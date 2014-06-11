@@ -20,7 +20,7 @@ Go check out the CSVs and come back. Done? Cool, I've just got a few features I 
 3. For a given dino, I'd like to be able to print all the known facts about that dinosaur. If there are facts missing, please don't print empty values, just skip that heading.
 4. Also, I'll probably want to do that for all the dinosaurs in a collection.
 
-Extra Credit:
+##### Extra Credit
 
 1. I would love to have a way to do (and chain) generic search by parameters. I can pass in a hash, and I'd like to get the proper list of dinos back out.
 2. CSV isn't may favorite format in the world. Can you implement a JSON export feature?

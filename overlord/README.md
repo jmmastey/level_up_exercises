@@ -4,7 +4,7 @@ You've been contacted by a super villain in search of help. He says he has a gre
 
 One tricky problem is that bombs are quite expensive to debug in prod. To avoid an embarrassing dud, you're going to develop and test the bomb in the relative safety of your own workshop (desk, really). Thankfully, you've got requirements, so mostly this is just an exercise of translating those requirements into working tests and then writing the software to control the bomb. 
 
-But, this is the important part: you're going to write all the tests for the device before you write any of the app code. I don't have an in character reason for this, so give me a break and follow me on this one. Your code will be better at the end than if you do it the other way around, I promise.
+But, this is the important part: you're going to write all the tests for the device before you write any of the app code. You cleverly realize that by writing the tests the way you'd like the code to work, you'll make your resulting code that much better. Well done, smartie.
 
 ### Requirements
 

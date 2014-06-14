@@ -8,3 +8,7 @@ These are the combined exercises used at <http://learnenova.herokuapp.com>. You 
 2. Wait until you're asked to do one of the exercises
 3. Use your fork, develop code, push it back upward
 4. Profit!
+
+## The First Lesson
+
+Like everything else in the world, these exercises have errors and problems and typos. We experience this problem whenever we code, and the only way to stay sane as a group is to fix problems as we find them. Be a mensch, send pull requests.

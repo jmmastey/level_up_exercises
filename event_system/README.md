@@ -1,6 +1,6 @@
 ## Forecast Reminder
 
-Al Roker is a traitor. After years of listening to that silver tongued liar, I finally have data that proves that [his forecasts are a farce](http://www.randalolson.com/wp-content/uploads/weather-forecast-accuracy-flipped.png). Thankfully, due to NOAA, we can fight back.
+[Al Roker](https://en.wikipedia.org/wiki/Al_roker) is a traitor. After years of listening to that silver tongued liar, I finally have data that proves that [his forecasts are a farce](http://www.randalolson.com/wp-content/uploads/weather-forecast-accuracy-flipped.png). Thankfully, due to NOAA, we can fight back.
 
 ### Your Mission
 

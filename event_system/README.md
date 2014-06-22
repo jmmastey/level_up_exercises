@@ -15,3 +15,5 @@ Some requirements to get you started:
 3. To make this a little harder, I should be able to register and save my contact information. If there are any important weather updates, email or text me about it early enough that I haven't already left the house.
 4. A webpage is a good first interface. That said, I want to pipe this data through [IFTTT](https://ifttt.com/) so go ahead and give me a JSON feed as well. I may want to retrieve historical data as well.
 5. Don't hit the NWS page every time I request the webpage, that would be rude and they'd probably block you pretty quickly. You'll need to persist the data to a database.
+
+Strike back at that blowhard. Roker must fall.

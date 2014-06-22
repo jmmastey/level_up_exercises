@@ -1,6 +1,6 @@
 ## Choose Your Destiny
 
-We're going to spend some time on this one, so it's time to Choose Your Own Adventure™.
+We're going to spend some time on this one, so it's time to Choose Your Own Adventure™. You'll be writing one of these Rails applications and refactoring it for a while, so pick something interesting.
 
 * If you're new in town, think about building the [Local Events Aggregator](happenings.md).
 * If you like a challenge parsing poorly structured data, advance to the [Congressional Trends Feed](opposite_of_progress.md).

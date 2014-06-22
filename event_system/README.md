@@ -4,6 +4,8 @@
 
 ![lies and damn lies](./weather-forecast-accuracy.png)
 
+Source: http://www.reddit.com/r/dataisbeautiful/comments/28qn5h/local_weather_channels_consistently_overpredict/
+
 Thankfully, because of friendly governmental agencies we can fight back.
 
 ### Your Mission

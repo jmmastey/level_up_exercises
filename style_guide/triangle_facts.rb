@@ -1,3 +1,4 @@
+# Killer facts about triangles AWW YEAH
 class Triangle
 	attr_accessor :side1,:side2,:side3
 

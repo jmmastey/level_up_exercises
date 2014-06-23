@@ -15,7 +15,7 @@ Go check out the CSVs and come back. Done? Cool, I've just got a few features I 
     * Grab all the dinosaurs that were bipeds.
     * Grab all the dinosaurs that were carnivores (fish and insects count).
     * Grab dinosaurs for specific periods (no need to differentiate between Early and Late Cretaceous, btw).
-    * Grab only big (> 2 tons) dinosaurs, or only small (< 2 tons) dinosaurs.
+    * Grab only big (> 2 tons) or small dinosaurs.
     * Just to be sure, I'd love to be able to combine criteria at will, even better if I can chain filter calls together.
 3. For a given dino, I'd like to be able to print all the known facts about that dinosaur. If there are facts missing, please don't print empty values, just skip that heading. Make sure to print Early / Late etc for the periods.
 4. Also, I'll probably want to print all the dinosaurs in a given collection (after filtering, etc).

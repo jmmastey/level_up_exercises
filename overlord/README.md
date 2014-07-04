@@ -8,7 +8,7 @@ But, this is the important part: you're going to write all the tests for the dev
 
 ### Requirements
 
-1. Even coffee machines have webservers these days. The bomb interface should be a Sinatra app, and the tests should be written in Cucumber and Rspec. 
+1. Even coffee machines have webservers these days. The bomb interface should be a Sinatra app, and the tests should be written in Cucumber and Rspec. A simple Sinatra base has been provided.
 2. The bomb interface should include a field to type in an activation / deactivation code and an indicator of the activation state of the bomb.
 3. When the super villain first boots the bomb, it should not be activated.
 4. The activation code is pretty simple:

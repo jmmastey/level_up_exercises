@@ -4,7 +4,7 @@ Google has just announced that it is discontinuing its popular Website Optimizer
 
 Fortunately, the company has been keeping its own statistics for website visits for quite some time, so we still have the data we need to see whether our split tests are successful. Even more fortunately, as you're the closest to having recently done a statistics class, you've been selected as the lucky individual to implement the calculations in code.
 
-However, math is hard. So, you're going to write the tests manually to make sure that the results of your computations are accurate. You've [googled some stats for split testing](http://visualwebsiteoptimizer.com/split-testing-blog/what-you-really-need-to-know-about-mathematics-of-ab-split-testing/) and you're ready to go.
+However, math is hard. So, you're going to write the Rspec tests manually to make sure that the results of your computations are accurate. You've [googled some stats for split testing](http://visualwebsiteoptimizer.com/split-testing-blog/what-you-really-need-to-know-about-mathematics-of-ab-split-testing/) and you're ready to go.
 
 ## Requirements
 

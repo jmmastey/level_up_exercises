@@ -27,3 +27,4 @@ DEPENDENCIES
   activemodel
   chronic
   hirb
+  json

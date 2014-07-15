@@ -1,4 +1,5 @@
 require './dino'
+require 'hirb'
 
 class DinoDex
 
@@ -132,22 +133,30 @@ class DinoDexSearch
 
 	def print
 
-		puts "--- Here are your dinos: (#{@dex.size})-------------"
-
 
 		@dex.sort! { |a,b| a.name.downcase <=> b.name.downcase }
 
+		display_array = []
+
+
 		@dex.each do |dino|
-			puts "#{dino.name} \t("+
-				"#{dino.period}, "+
-				"#{dino.continent}, "+
-				"#{dino.diet}, "+
-				"#{dino.weight}, "+
-				"#{dino.walking}, "+
-				"#{dino.description})"
+			display_array <<
+				[
+					dino.name, dino.period, dino.continent,
+					dino.diet, dino.weight, dino.walking,
+					dino.description
+				]
 		end
 
-		puts "--- End of list ----------------------"
+
+		puts Hirb::Helpers::AutoTable.render(display_array,
+			:headers =>
+				[
+					'NAME','PERIOD', 'CONTINENT', 'DIET',
+					'WEIGHT', 'WALKING', 'DESCRIPTION'
+				])
+
+
 	end
 
 	def export
@@ -156,6 +165,8 @@ class DinoDexSearch
 
 end
 
+
+# Start of testing this stuff out (the implementation is a bit rough..)
 
 # Skip validation of locale
 I18n.enforce_available_locales = false

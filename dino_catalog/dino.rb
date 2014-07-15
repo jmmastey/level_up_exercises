@@ -25,6 +25,10 @@ class Dino
 
 	end
 
+	def to_string
+		"#{name} (#{period}, #{continent}, #{diet}, #{weight}, #{walking}, #{description})"
+	end
+
 
 	def self.get_symbol_key(key)
 

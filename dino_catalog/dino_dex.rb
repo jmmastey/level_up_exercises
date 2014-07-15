@@ -4,7 +4,7 @@ class DinoDex
 
 	def initialize(*files)
 
-		@dex = Hash.new()
+		@dex_array = []
 
 		if files.nil? || files.size == 0
 			raise 'We have no files to initialize our Dino Dex!'
@@ -17,6 +17,14 @@ class DinoDex
 	end
 
 
+	def filter
+
+		return DinoDexSearch.new(@dex_array)
+
+	end
+
+
+
 	def process_file(file)
 
 		File.open(file, "r") do |source|
@@ -26,7 +34,6 @@ class DinoDex
 			header = enum.next
 
 			config = process_header(header)
-
 
 			enum.each do |c|
 
@@ -52,7 +59,7 @@ class DinoDex
 
 				end
 
-				d = Dino.new(dino_hash)
+				@dex_array << Dino.new(dino_hash)
 
 			end
 
@@ -74,10 +81,78 @@ class DinoDex
 	end
 
 
-
 	# Not sure what the defacto is here for access (?)
 	private :process_file, :process_header
 
+
+end
+
+
+class DinoDexSearch
+
+	def initialize(dex)
+		@dex = dex
+	end
+
+	def where(key, value)
+
+		@dex.keep_if do |h|
+			h.instance_variable_get("@#{key}") == value
+		end
+
+		self
+	end
+
+	def where_in(key, *values)
+
+		@dex.keep_if do |h|
+
+			keep = false
+
+			values.each do |value|
+				if h.instance_variable_get("@#{key}") == value
+					keep = true
+				end
+			end
+
+
+			keep
+		end
+
+		self
+	end
+
+	def more_than(key, value)
+		@dex.keep_if do |h|
+			h.instance_variable_get("@#{key}").to_i > value
+		end
+
+		self
+	end
+
+	def print
+
+		puts "--- Here are your dinos: (#{@dex.size})-------------"
+
+
+		@dex.sort! { |a,b| a.name.downcase <=> b.name.downcase }
+
+		@dex.each do |dino|
+			puts "#{dino.name} \t("+
+				"#{dino.period}, "+
+				"#{dino.continent}, "+
+				"#{dino.diet}, "+
+				"#{dino.weight}, "+
+				"#{dino.walking}, "+
+				"#{dino.description})"
+		end
+
+		puts "--- End of list ----------------------"
+	end
+
+	def export
+		#TODO
+	end
 
 end
 
@@ -86,3 +161,26 @@ end
 I18n.enforce_available_locales = false
 
 dex = DinoDex.new('dinodex.csv','african_dinosaur_export.csv')
+
+
+# dex.filter().where(:walking, "Biped")
+# 	.print()
+
+
+dex.filter().where(:walking, "Biped")
+	.where_in(:diet, "Carnivore", "Insectivore", "Piscivore")
+	.print()
+
+
+# dex.filter().where(:walking, "Biped")
+# 	.where(:diet, "Carnivore")
+# 	.more_than(:weight, 2000)
+# 	.print()
+
+
+# dex.filter().where(:walking, "Biped")
+# 	.where(:diet, "Carnivore")
+# 	.where_in(:diet, "Carnivore", "Insectivore", "Piscivore")
+# 	.where_in(:period, "Late Cretaceous", "Early Cretaceous")
+# 	.more_than(:weight, 2000)
+# 	.print()

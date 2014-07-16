@@ -20,9 +20,7 @@ class DinoDex
 
 
   def filter
-
     DinoDexSearch.new(@dex_array)
-
   end
 
 

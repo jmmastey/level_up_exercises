@@ -26,7 +26,13 @@ class Dino
   end
 
   def to_string
-    "#{name} (#{period}, #{continent}, #{diet}, #{weight}, #{walking}, #{description})"
+    "#{name} (#{period}, #{continent}, #{diet}, #{weight},
+    #{walking}, #{description})"
+  end
+
+  def to_json_hash
+    {'name' => @name, 'period' => @period, 'continent' => @continent,
+      'weight' => @weight, 'description' => @description}
   end
 
 

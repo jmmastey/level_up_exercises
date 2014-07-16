@@ -1,5 +1,6 @@
 require './dino'
 require 'hirb'
+require 'json'
 
 class DinoDex
 
@@ -142,15 +143,16 @@ class DinoDexSearch
     self
   end
 
+  def do_sort
+    @dex.sort! do |a,b|
+      a.name.downcase <=> b.name.downcase
+    end
+  end
 
 
   def print
 
-
-    @dex.sort! do |a,b|
-      a.name.downcase <=> b.name.downcase
-    end
-
+    do_sort
 
     display_array = []
 
@@ -174,7 +176,19 @@ class DinoDexSearch
   end
 
   def export_json
-    #TODO
+
+    do_sort
+
+    json_array = []
+
+    @dex.each do |dino|
+      json_array << dino.to_json_hash
+    end
+
+
+    puts JSON.generate(json_array)
+
+
   end
 
 end
@@ -188,7 +202,9 @@ I18n.enforce_available_locales = false
 dex = DinoDex.new('dinodex.csv','african_dinosaur_export.csv')
 
 
-dex.filter().print()
+# dex.filter().print()
+
+dex.filter().export_json()
 
 # dex.filter().where(:walking, "Biped")
 # 	.print()
@@ -205,9 +221,9 @@ dex.filter().print()
 # 	.print()
 
 
-dex.filter().where(:walking, "Biped")
-	.where(:diet, "Carnivore")
-	.where_in(:diet, "Carnivore", "Insectivore", "Piscivore")
-	.where_in(:period, "Late Cretaceous", "Early Cretaceous")
-	.more_than(:weight, 2000)
-	.print()
+# dex.filter().where(:walking, "Biped")
+# 	.where(:diet, "Carnivore")
+# 	.where_in(:diet, "Carnivore", "Insectivore", "Piscivore")
+# 	.where_in(:period, "Late Cretaceous", "Early Cretaceous")
+# 	.more_than(:weight, 2000)
+# 	.print()

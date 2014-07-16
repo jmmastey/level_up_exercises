@@ -1,6 +1,5 @@
 require './dino'
 require 'hirb'
-require 'json'
 
 class DinoDex
 
@@ -21,7 +20,7 @@ class DinoDex
 
   def filter
 
-    return DinoDexSearch.new(@dex_array)
+    DinoDexSearch.new(@dex_array)
 
   end
 
@@ -39,8 +38,12 @@ class DinoDex
 
       enum.each do |c|
 
-        # split em out and remove the \n and stuffz
-        items = c.split(',').map!{|i|i.gsub(/\s\z/,"")}
+        # split items
+        items = c.split(',')
+        # remove whitespace at the end
+        items = items.map do |i|
+          i.gsub(/\s\z/,"")
+        end
 
         # make the default nil
         # this is used in the Dino initialize
@@ -70,14 +73,18 @@ class DinoDex
 
   end
 
-  def process_header header
+  def process_header(header)
 
-    # split header items
-    # make lowercase
-    # remove whitespace
+    # split header
     columns = header.split(',')
-    columns.map!{|h|h.gsub(/\s+/,"").downcase}
-    return columns.map{|h|Dino.get_symbol_key(h)}
+    # remove whitespace, make lowercase
+    columns = columns.map do |h|
+      h.gsub(/\s+/,"").downcase
+    end
+
+    columns.map do |h|
+      Dino.get_symbol_key(h)
+    end
 
 
   end
@@ -140,7 +147,10 @@ class DinoDexSearch
   def print
 
 
-    @dex.sort! { |a,b| a.name.downcase <=> b.name.downcase }
+    @dex.sort! do |a,b|
+      a.name.downcase <=> b.name.downcase
+    end
+
 
     display_array = []
 
@@ -157,19 +167,14 @@ class DinoDexSearch
 
     puts Hirb::Helpers::AutoTable.render(display_array,
       :headers =>
-        [
-          'NAME','PERIOD', 'CONTINENT', 'DIET',
-          'WEIGHT', 'WALKING', 'DESCRIPTION'
-        ])
+        %w(NAME PERIOD CONTINENT DIET
+          WEIGHT WALKING DESCRIPTION))
 
 
   end
 
   def export_json
-
-
-
-
+    #TODO
   end
 
 end
@@ -183,24 +188,26 @@ I18n.enforce_available_locales = false
 dex = DinoDex.new('dinodex.csv','african_dinosaur_export.csv')
 
 
+dex.filter().print()
+
 # dex.filter().where(:walking, "Biped")
+# 	.print()
+
+
+# dex.filter().where(:walking, "Biped")
+#   .where_in(:diet, "Carnivore", "Insectivore", "Piscivore")
+#   .print()
+
+
+# dex.filter().where(:walking, "Biped")
+# 	.where(:diet, "Carnivore")
+# 	.more_than(:weight, 2000)
 # 	.print()
 
 
 dex.filter().where(:walking, "Biped")
-  .where_in(:diet, "Carnivore", "Insectivore", "Piscivore")
-  .print()
-
-
-# dex.filter().where(:walking, "Biped")
-# 	.where(:diet, "Carnivore")
-# 	.more_than(:weight, 2000)
-# 	.print()
-
-
-# dex.filter().where(:walking, "Biped")
-# 	.where(:diet, "Carnivore")
-# 	.where_in(:diet, "Carnivore", "Insectivore", "Piscivore")
-# 	.where_in(:period, "Late Cretaceous", "Early Cretaceous")
-# 	.more_than(:weight, 2000)
-# 	.print()
+	.where(:diet, "Carnivore")
+	.where_in(:diet, "Carnivore", "Insectivore", "Piscivore")
+	.where_in(:period, "Late Cretaceous", "Early Cretaceous")
+	.more_than(:weight, 2000)
+	.print()

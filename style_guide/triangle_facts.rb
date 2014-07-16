@@ -15,10 +15,10 @@ class Triangle
 	end
 
 	def isosceles
-		[side1,side2,side3].uniq.length == 2
+		[side1, side2, side3].uniq.length == 2
 	end
 
-	def scalene()
+	def scalene
 		!(equilateral || isosceles)
 	end
 
@@ -50,15 +50,19 @@ class Triangle
 		b2 = b**2
 		c2 = c**2
 
-		angleA = radians_to_degrees(Math.acos((b2 + c2 - a2) / (2.0 * b * c)))
-		angleB = radians_to_degrees(Math.acos((a2 + c2 - b2) / (2.0 * a * c)))
-		angleC = radians_to_degrees(Math.acos((a2 + b2 - c2) / (2.0 * a * b)))
+		aR = Math.acos((b2 + c2 - a2) / (2.0 * b * c))
+		bR = Math.acos((a2 + c2 - b2) / (2.0 * a * c))
+		cR = Math.acos((a2 + b2 - c2) / (2.0 * a * b))
 
-		return [angleA, angleB, angleC]
+		angleA = radians_to_degrees(aR)
+		angleB = radians_to_degrees(bR)
+		angleC = radians_to_degrees(cR)
+
+		[angleA, angleB, angleC]
 	end
 
 	def radians_to_degrees(rads)
-		return (rads * 180 / Math::PI).round
+		(rads * 180 / Math::PI).round
 	end
 end
 
@@ -67,6 +71,7 @@ triangles = [
 	[5,5,5],
 	[5,12,13],
 ]
+
 triangles.each { |sides|
 	tri = Triangle.new(*sides)
 	tri.recite_facts

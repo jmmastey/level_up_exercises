@@ -1,4 +1,5 @@
 require './dino'
+require './dino_dex_search'
 require 'hirb'
 require 'json'
 
@@ -24,46 +25,62 @@ class DinoDex
   end
 
 
-
   def process_file(file)
 
     File.open(file, "r") do |source|
 
-      enum = source.each
-      header = enum.next
-      config = process_header(header)
-      enum.each do |c|
+      input_enum = source.each
 
-        # split items
-        items = c.split(',')
-        # remove whitespace at the end
-        items = items.map do |i|
-          i.gsub(/\s\z/,"")
-        end
+      # just get the first row right now
+      header = input_enum.next
 
-        # make the default nil
-        # this is used in the Dino initialize
-        dino_hash = Hash.new(nil)
+      column_details = process_header(header)
 
-        config.each_with_index do |key, index|
-          if key == :special_diet_carnivore
-            if(items[index] == "Yes")
-              dino_hash[:diet] = "Carnivore"
-            else
-              # Leave this field nil?
-              dino_hash[:diet] = nil
-            end
-          else
-            dino_hash[key] = items[index]
-          end
-        end
+      # now proceed with the remaining value rows
+      input_enum.each do |row|
 
+        dino_details = process_row(row)
+        dino_hash = process_dino(dino_details, column_details)
         @dex_array << Dino.new(dino_hash)
 
       end
 
     end
 
+
+  end
+
+  def process_row(row)
+    # split items
+    items = row.split(',')
+    # remove whitespace at the end
+    items = items.map do |i|
+      i.gsub(/\s\z/,"")
+    end
+
+    return items
+
+  end
+
+  def process_dino(dino_details, column_details)
+    # make the default nil
+    # this is used in the Dino initialize
+    dino_hash = Hash.new(nil)
+
+    column_details.each_with_index do |key, index|
+      if key == :special_diet_carnivore
+        if(dino_details[index] == "Yes")
+          dino_hash[:diet] = "Carnivore"
+        else
+          # Leave this field nil?
+          dino_hash[:diet] = nil
+        end
+      else
+        dino_hash[key] = dino_details[index]
+      end
+    end
+
+    dino_hash
 
   end
 
@@ -87,129 +104,3 @@ class DinoDex
 
 
 end
-
-
-class DinoDexSearch
-
-  def initialize(dex)
-    @dex = dex
-  end
-
-  def where(key, value)
-
-    @dex.keep_if do |h|
-      h.instance_variable_get("@#{key}") == value
-    end
-
-    self
-  end
-
-
-  def where_in(key, *values)
-
-    @dex.keep_if do |h|
-
-      keep = false
-
-      values.each do |value|
-        if h.instance_variable_get("@#{key}") == value
-          keep = true
-        end
-      end
-
-      keep
-    end
-
-    self
-  end
-
-
-
-  def more_than(key, value)
-    @dex.keep_if do |h|
-      h.instance_variable_get("@#{key}").to_i > value
-    end
-
-    self
-  end
-
-  def do_sort
-    @dex.sort! do |a,b|
-      a.name.downcase <=> b.name.downcase
-    end
-  end
-
-
-  def print
-
-    do_sort
-
-    display_array = []
-
-
-    @dex.each do |dino|
-      display_array <<
-        [
-          dino.name, dino.period, dino.continent,
-          dino.diet, dino.weight, dino.walking,
-          dino.description
-        ]
-    end
-
-
-    puts Hirb::Helpers::AutoTable.render(display_array,
-      :headers =>
-        %w(NAME PERIOD CONTINENT DIET
-          WEIGHT WALKING DESCRIPTION))
-
-
-  end
-
-  def export_json
-    do_sort
-    json_array = []
-
-    @dex.each do |dino|
-      json_array << dino.to_json_hash
-    end
-
-    puts JSON.generate(json_array)
-
-  end
-
-end
-
-
-# Start of testing this stuff out (the implementation is a bit rough..)
-
-# Skip validation of locale
-I18n.enforce_available_locales = false
-
-dex = DinoDex.new('dinodex.csv','african_dinosaur_export.csv')
-
-
-# dex.filter().print()
-
-dex.filter().export_json()
-
-# dex.filter().where(:walking, "Biped")
-# 	.print()
-
-
-# dex.filter().where(:walking, "Biped")
-#   .where_in(:diet, "Carnivore", "Insectivore", "Piscivore")
-#   .print()
-
-
-# dex.filter().where(:walking, "Biped")
-# 	.where(:diet, "Carnivore")
-# 	.more_than(:weight, 2000)
-# 	.print()
-
-
-# dex.filter().where(:walking, "Biped")
-# 	.where(:diet, "Carnivore")
-# 	.where_in(:diet, "Carnivore", "Insectivore", "Piscivore")
-# 	.where_in(:period, "Late Cretaceous", "Early Cretaceous")
-# 	.more_than(:weight, 2000)
-# 	.print()

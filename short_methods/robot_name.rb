@@ -1,32 +1,90 @@
-class NameCollisionError < RuntimeError; end;
+require 'faker'
 
-class Robot
-  attr_accessor :name
+class RobotNamer
 
-  @@registry
+  def initialize
+    @name_registry = []
+    @char_generator = -> { ('A'..'Z').to_a.sample }
+    @num_generator = -> { rand(10) }
+  end
 
-  def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
 
+  def generate_robot_name
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+    robot_name = generate_random_name
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    # it's possible that our generator sucks
+    # and that we use all possible combinations
+    while name_exists?(robot_name)
+      puts "We have a collision: #{robot_name}"
+      robot_name = generate_random_name
     end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+    @name_registry << robot_name
+
+    robot_name
+  end
+
+  def name_exists?(name)
+    @name_registry.include?(name)
+  end
+
+  def generate_random_name
+    return "#{gen_char}#{gen_char}#{gen_num}#{gen_num}#{gen_num}"
+  end
+
+  def gen_char
+    @char_generator.call
+  end
+
+  def gen_num
+    @num_generator.call
+  end
+
+
+end
+
+class BadRobotNamer < RobotNamer
+
+  def initialize
+    @name_registry = []
+    @char_generator = -> { ('A'..'Z').to_a.sample }
+    @num_generator = -> { rand(5) }
+  end
+
+  def generate_random_name
+    return "#{gen_char}#{gen_num}#{gen_num}"
   end
 
 end
 
-robot = Robot.new
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+class Robot
+
+  @@default_namer = RobotNamer.new
+
+  attr_accessor :given_name, :robot_name
+
+  def initialize(given_name, namer = @@default_namer)
+
+    @given_name = given_name
+    @robot_name = namer.generate_robot_name
+
+  end
+
+
+end
+
+
+namer = BadRobotNamer.new
+# namer = RobotNamer.new
+
+100.times do
+  robot = Robot.new("Sparky", namer)
+
+  puts "My pet robot's name is #{robot.robot_name}, but we usually call him #{robot.given_name}."
+end
+
+
 
 # Errors!
 # generator = -> { 'AA111' }

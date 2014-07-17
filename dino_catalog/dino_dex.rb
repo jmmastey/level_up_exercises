@@ -30,11 +30,8 @@ class DinoDex
     File.open(file, "r") do |source|
 
       enum = source.each
-
       header = enum.next
-
       config = process_header(header)
-
       enum.each do |c|
 
         # split items
@@ -49,7 +46,6 @@ class DinoDex
         dino_hash = Hash.new(nil)
 
         config.each_with_index do |key, index|
-
           if key == :special_diet_carnivore
             if(items[index] == "Yes")
               dino_hash[:diet] = "Carnivore"
@@ -60,7 +56,6 @@ class DinoDex
           else
             dino_hash[key] = items[index]
           end
-
         end
 
         @dex_array << Dino.new(dino_hash)
@@ -73,7 +68,6 @@ class DinoDex
   end
 
   def process_header(header)
-
     # split header
     columns = header.split(',')
     # remove whitespace, make lowercase
@@ -84,7 +78,6 @@ class DinoDex
     columns.map do |h|
       Dino.get_symbol_key(h)
     end
-
 
   end
 
@@ -123,7 +116,6 @@ class DinoDexSearch
           keep = true
         end
       end
-
 
       keep
     end
@@ -174,18 +166,14 @@ class DinoDexSearch
   end
 
   def export_json
-
     do_sort
-
     json_array = []
 
     @dex.each do |dino|
       json_array << dino.to_json_hash
     end
 
-
     puts JSON.generate(json_array)
-
 
   end
 

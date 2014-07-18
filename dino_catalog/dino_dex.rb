@@ -51,9 +51,9 @@ class DinoDex
   end
 
   def process_row(row)
-    # split items
+
     items = row.split(',')
-    # remove whitespace at the end
+
     items = items.map do |i|
       i.gsub(/\s\z/,"")
     end
@@ -63,8 +63,7 @@ class DinoDex
   end
 
   def process_dino(dino_details, column_details)
-    # make the default nil
-    # this is used in the Dino initialize
+    # nil defautl used in Dino initialize
     dino_hash = Hash.new(nil)
 
     column_details.each_with_index do |key, index|
@@ -85,12 +84,13 @@ class DinoDex
   end
 
   def process_header(header)
-    # split header
     columns = header.split(',')
-    # remove whitespace, make lowercase
+
     columns = columns.map do |h|
-      h.gsub(/\s+/,"").downcase
+      h.gsub(/\s+/,"")
     end
+
+    columns = columns.map(&:downcase)
 
     columns.map do |h|
       Dino.get_symbol_key(h)

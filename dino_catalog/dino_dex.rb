@@ -31,12 +31,10 @@ class DinoDex
 
       input_enum = source.each
 
-      # just get the first row right now
       header = input_enum.next
 
       column_details = process_header(header)
 
-      # now proceed with the remaining value rows
       input_enum.each do |row|
 
         dino_details = process_row(row)
@@ -98,9 +96,6 @@ class DinoDex
 
   end
 
-
-  # Not sure what the defacto is here for access (?)
   private :process_file, :process_header
-
 
 end

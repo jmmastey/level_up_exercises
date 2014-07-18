@@ -25,22 +25,20 @@ class DinoDex
   end
 
 
-  def process_file(file)
+  def process_file(file_name)
 
-    File.open(file, "r") do |source|
+    File.open(file_name, "r") do |source_file|
 
-      input_enum = source.each
+      input_enum = source_file.each
 
       header = input_enum.next
 
       column_details = process_header(header)
 
       input_enum.each do |row|
-
         dino_details = process_row(row)
         dino_hash = process_dino(dino_details, column_details)
         @dex_array << Dino.new(dino_hash)
-
       end
 
     end

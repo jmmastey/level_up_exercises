@@ -1,7 +1,6 @@
 require './lib/splitalizer_data_loader'
-require './lib/split_data'
 
-# Currently only for two groups or test
+# Currently only for two groups or tests
 # I can add the ability for multiple groups
 # That seemed out of scope for testing purposes
 # Although this would provid more test scenarios...
@@ -26,8 +25,6 @@ class Splitalizer
 
 	def winning_group
 
-		analyze if @winning_group.nil?
-
 		if @a_conv_percent > @b_conv_percent
 			return "A"
 		else
@@ -44,7 +41,6 @@ class Splitalizer
 		value = send(attribute)
 		(value*100).round(NUM_DECIMALS).to_s + "%"
 	end
-
 
 	def chi
 		return @chi_squared unless @chi_squared.nil?
@@ -65,7 +61,6 @@ class Splitalizer
 	private
 
 	def analyze
-
 		@a_conv_percent = @data[:a_conv] / @data[:a_total].to_f
 		@b_conv_percent = @data[:b_conv] / @data[:b_total].to_f
 
@@ -77,11 +72,7 @@ class Splitalizer
 
 		@b_low  = @b_conv_percent - CONFIDENCE * b_stdv
 		@b_high = @b_conv_percent + CONFIDENCE * b_stdv
-
 	end
-
-
-
 
 end
 

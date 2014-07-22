@@ -21,7 +21,6 @@ end
 class Arrowhead
 
   def self.classify(region, shape)
-
     if !valid_region?(region)
         raise "Unknown region, please provide a valid region."
     end
@@ -41,20 +40,21 @@ class Arrowhead
 
   end
 
+  private
 
   def self.get_shapes(region)
-    return DataStore::CLASSIFICATIONS[region]
+    DataStore::CLASSIFICATIONS[region]
   end
 
 
   # private :valid_region?, :valid_shape?
 
   def self.valid_region?(region)
-    return DataStore::CLASSIFICATIONS.include?(region)
+    DataStore::CLASSIFICATIONS.include?(region)
   end
 
   def self.valid_shape?(valid_shapes, shape)
-    return valid_shapes.include?(shape)
+    valid_shapes.include?(shape)
   end
 
 

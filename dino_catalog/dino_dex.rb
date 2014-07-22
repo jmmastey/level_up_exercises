@@ -1,7 +1,5 @@
 require './dino'
 require './dino_dex_search'
-require 'hirb'
-require 'json'
 
 class DinoDex
 
@@ -26,7 +24,6 @@ class DinoDex
 
 
   def process_file(file_name)
-
     File.open(file_name, "r") do |source_file|
 
       input_enum = source_file.each
@@ -42,8 +39,6 @@ class DinoDex
       end
 
     end
-
-
   end
 
   def process_row(row)

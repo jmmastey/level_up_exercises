@@ -10,26 +10,25 @@ class Triangle
 		@side3 = side3
 	end
 
-	def equilateral
+	def equilateral?
 		side1 == side2 && side2 == side3
 	end
 
-	def isosceles
+	def isosceles?
 		[side1, side2, side3].uniq.length == 2
 	end
 
-	def scalene
-		!(equilateral || isosceles)
+	def scalene?
+		!(equilateral? || isosceles?)
 	end
 
 	def recite_facts
-
-		if equilateral
-				puts "This triangle is equilateral!"
-		elsif isosceles
-				puts "This triangle is isosceles! Also, that word is hard to type."
-		elsif scalene
-				puts "This triangle is scalene and mathematically boring."
+		if equilateral?
+			puts "This triangle is equilateral!"
+		elsif isosceles?
+			puts "This triangle is isosceles! Also, that word is hard to type."
+		elsif scalene?
+			puts "This triangle is scalene and mathematically boring."
 		end
 
 		angles = self.calculate_angles(side1, side2, side3)
@@ -39,9 +38,6 @@ class Triangle
 		if angles.include?(90)
 			puts "This triangle is also a right triangle!"
 		end
-
-		puts ""
-
 	end
 
 	def calculate_angles(a, b, c)
@@ -50,15 +46,15 @@ class Triangle
 		b2 = b**2
 		c2 = c**2
 
-		aR = Math.acos((b2 + c2 - a2) / (2.0 * b * c))
-		bR = Math.acos((a2 + c2 - b2) / (2.0 * a * c))
-		cR = Math.acos((a2 + b2 - c2) / (2.0 * a * b))
+		a_radian = Math.acos((b2 + c2 - a2) / (2.0 * b * c))
+		b_radian = Math.acos((a2 + c2 - b2) / (2.0 * a * c))
+		c_radian = Math.acos((a2 + b2 - c2) / (2.0 * a * b))
 
-		angleA = radians_to_degrees(aR)
-		angleB = radians_to_degrees(bR)
-		angleC = radians_to_degrees(cR)
+		a_angle = radians_to_degrees(a_radians)
+		b_angle = radians_to_degrees(b_radians)
+		c_angle = radians_to_degrees(c_radians)
 
-		[angleA, angleB, angleC]
+		[a_angle, b_angle, c_angle]
 	end
 
 	def radians_to_degrees(rads)
@@ -68,11 +64,11 @@ end
 
 
 triangles = [
-	[5,5,5],
-	[5,12,13],
+	[5, 5, 5],
+	[5, 12, 13],
 ]
 
-triangles.each { |sides|
+triangles.each do |sides|
 	tri = Triangle.new(*sides)
 	tri.recite_facts
-}
+end

@@ -15,6 +15,7 @@ class RobotNamer
 
     # it's possible that our generator sucks
     # and that we use all possible combinations
+    # and find ourselves in an infinite loop
     while name_exists?(robot_name)
       puts "We have a collision: #{robot_name}"
       robot_name = generate_random_name

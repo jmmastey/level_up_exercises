@@ -1,7 +1,7 @@
 require 'json'
 require 'date'
 
-class SplitalizeDataLoader
+class SplitalizerDataLoader
 	def self.parse(source_filename)
 
 		start_date = nil

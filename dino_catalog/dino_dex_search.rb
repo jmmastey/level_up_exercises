@@ -1,3 +1,6 @@
+require 'hirb'
+require 'json'
+
 class DinoDexSearch
 
 	def initialize(dex)

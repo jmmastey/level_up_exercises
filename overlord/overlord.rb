@@ -2,7 +2,7 @@
 
 require 'sinatra'
 
-enable :sessions
+use Rack::Session::Pool, :expire_after => 360000
 
 get '/' do
   "Time to build an app around here. Start time: " + start_time

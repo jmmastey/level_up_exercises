@@ -1,4 +1,5 @@
 require './lib/splitalizer_data_loader'
+require 'hirb'
 
 # Currently only for two groups or tests
 # I can add the ability for multiple groups
@@ -58,6 +59,45 @@ class Splitalizer
 		@chi_squared = numerator / denominator
 	end
 
+	def pretty_print
+
+		a_win = ""
+		b_win = ""
+
+		if winning_group == "A"
+			a_win = "*"
+		else
+			b_win = "*"
+		end
+
+		display_array = []
+
+		display_array << [
+			a_win,
+			"Group A",
+			@data[:a_total],
+			@data[:a_conv],
+			"#{format(:a_conv_percent)} ( #{format(:a_low)}% - #{format(:a_high)}% )",
+		]
+
+		display_array << [
+			b_win,
+			"Group B",
+			@data[:b_total],
+			@data[:b_conv],
+			"#{format(:b_conv_percent)} ( #{format(:b_low)}% - #{format(:b_high)}% )",
+		]
+
+
+
+		puts Hirb::Helpers::AutoTable.render(display_array,
+			:headers =>
+				%w(WINNER GROUP EVENTS SUCCESSES CONVERSION
+					))
+
+
+	end
+
 	private
 
 	def analyze
@@ -80,4 +120,4 @@ data = SplitalizerDataLoader.parse("./source_data.json")
 
 splital = Splitalizer.new(data)
 
-puts "TEST: #{splital.format(:a_low)}"
+splital.pretty_print

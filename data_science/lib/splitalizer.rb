@@ -35,7 +35,7 @@ class Splitalizer
 	end
 
 	def significant?
-		chi > Z
+		chi > Z_SCORE
 	end
 
 	def format(attribute)
@@ -77,7 +77,7 @@ class Splitalizer
 			"Group A",
 			@data[:a_total],
 			@data[:a_conv],
-			"#{format(:a_conv_percent)} ( #{format(:a_low)}% - #{format(:a_high)}% )",
+			"#{format(:a_conv_percent)} ( #{format(:a_low)} - #{format(:a_high)} )",
 		]
 
 		display_array << [
@@ -85,7 +85,7 @@ class Splitalizer
 			"Group B",
 			@data[:b_total],
 			@data[:b_conv],
-			"#{format(:b_conv_percent)} ( #{format(:b_low)}% - #{format(:b_high)}% )",
+			"#{format(:b_conv_percent)} ( #{format(:b_low)} - #{format(:b_high)} )",
 		]
 
 
@@ -117,7 +117,13 @@ class Splitalizer
 end
 
 data = SplitalizerDataLoader.parse("./source_data.json")
-
 splital = Splitalizer.new(data)
-
 splital.pretty_print
+
+data1 = SplitalizerDataLoader.parse("./spec/data/test_a_wins.json")
+splital1 = Splitalizer.new(data1)
+splital1.pretty_print
+
+data2 = SplitalizerDataLoader.parse("./spec/data/test_not_significant.json")
+splital2 = Splitalizer.new(data2)
+splital2.pretty_print

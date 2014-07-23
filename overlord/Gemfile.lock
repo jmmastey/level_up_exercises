@@ -2,10 +2,33 @@ GEM
   remote: https://rubygems.org/
   specs:
     daemons (1.1.9)
+    diff-lcs (1.2.5)
+    docile (1.1.5)
     eventmachine (1.0.3)
+    multi_json (1.10.1)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
+    rake (10.3.2)
+    rspec (3.0.0)
+      rspec-core (~> 3.0.0)
+      rspec-expectations (~> 3.0.0)
+      rspec-mocks (~> 3.0.0)
+    rspec-core (3.0.3)
+      rspec-support (~> 3.0.0)
+    rspec-expectations (3.0.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.0.0)
+    rspec-mocks (3.0.3)
+      rspec-support (~> 3.0.0)
+    rspec-support (3.0.3)
+    simplecov (0.9.0)
+      docile (~> 1.1.0)
+      multi_json
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -20,5 +43,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rack-test
+  rake
+  rspec
+  simplecov
   sinatra
   thin

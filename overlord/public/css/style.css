@@ -38,9 +38,19 @@ body {
   background-color: #D3D3D3;
 }
 
+.death-button {
+  display:block;
+  width: 100%;
+}
+
 .boot-button {
   width: 300px;
   margin:auto;
   display:block;
   font-size:40px;
+}
+
+.input-group-addon {
+  text-align: right;
+  min-width: 150px;
 }

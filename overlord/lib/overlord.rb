@@ -19,10 +19,16 @@ module Overlord
     end
 
     get '/boot_process' do
+      # https://gist.github.com/havvg/3226804
       erb :boot_process
     end
 
-    get '/stand_by' do
+    post '/stand_by' do
+
+      puts params
+
+      puts "Hello #{params[:name]}!"
+
       erb :stand_by
     end
 

@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Bootstrap -->
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/style.css" rel="stylesheet">
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -14,11 +15,28 @@
 		<![endif]-->
 	</head>
 	<body>
-		<div class="container">
-			<%= yield %>
+
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-md-12 title">
+					Enihilation Machine
+				</div>
+			</div>
+
+			<div class="row content">
+				<div class="col-md-10 col-md-offset-1">
+					<%= yield %>
+				</div>
+			</div>
+
+
+
+
 		</div>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/js/bootstrap.min.js"></script>
+
   </body>
 </html>

@@ -1,0 +1,46 @@
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  box-sizing: border-box;
+  background-color:#E2E2E2;
+}
+
+.container-fluid {
+  padding: 5px 20px;
+}
+
+.title {
+  text-align:center;
+  text-transform:uppercase;
+  border: 3px #777 solid;
+  margin-bottom: 30px;
+  padding: 10px;
+  font-size: 35px;
+  letter-spacing: 5px;
+}
+
+.status {
+  text-align:center;
+  font-size: 30px;
+  padding: 10px;
+  color: #464646;
+  text-transform:uppercase;
+}
+
+.status-label {
+
+}
+
+.status-text {
+  border: 1px #AAA solid;
+  background-color: #D3D3D3;
+}
+
+.boot-button {
+  width: 300px;
+  margin:auto;
+  display:block;
+  font-size:40px;
+}

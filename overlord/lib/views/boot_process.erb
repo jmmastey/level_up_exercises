@@ -6,19 +6,19 @@
 <div class="row" style="margin-top:55px">
   <div class="col-md-10 col-md-offset-1">
 
-    <form method="POST" action="stand_by" class="form-horizontal">
+    <form id="bootForm" method="POST" action="stand_by" class="form-horizontal">
       <fieldset>
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon">Activation Code</div>
-            <input class="form-control" type="password" placeholder="Enter death code">
+            <input class="form-control" type="password" name="post[activation-code]" placeholder="Enter death code">
           </div>
         </div>
 
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon">Deactivation Code</div>
-            <input class="form-control" type="password" placeholder="Enter pansy code">
+            <input class="form-control" type="password" name="post[deactivation-code]" placeholder="Enter pansy code">
           </div>
         </div>
 
@@ -31,7 +31,7 @@
           </div>
 
           <div class="col-md-6">
-            <button type="button" class="btn btn-default death-button">
+            <button type="button" class="btn btn-default death-button" onClick="parent.location='/'">
               Cancel <span class="glyphicon glyphicon-thumbs-down" style="margin-left: 5px"></span>
             </button>
           </div>

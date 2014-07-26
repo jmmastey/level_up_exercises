@@ -20,6 +20,10 @@ $(document).ready(function(){
             min: 4,
             max: 4,
             message: 'Activation code must be exactly 4 numbers'
+          },
+          regexp: {
+            regexp: /[0-9]{4}/,
+            message: 'Activation code must be numeric'
           }
         }
       },
@@ -33,6 +37,10 @@ $(document).ready(function(){
             min: 4,
             max: 4,
             message: 'Deactivation code must be exactly 4 numbers'
+          },
+          regexp: {
+            regexp: /[0-9]{4}/,
+            message: 'Activation code must be numeric'
           }
         }
       }

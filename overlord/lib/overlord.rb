@@ -4,7 +4,7 @@ module Overlord
     use Rack::Session::Pool, :expire_after => 360000
     # set :root, File.dirname(__FILE__)
     # set :public_folder, '../public'
-    set :public, 'public'
+    set :public_folder, 'public'
 
 
     helpers do
@@ -27,21 +27,19 @@ module Overlord
 
       puts params
 
-      puts "Hello #{params[:name]}!"
-
       erb :stand_by
     end
 
-    get '/activating' do
-      erb :activating
+    get '/activate' do
+      erb :activate
     end
 
-    get '/activated' do
+    post '/activated' do
       erb :activated
     end
 
-    get '/deactivating' do
-      erb :deactivating
+    get '/deactivate' do
+      erb :deactivate
     end
 
     get '/boom' do

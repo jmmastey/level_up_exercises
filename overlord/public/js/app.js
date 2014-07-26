@@ -16,14 +16,9 @@ $(document).ready(function(){
           notEmpty: {
             message: 'Activation code required and cannot be empty'
           },
-          stringLength: {
-            min: 4,
-            max: 4,
-            message: 'Activation code must be exactly 4 numbers'
-          },
           regexp: {
             regexp: /[0-9]{4}/,
-            message: 'Activation code must be numeric'
+            message: 'Activation code must be 4 numbers'
           }
         }
       },
@@ -33,14 +28,9 @@ $(document).ready(function(){
           notEmpty: {
             message: 'Deactivation code required and cannot be empty'
           },
-          stringLength: {
-            min: 4,
-            max: 4,
-            message: 'Deactivation code must be exactly 4 numbers'
-          },
           regexp: {
             regexp: /[0-9]{4}/,
-            message: 'Activation code must be numeric'
+            message: 'Activation code must be 4 numbers'
           }
         }
       }

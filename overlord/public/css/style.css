@@ -41,6 +41,7 @@ body {
 .death-button {
   display:block;
   width: 100%;
+  font-size: 25px;
 }
 
 .boot-button {

@@ -31,7 +31,7 @@ $(document).ready(function(){
           },
           regexp: {
             regexp: /^[0-9]{4}$/,
-            message: 'Activation code must be 4 numbers'
+            message: 'Deactivation code must be 4 numbers'
           }
         }
       }

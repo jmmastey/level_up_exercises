@@ -1,20 +1,13 @@
+require 'capybara/rspec'
 require 'spec_helper'
-# require 'capybara'
-# require 'capybara/dsl'
 
 RSpec.configure do |config|
   config.include Capybara::DSL
-
 end
 
-describe Overlord::Bomber do
+feature Overlord::Bomber, :type => :feature do
 
   Capybara.default_driver = :selenium
-
-  # https://gist.github.com/zhengjia/428105
-  # (Slide 44) http://www.slideshare.net/bsbodden/rspec-and-capybara
-  # http://youtu.be/BG_DDUD4M9E?t=47m18s
-  # https://learn.thoughtbot.com/test-driven-rails-resources/capybara.pdf
 
   def app
     Capybara.app = Overlord::Bomber
@@ -31,6 +24,65 @@ describe Overlord::Bomber do
     it "should have the machine title" do
       visit '/'
       expect(page.has_content?("ENNIHILATION")).to be_truthy
+    end
+  end
+
+  describe "start boot process with valid and invalid content" do
+    it "should show a boot page" do
+      visit '/boot_process'
+
+      expect(page).to have_button('Boot Up')
+
+      fill_in('post[activation-code]', :with => "12344")
+      expect(page).to have_content("Activation code must be 4 numbers")
+
+      fill_in('post[activation-code]', :with => "1111")
+      expect(page).to_not have_content("Activation code must be 4 numbers")
+
+      fill_in('post[activation-code]', :with => "abcd")
+      expect(page).to have_content("Activation code must be 4 numbers")
+
+      fill_in('post[activation-code]', :with => "4444")
+      expect(page).to_not have_content("Activation code must be 4 numbers")
+
+      fill_in('post[deactivation-code]', :with => "12344")
+      expect(page).to have_content("Deactivation code must be 4 numbers")
+
+      fill_in('post[deactivation-code]', :with => "1111")
+      expect(page).to_not have_content("Deactivation code must be 4 numbers")
+
+    end
+  end
+
+  describe "cancel boot process" do
+    it "should go back to home (off)" do
+
+      visit '/boot_process'
+      click_button('Cancel')
+      expect(page.has_content?("ENNIHILATION")).to be_truthy
+    end
+  end
+
+
+  describe "activating the bomb" do
+    it "should show ticket" do
+
+      visit '/boot_process'
+      fill_in('post[activation-code]', :with => "1234")
+      fill_in('post[deactivation-code]', :with => "1234")
+      click_button('Boot Up')
+
+      click_button('Activate')
+
+      fill_in('post[seconds-to-boom]', :with => "30")
+      fill_in('post[activation-code]', :with => "1234")
+
+      click_button('Boot')
+
+      expect(page).to have_content("DANGER!")
+
+
+
     end
   end
 

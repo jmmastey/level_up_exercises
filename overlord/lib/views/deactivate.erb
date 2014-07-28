@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-5 status status-label">Status:</div>
+  <div class="col-md-7 status status-text">Deactivating</div>
+</div>
+
+<div class="row" style="margin-top:55px">
+  <div class="col-md-10 col-md-offset-1">
+
+    <% if !@remaining_attempts.nil? %>
+      <div class="alert alert-warning alert-dismissible">
+        <%= @remaining_attempts %> chance(s) remaining for correct code.
+      </div>
+    <% end %>
+
+    <form id="deactivateForm" method="POST" action="power_off" class="form-horizontal">
+      <fieldset>
+          <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">Deactivation Code</div>
+            <input class="form-control" type="password" name="post[deactivation-code]" placeholder="Enter safe code">
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary death-button">
+              Deactivate <span class="glyphicon glyphicon-thumbs-up" style="margin-left: 5px"></span>
+            </button>
+          </div>
+
+          <div class="col-md-6">
+            <button type="button" class="btn btn-default death-button" onClick="history.back();">
+              Cancel <span class="glyphicon glyphicon-thumbs-down" style="margin-left: 5px"></span>
+            </button>
+          </div>
+
+        </div>
+      </fieldset>
+    </form>
+
+
+  </div>
+</div>

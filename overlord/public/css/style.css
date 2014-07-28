@@ -55,3 +55,11 @@ body {
   text-align: right;
   min-width: 150px;
 }
+
+.alert-boom {
+  text-align: center;
+  font-size: 25px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  word-spacing: 8px;
+}

@@ -12,11 +12,8 @@ module Overlord
 
       def is_boomed?
         boom_time = session[:boom_time]
-
         return false if boom_time.nil?
-
         boom_time < Time.now
-
       end
 
       def booted?

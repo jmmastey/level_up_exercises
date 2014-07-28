@@ -6,8 +6,21 @@
 <div class="row" style="margin-top:55px">
   <div class="col-md-10 col-md-offset-1">
 
+    <% if !@remaining_attempts.nil? %>
+      <div class="alert alert-warning alert-dismissible">
+        <%= @remaining_attempts %> chance(s) remaining for correct code.
+      </div>
+    <% end %>
+
     <form id="activateForm" method="POST" action="activated" class="form-horizontal">
       <fieldset>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">Seconds 'til boom</div>
+            <input class="form-control" type="text" name="post[seconds-to-boom]" placeholder="Enter number of seconds until the explosion">
+          </div>
+        </div>
+
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon">Activation Code</div>

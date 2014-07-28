@@ -65,7 +65,7 @@ feature Overlord::Bomber, :type => :feature do
 
 
   describe "activating the bomb" do
-    it "should show ticket" do
+    it "should show ticker" do
 
       visit '/boot_process'
       fill_in('post[activation-code]', :with => "1234")
@@ -80,6 +80,36 @@ feature Overlord::Bomber, :type => :feature do
       click_button('Boot')
 
       expect(page).to have_content("DANGER!")
+
+
+    end
+  end
+
+
+  describe "deactivating the bomb" do
+    it "should turn off the bomb" do
+
+      visit '/boot_process'
+      fill_in('post[activation-code]', :with => "1234")
+      fill_in('post[deactivation-code]', :with => "1234")
+      click_button('Boot Up')
+
+      click_button('Activate')
+
+      fill_in('post[seconds-to-boom]', :with => "30")
+      fill_in('post[activation-code]', :with => "1234")
+
+      click_button('Boot')
+
+      click_button('Deactivate')
+
+      fill_in('post[deactivation-code]', :with => "1234")
+
+      click_button('Deactivate')
+
+
+
+      expect(page).to have_content("OFF")
 
 
 

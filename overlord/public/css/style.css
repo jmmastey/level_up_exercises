@@ -34,9 +34,15 @@ body {
 }
 
 .status-text {
-  border: 1px #AAA solid;
-  background-color: #D3D3D3;
+  border: 1px rgba(180, 180, 180, 0.16) solid;
+  background-color: rgba(255, 255, 255, 0.21);
 }
+
+.status-header {
+  background-color: #EEEEEE;
+  padding: 15px;
+}
+
 
 .death-button {
   display:block;

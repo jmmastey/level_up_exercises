@@ -16,7 +16,15 @@ Remove, Change Quantity, Save item for later.
 
 ### Payment
 
-Coupons, Reward(other), Billing (Type/Info/Address/etc)
+#### Coupons
+- Test correct deductions (Valid / Invalid codes)
+- Test to make sure the option to enter a coupon is visible
+
+#### Reward(other)
+- For certain payment types (Visa), make sure the rewards account is linked and available rewards points are displayed for use. [External Dependency - potential Rando testing problem]
+
+#### Billing (Type/Info/Address/etc)
+- Allow user to enter credit/debit information
 
 ### Shipping (Address)
 - This is an important case as the shipping address may impact the billing or other order details.

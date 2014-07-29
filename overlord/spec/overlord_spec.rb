@@ -20,13 +20,6 @@ feature Overlord::Bomber, :type => :feature do
     end
   end
 
-  describe "the home state" do
-    it "should have the machine title" do
-      visit '/'
-      expect(page.has_content?("ENNIHILATION")).to be_truthy
-    end
-  end
-
   describe "start boot process with valid and invalid content" do
     it "should show a boot page" do
       visit '/boot_process'
@@ -56,7 +49,6 @@ feature Overlord::Bomber, :type => :feature do
 
   describe "cancel boot process" do
     it "should go back to home (off)" do
-
       visit '/boot_process'
       click_button('Cancel')
       expect(page.has_content?("ENNIHILATION")).to be_truthy
@@ -107,10 +99,7 @@ feature Overlord::Bomber, :type => :feature do
 
       click_button('Deactivate')
 
-
-
       expect(page).to have_content("OFF")
-
 
 
     end

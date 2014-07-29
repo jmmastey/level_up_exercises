@@ -1,6 +1,6 @@
 # Shopping Cart Test Plan
 
-* Just a general description, but organized in a way that will help digest the testing plan
+\* Just a general description, but organized in a way that will help digest the testing plan
 
 There are 3 primary stages: Shopping (browsing the store), Checkout (Pre-confirmation, editing order details), Confirmation (Post-checkout). These three phases will help to organize an effective test plan.
 
@@ -14,7 +14,7 @@ Browsing is the act of continue to shop around without directly managing the sho
 
 Remove, Change Quantity, Save item for later.
 
-### Paymen
+### Payment
 
 Coupons, Reward(other), Billing (Type/Info/Address/etc)
 

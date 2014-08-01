@@ -15,6 +15,22 @@ CSV::HeaderConverters[:weight] = lambda do |header|
   head
 end
 
-CSV::Converters[:weight_in_lbs] = lambda do |weight|
-  weight
+CSV::Converters[:weight_in_lbs] = lambda do |weight, field_info|
+  if field_info[:header].to_s == 'weight'
+    (weight.to_i * 2.20462).to_s
+  end
+  end
+
+CSV::Converters[:diet] = lambda do |diet|
+  diet_input = diet.to_s.downcase
+
+  carnivore = 'Carnivore' if diet_input == 'yes'
+
+  if diet_input != 'no'
+    carnivore ||= diet
+  else
+    carnivore = nil
+  end
+
+  carnivore
 end

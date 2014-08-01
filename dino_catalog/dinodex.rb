@@ -12,42 +12,50 @@ class RowPartition
 end
 
 class Dinodex
-  attr_accessor :catalog, :catalog_hash_array
+  attr_reader :catalog, :catalog_hash_array
 
 
   def initialize
+    @catalog = false
+    @catalog_hash_array ||= []
+    open_csv
+  end
+
+  def open_csv
     csv_tables = []
-    csv_hahses_array = []
+
     Dir.glob('*.csv').each do |file|
 
-      csv_tables << CSV.read(file, headers: true,
-                             :converters => [:all, :weight_in_lbs],
-                             :header_converters => [:africa, :symbol]
+      initial_table = CSV.read(file, headers: true,
+                             :converters => [:weight_in_lbs, :diet, :all],
+                             :header_converters => [:africa, :symbol],
+                             :unconverted_fields => true
       )
+      if initial_table.has_key?"weight_in_lbs"
+      end
+
     end
+
     csv_tables.each do |table|
       # sorted_headers = CSV::Row.new(table.by_col!.headers.sort, table.fields)
       entry = table.by_col!.sort.to_a.to_h
-      @csv_hahses_array << entry
-      # rows_array = []
-      # # temp_sorted_table.each{ |row|
-      # #   # header = [row.slice(row.find_index(row.first))]
-      # #   row_info = row.partition{|obj|
-      # #     obj.is_a?Symbol}
-      # #   part = RowPartition.new(row_info[0].to_s, row_info[1].to_s)
-      # #   rows_array << CSV::Row.new(part.header, part.fields)
-      # # }
-      # entry = CSV::Table.new(rows_array)
+      catalog_hash_array << entry
+
 
       @catalog ||= entry
-      catalog = entry if entry.keys.count > catalog.keys.count
+      @catalog = entry if entry.keys.count > @catalog.keys.count
 
 
     end
-    csv_hahses_array.delete(catalog) if csv_hahses_array.include?catalog
-    csv_hahses_array.each do |entry|
+    catalog_hash_array.delete(catalog) if catalog_hash_array.include? catalog
+    catalog_hash_array.each do |entry|
       entry.each do |dino|
-        catalog << dino
+        key = dino.delete(dino.first)
+        dino.each { |record|
+          record.each { |record_entry|
+            catalog[key] << record_entry if catalog.has_key? key }
+
+        }
       end
     end
     puts catalog

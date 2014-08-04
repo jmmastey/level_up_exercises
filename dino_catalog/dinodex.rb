@@ -1,65 +1,80 @@
 #!/usr/bin/env ruby
 # File dinodex.rb
 require 'csv'
+require 'hirb'
 require './csv_converters'
-class RowPartition
-  attr_accessor :header, :fields
-
-  def initialize(header, fields)
-    @header = header
-    @fields = fields
-  end
-end
+require './dinosaur'
 
 class Dinodex
-  attr_reader :catalog, :catalog_hash_array
+  attr_accessor :catalog, :catalog_hash_array
 
 
-  def initialize
-    @catalog = false
-    @catalog_hash_array ||= []
-    open_csv
+  def initialize(config = {})
+    self.catalog = {}
+    self.catalog_hash_array ||= []
+    options = {
+    :path => config[:path] || '*.csv',
+    :headers => config[:include_headers] || true,
+    :header_converters => config[:header_converters] || [],
+    :converters => config[:converters] || []
+    }
+
+    open_csv(options)
   end
 
-  def open_csv
+  private
+  def open_csv(options ={})
     csv_tables = []
+    file_path = options.delete(:path)
 
-    Dir.glob('*.csv').each do |file|
+    Dir.glob(file_path).each do |file|
 
-      initial_table = CSV.read(file, headers: true,
-                             :converters => [:weight_in_lbs, :diet, :all],
-                             :header_converters => [:africa, :symbol],
-                             :unconverted_fields => true
-      )
-      if initial_table.has_key?"weight_in_lbs"
-      end
+      initial_table = CSV.read(file, options)
+      csv_tables << initial_table
 
     end
 
+    process_csv(csv_tables)
+  end
+
+  def process_csv(csv_tables)
     csv_tables.each do |table|
-      # sorted_headers = CSV::Row.new(table.by_col!.headers.sort, table.fields)
-      entry = table.by_col!.sort.to_a.to_h
-      catalog_hash_array << entry
-
-
-      @catalog ||= entry
-      @catalog = entry if entry.keys.count > @catalog.keys.count
-
-
+        table.by_row.each { |dino|
+          tmp_dino = Dinosaur.new
+          ops = {}
+          table.headers.each do |header|
+            ops[header] = dino[header]
+          end
+          self.catalog[ops[:name]] = Dinosaur.new(ops)}
     end
-    catalog_hash_array.delete(catalog) if catalog_hash_array.include? catalog
-    catalog_hash_array.each do |entry|
-      entry.each do |dino|
-        key = dino.delete(dino.first)
-        dino.each { |record|
-          record.each { |record_entry|
-            catalog[key] << record_entry if catalog.has_key? key }
+  end
 
-        }
-      end
+  public
+  def show_data()
+    if self.catalog
+      display_array = []
+      headers = ["Name", "Period", "Continent", "Diet", "Weight", "Walking", "Description"]
+      self.catalog.values.each { |entry|
+        display_array << [entry.name, entry.period,
+                                                    entry.continent, entry.diet,
+                                                    entry.weight, entry.walking, entry.description] }
+      puts Hirb::Helpers::AutoTable.render(display_array, :headers => headers )
     end
-    puts catalog
+  end
+
+  def search(input)
+    puts "Your Query: #{input}"
+    puts self.catalog.select{|k, v|
+      v.to_s.include?input}
   end
 end
 
-dex = Dinodex.new
+dex_config = {path:'*.csv', headers: true, include_headers:true,
+              converters:  [:weight_in_lbs, :diet, :all],
+              header_converters: [:africa, :symbol],}
+
+dex = Dinodex.new(dex_config)
+puts dex.show_data
+puts "Search for something:"
+input = gets.chomp
+dex.search(input)

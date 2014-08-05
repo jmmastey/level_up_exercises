@@ -12,7 +12,7 @@ Build and define a schema to track users' drink history, so that they can rememb
 * Beer - A single type of brew from a brewery. Includes a style, description, and brewing year.
 * User - A person who drinks beer. Give them some humany fields.
 * Rating - When a person drinks a beer, they should be able to rate it on some parameters. Look at a site like [Beer Advocate](http://www.beeradvocate.com/beer/profile/26/7520/) for details.
-* All entities need some mechanical fields for insertion / update times and updater/inserter info.
+* All entities need some mechanical fields for insertion / update times and updater / inserter info.
 * Make sure to maintain referential integrity and proper cascading.
 
 Build the set of `CREATE TABLE` and related SQL statements to generate a proper, commented schema for this section.

@@ -1,8 +1,11 @@
 # File search_catalog.rb
+
+
 class SearchCatalog
   attr_accessor :columns
 
   def initialize(search_columns=[])
+    extend Hirb::Console
     self.columns = search_columns
     search_columns.each do |column|
       self.class.class_eval do
@@ -17,10 +20,14 @@ class SearchCatalog
     end
   end
 
-  def search(catalog, *terms)
-    catalog.select do |k, v|
-      terms.each{|term| v.to_s.include?(term[0])}
-      end
+  def search(catalog, terms)
+
+  end
+
+  def show_info(catalog, *terms)
+    selected = catalog.select do |k, v|
+      terms.include?(v.name)
+    end.each {|key, value| value}
   end
 
   # private

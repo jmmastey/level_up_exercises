@@ -8,8 +8,8 @@ require 'hirb'
 class Splitalizer
 
 	CONFIDENCE 		= 1.96
-	NUM_DECIMALS	= 2
 	Z_SCORE				= 3.841
+	NUM_DECIMALS	= 2
 
 	attr_accessor :a_conv_percent, :b_conv_percent,
 								:a_low, :a_high,

@@ -31,11 +31,11 @@ class Dinodex
   end
 
   def info
-    get_info(menu catalog.values, :fields=> Dinosaur.fields, :two_d=>false, :action=>false, :action_object=> self)
+    get_info(menu catalog.values, :fields => Dinosaur.fields, :two_d => false, :action => false, :action_object => self)
   end
 
   def list
-    table catalog.values, :fields=> Dinosaur.fields
+    table catalog.values, :fields => Dinosaur.fields
   end
 
 
@@ -48,7 +48,7 @@ class Dinodex
       print 'Query: '
       input = gets.chomp
       results = search_klass.search(catalog, input)
-      table results.values, :fields=>Dinosaur.fields
+      table results.values, :fields => Dinosaur.fields
     end
 
   end
@@ -78,7 +78,6 @@ class Dinodex
     answer = gets.chomp
     'back' if answer == 'no'
   end
-
 
 
 end

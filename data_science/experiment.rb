@@ -13,7 +13,7 @@ class Experiment
     Math.sqrt(p * (1-p) / n )
   end
 
-  def z_score(two_tailed=false)
+  def z_score
     alpha = 1.0-self.confidence
     1.0 - (0.5*alpha)
   end

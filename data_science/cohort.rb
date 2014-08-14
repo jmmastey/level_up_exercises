@@ -4,16 +4,16 @@ class Cohort
 
   def initialize(name)
     self.name = name
-    self.conversions = 0
-    self.visits = 0
+    self.conversions ||= 0.0
+    self.visits ||= 0.0
   end
 
   def add_visits
-     self.visits += 1
+     self.visits += 1.0
   end
 
   def add_conversions
-    self.conversions += 1
+    self.conversions += 1.0
   end
 
   def conversion_rate

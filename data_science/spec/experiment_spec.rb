@@ -5,8 +5,9 @@ require './cohort'
 
 describe Experiment do
   let(:experiment){Experiment.new}
-  let(:cohort_a){Cohort.new('A')}
-  let(:cohort_b){Cohort.new('B')}
+  let(:cohort_a){Cohort.new('A', {:visits =>1349.0, :conversions=>47.0})}
+  let(:cohort_b){Cohort.new('B', {:visits =>1543.0, :conversions=>79.0})}
+
   # subject{experiment}
 
   context '@confidence' do
@@ -30,8 +31,19 @@ describe Experiment do
     end
 
   end
-  it 'expect a standard error' do
-    pending
+  context '#stadard_error' do
+    it 'expect a standard error' do
+      visits = 1000.0
+      conversions = 100.0
+      expect(experiment.standard_error((conversions/visits), visits)).to be_within(0.001).of(0.009)
+    end
+  end
+
+  context '#chi_square_formulat' do
+    it 'expect a value' do
+      expect(experiment.chi_square_formula(cohort_a.visits, cohort_b.visits, cohort_a.conversions, cohort_b.conversions)).to eq(4.241)
+    end
+
   end
 
 

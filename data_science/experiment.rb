@@ -3,14 +3,71 @@ class Experiment
   attr_accessor :confidence
 
   def initialize(confidence=95.0)
-    # self.cohorts = cohorts
-    self.confidence = confidence.to_f / 100.0
+    self.confidence = confidence / 100.0
   end
 
-  def standard_error(conversion_rate, visits)
+  def analyse(cohorts = [])
+    text = ''
+    winner = nil
+    winning_conversion_rate = 0
+    chi_p = calculate_chi_and_avg_p(cohorts)
+    cohorts.each do |cohort|
+      text << generate_cohort_results(cohort)
+      if cohort.conversion_rate > winning_conversion_rate
+        winning_conversion_rate = cohort.conversion_percent
+        winner = '-'*20 +"\nWinning Split Test: #{cohort.name}\n"+'-'*20+ "\n"
+      end
+
+    end
+    text << winner
+    text << chi_p.to_s
+    text << "\n\n"
+
+    if chi_p[:chi] > chi_p[:p]
+      text << "Winning results are significant\n"
+    else
+      text << "Results are NOT significant\n"
+    end
+    text
+  end
+
+
+  def generate_cohort_results(cohort)
+    p_deviation = self.cdf_inverse(z_score)
+    text = ''
+    std_error = (self.standard_error(cohort.conversion_rate, cohort.visits, true)*p_deviation).round(3)
+    low_std_error = (cohort.conversion_percent - std_error).round(3)
+    high_std_error = (cohort.conversion_percent + std_error).round(3)
+    text << "Test #{cohort.name}: Conversion Rate: #{cohort.conversion_percent}%\n"
+    text << "Standard Error: +/- #{std_error}%\n"
+    text << "Error Variance (low/high): #{low_std_error}% -> #{high_std_error}%\n\n\n"
+    text
+  end
+
+  def calculate_chi_and_avg_p(cohorts)
+    if cohorts.size == 2
+      a = nil
+      b = nil
+      results = {}
+      cohorts.each do |cohort|
+        a = cohort if cohort.name == 'A'
+        b = cohort if cohort.name == 'B'
+      end
+      results[:chi] = chi_square_formula(a.visits, b.visits, a.conversions, b.conversions)
+      results[:p] =   (cdf_inverse(self.confidence)).round(3)
+      results
+    end
+  end
+
+
+  def standard_error(conversion_rate, visits , as_percent=false)
     p = conversion_rate.to_f
     n = visits.to_f
-    Math.sqrt(p * (1-p) / n )
+    se = Math.sqrt(p * (1-p) / n )
+    if as_percent == true
+      se = (se*100.0).round(3)
+    end
+    se
   end
 
   def z_score

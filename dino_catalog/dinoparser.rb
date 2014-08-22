@@ -60,6 +60,8 @@ class Dinosaur
 
     def matches_any? criteria
        puts row[criteria.name] 
+       #TODO: What I want to do is with all criteria passed in, verify that we meet all of it
+       #or not. If we do, simply return true. If not, return false
 
     end
 

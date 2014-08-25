@@ -28,14 +28,14 @@ Period-Jurassic or Early or Late.\nElse if you simply know the name of the dinos
     user_inp = gets.chomp.split(/[,-]/).each(&:lstrip!)
     begin
       criteria = Hash[*user_inp]
+      @dinos.select! { |dino| dino.match_criteria(criteria)}
     rescue Exception => e
-      puts "Please enter valid criteria like this: Walking-Biped, Diet-Carnivore, Period-Jurassic, etc.."
+      raise "Please enter valid criteria like this: Walking-Biped, Diet-Carnivore, Period-Jurassic, etc.."
     end
-    @dinos.select! { |dino| dino.match_criteria(criteria)}
+    #@dinos.select! { |dino| dino.match_criteria(criteria)}
     @dinos.each do |dino| puts dino.inspect
     end
   end
-
 
 dinosaurs = DinoLibrary.new
 dinosaurs.user_input

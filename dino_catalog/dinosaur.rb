@@ -32,10 +32,6 @@ class Dinosaur
     criteria.all?{ |method_name, param_value| filter_criteria(method_name, criteria) }
   end
 
-  #def criteria_not_matches?(method_name)
-  # !Dinosaur.method_defined?(:"#{method_name.downcase}?") && !(method_name.downcase).eql?("walking")
-  #end
-
   def filter_criteria(method_name, criteria)
     begin
       if ["Walking"].include?(method_name)

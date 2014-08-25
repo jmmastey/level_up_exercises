@@ -12,9 +12,6 @@ class DinoLibrary
      @dinos = dino_library.collect do |line|
       Dinosaur.new(line)
      end
-    # dino_hashes.each do |dino|
-    #  #puts dino.inspect
-    # end
   end
 
   def prompt_user
@@ -32,7 +29,6 @@ Period-Jurassic or Early or Late.\nElse if you simply know the name of the dinos
     rescue Exception => e
       raise "Please enter valid criteria like this: Walking-Biped, Diet-Carnivore, Period-Jurassic, etc.."
     end
-    #@dinos.select! { |dino| dino.match_criteria(criteria)}
     @dinos.each do |dino| puts dino.inspect
     end
   end

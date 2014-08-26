@@ -1,11 +1,10 @@
 class Dinodex
 
-    require "CSV"
-    require_relative "Dinosaur"
-    require_relative "Dinoparser"
+    require_relative "dinosaur"
+    require_relative "dinoparser"
 
     attr_reader :dinos, :all_dinosaurs
-   
+
     def initialize(filename = nil)
         @all_dinosaurs = []
         parser = Dinoparser.new()
@@ -45,5 +44,5 @@ end
 
 
 d1 = Dinodex.new("dinodex.csv")
-#d1.find_dinosaurs({"WALKING" => "Biped", "DIET" => "Carnivore", "WEIGHT" => 7000})
-d1.find_dinosaurs({diet: "Insectivore", walking: "Wee"})
+#d1.find_dinosaurs({diet: "Insectivore", walking: "Wee"})
+d1.find_dinosaurs({})

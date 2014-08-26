@@ -14,14 +14,14 @@ class Dinosaur
 
   end
 
-  def matches_period? period
+  def matches_period?(period)
     @period.include? period.value
   end
 
   def matches_weight_restriction?
   end
 
-  def matches_any? criteria
+  def matches_any?(criteria)
     criteria.any? { |key, match_value| self.send(key) == match_value }
   end
 

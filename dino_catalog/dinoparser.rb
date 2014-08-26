@@ -2,7 +2,7 @@ class Dinoparser
 
   require "csv"
 
-  def initialize()
+  def initialize
   end
 
   def parse_csv_file(filename)
@@ -14,4 +14,3 @@ class Dinoparser
   end
 
 end
-

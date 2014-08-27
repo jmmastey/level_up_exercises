@@ -49,7 +49,6 @@ class Importer
   def self.load(file_path, entry_klass, entries = [])
     CSV.read(file_path, OPTIONS).each do |row|
       entry = entry_klass.new(**Hash[row.headers.zip(row.fields)])
-      puts "row: #{entry.inspect}"
       entries << entry
     end
     entries

@@ -23,8 +23,8 @@ describe DinoDex::Catalog do
 
     context "for substring inclusion" do
       it "will match" do
-        x = c.where(:genus => 'titan')
-        expected = ["giraffatitan", "paralititan"]
+        x = c.where(:period => :cretaceous)
+        expected = ["albertonykus", "albertosaurus", "baryonyx", "deinonychus", "giganotosaurus", "paralititan", "quetzalcoatlus", "suchomimus"]
         expect(x.collect(&:genus).sort.sort).to eq(expected)
       end
     end

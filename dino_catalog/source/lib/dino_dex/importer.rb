@@ -48,7 +48,9 @@ class Importer
 
   def self.load(file_path, entry_klass, entries = [])
     CSV.read(file_path, OPTIONS).each do |row|
-      entries << entry_klass.new(**Hash[row.headers.zip(row.fields)])
+      entry = entry_klass.new(**Hash[row.headers.zip(row.fields)])
+      puts "row: #{entry.inspect}"
+      entries << entry
     end
     entries
   end
@@ -58,6 +60,6 @@ class Importer
   end
 
   def self.normalize(value)
-    value.to_s.snake_case.downcase.to_sym
+    value.to_s.gsub(" ", "_").downcase.to_sym
   end
 end

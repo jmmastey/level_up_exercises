@@ -9,4 +9,10 @@ module Utility
     end
   end
   Object.include(ObjectMixins)
+  module SymbolMixins
+    def include?(target)
+      to_s.include?(target.to_s)
+    end
+  end
+  Symbol.include(SymbolMixins)
 end

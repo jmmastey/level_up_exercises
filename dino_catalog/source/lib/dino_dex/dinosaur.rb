@@ -38,7 +38,7 @@ module DinoDex
       match_variable = criterion.first.to_sym
       match_value = instance_variable_get("@#{match_variable}")
       match_condition = criterion.last.try(:to_a).try(:flatten) || criterion.last
-      default_operand = match_value.is_a?(String) ? :include? : :==
+      default_operand = (match_value.is_a?(String) || match_value.is_a?(Symbol)) ? :include? : :==
       {
         :operand => match_condition.try(:first).try(:to_sym) || default_operand,
         :target => match_condition.try(:last) || match_condition,

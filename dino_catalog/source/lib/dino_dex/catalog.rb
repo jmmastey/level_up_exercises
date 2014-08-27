@@ -1,7 +1,3 @@
-# TODO:
-# - Isolate parser, converters for headers, and generalize import_data
-# - Clean up method chaining?
-
 module DinoDex
 
   require "CSV"

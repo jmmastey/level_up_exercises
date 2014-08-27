@@ -1,0 +1,12 @@
+require 'bundler/gem_tasks'
+
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
+task default: :guard
+
+task :guard do
+  cmd_bin = "bundle exec guard --no-interactions --clear"
+  IO.popen(cmd_bin).each do |line|
+    puts line.chomp
+  end
+end

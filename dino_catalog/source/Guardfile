@@ -1,0 +1,9 @@
+Guard.options[:clear] = true
+
+guard :rspec, cmd: 'bundle exec rspec --tty --color', notification: true, all_on_start: true do
+  watch(%r{^spec/.+_spec\.rb})
+  # watch(%r{^lib/(.+)\.rb})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch(%r{^lib/(.+)\.rb})     { |m| "spec" }
+  watch('spec/spec_helper.rb') { "spec" }
+  watch('spec/stubs_spec.rb')  { "spec" }
+end

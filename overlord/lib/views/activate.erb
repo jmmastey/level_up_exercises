@@ -1,0 +1,51 @@
+<div class="row status-header">
+  <div class="col-md-5 status status-label">Status:</div>
+  <div class="col-md-7 status status-text">Activating</div>
+</div>
+
+<div class="row" style="margin-top:55px">
+  <div class="col-md-10 col-md-offset-1">
+
+    <% if !@remaining_attempts.nil? %>
+      <div class="alert alert-warning alert-dismissible">
+        <%= @remaining_attempts %> chance(s) remaining for correct code.
+      </div>
+    <% end %>
+
+    <form id="activateForm" method="POST" action="activated" class="form-horizontal">
+      <fieldset>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">Seconds 'til boom</div>
+            <input class="form-control" type="text" name="post[seconds-to-boom]" placeholder="Enter number of seconds until the explosion">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">Activation Code</div>
+            <input class="form-control" type="password" name="post[activation-code]" placeholder="Enter death code">
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary death-button">
+              Boot <span class="glyphicon glyphicon-thumbs-up" style="margin-left: 5px"></span>
+            </button>
+          </div>
+
+          <div class="col-md-6">
+            <button type="button" class="btn btn-default death-button" onClick="parent.location='/stand_by'">
+              Cancel <span class="glyphicon glyphicon-thumbs-down" style="margin-left: 5px"></span>
+            </button>
+          </div>
+
+        </div>
+      </fieldset>
+    </form>
+
+
+  </div>
+</div>

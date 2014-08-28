@@ -1,0 +1,71 @@
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  box-sizing: border-box;
+  background-color:#E2E2E2;
+}
+
+.container-fluid {
+  padding: 5px 20px;
+}
+
+.title {
+  text-align:center;
+  text-transform:uppercase;
+  border: 3px #777 solid;
+  margin-bottom: 30px;
+  padding: 10px;
+  font-size: 35px;
+  letter-spacing: 5px;
+}
+
+.status {
+  text-align:center;
+  font-size: 30px;
+  padding: 10px;
+  color: #464646;
+  text-transform:uppercase;
+}
+
+.status-label {
+
+}
+
+.status-text {
+  border: 1px rgba(180, 180, 180, 0.16) solid;
+  background-color: rgba(255, 255, 255, 0.21);
+}
+
+.status-header {
+  background-color: #EEEEEE;
+  padding: 15px;
+}
+
+
+.death-button {
+  display:block;
+  width: 100%;
+  font-size: 25px;
+}
+
+.boot-button {
+  width: 300px;
+  margin:auto;
+  display:block;
+  font-size:40px;
+}
+
+.input-group-addon {
+  text-align: right;
+  min-width: 150px;
+}
+
+.alert-boom {
+  text-align: center;
+  font-size: 25px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  word-spacing: 8px;
+}

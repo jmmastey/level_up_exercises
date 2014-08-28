@@ -26,3 +26,15 @@ Go check out the CSVs and come back. Done? Cool, I've just got a few features I 
 2. CSV isn't may favorite format in the world. Can you implement a JSON export feature?
 
 Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long and up to 8 tons! Suh-weet.)
+
+#### Notes
+Dinosaur
+||= Dinodex =||= Afro Dinodex =||
+|| Name || Genus ||
+|| Period || Period ||
+|| Continent || N/A ||
+|| Diet || Carnivore ||
+|| Weight || Weight ||
+|| Walking || Walking ||
+|| Description || N/A ||
+

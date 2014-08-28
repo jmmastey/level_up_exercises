@@ -1,25 +1,27 @@
-require "CSV"
+require 'CSV'
 
 class Importer
   OPTIONS = {
-    :converters => [:nullify, :numeric, :reformat],
-    :headers => :first_row,
-    :header_converters => [:translate]
+    converters: [:nullify, :numeric, :reformat],
+    headers: :first_row,
+    header_converters: [:translate]
   }
 
   TRANSLATIONS = {
-    :genus => [:name, :genus],
-    :period => [:period],
-    :continent => [:continent],
-    :diet => [:carnivore, :diet],
-    :weight => [:weight, :weight_in_lbs],
-    :locomotion_type => [:walking],
-    :description => [:description]
+    genus: [:name, :genus],
+    period: [:period],
+    continent: [:continent],
+    diet: [:carnivore, :diet],
+    weight: [:weight, :weight_in_lbs],
+    locomotion_type: [:walking],
+    description: [:description]
   }
 
-  TRANSLATION_MATRIX = TRANSLATIONS.inject({}){|h, (k,v)| v.map{|f| h[f] = k}; h} # invert for array values
+  # rubocop:disable all
+  TRANSLATION_MATRIX = TRANSLATIONS.inject({}) { |h, (k,v)| v.map { |f| h[f] = k }; h } # invert for array values
+  # rubocop:enable all
 
-  CSV::Converters[:nullify] = lambda do |value, info|
+  CSV::Converters[:nullify] = lambda do |value|
     value.try(:empty?) ? nil : value
   end
 
@@ -39,7 +41,7 @@ class Importer
     end
   end
 
-  CSV::HeaderConverters[:translate] = lambda do |value, info|
+  CSV::HeaderConverters[:translate] = lambda do |value|
     value = Importer.normalize(value)
     Importer.translate(value)
   end
@@ -59,6 +61,6 @@ class Importer
   end
 
   def self.normalize(value)
-    value.to_s.gsub(" ", "_").downcase.to_sym
+    value.to_s.gsub(' ', '_').downcase.to_sym
   end
 end

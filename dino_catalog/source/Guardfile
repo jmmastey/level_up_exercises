@@ -1,9 +1,18 @@
-Guard.options[:clear] = true
+# guard :shell, notification: true do
+#   watch(%r{^lib/(.+)\.rb}) do |m|
+#     n m[0], "Rubocop:"
+#     `rake "rubocop[#{m[0]}]"`
+#   end
+# end
 
 guard :rspec, cmd: 'bundle exec rspec --tty --color', notification: true, all_on_start: true do
-  watch(%r{^spec/.+_spec\.rb})
-  # watch(%r{^lib/(.+)\.rb})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch(%r{^lib/(.+)\.rb})     { |m| "spec" }
   watch('spec/spec_helper.rb') { "spec" }
   watch('spec/stubs_spec.rb')  { "spec" }
 end
+
+# guard :rspec, cmd: 'bundle exec rake', notification: true, all_on_start: true do
+#   watch(%r{^lib/(.+)\.rb})     { |m| "specs" }
+#   watch('spec/spec_helper.rb') { "specs" }
+#   watch('spec/stubs_spec.rb')  { "specs" }
+# end

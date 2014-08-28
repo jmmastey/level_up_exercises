@@ -25,6 +25,8 @@ GEM
     guard-rspec (4.3.1)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
+    guard-shell (0.6.1)
+      guard (>= 1.1.0)
     listen (2.7.9)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -88,6 +90,7 @@ DEPENDENCIES
   extlib
   guard (~> 2.6.1)
   guard-rspec (~> 4.3.1)
+  guard-shell
   rspec (~> 3.0.0)
   rubocop
   terminal-notifier-guard

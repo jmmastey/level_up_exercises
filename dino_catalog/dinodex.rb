@@ -17,8 +17,10 @@ class Dinodex
     if (criteria.length == 0)
       print_valid_dinosaurs()
     else
+    #try map or reject
+
       @all_dinosaurs.each do | dino |
-        puts dino.to_s if dino.matches_any?(criteria)
+        puts dino if dino.matches_any?(criteria)
       end
     end
   end
@@ -27,7 +29,7 @@ class Dinodex
 
   def add_dinosaurs_to_collection(new_dino)
     dino = Dinosaur.new(new_dino)
-    @all_dinosaurs.push(dino)
+    @all_dinosaurs << dino
   end
 
   def print_valid_dinosaurs()
@@ -39,4 +41,4 @@ class Dinodex
 end
 
 d1 = Dinodex.new("dinodex.csv")
-d1.find_dinosaurs({walking: "Biped"})
+d1.find_dinosaurs({walking: "Quadriped"})

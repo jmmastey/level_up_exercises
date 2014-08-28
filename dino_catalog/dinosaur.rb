@@ -27,14 +27,9 @@ class Dinosaur
   end
 
   def to_s
-    puts "Dinosaur Info \n Name: #{@name} Period: #{@period} 
+     "Dinosaur Info \n Name: #{@name} Period: #{@period} 
       Continent: #{@continent} Diet: #{@diet} Weight: #{@weight}
       Walking: #{@walking} Description: #{@description}"
-
-    #self.instance_variables.each do | attr |
-    #  var_value = self.instance_variable_get(attr)
-    #  puts var_value if !var_value.nil?
-    #end
   end
 
 end

@@ -29,12 +29,13 @@ Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long
 
 #### Notes
 Dinosaur
-||= Dinodex =||= Afro Dinodex =||
-|| Name || Genus ||
-|| Period || Period ||
-|| Continent || N/A ||
-|| Diet || Carnivore ||
-|| Weight || Weight ||
-|| Walking || Walking ||
-|| Description || N/A ||
+| Dinodex | Afro Dinodex |
+| ----- | ----- |
+| Name | Genus |
+| Period | Period |
+| Continent | N/A |
+| Diet | Carnivore |
+| Weight | Weight |
+| Walking | Walking |
+| Description | N/A |
 

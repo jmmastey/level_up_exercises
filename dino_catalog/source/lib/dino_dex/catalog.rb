@@ -1,4 +1,5 @@
 module DinoDex
+  require 'pp'
   require 'CSV'
   require_relative 'dinosaur.rb'
   require_relative 'importer.rb'
@@ -24,6 +25,10 @@ module DinoDex
         @entries.define_singleton_method(m, &method(m))
       end
       @entries.flatten
+    end
+
+    def to_s
+      pp self
     end
 
     def self.load(klass, entries, *paths)

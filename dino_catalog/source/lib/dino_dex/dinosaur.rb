@@ -1,5 +1,6 @@
 module DinoDex
   require 'extlib'
+  require 'pp'
 
   class Dinosaur
     attr_accessor :genus, :period, :continent, :diet, \
@@ -27,6 +28,10 @@ module DinoDex
       p = parse_criterion(criterion)
       return unless p[:value].respond_to?(p[:operand])
       p[:value].public_send(p[:operand], p[:target])
+    end
+
+    def to_s
+      pp self
     end
 
     protected

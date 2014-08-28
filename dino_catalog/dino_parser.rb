@@ -28,30 +28,36 @@ class DinoParser
 
 	def initialize(file_name)
 		@file_name = file_name
-		@dinos = nil
-	end
-
-	def dinos
-		return @dinos if @dinos
-
 		@dinos = []
 
-    CSV.foreach(@file_name, { headers: true, header_converters: :symbol}) do |row|
-      p row
-      puts row.inspect
-      @dinos << Dino.new(row) 
-    end
- 
-    @dinos
- 
+		parse 
 	end
 
+	private
+		def parse
+	    CSV.foreach(@file_name, { headers: true, header_converters: :symbol} ) do |row|
+	      @dinos << Dino.new(row) 
+	    end
+		end
 end
 
-# could have a collection object and another parser object
-puts "Test"
+class DinoCollection
+	attr_accessor :dinos
 
-dino_parser = DinoParser.new("dinodex.csv")
-# parser = DinoParser.new("african_dinosaur_export.csv")
+	def initialize
+		@dinos = []
+	end
 
-dino_parser.dinos
+	def add_from_csv(file_name)
+		parser = DinoParser.new(file_name)
+		parser.dinos.each do |dino|
+			@dinos << dino
+		end
+	end
+end
+
+all_the_dinos = DinoCollection.new
+all_the_dinos.add_from_csv("dinodex.csv")
+
+p all_the_dinos.dinos
+

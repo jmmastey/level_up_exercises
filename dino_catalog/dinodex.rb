@@ -32,11 +32,11 @@ class Dinodex
 
   def print_valid_dinosaurs()
     @all_dinosaurs.each do | dino |
-      puts dino.to_s
+      dino.to_s
     end
   end
 
 end
 
 d1 = Dinodex.new("dinodex.csv")
-d1.find_dinosaurs({})
+d1.find_dinosaurs({walking: "Biped"})

@@ -1,0 +1,3 @@
+AllCops:
+  Exclude:
+    - style_guide/*.rb

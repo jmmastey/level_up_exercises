@@ -9,8 +9,7 @@ class Robot
   end
 
   def generate_name(params)
-    params = nil ? @name = name_generator : @name = name
-
+    params == nil ? @name = name_generator : @name = params
     @@registry << @name if ! @@registry.include? @name
   end
 

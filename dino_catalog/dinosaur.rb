@@ -1,7 +1,6 @@
 class Dinosaur
-
-  attr_accessor :name, :period, :continent, :diet, :weight, :walking, 
-    :description
+  attr_accessor :name, :period, :continent, :diet, :weight, :walking,
+                :description
 
   def initialize(row)
     @name = row[:name]
@@ -11,7 +10,6 @@ class Dinosaur
     @weight = row[:weight_in_lbs]
     @walking = row[:walking]
     @description = row[:description]
-
   end
 
   def matches_period?(period)
@@ -23,13 +21,12 @@ class Dinosaur
   end
 
   def matches_any?(criteria)
-    criteria.any? { |key, match_value| self.send(key) == match_value }
+    criteria.any? { |key, match_value| send(key) == match_value }
   end
 
   def to_s
-     "Dinosaur Info \n Name: #{@name} Period: #{@period} 
-      Continent: #{@continent} Diet: #{@diet} Weight: #{@weight}
-      Walking: #{@walking} Description: #{@description}"
+    "Dinosaur Info \n Name: #{@name} Period: #{@period} 
+    Continent: #{@continent} Diet: #{@diet} Weight: #{@weight}
+    Walking: #{@walking} Description: #{@description}"
   end
-
 end

@@ -1,5 +1,4 @@
 class Dinodex
-
   require_relative "dinosaur"
   require_relative "dinoparser"
 
@@ -7,18 +6,15 @@ class Dinodex
 
   def initialize(filename)
     @all_dinosaurs = []
-    parser = Dinoparser.new()
+    parser = Dinoparser.new
     @dinos = parser.parse_csv_file(filename)
-    @dinos.each {| row | add_dinosaurs_to_collection(row) }
-
+    @dinos.each { | row | add_dinosaurs_to_collection(row) }
   end
 
   def find_dinosaurs(criteria)
     if (criteria.length == 0)
-      print_valid_dinosaurs()
+      print_valid_dinosaurs
     else
-    #try map or reject
-
       @all_dinosaurs.each do | dino |
         puts dino if dino.matches_any?(criteria)
       end
@@ -37,8 +33,7 @@ class Dinodex
       dino.to_s
     end
   end
-
 end
 
 d1 = Dinodex.new("dinodex.csv")
-d1.find_dinosaurs({walking: "Quadriped"})
+d1.find_dinosaurs({ walking: "Quadriped" })

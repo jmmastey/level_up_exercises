@@ -1,12 +1,4 @@
-# https://github.com/jmmastey/level_up_exercises/tree/master/dino_catalog
-
 require 'csv'
-
-# Genus,Period,Carnivore,Weight,Walking
-# Abrictosaurus,Jurassic,No,100,Biped
-
-# NAME,PERIOD,CONTINENT,DIET,WEIGHT_IN_LBS,WALKING,DESCRIPTION
-# Albertosaurus,Late Cretaceous,North America,Carnivore,2000,Biped,Like a T-Rex but smaller.
 
 class Dino
 	attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
@@ -15,11 +7,40 @@ class Dino
 		p row
 		@name = row[:name]
 		@period = row[:period]
-		@continent = row[:continent]
-		@diet = row[:diet]
-		@weight_in_lbs = row[:weight_in_lbs].to_i
 		@walking = row[:walking]
 		@description = row[:description]
+		@diet = row[:diet]
+
+		if row.has_key? :name
+			@name = row[:name] 
+		else
+			@name = row[:genus]
+		end
+
+		if row.has_key? :weight_in_lbs 
+			@weight_in_lbs = row[:weight_in_lbs] 
+		else
+			@weight_in_lbs = row[:weight]
+		end
+
+		if row.has_key? :carnivore
+			is_carnivore = row[:carnivore].downcase
+			if is_carnivore == "yes"
+				@diet = "carnivore"
+			elsif is_carnivore == "no"
+				@diet = "herbivore"
+			end
+		end
+
+		if row.has_key? :continent
+			@continent = row[:continent]
+		else
+			@continent = "Africa"
+		end	
+	end
+
+	def weight_in_lbs
+		@weight_in_lbs.to_i
 	end
 
 	def is_biped?
@@ -34,6 +55,10 @@ class Dino
 		@period.downcase.include? period_name.downcase
 	end
 
+	def to_s
+		"Name: #{name}; Period: #{period}, Continent"
+	end
+
 end
 
 class DinoParser
@@ -43,11 +68,11 @@ class DinoParser
 		@file_name = file_name
 		@dinos = []
 
-		parse 
+		parse_csv 
 	end
 
 	private
-		def parse
+		def parse_csv
 	    CSV.foreach(@file_name, { headers: true, header_converters: :symbol} ) do |row|
 	      @dinos << Dino.new(row) 
 	    end
@@ -85,24 +110,28 @@ class DinoCollection
 	end
 
 	def print_bipeds
+		p "-------------"
 		bipeds.each do |d| 
 			p "#{d.name} #{d.walking}"
 		end
 	end
 
 	def print_meat_eaters
+		p "-------------"
 		meat_eaters.each do |d| 
 			p "#{d.name} #{d.diet}"
 		end
 	end
 
 	def print_from_period(period)
+		p "-------------"
 		from_period(period).each do |d| 
 			p "#{d.name} #{d.period}"
 		end
 	end
 
 	def print_weighs(weight)
+		p "-------------"
 		weighs_more_than(weight).each do |d| 
 			p "#{d.name} #{d.weight_in_lbs}"
 		end
@@ -111,13 +140,14 @@ end
 
 all_the_dinos = DinoCollection.new
 all_the_dinos.add_from_csv("dinodex.csv")
+all_the_dinos.add_from_csv("african_dinosaur_export.csv")
 
 p "-------------"
 all_the_dinos.dinos.each do |d|
 	p d
 end
 
-p "-------------"
+
 all_the_dinos.print_bipeds
 all_the_dinos.print_meat_eaters
 all_the_dinos.print_from_period("permian")

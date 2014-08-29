@@ -148,6 +148,69 @@ Name some resources that you might monitor for a production host.
 
 There's a big problem with most monitoring: a momentary spike in resource usage isn't actually a problem. Some software, like the 'god' gem, tries to overcome this limitation. Can you think of some strategies to solve this problem?
 
+
+## Web Proxies
+Usually have a proxy setup to listen for the machine and proxy requests back to actual software
+
+**Proxy server** - a server that acts as an intermediary from clients seeking resources from other services. 
+Client connects to proxy server (requesting some service - file/connection/webpage/etc.), proxy evluates request as a way to simplify and controls its complexity
+
+Why use them?
+
+* Adds stucture and encapsulation to distributed systems
+* Allows client computers to make indirect network connections to other network services
+* Share internet connection on local area network
+* Hide IP address
+* Implement internet access control
+* Access blocked websites
+* Speed up internet surfing
+
+Proxies between a production customer and actual application
+
+```
+Production   ----- request ---->     Proxy     ----- request ---->    Web
+Customer     <---- response ----     Server    <---- response ----    server
+```
+
+
+## Managing Server Time (NTP)
+command to reset your time using an external NTP (network time protocol) server
+
+```
+ntpdate
+```
+
+## Firewalls, iptables, and nmap
+Limit traffic in and out of systems using a firewall 
+
+* allowing only whitelisted traffic to pass, we can eliminate large numbers of security vulnerabilities
+
+iptables to manage traffic
+
+* IPTables is a front-end tool to talk to the kernel and decides the packets to filter
+
+
+init script to start|stop|restart and save rulesets `$ /etc/init.d/iptables`
+
+where Rulesets are saved `$ /etc/sysconfig/iptables`
+
+binary `$ /sbin/iptables`
+
+
+
+Start Iptable Firewall: 
+```
+$ /etc/init.d/iptables start 
+```
+
+Check status:
+```
+$ iptables -L -n -v
+```
+
+
+nmap to scan the machine and display a report of all ports open and listening
+
 ## Git
 compare staged commits `$ git diff —staged`
 
@@ -164,10 +227,7 @@ and unstage them `$ git reset filename.txt 	`
 
 
 
-
-
-
-## To Learn
+## Additional Topics
 Virtual Machine
 
 **Daemon (system service)** - a computer program which runs a background process, rather than being under direct control of an interactive user

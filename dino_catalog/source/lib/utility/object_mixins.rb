@@ -1,4 +1,7 @@
 module Utility
+  module BlocktasticSugar
+    # TODO: "INSIDE" DSL HERE
+  end
   module ObjectMixins
     def try(*a, &b)
       if a.empty? && block_given?

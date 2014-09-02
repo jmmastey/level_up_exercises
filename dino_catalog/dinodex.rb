@@ -5,6 +5,7 @@ require './dino'
 require './dinoquery'
 
 class DinoDex
+  @@valid_fields = Dinosaur.public_instance_methods
   @dinos = []
   def load(dinos)
     @dinos = dinos
@@ -14,5 +15,4 @@ class DinoDex
     dino_query = DinoQuery.new(@dinos.dup)
     return dino_query.and(key,op,arg)
   end
-
 end

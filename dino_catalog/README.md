@@ -29,9 +29,9 @@ Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long
 
 
 
-Parse African dinos (reformat?)
+--Parse African dinos (reformat?)
+--Print all known facts
+--Print all in a given collection
 Combine criteria (chain filter calls)
-Print all known facts
-Print all in a given collection
 
 

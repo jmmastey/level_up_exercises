@@ -4,39 +4,7 @@ class Dino
 	attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
 
 	def initialize(row)
-		p row
-		@name = row[:name]
-		@period = row[:period]
-		@walking = row[:walking]
-		@description = row[:description]
-		@diet = row[:diet]
-
-		if row.has_key? :name
-			@name = row[:name] 
-		else
-			@name = row[:genus]
-		end
-
-		if row.has_key? :weight_in_lbs 
-			@weight_in_lbs = row[:weight_in_lbs] 
-		else
-			@weight_in_lbs = row[:weight]
-		end
-
-		if row.has_key? :carnivore
-			is_carnivore = row[:carnivore].downcase
-			if is_carnivore == "yes"
-				@diet = "carnivore"
-			elsif is_carnivore == "no"
-				@diet = "herbivore"
-			end
-		end
-
-		if row.has_key? :continent
-			@continent = row[:continent]
-		else
-			@continent = "Africa"
-		end	
+		row.each { |key, val| instance_variable_set("@#{key}",val)}
 	end
 
 	def weight_in_lbs
@@ -58,7 +26,7 @@ class Dino
 	def to_hash
     hash = {}
     instance_variables.each {|var| hash[var.to_s.delete("@")] = instance_variable_get(var) }
-    hash.reject{ |key, val| val == nil }
+    hash
 	end
 
 	def to_s
@@ -80,8 +48,32 @@ class DinoParser
 	private
 		def parse_csv
 	    CSV.foreach(@file_name, { headers: true, header_converters: :symbol} ) do |row|
-	      @dinos << Dino.new(row) 
+	      @dinos << Dino.new(standardize_row(row)) 
 	    end
+		end
+
+		def standardize_row(row_in)
+			row = row_in.to_hash.reject{ |key, val| val == nil }
+
+			row[:name] = row.delete :genus if row.has_key? :genus
+			row[:weight_in_lbs] = kg_to_lbs(row.delete :weight) if row.has_key? :weight
+
+			if row.has_key? :carnivore
+				is_carnivore = row[:diet] = (row.delete :carnivore).downcase
+				if is_carnivore == "yes"
+					row[:diet] = "carnivore"
+				elsif is_carnivore == "no"
+					row[:diet] = "herbivore"
+				end
+			end
+			
+			row[:continent] = "Africa" if !row.has_key? :continent
+
+			row 
+		end
+
+		def kg_to_lbs(num_kg)
+			(num_kg.to_f / 2.20462).to_i
 		end
 end
 

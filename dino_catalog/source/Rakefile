@@ -1,0 +1,30 @@
+require 'bundler/gem_tasks'
+
+require 'rspec/core/rake_task'
+
+def run_command(cmd)
+  IO.popen(cmd).each do |line|
+    puts line.chomp
+  end
+end
+
+RSpec::Core::RakeTask.new(:spec)
+
+task default: :guard
+
+task :guard do
+  run_command('bundle exec guard --no-interactions --clear')
+end
+
+task :rubocop do |t, args|
+  # run_command("bundle exec rubocop #{args.join(' ')}")
+  run_command("bundle exec rubocop lib/")
+end
+
+task :specs do
+  Rake::Task[:rspec].invoke("spec")
+end
+
+task :rspec do |t, args|
+  run_command("bundle exec rspec --tty --color #{args.join(' ')}")
+end

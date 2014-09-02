@@ -1,3 +1,15 @@
 AllCops:
   Exclude:
     - style_guide/*.rb
+
+# C: Missing top-level module documentation comment.
+Style/Documentation:
+  Enabled: false
+
+# C: Prefer reduce over inject.
+Style/CollectionMethods:
+  Enabled: false
+
+# C: Use each_with_object instead of inject.
+Style/EachWithObject:
+  Enabled: false

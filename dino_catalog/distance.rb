@@ -1,5 +1,5 @@
-module Distance
 
+module Distance
   # the idea is to a normalized value
   # for how close a string is to a
   # valid string
@@ -26,5 +26,5 @@ module Distance
       edit_distance_rec(str1, len1 - 1, str2, len2 - 1) + cost
     ].min
   end
-
 end
+

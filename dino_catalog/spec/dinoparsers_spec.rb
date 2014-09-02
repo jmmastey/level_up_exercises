@@ -24,12 +24,16 @@ describe "DinoParser#parse" do
     dino_file_path = "dinodex.csv"
     dino_parser = DinoParser.new
     dinos = dino_parser.parse(dino_file_path)
-    expect(dinos[0].name).to eq("Albertosaurus")
-    expect(dinos[0].period).to eq("Late Cretaceous")
-    expect(dinos[0].continent).to eq("North America")
-    expect(dinos[0].weight).to eq(2000)
-    expect(dinos[0].walk).to eq("Biped")
-    expect(dinos[0].desc).to eq("Like a T-Rex but smaller.")
+    
+    expect(dinos.size).to eq(9)
+    
+    expect(dinos[1].name).to eq("Albertonykus")
+    expect(dinos[1].period).to eq("Early Cretaceous")
+    expect(dinos[1].continent).to eq("North America")
+    expect(dinos[1].diet).to eq("Insectivore")
+    expect(dinos[1].weight).to eq(0)
+    expect(dinos[1].walk).to eq("Biped")
+    expect(dinos[1].desc).to eq("Earliest known Alvarezsaurid.")
 
   end
 end

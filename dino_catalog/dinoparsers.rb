@@ -1,6 +1,20 @@
 require './dino'
 require 'csv'
 
+#install a new CSV converter
+CSV::Converters[:integer_plus] = lambda do |field|
+  begin
+    if field == nil
+      return 0
+    else
+      return Integer(field)
+    end
+  rescue 
+    return field
+  end
+end
+  
+
 class CSV::Table
   def map(&blk)
     a = []
@@ -15,8 +29,8 @@ end
 class DinoParser
   @@csv_opts = {
     :headers => true,
-    :header_converters => [:downcase],
-    :converters => :numeric
+    :header_converters => :downcase,
+    :converters => :integer_plus
   }
   def parse(data)
     data = CSV.read(data,@@csv_opts) if data.is_a? String
@@ -33,8 +47,8 @@ end
 class AfroDinoParser
   @@csv_opts = {
     :headers => true,
-    :header_converters => [:downcase],
-    :converters => :numeric
+    :header_converters => :downcase,
+    :converters => :integer_plus
   }
   def parse(data)
     data = CSV.read(data,@@csv_opts) if data.is_a? String

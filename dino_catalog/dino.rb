@@ -16,5 +16,9 @@ class Dinosaur
     @walk = walk
     @desc = desc
   end
+  
+  def to_s
+    return "#{name}, #{period}, #{diet}, #{weight}"
+  end
 end
 

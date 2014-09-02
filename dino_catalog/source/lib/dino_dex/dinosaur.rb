@@ -1,20 +1,14 @@
 module DinoDex
-  require 'extlib'
-  require 'pp'
+  require_relative 'common.rb'
 
   class Dinosaur
-    attr_accessor :genus, :period, :continent, :diet, \
-                  :weight, :locomotion_type, :description
+    include ::DinoDex::Common
 
-    # TODO: GO FULL META - instance_variable_set("@#{key}", value)
-    def initialize(genus: nil, period: nil, continent: nil, diet: nil, weight: nil, locomotion_type: nil, description: nil)
-      @genus = genus
-      @period = period
-      @continent = continent
-      @diet = diet
-      @weight = weight
-      @locomotion_type = locomotion_type
-      @description = description
+    def initialize(params)
+      params.each do |(key, value)|
+        instance_variable_set("@#{key}", value)
+        singleton_class.class_eval { attr_accessor key }
+      end
     end
 
     def matches_all?(criteria = {})
@@ -31,10 +25,6 @@ module DinoDex
       query[:value].public_send(query[:operand], query[:target])
     end
 
-    def to_s
-      pp self
-    end
-
     protected
 
     def parse_criterion(criterion)
@@ -47,17 +37,13 @@ module DinoDex
       }
     end
 
-    private
-
     def target(condition)
       condition.try(:last) || condition
     end
 
     def operand(condition, value)
-      # value.respond_to?(:encoding): match_value.is_a?(String) || match_value.is_a?(Symbol)
-      default = value.respond_to?(:encoding) ? :include? : :==
+      default = value.try(:text?) ? :include? : :==
       condition.try(:first).try(:to_sym) || default
     end
-
   end
 end

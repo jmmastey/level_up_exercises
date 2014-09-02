@@ -1,5 +1,11 @@
-Lint/ShadowingOuterLocalVariable:
+# C: Missing top-level module documentation comment.
+Style/Documentation:
   Enabled: false
 
-Style/Documentation:
+# C: Prefer reduce over inject.
+Style/CollectionMethods:
+  Enabled: false
+
+# C: Use each_with_object instead of inject.
+Style/EachWithObject:
   Enabled: false

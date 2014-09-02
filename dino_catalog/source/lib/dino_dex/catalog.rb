@@ -1,22 +1,17 @@
 module DinoDex
-  require 'pp'
-  require 'CSV'
+  require_relative 'common.rb'
   require_relative 'dinosaur.rb'
   require_relative 'importer.rb'
   require_relative '../utility/chainable.rb'
 
   class Catalog
-    prepend ::Utility::Chainable
-    attr_accessor :entries
+    include ::DinoDex::Common
+    include ::Utility::Chainable
+    attr_chainable :entries
 
-    def initialize(*file_paths)
+    def initialize(*paths)
       @entries ||= []
-      import(*file_paths)
-    end
-
-    def where(criteria, sample = entries)
-      sample ||= entries
-      sample.select { |entry| entry.matches_all?(criteria) }
+      import(*paths)
     end
 
     def import(*paths)
@@ -27,12 +22,8 @@ module DinoDex
       @entries.flatten
     end
 
-    def to_s
-      pp self
-    end
-
     def self.load(klass, entries, *paths)
-      paths.reduce(entries) { |a, e| a + Importer.load(e, klass) }
+      paths.inject(entries) { |a, e| a + Importer.load(e, klass) }
     end
   end
 end

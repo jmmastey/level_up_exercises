@@ -15,4 +15,10 @@ module Utility
     end
   end
   Symbol.include(SymbolMixins)
+  module TextMixins
+    def text?
+      true
+    end
+  end
+  [String, Symbol].each { |i| i.include(TextMixins) }
 end

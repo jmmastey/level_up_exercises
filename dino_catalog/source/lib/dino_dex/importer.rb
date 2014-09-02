@@ -7,6 +7,8 @@ class Importer
     header_converters: [:translate]
   }
 
+  # TODO: PASS IN VIA `load`
+  # TODO: AFRICA, DUH => :continent
   TRANSLATIONS = {
     genus: [:name, :genus],
     period: [:period],
@@ -17,14 +19,16 @@ class Importer
     description: [:description]
   }
 
-  # rubocop:disable all
-  TRANSLATION_MATRIX = TRANSLATIONS.inject({}) { |h, (k,v)| v.map { |f| h[f] = k }; h } # invert for array values
-  # rubocop:enable all
+  TRANSLATION_MATRIX = TRANSLATIONS.inject({}) do |hash, (key, array)|
+    array.map { |word| hash[word] = key }
+    hash
+  end
 
   CSV::Converters[:nullify] = lambda do |value|
     value.try(:empty?) ? nil : value
   end
 
+  # TODO: change to matrix, similar to TRANSLATIONS, using send with symbol arrays (to methods)
   CSV::Converters[:reformat] = lambda do |value, info|
     unless value.nil?
       case info.header
@@ -46,9 +50,8 @@ class Importer
     Importer.translate(value)
   end
 
-  def initialize; end
-
   def self.load(file_path, entry_klass, entries = [])
+    # TODO: LOOK AT `to_a`
     CSV.read(file_path, OPTIONS).each do |row|
       entry = entry_klass.new(**Hash[row.headers.zip(row.fields)])
       entries << entry

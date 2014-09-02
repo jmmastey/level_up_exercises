@@ -6,6 +6,7 @@ module DinoDex
     attr_accessor :genus, :period, :continent, :diet, \
                   :weight, :locomotion_type, :description
 
+    # TODO: GO FULL META - instance_variable_set("@#{key}", value)
     def initialize(genus: nil, period: nil, continent: nil, diet: nil, weight: nil, locomotion_type: nil, description: nil)
       @genus = genus
       @period = period
@@ -25,9 +26,9 @@ module DinoDex
     # - { :variable => { :< => :less_than_this } }
     # - { :variable => [ '>=', :greater_than_or_equal_to_this ] }
     def matches?(criterion)
-      p = parse_criterion(criterion)
-      return unless p[:value].respond_to?(p[:operand])
-      p[:value].public_send(p[:operand], p[:target])
+      query = parse_criterion(criterion)
+      return unless query[:value].respond_to?(query[:operand])
+      query[:value].public_send(query[:operand], query[:target])
     end
 
     def to_s
@@ -36,21 +37,27 @@ module DinoDex
 
     protected
 
-    # Supported Criterion:
-    # - [ :variable, :equals_this ]
-    # - [ :variable, { :< => :less_than_this } ]
-    # - [ :variable, [ '>=', :greater_than_or_equal_to_this ] ]
     def parse_criterion(criterion)
-      match_variable = criterion.first.to_sym
-      match_value = instance_variable_get("@#{match_variable}")
-      is_text = match_value.is_a?(String) || match_value.is_a?(Symbol)
-      match_condition = criterion.last.try(:to_a).try(:flatten) || criterion.last
-      default_operand = is_text ? :include? : :==
+      value = instance_variable_get("@#{criterion.first}")
+      condition = criterion.last.try(:to_a).try(:flatten) || criterion.last
       {
-        operand: match_condition.try(:first).try(:to_sym) || default_operand,
-        target: match_condition.try(:last) || match_condition,
-        value: match_value
+        operand: operand(condition, condition),
+        target: target(condition),
+        value: value
       }
     end
+
+    private
+
+    def target(condition)
+      condition.try(:last) || condition
+    end
+
+    def operand(condition, value)
+      # value.respond_to?(:encoding): match_value.is_a?(String) || match_value.is_a?(Symbol)
+      default = value.respond_to?(:encoding) ? :include? : :==
+      condition.try(:first).try(:to_sym) || default
+    end
+
   end
 end

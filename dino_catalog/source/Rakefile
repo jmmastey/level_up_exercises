@@ -13,7 +13,7 @@ RSpec::Core::RakeTask.new(:spec)
 task default: :guard
 
 task :guard do
-  run_command('bundle exec guard --debug --no-interactions') # --clear
+  run_command('bundle exec guard --no-interactions --clear')
 end
 
 task :rubocop do |t, args|

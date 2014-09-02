@@ -55,8 +55,14 @@ class Dino
 		@period.downcase.include? period_name.downcase
 	end
 
+	def to_hash
+    hash = {}
+    instance_variables.each {|var| hash[var.to_s.delete("@")] = instance_variable_get(var) }
+    hash.reject{ |key, val| val == nil }
+	end
+
 	def to_s
-		"Name: #{name}; Period: #{period}, Continent"
+		to_hash.map{ |key, val| "#{key.capitalize}: #{val}" }.join(" --- ")
 	end
 
 end
@@ -109,32 +115,29 @@ class DinoCollection
 		@dinos.select { |d| d.weight_in_lbs > weight }
 	end
 
+	def print_all
+		puts "\n-------------------All The Dinos-------------------"
+		puts dinos.map(&:to_s)
+	end
+
 	def print_bipeds
-		p "-------------"
-		bipeds.each do |d| 
-			p "#{d.name} #{d.walking}"
-		end
+		puts "\n-------------------Bipeds-------------------"
+		puts bipeds.map(&:to_s)
 	end
 
 	def print_meat_eaters
-		p "-------------"
-		meat_eaters.each do |d| 
-			p "#{d.name} #{d.diet}"
-		end
+		puts "\n-------------------Meat eaters-------------------"
+		puts meat_eaters.map(&:to_s)
 	end
 
 	def print_from_period(period)
-		p "-------------"
-		from_period(period).each do |d| 
-			p "#{d.name} #{d.period}"
-		end
+		puts "\n-------------------Period (#{period})-------------------"
+		puts from_period(period).map(&:to_s)
 	end
 
 	def print_weighs(weight)
-		p "-------------"
-		weighs_more_than(weight).each do |d| 
-			p "#{d.name} #{d.weight_in_lbs}"
-		end
+		puts "\n-------------------Weighs more than #{weight} lbs-------------------"
+		puts weighs_more_than(weight).map(&:to_s)
 	end
 end
 
@@ -142,16 +145,11 @@ all_the_dinos = DinoCollection.new
 all_the_dinos.add_from_csv("dinodex.csv")
 all_the_dinos.add_from_csv("african_dinosaur_export.csv")
 
-p "-------------"
-all_the_dinos.dinos.each do |d|
-	p d
-end
-
-
-all_the_dinos.print_bipeds
-all_the_dinos.print_meat_eaters
-all_the_dinos.print_from_period("permian")
-all_the_dinos.print_from_period("jurassic")
-all_the_dinos.print_weighs(2000)
-all_the_dinos.print_weighs(1999)
+all_the_dinos.print_all
+# all_the_dinos.print_bipeds
+# all_the_dinos.print_meat_eaters
+# all_the_dinos.print_from_period("permian")
+# all_the_dinos.print_from_period("jurassic")
+# all_the_dinos.print_weighs(2000)
+# all_the_dinos.print_weighs(1999)
 

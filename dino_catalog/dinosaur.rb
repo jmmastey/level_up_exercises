@@ -25,7 +25,7 @@ class Dinosaur
   end
 
   def to_s
-    "Dinosaur Info \n Name: #{@name} Period: #{@period} 
+    "Dinosaur Info \n Name: #{@name} Period: #{@period}
     Continent: #{@continent} Diet: #{@diet} Weight: #{@weight}
     Walking: #{@walking} Description: #{@description}"
   end

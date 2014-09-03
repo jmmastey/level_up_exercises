@@ -250,3 +250,5 @@ status: return the status of a service
 ```
 
 nginx
+
+curl

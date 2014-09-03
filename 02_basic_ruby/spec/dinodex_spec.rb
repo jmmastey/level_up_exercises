@@ -41,8 +41,8 @@ describe Dinodex, "#load files" do
 		@dinodex.findCSVfiles(@directory)
 	end
 	
-	it "loads the dinodex CSV file with 7 dinosaurs" do
-		expect(@output).to receive(:puts).with('Found 7 dinosaurs in dinodex.csv')
+	it "loads the dinodex CSV file with 9 dinosaurs" do
+		expect(@output).to receive(:puts).with('Found 9 dinosaurs in ' + @directory + '\dinodex.csv')
 		@dinodex.loadCSVfile(@directory + '\dinodex.csv')
 	end
 

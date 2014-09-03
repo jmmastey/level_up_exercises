@@ -23,6 +23,7 @@ class Dinodex
 	end
 	
 	def loadCSVfile(file)
+		newDinosaurs = []
 		if !File.exists?(file)
 			@output.puts 'File ' + file + ' not found';
 			return
@@ -30,17 +31,20 @@ class Dinodex
 
 		table = CSV.read(file, {headers: true})
 		table.each do |row|
+			dinosaur = Dinosaur.new
 			row.fields.each_with_index do |field, index|
-				
 				if !field.nil?
-					puts table.headers[index] + ": " + field
+					if ["genus","name"].include? table.headers[index].downcase
+						dinosaur.name = field
+					elsif ["period"].include? table.headers[index].downcase
+						dinosaur.period = field
+					end
 				end
-				#create dinosaur class
-				# fill in class
-				# add to array						
 			end
+			newDinosaurs.push dinosaur
 		end
-		#return array
 		
+		@output.puts 'Found ' + newDinosaurs.length.to_s + ' dinosaurs in ' + file
+		dinosaurs.push newDinosaurs
 	end
 end

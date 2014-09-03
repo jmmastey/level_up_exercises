@@ -1,6 +1,6 @@
-require './dinodex'
+$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__))) unless $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
+require 'dinodex'
 
 dinodex = Dinodex.new(STDOUT)
-dinodex.findCSVfiles('C:\code\lwalters\leveluprails\02_basic_ruby\inputs')
-dinodex.findCSVfiles('C:\code\lwalters\leveluprails\02_basic_ruby\inputs')
-dinodex.findCSVfiles('C:\code\lwalters\leveluprails\02_basic_ruby\inputs')
+dinodex.findCSVfiles('..\inputs')
+dinodex.loadCSVfile('..\inputs\dinodex.csv')

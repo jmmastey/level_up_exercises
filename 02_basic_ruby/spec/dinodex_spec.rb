@@ -23,7 +23,7 @@ describe Dinodex, "#load files" do
 	before(:each) do
 		@output = double('output').as_null_object
 		@dinodex = Dinodex.new(@output)
-		@directory = 'C:\code\lwalters\leveluprails\02_basic_ruby\inputs'
+		@directory = '.\inputs'
 	end
 
 	it "find files in our directory" do		
@@ -46,5 +46,9 @@ describe Dinodex, "#load files" do
 		@dinodex.loadCSVfile(@directory + '\dinodex.csv')
 	end
 
+	it "shows an error message when file not found" do
+		expect(@output).to receive(:puts).with('File ' + @directory + '\asdf.csv not found')
+		@dinodex.loadCSVfile(@directory + '\asdf.csv')
+	end
 
 end

@@ -40,7 +40,7 @@ describe DinoDex,"#query" do
     dinodex = DinoDex.new
     dinodex.load(dinos)
 
-    result =  dinodex.query("name","is_a?",String).sort(:name).result
+    result = dinodex.query("name","is_a?",String).sort(:name).result
 
     expect(result.size).to eq(9)
     expect(result[0].name).to eq("Albertonykus")
@@ -52,5 +52,6 @@ describe DinoDex,"#query" do
     expect(result[6].name).to eq("Megalosaurus")
     expect(result[7].name).to eq("Quetzalcoatlus")
     expect(result[8].name).to eq("Yangchuanosaurus")
+
   end
 end

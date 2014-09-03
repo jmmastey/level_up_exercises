@@ -5,18 +5,17 @@ class DinoQuery
   end
 
   def and(key,op,arg)
-    query = DinoQuery.new
     @data.keep_if {|dino| dino.send(key).send(op,arg) }
-    return self
+      self
   end
 
   def sort(field)
     @data.sort_by! {|dino| dino.send(field) }
-    return self
+      self
   end
 
   def result
-    return @data
+      @data
   end
 end
 

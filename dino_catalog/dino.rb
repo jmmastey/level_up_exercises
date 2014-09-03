@@ -1,12 +1,6 @@
 
 class Dinosaur
-  attr_reader :name
-  attr_reader :period
-  attr_reader :continent
-  attr_reader :diet
-  attr_reader :weight
-  attr_reader :walk
-  attr_reader :desc
+  attr_reader :name , :period , :continent , :diet , :weight , :walk , :desc
   def initialize(name,period,continent,diet,weight,walk,desc)
     @name = name
     @period = period

@@ -5,7 +5,7 @@ module Distance
   # valid string
   def Distance::similarity(unknown,valid)
     distance = edit_distance(unknown,valid)
-    return distance.to_f / unknown.size
+    distance.to_f / unknown.size
   end
 
 

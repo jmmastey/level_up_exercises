@@ -12,7 +12,7 @@ class Dinosaur
   end
   
   def to_s
-    return "#{name}, #{period}, #{diet}, #{weight}"
+    "#{name}, #{period}, #{continent}, #{diet}, #{weight}, #{walk}, #{desc}"
   end
 end
 

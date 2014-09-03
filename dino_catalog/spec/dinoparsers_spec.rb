@@ -31,7 +31,7 @@ describe "DinoParser#parse" do
     expect(dinos[1].period).to eq("Early Cretaceous")
     expect(dinos[1].continent).to eq("North America")
     expect(dinos[1].diet).to eq("Insectivore")
-    expect(dinos[1].weight).to eq(0)
+    expect(dinos[1].weight).to eq(nil)
     expect(dinos[1].walk).to eq("Biped")
     expect(dinos[1].desc).to eq("Earliest known Alvarezsaurid.")
 
@@ -62,14 +62,14 @@ describe "AfroDinoParser#parse" do
     
     expect(dinos[0].name).to eq("Abrictosaurus")
     expect(dinos[0].period).to eq("Jurassic")
-    expect(dinos[0].continent).to eq("")
+    expect(dinos[0].continent).to eq("Africa")
     expect(dinos[0].weight).to eq(100)
     expect(dinos[0].walk).to eq("Biped")
     expect(dinos[0].desc).to eq("")
 
     expect(dinos[1].name).to eq("Test1")
     expect(dinos[1].period).to eq("Test2")
-    expect(dinos[1].continent).to eq("")
+    expect(dinos[1].continent).to eq("Africa")
     expect(dinos[1].weight).to eq(1000)
     expect(dinos[1].walk).to eq("Test3")
     expect(dinos[1].desc).to eq("")
@@ -82,9 +82,26 @@ describe "AfroDinoParser#parse" do
    
     expect(dinos[0].name).to eq("Abrictosaurus")
     expect(dinos[0].period).to eq("Jurassic")
-    expect(dinos[0].continent).to eq("")
+    expect(dinos[0].continent).to eq("Africa")
     expect(dinos[0].weight).to eq(100)
     expect(dinos[0].walk).to eq("Biped")
     expect(dinos[0].desc).to eq("")
  end
-end 
+end
+
+describe "DinoTokenParser#parse" do
+  it "takes in a string and produces a token " +
+     "chain" do
+    parser = DinoTokenParser.new
+   
+    tokens = parser.parse("AND,name,>,A:SORT,weight")
+    
+    expect(tokens.size).to eq(2)
+
+    expect(tokens[0].field).to eq("name")
+    expect(tokens[0].op).to eq(">")
+    expect(tokens[0].arg).to eq("A")
+
+    expect(tokens[1].field).to eq("weight")
+  end
+end

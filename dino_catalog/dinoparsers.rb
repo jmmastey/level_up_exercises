@@ -1,19 +1,8 @@
 require './dino'
-require 'csv'
+require './dinotoken'
+require './matching'
 
-#install a new CSV converter
-CSV::Converters[:integer_plus] = lambda do |field|
-  begin
-    if field == nil
-      return 0
-    else
-      return Integer(field)
-    end
-  rescue 
-    return field
-  end
-end
-  
+require 'csv'
 
 class CSV::Table
   def map(&blk)
@@ -21,7 +10,7 @@ class CSV::Table
     self.each do |row|
       a.push(blk.call(row))
     end
-    return a
+    a
   end
 end
 
@@ -30,7 +19,7 @@ class DinoParser
   @@csv_opts = {
     :headers => true,
     :header_converters => :downcase,
-    :converters => :integer_plus
+    :converters => :integer
   }
   def parse(data)
     data = CSV.read(data,@@csv_opts) if data.is_a? String
@@ -48,20 +37,34 @@ class AfroDinoParser
   @@csv_opts = {
     :headers => true,
     :header_converters => :downcase,
-    :converters => :integer_plus
+    :converters => :integer
   }
   def parse(data)
     data = CSV.read(data,@@csv_opts) if data.is_a? String
     return data.map do |row|
       diet = parse_carnivore(row.field("carnivore"))
       Dinosaur.new(
-      row.field("genus"),row.field("period"),"",
+      row.field("genus"),row.field("period"),"Africa",
       diet,row.field("weight"),row.field("walking"),""
       )
     end
   end
 
   def parse_carnivore(str)
-    return (str.downcase == "yes") ? "Carnivore" : "Herbivore"
+    (str.downcase == "yes") ? "Carnivore" : "Herbivore"
+  end
+end
+
+class DinoTokenParser
+  def parse(command)
+    raw_tokens = command.split(':')
+    raw_tokens.map do |raw_token|
+      parts = raw_token.split(',')
+      tag = parts[0]
+      Match(tag, nil, {
+        'AND' => lambda {AndToken.new(parts)},
+        'SORT' => lambda {SortToken.new(parts)}
+      })
+    end
   end
 end

@@ -1,47 +1,66 @@
+require 'pp'
+
 class Dinosaur
 
   def initialize(dino_data=[])
     @dinosaur_data = dino_data
+    @dino_name = @dinosaur_data['name']
+    @biped = @dinosaur_data['walking']
+    @quadriped = @dinosaur_data['walking']
+    @weigh = @dinosaur_data['weight'].to_i
+    @diet_type = @dinosaur_data['diet']
+    @continent = @dinosaur_data['continent']
+    @life_period = @dinosaur_data['period']
   end
 
-  def walking(walking_type)
-    @dinosaur_data['walking'] == walking_type
+  def biped?
+    @biped == "Biped"
   end
 
-  def period?(period)
-    @dinosaur_data['period'].include?(period)
+  def quadriped?
+    @quadriped == "Quadriped"
   end
 
-  def continent?(continent_name)
-    @dinosaur_data['continent'].include?(continent_name) if @dinosaur_data.has_key?('continent')
+  def continent_from?(continent_name)
+    @continent.include?(continent_name)
   end
 
-  def diet?(diet)
-    @dinosaur_data[diet.downcase] == 'Yes' || @dinosaur_data['diet'] == diet.capitalize
-  end
-
-  def weight?(weight_in_tonnes)
-    @dinosaur_data['weight_in_lbs'].to_i > weight_in_tonnes.to_i || @dinosaur_data['weight'].to_i > weight_in_tonnes.to_i
+  def period?(time_period)
+    @life_period.include?(time_period)
   end
 
   def information?(dinosaur_name)
-    @dinosaur_data.has_value?(dinosaur_name)
+    @dino_name.has_value?(dinosaur_name)
+  end
+
+  def weight?(weight_in_tonnes)
+    @weigh > weight_in_tonnes.to_i
+  end
+
+  def diet?(diet)
+  @diet_type.include?(diet)
+  end
+
+  def to_s
+    print "Name of dinosaur #{@dino_name}, walking style - #{@biped}, from #{@life_period} period was a #{@diet_type}"
+    print " living in #{@continent}" if !@continent.nil?
+    print " weighing #{@weigh}" if @weigh>0
   end
 
   def match_criteria(criteria)
-    criteria.all?{ |method_name, param_value| filter_criteria(method_name, criteria) }
+    criteria.all? { |method_name, _param_value| filter_criteria(method_name, criteria) }
   end
 
   def filter_criteria(method_name, criteria)
     begin
-      if ["Walking"].include?(method_name)
-        send("#{method_name.downcase}", criteria[method_name]) if ["Walking"].include?(method_name)
+      case method_name
+      when "Walking" then send("#{criteria[method_name].downcase}?")
+      when "Continent" then send(:continent_from?, criteria[method_name])
       else
-        send("#{method_name.downcase}"+"?", criteria[method_name])
+        send("#{method_name.downcase}?", criteria[method_name])
       end
-    rescue Exception => e
-      raise "No method error! Please provide valid input like this: Walking-Biped, Diet-Carnivore, etc.."
+    rescue
+      raise "No method error! Please enter a valid criteria like this: Walking-Biped, Diet-Carnivore.. etc"
     end
   end
-
 end

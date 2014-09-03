@@ -28,7 +28,7 @@ class Dinodex
     @all_dinosaurs << dino
   end
 
-  def print_valid_dinosaurs()
+  def print_valid_dinosaurs
     @all_dinosaurs.each do | dino |
       dino.to_s
     end

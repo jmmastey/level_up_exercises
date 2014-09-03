@@ -13,7 +13,7 @@ class Triangle
     angles = calculate_angles(@side1, @side2, @side3)
     puts "The angles of this triangle are " + angles.join(",")
 
-    puts "This triangle is also a right triangle!" if angles.include? 90  
+    puts "This triangle is also a right triangle!" if angles.include? 90
   end
 
   private
@@ -28,7 +28,7 @@ class Triangle
     angle_c = radians_to_degrees(Math.acos((side_a**2 + side_b**2 - side_c**2) /
                                            (2.0 * side_a * side_b)))
 
-    [angle_a, angle_b, angle_c]    
+    [angle_a, angle_b, angle_c]
   end
 
   def radians_to_degrees(rads)

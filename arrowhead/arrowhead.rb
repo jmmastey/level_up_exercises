@@ -21,7 +21,7 @@ class Arrowhead
       region." if CLASSIFICATIONS[region].nil?
 
     raise "Unknown shape value. Are you sure you know
-      what you're talking about?" if ! CLASSIFICATIONS[region].key? shape
+      what you're talking about?" if !CLASSIFICATIONS[region].key? shape
 
     arrowhead = CLASSIFICATIONS[region].fetch shape
     puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."

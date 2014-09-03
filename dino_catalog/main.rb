@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 require './dinodex'
 require './dinoparsers.rb'
 

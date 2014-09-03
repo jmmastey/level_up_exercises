@@ -8,8 +8,9 @@
 
 function timeFormatter(text)
 {
-    text = text.toString()
-    var i = text.length
+    if(!text) text = '';
+    text = text.toString();
+    var i = text.length;
     while(i < 6)
     {
         text = "0".concat(text); i++
@@ -23,7 +24,9 @@ app.directive('bombtime', function() {
         restrict: 'A',
         require: 'ngModel',
         link: function(scope, element, attr, ngModel) {
-            ngModel.$formatters.push(timeFormatter)
+            ngModel.$formatters.push(timeFormatter);
+            ngModel.$parsers.push(timeFormatter);
+
         }
     };
 })
@@ -31,8 +34,9 @@ app.directive('bombtime', function() {
     '$location', 'Bomb', function($scope, $routeParams, $location, Bomb){
     $scope.activationCode = '';
     $scope.deactivationCode = '';
-    $scope.detonationCode = 60;
+    $scope.detonationCode = '';
     $scope.currentStep = 0;
+    $scope.bombActive = false
     $scope.currentCode = ['activationCode', 'deactivationCode', 'detonationCode'];
 
 
@@ -61,7 +65,8 @@ app.directive('bombtime', function() {
     {
         if(key != 'C' && key != 'S')
         {
-            $scope.currentForm.form = $scope.currentForm.form.toString().concat(key)
+//            $scope.form[$scope.currentCode[$scope.currentStep]].$se
+            $scope.currentForm.form = $scope.currentForm.form.toString().concat(key);
 
         }
 
@@ -83,6 +88,7 @@ app.directive('bombtime', function() {
             }
         }
 
+
     };
 
     if ($routeParams.activationCode && $routeParams.deactivationCode && $routeParams.detonationCode) {
@@ -92,21 +98,55 @@ app.directive('bombtime', function() {
     } else {
         $scope.bomb = new Bomb();
     }
+    $scope.bombActionClick = function(name){
+      if(name == 'Activate')
+      {
+          $scope.submit();
+      }
+      else{
+          $scope.submit();
+      }
+    };
 
     $scope.submit = function() {
+
         console.log("submit");
+//        if(!$scope.activationCode.length)
+//        {
+//            $scope.activationCode = '1234'
+//        }
+//        if(!$scope.deactivationCode.length)
+//        {
+//            $scope.deactivationCode = '0000'
+//        }
+//        if(!$scope.detonationCode.length)
+//        {
+//            $scope.detonationCode = 60
+//        }
+
 
         function success(response) {
             console.log("success", response);
             $location.path("/");
+            $('form[name="form"]').hide();
+            $scope.bombActive = true;
+            $scope.detonationTime = timeFormatter(response.detonation)
 
         }
 
         function failure(response) {
-            console.log("failure", response)
+            console.log("failure", response);
+            $('form[name="form"]').show();
+            $.each(response.data, function(key, error){
+//                $.each(key, function(e){
+                console.log(error)
+                    $scope.form[key].$dirty = true;
+                    $scope.form[key].$setValidity(error, false);
+//                })
 
-                    $scope.form[$scope.currentForm.formName].$dirty = true;
-                    $scope.form[$scope.currentForm.formName].$setValidity($scope.currentForm.formName, false);
+            });
+
+
         }
 
         if ($routeParams.code) {
@@ -128,23 +168,41 @@ app.directive('bombtime', function() {
 
     };
 
+    $scope.setStep = function(step){
+        $scope.currentStep = step
+    }
+
     $scope.cancel = function() {
         $location.path("/"+$scope.activation.code);
     };
 
     $scope.errorClass = function(name) {
         var s = $scope.form[name];
-        return s.$invalid && s.$dirty ? "error" : "";
+        return s.$invalid && s.$dirty ? "has-error" : "";
     };
 
     $scope.errorMessage = function(name) {
-        var s = $scope.form[name].$error;
         var result = [];
-        for(var value in s){
-            result.push(s[value])
-        }
+        $.each($scope.form[name].$error, function(key, value){
+             value ? result.push(key) : null;
+        });
+
         return result.join(", ");
     };
+
+            $scope.activeErrorMessage = function(name) {
+                var result = [];
+                $.each($scope.deactivationForm[name].$error, function(key, value){
+                    value ? result.push(key) : null;
+                });
+
+                return result.join(", ");
+            };
+
+            $scope.activeErrorClass = function(name) {
+                var s = $scope.deactivationForm[name];
+                return s.$invalid && s.$dirty ? "has-error" : "";
+            };
 
 
 

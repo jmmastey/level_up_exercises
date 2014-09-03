@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module("bombApp", ["ngResource", "ngRoute"]);
+var app = angular.module("bombApp", ["ngResource", "ngRoute", "rcForm", "rcDisabled"]);
 
 app.config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);

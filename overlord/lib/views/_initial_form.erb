@@ -1,0 +1,59 @@
+<div class="">
+    <form name="form" rc-submit="submit()" class="form-horizontal" novalidate ng-hide="bombActive">
+        <div class="step-0" >
+            <div class="control-group" ng-class="errorClass('activationCode')">
+                <label class="control-label" for="activationCode">Activation Code</label>
+
+                <div class="controls">
+                    <input data-ng-model="activationCode" type="number" ng-minlength="4" ng-click="setStep(0)"
+
+                           name="activationCode" value="{{activationCode}}" required autofocus>
+                            <span class="help-block"
+                                  ng-show="form.activationCode.$invalid && form.activationCode.$dirty">{{errorMessage('activationCode')}}
+                            </span>
+                </div>
+            </div>
+            <span ng-bind-template="Activation Code: {{activationCode}}">Activation Code: Not Set</span>
+
+        </div>
+        <div class="step-1" >
+            <div class="control-group" ng-class="errorClass('deactivationCode')">
+                <label class="control-label" for="deactivationCode">Deactivation Code</label>
+
+                <div class="controls">
+                    <input data-ng-model="deactivationCode" ng-click="setStep(1)" type="text" name="deactivationCode" placeholder="Deactivation Code" value="{{deactivationCode}}" ng-minlength="4" required autofocus>
+                             <span class="help-block"
+                                   ng-show="form.deactivationCode.$invalid && form.deactivationCode.$dirty">{{errorMessage('deactivationCode')}}
+                            </span>
+                </div>
+                <span>Deactivation Code: {{deactivationCode}}</span>
+                <!--<input type="number" ng-model="deactivation_code">-->
+            </div>
+        </div>
+        <div class="step-2">
+            <div class="control-group" ng-class="errorClass('detonationCode')">
+                <label class="control-label" for="detonationCode">Detonation Time</label>
+
+                <div class="controls">
+                    <input bombtime ng-model="detonationCode" type="text" ng-click="setStep(2)" ng-minlength="1"
+                           name="detonationCode" placeholder="Detonation Time" value="{{detonationCode}}" required autofocus>
+                             <span class="help-block"
+                                   ng-show="form.detonationCode.$invalid && form.detonationCode.$dirty">{{errorMessage('detonationCode')}}
+                            </span>
+                    <span>Detonation Time: {{detonationCode}}</span>
+                    <!--<input type="number" ng-model="timer_minutes">-->
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--<form class="form-inline">-->
+    <!--<div class="form-group col-md-12">-->
+    <!--<label for="bomb-timer">Detonation Time</label>-->
+    <!--<input type="text" class="form-control" id="bomb-timer" placeholder="Time until detonation">-->
+    <!--<label for="bomb-activation-coder">Activation Code</label>-->
+    <!--<input type="text" class="form-control" id="bomb-activation-code" placeholder="Enter Activation Code">-->
+    <!--<label for="bomb-deactivation-code">Deactivation Code</label>-->
+    <!--<input type="text" class="form-control" id="bomb-deactivation-code" placeholder="Enter Deactivation Code">-->
+    <!--</div>-->
+    <!--</div>-->
+</div>

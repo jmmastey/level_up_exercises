@@ -22,5 +22,8 @@
     "jquery": ">= 1.6.4",
     "sprintf": "~1.0.0",
     "bootstrap": "~3.2.0"
+  },
+  "devDependencies": {
+    "angularjs-utilities": "~0.0.9"
   }
 }

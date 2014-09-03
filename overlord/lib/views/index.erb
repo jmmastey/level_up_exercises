@@ -5,107 +5,39 @@
 <div class="row" ng-controller="BombController">
     <div class="col-md-6 col-md-offset-3 col-sm-10 col-xs-offset-1 col-xs-10 col-sm-offset-1">
 
-        <div class="panel panel-default" ng-show="currentStep == 3">
+        <div class="panel panel-default" ng-show="bombActive">
             <div class="panel-heading"><h4>STATUS</h4></div>
             <div class="panel-body">
                 <div class="alert alert-info bomb-status">Deactivated</div>
-                <div class="alert alert-info bomb-timer">Timer</div>
+                <div class="alert alert-info bomb-timer" ng-bind-template="Timer: {{detonationTime}}">Timer: {{detonationTime}}</div>
             </div>
         </div>
         <!--<div class="row">-->
-        <div class="">
-            <form name="form" ng-submit="submit()" class="form-horizontal" novalidate>
-                <div class="step-0" ng-hide="currentStep!=0" ng-show="currentStep==0 || !form.activationCode.$valid">
-                    <div class="control-group" ng-class="errorClass('activationCode')">
-                        <label class="control-label" for="activationCode">Activation Code</label>
+        <%= partial :initial_form %>
+        <div class="row">
+            <form name="deactivationForm" rc-submit="submit()" class="form-horizontal" ng-show="bombActive" novalidate>
+                <div class="control-group" ng-class="activeErrorClass('deactivationEntry')">
+                    <label class="control-label" for="deactivationEntry">Deactivate</label>
 
-                        <div class="controls">
-                            <input ng-model="activationCode" type="text" maxlength="10"
-                                   name="activationCode" value="{{activationCode}}" required autofocus>
+                    <div class="controls">
+                        <input ng-model="deactivationEntry" type="text" minlength="4" ng-click="setStep(4)"
+
+                               name="deactivationEntry" value="{{deactivationEntry}}" required autofocus>
                             <span class="help-block"
-                                  ng-show="form.activationCode.$invalid && form.activationCode.$dirty">{{errorMessage('activationCode')}}
+                                  ng-show="deactivationForm.deactivationEntry.$invalid && deactivationForm.deactivationEntry.$dirty">
+                                {{activeErrorMessage('deactivationEntry')}}
                             </span>
-                        </div>
-                    </div>
-                    <span ng-bind-template="Activation Code: {{activationCode}}">Activation Code: Not Set</span>
-
-                </div>
-                <div class="step-2" ng-show="currentStep==1" ng-hide="currentStep!=1">
-                    <div class="control-group" ng-class="errorClass('deactivationCode')">
-                        <label class="control-label" for="deactivationCode">Deactivation Code</label>
-
-                        <div class="controls">
-                            <input ng-model="deactivationCode" type="text" name="deactivationCode" placeholder="Deactivation Code" value="{{deactivationCode}}" minlength="4" required autofocus>
-                             <span class="help-block"
-                                   ng-show="form.deactivationCode.$invalid && form.deactivationCode.$dirty">{{errorMessage('deactivationCode')}}
-                            </span>
-                        </div>
-                        <span>Deactivation Code: {{deactivationCode}}</span>
-                        <!--<input type="number" ng-model="deactivation_code">-->
                     </div>
                 </div>
-                <div class="step-3 ng-hide" ng-show="currentStep==2" ng-hide="currentStep!=2">
-                    <div class="control-group" ng-class="errorClass('detonationCode')">
-                        <label class="control-label" for="detonationCode">Detonation Time</label>
-
-                        <div class="controls">
-                            <input bombtime ng-model="detonationCode" type="text" name="detonationCode" placeholder="Detonation Time" value="{{detonationCode}}" required autofocus>
-                             <span class="help-block"
-                                   ng-show="form.detonationCode.$invalid && form.detonationCode.$dirty">{{errorMessage('detonationCode')}}
-                            </span>
-                            <span>Detonation Time: {{detonationCode}}</span>
-                            <!--<input type="number" ng-model="timer_minutes">-->
-                        </div>
-                    </div>
-                    </div>
             </form>
-            <!--<form class="form-inline">-->
-            <!--<div class="form-group col-md-12">-->
-            <!--<label for="bomb-timer">Detonation Time</label>-->
-            <!--<input type="text" class="form-control" id="bomb-timer" placeholder="Time until detonation">-->
-            <!--<label for="bomb-activation-coder">Activation Code</label>-->
-            <!--<input type="text" class="form-control" id="bomb-activation-code" placeholder="Enter Activation Code">-->
-            <!--<label for="bomb-deactivation-code">Deactivation Code</label>-->
-            <!--<input type="text" class="form-control" id="bomb-deactivation-code" placeholder="Enter Deactivation Code">-->
-            <!--</div>-->
-            <!--</div>-->
+            <button class="btn btn-lg btn-danger" type="submit"
+                  ng-click="bombActionClick('Deactivate')">Deactivate</button>
+            <button class="btn btn-lg btn-success" type="submit"
+                  ng-click="bombActionClick('Activate')">Activate</button>
+
         </div>
-        <div class="row">
-            <% for value in control_row %>
-                                <span class="btn btn-lg <%= value[:class] %>"
-                                      ng-click="bombActionClick('<%= value[:value].to_s %>')"><%= value[:value] %></span>
-            <% end %>
-        </div>
-        <div class="row">
-            <div class="panel panel-primary ">
-                <div class="panel-body ">
-                    <div class="row bomb-control col-xs-6 col-xs-offset-3 col-sm-3 col-sm-offset-4 col-md-4">
-
-                        <% for set in keypad_numbers %>
-                            <div class="row">
-                                <% for value in set %>
-                                <span class="btn btn-lg <%= value[:class] %>" ng-click="keypadClick('<%= value[:value].to_s %>')"
-                                      type="button" value="<%= value[:value] %>"><%= value[:value] %></span>
-                                <% end %>
-                            </div>
-                        <% end %>
-
-                        <div class="row">
-                            <% for value in last_row %>
-                                <% if value[:value] == '0' %>
-                                <span class="btn btn-lg <%= value[:class] %>"
-                                      ng-click="keypadClick('<%= value[:value].to_s %>')"><%= value[:value].slice 0 %></span>
-                                <% else %>
-                                  <span class="btn <%= value[:class] %>"
-                                        ng-click="keypadClick('<%= value[:value].to_s %>')"></span>
-                                <% end %>
-                            <% end %>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
+        <%= partial :keypad, :locals => {:keypad_numbers => keypad_numbers,
+                                       :last_row => keypad_last_row,
+                                       :control_row => keypad_control_row} %>
     </div>
 </div>

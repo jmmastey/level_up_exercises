@@ -2,7 +2,9 @@ class Triangle
   attr_reader :side1, :side2, :side3
 
   def initialize(side1, side2, side3)
-    @side1, @side2, @side3 = side1, side2, side3
+    @side1 = side1
+    @side2 = side2
+    @side3 = side3
   end
 
   def recite_facts
@@ -10,7 +12,7 @@ class Triangle
     puts "This triangle is isosceles! Also, that word is hard to type." if isosceles?
     puts "This triangle is scalene and mathematically boring." if scalene?
 
-    angles = calculate_angles(@side1, @side2, @side3)
+    angles = calculate_angles(side1, side2, side3)
     puts "The angles of this triangle are " + angles.join(",")
 
     puts "This triangle is also a right triangle!" if angles.include? 90
@@ -36,11 +38,11 @@ class Triangle
   end
 
   def equilateral?
-    @side1 == @side2 && @side2 == @side3 ? true : false
+    side1 == side2 && side2 == side3 ? true : false
   end
 
   def isosceles?
-    [@side1, @side2, @side3].uniq.length == 2 ? true : false
+    [side1, side2, side3].uniq.length == 2 ? true : false
   end
 
   def scalene?
@@ -53,7 +55,7 @@ triangles = [
   [5, 12, 13],
   [10, 12, 10]
 ]
-triangles.each { |sides|
+triangles.each do |sides|
   tri = Triangle.new(*sides)
   tri.recite_facts
-}
+end

@@ -12,7 +12,7 @@ class Robot
   private
 
   def generate_name
-    generate_char = -> { ('A'..'Z').to_a.sample }
+
     generate_num = -> { rand(10) }
 
     @name = %"#{generate_char.call}#{generate_char.call}#{generate_num
@@ -29,6 +29,12 @@ class Robot
     @name = name
     @@registry << name
   end
+
+  def generate_full_name(num_chars, num_numbers)
+      generate_char = -> { ('A'..'Z').to_a.sample }
+  end
+
+
 end
 
 # Errors!

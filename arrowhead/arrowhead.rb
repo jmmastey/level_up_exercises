@@ -28,4 +28,4 @@ class Arrowhead
   end
 end
 
-Arrowhead::classify(:northern_plains, :bifurcated)
+Arrowhead::classify(:northern_plains, :lanceolate)

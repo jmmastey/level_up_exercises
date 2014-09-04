@@ -31,21 +31,10 @@ describe "DinoParser#parse" do
     expect(dinos[1].period).to eq("Early Cretaceous")
     expect(dinos[1].continent).to eq("North America")
     expect(dinos[1].diet).to eq("Insectivore")
-    expect(dinos[1].weight).to eq(nil)
+    expect(dinos[1].weight).to eq(-1)
     expect(dinos[1].walk).to eq("Biped")
     expect(dinos[1].desc).to eq("Earliest known Alvarezsaurid.")
 
-  end
-end
-
-describe "AfroDinoParser#parse_carnivore" do
-  it "if yes then its a carnivore" do
-    dino_parser = AfroDinoParser.new
-    yes_strings = ["yes", "YES", "Yes", "yeS"]
-    no_strings = ["no", "No", "y", "oh yeah!"]
-
-    yes_strings.each {|str| expect(dino_parser.parse_carnivore(str)).to eq("Carnivore") }
-    no_strings.each {|str| expect(dino_parser.parse_carnivore(str)).to eq("Herbivore") }
   end
 end
 
@@ -94,7 +83,7 @@ describe "DinoTokenParser#parse" do
      "chain" do
     parser = DinoTokenParser.new
    
-    tokens = parser.parse("AND,name,>,A:SORT,weight")
+    tokens = parser.parse("AND name > A; SORT weight")
     
     expect(tokens.size).to eq(2)
 

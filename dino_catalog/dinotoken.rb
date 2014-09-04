@@ -5,7 +5,11 @@ class AndToken
   def initialize(parts)
       @field = parts[1]
       @op = parts[2]
-      @arg = parts[3]
+      begin
+        @arg = Integer(parts[3])
+      rescue
+        @arg = parts[3]
+      end
   end
 
   def execute_token(dino_query)

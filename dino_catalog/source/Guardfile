@@ -6,13 +6,7 @@
 # end
 
 guard :rspec, cmd: 'bundle exec rspec --tty --color', notification: true, all_on_start: true do
-  watch(%r{^lib/(.+)\.rb})     { |m| "spec" }
-  watch('spec/spec_helper.rb') { "spec" }
-  watch('spec/stubs_spec.rb')  { "spec" }
+  watch(%r{^(.+)\.rb})     { 'spec' }
+  watch('spec/spec_helper.rb') { 'spec' }
+  watch('spec/stubs_spec.rb')  { 'spec' }
 end
-
-# guard :rspec, cmd: 'bundle exec rake', notification: true, all_on_start: true do
-#   watch(%r{^lib/(.+)\.rb})     { |m| "specs" }
-#   watch('spec/spec_helper.rb') { "specs" }
-#   watch('spec/stubs_spec.rb')  { "specs" }
-# end

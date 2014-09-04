@@ -1,10 +1,6 @@
 require 'rspec'
 require 'guard/rspec'
 
-# let(:log) { 
-#   Logger.new(STDOUT).tap { |l| l.level = Logger::DEBUG }
-# }
-
 if ENV['CI']
   require 'coveralls'
   Coveralls.wear!

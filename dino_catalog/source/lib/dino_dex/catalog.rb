@@ -23,7 +23,7 @@ module DinoDex
     end
 
     def self.load(klass, entries, *paths)
-      paths.inject(entries) { |a, e| a + Importer.load(e, klass) }
+      paths.inject(entries) { |a, e| a + Importer.import(e, klass) }
     end
   end
 end

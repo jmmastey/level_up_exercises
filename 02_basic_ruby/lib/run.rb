@@ -5,3 +5,7 @@ dinodex = Dinodex.new(STDOUT)
 dinodex.start('..\inputs')
 #dinodex.findCSVfiles('..\inputs')
 #dinodex.loadCSVfile('..\inputs\dinodex.csv')
+
+dinodex.listDisplay
+dinodex.detailDisplay('Giraffatitan')
+#dinodex.interactionLoop

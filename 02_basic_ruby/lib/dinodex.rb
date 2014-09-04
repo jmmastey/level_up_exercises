@@ -4,6 +4,7 @@ require 'dinosaur'
 class Dinodex
 	def initialize(output)
 		@output = output
+		@dinosaurs = []
 	end
 	
 	def dinosaurs
@@ -15,12 +16,32 @@ class Dinodex
 	end
 	
 	def start(directory)
-		@output.puts 'Welcome to Dinodex'
 		findCSVfiles(directory)
 		csvFiles.each do |file|
 			loadCSVfile(directory + '\\' + file)
 		end
-		interactionLoop
+	end
+
+	def interactionLoop
+		@output.puts 'Welcome to Dinodex'
+		
+		begin
+			@output.puts 'Enter your selection:'
+			@output.puts '(q=quit, l=listDisplay d [name]=detailDisplay)'
+			selection = gets.chomp
+			case selection[0]
+			when "d"
+				detailDisplay(selection[2..-1])
+			when "l"
+				listDisplay
+			when "q"
+				@output.puts 'Goodbye'
+			else
+				@output.puts "invalid selection, try again"
+			end
+			@output.puts ''
+		end while selection != "q"
+		
 	end
 	
 	def findCSVfiles(directory)
@@ -41,6 +62,7 @@ class Dinodex
 		table = CSV.read(file, {headers: true})
 		table.each do |row|
 			dinosaur = Dinosaur.new
+			#TODO: change this to just a map?
 			row.fields.each_with_index do |field, index|
 				if !field.nil?
 					if ["genus","name"].include? table.headers[index].downcase
@@ -62,22 +84,30 @@ class Dinodex
 					end
 				end
 			end
-			newDinosaurs.push dinosaur
+			@dinosaurs.push dinosaur
 		end
 		
-		@output.puts 'Found ' + newDinosaurs.length.to_s + ' dinosaurs in ' + file
-		dinosaurs.push newDinosaurs
+		@output.puts 'Found ' + table.length.to_s + ' dinosaurs in ' + file
 	end
 
-	def interactionLoop
-
-		@output.puts 'Enter your selection:'
-		
-		begin
-			selection = gets.chomp
-		
-		end while selection != "q"
-		
-		@output.puts 'Goodbye'
+	def listDisplay
+		@dinosaurs.each do |dinosaur|
+			@output.puts dinosaur.name			
+		end
 	end
+
+	def detailDisplay(name)
+		dinosaur = @dinosaurs.select {|dinosaur| dinosaur.name.downcase == name.downcase}[0]
+		if !dinosaur.nil?
+			@output.puts dinosaur.name
+			@output.puts 'Period: ' + dinosaur.period if !dinosaur.period.nil?
+			@output.puts 'Diet: ' + dinosaur.diet if !dinosaur.diet.nil?
+			@output.puts 'Walking: ' + dinosaur.walking if !dinosaur.walking.nil?
+			@output.puts 'Description: ' + dinosaur.description if !dinosaur.description.nil?
+			@output.puts 'Continent: ' + dinosaur.continent if !dinosaur.continent.nil?
+		else
+			@output.puts 'Dinosaur with name \'' + name + '\' not found.';
+		end
+	end
+	
 end

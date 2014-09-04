@@ -1,20 +1,6 @@
 require 'spec_helper'
 require 'dinodex'
 
-describe Dinodex, "#start" do
-	before(:each) do
-		@output = double('output').as_null_object
-		@dinodex = Dinodex.new(@output)
-		@directory = '.\inputs'
-	end
-	
-	it "sends a welcome message" do
-		expect(@output).to receive(:puts).with('Welcome to Dinodex')
-		@dinodex.start(@directory)
-	end
-	
-end
-
 describe Dinodex, "#interaction" do
 	before(:each) do
 		@output = double('output').as_null_object
@@ -22,9 +8,16 @@ describe Dinodex, "#interaction" do
 		@directory = '.\inputs'
 	end
 
+	it "sends a welcome message" do
+		expect(@output).to receive(:puts).with('Welcome to Dinodex')
+		@dinodex.stub(:gets).and_return('q')
+		@dinodex.interactionLoop
+	end
+
 	it "prompts for input" do
 		expect(@output).to receive(:puts).with('Enter your selection:')
-		@dinodex.start(@directory)
+		@dinodex.stub(:gets).and_return('q')
+		@dinodex.interactionLoop
 	end
 	
 	it "says goodbye when we quit" do
@@ -71,4 +64,42 @@ describe Dinodex, "#load files" do
 		@dinodex.loadCSVfile(@directory + '\asdf.csv')
 	end
 	
+end
+
+
+describe Dinodex, "#display" do
+	before(:each) do
+		@output = double('output').as_null_object
+		@dinodex = Dinodex.new(@output)
+		@directory = '.\inputs'
+		@dinodex.start(@directory)
+	end
+	
+	it "lists all dinosaurs" do
+		expect(@output).to receive(:puts).with('Giraffatitan')
+		expect(@output).to receive(:puts).with('Megalosaurus')
+		@dinodex.listDisplay
+	end
+	
+	it "lists details a single dinosaurs" do
+		expect(@output).to receive(:puts).with(/Giraffat/)
+		expect(@output).to receive(:puts).with(/Period/)
+		expect(@output).to receive(:puts).with('Diet: Omnivore')
+		expect(@output).not_to receive(:puts).with(/Continent/)
+		@dinodex.detailDisplay('Giraffatitan')
+	end
+
+	it "does not find invalid name" do
+		name = 'your mom'
+		expect(@output).to receive(:puts).with('Dinosaur with name \'' + name + '\' not found.')
+		@dinodex.detailDisplay(name)
+	end
+	
+
+#4. Also, I'll probably want to print all the dinosaurs in a given collection (after filtering, etc).
+
+#### Extra Credit
+
+#1. I would love to have a way to do (and chain) generic search by parameters. I can pass in a hash, and I'd like to get the proper list of dinos back out.
+#2. CSV isn't may favorite format in the world. Can you implement a JSON export feature?
 end

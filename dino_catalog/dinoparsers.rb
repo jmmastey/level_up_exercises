@@ -49,7 +49,7 @@ class DinoTokenParser
     raw_tokens.map do |raw_token|
       parts = raw_token.split(/\s+/)
       tag = parts[0]
-      Match(tag, nil, {
+      Match(tag, {
         'AND' => lambda {AndToken.new(parts)},
         'SORT' => lambda {SortToken.new(parts)}
       })

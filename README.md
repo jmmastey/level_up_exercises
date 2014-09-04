@@ -141,10 +141,7 @@ Name some resources that you might monitor for a production host.
 * applications
 * servers
 
-
-
 (cisco, juniper)
-
 
 There's a big problem with most monitoring: a momentary spike in resource usage isn't actually a problem. Some software, like the 'god' gem, tries to overcome this limitation. Can you think of some strategies to solve this problem?
 
@@ -181,35 +178,45 @@ ntpdate
 ```
 
 ## Firewalls, iptables, and nmap
-Limit traffic in and out of systems using a firewall 
 
-* allowing only whitelisted traffic to pass, we can eliminate large numbers of security vulnerabilities
+#### firewalls
 
-iptables to manage traffic
+* Limit traffic in/out of systems 
+* allowing only **whitelisted** traffic to pass, we can eliminate large numbers of security vulnerabilities
 
+#### iptables
+
+
+* use to manage traffic
 * IPTables is a front-end tool to talk to the kernel and decides the packets to filter
 
+```
+[09:34:15]cnuapp@local:~$ whereis iptables
+iptables: /sbin/iptables /usr/sbin/iptables /usr/share/iptables /usr/share/man/man8/iptables.8.gz
+```
 
-init script to start|stop|restart and save rulesets `$ /etc/init.d/iptables`
 
-where Rulesets are saved `$ /etc/sysconfig/iptables`
 
-binary `$ /sbin/iptables`
+`$ /etc/init.d/iptables start` init script to start|stop|restart|save rulesets 
 
+`$ /etc/sysconfig/iptables` where Rulesets are saved 
+
+`$ iptables -L -n -v` check status
+
+`$ /sbin/iptables` binary
 
 
 Start Iptable Firewall: 
+
 ```
 $ /etc/init.d/iptables start 
 ```
 
-Check status:
-```
-$ iptables -L -n -v
-```
 
+#### nmap
 
-nmap to scan the machine and display a report of all ports open and listening
+* network mapper
+* security scanner to display a report of all ports open/listening
 
 ## Git
 compare staged commits `$ git diff —staged`
@@ -224,8 +231,26 @@ and unstage them `$ git reset filename.txt 	`
 "hello".tr('el', 'ip’)
 ```
 
+&
+
+inject
+
+lambda
 
 
+```
+[2] pry(main)> proc { |x| x+x }
+=> #<Proc:0x007ff0261839e0@(pry):1>
+[3] pry(main)> f = _
+=> #<Proc:0x007ff0261839e0@(pry):1>
+from (pry):3:in `__pry__'
+[5] pry(main)> f.call 1
+=> 2
+```
+
+Procs, Blocks, & Lambdas, & Closures
+
+Know the difference!
 
 ## Additional Topics
 Virtual Machine
@@ -252,3 +277,8 @@ status: return the status of a service
 nginx
 
 curl
+
+bash
+
+
+

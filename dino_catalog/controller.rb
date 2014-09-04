@@ -1,3 +1,4 @@
+require 'json'
 require_relative "dino_collection"
 
 class Controller
@@ -41,13 +42,14 @@ class Controller
 		def search_by_params_hash
 			# I can pass in a hash, and I'd like to get the proper list of dinos back out
 			puts "Please enter a hash of search params:"
-			puts "example: { period: 'cretaceous', diet: 'carnivore' }"
+			puts "example: { :period => 'cretaceous', :diet => 'carnivore' }"
 
-			hash = { period: 'cretaceous', diet: 'carnivore' }
-			# hash = gets.chomp
-			puts hash
+			
+			#hash = { period: 'cretaceous', diet: 'carnivore' }
+			filter_params = JSON.parse(gets.chomp)
+			puts filter_params
 			puts "\nSearch results:"
-			puts find_dinos_by_params(hash).map(&:to_s)	
+			puts find_dinos_by_params(filter_params).map(&:to_s)	
 		end
 
 		def find_dinos_by_params(filter_params)

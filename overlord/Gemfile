@@ -3,4 +3,13 @@ source "https://rubygems.org"
 
 ruby "2.0.0"
 
+gem "activesupport"
+gem "i18n"
+gem "time_difference"
 gem "sinatra"
+gem "sinatra-contrib"
+gem "sinatra-partial"
+gem "rspec"
+gem "cucumber-sinatra"
+gem "nokogiri"
+gem "capybara"

@@ -1,19 +1,24 @@
 require './matching'
 
-class Test
-  def initialize
-    @a = "hello"
-    @b = [1, Object.new, nil, "hello", 4.25]
-    @c = nil
-    @d = true
-    @e = false
+class JSONParser  
+  def dump(thing)
+    return Match(thing, {
+      nil => "null",
+      false => "false",
+      true => "true",
+      Float => -> { dump_float(thing) },
+      Fixnum => -> { dump_fixnum(thing) },
+      String => -> { dump_string(thing) },
+      Array => -> { dump_array(thing) },
+      Object => -> { dump_object(thing) },
+   }) 
   end
-end
 
-class JSONParser
+private
+
   def dump_string(str)
     encoded = str.chars.map do |c|
-      match(c, {
+      Match(c, {
         '"' => "\"",
         "\\" => "\\\\",
         "\n" => "\\n",
@@ -22,20 +27,10 @@ class JSONParser
         "/" => "\/",
         "\f" => "\\f",
         "\t" => "\\t",
+        Else => c
       })
     end
     '"' + encoded.join + '"'
-  end
-  
-  def dump(thing)
-    return "null" if thing == nil
-    return "false" if thing.is_a? FalseClass
-    return "true" if thing.is_a? TrueClass
-    return dump_fixnum(thing) if thing.is_a? Fixnum
-    return dump_float(thing) if thing.is_a? Float
-    return dump_string(thing) if thing.is_a? String
-    return dump_array(thing) if thing.is_a? Array
-    return dump_object(thing) if thing.is_a? Object
   end
 
   def dump_object(obj)
@@ -60,11 +55,7 @@ class JSONParser
     digit.to_s
   end
  
-  def match(tag, matches)
-    matches[tag] == nil ? tag : matches[tag]
-  end
-  
   def parse_json_name(variable)
-    '"' + String(variable).sub(/@|:/,'') + '"'
+    '"' + String(variable).sub(/@|:/, '') + '"'
   end
 end

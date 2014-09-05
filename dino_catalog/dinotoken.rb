@@ -12,7 +12,7 @@ class AndToken
   end
 
   def execute_token(dino_query)
-    dino_query.and(@field,@op,@arg)
+    dino_query.and(@field, @op, @arg)
   end
 end
 

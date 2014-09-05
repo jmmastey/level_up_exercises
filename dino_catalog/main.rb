@@ -23,18 +23,14 @@ def main
   tokens = token_parser.parse(command)
 
   result = evaluate(tokens,dinodex)
-  puts (result)
+  puts JSONParser.new.dump(result)
 end
 
-
-def evaluate(tokens,dinodex)
-  query = tokens.reduce(dinodex.new_query) {|query,token| token.execute_token(query)}
+def evaluate(tokens, dinodex)
+  query = tokens.inject(dinodex.new_query) do |query, token| 
+    token.execute_token(query)
+  end
   query.result
-end
-
-def to_json(result)
-  dinos = result.map {|dino| dino.to_json }
-  "[" + dinos.join(", ") + "]"
 end
 
 main

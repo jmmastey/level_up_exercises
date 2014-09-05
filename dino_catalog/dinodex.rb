@@ -8,6 +8,7 @@ class DinoDex
   def initialize(dinos = [])
     @dinos = dinos
   end
+  
   def load(dinos)
     @dinos = dinos
   end

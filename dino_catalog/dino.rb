@@ -1,6 +1,5 @@
-
 class Dinosaur
-  attr_reader :name , :period , :continent , :diet , :weight , :walk , :desc
+  attr_reader :name, :period, :continent, :diet, :weight, :walk, :desc
   def initialize(values)
     @name = values[:name]
     @period = values[:period]
@@ -10,6 +9,7 @@ class Dinosaur
     @walk = values[:walk]
     @desc = values[:desc]
   end
+
   def to_s
 <<END
 === #{name} ===
@@ -20,7 +20,5 @@ weight: #{(weight == -1)? "" : weight}
 walk: #{walk}
 description: #{desc}
 END
-  end
-  
+  end  
 end
-

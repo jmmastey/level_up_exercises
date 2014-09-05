@@ -9,7 +9,7 @@ describe JSONParser, "#dumpString" do
       'a', 'te st', '"', "test\n", 'a"b"c',
       '\\"a'
     ]
-    parsed = raw_strings.map {|str| parser.dump_string(str) }
+    parsed = raw_strings.map {|str| parser.dump(str) }
 
     expect(parsed[0]).to eq('"a"')
     expect(parsed[1]).to eq('"te st"')

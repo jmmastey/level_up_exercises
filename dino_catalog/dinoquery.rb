@@ -1,7 +1,6 @@
 require "./string"
 
 class DinoQuery
-  
   def initialize(data=[])
     @data=data
   end

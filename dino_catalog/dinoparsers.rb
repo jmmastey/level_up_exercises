@@ -64,8 +64,8 @@ class DinoTokenParser
       parts = raw_token.split(/\s+/)
       tag = parts[0]
       Match(tag, {
-        "AND" => lambda { AndToken.new(parts) },
-        "SORT" => lambda { SortToken.new(parts) }
+        "AND" => -> { AndToken.new(parts) },
+        "SORT" => -> { SortToken.new(parts) }
       })
     end
   end

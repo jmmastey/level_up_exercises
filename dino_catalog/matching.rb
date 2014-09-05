@@ -1,4 +1,7 @@
 
+class Any
+end
+
 def Match(val_or_proc, matches, *args)
   if val_or_proc.is_a? Proc or val_or_proc.is_a? Method
     match_proc(val_or_proc, matches, *args)

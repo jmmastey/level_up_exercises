@@ -26,7 +26,7 @@ class Dinosaur
   end
 
   def parse_diet(carnivore)
-    (name['Carnivore'] == 'Yes') ? 'Carnivore' : 'Herbivore'
+    (name['carnivore'] == 'Yes') ? 'Carnivore' : 'Herbivore'
   end
   
   def to_s
@@ -35,6 +35,19 @@ class Dinosaur
     else 
       "#{name}, #{period}, #{continent}, #{diet}, #{weight}, #{walk}, #{desc}"
     end
+  end
+  
+  def to_json
+    variables_with_value = self.instance_variables.map do |variable_name|
+      json_name = parse_json_name(variable_name)
+      json_value = self.instance_variable_get(variable_name) 
+      "\"#{json_name}\": \"#{json_value}\""
+    end
+    "{" + variables_with_value.join(", ") + "}"
+  end
+private
+  def parse_json_name(variable)
+    String(variable).sub(/@|:/,'')
   end
 end
 

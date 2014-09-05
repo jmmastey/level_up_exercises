@@ -2,6 +2,8 @@
 
 require './dinodex'
 require './dinoparsers.rb'
+require './matching'
+require './jsonparser'
 
 def main
   dino_file_path = "dinodex.csv"
@@ -17,15 +19,22 @@ def main
 
   token_parser = DinoTokenParser.new
 
-  tokens = token_parser.parse(ARGV[0]) 
+  command = (ARGV[0] == nil) ? STDIN.read : ARGV[0]
+  tokens = token_parser.parse(command)
 
-  puts evaluate(tokens,dinodex)
+  result = evaluate(tokens,dinodex)
+  puts JSONParser.new.dump(result)
 end
 
 
 def evaluate(tokens,dinodex)
   query = tokens.reduce(dinodex.new_query) {|query,token| token.execute_token(query)}
   query.result
+end
+
+def to_json(result)
+  dinos = result.map {|dino| dino.to_json }
+  "[" + dinos.join(", ") + "]"
 end
 
 main

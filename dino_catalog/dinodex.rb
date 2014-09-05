@@ -109,21 +109,13 @@ class DinoDex
     header_converters = [
       :downcase,
       lambda do |header|
-        if header.include? "weight"
-          "weight"
-        else
-          header
-        end
+        header.include?("weight") ? "weight" : header
       end
     ]
 
     weight_converter = lambda do |field, field_info|
       if field_info.header.include? "weight"
-        if (field || "") == ""
-          nil
-        else
-          field.to_i
-        end
+        (field || "") == "" ? nil : field.to_i
       else
         field
       end
@@ -188,12 +180,8 @@ class DinoDex
 
   def csv_set_carnivore(field)
     if field
-      if field.downcase == "yes"
-        dinosaur.diet = "Carnivore"
-      else
-        dinosaur.diet = "Herbivore"
-      end #if
-    end #if
+      dinosaur.diet = (field.downcase == "yes") ? "Carnivore" : "Herbivore"
+    end 
   end
 end
 

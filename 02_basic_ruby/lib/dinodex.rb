@@ -1,8 +1,8 @@
 $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__))) unless $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
-require 'dinodex'
+require 'dinodex_controller'
 
 #TODO: handle OS independent paths
-dinodex = Dinodex.new(STDOUT)
+dinodex = DinodexController.new(STDOUT)
 dinodex.start('..\inputs')
 dinodex.interactionLoop
 

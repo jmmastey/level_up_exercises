@@ -1,10 +1,10 @@
 require 'spec_helper'
 require 'dinodex_controller'
 
-describe Dinodex, "#interaction" do
+describe DinodexController, "#interaction" do
 	before(:each) do
 		@output = double('output').as_null_object
-		@dinodex = Dinodex.new(@output)
+		@dinodex = DinodexController.new(@output)
 		@directory = '.\inputs'
 	end
 
@@ -27,10 +27,10 @@ describe Dinodex, "#interaction" do
 	end
 end
 
-describe Dinodex, "#load files" do
+describe DinodexController, "#load files" do
 	before(:each) do
 		@output = double('output').as_null_object
-		@dinodex = Dinodex.new(@output)
+		@dinodex = DinodexController.new(@output)
 		@directory = '.\inputs'
 	end
 
@@ -66,10 +66,10 @@ describe Dinodex, "#load files" do
 	
 end
 
-describe Dinodex, "#display and filter" do
+describe DinodexController, "#display and filter" do
 	before(:each) do
 		@output = double('output').as_null_object
-		@dinodex = Dinodex.new(@output)
+		@dinodex = DinodexController.new(@output)
 		@directory = '.\inputs'
 		@dinodex.start(@directory)
 	end
@@ -85,13 +85,13 @@ describe Dinodex, "#display and filter" do
 		expect(@output).to receive(:puts).with(/Period/)
 		expect(@output).to receive(:puts).with('Diet: Omnivore')
 		expect(@output).not_to receive(:puts).with(/Continent/)
-		@dinodex.detailDisplay('Giraffatitan')
+		@dinodex.detailDisplayByName('Giraffatitan')
 	end
 
 	it "does not find invalid name" do
 		name = 'your mom'
 		expect(@output).to receive(:puts).with('Dinosaur with name \'' + name + '\' not found.')
-		@dinodex.detailDisplay(name)
+		@dinodex.detailDisplayByName(name)
 	end
 	
 	it "tells me when filtering if I've entered an incorrect attribute" do
@@ -140,18 +140,20 @@ describe Dinodex, "#display and filter" do
 		@dinodex.filterAndDisplay(key + '=' + value)
 	end
 
-	it "filters and displays details of all the dinosaurs that were carnivores." do
-		key = 'diet'
-		value = 'carnivore'
+	it "filters and displays details of Afrovenator using name filter" do
+		key = 'name'
+		value = 'Afrovenator'
 
 		expect(@output).to receive(:puts).with('Afrovenator')
-		expect(@output).to receive(:puts).with('Carcharodontosaurus')
-		expect(@output).to receive(:puts).with('Diplocaulus')
+
+    expect(@output).to receive(:puts).with("Period: Jurassic")
+    expect(@output).to receive(:puts).with("Diet: Carnivore")
+    expect(@output).not_to receive(:puts).with(/Continent/)
 
 		expect(@output).not_to receive(:puts).with('Abrictosaurus')
 		expect(@output).not_to receive(:puts).with('Baryonyx')
-		
-		@dinodex.filterAndDisplay(key + '=' + value)
+
+		@dinodex.filterAndDetail(key + '=' + value)
 	end
 
 	it "chains filters together for quadruped and carnivore" do
@@ -169,17 +171,43 @@ describe Dinodex, "#display and filter" do
 		expect(@output).to receive(:puts).with('Keys available: name, period, diet, weight, walking, description, continent')
 		@dinodex.keyDisplay
 	end
-	
-=begin
-* Grab dinosaurs for specific periods (no need to differentiate between Early and Late Cretaceous, btw).
-* Grab only big (> 2 tons) or small dinosaurs.
-=end
 
-#4. Also, I'll probably want to print all the dinosaurs in a given collection (after filtering, etc).
+  it "Grab dinosaurs for specific cretacous and late cretaceous with filter 'cretaceous'" do
 
-#### Extra Credit
+    expect(@output).to receive(:puts).with('Baryonyx')
+    expect(@output).to receive(:puts).with('Giganotosaurus')
+    expect(@output).to receive(:puts).with('Suchomimus')
 
-#1. I would love to have a way to do (and chain) generic search by parameters. I can pass in a hash, and I'd like to get the proper list of dinos back out.
-#2. CSV isn't may favorite format in the world. Can you implement a JSON export feature?
+    expect(@output).not_to receive(:puts).with('Abrictosaurus')
+
+    @dinodex.filterAndDisplay('period=cretaceous')
+  end
+
+  it "Grab only big (> 2 tons) dinosaurs." do
+
+    expect(@output).to receive(:puts).with('Baryonyx')
+    expect(@output).to receive(:puts).with('Giganotosaurus')
+    expect(@output).to receive(:puts).with('Suchomimus')
+
+    expect(@output).not_to receive(:puts).with('Abrictosaurus')
+
+    @dinodex.filterAndDisplay('weight>2000')
+  end
+
+  it "Grab only small (< 2 tons) or dinosaurs." do
+
+    expect(@output).not_to receive(:puts).with('Baryonyx')
+    expect(@output).not_to receive(:puts).with('Giganotosaurus')
+    expect(@output).not_to receive(:puts).with('Suchomimus')
+
+    expect(@output).to receive(:puts).with('Abrictosaurus')
+
+    @dinodex.filterAndDisplay('weight<2000')
+  end
+
+  it "filters and prints output in JSON" do
+    expect(@output).to receive(:puts).with('[{"@name":"Abrictosaurus","@period":"Jurassic","@diet":"Omnivore","@weight":"100","@walking":"Biped"}]')
+    @dinodex.filterAndJSON('name=Abrictosaurus')
+  end
 
 end

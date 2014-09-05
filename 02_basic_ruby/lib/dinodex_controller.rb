@@ -1,7 +1,8 @@
+require 'JSON'
 require 'CSV'
 require 'dinosaur'
 
-class Dinodex
+class DinodexController
 	def initialize(output)
 		@output = output
 		@dinosaurs = []
@@ -30,13 +31,17 @@ class Dinodex
 			selection = gets.chomp
 			case selection[0]
 			when "d"
-				detailDisplay(selection[2..-1])
+				filterAndDetail("name=#{selection[2..-1]}")
 			when "k"
 				keyDisplay
 			when "l"
 				listDisplay
 			when "f"
 				filterAndDisplay(selection[2..-1])
+      when "g"
+        filterAndDetail(selection[2..-1])
+      when "j"
+        filterAndJSON(selection[2..-1])
 			when "q"
 				@output.puts 'Goodbye'
 			when "?", "h"
@@ -56,6 +61,7 @@ class Dinodex
 		@output.puts '                                   key and value, "f walking=biped". Multiple with pipe '
 		@output.puts '                                   delimiting, like "f walking=biped|diet=omnivore"'
 		@output.puts 'g [key=value]|... filterAndDetail  same as "f", but shows details instead of just name'
+    @output.puts 'j [key=value]|... filterAndJSON    same as "f", but shows JSON'
 		@output.puts 'k                 keyDisplay       show all the dinosaur attributes for filtering'
 		@output.puts 'l                 listDisplay      show all dinosaur names'
 		@output.puts 'q                 quit'
@@ -119,47 +125,61 @@ class Dinodex
 		end
 	end
 
+  def detailDisplayByName(name)
+    dinosaur = @dinosaurs.select {|dinosaur| dinosaur.name.downcase == name.downcase}[0]
+    if !dinosaur.nil?
+      detailDisplay(dinosaur)
+    else
+      @output.puts 'Dinosaur with name \'' + name + '\' not found.';
+    end
+
+  end
+
 	#TODO: have string and object inputs?
-	def detailDisplay(name)
-		dinosaur = @dinosaurs.select {|dinosaur| dinosaur.name.downcase == name.downcase}[0]
-		if !dinosaur.nil?
-			@output.puts dinosaur.name
-			@output.puts 'Period: ' + dinosaur.period if !dinosaur.period.nil?
-			@output.puts 'Diet: ' + dinosaur.diet if !dinosaur.diet.nil?
-			@output.puts 'Walking: ' + dinosaur.walking if !dinosaur.walking.nil?
-			@output.puts 'Description: ' + dinosaur.description if !dinosaur.description.nil?
-			@output.puts 'Continent: ' + dinosaur.continent if !dinosaur.continent.nil?
-		else
-			@output.puts 'Dinosaur with name \'' + name + '\' not found.';
-		end
-	end
+	def detailDisplay(dinosaur)
+    @output.puts dinosaur.name
+    @output.puts 'Period: ' + dinosaur.period if !dinosaur.period.nil?
+    @output.puts 'Diet: ' + dinosaur.diet if !dinosaur.diet.nil?
+    @output.puts 'Walking: ' + dinosaur.walking if !dinosaur.walking.nil?
+    @output.puts 'Description: ' + dinosaur.description if !dinosaur.description.nil?
+    @output.puts 'Continent: ' + dinosaur.continent if !dinosaur.continent.nil?
+  end
 
 	def filterAndDisplay(keyValuePairs)
 		listDisplay(getFilteredList(keyValuePairs))
 	end
 	
 	def filterAndDetail(keyValuePairs)
-		listDisplay(getFilteredList(keyValuePairs))
+		getFilteredList(keyValuePairs).each { |dinosaur| detailDisplay(dinosaur) }
 	end
-	
+
+  def filterAndJSON(keyValuePairs)
+    @output.puts JSON::dump(getFilteredList(keyValuePairs))
+  end
+
 	def getFilteredList(keyValuePairs)
 		filteredList = Array.new(@dinosaurs) #@dinosaurs.dup
 		keyValuePairs.split('|').each do |keyValuePair|
-			key, value = keyValuePair.split('=')
-			
+      comparison = keyValuePair[/[<>=]/]
+      key, value = keyValuePair.split(/[<>=]/)
+
 			if !Dinosaur.method_defined?(key)
 				@output.puts 'Invalid dinosaur attribute \'' + key + '\' used'
 				next
 			end
 			
 			if value.nil?
-				#@output.puts 'Empty value for \'' + key + '\' used'
 				@output.puts "Empty value for '#{key}' used"
 				next
 			end
-			
-			#filteredList = filteredList.select {|dinosaur| dinosaur.send(key).downcase == value.downcase}
-			filteredList.select! {|dinosaur| dinosaur.send(key).downcase == value.downcase}
+
+      if comparison == "="
+        filteredList.select! {|dinosaur| dinosaur.send(key).nil? ? false : (dinosaur.send(key).downcase.include? (value.downcase) )}
+      elsif comparison == "<"
+        filteredList.select! {|dinosaur| dinosaur.send(key).nil? ? false : dinosaur.send(key).to_i < value.to_i}
+      elsif comparison == ">"
+        filteredList.select! {|dinosaur| dinosaur.send(key).nil? ? false : dinosaur.send(key).to_i > value.to_i}
+      end
 		end
 		filteredList	
 	end

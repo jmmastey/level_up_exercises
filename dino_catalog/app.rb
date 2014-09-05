@@ -145,15 +145,15 @@ class App
               Array,
               "Filters dinosaurs by the given fields.") do |field_assigns|
                 flag_fields @filtered_index, field_assigns
-              end
+      end
 
-              opts.on("--period NAME", "Filters dinosaurs by period.") do |name|
-                flag_period @filtered_index, name
-              end
+      opts.on("--period NAME", "Filters dinosaurs by period.") do |name|
+        flag_period @filtered_index, name
+      end
 
-              opts.on("--small", "Includes only dinosaurs lighter than 2000 lbs.") do
-                flag_small @filtered_index
-              end
+      opts.on("--small", "Includes only dinosaurs lighter than 2000 lbs.") do
+        flag_small @filtered_index
+      end
     end
 
     Trace["Parser created."]

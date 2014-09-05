@@ -1,0 +1,30 @@
+DinoDex Help
+=============================================================================================
+Commands:
+  add {"field": "VALUE", "field2": VALUE, ...}     - adds a new dinosaur with the given
+                                                     values (formatted as JSON) to the index
+  clear_screen                                     - clears console window
+  help                                             - shows this help text
+  export FILENAME [SEARCH_PARAMS]                  - exports dinosaurs to JSON file,
+                                                     optionally filtered by the given search
+                                                     parameters
+  import FILENAME [FILENAME 2] [FILENAME 3] ...    - imports dinosaurs from a CSV file
+  list [SEARCH_PARAMS]                             - lists the dinosaurs in this index,
+                                                     optionally filtered by the given search
+                                                     parameters
+  welcome                                          - shows the welcome message
+  quit                                             - exits the program
+
+
+Available Fields: continent, description, diet, name, period, weight, walking
+
+Search Parameters:
+  --big                                            - includes only dinosaurs weighing 2000
+                                                     lbs or more
+  --biped                                          - includes only biped dinosaurs
+  --carnivore                                      - includes only dinosaurs that are 
+                                                     carnivores
+  --fields NAME=VALUE[,NAME2=VALUE2[,...]]         - includes only dinosaurs whose fields
+                                                     matches the given values
+  --period NAME                                    - includes only dinosaurs that existed
+                                                     in the given period

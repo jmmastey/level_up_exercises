@@ -2,7 +2,7 @@
 class Experiment
   attr_accessor :confidence
 
-  def initialize(confidence=95.0)
+  def initialize(confidence = 95.0)
     self.confidence = confidence / 100.0
   end
 
@@ -15,7 +15,7 @@ class Experiment
       text << generate_cohort_results(cohort)
       if cohort.conversion_rate > winning_conversion_rate
         winning_conversion_rate = cohort.conversion_percent
-        winner = '-'*20 +"\nWinning Split Test: #{cohort.name}\n"+'-'*20+ "\n"
+        winner = '-' * 20 + "\nWinning Split Test: #{cohort.name}\n" + '-' * 20 + "\n"
       end
 
     end
@@ -31,11 +31,10 @@ class Experiment
     text
   end
 
-
   def generate_cohort_results(cohort)
-    p_deviation = self.cdf_inverse(z_score)
+    p_deviation = cdf_inverse(z_score)
     text = ''
-    std_error = (self.standard_error(cohort.conversion_rate, cohort.visits, true)*p_deviation).round(3)
+    std_error = (standard_error(cohort.conversion_rate, cohort.visits, true) * p_deviation).round(3)
     low_std_error = (cohort.conversion_percent - std_error).round(3)
     high_std_error = (cohort.conversion_percent + std_error).round(3)
     text << "Test #{cohort.name}: Conversion Rate: #{cohort.conversion_percent}%\n"
@@ -54,37 +53,36 @@ class Experiment
         b = cohort if cohort.name == 'B'
       end
       results[:chi] = chi_square_formula(a.visits, b.visits, a.conversions, b.conversions)
-      results[:p] =   (cdf_inverse(self.confidence)).round(3)
+      results[:p] =   (cdf_inverse(confidence)).round(3)
       results
     end
   end
 
-
-  def standard_error(conversion_rate, visits , as_percent=false)
+  def standard_error(conversion_rate, visits, as_percent = false)
     p = conversion_rate.to_f
     n = visits.to_f
-    se = Math.sqrt(p * (1-p) / n )
+    se = Math.sqrt(p * (1 - p) / n)
     if as_percent == true
-      se = (se*100.0).round(3)
+      se = (se * 100.0).round(3)
     end
     se
   end
 
   def z_score
-    alpha = 1.0-self.confidence
-    1.0 - (0.5*alpha)
+    alpha = 1.0 - confidence
+    1.0 - (0.5 * alpha)
   end
 
   def chi_square_formula(visits_a, visits_b, conversion_a, conversion_b)
-    numerator = ( visits_a * conversion_b - visits_b * conversion_a )**2 * ( visits_a + visits_b + conversion_a + conversion_b )
-    denominator = ( visits_a + visits_b ) * ( visits_a + conversion_a ) * ( visits_b + conversion_b ) * ( conversion_a + conversion_b )
+    numerator = ( visits_a * conversion_b - visits_b * conversion_a)**2 * ( visits_a + visits_b + conversion_a + conversion_b)
+    denominator = ( visits_a + visits_b) * ( visits_a + conversion_a) * ( visits_b + conversion_b) * ( conversion_a + conversion_b)
     result = numerator / denominator.to_f
     result.round(3)
   end
 
   # standard normal cumulative distribution function
   def cdf(z_score)
-    (0.5 * (1.0 + Math.erf((z_score*1.0)/Math.sqrt(2))))
+    (0.5 * (1.0 + Math.erf((z_score * 1.0) / Math.sqrt(2))))
   end
 
   # inverse standard normal cumulative distribution function
@@ -99,21 +97,21 @@ class Experiment
     x = 0.0
     q = 0.0
     if 0.0 < confidence && confidence < p_low
-      q = Math.sqrt(-2.0*Math.log(confidence))
-      x = (((((c[1]*q+c[2])*q+c[3])*q+c[4])*q+c[5])*q+c[6]) / ((((d[1]*q+d[2])*q+d[3])*q+d[4])*q+1.0)
+      q = Math.sqrt(-2.0 * Math.log(confidence))
+      x = (((((c[1] * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) * q + c[6]) / ((((d[1] * q + d[2]) * q + d[3]) * q + d[4]) * q + 1.0)
     elsif p_low <= confidence && confidence <= p_high
       q = confidence - 0.5
-      r = q*q
-      x = (((((a[1]*r+a[2])*r+a[3])*r+a[4])*r+a[5])*r+a[6])*q / (((((b[1]*r+b[2])*r+b[3])*r+b[4])*r+b[5])*r+1.0)
+      r = q * q
+      x = (((((a[1] * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * r + a[6]) * q / (((((b[1] * r + b[2]) * r + b[3]) * r + b[4]) * r + b[5]) * r + 1.0)
     elsif p_high < confidence && confidence < 1.0
-      q = Math.sqrt(-2.0*Math.log(1.0-confidence))
-      x = -(((((c[1]*q+c[2])*q+c[3])*q+c[4])*q+c[5])*q+c[6]) / ((((d[1]*q+d[2])*q+d[3])*q+d[4])*q+1.0)
+      q = Math.sqrt(-2.0 * Math.log(1.0 - confidence))
+      x = -(((((c[1] * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) * q + c[6]) / ((((d[1] * q + d[2]) * q + d[3]) * q + d[4]) * q + 1.0)
     end
     pi = Math::PI
     if 0 < confidence && confidence < 1
-      e = 0.5 * Math.erfc(-x/Math.sqrt(2.0)) - confidence
-      u = e * Math.sqrt(2.0*pi) * Math.exp((x**2.0)/2.0)
-      x = x - u/(1.0 + x*u/2.0)
+      e = 0.5 * Math.erfc(-x / Math.sqrt(2.0)) - confidence
+      u = e * Math.sqrt(2.0 * pi) * Math.exp((x**2.0) / 2.0)
+      x = x - u / (1.0 + x * u / 2.0)
     end
     x
   end

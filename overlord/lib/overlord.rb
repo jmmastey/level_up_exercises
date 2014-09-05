@@ -11,8 +11,6 @@ require 'time_difference'
 require 'data_mapper'
 require_relative 'models/bomb'
 
-
-
 configure :development do
   DataMapper::Logger.new($stdout, :debug)
   DataMapper.setup(
@@ -28,7 +26,6 @@ configure :production do
   )
 end
 
-
 class Overlord < Sinatra::Base
   include OverlordHelpers
   register Sinatra::Partial
@@ -36,29 +33,25 @@ class Overlord < Sinatra::Base
   enable :sessions
   enable :partial_underscores
 
-  set :static => true
+  set static: true
   # set :public_folder, File.dirname(__FILE__) + '../public'
 
-
   get '/' do
-    erb :index, :layout => :base, locals: {:keypad_numbers => keypad_numbers,
-                                           :last_row => keypad_last_row,
-                                           :control_row => keypad_control_row}
+    erb :index, layout: :base, locals: { keypad_numbers: keypad_numbers,
+                                         last_row: keypad_last_row,
+                                         control_row: keypad_control_row }
   end
-
 
   after do
     puts body
   end
 
-
   get '/explode' do
-    json :status => 'boom'
+    json status: 'boom'
 
   end
 
-  run! if app_file == $0
-
+  run! if app_file == $PROGRAM_NAME
 end
 
 require './models/init'
@@ -66,5 +59,3 @@ require './helpers/init'
 require './routes/init'
 
 DataMapper.finalize
-
-

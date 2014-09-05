@@ -4,9 +4,9 @@ require './experiment'
 require './cohort'
 
 describe Experiment do
-  let(:experiment){Experiment.new}
-  let(:cohort_a){Cohort.new('A', {:visits =>1349.0, :conversions=>47.0})}
-  let(:cohort_b){Cohort.new('B', {:visits =>1543.0, :conversions=>79.0})}
+  let(:experiment) { Experiment.new }
+  let(:cohort_a) { Cohort.new('A', visits: 1349.0, conversions: 47.0) }
+  let(:cohort_b) { Cohort.new('B', visits: 1543.0, conversions: 79.0) }
 
   # subject{experiment}
 
@@ -35,7 +35,7 @@ describe Experiment do
     it 'expect a standard error' do
       visits = 1000.0
       conversions = 100.0
-      expect(experiment.standard_error((conversions/visits), visits)).to be_within(0.001).of(0.009)
+      expect(experiment.standard_error((conversions / visits), visits)).to be_within(0.001).of(0.009)
     end
   end
 
@@ -45,6 +45,5 @@ describe Experiment do
     end
 
   end
-
 
 end

@@ -1,15 +1,15 @@
 module OverlordHelpers
   def keypad_last_row
     values = []
-    values << {value: 'C', class: 'btn-danger glyphicon glyphicon-remove'}
-    values << {value: '0', class: 'btn-info'}
-    values << {value: 'S', class: 'btn-success glyphicon glyphicon-ok'}
+    values << { value: 'C', class: 'btn-danger glyphicon glyphicon-remove' }
+    values << { value: '0', class: 'btn-info' }
+    values << { value: 'S', class: 'btn-success glyphicon glyphicon-ok' }
   end
 
   def keypad_control_row
     values = []
-    values << {value: 'Deactivate', class: 'btn-danger'}
-    values << {value: 'Activate', class: 'btn-success'}
+    values << { value: 'Deactivate', class: 'btn-danger' }
+    values << { value: 'Activate', class: 'btn-success' }
     values
   end
 
@@ -17,23 +17,23 @@ module OverlordHelpers
     values = []
     keypadrow = []
     for value in 1...4 do
-      keypadrow << {value: value.to_s, class: 'btn-info'}
+      keypadrow << { value: value.to_s, class: 'btn-info' }
     end
     values << keypadrow
     keypadrow = []
     for value in 4...7 do
-      keypadrow << {value: value.to_s, class: 'btn-info'}
+      keypadrow << { value: value.to_s, class: 'btn-info' }
     end
     values << keypadrow
     keypadrow = []
     for value in 7...10 do
-      keypadrow << {value: value.to_s, class: 'btn-info'}
+      keypadrow << { value: value.to_s, class: 'btn-info' }
     end
     values << keypadrow
     values
   end
 
-# we can shove stuff into the session cookie YAY!
+  # we can shove stuff into the session cookie YAY!
   def start_time
     session[:start_time] ||= (Time.now).to_s
   end
@@ -48,7 +48,7 @@ module OverlordHelpers
 
   def is_code_long_enough?(code, value)
     if value.to_s.length < 4
-      json :errors => "#{code.to_s}:'not long enough'"
+      json errors: "#{code}:'not long enough'"
       false
     else
       true
@@ -63,7 +63,7 @@ module OverlordHelpers
   def bomb_time(h, m, s)
     request_time = Time.current
     session[:request_time] = request_time
-    request_time+ h.hours + m.minutes + s.seconds
+    request_time + h.hours + m.minutes + s.seconds
     # [detonate.hour - current.hour, detonate.min - current.min, detonate.sec - current.sec]
   end
 
@@ -84,8 +84,8 @@ module OverlordHelpers
 
   def is_codeset?(sesh, code)
     unless sesh[code].nil?
-      json :status => 'code already set'
-      json :body => code.to_s
+      json status: 'code already set'
+      json body: code.to_s
       halt 302
     end
   end

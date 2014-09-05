@@ -1,5 +1,5 @@
-require 'json'
-require_relative 'trace.rb'
+require "json"
+require_relative "trace.rb"
 
 class Dinosaur
   attr_accessor :name, :period, :continent, :diet, :weight, :walking, :description
@@ -14,11 +14,11 @@ class Dinosaur
     description: "Description"
   }
 
-  def initialize (fields = {})
+  def initialize(fields = {})
     init_field_maps
     map_fields fields
   end
-  
+
   def carnivore?
     diet_lower_case = diet.downcase
 
@@ -43,29 +43,29 @@ class Dinosaur
       instance_variable_defined?(var_name) &&
         instance_variable_get(var_name).to_s.downcase.include?(value.to_s.downcase)
     end
-  end
+end
 
   def to_h
     hash = {
-      name: self.name,
-      period: self.period,
-      continent: self.continent,
-      diet: self.diet,
-      weight: self.weight,
-      walking: self.walking, 
-      description: self.description
+      name: name,
+      period: period,
+      continent: continent,
+      diet: diet,
+      weight: weight,
+      walking: walking,
+      description: description
     }
 
-    hash.reject { |key , value| value.nil?}
+    hash.reject { |_key, value| value.nil? }
   end
 
-  def to_json (*args)
-    self.to_h.to_json *args
+  def to_json(*args)
+    to_h.to_json *args
   end
 
   def to_s
     str = ""
-    self.to_h.each do |key, value|
+    to_h.each do |key, value|
       str << @@labels[key] << ": " << value.to_s << "\n"
     end
 
@@ -73,6 +73,7 @@ class Dinosaur
   end
 
   private
+
   def init_field_maps
     @field_maps = {
       name: :name,
@@ -87,14 +88,14 @@ class Dinosaur
       carnivore: lambda do |field|
         if field.downcase == "yes"
           self.diet = "Carnivore"
-        else 
+        else
           self.diet = "Herbivore"
         end
       end
     }
   end
 
-  def map_fields (fields)
+  def map_fields(fields)
     fields.each do |key, value|
       field_map = @field_maps[key.to_sym]
       if field_map.nil?

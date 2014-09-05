@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'colorize'
-require 'json'
-require 'optparse'
-require_relative 'dinodex.rb'
-require_relative 'trace.rb'
+require "colorize"
+require "json"
+require "optparse"
+require_relative "dinodex.rb"
+require_relative "trace.rb"
 
 class App
   def main
@@ -18,6 +18,7 @@ class App
   end
 
   private
+
   @@valid_commands = [
     :add,
     :clear_screen,
@@ -28,7 +29,7 @@ class App
     :quit
   ]
 
-  def add fields
+  def add(fields)
     @dinodex.add (JSON.parse fields)
     puts "Dinosaur added.".green
   end
@@ -37,11 +38,11 @@ class App
     puts "\e[H\e[2J"
   end
 
-  def exec_command cmd
-    if cmd.length > 0 
+  def exec_command(cmd)
+    if cmd.length > 0
       if @@valid_commands.include?(cmd[0].to_sym)
         begin
-          send *cmd 
+          send *cmd
         rescue Exception => e
           puts "Error encountered: #{e.message}".red
         end
@@ -51,27 +52,27 @@ class App
     end
   end
 
-  def export (filename, *search_params)
+  def export(filename, *search_params)
     File.write filename, search(*search_params).to_json
     puts "File written.".green
   end
 
-  def flag_big index
+  def flag_big(index)
     index.find_with_min_weight! 2000
-    Trace['Index filtered by weight (big)']
+    Trace["Index filtered by weight (big)"]
   end
 
-  def flag_biped index
+  def flag_biped(index)
     index.find! walking: "Biped"
-    Trace['Index filtered by bipeds']
+    Trace["Index filtered by bipeds"]
   end
 
-  def flag_carnivore index
+  def flag_carnivore(index)
     index.find_carnivore!
-    Trace['Index filtered by carnivores']
+    Trace["Index filtered by carnivores"]
   end
 
-  def flag_fields index, field_assigns
+  def flag_fields(index, field_assigns)
     field_assigns.each do |field_assign|
       split_value = field_assign.split("=")
       name = split_value[0]
@@ -81,25 +82,25 @@ class App
     end
   end
 
-  def flag_period index, name
+  def flag_period(index, name)
     index.find_in_period! name
     Trace["Index filtered by period #{name}"]
   end
 
-  def flag_small index
+  def flag_small(index)
     index.find_with_max_weight! 1999
-    Trace['Index filtered by weight (small)']
+    Trace["Index filtered by weight (small)"]
   end
 
   def get_command
     print ">> "
     # split command by spaces, grouping quotes and brackets
-    cmd = gets.split /\s(?=(?:[^[\{\}]"]|"[^"]*"|\{[^[\{\}]]*\})*$)/ 
+    cmd = gets.split /\s(?=(?:[^[\{\}]"]|"[^"]*"|\{[^[\{\}]]*\})*$)/
     puts
     cmd
   end
 
-  def import (*filenames)
+  def import(*filenames)
     filenames.each do |filename|
       @dinodex.load_csv filename
       puts "Loaded file \"#{filename}\"".green
@@ -114,43 +115,45 @@ class App
     puts File.read("helptext.txt").cyan
   end
 
-  def list (*search_params)
+  def list(*search_params)
     puts search(*search_params).to_s.cyan
   end
 
-  def method_missing (m, *args, &block)
+  def method_missing(m, *_args, &_block)
     puts "Invalid command: #{m}".red
     puts
   end
 
-  def search (*search_params)
+  def search(*search_params)
     @filtered_index = @dinodex.clone
-    Trace['Filtered index created.']
+    Trace["Filtered index created."]
 
     opt_parser = OptionParser.new do |opts|
-      opts.on("--big", "Excludes dinosaurs under 2 tons.") do 
-        flag_big @filtered_index 
+      opts.on("--big", "Excludes dinosaurs under 2 tons.") do
+        flag_big @filtered_index
       end
 
-      opts.on("--biped", "Includes only bipedal dinosaurs.") do 
-        flag_biped @filtered_index 
+      opts.on("--biped", "Includes only bipedal dinosaurs.") do
+        flag_biped @filtered_index
       end
 
-      opts.on("--carnivore", "Includes only carnivores.") do 
+      opts.on("--carnivore", "Includes only carnivores.") do
         flag_carnivore @filtered_index
       end
 
-      opts.on("--fields NAME=VALUE", Array, "Filters dinosaurs by the given fields.") do |field_assigns|
-        flag_fields @filtered_index, field_assigns
-      end
+      opts.on("--fields NAME=VALUE",
+              Array,
+              "Filters dinosaurs by the given fields.") do |field_assigns|
+                flag_fields @filtered_index, field_assigns
+              end
 
-      opts.on("--period NAME", "Filters dinosaurs by period.") do |name|
-        flag_period @filtered_index, name
-      end
+              opts.on("--period NAME", "Filters dinosaurs by period.") do |name|
+                flag_period @filtered_index, name
+              end
 
-      opts.on("--small", "Includes only dinosaurs lighter than 2000 lbs.") do
-        flag_small @filtered_index
-      end
+              opts.on("--small", "Includes only dinosaurs lighter than 2000 lbs.") do
+                flag_small @filtered_index
+              end
     end
 
     Trace["Parser created."]
@@ -163,7 +166,7 @@ class App
 
   def quit
     puts "Thank you for using DinoDex.".yellow
-    Trace['User exited program']
+    Trace["User exited program"]
     puts
   end
 

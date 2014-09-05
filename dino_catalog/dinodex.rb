@@ -1,15 +1,15 @@
-require 'csv'
-require 'json'
-require_relative 'dinosaur.rb'
+require "csv"
+require "json"
+require_relative "dinosaur.rb"
 
-class DinoDex	
+class DinoDex
   attr_reader :dinosaurs
 
-  def initialize (dinosaurs = [])
+  def initialize(dinosaurs = [])
     @dinosaurs = dinosaurs || []
   end
 
-  def add (fields)
+  def add(fields)
     @dinosaurs.push (Dinosaur.new fields)
   end
 
@@ -17,11 +17,11 @@ class DinoDex
     DinoDex.new @dinosaurs.dup
   end
 
-  def each (*args)
+  def each(*args)
     @dinosaurs.each *args
   end
 
-  def find (params)
+  def find(params)
     params = params.to_h
 
     dinos = @dinosaurs.select do |dinosaur|
@@ -57,7 +57,7 @@ class DinoDex
     self
   end
 
-  def find_with_min_weight (min_weight)
+  def find_with_min_weight(min_weight)
     dinos = @dinosaurs.select do |dinosaur|
       !dinosaur.weight.nil? && dinosaur.weight >= min_weight
     end
@@ -73,7 +73,7 @@ class DinoDex
     self
   end
 
-  def find_with_max_weight (max_weight)
+  def find_with_max_weight(max_weight)
     dinos = @dinosaurs.select do |dinosaur|
       !dinosaur.weight.nil? && dinosaur.weight <= max_weight
     end
@@ -89,7 +89,7 @@ class DinoDex
     self
   end
 
-  def find_in_period (period)
+  def find_in_period(period)
     dinos = @dinosaurs.select do |dinosaur|
       dinosaur.match_partial? period: period
     end
@@ -105,7 +105,7 @@ class DinoDex
     self
   end
 
-  def load_csv (file_path)
+  def load_csv(file_path)
     header_converters = [
       :downcase,
       lambda do |header|
@@ -121,11 +121,12 @@ class DinoDex
       end
     end
 
-    csv = CSV.read file_path,
-      headers: true,
-      return_headers: true,
-      header_converters: header_converters,
-      converters: weight_converter
+    csv = CSV.read
+        file_path,
+        headers: true,
+        return_headers: true,
+        header_converters: header_converters,
+        converters: weight_converter
 
     dinos = csv.reject(&:header_row?).map { |row| Dinosaur.new row.to_hash }
     @dinosaurs.concat dinos
@@ -133,24 +134,25 @@ class DinoDex
     self
   end
 
-  def to_json (*args)
+  def to_json(*args)
     @dinosaurs.to_json *args
   end
 
   def to_s
     str = ""
-    self.dinosaurs.each do |dino|
+    dinosaurs.each do |dino|
       str << dino.to_s << "\n"
     end
 
     str
   end
 
-  private 
-  def csv_parse_row (row)
+  private
+
+  def csv_parse_row(row)
     dinosaur = Dinosaur.new
 
-    row.each do |header , field|
+    row.each do |header, field|
       case header
       when "name"
         dinosaur.name = field
@@ -172,8 +174,8 @@ class DinoDex
         if header.include? "weight"
           dinosaur.weight = field.to_i
         end
-      end #case
-    end #each
+      end # case
+    end # each
 
     dinosaur
   end
@@ -181,7 +183,6 @@ class DinoDex
   def csv_set_carnivore(field)
     if field
       dinosaur.diet = (field.downcase == "yes") ? "Carnivore" : "Herbivore"
-    end 
+    end
   end
 end
-

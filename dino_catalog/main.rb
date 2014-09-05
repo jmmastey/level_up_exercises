@@ -10,13 +10,13 @@ require './jsonparser'
 def get_options
   options = {}
   OptionParser.new do |opts|
-    opts.banner = "Usage: ./main.rb [commands]"
+    opts.banner = 'Usage: ./main.rb [commands]'
 
-    opts.on("-e","--export", "export to json") do |e|
+    opts.on('-e', '--export', 'export to json') do |_e|
       options[:export] = true
     end
 
-    opts.on("--command=MANDATORY","parse the command") do |c|
+    opts.on('--command=MANDATORY', 'parse the command') do |c|
       options[:command] = c
     end
   end.parse!
@@ -35,13 +35,13 @@ def main
   dinodex = DinoDex.new(dinos)
 
   token_parser = DinoTokenParser.new
- 
+
   options = get_options
   command = (options[:command].nil?) ? STDIN.read : options[:command]
   tokens = token_parser.parse(command)
 
   result = evaluate(tokens, dinodex)
-  
+
   if options[:export]
     puts JSONParser.new.dump(result)
   else

@@ -13,7 +13,7 @@ module Distance
     return len2 if len1 == 0
     return len1 if len2 == 0
 
-    cost = (str1[len1 - 1] == str2[len2 - 1])? 0 : 1
+    cost = (str1[len1 - 1] == str2[len2 - 1]) ? 0 : 1
 
     [
       edit_distance_rec(str1, len1 - 1, str2, len2) + 1,

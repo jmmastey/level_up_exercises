@@ -26,7 +26,7 @@ describe "#matcher" do
     tokens = [t1,t2,t3]
   
     results = tokens.map do |token| 
-      Match(lambda {|val| token.type == val}, { 
+      OldMatch(lambda {|val| token.type == val}, { 
 	'A' => 0xDEADBEEF,
         'B' => 0X55555555,
         'C' => 0x0000000F
@@ -39,7 +39,7 @@ describe "#matcher" do
 
     strings = ['A', 'B', 'C']
     results = strings.map do |val|
-      Match(val, {
+      OldMatch(val, {
         'A' => lambda{ SimpleToken.new('A') },
         'B' => lambda{ SimpleToken.new('B') },
         'C' => lambda{ SimpleToken.new('C') }
@@ -53,7 +53,7 @@ describe "#matcher" do
     tokens = [ SimpleToken.new(""), FancyToken.new, SimpleToken.new("") ]
     
     result = tokens.map do |token|
-      Match(token.method(:is_a?), { 
+      OldMatch(token.method(:is_a?), { 
         SimpleToken => -1,
         FancyToken => 3
       })
@@ -64,4 +64,29 @@ describe "#matcher" do
     expect(result[2]).to eq(-1)
   end
 end
+
+describe "#newMatcher" do
+  it "Should match objects based on " +
+   "equality, instance, and pattern" do
+
+  result = Match("test", {
+    "test" => "hello"
+  })
+  expect(result).to eq("hello")
+
+  result = Match("hello", {
+    Fixnum => 0,
+    String => "yay!",
+    NilClass => "no"
+  })
+  expect(result).to eq("yay!")
+
+  result = Match("12038", {
+    /\d+/ => Integer("12038"),
+    /hello/ => "Oh no!"
+  })
+  expect(result).to eq(12038)
+  end
+end
+
 

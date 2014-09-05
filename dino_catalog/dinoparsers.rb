@@ -1,8 +1,8 @@
-require './dino'
-require './dinotoken'
-require './matching'
+require "./dino"
+require "./dinotoken"
+require "./matching"
 
-require 'csv'
+require "csv"
 
 class CSV::Table
   def map(&blk)
@@ -24,22 +24,36 @@ class DinoParser
   def parse(data)
     data = CSV.read(data,@@csv_opts) if data.is_a? String
     return data.map do |row|
-      Dinosaur.new(row.to_hash)
+      Dinosaur.new(parse_csv_row(row.to_hash))
     end
+  end
+
+private
+  def parse_csv_row(csv_row)
+    {
+      :name => csv_row["name"], 
+      :period => csv_row["period"],
+      :continent => csv_row["continent"], 
+      :diet => csv_row["diet"], 
+      :walk => csv_row["walking"],
+      :weight =>  (csv_row["weight_in_lbs"] || -1),
+      :desc => csv_row["description"] 
+   }
   end
 end
 
-class AfroDinoParser
-  @@csv_opts = {
-    :headers => true,
-    :header_converters => :downcase,
-    :converters => :integer
-  }
-  def parse(data)
-    data = CSV.read(data,@@csv_opts) if data.is_a? String
-    return data.map do |row|
-      Dinosaur.new(row.to_hash)
-    end
+class AfroDinoParser < DinoParser
+private
+  def parse_csv_row(csv_row)
+    {
+      :name => csv_row["genus"],
+      :period => csv_row["period"],
+      :continent => "Africa",
+      :diet => csv_row["carnivore"],
+      :walk => csv_row["walking"],
+      :weight => csv_row["weight"],
+      :desc => ""
+    }
   end
 end
 
@@ -50,8 +64,8 @@ class DinoTokenParser
       parts = raw_token.split(/\s+/)
       tag = parts[0]
       Match(tag, {
-        'AND' => lambda {AndToken.new(parts)},
-        'SORT' => lambda {SortToken.new(parts)}
+        "AND" => lambda { AndToken.new(parts) },
+        "SORT" => lambda { SortToken.new(parts) }
       })
     end
   end

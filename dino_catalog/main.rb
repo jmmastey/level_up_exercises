@@ -23,7 +23,7 @@ def main
   tokens = token_parser.parse(command)
 
   result = evaluate(tokens,dinodex)
-  puts JSONParser.new.dump(result)
+  puts (result)
 end
 
 

@@ -1,4 +1,3 @@
-
 class AndToken
   attr_reader :field, :op, :arg
 

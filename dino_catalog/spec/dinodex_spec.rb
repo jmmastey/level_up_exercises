@@ -31,6 +31,27 @@ describe DinoDex,"#query" do
   expect(result[0].name).to eq("Yangchuanosaurus") 
 
   end
+  
+  it "should run a fully chained query" do
+  
+  dino_file = "dinodex.csv"
+  dino_parser = DinoParser.new
+  dinos = dino_parser.parse(dino_file)
+
+  dinodex = DinoDex.new
+  dinodex.load(dinos)  
+
+  result = dinodex.new_query
+    .and('name','>=','D')
+    .and('name','<=','N')
+    .and('weight','>',2000)
+    .sort('name').result
+
+  expect(result.size).to eq(2)
+  expect(result[0].name).to eq('Giganotosaurus')
+  expect(result[1].name).to eq('Megalosaurus')
+
+  end
 
   it "we should make sure sort works as well" do
     dino_file = "dinodex.csv"

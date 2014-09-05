@@ -3,7 +3,15 @@ require './dino'
 describe "#checkingInit" do
   it "I'm new to ruby, I'm checking" +
      "if class def worked" do
-  dino = Dinosaur.new("Name","Period","Continent","Diet",10000,"Walk","This is a description")
+  dino = Dinosaur.new({
+    :name => "Name",
+    :period => "Period",
+    :continent => "Continent",
+    :diet => "Diet",
+    :weight => 10000,
+    :walk => "Walk",
+    :desc => "This is a description"
+  })
   
   expect(dino.name).to eq("Name")
   expect(dino.period).to eq("Period")

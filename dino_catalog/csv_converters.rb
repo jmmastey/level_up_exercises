@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 # File csv_converters.rb
 require 'csv'
-INPUT_YES = 'yes'
-INPUT_NO = 'no'
+INPUT_YES   = 'yes'
+INPUT_NO    = 'no'
 DIET_HEADER = 'diet'
-
 
 CSV::HeaderConverters[:africa] = lambda do |header|
   head = header
@@ -47,8 +46,7 @@ CSV::Converters[:diet] = lambda do |diet, field_info|
       diet_return = 'Carnivore' if diet_input == INPUT_YES
       diet_return = '' if diet_input == INPUT_NO
     end
-    end
-
+  end
 
   diet_return
 end

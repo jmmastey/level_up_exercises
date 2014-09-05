@@ -1,15 +1,31 @@
 # A sample Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby '2.1.2'
 
-gem "activesupport"
-gem "i18n"
-gem "time_difference"
-gem "sinatra"
-gem "sinatra-contrib"
-gem "sinatra-partial"
-gem "rspec"
-gem "cucumber-sinatra"
-gem "nokogiri"
-gem "capybara"
+gem 'activesupport', :require => 'active_support/all'
+gem 'i18n'
+gem 'time_difference'
+gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'sinatra-partial', :require => 'sinatra/partial'
+gem 'nokogiri'
+gem 'datamapper'
+gem 'bundler'
+
+group :test do
+  gem 'rspec'
+end
+
+group :development do
+  gem 'dm-sqlite-adapter'
+end
+
+group :test, :development do
+  gem 'cucumber-sinatra'
+  gem 'capybara'
+end
+
+
+
+

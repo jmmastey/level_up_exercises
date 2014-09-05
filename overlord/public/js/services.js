@@ -19,11 +19,11 @@
 //    });
 //}
 
-app.factory("Bomb", function($resource) {
+bombApp.factory("Bomb", function($resource) {
     return $resource("/bomb",{},
         {
-            'activate':  { method: 'POST' },
-            'deactivate':  { method: 'POST', url:"/bomb/deactivate/:deactivationCode", params:{deactivationCode:"@deactivationCode"} },
+            'activationCode':  { method: 'POST' },
+            'deactivationCode':  { method: 'POST', url:"/bomb/deactivate/:deactivationCode", params:{deactivationCode:"@deactivationCode"} },
             'submitCodes': {method: 'POST', isObject:true,
                 url:"/bomb/:activationCode/:deactivationCode/:detonationCode",
             params:{activationCode: "@activationCode", deactivationCode:"@deactivationCode", detonationCode:"@detonationCode"}},

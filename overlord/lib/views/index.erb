@@ -14,6 +14,7 @@
         </div>
         <!--<div class="row">-->
         <%= partial :initial_form %>
+
         <div class="row">
             <form name="deactivationForm" rc-submit="submit()" class="form-horizontal" ng-show="bombActive" novalidate>
                 <div class="control-group" ng-class="activeErrorClass('deactivationEntry')">
@@ -30,14 +31,12 @@
                     </div>
                 </div>
             </form>
-            <button class="btn btn-lg btn-danger" type="submit"
-                  ng-click="bombActionClick('Deactivate')">Deactivate</button>
-            <button class="btn btn-lg btn-success" type="submit"
-                  ng-click="bombActionClick('Activate')">Activate</button>
+            <!--<button class="btn btn-lg btn-danger" type="submit"-->
+                  <!--ng-click="bombActionClick('Deactivate')">Deactivate</button>-->
+            <!--<button class="btn btn-lg btn-success" type="submit"-->
+                  <!--ng-click="bombActionClick('Activate')">Activate</button>-->
 
         </div>
-        <%= partial :keypad, :locals => {:keypad_numbers => keypad_numbers,
-                                       :last_row => keypad_last_row,
-                                       :control_row => keypad_control_row} %>
+
     </div>
 </div>

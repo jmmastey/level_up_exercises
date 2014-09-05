@@ -24,6 +24,8 @@
     "bootstrap": "~3.2.0"
   },
   "devDependencies": {
-    "angularjs-utilities": "~0.0.9"
+    "angularjs-utilities": "~0.0.9",
+    "jquery-steps": "~1.0.8",
+    "ng-keypad": "https://github.com/trochette/ng-keypad.git"
   }
 }

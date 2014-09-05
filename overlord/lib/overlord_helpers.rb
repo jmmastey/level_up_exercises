@@ -30,7 +30,6 @@ module OverlordHelpers
       keypadrow << {value: value.to_s, class: 'btn-info'}
     end
     values << keypadrow
-    keypadrow = []
     values
   end
 
@@ -76,7 +75,7 @@ module OverlordHelpers
       if is_code_long_enough?(code, value) && type.nil?
         session[code] = value
       else
-        bomb_detonation = bomb_time(*sprintf("%06d", value).scan(/../).map(&:to_i))
+        bomb_detonation = bomb_time(*sprintf('%06d', value).scan(/../).map(&:to_i))
         session[code] = bomb_detonation
       end
       nil
@@ -84,7 +83,7 @@ module OverlordHelpers
   end
 
   def is_codeset?(sesh, code)
-    if !sesh[code].nil?
+    unless sesh[code].nil?
       json :status => 'code already set'
       json :body => code.to_s
       halt 302

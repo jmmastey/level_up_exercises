@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'bundler/setup'
+
 require File.expand_path(File.dirname(__FILE__) + '/overlord_helpers.rb')
 require 'sinatra'
 require 'sinatra/json'
@@ -5,6 +8,26 @@ require 'sinatra/partial'
 require 'json'
 require 'active_support/all'
 require 'time_difference'
+require 'data_mapper'
+require_relative 'models/bomb'
+
+
+
+configure :development do
+  DataMapper::Logger.new($stdout, :debug)
+  DataMapper.setup(
+      :default,
+      "sqlite3://#{Dir.pwd}/bomb.db"
+  )
+end
+
+configure :production do
+  DataMapper.setup(
+      :default,
+      'postgres://postgres:12345@localhost/sinatra_service'
+  )
+end
+
 
 class Overlord < Sinatra::Base
   include OverlordHelpers
@@ -23,50 +46,6 @@ class Overlord < Sinatra::Base
                                            :control_row => keypad_control_row}
   end
 
-  get '/reset' do
-    session.clear
-    redirect to('/')
-  end
-
-
-
-  helpers do
-
-  end
-
-
-  post '/bomb/deactivate/:deactivactionCode' do
-    session[:bombActive] = false
-    redirect to('/')
-
-  end
-
-  bomb_vars = %w(activationCode deactivationCode detonationCode)
-  post '/bomb/'+bomb_vars.map{|v|":#{v}"}.join('/') do
-    errors = {}
-
-
-    bomb_vars.each do |key|
-      code = key.to_sym
-      value = params[code]
-      error = check_or_set_code(code, value)
-      errors[code] = error unless error.nil?
-    end
-    # body.join('; ')
-    if errors.empty?
-
-      session[:bombActive] = true
-      session[:detonationTime] = detonation_time
-      res = {:detonation => detonation_time}
-      body res.to_json
-      200
-    else
-      body errors.to_json
-      session[:bombActive] = false
-      400
-    end
-
-  end
 
   after do
     puts body
@@ -81,4 +60,11 @@ class Overlord < Sinatra::Base
   run! if app_file == $0
 
 end
+
+require './models/init'
+require './helpers/init'
+require './routes/init'
+
+DataMapper.finalize
+
 

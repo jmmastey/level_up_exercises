@@ -19,7 +19,7 @@ function timeFormatter(text)
 
 }
 
-app.directive('bombtime', function() {
+bombApp.directive('bombtime', function() {
     return {
         restrict: 'A',
         require: 'ngModel',
@@ -37,59 +37,11 @@ app.directive('bombtime', function() {
     $scope.detonationCode = '';
     $scope.currentStep = 0;
     $scope.bombActive = false
-    $scope.currentCode = ['activationCode', 'deactivationCode', 'detonationCode'];
 
 
-    $scope.currentForm = {
-        get form()
-        {
-            return $scope[$scope.currentCode[$scope.currentStep]];
-        },
-        set form(value)
-        {
-            $scope[$scope.currentCode[$scope.currentStep]] = value;
-        },
-        get method()
-        {
-            return $scope.currentCode[$scope.currentStep]
-        },
-        get formName()
-        {
-          return this.method
-        }
-
-    };
 
 
-    $scope.keypadClick = function(key)
-    {
-        if(key != 'C' && key != 'S')
-        {
-//            $scope.form[$scope.currentCode[$scope.currentStep]].$se
-            $scope.currentForm.form = $scope.currentForm.form.toString().concat(key);
 
-        }
-
-        if(key === 'C')
-        {
-
-            $scope.currentForm.form = ($scope.currentForm.form.slice(0, -1));
-        }
-
-        if(key == 'S')
-        {
-            if($scope.currentStep < 3)
-            {
-                $scope.currentStep++;
-            }
-            if($scope.currentStep == 3)
-            {
-                $scope.submit()
-            }
-        }
-
-
-    };
 
     if ($routeParams.activationCode && $routeParams.deactivationCode && $routeParams.detonationCode) {
         $scope.bomb= Bomb.show({ activationCode: $routeParams.activationCode,
@@ -127,82 +79,40 @@ app.directive('bombtime', function() {
 
         function success(response) {
             console.log("success", response);
-            $location.path("/");
-            $('form[name="form"]').hide();
-            $scope.bombActive = true;
-            $scope.detonationTime = timeFormatter(response.detonation)
 
         }
 
         function failure(response) {
             console.log("failure", response);
-            $('form[name="form"]').show();
-            $.each(response.data, function(key, error){
-//                $.each(key, function(e){
-                console.log(error)
-                    $scope.form[key].$dirty = true;
-                    $scope.form[key].$setValidity(error, false);
-//                })
-
-            });
-
 
         }
 
-        if ($routeParams.code) {
-
-            Bomb.submitCodes($scope.form, success, failure);
-//            Bomb.update($scope.activation, success, failure);
-        } else {
-            var codes = {};
-            for(var value in $scope.currentCode)
-            {
-                console.log(value)
-                var key = $scope.currentCode[value];
-                var val = $scope[key];
-                codes[key] = val;
-            }
-
-            Bomb.submitCodes(codes, success, failure);
-        }
 
     };
-
-    $scope.setStep = function(step){
-        $scope.currentStep = step
-    }
 
     $scope.cancel = function() {
         $location.path("/"+$scope.activation.code);
     };
 
-    $scope.errorClass = function(name) {
-        var s = $scope.form[name];
-        return s.$invalid && s.$dirty ? "has-error" : "";
+    $scope.errorClass = function(ngModelController) {
+        if(ngModelController.$pristine) return "";
+        return ngModelController.$valid ? "" : "has-error";
+
     };
 
-    $scope.errorMessage = function(name) {
+    $scope.showError = function(ngModelController){
+        return ngModelController.$invalid && ngModelController.$dirty;
+
+    };
+
+    $scope.errorMessage = function(ngModelController) {
         var result = [];
-        $.each($scope.form[name].$error, function(key, value){
+        $.each(ngModelController.$error, function(key, value){
              value ? result.push(key) : null;
         });
 
         return result.join(", ");
     };
-
-            $scope.activeErrorMessage = function(name) {
-                var result = [];
-                $.each($scope.deactivationForm[name].$error, function(key, value){
-                    value ? result.push(key) : null;
-                });
-
-                return result.join(", ");
-            };
-
-            $scope.activeErrorClass = function(name) {
-                var s = $scope.deactivationForm[name];
-                return s.$invalid && s.$dirty ? "has-error" : "";
-            };
 
 
 

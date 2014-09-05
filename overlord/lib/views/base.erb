@@ -8,6 +8,11 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/jquery.steps.css" rel="stylesheet">
+    <style type="text/css">
+        @import url("css/demo.css");
+        @import url("css/keypad-numeric.css");
+    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,26 +30,31 @@
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/jquery.js"></script>
+<script src="js/jquery.steps.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/angular.js"></script>
 <script src="js/directives/rcSubmit.js"></script>
 <script src="js/directives/rcVerifySet.js"></script>
 <script src="js/modules/rcDisabled.js"></script>
 <script src="js/modules/rcForm.js"></script>
+<script src="js/modules/ngKeypad.js"></script>
+<script src="js/modules/ngDraggable.js"></script>
 <!--<script src="angular-resource/js/angular-resource.js"></script>-->
 <!--<script src="angular-route/js/angular-route.min.js"></script>-->
 <script src="js/app.js"></script>
 <script src="js/controller.js"></script>
+<script src="js/controllers/BombActivationController.js"></script>
 <script src="js/services.js"></script>
 <script src="js/sprintf.js"></script>
 
 <script type="application/javascript">
     $(document).ready(function(){
-        scope = angular.element('[ng-controller=BombController]').scope();
-        scope.activationCode = '<%= session[:activationCode] || '' %>';
-        scope.deactivationCode = '<%= session[:deactivationCode] || '' %>';
-        scope.detonationTime = timeFormatter('<%= session[:detonationTime] || '' %>');
-        scope.bombActive = Boolean(Number('<%= session[:bombActive] ? 1:0 %>'));
+
+//        scope = angular.element('[ng-controller=BombController]').scope();
+//        scope.activationCode = '<%= session[:activationCode] || '' %>';
+//        scope.deactivationCode = '<%= session[:deactivationCode] || '' %>';
+//        scope.detonationTime = timeFormatter('<%= session[:detonationTime] || '' %>');
+//        scope.bombActive = Boolean(Number('<%= session[:bombActive] ? 1:0 %>'));
     });
 
 </script>

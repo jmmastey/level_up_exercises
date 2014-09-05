@@ -39,13 +39,20 @@ module.exports = function (grunt) {
 //                        'angular/angular.js': 'angular/angular.js'
 //                        'react/react.js': 'react/react.js'
                     }
-    }
+                },
+
             },
             concat: {
                 angular: {
                     files: {
                         'public/js/angular.js': ['bower_components/angular/angular.js', 'bower_components/angular-resource/angular-resource.js', 'bower_components/angular-route/angular-route.js'
                         ]
+                    }
+                },
+                ngKeypad:{
+                    files: {
+                        'public/js/modules/ngKeypad.js': ['bower_components/ng-keypad/src/ngKeypad/*.js'],
+                        'public/js/modules/ngDraggable.js': ['bower_components/ng-keypad/src/ngDraggable/*.js']
                     }
                 },
                 bootstrap: {
@@ -59,7 +66,9 @@ module.exports = function (grunt) {
                 },
                 jquery: {
                     files: {
-                        'public/js/jquery.js': ['bower_components/jquery/dist/jquery.js']
+                        'public/js/jquery.js': ['bower_components/jquery/jquery.js'],
+                        'public/js/jquery.steps.js': ['bower_components/jquery-steps/build/jquery.steps.js'],
+                        'public/css/jquery.steps.css':['bower_components/jquery-steps/demo/css/jquery.steps.css']
                     }
                 },
                 sprintf: {

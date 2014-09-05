@@ -1,10 +1,10 @@
-require './matching'
+require "./matching"
 
 class JSONParser
   def dump(thing)
-    Match(thing, nil => 'null',
-                 false => 'false',
-                 true => 'true',
+    Match(thing, nil => "null",
+                 false => "false",
+                 true => "true",
                  Float => -> { dump_float(thing) },
                  Fixnum => -> { dump_fixnum(thing) },
                  String => -> { dump_string(thing) },
@@ -30,17 +30,17 @@ class JSONParser
   end
 
   def dump_object(obj)
-    variables_with_value = obj.instance_variables.map do |variable_name|
+    json_object_members = obj.instance_variables.map do |variable_name|
       json_name = parse_json_name(variable_name)
       json_value = dump(obj.instance_variable_get(variable_name))
       "#{json_name}: #{json_value}"
     end
-    '{' + variables_with_value.join(', ') + '}'
+    '{' + json_object_members.join(', ') + '}'
   end
 
   def dump_array(array)
-    json_dumps = array.map { |thing| dump(thing) }
-    '[' + json_dumps.join(', ') + ']'
+    json_array_values = array.map { |thing| dump(thing) }
+    "[" + json_array_values.join(", ") + "]"
   end
 
   def dump_float(float)
@@ -52,6 +52,6 @@ class JSONParser
   end
 
   def parse_json_name(variable)
-    '"' + String(variable).sub(/@|:/, '') + '"'
+    '"' + String(variable).sub(/@|:/, "") + '"'
   end
 end

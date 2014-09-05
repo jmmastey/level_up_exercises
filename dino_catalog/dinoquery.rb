@@ -1,4 +1,4 @@
-require './string'
+require "./string"
 
 class DinoQuery
   attr_reader :result

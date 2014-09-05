@@ -1,8 +1,8 @@
-require 'rspec'
-require './jsonparser'
+require "rspec"
+require "./jsonparser"
 
-describe JSONParser, '#dumpString' do
-  it 'takes in a given string and escapes quotes for json' do
+describe JSONParser, "#dumpString" do
+  it "takes in a given string and escapes quotes for json" do
     parser = JSONParser.new
 
     raw_strings = [

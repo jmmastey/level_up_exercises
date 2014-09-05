@@ -16,7 +16,7 @@ class Dinosaur
 period: #{period}
 contnent: #{continent}
 diet: #{diet}
-weight: #{(weight == -1) ? '' : weight}
+weight: #{(weight == -1) ? "" : weight}
 walk: #{walk}
 description: #{desc}
 END

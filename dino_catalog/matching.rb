@@ -47,11 +47,11 @@ def match_proc(match_proc, matches, *args)
   matches.each do |key, proc_or_val|
     return value_of(proc_or_val) if match_proc.call(*args + [key]) == true
   end
-  fail "Unmatched!: function never evaluates to true!"
+  fail 'Unmatched!: function never evaluates to true!'
 end
 
 def match_val(match_key, matches)
-  proc_or_val = matches[match_key] 
+  proc_or_val = matches[match_key]
   fail "Unmatched!: no #{match_key} in matches!" if proc_or_val.nil?
   value_of(proc_or_val)
 end

@@ -11,14 +11,14 @@ class Dinosaur
   end
 
   def to_s
-<<END
+    <<END
 === #{name} ===
 period: #{period}
 contnent: #{continent}
 diet: #{diet}
-weight: #{(weight == -1)? "" : weight}
+weight: #{(weight == -1) ? '' : weight}
 walk: #{walk}
 description: #{desc}
 END
-  end  
+  end
 end

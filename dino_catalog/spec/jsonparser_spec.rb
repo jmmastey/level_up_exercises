@@ -1,15 +1,15 @@
 require 'rspec'
 require './jsonparser'
 
-describe JSONParser, "#dumpString" do
-  it "takes in a given string and escapes quotes for json" do
+describe JSONParser, '#dumpString' do
+  it 'takes in a given string and escapes quotes for json' do
     parser = JSONParser.new
-    
-    raw_strings = [ 
+
+    raw_strings = [
       'a', 'te st', '"', "test\n", 'a"b"c',
       '\\"a'
     ]
-    parsed = raw_strings.map {|str| parser.dump(str) }
+    parsed = raw_strings.map { |str| parser.dump(str) }
 
     expect(parsed[0]).to eq('"a"')
     expect(parsed[1]).to eq('"te st"')

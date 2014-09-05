@@ -1,9 +1,27 @@
 #!/usr/bin/ruby
 
+require 'optparse'
+
 require './dinodex'
 require './dinoparsers.rb'
 require './matching'
 require './jsonparser'
+
+def get_options
+  options = {}
+  OptionParser.new do |opts|
+    opts.banner = "Usage: ./main.rb [commands]"
+
+    opts.on("-e","--export", "export to json") do |e|
+      options[:export] = true
+    end
+
+    opts.on("--command=MANDATORY","parse the command") do |c|
+      options[:command] = c
+    end
+  end.parse!
+  options
+end
 
 def main
   dino_file_path = 'dinodex.csv'
@@ -17,12 +35,18 @@ def main
   dinodex = DinoDex.new(dinos)
 
   token_parser = DinoTokenParser.new
-
-  command = (ARGV[0].nil?) ? STDIN.read : ARGV[0]
+ 
+  options = get_options
+  command = (options[:command].nil?) ? STDIN.read : options[:command]
   tokens = token_parser.parse(command)
 
   result = evaluate(tokens, dinodex)
-  puts JSONParser.new.dump(result)
+  
+  if options[:export]
+    puts JSONParser.new.dump(result)
+  else
+    puts result
+  end
 end
 
 def evaluate(tokens, dinodex)

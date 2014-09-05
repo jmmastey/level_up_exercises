@@ -19,7 +19,7 @@ module Trace
 
   def self.[] message
     if @@trace_enabled
-      puts message.to_str.red
+      puts ("TRACE: #{message.to_str}").light_blue
     end
   end
 end

@@ -5,12 +5,16 @@ require_relative 'dinosaur.rb'
 class DinoDex	
   attr_reader :dinosaurs
 
-  def initialize (dinosaurs = nil)
+  def initialize (dinosaurs = [])
     @dinosaurs = dinosaurs || []
   end
 
-  def count (*args)
-    @dinosaurs.count *args
+  def add (fields)
+    @dinosaurs.push (Dinosaur.new fields)
+  end
+
+  def clone
+    DinoDex.new @dinosaurs.dup
   end
 
   def each (*args)
@@ -19,103 +23,122 @@ class DinoDex
 
   def find (params)
     params = params.to_h
-    dinos = @dinosaurs
 
-    params.each do |key , value|
-      dinos = dinos.select do |dinosaur|
-        variable_name = "@#{key}"
-        !dinosaur.instance_variable_defined?(variable_name) || 
-          dinosaur.instance_variable_get(variable_name) == value
-      end
-    end
-
-    dinos
-  end
-
-  def find_albian
-    dinos = @dinosaurs.select do |dinosaur| 
-      dinosaur.period.to_str.downcase == "albian"
-    end
-
-    DinoDex.new dinos
-  end
-
-  def find_big
-    dinos = @dinosaurs.select do |dinosaur| 
-      (dinosaur.weight || 0) > 2000
-    end 
-
-    DinoDex.new dinos
-  end
-
-  def find_bipeds
     dinos = @dinosaurs.select do |dinosaur|
-      dinosaur.walking.to_str.downcase == "biped"
-    end 
-
-    DinoDex.new dinos
-  end
-
-  def find_carnivores
-    dinos = @dinosaurs.select do |dinosaur| 
-      ["carnivore", "insectivore", "piscivore"].include? \
-        dinosaur.diet.to_str.downcase
+      dinosaur.match? params
     end
 
     DinoDex.new dinos
   end
 
-  def find_cretaceous
+  def find! (params)
+    params = params.to_h
+
+    @dinosaurs.select! do |dinosaur|
+      dinosaur.match? params
+    end
+
+    self
+  end
+
+  def find_carnivore
     dinos = @dinosaurs.select do |dinosaur|
-      dinosaur.period.to_str.downcase.include? "cretaceous"
+      dinosaur.carnivore?
     end
 
     DinoDex.new dinos
   end
 
-  def find_jurassic
+  def find_carnivore!
+    @dinosaurs.select! do |dinosaur|
+      dinosaur.carnivore?
+    end
+
+    self
+  end
+
+  def find_with_min_weight (min_weight)
     dinos = @dinosaurs.select do |dinosaur|
-      dinosaur.period.to_str.downcase == "jurassic"
+      !dinosaur.weight.nil? && dinosaur.weight >= min_weight
     end
 
     DinoDex.new dinos
   end
 
-  def find_oxfordian
+  def find_with_min_weight! (min_weight)
+    @dinosaurs.select! do |dinosaur|
+      (dinosaur.weight || 0) >= min_weight
+    end
+
+    self
+  end
+
+  def find_with_max_weight (max_weight)
     dinos = @dinosaurs.select do |dinosaur|
-      dinosaur.period.to_str.downcase == "oxfordian"
+      !dinosaur.weight.nil? && dinosaur.weight <= max_weight
     end
 
     DinoDex.new dinos
   end
 
-  def find_permian
+  def find_with_max_weight! (max_weight)
+    @dinosaurs.select! do |dinosaur|
+      !dinosaur.weight.nil? && dinosaur.weight <= max_weight
+    end
+
+    self
+  end
+
+  def find_in_period (period)
     dinos = @dinosaurs.select do |dinosaur|
-      dinosaur.period.to_str.downcase == "permian"
+      dinosaur.match_partial? period: period
     end
 
     DinoDex.new dinos
   end
 
-  def find_triassic
-    dinos = @dinosaurs.select do |dinosaur|
-      dinosaur.period.to_str.downcase == "triassic"
+  def find_in_period! (period)
+    @dinosaurs.select! do |dinosaur|
+      dinosaur.match_partial? period: period
     end
 
-    DinoDex.new dinos
+    self
   end
 
   def load_csv (file_path)
-    return false unless File.exists?(file_path) && File.readable?(file_path)
+    header_converters = [
+      :downcase,
+      lambda do |header|
+        if header.include? "weight"
+          "weight"
+        else
+          header
+        end
+      end
+    ]
 
-    @index ||= []
+    weight_converter = lambda do |field, field_info|
+      if field_info.header.include? "weight"
+        if (field || "") == ""
+          nil
+        else
+          field.to_i
+        end
+      else
+        field
+      end
+    end
 
-    csv = CSV.read file_path, :headers => true,
-      :return_headers => true,
-      :header_converters => :downcase
-    csv.each { |row| @dinosaurs << csv_parse_row(row) }
+    csv = CSV.read file_path,
+      headers: true,
+      return_headers: true,
+      header_converters: header_converters,
+      converters: weight_converter
 
-    @dinosaurs
+    dinos = csv.reject(&:header_row?).map { |row| Dinosaur.new row.to_hash }
+    @dinosaurs.concat dinos
+
+    self
   end
 
   def to_json (*args)
@@ -131,7 +154,7 @@ class DinoDex
     str
   end
 
-  protected
+  private 
   def csv_parse_row (row)
     dinosaur = Dinosaur.new
 
@@ -148,13 +171,7 @@ class DinoDex
       when "diet"
         dinosaur.diet = field
       when "carnivore"
-        if field
-          if field.downcase == "yes"
-            dinosaur.diet = "Carnivore"
-          else
-            dinosaur.diet = "Herbivore"
-          end #if
-        end #if
+        csv_set_carnivore field
       when "walking"
         dinosaur.walking = field
       when "description"
@@ -167,6 +184,16 @@ class DinoDex
     end #each
 
     dinosaur
+  end
+
+  def csv_set_carnivore(field)
+    if field
+      if field.downcase == "yes"
+        dinosaur.diet = "Carnivore"
+      else
+        dinosaur.diet = "Herbivore"
+      end #if
+    end #if
   end
 end
 

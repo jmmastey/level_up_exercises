@@ -28,3 +28,5 @@ Search Parameters:
                                                      matches the given values
   --period NAME                                    - includes only dinosaurs that existed
                                                      in the given period
+  --small                                          - includes only dinosaurs weighing less
+                                                     than 2000 lbs

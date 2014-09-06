@@ -47,8 +47,7 @@ class AfroDinoParser < DinoParser
 
   def parse_csv_row(csv_row)
     diet = parse_carnivore(csv_row["carnivore"])
-    row_weight = csv_row["weight"]
-    weight = (row_weight.nil?) ? -1 : kg_to_lbs(row_weight)
+    weight = csv_row["weight"] || -1
     {
       name: csv_row["genus"],
       period: csv_row["period"],

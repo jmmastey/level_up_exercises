@@ -23,7 +23,6 @@ end
 private
 
 def match_equality(value, matches)
-  return nil unless value.respond_to?(:==)
   match = matches[value]
   yield match if !match.nil?
 end

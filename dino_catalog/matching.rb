@@ -24,9 +24,8 @@ private
 
 def match_equality(value, matches)
   return nil unless value.respond_to?(:==)
-  matches.each do |key, match|
-    yield match if value == key
-  end
+  match = matches[value]
+  yield match if !match.nil?
 end
 
 def match_instance_of(value, matches)

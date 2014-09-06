@@ -52,7 +52,7 @@ class AfroDinoParser < DinoParser
       continent: "Africa",
       diet: csv_row["carnivore"],
       walk: csv_row["walking"],
-      weight: csv_row["weight"],
+      weight: (csv_row["weight"] || -1),
       desc: ""
     }
   end

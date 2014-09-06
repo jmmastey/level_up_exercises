@@ -23,22 +23,22 @@ end
 private
 
 def match_equality(value, matches)
+  return nil unless value.respond_to?(:==)
   matches.each do |key, match|
-    return nil unless value.respond_to?(:==)
     yield match if value == key
   end
 end
 
 def match_instance_of(value, matches)
+  return nil unless value.respond_to?(:is_a?)
   matches.each do |key, match|
-    return nil unless value.respond_to?(:is_a?)
     yield match if key.is_a?(Class) && value.is_a?(key)
   end
 end
 
 def match_regular_exp(value, matches)
+  return nil unless value.respond_to?(:=~)
   matches.each do |key, match|
-    return nil unless value.respond_to?(:=~)
     yield match if key.is_a?(Regexp) && (value =~ key)
   end
 end

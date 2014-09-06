@@ -46,15 +46,26 @@ class AfroDinoParser < DinoParser
   private
 
   def parse_csv_row(csv_row)
+    diet = parse_carnivore(csv_row["carnivore"])
+    row_weight = csv_row["weight"]
+    weight = (row_weight.nil?) ? -1 : kg_to_lbs(row_weight)
     {
       name: csv_row["genus"],
       period: csv_row["period"],
       continent: "Africa",
-      diet: csv_row["carnivore"],
+      diet: diet, 
       walk: csv_row["walking"],
-      weight: (csv_row["weight"] || -1),
+      weight: weight, 
       desc: ""
     }
+  end
+  
+  def parse_carnivore(carnivore_value)
+    carnivore_value == "Yes" ? "Carnivore" : "Herbivore"
+  end
+
+  def kg_to_lbs(weight)
+    (weight * 2.20462).round
   end
 end
 

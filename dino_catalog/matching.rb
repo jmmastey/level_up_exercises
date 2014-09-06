@@ -24,7 +24,7 @@ private
 
 def match_equality(value, matches)
   match = matches[value]
-  yield match if !match.nil?
+  yield match unless match.nil?
 end
 
 def match_instance_of(value, matches)

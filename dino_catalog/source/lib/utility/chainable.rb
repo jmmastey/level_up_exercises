@@ -11,24 +11,24 @@ module Utility
         this = self
         results = super(criteria, sample)
         prepend_hook = proc { |hash| this.where(hash, results) }
-        add_chainable_methods(results, prepend_hook)
+        add_chainable_methods(results, &prepend_hook)
       end
 
       private
 
-      def add_chainable_methods(object, target)
-        CHAINABLE_NAMES.each do |meth|
-          object.define_singleton_method(meth, &target)
+      def add_chainable_methods(object, &target)
+        object.instance_exec(CHAINABLE_NAMES, target) do |a, target|
+          a.each { |i| define_singleton_method(i, &target) }
+          self
         end
-        object
       end
     end
     module QueryMethods
-      def attr_chainable(collection = :entries)
-        class_eval("attr_accessor :#{collection}")
+      def attr_chainable(receiver, product, *aliases, &block)
+        class_eval("attr_accessor :#{receiver}")
         class_eval %{
           def where(criteria, sample)
-            sample ||= #{collection}
+            sample ||= #{receiver}
             sample.select { |entry| entry.matches_all?(criteria) }
           end
         }

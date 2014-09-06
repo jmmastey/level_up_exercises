@@ -7,7 +7,11 @@ module DinoDex
   class Catalog
     include ::DinoDex::Common
     include ::Utility::Chainable
-    attr_chainable :entries
+
+    attr_chainable :entries, :where, :with, :and do |criteria, sample = nil|
+      sample ||= entries
+      sample.select { |entry| entry.matches_all?(criteria) }
+    end
 
     def initialize(*paths)
       @entries ||= []

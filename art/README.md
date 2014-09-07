@@ -13,7 +13,6 @@
 * Adding SOA-caching via Faraday
 * Simple memoize
 * Solve an n+1 sql loading problem
-* Array inside a loop, string copies within a loop:
-  COUNTRY_CODE_MAP.detect? { |k,v| [k.downcase, v.downcase].include? string.downcase }
+* Array inside a loop, string copies within a loop: `COUNTRY_CODE_MAP.detect? { |k,v| [k.downcase, v.downcase].include? string.downcase }`
 * Use `||` instead of `.include?` for small arrays
 * Use `.pluck`, and other useful callbacks. (`delete_all` vs `destroy_all`)

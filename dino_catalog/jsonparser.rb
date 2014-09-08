@@ -35,7 +35,7 @@ class JSONParser
       json_value = dump(obj.instance_variable_get(variable_name))
       "#{json_name}: #{json_value}"
     end
-    '{' + json_object_members.join(', ') + '}'
+    "{" + json_object_members.join(", ") + "}"
   end
 
   def dump_array(array)

@@ -1,3 +1,4 @@
+# rubocop:disable all
 require_relative '../lib/arrowhead.rb'
 require_relative 'spec_helper.rb'
 
@@ -15,3 +16,4 @@ describe Arrowhead do
     end
   end
 end
+# rubocop:enable all

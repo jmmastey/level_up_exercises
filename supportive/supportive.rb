@@ -77,11 +77,11 @@ class BlagPost
     return '' unless comments.length > 0
 
     ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
+              when 1 then "st"
+              when 2 then "nd"
+              when 3 then "rd"
+              else "th"
+              end
     "You will be the #{comments.length}#{ordinal} commenter"
   end
 
@@ -116,6 +116,6 @@ blag = BlagPost.new("author"        => "Foo Bar",
                         mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis
                         parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem
                         facilisis semper ac in est.
-                        ARTICLE
-                   )
+ARTICLE
+)
 puts blag.to_s

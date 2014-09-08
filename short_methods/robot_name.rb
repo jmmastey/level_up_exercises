@@ -1,28 +1,41 @@
 class NameCollisionError < RuntimeError; end;
 
 class Robot
+  MAX_NAMING_ATTEMPTS = 3
+
   attr_accessor :name
 
-  @@registry
+  #@@registry
 
   def initialize(args = {})
     @@registry ||= []
-    @name_generator = args[:name_generator]
+    create_name(args[:name_generator])
+  end
 
+  private
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+  def create_name(name_generator)
+    name_generator ||= lambda(&method(:default_name_generator))
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
+    @name = name_generator.call
+    check_name_validity
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
     @@registry << @name
   end
 
+  def check_name_validity
+    if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+      raise NameCollissionError, "There was a problem generating the robot name!"
+    end
+  end
+
+  def default_name_generator
+    generate_char = -> { ('A'..'Z').to_a.sample }
+    generate_num = -> { rand(10) }
+
+    "#{generate_char.call}#{generate_char.call}#{generate_num.call}" <<
+    "#{generate_num.call}#{generate_num.call}"
+  end
 end
 
 robot = Robot.new

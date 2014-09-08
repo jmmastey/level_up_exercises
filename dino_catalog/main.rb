@@ -26,10 +26,10 @@ end
 def main
   options = get_options
   command = (options[:command].nil?) ? STDIN.read : options[:command]
-  
+
   token_parser = DinoTokenParser.new
   tokens = token_parser.parse(command)
- 
+
   dino_file_path = "dinodex.csv"
   dino_parser = DinoParser.new
   dinos = dino_parser.parse(dino_file_path)

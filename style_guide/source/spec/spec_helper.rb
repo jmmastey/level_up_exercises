@@ -1,3 +1,4 @@
+# rubocop:disable all
 require 'rspec'
 require 'guard/rspec'
 
@@ -39,3 +40,4 @@ def capture_stdout(&block)
   end
   fake.string
 end
+# rubocop:enable all

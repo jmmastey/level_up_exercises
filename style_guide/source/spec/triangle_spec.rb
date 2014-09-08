@@ -1,3 +1,4 @@
+# rubocop:disable all
 require_relative '../lib/triangle.rb'
 require_relative 'spec_helper.rb'
 
@@ -22,3 +23,4 @@ describe Triangle do
     end
   end
 end
+# rubocop:enable all

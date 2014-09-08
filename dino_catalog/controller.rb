@@ -36,11 +36,9 @@ class Controller
 		make_choices
 	end
 
-
 	private
 
 		def search_by_params_hash
-			# I can pass in a hash, and I'd like to get the proper list of dinos back out
 			puts "Please enter a hash of search params:"
 			puts "example: { 'period' : 'cretaceous', 'diet' : 'carnivore' }"
 			
@@ -95,7 +93,5 @@ class Controller
 
 end
 
-
 controller = Controller.new
-
 

@@ -231,7 +231,23 @@ and unstage them `$ git reset filename.txt 	`
 "hello".tr('el', 'ip’)
 ```
 
-&
+####&-unary operator
+
+* Almost the equivalent of calling `#to_proc` on the object
+
+
+A block that is passed to the each function on the [1,2,3] Array:
+
+```
+[1,2,3].each do |x|
+  puts x
+end
+```
+
+A proc assigned to a variable:
+```
+k = Proc.new{ |x| puts x }
+```
 
 inject
 
@@ -280,5 +296,14 @@ curl
 
 bash
 
+grape
+
+functional langs
+
+thread
+
+concurrency
+
+SICP book, lisp
 
 

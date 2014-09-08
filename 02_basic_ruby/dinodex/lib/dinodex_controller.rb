@@ -101,7 +101,7 @@ class DinodexController
 					elsif ["diet"].include? table.headers[index].downcase
 						dinosaur.diet = field
 					elsif ["carnivore"].include? table.headers[index].downcase
-						dinosaur.diet = field.downcase == "yes" ? "Carnivore" : "Omnivore"
+						dinosaur.diet = normalized_diet(field)
 					elsif ["weight_in_lbs", "weight"].include? table.headers[index].downcase
 						dinosaur.weight = field
 					elsif ["walking"].include? table.headers[index].downcase
@@ -117,7 +117,11 @@ class DinodexController
 		end
 		
 		@output.puts 'Found ' + table.length.to_s + ' dinosaurs in ' + file
-	end
+  end
+
+  def normalized_diet(diet)
+    diet.downcase == "yes" ? "Carnivore" : "Herbivore"
+  end
 
 	def listDisplay(dinosaurs = @dinosaurs)
 		dinosaurs.each do |dinosaur|

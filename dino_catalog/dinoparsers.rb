@@ -52,13 +52,13 @@ class AfroDinoParser < DinoParser
       name: csv_row["genus"],
       period: csv_row["period"],
       continent: "Africa",
-      diet: diet, 
+      diet: diet,
       walk: csv_row["walking"],
-      weight: weight, 
+      weight: weight,
       desc: ""
     }
   end
-  
+
   def parse_carnivore(carnivore_value)
     carnivore_value == "Yes" ? "Carnivore" : "Herbivore"
   end

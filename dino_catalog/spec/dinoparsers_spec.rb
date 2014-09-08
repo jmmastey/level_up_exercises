@@ -3,18 +3,9 @@ require "csv"
 
 describe "DinoParser#parse" do
   it "parameterize data to match dinos" do
-    headers = %w(NAME PERIOD CONTINENT DIET WEIGHT_IN_LBS WALKING DESCRIPTION)
-              .map(&:downcase)
     
-    row0 = ["Albertosaurus", "Late Cretaceous", "North America",
-            "Carnivore", 2000, "Biped", "Like a T-Rex but smaller."]
-    row1 = ["Test1", "Test2", "Test3", "Test4", 0, "Test6", "Test7"]
-    
-    data = [ row0, row1 ]
-    rows = data.map { |d| CSV::Row.new(headers, d) }
+    dinos = DinoParser.new.parse("dinodex.csv")
 
-    dino_parser = DinoParser.new
-    dinos = dino_parser.parse(rows)
     expect(dinos[0].name).to eq("Albertosaurus")
     expect(dinos[0].period).to eq("Late Cretaceous")
     expect(dinos[0].continent).to eq("North America")
@@ -43,14 +34,9 @@ end
 
 describe "AfroDinoParser#parse" do
   it "parameterize data from a matrix to create dinosaurs" do
-    headers = %w(genus period carnivore weight walking)
-    data = [
-      ["Abrictosaurus", "Jurassic", "No", 100, "Biped"],
-      ["Test1", "Test2", "Yes", 1000, "Test3"]
-    ]
-    rows = data.map { |d| CSV::Row.new(headers, d) }
+    
     dino_parser = AfroDinoParser.new
-    dinos = dino_parser.parse(rows)
+    dinos = dino_parser.parse("african_dinosaur_export.csv")
 
     expect(dinos[0].name).to eq("Abrictosaurus")
     expect(dinos[0].period).to eq("Jurassic")
@@ -60,11 +46,11 @@ describe "AfroDinoParser#parse" do
     expect(dinos[0].desc).to eq("")
     expect(dinos[0].diet).to eq("Herbivore")
 
-    expect(dinos[1].name).to eq("Test1")
-    expect(dinos[1].period).to eq("Test2")
+    expect(dinos[1].name).to eq("Afrovenator")
+    expect(dinos[1].period).to eq("Jurassic")
     expect(dinos[1].continent).to eq("Africa")
-    expect(dinos[1].weight).to eq(1000)
-    expect(dinos[1].walk).to eq("Test3")
+    expect(dinos[1].weight).to eq(-1)
+    expect(dinos[1].walk).to eq("Biped")
     expect(dinos[1].desc).to eq("")
     expect(dinos[1].diet).to eq("Carnivore")
   end

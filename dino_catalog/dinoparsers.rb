@@ -4,24 +4,14 @@ require "./matching"
 
 require "csv"
 
-class CSV::Table
-  def map(&blk)
-    a = []
-    each do |row|
-      a.push(blk.call(row))
-    end
-    a
-  end
-end
-
 class DinoParser
-  @@csv_opts = {
+  CSVOPTS = {
     headers: true,
     header_converters: :downcase,
     converters: :integer
   }
   def parse(data)
-    data = CSV.read(data, @@csv_opts) if data.is_a? String
+    data = CSV.read(data, CSVOPTS) 
     data.map do |row|
       Dinosaur.new(parse_csv_row(row.to_hash))
     end

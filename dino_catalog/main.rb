@@ -16,7 +16,7 @@ def get_options
       options[:export] = true
     end
 
-    opts.on("-c", "-bcommand=MANDATORY", "parse the command") do |c|
+    opts.on("-c", "-command=MANDATORY", "parse the command") do |c|
       options[:command] = c
     end
   end.parse!

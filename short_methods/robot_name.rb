@@ -14,21 +14,21 @@ class Robot
 
   def generate_name
 
-    generated_name = ''
+    generated_name = ""
     #generate_num = -> { rand(10) }
     #generate_char = -> { ('A'..'Z').to_a.sample }
 
     2.times.collect { generated_name << generate_char }
     3.times.collect { generated_name << generate_num.to_s }
 
-    if name_valid?(generated_name)
+    if is_name_valid?(generated_name)
       raise NameCollisionError, 'There was a problem generating the robot name'
     else
-      add_robot_name(generated_name)
+      set_name(generated_name)
     end
   end
 
-  def add_robot_name(name)
+  def set_name(name)
     @name = name
     @@registry << name
   end
@@ -41,7 +41,7 @@ class Robot
     ('A'..'Z').to_a.sample
   end
 
-  def name_valid?(name)
+  def is_name_valid?(name)
     !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
   end
 end

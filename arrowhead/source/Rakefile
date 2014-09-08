@@ -2,11 +2,7 @@ require 'rubygems'
 
 require 'rspec/core/rake_task'
 
-def run_command(cmd)
-  IO.popen(cmd).each do |line|
-    puts line.chomp
-  end
-end
+require_relative 'spec/spec_helper.rb'
 
 RSpec::Core::RakeTask.new(:spec)
 
@@ -15,10 +11,6 @@ task default: :guard
 task :guard do
   run_command('bundle exec guard --no-interactions --clear')
 end
-
-# task :rubocop do |_, args|
-#   run_command("bundle exec rubocop #{args.join(' ')}")
-# end
 
 task :specs do
   Rake::Task[:rspec].invoke('spec')

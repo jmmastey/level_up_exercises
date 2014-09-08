@@ -1,5 +1,7 @@
 load "#{File.dirname(__FILE__)}/../main.rb"
 
+require_relative 'spec_helper.rb'
+
 describe DinoDex::Catalog do
   c = DinoDex::Catalog.new('data/african_dinosaur_export.csv').import('data/dinodex.csv')
 

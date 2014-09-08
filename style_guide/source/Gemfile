@@ -12,6 +12,5 @@ group :development, :test do
   gem 'guard-shell', require: false
   gem 'rspec', '~> 3.0.0'
   gem 'coveralls', require: false
-  gem 'extlib'
   gem 'rubocop'
 end

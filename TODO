@@ -4,3 +4,4 @@ TODO:
     - global:       switch to activesupport concerns
                     https://gist.github.com/scottsims/09a23ee408c260351111
     - importer.rb:  needs tidying + refactoring
+    - catalog.rb:   revaluate usage of define_singleton_method for chaining

@@ -13,7 +13,7 @@ def get_options
   OptionParser.new do |opts|
     opts.banner = "Usage: ./main.rb [commands]"
 
-    opts.on("-e", "--export", "export to json") do |_e|
+    opts.on("-e", "--export", "export to json") do |e|
       options[:export] = true
     end
 

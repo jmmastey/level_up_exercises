@@ -1,4 +1,4 @@
-require './distance'
+require "./distance"
 
 # top level documentation
 class String

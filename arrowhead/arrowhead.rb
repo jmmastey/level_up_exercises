@@ -17,7 +17,6 @@ class Arrowhead
   attr_reader :region, :shape
 
   def self.classify(region, shape)
-
     @region = region
     @shape = shape
 
@@ -42,5 +41,4 @@ class Arrowhead
   end
 end
 
-Arrowhead::classify(:northern_plains, :lanceolate)
-
+Arrowhead.classify(:northern_plains, :lanceolate)

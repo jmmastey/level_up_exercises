@@ -1,9 +1,5 @@
 module Utility
   module ObjectMixins
-    def attr_accessible?(v)
-      respond_to?(v.to_sym) && respond_to?("#{v.to_s}=".to_sym)
-    end
-
     def try(*a, &b)
       if a.empty? && block_given?
         yield self
@@ -13,12 +9,6 @@ module Utility
     end
   end
   Object.include(ObjectMixins)
-  module BlocktasticSugar
-    # TODO: "INSIDE" DSL HERE (instance_eval wrapper)
-  end
-  module DemandMixins
-    # TODO: "DEMAND" DSL HERE (require/autoload replacement)
-  end
   module HashMixins
     def inverse
       inject({}) do |hash, (key, array)|

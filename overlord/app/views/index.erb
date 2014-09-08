@@ -1,0 +1,42 @@
+<div class="page-header">
+    <h1>Overlord</h1>
+    <!--Overlord - Evil Genius Bom-->
+</div>
+<div class="row" ng-controller="BombController">
+    <div class="col-md-6 col-md-offset-3 col-sm-10 col-xs-offset-1 col-xs-10 col-sm-offset-1">
+
+        <div class="panel panel-default" ng-show="bombActive">
+            <div class="panel-heading"><h4>STATUS</h4></div>
+            <div class="panel-body">
+                <div class="alert alert-info bomb-status">Deactivated</div>
+                <div class="alert alert-info bomb-timer" ng-bind-template="Timer: {{detonationTime}}">Timer: {{detonationTime}}</div>
+            </div>
+        </div>
+        <!--<div class="row">-->
+        <%= partial :initial_form %>
+
+        <div class="row">
+            <form name="deactivationForm" rc-submit="submit()" class="form-horizontal" ng-show="bombActive" novalidate>
+                <div class="control-group" ng-class="activeErrorClass('deactivationEntry')">
+                    <label class="control-label" for="deactivationEntry">Deactivate</label>
+
+                    <div class="controls">
+                        <input ng-model="deactivationEntry" type="text" minlength="4" ng-click="setStep(4)"
+
+                               name="deactivationEntry" value="{{deactivationEntry}}" required autofocus>
+                            <span class="help-block"
+                                  ng-show="deactivationForm.deactivationEntry.$invalid && deactivationForm.deactivationEntry.$dirty">
+                                {{activeErrorMessage('deactivationEntry')}}
+                            </span>
+                    </div>
+                </div>
+            </form>
+            <!--<button class="btn btn-lg btn-danger" type="submit"-->
+                  <!--ng-click="bombActionClick('Deactivate')">Deactivate</button>-->
+            <!--<button class="btn btn-lg btn-success" type="submit"-->
+                  <!--ng-click="bombActionClick('Activate')">Activate</button>-->
+
+        </div>
+
+    </div>
+</div>

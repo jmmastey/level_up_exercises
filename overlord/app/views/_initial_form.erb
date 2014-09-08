@@ -1,0 +1,69 @@
+<div ng-controller="BombActivationController" class="col-md-12">
+    <form name="activationForm" rc-submit="submit()" class="form-horizontal row" novalidate ng-hide="bombActive">
+        <div class="form-group" ng-class="errorClass(activationForm.activationCode)">
+            <div class="control-group">
+                <label class="control-label" for="activationCode">Activation Code</label>
+
+                <div class="controls">
+                    <a class="form-control" data-ng-model="activationCode" type="number"
+                       ng-minlength="4" data-ng-keypad-input="numeric"
+                       data-ng-keypad-restrict="^[0-9]{0,4}$"
+                       name="activationCode" required autofocus tabindex="1">{{activationCode}}</a>
+                            <span class="help-block"
+                                  ng-show="showError(activationForm.activationCode)">
+                                {{errorMessage(activationForm.activationCode)}}
+                            </span>
+                </div>
+            </div>
+            <!--<span ng-bind-template="Activation Code: {{activationCode}}">Activation Code: Not Set</span>-->
+        </div>
+        <div class="form-group" ng-class="errorClass(activationForm.deactivationCode)">
+            <div class="control-group">
+                <label class="control-label" for="deactivationCode">Deactivation Code</label>
+
+                <div class="controls">
+                    <a data-ng-model="deactivationCode" type="number" ng-minlength="4"
+                       data-ng-keypad-input="numeric" class="form-control" tabindex="2"
+                       data-ng-keypad-restrict="^[0-9]{0,4}$"
+                       name="deactivationCode" required autofocus>{{deactivationCode}}</a>
+                            <span class="help-block"
+                                  ng-show="showError(activationForm.deactivationCode)">
+                                {{errorMessage(activationForm.deactivationCode)}}
+                            </span>
+                </div>
+            </div>
+            <!--<span ng-bind-template="Activation Code: {{activationCode}}">Activation Code: Not Set</span>-->
+        </div>
+        <div class="form-group" ng-class="errorClass(activationForm.detonationTimeEntry)">
+            <div class="control-group">
+                <label class="control-label" for="detonationTimeEntry">Detonation Timer</label>
+
+                <div class="controls">
+                    <a bombtime data-ng-model="detonationTimeEntry" type="text" ng-minlength="1"
+                       data-ng-keypad-input="numeric" class="form-control" tabindex="3"
+                       name="detonationTimeEntry" required autofocus>{{detonationTimeEntry}}</a>
+                            <span class="help-block"
+                                  ng-show="showError(activationForm.detonationTimeEntry)">
+                                {{errorMessage(activationForm.detonationTimeEntry)}}
+                            </span>
+                </div>
+            </div>
+            <!--<span ng-bind-template="Activation Code: {{activationCode}}">Activation Code: Not Set</span>-->
+        </div>
+
+    </form>
+
+    <div data-ng-keypad="numeric" data-auto-close="false" data-ng-draggable class="numpad row">
+        <div ng-include="" src="'partials/keypad/numeric-iphone.html'"></div>
+    </div>
+    <!--<form class="form-inline">-->
+    <!--<div class="form-group col-md-12">-->
+    <!--<label for="bomb-timer">Detonation Time</label>-->
+    <!--<input type="text" class="form-control" id="bomb-timer" placeholder="Time until detonation">-->
+    <!--<label for="bomb-activation-coder">Activation Code</label>-->
+    <!--<input type="text" class="form-control" id="bomb-activation-code" placeholder="Enter Activation Code">-->
+    <!--<label for="bomb-deactivation-code">Deactivation Code</label>-->
+    <!--<input type="text" class="form-control" id="bomb-deactivation-code" placeholder="Enter Deactivation Code">-->
+    <!--</div>-->
+    <!--</div>-->
+</div>

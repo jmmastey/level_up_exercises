@@ -59,13 +59,17 @@ class AfroDinoParser < DinoParser
 end
 
 class DinoTokenParser
+  TOKENCLASSES = [ AndToken, SortToken ]
   def parse(command)
     raw_tokens = command.split(/;\s*/)
     raw_tokens.map do |raw_token|
       parts = raw_token.split(/\s+/)
-      tag = parts[0]
-      Match(tag,       "AND" => -> { AndToken.new(parts) },
-                       "SORT" => -> { SortToken.new(parts)       })
+      parse_token(parts)
+    end
+  end
+  def parse_token(parts)
+    TOKENCLASSES.each do |token_class| 
+      return token_class.new(parts) if token_class.accepts?(parts)
     end
   end
 end

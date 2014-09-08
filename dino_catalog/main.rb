@@ -6,6 +6,7 @@ require "./dinodex"
 require "./dinoparsers.rb"
 require "./matching"
 require "./jsonparser"
+require "./dinoparsestrategy"
 
 def get_options
   options = {}
@@ -27,18 +28,18 @@ def main
   options = get_options
   command = (options[:command].nil?) ? STDIN.read : options[:command]
 
-  token_parser = DinoTokenParser.new
-  tokens = token_parser.parse(command)
+  strategies = [ 
+    DinoParseStrategy.new(file_name: "dinodex.csv", dino_parser: DinoParser.new),
+    DinoParseStrategy.new(file_name: "african_dinosaur_export.csv", dino_parser: AfroDinoParser.new)
+  ]
 
-  dino_file_path = "dinodex.csv"
-  dino_parser = DinoParser.new
-  dinos = dino_parser.parse(dino_file_path)
-
-  afro_dino_file_path = "african_dinosaur_export.csv"
-  afro_dino_parser = AfroDinoParser.new
-  dinos += afro_dino_parser.parse(afro_dino_file_path)
+  dinos = []
+  strategies.each {|strategy| dinos += strategy.parse_dinos }
 
   dinodex = DinoDex.new(dinos)
+
+  token_parser = DinoTokenParser.new
+  tokens = token_parser.parse(command)
 
   result = evaluate(tokens, dinodex)
 
@@ -49,10 +50,13 @@ def main
   end
 end
 
+def parse_dinos(file, dino_parser)
+  dino_parser.parse(file)
+end
+
 def evaluate(tokens, dinodex)
-  query = tokens.reduce(dinodex.new_query) do |query, token|
-    token.execute_token(query)
-  end
+  query = dinodex.new_query
+  tokens.each { |token| token.apply_to(query) }
   query.result
 end
 

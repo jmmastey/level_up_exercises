@@ -14,7 +14,7 @@ end
 describe "AndToken#handle" do
   it "it should handle a query for a token, arg, op, field" do
 
-    dinodex = test_dinodex.new_query
+    query = test_dinodex.new_query
 
     token = AndToken.new(["AND", :name, :==, "Albertosaurus"])
 
@@ -22,7 +22,7 @@ describe "AndToken#handle" do
     expect(token.op).to eq(:==)
     expect(token.arg).to eq("Albertosaurus")
 
-    result = token.execute_token(dinodex).result
+    result = token.apply_to(query).result
 
     expect(result.size).to eq(1)
     expect(result[0].name).to eq("Albertosaurus")
@@ -37,7 +37,7 @@ describe "SortToken#execute" do
 
     expect(token.field).to eq(:name)
 
-    result = token.execute_token(dinodex.new_query).result
+    result = token.apply_to(dinodex.new_query).result
 
     expect(result.size).to eq(9)
     expect(result[0].name).to eq("Albertonykus")

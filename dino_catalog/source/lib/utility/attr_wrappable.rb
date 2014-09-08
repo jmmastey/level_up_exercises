@@ -16,13 +16,6 @@ module Utility
     module Core
       def attr_wrappable(method, &block)
         instance_exec(method, block) { |m, b| @wrappables.merge!(m => b) }
-        build_wrappable_module(method, &block)
-      end
-
-      private
-
-      def build_wrappable_module(method_name, &block)
-        # hook = Hook.clone
         prepend Hook
       end
     end

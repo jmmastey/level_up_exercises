@@ -13,3 +13,7 @@ Style/CollectionMethods:
 # C: Use each_with_object instead of inject.
 Style/EachWithObject:
   Enabled: false
+
+# C: Removing the preference for string single quotes
+Style/StringLiterals:
+  Enabled: false

@@ -3,11 +3,14 @@ require "csv"
 
 describe "DinoParser#parse" do
   it "parameterize data to match dinos" do
-    headers = %w(NAME PERIOD CONTINENT DIET WEIGHT_IN_LBS WALKING DESCRIPTION).map(&:downcase)
-    data = [
-      ["Albertosaurus", "Late Cretaceous", "North America", "Carnivore", 2000, "Biped", "Like a T-Rex but smaller."],
-      ["Test1", "Test2", "Test3", "Test4", 0, "Test6", "Test7"]
-    ]
+    headers = %w(NAME PERIOD CONTINENT DIET WEIGHT_IN_LBS WALKING DESCRIPTION)
+              .map(&:downcase)
+    
+    row0 = ["Albertosaurus", "Late Cretaceous", "North America",
+            "Carnivore", 2000, "Biped", "Like a T-Rex but smaller."]
+    row1 = ["Test1", "Test2", "Test3", "Test4", 0, "Test6", "Test7"]
+    
+    data = [ row0, row1 ]
     rows = data.map { |d| CSV::Row.new(headers, d) }
 
     dino_parser = DinoParser.new

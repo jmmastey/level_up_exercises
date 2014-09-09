@@ -14,7 +14,7 @@ class Arrowhead
     },
   }
 
-  attr_reader :region, :shape
+  attr_reader :region, :shape, :arrowhead_name
 
   def self.classify(region, shape)
     @region = region
@@ -28,8 +28,7 @@ class Arrowhead
       fail "Unknown shape value. Are you sure you know what you're talking about?"
     end
 
-    arrowhead = CLASSIFICATIONS[region].fetch shape
-    puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
+    arrowhead_name = CLASSIFICATIONS[region].fetch shape
   end
 
   def self.valid_region?
@@ -39,6 +38,9 @@ class Arrowhead
   def self.valid_shape?
     CLASSIFICATIONS[@region].key? @shape
   end
+
+  def to_s
+    "You have a(n) '#{arrowhead_name}' arrowhead. Probably priceless."
+  end
 end
 
-Arrowhead.classify(:northern_plains, :lanceolate)

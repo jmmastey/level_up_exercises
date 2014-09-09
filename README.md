@@ -269,8 +269,8 @@ Procs, Blocks, & Lambdas, & Closures
 Know the difference!
 
 ## Additional Topics
-Virtual Machine
 
+### Daemons 
 **Daemon (system service)** - a computer program which runs a background process, rather than being under direct control of an interactive user
 
 * Usually started during initial boot sequence by Init
@@ -280,7 +280,7 @@ Virtual Machine
 
 
 
-Daemon controls :
+#### Daemon controls:
 
 ```
 start: start a service
@@ -289,6 +289,18 @@ restart: restart a service without reloading its job config file
 reload: send a SIGHUP signal to running process
 status: return the status of a service
 ```
+
+
+### Rubocop
+
+` $ gem install rubocop `
+
+` $ cat .hound.yml `
+
+` $ rubocop -c .hound.yml /dino_catalog `
+
+
+### Misc.
 
 nginx
 
@@ -306,5 +318,6 @@ concurrency
 
 SICP book, lisp
 
+Virtual Machine
 
-Rubocop - Joe has a yaml hound file
+

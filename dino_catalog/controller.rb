@@ -1,4 +1,4 @@
-require 'json'
+require "json"
 require_relative "dino_collection"
 
 class Controller

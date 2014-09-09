@@ -1,6 +1,5 @@
 require "./dino"
-require "./dinotoken"
-require "./matching"
+require "./dinocommand"
 
 require "csv"
 
@@ -11,7 +10,7 @@ class DinoParser
     converters: :integer
   }
   def parse(data)
-    data = CSV.read(data, CSVOPTS) 
+    data = CSV.read(data, CSVOPTS)
     data.map do |row|
       Dinosaur.new(parse_csv_row(row.to_hash))
     end
@@ -52,24 +51,27 @@ class AfroDinoParser < DinoParser
   def parse_carnivore(carnivore_value)
     carnivore_value == "Yes" ? "Carnivore" : "Herbivore"
   end
-
-  def kg_to_lbs(weight)
-    (weight * 2.20462).round
-  end
 end
 
-class DinoTokenParser
-  TOKENCLASSES = [ AndToken, SortToken ]
-  def parse(command)
-    raw_tokens = command.split(/;\s*/)
-    raw_tokens.map do |raw_token|
-      parts = raw_token.split(/\s+/)
-      parse_token(parts)
-    end
+class DinoCommandParser
+  COMMANDCLASSES = [AndCommand, SortCommand]
+
+  def parse(command_text)
+    commands = command_text.split(/;\s*/)
+    commands.map { |command| parse_command(command) }
   end
-  def parse_token(parts)
-    TOKENCLASSES.each do |token_class| 
-      return token_class.new(parts) if token_class.accepts?(parts)
+
+private
+
+  def parse_command(command)
+    arguments = command.split(/\s+/)
+    parse_arguments(arguments)
+  end
+
+  def parse_arguments(arguments)
+    COMMANDCLASSES.each do |command_class|
+      return command_class.new(arguments) if command_class.accepts?(arguments)
     end
+    raise "ParseError: There was no class the accepts #{arguments}"
   end
 end

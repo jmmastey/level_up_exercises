@@ -72,7 +72,7 @@ end
 describe "DinoTokenParser#parse" do
   it "takes in a string and produces a token " \
      "chain" do
-    parser = DinoTokenParser.new
+    parser = DinoCommandParser.new
 
     tokens = parser.parse("AND name > A; SORT weight")
 

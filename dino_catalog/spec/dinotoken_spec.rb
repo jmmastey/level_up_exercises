@@ -1,4 +1,4 @@
-require "./dinotoken"
+require "./dinocommand"
 require "./dinodex"
 require "./dinoparsers"
 
@@ -16,7 +16,7 @@ describe "AndToken#handle" do
 
     query = test_dinodex.new_query
 
-    token = AndToken.new(["AND", :name, :==, "Albertosaurus"])
+    token = AndCommand.new(["AND", :name, :==, "Albertosaurus"])
 
     expect(token.field).to eq(:name)
     expect(token.op).to eq(:==)
@@ -33,7 +33,7 @@ describe "SortToken#execute" do
   it "it should handle a query for a sort token" do
     dinodex = test_dinodex
 
-    token = SortToken.new(["SORT", :name])
+    token = SortCommand.new(["SORT", :name])
 
     expect(token.field).to eq(:name)
 

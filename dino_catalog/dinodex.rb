@@ -10,8 +10,8 @@ class DinoDex
     @dinos = dinos
   end
 
-  def query(key, op, arg)
-    DinoQuery.new(@dinos.dup).and(key, op, arg)
+  def perform_query(commands)
+    new_query.perform_commands!(commands).result
   end
 
   def new_query

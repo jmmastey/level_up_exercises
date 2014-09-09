@@ -1,10 +1,10 @@
 #!/usr/bin/ruby
 
 require "optparse"
+require "json"
 
 require "./dinodex"
 require "./dinoparsers.rb"
-require "./matching"
 require "./jsonparser"
 require "./dinoparsestrategy"
 
@@ -13,7 +13,7 @@ def get_options
   OptionParser.new do |opts|
     opts.banner = "Usage: ./main.rb [commands]"
 
-    opts.on("-e", "--export", "export to json") do |e|
+    opts.on("-e", "--export", "export to json") do
       options[:export] = true
     end
 
@@ -24,40 +24,40 @@ def get_options
   options
 end
 
+def parse_strategies
+  [
+     DinoParseStrategy.new(
+       file_name: "dinodex.csv",
+       dino_parser: DinoParser.new
+     ),
+     DinoParseStrategy.new(
+       file_name: "african_dinosaur_export.csv",
+       dino_parser: AfroDinoParser.new
+     )
+  ]
+end
+
+def dinos
+  dinos = []
+  parse_strategies.each { |strategy| dinos += strategy.parse_dinos }
+  dinos
+end
+
 def main
   options = get_options
-  command = (options[:command].nil?) ? STDIN.read : options[:command]
 
-  strategies = [ 
-    DinoParseStrategy.new(file_name: "dinodex.csv", dino_parser: DinoParser.new),
-    DinoParseStrategy.new(file_name: "african_dinosaur_export.csv", dino_parser: AfroDinoParser.new)
-  ]
-
-  dinos = []
-  strategies.each {|strategy| dinos += strategy.parse_dinos }
+  command_parser = DinoCommandParser.new
+  command_text = (options[:command].nil?) ? STDIN.read : options[:command]
+  commands = command_parser.parse(command_text)
 
   dinodex = DinoDex.new(dinos)
-
-  token_parser = DinoTokenParser.new
-  tokens = token_parser.parse(command)
-
-  result = evaluate(tokens, dinodex)
+  result = dinodex.perform_query(commands)
 
   if options[:export]
-    puts JSONParser.new.dump(result)
+    puts JSON.dump(result)
   else
     puts result
   end
-end
-
-def parse_dinos(file, dino_parser)
-  dino_parser.parse(file)
-end
-
-def evaluate(tokens, dinodex)
-  query = dinodex.new_query
-  tokens.each { |token| token.apply_to(query) }
-  query.result
 end
 
 main

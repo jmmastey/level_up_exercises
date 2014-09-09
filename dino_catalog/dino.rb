@@ -1,4 +1,7 @@
+require "./jsonparser"
+
 class Dinosaur
+  include JSONable
   attr_reader :name, :period, :continent, :diet, :weight, :walk, :desc
   def initialize(values)
     @name = values[:name]

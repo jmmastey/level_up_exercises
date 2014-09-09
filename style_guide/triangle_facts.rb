@@ -46,7 +46,7 @@ class Triangle
   end
 
   def scalene?
-    equilateral? || isosceles? ? false : true
+    !(equilateral? || isosceles?)
   end
 end
 

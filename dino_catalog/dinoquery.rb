@@ -25,6 +25,6 @@ class DinoQuery
   def perform_command!(command)
     return and!(command.field, command.op, command.arg) if command.is_a? AndCommand
     return sort!(command.field) if command.is_a? SortCommand
-    raise "Command not found for query!: #{command}"
+    fail "Command not found for query!: #{command}"
   end
 end

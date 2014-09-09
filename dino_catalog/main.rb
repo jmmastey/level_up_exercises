@@ -26,14 +26,14 @@ end
 
 def parse_strategies
   [
-     DinoParseStrategy.new(
-       file_name: "dinodex.csv",
-       dino_parser: DinoParser.new
-     ),
-     DinoParseStrategy.new(
-       file_name: "african_dinosaur_export.csv",
-       dino_parser: AfroDinoParser.new
-     )
+    DinoParseStrategy.new(
+      file_name: "dinodex.csv",
+      dino_parser: DinoParser.new
+    ),
+    DinoParseStrategy.new(
+      file_name: "african_dinosaur_export.csv",
+      dino_parser: AfroDinoParser.new
+    )
   ]
 end
 

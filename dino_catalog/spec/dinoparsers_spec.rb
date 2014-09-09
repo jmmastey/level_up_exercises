@@ -3,7 +3,7 @@ require "csv"
 
 describe "DinoParser#parse" do
   it "parameterize data to match dinos" do
-    
+
     dinos = DinoParser.new.parse("dinodex.csv")
 
     expect(dinos[0].name).to eq("Albertosaurus")
@@ -34,7 +34,7 @@ end
 
 describe "AfroDinoParser#parse" do
   it "parameterize data from a matrix to create dinosaurs" do
-    
+
     dino_parser = AfroDinoParser.new
     dinos = dino_parser.parse("african_dinosaur_export.csv")
 

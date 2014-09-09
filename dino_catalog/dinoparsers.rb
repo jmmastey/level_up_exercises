@@ -61,7 +61,7 @@ class DinoCommandParser
     commands.map { |command| parse_command(command) }
   end
 
-private
+  private
 
   def parse_command(command)
     arguments = command.split(/\s+/)
@@ -72,6 +72,6 @@ private
     COMMANDCLASSES.each do |command_class|
       return command_class.new(arguments) if command_class.accepts?(arguments)
     end
-    raise "ParseError: There was no class the accepts #{arguments}"
+    fail "ParseError: There was no class the accepts #{arguments}"
   end
 end

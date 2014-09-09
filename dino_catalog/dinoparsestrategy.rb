@@ -1,5 +1,5 @@
 class DinoParseStrategy
-  attr :file_name, :dino_parser
+  attr_reader :file_name, :dino_parser
 
   def initialize(values)
     @file_name = values[:file_name]

@@ -299,6 +299,9 @@ status: return the status of a service
 
 ` $ rubocop -c .hound.yml /dino_catalog `
 
+new branch
+
+
 
 ### Misc.
 

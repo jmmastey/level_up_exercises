@@ -90,7 +90,6 @@ class Controller
       all_the_dinos.print_weighs_more_than(2000)
       all_the_dinos.print_weighs_more_than(1999)
     end
-
 end
 
 controller = Controller.new

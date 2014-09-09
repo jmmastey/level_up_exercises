@@ -10,7 +10,7 @@ describe Arrowhead do
 
   context 'arrowhead' do
     describe "valid" do
-      it "should return a valid region" do
+      it "should return a valid arrowhead" do
         arrowhead = Arrowhead.classify(:far_west, :stemmed)
         expect(arrowhead).to match("Stemmed")
       end
@@ -18,15 +18,13 @@ describe Arrowhead do
 
     describe "invalid" do
       it "should throw a proper error for a invalid region" do
-        expect {
-            arrowhead = Arrowhead.classify(:far_wessst, :stemmed)
-        }.to raise_error(RuntimeError)
+        expect { Arrowhead.classify(:far_wessst, :stemmed) }.to raise_error
+        (RuntimeError)
       end
 
       it "should throw a proper error for a invalid shape" do
-        expect {
-          arrowhead = Arrowhead.classify(:far_west, :stemmers)
-        }.to raise_error(RuntimeError)
+        expect { Arrowhead.classify(:far_west, :stemmers) }.to raise_error
+        (RuntimeError)
       end
     end
   end

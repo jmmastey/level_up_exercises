@@ -249,7 +249,7 @@ A proc assigned to a variable:
 k = Proc.new{ |x| puts x }
 ```
 
-inject
+inject/reduce (combine many things into one)
 
 lambda
 
@@ -307,3 +307,4 @@ concurrency
 SICP book, lisp
 
 
+Rubocop - Joe has a yaml hound file

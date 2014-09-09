@@ -31,16 +31,19 @@ Go check out the CSVs and come back. Done? Cool, I've just got a few features I 
 
 Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long and up to 8 tons! Suh-weet.)
 
---Parse African dinos (reformat?)
---Print all known facts
---Print all in a given collection
+
+## Notes
+
 Combine criteria (chain filter calls)
 
 json.parse
+
 cases to method name matching (using .send)
+
 symbol to lambda (ex. .map(&:to_sym) )
-query(key, op, val) via John
+
 separate classes into own files
+
 converter to reject nils
 .map into .each
 require json
@@ -56,7 +59,7 @@ VIM
 
 rubocop
 
-Builtin Testin
+Builtin Testing
 
 mini test 
 fixtures
@@ -65,4 +68,15 @@ rspec and factory girl (unit tests, ruby against some objects)
 cucumber (integration/behavioral)
 
 
+optparse gem 
+- to parse command line arguments
 
+
+
+
+#### From Sri
+if !something to unless something
+
+Custom header converters
+
+Tabs and spaces

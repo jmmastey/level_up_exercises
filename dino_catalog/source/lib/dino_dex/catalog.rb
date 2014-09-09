@@ -22,13 +22,14 @@ module DinoDex
       add_chainables(results, [:where, :with, :and], &hook)
     end
 
-    def initialize(*paths)
+    def initialize(klass, *paths)
       @entries ||= []
+      @entry_klass = klass
       import(*paths) unless paths.empty?
     end
 
     def import(*paths)
-      @entries = Catalog.load(DinoDex::Dinosaur, entries, *paths)
+      @entries = Catalog.load(@entry_klass, entries, *paths)
       entries.flatten
     end
 

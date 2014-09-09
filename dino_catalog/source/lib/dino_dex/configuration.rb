@@ -1,8 +1,6 @@
 require 'yaml'
 
 class Configuration
-  attr_accessor :raw
-
   def initialize(file_path)
     @raw = Configuration.normalize_partial(YAML.load_file(file_path))
   end
@@ -25,6 +23,10 @@ class Configuration
     @raw.try(:global).try(:fields).try(:formatters) || []
   end
 
+  def field_keys
+    @raw.try(:fields).try(:keys)
+  end
+
   def field_formatters
     formatters(default_field_formatters, :formatters)
   end
@@ -38,7 +40,7 @@ class Configuration
     formatters(default_header_formatters, :header_formatters)
   end
 
-  def lexicon
+  def field_translations
     @raw[:fields].inject({}) do |vocab, (field, opts)|
       if opts.try(:has_key?, :lexicon)
         vocab << { field => opts[:lexicon] }
@@ -48,7 +50,7 @@ class Configuration
     end
   end
 
-  def translations
+  def header_translations
     table = @raw[:fields].inject({}) do |vocab, (field, opts)|
       if opts.is_a?(Hash) && opts.try(:translations)
         vocab << { field => opts[:translations] }
@@ -61,6 +63,10 @@ class Configuration
 
   def value_type(field)
     @raw.try(:fields).try(field).try(:type) || :symbol
+  end
+
+  def normalized_value(field, value)
+    Configuration.normalize_value(value_type(field), value)
   end
 
   def self.normalize_partial(data)

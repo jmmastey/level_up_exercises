@@ -29,8 +29,8 @@ class Triangle
 
   def type_statement
     return 'This triangle is equilateral!' if equilateral?
-    return 'This triangle is isosceles! Also, that word is hard to type.' if isosceles?
-    return 'This triangle is scalene and mathematically boring.' if scalene?
+    return 'This triangle is isosceles!' if isosceles?
+    return 'This triangle is scalene!' if scalene?
   end
 
   def recite_facts
@@ -42,11 +42,11 @@ class Triangle
   end
 
   def angles
-    angleA = radians_to_degrees(Math.acos(cosine(@side2, @side3, @side1)))
-    angleB = radians_to_degrees(Math.acos(cosine(@side1, @side3, @side2)))
-    angleC = radians_to_degrees(Math.acos(cosine(@side1, @side2, @side3)))
+    angle_a = radians_to_degrees(Math.acos(cosine(@side2, @side3, @side1)))
+    angle_b = radians_to_degrees(Math.acos(cosine(@side1, @side3, @side2)))
+    angle_c = radians_to_degrees(Math.acos(cosine(@side1, @side2, @side3)))
 
-    [angleA, angleB, angleC]
+    [angle_a, angle_b, angle_c]
   end
 
   def cosine(a, b, c)

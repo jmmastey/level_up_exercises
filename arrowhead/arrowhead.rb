@@ -21,11 +21,11 @@ class Arrowhead
     @shape = shape
 
     unless valid_region?
-      raise "Unknown region, please provide a valid region."
+      fail "Unknown region, please provide a valid region."
     end
 
     unless valid_shape?
-      raise "Unknown shape value. Are you sure you know what you're talking about?"
+      fail "Unknown shape value. Are you sure you know what you're talking about?"
     end
 
     arrowhead = CLASSIFICATIONS[region].fetch shape

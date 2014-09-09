@@ -28,12 +28,18 @@ class Dino
 
   def to_hash
     hash = {}
-    instance_variables.each { |var| hash[var.to_s.delete("@")] = instance_variable_get(var) }
+
+    instance_variables.each do |var|
+      hash[var.to_s.delete("@")] = instance_variable_get(var) 
+    end
+
     hash
   end
 
   def to_s
-    to_hash.map{ |key, val| "#{key.capitalize}: #{val}" }.join(" --- ")
+    to_hash.map do |key, val|
+      "#{key.capitalize}: #{val}" 
+    end.join(" --- ")
   end
 end
 

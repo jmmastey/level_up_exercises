@@ -20,13 +20,13 @@ class Controller
     choice = gets.chomp.downcase
 
     case choice
-    when 'all'
+    when "all"
       all_the_dinos.print_all
-    when 'params'
+    when "params"
       search_by_params_hash
-    when 'add'
+    when "add"
       new_csv
-    when 'exit'
+    when "exit"
       exit
     when "examples"
       print_examples
@@ -38,6 +38,7 @@ class Controller
   end
 
   private
+
     def search_by_params_hash
       puts "Please enter a hash of search params:"
       puts "example: { 'period' : 'cretaceous', 'diet' : 'carnivore' }"
@@ -51,7 +52,7 @@ class Controller
       filtered_dinos = all_the_dinos.dinos
 
       filter_params.each do |key, val|
-        filtered_dinos.select!{ |d| d.send(key) == val }
+        filtered_dinos.select! { |d| d.send(key) == val }
       end
 
       filtered_dinos

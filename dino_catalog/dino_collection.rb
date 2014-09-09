@@ -14,33 +14,33 @@ class DinoCollection
     end
   end
 
-
   def print_all
-    puts "\n-------------------All The Dinos-------------------"
+    puts "\n-----------------All The Dinos-----------------"
     puts dinos.map(&:to_s)
   end
 
   def print_bipeds
-    puts "\n-------------------Bipeds-------------------"
+    puts "\n-----------------Bipeds-----------------"
     puts bipeds.map(&:to_s)
   end
 
   def print_meat_eaters
-    puts "\n-------------------Meat eaters-------------------"
+    puts "\n-----------------Meat eaters-----------------"
     puts meat_eaters.map(&:to_s)
   end
 
   def print_from_period(period)
-    puts "\n-------------------Period (#{period})-------------------"
+    puts "\n-----------------Period (#{period})-----------------"
     puts from_period(period).map(&:to_s)
   end
 
   def print_weighs_more_than(weight)
-    puts "\n-------------------Weighs more than #{weight} lbs-------------------"
+    puts "\n-----------------Weighs more than #{weight} lbs-----------------"
     puts weighs_more_than(weight).map(&:to_s)
   end
 
   private
+
     def bipeds
       @dinos.select { |d| d.is_biped? }
     end

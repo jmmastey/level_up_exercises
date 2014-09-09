@@ -19,6 +19,7 @@ class Triangle
   end
 
   private
+
     def equilateral
       side1 == side2 && side2 == side3
     end
@@ -32,11 +33,11 @@ class Triangle
     end
 
     def calculate_angles(a, b, c)
-      angleA = radians_to_degrees(radians(a,b,c))
-      angleB = radians_to_degrees(radians(c,a,b))
-      angleC = radians_to_degrees(radians(b,c,a))
+      angle_a = radians_to_degrees(radians(a, b, c))
+      angle_b = radians_to_degrees(radians(c, a, b))
+      angle_c = radians_to_degrees(radians(b, c, a))
 
-      [angleA, angleB, angleC]
+      [angle_a, angle_b, angle_c]
     end
 
     def radians(a, b, c)
@@ -44,14 +45,13 @@ class Triangle
     end
 
     def radians_to_degrees(rads)
-    (rads * 180 / Math::PI).round
+      (rads * 180 / Math::PI).round
     end
 end
 
-
 triangles = [
-[5,5,5],
-[5,12,13]
+  [5, 5, 5],
+  [5, 12, 13]
 ]
 
 triangles.each do |sides|

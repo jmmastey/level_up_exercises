@@ -11,30 +11,31 @@ class DinoParser
   end
 
   private
+
     def parse_csv
-      CSV.foreach(@file_name, { headers: true, header_converters: :symbol} ) do |row|
-      @dinos << Dino.new(standardize_row(row)) 
+      CSV.foreach(@file_name, headers: true, header_converters: :symbol) do |row|
+        @dinos << Dino.new(standardize_row(row)) 
       end
     end
 
     def standardize_row(row_in)
-      row = row_in.to_hash.reject{ |key, val| val == nil }
+      row = row_in.to_hash.reject { |_, val| val == nil }
 
       row[:name] = row.delete :genus if row.has_key? :genus
       row[:weight_in_lbs] = kg_to_lbs(row.delete :weight) if row.has_key? :weight
 
       if row.has_key? :carnivore
         is_carnivore = row[:diet] = (row.delete :carnivore).downcase
-        if is_carnivore == "yes"
-          row[:diet] = "carnivore"
-        elsif is_carnivore == "no"
-          row[:diet] = "herbivore"
-        end
+        row[:diet] = diet_type(is_carnivore)
       end
 
-      row[:continent] = "Africa" if !row.has_key? :continent
+      row[:continent] = "Africa" unless row.has_key? :continent
 
       row 
+    end
+
+    def diet_type(is_carnivore)
+       is_carnivore ? "carnivore" : "herbivore"
     end
 
     def kg_to_lbs(num_kg)

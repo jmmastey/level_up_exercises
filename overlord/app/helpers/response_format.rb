@@ -1,5 +1,6 @@
 # File response_format.rb
 # encoding: UTF-8
+require 'sinatra/base'
 
 module Sinatra
   module ResponseFormat

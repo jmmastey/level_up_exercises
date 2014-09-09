@@ -22,13 +22,10 @@ class Overlord < Sinatra::Application
   get '/api/bomb/:id/cut/:wire_id' do
     bomb ||= Bomb.get(params[:id]) || halt(404)
     wire ||= bomb.wires.get(params[:wire_id]) || halt(404)
-    if wire.detonates
-      cut_wire_response(bomb, :exploded, request.accept)
-    else
-      cut_wire_response(bomb, :diffused, request.accept)
-    end
 
-
+    wire_response = cut_wire_status(wire)
+    cut_wire_response(bomb,wire_response.status,
+                      wire_response.message , request.accept)
   end
 
   get '/test' do
@@ -54,7 +51,8 @@ class Overlord < Sinatra::Application
         # session_id: session[:id]
     )
     status 201
-    format_response('ok', request.accept)
+    response_message = {status: 'ok'}
+    format_response(response_message, request.accept)
   end
 
   put '/api/bomb/:id' do

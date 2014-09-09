@@ -159,6 +159,7 @@ DEPENDENCIES
   dm-sqlite-adapter
   i18n
   nokogiri
+  rack-test
   rspec
   ruby-debug-ide
   sinatra

@@ -42,9 +42,9 @@ class Overlord < Sinatra::Application
                                          control_row: keypad_control_row }
   end
 
-  after do
-    puts body
-  end
+  # after do
+  #   puts body
+  # end
 
   get '/explode' do
     json status: 'boom'

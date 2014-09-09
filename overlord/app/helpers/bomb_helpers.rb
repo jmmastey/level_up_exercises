@@ -1,9 +1,9 @@
 # File response_format.rb
 # encoding: UTF-8
-require 'sinatra/base'
 
 module Sinatra
   module BombHelpers
+    WireResponse = Struct.new(:status, :message)
 
     def create_wires(number_of_wires)
       wires = []
@@ -26,10 +26,11 @@ module Sinatra
       format_response(message, accept)
     end
 
-    def cut_wire(wire)
-      :exploded if wire.detonates
-      :diffused if wire.diffuses
-
+    def cut_wire_status(wire)
+      WireResponse.new(status: :exploded, message: 'Boom')  if wire.detonates
+      WireResponse.new(status: :diffused, message:'SUCCESS') if wire.diffuses
+      WireResponse.new(status: :active, message: 'SPEED_UP') if wire.speeds_up
+      WireResponse.new(status: :active, message:'SPEED_DOWN') if wire.speeds_down
     end
 
     private

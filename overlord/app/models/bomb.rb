@@ -1,5 +1,5 @@
 # File bomb.rb
-require 'active_support/time'
+# require 'active_support/time'
 class Bomb
   include DataMapper::Resource
   property :id, Serial

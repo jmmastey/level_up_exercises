@@ -9,22 +9,25 @@ gem 'time_difference'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-partial', require: 'sinatra/partial'
-gem 'nokogiri'
-gem 'datamapper'
+gem 'datamapper', require: 'data_mapper'
 gem 'bundler'
-gem 'tux'
-gem 'debase'
-gem 'ruby-debug-ide'
+
+
 
 group :test do
   gem 'rspec'
+  gem 'rack-test', require: 'rack/test'
 end
 
 group :development do
   gem 'dm-sqlite-adapter'
+  gem 'tux'
+  gem 'debase'
+  gem 'ruby-debug-ide'
 end
 
 group :test, :development do
   gem 'cucumber-sinatra'
   gem 'capybara'
+  gem 'nokogiri'
 end

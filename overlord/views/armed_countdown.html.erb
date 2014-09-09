@@ -1,0 +1,32 @@
+<html>
+  <h1><%= flash[:notice] %></h1>
+  <span id="countdown">Bomb armed. You have <%= timer %> seconds left!</span>
+  <form action="deactivate" method="post">
+    <input type="text" name="deactivation_code">
+    <input type="submit" id="submit">
+  </form>
+</html>
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="sinon.js"></script>
+<script type="text/javascript" src="date.js"></script>
+<script type="text/javascript">
+  var armedAt = Date.parse("<%= armed_at %>").getTime();
+  var timeLeft = parseInt(<%= timer %> - ((new Date().getTime() - armedAt) / 1000)) + 1;
+  var updateDate = function() {
+    var timeLeft = parseInt(<%= timer %> - ((new Date().getTime() - armedAt) / 1000)) + 1;
+    document.getElementById("countdown").innerHTML = "Bomb armed. You have " + timeLeft + " seconds left!";
+  }
+
+  <% if env.eql?(:development) || env.eql?(:test) %>
+    window.clock = sinon.useFakeTimers();
+  <% end %>
+
+  setInterval(updateDate, 1000);
+
+  var timeRunsOut = function() {
+    window.location.replace("/boom");
+  }
+
+  setTimeout(timeRunsOut, parseInt(timeLeft) * 1000);
+</script>

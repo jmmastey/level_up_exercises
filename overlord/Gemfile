@@ -1,6 +1,11 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-ruby "2.0.0"
-
 gem "sinatra"
+gem "cucumber"
+gem "capybara"
+gem "rspec"
+gem "rack-flash3"
+gem "thin"
+gem "pry"
+gem 'selenium-webdriver'

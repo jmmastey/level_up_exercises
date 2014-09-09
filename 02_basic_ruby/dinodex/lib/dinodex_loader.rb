@@ -19,7 +19,7 @@ class DinodexLoader
   def load_csv_file(file)
     raise("File #{file} not found") unless File.exists?(file)
 
-    newDinosaurs = []
+    new_dinosaurs = []
     table = CSV.read(file, {headers: true})
     table.each do |row|
       dinosaur = Dinosaur.new
@@ -27,9 +27,9 @@ class DinodexLoader
       row.fields.each_with_index do |field, index|
         parse_csv_field(dinosaur, field, table.headers[index].downcase)
       end
-      newDinosaurs.push dinosaur
+      new_dinosaurs.push dinosaur
     end
-    newDinosaurs
+    new_dinosaurs
   end
 
   private

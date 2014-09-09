@@ -3,108 +3,70 @@ require 'dinodex_controller'
 
 describe DinodexController, "#interaction" do
 	before(:each) do
-		@output = double('output').as_null_object
+		@output = double("output").as_null_object
 		@dinodex = DinodexController.new(@output)
-		@directory = '.\inputs'
+		@directory = "./inputs"
+    @dinodex.start(@directory)
 	end
 
 	it "sends a welcome message" do
 		expect(@output).to receive(:puts).with('Welcome to Dinodex')
 		@dinodex.stub(:gets).and_return('q')
-		@dinodex.interactionLoop
+		@dinodex.interaction_loop
 	end
 
 	it "prompts for input" do
 		expect(@output).to receive(:puts).with('Enter your selection: (h for help)')
 		@dinodex.stub(:gets).and_return('q')
-		@dinodex.interactionLoop
+		@dinodex.interaction_loop
 	end
 	
 	it "says goodbye when we quit" do
 		expect(@output).to receive(:puts).with('Goodbye')
 		@dinodex.stub(:gets).and_return('q')
-		@dinodex.interactionLoop
+		@dinodex.interaction_loop
 	end
-end
-
-describe DinodexController, "#load files" do
-	before(:each) do
-		@output = double('output').as_null_object
-		@dinodex = DinodexController.new(@output)
-		@directory = '.\inputs'
-	end
-
-	it "find files in our directory" do		
-		expect(@output).to receive(:puts).with('Finding CSV files in ' + @directory)
-		@dinodex.findCSVfiles(@directory)
-	end
-
-	it "find african_dinosaur_export" do
-		expect(@output).to receive(:puts).with('Found african_dinosaur_export.csv')
-		@dinodex.findCSVfiles(@directory)
-	end
-
-	it "find african_dinosaur_export" do
-		expect(@output).to receive(:puts).with('Found dinodex.csv')
-		@dinodex.findCSVfiles(@directory)
-	end
-	
-	it "shows a message that loads the dinodex CSV file with 9 dinosaurs" do
-		expect(@output).to receive(:puts).with('Found 9 dinosaurs in ' + @directory + '\dinodex.csv')
-		@dinodex.loadCSVfile(@directory + '\dinodex.csv')
-	end
-
-	it "shows an error message when file not found" do
-		expect(@output).to receive(:puts).with('File ' + @directory + '\asdf.csv not found')
-		@dinodex.loadCSVfile(@directory + '\asdf.csv')
-	end
-
-	it "displays all the dinosaurs it has loaded" do
-		expect(@output).to receive(:puts).with('File ' + @directory + '\asdf.csv not found')
-		@dinodex.loadCSVfile(@directory + '\asdf.csv')
-	end
-	
 end
 
 describe DinodexController, "#display and filter" do
 	before(:each) do
 		@output = double('output').as_null_object
 		@dinodex = DinodexController.new(@output)
-		@directory = '.\inputs'
+		@directory = "./inputs"
 		@dinodex.start(@directory)
 	end
 	
 	it "lists all dinosaurs" do
 		expect(@output).to receive(:puts).with('Giraffatitan')
 		expect(@output).to receive(:puts).with('Megalosaurus')
-		@dinodex.listDisplay
+		@dinodex.list_display
 	end
 	
 	it "lists details a single dinosaurs" do
 		expect(@output).to receive(:puts).with(/Giraffat/)
 		expect(@output).to receive(:puts).with(/Period/)
-		expect(@output).to receive(:puts).with('Diet: Omnivore')
+		expect(@output).to receive(:puts).with('Diet: Herbivore')
 		expect(@output).not_to receive(:puts).with(/Continent/)
-		@dinodex.detailDisplayByName('Giraffatitan')
+		@dinodex.detail_display_by_name('Giraffatitan')
 	end
 
 	it "does not find invalid name" do
 		name = 'your mom'
 		expect(@output).to receive(:puts).with('Dinosaur with name \'' + name + '\' not found.')
-		@dinodex.detailDisplayByName(name)
+		@dinodex.detail_display_by_name(name)
 	end
 	
 	it "tells me when filtering if I've entered an incorrect attribute" do
 		key = 'walkinasdf'
 		value = 'biped'
 		expect(@output).to receive(:puts).with('Invalid dinosaur attribute \'' + key + '\' used')
-		@dinodex.filterAndDisplay(key + '=' + value)
+		@dinodex.filter_and_display(key + '=' + value)
 	end
 
 	it "tells me when filtering if I've entered a blank value" do
 		key = 'walking'
 		expect(@output).to receive(:puts).with('Empty value for \'' + key + '\' used')
-		@dinodex.filterAndDisplay(key + '=')
+		@dinodex.filter_and_display(key + '=')
 	end
 	
 	it "filters and displays all the dinosaurs that were bipeds." do
@@ -123,7 +85,7 @@ describe DinodexController, "#display and filter" do
 		expect(@output).not_to receive(:puts).with('Paralititan')
 		expect(@output).not_to receive(:puts).with('Quetzalcoatlus')
 		
-		@dinodex.filterAndDisplay(key + '=' + value)
+		@dinodex.filter_and_display(key + '=' + value)
 	end
 	
 	it "filters and displays all the dinosaurs that were carnivores." do
@@ -137,7 +99,7 @@ describe DinodexController, "#display and filter" do
 		expect(@output).not_to receive(:puts).with('Abrictosaurus')
 		expect(@output).not_to receive(:puts).with('Baryonyx')
 		
-		@dinodex.filterAndDisplay(key + '=' + value)
+		@dinodex.filter_and_display(key + '=' + value)
 	end
 
 	it "filters and displays details of Afrovenator using name filter" do
@@ -153,7 +115,7 @@ describe DinodexController, "#display and filter" do
 		expect(@output).not_to receive(:puts).with('Abrictosaurus')
 		expect(@output).not_to receive(:puts).with('Baryonyx')
 
-		@dinodex.filterAndDetail(key + '=' + value)
+		@dinodex.filter_and_detail(key + '=' + value)
 	end
 
 	it "chains filters together for quadruped and carnivore" do
@@ -164,12 +126,12 @@ describe DinodexController, "#display and filter" do
 		expect(@output).not_to receive(:puts).with('Abrictosaurus')
 		expect(@output).not_to receive(:puts).with('Baryonyx')
 		
-		@dinodex.filterAndDisplay('walking=quadruped|diet=carnivore')
+		@dinodex.filter_and_display('walking=quadruped|diet=carnivore')
 	end
 	
 	it "shows all the possible dinosaur attributes to filter on" do
 		expect(@output).to receive(:puts).with('Keys available: name, period, diet, weight, walking, description, continent')
-		@dinodex.keyDisplay
+		@dinodex.key_display
 	end
 
   it "Grab dinosaurs for specific cretacous and late cretaceous with filter 'cretaceous'" do
@@ -180,34 +142,32 @@ describe DinodexController, "#display and filter" do
 
     expect(@output).not_to receive(:puts).with('Abrictosaurus')
 
-    @dinodex.filterAndDisplay('period=cretaceous')
+    @dinodex.filter_and_display('period=cretaceous')
   end
 
   it "Grab only big (> 2 tons) dinosaurs." do
-
     expect(@output).to receive(:puts).with('Baryonyx')
     expect(@output).to receive(:puts).with('Giganotosaurus')
     expect(@output).to receive(:puts).with('Suchomimus')
 
     expect(@output).not_to receive(:puts).with('Abrictosaurus')
 
-    @dinodex.filterAndDisplay('weight>2000')
+    @dinodex.filter_and_display('weight>2000')
   end
 
   it "Grab only small (< 2 tons) or dinosaurs." do
-
     expect(@output).not_to receive(:puts).with('Baryonyx')
     expect(@output).not_to receive(:puts).with('Giganotosaurus')
     expect(@output).not_to receive(:puts).with('Suchomimus')
 
     expect(@output).to receive(:puts).with('Abrictosaurus')
 
-    @dinodex.filterAndDisplay('weight<2000')
+    @dinodex.filter_and_display('weight<2000')
   end
 
   it "filters and prints output in JSON" do
-    expect(@output).to receive(:puts).with('[{"@name":"Abrictosaurus","@period":"Jurassic","@diet":"Omnivore","@weight":"100","@walking":"Biped"}]')
-    @dinodex.filterAndJSON('name=Abrictosaurus')
+    expect(@output).to receive(:puts).with('[{"@name":"Abrictosaurus","@period":"Jurassic","@diet":"Herbivore","@weight":"100","@walking":"Biped"}]')
+    @dinodex.filter_and_json('name=Abrictosaurus')
   end
 
 end

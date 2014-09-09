@@ -4,7 +4,7 @@ require 'dinodex_controller'
 #TODO: handle OS independent paths
 dinodex = DinodexController.new(STDOUT)
 dinodex.start('..\inputs')
-dinodex.interactionLoop
+dinodex.interaction_loop
 
 
 #debugging fun

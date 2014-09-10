@@ -1,5 +1,6 @@
 class SplitTestGroup
-  attr_reader :conversions, :views, :conversion_rate, :conversion_rate_interval
+  attr_reader :conversions, :views, :conversion_rate, \
+    :conversion_rate_interval, :conversion_rate_range
 
   CONFIDENCE_STD_ERROR_FACTOR = 1.96
 
@@ -15,6 +16,7 @@ class SplitTestGroup
   def perform_calculations
     calculate_conversion_rate
     calculate_conversion_rate_interval
+    calculate_conversion_rate_range
   end
 
   def calculate_conversion_rate
@@ -24,5 +26,12 @@ class SplitTestGroup
   def calculate_conversion_rate_interval
     standard_error = Math.sqrt(@conversion_rate * (1 - @conversion_rate) / @views)
     @conversion_rate_interval = CONFIDENCE_STD_ERROR_FACTOR * standard_error
+  end
+
+  def calculate_conversion_rate_range
+    min = @conversion_rate - @conversion_rate_interval
+    max = @conversion_rate + @conversion_rate_interval
+
+    @conversion_rate_range = [min, max]
   end
 end

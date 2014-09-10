@@ -13,3 +13,9 @@ Style/CollectionMethods:
 # C: Use each_with_object instead of inject.
 Style/EachWithObject:
   Enabled: false
+	
+Style/StringLiterals:
+  Enabled: false
+	
+Style/SignalException:
+  Enabled: false

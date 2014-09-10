@@ -1,6 +1,5 @@
 # rubocop:disable all
 require_relative '../../spec_helper.rb'
-require_relative '../../../lib/utility/attr_wrappable.rb'
 
 module Utility
   module Mocks
@@ -8,7 +7,7 @@ module Utility
       include ::Utility::Wrappable
 
       attr_wrappable :foo do |*args|
-        "#{super(*args)}"
+        "-#{super(*args)}-"
       end
 
       attr_wrappable :bar do |*args|
@@ -27,23 +26,29 @@ module Utility
 
   describe Wrappable do
     context 'after included' do
-      it 'will expose attr_wrappable' do
-        expect(Mocks::Foo.methods).to include(:attr_wrappable)
+      it 'exposes attr_wrappable' do
+        expect(Mocks::Foo).to respond_to(:attr_wrappable)
       end
       context 'attr_wrappable' do
         foo = Mocks::Foo.new
-        it 'will expose the wrappables' do
-          expect(foo.public_methods).to include(:wrappables)
+        it 'prepends the hook' do
+          expected = Utility::Wrappable::Hook
+          expect(foo.class.ancestors.first).to eq(expected)
         end
-        it 'will record wrapped methods in @wrappables' do
+        it 'exposes the wrappables accessor' do
+          expect(foo).to respond_to(:wrappables)
+        end
+        it 'records wrapped methods in @wrappables' do
           wrappables = foo.wrappables
           expect(wrappables.keys).to include(:foo, :bar)
         end
-        it 'will wrap a method' do
-          fail
+        it 'wraps a method' do
+          expected = '!FOOBAR!TESTING!FUBAR!'
+          expect(foo.bar('TESTING')).to eq(expected)
         end
-        it 'will follow the defined chain/flow bubble' do
-          fail
+        it 'wraps multiple methods' do
+          expected = '-FOOBEFORE!FOOBAR!SOMETHING!FUBAR!DONE-'
+          expect(foo.test).to eq(expected)
         end
         # TODO: Object heirachy collision checks
       end
@@ -51,6 +56,3 @@ module Utility
   end
 end
 # rubocop:enable all
-
-# puts "TEST:     FOOBEFORE!FOOBAR!SOMETHING!FUBAR!DONE"
-# puts "RESPONSE: #{Foo.new.test}"

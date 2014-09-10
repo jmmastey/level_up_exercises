@@ -1,82 +1,10 @@
 TODO:
 
-1:  dino_catalog
+1:  wrappable:
+    - investigate using the singleton_class for prepend
+    - prefer instance over class mixins (see above?)
+    - write more readable tests
+    
+2:  dino_catalog
     - global:       switch to activesupport concerns
                     https://gist.github.com/scottsims/09a23ee408c260351111
-
-HOUND:
-
-arrowhead/source/spec/arrowhead_spec.rb
-@@ -0,0 +1,19 @@
-+# rubocop:disable all
-+require_relative '../lib/arrowhead.rb'
-+require_relative 'spec_helper.rb'
-+
-+describe Arrowhead do
-+  context 'stubs' do
-+    it 'will classify correctly #1' do
-+      response = capture_stdout { puts Arrowhead::classify(:northern_plains, :bifurcated) }
-+      expected = [ %{You have a(n) 'Oxbow' arrowhead. Probably priceless.} ]
-+      expect(response.split("\n").collect(&:strip)).to eq(expected)
-
-jmmastey added a note 23 minutes ago
-This is too damn complicated. expect(response).to match("Oxbow") You don't care about the rest of the message.
-
----
-
-arrowhead/source/lib/arrowhead.rb
- ((21 lines not shown))
-+
-+  def self.classify_shape(region, shape)
-+    if classification_present?(CLASSIFICATIONS, region, shape)
-+      arrowhead = CLASSIFICATIONS[region][shape]
-+      puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-+    end
-+  end
-+
-+  def self.region_present?(data, region)
-+    err_str = 'Region doesn\'t exist.'
-+    data.include?(region) || fail(err_str)
-+  end
-+
-+  def self.classification_present?(data, region, shape)
-+    err_str = 'Classification doesn\'t exist.'
-+    if region_present?(data, region)
-
-jmmastey added a note 26 minutes ago
-This is probably somewhat unconfident. region_present? already fails when it doesn't exist, probably not necessary to test here.
-
----
-
-+  end
-+
-+  def generate_name(generator = @name_generator)
-+    @name = generator.call
-+    fail NameCollisionError unless name_valid?
-+    @@registry << @name
-+  end
-+
-+  def default_generator
-+    proc { |prefix = ''| prefix << "#{generate_char(2)}#{generate_num(3)}" }
-
-jmmastey added a note 22 minutes ago
-probably too clever. why the prefix?
-
-+  end
-+
-+  def name_valid?
-+    (name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) && !@@registry.include?(name)
-+  end
-+
-+  private
-+
-+  def generate_char(num = 1, prefix = '')
-+    c = -> { ('A'..'Z').to_a.sample }
-+    generate_string(c, num, prefix)
-+  end
-
-jmmastey added a note 21 minutes ago
-Definitely too clever. At most, (0..num).map { ('A'..'Z').to_a.sample }
-
-jmmastey added a note 20 minutes ago
-Also, no prefix'd string will ever pass with a default generator, no?

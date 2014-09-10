@@ -146,7 +146,7 @@ Name some resources that you might monitor for a production host.
 There's a big problem with most monitoring: a momentary spike in resource usage isn't actually a problem. Some software, like the 'god' gem, tries to overcome this limitation. Can you think of some strategies to solve this problem?
 
 
-## Web Proxies
+### Web Proxies
 Usually have a proxy setup to listen for the machine and proxy requests back to actual software
 
 **Proxy server** - a server that acts as an intermediary from clients seeking resources from other services. 
@@ -169,15 +169,35 @@ Production   ----- request ---->     Proxy     ----- request ---->    Web
 Customer     <---- response ----     Server    <---- response ----    server
 ```
 
+### Daemons 
+**Daemon (system service)** - a computer program which runs a background process, rather than being under direct control of an interactive user
 
-## Managing Server Time (NTP)
+* Usually started during initial boot sequence by Init
+* `syslogd` - a daemon that implements the system logging facility
+* `sshd` - a daemon that services (listens for and manages) incoming SSH connections
+* parent proces of a daemon is (often) `init`
+
+
+
+#### Daemon controls:
+
+```
+start: start a service
+stop: stop a service
+restart: restart a service without reloading its job config file
+reload: send a SIGHUP signal to running process
+status: return the status of a service
+```
+
+
+### Managing Server Time (NTP)
 command to reset your time using an external NTP (network time protocol) server
 
 ```
 ntpdate
 ```
 
-## Firewalls, iptables, and nmap
+### Firewalls, iptables, and nmap
 
 #### firewalls
 
@@ -218,10 +238,18 @@ $ /etc/init.d/iptables start
 * network mapper
 * security scanner to display a report of all ports open/listening
 
+________________________________________________________
+
+
+
 ## Git
 compare staged commits `$ git diff —staged`
 
-and unstage them `$ git reset filename.txt 	` 
+and unstage them `$ git reset filename.txt` 
+
+
+_________________________________________________________
+
 
 ## Ruby Core
 
@@ -231,64 +259,39 @@ and unstage them `$ git reset filename.txt 	`
 "hello".tr('el', 'ip’)
 ```
 
-####&-unary operator
+__________________________________________________________
 
-* Almost the equivalent of calling `#to_proc` on the object
+## Testing
+
+#### The Testing Mindset
+
+Developers are a tricksey bunch. Name some reasons why you shouldn't just trust the person who wrote the code.
+
+* Could have written it late at night and missed some essential edge cases
+* Could have completed it in a rush, sloppily
+* Might not have a full understaning of the project
+
+Name some mental pitfalls that you should watch out for when testing code.
+
+* Expect that the code doesn't work properly unless you have tests to back it up
+
+So then, why shouldn't we be satisfied with testing our own code?
+
+* Sometimes we get too focused on the code and need someone to come and test it with another perspective
+* Testing our own code will parallel the development we completed and not check for cases we hadn't thought of
 
 
-A block that is passed to the each function on the [1,2,3] Array:
+#### Red -> Green -> Refactor
+Tests read like specifications
+>  It's easy to go from tests to production code, but hard to go the other direction. And that implies something fascinating about the tests: The tests are the most important component in the system. They are more important than the production code.
 
-```
-[1,2,3].each do |x|
-  puts x
-end
-```
+**Red** - Tests have been writted which parallel the specifications for a story/feature. When running the tests before the code is written, they fail (sometimes indicated by the color red)
 
-A proc assigned to a variable:
-```
-k = Proc.new{ |x| puts x }
-```
+**Green** - Working code is written to get the tests to pass (indicated by the color green)
 
-inject/reduce (combine many things into one)
-
-lambda
-
-
-```
-[2] pry(main)> proc { |x| x+x }
-=> #<Proc:0x007ff0261839e0@(pry):1>
-[3] pry(main)> f = _
-=> #<Proc:0x007ff0261839e0@(pry):1>
-from (pry):3:in `__pry__'
-[5] pry(main)> f.call 1
-=> 2
-```
-
-Procs, Blocks, & Lambdas, & Closures
-
-Know the difference!
-
+**Refactor** - The working code is refactored to be more efficient, optimized, easier to read/understand, more eloquent. Duplications are removed (DRY-ed out).
+__________________________________________________________
 ## Additional Topics
-
-### Daemons 
-**Daemon (system service)** - a computer program which runs a background process, rather than being under direct control of an interactive user
-
-* Usually started during initial boot sequence by Init
-* `syslogd` - a daemon that implements the system logging facility
-* `sshd` - a daemon that services (listens for and manages) incoming SSH connections
-* parent proces of a daemon is (often) `init`
-
-
-
-#### Daemon controls:
-
-```
-start: start a service
-stop: stop a service
-restart: restart a service without reloading its job config file
-reload: send a SIGHUP signal to running process
-status: return the status of a service
-```
 
 
 ### Rubocop

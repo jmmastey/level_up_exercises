@@ -39,67 +39,67 @@ class Controller
 
   private
 
-    def print_all_dinos
-      all_the_dinos.print_all
+  def print_all_dinos
+    all_the_dinos.print_all
+  end
+
+  def print_invalid_choice
+    puts "\nWhoops! Your entry is not one of the options :(".colorize(:red)
+  end
+
+  def search_dinos
+    puts "Please enter a hash of search params:"
+    puts "example: { 'period' : 'cretaceous', 'diet' : 'carnivore' }"
+
+    filter_params = JSON.parse(gets.chomp)
+    puts "\nSearch results:"
+    puts filter_dinos(filter_params).map(&:to_s)
+  end
+
+  def filter_dinos(filter_params)
+    filtered_dinos = all_the_dinos.dinos
+
+    filter_params.each do |key, val|
+      filtered_dinos.select! { |d| d.send(key) == val }
     end
 
-    def print_invalid_choice
-      puts "\nWhoops! Your entry is not one of the options :(".colorize(:red)
-    end
+    filtered_dinos
+  end
 
-    def search_dinos
-      puts "Please enter a hash of search params:"
-      puts "example: { 'period' : 'cretaceous', 'diet' : 'carnivore' }"
+  def new_csv
+    puts "Please enter the filename:"
+    filename = gets.chomp
+    all_the_dinos.add_from_csv(filename)
+  end
 
-      filter_params = JSON.parse(gets.chomp)
-      puts "\nSearch results:"
-      puts filter_dinos(filter_params).map(&:to_s)	
-    end
+  def populate_directory
+    all_the_dinos.add_from_csv("dinodex.csv")
+    all_the_dinos.add_from_csv("african_dinosaur_export.csv")
+  end
 
-    def filter_dinos(filter_params)
-      filtered_dinos = all_the_dinos.dinos
+  def print_welcome_message
+    puts "\nWelome to the Dino Directory!!!!!".colorize(:green)
+  end
 
-      filter_params.each do |key, val|
-        filtered_dinos.select! { |d| d.send(key) == val }
-      end
+  def print_choice_menu
+    puts "----------------------------------------------------------"
+    puts "\nWhat would you like to do?".colorize(:light_cyan)
+    puts "  - Enter 'all' to print all dinos"
+    puts "  - Enter 'params' to print dinos with specific parameters"
+    puts "  - Enter 'add' to add new dinos via CSV"
+    puts "  - Enter 'examples' for preset filters"
+    puts "  - Enter 'exit' to exit"
+  end
 
-      filtered_dinos
-    end
-
-    def new_csv
-      puts "Please enter the filename:"
-      filename = gets.chomp
-      all_the_dinos.add_from_csv(filename)
-    end
-
-    def populate_directory
-      all_the_dinos.add_from_csv("dinodex.csv")
-      all_the_dinos.add_from_csv("african_dinosaur_export.csv")
-    end
-
-    def print_welcome_message
-      puts "\nWelome to the Dino Directory!!!!!".colorize(:green)
-    end
-
-    def print_choice_menu
-      puts "----------------------------------------------------------"
-      puts "\nWhat would you like to do?".colorize(:light_cyan)
-      puts "  - Enter 'all' to print all dinos"
-      puts "  - Enter 'params' to print dinos with specific parameters"
-      puts "  - Enter 'add' to add new dinos via CSV"
-      puts "  - Enter 'examples' for preset filters"
-      puts "  - Enter 'exit' to exit"
-    end
-
-    def print_examples
-      all_the_dinos.print_bipeds
-      all_the_dinos.print_meat_eaters
-      all_the_dinos.print_from_period("permian")
-      all_the_dinos.print_from_period("jurassic")
-      all_the_dinos.print_weighs_more_than(2000)
-      all_the_dinos.print_weighs_more_than(1999)
-    end
+  def print_examples
+    all_the_dinos.print_bipeds
+    all_the_dinos.print_meat_eaters
+    all_the_dinos.print_from_period("permian")
+    all_the_dinos.print_from_period("jurassic")
+    all_the_dinos.print_weighs_more_than(2000)
+    all_the_dinos.print_weighs_more_than(1999)
+  end
 end
 
-controller = Controller.new
+Controller.new
 

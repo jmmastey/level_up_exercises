@@ -4,42 +4,44 @@ class DinoParser
   attr_reader :file_name, :dinos
 
   def initialize(file_name)
-    @file_name = file_name
+    @filename = file_name
     @dinos = []
 
-    parse_csv 
+    parse_csv
   end
 
   private
 
-    def parse_csv
-      CSV.foreach(@file_name, headers: true, header_converters: :symbol) do |row|
-        @dinos << Dino.new(standardize_row(row)) 
-      end
+  def parse_csv
+    CSV.foreach(@filename, headers: true, header_converters: :symbol) do |row|
+      @dinos << Dino.new(standardize_row(row)) 
+    end
+  end
+
+  def standardize_row(row_in)
+    row = row_in.to_hash.reject { |_, val| val == nil }
+
+    row[:name] = row.delete :genus if row.has_key? :genus
+    if row.has_key? :weight
+      row[:weight_in_lbs] = kg_to_lbs(row.delete :weight)
     end
 
-    def standardize_row(row_in)
-      row = row_in.to_hash.reject { |_, val| val == nil }
-
-      row[:name] = row.delete :genus if row.has_key? :genus
-      row[:weight_in_lbs] = kg_to_lbs(row.delete :weight) if row.has_key? :weight
-
-      if row.has_key? :carnivore
-        is_carnivore = row[:diet] = (row.delete :carnivore).downcase
-        row[:diet] = diet_type(is_carnivore)
-      end
-
-      row[:continent] = "Africa" unless row.has_key? :continent
-
-      row 
+    if row.has_key? :carnivore
+      is_carnivore = row[:diet] = (row.delete :carnivore).downcase
+      row[:diet] = diet_type(is_carnivore)
     end
 
-    def diet_type(is_carnivore)
-       is_carnivore ? "carnivore" : "herbivore"
-    end
+    row[:continent] = "Africa" unless row.has_key? :continent
 
-    def kg_to_lbs(num_kg)
-      (num_kg.to_f / 2.20462).to_i
-    end
+    row
+  end
+
+  def diet_type(is_carnivore)
+     is_carnivore ? "carnivore" : "herbivore"
+  end
+
+  def kg_to_lbs(num_kg)
+    (num_kg.to_f / 2.20462).to_i
+  end
 end
 

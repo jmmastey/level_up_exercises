@@ -41,20 +41,20 @@ class DinoCollection
 
   private
 
-    def bipeds
-      @dinos.select { |d| d.is_biped? }
-    end
+  def bipeds
+    @dinos.select { |d| d.biped? }
+  end
 
-    def meat_eaters
-      @dinos.select { |d| d.eats_meat? }
-    end
+  def meat_eaters
+    @dinos.select { |d| d.eats_meat? }
+  end
 
-    def from_period(period)
-      @dinos.select { |d| d.from_period?(period) }
-    end
+  def from_period(period)
+    @dinos.select { |d| d.from_period?(period) }
+  end
 
-    def weighs_more_than(weight)
-      @dinos.select { |d| d.weight_in_lbs > weight }
-    end
+  def weighs_more_than(weight)
+    @dinos.select { |d| d.weight_in_lbs > weight }
+  end
 end
 

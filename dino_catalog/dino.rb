@@ -2,12 +2,13 @@ require "colorize"
 require "csv"
 
 class Dino
-  attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
+  attr_accessor :name, :period, :continent, :diet, :weight_in_lbs,
+                :walking, :description
 
   def initialize(row)
     row.each do |key, val| 
       val = val.downcase if val.is_a? String
-      instance_variable_set("@#{key}",val) 
+      instance_variable_set("@#{key}", val)
     end
   end
 
@@ -15,7 +16,7 @@ class Dino
     @weight_in_lbs.to_i
   end
 
-  def is_biped?
+  def biped?
     @walking.downcase == "biped"
   end
 

@@ -28,4 +28,13 @@ describe SplitTestGroup do
       expect(rounded_interval).to eq(0.0098)
     end
   end
+
+  describe "#conversion_rate_range" do
+    it "gets the 95% confident range of the conversion rate" do
+      min, max = @group_a.conversion_rate_range
+
+      expect(min).to eq(@group_a.conversion_rate - @group_a.conversion_rate_interval)
+      expect(max).to eq(@group_a.conversion_rate + @group_a.conversion_rate_interval)
+    end
+  end
 end

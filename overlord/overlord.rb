@@ -11,37 +11,35 @@ class Overlord < Sinatra::Application
 
   Tilt.register Tilt::ERBTemplate, 'html.erb'
 
+  before do
+    @destination, @redirected, @message = ApplicationController.new.service(get_in_memory_session, request)
+  end
+
   get '/' do
-    destination, redirected, message = ApplicationController.new.service(get_in_memory_session, request)
-    flash[:notice] = message if message
-    redirect to(destination) if redirected
+    flash[:notice] = @message if @message
+    redirect to(@destination) if @redirected
 
     erb :bomb_activation 
   end
 
   post '/activate' do
-    destination, redirected = ApplicationController.new.service(get_in_memory_session, request)
-    redirect to(destination)
+    redirect to(@destination)
   end
 
   get '/activated' do
-    server_side_session = get_in_memory_session
-    destination, redirected = ApplicationController.new.service(get_in_memory_session, request)
-    redirect to(destination) if redirected
+    redirect to(@destination) if @redirected
 
-    erb :armed_countdown, locals: {armed_at: server_side_session[:bomb].state[:armed_at], timer: server_side_session[:bomb].state[:timer].to_i, env: settings.env}
+    erb :armed_countdown, locals: {armed_at: bomb_state(:armed_at), timer: bomb_state(:timer).to_i, env: settings.env}
   end
 
   post '/deactivate' do
-    destination, redirected, message = ApplicationController.new.service(get_in_memory_session, request)
-    flash[:notice] = message
-    redirect to(destination)
+    flash[:notice] = @message
+    redirect to(@destination)
   end
 
   get '/boom' do
-    destination, redirected, message = ApplicationController.new.service(get_in_memory_session, request)
-    flash[:notice] = message
-    redirect to(destination) if redirected
+    flash[:notice] = @message
+    redirect to(@destination) if @redirected
 
     erb :blown
   end
@@ -60,6 +58,10 @@ class Overlord < Sinatra::Application
   private
   def get_in_memory_session
     settings.pseudo_in_memory_store[session[:session_id]]
+  end
+
+  def bomb_state state
+    get_in_memory_session.send(:[], :bomb).state.send(:[], state)
   end
 
   def reset_in_memory_session

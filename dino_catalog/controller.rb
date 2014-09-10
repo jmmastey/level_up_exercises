@@ -32,7 +32,7 @@ class Controller
 
     choice = "else" unless ACTION_MAP.has_key? choice
 
-    self.send(ACTION_MAP[choice])
+    send(ACTION_MAP[choice])
 
     make_choices
   end

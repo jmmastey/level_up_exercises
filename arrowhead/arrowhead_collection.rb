@@ -11,4 +11,3 @@ class ArrowheadCollection
     arrowheads << Arrowhead.new(args)
   end
 end
-

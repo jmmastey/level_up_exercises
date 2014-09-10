@@ -15,7 +15,7 @@ class ArrowheadClassifier
 
   private
 
-def classification_matches(region, shape)
+  def classification_matches(region, shape)
     collection.arrowheads.select do |a|
       a.region == region && a.shape == shape
     end
@@ -25,18 +25,14 @@ def classification_matches(region, shape)
     if matches.any?
       print_success(matches)
     else
-      raise_no_match_error
+      error_msg = "The system could not locate an arrowhead matching the"
+      error_msg += " specified region and shape."
+      raise error_msg
     end
   end
 
   def print_success(matches)
     puts "Your arrowhead is the #{matches.first.name}! Probably priceless."
-  end
-
-  def raise_no_match_error
-    error_msg = "The system could not locate an arrowhead matching the"
-    error_msg += " specified region and shape."
-    raise error_msg
   end
 
   def populate_collection

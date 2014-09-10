@@ -14,7 +14,7 @@ class DinoParser
 
   def parse_csv
     CSV.foreach(@filename, headers: true, header_converters: :symbol) do |row|
-      @dinos << Dino.new(standardize_row(row)) 
+      @dinos << Dino.new(standardize_row(row))
     end
   end
 
@@ -37,7 +37,7 @@ class DinoParser
   end
 
   def diet_type(is_carnivore)
-     is_carnivore ? "carnivore" : "herbivore"
+    is_carnivore ? "carnivore" : "herbivore"
   end
 
   def kg_to_lbs(num_kg)

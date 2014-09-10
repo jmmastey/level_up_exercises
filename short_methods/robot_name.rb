@@ -8,17 +8,18 @@ class Robot
   @@name_schema = /[[:alpha:]]{2}[[:digit:]]{3}/
 
   def initialize(args = {})
-    @name_generator = args[:name_generator]
+    @name_generator = args[:name_generator] || method(:generate_name)
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      @name = generate_name
-    end
+    @name = @name_generator.call
 
     fail InvalidNameError, "A robot cannot be created with the name '#{name}'" unless name =~ @@name_schema
     fail NameCollisionError, "A robot has already been created with the name '#{name}!"  if @@registry.include?(name)
-    @@registry << @name
+    
+    register_name(@name)
+  end
+
+  def register_name(name)
+    @@registry << name
   end
 
   def generate_name
@@ -41,6 +42,6 @@ robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
-#generator = -> { 'AA111' }
-#puts Robot.new(name_generator: generator).name
-#puts Robot.new(name_generator: generator).name
+# generator = -> { 'AA111' }
+# puts Robot.new(name_generator: generator).name
+# puts Robot.new(name_generator: generator).name

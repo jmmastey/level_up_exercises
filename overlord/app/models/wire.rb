@@ -11,4 +11,8 @@ class Wire
   property :diffuses, Boolean, default: false
 
   belongs_to :bomb
+
+  def inert?
+   !(@detonates && @speeds_down && @speeds_up && @diffuses)
+  end
 end

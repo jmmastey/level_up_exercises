@@ -1,10 +1,9 @@
+ENV['RACK_ENV'] = 'test'
+
 require 'rubygems'
 require 'bundler'
 require File.join(File.dirname(__FILE__), 'app/overlord.rb')
 
-configure :development do
-  Bundler.require(:default, :development)
-end
 
 configure :test do
   Bundler.require(:test, :development, :default)

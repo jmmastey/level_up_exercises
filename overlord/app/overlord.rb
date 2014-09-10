@@ -29,6 +29,14 @@ class Overlord < Sinatra::Application
     )
   end
 
+  configure :test do
+    DataMapper::Logger.new($stdout, :debug)
+    DataMapper.setup(
+        :default,
+        "sqlite3://#{Dir.pwd}/bomb_test.db"
+    )
+  end
+
   configure :production do
     DataMapper.setup(
         :default,

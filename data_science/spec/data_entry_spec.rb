@@ -1,22 +1,14 @@
 require_relative "../data_entry"
 
 describe DataEntry do
-  describe ".new" do
-    it "can take no parameters" do
-      entry = DataEntry.new
+  it "can be initialized with a hash of data as a parameter" do
+    entry = DataEntry.new(cohort: "A",
+                          date: "2014-09-10",
+                          result: 1)
 
-      expect(entry).to be_a(DataEntry)
-    end
-
-    it "can take a hash of data as a parameter" do
-      entry = DataEntry.new(cohort: "A",
-                            date: "2014-09-10",
-                            result: 1)
-
-      expect(entry.cohort).to eq("A")
-      expect(entry.date).to eq("2014-09-10")
-      expect(entry.result).to eq(1)
-    end
+    expect(entry.cohort).to eq("A")
+    expect(entry.date).to eq("2014-09-10")
+    expect(entry.result).to eq(1)
   end
 
   describe "#conversion?" do

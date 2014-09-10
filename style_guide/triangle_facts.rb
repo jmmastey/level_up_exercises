@@ -25,7 +25,7 @@ class Triangle
 
   private
 
-def equilateral
+  def equilateral
     side1 == side2 && side2 == side3
   end
 

@@ -26,5 +26,11 @@ describe SplitTestCalculator do
         expect(calc.better_group).to eq(:variation_group)
       end
     end
+
+    describe "#confident?" do
+      it "determines whether it is 95% confident in a difference between the variations" do
+        expect(calc).to be_confident
+      end
+    end
   end
 end

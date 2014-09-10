@@ -7,8 +7,8 @@ class DinoQuery
     @result = dinos
   end
 
-  def and!(key, op, arg)
-    @result.keep_if { |dino| dino.send(key).send(op, arg) }
+  def and!(field, method, arg)
+    @result.keep_if { |dino| dino.send(field).send(method, arg) }
     self
   end
 

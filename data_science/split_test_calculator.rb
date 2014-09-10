@@ -15,6 +15,13 @@ class SplitTestCalculator
     end
   end
 
+  def confident?
+    control_min, control_max = @control_group.conversion_rate_range
+    variation_min, variation_max = @variation_group.conversion_rate_range
+
+    (control_min < variation_max) || (variation_min < control_max)
+  end
+
   private
 
   def assign_fields(stats)

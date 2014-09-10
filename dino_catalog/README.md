@@ -73,6 +73,13 @@ optparse gem
 
 
 
+# to do
+ACTION_ITEMS instead of choice_methods
+
+colorize
+
+error handling
+
 
 #### From Sri
 if !something to unless something

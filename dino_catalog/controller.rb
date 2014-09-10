@@ -4,6 +4,17 @@ require_relative "dino_collection"
 class Controller
   attr_accessor :all_the_dinos
 
+  ACTION_MAP = {
+    "all"       => :print_all_dinos,
+    "params"    => :search_dinos,
+    "add"       => :new_csv,
+    "exit"      => :exit,
+    "quit"      => :exit,
+    "q"         => :exit,
+    "examples"  => :print_examples,
+    "else"      => :print_invalid_choice
+  }
+
   def initialize
     @all_the_dinos = DinoCollection.new
     populate_directory
@@ -16,39 +27,36 @@ class Controller
   end
 
   def make_choices
-    print_choice_menu	
+    print_choice_menu
     choice = gets.chomp.downcase
 
-    case choice
-    when "all"
-      all_the_dinos.print_all
-    when "params"
-      search_by_params_hash
-    when "add"
-      new_csv
-    when "exit"
-      exit
-    when "examples"
-      print_examples
-    else
-      puts "\nWhoops! '#{choice}' is not one of the options :("
-    end
+    choice = "else" unless ACTION_MAP.has_key? choice
+
+    self.send(ACTION_MAP[choice])
 
     make_choices
   end
 
   private
 
-    def search_by_params_hash
+    def print_all_dinos
+      all_the_dinos.print_all
+    end
+
+    def print_invalid_choice
+      puts "\nWhoops! Your entry is not one of the options :(".colorize(:red)
+    end
+
+    def search_dinos
       puts "Please enter a hash of search params:"
       puts "example: { 'period' : 'cretaceous', 'diet' : 'carnivore' }"
 
       filter_params = JSON.parse(gets.chomp)
       puts "\nSearch results:"
-      puts find_dinos_by_params(filter_params).map(&:to_s)	
+      puts filter_dinos(filter_params).map(&:to_s)	
     end
 
-    def find_dinos_by_params(filter_params)
+    def filter_dinos(filter_params)
       filtered_dinos = all_the_dinos.dinos
 
       filter_params.each do |key, val|
@@ -70,12 +78,12 @@ class Controller
     end
 
     def print_welcome_message
-      puts "\nWelome to the Dino Directory!!!!!"
+      puts "\nWelome to the Dino Directory!!!!!".colorize(:green)
     end
 
     def print_choice_menu
       puts "----------------------------------------------------------"
-      puts "\nWhat would you like to do?"
+      puts "\nWhat would you like to do?".colorize(:light_cyan)
       puts "  - Enter 'all' to print all dinos"
       puts "  - Enter 'params' to print dinos with specific parameters"
       puts "  - Enter 'add' to add new dinos via CSV"

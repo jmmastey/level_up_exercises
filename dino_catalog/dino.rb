@@ -1,3 +1,4 @@
+require "colorize"
 require "csv"
 
 class Dino
@@ -19,7 +20,7 @@ class Dino
   end
 
   def eats_meat?
-    ["carnivore", "insectivore", "piscivore"].include? @diet.downcase 
+    ["carnivore", "insectivore", "piscivore"].include? @diet.downcase
   end
 
   def from_period?(period_name)
@@ -30,7 +31,7 @@ class Dino
     hash = {}
 
     instance_variables.each do |var|
-      hash[var.to_s.delete("@")] = instance_variable_get(var) 
+      hash[var.to_s.delete("@")] = instance_variable_get(var)
     end
 
     hash
@@ -38,8 +39,8 @@ class Dino
 
   def to_s
     to_hash.map do |key, val|
-      "#{key.capitalize}: #{val}" 
-    end.join(" --- ")
+      "#{key.capitalize.colorize(:yellow)}: #{val}"
+    end.join("\n") + "\n\n"
   end
 end
 

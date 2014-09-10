@@ -3,7 +3,6 @@ class SplitTestCalculator
 
   def initialize(stats = {})
     assign_fields(stats)
-    run_calculations
   end
 
   private
@@ -17,8 +16,5 @@ class SplitTestCalculator
       conversions: stats[:variation_conversions],
       views: stats[:variation_views]
     )
-  end
-
-  def run_calculations
   end
 end

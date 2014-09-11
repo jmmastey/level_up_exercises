@@ -24,10 +24,10 @@ describe SplitTestGroup do
     end
   end
 
-  describe "#conversion_rate_interval" do
-    it "gets the conversion rate confidence interval" do
-      rounded_interval = group_a.conversion_rate_interval.round(4)
-      expect(rounded_interval).to eq(0.0098)
+  describe "#conversion_rate_error" do
+    it "gets the conversion rate confidence error" do
+      rounded_error = group_a.conversion_rate_error.round(4)
+      expect(rounded_error).to eq(0.0098)
     end
   end
 
@@ -35,8 +35,8 @@ describe SplitTestGroup do
     it "gets the 95% confident range of the conversion rate" do
       min, max = group_a.conversion_rate_range
 
-      expect(min).to eq(group_a.conversion_rate - group_a.conversion_rate_interval)
-      expect(max).to eq(group_a.conversion_rate + group_a.conversion_rate_interval)
+      expect(min).to eq(group_a.conversion_rate - group_a.conversion_rate_error)
+      expect(max).to eq(group_a.conversion_rate + group_a.conversion_rate_error)
     end
   end
 end

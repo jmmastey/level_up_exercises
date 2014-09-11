@@ -4,7 +4,7 @@ describe SplitTestCalculator do
 
   it "can be created using a hash of data" do
     control_group = SplitTestGroup.new(name: "A", views: 1349, conversions: 47)
-    variation_group = SplitTestGroup.new(name: "B", views:1543, conversions: 79)
+    variation_group = SplitTestGroup.new(name: "B", views: 1543, conversions: 79)
     SplitTestCalculator.new(control_group: control_group,
                             variation_group: variation_group)
   end
@@ -16,7 +16,7 @@ describe SplitTestCalculator do
 
   let(:calc) do
     control_group = SplitTestGroup.new(name: "A", views: 1349, conversions: 47)
-    variation_group = SplitTestGroup.new(name: "B", views:1543, conversions: 79)
+    variation_group = SplitTestGroup.new(name: "B", views: 1543, conversions: 79)
     SplitTestCalculator.new(control_group: control_group,
                             variation_group: variation_group)
   end

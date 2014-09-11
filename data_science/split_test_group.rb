@@ -13,19 +13,19 @@ class SplitTestGroup
     @conversion_rate ||= @conversions.to_f / @views
   end
 
-  def conversion_rate_interval
-    unless @conversion_rate_interval
+  def conversion_rate_error
+    unless @conversion_rate_error
       standard_error = Math.sqrt(conversion_rate * (1 - conversion_rate) / @views)
-      @conversion_rate_interval = CONFIDENCE_STD_ERROR_FACTOR * standard_error
+      @conversion_rate_error = CONFIDENCE_STD_ERROR_FACTOR * standard_error
     end
 
-    @conversion_rate_interval
+    @conversion_rate_error
   end
 
   def conversion_rate_range
     unless @conversion_rate_range
-      min = conversion_rate - conversion_rate_interval
-      max = conversion_rate + conversion_rate_interval
+      min = conversion_rate - conversion_rate_error
+      max = conversion_rate + conversion_rate_error
     end
 
     @conversion_rate_range = [min, max]

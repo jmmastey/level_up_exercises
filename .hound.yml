@@ -18,8 +18,6 @@ Style/EachWithObject:
 Style/StringLiterals:
   Enabled: false
 
-Style/StringLiterals:
-  Enabled: false
-
+#C: Prefer fail over raise
 Style/SignalException:
   Enabled: false

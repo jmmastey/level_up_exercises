@@ -30,12 +30,12 @@ class Robot
     if @name_generator
       @name = @name_generator.call
     else
-      @name = [ generate_char,
-                generate_char,
-                generate_num,
-                generate_num,
-                generate_num
-      ].join
+      @name = [generate_char,
+               generate_char,
+               generate_num,
+               generate_num,
+               generate_num
+              ].join
     end
   end
 

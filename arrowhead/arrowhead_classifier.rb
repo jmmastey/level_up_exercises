@@ -66,4 +66,3 @@ end
 classifier = ArrowheadClassifier.new
 classifier.classify(:far_west, :notched)
 classifier.classify(:somewhere_else, :etc)
-

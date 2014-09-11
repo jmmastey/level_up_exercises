@@ -1,9 +1,10 @@
 class SplitTestGroup
-  attr_reader :conversions, :views
+  attr_reader :name, :conversions, :views
 
   CONFIDENCE_STD_ERROR_FACTOR = 1.96
 
   def initialize(data)
+    @name = data[:name]
     @conversions = data[:conversions]
     @views = data[:views]
   end

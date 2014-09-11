@@ -2,7 +2,10 @@ class SplitTestCalculator
   attr_reader :control_group, :variation_group
 
   def initialize(stats = {})
-    assign_fields(stats)
+    validate_stats(stats)
+
+    @control_group = stats[:control_group]
+    @variation_group = stats[:variation_group]
   end
 
   def better_group
@@ -24,14 +27,8 @@ class SplitTestCalculator
 
   private
 
-  def assign_fields(stats)
-    @control_group = SplitTestGroup.new(
-      conversions: stats[:control_conversions],
-      views: stats[:control_views]
-    )
-    @variation_group = SplitTestGroup.new(
-      conversions: stats[:variation_conversions],
-      views: stats[:variation_views]
-    )
+  def validate_stats(stats)
+    raise ArgumentError, ":control_group must be assigned." unless stats[:control_group]
+    raise ArgumentError, ":variation_group must be assigned." unless stats[:variation_group]
   end
 end

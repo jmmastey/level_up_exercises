@@ -2,23 +2,22 @@ require 'pp'
 
 class Dinosaur
 
-  def initialize(dino_data=[])
-    @dinosaur_data = dino_data
-    @dino_name = @dinosaur_data['name']
-    @biped = @dinosaur_data['walking']
-    @quadriped = @dinosaur_data['walking']
-    @weigh = @dinosaur_data['weight'].to_i
-    @diet_type = @dinosaur_data['diet']
-    @continent = @dinosaur_data['continent']
-    @life_period = @dinosaur_data['period']
+  attr_reader :name, :walking, :weight, :diet, :continent, :period
+  def initialize(dino_data)
+    @dino_name = dino_data['name']
+    @walking = dino_data['walking']
+    @weigh = dino_data['weight'].to_i
+    @diet_type = dino_data['diet']
+    @continent = dino_data['continent']
+    @life_period = dino_data['period']
   end
 
   def biped?
-    @biped == "Biped"
+    @walking == "Biped"
   end
 
   def quadriped?
-    @quadriped == "Quadriped"
+    @walking == "Quadriped"
   end
 
   def continent_from?(continent_name)
@@ -38,11 +37,11 @@ class Dinosaur
   end
 
   def diet?(diet)
-  @diet_type.include?(diet)
+    @diet_type.include?(diet)
   end
 
   def to_s
-    print "Name of dinosaur #{@dino_name}, walking style - #{@biped}, from #{@life_period} period was a #{@diet_type}"
+    print "Name of dinosaur #{@dino_name}, walking style - #{@walking}, from #{@life_period} period was a #{@diet_type}"
     print " living in #{@continent}" if !@continent.nil?
     print " weighing #{@weigh}" if @weigh>0
   end

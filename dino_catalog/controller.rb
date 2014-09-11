@@ -57,13 +57,20 @@ class Controller
   end
 
   def filter_dinos(filter_params)
-    filtered_dinos = all_the_dinos.dinos
 
-    filter_params.each do |key, val|
-      filtered_dinos.select! { |d| d.send(key) == val }
+    all_the_dinos.dinos.select do |dino|
+      filter_params.reduce(true) do |is_match, pair|
+        key, value = pair[0], pair[1]
+        is_match && dino.send(key) == value
+      end
     end
 
-    filtered_dinos
+#    filtered_dinos = all_the_dinos.dinos
+#    filter_params.each do |key, val|
+#      filtered_dinos.select! { |d| d.send(key) == val }
+#    end
+#
+#    filtered_dinos
   end
 
   def new_csv

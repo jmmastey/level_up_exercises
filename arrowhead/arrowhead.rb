@@ -39,7 +39,7 @@ def self.classify
   raise "Classification doesn't exist" unless self.classication_present?
 
   arrowhead = CLASSFICATIONS[region][shape]
-  puts "You have a(n) #{arrowhead} arrowhead. Probably priceless."
+  "You have a(n) #{arrowhead} arrowhead. Probably priceless."
 end
 
 def self.region_present?(region)

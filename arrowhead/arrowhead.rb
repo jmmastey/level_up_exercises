@@ -47,4 +47,4 @@ def self.region_present?(region)
 end
 
 
-puts Arrowhead::classify(:northern_plains, :bifurcated)
+puts Arrowhead.classify(:northern_plains, :bifurcated)

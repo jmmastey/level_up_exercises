@@ -17,3 +17,7 @@ Style/EachWithObject:
 # C: Removing the preference for string single quotes
 Style/StringLiterals:
   Enabled: false
+
+#C: Prefer fail over raise
+Style/SignalException:
+  Enabled: false

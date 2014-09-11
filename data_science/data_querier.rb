@@ -14,19 +14,22 @@ class DataQuerier
     @test_data = data
   end
 
-  def count_cohort_conversions(cohort)
+  def count_conversions(cohort)
     count { |entry| entry.cohort == cohort && entry.conversion? }
   end
 
-  def count_cohort_views(cohort)
+  def count_views(cohort)
     count { |entry| entry.cohort == cohort }
   end
 
   private
 
   def validate_data(data)
-    unless data.is_a?(Array) && data.all? { |entry| entry.is_a?(DataEntry) }
-      raise ArgumentException, "Data must be an array of DataEntries."
-    end
+    valid = data.is_a?(Array) && data.all? { |entry| entry.is_a?(DataEntry) }
+    validate_data_error unless valid
+  end
+
+  def validate_data_error
+    raise ArgumentException, "Data must be an array of DataEntries."
   end
 end

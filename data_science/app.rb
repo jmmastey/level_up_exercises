@@ -20,6 +20,7 @@ class App
   end
 
   private
+
   def init_lines
     @lines ||= {
       thin: "-",
@@ -47,11 +48,11 @@ class App
   def calculate_data(data)
     querier = DataQuerier.new(data)
     control = SplitTestGroup.new(name: "A",
-                                 conversions: querier.count_cohort_conversions("A"),
-                                 views: querier.count_cohort_views("A"))
+                                 conversions: querier.count_conversions("A"),
+                                 views: querier.count_views("A"))
     variation = SplitTestGroup.new(name: "B",
-                                   conversions: querier.count_cohort_conversions("B"),
-                                   views: querier.count_cohort_views("B"))
+                                   conversions: querier.count_conversions("B"),
+                                   views: querier.count_views("B"))
 
     SplitTestCalculator.new(control_group: control,
                             variation_group: variation)

@@ -12,7 +12,7 @@ describe OutputFormatter do
       group = SplitTestGroup.new(name: "A",
                                  views: 1000,
                                  conversions: 50)
-      
+
       formatted_text = formatter.format(group)
 
       expect(formatted_text).to include("Group A")

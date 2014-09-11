@@ -6,11 +6,12 @@ ruby '2.1.2'
 source 'https://rubygems.org'
 
 group :development, :test do
-  gem 'terminal-notifier-guard'
-  gem 'guard', '~> 2.6.1'
-  gem 'guard-rspec', '~> 4.3.1', require: false
-  gem 'guard-shell', require: false
-  gem 'rspec', '~> 3.0.0'
   gem 'coveralls', require: false
-  gem 'rubocop'
+  gem 'guard', require: false
+  gem 'guard-rspec', require: false
+  gem 'guard-rubocop', require: false
+  gem 'guard-shell', require: false
+  gem 'rspec', require: false
+  gem 'rubocop', require: false
+  gem 'terminal-notifier-guard', require: false
 end

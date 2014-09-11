@@ -1,0 +1,37 @@
+<html>
+  <h1><%= flash[:notice] %></h1>
+  <h1> This is a bomb.</h1>
+  <form action="activate" method="post">
+    <div id="activation_code_div">
+      <label>Enter the activation code:
+        <input type="text" name="activation_code" id="activation_code">
+      </label>
+    </div>
+    <div id="timer_div">
+      <label>Enter time value for the bomb:
+        <input type="text" name="timer" id="timer" class="numeric">
+      </label>
+      <span class="error" style="color: Red; display: none">* Input digits (0 - 9)</span>
+    </div>
+    <input type="submit" id="submit">
+  </form>
+</html>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+  var specialKeys = new Array();
+  specialKeys.push(8); //Backspace
+  $(function () {
+    $(".numeric").bind("keypress", function (e) {
+      var keyCode = e.which ? e.which : e.keyCode
+      var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+      $(".error").css("display", ret ? "none" : "inline");
+        return ret;
+      });
+      $(".numeric").bind("paste", function (e) {
+        return false;
+      });
+      $(".numeric").bind("drop", function (e) {
+        return false;
+    });
+  });
+</script>

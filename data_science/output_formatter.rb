@@ -32,15 +32,15 @@ class OutputFormatter
     better_group = format_better_group(calculator.better_group)
     confidence = format_confidence(calculator.confident?)
 
-    "CONTROL   #{groups[:control_group]}\n\n" <<
-    "VARIATION #{groups[:variation_group]}\n\n" <<
-    "#{better_group}\n" <<
+    "CONTROL   #{groups[:control_group]}\n\n" \
+    "VARIATION #{groups[:variation_group]}\n\n" \
+    "#{better_group}\n" \
     "#{confidence}\n"
   end
 
   def format_confidence(confident)
     if confident
-      "We are confident about the difference between these groups." 
+      "We are confident about the difference between these groups."
     else
       "We are not confident about the difference between these groups."
     end
@@ -53,8 +53,8 @@ class OutputFormatter
     rate = format_pct(group.conversion_rate)
     error = format_pct(group.conversion_rate_error)
 
-    "Group #{name}\n" <<
-    "  #{conversions} conversions from #{views} views\n" <<
+    "Group #{name}\n" \
+    "  #{conversions} conversions from #{views} views\n" \
     "  #{rate} \xc2\xb1 #{error} conversion rate"
   end
 

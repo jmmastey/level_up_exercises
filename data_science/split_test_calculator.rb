@@ -28,7 +28,11 @@ class SplitTestCalculator
   private
 
   def validate_stats(stats)
-    raise ArgumentError, ":control_group must be assigned." unless stats[:control_group]
-    raise ArgumentError, ":variation_group must be assigned." unless stats[:variation_group]
+    group_unassigned_error(:control_group) unless stats[:control_group]
+    group_unassigned_error(:variation_group) unless stats[:variation_group]
+  end
+
+  def group_unassigned_error(group)
+    raise ArgumentError, "#{group} must be assigned."
   end
 end

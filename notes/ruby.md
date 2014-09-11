@@ -117,6 +117,29 @@ ________________________________________________________________________
 
 ## Methods
 
+### Reduce
+
+```
+irb(main):002:0> [ 1,2,3,4].reduce(0) do |a,b|
+irb(main):003:1*   puts "a = #{a}, b = #{b}"
+irb(main):004:1>   a+b
+irb(main):005:1> end
+a = 0, b = 1
+a = 1, b = 2
+a = 3, b = 3
+a = 6, b = 4
+=> 10
+```
+
+```
+irb(main):011:0> { :x => 1, :y => 2 }.reduce(0) do |a,b|
+irb(main):012:1*   puts b.inspect
+irb(main):013:1>   0
+irb(main):014:1> end
+[:x, 1]
+[:y, 2]
+=> 0
+```
 
 ####&-unary operator
 

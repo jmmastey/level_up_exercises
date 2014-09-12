@@ -30,7 +30,7 @@ class OutputFormatter
       variation_group: format_group(calculator.variation_group)
     }
     better_group = format_better_group(calculator.better_group)
-    confidence = format_confidence(calculator.confident?)
+    confidence = format_confidence_level(calculator.confidence_level)
 
     "CONTROL   #{groups[:control_group]}\n\n" \
     "VARIATION #{groups[:variation_group]}\n\n" \
@@ -38,12 +38,8 @@ class OutputFormatter
     "#{confidence}\n"
   end
 
-  def format_confidence(confident)
-    if confident
-      "We are confident about the difference between these groups."
-    else
-      "We are not confident about the difference between these groups."
-    end
+  def format_confidence_level(confidence_level)
+    "Confidence in variation: #{format_pct(confidence_level)}"
   end
 
   def format_group(group)

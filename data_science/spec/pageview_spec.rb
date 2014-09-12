@@ -8,13 +8,13 @@ describe PageView do
     let (:testdate) { Date.parse("2001-02-03") }
 
     let (:pageview) do
-      PageView.new(id:"idA", date: testdate, purchase: false)
+      PageView.new(id:"idA", date: testdate, purchased: false)
     end
 
     it "will store parameters" do
       expect(pageview.id).to eq("idA")
       expect(pageview.date).to eq(testdate)
-      expect(pageview.purchase).to eq(false)
+      expect(pageview.purchased).to eq(false)
     end
   end
 end

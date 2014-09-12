@@ -1,8 +1,9 @@
 class PageView
-  attr_reader :date, :purchase, :id
+  attr_reader :date, :purchased, :id
+
   def initialize(params)
     @date = params[:date]
-    @purchase = params[:purchase]
+    @purchased = params[:purchased]
     @id = params[:id]
   end
 end

@@ -3,13 +3,13 @@ class NameCollisionError < RuntimeError; end
 
 class Robot
   attr_accessor :name
-  
+
   ALPHACOUNT = 2
   DIGITCOUNT = 3
   REGISTRY = []
   SCHEMA = "[[:alpha:]]{#{ALPHACOUNT}}[[:digit:]]{#{DIGITCOUNT}}"
-  NAME_SCHEMA = Regexp.new(SCHEMA) 
-  
+  NAME_SCHEMA = Regexp.new(SCHEMA)
+
   # TO-DO dynamic regex generation
 
   def initialize(args = {})
@@ -19,7 +19,7 @@ class Robot
 
     raise_name_mismatch_error unless name =~ NAME_SCHEMA
     raise_name_collision_error if REGISTRY.include?(name)
-    
+
     register_name(@name)
   end
 
@@ -38,10 +38,10 @@ class Robot
     rand(10)
   end
 
-private
+  private
 
   def raise_name_mismatch_error
-    fail InvalidNameError, "A robot cannot be created with the name '#{name}'" 
+    fail InvalidNameError, "A robot cannot be created with the name '#{name}'"
   end
 
   def raise_name_collision_error

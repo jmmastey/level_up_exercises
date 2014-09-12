@@ -1,4 +1,4 @@
-class NameCollisionError < RuntimeError; end;
+class NameCollisionError < RuntimeError; end
 
 class Robot
   attr_accessor :name

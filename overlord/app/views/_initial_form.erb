@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <form name="activationForm" rc-submit="submit()" class="form-horizontal row" novalidate ng-hide="bombActive">
+    <form name="activationForm" id="activationForm" rc-submit="submit()" class="form-horizontal row" novalidate ng-hide="bombActive">
         <% @form_fields.each_with_index do |field, index| %>
             <div class="form-group" ng-class="errorClass(activationForm.<%= field %>)">
                 <div class="control-group">

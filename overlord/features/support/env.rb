@@ -11,12 +11,12 @@ require 'rspec/expectations'
 
 Capybara.app = Overlord
 
-class OverlordWorld
-  include Capybara::DSL
-  include RSpec::Expectations
-  include RSpec::Matchers
-end
-
-World do
-  OverlordWorld.new
-end
+# class OverlordWorld
+#   include Capybara::DSL
+#   include RSpec::Expectations
+#   include RSpec::Matchers
+# end
+#
+# World do
+#   OverlordWorld.new
+# end

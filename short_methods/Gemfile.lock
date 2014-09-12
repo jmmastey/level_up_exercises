@@ -26,6 +26,9 @@ GEM
     guard-rspec (4.3.1)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
+    guard-rubocop (1.1.0)
+      guard (~> 2.0)
+      rubocop (~> 0.20)
     guard-shell (0.6.1)
       guard (>= 1.1.0)
     hitimes (1.2.2)
@@ -91,9 +94,10 @@ PLATFORMS
 
 DEPENDENCIES
   coveralls
-  guard (~> 2.6.1)
-  guard-rspec (~> 4.3.1)
+  guard
+  guard-rspec
+  guard-rubocop
   guard-shell
-  rspec (~> 3.1.0)
+  rspec
   rubocop
   terminal-notifier-guard

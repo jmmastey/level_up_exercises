@@ -1,3 +1,4 @@
+# arrowhead/arrowhead.rb
 class Arrowhead
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
@@ -20,19 +21,15 @@ class Arrowhead
     get_arrowhead(get_shapes(region), shape)
   end
 
-  private
-
   def self.get_arrowhead(shapes, shape)
     arrowhead = shapes[shape]
     puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   rescue
-    raise "Unknown shape value. Are you sure you know what you're talking about?"
+    raise "Unknown. Are you sure you know what you're talking about?"
   end
 
   def self.get_shapes(region)
-    CLASSIFICATIONS[region]
-    rescue
-      raise 'Unknown region, please provide a valid region.'
+    CLASSIFICATIONS.fetch(region)
   end
 end
 

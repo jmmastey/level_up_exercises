@@ -17,11 +17,10 @@ module ArrowDb
     found_arrowhead = arrowheads.find do |arrowhead|
       arrowhead.type == values[:type] && arrowhead.region == values[:region]
     end
-    return found_arrowhead unless found_arrowhead.nil?
-    arrowhead_not_found(values)
+    found_arrowhead || raise_not_found_error(values)
   end
 
-  def self.arrowhead_not_found(values)
+  def self.raise_not_found_error(values)
     fail "Arrowhead not found with type of '#{values[:type]}' and region of '#{values[:region]}'"
   end
 end

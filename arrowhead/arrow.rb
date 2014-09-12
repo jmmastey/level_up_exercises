@@ -7,6 +7,14 @@ class ArrowHead
     @region = values[:region]
   end
 
+  def from?(region)
+    @region == region
+  end
+
+  def type?(type)
+    @type == type
+  end
+
   def to_s
     @name
   end

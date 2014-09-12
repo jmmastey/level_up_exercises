@@ -15,7 +15,7 @@ module ArrowDb
   def self.find_arrowhead(values)
     arrowheads = ARROWHEADS.to_enum
     found_arrowhead = arrowheads.find do |arrowhead|
-      arrowhead.type == values[:type] && arrowhead.region == values[:region]
+      arrowhead.type?(values[:type]) && arrowhead.from?(values[:region])
     end
     found_arrowhead || raise_not_found_error(values)
   end

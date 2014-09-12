@@ -1,3 +1,5 @@
+require_relative "chi_square"
+
 class SplitTestCalculator
   attr_reader :control_group, :variation_group
 
@@ -23,6 +25,11 @@ class SplitTestCalculator
     variation_min, variation_max = @variation_group.conversion_rate_range
 
     (control_min < variation_max) || (variation_min < control_max)
+  end
+
+  def confidence_level
+    calc = ChiSquare.new
+    calc.confidence_level(@control_group, @variation_group)
   end
 
   private

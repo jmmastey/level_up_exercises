@@ -44,7 +44,7 @@ describe SplitTestCalculator do
 
   describe "#confidence_level" do
     it "returns the confidence level of a difference in probabilities" do
-      # expect(calc.confidence_level).to
+      expect(calc.confidence_level.round(2)).to eq(0.97)
     end
   end
 end

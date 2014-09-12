@@ -42,9 +42,9 @@ class Triangle
   end
 
   def angles
-    cos_a = cosine(adjacent1:@side2, adjacent2:@side3, opposite:@side1)
-    cos_b = cosine(adjacent1:@side1, adjacent2:@side3, opposite:@side2)
-    cos_c = cosine(adjacent1:@side1, adjacent2:@side2, opposite:@side3)
+    cos_a = cosine(adjacent1: @side2, adjacent2: @side3, opposite: @side1)
+    cos_b = cosine(adjacent1: @side1, adjacent2: @side3, opposite: @side2)
+    cos_c = cosine(adjacent1: @side1, adjacent2: @side2, opposite: @side3)
 
     angle_a = radians_to_degrees(Math.acos(cos_a))
     angle_b = radians_to_degrees(Math.acos(cos_b))

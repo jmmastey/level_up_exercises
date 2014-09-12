@@ -17,15 +17,11 @@ class Robot
     register_name(@name)
   end
 
-  def register_name(name)
-    @@registry << name
-  end
-
   def generate_name
-    name = []
-    2.times { name << random_char }
-    3.times { name << random_num }
-    name.join
+    name  = ""
+    2.times { name += random_char }
+    3.times { name += random_num.to_s }
+    name
   end
 
   def random_char
@@ -34,6 +30,12 @@ class Robot
 
   def random_num
     rand(10)
+  end
+
+private
+
+  def register_name(name)
+    @@registry << name
   end
 end
 

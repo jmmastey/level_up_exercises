@@ -38,6 +38,6 @@ class ChiSquare
   end
 
   def sum_fields(objects, field)
-    objects.inject(0) { |sum, obj| sum + obj.send(field) }
+    objects.map(&field).reduce(&:+)
   end
 end

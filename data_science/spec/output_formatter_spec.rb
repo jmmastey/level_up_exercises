@@ -31,7 +31,7 @@ describe OutputFormatter do
 
       expect(formatted_text).to include(formatter.format(control))
       expect(formatted_text).to include(formatter.format(variation))
-      expect(formatted_text).to include("confident")
+      expect(formatted_text).to include("Confidence in variation: 96")
       expect(formatted_text).to include("The variation group is superior.")
     end
   end

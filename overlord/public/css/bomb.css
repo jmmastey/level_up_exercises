@@ -1,0 +1,30 @@
+.bomb-background {
+    background-image: url("../images/iphone.png");
+    background-repeat:  no-repeat;
+    background-color: #ffffff;
+    width: 300px;
+    height: 697px;
+
+}
+
+.closed {
+    display: none;
+}
+
+.pressed {
+    background: #666;
+}
+
+.input {
+    display: block;
+    border: 2px solid #666;
+    max-width: 100px;
+    padding: 5px 10px;
+    height: 18px;
+    text-decoration: none;
+    color: #000;
+}
+
+.focus {
+    border: 2px solid #FF0000;
+}

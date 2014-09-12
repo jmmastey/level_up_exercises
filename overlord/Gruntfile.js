@@ -40,6 +40,14 @@ module.exports = function (grunt) {
 //                        'react/react.js': 'react/react.js'
                     }
                 },
+                angular_timer:{
+                    options: {
+                        destPrefix: 'public/js/'
+                    },
+                    files: {
+                        'modules/': ['bower_components/angular-timer/dist/angular-timer.min.js']
+                    }
+                }
 
             },
             concat: {

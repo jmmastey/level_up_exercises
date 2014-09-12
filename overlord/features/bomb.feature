@@ -10,8 +10,9 @@ Feature: Bomb
 
   Scenario: Activate the bomb with default code
     Given I am on the home page
-    And the "activation_code" field within "bomb_control" should not contain "*"
-    And the "deactivation_code" field within "bomb_control" should not contain "*"
+    When I fill in "1234" for "activation_code" within "activationForm"
+    Then the "activation_code" field within "activationForm" should not contain "1234"
+    Then the "deactivation_code" field within "bomb_control" should not contain "*"
     When I press "Activate" within "bomb_control"
     Then the bomb should be active
 

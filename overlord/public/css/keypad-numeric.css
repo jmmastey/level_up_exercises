@@ -139,7 +139,7 @@
 }
 .numpad .container
 {
-    max-width: 400px;
+    max-width: 280px;
 }
 .numpad p
 {
@@ -149,7 +149,7 @@
 }
 .span4
 {
-    width: 80px;
+    width: 40px;
     float: left;
     margin: 0 8px 10px 8px;
 }
@@ -178,7 +178,7 @@
     -webkit-border-radius: 999px;
     border-radius: 999px;
     -moz-border-radius: 999px;
-    height: 80px;
+    height: 40px;
     background-color: #fff;
     color: #333;
     cursor: pointer;
@@ -194,16 +194,16 @@
 }
 .txt
 {
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 0px;
     font-family: 'Lato' , sans-serif;
-    line-height: 30px;
+    line-height: 23px;
     color: #333;
 }
 .small
 {
-    font-size: 15px;
+    font-size: 9px;
 }
 
 .btn

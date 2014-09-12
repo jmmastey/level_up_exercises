@@ -35,6 +35,8 @@ class Overlord < Sinatra::Application
         :default,
         "sqlite3://#{Dir.pwd}/bomb_test.db"
     )
+    set :views_folder, "#{File.dirname(__FILE__)}/views"
+    set :public_folder, "#{File.dirname(__FILE__)}/public"
   end
 
   configure :production do
@@ -45,9 +47,8 @@ class Overlord < Sinatra::Application
   end
 
   get '/' do
-    erb :index, layout: :base, locals: { keypad_numbers: keypad_numbers,
-                                         last_row: keypad_last_row,
-                                         control_row: keypad_control_row }
+    @form_fields = %w(activation_code deactivation_code detonation_time)
+    erb :index, layout: :base
   end
 
   # after do

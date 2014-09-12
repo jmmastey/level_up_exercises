@@ -16,18 +16,18 @@ gem 'bundler'
 
 group :test do
   gem 'rspec'
+  gem 'rspec-expectations', require: 'rspec/expectations'
   gem 'rack-test', require: 'rack/test'
+  gem 'cucumber'
+  gem 'cucumber-sinatra'
+  gem 'capybara'
+  gem 'nokogiri'
 end
 
-group :development do
+group :test, :development do
   gem 'dm-sqlite-adapter'
   gem 'tux'
   gem 'debase'
   gem 'ruby-debug-ide'
 end
 
-group :test, :development do
-  gem 'cucumber-sinatra'
-  gem 'capybara'
-  gem 'nokogiri'
-end

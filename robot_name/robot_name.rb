@@ -10,8 +10,6 @@ class Robot
   SCHEMA = "[[:alpha:]]{#{ALPHACOUNT}}[[:digit:]]{#{DIGITCOUNT}}"
   NAME_SCHEMA = Regexp.new(SCHEMA)
 
-  # TO-DO dynamic regex generation
-
   def initialize(args = {})
     @name_generator = args[:name_generator] || method(:generate_name)
 

@@ -16,6 +16,7 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
@@ -26,7 +27,7 @@ end
 
 When /^(?:|I )press "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
   with_scope(selector) do
-    click_button(button)
+    click_link(button)
   end
 end
 
@@ -100,7 +101,7 @@ end
 Then /^(?:|I )should see JSON:$/ do |expected_json|
   require 'json'
   expected = JSON.pretty_generate(JSON.parse(expected_json))
-  actual   = JSON.pretty_generate(JSON.parse(response.body))
+  actual = JSON.pretty_generate(JSON.parse(response.body))
   expected.should == actual
 end
 
@@ -217,3 +218,5 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+

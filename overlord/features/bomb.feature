@@ -5,29 +5,30 @@ Feature: Bomb
 
   Scenario: First boot
     Given I am on the home page
-    Then the bomb should not be active
+    Then  I should see "Deactivated" within "#bomb_status"
 
 
   Scenario: Activate the bomb with default code
     Given I am on the home page
-    When I fill in "1234" for "activation_code"
-    Then the "activation_code" should not contain "1234"
-    Then the "deactivation_code" should not contain "*"
-    When I press "Activate" within "bomb_control"
+
+#    Then the "activation_code" should not contain "*"
+    Then the "activation_code" field within "#activationForm" should not contain "1234"
+#    Then the "deactivation_code" should not contain "*"
+    Then I press "#activated"
     Then the bomb should be active
 
   Scenario: Deactivate bomb with default code
     Given I am on the home page
     And I should see "Active" within "bomb_status"
-    When I fill in "0000" for "deactivation_code" within "bomb_control"
+    When I fill in "0000" for "deactivation_code" within "bomb-control"
     And I press "Deactivate" within "bomb_control"
     Then the bomb should not be active
 
   Scenario: Activate the bomb with codes
     Given I am on the home page
     Then I should not see "Active" within "bomb_status"
-    When I fill in "4321" for "activation_code" within "bomb_control"
-    Then I fill in "1234" for "deactivation_code" within "bomb_control"
+    When I fill in "4321" for "activation_code" within "activationForm"
+    Then I fill in "1234" for "deactivation_code" within "activationForm"
     When I press "Activate" within "bomb_control"
     Then the bomb should be active
 

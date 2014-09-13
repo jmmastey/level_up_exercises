@@ -2,13 +2,13 @@
     <h1>Overlord</h1>
     <!--Overlord - Evil Genius Bom-->
 </div>
-<div class="row" ng-controller="BombController" id="bomb_control">
+<div class="row" ng-controller="BombController" id="bomb-control">
     <div class="bomb-background col-md-6 col-md-offset-3 col-sm-10 col-xs-offset-1 col-xs-10 col-sm-offset-1">
 
-        <div class="panel panel-default" ng-show="bombActive">
+        <div class="panel panel-default"  id="status">
             <div class="panel-heading"><h4>STATUS</h4></div>
             <div class="panel-body">
-                <div class="alert alert-info bomb-status">Deactivated</div>
+                <div class="alert alert-info" id="bomb_status">Deactivated</div>
                 <div class="alert alert-info bomb-timer" ng-bind-template="Timer: {{detonationTime}}">Timer: {{detonationTime}}</div>
             </div>
         </div>

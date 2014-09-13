@@ -1,27 +1,36 @@
-When(/^I boot a bomb$/) do
-  @bomb = Bomb.new
+Given(/^my bomb is not booted$/) do
+  pending # express the regexp above with the code you wish you had
 end
 
-Then(/^the bomb should not be activated$/) do
-  expect(@bomb).not_to be_active
+When(/^I boot my bomb$/) do
+  pending # express the regexp above with the code you wish you had
 end
 
-Then(/^its activation code should be (\d+)$/) do |code|
-  expect(@bomb.activation_code).to eq(code)
+Then(/^my bomb should be inactive$/) do
+  pending # express the regexp above with the code you wish you had
 end
 
-Then(/^its deactivation code should be (\d+)$/) do |code|
-  expect(@bomb.deactivation_code).to eq(code)
+Then(/^my bomb's activation code should be (\d+)$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
 end
 
-Given(/^my activation code is (\d+)$/) do |code|
-  @activation_code = code
+Then(/^my bomb's deactivation code should be (\d+)$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
 end
 
-Given(/^my deactivation code is (\d+)$/) do |code|
-  @deactivation_code = code
+Given(/^I set my activation code to (\d+)$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
 end
 
-When(/^I boot a bomb with both codes$/) do
-  @bomb = Bomb.new(@activation_code, @deactivation_code)
+Given(/^I set my deactivation code to (\d+)$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
 end
+
+When(/^I set my activation code to "(.*?)"$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^my bomb should reject the code$/) do
+  pending # express the regexp above with the code you wish you had
+end
+

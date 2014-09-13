@@ -1,18 +1,25 @@
 Feature: Booting
-  In order to use a bomb
-  As a super villian
+  As a super-villain
   I want to boot a bomb
+  so that I can use it later
 
-  Scenario: Boot a bomb
-    When I boot a bomb
-    Then the bomb should not be activated
-    And its activation code should be 1234
-    And its deactivation code should be 0000
+  Scenario: Booting without codes
+    Given my bomb is not booted
+    When I boot my bomb
+    Then my bomb should be inactive
+    And my bomb's activation code should be 1234
+    And my bomb's deactivation code should be 0000
 
-  Scenario: Boot a bomb with codes
-    Given my activation code is 5495
-    And my deactivation code is 1250
-    When I boot a bomb with both codes
-    Then the bomb should not be activated
-    And its activation code should be 5495
-    And its deactivation code should be 1250
+  Scenario: Booting with codes
+    Given my bomb is not booted
+    And I set my activation code to 3490
+    And I set my deactivation code to 1212
+    When I boot my bomb
+    Then my bomb should be inactive
+    And my bomb's activation code should be 3490
+    And my bomb's deactivation code should be 1212
+
+  Scenario: Booting with bad codes
+    Given my bomb is not booted
+    When I set my activation code to "Dog"
+    Then my bomb should reject the code

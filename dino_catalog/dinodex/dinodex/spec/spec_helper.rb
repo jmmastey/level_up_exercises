@@ -1,5 +1,3 @@
-$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__))) unless $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
-
 RSpec.configure do |config|
   config.mock_with :rspec do |c|
     c.syntax = [:should, :expect]
@@ -8,4 +6,3 @@ RSpec.configure do |config|
     c.syntax = [:should, :expect]
   end
 end
-

@@ -1,11 +1,11 @@
 require "dinosaur"
 
 class DinodexFilter
-
   def get_filtered_list(dinosaurs, criteria)
-    criteria.split("|").each do |criteria|
-      comparison = criteria[/[<>=]/]
-      key, value = criteria.split(/[<>=]/)
+    raise(ArgumentError, "Criteria not specified") if criteria.nil?
+    criteria.split("|").each do |criterion|
+      comparison = criterion[/[<>=]/]
+      key, value = criterion.split(/[<>=]/)
 
       raise_if_invalid(key, value)
 
@@ -17,38 +17,34 @@ class DinodexFilter
   private
 
   def raise_if_invalid(key, value)
-    if !Dinosaur.method_defined?(key)
-      raise(ArgumentError, "Invalid dinosaur attribute '#{key}' used")
-    end
+    raise(ArgumentError, "Empty value for '#{key}' used") if value.nil?
 
-    if value.nil?
-      raise(ArgumentError, "Empty value for '#{key}' used")
-    end
+    invalid_msg = "Invalid dinosaur attribute '#{key}' used"
+    raise(ArgumentError, invalid_msg) unless Dinosaur.method_defined?(key)
   end
 
   def filter(comparison, dinosaurs, key, value)
-    case comparison
-      when "="
-        dinosaurs.select! do |dinosaur|
-          dinosaur.send(key).nil? ? false : (dinosaur.send(key).downcase.include? (value.downcase))
-        end
-      when "<"
-        dinosaurs.select! do |dinosaur|
-          if dinosaur.send(key).nil?
-            false
-          else
-            dinosaur.send(key).to_i < value.to_i
-          end
-        end
-      when ">"
-        dinosaurs.select! do |dinosaur|
-          if dinosaur.send(key).nil? then
-            false
-          else
-            dinosaur.send(key).to_i > value.to_i
-          end
-        end
+    filter_map = { "=" => :filter_equals?,
+                   "<" => :filter_less_than?,
+                   ">" => :filter_greater_than?
+    }
+    unless filter_map[comparison]
+      raise(ArgumentError, "Invalid comparison operator #{comparison}")
+    end
+    dinosaurs.select! do |dinosaur|
+      send(filter_map[comparison], dinosaur, key, value)
     end
   end
 
+  def filter_greater_than?(dinosaur, key, value)
+    dinosaur.send(key).to_i > value.to_i
+  end
+
+  def filter_less_than?(dinosaur, key, value)
+    dinosaur.send(key).to_i < value.to_i
+  end
+
+  def filter_equals?(dinosaur, key, value)
+    dinosaur.send(key).downcase.include?(value.downcase)
+  end
 end

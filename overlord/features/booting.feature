@@ -22,4 +22,5 @@ Feature: Booting
   Scenario: Booting with bad codes
     Given my bomb is not booted
     When I set my activation code to "Dog"
+    And I boot my bomb
     Then my bomb should reject the code

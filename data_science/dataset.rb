@@ -33,6 +33,11 @@ class DataSet
     @dataset.group_by(&@group_field)
   end
 
+  def to_s
+    "total '#{@dataset.size}', successes '#{success_count}', " \
+    "failures '#{fail_count}', percent success '#{success_percent}'"
+  end
+
   private
 
   def dataset_group(group_key)

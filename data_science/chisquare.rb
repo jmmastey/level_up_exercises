@@ -47,4 +47,9 @@ class ChiSquare
     square_diff = (observed_size - global_percent * group_size)**2
     square_diff / (group_size * global_percent)
   end
+
+  def to_s
+    significant = (significant?) ? "is significant" : "is not significant"
+    "chi squared value is '#{value}' and the result #{significant}"
+  end
 end

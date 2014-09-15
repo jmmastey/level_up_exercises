@@ -16,7 +16,13 @@ def main
     )
   end
 
-  chisquare = ChiSquare.new(dataset: dataset)
+  chi_square = ChiSquare.new(dataset: dataset)
+  
+  appview = AppView.new
+
+  puts appview.dataset_message(dataset)
+  puts appview.interval_table(intervals)
+  puts appview.chisquare_results(chi_square)
 end
 
 main

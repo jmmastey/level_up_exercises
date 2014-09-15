@@ -28,4 +28,8 @@ class ConfidenceInterval
   def interval_weight
     1.96
   end
+
+  def to_s
+    "low '#{low_point}', mean '#{@probability}', high '#{high_point}"
+  end
 end

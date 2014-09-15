@@ -43,7 +43,7 @@ q                 quit
     @output = output
     @dinosaurs = []
     @csv_files = []
-    @dinodex_filter = DinodexFilter.new
+    @filter = DinodexFilter.new
   end
 
   def start(directory)
@@ -89,11 +89,11 @@ q                 quit
     selection.split(" ", 1)
   end
 
-  def help_display(*)
+  def help_display
     @output.puts MENU
   end
 
-  def key_display(*)
+  def key_display
     @output.puts "Keys available: name, period, diet, weight, walking, " \
       "description, continent"
   end

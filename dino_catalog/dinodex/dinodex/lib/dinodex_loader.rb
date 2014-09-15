@@ -3,8 +3,12 @@ require_relative "dinosaur"
 
 class DinodexLoader
   ALT_COLUMN_HANDLING = {
+    carnivore: :normalized_diet
+  }
+
+  ALT_COLUMN_NAMING = {
     genus: "name",
-    carnivore: { field: "diet", processor: :normalized_diet },
+    carnivore: "diet",
     weight_in_lbs: "weight"
   }
 
@@ -29,23 +33,21 @@ class DinodexLoader
 
   def read_row(new_dinosaurs, table)
     table.each do |row|
-      dinosaur = Dinosaur.new
-
-      row.fields.each_with_index do |field, index|
-        parse_csv_field(dinosaur, field, table.headers[index].downcase)
+      attrs = row.to_hash.inject({}) do |aggregator, var|
+        aggregator[rename_field(var[0])] = normalize_field(var[0], var[1])
+        aggregator
       end
-      new_dinosaurs.push dinosaur
+      new_dinosaurs << Dinosaur.new(attrs)
     end
   end
 
-  def parse_csv_field(dinosaur, value, column_name)
-    field_name = ALT_COLUMN_HANDLING[column_name.to_sym] || column_name
-    if field_name.is_a?(Hash) && self.respond_to?(field_name[:processor], true)
-      value = send(field_name[:processor], value)
-      field_name = field_name[:field]
-    end
-    dinosaur_respond_to = dinosaur.respond_to?("#{field_name}=")
-    dinosaur.send("#{field_name}=", value) if dinosaur_respond_to
+  def rename_field(file_column)
+    ALT_COLUMN_NAMING[file_column.downcase.to_sym] || file_column.downcase
+  end
+
+  def normalize_field(file_column, file_value)
+    return file_value unless ALT_COLUMN_HANDLING[file_column.downcase.to_sym]
+    send(ALT_COLUMN_HANDLING[file_column.downcase.to_sym], file_value)
   end
 
   def normalized_diet(carnivore)

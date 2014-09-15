@@ -1,0 +1,16 @@
+%html
+  %head
+    %title ACME Bomb
+  %body
+    .bomb
+      .wiring
+      .display
+        .activation_status
+        .timer
+        .status
+      .input
+        .keypad
+        .buttons
+          %button#activate{type: :button} Activate
+          %button#deactivate{type: :button} Deactivate
+          %button#confirm{type: :button} Confirm

@@ -1,0 +1,22 @@
+!!! XML
+!!!
+%html
+  %head
+    %title Someone set up us the bomb
+    %link{rel: :stylesheet, type: "text/css", href: "styles/boot.css"}
+  %body
+    .content
+      .center
+        %img{id: "cats", src: "images/cats.jpg"}
+        %h1 Someone set up us the bomb
+        - unless @error.nil? || @error.empty?
+          .error= @error
+      %form.boot_form{action: "/boot", method: :POST}
+        .field
+          %label{for: "activation_code"} Activation Code
+          %input.num#activation_code{type: "text", name: "activation_code", maxlength: 4}
+        .field
+          %label{for: "deactivation_code"} Deactivation Code
+          %input.num#deactivation_code{type: "text", name: "deactivation_code", maxlength: 4}
+        .buttons
+          %button{type: :submit} Boot

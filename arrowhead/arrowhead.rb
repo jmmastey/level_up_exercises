@@ -39,7 +39,7 @@ inputs = [
 inputs.each do |region_and_shape|
   begin
     Arrowhead.classify(region_and_shape[0], region_and_shape[1])
-  rescue ArgumentError => ae
-    puts "Argument error: #{ae.message}"
+  rescue ArgumentError => error
+    puts "Argument error: #{error.message}"
   end
 end

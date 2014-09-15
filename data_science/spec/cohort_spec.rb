@@ -11,6 +11,9 @@ describe Cohort do
     it "raises an error if no name" do
       expect { Cohort.new }.to raise_error ArgumentError
     end
+    
+    xit "raises an error if conversion/non-conversion are not integers" do
+    end
 
     it "can have conversions and non-conversions set on initialize" do
       cohort = Cohort.new("A", conversions: 10, non_conversions: 11)
@@ -39,15 +42,15 @@ describe Cohort do
     end
   end
 
-  describe "#sample_size" do
+  describe "#visitors" do
     it "sample size sums to conversions + nonconversions" do
       cohort = Cohort.new("A")
-      expect(cohort.sample_size).to eq(0)
+      expect(cohort.visitors).to eq(0)
 
       cohort.add_conversion
       cohort.add_conversion
       cohort.add_non_conversion
-      expect(cohort.sample_size).to eq(3)
+      expect(cohort.visitors).to eq(3)
     end
   end
 end

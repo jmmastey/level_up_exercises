@@ -5,7 +5,7 @@ describe Cohort do
   describe "#initialize" do
     it "must have a name" do
       cohort = Cohort.new("A")
-      expect(cohort.name).to be("A")
+      expect(cohort.name).to eq("A")
     end
 
     it "raises an error if no name" do
@@ -14,23 +14,34 @@ describe Cohort do
 
     it "initially has 0 conversions and nonconversions" do
       cohort = Cohort.new("A")
-      expect(cohort.conversions).to be(0)
-      expect(cohort.non_conversions).to be(0)
+      expect(cohort.conversions).to eq(0)
+      expect(cohort.non_conversions).to eq(0)
     end
   end
 
   describe "#add_conversion" do
     it "should increase number of conversions by 1" do
+      cohort = Cohort.new("A")
+      expect { cohort.add_conversion }.to change { cohort.conversions }.by(1)
     end
   end
 
   describe "#add_non_conversion" do
     it "should incease number of nonconversions by 1" do
+      cohort = Cohort.new("A")
+      expect { cohort.add_non_conversion }.to change { cohort.non_conversions }.by(1)
     end
   end
 
   describe "#sample_size" do
     it "sample size sums to conversions + nonconversions" do
+      cohort = Cohort.new("A")
+      expect(cohort.sample_size).to eq(0)
+
+      cohort.add_conversion
+      cohort.add_conversion
+      cohort.add_non_conversion
+      expect(cohort.sample_size).to eq(3)
     end
   end
 end

@@ -24,7 +24,7 @@ describe DataSet do
     end
 
     let(:groups) do
-       data_set.groups
+      data_set.groups
     end
 
     it "should provide the total chance success value" do

@@ -18,11 +18,11 @@ class ConfidenceInterval
   end
 
   def low_point
-     @probability - interval_weight * standard_deviation
+    @probability - interval_weight * standard_deviation
   end
 
   def high_point
-     @probability + interval_weight * standard_deviation
+    @probability + interval_weight * standard_deviation
   end
 
   def interval_weight

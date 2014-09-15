@@ -10,7 +10,7 @@ class ChiSquare
 
   def value
     @dataset.groups.each_key.inject(0) do |sum, group_id|
-      sum += chi_group_value(group_id) 
+      sum + chi_group_value(group_id)
     end
   end
 
@@ -21,7 +21,7 @@ class ChiSquare
   private
 
   def chi_group_value(group_id)
-    chi_success_value(group_id) + chi_fail_value(group_id) 
+    chi_success_value(group_id) + chi_fail_value(group_id)
   end
 
   def chi_success_value(group_id)
@@ -44,7 +44,7 @@ class ChiSquare
     observed_size = params[:observed_size]
     global_percent = params[:global_percent]
     group_size = params[:group_size]
-    square_diff = (observed_size - global_percent * group_size) ** 2
+    square_diff = (observed_size - global_percent * group_size)**2
     square_diff / (group_size * global_percent)
   end
 end

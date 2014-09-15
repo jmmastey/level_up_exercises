@@ -42,7 +42,7 @@ class Overlord < Sinatra::Base
   end
 
   def validate_code(code)
-    return true if code.match(BOMB_CODE_REGEX)
+    return true if code.empty? || code.match(BOMB_CODE_REGEX)
 
     add_error("#{code} is an invalid code.")
     false

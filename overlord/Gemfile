@@ -3,5 +3,10 @@ source "https://rubygems.org"
 
 ruby "2.1.0"
 
-gem "sinatra"
+gem "capybara"
+gem "cucumber"
 gem "haml"
+gem "pry"
+gem "rspec"
+gem "sass"
+gem "sinatra"

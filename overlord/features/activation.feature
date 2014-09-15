@@ -8,21 +8,21 @@ Feature: Activation
 
   Scenario: Entering activation code and receiving prompt
     Given the bomb is not active
-    When I enter activation code 1234
+    When I enter the code 1234
     Then I should see the confirmation message
 
   Scenario: Confirming activation
     Given the bomb is not active
-    When I enter activation code 1234
+    When I enter the code 1234
     And I confirm the code
     Then the bomb should be activated
     And the number of remaining disarm attempts should be set to 3
 
   Scenario: Entering an incorrect activation code
     Given the bomb is not active
-    When I enter activation code 5678
+    When I enter the code 5678
     Then I should see an "Invalid Activation Code" error
 
   Scenario: Entering activation code while bomb is active
-    Given the bomb not active
-    
+    Given the bomb is active
+    When I enter the code 

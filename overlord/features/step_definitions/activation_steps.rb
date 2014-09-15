@@ -7,7 +7,7 @@ Given(/^the bomb is not active$/) do
   expect(find(".activation_status")).to have_content("inactive")
 end
 
-When(/^I enter activation code (\d+)$/) do |code|
+When(/^I enter the code (\d+)$/) do |code|
   fill_in(:code, with: code)
 end
 

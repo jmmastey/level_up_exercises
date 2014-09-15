@@ -1,0 +1,78 @@
+// boot.scss
+
+$bg_color: black;
+$fg_color: white;
+$body_font: Fixedsys, Courier New, monospace;
+
+@font-face {
+  font-family: "Fixedsys";
+  src: url('fonts/fixedsys.eot');
+  src: url('fonts/fixedsys.eot?#iefix') format('embedded-opentype'),
+  url('fonts/fixedsys.ttf') format('truetype'),
+  url('fonts/fixedsys.svg#FixedsysExcelsior301Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: $bg_color; 
+  color: $fg_color;
+  font-family: $body-font;
+  text-transform: uppercase;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 794px;
+}
+
+.center {
+  text-align: center;
+}
+
+.error {
+  border-radius: 8px;
+  color: red;
+  padding: 8px;
+}
+
+h1, .buttons {
+  @extend .center;
+}
+
+button {
+  background-color: red;
+  border: none;
+  border-radius: 8px;
+  color: $bg_color;
+  display: inline-block;
+  font-size: 1.6em;
+  margin: 10px;
+  padding: 8px;
+  text-transform: uppercase;
+}
+
+.field {
+  font-size: 1.6em;
+
+  label {
+    display: inline-block;
+    min-width: 12em;
+  }
+
+  input {
+    background-color: $bg_color;
+    color: $fg_color;
+    font-family: $body_font;
+    font-size: 1.6em;
+  }
+
+  input.num {
+    width: 5em;
+  }
+}

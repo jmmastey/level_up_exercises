@@ -24,5 +24,13 @@ describe ConfidenceInterval do
       expect(easy_interval.standard_deviation).to eq(0.25)
       expect(hard_interval.standard_deviation).to eq((0.8 * (1 - 0.8))**0.5)
     end
+
+    it "should be able to calculate the low point" do
+      expect(easy_interval.low_point).to eq(0.5 - 1.96 * 0.25)
+    end
+
+    it "should be able to calculate the high point" do
+      expect(easy_interval.high_point).to eq(0.5 + 1.96 * 0.25)
+    end
   end
 end

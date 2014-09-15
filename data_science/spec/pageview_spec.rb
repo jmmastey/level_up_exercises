@@ -5,9 +5,9 @@ require_relative "../pageview"
 
 describe PageView do
   context "upon creation" do
-    let (:testdate) { Date.parse("2001-02-03") }
+    let(:testdate) { Date.parse("2001-02-03") }
 
-    let (:pageview) do
+    let(:pageview) do
       PageView.new(id: "idA", date: testdate, purchased: false)
     end
 

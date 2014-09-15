@@ -5,7 +5,7 @@ require_relative "../dataset.rb"
 
 describe DataSet do
   context "upon recieving data" do
-    let (:raw_data) do
+    let(:raw_data) do
       %q([{"date":"2014-03-15","cohort":"B","result":1},
           {"date":"2014-03-20","cohort":"B","result":0},
           {"date":"2014-03-20","cohort":"B","result":0},
@@ -14,7 +14,7 @@ describe DataSet do
           {"date":"2014-03-20","cohort":"A","result":0}])
     end
 
-    let (:data) do
+    let(:data) do
       ViewParser.new.parse(raw_data)
     end
 

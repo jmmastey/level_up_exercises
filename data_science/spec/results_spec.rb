@@ -1,11 +1,14 @@
+# Some questions I have for code review
+# how to "DRY" out code, for example repeating all the stuff in mocks..."
+
 require "spec_helper"
 require_relative "../results"
 
 describe Results do
   describe "#initialize" do
-    it "should start with no cohort data" do
+    it "should start with no data" do
       results = Results.new
-      expect(results.cohorts.count).to eq(0)
+      expect(results.data.count).to eq(0)
     end
   end
 
@@ -21,7 +24,7 @@ describe Results do
       expect { results.add_data }.to raise_error
     end
 
-    xit "parses JSON data and stores as cohort objects" do
+    it "parses JSON data and stores as cohort objects" do
       mock_json = "[{\"date\":\"2014-03-20\",\"cohort\":\"B\",\"result\":1},"
       mock_json += "{\"date\":\"2014-03-20\",\"cohort\":\"A\",\"result\":0}]"
       allow(File).to receive(:read).with("some_file").and_return(mock_json)
@@ -29,21 +32,20 @@ describe Results do
       results = Results.new
       results.add_data("some_file")
 
-      cohort_a = Cohort.new("A", conversions: 0, non_conversions: 1)
-      cohort_b = Cohort.new("B", conversions: 1, non_conversions: 0)
-      expect(results.cohorts).to include(cohort_a)
-      expect(results.cohorts).to include(cohort_b)
+      expect(results.data.first).to be_a DataPoint
+      expect(results.data.last).to be_a DataPoint
     end
 
-    xit "should create data object for each element in json input" do
-    #  mock_json = "[{\"date\":\"2014-03-20\",\"cohort\":\"B\",\"result\":1},"
-    #  mock_json += "{\"date\":\"2014-03-20\",\"cohort\":\"A\",\"result\":0}]"
-    #  allow(File).to receive(:read).with("some_file").and_return(mock_json)
+    it "should create data object for each element in json input" do
+      mock_json = "[{\"date\":\"2014-03-20\",\"cohort\":\"B\",\"result\":1},"
+      mock_json += "{\"date\":\"2014-03-20\",\"cohort\":\"A\",\"result\":1},"
+      mock_json += "{\"date\":\"2014-03-20\",\"cohort\":\"A\",\"result\":0}]"
+      allow(File).to receive(:read).with("some_file").and_return(mock_json)
 
-    #  parser = Results.new("some_file")
+      results = Results.new
+      results.add_data("some_file")
 
-    #  expect(parser.data.count).to be(2)
-#      expect(parser).to have(2).data
+      expect(results.data.count).to eq(3)
     end
   end
 end

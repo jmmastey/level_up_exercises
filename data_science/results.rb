@@ -1,10 +1,10 @@
 require "json"
 
 class Results
-  attr_reader :filename, :cohorts
+  attr_reader :filename, :data
 
   def initialize
-    @cohorts = []
+    @data = []
   end
 
   def add_data(filename)
@@ -18,7 +18,7 @@ class Results
     file = File.read filename
     input = JSON.parse file
     input.each do |data|
-      cohorts << Cohort.new(data["cohort"])
+      @data << DataPoint.new(data["cohort"], data["result"])
     end
   end
 end

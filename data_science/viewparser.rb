@@ -10,7 +10,7 @@ class ViewParser
     end
   end
 
-private 
+  private
 
   def build_pageview(item)
     date = Date.parse(item["date"])

@@ -5,7 +5,7 @@ require_relative "../pageview"
 require_relative "../viewparser"
 
 describe ViewParser do
-  context "Upon parsing json" do
+  context "upon parsing json" do
 
     let (:parser) { ViewParser.new }
 
@@ -14,12 +14,12 @@ describe ViewParser do
     let (:no_purchase_date) { Date.parse("2013-06-10") }
 
     let (:purchase_view) do
-      json = %q<[{"date":"2014-05-19","cohort":"A","result":1}]>
+      json = '[{"date":"2014-05-19","cohort":"A","result":1}]'
       parser.parse(json)[0]
     end
 
     let (:no_purchase_view) do
-      json = %q<[{"date":"2013-06-10","cohort":"B","result":0}]>
+      json = '[{"date":"2013-06-10","cohort":"B","result":0}]'
       parser.parse(json)[0]
     end
 

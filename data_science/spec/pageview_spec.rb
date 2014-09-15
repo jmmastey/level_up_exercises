@@ -4,11 +4,11 @@ require "date"
 require_relative "../pageview"
 
 describe PageView do
-  context "Upon Creation" do
+  context "upon creation" do
     let (:testdate) { Date.parse("2001-02-03") }
 
     let (:pageview) do
-      PageView.new(id:"idA", date: testdate, purchased: false)
+      PageView.new(id: "idA", date: testdate, purchased: false)
     end
 
     it "will store parameters" do

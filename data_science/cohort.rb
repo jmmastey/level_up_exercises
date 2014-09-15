@@ -1,10 +1,10 @@
 class Cohort
   attr_reader :name, :conversions, :non_conversions, :sample_size
 
-  def initialize(name)
+  def initialize(name, options = {})
     @name = name
-    @conversions = 0
-    @non_conversions = 0
+    @conversions = options[:conversions] || 0
+    @non_conversions = options[:non_conversions] || 0
   end
 
   def add_conversion

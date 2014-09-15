@@ -12,7 +12,13 @@ describe Cohort do
       expect { Cohort.new }.to raise_error ArgumentError
     end
 
-    it "initially has 0 conversions and nonconversions" do
+    it "can have conversions and non-conversions set on initialize" do
+      cohort = Cohort.new("A", conversions: 10, non_conversions: 11)
+      expect(cohort.conversions).to eq(10)
+      expect(cohort.non_conversions).to eq(11)
+    end
+
+    it "if not set, initially has 0 conversions and nonconversions" do
       cohort = Cohort.new("A")
       expect(cohort.conversions).to eq(0)
       expect(cohort.non_conversions).to eq(0)

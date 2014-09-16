@@ -2,13 +2,13 @@
 !!!
 %html
   %head
-    %title Someone set up us the bomb
+    %title Someone set us up the bomb
     %link{rel: :stylesheet, type: "text/css", href: "styles/boot.css"}
   %body
     .content
       .center
         %img{id: "cats", src: "images/cats.jpg"}
-        %h1 Someone set up us the bomb
+        %h1 Someone set us up the bomb
         - unless @error.nil? || @error.empty?
           .error= @error
       %form.boot_form{action: "/boot", method: :POST}

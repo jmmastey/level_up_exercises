@@ -28,7 +28,7 @@ body {
 
 button {
   background-color: red;
-  border: none;
+  border: 3px solid outset;
   border-radius: 8px;
   color: black;
   display: inline-block;
@@ -36,6 +36,9 @@ button {
   margin: 10px;
   padding: 8px;
   text-transform: uppercase; }
+
+button:active {
+  border-style: inset; }
 
 .field {
   font-size: 1.6em; }

@@ -27,17 +27,13 @@ class Results
   end
 
   def gather_data_into_cohorts
-    cohorts_temp = {}
-    cohorts.each do |cohort_name, _|
-      # REFACTOR THIS PLZ
-      conversions = num_conversions(cohort_name, true)
-
-
-      non_conversions = num_conversions(cohort_name, false)
-
-      cohorts_temp[cohort_name] = Cohort.new(cohort_name, conversions: conversions, non_conversions: non_conversions)
+    cohorts_orig = cohorts
+    cohorts_orig.each do |cohort, _|
+      @cohorts[cohort] =
+        Cohort.new(cohort,
+        conversions: num_conversions(cohort, true),
+        non_conversions: num_conversions(cohort, false))
     end
-    @cohorts = cohorts_temp
   end
 
   def num_conversions(cohort, converted)
@@ -45,11 +41,4 @@ class Results
       data_point.cohort_convert?(cohort, converted)
     end.count
   end
-
-  def num_non_conversions(cohort)
-    data_points.select do |data_point|
-      data_point.cohort_convert?(cohort, true)
-    end.count
-  end
 end
-

@@ -21,7 +21,7 @@ class ChiSquare
 
   def to_s
     significant = (significant?) ? "is significant" : "is not significant"
-    sprintf("chi squared value is '%f' and the result #{significant}", value)
+    format("chi squared value is '%f' and the result #{significant}", value)
   end
 
   private

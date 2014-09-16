@@ -62,7 +62,7 @@ class Overlord < Sinatra::Application
       errors = {}
       codes = %w(activation_code deactivation_code)
       codes.each do |code|
-        errors[code] = "too_short" if json[code.to_sym].size < 4
+        errors[code] = "code is too short" if json[code.to_sym].size < 4
       end
       unless errors.empty?
         status 400

@@ -1,10 +1,22 @@
 <div class="col-md-11 bomb-panel">
-    <div class="panel panel-default" ng-show="bombReady">
-        <div class="panel-body">
-            <div class="alert alert-danger bomb-status">{{bombStatus}}</div>
-            <timer interval="1000" autostart="false"> seconds left: {{countdown}}</timer>
+    <div class="" ng-show="bombReady">
+        <div class="row">
+            <div class="btn-group"><span class="btn btn-danger">STATUS<span class="badge bomb-status">{{bombStatus}}</span></span></div>
+        </div>
+        <div class="btn btn-lg" id="bomb-timer">
+            <span class="glyphicon glyphicon-time"></span>
+            <timer interval="1000" autostart="false"><span class="label label-warning">{{countdown}}</span></timer>
+        </div>
+        <div class="row" ng-hide="bombActive">
+        <h1>READY?</h1>
         </div>
 
+    </div>
+    <div id="wires" class="row">
+        <div ng-repeat="wire in wires" class="wire col-md-2" style="background-color:{{'#'+wire.color}};"
+             ng-click="cutWire(wire.id)" id="{{'wire_'+wire.id}}"
+             ng-mouseenter="tentacleColor(wire.color)"><span>cut</span> WIRE
+        </div>
     </div>
     <form name="deactivationForm" rc-submit="submit()" class="form-horizontal" ng-show="bombActive" novalidate>
         <div class="control-group" ng-class="activeErrorClass('deactivation_entry')">
@@ -30,7 +42,12 @@
         <% @form_fields.each_with_index do |field, index| %>
             <div class="form-group" ng-class="errorClass(activationForm.<%= field %>)">
                 <div class="control-group">
+                    <% unless field.eql?('detonation_time') %>
                     <label class="control-label" for="<%=field%>"><%=field.humanize.titleize%></label>
+                    <% else %>
+                    <label class="control-label" for="<%=field%>"><%=field.humanize.titleize%> (seconds)</label>
+                    <% end %>
+
 
                     <div class="controls">
                         <a class="form-control" data-ng-model="<%=field%>"

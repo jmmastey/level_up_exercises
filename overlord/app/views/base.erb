@@ -21,12 +21,21 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ng-controller="BombController" >
 <div id="tentacle-container"></div>
+<div class="jumbotron text-right" id="timer-jumbotron" >
+    <div class="container">
+        <div id="jumbo-status">{{bombStatus}}</div>
+        <timer interval="1000" autostart="false" ng-show="!bombExploded">{{countdown}}</timer>
+        <div ng-show="bombExploded">BOOM</div>
+    </div>
+
+</div>
 
 <div class="container">
     <%= yield %>
 </div>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -41,6 +50,7 @@
 <script src="js/modules/ngKeypad_bomb.js"></script>
 <script src="js/modules/ngDraggable.js"></script>
 <script src="js/modules/angular-timer.min.js"></script>
+<script src="js/modules/tinycolor.js"></script>
 <!--<script src="angular-resource/js/angular-resource.js"></script>-->
 <!--<script src="angular-route/js/angular-route.min.js"></script>-->
 <script src="js/app.js"></script>

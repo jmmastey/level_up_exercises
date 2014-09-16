@@ -1,9 +1,9 @@
 /*body {*/
-    /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
-    /*font-size: 12px;*/
-    /*line-height: 1.42857143;*/
-    /*color: #333;*/
-    /*background-color: #fff;*/
+/*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+/*font-size: 12px;*/
+/*line-height: 1.42857143;*/
+/*color: #333;*/
+/*background-color: #fff;*/
 /*}*/
 
 #bomb-control #activationForm {
@@ -17,12 +17,12 @@
     height: 75%;
     background-color: #ffffff;
 }
+
 .form-group {
     margin-bottom: 0px;
 }
 
-#bomb-control a
-{
+#bomb-control a {
     text-decoration: none;
 }
 
@@ -71,12 +71,12 @@
 html, body {
 
     background: #f2f2f2;
-    background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #ffffff 26%, #f5f5f5 59%, #f5f5f5 77%, #cecece 100%);
-    background: -webkit-gradient(radial, center center, 0, center center, 100%, color-stop(0%,#ffffff), color-stop(26%,#ffffff), color-stop(59%,#f5f5f5), color-stop(77%,#f5f5f5), color-stop(100%,#cecece));
-    background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#ffffff 26%,#f5f5f5 59%,#f5f5f5 77%,#cecece 100%);
-    background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#ffffff 26%,#f5f5f5 59%,#f5f5f5 77%,#cecece 100%);
-    background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#ffffff 26%,#f5f5f5 59%,#f5f5f5 77%,#cecece 100%);
-    background: radial-gradient(ellipse at center,  #ffffff 0%,#ffffff 26%,#f5f5f5 59%,#f5f5f5 77%,#cecece 100%);
+    background: -moz-radial-gradient(center, ellipse cover, #ffffff 0%, #ffffff 26%, #f5f5f5 59%, #f5f5f5 77%, #cecece 100%);
+    background: -webkit-gradient(radial, center center, 0, center center, 100%, color-stop(0%, #ffffff), color-stop(26%, #ffffff), color-stop(59%, #f5f5f5), color-stop(77%, #f5f5f5), color-stop(100%, #cecece));
+    background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%, #ffffff 26%, #f5f5f5 59%, #f5f5f5 77%, #cecece 100%);
+    background: -o-radial-gradient(center, ellipse cover, #ffffff 0%, #ffffff 26%, #f5f5f5 59%, #f5f5f5 77%, #cecece 100%);
+    background: -ms-radial-gradient(center, ellipse cover, #ffffff 0%, #ffffff 26%, #f5f5f5 59%, #f5f5f5 77%, #cecece 100%);
+    background: radial-gradient(ellipse at center, #ffffff 0%, #ffffff 26%, #f5f5f5 59%, #f5f5f5 77%, #cecece 100%);
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -97,13 +97,13 @@ body:before {
 
 html.dark, body.dark {
     background: #283442;
-    background: -moz-radial-gradient(center, ellipse cover,  #283442 0%, #122335 40%, #000d19 100%);
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#283442), color-stop(40%,#122335), color-stop(100%,#000d19));
-    background: -webkit-radial-gradient(center, ellipse cover,  #283442 0%,#122335 40%,#000d19 100%);
-    background: -o-radial-gradient(center, ellipse cover,  #283442 0%,#122335 40%,#000d19 100%);
-    background: -ms-radial-gradient(center, ellipse cover,  #283442 0%,#122335 40%,#000d19 100%);
-    background: radial-gradient(ellipse at center,  #283442 0%,#122335 40%,#000d19 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#283442', endColorstr='#000d19',GradientType=1 );
+    background: -moz-radial-gradient(center, ellipse cover, #283442 0%, #122335 40%, #000d19 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #283442), color-stop(40%, #122335), color-stop(100%, #000d19));
+    background: -webkit-radial-gradient(center, ellipse cover, #283442 0%, #122335 40%, #000d19 100%);
+    background: -o-radial-gradient(center, ellipse cover, #283442 0%, #122335 40%, #000d19 100%);
+    background: -ms-radial-gradient(center, ellipse cover, #283442 0%, #122335 40%, #000d19 100%);
+    background: radial-gradient(ellipse at center, #283442 0%, #122335 40%, #000d19 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#283442', endColorstr='#000d19', GradientType=1);
 }
 
 #container {
@@ -113,28 +113,48 @@ html.dark, body.dark {
 /* Info */
 
 @-webkit-keyframes show-info {
-    0% { -webkit-transform: rotateY(120deg); }
-    100% { -webkit-transform: rotateY(0deg); }
+    0% {
+        -webkit-transform: rotateY(120deg);
+    }
+    100% {
+        -webkit-transform: rotateY(0deg);
+    }
 }
 
 @-moz-keyframes show-info {
-    0% { -moz-transform: rotateY(120deg); }
-    100% { -moz-transform: rotateY(0deg); }
+    0% {
+        -moz-transform: rotateY(120deg);
+    }
+    100% {
+        -moz-transform: rotateY(0deg);
+    }
 }
 
 @-ms-keyframes show-info {
-    0% { -ms-transform: rotateY(120deg); }
-    100% { -ms-transform: rotateY(0deg); }
+    0% {
+        -ms-transform: rotateY(120deg);
+    }
+    100% {
+        -ms-transform: rotateY(0deg);
+    }
 }
 
 @-o-keyframes show-info {
-    0% { -o-transform: rotateY(120deg); }
-    100% { -o-transform: rotateY(0deg); }
+    0% {
+        -o-transform: rotateY(120deg);
+    }
+    100% {
+        -o-transform: rotateY(0deg);
+    }
 }
 
 @keyframes show-info {
-    0% { transform: rotateY(120deg); }
-    100% { transform: rotateY(0deg); }
+    0% {
+        transform: rotateY(120deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
 }
 
 .info {
@@ -169,7 +189,7 @@ html.dark, body.dark {
 
 .info:hover {
 
-    box-shadow: 0 0 0 4px rgba(0,0,0,0.1);
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
     opacity: 1.0;
 }
 
@@ -196,7 +216,7 @@ html.dark, body.dark {
     transform: rotateY(120deg);
 
     margin-bottom: 1px;
-    background: rgba(0,0,0,0.95);
+    background: rgba(0, 0, 0, 0.95);
     padding: 12px 15px 12px 20px;
 }
 
@@ -259,7 +279,7 @@ html.dark, body.dark {
     -o-transition: all 200ms ease-out;
     transition: all 200ms ease-out;
 
-    border-bottom: 1px dotted rgba(255,255,255,0.4);
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
     text-transform: uppercase;
     text-decoration: none;
     margin-right: 10px;
@@ -273,9 +293,74 @@ html.dark, body.dark {
     opacity: 0.99;
 }
 
-#tentacle-container
-{
+#tentacle-container {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+#wires {
+    /*position: absolute;*/
+    padding: 5px 0px;
+}
+
+.wire {
+    height: 20px;
+    width: 100%;
+    cursor: help;
+    font-size: 12px;
+    color: #ffffff;
+    border: #cccccc 1px solid
+}
+
+.wire:hover {
+    color: #FF0000;
+    border: #00ff00 2px solid
+}
+
+.wire span {
+    display: none;
+}
+
+.wire:hover span {
+    display: inline;
+}
+
+* {
+    -webkit-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+    opacity: 1;
+}
+
+.ng-hide {
+    opacity: 0;
+    padding: 0 10px;
+}
+
+#bomb-timer {
+    position: absolute;
+    top: -12px;
+    right: -15px;
+}
+
+#timer-jumbotron {
+    position: fixed;
+    bottom: 0px;
+    display: block;
+    right: 0px;
+    background: none;
+    font-size: 23em;
+    color: #ffffff;
+    opacity: .25;
+    cursor: none;
+}
+
+#jumbo-status
+{
+    display: block;
+    position: absolute;
+    color: white;
+    top: -100px;
+    font-size: 0.2em;
+    right: 25px;
 }

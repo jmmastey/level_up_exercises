@@ -37,6 +37,7 @@ bombApp.directive('bombtime', function () {
             $scope.currentStep = 0;
             $scope.bombActive = false;
             $scope.buttonLabel = 'NEXT';
+            $scope.bombExploded = false;
 
             $scope.$on('timer-stopped', function (event, data){
                 console.log('Timer Stopped - data = ', data);
@@ -90,9 +91,12 @@ bombApp.directive('bombtime', function () {
                             }
                         }
                         inputs.eq(index).focus();
-                        if($scope.activationForm.$valid && !$scope.bombActive)
+                        if($scope.activationForm.$valid && !$scope.bombActive && !$scope.bombReady)
                         {
                             $scope.submit();
+                        }
+                        if($scope.bombReady){
+                            $scope.activate();
                         }
                         if($scope.bombActive)
                         {
@@ -100,6 +104,7 @@ bombApp.directive('bombtime', function () {
                         }
                         break;
                     case "ACTIVATE":
+
                         if($scope.bombReady && !$scope.bombActive)
                         {
                             $scope.activate();
@@ -145,9 +150,11 @@ bombApp.directive('bombtime', function () {
                 function success(response) {
                     console.log("success", response);
                     $scope.bombActive = false;
+                    $scope.bombExploded = true;
                     $scope.bombStatus = response.status;
                     $scope.bomb_id = response.id;
-                    $scope.buttonLabel = 'YOU DIED'
+                    $scope.buttonLabel = 'YOU DIED';
+                    settings.colour = tinycolor("black").toHsv()
 //                    $scope.$broadcast('timer-stop');
                 }
 
@@ -172,19 +179,72 @@ bombApp.directive('bombtime', function () {
                     $scope.bombActive = false;
                     $scope.bombStatus = response.status;
                     $scope.bomb_id = response.id;
-                    $scope.buttonLabel = 'DEFUSED'
+                    $scope.buttonLabel = 'ACTIVATE';
                     $scope.$broadcast('timer-stop');
                     $scope.code_error = "success";
+                    settings.colour = tinycolor("grey").toHsv();
                 }
 
                 function failure(response) {
                     console.log("failure", response);
                     $scope.code_error = response.data.error;
                     $scope.bombStatus = response.data.status;
+                    settings.colour = tinycolor("pink").toHsv();
 
                 }
 
                 Bomb.deactivate({id: $scope.bomb_id, deactivation_code: $scope.deactivation_entry}, success, failure)
+
+
+
+            };
+
+            $scope.cutWire = function (wire_id) {
+                console.log("cutting wire");
+                 $('#wire_'+wire_id).hide();
+
+
+                function success(response) {
+                    console.log("success", response);
+                    var status = response.status;
+                    switch(status){
+                        case "exploded":
+                            $scope.bombActive = false;
+                            $scope.bombExploded = true;
+                            $scope.bombStatus = status;
+                            $scope.bomb_id = response.id;
+                            $scope.buttonLabel = 'YOU DIED';
+                            $scope.$broadcast('timer-stop');
+                            $scope.code_error = "you blew up";
+                            settings.colour = tinycolor("black").toHsv();
+                        break;
+                        case "diffused":
+                            $scope.bombActive = false;
+                            $scope.bombStatus = status;
+                            $scope.bomb_id = response.id;
+                            $scope.buttonLabel = 'YOU DID IT';
+                            $scope.$broadcast('timer-stop');
+                            $scope.code_error = "nothing to worry about here";
+                            settings.colour = tinycolor("green").toHsv();
+                        break;
+
+
+                    }
+//                    $scope.bombActive = false;
+//                    $scope.bombStatus = response.status;
+//                    $scope.bomb_id = response.id;
+//                    $scope.buttonLabel = 'ACTIVATE';
+                }
+
+                function failure(response) {
+                    console.log("failure", response);
+                    $scope.code_error = response.data.error;
+                    $scope.bombStatus = response.data.status;
+                    settings.colour = tinycolor("orange").toHsv();
+
+                }
+
+                Bomb.cut({id: $scope.bomb_id, wire_id:wire_id}, success, failure)
 
 
 
@@ -199,12 +259,15 @@ bombApp.directive('bombtime', function () {
                     $scope.bombActive = true;
                     $scope.bombStatus = response.status;
                     $scope.bomb_id = response.id;
-                    $scope.buttonLabel = 'DEACTIVATE'
+                    $scope.buttonLabel = 'DEACTIVATE';
                     $scope.$broadcast('timer-start');
+                    $scope.wires = response.wires;
+                    settings.colour = tinycolor("green").toHsv();
                 }
 
                 function failure(response) {
                     console.log("failure", response);
+                    settings.colour = tinycolor("red").toHsv();
 
                 }
 
@@ -221,9 +284,11 @@ bombApp.directive('bombtime', function () {
 
                 function success(response) {
                     console.log("success", response);
+                    settings.colour = tinycolor("white").toHsv();
                     $scope.bombReady = true;
-                    $scope.bombStatus = response.status
-                    $scope.bomb_id = response.id
+                    $scope.bombStatus = response.status;
+                    $scope.buttonLabel = 'ACTIVATE';
+                    $scope.bomb_id = response.id;
                     $scope.$broadcast('timer-set-countdown', $scope.detonation_time);
 
 
@@ -231,6 +296,7 @@ bombApp.directive('bombtime', function () {
 
                 function failure(response) {
                     console.log("failure", response);
+                    settings.colour = tinycolor("red").toHsv();
                     $(response.data).each(function(errors, key)
                     {
                         for(var k in key){
@@ -269,6 +335,10 @@ bombApp.directive('bombtime', function () {
                 });
 
                 return result.join(", ");
+            };
+
+            $scope.tentacleColor = function(color){
+              settings.colour = tinycolor(color).toHsv();
             };
 
 

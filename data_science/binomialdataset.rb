@@ -11,51 +11,37 @@ class BinomialDataSet
   end
 
   def fail_count
-    sum = 0
-    @groups.each do |_id, group|
-      sum += group.fail_count
-    end
-    sum
+    sum_field_in_groups(:fail_count)
   end
 
   def success_count
-    sum = 0
-    @groups.each do |_id, group|
-      sum += group.success_count
-    end
-    sum
+    sum_field_in_groups(:success_count)
   end
 
   def fail_percent
-    fail_sum = 0
-    @groups.each do |_id, group|
-      fail_sum += group.fail_count
-    end
-    fail_sum.to_f / count
+    fail_count.to_f / count
   end
 
   def success_percent
-    success_sum = 0
-    @groups.each do |_id, group|
-      success_sum += group.success_count
-    end
-    success_sum.to_f / count
+    success_count.to_f / count
   end
 
   def count
-    sum = 0
-    @groups.each do |_id, group|
-      sum += group.count
-    end
-    sum
+    sum_field_in_groups(:count)
   end
 
   def to_s
-    "total '#{count}', successes '#{success_count}', " \
-    "failures '#{fail_count}', percent success '%3f'" % success_percent
+    sprintf("total '#{count}', successes '#{success_count}', " \
+    "failures '#{fail_count}', percent success '%3f'", success_percent)
   end
 
   private
+
+  def sum_field_in_groups(field)
+    @groups.each_value.inject(0) do |sum, group|
+      sum + group.send(field)
+    end
+  end
 
   def split_into_groups(data)
     groups = {}

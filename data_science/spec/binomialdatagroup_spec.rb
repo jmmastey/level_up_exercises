@@ -17,8 +17,8 @@ describe BinomialDataGroup do
     end
 
     let(:data_group) do
-      BinomialDataGroup.new(group_field: :id, control_id: "A",
-         result_field: :purchased, data: data)
+      BinomialDataGroup.new(id: "B", result_field: :purchased,
+        data: data)
     end
 
     it "should provide the success count" do

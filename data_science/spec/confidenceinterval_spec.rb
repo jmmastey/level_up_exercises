@@ -3,34 +3,33 @@ require "rspec"
 require_relative "../confidenceinterval"
 
 describe ConfidenceInterval do
-  context "upon creation" do
-    let(:easy_interval) do
-      ConfidenceInterval.new(
-        success_count: 2,
-        fail_count: 2,
-        confidence_level: 0.95
-      )
+  context "upon recieving data" do
+    let(:raw_data) do
+      %q([{"date":"2014-03-15","cohort":"B","result":1},
+          {"date":"2014-03-20","cohort":"B","result":1},
+          {"date":"2014-03-20","cohort":"B","result":0},
+          {"date":"2014-03-17","cohort":"B","result":0}])
     end
 
-    let(:hard_interval) do
-      ConfidenceInterval.new(
-        success_count: 0.8,
-        fail_count: 0.2,
-        confidence_level: 0.95
-      )
+    let(:data) do
+      ViewParser.new.parse(raw_data)
+    end
+
+    let(:interval) do
+      ConfidenceInterval.new(id: "A", data: data,
+         result_field: :purchased, confidence_level: 0.95)
     end
 
     it "should be able to calculate the standard deviation" do
-      expect(easy_interval.standard_deviation).to eq(0.25)
-      expect(hard_interval.standard_deviation).to eq((0.8 * (1 - 0.8))**0.5)
+      expect(interval.standard_deviation).to eq(0.25)
     end
 
     it "should be able to calculate the low point" do
-      expect(easy_interval.low_point).to eq(0.5 - 1.96 * 0.25)
+      expect(interval.low_point).to eq(0.5 - 1.96 * 0.25)
     end
 
     it "should be able to calculate the high point" do
-      expect(easy_interval.high_point).to eq(0.5 + 1.96 * 0.25)
+      expect(interval.high_point).to eq(0.5 + 1.96 * 0.25)
     end
   end
 end

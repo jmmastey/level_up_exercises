@@ -25,4 +25,5 @@ Feature: Activation
 
   Scenario: Entering activation code while bomb is active
     Given the bomb is active
-    When I enter the code 
+    When I enter the code 1234
+    Then the number of remaining disarm attempts should be set to 3

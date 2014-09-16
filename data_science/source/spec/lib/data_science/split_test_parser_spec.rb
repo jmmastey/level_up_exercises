@@ -1,7 +1,7 @@
 require_relative '../../spec_helper.rb'
 
 module DataScience
-  klass = Parser
+  klass = SplitTestParser
   describe klass do
     OPTIONS = {
       importer_klass: JSONImporter,
@@ -10,17 +10,13 @@ module DataScience
 
     me = klass.load(OPTIONS)
 
-    context 'when importing' do
-      it 'delegates reading of input' do
-        expect_me = expect { klass.read(OPTIONS) }
-        expect_me.not_to raise_error
-      end
-    end
-
     context 'when parsing' do
       it 'returns all valid data' do
-        me = klass.load(OPTIONS)
-        expect(me.size).to eq(2892)
+        expected = {
+          A: { hits: 47, misses: 1302, total: 1349 },
+          B: { hits: 79, misses: 1464, total: 1543 }
+        }
+        expect(me).to eq(expected)
       end
     end
   end

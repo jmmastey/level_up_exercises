@@ -1,18 +1,21 @@
+# rubocop:disable all
+
 require 'pathname'
 require "#{File.dirname(__FILE__)}/spec/system_helper.rb"
 
 RUBOCOP_OPTS = {
   all_on_start: true,
-  cli: ['--format', 'clang', '--config', '../../.hound.yml']
+  cli: ['--format', 'clang'],
+  notification: true
 }
 
-RSPEC_OPTS = {
+RSPEC_OPTS = {  
+  all_on_start: true,
   cmd: 'bundle exec rspec --tty --color',
-  notification: true,
-  all_on_start: true
+  notification: true
 }
 
-group :red_green_refactor do#, halt_on_fail: true do
+group :red_green_refactor, halt_on_fail: true do
   guard :rspec, RSPEC_OPTS do
     watch(%r{^lib/(.+)\.rb})      { |m| "spec/lib/#{m[1]}_spec.rb" }
     watch(%r{^spec/(.+)\.rb})     { |m| "#{m[0]}" }
@@ -22,3 +25,4 @@ group :red_green_refactor do#, halt_on_fail: true do
     watch(%r{^(.+)\.rb})
   end
 end
+# rubocop:enable all

@@ -1,7 +1,7 @@
-# rubocop:disable all
 require_relative '../../spec_helper.rb'
 
 module Utility
+  # rubocop:disable all
   module Mocks
     class Foo
       include ::Utility::Wrappable
@@ -23,6 +23,7 @@ module Utility
       def finish; "DONE"; end
     end
   end
+  # rubocop:enable all
 
   describe Wrappable do
     context 'after included' do
@@ -55,4 +56,3 @@ module Utility
     end
   end
 end
-# rubocop:enable all

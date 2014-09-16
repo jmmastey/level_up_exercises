@@ -33,7 +33,11 @@ module Utility
   Hash.include(HashMixins)
   module StringMixins
     def snake_case
-      strip.gsub(' ', '_')
+      return downcase if match(/\A[A-Z]+\z/)
+      strip.gsub(' ', '_').
+      gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2').
+      gsub(/([a-z])([A-Z])/, '\1_\2').
+      downcase
     end
   end
   String.include(StringMixins)

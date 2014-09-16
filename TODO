@@ -1,10 +1,18 @@
 TODO:
 
+0:  class << self
+      alias_method :[], :load
+    end
+
 1:  wrappable:
-    - investigate using the singleton_class for prepend
+    - investigate using the singleton_class or alias_method instead of prepend
     - prefer instance over class mixins (see above?)
     - write more readable tests
+
+2:  object.this { ... }
+
+3:  const_missing require hook
     
-2:  dino_catalog
+4:  dino_catalog
     - global:       switch to activesupport concerns
                     https://gist.github.com/scottsims/09a23ee408c260351111

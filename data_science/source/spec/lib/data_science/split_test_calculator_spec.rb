@@ -1,10 +1,11 @@
 require_relative '../../spec_helper.rb'
 
 module DataScience
-  klass = Calculator
-  test_klass = Test
+  klass = SplitTestCalculator
+  test_klass = SplitTest
   describe klass do
     OPTIONS = {
+      importer_klass: JSONImporter,
       input_file: "#{PROJECT_ROOT}/data/conversion_sample.json"
     }
 
@@ -15,7 +16,6 @@ module DataScience
         expect(me).to be_a(test_klass)
       end
 
-      # FIXME: These tests may be redundant
       context "returns #{test_klass} object" do
         it 'with populated data' do
           expect(me.data).not_to be_empty

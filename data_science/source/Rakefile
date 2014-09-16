@@ -1,3 +1,4 @@
+# rubocop:disable all
 require 'rubygems'
 
 require 'rspec/core/rake_task'
@@ -19,3 +20,4 @@ end
 task :rspec do |_, args|
   run_command("bundle exec rspec --tty --color #{args.join(' ')}")
 end
+# rubocop:enable all

@@ -21,7 +21,7 @@ class ChiSquare
 
   def to_s
     significant = (significant?) ? "is significant" : "is not significant"
-    format("chi squared value is '%f' and the result #{significant}", value)
+    format("ChiSquare: the value is '%f' and the result #{significant}", value)
   end
 
   private

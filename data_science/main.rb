@@ -10,17 +10,12 @@ def main
   views = ViewParser.new.parse(text)
 
   dataset = BinomialDataSet.new(
-    group_field: :id, control_id: "A",
-    result_field: :purchased, data: views
+    group_field: :id, result_field: :purchased,
+    data: views
   )
 
-  intervals = dataset.groups.each.map do |group_id, group|
-    ConfidenceInterval.new(
-      id: group_id,
-      success_count: group.success_count,
-      fail_count: group.fail_count,
-      confidence_level: 0.95
-    )
+  intervals = dataset.groups.each_value.map do |group|
+    [group.id, group.confidence_interval]
   end
 
   chi_square = ChiSquare.new(dataset: dataset)

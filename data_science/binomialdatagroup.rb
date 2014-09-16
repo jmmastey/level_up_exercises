@@ -27,6 +27,14 @@ class BinomialDataGroup
     @data.size
   end
 
+  def confidence_interval
+    ConfidenceInterval.new(
+      success_count: success_count,
+      fail_count: fail_count,
+      confidence_level: 0.95
+    )
+  end
+
   def to_s
     "total '#{@data.size}', successes '#{success_count}', " \
     "failures '#{fail_count}', percent success '#{success_percent}'"

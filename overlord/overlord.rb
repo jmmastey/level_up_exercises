@@ -3,6 +3,7 @@
 
 require "pry"
 require "sinatra/base"
+require_relative "bomb"
 
 class Overlord < Sinatra::Base
   BOMB_CODE_REGEX = /[0-9]{4}/
@@ -34,6 +35,10 @@ class Overlord < Sinatra::Base
   def add_error(error)
     @error ||= ""
     @error << "#{error}\n"
+  end
+
+  def create_bomb(activation_code, deactivation_code)
+    @bomb = Bomb.new(activation_code, deactivation_code)
   end
 
   # we can shove stuff into the session cookie YAY!

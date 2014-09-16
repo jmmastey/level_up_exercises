@@ -1,5 +1,3 @@
-class NameCollisionError < RuntimeError; end;
-
 class Robot
   attr_accessor :name
 
@@ -19,16 +17,26 @@ class Robot
       @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
     end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+    raise ArgumentError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
     @@registry << @name
   end
 
 end
 
+
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+generator = lambda { "AB123" }
+robot = Robot.new(:name_generator => generator)
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+generator = lambda { "your mom" }
+begin
+  robot = Robot.new(:name_generator => generator)
+  puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+rescue ArgumentError => error
+  puts error.message
+end
+
 
 # Errors!
 # generator = -> { 'AA111' }

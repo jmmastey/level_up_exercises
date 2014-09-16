@@ -1,0 +1,139 @@
+@font-face {
+  font-family: "Fixedsys";
+  src: url("/fonts/fixedsys.eot");
+  src: url("/fonts/fixedsys.eot?#iefix") format("embedded-opentype"), url("/fonts/fixedsys.ttf") format("truetype"), url("/fonts/fixedsys.svg#FixedsysExcelsior301Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 13, bomb.scss */
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 18, bomb.scss */
+body {
+  background-color: #a90329;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFA90329', endColorstr='#FF6D0019');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2E5MDMyOSIvPjxzdG9wIG9mZnNldD0iNDQlIiBzdG9wLWNvbG9yPSIjOGYwMjIyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNmQwMDE5Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a90329), color-stop(44%, #8f0222), color-stop(100%, #6d0019));
+  background-image: -moz-linear-gradient(top, #a90329 0%, #8f0222 44%, #6d0019 100%);
+  background-image: -webkit-linear-gradient(top, #a90329 0%, #8f0222 44%, #6d0019 100%);
+  background-image: linear-gradient(to bottom, #a90329 0%, #8f0222 44%, #6d0019 100%);
+}
+
+/* line 24, bomb.scss */
+.clr {
+  clear: both;
+}
+
+/* line 28, bomb.scss */
+.bomb {
+  margin: 0 auto;
+}
+
+/* line 32, bomb.scss */
+.bomb-panel {
+  background: #aaa;
+  border: thick outset #bbb;
+  display: inline-block;
+  margin: 0;
+  width: auto;
+}
+
+/* line 40, bomb.scss */
+.display, .input {
+  display: inline-block;
+  height: 165px;
+  margin: 10px;
+  min-width: 375px;
+}
+/* line 46, bomb.scss */
+.display > div, .input > div {
+  margin: 0;
+}
+
+/* line 51, bomb.scss */
+.display {
+  background: #000;
+  border: thick inset #bbb;
+  float: left;
+  padding: 10px;
+}
+
+/* line 58, bomb.scss */
+.input {
+  float: right;
+  padding: 0px;
+}
+
+/* line 63, bomb.scss */
+.code-display {
+  background-color: #000;
+  border: thick inset #bbb;
+  color: #fff;
+  font-family: Fixedsys, "Courier New", monospace;
+  font-size: 30px;
+  margin: 0;
+  min-height: 40px;
+  padding: 2px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* line 76, bomb.scss */
+.keypad {
+  border: thick inset #bbb;
+}
+/* line 79, bomb.scss */
+.keypad .keypad-row {
+  margin: 0;
+  width: 100%;
+}
+/* line 84, bomb.scss */
+.keypad button {
+  font-size: 20px;
+  margin: 1px;
+  width: 32%;
+}
+/* line 90, bomb.scss */
+.keypad #btn-backspace {
+  background-color: #faa;
+}
+/* line 94, bomb.scss */
+.keypad #btn-enter {
+  background-color: #cfc;
+}
+
+/* line 99, bomb.scss */
+.wire, .wire-red, .wire-blue, .wire-green, .wire-black {
+  border: thin solid black;
+  border-bottom: none;
+  cursor: url("/images/cutter.png"), crosshair;
+  display: inline-block;
+  height: 5em;
+  margin: 0 5px;
+  width: 3px;
+}
+
+/* line 110, bomb.scss */
+.wire-red {
+  background-color: red;
+}
+
+/* line 110, bomb.scss */
+.wire-blue {
+  background-color: blue;
+}
+
+/* line 110, bomb.scss */
+.wire-green {
+  background-color: green;
+}
+
+/* line 110, bomb.scss */
+.wire-black {
+  background-color: black;
+}

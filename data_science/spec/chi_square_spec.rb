@@ -12,7 +12,7 @@ describe ChiSquare do
       cohorts = [ cohort_a, cohort_b]
       chi_square = ChiSquare.new(cohorts)
       expect(chi_square.cohorts[0].name).to eq("A")
-      expect(chi_square.cohorts[1].conversions).to eq("15")
+      expect(chi_square.cohorts[1].conversions).to eq(15)
     end
 
     it "raises an error if not input with two cohorts" do

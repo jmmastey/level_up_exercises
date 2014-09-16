@@ -1,4 +1,4 @@
-require_relative "../bomb_code"
+require_relative "../src/bomb_code"
 
 describe BombCode do
   context "upon activation" do
@@ -21,7 +21,10 @@ describe BombCode do
 
   context("upon receiving bad code") do
     it "should through an error" do
-      expect(BombCode.new("test")).to raise_error
+      expect { BombCode.new("test") }.to raise_error
+      expect { BombCode.new("a0123b") }.to raise_error
+      expect { BombCode.new("120") }.to raise_error
+      expect { BombCode.new("12314") }.to raise_error
     end
   end
 end

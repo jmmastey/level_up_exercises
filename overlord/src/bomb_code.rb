@@ -1,7 +1,7 @@
 
 class BombCode
   def initialize(code)
-    raise(ArgumentError, "only four characters in bomb code") if code.chars.size != 4
+    raise(ArgumentError, "only four characters in bomb code") if code.size != 4
     raise(ArgumentError, "invalid code #{code}") unless valid_code(code)
     @code = code
   end

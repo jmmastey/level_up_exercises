@@ -5,6 +5,7 @@ class ConfidenceInterval
     @success_count = params[:success_count]
     @fail_count = params[:fail_count]
     @confidence_level = params[:confidence_level]
+    @id = params[:id]
     raise_unsupported_error unless @confidence_level == 0.95
     @total_count = @success_count + @fail_count
     @probability = @success_count.to_f / (@total_count)
@@ -32,6 +33,6 @@ class ConfidenceInterval
   end
 
   def to_s
-    "low '%3f', mean '%3f', high '%3f'" % [low_point, @probability, high_point]
+    "Group '%s', low '%3f', mean '%3f', high '%3f'" % [@id, low_point, @probability, high_point]
   end
 end

@@ -16,6 +16,7 @@ def main
 
   intervals = dataset.groups.each.map do |group_id, group|
     ConfidenceInterval.new(
+      id: group_id,
       success_count: group.success_count,
       fail_count: group.fail_count,
       confidence_level: 0.95

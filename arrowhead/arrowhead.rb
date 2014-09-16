@@ -1,5 +1,4 @@
 class Arrowhead
-
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
     far_west: {
@@ -30,21 +29,6 @@ class Arrowhead
       raise "Unknown region, please provide a valid region."
     end
   end
-
 end
 
-
-def self.classify
-  raise 'Region doesn\'t exist' unless self.region_present?(region)
-  raise "Classification doesn't exist" unless self.classication_present?
-
-  arrowhead = CLASSFICATIONS[region][shape]
-  puts "You have a(n) #{arrowhead} arrowhead. Probably priceless."
-end
-
-def self.region_present?(region)
-  CLASSIFICATIONS.include? region
-end
-
-
-puts Arrowhead::classify(:northern_plains, :bifurcated)
+puts Arrowhead.classify(:northern_plains, :bifurcated)

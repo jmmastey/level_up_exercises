@@ -12,7 +12,6 @@ class Results
     @filename = filename
     parse_file
     gather_data_into_cohorts
-   # puts "cohorts: #{cohorts}"
   end
 
   private

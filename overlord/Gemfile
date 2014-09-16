@@ -1,4 +1,4 @@
-# A sample Gemfile
+# Overlord gemfile
 source 'https://rubygems.org'
 
 ruby '2.1.2'
@@ -13,11 +13,9 @@ gem 'datamapper', require: 'data_mapper'
 gem 'bundler'
 gem 'tux'
 
-
 group :production do
   gem 'dm-postgres-adapter'
 end
-
 
 group :test do
   gem 'rspec-expectations', require: 'rspec/expectations'
@@ -29,6 +27,7 @@ group :test do
   gem 'nokogiri'
   gem 'selenium-webdriver'
   gem 'capybara-angular'
+  gem 'xpath'
 end
 
 group :test, :development do
@@ -38,4 +37,3 @@ group :test, :development do
   gem 'compass'
   gem 'ruby-debug-ide'
 end
-

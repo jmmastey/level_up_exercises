@@ -1,7 +1,5 @@
 # File bomb.rb
 class Overlord < Sinatra::Application
-
-
   get '/api/bomb/cut/:id/:wire_id' do
     bomb ||= Bomb.get(params[:id]) || halt(404)
     wire ||= bomb.wires.get(params[:wire_id]) || halt(404)
@@ -20,8 +18,8 @@ class Overlord < Sinatra::Application
 
   get '/api/bomb/:id/activate/:activation_code' do
     bomb ||= Bomb.get(params[:id]) || halt(404)
-    valid_activation_code = bomb.activation_code.eql?(params[:activation_code])
-    if valid_activation_code
+    valid_code = bomb.activation_code.eql?(params[:activation_code])
+    if valid_code
       valid_activation(bomb)
     else
       invalid_activation(bomb)
@@ -30,8 +28,8 @@ class Overlord < Sinatra::Application
 
   get '/api/bomb/:id/deactivate/:deactivation_code' do
     bomb ||= Bomb.get(params[:id]) || halt(404)
-    valid_deactivation_code = bomb.deactivation_code.eql?(params[:deactivation_code]||0)
-    if valid_deactivation_code
+    valid_code = bomb.deactivation_code.eql?(params[:deactivation_code] || 0)
+    if valid_code
       valid_deactivation(bomb)
     else
       invalid_deactivation(bomb)
@@ -48,8 +46,6 @@ class Overlord < Sinatra::Application
     end
   end
 
-
-
   get '/api/bomb/:id' do
     bomb ||= Bomb.get(params[:id]) || halt(404)
     format_bomb(bomb)
@@ -62,7 +58,7 @@ class Overlord < Sinatra::Application
       errors = {}
       codes = %w(activation_code deactivation_code)
       codes.each do |code|
-        errors[code] = "code is too short" if json[code.to_sym].size < 4
+        errors[code] = 'code is too short' if json[code.to_sym].size < 4
       end
       unless errors.empty?
         status 400
@@ -81,13 +77,11 @@ class Overlord < Sinatra::Application
     status 201
     session['bomb_id'] = bomb.id
     session['bomb_status'] = bomb.status
-    response_message = { status: 'ok', id: bomb.id }
-    # format_response(response_message, request.accept)
     format_bomb(bomb)
   end
 
   get '/test' do
-    status, headers, body = call env.merge("PATH_INFO" => '/api/detonate')
+    status, headers, body = call env.merge('PATH_INFO' => '/api/detonate')
     [status, headers, body.map(&:upcase)]
   end
 
@@ -101,7 +95,6 @@ class Overlord < Sinatra::Application
     bomb.save
     format_bomb(bomb)
   end
-
 
   put '/api/bomb/:id' do
     bomb ||= Bomb.get(params[:id]) || halt(404)

@@ -7,7 +7,10 @@ module Sinatra
 
     def create_wires(number_of_wires)
       wires = []
-      speed_down_wire, speed_up_wire, diffusing_wire, detonating_wire = (0..number_of_wires.to_i).to_a.sample(4)
+      speed_down_wire,
+          speed_up_wire,
+          diffusing_wire,
+          detonating_wire = (0..number_of_wires.to_i).to_a.sample(4)
       number_of_wires.times do |wire_num|
         detonates = equal_wires?(wire_num, detonating_wire)
         speed_up = equal_wires?(wire_num, speed_up_wire)
@@ -27,11 +30,16 @@ module Sinatra
     end
 
     def cut_wire_status(wire)
-      return WireResponse.new(status: :exploded, message: 'BOOM') if wire.detonates
-      return WireResponse.new(status: :defused, message: 'SUCCESS') if wire.diffuses
-      return WireResponse.new(status: :active, message: 'SPEED_UP') if wire.speeds_up
-      return WireResponse.new(status: :active, message: 'SPEED_DOWN') if wire.speeds_down
-      WireResponse.new(status: :active, message: 'INERT') if wire.inert?
+      return WireResponse.new(status: :exploded,
+                              message: 'BOOM') if wire.detonates
+      return WireResponse.new(status: :defused,
+                              message: 'SUCCESS') if wire.diffuses
+      return WireResponse.new(status: :active,
+                              message: 'SPEED_UP') if wire.speeds_up
+      return WireResponse.new(status: :active,
+                              message: 'SPEED_DOWN') if wire.speeds_down
+      WireResponse.new(status: :active,
+                       message: 'INERT') if wire.inert?
     end
 
     private
@@ -63,7 +71,8 @@ module Sinatra
         detonate_bomb(bomb)
       else
         status 400
-        bomb_error = { id: bomb.id, status: bomb.status, attempts: bomb.attempts,
+        bomb_error = { id: bomb.id, status: bomb.status,
+                       attempts: bomb.attempts,
                        detonation_time: bomb.detonation_time,
                        error: 'Invalid Deactivation Code' }
         format_response(bomb_error, request.accept)
@@ -82,7 +91,6 @@ module Sinatra
       bomb.status = :exploded
       format_bomb(bomb)
     end
-
   end
   helpers BombHelpers
 end

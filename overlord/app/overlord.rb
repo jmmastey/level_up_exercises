@@ -2,15 +2,6 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)
 require File.expand_path(File.dirname(__FILE__) + '/overlord_helpers.rb')
-# require 'sinatra'
-# require 'sinatra/json'
-# require 'sinatra/partial'
-# require 'json'
-# require 'active_support/all'
-# require 'time_difference'
-# require 'data_mapper'
-# require_relative 'models/bomb'
-
 
 class Overlord < Sinatra::Application
   include OverlordHelpers
@@ -66,5 +57,3 @@ end
 require_relative 'models/init'
 require_relative 'helpers/init'
 require_relative 'routes/init'
-
-

@@ -2,7 +2,6 @@
 require File.expand_path '../spec_helper.rb', __FILE__
 include Sinatra::BombHelpers
 
-
 describe 'Overlord' do
 
   it 'should allow accessing the home page' do
@@ -15,9 +14,22 @@ describe 'Overlord' do
       Bomb.all.destroy!
       Wire.all.destroy!
     end
-    let(:bomb_body) { { activation_code: '12342', deactivation_code: '0220', detonation_time: '55' }.to_json }
-    let(:bomb_body_default) { { detonation_time: '55' }.to_json }
-    let(:bomb_body_failure) { {activation_code: 12342, deactivation_code: 0220, detonation_time: 55 }.to_json }
+    let(:bomb_body) do
+      { activation_code: '12342',
+        deactivation_code: '0220',
+        detonation_time: '55'
+      }.to_json
+    end
+    let(:bomb_body_default) do
+      { detonation_time: '55'
+      }.to_json
+    end
+    let(:bomb_body_failure) do
+      { activation_code: 12_342,
+        deactivation_code: 0220,
+        detonation_time: 55
+      }.to_json
+    end
     it 'should have no bombs', type: :request do
       get '/api/bomb/list'
       expect(last_response).to be_ok
@@ -42,17 +54,20 @@ describe 'Overlord' do
     end
 
     context 'with bombs' do
-      let!(:bomb) { Bomb.create(activation_code: '1234',
-                                deactivation_code: '0000',
-                                detonation_time: '60',
-                                wires: create_wires(5)) }
+      let!(:bomb) do
+        Bomb.create(activation_code: '1234',
+                    deactivation_code: '0000',
+                    detonation_time: '60',
+                    wires: create_wires(5))
+      end
 
       it 'should have a list' do
         get '/api/bomb/list'
         expect(last_response).to be_ok
         expect(array).not_to be_empty
         array.each do |bomb_listing|
-          expect(bomb_listing.symbolize_keys!).to have_key(:status).and have_key(:id)
+          expect(bomb_listing.symbolize_keys!).to have_key(:status)
+                                                  .and have_key(:id)
         end
 
       end
@@ -73,10 +88,12 @@ describe 'Overlord' do
           end
         end
         context 'deactivation' do
-          let!(:bomb) { Bomb.create(activation_code: '1234',
-                                    deactivation_code: '0000',
-                                    detonation_time: '55',
-                                    wires: create_wires(5), status: :active) }
+          let!(:bomb) do
+            Bomb.create(activation_code: '1234',
+                        deactivation_code: '0000',
+                        detonation_time: '55',
+                        wires: create_wires(5), status: :active)
+          end
           it 'should deactivate bomb' do
             get "/api/bomb/#{bomb.id}/deactivate/#{bomb.deactivation_code}"
             expect(last_response).to be_ok
@@ -115,14 +132,14 @@ describe 'Overlord' do
         end
 
         it 'cuts non-existent wire' do
-          get "/api/bomb/cut/#{bomb.id.to_s}/avsbs"
+          get "/api/bomb/cut/#{bomb.id}/avsbs"
           expect(last_response).to be_not_found
         end
 
         it 'cuts each wire' do
           messages = []
           bomb.wires.each do |wire|
-            get "/api/bomb/cut/#{bomb.id.to_s}/#{wire.id}"
+            get "/api/bomb/cut/#{bomb.id}/#{wire.id}"
             messages << json[:message]
             expect(last_response).to be_ok
             expect(json).to have_key(:status).and have_key(:message)
@@ -130,7 +147,6 @@ describe 'Overlord' do
           expect(messages).to be
           expect(messages.size).to be >= 3
         end
-
 
       end
 

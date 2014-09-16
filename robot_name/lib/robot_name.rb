@@ -1,22 +1,27 @@
 class NameCollisionError < RuntimeError; end
 
 class Robot
-  attr_accessor :name, :generated_name
+  attr_accessor :name
 
   def initialize(args = {})
     @@registry ||= []
-    @generated_name = ''
     @name_generator = args[:name_generator]
     generate_name
   end
 
   def generate_name
     if @name_generator.nil?
-      add_name_to_registry(generate_default_name)
+      add_name_to_registry(generate_random_name)
     else
       add_name_to_registry(@name_generator.call.to_s)
     end
   end
+
+  def name_registry
+    @@registry
+  end
+
+  private
 
   def add_name_to_registry(name)
     unless name_valid?(name)
@@ -26,13 +31,7 @@ class Robot
     @@registry << name
   end
 
-  def get_name_registry
-    @@registry
-  end
-
-  private
-
-  def generate_default_name
+  def generate_random_name
     "#{generate_char(2)}#{generate_num(3)}"
   end
 

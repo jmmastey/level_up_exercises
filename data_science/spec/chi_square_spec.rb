@@ -5,6 +5,7 @@ require_relative "../cohort"
 describe ChiSquare do
   let(:cohort_a) { Cohort.new("A", conversions: 5, non_conversions: 15) }
   let(:cohort_b) { Cohort.new("B", conversions: 15, non_conversions: 5) }
+  let(:cohort_c) { Cohort.new("B", conversions: 18, non_conversions: 2) }
   let(:cohorts) { [cohort_a, cohort_b] }
   let(:chi_square) { ChiSquare.new(cohorts) }
 
@@ -36,6 +37,19 @@ describe ChiSquare do
 
     it "has a chi square statistic 3.841 at the 0.05 sig level" do
       expect(chi_square.statistic).to eq(3.841)
+    end
+
+    it "calculates chi square value properly" do
+      expect(chi_square.value).to eq(10)
+    end
+
+    it "is statistically significant if value is greater than statistic" do
+      expect(chi_square.statistically_significant?).to eq(true)
+
+      chi_square_same = ChiSquare.new([cohort_a, cohort_a])
+      chi_square_close = ChiSquare.new([cohort_b, cohort_c])
+      expect(chi_square_same.statistically_significant?).to eq(false)
+      expect(chi_square_close.statistically_significant?).to eq(false)
     end
 
     xit "has a chi square value of 6.635 at the 0.01 sig level" do

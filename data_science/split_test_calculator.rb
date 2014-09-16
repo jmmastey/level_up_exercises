@@ -3,11 +3,11 @@ require_relative "chi_square"
 class SplitTestCalculator
   attr_reader :control_group, :variation_group
 
-  def initialize(stats = {})
-    validate_stats(stats)
+  def initialize(control_group, variation_group)
+    validate_stats(control_group, variation_group)
 
-    @control_group = stats[:control_group]
-    @variation_group = stats[:variation_group]
+    @control_group = control_group
+    @variation_group = variation_group
   end
 
   def better_group
@@ -34,9 +34,9 @@ class SplitTestCalculator
 
   private
 
-  def validate_stats(stats)
-    group_unassigned_error(:control_group) unless stats[:control_group]
-    group_unassigned_error(:variation_group) unless stats[:variation_group]
+  def validate_stats(control_group, variation_group)
+    group_unassigned_error(:control_group) unless control_group
+    group_unassigned_error(:variation_group) unless variation_group
   end
 
   def group_unassigned_error(group)

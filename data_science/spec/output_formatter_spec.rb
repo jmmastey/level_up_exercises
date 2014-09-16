@@ -24,8 +24,7 @@ describe OutputFormatter do
     it "formats SplitTestCalculators" do
       control = SplitTestGroup.new(name: "A", views: 1349, conversions: 47)
       variation = SplitTestGroup.new(name: "B", views: 1543, conversions: 79)
-      calc = SplitTestCalculator.new(control_group: control,
-                                     variation_group: variation)
+      calc = SplitTestCalculator.new(control, variation)
 
       formatted_text = formatter.format(calc)
 

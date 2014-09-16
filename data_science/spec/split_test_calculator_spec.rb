@@ -10,13 +10,12 @@ describe SplitTestCalculator do
                                          views: 1543,
                                          conversions: 79)
 
-    SplitTestCalculator.new(control_group: control_group,
-                            variation_group: variation_group)
+    SplitTestCalculator.new(control_group, variation_group)
   end
 
   it "requires that the control and variation groups are assigned" do
-    expect { SplitTestCalculator.new }.to raise_error(ArgumentError)
-    expect { SplitTestCalculator.new(variation_group: SplitTestGroup.new) }
+    expect { SplitTestCalculator.new(nil, nil)}.to raise_error(ArgumentError)
+    expect { SplitTestCalculator.new(nil, SplitTestGroup.new).to raise_error(ArgumentError) }
   end
 
   let(:calc) do
@@ -26,8 +25,7 @@ describe SplitTestCalculator do
     variation_group = SplitTestGroup.new(name: "B",
                                          views: 1543,
                                          conversions: 79)
-    SplitTestCalculator.new(control_group: control_group,
-                            variation_group: variation_group)
+    SplitTestCalculator.new(control_group, variation_group)
   end
 
   describe "#better_group" do

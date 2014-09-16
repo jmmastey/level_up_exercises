@@ -50,7 +50,7 @@ class ChiSquared
     observed_size = params[:observed_size]
     global_percent = params[:global_percent]
     group_size = params[:group_size]
-    square_diff = (observed_size - global_percent * group_size)**2
+    square_diff = (observed_size - (global_percent) * group_size)**2
     square_diff / (group_size * global_percent)
   end
 end

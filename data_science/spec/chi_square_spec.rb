@@ -25,12 +25,6 @@ describe ChiSquare do
       expect { ChiSquare.new(cohorts_ints) }.to raise_error ArgumentError
     end
 
-    xit "can accept a significance level on input" do
-      sig_level = 0.05
-      chi_square = ChiSquare.new(cohorts, sig_level)
-      expect(chi_square.sig_level).to eq(0.05)
-    end
-
     it "sets significance level to 0.05 if not set" do
       expect(chi_square.sig_level).to eq(0.05)
     end
@@ -48,14 +42,8 @@ describe ChiSquare do
 
       chi_square_same = ChiSquare.new([cohort_a, cohort_a])
       chi_square_close = ChiSquare.new([cohort_b, cohort_c])
-      expect(chi_square_same.statistically_significant?).to eq(false)
-      expect(chi_square_close.statistically_significant?).to eq(false)
-    end
-
-    xit "has a chi square value of 6.635 at the 0.01 sig level" do
-    end
-
-    xit "it can only accept sig values of 0.5, 0.1, 0.05....." do
+      expect(chi_square_same).not_to be_statistically_significant
+      expect(chi_square_close).not_to be_statistically_significant
     end
   end
 end

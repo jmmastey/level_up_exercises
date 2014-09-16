@@ -5,31 +5,31 @@ require "spec_helper"
 require_relative "../results"
 
 describe Results do
+  let(:results) { Results.new }
+
   describe "#initialize" do
     it "should start with no data" do
-      results = Results.new
       expect(results.data_points.count).to eq(0)
     end
   end
 
   describe "#add_data" do
     it "should be called with a file" do
-      results = Results.new
       results.add_data("source_data.json")
-      results.filename.should eq("source_data.json")
+      expect(results.filename).to eq("source_data.json")
     end
 
     it "raises an error if no filename" do
-      results = Results.new
       expect { results.add_data }.to raise_error
     end
   end
 
   context "after data has been added" do
     let(:results) do
-      mock_json = "[{\"date\":\"2014-03-20\",\"cohort\":\"B\",\"result\":1},"
-      mock_json += "{\"date\":\"2014-03-20\",\"cohort\":\"A\",\"result\":1},"
-      mock_json += "{\"date\":\"2014-03-20\",\"cohort\":\"A\",\"result\":0}]"
+      mock_json = %Q([{"date":"2014-03-20","cohort":"B","result":1},)
+      mock_json += %Q({"date":"2014-03-20","cohort":"A","result":1},)
+      mock_json += %Q({"date":"2014-03-20","cohort":"A","result":0}])
+
       allow(File).to receive(:read).with("some_file").and_return(mock_json)
 
       results = Results.new
@@ -59,6 +59,5 @@ describe Results do
         expect(results.cohorts["B"].conversions).to eq(1)
       end
     end
-    # CRQ - How to test for things like printing?
   end
 end

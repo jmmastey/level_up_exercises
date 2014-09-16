@@ -15,7 +15,10 @@ class Results
   end
 
   def print_results
-    
+    puts "Cohort      Non-conv     Conv     Visitors    Rate"
+    cohorts.each do |name, cohort|
+      sprintf("%s  %d  %d  %f  %f" , cohort.name, cohort.non_conversions, cohort.conversions, cohort.visitors, cohort.conversion_rate)
+    end
   end
 
   private
@@ -40,8 +43,8 @@ class Results
   end
 
   def num_conversions(cohort, converted)
-    data_points.select do |data_point|
+    data_points.count do |data_point|
       data_point.cohort_convert?(cohort, converted)
-    end.count
+    end
   end
 end

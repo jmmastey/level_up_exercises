@@ -27,7 +27,7 @@ end
 
 When /^(?:|I )press "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
   with_scope(selector) do
-    click_link(button)
+    click_on(button)
   end
 end
 

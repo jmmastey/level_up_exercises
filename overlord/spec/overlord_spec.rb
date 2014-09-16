@@ -15,9 +15,9 @@ describe 'Overlord' do
       Bomb.all.destroy!
       Wire.all.destroy!
     end
-    let(:bomb_body) { { activation_code: '12342', deactivation_code: '0220', detonation_time: '2014-09-08 00:01:00 -0500' }.to_json }
-    let(:bomb_body_default) { { detonation_time: '2014-09-08 00:01:00 -0500' }.to_json }
-    let(:bomb_body_failure) { {}.to_json }
+    let(:bomb_body) { { activation_code: '12342', deactivation_code: '0220', detonation_time: '55' }.to_json }
+    let(:bomb_body_default) { { detonation_time: '55' }.to_json }
+    let(:bomb_body_failure) { {activation_code: 12342, deactivation_code: 0220, detonation_time: 55 }.to_json }
     it 'should have no bombs', type: :request do
       get '/api/bomb/list'
       expect(last_response).to be_ok
@@ -44,7 +44,7 @@ describe 'Overlord' do
     context 'with bombs' do
       let!(:bomb) { Bomb.create(activation_code: '1234',
                                 deactivation_code: '0000',
-                                detonation_time: Time.now,
+                                detonation_time: '60',
                                 wires: create_wires(5)) }
 
       it 'should have a list' do
@@ -75,7 +75,7 @@ describe 'Overlord' do
         context 'deactivation' do
           let!(:bomb) { Bomb.create(activation_code: '1234',
                                     deactivation_code: '0000',
-                                    detonation_time: Time.now,
+                                    detonation_time: '55',
                                     wires: create_wires(5), status: :active) }
           it 'should deactivate bomb' do
             get "/api/bomb/#{bomb.id}/deactivate/#{bomb.deactivation_code}"

@@ -1,5 +1,5 @@
 'use strict';
-var bombApp = angular.module("bombApp", ["ngResource", "ngRoute", "rcForm", "rcDisabled", "ngKeypad"]);
+var bombApp = angular.module("bombApp", ["ngResource", "ngRoute", "rcForm", "rcDisabled", "ngKeypad", "timer"]);
 
 
 bombApp.config(function($routeProvider, $locationProvider){

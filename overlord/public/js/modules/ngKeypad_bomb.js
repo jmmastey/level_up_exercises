@@ -340,7 +340,8 @@
          */
         function handleElementSelected(event) {
             event.stopPropagation();
-
+            controller.$valid = true;
+            controller.$dirty = false;
             if (!self.active) {
                 clearSelectedElement();
 

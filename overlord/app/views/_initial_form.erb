@@ -1,5 +1,32 @@
-<div class="col-md-12">
-    <form name="activationForm" id="activationForm" rc-submit="submit()" class="form-horizontal row" novalidate ng-hide="bombActive">
+<div class="col-md-11 bomb-panel">
+    <div class="panel panel-default" ng-show="bombReady">
+        <div class="panel-body">
+            <div class="alert alert-danger bomb-status">{{bombStatus}}</div>
+            <timer interval="1000" autostart="false"> seconds left: {{countdown}}</timer>
+        </div>
+
+    </div>
+    <form name="deactivationForm" rc-submit="submit()" class="form-horizontal" ng-show="bombActive" novalidate>
+        <div class="control-group" ng-class="activeErrorClass('deactivation_entry')">
+
+            <label class="control-label" for="deactivation_entry">Deactivate</label>
+
+            <div class="controls">
+                <a ng-model="deactivation_entry" type="number"
+                   ng-minlength="4" data-ng-keypad-input="numeric"
+                   data-ng-keypad-restrict="^[0-9]{1,10}$"
+                   tabindex="4" class="form-control"
+                   id="deactivation_entry"
+                       name="deactivation_entry" required autofocus>{{deactivation_entry}}</a>
+                        <span class="help-block"
+                              ng-show="deactivationForm.deactivation_entry.$invalid && deactivationForm.deactivation_entry.$dirty">
+                            {{activeErrorMessage('deactivation_entry')}}
+                        </span>
+            </div>
+            <span class="small text-error">{{code_error}}</span>
+        </div>
+    </form>
+    <form name="activationForm" id="activationForm" ng-submit="submit()" class="form-horizontal row" novalidate ng-hide="bombReady">
         <% @form_fields.each_with_index do |field, index| %>
             <div class="form-group" ng-class="errorClass(activationForm.<%= field %>)">
                 <div class="control-group">
@@ -7,19 +34,14 @@
 
                     <div class="controls">
                         <a class="form-control" data-ng-model="<%=field%>"
-                           <% unless field.eql?('detonation_time') %>
                            type="number"
-                           <% else %>
-                            type="dateTime"
-                            <% end %>
                            id="<%= field %>"
-                           ng-minlength="4" data-ng-keypad-input="numeric"
-                           data-ng-keypad-restrict="^[0-9]{0,4}$"
-                           name="<%= field %>" required autofocus tabindex='<%= index+1 %>'>{{<%=field%>}}</a>
-                            <span class="help-block"
-                                  ng-show="showError(activationForm.<%=field%>)">
-                                {{errorMessage(activationForm.<%=field%>)}}
-                            </span>
+                           data-ng-keypad-input="numeric"
+                           data-ng-keypad-restrict="^[0-9]{1,10}$"
+                           name="<%= field %>" required
+                           autofocus tabindex='<%= index+1 %>'>{{<%=field%>}}
+                            </a>
+                            <span class="help-block" id="<%= field %>_errors"></span>
                     </div>
                 </div>
             </div>

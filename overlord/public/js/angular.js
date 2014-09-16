@@ -23555,7 +23555,7 @@ var styleDirective = valueFn({
 
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-animate){display:none !important;}ng\\:form{display:block;}</style>');
 /**
- * @license AngularJS v1.2.23
+ * @license AngularJS v1.2.24
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -24177,7 +24177,7 @@ angular.module('ngResource', ['ng']).
 })(window, window.angular);
 
 /**
- * @license AngularJS v1.2.23
+ * @license AngularJS v1.2.24
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */

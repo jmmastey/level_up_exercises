@@ -6,7 +6,7 @@ class Bomb
   property :activation_code, String, default: '1234'
   property :deactivation_code, String, default: '0000'
   # property :session_id, String, required: true
-  property :detonation_time, DateTime, required: true
+  property :detonation_time, String, default: '60'
   property :created_at, DateTime, default: DateTime.current
   property :status, Enum[:inactive, :active, :exploded, :defused], default: :inactive
   property :attempts, Integer, default: 0, max: 3

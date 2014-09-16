@@ -120,10 +120,10 @@
                     </div>
                     <div class="clearfix">
                     </div>
-                    <a class="btn btn-success btn-block flatbtn" data-ng-key="[NEXT]">NEXT</a>
+                    <a class="btn btn-success btn-block flatbtn" data-ng-key="[NEXT]">{{buttonLabel}}</a>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" ng-show="bombReady">
                 <div class="col-md-12">
                     <div>
                         <div class="spanicons deactivate" data-ng-key="[DEACTIVATE]">
@@ -132,19 +132,19 @@
                                     Deactivate</p>
                             </span>
                         </div>
-                        <div class="spanicons disabled">
+                        <div class="spanicons">
                             <span class="glyphicon glyphicon-earphone"></span><span class="small">
                                 <p>
                                     Calls</p>
                             </span>
                         </div>
-                        <div class="spanicons disabled">
+                        <div class="spanicons ">
                             <span class="glyphicon glyphicon-user"></span><span class="small">
                                 <p>
                                     Contacts</p>
                             </span>
                         </div>
-                        <div class="spanicons active">
+                        <div class="spanicons ">
                             <span class="glyphicon glyphicon-th"></span><span class="small">
                                 <p>
                                     Keyboard</p>

@@ -20,15 +20,12 @@
 //}
 
 bombApp.factory("Bomb", function($resource) {
-    return $resource("/bomb",{},
+    return $resource("/api/bomb",{},
         {
-            'activationCode':  { method: 'POST' },
-            'deactivationCode':  { method: 'POST', url:"/bomb/deactivate/:deactivationCode", params:{deactivationCode:"@deactivationCode"} },
-            'submitCodes': {method: 'POST', isObject:true,
-                url:"/bomb/:activationCode/:deactivationCode/:detonationCode",
-            params:{activationCode: "@activationCode", deactivationCode:"@deactivationCode", detonationCode:"@detonationCode"}},
-            'deactivation':{method: 'POST'},
-            'detonation':  { method: 'POST' },
+            'activate':  { method: 'GET' , url:"/api/bomb/:id/activate/:activation_code", params:{id: "@bomb_id", activation_code:"@activation_code"}},
+            'deactivate':  { method: 'GET', url:"/api/bomb/:id/deactivate/:deactivation_code", params:{id: "@bomb_id", deactivation_code:"@deactivationEntry"} },
+            'submit': {method: 'POST', isObject:true},
+            'detonate':  { method: 'GET', url:"/api/bomb/detonate/:id", params:{id:"@bomb_id"} },
             'index':   { method: 'GET', isArray: true },
             'show':    { method: 'GET', isArray: false },
             'update':  { method: 'PUT' },

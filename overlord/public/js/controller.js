@@ -34,17 +34,39 @@ bombApp.directive('bombtime', function () {
             var self = this;
             var selectedInputIndex = 1;
             $scope.opened = true;
-            $scope.activationCode = '';
-            $scope.deactivationCode = '';
-            $scope.detonationCode = '';
             $scope.currentStep = 0;
             $scope.bombActive = false;
+            $scope.buttonLabel = 'NEXT';
+
+            $scope.$on('timer-stopped', function (event, data){
+                console.log('Timer Stopped - data = ', data);
+                var completed = data.seconds;
+
+                if(completed >= $scope.detonation_time)
+                {
+                    $scope.detonate();
+                }
+            });
+
+//            $scope.$on(Keypad.KEY_PRESSED, function(event){
+//                controller.$valid = true;
+//                controller.$dirty = false;
+//            });
 
             $scope.$on(Keypad.MODIFIER_KEY_PRESSED, function (event, key, id) {
                 var focusedInput = $('a[data-ng-keypad-input]:focus'),
                     inputs = $('a[data-ng-keypad-input]'),
                     foundIndex = findInputInInputs(focusedInput, inputs),
                     index = 0;
+
+                if($scope.activationForm.$valid)
+                {
+                    $scope.buttonLabel = 'SUBMIT'
+                }
+                else
+                {
+                    $scope.buttonLabel = 'NEXT'
+                }
 
                 switch (key) {
                     case "PREVIOUS":
@@ -68,6 +90,30 @@ bombApp.directive('bombtime', function () {
                             }
                         }
                         inputs.eq(index).focus();
+                        if($scope.activationForm.$valid && !$scope.bombActive)
+                        {
+                            $scope.submit();
+                        }
+                        if($scope.bombActive)
+                        {
+                            $scope.deactivate();
+                        }
+                        break;
+                    case "ACTIVATE":
+                        if($scope.bombReady && !$scope.bombActive)
+                        {
+                            $scope.activate();
+                        }
+                        if($scope.bombReady && $scope.bombActive)
+                        {
+                            $scope.deactivate();
+                        }
+                        break;
+                    case "DEACTIVATE":
+                        if($scope.bombReady && $scope.bombActive)
+                        {
+                            $scope.deactivate();
+                        }
                         break;
                 }
             });
@@ -92,41 +138,111 @@ bombApp.directive('bombtime', function () {
             } else {
                 $scope.bomb = new Bomb();
             }
-            $scope.bombActionClick = function (name) {
-                if (name == 'Activate') {
-                    $scope.submit();
-                }
-                else {
-                    $scope.submit();
-                }
-            };
-
-            $scope.submit = function () {
-
-                console.log("submit");
-//        if(!$scope.activationCode.length)
-//        {
-//            $scope.activationCode = '1234'
-//        }
-//        if(!$scope.deactivationCode.length)
-//        {
-//            $scope.deactivationCode = '0000'
-//        }
-//        if(!$scope.detonationCode.length)
-//        {
-//            $scope.detonationCode = 60
-//        }
+            $scope.detonate = function (name) {
+                console.log("detonate");
 
 
                 function success(response) {
                     console.log("success", response);
+                    $scope.bombActive = false;
+                    $scope.bombStatus = response.status;
+                    $scope.bomb_id = response.id;
+                    $scope.buttonLabel = 'YOU DIED'
+//                    $scope.$broadcast('timer-stop');
+                }
 
+                function failure(response) {
+                    console.log("failure", response);
+                    $scope.code_error = response.data.error;
+                    $scope.bombStatus = response.data.status;
+
+                }
+
+                Bomb.detonate({id: $scope.bomb_id}, success, failure)
+
+
+
+            };
+            $scope.deactivate = function (name) {
+                console.log("deactivate");
+
+
+                function success(response) {
+                    console.log("success", response);
+                    $scope.bombActive = false;
+                    $scope.bombStatus = response.status;
+                    $scope.bomb_id = response.id;
+                    $scope.buttonLabel = 'DEFUSED'
+                    $scope.$broadcast('timer-stop');
+                    $scope.code_error = "success";
+                }
+
+                function failure(response) {
+                    console.log("failure", response);
+                    $scope.code_error = response.data.error;
+                    $scope.bombStatus = response.data.status;
+
+                }
+
+                Bomb.deactivate({id: $scope.bomb_id, deactivation_code: $scope.deactivation_entry}, success, failure)
+
+
+
+            };
+
+            $scope.activate = function (name) {
+                console.log("activate");
+
+
+                function success(response) {
+                    console.log("success", response);
+                    $scope.bombActive = true;
+                    $scope.bombStatus = response.status;
+                    $scope.bomb_id = response.id;
+                    $scope.buttonLabel = 'DEACTIVATE'
+                    $scope.$broadcast('timer-start');
                 }
 
                 function failure(response) {
                     console.log("failure", response);
 
                 }
+
+                Bomb.activate({id: $scope.bomb_id, activation_code: $scope.activation_code}, success, failure)
+
+
+
+            };
+
+            $scope.submit = function () {
+
+                console.log("submit");
+
+
+                function success(response) {
+                    console.log("success", response);
+                    $scope.bombReady = true;
+                    $scope.bombStatus = response.status
+                    $scope.bomb_id = response.id
+                    $scope.$broadcast('timer-set-countdown', $scope.detonation_time);
+
+
+                }
+
+                function failure(response) {
+                    console.log("failure", response);
+                    $(response.data).each(function(errors, key)
+                    {
+                        for(var k in key){
+                            $('#'+k+'_errors').html(key[k])
+                        }
+                    });
+                }
+                var form = $scope.activationForm;
+                var data = {activation_code: form.activation_code.$modelValue,
+                        deactivation_code: form.deactivation_code.$modelValue,
+                        detonation_time: form.detonation_time.$modelValue};
+                Bomb.submit(data, success, failure)
 
 
             };

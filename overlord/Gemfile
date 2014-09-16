@@ -14,10 +14,11 @@ gem 'bundler'
 
 
 
+
 group :test do
-  gem 'rspec'
   gem 'rspec-expectations', require: 'rspec/expectations'
   gem 'rack-test', require: 'rack/test'
+  gem 'rspec'
   gem 'cucumber'
   gem 'cucumber-sinatra'
   gem 'capybara'
@@ -28,6 +29,8 @@ group :test, :development do
   gem 'dm-sqlite-adapter'
   gem 'tux'
   gem 'debase'
+  gem 'sass'
+  gem 'compass'
   gem 'ruby-debug-ide'
 end
 

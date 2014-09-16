@@ -30,13 +30,25 @@ class Overlord < Sinatra::Application
 
   get '/api/bomb/:id/deactivate/:deactivation_code' do
     bomb ||= Bomb.get(params[:id]) || halt(404)
-    valid_deactivation_code = bomb.deactivation_code.eql?(params[:deactivation_code])
+    valid_deactivation_code = bomb.deactivation_code.eql?(params[:deactivation_code]||0)
     if valid_deactivation_code
       valid_deactivation(bomb)
     else
       invalid_deactivation(bomb)
     end
   end
+
+  get '/api/bomb/:id/deactivate*' do
+    bomb ||= Bomb.get(params[:id]) || halt(404)
+    valid_deactivation_code = bomb.deactivation_code.eql?(0)
+    if valid_deactivation_code
+      valid_deactivation(bomb)
+    else
+      invalid_deactivation(bomb)
+    end
+  end
+
+
 
   get '/api/bomb/:id' do
     bomb ||= Bomb.get(params[:id]) || halt(404)
@@ -47,18 +59,31 @@ class Overlord < Sinatra::Application
   post '/api/bomb' do
     # body = JSON.parse request.body.read
     begin
+      errors = {}
+      codes = %w(activation_code deactivation_code)
+      codes.each do |code|
+        errors[code] = "too_short" if json[code.to_sym].size < 4
+      end
+      unless errors.empty?
+        status 400
+        return format_response(errors, request.accept)
+      end
       bomb = Bomb.create(
-          activation_code: json[:activation_code],
-          deactivation_code: json[:deactivation_code],
-          detonation_time: Time.parse(json[:detonation_time]),
-          wires: create_wires(json[:wires] || 4)
+          activation_code: json[:activation_code] || '1234',
+          deactivation_code: json[:deactivation_code] || '0000',
+          detonation_time: json[:detonation_time] || '60',
+          wires: create_wires(json[:wires] || 5
+         )
       )
     rescue
       halt(404)
     end
     status 201
+    session['bomb_id'] = bomb.id
+    session['bomb_status'] = bomb.status
     response_message = { status: 'ok', id: bomb.id }
-    format_response(response_message, request.accept)
+    # format_response(response_message, request.accept)
+    format_bomb(bomb)
   end
 
   get '/test' do
@@ -70,8 +95,11 @@ class Overlord < Sinatra::Application
     redirect to('/api/detonate'), 303
   end
 
-  get '/api/detonate' do
-    "boom"
+  get '/api/bomb/detonate/:id' do
+    bomb ||= Bomb.get(params[:id]) || halt(404)
+    bomb.status = :exploded
+    bomb.save
+    format_bomb(bomb)
   end
 
 

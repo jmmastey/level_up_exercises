@@ -1,6 +1,6 @@
 {
   "name": "overlord",
-  "version": "0.0.0",
+      "version": "0.0.0",
   "homepage": "https://github.com/enovajuan/level_up_exercises",
   "authors": [
     "Juan Bonfante <jbonfante@enova.com>"
@@ -26,6 +26,8 @@
   "devDependencies": {
     "angularjs-utilities": "~0.0.9",
     "jquery-steps": "~1.0.8",
-    "ng-keypad": "https://github.com/trochette/ng-keypad.git"
+    "ng-keypad": "https://github.com/trochette/ng-keypad.git",
+    "angular-timer": "~1.1.6",
+    "coffee-script": "~1.8.0"
   }
 }

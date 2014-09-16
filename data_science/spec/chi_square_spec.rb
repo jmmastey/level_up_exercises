@@ -5,12 +5,11 @@ require_relative "../cohort"
 describe ChiSquare do
   let(:cohort_a) { Cohort.new("A", conversions: 5, non_conversions: 15) }
   let(:cohort_b) { Cohort.new("B", conversions: 15, non_conversions: 5) }
- # let(:chi_square) { ChiSquare.new(4,3,2,1) }
+  let(:cohorts) { [cohort_a, cohort_b] }
+  let(:chi_square) { ChiSquare.new(cohorts) }
 
   describe "#initialize" do
     it "accepts an array of two cohorts" do
-      cohorts = [ cohort_a, cohort_b]
-      chi_square = ChiSquare.new(cohorts)
       expect(chi_square.cohorts[0].name).to eq("A")
       expect(chi_square.cohorts[1].conversions).to eq(15)
     end
@@ -26,21 +25,16 @@ describe ChiSquare do
     end
 
     xit "can accept a significance level on input" do
-      cohorts = [ cohort_a, cohort_b]
       sig_level = 0.05
       chi_square = ChiSquare.new(cohorts, sig_level)
       expect(chi_square.sig_level).to eq(0.05)
     end
 
     it "sets significance level to 0.05 if not set" do
-      cohorts = [ cohort_a, cohort_b]
-      chi_square = ChiSquare.new(cohorts)
       expect(chi_square.sig_level).to eq(0.05)
     end
 
     it "has a chi square statistic 3.841 at the 0.05 sig level" do
-      cohorts = [ cohort_a, cohort_b]
-      chi_square = ChiSquare.new(cohorts)
       expect(chi_square.statistic).to eq(3.841)
     end
 

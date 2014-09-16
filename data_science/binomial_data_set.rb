@@ -32,7 +32,7 @@ class BinomialDataSet
 
   def to_s
     format("DataSet:(total '#{count}', successes '#{success_count}', " \
-    "failures '#{fail_count}', percent success '%3f)'", success_percent)
+    "failures '#{fail_count}', percent success '%3f%%')", success_percent)
   end
 
   private

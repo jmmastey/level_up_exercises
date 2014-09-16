@@ -41,7 +41,7 @@ class ConfidenceInterval
   end
 
   def to_s
-    format("Confidence Interval:(low '%3f', mean '%3f', high '%3f')",
+    format("(low '%3f%%', mean '%3f%%', high '%3f%%')",
       low_percent, success_percent, high_percent)
   end
 end

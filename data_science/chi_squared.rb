@@ -1,10 +1,10 @@
 require "statistics2"
 
-class ChiSquare
+class ChiSquared
   attr_reader :degrees_of_freedom, :confidence_level
   def initialize(params)
     @dataset = params[:dataset]
-    @degrees_of_freedom = 1
+    @degrees_of_freedom = @dataset.groups.size - 1
     @confidence_level = 0.95
   end
 

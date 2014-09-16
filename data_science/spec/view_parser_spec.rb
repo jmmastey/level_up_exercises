@@ -1,8 +1,8 @@
 require "rspec"
 require "date"
 
-require_relative "../pageview"
-require_relative "../viewparser"
+require_relative "../page_view"
+require_relative "../view_parser"
 
 describe ViewParser do
   context "upon parsing json" do

@@ -1,7 +1,7 @@
 require "rspec"
 
-require_relative "../viewparser"
-require_relative "../binomialdataset.rb"
+require_relative "../view_parser"
+require_relative "../binomial_data_set.rb"
 
 describe BinomialDataSet do
   context "upon recieving data" do

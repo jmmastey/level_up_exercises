@@ -1,10 +1,10 @@
 require "rspec"
 
-require_relative "../viewparser"
-require_relative "../binomialdataset.rb"
-require_relative "../chisquare.rb"
+require_relative "../view_parser"
+require_relative "../binomial_data_set"
+require_relative "../chi_squared"
 
-describe ChiSquare do
+describe ChiSquared do
   context "upon recieving data" do
     let(:raw_data) do
       %q([{"date":"2014-03-15","cohort":"B","result":1},
@@ -25,7 +25,7 @@ describe ChiSquare do
     end
 
     let(:chi_square) do
-      ChiSquare.new(dataset: dataset)
+      ChiSquared.new(dataset: dataset)
     end
 
     it "should calculate the statistical significance" do

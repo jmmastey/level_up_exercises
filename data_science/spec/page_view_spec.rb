@@ -1,7 +1,7 @@
 require "rspec"
 require "date"
 
-require_relative "../pageview"
+require_relative "../page_view"
 
 describe PageView do
   context "upon creation" do

@@ -9,7 +9,7 @@ class AppView
     rows.join("\n")
   end
 
-  def chi_square_results(chi_square)
+  def chi_squared_results(chi_square)
     chi_square.to_s
   end
 end

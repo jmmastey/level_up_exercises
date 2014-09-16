@@ -1,4 +1,4 @@
-require_relative "./binomialdatagroup"
+require_relative "./binomial_data_group"
 
 class UnsupportedError < RuntimeError; end
 

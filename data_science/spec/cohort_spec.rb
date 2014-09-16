@@ -20,7 +20,7 @@ describe Cohort do
 
     it "raises an error if conversion/non-conversion are not integers" do
       expect do
-        Cohort.new("A", conversions: "A String" )
+        Cohort.new("A", conversions: "A String")
       end.to raise_error ArgumentError
 
       expect do
@@ -28,7 +28,7 @@ describe Cohort do
       end.to raise_error ArgumentError
 
       expect do
-        Cohort.new("A", non_conversions: "A String" )
+        Cohort.new("A", non_conversions: "A String")
       end.to raise_error ArgumentError
     end
 
@@ -70,7 +70,7 @@ describe Cohort do
   describe "#conversion_rate" do
     it "calculates the rate of conversion" do
       cohort = Cohort.new("A", conversions: 11, non_conversions: 10)
-      expect(cohort.conversion_rate).to eq(11.0/21.0)
+      expect(cohort.conversion_rate).to eq(11.0 / 21.0)
     end
   end
 end

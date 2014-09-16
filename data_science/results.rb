@@ -16,8 +16,9 @@ class Results
 
   def print_results
     puts "Cohort      Non-conv     Conv     Visitors    Rate"
-    cohorts.each do |name, cohort|
-      sprintf("%s  %d  %d  %f  %f" , cohort.name, cohort.non_conversions, cohort.conversions, cohort.visitors, cohort.conversion_rate)
+    cohorts.each do |_, cohort|
+      sprintf("%s  %d  %d  %f  %f" , cohort.name, cohort.non_conversions,
+              cohort.conversions, cohort.visitors, cohort.conversion_rate)
     end
   end
 
@@ -28,15 +29,15 @@ class Results
     input = JSON.parse file
     input.each do |data|
       @data_points << DataPoint.new(data["cohort"], data["result"])
-      @cohorts[data["cohort"]] = nil # CR? - is there a beter way to do this?
+      @cohorts[data["cohort"]] = nil
     end
   end
 
   def gather_data_into_cohorts
     cohorts_orig = cohorts
     cohorts_orig.each do |cohort, _|
-      @cohorts[cohort] =
-        Cohort.new(cohort,
+      @cohorts[cohort] = Cohort.new(
+        cohort,
         conversions: num_conversions(cohort, convert: true),
         non_conversions: num_conversions(cohort, convert: false))
     end
@@ -48,7 +49,3 @@ class Results
     end
   end
 end
-#
-#r = Results.new
-#r.add_data("source_data.json")
-#r.print_results

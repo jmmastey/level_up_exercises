@@ -26,9 +26,9 @@ describe Results do
 
   context "after data has been added" do
     let(:results) do
-      mock_json = %Q([{"date":"2014-03-20","cohort":"B","result":1},)
-      mock_json += %Q({"date":"2014-03-20","cohort":"A","result":1},)
-      mock_json += %Q({"date":"2014-03-20","cohort":"A","result":0}])
+      mock_json = %([{"date":"2014-03-20","cohort":"B","result":1},)
+      mock_json += %({"date":"2014-03-20","cohort":"A","result":1},)
+      mock_json += %({"date":"2014-03-20","cohort":"A","result":0}])
 
       allow(File).to receive(:read).with("some_file").and_return(mock_json)
 

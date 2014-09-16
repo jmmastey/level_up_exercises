@@ -1,6 +1,5 @@
 class Cohort
-  attr_reader :name, :conversions, :non_conversions, :visitors,
-              :conversion_rate
+  attr_reader :name, :conversions, :non_conversions
 
   def initialize(name, options = {})
     @name = name

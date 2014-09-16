@@ -59,5 +59,6 @@ describe Results do
         expect(results.cohorts["B"].conversions).to eq(1)
       end
     end
+    # CRQ - How to test for things like printing?
   end
 end

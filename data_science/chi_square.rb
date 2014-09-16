@@ -28,7 +28,6 @@ class ChiSquare
     b_c = cohorts[1].conversions.to_f
     b_n = cohorts[1].non_conversions.to_f
 
-
     numerator = (a_n * b_c - a_c * b_n)**2 * (a_c + a_n + b_c + b_n)
     denominator = (a_c + a_n) * (b_c + b_n) * (a_c + b_c) * (a_n + b_n)
     numerator / denominator

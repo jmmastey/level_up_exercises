@@ -1,5 +1,6 @@
 class Cohort
-  attr_reader :name, :conversions, :non_conversions, :visitors
+  attr_reader :name, :conversions, :non_conversions, :visitors,
+              :conversion_rate
 
   def initialize(name, options = {})
     @name = name
@@ -7,6 +8,7 @@ class Cohort
     @non_conversions = options[:non_conversions] || 0
     raise ArgumentError unless @conversions.is_a? Integer
     raise ArgumentError unless @non_conversions.is_a? Integer
+    raise ArgumentError unless @name.is_a? String
   end
 
   def add_conversion
@@ -19,5 +21,9 @@ class Cohort
 
   def visitors
     conversions + non_conversions
+  end
+
+  def conversion_rate
+    conversions.to_f / visitors.to_f
   end
 end

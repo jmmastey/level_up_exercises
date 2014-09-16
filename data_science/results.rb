@@ -14,6 +14,10 @@ class Results
     gather_data_into_cohorts
   end
 
+  def print_results
+    
+  end
+
   private
 
   def parse_file

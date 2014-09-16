@@ -15,7 +15,7 @@ describe Cohort do
     it "raises an error if name is not a string" do
       expect { Cohort.new(0.5) }.to raise_error ArgumentError
       expect { Cohort.new(5) }.to raise_error ArgumentError
-      expect { Cohort.new(Cohort.new("A") }.to raise_error ArgumentError
+      expect { Cohort.new(Cohort.new("A")) }.to raise_error ArgumentError
     end
 
     it "raises an error if conversion/non-conversion are not integers" do
@@ -69,6 +69,13 @@ describe Cohort do
       cohort.add_conversion
       cohort.add_non_conversion
       expect(cohort.visitors).to eq(3)
+    end
+  end
+
+  describe "#conversion_rate" do
+    it "calculates the rate of conversion" do
+      cohort = Cohort.new("A", conversions: 10, non_conversions: 11)
+      expect(cohort.conversion_rate).to eq(10.0/21.0)
     end
   end
 end

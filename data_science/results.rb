@@ -37,14 +37,18 @@ class Results
     cohorts_orig.each do |cohort, _|
       @cohorts[cohort] =
         Cohort.new(cohort,
-        conversions: num_conversions(cohort, true),
-        non_conversions: num_conversions(cohort, false))
+        conversions: num_conversions(cohort, convert: true),
+        non_conversions: num_conversions(cohort, convert: false))
     end
   end
 
-  def num_conversions(cohort, converted)
+  def num_conversions(cohort, options = {})
     data_points.count do |data_point|
-      data_point.cohort_convert?(cohort, converted)
+      data_point.cohort_convert?(cohort, options[:convert])
     end
   end
 end
+#
+#r = Results.new
+#r.add_data("source_data.json")
+#r.print_results

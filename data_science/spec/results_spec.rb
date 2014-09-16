@@ -8,7 +8,7 @@ describe Results do
   describe "#initialize" do
     it "should start with no data" do
       results = Results.new
-      expect(results.data.count).to eq(0)
+      expect(results.data_points.count).to eq(0)
     end
   end
 
@@ -38,12 +38,12 @@ describe Results do
     end
 
     it "parses JSON data and stores as cohort objects" do
-      expect(results.data.first).to be_a DataPoint
-      expect(results.data.last).to be_a DataPoint
+      expect(results.data_points.first).to be_a DataPoint
+      expect(results.data_points.last).to be_a DataPoint
     end
 
     it "should create data object for each element in json input" do
-      expect(results.data.count).to eq(3)
+      expect(results.data_points.count).to eq(3)
     end
 
     it "should add a key for each cohort" do

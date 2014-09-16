@@ -11,4 +11,8 @@ class DataPoint
   def converted?
     result == 1
   end
+
+  def cohort_convert?(cohort_name,converted)
+    cohort_name == cohort && converted == converted?
+  end
 end

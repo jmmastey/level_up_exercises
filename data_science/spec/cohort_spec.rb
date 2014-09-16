@@ -13,8 +13,17 @@ describe Cohort do
     end
 
     it "raises an error if conversion/non-conversion are not integers" do
-      expect { Cohort.new("A", conversions: "A String" ) }.to raise_error ArgumentError
-      expect { Cohort.new("A", non_conversions: "A String" ) }.to raise_error ArgumentError
+      expect do
+        Cohort.new("A", conversions: "A String" )
+      end.to raise_error ArgumentError
+
+      expect do
+        Cohort.new("A", conversions: 0.5)
+      end.to raise_error ArgumentError
+
+      expect do
+        Cohort.new("A", non_conversions: "A String" )
+      end.to raise_error ArgumentError
     end
 
     it "can have conversions and non-conversions set on initialize" do
@@ -41,6 +50,7 @@ describe Cohort do
     it "should incease number of nonconversions by 1" do
       cohort = Cohort.new("A")
       expect { cohort.add_non_conversion }.to change { cohort.non_conversions }.by(1)
+
     end
   end
 

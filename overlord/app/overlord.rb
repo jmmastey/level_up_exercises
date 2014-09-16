@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
-Bundler.require(:default, :test, :development)
+Bundler.require(:default)
 require File.expand_path(File.dirname(__FILE__) + '/overlord_helpers.rb')
 # require 'sinatra'
 # require 'sinatra/json'
@@ -42,7 +42,7 @@ class Overlord < Sinatra::Application
   configure :production do
     DataMapper.setup(
         :default,
-        'postgres://postgres:12345@localhost/sinatra_service'
+        ENV['HEROKU_POSTGRESQL_COPPER_URL']
     )
   end
 

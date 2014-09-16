@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                         destPrefix: 'public/js/'
                     },
                     files: {
-                        'modules/': ['bower_components/angular-timer/dist/angular-timer.min.js']
+                        'modules/': ['bower_components/angular-timer/app/js/timer.js']
                     }
                 },
                 tinycolor:{

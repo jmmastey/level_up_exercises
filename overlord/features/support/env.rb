@@ -11,6 +11,8 @@ require 'rspec/expectations'
 
 Capybara.app = Overlord
 
+include Capybara::Angular::DSL
+
 # class OverlordWorld
 #   include Capybara::DSL
 #   include RSpec::Expectations

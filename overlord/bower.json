@@ -23,13 +23,13 @@
     "sprintf": "~1.0.0",
     "bootstrap": "~3.2.0",
     "tinycolor": "~1.0.0",
-    "grunt": "~0.4.5"
+    "grunt": "~0.4.5",
+    "angular-timer": "https://github.com/enovajuan/angular-timer.git#master"
   },
   "devDependencies": {
     "angularjs-utilities": "~0.0.9",
     "jquery-steps": "~1.0.8",
     "ng-keypad": "https://github.com/trochette/ng-keypad.git",
-    "angular-timer": "~1.1.6",
     "coffee-script": "~1.8.0"
   }
 }

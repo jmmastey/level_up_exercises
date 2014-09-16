@@ -23,6 +23,8 @@ group :test do
   gem 'cucumber-sinatra'
   gem 'capybara'
   gem 'nokogiri'
+  gem 'selenium-webdriver'
+  gem 'capybara-angular'
 end
 
 group :test, :development do

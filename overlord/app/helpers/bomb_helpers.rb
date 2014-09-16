@@ -28,7 +28,7 @@ module Sinatra
 
     def cut_wire_status(wire)
       return WireResponse.new(status: :exploded, message: 'BOOM') if wire.detonates
-      return WireResponse.new(status: :diffused, message: 'SUCCESS') if wire.diffuses
+      return WireResponse.new(status: :defused, message: 'SUCCESS') if wire.diffuses
       return WireResponse.new(status: :active, message: 'SPEED_UP') if wire.speeds_up
       return WireResponse.new(status: :active, message: 'SPEED_DOWN') if wire.speeds_down
       WireResponse.new(status: :active, message: 'INERT') if wire.inert?

@@ -219,7 +219,7 @@ bombApp.directive('bombtime', function () {
                             $scope.code_error = "you blew up";
                             settings.colour = tinycolor("black").toHsv();
                         break;
-                        case "diffused":
+                        case "defused":
                             $scope.bombActive = false;
                             $scope.bombStatus = status;
                             $scope.bomb_id = response.id;
@@ -232,9 +232,11 @@ bombApp.directive('bombtime', function () {
 
                     switch(message){
                         case "SPEED_UP":
+                            $scope.$broadcast('timer-set-interval', 500);
 
                         break;
                         case "SPEED_DOWN":
+                            $scope.$broadcast('timer-set-interval', 1500);
 
                         break;
                     }

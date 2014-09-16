@@ -1,0 +1,125 @@
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300);
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+
+.numpad {
+    /*margin: 0;*/
+    /*padding: 0;*/
+    font-family: 'Lato', sans-serif;
+    color: #333;
+    top: 200px;
+    position: absolute;
+    /*background-size: 100%;*/
+    /*-webkit-font-smoothing: antialiased;*/
+    /*-webkit-text-size-adjust: none;*/
+    /*background-color: #475264;*/
+}
+
+.numpad .container {
+    max-width: 240px;
+}
+
+.numpad p {
+    margin: 0;
+    padding: 0 0 10px 0;
+    line-height: 10px;
+}
+
+.span4 {
+    width: 35px;
+    float: left;
+    margin: 0 8px 10px 8px;
+}
+
+.phone {
+    margin-top: 15px;
+    background: #fff;
+}
+
+.tel {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 1px solid #9e9e9e;
+    border-radius: 0;
+}
+
+.num-pad {
+    padding-left: 15px;
+}
+
+.num {
+    border: 1px solid #9e9e9e;
+    -webkit-border-radius: 999px;
+    border-radius: 999px;
+    -moz-border-radius: 999px;
+    height: 35px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+.num:hover {
+    background-color: #9e9e9e;
+    color: #fff;
+    transition-property: background-color .2s linear 0s;
+    -moz-transition: background-color .2s linear 0s;
+    -webkit-transition: background-color .2s linear 0s;
+    -o-transition: background-color .2s linear 0s;
+}
+
+.txt {
+    font-size: 17px;
+    text-align: center;
+    margin-top: 3px;
+    font-family: 'Lato', sans-serif;
+    line-height: 15px;
+    color: #333;
+}
+
+.small {
+    font-size: 9px;
+}
+
+.btn {
+    font-weight: bold;
+    -webkit-transition: .1s ease-in background-color;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    transition-property: background-color .2s linear 0s;
+    -moz-transition: background-color .2s linear 0s;
+    -webkit-transition: background-color .2s linear 0s;
+    -o-transition: background-color .2s linear 0s;
+}
+
+.spanicons {
+    width: 42px;
+    float: left;
+    text-align: center;
+    margin-top: 40px;
+    color: #9e9e9e;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.spanicons:hover {
+    color: #3498db;
+    transition-property: color .2s linear 0s;
+    -moz-transition: color .2s linear 0s;
+    -webkit-transition: color .2s linear 0s;
+    -o-transition: color .2s linear 0s;
+}
+
+.active {
+    color: #3498db;
+}
+
+.deactivate {
+    color: #4cae4c;
+}
+
+.activate {
+    color: red;
+}

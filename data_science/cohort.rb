@@ -5,6 +5,8 @@ class Cohort
     @name = name
     @conversions = options[:conversions] || 0
     @non_conversions = options[:non_conversions] || 0
+    raise ArgumentError unless @conversions.is_a? Integer
+    raise ArgumentError unless @non_conversions.is_a? Integer
   end
 
   def add_conversion

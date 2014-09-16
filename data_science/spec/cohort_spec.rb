@@ -11,8 +11,10 @@ describe Cohort do
     it "raises an error if no name" do
       expect { Cohort.new }.to raise_error ArgumentError
     end
-    
-    xit "raises an error if conversion/non-conversion are not integers" do
+
+    it "raises an error if conversion/non-conversion are not integers" do
+      expect { Cohort.new("A", conversions: "A String" ) }.to raise_error ArgumentError
+      expect { Cohort.new("A", non_conversions: "A String" ) }.to raise_error ArgumentError
     end
 
     it "can have conversions and non-conversions set on initialize" do

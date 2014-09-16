@@ -99,7 +99,7 @@ Additional matchers
 ```
 
 
-### DRY it Up
+## DRY it Up
 
 ```
 it { should respond_to(:name) }
@@ -125,6 +125,16 @@ its(:name) { should be_nil? }
 it { should be_craving_brains} 
 ```
 
+## Hooks & Tags
+
+```
+before(:each)     # before each example runs
+before(:all)      # once before all examples
+
+after(:each)      # after each example runs
+after(:all)       # once after all examples have run
+
+```
 
 
 ## Mocks & Stubs

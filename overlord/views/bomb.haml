@@ -1,15 +1,36 @@
 %html
   %head
     %title ACME Bomb
+    %link{rel: :stylesheet, type: "text/css", href: "styles/bomb.css"}
   %body
     .bomb
       .wiring
-      .display
-        .activation_status
-        .timer
-        .status
-      .input
-        .keypad
-        .buttons
-          %button#enter{type: :button} Enter
-          %button#confirm{type: :button} Confirm
+        .wire-red &nbsp;
+        .wire-blue &nbsp;
+        .wire-green &nbsp;
+        .wire-black &nbsp;
+      .bomb-panel
+        .display
+          .activation_status
+          .timer
+          .status
+        .input
+          .code-display
+          %input#code{type: :hidden, maxlength: 4}
+          .keypad
+            .keypad-row
+              - (7..9).each do |n|
+                %button{data: {value: n}} #{n}
+            .keypad-row
+              - (4..6).each do |n|
+                %button{data: {value: n}} #{n}
+            .keypad-row
+              - (1..3).each do |n|
+                %button{data: {value: n}} #{n}
+            .keypad-row
+              %button{data: {value: 0}} 0
+              %button#btn-enter Enter
+              %button#btn-backspace &lt;&lt;
+        .clr
+    %script{src: "/scripts/jquery-2.1.1.min.js" }
+    %script{src: "/scripts/bomb.js" }

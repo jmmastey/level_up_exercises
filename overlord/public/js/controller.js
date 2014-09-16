@@ -207,6 +207,7 @@ bombApp.directive('bombtime', function () {
                 function success(response) {
                     console.log("success", response);
                     var status = response.status;
+                    var message = response.message;
                     switch(status){
                         case "exploded":
                             $scope.bombActive = false;
@@ -227,8 +228,15 @@ bombApp.directive('bombtime', function () {
                             $scope.code_error = "nothing to worry about here";
                             settings.colour = tinycolor("green").toHsv();
                         break;
+                    }
 
+                    switch(message){
+                        case "SPEED_UP":
 
+                        break;
+                        case "SPEED_DOWN":
+
+                        break;
                     }
 //                    $scope.bombActive = false;
 //                    $scope.bombStatus = response.status;

@@ -9,33 +9,39 @@ class ChiSquare
   end
 
   def value
-    @dataset.groups.each_key.inject(0) do |sum, group_id|
-      sum + chi_group_value(group_id)
+    @dataset.groups.each_value.inject(0) do |sum, group|
+      sum + chi_group_value(group)
     end
   end
 
   def significant?
-    Statistics2.chi2X_(@degrees_of_freedom, value) > @confidence_level
+    pvalue = Statistics2.chi2X_(@degrees_of_freedom, value)
+    pvalue > @confidence_level
+  end
+
+  def to_s
+    significant = (significant?) ? "is significant" : "is not significant"
+    "chi squared value is '%f' and the result #{significant}" % value
   end
 
   private
 
-  def chi_group_value(group_id)
-    chi_success_value(group_id) + chi_fail_value(group_id)
+  def chi_group_value(group)
+    chi_success_value(group) + chi_fail_value(group)
   end
 
-  def chi_success_value(group_id)
+  def chi_success_value(group)
     chi_difference(
-      observed_size: @dataset.success_count(group: group_id),
-      group_size: @dataset.groups[group_id].size,
+      observed_size: group.success_count,
+      group_size: group.count,
       global_percent: @dataset.success_percent
     )
   end
 
-  def chi_fail_value(group_id)
+  def chi_fail_value(group)
     chi_difference(
-      observed_size: @dataset.fail_count(group: group_id),
-      group_size: @dataset.groups[group_id].size,
+      observed_size: group.fail_count,
+      group_size: group.count,
       global_percent: @dataset.fail_percent
     )
   end
@@ -46,10 +52,5 @@ class ChiSquare
     group_size = params[:group_size]
     square_diff = (observed_size - global_percent * group_size)**2
     square_diff / (group_size * global_percent)
-  end
-
-  def to_s
-    significant = (significant?) ? "is significant" : "is not significant"
-    "chi squared value is '#{value}' and the result #{significant}"
   end
 end

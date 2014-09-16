@@ -6,16 +6,16 @@ describe ConfidenceInterval do
   context "upon creation" do
     let(:easy_interval) do
       ConfidenceInterval.new(
-        probability_of_success: 0.5,
-        observation_size: 4,
+        success_count: 2,
+        fail_count: 2,
         confidence_level: 0.95
       )
     end
 
     let(:hard_interval) do
       ConfidenceInterval.new(
-        probability_of_success: 0.8,
-        observation_size: 1,
+        success_count: 0.8,
+        fail_count: 0.2,
         confidence_level: 0.95
       )
     end

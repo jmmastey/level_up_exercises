@@ -2,10 +2,12 @@ class UnsupportedError < RuntimeError; end
 
 class ConfidenceInterval
   def initialize(params)
-    @probability = params[:probability_of_success]
-    @size = params[:observation_size]
+    @success_count = params[:success_count]
+    @fail_count = params[:fail_count]
     @confidence_level = params[:confidence_level]
     raise_unsupported_error unless @confidence_level == 0.95
+    @total_count = @success_count + @fail_count
+    @probability = @success_count.to_f / (@total_count)
   end
 
   def raise_unsupported_error
@@ -14,7 +16,7 @@ class ConfidenceInterval
   end
 
   def standard_deviation
-    (@probability * (1 - @probability) / @size)**0.5
+    (@probability * (1 - @probability) / @total_count)**0.5
   end
 
   def low_point
@@ -30,6 +32,6 @@ class ConfidenceInterval
   end
 
   def to_s
-    "low '#{low_point}', mean '#{@probability}', high '#{high_point}"
+    "low '%3f', mean '%3f', high '%3f'" % [low_point, @probability, high_point]
   end
 end

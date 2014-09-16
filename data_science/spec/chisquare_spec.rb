@@ -1,10 +1,10 @@
 require "rspec"
 
 require_relative "../viewparser"
-require_relative "../dataset.rb"
+require_relative "../binomialdataset.rb"
 require_relative "../chisquare.rb"
 
-describe DataSet do
+describe ChiSquare do
   context "upon recieving data" do
     let(:raw_data) do
       %q([{"date":"2014-03-15","cohort":"B","result":1},
@@ -20,7 +20,7 @@ describe DataSet do
     end
 
     let(:dataset) do
-      DataSet.new(group_field: :id, control_id: "A",
+      BinomialDataSet.new(group_field: :id, control_id: "A",
          result_field: :purchased, data: data)
     end
 

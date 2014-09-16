@@ -1,9 +1,9 @@
 require "rspec"
 
 require_relative "../viewparser"
-require_relative "../dataset.rb"
+require_relative "../binomialdataset.rb"
 
-describe DataSet do
+describe BinomialDataSet do
   context "upon recieving data" do
     let(:raw_data) do
       %q([{"date":"2014-03-15","cohort":"B","result":1},
@@ -19,7 +19,7 @@ describe DataSet do
     end
 
     let(:data_set) do
-      DataSet.new(group_field: :id, control_id: "A",
+      BinomialDataSet.new(group_field: :id, control_id: "A",
          result_field: :purchased, data: data)
     end
 
@@ -36,13 +36,13 @@ describe DataSet do
     end
 
     it "should provide the chance success by group" do
-      expect(data_set.success_percent(group: "A")).to eq(0.5)
-      expect(data_set.success_percent(group: "B")).to eq(0.25)
+      expect(data_set.groups["A"].success_percent).to eq(0.5)
+      expect(data_set.groups["B"].success_percent).to eq(0.25)
     end
 
     it "should provide the success count by group" do
-      expect(data_set.success_count(group: "A")).to eq(1)
-      expect(data_set.success_count(group: "B")).to eq(1)
+      expect(data_set.groups["A"].success_count).to eq(1)
+      expect(data_set.groups["B"].success_count).to eq(1)
     end
 
     it "should provide the total chance fail value" do
@@ -54,18 +54,22 @@ describe DataSet do
     end
 
     it "should provide the chance fail by group" do
-      expect(data_set.fail_percent(group: "A")).to eq(0.5)
-      expect(data_set.fail_percent(group: "B")).to eq(0.75)
+      expect(data_set.groups["A"].fail_percent).to eq(0.5)
+      expect(data_set.groups["B"].fail_percent).to eq(0.75)
     end
 
     it "should provide the fail count by group" do
-      expect(data_set.fail_count(group: "A")).to eq(1)
-      expect(data_set.fail_count(group: "B")).to eq(3)
+      expect(data_set.groups["A"].fail_count).to eq(1)
+      expect(data_set.groups["B"].fail_count).to eq(3)
     end
 
-    it "should group things by the group field" do
-      expect(groups["A"].size).to eq(2)
-      expect(groups["B"].size).to eq(4)
+    it "should provide a count of all things" do
+      expect(data_set.count).to eq(6)
+    end
+
+    it "should provide a count by group" do
+      expect(data_set.groups["A"].count).to eq(2)
+      expect(data_set.groups["B"].count).to eq(4)
     end
   end
 end

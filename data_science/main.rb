@@ -1,28 +1,34 @@
 require_relative "./viewparser"
+require_relative "./binomialdataset"
+require_relative "./confidenceinterval"
+require_relative "./chisquare"
+require_relative "./appview"
 
 def main
-  data_path = "source_data.json"
-  data = ViewParser.new.parse(data_path)
-  dataset = DataSet.new(
-    group_field: id, control_id: "A",
-    result_field: :purchased, data: data
+  text = File.read("source_data.json")
+
+  views = ViewParser.new.parse(text)
+
+  dataset = BinomialDataSet.new(
+    group_field: :id, control_id: "A",
+    result_field: :purchased, data: views
   )
 
-  intervals = %w(A B).map do |group_id|
+  intervals = dataset.groups.each.map do |group_id, group|
     ConfidenceInterval.new(
-      probability_of_success: @dataset.success_percent(group: group_id),
-      observation_size: @dataset.groups[group_id].size,
+      success_count: group.success_count,
+      fail_count: group.fail_count,
       confidence_level: 0.95
     )
   end
 
   chi_square = ChiSquare.new(dataset: dataset)
-  
+
   appview = AppView.new
 
   puts appview.dataset_message(dataset)
   puts appview.interval_table(intervals)
-  puts appview.chisquare_results(chi_square)
+  puts appview.chi_square_results(chi_square)
 end
 
 main

@@ -6,6 +6,13 @@ One tricky problem is that bombs are quite expensive to debug in prod. To avoid 
 
 But, this is the important part: you're going to write all the tests for the device before you write any of the app code. You cleverly realize that by writing the tests the way you'd like the code to work, you'll make your resulting code that much better. Well done, smartie.
 
+### INSTALL
+1. If you have bower installed `bower install`
+2. If no bower... but NPM installed `npm install`
+3. Once everything is installed, run `grunt bower`
+4. Run `bundle install`
+5. Rack it up `rackup`
+
 ### Requirements
 
 1. Even coffee machines have webservers these days. The bomb interface should be a Sinatra app, and the tests should be written in Cucumber and Rspec. A simple Sinatra base has been provided.

@@ -1,54 +1,42 @@
+require "activesupport"
 require "thread"
 
 class TimerError < RuntimeError; end
 
 class BombTimer
   SECONDS_REMAINING = 30
-  attr_reader :seconds_remaining
 
-  def initialize(seconds_remaining = SECONDS_REMAINING)
+  def initialize(remaining = SECONDS_REMAINING)
     @started = false
-    @seconds_remaining = seconds_remaining
-    @last_time_checked = nil
+    @seconds_remaining = remaining.seconds
   end
 
-  def start(time)
+  def start
     raise(TimerError, "cannot start the timer. it is already running") if started?
-    @last_time_checked = time
+    @deadline = Time.now + @seconds_remaing
     @started = true
   end
 
-  def stop(time)
+  def stop
     raise(TimerError, "cannot stop the timer. it is not running") unless started?
-    update_seconds_remaining(time)
     @started = false
+    @seconds_remaining = (@deadline - Time.now)
   end
 
-  def triggered?(time)
-    update_seconds_remaining(time)
-    @seconds_remaining <= 0
+  def triggered?
+    deadline < Time.now
   end
 
-  def reset(time, seconds_remaining = SECONDS_REMAINING)
-    @seconds_remaining = seconds_remaining
-    @last_time_checked = time
+  def deadline
+    @deadline
+  end
+
+  def reset(remaining = SECONDS_REMAINING)
+    @seconds_remaining = remaining.seconds
+    @deadline = Time.now + @seconds_remaining
   end
 
   def started?
     @started
-  end
-
-  def seconds_remaining(time)
-    update_seconds_remaining(time)
-    @seconds_remaining
-  end
-
-  private
-
-  def update_seconds_remaining(time)
-    if started?
-      @seconds_remaining -= (time - @last_time_checked)
-      @last_time_checked = time
-    end
   end
 end

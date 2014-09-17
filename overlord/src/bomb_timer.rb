@@ -4,7 +4,7 @@ class TimerError < RuntimeError; end
 
 class BombTimer
   SECONDS_REMAINING = 30
-  attr_reader :seconds_left
+  attr_reader :seconds_remaining
 
   def initialize(seconds_remaining = SECONDS_REMAINING)
     @started = false
@@ -25,9 +25,7 @@ class BombTimer
   end
 
   def triggered?(time)
-    if started?
-      update_seconds_remaining(time)
-    end
+    update_seconds_remaining(time)
     @seconds_remaining <= 0
   end
 
@@ -40,10 +38,17 @@ class BombTimer
     @started
   end
 
+  def seconds_remaining(time)
+    update_seconds_remaining(time)
+    @seconds_remaining
+  end
+
   private
 
   def update_seconds_remaining(time)
-    @seconds_remaining -= (time - @last_time_checked)
-    @last_time_checked = time
+    if started?
+      @seconds_remaining -= (time - @last_time_checked)
+      @last_time_checked = time
+    end
   end
 end

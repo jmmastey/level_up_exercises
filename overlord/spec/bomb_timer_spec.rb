@@ -4,6 +4,7 @@ require_relative "../src/bomb_timer"
 
 describe BombTimer do
   let(:now) { Time.now }
+  let(:a_millisecond) { 1E-6 }
 
   context "upon starting the 30 second default time" do
     let(:now) { Time.now }
@@ -16,6 +17,11 @@ describe BombTimer do
 
     it "should raise an error if started again" do
       expect{ timer.start(now) }.to raise_error
+    end
+
+    it "should keep tacked of elapsed time" do
+      expect(timer.seconds_remaining(now + 10.seconds))
+             .to be_within(a_millisecond).of(20.0)
     end
 
     it "should trigger after 30 seconds" do
@@ -61,6 +67,11 @@ describe BombTimer do
       timer
     end
 
+    it "should not have full 30 seconds remaining" do
+      expect(timer.seconds_remaining(now))
+            .to be_within(a_millisecond).of(30)
+    end
+
     it "should not be triggered" do
       expect(timer).not_to be_triggered(now + 25.seconds)
     end
@@ -72,6 +83,11 @@ describe BombTimer do
       timer.start(now)
       timer.stop(now + 5.seconds)
       timer
+    end
+
+    it "should keep track that 25 seconds remain" do
+      expect(timer.seconds_remaining(now + 20.seconds))
+            .to be_within(a_millisecond).of(25)
     end
 
     it "should raise error if trying to stop again" do

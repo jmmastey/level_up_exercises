@@ -6,7 +6,7 @@ require "sinatra"
 
 enable :sessions
 
-class Overload < Sinatra::Application
+class Overlord < Sinatra::Application
   get '/' do
     "Time to build an app around here. Start time: " + start_time
   end

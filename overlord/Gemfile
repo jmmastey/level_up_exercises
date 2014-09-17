@@ -6,3 +6,8 @@ ruby "1.9.3"
 # Gem libraries
 gem "sinatra"
 gem "cucumber"
+gem "rspec-expectations"
+gem "rspec"
+gem "capybara"
+gem "pry"
+gem "activesupport"

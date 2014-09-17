@@ -6,8 +6,12 @@ describe BombCode do
       BombCode.new("0369")
     end
 
-    it "should contain the whole sequence" do
+    it "should to_s should equal the original code" do
       expect(bomb_code.to_s).to eq("0369")
+    end
+
+    it "should not equal the string" do
+      expect(bomb_code).not_to eq("0369")
     end
 
     it "shoud be able to test equality" do

@@ -5,7 +5,7 @@ Feature: Deactivation
 
   Background:
     Given the bomb is booted with default codes
-    And the bomb is active
+    And the code 1234 was entered
 
   Scenario: Deactivating a bomb with a valid code
     When I enter the code 0000

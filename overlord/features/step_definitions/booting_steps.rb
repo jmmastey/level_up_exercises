@@ -7,7 +7,6 @@ Capybara.app = Overlord
 
 Given(/^my bomb is not booted$/) do
   visit("/")
-  expect(page).to have_content("Someone set up us the bomb")
 end
 
 When(/^I boot my bomb$/) do

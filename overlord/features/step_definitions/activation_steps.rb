@@ -1,14 +1,16 @@
+require_relative '_helpers'
+
 Given(/^I have booted a bomb with the default codes$/) do
   visit("/")
   click_on("Boot")
 end
 
-Given(/^the bomb is not active$/) do
-  expect(find(".activation_status")).to have_content("inactive")
+Given(/^the code (\d+) was entered$/) do |code|
+  enter_code_on_keypad(code)
 end
 
 When(/^I enter the code (\d+)$/) do |code|
-  fill_in(:code, with: code)
+  enter_code_on_keypad(code)
 end
 
 Then(/^I should see the confirmation message$/) do

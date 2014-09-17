@@ -1,4 +1,4 @@
-require "./bernoulli"
+require './bernoulli'
 require 'statistics2'
 
 class ChiSquare
@@ -12,7 +12,7 @@ class ChiSquare
     @bernoullis << bernoulli
   end
 
-  def value    
+  def value
     @bernoullis.inject(0.0) { |sum, bernoulli| sum + component(bernoulli) }
   end
 
@@ -25,6 +25,7 @@ class ChiSquare
   end
 
   private
+
   def global_estimate
     total = Bernoulli.new
     @bernoullis.each do |bernoulli|
@@ -40,14 +41,14 @@ class ChiSquare
   def success_component(bernoulli)
     estimated = global_estimate * bernoulli.n
     observed = bernoulli.successes
-    numerator = (observed - estimated) ** 2
+    numerator = (observed - estimated)**2
     SafeMath.divide(numerator, estimated)
   end
 
   def failure_component(bernoulli)
     estimated = (1.0 - global_estimate) * bernoulli.n
     observed = bernoulli.failures
-    numerator = (observed - estimated) ** 2
+    numerator = (observed - estimated)**2
     SafeMath.divide(numerator, estimated)
   end
 

@@ -1,4 +1,4 @@
-require "./safe_math"
+require './safe_math'
 
 class Bernoulli
   attr_reader :successes, :failures

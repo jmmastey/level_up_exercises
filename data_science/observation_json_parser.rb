@@ -1,15 +1,13 @@
-require "json"
-require "./observation"
-require "./confidence"
+require 'json'
+require './observation'
+require './confidence'
 
 class ObservationJSONParser
   def initialize(filename)
-    begin
-      file = File.read(filename)
-      @data = JSON.parse(file)
-    rescue
-      puts "There was a problem reading the file: #{filename}"
-    end
+    file = File.read(filename)
+    @data = JSON.parse(file)
+  rescue
+    puts "There was a problem reading the file: #{filename}"
   end
 
   def apply(confidence)
@@ -20,9 +18,10 @@ class ObservationJSONParser
   end
 
   private
+
   def to_observation(entry)
-    subject = entry["cohort"]
-    success = entry["result"]
+    subject = entry['cohort']
+    success = entry['result']
     return nil if subject.nil? || success.nil?
     Observation.new(subject, success.to_i == 1)
   end

@@ -1,6 +1,6 @@
 
 module SafeMath
-  def SafeMath.divide(x, y)
+  def self.divide(x, y)
     return 0 if y == 0
     x.to_f / y.to_f
   end

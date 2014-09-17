@@ -1,4 +1,4 @@
-require "./bernoulli"
+require './bernoulli'
 
 class Interval
   def initialize(bernoulli)

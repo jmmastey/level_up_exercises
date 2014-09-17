@@ -1,5 +1,5 @@
-require "spec_helper"
-require "./chi_square"
+require 'spec_helper'
+require './chi_square'
 
 def create_bernoulli(successes, failures)
   bernoulli = Bernoulli.new
@@ -9,7 +9,7 @@ def create_bernoulli(successes, failures)
 end
 
 describe ChiSquare do
-  let (:chi_square) { ChiSquare.new }
+  let(:chi_square) { ChiSquare.new }
 
   before(:each) do
     bernoulli = create_bernoulli(4, 4)
@@ -19,7 +19,7 @@ describe ChiSquare do
     chi_square.add(bernoulli)
   end
 
-  it "should return correct chi-value" do
+  it 'should return correct chi-value' do
     expect(chi_square.value).to eq(0.0839160839160839)
     expect(chi_square).not_to have_rejected_null_hyp
   end

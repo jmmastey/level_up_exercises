@@ -16,3 +16,6 @@ TODO:
 4:  dino_catalog
     - global:       switch to activesupport concerns
                     https://gist.github.com/scottsims/09a23ee408c260351111
+
+5:  data_science
+    - refactor to introspect on file information for instantation klasses.

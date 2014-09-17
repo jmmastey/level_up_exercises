@@ -23,4 +23,6 @@ class DataScience
       @cohorts[item["cohort"]].samples.push(item)
     end
   end
+
+
 end

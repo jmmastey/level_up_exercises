@@ -27,4 +27,9 @@ describe 'execution' do
     expect(@data_science.cohorts["A"].conversion_count).to be == 2
     expect(@data_science.cohorts["B"].conversion_count).to be == 3
   end
+
+  it 'should calculate the 95% confidence interval for each cohort' do
+    expect(@data_science.cohorts["A"].confidence_interval(0.95)).to be == [-0.042, 0.35]
+    expect(@data_science.cohorts["B"].confidence_interval(0.95)).to be == [-0.005, 0.358]
+  end
 end

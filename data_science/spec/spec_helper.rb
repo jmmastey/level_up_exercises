@@ -1,7 +1,12 @@
 # rubocop:disable all
+require_relative '../lib/split_test_calculator'
+require_relative '../lib/parse_json_file'
+require_relative 'system_helper.rb'
 require 'rspec'
 require 'guard/rspec'
-require_relative 'system_helper.rb'
+require 'simplecov'
+require 'capybara/rspec'
+require 'pry'
 
 if ENV['CI']
   require 'coveralls'

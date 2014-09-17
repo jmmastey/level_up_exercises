@@ -1,0 +1,97 @@
+<html>
+  <title>Overlords Solution</title>
+
+  <body bgcolor="#000033">
+	<center>
+	  <br>
+	  <em style="color: green; font-size: 2em;">Overlords Status</em>
+	  <br>
+	  <br>
+	  <br>
+
+      <table>
+		<tr>
+		  <td align="left">
+			<em style="color: gray; font-size: 2.0em;">Integrity: </em>
+		  </td>
+		  <td align="left">
+			<em style="color: yellow;  font-size: 2.0em;"><%= integrity %></em>
+		  </td>
+		</tr>
+
+		<tr>
+		  <td align="left">
+			<em style="color: gray; font-size: 2.0em;">Activation: </em>
+		  </td>
+		  <td align="left">
+			<em style="color: yellow;  font-size: 2.0em;"><%= activation %></em>
+		  </td>
+		</tr>
+
+		<tr>
+		  <td align="left">
+			<em style="color: gray; font-size: 2.0em;">Deactivation Attempts: </em>
+		  </td>
+		  <td align="left">
+			<em style="color: yellow;  font-size: 2.0em;"><%= deact_attempts %></em>
+		  </td>
+		</tr>
+
+		<tr>
+		  <td align="left">
+			<em style="color: gray; font-size: 2.0em;">Display Message: </em>
+		  </td>
+		  <td align="left">
+			<em style="color: blue;  font-size: 2.0em;"><%= display %></em>
+		  </td>
+		</tr>
+
+	  </table>
+
+	  <br><br><br>
+	  <form id="activate" action="/overlords/action" method=POST>
+		<input type='hidden' name='type' value='activate'/>
+		<em style="color: green; font-size: 1.5em;">Activation Code: </em>
+		<input type="text" name="activation_code">
+		<button type="submit" id="activate_btn">Activate</button>
+	  </form>
+
+	  <br>
+	  <form id="deactivate" action="/overlords/action" method=POST>
+		<input type='hidden' name='type' value='deactivate'/>
+		<em style="color: green; font-size: 1.5em;">Deactivation Code: </em>
+		<input type="text" name="deactivation_code">
+		<button type="submit" id="deactivate_btn">Deactivate</button>
+	  </form>
+
+	  <br>
+	  <form id="snip" action="/overlords/action" method=POST>
+		<input type='hidden' name='type' value='snip'/>
+		<em style="color: green; font-size: 1.5em;"></em>
+		<button type="submit" id="snip_btn">Snip Wires</button>
+	  </form>
+
+	  <script type="text/javascript">
+
+		function set_form_read_only(form_name, value) {
+		  var form = document.getElementById(form_name);
+		  var elements = form.elements;
+		  for (var i = 0, len = elements.length; i < len; ++i) {
+	        elements[i].readOnly = value;
+		  }
+		  var btn = document.getElementById(form_name + "_btn");
+	      btn.disabled = value;
+		}
+
+        var is_intact   = ("<%= integrity %>"  == "Intact");
+		var is_active   = ("<%= activation %>" == "Active");
+		var is_inactive = ("<%= activation %>" == "Inactive");
+
+        set_form_read_only("activate",   !is_intact || !is_inactive);
+        set_form_read_only("deactivate", !is_intact || !is_active);
+        set_form_read_only("snip",       !is_intact);
+
+	  </script>
+	</center>
+  </body>
+</html>

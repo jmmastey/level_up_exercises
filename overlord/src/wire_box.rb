@@ -6,7 +6,8 @@ class WireBox
   def snip(wire)
 
   end
-  def on_bad_snip(handler)
 
+  def triggered?
+    false
   end
 end

@@ -6,9 +6,9 @@ describe BombCodeBox do
   context "upon creation" do
     let(:code_box) { BombCodeBox.new }
 
-    it "should not be activate and not fired" do
+    it "should not be activate and not triggered" do
       expect(code_box).not_to be_active
-      expect(code_box).not_to be_fired
+      expect(code_box).not_to be_triggered
     end
 
     it "should be able to be activated with code" do
@@ -30,15 +30,15 @@ describe BombCodeBox do
       code_box
     end
 
-    it "should be active and not fired" do
+    it "should be active and not triggered" do
       expect(code_box).to be_active
-      expect(code_box).not_to be_fired
+      expect(code_box).not_to be_triggered
     end
 
     it "should be deactivated with 1234" do
       code_box.deactivate("1234")
       expect(code_box).not_to be_active
-      expect(code_box).not_to be_fired
+      expect(code_box).not_to be_triggered
     end
   end
 
@@ -53,15 +53,15 @@ describe BombCodeBox do
       expect { code_box.activate("4321") }.to raise_error
     end
 
-    it "should be activate and not fired" do
+    it "should be activate and not triggered" do
       expect(code_box).to be_active
-      expect(code_box).not_to be_fired
+      expect(code_box).not_to be_triggered
     end
 
     it "should be deactivated with same code" do
       code_box.deactivate("4321")
       expect(code_box).not_to be_active
-      expect(code_box).not_to be_fired
+      expect(code_box).not_to be_triggered
     end
   end
 
@@ -73,9 +73,9 @@ describe BombCodeBox do
       code_box
     end
 
-    it "should be active and not fired" do
+    it "should be active and not triggered" do
       expect(code_box).to be_active
-      expect(code_box).not_to be_fired
+      expect(code_box).not_to be_triggered
     end
   end
 
@@ -87,31 +87,22 @@ describe BombCodeBox do
       code_box
     end
 
-    it "should be fired and not active" do
-      expect(code_box).to be_fired
+    it "should be triggered and not active" do
+      expect(code_box).to be_triggered
       expect(code_box).not_to be_active
     end
   end
 
   context "upon firing" do
-    let(:not_exploded) { "not exploded!" }
-    let(:exploded) { "exploded!" }
-
-    let(:explode) do
-      ->() { not_exploded.replace(exploded) }
-    end
-
     let(:code_box) do
       code_box = BombCodeBox.new
-      code_box.on_fire(explode)
       code_box.activate("1234")
       2.times { code_box.deactivate("0000") }
       code_box
     end
 
-    it "should have called the handler" do
-      code_box
-      expect(not_exploded).to eq(exploded)
+    it "should have been triggered" do
+      expect(code_box).to be_triggered
     end
 
     it "should throw error on activation" do
@@ -123,7 +114,7 @@ describe BombCodeBox do
     end
   end
 
-  context "upon a deactivation after bad guess" do
+  context "upon a good deactivation after a bad one" do
     let(:code_box) do
       code_box = BombCodeBox.new
       code_box.activate("1234")
@@ -134,15 +125,15 @@ describe BombCodeBox do
 
     it "should be deactivated" do
       expect(code_box).not_to be_active
-      expect(code_box).not_to be_fired
+      expect(code_box).not_to be_triggered
     end
 
-    it "should be reset" do
+    it "should be reset and have two more guesses" do
       code_box.activate("1234")
       code_box.deactivate("0000")
       code_box.deactivate("1234")
       expect(code_box).not_to be_active
-      expect(code_box).not_to be_fired
+      expect(code_box).not_to be_triggered
     end
   end
 end

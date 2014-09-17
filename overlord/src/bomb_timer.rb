@@ -3,62 +3,47 @@ require "thread"
 class TimerError < RuntimeError; end
 
 class BombTimer
-  DEFAULT_SECONDS = 30
-  attr_reader :elapsed_seconds
+  SECONDS_REMAINING = 30
+  attr_reader :seconds_left
 
-  def initialize(seconds = DEFAULT_SECONDS)
-    @lock = Mutex.new
-    @active = false
-    @seconds = seconds
-    @elapsed_seconds = 0
-    @last_time_measured = nil
-    @times_up_handlers = []
-    @counter = counter
+  def initialize(seconds_remaining = SECONDS_REMAINING)
+    @started = false
+    @seconds_remaining = seconds_remaining
+    @last_time_checked = nil
   end
 
-  def start
-    @lock.synchronize do
-      raise(TimerError, "timer is already started") if @active
-      @active = true
+  def start(time)
+    raise(TimerError, "cannot start the timer. it is already running") if started?
+    @last_time_checked = time
+    @started = true
+  end
+
+  def stop(time)
+    raise(TimerError, "cannot stop the timer. it is not running") unless started?
+    update_seconds_remaining(time)
+    @started = false
+  end
+
+  def triggered?(time)
+    if started?
+      update_seconds_remaining(time)
     end
+    @seconds_remaining <= 0
   end
 
-  def stop
-    @lock.synchronize do
-      raise(TimerError, "timer is already stopped") unless @active
-      @active = false
-    end
+  def reset(time, seconds_remaining = SECONDS_REMAINING)
+    @seconds_remaining = seconds_remaining
+    @last_time_checked = time
   end
 
-  def reset(seconds = DEFAULT_SECONDS)
-    @lock.synchronize do
-      @elapsed_seconds = 0
-      @seconds = seconds
-    end
-  end
-
-  def on_times_up(handler)
-    @times_up_handlers << handler
+  def started?
+    @started
   end
 
   private
 
-  def run_times_up_handlers
-    @times_up_handlers.each { |handler| handler.call }
-  end
-
-  def counter
-    Thread.new do
-      while @elapsed_seconds <= @seconds
-        sleep(0.01)
-        if @active
-          current_time = Time.now
-          last_time_measured = current_time if last_time_measured.nil?
-          @elapsed_seconds += (current_time - last_time_measured)
-          last_time_measured = current_time
-        end
-      end
-      run_times_up_handlers
-    end
+  def update_seconds_remaining(time)
+    @seconds_remaining -= (time - @last_time_checked)
+    @last_time_checked = time
   end
 end

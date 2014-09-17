@@ -1,6 +1,10 @@
 require "rspec"
+require_relative "../bomb"
+require_relative "../wire"
 
 describe Bomb do
+  let(:bomb) { Bomb.new }
+
   it "initializes with an activation code and deactivation code" do
     activation_code = 2211
     deactivation_code = 1122
@@ -10,30 +14,29 @@ describe Bomb do
   end
 
   it "defaults activation/deactivation codes to 1234 and 0000 if none are given" do
-    bomb = Bomb.new
     expect(bomb.activation_code).to eq(1234)
     expect(bomb.deactivation_code).to eq(0000)
   end
 
+  it "has wires" do
+    expect(bomb.wires).to have_at_least(1).items
+  end
+
   it "initializes with wires intact" do
-    bomb = Bomb.new
-    expect(bomb.wires_intact?).to be true
+    bomb.wires.each { |wire| expect(wire).to be_intact }
   end
 
   it "initializes in an inactive state" do
-    bomb = Bomb.new
     expect(bomb).to be_inactive
   end
 
   describe "#active?" do
     it "returns true when bomb is in an active state" do
-      bomb = Bomb.new
       bomb.enter_code("1234")
       expect(bomb).to be_active
     end
 
     it "returns false when bomb is in any other state" do
-      bomb = Bomb.new
       expect(bomb).not_to be_active
 
       bomb.enter_code("1234")
@@ -45,30 +48,25 @@ describe Bomb do
 
   describe "#enter_code" do
     it "allows user to enter a 4-digit code" do
-      bomb = Bomb.new
       bomb.enter_code("1234")
     end
 
     it "does nothing when nil or empty string is passed in" do
-      bomb = Bomb.new
       bomb.enter_code(nil)
       bomb.enter_code("")
     end
 
     it "throws an exception when a code in an invalid format is entered" do
-      bomb = Bomb.new
       expect { bomb.enter_code("DOGG") }.to raise_error(ArgumentError)
       expect { bomb.enter_code("23") }.to raise_error(ArgumentError)
     end
 
     it "returns the bomb if no exception was raised" do
-      bomb = Bomb.new
       expect(bomb.enter_code("1222")).to be_a?(Bomb)
     end
 
     context "when inactive" do
       it "will activate when given an activation code" do
-        bomb = Bomb.new
         bomb.enter_code("1234")
         expect(bomb).to be_active
       end
@@ -105,7 +103,6 @@ describe Bomb do
 
   describe "#exploded?" do
     it "returns true when bomb has exploded" do
-      bomb = Bomb.new
       bomb.enter_code("1234")
 
       bomb.explode
@@ -113,7 +110,6 @@ describe Bomb do
     end
 
     it "returns false when bomb is intact" do
-      bomb = Bomb.new
       expect(bomb).not_to be_exploded
 
       bomb.enter_code("1234")
@@ -123,12 +119,10 @@ describe Bomb do
 
   describe "#inactive?" do
     it "returns true when bomb is in an inactive state" do
-      bomb = Bomb.new
       expect(bomb).to be_inactive
     end
 
     it "returns false when bomb is in any other state" do
-      bomb = Bomb.new
       bomb.enter_code("1234")
 
       expect(bomb).not_to be_inactive
@@ -140,12 +134,28 @@ describe Bomb do
 
   describe "#message" do
     it 'reports "Booted" when bomb is first booted' do
-      bomb = Bomb.new
       expect(bomb.message).to eq("Booted")
     end
 
+    it 'reports "Activated" when bomb is activated' do
+      bomb.enter_code("1234")
+      expect(bomb.message).to eq("Activated")
+    end
+
+    it 'reports "Deactivated" when bomb is deactivated' do
+      bomb.enter_code("1234")
+      bomb.enter_code("0000")
+
+      expect(bomb.message).to eq("Deactivated")
+    end
+
+    it 'reports "Boom" when bomb is exploded' do
+      bomb.enter_code("1234")
+      3.times { bomb.enter_code("5555") }
+      expect(bomb.message).to eq("Boom")
+    end
+
     it 'reports "Invalid Code" when bomb is given an invalid code' do
-      bomb = Bomb.new
       bomb.enter_code("5777")
       expect(bomb.message).to eq("Invalid Code")
     end
@@ -153,17 +163,14 @@ describe Bomb do
 
   describe "#remaining_deactivation_attempts" do
     it "reports the number of remaining allowed deactivation attempts" do
-      bomb = Bomb.new
       expect(bomb.remaining_deactivation_attempts).to be > 0
     end
 
     it "starts at 3 allowed attempts" do
-      bomb = Bomb.new
       expect(bomb.remaining_deactivation_attempts).to eq(3)
     end
 
     it "decrements whenever an invalid code is entered when the bomb is active" do
-      bomb = Bomb.new
       bomb.enter_code("1234")
       expect(bomb.remaining_deactivation_attempts).to eq(3)
       bomb.enter_code("5678")
@@ -181,6 +188,12 @@ describe Bomb do
       bomb.enter_code("0000")
       expect(bomb).to be_inactive
       expect(bomb.remaining_deactivation_attempts).to eq(3)
+    end
+  end
+
+  describe "#wires" do
+    it "gets all wires attached to this bomb" do
+      bomb.wires.each { |wire| expect(wire).to be_a?(Wire) }
     end
   end
 end

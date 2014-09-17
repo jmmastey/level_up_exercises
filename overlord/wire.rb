@@ -1,10 +1,10 @@
 class Wire
-  VALID_COLORS = [:red, :green, :blue, :black]
-
+  attr_accessor :type
   attr_reader :color
 
-  def initialize(color)
-    self.color = color
+  def initialize(bomb, color)
+    @bomb = bomb
+    @color = color
     @intact = true
   end
 
@@ -14,18 +14,13 @@ class Wire
 
   def snip
     @intact = false
+    @bomb.send("on_#{type}_wire_snipped") if @type
     self
-  end
-
-  def self.get_valid_colors
-    VALID_COLORS
   end
 
   private
 
   def color=(color)
-    raise ArgumentError, "Invalid color." unless VALID_COLORS.include?(color)
-
     @color = color
   end
 end

@@ -62,13 +62,13 @@ Feature: Bomb
 	And  I deactivate it with code 1111
 	And  I deactivate it with code 1111
 	And  I deactivate it with code 1111
-	Then I should see it detonated
+	Then I should see it exploded
 
   Scenario: Deactive with wrong code two times
     Given I create a bomb with codes 9854 0941
 	When I deactivate it with code 1111
 	And  I deactivate it with code 1111
-	Then I should see it not detonated
+	Then I should see it not exploded
 
   Scenario: Check status for a newly created bomb
   	Given I create a bomb with no codes

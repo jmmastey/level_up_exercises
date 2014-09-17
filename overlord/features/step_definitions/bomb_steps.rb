@@ -40,20 +40,20 @@ end
 
 Then /I should see it is active/ do
   expect(@bomb).to be_active
-  expect(@bomb).not_to be_detonated
+  expect(@bomb).not_to be_exploded
 end
 
 Then /I should see it is not active/ do
   expect(@bomb).not_to be_active
-  expect(@bomb).not_to be_detonated
+  expect(@bomb).not_to be_exploded
 end
 
-Then /I should see it detonated/ do
-  expect(@bomb).to be_detonated
+Then /I should see it exploded/ do
+  expect(@bomb).to be_exploded
 end
 
-Then /I should see it not detonated/ do
-  expect(@bomb).not_to be_detonated
+Then /I should see it not exploded/ do
+  expect(@bomb).not_to be_exploded
 end
 
 Then /I should see status "(.*?)" \+ "(.*?)" \+ (\d) deactivation attempts/ do |integrity, activation, attempts|

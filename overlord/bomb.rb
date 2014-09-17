@@ -1,18 +1,18 @@
 class Bomb
   # Communication Messages
-  BOMB_DETONATED_MSG   = "Sorry, bomb has already detonated."
+  BOMB_EXPLODED_MSG    = "Sorry, bomb has already exploded."
   BOMB_SNIPPED_MSG     = "Sorry, bomb wires have been snipped."
   BOMB_ACTIVE_MSG      = "Bomb is already active"
   BOMB_INACTIVE_MSG    = "Bomb is already inactive"
   BOMB_ACTIVATED_MSG   = "Bomb activated - Look Out!"
   BOMB_DEACTIVATED_MSG = "Bomb deactivated"
   
-  TOO_MANY_DEACT_MSG   = "Bomb detonated - too many attempts!"
+  TOO_MANY_DEACT_MSG   = "Bomb exploded - too many attempts!"
   WRONG_CODE_MSG       = "Wrong code"
   CODE_NOT_AN_INT_MSG  = "Code must be an integer"
 
   # State
-  INTEGRITY_DETONATED = "Blown to shreds"
+  INTEGRITY_EXPLODED  = "Blown to shreds"
   INTEGRITY_SNIPPED   = "Wires are cut"
   INTEGRITY_INTACT    = "Intact"
 
@@ -58,10 +58,10 @@ class Bomb
   end
 
   def active?
-    @active && !detonated? && !snipped?
+    @active && !exploded? && !snipped?
   end
 
-  def detonated?
+  def exploded?
     @deactivation_attempts >= 3
   end
 
@@ -79,13 +79,13 @@ class Bomb
 
   private
   def integrity_status
-    return INTEGRITY_DETONATED if detonated?
+    return INTEGRITY_EXPLODED if exploded?
     return INTEGRITY_SNIPPED   if snipped?
     INTEGRITY_INTACT
   end
 
   def activation_status
-    return ACTIVATION_NOT_APP if detonated? || snipped?
+    return ACTIVATION_NOT_APP if exploded? || snipped?
     return ACTIVATION_ACTIVE if active?
     ACTIVATION_INACTIVE
   end
@@ -136,11 +136,11 @@ class Bomb
 
   def too_many_failures?
     @deactivation_attempts += 1
-    detonated?
+    exploded?
   end
 
   def bomb_is_defunct
-    return BOMB_DETONATED_MSG if detonated?
+    return BOMB_EXPLODED_MSG if exploded?
     return BOMB_SNIPPED_MSG if snipped?
     nil
   end

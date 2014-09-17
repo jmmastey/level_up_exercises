@@ -40,7 +40,7 @@ Then /the bomb should be intact/ do
   expect(value_of_field("integrity")).to eq("Intact")
 end
 
-Then /the bomb should be detonated/ do
+Then /the bomb should be exploded/ do
   expect(value_of_field("integrity")).to eq("Blown to shreds")
 end
 

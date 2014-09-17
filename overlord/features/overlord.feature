@@ -64,10 +64,10 @@ Feature: Overlord Bomb-Status Page
     And I select code 0009
     And I press deactivate
 	Then I should see the bomb status page
-	And the bomb should be detonated
+	And the bomb should be exploded
     And the bomb should have defunct activation
     And the deactivation attempts should be 3
-    And the bomb message should be "Bomb detonated - too many attempts!"
+    And the bomb message should be "Bomb exploded - too many attempts!"
 
   Scenario: I visit the main page, create a bomb, snip the wires
     When I click on snip

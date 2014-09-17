@@ -3,13 +3,12 @@ require_relative "../bomb"
 
 describe Bomb do
   let(:bomb) { Bomb.new }
-  let(:activated_bomb) { bomb.activate(1234) }
 
   describe "#initialize" do
     it "is initially decatived" do
       expect(bomb).not_to be_activated
     end
-    
+
     it "is initially has not exploded..." do
       expect(bomb).not_to be_exploded
     end
@@ -48,7 +47,6 @@ describe Bomb do
   end
 
   describe "#activate" do
-
     it "should be activated on correct activation code entry" do
       bomb.activate(1234)
       expect(bomb).to be_activated
@@ -60,8 +58,7 @@ describe Bomb do
     end
 
     it "should stay activated upon additional activation entries" do
-      bomb.activate(1234)
-      bomb.activate(1234)
+      2.times { bomb.activate(1234) }
       expect(bomb).to be_activated
     end
   end
@@ -81,9 +78,7 @@ describe Bomb do
 
     it "should explode after three incorrect deactivation attempts" do
       bomb.activate(1234)
-      bomb.deactivate(1)
-      bomb.deactivate(1)
-      bomb.deactivate(1)
+      3.times { bomb.deactivate(1) }
       expect(bomb).to be_exploded
     end
   end

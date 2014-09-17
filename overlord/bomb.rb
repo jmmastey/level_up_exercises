@@ -41,7 +41,7 @@ class Bomb
   def int_in_range?(input)
     input.is_a?(Integer) && input.between?(0,9999)
   end
-  
+
   def explode
     @exploded = true
   end

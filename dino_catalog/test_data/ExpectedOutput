@@ -1,0 +1,175 @@
+
+[0;33;49mTask-Menu
+-----------------------------------
+[0m[0;37;49mfields  [0m[0;94;49m - Display Fields[0m
+[0;37;49mnames   [0m[0;94;49m - Display Names[0m
+[0;37;49mbipeds  [0m[0;94;49m - Display Bipeds[0m
+[0;37;49mcarnis  [0m[0;94;49m - Display Carnivores[0m
+[0;37;49morganize[0m[0;94;49m - Organize By Period[0m
+[0;37;49mheavy   [0m[0;94;49m - Display Heavyweights[0m
+[0;37;49mwelter  [0m[0;94;49m - Display Welterweights[0m
+[0;37;49mlookup  [0m[0;94;49m - Lookup Dinosaur [e.g. lookup Afrovenator][0m
+[0;37;49msearch  [0m[0;94;49m - Search Dinosaur [e.g. search walking=Biped diet=Carnivore ... ][0m
+[0;37;49mexport  [0m[0;94;49m - Export JSON [e.g. export dinos.json][0m
+[0;37;49mmenu    [0m[0;94;49m - Menu[0m
+[0;37;49mquit    [0m[0;94;49m - Quit[0m
+
+[0;33;49mEnter Choice > [0m
+[0;94;49mFields[0m
+[0;94;49m------[0m
+name
+period
+continent
+diet
+weight
+walking
+description
+
+[0;33;49mEnter Choice > [0m
+[0;94;49mNames[0m
+[0;94;49m-----[0m
+Abrictosaurus
+Afrovenator
+Carcharodontosaurus
+Giraffatitan
+Paralititan
+Suchomimus
+Melanorosaurus
+Albertosaurus
+Albertonykus
+Baryonyx
+Deinonychus
+Diplocaulus
+Megalosaurus
+Giganotosaurus
+Quetzalcoatlus
+Yangchuanosaurus
+
+[0;33;49mEnter Choice > [0m
+[0;94;49mBipeds[0m
+[0;94;49m------[0m
+Abrictosaurus
+Afrovenator
+Carcharodontosaurus
+Suchomimus
+Albertosaurus
+Albertonykus
+Baryonyx
+Deinonychus
+Megalosaurus
+Giganotosaurus
+Yangchuanosaurus
+
+[0;33;49mEnter Choice > [0m
+[0;94;49mCarnivores[0m
+[0;94;49m----------[0m
+Afrovenator
+Carcharodontosaurus
+Suchomimus
+Albertosaurus
+Albertonykus
+Baryonyx
+Deinonychus
+Diplocaulus
+Megalosaurus
+Giganotosaurus
+Quetzalcoatlus
+Yangchuanosaurus
+
+[0;33;49mEnter Choice > [0m
+[0;94;49mPeriods[0m
+[0;94;49m-------[0m
+Jurassic
+   - Abrictosaurus
+   - Afrovenator
+   - Giraffatitan
+   - Megalosaurus
+
+Albian
+   - Carcharodontosaurus
+
+Cretaceous
+   - Paralititan
+   - Suchomimus
+   - Albertosaurus
+   - Albertonykus
+   - Baryonyx
+   - Deinonychus
+   - Giganotosaurus
+   - Quetzalcoatlus
+
+Triassic
+   - Melanorosaurus
+
+Permian
+   - Diplocaulus
+
+Oxfordian
+   - Yangchuanosaurus
+
+[0;33;49mEnter Choice > [0m
+[0;94;49mHeavyweights[0m
+[0;94;49m------------[0m
+Giraffatitan
+Paralititan
+Suchomimus
+Baryonyx
+Giganotosaurus
+Yangchuanosaurus
+
+[0;33;49mEnter Choice > [0m
+[0;94;49mWelterweights[0m
+[0;94;49m-------------[0m
+Abrictosaurus
+Afrovenator
+Carcharodontosaurus
+Melanorosaurus
+Albertosaurus
+Albertonykus
+Deinonychus
+Diplocaulus
+Megalosaurus
+Quetzalcoatlus
+
+[0;33;49mEnter Choice > [0m
+[0;37;49mAfrovenator[0m
+[0;37;49m-----------[0m
+  Period      => Jurassic
+  Continent   => Unknown-Continent
+  Diet        => Carnivore
+  Weight      => Unknown-Weight
+  Walking     => Biped
+  Description => Unknown-Description
+
+[0;33;49mEnter Choice > [0m
+[0;94;49mSearch Results[0m
+[0;94;49m--------------[0m
+Afrovenator
+Carcharodontosaurus
+Suchomimus
+Albertosaurus
+Deinonychus
+Megalosaurus
+Giganotosaurus
+Yangchuanosaurus
+[0;33;49m8 Found
+[0m
+[0;33;49mEnter Choice > [0m
+
+[0;33;49mTask-Menu
+-----------------------------------
+[0m[0;37;49mfields  [0m[0;94;49m - Display Fields[0m
+[0;37;49mnames   [0m[0;94;49m - Display Names[0m
+[0;37;49mbipeds  [0m[0;94;49m - Display Bipeds[0m
+[0;37;49mcarnis  [0m[0;94;49m - Display Carnivores[0m
+[0;37;49morganize[0m[0;94;49m - Organize By Period[0m
+[0;37;49mheavy   [0m[0;94;49m - Display Heavyweights[0m
+[0;37;49mwelter  [0m[0;94;49m - Display Welterweights[0m
+[0;37;49mlookup  [0m[0;94;49m - Lookup Dinosaur [e.g. lookup Afrovenator][0m
+[0;37;49msearch  [0m[0;94;49m - Search Dinosaur [e.g. search walking=Biped diet=Carnivore ... ][0m
+[0;37;49mexport  [0m[0;94;49m - Export JSON [e.g. export dinos.json][0m
+[0;37;49mmenu    [0m[0;94;49m - Menu[0m
+[0;37;49mquit    [0m[0;94;49m - Quit[0m
+
+[0;33;49mEnter Choice > [0m
+Goodbye!

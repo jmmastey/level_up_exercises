@@ -41,7 +41,11 @@ describe 'execution' do
   end
 
   it 'should throw error calculating chisquare on this tiny dataset' do
-    expect { @data_science.leader_is_better_than_random }.to raise_error
+    expect(@data_science.better_than_random).to be false
+  end
+
+  it 'should determine the leading cohort' do
+    expect(@data_science.leader_name).to be == "B"
   end
 end
 
@@ -51,14 +55,13 @@ describe 'display' do
   end
 
   it 'should show the results on the console' do
-    output= <<-SCIENCE_BITCH
+    output = <<-SCIENCE_BITCH
 Cohort  Samples  Conversions  Rate      Confidence Interval
 A       13       2            15.4%     -4.2% to 35.0%
 B       17       3            17.6%     -0.5% to 35.8%
 
 p value = 100.000
-is the leader better than random? no
-
+The leader (B) is not better than random.
 SCIENCE_BITCH
 
     expect { DataScience.new("test_data.json") }.to output(output).to_stdout

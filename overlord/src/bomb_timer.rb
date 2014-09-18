@@ -24,7 +24,11 @@ class BombTimer
   end
 
   def triggered?
-    deadline < Time.now
+    if deadline.nil?
+      false
+    else
+      deadline < Time.now
+    end
   end
 
   def deadline

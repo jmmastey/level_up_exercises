@@ -14,7 +14,7 @@ class BlagPost
       hash
     end
 
-    if args[:author] != '' && args[:author_url] != ''
+    unless args[:author].blank? && args[:author_url].blank?
       @author = Author.new(args[:author], args[:author_url])
     end
 
@@ -38,11 +38,7 @@ class BlagPost
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    author.try { |a| "By #{a.name}, at #{a.url}" } || ""
   end
 
   def category_list
@@ -65,11 +61,7 @@ class BlagPost
   end
 
   def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    String(string).titleize
   end
 
   def commenters
@@ -86,7 +78,7 @@ class BlagPost
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date.years_since(3) > Date.today
   end
 
   def abstract
@@ -102,7 +94,7 @@ end
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
+                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it? No I Don't
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.

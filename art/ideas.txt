@@ -1,0 +1,6 @@
+The Center for Performance Art
+
+Entities: Performer, Show, User, Review
+Features: Json API, Calendar, Recommendations?
+Routes:
+  GET performances/:id

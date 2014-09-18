@@ -1,21 +1,39 @@
 # The Center for Performance Art
 
-* Diagnosing performance problems (splunk? newrelic? generating realistic load?)
-* Add redis, memoize some methods into redis
-* Add page chunk caching
-* Add whole-page caching (move a dynmic block to JSON)
-* Cache expiration keys and `touch: true`
-* Defer execution using Sidekiq
-* Fix a non-threadsafe issue and move to Rubinius?
-* Switch to a pack of Mongrels?
-* Move assets to a CDN (or at least serve from nginx)
-* Squid or other reverse-proxy
-* Adding SOA-caching via Faraday
-* Simple memoize
-* Solve an n+1 sql loading problem
-* Array inside a loop, string copies within a loop: `COUNTRY_CODE_MAP.detect? { |k,v| [k.downcase, v.downcase].include? string.downcase }`
-* Use `||` instead of `.include?` for small arrays
-* Use `.pluck`, and other useful callbacks. (`delete_all` vs `destroy_all`)
-* Move to batch processing. Configure batch size.
-* Remove method cache clear by way of OpenStruct creation. (https://github.com/charliesome/charlie.bz/blob/master/posts/things-that-clear-rubys-method-cache.md)
-* Slow unit tests, refactor to remove tons of extra data
+Detection
+* (remote) Get off localhost.
+* (diagnose) Diagnosing performance problems (splunk? newrelic? generating realistic load?)
+* (premature) Not fixing problems that don't exist.
+* (profile) More realistic load profiles.
+
+http://guides.rubyonrails.org/v3.2.13/performance_testing.html
+https://github.com/rails/rails-perftest
+http://martin.kleppmann.com/2008/10/27/load-performance-testing-a-rails-application-with-apachebench.html
+http://blog.newrelic.com/2009/06/25/load-testing-rails-new-railslab-episode/
+http://railscasts.com/episodes/411-performance-testing?view=comments
+
+Refactoring
+* (loop_invariant) Array inside a loop, string copies within a loop: `COUNTRY_CODE_MAP.detect? { |k,v| [k.downcase, v.downcase].include? string.downcase }`
+* (wrong_work) Move computation into the database
+* (include) Use `||` instead of `.include?` for small arrays
+* (pluck) Use `.pluck`, and other useful callbacks. (`delete_all` vs `destroy_all`)
+* (batches) Move to batch processing. Configure batch size.
+* (method_cache) Remove method cache clear by way of OpenStruct creation. (https://github.com/charliesome/charlie.bz/blob/master/posts/things-that-clear-rubys-method-cache.md)
+* (slow_tests) Slow unit tests, refactor to remove tons of extra data
+* (scope) Remove an unnecessary default scope that sorts on an expensive key.
+
+Features
+* (memoize) Simple memoize
+* (n_plus_one) Solve an n+1 sql loading problem
+* (cache_expiry) Cache expiration keys and `touch: true`
+* (chunk_caching) Add page chunk caching
+* (page_caching) Add whole-page caching (move a dynmic block to JSON)
+
+Platform
+* (thread) Fix a non-threadsafe issue and move to Rubinius?
+* (redis) Add redis, memoize some methods into redis
+* (sidekiq) Defer execution using Sidekiq
+* (mongrel) Switch to a pack of Mongrels?
+* (cdn) Move assets to a CDN (or at least serve from nginx)
+* (squid) Squid or other reverse-proxy
+* (faraday) Adding SOA-caching via Faraday

@@ -24,4 +24,3 @@ end
 Then(/^the bomb shoud throw an error$/) do
   pending # express the regexp above with the code you wish you had
 end
-

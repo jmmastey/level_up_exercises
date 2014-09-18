@@ -31,9 +31,7 @@ class BombTimer
     end
   end
 
-  def deadline
-    @deadline
-  end
+  attr_reader :deadline
 
   def seconds_remaining
     if started?

@@ -27,7 +27,7 @@ describe Bomb do
   context "upon creation" do
     let(:bomb) do
       devices = [device, device, device]
-      devices = Hash[devices.each_with_index.map {|device, idx| [idx, device]}]
+      devices = Hash[devices.each_with_index.map { |device, idx| [idx, device] }]
       described_class.new(devices)
     end
 
@@ -43,7 +43,7 @@ describe Bomb do
   context "upon a triggered device" do
     let(:bomb) do
       devices = [device, device, device, triggered_device, device]
-      devices = Hash[devices.each_with_index.map {|device, idx| [idx, device]}]
+      devices = Hash[devices.each_with_index.map { |device, idx| [idx, device] }]
       described_class.new(devices)
     end
 
@@ -54,7 +54,7 @@ describe Bomb do
 
   context "creating with bad device" do
     it "should not be allowed to be created" do
-      expect { described_class.new({ 0 => bad_device }) }.to raise_error
+      expect { described_class.new(0 => bad_device) }.to raise_error
     end
   end
 end

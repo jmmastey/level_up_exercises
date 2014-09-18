@@ -15,13 +15,13 @@ class BombCodeBox
   end
 
   def activate(code = DEFAULT_CODE)
-    raise(CodeBoxError, "cannot activate, an active box") if (active? || triggered?)
+    raise(CodeBoxError, "cannot activate, an active box") if active? || triggered?
     @code = BombCode.new(code)
     @active = true
   end
 
   def deactivate(code)
-    raise(CodeBoxError, "cannot deactive, an inactive box") if (!active? || triggered?)
+    raise(CodeBoxError, "cannot deactive, an inactive box") if !active? || triggered?
     new_code = BombCode.new(code)
     if new_code == @code
       reset

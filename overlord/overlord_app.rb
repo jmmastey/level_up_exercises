@@ -33,5 +33,5 @@ class Overlord < Sinatra::Application
     WireBox.new(wire_colors: WIREBOX_COLORS, safe_wire: WIREBOX_COLORS.sample)
   end
 
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

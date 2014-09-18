@@ -32,7 +32,7 @@ describe BombTimer do
     end
 
     it "should raise an error if started again" do
-      expect{ timer.start }.to raise_error
+      expect { timer.start }.to raise_error
     end
 
     it "should have a deadline set 30 seconds from now" do

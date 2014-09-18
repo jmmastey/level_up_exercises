@@ -7,12 +7,17 @@ describe 'Data Science' do
 
   context "Parser" do
     it "should parse a json file correctly" do
-      expect(@parser.ungrouped_json.first).to include(:cohort)
+      expect(@parser.data.first).to include(:cohort)
     end
 
     it "should parse and group the json file by cohort" do
+      expect(@parser.data.length).to eql(2)
+    end
+
+    it "should return correct length for both cohorts" do
 
     end
+
   end
 
   context "Calculation" do

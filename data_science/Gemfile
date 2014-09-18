@@ -17,4 +17,5 @@ group :development, :test do
   gem 'abanalyzer', require: true
   gem 'capybara', require: true
   gem 'pry', require: true
+  gem 'rserve-client'
 end

@@ -41,12 +41,26 @@ describe 'execution' do
   end
 
   it 'should throw error calculating chisquare on this tiny dataset' do
-    expect {@data_science.leader_is_better_than_random }.to raise_error
+    expect { @data_science.leader_is_better_than_random }.to raise_error
   end
 end
 
 describe 'display' do
+  before(:each) do
+    @data_science = DataScience.new("test_data.json")
+  end
+
   it 'should show the results on the console' do
-    pending
+    output= <<-SCIENCE_BITCH
+Cohort  Samples  Conversions  Rate      Confidence Interval
+A       13       2            15.4%     -4.2% to 35.0%
+B       17       3            17.6%     -0.5% to 35.8%
+
+p value = 100.000
+is the leader better than random? no
+
+SCIENCE_BITCH
+
+    expect { DataScience.new("test_data.json") }.to output(output).to_stdout
   end
 end

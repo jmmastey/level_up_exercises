@@ -29,6 +29,8 @@ puts
 
 combined = dinodex.find(diet: "Carnivore",
                         walking: "Biped")
-puts "Combinde: #{combined.size}"
-combined.each { |dino| puts dino }
+puts "Biped and Carnivore: #{combined.size}"
+combined.each { |dino| puts dino.to_hash }
 puts
+
+puts dinodex.to_json

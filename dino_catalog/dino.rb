@@ -1,5 +1,5 @@
 class Dino
-  attr_accessor :name, :period, :continent, :diet, :weight, :walking, :description
+  attr_reader :name, :period, :continent, :diet, :weight, :walking, :description
 
   def initialize(name, options = {})
     @name = name
@@ -20,5 +20,16 @@ class Dino
     output += " - Walking: #{walking}" if walking
     output += " - Description: #{description}" if description
     output
+  end
+
+  def to_hash
+    {
+      :name => name,
+      :period => period,
+      :continent => continent,
+      :diet => diet,
+      :weight => weight,
+      :walking => walking,
+    }
   end
 end

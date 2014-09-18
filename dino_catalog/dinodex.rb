@@ -1,6 +1,7 @@
 require_relative "dinoparser"
 require_relative "dino"
 require "csv"
+require "json"
 
 class DinoDex
   PARSER_MAP = [FavoriteDinoParser.new, AfricanDinoParser.new]
@@ -31,5 +32,9 @@ class DinoDex
         end
       end
     end
+  end
+
+  def to_json
+    @dinos.map { |dino| dino.to_hash}.to_json
   end
 end

@@ -21,18 +21,15 @@ class DinoDex
     end
   end
 
-  def first
-    @dinos.first
+  def find(criteria = {})
+    @dinos.find_all do |dino|
+      criteria.all? do |field, value|
+        if value.is_a? Proc
+          value.call(dino.send(field))
+        else
+          /#{value}/.match(dino.send(field))
+        end
+      end
+    end
   end
-
-  def each(&block)
-    @dinos.each &block
-  end
-end
-
-
-dinodex = DinoDex.new("dinodex.csv", "african_dinosaur_export.csv")
-
-dinodex.each do |dino|
-  puts dino
 end

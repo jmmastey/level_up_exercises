@@ -1,6 +1,22 @@
 The Center for Performance Art
 
-Entities: Performer, Show, User, Review
 Features: Json API, Calendar, Recommendations?
-Routes:
-  GET performances/:id
+routes/
+  PUT performances/:id
+  GET performances/:id - page_caching
+  GET performances/:id/reviews - cache_expiry, chunk_caching
+  GET performances/:id/performers
+  GET users/ - pagination
+  GET users/:id - serializers
+  GET users/:id/reviews - pluck, n_plus_one
+tasks/
+  import_reviews - include, method_cache, batches, thread
+  you_may_also_like - loop_invariant, sidekiq
+models/
+  performer.rb
+  show.rb - memoize?
+  user.rb
+  review.rb
+    #average_rating_for_performance - wrong_work, redis
+    #num_positive_reviews - scope
+    

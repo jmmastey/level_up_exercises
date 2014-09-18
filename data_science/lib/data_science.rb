@@ -3,36 +3,44 @@ require "cohort"
 
 class DataScience
   include JsonReader
-  attr_accessor :cohorts
+  attr_accessor :cohorts, :ab_analyzer
 
   def initialize(input_file = "source_data.json")
     process_file(input_file)
   end
 
   def leader_is_better_than_random
-    values = {}
-    cohorts.each do |name, cohort|
-      values[name] = { :conversion_count => cohort.conversion_count * 500,
-                       :sample_size      => cohort.sample_size * 500 }
-    end
-    tester = ABAnalyzer::ABTest.new(values)
-    puts sprintf("%0.5f", tester.chisquare_p)
-    puts sprintf("%0.5f", tester.chisquare_score)
-    tester.chisquare_p < 0.05
+    # puts sprintf("%0.5f", @ab_analyzer.chisquare_p)
+    # puts sprintf("%0.5f", @ab_analyzer.chisquare_score)
+    @ab_analyzer.chisquare_p < 0.05
   end
 
   private
 
   def process_file(input_file)
     data = read(input_file)
-    extract_cohorts(data)
+    @cohorts = extract_cohorts(data)
+    @ab_analyzer = analyze(@cohorts)
   end
 
   def extract_cohorts(data)
-    @cohorts = {}
-    data.each do |item|
-      @cohorts[item["cohort"]] ||= Cohort.new
-      @cohorts[item["cohort"]].samples.push(item)
+    data.inject({}) do |result, element|
+      result[element["cohort"]] ||= Cohort.new
+      result[element["cohort"]].samples.push(element)
+      result
     end
+  end
+
+  def analyze(values)
+    ABAnalyzer::ABTest.new(ab_formatted(values))
+  end
+
+  def ab_formatted(cohorts)
+    values = {}
+    cohorts.each do |name, cohort|
+      values[name] = { :conversion_count => cohort.conversion_count,
+                       :sample_size      => cohort.sample_size }
+    end
+    values
   end
 end

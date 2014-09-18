@@ -1,7 +1,7 @@
 require 'abanalyzer'
 
 class Cohort
-  attr_accessor :samples, :name
+  attr_accessor :samples
 
   def initialize
     @samples = []

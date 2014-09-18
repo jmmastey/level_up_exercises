@@ -40,7 +40,13 @@ describe 'execution' do
     expect(b_result[1]).to be_within(0.001).of(0.358)
   end
 
-  it 'should calculate if that the current leader is in fact better than random' do
-    expect(@data_science.leader_is_better_than_random).to be false
+  it 'should throw error calculating chisquare on this tiny dataset' do
+    expect {@data_science.leader_is_better_than_random }.to raise_error
+  end
+end
+
+describe 'display' do
+  it 'should show the results on the console' do
+    pending
   end
 end

@@ -1,5 +1,5 @@
 class Bomb
-  attr_reader :activation_code, :deactivation_code
+  attr_reader :activation_code, :deactivation_code, :deactivation_attempts
 
   def initialize(options = {})
     @active = false
@@ -19,8 +19,15 @@ class Bomb
     @exploded
   end
 
+  def status
+    return "exploded" if exploded?
+    return "activated" if activated?
+    "deactivated"
+  end
+
   def activate(code)
     @active = true if code == activation_code
+    @deactivation_attempts = 0
   end
 
   def deactivate(code)

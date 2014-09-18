@@ -7,7 +7,7 @@ describe Bomb do
   describe "#initialize" do
     it "is initially is deacatived" do
       expect(bomb).not_to be_activated
-      expect(bomb.status).to be("deactivated")
+      expect(bomb.status).to eq("deactivated")
     end
 
     it "is initially has not exploded..." do
@@ -66,7 +66,7 @@ describe Bomb do
     it "should stay activated upon additional activation entries" do
       2.times { bomb.activate(1234) }
       expect(bomb).to be_activated
-      expect(bomb.status).to be("activated")
+      expect(bomb.status).to eq("activated")
     end
   end
 
@@ -75,7 +75,7 @@ describe Bomb do
       bomb.activate(1234)
       bomb.deactivate(0)
       expect(bomb).not_to be_activated
-      expect(bomb.status).to be("deactivated")
+      expect(bomb.status).to eq("deactivated")
     end
 
     it "should stay active upon entry of incorrect deactivation code" do
@@ -88,7 +88,7 @@ describe Bomb do
       bomb.activate(1234)
       3.times { bomb.deactivate(1) }
       expect(bomb).to be_exploded
-      expect(bomb.status).to be("exploded")
+      expect(bomb.status).to eq("exploded")
     end
 
     it "should reset to 0 deactivation attempts after re-activation" do
@@ -96,7 +96,7 @@ describe Bomb do
       bomb.deactivate(2222)
       bomb.deactivate(0000)
       bomb.activate(1234)
-      expect(bomb.deactivation_attemps).to eq(0)
+      expect(bomb.deactivation_attempts).to eq(0)
     end
   end
 end

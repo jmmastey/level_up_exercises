@@ -8,10 +8,14 @@
     %script{src: "https://maxcdn.bootstrapcdn/bootstrap/3.2.0/js/bootstrap.min.js"}
   %body
     .container
+      .starter-template
+        .h1 Hahaha Welcome to Nefarious Labs!
+        .p Please enjoy the lovely gift... I think you'll find it's to die for hahaha!
+    .container
       .row
         .col-md-4
-          .codebox CodeBox!
+          = haml :codebox, :codebox => @bomb.devices[:codebox]
         .col-md-4
-          .wirebox WireBox!
+          = haml :wirebox, :wirebox => @bomb.devices[:wirebox]
         .col-md-4
-          .timer Timer!
+          = haml :timer, :timer => @bomb.devices[:timer]

@@ -1,0 +1,26 @@
+!!! XML
+!!!
+%table{border: 1}
+  %tr
+    %td{colspan: 2}
+      %input{type: "text"}
+    %td
+      %button{data: {value: "delete"}, class: "btn-default btn-block"}
+        %span{class: "glyphicon glyphicon-arrow-left"}
+  %tr
+    - (7..9).each do |n|
+      %td{style: "width: 33%"}
+        %button{data: {value: n}, class: "btn-lg btn-block"} #{n}
+  %tr
+    - (4..6).each do |n|
+      %td{style: "width: 33%"}
+        %button{data: {value: n}, class: "btn-lg btn-block"} #{n}
+  %tr
+    - (1..3).each do |n|
+      %td{style: "width: 33%"}
+        %button{data: {value: n}, class: "btn-lg btn-block"} #{n}
+  %tr
+    %td
+      %button{data: {value: 0}, class: "btn-lg btn-block"} 0
+    %td{colspan: 2}
+      %input{type: "submit", value: "submit code", class: "btn-lg btn-block"}

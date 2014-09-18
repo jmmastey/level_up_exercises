@@ -11,7 +11,6 @@ class BombCodeBox
   def initialize
     @active = false
     @triggered = false
-    @fire_handlers = []
     @guess_count = 0
   end
 

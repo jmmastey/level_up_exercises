@@ -6,7 +6,7 @@ class Bomb
   end
 
   def exploded?
-    @devices.each do |device|
+    @devices.each_value do |device|
       return true if device.triggered?
     end
     false
@@ -19,7 +19,7 @@ class Bomb
   end
 
   def all_devices_respond_to_triggered?
-    @devices.each do |device|
+    @devices.each_value do |device|
       return false unless device.respond_to?(:triggered?)
     end
     true

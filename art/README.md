@@ -16,3 +16,6 @@
 * Array inside a loop, string copies within a loop: `COUNTRY_CODE_MAP.detect? { |k,v| [k.downcase, v.downcase].include? string.downcase }`
 * Use `||` instead of `.include?` for small arrays
 * Use `.pluck`, and other useful callbacks. (`delete_all` vs `destroy_all`)
+* Move to batch processing. Configure batch size.
+* Remove method cache clear by way of OpenStruct creation. (https://github.com/charliesome/charlie.bz/blob/master/posts/things-that-clear-rubys-method-cache.md)
+* Slow unit tests, refactor to remove tons of extra data

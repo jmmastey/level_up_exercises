@@ -36,6 +36,10 @@ When /I snip the wires/ do
   @bomb.snip
 end
 
+When /I detonate it/ do
+  @bomb.detonate
+end
+
 
 
 Then /I should see it is active/ do

@@ -23,6 +23,9 @@ When /I click on snip/ do
   click_snip_wires()
 end
 
+When /I detonate the bomb/ do
+  detonate_bomb()
+end
 
 
 
@@ -105,4 +108,9 @@ end
 
 def set_keypad_action(value)
   find(:xpath, "//input[@id='keypad_action']").set value
+end
+
+def detonate_bomb
+  set_keypad_action("detonate")
+  click_submit_action()
 end

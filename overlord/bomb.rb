@@ -1,28 +1,30 @@
 class Bomb
   # Communication Messages
-  BOMB_EXPLODED_MSG    = "Sorry, bomb has already exploded."
-  BOMB_SNIPPED_MSG     = "Sorry, bomb wires have been snipped."
-  BOMB_ACTIVE_MSG      = "Bomb is already active"
-  BOMB_INACTIVE_MSG    = "Bomb is already inactive"
-  BOMB_ACTIVATED_MSG   = "Bomb activated - Look Out!"
-  BOMB_DEACTIVATED_MSG = "Bomb deactivated"
+  BOMB_EXPLODED_MSG     = 'Sorry, bomb has already exploded.'
+  BOMB_SNIPPED_MSG      = 'Sorry, bomb wires have been snipped.'
+  BOMB_ACTIVE_MSG       = 'Bomb is already active'
+  BOMB_INACTIVE_MSG     = 'Bomb is already inactive'
+  BOMB_ACTIVATED_MSG    = 'Bomb activated - Look Out!'
+  BOMB_DEACTIVATED_MSG  = 'Bomb deactivated'
+  BOMB_DETONATION_MSG   = 'Bomb has been detonated!'
+  BOMB_JUST_SNIPPED_MSG = 'Bomb wires snipped and is now defunct'
   
-  TOO_MANY_DEACT_MSG   = "Bomb exploded - too many attempts!"
-  WRONG_CODE_MSG       = "Wrong code"
-  CODE_NOT_AN_INT_MSG  = "Code must be an integer"
+  CODE_TOO_MANY_DEACT_MSG = 'Bomb exploded - too many attempts!'
+  CODE_WRONG_VALUE_MSG    = 'Wrong code'
+  CODE_NOT_AN_INT_MSG     = 'Code must be an integer'
 
   # State
-  INTEGRITY_EXPLODED  = "Blown to shreds"
-  INTEGRITY_SNIPPED   = "Wires are cut"
-  INTEGRITY_INTACT    = "Intact"
+  INTEGRITY_EXPLODED  = 'Blown to shreds'
+  INTEGRITY_SNIPPED   = 'Wires are cut'
+  INTEGRITY_INTACT    = 'Intact'
 
-  ACTIVATION_NOT_APP  = "NA"
-  ACTIVATION_ACTIVE   = "Active"
-  ACTIVATION_INACTIVE = "Inactive"
+  ACTIVATION_NOT_APP  = 'NA'
+  ACTIVATION_ACTIVE   = 'Active'
+  ACTIVATION_INACTIVE = 'Inactive'
 
   # Default Codes
-  DEFAULT_ACTIVATION_CODE   = "1234"
-  DEFAULT_DEACTIVATION_CODE = "0000"
+  DEFAULT_ACTIVATION_CODE   = '1234'
+  DEFAULT_DEACTIVATION_CODE = '0000'
 
 
   def initialize(activation_code, deactivation_code)
@@ -35,6 +37,7 @@ class Bomb
     @active = false
     @snipped = false
     @deactivation_attempts = 0
+    @detonated = false
   end
 
   def activate(code)
@@ -54,7 +57,13 @@ class Bomb
   def snip
     return bomb_is_defunct if bomb_is_defunct
     @snipped = true
-    "You have snipped the wires - bomb is now defunct"
+    BOMB_JUST_SNIPPED_MSG
+  end
+
+  def detonate
+    return bomb_is_defunct if bomb_is_defunct
+    @detonated = true
+    BOMB_DETONATION_MSG
   end
 
   def active?
@@ -62,7 +71,7 @@ class Bomb
   end
 
   def exploded?
-    @deactivation_attempts >= 3
+    @deactivation_attempts >= 3 || @detonated
   end
 
   def snipped?
@@ -71,9 +80,9 @@ class Bomb
 
   def to_h
     result = {}
-    result["integrity"] = integrity_status
-    result["activation"] = activation_status
-    result["deact_attempts"] = @deactivation_attempts
+    result['integrity'] = integrity_status
+    result['activation'] = activation_status
+    result['deact_attempts'] = @deactivation_attempts
     result
   end
 
@@ -111,7 +120,7 @@ class Bomb
   end
 
   def attempt_to_activate(code)
-    return WRONG_CODE_MSG unless code.to_i == @activation_code
+    return CODE_WRONG_VALUE_MSG unless code.to_i == @activation_code
     successful_activation
   end
 
@@ -122,8 +131,8 @@ class Bomb
 
   def attempt_to_deactivate(code)
     if code.to_i != @deactivation_code
-      return TOO_MANY_DEACT_MSG if too_many_failures?
-      return WRONG_CODE_MSG
+      return CODE_TOO_MANY_DEACT_MSG if too_many_failures?
+      return CODE_WRONG_VALUE_MSG
     end
     successful_deactivation
   end

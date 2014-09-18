@@ -75,7 +75,7 @@ Feature: Overlord Bomb-Status Page
 	And the bomb should be snipped
     And the bomb should have defunct activation
     And the deactivation attempts should be 0
-    And the bomb message should be "You have snipped the wires - bomb is now defunct"
+    And the bomb message should be "Bomb wires snipped and is now defunct"
 
   Scenario: I visit the main page, create a bomb, snip the wires twice
     When I click on snip
@@ -97,3 +97,13 @@ Feature: Overlord Bomb-Status Page
 	And the bomb should be intact
     And the bomb should be activated
     And the deactivation attempts should be 0
+
+  Scenario: I visit the main page, create a bomb, activate it, deactivate it, activate it
+    When I select code 1234
+    And I press activate
+    And I detonate the bomb
+	Then I should see the bomb status page
+	And the bomb should be exploded
+    And the bomb should have defunct activation
+    And the deactivation attempts should be 0
+    And the bomb message should be "Bomb has been detonated!"

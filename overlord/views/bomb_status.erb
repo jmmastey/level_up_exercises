@@ -17,8 +17,9 @@
 	  </canvas>
 
 	  <form id="keypad" action="/overlords/action" method=POST>
-		<input type='hidden' id='keypad_action' name='type' value='activate'/>
+		<input type='hidden' id='keypad_action' name='action' value='activate'/>
 		<input type='hidden' id='keypad_code' name='code' value=''/>
+		<input type='hidden' id='timer' name='timer' value='<%= timer %>'/>
 		<button type="submit" id='keypad_submit' style="display: none;"/>
 	  </form>
 
@@ -147,7 +148,7 @@
           if (!canvas.getContext) { return; }
           var ctx=canvas.getContext("2d");
         
-          var colors = ['#FFFF00', '#AAAA00', '777700']
+          var colors = ['#FFFF00', '#AAAA00', '#777700']
         
           for (i = 0; i < 400; i++) {
             var r = Math.pow(Math.random(), 1.5) * 200;
@@ -171,13 +172,14 @@
           if (!canvas.getContext) { return; }
           var ctx=canvas.getContext("2d");
         
-          // Frame
+         // Frame
           ctx.fillStyle = '#888800';
           ctx.fillRect(0, 400, 600, 400);
           ctx.fillStyle = '#000000';
           ctx.fillRect(10, 410, 580, 380);
         
           // Labels
+          ctx.lineWidth = 2;
           ctx.fillStyle = '#101010';
           ctx.fillRect(24, 420, 260, 40);
           ctx.strokeStyle = '#550055';
@@ -194,6 +196,7 @@
           ctx.strokeRect(24, 540, 260, 40);
         
           ctx.font = "30px bold Georgia";
+          ctx.textAlign="left";
           ctx.fillStyle = '#3333DD';
           ctx.fillText("Integrity",      36, 450);
           ctx.fillText("Activation",     36, 510);
@@ -219,25 +222,7 @@
         
           ctx.fillText(message, 300, 750);
 
-		  // Keypad
-          ctx.fillStyle = '#222200';
-          ctx.fillRect(31, 605, 210, 90);
-
-          ctx.font = "25px bold courier";
-          ctx.textAlign="center";
-          for (i = 0; i < 10; i++)
-          {
-          	row = Math.floor(i / 5);
-          	col = i % 5;
-            x =  40 + col * 40;
-			y = 615 + row * 40;
-            ctx.fillStyle = '#440000';
-            ctx.fillRect(x, y, 32, 32);
-            ctx.strokeStyle = '#AA0000';
-            ctx.strokeRect(x, y, 32, 32);
-            ctx.fillStyle = '#CCCC77';
-            ctx.fillText(i, x + 15, y + 25);
-          }
+          draw_keypad();
 
           // Activate Area
           ctx.fillStyle = '#111111';
@@ -300,6 +285,32 @@
           draw_code();
         }
 
+        function draw_keypad() {
+          var canvas = document.getElementById("canvas");
+          if (!canvas.getContext) { return; }
+          var ctx=canvas.getContext("2d");
+
+		  // Keypad
+          ctx.fillStyle = '#222200';
+          ctx.fillRect(31, 605, 210, 90);
+
+          ctx.font = "25px bold courier";
+          ctx.textAlign="center";
+          for (i = 0; i < 10; i++)
+          {
+          	row = Math.floor(i / 5);
+          	col = i % 5;
+            x =  40 + col * 40;
+			y = 615 + row * 40;
+            ctx.fillStyle = '#440000';
+            ctx.fillRect(x, y, 32, 32);
+            ctx.strokeStyle = '#AA0000';
+            ctx.strokeRect(x, y, 32, 32);
+            ctx.fillStyle = '#CCCC77';
+            ctx.fillText(keys[i], x + 15, y + 25);
+          }
+        }
+
         function detect_rect(x, y, loX, hiX, loY, hiY)
         {
           return ((loX < x) && (x < hiX) && (loY < y) && (y < hiY));
@@ -315,7 +326,7 @@
           row = Math.floor((y - 615) / 40);
 		  col = Math.floor((x -  40) / 40);
 
-          return 5 * row + col;
+          return keys[5 * row + col];
         }
 
         function clicked_activate(x, y)
@@ -355,6 +366,49 @@
           ctx.fillText(code, 56, 713);
         }
 
+        // Draw-Timer
+        function draw_timer() {
+          var canvas = document.getElementById("canvas");
+          if (!canvas.getContext) { return; }
+          var ctx=canvas.getContext("2d");   
+
+          angle = 4 * Math.atan(remaining);
+
+          ctx.beginPath();
+          ctx.fillStyle = '#220022';
+          ctx.arc(300, 220, 50, 0, Math.PI*2, true);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.lineWidth = 3.0;
+          ctx.fillStyle = '#220099';
+          ctx.arc(300, 220, 50, 0, Math.PI * 2, true);
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.fillStyle = '#AAAA11';
+          ctx.moveTo(300, 220);
+          ctx.arc(300, 220, 40, 0 - Math.PI / 2, angle - Math.PI / 2, false);
+          ctx.lineTo(300, 220);
+          ctx.fill();
+
+          if (is_active()) {
+            remaining -= 0.100;
+            document.getElementById("timer").value = remaining;
+
+            if (remaining <= 0) {
+              document.getElementById("keypad_action").value = 'detonate';
+              document.getElementById("keypad").submit();
+              return;
+            }
+
+            if (Math.random() < 0.60) {
+              shuffle_keys();
+            }
+            draw_keypad();
+            setTimeout(draw_timer, 100);
+          }
+        }
 
 		function add_listeners()
         {
@@ -396,9 +450,23 @@
 
           }, false);
         }
-        
+
+        function shuffle_keys() {
+           i = Math.floor((Math.random() * 10));
+           j = Math.floor((Math.random() * 10));
+           tmp = keys[i];
+           keys[i] = keys[j];
+           keys[j] = tmp;
+        }
+
         // Background
         draw_background();
+
+        // Get Remaining Time on Timer
+        var remaining = document.getElementById("timer").value;
+
+        // Keypad
+        var keys = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
         // Intact
         if (is_intact()) {
@@ -409,8 +477,10 @@
             // Not-Active
             else
             {
-            draw_bomb_intact();
+                draw_bomb_intact();
             }
+
+            draw_timer();
         }
         // Detonated
         else if (is_detonated()) {
@@ -419,6 +489,7 @@
         // Snipped
         else if (is_snipped()) {
           draw_bomb_snipped();
+          draw_timer();
         }
         
         draw_panel("<%= integrity %>",

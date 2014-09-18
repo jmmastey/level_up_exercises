@@ -1,4 +1,4 @@
-Feature: Bomb
+Feature: Bomb Activation and Deactivation 
   In order to test the Bomb class
   As a developer who wrote Bomb
   I want to create/activate/deactivate a bomb
@@ -56,6 +56,8 @@ Feature: Bomb
   Scenario: Dectivate with a bad code
     Given I create a bomb with codes 9854 0941
 
+
+  # Bomb Deactivation With Wrong Codes
   Scenario: Deactive with wrong code three times
     Given I create a bomb with codes 9854 0941
 	When I activate it with code 9854
@@ -70,6 +72,8 @@ Feature: Bomb
 	And  I deactivate it with code 1111
 	Then I should see it not exploded
 
+
+  # Bomb Status (States)
   Scenario: Check status for a newly created bomb
   	Given I create a bomb with no codes
     Then I should see status "Intact" + "Inactive" + 0 deactivation attempts
@@ -106,6 +110,8 @@ Feature: Bomb
 	And  I deactivate it with code 0000
     Then I should see status "Blown to shreds" + "NA" + 3 deactivation attempts
 
+
+  # Bomb Snipped
   Scenario: Check status for a bomb that was snipped
   	Given I create a bomb with codes 9854 0941
 	When I snip the wires
@@ -117,8 +123,40 @@ Feature: Bomb
 	And  I deactivate it with code 0000
     Then I should see status "Wires are cut" + "NA" + 0 deactivation attempts
 
-  Scenario: Check status for a bomb that was snipped then deactivation attempt
+  Scenario: Check status for a bomb that was activated then snipped
   	Given I create a bomb with codes 9854 0941
 	When I activate it with code 9854
 	And  I snip the wires 
     Then I should see status "Wires are cut" + "NA" + 0 deactivation attempts
+
+
+  # Bomb (Manual) Detonation
+  Scenario: Check status for a bomb that was detonated
+  	Given I create a bomb with codes 9854 0941
+	When I detonate it
+    Then I should see status "Blown to shreds" + "NA" + 0 deactivation attempts
+
+  Scenario: Check status for a bomb that was detonated then deactivation attempt
+  	Given I create a bomb with codes 9854 0941
+	When I detonate it
+	And  I deactivate it with code 0000
+    Then I should see status "Blown to shreds" + "NA" + 0 deactivation attempts
+
+  Scenario: Check status for a bomb that was activated then detonated
+  	Given I create a bomb with codes 9854 0941
+	When I activate it with code 9854
+	And  I detonate it 
+    Then I should see status "Blown to shreds" + "NA" + 0 deactivation attempts
+
+  Scenario: Check status for a bomb that was snipped then detonated
+  	Given I create a bomb with codes 9854 0941
+	When I snip the wires
+	And  I detonate it 
+    Then I should see status "Wires are cut" + "NA" + 0 deactivation attempts
+
+  Scenario: Check status for a bomb that was deactivated with wrong code then detonated
+  	Given I create a bomb with codes 9854 0941
+	When I activate it with code 9854
+	And  I deactivate it with code 0009
+	And  I detonate it
+    Then I should see status "Blown to shreds" + "NA" + 1 deactivation attempts

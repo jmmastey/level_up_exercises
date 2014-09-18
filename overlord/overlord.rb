@@ -13,6 +13,8 @@ enable :sessions
 set :port, 8080
 set :bind, '0.0.0.0'
 
+ACTIVATION_TIME = 8
+
 get '/' do
   redirect '/overlords'
 end
@@ -22,23 +24,27 @@ get '/overlords' do
 end
 
 post '/overlords/create_bomb' do
-  activation_code = params[:activation_code] || ""
-  deactivation_code = params[:deactivation_code] || ""
-  session[:bomb] = Bomb.new(activation_code, deactivation_code)
+  session[:bomb] = create_bomb(params)
   session[:bomb_msg] = "Bomb Created"
+  session[:timer] = ACTIVATION_TIME
   erb :bomb_status, :locals => get_status
 end
 
 post '/overlords/action' do
-  case params[:type]
-  when 'activate'
-    activate(params)
-  when 'deactivate'
-    deactivate(params)
-  when 'snip'
-    snip(params)
-  end
+  record_timer(params)
+  action = params[:action]
+  send(action, params)
   erb :bomb_status, :locals => get_status
+end
+
+def create_bomb(params)
+  activation_code = params[:activation_code] || ""
+  deactivation_code = params[:deactivation_code] || ""
+  Bomb.new(activation_code, deactivation_code)
+end
+
+def record_timer(params)
+  session[:timer] = params[:timer]
 end
 
 def activate(params)
@@ -55,10 +61,15 @@ def snip(params)
   session[:bomb_msg] = session[:bomb].snip  
 end
 
+def detonate(params)
+  session[:bomb_msg] = session[:bomb].detonate
+end
+
 def get_status
   bomb = session[:bomb] || Bomb.new
   status = bomb.to_h
   status[:bomb_msg] = session[:bomb_msg]
+  status[:timer] = session[:timer]
   status
 end
 

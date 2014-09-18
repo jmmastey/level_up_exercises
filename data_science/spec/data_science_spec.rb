@@ -28,8 +28,19 @@ describe 'execution' do
     expect(@data_science.cohorts["B"].conversion_count).to be == 3
   end
 
-  it 'should calculate the 95% confidence interval for each cohort' do
-    expect(@data_science.cohorts["A"].confidence_interval(0.95)).to be == [-0.042, 0.35]
-    expect(@data_science.cohorts["B"].confidence_interval(0.95)).to be == [-0.005, 0.358]
+  it 'should calculate the 95% confidence interval for A cohort' do
+    a_result = @data_science.cohorts["A"].confidence_interval(0.95)
+    expect(a_result[0]).to be_within(0.001).of(-0.042)
+    expect(a_result[1]).to be_within(0.001).of(0.35)
+  end
+
+  it 'should calculate the 95% confidence interval for B cohort' do
+    b_result = @data_science.cohorts["B"].confidence_interval(0.95)
+    expect(b_result[0]).to be_within(0.001).of(-0.005)
+    expect(b_result[1]).to be_within(0.001).of(0.358)
+  end
+
+  it 'should calculate if that the current leader is in fact better than random' do
+    expect(@data_science.leader_is_better_than_random).to be false
   end
 end

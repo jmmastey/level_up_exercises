@@ -9,16 +9,22 @@ Feature: Bomb
     Then I should see a status of "deactivated"
     And there should be a field to activate the bomb
 
-  Scenario: Booting bomb w/ custom codes
-    Given I enter custom activation and deactivation codes
+  Scenario: Booting bomb w/ valid custom codes
+    Given I enter custom activation and deactivation codes "1111" "2222"
     When I press boot
     Then I should see a status of "deactivated"
     And there should be a field to activate the bomb
+
+  Scenario: Booting bomb w/ invalid custom codes
+    Given I enter custom activation and deactivation codes "words" "words"
+    When I press boot
+    Then I should stay on the page
 
   Scenario: Activating with correct code activates
     Given I have booted a bomb with default codes
     When I activate it with 1234
     Then I should see a status of "activated"
+    And there should be a field to deactivate the bomb
 
   Scenario: Activating with correct custom code activates
     Given I have booted a bomb with custom codes 1111 2222

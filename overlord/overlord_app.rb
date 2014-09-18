@@ -18,6 +18,7 @@ class Overlord < Sinatra::Application
 
   get '/' do
     @bomb = session[:bomb] || new_bomb
+    @bomb.codebox
     session[:bomb] = @bomb
     haml(:index)
   end

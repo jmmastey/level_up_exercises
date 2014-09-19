@@ -1,5 +1,4 @@
 # In case you missed them, here are the extensions: http://guides.rubyonrails.org/active_support_core_extensions.html
-
 require 'active_support/all'
 
 class BlagPost
@@ -44,20 +43,8 @@ class BlagPost
   def category_list
     return "" if categories.empty?
 
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
+    return as_title("Category: "+categories.to_sentence)  if categories.length == 1
+    return as_title("Categories: "+categories.to_sentence) if categories.many?
   end
 
   def as_title(string)
@@ -104,4 +91,5 @@ blag = BlagPost.new("author"        => "Foo Bar",
                         facilisis semper ac in est.
                         ARTICLE
                    )
+I18n.enforce_available_locales = false
 puts blag.to_s

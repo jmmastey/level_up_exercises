@@ -23,7 +23,7 @@ class DinoDex
     end
   end
 
-  def find(criteria = {})
+  def filter(criteria = {})
     result_data = @dinos.find_all do |dino|
       criteria.all? do |field, value|
         raise "Invalid search criteria #{field}" unless dino.respond_to? field
@@ -60,7 +60,7 @@ class DinoDex
     if /having_/.match(method)
       criteria = args.length > 1 ? args : args[0]
       field = method[7..-1].to_sym
-      find({field => criteria})
+      filter({field => criteria})
     else
       super
     end

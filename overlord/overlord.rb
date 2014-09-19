@@ -1,9 +1,13 @@
 #!/usr/bin/env ruby
 # run `ruby overlord.rb` to run a webserver for this app
 
+require "json"
 require "pry"
 require "sinatra/base"
-require_relative "bomb"
+require_relative "lib/bomb_controller"
+require_relative "lib/wire_box"
+require_relative "lib/wire_generator"
+require_relative "lib/bomb"
 
 class Overlord < Sinatra::Base
   BOMB_CODE_REGEX = /[0-9]{4}/
@@ -16,11 +20,27 @@ class Overlord < Sinatra::Base
   end
 
   get "/bomb" do
+    @bomb_controller = current_bomb_controller
+    redirect "/boot" unless @bomb_controller
+
+    begin
     haml(:bomb)
+    rescue Exception => e
+      log_error(e)
+      raise e
+    end
   end
 
   get "/boot" do
     haml(:boot)
+  end
+
+  get "/get_state" do
+    get_json_response
+  end
+
+  get "/explosion" do
+    haml(:explosion)
   end
 
   post "/boot" do
@@ -29,27 +49,69 @@ class Overlord < Sinatra::Base
 
     return haml(:boot) unless validate_codes(activation_code, deactivation_code)
 
+    session[:bomb_controller] = create_bomb_controller(activation_code, deactivation_code)
     redirect "/bomb"
   end
+
+  post "/code_entry" do
+    code = params[:code]
+
+    bomb_controller = current_bomb_controller
+    bomb_controller.enter_code(code)
+    # binding.pry
+
+    get_json_response
+  end
+
+  private
 
   def add_error(error)
     @error ||= ""
     @error << "#{error}\n"
   end
 
-  def create_bomb(activation_code, deactivation_code)
-    @bomb = Bomb.new(activation_code, deactivation_code)
+  def current_bomb_controller
+    session[:bomb_controller]
   end
 
-  # we can shove stuff into the session cookie YAY!
-  def start_time
-    session[:start_time] ||= (Time.now).to_s
+  def create_bomb_controller(activation_code, deactivation_code)
+    bomb_controller = BombController.new(activation_code, deactivation_code)
+    bomb_controller.wire_box = create_wire_box
+    bomb_controller.wire_box.device = create_bomb
+
+    bomb_controller
+  end
+
+  def create_wire_box
+    wire_generator = WireGenerator.new("./valid_wire_colors.dat")
+    wires = wire_generator.generate_wires
+    WireBox.new(wires)
+  end
+
+  def create_bomb
+    Bomb.new
+  end
+
+  def get_json_response
+    bomb_controller = current_bomb_controller
+    { message: bomb_controller.message,
+      state: bomb_controller.state,
+      timer: bomb_controller.timer }.to_json
+  end
+
+  def log_error(error)
+    File.open("error.log", "a") do |file|
+      file.write("ERROR LOGGED #{Time.now}\n")
+      file.write("\t#{error}\n")
+      backtrace = error.backtrace.map { |entry| "\t\t#{entry}" }
+      file.write("#{backtrace.join("\n")}\n")
+    end
   end
 
   def validate_code(code)
-    return true if code.empty? || code.match(BOMB_CODE_REGEX)
+    return true if code.nil? || code.empty? || code.match(BOMB_CODE_REGEX)
 
-    add_error("#{code} is an invalid code.")
+    add_error("'#{code}' is an invalid code.")
     false
   end
 

@@ -1,3 +1,5 @@
+require_relative "timer"
+
 class BombController
   DEFAULT_ACTIVATION_CODE = "1234"
   DEFAULT_DEACTIVATION_CODE = "0000"
@@ -6,10 +8,10 @@ class BombController
   attr_accessor :wire_box
   attr_reader :activation_code, :deactivation_code, :message, :timer
 
-  def initialize(activation_code = DEFAULT_ACTIVATION_CODE,
-                 deactivation_code = DEFAULT_DEACTIVATION_CODE)
-    @activation_code = activation_code
-    @deactivation_code = deactivation_code
+  def initialize(activation_code = nil,
+                 deactivation_code = nil)
+    @activation_code = normalize_code(activation_code) || DEFAULT_ACTIVATION_CODE
+    @deactivation_code = normalize_code(deactivation_code) || DEFAULT_DEACTIVATION_CODE
     @state = :inactive
     @message = "Booted"
     @timer = nil
@@ -24,8 +26,9 @@ class BombController
   end
 
   def enter_code(code)
+    code = normalize_code(code)
     update_state
-    raise_code_format_error unless code == "" || code.match(/^\d{4}$/)
+    raise_code_format_error unless code.nil? || code.match(/^\d{4}$/)
     send("enter_code_when_#{@state}", code)
   end
 
@@ -47,19 +50,19 @@ class BombController
   def activate(timer_seconds)
     @timer = Timer.new(timer_seconds)
     @state = :active
-    @message = "Activated"
+    @message = "Activated bomb"
     reset_deactivation_attempts
     update_state
   end
 
   def deactivate
     @state = :inactive
-    @message = "Deactivated"
+    @message = "Deactivated bomb"
     update_state
   end
 
   def enter_code_when_active(code)
-    return if code == ""
+    return if code.nil?
     return deactivate if code == @deactivation_code
     @message = "Invalid code"
     increment_deactivation_attempts unless ignore_invalid_code?(code)
@@ -67,7 +70,7 @@ class BombController
   end
 
   def enter_code_when_activating(code)
-    return deactivate if code == ""
+    return deactivate if code.nil?
     minutes = code.slice(0, 2).to_i
     seconds = code.slice(2, 2).to_i
     activate((minutes * 60) + seconds)
@@ -82,7 +85,7 @@ class BombController
   end
 
   def enter_code_when_inactive(code)
-    return if code == ""
+    return if code.nil?
     return start_activation_process if code == @activation_code
     @message = "Invalid code"
   end
@@ -103,6 +106,11 @@ class BombController
 
   def increment_deactivation_attempts
     @deactivation_attempts += 1
+  end
+
+  def normalize_code(code)
+    return nil if (code == "")
+    code
   end
 
   def raise_code_format_error

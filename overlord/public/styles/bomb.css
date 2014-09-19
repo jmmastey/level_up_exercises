@@ -5,13 +5,13 @@
   font-weight: normal;
   font-style: normal;
 }
-/* line 13, bomb.scss */
+/* line 15, bomb.scss */
 html {
   margin: 0;
   padding: 0;
 }
 
-/* line 18, bomb.scss */
+/* line 20, bomb.scss */
 body {
   background-color: #a90329;
   *zoom: 1;
@@ -24,17 +24,17 @@ body {
   background-image: linear-gradient(to bottom, #a90329 0%, #8f0222 44%, #6d0019 100%);
 }
 
-/* line 24, bomb.scss */
+/* line 26, bomb.scss */
 .clr {
   clear: both;
 }
 
-/* line 28, bomb.scss */
+/* line 30, bomb.scss */
 .bomb {
   margin: 0 auto;
 }
 
-/* line 32, bomb.scss */
+/* line 34, bomb.scss */
 .bomb-panel {
   background: #aaa;
   border: thick outset #bbb;
@@ -43,38 +43,46 @@ body {
   width: auto;
 }
 
-/* line 40, bomb.scss */
+/* line 42, bomb.scss */
 .display, .input {
   display: inline-block;
   height: 165px;
   margin: 10px;
   min-width: 375px;
 }
-/* line 46, bomb.scss */
+/* line 48, bomb.scss */
 .display > div, .input > div {
   margin: 0;
 }
 
-/* line 51, bomb.scss */
+/* line 53, bomb.scss */
 .display {
   background: #000;
   border: thick inset #bbb;
+  color: #fff;
+  font-family: Fixedsys, "Courier New", sans-serif;
+  font-size: 30px;
   float: left;
   padding: 10px;
+  text-transform: uppercase;
+}
+/* line 63, bomb.scss */
+.display .timer {
+  font-size: 1.2em;
 }
 
-/* line 58, bomb.scss */
+/* line 68, bomb.scss */
 .input {
   float: right;
   padding: 0px;
 }
 
-/* line 63, bomb.scss */
+/* line 73, bomb.scss */
 .code-display {
   background-color: #000;
   border: thick inset #bbb;
   color: #fff;
-  font-family: Fixedsys, "Courier New", monospace;
+  font-family: Fixedsys, "Courier New", sans-serif;
   font-size: 30px;
   margin: 0;
   min-height: 40px;
@@ -83,32 +91,38 @@ body {
   vertical-align: middle;
 }
 
-/* line 76, bomb.scss */
+/* line 86, bomb.scss */
 .keypad {
   border: thick inset #bbb;
 }
-/* line 79, bomb.scss */
+/* line 89, bomb.scss */
 .keypad .keypad-row {
   margin: 0;
   width: 100%;
 }
-/* line 84, bomb.scss */
+/* line 94, bomb.scss */
 .keypad button {
   font-size: 20px;
   margin: 1px;
   width: 32%;
 }
-/* line 90, bomb.scss */
+/* line 100, bomb.scss */
 .keypad #btn-backspace {
   background-color: #faa;
 }
-/* line 94, bomb.scss */
+/* line 104, bomb.scss */
 .keypad #btn-enter {
   background-color: #cfc;
 }
 
-/* line 99, bomb.scss */
-.wire, .wire-red, .wire-blue, .wire-green, .wire-black {
+/* line 109, bomb.scss */
+.wiring {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 114, bomb.scss */
+.wire {
   border: thin solid black;
   border-bottom: none;
   cursor: url("/images/cutter.png"), crosshair;
@@ -118,22 +132,7 @@ body {
   width: 3px;
 }
 
-/* line 110, bomb.scss */
-.wire-red {
-  background-color: red;
-}
-
-/* line 110, bomb.scss */
-.wire-blue {
-  background-color: blue;
-}
-
-/* line 110, bomb.scss */
-.wire-green {
-  background-color: green;
-}
-
-/* line 110, bomb.scss */
-.wire-black {
-  background-color: black;
+/* line 124, bomb.scss */
+.wire.cut {
+  visibility: hidden;
 }

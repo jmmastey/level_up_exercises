@@ -2,7 +2,7 @@ require_relative "../lib/wire"
 require_relative "../lib/wire_generator"
 
 describe WireGenerator do
-  let(:generator) { WireGenerator.new }
+  let(:generator) { WireGenerator.new("./valid_wire_colors.dat") }
 
   it "generates a random collection of wires" do
     wires = generator.generate_wires

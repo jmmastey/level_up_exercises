@@ -3,8 +3,8 @@ require_relative "wire"
 class WireGenerator
   DISARM_TO_EXPLODING_RATIO = 0.4
 
-  def initialize
-    @valid_wire_colors = read_valid_wire_colors
+  def initialize(color_file_path)
+    @valid_wire_colors = read_valid_wire_colors(color_file_path)
   end
 
   def generate_wires(number_of_wires = generate_random_wire_count)
@@ -25,7 +25,7 @@ class WireGenerator
   end
 
   def configure_disarm_wires(wires)
-    wires.each { |wire| wire.type = :disarming }
+    wires.each { |wire| wire.type = :disarm }
   end
 
   def configure_exploding_wires(wires)
@@ -41,8 +41,8 @@ class WireGenerator
     (3..6).to_a.sample
   end
 
-  def read_valid_wire_colors
-    file = File.read("./valid_wire_colors.dat")
+  def read_valid_wire_colors(color_file_path)
+    file = File.read(color_file_path)
     file.split("\n").map(&:to_sym)
   end
 

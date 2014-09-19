@@ -28,9 +28,7 @@ class DinoDex
       criteria.all? do |field, value|
         raise "Invalid search criteria #{field}" unless dino.respond_to? field
         if value.is_a? Array
-          v = dino.send(field)
-          v = v.to_f if value[1].is_a? Numeric
-          v.send(value[0], value[1])
+          dino.send(field).send(value[0], value[1])
         elsif value.is_a? String
           /#{value}/.match(dino.send(field))
         else

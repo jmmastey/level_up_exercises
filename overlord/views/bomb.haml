@@ -5,15 +5,13 @@
   %body
     .bomb
       .wiring
-        .wire-red &nbsp;
-        .wire-blue &nbsp;
-        .wire-green &nbsp;
-        .wire-black &nbsp;
+        - @bomb_controller.wire_box.wires.each do |wire|
+          .wire{id: "wire_#{wire.color}", style:"background-color: #{wire.color}", title: "Snip wire", data: {type: wire.type}}
       .bomb-panel
         .display
-          .activation_status
+          .activation_status= @bomb_controller.state.upcase
           .timer
-          .message
+          .message Booted
         .input
           .code-display
           %input#code{type: :hidden, maxlength: 4}
@@ -32,5 +30,5 @@
               %button#btn-enter Enter
               %button#btn-backspace &lt;&lt;
         .clr
-    %script{src: "/scripts/jquery-2.1.1.min.js" }
-    %script{src: "/scripts/bomb.js" }
+%script{src: "/scripts/jquery-2.1.1.min.js" }
+%script{src: "/scripts/bomb.js" }

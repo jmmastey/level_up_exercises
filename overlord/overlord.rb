@@ -10,12 +10,21 @@ get '/' do
 end
 
 post '/set-codes' do
-  @bomb = Bomb.new(activation_code: params[:activation_code],
-                   deactivation_code: params[:deactivation_code])
+  session[:bomb] = Bomb.new(activation_code: params[:activation_code].to_i,
+                            deactivation_code: params[:deactivation_code].to_i)
+  @bomb = session[:bomb]
   erb :toggle_bomb
 end
 
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
+post '/activate' do
+  session[:bomb].activate(params[:code].to_i)
+  @bomb = session[:bomb]
+  erb :toggle_bomb
 end
+
+post '/deactivate' do
+  session[:bomb].deactivate(params[:code].to_i)
+  @bomb = session[:bomb]
+  erb :toggle_bomb
+end
+

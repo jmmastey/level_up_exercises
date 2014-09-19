@@ -63,6 +63,15 @@ class Overlord < Sinatra::Base
     get_json_response
   end
 
+  post "/snip_wire" do
+    color = params[:wire_color]
+    bomb_controller = current_bomb_controller
+    wire = bomb_controller.wire_box.get_wire_from_color(color)
+    wire.snip
+
+    get_json_response
+  end
+
   private
 
   def add_error(error)

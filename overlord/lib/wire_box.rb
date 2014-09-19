@@ -43,6 +43,11 @@ class WireBox
     @wires.select { |wire| wire.is_type?(:exploding) }
   end
 
+  def get_wire_from_color(color)
+    color = color.to_sym
+    @wires.select { |wire| wire.color == color }.first
+  end
+
   def intact?
     state == :intact
   end

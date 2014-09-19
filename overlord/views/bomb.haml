@@ -6,12 +6,12 @@
     .bomb
       .wiring
         - @bomb_controller.wire_box.wires.each do |wire|
-          .wire{id: "wire_#{wire.color}", style:"background-color: #{wire.color}", title: "Snip wire", data: {type: wire.type}}
+          .wire{style:"background-color: #{wire.color}", title: "Snip wire", data: {color: wire.color, type: wire.type}}
       .bomb-panel
         .display
           .activation_status= @bomb_controller.state.upcase
           .timer
-          .message Booted
+          .message= @bomb_controller.message.upcase
         .input
           .code-display
           %input#code{type: :hidden, maxlength: 4}

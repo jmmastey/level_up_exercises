@@ -21,4 +21,5 @@ Feature: Wire-cutting
   Scenario: Activating a bomb ready to explode
     When I cut an exploding wire
     And I enter the code 1234
+    And I enter the code 0400
     Then the bomb should explode

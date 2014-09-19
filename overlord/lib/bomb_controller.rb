@@ -25,6 +25,11 @@ class BombController
     DEFAULT_DEACTIVATION_CODE
   end
 
+  def disable_bomb
+    @state = :disabled
+    @message = "Bomb disabled"
+  end
+
   def enter_code(code)
     code = normalize_code(code)
     update_state
@@ -39,7 +44,7 @@ class BombController
 
   def update_state
     unless @state == :disabled || @state == :exploded
-      @state = :disabled if @wire_box.disabled?
+      disable_bomb if @wire_box.disabled?
       @state = :exploded if @wire_box.exploded?
     end
     @state
@@ -74,6 +79,7 @@ class BombController
     minutes = code.slice(0, 2).to_i
     seconds = code.slice(2, 2).to_i
     activate((minutes * 60) + seconds)
+    explode if should_explode?
   end
 
   def enter_code_when_disabled(code)

@@ -64,6 +64,12 @@ describe WireBox do
     end
   end
 
+  describe "#get_wire_from_color" do
+    it "returns the wire with the given color" do
+      expect(wirebox.get_wire_from_color(:red)).to eq(wire)
+    end
+  end
+
   describe "#intact?" do
     it "returns true if state is intact, false otherwise" do
       expect(wirebox).to be_intact

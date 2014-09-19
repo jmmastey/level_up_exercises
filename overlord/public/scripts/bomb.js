@@ -1,13 +1,9 @@
-/**
- * bomb.js
- * @author Dan Kotowski
- */
-
 var Bomb = Bomb || {};
 
 Bomb.init = function() {
   Bomb.init_code_display();
   Bomb.init_keypad();
+  Bomb.init_wires();
 };
 
 Bomb.init_code_display = function() {
@@ -38,6 +34,9 @@ Bomb.init_keypad_enter = function() {
   $('#btn-enter').click(Bomb.submit_code);
 };
 
+Bomb.init_wires = function() {
+  $('.wire').click(function() { Bomb.snip_wire(this); });
+};
 
 Bomb.clear_code_field = function() {
   Bomb.update_code_field("");
@@ -64,6 +63,21 @@ Bomb.handle_server_response = function(result) {
 
 Bomb.on_server_error = function(request, status_message, error) {
   alert('Error connecting to server: ' + error);
+};
+
+Bomb.snip_wire = function(wire) {
+  if ($(wire).hasClass("cut")) return;
+
+  color = $(wire).attr('data-color');
+  $(wire).addClass("cut");
+  $.ajax({
+    type: "POST",
+    url: "/snip_wire",
+    data: { wire_color: color },
+    dataType: "json",
+    error: Bomb.on_server_error,
+    success: Bomb.handle_server_response
+  });
 };
 
 Bomb.submit_code = function() {

@@ -1,13 +1,13 @@
 class Bomb
   # Communication Messages
-  BOMB_EXPLODED_MSG     = 'Sorry, bomb has already exploded.'
-  BOMB_SNIPPED_MSG      = 'Sorry, bomb wires have been snipped.'
-  BOMB_ACTIVE_MSG       = 'Bomb is already active'
-  BOMB_INACTIVE_MSG     = 'Bomb is already inactive'
-  BOMB_ACTIVATED_MSG    = 'Bomb activated - Look Out!'
-  BOMB_DEACTIVATED_MSG  = 'Bomb deactivated'
-  BOMB_DETONATION_MSG   = 'Bomb has been detonated!'
-  BOMB_JUST_SNIPPED_MSG = 'Bomb wires snipped and is now defunct'
+  BOMB_ACTIVE_MSG           = 'Bomb is already active'
+  BOMB_INACTIVE_MSG         = 'Bomb is already inactive'
+  BOMB_ACTIVATED_MSG        = 'Bomb activated - Look Out!'
+  BOMB_DEACTIVATED_MSG      = 'Bomb deactivated'
+  BOMB_DETONATION_MSG       = 'Bomb has been detonated!'
+  BOMB_JUST_SNIPPED_MSG     = 'Bomb wires snipped and is now defunct'
+  BOMB_ALREADY_EXPLODED_MSG = 'Sorry, bomb has already exploded.'
+  BOMB_ALREADY_SNIPPED_MSG  = 'Sorry, bomb wires have been snipped.'
   
   CODE_TOO_MANY_DEACT_MSG = 'Bomb exploded - too many attempts!'
   CODE_WRONG_VALUE_MSG    = 'Wrong code'
@@ -18,9 +18,9 @@ class Bomb
   INTEGRITY_SNIPPED   = 'Wires are cut'
   INTEGRITY_INTACT    = 'Intact'
 
-  ACTIVATION_NOT_APP  = 'NA'
-  ACTIVATION_ACTIVE   = 'Active'
-  ACTIVATION_INACTIVE = 'Inactive'
+  ACTIVATION_NOT_APPLICABLE  = 'NA'
+  ACTIVATION_ACTIVE          = 'Active'
+  ACTIVATION_INACTIVE        = 'Inactive'
 
   # Default Codes
   DEFAULT_ACTIVATION_CODE   = '1234'
@@ -30,10 +30,10 @@ class Bomb
   def initialize(activation_code, deactivation_code)
     set_activation_code(activation_code)
     set_deactivation_code(deactivation_code)
-    init_state
+    initialize_state
   end
 
-  def init_state
+  def initialize_state
     @active = false
     @snipped = false
     @deactivation_attempts = 0
@@ -94,7 +94,7 @@ class Bomb
   end
 
   def activation_status
-    return ACTIVATION_NOT_APP if exploded? || snipped?
+    return ACTIVATION_NOT_APPLICABLE if exploded? || snipped?
     return ACTIVATION_ACTIVE if active?
     ACTIVATION_INACTIVE
   end
@@ -149,8 +149,8 @@ class Bomb
   end
 
   def bomb_is_defunct
-    return BOMB_EXPLODED_MSG if exploded?
-    return BOMB_SNIPPED_MSG if snipped?
+    return BOMB_ALREADY_EXPLODED_MSG if exploded?
+    return BOMB_ALREADY_SNIPPED_MSG if snipped?
     nil
   end
 end

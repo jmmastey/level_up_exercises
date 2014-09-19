@@ -43,8 +43,8 @@ class BlagPost
   def category_list
     return "" if categories.empty?
 
-    return as_title("Category: "+categories.to_sentence)  if categories.length == 1
-    return as_title("Categories: "+categories.to_sentence) if categories.many?
+    return as_title("Category: " + categories.to_sentence)  if categories.length == 1
+    return as_title("Categories: " + categories.to_sentence) if categories.many?
   end
 
   def as_title(string)
@@ -63,11 +63,9 @@ class BlagPost
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    return body if body.length < 200
+
+    body[0..200] + "..."
   end
 
 end

@@ -1,4 +1,7 @@
 class Dino
+  CARNIVORE = ["Carnivore", "Insectivore", "Piscivore"]
+  HERBIVORE = ["Herbivore"]
+
   attr_reader :name, :period, :continent, :diet, :weight, :walking, :description
 
   def initialize(name, options = {})
@@ -9,6 +12,14 @@ class Dino
     @weight = options[:weight]
     @walking = options[:walking]
     @description = options[:description]
+  end
+
+  def carnivore
+    CARNIVORE.include? diet
+  end
+
+  def herbivore
+    HERBIVORE.inlude? diet
   end
 
   def to_s

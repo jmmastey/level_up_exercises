@@ -1,36 +1,42 @@
 require_relative "dinodex"
 
-dinodex = DinoDex.new("dinodex.csv", "african_dinosaur_export.csv")
+dinodex = DinoDex.new()
+dinodex.add_data("dinodex.csv", "african_dinosaur_export.csv")
+
 bipeds = dinodex.find(walking: "Biped")
-puts "Bipeds: #{bipeds.size}"
-bipeds.each { |dino| puts dino }
-puts
+puts "Bipeds:"
+puts bipeds
 
 # Does not meet definition today
 carnivores = dinodex.find(diet: "Carnivore")
-puts "Carnivores: #{carnivores.size}"
-carnivores.each { |dino| puts dino }
-puts
+puts carnivores
 
 cretaceous = dinodex.find(period: "Cretaceous")
-puts "Cretaceous: #{cretaceous.size}"
-cretaceous.each { |dino| puts dino }
-puts
+puts cretaceous
 
-big = dinodex.find(weight: lambda { |w| w.to_i > 4000})
-puts "Big: #{big.size}"
-big.each { |dino| puts dino }
-puts
+big = dinodex.find(weight: [">", 4000])
+puts big
 
-small = dinodex.find(weight: lambda { |w| w.to_i < 4000})
-puts "Small: #{small.size}"
-small.each { |dino| puts dino }
-puts
+small = dinodex.find(weight: ["<=", 4000])
+puts small
 
-combined = dinodex.find(diet: "Carnivore",
+small2 = dinodex.having_weight(["<=", 4000])
+puts small2
+
+combined = dinodex.find(carnivore: true,
                         walking: "Biped")
-puts "Biped and Carnivore: #{combined.size}"
-combined.each { |dino| puts dino.to_hash }
-puts
+puts combined
 
+chained = dinodex.find(carnivore: true).find(walking: "Biped")
+puts chained
+
+having_chaind = dinodex
+  .having_carnivore(true)
+  .having_walking("Biped")
+puts having_chaind
+
+puts having_chaind.first
+
+puts
+puts "JSON:"
 puts dinodex.to_json

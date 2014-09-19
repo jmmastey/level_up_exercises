@@ -1,31 +1,31 @@
 require_relative "dino"
 
 class DinoParser
-  def can_parse?(data)
-    data && attribute_map.keys.all? { |attr| data.has_key? attr}
+  def self.can_parse?(data)
+    attribute_map && attribute_map.keys.all? { |attr| data.has_key? attr}
   end
 
-  def parse(data)
+  def self.parse(data)
     options = Hash[attribute_map.map { |a, v| [v, transform(a, data[a])] }]
     Dino.new(options[:name], base.merge(options))
   end
 
   protected
-  def base
+  def self.base
     {}
   end
 
-  def attribute_map
+  def self.attribute_map
   end
 
-  def transform(attr, data)
+  def self.transform(attr, data)
     data
   end
 end
 
 class FavoriteDinoParser < DinoParser
   protected
-  def attribute_map
+  def self.attribute_map
     {
       "NAME" => :name,
       "PERIOD" => :period,
@@ -44,13 +44,13 @@ class AfricanDinoParser < DinoParser
   }
 
   protected 
-  def base
+  def self.base
     {
       :continent => "Africa",
     }
   end
 
-  def attribute_map
+  def self.attribute_map
     {
       "Genus" => :name,
       "Period" => :period,
@@ -60,7 +60,7 @@ class AfricanDinoParser < DinoParser
     }
   end
 
-  def transform(attr, data)
+  def self.transform(attr, data)
     TRANSFORMS.has_key?(attr) ? TRANSFORMS[attr].call(data) : data
   end
 end

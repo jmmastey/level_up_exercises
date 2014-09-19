@@ -3,7 +3,6 @@ class Bomb
   def initialize(devices)
     @devices = devices
     raise_bad_devices_error unless all_devices_respond_to_triggered?
-    create_singleton_methods_for_devices
   end
 
   def exploded?
@@ -14,14 +13,6 @@ class Bomb
   end
 
   private
-
-  def create_singleton_methods_for_devices
-    @devices.each do |name, device|
-      define_singleton_method(name.to_sym) do
-        device
-      end
-    end
-  end
 
   def raise_bad_devices_error
     raise(RuntimeError, "all devices must respond to triggered?")

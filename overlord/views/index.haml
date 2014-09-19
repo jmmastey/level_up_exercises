@@ -3,9 +3,11 @@
 %html
   %head
     %title Nefarious Labs
+    %link{rel: :stylesheet, type: "text/css", href: "/css/index.css"}
+    %script{src: "https://code.jquery.com/jquery-2.1.1.min.js"}
     %link{rel: :stylesheet, type: "text/css", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"}
     %link{rel: :stylesheet, type: "text/css", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"}
-    %script{src: "https://maxcdn.bootstrapcdn/bootstrap/3.2.0/js/bootstrap.min.js"}
+    %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"}
   %body
     .container
       .starter-template
@@ -14,7 +16,7 @@
     .container
       .row
         .col-md-4
-          = haml :codebox, :codebox => @bomb.devices[:codebox]
+          = haml :codebox, :locals => {:codebox => @bomb.devices[:codebox]}
         .col-md-4
           = haml :wirebox, :wirebox => @bomb.devices[:wirebox]
         .col-md-4

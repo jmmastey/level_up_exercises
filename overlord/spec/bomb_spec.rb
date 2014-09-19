@@ -62,8 +62,8 @@ describe Bomb do
     end
 
     it "should create methods to fetch from the hash" do
-      expect(bomb.a).to eq(device)
-      expect(bomb.b).to eq(triggered_device)
+      expect(bomb.devices[:a]).to eq(device)
+      expect(bomb.devices[:b]).to eq(triggered_device)
     end
 
     it "should throw an error if not in device" do

@@ -1,0 +1,16 @@
+
+#codebox {
+  background-color: grey;
+  border-radius: 25px;
+  padding: 20px 10px;
+}
+
+#codebox table {
+  padding: 10px;
+  margin: 0 auto;
+}
+
+#codebox td {
+  width: 33%;
+}
+

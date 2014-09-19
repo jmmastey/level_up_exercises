@@ -27,14 +27,14 @@ post '/overlords/create_bomb' do
   session[:bomb] = create_bomb(params)
   session[:bomb_msg] = "Bomb Created"
   session[:timer] = ACTIVATION_TIME
-  erb :bomb_status, :locals => get_status
+  erb :bomb_status, :locals => local_session_variables
 end
 
 post '/overlords/action' do
   record_timer(params)
   action = params[:action]
   send(action, params)
-  erb :bomb_status, :locals => get_status
+  erb :bomb_status, :locals => local_session_variables
 end
 
 def create_bomb(params)
@@ -65,12 +65,15 @@ def detonate(params)
   session[:bomb_msg] = session[:bomb].detonate
 end
 
-def get_status
-  bomb = session[:bomb] || Bomb.new
-  status = bomb.to_h
-  status[:bomb_msg] = session[:bomb_msg]
-  status[:timer] = session[:timer]
-  status
+def local_session_variables
+  variables = get_session_bomb.to_h
+  variables[:bomb_msg] = session[:bomb_msg]
+  variables[:timer] = session[:timer]
+  variables
+end
+
+def get_session_bomb
+  session[:bomb] || Bomb.new
 end
 
 def start_time

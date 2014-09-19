@@ -1,0 +1,12 @@
+/* line 1, explosion.scss */
+html, body, .explosion {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 7, explosion.scss */
+.explosion {
+  background-color: #f00;
+  background: url("/images/explosion.jpg");
+}

@@ -1,25 +1,16 @@
 class Dino
-  CARNIVORE = ["Carnivore", "Insectivore", "Piscivore"]
-  HERBIVORE = ["Herbivore"]
 
-  attr_reader :name, :period, :continent, :diet, :weight, :walking, :description
+  attr_reader :name, :period, :continent, :diet, :carnivore, :weight, :walking, :description
 
   def initialize(name, options = {})
     @name = name
     @period = options[:period]
     @continent = options[:continent]
     @diet = options[:diet]
-    @weight = options[:weight]
+    @carnivore = options[:carnivore]
+    @weight = options[:weight].to_f
     @walking = options[:walking]
     @description = options[:description]
-  end
-
-  def carnivore
-    CARNIVORE.include? diet
-  end
-
-  def herbivore
-    HERBIVORE.inlude? diet
   end
 
   def to_s
@@ -27,6 +18,7 @@ class Dino
     output += " - Continent: #{continent}" if continent
     output += " - Period: #{period}" if period
     output += " - Diet: #{diet}" if diet
+    output += " - Carnivore: #{carnivore}"
     output += " - Weight: #{weight}" if weight
     output += " - Walking: #{walking}" if walking
     output += " - Description: #{description}" if description
@@ -38,6 +30,7 @@ class Dino
       :name => name,
       :period => period,
       :continent => continent,
+      :carnivore => carnivore,
       :diet => diet,
       :weight => weight,
       :walking => walking,

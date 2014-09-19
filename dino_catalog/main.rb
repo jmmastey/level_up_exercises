@@ -1,14 +1,17 @@
 require_relative "dinodex"
 
 dinodex = DinoDex.new()
+puts dinodex
 dinodex.add_data("dinodex.csv", "african_dinosaur_export.csv")
+puts dinodex
 
 bipeds = dinodex.filter(walking: "Biped")
-puts "Bipeds:"
 puts bipeds
 
-# Does not meet definition today
 carnivores = dinodex.filter(diet: "Carnivore")
+puts carnivores
+
+carnivores = dinodex.filter(carnivore: true)
 puts carnivores
 
 cretaceous = dinodex.filter(period: "Cretaceous")

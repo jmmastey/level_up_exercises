@@ -2,11 +2,11 @@ require_relative "dino"
 
 class DinoParser
   def self.can_parse?(data)
-    attribute_map && attribute_map.keys.all? { |attr| data.has_key? attr}
+    (attribute_map.values.uniq - data.keys).empty?
   end
 
   def self.parse(data)
-    options = Hash[attribute_map.map { |a, v| [v, transform(a, data[a])] }]
+    options = Hash[attribute_map.map { |hash_key, data_key| [hash_key, transform(hash_key, data[data_key])] }]
     Dino.new(options[:name], base.merge(options))
   end
 
@@ -24,23 +24,35 @@ class DinoParser
 end
 
 class FavoriteDinoParser < DinoParser
+  CARNIVORE = ["Carnivore", "Insectivore", "Piscivore"]
+
+  TRANSFORMS = {
+    :carnivore => lambda { |v| CARNIVORE.include? v }
+  }
+
   protected
   def self.attribute_map
     {
-      "NAME" => :name,
-      "PERIOD" => :period,
-      "CONTINENT" => :continent,
-      "DIET" => :diet,
-      "WEIGHT_IN_LBS" => :weight,
-      "WALKING" => :walking,
-      "DESCRIPTION" => :description,
+      :name => "NAME",
+      :period => "PERIOD",
+      :continent => "CONTINENT",
+      :diet => "DIET",
+      :carnivore => "DIET",
+      :weight => "WEIGHT_IN_LBS",
+      :walking => "WALKING",
+      :description => "DESCRIPTION",
     }
+  end
+
+  def self.transform(attr, data)
+    TRANSFORMS.has_key?(attr) ? TRANSFORMS[attr].call(data) : data
   end
 end
 
 class AfricanDinoParser < DinoParser
   TRANSFORMS = { 
-    "Carnivore" => lambda { |v| v == "Yes" ? "Carnivore" : "Herbivore" },
+    :carnivore => lambda { |v| v == "Yes" },
+    :diet => lambda { |v| v == "Yes" ? "Carnivore" : "Herbivore" },
   }
 
   protected 
@@ -52,11 +64,12 @@ class AfricanDinoParser < DinoParser
 
   def self.attribute_map
     {
-      "Genus" => :name,
-      "Period" => :period,
-      "Carnivore" => :diet,
-      "Weight" => :weight,
-      "Walking" => :walking,
+      :name => "Genus",
+      :period => "Period",
+      :diet => "Carnivore",
+      :carnivore => "Carnivore",
+      :weight => "Weight",
+      :walking => "Walking",
     }
   end
 

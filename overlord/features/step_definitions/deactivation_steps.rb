@@ -5,16 +5,12 @@ end
 
 Given(/^the bomb is active$/) do
   enter_code_on_keypad(1234)
-  click_on("Enter")
-  expect(find(".activation_status")).to have_content("active")
-end
-
-When(/^click Enter$/) do
-  click_on("Enter")
+  enter_code_on_keypad(0400)
+  expect(find(".activation_status")).to have_content("ACTIVE")
 end
 
 Then(/^the bomb should be inactive$/) do
-  expect(find(".activation_status")).to have_content("inactive")
+  expect(find(".activation_status")).to have_content("INACTIVE")
 end
 
 Then(/^the number of remaining disarm attempts should be (\d+)$/) do |attempts|
@@ -22,9 +18,9 @@ Then(/^the number of remaining disarm attempts should be (\d+)$/) do |attempts|
 end
 
 Given(/^(\d+) failed attempts have been made to disarm the bomb$/) do |attempts|
+  attempts = attempts.to_i
   attempts.times do
     enter_code_on_keypad(5678)
-    click_on("Enter")
   end
 end
 

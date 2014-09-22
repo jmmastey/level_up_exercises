@@ -8,3 +8,4 @@ Feature: villain boots bomb
     Given I am not yet playing
     When I go to the home page
     Then I should see "Please configure the bomb"
+    And I should not see "Bomb is activated"

@@ -3,19 +3,20 @@ class ParseJsonFile
 
   attr_accessor :data
 
-  def initialize(filename)
+  def initialize
     @data = []
-    parse_json_file(filename)
   end
 
   def group_data_by_cohort
     @data.group_by { |dta| dta[:cohort] }
   end
 
-  private
-
-  def parse_json_file(filename)
+  def load_json_file(filename)
     file = File.read(filename)
-    @data = JSON.parse(file, { symbolize_names: true })
+    parse_json(file)
+  end
+
+  def parse_json(json_data)
+    @data = JSON.parse(json_data, { symbolize_names: true })
   end
 end

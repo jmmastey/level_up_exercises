@@ -9,21 +9,25 @@ get '/' do
   erb :index
 end
 
+get '/bomb' do
+  erb :bomb
+end
+
 post '/set-codes' do
   session[:bomb] = Bomb.new(params[:activation_code], params[:deactivation_code])
   @bomb = session[:bomb]
-  erb :toggle_bomb
+  erb :bomb
 end
 
 post '/activate' do
   session[:bomb].activate(params[:code])
   @bomb = session[:bomb]
-  erb :toggle_bomb
+  erb :bomb
 end
 
 post '/deactivate' do
   session[:bomb].deactivate(params[:code])
   @bomb = session[:bomb]
-  erb :toggle_bomb
+  erb :bomb
 end
 

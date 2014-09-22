@@ -6,7 +6,8 @@ class DinoParser
   end
 
   def self.parse(data)
-    options = Hash[attribute_map.map { |hash_key, data_key| [hash_key, transform(hash_key, data[data_key])] }]
+    options = Hash[attribute_map.map { |hash_key, data_key| 
+      [hash_key, transform(hash_key, data[data_key])] }]
     Dino.new(options[:name], base.merge(options))
   end
 

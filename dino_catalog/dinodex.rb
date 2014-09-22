@@ -14,13 +14,12 @@ class DinoDex
 
   def add_data(*file_paths)
     file_paths.each do |file_path|
-      parser = nil
-      CSV.foreach(file_path, :headers => true) do |row|
-        item = row.to_hash
-        parser ||= PARSER_MAP.detect { |p| p.can_parse?(item) }
-        raise "Can't parse file #{file_path}" unless parser
-        @dinos << parser.parse(item)
-      end
+      csv = CSV.open(file_path, headers: true)
+      # is there a better way to do this to get the first line and then parse
+      parser = PARSER_MAP.detect { |p| p.can_parse?(csv.first.to_hash) }
+      raise "Can't parse file #{file_path}" unless parser
+      csv.rewind
+      @dinos.concat csv.map { |row| parser.parse(row.to_hash) }
     end
   end
 

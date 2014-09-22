@@ -17,23 +17,20 @@ class DinoDex
       parser = nil
       CSV.foreach(file_path, :headers => true) do |row|
         item = row.to_hash
-        parser ||= PARSER_MAP.find { |pmap| pmap.can_parse?(item) }
+        parser ||= PARSER_MAP.detect { |p| p.can_parse?(item) }
+        raise "Can't parse file #{file_path}" unless parser
         @dinos << parser.parse(item)
       end
     end
   end
 
   def filter(criteria = {})
-    result_data = @dinos.find_all do |dino|
+    result_data = @dinos.select do |dino|
       criteria.all? do |field, value|
-        raise "Invalid search criteria #{field}" unless dino.respond_to? field
-        if value.is_a? Array
-          dino.send(field).send(value[0], value[1])
-        elsif value.is_a? String
-          /#{value}/.match(dino.send(field))
-        else
-          dino.send(field) == value
-        end
+        raise "Invalid search criteria #{field}" unless dino.respond_to?(field)
+        # can't have an and filter on the same fields
+        raise "Already filtering on #{field}" if @filter.has_key?(field)
+        match(dino.send(field), value)
       end
     end
     self.class.new(result_data, filter: @filter.merge(criteria))
@@ -55,10 +52,10 @@ class DinoDex
   end
 
   def method_missing(method, *args)
-    if /having_/.match(method)
+    if /having_/ =~ method
       criteria = args.length > 1 ? args : args[0]
       field = method[7..-1].to_sym
-      filter({field => criteria})
+      filter({ field => criteria })
     else
       super
     end
@@ -67,4 +64,16 @@ class DinoDex
   def each(&block)
     @dinos.each(&block)
   end
+
+  private
+  def match(left, right)
+    if right.is_a? Array
+      left.send(right[0], right[1])
+    elsif right.is_a? String
+      /#{right}/ =~ left
+    else
+      left == right
+    end
+  end
 end
+

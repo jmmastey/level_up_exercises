@@ -9,9 +9,9 @@
     %tr
       %td{colspan: 2}
         %fieldset{disabled: ""}
-          %input{class: "form-control input-lg", type: "text"}
+          %input#codebox-code{class: "form-control input-lg", type: "text"}
       %td
-        %button{data: {value: "delete"}, class: "btn btn-lg btn-primary btn-block"}
+        %div#codebox-delete{data: {value: "delete"}, class: "btn btn-lg btn-primary btn-block"}
           %span{class: "glyphicon glyphicon-arrow-left"}
     %tr
       - (7..9).each do |n|

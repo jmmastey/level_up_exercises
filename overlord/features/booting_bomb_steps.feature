@@ -8,18 +8,18 @@ Feature: Booting the Bomb
 
   Scenario: Booting w/ default codes
     When I leave activation and deactivation fields blank
-    And I press "boot"
+    And I press "Boot"
     Then I should see a status of "deactivated"
-    And there should be an "activation_code" field
+    And there should be a/an "code" field
 
   Scenario: Booting w/ custom codes
     When I enter custom codes 1111 2222
-    And I press "boot"
+    And I press "Boot"
     Then I should see a status of "deactivated"
-    And there should be an "activation_code" field
+    And there should be a/an "code" field
 
   # ??? How do I test this....
   Scenario: Booting w/ invalid codes
     When I enter custom codes 12345 321
-    And I press "boot"
+    And I press "Boot"
     Then I should stay on the page (not be able to press boot, etc.)

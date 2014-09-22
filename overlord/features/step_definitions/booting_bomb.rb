@@ -24,11 +24,10 @@ end
 # Then #
 Then(/^I should see a status of "(.*?)"$/) do |status|
   page.should have_content(status)
-  expect(@bomb.status).to eq(status)
 end
 
-Then(/^there should be an "(.*?)" field$/) do |name|
-  page.should have_content(name)
+Then(/^there should be a\/an "(.*?)" field$/) do |name|
+  page.should have_field(name)
 end
 
 Then(/^I should stay on the page \(not be able to press boot, etc\.\)$/) do

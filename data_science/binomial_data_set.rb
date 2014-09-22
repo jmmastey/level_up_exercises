@@ -3,6 +3,7 @@ require_relative "./binomial_data_group"
 class BinomialDataSet
   attr_reader :group_field, :groups
 
+  # TODO convert to composition
   def initialize(params)
     @group_field = params[:group_field]
     @result_field = params[:result_field]

@@ -35,9 +35,10 @@ describe BinomialDataSet do
       expect(data_set.success_count).to eq(2)
     end
 
+    # TODO: group testing should not be dataset
     it "should provide the chance success by group" do
-      expect(data_set.groups["A"].success_percent).to eq(0.5)
-      expect(data_set.groups["B"].success_percent).to eq(0.25)
+      expect(groups["A"].success_percent).to eq(0.5)
+      expect(groups["B"].success_percent).to eq(0.25)
     end
 
     it "should provide the success count by group" do

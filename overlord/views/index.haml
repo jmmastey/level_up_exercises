@@ -10,14 +10,16 @@
     %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"}
   %body
     .container
-      .starter-template
-        .h1 Hahaha Welcome to Nefarious Labs!
-        .p Please enjoy the lovely gift... I think you'll find it's to die for hahaha!
-    .container
+      .row
+        .col-md-12
+          .starter-template
+            .h1 Hahaha Welcome to Nefarious Labs!
+            .p Please enjoy the lovely gift... I think you'll find it's to die for hahaha!
       .row
         .col-md-4
           = haml :codebox, :locals => {:codebox => @bomb.devices[:codebox]}
         .col-md-4
-          = haml :wirebox, :locals => {:wirebox => @bomb.devices[:wirebox]}
+          = haml :wirebox, :locals => {:wirebox => @bomb.devices[:wirebox],
+                                       :timer => @bomb.devices[:timer]}
         .col-md-4
-          = haml :timer, :locals => {:timer => @bomb.devices[:timer]}
+          = haml :bomb, :locals => {:bomb => @bomb}

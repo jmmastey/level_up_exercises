@@ -30,7 +30,7 @@ class Overlord < Sinatra::Application
   end
 
   def random_wirebox
-    WireBox.new(wire_colors: WIREBOX_COLORS, safe_wire: WIREBOX_COLORS.sample)
+    WireBox.new(wire_colors: WIREBOX_COLORS, safe_color: WIREBOX_COLORS.sample)
   end
 
   run! if app_file == $PROGRAM_NAME

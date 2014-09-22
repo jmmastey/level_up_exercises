@@ -14,18 +14,37 @@
   width: 33%;
 }
 
+.timer {
+  margin: 20px 0;
+  background-color: grey;
+  border-radius: 25px;
+  padding: 30px 0;
+  display: block;
+}
+
+.timer-display {
+  margin: 0 5px;
+}
+
 #wirebox {
   background-color: grey;
   border-radius: 25px;
 }
 
 #wirebox .wires {
-  padding: 0;
   margin: 10px 0;
+  padding: 0;
 }
 
 #wirebox .wire {
+  padding: 8px 0;
+  margin: 2px 0;
   border-radius: 10px;
+  border: 1px solid black;
+}
+
+#wirebox .wire {
+  cursor: pointer;
 }
 
 #wirebox .big-wire-left {

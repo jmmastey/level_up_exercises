@@ -65,6 +65,11 @@ class BombController
     update_state
   end
 
+  def check_detonation
+    @wire_box.check_booby_traps
+    explode_if_triggered
+  end
+
   def deactivate
     @state = :inactive
     @message = "Deactivated bomb"
@@ -77,7 +82,7 @@ class BombController
     return deactivate if code == @deactivation_code
     @message = "Invalid code"
     increment_deactivation_attempts unless ignore_invalid_code?(code)
-    explode if should_explode?
+    explode_if_triggered
   end
 
   def enter_code_when_activating(code)
@@ -85,7 +90,7 @@ class BombController
     minutes = code.slice(0, 2).to_i
     seconds = code.slice(2, 2).to_i
     activate((minutes * 60) + seconds)
-    explode if should_explode?
+    explode_if_triggered
   end
 
   def enter_code_when_disabled(code)
@@ -112,6 +117,14 @@ class BombController
     update_state
   end
 
+  def explode_if_triggered
+    explode if should_explode?
+  end
+
+  def has_expired_timer?
+    timer && timer.expired?
+  end
+
   def ignore_invalid_code?(code)
     @deactivation_attempts == 0 && code == @activation_code
   end
@@ -131,10 +144,6 @@ class BombController
 
   def reset_deactivation_attempts
     @deactivation_attempts = 0
-  end
-
-  def has_expired_timer?
-    timer && timer.expired?
   end
 
   def should_explode?

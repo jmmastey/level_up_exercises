@@ -2,6 +2,7 @@ var Bomb = Bomb || {};
 
 Bomb.init = function() {
   Bomb.init_code_display();
+  Bomb.init_keyboard_input();
   Bomb.init_keypad();
   Bomb.init_timer();
   Bomb.init_wires();
@@ -12,6 +13,26 @@ Bomb.init = function() {
 Bomb.init_code_display = function() {
   $('input#code').change(function() {
     $('.code-display').html($('input#code').val());
+  });
+};
+
+Bomb.init_keyboard_input = function() {
+  $(window).keydown(function(e) {
+    if (e.which == Key.enter) {
+      $('#btn-enter').click();
+      e.preventDefault();
+    } else if (e.which == Key.backspace) {
+      $('#btn-backspace').click();
+      e.preventDefault();
+    } else if (e.which >= Key.number_0 && e.which <= Key.number_9) {
+      number = e.which - Key.number_0;
+      $('.keypad button[data-value=' + number + ']').click();
+      e.preventDefault();
+    } else if (e.which >= Key.numpad_0 && e.which <= Key.numpad_9) {
+      number = e.which - Key.numpad_0;
+      $('.keypad button[data-value=' + number + ']').click();
+      e.preventDefault();
+    }
   });
 };
 

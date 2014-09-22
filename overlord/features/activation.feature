@@ -26,5 +26,6 @@ Feature: Activation
   @javascript
   Scenario: Entering activation code while bomb is active
     Given the code 1234 was entered
+    And the time 0400 was entered
     When I enter the code 1234
     Then I should see the message "INVALID CODE"

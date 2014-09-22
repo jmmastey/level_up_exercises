@@ -57,22 +57,22 @@ def deactivate(params)
   session[:bomb_msg] = session[:bomb].deactivate(code)
 end
 
-def snip(params)
-  session[:bomb_msg] = session[:bomb].snip  
+def snip(_params)
+  session[:bomb_msg] = session[:bomb].snip
 end
 
-def detonate(params)
+def detonate(_params)
   session[:bomb_msg] = session[:bomb].detonate
 end
 
 def local_session_variables
-  variables = get_session_bomb.to_h
+  variables = session_bomb.to_h
   variables[:bomb_msg] = session[:bomb_msg]
   variables[:timer] = session[:timer]
   variables
 end
 
-def get_session_bomb
+def session_bomb
   session[:bomb] || Bomb.new
 end
 

@@ -16,6 +16,7 @@ class DinoParser
   end
 
   def self.attribute_map
+    {}
   end
 
   def self.transform(attr, data)
@@ -24,7 +25,7 @@ class DinoParser
 end
 
 class FavoriteDinoParser < DinoParser
-  CARNIVORE = ["Carnivore", "Insectivore", "Piscivore"]
+  CARNIVORE = %w"Carnivore Insectivore Piscivore"
 
   TRANSFORMS = {
     :carnivore => lambda { |v| CARNIVORE.include? v }
@@ -77,3 +78,4 @@ class AfricanDinoParser < DinoParser
     TRANSFORMS.has_key?(attr) ? TRANSFORMS[attr].call(data) : data
   end
 end
+

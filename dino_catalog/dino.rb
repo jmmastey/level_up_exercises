@@ -1,6 +1,6 @@
 class Dino
-
-  attr_reader :name, :period, :continent, :diet, :carnivore, :weight, :walking, :description
+  attr_reader :name, :period, :continent, :diet, :carnivore, :weight,
+    :walking, :description
 
   def initialize(name, options = {})
     @name = name
@@ -15,13 +15,13 @@ class Dino
 
   def to_s
     output = "Dino #{name}"
-    output += " - Continent: #{continent}" if continent
-    output += " - Period: #{period}" if period
-    output += " - Diet: #{diet}" if diet
-    output += " - Carnivore: #{carnivore}"
-    output += " - Weight: #{weight}" if weight
-    output += " - Walking: #{walking}" if walking
-    output += " - Description: #{description}" if description
+    output << " - Continent: #{continent}" if continent
+    output << " - Period: #{period}" if period
+    output << " - Diet: #{diet}" if diet
+    output << " - Carnivore: #{carnivore}"
+    output << " - Weight: #{weight}" if weight
+    output << " - Walking: #{walking}" if walking
+    output << " - Description: #{description}" if description
     output
   end
 
@@ -37,3 +37,4 @@ class Dino
     }
   end
 end
+

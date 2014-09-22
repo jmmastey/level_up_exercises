@@ -6,7 +6,7 @@ Feature: Deactivation
   Background:
     Given the bomb is booted with default codes
     And the code 1234 was entered
-    And the code 0400 was entered
+    And the time 0400 was entered
 
   @javascript
   Scenario: Deactivating a bomb with a valid code

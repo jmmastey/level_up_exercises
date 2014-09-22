@@ -14,13 +14,13 @@ Feature: Activation
   @javascript
   Scenario: Setting the timer
     When I enter the code 1234
-    And I enter the code 0400
+    And I enter the time 0400
     Then the bomb should be activated
 
   @javascript
   Scenario: Cancelling the activation
     When I enter the code 1234
-    And I enter a blank code
+    And I enter a blank time
     Then the bomb should be deactivated
 
   @javascript

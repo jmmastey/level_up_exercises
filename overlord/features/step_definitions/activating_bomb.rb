@@ -1,15 +1,19 @@
-Given(/^I have booted a bomb with default codes$/) do
-  pending # express the regexp above with the code you wish you had
+Given(/^I have booted the bomb with default codes$/) do
+  visit("/")
+  click_button("Boot")
 end
 
-Given(/^I have booted a bomb with custom codes (\d+) (\d+)$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Given(/^I have booted the bomb with custom codes (\d+) (\d+)$/) do |act_code, deact_code|
+  visit("/")
+  fill_in("activation_code", with: act_code)
+  fill_in("deactivation_code", with: deact_code)
+  click_button("Boot")
 end
 
-When(/^I activate it with (\d+)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I activate it with (\d+)$/) do |code|
+  fill_in("code", with: code)
 end
 
-When(/^I deactivate it with (\d+)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I deactivate it with (\d+)$/) do |code|
+  fill_in("code", with: code)
 end

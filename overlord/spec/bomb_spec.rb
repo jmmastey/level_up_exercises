@@ -59,7 +59,7 @@ describe Bomb do
 
     it "should have 0 deactivation attempts after activation" do
       bomb.activate("1234")
-      expect(bomb.deactivation_attempt).to eq(0)
+      expect(bomb.deactivation_attempts).to eq(0)
     end
 
     it "should remain deactivated if incorrect activation code entry" do
@@ -77,7 +77,7 @@ describe Bomb do
   describe "#deactivate" do
     it "should become inactive upon correct entry of deactivation code" do
       bomb.activate("1234")
-      bomb.deactivate(0)
+      bomb.deactivate("0000")
       expect(bomb).not_to be_activated
       expect(bomb.status).to eq("deactivated")
     end

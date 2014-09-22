@@ -1,12 +1,13 @@
 class Bomb
   attr_reader :activation_code, :deactivation_code, :deactivation_attempts
 
-  def initialize(options = {})
+  def initialize(activation_code = "1234", deactivation_code = "0000")
     @active = false
     @exploded = false
-    @activation_code = options[:activation_code] || 1234
-    @deactivation_code = options[:deactivation_code] || 0
     @deactivation_attempts = 0
+
+    @activation_code = activation_code
+    @deactivation_code = deactivation_code
 
     raise ArgumentError unless valid_input?
   end
@@ -42,11 +43,14 @@ class Bomb
   private
 
   def valid_input?
-    int_in_range?(activation_code) && int_in_range?(deactivation_code)
+    @activation_code = "1234" if activation_code == ""
+    @deactivation_code = "0000" if deactivation_code == ""
+    matches_code_pattern?(activation_code) && matches_code_pattern?(deactivation_code)
   end
 
-  def int_in_range?(input)
-    input.is_a?(Integer) && input.between?(0,9999)
+  def matches_code_pattern?(input)
+    return false unless input.is_a? String
+    /^\d{4}$/ =~ input
   end
 
   def explode

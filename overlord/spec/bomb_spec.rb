@@ -27,6 +27,18 @@ describe Bomb do
       expect(bomb.activation_code).to eq(1111)
     end
 
+    it "sets codes to defaults if initialized with empty string" do
+      bomb = Bomb.new(activation_code: "", deactivation_code: "")
+      expect(bomb.activation_code).to eq(1234)
+      expect(bomb.deactivation_code).to eq(0)
+    end
+
+    it "string integer codes work, too" do
+      bomb = Bomb.new(activation_code: "2222", deactivation_code: "3333")
+      expect(bomb.activation_code).to eq(2222)
+      expect(bomb.deactivation_code).to eq(3333)
+    end
+
     it "can have an deactivation code set on boot" do
       bomb = Bomb.new(deactivation_code: 1111)
       expect(bomb.deactivation_code).to eq(1111)

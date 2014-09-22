@@ -43,14 +43,14 @@ class Bomb
   def activate(code)
     return bomb_is_defunct if bomb_is_defunct
     return BOMB_ACTIVE_MSG if active?
-    return CODE_NOT_AN_INT_MSG unless is_integer?(code)
+    return CODE_NOT_AN_INT_MSG unless integer?(code)
     attempt_to_activate(code)
   end
 
   def deactivate(code)
     return bomb_is_defunct if bomb_is_defunct
     return BOMB_INACTIVE_MSG unless active?
-    return CODE_NOT_AN_INT_MSG unless is_integer?(code)
+    return CODE_NOT_AN_INT_MSG unless integer?(code)
     attempt_to_deactivate(code)
   end
 
@@ -99,7 +99,7 @@ class Bomb
     ACTIVATION_INACTIVE
   end
 
-  def is_integer?(str)
+  def integer?(str)
     (str =~ /[0-9]+/)
   end
 
@@ -109,13 +109,13 @@ class Bomb
 
   def set_activation_code(code)
     code = DEFAULT_ACTIVATION_CODE if code.empty?
-    raise_invalid_code_error(code) unless is_integer?(code)
+    raise_invalid_code_error(code) unless integer?(code)
     @activation_code = code.to_i
   end
 
   def set_deactivation_code(code)
     code = DEFAULT_DEACTIVATION_CODE if code.empty?
-    raise_invalid_code_error(code) unless is_integer?(code)
+    raise_invalid_code_error(code) unless integer?(code)
     @deactivation_code = code.to_i
   end
 

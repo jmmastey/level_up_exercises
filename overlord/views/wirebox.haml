@@ -1,11 +1,11 @@
-.row#wirebox
-  .col-md-3{class: "pull-left big-wire big-wire-left"}
-  .col-md-6{class: "wires"}
+%div#wirebox{class: "row device"}
+  .col-sm-3{class: "pull-left big-wire big-wire-left"}
+  .col-sm-6{class: "wires"}
     - wirebox.wires.each do |wire|
       - if wire.snipped?
         %div{class: "wire wire-snipped"}
       - else
         %div{class: "wire wire-#{wire.color}"}
-  .col-md-3{class: "pull-right big-wire big-wire-right"}
+  .col-sm-3{class: "pull-right big-wire big-wire-right"}
 .row
   = haml :timer, :locals => { :timer => timer }

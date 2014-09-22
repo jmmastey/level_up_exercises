@@ -1,10 +1,10 @@
-%div#codebox
+.device#codebox
   %table
     - if codebox.active?
       %caption{class: "alert alert-danger"}
         %strong Active Bomb!
     - else
-      %caption{class: "alert alert-primary"}
+      %caption{class: "alert alert-success"}
         %strong Not Active
     %tr
       %td{colspan: 2}

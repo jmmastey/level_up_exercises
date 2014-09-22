@@ -5,7 +5,7 @@
       - if wire.snipped?
         %div{class: "wire wire-snipped"}
       - else
-        %div{class: "wire wire-#{wire.color}"}
+        %div{class: "wire wire-#{wire.color}", data:{value: wire.color}}
   .col-sm-3{class: "pull-right big-wire big-wire-right"}
 .row
   = haml :timer, :locals => { :timer => timer }

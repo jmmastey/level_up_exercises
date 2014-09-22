@@ -5,15 +5,15 @@ Given(/^I have booted a bomb with the default codes$/) do
   click_on("Boot")
 end
 
-Given(/^the code (\d+) was entered$/) do |code|
+Given(/^the (?:code|time) (\d+) was entered$/) do |code|
   enter_code_on_keypad(code)
 end
 
-When(/^I enter a blank code/) do
+When(/^I enter a blank (?:code|time)/) do
   enter_code_on_keypad
 end
 
-When(/^I enter the code (\d+)$/) do |code|
+When(/^I enter the (?:code|time) (\d+)$/) do |code|
   enter_code_on_keypad(code)
 end
 

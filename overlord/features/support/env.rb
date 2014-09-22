@@ -8,7 +8,7 @@ require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 
-Capybara.app = Overlord
+Capybara.app = Sinatra::Application.new
 
 class OverlordWorld
   include Capybara::DSL

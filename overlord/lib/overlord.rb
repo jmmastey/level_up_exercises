@@ -5,7 +5,7 @@ require 'sinatra'
 enable :sessions
 
 get '/' do
-  "Time to build an app around here. Start time: " + start_time
+  "Please configure the bomb"
 end
 
 # we can shove stuff into the session cookie YAY!

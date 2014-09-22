@@ -60,8 +60,28 @@ body {
   padding: 10px;
   text-transform: uppercase;
 
+  & > div {
+    height: 1.5em;
+  }
+
+  .activation_status {
+    &[data-state="inactive"] {
+      color: green;
+    }
+    &[data-state="active"] {
+      color: red;
+    }
+    &[data-state="activating"] {
+      color: orange;
+    }
+    &[data-state="disabled"] {
+      color: #eee;
+    }
+  }
+
   .timer {
-    font-size: 1.2em;
+    color: red;
+    font-size: 1.4em;
   }
 }
 

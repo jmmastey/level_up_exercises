@@ -3,7 +3,10 @@ var Bomb = Bomb || {};
 Bomb.init = function() {
   Bomb.init_code_display();
   Bomb.init_keypad();
+  Bomb.init_timer();
   Bomb.init_wires();
+
+  Bomb.get_state_from_server();
 };
 
 Bomb.init_code_display = function() {
@@ -34,12 +37,42 @@ Bomb.init_keypad_enter = function() {
   $('#btn-enter').click(Bomb.submit_code);
 };
 
+Bomb.init_timer = function() {
+  Bomb.configure_timer(null);
+}
+
 Bomb.init_wires = function() {
   $('.wire').click(function() { Bomb.snip_wire(this); });
 };
 
 Bomb.clear_code_field = function() {
   Bomb.update_code_field("");
+};
+
+Bomb.configure_timer = function(time) {
+  if (Bomb.timer != null) {
+    clearInterval(Bomb.timer);
+  }
+
+  Bomb.detonation_time = null;
+  Bomb.timer = null;
+
+  if (time != null && time != "") {
+    time = new Date(time);
+    Bomb.detonation_time = time;
+    Bomb.timer = setInterval(Bomb.on_timer_tick, 1000);
+  }
+  Bomb.update_timer_display();
+}
+
+Bomb.format_message = function(message) {
+  var groups = [];
+  var lines = message.split(/\n/);
+  var temp = $('<div />');
+  for (var i = 0; i < lines.length; i++) {
+    groups.push(temp.text(lines[i]).html());
+  }
+  return groups.join("<br />");
 };
 
 Bomb.get_code_field = function() {
@@ -59,6 +92,16 @@ Bomb.get_state_from_server = function() {
 Bomb.handle_server_response = function(result) {
   Bomb.update_message(result.message);
   Bomb.update_state(result.state);
+  Bomb.configure_timer(result.detonation_time);
+};
+
+Bomb.on_timer_tick = function() {
+  Bomb.update_timer_display();
+  if (Bomb.detonation_time >= Date.now()) {
+    Bomb.configure_timer(null);
+    Bomb.update_timer_display();
+    Bomb.get_state_from_server();
+  }
 };
 
 Bomb.on_server_error = function(request, status_message, error) {
@@ -103,14 +146,30 @@ Bomb.update_code_field = function(new_value) {
 };
 
 Bomb.update_message = function(message) {
-  $('.message').text(message);
+  $('.message').html(Bomb.format_message(message));
 };
 
 Bomb.update_state = function(state) {
   $('.activation_status').text(state.toUpperCase());
+  $('.activation_status').attr('data-state', state);
   if (state == "exploded") {
     window.location.assign('/explosion');
   }
+};
+
+Bomb.update_timer_display = function() {
+  var time = "";
+  if (Bomb.detonation_time != null) {
+    delay = Bomb.detonation_time - Date.now();
+    total_seconds = Math.floor(delay / 1000);
+    hours = Math.floor(total_seconds / 3600);
+    minutes = Math.floor(total_seconds / 60) % 60;
+    seconds = total_seconds % 60;
+    time = leading_zeros(hours, 2) + ":" 
+         + leading_zeros(minutes, 2) + ":" 
+         + leading_zeros(seconds, 2);
+  }
+  $('.timer').text(time);
 };
 
 $(function() {

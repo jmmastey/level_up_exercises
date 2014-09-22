@@ -67,17 +67,38 @@ body {
   text-transform: uppercase;
 }
 /* line 63, bomb.scss */
+.display > div {
+  height: 1.5em;
+}
+/* line 68, bomb.scss */
+.display .activation_status[data-state="inactive"] {
+  color: green;
+}
+/* line 71, bomb.scss */
+.display .activation_status[data-state="active"] {
+  color: red;
+}
+/* line 74, bomb.scss */
+.display .activation_status[data-state="activating"] {
+  color: orange;
+}
+/* line 77, bomb.scss */
+.display .activation_status[data-state="disabled"] {
+  color: #eee;
+}
+/* line 82, bomb.scss */
 .display .timer {
-  font-size: 1.2em;
+  color: red;
+  font-size: 1.4em;
 }
 
-/* line 68, bomb.scss */
+/* line 88, bomb.scss */
 .input {
   float: right;
   padding: 0px;
 }
 
-/* line 73, bomb.scss */
+/* line 93, bomb.scss */
 .code-display {
   background-color: #000;
   border: thick inset #bbb;
@@ -91,37 +112,37 @@ body {
   vertical-align: middle;
 }
 
-/* line 86, bomb.scss */
+/* line 106, bomb.scss */
 .keypad {
   border: thick inset #bbb;
 }
-/* line 89, bomb.scss */
+/* line 109, bomb.scss */
 .keypad .keypad-row {
   margin: 0;
   width: 100%;
 }
-/* line 94, bomb.scss */
+/* line 114, bomb.scss */
 .keypad button {
   font-size: 20px;
   margin: 1px;
   width: 32%;
 }
-/* line 100, bomb.scss */
+/* line 120, bomb.scss */
 .keypad #btn-backspace {
   background-color: #faa;
 }
-/* line 104, bomb.scss */
+/* line 124, bomb.scss */
 .keypad #btn-enter {
   background-color: #cfc;
 }
 
-/* line 109, bomb.scss */
+/* line 129, bomb.scss */
 .wiring {
   margin: 0;
   padding: 0;
 }
 
-/* line 114, bomb.scss */
+/* line 134, bomb.scss */
 .wire {
   border: thin solid black;
   border-bottom: none;
@@ -132,7 +153,7 @@ body {
   width: 3px;
 }
 
-/* line 124, bomb.scss */
+/* line 144, bomb.scss */
 .wire.cut {
   visibility: hidden;
 }

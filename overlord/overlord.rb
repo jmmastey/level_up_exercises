@@ -14,6 +14,9 @@ class Overlord < Sinatra::Base
 
   set :haml, format: :html5
   set :sessions, true
+  set :raise_errors, true
+  set :dump_errors, false
+  set :show_exceptions, true
 
   get "/" do
     redirect("/boot")
@@ -103,9 +106,18 @@ class Overlord < Sinatra::Base
 
   def get_json_response
     bomb_controller = current_bomb_controller
+    bomb_controller.update_state
+    detonation_time = get_detonation_time_from_timer(bomb_controller.timer)
+
     { message: bomb_controller.message,
       state: bomb_controller.state,
-      timer: bomb_controller.timer }.to_json
+      detonation_time: detonation_time
+    }.to_json
+  end
+
+  def get_detonation_time_from_timer(timer)
+    return nil if timer.nil?
+    timer.end_time
   end
 
   def log_error(error)

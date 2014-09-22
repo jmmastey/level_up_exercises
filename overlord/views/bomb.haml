@@ -6,11 +6,11 @@
     .bomb
       .wiring
         - @bomb_controller.wire_box.wires.each do |wire|
-          .wire{style:"background-color: #{wire.color}", title: "Snip wire", data: {color: wire.color, type: wire.type}}
+          .wire{class: (wire.cut? ? "cut" : ""), style:"background-color: #{wire.color}", title: "Snip wire", data: {color: wire.color, type: wire.type}}
       .bomb-panel
         .display
-          .activation_status= @bomb_controller.state.upcase
-          .timer
+          .activation_status{data: {state: @bomb_controller.state}}= @bomb_controller.state.upcase
+          .timer &nbsp;
           .message= @bomb_controller.message.upcase
         .input
           .code-display
@@ -31,4 +31,5 @@
               %button#btn-backspace &lt;&lt;
         .clr
 %script{src: "/scripts/jquery-2.1.1.min.js" }
+%script{src: "/scripts/helpers.js" }
 %script{src: "/scripts/bomb.js" }

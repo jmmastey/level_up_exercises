@@ -28,6 +28,7 @@ class BombController
   def disable_bomb
     @state = :disabled
     @message = "Bomb disabled"
+    @timer = nil
   end
 
   def enter_code(code)
@@ -67,6 +68,7 @@ class BombController
   def deactivate
     @state = :inactive
     @message = "Deactivated bomb"
+    @timer = nil
     update_state
   end
 
@@ -143,6 +145,6 @@ class BombController
     update_state
     return unless @state == :inactive
     @state = :activating
-    @message = "Set Timer or Enter to stop"
+    @message = "Set Timer (mmss)\n or Enter to stop"
   end
 end

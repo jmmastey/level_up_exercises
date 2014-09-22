@@ -13,7 +13,8 @@ Feature: Wire-cutting
 
   @javascript
   Scenario: Cutting an exploding wire
-    Given the bomb is active
+    Given the code 1234 was entered
+    And the time 0400 was entered
     When I cut an exploding wire
     Then the bomb should explode
 

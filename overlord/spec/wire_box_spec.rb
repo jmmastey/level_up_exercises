@@ -1,4 +1,5 @@
 require "rspec/collection_matchers"
+require_relative "../lib/bomb"
 require_relative "../lib/wire"
 require_relative "../lib/wire_box"
 require_relative "_helpers"
@@ -30,6 +31,20 @@ describe WireBox do
 
   it "initializes in the disabled state" do
     expect(wireless_box.state).to eq(:disabled)
+  end
+
+  describe "#check_booby_traps" do
+    let (:device) { Bomb.new }
+
+    it "returns the state of the wire box" do
+      expect(wirebox.state).to eq(wirebox.check_booby_traps)
+    end
+
+    it "explodes the bomb if an exploding wire was cut" do
+      complex_wirebox.device = device;
+      complex_wirebox.exploding_wires.first.snip
+      expect(complex_wirebox.check_booby_traps).to eq(:exploded)
+    end
   end
 
   describe "#disabled?" do
@@ -100,7 +115,7 @@ describe WireBox do
   end
 
   describe "#send_to_device" do
-    let (:device) { double("bomb", exploded?: false, intact?: true) }
+    let (:device) { Bomb.new }
 
     it "sends a message to its device and returns the result" do
       wirebox.device = device

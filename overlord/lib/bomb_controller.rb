@@ -44,8 +44,12 @@ class BombController
 
   def update_state
     unless @state == :disabled || @state == :exploded
+      @wire_box.check_booby_traps if @state == :active
       disable_bomb if @wire_box.disabled?
-      @state = :exploded if @wire_box.exploded?
+      if @wire_box.exploded?
+        @state = :exploded
+        @message = "Exploded"
+      end
     end
     @state
   end

@@ -1,6 +1,7 @@
 require_relative "wire"
 
 class DisabledError < RuntimeError; end;
+class ExplodedError < RuntimeError; end;
 class NoDeviceError < RuntimeError; end;
 
 class WireBox
@@ -15,11 +16,8 @@ class WireBox
     end
   end
 
-  def check_state
-    state = self.state
-    should_explode = (state == :exploding) && device && device.intact?
+  def check_booby_traps
     device.explode if should_explode
-
     state
   end
 
@@ -54,6 +52,7 @@ class WireBox
 
   def send_to_device(method, *args)
     raise_disabled_error if disabled?
+    raise_exploded_error if exploded?
     raise_no_device_error unless device
     device.send(method, *args)
   end
@@ -71,7 +70,15 @@ class WireBox
     raise DisabledError, "Cannot send a message through a disabled wire box."
   end
 
+  def raise_exploded_error
+    raise ExplodedError, "Cannot send a message through an exploded box."
+  end
+
   def raise_no_device_error
     raise NoDeviceError, "Wire box is not connected to a device."
+  end
+
+  def should_explode
+    (state == :exploding) && device && device.intact?
   end
 end

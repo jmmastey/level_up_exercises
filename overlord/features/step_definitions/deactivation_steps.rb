@@ -3,12 +3,6 @@ Given(/^the bomb is booted with default codes$/) do
   click_on("Boot")
 end
 
-Given(/^the bomb is active$/) do
-  enter_code_on_keypad(1234)
-  enter_code_on_keypad(0400)
-  expect(find(".activation_status")).to have_content("ACTIVE")
-end
-
 Then(/^the bomb should be inactive$/) do
   expect(find(".activation_status")).to have_content("INACTIVE")
 end

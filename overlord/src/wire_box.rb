@@ -14,4 +14,8 @@ class WireBox
   def triggered?
     @triggered
   end
+
+  def colors
+    @wire_colors
+  end
 end

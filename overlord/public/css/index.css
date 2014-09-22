@@ -14,3 +14,18 @@
   width: 33%;
 }
 
+#wirebox .wire-red:hover {
+  background-color: red;
+}
+#wirebox .wire-green:hover {
+  background-color: green;
+}
+#wirebox .wire-blue:hover {
+  background-color: blue;
+}
+#wirebox .wire-yellow:hover {
+  background-color: yellow;
+}
+#wirebox .wire-orange:hover {
+  background-color: orange;
+}

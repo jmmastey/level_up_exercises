@@ -30,5 +30,15 @@ describe WireBox do
     it "should raise error if color not in box" do
       expect { box.snip(:purple) }.to raise_error
     end
+
+    it "should have all colors available" do
+      expect(box.colors.size).to eq(4)
+    end
+
+    it "should contain all the original colors" do
+      colors.each do |color|
+        expect(box.colors).to include(color)
+      end
+    end
   end
 end

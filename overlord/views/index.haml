@@ -18,6 +18,6 @@
         .col-md-4
           = haml :codebox, :locals => {:codebox => @bomb.devices[:codebox]}
         .col-md-4
-          = haml :wirebox, :wirebox => @bomb.devices[:wirebox]
+          = haml :wirebox, :locals => {:wirebox => @bomb.devices[:wirebox]}
         .col-md-4
-          = haml :timer, :timer => @bomb.devices[:timer]
+          = haml :timer, :locals => {:timer => @bomb.devices[:timer]}

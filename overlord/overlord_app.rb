@@ -12,7 +12,7 @@ require_relative "src/bomb_code_box"
 enable :sessions
 
 class Overlord < Sinatra::Application
-  WIREBOX_COLORS = [:red, :green, :blue, :yellow]
+  WIREBOX_COLORS = [:red, :green, :blue, :yellow, :orange]
   set :haml, format: :html5
   set :sessions, true
 

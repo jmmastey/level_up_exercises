@@ -1,2 +1,3 @@
-!!! XML
-!!!
+%div#wirebox
+  - wirebox.colors.each do |color|
+    .wire{class: "wire-#{color}"} #{color}

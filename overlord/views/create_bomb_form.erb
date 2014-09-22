@@ -1,0 +1,30 @@
+<html>
+  <title>Overlords Solution</title>
+
+  <body bgcolor="#000033">
+	<center>
+	  <br/>
+	  <em style="color: green; font-size: 2em;">Overlords Bomb Factory</em>
+	  <br/>
+	  <br/>
+	  <br/>
+	  <em style="color: blue;  font-size: 1.5em;">Use form to create a bomb</em>
+	  <br/>
+	  <em style="color: blue;  font-size: 1.5em;">All codes must be whole numbers</em>
+	  <br/>
+	
+	  <form action="/overlords/create_bomb" method=POST>
+		<br/>
+		<input type="text" name="activation_code" value="1234">
+		<em style="color: green; font-size: 1.0em;"> <= Activation Code</em>
+
+	    <br/>
+		<input type="text" name="deactivation_code" value="0000">
+		<em style="color: green; font-size: 1.0em;"> <= Deactivation Code</em>
+
+	    <br/>
+	    <button type="submit">Create!</button> 
+	  </form>
+	</center>
+  </body>
+</html>

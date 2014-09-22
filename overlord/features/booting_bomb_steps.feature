@@ -18,7 +18,7 @@ Feature: Booting the Bomb
     Then I should see a status of "deactivated"
     And there should be a/an "code" field
 
-  # ??? How do I test this....
+  #??? How do I test this....
   Scenario: Booting w/ invalid codes
     When I enter custom codes 12345 321
     And I press "Boot"

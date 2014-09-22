@@ -8,7 +8,7 @@ class Bomb
   BOMB_JUST_SNIPPED_MSG     = 'Bomb wires snipped and is now defunct'
   BOMB_ALREADY_EXPLODED_MSG = 'Sorry, bomb has already exploded.'
   BOMB_ALREADY_SNIPPED_MSG  = 'Sorry, bomb wires have been snipped.'
-  
+
   CODE_TOO_MANY_DEACT_MSG = 'Bomb exploded - too many attempts!'
   CODE_WRONG_VALUE_MSG    = 'Wrong code'
   CODE_NOT_AN_INT_MSG     = 'Code must be an integer'
@@ -25,7 +25,6 @@ class Bomb
   # Default Codes
   DEFAULT_ACTIVATION_CODE   = '1234'
   DEFAULT_DEACTIVATION_CODE = '0000'
-
 
   def initialize(activation_code, deactivation_code)
     set_activation_code(activation_code)
@@ -87,6 +86,7 @@ class Bomb
   end
 
   private
+
   def integrity_status
     return INTEGRITY_EXPLODED if exploded?
     return INTEGRITY_SNIPPED   if snipped?
@@ -125,7 +125,7 @@ class Bomb
   end
 
   def successful_activation
-    @active = true 
+    @active = true
     BOMB_ACTIVATED_MSG
   end
 

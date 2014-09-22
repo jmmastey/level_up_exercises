@@ -9,7 +9,7 @@ describe WireBox do
 
   context "upon creation with safe green wire" do
     let(:box) do
-      WireBox.new(wire_colors: colors, safe_wire: :green)
+      WireBox.new(wire_colors: colors, safe_color: :green)
     end
 
     it "should not explode when green is clipped" do
@@ -32,12 +32,13 @@ describe WireBox do
     end
 
     it "should have all colors available" do
-      expect(box.colors.size).to eq(4)
+      expect(box.wires.size).to eq(4)
     end
 
     it "should contain all the original colors" do
+      wire_colors = box.wires.map { |wire| wire.color }
       colors.each do |color|
-        expect(box.colors).to include(color)
+        expect(wire_colors).to include(color)
       end
     end
   end

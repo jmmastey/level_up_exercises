@@ -14,18 +14,64 @@
   width: 33%;
 }
 
+#wirebox {
+  background-color: grey;
+  border-radius: 25px;
+}
+
+#wirebox .wires {
+  padding: 0;
+  margin: 10px 0;
+}
+
+#wirebox .wire {
+  border-radius: 10px;
+}
+
+#wirebox .big-wire-left {
+  border-radius: 10px 0 0 10px;
+}
+#wirebox .big-wire-right {
+  border-radius: 0 10px 10px 0;
+}
+
+#wirebox .big-wire {
+  padding: 15px 0;
+  margin: 20px 0;
+  background-color:black;
+}
+
 #wirebox .wire-red:hover {
-  background-color: red;
+  background-color: #CC0000;
+}
+#wirebox .wire-red {
+  background-color: #E60000;
+}
+
+#wirebox .wire-green {
+  background-color: #00CC00;
 }
 #wirebox .wire-green:hover {
-  background-color: green;
+  background-color: #00B800;
+}
+
+#wirebox .wire-blue {
+  background-color: #0066FF;
 }
 #wirebox .wire-blue:hover {
-  background-color: blue;
+  background-color: #005CE6;
+}
+
+#wirebox .wire-yellow {
+  background-color: #FFFF00;
 }
 #wirebox .wire-yellow:hover {
-  background-color: yellow;
+  background-color: #E6E600;
+}
+
+#wirebox .wire-orange {
+  background-color: #FF6600;
 }
 #wirebox .wire-orange:hover {
-  background-color: orange;
+  background-color: #E65C00;
 }

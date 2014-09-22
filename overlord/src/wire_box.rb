@@ -1,21 +1,25 @@
+require_relative "wire"
 
 class WireBox
   def initialize(params)
-    @wire_colors = params[:wire_colors]
-    @safe_wire = params[:safe_wire]
+    @wires = params[:wire_colors].map { |color| Wire.new(color) }
+    @safe_wire = @wires.find { |wire| wire.color ==  params[:safe_color] }
+    raise(RuntimeError, "there is no wire which matches the safe color") if @safe_wire.nil?
     @triggered = false
   end
 
   def snip(color)
-    raise(RuntimeError, "you must snip a wire a color #{@wire_colors}") unless @wire_colors.include?(color)
-    @triggered = true unless color == @safe_wire
+    wire = @wires.find { |w| w.color == color }
+    raise(RuntimeError, "there is no wire of color '#{color}'") if wire.nil?
+    wire.snip
+    @triggered = true unless wire == @safe_wire
   end
 
   def triggered?
     @triggered
   end
 
-  def colors
-    @wire_colors
+  def wires
+    @wires
   end
 end

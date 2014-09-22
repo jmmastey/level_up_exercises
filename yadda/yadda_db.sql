@@ -71,3 +71,159 @@ CREATE UNIQUE INDEX beers_breweries_styles_name ON beers(brewery_id, beer_style_
 CREATE UNIQUE INDEX ratings_user_and_beer_id ON ratings(user_id, beer_id);
 CREATE UNIQUE INDEX users_email ON users(email);
 
+-- Begin a few insertions
+
+INSERT INTO breweries (
+    name,
+    year_founded,
+    address,
+    city,
+    state,
+    description,
+    created_at,
+    updated_at,
+    created_by,
+    updated_by
+)
+VALUES(
+    'Goose Island Brewery',
+    '1988',
+    '1800 W Fulton st',
+    'Chicago',
+    'IL',
+    'Makers of 312 and Matilda',
+    now(),
+    now(),
+    current_user,
+    current_user
+);
+
+INSERT INTO beer_styles (
+    style,
+    created_at,
+    updated_at,
+    created_by,
+    updated_by
+)
+VALUES(
+    'American Pale Wheat Ale',
+    now(),
+    now(),
+    current_user,
+    current_user
+);
+
+INSERT INTO beers(
+    brewery_id,
+    beer_style_id,
+    name,
+    description,
+    created_at,
+    updated_at,
+    created_by,
+    updated_by
+)
+VALUES(
+    1,
+    1,
+    '312 Urban Wheat',
+    'Hazy staw color, light orange hop aroma',
+    now(),
+    now(),
+    current_user,
+    current_user
+);
+
+INSERT INTO users (
+    first_name,
+    last_name,
+    email,
+    birth_date,
+    blood_type,
+    created_at,
+    updated_at,
+    created_by,
+    updated_by
+)
+VALUES(
+    'Franco',
+    'Reyes',
+    'freyes1988@gmail.com',
+    '1988-04-15',
+    'O-',
+    now(),
+    now(),
+    current_user,
+    current_user
+);
+
+INSERT INTO ratings (
+    user_id,
+    beer_id,
+    rating,
+    comment,
+    created_at,
+    updated_at,
+    created_by,
+    updated_by
+)
+VALUES(
+    1,
+    1,
+    1,
+    'This beer is like awesome, man!',
+    now(),
+    now(),
+    current_user,
+    current_user
+);
+
+-- Like, made an error in my beer rating man
+UPDATE ratings
+SET rating = 5, updated_at = now(), updated_by = current_user
+WHERE user_id = 1 AND beer_id = 1;
+
+INSERT INTO beers(
+    brewery_id,
+    beer_style_id,
+    name,
+    description,
+    created_at,
+    updated_at,
+    created_by,
+    updated_by
+)
+VALUES(
+    1,
+    1,
+    '312 Pale Ale',
+    'Hazy staw color, light orange hop aroma',
+    now(),
+    now(),
+    current_user,
+    current_user
+);
+
+INSERT INTO ratings (
+    user_id,
+    beer_id,
+    rating,
+    comment,
+    created_at,
+    updated_at,
+    created_by,
+    updated_by
+)
+VALUES(
+    1,
+    2,
+    4,
+    'This beer is also awesome, man! But not as awesome as the other beer',
+    now(),
+    now(),
+    current_user,
+    current_user
+);
+
+-- Was like told not to post ratings on beer. Bummer.
+DELETE FROM ratings WHERE user_id = 1 AND beer_id = 2;

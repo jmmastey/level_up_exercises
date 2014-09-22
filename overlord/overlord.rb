@@ -10,20 +10,19 @@ get '/' do
 end
 
 post '/set-codes' do
-  session[:bomb] = Bomb.new(activation_code: params[:activation_code].to_i,
-                            deactivation_code: params[:deactivation_code].to_i)
+  session[:bomb] = Bomb.new(params[:activation_code], params[:deactivation_code])
   @bomb = session[:bomb]
   erb :toggle_bomb
 end
 
 post '/activate' do
-  session[:bomb].activate(params[:code].to_i)
+  session[:bomb].activate(params[:code])
   @bomb = session[:bomb]
   erb :toggle_bomb
 end
 
 post '/deactivate' do
-  session[:bomb].deactivate(params[:code].to_i)
+  session[:bomb].deactivate(params[:code])
   @bomb = session[:bomb]
   erb :toggle_bomb
 end

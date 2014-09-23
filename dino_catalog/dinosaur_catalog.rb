@@ -11,13 +11,8 @@ class Dinosaur
     end
   end
 
-  def filter_result(options)
-    @result_dinosaurs.each do |dino|
 
-    end
-  end
-
-  def get_name()
+  def get_name
     dinosaur_names = []
     @result_dinosaurs.each do |dinosaur|
       dinosaur_names << dinosaur["NAME"]
@@ -36,19 +31,19 @@ class Dinosaur
         end
         if options["compare"] == "greater"
           if dinosaur[key].to_i > val.to_i
-            @result_dinosaurs << dinosaur unless @result_dinosaurs.include?dinosaur['NAME']
+            @result_dinosaurs << dinosaur unless @result_dinosaurs.include? dinosaur['NAME']
           end
         elsif options["compare"] == "lesser"
           if dinosaur[key].to_i < val.to_i
-            @result_dinosaurs << dinosaur unless @result_dinosaurs.include?dinosaur['NAME']
+            @result_dinosaurs << dinosaur unless @result_dinosaurs.include? dinosaur['NAME']
           end
         else
           if val.kind_of?(Array)
             if val.include? dinosaur[key].downcase
-              @result_dinosaurs << dinosaur unless @result_dinosaurs.include?dinosaur['NAME']
+              @result_dinosaurs << dinosaur unless @result_dinosaurs.include? dinosaur['NAME']
             end
           elsif dinosaur[key].downcase == val
-            @result_dinosaurs << dinosaur unless @result_dinosaurs.include?dinosaur['NAME']
+            @result_dinosaurs << dinosaur unless @result_dinosaurs.include? dinosaur['NAME']
           end
         end
       end
@@ -60,7 +55,7 @@ class Dinosaur
     @dinosaurs.each do |dinosaur|
       if dinosaur["NAME"].downcase == name.downcase
         dinosaur.each do |key, value|
-          puts key+" => "+value unless value == nil
+          puts key + " => " + value unless value == nil
         end
       end
     end
@@ -84,7 +79,7 @@ end
 options = Hash.new
 options1 = Hash.new
 options2 = Hash.new
-options4 = Hash.new
+
 options['WALKING'] = "biped"
 options['compare'] = "equal"
 dinosaur = Dinosaur.new

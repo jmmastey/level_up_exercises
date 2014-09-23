@@ -67,17 +67,13 @@ Feature: Bomb Activation and Deactivation
 
   # Bomb Deactivation With Wrong Codes
   Scenario: Deactive with wrong code three times
-    Given I create a bomb with codes 9854 and 0941
-	When I activate it with code 9854
-	And  I deactivate it with code 1111
-	And  I deactivate it with code 1111
-	And  I deactivate it with code 1111
+    Given I activate a bomb
+	When I attempt unsuccessfully to deactivate it 3 times
 	Then I should see it exploded
 
   Scenario: Deactive with wrong code two times
-    Given I create a bomb with codes 9854 and 0941
-	When I deactivate it with code 1111
-	And  I deactivate it with code 1111
+    Given I activate a bomb
+    When I attempt unsuccessfully to deactivate it 2 times
 	Then I should see it not exploded
 
 

@@ -13,6 +13,17 @@ Given /an activated bomb with default codes/ do
   @bomb.activate('1234')
 end
 
+Given /I activate a bomb/ do
+  @bomb = Bomb.new
+  @bomb.activate('1234')
+end
+
+When /I attempt unsuccessfully to deactivate it (\d+) times/ do |attempts|
+  @bomb = Bomb.new
+  @bomb.activate('1234')
+  attempts.to_i.times { @bomb.deactivate('1111') }
+end
+
 When /I activate it with code ([^\s]+)/ do |code|
   @bomb.activate(code)
 end

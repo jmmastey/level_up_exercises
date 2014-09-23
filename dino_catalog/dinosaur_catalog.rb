@@ -90,12 +90,6 @@ options['compare'] = "equal"
 dinosaur = Dinosaur.new
 
 dinosaur1 = Dinosaur.new
-#puts "----"
-#dinosaur.get_description("Albertonykus")
-#puts "----"
-#result = dinosaur.search_dinosaur(options)
-
-#p result.result_dinosaurs
 
 options1['DIET'] = ['carnivore', 'insectivore']
 options1['compare'] = "equal"
@@ -109,9 +103,3 @@ p result.get_name.inspect
 
 result = dinosaur1.search_dinosaur(options2)
 p result.get_name.inspect
-#options4['PERIOD'] = "permian"
-#options4['compare']= "equal"
-
-#result = dinosaur.search_dinosaur(options4)
-#p result.result_dinosaurs.inspect
-#p dinosaur.as_json

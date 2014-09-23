@@ -31,5 +31,5 @@ Then(/^there should be a\/an "(.*?)" field$/) do |name|
 end
 
 Then(/^I should stay on the page \(not be able to press boot, etc\.\)$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).not_to have_content "Activate"
 end

@@ -12,8 +12,10 @@ end
 
 When(/^I activate it with (\d+)$/) do |code|
   fill_in("code", with: code)
+  click_button("Activate")
 end
 
 When(/^I deactivate it with (\d+)$/) do |code|
   fill_in("code", with: code)
+  click_button("Deactivate")
 end

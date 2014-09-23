@@ -119,8 +119,6 @@ class Overlord < Sinatra::Base
     time_remaining = nil
     time_remaining = (detonation_time - Time.now) if detonation_time
 
-    # binding.pry
-
     { error: error,
       message: bomb_controller.message,
       state: bomb_controller.state,

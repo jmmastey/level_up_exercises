@@ -39,9 +39,10 @@ post '/overlords/action' do
 end
 
 def create_bomb(params)
+  respond = Respond.new("responses.json")
   activation_code = params[:activation_code] || ""
   deactivation_code = params[:deactivation_code] || ""
-  Bomb.new(activation_code, deactivation_code)
+  Bomb.new(respond, activation_code, deactivation_code)
 end
 
 private

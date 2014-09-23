@@ -130,12 +130,12 @@ def click_snip_wires
 end
 
 def set_keypad_code(code)
-  field = page.find("input[@id='keypad_code']", :visible => false)
+  field = page.find("input[@id='keypad_code']")
   field.set("#{code}")
 end
 
 def set_keypad_action(value)
-  field = page.find("input[@id='keypad_action']", :visible => false)
+  field = page.find("input[@id='keypad_action']")
   field.set(value)
 end
 

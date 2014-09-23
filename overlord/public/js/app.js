@@ -30,6 +30,9 @@ timer = {
   "time": 0,
   "update_time" : function(time) {
     this.time = time;
+    if (time < 0) {
+      window.location.reload();
+    }
     this.update_dom();
   },
   "formatted_time" : function() {
@@ -39,6 +42,11 @@ timer = {
   },
   "update_dom" : function() {
     $('#timer-output').val(this.formatted_time());
+  },
+  "start" : function() {
+    setInterval(function() {
+      timer.update_time(timer.time - 1)
+    }, 1000);
   }
 }
 
@@ -86,4 +94,8 @@ window.onload = function() {
 
   var time_left = $('#timer-time').val();
   timer.update_time(time_left);
+  var active_state = $('#codebox table caption').attr('data-value');
+  if (active_state === "active") {
+    timer.start();
+  }
 }

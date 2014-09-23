@@ -31,10 +31,13 @@ class Overlord < Sinatra::Application
   get '/enter/:code' do
     @bomb = session[:bomb]
     codebox = @bomb.devices[:codebox]
+    timer = @bomb.devices[:timer]
     if codebox.active?
       codebox.deactivate(params[:code])
+      timer.stop unless codebox.active?
     else
       codebox.activate(params[:code])
+      timer.start
     end
     redirect to('/')
   end

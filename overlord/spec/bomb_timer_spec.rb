@@ -50,6 +50,7 @@ describe BombTimer do
       remaining = timer.seconds_remaining
       expect(timer.seconds_remaining).to eq(remaining)
       timer.start
+      sleep(1)
       expect(timer.seconds_remaining).not_to eq(remaining)
     end
 
@@ -81,7 +82,7 @@ describe BombTimer do
       expect(timer).to receive(:deadline)
         .and_return(now + 10.seconds).at_least(:once)
       timer.stop
-      expect(timer.seconds_remaining).to be_within(a_millisecond).of(10.seconds)
+      expect(timer.seconds_remaining).to be_within(a_millisecond).of(9.seconds)
       expect(timer).not_to be_triggered
     end
   end

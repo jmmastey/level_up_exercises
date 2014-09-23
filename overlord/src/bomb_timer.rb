@@ -35,9 +35,9 @@ class BombTimer
 
   def seconds_remaining
     if started?
-      Time.now - deadline
+      (deadline - Time.now).floor
     else
-      @seconds_remaining
+      @seconds_remaining.floor
     end
   end
 

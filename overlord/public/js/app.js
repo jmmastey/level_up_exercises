@@ -22,7 +22,7 @@ codebox = {
      this.update_dom();
    },
    "enter" : function() {
-     // add code to send ajax
+     window.location = "/enter/" + this.formatted_code();
    }
 }
 
@@ -39,6 +39,12 @@ timer = {
   },
   "update_dom" : function() {
     $('#timer-output').val(this.formatted_time());
+  }
+}
+
+wirebox = {
+  "snip" : function(color) {
+    window.location = "/snip/" + color;
   }
 }
 
@@ -71,6 +77,11 @@ window.onload = function() {
 
   $('#codebox-enter').click(function(e) {
     codebox.enter();
+  });
+
+  $('.wire').click(function(e) {
+    var color = e.target.getAttribute('data-value');
+    wirebox.snip(color);
   });
 
   var time_left = $('#timer-time').val();

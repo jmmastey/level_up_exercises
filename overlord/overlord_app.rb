@@ -17,9 +17,31 @@ class Overlord < Sinatra::Application
   set :sessions, true
 
   get '/' do
-    @bomb = new_bomb
+    @bomb = session[:bomb] || new_bomb
     session[:bomb] = @bomb
     haml(:index)
+  end
+
+  get '/snip/:color' do
+    @bomb = session[:bomb]
+    @bomb.devices[:wirebox].snip(params[:color].to_sym)
+    redirect to('/')
+  end
+
+  get '/enter/:code' do
+    @bomb = session[:bomb]
+    codebox = @bomb.devices[:codebox]
+    if codebox.active?
+      codebox.deactivate(params[:code])
+    else
+      codebox.activate(params[:code])
+    end
+    redirect to('/')
+  end
+
+  get '/reset' do
+    session[:bomb] = new_bomb
+    redirect to('/')
   end
 
   def new_bomb

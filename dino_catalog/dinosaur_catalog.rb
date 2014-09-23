@@ -11,7 +11,6 @@ class Dinosaur
     end
   end
 
-
   def get_name
     dinosaur_names = []
     @result_dinosaurs.each do |dinosaur|
@@ -38,7 +37,7 @@ class Dinosaur
             @result_dinosaurs << dinosaur unless @result_dinosaurs.include? dinosaur['NAME']
           end
         else
-          if val.kind_of?(Array)
+          if val.is_a? (Array)
             if val.include? dinosaur[key].downcase
               @result_dinosaurs << dinosaur unless @result_dinosaurs.include? dinosaur['NAME']
             end

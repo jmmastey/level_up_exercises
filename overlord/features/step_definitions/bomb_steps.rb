@@ -64,7 +64,7 @@ Then /I should see it not exploded/ do
   expect(@bomb).not_to be_exploded
 end
 
-Then /I should see status "(.*?)" \+ "(.*?)" \+ (\d) deactivation attempts/ do |integrity, activation, attempts|
+Then /I should see status: Integrity => "(.*?)", Activation => "(.*?)", Attempts => (\d+)/ do |integrity, activation, attempts|
   expect(@bomb.to_h["integrity"]).to eq(integrity)
   expect(@bomb.to_h["activation"]).to eq(activation)
   expect(@bomb.to_h["deact_attempts"]).to eq(attempts.to_i)

@@ -49,13 +49,6 @@ body {
   margin: 0 5px;
 }
 
-.timer-display input {
-  display: inline;
-}
-
-#wirebox {
-}
-
 #wirebox .wires {
   margin: 10px 0;
   padding: 0;

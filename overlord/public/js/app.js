@@ -27,6 +27,7 @@ codebox = {
 }
 
 timer = {
+  "active" : false,
   "time": 0,
   "update_time" : function(time) {
     this.time = time;
@@ -43,10 +44,26 @@ timer = {
   "update_dom" : function() {
     $('#timer-output').val(this.formatted_time());
   },
+  "increment" : function() {
+    if (!this.active) {
+      this.update_time(this.time + 1);
+    }
+  },
+  "decrement" : function() {
+    if (!this.active) {
+      this.update_time(this.time - 1);
+    }
+  },
   "start" : function() {
+    this.active = true;
     setInterval(function() {
       timer.update_time(timer.time - 1)
     }, 1000);
+  },
+  "reset" : function() {
+    if (!this.active) {
+      this.update_time(30);
+    }
   }
 }
 
@@ -92,7 +109,14 @@ window.onload = function() {
     wirebox.snip(color);
   });
 
-  var time_left = $('#timer-time').val();
+  $('#timer-increment').click(function() {
+    timer.increment();
+  });
+  $('#timer-decrement').click(function() {
+    timer.decrement();
+  });
+
+  var time_left = parseInt($('#timer-time').val());
   timer.update_time(time_left);
   var active_state = $('#codebox table caption').attr('data-value');
   if (active_state === "active") {

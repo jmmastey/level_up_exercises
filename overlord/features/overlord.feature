@@ -19,10 +19,7 @@ Feature: Overlord Bomb-Status Page
     And the bomb should be activated
 
   Scenario: I visit the main page, create a bomb, activate it, deactivate it
-    When I select code 1234
-    And I press activate
-    And I select code 0000
-    And I press deactivate
+    When I activate it and deactivate it
     Then I should see the bomb status page
     And the bomb should be intact
     And the bomb should not be activated
@@ -30,10 +27,7 @@ Feature: Overlord Bomb-Status Page
     And the bomb message should be "Bomb deactivated"
 
   Scenario: I visit the main page, create a bomb, activate it, deactivate with wrong code
-    When I select code 1234
-    And I press activate
-    And I select code 0009
-    And I press deactivate
+    When I activate it and unsuccessfully deactivate it 1 time
     Then I should see the bomb status page
     And the bomb should be intact
     And the bomb should be activated
@@ -41,12 +35,7 @@ Feature: Overlord Bomb-Status Page
     And the bomb message should be "Wrong code"
 
   Scenario: I visit the main page, create a bomb, activate it, deactivate with wrong code twice
-    When I select code 1234
-    And I press activate
-    And I select code 0009
-    And I press deactivate
-    And I select code 0009
-    And I press deactivate
+    When I activate it and unsuccessfully deactivate it 2 times
     Then I should see the bomb status page
     And the bomb should be intact
     And the bomb should be activated
@@ -54,14 +43,7 @@ Feature: Overlord Bomb-Status Page
     And the bomb message should be "Wrong code"
 
   Scenario: I visit the main page, create a bomb, activate it, deactivate with wrong code thrice
-    When I select code 1234
-    And I press activate
-    And I select code 0009
-    And I press deactivate
-    And I select code 0009
-    And I press deactivate
-    And I select code 0009
-    And I press deactivate
+    When I activate it and unsuccessfully deactivate it 3 times
     Then I should see the bomb status page
     And the bomb should be exploded
     And the bomb should have defunct activation
@@ -69,7 +51,7 @@ Feature: Overlord Bomb-Status Page
     And the bomb message should be "Bomb exploded - too many attempts!"
 
   Scenario: I visit the main page, create a bomb, snip the wires
-    When I click on snip
+    When I click on snip 1 time
     Then I should see the bomb status page
     And the bomb should be snipped
     And the bomb should have defunct activation
@@ -77,8 +59,7 @@ Feature: Overlord Bomb-Status Page
     And the bomb message should be "Bomb wires snipped and is now defunct"
 
   Scenario: I visit the main page, create a bomb, snip the wires twice
-    When I click on snip
-    When I click on snip
+    When I click on snip 2 times
     Then I should see the bomb status page
     And the bomb should be snipped
     And the bomb should have defunct activation
@@ -86,20 +67,15 @@ Feature: Overlord Bomb-Status Page
     And the bomb message should be "Sorry, bomb wires have been snipped."
 
   Scenario: I visit the main page, create a bomb, activate it, deactivate it, activate it
-    When I select code 1234
-    And I press activate
-    And I select code 0000
-    And I press deactivate
-    And I select code 1234
-    And I press activate
+    When I activate it and deactivate it
+	And I activate it
     Then I should see the bomb status page
     And the bomb should be intact
     And the bomb should be activated
     And the deactivation attempts should be 0
 
-  Scenario: I visit the main page, create a bomb, activate it, deactivate it, activate it
-    When I select code 1234
-    And I press activate
+  Scenario: I visit the main page, create a bomb, activate it and detonate it
+    When I activate it
     And I detonate the bomb
     Then I should see the bomb status page
     And the bomb should be exploded

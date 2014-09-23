@@ -19,14 +19,41 @@ When /I press deactivate/ do
   click_deactivate_button()
 end
 
-When /I click on snip/ do
-  click_snip_wires()
+
+
+When /I click on snip (\d+) time/ do |snips|
+  snips.to_i.times { click_snip_wires() }
 end
 
 When /I detonate the bomb/ do
   detonate_bomb()
 end
 
+When /I activate it$/ do
+  set_keypad_code('1234')
+  click_activate_button()
+end
+
+When /I deactivate it$/ do
+  set_keypad_code('1234')
+  click_deactivate_button()
+end
+
+When /I activate it and deactivate it/ do
+  set_keypad_code("1234")
+  click_activate_button()
+  set_keypad_code("0000")
+  click_deactivate_button()
+end
+
+When /I activate it and unsuccessfully deactivate it (\d+) time/ do |attempts|
+  set_keypad_code("1234")
+  click_activate_button()
+  attempts.to_i.times do
+    set_keypad_code("1111")
+    click_deactivate_button()
+  end
+end
 
 
 Then /I should see the Create Bomb page/ do

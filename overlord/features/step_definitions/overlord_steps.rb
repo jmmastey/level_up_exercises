@@ -130,11 +130,13 @@ def click_snip_wires
 end
 
 def set_keypad_code(code)
-  find(:xpath, "//input[@id='keypad_code']").set "#{code}"
+  field = page.find("input[@id='keypad_code']", :visible => false)
+  field.set("#{code}")
 end
 
 def set_keypad_action(value)
-  find(:xpath, "//input[@id='keypad_action']").set value
+  field = page.find("input[@id='keypad_action']", :visible => false)
+  field.set(value)
 end
 
 def detonate_bomb

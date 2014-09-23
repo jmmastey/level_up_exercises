@@ -44,8 +44,7 @@
             return ("<%= activation %>"  == "Inactive");
         }
         
-        function draw_background()
-        {
+        function draw_background() {
             var canvas = document.getElementById("canvas");
             if (!canvas.getContext) { return; }
             var ctx=canvas.getContext("2d");
@@ -53,16 +52,16 @@
             ctx.fillStyle = '#110011';
             ctx.fillRect(0, 0, 600, 800);
             ctx.strokeStyle = '#333333';
-        	ctx.lineWidth = 1;
-        
-        	for (var i = 0; i <= 600; i += 50) {
+            ctx.lineWidth = 1;
+            
+            for (var i = 0; i <= 600; i += 50) {
                 ctx.beginPath();
                 ctx.moveTo(i, 0);
                 ctx.lineTo(i, 450);
                 ctx.stroke();
             }
-        
-        	for (var i = 0; i <= 400; i += 50) {
+            
+            for (var i = 0; i <= 400; i += 50) {
                 ctx.beginPath();
                 ctx.moveTo(0, i);
                 ctx.lineTo(800, i);
@@ -220,67 +219,67 @@
             }
             
             ctx.fillText(message, 300, 750);
-        
+            
             draw_keypad();
-        
+            
             // Activate Area
             ctx.fillStyle = '#111111';
             ctx.fillRect(300, 608, 200, 36);
             ctx.strokeStyle = '#999922';
             ctx.strokeRect(300, 608, 200, 36);
             ctx.fillStyle = '#00AA00';
-        	if (!is_intact() || !is_inactive()) {
-        		ctx.fillStyle = '#333333';
+            if (!is_intact() || !is_inactive()) {
+                ctx.fillStyle = '#333333';
             }
             ctx.fillText("ACTIVATE", 400, 634);
-        
-        	// Deactivate Area
+            
+            // Deactivate Area
             ctx.fillStyle = '#111111';
             ctx.fillRect(300, 655, 200, 36);
             ctx.strokeStyle = '#999922';
             ctx.strokeRect(300, 655, 200, 36);
             ctx.fillStyle = '#AA5500';
-        	if (!is_intact() || !is_active()) {
-        		ctx.fillStyle = '#333333';
+            if (!is_intact() || !is_active()) {
+                ctx.fillStyle = '#333333';
             }
             ctx.fillText("DEACTIVATE", 400, 681);
-        
-        	// Snip Area
+            
+            // Snip Area
             ctx.fillStyle = '#111111';
-        	ctx.beginPath();
+            ctx.beginPath();
             ctx.arc(545, 650, 32, 0.0, Math.PI * 2, false);
             ctx.fill();
-        
+            
             ctx.strokeStyle = '#222299';
-        	ctx.beginPath();
+            ctx.beginPath();
             ctx.arc(545, 650, 32, 0.0, Math.PI * 2, false);
             ctx.stroke();
-        
+            
             // Snip Area - Scissors
             ctx.strokeStyle = '#0055AA';
-        	if (!is_intact()) {
-        		ctx.strokeStyle = '#333333';
+            if (!is_intact()) {
+                ctx.strokeStyle = '#333333';
             }
             ctx.lineWidth = 5;
-        	ctx.beginPath();
-        	ctx.moveTo(533, 633);
+            ctx.beginPath();
+            ctx.moveTo(533, 633);
             ctx.lineTo(554, 663);
             ctx.stroke();
-        
-        	ctx.beginPath();
-        	ctx.moveTo(557, 633);
+            
+            ctx.beginPath();
+            ctx.moveTo(557, 633);
             ctx.lineTo(536, 663);
             ctx.stroke();
-        
+            
             ctx.lineWidth = 3;
-        	ctx.beginPath();
+            ctx.beginPath();
             ctx.arc(534, 666, 4, 0.0, Math.PI * 2, false);
             ctx.stroke();
-        
-        	ctx.beginPath();
+            
+            ctx.beginPath();
             ctx.arc(556, 666, 4, 0.0, Math.PI * 2, false);
             ctx.stroke();
-        
+            
             draw_code();
         }
         
@@ -288,11 +287,11 @@
             var canvas = document.getElementById("canvas");
             if (!canvas.getContext) { return; }
             var ctx=canvas.getContext("2d");
-        
-        	// Keypad
+            
+            // Keypad
             ctx.fillStyle = '#222200';
             ctx.fillRect(31, 605, 210, 90);
-        
+            
             ctx.font = "25px bold courier";
             ctx.textAlign="center";
             for (i = 0; i < 10; i++)
@@ -300,7 +299,7 @@
                 row = Math.floor(i / 5);
                 col = i % 5;
                 x =  40 + col * 40;
-        		y = 615 + row * 40;
+                y = 615 + row * 40;
                 ctx.fillStyle = '#440000';
                 ctx.fillRect(x, y, 32, 32);
                 ctx.strokeStyle = '#AA0000';
@@ -310,39 +309,34 @@
             }
         }
         
-        function detect_rect(x, y, loX, hiX, loY, hiY)
-        {
+        function detect_rect(x, y, loX, hiX, loY, hiY) {
             return ((loX < x) && (x < hiX) && (loY < y) && (y < hiY));
         }
         
-        function clicked_digit(x, y)
-        {
-        	if (is_detonated()) { return -1; }
-        	if (x < 40 || x > 222 || y < 615 || y > 687) {
-        		return -1;
+        function clicked_digit(x, y) {
+            if (is_detonated()) { return -1; }
+            if (x < 40 || x > 222 || y < 615 || y > 687) {
+                return -1;
             }
-        
+            
             row = Math.floor((y - 615) / 40);
-        	col = Math.floor((x -  40) / 40);
-        
+            col = Math.floor((x -  40) / 40);
+            
             return keys[5 * row + col];
         }
         
-        function clicked_activate(x, y)
-        {
-        	if (!is_intact() || !is_inactive()) { return false; }
+        function clicked_activate(x, y) {
+            if (!is_intact() || !is_inactive()) { return false; }
             return detect_rect(x, y, 300, 500, 608, 644);
         }
         
-        function clicked_deactivate(x, y)
-        {
-        	if (!is_intact() || !is_active()) { return false; }
+        function clicked_deactivate(x, y) {
+            if (!is_intact() || !is_active()) { return false; }
             return detect_rect(x, y, 300, 500, 655, 691);
         }
         
-        function clicked_snipped(x, y)
-        {
-        	if (!is_intact()) { return false; }
+        function clicked_snipped(x, y) {
+            if (!is_intact()) { return false; }
             return (Math.sqrt(Math.pow(x - 545, 2) + Math.pow(y - 650, 2)) < 32);
         }
         
@@ -350,10 +344,10 @@
             var canvas = document.getElementById("canvas");
             if (!canvas.getContext) { return; }
             var ctx=canvas.getContext("2d");
-        
+            
             var code = document.getElementById("keypad_code").value;
             while (code.length < 4) code += '-';
-        
+            
             ctx.fillStyle = '#070707';
             ctx.fillRect(32, 700, 50, 16);
             ctx.lineWidth = 1.0;
@@ -370,37 +364,37 @@
             var canvas = document.getElementById("canvas");
             if (!canvas.getContext) { return; }
             var ctx=canvas.getContext("2d");   
-        
+            
             angle = 4 * Math.atan(remaining);
-        
+            
             ctx.beginPath();
             ctx.fillStyle = '#220022';
             ctx.arc(300, 220, 50, 0, Math.PI*2, true);
             ctx.fill();
-        
+            
             ctx.beginPath();
             ctx.lineWidth = 3.0;
             ctx.fillStyle = '#220099';
             ctx.arc(300, 220, 50, 0, Math.PI * 2, true);
             ctx.stroke();
-        
+            
             ctx.beginPath();
             ctx.fillStyle = '#AAAA11';
             ctx.moveTo(300, 220);
             ctx.arc(300, 220, 40, 0 - Math.PI / 2, angle - Math.PI / 2, false);
             ctx.lineTo(300, 220);
             ctx.fill();
-        
+            
             if (is_active()) {
                 remaining -= 0.100;
                 document.getElementById("timer").value = remaining;
-        
+                
                 if (remaining <= 0) {
                     document.getElementById("keypad_action").value = 'detonate';
                     document.getElementById("keypad").submit();
                     return;
                 }
-        
+                
                 if (Math.random() < 0.60) {
                     shuffle_keys();
                 }
@@ -409,17 +403,16 @@
             }
         }
         
-        function add_listeners()
-        {
+        function add_listeners() {
             var canvas = document.getElementById("canvas");
             if (!canvas.getContext) { return; }
             var ctx=canvas.getContext("2d");
-        
+            
             canvas.addEventListener('click', function(event) {
                 var x = event.pageX - canvas.offsetLeft;
                 var y = event.pageY - canvas.offsetTop;
-        
-        		digit = clicked_digit(x, y);
+                
+                digit = clicked_digit(x, y);
                 if (digit >= 0) {
                     var code = document.getElementById("keypad_code").value;
                     if (code.length < 4) {
@@ -428,25 +421,25 @@
                     draw_code();
                     return;
                 }
-        
+                
                 if (clicked_activate(x, y)) {
                     document.getElementById("keypad_action").value = 'activate';
-        			document.getElementById("keypad").submit();
-        			return;
+                	document.getElementById("keypad").submit();
+                	return;
                 }
-        
+                
                 if (clicked_deactivate(x, y)) {
                     document.getElementById("keypad_action").value = 'deactivate';
-        			document.getElementById("keypad").submit();
-        			return;
+                	document.getElementById("keypad").submit();
+                	return;
                 }
-        
+                
                 if (clicked_snipped(x, y)) {
                     document.getElementById("keypad_action").value = 'snip';
-        			document.getElementById("keypad").submit();
-        			return;
+                	document.getElementById("keypad").submit();
+                	return;
                 }
-        
+                
             }, false);
         }
         
@@ -478,7 +471,7 @@
             {
                 draw_bomb_intact();
             }
-        
+            
             draw_timer();
         }
         // Detonated
@@ -497,7 +490,7 @@
                    "<%= bomb_msg %>");
         
         add_listeners();
-	  </script>
-	</center>
+      </script>
+    </center>
   </body>
 </html>

@@ -30,19 +30,23 @@ class Dinosaur
         end
         if options["compare"] == "greater"
           if dinosaur[key].to_i > val.to_i
-            @result_dinosaurs << dinosaur unless @result_dinosaurs.include? dinosaur['NAME']
+            @result_dinosaurs << dinosaur unless
+                                            @result_dinosaurs.include? dinosaur['NAME']
           end
         elsif options["compare"] == "lesser"
           if dinosaur[key].to_i < val.to_i
-            @result_dinosaurs << dinosaur unless @result_dinosaurs.include? dinosaur['NAME']
+            @result_dinosaurs << dinosaur unless
+                                            @result_dinosaurs.include? dinosaur['NAME']
           end
         else
           if val.is_a? (Array)
             if val.include? dinosaur[key].downcase
-              @result_dinosaurs << dinosaur unless @result_dinosaurs.include? dinosaur['NAME']
+              @result_dinosaurs << dinosaur unless
+                                              @result_dinosaurs.include? dinosaur['NAME']
             end
           elsif dinosaur[key].downcase == val
-            @result_dinosaurs << dinosaur unless @result_dinosaurs.include? dinosaur['NAME']
+            @result_dinosaurs << dinosaur unless
+                                            @result_dinosaurs.include? dinosaur['NAME']
           end
         end
       end

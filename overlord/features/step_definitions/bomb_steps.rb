@@ -1,13 +1,17 @@
 require_relative '../../bomb'
 
 Given /I create a bomb with no code/ do
-  @bomb = Bomb.new()
+  @bomb = Bomb.new
 end
 
-Given /I create a bomb with codes ([^\s]+) ([^\s]+)/ do |act_code, deact_code|
+Given /I create a bomb with codes ([^\s]+) and ([^\s]+)/ do |act_code, deact_code|
   @bomb = Bomb.new(act_code, deact_code)
 end
 
+Given /an activated bomb with default codes/ do
+  @bomb = Bomb.new
+  @bomb.activate('1234')
+end
 
 When /I activate it with code ([^\s]+)/ do |code|
   @bomb.activate(code)

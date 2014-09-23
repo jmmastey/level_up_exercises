@@ -129,12 +129,14 @@ class Bomb
   end
 
   def attempt_to_deactivate(code)
-    if code != @deactivation_code
+    return unsuccessful_deactivation unless code == @deactivation_code
+    successful_deactivation
+  end
+
+  def unsuccessful_deactivation
       @deactivation_attempts += 1
       return RESPOND_TOO_MANY_DEACT if too_many_failures?
       return RESPOND_WRONG_CODE
-    end
-    successful_deactivation
   end
 
   def successful_deactivation

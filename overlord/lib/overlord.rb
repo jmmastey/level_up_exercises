@@ -5,7 +5,16 @@ require 'sinatra'
 enable :sessions
 
 get '/' do
-  "Please configure the bomb"
+  erb :index, :layout => :layout_no_header
+end
+
+get '/start' do
+  erb :start
+end
+
+post '/activate' do
+  # activate the bomb
+  erb :activated
 end
 
 # we can shove stuff into the session cookie YAY!

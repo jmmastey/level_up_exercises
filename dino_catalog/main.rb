@@ -13,7 +13,7 @@ puts dinodex.filter(period: "Cretaceous")
 puts dinodex.filter(weight: [">", 4000])
 puts dinodex.filter(weight: ["<=", 4000])
 puts dinodex.having_weight(["<=", 4000])
-puts dinodex.filter(carnivore: true, 
+puts dinodex.filter(carnivore: true,
                     walking: "Biped")
 puts dinodex
   .filter(carnivore: true)
@@ -30,4 +30,3 @@ puts dinodex.first.to_json
 puts
 puts "JSON:"
 puts dinodex.to_json
-

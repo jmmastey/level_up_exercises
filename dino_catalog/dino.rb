@@ -29,14 +29,14 @@ class Dino
 
   def to_h
     {
-      :name => name,
-      :period => period,
-      :continent => continent,
-      :carnivore => carnivore,
-      :diet => diet,
-      :weight => weight,
-      :walking => walking,
-      :description => description,
+      name: name,
+      period: period,
+      continent: continent,
+      carnivore: carnivore,
+      diet: diet,
+      weight: weight,
+      walking: walking,
+      description: description,
     }
   end
 
@@ -44,4 +44,3 @@ class Dino
     to_h.to_json(*args)
   end
 end
-

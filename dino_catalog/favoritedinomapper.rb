@@ -2,25 +2,26 @@ require_relative "hashmapper"
 
 class FavoriteDinoMapper
   include HashMapper
-  CARNIVORE = %w"Carnivore Insectivore Piscivore"
+  CARNIVORE = %w(Carnivore Insectivore Piscivore)
 
   TRANSFORMS = {
-    :carnivore => lambda { |v| CARNIVORE.include? v }
+    carnivore: ->(v) { CARNIVORE.include? v },
   }
-  TRANSFORMS.default = lambda { |v| v }
+  TRANSFORMS.default = ->(v) { v }
 
   KEY_MAP = {
-    :name => "NAME",
-    :period => "PERIOD",
-    :continent => "CONTINENT",
-    :diet => "DIET",
-    :carnivore => "DIET",
-    :weight => "WEIGHT_IN_LBS",
-    :walking => "WALKING",
-    :description => "DESCRIPTION",
+    name: "NAME",
+    period: "PERIOD",
+    continent: "CONTINENT",
+    diet: "DIET",
+    carnivore: "DIET",
+    weight: "WEIGHT_IN_LBS",
+    walking: "WALKING",
+    description: "DESCRIPTION",
   }
 
   protected
+
   def key_map
     KEY_MAP
   end

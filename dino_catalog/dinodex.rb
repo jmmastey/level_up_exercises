@@ -21,24 +21,22 @@ class DinoDex
 
   def filter(criteria = {})
     result_data = @dinos.select do |dino|
-      criteria.all? do |field, value|
-        raise "Invalid search criteria #{field}" unless dino.respond_to?(field)
-        raise "Already filtering on #{field}" if @filter.has_key?(field)
-        match(dino.send(field), value)
-      end
+      meets_criteria(criteria, dino)
     end
     self.class.new(result_data, @filter.merge(criteria))
   end
 
   def to_s
-    result = "###############\n" <<
-      "Dino Dex Entries (Count: #{@dinos.length})\n" <<
-      "---------------\n" <<
-      "Filter: \n" <<
-      @filter.map { |f, v| "#{f}: #{v}" }.join("\n") << "\n" <<
-      "---------------\n" <<
-      @dinos.map { |dino| "#{dino}" }.join("\n") << "\n" <<
-      "###############\n"
+    <<-STRING
+###############
+Dino Dex Entries (Count: #{@dinos.length})
+---------------
+Filter:
+#{@filter.map { |f, v| "#{f}: #{v}" }.join("\n")}
+---------------
+#{@dinos.map { |dino| "#{dino}" }.join("\n")}
+###############
+    STRING
   end
 
   def to_json
@@ -49,7 +47,7 @@ class DinoDex
     if /having_/ =~ method
       criteria = args.length > 1 ? args : args[0]
       field = method[7..-1].to_sym
-      filter({ field => criteria })
+      filter(field => criteria)
     else
       super
     end
@@ -60,6 +58,7 @@ class DinoDex
   end
 
   private
+
   def parse_file(file_path)
     csv = CSV.open(file_path, headers: true)
     mapper = get_mapper(csv)
@@ -68,12 +67,20 @@ class DinoDex
 
   def get_mapper(csv_file)
     first_line = csv_file.first.to_hash
-    mapper = DINO_MAPPERS.detect { |m| m.can_map? first_line }
+    mapper = DINO_MAPPERS.find { |m| m.can_map? first_line }
     raise "Can't find a mapper for file #{file_path}" unless mapper
     csv_file.rewind
     mapper
   end
-  
+
+  def meets_criteria(criteria, dino)
+    criteria.all? do |field, value|
+      raise "Invalid search criteria #{field}" unless dino.respond_to?(field)
+      raise "Already filtering on #{field}" if @filter.key?(field)
+      match(dino.send(field), value)
+    end
+  end
+
   def match(left, right)
     if right.is_a? Array
       left.send(right[0], right[1])
@@ -88,4 +95,3 @@ class DinoDex
     Dino.new(data[:name], data)
   end
 end
-

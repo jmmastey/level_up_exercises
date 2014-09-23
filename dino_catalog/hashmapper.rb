@@ -4,15 +4,18 @@ module HashMapper
   end
 
   def map(input)
-    Hash[key_map.map { |output_key, input_key| 
-      [output_key, transform(output_key, input[input_key])] }]
+    Hash[
+      key_map.map do |output_key, input_key|
+        [output_key, transform(output_key, input[input_key])]
+      end
+    ]
   end
 
   def key_map
     {}
   end
 
-  def transform(attr, value)
+  def transform(_, value)
     value
   end
 end

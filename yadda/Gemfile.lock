@@ -4,9 +4,11 @@ GEM
     faker (1.4.3)
       i18n (~> 0.5)
     i18n (0.6.11)
+    pg (0.17.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   faker
+  pg

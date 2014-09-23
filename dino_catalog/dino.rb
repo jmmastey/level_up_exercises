@@ -1,3 +1,5 @@
+require "json"
+
 class Dino
   attr_reader :name, :period, :continent, :diet, :carnivore, :weight,
     :walking, :description
@@ -25,7 +27,7 @@ class Dino
     output
   end
 
-  def to_hash
+  def to_h
     {
       :name => name,
       :period => period,
@@ -34,7 +36,12 @@ class Dino
       :diet => diet,
       :weight => weight,
       :walking => walking,
+      :description => description,
     }
+  end
+
+  def to_json(*args)
+    to_h.to_json(*args)
   end
 end
 

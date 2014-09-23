@@ -23,6 +23,7 @@ puts dinodex
 puts
 puts "First Dino: "
 puts dinodex.first
+puts dinodex.first.to_json
 
 puts
 puts "JSON:"

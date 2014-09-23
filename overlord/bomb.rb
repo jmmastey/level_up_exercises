@@ -152,6 +152,5 @@ class Bomb
   def bomb_is_defunct
     return RESPOND_ALREADY_EXPLODED if exploded?
     return RESPOND_ALREADY_SNIPPED if snipped?
-    nil
   end
 end

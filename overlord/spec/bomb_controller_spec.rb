@@ -1,5 +1,5 @@
+require_relative "_helpers"
 require_relative "../lib/bomb_controller"
-require_relative "_helpers.rb"
 
 describe BombController do
   let(:controller) do
@@ -149,6 +149,20 @@ describe BombController do
   describe "#timer" do
     it "is nil when the controller is initialized" do
       expect(controller.timer).to be_nil
+    end
+  end
+
+  describe "#update_state" do
+    it "returns the state of the controller" do
+      expect(controller.update_state).to eq(:inactive)
+    end
+
+    it "checks the wire box for cut booby traps if the bomb is active" do
+      controller.enter_code(controller.default_activation_code)
+      controller.enter_code("0400")
+      controller.wire_box.exploding_wires.first.snip
+
+      expect(controller.update_state).to eq(:exploded)
     end
   end
 end

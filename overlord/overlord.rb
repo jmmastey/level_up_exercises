@@ -26,12 +26,7 @@ class Overlord < Sinatra::Base
     @bomb_controller = current_bomb_controller
     redirect "/boot" unless @bomb_controller
 
-    begin
     haml(:bomb)
-    rescue Exception => e
-      log_error(e)
-      raise e
-    end
   end
 
   get "/boot" do
@@ -60,8 +55,12 @@ class Overlord < Sinatra::Base
     code = params[:code]
 
     bomb_controller = current_bomb_controller
-    bomb_controller.enter_code(code)
-    # binding.pry
+
+    begin
+      bomb_controller.enter_code(code)
+    rescue Exception => e
+      add_error(e)
+    end
 
     get_json_response
   end
@@ -69,13 +68,20 @@ class Overlord < Sinatra::Base
   post "/snip_wire" do
     color = params[:wire_color]
     bomb_controller = current_bomb_controller
-    wire = bomb_controller.wire_box.get_wire_from_color(color)
-    wire.snip
+
+    begin
+      wire = bomb_controller.wire_box.get_wire_from_color(color)
+      wire.snip
+    rescue Exception => e
+      add_error(e)
+    end
 
     get_json_response
   end
 
   private
+
+  attr_reader :error
 
   def add_error(error)
     @error ||= ""
@@ -108,25 +114,21 @@ class Overlord < Sinatra::Base
     bomb_controller = current_bomb_controller
     bomb_controller.update_state
     detonation_time = get_detonation_time_from_timer(bomb_controller.timer)
+    time_remaining = nil
+    time_remaining = (detonation_time - Time.now) if detonation_time
 
-    { message: bomb_controller.message,
+    # binding.pry
+
+    { error: error,
+      message: bomb_controller.message,
       state: bomb_controller.state,
-      detonation_time: detonation_time
+      time: time_remaining
     }.to_json
   end
 
   def get_detonation_time_from_timer(timer)
     return nil if timer.nil?
     timer.end_time
-  end
-
-  def log_error(error)
-    File.open("error.log", "a") do |file|
-      file.write("ERROR LOGGED #{Time.now}\n")
-      file.write("\t#{error}\n")
-      backtrace = error.backtrace.map { |entry| "\t\t#{entry}" }
-      file.write("#{backtrace.join("\n")}\n")
-    end
   end
 
   def validate_code(code)

@@ -4,8 +4,8 @@ Bomb.init = function() {
   Bomb.init_code_display();
   Bomb.init_keyboard_input();
   Bomb.init_keypad();
-  Bomb.init_timer();
   Bomb.init_wires();
+  Bomb.configure_timer();
 
   Bomb.get_state_from_server();
 };
@@ -58,10 +58,6 @@ Bomb.init_keypad_enter = function() {
   $('#btn-enter').click(Bomb.submit_code);
 };
 
-Bomb.init_timer = function() {
-  Bomb.configure_timer(null);
-}
-
 Bomb.init_wires = function() {
   $('.wire').click(function() { Bomb.snip_wire(this); });
 };
@@ -75,12 +71,11 @@ Bomb.configure_timer = function(time) {
     clearInterval(Bomb.timer);
   }
 
-  Bomb.detonation_time = null;
+  Bomb.time = null;
   Bomb.timer = null;
 
   if (time != null && time != "") {
-    time = new Date(time);
-    Bomb.detonation_time = time;
+    Bomb.time = time;
     Bomb.timer = setInterval(Bomb.on_timer_tick, 1000);
   }
   Bomb.update_timer_display();
@@ -110,16 +105,24 @@ Bomb.get_state_from_server = function() {
   });
 };
 
+Bomb.handle_error = function(error) {
+  if (error != null && error != "") {
+    console.log(error);
+  }
+};
+
 Bomb.handle_server_response = function(result) {
+  Bomb.handle_error(result.error);
   Bomb.update_message(result.message);
   Bomb.update_state(result.state);
-  Bomb.configure_timer(result.detonation_time);
+  Bomb.configure_timer(result.time);
 };
 
 Bomb.on_timer_tick = function() {
+  Bomb.time--;
   Bomb.update_timer_display();
-  if (Bomb.detonation_time >= Date.now()) {
-    Bomb.configure_timer(null);
+  if (Bomb.time <= 0) {
+    Bomb.configure_timer();
     Bomb.update_timer_display();
     Bomb.get_state_from_server();
   }
@@ -180,9 +183,8 @@ Bomb.update_state = function(state) {
 
 Bomb.update_timer_display = function() {
   var time = "";
-  if (Bomb.detonation_time != null) {
-    delay = Bomb.detonation_time - Date.now();
-    total_seconds = Math.floor(delay / 1000);
+  if (Bomb.time != null) {
+    total_seconds = Math.round(Bomb.time)
     hours = Math.floor(total_seconds / 3600);
     minutes = Math.floor(total_seconds / 60) % 60;
     seconds = total_seconds % 60;

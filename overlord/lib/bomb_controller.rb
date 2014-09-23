@@ -25,12 +25,6 @@ class BombController
     DEFAULT_DEACTIVATION_CODE
   end
 
-  def disable_bomb
-    @state = :disabled
-    @message = "Bomb disabled"
-    @timer = nil
-  end
-
   def enter_code(code)
     code = normalize_code(code)
     update_state
@@ -45,12 +39,9 @@ class BombController
 
   def update_state
     unless @state == :disabled || @state == :exploded
-      @wire_box.check_booby_traps if @state == :active
       disable_bomb if @wire_box.disabled?
-      if @wire_box.exploded?
-        @state = :exploded
-        @message = "Exploded"
-      end
+      check_wire_box_for_triggers
+      explode_if_triggered
     end
     @state
   end
@@ -65,9 +56,12 @@ class BombController
     update_state
   end
 
-  def check_detonation
-    @wire_box.check_booby_traps
-    explode_if_triggered
+  def check_wire_box_for_triggers
+    @wire_box.check_booby_traps if @state == :active
+    if @wire_box.exploded?
+      @state = :exploded
+      @message = "Exploded"
+    end
   end
 
   def deactivate
@@ -75,6 +69,12 @@ class BombController
     @message = "Deactivated bomb"
     @timer = nil
     update_state
+  end
+
+  def disable_bomb
+    @state = :disabled
+    @message = "Bomb disabled"
+    @timer = nil
   end
 
   def enter_code_when_active(code)
@@ -112,7 +112,6 @@ class BombController
   end
 
   def explode
-    update_state
     wire_box.send_to_device(:explode) if @state == :active
     update_state
   end

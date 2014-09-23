@@ -1,3 +1,7 @@
+require_relative "../lib/bomb"
+require_relative "../lib/wire"
+require_relative "../lib/wire_box"
+
 def get_test_wire_box
   disarm_wires = [
     Wire.new(:red),

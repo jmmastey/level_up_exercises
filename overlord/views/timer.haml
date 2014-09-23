@@ -1,7 +1,12 @@
 .timer{class: "device"}
   .row
     .timer-display#timer-display{class: "col-sm-8 col-sm-offset-2"}
-      %fieldset{disabled: ""}
-        %input#timer-output{class: "form-control input-lg", type: "text"}
+      .input-group
+        %input#timer-output{class: "disabled input-lg", type: "text"}
+        %button#timer-increment{class: "btn btn-sm"} up
+        %button#timer-decrement{class: "btn btn-sm"} down
         %input#timer-time{type: "hidden", name: "timer-seconds", value: "#{timer.seconds_remaining}"}
+  .row
+    %div{class: "col-sm-8 col-sm-offset-2"}
+      .button#timer-reset{class: "center-block btn btn-lg btn-primary", type: "reset"} reset
 

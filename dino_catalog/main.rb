@@ -13,9 +13,11 @@ puts dinodex.filter(period: "Cretaceous")
 puts dinodex.filter(weight: [">", 4000])
 puts dinodex.filter(weight: ["<=", 4000])
 puts dinodex.having_weight(["<=", 4000])
-puts dinodex.filter(carnivore: true,
-                        walking: "Biped")
-puts dinodex.filter(carnivore: true).filter(walking: "Biped")
+puts dinodex.filter(carnivore: true, 
+                    walking: "Biped")
+puts dinodex
+  .filter(carnivore: true)
+  .filter(walking: "Biped")
 puts dinodex
   .having_carnivore(true)
   .having_walking("Biped")

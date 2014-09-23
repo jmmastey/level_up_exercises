@@ -7,8 +7,9 @@ class AfricanDinoMapper
     :diet => lambda { |v| v == "Yes" ? "Carnivore" : "Herbivore" },
     :continent => lambda { |_| "Africa" },
   }
+  TRANSFORMS.default = lambda { |v| v }
 
-  ATTRIBUTE_MAP = {
+  KEY_MAP = {
     :name => "Genus",
     :period => "Period",
     :diet => "Carnivore",
@@ -19,11 +20,11 @@ class AfricanDinoMapper
   }
 
   protected 
-  def attribute_map
-    ATTRIBUTE_MAP
+  def key_map
+    KEY_MAP
   end
 
   def transform(attr, data)
-    TRANSFORMS.has_key?(attr) ? TRANSFORMS[attr].call(data) : data
+    TRANSFORMS[attr].call(data)
   end
 end

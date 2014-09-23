@@ -9,9 +9,9 @@ class Bomb
   RESPOND_ALREADY_EXPLODED = 'Sorry, bomb has already exploded.'
   RESPOND_ALREADY_SNIPPED  = 'Sorry, bomb wires have been snipped.'
 
-  CODE_TOO_MANY_DEACT_MSG = 'Bomb exploded - too many attempts!'
-  CODE_WRONG_VALUE_MSG    = 'Wrong code'
-  CODE_NOT_AN_INT_MSG     = 'Code must be an integer'
+  RESPOND_TOO_MANY_DEACT   = 'Bomb exploded - too many attempts!'
+  RESPOND_WRONG_CODE       = 'Wrong code'
+  RESPOND_CODE_NOT_AN_INT  = 'Code must be an integer'
 
   # State
   INTEGRITY_EXPLODED  = 'Blown to shreds'
@@ -43,14 +43,14 @@ class Bomb
   def activate(code)
     return bomb_is_defunct if bomb_is_defunct
     return RESPOND_ALREADY_ACTIVE if active?
-    return CODE_NOT_AN_INT_MSG unless integer?(code)
+    return RESPOND_CODE_NOT_AN_INT unless integer?(code)
     attempt_to_activate(code)
   end
 
   def deactivate(code)
     return bomb_is_defunct if bomb_is_defunct
     return RESPOND_ALREADY_INACTIVE unless active?
-    return CODE_NOT_AN_INT_MSG unless integer?(code)
+    return RESPOND_CODE_NOT_AN_INT unless integer?(code)
     attempt_to_deactivate(code)
   end
 
@@ -119,7 +119,7 @@ class Bomb
   end
 
   def attempt_to_activate(code)
-    return CODE_WRONG_VALUE_MSG unless code == @activation_code
+    return RESPOND_WRONG_CODE unless code == @activation_code
     successful_activation
   end
 
@@ -131,8 +131,8 @@ class Bomb
   def attempt_to_deactivate(code)
     if code != @deactivation_code
       @deactivation_attempts += 1
-      return CODE_TOO_MANY_DEACT_MSG if too_many_failures?
-      return CODE_WRONG_VALUE_MSG
+      return RESPOND_TOO_MANY_DEACT if too_many_failures?
+      return RESPOND_WRONG_CODE
     end
     successful_deactivation
   end

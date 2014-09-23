@@ -15,7 +15,7 @@ Feature: Bomb Activation and Deactivation
   Scenario: Deactivate a default bomb with correct code
     Given I create a bomb with no code
 	When I activate it with code 1234
-	And I deactivate it with code 0
+	And I deactivate it with code 0000
 	Then I should see it is not active
 
   Scenario: Create a bomb with codes
@@ -44,11 +44,16 @@ Feature: Bomb Activation and Deactivation
 	And I deactivate it with code 0000
 	Then I should see it is active
 
-  Scenario: Create a bomb with bad codes (non-Integer)
-    Given I create a bomb with bad codes ABCD 0941 it raises an ArgumentError
+  Scenario: Create a bomb with bad activation code, it resorts to default code
+    Given I create a bomb with codes ABCD 0941
+	When I activate it with code 1234
+	Then I should see it is active
 
-  Scenario: Create a bomb with bad codes (non-Integer)
-    Given I create a bomb with bad codes 1234 ABCD it raises an ArgumentError
+  Scenario: Create a bomb with bad deactivation code, it resorts to default code
+    Given I create a bomb with codes 9854 ABCD
+	When I activate it with code 9854
+	And I deactivate it with code 0000
+	Then I should see it is not active
 
   Scenario: Activate with a bad code
     Given I create a bomb with codes 9854 0941

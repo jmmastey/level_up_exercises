@@ -1,28 +1,19 @@
 require_relative '../../bomb'
 
 Given /I create a bomb with no code/ do
-  @bomb = Bomb.new("", "")
+  @bomb = Bomb.new()
 end
 
 Given /I create a bomb with codes ([^\s]+) ([^\s]+)/ do |act_code, deact_code|
   @bomb = Bomb.new(act_code, deact_code)
 end
 
-Given /I create a bomb with bad codes ([^\s]+) ([^\s]+)/ do |act_code, deact_code|
-  expect { Bomb.new(act_code, deact_code) }.to raise_error(ArgumentError)
-end
 
-
-
-When /I activate it with code (\d+)/ do |code|
+When /I activate it with code ([^\s]+)/ do |code|
   @bomb.activate(code)
 end
 
-When /I activate it with bad code ([^\s]+)/ do |code|
-  expect { @bomb.activate(code) }.to raise_error(ArgumentError)
-end
-
-When /I deactivate it with code (\d+)/ do |code|
+When /I deactivate it with code ([^\s]+)/ do |code|
   @bomb.deactivate(code)
 end
 

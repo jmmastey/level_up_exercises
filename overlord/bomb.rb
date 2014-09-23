@@ -1,5 +1,5 @@
 class Bomb
-  # Communication Messages
+  # Response Messages
   RESPOND_ALREADY_ACTIVE   = 'Bomb is already active'
   RESPOND_ALREADY_INACTIVE = 'Bomb is already inactive'
   RESPOND_ACTIVATED        = 'Bomb activated - Look Out!'

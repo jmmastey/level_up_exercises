@@ -14,6 +14,10 @@ describe Bomb do
       expect(bomb).not_to be_exploded
     end
 
+    it "has unsnipped wires on boot" do
+      expect(bomb).not_to have_snipped_wires
+    end
+
     it "has a default activation code of 1234" do
       expect(bomb.activation_code).to eq("1234")
     end
@@ -101,6 +105,20 @@ describe Bomb do
       bomb.deactivate("0000")
       bomb.activate("1234")
       expect(bomb.deactivation_attempts).to eq(0)
+    end
+  end
+
+  describe "#snip_wires" do
+    it "should be detonated with snipped wires" do
+      bomb.snip_wires
+      expect(bomb).to have_snipped_wires
+      expect(bomb.status).to eq("detonated")
+    end
+
+    it "cannot be activated once wires are snipped" do
+      bomb.snip_wires
+      bomb.activate("1234")
+      expect(bomb.status).to eq("detonated")
     end
   end
 end

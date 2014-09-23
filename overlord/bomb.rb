@@ -5,10 +5,10 @@ class Bomb
     @active = false
     @exploded = false
     @deactivation_attempts = 0
+    @wires = true
 
     @activation_code = activation_code
     @deactivation_code = deactivation_code
-
     raise ArgumentError unless valid_input?
   end
 
@@ -20,7 +20,12 @@ class Bomb
     @exploded
   end
 
+  def has_snipped_wires?
+    !@wires
+  end
+
   def status
+    return "detonated" if has_snipped_wires?
     return "exploded" if exploded?
     return "activated" if activated?
     "deactivated"
@@ -38,6 +43,10 @@ class Bomb
       @deactivation_attempts += 1
       explode if @deactivation_attempts >= 3
     end
+  end
+
+  def snip_wires
+    @wires = false
   end
 
   private

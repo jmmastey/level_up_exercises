@@ -1,6 +1,6 @@
 <p>Status: <%= @bomb.status %> </p>
 
-<% if @bomb.detonated? %>
+<% if @bomb.disarmed? %>
 <% elsif @bomb.exploded? %>
   <%= erb :_exploded %>
 <% elsif @bomb.activated? %>

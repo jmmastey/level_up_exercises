@@ -12,46 +12,46 @@ When /I select code (\d+)/ do |code_value|
 end
 
 When /I press activate/ do
-  click_activate_button()
+  click_activate_button
 end
 
 When /I press deactivate/ do
-  click_deactivate_button()
+  click_deactivate_button
 end
 
 
 
 When /I click on snip (\d+) time/ do |snips|
-  snips.to_i.times { click_snip_wires() }
+  snips.to_i.times { click_snip_wires }
 end
 
 When /I detonate the bomb/ do
-  detonate_bomb()
+  detonate_bomb
 end
 
 When /I activate it$/ do
   set_keypad_code('1234')
-  click_activate_button()
+  click_activate_button
 end
 
 When /I deactivate it$/ do
   set_keypad_code('1234')
-  click_deactivate_button()
+  click_deactivate_button
 end
 
 When /I activate it and deactivate it/ do
   set_keypad_code("1234")
-  click_activate_button()
+  click_activate_button
   set_keypad_code("0000")
-  click_deactivate_button()
+  click_deactivate_button
 end
 
 When /I activate it and unsuccessfully deactivate it (\d+) time/ do |attempts|
   set_keypad_code("1234")
-  click_activate_button()
+  click_activate_button
   attempts.to_i.times do
     set_keypad_code("1111")
-    click_deactivate_button()
+    click_deactivate_button
   end
 end
 
@@ -111,12 +111,12 @@ end
 
 def click_activate_button
   set_keypad_action("activate")
-  click_submit_action()
+  click_submit_action
 end
 
 def click_deactivate_button
   set_keypad_action("deactivate")
-  click_submit_action()
+  click_submit_action
 end
 
 def click_submit_action
@@ -126,7 +126,7 @@ end
 
 def click_snip_wires
   set_keypad_action("snip")
-  click_submit_action()
+  click_submit_action
 end
 
 def set_keypad_code(code)
@@ -139,5 +139,5 @@ end
 
 def detonate_bomb
   set_keypad_action("detonate")
-  click_submit_action()
+  click_submit_action
 end

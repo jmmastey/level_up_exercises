@@ -31,3 +31,9 @@ post '/deactivate' do
   erb :bomb
 end
 
+post '/snip-wires' do
+  session[:bomb].snip_wires
+  @bomb = session[:bomb]
+  erb :bomb
+end
+

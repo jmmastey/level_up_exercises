@@ -56,10 +56,14 @@ Feature: Bomb Activation and Deactivation
 
   Scenario: Activate with a bad code
     Given I create a bomb with codes 9854 and 0941
+	When I activate it with code 1234
+	Then I should see it is not active
 
   Scenario: Dectivate with a bad code
     Given I create a bomb with codes 9854 and 0941
-
+	When I activate it with code 9854
+    And I deactivate it with code 0000
+    Then I should see it is active
 
   # Bomb Deactivation With Wrong Codes
   Scenario: Deactive with wrong code three times

@@ -6,7 +6,7 @@ class Dinosaur
   def initialize
     @dinosaurs = []
     @result_dinosaurs = []
-    CSV.foreach('dinodex.csv', :headers=>true) do |row|
+    CSV.foreach('dinodex.csv', :headers => true) do |row|
       @dinosaurs << row.to_hash
     end
   end
@@ -72,7 +72,6 @@ class Dinosaur
       i += 1
     end
     hash_json.to_json
-   #@dinosaur.as_json
   end
 end
 

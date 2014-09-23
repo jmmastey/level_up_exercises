@@ -54,10 +54,10 @@ class Bomb
   def valid_input?
     @activation_code = "1234" if activation_code == ""
     @deactivation_code = "0000" if deactivation_code == ""
-    matches_code_pattern?(activation_code) && matches_code_pattern?(deactivation_code)
+    matches_pattern?(activation_code) && matches_pattern?(deactivation_code)
   end
 
-  def matches_code_pattern?(input)
+  def matches_pattern?(input)
     return false unless input.is_a? String
     /^\d{4}$/ =~ input
   end

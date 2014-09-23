@@ -16,6 +16,7 @@ set :bind, '0.0.0.0'
 ACTIVATION_TIME = 10
 ALLOWED_ACTIONS = ['activate', 'deactivate', 'snip', 'detonate']
 
+
 get '/' do
   redirect '/overlords'
 end
@@ -34,7 +35,7 @@ end
 post '/overlords/action' do
   record_timer(params)
   action = get_valid_action(params)
-  send(action, params)
+  send(action, params) if action
   erb :bomb_status, :locals => local_session_variables
 end
 

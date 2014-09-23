@@ -1,24 +1,9 @@
-<h1>Toggle Bomb</h1>
 <p>Status: <%= @bomb.status %> </p>
 
 <% if @bomb.exploded? %>
-
+  <%= erb :_exploded %>
 <% elsif @bomb.activated? %>
-
-  <form action="/deactivate" method="post">
-    <label for="code">Deactivation Code</label>
-    <input type="number" min="0" max="9999" name="code">
-    <input type="submit" value="Deactivate">
-  </form>
-
-  <p>Deactivation attempts: <%= @bomb.deactivation_attempts %> </p>
-
+  <%= erb :_activated %>
 <% else %>
-
-  <form action="/activate" method="post">
-    <label for="code">Activation Code</label>
-    <input type="number" min="0" max="9999" name="code">
-    <input type="submit" value="Activate">
-  </form>
-
+  <%= erb :_deactivated %>
 <% end %>

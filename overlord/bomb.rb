@@ -20,12 +20,12 @@ class Bomb
     @exploded
   end
 
-  def has_snipped_wires?
+  def detonated?
     !@wires
   end
 
   def status
-    return "detonated" if has_snipped_wires?
+    return "detonated" if detonated?
     return "exploded" if exploded?
     return "activated" if activated?
     "deactivated"

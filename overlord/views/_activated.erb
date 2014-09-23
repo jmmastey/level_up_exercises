@@ -1,0 +1,7 @@
+<form action="/deactivate" method="post">
+  <label for="code">Deactivation Code</label>
+  <input type="number" min="0" max="9999" name="code">
+  <input type="submit" value="Deactivate" class="submit-btn">
+</form>
+
+<p>Deactivation attempts: <%= @bomb.deactivation_attempts %> </p>

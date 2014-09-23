@@ -1,5 +1,4 @@
 # In case you missed them, here are the extensions: http://guides.rubyonrails.org/active_support_core_extensions.html
-
 require 'active_support/all'
 
 class BlagPost
@@ -9,12 +8,10 @@ class BlagPost
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
   def initialize(args)
-    args = args.inject({}) do |hash, (key, value)|
-      hash[key.to_sym] = value
-      hash
-    end
 
-    if args[:author] != '' && args[:author_url] != ''
+    args.symbolize_keys!
+
+    unless args[:author].blank? && args[:author_url].blank?
       @author = Author.new(args[:author], args[:author_url])
     end
 
@@ -38,63 +35,35 @@ class BlagPost
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    author.try { |a| "By #{a.name}, at #{a.url}" } || ""
   end
 
   def category_list
     return "" if categories.empty?
 
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
+    return as_title("Category: " + categories.to_sentence)  if categories.length == 1
+    return as_title("Categories: " + categories.to_sentence) if categories.many?
   end
 
   def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    String(string).titleize
   end
 
   def commenters
     return '' unless comments_allowed?
     return '' unless comments.length > 0
 
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    "You will be the #{comments.length.ordinalize} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date.years_since(3) > Date.today
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    return body if body.length < 200
+
+    body[0..200] + "..."
   end
 
 end
@@ -102,7 +71,7 @@ end
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
+                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it? No, I Don't
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.
@@ -118,4 +87,5 @@ blag = BlagPost.new("author"        => "Foo Bar",
                         facilisis semper ac in est.
                         ARTICLE
                    )
+I18n.enforce_available_locales = false
 puts blag.to_s

@@ -2,8 +2,8 @@ Given /I visit the main page/ do
   visit '/overlords'
 end
 
-
-When /I click the Create button/ do
+Given /I create a bomb from the main page/ do
+  visit '/overlords'
   click_button 'Create!'
 end
 
@@ -29,7 +29,7 @@ end
 
 
 
-Then /I should see content/ do
+Then /I should see the Create Bomb page/ do
   expect(body.match('Overlords')).to be_truthy
 end
 

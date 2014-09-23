@@ -4,8 +4,7 @@ Feature: Overlord Bomb-Status Page
   I want to visit the page and verify all functionality
 
   Background:
-    Given I visit the main page
-    When I click the Create button
+    Given I create a bomb from the main page
 
   Scenario: I visit the main page and click create-bomb
     Then I should see the bomb status page

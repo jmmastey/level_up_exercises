@@ -5,9 +5,8 @@ Feature: Overlord Create-Bomb Page
 
   Scenario: I visit the main page
     Given I visit the main page
-    Then I should see content
+    Then I should see the Create Bomb page
 
   Scenario: I visit the main page and click create-bomb
-    Given I visit the main page
-    When I click the Create button
+    Given I create a bomb from the main page
     Then I should see the bomb status page

@@ -1,6 +1,6 @@
 require 'pg'
 require 'faker'
-require 'pry'
+
 def populate_breweries(conn, brewery_count)
 
   puts "Populating Breweries"
@@ -185,19 +185,20 @@ def rate_beers(conn, user_count, beer_count)
         $2,
         $3,
         $4,
-        now(),
+        $5,
         now(),
         current_user,
         current_user
     )
   "
 
-  user_count.times do
+  (user_count * 2).times do
     params = []
     params.push(Random.new.rand(1..user_count))
     params.push(Random.new.rand(1..beer_count))
     params.push(Random.new.rand(1..5))
     params.push(Faker::Lorem.sentence)
+    params.push(Time.at(Random.new.rand(0.95..1) * Time.now.to_i).strftime("%Y-%m-%d %H:%M:%S"))
 
     begin
       conn.exec_params(query, params)

@@ -57,7 +57,7 @@ end
 
 
 Then /I should see the Create Bomb page/ do
-  expect(body.match('Overlords')).to be_truthy
+  expect(body).to match('Overlords')
 end
 
 Then /I should see the bomb status page/ do

@@ -1,0 +1,49 @@
+* {
+	color: white;
+	font-family: "Courier New", "Sans";
+}
+
+html { 
+	height: 900px;
+  background: url(../img/bomb.jpeg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.container {
+	text-align: center;
+	position: absolute;
+	top: 70%;
+	margin-top: -150px;
+	left: 0;
+	width: 100%;
+}
+
+.content {
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 395px;
+}
+
+input { 
+	color: black;
+}
+
+.submit-btn {
+	color: white;
+	background: red;
+  border:none;
+  font-size:1em;
+}
+
+.boom {
+		height: 900px;
+  background: url(../img/boom.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

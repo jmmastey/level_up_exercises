@@ -1,0 +1,12 @@
+<p>Status: <%= @bomb.status %> </p>
+
+<% if @bomb.disarmed? %>
+<% elsif @bomb.exploded? %>
+  <%= erb :_exploded %>
+<% elsif @bomb.activated? %>
+  <%= erb :_activated %>
+  <%= erb :_snip_wires %>
+<% else %>
+  <%= erb :_deactivated %>
+  <%= erb :_snip_wires %>
+<% end %>

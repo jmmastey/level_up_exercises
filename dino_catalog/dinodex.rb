@@ -1,10 +1,11 @@
-require_relative "dinoparser"
+require_relative "affricandinomapper"
+require_relative "favoritedinomapper"
 require_relative "dino"
 require "csv"
 require "json"
 
 class DinoDex
-  PARSER_MAP = [FavoriteDinoParser, AfricanDinoParser]
+  DINO_MAPPERS = [FavoriteDinoMapper.new, AfricanDinoMapper.new]
   include Enumerable
 
   def initialize(dinos = [], options = {})
@@ -16,10 +17,10 @@ class DinoDex
     file_paths.each do |file_path|
       csv = CSV.open(file_path, headers: true)
       # is there a better way to do this to get the first line and then parse
-      parser = PARSER_MAP.detect { |p| p.can_parse?(csv.first.to_hash) }
-      raise "Can't parse file #{file_path}" unless parser
+      mapper = DINO_MAPPERS.detect { |m| m.can_map?(csv.first.to_hash) }
+      raise "Can't find a mapper for file #{file_path}" unless mapper
       csv.rewind
-      @dinos.concat csv.map { |row| parser.parse(row.to_hash) }
+      @dinos.concat csv.map { |row| create_dino(mapper.map(row.to_hash)) }
     end
   end
 
@@ -27,7 +28,6 @@ class DinoDex
     result_data = @dinos.select do |dino|
       criteria.all? do |field, value|
         raise "Invalid search criteria #{field}" unless dino.respond_to?(field)
-        # can't have an and filter on the same fields
         raise "Already filtering on #{field}" if @filter.has_key?(field)
         match(dino.send(field), value)
       end
@@ -36,18 +36,18 @@ class DinoDex
   end
 
   def to_s
-    result = "###############\n"
-    result << "Dino Dex Entries (Count: #{@dinos.length})\n"
-    result << "---------------\n"
-    result << "Filter: \n" unless @filter.empty?
-    @filter.each { |f, v| result << "#{f}: #{v}\n" }
-    result << "---------------\n"
-    @dinos.each { |dino| result << "#{dino}\n" }
-    result << "###############\n"
+    result = "###############\n" <<
+      "Dino Dex Entries (Count: #{@dinos.length})\n" <<
+      "---------------\n" <<
+      "Filter: \n" <<
+      @filter.map { |f, v| "#{f}: #{v}" }.join("\n") << "\n" <<
+      "---------------\n" <<
+      @dinos.map { |dino| "#{dino}" }.join("\n") << "\n" <<
+      "###############\n"
   end
 
   def to_json
-    @dinos.map { |dino| dino.to_hash}.to_json
+    @dinos.to_json
   end
 
   def method_missing(method, *args)
@@ -73,6 +73,10 @@ class DinoDex
     else
       left == right
     end
+  end
+
+  def create_dino(data)
+    Dino.new(data[:name], data)
   end
 end
 

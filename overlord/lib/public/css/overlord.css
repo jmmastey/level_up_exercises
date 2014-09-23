@@ -1,0 +1,62 @@
+body {
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    background-color: #000000;
+    color: #f6f6f6;
+}
+
+div.landingPage {
+    background-image: url('/images/Nightmare_Moon_large.png');
+    background-position: 25% top;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+div.header {
+    background-image: url('/images/Nightmare_Moon_header.png');
+    background-position: right top;
+    background-repeat: no-repeat;
+    height: 140px;
+}
+
+div.landingPageContent {
+    height: 100%;
+}
+
+div.landing-content {
+    height: 100%;
+}
+
+div.landing-content p {
+    height: 45%;
+    max-height: 400px;
+}
+
+a.button {
+    font-weight: normal;
+    border: 1px solid #cc6600;
+    background: #ff8100;
+    border-radius: 20px;
+    line-height: 30px;
+    font-size: 18px;
+    color: #ffffff !important;
+    text-shadow: 0px 1px 1px #cc6600;
+    display: inline-block;
+    padding: 0px 30px;
+    text-decoration: none;
+}
+
+@media (max-width: 641px) {
+    div.landing-content p {
+        background-color: red;
+    }
+    div.header {
+        background-position: left top;
+    }
+}
+
+@media (min-width: 1140px) {
+    div.landingPage {
+        background-position: right top;
+    }
+}
+

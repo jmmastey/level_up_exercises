@@ -1,13 +1,13 @@
 class Bomb
   # Communication Messages
-  BOMB_ACTIVE_MSG           = 'Bomb is already active'
-  BOMB_INACTIVE_MSG         = 'Bomb is already inactive'
-  BOMB_ACTIVATED_MSG        = 'Bomb activated - Look Out!'
-  BOMB_DEACTIVATED_MSG      = 'Bomb deactivated'
-  BOMB_DETONATION_MSG       = 'Bomb has been detonated!'
-  BOMB_JUST_SNIPPED_MSG     = 'Bomb wires snipped and is now defunct'
-  BOMB_ALREADY_EXPLODED_MSG = 'Sorry, bomb has already exploded.'
-  BOMB_ALREADY_SNIPPED_MSG  = 'Sorry, bomb wires have been snipped.'
+  RESPOND_ALREADY_ACTIVE   = 'Bomb is already active'
+  RESPOND_ALREADY_INACTIVE = 'Bomb is already inactive'
+  RESPOND_ACTIVATED        = 'Bomb activated - Look Out!'
+  RESPOND_DEACTIVATED      = 'Bomb deactivated'
+  RESPOND_DETONATION       = 'Bomb has been detonated!'
+  RESPOND_JUST_SNIPPED     = 'Bomb wires snipped and is now defunct'
+  RESPOND_ALREADY_EXPLODED = 'Sorry, bomb has already exploded.'
+  RESPOND_ALREADY_SNIPPED  = 'Sorry, bomb wires have been snipped.'
 
   CODE_TOO_MANY_DEACT_MSG = 'Bomb exploded - too many attempts!'
   CODE_WRONG_VALUE_MSG    = 'Wrong code'
@@ -42,14 +42,14 @@ class Bomb
 
   def activate(code)
     return bomb_is_defunct if bomb_is_defunct
-    return BOMB_ACTIVE_MSG if active?
+    return RESPOND_ALREADY_ACTIVE if active?
     return CODE_NOT_AN_INT_MSG unless integer?(code)
     attempt_to_activate(code)
   end
 
   def deactivate(code)
     return bomb_is_defunct if bomb_is_defunct
-    return BOMB_INACTIVE_MSG unless active?
+    return RESPOND_ALREADY_INACTIVE unless active?
     return CODE_NOT_AN_INT_MSG unless integer?(code)
     attempt_to_deactivate(code)
   end
@@ -57,13 +57,13 @@ class Bomb
   def snip
     return bomb_is_defunct if bomb_is_defunct
     @snipped = true
-    BOMB_JUST_SNIPPED_MSG
+    RESPOND_JUST_SNIPPED
   end
 
   def detonate
     return bomb_is_defunct if bomb_is_defunct
     @detonated = true
-    BOMB_DETONATION_MSG
+    RESPOND_DETONATION
   end
 
   def active?
@@ -125,7 +125,7 @@ class Bomb
 
   def successful_activation
     @active = true
-    BOMB_ACTIVATED_MSG
+    RESPOND_ACTIVATED
   end
 
   def attempt_to_deactivate(code)
@@ -140,7 +140,7 @@ class Bomb
   def successful_deactivation
     @active = false
     @deactivation_attempts = 0
-    BOMB_DEACTIVATED_MSG
+    RESPOND_DEACTIVATED
   end
 
   def too_many_failures?
@@ -148,8 +148,8 @@ class Bomb
   end
 
   def bomb_is_defunct
-    return BOMB_ALREADY_EXPLODED_MSG if exploded?
-    return BOMB_ALREADY_SNIPPED_MSG if snipped?
+    return RESPOND_ALREADY_EXPLODED if exploded?
+    return RESPOND_ALREADY_SNIPPED if snipped?
     nil
   end
 end

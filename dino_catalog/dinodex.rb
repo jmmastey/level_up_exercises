@@ -8,19 +8,14 @@ class DinoDex
   DINO_MAPPERS = [FavoriteDinoMapper.new, AfricanDinoMapper.new]
   include Enumerable
 
-  def initialize(dinos = [], options = {})
+  def initialize(dinos = [], filter = {})
     @dinos = dinos
-    @filter = options[:filter] || {}
+    @filter = filter
   end
 
   def add_data(*file_paths)
     file_paths.each do |file_path|
-      csv = CSV.open(file_path, headers: true)
-      # is there a better way to do this to get the first line and then parse
-      mapper = DINO_MAPPERS.detect { |m| m.can_map?(csv.first.to_hash) }
-      raise "Can't find a mapper for file #{file_path}" unless mapper
-      csv.rewind
-      @dinos.concat csv.map { |row| create_dino(mapper.map(row.to_hash)) }
+      parse_file file_path
     end
   end
 
@@ -32,7 +27,7 @@ class DinoDex
         match(dino.send(field), value)
       end
     end
-    self.class.new(result_data, filter: @filter.merge(criteria))
+    self.class.new(result_data, @filter.merge(criteria))
   end
 
   def to_s
@@ -65,6 +60,20 @@ class DinoDex
   end
 
   private
+  def parse_file(file_path)
+    csv = CSV.open(file_path, headers: true)
+    mapper = get_mapper(csv)
+    @dinos.concat csv.map { |row| create_dino(mapper.map(row.to_hash)) }
+  end
+
+  def get_mapper(csv_file)
+    first_line = csv_file.first.to_hash
+    mapper = DINO_MAPPERS.detect { |m| m.can_map? first_line }
+    raise "Can't find a mapper for file #{file_path}" unless mapper
+    csv_file.rewind
+    mapper
+  end
+  
   def match(left, right)
     if right.is_a? Array
       left.send(right[0], right[1])

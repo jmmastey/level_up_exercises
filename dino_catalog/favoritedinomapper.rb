@@ -7,8 +7,9 @@ class FavoriteDinoMapper
   TRANSFORMS = {
     :carnivore => lambda { |v| CARNIVORE.include? v }
   }
+  TRANSFORMS.default = lambda { |v| v }
 
-  ATTRIBUTE_MAP = {
+  KEY_MAP = {
     :name => "NAME",
     :period => "PERIOD",
     :continent => "CONTINENT",
@@ -20,11 +21,11 @@ class FavoriteDinoMapper
   }
 
   protected
-  def attribute_map
-    ATTRIBUTE_MAP
+  def key_map
+    KEY_MAP
   end
 
   def transform(attr, value)
-    TRANSFORMS.has_key?(attr) ? TRANSFORMS[attr].call(value) : value
+    TRANSFORMS[attr].call(value)
   end
 end

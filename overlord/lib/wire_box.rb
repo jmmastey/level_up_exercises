@@ -1,8 +1,8 @@
 require_relative "wire"
 
-class DisabledError < RuntimeError; end;
-class ExplodedError < RuntimeError; end;
-class NoDeviceError < RuntimeError; end;
+class DisabledError < RuntimeError; end
+class ExplodedError < RuntimeError; end
+class NoDeviceError < RuntimeError; end
 
 class WireBox
   attr_accessor :device

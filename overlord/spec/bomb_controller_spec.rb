@@ -102,13 +102,16 @@ describe BombController do
       end
 
       it "ignores the activation code" do
-        3.times { controller_for_context.enter_code(controller.default_activation_code) }
+        3.times do
+          controller_for_context.enter_code(controller.default_activation_code)
+        end
         expect(controller_for_context.state).to eq(:active)
       end
 
       it "sets message to Invalid Code if an invalid code is entered" do
         controller_for_context.enter_code("3333")
-        expect(controller_for_context.message.downcase).to include("invalid code")
+        normalized_message = controller_for_context.message.downcase
+        expect(normalized_message).to include("invalid code")
       end
 
       it "detonates after 3 invalid attempts" do
@@ -127,8 +130,8 @@ describe BombController do
         controller
       end
 
-      it "raises a runtime error" do
-        expect { controller_for_context.enter_code("1111") }.to raise_error(RuntimeError)
+      it "raises an error" do
+        expect { controller_for_context.enter_code("1111") }.to raise_error
       end
     end
 
@@ -141,7 +144,7 @@ describe BombController do
       end
 
       it "raises an error" do
-        expect { controller_for_context.enter_code("3333") }.to raise_error(RuntimeError)
+        expect { controller_for_context.enter_code("3333") }.to raise_error
       end
     end
   end

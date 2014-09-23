@@ -34,7 +34,7 @@ class Overlord < Sinatra::Base
   end
 
   get "/get_state" do
-    get_json_response
+    generate_json_response
   end
 
   get "/explosion" do
@@ -47,7 +47,9 @@ class Overlord < Sinatra::Base
 
     return haml(:boot) unless validate_codes(activation_code, deactivation_code)
 
-    session[:bomb_controller] = create_bomb_controller(activation_code, deactivation_code)
+    controller =  create_bomb_controller(activation_code, deactivation_code)
+    session[:bomb_controller] = controller
+
     redirect "/bomb"
   end
 
@@ -62,7 +64,7 @@ class Overlord < Sinatra::Base
       add_error(e)
     end
 
-    get_json_response
+    generate_json_response
   end
 
   post "/snip_wire" do
@@ -76,7 +78,7 @@ class Overlord < Sinatra::Base
       add_error(e)
     end
 
-    get_json_response
+    generate_json_response
   end
 
   private
@@ -110,7 +112,7 @@ class Overlord < Sinatra::Base
     Bomb.new
   end
 
-  def get_json_response
+  def generate_json_response
     bomb_controller = current_bomb_controller
     bomb_controller.update_state
     detonation_time = get_detonation_time_from_timer(bomb_controller.timer)
@@ -139,7 +141,7 @@ class Overlord < Sinatra::Base
   end
 
   def validate_codes(*codes)
-    return codes.all? { |code| validate_code(code) }
+    codes.all? { |code| validate_code(code) }
   end
 
   # start server if this file is executed

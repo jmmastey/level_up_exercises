@@ -21,4 +21,3 @@ end
 Then(/^the bomb should explode$/) do
   expect(page).to have_selector(".explosion")
 end
-

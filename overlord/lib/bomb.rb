@@ -1,4 +1,4 @@
-class ExplodedError < RuntimeError; end;
+class ExplodedError < RuntimeError; end
 
 class Bomb
   attr_reader :state

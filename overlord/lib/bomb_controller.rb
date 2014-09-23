@@ -93,12 +93,12 @@ class BombController
     explode_if_triggered
   end
 
-  def enter_code_when_disabled(code)
-    raise RuntimeError, "Bomb has been deactivated."
+  def enter_code_when_disabled(_code)
+    raise "Bomb has been deactivated."
   end
 
-  def enter_code_when_exploded(code)
-    raise RuntimeError, "Bomb already exploded."
+  def enter_code_when_exploded(_code)
+    raise "Bomb already exploded."
   end
 
   def enter_code_when_inactive(code)
@@ -146,7 +146,8 @@ class BombController
   end
 
   def should_explode?
-    @state == :active && (has_expired_timer? || exhausted_deactivation_attempts?)
+    @state == :active && \
+      (has_expired_timer? || exhausted_deactivation_attempts?)
   end
 
   def start_activation_process

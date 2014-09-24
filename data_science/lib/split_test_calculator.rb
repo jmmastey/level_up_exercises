@@ -3,9 +3,6 @@ class SplitTestCalculator
 
   attr_reader :abtester
 
-  def initialize
-  end
-
   def chi_square_score
     @abtester.chisquare_score
   end

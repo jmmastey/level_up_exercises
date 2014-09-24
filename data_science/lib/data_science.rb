@@ -20,9 +20,12 @@ class DataScience
       @calculated_data[k] = { :conversionpct => conversion_percentage(k) }
       @calculated_data[k].store( :conversions, all_conversions(k))
       @calculated_data[k].store( :sample_size, cohort_sample_size(k))
+      @calculated_data[k].store( :error_bars,
+                                 @calculator.error_bars(all_conversions(k),
+                                  cohort_sample_size(k)))
     end
     @calculator.calculate(values)
-    @calculated_data[:chisq] = @calculator.chi_square_score
+    @calculated_data[:chi_square] = @calculator.chi_square_score
     @calculated_data[:pvalue] = @calculator.chi_square_pvalue
     @calculated_data[:different] = @calculator.test_groups_are_different?
     @calculated_data

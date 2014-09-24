@@ -42,15 +42,17 @@ describe 'Data Science' do
     end
 
     it "should have the correct amount of error bars for each cohort" do
-      @ds.all_data.each_key do |k|
-        puts @ds.error_bars(k).length
-      end
+      expect(@calculation["A"][:error_bars].length).to eql(2)
+      expect(@calculation["B"][:error_bars].length).to eql(2)
     end
 
     it "should have a valid p-value" do
+      expect(@calculation[:pvalue]).to_not be_nil
     end
 
     it "should have a valid chi-square value" do
+      expect(@calculation[:chi_square]).to_not be_nil
+      expect(@calculation[:chi_square]).to be_within(1).of(4)
     end
   end
 

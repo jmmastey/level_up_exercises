@@ -4,6 +4,7 @@ require "thread"
 class TimerError < RuntimeError; end
 
 class BombTimer
+  attr_reader :deadline
   SECONDS_REMAINING = 30
 
   def initialize(remaining = SECONDS_REMAINING)
@@ -30,8 +31,6 @@ class BombTimer
       deadline < Time.now
     end
   end
-
-  attr_reader :deadline
 
   def seconds_remaining
     if started?

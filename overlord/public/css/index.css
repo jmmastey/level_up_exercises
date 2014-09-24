@@ -4,8 +4,23 @@ body {
 }
 
 .starter-template {
-  color: white;
-  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  margin-top: 5%;
+}
+
+.starter-template .panel-title {
+  font-size: 24px;
+}
+
+.panel-body {
+  font-size: 18px;
+}
+
+.panel-body .progress {
+  margin-bottom: 0;
+}
+
+#devices {
+  margin-top: 10px;
 }
 
 .device {
@@ -49,9 +64,8 @@ body {
   margin: 0 5px;
 }
 
-#wirebox .wires {
-  margin: 10px 0;
-  padding: 0;
+#wirebox {
+  padding: 15px 0;
 }
 
 #wirebox .wire {
@@ -65,12 +79,6 @@ body {
   cursor: url("/images/cutter.png"), crosshair;
 }
 
-#wirebox .big-wire-left {
-  border-radius: 10px 0 0 10px;
-}
-#wirebox .big-wire-right {
-  border-radius: 0 10px 10px 0;
-}
 
 #wirebox .big-wire {
   padding: 15px 0;

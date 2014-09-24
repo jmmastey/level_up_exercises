@@ -8,8 +8,9 @@
         %strong Not Active
     %tr
       %td{colspan: 2}
-        %fieldset{disabled: ""}
-          %input#codebox-code{class: "form-control input-lg", type: "text"}
+        %div#codebox-code-display
+          %fieldset{disabled: ""}
+            %input#codebox-code{class: "form-control input-lg", type: "text"}
       %td
         %div#codebox-delete{data: {value: "delete"}, class: "btn btn-lg btn-primary btn-block"}
           %span{class: "glyphicon glyphicon-arrow-left"}

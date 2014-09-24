@@ -28,7 +28,7 @@ class Overlord < Sinatra::Application
     redirect to('/')
   end
 
-  get '/enter/:code' do
+  get '/enter/:code/:seconds' do
     @bomb = session[:bomb]
     codebox = @bomb.devices[:codebox]
     timer = @bomb.devices[:timer]
@@ -37,6 +37,7 @@ class Overlord < Sinatra::Application
       timer.stop unless codebox.active?
     else
       codebox.activate(params[:code])
+      timer.reset(params[:seconds].to_i)
       timer.start
     end
     redirect to('/')

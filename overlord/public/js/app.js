@@ -10,6 +10,11 @@ codebox = {
   },
   "update_dom" : function() {
     $('#codebox-code').val(this.formatted_code());
+    if (this.stack.length < 4) {
+      $('#codebox-code-display').addClass('has-error');
+    } else {
+      $('#codebox-code-display').removeClass('has-error');
+    }
   },
   "press" : function(code) {
      if (this.stack.length < 4) {
@@ -22,7 +27,8 @@ codebox = {
      this.update_dom();
    },
    "enter" : function() {
-     window.location = "/enter/" + this.formatted_code();
+     if (this.stack.length < 4) { return; }
+     window.location = "/enter/" + this.formatted_code() + "/" + timer.time;
    }
 }
 
@@ -43,6 +49,12 @@ timer = {
   },
   "update_dom" : function() {
     $('#timer-output').val(this.formatted_time());
+    if (this.time < 10) {
+      time = 10 - this.time;
+      $('.progress-bar').css({"width" : time + "0%"});
+    } else {
+      $('.progress-bar').css({"width" : "0%"});
+    }
   },
   "increment" : function() {
     if (!this.active) {
@@ -50,7 +62,7 @@ timer = {
     }
   },
   "decrement" : function() {
-    if (!this.active) {
+    if (!this.active && this.time > 1) {
       this.update_time(this.time - 1);
     }
   },
@@ -114,6 +126,9 @@ window.onload = function() {
   });
   $('#timer-decrement').click(function() {
     timer.decrement();
+  });
+  $('#timer-reset').click(function() {
+    timer.reset();
   });
 
   var time_left = parseInt($('#timer-time').val());

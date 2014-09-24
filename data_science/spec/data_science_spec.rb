@@ -20,8 +20,8 @@ describe 'Data Science' do
   context "Calculation" do
     before :all do
       @ds = DataScience.new("source_data.json")
+      @calculation = @ds.perform_all_calculations
     end
-
 
     it "should return a correct total sample size" do
       totals = 0
@@ -45,15 +45,24 @@ describe 'Data Science' do
       @ds.all_data.each_key do |k|
         puts @ds.error_bars(k).length
       end
-
     end
 
     it "should have a valid p-value" do
-
     end
 
     it "should have a valid chi-square value" do
+    end
+  end
 
+  context "Invalid Data" do
+    before :all do
+      @ds = DataScience.new("spec/mock_json.json")
+    end
+
+    it "should throw a Insufficient Data error" do
+      expect {
+        @ds.perform_all_calculations
+      }.to raise_error
     end
   end
 end

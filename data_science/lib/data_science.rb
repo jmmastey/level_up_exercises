@@ -2,13 +2,30 @@ class DataScience
   require_relative 'parse_json_file'
   require_relative 'split_test_calculator'
 
-  attr_accessor :all_data, :calculator
+  attr_accessor :all_data, :calculator, :calculated_data
 
   def initialize(filename)
     parser = ParseJsonFile.new
     parser.load_json_file(filename)
     @all_data = parser.group_data_by_cohort
     @calculator = SplitTestCalculator.new
+    @calculated_data = {}
+  end
+
+  def perform_all_calculations
+    values = {}
+    @all_data.each_key do |k|
+      values[k] = { :conversions=>all_conversions(k),
+                    :total=>cohort_sample_size(k) }
+      @calculated_data[k] = { :conversionpct => conversion_percentage(k) }
+      @calculated_data[k].store( :conversions, all_conversions(k))
+      @calculated_data[k].store( :sample_size, cohort_sample_size(k))
+    end
+    @calculator.calculate(values)
+    @calculated_data[:chisq] = @calculator.chi_square_score
+    @calculated_data[:pvalue] = @calculator.chi_square_pvalue
+    @calculated_data[:different] = @calculator.test_groups_are_different?
+    @calculated_data
   end
 
   def cohort_sample_size(cohort)
@@ -22,19 +39,6 @@ class DataScience
   def all_conversions(cohort_id)
     conv_data = specific_cohort(cohort_id)
     conv_data[cohort_id].select { |item| item[:result] == 1 }.length.to_f
-  end
-
-  def perform_all_calculations
-    values = {}
-    @all_data.each_key do |k|
-      values[k] = { :conversions=>all_conversions(k),
-                    :total=>cohort_sample_size(k) }
-      puts "Conversion Percentage: #{conversion_percentage(k)}"
-    end
-
-    @calculator.calculate(values)
-    puts "Chi2: #{@calculator.chi_square_score} PV: #{@calculator.chi_square_pvalue}"
-    puts "Different Values? #{@calculator.test_groups_are_different?}"
   end
 
   def conversion_percentage(cohort_id)

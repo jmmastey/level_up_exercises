@@ -1,4 +1,4 @@
-DROP DATABASE yadda;
+DROP DATABASE IF EXISTS yadda;
 CREATE DATABASE yadda;
 
 \connect yadda
@@ -6,13 +6,13 @@ CREATE DATABASE yadda;
 CREATE TABLE breweries (
     id serial PRIMARY KEY,
     name varchar(128) NOT NULL,
-    year_founded varchar(4) NOT NULL,
+    year_founded integer NOT NULL,
     address varchar(128) NOT NULL,
     city varchar(128) NOT NULL,
-    state varchar(2) NOT NULL, -- I can make a lookup for this but I'm lazy
+    state char(2) NOT NULL,
     description text NOT NULL,
-    created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL,
+    created_at timestamptz NOT NULL,
+    updated_at timestamptz NOT NULL,
     created_by varchar(64) NOT NULL,
     updated_by varchar(64) NOT NULL
 );
@@ -20,11 +20,10 @@ CREATE TABLE breweries (
 CREATE TABLE beer_styles (
     id serial PRIMARY KEY,
     style varchar(128) NOT NULL,
-    created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL,
+    created_at timestamptz NOT NULL,
+    updated_at timestamptz NOT NULL,
     created_by varchar(64) NOT NULL,
-    updated_by varchar(64) NOT NULL,
-    UNIQUE(style)
+    updated_by varchar(64) NOT NULL
 );
 
 CREATE TABLE beers (
@@ -33,8 +32,8 @@ CREATE TABLE beers (
     beer_style_id integer REFERENCES beer_styles ON DELETE CASCADE,
     name varchar(64) NOT NULL,
     description text NOT NULL,
-    created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL,
+    created_at timestamptz NOT NULL,
+    updated_at timestamptz NOT NULL,
     created_by varchar(64) NOT NULL,
     updated_by varchar(64) NOT NULL
 );
@@ -47,8 +46,8 @@ CREATE TABLE users (
     email     varchar (255) NOT NULL,
     birth_date date NOT NULL,
     blood_type varchar(2) NOT NULL,
-    created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL,
+    created_at timestamptz NOT NULL,
+    updated_at timestamptz NOT NULL,
     created_by varchar(64) NOT NULL,
     updated_by varchar(64) NOT NULL
 );
@@ -58,9 +57,9 @@ CREATE TABLE ratings (
     user_id integer REFERENCES users ON DELETE CASCADE,
     beer_id integer REFERENCES beers ON DELETE CASCADE,
     rating  integer NOT NULL,
-    comment text default '',
-    created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL,
+    comments text default '',
+    created_at timestamptz NOT NULL,
+    updated_at timestamptz NOT NULL,
     created_by varchar(64) NOT NULL,
     updated_by varchar(64) NOT NULL
 );
@@ -87,13 +86,13 @@ INSERT INTO breweries (
 )
 VALUES(
     'Goose Island Brewery',
-    '1988',
+    1988,
     '1800 W Fulton st',
     'Chicago',
     'IL',
     'Makers of 312 and Matilda',
-    now(),
-    now(),
+    now() at time zone 'UTC',
+    now() at time zone 'UTC',
     current_user,
     current_user
 );
@@ -107,8 +106,8 @@ INSERT INTO beer_styles (
 )
 VALUES(
     'American Pale Wheat Ale',
-    now(),
-    now(),
+    now() at time zone 'UTC',
+    now() at time zone 'UTC',
     current_user,
     current_user
 );
@@ -128,8 +127,8 @@ VALUES(
     1,
     '312 Urban Wheat',
     'Hazy staw color, light orange hop aroma',
-    now(),
-    now(),
+    now() at time zone 'UTC',
+    now() at time zone 'UTC',
     current_user,
     current_user
 );
@@ -151,8 +150,8 @@ VALUES(
     'freyes1988@gmail.com',
     '1988-04-15',
     'O-',
-    now(),
-    now(),
+    now() at time zone 'UTC',
+    now() at time zone 'UTC',
     current_user,
     current_user
 );
@@ -161,7 +160,7 @@ INSERT INTO ratings (
     user_id,
     beer_id,
     rating,
-    comment,
+    comments,
     created_at,
     updated_at,
     created_by,
@@ -172,15 +171,15 @@ VALUES(
     1,
     1,
     'This beer is like awesome, man!',
-    now(),
-    now(),
+    now() at time zone 'UTC',
+    now() at time zone 'UTC',
     current_user,
     current_user
 );
 
 -- Like, made an error in my beer rating man
 UPDATE ratings
-SET rating = 5, updated_at = now(), updated_by = current_user
+SET rating = 5, updated_at = now() at time zone 'UTC', updated_by = current_user
 WHERE user_id = 1 AND beer_id = 1;
 
 INSERT INTO beers(
@@ -198,8 +197,8 @@ VALUES(
     1,
     '312 Pale Ale',
     'Hazy staw color, light orange hop aroma',
-    now(),
-    now(),
+    now() at time zone 'UTC',
+    now() at time zone 'UTC',
     current_user,
     current_user
 );
@@ -208,7 +207,7 @@ INSERT INTO ratings (
     user_id,
     beer_id,
     rating,
-    comment,
+    comments,
     created_at,
     updated_at,
     created_by,
@@ -219,8 +218,8 @@ VALUES(
     2,
     4,
     'This beer is also awesome, man! But not as awesome as the other beer',
-    now(),
-    now(),
+    now() at time zone 'UTC',
+    now() at time zone 'UTC',
     current_user,
     current_user
 );

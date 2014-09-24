@@ -1,4 +1,5 @@
 require "rspec"
+require "rspec/matchers"
 
 require_relative "../view_parser"
 require_relative "../binomial_data_set.rb"
@@ -37,8 +38,8 @@ describe BinomialDataSet do
 
     # TODO: group testing should not be dataset
     it "should provide the chance success by group" do
-      expect(groups["A"].success_percent).to eq(0.5)
-      expect(groups["B"].success_percent).to eq(0.25)
+      expect(data_set).to have(2).groups["A"]
+      expect(data_set).to have(2).groups["B"]
     end
 
     it "should provide the success count by group" do

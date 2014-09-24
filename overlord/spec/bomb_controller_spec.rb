@@ -14,8 +14,6 @@ describe BombController do
 
   it "can initialize with an activation and deactivation code" do
     controller = BombController.new("1111", "2222")
-    expect(controller.activation_code).to eq("1111")
-    expect(controller.deactivation_code).to eq("2222")
   end
 
   it "is inactive when initialized" do
@@ -23,22 +21,12 @@ describe BombController do
   end
 
   describe "#default_activation_code" do
-    it "is the activation code of a bomb initialized without one" do
-      default = controller.default_activation_code
-      expect(default).to eq(controller.activation_code)
-    end
-
     it "is 1234" do
       expect(controller.default_activation_code).to eq("1234")
     end
   end
 
   describe "#default_deactivation_code" do
-    it "is the deactivation code of a bomb initialized without one" do
-      default = controller.default_deactivation_code
-      expect(default).to eq(controller.deactivation_code)
-    end
-
     it "is 0000" do
       expect(controller.default_deactivation_code).to eq("0000")
     end

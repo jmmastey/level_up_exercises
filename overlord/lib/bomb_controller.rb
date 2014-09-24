@@ -6,7 +6,7 @@ class BombController
   MAX_DEACTIVATION_ATTEMPTS = 3
 
   attr_accessor :wire_box
-  attr_reader :activation_code, :deactivation_code, :message, :timer
+  attr_reader :message, :timer
 
   def initialize(activation_code = nil,
                  deactivation_code = nil)

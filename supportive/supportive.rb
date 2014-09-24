@@ -61,9 +61,7 @@ class BlagPost
   end
 
   def abstract
-    return body if body.length < 200
-
-    body[0..200] + "..."
+    body.truncate(200)
   end
 
 end

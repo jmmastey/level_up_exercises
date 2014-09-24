@@ -15,6 +15,7 @@ class Overlord < Sinatra::Application
   WIREBOX_COLORS = [:red, :green, :blue, :yellow, :orange]
   set :haml, format: :html5
   set :sessions, true
+  set :port, 80
 
   get '/' do
     @bomb = session[:bomb] || new_bomb

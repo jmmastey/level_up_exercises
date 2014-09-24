@@ -4,7 +4,7 @@ require_relative "../lib/bomb_controller"
 describe BombController do
   let(:controller) do
     controller = BombController.new
-    controller.wire_box = get_test_wire_box
+    controller.wire_box = create_test_wire_box
     controller
   end
 

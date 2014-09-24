@@ -58,10 +58,7 @@ class BombController
 
   def check_wire_box_for_triggers
     @wire_box.check_booby_traps if @state == :active
-    if @wire_box.exploded?
-      @state = :exploded
-      @message = "Exploded"
-    end
+    report_bomb_exploded if @wire_box.exploded?
   end
 
   def deactivate
@@ -139,6 +136,11 @@ class BombController
 
   def raise_code_format_error
     raise ArgumentError, "Invalid code format."
+  end
+
+  def report_bomb_exploded
+    @state = :exploded
+    @message = "Exploded"
   end
 
   def reset_deactivation_attempts

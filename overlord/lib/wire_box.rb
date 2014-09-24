@@ -26,7 +26,7 @@ class WireBox
   end
 
   def disarm_wires
-    @wires.select { |wire| wire.is_type?(:disarm) }
+    @wires.select { |wire| wire.type?(:disarm) }
   end
 
   def exploded?
@@ -38,7 +38,7 @@ class WireBox
   end
 
   def exploding_wires
-    @wires.select { |wire| wire.is_type?(:exploding) }
+    @wires.select { |wire| wire.type?(:exploding) }
   end
 
   def get_wire_from_color(color)

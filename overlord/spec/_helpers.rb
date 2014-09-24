@@ -2,9 +2,9 @@ require_relative "../lib/bomb"
 require_relative "../lib/wire"
 require_relative "../lib/wire_box"
 
-def get_test_wire_box
-  disarm_wires = get_disarm_wires
-  exploding_wires = get_exploding_wires
+def create_test_wire_box
+  disarm_wires = create_disarm_wires
+  exploding_wires = create_exploding_wires
 
   box = WireBox.new(disarm_wires.concat(exploding_wires))
   box.device = Bomb.new
@@ -14,7 +14,7 @@ end
 
 private
 
-def get_disarm_wires
+def create_disarm_wires
   disarm_wires = [
     Wire.new(:red),
     Wire.new(:black)
@@ -23,7 +23,7 @@ def get_disarm_wires
   disarm_wires
 end
 
-def get_exploding_wires
+def create_exploding_wires
   explode_wires = [
     Wire.new(:blue),
     Wire.new(:green)

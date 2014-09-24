@@ -11,10 +11,10 @@ describe Wire do
     expect(wire.color).to eq(:red)
   end
 
-  describe "#is_type?" do
+  describe "#type?" do
     it "returns true if this object's type matches the given type" do
       wire.type = :disarm
-      expect(wire.is_type?(:disarm)).to be true
+      expect(wire.type?(:disarm)).to be true
     end
   end
 

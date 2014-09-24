@@ -15,12 +15,12 @@ class Wire
     @state == :intact
   end
 
-  def is_type?(type)
+  def type?(type)
     @type == type
   end
 
   def snip
-    raise RuntimeError, "Wire is already cut." if cut?
+    raise "Wire is already cut." if cut?
 
     @state = :cut
   end

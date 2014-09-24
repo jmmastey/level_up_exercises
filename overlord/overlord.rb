@@ -143,5 +143,5 @@ class Overlord < Sinatra::Base
   end
 
   # start server if this file is executed
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

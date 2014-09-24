@@ -18,7 +18,7 @@ describe WireBox do
   end
 
   let(:complex_wirebox) do
-    get_test_wire_box
+    create_test_wire_box
   end
 
   it "initializes without wires" do
@@ -59,7 +59,7 @@ describe WireBox do
       expect(complex_wirebox).to have(2).disarm_wires
 
       disarm_wires = complex_wirebox.disarm_wires
-      expect(disarm_wires.all? { |wire| wire.is_type?(:disarm) }).to be true
+      expect(disarm_wires.all? { |wire| wire.type?(:disarm) }).to be true
     end
   end
 
@@ -75,7 +75,7 @@ describe WireBox do
       expect(complex_wirebox).to have(2).exploding_wires
 
       exploding_wires = complex_wirebox.exploding_wires
-      expect(exploding_wires.all? { |wire| wire.is_type?(:exploding) }).to be true
+      expect(exploding_wires.all? { |wire| wire.type?(:exploding) }).to be true
     end
   end
 

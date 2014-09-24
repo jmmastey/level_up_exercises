@@ -80,6 +80,7 @@ DEPENDENCIES
   cucumber
   haml
   pry
+  rack
   rspec
   rspec-collection_matchers
   rspec-expectations

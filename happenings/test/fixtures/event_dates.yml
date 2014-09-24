@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  venue_id: 
+  date_time: 2014-09-24 16:17:03
+  event_id: 
+
+two:
+  venue_id: 
+  date_time: 2014-09-24 16:17:03
+  event_id: 

@@ -5,10 +5,13 @@ DROP VIEW IF EXISTS tot_beer_scores;
 DROP VIEW IF EXISTS avg_beer_scores;
 
 CREATE VIEW tot_beer_scores AS
-    SELECT b.brewery_id, b.id as beer_id, SUM(rating) as total
-    FROM ratings INNER JOIN beers b
+    SELECT b.brewery_id, b.id as beer_id, SUM(rating) as total, rank() OVER (
+        PARTITION BY b.brewery_id ORDER BY SUM(rating) DESC
+    )
+    FROM ratings
+    INNER JOIN beers b
     ON b.id = ratings.beer_id
-    GROUP by b.id;
+    GROUP BY b.id;
 
 CREATE VIEW avg_beer_scores AS
     SELECT
@@ -25,13 +28,7 @@ CREATE VIEW top_rated_beer_per_brewery AS
         br.city as brewery_city,
         b.name as beer_name,
         scores.total as score_total
-    FROM (
-        SELECT brewery_id, beer_id, total, rank()
-        OVER (
-            PARTITION BY brewery_id ORDER BY total DESC
-        )
-        FROM tot_beer_scores
-    ) scores
+    FROM tot_beer_scores as scores
     INNER JOIN breweries br
     ON br.id = scores.brewery_id
     INNER JOIN beers b

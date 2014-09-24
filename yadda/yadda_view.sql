@@ -64,4 +64,6 @@ CREATE VIEW you_might_also_enjoy AS
         ON b.id = abs.beer_id
     INNER JOIN beer_styles bs
         ON bs.id = b.beer_style_id
-    WHERE abs.average >= 4;
+        AND bs.style = 'Pilsner'
+    WHERE abs.average >= 4
+    ORDER BY RANDOM ();

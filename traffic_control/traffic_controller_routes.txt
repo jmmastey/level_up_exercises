@@ -1,25 +1,27 @@
-                  Prefix Verb   URI Pattern                        Controller#Action
+Verb   URI Pattern                     Controller#Action
 
-                 flights GET    /flights(.:format)                 flights#index
-              new_flight GET    /flights/new(.:format)             flights#new
-                  flight POST   /flights/create(.:format)          flights#create
-             edit_flight GET    /flights/:id/edit(.:format)        flights#edit
-                  flight GET    /flights/:id(.:format)             flights#show
-         flight_manifest GET    /flights/:id/:manifest(.:format)   flights#manifest
-             flight_trip GET    /flights/:id/:trip(.:format)       flights#trip
-           flight_refuel GET    /flights/:id/:refuel(.:format)     flights#refuel
+GET    /flights                        flights#index
+POST   /flights/                       flights#create
+GET    /flights/:id                    flights#show
+PUT    /flights/:id/                   flights#edit
+GET    /flights/:id/manifests          flights#manifest
+GET    /flights/:id/destinations       flights#destination
+GET    /flights/:id/refuelling_stops   flights#refuelling_stops
 
-                airports GET    /airports(.:format)                airports#index
-                 airport GET    /airports/:code(.:format)          airports#show
+GET    /airports                       airports#index
+GET    /airports/:code                 airports#show
+GET    /airports/:code/flights         airport#flights
 
-             itineraries GET    /itineraries(.:format)             itineraries#index
-               itinerary GET    /itineraries/:id(.:format)         itineraries#show
-                         PUT    /itineraries/:id(.:format)         itineraries#update
-                         DELETE /itineraries/:id(.:format)         itineraries#destroy
+GET    /itineraries                    itineraries#index
+GET    /itineraries/:id                itineraries#show
+GET    /itineraries/:id/flights        itineraries#flights
+POST   /itineraries/                   itineraries#create
+PUT    /itineraries/:id                itineraries#edit
+DELETE /itineraries/:id                itineraries#destroy
 
-              passengers GET    /passengers(.:format)              passengers#index
-               passenger GET    /passengers/:id(:format)           passengers#show
-               passenger POST   /passengers/create(.:format)       passengers#create
-     passenger_itinerary GET    /passengers/:id/itinerary(:format) passengers#itinerary
-                         PUT    /passengers/:id/itinerary(:format) passengers#update_itinerary
-                         DELETE /passengers/:id/itinerary(:format) passengers#destroy_itinerary
+GET    /passengers                     passengers#index
+POST   /passengers/                    passengers#create
+GET    /passengers/:id                 passengers#show
+GET    /passengers/:id/itineraries     passengers#itinerary
+PUT    /passengers/:id/itineraries     passengers#update_itinerary
+DELETE /passengers/:id/itineraries     passengers#destroy_itinerary

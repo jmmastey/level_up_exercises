@@ -1,0 +1,27 @@
+Verb   URI Pattern                     Controller#Action
+
+GET    /flights                        flights#index
+POST   /flights/                       flights#create
+GET    /flights/:id                    flights#show
+PUT    /flights/:id/                   flights#edit
+GET    /flights/:id/manifests          flights#manifest
+GET    /flights/:id/destinations       flights#destination
+GET    /flights/:id/refuelling_stops   flights#refuelling_stops
+
+GET    /airports                       airports#index
+GET    /airports/:code                 airports#show
+GET    /airports/:code/flights         airport#flights
+
+GET    /itineraries                    itineraries#index
+GET    /itineraries/:id                itineraries#show
+GET    /itineraries/:id/flights        itineraries#flights
+POST   /itineraries/                   itineraries#create
+PUT    /itineraries/:id                itineraries#edit
+DELETE /itineraries/:id                itineraries#destroy
+
+GET    /passengers                     passengers#index
+POST   /passengers/                    passengers#create
+GET    /passengers/:id                 passengers#show
+GET    /passengers/:id/itineraries     passengers#itinerary
+PUT    /passengers/:id/itineraries     passengers#update_itinerary
+DELETE /passengers/:id/itineraries     passengers#destroy_itinerary

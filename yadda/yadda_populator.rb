@@ -25,8 +25,8 @@ def populate_breweries(conn, brewery_count)
       $4,
       $5,
       $6,
-      now(),
-      now(),
+      now() at time zone 'UTC',
+      now() at time zone 'UTC',
       current_user,
       current_user
   )"
@@ -61,8 +61,8 @@ def populate_beer_styles(conn, beer_styles)
   )
   VALUES(
       $1,
-      now(),
-      now(),
+      now() at time zone 'UTC',
+      now() at time zone 'UTC',
       current_user,
       current_user
   )"
@@ -91,8 +91,8 @@ def populate_beers(conn, beer_count, brewery_count, beer_style_count)
       $2,
       $3,
       $4,
-      now(),
-      now(),
+      now() at time zone 'UTC',
+      now() at time zone 'UTC',
       current_user,
       current_user
   )"
@@ -138,8 +138,8 @@ def populate_users(conn, user_count)
         $3,
         $4,
         $5,
-        now(),
-        now(),
+        now() at time zone 'UTC',
+        now() at time zone 'UTC',
         current_user,
         current_user
     )
@@ -186,7 +186,7 @@ def rate_beers(conn, user_count, beer_count)
         $3,
         $4,
         $5,
-        now(),
+        now() at time zone 'UTC',
         current_user,
         current_user
     )

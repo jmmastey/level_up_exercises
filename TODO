@@ -19,3 +19,16 @@ TODO:
 
 5:  data_science
     - refactor to introspect on file information for instantation klasses.
+      - OR inject importer into parser prior to passing off to calculator
+    - omit Importer::read() in favor of Importer::load()
+    - fix begin/rescue syntax in SplitTest execute
+    - just use keys in build_groups in SplitTest
+    - extra reject clause from init_tester in SplitTest
+    - remove #to_f from denominator in conversion in SplitTest
+    - SplitTestCalculator -> Calculator
+    - Object.this(&block) OR GROUP_BY in SplitTestParser
+    - specs -> me -> better naming
+    - specs -> lets for outside context variable assignment
+    - hash_matcher / keys for in 'exposes correct fields' in SplitTestCalculator
+    - new line are `it` blocks
+    - "populates `results` hash with accurate data" -> extract `expected`

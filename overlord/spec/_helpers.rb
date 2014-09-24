@@ -6,7 +6,7 @@ def get_test_wire_box
   disarm_wires = get_disarm_wires
   exploding_wires = get_exploding_wires
 
-  box = WireBox.new(disarm_wires.concat(explode_wires))
+  box = WireBox.new(disarm_wires.concat(exploding_wires))
   box.device = Bomb.new
 
   box
@@ -19,6 +19,8 @@ def get_disarm_wires
     Wire.new(:red),
     Wire.new(:black)
   ].each { |wire| wire.type = :disarm }
+
+  disarm_wires
 end
 
 def get_exploding_wires
@@ -26,4 +28,6 @@ def get_exploding_wires
     Wire.new(:blue),
     Wire.new(:green)
   ].each { |wire| wire.type = :exploding }
+
+  explode_wires
 end

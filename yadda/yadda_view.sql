@@ -13,14 +13,13 @@ CREATE VIEW tot_beer_scores AS
     ON b.id = ratings.beer_id
     GROUP BY b.id;
 
-CREATE VIEW avg_beer_scores AS
+CREATE VIEW top_avg_beer_scores AS
     SELECT
-        b.brewery_id,
-        b.id as beer_id,
+        beer_id,
         ROUND(AVG(rating), 1) as average
-    FROM ratings INNER JOIN beers b
-    ON b.id = ratings.beer_id
-    GROUP by b.id;
+    FROM ratings
+    GROUP by beer_id
+    HAVING ROUND(AVG(rating), 1) >= 4;
 
 CREATE VIEW top_rated_beer_per_brewery AS
     SELECT
@@ -55,12 +54,11 @@ CREATE VIEW recent_avg_score AS
     ORDER BY brewery_name, brewery_city, beer_name;
 
 CREATE VIEW you_might_also_enjoy AS
-    SELECT bs.style as style, b.name as beer_name, abs.average
-    FROM avg_beer_scores abs
+    SELECT bs.style as style, b.name as beer_name, tabs.average
+    FROM top_avg_beer_scores tabs
     INNER JOIN beers b
-        ON b.id = abs.beer_id
+        ON b.id = tabs.beer_id
     INNER JOIN beer_styles bs
         ON bs.id = b.beer_style_id
         AND bs.style = 'Pilsner'
-    WHERE abs.average >= 4
     ORDER BY RANDOM ();

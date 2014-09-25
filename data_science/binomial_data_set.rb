@@ -14,14 +14,14 @@ class BinomialDataSet
 
   def to_s
     format("DataSet:(total '#{count}', successes '#{success_count}', " \
-    "failures '#{fail_count}', percent success '%3f%%')", 100*success_percent)
+    "failures '#{fail_count}', percent success '%3f%%')", 100 * success_percent)
   end
 
   private
 
   def split_into_groups(data)
     raw_groups = data.group_by(&@group_field)
-    raw_groups.each { |key, data| raw_groups[key] = parse_group(key, data) }
+    raw_groups.each { |key, group| raw_groups[key] = parse_group(key, group) }
   end
 
   def parse_group(key, data)

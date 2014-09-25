@@ -6,7 +6,7 @@ describe ConfidenceInterval do
   context "upon recieving statistics" do
     let(:interval) do
       ConfidenceInterval.new(success_count: 2,
-         fail_count:2, confidence_level: 0.95)
+         fail_count: 2, confidence_level: 0.95)
     end
 
     it "should be able to calculate the standard deviation" do

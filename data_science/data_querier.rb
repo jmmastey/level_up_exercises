@@ -2,27 +2,33 @@ require 'forwardable'
 require_relative "data_entry"
 
 class DataQuerier
-  extend Forwardable
-  include Enumerable
-
-  attr_reader :test_data
-
-  def_delegators :test_data, :each
+  attr_reader :groups
 
   def initialize(data = [])
     validate_data(data)
     @test_data = data
+    @groups = group_data(data)
   end
 
-  def count_conversions(cohort)
-    count { |entry| entry.cohort == cohort && entry.conversion? }
+  def count_conversions(cohort = nil)
+    entries = @test_data
+    entries = groups[cohort] if cohort
+
+    entries.count { |entry| entry.conversion? }
   end
 
-  def count_views(cohort)
-    count { |entry| entry.cohort == cohort }
+  def count_views(cohort = nil)
+    entries = @test_data
+    entries = groups[cohort] if cohort
+
+    entries.count
   end
 
   private
+
+  def group_data(data)
+    data.group_by(&:cohort)
+  end
 
   def validate_data(data)
     valid = data.is_a?(Array) && data.all? { |entry| entry.is_a?(DataEntry) }

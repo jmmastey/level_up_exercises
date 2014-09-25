@@ -78,29 +78,19 @@ end
 
 
 def activation
-  value_of_field("activation")
-end
-
-def deactivation
-  value_of_field("deactivation")
+  page.evaluate_script("activation()")
 end
 
 def integrity
-  value_of_field("integrity")
+  page.evaluate_script("integrity()")
 end
 
 def deact_attempts
-  value_of_field("deact_attempts")
+  page.evaluate_script("attempts()")
 end
 
 def bomb_message
-  value_of_field("bomb_msg")
-end
-
-
-def value_of_field(label)
-  field = page.find("meta[name=#{label}]", :visible => false)
-  field[:content]
+  page.evaluate_script("bomb_msg()")
 end
 
 def activate_bomb(code = '1234')

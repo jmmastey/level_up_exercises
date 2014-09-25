@@ -1,9 +1,5 @@
 <html>
   <title>Bomb Status</title>
-  <meta name="integrity"      content="<%= integrity %>">
-  <meta name="activation"     content="<%= activation %>">
-  <meta name="deact_attempts" content="<%= deact_attempts %>">
-  <meta name="bomb_msg"       content="<%= bomb_msg %>">
 
   <body bgcolor="#000033">
 	<center>
@@ -19,25 +15,17 @@
 	  <script type="text/javascript">
 
 		// Access State
-        function is_intact() {
-            return ("<%= integrity %>"  == "Intact");
-        }
-        
-        function is_detonated() {
-            return ("<%= integrity %>"  == "Blown to shreds");
-        }
-        
-        function is_snipped() {
-            return ("<%= integrity %>"  == "Wires are cut");
-        }
-        
-        function is_active() {
-            return ("<%= activation %>"  == "Active");
-        }
-        
-        function is_inactive() {
-            return ("<%= activation %>"  == "Inactive");
-        }
+		function integrity()    { return "<%= integrity %>";      }
+		function activation()   { return "<%= activation %>";     }
+		function attempts()     { return "<%= deact_attempts %>"; }
+		function bomb_msg()     { return "<%= bomb_msg %>";	      }
+		function timer()        { return "<%= timer %>";          }
+
+        function is_intact()    { return (integrity()  == "Intact");          }
+        function is_detonated() { return (integrity()  == "Blown to shreds"); }
+        function is_snipped()   { return (integrity()  == "Wires are cut");   }
+        function is_active()    { return (activation() == "Active");          }
+        function is_inactive()  { return (activation() == "Inactive");        }
 
 		// Actions
         function set_keypad_code(code) {
@@ -199,10 +187,7 @@
             }
         }
         
-        function draw_panel(integrity,
-                            activation,
-                            attempts,
-                            message) {
+        function draw_panel() {
             var canvas = document.getElementById("canvas");
             if (!canvas.getContext) { return; }
             var ctx=canvas.getContext("2d");
@@ -239,23 +224,23 @@
             
             ctx.font = "30px bold courier";
             ctx.fillStyle = '#FFFF00';
-            ctx.fillText(integrity,   310, 450);
-            ctx.fillText(activation,  310, 510);
-            ctx.fillText(attempts,    310, 570);
+            ctx.fillText(integrity(),   310, 450);
+            ctx.fillText(activation(),  310, 510);
+            ctx.fillText(attempts(),    310, 570);
             
             ctx.font = "30px bold courier";
             ctx.textAlign="center";
             ctx.fillStyle = '#9999FF';
             
-            if (ctx.measureText(message).width > 550) {
+            if (ctx.measureText(bomb_msg()).width > 550) {
                 ctx.font = "20px bold courier";
             }
             
-            if (ctx.measureText(message).width > 550) {
+            if (ctx.measureText(bomb_msg()).width > 550) {
                 ctx.font = "10px bold courier";
             }
             
-            ctx.fillText(message, 300, 750);
+            ctx.fillText(bomb_msg(), 300, 750);
             
             draw_keypad();
             
@@ -486,7 +471,7 @@
         draw_background();
         
         // Get Remaining Time on Timer
-        var remaining = "<%= timer %>";
+        var remaining = timer();
 
         // Keypad Code
         var keypad_code = "";
@@ -518,11 +503,7 @@
             draw_timer();
         }
         
-        draw_panel("<%= integrity %>",
-                   "<%= activation %>",
-                   "<%= deact_attempts %>",
-                   "<%= bomb_msg %>");
-        
+        draw_panel();
         add_listeners();
 
       </script>

@@ -14,8 +14,10 @@ set :port, 8080
 set :bind, '0.0.0.0'
 
 ACTIVATION_TIME = 10
-ALLOWED_ACTIONS = ['activate', 'deactivate', 'snip', 'detonate']
 
+before do
+  record_timer(params)
+end
 
 get '/' do
   redirect '/overlords'
@@ -32,33 +34,22 @@ post '/overlords/create_bomb' do
   erb :bomb_status, :locals => local_session_variables
 end
 
-post '/overlords/action' do
-  record_timer(params)
-  action = get_valid_action(params)
-  send(action, params) if action
-  erb :bomb_status, :locals => local_session_variables
-end
-
 post '/overlords/activate' do
-  record_timer(params)
   activate(params)
   erb :bomb_status, :locals => local_session_variables
 end
 
 post '/overlords/deactivate' do
-  record_timer(params)
   deactivate(params)
   erb :bomb_status, :locals => local_session_variables
 end
 
 post '/overlords/snip' do
-  record_timer(params)
   snip
   erb :bomb_status, :locals => local_session_variables
 end
 
 post '/overlords/detonate' do
-  record_timer(params)
   detonate
   erb :bomb_status, :locals => local_session_variables
 end
@@ -74,11 +65,6 @@ private
 
 def record_timer(params)
   session[:timer] = params[:timer]
-end
-
-def get_valid_action(params)
-  action = params[:action]
-  return action if ALLOWED_ACTIONS.include?(action)
 end
 
 def activate(params)
@@ -108,8 +94,4 @@ end
 
 def session_bomb
   session[:bomb] || Bomb.new
-end
-
-def start_time
-  session[:start_time] ||= (Time.now).to_s
 end

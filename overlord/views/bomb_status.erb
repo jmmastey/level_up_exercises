@@ -24,6 +24,8 @@
 	  </form>
 
 	  <script type="text/javascript">
+
+		// Access State
         function is_intact() {
             return ("<%= integrity %>"  == "Intact");
         }
@@ -42,6 +44,56 @@
         
         function is_inactive() {
             return ("<%= activation %>"  == "Inactive");
+        }
+
+        function get_keypad_code() {
+            return document.getElementById("keypad_code").value;
+        }
+
+		// Actions
+        function set_keypad_code(code) {
+            document.getElementById("keypad_code").value = code;
+        }
+
+        function click_activate() {
+            post('/overlords/action', {action: 'activate', code: get_keypad_code(), timer: remaining});
+        }
+
+        function click_deactivate() {
+            post('/overlords/action', {action: 'deactivate', code: get_keypad_code(), timer: remaining});
+        }
+
+		function click_snip() {
+            post('/overlords/action', {action: 'snip', timer: remaining});
+        }
+
+		function detonate_bomb() {
+            post('/overlords/action', {action: 'detonate', timer: remaining});
+        }
+
+
+        function post(path, params, method) {
+            method = method || "post"; // Set method to post by default if not specified.
+        
+            // The rest of this code assumes you are not using a library.
+            // It can be made less wordy if you use one.
+            var form = document.createElement("form");
+            form.setAttribute("method", method);
+            form.setAttribute("action", path);
+        
+            for(var key in params) {
+                if(params.hasOwnProperty(key)) {
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", key);
+                    hiddenField.setAttribute("value", params[key]);
+        
+                    form.appendChild(hiddenField);
+                 }
+            }
+        
+            document.body.appendChild(form);
+            form.submit();
         }
         
         function draw_background() {

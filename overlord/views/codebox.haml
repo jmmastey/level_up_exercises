@@ -1,0 +1,33 @@
+.device#codebox
+  %table
+    - if codebox.active?
+      %caption{class: "alert alert-danger", data:{value:"active"}}
+        %strong Active Bomb!
+    - else
+      %caption{class: "alert alert-success", data:{value:"deactive"}}
+        %strong Not Active
+    %tr
+      %td{colspan: 2}
+        %div#codebox-code-display
+          %fieldset{disabled: ""}
+            %input#codebox-code{class: "form-control input-lg", type: "text"}
+      %td
+        %div#codebox-delete{data: {value: "delete"}, class: "btn btn-lg btn-primary btn-block"}
+          %span{class: "glyphicon glyphicon-arrow-left"}
+    %tr
+      - (7..9).each do |n|
+        %td
+          %button{data: {value: n}, class: "btn btn-lg btn-default btn-block"} #{n}
+    %tr
+      - (4..6).each do |n|
+        %td
+          %button{data: {value: n}, class: "btn btn-lg btn-default btn-block"} #{n}
+    %tr
+      - (1..3).each do |n|
+        %td
+          %button{data: {value: n}, class: "btn btn-lg btn-default btn-block"} #{n}
+    %tr
+      %td
+        %button{data: {value: 0}, class: "btn btn-lg btn-default btn-block"} 0
+      %td{colspan: 2}
+        %input#codebox-enter{type: "submit", value: "submit", class: "btn btn-danger btn-lg btn-block"}

@@ -1,0 +1,34 @@
+!!! XML
+!!!
+%html
+  %head
+    %title Nefarious Labs
+    %link{rel: :stylesheet, type: "text/css", href: "/css/index.css"}
+    %script{src: "https://code.jquery.com/jquery-2.1.1.min.js"}
+    %link{rel: :stylesheet, type: "text/css", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"}
+    %link{rel: :stylesheet, type: "text/css", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"}
+    %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"}
+    %script{src: "/js/app.js"}
+  %body
+    - if @bomb.exploded?
+      = haml :explosion
+    - else
+      .container
+        .row
+          .col-sm-12
+            .starter-template{class: "panel panel-danger"}
+              .panel-heading
+                %h1{class: "panel-title"}
+                  %strong Hahaha Welcome to Nefarious Labs!
+              .panel-body
+                %strong Please enjoy the lovely gift... I think you'll find it's to die for mwahaha!
+        .row#devices
+          .col-sm-4
+            = haml :codebox, :locals => {:codebox => @bomb.devices[:codebox]}
+          .col-sm-4
+            = haml :wirebox, :locals => {:wirebox => @bomb.devices[:wirebox],
+                                         :timer => @bomb.devices[:timer]}
+          .col-sm-4
+            = haml :bomb, :locals => {:bomb => @bomb}
+        .row
+          = haml :progress_bar

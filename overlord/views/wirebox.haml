@@ -1,0 +1,9 @@
+%div#wirebox{class: "row device"}
+  .col-sm-10{class: "col-sm-offset-1 wires"}
+    - wirebox.wires.each do |wire|
+      - if wire.snipped?
+        %div{class: "wire wire-snipped"}
+      - else
+        %div{class: "wire wire-#{wire.color}", data:{value: wire.color}}
+.row
+  = haml :timer, :locals => { :timer => timer }

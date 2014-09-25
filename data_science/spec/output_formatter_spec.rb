@@ -1,19 +1,32 @@
 require_relative "../output_formatter"
 
 describe OutputFormatter do
-  it "can be initialized with no parameters" do
-    OutputFormatter.new
+  let(:test_group) do
+    SplitTestGroup.new(name: "A",
+                       views: 1000,
+                       conversions: 50)
   end
+
+  let(:control_group) do
+    SplitTestGroup.new(name: "A", views: 1349, conversions: 47)
+  end
+
+  let(:variation_group) do
+    SplitTestGroup.new(name: "B", views: 1543, conversions: 79)
+  end
+
+  let(:calc) { SplitTestCalculator.new(control_group, variation_group) }
 
   let(:formatter) { OutputFormatter.new }
 
+  it "can be initialized with no parameters" do
+    expect { formatter }.not_to raise_error
+  end
+
   describe "#format" do
     it "formats SplitTestGroups" do
-      group = SplitTestGroup.new(name: "A",
-                                 views: 1000,
-                                 conversions: 50)
 
-      formatted_text = formatter.format(group)
+      formatted_text = formatter.format(test_group)
 
       expect(formatted_text).to include("Group A")
       expect(formatted_text).to include("50 conversions")
@@ -22,16 +35,12 @@ describe OutputFormatter do
     end
 
     it "formats SplitTestCalculators" do
-      control = SplitTestGroup.new(name: "A", views: 1349, conversions: 47)
-      variation = SplitTestGroup.new(name: "B", views: 1543, conversions: 79)
-      calc = SplitTestCalculator.new(control, variation)
-
       formatted_text = formatter.format(calc)
 
-      expect(formatted_text).to include(formatter.format(control))
-      expect(formatted_text).to include(formatter.format(variation))
+      expect(formatted_text).to include(formatter.format(control_group))
+      expect(formatted_text).to include(formatter.format(variation_group))
       expect(formatted_text).to include("Confidence in variation: 96")
-      expect(formatted_text).to include("The variation group is superior.")
+      expect(formatted_text).to include("Group 'B' is superior.")
     end
   end
 end

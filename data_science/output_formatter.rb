@@ -15,27 +15,19 @@ class OutputFormatter
   private
 
   def format_better_group(group)
-    text = {
-      nil => "Neither group is superior.",
-      control_group: "The control group is superior.",
-      variation_group: "The variation group is superior."
-    }
-
-    text[group]
+    "Group '#{group.name}' is superior."
   end
 
   def format_calculator(calculator)
-    groups = {
-      control_group: format_group(calculator.control_group),
-      variation_group: format_group(calculator.variation_group)
-    }
+    groups = calculator.groups
+
     better_group = format_better_group(calculator.better_group)
     confidence = format_confidence_level(calculator.confidence_level)
+    formatted_groups = groups.map { |group| format_group(group) }
 
-    "CONTROL   #{groups[:control_group]}\n\n" \
-    "VARIATION #{groups[:variation_group]}\n\n" \
-    "#{better_group}\n" \
-    "#{confidence}\n"
+    formatted_groups.join("\n") <<
+      "#{better_group}\n" \
+      "#{confidence}\n"
   end
 
   def format_confidence_level(confidence_level)

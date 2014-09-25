@@ -1,45 +1,29 @@
 require_relative "chi_square"
 
 class SplitTestCalculator
-  attr_reader :control_group, :variation_group
+  attr_reader :groups
 
-  def initialize(control_group, variation_group)
-    validate_stats(control_group, variation_group)
-
-    @control_group = control_group
-    @variation_group = variation_group
+  def initialize(*groups)
+    validate_stats(groups)
+    @groups = groups
   end
 
   def better_group
-    if @control_group.conversion_rate == @variation_group.conversion_rate
-      nil
-    elsif @control_group.conversion_rate < @variation_group.conversion_rate
-      :variation_group
-    else
-      :control_group
-    end
-  end
-
-  def confident?
-    control_min, control_max = @control_group.conversion_rate_range
-    variation_min, variation_max = @variation_group.conversion_rate_range
-
-    (control_min < variation_max) || (variation_min < control_max)
+    @groups.max_by(&:conversion_rate)
   end
 
   def confidence_level
     calc = ChiSquare.new
-    calc.confidence_level(@control_group, @variation_group)
+    calc.confidence_level(*@groups)
   end
 
   private
 
-  def validate_stats(control_group, variation_group)
-    group_unassigned_error(:control_group) unless control_group
-    group_unassigned_error(:variation_group) unless variation_group
+  def validate_stats(groups)
+    raise_group_count_error if groups.count < 2
   end
 
-  def group_unassigned_error(group)
-    raise ArgumentError, "#{group} must be assigned."
+  def group_unassigned_error
+    raise ArgumentError, "Must have at least 2 groups."
   end
 end

@@ -6,7 +6,7 @@ require "json"
 
 class DinoDex
   DINO_MAPPERS = [FavoriteDinoMapper.new, AfricanDinoMapper.new]
-  DINO_PROPERTIES = [:continent, :walking, :diet, :carnivore, :description, 
+  DINO_PROPERTIES = [:continent, :walking, :diet, :carnivore, :description,
                      :name, :period, :weight]
   include Enumerable
 
@@ -72,6 +72,6 @@ Filter:
   end
 
   def add_dino(data)
-    @dinos << Dino.new(data[:name], data)
+    @dinos << Dino.new(data)
   end
 end

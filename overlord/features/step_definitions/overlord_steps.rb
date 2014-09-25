@@ -7,9 +7,6 @@ Given /I create a bomb from the main page/ do
   click_button 'Create!'
 end
 
-When /I select code (\d+)/ do |code_value|
-  set_keypad_code(code_value)
-end
 
 When /I click on snip (\d+) time/ do |snips|
   snips.to_i.times { click_snip_wires }
@@ -21,10 +18,6 @@ end
 
 When /I activate it$/ do
   activate_bomb
-end
-
-When /I activate the bomb with code (\d+)/ do |code|
-  activate_bomb(code)
 end
 
 When /I deactivate it$/ do

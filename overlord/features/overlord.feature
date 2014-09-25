@@ -15,7 +15,7 @@ Feature: Overlord Bomb-Status Page
 
   @javascript
   Scenario: I visit the main page, create a bomb, activate it
-    When I activate the bomb with code 1234
+    When I activate it
     Then I should see the bomb status page
     And the bomb should be intact
     And the bomb should be activated

@@ -56,33 +56,29 @@
         }
 
         function click_activate() {
-            post('/overlords/action', {action: 'activate', code: get_keypad_code(), timer: remaining});
+            post('/overlords/activate', {code: get_keypad_code(), timer: remaining});
         }
 
         function click_deactivate() {
-            post('/overlords/action', {action: 'deactivate', code: get_keypad_code(), timer: remaining});
+            post('/overlords/deactivate', {code: get_keypad_code(), timer: remaining});
         }
 
 		function click_snip() {
-            post('/overlords/action', {action: 'snip', timer: remaining});
+            post('/overlords/snip', {timer: remaining});
         }
 
 		function detonate_bomb() {
-            post('/overlords/action', {action: 'detonate', timer: remaining});
+            post('/overlords/detonate', {timer: remaining});
         }
 
 
-        function post(path, params, method) {
-            method = method || "post"; // Set method to post by default if not specified.
-        
-            // The rest of this code assumes you are not using a library.
-            // It can be made less wordy if you use one.
+        function post(path, params) {
             var form = document.createElement("form");
-            form.setAttribute("method", method);
+            form.setAttribute("method", "post");
             form.setAttribute("action", path);
         
-            for(var key in params) {
-                if(params.hasOwnProperty(key)) {
+            for (var key in params) {
+                if (params.hasOwnProperty(key)) {
                     var hiddenField = document.createElement("input");
                     hiddenField.setAttribute("type", "hidden");
                     hiddenField.setAttribute("name", key);

@@ -39,6 +39,30 @@ post '/overlords/action' do
   erb :bomb_status, :locals => local_session_variables
 end
 
+post '/overlords/activate' do
+  record_timer(params)
+  activate(params)
+  erb :bomb_status, :locals => local_session_variables
+end
+
+post '/overlords/deactivate' do
+  record_timer(params)
+  deactivate(params)
+  erb :bomb_status, :locals => local_session_variables
+end
+
+post '/overlords/snip' do
+  record_timer(params)
+  snip
+  erb :bomb_status, :locals => local_session_variables
+end
+
+post '/overlords/detonate' do
+  record_timer(params)
+  detonate
+  erb :bomb_status, :locals => local_session_variables
+end
+
 def create_bomb(params)
   respond = Respond.new("responses.json")
   activation_code = params[:activation_code] || ""
@@ -67,11 +91,11 @@ def deactivate(params)
   session[:bomb_msg] = session[:bomb].deactivate(code)
 end
 
-def snip(_params)
+def snip()
   session[:bomb_msg] = session[:bomb].snip
 end
 
-def detonate(_params)
+def detonate()
   session[:bomb_msg] = session[:bomb].detonate
 end
 

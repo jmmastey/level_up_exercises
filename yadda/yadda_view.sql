@@ -2,7 +2,7 @@ DROP VIEW IF EXISTS top_rated_beer_per_brewery;
 DROP VIEW IF EXISTS recent_avg_score;
 DROP VIEW IF EXISTS you_might_also_enjoy;
 DROP VIEW IF EXISTS tot_beer_scores;
-DROP VIEW IF EXISTS avg_beer_scores;
+DROP VIEW IF EXISTS top_avg_beer_scores;
 
 CREATE VIEW tot_beer_scores AS
     SELECT b.brewery_id, b.id as beer_id, SUM(rating) as total, rank() OVER (

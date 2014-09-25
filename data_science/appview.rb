@@ -12,8 +12,8 @@ class AppView
   end
 
   def interval_table(intervals_with_id)
-    rows = intervals_with_id.map do |interval_with_id|
-      "Group '#{interval_with_id[0]}' interval: #{interval_with_id[1]}"
+    rows = intervals_with_id.each.map do |key, interval|
+      "Group '#{key}' interval: #{interval}"
     end
     rows.join("\n")
   end

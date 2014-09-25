@@ -45,14 +45,12 @@ class BinomialDataSet
   end
 
   def split_into_groups(data)
-    groups = {}
-    data.group_by(&@group_field).each do |key, data_row|
-      groups[key] = BinomialDataGroup.new(
-        id: key, data: data_row,
-        group_field: @group_field,
-        result_field: @result_field
-      )
-    end
-    groups
+    raw_groups = data.group_by(&@group_field)
+    raw_groups.each { |key, data| raw_groups[key] = parse_group(key, data) }
+  end
+
+  def parse_group(key, data)
+    BinomialDataGroup.new(id: key, data: data,
+      group_field: @group_field, result_field: @result_field)
   end
 end

@@ -1,5 +1,4 @@
-require "rspec"
-require "rspec/matchers"
+require "rspec/collection_matchers"
 
 require_relative "../view_parser"
 require_relative "../binomial_data_set.rb"
@@ -24,8 +23,12 @@ describe BinomialDataSet do
          result_field: :purchased, data: data)
     end
 
-    let(:groups) do
-      data_set.groups
+    let(:group_a) do
+      data_set.groups["A"]
+    end
+
+    let(:group_b) do
+      data_set.groups["B"]
     end
 
     it "should provide the total chance success value" do
@@ -37,14 +40,13 @@ describe BinomialDataSet do
     end
 
     # TODO: group testing should not be dataset
-    it "should provide the chance success by group" do
-      expect(data_set).to have(2).groups["A"]
-      expect(data_set).to have(2).groups["B"]
+    it "should provide all the groups" do
+      expect(data_set).to have(2).groups
     end
 
     it "should provide the success count by group" do
-      expect(data_set.groups["A"].success_count).to eq(1)
-      expect(data_set.groups["B"].success_count).to eq(1)
+      expect(data_set.groups["A"].count).to eq(2)
+      expect(data_set.groups["B"].count).to eq(4)
     end
 
     it "should provide the total chance fail value" do

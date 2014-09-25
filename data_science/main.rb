@@ -14,8 +14,9 @@ def main
     data: views
   )
 
-  intervals = dataset.groups.each_value.map do |group|
-    [group.id, group.confidence_interval]
+  intervals = dataset.groups.inject({}) do |mapped_hash, (id, group)|
+    mapped_hash[id] = group.confidence_interval
+    mapped_hash
   end
 
   chi_squared = ChiSquared.new(dataset: dataset)

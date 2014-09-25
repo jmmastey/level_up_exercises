@@ -1,17 +1,17 @@
 class Arrowhead
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
-    :far_west => {
-      :notched => "Archaic Side Notch",
-      :stemmed => "Archaic Stemmed",
-      :lanceolate => "Agate Basin",
-      :bifurcated => "Cody",
+    far_west: {
+      notched: "Archaic Side Notch",
+      stemmed: "Archaic Stemmed",
+      lanceolate: "Agate Basin",
+      bifurcated: "Cody",
     },
-    :northern_plains => {
-      :notched => "Besant",
-      :stemmed => "Archaic Stemmed",
-      :lanceolate => "Humboldt Constricted Base",
-      :bifurcated => "Oxbow",
+    northern_plains: {
+      notched: "Besant",
+      stemmed: "Archaic Stemmed",
+      lanceolate: "Humboldt Constricted Base",
+      bifurcated: "Oxbow",
     },
   }
 
@@ -20,13 +20,12 @@ class Arrowhead
     puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 
-  private 
   def self.get_arrowhead(region, shape)
     shapes = get_shapes(region)
     if shapes.include? shape
       shapes[shape]
     else
-      raise "Unknown shape value. Are you sure you know what you're talking about?"
+      raise "Unknown shape value, please provide a valid shape."
     end
   end
 

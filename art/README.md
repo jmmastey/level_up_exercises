@@ -22,6 +22,7 @@ Refactoring
 + (method_cache) Remove method cache clear by way of OpenStruct creation. (https://github.com/charliesome/charlie.bz/blob/master/posts/things-that-clear-rubys-method-cache.md)
 + (slow_tests) Slow unit tests, refactor to remove tons of extra data
 + (scope) Remove an unnecessary default scope that sorts on an expensive key.
++ (all) switch from User.all
 
 Features
 + (memoize) Simple memoize

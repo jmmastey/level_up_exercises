@@ -2,11 +2,12 @@ The Center for Performance Art
 
 Features: Json API, Calendar, Recommendations?
 routes/
-  PUT performances/:id
+  PUT performances - all
+  PUT performances/:id - memoize
   GET performances/:id - page_caching
   GET performances/:id/reviews - cache_expiry, chunk_caching
   GET performances/:id/performers
-  GET users/ - pagination
+  GET users - pagination
   GET users/:id - serializers
   GET users/:id/reviews - pluck, n_plus_one
 tasks/
@@ -14,7 +15,7 @@ tasks/
   you_may_also_like - loop_invariant, sidekiq
 models/
   performer.rb
-  show.rb - memoize?
+  show.rb
   user.rb
   review.rb
     #average_rating_for_performance - wrong_work, redis

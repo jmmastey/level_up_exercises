@@ -55,7 +55,7 @@ post '/overlords/detonate' do
 end
 
 def create_bomb(params)
-  respond = Respond.new("responses.json")
+  respond = Respond.new("bomb_responses.json")
   activation_code = params[:activation_code] || ""
   deactivation_code = params[:deactivation_code] || ""
   Bomb.new(respond, activation_code, deactivation_code)

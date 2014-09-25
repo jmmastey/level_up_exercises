@@ -1,29 +1,29 @@
 require_relative '../../bomb'
 
 Given /I create a bomb with no code/ do
-  respond = Respond.new('responses.json')
+  respond = Respond.new('bomb_responses.json')
   @bomb = Bomb.new(respond)
 end
 
 Given /I create a bomb with codes ([^\s]+) and ([^\s]+)/ do |act_code, deact_code|
-  respond = Respond.new('responses.json')
+  respond = Respond.new('bomb_responses.json')
   @bomb = Bomb.new(respond, act_code, deact_code)
 end
 
 Given /an activated bomb with default codes/ do
-  respond = Respond.new('responses.json')
+  respond = Respond.new('bomb_responses.json')
   @bomb = Bomb.new(respond)
   @bomb.activate('1234')
 end
 
 Given /I activate a bomb/ do
-  respond = Respond.new('responses.json')
+  respond = Respond.new('bomb_responses.json')
   @bomb = Bomb.new(respond)
   @bomb.activate('1234')
 end
 
 When /I attempt unsuccessfully to deactivate it (\d+) times/ do |attempts|
-  respond = Respond.new('responses.json')
+  respond = Respond.new('bomb_responses.json')
   @bomb = Bomb.new(respond)
   @bomb.activate('1234')
   attempts.to_i.times { @bomb.deactivate('1111') }

@@ -3,7 +3,7 @@ require 'rspec/collection_matchers'
 require_relative '../respond'
 
 describe Respond do
-  let(:respond) { respond = Respond.new('responses.json') }
+  let(:respond) { respond = Respond.new('bomb_responses.json') }
 
   it 'should load all responses' do
     expect(respond).to have(11).responses

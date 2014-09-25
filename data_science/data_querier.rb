@@ -14,7 +14,7 @@ class DataQuerier
     entries = @test_data
     entries = groups[cohort] if cohort
 
-    entries.count { |entry| entry.conversion? }
+    entries.count(&:conversion?)
   end
 
   def count_views(cohort = nil)

@@ -21,12 +21,12 @@ class Arrowhead
   end
 
   def self.arrowhead_for(region, shape)
-    shapes_for(region)[shape] || 
+    shapes_for(region)[shape] ||
       raise("Unknown shape value, please provide a valid shape.")
   end
 
   def self.shapes_for(region)
-    CLASSIFICATIONS[region] || 
+    CLASSIFICATIONS[region] ||
       raise("Unknown region, please provide a valid region.")
   end
 end

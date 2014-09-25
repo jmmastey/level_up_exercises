@@ -2,7 +2,6 @@ require 'pg'
 require 'faker'
 
 def populate_breweries(conn, brewery_count)
-
   puts "Populating Breweries"
 
   query = "
@@ -18,13 +17,7 @@ def populate_breweries(conn, brewery_count)
       created_by,
       updated_by
   )
-  VALUES(
-      $1,
-      $2,
-      $3,
-      $4,
-      $5,
-      $6,
+  VALUES( $1, $2, $3, $4, $5, $6,
       now() at time zone 'UTC',
       now() at time zone 'UTC',
       current_user,
@@ -71,8 +64,6 @@ def populate_beer_styles(conn, beer_styles)
 end
 
 def populate_beers(conn, beer_count, brewery_count, beer_style_count)
-  # Drown the world with 1 million beers
-
   puts "Populating beers"
 
   query = "
@@ -97,7 +88,6 @@ def populate_beers(conn, beer_count, brewery_count, beer_style_count)
       current_user
   )"
 
-
   beer_count.times do
     params = []
     params.push(Random.new.rand(1..brewery_count))
@@ -114,12 +104,9 @@ def populate_beers(conn, beer_count, brewery_count, beer_style_count)
 end
 
 def populate_users(conn, user_count)
-  # Give us Aurora. That's about 200k in people
-
   puts "Populating users"
   blood_types = ['A', 'B', 'O', 'A-', 'B-', 'O-', 'A+', 'B+', 'O+']
 
-  #binding.pry
   query = "
     INSERT INTO users (
         first_name,
@@ -144,19 +131,20 @@ def populate_users(conn, user_count)
         current_user
     )
   "
+
   user_count.times do
     params = []
 
     first_name = Faker::Name.first_name
-    last_name= Faker::Name.last_name
+    last_name = Faker::Name.last_name
 
     params.push(first_name)
     params.push(last_name)
-    params.push(Faker::Internet.free_email(first_name+"_"+last_name+rand(1..100).to_s))
+    params.push(Faker::Internet
+        .free_email(first_name + "_" + last_name + rand(1..100).to_s))
     params.push(Time.at(rand * Time.now.to_i).strftime("%Y-%m-%d"))
     params.push(blood_types.sample)
 
-    #binding.pry
     begin
       conn.exec_params(query, params)
     rescue
@@ -166,7 +154,6 @@ def populate_users(conn, user_count)
 end
 
 def rate_beers(conn, user_count, beer_count)
-
   puts "Rating Beers"
 
   query = "
@@ -198,21 +185,20 @@ def rate_beers(conn, user_count, beer_count)
     params.push(Random.new.rand(1..beer_count))
     params.push(Random.new.rand(1..5))
     params.push(Faker::Lorem.sentence)
-    params.push(Time.at(Random.new.rand(0.95..1) * Time.now.to_i).strftime("%Y-%m-%d %H:%M:%S"))
+    params.push(Time.at(Random.new.rand(0.95..1) * Time.now.to_i)
+                .strftime("%Y-%m-%d %H:%M:%S"))
 
     begin
       conn.exec_params(query, params)
     rescue
       next
     end
-
   end
-
 end
 
-brewery_count = 10000
-beer_count    = 1000000
-user_count    = 200000
+brewery_count = 10_000
+beer_count    = 1_000_000
+user_count    = 200_000
 
 # List O' Beer styles
 beer_styles = [
@@ -231,7 +217,7 @@ beer_styles = [
   "Pilsner",
   "Porter",
   "Saison",
-  "Wheat Beer"
+  "Wheat Beer",
 ]
 
 beer_style_count = beer_styles.count
@@ -244,5 +230,3 @@ populate_beers(conn, beer_count, brewery_count, beer_style_count)
 populate_users(conn, user_count)
 
 rate_beers(conn, user_count, beer_count)
-
-

@@ -39,21 +39,17 @@
             return ("<%= activation %>"  == "Inactive");
         }
 
-        function get_keypad_code() {
-            return document.getElementById("keypad_code").value;
-        }
-
 		// Actions
         function set_keypad_code(code) {
-            document.getElementById("keypad_code").value = code;
+            keypad_code = code;
         }
 
         function click_activate() {
-            post('/overlords/activate', {code: get_keypad_code(), timer: remaining});
+            post('/overlords/activate', {code: keypad_code, timer: remaining});
         }
 
         function click_deactivate() {
-            post('/overlords/deactivate', {code: get_keypad_code(), timer: remaining});
+            post('/overlords/deactivate', {code: keypad_code, timer: remaining});
         }
 
 		function click_snip() {
@@ -386,8 +382,8 @@
             if (!canvas.getContext) { return; }
             var ctx=canvas.getContext("2d");
             
-            var code = document.getElementById("keypad_code").value;
-            while (code.length < 4) code += '-';
+            var rendered_code = keypad_code;
+            while (rendered_code.length < 4) rendered_code += '-';
             
             ctx.fillStyle = '#070707';
             ctx.fillRect(32, 700, 50, 16);
@@ -397,7 +393,7 @@
             ctx.font = "15px bold Georgia";
             ctx.textAlign="center";
             ctx.fillStyle = '#8888FF';
-            ctx.fillText(code, 56, 713);
+            ctx.fillText(rendered_code, 56, 713);
         }
         
         // Draw-Timer
@@ -428,11 +424,9 @@
             
             if (is_active()) {
                 remaining -= 0.100;
-                document.getElementById("timer").value = remaining;
                 
                 if (remaining <= 0) {
-                    document.getElementById("keypad_action").value = 'detonate';
-                    document.getElementById("keypad").submit();
+                    detonate_bomb();
                     return;
                 }
                 
@@ -455,29 +449,25 @@
                 
                 digit = clicked_digit(x, y);
                 if (digit >= 0) {
-                    var code = document.getElementById("keypad_code").value;
-                    if (code.length < 4) {
-                        document.getElementById("keypad_code").value += digit.toString();
+                    if (keypad_code.length < 4) {
+                        keypad_code += digit.toString();
                     }
                     draw_code();
                     return;
                 }
                 
                 if (clicked_activate(x, y)) {
-                    document.getElementById("keypad_action").value = 'activate';
-                	document.getElementById("keypad").submit();
+					click_activate();
                 	return;
                 }
                 
                 if (clicked_deactivate(x, y)) {
-                    document.getElementById("keypad_action").value = 'deactivate';
-                	document.getElementById("keypad").submit();
+                    click_deactivate();					 
                 	return;
                 }
                 
                 if (clicked_snipped(x, y)) {
-                    document.getElementById("keypad_action").value = 'snip';
-                	document.getElementById("keypad").submit();
+                    click_snip();
                 	return;
                 }
                 
@@ -496,7 +486,10 @@
         draw_background();
         
         // Get Remaining Time on Timer
-        var remaining = document.getElementById("timer").value;
+        var remaining = "<%= timer %>";
+
+        // Keypad Code
+        var keypad_code = "";
         
         // Keypad
         var keys = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];

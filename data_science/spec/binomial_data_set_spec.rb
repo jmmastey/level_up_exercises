@@ -39,7 +39,6 @@ describe BinomialDataSet do
       expect(data_set.success_count).to eq(2)
     end
 
-    # TODO: group testing should not be dataset
     it "should provide all the groups" do
       expect(data_set).to have(2).groups
     end
@@ -57,23 +56,8 @@ describe BinomialDataSet do
       expect(data_set.fail_count).to eq(4)
     end
 
-    it "should provide the chance fail by group" do
-      expect(data_set.groups["A"].fail_percent).to eq(0.5)
-      expect(data_set.groups["B"].fail_percent).to eq(0.75)
-    end
-
-    it "should provide the fail count by group" do
-      expect(data_set.groups["A"].fail_count).to eq(1)
-      expect(data_set.groups["B"].fail_count).to eq(3)
-    end
-
     it "should provide a count of all things" do
       expect(data_set.count).to eq(6)
-    end
-
-    it "should provide a count by group" do
-      expect(data_set.groups["A"].count).to eq(2)
-      expect(data_set.groups["B"].count).to eq(4)
     end
   end
 end

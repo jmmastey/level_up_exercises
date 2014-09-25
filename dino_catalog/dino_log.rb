@@ -1,11 +1,14 @@
 #INSTRUCTIONS: 
-# easiest to run in irb and call parse_dino_csv, it returns a DinoDex colleciton object
+# easiest to run in irb and call parse_dino_csv, 
+# it returns a DinoDex colleciton object
 # you can chain filter, each returning a DinDex collection object
 
 require 'csv'
+require 'json'
+require 'pry'
 
 class Dino
-  attr_accessor :name,:period,:continent,:diet,:weight,:walking,:description
+  attr_accessor :name, :period, :continent, :diet, :weight, :walking, :description
 
   ATTRIBUTES = %w[name period continent diet weight walking description]
 
@@ -19,23 +22,37 @@ class Dino
     @description = opts[:description]
   end
 
-  def print_attribs
-    puts "Name: #{@name}" if @name && !@name.empty?
-    puts "Period: #{@period}" if @period && !@period.empty?
-    puts "Continent: #{@continent}" if @continent && !@continent.empty?
-    puts "Diet: #{@diet}" if @diet && !@diet.empty?
-    puts "Weight: #{@weight}" if @weight && !@weight.empty?
-    puts "Walking: #{@walking}" if @walking && !@walking.empty?
-    puts "Description: #{@description}" if @description && !@description.empty?
+  def attrs_to_hash
+    ATTRIBUTES.inject({}) { |result, att| result[att] = send(att).to_s; result }
   end
 
-  def write_json(filehandle)
-    filehandle.write("  {" + "\n")
-    ATTRIBUTES.each do |attrib|
-      filehandle.write("    #{attrib}: #{send(attrib)}\n")
-    end
-    filehandle.write("  }" + "\n")
+  def print_attribs
+    ATTRIBUTES.inject("") { |result, att| result = result + attr_to_s(att) + ", " }
   end
+
+  def small?
+    @weight.to_i <= 2000 
+  end
+
+  def big?
+    !small?
+  end
+
+  def biped?
+    @walking == "Biped"
+  end
+
+  def carnivore?
+    %w[Carnivore Insectivore Piscivore].include? @diet
+  end
+
+  private
+
+  def attr_to_s(attrib_name)
+    attr_value = send(attrib_name).to_s
+    attr_value ? "#{attrib_name}: #{attr_value}" : ""
+  end
+
 end
 
 class DinoDex
@@ -46,72 +63,76 @@ class DinoDex
   end
 
   def print_dinos
-    @dinos.each { |dino| dino.print_attribs }
+    @dinos.map { |dino| dino.print_attribs }
   end
 
-  def write_json(filename='dino_json.txt')
-    if File.exist? filename
-      puts "file #{filename} already exists, pick another file name"
-      return
-    end
+  def write_json_to_file(filename='dino_json.txt', overwrite=false)
+    raise ArgumentError, "file name already exists" if File.exist?(filename) && !overwrite
 
-    f = File.open(filename,'a')
-    f.write("[\n")
-    @dinos.each do |dino|
-      dino.write_json(f)
-    end
-    f.write("]")
+    f = File.open(filename,'w')
+    f.write(dinos_to_array.to_json)
     f.close
   end
 
-  def bipeds
-    filtered_dinos = @dinos.select do |dino|
-      dino.walking ==  "Biped"
-    end
-    DinoDex.new(filtered_dinos)
-  end
-
-  def carnivores
-    filtered_dinos = @dinos.select do |dino|
-      %w[Carnivore Insectivore Piscivore].include? dino.diet
-    end
-    DinoDex.new(filtered_dinos)
+  def dinos_to_array
+    @dinos.inject([]) { |result,dino| result << dino.attrs_to_hash; result }
   end
 
   %w[cretaceous permian jurassic oxfordian].each do |period|
     define_method(period) do
-      filtered_dinos = @dinos.select do |dino|
-        dino.period.downcase.include? period
-      end
+      filtered_dinos = @dinos.select { |dino| dino.period.downcase.include? period }
       DinoDex.new(filtered_dinos)
     end
   end
 
+  def bipeds
+    DinoDex.new @dinos.select(&:biped?)
+  end
+
+  def carnivores
+    DinoDex.new @dinos.select(&:carnivore?)
+  end
+
   def small
-    filtered_dinos = @dinos.select do |dino|
-      dino.weight.to_i <= 2000
-    end
-    DinoDex.new(filtered_dinos)
+    DinoDex.new @dinos.select(&:small?)
   end
 
   def big
-    filtered_dinos = @dinos.select do |dino|
-      dino.weight.to_i > 2000
-    end
-    DinoDex.new(filtered_dinos)
+    DinoDex.new @dinos.select(&:big?)
   end
 end
 
-def parse_dino_csv
-  if !File.exist? "dinodex.csv"
-    puts "cant find dinodex.csv file! exitting!"
-    exit(1)
-  end
-  
+def parse_dino_csv(filename='dinodex.csv')
+  raise ArgumentError, "couldnt find #{filename}" if !File.exist?(filename)
+ 
   dinos = []
-  CSV.foreach("dinodex.csv") do |row|
-    next if row[0] == "NAME"
-    dinos << Dino.new(name: row[0], period: row[1], continent: row[2], diet: row[3], weight: row[4], walking: row[5], description: row[6])
+  CSV.foreach(filename, headers: true) do |row|
+
+    name =        row['Genus']        || row['NAME']
+    period =      row['Period']       || row['PERIOD']
+    continent =   row['Continent']    || row['CONTINENT']
+    diet =        row['DIET']         || set_custom_diet(row['Carnivore'])
+    weight =      row['Weight']       || row['WEIGHT_IN_LBS']
+    walking =     row['Walking']      || row['WALKING']
+    description = row['DESCRIPTION']
+
+    dinos << Dino.new(name: name, 
+                      period: period, 
+                      continent: continent, 
+                      diet: diet, 
+                      weight: weight,   
+                      walking: walking, 
+                      description: description)
   end
   DinoDex.new(dinos)
+end
+
+def set_custom_diet(is_carnivore)
+  if is_carnivore == "Yes" 
+    "Carnivore"
+  elsif is_carnivore == "No"
+    "Non-carnivore"
+  else
+    "Unknown"
+  end
 end

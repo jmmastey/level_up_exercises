@@ -5,10 +5,6 @@ describe DataQuerier do
     DataQuerier.new([DataEntry.new, DataEntry.new])
   end
 
-  it "is an Enumerable" do
-    expect(DataQuerier.new).to be_an(Enumerable)
-  end
-
   let(:random_query) do
     DataQuerier.new([
       DataEntry.new(cohort: "A", result: 0),
@@ -25,6 +21,10 @@ describe DataQuerier do
   end
 
   describe "#count_views" do
+    it "counts the total number of views if not provided with a cohort" do
+      expect(random_query.count_views).to eq(10)
+    end
+
     it "counts the number of views from a cohort" do
       expect(random_query.count_views("A")).to eq(6)
       expect(random_query.count_views("B")).to eq(4)
@@ -32,6 +32,10 @@ describe DataQuerier do
   end
 
   describe "#count_conversions" do
+    it "counts the total number of conversions if not provided with a cohort" do
+      expect(random_query.count_conversions).to eq(4)
+    end
+
     it "counts the number of conversions from a cohort" do
       expect(random_query.count_conversions("A")).to eq(3)
       expect(random_query.count_conversions("B")).to eq(1)

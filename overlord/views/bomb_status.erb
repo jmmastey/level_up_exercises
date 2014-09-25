@@ -16,13 +16,6 @@
 	  <canvas id="canvas" width=600' height='800'>
 	  </canvas>
 
-	  <form id="keypad" action="/overlords/action" method=POST>
-		<input type='hidden' id='keypad_action' name='action' value='activate'/>
-		<input type='hidden' id='keypad_code' name='code' value=''/>
-		<input type='hidden' id='timer' name='timer' value='<%= timer %>'/>
-		<button type="submit" id='keypad_submit' style="display: none;"/>
-	  </form>
-
 	  <script type="text/javascript">
 
 		// Access State
@@ -538,6 +531,7 @@
                    "<%= bomb_msg %>");
         
         add_listeners();
+
       </script>
     </center>
   </body>

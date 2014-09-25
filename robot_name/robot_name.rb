@@ -14,14 +14,14 @@ class Robot
 
   def generate_name
     @name = @name_generator.call
-    unless valid?(@name) && uniq?(@name)
-      raise NameCollisionError, 'There was a problem generating the robot name!' 
-    end
+    raise NameCollisionError,
+      'There was a problem generating the robot name!' unless valid?(@name) &&
+      uniq?(@name)
     @@registry << @name
   end
 
   def default_name_generator
-    @name = (2.times.map { ('A'..'Z').to_a.sample } + 
+    @name = (2.times.map { ('A'..'Z').to_a.sample } +
              3.times.map { rand(10) }).join
   end
 
@@ -40,7 +40,7 @@ puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 # Errors!
 generator = -> { 'AA111' }
 Robot.new(generator)
-begin 
+begin
   Robot.new(generator)
   puts "Faild, exception not raised"
 rescue

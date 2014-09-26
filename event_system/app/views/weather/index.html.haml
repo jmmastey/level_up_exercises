@@ -1,0 +1,7 @@
+%h1 Weather#index
+%form{:name => "city", :id => "city", :action => "/weather/index", :method => "get", :enctype => "text/plain"}
+  %fieldset
+    %li
+      %input{:type => "text", :name => "region[name]", :class => "text"}
+    %input{:type => "submit", :value => "Send", :class => "button"}
+

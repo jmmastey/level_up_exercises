@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140923215202) do
+ActiveRecord::Schema.define(version: 20140924134044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "email_contacts", primary_key: "email_id", force: true do |t|
+    t.string  "email"
+    t.integer "region_id"
+  end
 
   create_table "regions", primary_key: "region_id", force: true do |t|
     t.string "country"

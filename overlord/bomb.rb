@@ -90,10 +90,6 @@ class Bomb
     (str =~ /[0-9]+/)
   end
 
-  def raise_invalid_code_error(code)
-    raise ArgumentError, "Invalid code #{code}, must be an integer"
-  end
-
   def set_activation_code(code)
     code = DEFAULT_ACTIVATION_CODE unless integer?(code)
     @activation_code = code

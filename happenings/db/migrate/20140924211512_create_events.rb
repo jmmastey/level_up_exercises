@@ -8,7 +8,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :show_type
       t.string :phone_number
       t.string :running_time
-      t.string :url
+      t.string :event_url
       t.string :ticket_url
 
       t.timestamps

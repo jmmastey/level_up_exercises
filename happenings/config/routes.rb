@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
-  resources :event_dates
 
-  resources :events
+  devise_for :admins
+  devise_for :users
+  root to: "application#index"
 
-  resources :venues
+  resources :events do
+    resources :event_dates, as: 'date'
+  end
+
+  resources :venues do
+    resources :events
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

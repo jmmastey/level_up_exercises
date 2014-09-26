@@ -32,23 +32,8 @@ li {
   display: block;
 }
 
-ul li ul {
-  display: none;
-}
-
-ul li:hover ul {
-  display: block;
-  background-color: white;
-  width: 150px;
-  padding: 0;
-}
-
-ul li ul li:hover {
-  background-color: gray;
-  border: 2px solid #A8A8A8;
-  width: 146px;
-  padding: 0px;
-  margin: 0px;
+li:hover {
+    background-color: gray;
 }
 
 header {
@@ -68,13 +53,6 @@ header h1 {
   float: left;
   width: 55%;
   height: 80px;
-}
-
-#header-user {
-  float: right;
-  width: 20%;
-  height: 80px;
-  text-align: left;
 }
 
 .header-vert-align {

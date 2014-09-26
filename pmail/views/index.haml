@@ -8,6 +8,7 @@
     %link(rel='stylesheet' href='/css/style.css')
     %link(rel='stylesheet' href='/css/email.css')
     %link(rel='stylesheet' href='/css/navigation.css')
+    %link(rel='stylesheet' href='/css/user_dropdown.css')
   %body
 
     %header
@@ -16,15 +17,7 @@
         %form{ action: "/", role: "search"}
           %input.header-vert-align{ name: "email_search", type: "search" }
           %button.header-vert-align{ type: "submit" } SEARCH
-      #header-user
-        %ul.user-options-menu
-          %li
-            Bobby Generic
-            %ul
-              %li
-                %a{href: '#'} Profile
-              %li
-                %a{href: '#'} Logout
+      =haml :user_dropdown
     %main
       =haml :navigation
 

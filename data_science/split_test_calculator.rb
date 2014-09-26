@@ -4,7 +4,6 @@ class SplitTestCalculator
   attr_reader :groups
 
   def initialize(*groups)
-    puts groups #TODO: REMOVE
     validate_stats(groups)
     @groups = groups
   end

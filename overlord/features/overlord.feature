@@ -73,7 +73,7 @@ Feature: Overlord Bomb-Status Page
     And the bomb should be snipped
     And the bomb should have defunct activation
     And the deactivation attempts should be 0
-    And the bomb message should be "Sorry, bomb wires have been snipped."
+    And the bomb message should be "Sorry, bomb wires have been snipped"
 
   @javascript
   Scenario: I visit the main page, create a bomb, activate it, deactivate it, activate it

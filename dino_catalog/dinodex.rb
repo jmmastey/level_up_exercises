@@ -1,5 +1,5 @@
 require './dino'
-require './dino_parser'
+require './dino_csv_parser'
 
 class DinoDex
   attr_accessor :dinos
@@ -9,7 +9,7 @@ class DinoDex
   end
 
   def add_dinos_from_csv(filename = 'dinodex.csv')
-    add_dinos(DinoParser.parse_dinos_from_csv(filename)) 
+    add_dinos(DinoCsvParser.parse_dinos_from_csv(filename)) 
   end
 
   def add_dinos(dinos)

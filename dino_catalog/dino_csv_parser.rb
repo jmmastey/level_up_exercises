@@ -1,7 +1,7 @@
 require './dino'
 require 'csv'
 
-module DinoParser
+module DinoCsvParser
   def self.parse_dinos_from_csv(filename = 'dinodex.csv')
     if !File.exist?(filename)
       raise ArgumentError, "couldnt find #{filename}"

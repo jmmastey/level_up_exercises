@@ -32,7 +32,6 @@ li {
   display: block;
 }
 
-
 ul li ul {
   display: none;
 }
@@ -52,15 +51,10 @@ ul li ul li:hover {
   margin: 0px;
 }
 
-nav li:hover {
-  background-color: gray;
-}
-
 header {
   position: relative;
   height: 80px;
   width: 100%;
-  
 }
 
 header h1 {
@@ -92,34 +86,5 @@ main {
   margin-left: auto;
   margin-right: auto;
   width: 900px;
-}
-
-nav {
-  background-color: white;
-  width: 200px;
-  margin-left: 0px;
-  margin-right: 10px;
-  float: left;
-}
-
-nav button {
-  width: 100px;
-  margin-top: 25px;
-  margin-left: 50px;
-  margin-right: 50px;
-}
-
-nav ul {
-  width: 150px;
-  padding: 0px;
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-nav li {
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 

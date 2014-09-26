@@ -7,6 +7,7 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1")
     %link(rel='stylesheet' href='/css/style.css')
     %link(rel='stylesheet' href='/css/email.css')
+    %link(rel='stylesheet' href='/css/navigation.css')
   %body
 
     %header
@@ -25,15 +26,7 @@
               %li
                 %a{href: '#'} Logout
     %main
-      %nav
-        %button Compose
-
-        %ul
-          %li Inbox
-          %li Sent Mail
-          %li Bills
-          %li CC Statements
-          %li Drafts
+      =haml :navigation
 
       #emails
         %ul.emails-list

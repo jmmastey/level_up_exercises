@@ -1,3 +1,5 @@
+require 'csv'
+
 class FileHandler
   #name of file to import
   attr_accessor :file_name
@@ -18,22 +20,13 @@ class FileHandler
   end
 
   def load_file()
-    File.open(file_name, 'r') do |f|
-      f.each_line do |line|
-        line = clean_line(line)
-
-        #check for headers (first line of file)
-        unless headers.nil?
-          @contents << line.split(',')
-        else
-          @headers = line.split(',')
-        end
+    CSV.foreach(file_name) do |line|
+      #check for headers (first line of file)
+      unless headers.nil?
+        @contents << line
+      else
+        @headers = line
       end
     end
-  end
-
-  def clean_line(line)
-    #clean up whitespace: space, tabs, \n (line breaks)
-    line.gsub(/\s+/, "")
   end
 end

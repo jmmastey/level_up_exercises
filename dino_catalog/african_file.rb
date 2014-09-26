@@ -1,5 +1,7 @@
 # Sample headers: Genus,Period,Carnivore,Weight,Walking
 # Sample content: Melanorosaurus,Triassic,No,2400,Quadruped
+require_relative 'file_handler'
+require_relative 'dinosaur'
 
 class AfricanFile < FileHandler
   def get_all_dinosaurs()
@@ -22,13 +24,16 @@ class AfricanFile < FileHandler
         when 'genus'
           dinosaur.name = value
         when 'carnivore'
-          dinosaur.diet = value
+          if value == 'Yes'
+            dinosaur.diet = 'Carnivore'
+          else
+            dinosaur.diet = 'Herbivore'
+          end
         else
           dinosaur.send("#{field.downcase}=", value)
       end
     end
 
-    #dinosaur
-    dinosaur.name
+    dinosaur
   end
 end

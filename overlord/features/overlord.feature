@@ -12,6 +12,7 @@ Feature: Overlord Bomb-Status Page
     Then I should see the bomb status page
     And the bomb should be intact
     And the bomb should not be activated
+    And the bomb message should be "Bomb Created"
 
   @javascript
   Scenario: I visit the main page, create a bomb, activate it

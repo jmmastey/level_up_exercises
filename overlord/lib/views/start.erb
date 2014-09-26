@@ -1,5 +1,14 @@
-<p>Enter your activation code</p>
+Cannot arm bomb: <%= @activation_error %>
 <form action="activate" method="POST">
-  <input type="text" name="activation_code">
-  <input type="submit" name="activate" value="Arm the bomb">
+  <div>
+    <label for="activation_code">Enter your activation code:</label>
+    <input type="text" name="activation_code">
+  </div>
+  <div>
+    <label for="deactivation_code">Enter your deactivation code:</label>
+    <input type="text" name="deactivation_code">
+  </div>
+  <div>
+    <input type="submit" name="activate" value="Arm the bomb">
+  </div>
 </form>

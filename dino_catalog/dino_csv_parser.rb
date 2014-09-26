@@ -6,12 +6,12 @@ module DinoCsvParser
     if !File.exist?(filename)
       raise ArgumentError, "couldnt find #{filename}"
     end
-  
+
     rows = CSV.read(filename)
     headers = rows.shift
     csv_type = determine_csv_type(headers)
 
-    #assuming that csv formats for dinos come in specific flavors
+    # assuming that csv formats for dinos come in specific flavors
     case csv_type
       when "african"
         return parse_african_csv(filename)
@@ -25,7 +25,7 @@ module DinoCsvParser
   STANDARD_CSV_HEADERS = %w[NAME PERIOD CONTINENT DIET WEIGHT_IN_LBS WALKING DESCRIPTION].sort
   AFRICAN_CSV_HEADERS = %w[Genus Period Carnivore Weight Walking].sort
 
-  #look for exact header names, but order doesn't matter
+  # look for exact header names, but order doesn't matter
   def self.determine_csv_type(headers)
     sorted_headers = headers.sort
     return "standard" if sorted_headers == STANDARD_CSV_HEADERS
@@ -41,7 +41,7 @@ module DinoCsvParser
       diet =        set_custom_diet(row['Carnivore'])
       weight =      row['Weight']
       walking =     row['Walking']
-    
+
       dinos << Dino.new(name: name,
                         period: period,
                         diet: diet,
@@ -61,7 +61,7 @@ module DinoCsvParser
       weight =      row['WEIGHT_IN_LBS']
       walking =     row['WALKING']
       description = row['DESCRIPTION']
-    
+
       dinos << Dino.new(name: name,
                         period: period,
                         continent: continent,
@@ -74,7 +74,7 @@ module DinoCsvParser
   end
 
   def self.set_custom_diet(is_carnivore)
-    if is_carnivore == "Yes" 
+    if is_carnivore == "Yes"
       "Carnivore"
     elsif is_carnivore == "No"
       "Herbivore"

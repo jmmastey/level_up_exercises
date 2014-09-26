@@ -13,13 +13,13 @@ module DinoCsvParser
 
     #assuming that csv formats for dinos come in specific flavors
     case csv_type
-    when "african"
-      return parse_african_csv(filename)
-    when "standard"
-      return parse_standard_csv(filename)
-    else
-      raise ArgumentError, "cannot determine csv type"
-    end
+      when "african"
+        return parse_african_csv(filename)
+      when "standard"
+        return parse_standard_csv(filename)
+      else
+        raise ArgumentError, "cannot determine csv type"
+      end
   end
 
   STANDARD_CSV_HEADERS = %w[NAME PERIOD CONTINENT DIET WEIGHT_IN_LBS WALKING DESCRIPTION].sort

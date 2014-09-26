@@ -5,26 +5,11 @@
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE-edge")
     %meta(name="viewport" content="width=device-width, initial-scale=1")
-    %link(rel='stylesheet' href='/css/style.css')
+    %link(rel='stylesheet' href='/css/base.css')
     %link(rel='stylesheet' href='/css/email.css')
+    %link(rel='stylesheet' href='/css/header.css')
+    %link(rel='stylesheet' href='/css/main.css')
     %link(rel='stylesheet' href='/css/navigation.css')
     %link(rel='stylesheet' href='/css/user_dropdown.css')
   %body
-
-    %header
-      %h1 Pete Mail
-      #header-search-form
-        %form{ action: "/", role: "search"}
-          %input.header-vert-align{ name: "email_search", type: "search" }
-          %button.header-vert-align{ type: "submit" } SEARCH
-      =haml :user_dropdown
-    %main
-      =haml :navigation
-
-      #emails
-        %ul.emails-list
-          =haml :'emails/email_1'
-          =haml :'emails/email_2'
-          =haml :'emails/email_3'
-          =haml :'emails/email_4'
-          =haml :'emails/email_5'
+    =haml :body

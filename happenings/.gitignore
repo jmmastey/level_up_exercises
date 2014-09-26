@@ -5,6 +5,7 @@ capybara-*.html
 .rspec
 /log
 /tmp
+*.iml
 /db/*.sqlite3
 /public/system
 /coverage/
@@ -26,3 +27,4 @@ config/secrets.yml
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+.idea

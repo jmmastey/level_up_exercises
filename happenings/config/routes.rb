@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :event_dates
+
+  resources :venues
+
+  resources :events
+
   devise_for :admins
   devise_for :users
   root to: "application#index"

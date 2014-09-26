@@ -4,6 +4,7 @@ class SplitTestCalculator
   attr_reader :groups
 
   def initialize(*groups)
+    puts groups #TODO: REMOVE
     validate_stats(groups)
     @groups = groups
   end
@@ -20,10 +21,11 @@ class SplitTestCalculator
   private
 
   def validate_stats(groups)
-    raise_group_count_error if groups.count < 2
+    raise_group_count_error(groups.count) if groups.count < 2
   end
 
-  def group_unassigned_error
-    raise ArgumentError, "Must have at least 2 groups."
+  def raise_group_count_error(actual_count)
+    message = "Must have at least 2 groups (received #{actual_count})."
+    raise ArgumentError, message
   end
 end

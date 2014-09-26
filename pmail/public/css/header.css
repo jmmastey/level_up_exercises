@@ -1,0 +1,23 @@
+header {
+  position: relative;
+  height: 80px;
+  width: 100%;
+}
+
+header h1 {
+  float: left;
+  width: 15%;
+  height 80px;
+  text-align: center;
+}
+
+#header-search-form {
+  float: left;
+  width: 55%;
+  height: 80px;
+}
+
+.header-vert-align {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}

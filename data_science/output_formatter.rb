@@ -26,7 +26,7 @@ class OutputFormatter
     formatted_groups = groups.map { |group| format_group(group) }
 
     formatted_groups.join("\n") <<
-      "#{better_group}\n" \
+      "\n#{better_group}\n" \
       "#{confidence}\n"
   end
 
@@ -43,7 +43,7 @@ class OutputFormatter
 
     "Group #{name}\n" \
     "  #{conversions} conversions from #{views} views\n" \
-    "  #{rate} \xc2\xb1 #{error} conversion rate"
+    "  #{rate} \xc2\xb1 #{error} conversion rate\n"
   end
 
   def format_pct(percent)

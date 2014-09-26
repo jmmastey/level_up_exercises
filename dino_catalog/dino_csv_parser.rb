@@ -30,7 +30,7 @@ module DinoCsvParser
     sorted_headers = headers.sort
     return "standard" if sorted_headers == STANDARD_CSV_HEADERS
     return "african"  if sorted_headers == AFRICAN_CSV_HEADERS
-    return "unknown"
+    "unknown"
   end
 
   def self.parse_african_csv(filename)

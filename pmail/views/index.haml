@@ -1,0 +1,89 @@
+!!! 5
+%html
+  %head
+    %title Bomb for Overlord
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE-edge")
+    %meta(name="viewport" content="width=device-width, initial-scale=1")
+    %link(rel='stylesheet' href='/css/style.css')
+  %body
+
+    %header
+      %h1 Pete Mail
+      #header-search-form
+        %form{ action: "/", role: "search"}
+          %input.header-vert-align{ name: "email_search", type: "search" }
+          %button.header-vert-align{ type: "submit" } SEARCH
+      #header-user
+        %ul.user-options-menu
+          %li
+            Bobby Generic
+            %ul
+              %li
+                %a{href: '#'} Profile
+              %li
+                %a{href: '#'} Logout
+    %main
+      %nav
+        %button Compose
+
+        %ul
+          %li Inbox
+          %li Sent Mail
+          %li Bills
+          %li CC Statements
+          %li
+          %li Drafts
+
+      #emails
+        %ul.emails-list
+          %li.email-entry
+            %a{ href: '#' }
+              .email-selectors
+                %input{ type: "checkbox"}
+              .email-sender
+                Bill Gates
+              .email-subject
+                Please Run Microsoft For Me
+              .email-time
+                NOW
+          %li.email-entry
+            %a{ href: '#' }
+              .email-selectors
+                %input{ type: "checkbox"}
+              .email-sender
+                Steve Jobs
+              .email-subject
+                Is The Coast Clear? Can I Stop Hiding?
+              .email-time
+                yesterday
+          %li.email-entry
+            %a{ href: '#' }
+              .email-selectors
+                %input{ type: "checkbox"}
+              .email-sender
+                Larry Page
+              .email-subject
+                I Thought I saw Steve at Whole Foods
+              .email-time
+                3 Days ago
+          %li.email-entry
+            %a{ href: '#' }
+              .email-selectors
+                %input{ type: "checkbox"}
+              .email-sender
+                Steve Wozniak
+              .email-subject
+                Saw a Mercedes SL55 Without A Plate.
+              .email-time
+                4 Days ago
+          %li.email-entry
+            %a{ href: '#' }
+              .email-selectors
+                %input{ type: "checkbox"}
+              .email-sender
+                John Smith
+              .email-subject
+                YOU WON A FREE VACATION REPLY WITH SSN!
+              .email-time
+                5 Days ago

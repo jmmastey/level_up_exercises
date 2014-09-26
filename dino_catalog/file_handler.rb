@@ -30,7 +30,8 @@ class FileHandler
     end
   end
 
-  def map_to_dinosaur()
-    #child class invokes this method
+  def clean_line(line)
+    #clean up whitespace, \n (line breaks)
+    puts line
   end
 end

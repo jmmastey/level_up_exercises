@@ -1,6 +1,9 @@
 require_relative 'file_handler'
+require_relative 'african_file'
 
-file_results = FileHandler.new('dinodex.csv')
+file_handler = AfricanFile.new('african_dinosaur_export.csv')
+
+file_handler.get_all_dinosaurs
 
 #create dinodex object
 

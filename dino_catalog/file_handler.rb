@@ -20,6 +20,8 @@ class FileHandler
   def load_file()
     File.open(file_name, 'r') do |f|
       f.each_line do |line|
+        line = clean_line(line)
+
         #check for headers (first line of file)
         unless headers.nil?
           @contents << line.split(',')
@@ -31,7 +33,7 @@ class FileHandler
   end
 
   def clean_line(line)
-    #clean up whitespace, \n (line breaks)
-    puts line
+    #clean up whitespace: space, tabs, \n (line breaks)
+    line.gsub(/\s+/, "")
   end
 end

@@ -2,15 +2,19 @@ require 'json'
 
 class Respond
   attr_reader :responses
+  attr_reader :last
+
+  DONT_KNOW = "Don't know what to say"
 
   def initialize(filename)
     file = File.read(filename)
     data = JSON.parse(file)
     extract_responses(data)
+    @last = DONT_KNOW
   end
 
   def with(response)
-    @responses[response] || "Don't know what to say"
+    @last = @responses[response] || DONT_KNOW
   end
 
   private

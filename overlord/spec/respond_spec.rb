@@ -57,7 +57,16 @@ describe Respond do
     expect(respond.with(:code_not_an_int)).to eq('Code must be an integer')
   end
 
+  it 'should keep track of the last reponse' do
+    respond.with(:code_not_an_int)
+    expect(respond.last).to eq('Code must be an integer')
+  end
+
   it 'should know how to deal with unrecognized messages' do
     expect(respond.with(:what_the_heck)).to eq("Don't know what to say")
+  end
+
+  it 'should return unrecognized message when there was no last response' do
+    expect(respond.last).to eq("Don't know what to say")
   end
 end

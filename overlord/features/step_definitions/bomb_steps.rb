@@ -1,8 +1,8 @@
 require_relative '../../bomb'
 
-Given /I create a bomb with no code/ do
-  respond = Respond.new('bomb_responses.json')
-  @bomb = Bomb.new(respond)
+Given /I create a bomb with default codes/ do
+  @respond = Respond.new('bomb_responses.json')
+  @bomb = Bomb.new(@respond)
 end
 
 Given /I create a bomb with codes ([^\s]+) and ([^\s]+)/ do |act_code, deact_code|
@@ -16,24 +16,23 @@ Given /an activated bomb with default codes/ do
   @bomb.activate('1234')
 end
 
-Given /I activate a bomb/ do
-  respond = Respond.new('bomb_responses.json')
-  @bomb = Bomb.new(respond)
+Given /I activate the bomb$/ do
   @bomb.activate('1234')
 end
 
-When /I attempt unsuccessfully to deactivate it (\d+) times/ do |attempts|
-  respond = Respond.new('bomb_responses.json')
-  @bomb = Bomb.new(respond)
-  @bomb.activate('1234')
+Given /I deactivate the bomb$/ do
+  @bomb.deactivate('0000')
+end
+
+When /I unsuccessfully deactivate it (\d+) time/ do |attempts|
   attempts.to_i.times { @bomb.deactivate('1111') }
 end
 
-When /I activate it with code ([^\s]+)/ do |code|
+When /I activate it with code ([^\s]+)$/ do |code|
   @bomb.activate(code)
 end
 
-When /I deactivate it with code ([^\s]+)/ do |code|
+When /I deactivate it with code ([^\s]+)$/ do |code|
   @bomb.deactivate(code)
 end
 
@@ -75,3 +74,6 @@ Then /I should see status: Integrity => "(.*?)", Activation => "(.*?)", Attempts
   expect(@bomb.to_h["deact_attempts"]).to eq(attempts.to_i)
 end
 
+Then /it should respond with "(.*?)"/ do |response|
+  expect(@respond.last).to eq(response)
+end

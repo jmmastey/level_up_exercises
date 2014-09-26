@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require "colorize"
-require_relative "data_querier"
+require_relative "data_grouper"
 require_relative "json_stat_parser"
 require_relative "output_formatter"
 require_relative "split_test_calculator"
@@ -46,16 +46,13 @@ class App
   end
 
   def calculate_data(data)
-    querier = DataQuerier.new(data)
-    control = SplitTestGroup.new(name: "A",
-                                 conversions: querier.count_conversions("A"),
-                                 views: querier.count_views("A"))
-    variation = SplitTestGroup.new(name: "B",
-                                   conversions: querier.count_conversions("B"),
-                                   views: querier.count_views("B"))
+    groups = create_groups(data)
+    SplitTestCalculator.new(*groups)
+  end
 
-    SplitTestCalculator.new(control_group: control,
-                            variation_group: variation)
+  def create_groups(data)
+    grouper = DataGrouper.new
+    grouper.create_groups(data)
   end
 
   def output_result(result)

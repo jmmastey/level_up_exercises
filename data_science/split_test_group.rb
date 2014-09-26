@@ -5,11 +5,12 @@ class SplitTestGroup
 
   def initialize(data)
     @name = data[:name]
-    @conversions = data[:conversions]
-    @views = data[:views]
+    @conversions = data[:num_conversions]
+    @views = data[:num_views]
   end
 
   def conversion_rate
+    # check for @views == 0
     @conversion_rate ||= @conversions.to_f / @views
   end
 

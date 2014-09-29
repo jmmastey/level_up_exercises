@@ -3,13 +3,13 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :name
       t.references :venue, index: true
-      t.text :description
-      t.string :price
-      t.string :show_type
-      t.string :phone_number
-      t.string :running_time
-      t.string :event_url
-      t.string :ticket_url
+      t.text :description, null: true
+      t.string :price, null: true
+      t.string :show_type, null: true
+      t.string :phone_number, null: true
+      t.string :running_time, null: true
+      t.string :event_url, null: true
+      t.string :ticket_url, null: true
 
       t.timestamps
     end

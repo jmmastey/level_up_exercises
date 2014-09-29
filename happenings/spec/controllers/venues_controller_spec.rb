@@ -24,11 +24,11 @@ RSpec.describe VenuesController, :type => :controller do
   # Venue. As you add validations to Venue, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.build(:venue).attributes
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    FactoryGirl.attributes_for(:venue_invalid)
   }
 
   # This should return the minimal set of values that should be in the session
@@ -38,16 +38,16 @@ RSpec.describe VenuesController, :type => :controller do
 
   describe "GET index" do
     it "assigns all venues as @venues" do
-      venue = Venue.create! valid_attributes
+      venues = FactoryGirl.create_pair(:venue)
       get :index, {}, valid_session
-      expect(assigns(:venues)).to eq([venue])
+      expect(:venues).to eq([venues])
     end
   end
 
   describe "GET show" do
     it "assigns the requested venue as @venue" do
-      venue = Venue.create! valid_attributes
-      get :show, {:id => venue.to_param}, valid_session
+      venue = FactoryGirl.create(:venue)
+      get :show, {id: venue.to_param}, valid_session
       expect(assigns(:venue)).to eq(venue)
     end
   end
@@ -61,8 +61,8 @@ RSpec.describe VenuesController, :type => :controller do
 
   describe "GET edit" do
     it "assigns the requested venue as @venue" do
-      venue = Venue.create! valid_attributes
-      get :edit, {:id => venue.to_param}, valid_session
+      venue = FactoryGirl.create(:venue)
+      get :edit, {id: venue.to_param}, valid_session
       expect(assigns(:venue)).to eq(venue)
     end
   end
@@ -71,30 +71,30 @@ RSpec.describe VenuesController, :type => :controller do
     describe "with valid params" do
       it "creates a new Venue" do
         expect {
-          post :create, {:venue => valid_attributes}, valid_session
+          post :create, {venue: valid_attributes}, valid_session
         }.to change(Venue, :count).by(1)
       end
 
       it "assigns a newly created venue as @venue" do
-        post :create, {:venue => valid_attributes}, valid_session
+        post :create, {venue: valid_attributes}, valid_session
         expect(assigns(:venue)).to be_a(Venue)
         expect(assigns(:venue)).to be_persisted
       end
 
       it "redirects to the created venue" do
-        post :create, {:venue => valid_attributes}, valid_session
+        post :create, {venue: valid_attributes}, valid_session
         expect(response).to redirect_to(Venue.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved venue as @venue" do
-        post :create, {:venue => invalid_attributes}, valid_session
+        post :create, {venue: invalid_attributes}, valid_session
         expect(assigns(:venue)).to be_a_new(Venue)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:venue => invalid_attributes}, valid_session
+        post :create, {venue: invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
     end
@@ -103,39 +103,39 @@ RSpec.describe VenuesController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        FactoryGirl.attributes_for(:venue, venue_url:"http://google.com", description: "I've changed", city: "Rockford")
       }
 
       it "updates the requested venue" do
-        venue = Venue.create! valid_attributes
-        put :update, {:id => venue.to_param, :venue => new_attributes}, valid_session
+        venue = FactoryGirl.create(:venue)
+        put :update, {id: venue.to_param, venue: new_attributes}, valid_session
         venue.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested venue as @venue" do
-        venue = Venue.create! valid_attributes
-        put :update, {:id => venue.to_param, :venue => valid_attributes}, valid_session
+        venue = FactoryGirl.create(:venue)
+        put :update, {id: venue.to_param, venue: valid_attributes}, valid_session
         expect(assigns(:venue)).to eq(venue)
       end
 
       it "redirects to the venue" do
-        venue = Venue.create! valid_attributes
-        put :update, {:id => venue.to_param, :venue => valid_attributes}, valid_session
+        venue = FactoryGirl.create(:venue)
+        put :update, {id: venue.to_param, venue: valid_attributes}, valid_session
         expect(response).to redirect_to(venue)
       end
     end
 
     describe "with invalid params" do
       it "assigns the venue as @venue" do
-        venue = Venue.create! valid_attributes
-        put :update, {:id => venue.to_param, :venue => invalid_attributes}, valid_session
+        venue = FactoryGirl.create(:venue)
+        put :update, {id: venue.to_param, venue: invalid_attributes}, valid_session
         expect(assigns(:venue)).to eq(venue)
       end
 
       it "re-renders the 'edit' template" do
-        venue = Venue.create! valid_attributes
-        put :update, {:id => venue.to_param, :venue => invalid_attributes}, valid_session
+        venue = FactoryGirl.create(:venue)
+        put :update, {id: venue.to_param, venue: invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
     end
@@ -143,15 +143,15 @@ RSpec.describe VenuesController, :type => :controller do
 
   describe "DELETE destroy" do
     it "destroys the requested venue" do
-      venue = Venue.create! valid_attributes
+      venue = FactoryGirl.create(:venue)
       expect {
-        delete :destroy, {:id => venue.to_param}, valid_session
+        delete :destroy, {id: venue.to_param}, valid_session
       }.to change(Venue, :count).by(-1)
     end
 
     it "redirects to the venues list" do
-      venue = Venue.create! valid_attributes
-      delete :destroy, {:id => venue.to_param}, valid_session
+      venue = FactoryGirl.create(:venue)
+      delete :destroy, {id: venue.to_param}, valid_session
       expect(response).to redirect_to(venues_url)
     end
   end

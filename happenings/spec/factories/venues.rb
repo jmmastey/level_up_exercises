@@ -2,5 +2,22 @@
 
 FactoryGirl.define do
   factory :venue do
+    sequence(:name) {|i| "Venue#{i}"}
+    venue_url "http://www.irock.com"
+    # phone_number 17736794909
+
+    description "I am a cool venue"
+    zipcode "60645"
+    city "Chicago"
+    address "123 Elm Street"
+
+    factory :venue_invalid do
+      venue_url nil
+      description nil
+      zipcode nil
+      city nil
+      address nil
+    end
+
   end
 end

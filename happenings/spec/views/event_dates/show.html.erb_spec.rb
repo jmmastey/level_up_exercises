@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "event_dates/show", :type => :view do
   before(:each) do
-    @event_date = assign(:event_date, EventDate.create!())
+    @event_date = FactoryGirl.create(:event_date)
   end
 
   it "renders attributes in <p>" do

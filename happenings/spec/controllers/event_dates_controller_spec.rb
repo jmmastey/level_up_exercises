@@ -24,11 +24,11 @@ RSpec.describe EventDatesController, :type => :controller do
   # EventDate. As you add validations to EventDate, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.build(:event_date).attributes
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    FactoryGirl.build(:invalid_event_date).attributes
   }
 
   # This should return the minimal set of values that should be in the session
@@ -38,16 +38,16 @@ RSpec.describe EventDatesController, :type => :controller do
 
   describe "GET index" do
     it "assigns all event_dates as @event_dates" do
-      event_date = EventDate.create! valid_attributes
+      event_dates = FactoryGirl.create_pair(:event_date)
       get :index, {}, valid_session
-      expect(assigns(:event_dates)).to eq([event_date])
+      expect(assigns(:event_dates)).to eq([event_dates])
     end
   end
 
   describe "GET show" do
     it "assigns the requested event_date as @event_date" do
-      event_date = EventDate.create! valid_attributes
-      get :show, {:id => event_date.to_param}, valid_session
+      event_date = FactoryGirl.create(:event_date)
+      get :show, {id: event_date.to_param}, valid_session
       expect(assigns(:event_date)).to eq(event_date)
     end
   end
@@ -61,8 +61,8 @@ RSpec.describe EventDatesController, :type => :controller do
 
   describe "GET edit" do
     it "assigns the requested event_date as @event_date" do
-      event_date = EventDate.create! valid_attributes
-      get :edit, {:id => event_date.to_param}, valid_session
+      event_date = FactoryGirl.create(:event_date)
+      get :edit, {id: event_date.to_param}, valid_session
       expect(assigns(:event_date)).to eq(event_date)
     end
   end
@@ -71,30 +71,30 @@ RSpec.describe EventDatesController, :type => :controller do
     describe "with valid params" do
       it "creates a new EventDate" do
         expect {
-          post :create, {:event_date => valid_attributes}, valid_session
+          post :create, {event_date: valid_attributes}, valid_session
         }.to change(EventDate, :count).by(1)
       end
 
       it "assigns a newly created event_date as @event_date" do
-        post :create, {:event_date => valid_attributes}, valid_session
+        post :create, {event_date: valid_attributes}, valid_session
         expect(assigns(:event_date)).to be_a(EventDate)
         expect(assigns(:event_date)).to be_persisted
       end
 
       it "redirects to the created event_date" do
-        post :create, {:event_date => valid_attributes}, valid_session
+        post :create, {event_date: valid_attributes}, valid_session
         expect(response).to redirect_to(EventDate.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved event_date as @event_date" do
-        post :create, {:event_date => invalid_attributes}, valid_session
+        post :create, {event_date: invalid_attributes}, valid_session
         expect(assigns(:event_date)).to be_a_new(EventDate)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:event_date => invalid_attributes}, valid_session
+        post :create, {event_date: invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
     end
@@ -103,39 +103,40 @@ RSpec.describe EventDatesController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        FactoryGirl.attributes_for(:event_date, date_time: 3.days.from_now)
       }
 
       it "updates the requested event_date" do
-        event_date = EventDate.create! valid_attributes
-        put :update, {:id => event_date.to_param, :event_date => new_attributes}, valid_session
+        event_date = FactoryGirl.create(:event_date)
+        put :update, {id: event_date.to_param, event_date: new_attributes}, valid_session
         event_date.reload
-        skip("Add assertions for updated state")
+        expect(event_date).to eq(3.days.from_now)
+        # skip("Add assertions for updated state")
       end
 
       it "assigns the requested event_date as @event_date" do
-        event_date = EventDate.create! valid_attributes
-        put :update, {:id => event_date.to_param, :event_date => valid_attributes}, valid_session
+        event_date = FactoryGirl.create(:event_date)
+        put :update, {id: event_date.to_param, event_date: valid_attributes}, valid_session
         expect(assigns(:event_date)).to eq(event_date)
       end
 
       it "redirects to the event_date" do
-        event_date = EventDate.create! valid_attributes
-        put :update, {:id => event_date.to_param, :event_date => valid_attributes}, valid_session
+        event_date = FactoryGirl.create(:event_date)
+        put :update, {id: event_date.to_param, event_date: valid_attributes}, valid_session
         expect(response).to redirect_to(event_date)
       end
     end
 
     describe "with invalid params" do
       it "assigns the event_date as @event_date" do
-        event_date = EventDate.create! valid_attributes
-        put :update, {:id => event_date.to_param, :event_date => invalid_attributes}, valid_session
+        event_date = FactoryGirl.create(:event_date)
+        put :update, {id: event_date.to_param, event_date: invalid_attributes}, valid_session
         expect(assigns(:event_date)).to eq(event_date)
       end
 
       it "re-renders the 'edit' template" do
-        event_date = EventDate.create! valid_attributes
-        put :update, {:id => event_date.to_param, :event_date => invalid_attributes}, valid_session
+        event_date = FactoryGirl.create(:event_date)
+        put :update, {id: event_date.to_param, event_date: invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
     end
@@ -143,15 +144,15 @@ RSpec.describe EventDatesController, :type => :controller do
 
   describe "DELETE destroy" do
     it "destroys the requested event_date" do
-      event_date = EventDate.create! valid_attributes
+      event_date = FactoryGirl.create(:event_date)
       expect {
-        delete :destroy, {:id => event_date.to_param}, valid_session
+        delete :destroy, {id: event_date.to_param}, valid_session
       }.to change(EventDate, :count).by(-1)
     end
 
     it "redirects to the event_dates list" do
-      event_date = EventDate.create! valid_attributes
-      delete :destroy, {:id => event_date.to_param}, valid_session
+      event_date = FactoryGirl.create(:event_date)
+      delete :destroy, {id: event_date.to_param}, valid_session
       expect(response).to redirect_to(event_dates_url)
     end
   end

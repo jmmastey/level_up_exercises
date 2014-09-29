@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "venues/new", :type => :view do
   before(:each) do
-    assign(:venue, Venue.new())
+    @venue = FactoryGirl.build(:venue)
   end
 
   it "renders new venue form" do

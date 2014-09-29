@@ -1,6 +1,6 @@
 ## EVE Online Market
 
-The purpose of this application is to provide an interface for users to track and predict item prices in the MMORPG **EVE Online**.
+The purpose of this application is to provide an interface for users to track and predict item prices in the MMORPG [EVE Online](http://www.eveonline.com/).
 
 EVE Online has a dynamic, entirely player-driven market.  Some researchers have even taken to studying EVE Online as a small simulation of real-world market trends.
 

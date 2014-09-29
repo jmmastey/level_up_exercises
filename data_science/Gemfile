@@ -1,0 +1,21 @@
+#!/usr/bin/env bundle
+# encoding: utf-8
+
+ruby '2.1.2'
+
+source 'https://rubygems.org'
+
+group :development, :test do
+  gem 'coveralls', require: true
+  gem 'guard', require: true
+  gem 'guard-rspec', require: true
+  gem 'guard-rubocop', require: true
+  gem 'guard-shell', require: false
+  gem 'rspec', require: true
+  gem 'rubocop', require: false
+  gem 'terminal-notifier-guard', require: false
+  gem 'abanalyzer', require: true
+  gem 'capybara', require: true
+  gem 'pry', require: true
+  gem 'rserve-client'
+end

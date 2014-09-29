@@ -2,8 +2,12 @@ require_relative "../split_test_group"
 
 describe SplitTestGroup do
 
-  let(:group_a) { SplitTestGroup.new(name: "A", views: 1349, conversions: 47) }
-  let(:group_b) { SplitTestGroup.new(name: "B", views: 1543, conversions: 79) }
+  let(:group_a) { SplitTestGroup.new(name: "A",
+                                     num_views: 1349,
+                                     num_conversions: 47) }
+  let(:group_b) { SplitTestGroup.new(name: "B",
+                                     num_views: 1543,
+                                     num_conversions: 79) }
 
   it "can be initialized with the numbers of views and conversions" do
     expect(group_a.name).to eq("A")

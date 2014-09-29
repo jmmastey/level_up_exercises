@@ -19,6 +19,7 @@ class FileHandler
     load_file()
   end
 
+  #TODO CSV read function, headers option
   def load_file()
     CSV.foreach(file_name) do |line|
       #check for headers (first line of file)
@@ -28,5 +29,16 @@ class FileHandler
         @headers = line
       end
     end
+  end
+
+  def get_all_objects()
+    objects = []
+
+    #loop through content
+    contents.each do |content|
+      objects << map_to_object(content)
+    end
+
+    objects
   end
 end

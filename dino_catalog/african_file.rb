@@ -1,9 +1,6 @@
 require_relative 'file_handler'
 require_relative 'dinosaur'
 
-#Sample headers: Genus,Period,Carnivore,Weight,Walking
-#Sample content: Melanorosaurus,Triassic,No,2400,Quadruped
-
 class AfricanFile < FileHandler
   def map_to_object(content)
     dinosaur = Dinosaur.new()

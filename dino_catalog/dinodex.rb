@@ -23,6 +23,7 @@ class Dinodex
         filter = :weight_classification
     end
 
+    #Look through collection for Dinosaurs that match criteria
     @dinosaurs.each do |dinosaur|
       if dinosaur.send("#{filter}")
         if value.include? dinosaur.send("#{filter}")
@@ -33,6 +34,7 @@ class Dinodex
 
     @dinosaurs = results
 
+    #Send back self to allow chaining of filter()
     self
   end
 

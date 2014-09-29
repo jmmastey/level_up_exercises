@@ -38,9 +38,9 @@ RSpec.describe VenuesController, :type => :controller do
 
   describe "GET index" do
     it "assigns all venues as @venues" do
-      venues = FactoryGirl.create_pair(:venue)
+      venues = Venue.all
       get :index, {}, valid_session
-      expect(:venues).to eq([venues])
+      expect(assigns(:venues)).to eq(venues)
     end
   end
 
@@ -110,7 +110,9 @@ RSpec.describe VenuesController, :type => :controller do
         venue = FactoryGirl.create(:venue)
         put :update, {id: venue.to_param, venue: new_attributes}, valid_session
         venue.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:venue).venue_url).to eq(new_attributes[:venue_url])
+        expect(assigns(:venue).description).to eq(new_attributes[:description])
+        expect(assigns(:venue).city).to eq(new_attributes[:city])
       end
 
       it "assigns the requested venue as @venue" do

@@ -28,7 +28,7 @@ RSpec.describe EventsController, :type => :controller do
   }
 
   let(:invalid_attributes) {
-    FactoryGirl.attributes_for(:event_invalid)
+    FactoryGirl.build(:event_invalid).attributes
   }
 
   # This should return the minimal set of values that should be in the session
@@ -38,9 +38,9 @@ RSpec.describe EventsController, :type => :controller do
 
   describe "GET index" do
     it "assigns all events as @events" do
-      events = FactoryGirl.create_list(:event, 2)
+      events = Event.all
       get :index, {}, valid_session
-      expect(:events).to eq([events])
+      expect(assigns(:events)).to eq(events)
     end
   end
 
@@ -111,7 +111,9 @@ RSpec.describe EventsController, :type => :controller do
         event = FactoryGirl.create(:event)
         put :update, {id: event.to_param, event: new_attributes}, valid_session
         event.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:event).event_url).to eq(new_attributes[:event_url])
+        expect(assigns(:event).price).to eq(new_attributes[:price])
+        expect(assigns(:event).show_type).to eq(new_attributes[:show_type])
       end
 
       it "assigns the requested event as @event" do

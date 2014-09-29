@@ -38,9 +38,9 @@ RSpec.describe EventDatesController, :type => :controller do
 
   describe "GET index" do
     it "assigns all event_dates as @event_dates" do
-      event_dates = FactoryGirl.create_pair(:event_date)
+      event_dates = FactoryGirl.create_list(:event_date, 2)
       get :index, {}, valid_session
-      expect(assigns(:event_dates)).to eq([event_dates])
+      expect(assigns(:event_dates)).to eq(event_dates)
     end
   end
 
@@ -110,7 +110,7 @@ RSpec.describe EventDatesController, :type => :controller do
         event_date = FactoryGirl.create(:event_date)
         put :update, {id: event_date.to_param, event_date: new_attributes}, valid_session
         event_date.reload
-        expect(event_date).to eq(3.days.from_now)
+        expect(assigns(:event_date).id).to eq(event_date.id)
         # skip("Add assertions for updated state")
       end
 

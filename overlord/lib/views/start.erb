@@ -1,14 +1,26 @@
-Cannot arm bomb: <%= @activation_error %>
 <form action="activate" method="POST">
-  <div>
-    <label for="activation_code">Enter your activation code:</label>
-    <input type="text" name="activation_code">
-  </div>
-  <div>
-    <label for="deactivation_code">Enter your deactivation code:</label>
-    <input type="text" name="deactivation_code">
-  </div>
-  <div>
-    <input type="submit" name="activate" value="Arm the bomb">
+  <div class="grid grid-pad">
+
+    <% if @activation_error %>
+    <div class="col-1-1">
+      Cannot arm bomb: <%= @activation_error %>
+    </div>
+    <% end %>
+
+    <div class="col-1-3">
+        <label for="activation_code">Enter your activation code:</label>
+    </div>
+    <div class="col-2-3">
+        <input type="text" name="activation_code">
+    </div>
+    <div class="col-1-3">
+      <label for="deactivation_code">Enter your deactivation code:</label>
+    </div>
+    <div class="col-2-3">
+      <input type="text" name="deactivation_code">
+    </div>
+    <div class="col-1-1">
+      <input class="button"  type="submit" name="activate" value="Arm the bomb">
+    </div>
   </div>
 </form>

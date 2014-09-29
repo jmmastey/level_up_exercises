@@ -14,3 +14,9 @@ Feature: villain boots bomb
     When I follow "Take over the world"
     Then I should be on the start page
     And I should see "Enter your activation code"
+
+  Scenario: start a new game
+    Given the bomb has already exploded
+    When I follow "Let's make a new bomb"
+    Then I should be on the start page
+    And I should see "Enter your activation code"

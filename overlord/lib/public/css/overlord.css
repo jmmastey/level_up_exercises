@@ -31,7 +31,7 @@ div.landing-content p {
     max-height: 400px;
 }
 
-a.button {
+input.button, a.button {
     font-weight: normal;
     border: 1px solid #cc6600;
     background: #ff8100;

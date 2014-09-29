@@ -30,8 +30,5 @@ Feature: villain activates bomb
   Scenario: activation fails after bomb already activated
     Given I have already activated the bomb
     And I am on the start page
-    When I fill in "activation_code" with "1234"
-    When I fill in "deactivation_code" with "1234"
-    And I press "Arm the bomb"
-    Then I should see "already activated"
+    Then I should see "Bomb is armed"
 

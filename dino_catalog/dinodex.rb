@@ -44,6 +44,6 @@ class Dinodex
   end
 
   def to_s()
-    @dinosaurs.each { |dinosaur| puts dinosaur}
+    @dinosaurs.each { |dinosaur| dinosaur.to_s}
   end
 end

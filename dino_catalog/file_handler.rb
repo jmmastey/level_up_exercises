@@ -1,9 +1,6 @@
 require 'csv'
 
 class FileHandler
-  #one metric ton as pounds
-  TON_AS_POUNDS = 2204
-
   attr_accessor :file_name, :headers, :contents
 
   def initialize(file_name)

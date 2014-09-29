@@ -5,29 +5,22 @@ class AfricanFile < FileHandler
   def map_to_object(content)
     dinosaur = Dinosaur.new()
 
-    dinosaur.continent = 'Africa'
+    dinosaur.continent = "Africa"
 
     #map headers to content
     headers.zip(content).each do |field, value|
       case field.downcase
-        when 'genus'
+        when "genus"
           dinosaur.name = value
-        when 'carnivore'
+        when "carnivore"
           if value == 'Yes'
-            dinosaur.diet = 'Carnivore'
+            dinosaur.diet = "Carnivore"
           else
-            dinosaur.diet = 'Herbivore'
+            dinosaur.diet = "Herbivore"
           end
-        when 'weight'
+        when "weight"
           dinosaur.weight = value
-
-          if value.to_i > (TON_AS_POUNDS * 2)
-            dinosaur.weight_classification = "big"
-          elsif value.to_i > 0
-            dinosaur.weight_classification = "small"
-          else
-            dinosaur.weight_classification = nil
-          end
+          dinosaur.weight_classification = Dinosaur.determine_weight_classification(value)
         else
           dinosaur.send("#{field.downcase}=", value)
       end

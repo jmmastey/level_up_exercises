@@ -46,9 +46,6 @@ input.button, a.button {
 }
 
 @media (max-width: 641px) {
-    div.landing-content p {
-        background-color: red;
-    }
     div.header {
         background-position: left top;
     }

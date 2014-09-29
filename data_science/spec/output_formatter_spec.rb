@@ -3,16 +3,16 @@ require_relative "../output_formatter"
 describe OutputFormatter do
   let(:test_group) do
     SplitTestGroup.new(name: "A",
-                       views: 1000,
-                       conversions: 50)
+                       num_views: 1000,
+                       num_conversions: 50)
   end
 
   let(:control_group) do
-    SplitTestGroup.new(name: "A", views: 1349, conversions: 47)
+    SplitTestGroup.new(name: "A", num_views: 1349, num_conversions: 47)
   end
 
   let(:variation_group) do
-    SplitTestGroup.new(name: "B", views: 1543, conversions: 79)
+    SplitTestGroup.new(name: "B", num_views: 1543, num_conversions: 79)
   end
 
   let(:calc) { SplitTestCalculator.new(control_group, variation_group) }

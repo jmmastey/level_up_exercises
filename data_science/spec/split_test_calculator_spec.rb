@@ -3,14 +3,14 @@ require_relative '../split_test_calculator.rb'
 describe SplitTestCalculator do
   let(:control_group) do
     SplitTestGroup.new(name: "A",
-                       views: 1349,
-                       conversions: 47)
+                       num_views: 1349,
+                       num_conversions: 47)
   end
 
   let(:variation_group) do
     SplitTestGroup.new(name: "B",
-                       views: 1543,
-                       conversions: 79)
+                       num_views: 1543,
+                       num_conversions: 79)
   end
 
   let(:calc) { SplitTestCalculator.new(control_group, variation_group) }

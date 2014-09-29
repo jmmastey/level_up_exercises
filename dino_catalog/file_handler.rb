@@ -18,7 +18,7 @@ class FileHandler
   end
 
   #TODO CSV read function, headers option
-  def load_file()
+  def load_file
     CSV.foreach(file_name) do |line|
       #check for headers (first line of file)
       unless headers.nil?
@@ -29,7 +29,7 @@ class FileHandler
     end
   end
 
-  def get_all_objects()
+  def get_all_objects
     objects = []
 
     #loop through content

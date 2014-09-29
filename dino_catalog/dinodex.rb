@@ -38,11 +38,11 @@ class Dinodex
     self
   end
 
-  def to_s()
+  def to_s
     @dinosaurs.each { |dinosaur| dinosaur.to_s}
   end
 
-  def to_json()
+  def to_json
     @dinosaurs.each { |dinosaur| puts JSON.generate(dinosaur.to_hash) }
   end
 end

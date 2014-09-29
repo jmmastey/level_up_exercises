@@ -1,7 +1,8 @@
 class Dinosaur
-  attr_accessor :name, :period, :diet, :weight, :walking, :continent, :description, :weight_classification
+  attr_accessor :name, :period, :diet, :weight, :walking, :continent, 
+                  :description, :weight_classification
 
-  def to_s()
+  def to_s
     #TODO figure out better way to filter/display values
     if name
       puts "Name: " + name.to_s
@@ -28,7 +29,7 @@ class Dinosaur
     puts "\r"
   end
 
-  def to_hash()
+  def to_hash
     {
       :name => name,
       :period => period,

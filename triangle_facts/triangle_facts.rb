@@ -1,24 +1,23 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-  (1..3).each do |side|
-    define_method("side#{side}") { @sides[side - 1] }
-  end
+  attr_accessor :side1, :side2, :side3
 
-  def initialize(*sides)
-    raise "Triangle requires 3 sides." unless sides.length == 3
-    @sides = sides
+  def initialize(side1, side2, side3)
+    self.side1 = side1
+    self.side2 = side2
+    self.side3 = side3
   end
 
   def equilateral?
-    @sides.uniq.length == 1
+    [side1, side2, side3].uniq.length == 1
   end
 
   def isosceles?
-    @sides.uniq.length == 2
+    [side1, side2, side3].uniq.length == 2
   end
 
   def scalene?
-    !(equilateral? || isosceles?)
+    [side1, side2, side3].uniq.length == 3
   end
 
   def recite_facts
@@ -29,22 +28,25 @@ class Triangle
     elsif scalene?
       puts "This triangle is scalene and mathematically boring."
     end
-    angles = calculate_angles(@sides)
+    angles = calculate_angles(side1, side2, side3)
     puts "The angles of this triangle are #{angles.join(",")}"
     puts "This triangle is also a right triangle!" if angles.include?(90)
   end
 
-  def calculate_angles(sides)
-    [to_angle(sides), to_angle(sides.rotate), to_angle(sides.rotate(2))]
+  def calculate_angles(side1, side2, side3)
+    [calculate_opposing_angle(side1, side2, side3),
+     calculate_opposing_angle(side2, side1, side3),
+     calculate_opposing_angle(side3, side1, side2)]
   end
 
   def radians_to_degrees(rads)
     (rads * 180 / Math::PI).round
   end
 
-  def to_angle(sides)
-    radians_to_degrees(Math.acos((sides[1]**2 + sides[2]**2 - sides[0]**2) /
-                       (2.0 * sides[1] * sides[2])))
+  def calculate_opposing_angle(opposing_side, other_side1, other_side2)
+    numerator = other_side1**2 + other_side2**2 - opposing_side**2
+    denomenator = 2.0 * other_side1 * other_side2
+    radians_to_degrees(Math.acos(numerator / denomenator))
   end
 end
 

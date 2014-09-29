@@ -1,13 +1,13 @@
 # rubocop:disable all
 # TODO: Find a efficient way to require all files in a directory
-require_relative '../lib/split_test_calculator'
-require_relative '../lib/parse_json_file'
-require_relative '../lib/data_science'
+require_relative '../overlord'
 require_relative 'system_helper.rb'
+require_relative '../spec/support/utils.rb'
 require 'rspec'
 require 'guard/rspec'
 require 'simplecov'
 require 'capybara/rspec'
+require 'selenium-webdriver'
 require 'pry'
 
 if ENV['CI']

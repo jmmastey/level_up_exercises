@@ -5,18 +5,7 @@ require_relative 'dinosaur'
 #Sample content: Melanorosaurus,Triassic,No,2400,Quadruped
 
 class AfricanFile < FileHandler
-  def get_all_objects()
-    dinosaurs = []
-
-    #loop through content
-    contents.each do |content|
-      dinosaurs << map_to_dinosaur(content)
-    end
-
-    dinosaurs
-  end
-
-  def map_to_dinosaur(content)
+  def map_to_object(content)
     dinosaur = Dinosaur.new()
 
     dinosaur.continent = 'Africa'

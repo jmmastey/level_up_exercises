@@ -1,3 +1,5 @@
+require 'json'
+
 class Dinodex
   TON_AS_POUNDS = 2204
 
@@ -45,5 +47,10 @@ class Dinodex
 
   def to_s()
     @dinosaurs.each { |dinosaur| dinosaur.to_s}
+  end
+
+  def to_json()
+    #@dinosaurs.each { |dinosaur| dinosaur.to_hash.to_json}
+    @dinosaurs.each { |dinosaur| puts JSON.generate(dinosaur.to_hash) }
   end
 end

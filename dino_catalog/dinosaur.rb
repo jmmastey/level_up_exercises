@@ -27,4 +27,16 @@ class Dinosaur
 
     puts "\r"
   end
+
+  def to_hash()
+    {
+      :name => name,
+      :period => period,
+      :diet => diet,
+      :weight => weight,
+      :walking => walking,
+      :continent => continent,
+      :description => description,
+    }
+  end
 end

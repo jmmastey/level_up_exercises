@@ -11,10 +11,10 @@ all_dinodex_dinosaurs = DinodexFile.new('dinodex.csv').get_all_objects
 dinodex = Dinodex.new(all_african_dinosaurs + all_dinodex_dinosaurs)
 
 #Get all bipeds
-dinodex.dup.filter(:walking, 'Biped').to_s
+#dinodex.dup.filter(:walking, 'Biped').to_s
 
 #Get all carnivores (basically all non-herbivores)
-dinodex.dup.filter(:diet, 'Carnivore').to_s
+#dinodex.dup.filter(:diet, 'Carnivore').to_s
 
 #Get specific periods (Cretaceous, Permian, Jurassic, Triassic)
 #TODO support multiple values
@@ -23,6 +23,6 @@ dinodex.dup.filter(:diet, 'Carnivore').to_s
 #Get all small dinosaurs from North America
 dinodex.dup.filter(:weight, 'small').filter(:continent, 'North America').to_s
 
+#JSON examples
 #dinodex.dup.filter(:name, "Suchomimus").to_json
-
 #dinodex.dup.filter(:weight, 'small').filter(:continent, 'North America').to_json

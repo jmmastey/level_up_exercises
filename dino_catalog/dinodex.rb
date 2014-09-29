@@ -1,8 +1,6 @@
 require 'json'
 
 class Dinodex
-  TON_AS_POUNDS = 2204
-
   def initialize(dinosaurs)
     @dinosaurs = dinosaurs
   end
@@ -21,21 +19,14 @@ class Dinodex
         end
       when :period
         value = ["Early " + value, value, "Late " + value]
+      when :weight
+        filter = :weight_classification
     end
 
     @dinosaurs.each do |dinosaur|
       if dinosaur.send("#{filter}")
-        #TODO figure out better way to filter by weight (an int)
-        if filter == :weight
-          if value == 'big' && (dinosaur.send("#{filter}").to_i > (TON_AS_POUNDS * 2))
-            results << dinosaur
-          elsif value == 'small' && (dinosaur.send("#{filter}").to_i <= (TON_AS_POUNDS * 2))
-            results << dinosaur
-          end
-        else
-          if value.include? dinosaur.send("#{filter}")
-            results << dinosaur
-          end
+        if value.include? dinosaur.send("#{filter}")
+          results << dinosaur
         end
       end
     end
@@ -50,7 +41,6 @@ class Dinodex
   end
 
   def to_json()
-    #@dinosaurs.each { |dinosaur| dinosaur.to_hash.to_json}
     @dinosaurs.each { |dinosaur| puts JSON.generate(dinosaur.to_hash) }
   end
 end

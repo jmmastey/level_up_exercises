@@ -1,5 +1,5 @@
 class Dinosaur
-  attr_accessor :name, :period, :diet, :weight, :walking, :continent, :description
+  attr_accessor :name, :period, :diet, :weight, :walking, :continent, :description, :weight_classification
 
   def to_s()
     #TODO figure out better way to filter/display values

@@ -1,6 +1,8 @@
 require 'csv'
 
 class FileHandler
+  TON_AS_POUNDS = 2204
+  
   #name of file to import
   attr_accessor :file_name
   #array of headers

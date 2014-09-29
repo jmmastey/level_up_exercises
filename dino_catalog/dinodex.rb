@@ -25,10 +25,8 @@ class Dinodex
 
     #Look through collection for Dinosaurs that match criteria
     @dinosaurs.each do |dinosaur|
-      if dinosaur.send("#{filter}")
-        if value.include? dinosaur.send("#{filter}")
-          results << dinosaur
-        end
+      if (dinosaur.send("#{filter}")) && (value.include? dinosaur.send("#{filter}"))
+        results << dinosaur
       end
     end
 

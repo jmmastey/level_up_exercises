@@ -1,0 +1,14 @@
+{
+  "already_active":    "Bomb is already active",
+  "already_inactive":  "Bomb is already inactive",
+  "activated":         "Bomb activated - Look Out!",
+  "deactivated":       "Bomb deactivated",
+  "detonation":        "Bomb has been detonated!",
+  "just_snipped":      "Bomb wires snipped and is now defunct",
+  "already_exploded":  "Sorry, bomb has already exploded",
+  "already_snipped":   "Sorry, bomb wires have been snipped",
+
+  "too_many_deact":    "Bomb exploded - too many attempts!",
+  "wrong_code":        "Wrong code",
+  "code_not_an_int":   "Code must be an integer"
+}

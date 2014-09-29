@@ -1,0 +1,512 @@
+<html>
+  <title>Bomb Status</title>
+
+  <body bgcolor="#000033">
+	<center>
+	  <br>
+	  <em style="color: orange; font-size: 2em;">Overlords</em>
+	  <br>
+	  <br>
+	  <br>
+
+	  <canvas id="canvas" width=600' height='800'>
+	  </canvas>
+
+	  <script type="text/javascript">
+
+		// Access State
+		function integrity()    { return "<%= integrity %>";      }
+		function activation()   { return "<%= activation %>";     }
+		function attempts()     { return "<%= deact_attempts %>"; }
+		function bomb_msg()     { return "<%= bomb_msg %>";	      }
+		function timer()        { return "<%= timer %>";          }
+
+        function is_intact()    { return (integrity()  == "Intact");          }
+        function is_detonated() { return (integrity()  == "Blown to shreds"); }
+        function is_snipped()   { return (integrity()  == "Wires are cut");   }
+        function is_active()    { return (activation() == "Active");          }
+        function is_inactive()  { return (activation() == "Inactive");        }
+
+		// Actions
+        function set_keypad_code(code) {
+            keypad_code = code;
+        }
+
+        function click_activate() {
+            post('/overlords/activate', {code: keypad_code, timer: remaining});
+        }
+
+        function click_deactivate() {
+            post('/overlords/deactivate', {code: keypad_code, timer: remaining});
+        }
+
+		function click_snip() {
+            post('/overlords/snip', {timer: remaining});
+        }
+
+		function detonate_bomb() {
+            post('/overlords/detonate', {timer: remaining});
+        }
+
+
+        function post(path, params) {
+            var form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("action", path);
+        
+            for (var key in params) {
+                if (params.hasOwnProperty(key)) {
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", key);
+                    hiddenField.setAttribute("value", params[key]);
+        
+                    form.appendChild(hiddenField);
+                 }
+            }
+        
+            document.body.appendChild(form);
+            form.submit();
+        }
+        
+        function draw_background() {
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");
+            
+            ctx.fillStyle = '#110011';
+            ctx.fillRect(0, 0, 600, 800);
+            ctx.strokeStyle = '#333333';
+            ctx.lineWidth = 1;
+            
+            for (var i = 0; i <= 600; i += 50) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, 450);
+                ctx.stroke();
+            }
+            
+            for (var i = 0; i <= 400; i += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(800, i);
+                ctx.stroke();
+            }
+        }
+        
+        function draw_bomb() {
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");
+            
+            ctx.fillStyle = '#770077';
+            ctx.lineWidth = 2
+            ctx.fillRect(250, 90, 100, 130);
+            ctx.strokeStyle = '#770077';
+            ctx.strokeRect(250, 90, 100, 130);
+            
+            ctx.fillStyle = '#770077';
+            ctx.beginPath();
+            ctx.arc(300, 220, 100, 0, Math.PI*2, true);
+            ctx.fill();
+        }
+        
+        function draw_bomb_intact() {
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");
+            
+            // Draw Wick
+            ctx.strokeStyle = '#CC00CC';
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.arc(350, 92, 50, Math.PI * 3.0 / 3.0, Math.PI * 5.0 / 3.0, false);
+            ctx.stroke();
+            
+            draw_bomb();
+        }
+        
+        function draw_bomb_activated() {
+            draw_bomb_intact();
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");
+            
+            // Draw Ignited
+            var x = 350 + 50 * Math.cos(Math.PI * 5.0 / 3.0);
+            var y =  92 + 50 * Math.sin(Math.PI * 5.0 / 3.0);
+            
+            ctx.fillStyle = '#CCCC00';
+            ctx.beginPath();
+            ctx.arc(x, y, 16, 0, Math.PI*2, true);
+            ctx.fill();      
+            
+            ctx.fillStyle = '#FFFF00';
+            ctx.beginPath();
+            ctx.arc(x, y, 10, 0, Math.PI*2, true);
+            ctx.fill();    
+        }
+        
+        function draw_bomb_snipped() {
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");
+            
+            // Draw Cut-Wick
+            ctx.strokeStyle = '#775577';
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.arc(350, 92, 50, Math.PI * 3.0 / 3.0, Math.PI * 3.5 / 3.0, false);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.arc(350, 122, 50, Math.PI * 4.0 / 3.0, Math.PI * 5.0 / 3.0, false);
+            ctx.stroke();
+            
+            draw_bomb();
+        }
+        
+        function draw_bomb_detonated() {
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");
+            
+            var colors = ['#FFFF00', '#AAAA00', '#777700']
+            
+            for (i = 0; i < 400; i++) {
+                var r = Math.pow(Math.random(), 1.5) * 200;
+                var t = Math.random() * 2 * Math.PI;
+                var x = 300 + r * Math.cos(t);
+                var y = 220 + r * Math.sin(t);
+                var w = Math.floor(6 - r / 50);
+                
+                var c = Math.floor((Math.random() * 1000) % 3);
+                if (c < 0) { c = 0; }
+                ctx.fillStyle = colors[c];
+                ctx.fillRect(x, y, w, w);
+            }
+        }
+        
+        function draw_panel() {
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");
+            
+            // Frame
+            ctx.fillStyle = '#888800';
+            ctx.fillRect(0, 400, 600, 400);
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(10, 410, 580, 380);
+            
+            // Labels
+            ctx.lineWidth = 2;
+            ctx.fillStyle = '#101010';
+            ctx.fillRect(24, 420, 260, 40);
+            ctx.strokeStyle = '#550055';
+            ctx.strokeRect(24, 420, 260, 40);
+            
+            ctx.fillStyle = '#101010';
+            ctx.fillRect(24, 480, 260, 40);
+            ctx.strokeStyle = '#550055';
+            ctx.strokeRect(24, 480, 260, 40);
+            
+            ctx.fillStyle = '#101010';
+            ctx.fillRect(24, 540, 260, 40);
+            ctx.strokeStyle = '#550055';
+            ctx.strokeRect(24, 540, 260, 40);
+            
+            ctx.font = "30px bold Georgia";
+            ctx.textAlign="left";
+            ctx.fillStyle = '#3333DD';
+            ctx.fillText("Integrity",      36, 450);
+            ctx.fillText("Activation",     36, 510);
+            ctx.fillText("Deact-Attempts", 36, 570);
+            
+            ctx.font = "30px bold courier";
+            ctx.fillStyle = '#FFFF00';
+            ctx.fillText(integrity(),   310, 450);
+            ctx.fillText(activation(),  310, 510);
+            ctx.fillText(attempts(),    310, 570);
+            
+            ctx.font = "30px bold courier";
+            ctx.textAlign="center";
+            ctx.fillStyle = '#9999FF';
+            
+            if (ctx.measureText(bomb_msg()).width > 550) {
+                ctx.font = "20px bold courier";
+            }
+            
+            if (ctx.measureText(bomb_msg()).width > 550) {
+                ctx.font = "10px bold courier";
+            }
+            
+            ctx.fillText(bomb_msg(), 300, 750);
+            
+            draw_keypad();
+            
+            // Activate Area
+            ctx.fillStyle = '#111111';
+            ctx.fillRect(300, 608, 200, 36);
+            ctx.strokeStyle = '#999922';
+            ctx.strokeRect(300, 608, 200, 36);
+            ctx.fillStyle = '#00AA00';
+            if (!is_intact() || !is_inactive()) {
+                ctx.fillStyle = '#333333';
+            }
+            ctx.fillText("ACTIVATE", 400, 634);
+            
+            // Deactivate Area
+            ctx.fillStyle = '#111111';
+            ctx.fillRect(300, 655, 200, 36);
+            ctx.strokeStyle = '#999922';
+            ctx.strokeRect(300, 655, 200, 36);
+            ctx.fillStyle = '#AA5500';
+            if (!is_intact() || !is_active()) {
+                ctx.fillStyle = '#333333';
+            }
+            ctx.fillText("DEACTIVATE", 400, 681);
+            
+            // Snip Area
+            ctx.fillStyle = '#111111';
+            ctx.beginPath();
+            ctx.arc(545, 650, 32, 0.0, Math.PI * 2, false);
+            ctx.fill();
+            
+            ctx.strokeStyle = '#222299';
+            ctx.beginPath();
+            ctx.arc(545, 650, 32, 0.0, Math.PI * 2, false);
+            ctx.stroke();
+            
+            // Snip Area - Scissors
+            ctx.strokeStyle = '#0055AA';
+            if (!is_intact()) {
+                ctx.strokeStyle = '#333333';
+            }
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(533, 633);
+            ctx.lineTo(554, 663);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(557, 633);
+            ctx.lineTo(536, 663);
+            ctx.stroke();
+            
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(534, 666, 4, 0.0, Math.PI * 2, false);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.arc(556, 666, 4, 0.0, Math.PI * 2, false);
+            ctx.stroke();
+            
+            draw_code();
+        }
+        
+        function draw_keypad() {
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");
+            
+            // Keypad
+            ctx.fillStyle = '#222200';
+            ctx.fillRect(31, 605, 210, 90);
+            
+            ctx.font = "25px bold courier";
+            ctx.textAlign="center";
+            for (i = 0; i < 10; i++)
+            {
+                row = Math.floor(i / 5);
+                col = i % 5;
+                x =  40 + col * 40;
+                y = 615 + row * 40;
+                ctx.fillStyle = '#440000';
+                ctx.fillRect(x, y, 32, 32);
+                ctx.strokeStyle = '#AA0000';
+                ctx.strokeRect(x, y, 32, 32);
+                ctx.fillStyle = '#CCCC77';
+                ctx.fillText(keys[i], x + 15, y + 25);
+            }
+        }
+        
+        function detect_rect(x, y, loX, hiX, loY, hiY) {
+            return ((loX < x) && (x < hiX) && (loY < y) && (y < hiY));
+        }
+        
+        function clicked_digit(x, y) {
+            if (is_detonated()) { return -1; }
+            if (x < 40 || x > 222 || y < 615 || y > 687) {
+                return -1;
+            }
+            
+            row = Math.floor((y - 615) / 40);
+            col = Math.floor((x -  40) / 40);
+            
+            return keys[5 * row + col];
+        }
+        
+        function clicked_activate(x, y) {
+            if (!is_intact() || !is_inactive()) { return false; }
+            return detect_rect(x, y, 300, 500, 608, 644);
+        }
+        
+        function clicked_deactivate(x, y) {
+            if (!is_intact() || !is_active()) { return false; }
+            return detect_rect(x, y, 300, 500, 655, 691);
+        }
+        
+        function clicked_snipped(x, y) {
+            if (!is_intact()) { return false; }
+            return (Math.sqrt(Math.pow(x - 545, 2) + Math.pow(y - 650, 2)) < 32);
+        }
+        
+        function draw_code() {
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");
+            
+            var rendered_code = keypad_code;
+            while (rendered_code.length < 4) rendered_code += '-';
+            
+            ctx.fillStyle = '#070707';
+            ctx.fillRect(32, 700, 50, 16);
+            ctx.lineWidth = 1.0;
+            ctx.strokeStyle = '#333333';
+            ctx.strokeRect(32, 700, 50, 16);
+            ctx.font = "15px bold Georgia";
+            ctx.textAlign="center";
+            ctx.fillStyle = '#8888FF';
+            ctx.fillText(rendered_code, 56, 713);
+        }
+        
+        // Draw-Timer
+        function draw_timer() {
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");   
+            
+            angle = 4 * Math.atan(remaining);
+            
+            ctx.beginPath();
+            ctx.fillStyle = '#220022';
+            ctx.arc(300, 220, 50, 0, Math.PI*2, true);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.lineWidth = 3.0;
+            ctx.fillStyle = '#220099';
+            ctx.arc(300, 220, 50, 0, Math.PI * 2, true);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.fillStyle = '#AAAA11';
+            ctx.moveTo(300, 220);
+            ctx.arc(300, 220, 40, 0 - Math.PI / 2, angle - Math.PI / 2, false);
+            ctx.lineTo(300, 220);
+            ctx.fill();
+            
+            if (is_active()) {
+                remaining -= 0.100;
+                
+                if (remaining <= 0) {
+                    detonate_bomb();
+                    return;
+                }
+                
+                if (Math.random() < 0.60) {
+                    shuffle_keys();
+                }
+                draw_keypad();
+                setTimeout(draw_timer, 100);
+            }
+        }
+        
+        function add_listeners() {
+            var canvas = document.getElementById("canvas");
+            if (!canvas.getContext) { return; }
+            var ctx=canvas.getContext("2d");
+            
+            canvas.addEventListener('click', function(event) {
+                var x = event.pageX - canvas.offsetLeft;
+                var y = event.pageY - canvas.offsetTop;
+                
+                digit = clicked_digit(x, y);
+                if (digit >= 0) {
+                    if (keypad_code.length < 4) {
+                        keypad_code += digit.toString();
+                    }
+                    draw_code();
+                    return;
+                }
+                
+                if (clicked_activate(x, y)) {
+					click_activate();
+                	return;
+                }
+                
+                if (clicked_deactivate(x, y)) {
+                    click_deactivate();					 
+                	return;
+                }
+                
+                if (clicked_snipped(x, y)) {
+                    click_snip();
+                	return;
+                }
+                
+            }, false);
+        }
+        
+        function shuffle_keys() {
+            i = Math.floor((Math.random() * 10));
+            j = Math.floor((Math.random() * 10));
+            tmp = keys[i];
+            keys[i] = keys[j];
+            keys[j] = tmp;
+        }
+        
+        // Background
+        draw_background();
+        
+        // Get Remaining Time on Timer
+        var remaining = timer();
+
+        // Keypad Code
+        var keypad_code = "";
+        
+        // Keypad
+        var keys = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        
+        // Intact
+        if (is_intact()) {
+            // Active
+            if (is_active()) {
+                draw_bomb_activated();
+            }
+            // Not-Active
+            else
+            {
+                draw_bomb_intact();
+            }
+            
+            draw_timer();
+        }
+        // Detonated
+        else if (is_detonated()) {
+            draw_bomb_detonated();
+        }
+        // Snipped
+        else if (is_snipped()) {
+            draw_bomb_snipped();
+            draw_timer();
+        }
+        
+        draw_panel();
+        add_listeners();
+
+      </script>
+    </center>
+  </body>
+</html>

@@ -4,55 +4,63 @@ class Bomb
 
   MAX_ATTEMPTS = 3
 
-  attr_reader :attempts_remaining
+  protected
+
+  attr_accessor :status,
+                :attempts_remaining,
+                :deactivation_code,
+                :activation_code
+
+  public
+
+  def status
+    @status
+  end
 
   def activated?
-    @activated
+    self.status == :activated
   end
 
   def exploded?
-    @exploded
+    self.status == :exploded
   end
 
   def initialize(act_code = nil, deact_code = nil)
-    @activated = false
-    @exploded = false
+    self.status = :inactivated
+    self.attempts_remaining = MAX_ATTEMPTS - 1
     activate(act_code, deact_code) unless act_code.nil? || deact_code.nil?
   end
 
   def activate(activation_code, deactivation_code)
     validate_inputs(activation_code, deactivation_code)
-    @activation_code = activation_code
-    @deactivation_code = deactivation_code
-    @attempts_remaining = MAX_ATTEMPTS - 1
-    @exploded = false
-    @activated = true
+    self.activation_code = activation_code
+    self.deactivation_code = deactivation_code
+    self.status = :activated
   end
 
   def deactivate(code)
-    raise(BombError, "already gone bang") if @exploded
-    if @deactivation_code != code
-      explode_on_max_attempts
+    raise(BombError, "already gone bang") if exploded?
+    if code == self.deactivation_code
+      self.status = :deactivated
     else
-      @activated = false
+      explode_on_max_attempts
     end
   end
 
   private
 
   def explode_on_max_attempts
-    explode if @attempts_remaining == 0
-    @attempts_remaining -= 1
+    explode if self.attempts_remaining == 0
+    self.attempts_remaining -= 1
   end
 
   def explode
-    @exploded = true
-    @activated = false
+    self.status = :exploded
   end
 
   def validate_inputs(activation_code, deactivation_code)
-    raise(BombError, "already activated") if @activated
-    raise(BombError, "already gone bang") if @exploded
+    raise(BombError, "already activated") if self.activated?
+    raise(BombError, "already gone bang") if self.exploded?
     validate_codes(activation_code, deactivation_code)
   end
 

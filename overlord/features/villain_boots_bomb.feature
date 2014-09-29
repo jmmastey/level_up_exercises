@@ -12,11 +12,11 @@ Feature: villain boots bomb
   Scenario: start the game
     Given I am on the home page
     When I follow "Take over the world"
-    Then I should be on the start page
+    Then I should be on the inactivated page
     And I should see "Enter your activation code"
 
   Scenario: start a new game
     Given the bomb has already exploded
-    When I follow "Let's make a new bomb"
-    Then I should be on the start page
+    When I press "Let's make a new bomb"
+    Then I should be on the inactivated page
     And I should see "Enter your activation code"

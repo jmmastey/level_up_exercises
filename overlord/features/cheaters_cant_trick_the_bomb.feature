@@ -11,5 +11,5 @@ Feature: cheaters cant trick the bomb
 
   Scenario: the bomb cannot be used after exploding
     Given the bomb has already exploded
-    And I am on the start page
+    And I am on the inactivated page
     Then I should see "boom"

@@ -5,57 +5,38 @@ require_relative 'bomb'
 
 enable :sessions
 
+def bomb
+  session[:bomb] ||= Bomb.new
+end
+
 get '/' do
   erb :index, layout: :layout_no_header
 end
 
-get '/start' do
-  if bomb.exploded?
-    erb :exploded
-  elsif bomb.activated?
-    erb :activated
-  else
-    erb :start
-  end
+get '/inactivated' do
+  erb bomb.status
 end
 
-get '/restart' do
+post '/restart' do
   session[:bomb] = Bomb.new
-  redirect '/start'
+  redirect '/inactivated'
 end
 
 post '/activate' do
   begin
     bomb.activate(params[:activation_code], params[:deactivation_code])
-    erb :activated
   rescue ArgumentError => @activation_error
-    erb :start
-  rescue Bomb::BombError => @bomb_error
-    erb :exploded
+
   end
+  erb bomb.status
 end
 
 post '/deactivate' do
   begin
     bomb.deactivate(params[:deactivation_code])
-    if bomb.exploded?
-      erb :exploded
-    elsif bomb.activated?
-      @bomb_error = "Incorrect deactivation code"
-      erb :activated
-    else
-      erb :deactivated
-    end
+    @bomb_error = "Incorrect deactivation code" if bomb.activated?
   rescue Bomb::BombError => @bomb_error
-    erb :activated
+
   end
-end
-
-def bomb
-  session[:bomb] ||= Bomb.new
-end
-
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
+  erb bomb.status
 end

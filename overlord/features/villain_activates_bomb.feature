@@ -5,7 +5,7 @@ Feature: villain activates bomb
   So I can blow up stuff
 
   Scenario Outline: activates the bomb
-    Given I am on the start page
+    Given I am on the inactivated page
     When I fill in "activation_code" with "<act_code>"
     When I fill in "deactivation_code" with "<deact_code>"
     And I press "Arm the bomb"
@@ -29,6 +29,6 @@ Feature: villain activates bomb
 
   Scenario: activation fails after bomb already activated
     Given I have already activated the bomb
-    And I am on the start page
+    And I am on the inactivated page
     Then I should see "Bomb is armed"
 

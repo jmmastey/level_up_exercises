@@ -24,7 +24,7 @@ def attempt_bad_deactivation
 end
 
 def activate(act, deact)
-  visit path_to("the start page")
+  visit path_to("the inactivated page")
   page.should have_content("Enter your activation code")
   fill_in("activation_code", with: act)
   fill_in("deactivation_code", with: deact)

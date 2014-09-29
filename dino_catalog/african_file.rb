@@ -2,6 +2,7 @@ require_relative 'file_handler'
 require_relative 'dinosaur'
 
 class AfricanFile < FileHandler
+  #TODO lambda / block
   def map_to_object(content)
     dinosaur = Dinosaur.new()
 

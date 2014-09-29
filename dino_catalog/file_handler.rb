@@ -15,10 +15,11 @@ class FileHandler
   end
 
   #TODO CSV read function, headers option
+  #TODO skip zip functionality
   def load_file
     CSV.foreach(file_name) do |line|
       #check for headers (first line of file)
-      unless headers.nil?
+      if headers
         @contents << line
       else
         @headers = line

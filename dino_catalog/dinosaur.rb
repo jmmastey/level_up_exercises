@@ -6,6 +6,7 @@ class Dinosaur
                   :description, :weight_classification
 
   def to_s
+    #TODO don't use puts
     puts "Name: " + name.to_s if name
     puts "Period: " + period.to_s if period
     puts "Diet: " + diet.to_s if diet
@@ -29,6 +30,7 @@ class Dinosaur
     }
   end
 
+  #TODO change this
   def self.determine_weight_classification(weight)
     if weight.to_i > (TON_AS_POUNDS * 2)
       "big"

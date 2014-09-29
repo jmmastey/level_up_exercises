@@ -37,10 +37,12 @@ class Dinodex
   end
 
   def to_s
+    #TODO join method dinosaurs.join("\n")
     @dinosaurs.each { |dinosaur| dinosaur.to_s}
   end
 
   def to_json
+    #TODO change to dinosaur.to_json
     @dinosaurs.each { |dinosaur| puts JSON.generate(dinosaur.to_hash) }
   end
 end

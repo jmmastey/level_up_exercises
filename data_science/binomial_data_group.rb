@@ -10,7 +10,8 @@ class BinomialDataGroup
   end
 
   def to_s
-    format("(total '#{@data.size}', successes '#{success_count}', " \
-    "failures '#{fail_count}', percent success '%4f%%')", 100 * success_percent)
+    base_string = "(total '#{@data.size}', successes '#{success_count}', " \
+    "failures '#{fail_count}', percent success '%4f%%')"
+   format(base_string, 100 * success_percent)
   end
 end

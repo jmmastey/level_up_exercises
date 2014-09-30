@@ -13,8 +13,9 @@ class BinomialDataSet
   end
 
   def to_s
-    format("DataSet:(total '#{count}', successes '#{success_count}', " \
-    "failures '#{fail_count}', percent success '%3f%%')", 100 * success_percent)
+    base_string = "DataSet:(total '#{count}', successes '#{success_count}', " \
+    "failures '#{fail_count}', percent success '%3f%%')"
+    format(base_string, 100 * success_percent)
   end
 
   private

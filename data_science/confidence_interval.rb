@@ -3,11 +3,11 @@ require_relative "./binomial_data_group"
 class UnsupportedError < RuntimeError; end
 
 class ConfidenceInterval
-  def initialize(params)
-    @success_count = params[:success_count]
-    @fail_count = params[:fail_count]
+  def initialize(args)
+    @success_count = args[:success_count]
+    @fail_count = args[:fail_count]
     @count = @success_count + @fail_count
-    @confidence_level = params[:confidence_level]
+    @confidence_level = args[:confidence_level]
     raise_unsupported_error unless @confidence_level == 0.95
   end
 

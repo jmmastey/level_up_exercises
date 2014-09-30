@@ -34,7 +34,7 @@ class ChiSquared
     chi_difference(
       observed_size: group.success_count,
       group_size: group.count,
-      global_percent: @dataset.success_percent
+      total_percent: @dataset.success_percent
     )
   end
 
@@ -42,15 +42,15 @@ class ChiSquared
     chi_difference(
       observed_size: group.fail_count,
       group_size: group.count,
-      global_percent: @dataset.fail_percent
+      total_percent: @dataset.fail_percent
     )
   end
 
-  def chi_difference(params)
-    observed_size = params[:observed_size]
-    global_percent = params[:global_percent]
-    group_size = params[:group_size]
-    square_diff = (observed_size - (global_percent) * group_size)**2
-    square_diff / (group_size * global_percent)
+  def chi_difference(args)
+    observed_size = args[:observed_size]
+    total_percent = args[:total_percent]
+    group_size = args[:group_size]
+    square_diff = (observed_size - (total_percent) * group_size)**2
+    square_diff / (group_size * total_percent)
   end
 end

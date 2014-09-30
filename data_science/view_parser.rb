@@ -7,13 +7,13 @@ class ViewParser
   def parse(json)
     items = JSON.parse(json)
     items.map do |item|
-      build_pageview(item)
+      unmarshal(item)
     end
   end
 
   private
 
-  def build_pageview(item)
+  def unmarshal(item)
     date = Date.parse(item["date"])
     id = item["cohort"]
     purchased = purchased?(item["result"])

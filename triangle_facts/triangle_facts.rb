@@ -8,8 +8,12 @@ class Triangle
     @angles = calculate_angles
   end
 
+  def sides
+    [@side1, @side2, @side3]
+  end
+
   def triangle_type
-    case [side1, side2, side3].uniq.length
+    case sides.uniq.length
     when 1
       "This triangle is equilateral!"
     when 2
@@ -29,15 +33,19 @@ class Triangle
   end
 
   def calculate_angles
-    a = side1
-    b = side2
-    c = side3
+    a, b, c = sides
 
-    angleA = radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
-    angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
-    angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
+    angle_d = radians_to_degrees(
+                Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c))
+              )
+    angle_e = radians_to_degrees(
+                Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c))
+              )
+    angle_f = radians_to_degrees(
+                Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b))
+              )
 
-    [angleA, angleB, angleC]
+    [angle_d, angle_e, angle_f]
   end
 
   def radians_to_degrees(rads)

@@ -3,6 +3,7 @@ require_relative 'dinosaur'
 
 class AfricanFile < FileHandler
   def map_to_object(content)
+    #better way?
     if content['Carnivore'] == 'Yes'
       content['Carnivore'] = 'Carnivore'
     else

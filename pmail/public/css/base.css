@@ -1,0 +1,37 @@
+html, body, form {
+  margin: 0;
+  padding: 0;
+  background-color: #E6E6E6;
+}
+
+button {
+  position: relative;
+  background: #3498db;
+  border: solid;
+  border-color: #E8E8E8;
+  border-width: 0px 0px 2px 0px;
+}
+
+input {
+  position: relative;
+  height: 30px;
+  width: 200px;
+  vertical-align: middle;
+  border: 0;
+  border-color: #E8E8E8;
+  border-bottom-width: thin;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  color: black;
+}
+
+li {
+  display: block;
+}
+
+li:hover {
+    background-color: gray;
+}

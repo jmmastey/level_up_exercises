@@ -1,0 +1,22 @@
+nav {
+  background-color: white;
+  width: 200px;
+  margin: 0px 10px 0px 0px;
+  float: left;
+}
+
+nav button {
+  height: 28px;
+  width: 100px;
+  margin: 25px 50px 0px;
+}
+
+nav ul {
+  width: 150px;
+  padding: 0px;
+  margin: 0px 25px 10px 25px;
+}
+
+nav li {
+  margin: 5px 0px;
+}

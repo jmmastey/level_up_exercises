@@ -1,8 +1,8 @@
 require_relative "binomial_data_group"
-require_relative "binomialable"
+require_relative "binomial"
 
 class BinomialDataSet
-  include Binomialable
+  include Binomial
   attr_reader :group_field, :groups
 
   def initialize(params)
@@ -21,11 +21,11 @@ class BinomialDataSet
 
   def split_into_groups(data)
     raw_groups = data.group_by(&@group_field)
-    raw_groups.each { |key, group| raw_groups[key] = parse_group(key, group) }
+    raw_groups.each { |group_key, group| raw_groups[group_key] = parse_group(group_key, group) }
   end
 
-  def parse_group(key, data)
-    BinomialDataGroup.new(id: key, data: data,
+  def parse_group(group_key, data)
+    BinomialDataGroup.new(id: group_key, data: data,
       group_field: @group_field, result_field: @result_field)
   end
 end

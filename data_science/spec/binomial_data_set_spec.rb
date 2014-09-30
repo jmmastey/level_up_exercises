@@ -31,32 +31,32 @@ describe BinomialDataSet do
       data_set.groups["B"]
     end
 
-    it "should provide the total chance success value" do
+    it "provides the total chance success value" do
       expect(data_set.success_percent).to eq(2.0 / 6)
     end
 
-    it "should provide the total success count" do
+    it "provides the total success count" do
       expect(data_set.success_count).to eq(2)
     end
 
-    it "should provide all the groups" do
+    it "provides all the groups" do
       expect(data_set).to have(2).groups
     end
 
-    it "should provide the success count by group" do
+    it "provides the success count by group" do
       expect(data_set.groups["A"].count).to eq(2)
       expect(data_set.groups["B"].count).to eq(4)
     end
 
-    it "should provide the total chance fail value" do
+    it "provides the total chance fail value" do
       expect(data_set.fail_percent).to eq(4.0 / 6)
     end
 
-    it "should provide the total fail count" do
+    it "provides the total fail count" do
       expect(data_set.fail_count).to eq(4)
     end
 
-    it "should provide a count of all things" do
+    it "provides a count of all things" do
       expect(data_set.count).to eq(6)
     end
   end

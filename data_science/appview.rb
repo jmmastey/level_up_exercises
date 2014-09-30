@@ -1,7 +1,7 @@
 
-class AppView
+class ApplicationView
   def dataset_message(dataset)
-    dataset.to_s + "\n" + groups_message(dataset.groups)
+    [dataset.to_s, groups_message(dataset.groups)].join("\n")
   end
 
   def groups_message(groups)
@@ -11,11 +11,10 @@ class AppView
     group_messages.join("\n")
   end
 
-  def interval_table(intervals_with_id)
-    rows = intervals_with_id.each.map do |key, interval|
-      "Group '#{key}' interval: #{interval}"
-    end
-    rows.join("\n")
+  def interval_table(dataset)
+    dataset.groups.map do |group_id, data_group|
+      "Group #{group_id}: #{data_group.to_conf}"
+    end.join("\n")
   end
 
   def chi_squared_results(chi_square)

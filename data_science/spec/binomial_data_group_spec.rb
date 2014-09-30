@@ -21,7 +21,7 @@ describe BinomialDataGroup do
         data: data)
     end
 
-    it "should provide the success count" do
+    it "provides the success count" do
       expect(data_group.success_count).to eq(1)
     end
 
@@ -29,15 +29,15 @@ describe BinomialDataGroup do
       expect(data_group.fail_count).to eq(3)
     end
 
-    it "should provide the total count" do
+    it "provides the total count" do
       expect(data_group.count).to eq(4)
     end
 
-    it "should provide the success percent" do
+    it "provides the success percent" do
       expect(data_group.success_percent).to eq(0.25)
     end
 
-    it "should provide the fail percent" do
+    it "provides the fail percent" do
       expect(data_group.fail_percent).to eq(0.75)
     end
   end

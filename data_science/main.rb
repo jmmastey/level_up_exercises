@@ -14,17 +14,12 @@ def main
     data: views
   )
 
-  intervals = dataset.groups.inject({}) do |mapped_hash, (id, group)|
-    mapped_hash[id] = group.confidence_interval
-    mapped_hash
-  end
-
   chi_squared = ChiSquared.new(dataset: dataset)
 
-  appview = AppView.new
+  appview = ApplicationView.new
 
   puts appview.dataset_message(dataset)
-  puts appview.interval_table(intervals)
+  puts appview.interval_table(dataset)
   puts appview.chi_squared_results(chi_squared)
 end
 

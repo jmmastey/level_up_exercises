@@ -1,20 +1,12 @@
-require_relative "binomialable"
+require_relative "binomial"
 class BinomialDataGroup
   attr_reader :id
-  include Binomialable
+  include Binomial
 
-  def initialize(params)
-    @data = params[:data]
-    @result_field = params[:result_field]
-    @id = params[:id]
-  end
-
-  def confidence_interval
-    ConfidenceInterval.new(
-      success_count: success_count,
-      fail_count: fail_count,
-      confidence_level: 0.95
-    )
+  def initialize(data: nil, result_field: nil, id: nil)
+    @data = data
+    @result_field = result_field
+    @id = id
   end
 
   def to_s

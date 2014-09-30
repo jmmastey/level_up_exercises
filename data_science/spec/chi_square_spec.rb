@@ -6,12 +6,17 @@ describe ChiSquare do
   end
 
   let(:chi_square) { ChiSquare.new }
-  let(:group_a) { SplitTestGroup.new(name: "A",
-                                     num_views: 1349,
-                                     num_conversions: 47) }
-  let(:group_b) { SplitTestGroup.new(name: "B",
-                                     num_views: 1543,
-                                     num_conversions: 79) }
+  let(:group_a) do
+    SplitTestGroup.new(name: "A",
+                       num_views: 1349,
+                       num_conversions: 47)
+  end
+
+  let(:group_b) do
+    SplitTestGroup.new(name: "B",
+                       num_views: 1543,
+                       num_conversions: 79)
+  end
 
   describe "#test_statistic" do
     it "gets the chi-square test statistic from the provided groups" do

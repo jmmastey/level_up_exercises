@@ -39,7 +39,7 @@ class Dinodex
     @dinosaurs.join("\n")
   end
 
-  def to_json
-    @dinosaurs.to_json
+  def to_json(*args)
+    @dinosaurs.to_json(*args)
   end
 end

@@ -27,11 +27,20 @@ Feature: shopper shops
     When I click remove
     Then I should not see the product
     
-  Scenario: update quantity
+  Scenario Outline: update quantity
     Given I am on the cart page with product in my cart
-    When I click increase quantity
-    Then I should see quantity 2
-  
+    When I fill in "quantity" with "<new_qty>"
+    Then I should see "<qty_result>"
+  Examples:
+    | new_qty | qty_result |
+    | 0       | Removed    |
+    | 2       | Qty: 2     |
+    | 1       | Qty: 1     |
+    | 400     | Qty: 1     |
+    |         | Qty: 1     |
+    | abc     | Qty: 1     |
+    | -1      | Qty: 1     |
+
   Scenario: view PDP from cart
     Given I am on the cart page with product in my cart
     When I click on a product

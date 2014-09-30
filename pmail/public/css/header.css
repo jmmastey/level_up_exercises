@@ -11,13 +11,20 @@ header h1 {
   text-align: center;
 }
 
+header button {
+  height: 28px;
+  width: 100px;
+  margin: 25px 0px;
+}
+
+header input {
+  height: 30px;
+  width: 200px;
+  margin: 25px 0px;
+}
+
 #header-search-form {
   float: left;
   width: 55%;
   height: 80px;
-}
-
-.header-vert-align {
-  margin-top: 25px;
-  margin-bottom: 25px;
 }

@@ -1,26 +1,26 @@
-#header-user-dropdown {
+.user-dropdown {
   float: right;
   width: 20%;
   height: 80px;
   text-align: left;
 }
 
-#header-user-dropdown > ul li:hover {
+.user-dropdown > ul li:hover {
   background-color: #E6E6E6;
 }
 
-#header-user-dropdown > ul li ul {
+.user-dropdown > ul li ul {
   display: none;
 }
 
-#header-user-dropdown > ul li:hover ul {
+.user-dropdown > ul li:hover ul {
   display: block;
   background-color: white;
   width: 150px;
   padding: 0;
 }
 
-#header-user-dropdown > ul li ul li:hover {
+.user-dropdown > ul li ul li:hover {
   background-color: gray;
   border: 2px solid #A8A8A8;
   width: 146px;

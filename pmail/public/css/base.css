@@ -6,20 +6,20 @@ html, body, form {
 
 button {
   position: relative;
-  height: 28px;
-  width: 100px;
   background: #3498db;
-  border: 0;
-  border-bottom: 2px solid #E8E8E8;
+  border: solid;
+  border-color: #E8E8E8;
+  border-width: 0px 0px 2px 0px;
 }
 
 input {
   position: relative;
   height: 30px;
   width: 200px;
-  border: 0;
   vertical-align: middle;
-  border-bottom: 2px solid #E8E8E8;
+  border: 0;
+  border-color: #E8E8E8;
+  border-bottom-width: thin;
 }
 
 a {

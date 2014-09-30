@@ -2,8 +2,8 @@
   %h1 Pete Mail
   #header-search-form
     %form{ action: "/", role: "search"}
-      %input.header-vert-align{ name: "email_search", type: "search" }
-      %button.header-vert-align{ type: "submit" } SEARCH
+      %input{ name: "email_search", type: "search" }
+      %button{ type: "submit" } SEARCH
   =haml :user_dropdown
 %main
   =haml :navigation

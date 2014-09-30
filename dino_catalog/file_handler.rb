@@ -1,4 +1,4 @@
-require 'csv'
+require "csv"
 
 class FileHandler
   attr_accessor :file_name, :headers, :contents
@@ -9,12 +9,6 @@ class FileHandler
   end
 
   def get_all_objects
-    objects = []
-
-    @contents.each do |content|
-      objects << map_to_object(content)
-    end
-
-    objects
+    @contents.map { |content| map_to_object(content) }
   end
 end

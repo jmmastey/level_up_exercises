@@ -1,4 +1,4 @@
-require 'json'
+require "json"
 
 class Dinodex
   def initialize(dinosaurs)
@@ -40,10 +40,6 @@ class Dinodex
   end
 
   def to_json
-    output = []
-
-    @dinosaurs.each { |dinosaur| output << dinosaur.to_hash.to_json }
-
-    output.join("")
+    @dinosaurs.to_json
   end
 end

@@ -5,7 +5,7 @@ Feature: villain deactivates bomb
   So I won't blow up stuff if I change my mind
 
   Scenario Outline: deactivate the bomb
-    Given I have already activated the bomb with codes "<act>" and "<deact>"
+    Given I have already activated with "<act>" and "<deact>"
     When I fill in "deactivation_code" with "<entry>"
     And I press "Deactivate"
     Then I should see "<result>"

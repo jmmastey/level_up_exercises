@@ -7,9 +7,9 @@ class Bomb
   protected
 
   attr_accessor :status,
-                :attempts_remaining,
-                :deactivation_code,
-                :activation_code
+    :attempts_remaining,
+    :deactivation_code,
+    :activation_code
 
   public
 

@@ -18,7 +18,7 @@ get '/inactivated' do
 end
 
 get '/attempts_remaining' do
-  erb :attempts_remaining, :layout => false
+  erb :attempts_remaining, layout: false
 end
 
 post '/restart' do
@@ -29,10 +29,10 @@ end
 post '/activate' do
   begin
     bomb.activate(params[:activation_code], params[:deactivation_code])
-  rescue ArgumentError => @activation_error
-
-  rescue Bomb::BombError => @bomb_error
-
+  rescue ArgumentError => e
+    @activation_error = e.message
+  rescue Bomb::BombError => e
+    @bomb_error = e.message
   end
   erb bomb.status
 end
@@ -41,8 +41,8 @@ post '/deactivate' do
   begin
     bomb.deactivate(params[:deactivation_code])
     @bomb_error = "Incorrect deactivation code" if bomb.activated?
-  rescue Bomb::BombError => @bomb_error
-
+  rescue Bomb::BombError => e
+    @bomb_error = e.message
   end
   erb bomb.status
 end

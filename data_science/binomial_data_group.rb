@@ -3,10 +3,10 @@ class BinomialDataGroup
   attr_reader :id
   include Binomial
 
-  def initialize(data: nil, result_field: nil, id: nil)
-    @data = data
-    @result_field = result_field
-    @id = id
+  def initialize(args)
+    @data = args[:data]
+    @result_field = args[:result_field]
+    @id = args[:id]
   end
 
   def to_s

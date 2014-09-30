@@ -12,6 +12,6 @@ require "yaml"
 items = YAML.load_file("db/item_map.yaml")
 items.each do |item_id, details|
   Item.create(id: item_id,
-              description: details["description"],
-              icon: details["iconFile"])
+              description: details["description"].strip,
+              icon: details["iconFile"].strip)
 end

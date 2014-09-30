@@ -85,6 +85,14 @@ describe EveCentral do
       eve_central.quicklook(tritanium_id, regions: regions)
     end
 
+    let(:system_quicklook) do
+      eve_central.quicklook(tritanium_id, system: odin_id)
+    end
+
+    let(:minqty_quicklook) do
+      eve_central.quicklook(tritanium_id, min_qty: 1000)
+    end
+
     it "returns a hash of items" do
       expect(tritanium_quicklook).to be_a(Hash)
     end
@@ -96,6 +104,22 @@ describe EveCentral do
 
     it "accepts a number of hours to filter by" do
       expect(hour_quicklook).not_to raise_error
+    end
+
+    it "accepts a region to filter by" do
+      expect(region_quicklook).not_to raise_error
+    end
+
+    it "accepts a collection of regions to filter by" do
+      expect(multiregion_quicklook).not_to raise_error
+    end
+
+    it "accepts a system to filter by" do
+      expect(system_quicklook).not_to raise_error
+    end
+
+    it "accepts a minimum quantity in an order to filter by" do
+      expect(minqty_quicklook).not_to raise_error
     end
   end
 end

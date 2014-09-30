@@ -10,14 +10,14 @@ class Dinodex
 
     #Check for special filtering cases
     case filter
-      when :diet
-        if value == "Carnivore"
-          value = ["Carnivore", "Insectivore", "Piscivore"]
-        end
-      when :period
-        value = ["Early " + value, value, "Late " + value]
-      when :weight
-        filter = :weight_classification
+    when :diet
+      if value == "Carnivore"
+        value = ["Carnivore", "Insectivore", "Piscivore"]
+      end
+    when :period
+      value = ["Early " + value, value, "Late " + value]
+    when :weight
+      filter = :weight_classification
     end
 
     #Look through collection for Dinosaurs that match criteria
@@ -37,7 +37,7 @@ class Dinodex
   def to_json
     output = []
 
-    @dinosaurs.each { |dinosaur| output <<dinosaur.to_hash.to_json }
+    @dinosaurs.each { |dinosaur| output << dinosaur.to_hash.to_json }
 
     output.join("")
   end

@@ -4,33 +4,21 @@ class FileHandler
   attr_accessor :file_name, :headers, :contents
 
   def initialize(file_name)
-    #TODO, check for valid file/formatting
     @file_name = file_name
 
-    #initialize contents
     @contents = []
 
-    #chain to file load
     load_file()
   end
 
-  #TODO CSV read function, headers option
-  #TODO skip zip functionality
   def load_file
-    CSV.foreach(file_name) do |line|
-      #check for headers (first line of file)
-      if headers
-        @contents << line
-      else
-        @headers = line
-      end
-    end
+    @contents = CSV.read(file_name, { headers: true,
+                                      encoding: "UTF-8", })
   end
 
   def get_all_objects
     objects = []
 
-    #loop through content
     contents.each do |content|
       objects << map_to_object(content)
     end

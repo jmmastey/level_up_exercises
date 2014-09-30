@@ -6,9 +6,6 @@ class Dinodex
   end
 
   def filter(filter, value)
-    #Display filter and value on front-end
-    puts "+ Filtering " + filter.to_s + " on " + value.to_s
-
     results = []
 
     #Check for special filtering cases
@@ -30,19 +27,18 @@ class Dinodex
       end
     end
 
-    @dinosaurs = results
-
-    #Send back self to allow chaining of filter()
-    self
+    Dinodex.new(results)
   end
 
   def to_s
-    #TODO join method dinosaurs.join("\n")
-    @dinosaurs.each { |dinosaur| dinosaur.to_s}
+    @dinosaurs.join("\n")
   end
 
   def to_json
-    #TODO change to dinosaur.to_json
-    @dinosaurs.each { |dinosaur| puts JSON.generate(dinosaur.to_hash) }
+    output = []
+
+    @dinosaurs.each { |dinosaur| output <<dinosaur.to_hash.to_json }
+
+    output.join("")
   end
 end

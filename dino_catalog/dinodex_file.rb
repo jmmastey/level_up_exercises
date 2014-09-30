@@ -3,19 +3,12 @@ require_relative 'dinosaur'
 
 class DinodexFile < FileHandler
   def map_to_object(content)
-    dinosaur = Dinosaur.new()
-
-    #map headers to content
-    headers.zip(content).each do |field, value|
-      case field.downcase
-        when "weight_in_lbs"
-          dinosaur.weight = value
-          dinosaur.weight_classification = Dinosaur.determine_weight_classification(value)
-        else
-          dinosaur.send("#{field.downcase}=", value)
-      end
-    end
-
-    dinosaur
+    Dinosaur.new(:name => content['NAME'],
+                 :period => content['PERIOD'],
+                 :diet => content['DIET'],
+                 :weight => content['WEIGHT_IN_LBS'],
+                 :walking => content['WALKING'],
+                 :continent => content['CONTINENT'],
+                 :description => content['DESCRIPTION'],)
   end
 end

@@ -1,8 +1,7 @@
 #emails {
   float: left;
   width: 680px;
-  margin-left: 10px;
-  margin-right: 0px;
+  margin: 0px 0px 0px 10px;
   background-color: white;
 }
 

@@ -1,28 +1,22 @@
 nav {
   background-color: white;
   width: 200px;
-  margin-left: 0px;
-  margin-right: 10px;
+  margin: 0px 10px 0px 0px;
   float: left;
 }
 
 nav button {
+  height: 28px;
   width: 100px;
-  margin-top: 25px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin: 25px 50px 0px;
 }
 
 nav ul {
   width: 150px;
   padding: 0px;
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 0px 25px 10px 25px;
 }
 
 nav li {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 5px 0px;
 }

@@ -84,6 +84,12 @@ describe 'Deactivate bomb' do
     expect(bomb).not_to be_activated
     expect(bomb).not_to be_exploded
   end
+
+  it 'should report the number of attempts remaining' do
+    bomb.activate(valid_code, valid_code)
+    bomb.deactivate(invalid_code)
+    expect(bomb.attempts_remaining).to eq(Bomb::MAX_ATTEMPTS - 1)
+  end
 end
 
 describe 'Explosive scenarios' do

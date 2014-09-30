@@ -17,6 +17,10 @@ class Bomb
     @status
   end
 
+  def attempts_remaining
+    @attempts_remaining
+  end
+
   def activated?
     self.status == :activated
   end
@@ -27,7 +31,7 @@ class Bomb
 
   def initialize(act_code = nil, deact_code = nil)
     self.status = :inactivated
-    self.attempts_remaining = MAX_ATTEMPTS - 1
+    self.attempts_remaining = MAX_ATTEMPTS
     activate(act_code, deact_code) unless act_code.nil? || deact_code.nil?
   end
 
@@ -43,15 +47,15 @@ class Bomb
     if code == self.deactivation_code
       self.status = :deactivated
     else
-      explode_on_max_attempts
+      explode_on_max_attempt
     end
   end
 
   private
 
-  def explode_on_max_attempts
-    explode if self.attempts_remaining == 0
+  def explode_on_max_attempt
     self.attempts_remaining -= 1
+    explode if self.attempts_remaining == 0
   end
 
   def explode

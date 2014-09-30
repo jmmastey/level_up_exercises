@@ -1,3 +1,4 @@
+<script src="js/activated.js"></script>
 <form action="deactivate" method="POST">
 
 <div class="grid grid-pad">
@@ -20,6 +21,11 @@
   <div class="col-1-1">
     <input class="button" type="submit" name="deactivate" value="Deactivate">
   </div>
+  <div class="col-1-2">
+    <input class="button" type="button" name="show_attempts" id="show_attempts"
+           value="Show attempts remaining">
+  </div>
+  <div class="col-2-2" id="attempts_remaining"></div>
 </div>
 
 </form>

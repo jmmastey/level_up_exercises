@@ -17,6 +17,10 @@ get '/inactivated' do
   erb bomb.status
 end
 
+get '/attempts_remaining' do
+  erb :attempts_remaining, :layout => false
+end
+
 post '/restart' do
   session[:bomb] = Bomb.new
   redirect '/inactivated'
@@ -26,6 +30,8 @@ post '/activate' do
   begin
     bomb.activate(params[:activation_code], params[:deactivation_code])
   rescue ArgumentError => @activation_error
+
+  rescue Bomb::BombError => @bomb_error
 
   end
   erb bomb.status

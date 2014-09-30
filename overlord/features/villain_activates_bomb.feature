@@ -27,8 +27,4 @@ Feature: villain activates bomb
     | 1234     | asbc       | Cannot arm bomb: deactivation code must be 4 numbers |
 
 
-  Scenario: activation fails after bomb already activated
-    Given I have already activated the bomb
-    And I am on the inactivated page
-    Then I should see "Bomb is armed"
 

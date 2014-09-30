@@ -9,6 +9,18 @@ class Dinodex
     results = []
 
     #Check for special filtering cases
+    filter, value = filter_overrides(filter, value)
+
+    @dinosaurs.each do |dinosaur|
+      if (dinosaur.send("#{filter}")) && (value.include? dinosaur.send("#{filter}"))
+        results << dinosaur
+      end
+    end
+
+    Dinodex.new(results)
+  end
+
+  def filter_overrides(filter, value)
     case filter
     when :diet
       if value == "Carnivore"
@@ -20,14 +32,7 @@ class Dinodex
       filter = :weight_classification
     end
 
-    #Look through collection for Dinosaurs that match criteria
-    @dinosaurs.each do |dinosaur|
-      if (dinosaur.send("#{filter}")) && (value.include? dinosaur.send("#{filter}"))
-        results << dinosaur
-      end
-    end
-
-    Dinodex.new(results)
+    [filter, value]
   end
 
   def to_s

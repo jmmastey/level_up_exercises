@@ -11,11 +11,6 @@ class ConfidenceInterval
     raise_unsupported_error unless @confidence_level == 0.95
   end
 
-  def raise_unsupported_error
-    fail UnsupportedError, "We're sorry! only confidence levels of 0.95 are currently supported" \
-        "goto 'https://github.com/johnmcconnell/leveluprails/data_science' to add support."
-  end
-
   def standard_deviation
     (success_percent * fail_percent / @count)**0.5
   end
@@ -43,5 +38,17 @@ class ConfidenceInterval
   def to_s
     format("(low '%3f%%', mean '%3f%%', high '%3f%%')",
            100 * low_percent, 100 * success_percent, 100 * high_percent)
+  end
+
+  private
+
+  def raise_unsupported_error
+    fail UnsupportedError, unsupported_message
+  end
+
+  def unsupported_message
+    "We're sorry! only confidence levels of 0.95 are currently supported goto" \
+    "'https://github.com/johnmcconnell/leveluprails/data_science' to add " \
+    "support."
   end
 end

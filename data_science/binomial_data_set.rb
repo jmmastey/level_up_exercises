@@ -22,7 +22,9 @@ class BinomialDataSet
 
   def split_into_groups(data)
     raw_groups = data.group_by(&@group_field)
-    raw_groups.each { |group_key, group| raw_groups[group_key] = parse_group(group_key, group) }
+    raw_groups.each do |group_key, group|
+      raw_groups[group_key] = parse_group(group_key, group)
+    end
   end
 
   def parse_group(group_key, data)

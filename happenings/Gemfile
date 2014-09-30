@@ -33,11 +33,12 @@ gem 'spring', group: :development
 # Use unicorn as the app server
 # gem 'unicorn'
 group :development do
-  # gem 'puma', '~> 2.9.1'
-  true
+  gem 'puma', '~> 2.9.1'
 end
 gem 'devise', '~> 3.3.0'
 gem 'activevalidators', '3.1.2'
+gem 'twitter-bootstrap-rails'
+gem 'compass'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -46,11 +47,9 @@ gem 'activevalidators', '3.1.2'
 # gem 'debugger', group: [:development, :test]
 group :development, :test do
   gem 'ruby_debugger'
-  gem "factory_girl_rails", "~> 4.0"
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'minitest-rails'
-  gem 'minitest-reporters', '>= 0.5.0'
   gem 'debase', '~> 0.0.9'
   gem 'ruby-debug-ide', '0.4.22'
 end

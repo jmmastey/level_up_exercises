@@ -1,0 +1,24 @@
+<div>
+    <ul class="list-group">
+    <li class="list-group-item"><%= link_to event.id, event_path(event) %></li>
+    <li class="list-group-item"><%= event.name %></li>
+    <li class="list-group-item"><%= event.venue_id %></li>
+    <li class="list-group-item"><%= event.description %></li>
+    <li class="list-group-item"><%= event.price %></li>
+    <li class="list-group-item"><%= event.show_type %></li>
+    <li class="list-group-item"><%= event.phone_number %></li>
+    <li class="list-group-item"><%= event.running_time %></li>
+    <li class="list-group-item"><%= event.event_url %></li>
+    <li class="list-group-item"><%= event.ticket_url %></li>
+    <li class="list-group-item"><%=l event.created_at %></li>
+    <!--<li>-->
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_event_path(event), :class => 'btn btn-default btn-xs' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+#                     event_path(event),
+#                     :method => :delete,
+#                     :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'btn btn-xs btn-danger' %>
+    <!--</li>-->
+    </ul>
+</div>

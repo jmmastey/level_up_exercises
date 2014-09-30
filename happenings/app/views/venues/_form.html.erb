@@ -1,45 +1,73 @@
-<%= form_for(@venue) do |f| %>
-  <% if @venue.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@venue.errors.count, "error") %> prohibited this venue from being saved:</h2>
+<%= form_for @venue, :html => { :class => "form-horizontal venue" } do |f| %>
 
-      <ul>
-      <% @venue.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @venue.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@venue.errors.count, "error") %> prohibited this venue from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @venue.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@venue[:name]) %>
   </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
+  <div class="control-group">
+    <%= f.label :address, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :address, :class => 'form-control' %>
+    </div>
+    <%= error_span(@venue[:address]) %>
   </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
+  <div class="control-group">
+    <%= f.label :city, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :city, :class => 'form-control' %>
+    </div>
+    <%= error_span(@venue[:city]) %>
   </div>
-  <div class="field">
-    <%= f.label :zipcode %><br>
-    <%= f.text_field :zipcode %>
+  <div class="control-group">
+    <%= f.label :zipcode, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :zipcode, :class => 'form-control' %>
+    </div>
+    <%= error_span(@venue[:zipcode]) %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@venue[:description]) %>
   </div>
-  <div class="field">
-    <%= f.label :phone_number %><br>
-    <%= f.text_field :phone_number %>
+  <div class="control-group">
+    <%= f.label :phone_number, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :phone_number, :class => 'form-control' %>
+    </div>
+    <%= error_span(@venue[:phone_number]) %>
   </div>
-  <div class="field">
-    <%= f.label :venue_url %><br>
-    <%= f.text_field :venue_url %>
+  <div class="control-group">
+    <%= f.label :venue_url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :venue_url, :class => 'form-control' %>
+    </div>
+    <%= error_span(@venue[:venue_url]) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            venues_path, :class => 'btn btn-default' %>
+
 <% end %>

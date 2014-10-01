@@ -5,13 +5,13 @@ class AfricanFile < FileHandler
   def map_to_object(content)
     Dinosaur.new(name: content["Genus"],
                  period: content["Period"],
-                 diet: is_carnivore(content["Carnivore"]),
+                 diet: diet_type(content["Carnivore"]),
                  weight: content["Weight"],
                  walking: content["Walking"],
                  continent: "Africa",)
   end
 
-  def is_carnivore(carnivore)
+  def diet_type(carnivore)
     if carnivore == "Yes"
       "Carnivore"
     else

@@ -1,8 +1,7 @@
-# EveCentral
+## EVE Central
+Provides a wrapper for the [EVE Central API](http://dev.eve-central.com/evec-api/start) methods.
 
-TODO: Write a gem description
-
-## Installation
+### Installation
 
 Add this line to your application's Gemfile:
 
@@ -18,14 +17,8 @@ Or install it yourself as:
 
     $ gem install eve_central
 
-## Usage
+### Market Statistics
+Retrieves aggregate statistics for the items specified.
 
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/eve_central/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+#### Quick-look
+Retrieves all of the available market orders, including prices, stations, order IDs, volumes, etc.

@@ -28,11 +28,17 @@ class EventDatesController < ApplicationController
 
     respond_to do |format|
       if @event_date.save
-        format.html { redirect_to @event_date, notice: 'Event date was successfully created.' }
+        format.html do
+          redirect_to @event_date,
+            notice: 'Event date was successfully created.'
+        end
         format.json { render :show, status: :created, location: @event_date }
       else
         format.html { render :new }
-        format.json { render json: @event_date.errors, status: :unprocessable_entity }
+        format.json do
+          render json:   @event_date.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -42,11 +48,19 @@ class EventDatesController < ApplicationController
   def update
     respond_to do |format|
       if @event_date.update(event_date_params)
-        format.html { redirect_to @event_date, notice: 'Event date was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event_date }
+        format.html do
+          redirect_to @event_date,
+            notice: 'Event date was successfully updated.'
+        end
+        format.json do
+          render :show, status: :ok, location: @event_date
+        end
       else
         format.html { render :edit }
-        format.json { render json: @event_date.errors, status: :unprocessable_entity }
+        format.json do
+          render json:   @event_date.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -56,7 +70,10 @@ class EventDatesController < ApplicationController
   def destroy
     @event_date.destroy
     respond_to do |format|
-      format.html { redirect_to event_dates_url, notice: 'Event date was successfully destroyed.' }
+      format.html do
+        redirect_to event_dates_url,
+          notice: 'Event date was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
@@ -68,7 +85,8 @@ class EventDatesController < ApplicationController
     @event_date = EventDate.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet,
+  # only allow the white list through.
   def event_date_params
     params.require(:event_date).permit(:venue_id, :date_time, :event_id)
   end

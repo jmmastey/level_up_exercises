@@ -103,13 +103,17 @@ RSpec.describe EventsController, type: :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) do
-        FactoryGirl.attributes_for(:event, event_url: "http://google.com", price: "500", show_type: "Game")
+        FactoryGirl.attributes_for(:event,
+          event_url: "http://google.com",
+          price:     "500",
+          show_type: "Game")
 
       end
 
       it "updates the requested event" do
         event = FactoryGirl.create(:event)
-        put :update, { id: event.to_param, event: new_attributes }, valid_session
+        put :update, { id:    event.to_param,
+                       event: new_attributes }, valid_session
         event.reload
         expect(assigns(:event).event_url).to eq(new_attributes[:event_url])
         expect(assigns(:event).price).to eq(new_attributes[:price])
@@ -118,13 +122,15 @@ RSpec.describe EventsController, type: :controller do
 
       it "assigns the requested event as @event" do
         event = FactoryGirl.create(:event)
-        put :update, { id: event.to_param, event: valid_attributes }, valid_session
+        put :update, { id:    event.to_param,
+                       event: valid_attributes }, valid_session
         expect(assigns(:event)).to eq(event)
       end
 
       it "redirects to the event" do
         event = FactoryGirl.create(:event)
-        put :update, { id: event.to_param, event: valid_attributes }, valid_session
+        put :update, { id:    event.to_param,
+                       event: valid_attributes }, valid_session
         expect(response).to redirect_to(event)
       end
     end
@@ -132,13 +138,15 @@ RSpec.describe EventsController, type: :controller do
     describe "with invalid params" do
       it "assigns the event as @event" do
         event = FactoryGirl.create(:event)
-        put :update, { id: event.to_param, event: invalid_attributes }, valid_session
+        put :update, { id:    event.to_param,
+                       event: invalid_attributes }, valid_session
         expect(assigns(:event)).to eq(event)
       end
 
       it "re-renders the 'edit' template" do
         event = FactoryGirl.create(:event)
-        put :update, { id: event.to_param, event: invalid_attributes }, valid_session
+        put :update, { id:    event.to_param,
+                       event: invalid_attributes }, valid_session
         expect(response).to render_template("edit")
       end
     end

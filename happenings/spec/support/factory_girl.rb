@@ -7,7 +7,8 @@ RSpec.configure do |config|
 
   factory_girl_results = {}
   config.before(:suite) do
-    ActiveSupport::Notifications.subscribe("factory_girl.run_factory") do |_name, _start, _finish, _id, payload|
+    ActiveSupport::Notifications.subscribe("factory_girl.run_factory") do
+    |payload|
       factory_name = payload[:name]
       strategy_name = payload[:strategy]
       factory_girl_results[factory_name] ||= {}
@@ -42,23 +43,3 @@ end
 
 # Cucumber
 World(FactoryGirl::Syntax::Methods)
-
-# Spinach
-class Spinach::FeatureSteps
-  include FactoryGirl::Syntax::Methods
-end
-
-# MiniTest
-class MiniTest::Unit::TestCase
-  include FactoryGirl::Syntax::Methods
-end
-
-# MiniTest::Spec
-class MiniTest::Spec
-  include FactoryGirl::Syntax::Methods
-end
-
-# minitest-rails
-class MiniTest::Rails::ActiveSupport::TestCase
-  include FactoryGirl::Syntax::Methods
-end

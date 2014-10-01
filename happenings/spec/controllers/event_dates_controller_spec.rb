@@ -108,7 +108,8 @@ RSpec.describe EventDatesController, type: :controller do
 
       it "updates the requested event_date" do
         event_date = FactoryGirl.create(:event_date)
-        put :update, { id: event_date.to_param, event_date: new_attributes }, valid_session
+        put :update, { id:         event_date.to_param,
+                       event_date: new_attributes }, valid_session
         event_date.reload
         expect(assigns(:event_date).id).to eq(event_date.id)
         # skip("Add assertions for updated state")
@@ -116,13 +117,15 @@ RSpec.describe EventDatesController, type: :controller do
 
       it "assigns the requested event_date as @event_date" do
         event_date = FactoryGirl.create(:event_date)
-        put :update, { id: event_date.to_param, event_date: valid_attributes }, valid_session
+        put :update, { id:         event_date.to_param,
+                       event_date: valid_attributes }, valid_session
         expect(assigns(:event_date)).to eq(event_date)
       end
 
       it "redirects to the event_date" do
         event_date = FactoryGirl.create(:event_date)
-        put :update, { id: event_date.to_param, event_date: valid_attributes }, valid_session
+        put :update, { id:         event_date.to_param,
+                       event_date: valid_attributes }, valid_session
         expect(response).to redirect_to(event_date)
       end
     end
@@ -130,13 +133,15 @@ RSpec.describe EventDatesController, type: :controller do
     describe "with invalid params" do
       it "assigns the event_date as @event_date" do
         event_date = FactoryGirl.create(:event_date)
-        put :update, { id: event_date.to_param, event_date: invalid_attributes }, valid_session
+        put :update, { id:         event_date.to_param,
+                       event_date: invalid_attributes }, valid_session
         expect(assigns(:event_date)).to eq(event_date)
       end
 
       it "re-renders the 'edit' template" do
         event_date = FactoryGirl.create(:event_date)
-        put :update, { id: event_date.to_param, event_date: invalid_attributes }, valid_session
+        put :update, { id:         event_date.to_param,
+                       event_date: invalid_attributes }, valid_session
         expect(response).to render_template("edit")
       end
     end

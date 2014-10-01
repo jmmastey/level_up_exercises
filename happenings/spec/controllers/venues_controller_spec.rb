@@ -103,12 +103,16 @@ RSpec.describe VenuesController, type: :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) do
-        FactoryGirl.attributes_for(:venue, venue_url: "http://google.com", description: "I've changed", city: "Rockford")
+        FactoryGirl.attributes_for(:venue,
+          venue_url: "http://google.com",
+          description: "I've changed",
+          city: "Rockford")
       end
 
       it "updates the requested venue" do
         venue = FactoryGirl.create(:venue)
-        put :update, { id: venue.to_param, venue: new_attributes }, valid_session
+        put :update, { id: venue.to_param,
+                       venue: new_attributes }, valid_session
         venue.reload
         expect(assigns(:venue).venue_url).to eq(new_attributes[:venue_url])
         expect(assigns(:venue).description).to eq(new_attributes[:description])
@@ -117,13 +121,15 @@ RSpec.describe VenuesController, type: :controller do
 
       it "assigns the requested venue as @venue" do
         venue = FactoryGirl.create(:venue)
-        put :update, { id: venue.to_param, venue: valid_attributes }, valid_session
+        put :update, { id: venue.to_param,
+                       venue: valid_attributes }, valid_session
         expect(assigns(:venue)).to eq(venue)
       end
 
       it "redirects to the venue" do
         venue = FactoryGirl.create(:venue)
-        put :update, { id: venue.to_param, venue: valid_attributes }, valid_session
+        put :update, { id: venue.to_param,
+                       venue: valid_attributes }, valid_session
         expect(response).to redirect_to(venue)
       end
     end
@@ -131,13 +137,15 @@ RSpec.describe VenuesController, type: :controller do
     describe "with invalid params" do
       it "assigns the venue as @venue" do
         venue = FactoryGirl.create(:venue)
-        put :update, { id: venue.to_param, venue: invalid_attributes }, valid_session
+        put :update, { id: venue.to_param,
+                       venue: invalid_attributes }, valid_session
         expect(assigns(:venue)).to eq(venue)
       end
 
       it "re-renders the 'edit' template" do
         venue = FactoryGirl.create(:venue)
-        put :update, { id: venue.to_param, venue: invalid_attributes }, valid_session
+        put :update, { id: venue.to_param,
+                       venue: invalid_attributes }, valid_session
         expect(response).to render_template("edit")
       end
     end

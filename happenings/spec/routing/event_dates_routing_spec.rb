@@ -16,7 +16,8 @@ RSpec.describe EventDatesController, type: :routing do
     end
 
     it "routes to #edit" do
-      expect(get: "/event_dates/1/edit").to route_to("event_dates#edit", id: "1")
+      expect(get: "/event_dates/1/edit").to route_to("event_dates#edit",
+        id: "1")
     end
 
     it "routes to #create" do
@@ -28,7 +29,8 @@ RSpec.describe EventDatesController, type: :routing do
     end
 
     it "routes to #destroy" do
-      expect(delete: "/event_dates/1").to route_to("event_dates#destroy", id: "1")
+      expect(delete: "/event_dates/1").to route_to("event_dates#destroy",
+        id: "1")
     end
 
   end

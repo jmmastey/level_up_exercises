@@ -28,11 +28,17 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.html do
+          redirect_to @event,
+            notice: 'Event was successfully created.'
+        end
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @event.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -42,11 +48,16 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html do
+          redirect_to @event,
+            notice: 'Event was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @event.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -56,7 +67,10 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html do
+        redirect_to events_url,
+          notice: 'Event was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
@@ -68,8 +82,11 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet,
+  # only allow the white list through.
   def event_params
-    params.require(:event).permit(:name, :venue_id, :description, :price, :show_type, :phone_number, :running_time, :event_url)
+    params.require(:event).permit(:name, :venue_id, :description,
+      :price, :show_type, :phone_number,
+      :running_time, :event_url)
   end
 end

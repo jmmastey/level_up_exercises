@@ -11,4 +11,18 @@ describe Artist do
     before { artist.name = " " }
     it { should_not be_valid }
   end
+
+  describe "adding a new artist with same name" do
+    it "should be invalid" do
+      artist.save
+     # same_artist = Artist.new(name: "Beyonce")
+      same_artist = artist.dup
+      same_artist = artist.name.downcase
+      same_artist.save
+
+      expect { same_artist }.not_to be_valid
+
+     # it { should_not } be_valid
+    end
+  end
 end

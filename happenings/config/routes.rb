@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
 
+  resources :jobs
+
+  devise_for :users, ActiveAdmin::Devise.config
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   resources :event_dates
 
   resources :venues
 
   resources :events
 
-  devise_for :admins
-  devise_for :users
+
+
   root to: "application#index"
 
   resources :events do

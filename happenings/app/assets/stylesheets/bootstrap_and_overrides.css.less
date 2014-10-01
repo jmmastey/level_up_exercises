@@ -22,12 +22,12 @@
 // Since bootstrap was imported above you have access to its mixins which
 // you may use and inherit here
 //
-// If you'd like to override bootstrap's own variables, you can do so here as well
-// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
-//
 // Example:
 // @link-color: #ff0000;
 @brand-primary: #7fc5ca;
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
 @brand-success: #295329;
 @brand-info: #de9a9f;
 @brand-warning:         #f0ad4e;
@@ -78,5 +78,14 @@
 }
 .list-group-item {
   padding: 5px 10px;
+}
+.panel-default > .panel-heading {
+  color: @gray-lighter;
+}
+
+#application-index .panel.col-xs-4 {
+  height: 300px;
+  overflow: auto;
+
 }
 

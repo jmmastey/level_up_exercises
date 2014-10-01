@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def index
-    @events = Event.all
-    @venues = Venue.all
+    @events = Event.includes(:event_dates).all.limit(20)
+    @venues = Venue.includes(:venue_events).all.limit(20)
   end
 end

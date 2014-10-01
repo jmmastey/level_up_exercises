@@ -1,6 +1,6 @@
 class Venue < ActiveRecord::Base
   has_many :venue_events
-  has_many :events, through: :venue_events, inverse_of: :venue
+  has_many :events, through: :venue_events, inverse_of: :venue, dependent: :destroy
 
   validates :name, presence: true
   validates :description, presence: true, allow_blank: true

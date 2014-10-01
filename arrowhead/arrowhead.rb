@@ -25,7 +25,7 @@ class Arrowhead
   def self.valid_shape?(shape, shape_set)
     return true if shape_set.include? shape
 
-    raise "Unknown shape value. Are you sure you know what you're talking 
+    raise "Unknown shape value. Are you sure you know what you're talking
             about?"
   end
 

@@ -25,7 +25,8 @@ class Arrowhead
   def self.valid_shape?(shape, shape_set)
     return true if shape_set.include? shape
 
-    raise "Unknown shape value. Are you sure you know what you're talking about?"
+    raise "Unknown shape value. Are you sure you know what you're talking 
+            about?"
   end
 
   def self.get_shape_set(region)
@@ -43,4 +44,4 @@ class Arrowhead
   end
 end
 
-puts Arrowhead.classify(:northern_plains, :bifurcated)
+puts Arrowhead.classify(:northern_plains, :bifucated)

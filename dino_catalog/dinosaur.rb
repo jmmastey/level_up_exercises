@@ -1,6 +1,12 @@
 class Dinosaur
-  attr_accessor :name, :period, :diet, :weight, :walking, :continent, 
-                  :description, :weight_classification
+  attr_accessor :name,
+    :period,
+    :diet,
+    :weight,
+    :walking,
+    :continent,
+    :description,
+    :weight_classification
 
   def initialize(properties)
     @name = properties[:name]
@@ -16,7 +22,6 @@ class Dinosaur
   def to_s
     output = []
 
-    output << "---"
     output << "Name: " + name.to_s if name
     output << "Period: " + period.to_s if period
     output << "Diet: " + diet.to_s if diet
@@ -30,13 +35,13 @@ class Dinosaur
 
   def to_hash
     {
-      :name => name,
-      :period => period,
-      :diet => diet,
-      :weight => weight,
-      :walking => walking,
-      :continent => continent,
-      :description => description,
+      name: name,
+      period: period,
+      diet: diet,
+      weight: weight,
+      walking: walking,
+      continent: continent,
+      description: description,
     }
   end
 

@@ -8,11 +8,12 @@ class Dinodex
   def filter(filter, value)
     results = []
 
-    #Check for special filtering cases
+    # Check for special filtering cases
     filter, value = filter_overrides(filter, value)
 
     @dinosaurs.each do |dinosaur|
-      if (dinosaur.send("#{filter}")) && (value.include? dinosaur.send("#{filter}"))
+      if (dinosaur.send("#{filter}")) &&
+        (value.include? dinosaur.send("#{filter}"))
         results << dinosaur
       end
     end
@@ -22,14 +23,12 @@ class Dinodex
 
   def filter_overrides(filter, value)
     case filter
-    when :diet
-      if value == "Carnivore"
-        value = ["Carnivore", "Insectivore", "Piscivore"]
-      end
-    when :period
-      value = ["Early " + value, value, "Late " + value]
-    when :weight
-      filter = :weight_classification
+      when :diet
+        %w(Carnivore Insectivore Piscivore) if value == "Carnivore"
+      when :period
+        value = ["Early " + value, value, "Late " + value]
+      when :weight
+        filter = :weight_classification
     end
 
     [filter, value]

@@ -9,6 +9,6 @@ class DinodexFile < FileHandler
                  weight: content["WEIGHT_IN_LBS"],
                  walking: content["WALKING"],
                  continent: content["CONTINENT"],
-                 description: content["DESCRIPTION"],)
+                 description: content["DESCRIPTION"])
   end
 end

@@ -8,7 +8,7 @@ class AfricanFile < FileHandler
                  diet: diet_type(content["Carnivore"]),
                  weight: content["Weight"],
                  walking: content["Walking"],
-                 continent: "Africa",)
+                 continent: "Africa")
   end
 
   def diet_type(carnivore)

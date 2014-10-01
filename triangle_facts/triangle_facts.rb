@@ -1,25 +1,21 @@
 # Classify and display information about triangles, based on knowing sides.
 class Triangle
-  attr_accessor :side1, :side2, :side3, :angles
+  attr_accessor :sides, :angles
 
   def initialize(side1, side2, side3)
-    @side1, @side2, @side3 = side1, side2, side3
+    @sides = side1, side2, side3
 
     @angles = calculate_angles
   end
 
-  def sides
-    [@side1, @side2, @side3]
-  end
-
   def triangle_type
     case sides.uniq.length
-    when 1
-      "This triangle is equilateral!"
-    when 2
-      "This triangle is isosceles! Also, that word is hard to type."
-    else
-      "This triangle is scalene and mathematically boring."
+      when 1
+        "This triangle is equilateral!"
+      when 2
+        "This triangle is isosceles! Also, that word is hard to type."
+      else
+        "This triangle is scalene and mathematically boring."
     end
   end
 
@@ -36,13 +32,13 @@ class Triangle
     a, b, c = sides
 
     angle_d = radians_to_degrees(
-                Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c))
+                Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)),
               )
     angle_e = radians_to_degrees(
-                Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c))
+                Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)),
               )
     angle_f = radians_to_degrees(
-                Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b))
+                Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)),
               )
 
     [angle_d, angle_e, angle_f]

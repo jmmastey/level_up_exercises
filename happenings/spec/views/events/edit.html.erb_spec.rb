@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "events/edit", :type => :view do
+RSpec.describe "events/edit", type: :view do
   before(:each) do
     @event = FactoryGirl.create(:event)
   end

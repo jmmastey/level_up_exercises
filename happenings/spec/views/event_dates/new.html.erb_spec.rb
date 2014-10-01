@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "event_dates/new", :type => :view do
+RSpec.describe "event_dates/new", type: :view do
   before(:each) do
     @event_date = FactoryGirl.build(:event_date)
   end

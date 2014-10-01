@@ -1,5 +1,5 @@
 # File notifications.rb
-ActiveSupport::Notifications.subscribe("factory_girl.run_factory") do |name, start, finish, id, payload|
+ActiveSupport::Notifications.subscribe("factory_girl.run_factory") do |_name, start, finish, _id, payload|
   execution_time_in_seconds = finish - start
 
   if execution_time_in_seconds >= 0.5

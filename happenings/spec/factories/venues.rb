@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :venue do
-    sequence(:name) {|i| "Venue#{i}"}
+    sequence(:name) { |i| "Venue#{i}" }
     venue_url "http://www.irock.com"
     phone_number "17736794909"
 

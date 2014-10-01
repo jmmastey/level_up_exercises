@@ -62,13 +62,14 @@ class EventDatesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event_date
-      @event_date = EventDate.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_date_params
-      params.require(:event_date).permit(:venue_id, :date_time, :event_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event_date
+    @event_date = EventDate.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_date_params
+    params.require(:event_date).permit(:venue_id, :date_time, :event_id)
+  end
 end

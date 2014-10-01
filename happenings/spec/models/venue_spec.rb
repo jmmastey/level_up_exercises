@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Venue, :type => :model do
-
+RSpec.describe Venue, type: :model do
 
   context 'model responds to' do
     vars = FactoryGirl.attributes_for(:venue).keys

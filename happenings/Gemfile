@@ -42,7 +42,6 @@ gem 'twitter-bootstrap-rails'
 gem 'therubyracer',  platforms: :ruby
 gem 'less-rails'
 
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

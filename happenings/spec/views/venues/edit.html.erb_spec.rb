@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "venues/edit", :type => :view do
+RSpec.describe "venues/edit", type: :view do
   before(:each) do
     @venue = FactoryGirl.create(:venue)
   end

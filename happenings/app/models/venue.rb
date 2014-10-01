@@ -11,5 +11,4 @@ class Venue < ActiveRecord::Base
   validates :phone_number, presence: true
 
   validates_absence_of(:venue_events)
-
 end

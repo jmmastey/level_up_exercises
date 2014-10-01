@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EventDate, :type => :model do
+RSpec.describe EventDate, type: :model do
 
   context 'model responds to' do
     vars = FactoryGirl.attributes_for(:event_date).keys

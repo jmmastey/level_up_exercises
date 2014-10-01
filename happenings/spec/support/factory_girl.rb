@@ -7,7 +7,7 @@ RSpec.configure do |config|
 
   factory_girl_results = {}
   config.before(:suite) do
-    ActiveSupport::Notifications.subscribe("factory_girl.run_factory") do |name, start, finish, id, payload|
+    ActiveSupport::Notifications.subscribe("factory_girl.run_factory") do |_name, _start, _finish, _id, payload|
       factory_name = payload[:name]
       strategy_name = payload[:strategy]
       factory_girl_results[factory_name] ||= {}
@@ -34,7 +34,6 @@ RSpec.configure do |config|
     puts factory_girl_results
   end
 end
-
 
 # Test::Unit
 class Test::Unit::TestCase

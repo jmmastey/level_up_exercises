@@ -3,7 +3,7 @@ class EventDate < ActiveRecord::Base
   belongs_to :event, dependent: :destroy
 
   # validates_each 'venue', 'event' do |param|
-    validates :venue, presence: true
-    validates :event, presence: true
+  validates :venue, presence: true
+  validates :event, presence: true
   # end
 end

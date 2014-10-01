@@ -1,0 +1,16 @@
+<h1>Add New Event</h1>
+<h2>
+<%= form_for :event, url: { action: "create" } do |f|%>
+
+<%= f.label :name %><br>
+<%= f.text_field :name %><br>
+
+<%= f.label :location %><br>
+<%= f.text_field :location %><br>
+
+<%= f.label :when %><br>
+<%= f.datetime_field :when %><br>
+
+<%= f.submit %>
+<% end %>
+</h2>

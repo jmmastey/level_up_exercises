@@ -1,5 +1,27 @@
 #!/usr/bin/ruby
 
+# longPrefixOf?
+#
+# Parameters
+#   prefix (string) - word to test as potential prefix of standard
+#   standard (string) - word to test whether prefix is leading match of
+# Returns: True iff "prefix" is a proper prefix of "standard" of more than 3 chars
+# Implements very simple method to equate input tokens to those recognized as identifying
+# objects descriptive of dinosaurs during input source interpretation
+def longPrefixOf?(prefix, standard)
+
+
+end
+
+# DinoAmbulation
+#
+# Class handling and representing dinosaur locomotion (bi/quradrupedalism)
+class DinoAmbulation
+
+  attr_reader :ambulation     # (string) descriptive noun
+end
+
+
 # DinoDiet
 #
 # Objects that represent the various specific types of diets that dinosaurs can have
@@ -21,6 +43,7 @@ class DinoDiet
     dname = diet_name.downcase
 
     @@diet_list.each do |diet_type|
+      puts "Checking #{diet_type.inspect}\n"
       return diet_type if diet_type.is_legal_alias?(dname)
     end
 
@@ -33,13 +56,12 @@ class DinoDiet
   # Parameters:
   #   diet_name (string) - A string that may represent the name of a type of diet
   # Return value: true iff diet_name can represent this DietType; else false
-  # Used privately to classify names of diets (as strings) as one of the declared diet types. A name
+  # Used to classify names of diets (as strings) as one of the declared diet types. A name
   # is a legal alias when it is at least a three-letter prefix of the DinoDiet independent of letter case
   def is_legal_alias?(diet_name)
 
-    return (diet_name.length > 3) && (@diet.slice(0, diet_name.length) == diet_name)
+    return (diet_name.length >= 3) && (@diet.slice(0, diet_name.length) == diet_name)
   end
-  protected :is_legal_alias?
 
 
   # Held private to fix list of legal diets
@@ -49,13 +71,14 @@ class DinoDiet
   end
   private :initialize
 
+
   @@diet_list = [
-    @@INSECTIVORE = DinoDiet.new("Insectivore", true),
-    @@PISCIVORE = DinoDiet.new("Piscivore", true),
-    @@CARNIVORE = DinoDiet.new("Carnivorous", true),
-    @@UNSPECIFIED_CARNIVORE = DinoDiet.new("Unspecified carnivore", true),
-    @@UNSPECIFIED_NONCARNIVORE = DinoDiet.new("Unspecified non-carnivore", false),
-    @@UNKNOWN_DIET = DinoDiet.new("Unknown diet", false)
+    @@INSECTIVORE = DinoDiet.new("insectivore", true),
+    @@PISCIVORE = DinoDiet.new("piscivore", true),
+    @@CARNIVORE = DinoDiet.new("carnivorous", true),
+    @@UNSPECIFIED_CARNIVORE = DinoDiet.new("unspecified carnivore", true),
+    @@UNSPECIFIED_NONCARNIVORE = DinoDiet.new("unspecified non-carnivore", false),
+    @@UNKNOWN_DIET = DinoDiet.new("unknown diet", false)
   ]
 end
 

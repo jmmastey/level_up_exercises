@@ -11,32 +11,32 @@ all_dinodex_dinosaurs = DinodexFile.new("dinodex.csv").all_objects
 
 dinodex = Dinodex.new(all_african_dinosaurs + all_dinodex_dinosaurs)
 
-# Get all bipeds
-# puts dinodex.filter(:walking, "Biped").to_s
+Get all bipeds
+puts dinodex.filter(:walking, "Biped").to_s
 
-# # Get all carnivores (basically all non-herbivores)
-# puts dinodex.filter(:diet, "Insectivore").to_s
+# Get all carnivores (basically all non-herbivores)
+puts dinodex.filter(:diet, "Insectivore").to_s
 
-# # Get specific time periods
-# puts dinodex.filter(:period, "Jurassic").to_s
-# puts dinodex.filter(:period, "Triassic").to_s
-# puts dinodex.filter(:period, "Cretaceous").to_s
+# Get specific time periods
+puts dinodex.filter(:period, "Jurassic").to_s
+puts dinodex.filter(:period, "Triassic").to_s
+puts dinodex.filter(:period, "Cretaceous").to_s
 
-# # Get all big dinosaurs (over 2 tons)
+# Get all big dinosaurs (over 2 tons)
 puts dinodex.filter(:weight, "big").to_s
 
-# # Get all small dinosaurs from North America
-# puts dinodex.filter(:weight, "small").filter(:continent, "North America").to_s
+# Get all small dinosaurs from North America
+puts dinodex.filter(:weight, "small").filter(:continent, "North America").to_s
 
-# # Get all herbivores, that are quadruped, that live in Africa
-# puts dinodex.filter(:diet, "Herbivore")
-#             .filter(:walking, "Quadruped")
-#             .filter(:continent, "Africa")
-#             .to_s
+# Get all herbivores, that are quadruped, that live in Africa
+puts dinodex.filter(:diet, "Herbivore")
+            .filter(:walking, "Quadruped")
+            .filter(:continent, "Africa")
+            .to_s
 
-# # JSON examples
-# puts dinodex.filter(:name, "Suchomimus").to_json
-# puts dinodex.filter(:diet, "Herbivore").to_json
-# puts dinodex.filter(:weight, "small")
-#             .filter(:continent, "North America")
-#             .to_json
+# JSON examples
+puts dinodex.filter(:name, "Suchomimus").to_json
+puts dinodex.filter(:diet, "Herbivore").to_json
+puts dinodex.filter(:weight, "small")
+            .filter(:continent, "North America")
+            .to_json

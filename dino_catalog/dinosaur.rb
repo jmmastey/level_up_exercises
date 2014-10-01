@@ -15,9 +15,26 @@ class Dinosaur
   end
 
   def to_s
-    "Name: #{name}  Period: #{period} Continent: #{continent}  Diet: #{diet} Weight: #{weight} Walking: #{walking}  Desc: #{description}\n"
+    #"Name: #{name}  Period: #{period} Continent: #{continent}  Diet: #{diet} Weight: #{weight} Walking: #{walking}  Desc: #{description}\n"
+    to_hash.map { |(key, value)| "#{key.upcase}: #{value}" if value }.join(" | ")
     #<<-name    end with name
   end
+  def to_hash
+    {
+      name: @name,
+      period: @period,
+      continent: @continent,
+      diet: @diet,
+      weight: @weight,
+      walking: @walking,
+      description: @description
+    }
+  end
+
+  def to_json(*args)
+    to_hash.to_json(*args)
+  end
+
 end
 
 

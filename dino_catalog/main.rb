@@ -2,22 +2,23 @@
 
 require 'csv'
 require 'json'
-require_relative 'dinoparser.rb'
-require_relative 'dino.rb'
+require_relative 'dinodex_mapper'
+require_relative 'africandino_mapper'
+require_relative 'dinodex.rb'
 require_relative 'dinosaur.rb'
 
-dino = Dino.new()
+dino = DinoDex.new()
 
 file_paths = ['dinodex.csv', 'african_dinosaur_export.csv']
 
 puts "**************************************************\n"
-puts "Voila! Both files merged:\n"
+puts "Voila! Both files merged:"
 puts "**************************************************\n"
-puts merge_dino = dino.merge(file_paths)
+puts merge_dino = dino.merge_parser(file_paths)
 
 puts "\nBIPEDS:\n"
 puts "**************************************************\n"
-puts bipeds = dino.filter(:walking,"Biped")
+puts dino.filter(:walking,"Biped")
 
 puts "\nCARNIVORES:\n"
 puts "**************************************************\n"
@@ -27,27 +28,7 @@ end
 
 puts "\nCRETACEOUS PERIOD:\n"
 puts "**************************************************\n"
-puts cretaceous = dino.search_filter(:period,"Cretaceous")
-
-puts "\nPERMIAN PERIOD:\n"
-puts "**************************************************\n"
-puts permian = dino.search_filter(:period,"Permian")
-
-puts "\nJURASSIC PERIOD:\n"
-puts "**************************************************\n"
-puts jurassic = dino.search_filter(:period,"Jurassic")
-
-puts "\nOXFORDIAN PERIOD:\n"
-puts "**************************************************\n"
-puts oxfordian = dino.search_filter(:period,"Oxfordian")
-
-puts "\nALBIAN PERIOD:\n"
-puts "**************************************************\n"
-puts albian = dino.search_filter(:period,"Albian")
-
-puts "\nTRIASSIC PERIOD:\n"
-puts "**************************************************\n"
-puts triassic = dino.search_filter(:period,"Triassic")
+puts dino.filter(:period,"Cretaceous")
 
 puts "\nHeavy Dinos (> 2tons):"
 puts "**************************************************\n"
@@ -64,13 +45,13 @@ end
 puts "\nChaining Criteria:"
 puts "Biped dinos and dinos from Jurassic period:" 
 puts "**************************************************\n"
-puts chained = bipeds.concat(jurassic)
+puts dino.filter(:walking,"Biped").filter(:period,"Jurassic")
 
 puts "\nCombined filter:"
 puts "Biped dinos from Jurassic period only:"
 puts "**************************************************\n"
-puts combined = dino.combined(:walking,"Biped",:period,"Jurassic")
+puts dino.combined(walking: "Biped",period: "Jurassic")
 
 puts "\nAs a JSON:"
 puts "**************************************************\n"
-puts JSON.generate(merge_dino)
+puts merge_dino.to_json

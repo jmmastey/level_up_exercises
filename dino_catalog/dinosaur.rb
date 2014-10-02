@@ -15,9 +15,10 @@ class Dinosaur
   end
 
   def to_s
-    to_hash.map do |(key, value)|
-      "#{key.upcase}: #{value}".join(' | ') if value
+    output = to_hash.map do |(key, value)|
+      "#{key.upcase}: #{value}" if value
     end
+    output.join(" |")
   end
 
   def to_hash

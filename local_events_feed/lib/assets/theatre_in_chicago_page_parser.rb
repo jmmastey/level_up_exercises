@@ -1,61 +1,38 @@
+require_relative 'theatre_in_chicago_event'
 require 'date'
-require 'active_support/all'
 
 class TheatreInChicagoPageParser
-  class Event
-    attr_accessor :name, :location, :date, :time
-
-    def initialize
-      @date = ''
-      reset
-    end
-    
-    def reset
-      @name = ''
-      @location = ''
-      @time = ''
-    end
-
-    def full?
-      @date.present? && @time.present? && @name.present? && @location.present?
-    end
-
-    def to_s
-      "#{@date}, #{@time}, #{@name}, #{@location}"
-    end
-
-    def clean
-      @location.gsub!(/<[^>]*>/, '')
-      @location.gsub!(/\s+/, ' ')
-      @location.strip!
-    end
-  end
-
   attr_reader :events
+  TIME_REGEXP = Regexp.new('(\d|\d\d):(\d\d)(a|p)m')
 
   def initialize(body)
     @lines = body.split(/\n/)
     @position = 0
-    @date = ""
-    @event = Event.new
     @events = []
+    @date = ''
+    @event = create_new_event
     extract_events
   end
 
   private
 
+  def create_new_event
+    TheatreInChicagoEvent.new(@date)
+  end
+
   def extract_events
     while !reached_end_of_file?
       extract_fields_from_current_line
-      if @event.full?
-        @event.clean
-        @events << @event.clone
-        @event.reset
-      end
+      check_for_complete_event
     end
   end
 
-  private
+  def check_for_complete_event
+    if @event.complete?
+      @events << @event.clean.clone
+      @event = create_new_event
+    end
+  end
 
   def extract_fields_from_current_line
     extract_date_from_current_line
@@ -78,23 +55,24 @@ class TheatreInChicagoPageParser
     month = extract_month_from_current_line
     return unless month
     day, year = /#{month} (\d+), (\d+)/.match(line).captures
-    @event.date = construct_date(month, day, year)
+    @date = construct_date(month, day, year)
+    @event.date = @date
   end
 
   def extract_time_from_current_line
-    return unless /(\d|\d\d):(\d\d)(a|p)m/.match(line)
-    hh, mm, am_pm = /(\d|\d\d):(\d\d)(a|p)m/.match(line).captures
+    return unless TIME_REGEXP.match(line)
+    hh, mm, am_pm = TIME_REGEXP.match(line).captures
     set_event_time(hh, mm, am_pm) if valid_time_components(hh, mm, am_pm)
   end
 
   def extract_location_from_current_line
-    return if @event.date.empty?
+    return if @date.empty?
     return unless @event.time.empty?
     append_location_from_current_line
   end
 
   def extract_name_from_current_line
-    return if @event.date.empty?
+    return if @date.empty?
     match = /<a href=\'http:\/\/www.theatreinchicago.com\/.*\'>(.*)<\/a>/.match(line)
     return unless match
     @event.name = match.captures[0]

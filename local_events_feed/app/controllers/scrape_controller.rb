@@ -1,4 +1,4 @@
-#require_relative '../../lib/assets/theatre_in_chicago_scraper'
+require_relative '../../lib/assets/theatre_in_chicago_scraper'
 
 class ScrapeController < ApplicationController
   SECS_IN_DAY = 24 * 3600
@@ -18,7 +18,6 @@ class ScrapeController < ApplicationController
 
   def scrape_for_new_events_in(upcoming_days)
     future = (Time.now + SECS_IN_DAY * upcoming_days).to_date
-    #@raw_events = TheatreInChicagoScraper.get_events(future.year, future.month)
-    @raw_events = TheatreInChicagoScraper.get_events(2014, 12)
+    @raw_events = TheatreInChicagoScraper.get_events(future.year, future.month)
   end
 end

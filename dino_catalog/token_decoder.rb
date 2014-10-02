@@ -12,7 +12,7 @@ module TokenDecoder
   # Implements very simple method to equate input tokens to those recognized as identifying
   # objects descriptive of dinosaurs during input source interpretation
   def isValidToken?(prefix)
-
+puts "COMPARING #{prefix} to #{getStandard()}\n"
     (prefix.length >= 3) && (getStandard().slice(0, prefix.length).casecmp(prefix) == 0)
   end
 
@@ -38,12 +38,16 @@ module TokenDecoder
 
       stdobjs = getStandardObjects
 
-      stdobjs.each do |instance|
-puts "TRYING #{instance.inspect}\n"
-        return instance if instance.isValidToken?(token)
-      end
+      return stdobjs.inject(nil) { |last_match, stdobj|
 
-      return stdobjs.last
+puts "TESTING #{token} against #{stdobj.inspect}\n"
+        if stdobj.isValidToken?(token)
+
+          # Can't unambiguously match this token because this is the second object to claim it
+          raise ArgumentError.new("token matches multiple #{self.class.name} instances") unless last_match.nil?
+          last_match = stdobj
+        end
+      } || stdobjs.last    # If no match, return last one
     end
 
     # getStandardObjects (class, abstract)

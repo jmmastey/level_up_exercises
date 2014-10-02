@@ -1,0 +1,31 @@
+<script src="js/activated.js"></script>
+<form action="deactivate" method="POST">
+
+<div class="grid grid-pad">
+
+  <% if @bomb_error %>
+      <div class="col-1-1">
+        Error: <%= @bomb_error %>
+      </div>
+  <% end %>
+
+  <div class="col-1-1">
+    <p>Bomb is armed</p>
+  </div>
+  <div class="col-1-3">
+    <label for="deactivation_code">Enter your deactivation code:</label>
+  </div>
+  <div class="col-2-3">
+    <input type="text" name="deactivation_code">
+  </div>
+  <div class="col-1-1">
+    <input class="button" type="submit" name="deactivate" value="Deactivate">
+  </div>
+  <div class="col-1-2">
+    <input class="button" type="button" name="show_attempts" id="show_attempts"
+           value="Show attempts remaining">
+  </div>
+  <div class="col-2-2" id="attempts_remaining"></div>
+</div>
+
+</form>

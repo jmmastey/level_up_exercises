@@ -11,7 +11,7 @@ all_dinodex_dinosaurs = DinodexFile.new("dinodex.csv").all_objects
 
 dinodex = Dinodex.new(all_african_dinosaurs + all_dinodex_dinosaurs)
 
-Get all bipeds
+# Get all bipeds
 puts dinodex.filter(:walking, "Biped").to_s
 
 # Get all carnivores (basically all non-herbivores)

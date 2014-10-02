@@ -10,13 +10,13 @@ class DinoAmbulation
 
   attr_reader :ambulation     # (string) descriptive noun
 
-  @amb_list = [
+  @@amb_list = [
       BIPEDAL = Class.new(DinoAmbulation) { @ambulation = "bipedal"; }.new,
       QUADRUPEDAL = Class.new(DinoAmbulation) { @ambulation = "quradrupedal"; }.new
   ]
 
   def self.getStandardObjects
-    @amb_list
+    @@amb_list
   end
 end   # class DinoAmbulation
 
@@ -30,31 +30,25 @@ class DinoDiet
   attr_reader :diet           # What such a diet is called (string)
   attr_reader :carnivorous    # Whether the diet is considered carnivorous (boolean)
 
-  def initialize(diet, carnivorous = false)
-    @diet = diet
-    @carnivorous = carnivorous
-  end
-
-  # Hold private so no more of these things can be created
-  private_class_method :new
+  @@diet_list = [
+    INSECTIVORE = (Class.new(DinoDiet) { @@diet = "insectivore"; @@carnivorous = true }).new,
+    PISCIVORE = Class.new(DinoDiet) { @@diet, @@carnivorous = "piscivore", true }.new,
+    CARNIVORE = Class.new(DinoDiet) { @@diet, @@carnivorous = "carnivorous", true }.new,
+    UNSPECIFIED_CARNIVORE = Class.new(DinoDiet) { @@diet, @@carnivorous = "unspecified carnivore", true }.new,
+    UNSPECIFIED_NONCARNIVORE = Class.new(DinoDiet) { @@diet, @@carnivorous = "unspecified non-carnivore", false }.new,
+    UNKNOWN_DIET = Class.new(DinoDiet) { @@diet, @@carnivorous = "unknown diet", false }.new
+  ]
 
   #
   # Implementing TokenDecoder interface
   #
 
   def self.getStandardObjects
-    [
-      INSECTIVORE = DinoDiet.new("insectivore", true),
-      PISCIVORE = DinoDiet.new("piscivore", true),
-      CARNIVORE = DinoDiet.new("carnivorous", true),
-      UNSPECIFIED_CARNIVORE = DinoDiet.new("unspecified carnivore", true),
-      UNSPECIFIED_NONCARNIVORE = DinoDiet.new("unspecified non-carnivore", false),
-      UNKNOWN_DIET = DinoDiet.new("unknown diet", false)
-    ]
+    @@diet_list
   end
 
   def getStandard
-    @diet
+    @@diet
   end
 end   # class DinoDiet
 

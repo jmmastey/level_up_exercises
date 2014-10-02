@@ -39,7 +39,7 @@ module TokenDecoder
       stdobjs = getStandardObjects
 
       stdobjs.each do |instance|
-
+puts "TRYING #{instance.inspect}\n"
         return instance if instance.isValidToken?(token)
       end
 

@@ -24,24 +24,42 @@ module TokenDecoder
     raise NotImplementedError
   end
 
-  # createByToken (primary class interface method)
-  #
-  # Parameters
-  #   token (string) - A token word to be used to select an instance of comprising class to create
-  # Returns: (TokenFactory) An instance of the comprising class 
-  # Called on comprising class to select an instance for the input token
-  def self.createByToken(token)
+  # Place these in a module that can be used (below) to extend a comprising class, thereby
+  # implementing static method mixin that is not a native ruby behavior
+  module StaticMethods
 
-    getStandardObjects.each do |instance|
+    # createByToken (primary class interface method)
+    #
+    # Parameters
+    #   token (string) - A token word to be used to select an instance of comprising class to create
+    # Returns: (TokenFactory) An instance of the comprising class, or LAST OBJECT BY DEFAULT
+    # Called on comprising class to select an instance for the input token
+    def createByToken(token)
 
-      return instance if instance.isValidToken?(token)
+      stdobjs = getStandardObjects
+
+      stdobjs.each do |instance|
+
+        return instance if instance.isValidToken?(token)
+      end
+
+      return stdobjs.last
     end
 
-  # getStandardObjects (class, abstract)
-  #
-  # Returns: Predefined list of comprising class instances that may be selected by tokens
-  def self.getStandardObjects
-    raise NotImplementedError
+    # getStandardObjects (class, abstract)
+    #
+    # Returns: Predefined list of comprising class instances that may be selected by tokens.
+    # with the LAST object being DEFAULT when no other claims a token match
+    def getStandardObjects
+      raise NotImplementedError
+    end
+  end
+
+  # Because ruby does not mixin class methods, it has to be done explicitly. The above module is full
+  # of the methods meant to be mixed in as class methods.
+  def self.included(comprising_class)
+  
+    comprising_class.extend StaticMethods
   end
 end  # module TokenDecoder
 

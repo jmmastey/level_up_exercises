@@ -122,15 +122,18 @@ class Dinosaur
   #
   # Parameters:
   #   taxon (string) - Defining clade
-  #   period (symbol) - Interval of history
-  #   diet (string) - 
-  def initalize(taxon, period, diet, weight, ambulation, description = nil)
+  #   period (TimePeriod)
+  #   diet (DinoDiet)
+  #   weight (integer)
+  #   ambulation (DinoAmbulation)
+  def initialize(taxon, period, diet, weight, ambulation, description = nil)
 
+    @taxon, @period, @diet, @weight, @ambulation, @description =
+      taxon, period, diet, weight, ambulation, description
   end
 end
 
 ARGV.each { |a|
-  puts "a: #{DinoDiet.createByToken(a).inspect}\n"
-  #puts "a: #{TimePeriod.createByToken(a).inspect}\n"
+  puts "a: #{TimePeriod.createByToken(a).inspect}\n"
 }
 

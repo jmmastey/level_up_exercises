@@ -12,7 +12,7 @@ module TokenDecoder
   # Implements very simple method to equate input tokens to those recognized as identifying
   # objects descriptive of dinosaurs during input source interpretation
   def isValidToken?(prefix)
-puts "COMPARING #{prefix} to #{getStandard()}\n"
+
     (prefix.length >= 3) && (getStandard().slice(0, prefix.length).casecmp(prefix) == 0)
   end
 
@@ -21,6 +21,7 @@ puts "COMPARING #{prefix} to #{getStandard()}\n"
   # Returns: (string) A token that represents this object against which other tokens are matched
   # Must be overridden in comprising classes to provide a token to match
   def getStandard
+
     raise NotImplementedError
   end
 
@@ -38,14 +39,16 @@ puts "COMPARING #{prefix} to #{getStandard()}\n"
 
       stdobjs = getStandardObjects
 
+      # Reduce the list of standard instances to find one that claims the token; but only one!
       return stdobjs.inject(nil) { |last_match, stdobj|
 
-puts "TESTING #{token} against #{stdobj.inspect}\n"
-        if stdobj.isValidToken?(token)
+        if stdobj.isValidToken?(token) 
 
-          # Can't unambiguously match this token because this is the second object to claim it
-          raise ArgumentError.new("token matches multiple #{self.class.name} instances") unless last_match.nil?
-          last_match = stdobj
+          return stdobjs.last if last_match     # No matches when more than one matches
+          stdobj
+        else
+
+          last_match
         end
       } || stdobjs.last    # If no match, return last one
     end
@@ -58,6 +61,7 @@ puts "TESTING #{token} against #{stdobj.inspect}\n"
       raise NotImplementedError
     end
   end
+
 
   # Because ruby does not mixin class methods, it has to be done explicitly. The above module is full
   # of the methods meant to be mixed in as class methods.

@@ -1,4 +1,5 @@
 require 'date'
+require 'active_support/all'
 
 class TheatreInChicagoPageParser
   class Event
@@ -16,7 +17,7 @@ class TheatreInChicagoPageParser
     end
 
     def full?
-      !@date.empty? && !@time.empty? && !@name.empty? && !@location.empty?
+      @date.present? && @time.present? && @name.present? && @location.present?
     end
 
     def to_s

@@ -1,7 +1,7 @@
 require_relative 'theatre_in_chicago_page_parser'
 require 'open-uri'
 
-module TheatreInChicagoScraper
+class TheatreInChicagoScraper
   END_POINT = "http://www.theatreinchicago.com/opening/"
   QUERY = "CalendarMonthlyResponse.php?"
 

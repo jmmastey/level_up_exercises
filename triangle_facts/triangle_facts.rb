@@ -4,26 +4,30 @@ class Triangle
 
   def initialize(side1, side2, side3)
     @sides = side1, side2, side3
-
     @angles = calculate_angles
+    @type = triangle_type
   end
 
   def triangle_type
-    case sides.uniq.length
-      when 1
-        "This triangle is equilateral!"
-      when 2
-        "This triangle is isosceles! Also, that word is hard to type."
-      else
-        "This triangle is scalene and mathematically boring."
-    end
+    unique_sides = sides.uniq.count
+    return :equilateral if unique_sides == 1
+    return :isosceles   if unique_sides == 2
+    return :scalene     if unique_sides == 3
+  end
+
+  def triangle_show
+    messages = {
+      equilateral: "This triangle is equilateral!",
+      isosceles: "This triangle is isosceles! Also, that word is hard to type.",
+      scalene: "This triangle is scalene and mathematically boring.",
+    }
+
+    messages[@type]
   end
 
   def recite_facts
-    puts triangle_type
-
+    puts triangle_show
     puts "The angles of this triangle are #{angles.join(',')}"
-
     puts "This triangle is also a right triangle!" if angles.include? 90
     puts "\n"
   end

@@ -1,6 +1,6 @@
 # YADDA - Yet Another Drinking Diary App
 
-We need an excuse to build a database with some real interactions. This is just that excuse. There is a major flaw with every currently extant drinking-diary app (BrewTrackr, BrewGene, Untappd, BeerHunt, NextPint, etc etc etc). They've all already been built, and not by us. Let's use justification and build some data.
+We need an excuse to build a database with some real interactions. This is just that excuse. There is a major flaw with every currently extant drinking-diary app (BrewTrackr, BrewGene, Untappd, BeerHunt, NextPint, etc etc etc). They've all already been built, and not by us. Let's use that justification and build some data.
 
 The different parts of this exercise correspond with an entire module on Data, so don't feel the need to do them all up front.
 

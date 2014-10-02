@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Artist do
   subject(:artist) { Artist.new(name: "Beyonce") }
 
-  it { should respond_to(:name) }
+  it { is_expected.to respond_to(:name) }
 
   it { should be_valid }
 

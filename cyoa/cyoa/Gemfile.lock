@@ -39,7 +39,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    childprocess (0.5.3)
+    childprocess (0.5.4)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -52,6 +52,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.1)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
     ffi (1.9.5)
     haml (4.0.5)
       tilt
@@ -104,6 +109,9 @@ GEM
     rspec-expectations (3.1.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.1.0)
+    rspec-its (1.0.1)
+      rspec-core (>= 2.99.0.beta1)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-mocks (3.1.2)
       rspec-support (~> 3.1.0)
     rspec-rails (3.1.0)
@@ -161,12 +169,14 @@ DEPENDENCIES
   better_errors
   capybara
   coffee-rails (~> 4.0.0)
+  factory_girl_rails
   haml
   jbuilder (~> 2.0)
   jquery-rails
   pg
   rails (= 4.1.6)
   rails_12factor (= 0.0.2)
+  rspec-its
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

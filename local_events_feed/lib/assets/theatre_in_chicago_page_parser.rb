@@ -118,7 +118,7 @@ class TheatreInChicagoPageParser
 
   def construct_date(month, day, year)
     mm = convert_to_mm(month.to_s)
-    sprintf("%04d%02d%02d", year.to_i, mm, day.to_i)
+    sprintf("%04d-%02d-%02d", year.to_i, mm, day.to_i)
   end
 
   def convert_to_mm(month)
@@ -136,6 +136,6 @@ class TheatreInChicagoPageParser
   def set_event_time(hh, mm, am_pm)
     halfday = 0
     halfday = 12 if am_pm == 'p'
-    @event.time = sprintf("%02d%02d00.000", hh.to_i + halfday, mm)
+    @event.time = sprintf("%02d:%02d:00", hh.to_i + halfday, mm)
   end
 end

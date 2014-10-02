@@ -1,0 +1,892 @@
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+
+
+
+
+
+<center>
+  <style type="text/css">
+.calendar {
+	/** configure the width **/
+	width:185px;	
+	background-color: #F3F3F3;
+	border: 1px solid #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin:0px;
+	padding:0px;
+	text-align:center;
+}
+.calendar th {
+	background-color: #EFEFEF;
+	font-weight: bold;
+	height: 5px;
+}
+.calendar .header {
+	background-color: #730000;
+	font-weight: bold;
+	height: 10px;
+	color: #FFFFFF;
+}
+.calendar .footer {
+	background-color: #730000;
+	font-weight: bold;
+	font-size:0.8em;
+	color: #FFFFFF;
+	width:100%;
+}
+.calendar td {
+	width: 22px;
+	height: 5px;
+	text-align: center;
+	font-size:0.9em;
+	padding: 2px;
+}
+.calendar .today {
+	width: 18px;
+	height: 16px;
+	background-color: #FAD2DA;
+	padding: 2px;
+	border: 1px solid #000000;
+}
+
+.calendar .link {
+	width: 18px;
+	height: 16px;
+	background-color: #FF9B35;
+	padding: 2px;
+	border: 1px solid #000000;
+}
+
+.calendar a, .calendar a:link, .calendar a:hover {
+	font-weight: bold;
+	text-decoration: underline;
+	color: #000000;
+
+}
+.calendar a.headerNav, .calendar a:link.headerNav, .calendar a:hover.headerNav {
+	background-color: #730000;
+	color: #ffffff;
+}
+
+.calendar a.footerNav, .calendar a:link.footerNav, .calendar a:hover.footerNav {
+	width: 100%;
+	background-color: #730000;
+	color: #ffffff;
+}
+</style>
+
+<script language="javascript">
+
+function createQCObject() { 
+   var req; 
+   if(window.XMLHttpRequest){ 
+      // Firefox, Safari, Opera... 
+      req = new XMLHttpRequest(); 
+   } else if(window.ActiveXObject) { 
+      // Internet Explorer 5+ 
+      req = new ActiveXObject("Microsoft.XMLHTTP"); 
+   } else { 
+      alert('Problem creating the XMLHttpRequest object'); 
+   } 
+   return req; 
+} 
+
+// Make the XMLHttpRequest object 
+var http = createQCObject(); 
+var ran_no=(Math.round((Math.random()*9999))); 
+
+
+function cDisplay(id,opendate) {
+http.open('get', 'CalendarSampleResponse.php?id='+id+'&ran='+ran_no+'&opendate='+opendate);
+   	http.onreadystatechange = function() {
+		if (http.readyState == 4 && http.status == 200) { 
+      		var response = http.responseText;
+			if(response) { 
+			
+		 	document.getElementById("calendar_details").innerHTML = http.responseText; 
+			if(typeof(document.getElementById("calendar_details").textContent) != "undefined")
+			{
+				if(document.getElementById("calendar_details").textContent=="")
+				document.getElementById("calendar_details").innerHTML="No openings scheduled for today";
+			}
+			else
+			{
+			if(document.getElementById("calendar_details").innerText=="")
+				document.getElementById("calendar_details").innerHTML="No openings scheduled for today";
+      		//document.getElementById("calendar_details").innerHTML ="working";
+			}
+			}
+			
+   		} 
+	} 
+   	http.send(null); 
+}
+function test()
+{
+//
+}
+
+function displayQCalendar(m,y,optional) {
+//var t=setTimeout("alert('hi')",1);
+//alert('hi');
+if (typeof optional == "undefined") 
+    optional = "";
+
+ document.getElementById("calendar_details").innerHTML="";
+ 
+	http.open('get', 'quick_calendar5.php?m='+m+'&y='+y+'&ran='+ran_no);
+   	http.onreadystatechange = function() {
+	// alert(http.readyState);
+		if (http.readyState == 4 && http.status == 200) { 
+		 
+      		var response = http.responseText;
+      		if(response) { 
+			//alert(http.responseText);
+				document.getElementById("quickCalender").innerHTML = http.responseText; 
+      		}
+			 
+   		} 
+		
+	}
+	http.send(null);
+	
+	
+	
+	if(optional=="showdate")
+	{
+	 
+	var http1 = createQCObject(); 
+	var ran_no1=(Math.round((Math.random()*9999)));
+	id="";
+	var today=new Date();
+	var opendate=today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+	http1.open('get', 'CalendarSampleResponse.php?id='+id+'&ran='+ran_no1+'&opendate='+opendate);
+   	http1.onreadystatechange = function() {
+		if (http1.readyState == 4 && http1.status == 200) { 
+      		var response = http1.responseText;
+			if(response) { 
+		 	document.getElementById("calendar_details").innerHTML = http1.responseText; 
+			if(typeof(document.getElementById("calendar_details").textContent) != "undefined")
+			{
+				if(document.getElementById("calendar_details").textContent=="")
+				document.getElementById("calendar_details").innerHTML="No openings scheduled for today";
+			}
+			else
+			{
+			if(document.getElementById("calendar_details").innerText=="")
+				document.getElementById("calendar_details").innerHTML="No openings scheduled for today";
+      		//document.getElementById("calendar_details").innerHTML ="working";
+			}
+			}
+			
+   		} 
+	} 
+	http1.send(null); 
+	}
+	
+	
+	
+	if(optional=="showmonth")
+	{
+	var http1 = createQCObject(); 
+	var ran_no1=(Math.round((Math.random()*9999)));
+	http1.open('get', 'CalendarMonthlyResponse.php?ran='+ran_no1+'&month='+m+'&year='+y);
+   	http1.onreadystatechange = function() {
+		if (http1.readyState == 4 && http1.status == 200) { 
+      		var response = http1.responseText;
+      		if(response) { 
+		// alert(http.responseText);
+		     document.getElementById("calendar_details").innerHTML = http1.responseText; 
+      		//document.getElementById("calendar_details").innerHTML ="working";
+			} 
+   		} 
+	} 
+   	http1.send(null); 
+	}
+}
+
+function cMonthlyDisplay(month,year) {
+ 
+	http.open('get', 'CalendarMonthlyResponse.php?ran='+ran_no+'&month='+month+'&year='+year);
+   	http.onreadystatechange = function() {
+		if (http.readyState == 4 && http.status == 200) { 
+      		var response = http.responseText;
+      		if(response) { 
+		// alert(http.responseText);
+		     document.getElementById("calendar_details").innerHTML = http.responseText; 
+      		//document.getElementById("calendar_details").innerHTML ="working";
+			} 
+   		} 
+	} 
+   	http.send(null); 
+}
+
+
+
+function FindPlay()
+{
+
+var play= document.myform.play.value;
+ http.open('post', 'CalendarSampleResponse.php?play='+play+'&search=1');
+   	http.onreadystatechange = function() {
+		if (http.readyState == 4 && http.status == 200) { 
+      		var response = http.responseText;
+      		if(response) { 
+		 
+		     document.getElementById("calendar_details").innerHTML = http.responseText; 
+			  
+			if(typeof(document.getElementById("calendar_details").textContent) != "undefined")
+			{
+				if(document.getElementById("calendar_details").textContent=="")
+				{
+					document.getElementById("calendar_details").innerHTML="No results found for '"+play+"' on opening night calendar";
+				}
+      		//document.getElementById("calendar_details").innerHTML ="working";
+			}
+			else
+			{
+			if(document.getElementById("calendar_details").innerText=="")
+				document.getElementById("calendar_details").innerHTML="No results found for '"+play+"' on opening night calendar";
+      		//document.getElementById("calendar_details").innerHTML ="working";
+			}
+			} 
+   		} 
+	} 
+   	http.send(null);
+	return false;
+}
+</script>
+
+
+
+
+				
+
+ 
+	 </center>
+ <html>
+<head>
+<title>Chicago Theatre Opening Night Calendar - Chicago Play Openings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+
+<link rel="stylesheet" href="../styles/tic_styles.css">
+<!--[if IE ]>
+<link type="text/css" rel="stylesheet" media="screen" href="http://theatreinchicago.com/styles/ie.css" />
+<![endif]-->
+<style type="text/css">
+<!--
+.style1 {font-weight: bold}
+.style2 {font-size: 16px}
+.style3 {
+	font-size: 18px;
+	font-weight: bold;
+}
+.style4 {font-size: 14px}
+.style5 {color: #730000}
+-->
+</style>
+<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') +
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+googletag.defineSlot('/113039460/TICauditionheader', [234, 60], 'div-gpt-ad-1364246675488-0').addService(googletag.pubads());
+googletag.defineSlot('/113039460/TICauditionrightuppercolumn', [160, 600], 'div-gpt-ad-1364246675488-1').addService(googletag.pubads());
+googletag.defineSlot('/113039460/TICfooter', [468, 60], 'div-gpt-ad-1364246675488-2').addService(googletag.pubads());
+googletag.defineSlot('/113039460/TICheader', [468, 60], 'div-gpt-ad-1364246675488-3').addService(googletag.pubads());
+googletag.defineSlot('/113039460/TICleftcolumn', [160, 600], 'div-gpt-ad-1364246675488-4').addService(googletag.pubads());
+googletag.defineSlot('/113039460/TICrightbottomcolumn', [160, 600], 'div-gpt-ad-1364246675488-5').addService(googletag.pubads());
+googletag.defineSlot('/113039460/TICrightmiddlecolumn', [160, 600], 'div-gpt-ad-1364246675488-6').addService(googletag.pubads());
+googletag.defineSlot('/113039460/TICrightuppercolumn', [160, 600], 'div-gpt-ad-1364246675488-7').addService(googletag.pubads());
+googletag.defineSlot('/113039460/TICspecificrightuppercolumn', [160, 600], 'div-gpt-ad-1364246675488-8').addService(googletag.pubads());
+googletag.defineSlot('/113039460/TICauditionfooter', [468, 60], 'div-gpt-ad-1385498761131-0').addService(googletag.pubads());
+googletag.enableServices();
+});
+</script>
+</head>
+
+<body bgcolor="#cacaca" style="margin:0 auto;">
+<div style="margin:0 auto;">
+<table width="920" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+  <tr>
+    <td colspan="3"><!-- header start //-->
+<table width="970" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td bgcolor="#730000"><a href="/"><img src="/images/main/tic_logo.gif" alt="Theatre In Chicago" width="400" height="66" border="0">&nbsp;&nbsp;&nbsp;&nbsp;</td><td bgcolor="#730000"><!-- TICheader -->
+<span id='div-gpt-ad-1364246675488-3' style='width:468px; height:60px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1364246675488-3'); });
+</script>
+</span></td>
+  </tr>
+  <tr bgcolor="#FFFFFF"> 
+    <td height="1"><img src="/images/main/spacer.gif" width="1" height="1"></td>
+  </tr>
+  <tr bgcolor="#5B5B5B"> 
+    <td><a href="/"><img src="/images/main/tic_tag.gif" alt="Your Source For What's On Stage In Chicago" width="400" height="23" border="0"></a></td><td bgcolor="#5B5B5B">&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFFFF"> 
+    <td height="2"><img src="/images/main/spacer.gif" width="1" height="2"></td>
+  </tr>
+  <tr bgcolor="#FF9B35"> 
+    <td height="34"><img src="/images/main/spacer.gif" width="1" height="34"></td> <td bgcolor="#FF9B35"> </td>
+  </tr>
+</table>
+<script type="text/javascript">
+window.google_analytics_uacct = "UA-192177-2";
+</script>
+<!-- header end //--></td>
+  </tr>
+  <tr>
+    <td rowspan="2" width="167" bgcolor="#EEEEEE" valign="top"><!-- leftNav start //--><style type="text/css">
+<!--
+.style1 {color: #1A50B8}
+-->
+</style>
+ 
+<table width="167" border="0" cellspacing="0" cellpadding="5">
+  <tr> 
+    <td class="leftNav" nowrap> 
+      <div align="right"><a href="http://www.theatreinchicago.com/" class="leftNav"><br>
+      Home</a></div>
+    </td>
+    <td rowspan="7"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="7" height="1"></td>
+  </tr>
+  <tr> 
+    <td class="leftNav" nowrap> 
+      <div align="right"><a href="http://www.theatreinchicago.com/nowplayingrs.php" class="leftNav">Now Playing</a></div>
+    </td>
+  </tr>
+  <tr> 
+    <td class="leftNav" nowrap> <span class="style1"></span>      <div align="right"><a href="http://www.theatreinchicago.com/comingsoonrs.php" class="leftNav">Coming Soon</a></div>    </td>
+  </tr>
+  <tr> 
+    <td class="leftNav" nowrap> <span class="style1"></span>      <div align="right"><a href="http://www.theatreinchicago.com/tictix.php" class="leftNav">Half-Price Tickets</a></div>    </td>
+  </tr>
+  <tr> 
+    <td class="leftNav" nowrap> 
+      <div align="right"><a href="http://www.theatreinchicago.com/search.php" class="leftNav">Search</a></div>
+    </td>
+  </tr>
+  <tr> 
+    <td class="leftNav" nowrap> 
+      <div align="right"><a href="http://www.theatreinchicago.com/maps/mapTheatres.php" class="leftNav">Theatre Map</a></div>
+    </td>
+  </tr>
+  <tr> 
+    <td class="leftNav" nowrap> 
+      <div align="right"><a href="http://www.theatreinchicago.com/childrens.php" class="leftNav">Children's Shows</a></div>
+    </td>
+  </tr>
+  <tr> 
+    <td class="leftNav" nowrap> 
+      <div align="right"><a href="http://www.theatreinchicago.com/newslistingsrs.php" class="leftNav">Performance Spotlight</a></div>
+    </td>
+  </tr>
+     <tr> 
+    <td class="leftNav" nowrap> 
+      <div align="right"><a href="http://www.theatreinchicago.com/reviewlistings.php" class="leftNav">Review Round-Up </a></div>
+    </td>
+  </tr>
+    <tr> 
+    <td class="leftNav" nowrap> <span class="style1"></span>      <div align="right"><a href="http://www.theatreinchicago.com/videos.php" class="leftNav">Videos</a></div>    </td>
+  </tr>
+  <tr> 
+    <td class="leftNav" nowrap> 
+      <div align="right"><a href="http://www.theatreinchicago.com/talk" class="leftNav">Talk Theatre Podcast </a></div>
+    </td>
+  </tr>
+ <tr> 
+    <td class="leftNav" nowrap> 
+      <div align="right"><a href="http://www.theatreinchicago.com/photogallery.php" class="leftNav">Photo Gallery </a></div>
+    </td>
+  </tr>
+  <tr> 
+    <td class="leftNav" nowrap> 
+      <div align="right"><a href="http://www.theatreinchicago.com/aboutus.php" class="leftNav">About Us</a></div>
+    </td>
+ </table>
+<br><link type="text/css" href="http://www.theatreinchicago.com/includes/leftsearch/theme/ui.all.css" rel="Stylesheet" />
+<script src="http://www.theatreinchicago.com/includes/leftsearch/jquery-1.3.1.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://www.theatreinchicago.com/includes/leftsearch/jquery-ui-personalized-1.6rc6.js"></script>
+
+<script type="text/javascript">
+
+	function setEffect(){
+		var browser=navigator.appName;
+		if (browser == 'Microsoft Internet Explorer')
+		return '';
+		else
+		return 'slow';
+		}
+
+	$(function() {
+
+		var d = setEffect();
+		$("#datepicker").datepicker({
+			minDate: 0,
+		    maxDate: '1y',
+			changeMonth: false,
+			changeYear: false,
+			showButtonPanel: true,
+			numberOfMonths: 1,
+			showOn: "both",
+		    //buttonImage: "templates/images/calendar.gif",
+    		//buttonImageOnly: true
+			//showOn: 'button',
+			buttonImage: 'http://www.theatreinchicago.com/includes/leftsearch/theme/images/ticcalendar.gif',
+			buttonImageOnly: true,
+    		dateFormat: 'm/d/yy',
+    		duration: d,
+    		altField: '#alternate',
+    		altFormat: 'yy-mm-dd',
+			closeText: 'Close'
+    });
+	});
+	</script>
+
+ <table width="167" border="0" cellspacing="0" cellpadding="0">
+  <tr bgcolor="#8A2D2D"> 
+    <td height="1" colspan="2"><img src="http://www.theatreinchicago.com/images/spacer.gif" width="1" height="1"></td>
+  </tr>
+  <tr bgcolor="#CACACA"> 
+    <td height="24" colspan="2" class="quickFind">&nbsp;&nbsp;&nbsp;Quick Search</td>
+  </tr>
+  <tr bgcolor="#8A2D2D"> 
+    <td height="1" colspan="2"><img src="http://www.theatreinchicago.com/images/spacer.gif" width="1" height="1"></td>
+  </tr>
+  
+  
+  
+ 
+  <tr align="center"> 
+    <td colspan="2" class="body" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; font-weight: normal; color: #5D5D5D; height: 80px;"> 
+<form style="display: inline;" method='GET' action='http://www.theatreinchicago.com/searchresultsQF.php' name="ShowQF" id="ShowQF">
+        <select style="margin: 15px auto 5px;" name='QFsearchBy' class="body">
+          <option value='site' SELECTED>--Show or Theatre--</option>
+          <option value='play'>Show Name</option>
+          <option value='theatre'>Venue/Theatre Name</option>
+        </select>
+        <div  style="margin: 0px auto;">
+        <input type='text' name='txtTitle' size='15' value='' class="body">
+        <input type='image' height='23' width='43' name='go' src='http://www.theatreinchicago.com/images/main/go.jpg' align='top' border='0'></div> 
+  </form>
+       
+  <div class="body" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; font-weight: normal; color: #5D5D5D; height: 30px; text-align: center;  margin: 3px auto;"><strong>OR</strong><br />
+         Search by date:</div>
+         
+	<div id="date-form" class="body" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; font-weight: normal; color: #5D5D5D; height: 30px; text-align: center; padding: 0;">
+<form style="display: inline; margin: 0 auto; padding: 0;" method='GET' action='http://www.theatreinchicago.com/searchresults.php' name="DateQF" id="DateQF">
+   <!-- <div class="body" id="datepicker" style="width:200px"></div>-->
+	<input type="text"  id="datepicker" value=" mm/dd/yy" size="12" class="body" style="margin-right: 6px; margin-left: 7px;">
+	<input type="hidden" id="alternate" size="30" name="txtDate" value="">
+	<input type='image' height='23' width='43' name='go' src='http://www.theatreinchicago.com/images/main/go.jpg' align='top' border='0'>
+	<input name="txtTitle" type="hidden" id="txtTitle">
+	<input name="txtGenre" type="hidden" id="txtGenre">
+	<input name="txtArea" type="hidden" id="txtArea">
+	<input name="txtDateF" type="hidden" id="txtDateF" value='null'>
+	<input name="txtDateT" type="hidden" id="txtDateT" value='null'>
+	<input name="QFdate" type="hidden" id="QFdate" value='1'>
+      
+
+</form> 
+        </div>
+	<hr style="margin: 10px 0; padding: 0;" />
+        </td>
+        </tr>
+	    
+	
+	 <tr>
+	   <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinchicago.com/tictop.php" class="leftNavSearch">Top Rated Plays</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+	    <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+    </tr>
+    <tr>
+	   <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinchicago.com/opening/openingnight.php" class="leftNavSearch">Opening Night Calendar</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+	    <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+    </tr>
+	    <tr>
+	   <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinchicago.com/newswirers.php" class="leftNavSearch">Theatre News Wire </a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+	    <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+    </tr>
+	    <tr>
+		 <tr>
+	   <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinchicago.com/seatingcharts.php" class="leftNavSearch">Seating Charts </a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+	    <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+    </tr>
+    
+	    <tr>
+		
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinchicago.com/eat.php" class="leftNavSearch">Restaurant Guide</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+	<tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+<tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinchicago.com/broadwayinchicago.php" class="leftNavSearch">Broadway In Chicago</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+    <tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinchicago.com/auditions/" class="leftNavSearch">Auditions</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+    
+    <tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinnewyork.com" class="leftNavSearch">Theatre In New York</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+    <tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinboston.com" class="leftNavSearch">Theatre In Boston</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+	<tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreindc.com" class="leftNavSearch">Theatre In DC </a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+
+<tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinla.com" class="leftNavSearch">Theatre In LA</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+	<tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinminneapolis.com" class="leftNavSearch">Theatre In Minneapolis </a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+    <tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinseattle.com" class="leftNavSearch">Theatre In Seattle</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+    <tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinsanfrancisco.com" class="leftNavSearch">Theatre In San Francisco</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+    <tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinphilly.com" class="leftNavSearch">Theatre In Philly</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+    <tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinphoenix.com" class="leftNavSearch">Theatre In Phoenix</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+    <tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreinportland.com" class="leftNavSearch">Theatre In Portland</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+    <tr>
+	      <td height="3" nowrap class="leftNavSearch">  <div align="right"><a href="http://www.theatreatlanta.com" class="leftNavSearch">Theatre Atlanta</a> </div></td>
+       <td width="19" nowrap class="leftNavSearch">&nbsp;</td>
+    </tr>
+  <tr>
+	      <td height="2" colspan="2" nowrap class="leftNavSearch"><img src="http://www.theatreinchicago.com/images/main/spacer.gif" width="1" height="10" /></td>
+
+    </tr>
+
+
+	
+	
+	
+	
+	
+	    <tr>
+	      <td height="3" colspan="2" nowrap class="leftNavSearch"><div align="center">
+	                 </div></td>
+    </tr>
+    
+
+</table>
+<!-- leftNav end//--></td>
+    <td width="633" valign="top">
+<table border="0" cellspacing="0" cellpadding="4">
+        <tr>
+          <td width="633"><!-- mainContent start //--><!-- featured show start //-->            <!-- featured show end //-->
+			<!-- open/close start//-->
+            <!-- open/close end//-->
+            <table width="625"  border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="43" bgcolor="#730000" class="tableHead">&nbsp;&nbsp;Chicago Theatre Opening Night Calendar - Find Official Play Openings In Chicago
+</td>
+              </tr>
+              <tr>
+                <td bgcolor="#FFFFFF"><p class="JeffRedHead"></p><br>
+                  <p><span class="JeffRedHead">Click on a calendar day to view openings, or click on a month to view openings for the entire month.  To find an opening for a specific play or at a certain theatre, simply use the search tool.
+                  </span><br>
+
+                <hr></td>
+              </tr>
+            </table>
+            <table width="100%"  border="0" cellpadding="1" cellspacing="2" bgcolor="#FFFFFF">
+              <tr>
+                <td width=400 align="left" valign="top" class="body" id="calendar_details">                </td>
+                <td align="left" valign="top"> <!-- calendar goes here-->
+								  <div id='quickCalender'>
+					<table cellspacing='0'  width='185' height='114px' cellpadding='0' class='calendar'>
+		<tr>
+		<th class='header'>&nbsp;<a href="javascript:;" onclick="displayQCalendar('10','2013')" class='headerNav' title='Prev Year'></a></th>
+		<th class='header'>&nbsp;<a href="javascript:;" onclick="displayQCalendar('9','2014','showmonth')" class='headerNav'><</a></th>
+		<th colspan='3' class='header'><a href="javascript:;" onclick="cMonthlyDisplay('10','2014')" class='headerNav' title='Prev Month'>Oct 2014</a></th>
+		<th class='header'><a href="javascript:;" onclick="displayQCalendar('11','2014','showmonth');" class='headerNav' title='Next Month'>></a>&nbsp;</th>
+		<th class='header'>&nbsp;<a href="javascript:;" onclick="displayQCalendar('10','2015')"  class='headerNav' title='Next Year'></a></th>
+		</tr><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>Th</th><th>F</th><th>S</th></tr><tr><td></td><td></td><td></td><td><div class='link'><a href="javascript:cDisplay('','2014-10-01')" title=''>1</a></div></td><td><div class='link'><a href="javascript:cDisplay('','2014-10-02')" title=''>2</a></div></td><td>3</td><td><div class='link'><a href="javascript:cDisplay('','2014-10-04')" title=''>4</a></div></td></tr><tr><td><div class='link'><a href="javascript:cDisplay('','2014-10-05')" title=''>5</a></div></td><td><div class='link'><a href="javascript:cDisplay('','2014-10-06')" title=''>6</a></div></td><td><div class='link'><a href="javascript:cDisplay('','2014-10-07')" title=''>7</a></div></td><td>8</td><td>9</td><td>10</td><td>11</td></tr><tr><td>12</td><td><div class='link'><a href="javascript:cDisplay('','2014-10-13')" title=''>13</a></div></td><td><div class='link'><a href="javascript:cDisplay('','2014-10-14')" title=''>14</a></div></td><td>15</td><td>16</td><td><div class='link'><a href="javascript:cDisplay('','2014-10-17')" title=''>17</a></div></td><td><div class='link'><a href="javascript:cDisplay('','2014-10-18')" title=''>18</a></div></td></tr><tr><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td></tr><tr><td>26</td><td><div class='link'><a href="javascript:cDisplay('','2014-10-27')" title=''>27</a></div></td><td>28</td><td><div class='link'><a href="javascript:cDisplay('','2014-10-29')" title=''>29</a></div></td><td>30</td><td>31</td><td></td></tr><tr><td colspan='7' class='footer'><a href="javascript:;" onclick="displayQCalendar('10','2014','showdate');" class='footerNav'>Today is October 1, 2014</a></td></tr></table>					</script>
+					</div>
+                                     <br />
+                <form name=myform method=post onSubmit="FindPlay();return false;">
+                </b><b>Search for an opening by play name or theatre:</b> <br></b>
+				<input type=text class="body1" value="" name="play" >
+
+				<input type=submit class="detailbody" value="Go" >
+				</form>
+			    </td>
+              </tr>
+              <tr>
+                <td class="body"><a></a></td>
+                <td>
+
+
+
+
+                </td>
+              </tr>
+              <tr>
+                <td class="body">&nbsp;</td>
+              </tr>
+              <tr>
+                <td valign="top" class="body"> </td>
+              </tr>
+              <tr>
+                <td class="body">&nbsp;</td>
+              </tr>
+              <tr>
+                <td class="body">&nbsp; </td>
+              </tr>
+              <tr>
+                <td height="5" colspan="2" bgcolor="#FF9B35"><img src="../images/main/spacer.gif" width="1" height="1"></td>
+              </tr>
+<tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+            <p>&nbsp;</p>
+          <!-- mainContent end //--></td>
+        </tr>
+      </table>
+
+    </td>
+    <td rowspan="2" valign="top" bgcolor="#EEEEEE"><!-- ad start //-->
+      <div align="center"><img src="/images/main/spacer.gif" height="5" width="165" /><br />
+        <!-- TICrightuppercolumn -->
+<div id='div-gpt-ad-1364246675488-7' style='width:160px; height:600px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1364246675488-7'); });
+</script>
+</div>        </div>
+    <!-- ad end //--></td>
+  </tr>
+  <tr>
+    <td><!-- footer start //-->
+<div align="center" class="footer">
+<!-- TICfooter -->
+<div id='div-gpt-ad-1364246675488-2' style='width:468px; height:60px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1364246675488-2'); });
+</script>
+</div>
+<br><br />
+
+  <a href="http://www.theatreinchicago.com/" class="footer">home</a> | <a href="http://www.theatreinchicago.com/nowplayingrs.php" class="footer">now playing</a> | <a href="http://www.theatreinchicago.com/comingsoonrs.php" class="footer">coming soon</a> 
+  
+  | 
+   <a href="http://www.theatreinchicago.com/talk" class="footer">talk theatre podcast</a> 
+  
+  | 
+  <a href="http://www.theatreinchicago.com/search.php" class="footer">theatre search / maps</a> | <A HREF="http://www.theatreinchicago.com/tictix.php" class="footer">tickets</A>
+  | <a href="http://www.theatreinchicago.com/newslistingsrs.php" class="footer">theatre news</a> | <a href="http://www.theatreinchicago.com/aboutus.php" class="footer">about us</a><br>
+   <strong>Also visit our sister sites:<br />
+<a href="http://www.theatreinla.com">Theatre In Los Angeles</a></strong>, <strong><a href="http://www.theatreindc.com">Theatre In DC</a>, <a href="http://www.theatreinboston.com">Theatre In Boston</a>, <a href="http://www.theatreinminneapolis.com">Theatre In Minneapolis</a>, <a href="http://www.theatreinseattle.com">Theatre In Seattle</a>,  <a href="http://www.theatreatlanta.com">Theatre Atlanta</a>, and <a href="http://www.theatreinsanfrancisco.com">Theatre In San Francisco</a>, and <a href="http://www.theatreinphilly.com">Theatre In Philly</a>.</strong><br>
+  <br>
+  &copy;2014 Theatre In Chicago, all rights reserved<br />
+  <a href="http://www.theatreinchicago.com/news/TICrss.xml"><img src="http://www.theatreinchicago.com/includes/xmlbutton.jpg" alt="News XML" width="80" height="15" border="0" /></a></div>
+  
+<!-- Google Analytics -->    
+<!-- Google Analytics Starts -->
+<script type="text/javascript">
+
+
+  var _gaq = _gaq || [];
+
+  _gaq.push(['_setAccount', 'UA-192177-2']);
+
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+
+    var ga = document.createElement('script');
+
+    ga.type = 'text/javascript'; ga.async = true;
+
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+  })();
+
+
+</script>
+
+<script type="text/javascript">
+
+var a = document.getElementsByTagName('a');
+
+for(i = 0; i < a.length; i++){
+
+  if (a[i].href.indexOf(location.host) == -1 && a[i].href.match(/^http:\/\//i)){
+
+   a[i].onclick = function(){
+
+        _gaq.push(['_trackEvent', 'outgoing_links', this.href.replace(/^http:\/\//i, '')]);
+
+        }
+
+  }
+
+}
+</script>
+
+<!-- Google Analytics Ends -->
+<!-- Google Analytics End -->
+
+<!--/* Perfect Audience */-->
+<script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    // _pa.orderId = "myUser@email.com"; // OPTIONAL: include your user's email address or order ID
+    // _pa.revenue = "19.99"; // OPTIONAL: include dynamic purchase value for the conversion
+    // _pa.onLoadEvent = "sign_up"; // OPTIONAL: name of segment/conversion to be fired on script load
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.perfectaudience.com/serve/5065b47d676597000200004f.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+</script>
+<!-- Get Clicky -->
+<script type="text/javascript">
+var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(66535313);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+</script>
+<!-- Get Clicky End -->
+
+  
+  
+ 
+  
+  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- footer end //--></td>
+  </tr>
+</table>
+<script>
+var today=new Date();
+var opendate1=today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+cDisplay('',opendate1);
+//cMonthlyDisplay('10','2014');
+</script>
+
+</div>
+</body>
+
+</html>

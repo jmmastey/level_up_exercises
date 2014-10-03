@@ -4,14 +4,22 @@ require_relative 'math_helper'
 
 describe ChiSquare do
   let(:an_angstrom) { 1e-10 }
-  let(:chi_square) { ChiSquare.new }
+  let(:empty_chi_square) { ChiSquare.new }
 
-  before(:each) do
+  let(:chi_square) do
+    chi_square = ChiSquare.new
+
     bernoulli = create_bernoulli(4, 4)
     chi_square.add(bernoulli)
 
     bernoulli = create_bernoulli(9, 7)
     chi_square.add(bernoulli)
+    
+    chi_square
+  end
+
+  it 'should return zero chi-value when empty' do
+    expect(empty_chi_square.value).to be_within(an_angstrom).of(0.0)
   end
 
   it 'should return correct chi-value' do

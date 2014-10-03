@@ -13,7 +13,8 @@ class ChiSquare
   end
 
   def value
-    @bernoullis.inject(0.0) { |sum, bernoulli| sum + component(bernoulli) }
+    return 0.0 if @bernoullis.empty?
+    @bernoullis.map { |b| component(b) }.inject(:+)
   end
 
   def significance

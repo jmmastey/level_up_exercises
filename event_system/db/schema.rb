@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140924134044) do
+ActiveRecord::Schema.define(version: 20140930133458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 20140924134044) do
   create_table "regions", primary_key: "region_id", force: true do |t|
     t.string "country"
     t.string "state"
+  end
+
+  create_table "weather_forecasts", force: true do |t|
+    t.date     "weather_day"
+    t.integer  "high"
+    t.integer  "low"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

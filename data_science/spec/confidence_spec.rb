@@ -37,9 +37,18 @@ describe Confidence do
   it 'should compute the max-cohort correctly' do
     expect(confidence.max_subject).to eq('B')
     expect(confidence.max_conversion).to be_within(an_angstrom).of(0.5625)
+    expect(confidence.is_max?('B')).to be true
   end
 
   it 'should not have distinct means' do
     expect(confidence).not_to have_distinct_means
+  end
+
+  it 'should have correct chi-square value' do
+    expect(confidence.chi_square_value).to be_within(an_angstrom).of(0.0839160839)
+  end
+
+  it 'should have correct chi-square significance' do
+    expect(confidence.chi_square_significance).to be_within(an_angstrom).of(0.2279410302)
   end
 end

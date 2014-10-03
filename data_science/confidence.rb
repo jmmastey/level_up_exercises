@@ -17,6 +17,10 @@ class Confidence
     @observations[subject].update(observation.success)
   end
 
+  def add_list(observations)
+    observations.each { |o| add(o) }
+  end
+
   def subjects
     @observations.keys
   end

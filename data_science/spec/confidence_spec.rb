@@ -1,17 +1,26 @@
 require 'spec_helper'
+require 'data_helper'
 require_relative '../confidence'
 
 describe Confidence do
-  let(:confidence) { Confidence.new }
-  let(:interval_a) { confidence.interval('A') }
-  let(:interval_b) { confidence.interval('B') }
-
-  before(:each) do
+  let(:confidence) do
+    confidence = Confidence.new
     4.times { confidence.add(Observation.new('A', true )) }
     4.times { confidence.add(Observation.new('A', false)) }
     9.times { confidence.add(Observation.new('B', true )) }
     7.times { confidence.add(Observation.new('B', false)) }
+    confidence
   end
+
+  let(:confidence_from_list) do
+    confidence_from_list = Confidence.new
+    confidence_from_list.add_list(observations('A', 4, 4))
+    confidence_from_list.add_list(observations('B', 9, 7))
+    confidence_from_list
+  end
+
+  let(:interval_a) { confidence.interval('A') }
+  let(:interval_b) { confidence.interval('B') }
 
   it 'contains the correct list of subjects' do
     expect(confidence.subjects).to match_array(["A", "B"])
@@ -19,6 +28,10 @@ describe Confidence do
 
   it 'adds observations correctly' do
     expect(confidence.subjects).to match_array(["A", "B"])
+  end
+
+  it 'adds observations from a list correctly' do
+    expect(confidence_from_list.subjects).to match_array(["A", "B"])
   end
 
   it 'computes the confidence interval for A correctly' do

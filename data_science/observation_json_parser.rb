@@ -8,11 +8,8 @@ class ObservationJSONParser
     @data = JSON.parse(file)
   end
 
-  def apply(confidence)
-    @data.each do |entry|
-      observation = to_observation(entry)
-      confidence.add(observation) unless observation.nil?
-    end
+  def observations
+    @data.map { |entry| to_observation(entry) }.compact
   end
 
   private

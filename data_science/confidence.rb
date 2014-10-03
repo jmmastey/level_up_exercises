@@ -12,9 +12,7 @@ class Confidence
   def add(observation)
     subject = observation.subject
     create_subject(subject) unless @observations.key?(subject)
-
-    success = observation.success
-    @observations[subject].update(success)
+    @observations[subject].update(observation.success)
   end
 
   def subjects
@@ -27,14 +25,6 @@ class Confidence
 
   def has_distinct_means?
     chi_square.has_rejected_null_hypothesis?
-  end
-
-  def chi_square_value_msg
-    sprintf('%0.4f', chi_square.value)
-  end
-
-  def chi_square_significance_msg
-    sprintf('%0.4f', chi_square.significance)
   end
 
   def max_conversion
@@ -104,6 +94,14 @@ class Confidence
     else
       'Means are NOT distinct'.blue
     end
+  end
+
+  def chi_square_value_msg
+    sprintf('%0.4f', chi_square.value)
+  end
+
+  def chi_square_significance_msg
+    sprintf('%0.4f', chi_square.significance)
   end
 
   def create_subject(subject)

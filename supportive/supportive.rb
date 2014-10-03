@@ -46,15 +46,12 @@ class BlagPost
   end
 
   def category_list
-    return "" if categories.empty?
+    #PLURALIZE
+    "" if categories.empty?
+    label = "Category" 
+    label.pluralize unless label.length == 1
 
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
+      if categories.length > 1
       last_category = categories.pop
       suffix = " and #{as_title(last_category)}"
     else
@@ -65,6 +62,7 @@ class BlagPost
   end
 
   def as_title(string)
+    #camelize
     string = String(string)
     words = string.gsub('_', ' ').split(' ')
 
@@ -73,6 +71,7 @@ class BlagPost
   end
 
   def commenters
+    #ORDINALIZE
     return '' unless comments_allowed?
     return '' unless comments.length > 0
 
@@ -90,11 +89,8 @@ class BlagPost
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    #TRUNCATE    
+      body.truncate(200, omission: '...')
   end
 
 end
@@ -102,7 +98,7 @@ end
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
+                    "comments"      => [ [], [], [], [] ], # because comments are meaningless, get it?
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.

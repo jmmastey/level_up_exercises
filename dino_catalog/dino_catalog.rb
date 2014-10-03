@@ -5,9 +5,9 @@
 # Fri Oct  3 11:56:12 CDT 2014
 # Jonathan Marks (jmarks1@enova.com)
 #
-# Implements CLI application as solution to "dinodex" leveluprails exercise. Represents dinosaurs internally
-# as CSV::Row objects with # no higher-level data structure. Not designed to export API for use in other 
-# software.
+# Implements CLI application as solution to "dinodex" leveluprails exercise.
+# Represents dinosaurs internally as CSV::Row objects with # no higher-level
+# data structure. Not designed to export API for use in other software.
 #
 
 require "csv"
@@ -17,13 +17,13 @@ class DinoTable
 
   attr_reader :csv_table
 
-  # Field names encounted that are keys in this hash are translated to corresponding values
+  # Field names that are keys below are translated to # corresponding values
   @@header_map = {
     'genus'           => 'name',
     'weight_in_lbs'   => 'weight',
   }
 
-  # Diet type tokens mapping true in this hash are recognized as carnivorous diets
+  # Diet type tokens mapped true below are recognized as carnivorous diets
   @@carnivorous_diets = {
     'insectivore' => true,
     'piscivore' => true,
@@ -35,22 +35,22 @@ class DinoTable
   #
   # Parameters
   #   row (CSV::Row) A newly read row from CSV file
-  # Returns: (CSV::Row) A CSV row, possibly modified from the row passed as input
-  # Normalize a CSV row to ensure all known data are accounted and in proper form for query.
-  # NOTE: A CSV field converter won't suffice because these actions use data from multiple
-  # fields at once.
+  # Returns: (CSV::Row) A CSV row, possibly modified from the row passed as
+  # input Normalize a CSV row to ensure all known data are accounted and in
+  # proper form for query.  NOTE: A CSV field converter won't suffice because
+  # these actions use data from multiple fields at once.
   def fix_dino_table_row(row)
 
-    # Complete the "carnivore" field based on diet if incomplete and we know the diet
+    # Complete "carnivore" field using diet if incomplete and we know the diet
     row[:carnivore] =
       !!@@carnivorous_diets[row.field(:diet)] unless row.header?(:carnivore)
 
-    # Complete "diet" field w/generic info if we only know whether dino is a carnivore
+    # Complete "diet" field w/generic info if we know whether dino is carnivore
     #
-    # NOTE: ASK CUSTOMER WHETHER THESE GENERIC ASSUMPTIONS ARE DESIRABLE AND CORRECT
+    # NOTE: ASK CUSTOMER IF THESE GENERIC ASSUMPTIONS ARE DESIRABLE AND CORRECT
     #
-    row[:diet] =
-      row.field(:carnivore) ? "carnivore" : "herbivore" unless row.header?(:diet)
+    row[:diet] = row.field(:carnivore) ? 
+                  "carnivore" : "herbivore" unless row.header?(:diet)
 
     # Validate/normalize other fields? (walking, name, weight, period?)
 
@@ -104,8 +104,8 @@ class DinoTable
   # initialize
   #
   # Parameters
-  #   filenames (variadic list of strings) - List of filenames of CSV input files to read
-  # Constructs a DinoTable, optionally initializing with data from CSV input files
+  #   filenames (variadic list of strings) - filenames of CSV inputs to read
+  # Constructs a DinoTable, optionally initialized by CSV input files
   def initialize(*filenames)
 
     # Accumulator for full dinosaur data set
@@ -118,7 +118,7 @@ class DinoTable
 end     # class DinoTable
 
 
-# Implements the main program; command-line interface that identfies input data files and
+# Implements main program; command-line interface accepts input data files and
 # selects filters to apply to dinosaur data constructed from input files.
 class DinoDex
 
@@ -134,17 +134,19 @@ class DinoDex
   # parse_options
   #
   # Parameters
-  #   options (Array of Strings) - List of command-line options (defaults to ARGV)
-  # Configures the DinoDex by interpreting command-line arguments in an arg vector
+  #   options (Array of Strings) - List of CLI options (defaults to ARGV)
+  # Configures the DinoDex by interpreting CLI arguments in an arg vector
   def parse_options(options = ARGV)
 
     optparser = OptionParser.new { |opts|
 
-      opts.banner = "Usage #{opts.program_name} [-f <input_file>]+ [-l|-s] [-c|-C] [-b|-q] [-p <period>]"
+      opts.banner = "Usage #{opts.program_name} " +
+        "[-f <input_file>]+ [-l|-s] [-c|-C] [-b|-q] [-p <period>]"
       opts.separator ""
       opts.separator "Description of options:"
       
-      opts.on("-f", "--input-file filename", "Use data from a properly-formatted CSV input file") { |fname| 
+      opts.on("-f", "--input-file filename", 
+          "Use data from a properly-formatted CSV input file") { |fname| 
         @dino_table.read_dino_csv(fname) 
       }
 
@@ -160,20 +162,28 @@ class DinoDex
         @filters << ->(csvrow) { (! (c = csvrow[:carnivore]).nil?) && c }
       }
 
-      opts.on("-C", "--non-carnivorous", "Select only non-carnivorous beasts") {
+      opts.on("-C", "--non-carnivorous", 
+          "Select only non-carnivorous beasts") {
         @filters << ->(csvrow) { (! (c = csvrow[:carnivore]).nil?) && !c }
       }
 
       opts.on("-b", "--bipedal", "Select only bipeds") {
-        @filters << ->(csvrow) { (! (w = csvrow[:walking]).nil?) && (w == "biped") }
+        @filters << ->(csvrow) {
+          (! (w = csvrow[:walking]).nil?) && (w == "biped")
+        }
       }
 
       opts.on("-q", "--quadrupedal", "Select only quadrupeds") {
-        @filters << ->(csvrow) { (! (w = csvrow[:walking]).nil?) && (w == "biped") }
+        @filters << ->(csvrow) {
+          (! (w = csvrow[:walking]).nil?) && (w == "biped")
+        }
       }
 
-      opts.on("-p", "--period [period]", "Select dinosaurs from periods matching expression") { |expr|
-        @filters << ->(csvrow) { (! (p = csvrow[:period]).nil?) && (p =~ /#{expr}/i) }
+      opts.on("-p", "--period [period]",
+          "Select dinosaurs from periods matching expression") { |expr|
+        @filters << ->(csvrow) {
+          (! (p = csvrow[:period]).nil?) && (p =~ /#{expr}/i)
+        }
       }
 
       opts.on_tail("-h", "--help", "Show option summary") {
@@ -181,17 +191,10 @@ class DinoDex
         exit 1
       }
     }
-  
-    begin
 
-      optparser.parse!(options)
-    rescue Exception => ex
-    
-      puts ex.message + "\n"
-      puts optparser
-      exit 1
-    end
+    optparser.parse!(options)
   end
+
 
   # write_field
   #
@@ -244,6 +247,17 @@ end
 # Main program begins
 #
 
-d = DinoDex.new
-d.parse_options
-d.print_dinosaurs
+begin
+
+  d = DinoDex.new
+  d.parse_options
+  d.print_dinosaurs
+rescue Exception => ex
+    
+  # Catch any kind of error h
+  puts ex.message + "\n"
+  puts optparser
+  exit 1
+end
+
+exit 0

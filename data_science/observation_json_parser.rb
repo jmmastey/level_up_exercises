@@ -6,8 +6,6 @@ class ObservationJSONParser
   def initialize(filename)
     file = File.read(filename)
     @data = JSON.parse(file)
-  rescue
-    raise "There was a problem reading the file: #{filename}"
   end
 
   def apply(confidence)

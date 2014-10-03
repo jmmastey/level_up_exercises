@@ -1,58 +1,68 @@
-require_relative "dinosaur"
-require "json"
+require_relative 'dinosaur'
+require 'json'
 
+# DinoDex is a container class that allows you to query for dinosaurs.
 class DinoDex
-
   def initialize(dinosaurs = [])
     @dinosaurs = dinosaurs
   end
 
-  def print 
+  def print
     puts @dinosaurs
   end
 
   def who(name)
-    selection {|dino| dino.name == name}
+    selection { | dino | dino.name == name }
   end
 
-  def when(period) 
-    selection {|dino| dino.period == period}
+  def when(period)
+    selection { | dino | dino.period == period }
   end
 
   def where(continent)
-    selection {|dino| dino.continent == continent}
+    selection { | dino | dino.continent == continent }
   end
 
   def diet(diet)
-    selection {|dino| dino.diet == diet}
+    selection { | dino | dino.diet == diet }
   end
 
   def carnivore
-    selection {|dino| ["Carnivore", "Insectivore", "Piscivore"].include?(dino.diet)} 
+    selection do | dino |
+      %w(Carnivore Insectivore Piscivore).include?(dino.diet)
+    end
   end
 
   def weight(weight)
-    selection {|dino| dino.weight == weight?}
+    selection { | dino | dino.weight == weight }
   end
 
   def big
-    selection {|dino| dino.big?}
+    selection(&:big?)
   end
 
   def small
-    selection {|dino| !dino.big?}
+    selection(&:small?)
   end
 
   def walking(walking)
-    selection {|dino| dino.walking == walking}
+    selection { | dino | dino.walking == walking }
   end
 
   def search(parameters)
     temp = @dinosaurs.dup
-    parameters.each do |(key,value)|
-      temp = temp.select {|dino| dino.send(key) == value}
+    parameters.each do |(key, value)|
+      temp = temp.select { | dino | dino.send(key) == value }
     end
     temp
+  end
+
+  def search(parameters)
+    @dinosaurs.select do | dino |
+      parameters.all? do | key, value |
+        dino.send(key) == value
+      end
+    end
   end
 
   def to_json
@@ -64,5 +74,4 @@ class DinoDex
   def selection(&block)
     DinoDex.new(@dinosaurs.select(&block))
   end
-
 end

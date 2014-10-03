@@ -22,6 +22,14 @@ describe Confidence do
   let(:interval_a) { confidence.interval('A') }
   let(:interval_b) { confidence.interval('B') }
 
+  let(:a_lower) { 0.5 - 0.3535533906 }
+  let(:a_upper) { 0.5 + 0.3535533906 }
+  let(:a_midpt) { 0.5 }
+
+  let(:b_lower) { 0.5625 - 0.2480391854 }
+  let(:b_upper) { 0.5625 + 0.2480391854 }
+  let(:b_midpt) { 0.5625 }
+
   it 'contains the correct list of subjects' do
     expect(confidence.subjects).to match_array(["A", "B"])
   end
@@ -35,15 +43,15 @@ describe Confidence do
   end
 
   it 'computes the confidence interval for A correctly' do
-    expect(interval_a.lower).to be_within(an_angstrom).of(0.5 - 0.3535533906)
-    expect(interval_a.upper).to be_within(an_angstrom).of(0.5 + 0.3535533906)
-    expect(interval_a.midpt).to be_within(an_angstrom).of(0.5)
+    expect(interval_a.lower).to be_within(an_angstrom).of(a_lower)
+    expect(interval_a.upper).to be_within(an_angstrom).of(a_upper)
+    expect(interval_a.midpt).to be_within(an_angstrom).of(a_midpt)
   end
 
   it 'computes the confidence interval for B correctly' do
-    expect(interval_b.lower).to be_within(an_angstrom).of(0.5625 - 0.2480391854)
-    expect(interval_b.upper).to be_within(an_angstrom).of(0.5625 + 0.2480391854)
-    expect(interval_b.midpt).to be_within(an_angstrom).of(0.5625)
+    expect(interval_b.lower).to be_within(an_angstrom).of(b_lower)
+    expect(interval_b.upper).to be_within(an_angstrom).of(b_upper)
+    expect(interval_b.midpt).to be_within(an_angstrom).of(b_midpt)
   end
 
   it 'computes the max-cohort correctly' do

@@ -1,0 +1,9 @@
+[0;33;49mSubject Count Convs   Estim   Lower   Upper
+-------------------------------------------
+[0mA           8     4  0.5000  0.1464  0.8536
+B          16     9  0.5625  0.3145  0.8105[0;94;49m <== [0m[0;33;49mMax[0m
+[0;33;49m
+Max-Conversion: [0mB[0;33;49m
+Chi-Square-Value: [0m0.0839[0;33;49m
+Chi-Square-Significance: [0m0.2279[0;33;49m
+Chi-Square-Test: [0m[0;34;49mMeans are NOT distinct[0m

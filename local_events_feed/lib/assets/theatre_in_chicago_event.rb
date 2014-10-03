@@ -18,6 +18,14 @@ class TheatreInChicagoEvent
   def to_s
     "#{date}, #{time}, #{name}, #{location}"
   end
+  
+  def when
+    Datetime.parse("#{date}T#{time}-0600")
+  end
+
+  def match(other)
+    date == other.date && name == other.name && location = other.location && time == other.time
+  end
 
   def clean
     location.gsub!(/<[^>]*>/, '')

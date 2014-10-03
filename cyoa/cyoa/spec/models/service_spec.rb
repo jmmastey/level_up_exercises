@@ -6,6 +6,7 @@ describe Service do
   it { should be_valid }
   it { should respond_to(:name) }
   it { should respond_to(:url) }
+  it { should respond_to(:charts) }
 
   describe "#name" do
     it "must have a unique name" do

@@ -1,14 +1,20 @@
 require "eve_central/version"
 
+# TODO: Separate each API method into its own class
+
 class EveCentral
   def marketstat(item_id, options = {})
     endpoint = "http://api.eve-central.com/api/marketstat"
     params = create_marketstat_params(item_id, options)
+    response = send_post_request(endpoint, params)
+    create_hash_from_response(response)
   end
 
   def quicklook(item_id, options = {})
     endpoint = "http://api.eve-central.com/api/quicklook"
     params = create_quicklook_params(item_id, options)
+    response = send_post_request(endpoint, params)
+    create_hash_from_response(response)
   end
 
   private
@@ -29,10 +35,17 @@ class EveCentral
     min_qty: :setminQ
   }
 
+  def create_hash_from_response(response)
+    return nil unless response.body_permitted?
+
+    # TODO: Implement response parser
+    raise NotImplementedError, "Method not yet implemented."
+  end
+
   def create_post_param(key, value)
     return "#{key}=#{value}" unless value.is_a?(Enumerable)
 
-    value.map { |v| create_post_param(key, value) }
+    value.map { |element| create_post_param(key, element) }
          .join("&")
   end
 
@@ -54,10 +67,15 @@ class EveCentral
   end
 
   def map_params(params, mapper)
-    Hash[params.map { |key, value| [mapper[key] || key, value] }]
+    mapped_params = params.map do |key, value|
+      mapped_key = mapper[key] || key
+      [mapped_key, value]
+    end
+
+    Hash[mapped_params]
   end
 
   def send_post_request(url, data)
-    response = Net::HTTP.post(url, data)
+    Net::HTTP.post(url, data)
   end
 end

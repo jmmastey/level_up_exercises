@@ -17,19 +17,19 @@ describe ChiSquare do
     chi_square
   end
 
-  it 'should return zero chi-value when empty' do
+  it 'has zero chi-value when empty' do
     expect(empty_chi_square.value).to be_within(an_angstrom).of(0.0)
   end
 
-  it 'should return correct chi-value' do
+  it 'has correct chi-value' do
     expect(chi_square.value).to be_within(an_angstrom).of(0.0839160839)
   end
 
-  it 'should return correct significance-value' do
+  it 'has correct significance-value' do
     expect(chi_square.significance).to be_within(an_angstrom).of(0.2279410302)
   end
 
-  it 'should not have rejected the null hypothesis' do
+  it 'does not reject the null hypothesis' do
     expect(chi_square).not_to have_rejected_null_hypothesis
   end
 end

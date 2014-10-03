@@ -12,10 +12,13 @@ describe Interval do
   let(:interval) { Interval.new(bernoulli) }
 
 
-  it 'should have correct values for 3 out of 4 Bernoulli' do
-    expect(interval.midpt).to be_within(an_angstrom).of(0.75)
+  it 'has correct endpts' do
     expect(interval.lower).to be_within(an_angstrom).of(0.75 - 2 * bernoulli.se)
     expect(interval.upper).to be_within(an_angstrom).of(0.75 + 2 * bernoulli.se)
+  end
+
+  it 'has correct midpt' do
+    expect(interval.midpt).to be_within(an_angstrom).of(0.75)
   end
 
 end

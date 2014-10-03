@@ -8,7 +8,7 @@ describe ObservationJSONParser do
   let(:interval_a) { confidence.interval("A") }
   let(:interval_b) { confidence.interval("B") }
 
-  it 'should apply to confidence correctly' do
+  it 'applies to confidence correctly' do
     parser.apply(confidence)
     expect(confidence.subjects).to match_array(["A", "B"])
     expect(interval_a.midpt).to be_within(an_angstrom).of(0.0)

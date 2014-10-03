@@ -15,7 +15,7 @@ describe 'ConfidenceReport' do
   let(:expected_text_file) { 'fixtures/expected_confidence_report.txt' }
   let(:expected_text) { File.open(expected_text_file).read }
 
-  it 'should display a pretty report with correct values' do
+  it 'displays a pretty report with correct values' do
     expect(report.to_s).to eq(expected_text)
   end
 end

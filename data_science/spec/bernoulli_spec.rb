@@ -11,28 +11,28 @@ describe Bernoulli do
     bernoulli
   end
 
-  it 'should be empty when first created' do
+  it 'is empty when first created' do
     expect(empty_bernoulli.n).to eq(0)
     expect(empty_bernoulli.p).to be_within(an_angstrom).of(0.0)
     expect(empty_bernoulli.q).to be_within(an_angstrom).of(0.0)
     expect(empty_bernoulli.se).to be_within(an_angstrom).of(0.0)
   end
 
-  it 'should show correct values for 3 out of 4' do
+  it 'shows correct values for 3 out of 4' do
     expect(first_bernoulli.n).to eq(4)
     expect(first_bernoulli.p).to be_within(an_angstrom).of(0.75)
     expect(first_bernoulli.q).to be_within(an_angstrom).of(0.25)
     expect(first_bernoulli.se).to be_within(an_angstrom).of(0.216506351)
   end
 
-  it 'should show correct values after accumulating another bernoulli' do
+  it 'shows correct values after accumulating another bernoulli' do
     expect(accum_bernoulli.n).to eq(4)
     expect(accum_bernoulli.p).to be_within(an_angstrom).of(0.75)
     expect(accum_bernoulli.q).to be_within(an_angstrom).of(0.25)
     expect(accum_bernoulli.se).to be_within(an_angstrom).of(0.216506351)
   end
 
-  it 'should show the correct chi_component' do
+  it 'shows the correct chi_component' do
     expect(first_bernoulli.chi_component(0.5)).to be_within(an_angstrom).of(1.0)
   end
 

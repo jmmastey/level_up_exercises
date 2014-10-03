@@ -1,8 +1,8 @@
-Given(/^Configure bomb with activation codes '(\d+)' and '(\d+)'$/) do |arg1, arg2|
+Given(/^Configure bomb with activation codes '(.*?)' and '(.*?)'$/) do |arg1, arg2|
   pending # express the regexp above with the code you wish you had
 end
 
-When(/^I fill in '(\d+)' to activate the bomb$/) do |arg1|
+When(/^I fill in '(.*?)' to activate the bomb$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 

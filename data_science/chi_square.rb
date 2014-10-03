@@ -34,21 +34,7 @@ class ChiSquare
   end
 
   def component(bernoulli)
-    success_component(bernoulli) + failure_component(bernoulli)
-  end
-
-  def success_component(bernoulli)
-    estimated = global_estimate * bernoulli.n
-    observed = bernoulli.successes
-    numerator = (observed - estimated)**2
-    SafeMath.divide(numerator, estimated)
-  end
-
-  def failure_component(bernoulli)
-    estimated = (1.0 - global_estimate) * bernoulli.n
-    observed = bernoulli.failures
-    numerator = (observed - estimated)**2
-    SafeMath.divide(numerator, estimated)
+    bernoulli.chi_component(global_estimate)
   end
 
   def deg_of_freedom

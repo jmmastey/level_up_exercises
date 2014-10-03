@@ -41,4 +41,23 @@ class Bernoulli
   def to_s
     sprintf("Successes: %5d  Failures: %5d  %6.4f %7.4f", @successes, @failures, p, se)
   end
+
+  def chi_component(hypothesized_p)
+    chi_success_component(hypothesized_p) + chi_failure_component(hypothesized_p)
+  end
+
+  private
+
+  def chi_success_component(hypothesized_p)
+    observed = @successes
+    expected = n * hypothesized_p
+    return SafeMath.divide((observed - expected)**2, expected)
+  end
+
+  def chi_failure_component(hypothesized_p)
+    observed = @failures
+    expected = n * (1.0 - hypothesized_p)
+    return SafeMath.divide((observed - expected)**2, expected)
+  end
+
 end

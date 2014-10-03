@@ -3,7 +3,6 @@ require_relative '../chi_square'
 require_relative 'math_helper'
 
 describe ChiSquare do
-  let(:an_angstrom) { 1e-10 }
   let(:empty_chi_square) { ChiSquare.new }
 
   let(:chi_square) do

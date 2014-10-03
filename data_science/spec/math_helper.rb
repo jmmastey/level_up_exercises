@@ -6,3 +6,8 @@ def create_bernoulli(successes, failures)
   failures.times { bernoulli.update(false) }
   bernoulli
 end
+
+def an_angstrom
+  1e-10
+end
+

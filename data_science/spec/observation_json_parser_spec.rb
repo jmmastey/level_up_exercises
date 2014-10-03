@@ -3,7 +3,6 @@ require 'rspec/collection_matchers'
 require_relative '../observation_json_parser'
 
 describe ObservationJSONParser do
-  let(:an_angstrom) { 1e-10 }
   let(:parser) { ObservationJSONParser.new("test_data/test_file.json") }
   let(:confidence) { Confidence.new }
   let(:interval_a) { confidence.interval("A") }

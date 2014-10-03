@@ -11,8 +11,6 @@ describe Bernoulli do
     bernoulli
   end
 
-  let(:an_angstrom) { 1e-10 }
-
   it 'should be empty when first created' do
     expect(empty_bernoulli.n).to eq(0)
     expect(empty_bernoulli.p).to be_within(an_angstrom).of(0.0)

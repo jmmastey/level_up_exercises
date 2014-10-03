@@ -2,8 +2,6 @@ require 'spec_helper'
 require_relative '../interval'
 
 describe Interval do
-  let(:an_angstrom) { 1e-10 }
-
   let(:bernoulli) do
     bernoulli = Bernoulli.new
     3.times { bernoulli.update(true) }

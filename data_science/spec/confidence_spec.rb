@@ -2,7 +2,6 @@ require 'spec_helper'
 require_relative '../confidence'
 
 describe Confidence do
-  let(:an_angstrom) { 1e-10 }
   let(:confidence) { Confidence.new }
   let(:interval_a) { confidence.interval('A') }
   let(:interval_b) { confidence.interval('B') }

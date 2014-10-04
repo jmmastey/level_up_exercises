@@ -5,7 +5,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @event.when = Time.now
+    @event.time = Time.now
   end
 
   def create
@@ -18,9 +18,13 @@ class EventsController < ApplicationController
     end
   end
 
+  def show
+    @event = Event.find(params[:id])
+  end
+
   private
 
   def event_params
-    params.require(:event).permit(:name, :location, :when)
+    params.require(:event).permit(:name, :location, :time)
   end
 end

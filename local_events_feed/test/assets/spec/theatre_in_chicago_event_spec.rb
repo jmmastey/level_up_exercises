@@ -13,18 +13,23 @@ describe TheatreInChicagoEvent do
   end
 
   let(:cleaned_event) { cleaned_event = setted_event.clone.clean }
+  let(:other_event) { setted_event.clone }
 
 
-  it 'should not be complete when blank' do
+
+  it 'is not complete when blank' do
     expect(blank_event).to_not be_complete
   end
 
-  it 'should be complete when all fields are set' do
+  it 'is complete when all fields are set' do
     expect(setted_event).to be_complete
   end
 
-  it 'should have a clean location when cleaned' do
+  it 'has a clean location when cleaned' do
     expect(cleaned_event.location).to eq("Everywhere")
   end
-    
+
+  it 'matches another event that has identical fields' do
+    expect(setted_event.match?(other_event))
+  end
 end

@@ -5,9 +5,9 @@
   <% @events.each do |event| %>
   <tr>
 	<td align='center'>
-	  <%= event.name %><br>
+	  <%= link_to event.name, event %><br>
 	  <%= event.location %><br>
-	  <%= event.when %><br>
+	  <%= event.time %><br>
 	  <br>
 	</td>
   </tr>

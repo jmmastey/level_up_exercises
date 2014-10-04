@@ -1,11 +1,11 @@
-require_relative '../../lib/assets/theatre_in_chicago_scraper'
+require 'assets/theatre_in_chicago_scraper'
 
 class ScrapeController < ApplicationController
   SECS_IN_DAY = 24 * 3600
 
   def index
-    render plain: "<h2>Scraping, Please Wait...</h2>"
     scrape_for_new_events
+    redirect_to events_path
   end
 
   private
@@ -33,14 +33,11 @@ class ScrapeController < ApplicationController
     event = Event.new
     event.name = raw_event.name
     event.location = raw_event.location
-    event.when = raw_event.when
+    event.time = raw_event.time
     event
   end
 
   def unique?(event)
-    Event.all.each do |other|
-      return false if other.match(event)
-    end
-    true
+    !Event.all.any? { |other| other.match?(event) }
   end
 end

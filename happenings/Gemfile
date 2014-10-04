@@ -56,7 +56,8 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'debase', '~> 0.0.9'
-  gem 'ruby-debug-ide', '0.4.22'
+
+  gem 'ruby-debug-ide', '~> 0.4.22'
   gem 'simplecov'
   gem 'simplecov-teamcity-summary'
 end

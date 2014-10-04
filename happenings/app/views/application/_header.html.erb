@@ -24,15 +24,24 @@
                             Account <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><%= link_to "Profile", edit_user_registration_path %></li>
+                            <li><%= link_to "Profile",
+                                edit_user_registration_path
+                            %></li>
                             <li><%= link_to "Settings", '#' %></li>
+                            <% if current_user.superadmin? %>
+                            <li><%= link_to "Admin",
+                                                 admin_root_path %></li>
+                            <% end %>
                             <li class="divider"></li>
                             <li>
-                                <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+                                <%= link_to "Logout",
+                                    destroy_user_session_path,
+                                    :method => :delete %>
                             </li>
                         </ul>
                     </li>
-                    <li> <%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+                    <li> <%= link_to "Logout", destroy_user_session_path,
+                                     :method => :delete %></li>
                 <% else %>
                     <li><%= link_to "Sign in", new_user_session_path %></li>
                 <% end %>

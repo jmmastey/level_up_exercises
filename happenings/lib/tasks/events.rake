@@ -1,33 +1,33 @@
 # lib/tasks/jobs.rake
-namespace :jobs do
+namespace :events do
   desc "Fill database with Job listings"
   task fetch: :environment do
     require 'nokogiri'
     require 'open-uri'
 
     # clean database to avoid duplicates
-    Job.all.each do |job|
-      job.destroy!
-    end
+    # Job.all.each do |job|
+    #   job.destroy!
+    # end
 
     # write your nokogiri scripts here or
     #
-    require 'lib/tasks/sites/theater_in_chicago'
+    require_relative 'sites/theater_in_chicago'
     #
     # them from other files.
 
     # Throw away old jobs
-    Job.destroy_all(['created_at < ?', 7.days.ago])
+    # Job.destroy_all(['created_at < ?', 7.days.ago])
   end
 
-  desc "Delete Jobs that are older than 7 days"
+  desc "Delete Events that are older than 7 days"
   task prune: :environment do
-    Job.destroy_all(['created_at < ?', 7.days.ago])
+    Event.destroy_all(['created_at < ?', 7.days.ago])
   end
 
-  desc "Delete all jobs."
+  desc "Delete all Events."
   task clean: :environment do
-    Job.all.each do |job|
+    Event.all.each do |job|
       job.destroy!
     end
   end

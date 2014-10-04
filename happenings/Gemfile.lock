@@ -259,7 +259,7 @@ DEPENDENCIES
   rails (= 4.1.6)
   rspec
   rspec-rails
-  ruby-debug-ide (= 0.4.22)
+  ruby-debug-ide (~> 0.4.22)
   ruby_debugger
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

@@ -7,4 +7,9 @@ class Event < ActiveRecord::Base
   def match?(other)
     name == other.name && location == other.location && time == other.time
   end
+
+  def has_match_in?(list)
+    list.any? { |other| other.match?(self) }
+  end
+
 end

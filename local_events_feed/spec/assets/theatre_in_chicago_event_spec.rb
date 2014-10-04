@@ -1,5 +1,5 @@
-require_relative 'spec_helper'
-require_relative '../../../lib/assets/theatre_in_chicago_event'
+require 'spec_helper'
+require 'assets/theatre_in_chicago_event'
 
 describe TheatreInChicagoEvent do
   let(:blank_event) { TheatreInChicagoEvent.new("20141001") }
@@ -12,7 +12,7 @@ describe TheatreInChicagoEvent do
     setted_event
   end
 
-  let(:cleaned_event) { cleaned_event = setted_event.clone.clean }
+  let(:cleaned_event) { setted_event.clone.clean }
   let(:other_event) { setted_event.clone }
 
 

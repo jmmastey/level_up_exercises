@@ -1,5 +1,5 @@
-require_relative 'spec_helper'
-require_relative '../../../lib/assets/theatre_in_chicago_page_parser'
+require 'spec_helper'
+require 'assets/theatre_in_chicago_page_parser'
 
 describe TheatreInChicagoPageParser do
   let(:body) { File.open("test/fixtures/theatre_in_chicago_test_page.html").read }

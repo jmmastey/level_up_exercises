@@ -24,7 +24,7 @@ class TheatreInChicagoEvent
   end
 
   def match?(other)
-    date == other.date && name == other.name && location = other.location && time == other.time
+    date == other.date && name == other.name && location == other.location && time == other.time
   end
 
   def clean

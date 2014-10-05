@@ -1,3 +1,20 @@
 <h2>Welcome <%= @user.name %></h2>
 
 <h3>List of Upcoming Events</h3>
+
+<table>
+<th>
+  <td>Name</td>
+  <td>Wben</td>
+  <td>Location</td>
+  <td colspan=2></td>
+</th>
+<% @user.events.each do |event| %>
+<td><%= event.name %></td>
+<td><%= event.wben %></td>
+<td><%= event.location %></td>
+<td><%= link_to 'Remove' %></td>
+<% end %>
+</table>
+<br>
+<h4><%= link_to 'Events', { :controller => 'events', :user_id => @user[:id] }  %></h4>

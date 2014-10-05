@@ -11,5 +11,4 @@ class Event < ActiveRecord::Base
   def has_match_in?(list)
     list.any? { |other| other.match?(self) }
   end
-
 end

@@ -1,22 +1,43 @@
 # File theater_in_chicago.rb
+require_relative "../../html_scraper"
+# TODO: Extract ScraperDetails Into Top Level Class
+# TODO: HTMLParser needs to not be so tightly coupled with HTML Scraper
+# TODO: Extract details class functionality into proper encapsulation
+# TODO: Remove Scraping logic out of parser and move to Scraper Class
+# TODO: Remove methods used for scraping incorrectly
+# TODO: Remove circular logic and evaluation
+# TODO: Cause details to be extracted per record
+# TODO: Add checks for invalid server responses from sources
+# TODO: Recreate entire classes with rspec tests
+
 class ScraperDetails
   attr_accessor :date, :title_text, :event_link, :theater, :time,
                 :date_css_class, :title_css_class, :body_css_class,
                 :theater_link
+  attr_reader   :entry_point
 
-  def initialize
-    @date_css_class  = ".JeffRedHead"
-    @title_css_class = "#{date_css_class} > .detailhead a"
-    @body_css_class  = "#{date_css_class} > .detailbody"
+  def initialize(options = {})
+    @url         = options[:url] || "http://www.theatreinchicago.com/"
+    @entry_point = options[:main_selector] || "tr td"
+    @date_css_class  = options[:date_selector] || ".JeffRedHead"
+    @title_css_class = options[:title_selector] || "#{date_css_class} >.detailhead a"
+    @body_css_class  = options[:body_selector] || "#{date_css_class} > .detailbody"
   end
 
-  def digest(result)
+  def url
+    query_url
+  end
+
+  def query_url(month=10, year=2014)
+    @url+"opening/CalendarMonthlyResponse.php?ran=6563&month=#{month}&year=#{year}"
+  end
+
+  def digest(doc)
+    result = doc.css(@entry_point)
     result.css(date_css_class, title_css_class, body_css_class).each do
-    |html_date, html_title, html_body|
+    |*items|
       30.times{ print "+"}
-      puts html_date
-      puts html_title
-      puts html_body
+      puts items
     end
     puts result.inspect.squish
 
@@ -46,29 +67,9 @@ class ScraperDetails
   end
 end
 
-class TheaterInChicagoScraper
+class HTMLParser
+  include HTMLScraper
   attr_accessor :entry_point, :url, :consumer
-
-  def initialize(scrape_consumer = nil)
-    @consumer = scrape_consumer || ScraperDetails.new
-    @url         = "http://www.theatreinchicago.com/"
-    @entry_point = "tr td"
-  end
-
-
-  def scrape(url)
-    doc = Nokogiri::HTML(open(url || query_url))
-    if url.nil?
-      # doc.css(entry_point).to_ary.in_groups_of(3).each do |event_array|
-      #   process_document_group(event_array)
-      # end
-      result = doc.css(entry_point)
-      consumer.digest(result)
-    else
-      doc
-    end
-  end
-
 
   def process_document_group(event_array)
     tmp_event = ScraperDetails.new
@@ -78,9 +79,6 @@ class TheaterInChicagoScraper
     compile_event_information(tmp_event)
   end
 
-  def query_url(month=10, year=2014)
-    url+"opening/CalendarMonthlyResponse.php?ran=6563&month=#{month}&year=#{year}"
-  end
 
   def compile_event_information(event_details)
     event = Event.find_or_initialize_by(name: event_details.title_text)
@@ -111,7 +109,7 @@ class TheaterInChicagoScraper
   end
 end
 
-scraper = TheaterInChicagoScraper.new
-scraper.scrape(nil)
+scraper = HTMLParser.new
+
 
 

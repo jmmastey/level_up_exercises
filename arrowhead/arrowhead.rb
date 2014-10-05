@@ -1,3 +1,4 @@
+# Classify arrowheads based on region and shape
 class Arrowhead
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
@@ -15,20 +16,32 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
+  def self.valid_region?(region)
+    return true if CLASSIFICATIONS.include? region
+
+    raise "Unknown region, please provide a valid region."
+  end
+
+  def self.valid_shape?(shape, shape_set)
+    return true if shape_set.include? shape
+
+    raise "Unknown shape value. Are you sure you know what you're talking
+            about?"
+  end
+
+  def self.get_shape_set(region)
+    CLASSIFICATIONS[region] if valid_region?(region)
+  end
+
+  def self.get_shape(shape, shape_set)
+    shape_set[shape] if valid_shape?(shape, shape_set)
+  end
+
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+    arrowhead = get_shape(shape, get_shape_set(region))
+
+    puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end
 
-puts Arrowhead.classify(:northern_plains, :bifurcated)
+puts Arrowhead.classify(:northern_plains, :bifucated)

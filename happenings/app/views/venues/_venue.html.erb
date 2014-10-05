@@ -1,0 +1,23 @@
+<div>
+    <ul class="list-group">
+        <li class="list-group"><%= link_to venue.id, venue_path(venue) %></li>
+        <li class="list-group-item"><%= venue.name %></li>
+        <li class="list-group-item"><%= venue.address %></li>
+        <li class="list-group-item"><%= venue.city %></li>
+        <li class="list-group-item"><%= venue.zipcode %></li>
+        <li class="list-group-item"><%= venue.description %></li>
+        <li class="list-group-item"><%= venue.phone_number %></li>
+        <li class="list-group-item"><%= venue.venue_url %></li>
+        <li class="list-group-item"><%= l venue.created_at %></li>
+        <li class="list-group-item">
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_venue_path(venue), :class => 'btn btn-default btn-xs' %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        venue_path(venue),
+                        :method => :delete,
+                        :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                        :class => 'btn btn-xs btn-danger' %>
+        </li>
+    </ul>
+
+</div>

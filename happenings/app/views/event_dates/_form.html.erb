@@ -1,0 +1,45 @@
+<%= form_for @event_date, :html => { :class => "form-horizontal event_date" } do |f| %>
+
+    <% if @event_date.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@event_date.errors.count, "error") %> prohibited this event_date from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @event_date.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :venue_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :venue_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event_date[:venue_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :date_time, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :date_time, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event_date[:date_time]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :event_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :event_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event_date[:event_id]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            event_dates_path, :class => 'btn btn-default' %>
+
+<% end %>

@@ -1,0 +1,87 @@
+<%= form_for @event, :html => { :class => "form-horizontal event" } do |f| %>
+
+    <% if @event.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event[:name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :venue_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :venue_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event[:venue_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event[:description]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :price, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :price, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event[:price]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :show_type, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :show_type, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event[:show_type]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :phone_number, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :phone_number, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event[:phone_number]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :running_time, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :running_time, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event[:running_time]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :event_url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :event_url, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event[:event_url]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :ticket_url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :ticket_url, :class => 'form-control' %>
+    </div>
+    <%= error_span(@event[:ticket_url]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            events_path, :class => 'btn btn-default' %>
+
+<% end %>

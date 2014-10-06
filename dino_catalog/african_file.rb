@@ -17,7 +17,7 @@ class AfricanFile < FileHandler
   end
 
   def content_converters
-    CSV::Converters[:blank_to_nil] = lambda do |field, field_info|
+    CSV::Converters[:mapping] = lambda do |field, field_info|
       field && field.empty? ? nil : field
 
       field = diet_type(field) if field_info[:header].to_s == 'diet'

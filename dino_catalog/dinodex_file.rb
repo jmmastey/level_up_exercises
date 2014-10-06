@@ -14,7 +14,7 @@ class DinodexFile < FileHandler
   end
 
   def content_converters
-    CSV::Converters[:blank_to_nil] = lambda do |field|
+    CSV::Converters[:mapping] = lambda do |field|
       field && field.empty? ? nil : field
     end
   end

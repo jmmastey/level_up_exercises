@@ -15,14 +15,14 @@ class Arrowhead
     },
   }
 
-  def self.verify_shape(region)
-    CLASSIFICATIONS[region] ||
-    raise("Unknown shape value. Are you sure you know what you're talking about?")
+  def self.verify_shape(region, shape)
+    CLASSIFICATIONS[region][shape] ||
+      raise("Unknown shape value. Are you sure you know what you're talking about?")
   end
 
   def self.verify_region(region, shape)
-    verify_shape(region)[shape] ||
-    raise("Unknown region, please provide a valid region.")
+    verify_shape(region, shape) ||
+      raise("Unknown region, please provide a valid region.")
   end
 
   def self.classify(region, shape)

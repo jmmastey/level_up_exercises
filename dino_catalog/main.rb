@@ -23,10 +23,12 @@ puts dinodex.filter(:period, "Triassic").to_s
 puts dinodex.filter(:period, "Cretaceous").to_s
 
 # Get all big dinosaurs (over 2 tons)
-puts dinodex.filter("big?", "yes").to_s
+puts dinodex.filter("big_as_string", "yes").to_s
 
 # Get all small dinosaurs from North America
-puts dinodex.filter("big?", "no").filter(:continent, "North America").to_s
+puts dinodex.filter("big_as_string", "no")
+            .filter(:continent, "North America")
+            .to_s
 
 # Get all herbivores, that are quadruped, that live in Africa
 puts dinodex.filter(:diet, "Herbivore")
@@ -37,6 +39,6 @@ puts dinodex.filter(:diet, "Herbivore")
 # JSON examples
 puts dinodex.filter(:name, "Suchomimus").to_json
 puts dinodex.filter(:diet, "Herbivore").to_json
-puts dinodex.filter("big?", "no")
+puts dinodex.filter("big_as_string", "no")
             .filter(:continent, "North America")
             .to_json

@@ -34,11 +34,13 @@ class Dinosaur
     }
   end
 
-  def big?
+  def big_as_string
     if @weight.to_i > (2204 * 2)
-      'yes'
+      "yes"
+    elsif @weight.to_i > 0
+      "no"
     else
-      'no'
+      nil
     end
   end
 

@@ -8,7 +8,7 @@ class DinodexFile < FileHandler
 
   def header_converters
     CSV::HeaderConverters[:renaming] = lambda do |header|
-      header = :name if header == 'WEIGHT_IN_LBS'
+      header = :weight if header == 'WEIGHT_IN_LBS'
       header.downcase.to_sym
     end
   end

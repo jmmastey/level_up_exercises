@@ -9,13 +9,9 @@ class Dinosaur
     :weight_classification
 
   def initialize(properties)
-    @name = properties[:name]
-    @period = properties[:period]
-    @diet = properties[:diet]
-    @weight = properties[:weight]
-    @walking = properties[:walking]
-    @continent = properties[:continent]
-    @description = properties[:description]
+    properties.each do |field, value|
+      method("#{field}=").call(value)
+    end
   end
 
   def to_s

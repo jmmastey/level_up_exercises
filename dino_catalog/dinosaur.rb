@@ -16,19 +16,12 @@ class Dinosaur
     @walking = properties[:walking]
     @continent = properties[:continent]
     @description = properties[:description]
-    @weight_classification = determine_weight_classification
   end
 
   def to_s
     output = []
 
-    output << "Name: " + name.to_s if name
-    output << "Period: " + period.to_s if period
-    output << "Diet: " + diet.to_s if diet
-    output << "Weight: " + weight.to_s if weight
-    output << "Walking: " + walking.to_s if walking
-    output << "Continent: " + continent.to_s if continent
-    output << "Description: " + description.to_s if description
+    to_hash.map { |field, value| output << "#{field}: #{value}" if value }
 
     output.join("\n")
   end
@@ -45,14 +38,11 @@ class Dinosaur
     }
   end
 
-  def determine_weight_classification
-    # 2204 is one metric ton represented as pounds (lbs)
+  def big?
     if @weight.to_i > (2204 * 2)
-      "big"
-    elsif @weight.to_i > 0
-      "small"
+      'yes'
     else
-      nil
+      'no'
     end
   end
 

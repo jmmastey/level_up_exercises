@@ -8,7 +8,6 @@ class Dinodex
   def filter(filter, value)
     results = []
 
-    # Check for special filtering cases
     filter, value = filter_overrides(filter, value)
 
     @dinosaurs.each do |dinosaur|
@@ -27,15 +26,13 @@ class Dinodex
         %w(Carnivore Insectivore Piscivore) if value == "Carnivore"
       when :period
         value = ["Early " + value, value, "Late " + value]
-      when :weight
-        filter = :weight_classification
     end
 
     [filter, value]
   end
 
   def to_s
-    @dinosaurs.join("\n")
+    @dinosaurs.join("\n\n")
   end
 
   def to_json(*args)

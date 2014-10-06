@@ -3,19 +3,34 @@ require_relative "dinosaur"
 
 class AfricanFile < FileHandler
   def map_to_object(content)
-    Dinosaur.new(name: content["Genus"],
-                 period: content["Period"],
-                 diet: diet_type(content["Carnivore"]),
-                 weight: content["Weight"],
-                 walking: content["Walking"],
-                 continent: "Africa")
+    dino = Dinosaur.new(content)
+    dino.continent = 'Africa'
+    dino
+  end
+
+  def header_converters
+    CSV::HeaderConverters[:renaming] = lambda do |header|
+      header = :name if header == 'Genus'
+      header = :diet if header == 'Carnivore'
+      header.downcase.to_sym
+    end
+  end
+
+  def content_converters
+    CSV::Converters[:blank_to_nil] = lambda do |field, field_info|
+      field && field.empty? ? nil : field
+
+      field = diet_type(field) if field_info[:header].to_s == 'diet'
+
+      field
+    end
   end
 
   def diet_type(carnivore)
-    if carnivore == "Yes"
-      "Carnivore"
+    if carnivore == 'Yes'
+      'Carnivore'
     else
-      "Herbivore"
+      'Herbivore'
     end
   end
 end

@@ -3,12 +3,19 @@ require_relative "dinosaur"
 
 class DinodexFile < FileHandler
   def map_to_object(content)
-    Dinosaur.new(name: content["NAME"],
-                 period: content["PERIOD"],
-                 diet: content["DIET"],
-                 weight: content["WEIGHT_IN_LBS"],
-                 walking: content["WALKING"],
-                 continent: content["CONTINENT"],
-                 description: content["DESCRIPTION"])
+    Dinosaur.new(content)
+  end
+
+  def header_converters
+    CSV::HeaderConverters[:renaming] = lambda do |header|
+      header = :name if header == 'WEIGHT_IN_LBS'
+      header.downcase.to_sym
+    end
+  end
+
+  def content_converters
+    CSV::Converters[:blank_to_nil] = lambda do |field|
+      field && field.empty? ? nil : field
+    end
   end
 end

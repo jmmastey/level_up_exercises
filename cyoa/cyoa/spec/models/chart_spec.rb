@@ -7,28 +7,29 @@ describe Chart do
     service
   end
 
-  subject(:chart) { service.charts.build(scope: "month") }
+  subject(:chart) { service.charts.build(scope: "monthly") }
 
-  it { should respond_to(:service) }
-  it { should respond_to(:scope) }
-  it { should be_valid }
+  xit { should respond_to(:service) }
+  it { is_expected.to respond_to(:scope) }
+  it { is_expected.to respond_to(:songs) }
+  it { is_expected.to be_valid }
 
   describe "#scope" do
-    it "can only have type 'month' or 'day'" do
-      chart.scope = "week"
+    it "can only have type 'monthly' or 'daily'" do
+      chart.scope = "weekly"
       expect(chart).not_to be_valid
 
-      chart.scope = "day"
+      chart.scope = "daily"
       expect(chart).to be_valid
     end
   end
 
   describe "#service" do
-    it "knows its service" do
+    xit "knows its service" do
       expect(chart.service).to eq(service)
     end
 
-    it "must have a service" do
+    xit "must have a service" do
       chart.service = nil
       expect(chart).not_to be_valid
     end

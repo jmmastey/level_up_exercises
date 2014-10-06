@@ -5,8 +5,9 @@ describe Song do
   let(:song_name) { "Single Ladies" }
   let(:song) { artist.songs.build(name: song_name) }
 
-  it { should respond_to(:name) }
-  it { should respond_to(:artist_id) }
+  it { is_expected.to respond_to(:name) }
+  it { is_expected.to respond_to(:artist) }
+  it { is_expected.to respond_to(:charts) }
 
   describe "#name" do
     it "when song doesn't have a name it should not be valid" do

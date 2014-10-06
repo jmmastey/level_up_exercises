@@ -11,26 +11,26 @@ RSpec.describe Event, :type => :model do
   let(:list_2) { [event_c, event_d, event_e] }
 
   it 'matches another event with identical data fields' do
-    expect(event_a.match?(event_b)).to be true
+    expect(event_a).to be_same_as(event_b)
   end
 
   it 'does not match another event with difference name' do
-    expect(event_a.match?(event_c)).to be false
+    expect(event_a).not_to be_same_as(event_c)
   end
 
   it 'does not match another event with difference location' do
-    expect(event_a.match?(event_d)).to be false
+    expect(event_a).not_to be_same_as(event_d)
   end
 
   it 'does not match another event with difference time' do
-    expect(event_a.match?(event_e)).to be false
+    expect(event_a).not_to be_same_as(event_e)
   end
 
   it 'has a matching item in a list' do
-    expect(event_a.has_match_in?(list_1)).to be true
+    expect(event_a).to have_match_in(list_1)
   end
 
   it 'does not have a matching item in a list' do
-    expect(event_a.has_match_in?(list_2)).to be false
+    expect(event_a).not_to have_match_in(list_2)
   end
 end

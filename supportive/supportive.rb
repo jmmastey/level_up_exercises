@@ -2,14 +2,15 @@
 
 require 'active_support/all'
 
-class BlagPost
+class BlagPost 
   attr_accessor :author, :comments, :categories, :body, :publish_date
 
   Author = Struct.new(:name, :url)
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
   def initialize(args)
-    args = args.inject({}) do |hash, (key, value)|
+    #TODO refactor this method
+      args = args.inject({}) do |hash, (key, value)|
       hash[key.to_sym] = value
       hash
     end
@@ -28,9 +29,10 @@ class BlagPost
 
     @comments = args[:comments] || []
     @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
-    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
+    @publish_date = (
   end
-
+  
+  
   def to_s
     [ category_list, byline, abstract, commenters ].join("\n")
   end
@@ -38,67 +40,42 @@ class BlagPost
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    return "" unless author
+    "By #{author.name}, at #{author.url}"
   end
 
   def category_list
-    #PLURALIZE
-    "" if categories.empty?
+    return "" if categories.empty?
     label = "Category" 
     label.pluralize unless label.length == 1
 
       if categories.length > 1
       last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
-  end
-
-  def as_title(string)
-    #camelize
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+      suffix = " and last_category.titleize" ||= ""
+      end
+    label + ": " + categories.map { |cat| cat }.join(", ") + suffix
   end
 
   def commenters
-    #ORDINALIZE
     return '' unless comments_allowed?
     return '' unless comments.length > 0
-
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    ordinal = comments.length.ordinalize
+    "You will be the #{ordinal} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date.years_since(3) > Date.today
   end
 
   def abstract
-    #TRUNCATE    
-      body.truncate(200, omission: '...')
+    body.truncate(200, omission: '...')
   end
-
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ [], [], [], [] ], # because comments are meaningless, get it?
+                    "comments"      => [ [], [], [], [] ], # because comments are meaningless, get it? ;)
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.

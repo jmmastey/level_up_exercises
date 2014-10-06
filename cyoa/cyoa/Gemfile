@@ -12,6 +12,7 @@ gem "turbolinks"
 gem "jbuilder", "~> 2.0"
 
 gem "grooveshark"
+gem "next-big-sound-lite"
 
 group :development do
   gem "spring"

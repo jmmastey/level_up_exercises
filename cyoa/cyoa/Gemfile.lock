@@ -64,6 +64,7 @@ GEM
       uuid (~> 2.0)
     haml (4.0.5)
       tilt
+    hashie (3.3.1)
     hike (1.2.3)
     i18n (0.6.11)
     jbuilder (2.2.0)
@@ -83,6 +84,10 @@ GEM
     minitest (5.4.2)
     multi_json (1.10.1)
     netrc (0.7.7)
+    next-big-sound-lite (1.0.0)
+      hashie
+      json
+      rest-client
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     pg (0.17.1)
@@ -190,6 +195,7 @@ DEPENDENCIES
   haml
   jbuilder (~> 2.0)
   jquery-rails
+  next-big-sound-lite
   pg
   pry
   rails (= 4.1.6)

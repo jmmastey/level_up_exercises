@@ -41,5 +41,13 @@ gem 'spring',        group: :development
 gem 'bcrypt-ruby', '3.1.2'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'selenium-webdriver'
+  gem 'capybara', '2.2.0'
+end
+
+group :production do
 end

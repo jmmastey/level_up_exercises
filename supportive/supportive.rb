@@ -15,6 +15,10 @@ class BlagPost
     end
     author_presence(args)
     @categories = category_filter(args)
+    blag_info(args)
+  end
+
+  def blag_info(args)
     @comments = args[:comments] || []
     @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
     @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today

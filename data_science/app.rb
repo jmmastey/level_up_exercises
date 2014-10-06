@@ -8,10 +8,6 @@ require_relative "split_test_calculator"
 require_relative "split_test_group"
 
 class App
-  def initialize
-    init_lines
-  end
-
   def main
     welcome
     data = read_data
@@ -21,13 +17,11 @@ class App
 
   private
 
-  def init_lines
-    @lines ||= {
-      thin: "-",
-      thick: "=",
-      title: "*"
-    }
-  end
+  LINES = {
+    thin: "-",
+    thick: "=",
+    title: "*"
+  }
 
   def welcome
     puts header_line(:title).cyan
@@ -37,7 +31,7 @@ class App
   end
 
   def header_line(type = :thin, width = 80)
-    @lines[type] * width
+    LINES[type] * width
   end
 
   def read_data

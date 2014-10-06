@@ -76,7 +76,7 @@ class DinoTable
         ],
         :converters => [
 
-          ->(fval, finfo) {
+          ->(fval, finfo) do
             # There are few enough fields to warrant a simple if ladder here.
             if fval.nil?
               ;
@@ -91,13 +91,13 @@ class DinoTable
             end
 
             fval
-          }
+          end
         ]
-      }) { |new_row|
+      }) do |new_row|
 
         # Accumulate the new fixed up rows into a CSV table
         @csv_table << fix_dino_table_row(new_row)
-      }
+      end
   end
 
 
@@ -122,12 +122,18 @@ end     # class DinoTable
 # selects filters to apply to dinosaur data constructed from input files.
 class DinoDex
 
+  # The lbs when we call a dinosaur large
+  LARGE_WEIGHT = 4000
+
   # Initialized with dinosaur information after construction
   attr_reader :dino_table
 
   def initialize
 
-    @filters = [->(csvrow) { true }]
+    # Filter method list selecting  dinosaurs of interest (CLI adds # these)
+    @filters = [->(csvrow) { true }]  # Default filter: Accept unconditionally
+
+    # The container which keeps my dinosaur list
     @dino_table = DinoTable.new
   end
 
@@ -135,10 +141,11 @@ class DinoDex
   #
   # Parameters
   #   options (Array of Strings) - List of CLI options (defaults to ARGV)
-  # Configures the DinoDex by interpreting CLI arguments in an arg vector
+  # Configures the DinoDex by interpreting CLI arguments in an arg vector. 
+  # Each filter is written so that nil field values will fail them.
   def parse_options(options = ARGV)
 
-    optparser = OptionParser.new { |opts|
+    optparser = OptionParser.new do |opts|
 
       opts.banner = "Usage #{opts.program_name} " +
         "[-f <input_file>]+ [-l|-s] [-c|-C] [-b|-q] [-p <period>]"
@@ -146,51 +153,47 @@ class DinoDex
       opts.separator "Description of options:"
       
       opts.on("-f", "--input-file filename", 
-          "Use data from a properly-formatted CSV input file") { |fname| 
+          "Use data from a properly-formatted CSV input file") do |fname| 
         @dino_table.read_dino_csv(fname) 
-      }
+      end
 
-      opts.on("-l", "--large", "Select only large dinosaurs") {
-        @filters << ->(csvrow) { (! (w = csvrow[:weight]).nil?) && (w > 4000) }
-      }
+      opts.on("-l", "--large", "Select only large dinosaurs") do
+        @filters << ->(csvrow) { (csvrow[:weight]) || 0) > LARGE_WEIGHT}
+      end
 
-      opts.on("-s", "--small", "Select only small dinosaurs") {
-        @filters << ->(csvrow) { (! (w = csvrow[:weight]).nil?) && (w <= 4000) }
-      }
+      opts.on("-s", "--small", "Select only small dinosaurs") do
+        @filters << ->(csvrow) { 
+          # Distinguish nil and 0 because tiny dinosaurs can be 0 lbs
+          (! (w = csvrow[:weight]).nil?) && (w <= LARGE_WEIGHT) }
+      end
 
-      opts.on("-c", "--carnivores", "Select only carnivorous beasts") {
-        @filters << ->(csvrow) { (! (c = csvrow[:carnivore]).nil?) && c }
-      }
+      opts.on("-c", "--carnivores", "Select only carnivorous beasts") do
+        @filters << ->(csvrow) { csvrow[:carnivore]) }
+      end
 
       opts.on("-C", "--non-carnivorous", 
-          "Select only non-carnivorous beasts") {
-        @filters << ->(csvrow) { (! (c = csvrow[:carnivore]).nil?) && !c }
-      }
+          "Select only non-carnivorous beasts") do
+        @filters << ->(csvrow) { ! ((c = csvrow[:carnivore]).nil?) || c) }
+      end
 
-      opts.on("-b", "--bipedal", "Select only bipeds") {
-        @filters << ->(csvrow) {
-          (! (w = csvrow[:walking]).nil?) && (w == "biped")
-        }
-      }
+      opts.on("-b", "--bipedal", "Select only bipeds") do
+        @filters << ->(csvrow) { (csvrow[:walking] || '') == "biped" }
+      end
 
-      opts.on("-q", "--quadrupedal", "Select only quadrupeds") {
-        @filters << ->(csvrow) {
-          (! (w = csvrow[:walking]).nil?) && (w == "biped")
-        }
-      }
+      opts.on("-q", "--quadrupedal", "Select only quadrupeds") do
+        @filters << ->(csvrow) { (csvrow[:walking] || '') == "quadruped" }
+      end
 
       opts.on("-p", "--period [period]",
-          "Select dinosaurs from periods matching expression") { |expr|
-        @filters << ->(csvrow) {
-          (! (p = csvrow[:period]).nil?) && (p =~ /#{expr}/i)
-        }
-      }
+          "Select dinosaurs from periods matching expression") do |expr|
+        @filters << ->(csvrow) { (csvrow[:period] || '') =~ /#{expr}/i }
+      end
 
-      opts.on_tail("-h", "--help", "Show option summary") {
+      opts.on_tail("-h", "--help", "Show option summary") do
         puts opts
         exit 1
-      }
-    }
+      end
+    end
 
     optparser.parse!(options)
   end
@@ -201,11 +204,13 @@ class DinoDex
   # Parameters
   #   csvrow (CSV::Row) - A CSV::Row describing a dinosaur
   #   fieldname (symbol) - CSV row field identifier
-  #   label (string) - Thingie to print in front of field value to identify the data to user
-  # Writes to stdout a formatted description of a specified dinosaur attribute denoted in the CSV::Row
+  #   label (string) - Text printed before field val identifying data to user
+  # Writes to stdout a formatted description of a specified dinosaur attribute
   def write_field(csvrow, fieldname, label)
 
-    puts "#{label}: #{csvrow[fieldname]}\n" if csvrow.include?(fieldname) && ! csvrow[fieldname].nil?
+    if csvrow.include?(fieldname) && ! csvrow[fieldname].nil?
+      puts "#{label}: #{csvrow[fieldname]}\n" 
+    end
   end
 
 
@@ -213,7 +218,8 @@ class DinoDex
   #
   # Parameters
   #   csvrow (CSV::Row) - A CSV::Row describing a dinosaur
-  # Writes to stdout a formatted description of all the dinosaurs attributes (we care about) in the CSV::Row
+  # Writes to stdout a formatted description of all the dinosaurs attributes
+  # (we care about) in the CSV::Row
   def print_dinosaur(csvrow)
 
     puts "Name: #{csvrow[:name]}\n"
@@ -229,17 +235,18 @@ class DinoDex
   
   # print_dinosaurs
   #
-  # Applies filters to the list of all known dinosaurs and prints to stdout a formatted list of all that 
-  # survive the filter criteria
+  # Applies filters to the list of all known dinosaurs and prints to stdout 
+  # a formatted list of all that survive the filter criteria
   def print_dinosaurs
 
-    # Ought to do this another way that shortcuts filter evaluation when one fails
-    @dino_table.csv_table.delete_if { |csvrow|
-      ! @filters.inject(true) { |keep, filter_method| keep && filter_method.call(csvrow) }
-    }.each { |surviving_csvrow|
-      print_dinosaur(surviving_csvrow)
-      puts
-    }
+    # Weed out rows for which any filter criterion fails
+    @dino_table.each do |csvrow|
+
+      unless @filters.any? { |filter_method| ! filter_method.call(csvrow) }
+        print_dinosaur(csvrow)
+        puts
+      end
+    end
   end
 end
 

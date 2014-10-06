@@ -13,18 +13,18 @@ class BlagPost
       hash[key.to_sym] = value
       hash
     end
-    author_presence(args)
+    set_author_presence(args)
     @categories = category_filter(args)
-    blag_info(args)
+    set_blag_info(args)
   end
 
-  def blag_info(args)
+  def set_blag_info(args)
     @comments = args[:comments] || []
     @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
     @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
   end
 
-  def author_presence(args)
+  def set_author_presence(args)
     if args[:author] != '' && args[:author_url] != ''
       @author = Author.new(args[:author], args[:author_url])
     end
@@ -51,8 +51,7 @@ class BlagPost
 
   def category_list
     return "" if categories.empty?
-    label = "Category"
-    label = label.pluralize  unless categories.length == 1
+    label = categories.length == 1 ? "Category" : "Categories"
     label + ": " +  (categories.map { |cat| as_title(cat) }).to_sentence
   end  
 
@@ -62,8 +61,7 @@ class BlagPost
   end
 
   def commenters
-    return '' unless comments_allowed?
-    return '' unless comments.length > 0
+    return '' unless comments_allowed? || comments.length > 0    
     ordinal = comments.length.ordinalize
     "You will be the #{ordinal} commenter"
   end

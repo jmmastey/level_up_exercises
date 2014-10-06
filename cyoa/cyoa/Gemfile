@@ -11,6 +11,8 @@ gem "jquery-rails"
 gem "turbolinks"
 gem "jbuilder", "~> 2.0"
 
+gem "grooveshark"
+
 group :development do
   gem "spring"
   gem "better_errors"

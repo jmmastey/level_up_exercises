@@ -6,9 +6,10 @@ class Robot
 
   def initialize(args = {})
     @name_generator = args[:name_generator]
-    @name = fetch_name
 
-    @@registry << @name if valid_name? && !name_in_registry?
+    fetch_name
+
+    validate_name
   end
 
   def fetch_name
@@ -19,32 +20,26 @@ class Robot
     end
   end
 
+  def validate_name
+    if valid_name? && !name_in_registry?
+      @@registry << @name
+    else
+      raise NameCollisionError, "There was a problem generating the robot name!"
+    end
+  end
+
   def generate_new_name
-    generate_char.to_s +
-    generate_char.to_s +
-    generate_num.to_s +
-    generate_num.to_s +
-    generate_num.to_s
-  end
+    alphabet = ('A'..'Z').to_a
 
-  def generate_char
-    ('A'..'Z').to_a.sample
-  end
-
-  def generate_num
-    rand(10)
+    (2.times.map { alphabet.sample } + 3.times.map { rand(10) }).join
   end
 
   def valid_name?
-    return true if name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
-
-    raise NameCollisionError, "There was a problem generating the robot name!"
+    @name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
   end
 
   def name_in_registry?
-    return false unless @@registry.include? name
-
-    raise NameCollisionError, "This name already exists for a robot"
+    @@registry.include? @name
   end
 end
 

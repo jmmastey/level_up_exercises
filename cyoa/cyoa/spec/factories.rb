@@ -12,4 +12,6 @@ FactoryGirl.define do
     name "Single Ladies"
     artist
   end
+
+  #factory :char
 end

@@ -2,7 +2,7 @@ require 'csv'
 require 'json'
 require_relative 'dinosaur'
 require_relative 'dinodex_mapper'
-require_relative 'africandino_mapper'
+require_relative 'african_dino_mapper'
 # Class Dinodex has all the methods for main
 class DinoDex
   def initialize(dinosaurs = [])

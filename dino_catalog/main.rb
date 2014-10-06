@@ -3,7 +3,7 @@
 require 'csv'
 require 'json'
 require_relative 'dinodex_mapper'
-require_relative 'africandino_mapper'
+require_relative 'african_dino_mapper'
 require_relative 'dinodex.rb'
 require_relative 'dinosaur.rb'
 

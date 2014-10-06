@@ -9,6 +9,16 @@ class DataAggregator
     @grooveshark = Grooveshark::Client.new
   end
 
+  def populate_charts
+    store_todays_chart("daily")
+    store_todays_chart("monthly")
+  end
+
+  def gather_metrics_for_artists
+  end
+
+  private
+
   def store_todays_chart(scope = "daily")
     chart = Chart.new(scope: scope)
     chart.save

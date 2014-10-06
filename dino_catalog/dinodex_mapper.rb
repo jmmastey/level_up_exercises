@@ -4,14 +4,13 @@ require_relative 'dinosaur'
 class DinoDexMapper
   def map_dinos(entry)
     # entry['NAME'] == 'Abrichtosaurus'
-    dinosaur = Dinosaur.new
-    dinosaur.name = entry['NAME']
-    dinosaur.period = entry['PERIOD']
-    dinosaur.continent = entry['CONTINENT']
-    dinosaur.diet = entry['DIET']
-    dinosaur.weight = entry['WEIGHT_IN_LBS']
-    dinosaur.walking = entry['WALKING']
-    dinosaur.description = entry['DESCRIPTION']
-    dinosaur
+    Dinosaur.new(
+    name: entry['NAME'],
+    period: entry['PERIOD'],
+    continent: entry['CONTINENT'],
+    diet: entry['DIET'],
+    weight: entry['WEIGHT_IN_LBS'],
+    walking: entry['WALKING'],
+    description: entry['DESCRIPTION'])
   end
 end

@@ -30,17 +30,17 @@ class DinoDex
   def filter(key, value)
     search { |dinosaur| dinosaur.send(key) =~ /#{value}/ }
   end
+  #create an outre dinosaur loop and go thru criteria as .all?
 
   def combined(criteria)
-    result =  []
-    criteria.each do |key, value|
-      result = search { |dinosaur| dinosaur.send(key) == value }
+    @dinosaurs.select do |dinosaur|
+      criteria.all? do |key, value|
+        dinosaur.send(key) == value
+      end
     end
-    result
   end
-
   def search(&query)
-    DinoDex.new(@dinosaurs.select(&query).to_a)
+    DinoDex.new(@dinosaurs.select(&query))
   end
 
   def to_s

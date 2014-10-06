@@ -1,5 +1,6 @@
 ### Current thoughts:
 
+* https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet#Redirects_and_Forwards
 * Go through RailsGoat. If we can get this installed, that should do 90% of the work.
 * Use something like SqlMap to discover vulns.
 * Use something like Burp to walk through requests. Use the scanner?

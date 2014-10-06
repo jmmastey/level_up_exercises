@@ -2,37 +2,38 @@
 
 require 'active_support/all'
 
-class BlagPost 
+class BlagPost
   attr_accessor :author, :comments, :categories, :body, :publish_date
 
   Author = Struct.new(:name, :url)
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
   def initialize(args)
-    #TODO refactor this method
-      args = args.inject({}) do |hash, (key, value)|
+    args = args.inject({}) do |hash, (key, value)|
       hash[key.to_sym] = value
       hash
     end
+    author_presence(args)
+    @categories = category_filter(args)
+    @comments = args[:comments] || []
+    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
+    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
+  end
 
+  def author_presence(args)
     if args[:author] != '' && args[:author_url] != ''
       @author = Author.new(args[:author], args[:author_url])
     end
-
-    if args[:categories]
-      @categories = args[:categories].reject do |category|
-        DISALLOWED_CATEGORIES.include? category
-      end
-    else
-      @categories = []
-    end
-
-    @comments = args[:comments] || []
-    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
-    @publish_date = (
   end
   
-  
+  def category_filter(args)
+    if args[:categories]
+        args[:categories].reject do |category|
+        DISALLOWED_CATEGORIES.include? category ||= []
+      end
+    end
+  end
+
   def to_s
     [ category_list, byline, abstract, commenters ].join("\n")
   end
@@ -46,14 +47,14 @@ class BlagPost
 
   def category_list
     return "" if categories.empty?
-    label = "Category" 
-    label.pluralize unless label.length == 1
+    label = "Category"
+    label = label.pluralize  unless categories.length == 1
+    label + ": " +  (categories.map { |cat| as_title(cat) }).to_sentence
+  end  
 
-      if categories.length > 1
-      last_category = categories.pop
-      suffix = " and last_category.titleize" ||= ""
-      end
-    label + ": " + categories.map { |cat| cat }.join(", ") + suffix
+  def as_title(string)
+    string = String(string)
+    words = string.titleize
   end
 
   def commenters
@@ -70,11 +71,12 @@ class BlagPost
   def abstract
     body.truncate(200, omission: '...')
   end
+
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
-                    "categories"    => [:theory_of_computation, :languages, :gossip],
+                    "categories"    => [:theory_of_computation, :languages, :gossip, :fashion, :editorial],
                     "comments"      => [ [], [], [], [] ], # because comments are meaningless, get it? ;)
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE

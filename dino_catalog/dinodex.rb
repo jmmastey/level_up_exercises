@@ -11,10 +11,8 @@ class Dinodex
     filter, value = filter_overrides(filter, value)
 
     @dinosaurs.each do |dinosaur|
-      if (dinosaur.send("#{filter}")) &&
-        (value.include? dinosaur.send("#{filter}"))
-        results << dinosaur
-      end
+      dino_val = dinosaur.send("#{filter}")
+      results << dinosaur if (dino_val) && (value.include? dino_val)
     end
 
     Dinodex.new(results)

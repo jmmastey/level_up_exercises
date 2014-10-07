@@ -35,13 +35,10 @@ class Dinosaur
   end
 
   def big_as_string
-    if @weight.to_i > (2204 * 2)
-      "yes"
-    elsif @weight.to_i > 0
-      "no"
-    else
-      nil
-    end
+    return 'yes' if @weight.to_i > (2204 * 2)
+    return 'no' if @weight.to_i > 0
+
+    nil
   end
 
   def to_json(*args)

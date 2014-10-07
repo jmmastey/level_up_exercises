@@ -18,22 +18,20 @@ class DataAggregator
   def gather_metrics_for_artists
   end
 
-  private
-
   def store_current_chart(scope = "daily")
     chart = Chart.new(scope: scope)
     chart.save
 
     songs = []
 
-    get_popular_songs(scope: scope).each do |song|
-      artist = Artist.find_or_create_by(name: song.artist,
-                                        grooveshark_id: song.artist_id.to_i)
-      song = Song.find_or_create_by(name: song.name,
-                                    grooveshark_id: song.id.to_i,
+    get_popular_songs(scope: scope).each do |gs_song|
+      artist = Artist.find_or_create_by(name: gs_song.artist,
+                                        grooveshark_id: gs_song.artist_id.to_i)
+      song = Song.find_or_create_by(name: gs_song.name,
+                                    grooveshark_id: gs_song.id.to_i,
                                     artist: artist)
 
-      ChartSong.create(song: song, chart: chart, popularity: song.popularity)
+      ChartSong.create(song: song, chart: chart, popularity: gs_song.data["popularity"].to_i)
     end
   end
 
@@ -43,8 +41,6 @@ class DataAggregator
 
     grooveshark.popular_songs(scope).take(limit)
   end
-
-  public
 
   def metric_for_artist(id, start = 3.months.ago)
     NextBigSoundLite::Metric.artist(id, start: start)

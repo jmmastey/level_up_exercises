@@ -19,14 +19,14 @@ class Overlord < Sinatra::Application
   set :method_override, true
 
   get '/' do
-    erb STATUS_TAMPLATES[bomb_status], :locals => { status_desc: STATUS_TEXT[bomb_status] }
+    render_status
   end
 
   post '/' do
     return [400, "Bomb already booted"] if bomb_status != :new
     if set_valid_boot_codes
       session[:status] = :booted
-      redirect '/'
+      render_status
     else
       [400, "Invalid codes entered"]
     end
@@ -36,7 +36,7 @@ class Overlord < Sinatra::Application
   put '/' do
     return [400, "Bomb cannot be activated now"] if bomb_status != :booted
     session[:status] = :active if params[:code] == session[:activation_code]
-    redirect '/'
+    render_status
   end
 
   # Deactivate
@@ -48,7 +48,7 @@ class Overlord < Sinatra::Application
       session[:deactivation_tries] = session[:deactivation_tries].to_i + 1
       session[:status] = :exploded if session[:deactivation_tries] == 3
     end
-    redirect '/'
+    render_status
   end
 
   # Hidden override
@@ -79,5 +79,9 @@ class Overlord < Sinatra::Application
 
   def bomb_status
     session[:status] || :new
+  end
+
+  def render_status
+    erb STATUS_TAMPLATES[bomb_status], :locals => { status_desc: STATUS_TEXT[bomb_status] }
   end
 end

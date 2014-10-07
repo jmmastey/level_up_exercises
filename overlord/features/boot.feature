@@ -3,34 +3,34 @@ Feature: Boot Bomb
   As a vilian
   I want to be able to create a bomb
 
-  Scenario: First visit the bomb page
+  Background:
     Given the bomb is not yet booted
-    When I go to the home page
-    Then I should see "Welcome to Your Bomb Let's boot the bomb!"
+    And I am on the home page
+
+  Scenario: First visit the bomb page
+    Then I should see "Welcome to Your Bomb"
+    And I should see "Let's boot the bomb!"
 
   Scenario: Boot bomb with default codes
-    Given the bomb is not yet booted
-    When I go to the home page
-    And I press "Boot"
+    When I press "Boot"
     Then I should see "The Bomb is Booted Up"
+    And I should see field "code"
 
-  Scenario: Boot bomb with valid codes
-    Given the bomb is not yet booted
-    When I go to the home page
-    And I fill in "Activation Code" with "4321"
-    And I fill in "Deactivation Code" with "9999"
+  Scenario Outline: Boot bomb with various codes
+    When I fill in "Activation Code" with "<activation>"
+    And I fill in "Deactivation Code" with "<deactivation>"
     And I press "Boot"
-    Then I should see "The Bomb is Booted Up"
+    Then I should see "<message>"
+    And I should see field "<field>"
 
-  Scenario: Boot bomb with invalid codes
-    Given the bomb is not yet booted
-    When I go to the home page
-    And I fill in "Activation Code" with "22"
-    And I fill in "Deactivation Code" with "11"
-    And I press "Boot"
-    Then I should see "Invalid codes entered"
-
-  Scenario: Visit home page after bomb is booted
-    Given the bomb is booted with codes "1234" and "0000"
-    When I go to the home page
-    Then I should see "The Bomb is Booted Up"
+    Examples:
+      | activation | deactivation | message               | field |
+      | 4321       | 9999         | The Bomb is Booted Up | code  |
+      | 22         | 9999         | Invalid codes entered |       |
+      | a          | 9999         | Invalid codes entered |       |
+      | 43210      | 9999         | Invalid codes entered |       |
+      | abcd       | 9999         | Invalid codes entered |       |
+      | 4321       | 11           | Invalid codes entered |       |
+      | 4321       | a            | Invalid codes entered |       |
+      | 4321       | 99999        | Invalid codes entered |       |
+      | 4321       | xyzz         | Invalid codes entered |       |

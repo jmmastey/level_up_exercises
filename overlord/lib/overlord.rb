@@ -1,20 +1,19 @@
 require 'sinatra/base'
 
 class BombError < Exception; end
+class BombExploaded < Exception; end
 
 class Overlord < Sinatra::Application
   STATUS_TAMPLATES = {
     new: :boot,
     booted: :booted,
     active: :active,
-    exploded: :boom,
   }
 
   STATUS_TEXT = {
     new: "Not Ready",
     booted: "Booted Up",
     active: "Activated",
-    exploded: "Exploded",
   }
 
   enable :sessions
@@ -36,12 +35,16 @@ class Overlord < Sinatra::Application
   # Activate
   put '/' do
     raise(BombError, "Bomb cannot be activated now") if bomb_status != :booted
-    session[:status] = :active if params[:code] == session[:activation_code]
+    if params[:code] == session[:activation_code]
+      session[:status] = :active
+      session[:expire] = Time.now + (params[:time] || 30).to_i
+    end
     render_bomb_page
   end
 
   # Deactivate
   delete '/' do
+    check_exploaded
     raise(BombError, "Bomb connot be deactivated now") if bomb_status != :active
     if params[:code] == session[:deactivation_code]
       session.clear
@@ -66,6 +69,10 @@ class Overlord < Sinatra::Application
     }
   end
 
+  error BombExploaded do
+    erb :boom, :locals => { status_desc: "Exploaded" }
+  end
+
   private 
 
   def set_valid_boot_codes
@@ -88,8 +95,16 @@ class Overlord < Sinatra::Application
   end
 
   def render_bomb_page
+    check_exploaded
     erb STATUS_TAMPLATES[bomb_status], 
       :locals => { status_desc: STATUS_TEXT[bomb_status] }
+  end
+
+  def check_exploaded
+    if session[:status] == :active && Time.now > session[:expire]
+      session[:status] = :exploded
+    end
+    raise(BombExploaded) if session[:status] == :exploded
   end
 
   # start the server if ruby file executed directly

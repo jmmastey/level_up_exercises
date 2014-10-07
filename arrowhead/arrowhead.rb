@@ -16,36 +16,40 @@ class Arrowhead
     },
   }
 
-  def self.valid_region?(region)
-    CLASSIFICATIONS.include? region
+  attr_accessor :region, :shape
+
+  def initialize(region, shape)
+    @region = region
+    @shape = shape
+    @shape_group = find_shape_group
   end
 
-  def self.valid_shape?(shape, shape_group)
-    shape_group.include? shape
+  def valid_region?
+    CLASSIFICATIONS.include? @region
   end
 
-  def self.get_shape_group(region)
-    if valid_region?(region)
-      CLASSIFICATIONS[region]
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+  def valid_shape?
+    @shape_group.include? @shape
   end
 
-  def self.get_shape(shape, shape_group)
-    if valid_shape?(shape, shape_group)
-      shape_group[shape]
-    else
-      raise "Unknown shape value. Are you sure you know what you're talking
-            about?"
-    end
+  def find_shape_group
+    raise "Unknown region, please provide a valid region." unless valid_region?
+
+    CLASSIFICATIONS[@region]
   end
 
-  def self.classify(region, shape)
-    arrowhead = get_shape(shape, get_shape_group(region))
+  def find_shape
+    raise "Unknown shape value." unless valid_shape?
+
+    @shape_group[@shape]
+  end
+
+  def classify
+    arrowhead = find_shape
 
     puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end
 
-puts Arrowhead.classify(:northern_plains, :bifurcated)
+arrowhead = Arrowhead.new(:northern_plains, :bifurcated)
+arrowhead.classify

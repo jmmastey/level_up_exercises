@@ -24,7 +24,7 @@ class Overlord < Sinatra::Application
     render_bomb_page
   end
 
-  #Boot
+  # Boot
   post '/' do
     raise(BombError, "Bomb already booted") if bomb_status != :new
     raise(BombError, "Invalid codes entered") unless set_valid_boot_codes
@@ -63,17 +63,17 @@ class Overlord < Sinatra::Application
 
   error BombError do
     status 400
-    erb :error, :locals => { 
+    erb :error, locals: {
       status_desc: "Not Happy",
       error_message: env['sinatra.error'].message,
     }
   end
 
   error BombExploaded do
-    erb :boom, :locals => { status_desc: "Exploaded" }
+    erb :boom, locals: { status_desc: "Exploaded" }
   end
 
-  private 
+  private
 
   def set_valid_boot_codes
     session[:activation_code] = code_if_valid(params[:activation_code], "1234")
@@ -96,8 +96,8 @@ class Overlord < Sinatra::Application
 
   def render_bomb_page
     check_exploaded
-    erb STATUS_TAMPLATES[bomb_status], 
-      :locals => { status_desc: STATUS_TEXT[bomb_status] }
+    erb STATUS_TAMPLATES[bomb_status],
+      locals: { status_desc: STATUS_TEXT[bomb_status] }
   end
 
   def check_exploaded

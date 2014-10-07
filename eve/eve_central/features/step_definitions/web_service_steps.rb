@@ -1,6 +1,6 @@
 require "net/http"
+require "rspec"
 require "vcr"
-
 
 Given(/^the web service domain is "([^"]*?)"$/) do |domain|
   @domain = domain
@@ -66,5 +66,9 @@ Then(/^the XML response should (not)?\s?have "([^"]+)" with "([^"]+)" attribute 
 end
 
 Then(/^the XML response should (not)?\s?have "([^"]+)" with text "((?:[^"]|\\")+)"$/) do |negative, xpath, text|
-  pending # Need to implement custom matcher for XPath/text.
+  if negative
+    expect(@response_data).not_to have_xpath(xpath).with_text(text)
+  else
+    expect(@response_data).to have_xpath(xpath).with_text(text)
+  end
 end

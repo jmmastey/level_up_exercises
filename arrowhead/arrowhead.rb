@@ -16,7 +16,7 @@ class Arrowhead
     },
   }
 
-  attr_accessor :region, :shape
+  attr_accessor :region, :shape, :shape_group
 
   def initialize(region, shape)
     @region = region
@@ -47,9 +47,8 @@ class Arrowhead
   def classify
     arrowhead = find_shape
 
-    puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
+    "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end
 
-arrowhead = Arrowhead.new(:northern_plains, :bifurcated)
-arrowhead.classify
+puts Arrowhead.new(:northern_plains, :bifurcated).classify

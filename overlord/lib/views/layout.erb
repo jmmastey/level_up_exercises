@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>The Bomb!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- Bootstrap -->
+<link href="css/dark.css" rel="stylesheet" media="screen">
+<style>
+h1, h2 {
+  text-align: center;
+}
+html{
+  /* This image will be displayed fullscreen */
+  background:url('round-bomb-in-the-desert-wallpaper.jpg') no-repeat center center;
+
+  /* Ensure the html element always takes up the full height of the browser window */
+  min-height:100%;
+
+  /* The Magic */
+  background-size:cover;
+  opacity: 60%;
+}
+
+body{
+  /* Workaround for some mobile browsers */
+  min-height:100%;
+  background-color: transparent;
+}
+.content {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+}
+</style>
+</head>
+<body >
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">The Bomb</a>
+    </div>
+
+    <p class="navbar-text navbar-right">The Bomb is <b><%= status_desc %></b></p>
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container-fluid">
+  <div class="content">
+    <%= yield %>
+  </div>
+</div>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
+

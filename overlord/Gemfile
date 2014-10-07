@@ -1,6 +1,15 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-ruby "2.0.0"
+ruby "2.1.0"
 
 gem "sinatra"
+
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
+
+group :test do
+  gem "timecop"
+end

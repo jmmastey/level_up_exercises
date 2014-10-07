@@ -1,3 +1,4 @@
+require 'abanalyzer'
 require_relative 'datum'
 
 class Dataset
@@ -5,8 +6,7 @@ class Dataset
   attr_accessor :results
 
   def initialize(data)
-    @results = []
-    data.each { |line| @results << Datum.new(line) }
+    @results = data.map { |line| Datum.new(line) }
   end
 
   def total_sample_size
@@ -14,23 +14,11 @@ class Dataset
   end
 
   def total_in_group(cohort)
-    count = 0
-
-    @results.each do |result|
-      count += 1 if result.cohort == cohort
-    end
-
-    count
+    @results.count { |result| result.cohort == cohort }
   end
 
   def number_of_conversions(cohort)
-    count = 0
-
-    @results.each do |result|
-      count += 1 if result.cohort == cohort && result.result == 1
-    end
-
-    count
+    @results.count { |result| result.cohort == cohort && result.result == 1 }
   end
 
   def percentage_of_conversion(cohort)
@@ -43,11 +31,16 @@ class Dataset
 
     ((Math.sqrt(p * (1 - p) / n)) * CONFIDENCE).round(4)
   end
+
+  def calculate_probability
+    click_a = number_of_conversions('A')
+    click_b = number_of_conversions('B')
+    groups =
+    {
+      groupa: { opened: click_a, notopened: (total_in_group('A') - click_a) },
+      groupb: { opened: click_b, notopened: (total_in_group('B') - click_b) },
+    }
+
+    ABAnalyzer::ABTest.new(groups).chisquare_p.round(4)
+  end
 end
-
-require_relative 'json_loader'
-
-json = JSONLoader.new('source_data.json').fetch_data
-dataset = Dataset.new(json)
-puts dataset.calculate_standard_error('A')# * 100
-puts dataset.calculate_standard_error('B')# * 100

@@ -8,6 +8,12 @@ require_relative "split_test_calculator"
 require_relative "split_test_group"
 
 class App
+  LINES = {
+    thin: "-",
+    thick: "=",
+    title: "*"
+  }
+
   def main
     welcome
     data = read_data
@@ -16,12 +22,6 @@ class App
   end
 
   private
-
-  LINES = {
-    thin: "-",
-    thick: "=",
-    title: "*"
-  }
 
   def welcome
     puts header_line(:title).cyan

@@ -1,16 +1,22 @@
-require "nokogiri"
 require "rspec"
+require_relative "matcher_helpers"
 
 RSpec::Matchers.define :have_xpath do |xpath|
   match do |actual|
-    actual_xml = Nokogiri::XML(actual)
-    matching_xml = actual_xml.xpath(xpath)
+    matcher = MatcherHelpers::XmlMatcher.new(actual)
+    matcher.with_xpath(xpath)
+    matcher.with_text(@expected_text) if @expected_text
+    matcher.without_text(@unexpected_text) if @unexpected_text
+    matcher.with_value(@comparator, @compare_value) if @comparator && @compare_value
 
-    matching_xml.any? &&
-      (!@expected_text || matching_xml.text == @expected_text)
+    matcher.matches?
   end
 
   chain :with_text do |text|
-    @expected_text = text
+    @expected_text = text unless text.nil? || text.empty?
+  end
+
+  chain :without_text do |text|
+    @unexpected_text = text unless text.nil? || text.empty?
   end
 end

@@ -1,10 +1,15 @@
 <h1>The Bomb is Booted</h1>
-<h2>Status: Not Active</h2>
-<p>Bomb is ready to activate</p>
-<form action="/activate" method="post">
-  <p>
-  <label for="code">Code</label><br />
-  <input id="code" name="code" type="text" />
-  </p>
-  <p><input type="submit" value="Enter" /></p>
+<form class="form-horizontal" action="/" method="post" role="form">
+  <input type="hidden" name="_method" value="put" />
+  <div class="form-group">
+    <label for="code" class="col-sm-6 control-label">Code</label>
+    <div class="col-sm-6">
+      <input id="code" name="code" type="text" />
+    </div>
+  </div >
+  <div class="form-group">
+    <div class="col-sm-offset-6 col-sm-6">
+      <button class="btn btn-default" type="submit">Enter</button>
+    </div>
+  </div>
 </form>

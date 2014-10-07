@@ -1,6 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    better_errors (2.0.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
+    coderay (1.1.0)
+    erubis (2.7.0)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -14,4 +20,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors
   sinatra

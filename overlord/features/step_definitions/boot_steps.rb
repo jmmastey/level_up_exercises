@@ -1,9 +1,6 @@
 Given(/^the bomb is not yet booted$/) do
 end
 
-When(/^I don't enter any codes$/) do
-end
-
 Given(/^the bomb is booted with codes "(.*?)" and "(.*?)"$/) do |activation_code, deactivation_code|
   visit("/")
   boot_bomb(activation_code, deactivation_code)

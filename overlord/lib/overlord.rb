@@ -1,43 +1,59 @@
 require 'sinatra/base'
 
-class Overlord < Sinatra::Base
-  enable :sessions
+class Overlord < Sinatra::Application
   STATUS_TAMPLATES = {
     new: :boot,
     booted: :booted,
     active: :active,
     exploded: :boom,
   }
+  STATUS_TEXT = {
+    new: "Not Ready",
+    booted: "Booted Up",
+    active: "Activated",
+    exploded: "Exploded",
+  }
+
+  enable :sessions
+  # Enable put and delete verbs from forms using hidden input
+  set :method_override, true
 
   get '/' do
-    erb STATUS_TAMPLATES[bomb_status]
+    erb STATUS_TAMPLATES[bomb_status], :locals => { status_desc: STATUS_TEXT[bomb_status] }
   end
 
-  post '/boot' do
+  post '/' do
     return [400, "Bomb already booted"] if bomb_status != :new
-    session[:activation_code] = valid_or_default_code(params[:activation_code], "1234")
-    session[:deactivation_code] = valid_or_default_code(params[:deactivation_code], "0000")
-    if session[:activation_code] && session[:deactivation_code]
+    if set_valid_boot_codes
       session[:status] = :booted
       redirect '/'
     else
-      status 400
-      body "Invalid codes entered"
+      [400, "Invalid codes entered"]
     end
   end
 
-  post '/activate' do
+  # Activate
+  put '/' do
+    return [400, "Bomb cannot be activated now"] if bomb_status != :booted
     session[:status] = :active if params[:code] == session[:activation_code]
     redirect '/'
   end
 
-  post '/deactivate' do
+  # Deactivate
+  delete '/' do
+    return [400, "Bomb connot be deactivated now"] if bomb_status != :active
     if params[:code] == session[:deactivation_code]
-      session[:status] = :new
+      session.clear
     else
       session[:deactivation_tries] = session[:deactivation_tries].to_i + 1
       session[:status] = :exploded if session[:deactivation_tries] == 3
     end
+    redirect '/'
+  end
+
+  # Hidden override
+  get '/reset' do
+    session.clear
     redirect '/'
   end
 
@@ -46,12 +62,18 @@ class Overlord < Sinatra::Base
 
   private
 
-  def valid_or_default_code(code, default)
-    return default if code.empty?
-    return code if valid_code(code)
+  def set_valid_boot_codes
+    session[:activation_code] = code_if_valid(params[:activation_code], "1234")
+    session[:deactivation_code] = code_if_valid(params[:deactivation_code], "0000")
+    session[:activation_code] && session[:deactivation_code]
   end
 
-  def valid_code(code)
+  def code_if_valid(code, default = nil)
+    return default if code.empty?
+    return code if valid_code?(code)
+  end
+
+  def valid_code?(code)
     code =~ /^\d{4}$/
   end
 

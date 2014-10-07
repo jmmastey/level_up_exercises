@@ -12,7 +12,7 @@ Feature: Boot Bomb
     Given the bomb is not yet booted
     When I go to the home page
     And I press "Boot"
-    Then I should see "Bomb is ready to activate"
+    Then I should see "The Bomb is Booted Up"
 
   Scenario: Boot bomb with valid codes
     Given the bomb is not yet booted
@@ -20,7 +20,7 @@ Feature: Boot Bomb
     And I fill in "Activation Code" with "4321"
     And I fill in "Deactivation Code" with "9999"
     And I press "Boot"
-    Then I should see "Bomb is ready to activate"
+    Then I should see "The Bomb is Booted Up"
 
   Scenario: Boot bomb with invalid codes
     Given the bomb is not yet booted
@@ -33,4 +33,4 @@ Feature: Boot Bomb
   Scenario: Visit home page after bomb is booted
     Given the bomb is booted with codes "1234" and "0000"
     When I go to the home page
-    Then I should see "Bomb is ready to activate"
+    Then I should see "The Bomb is Booted Up"

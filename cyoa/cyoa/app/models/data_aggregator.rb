@@ -24,14 +24,17 @@ class DataAggregator
 
     songs = []
 
-    get_popular_songs(scope: scope).each do |gs_song|
+    get_popular_songs(scope: scope).each_with_index do |gs_song, index|
       artist = Artist.find_or_create_by(name: gs_song.artist,
                                         grooveshark_id: gs_song.artist_id.to_i)
       song = Song.find_or_create_by(name: gs_song.name,
                                     grooveshark_id: gs_song.id.to_i,
                                     artist: artist)
 
-      ChartSong.create(song: song, chart: chart, popularity: gs_song.data["popularity"].to_i)
+      ChartSong.create(song: song,
+                       chart: chart,
+                       popularity: gs_song.data["popularity"].to_i,
+                       position: index + 1)
     end
   end
 

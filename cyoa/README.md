@@ -1,3 +1,6 @@
+# WikiUniversity
+WikiUniversity is a completely open source community generate mooc.
+
 ## Choose Your Destiny
 
 We're going to spend some time on this one, so it's time to Choose Your Own Adventure™. You'll be writing one of these Rails applications and refactoring it for a while, so pick something interesting.

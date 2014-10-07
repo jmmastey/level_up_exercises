@@ -1,5 +1,7 @@
 require 'sinatra/base'
 
+class BombError < Exception; end
+
 class Overlord < Sinatra::Application
   STATUS_TAMPLATES = {
     new: :boot,
@@ -7,6 +9,7 @@ class Overlord < Sinatra::Application
     active: :active,
     exploded: :boom,
   }
+
   STATUS_TEXT = {
     new: "Not Ready",
     booted: "Booted Up",
@@ -19,48 +22,51 @@ class Overlord < Sinatra::Application
   set :method_override, true
 
   get '/' do
-    render_status
+    render_bomb_page
   end
 
+  #Boot
   post '/' do
-    return [400, "Bomb already booted"] if bomb_status != :new
-    if set_valid_boot_codes
-      session[:status] = :booted
-      render_status
-    else
-      [400, "Invalid codes entered"]
-    end
+    raise(BombError, "Bomb already booted") if bomb_status != :new
+    raise(BombError, "Invalid codes entered") unless set_valid_boot_codes
+    session[:status] = :booted
+    render_bomb_page
   end
 
   # Activate
   put '/' do
-    return [400, "Bomb cannot be activated now"] if bomb_status != :booted
+    raise(BombError, "Bomb cannot be activated now") if bomb_status != :booted
     session[:status] = :active if params[:code] == session[:activation_code]
-    render_status
+    render_bomb_page
   end
 
   # Deactivate
   delete '/' do
-    return [400, "Bomb connot be deactivated now"] if bomb_status != :active
+    raise(BombError, "Bomb connot be deactivated now") if bomb_status != :active
     if params[:code] == session[:deactivation_code]
       session.clear
     else
       session[:deactivation_tries] = session[:deactivation_tries].to_i + 1
       session[:status] = :exploded if session[:deactivation_tries] == 3
     end
-    render_status
+    render_bomb_page
   end
 
   # Hidden override
   get '/reset' do
     session.clear
-    redirect '/'
+    redirect url('/')
   end
 
-  # start the server if ruby file executed directly
-  run! if app_file == $PROGRAM_NAME
+  error BombError do
+    status 400
+    erb :error, :locals => { 
+      status_desc: "Not Happy",
+      error_message: env['sinatra.error'].message,
+    }
+  end
 
-  private
+  private 
 
   def set_valid_boot_codes
     session[:activation_code] = code_if_valid(params[:activation_code], "1234")
@@ -81,7 +87,11 @@ class Overlord < Sinatra::Application
     session[:status] || :new
   end
 
-  def render_status
-    erb STATUS_TAMPLATES[bomb_status], :locals => { status_desc: STATUS_TEXT[bomb_status] }
+  def render_bomb_page
+    erb STATUS_TAMPLATES[bomb_status], 
+      :locals => { status_desc: STATUS_TEXT[bomb_status] }
   end
+
+  # start the server if ruby file executed directly
+  run! if app_file == $PROGRAM_NAME
 end

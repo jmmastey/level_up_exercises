@@ -3,10 +3,10 @@ require "spec_helper"
 describe Service do
   subject(:service) { Service.new(name: "Grooveshark", url: "http://grooveshark.com") }
 
-  it { should be_valid }
-  it { should respond_to(:name) }
-  it { should respond_to(:url) }
-  it { should respond_to(:charts) }
+  it { is_expected.to be_valid }
+  it { is_expected.to respond_to(:name) }
+  it { is_expected.to respond_to(:url) }
+  it { is_expected.to respond_to(:metrics) }
 
   describe "#name" do
     it "must have a unique name" do

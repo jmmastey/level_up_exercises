@@ -2,7 +2,6 @@ require 'abanalyzer'
 require_relative 'datum'
 
 class Dataset
-  CONFIDENCE = 1.96
   attr_accessor :results
 
   def initialize(data)
@@ -29,7 +28,8 @@ class Dataset
     p = percentage_of_conversion(cohort)
     n = total_in_group(cohort)
 
-    ((Math.sqrt(p * (1 - p) / n)) * CONFIDENCE)
+    # 1.96 is a confidence level of approx. 95%
+    ((Math.sqrt(p * (1 - p) / n)) * 1.96)
   end
 
   def calculate_probability

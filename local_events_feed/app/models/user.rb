@@ -19,6 +19,14 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def add_event(event)
+    events << event unless event.has_match_in?(events)
+  end
+
+  def remove_event(event)
+    events.delete(event)
+  end
+
   private
 
   def create_member_token

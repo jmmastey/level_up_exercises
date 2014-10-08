@@ -12,4 +12,5 @@ end
 
 group :test do
   gem "timecop"
+  gem "selenium-webdriver"
 end

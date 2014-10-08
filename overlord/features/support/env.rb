@@ -9,6 +9,7 @@ require 'capybara/cucumber'
 require 'rspec'
 
 Capybara.app = Overlord
+Capybara.default_driver = :selenium
 
 class OverlordWorld
   include Capybara::DSL

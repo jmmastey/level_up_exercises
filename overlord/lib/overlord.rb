@@ -17,6 +17,8 @@ class Overlord < Sinatra::Application
   }
 
   enable :sessions
+  # Disable Sinatra intercepting exceptions when running under development env
+  set :show_exceptions, false
   # Enable put and delete verbs from forms using hidden input
   set :method_override, true
 

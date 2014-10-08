@@ -7,6 +7,7 @@ Feature: Boot Bomb
     Given the bomb is not yet booted
     And I am on the home page
 
+  # Happy Path
   Scenario: First visit the bomb page
     Then I should see "Welcome to Your Bomb"
     And I should see "Let's boot the bomb!"
@@ -16,6 +17,7 @@ Feature: Boot Bomb
     Then I should see "The Bomb is Booted Up"
     And I should see field "code"
 
+  # Happy and Sad Path Tests
   Scenario Outline: Boot bomb with various codes
     When I fill in "Activation Code" with "<activation>"
     And I fill in "Deactivation Code" with "<deactivation>"

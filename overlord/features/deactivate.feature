@@ -8,6 +8,7 @@ Feature: Bomb Deactivation
     And the bomb is activated with code "1234"
     And I am on the home page
 
+  # Happy Path Tests
   Scenario: Home poge
     When I go to the home page
     Then I should see "The Bomb is Active"
@@ -18,6 +19,13 @@ Feature: Bomb Deactivation
     And I press "Enter"
     Then I should see "Welcome to Your Bomb"
 
+  Scenario: Invalid deactivation followed by valid
+    When I enter code "1111" "2" times
+    And I fill in "Code" with "0000"
+    And I press "Enter"
+    Then I should see "Welcome to Your Bomb"
+
+  # Sad Path Tests
   Scenario: Valid deactivation code entered after time expired
     When I wait 31 seconds
     And I fill in "Code" with "0000"
@@ -32,9 +40,3 @@ Feature: Bomb Deactivation
   Scenario: Invalid deactivation code entered 3 times
     When I enter code "1111" "3" times
     Then I should see "The Bomb Exploded"
-
-  Scenario: Invalid deactivation followed by valid
-    When I enter code "1111" "2" times
-    And I fill in "Code" with "0000"
-    And I press "Enter"
-    Then I should see "Welcome to Your Bomb"

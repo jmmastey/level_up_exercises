@@ -39,8 +39,6 @@ class DinoTable
     @csv_table = CSV::Table.new([])
 
     filenames.each { |datafile| read_dino_csv(datafile) }
-
-    @csv_table.each { |r| puts r.inspect; puts "\n" }
   end
 
   # fix_dino_table_row
@@ -86,7 +84,6 @@ class DinoTable
 
       # Accumulate the new fixed up rows into a CSV table
       @csv_table << fix_dino_table_row(new_row)
-      puts "CSVT: #{@csv_table.inspect}\n"
     end
   end
 
@@ -107,19 +104,19 @@ class DinoTable
         # it were more complicated the fields may be objects that know how to
         # normalize themselves.
         case finfo.header
-        when :name, :period, :continent
-          # Proper nouns: first letter is uppercased
-          fval[0].upcase!
-          fval
-        when :carnivore
-          # This field must be a boolean value
-          fval.casecmp("yes") == 0
-        when :weight
-          # This field is a whole-number weight in lbs
-          fval.to_i
-        else
-          # Other fields are conventionally lower-cased for consistency
-          fval.downcase!
+          when :name, :period, :continent
+            # Proper nouns: first letter is uppercased
+            fval[0].upcase!
+            fval
+          when :carnivore
+            # This field must be a boolean value
+            fval.casecmp("yes") == 0
+          when :weight
+            # This field is a whole-number weight in lbs
+            fval.to_i
+          else
+            # Other fields are conventionally lower-cased for consistency
+            fval.downcase!
         end
       end,
     ]
@@ -136,7 +133,7 @@ class DinoDex
   attr_reader :dino_table
 
   def initialize
-    # Filter method list selecting  dinosaurs of interest (CLI adds # these)
+    # Filter method list selecting  dinosaurs of interest (CLI adds more)
     @filters = [->(_csvrow) { true }]  # Default filter: Accept unconditionally
 
     # The container which keeps my dinosaur list
@@ -243,10 +240,10 @@ begin
   d = DinoDex.new
   d.parse_options
   d.print_dinosaurs
-#rescue Exception => ex
+rescue Exception => ex
 
-  # Catch any kind of error h
-  #puts ex.message + "\n"
+  # Catch any kind of error h 
+  puts ex.message + "\n"
   exit 1
 end
 

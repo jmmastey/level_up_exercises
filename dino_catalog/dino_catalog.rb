@@ -101,17 +101,20 @@ class DinoTable
   def field_converters
     [
       lambda do |fval, finfo|
-        # There are few enough fields to warrant a simple if ladder here.
-        if fval.nil?
-          nil
-        elsif [:name, :period, :continent].include?(finfo.header)
+        return nil if fval.nil?
+
+        # There are few enough fields to warrant a simple if ladder here. But if
+        # it were more complicated the fields may be objects that know how to
+        # normalize themselves.
+        case finfo.header
+        when :name, :period, :continent
           # Proper nouns: first letter is uppercased
           fval[0].upcase!
           fval
-        elsif finfo.header == :carnivore
+        when :carnivore
           # This field must be a boolean value
           fval.casecmp("yes") == 0
-        elsif finfo.header == :weight
+        when :weight
           # This field is a whole-number weight in lbs
           fval.to_i
         else

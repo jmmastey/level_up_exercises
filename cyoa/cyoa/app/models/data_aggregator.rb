@@ -7,18 +7,25 @@ class DataAggregator
 
   def initialize
     @grooveshark = Grooveshark::Client.new
-    NextBigSoundLite.api_key = "colleensain"
   end
 
   def populate_charts
-    store_current_chart("daily")
-    store_current_chart("monthly")
+    update_chart_data("daily")
+    update_chart_data("monthly")
+    update_new_artist_api_ids
   end
 
-  def gather_metrics_for_artists
+  def update_artist_metrics
+    artists = Artist.all
+    artists.each do |artist|
+    end
   end
 
-  def store_current_chart(scope = "daily")
+  def get_artist_metrics(artist, start = 3.months.ago)
+    NextBigSoundLite::Metric.artist(artist.id, start: start)
+  end
+
+  def update_chart_data(scope = "daily")
     chart = Chart.new(scope: scope)
     chart.save
 
@@ -45,21 +52,9 @@ class DataAggregator
     grooveshark.popular_songs(scope).take(limit)
   end
 
-  def metric_for_artist(id, start = 3.months.ago)
-    NextBigSoundLite::Metric.artist(id, start: start)
-  end
-
-  def store_nbs_ids_for_artists
-    artists = Artist.where(nbs_id: nil)
-    artists.each do |artist|
-      search_results = NextBigSoundLite::Artist.search(artist.name)
-
-      if search_results
-        nbs_id = search_results.first.id.to_i
-        artist.nbs_id = nbs_id
-
-        artist.save
-      end
+  def update_new_artist_api_ids
+    Artist.where(nbs_id: nil).each do |artist|
+      artist.update_api_ids
     end
   end
 end

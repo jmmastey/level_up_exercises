@@ -18,3 +18,4 @@
 </table>
 <br>
 <h4><%= link_to 'Events', { :controller => 'events', :user_id => @user[:id] }  %></h4>
+<%= debug(params) if Rails.env.development? %>

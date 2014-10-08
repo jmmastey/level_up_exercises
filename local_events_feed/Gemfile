@@ -45,8 +45,10 @@ group :development, :test do
 end
 
 group :test do
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner', github: 'bmabey/database_cleaner'
   gem 'selenium-webdriver'
-  gem 'capybara', '2.2.0'
+  gem 'capybara', '2.3.0'
 end
 
 group :production do

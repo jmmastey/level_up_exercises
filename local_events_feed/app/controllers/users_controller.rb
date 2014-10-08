@@ -2,18 +2,27 @@ class UsersController < ApplicationController
   def index
   end
 
-  def create
-    @user = get_user(user_params)
+  def new
+    @user = User.new
+  end
 
-    if @user.save
-      redirect_to @user
+  def create
+    @user = User.create(user_params)
+
+    if @user.valid?
+      sign_in(@user)
+      redirect_to events_path
     else
-      render 'index'
+      render 'sign_up'
     end
   end
 
   def show
-    @user = User.find(params[:id])
+    if signed_in?
+      redirect_to events_path
+    else
+      render plain: "Please Sign In First"
+    end
   end
 
   def remove_event
@@ -35,16 +44,13 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
-  def get_user(params)
-    name = params[:name]
-    find_user(name) || User.create(params)
+  def failed_to_authenticate?(params)
+    @user = User.find_by(email: params[:email])
+    return true if @user.nil?
+    return true if @user.authenticate(params[:password]) != @user
+    false
   end
-
-  def find_user(name)
-    User.all.detect { |user| user[:name] == name }
-  end
-
 end

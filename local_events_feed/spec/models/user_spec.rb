@@ -37,6 +37,10 @@ describe User do
     expect(valid_user).to respond_to(:password_confirmation)
   end
 
+  it 'responds to remember_token' do
+    expect(valid_user).to respond_to(:remember_token)
+  end
+
   it 'responds to authenticate' do
     expect(valid_user).to respond_to(:authenticate)
   end
@@ -47,6 +51,10 @@ describe User do
 
   it 'is stored with lowercase e-mail' do
     expect(User.find(upcase_email_user[:id]).email).to eq('lmajors@besthost.com')
+  end
+
+  it 'has a non-empty remember_token' do
+    expect(valid_user.remember_token).not_to be_blank
   end
 
   it 'will not create a user with an email that already exists' do

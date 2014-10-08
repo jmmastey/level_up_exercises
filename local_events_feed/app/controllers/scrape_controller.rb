@@ -38,6 +38,6 @@ class ScrapeController < ApplicationController
   end
 
   def unique?(event)
-    !Event.all.any? { |other| other.match?(event) }
+    !Event.all.any? { |other| other.same_as?(event) }
   end
 end

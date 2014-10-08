@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'models/event_helper'
 
 RSpec.describe Event, :type => :model do
-  let(:event) { create_event('Party', 'Everywhere', "2014-10-01T09:30:00") }
+  let(:event) { new_event('Party', 'Everywhere', "2014-10-01T09:30:00") }
 
   it "responds to name" do
     expect(event).to respond_to(:name)

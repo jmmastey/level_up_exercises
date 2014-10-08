@@ -2,11 +2,11 @@ require 'rails_helper'
 require 'models/event_helper'
 
 RSpec.describe Event, :type => :model do
-  let(:event_a) { create_event('Party', 'Everywhere', "2014-10-01T09:30:00") }
-  let(:event_b) { create_event('Party', 'Everywhere', "2014-10-01T09:30:00") }
-  let(:event_c) { create_event('Partx', 'Everywhere', "2014-10-01T09:30:00") }
-  let(:event_d) { create_event('Party', 'Everywherx', "2014-10-01T09:30:00") }
-  let(:event_e) { create_event('Party', 'Everywhere', "2014-10-01T09:30:01") }
+  let(:event_a) { new_event('Party', 'Everywhere', "2014-10-01T09:30:00") }
+  let(:event_b) { new_event('Party', 'Everywhere', "2014-10-01T09:30:00") }
+  let(:event_c) { new_event('Partx', 'Everywhere', "2014-10-01T09:30:00") }
+  let(:event_d) { new_event('Party', 'Everywherx', "2014-10-01T09:30:00") }
+  let(:event_e) { new_event('Party', 'Everywhere', "2014-10-01T09:30:01") }
   let(:list_1) { [event_a, event_b, event_c, event_d, event_e] }
   let(:list_2) { [event_c, event_d, event_e] }
 

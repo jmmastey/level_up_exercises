@@ -19,6 +19,17 @@ puts "Conversions"
 puts "\tGroup A: #{conversions_a}"
 puts "\tGroup B: #{conversions_b}"
 puts "Percentage of Conversions"
-puts "\tGroup A: #{dataset.percentage_of_conversion('A') * 100}"
-puts "\tGroup B: #{dataset.percentage_of_conversion('B') * 100}"
-puts "Confidence Level: #{dataset.calculate_probability}"
+
+pct_con_a = (dataset.percentage_of_conversion('A') * 100).round(4)
+std_err_a = (dataset.calculate_standard_error('A') * 100).round(4)
+puts "\tGroup A: #{pct_con_a}%" \
+  " +/- #{std_err_a}%" \
+  " (#{(pct_con_a - std_err_a).round(4)}% - #{(pct_con_a + std_err_a).round(4)}%)"
+
+pct_con_b = (dataset.percentage_of_conversion('B') * 100).round(4)
+std_err_b = (dataset.calculate_standard_error('B') * 100).round(4)
+puts "\tGroup B: #{pct_con_b}%" \
+  " +/- #{std_err_b}%" \
+  " (#{(pct_con_b - std_err_b).round(4)}% - #{(pct_con_b + std_err_b).round(4)}%)"
+
+puts "Confidence Level: #{dataset.calculate_probability.round(4)}"

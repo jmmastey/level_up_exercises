@@ -1,7 +1,7 @@
 require_relative 'json_loader'
 
 describe JSONLoader do
-  loader = JSONLoader.new('test_data.json')
+  loader = JSONLoader.new('source_data.json')
   loader.fetch_data
 
   it "should have a legit data source" do

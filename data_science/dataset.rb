@@ -21,7 +21,7 @@ class Dataset
   end
 
   def percentage_of_conversion(cohort)
-    (number_of_conversions(cohort).to_f / total_in_group(cohort).to_f)
+    number_of_conversions(cohort).to_f / total_in_group(cohort).to_f
   end
 
   def calculate_standard_error(cohort)

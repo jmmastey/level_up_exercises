@@ -1,0 +1,12 @@
+<html>
+ <body>
+    <h3> Click on the title to add it to your calendar </h3>
+    <ul>
+      <li><%= link_to @event.title, :controller => 'events', :action => :show, :format => :ics %></li>
+      <li><%= @event.time.strftime("%l:%M:%p") %></li>
+      <li><%= @event.location %></li>
+    </ul>
+ </body>
+</html>
+
+

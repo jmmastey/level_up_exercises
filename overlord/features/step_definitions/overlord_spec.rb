@@ -5,7 +5,7 @@ Given(/^I visit the activation page$/) do
 end
 
 Given(/^Configure bomb with codes '(.*?)' and '(.*?)'$/) do |arg1, arg2|
-  code_config(arg1, arg2)
+  configure_bomb(arg1, arg2)
 end
 
 When(/^I fill in '(.*?)' to activate the bomb$/) do |arg1|
@@ -45,7 +45,7 @@ end
 
 When(/^I do nothing on the deactivation page for 30 seconds$/) do
   activation_page
-  code_config(1111,2222)
+  configure_bomb(1111,2222)
   activate_bomb(1111)
   # Wait 30 seconds then verify exploded state
 end

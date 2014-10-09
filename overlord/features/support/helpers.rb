@@ -4,15 +4,10 @@ def host_url
   @overlord_url = "#{overlord_url}"
 end
 
-def code_config(act_code, deact_code)
-  fill_in 'activation', :with => act_code
-  fill_in 'deactivation', :with => deact_code
-  click_button 'submit my codes!'
-end
-
-def default_config
-  visit host_url
-  click_button 'submit my codes!'
+def configure_bomb(act_code, deact_code)
+  fill_in 'activation_code', :with => act_code
+  fill_in 'deactivation_code', :with => deact_code
+  click_button 'Go Baby!'
 end
 
 def activation_page

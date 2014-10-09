@@ -6,4 +6,11 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = yield
+    = nav_bar brand: "Groovemetrics", static: :top
+    .container-fluid
+      .row-fluid
+        .span3
+          Side bar
+        .span9
+          / Body content
+          = yield

@@ -1,5 +1,7 @@
 require 'rspec/expectations'
 require 'capybara/cucumber'
+require_relative 'helpers'
+
 Capybara.run_server = false
 Capybara.default_driver = :selenium
 Capybara.default_selector = :css

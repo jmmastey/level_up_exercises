@@ -5,7 +5,7 @@ ruby "2.1.2"
 
 gem "sinatra"
 
-group :development, :test do
+# group :development, :test do
   gem 'coveralls', require: false
   gem 'guard', require: false
   gem 'guard-rspec', require: false
@@ -18,4 +18,4 @@ group :development, :test do
   gem 'cucumber'
   gem 'pry'
   gem 'capybara'
-end
+# end

@@ -6,14 +6,6 @@ When(/^The bomb is booted$/) do
   click_button('arm-button')
 end
 
-# Then(/^The bomb should not be activated$/) do
-  
-# end
-
-When(/^The activation code is used$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
 Then(/^The bomb should be activated$/) do
   pending # express the regexp above with the code you wish you had
 end

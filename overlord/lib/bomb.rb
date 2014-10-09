@@ -40,7 +40,7 @@ class Bomb
 
   def explode_on_max_attempt
     @attempts_remaining -= 1
-    explode if @attempts_remaining == 0
+    explode if @attempts_remaining <= 0
   end
 
   def explode

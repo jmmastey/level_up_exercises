@@ -22,4 +22,3 @@ Feature: Bomb interface contains field to type code
     Given The bomb is activated
     When The deactivation code is used
     Then The bomb should be deactivated
-

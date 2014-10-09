@@ -4,48 +4,33 @@ class Bomb
 
   MAX_ATTEMPTS = 3
 
-  protected
-
-  attr_accessor :status,
-    :attempts_remaining,
-    :deactivation_code,
-    :activation_code
-
-  public
-
-  def status
-    @status
-  end
-
-  def attempts_remaining
-    @attempts_remaining
-  end
+  attr_reader :status, :attempts_remaining
 
   def activated?
-    self.status == :activated
+    @status == :activated
   end
 
   def exploded?
-    self.status == :exploded
+    @status == :exploded
   end
 
   def initialize(act_code = nil, deact_code = nil)
-    self.status = :inactivated
-    self.attempts_remaining = MAX_ATTEMPTS
+    @status = :inactivated
+    @attempts_remaining = MAX_ATTEMPTS
     activate(act_code, deact_code) unless act_code.nil? || deact_code.nil?
   end
 
   def activate(activation_code, deactivation_code)
     validate_inputs(activation_code, deactivation_code)
-    self.activation_code = activation_code
-    self.deactivation_code = deactivation_code
-    self.status = :activated
+    @activation_code = activation_code
+    @deactivation_code = deactivation_code
+    @status = :activated
   end
 
   def deactivate(code)
     raise(BombError, "already gone bang") if exploded?
-    if code == self.deactivation_code
-      self.status = :deactivated
+    if code == @deactivation_code
+      @status = :deactivated
     else
       explode_on_max_attempt
     end
@@ -54,12 +39,12 @@ class Bomb
   private
 
   def explode_on_max_attempt
-    self.attempts_remaining -= 1
-    explode if self.attempts_remaining == 0
+    @attempts_remaining -= 1
+    explode if @attempts_remaining == 0
   end
 
   def explode
-    self.status = :exploded
+    @status = :exploded
   end
 
   def validate_inputs(activation_code, deactivation_code)

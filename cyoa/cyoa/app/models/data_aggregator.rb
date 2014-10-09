@@ -2,7 +2,7 @@ class DataAggregator
   attr_reader :grooveshark
 
   DEFAULTS = {
-    top_song_limit: 10
+    top_song_limit: 30
   }
 
   def initialize
@@ -12,17 +12,12 @@ class DataAggregator
   def populate_charts
     update_chart_data("daily")
     update_chart_data("monthly")
-    update_new_artist_api_ids
   end
 
   def update_artist_metrics
-    artists = Artist.all
-    artists.each do |artist|
+    Artist.all.each do |artist|
+      artist.update_metrics
     end
-  end
-
-  def get_artist_metrics(artist, start = 3.months.ago)
-    NextBigSoundLite::Metric.artist(artist.id, start: start)
   end
 
   def update_chart_data(scope = "daily")
@@ -31,7 +26,7 @@ class DataAggregator
 
     songs = []
 
-    get_popular_songs(scope: scope).each_with_index do |gs_song, index|
+    get_current_popular_songs(scope: scope).each_with_index do |gs_song, index|
       artist = Artist.find_or_create_by(name: gs_song.artist,
                                         grooveshark_id: gs_song.artist_id.to_i)
       song = Song.find_or_create_by(name: gs_song.name,
@@ -45,7 +40,7 @@ class DataAggregator
     end
   end
 
-  def get_popular_songs(options = {})
+  def get_current_popular_songs(options = {})
     limit = options[:limit] || DEFAULTS[:top_song_limit]
     scope = options[:scope] || "daily"
 

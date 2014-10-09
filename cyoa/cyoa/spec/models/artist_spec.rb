@@ -8,6 +8,8 @@ describe Artist do
   end
 
   it { is_expected.to respond_to(:name) }
+  it { is_expected.to respond_to(:metrics) }
+  it { is_expected.to respond_to(:songs) }
 
   it { is_expected.to be_valid }
 

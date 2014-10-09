@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       sign_in(@user)
       redirect_to @user
     else
-      render 'new', locals: { failed_to_authenticate: true }
+      redirect_to new_session_path, :flash => { :failed_to_authenticate => true }
     end
   end
 

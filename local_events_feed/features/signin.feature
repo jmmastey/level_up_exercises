@@ -20,6 +20,7 @@ Feature: Signing in
     Given a user visits the signin page
     When they submit invalid signin information
     Then they should see the signin page
+	And they should see authentication-failure message
 
   Scenario: User tries to sign in twice
     Given a signed-in user

@@ -10,9 +10,9 @@
   <%= f.submit 'Sign-In' %>
 <% end %>
 
-<% if defined? failed_to_authenticate %>
-<br>
-<font color='red'>Wrong email and/or password</font>
+<% if flash[:failed_to_authenticate] %>
+  <br>
+  <font color='red'>Wrong email and/or password</font>
 <% end %>
 
 <br>

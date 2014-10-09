@@ -78,6 +78,9 @@ Then /^they should see signup errors$/ do
   expect(page).to have_content('Issue')
 end
 
+Then /^they should see authentication-failure message$/ do
+  expect(page).to have_content('Wrong email and/or password')
+end
 
 
 def visit_signin_page

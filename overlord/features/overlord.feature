@@ -1,4 +1,7 @@
 Feature: Bomb interface contains field to type code
+  As a super villain
+  I want to arm a bomb
+  So that I can blow up everything
 
   Scenario: Super villain boots the bomb
     Given The bomb is available
@@ -20,4 +23,3 @@ Feature: Bomb interface contains field to type code
     When The deactivation code is used
     Then The bomb should be deactivated
 
-  

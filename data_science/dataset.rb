@@ -1,5 +1,4 @@
 require 'abanalyzer'
-require_relative 'datum'
 
 class Dataset
   attr_accessor :results

@@ -3,10 +3,10 @@ Feature: Bomb interface contains field to type code
   I want to arm a bomb
   So that I can blow up everything
 
-  Scenario: Super villain boots the bomb
+  Scenario: I boot the bomb
     Given The bomb is available
     When The bomb is booted
-    Then The bomb should not be activated
+    Then I should see "bomb is not activated"
 
   Scenario: Activate the bomb
     Given The bomb is available

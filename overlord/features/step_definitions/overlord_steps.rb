@@ -3,12 +3,12 @@ Given(/^The bomb is available$/) do
 end
 
 When(/^The bomb is booted$/) do
-  pending # express the regexp above with the code you wish you had
+  click_button('arm-button')
 end
 
-Then(/^The bomb should not be activated$/) do
-  pending # express the regexp above with the code you wish you had
-end
+# Then(/^The bomb should not be activated$/) do
+  
+# end
 
 When(/^The activation code is used$/) do
   pending # express the regexp above with the code you wish you had
@@ -19,7 +19,7 @@ Then(/^The bomb should be activated$/) do
 end
 
 Given(/^The bomb is activated$/) do
-  pending # express the regexp above with the code you wish you had
+  visit "/activated"
 end
 
 When(/^The deactivation code is used$/) do

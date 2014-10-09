@@ -1,3 +1,9 @@
+def host_url
+  @host = ENV['TEST_HOST'] ? ENV['TEST_HOST'] : "localhost:4567"
+  overlord_url = @host.start_with?('http') ? @host : "http://#{@host}"
+  @overlord_url = "#{overlord_url}"
+end
+
 def code_config(act_code, deact_code)
   fill_in 'activation', :with => act_code
   fill_in 'deactivation', :with => deact_code
@@ -5,7 +11,7 @@ def code_config(act_code, deact_code)
 end
 
 def default_config
-  visit 'http://localhost:4567'
+  visit host_url
   click_button 'submit my codes!'
 end
 

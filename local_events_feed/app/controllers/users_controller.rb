@@ -11,34 +11,33 @@ class UsersController < ApplicationController
 
     if @user.valid?
       sign_in(@user)
-      redirect_to events_path
+      redirect_to @user
     else
       render 'sign_up'
     end
   end
 
   def show
-    if signed_in?
-      redirect_to events_path
-    else
-      render plain: "Please Sign In First"
-    end
+    please_sign_in if !signed_in?
+    @user = current_user
+  end
+
+  def please_sign_in
+    render plain: "Please sign in first"
   end
 
   def remove_event
     @user = User.find(params[:user_id])
     @event = Event.find(params[:event_id])
     @user.events.delete(@event)
-    @event.users.delete(@user)
-    redirect_to events_path
+    redirect_to @user
   end
 
   def add_event
     @user = User.find(params[:user_id])
     @event = Event.find(params[:event_id])
-    @user.events << @event
-    @event.users << @user
-    redirect_to events
+    @user.add_event(@event)
+    redirect_to events_path
   end
 
   private

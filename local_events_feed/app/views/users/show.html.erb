@@ -1,21 +1,44 @@
-<h2>Welcome <%= @user.name %></h2>
+<head>
+  <style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 5px;
+  }
+  th {
+    background: lightblue;
+  }
+  </style>
+</head>
 
-<h3>List of Upcoming Events</h3>
+<body>
+  <% if signed_in? %>
+    <p style="text-align:left;">Logged-In: <font color='red'><%= current_user.name %></font>
+    <span style="float:right;"><%= link_to 'Logout', session_path(id: 0), method: :delete %></span></p>
 
-<table>
-<th>
-  <td>Name</td>
-  <td>Wben</td>
-  <td>Location</td>
-  <td colspan=2></td>
-</th>
-<% @user.events.each do |event| %>
-<td><%= event.name %></td>
-<td><%= event.wben %></td>
-<td><%= event.location %></td>
-<td><%= link_to 'Remove' %></td>
-<% end %>
-</table>
-<br>
-<h4><%= link_to 'Events', { :controller => 'events', :user_id => @user[:id] }  %></h4>
-<%= debug(params) if Rails.env.development? %>
+    <h3><%= "#{first_name}'s Events" %></h3>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>When</th>
+        <th>Location</th>
+        <th>Action</th>
+      </tr>
+      <% @user.events.each do |event| %>
+        <tr>
+          <td><%= link_to event.name, event.link %></td>
+          <td><%= event.time %></td>
+          <td><%= event.location %></td>
+          <td><%= link_to 'Remove', { :action => 'remove_event', :user_id => @user.id, :event_id => event.id }, method: :post, :id => "remove-#{event.id}" %></td>
+        </tr>
+      <% end %>
+    </table>
+    <br>
+    <h4><%= link_to 'Browse All Events', { :controller => 'events', :user_id => @user[:id] }  %></h4>
+  <% else %>
+    <h3>Please <%= link_to 'sign in', new_session_path %></h3>
+  <% end %>
+</body>

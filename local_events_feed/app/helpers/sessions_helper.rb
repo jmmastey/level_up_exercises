@@ -27,4 +27,9 @@ module SessionsHelper
     remember_token = User.digest(cookies[:remember_token])
     @current_user || User.find_by(remember_token: remember_token)
   end
+
+  def first_name
+    return 'Someone' unless current_user.name.present? && signed_in?
+    current_user.name.split(/\s+/)[0]
+  end
 end

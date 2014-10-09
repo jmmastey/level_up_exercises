@@ -13,7 +13,7 @@ Given /^a user visits the signup page$/ do
 end
 
 Given /^the user has an account$/ do
-  @user = create_user
+  create_user
 end
 
 Given /^a signed-in user$/ do
@@ -58,12 +58,12 @@ Then /^they should see the signup page$/ do
   expect(page).to have_content(signup_heading_msg)
 end
 
-Then /^they should see the events page$/ do
-  expect(page).to have_content(events_page_msg('John Smith'))
+Then /^they should see their own page$/ do
+  expect(page).to have_content(user_page_msg('John'))
 end
 
 Then /^they should see themselves logged in$/ do
-  expect(page).to have_content(events_page_msg('John Smith'))
+  expect(page).to have_content(logged_in_msg('John Smith'))
 end
 
 Then /^they should see the welcome heading$/ do
@@ -80,27 +80,12 @@ end
 
 
 
-def create_user(name = 'John Smith', email = 'jsmith@besthost.com', password = 'pass-me', confirm = 'pass-me')
-  User.create(name: name,
-              email: email,
-              password: password,
-              password_confirmation: confirm)
-end
-
 def visit_signin_page
   visit(new_session_path)
 end
 
 def visit_signup_page
   visit(new_user_path)
-end
-
-def user_signs_in
-  visit_signin_page
-  @user = create_user
-  fill_in('Email', with: @user.email)
-  fill_in('Password', with: @user.password)
-  click_button("Sign-In")
 end
 
 def welcome_heading_msg
@@ -111,7 +96,7 @@ def signup_heading_msg
   'Please fill out the form below'
 end
 
-def events_page_msg(name)
+def logged_in_msg(name)
   "Logged-In: #{name}"
 end
 

@@ -3,7 +3,7 @@ Feature: Signing up
   Scenario: Successful Signup
     Given a user visits the signup page
     When they submit valid signup information
-    Then they should see the events page
+    Then they should see their own page
     And they should see themselves logged in
 
   Scenario: Unsuccessful Signup

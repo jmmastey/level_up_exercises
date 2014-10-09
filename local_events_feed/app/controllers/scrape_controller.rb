@@ -11,7 +11,7 @@ class ScrapeController < ApplicationController
   private
 
   def scrape_for_new_events
-    (1..1).each do |upcoming_days|
+    (1..5).each do |upcoming_days|
       scrape_for_new_events_in(upcoming_days)
     end
   end
@@ -30,11 +30,10 @@ class ScrapeController < ApplicationController
   end
 
   def convert_to_model(raw_event)
-    event = Event.new
-    event.name = raw_event.name
-    event.location = raw_event.location
-    event.time = raw_event.time
-    event
+    Event.new(name: raw_event.name,
+              location: raw_event.location,
+              time: raw_event.when,
+              link: raw_event.link)
   end
 
   def unique?(event)

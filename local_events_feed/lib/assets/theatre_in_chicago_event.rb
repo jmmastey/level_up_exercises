@@ -21,7 +21,7 @@ class TheatreInChicagoEvent
   end
   
   def when
-    DateTime.parse("#{date}T#{time}-0600")
+    DateTime.parse("#{date}T#{time}+0600")
   end
 
   def match?(other)

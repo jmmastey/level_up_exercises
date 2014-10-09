@@ -8,7 +8,7 @@ Feature: Signing in
     Given a user visits the signin page
     And the user has an account
     When they submit valid signin information
-    Then they should see the events page
+    Then they should see their own page
     And they should see a signout link
 
   Scenario: Successful signout

@@ -18,7 +18,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    please_sign_in if !signed_in?
     @user = current_user
   end
 
@@ -31,13 +30,6 @@ class UsersController < ApplicationController
     @event = Event.find(params[:event_id])
     @user.events.delete(@event)
     redirect_to @user
-  end
-
-  def add_event
-    @user = User.find(params[:user_id])
-    @event = Event.find(params[:event_id])
-    @user.add_event(@event)
-    redirect_to events_path
   end
 
   private

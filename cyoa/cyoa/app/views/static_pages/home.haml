@@ -1,1 +1,17 @@
 %h1 home
+
+- @charts.each do |chart|
+  = "#{chart.scope} on #{chart.created_at}"
+  %table.table
+    %tr
+      %th Position
+      %th Song
+      %th Artist
+    - chart.chart_songs.each do |cs|
+      %tr
+        %td
+          = cs.position
+        %td 
+          = cs.song.name
+        %td 
+          = cs.song.artist.name

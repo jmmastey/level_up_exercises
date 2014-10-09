@@ -25,3 +25,7 @@ end
 When /^I attempt to deactivate with the wrong code too many times$/ do
   attempt_bad_deactivations
 end
+
+Then(/^The bomb should explode$/) do
+  page.should have_content("boom")
+end

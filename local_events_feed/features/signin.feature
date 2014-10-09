@@ -20,3 +20,8 @@ Feature: Signing in
     Given a user visits the signin page
     When they submit invalid signin information
     Then they should see the signin page
+
+  Scenario: User tries to sign in twice
+    Given a signed-in user
+    And a user visits the signin page
+    Then they should see their own page

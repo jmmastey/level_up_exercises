@@ -1,7 +1,7 @@
 Feature: shopper shops
   
   As a shopper
-  I want to a decent shopping experience
+  I want to have a decent shopping experience
   So I can buy a ton of stuff easily
 
   Scenario: add to cart
@@ -20,12 +20,12 @@ Feature: shopper shops
     And I have just added to my cart in an anonymous state
     When I log in
     And I visit the cart page
-    Then I should see both products in my cart
+    Then I should see products from both states in my cart
     
   Scenario: remove from cart
     Given I am on the cart page with product in my cart
-    When I click remove
-    Then I should not see the product
+    When I click the remove button for a specific product
+    Then I should not see the specific product in my cart
     
   Scenario Outline: update quantity
     Given I am on the cart page with product in my cart
@@ -43,8 +43,8 @@ Feature: shopper shops
 
   Scenario: view PDP from cart
     Given I am on the cart page with product in my cart
-    When I click on a product
-    Then I should be on a PDP
+    When I click on a specific product
+    Then I should be on a PDP of the specific product
     
   Scenario Outline: estimate shipping cost
     Given I am on the cart page with product in my cart

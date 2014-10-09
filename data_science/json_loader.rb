@@ -1,4 +1,4 @@
-require 'JSON'
+require "json"
 
 class JSONLoader
   attr_accessor :file_name, :data

@@ -5,7 +5,7 @@ class Dataset
   attr_accessor :results
 
   def initialize(data)
-    @results = data.map { |line| Datum.new(line) }
+    @results = data
   end
 
   def total_sample_size
@@ -13,11 +13,13 @@ class Dataset
   end
 
   def total_in_group(cohort)
-    @results.count { |result| result.cohort == cohort }
+    @results.count { |result| result["cohort"] == cohort }
   end
 
   def number_of_conversions(cohort)
-    @results.count { |result| result.cohort == cohort && result.result == 1 }
+    @results.count do |result|
+      result["cohort"] == cohort && result["result"] == 1
+    end
   end
 
   def percentage_of_conversion(cohort)

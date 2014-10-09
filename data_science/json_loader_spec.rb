@@ -1,14 +1,13 @@
-require_relative 'json_loader'
+require_relative "json_loader"
 
 describe JSONLoader do
-  loader = JSONLoader.new('source_data.json')
-  loader.fetch_data
+  subject(:file_loader) { JSONLoader.new("source_data.json") }
 
-  it "has a legit data source" do
-    expect(loader.file_name).to end_with('.json')
+  context "verify legit data source" do
+    it { expect(file_loader.file_name).to end_with(".json") }
   end
 
-  it "loads data from a data source" do
-    expect(loader.data).not_to be_empty
+  context "load data from data source" do
+    it { expect(file_loader.fetch_data).not_to be_empty }
   end
 end

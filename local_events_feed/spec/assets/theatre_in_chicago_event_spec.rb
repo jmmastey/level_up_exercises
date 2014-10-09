@@ -9,6 +9,7 @@ describe TheatreInChicagoEvent do
     setted_event.name = "Party"
     setted_event.location = " Everywhere     <tag>  "
     setted_event.time = "07:30:00.000"
+    setted_event.link = "http://www.event.com"
     setted_event
   end
 

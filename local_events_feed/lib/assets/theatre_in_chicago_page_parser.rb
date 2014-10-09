@@ -52,8 +52,8 @@ class TheatreInChicagoPageParser
   end
 
   def extract_date_from_current_line
-    month = extract_month_from_current_line
-    return unless month
+    return unless month = extract_month_from_current_line
+    return unless /#{month} (\d+), (\d+)/.match(line)
     day, year = /#{month} (\d+), (\d+)/.match(line).captures
     @date = construct_date(month, day, year)
     @event.date = @date
@@ -73,9 +73,10 @@ class TheatreInChicagoPageParser
 
   def extract_name_from_current_line
     return if @date.empty?
-    match = /<a href=\'http:\/\/www.theatreinchicago.com\/.*\'>(.*)<\/a>/.match(line)
-    return unless match
-    @event.name = match.captures[0]
+    match = /<a href=\'(http:\/\/www.theatreinchicago.com\/.*)\'>(.*)<\/a>/.match(line)
+    return unless match && match.captures.count == 2
+    @event.link = match.captures[0]
+    @event.name = match.captures[1]
   end
 
   def append_location_from_current_line

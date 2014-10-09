@@ -1,7 +1,7 @@
 require 'sinatra/base'
 
 class BombError < Exception; end
-class BombExploaded < Exception; end
+class BombExploded < Exception; end
 
 class Overlord < Sinatra::Application
   STATUS_TAMPLATES = {
@@ -37,6 +37,7 @@ class Overlord < Sinatra::Application
   # Activate
   put '/' do
     raise(BombError, "Bomb cannot be activated now") if bomb_status != :booted
+    raise(BombError, "Invalid time entered") unless params[:time] =~ /^\d+$/
     if params[:code] == session[:activation_code]
       session[:status] = :active
       session[:expire] = Time.now + (params[:time] || 30).to_i
@@ -71,8 +72,8 @@ class Overlord < Sinatra::Application
     }
   end
 
-  error BombExploaded do
-    erb :boom, locals: { status_desc: "Exploaded" }
+  error BombExploded do
+    erb :boom, locals: { status_desc: "Exploded" }
   end
 
   private
@@ -106,7 +107,7 @@ class Overlord < Sinatra::Application
     if session[:status] == :active && Time.now > session[:expire]
       session[:status] = :exploded
     end
-    raise(BombExploaded) if session[:status] == :exploded
+    raise(BombExploded) if session[:status] == :exploded
   end
 
   # start the server if ruby file executed directly

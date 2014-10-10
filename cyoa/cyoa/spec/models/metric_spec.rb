@@ -8,13 +8,13 @@ describe Metric do
   end
 
   let(:service) { Service.new(name: "Grooveshark", url: "http://grooveshark.com") }
+  let(:category) { Category.new(name: "fans") }
 
   subject(:metric) do
     Metric.new(artist: artist,
-               json_data: "{\"metric\":\"facebook\"}",
-               start_on: 2.months.ago,
-               end_on: Time.now,
-               service: service)
+               service: service,
+               category: category,
+               value: 10)
   end
 
   it { is_expected.to be_valid }

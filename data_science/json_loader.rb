@@ -1,13 +1,13 @@
 require "json"
 
 class JSONLoader
-  attr_accessor :file_name, :data
+  attr_accessor :file_name
 
   def initialize(file_name)
     @file_name = file_name
   end
 
   def fetch_data
-    @data = JSON.parse(File.read(@file_name))
+    JSON.parse(File.read(@file_name))
   end
 end

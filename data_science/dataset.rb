@@ -8,15 +8,15 @@ class Dataset
   end
 
   def total_sample_size
-    @results.length
+    results.length
   end
 
   def total_in_group(cohort)
-    @results.count { |result| result["cohort"] == cohort }
+    results.count { |result| result["cohort"] == cohort }
   end
 
   def number_of_conversions(cohort)
-    @results.count do |result|
+    results.count do |result|
       result["cohort"] == cohort && result["result"] == 1
     end
   end

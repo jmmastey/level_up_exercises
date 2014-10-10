@@ -2,9 +2,14 @@ require_relative "spec_helper"
 require_relative "../lib/eve_central/order"
 
 describe EveCentral::Order do
-  let(:order) { EveCentral::Order.new(1000) }
+  let(:blank_order) { EveCentral::Order.new }
+  let(:order) { EveCentral::Order.new(id: 1000) }
 
-  it "can be initialized with an ID" do
+  it "can be initialized without parameters" do
+    expect(blank_order).not_to be_nil
+  end
+
+  it "can be initialized with a hash of stats" do
     expect(order.id).to eq(1000)
   end
 

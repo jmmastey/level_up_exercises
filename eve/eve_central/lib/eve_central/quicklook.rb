@@ -1,5 +1,6 @@
 require "net/http"
 require "nokogiri"
+require "pry"
 require_relative "errors"
 require_relative "xml_helpers"
 
@@ -32,25 +33,26 @@ module EveCentral
     private
 
     def convert_item(quicklook_node)
-      Item.new({
-        id: get_node_int(quicklook_node, "item"),
-        name: get_node_content(quicklook_node, "itemname")
+      Item.new(get_node_int(quicklook_node, "item"),
+               get_node_content(quicklook_node, "itemname"))
+    end
+
+    def convert_order(order_node)
+      Order.new({
+        id: order_node["id"].to_i,
+        region: get_node_int(order_node, "region"),
+        station: convert_station(order_node),
+        security: get_node_float(order_node, "security"),
+        price: get_node_float(order_node, "price"),
+        volume_remaining: get_node_int(order_node, "vol_remain"),
+        min_volume: get_node_int(order_node, "min_volume"),
+        expires: get_node_date(order_node, "expires")
       })
     end
 
     def convert_orders(order_nodes)
       order_nodes.map do |order_node|
-        Order.new({
-          id: order_node["id"].to_i,
-          region: get_node_int(order_node, "region"),
-          station: convert_station(order_node),
-          security: get_node_float(order_node, "security"),
-          price: get_node_float(order_node, "price"),
-          volume_remaining: get_node_int(order_node, "vol_remain"),
-          min_volume: get_node_int(order_node, "min_volume"),
-          expires: get_node_date(order_node, "expires"),
-          reported_time: get_node_datetime(order_node, "reported_time", :no_year)
-        })
+        convert_order(order_node)
       end
     end
 
@@ -69,6 +71,11 @@ module EveCentral
       response_body = Nokogiri::XML(response.body)
       ql_node = response_body.xpath("/evec_api/quicklook")
       convert_quicklook_item(ql_node)
+    end
+
+    def convert_station(order_node)
+      Station.new(get_node_int(order_node, "station"),
+                  get_node_content(order_node, "station_name"))
     end
 
     def create_params(item_id, options)

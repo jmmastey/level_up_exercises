@@ -22,7 +22,10 @@ class Bomb
     if code == deactivation_code
       @bomb_status = :deactivated
     else
-      raise(StandardError, "Too Many Attempts") if @deactivation_attempts <= 0
+      if @deactivation_attempts == 0
+        @bomb_status = :exploded
+        raise(StandardError, "Too Many Attempts")
+      end
     end
   end
 

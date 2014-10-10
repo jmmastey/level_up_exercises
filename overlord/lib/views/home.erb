@@ -2,9 +2,11 @@
 
 <p>This is the main bomb page.</p>
 
-<p>Activation state: <%= @state %></p>
+<p>Activation state: <%= session[:bomb_state] %></p>
 
 <p>
-  <input type="text" id="activation-code" name="activation-code"><br />
-  <input type="button" id="arm-button" name="arm-button" value="Arm the bomb">
+  <form action="/activated" method="POST">
+    <input type="text" id="activation-code" name="activation-code"><br />
+    <input type="submit" id="arm-button" name="arm-button" value="Arm the bomb">
+  </form>
 </p>

@@ -4,16 +4,20 @@ class Overlord < Sinatra::Base
   enable :sessions
 
   get '/' do
-    @state = 'bomb is not activated'
+    # @state = 'bomb is not activated'
+    session[:bomb_state] ||= 'bomb is not activated'
     erb :home
   end
 
-  get '/activated' do
-    @state = 'bomb is activated'
+  post '/activated' do
+    # @state = 'bomb is activated'
+    session[:bomb_state] = 'POST bomb is activated'
+    redirect '/'
   end
 
-  get '/detonated' do
-    @state = 'bomb has blown up'
+  post '/detonated' do
+    # @state = 'bomb has blown up'
+    session[:bomb_state] = 'bomb has blown up'
   end
 
   # start the server if ruby file executed directly

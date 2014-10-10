@@ -2,9 +2,12 @@ require "net/http"
 require "nokogiri"
 require "pry"
 require_relative "errors"
+require_relative "xml_helpers"
 
 module EveCentral
   class Marketstat
+    include XmlHelpers
+
     DEFAULT_URL = "http://api.eve-central.com/api/marketstat"
 
     PARAM_KEY_MAP = {
@@ -56,11 +59,6 @@ module EveCentral
       MarketstatOrderGroup.new(init_params)
     end
 
-    def create_params(item_id, options)
-      options[:item_id] = item_id
-      map_params(options)
-    end
-
     def convert_stats(type_node)
       buy_node = type_node.xpath("buy").first
       sell_node = type_node.xpath("sell").first
@@ -71,16 +69,9 @@ module EveCentral
         all_stats: convert_stat_group(all_node) }
     end
 
-    def get_node_content(parent, xpath)
-      parent.xpath(xpath).first.content
-    end
-
-    def get_node_float(parent, xpath)
-      get_node_content(parent, xpath).to_f
-    end
-
-    def get_node_int(parent, xpath)
-      get_node_content(parent, xpath).to_i
+    def create_params(item_id, options)
+      options[:item_id] = item_id
+      map_params(options)
     end
 
     def map_params(options)
@@ -93,7 +84,7 @@ module EveCentral
     end
 
     def raise_conn_error(code)
-      message = "Unable to connect to API at '#{url}'. Code #{code}"
+      message = "Unable to connect to Marketstat API at '#{url}'. Code #{code}"
       raise ConnectionError, message
     end
 

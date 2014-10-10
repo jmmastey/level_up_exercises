@@ -1,3 +1,4 @@
+require "vcr"
 require_relative "spec_helper"
 require_relative "../lib/eve_central/marketstat.rb"
 
@@ -23,11 +24,16 @@ describe EveCentral::Marketstat do
 
   describe "#request" do
     context "when given a single item ID" do
-      subject(:basic_item_request) { marketstat.request(tritanium_id) }
+      # TODO: Rename request
+      subject(:basic_item_request) do
+        VCR.use_cassette("marketstat_basic_response") do
+          marketstat.request(tritanium_id)
+        end
+      end
 
       it { is_expected.to have(1).items }
 
-      it "has one MarketstatItem with stats for the  requested item ID" do
+      it "has one MarketstatItem with stats for the requested item ID" do
         expect(basic_item_request[0]).to be_a(EveCentral::MarketstatItem)
         expect(basic_item_request[0].item_id).to eq(tritanium_id)
       end
@@ -35,7 +41,9 @@ describe EveCentral::Marketstat do
 
     context "when given a collection of item IDs" do
       subject(:multi_item_request) do
-        marketstat.request([tritanium_id, pyerite_id])
+        VCR.use_cassette("marketstat_multi_response") do
+          marketstat.request([tritanium_id, pyerite_id])
+        end
       end
 
       it "returns a collection of stats for each item requested" do

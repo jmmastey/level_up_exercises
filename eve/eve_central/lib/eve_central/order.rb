@@ -1,3 +1,5 @@
+require "active_model"
+
 module EveCentral
   class Order
     include ActiveModel::Validations
@@ -8,11 +10,11 @@ module EveCentral
       :volume_remaining, :min_volume, :expires, :reported_time
 
     validates_presence_of :id
-    validates :id, :region_id, :volume_remaining, :min_volume, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-    validates :security, :price, numericality: true
+    validates_numericality_of :id, :region_id, :volume_remaining, :min_volume, only_integer: true, greater_than_or_equal_to: 0, allow_nil: true
+    validates_numericality_of :price, greater_than_or_equal_to: 0, allow_nil: true
+    validates_numericality_of :security, allow_nil: true, greater_than_or_equal_to: -1.0, less_than_or_equal_to: 1.0
 
     def initialize(id)
-      @errors = ActiveRecord::Errors.new(self)
       self.id = id
     end
 

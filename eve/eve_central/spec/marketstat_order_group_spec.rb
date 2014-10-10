@@ -33,39 +33,88 @@ describe EveCentral::MarketstatOrderGroup do
     expect(group).not_to be_nil
   end
 
+  it "is never persisted" do
+    expect(group).not_to be_persisted
+  end
+
   describe "#average" do
-    it "is the average item price of orders in this group" do
-      expect(group.average).to eq(average)
+    it "is between the minimum and maximum values" do
+      expect(group).to be_valid
+
+      group.average = group.minimum - 0.1
+      expect(group).not_to be_valid
+
+      group.average = group.maximum + 0.1
+      expect(group).not_to be_valid
     end
   end
 
   describe "#maximum" do
-    it "is the maximum item price of orders in this group" do
-      expect(group.maximum).to eq(maximum)
+    it "requires that it be greater than or equal to the minimum" do
+      expect(group).to be_valid
+
+      group.maximum = group.minimum - 0.1
+      expect(group).not_to be_valid
     end
   end
 
   describe "#median" do
-    it "is the median item price of orders in this group" do
-      expect(group.median).to eq(median)
+    it "is between the minimum and maximum values" do
+      expect(group).to be_valid
+
+      group.median = group.minimum - 0.1
+      expect(group).not_to be_valid
+
+      group.median = group.maximum + 0.1
+      expect(group).not_to be_valid
     end
   end
 
   describe "#minimum" do
-    it "is the minimum item price of orders in this group" do
-      expect(group.minimum).to eq(minimum)
+    it "requires that it be non-negative" do
+      expect(group).to be_valid
+
+      group.minimum = -1
+      expect(group).not_to be_valid
+    end
+  end
+
+  describe "#percentile" do
+    it "requires that it be between 0 and 100, inclusive" do
+      group.percentile = 0
+      expect(group).to be_valid
+
+      group.percentile = 100
+      expect(group).to be_valid
+
+      group.percentile = -0.1
+      expect(group).not_to be_valid
+
+      group.percentile = 100.1
+      expect(group).not_to be_valid
     end
   end
 
   describe "#standard_deviation" do
-    it "is the standard deviation of item prices of orders in this group" do
-      expect(group.standard_deviation).to eq(standard_deviation)
+    it "requires that it be non-negative" do
+      expect(group).to be_valid
+
+      group.standard_deviation = -1
+      expect(group).not_to be_valid
     end
   end
 
   describe "#volume" do
-    it "is the total volume of items of orders in this group" do
-      expect(group.volume).to eq(volume)
+    it "requires that it be an integer" do
+      group.volume = 2.3
+      expect(group).not_to be_valid
+    end
+
+    it "requires that it be non-negative" do
+      expect(group).to be_valid
+
+      group.volume = -1
+      expect(group).not_to be_valid
     end
   end
 end

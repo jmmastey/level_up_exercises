@@ -14,30 +14,27 @@ Feature: Create a cool bomb thingy
     Given I visit the activation page
 
   @activation_code
-  Scenario: Configure bomb with activation code
+  Scenario: Activate the bomb
     Given Configure bomb with codes '1111' and '8888'
-    When I fill in '1111' to activate the bomb
     Then I should see 'Activated'
-
-  Scenario: Verify only numeric inputs are accepted
-    Given I visit the activation page
-    When I fill in 'ZZZZ' to activate the bomb
-    Then I should see 'Deactivated'
 
   Scenario: Deactivate the bomb
     Given Configure bomb with codes '2222' and '0000'
-    When I fill in '2222' to deactivate the bomb
+    When I fill in '0000' to deactivate the bomb
     Then I should see 'Deactivated'
 
   Scenario: Input incorrect deactivation code 3 times
-    Given I attempt to deactivate the bomb with incorrect activation codes
-    When I fill in '3333', '3334' and '3335' to deactivate the bomb
+    Given Configure bomb with codes '2222' and '3151'
+    #When I fill in '1234' to deactivate the bomb
+    #When I fill in '5678' to deactivate the bomb
+    When I fill in '8544' to deactivate the bomb
     Then I should see the bomb as 'Exploded'
 
   Scenario: Attempting to activate a already activated bomb
     Given Configure bomb with codes '2222' and '0000'
-    When I fill in '2222' to activate the bomb
-    When I attempt to go back to the activation page
+    Then I should see 'Activated'
+    Given I visit the activation page
+    Given Configure bomb with codes '2222' and '0000'
     Then I should see 'Activated'
 
   Scenario: When user does not enter deactivation code on activated bomb

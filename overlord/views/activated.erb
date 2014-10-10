@@ -1,4 +1,12 @@
 <H1>Activated</H1>
 
-The Activation Code: <% @activation_code %>
-Deactivation Code: <% @deactivation_code %>
+<form action="deactivate" method="POST">
+
+  <% if @errors %>
+    Errors: <%= @errors %>
+  <% end %>
+
+  <label for="deactivation_code">Enter your deactivation code:</label>
+  <input type="text" name="deactivation_code">
+  <input class="button" type="submit" name="deactivate" value="Deactivate">
+</form>

@@ -11,14 +11,10 @@ def configure_bomb(act_code, deact_code)
 end
 
 def activation_page
-  visit 'http://localhost:4567'
-end
-
-def activate_bomb(activation_code)
-  fill_in 'activation', :with => activation_code
-  click_button 'Activate'
+  visit host_url
 end
 
 def deactivate_bomb(deactivation_code)
-  fill_in 'deactivation', :with => deactivation_code
+  fill_in 'deactivation_code', :with => deactivation_code
+  click_button 'Deactivate'
 end

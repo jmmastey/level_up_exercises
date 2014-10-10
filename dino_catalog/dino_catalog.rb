@@ -2,23 +2,7 @@
 
 #!/usr/bin/ruby -w
 
-require "./object_set"
-
-class TestSet
-  include ObjectSet
-
-  def initialize
-    @items = []
-  end
-
-  def []=(int, val)
-    @items[int] = val
-  end
-
-  def each
-    @items.each { |item| yield item }
-  end
-end
+require "./queriable_enumerable"
 
 class Foo
   attr_accessor :bar
@@ -30,7 +14,7 @@ class Foo
   end
 end
 
-a = TestSet.new
+a = QueriableEnumerable.new([])
 c = -1 
 a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
 a[c+=1] = Foo.new(c, "Next C IS #{c+1}")

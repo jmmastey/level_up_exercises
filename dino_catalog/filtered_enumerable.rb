@@ -1,7 +1,7 @@
 # An Enumerable collection of objects that's qualified by a filter condition
-module ObjectSet
-  class FilteredObjectSet
-    include ObjectSet
+module FilteringEnumerable
+  class FilteredEnumerable
+    include FilteringEnumerable
     
     def initialize(parent, attribute, match_expressions)
       @parent = parent

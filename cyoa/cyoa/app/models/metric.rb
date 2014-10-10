@@ -3,5 +3,6 @@ class Metric < ActiveRecord::Base
   belongs_to :service
 
   validates :artist, presence: true
-  validates :service, presence: true
+  #validates :service, presence: true
+
 end

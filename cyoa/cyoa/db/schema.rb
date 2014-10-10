@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008162015) do
+ActiveRecord::Schema.define(version: 20141010161748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 20141008162015) do
     t.integer  "grooveshark_id"
     t.integer  "nbs_id"
     t.string   "music_brainz_id"
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "chart_songs", force: true do |t|
@@ -45,12 +51,12 @@ ActiveRecord::Schema.define(version: 20141008162015) do
 
   create_table "metrics", force: true do |t|
     t.integer  "artist_id"
-    t.json     "json_data"
-    t.datetime "start_on"
-    t.datetime "end_on"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "service_id"
+    t.integer  "value"
+    t.string   "nbs_date"
+    t.integer  "category_id"
   end
 
   create_table "services", force: true do |t|

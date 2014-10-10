@@ -7,6 +7,10 @@ class Artist < ActiveRecord::Base
   validates :grooveshark_id, uniqueness: true, allow_nil: true, allow_blank: true
   validates :nbs_id, uniqueness: true, allow_nil: true, allow_blank: true
 
+  after_create :retrieve_initial_metrics 
+
+
+
   def update_metrics #(options = {})
     metric = Metric.new(start_on: 3.months.ago,
                         end_on: Time.now,
@@ -17,6 +21,12 @@ class Artist < ActiveRecord::Base
   end
 
   #private
+  def retrieve_initial_metrics
+
+  end
+
+  def process_metrics
+  end
 
   def nbs_metrics
     update_api_ids
@@ -35,6 +45,7 @@ class Artist < ActiveRecord::Base
 end
 
 # Questions:
-# Metrics: save all as json data 
+# Metrics: save all as json data
 #          OR
 #          process when retrieve data and save for that particular service
+# Where to put callbacks?

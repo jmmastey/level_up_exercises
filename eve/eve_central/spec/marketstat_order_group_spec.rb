@@ -9,7 +9,7 @@ describe EveCentral::MarketstatOrderGroup do
   let(:minimum) { 1.00 }
   let(:percentile) { 4.11 }
   let(:standard_deviation) { 1.40 }
-  let(:volume) { 47670156708 }
+  let(:volume) { 47_670_156_708 }
 
   let(:params) do
     {

@@ -4,7 +4,7 @@ require_relative "../lib/eve_central/station"
 describe EveCentral::Station do
   include_context "station_ids"
 
-  let(:default_station) { EveCentral::Station.new(amarr6_tct_id)}
+  let(:default_station) { EveCentral::Station.new(amarr6_tct_id) }
   let(:named_station) do
     EveCentral::Station.new(amarr6_tct_id, amarr6_tct_name)
   end

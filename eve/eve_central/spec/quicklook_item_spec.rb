@@ -14,8 +14,8 @@ describe EveCentral::QuicklookItem do
   let(:empty_ql) { EveCentral::QuicklookItem }
 
   let(:orders) do
-    [ double("Order 1", valid?: true),
-      double("Order 2", valid?: true) ]
+    [double("Order 1", valid?: true),
+     double("Order 2", valid?: true)]
   end
 
   it "can be initialized with no parameters" do
@@ -24,11 +24,9 @@ describe EveCentral::QuicklookItem do
 
   context "with valid item and orders" do
     subject(:ql) do
-      EveCentral::QuicklookItem.new({
-        item: item,
-        buy_orders: orders,
-        sell_orders: orders
-      })
+      EveCentral::QuicklookItem.new(item: item,
+                                    buy_orders: orders,
+                                    sell_orders: orders)
     end
 
     it { is_expected.to be_valid }
@@ -38,11 +36,9 @@ describe EveCentral::QuicklookItem do
     let(:bad_item) { double("Bad Item", valid?: false) }
 
     subject(:ql) do
-      EveCentral::QuicklookItem.new({
-        item: bad_item,
-        buy_orders: orders,
-        sell_orders: orders
-      })
+      EveCentral::QuicklookItem.new(item: bad_item,
+                                    buy_orders: orders,
+                                    sell_orders: orders)
     end
 
     it { is_expected.not_to be_valid }
@@ -50,16 +46,14 @@ describe EveCentral::QuicklookItem do
 
   context "with at least one invalid order" do
     let(:bad_orders) do
-      [ double("Order 1", valid?: true),
-        double("Order 2", valid?: false) ]
+      [double("Order 1", valid?: true),
+       double("Order 2", valid?: false)]
     end
 
     subject(:bad_ql) do
-      EveCentral::QuicklookItem.new({
-        item: item,
-        sell_orders: bad_orders,
-        buy_orders: orders
-      })
+      EveCentral::QuicklookItem.new(item: item,
+                                    sell_orders: bad_orders,
+                                    buy_orders: orders)
     end
 
     it { is_expected.not_to be_valid }

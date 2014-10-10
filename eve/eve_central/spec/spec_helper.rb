@@ -9,9 +9,13 @@ RSpec.shared_context "item_ids" do
 end
 
 RSpec.shared_context "station_ids" do
-  let(:amarr6_tct_id) { 60008950 }
-  let(:amarr6_tct_name) { "Amarr VI (Zorast) - Moon 2 - Theology Council Tribunal" }
-  let(:amarr8_efa_id) { 60008494 }
+  let(:amarr6_tct_id) { 60_008_950 }
+
+  let(:amarr6_tct_name) do
+    "Amarr VI (Zorast) - Moon 2 - Theology Council Tribunal"
+  end
+
+  let(:amarr8_efa_id) { 60_008_494 }
   let(:amarr8_efa_name) { "Amarr VIII (Oris) - Emperor Family Academy" }
 end
 

@@ -11,7 +11,6 @@ class Robot
 
   def generate_new_name
     alphabet = ('A'..'Z').to_a
-
     (2.times.map { alphabet.sample } + 3.times.map { rand(10) }).join
   end
 

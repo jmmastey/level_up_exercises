@@ -14,7 +14,7 @@ class Foo
   end
 end
 
-a = QueriableEnumerable.new([])
+a = QueriableEnumerable.new()
 c = -1 
 a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
 a[c+=1] = Foo.new(c, "Next C IS #{c+1}")

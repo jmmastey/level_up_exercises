@@ -5,7 +5,7 @@ require "./filtering_enumerable"
 class QueriableEnumerable
   include FilteringEnumerable
 
-  def initialize(an_enumerable)
+  def initialize(an_enumerable = [])
     @wrapped_enumerable = an_enumerable
   end
 

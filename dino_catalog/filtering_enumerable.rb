@@ -1,6 +1,6 @@
 require "./filtered_enumerable"
 
-# An Enumerable, queriable collection of objects that acting as factory for a
+# An Enumerable, queriable collection of objects that acts as factory for a
 # filtered view of its items through a proxy interface to the underlying items'
 # attributes.
 module FilteringEnumerable

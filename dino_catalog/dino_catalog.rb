@@ -40,5 +40,4 @@ a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
 a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
 a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
 
-puts a.bar(3).inspect
 a.bar(3,4,5).each { |c| puts c.inspect, "\n" }

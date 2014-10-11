@@ -25,14 +25,16 @@
         <th>Name</th>
         <th>When</th>
         <th>Location</th>
-        <th>Action</th>
-      </tr>
+        <th>Remove</th>
+		<th>Calendar</th>
+    </tr>
       <% @user.events.each do |event| %>
         <tr>
           <td><%= link_to event.name, event.link %></td>
           <td><%= event.time %></td>
           <td><%= event.location %></td>
-          <td><%= link_to 'Remove', { :action => 'remove_event', :user_id => @user.id, :event_id => event.id }, method: :post, :id => "remove-#{event.id}" %></td>
+          <td><%= link_to 'Remove', { :action => 'remove_event', :event_id => event.id }, method: :post, :id => "remove-#{event.id}" %></td>
+		  <td><%= link_to 'Update', { :action => 'add_event_to_calendar', :event_id => event.id }, method: :post, :format => :ics, :id => "add_cal-#{event.id}" %></td>
         </tr>
       <% end %>
     </table>

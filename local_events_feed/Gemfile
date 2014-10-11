@@ -39,6 +39,7 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'bcrypt-ruby', '3.1.2'
+gem 'icalendar', '~> 2.2.0'
 
 group :development, :test do
   gem 'rspec-rails'

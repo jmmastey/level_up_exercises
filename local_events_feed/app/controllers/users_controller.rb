@@ -22,10 +22,15 @@ class UsersController < ApplicationController
   end
 
   def remove_event
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:id])
     @event = Event.find(params[:event_id])
     @user.events.delete(@event)
     redirect_to @user
+  end
+
+  def add_event_to_calendar
+    @event = Event.find(params[:event_id])
+    headers['Content-Type'] = "text/calendar; charset=UTF-8"
   end
 
   private

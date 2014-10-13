@@ -15,6 +15,10 @@ class Event < ActiveRecord::Base
     list.any? { |other| other.same_as?(self) }
   end
 
+  def unique?
+    !has_match_in?(Event.all)
+  end
+
   def to_chicago_time_s
     time.in_time_zone("Central Time (US & Canada)").strftime('%m/%d/%Y %I:%M %P')
   end

@@ -30,8 +30,7 @@ class TheatreInChicagoEvent
 
   def clean
     location.gsub!(/<[^>]*>/, '')
-    location.gsub!(/\s+/, ' ')
-    location.strip!
+    location.squish!
     self
   end
 

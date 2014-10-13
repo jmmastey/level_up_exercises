@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby 
+#!/usr/bin/env ruby
 require 'optparse'
 require 'optparse/time'
 require 'ostruct'
@@ -7,10 +7,9 @@ require_relative 'Dinosaur.rb'
 require_relative 'CSVParse.rb'
 
 class Optparse
-
-  #
-  # Return a structure describing the options.
-  #
+#
+# Return a structure describing the options.
+#
 LARGE_WEIGHT = 2000
   # collect the filters in struct and execute them at the end
   def self.parse(args)
@@ -25,48 +24,56 @@ LARGE_WEIGHT = 2000
       opts.separator "Specific options:"
 
       # CSV as argument
-      opts.on("-f", "--file [inputCSV]",
+      opts.on("-f",
+              "--file [inputCSV]",
               "Input the file to be used") do |f|
         options.dinosaurs = parser.parse_csv(f)
       end
 
-      opts.on("-a", "--all",
-              "Display all dinosaurs") do |a|
+      opts.on("-a",
+              "--all",
+              "Display all dinosaurs") do
         options.dinosaurs.each do |dino|
           puts dino.name
         end
       end
 
-      opts.on("-b", "--bipeds",
+      opts.on("-b",
+              "--bipeds",
               "Display all dinosaurs that were bipeds") do
-        options.dinosaurs.keep_if { |dino| dino.walking == 'Biped'}
+        options.dinosaurs.keep_if { |dino| dino.walking == 'Biped' }
       end
 
-      opts.on("-c", "--carnivores",
+      opts.on("-c",
+              "--carnivores",
               "Display all dinosaurs that were carnivores") do
-        options.dinosaurs.keep_if { |dino| dino.carnivore == "Yes"}
+        options.dinosaurs.keep_if { |dino| dino.carnivore == "Yes" }
       end
 
-      opts.on("-C", "--non-carnivores",
+      opts.on("-C", 
+              "--non-carnivores",
               "Display all dinosaurs that were carnivores") do
-        options.dinosaurs.keep_if { |dino| dino.carnivore != "Yes"}
+        options.dinosaurs.keep_if { |dino| dino.carnivore != "Yes" }
       end
 
-      opts.on("-p", "--period [period]",
+      opts.on("-p",
+              "--period [period]",
               "Display all dinosaurs from a certain period") do |p|
-        options.dinosaurs.keep_if { |dino| dino.period.downcase.include? p.downcase}
+        options.dinosaurs.keep_if { |dino| dino.period.downcase.include? p.downcase }
       end
 
-      opts.on("-s", "--small",
+      opts.on("-s",
+              "--small",
               "Display all small dinosaurs") do
-        options.dinosaurs.keep_if { |dino| dino.weight.to_i <= LARGE_WEIGHT}
+        options.dinosaurs.keep_if { |dino| dino.weight.to_i <= LARGE_WEIGHT }
       end
 
-      opts.on("-l", "--large",
+      opts.on("-l",
+              "--large",
               "Display all large dinosaurs") do
-        options.dinosaurs.keep_if { |dino| dino.weight.to_i > LARGE_WEIGHT}
+        options.dinosaurs.keep_if { |dino| dino.weight.to_i > LARGE_WEIGHT }
       end
-    end 
+    end
     opt_parser.parse!(args)
     # puts options.dinosaurs
     options

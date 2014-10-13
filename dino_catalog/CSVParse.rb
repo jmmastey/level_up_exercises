@@ -12,7 +12,7 @@ class CSVParse
 	Dinos =[]
 
 	def parse_csv input_csv
-		CSV.foreach(input_csv, 
+		CSV.foreach(input_csv,
 			:headers => true,
 			:header_converters => [:downcase,
 			 lambda { |h| HEADER_TAG[h] || h},

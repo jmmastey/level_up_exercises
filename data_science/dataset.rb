@@ -33,14 +33,19 @@ class Dataset
     ((Math.sqrt(p * (1 - p) / n)) * 1.96)
   end
 
+  def all_group_types
+    results.map { |result| result["cohort"] }.uniq
+  end
+
   def calculate_probability
-    click_a = number_of_conversions('A')
-    click_b = number_of_conversions('B')
-    groups =
-    {
-      groupa: { success: click_a, failure: (total_in_group('A') - click_a) },
-      groupb: { success: click_b, failure: (total_in_group('B') - click_b) },
-    }
+    groups = {}
+
+    all_group_types.each do |group|
+      clicks = number_of_conversions(group)
+      total = total_in_group(group)
+
+      groups[group] = { success: clicks, failure: (total - clicks) }
+    end
 
     ABAnalyzer::ABTest.new(groups).chisquare_p
   end

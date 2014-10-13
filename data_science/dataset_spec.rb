@@ -2,7 +2,7 @@ require_relative 'json_loader'
 require_relative 'dataset'
 
 describe Dataset do
-  subject(:json) { JSONLoader.new('source_data.json') }
+  let(:json) { JSONLoader.new('source_data.json') }
   subject(:dataset) { Dataset.new(json.fetch_data) }
 
   context "total sample size" do

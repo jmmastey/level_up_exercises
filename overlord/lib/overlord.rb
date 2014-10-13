@@ -24,19 +24,41 @@ class Overlord < Sinatra::Base
 
   post '/switch' do
     if session[:bomb_state] == 'activated'
-      if session[:activate_code] == params[:code]
-        session[:attempts] = 0
-      elsif session[:deactivate_code] == params[:code]
-        update_bomb_state 'not activated'
-      else
-        session[:attempts] += 1
-        # update_bomb_state 'activated'
-      end
+      check_deactivate_code(params[:code])
     else
-      update_bomb_state 'activated'
+      check_activate_code(params[:code])
     end
 
+    check_for_explosion
+
     redirect '/bomb'
+  end
+
+  get '/explosion' do
+    erb :explosion
+  end
+
+  def check_activate_code(code)
+    return unless session[:activate_code] == code
+
+    update_bomb_state 'activated'
+    session[:attempts] = 0
+  end
+
+  def check_deactivate_code(code)
+    if session[:deactivate_code] == code
+      update_bomb_state 'not activated'
+      session[:attempts] = 0
+    else
+      session[:attempts] += 1
+    end
+  end
+
+  def check_for_explosion
+    return if session[:attempts] < 3
+
+    update_bomb_state 'exploded'
+    redirect '/explosion'
   end
 
   def update_bomb_state(state)

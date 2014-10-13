@@ -1,10 +1,10 @@
-# DinoDiet
+# Diet
 #
 # Objects that represent the various specific types of diets that dinosaurs can have.
-class DinoDiet
+class Dinodex::Diet
   
-  attr_reader :diet           # What such a diet is called (string)
-  attr_reader :carnivorous    # Whether the diet is considered carnivorous (boolean)
+  attr_reader :diet           # What such a diet is called
+  attr_reader :carnivorous    # Whether the diet is considered carnivorous
 
   def initialize(diet_name, is_carnivore)
     @diet, @carnivorous = diet_name, is_carnivore

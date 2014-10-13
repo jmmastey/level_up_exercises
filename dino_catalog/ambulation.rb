@@ -1,7 +1,7 @@
-# DinoAmbulation
+# Ambulation
 #
 # Class handling and representing dinosaur locomotion (bi/quradrupedalism).
-class DinoAmbulation
+class Dinodex::Ambulation
 
   attr_reader :ambulation     # (string) descriptive noun
 

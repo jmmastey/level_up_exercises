@@ -1,24 +1,27 @@
+require "./attribute_conditioned_enumerable"
+
 # An Enumerable collection of objects that's qualified by a filter condition
 module FilteringEnumerable
-  class FilteredEnumerable
-    include FilteringEnumerable
+  class AttributeMatchingEnumerable < AttributeConditionedEnumerable
     
-    def initialize(parent, attribute, match_expressions)
-      @parent = parent
-      @filter_attribute = attribute
-      @match_expressions = match_expressions
-    end
+    attr_reader :match_expressions
 
-    # Implements Enumerable
-    def each
-      @parent.each { |item| yield item if keep_item?(item) }
+    def initialize(parent, filter_attribute, match_expressions)
+      super(parent, filter_attribute)
+      @match_expressions = match_expressions
     end
 
     private
 
     def keep_item?(item)
-      item.respond_to?(@filter_attribute) && 
-        @match_expressions.include?(item.send(@filter_attribute)) 
+      @match_expressions.include?(item_attr_val(item))
     end
+  end
+end
+
+# Add interface to FilteringEnumerable mixin to expose this functionality
+module FilteringEnumerable
+  def matches(attribute, *match_expressions)
+    FilteredEnumerable.new(self, attribute, match_expressions)
   end
 end

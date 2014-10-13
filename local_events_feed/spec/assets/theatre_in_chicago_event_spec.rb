@@ -33,4 +33,8 @@ describe TheatreInChicagoEvent do
   it 'matches another event that has identical fields' do
     expect(setted_event.match?(other_event))
   end
+
+  it 'converts to an Event model' do
+    expect(setted_event.to_event_model).to be_valid
+  end
 end

@@ -24,16 +24,9 @@ class ScrapeController < ApplicationController
 
   def add(raw_events)
     raw_events.each do |raw_event|
-      event = convert_to_model(raw_event)
+      event = raw_event.to_event_model
       event.save if unique?(event)
     end
-  end
-
-  def convert_to_model(raw_event)
-    Event.new(name: raw_event.name,
-              location: raw_event.location,
-              time: raw_event.when,
-              link: raw_event.link)
   end
 
   def unique?(event)

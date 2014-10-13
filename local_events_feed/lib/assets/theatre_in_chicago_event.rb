@@ -34,4 +34,11 @@ class TheatreInChicagoEvent
     location.strip!
     self
   end
+
+  def to_event_model
+    Event.new(name: self.name,
+              location: self.location,
+              time: self.when,
+              link: self.link)
+  end
 end

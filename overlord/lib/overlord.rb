@@ -4,7 +4,7 @@ class Overlord < Sinatra::Base
   enable :sessions
 
   get '/' do
-    update_bomb_state 'not booted'
+    session[:bomb_state] = 'not booted'
     erb :home
   end
 
@@ -13,7 +13,7 @@ class Overlord < Sinatra::Base
       redirect '/'
     end
 
-    update_bomb_state 'not activated'
+    session[:bomb_state] = 'not activated'
 
     session[:activate_code] = params[:activation_code]
     session[:deactivate_code] = params[:deactivation_code]
@@ -49,13 +49,13 @@ class Overlord < Sinatra::Base
   def check_activate_code(code)
     return unless session[:activate_code] == code
 
-    update_bomb_state 'activated'
+    session[:bomb_state] = 'activated'
     session[:attempts] = 0
   end
 
   def check_deactivate_code(code)
     if session[:deactivate_code] == code
-      update_bomb_state 'not activated'
+      session[:bomb_state] = 'not activated'
       session[:attempts] = 0
     else
       session[:attempts] += 1
@@ -65,12 +65,8 @@ class Overlord < Sinatra::Base
   def check_for_explosion
     return if session[:attempts] < 3
 
-    update_bomb_state 'exploded'
+    session[:bomb_state] = 'exploded'
     redirect '/explosion'
-  end
-
-  def update_bomb_state(state)
-    session[:bomb_state] = state
   end
 
   # start the server if ruby file executed directly

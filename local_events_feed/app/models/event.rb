@@ -5,10 +5,12 @@ class Event < ActiveRecord::Base
   validates :location, presence: true
   validates :time, presence: true
   validates :link, presence: true
+  validate :unique?
+
   has_and_belongs_to_many :users
 
   def same_as?(other)
-    name == other.name && location == other.location && time == other.time
+    name == other.name && location == other.location && time == other.time && link == other.link
   end
 
   def has_match_in?(list)

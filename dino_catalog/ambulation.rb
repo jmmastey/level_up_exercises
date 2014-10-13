@@ -10,6 +10,5 @@ class Dinodex::Ambulation
   end
 
     BIPEDAL       = new("bipedal"),
-    QUADRUPEDAL   = new("quadrupedal"),
-    UNKNOWN       = new("unknown")
+    QUADRUPEDAL   = new("quadrupedal")
 end

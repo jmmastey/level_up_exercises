@@ -14,5 +14,4 @@ class Dinodex::TimePeriod
   TRIASSIC          = new("Triassic")
   JURASSIC          = new("Jurassic")
   CRETACEOUS        = new("Cretaceous")
-  UNKOWN_PERIOD     = new("Unknown")
 end 

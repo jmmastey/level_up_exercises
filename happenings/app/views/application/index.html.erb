@@ -1,6 +1,6 @@
 <div class="panel panel-default col-xs-4">
 	  <div class="panel-heading row">
-			<h3 class="panel-title">Upcoming Events</h3>
+			<h3 class="panel-title"><%= link_to "Upcoming Events", events_path %></h3>
 	  </div>
 	  <div class="panel-body">
         <%= render @events  %>
@@ -8,7 +8,7 @@
 </div>
 <div class="panel panel-default col-xs-4 col-xs-offset-1">
 	  <div class="panel-heading row">
-			<h3 class="panel-title">Venues</h3>
+			<h3 class="panel-title"><%= link_to "Venues", venues_path %></h3>
 	  </div>
 	  <div class="panel-body">
         <%= render @venues  %>

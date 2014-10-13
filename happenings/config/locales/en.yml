@@ -23,5 +23,5 @@ en:
   hello: "Hello world"
   time:
     formats:
-        event_date_format: "%A, %B %d @%I %p"
+        event_date_format: "%A, %b %d @ %l:%M %p %Z"
 

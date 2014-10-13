@@ -2,7 +2,9 @@
     <ul class="list-group ">
         <li class="list-group-item">
             <h3 class="list-group-item-heading"><%= link_to event.name, event_path(event) %>
+                <% if event.venue %>
                     <span class="h4">@ <%= link_to event.venue.name, venue_path(event.venue) %></span>
+                <% end %>
             </h3>
 
             <div class="list-group-item-text">

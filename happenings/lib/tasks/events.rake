@@ -12,7 +12,7 @@ namespace :events do
 
     # write your nokogiri scripts here or
     #
-    require_relative 'sites/theater_in_chicago'
+    require_relative 'sites/theater_scraper'
     #
     # them from other files.
 

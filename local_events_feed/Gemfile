@@ -40,6 +40,7 @@ gem 'spring',        group: :development
 
 gem 'bcrypt-ruby', '3.1.2'
 gem 'icalendar', '~> 2.2.0'
+gem 'whenever'
 
 group :development, :test do
   gem 'rspec-rails'

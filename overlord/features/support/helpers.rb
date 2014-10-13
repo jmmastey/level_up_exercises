@@ -7,7 +7,12 @@ end
 def configure_bomb(act_code, deact_code)
   fill_in 'activation_code', :with => act_code
   fill_in 'deactivation_code', :with => deact_code
-  click_button 'Go Baby!'
+  click_button 'Configure'
+end
+
+def activate_bomb(act_code)
+  fill_in 'activation_code', :with => act_code
+  click_button 'Activate!'
 end
 
 def activation_page

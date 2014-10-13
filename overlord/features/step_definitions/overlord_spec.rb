@@ -13,11 +13,7 @@ Then(/^I should see 'Activated'$/) do
 end
 
 Then(/^I should see 'Deactivated'$/) do
-  expect(page).to have_content("Deactivated")
-end
-
-Given(/^I attempt to deactivate the bomb with incorrect activation codes$/) do
-  deactivate_bomb(1111)
+  expect(page).to have_content("Phew")
 end
 
 Then(/^I should see the bomb as 'Exploded'$/) do
@@ -29,13 +25,8 @@ Then(/^I should not be able to use any of the buttons$/) do
 end
 
 When(/^I do nothing on the deactivation page for 30 seconds$/) do
-  pending
-
-  activation_page
-  configure_bomb(1111,2222)
-  activate_bomb(1111)
   sleep(30)
-  expect(page).to have_content("Exploded")
+  expect(page).to have_content("BOOM")
 end
 
 When(/^I fill in '(\d+)' to deactivate the bomb$/) do |arg1|
@@ -43,5 +34,14 @@ When(/^I fill in '(\d+)' to deactivate the bomb$/) do |arg1|
 end
 
 When(/^I snip the wire$/) do
-  pending
+  click_button 'snip'
+  expect(page).to have_content("Phew")
+end
+
+When(/^I activate the bomb with code '(\d+)'$/) do |arg1|
+  activate_bomb(arg1)
+end
+
+Then(/^I should remain on the activation page$/) do
+  expect(page).to have_content("Enter activation code")
 end

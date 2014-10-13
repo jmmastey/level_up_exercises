@@ -4,7 +4,7 @@ end
 
 Given(/^I booted the bomb$/) do
   visit "/"
-  click_button("arm-button")
+  click_button("boot-button")
 end
 
 Given(/^I activated the bomb$/) do

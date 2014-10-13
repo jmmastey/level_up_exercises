@@ -5,6 +5,11 @@ describe User do
   let(:user) { create_user('Kevin Kline', 'coolguy@besthost.com') }
   let(:events) { create_events }
   let(:event) { events[0] }
+
+  let(:duplicate_event) do
+    create_event(event.name, event.location, event.time, event.link)
+  end
+
   let(:user_with_events) do
     events.each { |event| user.add_event(event)}
     user
@@ -25,5 +30,10 @@ describe User do
   it "can delete an event from its list and shrink event's users" do
     user_with_events
     expect { user_with_events.remove_event(event) }.to change{ event.users.count }.from(1).to(0)
+  end
+
+  it "will not add duplicate events" do
+    user_with_events
+    expect { user_with_events.add_event(duplicate_event) }.not_to change{ user_with_events.events.count }
   end
 end

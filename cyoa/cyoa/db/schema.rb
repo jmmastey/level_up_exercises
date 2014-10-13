@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010161748) do
+ActiveRecord::Schema.define(version: 20141013150932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,9 +54,10 @@ ActiveRecord::Schema.define(version: 20141010161748) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "service_id"
-    t.integer  "value"
+    t.integer  "value",       limit: 8
     t.string   "nbs_date"
     t.integer  "category_id"
+    t.date     "recorded_on"
   end
 
   create_table "services", force: true do |t|

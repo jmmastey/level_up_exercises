@@ -1,5 +1,9 @@
-Given(/^The bomb is available$/) do
+Given(/^The bomb is not booted$/) do
   visit "/"
+end
+
+Given(/^The bomb is available$/) do
+  visit "/bomb"
 end
 
 When(/^The bomb is booted$/) do
@@ -8,10 +12,6 @@ end
 
 Then(/^The bomb should be activated$/) do
   pending # express the regexp above with the code you wish you had
-end
-
-Given(/^The bomb is activated$/) do
-  visit "/activated"
 end
 
 When(/^The deactivation code is used$/) do

@@ -5,8 +5,9 @@
 <p>Activation state: <%= session[:bomb_state] %></p>
 
 <p>
-  <form action="/activated" method="POST">
-    <input type="text" id="activation-code" name="activation-code"><br />
-    <input type="submit" id="arm-button" name="arm-button" value="Arm the bomb">
+  <form action="/boot" method="POST">
+    Activation code <input type="text" id="activation_code" name="activation_code" value="1234"><br />
+    Deactivation code <input type="text" id="deactivation_code" name="deactivation_code" value="0000"><br />
+    <input type="submit" id="arm-button" name="arm-button" value="Boot the bomb">
   </form>
 </p>

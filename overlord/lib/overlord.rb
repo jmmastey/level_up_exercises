@@ -4,53 +4,43 @@ class Overlord < Sinatra::Base
   enable :sessions
 
   get '/' do
-    session[:bomb_state] ||= 'not booted'
-    session[:attempts] = 0
+    update_bomb_state 'not booted'
     erb :home
   end
 
-  get '/inactive' do
-    # session[:bomb_state] = 'inactive'
+  post '/boot' do
+    update_bomb_state 'not activated'
+
+    session[:activate_code] = params[:activation_code]
+    session[:deactivate_code] = params[:deactivation_code]
+    session[:attempts] = 0
+
+    redirect '/bomb'
+  end
+
+  get '/bomb' do
     erb :bomb
   end
 
-  get '/active' do
-    # session[:bomb_state] = 'active'
-    erb :bomb
-  end
-
-  get '/explode' do
-    # session[:bomb_state] = 'blown up'
-    erb :explode
-  end
-
-  post '/booted' do
-    session[:bomb_state] = 'inactive'
-    session[:activate_code] ||= 1234
-    session[:deactivate_code] ||= 0000
-    redirect '/inactive'
-  end
-
-  post '/activated' do
-    redirect '/inactive' unless params[:code] == session[:activate_code]
-
-    session[:bomb_state] = 'active'
-    redirect '/active'
-  end
-
-  post '/inactivated' do
-    if params[:code] == session[:deactivate_code] && session[:attempts] < 2
-      session[:bomb_state] = 'inactive'
-      redirect '/inactive'
+  post '/switch' do
+    if session[:bomb_state] == 'activated'
+      if session[:activate_code] == params[:code]
+        session[:attempts] = 0
+      elsif session[:deactivate_code] == params[:code]
+        update_bomb_state 'not activated'
+      else
+        session[:attempts] += 1
+        # update_bomb_state 'activated'
+      end
     else
-      redirect '/detonated', 303
+      update_bomb_state 'activated'
     end
+
+    redirect '/bomb'
   end
 
-  post '/detonated' do
-    # @state = 'bomb has blown up'
-    session[:bomb_state] = 'blown up'
-    redirect '/explode'
+  def update_bomb_state(state)
+    session[:bomb_state] = state
   end
 
   # start the server if ruby file executed directly

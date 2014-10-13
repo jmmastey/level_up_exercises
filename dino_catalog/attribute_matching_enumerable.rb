@@ -6,7 +6,7 @@ module FilteringEnumerable
     
     attr_reader :match_expressions
 
-    def initialize(parent, filter_attribute, match_expressions)
+    def initialize(parent, filter_attribute, *match_expressions)
       super(parent, filter_attribute)
       @match_expressions = match_expressions
     end
@@ -21,7 +21,7 @@ end
 
 # Add interface to FilteringEnumerable mixin to expose this functionality
 module FilteringEnumerable
-  def matches(attribute, *match_expressions)
-    FilteredEnumerable.new(self, attribute, match_expressions)
+  add_filter_method(:match) do |parent, attribute, *match_expressions|
+    AttributeMatchingEnumerable.new(parent, attribute, *match_expressions)
   end
 end

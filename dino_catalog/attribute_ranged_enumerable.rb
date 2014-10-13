@@ -7,7 +7,7 @@ module FilteringEnumerable
     attr_reader :lo_value
     attr_reader :hi_value
 
-    def initialize(parent, attribute, low_value, hi_value, exclude_end = false)
+    def initialize(parent, attribute, lo_value, hi_value, exclude_end = false)
       super(parent, attribute)
       @lo_value = lo_value
       @hi_value = hi_value
@@ -20,7 +20,7 @@ module FilteringEnumerable
 
     def exclusive(true_or_false)
       @exclusive = true_or_false
-      @range = Range.new(lo_value, hi_value, exclusive?)  # Remake range
+      @range = Range.new(@lo_value, @hi_value, exclusive?)  # Remake range
       self  # Support chaining
     end
 
@@ -34,7 +34,8 @@ end
 
 # Add interface to FilteringEnumerable mixin to expose this functionality
 module FilteringEnumerable
-  def between(attribute, lo_value, hi_value, exclusive = false)
-    AttributeRangedEnumerable(self, attribute, lo_value, hi_value, exclusive)
+  add_filter_method(:between) do 
+      |parent, attribute, lo_value, hi_value, exclusive = true|
+    AttributeRangedEnumerable.new(parent, attribute, lo_value, hi_value, exclusive)
   end
 end

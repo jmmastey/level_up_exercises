@@ -6,7 +6,7 @@ module FilteringEnumerable
 
     attr_reader :filter_attribute
 
-    def initialize(parent, filter_attribue)
+    def initialize(parent, filter_attribute)
       @parent = parent
       @filter_attribute = filter_attribute
       @negated = false

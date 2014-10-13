@@ -1,0 +1,12 @@
+<% if signed_in? %> 
+  <script>
+    window.navigator.registerProtocolHandler("webcal","https://www.google.com/calendar/render?cid=%s","Google Calendar");
+  </script>
+
+  <% @calendar=Icalendar::Calendar.new %>
+  <% @calendar.add_event(@event.ics) %>
+  <% @calendar.publish %>
+  <%= @calendar.to_ical %>
+<% else %>
+  <h3>Please <%= link_to 'sign in', new_session_path %></h3>
+<% end %>

@@ -1,0 +1,35 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="show.css"/>
+</head>
+
+<body>
+  <% if signed_in? %>
+    <p style="text-align:left;">Logged-In: <font color='red'><%= current_user.name %></font>
+    <span style="float:right;"><%= link_to 'Logout', session_path(id: 0), method: :delete %></span></p>
+
+    <h3><%= "#{first_name}'s Events" %></h3>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>When</th>
+        <th>Location</th>
+		<th>Calendar</th>
+        <th>Remove</th>
+    </tr>
+      <% @user.events.each do |event| %>
+        <tr>
+          <td><%= link_to event.name, event.link %></td>
+          <td><%= event.to_chicago_time_s %></td>
+          <td><%= event.location %></td>
+		  <td><%= link_to 'Update', { :action => 'add_event_to_calendar', :event_id => event.id }, method: :post, :format => :ics, :id => "add_cal-#{event.id}" %></td>
+          <td align='center'><%= link_to image_tag("minus.png", :class => 'minus'), { :action => 'remove_event', :event_id => event.id }, method: :post, :id => "remove-#{event.id}" %></td>
+        </tr>
+      <% end %>
+    </table>
+    <br>
+    <h4><%= link_to 'Browse All Events', { :controller => 'events', :user_id => @user[:id] }  %></h4>
+  <% else %>
+    <h3>Please <%= link_to 'sign in', new_session_path %></h3>
+  <% end %>
+</body>

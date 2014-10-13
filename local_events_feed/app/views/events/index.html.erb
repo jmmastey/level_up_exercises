@@ -1,0 +1,45 @@
+<%= stylesheet_link_tag "events.css.scss" %>
+
+<body>
+  <% if signed_in? %>
+  <p style="text-align:left;">Logged-In: <font color='red'><%= current_user.name %></font>
+	&nbsp|&nbsp<%= link_to 'Home', current_user %>
+    <span style="float:right;"><%= link_to 'Logout', session_path(id: 0), method: :delete %></span></p>
+
+	<center>
+	  <h1>All Events</h1>
+
+	  <table>
+		<tr>
+		  <th align='center'>When</th>
+		  <th align='center'>Name</th>
+		  <th align='center'>Where</th>
+		  <th></th>
+		</tr>
+		<% @events.each do |event| %>
+		<% member = event.has_match_in?(current_user.events) %>
+		<% member_class = member ? "member" : "non-member" %>
+		<tr>
+		  <td class=<%= member_class %> align='left'><%= event.to_chicago_time_s %></td>
+		  <td class=<%= member_class %> align='left'><%= link_to event.name, event.link %></td>
+		  <td class=<%= member_class %> align='left'><%= event.location %></td>
+		  <td class=<%= member_class %> >
+			<% association = { event_id: event[:id], user_id: current_user[:id] } %>
+			<% if event.has_match_in?(current_user.events) %>
+              <%= link_to image_tag("minus.png", :class => 'minus'), events_remove_event_path(association), method: :post, :id => "remove-#{event[:id]}" %>
+			<% else %>
+              <%= link_to image_tag("plus.png", :class => 'plus'), events_add_event_path(association), method: :post, :id => "add-#{event[:id]}" %>
+			<% end %>
+          </td>
+		</tr>
+		<% end %>
+	  </table>
+
+	  <h2>
+		<%= link_to 'Scrape for Events', scrape_path, method: :post %>
+	  </h2>
+	</center>
+  <% else %>
+    <h3>Please <%= link_to 'sign in', new_session_path %></h3>
+  <% end %>
+</body>

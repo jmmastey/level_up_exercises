@@ -13,10 +13,12 @@ total_b = dataset.total_in_group('B')
 conversions_a = dataset.number_of_conversions('A')
 conversions_b = dataset.number_of_conversions('B')
 
-pct_con_a = (dataset.percentage_of_conversion('A') * 100)
+percents = dataset.cohort_percentages
+
+pct_con_a = (percents['A'] * 100)
 std_err_a = (dataset.calculate_standard_error('A') * 100)
 
-pct_con_b = (dataset.percentage_of_conversion('B') * 100)
+pct_con_b = (percents['B'] * 100)
 std_err_b = (dataset.calculate_standard_error('B') * 100)
 
 puts "Total Sample Size: #{(total_a + total_b)}"
@@ -38,3 +40,5 @@ puts "\tGroup B: #{pct_con_b.round(ROUND_TO)}%" \
   " #{(pct_con_b + std_err_b).round(ROUND_TO)}%)"
 
 puts "Confidence Level: #{dataset.calculate_probability.round(ROUND_TO)}"
+
+puts dataset.show_winner

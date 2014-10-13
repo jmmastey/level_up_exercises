@@ -49,4 +49,20 @@ class Dataset
 
     ABAnalyzer::ABTest.new(groups).chisquare_p
   end
+
+  def cohort_percentages
+    percentages = {}
+
+    all_group_types.each do |group|
+      percentages[group] = percentage_of_conversion(group)
+    end
+
+    percentages
+  end
+
+  def show_winner
+    return "No clear winner" if calculate_probability >= 0.05
+
+    "Cohort #{cohort_percentages.sort.last.first} is the winner"
+  end
 end

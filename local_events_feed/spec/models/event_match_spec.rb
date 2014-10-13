@@ -7,6 +7,7 @@ RSpec.describe Event, :type => :model do
   let(:event_c) { new_event('Partx', 'Everywhere', "2014-10-01T09:30:00", 'www.event.com') }
   let(:event_d) { new_event('Party', 'Everywherx', "2014-10-01T09:30:00", 'www.event.com') }
   let(:event_e) { new_event('Party', 'Everywhere', "2014-10-01T09:30:01", 'www.event.com') }
+  let(:event_f) { new_event('Party', 'Everywhere', "2014-10-01T09:30:00", 'www.event.coz') }
   let(:list_1) { [event_a, event_b, event_c, event_d, event_e] }
   let(:list_2) { [event_c, event_d, event_e] }
   let(:unique_event)    { new_event("Party A", "North Side", "2014-10-01T18:00:00", "www.party.com/party-a.htmlX") }
@@ -26,6 +27,10 @@ RSpec.describe Event, :type => :model do
 
   it 'does not match another event with different time' do
     expect(event_a).not_to be_same_as(event_e)
+  end
+
+  it 'does not match another event with different time' do
+    expect(event_a).not_to be_same_as(event_f)
   end
 
   it 'has a matching item in a list' do

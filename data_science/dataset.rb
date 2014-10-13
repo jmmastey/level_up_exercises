@@ -1,22 +1,23 @@
 require 'abanalyzer'
 
 class Dataset
-  attr_accessor :results
+  # 1.96 is a confidence level of approx. 95%
+  CONFIDENCE = 1.96
 
   def initialize(data)
     @results = data
   end
 
   def total_sample_size
-    results.length
+    @results.length
   end
 
   def total_in_group(cohort)
-    results.count { |result| result["cohort"] == cohort }
+    @results.count { |result| result["cohort"] == cohort }
   end
 
   def number_of_conversions(cohort)
-    results.count do |result|
+    @results.count do |result|
       result["cohort"] == cohort && result["result"] == 1
     end
   end
@@ -29,12 +30,11 @@ class Dataset
     p = percentage_of_conversion(cohort)
     n = total_in_group(cohort)
 
-    # 1.96 is a confidence level of approx. 95%
-    ((Math.sqrt(p * (1 - p) / n)) * 1.96)
+    ((Math.sqrt(p * (1 - p) / n)) * CONFIDENCE)
   end
 
   def all_group_types
-    results.map { |result| result["cohort"] }.uniq
+    @results.map { |result| result["cohort"] }.uniq
   end
 
   def calculate_probability

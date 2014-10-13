@@ -9,6 +9,10 @@ class Overlord < Sinatra::Base
   end
 
   post '/boot' do
+    unless num?(params[:activation_code]) && num?(params[:deactivation_code])
+      redirect '/'
+    end
+
     update_bomb_state 'not activated'
 
     session[:activate_code] = params[:activation_code]
@@ -36,6 +40,10 @@ class Overlord < Sinatra::Base
 
   get '/explosion' do
     erb :explosion
+  end
+
+  def num?(number)
+    /^[\d]{1,9}$/ =~ number
   end
 
   def check_activate_code(code)

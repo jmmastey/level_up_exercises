@@ -14,3 +14,4 @@ Feature: Activating the bomb
     | 1234 | bomb is activated     |
     | 4321 | bomb is not activated |
     | zzzz | bomb is not activated |
+    |      | bomb is not activated |

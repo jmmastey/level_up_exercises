@@ -16,6 +16,8 @@ Feature: Deactivating the bomb
     | code | message               |
     | 0000 | bomb is not activated |
     | 1234 | bomb is activated     |
+    | zzzz | bomb is activated     |
+    |      | bomb is activated     |
 
   Scenario: I can't deactivate the bomb
     When I press "arm-button"

@@ -20,6 +20,7 @@ describe Metric do
   it { is_expected.to be_valid }
   it { is_expected.to respond_to(:artist) }
   it { is_expected.to respond_to(:service) }
+  it { is_expected.to respond_to(:category) }
 
   describe "associated with an artist and service" do
     it "must have an artist" do

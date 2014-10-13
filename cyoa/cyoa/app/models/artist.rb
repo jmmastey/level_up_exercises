@@ -9,15 +9,6 @@ class Artist < ActiveRecord::Base
 
   #after_create :retrieve_initial_metrics
 
-  def update_metrics
-    #metric = Metric.new(start_on: 3.months.ago,
-    #                    end_on: Time.now,
-    #                    json_data: nbs_metrics)
-    #metrics << metric
-
-    #save
-  end
-
   #private
   def retrieve_initial_metrics
 
@@ -54,10 +45,9 @@ class Artist < ActiveRecord::Base
     return if nbs_id
 
     search_results = NextBigSoundLite::Artist.search(name)
-      nbs_id = search_results.first.id.to_i
-      music_brainz_id = search_results.first.music_brainz_id
-      save
-    end
+    nbs_id = search_results.first.id.to_i
+    music_brainz_id = search_results.first.music_brainz_id
+    save
   end
 end
 

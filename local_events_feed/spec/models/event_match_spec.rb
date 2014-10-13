@@ -38,11 +38,11 @@ RSpec.describe Event, :type => :model do
 
   it 'recognizes that it is unique in the database' do
     create_events
-    expect(unique_event).to be_unique
+    expect(unique_event).to be_valid
   end
 
   it 'recognizes that it is not unique in the database' do
     create_events
-    expect(duplicate_event).not_to be_unique
+    expect(duplicate_event).not_to be_valid
   end
 end

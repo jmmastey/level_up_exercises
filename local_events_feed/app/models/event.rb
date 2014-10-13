@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
   validates :location, presence: true
   validates :time, presence: true
   validates :link, presence: true
-  validate :unique?
+  validate :must_be_a_unique_event
 
   has_and_belongs_to_many :users
 
@@ -15,10 +15,6 @@ class Event < ActiveRecord::Base
 
   def has_match_in?(list)
     list.any? { |other| other.same_as?(self) }
-  end
-
-  def unique?
-    !has_match_in?(Event.all)
   end
 
   def to_chicago_time_s
@@ -35,5 +31,17 @@ class Event < ActiveRecord::Base
     ical_event.url         = link
     ical_event.ip_class    = "PRIVATE"
     ical_event
+  end
+
+  private
+
+  def unique?
+    !has_match_in?(Event.all)
+  end
+
+  def must_be_a_unique_event
+    if !unique?
+      errors[:base] << "This is a duplicate event"
+    end
   end
 end

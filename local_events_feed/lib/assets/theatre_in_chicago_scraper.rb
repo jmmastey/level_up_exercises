@@ -5,11 +5,11 @@ module TheatreInChicagoScraper
   END_POINT = "http://www.theatreinchicago.com/opening/"
   QUERY = "CalendarMonthlyResponse.php?"
 
-  def self.get_events(year, month)
-    uri = construct_uri(year, month)
+  def self.get_events(time)
+    uri = construct_uri(time.year, time.month)
     body = get_page_content(uri)
     parser = TheatreInChicagoPageParser.new(body)
-    parser.events
+    parser.events.map { |chicago_event| chicago_event.to_event_model }
   end
 
   private

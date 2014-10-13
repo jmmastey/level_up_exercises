@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Service do
-  subject(:service) { Service.new(name: "Grooveshark", url: "http://grooveshark.com") }
+  subject(:service) { FactoryGirl.create(:service) }
 
   it { is_expected.to be_valid }
   it { is_expected.to respond_to(:name) }
@@ -9,13 +9,12 @@ describe Service do
   it { is_expected.to respond_to(:metrics) }
 
   describe "#name" do
-    it "must have a unique name" do
-      service.save
-      same_service = service.dup
-      same_service.name = service.name.downcase
-      same_service.save
+    it "must have a name" do
+      expect(FactoryGirl.build(:service, name: nil)).not_to be_valid
+    end
 
-      expect(same_service).not_to be_valid
+    it "must have a unique name" do
+      expect(FactoryGirl.build(:service, name: service.name.downcase)).not_to be_valid
     end
   end
 
@@ -25,12 +24,7 @@ describe Service do
     end
 
     it "must have a unique url" do
-      service.save
-      same_service = service.dup
-      same_service.url = service.url.downcase
-      same_service.save
-
-      expect(same_service).not_to be_valid
+      expect(FactoryGirl.build(:service, url: service.url.capitalize)).not_to be_valid
     end
   end
 end

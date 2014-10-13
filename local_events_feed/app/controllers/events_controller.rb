@@ -4,11 +4,6 @@ class EventsController < ApplicationController
     @user = User.find(params[:user_id]) if params[:user_id]
   end
 
-  def new
-    @event = Event.new
-    @event.time = Time.now
-  end
-
   def create
     @event = Event.new(event_params)
     

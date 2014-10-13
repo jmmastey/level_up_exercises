@@ -8,10 +8,14 @@ module FilteringEnumerable
 
   # An unknown method is taken for a query condition against attributes of items
   def method_missing(attribute, *match_expressions)
-    FilteredEnumerable.new(self, attribute, match_expressions)
+    query(attribute
   end
 
   def respond_to_missing?(attribute, include_all)
     true
+  end
+
+  def query(attribute, *match_expressions)
+    FilteredEnumerable.new(self, attribute, match_expressions)
   end
 end

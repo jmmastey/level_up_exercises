@@ -15,6 +15,10 @@ class Event < ActiveRecord::Base
     list.any? { |other| other.same_as?(self) }
   end
 
+  def to_chicago_time_s
+    time.in_time_zone("Central Time (US & Canada)").strftime('%m/%d/%Y %I:%M %P')
+  end
+
   def ics
     ical_event = Icalendar::Event.new
     ical_event.uid         = "#{id}"

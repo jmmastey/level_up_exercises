@@ -1,16 +1,5 @@
 <head>
-  <style>
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-  th, td {
-    padding: 5px;
-  }
-  th {
-    background: lightblue;
-  }
-  </style>
+  <link type="text/css" rel="stylesheet" href="show.css"/>
 </head>
 
 <body>
@@ -25,16 +14,16 @@
         <th>Name</th>
         <th>When</th>
         <th>Location</th>
-        <th>Remove</th>
 		<th>Calendar</th>
+        <th>Remove</th>
     </tr>
       <% @user.events.each do |event| %>
         <tr>
           <td><%= link_to event.name, event.link %></td>
-          <td><%= event.time %></td>
+          <td><%= event.to_chicago_time_s %></td>
           <td><%= event.location %></td>
-          <td><%= link_to 'Remove', { :action => 'remove_event', :event_id => event.id }, method: :post, :id => "remove-#{event.id}" %></td>
 		  <td><%= link_to 'Update', { :action => 'add_event_to_calendar', :event_id => event.id }, method: :post, :format => :ics, :id => "add_cal-#{event.id}" %></td>
+          <td align='center'><%= link_to image_tag("minus.png", :class => 'minus'), { :action => 'remove_event', :event_id => event.id }, method: :post, :id => "remove-#{event.id}" %></td>
         </tr>
       <% end %>
     </table>

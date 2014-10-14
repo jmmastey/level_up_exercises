@@ -10,7 +10,7 @@ class Optparse
 #
 # Return a structure describing the options.
 #
-LARGE_WEIGHT = 2000
+  LARGE_WEIGHT = 2000
 # collect the filters in struct and execute them at the end
   def self.parse(args)
     # The options specified on the command line will be collected in *options*.

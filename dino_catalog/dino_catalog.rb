@@ -9,10 +9,14 @@ require "filtering_enumerable"
 require "dinodex"
 require "dinodex/csv_loader"
 
-loader Dinodex::CSVLoader.new("african_dinosaur_export.csv")
+q = QueriableEnumerable.new
+l = Dinodex::CSVLoader.new("dinodex.csv")
+#l = Dinodex::CSVLoader.new("african_dinosaur_export.csv")
 #Dinodex::CSVLoader.load("dinodex.csv") { |d| puts d.inspect }
+l.load { |d| q << d }
 
-
+q.match(:diet, 'insectivore').each { |d| puts "foo" }
+q.each { |d| puts d.full_description }
 #
 #class Foo
 #  attr_accessor :bar

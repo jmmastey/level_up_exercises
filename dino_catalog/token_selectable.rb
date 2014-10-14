@@ -20,10 +20,10 @@ class TokenSelectable
   end
 
   def to_s
-    "#{self.class}[#{@instance_name}]"
+    name
   end
 
   def self.decode_instance_token(token)
-    @all_instances.first { |inst| inst.recognizes_token?(token) }
+    @all_instances.find { |inst| inst.recognizes_token?(token) }
   end
 end

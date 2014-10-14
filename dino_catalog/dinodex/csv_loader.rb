@@ -8,16 +8,16 @@ module Dinodex
     attr_accessor :path
 
     def initialize(path, default_values = {})
-      @input_path, @default_values = path, default_values
+      @path, @default_values = path, default_values
     end
 
-    def load
-      @csvreader = CSV.foreach(@path,
+    def load(path = nil, default_values = nil)
+      @csvreader = CSV.foreach(path || @path,
                                headers: true,
                                return_headers: false,
                                header_converters: :dinodex_rename,
                                converters: [:dinodex_csv]) do |csvrow|
-        yield make_dinosaur(csvrow)
+        yield make_dinosaur(csvrow, default_values || @default_values)
       end
     end
 
@@ -34,8 +34,8 @@ module Dinodex
       other
     end
 
-    def make_dinosaur(csvrow)
-      @default_values.each { |header, value| csvrow[header] = value }
+    def make_dinosaur(csvrow, default_values)
+      default_values.each { |header, value| csvrow[header] = value }
       other = extract_other_information(csvrow)
       taxon, period, weight, ambulation = 
         [:name, :period, :weight, :walking].map { |field| csvrow[field] }
@@ -44,6 +44,8 @@ module Dinodex
     end
 
     CSV::Converters[:dinodex_csv] = lambda do |fieldval, fieldinfo|
+      return nil if fieldval.nil?
+
       case fieldinfo.header
       when :period then TimePeriod.decode_instance_token(fieldval)
       when :diet then Diet.decode_instance_token(fieldval)

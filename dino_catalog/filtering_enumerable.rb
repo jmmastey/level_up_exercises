@@ -18,18 +18,18 @@ module FilteringEnumerable
   # Callbacks are called with this Enumerable as parent and any given arguments
   @@filter_factory_methods = {}
 
-  def method_missing(method, *args)
-    filtered_attr, filter_method, *match_exprs = method, *args
-    add_filter(filtered_attr, filter_method, *match_exprs)
+  def method_missing(filter_method, *args, &block)
+    filtered_attr, *match_exprs = *args
+    add_filter(filter_method, filtered_attr, *match_exprs)
   end
 
-  def respond_to_missing?(attribute, include_all)
-    true
+  def respond_to_missing?(method, include_all)
+    super || @@filter_factory_methods.include?(method)
   end
 
-  def add_filter(attribute, filter_method_name, *match_expressions)
-    factory_method = @@filter_factory_methods[filter_method_name] or
-      raise NoMethodError.new("No such filter: #{filter_method_name}")
+  def add_filter(filter_method, attribute,  *match_expressions)
+    factory_method = @@filter_factory_methods[filter_method] or
+      raise NoMethodError.new("No such filter: #{filter_method}")
 
     factory_method.call(self, attribute, *match_expressions)
   end

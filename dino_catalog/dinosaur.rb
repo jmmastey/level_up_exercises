@@ -49,13 +49,14 @@ class Dinosaur
 
   private
 
-  def make_title(key)
+  def titelize(key)
     key.split("_").map(&:upcase).join(" ")
   end
 
   def display_by_key(key)
     return unless value = instance_variable_get("@#{key}")
-    title = make_title key
+
+    title = titelize key
     display_field title, value
   end
 

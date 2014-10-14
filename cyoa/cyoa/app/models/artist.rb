@@ -7,20 +7,26 @@ class Artist < ActiveRecord::Base
   validates :grooveshark_id, uniqueness: true, allow_nil: true, allow_blank: true
   validates :nbs_id, uniqueness: true, allow_nil: true, allow_blank: true
 
-  #after_create :retrieve_initial_metrics
+  after_create :populate_initial_metrics
 
-  #private
-  def retrieve_initial_metrics
+  def update_metrics
+    nbs_services = get_nbs_metrics(3.months.ago)
+    process_metrics(nbs_services)
+  end
 
-    nbs_services = get_nbs_metrics(3.months.ago, 0)
+  def populate_initial_metrics
+    return if metrics.any?
+    nbs_services = get_nbs_metrics(3.months.ago)
+    process_metrics(nbs_services)
+  end
 
+  def process_metrics(nbs_services)
     nbs_services.each do |nbs_service|
       service = Service.find_or_create_by(name: nbs_service["service"]["name"])
 
       nbs_metrics = nbs_service["metric"]
-      nbs_categories = nbs_metrics.keys
 
-      nbs_categories.each do |nbs_category|
+      nbs_metrics.keys.each do |nbs_category|
         category = Category.find_or_create_by(name: nbs_category)
         nbs_metrics[nbs_category].each do |nbs_date, nbs_value|
           metric = Metric.new(service: service,
@@ -33,10 +39,7 @@ class Artist < ActiveRecord::Base
     end
   end
 
-  def process_metrics
-  end
-
-  def get_nbs_metrics(start_on, end_on)
+  def get_nbs_metrics(start_on)
     update_api_ids
     NextBigSoundLite::Metric.artist(nbs_id, start: start_on)
   end
@@ -45,10 +48,8 @@ class Artist < ActiveRecord::Base
     return if nbs_id
 
     search_results = NextBigSoundLite::Artist.search(name)
-    nbs_id = search_results.first.id.to_i
-    music_brainz_id = search_results.first.music_brainz_id
+    self.nbs_id = search_results.first.id.to_i
+    self.music_brainz_id = search_results.first.music_brainz_id
     save
   end
 end
-
-# Where to put callbacks?

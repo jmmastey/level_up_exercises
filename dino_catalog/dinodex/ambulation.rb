@@ -1,22 +1,14 @@
+require "token_selectable"
+
 # Ambulation
 #
 # Class handling and representing dinosaur locomotion (bi/quradrupedalism).
-class Dinodex::Ambulation
+class Dinodex::Ambulation < TokenSelectable
+  alias_method :ambulation, :name     # (string) descriptive noun
 
-  attr_reader :ambulation     # (string) descriptive noun
-
-  def initialize(ambulation_mode)
-    @ambulation = ambulation_mode
-  end
-
-  BIPEDAL       = new("bipedal"),
-  QUADRUPEDAL   = new("quadrupedal")
-
-  def self.decode(word)
-    case word
-    when /biped/i then BIPEDAL
-    when /quadrup/i then QUADRUPEDAL
-    else nil
-    end
-  end
+  @all_instances = [
+    BIPEDAL       = new("bipedal", /biped/i),
+    QUADRUPEDAL   = new("quadrupedal", /quadr/i),
+  ]
 end
+

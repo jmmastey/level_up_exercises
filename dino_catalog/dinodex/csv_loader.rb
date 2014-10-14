@@ -1,15 +1,21 @@
 require "csv"
 
 module Dinodex
-  module CSVLoader
-    extend self
+  class CSVLoader
 
-    def load(io)
-      @csvreader = CSV.foreach(io,
+    # Hash of {header => default_value} to place into all rows
+    attr_accessor :default_values
+    attr_accessor :path
+
+    def initialize(path, default_values = {})
+      @input_path, @default_values = path, default_values
+    end
+
+    def load
+      @csvreader = CSV.foreach(@path,
                                headers: true,
-                               return_headers: true,
-                               header_converters: 
-                                [:downcase, :symbol, :dinodex_rename],
+                               return_headers: false,
+                               header_converters: :dinodex_rename,
                                converters: [:dinodex_csv]) do |csvrow|
         yield make_dinosaur(csvrow)
       end
@@ -18,40 +24,40 @@ module Dinodex
     protected
 
     def extract_other_information(csvrow)
-
       other = {}
       other[:description] = csvrow[:description] if csvrow[:description]
       other[:continent] = csvrow[:continent] if csvrow[:continent]
       other[:diet] = csvrow[:diet] || case csvrow[:carnivore].casecmp("yes")
-                                      when 0 then Diet.UNSPECIFIED_CARNIVORE
-                                      else Diet.UNSPECIFIED_NONCARNIVORE
+                                      when 0 then Diet::UNSPECIFIED_CARNIVORE
+                                      else Diet::UNSPECIFIED_NONCARNIVORE
                                       end
       other
     end
 
     def make_dinosaur(csvrow)
-
+      @default_values.each { |header, value| csvrow[header] = value }
       other = extract_other_information(csvrow)
       taxon, period, weight, ambulation = 
-        [:name, :period, :weight, :ambulation].map { |field| csvrow[field] }
+        [:name, :period, :weight, :walking].map { |field| csvrow[field] }
 
       Dinosaur.new(taxon, period, weight, ambulation, other)
     end
 
     CSV::Converters[:dinodex_csv] = lambda do |fieldval, fieldinfo|
       case fieldinfo.header
-      when :period then TimePeriod.decode(fieldval)
-      when :diet then Diet.decode(fieldval)
+      when :period then TimePeriod.decode_instance_token(fieldval)
+      when :diet then Diet.decode_instance_token(fieldval)
       when :weight then fieldval.to_i
-      when :walking then Ambulation.decode(fieldval)
+      when :walking then Ambulation.decode_instance_token(fieldval)
       else fieldval
       end
     end
 
-    CSV::HeaderConverters[:dinodex_rename] = lambda do |header, fieldinfo|
-      case header
+    CSV::HeaderConverters[:dinodex_rename] = lambda do |header|
+      case (header = header.downcase.to_sym)
       when :genus then :name
       when :weight_in_lbs then :weight
+      else header
       end
     end
   end

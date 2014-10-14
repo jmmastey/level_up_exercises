@@ -1,14 +1,16 @@
 #!/usr/bin/ruby -w
 
+require "pry"
+
 this_dir = File.dirname(__FILE__)
 $LOAD_PATH.unshift(this_dir) unless $LOAD_PATH.include?(this_dir)
 
 require "filtering_enumerable"
 require "dinodex"
 require "dinodex/csv_loader"
-require "pry"
 
-Dinodex::CSVLoader.load("dinodex.csv") { |d| puts d.inspect }
+loader Dinodex::CSVLoader.new("african_dinosaur_export.csv")
+#Dinodex::CSVLoader.load("dinodex.csv") { |d| puts d.inspect }
 
 
 #

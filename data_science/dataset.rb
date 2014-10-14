@@ -2,7 +2,8 @@ require 'abanalyzer'
 
 class Dataset
   # 1.96 is a confidence level of approx. 95%
-  CONFIDENCE = 1.96
+  CONFIDENCE_LEVEL = 1.96
+  PROBABILITY_THRESHOLD = 0.05
 
   def initialize(data)
     @results = data
@@ -30,7 +31,7 @@ class Dataset
     p = percentage_of_conversion(cohort)
     n = total_in_group(cohort)
 
-    ((Math.sqrt(p * (1 - p) / n)) * CONFIDENCE)
+    ((Math.sqrt(p * (1 - p) / n)) * CONFIDENCE_LEVEL)
   end
 
   def all_group_types
@@ -61,7 +62,7 @@ class Dataset
   end
 
   def show_winner
-    return "No clear winner" if calculate_probability >= 0.05
+    return "No clear winner" if calculate_probability >= PROBABILITY_THRESHOLD
 
     "Cohort #{cohort_percentages.last.first} is the winner"
   end

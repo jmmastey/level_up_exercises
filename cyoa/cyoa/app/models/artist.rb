@@ -16,12 +16,14 @@ class Artist < ActiveRecord::Base
   end
 
   def update_metrics
+    yesterday = Time.now.to_date - 1
+    return if update_start_date >= yesterday
     nbs_service_metrics = get_nbs_metrics(update_start_date)
     process_metrics(nbs_service_metrics)
   end
 
   def update_start_date
-    return 3.months.ago unless metrics
+    return 3.months.ago if metrics.empty?
     (metrics.first.recorded_on + 1).to_datetime
   end
 
@@ -37,12 +39,12 @@ class Artist < ActiveRecord::Base
       nbs_metrics.keys.each do |nbs_category|
         category = Category.find_or_create_by(name: nbs_category)
         nbs_metrics[nbs_category].each do |nbs_date, nbs_value|
-          new_metrics.push "(#{self.id}, #{category.id}, #{nbs_value}, '#{nbs_date}', '#{recorded_on(nbs_date)}', '#{cur_time}', '#{cur_time}')"
+          new_metrics.push "(#{self.id}, #{category.id}, #{service.id}, #{nbs_value}, '#{nbs_date}', '#{recorded_on(nbs_date)}', '#{cur_time}', '#{cur_time}')"
         end
       end
     end
 
-    sql_insertion_records = "INSERT INTO metrics (artist_id, category_id, value, nbs_date, recorded_on, created_at, updated_at) VALUES #{new_metrics.join(", ")}"
+    sql_insertion_records = "INSERT INTO metrics (artist_id, category_id, service_id, value, nbs_date, recorded_on, created_at, updated_at) VALUES #{new_metrics.join(", ")}"
     ActiveRecord::Base.connection.execute sql_insertion_records
   end
 

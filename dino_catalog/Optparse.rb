@@ -11,11 +11,13 @@ class Optparse
 # Return a structure describing the options.
 #
   LARGE_WEIGHT = 2000
+
 # collect the filters in struct and execute them at the end
   def self.parse(args)
     # The options specified on the command line will be collected in *options*.
     options = OpenStruct.new
     options.filters = []
+    options.dinosaurs = []
     parser = CSVParse.new
     opt_parser = OptionParser.new do |opts|
       opts.banner = "Usage: Optparse.rb [options]"
@@ -29,7 +31,9 @@ class Optparse
         "--file [inputCSV]",
         "Input the file to be used"
               ) do |f|
-        options.dinosaurs = parser.parse_csv(f)
+        options.dinosaurs.clear
+        options.dinosaurs = parser.parse_csv(f) unless !(File.exist?(f) \
+          && f.split(//).last(3).join.casecmp('csv'))
       end
 
       opts.on(
@@ -38,7 +42,12 @@ class Optparse
         "Display all dinosaurs"
               ) do
         options.dinosaurs.each do |dino|
-          puts dino.name
+          dino.all_variables.each do |attri|
+            puts "-------------"
+            puts attri
+            puts "-------------"
+          end
+          puts "\n------------------\n\n"
         end
       end
 
@@ -79,7 +88,7 @@ class Optparse
         "--small",
         "Display all small dinosaurs"
         ) do
-        options.dinosaurs.keep_if { |dino| dino.weight.to_i <= LARGE_WEIGHT }
+        options.dinosaurs.keep_if { |dino| dino.weight.to_i <= LARGE_WEIGHT && !dino.weight.nil?}
       end
 
       opts.on(

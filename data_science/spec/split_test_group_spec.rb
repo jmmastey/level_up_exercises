@@ -48,4 +48,28 @@ describe SplitTestGroup do
       expect(max).to eq(group_a.conversion_rate + group_a.conversion_rate_error)
     end
   end
+
+  describe "#to_s" do
+    subject(:formatted_text) { group_a.to_s }
+
+    it "should contain the name of the group" do
+      expect(formatted_text).to include("Group A")
+    end
+
+    it "should contain the number of conversions" do
+      expect(formatted_text).to include("47 conversions")
+    end
+
+    it "should contain the number of views" do
+      expect(formatted_text).to include("1349 views")
+    end
+
+    it "should include the conversion rate" do
+      expect(formatted_text).to include("3.48%")
+    end
+
+    it "should include the conversion rate error" do
+      expect(formatted_text).to include("\xc2\xb1 0.98%")
+    end
+  end
 end

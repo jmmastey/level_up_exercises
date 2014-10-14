@@ -3,7 +3,6 @@
 require "colorize"
 require_relative "data_grouper"
 require_relative "json_stat_parser"
-require_relative "output_formatter"
 require_relative "split_test_calculator"
 require_relative "split_test_group"
 

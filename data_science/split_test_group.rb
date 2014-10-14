@@ -23,12 +23,25 @@ class SplitTestGroup
     @conversion_rate_range ||= calculate_conversion_rate_range
   end
 
+  def to_s
+    rate = format_pct(conversion_rate)
+    error = format_pct(conversion_rate_error)
+
+    %Q(Group #{name}
+       #{conversions} conversions from #{views} views
+       #{rate} \xc2\xb1 #{error} conversion rate)
+  end
+
   private
 
   def calculate_conversion_rate_range
     min = conversion_rate - conversion_rate_error
     max = conversion_rate + conversion_rate_error
     [min, max]
+  end
+
+  def format_pct(percent)
+    "#{sprintf("%.2f", percent * 100)}%"
   end
 
   def standard_error

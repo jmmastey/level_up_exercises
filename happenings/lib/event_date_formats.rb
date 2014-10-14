@@ -3,10 +3,7 @@
 class EventDateFormat
   attr_accessor :formats
 
-
-  def initialize(format="")
+  def initialize(_format = "")
     @formats = []
-
-
   end
 end

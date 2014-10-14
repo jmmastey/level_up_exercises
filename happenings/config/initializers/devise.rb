@@ -34,11 +34,15 @@ Devise.setup do |config|
   # or not authentication should be aborted when the value is not present.
   # config.authentication_keys = [ :email ]
 
-  # Configure parameters from the request object used for authentication. Each entry
+  # Configure parameters from the request object used for authentication.
+  # Each entry
   # given should be a request method and it will automatically be passed to the
-  # find_for_authentication method and considered in your model lookup. For instance,
-  # if you set :request_keys to [:subdomain], :subdomain will be used on authentication.
-  # The same considerations mentioned for authentication_keys also apply to request_keys.
+  # find_for_authentication method and considered in your model lookup.
+  # For instance,
+  # if you set :request_keys to [:subdomain], :subdomain will be used on
+  # authentication.
+  # The same considerations mentioned for authentication_keys also apply to
+  # request_keys.
   # config.request_keys = []
 
   # Configure which authentication keys should be case-insensitive.
@@ -48,20 +52,25 @@ Devise.setup do |config|
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
-  # modifying a user and when used to authenticate or find a user. Default is :email.
+  # modifying a user and when used to authenticate or find a user.
+  # Default is :email.
   config.strip_whitespace_keys              = [:email]
 
   # Tell if authentication through request.params is enabled. True by default.
-  # It can be set to an array that will enable params authentication only for the
-  # given strategies, for example, `config.params_authenticatable = [:database]` will
+  # It can be set to an array that will enable params authentication only for
+  # the
+  # given strategies, for example,
+  # `config.params_authenticatable = [:database]` will
   # enable it only for database (email + password) authentication.
   # config.params_authenticatable = true
 
   # Tell if authentication through HTTP Auth is enabled. False by default.
   # It can be set to an array that will enable http authentication only for the
-  # given strategies, for example, `config.http_authenticatable = [:database]` will
+  # given strategies, for example, `config.http_authenticatable = [:database]`
+  # will
   # enable it only for database authentication. The supported strategies are:
-  # :database      = Support basic authentication with authentication key + password
+  # :database      = Support basic authentication with authentication
+  # key + password
   # config.http_authenticatable = false
 
   # If http headers should be returned for AJAX requests. True by default.
@@ -89,14 +98,20 @@ Devise.setup do |config|
   # config.clean_up_csrf_token_on_authentication = true
 
   # ==> Configuration for :database_authenticatable
-  # For bcrypt, this is the cost for hashing the password and defaults to 10. If
-  # using other encryptors, it sets how many times you want the password re-encrypted.
+  # For bcrypt, this is the cost for hashing the password and defaults to 10.
+  # If
+  # using other encryptors, it sets how many times you want the
+  # password re-encrypted.
   #
-  # Limiting the stretches to just one in testing will increase the performance of
+  # Limiting the stretches to just one in testing will increase the
+  # performance of
   # your test suite dramatically. However, it is STRONGLY RECOMMENDED to not use
-  # a value less than 10 in other environments. Note that, for bcrypt (the default
-  # encryptor), the cost increases exponentially with the number of stretches (e.g.
-  # a value of 20 is already extremely slow: approx. 60 seconds for 1 calculation).
+  # a value less than 10 in other environments. Note that, for bcrypt
+  # (the default
+  # encryptor), the cost increases exponentially with the number of
+  # stretches (e.g.
+  # a value of 20 is already extremely slow: approx. 60 seconds for
+  # 1 calculation).
   config.stretches                          = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.

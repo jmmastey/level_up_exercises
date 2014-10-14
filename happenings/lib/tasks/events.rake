@@ -12,7 +12,7 @@ namespace :events do
 
     # write your nokogiri scripts here or
     #
-    require_relative 'sites/theater_scraper'
+    require_relative 'sites/theatre_scraper'
     #
     # them from other files.
 
@@ -27,9 +27,7 @@ namespace :events do
 
   desc "Delete all Events."
   task clean: :environment do
-    Event.all.each do |job|
-      job.destroy!
-    end
+    Event.all.each(&:destroy!)
   end
 
 end

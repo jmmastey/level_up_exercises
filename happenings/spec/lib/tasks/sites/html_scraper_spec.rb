@@ -3,7 +3,7 @@ require 'rspec'
 
 Rspec.describe HTMLScraper do
   context 'Scraper' do
-    subject{}
+    subject {}
   end
 
   it 'should not accept nil url' do

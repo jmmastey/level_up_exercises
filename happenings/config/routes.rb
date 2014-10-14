@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   resources :venues
   resources :events
 
-
   root to: "application#index"
 
   resources :events do

@@ -3,7 +3,7 @@ AllCops:
     - triangle_facts/*.rb
     - supportive/supportive.rb
     - out/**/*
-    
+
 # C: Missing top-level module documentation comment.
 Style/Documentation:
   Enabled: false
@@ -43,6 +43,10 @@ Style/CaseIndentation:
 # don't force crappy var names for reduce/inject loops...
 Style/SingleLineBlockParams:
   Enabled: false
+
+# for method chains, keep the dot with the method name
+Style/DotPosition:
+  EnforcedStyle: leading
 
 # stop nesting so hard.
 Metrics/BlockNesting:

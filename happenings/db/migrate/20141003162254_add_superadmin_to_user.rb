@@ -1,12 +1,9 @@
 class AddSuperadminToUser < ActiveRecord::Migration
-
-
   def self.up
     add_column :users, :superadmin, :boolean, null: false, default: false
     User.create(email: 'admin@example.com', password: 'password',
                  password_confirmation: 'password',
                  superadmin: true)
-
   end
 
   def self.down

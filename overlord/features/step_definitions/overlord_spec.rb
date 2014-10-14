@@ -1,11 +1,12 @@
 require_relative '../support/env'
 
-Given(/^I visit the activation page$/) do
-  activation_page
+Given(/^I visit the configuration page$/) do
+  configuration_page
+  expect(page).to have_field("activation_code")
 end
 
-Given(/^Configure bomb with codes '(.*?)' and '(.*?)'$/) do |arg1, arg2|
-  configure_bomb(arg1, arg2)
+Given(/^Configure bomb with codes '(.*?)' and '(.*?)'$/) do |act, deac|
+  configure_bomb(act, deac)
 end
 
 Then(/^I should see 'Activated'$/) do
@@ -20,12 +21,8 @@ Then(/^I should see the bomb as 'Exploded'$/) do
   expect(page).to have_content("BOOM")
 end
 
-Then(/^I should not be able to use any of the buttons$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
 When(/^I do nothing on the deactivation page for 30 seconds$/) do
-  sleep(30)
+  default_wait_time
   expect(page).to have_content("BOOM")
 end
 
@@ -34,7 +31,7 @@ When(/^I fill in '(\d+)' to deactivate the bomb$/) do |arg1|
 end
 
 When(/^I snip the wire$/) do
-  click_button 'snip'
+  snip_wire
   expect(page).to have_content("Phew")
 end
 
@@ -42,6 +39,14 @@ When(/^I activate the bomb with code '(\d+)'$/) do |arg1|
   activate_bomb(arg1)
 end
 
+When(/^I activate the bomb with code 'ABBA'$/) do
+  activate_bomb("ABBA")
+end
+
 Then(/^I should remain on the activation page$/) do
   expect(page).to have_content("Enter activation code")
+end
+
+Then(/^The bomb should not be configured$/) do
+  expect(page).to have_content("Bomb Configuration")
 end

@@ -3,9 +3,8 @@
 <script>
   var countdownseconds = 20;
   function countdowntimer() {
-    var minutes = Math.round((countdownseconds - 30)/60);
     var remainingSeconds = countdownseconds % 60;
-    document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
+    document.getElementById('countdown').innerHTML = remainingSeconds;
     if (countdownseconds == 0) {
       clearInterval(countdownTimer);
       window.location.href = 'exploded'

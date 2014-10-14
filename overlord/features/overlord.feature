@@ -11,9 +11,8 @@ Feature: Create a cool bomb thingy
   explode.
 
   Background:
-    Given I visit the activation page
+    Given I visit the configuration page
 
-  @activation_code
   Scenario: Activate the bomb
     Given Configure bomb with codes '1111' and '8888'
     When I activate the bomb with code '1111'
@@ -54,7 +53,7 @@ Feature: Create a cool bomb thingy
     Given Configure bomb with codes '2222' and '0000'
     When I activate the bomb with code '2222'
     Then I should see 'Activated'
-    Given I visit the activation page
+    Given I visit the configuration page
     Given Configure bomb with codes '2222' and '0000'
     When I activate the bomb with code '2222'
     Then I should see 'Activated'
@@ -70,3 +69,13 @@ Feature: Create a cool bomb thingy
     When I activate the bomb with code '2222'
     When I snip the wire
     Then I should see 'Deactivated'
+
+  Scenario: User inserts letters for codes on config
+    Given Configure bomb with codes '2a33' and 'ABBA'
+    Then The bomb should not be configured
+
+  Scenario: User enters letters for activation code to activate bomb
+    Given Configure bomb with codes '2222' and '3151'
+    When I activate the bomb with code 'ABBA'
+    Then I should remain on the activation page
+

@@ -15,8 +15,9 @@ l = Dinodex::CSVLoader.new("dinodex.csv")
 #Dinodex::CSVLoader.load("dinodex.csv") { |d| puts d.inspect }
 l.load { |d| q << d }
 
-q.match(:diet, 'insectivore').each { |d| puts "foo" }
-q.each { |d| puts d.full_description }
+q.match(:diet, Dinodex::Diet::PISCIVORE
+               ).each { |d| puts d.full_description}
+#q.each { |d| puts d.full_description }
 #
 #class Foo
 #  attr_accessor :bar

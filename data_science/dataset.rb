@@ -9,6 +9,10 @@ class Dataset
     @results = data
   end
 
+  def total_sample_size
+    @results.length
+  end
+
   def total_in_group(cohort)
     @results.count { |result| result["cohort"] == cohort }
   end
@@ -55,11 +59,5 @@ class Dataset
     end
 
     Hash[percentages.sort_by { |_, y| y }]
-  end
-
-  def show_winner
-    return "No clear winner" if calculate_probability >= PROBABILITY_THRESHOLD
-
-    "Cohort #{cohort_percentages.to_a.last.first} is the winner"
   end
 end

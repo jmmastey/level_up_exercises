@@ -7,7 +7,7 @@ require_relative "output_formatter"
 require_relative "split_test_calculator"
 require_relative "split_test_group"
 
-class App
+class SplitTest
   LINES = {
     thin: "-",
     thick: "=",
@@ -50,9 +50,8 @@ class App
   end
 
   def output_result(result)
-    formatter = OutputFormatter.new
-    puts formatter.format(result).yellow
+    puts result.to_s.yellow
   end
 end
 
-App.new.main
+SplitTest.new.main

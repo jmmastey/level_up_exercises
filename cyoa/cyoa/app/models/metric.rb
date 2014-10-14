@@ -3,11 +3,7 @@ class Metric < ActiveRecord::Base
   belongs_to :service
   belongs_to :category
 
-  validates :artist, presence: true
-  validates :service, presence: true
-  validates :value, presence: true
-  validates :category, presence: true
-  validates :nbs_date, presence: true
+  validates :artist, :service, :value, :category, :nbs_date, presence: true
 
   after_create :set_recorded_on
 

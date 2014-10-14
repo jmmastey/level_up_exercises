@@ -14,7 +14,7 @@ conversions_a = dataset.number_of_conversions('A')
 conversions_b = dataset.number_of_conversions('B')
 
 percents = dataset.cohort_percentages
-
+puts percents
 pct_con_a = (percents['A'] * 100)
 std_err_a = (dataset.calculate_standard_error('A') * 100)
 

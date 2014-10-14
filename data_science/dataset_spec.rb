@@ -16,11 +16,23 @@ describe "BadDataset" do
   end
 
   context "calculate chi-square probability" do
-    it { expect(dataset.calculate_probability.round(4)).to raise_error }
+    it "raises Insufficient Data Error" do
+      expect { dataset.calculate_probability.round(4) }.to raise_error { |error|
+        expect(error).to be_a(ABAnalyzer::InsufficientDataError)
+      }
+    end
+  end
+
+  context "cohort percentages" do
+    it { expect(dataset.cohort_percentages.first).to eq(["A", 0.5]) }
   end
 
   context "show winner" do
-    it { expect(dataset.show_winner).to raise_error }
+    it "raises Insufficient Data Error" do
+      expect { dataset.show_winner }.to raise_error { |error|
+        expect(error).to be_a(ABAnalyzer::InsufficientDataError)
+      }
+    end
   end
 end
 
@@ -40,6 +52,11 @@ describe "WinnerADataset" do
 
   context "calculate chi-square probability" do
     it { expect(dataset.calculate_probability.round(4)).to eq(0.0484) }
+  end
+
+  context "cohort percentages" do
+    let(:first_cohort_percent) { dataset.cohort_percentages.first }
+    it { expect(first_cohort_percent).to eq(["B", 0.3076923076923077]) }
   end
 
   context "show winner" do
@@ -63,6 +80,11 @@ describe "WinnerBDataset" do
 
   context "calculate chi-square probability" do
     it { expect(dataset.calculate_probability.round(4)).to eq(0.0484) }
+  end
+
+  context "cohort percentages" do
+    let(:first_cohort_percent) { dataset.cohort_percentages.first }
+    it { expect(first_cohort_percent).to eq(["A", 0.3076923076923077]) }
   end
 
   context "show winner" do

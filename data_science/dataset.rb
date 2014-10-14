@@ -54,12 +54,12 @@ class Dataset
       percentages[group] = percentage_of_conversion(group)
     end
 
-    percentages.sort_by { |_x, y| y }
+    Hash[percentages.sort_by { |_, y| y }]
   end
 
   def show_winner
     return "No clear winner" if calculate_probability >= PROBABILITY_THRESHOLD
 
-    "Cohort #{cohort_percentages.last.first} is the winner"
+    "Cohort #{cohort_percentages.to_a.last.first} is the winner"
   end
 end

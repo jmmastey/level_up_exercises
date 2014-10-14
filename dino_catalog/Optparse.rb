@@ -88,7 +88,7 @@ class Optparse
         "--small",
         "Display all small dinosaurs"
         ) do
-        options.dinosaurs.keep_if { |dino| dino.weight.to_i <= LARGE_WEIGHT && !dino.weight.nil?}
+        options.dinosaurs.keep_if { |dino| dino.weight.to_i <= LARGE_WEIGHT && !dino.weight.nil? }
       end
 
       opts.on(

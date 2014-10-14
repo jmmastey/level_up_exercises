@@ -9,10 +9,6 @@ class Dataset
     @results = data
   end
 
-  def total_sample_size
-    @results.length
-  end
-
   def total_in_group(cohort)
     @results.count { |result| result["cohort"] == cohort }
   end

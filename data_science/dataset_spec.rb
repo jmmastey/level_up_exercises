@@ -91,3 +91,31 @@ describe "WinnerBDataset" do
     it { expect(dataset.show_winner).to eq('Cohort B is the winner') }
   end
 end
+
+describe "NoWinnerDataset" do
+  let(:json) { JSONLoader.new('test_no_winner_data.json') }
+  subject(:dataset) { Dataset.new(json.fetch_data) }
+
+  context "percentage of conversion" do
+    it { expect(dataset.percentage_of_conversion('A').round(4)).to eq(0.5556) }
+    it { expect(dataset.percentage_of_conversion('B').round(4)).to eq(0.3846) }
+  end
+
+  context "calculate standard error" do
+    it { expect(dataset.calculate_standard_error('A').round(4)).to eq(0.2296) }
+    it { expect(dataset.calculate_standard_error('B').round(4)).to eq(0.2645) }
+  end
+
+  context "calculate chi-square probability" do
+    it { expect(dataset.calculate_probability.round(4)).to eq(0.3473) }
+  end
+
+  context "cohort percentages" do
+    let(:first_cohort_percent) { dataset.cohort_percentages.first }
+    it { expect(first_cohort_percent).to eq(["B", 0.38461538461538464]) }
+  end
+
+  context "show winner" do
+    it { expect(dataset.show_winner).to eq('No clear winner') }
+  end
+end

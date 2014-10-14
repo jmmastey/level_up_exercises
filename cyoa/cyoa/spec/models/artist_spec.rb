@@ -23,7 +23,6 @@ describe Artist do
     it "api ids are unique" do
       expect(FactoryGirl.build(:another_artist, grooveshark_id: artist.grooveshark_id)).not_to be_valid
       expect(FactoryGirl.build(:another_artist, nbs_id: artist.nbs_id)).not_to be_valid
-
     end
   end
 end

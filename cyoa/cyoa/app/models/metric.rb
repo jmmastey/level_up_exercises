@@ -5,7 +5,7 @@ class Metric < ActiveRecord::Base
 
   validates :artist, :service, :value, :category, :nbs_date, presence: true
 
-  after_create :set_recorded_on
+  before_create :set_recorded_on
 
   private
 

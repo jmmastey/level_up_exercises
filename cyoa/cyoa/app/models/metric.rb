@@ -7,6 +7,8 @@ class Metric < ActiveRecord::Base
 
   before_create :set_recorded_on
 
+  default_scope -> { order('recorded_on DESC') }
+
   private
 
   def set_recorded_on

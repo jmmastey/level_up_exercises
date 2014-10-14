@@ -10,8 +10,13 @@ class Artist < ActiveRecord::Base
   after_create :populate_initial_metrics
 
   def update_metrics
-    nbs_services = get_nbs_metrics(3.months.ago)
-    process_metrics(nbs_services)
+    nbs_service_metrics = get_nbs_metrics(update_start_date)
+    process_metrics(nbs_service_metrics)
+  end
+
+  def update_start_date
+    return 3.months.ago unless metrics
+    (metrics.first.recorded_on + 1).to_datetime
   end
 
   def populate_initial_metrics

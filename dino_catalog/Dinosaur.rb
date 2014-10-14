@@ -7,7 +7,7 @@ class Dinosaur
 	attr_reader :weight
 	attr_reader :walking
 	attr_reader :descriptor
-	
+
 	def initialize( params = {})
 		@name = params[:name]
 		@period = params[:period]
@@ -20,5 +20,5 @@ class Dinosaur
 		unless diet.nil?
 			@carnivore = 'Yes' if ['insectivore', 'piscivore', 'carnivore'].include?(@diet.downcase)
 		end
-	end	
+	end
 end # class Dinosaur

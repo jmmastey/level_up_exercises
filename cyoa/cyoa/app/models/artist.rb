@@ -14,7 +14,7 @@ class Artist < ActiveRecord::Base
     nbs_services = get_nbs_metrics(3.months.ago)
     process_metrics(nbs_services)
   end
-  
+
   def update_metrics
     nbs_service_metrics = get_nbs_metrics(update_start_date)
     process_metrics(nbs_service_metrics)
@@ -25,9 +25,9 @@ class Artist < ActiveRecord::Base
     (metrics.first.recorded_on + 1).to_datetime
   end
 
-
   def process_metrics(nbs_services)
     new_metrics = []
+    cur_time = Time.now
 
     nbs_services.each do |nbs_service|
       service = Service.find_or_create_by(name: nbs_service["service"]["name"])
@@ -37,12 +37,12 @@ class Artist < ActiveRecord::Base
       nbs_metrics.keys.each do |nbs_category|
         category = Category.find_or_create_by(name: nbs_category)
         nbs_metrics[nbs_category].each do |nbs_date, nbs_value|
-          new_metrics.push "(#{self.id}, #{category.id}, #{nbs_value}, '#{nbs_date}')"
+          new_metrics.push "(#{self.id}, #{category.id}, #{nbs_value}, '#{nbs_date}', '#{recorded_on(nbs_date)}', '#{cur_time}', '#{cur_time}')"
         end
       end
     end
 
-    sql_insertion_records = "INSERT INTO metrics (artist_id, category_id, value, nbs_date) VALUES #{new_metrics.join(", ")}"
+    sql_insertion_records = "INSERT INTO metrics (artist_id, category_id, value, nbs_date, recorded_on, created_at, updated_at) VALUES #{new_metrics.join(", ")}"
     ActiveRecord::Base.connection.execute sql_insertion_records
   end
 
@@ -58,5 +58,12 @@ class Artist < ActiveRecord::Base
     self.nbs_id = search_results.first.id.to_i
     self.music_brainz_id = search_results.first.music_brainz_id
     save
+  end
+
+  def recorded_on(nbs_date)
+    sec_in_day = 86400
+    date_unix_days = nbs_date.to_i
+    date_unix_sec = date_unix_days * sec_in_day
+    Time.at(date_unix_sec)
   end
 end

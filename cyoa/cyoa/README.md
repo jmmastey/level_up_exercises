@@ -56,9 +56,8 @@ T3=> #<Benchmark::Tms:0x007fdb030b28c8 @label="", @real=16.910623, @cstime=0.0, 
 Mass Insert with SQL
 
 ```
-T1=> #<Benchmark::Tms:0x007fdafde53118 @label="", @real=1.957452, @cstime=0.0, @cutime=0.0, @stime=0.0, @utime=0.15000000000000568, @total=0.15000000000000568>
-T2=> #<Benchmark::Tms:0x007fdaff222310 @label="", @real=2.222488, @cstime=0.0, @cutime=0.0, @stime=0.0, @utime=0.05000000000001137, @total=0.05000000000001137>
-T3=> #<Benchmark::Tms:0x007fdafc757e78 @label="", @real=2.471284, @cstime=0.0, @cutime=0.0, @stime=0.009999999999999787, @utime=0.05000000000001137, @total=0.060000000000011156>
+T1=> #<Benchmark::Tms:0x007f96b0523728 @label="", @real=2.983779, @cstime=0.0, @cutime=0.0, @stime=0.07999999999999996, @utime=0.16000000000000014, @total=0.2400000000000001>
+T2=> #<Benchmark::Tms:0x007f96ac013c78 @label="", @real=3.12616, @cstime=0.0, @cutime=0.0, @stime=0.08999999999999986, @utime=0.16999999999999993, @total=0.2599999999999998>
 ```
 
 

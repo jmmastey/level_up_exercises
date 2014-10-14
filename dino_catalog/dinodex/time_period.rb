@@ -14,4 +14,16 @@ class Dinodex::TimePeriod
   TRIASSIC          = new("Triassic")
   JURASSIC          = new("Jurassic")
   CRETACEOUS        = new("Cretaceous")
+
+  def self.decode(word)
+    case word
+    when /oxf/i then OXFORDIAN
+    when /perm/i then PERMIAN
+    when /alb/i then ALBIAN
+    when /tri/i then TRIASSIC
+    when /jur/i then JURASSIC
+    when /cret/i then CRETACEOUS
+    else nil
+    end
+  end
 end 

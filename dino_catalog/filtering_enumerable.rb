@@ -45,6 +45,8 @@ module FilteringEnumerable
   end
 end
 
-require "./attribute_ranged_enumerable"
-require "./attribute_matching_enumerable"
+require "filtering_enumerable/attribute_conditioned_enumerable"
+require "filtering_enumerable/attribute_ranged_enumerable"
+require "filtering_enumerable/attribute_matching_enumerable"
+require "filtering_enumerable/queriable_enumerable"
 

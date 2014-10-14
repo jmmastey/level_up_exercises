@@ -1,10 +1,10 @@
-# Namespace for Dinosaur index library
-module Dinodex
+require "filtering_enumerable"
 
-end
+# Dinosaur index library
+Dinodex = Module.new()
 
 # Component libraries implementing Dinodex dinosaur catalog
-require "dinosaur.rb"
-require "ambulation.rb"
-require "diet.rb"
-require "time_period.rb"
+require "dinodex/dinosaur.rb"
+require "dinodex/ambulation.rb"
+require "dinodex/diet.rb"
+require "dinodex/time_period.rb"

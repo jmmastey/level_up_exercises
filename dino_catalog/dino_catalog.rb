@@ -3,10 +3,12 @@
 this_dir = File.dirname(__FILE__)
 $LOAD_PATH.unshift(this_dir) unless $LOAD_PATH.include?(this_dir)
 
-require "queriable_enumerable"
+require "filtering_enumerable"
 require "dinodex"
+require "dinodex/csv_loader"
 require "pry"
 
+Dinodex::CSVLoader.load("dinodex.csv") { |d| puts d.inspect }
 
 
 #

@@ -1,5 +1,3 @@
-require "./attribute_conditioned_enumerable"
-
 # An Enumerable collection of objects that's qualified by a filter condition
 module FilteringEnumerable
   class AttributeMatchingEnumerable < AttributeConditionedEnumerable

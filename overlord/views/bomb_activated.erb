@@ -1,5 +1,3 @@
-<h1>Activated!</h1>
-<span id="countdown" class="timer"></span>
 <script>
   var countdownseconds = 20;
   function countdowntimer() {
@@ -15,6 +13,12 @@
 
   var countdownTimer = setInterval('countdowntimer()', 1000);
 </script>
+
+<h1>Activated!</h1>
+
+
+<span id="countdown" class="timer"></span>
+
 
 <form action="/deactivate" method="post">
   <input type="number" name="deactivation_code" maxlength="4" min="0000"

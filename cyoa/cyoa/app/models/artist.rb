@@ -9,6 +9,12 @@ class Artist < ActiveRecord::Base
 
   after_create :populate_initial_metrics
 
+  def populate_initial_metrics
+    return if metrics.any?
+    nbs_services = get_nbs_metrics(3.months.ago)
+    process_metrics(nbs_services)
+  end
+  
   def update_metrics
     nbs_service_metrics = get_nbs_metrics(update_start_date)
     process_metrics(nbs_service_metrics)
@@ -19,13 +25,10 @@ class Artist < ActiveRecord::Base
     (metrics.first.recorded_on + 1).to_datetime
   end
 
-  def populate_initial_metrics
-    return if metrics.any?
-    nbs_services = get_nbs_metrics(3.months.ago)
-    process_metrics(nbs_services)
-  end
 
   def process_metrics(nbs_services)
+    new_metrics = []
+
     nbs_services.each do |nbs_service|
       service = Service.find_or_create_by(name: nbs_service["service"]["name"])
 
@@ -34,14 +37,13 @@ class Artist < ActiveRecord::Base
       nbs_metrics.keys.each do |nbs_category|
         category = Category.find_or_create_by(name: nbs_category)
         nbs_metrics[nbs_category].each do |nbs_date, nbs_value|
-          metric = Metric.new(service: service,
-                              category: category,
-                              value: nbs_value,
-                              nbs_date: nbs_date)
-          metrics << metric
+          new_metrics.push "(#{self.id}, #{category.id}, #{nbs_value}, '#{nbs_date}')"
         end
       end
     end
+
+    sql_insertion_records = "INSERT INTO metrics (artist_id, category_id, value, nbs_date) VALUES #{new_metrics.join(", ")}"
+    ActiveRecord::Base.connection.execute sql_insertion_records
   end
 
   def get_nbs_metrics(start_on)

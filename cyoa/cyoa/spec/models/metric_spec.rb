@@ -34,6 +34,5 @@ describe Metric do
     oct_12 = Time.new(2014, 10, 12, 12, 0, 0).to_i / (60 * 60 * 24)
     metric_oct_12 = FactoryGirl.create(:metric, nbs_date: oct_12.to_s) 
     expect(metric_oct_12.recorded_on).to eq(Date.new(2014, 10, 12))
-    expect(Metric.last.recorded_on).to eq(Date.new(2014, 10, 12))
   end
 end

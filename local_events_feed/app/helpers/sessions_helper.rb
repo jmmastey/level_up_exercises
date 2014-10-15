@@ -29,7 +29,7 @@ module SessionsHelper
   end
 
   def first_name
-    return 'Someone' unless current_user.name.present? && signed_in?
+    return 'Someone' unless signed_in? && current_user.name.present?
     current_user.name.split(/\s+/)[0]
   end
 end

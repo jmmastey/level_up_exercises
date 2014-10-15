@@ -17,7 +17,7 @@
 		<th>Calendar</th>
         <th>Remove</th>
     </tr>
-      <% @user.events.each do |event| %>
+      <% current_user.events.each do |event| %>
         <tr>
           <td><%= link_to event.name, event.link %></td>
           <td><%= event.to_chicago_time_s %></td>
@@ -28,7 +28,7 @@
       <% end %>
     </table>
     <br>
-    <h4><%= link_to 'Browse All Events', { :controller => 'events', :user_id => @user[:id] }  %></h4>
+    <h4><%= link_to 'Browse All Events', { :controller => 'events', :user_id => current_user[:id] }  %></h4>
   <% else %>
     <h3>Please <%= link_to 'sign in', new_session_path %></h3>
   <% end %>

@@ -60,4 +60,12 @@ class Dataset
 
     Hash[percentages.sort_by { |_, y| y }]
   end
+
+  def show_winner
+    if calculate_probability >= PROBABILITY_THRESHOLD
+      "No clear winner"
+    else
+      "Cohort #{cohort_percentages.to_a.last.first} is the winner"
+    end
+  end
 end

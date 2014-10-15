@@ -9,20 +9,20 @@ class Results
 
   json = JSONLoader.new("source_data.json")
   @dataset = Dataset.new(json.fetch_data)
-  @cohorts = @dataset.all_group_types
 
   def self.cohorts_table
-    results = []
-    @cohorts.map do |cohort|
-      results << [cohort,
-                  @dataset.total_in_group(cohort),
-                  @dataset.number_of_conversions(cohort),
-                  percentage_by_cohort(cohort)]
-    end
-
-    table results,
+    table cohort_results,
       headers: ["Groups", "Sample Size", "Conversions", "Per. of Conversions"],
       description: false
+  end
+
+  def self.cohort_results
+    @dataset.all_group_types.map do |cohort|
+      [cohort,
+       @dataset.total_in_group(cohort),
+       @dataset.number_of_conversions(cohort),
+       percentage_by_cohort(cohort)]
+    end
   end
 
   def self.percentage_by_cohort(cohort)
@@ -42,11 +42,7 @@ class Results
   end
 
   def self.winner
-    if @dataset.calculate_probability >= Dataset::PROBABILITY_THRESHOLD
-      "No clear winner"
-    else
-      "Cohort #{@dataset.cohort_percentages.to_a.last.first} is the winner"
-    end
+    @dataset.show_winner
   end
 end
 

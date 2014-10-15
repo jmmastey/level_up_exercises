@@ -1,2 +1,6 @@
 class Item < ActiveRecord::Base
+  validates_presence_of :name, :in_game_id
+  validates_numericality_of :in_game_id,
+                            only_integer: true,
+                            greater_than_or_equal_to: 0
 end

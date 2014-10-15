@@ -1,13 +1,15 @@
+require "filtering_enumerable/enumerable_wrapper"
+
 # Can be negated
 # imlements the each and offers virtual keep_item? methods
 module FilteringEnumerable
-  class AttributeConditionedEnumerable
+  class AttributeConditionedEnumerable < EnumerableWrapper
     include FilteringEnumerable
 
     attr_reader :filter_attribute
 
     def initialize(parent, filter_attribute)
-      @parent = parent
+      super(parent)
       @filter_attribute = filter_attribute
       @negated = false
     end
@@ -23,7 +25,7 @@ module FilteringEnumerable
 
     # Implements Enumerable
     def each
-      @parent.each do |item| 
+      @wrapped_enumerable.each do |item| 
         yield item if 
           negated? ^ (item.respond_to?(@filter_attribute) && keep_item?(item))
       end

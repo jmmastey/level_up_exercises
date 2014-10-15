@@ -5,16 +5,24 @@ require "pry"
 this_dir = File.dirname(__FILE__)
 $LOAD_PATH.unshift(this_dir) unless $LOAD_PATH.include?(this_dir)
 
-require "filtering_enumerable"
+require "queriable_array"
 require "dinodex"
 require "dinodex/csv_loader"
 require "dinodex_cli"
 
 cli_parser = Dinodex::CommandLineInterface.new
 cli_parser.parse!(ARGV)
+
+dino_list = QueriableArray.new
+dino_list = dino_list.match(:diet, "insectivore")
+
+cli_parser.input_files.each do |filename, field_defaults|
+  Dinodex::CSVLoader.new(filename, field_defaults)
+                    .read { |dinosaur| dino_list << dinosaur }
+end
+
 binding.pry
-dino_list = QueriableEnumerable.new
-csv_loader = Dinodex::CSVLoader
+
 #cli_parser
 #cli_parser.in
 #q = QueriableEnumerable.new

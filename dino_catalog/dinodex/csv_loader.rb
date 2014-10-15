@@ -7,12 +7,14 @@ module Dinodex
     attr_accessor :default_values
     attr_accessor :path
 
-    def initialize(path, default_values = {})
+    def initialize(path = nil, default_values = {})
       @path, @default_values = path, default_values
     end
 
-    def load(path = nil, default_values = nil)
-      @csvreader = CSV.foreach(path || @path,
+    def read(path = nil, default_values = nil)
+      path ||= @path or raise AgumentError.new("Missing input file")
+
+      @csvreader = CSV.foreach(path,
                                headers: true,
                                return_headers: false,
                                header_converters: :dinodex_rename,

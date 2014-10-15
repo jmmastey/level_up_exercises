@@ -62,7 +62,7 @@ class BlagPost
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date.years_since(3) > Date.today
   end
 
   def abstract

@@ -3,23 +3,16 @@ require_relative "dinosaur.rb"
 
 class DinosaurParser
   CSV_EXTENSION   = "csv"
-  HEADERS_ALLOWED = %w(name
-                       period
-                       continent
-                       diet
-                       weight_in_lbs
-                       walking
-                       description
-                    )
+  HEADERS_ALLOWED = Dinosaur::ATTRIBUTES
 
   HEADER_ALIASES   = {
     "genus" => "name",
     "weight" => "weight_in_lbs",
-    "carnivore" => "diet"
+    "carnivore" => "diet",
   }
 
   CONVERTERS       = {
-    "diet"  => :diet_converter
+    "diet"  => :diet_converter,
   }
 
   class << self
@@ -47,7 +40,7 @@ class DinosaurParser
     end
 
     def process_row(row)
-      hash = create_initial_param
+      hash = create_default_params
 
       row.each do |column|
         if header = process_header(column[0])
@@ -57,13 +50,23 @@ class DinosaurParser
       hash
     end
 
+    def process_header(header)
+      header = header.downcase.gsub(" ", "_")
+
+      if HEADERS_ALLOWED.include?(header)
+        header
+      elsif HEADERS_ALLOWED.include?(HEADER_ALIASES[header])
+        HEADER_ALIASES[header]
+      end
+    end
+
     def process_value(header, value)
       return value unless CONVERTERS.include?(header)
 
-      self.send(CONVERTERS[header], value)
+      send CONVERTERS[header], value
     end
 
-    def create_initial_param
+    def create_default_params
       unless @param_hash
         @param_hash = {}
         HEADERS_ALLOWED.each do |header|
@@ -78,21 +81,11 @@ class DinosaurParser
       (File.extname(filename) == ".#{CSV_EXTENSION}") && (File.exist?(filename))
     end
 
-    def process_header(header)
-      header = header.downcase.gsub(" ", "_")
-
-      if HEADERS_ALLOWED.include?(header)
-        header
-      elsif HEADERS_ALLOWED.include?(HEADER_ALIASES[header])
-        HEADER_ALIASES[header]
-      end
-    end
-
     def diet_converter(value)
       if value.downcase == "yes"
         value = "Carnivore"
       elsif value.downcase == "no"
-        value ="Herbivore"
+        value = "Herbivore"
       end
 
       value

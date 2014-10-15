@@ -2,16 +2,16 @@ require 'minitest/autorun'
 require_relative '../dinosaur_parser.rb'
 
 class DinosaurParserTest < MiniTest::Unit::TestCase
-  def test_convert_header_should_handle_valid_header
-    assert_equal('weight_in_lbs', DinosaurParser.convert_header("WEIGHT IN LBS"))
+  def test_process_header_should_handle_valid_header
+    assert_equal('weight_in_lbs', DinosaurParser.process_header("WEIGHT IN LBS"))
   end
 
-  def test_convert_header_should_handle_valid_alias
-    assert_equal('weight_in_lbs', DinosaurParser.convert_header("weight"))
+  def test_process_header_should_handle_valid_alias
+    assert_equal('weight_in_lbs', DinosaurParser.process_header("weight"))
   end
 
-  def test_convert_header_should_handle_invalid_header
-    assert_equal(nil, DinosaurParser.convert_header("capacity"))
+  def test_process_header_should_handle_invalid_header
+    assert_equal(nil, DinosaurParser.process_header("capacity"))
   end
 
   def test_valid_file_should_fail_for_non_existing_file
@@ -27,7 +27,7 @@ class DinosaurParserTest < MiniTest::Unit::TestCase
   end
 
   def test_param_hash
-    DinosaurParser.get_param_hash
+    DinosaurParser.create_default_params
     assert_equal(true, DinosaurParser.param_hash.keys.include?(:weight_in_lbs))
   end
 end

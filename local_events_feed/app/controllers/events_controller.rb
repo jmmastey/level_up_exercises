@@ -2,10 +2,6 @@ class EventsController < ApplicationController
   def index
   end
 
-  def show
-    @event = Event.find(params[:id])
-  end
-
   def remove_event
     @user = User.find(params[:user_id])
     @event = Event.find(params[:event_id])

@@ -16,7 +16,7 @@ module FilteringEnumerable
       @exclusive
     end
 
-    def exclusive(true_or_false)
+    def exclusive(true_or_false = true)
       @exclusive = true_or_false
       @range = Range.new(@lo_value, @hi_value, exclusive?)  # Remake range
       self  # Support chaining

@@ -12,8 +12,11 @@ cli_parser = Dinodex::CommandLineInterface.new
 cli_parser.parse!(ARGV)
 
 dino_list = QueriableArray.new
-d = dino_list
-dino_list = dino_list.match(:diet, Dinodex::Diet::CARNIVORE)
+dino_list = dino_list.between(:weight, 0, Dinodex::LARGE_SIZE_LBS)
+                     .exclusive if cli_parser.select_small
+dino_list = dino_list.between(:weight, 0, Dinodex::LARGE_SIZE_LBS)
+                     .exclusive.negate if cli_parser.select_large
+dino_list = dino_list.match(:
 
 cli_parser.input_files.each do |filename, field_defaults|
   Dinodex::CSVLoader.new(filename, field_defaults)

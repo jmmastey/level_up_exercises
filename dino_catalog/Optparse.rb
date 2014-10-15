@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'optparse'
-require 'optparse/time'
 require 'ostruct'
 require 'pp'
 require_relative 'Dinosaur.rb'
@@ -29,11 +28,14 @@ class Optparse
       opts.on(
         "-f",
         "--file [inputCSV]",
+        Array,
         "Input the file to be used"
               ) do |f|
         options.dinosaurs.clear
-        options.dinosaurs = parser.parse_csv(f) unless !(File.exist?(f) \
-          && f.split(//).last(3).join.casecmp('csv'))
+        f.each do |file|
+          options.dinosaurs = parser.parse_csv(f) unless !(File.exist?(file) \
+            && file.split(//).last(3).join.casecmp('csv'))
+        end
       end
 
       opts.on(

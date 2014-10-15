@@ -4,17 +4,22 @@ class Dinosaur
   CRETACEOUS    = "Cretaceous"
   BIG_THRESHOLD = 2000
   CARNIVORE     = %w(carnivore insectivore piscivore)
+  ATTRIBUTES    = %w(name
+                     period
+                     continent
+                     diet
+                     weight_in_lbs
+                     walking
+                     description
+                    )
 
   attr_reader :name, :continent, :diet, :weight_in_lbs, :walking, :description
 
   def initialize(params = {})
-    @name          = params[:name]
-    @period        = params[:period]
-    @continent     = params[:continent]
-    @diet          = params[:diet]
-    @weight_in_lbs = params[:weight_in_lbs]
-    @walking       = params[:walking]
-    @description   = params[:description]
+    ATTRIBUTES.each do |attr|
+      var_name = "@#{attr}"
+      instance_variable_set(var_name, params[attr.to_sym]) 
+    end
   end
 
   def biped?
@@ -38,13 +43,9 @@ class Dinosaur
   end
 
   def display
-    display_by_key('name')
-    display_by_key('period')
-    display_by_key('continent')
-    display_by_key('diet')
-    display_by_key('weight_in_lbs')
-    display_by_key('walking')
-    display_by_key('description')
+    ATTRIBUTES.each do |attr|
+      display_by_key attr
+    end
   end
 
   private

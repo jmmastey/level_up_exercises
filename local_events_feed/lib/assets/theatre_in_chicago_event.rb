@@ -21,7 +21,8 @@ class TheatreInChicagoEvent
   end
   
   def when
-    result = DateTime.parse("#{date}T#{time}-05:00")
+    zone = "Central Time (US & Canada)"
+    result = ActiveSupport::TimeZone[zone].parse("#{date} #{time}")
   end
 
   def match?(other)

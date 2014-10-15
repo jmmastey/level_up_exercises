@@ -38,7 +38,7 @@ describe TheatreInChicagoEvent do
     expect(setted_event.to_event_model).to be_valid
   end
 
-  it "converts to a string corretcly" do
+  it "converts to a string correctly" do
     expect(cleaned_event.to_s).to eq('20141001, 07:30:00.000, Party, Everywhere, http://www.event.com')
   end
 end

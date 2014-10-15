@@ -1,24 +1,24 @@
 class Dinosaur
-  BIPED         = "Biped"
-  QUADRUPED     = "Quadruped"
-  CRETACEOUS    = "Cretaceous"
-  BIG_THRESHOLD = 2000
-  CARNIVORE     = %w(carnivore insectivore piscivore)
-  ATTRIBUTES    = %w(name
-                     period
-                     continent
-                     diet
-                     weight_in_lbs
-                     walking
-                     description
-                    )
+  BIPED                  = "Biped"
+  QUADRUPED              = "Quadruped"
+  CRETACEOUS             = "Cretaceous"
+  BIG_DINOSAUR_THRESHOLD = 2000
+  CARNIVORE              = %w(carnivore insectivore piscivore)
+  ATTRIBUTES             = %w(name
+                              period
+                              continent
+                              diet
+                              weight_in_lbs
+                              walking
+                              description
+                           )
 
   attr_reader :name, :continent, :diet, :weight_in_lbs, :walking, :description
 
   def initialize(params = {})
     ATTRIBUTES.each do |attr|
       var_name = "@#{attr}"
-      instance_variable_set(var_name, params[attr.to_sym]) 
+      instance_variable_set(var_name, params[attr.to_sym])
     end
   end
 
@@ -35,17 +35,15 @@ class Dinosaur
   end
 
   def carnivore?
-    !@diet.nil? && CARNIVORE.include?(@diet.downcase)
+    @diet && CARNIVORE.include?(@diet.downcase)
   end
 
   def big_dinosaur?
-    @weight_in_lbs >= BIG_THRESHOLD
+    @weight_in_lbs >= BIG_DINOSAUR_THRESHOLD
   end
 
   def display
-    ATTRIBUTES.each do |attr|
-      display_by_key attr
-    end
+    ATTRIBUTES.each { |attr| display_by_key attr }
   end
 
   private

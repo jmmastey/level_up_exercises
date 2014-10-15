@@ -17,7 +17,7 @@ class Overlord < Sinatra::Base
 
     session[:activate_code] = params[:activation_code]
     session[:deactivate_code] = params[:deactivation_code]
-    session[:attempts] = 0
+    reset_attempts
 
     redirect '/bomb'
   end
@@ -39,34 +39,40 @@ class Overlord < Sinatra::Base
   end
 
   get '/explosion' do
+    session[:bomb_state] = 'exploded'
     erb :explosion
   end
 
-  def num?(number)
-    /^[\d]{1,9}$/ =~ number
-  end
-
-  def check_activate_code(code)
-    return unless session[:activate_code] == code
-
-    session[:bomb_state] = 'activated'
-    session[:attempts] = 0
-  end
-
-  def check_deactivate_code(code)
-    if session[:deactivate_code] == code
-      session[:bomb_state] = 'not activated'
-      session[:attempts] = 0
-    else
-      session[:attempts] += 1
+  helpers do
+    def num?(number)
+      /^[\d]{1,9}$/ =~ number
     end
-  end
 
-  def check_for_explosion
-    return if session[:attempts] < 3
+    def check_activate_code(code)
+      return unless session[:activate_code] == code
 
-    session[:bomb_state] = 'exploded'
-    redirect '/explosion'
+      session[:bomb_state] = 'activated'
+      session[:attempts] = 0
+    end
+
+    def check_deactivate_code(code)
+      if session[:deactivate_code] == code
+        session[:bomb_state] = 'not activated'
+        reset_attempts
+      else
+        session[:attempts] += 1
+      end
+    end
+
+    def check_for_explosion
+      return if session[:attempts] < 3
+
+      redirect '/explosion'
+    end
+
+    def reset_attempts
+      session[:attempts] = 0
+    end
   end
 
   # start the server if ruby file executed directly

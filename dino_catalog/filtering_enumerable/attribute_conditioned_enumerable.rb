@@ -37,8 +37,7 @@ module FilteringEnumerable
     # Implements Enumerable
     def each
       @wrapped_enumerable.each do |item| 
-        yield item if 
-          item_passes_filter?(item)
+        yield item if item_passes_filter?(item)
       end
     end
 
@@ -50,7 +49,6 @@ module FilteringEnumerable
     end
 
     def item_passes_filter?(item)
-
       (exclude_nil? && item_attr_val(item).nil?) ? false
                                                  : negated? ^ keep_item?(item)
     end

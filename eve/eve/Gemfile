@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0.beta1'
 # Use postgresql as the database for Active Record
@@ -52,4 +51,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner', require: false
+
+  gem 'eve_central'
 end

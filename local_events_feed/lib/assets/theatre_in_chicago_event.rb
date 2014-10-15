@@ -17,7 +17,7 @@ class TheatreInChicagoEvent
   end
 
   def to_s
-    "#{date}, #{time}, #{name}, #{location}, #link"
+    "#{date}, #{time}, #{name}, #{location}, #{link}"
   end
   
   def when

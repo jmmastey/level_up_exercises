@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 
   def failed_to_authenticate?(params)
     @user = User.find_by(email: params[:email])
-    return true if @user.nil?
+    return true unless @user.present?
     return true if @user.authenticate(params[:password]) != @user
     false
   end

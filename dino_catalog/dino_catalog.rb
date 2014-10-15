@@ -10,54 +10,16 @@ require "dinodex_cli"
 
 cli_parser = Dinodex::CommandLineInterface.new
 cli_parser.parse!(ARGV)
-
-dino_list = QueriableArray.new
-dino_list = dino_list.between(:weight, 0, Dinodex::LARGE_SIZE_LBS)
-                     .exclusive if cli_parser.select_small
-dino_list = dino_list.between(:weight, 0, Dinodex::LARGE_SIZE_LBS)
-                     .exclusive.negate if cli_parser.select_large
-dino_list = dino_list.match(:
+dino_list = cli_parser.filtering_list
 
 cli_parser.input_files.each do |filename, field_defaults|
-  Dinodex::CSVLoader.new(filename, field_defaults)
-                    .read { |dinosaur| dino_list << dinosaur }
+  Dinodex::CSVLoader.new(filename, field_defaults).read do |dinosaur| 
+    dino_list << dinosaur
+  end
 end
 
-puts dino_list.count
+dino_list.each do |dinosaur| 
+  puts "--- #{dinosaur} ---"
+  puts dinosaur.full_description
+end
 
-#cli_parser
-#cli_parser.in
-#q = QueriableEnumerable.new
-#l = Dinodex::CSVLoader.new("dinodex.csv")
-#l = Dinodex::CSVLoader.new("african_dinosaur_export.csv")
-#Dinodex::CSVLoader.load("dinodex.csv") { |d| puts d.inspect }
-#l.load { |d| q << d }
-
-#q.match(:diet, Dinodex::Diet::PISCIVORE
-#               ).each { |d| puts d.full_description}
-#q.each { |d| puts d.full_description }
-#
-#class Foo
-#  attr_accessor :bar
-#  attr_accessor :baz
-#
-#  def initialize(bar, baz)
-#    @bar = bar
-#    @baz = baz
-#  end
-#end
-#
-#a = QueriableEnumerable.new()
-#c = -1 
-#a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
-#a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
-#a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
-#a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
-#a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
-#a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
-#a[c+=1] = Foo.new(c, "Next C IS #{c+1}")
-#
-##a.bar(:match, 3,4, 5).each { |c| puts c.inspect, "\n" }
-#a.bar(:between, 2,10).each { |c| puts c.inspect, "\n" }
-#
-##.baz("Next C IS 2").each { |c| puts c.inspect, "\n" }

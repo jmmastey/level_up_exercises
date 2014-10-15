@@ -49,4 +49,5 @@ require "filtering_enumerable/enumerable_wrapper"
 require "filtering_enumerable/attribute_conditioned_enumerable"
 require "filtering_enumerable/attribute_ranged_enumerable"
 require "filtering_enumerable/attribute_matching_enumerable"
+require "filtering_enumerable/attribute_regexpmatch_enumerable"
 

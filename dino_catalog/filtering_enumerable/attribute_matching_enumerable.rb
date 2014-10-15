@@ -15,10 +15,8 @@ module FilteringEnumerable
       @match_expressions.include?(item_attr_val(item))
     end
   end
-end
 
-# Add interface to FilteringEnumerable mixin to expose this functionality
-module FilteringEnumerable
+  # Add interface to FilteringEnumerable mixin to expose this functionality
   add_filter_method(:match) do |parent, attribute, *match_expressions|
     AttributeMatchingEnumerable.new(parent, attribute, *match_expressions)
   end

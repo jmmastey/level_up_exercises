@@ -1,16 +1,9 @@
-<h1>The bomb</h1>
-
-<p>This is the main bomb page.</p>
-
-<p>Activation state: bomb is <%= session[:bomb_state] %></p>
-
-<!--<p>Attempts: <%= session[:attempts] %></p>
-<p>Act code: <%= session[:activate_code] %></p>
-<p>Dea code: <%= session[:deactivate_code] %></p>-->
-
-<p>
-  <form action="/switch" method="POST">
-    Enter code <input type="text" id="code" name="code"><br />
-    <input type="submit" id="arm-button" name="arm-button" value="Arm the bomb">
-  </form>
-</p>
+<div class="bomb-screen">
+  <div style="padding-top:150px;">
+    <form action="/switch" method="POST">
+      <span class="text-frame">Enter code <input type="text" id="code" name="code"></span>
+      <p>&nbsp;</p>
+      <button type="button" class="btn btn-lg btn-default" onclick="form.submit();">Arm the Bomb</button>
+    </form>
+  </div>
+</div>

@@ -10,14 +10,21 @@ require "dinodex"
 require "dinodex/csv_loader"
 require "dinodex_cli"
 
-q = QueriableEnumerable.new
-l = Dinodex::CSVLoader.new("dinodex.csv")
+cli_parser = Dinodex::CommandLineInterface.new
+cli_parser.parse!(ARGV)
+binding.pry
+dino_list = QueriableEnumerable.new
+csv_loader = Dinodex::CSVLoader
+#cli_parser
+#cli_parser.in
+#q = QueriableEnumerable.new
+#l = Dinodex::CSVLoader.new("dinodex.csv")
 #l = Dinodex::CSVLoader.new("african_dinosaur_export.csv")
 #Dinodex::CSVLoader.load("dinodex.csv") { |d| puts d.inspect }
-l.load { |d| q << d }
+#l.load { |d| q << d }
 
-q.match(:diet, Dinodex::Diet::PISCIVORE
-               ).each { |d| puts d.full_description}
+#q.match(:diet, Dinodex::Diet::PISCIVORE
+#               ).each { |d| puts d.full_description}
 #q.each { |d| puts d.full_description }
 #
 #class Foo

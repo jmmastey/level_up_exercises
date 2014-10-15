@@ -18,12 +18,11 @@ module Dinodex
     @@opt_n = ["-n", "--noncarnivore", "Select noncarnivorous species"]
     @@opt_j = ["-j", "--json", "Select JSON output"]
     @@opt_h = ["-h", "--help", "Show this help"]
-    @@opt_p = ["-p=MANDATORY", "--period", "period", "Select species by period"]
-    @@opt_d = ["-d=MANDATORY", "--default", "field=value", "Set default value"]
-    @@opt_r = ["-r=MANDATORY", "--region", "continent",
-               "Select species by continent"]
-    @@opt_f = ["-f=MANDATORY", "--file", "filename", 
-               "Read dinosaurs from 'filename'"]
+    @@opt_p = ["-p=period", "--period", "Select species by period"]
+    @@opt_d = ["-d=field=value", "--default", "Set default value",
+               "Omit '=value' to unset default"]
+    @@opt_r = ["-r=continent", "--region", "Select species by continent"]
+    @@opt_f = ["-f=filename", "--file", "Read dinosaurs from 'filename'"]
 
     def initialize
 
@@ -33,10 +32,13 @@ module Dinodex
       @input_files = []
       @filtering_list = QueriableArray.new
 
-      self.banner = "usage $0 [-f filename]+ ...TBD..."
+      self.banner = "usage #{File.basename($0)} " \
+                    "([-d field=val]* [-f filename]+)+ [selection options]*"
       separator ""
       separator "Option summary"
 
+      on(*@@opt_d) { |defstr| set_default_value(defstr) }
+      on(*@@opt_f) { |f| @input_files << [f, @default_values] }
       on(*@@opt_s) { |_o| add_small_filter }
       on(*@@opt_l) { |_o| add_large_filter }
       on(*@@opt_2) { |_o| add_biped_filter }
@@ -45,10 +47,8 @@ module Dinodex
       on(*@@opt_n) { |_o| add_noncarnivore_filter }
       on(*@@opt_r) { |continent_pattern| add_region_filter(continent_pattern) }
       on(*@@opt_p) { |period_pattern| add_timeperiod_filter(period_pattern) }
-      on(*@@opt_j) { |_o| @output_json = true }
-      on(*@@opt_d) { |defstr| set_default_value(defstr) }
-      on(*@@opt_f) { |f| @input_files << [f, @default_values] }
       on(*@@opt_h) { |_o| output_help_and_exit }
+      on(*@@opt_j) { |_o| @output_json = true }
     end
 
     # NOTE: "field=" sets empty string value; "field" alone will delete default
@@ -74,7 +74,8 @@ module Dinodex
     end
 
     def add_small_filter
-      @filtering_list = @filtering_list.between(:weight, 0, LARGE_SIZE_LBS)
+      @filtering_list = 
+        @filtering_list.between(:weight, 0, LARGE_SIZE_LBS).exclude_nil
     end
 
     def add_large_filter
@@ -82,7 +83,7 @@ module Dinodex
     end
 
     def add_carnivore_filter
-      @filtering_list = @filtering_list.match(:carnivore?, true)
+      @filtering_list = @filtering_list.match(:carnivorous?, true)
     end
 
     def add_noncarnivore_filter
@@ -90,22 +91,23 @@ module Dinodex
     end
 
     def add_quadruped_filter
-      @filtering_list = @filtering_list.match(:ambulation, 
-                                              Ambulation.QUADRUPEDAL)
+      @filtering_list = 
+        @filtering_list.match(:ambulation, Ambulation::QUADRUPEDAL).exclude_nil
     end
 
     def add_biped_filter
-      @filtering_list = @filtering_list.match(:ambulation, Ambulation.BIPEDAL)
+      @filtering_list = 
+        @filtering_list.match(:ambulation, Ambulation::BIPEDAL).exclude_nil
     end
 
     def add_region_filter(pattern)
       @filtering_list = 
-        @filtering_list.match_regex(:continent, /#{pattern}/i)
+        @filtering_list.match_regex(:continent, /^#{pattern}/i)
     end
 
     def add_timeperiod_filter(pattern)
       @filtering_list = 
-        @filtering_list.match_regex(:time_period, /#{pattern}/i)
+        @filtering_list.match_regex(:time_period, /^#{pattern}/i)
     end
 
     def output_help_and_exit(exitcode = 0)

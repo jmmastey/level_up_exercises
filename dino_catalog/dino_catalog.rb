@@ -7,6 +7,7 @@ require "queriable_array"
 require "dinodex"
 require "dinodex/csv_loader"
 require "dinodex_cli"
+#require"pry"
 
 cli_parser = Dinodex::CommandLineInterface.new
 cli_parser.parse!(ARGV)
@@ -20,6 +21,6 @@ end
 
 dino_list.each do |dinosaur| 
   puts "--- #{dinosaur} ---"
-  puts dinosaur.full_description
+  puts dinosaur.full_description, "\n"
 end
 

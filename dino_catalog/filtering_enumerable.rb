@@ -23,14 +23,13 @@ module FilteringEnumerable
     add_filter(filter_method, filtered_attr, *match_exprs)
   end
 
-  def respond_to_missing?(method, include_all)
+  def respond_to_missing?(method, include_all = false)
     super || @@filter_factory_methods.include?(method)
   end
 
   def add_filter(filter_method, attribute,  *match_expressions)
     factory_method = @@filter_factory_methods[filter_method] or
       raise NoMethodError.new("No such filter: #{filter_method}")
-
     factory_method.call(self, attribute, *match_expressions)
   end
 

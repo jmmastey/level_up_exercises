@@ -8,9 +8,10 @@ class Dinodex::Dinosaur
   attr_accessor :continent    # Geographic region of residence
   attr_accessor :description  # Human-readable informational message
 
-  def initialize(taxon, period, weight, ambulation, other = {})
+  def initialize(taxon, time_period, weight, ambulation, other = {})
 
-    @taxon, @period, @weight, @ambulation = taxon, period, weight, ambulation
+    @taxon, @time_period, @weight, @ambulation = 
+      taxon, time_period, weight, ambulation
     @diet = other[:diet]
     @description = other[:description]
     @continent = other[:continent]
@@ -31,11 +32,10 @@ class Dinodex::Dinosaur
   private
 
   def printed_field_list
-    [:taxon, :time_period, :time_period, :weight,
+    [:taxon, :time_period, :weight,
         :diet, :ambulation, :continent, :description].map do |fieldsym|
-      (fieldval = send(fieldsym)) && 
-        "#{fieldsym.to_s.gsub('_', ' ').capitalize}: #{fieldval}" || 
-        nil
+      (fieldval = send(fieldsym)) ?
+        "#{fieldsym.to_s.gsub('_', ' ').capitalize}: #{fieldval}" : nil
     end
   end
 end

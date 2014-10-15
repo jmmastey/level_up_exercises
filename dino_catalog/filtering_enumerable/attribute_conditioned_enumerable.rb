@@ -12,6 +12,7 @@ module FilteringEnumerable
       super(parent)
       @filter_attribute = filter_attribute
       @negated = false
+      @exclude_nil = false
     end
 
     def negated?
@@ -23,11 +24,21 @@ module FilteringEnumerable
       self
     end
 
+    # Whether to automatically fail items with nil attribute values in filter
+    def exclude_nil(true_or_false = true)
+      @exclude_nil = true_or_false
+      self
+    end
+
+    def exclude_nil?
+      @exclude_nil
+    end
+
     # Implements Enumerable
     def each
       @wrapped_enumerable.each do |item| 
         yield item if 
-          negated? ^ (item.respond_to?(@filter_attribute) && keep_item?(item))
+          item_passes_filter?(item)
       end
     end
 
@@ -35,7 +46,13 @@ module FilteringEnumerable
 
     # Encapsulate @filter_attribute
     def item_attr_val(item)
-      item.send(@filter_attribute)
+      item.respond_to?(@filter_attribute) ? item.send(@filter_attribute) : nil
+    end
+
+    def item_passes_filter?(item)
+
+      (exclude_nil? && item_attr_val(item).nil?) ? false
+                                                 : negated? ^ keep_item?(item)
     end
 
     # Overridden in subclass to implement an actual selection condition

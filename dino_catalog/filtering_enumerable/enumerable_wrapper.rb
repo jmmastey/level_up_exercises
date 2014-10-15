@@ -9,16 +9,19 @@ module FilteringEnumerable
     end
 
     def method_missing(method, *args, &block)
-      # Give preference to the wrapped enumerable so I impersonate it well
-      if @wrapped_enumerable.respond_to?(method)
-        @wrapped_enumerable.send(method, *args, &block)
-      else
+      if i_can_do_it?(method)
         super
+      else
+        @wrapped_enumerable.send(method, *args, &block)
       end
     end
 
+    # superclass' version knows my inherent capabilities vs. delegated
+    alias_method :i_can_do_it?, :respond_to_missing?
+    
     def respond_to_missing?(method, include_all = false)
-      super || @wrapped_enumerable.respond_to?(method, include_all)
+      i_can_do_it?(method, include_all) || 
+        @wrapped_enumerable.respond_to_missing?(method, include_all)
     end
   end
 end

@@ -18,6 +18,6 @@ class ScrapeController < ApplicationController
   def scrape_for_new_events_in(upcoming)
     future = upcoming.days.from_now
     events = TheatreInChicagoScraper.get_events(future)
-    events.each { |event| event.save }
+    events.each(&:save)
   end
 end

@@ -66,13 +66,13 @@ class TheatreInChicagoPageParser
   end
 
   def extract_location_from_current_line
-    return if @date.empty?
-    return unless @event.time.empty?
+    return unless @date.present?
+    return unless @event.time.blank?
     append_location_from_current_line
   end
 
   def extract_name_from_current_line
-    return if @date.empty?
+    return unless @date.present?
     match = /<a href=\'(http:\/\/www.theatreinchicago.com\/.*)\'>(.*)<\/a>/.match(line)
     return unless match && match.captures.count == 2
     @event.link = match.captures[0]
@@ -80,7 +80,7 @@ class TheatreInChicagoPageParser
   end
 
   def append_location_from_current_line
-    if @event.location.empty?
+    if @event.location.blank?
       extract_beginning_of_location_from_current_line
     else
       @event.location += line

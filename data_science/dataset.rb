@@ -18,9 +18,7 @@ class Dataset
   end
 
   def number_of_conversions(cohort)
-    @results.count do |result|
-      result["cohort"] == cohort && result["result"] == 1
-    end
+    @results.count { |result| result["cohort"] == cohort && result["result"] == 1 }
   end
 
   def percentage_of_conversion(cohort)
@@ -58,7 +56,7 @@ class Dataset
       percentages[group] = percentage_of_conversion(group)
     end
 
-    Hash[percentages.sort_by { |_, y| y }]
+    Hash[percentages.sort_by { |_, percent| percent }]
   end
 
   def show_winner

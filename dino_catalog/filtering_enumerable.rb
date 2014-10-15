@@ -7,7 +7,7 @@
 #
 # enum->attribute(:filter, val1, val2, ...)
 #
-# When a subclass registers a method to the module 
+# When a subclass registers a method to the module
 # filter(attribute, val1, val2, ...) that returns an instance of such a filter
 #
 # eg: enum->favorite_color(:matches, :blue)
@@ -18,7 +18,7 @@ module FilteringEnumerable
   # Callbacks are called with this Enumerable as parent and any given arguments
   @@filter_factory_methods = {}
 
-  def method_missing(filter_method, *args, &block)
+  def method_missing(filter_method, *args, &_block)
     filtered_attr, *match_exprs = *args
     add_filter(filter_method, filtered_attr, *match_exprs)
   end
@@ -28,8 +28,8 @@ module FilteringEnumerable
   end
 
   def add_filter(filter_method, attribute,  *match_expressions)
-    factory_method = @@filter_factory_methods[filter_method] or
-      raise NoMethodError.new("No such filter: #{filter_method}")
+    raise NoMethodError, "No such filter: #{filter_method}" unless
+      (factory_method = @@filter_factory_methods[filter_method])
     factory_method.call(self, attribute, *match_expressions)
   end
 
@@ -49,4 +49,3 @@ require "filtering_enumerable/attribute_conditioned_enumerable"
 require "filtering_enumerable/attribute_ranged_enumerable"
 require "filtering_enumerable/attribute_matching_enumerable"
 require "filtering_enumerable/attribute_regexpmatch_enumerable"
-

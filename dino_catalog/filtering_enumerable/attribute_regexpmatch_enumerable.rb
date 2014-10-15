@@ -1,14 +1,13 @@
 # FilteringEnumerable wrapper that filters by regular expression match
 module FilteringEnumerable
   class AttributeRegexpmatchEnumerable < AttributeConditionedEnumerable
-
     def initialize(parent, filter_attribute, *match_patterns)
       super(parent, filter_attribute)
       @match_patterns = match_patterns
     end
 
     protected
-    
+
     def keep_item?(item)
       @match_patterns.any? { |regexp| regexp.match(item_attr_val(item)) }
     end

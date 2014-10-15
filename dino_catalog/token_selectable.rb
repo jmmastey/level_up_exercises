@@ -6,13 +6,10 @@
 # - @token_pattern to be a RegExp an instance uses to match token
 #
 class TokenSelectable
+  attr_reader :name
 
   def initialize(instance_name, token_pattern)
-    @instance_name, @token_pattern = instance_name, token_pattern
-  end
-
-  def name
-    @instance_name
+    @name, @token_pattern = instance_name, token_pattern
   end
 
   def recognizes_token?(token)

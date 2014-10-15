@@ -1,7 +1,6 @@
 # An Enumerable collection of objects that's qualified by a filter condition
 module FilteringEnumerable
   class AttributeMatchingEnumerable < AttributeConditionedEnumerable
-    
     attr_reader :match_expressions
 
     def initialize(parent, filter_attribute, *match_expressions)

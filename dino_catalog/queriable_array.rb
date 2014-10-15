@@ -7,5 +7,3 @@ class QueriableArray < FilteringEnumerable::EnumerableWrapper
     super([])
   end
 end
-
-

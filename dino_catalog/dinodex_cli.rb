@@ -5,7 +5,6 @@ require "queriable_array"
 # to build a filter for a list of dinosaurs
 module Dinodex
   class CommandLineInterface < OptionParser
-
     attr_accessor :input_files  # [[pathname, {default values}]
     attr_accessor :filtering_list
     attr_accessor :output_json
@@ -20,24 +19,23 @@ module Dinodex
     @@opt_h = ["-h", "--help", "Show this help"]
     @@opt_p = ["-p=period", "--period", "Select species by period"]
     @@opt_d = ["-d=field=value", "--default", "Set default value",
-               "Omit '=value' to unset default"]
+              "Omit '=value' to unset default"]
     @@opt_r = ["-r=continent", "--region", "Select species by continent"]
     @@opt_f = ["-f=filename", "--file", "Read dinosaurs from 'filename'"]
 
     def initialize
-
-      super 
+      super
 
       @default_values = {}
       @input_files = []
       @filtering_list = QueriableArray.new
 
-      self.banner = "usage #{File.basename($0)} " \
+      self.banner = "usage #{File.basename($PROGRAM_NAME)} " \
                     "([-d field=val]* [-f filename]+)+ [selection options]*"
       separator ""
       separator "Option summary"
 
-      on(*@@opt_d) { |defstr| set_default_value(defstr) }
+      on(*@@opt_d) { |defstr| update_default_value(defstr) }
       on(*@@opt_f) { |f| @input_files << [f, @default_values] }
       on(*@@opt_s) { |_o| add_small_filter }
       on(*@@opt_l) { |_o| add_large_filter }
@@ -52,12 +50,12 @@ module Dinodex
     end
 
     # NOTE: "field=" sets empty string value; "field" alone will delete default
-    def set_default_value(opt_arg)
+    def update_default_value(opt_arg)
       fieldname, value = split_default_setting_optarg(opt_arg)
 
       # Don't modify current @default_values; stored w/previous input files
       # Instead duplicate and release, adding new settings to dupl. instead
-      @default_values = @default_values.dup   
+      @default_values = @default_values.dup
 
       if value.nil? then @default_values.delete(fieldname)
       else @default_values[fieldname] = value
@@ -68,13 +66,13 @@ module Dinodex
 
     def split_default_setting_optarg(opt_arg)
       fieldname, value = opt_arg.split('=', 2)
-      raise ArgumentError.new(
-        "Invalid syntax setting default value: #{opt_arg}") unless fieldname
+      raise ArgumentError,
+            "Invalid syntax setting default value: #{opt_arg}" unless fieldname
       [fieldname.downcase.to_sym, value]
     end
 
     def add_small_filter
-      @filtering_list = 
+      @filtering_list =
         @filtering_list.between(:weight, 0, LARGE_SIZE_LBS).exclude_nil
     end
 
@@ -83,7 +81,7 @@ module Dinodex
     end
 
     def add_carnivore_filter
-      @filtering_list = @filtering_list.match(:carnivorous?, true)
+      @filtering_list = @filtering_list.match(:carnivorous, true).exclude_nil
     end
 
     def add_noncarnivore_filter
@@ -91,22 +89,22 @@ module Dinodex
     end
 
     def add_quadruped_filter
-      @filtering_list = 
+      @filtering_list =
         @filtering_list.match(:ambulation, Ambulation::QUADRUPEDAL).exclude_nil
     end
 
     def add_biped_filter
-      @filtering_list = 
+      @filtering_list =
         @filtering_list.match(:ambulation, Ambulation::BIPEDAL).exclude_nil
     end
 
     def add_region_filter(pattern)
-      @filtering_list = 
+      @filtering_list =
         @filtering_list.match_regex(:continent, /^#{pattern}/i)
     end
 
     def add_timeperiod_filter(pattern)
-      @filtering_list = 
+      @filtering_list =
         @filtering_list.match_regex(:time_period, /^#{pattern}/i)
     end
 

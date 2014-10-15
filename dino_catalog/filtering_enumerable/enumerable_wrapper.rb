@@ -18,9 +18,9 @@ module FilteringEnumerable
 
     # superclass' version knows my inherent capabilities vs. delegated
     alias_method :i_can_do_it?, :respond_to_missing?
-    
+
     def respond_to_missing?(method, include_all = false)
-      i_can_do_it?(method, include_all) || 
+      i_can_do_it?(method, include_all) ||
         @wrapped_enumerable.respond_to_missing?(method, include_all)
     end
   end

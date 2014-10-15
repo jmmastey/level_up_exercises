@@ -14,7 +14,7 @@
 		  <th align='center'>Where</th>
 		  <th></th>
 		</tr>
-		<% @events.each do |event| %>
+		<% Event.all.each do |event| %>
 		<% member = event.has_match_in?(current_user.events) %>
 		<% member_class = member ? "member" : "non-member" %>
 		<tr>

@@ -1,8 +1,6 @@
 <body>
   <% if signed_in? %>
-  <p style="text-align:left;">Logged-In: <font color='red'><%= current_user.name %></font>
-	&nbsp|&nbsp<%= link_to 'Home', current_user %>
-    <span style="float:right;"><%= link_to 'Logout', session_path(id: 0), method: :delete %></span></p>
+    <%= render :partial => "session_bar.html.erb" %>
 
 	<center>
 	  <h1>All Events</h1>

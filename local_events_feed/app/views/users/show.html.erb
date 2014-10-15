@@ -4,8 +4,7 @@
 
 <body>
   <% if signed_in? %>
-    <p style="text-align:left;">Logged-In: <font color='red'><%= current_user.name %></font>
-    <span style="float:right;"><%= link_to 'Logout', session_path(id: 0), method: :delete %></span></p>
+    <%= render :partial => "session_bar.html.erb" %>
 
     <h3><%= "#{first_name}'s Events" %></h3>
 
@@ -16,7 +15,7 @@
         <th>Location</th>
 		<th>Calendar</th>
         <th>Remove</th>
-    </tr>
+      </tr>
       <% current_user.events.each do |event| %>
         <tr>
           <td><%= link_to event.name, event.link %></td>

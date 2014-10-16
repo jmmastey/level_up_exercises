@@ -1,5 +1,7 @@
 %h1 Home
 
+
+%h2 Twitter Fans ("followers")      
 .bubblechart
   %ul.bubblechains
     %li
@@ -8,7 +10,30 @@
         - @artists.each do |artist|
           %tr
             %td= artist.name
-            %td= artist.metrics.count
-         
+            %td= artist.fan_count("Twitter")
+
+%h2 YouTube Fans ("likes")
+.bubblechart
+  %ul.bubblechains
+    %li
+      %span Artists
+      %table
+        - @artists.each do |artist|
+          %tr
+            %td= artist.name
+            %td= artist.fan_count("YouTube")
+
+%h2 Facebook Fans ("fans")       
+.bubblechart
+  %ul.bubblechains
+    %li
+      %span Artists
+      %table
+        - @artists.each do |artist|
+          %tr
+            %td= artist.name
+            %td= artist.fan_count("Facebook")
+
+
 %script{ src: "http://people.csail.mit.edu/eob/cts/widgets/bubblechart.cts", 
-         type: "text/cts"}
+         type: "text/cts" }

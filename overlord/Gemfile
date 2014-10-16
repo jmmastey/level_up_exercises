@@ -6,18 +6,10 @@ gem "sinatra"
 gem "rake"
 
 group :development, :test do
-  gem 'coveralls', require: false
-  gem 'guard', require: false
-  gem 'guard-rspec', require: false
-  gem 'guard-rubocop', require: false
-  gem 'guard-shell', require: false
   gem 'rspec', require: false
-  gem 'rubocop', require: false
-  gem 'terminal-notifier-guard', require: false
+  gem 'rspec-expectations'
   gem 'selenium-webdriver'
   gem 'cucumber'
   gem 'pry'
   gem 'capybara'
-  gem 'rspec'
-  gem 'rspec-expectations'
 end

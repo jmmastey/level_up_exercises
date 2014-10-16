@@ -2,10 +2,12 @@ require 'sinatra'
 enable :sessions
 
 get '/' do
+  session.clear
   erb :initialize
 end
 
 get '/initialize' do
+  session.clear
   erb :initialize
 end
 

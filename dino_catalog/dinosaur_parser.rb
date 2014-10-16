@@ -4,6 +4,9 @@ require_relative "dinosaur.rb"
 class DinosaurParser
   CSV_EXTENSION   = "csv"
   HEADERS_ALLOWED = Dinosaur::ATTRIBUTES
+  
+  CARNIVORE = "carnivore"
+  HERBIVORE = "herbivore"
 
   HEADER_ALIASES   = {
     "genus" => "name",
@@ -82,10 +85,10 @@ class DinosaurParser
     end
 
     def diet_converter(value)
-      if value.downcase == "yes"
-        value = "Carnivore"
-      elsif value.downcase == "no"
-        value = "Herbivore"
+      if value.casecmp("yes") == 0
+        value = CARNIVORE
+      elsif value.casecmp("no") == 0
+        value = HERBIVORE
       end
 
       value

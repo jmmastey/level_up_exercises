@@ -38,11 +38,6 @@ class Overlord < Sinatra::Base
     redirect '/bomb'
   end
 
-  get '/explosion' do
-    session[:bomb_state] = 'exploded'
-    erb :explosion
-  end
-
   helpers do
     def num?(number)
       /^[\d]{1,9}$/ =~ number
@@ -67,7 +62,8 @@ class Overlord < Sinatra::Base
     def check_for_explosion
       return if session[:attempts] < 3
 
-      redirect '/explosion'
+      session[:bomb_state] = 'exploded'
+      redirect '/bomb'
     end
 
     def reset_attempts

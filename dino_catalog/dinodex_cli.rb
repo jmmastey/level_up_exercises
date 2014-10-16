@@ -2,7 +2,9 @@ require "optparse"
 require "queriable_array"
 
 # Implement command-line options to collect information about files to read and
-# to build a filter for a list of dinosaurs
+# to build a filter for a list of dinosaurs. Default values set on command line
+# are added to every dinosaur created from input files for which they are
+# effective (i.e. subsequently listed).
 module Dinodex
   class CommandLineInterface < OptionParser
     attr_accessor :input_files  # [[pathname, {default values}]

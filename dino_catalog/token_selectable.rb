@@ -1,5 +1,5 @@
-# Class providing class-level capability to select a predefined
-# instance based on input tokens
+# Class providing class-level factory capability to fetch an instance based on
+# input tokens
 #
 # By default subclass must define:
 # - @all_instances (class inst var) to be a list of predefined instances

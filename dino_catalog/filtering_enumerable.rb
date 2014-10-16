@@ -3,20 +3,27 @@
 # attributes. Actual filter implementations will contribute methods to this
 # mixin that will add their functionality to this interface.
 #
-# Called as:
+# Called as: (...or see #apply_filters)
 #
-# enum->attribute(:filter, val1, val2, ...)
-#
-# When a subclass registers a method to the module
-# filter(attribute, val1, val2, ...) that returns an instance of such a filter
-#
-# eg: enum->favorite_color(:matches, :blue)
+# enum->filter(:attribute, val1, val2, ...)
 #
 module FilteringEnumerable
   include Enumerable
 
-  # Callbacks are called with this Enumerable as parent and any given arguments
+  # Registry of available filters {:method => filter factory}
   @@filter_factory_methods = {}
+
+  # Return a new filtered enum applying all given filters to this one, as in:
+  # enum.apply_filters {
+  #   :foo => [:match, "bar", "baz"],
+  #   :quux => [:regex_match, /xyzzy/i, /qux/],
+  #   :dollars => [:between, 0, 10]
+  # }
+  def apply_filters(attr_filter_map)    # {:attr => [:filter, param1, ...]}
+    attr_filter_map.each_pair.reduce(self) do |enum, (attr, (method, *params))|
+      enum.add_filter(method, attr, *params)
+    end
+  end
 
   def method_missing(filter_method, *args, &_block)
     filtered_attr, *match_exprs = *args
@@ -33,14 +40,14 @@ module FilteringEnumerable
     factory_method.call(self, attribute, *match_expressions)
   end
 
-  class << self
-    def filter_methods
-      @@filter_factory_methods.keys
-    end
+  def self.filter_methods
+    @@filter_factory_methods.keys
+  end
 
-    def add_filter_method(filter_method_name, &factory_method)
-      @@filter_factory_methods[filter_method_name] = factory_method
-    end
+  # Filter implementation classes register a factory method and method name to
+  # invoke it with the filter arguments. (See #add_filter)
+  def self.add_filter_method(filter_method_name, &factory_method)
+    @@filter_factory_methods[filter_method_name] = factory_method
   end
 end
 

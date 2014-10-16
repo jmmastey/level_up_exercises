@@ -7,7 +7,7 @@ require "queriable_array"
 require "dinodex"
 require "dinodex/csv_loader"
 require "dinodex_cli"
-require "pry"
+#require "pry"
 
 cli_parser = Dinodex::CommandLineInterface.new
 cli_parser.parse!(ARGV)

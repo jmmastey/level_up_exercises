@@ -26,11 +26,7 @@ module Dinodex
     end
 
     def full_description
-      lines = [format_field(:taxon, @taxon)]
-      lines << format_timeperiod_field
-      lines.concat(formatted_field_list)
-      lines.concat(formatted_attribute_list)
-      lines.compact.join("\n  ")
+      formatted_field_list.compact.join("\n")
     end
 
     private
@@ -45,33 +41,14 @@ module Dinodex
       @attributes = options   # Whatever's left
     end
 
-    def format_timeperiod_field
-      return nil unless @time_period
-      qualifier = @attributes[:time_period_qualifier]
-      fieldvalue = (qualifier ? "#{qualifier} " : '') + @time_period.to_s
-      format_field(:time_period, fieldvalue)
-    end
-
     def format_field(fieldname, fieldvalue)
-      return nil if fieldvalue.nil?
-      "#{fieldname.to_s.gsub('_', ' ').capitalize}: #{fieldvalue}"
+      fieldvalue && "#{fieldname.to_s.gsub('_', ' ').capitalize}: #{fieldvalue}"
     end
 
     def formatted_field_list
-      [:weight, :diet, :carnivorous, 
+      [:taxon, :time_period, :weight, :diet, :carnivorous, 
        :ambulation, :continent, :description].map do |fieldsym| 
         format_field(fieldsym, send(fieldsym))
-      end
-    end
-
-    @@hide_attributes = [:time_period_qualifier]
-
-    def formatted_attribute_list
-      @attributes.sort.map do |attr_name, attr_val|
-        unless @@hide_attributes.include?(attr_name) 
-        then format_field(attr_name.to_s, attr_val)
-        else nil
-        end
       end
     end
   end

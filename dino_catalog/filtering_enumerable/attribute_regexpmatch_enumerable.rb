@@ -9,7 +9,7 @@ module FilteringEnumerable
     protected
 
     def keep_item?(item)
-      @match_patterns.any? { |regexp| regexp.match(item_attr_val(item)) }
+      @match_patterns.any? { |regexp| regexp.match(item_attr_val(item).to_s) }
     end
   end
 

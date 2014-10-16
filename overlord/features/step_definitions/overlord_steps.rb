@@ -11,7 +11,3 @@ Given(/^I activated the bomb$/) do
   fill_in("code", with: "1234")
   click_button("arm-button")
 end
-
-When(/^I visit the bomb booting page$/) do
-  visit "/"
-end

@@ -5,7 +5,7 @@ Feature: Boot the bomb
 
   Background:
     Given The bomb is not booted
-    When I visit the bomb booting page
+    When I go to 'the home page'
 
   Scenario: I visit the bomb booting page
     Then I should see "bomb status not booted"

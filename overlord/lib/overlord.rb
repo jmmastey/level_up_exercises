@@ -14,7 +14,6 @@ class Overlord < Sinatra::Base
     end
 
     session[:bomb_state] = 'not activated'
-
     session[:activate_code] = params[:activation_code]
     session[:deactivate_code] = params[:deactivation_code]
     reset_attempts
@@ -47,7 +46,7 @@ class Overlord < Sinatra::Base
       return unless session[:activate_code] == code
 
       session[:bomb_state] = 'activated'
-      session[:attempts] = 0
+      reset_attempts
     end
 
     def check_deactivate_code(code)
@@ -63,7 +62,6 @@ class Overlord < Sinatra::Base
       return if session[:attempts] < 3
 
       session[:bomb_state] = 'exploded'
-      redirect '/bomb'
     end
 
     def reset_attempts
@@ -73,9 +71,4 @@ class Overlord < Sinatra::Base
 
   # start the server if ruby file executed directly
   run! if app_file == $PROGRAM_NAME
-end
-
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
 end

@@ -38,7 +38,7 @@ class Results
   end
 
   def self.confidence_level
-    "Confidence Level: #{@dataset.calculate_probability.round(ROUND_TO)}"
+    "Confidence Level: #{@dataset.calculate_group_probabilities.round(ROUND_TO)}"
   end
 
   def self.winner

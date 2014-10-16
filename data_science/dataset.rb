@@ -36,7 +36,7 @@ class Dataset
     @results.map { |result| result["cohort"] }.uniq
   end
 
-  def calculate_probability
+  def calculate_group_probabilities
     groups = {}
 
     all_group_types.each do |group|
@@ -60,7 +60,7 @@ class Dataset
   end
 
   def show_winner
-    if calculate_probability >= PROBABILITY_THRESHOLD
+    if calculate_group_probabilities >= PROBABILITY_THRESHOLD
       "No clear winner"
     else
       "Cohort #{cohort_percentages.to_a.last.first} is the winner"

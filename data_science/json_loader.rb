@@ -8,6 +8,6 @@ class JSONLoader
   end
 
   def fetch_data
-    JSON.parse(File.read(@file_name))
+    JSON.parse(File.read(file_name))
   end
 end

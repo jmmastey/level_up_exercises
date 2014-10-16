@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Super Villain's Detonation Device
 
 You've been contacted by a super villain in search of help. He says he has a great idea, and needs only your genius to bring it to completion. Turns out the idea is going to be a bomb. I mean, literally. It's a bomb. Still, he's offering equity.
@@ -28,19 +27,3 @@ But, this is the important part: you're going to write all the tests for the dev
 * Add a timer. All good bombs have timers.
 * Add wires to snip to stop the bomb from detonating. This guy seems like he might not pay on time.
 * No bonus points for developing an actual electronic detonator. Still, dude, sweet.
-=======
-# Level Up Exercises
-
-These are the combined exercises used at http://leveluprails.herokuapp.com. You can do them out of sequence, but you'll probably be missing the point. Do the right thing, visit the site.
-
-## How to Do These Exercises
-
-1. Fork this repo into your own space
-2. Wait until you're asked to do one of the exercises
-3. Use your fork, develop code, push it back upward
-4. Profit!
-
-## The First Lesson
-
-Like everything else in the world, these exercises have errors and problems and typos. We experience this problem whenever we code, and the only way to stay sane as a group is to fix problems as we find them. Be a mensch, send pull requests.
->>>>>>> 0a509545fa0c4bf48fe0cbfe113c94af6fbb562f

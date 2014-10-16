@@ -1,0 +1,12 @@
+<h1> Bomb Configuration. </h1>
+
+<form action="/initialize" method="post">
+  <h2>Activation code : <input type="number" name="activation_code"
+                               maxlength="4" min="1111" max="9999"
+                               value="1111"></h2>
+  <h2>Deactivation code : <input type="number" name="deactivation_code"
+                                 maxlength="4" min="0000" max="9999"
+                                 value="1234"></h2>
+  <input type="submit" value="Configure">
+  (For optimal use, you probably want to change these default values)
+</form>

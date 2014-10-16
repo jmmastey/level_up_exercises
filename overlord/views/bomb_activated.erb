@@ -1,0 +1,32 @@
+<script>
+  var countdownseconds = 20;
+  function countdowntimer() {
+    var remainingSeconds = countdownseconds % 60;
+    document.getElementById('countdown').innerHTML = remainingSeconds;
+    if (countdownseconds == 0) {
+      clearInterval(countdownTimer);
+      window.location.href = 'exploded'
+    } else {
+      countdownseconds--;
+    }
+  }
+
+  var countdownTimer = setInterval('countdowntimer()', 1000);
+</script>
+
+<h1>Activated!</h1>
+
+
+<span id="countdown" class="timer"></span>
+
+
+<form action="/deactivate" method="post">
+  <input type="number" name="deactivation_code" maxlength="4" min="0000"
+         max="9999">
+  <input type="submit" value="Deactivate">
+</form>
+
+
+<form action="/snippy" method="post">
+  <input type="submit" value="snip">
+</form>

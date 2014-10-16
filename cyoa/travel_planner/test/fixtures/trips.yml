@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  home_location_id: MyString2 (Location)
+  flights: 
+  meetings: 
+
+two:
+  home_location_id: MyString (Location)
+  flights: 
+  meetings: 

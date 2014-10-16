@@ -53,7 +53,7 @@ module Dinodex
     def make_dinosaur(csvrow, default_values)
       taxon = csvrow.delete(:name).last
       attrs = extract_csvrow_data(csvrow)
-      apply_default_values(attrs)
+      apply_default_values(attrs, default_values)
       determine_diet(attrs)
       Dinosaur.new(taxon, attrs)
     end
@@ -76,7 +76,7 @@ module Dinodex
       attrs
     end
 
-    def apply_default_values(attrs)
+    def apply_default_values(attrs, default_values)
       default_values.each { |hdr, value| attrs[hdr] ||= value }
     end
 

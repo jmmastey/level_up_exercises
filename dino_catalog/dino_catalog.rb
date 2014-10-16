@@ -20,7 +20,7 @@ cli_parser.input_files.each do |filename, field_defaults|
 end
 
 if cli_parser.output_json
-  puts dino_list.map { |d| d.to_hash }.to_json(
+  puts dino_list.map(&:to_hash).to_json(
     indent: ' ', space: ' ', object_nl: "\n", array_nl: "\n")
 else
   dino_list.each do |dinosaur|

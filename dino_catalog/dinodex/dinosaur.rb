@@ -32,7 +32,10 @@ module Dinodex
     end
 
     def to_hash
-      fields_and_values.reduce({}) { |h, (field, value)| h[field] = value.to_s; h }
+      fields_and_values.reduce({}) do |h, (field, value)|
+        h[field] = value.to_s;
+        h
+      end
     end
 
     private
@@ -48,12 +51,12 @@ module Dinodex
     end
 
     def output_field_list
-      [:taxon, :time_period, :weight, :diet, 
+      [:taxon, :time_period, :weight, :diet,
        :carnivorous, :ambulation, :continent, :description]
     end
 
     def fields_and_values
-      output_field_list.map do |fieldsym| 
+      output_field_list.map do |fieldsym|
         fieldvalue = send(fieldsym)
         fieldvalue.nil? ? nil : [fieldsym, fieldvalue]
       end.compact

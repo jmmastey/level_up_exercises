@@ -16,8 +16,8 @@ module Dinodex
     end
 
     # Ignores qualifier, just matches period itself
-    def ==(other_period)
-      period == other_period.period
+    def ==(other)
+      period == other.period
     end
 
     class << self
@@ -26,7 +26,7 @@ module Dinodex
       # Overridden to select, clone, and configure prototype
       def decode_instance_token(token)
         matches = /(?:(\w+)\s+)?(\w+)/.match(token || '')
-        qualifier, period = matches[1,2]
+        qualifier, period = matches[1, 2]
         period && find_and_clone_prototype(period, qualifier)
       end
     end
@@ -47,8 +47,6 @@ module Dinodex
       new(JURASSIC, /jur/i),
       new(CRETACEOUS, /cre/i),
     ]
-
-    private
 
     def self.find_and_clone_prototype(period_token, qualifier)
       (prototype = decode_token_to_prototype(period_token)) && begin

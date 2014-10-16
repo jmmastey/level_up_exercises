@@ -15,6 +15,7 @@ module Dinodex
       period + (qualifier ? " (#{qualifier})" : '')
     end
 
+    # Ignores qualifier, just matches period itself
     def ==(other_period)
       period == other_period.period
     end

@@ -1,2 +1,14 @@
-%h1 home
+%h1 Home
 
+.bubblechart
+  %ul.bubblechains
+    %li
+      %span Artists
+      %table
+        - @artists.each do |artist|
+          %tr
+            %td= artist.name
+            %td= artist.metrics.count
+         
+%script{ src: "http://people.csail.mit.edu/eob/cts/widgets/bubblechart.cts", 
+         type: "text/cts"}

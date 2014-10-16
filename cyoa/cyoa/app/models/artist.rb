@@ -9,6 +9,19 @@ class Artist < ActiveRecord::Base
 
   after_create :populate_initial_metrics
 
+  def self.some
+    [ self.find_by(name: "Beyonce"),
+      self.find_by(name: "Paul Simon"),
+      self.find_by(name: "The Rolling Stones"),
+      self.find_by(name: "Alison Krauss"),
+      self.find_by(name: "Prince")
+    ]
+  end
+
+  def self.yonce
+    self.find_by(name: "Beyonce")
+  end
+
   def populate_initial_metrics
     return if metrics.any?
     nbs_services = get_nbs_metrics(3.months.ago)
@@ -48,7 +61,7 @@ class Artist < ActiveRecord::Base
     ActiveRecord::Base.connection.execute sql_insertion_records
   end
 
-  def get_nbs_metrics(start_on)
+  def get_nbs_metrics(start_on = 3.months.ago)
     update_api_ids
     NextBigSoundLite::Metric.artist(nbs_id, start: start_on)
   end

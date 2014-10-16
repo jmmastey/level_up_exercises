@@ -2,11 +2,13 @@ require "csv"
 require_relative "dinosaur.rb"
 
 class DinosaurParser
-  CSV_EXTENSION   = "csv"
-  HEADERS_ALLOWED = Dinosaur::ATTRIBUTES
+  CSV_EXTENSION    = "csv"
+  HEADERS_ALLOWED  = Dinosaur::ATTRIBUTES
   
-  CARNIVORE = "carnivore"
-  HERBIVORE = "herbivore"
+  DIET_CARNIVORE   = "carnivore"
+  DIET_HERBIVORE   = "herbivore"
+
+  CONTINENT_AFRICA = "Africa"
 
   HEADER_ALIASES   = {
     "genus" => "name",
@@ -16,6 +18,7 @@ class DinosaurParser
 
   CONVERTERS       = {
     "diet"  => :diet_converter,
+    "continent" => :continent_converter,
   }
 
   class << self
@@ -36,21 +39,24 @@ class DinosaurParser
 
       rows.each do |row|
         params = process_row(row)
-        dinosaurs.push(Dinosaur.new(params))
+        dinosaurs << Dinosaur.new(params)
       end
 
       dinosaurs
     end
 
     def process_row(row)
-      hash = create_default_params
+      default_hash = create_default_params
 
-      row.each do |column|
-        if header = process_header(column[0])
-          hash[header.to_sym] = process_value(header, column[1])
+      row.each do |header, value|
+        if header = process_header(header)
+          default_hash[header.to_sym] = value
         end
       end
-      hash
+
+      default_hash.each_with_object({}) do |(key, value), hash|
+        hash[key] = process_value(key.to_s, value)
+      end
     end
 
     def process_header(header)
@@ -60,6 +66,8 @@ class DinosaurParser
         header
       elsif HEADERS_ALLOWED.include?(HEADER_ALIASES[header])
         HEADER_ALIASES[header]
+      else
+        nil
       end
     end
 
@@ -86,12 +94,16 @@ class DinosaurParser
 
     def diet_converter(value)
       if value.casecmp("yes") == 0
-        value = CARNIVORE
+        value = DIET_CARNIVORE
       elsif value.casecmp("no") == 0
-        value = HERBIVORE
+        value = DIET_HERBIVORE
       end
 
       value
+    end
+
+    def continent_converter(value)
+      (value ? value : CONTINENT_AFRICA)
     end
   end
 end

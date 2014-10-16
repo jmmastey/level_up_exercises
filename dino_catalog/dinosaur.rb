@@ -35,7 +35,7 @@ class Dinosaur
   end
 
   def carnivore?
-    @diet && CARNIVORE.include?(@diet.downcase)
+    !!@diet && CARNIVORE.include?(@diet.downcase)
   end
 
   def big_dinosaur?

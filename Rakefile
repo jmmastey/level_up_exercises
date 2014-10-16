@@ -26,3 +26,8 @@ end
 task :rspec do |_, args|
   run_command("bundle exec rspec --tty --color #{args.join(' ')}")
 end
+
+task web: do
+  bundle exec rackup config.ru -p $PORT
+end
+

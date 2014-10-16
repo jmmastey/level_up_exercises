@@ -10,9 +10,6 @@ get '/' do
   end
 end
 
-get '/initialize' do
-end
-
 post '/initialize' do
   reset_all_attempts
   session[:activation_code] = params[:activation_code]

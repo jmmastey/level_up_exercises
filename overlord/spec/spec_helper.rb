@@ -1,34 +1,30 @@
-# rubocop:disable all
-# TODO: Find a efficient way to require all files in a directory
-require_relative '../overlord'
-require_relative 'system_helper.rb'
-require_relative '../spec/support/utils.rb'
+ENV['RACK_ENV'] = 'test'
+
+require_relative '../overlord'  # <-- your sinatra app
 require 'rspec'
-require 'guard/rspec'
-require 'simplecov'
-require 'capybara/rspec'
-require 'selenium-webdriver'
-require 'pry'
+require 'rack/test'
 
-if ENV['CI']
-  require 'coveralls'
-  Coveralls.wear!
+RSpec.configure do |conf|
+  conf.include Rack::Test::Methods
 end
 
-rspec_major_version = RSpec::Version::STRING.to_i
-
-RSpec.configure do |config|
-  if rspec_major_version < 3
-    config.color_enabled = true
-    config.treat_symbols_as_metadata_keys_with_true_values = true
-  else
-    config.color = true
-  end
-  config.order = :random
-  config.filter_run focus: ENV['CI'] != 'true'
-  config.run_all_when_everything_filtered = true
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
-  end
+def app
+  Sinatra::Application
 end
-# rubocop:enable all
+
+def session
+  last_request.env['rack.session']
+end
+
+def configure_bomb(act_code = 1111, deact_code = 1234)
+  post '/initialize', params={activation_code: act_code,
+                                      deactivation_code: deact_code}
+end
+
+def activate_bomb(act_code = 1111)
+  post '/activate', params={activation_code: act_code}
+end
+
+def deactivate_bomb(deact_code = 1234)
+  post '/deactivate', params={deactivation_code: deact_code}
+end

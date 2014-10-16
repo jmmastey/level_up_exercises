@@ -12,4 +12,5 @@ group :development, :test do
   gem 'cucumber'
   gem 'pry'
   gem 'capybara'
+  gem 'rubocop', require: false
 end

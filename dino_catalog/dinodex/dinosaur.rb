@@ -26,7 +26,13 @@ module Dinodex
     end
 
     def full_description
-      formatted_field_list.compact.join("\n")
+      fields_and_values.map do |fieldname, fieldvalue|
+        "#{fieldname.to_s.gsub('_', ' ').capitalize}: #{fieldvalue}"
+      end.join("\n")
+    end
+
+    def to_hash
+      fields_and_values.reduce({}) { |h, (field, value)| h[field] = value.to_s; h }
     end
 
     private
@@ -41,15 +47,16 @@ module Dinodex
       @attributes = options   # Whatever's left
     end
 
-    def format_field(fieldname, fieldvalue)
-      fieldvalue && "#{fieldname.to_s.gsub('_', ' ').capitalize}: #{fieldvalue}"
+    def output_field_list
+      [:taxon, :time_period, :weight, :diet, 
+       :carnivorous, :ambulation, :continent, :description]
     end
 
-    def formatted_field_list
-      [:taxon, :time_period, :weight, :diet, :carnivorous, 
-       :ambulation, :continent, :description].map do |fieldsym| 
-        format_field(fieldsym, send(fieldsym))
-      end
+    def fields_and_values
+      output_field_list.map do |fieldsym| 
+        fieldvalue = send(fieldsym)
+        fieldvalue.nil? ? nil : [fieldsym, fieldvalue]
+      end.compact
     end
   end
 end

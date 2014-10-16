@@ -7,7 +7,7 @@ require "queriable_array"
 require "dinodex"
 require "dinodex/csv_loader"
 require "dinodex_cli"
-#require "pry"
+require "json"
 
 cli_parser = Dinodex::CommandLineInterface.new
 cli_parser.parse!(ARGV)
@@ -19,7 +19,12 @@ cli_parser.input_files.each do |filename, field_defaults|
   end
 end
 
-dino_list.each do |dinosaur|
-  puts "--- #{dinosaur} ---"
-  puts dinosaur.full_description, "\n"
+if cli_parser.output_json
+  puts dino_list.map { |d| d.to_hash }.to_json(
+    indent: ' ', space: ' ', object_nl: "\n", array_nl: "\n")
+else
+  dino_list.each do |dinosaur|
+    puts "--- #{dinosaur} ---"
+    puts dinosaur.full_description, "\n"
+  end
 end

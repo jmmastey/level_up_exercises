@@ -1,11 +1,13 @@
 ENV['RACK_ENV'] = 'test'
 
-require_relative '../overlord'  # <-- your sinatra app
+require_relative '../../overlord'  # <-- your sinatra app
 require 'rspec'
 require 'rack/test'
 
 RSpec.configure do |conf|
   conf.include Rack::Test::Methods
+  conf.color = true
+  conf.formatter = :documentation
 end
 
 def app

@@ -1,14 +1,11 @@
-require_relative '../spec/spec_helper'
+require_relative '../spec/helpers/spec_helper'
 
 describe 'Overlord' do
-
   describe "Controller" do
-
     it "loads first page" do
       get '/'
       expect(last_response).to be_ok
     end
-
   end
 
   describe "Activation" do

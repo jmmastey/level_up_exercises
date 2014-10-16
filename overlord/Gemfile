@@ -13,4 +13,5 @@ group :development, :test do
   gem 'pry'
   gem 'capybara'
   gem 'rubocop', require: false
+  gem 'simplecov', require: false
 end

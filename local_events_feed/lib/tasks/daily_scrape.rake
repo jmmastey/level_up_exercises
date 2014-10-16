@@ -12,4 +12,7 @@ def scrape_for_new_events_in(upcoming)
   events.each { |event| event.save }
 end
 
-scrape_for_new_events
+desc "Scrape for events from sources and add to DB"
+task :daily_scrape => :environment do
+  scrape_for_new_events
+end

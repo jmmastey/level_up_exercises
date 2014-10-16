@@ -1,9 +1,9 @@
 <div class="bomb-screen">
   <div style="padding-top:310px;">
     <form action="/switch" method="POST">
-      <span class="text-frame">Enter code <input type="text" id="code" name="code"></span>
+      <span class="text-frame">Enter code <input type="text" class="form-control bomb-field" id="code" name="code"></span>
       <p>&nbsp;</p>
-      <button type="button" class="btn btn-lg btn-default" onclick="form.submit();">Arm the Bomb</button>
+      <input type="submit" class="btn btn-lg btn-default" id="arm-button" name="arm-button" value="Arm the Bomb">
     </form>
   </div>
 </div>

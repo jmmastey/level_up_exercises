@@ -10,8 +10,8 @@ Feature: Activating the bomb
     Then I should see "<message>"
 
   Examples:
-    | code | message               |
-    | 1234 | bomb is activated     |
-    | 4321 | bomb is not activated |
-    | zzzz | bomb is not activated |
-    |      | bomb is not activated |
+    | code | message                   |
+    | 1234 | bomb status activated     |
+    | 4321 | bomb status not activated |
+    | zzzz | bomb status not activated |
+    |      | bomb status not activated |

@@ -13,14 +13,14 @@ Feature: Deactivating the bomb
     Then I should see "<message>"
 
   Examples:
-    | code | message               |
-    | 0000 | bomb is not activated |
-    | 1234 | bomb is activated     |
-    | zzzz | bomb is activated     |
-    |      | bomb is activated     |
+    | code | message                   |
+    | 0000 | bomb status not activated |
+    | 1234 | bomb status activated     |
+    | zzzz | bomb status activated     |
+    |      | bomb status activated     |
 
   Scenario: I can't deactivate the bomb
     When I press "arm-button"
     And I press "arm-button"
     And I press "arm-button"
-    Then I should see "exploded"
+    Then I should see "bomb status exploded"

@@ -17,14 +17,14 @@ def session
 end
 
 def configure_bomb(act_code = 1111, deact_code = 1234)
-  post '/initialize', params={activation_code: act_code,
-                                      deactivation_code: deact_code}
+  post '/initialize', activation_code: act_code,
+                      deactivation_code: deact_code
 end
 
 def activate_bomb(act_code = 1111)
-  post '/activate', params={activation_code: act_code}
+  post '/activate', activation_code: act_code
 end
 
 def deactivate_bomb(deact_code = 1234)
-  post '/deactivate', params={deactivation_code: deact_code}
+  post '/deactivate', deactivation_code: deact_code
 end

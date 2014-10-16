@@ -1,14 +1,14 @@
 class Dinosaur
-  attr_reader :name,:period,:continent,:carnivore,:diet,:weight,:walking,:descriptor
+  attr_reader :name, :period, :continent, :carnivore, :diet, :weight, :walking, :descriptor
 
   def initialize( params = {})
-    @name = params[:name]
-    @period = params[:period]
-    @continent = params[:continent]
-    @carnivore = params[:carnivore]
-    @diet = params[:diet]
-    @weight = params[:weight]
-    @walking = params[:walking]
+    @name       = params[:name]
+    @period     = params[:period]
+    @continent  = params[:continent]
+    @carnivore  = params[:carnivore]
+    @diet       = params[:diet]
+    @weight     = params[:weight]
+    @walking    = params[:walking]
     @descriptor = params[:descriptor]
     unless diet.nil?
       @carnivore = 'Yes' if ['insectivore', 'piscivore', 'carnivore'].include?(@diet.downcase)

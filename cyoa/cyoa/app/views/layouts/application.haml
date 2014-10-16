@@ -7,6 +7,8 @@
     = csrf_meta_tags
 
   %body
+    %p.notice= notice
+    %p.alert= alert
     = nav_bar brand: "Groovemetrics", static: :top
     .container-fluid
       .row-fluid

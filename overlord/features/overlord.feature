@@ -13,69 +13,29 @@ Feature: Create a cool bomb thingy
   Background:
     Given I visit the configuration page
 
-  Scenario: Activate the bomb
-    Given Configure bomb with codes '1111' and '8888'
-    When I activate the bomb with code '1111'
-    Then I should see 'Activated'
-
-  Scenario: Deactivate the bomb
-    Given Configure bomb with codes '2222' and '0000'
-    When I activate the bomb with code '2222'
-    When I fill in '0000' to deactivate the bomb
-    Then I should see 'Deactivated'
-
-  Scenario: Input incorrect activation code 3 times
-    Given Configure bomb with codes '2222' and '3151'
-    When I activate the bomb with code '6666'
-    When I activate the bomb with code '6667'
-    When I activate the bomb with code '6668'
-    Then I should see the bomb as 'Exploded'
-
-  Scenario: Input incorrect deactivation code 3 times
-    Given Configure bomb with codes '2222' and '3151'
-    When I activate the bomb with code '2222'
-    When I fill in '1234' to deactivate the bomb
-    When I fill in '5678' to deactivate the bomb
-    When I fill in '8544' to deactivate the bomb
-    Then I should see the bomb as 'Exploded'
-
   Scenario: Activate bomb with deactivation code
-    Given Configure bomb with codes '4444' and '5555'
-    When I activate the bomb with code '5555'
+    Given I have a configured bomb with default codes
+    When I activate the bomb with code '1234'
     Then I should remain on the activation page
 
   Scenario: Deactivate bomb with activation code
-    Given Configure bomb with codes '3333' and '6666'
-    When I activate the bomb with code '3333'
+    Given I have a configured bomb with default codes
+    When I activate the bomb with code '1111'
     When I fill in '6666' to deactivate the bomb
-
-  Scenario: Attempting to activate a already activated bomb
-    Given Configure bomb with codes '2222' and '0000'
-    When I activate the bomb with code '2222'
-    Then I should see 'Activated'
-    Given I visit the configuration page
-    Given Configure bomb with codes '2222' and '0000'
-    When I activate the bomb with code '2222'
-    Then I should see 'Activated'
-
-  Scenario: When user does not enter deactivation code on activated bomb
-    Given Configure bomb with codes '2222' and '0000'
-    When I activate the bomb with code '2222'
-    When I do nothing on the deactivation page for 30 seconds
-    Then I should see the bomb as 'Exploded'
-
-  Scenario: When a user snips the bomb wire
-    Given Configure bomb with codes '2222' and '0000'
-    When I activate the bomb with code '2222'
-    When I snip the wire
-    Then I should see 'Deactivated'
+    Then I should remain on the deactivation page
 
   Scenario: User inserts letters for codes on config
     Given Configure bomb with codes '2a33' and 'ABBA'
     Then The bomb should not be configured
 
   Scenario: User enters letters for activation code to activate bomb
-    Given Configure bomb with codes '2222' and '3151'
+    Given I have a configured bomb with default codes
     When I activate the bomb with code 'ABBA'
     Then I should remain on the activation page
 
+  Scenario: User creates a custom code to create a bomb
+    Given Configure bomb with codes '6666' and '9999'
+    When I activate the bomb with code '6666'
+    Then I should see 'Activated'
+      And I fill in '9999' to deactivate the bomb
+    Then I should see 'Deactivated'

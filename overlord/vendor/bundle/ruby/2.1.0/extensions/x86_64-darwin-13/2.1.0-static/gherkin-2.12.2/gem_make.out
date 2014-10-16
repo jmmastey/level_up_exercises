@@ -1,0 +1,18 @@
+/Users/cjohnson/.rvm/rubies/ruby-2.1.2/bin/ruby extconf.rb 
+checking for main() in -lc... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling gherkin_lexer_zh_tw.c
+ext/gherkin_lexer_zh_tw/gherkin_lexer_zh_tw.c:739:18: warning: unused variable 'lexer_en_main' [-Wunused-const-variable]
+static const int lexer_en_main = 1;
+                 ^
+1 warning generated.
+linking shared-object gherkin_lexer_zh_tw.bundle
+ld: warning: directory not found for option '-L/Users/travis/.sm/pkg/active/lib'
+
+make "DESTDIR=" install
+/usr/bin/install -m 0755 gherkin_lexer_zh_tw.bundle ./.gem.20141016-27708-1ek14db
+installing default gherkin_lexer_zh_tw libraries

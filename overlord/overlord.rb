@@ -2,13 +2,15 @@ require 'sinatra'
 enable :sessions
 
 get '/' do
-  session.clear
-  erb :initialize
+  if session[:bomb_status] == :activated
+    erb :bomb_activated
+  else
+    session.clear
+    erb :initialize
+  end
 end
 
 get '/initialize' do
-  session.clear
-  erb :initialize
 end
 
 post '/initialize' do

@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+$:.unshift(File.dirname(__FILE__) + '/../lib') unless $:.include?(File.dirname(__FILE__) + '/../lib')
+
+if(ENV['SIMPLECOV'] && RUBY_VERSION =~ /1\.9/)
+  require 'simplecov'
+  SimpleCov.root(File.expand_path(File.dirname(__FILE__) + '/..'))
+  SimpleCov.start
+end
+
+require 'cucumber/rspec/disable_option_parser'
+require 'cucumber/cli/main'
+# The dup is to keep ARGV intact, so that tools like ruby-debug can respawn.
+Cucumber::Cli::Main.new(ARGV.dup).execute!

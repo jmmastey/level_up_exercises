@@ -22,6 +22,10 @@ class Artist < ActiveRecord::Base
       find_or_create_by(name: "Kanye West"),
       find_or_create_by(name: "Lady Gaga"),
       find_or_create_by(name: "Madonna"),
+      find_or_create_by(name: "Nightwish"),
+      find_or_create_by(name: "Justice"),
+      find_or_create_by(name: "Taylor Swift"),
+      find_or_create_by(name: "Sacred Monster"),
       find_or_create_by(name: "Prince")
     ]
   end
@@ -43,19 +47,19 @@ class Artist < ActiveRecord::Base
     metric.value
   end
 
+  def update_metrics
+    yesterday = Time.now.to_date - 1
+    return if update_start_date >= yesterday
+    nbs_service_metrics = get_nbs_metrics(update_start_date)
+    process_metrics(nbs_service_metrics)
+  end
+
   private
 
   def populate_initial_metrics
     return if metrics.any?
     nbs_services = get_nbs_metrics(3.months.ago)
     process_metrics(nbs_services)
-  end
-
-  def update_metrics
-    yesterday = Time.now.to_date - 1
-    return if update_start_date >= yesterday
-    nbs_service_metrics = get_nbs_metrics(update_start_date)
-    process_metrics(nbs_service_metrics)
   end
 
   def update_start_date
@@ -83,6 +87,8 @@ class Artist < ActiveRecord::Base
       end
     end
 
+    return unless new_metrics.any?
+
     sql_insertion_records = "INSERT INTO metrics (artist_id, category_id, service_id, value, nbs_date, recorded_on, created_at, updated_at) VALUES #{new_metrics.join(", ")}"
     ActiveRecord::Base.connection.execute sql_insertion_records
   end
@@ -96,7 +102,7 @@ class Artist < ActiveRecord::Base
     return if nbs_id
 
     search_results = NextBigSoundLite::Artist.search(name)
-    return if search_results.empty?
+    return if search_results.blank?
     self.nbs_id = search_results.first.id.to_i
     self.music_brainz_id = search_results.first.music_brainz_id
     save

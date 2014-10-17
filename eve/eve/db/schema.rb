@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016222241) do
+ActiveRecord::Schema.define(version: 20141017215634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,40 +25,39 @@ ActiveRecord::Schema.define(version: 20141016222241) do
 
   add_index "items", ["in_game_id"], name: "index_items_on_in_game_id", unique: true, using: :btree
 
-  create_table "locations", force: true do |t|
-    t.string   "name"
-    t.integer  "in_game_id"
-    t.integer  "locatable_id"
-    t.string   "locatable_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "locations", ["in_game_id"], name: "index_locations_on_in_game_id", unique: true, using: :btree
-
   create_table "orders", force: true do |t|
     t.integer  "in_game_id"
-    t.integer  "region_id"
-    t.integer  "station_id"
     t.decimal  "security"
     t.decimal  "price"
     t.string   "type"
+    t.integer  "region_id"
+    t.integer  "station_id"
+    t.integer  "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "orders", ["in_game_id"], name: "index_orders_on_in_game_id", unique: true, using: :btree
+  add_index "orders", ["item_id"], name: "index_orders_on_item_id", using: :btree
   add_index "orders", ["region_id", "station_id"], name: "index_orders_on_region_id_and_station_id", using: :btree
   add_index "orders", ["type"], name: "index_orders_on_type", using: :btree
 
   create_table "regions", force: true do |t|
+    t.integer  "in_game_id"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "regions", ["in_game_id"], name: "index_regions_on_in_game_id", unique: true, using: :btree
+
   create_table "stations", force: true do |t|
+    t.integer  "in_game_id"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "stations", ["in_game_id"], name: "index_stations_on_in_game_id", unique: true, using: :btree
 
 end

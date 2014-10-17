@@ -6,5 +6,6 @@ class CreateItems < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :items, :in_game_id, unique: true
   end
 end

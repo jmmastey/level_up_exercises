@@ -132,6 +132,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
+    rake-progressbar (0.0.5)
     rdoc (4.1.2)
       json (~> 1.4)
     rspec-core (3.0.4)
@@ -212,6 +213,7 @@ DEPENDENCIES
   pg
   psych (~> 2.0)
   rails (= 4.2.0.beta1)
+  rake-progressbar
   rspec-rails (~> 3.0.0)
   rubysl-irb
   sass-rails (~> 5.0.0.beta1)

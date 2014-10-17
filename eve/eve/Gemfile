@@ -38,7 +38,7 @@ gem 'haml-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'eve_central'
+gem 'eve_central', require: false
 
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
@@ -53,6 +53,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner', require: false
-
-  gem "rubysl-irb"
+  gem 'rake-progressbar', require: false
+  gem "rubysl-irb", require: false
 end

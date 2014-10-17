@@ -43,6 +43,10 @@ Style/CaseIndentation:
 Style/SingleLineBlockParams:
   Enabled: false
 
+# for method chains, keep the dot with the method name
+Style/DotPosition:
+  EnforcedStyle: leading
+
 # stop nesting so hard.
 Metrics/BlockNesting:
   Max: 2

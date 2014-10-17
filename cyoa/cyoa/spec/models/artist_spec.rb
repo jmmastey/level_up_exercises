@@ -16,13 +16,19 @@ describe Artist do
     end
 
     it "name of artist is unique" do
-      #expect(FactoryGirl.build(:another_artist, name: artist.name.downcase)).not_to be_valid
+      expect(FactoryGirl.build(:another_artist, name: artist.name.downcase)).not_to be_valid
     end
 
     it "can be searched case-insensitively" do
       expect(Artist.find_by_unique_name(artist.name)).not_to be_nil
       expect(Artist.find_by_unique_name(artist.name.upcase)).not_to be_nil
       expect(Artist.find_by_unique_name(artist.name.downcase)).not_to be_nil
+      expect(Artist.find_by_unique_name("Something That Doesn't Exist")).to be_nil
+    end
+
+    it "can locate or create a unique entry" do
+      expect(Artist.find_or_create_by_unique_name("Something Whatever")).not_to be_nil
+      expect(Artist.find_or_create_by_unique_name(artist.name.upcase)).to eq(artist)
     end
   end
 

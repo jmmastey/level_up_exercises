@@ -33,6 +33,10 @@ class Artist < ActiveRecord::Base
   def self.yonce
     find_by(name: "Beyonce")
   end
+  
+  def self.find_by_unique_name(name)
+    Artist.where("lower(name) =?", name.downcase).first
+  end
 
   def fan_count(service_name = nil)
     category_name = "fans"

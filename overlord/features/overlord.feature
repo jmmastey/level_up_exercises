@@ -4,7 +4,7 @@ Feature: Start bomb
   So that I can activate it
 
 Scenario: Valid 
- Given I visit the overlord page
- When I type in the right activation code
- And I click activate
- Then I should see the bomb status as active
+  Given I visit the overlord page
+  When I type in the right activation code
+  And I click activate
+  Then I should see the bomb status as active

@@ -2,6 +2,7 @@ source "https://rubygems.org"
 gem "colorize"
 gem "statistics2"
 
-group :test do
+group :development, :test do
+  gem "rubysl-irb"
   gem "rspec"
 end

@@ -15,6 +15,15 @@ GEM
     rspec-mocks (3.1.2)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.1)
+    rubysl-e2mmap (2.0.0)
+    rubysl-irb (2.0.4)
+      rubysl-e2mmap (~> 2.0)
+      rubysl-mathn (~> 2.0)
+      rubysl-readline (~> 2.0)
+      rubysl-thread (~> 2.0)
+    rubysl-mathn (2.0.0)
+    rubysl-readline (2.0.2)
+    rubysl-thread (2.0.2)
     statistics2 (0.54)
 
 PLATFORMS
@@ -23,4 +32,5 @@ PLATFORMS
 DEPENDENCIES
   colorize
   rspec
+  rubysl-irb
   statistics2

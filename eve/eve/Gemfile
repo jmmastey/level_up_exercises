@@ -38,6 +38,8 @@ gem 'haml-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'eve_central'
+
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug'
@@ -52,5 +54,5 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner', require: false
 
-  gem 'eve_central'
+  gem "rubysl-irb"
 end

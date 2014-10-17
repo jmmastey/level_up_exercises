@@ -10,11 +10,19 @@ class Artist < ActiveRecord::Base
   after_create :populate_initial_metrics
 
   def self.some
-    [ find_by(name: "Beyonce"),
-      find_by(name: "Paul Simon"),
-      find_by(name: "The Rolling Stones"),
-      find_by(name: "Alison Krauss"),
-      find_by(name: "Prince")
+    [ find_or_create_by(name: "Beyonce"),
+      find_or_create_by(name: "Jay-Z"),
+      find_or_create_by(name: "Paul Simon"),
+      find_or_create_by(name: "SBTRKT"),
+      find_or_create_by(name: "Disclosure"),
+      find_or_create_by(name: "Bassnectar"),
+      find_or_create_by(name: "The Rolling Stones"),
+      find_or_create_by(name: "Alison Krauss"),
+      find_or_create_by(name: "Metallica"),
+      find_or_create_by(name: "Kanye West"),
+      find_or_create_by(name: "Lady Gaga"),
+      find_or_create_by(name: "Madonna"),
+      find_or_create_by(name: "Prince")
     ]
   end
 
@@ -56,6 +64,7 @@ class Artist < ActiveRecord::Base
   end
 
   def process_metrics(nbs_services)
+    return if nbs_services.blank?
     new_metrics = []
     cur_time = Time.now
 
@@ -64,10 +73,12 @@ class Artist < ActiveRecord::Base
 
       nbs_metrics = nbs_service["metric"]
 
-      nbs_metrics.keys.each do |nbs_category|
-        category = Category.find_or_create_by(name: nbs_category)
-        nbs_metrics[nbs_category].each do |nbs_date, nbs_value|
-          new_metrics.push "(#{self.id}, #{category.id}, #{service.id}, #{nbs_value}, '#{nbs_date}', '#{recorded_on(nbs_date)}', '#{cur_time}', '#{cur_time}')"
+      unless nbs_metrics.blank?
+        nbs_metrics.keys.each do |nbs_category|
+          category = Category.find_or_create_by(name: nbs_category)
+          nbs_metrics[nbs_category].each do |nbs_date, nbs_value|
+            new_metrics.push "(#{self.id}, #{category.id}, #{service.id}, #{nbs_value}, '#{nbs_date}', '#{recorded_on(nbs_date)}', '#{cur_time}', '#{cur_time}')"
+          end
         end
       end
     end
@@ -85,6 +96,7 @@ class Artist < ActiveRecord::Base
     return if nbs_id
 
     search_results = NextBigSoundLite::Artist.search(name)
+    return if search_results.empty?
     self.nbs_id = search_results.first.id.to_i
     self.music_brainz_id = search_results.first.music_brainz_id
     save

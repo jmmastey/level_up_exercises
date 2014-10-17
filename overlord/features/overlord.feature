@@ -1,10 +1,18 @@
+
+
 Feature: Start bomb
   As a villain
   I want to boot the bomb
   So that I can activate it
 
-Scenario: Valid 
-  Given I visit the overlord page
+Scenario: Valid Activation
+  Given I visit the overlord home page
   When I type in the right activation code
   And I click activate
   Then I should see the bomb status as active
+
+Scenario: Valid Deactivation
+  Given I am on the activate page
+  When I type in the right deactivation code
+  And I click deactivate
+  Then I should see the bomb status as inactive

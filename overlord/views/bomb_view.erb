@@ -7,10 +7,10 @@
 <h1 class = "heading"> BOMB! BOMB! BOMB! </h1>
 <% if @bomb.active? %>
 <h2 class = "heading_two"> Status: The bomb is active </h2>
-<img  id = "bomb_active" src = "images/active_bomb.jpg">
+<img id = "bomb_active" src = "images/active_bomb.jpg">
 <% elsif !@bomb.exploded? %>
 <h2 class = "heading_two"> Status: The bomb is inactive </h2>
- <img  id = "bomb_active" src = "images/inactive_bomb.jpg">
+ <img id = "bomb_active" src = "images/inactive_bomb.jpg">
  <%else%>
  <h2 class = "heading_two"> Status: The bomb has exploded. Ha!</h2>
  <img  id = "bomb_active" src = "images/exploded_bomb.jpg">
@@ -18,14 +18,14 @@
 
 
 <form action  = "/activate" method = "post" >
-  <input type = "text" name = "activation_code">
-  <button type="submit" class="btn btn-danger">Activate</button> <br/>
+  <input type  = "text" id = "active" name = "activation_code">
+  <button type ="submit" class="btn btn-danger">Activate</button> <br/>
 </form>
 
 <form action  = "/deactivate" method = "post" >
   <input type = "text" name = "deactivation_code">
   <button type = "submit" class="btn btn-primary"> Deactivate </button>
-</form> 
+</form>
 
 </div>
 </body>

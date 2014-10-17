@@ -20,9 +20,14 @@ FactoryGirl.define do
     name "fans"
   end
 
-  factory :service do
+  factory :service  do
     name "Facebook"
     url "http://facebook.com"
+  end
+
+  factory :another_service, class: Service do
+    name "Twitter"
+    url "http://twitter.com"
   end
 
   factory :metric do

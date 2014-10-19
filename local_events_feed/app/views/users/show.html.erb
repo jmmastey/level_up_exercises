@@ -11,18 +11,20 @@
     <table>
       <tr>
         <th>Name</th>
-        <th>When</th>
         <th>Location</th>
 		<th>Calendar</th>
         <th>Remove</th>
       </tr>
-      <% current_user.events.each do |event| %>
+      <% current_user.showings.each do |showing| %>
         <tr>
-          <td><%= link_to event.name, event.link %></td>
-          <td><%= event.to_chicago_time_s %></td>
-          <td><%= event.location %></td>
-		  <td><%= link_to 'Update', { :action => 'add_event_to_calendar', :event_id => event.id }, method: :post, :format => :ics, :id => "add_cal-#{event.id}" %></td>
-          <td align='center'><%= link_to image_tag("minus.png", :class => 'minus'), { :action => 'remove_event', :event_id => event.id }, method: :post, :id => "remove-#{event.id}" %></td>
+          <td class='member'><%= link_to showing.name, showing.event %></td>
+          <td class='member'><%= showing.location %></td>
+		  <td class='member'><%= link_to 'Update', { :action => 'add_showing_to_calendar', :showing_id => showing.id }, method: :post, :format => :ics, :id => "add_cal-#{showing.id}" %></td>
+          <td align='center' class='member'>
+			<%= link_to image_tag("minus.png", :class => "member_minus"), 
+			  { action: 'remove_showing', showing_id: showing[:id], user_id: current_user[:id] },
+			  method: :post, :id => "remove-#{showing[:id]}" %>
+          </td>
         </tr>
       <% end %>
     </table>

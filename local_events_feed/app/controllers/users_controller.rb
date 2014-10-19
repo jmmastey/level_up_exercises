@@ -20,15 +20,15 @@ class UsersController < ApplicationController
   def show
   end
 
-  def remove_event
+  def remove_showing
     user = User.find(params[:id])
-    event = Event.find(params[:event_id])
-    user.events.delete(event)
+    showing = Showing.find(params[:showing_id])
+    user.remove_showing(showing)
     redirect_to user
   end
 
-  def add_event_to_calendar
-    @event = Event.find(params[:event_id])
+  def add_showing_to_calendar
+    @showing = Showing.find(params[:showing_id])
     headers['Content-Type'] = "text/calendar; charset=UTF-8"
   end
 

@@ -7,11 +7,11 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-  post 'users/:id/add_event_to_calendar' => 'users#add_event_to_calendar'
-  post 'users/:id/remove_event' => 'users#remove_event'
+  post 'users/:id/add_showing_to_calendar' => 'users#add_showing_to_calendar'
+  post 'users/:id/remove_showing' => 'users#remove_showing'
 
-  post 'events/add_event' => 'events#add_event'
-  post 'events/remove_event' => 'events#remove_event'
+  post 'events/add_user_showing' => 'events#add_user_showing'
+  post 'events/remove_user_showing' => 'events#remove_user_showing'
 
   post 'scrape' => 'scrape#index'
 
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :users, only: [:new, :create, :show]
-  resources :events, only: [:index]
+  resources :events, only: [:index, :show]
   resources :sessions, only: [:new, :create, :destroy]
 
   # Example resource route with options:

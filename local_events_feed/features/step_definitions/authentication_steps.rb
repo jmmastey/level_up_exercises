@@ -50,35 +50,35 @@ When /^they submit invalid signup information$/ do
   click_button("Sign-Up!")
 end
 
-Then /^they should see the signin page$/ do
+Then /^they see the signin page$/ do
   expect(page).to have_content('Sign in')
 end
 
-Then /^they should see the signup page$/ do
+Then /^they see the signup page$/ do
   expect(page).to have_content(signup_heading_msg)
 end
 
-Then /^they should see their own page$/ do
+Then /^they see their own page$/ do
   expect(page).to have_content(user_page_msg('John'))
 end
 
-Then /^they should see themselves logged in$/ do
+Then /^they see themselves logged in$/ do
   expect(page).to have_content(logged_in_msg('John Smith'))
 end
 
-Then /^they should see the welcome heading$/ do
+Then /^they see the welcome heading$/ do
   expect(page).to have_content(welcome_heading_msg)
 end
 
-Then /^they should see a signout link$/ do
+Then /^they see a signout link$/ do
   expect(page).to have_link('Logout', session_destroy_link)
 end
 
-Then /^they should see signup errors$/ do
+Then /^they see signup errors$/ do
   expect(page).to have_content('Issue')
 end
 
-Then /^they should see authentication-failure message$/ do
+Then /^they see authentication-failure message$/ do
   expect(page).to have_content('Wrong email and/or password')
 end
 

@@ -2,18 +2,24 @@ class EventsController < ApplicationController
   def index
   end
 
-  def remove_event
-    user = User.find(params[:user_id])
-    event = Event.find(params[:event_id])
-    user.events.delete(event)
-    redirect_to events_path
+  def show
+    @event = Event.find(params[:id])
   end
 
-  def add_event
+  def add_user_showing
     user = User.find(params[:user_id])
-    event = Event.find(params[:event_id])
-    user.add_event(event)
-    redirect_to events_path
+    showing = Showing.find(params[:showing_id])
+    @event = showing.event
+    user.add_showing(showing)
+    redirect_to @event
+  end
+
+  def remove_user_showing
+    user = User.find(params[:user_id])
+    showing = Showing.find(params[:showing_id])
+    @event = showing.event
+    user.remove_showing(showing)
+    redirect_to @event
   end
 
   private

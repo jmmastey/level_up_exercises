@@ -36,9 +36,8 @@ class TheatreInChicagoEvent
   end
 
   def to_event_model
-    Event.new(name: self.name,
-              location: self.location,
-              time: self.when,
-              link: self.link)
+    event = Event.new(name: self.name, location: self.location, link: self.link)
+    event.add_showing(time: time)
+    event
   end
 end

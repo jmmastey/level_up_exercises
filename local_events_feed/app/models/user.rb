@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX }
   validates :password, length: { minimum: 6 }
 
-  has_and_belongs_to_many :events
+  has_and_belongs_to_many :showings
   has_secure_password
 
   def User.new_remember_token
@@ -19,12 +19,16 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
-  def add_event(event)
-    events << event unless event.has_match_in?(events)
+  def add_showing(showing)
+    showings << showing unless showing.in?(showings)
   end
 
-  def remove_event(event)
-    events.delete(event)
+  def remove_showing(showing)
+    showings.delete(showing)
+  end
+
+  def has_showing_in?(event)
+    showings.any? { |showing| showing.in?(event.showings) }
   end
 
   private

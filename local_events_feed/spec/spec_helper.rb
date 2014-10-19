@@ -16,6 +16,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'capybara'
+require 'rspec/collection_matchers'
 
 RSpec.configure do |config|
 

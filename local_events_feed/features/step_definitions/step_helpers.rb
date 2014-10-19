@@ -14,57 +14,66 @@ def user_signs_in
 end
 
 def create_events
-  create_event("Party A", "North Side", "2014-10-01T18:00:00", "www.party.com/party-a.html")
-  create_event("Party B", "South Side", "2014-10-02T19:00:00", "www.party.com/party-b.html")
-  create_event("Party C", "East Side", "2014-10-03T20:00:00", "www.party.com/party-c.html")
+  create_event("Party A", "North Side", "www.party.com/party-a.html", [eight_oclock, nine_oclock, ten_oclock])
+  create_event("Party B", "South Side", "www.party.com/party-b.html", [eight_oclock])
+  create_event("Party C", "East Side", "www.party.com/party-c.html", [nine_oclock, ten_oclock])
 end
 
 def create_more_events
-  create_event("Party D", "North Side", "2014-10-01T18:00:00", "www.party.com/party-d.html")
-  create_event("Party E", "South Side", "2014-10-02T19:00:00", "www.party.com/party-e.html")
+  create_event("Party D", "North Side", "www.party.com/party-d.html", [nine_oclock])
+  create_event("Party E", "South Side", "www.party.com/party-e.html")
 end
 
-def create_event(name, location, time, link)
-  Event.create(name: name,
-               location: location,
-               time: time,
-               link: link)
+def create_event(name, location, link, showing_times = [])
+  event = Event.create(name: name, location: location, link: link)
+  showing_times.each { |time| event.add_showing(time: time) }
+  event
 end
 
 def user_events
-  Event.all.select { |event| @user.events.include?(event) }
+  Event.all.select { |event| @user.has_showing_in?(event) }
 end
 
 def non_user_events
-  Event.all.select { |event| !@user.events.include?(event) }
+  Event.all.select { |event| !@user.has_showing_in?(event) }
 end
 
-def a_user_event
-  user_events[0]
+def a_user_showing
+  user_events.first.showings.first
 end
 
-def a_non_user_event
-  non_user_events[0]
+def a_non_user_showing
+  user_events.first.showings.last
 end
 
-def remove_link_id(event)
-  "remove-#{event.id}"
+def remove_link_id(showing)
+  "remove-#{showing.id}"
 end
 
-def add_link_id(event)
-  "add-#{event.id}"
+def add_link_id(showing)
+  "add-#{showing.id}"
 end
 
 def user_page_msg(name)
   "#{name}'s Events"
 end
 
-def add_events_to_user
-  create_events
-  create_user
-  Event.all.each { |event| @user.add_event(event) }
+def add_showings_to_user
+  Event.all.each { |event| @user.add_showing(event.showings.first) }
 end
 
 def find_event(name)
   Event.find_by(name: name)
+end
+
+def eight_oclock
+  DateTime.parse("20141001T080000")
+end
+
+def nine_oclock
+  DateTime.parse("20141001T090000")
+end
+
+def ten_oclock
+  DateTime.parse("20141001T100000")
 end

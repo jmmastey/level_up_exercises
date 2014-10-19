@@ -15,6 +15,7 @@ describe TheatreInChicagoEvent do
 
   let(:cleaned_event) { setted_event.clone.clean }
   let(:other_event) { setted_event.clone }
+  let(:model_event) { setted_event.to_event_model }
 
 
 
@@ -34,8 +35,12 @@ describe TheatreInChicagoEvent do
     expect(setted_event.match?(other_event))
   end
 
-  it 'converts to an Event model' do
-    expect(setted_event.to_event_model).to be_valid
+  it 'converts to a valid Event model' do
+    expect(model_event).to be_valid
+  end
+
+  it 'adds a single show to the event show' do
+    expect(model_event).to have(1).showing
   end
 
   it "converts to a string correctly" do

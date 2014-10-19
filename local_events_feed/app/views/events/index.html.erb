@@ -7,26 +7,17 @@
 
 	  <table>
 		<tr>
-		  <th align='center'>When</th>
-		  <th align='center'>Name</th>
-		  <th align='center'>Where</th>
-		  <th></th>
+		  <th>Name</th>
+		  <th>Where</th>
+		  <th>Dates</th>
 		</tr>
 		<% Event.all.each do |event| %>
-		<% member = event.has_match_in?(current_user.events) %>
+		<% member = current_user.has_showing_in?(event) %>
 		<% member_class = member ? "member" : "non-member" %>
 		<tr>
-		  <td class=<%= member_class %> align='left'><%= event.to_chicago_time_s %></td>
-		  <td class=<%= member_class %> align='left'><%= link_to event.name, event.link %></td>
-		  <td class=<%= member_class %> align='left'><%= event.location %></td>
-		  <td class=<%= member_class %> >
-			<% association = { event_id: event[:id], user_id: current_user[:id] } %>
-			<% if event.has_match_in?(current_user.events) %>
-              <%= link_to image_tag("minus.png", :class => "#{member_class}_minus"), events_remove_event_path(association), method: :post, :id => "remove-#{event[:id]}" %>
-			<% else %>
-              <%= link_to image_tag("plus.png", :class => 'plus'), events_add_event_path(association), method: :post, :id => "add-#{event[:id]}" %>
-			<% end %>
-          </td>
+		  <td class=<%= member_class %> align='left'><%= link_to event.name.truncate(40), event %></td>
+		  <td class=<%= member_class %> align='left'><%= event.location.truncate(40) %></td>
+		  <td class=<%= member_class %> align='center'><%= event.pretty_date_range %></td>
 		</tr>
 		<% end %>
 	  </table>

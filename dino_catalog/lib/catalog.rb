@@ -1,4 +1,5 @@
 require 'CSV'
+require_relative 'dinosaur'
 
 class Catalog
 
@@ -7,7 +8,6 @@ class Catalog
   def initialize(path=nil)
     # locate the file
     @filepath = File.join(APP_ROOT, path)
-    puts @filepath
 
     # if file exists, parse it
     if @filepath && File.exists?(@filepath)
@@ -22,14 +22,15 @@ class Catalog
 
   def build_catalog(file_path)
     # read the file
-
     CSV.read(file_path, headers: true, header_converters: :symbol).each do |data|
-      puts data.inspect
+      create_dinosaur_entry(data[:name])
     end
-
-    # add dinosaurs to the catalog
-
   end
+
+  def create_dinosaur_entry(attributes)
+    Dinosaur.new(attributes)
+  end
+
 
   # launch the program
 

@@ -1,10 +1,10 @@
 = nav_bar brand: "Groovemetrics", static: :top do
-  = menu_group do
-    = menu_group pull: :right do
-      - if current_user
-        = menu_item current_user.email, root_path
+  = menu_group pull: :right do
+    - if current_user
+      = drop_down current_user.email do
         = menu_item "Edit profile", edit_user_registration_path
+        = drop_down_divider
         = menu_item "Logout", destroy_user_session_path, method: :delete
-      - else
-        = menu_item "Sign Up", new_user_registration_path
-        = menu_item "Login", new_user_session_path
+    - else
+      = menu_item "Sign Up", new_user_registration_path
+      = menu_item "Login", new_user_session_path

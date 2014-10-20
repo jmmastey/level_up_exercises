@@ -5,4 +5,7 @@ APP_ROOT = File.dirname(__FILE__)
 
 $:.unshift( File.join(APP_ROOT, 'lib') ) # load the lib directory
 
-require 'driver'
+require 'catalog'
+
+catalog = Catalog.new('dinodex.csv')
+catalog.launch!

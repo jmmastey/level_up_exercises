@@ -7,6 +7,7 @@ describe Artist do
 
   it { is_expected.to respond_to(:metrics) }
   it { is_expected.to respond_to(:songs) }
+  it { is_expected.to respond_to(:users) }
 
   describe "#name" do
     it { is_expected.to respond_to(:name) }

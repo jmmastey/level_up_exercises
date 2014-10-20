@@ -36,4 +36,9 @@ FactoryGirl.define do
     category
     service
   end
+
+  factory :user do
+    email "csain@enova.com"
+    password "password"
+  end
 end

@@ -6,20 +6,17 @@ class Triangle
     @side1,@side2,@side3 = side1,side2,side3
   end
 
-  def equilateral()
-    return side1 == side2 && side2 == side3
+  def equilateral?
+    # side1 is a method.  Created by attr_accessor that gets @side1
+    (side1 == side2) && (side2 == side3)
   end
 
-  def isosceles()
-    return [side1,side2,side3].uniq.length == 2
+  def isosceles?
+    [side1, side2, side3].uniq.length == 2
   end
 
-  def scalene()
-    unless ! (equilateral || isosceles)
-      false
-    else
-      true
-    end
+  def scalene?
+    !(equilateral? || isosceles?)
   end
 
   def recite_facts

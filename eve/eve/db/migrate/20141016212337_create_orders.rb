@@ -5,9 +5,9 @@ class CreateOrders < ActiveRecord::Migration
       t.decimal :security
       t.decimal :price
       t.string :type
-      t.references :region
-      t.references :station
-      t.references :item
+      t.belongs_to :region
+      t.belongs_to :station
+      t.belongs_to :item
 
       t.timestamps null: false
     end

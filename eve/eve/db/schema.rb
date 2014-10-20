@@ -11,10 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141017215634) do
+ActiveRecord::Schema.define(version: 20141020141604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "forecast_requests", force: true do |t|
+    t.date     "target_date"
+    t.integer  "num_target_days"
+    t.datetime "history_start_time"
+    t.datetime "history_end_time"
+    t.decimal  "min_price"
+    t.decimal  "average_price"
+    t.decimal  "max_price"
+    t.integer  "item_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "forecast_requests", ["item_id"], name: "index_forecast_requests_on_item_id", using: :btree
+  add_index "forecast_requests", ["target_date"], name: "index_forecast_requests_on_target_date", using: :btree
+
+  create_table "forecasts", force: true do |t|
+    t.date     "target_date"
+    t.integer  "forecast_request_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "items", force: true do |t|
     t.string   "name"

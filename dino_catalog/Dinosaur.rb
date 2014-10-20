@@ -12,8 +12,8 @@ class Dinosaur
     @descriptor = params[:descriptor]
     unless diet.nil?
       @carnivore = 'Yes' if ['insectivore', 'piscivore', 'carnivore'].include?(@diet.downcase)
-    end # unless diet.nil?
-  end # def initialize
+    end
+  end
 
   def all_variables
     variables = instance_variables
@@ -25,4 +25,4 @@ class Dinosaur
     end
     attributes
   end
-end # class Dinosaur
+end

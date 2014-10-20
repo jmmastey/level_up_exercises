@@ -22,5 +22,5 @@ class CSVParse
       DINOS.push(Dinosaur.new(row))
     end
     DINOS
-  end # parse_dinodex()
-end # class CSVParse
+  end
+end

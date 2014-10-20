@@ -3,27 +3,23 @@ require 'ostruct'
 require 'pp'
 require_relative 'Dinosaur.rb'
 require_relative 'CSVParse.rb'
+require_relative 'dinodex.rb'
 
 class Optparse
-#
-# Return a structure describing the options.
-#
+
   LARGE_WEIGHT = 2000
 
-# collect the filters in struct and execute them at the end
   def self.parse(args)
-    # The options specified on the command line will be collected in *options*.
+
     options = OpenStruct.new
     options.filters = []
     options.dinosaurs = []
     parser = CSVParse.new
     opt_parser = OptionParser.new do |opts|
       opts.banner = "Usage: Optparse.rb [options]"
-
       opts.separator ""
       opts.separator "Specific options:"
 
-      # CSV as argument
       opts.on(
         "-f",
         "--file [inputCSV]",
@@ -32,8 +28,7 @@ class Optparse
               ) do |f|
         options.dinosaurs.clear
         f.each do |file|
-          options.dinosaurs = parser.parse_csv(f) unless !(File.exist?(file) \
-            && file.split(//).last(3).join.casecmp('csv'))
+          options.dinosaurs = Dinodex.new(file)
         end
       end
 
@@ -101,9 +96,8 @@ class Optparse
       end
     end
     opt_parser.parse!(args)
-    # puts options.dinosaurs
     options
-  end  # parse()
-end  # class Optparse
+  end
+end
 
 options = Optparse.parse(ARGV)

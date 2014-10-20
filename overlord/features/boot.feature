@@ -7,11 +7,13 @@ Feature: Boot the bomb
     Given The bomb is not booted
     When I go to 'the home page'
 
+  @happy
   Scenario: I visit the bomb booting page
     Then I should see "bomb status not booted"
     And the "activation_code" field should contain "1234"
     And the "deactivation_code" field should contain "0000"
 
+  @happy
   Scenario: I boot the bomb with default codes
     And I press "boot-button"
     Then I should see "bomb status not activated"
@@ -22,12 +24,21 @@ Feature: Boot the bomb
     And I press "boot-button"
     Then I should see "<message>"
 
+  @happy
   Examples:
     | activation_code | deactivation_code | message                   |
     | 1234            | 0000              | bomb status not activated |
+
+  @sad
+  Examples:
+    | activation_code | deactivation_code | message                   |
     | 9876            | 9999              | bomb status not activated |
     | 5               | 5                 | bomb status not activated |
     | 132456789       | 987654321         | bomb status not activated |
+
+  @bad
+  Examples:
+    | activation_code | deactivation_code | message                   |
     | 1324567890      | 0987654321        | bomb status not booted    |
     | qwerty          | asdfg             | bomb status not booted    |
     | 123q            | 000a              | bomb status not booted    |

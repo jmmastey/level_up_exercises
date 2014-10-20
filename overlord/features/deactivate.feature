@@ -12,13 +12,23 @@ Feature: Deactivating the bomb
     And I press "arm-button"
     Then I should see "<message>"
 
+  @happy
   Examples:
     | code | message                   |
     | 0000 | bomb status not activated |
+
+  @sad
+  Examples:
+    | code | message                   |
     | 1234 | bomb status activated     |
+
+  @bad
+  Examples:
+    | code | message                   |
     | zzzz | bomb status activated     |
     |      | bomb status activated     |
 
+  @sad
   Scenario: I can't deactivate the bomb
     When I press "arm-button"
     And I press "arm-button"

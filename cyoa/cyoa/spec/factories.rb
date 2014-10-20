@@ -34,7 +34,6 @@ FactoryGirl.define do
     value 10
     nbs_date "16350"
     category
-    artist
     service
   end
 end

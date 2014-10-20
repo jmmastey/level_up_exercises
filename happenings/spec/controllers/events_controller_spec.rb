@@ -19,7 +19,7 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe EventsController, type: :controller do
-
+  login_admin
   # This should return the minimal set of attributes required to create a valid
   # Event. As you add validations to Event, be sure to
   # adjust the attributes here as well.
@@ -28,18 +28,13 @@ RSpec.describe EventsController, type: :controller do
   end
 
   let(:invalid_attributes) do
-    FactoryGirl.build(:event_invalid).attributes
+    FactoryGirl.build(:invalid_event).attributes
   end
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # EventsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
 
   describe "GET index" do
     it "assigns all events as @events" do
       events = Event.all
-      get :index, {}, valid_session
+      get :index, {}
       expect(assigns(:events)).to eq(events)
     end
   end
@@ -47,14 +42,14 @@ RSpec.describe EventsController, type: :controller do
   describe "GET show" do
     it "assigns the requested event as @event" do
       event = FactoryGirl.create(:event)
-      get :show, { id: event.to_param }, valid_session
+      get :show, { id: event.to_param }
       expect(assigns(:event)).to eq(event)
     end
   end
 
   describe "GET new" do
     it "assigns a new event as @event" do
-      get :new, {}, valid_session
+      get :new, {}
       expect(assigns(:event)).to be_a_new(Event)
     end
   end
@@ -62,7 +57,7 @@ RSpec.describe EventsController, type: :controller do
   describe "GET edit" do
     it "assigns the requested event as @event" do
       event = FactoryGirl.create(:event)
-      get :edit, { id: event.to_param }, valid_session
+      get :edit, { id: event.to_param }
       expect(assigns(:event)).to eq(event)
     end
   end
@@ -71,30 +66,30 @@ RSpec.describe EventsController, type: :controller do
     describe "with valid params" do
       it "creates a new Event" do
         expect do
-          post :create, { event: valid_attributes }, valid_session
+          post :create, { event: valid_attributes }
         end.to change(Event, :count).by(1)
       end
 
       it "assigns a newly created event as @event" do
-        post :create, { event: valid_attributes }, valid_session
+        post :create, { event: valid_attributes }
         expect(assigns(:event)).to be_a(Event)
         expect(assigns(:event)).to be_persisted
       end
 
       it "redirects to the created event" do
-        post :create, { event: valid_attributes }, valid_session
+        post :create, { event: valid_attributes }
         expect(response).to redirect_to(Event.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved event as @event" do
-        post :create, { event: invalid_attributes }, valid_session
+        post :create, { event: invalid_attributes }
         expect(assigns(:event)).to be_a_new(Event)
       end
 
       it "re-renders the 'new' template" do
-        post :create, { event: invalid_attributes }, valid_session
+        post :create, { event: invalid_attributes }
         expect(response).to render_template("new")
       end
     end
@@ -113,7 +108,7 @@ RSpec.describe EventsController, type: :controller do
       it "updates the requested event" do
         event = FactoryGirl.create(:event)
         put :update, { id:    event.to_param,
-                       event: new_attributes }, valid_session
+                       event: new_attributes }
         event.reload
         expect(assigns(:event).event_url).to eq(new_attributes[:event_url])
         expect(assigns(:event).price).to eq(new_attributes[:price])
@@ -123,14 +118,14 @@ RSpec.describe EventsController, type: :controller do
       it "assigns the requested event as @event" do
         event = FactoryGirl.create(:event)
         put :update, { id:    event.to_param,
-                       event: valid_attributes }, valid_session
+                       event: valid_attributes }
         expect(assigns(:event)).to eq(event)
       end
 
       it "redirects to the event" do
         event = FactoryGirl.create(:event)
         put :update, { id:    event.to_param,
-                       event: valid_attributes }, valid_session
+                       event: valid_attributes }
         expect(response).to redirect_to(event)
       end
     end
@@ -139,14 +134,14 @@ RSpec.describe EventsController, type: :controller do
       it "assigns the event as @event" do
         event = FactoryGirl.create(:event)
         put :update, { id:    event.to_param,
-                       event: invalid_attributes }, valid_session
+                       event: invalid_attributes }
         expect(assigns(:event)).to eq(event)
       end
 
       it "re-renders the 'edit' template" do
         event = FactoryGirl.create(:event)
         put :update, { id:    event.to_param,
-                       event: invalid_attributes }, valid_session
+                       event: invalid_attributes }
         expect(response).to render_template("edit")
       end
     end
@@ -156,13 +151,13 @@ RSpec.describe EventsController, type: :controller do
     it "destroys the requested event" do
       event = FactoryGirl.create(:event)
       expect do
-        delete :destroy, { id: event.to_param }, valid_session
+        delete :destroy, { id: event.to_param }
       end.to change(Event, :count).by(-1)
     end
 
     it "redirects to the events list" do
       event = FactoryGirl.create(:event)
-      delete :destroy, { id: event.to_param }, valid_session
+      delete :destroy, { id: event.to_param }
       expect(response).to redirect_to(events_url)
     end
   end

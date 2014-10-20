@@ -11,7 +11,7 @@ FactoryGirl.define do
     city "Chicago"
     address "123 Elm Street"
 
-    factory :venue_invalid do
+    factory :invalid_venue do
       name nil
       venue_url nil
       description nil
@@ -19,6 +19,7 @@ FactoryGirl.define do
       city nil
       address nil
       phone_number nil
+
     end
 
   end

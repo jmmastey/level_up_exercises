@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :event_date do
     association :event, factory: :event
     association :venue, factory: :venue
-    date_time DateTime.tomorrow
+    date_time {DateTime.tomorrow }
 
     factory :invalid_event_date do
       event nil

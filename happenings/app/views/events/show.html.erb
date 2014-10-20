@@ -32,6 +32,9 @@
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               event_path(@event),
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :data => {
+                      confirm: t('.confirm',
+                                 :default => t("helpers.links.confirm",
+                                               :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
 <% end %>

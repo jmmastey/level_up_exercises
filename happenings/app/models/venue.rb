@@ -1,6 +1,6 @@
 class Venue < ActiveRecord::Base
   has_many :venue_events
-  has_many :events, through: :venue_events, inverse_of: :venue, dependent: :destroy
+  has_many :events, through: :venue_events, inverse_of: :venue
 
   scope :index, -> { includes(:venue_events).all.limit(20) }
 

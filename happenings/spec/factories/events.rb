@@ -13,7 +13,7 @@ FactoryGirl.define do
     ticket_url "http://some.event.com/ticket"
     association :venue, factory: :venue
 
-    factory :event_invalid do
+    factory :invalid_event do
       description nil
       price nil
       show_type nil
@@ -21,6 +21,7 @@ FactoryGirl.define do
       event_url nil
       ticket_url nil
       venue nil
+
     end
 
   end

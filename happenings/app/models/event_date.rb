@@ -6,4 +6,6 @@ class EventDate < ActiveRecord::Base
   validates :venue, presence: true
   validates :event, presence: true
   # end
+
+  default_scope -> {order(date_time: :asc)}
 end

@@ -162,5 +162,3 @@ class TheatreScraper < EventScraper
     venue
   end
 end
-
-TheatreScraper.new

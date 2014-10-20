@@ -13,6 +13,7 @@ namespace :events do
     # write your nokogiri scripts here or
     #
     require_relative 'sites/theatre_scraper'
+    TheatreScraper.new
     #
     # them from other files.
 

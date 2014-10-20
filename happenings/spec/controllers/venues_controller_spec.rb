@@ -19,7 +19,7 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe VenuesController, type: :controller do
-
+  login_admin
   # This should return the minimal set of attributes required to create a valid
   # Venue. As you add validations to Venue, be sure to
   # adjust the attributes here as well.
@@ -28,18 +28,17 @@ RSpec.describe VenuesController, type: :controller do
   end
 
   let(:invalid_attributes) do
-    FactoryGirl.attributes_for(:venue_invalid)
+    FactoryGirl.attributes_for(:invalid_venue)
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # VenuesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
 
   describe "GET index" do
     it "assigns all venues as @venues" do
       venues = Venue.all
-      get :index, {}, valid_session
+      get :index, {}
       expect(assigns(:venues)).to eq(venues)
     end
   end
@@ -47,14 +46,14 @@ RSpec.describe VenuesController, type: :controller do
   describe "GET show" do
     it "assigns the requested venue as @venue" do
       venue = FactoryGirl.create(:venue)
-      get :show, { id: venue.to_param }, valid_session
+      get :show, { id: venue.to_param }
       expect(assigns(:venue)).to eq(venue)
     end
   end
 
   describe "GET new" do
     it "assigns a new venue as @venue" do
-      get :new, {}, valid_session
+      get :new, {}
       expect(assigns(:venue)).to be_a_new(Venue)
     end
   end
@@ -62,7 +61,7 @@ RSpec.describe VenuesController, type: :controller do
   describe "GET edit" do
     it "assigns the requested venue as @venue" do
       venue = FactoryGirl.create(:venue)
-      get :edit, { id: venue.to_param }, valid_session
+      get :edit, { id: venue.to_param }
       expect(assigns(:venue)).to eq(venue)
     end
   end
@@ -71,30 +70,30 @@ RSpec.describe VenuesController, type: :controller do
     describe "with valid params" do
       it "creates a new Venue" do
         expect do
-          post :create, { venue: valid_attributes }, valid_session
+          post :create, { venue: valid_attributes }
         end.to change(Venue, :count).by(1)
       end
 
       it "assigns a newly created venue as @venue" do
-        post :create, { venue: valid_attributes }, valid_session
+        post :create, { venue: valid_attributes }
         expect(assigns(:venue)).to be_a(Venue)
         expect(assigns(:venue)).to be_persisted
       end
 
       it "redirects to the created venue" do
-        post :create, { venue: valid_attributes }, valid_session
+        post :create, { venue: valid_attributes }
         expect(response).to redirect_to(Venue.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved venue as @venue" do
-        post :create, { venue: invalid_attributes }, valid_session
+        post :create, { venue: invalid_attributes }
         expect(assigns(:venue)).to be_a_new(Venue)
       end
 
       it "re-renders the 'new' template" do
-        post :create, { venue: invalid_attributes }, valid_session
+        post :create, { venue: invalid_attributes }
         expect(response).to render_template("new")
       end
     end
@@ -112,7 +111,7 @@ RSpec.describe VenuesController, type: :controller do
       it "updates the requested venue" do
         venue = FactoryGirl.create(:venue)
         put :update, { id: venue.to_param,
-                       venue: new_attributes }, valid_session
+                       venue: new_attributes }
         venue.reload
         expect(assigns(:venue).venue_url).to eq(new_attributes[:venue_url])
         expect(assigns(:venue).description).to eq(new_attributes[:description])
@@ -122,14 +121,14 @@ RSpec.describe VenuesController, type: :controller do
       it "assigns the requested venue as @venue" do
         venue = FactoryGirl.create(:venue)
         put :update, { id: venue.to_param,
-                       venue: valid_attributes }, valid_session
+                       venue: valid_attributes }
         expect(assigns(:venue)).to eq(venue)
       end
 
       it "redirects to the venue" do
         venue = FactoryGirl.create(:venue)
         put :update, { id: venue.to_param,
-                       venue: valid_attributes }, valid_session
+                       venue: valid_attributes }
         expect(response).to redirect_to(venue)
       end
     end
@@ -138,14 +137,14 @@ RSpec.describe VenuesController, type: :controller do
       it "assigns the venue as @venue" do
         venue = FactoryGirl.create(:venue)
         put :update, { id: venue.to_param,
-                       venue: invalid_attributes }, valid_session
+                       venue: invalid_attributes }
         expect(assigns(:venue)).to eq(venue)
       end
 
       it "re-renders the 'edit' template" do
         venue = FactoryGirl.create(:venue)
         put :update, { id: venue.to_param,
-                       venue: invalid_attributes }, valid_session
+                       venue: invalid_attributes }
         expect(response).to render_template("edit")
       end
     end
@@ -155,13 +154,13 @@ RSpec.describe VenuesController, type: :controller do
     it "destroys the requested venue" do
       venue = FactoryGirl.create(:venue)
       expect do
-        delete :destroy, { id: venue.to_param }, valid_session
+        delete :destroy, { id: venue.to_param }
       end.to change(Venue, :count).by(-1)
     end
 
     it "redirects to the venues list" do
       venue = FactoryGirl.create(:venue)
-      delete :destroy, { id: venue.to_param }, valid_session
+      delete :destroy, { id: venue.to_param }
       expect(response).to redirect_to(venues_url)
     end
   end

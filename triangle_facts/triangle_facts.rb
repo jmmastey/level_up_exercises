@@ -14,14 +14,14 @@ class Triangle
 		[side1, side2, side3].uniq.length == 2
 	end
 
-	def scalene()
+	def scalene(equilateral, isosceles)
 		!(equilateral || isosceles)
 	end
 
 	def recite_facts
-		puts 'This triangle is equilateral!' if equalateral
-		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles
-		puts 'This triangle is scalene and mathematically boring.' if scalene
+		puts 'This triangle is equilateral!' if equalateral?
+		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles?
+		puts 'This triangle is scalene and mathematically boring.' if scalene?
 
 		angles = self.calculate_angles(side1,side2,side3)
 		puts 'The angles of this triangle are ' + angles.join(',')
@@ -30,10 +30,17 @@ class Triangle
 		puts ''
 	end
 
+	def foo(a,b,c)
+		a**2 + b**2 - c**2
+	end
+
 	def calculate_angles(a,b,c)
-		angleA = radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
-		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
-		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
+		angleA = radians_to_degrees(Math.acos((foo(b,c,a)) /
+		 (2.0 * b * c)))
+		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) /
+		 (2.0 * a * c)))
+		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) /
+		 (2.0 * a * b)))
 
 		[angleA, angleB, angleC]
 	end

@@ -2,31 +2,25 @@ require 'date'
 require 'active_support/all'
 
 class TheatreInChicagoEvent
-  attr_accessor :name, :location, :date, :time, :link
+  attr_accessor :name, :location, :link, :showings
 
-  def initialize(date)
-    @date = date
+  def initialize
     @name = ''
     @location = ''
-    @time = ''
     @link = ''
+    @showings = []
   end
 
   def complete?
-    date.present? && time.present? && name.present? && location.present? && link.present?
+    name.present? && location.present? && link.present?
   end
 
   def to_s
-    "#{date}, #{time}, #{name}, #{location}, #{link}"
+    "#{name}, #{location}, #{link}"
   end
   
-  def when
-    zone = "Central Time (US & Canada)"
-    result = ActiveSupport::TimeZone[zone].parse("#{date} #{time}")
-  end
-
   def match?(other)
-    date == other.date && name == other.name && location == other.location && time == other.time && link == other.link
+    name == other.name && location == other.location && link == other.link
   end
 
   def clean
@@ -37,7 +31,7 @@ class TheatreInChicagoEvent
 
   def to_event_model
     event = Event.new(name: self.name, location: self.location, link: self.link)
-    event.add_showing(time: time)
+    showings.each { |showing| event.add_showing(time: showing) }
     event
   end
 end

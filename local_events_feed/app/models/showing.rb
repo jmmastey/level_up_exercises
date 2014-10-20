@@ -1,4 +1,5 @@
 class Showing < ActiveRecord::Base
+  LOCAL_TIME_ZONE = "Central Time (US & Canada)"
   validates :time, presence: true
 
   belongs_to :event
@@ -16,8 +17,16 @@ class Showing < ActiveRecord::Base
     sorted.first.time == sorted.last.time
   end
 
-  def to_chicago_time_s
-    time.in_time_zone("Central Time (US & Canada)").strftime('%m/%d/%Y %I:%M %P')
+  def to_local_time_s
+    time.in_time_zone(LOCAL_TIME_ZONE).strftime('%m/%d/%Y %I:%M %P')
+  end
+
+  def pretty_local_date
+    time.in_time_zone(LOCAL_TIME_ZONE).strftime('%b %-d, %Y')
+  end
+
+  def pretty_local_time
+    time.in_time_zone(LOCAL_TIME_ZONE).strftime('%I:%M %P')
   end
 
   def ics

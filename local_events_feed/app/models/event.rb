@@ -34,14 +34,37 @@ class Event < ActiveRecord::Base
     pretty_date(showings.first.time) + " - " + pretty_date(showings.last.time)
   end
 
+  def pretty_showing_count
+    return '-' unless showings.present?
+    showings.count.to_s
+  end
+
   def sorted_showings
     Showing.sort_by_time(showings)
   end
 
+  def add_to_db
+    if unique?
+      save
+    else
+      add_showings_to_match
+    end
+  end
+
   private
+
+  def add_showings_to_match
+    matching_event = find_match
+    return unless matching_event.present?
+    showings.each { |showing| matching_event.add_showing(time: showing.time) }
+  end
 
   def unique?
     !has_match_in?(Event.all)
+  end
+
+  def find_match
+    Event.find_by(name: name, location: location, link: link)
   end
 
   def already_have_show_at?(time)

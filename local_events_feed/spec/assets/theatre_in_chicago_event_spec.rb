@@ -2,13 +2,13 @@ require 'spec_helper'
 require 'assets/theatre_in_chicago_event'
 
 describe TheatreInChicagoEvent do
-  let(:blank_event) { TheatreInChicagoEvent.new("20141001") }
+  let(:blank_event) { TheatreInChicagoEvent.new }
 
   let(:setted_event) do
-    setted_event = TheatreInChicagoEvent.new("20141001")
+    setted_event = TheatreInChicagoEvent.new
     setted_event.name = "Party"
     setted_event.location = " Everywhere     <tag>  "
-    setted_event.time = "07:30:00.000"
+    setted_event.showings << DateTime.parse("20141001T073000")
     setted_event.link = "http://www.event.com"
     setted_event
   end
@@ -44,6 +44,6 @@ describe TheatreInChicagoEvent do
   end
 
   it "converts to a string correctly" do
-    expect(cleaned_event.to_s).to eq('20141001, 07:30:00.000, Party, Everywhere, http://www.event.com')
+    expect(cleaned_event.to_s).to eq('Party, Everywhere, http://www.event.com')
   end
 end

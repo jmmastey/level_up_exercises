@@ -1,23 +1,23 @@
 require_relative 'theatre_in_chicago_event'
+require_relative 'theatre_in_chicago_showing_parser'
 require 'date'
 
 class TheatreInChicagoPageParser
   attr_reader :events
-  TIME_REGEXP = Regexp.new('(\d|\d\d):(\d\d)(a|p)m')
 
-  def initialize(body)
+  def initialize(body, showings_enabled: true)
     @lines = body.split(/\n/)
     @position = 0
     @events = []
-    @date = ''
     @event = create_new_event
     extract_events
+    add_showings if showings_enabled
   end
 
   private
 
   def create_new_event
-    TheatreInChicagoEvent.new(@date)
+    TheatreInChicagoEvent.new
   end
 
   def extract_events
@@ -27,16 +27,22 @@ class TheatreInChicagoPageParser
     end
   end
 
+  def add_showings
+    events.each do |event|
+      showings_body = open(event.link).read
+      showing_times = TheatreInChicagoShowingParser.new(showings_body).showing_times
+      event.showings = showing_times
+    end
+  end
+
   def check_for_complete_event
-    if @event.complete?
+    if @event.complete? && /<br>/.match(@event.location)
       @events << @event.clean.clone
       @event = create_new_event
     end
   end
 
   def extract_fields_from_current_line
-    extract_date_from_current_line
-    extract_time_from_current_line
     extract_location_from_current_line
     extract_name_from_current_line
     @position += 1
@@ -51,28 +57,11 @@ class TheatreInChicagoPageParser
     @lines[@position]
   end
 
-  def extract_date_from_current_line
-    return unless month = extract_month_from_current_line
-    return unless /#{month} (\d+), (\d+)/.match(line)
-    day, year = /#{month} (\d+), (\d+)/.match(line).captures
-    @date = construct_date(month, day, year)
-    @event.date = @date
-  end
-
-  def extract_time_from_current_line
-    return unless TIME_REGEXP.match(line)
-    hh, mm, am_pm = TIME_REGEXP.match(line).captures
-    set_event_time(hh, mm, am_pm) if valid_time_components(hh, mm, am_pm)
-  end
-
   def extract_location_from_current_line
-    return unless @date.present?
-    return unless @event.time.blank?
     append_location_from_current_line
   end
 
   def extract_name_from_current_line
-    return unless @date.present?
     match = /<a href=\'(http:\/\/www.theatreinchicago.com\/.*)\'>(.*)<\/a>/.match(line)
     return unless match && match.captures.count == 2
     @event.link = match.captures[0]
@@ -94,28 +83,5 @@ class TheatreInChicagoPageParser
 
   def extract_month_from_current_line
     /January|February|March|April|May|June|July|August|September|October|November|December/.match(line)
-  end
-
-  def construct_date(month, day, year)
-    mm = convert_to_mm(month.to_s)
-    sprintf("%04d-%02d-%02d", year.to_i, mm, day.to_i)
-  end
-
-  def convert_to_mm(month)
-    Date::MONTHNAMES.index(month)
-  end
-
-  def valid_time_components(hh, mm, am_pm)
-    return false unless hh && mm && am_pm
-    return false unless (0..12).include?(hh.to_i)
-    return false unless (0..59).include?(mm.to_i)
-    return false unless ['a', 'p'].include?(am_pm)
-    true
-  end
-
-  def set_event_time(hh, mm, am_pm)
-    halfday = 0
-    halfday = 12 if am_pm == 'p'
-    @event.time = sprintf("%02d:%02d:00", hh.to_i + halfday, mm)
   end
 end

@@ -6,30 +6,32 @@
   <% if signed_in? %>
     <%= render :partial => "session_bar.html.erb" %>
 
-    <h3><%= "#{first_name}'s Events" %></h3>
+	<center>
+      <h2><span class='event-show-headings'><%= "#{first_name}'s Events" %></span></h2>
 
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Location</th>
-		<th>Calendar</th>
-        <th>Remove</th>
-      </tr>
-      <% current_user.showings.each do |showing| %>
-        <tr>
-          <td class='member'><%= link_to showing.name, showing.event %></td>
-          <td class='member'><%= showing.location %></td>
-		  <td class='member'><%= link_to 'Update', { :action => 'add_showing_to_calendar', :showing_id => showing.id }, method: :post, :format => :ics, :id => "add_cal-#{showing.id}" %></td>
-          <td align='center' class='member'>
-			<%= link_to image_tag("minus.png", :class => "member_minus"), 
+      <table>
+		<tr>
+          <th>Name</th>
+          <th>Location</th>
+		  <th>Calendar</th>
+          <th>Remove</th>
+		</tr>
+		<% current_user.showings.each do |showing| %>
+          <tr>
+			<td class='member'><%= link_to showing.name, showing.event %></td>
+			<td class='member'><%= showing.location %></td>
+			<td class='member'><%= link_to 'Update', { :action => 'add_showing_to_calendar', :showing_id => showing.id }, method: :post, :format => :ics, :id => "add_cal-#{showing.id}" %></td>
+			<td align='center' class='member'>
+			  <%= link_to image_tag("minus.png", :class => "member_minus"), 
 			  { action: 'remove_showing', showing_id: showing[:id], user_id: current_user[:id] },
 			  method: :post, :id => "remove-#{showing[:id]}" %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-    <br>
-    <h4><%= link_to 'Browse All Events', { :controller => 'events', :user_id => current_user[:id] }  %></h4>
+			</td>
+          </tr>
+		<% end %>
+      </table>
+      <br>
+      <h4><%= link_to 'Browse All Events', { :controller => 'events', :user_id => current_user[:id] }  %></h4>
+	 </center>
   <% else %>
     <h3>Please <%= link_to 'sign in', new_session_path %></h3>
   <% end %>

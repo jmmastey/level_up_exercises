@@ -10,6 +10,7 @@
 		  <th>Name</th>
 		  <th>Where</th>
 		  <th>Dates</th>
+		  <th># Shows</th>
 		</tr>
 		<% Event.all.each do |event| %>
 		<% member = current_user.has_showing_in?(event) %>
@@ -18,6 +19,7 @@
 		  <td class=<%= member_class %> align='left'><%= link_to event.name.truncate(40), event %></td>
 		  <td class=<%= member_class %> align='left'><%= event.location.truncate(40) %></td>
 		  <td class=<%= member_class %> align='center'><%= event.pretty_date_range %></td>
+		  <td class=<%= member_class %> align='center'><%= event.pretty_showing_count %></td>
 		</tr>
 		<% end %>
 	  </table>

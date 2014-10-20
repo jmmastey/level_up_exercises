@@ -9,6 +9,7 @@ Feature: Adding items to my cart
   Scenario Outline: I add an item to my empty cart
     When I add "<quantity>" "<item>" to my cart
     Then I should see "<quantity>" "<item>" in my cart
+    And I should see "<message>"
 
   @happy
   Examples:
@@ -32,6 +33,7 @@ Feature: Adding items to my cart
     And I add "<quantity_2>" "<item_2>" to my cart
     Then I should see "<quantity_1>" "<item_1>" in my cart
     And I should see "<quantity_2>" "<item_2>" in my cart
+    And I should see "<message>"
 
   @happy
   Examples:
@@ -55,6 +57,7 @@ Feature: Adding items to my cart
     When I add "<quantity_1>" "<item>" to my cart
     And I add "<quantity_2>" "<item>" to my cart
     Then I should see "<total>" "<item>" in my cart
+    And I should see "<message>"
 
   @happy
   Examples:

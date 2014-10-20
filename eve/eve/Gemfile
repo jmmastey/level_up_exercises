@@ -38,6 +38,9 @@ gem 'haml-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use devise for authentication
+gem 'devise'
+
 gem 'eve_central', require: false
 
 group :development, :test do
@@ -53,6 +56,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner', require: false
+  gem "factory_girl_rails", "~> 4.0", require: false
   gem 'rake-progressbar', require: false
   gem "rubysl-irb", require: false
 end

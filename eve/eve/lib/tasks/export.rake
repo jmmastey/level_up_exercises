@@ -4,6 +4,8 @@ require "rake-progressbar"
 namespace :export do
   desc "Inserts static information from dump files."
 
+  task all: [:items, :regions, :stations]
+
   task items: :environment do
     ActiveRecord::Base.transaction do
       path = "db/items.csv"

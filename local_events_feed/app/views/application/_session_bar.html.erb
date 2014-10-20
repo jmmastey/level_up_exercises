@@ -1,0 +1,11 @@
+<p style="text-align:left;">
+  Logged-In:
+  <font color='red'>
+	<%= current_user.name %>
+  </font>
+  &nbsp|&nbsp<%= link_to 'Home', current_user %>
+  &nbsp|&nbsp<%= link_to 'Events', events_path %>
+  <span style="float:right;">
+	<%= link_to 'Logout', session_path(id: 0), method: :delete %>
+  </span>
+</p>

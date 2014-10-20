@@ -24,6 +24,7 @@ class TheatreInChicagoPageParser
     while !reached_end_of_file?
       extract_fields_from_current_line
       check_for_complete_event
+      move_to_next_line
     end
   end
 
@@ -35,8 +36,12 @@ class TheatreInChicagoPageParser
     end
   end
 
+  def move_to_next_line
+    @position += 1
+  end
+
   def check_for_complete_event
-    if @event.complete? && /<br>/.match(@event.location)
+    if @event.complete? && location_is_complete?
       @events << @event.clean.clone
       @event = create_new_event
     end
@@ -45,7 +50,6 @@ class TheatreInChicagoPageParser
   def extract_fields_from_current_line
     extract_location_from_current_line
     extract_name_from_current_line
-    @position += 1
   end
 
   def reached_end_of_file?
@@ -58,7 +62,12 @@ class TheatreInChicagoPageParser
   end
 
   def extract_location_from_current_line
+    return if location_is_complete?
     append_location_from_current_line
+  end
+
+  def location_is_complete?
+    /<br>/.match(@event.location)
   end
 
   def extract_name_from_current_line

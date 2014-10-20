@@ -6,74 +6,70 @@ Feature: Adding items to my cart
   Background:
     Given I have an empty cart
 
-  @happy
-  Scenario: I add an item to my empty cart
-    When I add "1" "Sample Item A" to my cart
-    Then I should see "1" "Sample Item A" in my cart
-
-  @sad
-  Scenario: I add an item to my empty cart
-    When I add "0" "Sample Item A" to my cart
-    Then I should see "0" "Sample Item A" in my cart
-
-  @bad
-  Scenario: I add an item to my empty cart
-    When I add "-1" "Sample Item A" to my cart
-    Then I should see the message "Sample Item A is not in cart"
-
-  @bad
-  Scenario: I add an item to my empty cart
-    When I add "" "Sample Item A" to my cart
-    Then I should see the message "Select a quantity for Sample Item A"
+  Scenario Outline: I add an item to my empty cart
+    When I add "<quantity>" "<item>" to my cart
+    Then I should see "<quantity>" "<item>" in my cart
 
   @happy
-  Scenario: I add an item to my cart with items
-    When I add "1" "Sample Item A" to my cart
-    And I add "1" "Sample Item B" to my cart
-    Then I should see "1" "Sample Item A" in my cart
-    And I should see "1" "Sample Item B" in my cart
+  Examples:
+    | quantity | item          | message |
+    | 1        | Sample Item A |         |
 
   @sad
-  Scenario: I add an item to my cart with items
-    When I add "1" "Sample Item A" to my cart
-    And I add "0" "Sample Item B" to my cart
-    Then I should see "1" "Sample Item A" in my cart
-    And I should see "0" "Sample Item B" in my cart
+  Examples:
+    | quantity | item          | message |
+    | 0        | Sample Item A |         |
 
   @bad
-  Scenario: I add an item to my cart with items
-    When I add "1" "Sample Item A" to my cart
-    And I add "-1" "Sample Item B" to my cart
-    Then I should see "1" "Sample Item A" in my cart
-    And I should see the message "Sample Item B is not in cart"
+  Examples:
+    | quantity | item          | message                             |
+    | -1       | Sample Item A | Sample Item A is not in cart        |
+    |          | Sample Item A | Select a quantity for Sample Item A |
+    | 1        |               | Select a valid item to add to cart  |
 
-  @bad
-  Scenario: I add an item to my cart with items
-    When I add "1" "Sample Item A" to my cart
-    And I add "" "Sample Item B" to my cart
-    Then I should see "1" "Sample Item A" in my cart
-    And I should see the message "Select a quantity for Sample Item B"
+  Scenario Outline: I add an item to my cart with items
+    When I add "<quantity_1>" "<item_1>" to my cart
+    And I add "<quantity_2>" "<item_2>" to my cart
+    Then I should see "<quantity_1>" "<item_1>" in my cart
+    And I should see "<quantity_2>" "<item_2>" in my cart
 
   @happy
-  Scenario: I add the same item to my cart twice
-    When I add "1" "Sample Item B" to my cart
-    And I add "1" "Sample Item B" to my cart
-    Then I should see "2" "Sample Item B" in my cart
+  Examples:
+    | quantity_1 | item_1        | quantity_2 | item_2        | message |
+    | 1          | Sample Item A | 1          | Sample Item B |         |
 
   @sad
-  Scenario: I add the same item to my cart twice
-    When I add "0" "Sample Item B" to my cart
-    And I add "0" "Sample Item B" to my cart
-    Then I should not see "Sample Item B" in my cart
+  Examples:
+    | quantity_1 | item_1        | quantity_2 | item_2        | message |
+    | 1          | Sample Item A | 0          | Sample Item B |         |
 
   @bad
-  Scenario: I add the same item to my cart twice
-    When I add "1" "Sample Item B" to my cart
-    And I add "-2" "Sample Item B" to my cart
-    Then I should see the message "Invalid quantity for Sample Item B"
+  Examples:
+    | quantity_1 | item_1        | quantity_2 | item_2        | message                      |
+    | -1         | Sample Item A | 1          | Sample Item B | Sample Item A is not in cart |
+    |            | Sample Item A | 1          | Sample Item B | Select a quantity for Sample Item A |
+    | 1          | Sample Item A | -1         | Sample Item B | Sample Item B is not in cart |
+    | 1          | Sample Item A |            | Sample Item B | Select a quantity for Sample Item B |
+
+  Scenario Outline: I add the same item to my cart twice
+    When I add "<quantity_1>" "<item>" to my cart
+    And I add "<quantity_2>" "<item>" to my cart
+    Then I should see "<total>" "<item>" in my cart
+
+  @happy
+  Examples:
+    | item          | quantity_1 | quantity_2 | total | message |
+    | Sample Item B | 1          | 1          | 2     |         |
+
+  @sad
+  Examples:
+    | item          | quantity_1 | quantity_2 | total | message |
+    | Sample Item B | 0          | 0          | 0     |         |
 
   @bad
-  Scenario: I add the same item to my cart twice
-    When I add "1" "Sample Item B" to my cart
-    And I add "" "Sample Item B" to my cart
-    Then I should see the message "Select a quantity for Sample Item B"
+  Examples:
+    | item          | quantity_1 | quantity_2 | total | message                             |
+    | Sample Item B | 1          | -2         | 0     | Invalid quantity for Sample Item B  |
+    | Sample Item B | 1          |            | 0     | Select a quantity for Sample Item B |
+    | Sample Item B | -2         | 1          | 0     | Invalid quantity for Sample Item B  |
+    | Sample Item B |            | 1          | 0     | Select a quantity for Sample Item B |

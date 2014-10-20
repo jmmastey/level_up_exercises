@@ -22,15 +22,11 @@ class Catalog
 
   def build_catalog(file_path)
     # read the file
-    #File.open(path) do |f|
-      #while record - f.gets
-        #csv_line = record.chomp.split(',')
-        #puts csv_line
-      #end
-    #end
-    CSV.read(file_path).each do |line|
-      puts line.inspect
+
+    CSV.read(file_path, headers: true, header_converters: :symbol).each do |data|
+      puts data.inspect
     end
+
     # add dinosaurs to the catalog
 
   end

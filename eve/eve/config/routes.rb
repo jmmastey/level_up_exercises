@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'forecast/index'
+
+  get 'forecast/recent'
+
+  get 'forecast/search'
+
   get 'home/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

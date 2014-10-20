@@ -61,10 +61,10 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.2)
-    factory_girl (4.4.0)
+    factory_girl (4.5.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.4.1)
-      factory_girl (~> 4.4.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     ffi (1.9.6)
     grooveshark (0.2.11)
@@ -74,9 +74,11 @@ GEM
     haml (4.0.5)
       tilt
     hashie (3.3.1)
+    highstocks-rails (2.0.4)
+      railties (>= 3.1)
     hike (1.2.3)
     i18n (0.6.11)
-    jbuilder (2.2.2)
+    jbuilder (2.2.3)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.2)
@@ -94,11 +96,11 @@ GEM
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.4.1)
+    mime-types (2.4.2)
     mini_portile (0.6.0)
     minitest (5.4.2)
     multi_json (1.10.1)
-    netrc (0.7.8)
+    netrc (0.8.0)
     next-big-sound-lite (1.0.0)
       hashie
       json
@@ -223,6 +225,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   grooveshark
   haml
+  highstocks-rails
   jbuilder (~> 2.0)
   jquery-rails
   less-rails

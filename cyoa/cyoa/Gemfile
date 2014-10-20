@@ -16,6 +16,7 @@ gem "twitter-bootstrap-rails"
 gem "jquery-rails"
 gem "turbolinks"
 gem "jbuilder", "~> 2.0"
+gem "highstocks-rails"
 
 gem "grooveshark"
 gem "next-big-sound-lite"

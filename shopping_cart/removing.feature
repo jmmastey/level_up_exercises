@@ -6,19 +6,51 @@ Feature: Removing items from my cart
   Background:
     Given I have an empty cart
 
+  Scenario Outline: I remove an item from my empty cart
+    When I remove "<quantity>" <item> from my cart
+    Then I should see the message "<message>"
+
+  @sad
+  Examples
+    | quantity | item          | message           |
+    | 0        | Sample Item A | The cart is empty |
+
   @bad
-  Scenario: I remove an item from my empty cart
-    When I remove "1" "Sample Item A" from my cart
-    Then I should see the message "The cart is empty"
+  Examples
+    | quantity | item          | message                              |
+    | 1        | Sample Item A | Item not found in cart               |
+    | 1        |               | Select a valid item to remove        |
+    |          | Sample Item A | Select a valid quantity for the item |
+
+  Scenario Outline: I remove an item from my cart with items
+    When I add "<quantity_1>" "<item_1>" to my cart
+    And I add "<quantity_2>" "<item_2>" to my cart
+    And I remove "<remove>" "<item_1>" from my cart
+    Then I should see "<total>" "<item_1>" in my cart
+    And I should see "<quantity_2>" "<item_2>" in my cart
 
   @happy
-  Scenario: I remove an item from my cart with items
-    When I add "1" "Sample Item A" to my cart
-    And I add "1" "Sample Item B" to my cart
-    And I remove "1" "Sample Item A" from my cart
-    Then I should see "1" "Sample Item B" in my cart
+  Examples:
+    | quantity_1 | item_1        | quantity_2 | item_2        | remove | total | message |
+    | 1          | Sample Item A | 1          | Sample Item B | 1      | 0     |         |
 
-  @happy
+  @sad
+  Examples:
+    | quantity_1 | item_1        | quantity_2 | item_2        | remove | total | message |
+    | 0          | Sample Item A | 0          | Sample Item B | 0      | 0     |         |
+
+  @bad
+  Examples:
+    | quantity_1 | item_1        | quantity_2 | item_2        | remove | total | message                                             |
+    | 1          | Sample Item A | 1          | Sample Item B | 2      | 0     | Select a valid quantity to remove for Sample Item A |
+    | -1         | Sample Item A | 1          | Sample Item B | 1      | 0     | Select a valid quantity for Sample Item A           |
+    | 1          | Sample Item A | -1         | Sample Item B | 1      | 0     | Select a valid quantity for Sample Item B           |
+    |            | Sample Item A | 1          | Sample Item B | 1      | 0     | Select a valid quantity for Sample Item A           |
+    | 1          | Sample Item A |            | Sample Item B | 1      | 0     | Select a valid quantity for Sample Item B           |
+    | 1          |               | 1          | Sample Item B | 1      | 0     | Select a valid item to remove                       |
+    | 1          | Sample Item A | 1          |               | 1      | 0     | Select a valid item to remove                       |
+
+  @bad
   Scenario: I remove the same item from my cart twice
     When I add "1" "Sample Item B" to my cart
     And I remove "2" "Sample Item B" from my cart

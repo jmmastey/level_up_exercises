@@ -1,3 +1,5 @@
+require 'CSV'
+
 class Catalog
 
   # Initialize the new catalog
@@ -18,7 +20,7 @@ class Catalog
 
   # load in the csv file
 
-  def build_catalog(path)
+  def build_catalog(file_path)
     # read the file
     #File.open(path) do |f|
       #while record - f.gets
@@ -26,7 +28,9 @@ class Catalog
         #puts csv_line
       #end
     #end
-    puts File.readlines(path)
+    CSV.read(file_path).each do |line|
+      puts line.inspect
+    end
     # add dinosaurs to the catalog
 
   end

@@ -12,3 +12,6 @@ These are the combined exercises used at http://leveluprails.herokuapp.com. You 
 ## The First Lesson
 
 Like everything else in the world, these exercises have errors and problems and typos. We experience this problem whenever we code, and the only way to stay sane as a group is to fix problems as we find them. Be a mensch, send pull requests.
+
+“Be yourself; everyone else is already taken.”
+  ― Oscar Wilde

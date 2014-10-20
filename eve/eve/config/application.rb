@@ -25,5 +25,11 @@ module Eve
 
     # Use SASS syntax
     config.sass.preferred_syntax = :sass
+
+    # Use FactoryGirl
+    # config.generators do |g|
+    #   g.test_framework :rspec, fixture: true
+    #   g.fixture_replacement :factory_girl, dir: "spec/factories"
+    # end
   end
 end

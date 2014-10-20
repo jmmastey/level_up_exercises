@@ -7,17 +7,7 @@
     = csrf_meta_tags
 
   %body
-    / %p.notice= notice
-    / %p.alert= alert
-    = nav_bar brand: "Groovemetrics", static: :top
-    #user_nav
-      - if user_signed_in?
-        Signed in as #{current_user.email}. Not you?
-        \#{link_to "Edit profile", edit_user_registration_path} |
-        \#{link_to "Log out", destroy_user_session_path, method: :delete}
-      - else
-        = link_to "Sign up", new_user_registration_path
-        or #{link_to "Login", new_user_session_path}
+    = render partial: "/layouts/navigation"
     - flash.each do |name, message|
       = content_tag :div, message, id: "flash_#{name}"
     .container-fluid

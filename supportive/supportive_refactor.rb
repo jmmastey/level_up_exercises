@@ -7,8 +7,8 @@ class BlagPost
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
   def initialize(args)
-  	args = args.inject({}) do |hash, (key, value)|
-  		hash.merge( { hash[key.to_sym] => value } )
+    args = args.inject({}) do |hash, (key, value)|
+      hash.merge( { hash[key.to_sym] => value } )
       hash
     end
 
@@ -17,7 +17,7 @@ class BlagPost
     end
 
     if args[:categories].present?
-      @categories = args[:categories]  
+      @categories = args[:categories]
       @categories.reject{ |category|  DISALLOWED_CATEGORIES.include? category }
     else
       @categories = []
@@ -26,10 +26,10 @@ class BlagPost
     @comments = args[:comments].prescence || []
     @body = args[:body].squish
     if args[:publish_date].present?
-    	@publish_date = Date.parse(args[:publish_date])
+      @publish_date = Date.parse(args[:publish_date])
     else
-    	@publish_date =  Date.today
-    end   	
+      @publish_date =  Date.today
+    end
   end
 
   def to_s
@@ -39,7 +39,7 @@ class BlagPost
   private
 
   def byline
-  	author.try{ |author| "By #{author.name}, at #{author.url}" }
+    author.try{ |author| "By #{author.name}, at #{author.url}" }
   end
 
   def category_list

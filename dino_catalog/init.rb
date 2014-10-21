@@ -18,10 +18,12 @@ loop do
     exit!
   else
     app = App.new(filename)
+    app.launch!
   end
 end
 
-catalog.launch!
+
+
 
 
   # launch the program

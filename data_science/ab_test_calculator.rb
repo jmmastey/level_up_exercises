@@ -4,8 +4,8 @@ class ABTestCalculator
   attr_reader :group_B
 
   def initialize
-    @group_A = ABTest.new
-    @group_B = ABTest.new
+    @group_A = ABTestGroup.new
+    @group_B = ABTestGroup.new
   end
 
   def compute
@@ -15,27 +15,6 @@ class ABTestCalculator
   end
 
   private
-
-  def new_initialized_result
-
-    r = ABTest.new
-    r.visitors_A, r.converts_A = @visitors_A, @converts_A
-    r.conversion_ratio_A, r.standard_error_A, r.error_margin_A =
-      descriptive_stats_for(@converts_A, @visitors_A)
-
-    r.visitors_B, r.converts_B = @visitors_B, @converts_B
-    r.conversion_ratio_B, r.standard_error_B, r.error_margin_B =
-      descriptive_stats_for(@converts_B, @visitors_B)
-
-    r
-  end
-
-  def descriptive_stats_for(n_converts, n_visitors)
-    conv_ratio = n_converts.to_f / n_visitors
-    standard_error = Math.sqrt(conv_ratio * (1 - conv_ratio) / n_visitors)
-    margin = standard_error * STDERRS_95_CONFIDENCE
-    return conv_ratio, standard_error, margin
-  end
 
   def chi_square_by_test_matrix(total_A, converts_A, total_B, converts_B)
     nonconverts_A = total_A - converts_A

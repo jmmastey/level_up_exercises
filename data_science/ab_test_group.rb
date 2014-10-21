@@ -12,10 +12,12 @@ class ABTestCalculator
 
     def add_nonconverts(howmany)
       @nonconverts += howmany
+      self
     end
 
     def add_converts(howmany)
       @converts += howmany
+      self
     end
 
     def visitors

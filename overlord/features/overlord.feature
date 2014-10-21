@@ -1,5 +1,3 @@
-
-
 Feature: Start bomb
   As a villain
   I want to boot the bomb
@@ -54,3 +52,7 @@ Scenario: Code is More Than Four Characters
   When I type in 0000000
   And I press deactivate
   Then the bomb should be active
+
+Scenario: Bomb explodes after 30 seconds
+  Given I have been on the home page for thirty seconds
+  Then the bomb should explode

@@ -62,10 +62,3 @@ end
 Then /^I should see the bomb status as exploded$/ do
   expect(page).to have_content "Status: The bomb has exploded. Ha!"
 end
-
-
-# Then /^I should see the bomb status as exploded$/ do
-#   expect(page).to have_content "Status: The bomb has exploded. Ha!"
-# end
-
-

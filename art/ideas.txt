@@ -17,7 +17,7 @@ db/
   seed.rb - import
 models/
   performer.rb
-  show.rb
+  performance.rb
   user.rb
   review.rb
     #average_rating_for_performance - wrong_work, redis

@@ -32,13 +32,13 @@ class Triangle
     puts ""
   end
 
-	def calculate_angles
-		angleA = radians_to_degrees(Math.acos((side2**2 + side3**2 - side1**2) / (2.0 * side2 * side3)))
-		angleB = radians_to_degrees(Math.acos((side1**2 + side3**2 - side2**2) / (2.0 * side1 * side3)))
-		angleC = radians_to_degrees(Math.acos((side1**2 + side2**2 - side3**2) / (2.0 * side1 * side2)))
+  def calculate_angles
+    angleA = radians_to_degrees(Math.acos((side2**2 + side3**2 - side1**2) / (2.0 * side2 * side3)))
+    angleB = radians_to_degrees(Math.acos((side1**2 + side3**2 - side2**2) / (2.0 * side1 * side3)))
+    angleC = radians_to_degrees(Math.acos((side1**2 + side2**2 - side3**2) / (2.0 * side1 * side2)))
 
-		return [angleA, angleB, angleC]
-	end
+    return [angleA, angleB, angleC]
+  end
 
   def law_of_cosines(sides)
     radians_to_degrees(Math.acos((sides[0]**2 + sides[1]**2 - sides[2]**2) / (2.0 * sides[0] * sides[1])))

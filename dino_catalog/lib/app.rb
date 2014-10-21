@@ -21,18 +21,41 @@ class App
 
   def launch!
     action = nil
-    until action == (:quit || :exit)
+    until action == :quit
       print "What would you like to do?\n"
       print "To list dinosaurs that were bipeds, enter 'Bipeds'.\n"
       print "To list dinosaurs that were carnivores, enter 'Carnivores'.\n"
-      print "To list dinosaurs of a specific period, enter the period, such as 'Jurassic'.\n"
+      print "To list dinosaurs of a specific period, enter 'period' followed by the period you want, such as 'Period Jurassic'.\n"
       print "To list only big or small dinosaurs, enter 'big' or 'small'.\n"
       print " > "
       user_input = gets.chomp
-      action = format_user_input(user_input)
-      do_action(actionaction)
+      formatted_action = format_user_input(user_input)
+      action = do_action(formatted_action)
     end
   end
+
+  def format_user_input(input)
+    input.downcase.strip
+  end
+
+  def do_action(action)
+    case action
+    when 'bipeds'
+      # biped search
+    when 'Carnivores'
+      # carnivore search
+    when 'period'
+      # period search
+    when 'big' || 'small'
+      # size search
+    when 'quit'
+      return :quit
+    else
+      "I don't understand. Please enter a valid input."
+    end
+  end
+
+
 
 
 

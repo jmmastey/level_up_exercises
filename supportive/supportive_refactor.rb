@@ -81,7 +81,7 @@ class BlagPost
   end
 
   def comments_allowed?
-  	date = Date.new(publish_date)
+    date = Date.new(publish_date)
     date.years_since(3) > Date.today
   end
 

@@ -22,4 +22,3 @@ models/
   review.rb
     #average_rating_for_performance - wrong_work, redis
     #num_positive_reviews - scope
-    

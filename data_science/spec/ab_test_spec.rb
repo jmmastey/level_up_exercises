@@ -1,10 +1,9 @@
 require_relative "../ab_test.rb"
 
-
-describe ABTestCalculator::ABTest do
+describe ABTest do
 
   let(:abtest) do
-    abtest = ABTestCalculator::ABTest.new
+    abtest = ABTest.new
     abtest.group_A.add_nonconverts(data[:a_nc]).add_converts(data[:a_c])
     abtest.group_B.add_nonconverts(data[:b_nc]).add_converts(data[:b_c])
     abtest

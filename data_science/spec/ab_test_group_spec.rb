@@ -1,8 +1,8 @@
 require_relative "../ab_test_group.rb"
 
-describe ABTestCalculator::ABTestGroup do
+describe ABTest::ABTestGroup do
 
-  let(:abg) { ABTestCalculator::ABTestGroup.new(converts: 443, nonconverts: 5325) }
+  let(:abg) { ABTest::ABTestGroup.new(converts: 443, nonconverts: 5325) }
 
   it "accepts conversion data in constructor" do
     expect(abg.converts).to be == 443

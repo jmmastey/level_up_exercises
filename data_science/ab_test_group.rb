@@ -1,4 +1,4 @@
-class ABTestCalculator
+class ABTest
   class ABTestGroup
     attr_accessor :converts
     attr_accessor :nonconverts

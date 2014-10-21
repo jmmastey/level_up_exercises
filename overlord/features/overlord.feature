@@ -13,25 +13,11 @@ Feature: Create a cool bomb thingy
   Background:
     Given I visit the configuration page
 
-  Scenario: Activate bomb with deactivation code
-    Given I have a configured bomb with default codes
-    When I activate the bomb with code '1234'
-    Then I should remain on the activation page
-
-  Scenario: Deactivate bomb with activation code
-    Given I have a configured bomb with default codes
-    When I activate the bomb with code '1111'
-    When I fill in '6666' to deactivate the bomb
-    Then I should remain on the deactivation page
-
   Scenario: User inserts letters for codes on config
     Given Configure bomb with codes '2a33' and 'ABBA'
     Then The bomb should not be configured
 
-  Scenario: User enters letters for activation code to activate bomb
-    Given I have a configured bomb with default codes
-    When I activate the bomb with code 'ABBA'
-    Then I should remain on the activation page
+
 
   Scenario: User creates a custom code to create a bomb
     Given Configure bomb with codes '6666' and '9999'

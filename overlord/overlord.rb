@@ -33,10 +33,6 @@ end
 post '/deactivate' do
   increment_attempts
 
-  if session[:bomb_status] == :exploded
-    explode_bomb
-  end
-
   if params[:deactivation_code] != session[:deactivation_code] &&
       excessive_attempts?
     explode_bomb

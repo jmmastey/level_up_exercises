@@ -27,3 +27,7 @@ Given(/^Configure bomb with codes '(\w+)' and '(\w+)'$/) do | act_code,
   fill_in 'deactivation_code', with: deact_code
   click_button 'Configure'
 end
+
+Then(/^I should see the bomb as 'Exploded'$/) do
+  expect(page).to have_content("BOOM")
+end

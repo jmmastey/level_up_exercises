@@ -4,10 +4,6 @@ Then(/^I should see 'Deactivated'$/) do
   expect(page).to have_content("Phew")
 end
 
-Then(/^I should see the bomb as 'Exploded'$/) do
-  expect(page).to have_content("BOOM")
-end
-
 When(/^I do nothing on the deactivation page for 30 seconds$/) do
   sleep(30)
   expect(page).to have_content("BOOM")

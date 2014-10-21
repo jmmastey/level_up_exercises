@@ -17,6 +17,10 @@ Feature: Deactivation Of Bomb
     Given I fill in '1234' to deactivate the bomb
     Then I should see 'Deactivated'
 
+  Scenario: Deactivate bomb with activation code
+    Given I fill in '6666' to deactivate the bomb
+    Then I should remain on the deactivation page
+
   Scenario: Input incorrect deactivation code 3 times
     Given I fill in '5678' to deactivate the bomb
     Given I fill in '9877' to deactivate the bomb

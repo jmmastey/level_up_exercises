@@ -26,3 +26,11 @@ Feature: Activation Of Bomb
     Then I should see 'Activated'
     Given I visit the configuration page
     Then I should see 'Activated'
+
+  Scenario: Activate bomb with deactivation code
+    Given I activate the bomb with code '1234'
+    Then I should remain on the activation page
+
+  Scenario: User enters letters for activation code to activate bomb
+    Given I activate the bomb with code 'ABBA'
+    Then I should remain on the activation page

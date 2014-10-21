@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :performer do
-    name "John D"
-    description "Blargablarg"
+    name { Faker::Name.name }
+    description { Faker::Lorem.sentence }
 
     trait(:with_shows) do
       after(:create) do |performer|

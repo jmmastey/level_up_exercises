@@ -6,7 +6,7 @@ RSpec.describe PerformancesController, :type => :controller do
   # Performance. As you add validations to Performance, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for :performance
+    FactoryGirl.build(:performance).attributes.symbolize_keys
   }
 
   let(:invalid_attributes) {

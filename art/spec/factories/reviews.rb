@@ -6,6 +6,6 @@ FactoryGirl.define do
     association :performance
 
     rating { rand(1..5) }
-    review "Arglebargles"
+    review { Faker::Lorem.sentence }
   end
 end

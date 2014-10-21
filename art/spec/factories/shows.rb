@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :show do
-    name "Whuf"
-    description "Apoplexy"
+    name { Faker::Name.name }
+    description { Faker::Lorem.sentence }
   end
 end

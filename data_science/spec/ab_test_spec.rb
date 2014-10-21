@@ -4,8 +4,8 @@ describe ABTest do
 
   let(:abtest) do
     abtest = ABTest.new
-    abtest.group_A.add_nonconverts(data[:a_nc]).add_converts(data[:a_c])
-    abtest.group_B.add_nonconverts(data[:b_nc]).add_converts(data[:b_c])
+    abtest.group_a.add_nonconverts(data[:a_nc]).add_converts(data[:a_c])
+    abtest.group_b.add_nonconverts(data[:b_nc]).add_converts(data[:b_c])
     abtest
   end
 

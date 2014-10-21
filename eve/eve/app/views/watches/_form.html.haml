@@ -1,0 +1,15 @@
+= form_for(@watch, html: { role: :form } ) do |f|
+  - if @watch.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@watch.errors.count, "error")} prohibited this watch from being saved:"
+      %ul
+        - @watch.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :nickname
+    = f.text_field :nickname, class: "form-control"
+  .form-group
+    = f.label :item
+    = f.text_field :item, class: "form-control"
+  = f.submit 'Save', class: "btn btn-primary"

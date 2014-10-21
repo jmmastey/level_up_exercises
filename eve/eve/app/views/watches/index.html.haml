@@ -1,0 +1,28 @@
+.page-header
+  %h1 My Watches
+
+- if @watches.empty?
+  %p.alert.alert-info You have no watches.
+- else
+  %table.table
+    %thead
+      %tr
+        %th Nickname
+        %th Item
+        %th User
+        %th
+        %th
+        %th
+    %tbody
+      - @watches.each do |watch|
+        %tr
+          %td= watch.nickname
+          %td= watch.item
+          %td= watch.user
+          %td= link_to('Show', watch)
+          %td= link_to('Edit', edit_watch_path(watch))
+          %td= link_to('Destroy', watch, :method => :delete, :data => { :confirm => 'Are you sure?' })
+
+= link_to(new_watch_path, class: "btn btn-default") do
+  %span.glyphicon.glyphicon-plus
+  Add Watch

@@ -9,7 +9,7 @@ class App
 
   def check_file(filepath)
     if filepath && File.exists?(filepath)
-      puts "I found a fil e!"
+      puts "I found a file!"
     else
       raise IOError, "No file was found"
     end

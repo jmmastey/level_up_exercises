@@ -1,5 +1,6 @@
 require 'CSV'
 require_relative 'dinosaur'
+require_relative 'csv_modifier'
 
 class Catalog
 
@@ -9,12 +10,12 @@ class Catalog
     @path = path
     @catalog_name = name
     @catalog = []
-    build_catalog_entries(path)
+    build_catalog_entries(@path, @catalog_name)
   end
 
-  def build_catalog_entries(filepath)
-    normalize_csv_headers(filepath)
-    normalized_filepath_name = normalized_filepath
+  def build_catalog_entries(filepath, catalog_name)
+    CsvModifier.normalize_csv_headers(filepath, catalog_name)
+    normalized_filepath_name = CsvModifier.normalized_filepath(catalog_name)
     CSV.read(normalized_filepath_name, headers: true, header_converters: :symbol).each do |data|
       @catalog << create_dinosaur_entry(data[:name], data)
     end
@@ -24,18 +25,6 @@ class Catalog
     Dinosaur.new(name, attributes)
   end
 
-  def normalize_csv_headers(old_csv_file)
-    normalized_filepath_name = normalized_filepath
-    CSV.open(normalized_filepath_name, 'w') do |csv|
-      csv << ['NAME', 'PERIOD', 'CONTINENT', 'DIET', 'WEIGHT_IN_LBS', 'WALKING', 'DESCRIPTION']
-      CSV.read(old_csv_file, headers: true).each do |row|
-        csv.puts row
-      end
-    end
-  end
 
-  def normalized_filepath
-    File.join(APP_ROOT, "normalized_#{@catalog_name}")
-  end
 
 end

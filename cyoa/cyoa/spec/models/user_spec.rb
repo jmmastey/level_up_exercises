@@ -13,5 +13,10 @@ describe User do
     end
   end
 
-
+  describe "#remove_artist" do
+    it "can remove artists" do
+      user.remove_artist(Artist.yonce)
+      expect(user.artists).not_to include(Artist.yonce)
+    end
+  end
 end

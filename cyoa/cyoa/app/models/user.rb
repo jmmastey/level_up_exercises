@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
 
   after_create :set_defaults
 
+  def remove_artist(artist)
+    artists.delete(artist)
+  end
+
   private
 
   def set_defaults

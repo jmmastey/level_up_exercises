@@ -47,14 +47,25 @@ When /^I type in password$/ do
   fill_in("deactivation_code", with: "password")
 end
 
+Given /^I am on the deactivate page$/ do
+  step "I visit the overlord home page"
+  step "I type in the wrong deactivation code"
+  step "I click deactivate"
+end
 
-# When /^I type the wrong deactivation code three times$/ do
-#    fill_in("deactivation_code", with: "7654")
-#    fill_in("deactivation_code", with: "9086")
-#    fill_in("deactivation_code", with: "8765")
-# end
+Given /^I am on the deactivate page after second attempt$/ do
+  step "I visit the overlord home page"
+  step "I type in the wrong deactivation code"
+  step "I click deactivate"
+  step "I type in the wrong deactivation code"
+  step "I click deactivate"
+end
 
-#bad tests
+Then /^I should see the bomb status as exploded$/ do 
+  expect(page).to have_content "Status: The bomb has exploded. Ha!"
+end
+
+
 # Then /^I should see the bomb status as exploded$/ do
 #   expect(page).to have_content "Status: The bomb has exploded. Ha!"
 # end

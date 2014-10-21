@@ -37,3 +37,17 @@ Scenario: Invalid Deactivation
     And I press deactivate
     Then the bomb should be active
 
+  Scenario: Second Deactivation Attempt
+    Given I am on the deactivate page
+    When I type in the wrong deactivation code
+    And I click deactivate
+    Then I should see the bomb status as active
+
+  Scenario: Third Deactivation Attempt
+    Given I am on the deactivate page after second attempt
+    When I type in the wrong deactivation code
+    And I click deactivate
+    Then I should see the bomb status as exploded
+
+    
+  

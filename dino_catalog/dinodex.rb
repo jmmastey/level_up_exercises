@@ -11,7 +11,7 @@ class Dinodex
 
   def print_all_dinos
     @dinosaurs.each do |dino|
-      dino.all_variables.each { |attri| puts attri}
+      dino.all_variables.each { |attri| puts attri }
       puts "\n----------\n\n"
     end
   end

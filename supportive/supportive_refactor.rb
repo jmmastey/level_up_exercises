@@ -88,7 +88,6 @@ class BlagPost
   def abstract
     body.truncate(200) unless body.length < 200
   end
-
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",

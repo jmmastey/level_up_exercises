@@ -16,13 +16,13 @@ class Catalog
 
   def build_catalog_entries(filepath)
     CSV.read(filepath, headers: true, header_converters: :symbol).each do |data|
-      @catalog << create_dinosaur_entry(data)
+      @catalog << create_dinosaur_entry(data[:name], data)
     end
-    @catalog.each { |entry| puts entry.name }
+    #@catalog.each { |entry| puts entry.name }
   end
 
-  def create_dinosaur_entry(attributes)
-    Dinosaur.new(attributes)
+  def create_dinosaur_entry(name, attributes)
+    Dinosaur.new(name, attributes)
   end
 
 end

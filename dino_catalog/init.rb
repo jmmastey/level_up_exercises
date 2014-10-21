@@ -21,13 +21,3 @@ loop do
     app.launch!
   end
 end
-
-
-
-
-
-  # launch the program
-
-  # get the user's input
-
-  # do what the user requests

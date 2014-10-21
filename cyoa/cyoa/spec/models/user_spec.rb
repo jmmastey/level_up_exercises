@@ -9,7 +9,9 @@ describe User do
     it { is_expected.to respond_to(:artists) }
 
     it "has default artists on creation" do
-      expect(user.artists).to include(Artist.find_or_create_by_unique_name("Beyonce"))
+      expect(user.artists).to include(Artist.yonce)
     end
   end
+
+
 end

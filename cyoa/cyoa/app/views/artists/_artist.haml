@@ -1,0 +1,37 @@
+.col-md-4
+  %h2 Twitter Followers
+  .bubblechart
+    %ul.bubblechains
+      %li
+        %span Artists
+        %table
+          - @artists.each do |artist|
+            %tr
+              %td= artist.name
+              %td= artist.fan_count("Twitter")
+.col-md-4
+  %h2 YouTube Likes
+  .bubblechart
+    %ul.bubblechains
+      %li
+        %span Artists
+        %table
+          - @artists.each do |artist|
+            %tr
+              %td= artist.name
+              %td= artist.fan_count("YouTube")
+
+.col-md-4
+  %h2 Facebook Fans
+  .bubblechart
+    %ul.bubblechains
+      %li
+        %span Artists
+        %table
+          - @artists.each do |artist|
+            %tr
+              %td= artist.name
+              %td= artist.fan_count("Facebook")
+
+%script{ src: "http://people.csail.mit.edu/eob/cts/widgets/bubblechart.cts", 
+         type: "text/cts" }

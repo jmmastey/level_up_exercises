@@ -1,0 +1,12 @@
+%h1 My Artists
+
+%table.table.table-striped
+  %tr
+    %th Artist
+    %th Remove
+  - @artists.each do |artist|
+    %tr
+      %td= artist.name
+      %td X
+
+= render partial: "artist"

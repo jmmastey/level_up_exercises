@@ -5,24 +5,22 @@ Feature: User signup
 
   Background:
     Given I am not logged in
-    And I click "Sign Up"
+    And I go to the signup page
 
   Scenario: Sign up w/ valid email/password
-    When I enter valid email and password
-    And I click "Sign up"
+    When I submit valid email and password
     Then I see the message "You have signed up successfully."
 
   Scenario: Sign up w/ invalid email
-    When I enter invalid email and valid password
-    And I click "Sign up"
-    Then I see the message "Invalid email or password."
+    When I submit invalid email and valid password
+    Then I see the message "Email is invalid"
 
   Scenario: Sign up w/ invalid password
-    When I enter valid email and invalid password
-    And I click "Sign up"
-    Then I see the message "Invalid email or password."
+    When I submit valid email and invalid password
+    Then I see the message "Password is too short"
 
   Scenario: Sign up w/ differing password/confirmation
-    When I enter valid email/password and differing confirmation
-    And I click "Sign up"
-    Then I see the message "Invalid email or password."
+    When I submit valid email/password and differing confirmation
+    Then I see the message "Password confirmation doesn't match"
+
+  Scenario: Sign up w/ already registered email

@@ -1,4 +1,21 @@
 $ ->
+  $.getJSON "http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?", (data) ->
+    
+    # Create the chart
+    $("#aapl").highcharts "StockChart",
+      rangeSelector:
+        selected: 1
+
+      title:
+        text: "AAPL Stock Price"
+
+      series: [
+        name: "AAPL"
+        data: data
+        tooltip:
+          valueDecimals: 2
+      ]
+
   $("#weather").highcharts
     title:
       text: "Monthly Average Temperature"

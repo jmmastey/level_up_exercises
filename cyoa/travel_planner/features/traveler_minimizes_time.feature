@@ -12,10 +12,3 @@ Feature: traveler minimizes travel time
       And I enter my destination airport code
     When I click find shortest travel time
     Then I should see flight options
-
-
-    trip
-      home_location
-      flights
-      meetings
-

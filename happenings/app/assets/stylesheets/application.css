@@ -11,5 +11,9 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require fullcalendar
  *= require_self
  */
+a {
+    text-decoration: none !important;
+}

@@ -80,7 +80,7 @@ class EventsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = Event.find(params[:id])
+    @event = Event.includes(:event_dates, :venue).find(params[:id])
   end
 
   # Never trust parameters from the scary internet,

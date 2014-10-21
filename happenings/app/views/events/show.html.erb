@@ -7,7 +7,7 @@
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @event.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:venue_id) %>:</strong></dt>
-  <dd><%= @event.venue_id %></dd>
+  <dd><%=link_to @event.venue.name, venue_path(@event.venue_id) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @event.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
@@ -19,10 +19,13 @@
   <dt><strong><%= model_class.human_attribute_name(:running_time) %>:</strong></dt>
   <dd><%= @event.running_time %></dd>
   <dt><strong><%= model_class.human_attribute_name(:event_url) %>:</strong></dt>
-  <dd><%= @event.event_url %></dd>
+  <dd><%= link_to @event.event_url %></dd>
   <dt><strong><%= model_class.human_attribute_name(:ticket_url) %>:</strong></dt>
   <dd><%= @event.ticket_url %></dd>
 </dl>
+<% @event.event_dates.each do |ev_date| %>
+      <%= render ev_date %>
+<% end %>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               events_path, :class => 'btn btn-default'  %>

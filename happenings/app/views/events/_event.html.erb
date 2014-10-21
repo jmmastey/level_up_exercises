@@ -1,4 +1,4 @@
-<div>
+<article>
     <ul class="list-group ">
         <li class="list-group-item">
             <h3 class="list-group-item-heading"><%= link_to event.name, event_path(event) %>
@@ -6,7 +6,7 @@
                     <span class="h4">@ <%= link_to event.venue.name, venue_path(event.venue) %></span>
                 <% end %>
             </h3>
-
+           <% unless current_page?(root_path) %>
             <div class="list-group-item-text">
                 <%= event.description %>
                 <dl class=" dl-horizontal pull-right text-right">
@@ -35,6 +35,7 @@
                     </div>
                 </div>
             </div>
+        <% end %>
         </li>
     </ul>
-</div>
+</article>

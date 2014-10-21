@@ -1,8 +1,9 @@
 class Venue < ActiveRecord::Base
-  has_many :venue_events
-  has_many :events, through: :venue_events, inverse_of: :venue
+  has_many :events
+  default_scope -> {order(name: :asc)}
+  default_scope -> {includes(:events).all}
 
-  scope :index, -> { includes(:venue_events).all.limit(20) }
+  scope :index, -> { includes(:events).all.limit(20) }
 
   validates :name, presence: true
   validates :description, presence: true, allow_blank: true

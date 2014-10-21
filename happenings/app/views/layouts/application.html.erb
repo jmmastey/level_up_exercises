@@ -40,9 +40,9 @@
 
     <%= render 'header' %>
 
-    <div class="container" id="<%= request.params.values.join('-') %>">
+    <div class="container-fluid" id="<%= request.params.values.join('-') %>">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="col-xs-12">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>

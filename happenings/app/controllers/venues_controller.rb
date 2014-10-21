@@ -80,7 +80,7 @@ class VenuesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_venue
-    @venue = Venue.find(params[:id])
+    @venue = Venue.includes(:events).find(params[:id])
   end
 
   # Never trust parameters from the scary internet,

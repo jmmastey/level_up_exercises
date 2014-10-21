@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '3.1.2'
+gem 'jquery-turbolinks'
 
 gem 'turbolinks', '2.3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -48,6 +49,7 @@ gem 'nokogiri'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'fullcalendar-rails', :github => "enovajuan/fullcalendar-rails"
 group :development, :test do
   gem 'ruby_debugger'
   gem 'factory_girl_rails', '~> 4.4.0'

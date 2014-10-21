@@ -2,7 +2,6 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
-
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @venue.name %></dd>
@@ -19,6 +18,8 @@
   <dt><strong><%= model_class.human_attribute_name(:venue_url) %>:</strong></dt>
   <dd><%= @venue.venue_url %></dd>
 </dl>
+
+      <%= render @venue.events %>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               venues_path, :class => 'btn btn-default'  %>

@@ -9,12 +9,12 @@ class BlagPost
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
   def initialize(args)
-    args = args.symbolize_keys
-    extract_author(args)
-    extract_categories(args)
-    extract_comments(args)
-    extract_body(args)
-    set_publish_date(args)
+    @document = args.symbolize_keys
+    extract_author
+    extract_categories
+    extract_comments
+    extract_body
+    set_publish_date
   end
 
   def to_s
@@ -23,26 +23,26 @@ class BlagPost
 
   private
 
-  def extract_author(args)
-    return unless args[:author].present? && args[:author_url].present?
-    @author = Author.new(args[:author], args[:author_url])
+  def extract_author
+    return unless @document[:author].present? && @document[:author_url].present?
+    @author = Author.new(@document[:author], @document[:author_url])
   end
 
-  def extract_categories(args)
-    return unless args[:categories].present?
-    @categories = args[:categories].reject {|cat| cat.in?(DISALLOWED_CATEGORIES) }
+  def extract_categories
+    return unless @document[:categories].present?
+    @categories = @document[:categories].reject {|cat| cat.in?(DISALLOWED_CATEGORIES) }
   end
 
-  def extract_comments(args)
-    @comments = args[:comments].presence
+  def extract_comments
+    @comments = @document[:comments].presence
   end
 
-  def extract_body(args)
-    @body = args[:body].squish
+  def extract_body
+    @body = @document[:body].squish
   end
 
-  def set_publish_date(args)
-    @publish_date = (args[:publish_date].try { |date| Date.parse(date) }) || Date.today
+  def set_publish_date
+    @publish_date = (@document[:publish_date].try { |date| Date.parse(date) }) || Date.today
   end
 
   def by_line

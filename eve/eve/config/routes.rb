@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  get 'forecast/index'
-
-  get 'forecast/recent'
-
-  get 'forecast/search'
+  devise_for :users
 
   get 'home/index'
 

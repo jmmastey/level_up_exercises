@@ -1,5 +1,4 @@
 class Item < ActiveRecord::Base
-  has_many :forecast_requests, dependent: :destroy
   has_many :orders, dependent: :destroy
 
   validates_presence_of :name, :in_game_id

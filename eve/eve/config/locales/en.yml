@@ -20,4 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  app_name: "EVE Forecast"
+  title: "EVE Forecast, item price predictions for EVE Online"
+  helpers:
+    label:
+      session:
+        remember_me: "Remember me"
+  home:
+    welcome: "Welcome to EVE Forecast"
+    subtitle: "An online tool for EVE Online item price predictions."

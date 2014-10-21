@@ -1,9 +1,14 @@
 %html
   %head
-    %title EVE Online Price Prediction
+    %title= t(:title)
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    = render "shared/menu"
     .container-fluid
+      - if notice
+        %p.alert.alert-info= notice
+      - if alert
+        %p.alert.alert-danger= alert
       = yield

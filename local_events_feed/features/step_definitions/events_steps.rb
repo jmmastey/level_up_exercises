@@ -13,7 +13,7 @@ When /^they click on scrape-events$/ do
 end
 
 When /^they click on an event$/ do
-  click_link(Event.first.name)
+  click_link("#{Event.first.name}-events")
 end
 
 Then /^they see highlighted events$/ do

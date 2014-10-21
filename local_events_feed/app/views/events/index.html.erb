@@ -1,33 +1,12 @@
 <body>
   <% if signed_in? %>
-    <%= render :partial => "session_bar.html.erb" %>
-
-	<center class='main-body'>
-	  <h1 class='title-headings'>All Events</h1>
-
-	  <table>
-		<tr>
-		  <th>Name</th>
-		  <th>Where</th>
-		  <th>Dates</th>
-		  <th># Shows</th>
-		</tr>
-		<% Event.all.each do |event| %>
-		<% member = current_user.has_showing_in?(event) %>
-		<% member_class = member ? "member" : "non-member" %>
-		<tr>
-		  <td class=<%= member_class %> align='left'><span class='td-text'><%= link_to event.name.truncate(40), event %></span></td>
-		  <td class=<%= member_class %> align='left'><span class='td-text'><%= event.location.truncate(40) %></span></td>
-		  <td class=<%= member_class %> align='center'><span class='td-text'><%= event.pretty_date_range %></span></td>
-		  <td class=<%= member_class %> align='center'><span class='td-text'><%= event.pretty_showing_count %></span></td>
-		</tr>
-		<% end %>
-	  </table>
-
-	  <h2>
-		<%= link_to 'Scrape for Events', scrape_path, method: :post %>
-	  </h2>
-	</center>
+      <%= render :partial => "session_bar.html.erb" %>
+	<div class='dim-table' style='float: left; padding-left: 5%'>
+	  <%= render :partial => "user_event.html.erb" %>
+	</div>
+	<div class='focus-table' style='float: right; padding-right: 5%'>
+	  <%= render :partial => "events.html.erb" %>
+	</div>
   <% else %>
     <h3>Please <%= link_to 'sign in', new_session_path %></h3>
   <% end %>

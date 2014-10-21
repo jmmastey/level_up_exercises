@@ -34,3 +34,20 @@
 .background-image-hide {
 	display: none;
 }
+
+.dim-table {
+	width: 40%;
+	top: 100px;
+	z-index: 0;
+	opacity: 0.75;
+	display: inline;
+	position: fixed;
+}
+
+.focus-table {
+	width: 40%;
+	top: 100px;
+	z-index: 0;
+	opacity: 1.0;
+	display: inline;
+}

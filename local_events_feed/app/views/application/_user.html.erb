@@ -1,0 +1,34 @@
+	<center class='main-body'>
+      <h2><span class='title-headings'><%= "#{first_name}'s Events" %></span></h2>
+
+      <table>
+		<tr>
+		  <th>Date</th>
+          <th>Name</th>
+          <th>Location</th>
+		  <th>Time</th>
+		  <th>Calendar</th>
+          <th>Remove</th>
+		</tr>
+		<% current_user.showings.each do |showing| %>
+          <tr>
+			<td class='member'><%= showing.pretty_local_date %></td>
+			<td class='member'><%= link_to showing.name, showing.event %></td>
+			<td class='member'><%= showing.location %></td>
+			<td class='member'><%= showing.pretty_local_time %></td>
+			<td class='member'>
+			  <%= link_to 'Update',
+				  { controller: 'users', action: 'add_showing_to_calendar', showing_id: showing.id, id: current_user[:id] },
+				  method: :post, :format => :ics, :id => "add_cal-#{showing.id}" %>
+			</td>
+			<td align='center' class='member'>
+			  <%= link_to image_tag("minus.png", :class => "member_minus"), 
+			  { controller: 'users', action: 'remove_showing', showing_id: showing[:id], id: current_user[:id] },
+			  method: :post, :id => "remove-#{showing[:id]}-user-show" %>
+			</td>
+          </tr>
+		<% end %>
+      </table>
+      <br>
+      <h4><%= link_to 'Browse All Events', { :controller => 'events', :user_id => current_user[:id] }  %></h4>
+	 </center>

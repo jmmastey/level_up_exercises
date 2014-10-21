@@ -1,41 +1,12 @@
 <body>
   <% if signed_in? %>
     <%= render :partial => "session_bar.html.erb" %>
-
-	<center class='main-body'>
-	  <h2><span class='title-headings'><%= @event.name %></span></h2>
-	  <h2><span class='title-headings'><%= @event.location %></span></h2>
-	  <h2><%= link_to 'Website', @event.link %></h2>
-	
-	  <table>
-		<thead><h3 style="color: white">Event Showings</h3></thead>
-		<tr>
-		  <th>Date</th>
-		  <th>Time</th>
-		  <th>Action</th>
-		</tr>
-		<% if @event.showings.blank? %>
-	      <tr colspan=3>No Showings</tr>
-	    <% else %>
-	      <% @event.sorted_showings.each do |showing| %>
-		    <% member = showing.in?(current_user.showings) %>
-		    <% member_class = member ? 'member' : 'non-member' %>
-	        <tr>
-			  <td class="<%= member_class %>"><%= showing.pretty_local_date %></td>
-			  <td class="<%= member_class %>"><%= showing.pretty_local_time %></td>
-			  <td class="<%= member_class %>" align='center'>
-		      <% association = { showing_id: showing[:id], user_id: current_user[:id] } %>
-			  <% if member %>
-			    <%= link_to image_tag("minus.png", :class => "#{member_class}_minus"), events_remove_user_showing_path(association), method: :post, :id => "remove-#{showing[:id]}" %>
-			  <% else %>
-			    <%= link_to image_tag("plus.png", :class => 'plus'), events_add_user_showing_path(association), method: :post, :id => "add-#{showing[:id]}" %>
-			  <% end %>
-			  </td>
-			</tr>
-		  <% end %>
-	    <% end %>
-	  </table>
-	</center>
+	<div class='dim-table' style='float: left; padding-left: 5%'>
+	  <%= render :partial => "user.html.erb" %>
+	</div>
+	<div class='focus-table' style='float: right; padding-right: 5%'>
+	  <%= render :partial => "event.html.erb" %>
+	</div>
   <% else %>
     <h3>Please <%= link_to 'sign in', new_session_path %></h3>
   <% end %>

@@ -46,8 +46,12 @@ def a_non_user_showing
   user_events.first.showings.last
 end
 
-def remove_link_id(showing)
-  "remove-#{showing.id}"
+def remove_link_id_user_show(showing)
+  "remove-#{showing.id}-user-show"
+end
+
+def remove_link_id_event_show(showing)
+  "remove-#{showing.id}-event-show"
 end
 
 def add_link_id(showing)

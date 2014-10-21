@@ -41,6 +41,8 @@ gem 'haml-rails'
 # Use devise for authentication
 gem 'devise'
 
+gem 'bootstrap-typeahead-rails', "~> 0.10.5"
+
 gem 'eve_central', require: false
 
 group :development, :test do

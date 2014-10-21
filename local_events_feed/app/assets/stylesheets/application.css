@@ -22,6 +22,10 @@
 	color: yellow;
 }
 
+.show-headings {
+	color: #EEEE33;
+}
+
 .background-image {
 	width: 100%;
 	position: fixed;
@@ -37,7 +41,8 @@
 
 .dim-table {
 	width: 40%;
-	top: 100px;
+	margin-top: 0px;
+	padding-top: 100px;
 	z-index: 0;
 	opacity: 0.75;
 	display: inline;
@@ -46,7 +51,8 @@
 
 .focus-table {
 	width: 40%;
-	top: 100px;
+	margin-top: 0px;
+	padding-top: 100px;
 	z-index: 0;
 	opacity: 1.0;
 	display: inline;

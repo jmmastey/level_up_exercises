@@ -13,7 +13,7 @@ When /^they click on remove for a showing$/ do
 end
 
 When /^they click on the all-events link$/ do
-  click_link("Browse All Events")
+  click_link("Events")
 end
 
 Then /^they see their showings on their page$/ do

@@ -1,4 +1,4 @@
-require_relative "../ab_test_group.rb"
+require_relative "../lib/ab_test/ab_test_group.rb"
 
 describe ABTest::ABTestGroup do
 

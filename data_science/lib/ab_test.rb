@@ -1,4 +1,4 @@
-require_relative "ab_test_group.rb"
+require_relative "ab_test/ab_test_group.rb"
 
 class ABTest
   attr_reader :group_A, :group_B

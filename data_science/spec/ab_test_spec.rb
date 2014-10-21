@@ -1,4 +1,4 @@
-require_relative "../ab_test.rb"
+require_relative "../lib/ab_test.rb"
 
 describe ABTest do
 

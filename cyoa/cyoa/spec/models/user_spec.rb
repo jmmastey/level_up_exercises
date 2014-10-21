@@ -5,5 +5,11 @@ describe User do
 
   it { is_expected.to be_valid }
 
-  it { is_expected.to respond_to(:artists) }
+  describe "#artists" do
+    it { is_expected.to respond_to(:artists) }
+
+    it "has default artists on creation" do
+      expect(user.artists).to include(Artist.find_or_create_by_unique_name("Beyonce"))
+    end
+  end
 end

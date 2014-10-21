@@ -10,24 +10,19 @@ class Artist < ActiveRecord::Base
 
   after_create :populate_initial_metrics
 
-  def self.some
-    [ find_or_create_by(name: "Beyonce"),
-      find_or_create_by(name: "Jay-Z"),
-      find_or_create_by(name: "Paul Simon"),
-      find_or_create_by(name: "SBTRKT"),
-      find_or_create_by(name: "Disclosure"),
-      find_or_create_by(name: "Bassnectar"),
-      find_or_create_by(name: "The Rolling Stones"),
-      find_or_create_by(name: "Alison Krauss"),
-      find_or_create_by(name: "Metallica"),
-      find_or_create_by(name: "Kanye West"),
-      find_or_create_by(name: "Lady Gaga"),
-      find_or_create_by(name: "Madonna"),
-      find_or_create_by(name: "Nightwish"),
-      find_or_create_by(name: "Justice"),
-      find_or_create_by(name: "Taylor Swift"),
-      find_or_create_by(name: "Sacred Monster"),
-      find_or_create_by(name: "Prince")
+  def self.defaults
+    [ find_or_create_by_unique_name("Beyonce"),
+      find_or_create_by_unique_name("Jay-Z"),
+      find_or_create_by_unique_name("Paul Simon"),
+      find_or_create_by_unique_name("Bassnectar"),
+      find_or_create_by_unique_name("The Rolling Stones"),
+      find_or_create_by_unique_name("Alison Krauss"),
+      find_or_create_by_unique_name("Kanye West"),
+      find_or_create_by_unique_name("Lady Gaga"),
+      find_or_create_by_unique_name("Madonna"),
+      find_or_create_by_unique_name("Justice"),
+      find_or_create_by_unique_name("Taylor Swift"),
+      find_or_create_by_unique_name("Prince")
     ]
   end
 

@@ -24,11 +24,13 @@ class Bomb
   def deactivate
     if @guess == @deactivation_code && !@exploded
        @active = false
-    else 
+    else
       @failed_attempts += 1
       if @failed_attempts == 3
-        @exploded = true
-        @active = false
+         @exploded = true
+         @active = false
+      elsif @failed_attempts == 1
+        @active = true
       end
     end
   end

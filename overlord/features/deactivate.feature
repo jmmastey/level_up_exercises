@@ -18,6 +18,7 @@
     And I press deactivate
     Then the bomb should be active
 
+
   Scenario: Multiple Invalid Deactivation Attempts Triggers Explosion
     Given the password is 0000
     And I type 8765

@@ -15,24 +15,31 @@ get '/' do
   erb :bomb_view
 end
 
-
 post '/activate' do
-  code = params[:activation_code].to_i
-  bomb =  session[:bomb]
-  bomb.enter_code(code)
-  bomb.activate
+  code = params[:activation_code]
+  if is_valid_code?(code)
+    bomb =  session[:bomb]
+    bomb.enter_code(code.to_i)
+    bomb.activate
+  end
   @bomb = session[:bomb]
   erb :bomb_view
 end
 
 post '/deactivate' do
-  code = params[:deactivation_code].to_i
+  code = params[:deactivation_code]
+  if is_valid_code?(code)
   bomb = session[:bomb]
-  bomb.enter_code(code)
+  bomb.enter_code(code.to_i)
   bomb.deactivate
+ end
   @bomb = session[:bomb]
   erb :bomb_view
  end
+
+def is_valid_code?(code)
+  /\A[0-9]+\Z/.match(code)
+end
 
 
 # we can shove stuff into the session cookie YAY!

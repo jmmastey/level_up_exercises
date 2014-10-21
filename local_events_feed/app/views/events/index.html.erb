@@ -2,8 +2,8 @@
   <% if signed_in? %>
     <%= render :partial => "session_bar.html.erb" %>
 
-	<center>
-	  <h1>All Events</h1>
+	<center class='main-body'>
+	  <h1 class='title-headings'>All Events</h1>
 
 	  <table>
 		<tr>
@@ -16,10 +16,10 @@
 		<% member = current_user.has_showing_in?(event) %>
 		<% member_class = member ? "member" : "non-member" %>
 		<tr>
-		  <td class=<%= member_class %> align='left'><%= link_to event.name.truncate(40), event %></td>
-		  <td class=<%= member_class %> align='left'><%= event.location.truncate(40) %></td>
-		  <td class=<%= member_class %> align='center'><%= event.pretty_date_range %></td>
-		  <td class=<%= member_class %> align='center'><%= event.pretty_showing_count %></td>
+		  <td class=<%= member_class %> align='left'><span class='td-text'><%= link_to event.name.truncate(40), event %></span></td>
+		  <td class=<%= member_class %> align='left'><span class='td-text'><%= event.location.truncate(40) %></span></td>
+		  <td class=<%= member_class %> align='center'><span class='td-text'><%= event.pretty_date_range %></span></td>
+		  <td class=<%= member_class %> align='center'><span class='td-text'><%= event.pretty_showing_count %></span></td>
 		</tr>
 		<% end %>
 	  </table>

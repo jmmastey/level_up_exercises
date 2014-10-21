@@ -10,5 +10,5 @@
     = render partial: "/layouts/navigation"
     - flash.each do |name, message|
       = content_tag :div, message, id: "flash_#{name}"
-    .container-fluid
+    .container
       = yield

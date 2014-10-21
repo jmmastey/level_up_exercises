@@ -1,4 +1,4 @@
-%h1 Home
+%h1 Popular Artist Metrics
 
 .col-md-4
   %h2 Twitter Followers
@@ -35,10 +35,11 @@
               %td= artist.name
               %td= artist.fan_count("Facebook")
 
+.col-md-6
+  #weather
 
-#weather
-
-#aapl
+.col-md-6
+  #aapl
 
 %script{ src: "http://people.csail.mit.edu/eob/cts/widgets/bubblechart.cts", 
          type: "text/cts" }

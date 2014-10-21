@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :performances
+
   resources :shows
 
   resources :performers

@@ -3,6 +3,7 @@ require 'rubygems'
 require 'sinatra'
 require 'erb'
 require 'shotgun'
+# require 'sinatra/flash'
 require_relative 'bomb'
 
 enable :sessions
@@ -28,6 +29,7 @@ end
 
 post '/deactivate' do
   code = params[:deactivation_code]
+  puts 
   if is_valid_code?(code)
   bomb = session[:bomb]
   bomb.enter_code(code.to_i)
@@ -38,7 +40,7 @@ post '/deactivate' do
  end
 
 def is_valid_code?(code)
-  /\A[0-9]+\Z/.match(code)
+  /\A[0-9]{4}\Z/.match(code)
 end
 
 

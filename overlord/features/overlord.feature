@@ -29,25 +29,28 @@ Scenario: Invalid Deactivation
   And I click deactivate
   Then I should see the bomb status as active
 
+Scenario: Second Deactivation Attempt
+  Given I am on the deactivate page
+  When I type in the wrong deactivation code
+  And I click deactivate
+  Then I should see the bomb status as active
 
-  Scenario: Non-Numeric Deactivation 
-    Given I am on the activate page
-    And the password is 0000
-    When I type in password
-    And I press deactivate
-    Then the bomb should be active
+Scenario: Third Deactivation Attempt
+  Given I am on the deactivate page after second attempt
+  When I type in the wrong deactivation code
+  And I click deactivate
+  Then I should see the bomb status as exploded
 
-  Scenario: Second Deactivation Attempt
-    Given I am on the deactivate page
-    When I type in the wrong deactivation code
-    And I click deactivate
-    Then I should see the bomb status as active
+Scenario: Non-Numeric Deactivation 
+  Given I am on the activate page
+  And the password is 0000
+  When I type in password
+  And I press deactivate
+  Then the bomb should be active
 
-  Scenario: Third Deactivation Attempt
-    Given I am on the deactivate page after second attempt
-    When I type in the wrong deactivation code
-    And I click deactivate
-    Then I should see the bomb status as exploded
-
-    
-  
+Scenario: Code is More Than Four Characters
+  Given I am on the deactivate page
+  And the password is 0000
+  When I type in 0000000
+  And I press deactivate
+  Then the bomb should be active

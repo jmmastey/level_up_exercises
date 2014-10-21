@@ -33,8 +33,6 @@ Then /^I should see the bomb status as inactive$/ do
   expect(page).to have_content "Status: The bomb is inactive"
 end
 
-#sad tests :(
-
 When /^I type in the wrong activation code$/ do
  fill_in("activation_code", with: "8768")
 end
@@ -61,7 +59,7 @@ Given /^I am on the deactivate page after second attempt$/ do
   step "I click deactivate"
 end
 
-Then /^I should see the bomb status as exploded$/ do 
+Then /^I should see the bomb status as exploded$/ do
   expect(page).to have_content "Status: The bomb has exploded. Ha!"
 end
 

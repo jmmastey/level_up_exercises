@@ -4,9 +4,10 @@
   %tr
     %th Artist
     %th Remove
-  - @artists.each do |artist|
-    %tr
-      %td= artist.name
-      %td X
+  - if @artists.any?
+    - @artists.each do |artist|
+      %tr
+        %td= artist.name
+        %td= button_to "Remove", artist_path(artist), method: :delete
 
 = render partial: "artist"

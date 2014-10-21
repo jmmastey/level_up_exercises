@@ -13,12 +13,7 @@ routes/
 tasks/
   import_reviews - include, method_cache, batches, thread
   you_may_also_like - loop_invariant, sidekiq
-db/
-  seed.rb - import
 models/
-  performer.rb
-  performance.rb
-  user.rb
   review.rb
     #average_rating_for_performance - wrong_work, redis
     #num_positive_reviews - scope

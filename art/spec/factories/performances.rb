@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :performance do
     association :show
-    performed_on { rand(0.200).days.from_now }
+    performed_on { Faker::Date.between(2.years.ago, 2.years.from_now) }
   end
 end

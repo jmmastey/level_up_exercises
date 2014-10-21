@@ -14,6 +14,7 @@ Detection
 + (profile) More realistic load profiles.
 
 Refactoring
++ (import) Scale seed data creation properly. (https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance/)
 + (loop_invariant) Array inside a loop, string copies within a loop: `COUNTRY_CODE_MAP.detect? { |k,v| [k.downcase, v.downcase].include? string.downcase }`
 + (wrong_work) Move computation into the database
 + (include) Use `||` instead of `.include?` for small arrays

@@ -13,6 +13,8 @@ routes/
 tasks/
   import_reviews - include, method_cache, batches, thread
   you_may_also_like - loop_invariant, sidekiq
+db/
+  seed.rb - import
 models/
   performer.rb
   show.rb

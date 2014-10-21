@@ -4,12 +4,12 @@ class App
     @filepath = File.join(APP_ROOT, name)
     @app_name = name
     check_file(@filepath)
-    create_catalog(@filepath, @name)
+    create_catalog(@filepath, @app_name)
   end
 
   def check_file(filepath)
     if filepath && File.exists?(filepath)
-      puts "I found a file!"
+      puts "I found a fil e!"
     else
       raise IOError, "No file was found"
     end
@@ -42,7 +42,7 @@ class App
     case action
     when 'bipeds'
       # biped search
-    when 'Carnivores'
+    when 'carnivores'
       # carnivore search
     when 'period'
       # period search

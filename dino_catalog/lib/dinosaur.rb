@@ -13,3 +13,6 @@ class Dinosaur
   end
 
 end
+
+
+#options.each { |key, value| insnce_variable_set("@#{key}", value)}

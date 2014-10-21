@@ -7,22 +7,35 @@ class Catalog
 
   def initialize(path=nil, name)
     @path = path
-    @name = name
+    @catalog_name = name
     @catalog = []
     build_catalog_entries(path)
   end
 
-  # load in the csv file
-
   def build_catalog_entries(filepath)
-    CSV.read(filepath, headers: true, header_converters: :symbol).each do |data|
+    normalize_csv_headers(filepath)
+    normalized_filepath_name = normalized_filepath
+    CSV.read(normalized_filepath_name, headers: true, header_converters: :symbol).each do |data|
       @catalog << create_dinosaur_entry(data[:name], data)
     end
-    #@catalog.each { |entry| puts entry.name }
   end
 
   def create_dinosaur_entry(name, attributes)
     Dinosaur.new(name, attributes)
+  end
+
+  def normalize_csv_headers(old_csv_file)
+    normalized_filepath_name = normalized_filepath
+    CSV.open(normalized_filepath_name, 'w') do |csv|
+      csv << ['NAME', 'PERIOD', 'CONTINENT', 'DIET', 'WEIGHT_IN_LBS', 'WALKING', 'DESCRIPTION']
+      CSV.read(old_csv_file, headers: true).each do |row|
+        csv.puts row
+      end
+    end
+  end
+
+  def normalized_filepath
+    File.join(APP_ROOT, "normalized_#{@catalog_name}")
   end
 
 end

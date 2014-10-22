@@ -1,19 +1,18 @@
-require 'pry'
-# jlynch - Determines which type and angles of triangle given sides
-# Talking to Ozzie he said no @angles - no caching those angles!
 class Triangle
-  attr_accessor :sides
+  attr_accessor :side1, :side2, :side3
 
   def initialize(side1, side2, side3)
-    @sides = { side1: side1, side2: side2, side3: side3 }
+    @side1 = side1
+    @side2 = side2
+    @side3 = side3
   end
 
   def is_equilateral?
-    (sides[:side1] == sides[:side2]) && (sides[:side2] == sides[:side3])
+    (side1 == side2) && (side2 == side3)
   end
 
   def is_isosceles?
-    sides.to_a.uniq.length == 2
+    [side1, side2, side3].uniq.length == 2
   end
 
   def is_scalene?
@@ -25,8 +24,8 @@ class Triangle
     puts "equilateral!" if is_equilateral?
     puts "isosceles! Also, that word is hard to type." if is_isosceles?
     puts "scalene and mathematically boring." if is_scalene?
-    puts "The angles of this triangle are #{ angles.join(', ') }"
-    puts "This triangle is also a right triangle!" if angles.include? 90
+    puts "The angles of this triangle are #{ angles_from_sides.join(', ') }"
+    puts "This triangle is also a right triangle!" if angles_from_sides.include? 90
     puts ""
   end
 
@@ -36,11 +35,21 @@ class Triangle
 
   private
 
-  def angles
-    angle_a = radians_to_degrees(Math.acos((sides[:side2]**2 + sides[:side3]**2 - sides[:side1]**2) / (2.0 * sides[:side2] * sides[:side3])))
-    angle_b = radians_to_degrees(Math.acos((sides[:side1]**2 + sides[:side3]**2 - sides[:side2]**2) / (2.0 * sides[:side1] * sides[:side3])))
-    angle_c = radians_to_degrees(Math.acos((sides[:side1]**2 + sides[:side2]**2 - sides[:side3]**2) / (2.0 * sides[:side1] * sides[:side2])))
-    return [angle_a, angle_b, angle_c]
+  def angles_from_sides
+    positions = [[side3, side2, side1],
+                 [side1, side3, side2],
+                 [side1, side2, side3]]
+    angle_a, angle_b, angle_c = [0, 0, 0]
+    angles = [angle_a, angle_b, angle_c]
+
+    positions.each_with_index do |position, index|
+      angles[index] = law_of_cosines(position)
+    end
+    angles
+  end
+
+  def law_of_cosines(sides)
+    radians_to_degrees(Math.acos((sides[0]**2 + sides[1]**2 - sides[2]**2) / (2.0 * sides[0] * sides[1])))
   end
 end
 
@@ -50,6 +59,6 @@ triangles.each do |sides|
   tri = Triangle.new(*sides)
   tri.recite_facts
   print "Let's change side 1 to 4in ... "
-  tri.sides[:side1] = 4
+  tri.side1 = 4
   tri.recite_facts
 end

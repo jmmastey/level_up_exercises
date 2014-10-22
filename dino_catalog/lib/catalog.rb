@@ -4,14 +4,13 @@ require_relative 'csv_modifier'
 
 class Catalog
 
-  # Initialize the new catalog
+  attr_reader :dinosaurs
 
   def initialize(path=nil, name)
     @path = path
     @catalog_name = name
-    @catalog = []
+    @dinosaurs = []
     build_catalog_entries(@path, @catalog_name)
-    @catalog.each { |entry| puts entry.inspect }
   end
 
   def build_catalog_entries(filepath, catalog_name)
@@ -19,7 +18,7 @@ class Catalog
     normalized_filepath_name = CsvModifier.normalized_filepath(catalog_name)
     #CsvModifier.replace_cell_with_carnivore(normalized_filepath_name)
     CSV.read(normalized_filepath_name, headers: true, header_converters: :symbol).each do |data|
-      @catalog << create_dinosaur_entry(data[:name], data)
+      @dinosaurs << create_dinosaur_entry(data[:name], data)
     end
   end
 

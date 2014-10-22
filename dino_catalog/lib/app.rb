@@ -1,10 +1,12 @@
+require 'pry'
+
 class App
 
   def initialize(name)
     @filepath = File.join(APP_ROOT, name)
     @app_name = name
     check_file(@filepath)
-    create_catalog(@filepath, @app_name)
+    @catalog = create_catalog(@filepath, @app_name)
   end
 
   def check_file(filepath)
@@ -41,7 +43,7 @@ class App
   def do_action(action)
     case action
     when 'bipeds'
-      # biped search
+      list_bipeds
     when 'carnivores'
       # carnivore search
     when 'period'
@@ -52,6 +54,15 @@ class App
       return :quit
     else
       "I don't understand. Please enter a valid input."
+    end
+  end
+
+  def list_bipeds
+    bipeds = @catalog.dinosaurs.select { |dinosaur| dinosaur.walking == 'Biped' }
+    print "The following dinosaurs are bipeds: \n\n"
+    print "Sorry. No bipeds were found" if bipeds.empty?
+    bipeds.each do |dinosaur|
+      puts "#{dinosaur.name}"
     end
   end
 

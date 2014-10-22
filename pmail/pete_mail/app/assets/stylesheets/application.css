@@ -41,6 +41,8 @@ div {
 	top: 30%;
 	height: 40%;
 	width: 30%;
+	padding: 0px;
+	margin: 0px;
 }
 
 #search-field {
@@ -51,6 +53,13 @@ div {
 	width: 100%;
 	padding: 0px;
 	margin: 0px;
+	border: none;
+}
+
+#search-field-div:hover {
+	border-top: 1px solid #AAAAAA;
+	border-left: 1px solid #AAAAAA;
+	border-bottom: 1px solid #AAAAAA;
 }
 
 #search-button-div {
@@ -59,6 +68,8 @@ div {
 	top: 30%;
 	width: 2%;
 	height: 40%;
+	padding: 0px;
+	margin: 0px;
 }
 
 #search-button { 
@@ -67,6 +78,8 @@ div {
 	top: 0%;
 	height: 100%;
 	width: 100%;
+	padding: 0px;
+	margin: 0px;
 	background-image: url('white-magnifying-glass-hi.png');
 	background-repeat: no-repeat;
 	background-size: 40% 50%;
@@ -84,21 +97,9 @@ div {
 	top: 30%;
 	height: 40%;
 	width: 1.5%;
+	background-color: #999999;
 }
 
-#apps-button {
-	position: absolute;
-	left: 0%;
-	top: 0%;
-	height: 100%;
-	width: 100%;
-}
-
-#apps-button td {
-	background: #777777;
-	padding: 0px;
-}
-
-#apps-button:hover td {
-	background: #444444;
+#apps-button-div:hover {
+	background-color: #BBBBBB;
 }

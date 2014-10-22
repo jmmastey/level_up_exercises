@@ -12,7 +12,7 @@ RSpec.describe "watches/show", :type => :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(/Nickname/)
-    expect(rendered).to match(//)
-    expect(rendered).to match(//)
+    expect(rendered).to match(/Item/)
+    expect(rendered).to match(/User/)
   end
 end

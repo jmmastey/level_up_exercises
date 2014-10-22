@@ -7,7 +7,7 @@
         %table
           - @artists.sort_by{ |a| a.fan_count("Twitter") }.reverse.each do |artist|
             %tr
-              %td= artist.name
+              %td= artist.nbs_name
               %td= artist.fan_count("Twitter")
               
 .col-md-4
@@ -19,7 +19,7 @@
         %table
           - @artists.sort_by{ |a| a.fan_count("YouTube") }.reverse.each do |artist|
             %tr
-              %td= artist.name
+              %td= artist.nbs_name
               %td= artist.fan_count("YouTube")
 
 .col-md-4
@@ -31,7 +31,7 @@
         %table
           - @artists.sort_by{ |a| a.fan_count("Facebook") }.reverse.each do |artist|
             %tr
-              %td= artist.name
+              %td= artist.nbs_name
               %td= artist.fan_count("Facebook")
 
 %script{ src: "http://people.csail.mit.edu/eob/cts/widgets/bubblechart.cts", 

@@ -10,7 +10,7 @@ class Artist < ActiveRecord::Base
 
   after_create :populate_initial_metrics
 
-  default_scope -> { order('name ASC') }
+  default_scope -> { order('lower(name) ASC') }
 
   def self.update_all_metrics
     Artist.all.each do |artist|

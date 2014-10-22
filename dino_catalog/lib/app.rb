@@ -27,10 +27,10 @@ class App
     action = nil
     until action == :back
       print "\n\nWhat would you like to do?\n\n"
-      print "To list dinosaurs that were bipeds, enter 'Bipeds'.\n"
-      print "To list dinosaurs that were carnivores, enter 'Carnivores'.\n"
-      print "To list dinosaurs of a specific period, enter 'period' followed by the period you want, such as 'Period Jurassic'.\n"
-      print "To list only big or small dinosaurs, enter 'big' or 'small'.\n"
+      print "1. To list dinosaurs that were bipeds, enter 'Bipeds'.\n"
+      print "2. To list dinosaurs that were carnivores, enter 'Carnivores'.\n"
+      print "3. To list dinosaurs of a specific period, enter 'period' followed by the period you want, such as 'Period Jurassic'.\n"
+      print "4. To list only big or small dinosaurs, enter 'big' or 'small'.\n\n"
       print "To go back import a new CSV file, enter 'back'.\n"
       print "To exit this program, enter 'quit'\n\n"
       print " > "

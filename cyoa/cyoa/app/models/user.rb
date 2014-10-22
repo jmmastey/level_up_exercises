@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   def add_artist_name(artist_name)
     artist = Artist.find_or_create_by_unique_name(artist_name)
     artists << artist
+    artist.nbs_id
   end
 
   def nbs_artists

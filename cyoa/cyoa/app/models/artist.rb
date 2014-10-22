@@ -20,7 +20,8 @@ class Artist < ActiveRecord::Base
 
   def self.defaults
     [ find_or_create_by_unique_name("Beyonce"),
-      find_or_create_by_unique_name("Jay-Z"),
+      find_or_create_by_unique_name("Jay Z"),
+      find_or_create_by_unique_name("Big L"),
       find_or_create_by_unique_name("Paul Simon"),
       find_or_create_by_unique_name("Bassnectar"),
       find_or_create_by_unique_name("The Rolling Stones"),

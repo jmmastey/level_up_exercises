@@ -13,7 +13,12 @@ class ArtistsController < ApplicationController
   end
 
   def create
-    current_user.add_artist_name(params[:artist][:name])
+    name = params[:artist][:name]
+    unless current_user.add_artist_name(name)
+      message = "Whoops! We can't seem to find any data on the artist "
+      message += "'#{name}'."
+      flash[:info] = message
+    end
     redirect_to :back
   end
 end

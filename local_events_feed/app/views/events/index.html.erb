@@ -1,12 +1,13 @@
 <body>
   <% if signed_in? %>
-      <%= render :partial => "session_bar.html.erb" %>
-	<div class='dim-table' style='float: left; padding-left: 5%'>
+    <%= render :partial => "session_bar.html.erb" %>
+	<div class='dim-table' style='position: fixed; top: 5%; left: 0%; padding-top: 0px;'>
 	  <%= render :partial => "user.html.erb" %>
 	</div>
-	<div class='focus-table' style='float: right; padding-right: 5%'>
+	<div class='focus-table' style='position: absolute; top: 5%; left: 50%; padding-top: 0px;'>
 	  <%= render :partial => "events.html.erb" %>
 	</div>
+	<div id='all-events-title'>All Events</div>
   <% else %>
     <h3>Please <%= link_to 'sign in', new_session_path %></h3>
   <% end %>

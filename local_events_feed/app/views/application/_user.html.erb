@@ -1,6 +1,4 @@
 	<center class='main-body'>
-      <h2><span class='title-headings'><%= "#{first_name}'s Events" %></span></h2>
-
       <table>
 		<tr>
 		  <th>Date</th>
@@ -22,7 +20,7 @@
 				  method: :post, :format => :ics, :id => "add_cal-#{showing.id}" %>
 			</td>
 			<td align='center' class='member'>
-			  <%= link_to image_tag("minus.png", :class => "member_minus"), 
+			  <%= link_to image_tag("minus.png", :class => 'minus'), 
 			  { controller: 'users', action: 'remove_showing', showing_id: showing[:id], id: current_user[:id] },
 			  method: :post, :id => "remove-#{showing[:id]}-user-show" %>
 			</td>

@@ -1,16 +1,16 @@
 <head>
-  <link type="text/css" rel="stylesheet" href="show.css"/>
+  <% if signed_in? %>
+    <title><%= first_name %>'s Events</title>
+  <% end %>
 </head>
 
 <body>
   <% if signed_in? %>
     <%= render :partial => "session_bar.html.erb" %>
-	<div class='focus-table' style='float: left; padding-left: 5%'>
-      <%= render :partial => "user.html.erb" %>
+	<div class='focus-table' style='position: fixed; top: 5%; left: 0%; padding-top: 0px;'>
+	  <%= render :partial => "user.html.erb" %>
 	</div>
-	<div class='dim-table' style='float: right; padding-right: 5%'>
-	  <%= render :partial => "events.html.erb" %>
-	</div>
+	<div id='all-events-title'><%= first_name %>'s Events</div>
   <% else %>
     <h3>Please <%= link_to 'sign in', new_session_path %></h3>
   <% end %>

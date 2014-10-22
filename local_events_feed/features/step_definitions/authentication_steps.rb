@@ -59,7 +59,7 @@ Then /^they see the signup page$/ do
 end
 
 Then /^they see their own page$/ do
-  expect(page).to have_content(user_page_msg('John'))
+  expect(page).to have_title(user_page_msg('John'))
 end
 
 Then /^they see themselves logged in$/ do

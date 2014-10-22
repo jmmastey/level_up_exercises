@@ -12,6 +12,8 @@ module CsvModifier
     CSV.open(normalized_filepath_name, 'w') do |csv|
       csv << new_headers
       CSV.read(old_csv_file, headers: true).each do |row|
+        row['Carnivore'] = 'Carnivore' if row['Carnivore'] == 'Yes'
+        row['Carnivore'] = nil if row['Carnivore'] == 'No'
         csv.puts row
       end
     end
@@ -33,7 +35,5 @@ module CsvModifier
     end
     new_header_row
   end
-
-
 
 end

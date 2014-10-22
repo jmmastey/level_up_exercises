@@ -1,8 +1,8 @@
 Name,Period,Diet,Weight_in_lbs,Walking
-Abrictosaurus,Jurassic,No,100,Biped
-Afrovenator,Jurassic,Yes,,Biped
-Carcharodontosaurus,Albian,Yes,3000,Biped
-Giraffatitan,Jurassic,No,6600,Quadruped
-Paralititan,Cretaceous,No,120000,Quadruped
-Suchomimus,Cretaceous,Yes,10400,Biped
-Melanorosaurus,Triassic,No,2400,Quadruped
+Abrictosaurus,Jurassic,,100,Biped
+Afrovenator,Jurassic,Carnivore,,Biped
+Carcharodontosaurus,Albian,Carnivore,3000,Biped
+Giraffatitan,Jurassic,,6600,Quadruped
+Paralititan,Cretaceous,,120000,Quadruped
+Suchomimus,Cretaceous,Carnivore,10400,Biped
+Melanorosaurus,Triassic,,2400,Quadruped

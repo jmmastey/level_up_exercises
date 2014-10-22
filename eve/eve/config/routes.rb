@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'items/index'
+
   resources :watches
 
   devise_for :users

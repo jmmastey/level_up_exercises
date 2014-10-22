@@ -18,12 +18,15 @@ class Triangle
     !(equilateral || isosceles)
   end
 
-  def recite_facts
+  def triangle_type
     puts 'This triangle is equilateral!' if equilateral
     puts 'This triangle is isosceles! Also, \
     that word is hard to type.' if isosceles
     puts 'This triangle is scalene and mathematically boring.' if scalene
+  end
 
+  def recite_facts
+    triangle_type
     angles = calculate_angles(side1, side2, side3)
     puts 'The angles of this triangle are ' + angles.join(',')
 
@@ -36,11 +39,10 @@ class Triangle
   end
 
   def calculate_angles(a, b, c)
-    angle_a = law_of_cosines(b, c, a)
-    angle_b = law_of_cosines(a, c, b)
-    angle_c = law_of_cosines(a, b, c)
-
-    [angle_a, angle_b, angle_c]
+    [law_of_cosines(b, c, a),
+    law_of_cosines(a, c, b),
+    law_of_cosines(a, b, c),
+    ]
   end
 
   def radians_to_degrees(rads)

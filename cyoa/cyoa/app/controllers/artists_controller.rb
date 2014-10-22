@@ -13,8 +13,7 @@ class ArtistsController < ApplicationController
   end
 
   def create
-    artist = Artist.find_or_create_by_unique_name(params[:artist][:name])
-    current_user.artists << artist
+    current_user.add_artist_name(params[:artist][:name])
     redirect_to :back
   end
 end

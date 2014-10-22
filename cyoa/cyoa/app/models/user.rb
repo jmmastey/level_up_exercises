@@ -10,6 +10,15 @@ class User < ActiveRecord::Base
     artists.delete(artist)
   end
 
+  def add_artist_name(artist_name)
+    artist = Artist.find_or_create_by_unique_name(artist_name)
+    artists << artist
+  end
+
+  def nbs_artists
+    artists.where.not("nbs_id" => nil)
+  end
+
   private
 
   def set_defaults

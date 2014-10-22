@@ -33,9 +33,18 @@ describe Artist do
     end
   end
 
-  describe "#nbs_id" do
-    it "has a unique nbs id" do
-      expect(FactoryGirl.build(:another_artist, nbs_id: artist.nbs_id)).not_to be_valid
+  context "Next Big Sound API" do
+    describe "#nbs_id" do
+      it "has a unique nbs id" do
+        expect(FactoryGirl.build(:another_artist, nbs_id: artist.nbs_id)).not_to be_valid
+      end
+    end
+
+    describe "#nbs_name" do
+      it "stores the next big sound name" do
+        kanye = Artist.create(name: "kanye west")
+        expect(kanye.nbs_name).to eq("Kanye West")
+      end
     end
   end
 

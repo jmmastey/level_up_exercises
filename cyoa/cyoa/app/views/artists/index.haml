@@ -4,12 +4,12 @@
 %table.table.table-striped
   %tr
     %th Artist
-    %th Remove
+    %th 
   - if @artists.any?
     - @artists.each do |artist|
       %tr
-        %td= artist.name
-        %td= button_to "Remove", artist_path(artist), method: :delete
+        %td= artist.name  
+        %td= button_to "Remove", artist_path(artist), method: :delete, class: "btn btn-default"
 
 
 = form_for @artist do |f|

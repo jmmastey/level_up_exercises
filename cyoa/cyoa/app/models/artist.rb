@@ -29,7 +29,7 @@ class Artist < ActiveRecord::Base
   end
 
   def self.yonce
-    find_by(name: "Beyonce")
+    find_or_create_by_unique_name("Beyonce")
   end
 
   def self.find_by_unique_name(name)

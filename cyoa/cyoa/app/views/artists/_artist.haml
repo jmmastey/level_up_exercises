@@ -5,7 +5,7 @@
       %li
         %span Artists
         %table
-          - @artists.each do |artist|
+          - @artists.sort_by{ |a| a.fan_count("Twitter") }.reverse.each do |artist|
             %tr
               %td= artist.name
               %td= artist.fan_count("Twitter")
@@ -16,7 +16,7 @@
       %li
         %span Artists
         %table
-          - @artists.each do |artist|
+          - @artists.sort_by{ |a| a.fan_count("YouTube") }.reverse.each do |artist|
             %tr
               %td= artist.name
               %td= artist.fan_count("YouTube")
@@ -28,7 +28,7 @@
       %li
         %span Artists
         %table
-          - @artists.each do |artist|
+          - @artists.sort_by{ |a| a.fan_count("Facebook") }.reverse.each do |artist|
             %tr
               %td= artist.name
               %td= artist.fan_count("Facebook")

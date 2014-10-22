@@ -10,6 +10,8 @@ class Artist < ActiveRecord::Base
 
   after_create :populate_initial_metrics
 
+  default_scope -> { order('name ASC') }
+
   def self.defaults
     [ find_or_create_by_unique_name("Beyonce"),
       find_or_create_by_unique_name("Jay-Z"),

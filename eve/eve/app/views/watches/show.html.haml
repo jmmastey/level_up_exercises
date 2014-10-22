@@ -1,13 +1,11 @@
-%p#notice= notice
-
 %p
-  %b Nickname:
+  %strong Nickname:
   = @watch.nickname
 %p
-  %b Item:
+  %strong Item:
   = @watch.item
 %p
-  %b User:
+  %strong User:
   = @watch.user
 
 = link_to 'Edit', edit_watch_path(@watch)

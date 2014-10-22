@@ -11,9 +11,9 @@ class App
 
   def check_file(filepath)
     if filepath && File.exists?(filepath)
-      puts "I found a file!"
+      puts "\nA file was found!"
     else
-      raise IOError, "No file was found"
+      raise IOError, "No file was found."
     end
   end
 
@@ -23,12 +23,14 @@ class App
 
   def launch!
     action = nil
-    until action == :quit
-      print "What would you like to do?\n"
+    until action == :back
+      print "\n\nWhat would you like to do?\n\n"
       print "To list dinosaurs that were bipeds, enter 'Bipeds'.\n"
       print "To list dinosaurs that were carnivores, enter 'Carnivores'.\n"
       print "To list dinosaurs of a specific period, enter 'period' followed by the period you want, such as 'Period Jurassic'.\n"
       print "To list only big or small dinosaurs, enter 'big' or 'small'.\n"
+      print "To go back import a new CSV file, enter 'back'.\n"
+      print "To exit this program, enter 'quit'\n\n"
       print " > "
       user_input = gets.chomp
       formatted_action = format_user_input(user_input)
@@ -50,8 +52,11 @@ class App
       # period search
     when 'big' || 'small'
       # size search
+    when 'back'
+      return :back
     when 'quit'
-      return :quit
+      puts "\n\nExiting.\n\n"
+      exit!
     else
       "I don't understand. Please enter a valid input."
     end
@@ -59,7 +64,7 @@ class App
 
   def list_bipeds
     bipeds = @catalog.dinosaurs.select { |dinosaur| dinosaur.walking == 'Biped' }
-    print "The following dinosaurs are bipeds: \n\n"
+    print "\nThe following dinosaurs are bipeds: \n\n"
     print "Sorry. No bipeds were found" if bipeds.empty?
     bipeds.each do |dinosaur|
       puts "#{dinosaur.name}"

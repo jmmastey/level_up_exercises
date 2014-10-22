@@ -9,12 +9,12 @@ require 'catalog'
 require 'app'
 
 loop do
-  puts "What is the filename of the CSV to import?\n\n"
-  puts "Enter 'quit' or 'exit' to leave the program."
+  puts "\nWhat is the filename of the CSV to import?\n\n"
+  puts "Enter 'quit' or 'exit' to leave the program.\n\n"
   print ">>  "
   filename = gets.chomp
   if filename == 'quit' || filename == 'exit'
-    puts "Exiting.\n\n"
+    puts "\n\nExiting.\n\n"
     exit!
   else
     app = App.new(filename)

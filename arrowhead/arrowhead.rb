@@ -1,3 +1,7 @@
+ArrowHeadError = Class.new(RuntimeError)
+InvalidRegionError = Class.new(ArrowHeadError)
+InvalidShapeError = Class.new(ArrowHeadError)
+
 class Arrowhead
   # This seriously belongs in a database.
   attr_reader :region, :shape
@@ -22,16 +26,19 @@ class Arrowhead
   end
 
   def region_handler(region)
-    raise "Unknown region, please " \
-          "provide a valid region." unless CLASSIFICATIONS.include? region
-    region
+    if CLASSIFICATIONS.include? region
+      region
+    else
+      raise InvalidRegionError, "Invalid Region"
+    end
   end
 
   def shape_handler(shape)
-    raise "Unknown shape value. Are you sure " \
-          "you know what you're talking about?" \
-          unless CLASSIFICATIONS[region].include? shape
-    shape
+    if CLASSIFICATIONS[region].include? shape
+      shape
+    else
+      raise InvalidShapeError, "Invalid Shape"
+    end
   end
 
   def classify

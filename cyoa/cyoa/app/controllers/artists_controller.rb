@@ -2,7 +2,7 @@ class ArtistsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @artists = current_user.artists
+    @artists = current_user.nbs_artists
     @artist = Artist.new
   end
 

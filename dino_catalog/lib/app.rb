@@ -35,23 +35,23 @@ class App
       print "To exit this program, enter 'quit'\n\n"
       print " > "
       user_input = gets.chomp
-      formatted_action = format_user_input(user_input)
-      action = do_action(formatted_action)
+      formatted_action_arguments = format_user_input(user_input)
+      action = do_action(formatted_action_arguments)
     end
   end
 
   def format_user_input(input)
-    input.downcase.strip
+    action, arguments = input.downcase.strip.split(' ')
   end
 
   def do_action(action)
-    case action
+    case action[0]
     when 'bipeds'
       list_bipeds
     when 'carnivores'
       list_carnivores
     when 'period'
-      # period search
+      list_period(action[1])
     when 'big' || 'small'
       # size search
     when 'back'

@@ -1,5 +1,10 @@
+ArrowHeadError = Class.new(RuntimeError)
+InvalidRegionError = Class.new(ArrowHeadError)
+InvalidShapeError = Class.new(ArrowHeadError)
+
 class Arrowhead
   # This seriously belongs in a database.
+  attr_reader :region, :shape
   CLASSIFICATIONS = {
     far_west: {
       notched: "Archaic Side Notch",
@@ -15,20 +20,31 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
-  def self.classify(region, shape)
+  def initialize(region, shape)
+    @region = region_handler(region)
+    @shape = shape_handler(shape)
+  end
+
+  def region_handler(region)
     if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
+      region
     else
-      raise "Unknown region, please provide a valid region."
+      raise InvalidRegionError, "Invalid Region"
     end
+  end
+
+  def shape_handler(shape)
+    if CLASSIFICATIONS[region].include? shape
+      shape
+    else
+      raise InvalidShapeError, "Invalid Shape"
+    end
+  end
+
+  def classify
+    arrowhead = CLASSIFICATIONS[region][shape]
+    puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end
 
-puts Arrowhead.classify(:northern_plains, :bifurcated)
+puts Arrowhead.new(:northern_plains, :bifurcated).classify

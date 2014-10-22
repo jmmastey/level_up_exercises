@@ -112,8 +112,11 @@ class Artist < ActiveRecord::Base
     search_results = NextBigSoundLite::Artist.search(name)
     return if search_results.blank?
 
-    self.nbs_id = search_results.first.id.to_i
-    self.music_brainz_id = search_results.first.music_brainz_id
+    artist = search_results.first
+
+    self.nbs_id = artist.id.to_i
+    self.nbs_name = artist.name
+    self.music_brainz_id = artist.music_brainz_id
     save
   end
 

@@ -6,7 +6,7 @@
 </head>
 <body onload=explode()>
 <h1 class="heading"> BOMB! BOMB! BOMB! </h1>
-<% if @bomb.active? %>
+<% if @bomb.active?%>
 <h2 class= "heading_two"> Status: The bomb is active </h2>
 <img id = "bomb_active" src="images/active_bomb.jpg">
 <% elsif !@bomb.exploded? %>

@@ -1,6 +1,5 @@
 %h1 My Artists
 
-
 %table.table.table-striped
   %tr
     %th Artist
@@ -11,19 +10,11 @@
         %td= artist.name  
         %td= button_to "Remove", artist_path(artist), method: :delete, class: "btn btn-default"
 
-
-= form_for @artist do |f|
-  = f.label :name
-
-  \#{f.text_field :name}
-  %br/
-  = f.submit
-
-
-.form-group
-  %input.form-control{ placeholder: "Search for another artist...", type: "text"}
-%button.btn.btn-default{ type: "submit"} Add
-
-%br
+= form_for @artist do |f| 
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control", placeholder: "Search for another artist"
+  .form-group
+    = f.submit "Find Artist", class: "btn btn-default"
 
 = render partial: "artist"

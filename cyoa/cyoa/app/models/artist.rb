@@ -64,14 +64,6 @@ class Artist < ActiveRecord::Base
     metric.value
   end
 
-  private
-
-  def populate_initial_metrics
-    return if metrics.any?
-    nbs_services = get_nbs_metrics(3.months.ago)
-    process_metrics(nbs_services)
-  end
-
   def update_metrics
     yesterday = Time.now.to_date - 1
     return if update_start_date >= yesterday
@@ -79,9 +71,17 @@ class Artist < ActiveRecord::Base
     process_metrics(nbs_service_metrics)
   end
 
+  private
+
   def update_start_date
     return 3.months.ago if metrics.empty?
     (metrics.first.recorded_on + 1).to_datetime
+  end
+
+  def populate_initial_metrics
+    return if metrics.any?
+    nbs_services = get_nbs_metrics(3.months.ago)
+    process_metrics(nbs_services)
   end
 
   def process_metrics(nbs_services)

@@ -12,6 +12,12 @@ class Artist < ActiveRecord::Base
 
   default_scope -> { order('name ASC') }
 
+  def self.update_all_metrics
+    Artist.all.each do |artist|
+      artist.update_metrics
+    end
+  end
+
   def self.defaults
     [ find_or_create_by_unique_name("Beyonce"),
       find_or_create_by_unique_name("Jay-Z"),
@@ -38,7 +44,10 @@ class Artist < ActiveRecord::Base
 
   def self.find_or_create_by_unique_name(name)
     artist = Artist.find_by_unique_name(name)
-    return artist if artist
+    if artist
+      artist.update_metrics
+      return artist
+    end
     Artist.create(name: name)
   end
 
@@ -55,19 +64,19 @@ class Artist < ActiveRecord::Base
     metric.value
   end
 
-  def update_metrics
-    yesterday = Time.now.to_date - 1
-    return if update_start_date >= yesterday
-    nbs_service_metrics = get_nbs_metrics(update_start_date)
-    process_metrics(nbs_service_metrics)
-  end
-
   private
 
   def populate_initial_metrics
     return if metrics.any?
     nbs_services = get_nbs_metrics(3.months.ago)
     process_metrics(nbs_services)
+  end
+
+  def update_metrics
+    yesterday = Time.now.to_date - 1
+    return if update_start_date >= yesterday
+    nbs_service_metrics = get_nbs_metrics(update_start_date)
+    process_metrics(nbs_service_metrics)
   end
 
   def update_start_date

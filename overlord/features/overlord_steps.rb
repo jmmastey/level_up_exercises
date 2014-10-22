@@ -1,4 +1,4 @@
-require 'pry'
+require "pry"
 Given /^I visit the overlord home page$/ do
   visit ("/")
 end
@@ -19,7 +19,7 @@ Given /^I am on the activate page$/ do
   step "I visit the overlord home page"
   step "I type in the right activation code"
   step "I click activate"
- end
+end
 
 When /^I type in the right deactivation code$/ do
   fill_in("deactivation_code", with: "0000")

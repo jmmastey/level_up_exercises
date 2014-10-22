@@ -1,4 +1,4 @@
-require_relative '../bomb'
+require_relative "../bomb"
 
 Given /^the password is (\d+)$/ do |code|
   @bomb = Bomb.new(code.to_i)

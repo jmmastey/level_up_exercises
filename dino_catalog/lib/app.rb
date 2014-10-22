@@ -76,8 +76,18 @@ class App
   def list_carnivores
     carnivores = @catalog.dinosaurs.select { |dinosaur| CARNIVORES.include?(dinosaur.diet) }
     print "\nThe following dinosaurs are Carnivores, Insectivores, or Piscivores: \n\n"
-    print "Sorry. No bipeds were found" if carnivores.empty?
+    print "Sorry. No carnivores were found" if carnivores.empty?
     carnivores.each do |dinosaur|
+      puts "#{dinosaur.name}"
+    end
+  end
+
+  def list_period(period)
+    puts period
+    dinosaurs_in_period = @catalog.dinosaurs.select { |dinosaur| dinosaur.period.downcase =~ /#{period}/ }
+    print "\nThe following dinosaurs lived in the #{period.capitalize} period: \n\n"
+    print "Sorry. No dinosaurs were found" if dinosaurs_in_period.empty?
+    dinosaurs_in_period.each do |dinosaur|
       puts "#{dinosaur.name}"
     end
   end

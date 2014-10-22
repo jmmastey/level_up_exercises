@@ -1,6 +1,6 @@
 require 'csv'
 require 'pp'
-require_relative 'Dinosaur'
+require_relative 'dinosaur'
 
 class CSVParse
   HEADER_TAG = {

@@ -14,16 +14,91 @@
  *= require_self
  */
 
-#bar-top-left {
-	float: top;
+div {
+	border: 1px dashed orange;
+}
+
+#bar-top {
 	position: fixed;
 	background-color: #EEEEEE;
-	margin: none;
-	padding: none;
-	border: none;
 	border-bottom: 1px solid #DDDDDD;
+	top: 0%;
 	height: 7%;
-	width: 15%;
-	top: 0px;
-	left: 0px;
+	width: 100%;
+	z-index: -1;
+}
+
+#logo {
+	position: absolute;
+	left: 1%;
+	height: 90%;
+	z-index: 0;
+}
+
+#search-field-div {
+	position: absolute;
+	left: 10%;
+	top: 30%;
+	height: 40%;
+	width: 30%;
+}
+
+#search-field {
+	position: absolute;
+	left: 0%;
+	top: 0%;
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+#search-button-div {
+	position: absolute;
+	left: 40%;
+	top: 30%;
+	width: 2%;
+	height: 40%;
+}
+
+#search-button { 
+	position: absolute;
+	left: 0%;
+	top: 0%;
+	height: 100%;
+	width: 100%;
+	background-image: url('white-magnifying-glass-hi.png');
+	background-repeat: no-repeat;
+	background-size: 40% 50%;
+	background-position: center;
+	border: 0px;
+	background-color: #7777FF;
+	cursor: pointer;
+	outline: 0;
+	z-index: 0;
+}
+
+#apps-button-div {
+	position: absolute;
+	left: 90%;
+	top: 30%;
+	height: 40%;
+	width: 1.5%;
+}
+
+#apps-button {
+	position: absolute;
+	left: 0%;
+	top: 0%;
+	height: 100%;
+	width: 100%;
+}
+
+#apps-button td {
+	background: #777777;
+	padding: 0px;
+}
+
+#apps-button:hover td {
+	background: #444444;
 }

@@ -2,6 +2,8 @@ require 'pry'
 
 class App
 
+  CARNIVORES = ['Carnivore', 'Insectivore', 'Piscivore']
+
   def initialize(name)
     @filepath = File.join(APP_ROOT, name)
     @app_name = name
@@ -47,7 +49,7 @@ class App
     when 'bipeds'
       list_bipeds
     when 'carnivores'
-      # carnivore search
+      list_carnivores
     when 'period'
       # period search
     when 'big' || 'small'
@@ -67,6 +69,15 @@ class App
     print "\nThe following dinosaurs are bipeds: \n\n"
     print "Sorry. No bipeds were found" if bipeds.empty?
     bipeds.each do |dinosaur|
+      puts "#{dinosaur.name}"
+    end
+  end
+
+  def list_carnivores
+    carnivores = @catalog.dinosaurs.select { |dinosaur| CARNIVORES.include?(dinosaur.diet) }
+    print "\nThe following dinosaurs are Carnivores, Insectivores, or Piscivores: \n\n"
+    print "Sorry. No bipeds were found" if carnivores.empty?
+    carnivores.each do |dinosaur|
       puts "#{dinosaur.name}"
     end
   end

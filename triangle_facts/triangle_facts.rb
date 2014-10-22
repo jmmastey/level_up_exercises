@@ -33,7 +33,7 @@ class Triangle
     puts 'This triangle is also a right triangle!' if angles.include? 90
   end
 
-  def law_of_cosines(x, y, z)
+  def law_of_cosines(a, b, c)
     radians_to_degrees(Math.acos((x**2 + y**2 - z**2) /
      (2.0 * x * y)))
   end

@@ -1,5 +1,6 @@
 class Arrowhead
   # This seriously belongs in a database.
+  attr_reader :region, :shape
   CLASSIFICATIONS = {
     far_west: {
       notched: "Archaic Side Notch",
@@ -15,17 +16,28 @@ class Arrowhead
     },
   }
 
-  def self.classify(region, shape)
+  def initialize(region, shape)
+    @region = region_handler(region)
+    @shape = shape_handler(shape)
+  end
+
+  def region_handler(region)
     raise "Unknown region, please " \
           "provide a valid region." unless CLASSIFICATIONS.include? region
+    region
+  end
 
-    shapes = CLASSIFICATIONS[region]
+  def shape_handler(shape)
     raise "Unknown shape value. Are you sure " \
-          "you know what you're talking about?" unless shapes.include? shape
+          "you know what you're talking about?" \
+          unless CLASSIFICATIONS[region].include? shape
+    shape
+  end
 
-    arrowhead = shapes[shape]
+  def classify
+    arrowhead = CLASSIFICATIONS[region][shape]
     puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end
 
-puts Arrowhead.classify(:northern_plains, :bifurcated)
+puts Arrowhead.new(:northern_plains, :bifurcated).classify

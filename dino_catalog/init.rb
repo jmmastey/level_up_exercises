@@ -10,7 +10,7 @@ require 'app'
 
 app = App.new("dinodex.csv")
 
-if ARGV.shift
+if ARGV.size == 1
   app.load_csv_file(ARGV.shift)
 else
     puts "\nPlease enter the filename of the CSV to import\n\n"

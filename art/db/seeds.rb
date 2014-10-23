@@ -12,7 +12,17 @@ MODEL_COUNTS = {
   review: 1000,
 }
 
-MODEL_COUNTS[:user].times { FactoryGirl.create(:user) }
-MODEL_COUNTS[:show].times { FactoryGirl.create(:show) }
-MODEL_COUNTS[:performer].times { FactoryGirl.create(:performer, :with_shows) }
-MODEL_COUNTS[:review].times { FactoryGirl.create(:review) }
+def execute_with_progress(num, title)
+  #progress = ProgressBar.create title: title, total: nil
+  num.times do
+    yield
+    #progress.increment
+  end
+  #rogress.finish
+end
+
+execute_with_progress(MODEL_COUNTS[:user], "Users"){ FactoryGirl.create(:user) }
+execute_with_progress(MODEL_COUNTS[:show], "Shows"){ FactoryGirl.create(:show) }
+execute_with_progress(MODEL_COUNTS[:performer], "Performers"){ FactoryGirl.create(:performer, :with_shows) }
+execute_with_progress(MODEL_COUNTS[:review], "Reviews"){ FactoryGirl.create(:review) }
+

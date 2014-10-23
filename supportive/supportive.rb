@@ -10,6 +10,8 @@ class BlagPost
   BANNED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
   def initialize(params)
+    set_defaults
+
     params.symbolize_keys!
 
     if params[:author].present? && params[:author_url].present?
@@ -18,15 +20,13 @@ class BlagPost
 
     if params[:categories]
       @categories = params[:categories].reject do |category|
-        BANNED_CATEGORIES.include? category
+        category.in?(BANNED_CATEGORIES)
       end
-    else
-      @categories = []
     end
 
-    @comments = params[:comments] || []
+    @publish_date = Date.parse(params[:publish_date]) if params[:publish_date]
+    @comments = params[:comments] if params[:comments]
     @body = params[:body].squish
-    @publish_date = (params[:publish_date] && Date.parse(params[:publish_date])) || Date.today
   end
 
   def to_s
@@ -35,8 +35,15 @@ class BlagPost
 
   private
 
+  def set_defaults
+    @comments = []
+    @categories = []
+    @publish_date = Date.today
+  end
+
   def byline
     return "" if author.nil?
+
     "By #{author.name}, at #{author.url}"
   end
 

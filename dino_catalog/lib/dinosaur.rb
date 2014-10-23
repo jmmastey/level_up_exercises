@@ -12,6 +12,10 @@ class Dinosaur
     @description = options[:description]
   end
 
+  def big?
+    @weight_in_lbs.to_i / 2000 > 2
+  end
+
 end
 
 

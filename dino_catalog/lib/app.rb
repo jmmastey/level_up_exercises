@@ -53,7 +53,9 @@ class App
     when 'period'
       list_period(action[1])
     when 'big' || 'small'
-      # size search
+      list_size(action[0])
+    when 'small'
+      list_size(action[0])
     when 'back'
       return :back
     when 'quit'
@@ -83,11 +85,24 @@ class App
   end
 
   def list_period(period)
-    puts period
     dinosaurs_in_period = @catalog.dinosaurs.select { |dinosaur| dinosaur.period.downcase =~ /#{period}/ }
     print "\nThe following dinosaurs lived in the #{period.capitalize} period: \n\n"
     print "Sorry. No dinosaurs were found" if dinosaurs_in_period.empty?
     dinosaurs_in_period.each do |dinosaur|
+      puts "#{dinosaur.name}"
+    end
+  end
+
+  def list_size(size)
+    dinosaurs_by_size = @catalog.dinosaurs.partition { |dinosaur| dinosaur.big? }
+    if size == 'big'
+      dinosaur_size_subset = dinosaurs_by_size[0]
+    else
+      dinosaur_size_subset = dinosaurs_by_size[1].select { |dino| dino.weight_in_lbs }
+    end
+    print "\nThe following dinosaurs were #{size.capitalize}: \n\n"
+    print "Sorry. No dinosaurs were found" if dinosaurs_by_size.empty?
+    dinosaur_size_subset.each do |dinosaur|
       puts "#{dinosaur.name}"
     end
   end

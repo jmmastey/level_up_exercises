@@ -8,16 +8,20 @@ $:.unshift( File.join(APP_ROOT, 'lib') ) # load the lib directory
 require 'catalog'
 require 'app'
 
-loop do
-  puts "\nWhat is the filename of the CSV to import?\n\n"
-  puts "Enter 'quit' or 'exit' to leave the program.\n\n"
-  print ">>  "
-  filename = gets.chomp
-  if filename == 'quit' || filename == 'exit'
-    puts "\n\nExiting.\n\n"
-    exit!
-  else
-    app = App.new(filename)
-    app.launch!
-  end
-end
+app = App.new("dinodex.csv")
+app.load_csv_file(ARGV.shift || "african_dinosaur_export.csv")
+app.launch!
+
+# loop do
+#   puts "\nWhat is the filename of the CSV to import?\n\n"
+#   puts "Enter 'quit' or 'exit' to leave the program.\n\n"
+#   print ">>  "
+#   filename = gets.chomp
+#   if filename == 'quit' || filename == 'exit'
+#     puts "\n\nExiting.\n\n"
+#     exit!
+#   else
+#     app = App.new(filename)
+#     app.launch!
+#   end
+# end

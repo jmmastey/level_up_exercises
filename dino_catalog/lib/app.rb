@@ -7,8 +7,13 @@ class App
   def initialize(name)
     @filepath = File.join(APP_ROOT, name)
     @app_name = name
-    check_file(@filepath)
-    @catalog = create_catalog(@filepath, @app_name)
+    #check_file(@filepath)
+    #@catalog = create_catalog(@filepath, @app_name)
+  end
+
+  def load_csv_file(filename)
+    @file = CSV.read(filename, headers: true, header_converters: :symbol)
+    puts @file
   end
 
   def check_file(filepath)

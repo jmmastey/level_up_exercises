@@ -2,3 +2,5 @@
 
 <% http = Curl.get("https://congress.api.sunlightfoundation.com/bills?query=small%20business&apikey=2d3136f6874046c8ba34d5e2f1a96b03") %>
 <%= JSON.parse(http.body_str) %>
+
+# https://congress.api.sunlightfoundation.com/legislators?apikey=2d3136f6874046c8ba34d5e2f1a96b03

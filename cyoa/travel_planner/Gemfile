@@ -60,6 +60,11 @@ group :test do
   gem 'rubocop-rspec'
 
   gem 'webmock', '~> 1.18', require: false
+
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
 end
 
 group :development, :test do

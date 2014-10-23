@@ -1,6 +1,6 @@
 = nav_bar brand: "Groovemetrics", static: :top do
   = menu_group pull: :right do
-    = menu_item "My Artists", artists_path
+    = menu_item "Artists", artists_path
     - if current_user
       = drop_down current_user.email do
         = menu_item "Edit profile", edit_user_registration_path

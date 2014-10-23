@@ -4,4 +4,9 @@ class Show < ActiveRecord::Base
 
   validates :name, presence: true
   validates :description, presence: true
+  validates :location, presence: true
+  validates :year, presence: true, numericality: true
+  validates :director, presence: true
+  validates :theatre_company, presence: true
+  validates :notes, presence: true
 end

@@ -14,17 +14,12 @@ module Filters
     dinosaurs.select { |dinosaur| dinosaur.period.downcase =~ /#{period}/ }
   end
 
-  def filter_size(size)
-    dinosaurs_by_size = @catalog.dinosaurs.partition { |dinosaur| dinosaur.big? }
+  def filter_size
+    dinosaurs.partition { |dinosaur| dinosaur.big? }
     if size == 'big'
       dinosaur_size_subset = dinosaurs_by_size[0]
     else
       dinosaur_size_subset = dinosaurs_by_size[1].select { |dino| dino.weight_in_lbs }
-    end
-    print "\nThe following dinosaurs were #{size.capitalize}: \n\n"
-    print "Sorry. No dinosaurs were found" if dinosaurs_by_size.empty?
-    dinosaur_size_subset.each do |dinosaur|
-      puts "#{dinosaur.name}"
     end
   end
 

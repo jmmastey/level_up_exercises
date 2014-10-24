@@ -1,0 +1,115 @@
+<html>
+<head>
+  <title>PMAIL</title>
+  <style>
+  .body_content{
+   float: right;
+   width: 100px ;
+  }
+  /*BANNER CONTENTS*/
+  .banner{
+    border: 1px solid;
+    padding: 10px;
+    min-width: 750px;
+    color: #F2F2F0;
+    background-color:#F2F2F0;
+    }
+
+  .bannertextbox{
+    height:28px;
+    width:570px;
+    margin-left:155px;
+    border:1px;
+  }
+  .pmailsearch{
+    height:28px;
+    width:60px;
+    padding:10px;
+    background-color:#426ADD
+  }
+  /*SUB-BANNER*/
+  .sub_banner{
+    border: 1px solid;
+    padding: 10px;
+    min-width: 750px;
+    color: #F2F2F0;
+    height:35px;
+  }
+  .mail{margin-left: 10px;width:55px;height:25px; background-color:white; color:#CD2309;border:none; font-size:115%;}
+ .select{margin-left:90px;width:55px;height:30px;}
+ .refresh{margin-left:10px;width:55px;height:30px;} 
+ .more{margin-left: 10px;width:55px;height:30px;margin-bottom: 15px;}
+ .newer{width:55px;height:30px;float:right;}
+  
+  .older{width:27px;height:30px;margin-right:15px;float:right;}
+  
+ .settings{width:27px;height:30px;float:right;}
+
+  /*MAIN CONTENT*/
+  .main_content{
+    width:586px;
+    border:1px;
+    float:right;
+  }
+
+ /*SIDE BAR*/
+
+ .side_bar{
+    width: 90px;
+  }
+  .compose{
+    margin-top: 20px;
+    color:white;
+    background-color: #CD2309;
+    margin-left: 40px;
+  }
+
+  ul{
+    list-style-type: none;
+  }
+  .list{
+    font-family:Arial;
+  }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="banner">
+    <div class="bannercontents">
+    <input type="text" name="search" class="bannertextbox"/>
+    <button name="pmailsearch" class="pmailsearch"/>
+   </div>
+  </div>
+
+  <div class="sub_banner">
+    <button type=button name="mail" class="mail"/>Mail</button>
+    <!-- <div class="sub_banner_contents"> -->
+      <button type=button name="select" class="select"></button>
+      <button type=button name="refresh" class="refresh"></button>
+      <button type=button name="more" class="more"></button>
+      <button type=button name="newwer" class="newer"></button>
+      <button type=button name="older" class="older"></button>
+      <button type=button name="settings" class="settings"></button>
+
+    <!-- </div> -->
+  </div>
+
+  <div class="side_bar">
+    <button name="searchcontent" class="compose">COMPOSE</button>
+    <ul class="list">
+      <li>Inbox</li>
+      <li>Starred</li>
+      <li>Sent</li>
+      <li>Drafts</li>
+      <li>Archives</li>
+      <li>More</li>
+    </ul>
+  </div>
+
+  <div class="main_content">
+    <p>hello world</p>
+  </div>
+
+</div>
+</body>
+</html>

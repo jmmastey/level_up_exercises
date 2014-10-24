@@ -27,12 +27,12 @@ class Utility
 
   def self.pass_off_filters(options, my_array)
 
-  options=options.to_h.each{ |k,v|
+  options=options.to_h.each do |k,v|
       Filter.filter_by_walking(my_array, v) if k.to_s.eql?("Walking")
       Filter.filter_by_weight(my_array, v) if k.to_s.eql?("Weight")
       Filter.filter_by_diet(my_array, v) if k.to_s.eql?("Diet")
       Filter.filter_by_period(my_array, v) if k.to_s.eql?("Period")
-    }
+    end
     my_array
   end #pass off
 

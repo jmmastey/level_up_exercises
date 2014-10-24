@@ -16,7 +16,7 @@ class Bill < ActiveRecord::Base
   end
 
   def fetch
-    http = Curl.get("https://congress.api.sunlightfoundation.com/bills?apikey=2d3136f6874046c8ba34d5e2f1a96b03")
+    http = Curl.get("#{ApplicationHelper::API_BASE_PATH}bills?apikey=2d3136f6874046c8ba34d5e2f1a96b03&per_page=50")
     @results = JSON.parse(http.body_str)
 
     @results["results"].each do |result|

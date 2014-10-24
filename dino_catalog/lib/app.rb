@@ -20,6 +20,13 @@ class App
     Otherwise, to exit this program, enter 'quit'.\n
     HEREDOC
 
+  SEARCH_REGEX = {
+    biped_regex: /biped/,
+    carnivore_regex: /carnivore|insectivore|piscivore/,
+    period_regex: /cretaceous|permian|jurassic|oxfordian|albian|triassic/,
+    size_regex: /big|small/
+  }
+
   def initialize(name)
     @app_name = name
   end
@@ -47,14 +54,19 @@ class App
     until action == :back
       print USER_PROMPT
       print '> '
-      user_input = gets.chomp
-      formatted_action_arguments = format_user_input(user_input)
+      user_input = gets.chomp.downcase
+      search_terms = get_user_search_terms(user_input)
       action = do_action(formatted_action_arguments)
     end
   end
 
-  def format_user_input(input)
-    action, arguments = input.downcase.strip.split(' ')
+  def get_user_search_terms(phrase)
+    search_terms = []
+    SEARCH_REGEX.each do |term, regex|
+      matches = phrase.scan(regex)
+      search_terms.push(matches) unless matches.empty?
+    end
+    search_terms.flatten
   end
 
   def do_action(action)

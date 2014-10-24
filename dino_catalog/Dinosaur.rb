@@ -4,7 +4,7 @@ class Dinosaur
 
   CARNIVORE_DIET = %w(insectivore piscivore carnivore)
   def initialize(params = {})
-    params.each { |name, value| instance_variable_set("@#{name}", value) }
+    params.each { |name, value| instance_variable_set("@#{name}", value) unless value.nil? }
     (@carnivore = 'Yes' if CARNIVORE_DIET.include?(@diet.downcase))\
      unless diet.nil?
   end

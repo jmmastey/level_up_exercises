@@ -1,3 +1,5 @@
+require 'csv'
+
 module CsvModifier
 
   @@alias_table = {

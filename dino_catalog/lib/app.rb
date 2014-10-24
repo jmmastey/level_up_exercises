@@ -8,13 +8,7 @@ class App
 
   def initialize(name)
     @app_name = name
-    #check_file(@filepath)
-    #@catalog = create_catalog(@filepath, @app_name)
   end
-
-  # def load_csv_file(filename)
-  #   CSV.read(filename, headers: true, header_converters: :symbol)
-  # end
 
   def normalize_csv_file(csv_file)
     normalize_csv_headers(csv_file)
@@ -24,20 +18,13 @@ class App
     Dinosaur.new(name, attributes)
   end
 
-  # def check_file(filepath)
-  #   if filepath && File.exists?(filepath)
-  #     puts "\nA file was found!"
-  #   else
-  #     raise IOError, "No file was found."
-  #   end
-  # end
-
-  def create_catalog(filepath, name)
-    Catalog.new(filepath, name)
+  def create_catalog(filepath)
+    Catalog.new(filepath)
   end
 
   def launch!(csv_filename)
     normalize_csv_file(csv_filename)
+    @catalog = create_catalog("normalized_csv_file.csv")
 
     action = nil
     until action == :back

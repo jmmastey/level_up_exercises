@@ -8,7 +8,7 @@ $:.unshift( File.join(APP_ROOT, 'lib') ) # load the lib directory
 require 'catalog'
 require 'app'
 
-app = App.new("dinodex.csv")
+app = App.new("dinosaur_catalog")
 
 if ARGV.size == 1
   app.launch!(ARGV.shift)

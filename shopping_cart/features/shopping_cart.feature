@@ -1,5 +1,3 @@
-@overlord
-
 Feature: Shopping Cart
   A simple shopping cart that allows people to add a item to a cart
   and then on those items be able to add, remove or change quantities.
@@ -13,17 +11,17 @@ Feature: Shopping Cart
   logged in, and a cart from a previous session.
 
   Background:
-    Given I visit the configuration page
+    Given I have a empty shopping cart
+    And "Item 1" which costs $10.00
+    And "Item 2" which costs $20.00
+    And "Item 3" which costs $30.00
 
-  Scenario: User inserts letters for codes on config
-    Given Configure bomb with codes '2a33' and 'ABBA'
-    Then The bomb should not be configured
+  Scenario Outline: Add items to a shopping cart with previous items
 
 
 
-  Scenario: User creates a custom code to create a bomb
-    Given Configure bomb with codes '6666' and '9999'
-    When I activate the bomb with code '6666'
-    Then I should see 'Activated'
-      And I fill in '9999' to deactivate the bomb
-    Then I should see 'Deactivated'
+  Scenario Outline: Add unauthenticated items to a cart with previous items
+
+
+
+  Scenario Outline: Add same item types to a previous shopping cart

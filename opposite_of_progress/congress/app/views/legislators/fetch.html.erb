@@ -1,6 +1,0 @@
-<% @results.each do |result| %>
-  <% @legislator = result %>
-  <%= render partial: "legislator_list_item", locals: {legislator: @legislator} %>
-<% end %>
-
-<%= "There are no legislators to show" if @results.count == 0 %>

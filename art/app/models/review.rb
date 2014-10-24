@@ -5,4 +5,6 @@ class Review < ActiveRecord::Base
   validates :user, presence: true
   validates :performance, presence: true
   validates :rating, presence: true, numericality: true
+
+  scope :recent, -> { order("created_at desc").limit(5) }
 end

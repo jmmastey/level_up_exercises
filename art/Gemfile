@@ -18,6 +18,7 @@ group :development, :test do
   gem 'faker'
   gem 'ruby-progressbar'
   gem 'pry'
+  gem 'rspec-collection_matchers'
 end
 
 group :test do

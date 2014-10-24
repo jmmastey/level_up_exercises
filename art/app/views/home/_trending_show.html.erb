@@ -1,0 +1,11 @@
+<div class='show'>
+  <h2><%= link_to show.name, show %></h2>
+  <p><%= show.description %></p>
+  <h4>What People Are Saying</h4>
+  <ul>
+    <% show.reviews.recent.each do |review| %>
+      <li>(<%= review.rating %> stars!) <%= review.review %> - <%= review.user.name %></li>
+    <% end %>
+  </ul>
+  <hr />
+</div>

@@ -1,6 +1,7 @@
 class Show < ActiveRecord::Base
   has_and_belongs_to_many :performers
   has_many :performances
+  has_many :reviews, through: :performances
 
   validates :name, presence: true
   validates :description, presence: true
@@ -11,4 +12,17 @@ class Show < ActiveRecord::Base
   validates :notes, presence: true
 
   default_scope -> { order("name asc") }
+
+  def self.trending(limit = 5)
+    find(recently_reviewed(limit))
+  end
+
+  def self.recently_reviewed(limit)
+    connection.execute("select distinct show_id from (
+      select show_id from reviews
+        join performances on performances.id = reviews.performance_id
+        join shows on shows.id = performances.show_id
+      order by reviews.created_at desc
+      ) t limit #{limit}").map { |s| s['show_id'] }
+  end
 end

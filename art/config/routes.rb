@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :performers
   resources :users
 
-  root 'shows#index'
+  root 'home#trending'
 end

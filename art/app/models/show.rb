@@ -9,4 +9,6 @@ class Show < ActiveRecord::Base
   validates :director, presence: true
   validates :theatre_company, presence: true
   validates :notes, presence: true
+
+  default_scope -> { order("name asc") }
 end

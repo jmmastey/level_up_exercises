@@ -28,6 +28,7 @@ class Artist < ActiveRecord::Base
     DEFAULTS.each do |name| 
       default_list << find_or_create_by_unique_name(name) 
     end
+    default_list
   end
 
   def self.yonce

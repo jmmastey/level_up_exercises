@@ -23,11 +23,11 @@ class Arrowhead
   end
 
   def self.raise_shape_error
-    raise_error SHAPE_ERROR
+    raise_error(SHAPE_ERROR)
   end
 
   def self.raise_region_error
-    raise_error REGION_ERROR
+    raise_error(REGION_ERROR)
   end
 
   def self.validate_region(region)
@@ -35,7 +35,7 @@ class Arrowhead
   end
 
   def self.validate_shape(region, shape)
-    validate_region region
+    validate_region(region)
     raise_shape_error unless CLASSIFICATIONS[region].include? shape
   end
 

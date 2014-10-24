@@ -7,7 +7,6 @@ class App
   CARNIVORES = ['Carnivore', 'Insectivore', 'Piscivore']
 
   def initialize(name)
-    #@filepath = File.join(APP_ROOT, name)
     @filepath = File.dirname(__FILE__)
     @app_name = name
     #check_file(@filepath)
@@ -15,10 +14,7 @@ class App
   end
 
   def load_csv_file(filename)
-    #puts "..#{@filepath}/#{@app_name}"
-    puts File.exists?("..#{@filepath}/#{@app_name}")
-    puts File.exists?("..\/#{filename}")
-    #CSV.read("..\/#{filename}", headers: true, header_converters: :symbol)
+    @csv_file = CSV.read(filename, headers: true, header_converters: :symbol)
   end
 
   def normalize_csv_file(name)

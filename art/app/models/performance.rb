@@ -6,6 +6,8 @@ class Performance < ActiveRecord::Base
   validates :show, presence: true
 
   def average_rating
+    return unless reviews.any?
+
     total_rating = reviews.inject(0) do |total, review|
       total + review.rating
     end

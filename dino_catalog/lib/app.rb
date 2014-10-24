@@ -7,8 +7,6 @@ class App
   include CsvModifier
   include Filters
 
-  CARNIVORES = ['Carnivore', 'Insectivore', 'Piscivore']
-
   USER_PROMPT = <<-HEREDOC.strip_heredoc
 
     What would you like to do?\n
@@ -70,7 +68,8 @@ class App
 
   def filter_results(catalog, filters)
     filtered_dinosaur_listings = []
-    filtered_dinosaur_listings << catalog.filter_bipeds
+    #filtered_dinosaur_listings << catalog.filter_bipeds
+    filtered_dinosaur_listings << catalog.filter_carnivores
     puts filtered_dinosaur_listings
     # filters.each do |filter|
     #   catalog.filter_bipeds

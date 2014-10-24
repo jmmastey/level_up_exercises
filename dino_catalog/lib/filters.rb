@@ -1,16 +1,13 @@
 module Filters
 
+  CARNIVORES = ['Carnivore', 'Insectivore', 'Piscivore']
+
   def filter_bipeds
     dinosaurs.select { |dinosaur| dinosaur.walking == 'Biped' }
   end
 
   def filter_carnivores
-    carnivores = @catalog.dinosaurs.select { |dinosaur| CARNIVORES.include?(dinosaur.diet) }
-    print "\nThe following dinosaurs are Carnivores, Insectivores, or Piscivores: \n\n"
-    print "Sorry. No carnivores were found" if carnivores.empty?
-    carnivores.each do |dinosaur|
-      puts "#{dinosaur.name}"
-    end
+    dinosaurs.select { |dinosaur| CARNIVORES.include?(dinosaur.diet) }
   end
 
   def filter_period(period)

@@ -1,4 +1,6 @@
 require 'pry'
+require 'active_support/core_ext'
+
 require_relative 'csv_modifier'
 require_relative 'filters'
 
@@ -8,18 +10,15 @@ class App
 
   CARNIVORES = ['Carnivore', 'Insectivore', 'Piscivore']
 
-  USER_PROMPT = %{
-    What would you like to do?
+  USER_PROMPT = <<-HEREDOC.strip_heredoc
 
-    You can enter a phrase that includes the keywords you want to filter the dinosaur catalog by.
-
-    Carnivores Big Traissic Bipeds
-
-    Which will return all dinosaurs that meet the four criteria.
-
-    Otherwise, to exit this program, enter 'quit'.
-
-    }.gsub /^    /, ""
+    What would you like to do?\n
+    You can enter a phrase that includes the keywords you want to filter the dinosaur catalog by.\n
+    For example:\n
+      Carnivores Big Traissic Bipeds\n
+    Which will return all dinosaurs that meet the four criteria.\n
+    Otherwise, to exit this program, enter 'quit'.\n
+    HEREDOC
 
   def initialize(name)
     @app_name = name

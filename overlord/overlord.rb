@@ -1,6 +1,7 @@
+#!/usr/bin/ruby -w
 # run `ruby overlord.rb` to run a webserver for this app
 
-require 'sinatra'
+require "sinatra"
 
 enable :sessions
 

@@ -19,8 +19,8 @@ RSpec.describe Performance, :type => :model do
     end
 
     it "should summarize all scores when they are available" do
-      FactoryGirl.create_list(:review, 10, rating: 5, performance: subject)
-      FactoryGirl.create_list(:review, 10, rating: 3, performance: subject)
+      FactoryGirl.create_list(:review, 30, rating: 5, performance: subject)
+      FactoryGirl.create_list(:review, 30, rating: 3, performance: subject)
       expect(performance.average_rating).to eq(4)
     end
   end

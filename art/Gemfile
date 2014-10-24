@@ -17,6 +17,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'faker'
   gem 'ruby-progressbar'
+  gem 'pry'
 end
 
 group :test do

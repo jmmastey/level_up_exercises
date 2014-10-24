@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :show do
     name { Faker::Company.catch_phrase }
     description { Faker::Lorem.sentence }
-
     year { rand(1990..2200) }
     director { Faker::Name.name }
     theatre_company { Faker::Company.name }

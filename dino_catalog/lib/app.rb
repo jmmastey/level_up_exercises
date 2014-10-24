@@ -8,6 +8,19 @@ class App
 
   CARNIVORES = ['Carnivore', 'Insectivore', 'Piscivore']
 
+  USER_PROMPT = %{
+    What would you like to do?
+
+    You can enter a phrase that includes the keywords you want to filter the dinosaur catalog by.
+
+    Carnivores Big Traissic Bipeds
+
+    Which will return all dinosaurs that meet the four criteria.
+
+    Otherwise, to exit this program, enter 'quit'.
+
+    }.gsub /^    /, ""
+
   def initialize(name)
     @app_name = name
   end
@@ -33,14 +46,8 @@ class App
   def obtain_user_filters
     action = nil
     until action == :back
-      puts "\n\nWhat would you like to do?\n"
-      puts "1. To list dinosaurs that were bipeds, enter 'Bipeds'."
-      puts "2. To list dinosaurs that were carnivores, enter 'Carnivores'."
-      puts "3. To list dinosaurs of a specific period, enter 'period' followed by the period you want, such as 'Period Jurassic'."
-      puts "4. To list only big or small dinosaurs, enter 'big' or 'small'.\n"
-      #puts "To go back import a new CSV file, enter 'back'."
-      puts "To exit this program, enter 'quit'\n"
-      print " > "
+      print USER_PROMPT
+      print '> '
       user_input = gets.chomp
       formatted_action_arguments = format_user_input(user_input)
       action = do_action(formatted_action_arguments)

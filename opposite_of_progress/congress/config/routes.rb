@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  get 'home/index'
+  resources :legislators
 
-  get 'legislators/fetch' => 'legislator#fetch_all'
+  # Used by cron to pull legislator info
+  get 'legislators/fetch' => 'legislator#fetch'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

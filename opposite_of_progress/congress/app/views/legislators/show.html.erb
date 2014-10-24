@@ -1,0 +1,7 @@
+<h2><%= "#{@legislator.first_name} #{@legislator.last_name}" %></h2>
+
+<p><%= "Twitter: #{@legislator.twitter_id}" if @legislator.twitter_id %></p>
+
+<p><%= "Facebook: #{@legislator.facebook_id}" if @legislator.facebook_id %></p>
+
+<p><%= link_to "Back to Legislators", legislators_path %></p>

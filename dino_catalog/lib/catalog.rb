@@ -1,6 +1,8 @@
 require_relative 'dinosaur'
+require_relative 'filters'
 
 class Catalog
+  include Filters
 
   attr_reader :dinosaurs
 

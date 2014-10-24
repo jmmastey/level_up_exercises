@@ -2,7 +2,6 @@ require 'pry'
 require 'active_support/core_ext'
 
 require_relative 'csv_modifier'
-require_relative 'filters'
 
 class App
   include CsvModifier
@@ -40,7 +39,7 @@ class App
   end
 
   def create_catalog(filepath)
-    Catalog.new(filepath)
+    @catalog = Catalog.new(filepath)
   end
 
   def launch!(csv_filename)
@@ -56,7 +55,7 @@ class App
       print '> '
       user_input = gets.chomp.downcase
       search_terms = get_user_search_terms(user_input)
-      action = do_action(formatted_action_arguments)
+      filter_results(@catalog, search_terms)
     end
   end
 
@@ -67,6 +66,15 @@ class App
       search_terms.push(matches) unless matches.empty?
     end
     search_terms.flatten
+  end
+
+  def filter_results(catalog, filters)
+    filtered_dinosaur_listings = []
+    filtered_dinosaur_listings << catalog.filter_bipeds
+    puts filtered_dinosaur_listings
+    # filters.each do |filter|
+    #   catalog.filter_bipeds
+    # end
   end
 
   def do_action(action)

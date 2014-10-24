@@ -1,10 +1,6 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Legislator.create(bioguide_id: 'B000911',
                   birthday: '1946-11-11',
@@ -37,3 +33,27 @@ Legislator.create(bioguide_id: 'B000944',
                   state: 'OH',
                   twitter_id: 'SenSherrodBrown',
                   facebook_id: nil)
+
+Bill.create(bill_id: 'hjres124-113',
+            bill_type: 'hjres',
+            number: '164',
+            congress: '113',
+            chamber: 'house',
+            introduced_on: '2014-09-09',
+            last_action_at: '2014-09-19',
+            last_vote_at: '2014-09-18',
+            last_version_on: '2014-09-17',
+            official_title: 'aking continuing appropriations for fiscal year 2015, and for other purposes.',
+            short_title: 'Continuing Appropriations Resolution, 2015')
+
+Bill.create(bill_id: 'hr5404-113',
+            bill_type: 'hr',
+            number: '175',
+            congress: '113',
+            chamber: 'house',
+            introduced_on: '2014-09-08',
+            last_action_at: '2014-09-26',
+            last_vote_at: '2014-09-18',
+            last_version_on: '2014-09-20',
+            official_title: 'To amend title 38, United States Code, to extend certain expiring provisions of law administered by the Secretary of Veterans Affairs, and for other purposes.',
+            short_title: 'Department of Veterans Affairs Expiring Authorities Act of 2014')

@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023210926) do
+ActiveRecord::Schema.define(version: 20141024155756) do
+
+  create_table "bills", force: true do |t|
+    t.string   "bill_id"
+    t.string   "bill_type"
+    t.integer  "number"
+    t.integer  "congress"
+    t.string   "chamber"
+    t.date     "introduced_on"
+    t.date     "last_action_at"
+    t.date     "last_vote_at"
+    t.date     "last_version_on"
+    t.string   "official_title"
+    t.string   "short_title"
+    t.string   "summary"
+    t.string   "summary_short"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "legislators", force: true do |t|
     t.string   "bioguide_id"

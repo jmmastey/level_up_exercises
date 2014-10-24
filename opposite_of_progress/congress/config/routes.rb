@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root "home#index"
 
+  resources :bills
   resources :legislators
 
   # Used by cron to pull legislator info

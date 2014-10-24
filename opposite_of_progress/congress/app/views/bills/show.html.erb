@@ -1,0 +1,7 @@
+<h2><%= "#{@bill.short_title}" %></h2>
+
+<p><%= "Chamber: #{@bill.chamber}" if @bill.chamber %></p>
+
+<p><%= "Last Vote: #{@bill.last_vote_at}" if @bill.last_vote_at %></p>
+
+<p><%= link_to "Back to Bills", bills_path %></p>

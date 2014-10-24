@@ -1,34 +1,56 @@
 require 'pry'
+require_relative 'csv_modifier'
 
 class App
+  include CsvModifier
 
   CARNIVORES = ['Carnivore', 'Insectivore', 'Piscivore']
 
   def initialize(name)
-    @filepath = File.join(APP_ROOT, name)
+    #@filepath = File.join(APP_ROOT, name)
+    @filepath = File.dirname(__FILE__)
     @app_name = name
     #check_file(@filepath)
-    #@catalog = create_catalog(@filepath, @app_name)
+    @catalog = create_catalog(@filepath, @app_name)
   end
 
   def load_csv_file(filename)
-    @file = CSV.read(filename, headers: true, header_converters: :symbol)
-    puts @file
+    #puts "..#{@filepath}/#{@app_name}"
+    puts File.exists?("..#{@filepath}/#{@app_name}")
+    puts File.exists?("..\/#{filename}")
+    #CSV.read("..\/#{filename}", headers: true, header_converters: :symbol)
   end
 
-  def check_file(filepath)
-    if filepath && File.exists?(filepath)
-      puts "\nA file was found!"
-    else
-      raise IOError, "No file was found."
-    end
+  def normalize_csv_file(name)
+    CsvModifier.normalize_csv_headers(@filepath)
+    #need to move all of this to the Catalog class, which will build the catalog instance from this CSV file
+    # normalized_filepath_name = CsvModifier.normalized_filepath(catalog_name)
+    # #CsvModifier.replace_cell_with_carnivore(normalized_filepath_name)
+    # CSV.read(normalized_filepath_name, headers: true, header_converters: :symbol).each do |data|
+    #   @dinosaurs << create_dinosaur_entry(data[:name], data)
+    # end
   end
+
+  def create_dinosaur_entry(name, attributes)
+    Dinosaur.new(name, attributes)
+  end
+
+  # def check_file(filepath)
+  #   if filepath && File.exists?(filepath)
+  #     puts "\nA file was found!"
+  #   else
+  #     raise IOError, "No file was found."
+  #   end
+  # end
 
   def create_catalog(filepath, name)
     Catalog.new(filepath, name)
   end
 
   def launch!
+    normalize_csv_file = normalize_csv_file(file)
+    #puts normalize_csv_file
+
     action = nil
     until action == :back
       print "\n\nWhat would you like to do?\n\n"

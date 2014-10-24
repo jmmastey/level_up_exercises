@@ -6,8 +6,8 @@ module CsvModifier
     'Weight' => 'Weight_in_lbs'
   }
 
-  def self.normalize_csv_headers(old_csv_file, new_filename)
-    normalized_filepath_name = normalized_filepath(new_filename)
+  def normalize_csv_headers(old_csv_file)
+    normalized_filepath_name = normalized_filepath(old_csv_file)
     new_headers = replace_header_with_alias(old_csv_file)
     CSV.open(normalized_filepath_name, 'w') do |csv|
       csv << new_headers
@@ -19,11 +19,11 @@ module CsvModifier
     end
   end
 
-  def self.normalized_filepath(filename)
-    File.join(APP_ROOT, "normalized_#{filename}")
+  def normalized_filepath(filename)
+    File.join(APP_ROOT, "normalized_csv_file")
   end
 
-  def self.replace_header_with_alias(csv_file)
+  def replace_header_with_alias(csv_file)
     header_row = CSV.read(csv_file, headers: true).headers
     new_header_row = []
     header_row.each do |column_name|

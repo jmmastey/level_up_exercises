@@ -3,13 +3,13 @@ require 'pp'
 require_relative 'dinosaur'
 
 class CSVParse
-  HEADER_TAG = {
+  HEADER_TAG ||= {
     'genus' => 'name',
     'weight_in_lbs' => 'weight',
   }
 
-  BIPED = 'biped'
-  DINOS = []
+  BIPED ||= 'biped'
+  DINOS ||= []
 
   def parse_csv(input_csv)
     CSV.foreach(input_csv, headers: true,

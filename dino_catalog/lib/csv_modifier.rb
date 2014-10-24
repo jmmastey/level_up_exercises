@@ -7,9 +7,8 @@ module CsvModifier
   }
 
   def normalize_csv_headers(old_csv_file)
-    normalized_filepath_name = normalized_filepath(old_csv_file)
     new_headers = replace_header_with_alias(old_csv_file)
-    CSV.open(normalized_filepath_name, 'w') do |csv|
+    CSV.open("normalized_csv_file.csv", 'w') do |csv|
       csv << new_headers
       CSV.read(old_csv_file, headers: true).each do |row|
         row['Carnivore'] = 'Carnivore' if row['Carnivore'] == 'Yes'
@@ -17,10 +16,6 @@ module CsvModifier
         csv.puts row
       end
     end
-  end
-
-  def normalized_filepath(filename)
-    File.join(APP_ROOT, "normalized_csv_file")
   end
 
   def replace_header_with_alias(csv_file)

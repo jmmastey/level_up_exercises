@@ -7,24 +7,17 @@ class App
   CARNIVORES = ['Carnivore', 'Insectivore', 'Piscivore']
 
   def initialize(name)
-    @filepath = File.dirname(__FILE__)
     @app_name = name
     #check_file(@filepath)
-    @catalog = create_catalog(@filepath, @app_name)
+    #@catalog = create_catalog(@filepath, @app_name)
   end
 
-  def load_csv_file(filename)
-    @csv_file = CSV.read(filename, headers: true, header_converters: :symbol)
-  end
+  # def load_csv_file(filename)
+  #   CSV.read(filename, headers: true, header_converters: :symbol)
+  # end
 
-  def normalize_csv_file(name)
-    CsvModifier.normalize_csv_headers(@filepath)
-    #need to move all of this to the Catalog class, which will build the catalog instance from this CSV file
-    # normalized_filepath_name = CsvModifier.normalized_filepath(catalog_name)
-    # #CsvModifier.replace_cell_with_carnivore(normalized_filepath_name)
-    # CSV.read(normalized_filepath_name, headers: true, header_converters: :symbol).each do |data|
-    #   @dinosaurs << create_dinosaur_entry(data[:name], data)
-    # end
+  def normalize_csv_file(csv_file)
+    normalize_csv_headers(csv_file)
   end
 
   def create_dinosaur_entry(name, attributes)
@@ -43,9 +36,8 @@ class App
     Catalog.new(filepath, name)
   end
 
-  def launch!
-    normalize_csv_file = normalize_csv_file(file)
-    #puts normalize_csv_file
+  def launch!(csv_filename)
+    normalize_csv_file(csv_filename)
 
     action = nil
     until action == :back

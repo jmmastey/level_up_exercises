@@ -11,7 +11,7 @@ require 'app'
 app = App.new("dinodex.csv")
 
 if ARGV.size == 1
-  app.load_csv_file(ARGV.shift)
+  app.launch!(ARGV.shift)
 else
     puts "\nPlease enter the filename of the CSV to import\n\n"
     puts "Enter 'quit' or 'exit' to leave the program.\n\n"
@@ -21,8 +21,8 @@ else
        puts "\n\nExiting.\n\n"
        exit!
     else
-       app.load_csv_file(user_file)
+       app.launch!(user_file)
     end
 end
 
-app.launch!
+

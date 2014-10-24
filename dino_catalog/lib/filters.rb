@@ -11,12 +11,7 @@ module Filters
   end
 
   def filter_period(period)
-    dinosaurs_in_period = @catalog.dinosaurs.select { |dinosaur| dinosaur.period.downcase =~ /#{period}/ }
-    print "\nThe following dinosaurs lived in the #{period.capitalize} period: \n\n"
-    print "Sorry. No dinosaurs were found" if dinosaurs_in_period.empty?
-    dinosaurs_in_period.each do |dinosaur|
-      puts "#{dinosaur.name}"
-    end
+    dinosaurs.select { |dinosaur| dinosaur.period.downcase =~ /#{period}/ }
   end
 
   def filter_size(size)

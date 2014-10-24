@@ -20,5 +20,21 @@
   <%= @user.profile_img_url %>
 </p>
 
+<h3>Reviews</h3>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Performance</th>
+      <th>Rating</th>
+      <th>Review</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= render @user.reviews %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

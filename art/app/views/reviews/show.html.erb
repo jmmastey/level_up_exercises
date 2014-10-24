@@ -2,12 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @review.user %>
+  <%= link_to @review.user.name, @review.user %>
 </p>
 
 <p>
   <strong>Performance:</strong>
-  <%= @review.performance %>
+  <%= link_to @review.performance.show.name, @review.performance %>
 </p>
 
 <p>

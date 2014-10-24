@@ -23,15 +23,15 @@
     padding:10px;
     background-color:#426ADD
   }
-  /*SUB-BANNER*/
-  .sub_banner{
+  /*NAV-BANNER*/
+  .nav_banner{
     border: 1px solid;
     padding: 10px;
     min-width: 750px;
     color: #F2F2F0;
     height:35px;
   }
-  .mail{margin-left: 10px;width:55px;height:25px; background-color:white; color:#CD2309;border:none; font-size:115%;}
+ .mail{margin-left: 10px;width:55px;height:25px; background-color:white; color:#CD2309;border:none; font-size:115%;}
  .select{margin-left:90px;width:55px;height:30px;}
  .refresh{margin-left:10px;width:55px;height:30px;} 
  .more{margin-left: 10px;width:55px;height:30px;margin-bottom: 15px;}

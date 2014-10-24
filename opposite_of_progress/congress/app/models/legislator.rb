@@ -1,9 +1,73 @@
 class Legislator < ActiveRecord::Base
   def fetch
-    # http = Curl.get("https://congress.api.sunlightfoundation.com/legislators?last_name=Brown&apikey=2d3136f6874046c8ba34d5e2f1a96b03")
-    # @results = JSON.parse(http.body_str)
+    http = Curl.get("https://congress.api.sunlightfoundation.com/legislators?apikey=2d3136f6874046c8ba34d5e2f1a96b03")
+    @results = JSON.parse(http.body_str)
 
-    # @results = {"results"=>[{"bioguide_id"=>"B000911", "birthday"=>"1946-11-11", "chamber"=>"house", "contact_form"=>"https://forms.house.gov/corrinebrown/webforms/contact-me.shtml", "crp_id"=>"N00002713", "district"=>5, "facebook_id"=>"179120958813519", "fax"=>"202-225-2256", "fec_ids"=>["H2FL03056", "S0FL00403"], "first_name"=>"Corrine", "gender"=>"F", "govtrack_id"=>"400048", "icpsr_id"=>29328, "in_office"=>true, "last_name"=>"Brown", "middle_name"=>nil, "name_suffix"=>nil, "nickname"=>nil, "oc_email"=>"Rep.Corrinebrown@opencongress.org", "ocd_id"=>"ocd-division/country:us/state:fl/cd:5", "office"=>"2111 Rayburn House Office Building", "party"=>"D", "phone"=>"202-225-0123", "state"=>"FL", "state_name"=>"Florida", "term_end"=>"2015-01-03", "term_start"=>"2013-01-03", "thomas_id"=>"00132", "title"=>"Rep", "twitter_id"=>"RepCorrineBrown", "votesmart_id"=>26797, "website"=>"http://corrinebrown.house.gov", "youtube_id"=>"CongresswomanBrown"}, {"bioguide_id"=>"B000944", "birthday"=>"1952-11-09", "chamber"=>"senate", "contact_form"=>"http://www.brown.senate.gov/contact", "crp_id"=>"N00003535", "district"=>nil, "facebook_id"=>nil, "fax"=>"202-228-6321", "fec_ids"=>["H2OH13033", "S6OH00163"], "first_name"=>"Sherrod", "gender"=>"M", "govtrack_id"=>"400050", "icpsr_id"=>29389, "in_office"=>true, "last_name"=>"Brown", "lis_id"=>"S307", "middle_name"=>nil, "name_suffix"=>nil, "nickname"=>nil, "oc_email"=>"Sen.Brown@opencongress.org", "ocd_id"=>"ocd-division/country:us/state:oh", "office"=>"713 Hart Senate Office Building", "party"=>"D", "phone"=>"202-224-2315", "senate_class"=>1, "state"=>"OH", "state_name"=>"Ohio", "state_rank"=>"senior", "term_end"=>"2019-01-03", "term_start"=>"2013-01-03", "thomas_id"=>"00136", "title"=>"Sen", "twitter_id"=>"SenSherrodBrown", "votesmart_id"=>27018, "website"=>"http://www.brown.senate.gov", "youtube_id"=>"SherrodBrownOhio"}], "count"=>2, "page"=>{"count"=>2, "per_page"=>20, "page"=>1}}
-    'made it here'
+    @results["results"].each do |result|
+      legislator = Legislator.where(bioguide_id: result['bioguide_id'])
+
+      if legislator.count == 0
+        # create the legislator
+        Legislator.create(bioguide_id: result['bioguide_id'],
+                          birthday: result['birthday'],
+                          chamber: result['chamber'],
+                          party: result['party'],
+                          title: result['title'],
+                          term_start: result['term_start'],
+                          term_end: result['term_end'],
+                          gender: result['gender'],
+                          first_name: result['first_name'],
+                          nickname: result['nickname'],
+                          middle_name: result['middle_name'],
+                          last_name: result['last_name'],
+                          state: result['state'],
+                          twitter_id: result['twitter_id'],
+                          facebook_id: result['facebook_id'])
+      else
+        legislator = legislator.first
+        # check for update
+        md5 = Digest::MD5.new
+        md5.update legislator.bioguide_id.to_s
+        md5 << legislator.birthday.to_s
+        md5 << legislator.chamber.to_s
+        md5 << legislator.party.to_s
+        md5 << legislator.title.to_s
+        md5 << legislator.term_start.to_s
+        md5 << legislator.term_end.to_s
+        md5 << legislator.gender.to_s
+        md5 << legislator.first_name.to_s
+        md5 << legislator.nickname.to_s
+        md5 << legislator.middle_name.to_s
+        md5 << legislator.last_name.to_s
+        md5 << legislator.state.to_s
+        md5 << legislator.twitter_id.to_s
+        md5 << legislator.facebook_id.to_s
+        old_hash = md5.hexdigest
+
+        md5 = Digest::MD5.new
+        md5.update result['bioguide_id'].to_s
+        md5 << result['birthday'].to_s
+        md5 << result['chamber'].to_s
+        md5 << result['party'].to_s
+        md5 << result['title'].to_s
+        md5 << result['term_start'].to_s
+        md5 << result['term_end'].to_s
+        md5 << result['gender'].to_s
+        md5 << result['first_name'].to_s
+        md5 << result['nickname'].to_s
+        md5 << result['middle_name'].to_s
+        md5 << result['last_name'].to_s
+        md5 << result['state'].to_s
+        md5 << result['twitter_id'].to_s
+        md5 << result['facebook_id'].to_s
+        new_hash = md5.hexdigest
+
+        if old_hash == new_hash
+          puts 'they match, no update needed'
+        else
+          puts 'not matching, update this record'
+        end
+      end
+    end
   end
 end

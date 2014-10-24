@@ -1,7 +1,8 @@
 task :cron => :environment do
   puts "Pull in Legislators"
-  
-  Legislator.fetch
+
+  # Legislator.new.fetch
+  Bill.new.fetch
 
   puts "Crons complete"
 end

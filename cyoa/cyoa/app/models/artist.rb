@@ -12,6 +12,11 @@ class Artist < ActiveRecord::Base
 
   default_scope -> { order('lower(name) ASC') }
 
+  DEFAULTS = [
+    "Bassnectar", "Beyonce", "Disclosure", "Jay Z", "Kanye West", "Lady Gaga", 
+    "Madonna", "Phish", "STS9", "The Rolling Stones"
+  ]
+
   def self.update_all_metrics
     Artist.all.each do |artist|
       artist.update_metrics
@@ -19,20 +24,10 @@ class Artist < ActiveRecord::Base
   end
 
   def self.defaults
-    [ find_or_create_by_unique_name("Beyonce"),
-      find_or_create_by_unique_name("Jay Z"),
-      find_or_create_by_unique_name("Big L"),
-      find_or_create_by_unique_name("Paul Simon"),
-      find_or_create_by_unique_name("Bassnectar"),
-      find_or_create_by_unique_name("The Rolling Stones"),
-      find_or_create_by_unique_name("Alison Krauss"),
-      find_or_create_by_unique_name("Kanye West"),
-      find_or_create_by_unique_name("Lady Gaga"),
-      find_or_create_by_unique_name("Madonna"),
-      find_or_create_by_unique_name("Justice"),
-      find_or_create_by_unique_name("Taylor Swift"),
-      find_or_create_by_unique_name("Prince")
-    ]
+    default_list = []
+    DEFAULTS.each do |name| 
+      default_list << find_or_create_by_unique_name(name) 
+    end
   end
 
   def self.yonce
@@ -44,11 +39,13 @@ class Artist < ActiveRecord::Base
   end
 
   def self.find_or_create_by_unique_name(name)
+
     artist = Artist.find_by_unique_name(name)
     if artist
       artist.update_metrics
       return artist
     end
+
     Artist.create(name: name)
   end
 

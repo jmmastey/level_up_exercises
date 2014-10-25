@@ -1,7 +1,4 @@
-require_relative 'Arrowhead'
-
-# Custom exception class for an emoty container
-class EmptyContainerError < RuntimeError; end
+require_relative 'arrowhead'
 
 # Queryable container class that contains custom arrohead information.
 class ArrowheadIndex
@@ -12,21 +9,20 @@ class ArrowheadIndex
   end
 
   def region(region)
-    filter { | arrowhead | arrowhead.region == region }
-      rescue EmptyContainerError
-        raise 'Unknown region, please provide a valid region'
+    filter('Unknown region, Please provide a valid region.') do
+      | arrowhead | arrowhead.region == region
+    end
   end
 
   def shape(shape)
-    filter { | arrowhead | arrowhead.shape == shape }
-    rescue EmptyContainerError
-      raise 'Unknown shape value.  Are you sure you know what you
-           are talking about?'
+    filter('Unknown shape. Please provide a valid shape.') do
+      | arrowhead | arrowhead.shape == shape
+    end
   end
 
-  private def filter(&block)
+  private def filter(error_msg, &block)
     result = @arrowheads.select(&block)
-    fail EmptyContainerError if result.empty?
+    fail error_msg if result.empty?
     ArrowheadIndex.new(result)
   end
 end

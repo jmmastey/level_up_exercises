@@ -29,7 +29,7 @@ RSpec.describe Show, :type => :model do
       old_show = FactoryGirl.create(:review, created_at: 1.month.ago).performance.show
       FactoryGirl.create_list(:review, 10, created_at: 1.minute.ago)
 
-      expect(trending).not_to include(old_show)
+      expect(trending.map(&:id)).not_to include(old_show.id)
     end
 
     it "only returns shows with reviews" do

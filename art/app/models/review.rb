@@ -6,5 +6,22 @@ class Review < ActiveRecord::Base
   validates :performance, presence: true
   validates :rating, presence: true, numericality: true
 
-  scope :recent, -> { order("created_at desc").limit(5) }
+  scope :recent, -> { where("created_at > ?", 5.days.ago) }
+  scope :for, ->(performance) { where(performance: performance) }
+
+  def self.recent_ratings(performance)
+    recent.for(performance).average(:rating)
+  end
+
+  def sentiment
+    recent = self.class.recent_ratings(self.performance)
+
+    if self.rating > (recent + 0.5)
+      :happy
+    elsif self.rating < (recent - 0.5)
+      :sad
+    else
+      :meh
+    end
+  end
 end

@@ -1,6 +1,6 @@
 class Performance < ActiveRecord::Base
   belongs_to :show
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   validates :performed_on, presence: true
   validates :show, presence: true

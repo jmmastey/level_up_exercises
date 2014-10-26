@@ -1,6 +1,6 @@
 class Show < ActiveRecord::Base
   has_and_belongs_to_many :performers
-  has_many :performances
+  has_many :performances, dependent: :destroy
   has_many :reviews, through: :performances
 
   validates :name, presence: true

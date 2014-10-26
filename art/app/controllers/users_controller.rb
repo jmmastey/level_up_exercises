@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @recommendations = ShowRecommender.new(@user).recommendations
   end
 
   # GET /users/new

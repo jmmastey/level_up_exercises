@@ -20,6 +20,8 @@
   <%= @user.profile_img_url %>
 </p>
 
+<%= render partial: 'recommendations', locals: { recommendations: @recommendations } %>
+
 <h3>Reviews</h3>
 <table>
   <thead>

@@ -6,27 +6,32 @@ class Triangle
     @side1, @side2, @side3 = side1, side2, side3
   end
 
+  def num_unique_sides
+    [@side1, @side2, @side3].uniq.length
+  end
+
   def equilateral?
-    (side1 == side2) && (side2 == side3)
+    num_unique_sides == 1
   end
 
   def isosceles?
-    [side1, side2, side3].uniq.length == 2
+    num_unique_sides == 2
   end
 
   def scalene?
-    !(equilateral? || isosceles?)
+    num_unique_sides == 3
   end
 
   def recite_facts
-    puts 'This triangle is equilateral!' if equilateral?
-    puts 'This triangle is scalene and mathematically boring.' if scalene?
-
-    if isosceles?
-      puts 'This triangle is isosceles! Also, that word is hard to type.'
-    end
-
+    recite_type_facts
     recite_angle_facts
+  end
+
+  def recite_type_facts
+    puts 'This triangle is equilateral!' if equilateral?
+    puts 'This triangle is isosceles! Also, that word is hard to type.' \
+      if isosceles?
+    puts 'This triangle is scalene and mathematically boring.' if scalene?    
   end
 
   def recite_angle_facts
@@ -45,8 +50,12 @@ class Triangle
     [angle_a, angle_b, angle_c]
   end
 
-  def calculate_angle_from_vertices(a, b, c)
-    radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
+  def calculate_angle_from_vertices(opposite, adjacent_a, adjacent_b)
+    divident  = adjacent_a**2 + adjacent_b**2 - opposite**2
+    divisor   = 2.0 * adjacent_a * adjacent_b
+    cos_theta = divident / divisor
+    radians   = Math.acos(cos_theta)
+    radians_to_degrees(radians)
   end
 
   def radians_to_degrees(rads)

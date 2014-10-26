@@ -7,7 +7,7 @@ class Triangle
   end
 
   def num_unique_sides
-    [@side1, @side2, @side3].uniq.length
+    [side1, side2, side3].uniq.length
   end
 
   def equilateral?

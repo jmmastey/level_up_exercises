@@ -39,4 +39,12 @@ RSpec.describe Show, :type => :model do
       expect(trending).not_to include(new_show)
     end
   end
+
+  describe ".num_reviews" do
+    subject(:show) { FactoryGirl.create(:show, :with_performances) }
+    let!(:reviews) { FactoryGirl.create_list(:review, 20, performance: show.performances.last) }
+
+    it "returns the total number of reviews" do
+    end
+  end
 end

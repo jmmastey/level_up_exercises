@@ -25,4 +25,8 @@ class Show < ActiveRecord::Base
       order by reviews.created_at desc
       ) t limit #{limit}").map { |s| s['show_id'] }
   end
+
+  def num_reviews
+    Review.where(performance: performances).count
+  end
 end

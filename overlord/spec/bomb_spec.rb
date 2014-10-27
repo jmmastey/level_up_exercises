@@ -79,7 +79,7 @@ describe Supervillian::Bomb do
 
   it "raises an exception disarming with an unregistered disarming code" do
     expect { armed_bomb.disarm!(REGISTERED_ARMING_CODE - 1234) }.to \
-      raise_error("FOO ON YOO")
+      raise_error(Supervillian::WrongActivationCodeError)
   end
 
   it "does not disarm using an unregistered disarming code" do
@@ -123,7 +123,6 @@ describe Supervillian::Bomb do
   end
 
   it "explodes after delay" do
-    skip "Not implemented"
     sleep armed_bomb.delay + 0.10
     expect(armed_bomb.exploded?).to be(true)
   end

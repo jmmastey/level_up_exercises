@@ -12,16 +12,16 @@ class App
     What would you like to do?\n
     You can enter a phrase that includes the keywords you want to filter the dinosaur catalog by.\n
     For example:\n
-      Carnivores Big Traissic Bipeds\n
+      Carnivores Big Triassic Bipeds\n
     Which will return all dinosaurs that meet the four criteria.\n
     Otherwise, to exit this program, enter 'quit'.\n
     HEREDOC
 
   SEARCH_REGEX = {
-    biped_regex: /biped/,
-    carnivore_regex: /carnivore|insectivore|piscivore/,
-    period_regex: /cretaceous|permian|jurassic|oxfordian|albian|triassic/,
-    size_regex: /big|small/
+    biped: /biped/,
+    carnivores: /carnivore|insectivore|piscivore/,
+    periods: /cretaceous|permian|jurassic|oxfordian|albian|triassic/,
+    sizes: /big|small/
   }
 
   def initialize(name)
@@ -58,19 +58,18 @@ class App
   end
 
   def get_user_search_terms(phrase)
-    search_terms = []
+    search_terms = {}
     SEARCH_REGEX.each do |term, regex|
-      matches = phrase.scan(regex)
-      search_terms.push(matches) unless matches.empty?
+      search_terms[term] = phrase.scan(regex) unless phrase.scan(regex).empty?
     end
-    search_terms.flatten
+    search_terms
   end
 
   def filter_results(catalog, filters)
     filtered_dinosaur_listings = []
     #filtered_dinosaur_listings << catalog.filter_bipeds
     #filtered_dinosaur_listings << catalog.filter_carnivores
-    filtered_dinosaur_listings << catalog.filter_period(period)
+    #filtered_dinosaur_listings << catalog.filter_period(period)
     puts filtered_dinosaur_listings
     # filters.each do |filter|
     #   catalog.filter_bipeds

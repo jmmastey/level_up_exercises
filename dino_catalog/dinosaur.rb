@@ -12,8 +12,10 @@ class Dinosaur
   end
 
   def filter_params(params)
-    params.delete_if { |key| !VALID_PARAMS.include?(key) }
-    params[:carnivore] = 'Yes' if CARNIVORE_DIET.include?(params[:diet])
+    params.keep_if { |key, value| VALID_PARAMS.include?(key) && !value.nil? }
+    if params.key?(:diet)
+      params[:carnivore] = 'Yes' if CARNIVORE_DIET.include?(params[:diet])
+    end
     params
   end
 
@@ -25,13 +27,11 @@ class Dinosaur
     attributes
   end
 
-  def format_key(key)
-    key.to_s + "\n------"
+  def format_key(value)
+    instance_variable_get(value).to_s + "\n------"
   end
 
   def format_var(var)
     "------\n" + var.to_s.tr('@', '').capitalize
   end
 end
-
-puts Dinosaur.new(name: 'Claw', diet: nil, monster: 'yes').formatted_variables_hash

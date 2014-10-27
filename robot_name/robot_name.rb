@@ -14,17 +14,22 @@ class Robot
 
   def initialize(args = {})
     self.class.registry ||= []
-    @name_generator = args[:name_generator] || default_name_generator
-    generate_name
+    @name_generator = args[:name_generator] || method(:default_name_generator)
+    assign_name
+  end
+
+  def assign_name
+    name = @name_generator.call
+    check_name_collision(name)
+    check_pattern(name)
+    self.class.registry << (@name = name)
   end
 
   def generate_name
-    name = @name_generator.call
-
-    check_name_collision(name)
-    check_pattern(name)
-
-    self.class.registry << (@name = name)
+    NAME_LENGTH.times.to_a.each_with_object('') do |i, new_name|
+      range = i < NAME_CHAR_LENGTH ? ('A'..'Z') : ('0'..'9')
+      new_name << range.to_a.sample
+    end
   end
 
   def check_name_collision(name)
@@ -37,14 +42,12 @@ class Robot
   end
 
   def default_name_generator
-    lambda do
-      NAME_LENGTH.times.to_a.each_with_object('') do |i, name|
-        range = i < NAME_CHAR_LENGTH ? ('A'..'Z') : ('0'..'9')
-        name << range.to_a.sample
-      end
+    loop do
+      new_name = generate_name
+      return new_name unless self.class.registry.include? new_name
     end
   end
 
-  private :generate_name, :check_name_collision, :check_pattern,
+  private :assign_name, :generate_name, :check_name_collision, :check_pattern,
     :default_name_generator
 end

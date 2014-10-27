@@ -1,3 +1,13 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+window.Eve or= {}
+
+Eve.Watches =
+	init: ->
+		init_item_typeahead()
+	
+	init_item_typeahead: ->
+		$('#watch_item').typeahead
+			name: 'items'
+			displayKey: 'name'
+			source: Eve.Bloodhound.item_engine.ttAdapter()
+
+$ -> Eve.Watches.init

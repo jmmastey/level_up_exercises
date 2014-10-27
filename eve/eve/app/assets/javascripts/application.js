@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require bootstrap-typeahead-rails
+//= require bloodhound.js.coffee
 //= require_tree .

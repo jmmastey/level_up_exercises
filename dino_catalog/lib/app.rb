@@ -85,10 +85,6 @@ class App
     end
   end
 
-  def print_dinosaur_instance(set, name)
-    puts "Here is a dinosaur!"
-  end
-
   def get_user_search_terms(phrase)
     search_terms = {}
     SEARCH_REGEX.each do |term, regex|

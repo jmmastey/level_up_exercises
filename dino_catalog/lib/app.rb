@@ -1,12 +1,14 @@
 require 'pry'
 require 'active_support/core_ext'
 require 'active_support/inflector/inflections'
+require 'display'
 
 require_relative 'csv_modifier'
 
 class App
   include CsvModifier
   include Filters
+  include Display
 
   USER_SEARCH_PROMPT = <<-HEREDOC.strip_heredoc
 
@@ -81,10 +83,6 @@ class App
         print_dinosaur_instance(dinosaurs, user_input)
       end
     end
-  end
-
-  def print_dinosaur_set(set)
-    puts "Dinosaurs!"
   end
 
   def print_dinosaur_instance(set, name)

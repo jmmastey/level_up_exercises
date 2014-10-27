@@ -52,8 +52,16 @@ class App
       print USER_PROMPT
       print '> '
       user_input = gets.chomp.downcase
+      exit! if user_input == 'exit'
       search_terms = get_user_search_terms(user_input)
-      @filtered_dinosaurs_set = filter_results(@catalog, search_terms)
+      @filtered_dinosaurs = filter_results(@catalog, search_terms)
+      puts @filtered_dinosaurs
+    end
+  end
+
+  def user_actions
+    until action == :exit
+      print 'The following dinosaurs meet your search criteria:'
     end
   end
 
@@ -71,7 +79,7 @@ class App
       filter_function = "filter_#{search_type}".to_sym
       filtered_dinosaur_listings << catalog.send(filter_function, criteria)
     end
-    filtered_dinosaur_listings
+    filtered_dinosaur_listings.flatten.uniq
   end
 
 end

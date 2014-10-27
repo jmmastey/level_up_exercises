@@ -17,5 +17,4 @@ class DinosaurTest < MiniTest::Unit::TestCase
   def test_valid_format_var_name
     assert_equal "------\nName", Dinosaur.new(name: 'Claw').format_var_name('@name')
   end
-
 end

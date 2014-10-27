@@ -181,7 +181,7 @@ a {
 
 #apps-button-div {
 	position: fixed;
-	left: 85%;
+	right: 180px;
 	top: 18px;
 	height: 24px;
 	width: 24px;
@@ -194,7 +194,7 @@ a {
 
 #manage-account {
 	position: fixed;
-	left: 87%;
+	right: 10px;
 	top: 18px;
 	background: none;
 }
@@ -475,4 +475,112 @@ a {
 #mark-all-as-read-menu-div .option {
 	position: absolute;
 	left: 10px;
+	font-size: 12px;
+}
+
+#mark-all-as-read-menu-div:hover {
+	background: #CCCCF2;
+}
+
+#settings-div {
+	position: fixed;
+	top: 70px;
+	right: 1%;
+	width: 40px;
+	height: 24px;
+	cursor: pointer;
+	border: 1px solid #CCCCCC;
+	background-image: url('gear.png');
+	background-repeat: no-repeat;
+	background-size: 20px 20px;
+	background-position: center;
+	background-color: none;
+	background-color: #EEEEEE;
+	padding: 0px;
+}
+
+#settings-div:hover {
+	border: 1px solid #BBBBBB;
+}
+
+#settings-menu-div {
+	display: none;
+	position: absolute;
+	right: 0%;
+	top: 110%;
+	width: 300%;
+	height: auto;
+	background: white;
+	border: 1px solid #CCCCCC;
+}
+
+#settings-menu-div ul {
+	padding: 5px;
+}
+
+#settings-menu-div li {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	list-style: none;
+	font-size: 10px;
+}
+
+#settings-menu-div li.selected {
+	color: red;
+}
+
+#settings-menu-div li:hover {
+	background-color: #DDDDDD;
+}
+
+#settings-menu-div li .separate {
+	border-top: 1px solid #D0D0D0;
+	border-bottom: 1px solid #D0D0D0;
+}
+
+#bar-left-white {
+	position: fixed;
+	background-color: white;
+	top: 100px;
+	left: 0px;
+	width: 160px;
+	height: 100%;
+	border: none;
+	z-index: -10;
+}
+
+#compose-button {
+	position: absolute;
+	left: 20px;
+	top: 20px;
+	width: 120px;
+	height: 23px;
+	border-radius: 2px;
+	background-color: #DD0000;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+	padding: 0px;
+	padding-top: 7px;
+	color: white;
+}
+
+
+#folders {
+	position: absolute;
+	left: 20px;
+	top: 50px;
+	padding-left: 0px;
+}
+
+#folders li {
+	list-style: none;
+	font-size: 12px;
+	padding-left: 0px;
+	padding-top: 12px;
+	cursor: pointer;
+}
+
+#folders li.selected {
+	color: red;
 }

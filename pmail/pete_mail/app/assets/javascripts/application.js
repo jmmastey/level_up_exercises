@@ -44,22 +44,18 @@ function setup_event_handlers() {
 	});
 
 
+	// Manage Account
+	$( "#manage-account" ).click( function() {
+		$( "#manage-account-menu" ).toggle();
+	});
+
+	
 	// Mail Options
 	$( "#mail-options-button-div" ).click( function() {
 		$( "#mail-options-list-div" ).toggle();
 	});
 
 
-	// Manage Account
-	$( "#manage-account" ).mouseenter( function() {
-		$( "#manage-account-menu" ).show("fast");
-	});
-
-	$( "#manage-account-menu" ).click( function() {
-		$( "#manage-account-menu" ).hide();
-	});
-
-	
 	// Mail Item Selection
 	$( "#mail-item-selection-div .down-arrow" ).click( function() {
 		$( "#mail-item-selection-options-div" ).toggle();
@@ -70,6 +66,28 @@ function setup_event_handlers() {
 	$( "#mark-all-as-read-div" ).click( function() {
 		$( "#mark-all-as-read-menu-div" ).toggle();
 	});
+
+
+	// Settings
+	$( "#settings-div" ).click( function() {
+		$( "#settings-menu-div" ).toggle();
+	});
+
+	$( "#settings-menu-div li.density" ).click( function() {
+		$( "#settings-menu-div li.density" ).removeClass("selected");
+		$( this ).addClass("selected");
+	});
+
+
+	// Folders
+	$( "#folders li" ).click( function() {
+		$( "#folders li" ).removeClass("selected");
+		$( this ).addClass("selected");
+	});
+}
+
+function clear_settings_menu_options() {
+	
 }
 
 $(document).ready(function() {

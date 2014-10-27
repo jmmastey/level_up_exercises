@@ -2,7 +2,7 @@ class Dinosaur
   BIPED                  = "Biped"
   QUADRUPED              = "Quadruped"
   CRETACEOUS             = "Cretaceous"
-  BIG_DINOSAUR_THRESHOLD = 2000
+  BIG_DINOSAUR_THRESHOLD = 4000
   CARNIVORE              = %w(carnivore insectivore piscivore)
   ATTRIBUTES             = %w(name
                               period
@@ -17,8 +17,7 @@ class Dinosaur
 
   def initialize(params = {})
     ATTRIBUTES.each do |attr|
-      var_name = "@#{attr}"
-      instance_variable_set(var_name, params[attr.to_sym])
+      instance_variable_set("@#{attr}", params[attr.to_sym])
     end
   end
 
@@ -55,8 +54,8 @@ class Dinosaur
   def display_by_key(key)
     return unless value = instance_variable_get("@#{key}")
 
-    title = titelize key
-    display_field title, value
+    title = titelize(key)
+    display_field(title, value)
   end
 
   def display_field(title, value)

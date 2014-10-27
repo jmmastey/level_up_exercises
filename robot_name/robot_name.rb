@@ -19,10 +19,10 @@ class Robot
   end
 
   def assign_name
-    name = @name_generator.call
-    check_name_collision(name)
-    check_pattern(name)
-    self.class.registry << (@name = name)
+    new_name = @name_generator.call
+    check_name_collision(new_name)
+    check_pattern(new_name)
+    self.class.registry << (@name = new_name)
   end
 
   def generate_name

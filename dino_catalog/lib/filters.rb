@@ -2,8 +2,8 @@ module Filters
 
   CARNIVORES = ['Carnivore', 'Insectivore', 'Piscivore']
 
-  def filter_bipeds
-    dinosaurs.select { |dinosaur| dinosaur.walking == 'Biped' }
+  def filter_bipeds(biped_terms)
+    dinosaurs.select { |dinosaur| biped_terms.include? dinosaur.walking.downcase }
   end
 
   def filter_carnivores

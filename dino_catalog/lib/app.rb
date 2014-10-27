@@ -18,7 +18,7 @@ class App
     HEREDOC
 
   SEARCH_REGEX = {
-    biped: /biped/,
+    bipeds: /biped/,
     carnivores: /carnivore|insectivore|piscivore/,
     periods: /cretaceous|permian|jurassic|oxfordian|albian|triassic/,
     sizes: /big|small/
@@ -67,7 +67,7 @@ class App
 
   def filter_results(catalog, filters)
     filtered_dinosaur_listings = []
-    #filtered_dinosaur_listings << catalog.filter_bipeds
+    filtered_dinosaur_listings << catalog.filter_bipeds(filters[:bipeds])
     #filtered_dinosaur_listings << catalog.filter_carnivores
     #filtered_dinosaur_listings << catalog.filter_period(period)
     puts filtered_dinosaur_listings

@@ -11,7 +11,7 @@ class EventCalendar
   private
 
   def add_calendar_events
-    calendar_events.each { |event| add_event(event) }
+    calendar_events.each { |event| add_event(event.to_ical) }
   end
 
   def add_event(event)
@@ -25,6 +25,6 @@ class EventCalendar
   end
 
   def calendar_events
-    Performance.upcoming.map(&:to_ical)
+    Performance.upcoming
   end
 end

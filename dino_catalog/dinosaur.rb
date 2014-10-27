@@ -22,16 +22,16 @@ class Dinosaur
   def formatted_variables_hash
     attributes = {}
     instance_variables.each do |var|
-      attributes[format_var(var)] = format_key(var)
+      attributes[format_var_name(var)] = format_var_value(var)
     end
     attributes
   end
 
-  def format_key(value)
-    instance_variable_get(value).to_s + "\n------"
+  def format_var_value(value)
+    instance_variable_get(value) + "\n------"
   end
 
-  def format_var(var)
-    "------\n" + var.to_s.tr('@', '').capitalize
+  def format_var_name(name)
+    "------\n" + name.to_s.tr('@', '').capitalize
   end
 end

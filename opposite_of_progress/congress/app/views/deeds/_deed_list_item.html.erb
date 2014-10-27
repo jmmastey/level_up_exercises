@@ -1,4 +1,22 @@
-<p>
-  <%= link_to "#{deed.deed}", deed %>
-  <%= "#{deed.bioguide_id}" %>
-</p>
+<div class="panel">
+  <div><%= raw "#{link_to deed.deed, deed}" %></div>
+  <br />
+  <div class="row">
+    <div class="large-6 columns">
+      <% if deed.bioguide_id %>
+        <%= "Legislator:" %>
+        <% legislator = Legislator.where(bioguide_id: deed.bioguide_id).first %>
+        <%= raw "#{link_to legislator.full_name, legislator}" if legislator %>
+        <%= "#{deed.bioguide_id}" unless legislator %>
+      <% end %>
+    </div>
+    <div class="large-6 columns">
+      <% if deed.bill_id %>
+        <%= "Bill:" %>
+        <% bill = Bill.where(bill_id: deed.bill_id).first %>
+        <%= raw "#{link_to bill.short_title, bill}" if bill %>
+        <%= "#{deed.bill_id}" unless bill %>
+      <% end %>
+    </div>
+  </div>
+</div>

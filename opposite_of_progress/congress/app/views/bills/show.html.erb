@@ -4,4 +4,12 @@
 
 <p><%= "Last Vote: #{@bill.last_vote_at}" if @bill.last_vote_at %></p>
 
+<% if @bill.sponsor_id %>
+<p><%= @bill.sponsor_id %></p>
+  <% legislator = Legislator.where(bioguide_id: @bill.sponsor_id).first %>
+  <% if legislator %>
+    <p><%= "Sponsor Id: #{legislator.full_name}"%></p>
+  <% end %>
+<% end %>
+
 <p><%= link_to "Back to Bills", bills_path %></p>

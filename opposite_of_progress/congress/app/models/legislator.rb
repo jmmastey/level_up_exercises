@@ -19,8 +19,20 @@ class Legislator < ActiveRecord::Base
     md5.hexdigest
   end
 
+  def full_name
+    name_arr = []
+
+    name_arr << self.title if self.title
+    name_arr << self.first_name if self.first_name
+    name_arr << "'#{self.nickname}'" if self.nickname
+    name_arr << self.last_name if self.last_name
+    name_arr << "(#{self.party})" if self.party
+
+    name_arr.join(" ")
+  end
+
   def fetch
-    http = Curl.get("#{ApplicationHelper::API_BASE_PATH}legislators?apikey=2d3136f6874046c8ba34d5e2f1a96b03&per_page=50")
+    http = Curl.get("#{ApplicationHelper::API_BASE_PATH}legislators?apikey=2d3136f6874046c8ba34d5e2f1a96b03&per_page=50&page=12")
     @results = JSON.parse(http.body_str)
 
     @results["results"].each do |result|

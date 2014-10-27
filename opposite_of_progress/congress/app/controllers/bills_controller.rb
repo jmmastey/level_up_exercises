@@ -3,6 +3,7 @@ class BillsController < ApplicationController
 
   def index
     @results = Bill.all
+    # @results = Deed.new.law_voted_on
   end
 
   def show

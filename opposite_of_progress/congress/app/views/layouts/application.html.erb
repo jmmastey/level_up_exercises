@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Congress</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<%= yield %>
+    <title>Opposite of Progress</title>
 
-</body>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <div class="row">
+      <div class="small-4 large-2 columns">&nbsp;</div>
+      <div class="small-4 large-8 columns">
+        <h1>Opposite of Progress</h1>
+
+        <nav class="top-bar" data-topbar role="navigation">
+          <section class="top-bar-section">
+            <ul class="left">
+              <li><%= link_to "Good Deeds", root_path %></li>
+              <li><%= link_to "All Bills", bills_path %></li>
+              <li><%= link_to "All Legislators", legislators_path %></li>
+            </ul>
+          </section>
+        </nav>
+
+        <%= yield %>
+      </div>
+      <div class="small-4 large-2 columns">&nbsp;</div>
+
+      <%= javascript_include_tag "application" %>
+    </div>
+  </body>
 </html>

@@ -40,3 +40,9 @@ gem 'spring',        group: :development
 
 # Use Curb for cURL requests
 gem 'curb'
+
+# Use Foundation for styling
+gem 'foundation-rails'
+
+# Use will_paginate for Pagination
+gem 'will_paginate'

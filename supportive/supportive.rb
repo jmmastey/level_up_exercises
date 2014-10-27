@@ -6,29 +6,27 @@ class BlagPost
   attr_accessor :author, :comments, :categories, :body, :publish_date
 
   Author = Struct.new(:name, :url)
-  DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
-  def initialize(args)
-    args = args.inject({}) do |hash, (key, value)|
-      hash[key.to_sym] = value
-      hash
+  BANNED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
+
+  def initialize(params)
+    set_defaults
+
+    params.symbolize_keys!
+
+    if params[:author].present? && params[:author_url].present?
+      @author = Author.new(params[:author], params[:author_url])
     end
 
-    if args[:author] != '' && args[:author_url] != ''
-      @author = Author.new(args[:author], args[:author_url])
-    end
-
-    if args[:categories]
-      @categories = args[:categories].reject do |category|
-        DISALLOWED_CATEGORIES.include? category
+    if params[:categories]
+      @categories = params[:categories].reject do |category|
+        category.in?(BANNED_CATEGORIES)
       end
-    else
-      @categories = []
     end
 
-    @comments = args[:comments] || []
-    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
-    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
+    @publish_date = Date.parse(params[:publish_date]) if params[:publish_date]
+    @comments = params[:comments] if params[:comments]
+    @body = params[:body].squish
   end
 
   def to_s
@@ -37,71 +35,44 @@ class BlagPost
 
   private
 
+  def set_defaults
+    @comments = []
+    @categories = []
+    @publish_date = Date.today
+  end
+
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    return "" if author.nil?
+
+    "By #{author.name}, at #{author.url}"
   end
 
   def category_list
     return "" if categories.empty?
 
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
-  end
-
-  def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    prefix = "Category".pluralize(categories.length) + ": "
+    list = categories.map { |category| category.to_s.titleize }.to_sentence
+    prefix + list
   end
 
   def commenters
-    return '' unless comments_allowed?
-    return '' unless comments.length > 0
+    return "" unless comments_allowed? || comments.any?
 
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    "You will be the #{comments.length}#{comments.length.ordinal} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date > 3.years.ago
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    body.truncate(200)
   end
-
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
-                    "categories"    => [:theory_of_computation, :languages, :gossip],
+                    "categories"    => [:theory_of_computation, :languages, :gossip, :another_category],
                     "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE

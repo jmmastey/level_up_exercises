@@ -3,6 +3,22 @@
 
   <div id="search-field-div">
 	<input type='text' id="search-field"/>
+	<div id="search-options-menu-div">
+	  <span class="item-label">From</span><br>
+	  <input class="item-input" type='text' value=""/><br>
+	  <span class="item-label">To</span><br>
+	  <input class="item-input" type='text' value=""/><br>
+	  <span class="item-label">Has the words</span><br>
+	  <input class="item-input" type='text' value=""/><br>
+	  <span class="item-label">Doesn't have</span><br>
+	  <input class="item-input" type='text' value=""/><br>
+	  <br>
+	  <input type='checkbox'>
+	  <span class="item-label">Has attachment</span><br>
+	  <br>
+	  <input type='checkbox'>
+	  <span class="item-label">Don't include chats</span><br>
+	</div>
   </div>
 
   <div id="search-options-div">
@@ -18,19 +34,66 @@
   </div>
 
   <div id="manage-account">cdevel@enova.com
-	<div id="manage-account-menu"></div>
+	<div id="manage-account-menu">
+
+	  <div class="header">		  
+		This class is managed by <b>enova.com</b><br>
+		<a href="#">Learn more</a>
+	  </div>
+
+	  <div class="user-info">
+		<span class="fullname"><b>Curious Developer</b></span><br>
+		<span class="email">cdevel@enova.com</p></span>
+	  </div>
+
+	  <div class="lower-bar">
+		<div class="settings"><a href="#">Settings</a></div>
+		<div class="logout"><a href="#">Logout</a></div>	  
+	  </div>
+	</div>
   </div>
 </div>
 
 <div id="bar-top-white">
   <div id="mail-options-button-div">
-	Mail
+	<div class="label">Mail</div>
+	<div class="down-arrow"></div>
 	<div id="mail-options-list-div">
 	  <ul>
 		<li>Mail</li>
 		<li><a href="#">Contacts</a></li>
-		<li><a href="http://www.google.com">Tasks</a></li>
+		<li><a href="#">Tasks</a></li>
 	  </ul>
 	</div>
   </div>
+
+  <div id="mail-item-selection-div">
+	<input type='checkbox'/>
+	<div class="down-arrow"></div>
+	<div id="mail-item-selection-options-div">
+	  <ul>
+		<li><a href="#">All</a></li>
+		<li><a href="#">None</a></li>
+		<li><a href="#">Read</a></li>
+		<li><a href="#">Unread</a></li>
+		<li><a href="#">Starred</a></li>
+		<li><a href="#">Unstarred</a></li>
+	  </ul>
+	</div>
+  </div>
+
+  <div id="refresh-div">
+	<a href="#"></a>
+  </div>
+
+  <div id="mark-all-as-read-div">	
+	<div class="label">More</div>
+	<div class="down-arrow"></div>
+	<div id="mark-all-as-read-menu-div">
+	  <div class="option">Mark all as read</div>
+	</div>
+  </div>
+
+
+
 </div>

@@ -15,7 +15,15 @@
  */
 
 div {
-	border: 1px dashed orange;
+//	border: 1px dashed orange;
+}
+
+a {
+	text-decoration: none;
+}
+
+* {
+	font-family: verdana;
 }
 
 .tooltip {
@@ -37,25 +45,26 @@ div {
 	position: fixed;
 	background-color: #EEEEEE;
 	border-bottom: 1px solid #DDDDDD;
-	top: 0%;
-	height: 7%;
+	top: 0px;
+	left: 0px;
+	height: 60px;
 	width: 100%;
 	z-index: -1;
 }
 
 #logo {
-	position: absolute;
-	left: 1%;
-	height: 90%;
+	position: fixed;
+	left: 10px;
+	height: 54px;
 	z-index: 0;
 }
 
 #search-field-div {
-	position: absolute;
-	left: 10%;
-	top: 30%;
-	height: 40%;
-	width: 30%;
+	position: fixed;
+	left: 160px;
+	top: 18px;
+	height: 24px;
+	width: 500px;
 	padding: 0px;
 	margin: 0px;
 }
@@ -69,6 +78,9 @@ div {
 	padding: 0px;
 	margin: 0px;
 	border: none;
+	border-top: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
 }
 
 #search-field-div:hover {
@@ -84,19 +96,19 @@ div {
 }
 
 #search-options-div { 
-	position: absolute;
-	left: 40%;
-	top: 30%;
-	width: 2%;
-	height: 40%;
+	position: fixed;
+	left: 636px;
+	top: 18px;
+	width: 24px;
+	height: 24px;
 	padding: 0px;
 	margin: 0px;
 	background-image: url('down-arrow.png');
 	background-repeat: no-repeat;
-	background-size: 25% 33%;
+	background-size: 10px 8px;
 	background-position: center;
-	background-color: white;
-	border: 0px;
+	background-color: none;
+	border: none;
 	cursor: pointer;
 	outline: 0;
 	z-index: 25;
@@ -109,13 +121,14 @@ div {
 }
 
 #search-button-div {
-	position: absolute;
-	left: 42%;
-	top: 30%;
-	width: 2%;
-	height: 40%;
+	position: fixed;
+	left: 660px;
+	top: 18px;
+	width: 24px;
+	height: 24px;
 	padding: 0px;
 	margin: 0px;
+	border: none;
 }
 
 #search-button { 
@@ -128,21 +141,50 @@ div {
 	margin: 0px;
 	background-image: url('white-magnifying-glass-hi.png');
 	background-repeat: no-repeat;
-	background-size: 40% 50%;
+	background-size: 15px 12px;
 	background-position: center;
-	border: 0px;
 	background-color: #7777FF;
+	border: none;
 	cursor: pointer;
 	outline: 0;
 	z-index: 0;
 }
 
-#apps-button-div {
+#search-options-menu-div {
+	display: none;
 	position: absolute;
-	left: 90%;
-	top: 30%;
-	height: 40%;
-	width: 1.5%;
+	left: 0%;
+	top: 100%;
+	height: 1200%;
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	background: white;
+	padding-left: 5%;
+	padding-top: 5%;
+}
+
+#search-options-menu-div .item-label {
+	position: static;
+	color: #999999;
+	font-family: arial;
+	font-size: 15px;
+}
+
+#search-options-menu-div .item-input {
+	position: static;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #DDDDDD;
+	border-right: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	width: 90%;
+}
+
+#apps-button-div {
+	position: fixed;
+	left: 85%;
+	top: 18px;
+	height: 24px;
+	width: 24px;
 	background-color: #999999;
 }
 
@@ -151,9 +193,9 @@ div {
 }
 
 #manage-account {
-	position: absolute;
-	left: 92%;
-	top: 35%;
+	position: fixed;
+	left: 87%;
+	top: 18px;
 	background: none;
 }
 
@@ -161,35 +203,114 @@ div {
 	display: none;
 	position: absolute;
 	left: -100%;
-	top: 120%;
+	top: 130%;
 	width: 200%;
-	height: 500%;
+	height: 700%;
 	background-color: #FFFFDD;
+	border: 1px solid #DDDDDD;
 }
 
-#manage-account:hover > #manage-account-menu {
-	display: block;
+#manage-account-menu .header {
+	position: absolute;
+	left: 0%;
+	top: 0%;
+	width: 100%;
+	height: 25%;
+	background-color: #FFFFCC;	
+	font-size: 10px;
+	padding-top: 5px;
+	padding-left: 30px;
+	padding-bottom: 0px;
+}
+
+#manage-account-menu .user-info {
+	position: absolute;
+	left: 0%;
+	top: 25%;
+	width: 100%;
+	height: 55%;
+	background-color: #FFFFFF;
+	padding: 0px;
+	padding-left: 30px;
+}
+
+#manage-account-menu .user-info .fullname {
+	font-size: 10px;
+	font-weight: bold;
+}
+
+#manage-account-menu .user-info .email {
+	font-size: 10px;
+}
+
+#manage-account-menu .lower-bar {
+	position: absolute;
+	left: 0%;
+	top: 70%;
+	width: 100%;
+	height: 30%;
+	background-color: #CCCCCC;
+}
+
+#manage-account-menu .lower-bar .settings {
+	position: absolute;
+	left: 10%;
+	top: 15%;
+	height: %80;
+	width: %20;
+	padding: 5px;
+	border: 1px solid #777777;
+	font-size: 10px;
+}
+
+#manage-account-menu .lower-bar .logout {
+	position: absolute;
+	left: 60%;
+	top: 15%;
+	height: %80;
+	width: %20;
+	padding: 5px;
+	border: 1px solid #777777;
+	font-size: 10px;
 }
 
 #bar-top-white {
 	position: fixed;
 	background-color: #FFFFFF;
 	border-bottom: 1px solid #DDDDDD;
-	top: 7%;
-	height: 5.5%;
+	top: 60px;
+	height: 40px;
 	width: 100%;
 	z-index: -2;
 }
 
 #mail-options-button-div {
-	position: absolute;
-	color: #FF4444;
-	top: 20%;
-	left: 1%;
-	font-family: verdana;
-	font-size: 18px;
+	position: fixed;
+	top: 70px;
+	left: 20px;
 	cursor: pointer;
 }
+
+#mail-options-button-div .label {
+	font-family: verdana;
+	font-size: 18px;
+	color: #FF4444;
+}
+
+#mail-options-button-div .down-arrow {
+	position: absolute;
+	left: 100%;
+	top: 10%;
+	width: 20px;
+	height: 20px;
+	background-image: url('down-arrow.png');
+	background-repeat: no-repeat;
+	background-size: 10px 8px;
+	background-position: center;
+	background-color: white;
+	opacity: 0.5;
+}
+
 
 #mail-options-list-div {
 	display: none;
@@ -217,4 +338,141 @@ div {
 
 #mail-options-list-div ul li:first-child {
 	color: #FF4444;
+}
+
+#mail-item-selection-div {
+	position: fixed;
+	top: 70px;
+	left: 160px;
+	width: 30px;
+	height: 24px;
+	cursor: pointer;
+	border: 1px solid #CCCCCC;
+	padding-right: 10px;
+	background: #EEEEEE;
+}
+
+#mail-item-selection-div:hover {
+	border: 1px solid #BBBBBB;
+}
+
+#mail-item-selection-div .down-arrow {
+	position: absolute;
+	top: 12%;
+	left: 35%;
+	width: 25px;
+	height: 20px;
+	background-image: url('down-arrow.png');
+	background-repeat: no-repeat;
+	background-size: 10px 8px;
+	background-position: center;
+	background-color: white;
+	opacity: 0.5;
+	padding: 0px;
+}
+
+#mail-item-selection-options-div {
+	display: none;
+	position: absolute;
+	top: 101%;
+	left: 0%;
+	width: auto;
+	height: auto;
+	border: 1px solid #CCCCCC;
+	background-color: white;
+	padding: 0px;
+}
+
+#mail-item-selection-options-div ul {
+	list-style: none;
+	padding: 10px;
+}
+
+#mail-item-selection-options-div li {
+	list-style: none;
+	font-size: 13px;
+	color: black;
+	padding: 0px;
+}
+
+#mail-item-selection-options-div li:hover {
+	background-color: #BBBBBB;
+}
+
+#mail-item-selection-options-div li a {
+	color: black;
+	text-decoration: none;
+}
+
+#refresh-div {
+	position: fixed;
+	top: 70px;
+	left: 210px;
+	width: 40px;
+	height: 24px;
+	cursor: pointer;
+	border: 1px solid #CCCCCC;
+	background-image: url('refresh.png');
+	background-repeat: no-repeat;
+	background-size: 20px 20px;
+	background-position: center;
+	background-color: #EEEEEE;
+}
+
+#refresh-div:hover {
+	border: 1px solid #BBBBBB;
+}
+
+#mark-all-as-read-div {
+	position: fixed;
+	top: 70px;
+	left: 260px;
+	width: 40px;
+	height: 24px;
+	cursor: pointer;
+	border: 1px solid #CCCCCC;
+	background-color: #EEEEEE;
+	padding: 0px;
+}
+
+#mark-all-as-read-div:hover {
+	border: 1px solid #BBBBBB;
+}
+
+#mark-all-as-read-div .label {
+	position: absolute;
+	top: 3px;
+	left: 2px;
+	font-family: verdana;
+	font-size: 10px;
+	color: black
+}
+
+#mark-all-as-read-div .down-arrow {
+	position: absolute;
+	left: 23px;
+	top: 10%;
+	width: 20px;
+	height: 20px;
+	background-image: url('down-arrow.png');
+	background-repeat: no-repeat;
+	background-size: 10px 8px;
+	background-position: center;
+	opacity: 0.5;
+}
+
+#mark-all-as-read-menu-div {
+	display: none;
+	position: absolute;
+	left: 0%;
+	top: 110%;
+	width: 400%;
+	height: 100%;
+	background: white;
+	border: 1px solid #CCCCCC;
+}
+
+#mark-all-as-read-menu-div .option {
+	position: absolute;
+	left: 10px;
 }

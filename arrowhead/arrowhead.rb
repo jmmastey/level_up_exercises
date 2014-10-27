@@ -26,14 +26,15 @@ class Arrowhead
   private_class_method :print_arrowhead
 
   def self.get_region_shapes(region)
-    CLASSIFICATIONS[region] || raise("Unknown region, please " \
-                                     "provide a valid region.")
+    CLASSIFICATIONS[region] ||
+      raise("Unknown region, please provide a valid region.")
   end
   private_class_method :get_region_shapes
 
   def self.select_arrowhead_by_shape(shape, region_shapes)
-    region_shapes[shape] || raise("Unknown shape value. Are you sure " \
-                                  "you know what you're talking about?")
+    message = "Unknown shape value. "
+    message += "Are you sure you know what you're talking about?"
+    region_shapes[shape] || raise(message)
   end
   private_class_method :select_arrowhead_by_shape
 end

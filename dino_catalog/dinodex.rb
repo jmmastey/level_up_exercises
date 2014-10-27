@@ -24,16 +24,20 @@ class Dinosaur
   end
 end
 
-dinosaurs = CSV.read('african_dinosaur_export.csv', headers:true)
+class Library
+  def initialize
+  end
 
-library = []
-dinosaurs.each do |dino|
-    row = dino.to_hash
-    mapping = {"Genus" => "Name", "Carnivore" => "Diet", "Weight" => "Weight_in_lbs"}
-    row.keys.each { |k| row[mapping[k]] = row.delete(k) if mapping[k]}
-    row = row.inject({}){|memo,(k,v)| memo[k.downcase.to_sym] = v; memo}
-    library << Dinosaur.new(row)
+  def parser(file)
+    dinosaurs = CSV.read(file, headers:true)
+
+    dinosaurs.each do |dino|
+        row = dino.to_hash
+        mapping = {"Genus" => "Name", "Carnivore" => "Diet", "Weight" => "Weight_in_lbs"}
+        row.keys.each { |k| row[mapping[k]] = row.delete(k) if mapping[k]}
+        row = row.inject({}){|memo,(k,v)| memo[k.downcase.to_sym] = v; memo}
+        library << Dinosaur.new(row)
+    end
+  end
 end
-
-
 p library

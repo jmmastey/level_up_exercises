@@ -67,8 +67,8 @@ class App
 
   def filter_results(catalog, filters)
     filtered_dinosaur_listings = []
-    filtered_dinosaur_listings << catalog.filter_bipeds(filters[:bipeds])
-    #filtered_dinosaur_listings << catalog.filter_carnivores
+    #filtered_dinosaur_listings << catalog.filter_bipeds(filters[:bipeds])
+    filtered_dinosaur_listings << catalog.filter_carnivores(filters[:carnivores])
     #filtered_dinosaur_listings << catalog.filter_period(period)
     puts filtered_dinosaur_listings
     # filters.each do |filter|

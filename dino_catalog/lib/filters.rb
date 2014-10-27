@@ -6,7 +6,7 @@ module Filters
     dinosaurs.select { |dinosaur| biped_terms.include? dinosaur.walking.downcase }
   end
 
-  def filter_carnivores
+  def filter_carnivores(carnivore_terms)
     dinosaurs.select { |dinosaur| CARNIVORES.include?(dinosaur.diet) }
   end
 

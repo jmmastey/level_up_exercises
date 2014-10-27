@@ -53,50 +53,25 @@ class App
       print '> '
       user_input = gets.chomp.downcase
       search_terms = get_user_search_terms(user_input)
-      filter_results(@catalog, search_terms)
+      @filtered_dinosaurs_set = filter_results(@catalog, search_terms)
     end
   end
 
   def get_user_search_terms(phrase)
     search_terms = {}
     SEARCH_REGEX.each do |term, regex|
-      search_terms[term] = phrase.scan(regex) unless phrase.scan(regex).empty?
+      search_terms[term] = phrase.scan(regex) unless phrase.scan(regex).empty? #  use inject?
     end
     search_terms
   end
 
   def filter_results(catalog, filters)
     filtered_dinosaur_listings = []
-    #filtered_dinosaur_listings << catalog.filter_bipeds(filters[:bipeds])
-    #filtered_dinosaur_listings << catalog.filter_carnivores(filters[:carnivores])
-    #filtered_dinosaur_listings << catalog.filter_period(filters[:periods])
-    filtered_dinosaur_listings << catalog.filter_size(filters[:sizes])
-    puts filtered_dinosaur_listings.inspect
-    # filters.each do |filter|
-    #   catalog.filter_bipeds
-    # end
-  end
-
-  def do_action(action)
-    case action[0]
-    when 'bipeds'
-      list_bipeds
-    when 'carnivores'
-      list_carnivores
-    when 'period'
-      list_period(action[1])
-    when 'big'
-      list_size(action[0])
-    when 'small'
-      list_size(action[0])
-    when 'back'
-      return :back
-    when 'quit'
-      puts "\n\nExiting.\n\n"
-      exit!
-    else
-      "I don't understand. Please enter a valid input."
+    filters.each do |search_type, criteria|
+      filter_function = "filter_#{search_type}".to_sym
+      filtered_dinosaur_listings << catalog.send(filter_function, criteria)
     end
+    filtered_dinosaur_listings
   end
 
 end

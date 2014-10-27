@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    @search_query = params[:q]
+    @search_query = params[:query]
     @items = get_items
     @items = search_items(@items, @search_query) if @search_query
 

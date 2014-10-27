@@ -6,10 +6,11 @@
         - @watch.errors.full_messages.each do |msg|
           %li= msg
 
+  = f.hidden_field :user_id
   .form-group
     = f.label :nickname
     = f.text_field :nickname, class: "form-control"
   .form-group
-    = f.label :item
-    = f.text_field :item, class: "form-control typeahead", autocomplete: :off, data: { provide: :typeahead }
+    = f.label :item_id, "Item"
+    = f.hidden_field :item_id, class: "form-control"
   = f.submit 'Save', class: "btn btn-primary"

@@ -14,6 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require bootstrap-typeahead-rails
-//= require bloodhound.js.coffee
+//= require select2
 //= require_tree .

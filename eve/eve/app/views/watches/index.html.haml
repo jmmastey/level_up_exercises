@@ -9,19 +9,15 @@
       %tr
         %th Nickname
         %th Item
-        %th User
-        %th
-        %th
+        %th.text-right Price (ISK)
         %th
     %tbody
       - @watches.each do |watch|
         %tr
-          %td= watch.nickname
-          %td= watch.item
-          %td= watch.user
-          %td= link_to('Show', watch)
-          %td= link_to('Edit', edit_watch_path(watch))
-          %td= link_to('Destroy', watch, :method => :delete, :data => { :confirm => 'Are you sure?' })
+          %td= link_to(watch.nickname, watch)
+          %td= watch.item.name
+          %td.text-right
+          %td= link_to('Delete', watch, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger')
 
 = link_to(new_watch_path, class: "btn btn-default") do
   %span.glyphicon.glyphicon-plus

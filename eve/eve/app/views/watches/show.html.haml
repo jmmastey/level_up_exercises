@@ -3,11 +3,6 @@
   = @watch.nickname
 %p
   %strong Item:
-  = @watch.item
-%p
-  %strong User:
-  = @watch.user
+  = @watch.item.name
 
-= link_to 'Edit', edit_watch_path(@watch)
-\|
 = link_to 'Back', watches_path

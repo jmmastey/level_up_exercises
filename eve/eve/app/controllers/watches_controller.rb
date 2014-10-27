@@ -1,9 +1,11 @@
 class WatchesController < ApplicationController
+  load_and_authorize_resource
+
   before_action :set_watch, only: [:show, :edit, :update, :destroy]
   respond_to :html, :xml, :json
 
   def index
-    @watches = Watch.all
+    set_watches
     respond_with(@watches)
   end
 
@@ -12,11 +14,12 @@ class WatchesController < ApplicationController
   end
 
   def new
-    @watch = Watch.new
+    @watch = Watch.new(user: current_user)
     respond_with(@watch)
   end
 
   def edit
+    respond_with(@watch)
   end
 
   def create
@@ -36,11 +39,15 @@ class WatchesController < ApplicationController
   end
 
   private
-    def set_watch
-      @watch = Watch.find(params[:id])
-    end
+  def set_watches
+    @watches = Watch.where(user: current_user)
+  end
 
-    def watch_params
-      params.require(:watch).permit(:nickname, :item_id, :user_id)
-    end
+  def set_watch
+    @watch = Watch.find(params[:id])
+  end
+
+  def watch_params
+    params.require(:watch).permit(:nickname, :item_id, :user_id)
+  end
 end

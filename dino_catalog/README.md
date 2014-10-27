@@ -4,7 +4,7 @@ It may not be immediately evident, but I am a huge fan of dinosaurs. They're hug
 
 ...
 
-Anyway. I need to catalog some dinosaurs for my newest project, DinoDex. I've got a CSV file for the dinosaur facts, and I need the code to read all the dinosaur facts and do some basic manipulations with the data.
+Anyway. I need to catalog sasdfasdome dinosaurs for my newest project, DinoDex. I've got a CSV file for the dinosaur facts, and I need the code to read all the dinosaur facts and do some basic manipulations with the data.
 
 ### Requirements
 

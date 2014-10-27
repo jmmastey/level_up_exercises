@@ -1,2 +1,19 @@
-%h1 Items#index
-%p Find me in app/views/items/index.html.haml
+.page-header
+  %h2 EVE Online Items
+
+= form_tag("/items", method: "get", role: "form") do
+  .form-group
+    = label_tag(:q, "Search", class: "sr-only")
+    .input-group
+      = search_field_tag(:q, @search_query, class: "form-control", placeholder: "Search items")
+      .input-group-btn
+        %button{type: "submit", class: "btn btn-default"}
+          &nbsp;
+          %span.glyphicon.glyphicon-search
+          &nbsp;
+
+- if @items
+  - if @items.empty?
+    %p.info No items found.
+  - else
+    = render(partial: 'list', locals: { items: @items })

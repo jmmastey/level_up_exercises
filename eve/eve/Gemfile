@@ -42,6 +42,7 @@ gem 'haml-rails'
 gem 'devise'
 
 gem 'bootstrap-typeahead-rails', "~> 0.10.5"
+gem 'kaminari'
 
 gem 'eve_central', require: false
 

@@ -1,0 +1,11 @@
+%table.table.table-condensed.table-striped
+  %thead
+    %tr
+      %th EVE ID
+      %th Name
+  %tbody
+    - @items.each do |item|
+      %tr
+        %td= item.in_game_id
+        %td= item.name
+= paginate @items

@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :users
 
   root 'home#trending'
+  get 'calendar.:format', to: 'performances#calendar', as: 'calendar'
 end

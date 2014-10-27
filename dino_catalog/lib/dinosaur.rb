@@ -13,10 +13,15 @@ class Dinosaur
   end
 
   def big?
-    @weight_in_lbs.to_i / 2000 > 2
+    weight_in_tons > 2
+  end
+
+  def small?
+    weight_in_tons > 0 && weight_in_tons <= 2
+  end
+
+  def weight_in_tons
+    @weight_in_lbs.to_i / 2000.0
   end
 
 end
-
-
-#options.each { |key, value| insnce_variable_set("@#{key}", value)}

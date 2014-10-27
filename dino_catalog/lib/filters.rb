@@ -15,12 +15,12 @@ module Filters
     dinosaurs.select { |dinosaur| dinosaur.period.downcase.match(periods_in_regex_array) }
   end
 
-  def filter_size
-    dinosaurs.partition { |dinosaur| dinosaur.big? }
-    if size == 'big'
-      dinosaur_size_subset = dinosaurs_by_size[0]
-    else
-      dinosaur_size_subset = dinosaurs_by_size[1].select { |dino| dino.weight_in_lbs }
+  def filter_size(size_terms)
+    case
+    when size_terms.include?('big')
+      dinosaurs.select { |dinosaur| dinosaur.big? }
+    when size_terms.include?('small')
+      dinosaurs.select { |dinosaur| dinosaur.small? }
     end
   end
 

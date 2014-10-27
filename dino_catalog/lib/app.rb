@@ -69,7 +69,8 @@ class App
     filtered_dinosaur_listings = []
     #filtered_dinosaur_listings << catalog.filter_bipeds(filters[:bipeds])
     #filtered_dinosaur_listings << catalog.filter_carnivores(filters[:carnivores])
-    filtered_dinosaur_listings << catalog.filter_period(filters[:periods])
+    #filtered_dinosaur_listings << catalog.filter_period(filters[:periods])
+    filtered_dinosaur_listings << catalog.filter_size(filters[:sizes])
     puts filtered_dinosaur_listings.inspect
     # filters.each do |filter|
     #   catalog.filter_bipeds

@@ -52,7 +52,7 @@ class BlagPost
   def category_list
     return "" unless categories.present?
     label = "Category".pluralize(categories.size)
-    label + ": " + categories.map { |cat| String(cat).titleize }.to_sentence
+    label + ": " + categories.map(&:titleize).to_sentence
   end
 
   def commenters

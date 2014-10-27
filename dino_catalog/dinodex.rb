@@ -1,19 +1,19 @@
 require 'csv'
-
+#
 class Dinosaur
     attr_reader :name
   def initialize(options)
-    @name = options["NAME"].to_s
-    @period = options["PERIOD"].to_s
-    @continent = options["CONTINENT"].to_s
-    @diet = options["DIET"].to_s
-    @weight_in_lbs = options["WEIGHT_IN_LBS"].to_i
-    @legs = convert(options["WALKING"])
-    @description = options["DESCRIPTION"].to_s
+    @name = options[:name].to_s
+    @period = options[:period].to_s
+    @continent = options[:continent].to_s
+    @diet = options[:diet].to_s
+    @weight_in_lbs = options[:weight_in_lbs].to_i
+    @legs = convert_legs(options[:walking])
+    @description = options[:description].to_s
   end
 
 
-  def convert(dino)
+  def convert_legs(dino)
     if dino.downcase == "biped"
       2
     elsif dino.downcase == "quadruped"
@@ -24,15 +24,16 @@ class Dinosaur
   end
 end
 
-dinosaurs = CSV.read('dinodex.csv', headers:true)
+dinosaurs = CSV.read('african_dinosaur_export.csv', headers:true)
 
-p dinosaurs
 library = []
 dinosaurs.each do |dino|
-    row =dino.to_hash
+    row = dino.to_hash
+    mapping = {"Genus" => "Name", "Carnivore" => "Diet", "Weight" => "Weight_in_lbs"}
+    row.keys.each { |k| row[mapping[k]] = row.delete(k) if mapping[k]}
+    row = row.inject({}){|memo,(k,v)| memo[k.downcase.to_sym] = v; memo}
     library << Dinosaur.new(row)
-
 end
 
 
-# p library[4]
+p library

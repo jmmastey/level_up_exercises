@@ -25,11 +25,11 @@ gem "next-big-sound-lite"
 group :development do
   gem "spring"
   gem "better_errors"
+  gem "pry-rails"
 end
 
 group :development, :test do
   gem "rspec-rails"
-  gem "pry"
 end
 
 group :test do

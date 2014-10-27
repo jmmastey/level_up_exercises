@@ -1,5 +1,6 @@
 require 'pry'
 require 'active_support/core_ext'
+require 'active_support/inflector/inflections'
 
 require_relative 'csv_modifier'
 
@@ -7,13 +8,22 @@ class App
   include CsvModifier
   include Filters
 
-  USER_PROMPT = <<-HEREDOC.strip_heredoc
+  USER_SEARCH_PROMPT = <<-HEREDOC.strip_heredoc
 
     What would you like to do?\n
     You can enter a phrase that includes the keywords you want to filter the dinosaur catalog by.\n
     For example:\n
       Carnivores Big Triassic Bipeds\n
     Which will return all dinosaurs that meet the four criteria.\n
+    Otherwise, to exit this program, enter 'quit'.\n
+    HEREDOC
+
+  USER_PROCESSING_PROMPT = <<-HEREDOC.strip_heredoc
+
+    You may perform the following action on the search results"\n
+      Enter 'Print' to list the dinosaurs that met your search criteria.\n
+      Enter the dinosaur's name to list information on an individual dinosaur.\n
+      Enter 'Back' to perform another search.\n
     Otherwise, to exit this program, enter 'quit'.\n
     HEREDOC
 
@@ -47,22 +57,38 @@ class App
   end
 
   def obtain_user_filters
+    print USER_SEARCH_PROMPT
+    print '> '
+    user_input = gets.chomp.downcase
+    exit! if user_input == 'exit' || user_input == 'quit'
+    search_terms = get_user_search_terms(user_input)
+    filtered_dinosaurs = filter_results(@catalog, search_terms)
+    user_processing(filtered_dinosaurs)
+  end
+
+  def user_processing(dinosaurs)
     action = nil
     until action == :back
-      print USER_PROMPT
+      puts "\nYour search resulted in #{dinosaurs.size} dinosaurs:"
+      # Need to print out the dinosaurs
+      print USER_PROCESSING_PROMPT
       print '> '
       user_input = gets.chomp.downcase
-      exit! if user_input == 'exit'
-      search_terms = get_user_search_terms(user_input)
-      @filtered_dinosaurs = filter_results(@catalog, search_terms)
-      puts @filtered_dinosaurs
+      exit! if user_input == 'exit' || user_input == 'quit'
+      if user_input == 'print'
+        print_dinosaur_set(dinosaurs)
+      else
+        print_dinosaur_instance(dinosaurs, user_input)
+      end
     end
   end
 
-  def user_actions
-    until action == :exit
-      print 'The following dinosaurs meet your search criteria:'
-    end
+  def print_dinosaur_set(set)
+    puts "Dinosaurs!"
+  end
+
+  def print_dinosaur_instance(set, name)
+    puts "Here is a dinosaur!"
   end
 
   def get_user_search_terms(phrase)

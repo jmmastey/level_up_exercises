@@ -23,10 +23,10 @@ class App
 
   USER_PROCESSING_PROMPT = <<-HEREDOC.strip_heredoc
 
-    You may perform the following action on the search results"\n
+    You may perform the following action on the search results\n
       Enter 'Print' to list the dinosaurs that met your search criteria.\n
       Enter the dinosaur's name to list information on an individual dinosaur.\n
-      Enter 'Back' to perform another search.\n
+      Enter 'Search' to perform another search.\n
     Otherwise, to exit this program, enter 'quit'.\n
     HEREDOC
 
@@ -53,36 +53,44 @@ class App
     @catalog = Catalog.new(filepath)
   end
 
-  def launch!(csv_filename)
+  def launch!(csv_filename=nil)
+    @csv_filename = csv_filename
     normalize_csv_file(csv_filename)
     @catalog = create_catalog("normalized_csv_file.csv")
     obtain_user_filters
   end
 
   def obtain_user_filters
+    @filtered_dinosaurs = nil
     print USER_SEARCH_PROMPT
     print '> '
     user_input = gets.chomp.downcase
     exit! if user_input == 'exit' || user_input == 'quit'
     search_terms = get_user_search_terms(user_input)
-    filtered_dinosaurs = filter_results(@catalog, search_terms)
-    user_processing(filtered_dinosaurs)
+    @filtered_dinosaurs = filter_results(@catalog, search_terms)
+    puts "\nYour search resulted in #{@filtered_dinosaurs.size} dinosaurs:"
+    print_search_summary(@filtered_dinosaurs)
+    user_processing(@filtered_dinosaurs)
   end
 
   def user_processing(dinosaurs)
-    action = nil
-    until action == :back
-      puts "\nYour search resulted in #{dinosaurs.size} dinosaurs:"
-      # Need to print out the dinosaurs
-      print USER_PROCESSING_PROMPT
-      print '> '
-      user_input = gets.chomp.downcase
-      exit! if user_input == 'exit' || user_input == 'quit'
-      if user_input == 'print'
-        print_dinosaur_set(dinosaurs)
-      else
-        print_dinosaur_instance(dinosaurs, user_input)
-      end
+    print USER_PROCESSING_PROMPT
+    print '> '
+    user_input = gets.chomp.downcase
+    exit! if user_input == 'exit' || user_input == 'quit'
+    user_actions(user_input)
+  end
+
+  def user_actions(input)
+    exit! if input == 'exit' || input == 'quit'
+    if input == 'print'
+      print_dinosaur_set(@filtered_dinosaurs)
+      user_processing(@filtered_dinosaurs)
+    elsif input == 'search'
+      launch!(@csv_filename)
+    else
+      print_dinosaur_instance(@filtered_dinosaurs, input)
+      user_processing(@filtered_dinosaurs)
     end
   end
 
@@ -101,6 +109,12 @@ class App
       filtered_dinosaur_listings << catalog.send(filter_function, criteria)
     end
     filtered_dinosaur_listings.flatten.uniq
+  end
+
+  def print_search_summary(search_results)
+    puts "\n"
+    search_results.each { |dinosaur| puts "#{dinosaur.name}"}
+    puts "\n"
   end
 
 end

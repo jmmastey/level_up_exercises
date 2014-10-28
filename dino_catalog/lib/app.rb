@@ -1,4 +1,5 @@
 require 'pry'
+require 'active_support'
 require 'active_support/core_ext'
 require 'active_support/inflector/inflections'
 require 'display'

@@ -8,6 +8,6 @@ class DinodexMaker
     filesArray.each do |file|
       dinosaurs = parser.parse_csv(file)
     end
-  Dinodex.new(dinosaurs)
+    Dinodex.new(dinosaurs)
   end
 end

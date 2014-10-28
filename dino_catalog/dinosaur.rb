@@ -14,7 +14,7 @@ class Dinosaur
   def filter_params(params)
     params.keep_if { |key, value| VALID_PARAMS.include?(key) && !value.nil? }
     if params.key?(:diet)
-      params[:carnivore] = 'Yes' if CARNIVORE_DIET.include?(params[:diet])
+      params[:carnivore] = 'Yes' if CARNIVORE_DIET.include?(params[:diet].downcase)
     end
     params
   end

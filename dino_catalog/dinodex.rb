@@ -15,40 +15,29 @@ class Dinodex
   end
 
   def bipeds
-    tmp_dino = Dinodex.new(dinosaurs.dup)
-    tmp_dino.dinosaurs.keep_if do |dino|
-      dino.walking == 'Biped'
-    end
-    tmp_dino
+    bipeds = dinosaurs.select { |dino| dino.walking == 'Biped' }
+    Dinodex.new(bipeds)
   end
 
   def carnivores
-    tmp_dino = Dinodex.new(dinosaurs.dup)
-    tmp_dino.dinosaurs.select { |dino| dino.carnivore == "Yes" }
-    tmp_dino
+    carnivores = dinosaurs.select { |dino| dino.carnivore == 'Yes' }
+    Dinodex.new(carnivores)
   end
 
   def period(p)
-    tmp_dino = Dinodex.new(dinosaurs.dup)
-    tmp_dino.dinosaurs.keep_if do |dino|
-      dino.period.downcase.include? p.downcase
+    from_period = dinosaurs.select do |dino|
+     dino.period.downcase.include? p.downcase
     end
-    tmp_dino
+    Dinodex.new(from_period)
   end
 
   def small_dinosaurs
-    tmp_dino = Dinodex.new(dinosaurs.dup)
-    tmp_dino.dinosaurs.keep_if do |dino|
-      dino.weight <= LARGE_WEIGHT
-    end
-    tmp_dino
+    smalls = dinosaurs.select { |dino| dino.weight <= LARGE_WEIGHT }
+    Dinodex.new(smalls)
   end
 
   def large_dionsaurs
-    tmp_dino = Dinodex.new(dinosaurs.dup)
-    tmp_dino.dinosaurs.keep_if do |dino|
-      dino.weight > LARGE_WEIGHT
-    end
-    tmp_dino
+    larges = dinosaurs.select { |dino| dino.weight > LARGE_WEIGHT }
+    Dinodex.new(larges)
   end
 end

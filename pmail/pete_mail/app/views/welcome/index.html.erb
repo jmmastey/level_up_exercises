@@ -118,3 +118,32 @@
 	<li>Drafts</li>
   </ul>
 </div>
+
+<!-- This is a mock-up -->
+<% mail_items = [] %>
+<% 10.times do %>
+<%   mail_items << {from: 'cohort', subject: 'Did you visit that page?', text: 'I think we should start looking at different possibilities for our own site', time: '9:26am'} %>
+<%   mail_items << {from: 'David Wallace', subject: 'We need to talk', text: "Do you really know for sure if what they're saying is true because it doesn't make sense", time: '9:14am'} %>
+<%   mail_items << {from: "Men's Wearhouse", subject: "Don't miss 50% off everything", text: "Dear Customer, We value your business and simply cannot let you miss this great one-day sale", time: '9:08am'} %>
+<% end %>
+
+<div id="mail-items-div">
+  <table class="table">
+	<% mail_items.each do |item| %>
+	<tr>
+	  <td class="checkbox"><input type='checkbox'>
+	  </td>
+	  <td class="starred">
+	  </td>
+	  <td class="from"><%= item[:from] %>
+	  </td>
+	  <td class="subject">
+		<%= item[:subject] %>
+		<span class="text"><%= item[:text] %></span>
+	  </td>
+	  <td class="date-time"><%= item[:time].truncate(20) %>
+	  </td>
+	</tr>
+	<% end %>
+  </table>
+</div>

@@ -48,7 +48,7 @@ a {
 	top: 0px;
 	left: 0px;
 	height: 60px;
-	width: 100%;
+	right: 0px;
 	z-index: -1;
 }
 
@@ -185,7 +185,11 @@ a {
 	top: 18px;
 	height: 24px;
 	width: 24px;
-	background-color: #999999;
+	background-image: url('grid.jpg');
+	background-repeat: no-repeat;
+	background-size: 24px 24px;
+	background-position: center;
+	background-color: white;
 }
 
 #apps-button-div:hover {
@@ -279,8 +283,9 @@ a {
 	background-color: #FFFFFF;
 	border-bottom: 1px solid #DDDDDD;
 	top: 60px;
+	left: 0px;
 	height: 40px;
-	width: 100%;
+	right: 0px;
 	z-index: -2;
 }
 
@@ -563,6 +568,7 @@ a {
 	padding: 0px;
 	padding-top: 7px;
 	color: white;
+	cursor: pointer;
 }
 
 
@@ -583,4 +589,69 @@ a {
 
 #folders li.selected {
 	color: red;
+}
+
+#mail-items-div {
+	position: absolute;
+	top: 100px;
+	left: 160px;
+	right: 0px;
+	height: 100%;
+	border-top: 1px solid #DDDDDD;
+	z-index: -100;
+	padding: 0px;
+}
+
+#mail-items-div .table {
+	position: absolute;
+	background-color: #EEEEEE;
+	border-style: none;
+	font-size: 12px;
+	width: 100%;
+	padding: 0px;
+	border-collapse: collapse;
+	z-index: auto;
+}
+
+#mail-items-div .table td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #DDDDDD;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+#mail-items-div .table tr {
+	width: 100%;
+	padding: 0px;
+}
+
+#mail-items-div .table tr:hover {
+	background-color: #DDDDFF;
+}
+
+#mail-items-div .table td.checkbox {
+	width: 5%;
+}
+
+#mail-items-div .table td.starred {
+	width: 5%;
+}
+
+#mail-items-div .table td.from {
+	width: 20%;
+}
+
+#mail-items-div .table td.subject {
+	width: 60%;
+}
+
+#mail-items-div .table td.subject .text {
+	color: #555555;
+}
+
+#mail-items-div .table td.date-time {
+	width: 10%;
+	text-align: right;
+	padding-right: 10px;
 }

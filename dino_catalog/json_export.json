@@ -1,0 +1,9 @@
+{"name":"Albertosaurus","period":"Late Cretaceous","continent":"North America","diet":"Carnivore","weight_in_lbs":"2000","walking":"Biped","description":"Like a T-Rex but smaller."},
+{"name":"Albertonykus","period":"Early Cretaceous","continent":"North America","diet":"Insectivore","weight_in_lbs":null,"walking":"Biped","description":"Earliest known Alvarezsaurid."},
+{"name":"Baryonyx","period":"Early Cretaceous","continent":"Europe","diet":"Piscivore","weight_in_lbs":"6000","walking":"Biped","description":"One of the only known dinosaurs with a fish-only diet."},
+{"name":"Deinonychus","period":"Early Cretaceous","continent":"North America","diet":"Carnivore","weight_in_lbs":"150","walking":"Biped","description":null},
+{"name":"Diplocaulus","period":"Late Permian","continent":"North America","diet":"Carnivore","weight_in_lbs":null,"walking":"Quadruped","description":"They actually had fins on the side of their body."},
+{"name":"Megalosaurus","period":"Jurassic","continent":"Europe","diet":"Carnivore","weight_in_lbs":"2200","walking":"Biped","description":"Originally thought to be a Quadruped. First dinosaur to be named."},
+{"name":"Giganotosaurus","period":"Late Cretaceous","continent":"South America","diet":"Carnivore","weight_in_lbs":"30420","walking":"Biped","description":"Largest hunter and also the coolest ever."},
+{"name":"Quetzalcoatlus","period":"Late Cretaceous","continent":"North America","diet":"Carnivore","weight_in_lbs":"440","walking":"Quadruped","description":"Largest known flying animal of all time."},
+{"name":"Yangchuanosaurus","period":"Oxfordian","continent":"Asia","diet":"Carnivore","weight_in_lbs":"7200","walking":"Biped","description":null}

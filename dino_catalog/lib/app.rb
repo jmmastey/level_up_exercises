@@ -3,6 +3,7 @@ require 'active_support'
 require 'active_support/core_ext'
 require 'active_support/inflector/inflections'
 require 'display'
+require 'json_export'
 
 require_relative 'csv_modifier'
 
@@ -10,6 +11,7 @@ class App
   include CsvModifier
   include Filters
   include Display
+  include JsonExport
 
   USER_SEARCH_PROMPT = <<-HEREDOC.strip_heredoc
 
@@ -88,6 +90,9 @@ class App
       user_processing(@filtered_dinosaurs)
     elsif input == 'search'
       launch!(@csv_filename)
+    elsif input == 'json'
+      convert_to_json(@filtered_dinosaurs)
+      user_processing(@filtered_dinosaurs)
     else
       print_dinosaur_instance(@filtered_dinosaurs, input)
       user_processing(@filtered_dinosaurs)

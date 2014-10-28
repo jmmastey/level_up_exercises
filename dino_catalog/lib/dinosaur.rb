@@ -24,4 +24,10 @@ class Dinosaur
     @weight_in_lbs.to_i / 2000.0
   end
 
+  def to_hash
+    hash = {}
+    instance_variables.each {|var| hash[var.to_s.delete("@")] = instance_variable_get(var) }
+    hash
+  end
+
 end

@@ -26,7 +26,7 @@ class Dinodex
 
   def period(p)
     from_period = dinosaurs.select do |dino|
-     dino.period.downcase.include? p.downcase
+      dino.period.downcase.include? p.downcase
     end
     Dinodex.new(from_period)
   end

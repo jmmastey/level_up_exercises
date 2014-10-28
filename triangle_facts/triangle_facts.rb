@@ -1,58 +1,77 @@
-# Killer facts about triangles AWW YEAH
 class Triangle
-	attr_accessor :side1,:side2,:side3
+  attr_accessor :side1, :side2, :side3
 
-	def initialize(side1,side2,side3)
-		@side1,@side2,@side3 = side1,side2,side3
-	end
+  SHAPE_DESCRIPTION = {
+    equilateral: "equilateral!",
+    isosceles: "isosceles! Also, that word is hard to type.",
+    scalene: "scalene and mathematically boring."
+  }
 
-	def equilateral()
-		return side1 == side2 && side2 == side3
-	end
+  def initialize(side1, side2, side3)
+    @side1 = side1
+    @side2 = side2
+    @side3 = side3
+  end
 
-	def isosceles()
-		return [side1,side2,side3].uniq.length == 2
-	end
+  def is_equilateral?
+    (side1 == side2) && (side2 == side3)
+  end
 
-	def scalene()
-		unless ! (equilateral || isosceles)
-	    false
-	  else
-	    true
-	  end
-	end
+  def is_isosceles?
+    [side1, side2, side3].uniq.length == 2
+  end
 
-	def recite_facts
-		puts 'This triangle is equilateral!' if equalateral 
-		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles 
-		puts 'This triangle is scalene and mathematically boring.' if scalene 
+  def is_scalene?
+    true unless is_equilateral? || is_isosceles?
+  end
 
-		angles = self.calculate_angles(side1,side2,side3)
-		puts 'The angles of this triangle are ' + angles.join(',')
+  def triangle_shape_description
+    if is_equilateral?
+      :equilateral
+    elsif is_isosceles?
+      :isosceles
+    else
+      :scalene
+    end
+  end
 
-		puts 'This triangle is also a right triangle!' if angles.include? 90
-		puts ''
-	end
+  def recite_facts(shape_type)
+    print "This triangle: #{ self.object_id }, is "
+    puts SHAPE_DESCRIPTION[triangle_shape_description]
+    puts "The angles of this triangle are #{ angles_from_sides.join(', ') }"
+    puts "This triangle is also a right triangle!" if angles_from_sides.include? 90
+    puts ""
+  end
 
-	def calculate_angles(a,b,c)
-		angleA = radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
-		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
-		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
+  def radians_to_degrees(rads)
+    (rads * 180 / Math::PI).round
+  end
 
-		return [angleA, angleB, angleC]
-	end
+  private
 
-	def radians_to_degrees(rads)
-		return (rads * 180 / Math::PI).round
-	end
+  def angles_from_sides
+    positions = [[side3, side2, side1],
+                 [side1, side3, side2],
+                 [side1, side2, side3]]
+    angles = [0, 0, 0]
+
+    positions.each_with_index do |position, index|
+      angles[index] = law_of_cosines(position)
+    end
+    angles
+  end
+
+  def law_of_cosines(sides)
+    radians_to_degrees(Math.acos((sides[0]**2 + sides[1]**2 - sides[2]**2) / (2.0 * sides[0] * sides[1])))
+  end
 end
 
+triangles = [[5, 5, 5], [5, 12, 13]]
 
-triangles = [
-	[5,5,5],
-	[5,12,13],
-]
-triangles.each { |sides|
-	tri = Triangle.new(*sides)
-	tri.recite_facts
-}
+triangles.each do |sides|
+  tri = Triangle.new(*sides)
+  tri.recite_facts(tri.triangle_shape_description)
+  print "Let's change side 1 to 4in ..."
+  tri.side1 = 4
+  tri.recite_facts(tri.triangle_shape_description)
+end

@@ -4,6 +4,7 @@ require 'active_support/core_ext'
 require 'active_support/inflector/inflections'
 require 'display'
 require 'json_export'
+require 'option_parser'
 
 require_relative 'csv_modifier'
 
@@ -56,11 +57,15 @@ class App
     @catalog = Catalog.new(filepath)
   end
 
-  def launch!(csv_filename=nil)
+  def launch!(csv_filename=nil, user_hash_input=nil)
     @csv_filename = csv_filename
     normalize_csv_file(csv_filename)
     @catalog = create_catalog("normalized_csv_file.csv")
-    obtain_user_filters
+    if user_hash_input
+      direct_user_input_search(user_hash_input)
+    else
+      obtain_user_filters
+    end
   end
 
   def obtain_user_filters
@@ -70,6 +75,14 @@ class App
     user_input = gets.chomp.downcase
     exit! if user_input == 'exit' || user_input == 'quit'
     search_terms = get_user_search_terms(user_input)
+    @filtered_dinosaurs = filter_results(@catalog, search_terms)
+    puts "\nYour search resulted in #{@filtered_dinosaurs.size} dinosaurs:"
+    print_search_summary(@filtered_dinosaurs)
+    user_processing(@filtered_dinosaurs)
+  end
+
+  def direct_user_input_search(search_terms)
+    @filtered_dinosaurs = nil
     @filtered_dinosaurs = filter_results(@catalog, search_terms)
     puts "\nYour search resulted in #{@filtered_dinosaurs.size} dinosaurs:"
     print_search_summary(@filtered_dinosaurs)

@@ -1,3 +1,4 @@
+require 'pry'
 #### Dinosaur Catalog ####
 # Launch this Ruby file from the command line to initiate the program
 
@@ -10,19 +11,25 @@ require 'app'
 
 app = App.new("dinosaur_catalog")
 
+options = OptionParser.parse(ARGV)
+
 if ARGV.size == 1
-  app.launch!(ARGV.shift)
+  csv_file = ARGV.shift
+  user_hash_input = options.search_terms unless options.search_terms.empty?
+
+  app.launch!(csv_file, user_hash_input)
 else
-    puts "\nPlease enter the filename of the CSV to import\n\n"
-    puts "Enter 'quit' or 'exit' to leave the program.\n\n"
-    print ">>  "
-    user_file = gets.chomp
-    if user_file == 'quit' || user_file == 'exit'
-       puts "\n\nExiting.\n\n"
-       exit!
-    else
-       app.launch!(user_file)
-    end
+  puts "\nPlease enter the filename of the CSV to import\n\n"
+  puts "Enter 'quit' or 'exit' to leave the program.\n\n"
+  print ">>  "
+  user_file = gets.chomp
+  if user_file == 'quit' || user_file == 'exit'
+    puts "\n\nExiting.\n\n"
+    exit!
+  else
+    puts "\nFile Found!\n"
+    app.launch!(user_file)
+  end
 end
 
 

@@ -28,6 +28,7 @@ class App
     You may perform the following action on the search results\n
       Enter 'Print' to list the dinosaurs that met your search criteria.\n
       Enter the dinosaur's name to list information on an individual dinosaur.\n
+      Enter 'json' to export the search results as a JSON file.\n
       Enter 'Search' to perform another search.\n
     Otherwise, to exit this program, enter 'quit'.\n
     HEREDOC
@@ -92,6 +93,7 @@ class App
       launch!(@csv_filename)
     elsif input == 'json'
       convert_to_json(@filtered_dinosaurs)
+      puts "\nYour JSON file has been saved as json_export.json in the main directory."
       user_processing(@filtered_dinosaurs)
     else
       print_dinosaur_instance(@filtered_dinosaurs, input)

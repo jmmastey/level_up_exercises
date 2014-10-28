@@ -5,3 +5,11 @@
       %input{:type => "text", :name => "region[name]", :class => "text"}
     %input{:type => "submit", :value => "Send", :class => "button"}
 
+%table
+  -if @scraping != nil
+    - @scraping.each do |key,hash_temp|
+      %tr
+        %td= key
+        %td= hash_temp["low"].to_s  if hash_temp.has_key? "low"
+        %td= hash_temp["high"].to_s if hash_temp.has_key? "high"
+

@@ -19,7 +19,7 @@ class Dinosaur
     params
   end
 
-  def formatted_variables_hash
+  def formatted_variables
     attributes = {}
     instance_variables.each do |var|
       attributes[format_var_name(var)] = format_var_value(var)

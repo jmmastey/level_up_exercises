@@ -17,4 +17,8 @@ class DinosaurTest < MiniTest::Unit::TestCase
   def test_valid_format_var_name
     assert_equal "------\nName", Dinosaur.new(name: 'Claw').format_var_name('@name')
   end
+
+  def test_formatted_variables_returns_a_hash
+    assert_equal true, Dinosaur.new.formatted_variables.is_a?(Hash)
+  end
 end

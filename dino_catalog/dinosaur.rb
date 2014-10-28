@@ -45,7 +45,12 @@ class Dinosaur
     ATTRIBUTES.each { |attr| display_by_key attr }
   end
 
-  private
+  def to_hash
+    ATTRIBUTES.inject({}) do |a, e|
+      a[e] = instance_variable_get("@#{e}")
+      a
+    end
+  end
 
   def titelize(key)
     key.split("_").map(&:upcase).join(" ")
@@ -61,4 +66,6 @@ class Dinosaur
   def display_field(title, value)
     puts format("%-15s: %s", title, value)
   end
+
+  private :titelize, :display_by_key, :display_field
 end

@@ -8,6 +8,18 @@ class Triangle
     @side_3 = side_3
   end
 
+  def angle_1
+    radians_to_degrees(Math.acos((@side_2**2 + @side_3**2 - @side_1**2) / (2.0 * @side_2 * @side_3)))
+  end
+
+  def angle_2
+    radians_to_degrees(Math.acos((@side_1**2 + @side_3**2 - @side_2**2) / (2.0 * @side_1 * @side_3)))
+  end
+
+  def angle_3
+    radians_to_degrees(Math.acos((@side_1**2 + @side_2**2 - @side_3**2) / (2.0 * @side_1 * @side_2)))
+  end
+
   def equilateral?
     side_1 == side_2 && side_2 == side_3
   end
@@ -24,30 +36,39 @@ class Triangle
     end
   end
 
+  def right?
+    [angle_1, angle_2, angle_3].include? 90
+  end
+
   def recite_facts
-    puts "This triangle is equilateral!" if equilateral?
 
-    puts "This triangle is isosceles! Also, that word is hard to type." if isosceles?
+    print_equilateral if equilateral?
 
-    puts "This triangle is scalene and mathematically boring." if scalene?
+    print_isosceles if isosceles?
 
-    angles = self.calculate_angles(side_1, side_2, side_3)
+    print_scalene if scalene?
 
-    puts "The angles of this triangle are + #{angles.join(',')}"
+    print_angles
 
-    puts "This triangle is also a right triangle!" if angles.include? 90
+    puts "This triangle is also a right triangle!" if right?
 
     puts ""
   end
 
-  def calculate_angles(side_1, side_2, side_3)
-    angle_1 = radians_to_degrees(Math.acos((side_2**2 + side_3**2 - side_1**2) / (2.0 * side_2 * side_3)))
+  def print_equilateral
+    puts "This triangle is equilateral!"
+  end
 
-    angle_2 = radians_to_degrees(Math.acos((side_1**2 + side_3**2 - side_2**2) / (2.0 * side_1 * side_3)))
+  def print_isosceles
+    puts "This triangle is isosceles! Also, that word is hard to type."
+  end
 
-    angle_3 = radians_to_degrees(Math.acos((side_1**2 + side_2**2 - side_3**2) / (2.0 * side_1 * side_2)))
+  def print_scalene
+    puts "This triangle is scalene and mathematically boring."
+  end
 
-    [angle_1, angle_2, angle_3]
+  def print_angles
+    puts "The angles of this triangle are #{angle_1}, #{angle_2}, #{angle_3}"
   end
 
   def radians_to_degrees(radians)

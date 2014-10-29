@@ -1,5 +1,5 @@
-require_relative 'dinosaur'
-require_relative 'filters'
+require 'dinosaur'
+require 'filters'
 
 class Catalog
   include Filters
@@ -9,8 +9,7 @@ class Catalog
   def initialize(path=nil)
     @path = path
     @dinosaurs = []
-    return if path.nil?
-    build_catalog_entries
+    build_catalog_entries unless path.nil?
   end
 
   def self.from_array(array)

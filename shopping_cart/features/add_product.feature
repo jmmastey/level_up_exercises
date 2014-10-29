@@ -86,7 +86,7 @@ Feature: Shopping Cart
     And I add 1 of "Item 1" to shopping cart
     Then I should see 1 of "Item 1" in the shopping cart
     And I should see 1 of "Item 3" in the shopping cart
-    And I should see $10.00 of "Item 1" in then shopping cart
+    And I should see $10.00 of "Item 1" in the shopping cart
     And I should see $30.00 of "Item 3" in the shopping cart
     And I should see items subtotal of $40.00 in the shopping cart
 

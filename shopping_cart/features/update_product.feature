@@ -20,7 +20,7 @@ Feature: Update products in shopping cart
   Scenario: Increase the quantities of multiple products
     When I modify quantity of "Item 1" to 11
     When I modify quantity of "Item 2" to 2
-    And I press "Recalculte"
+    And I press "Recalculate"
     Then I should see 11 of "Item 1" in the shopping cart
     And I should see 2 of "Item 2" in the shopping cart
     And I should see items subtotal of $180.00 in the shopping cart

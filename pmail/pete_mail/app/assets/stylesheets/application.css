@@ -600,6 +600,7 @@ a {
 	border-top: 1px solid #DDDDDD;
 	z-index: -100;
 	padding: 0px;
+	overflow: auto;
 }
 
 #mail-items-div .table {
@@ -631,11 +632,20 @@ a {
 }
 
 #mail-items-div .table td.checkbox {
-	width: 5%;
+	width: 2%;
 }
 
 #mail-items-div .table td.starred {
-	width: 5%;
+	width: 3%;
+	background-image: url('open_star.png');
+	background-repeat: no-repeat;
+	background-size: 20px 16px;
+	background-position: center;
+	background-color: none;
+}
+
+#mail-items-div .table td.starred.checked {
+	background-image: url('closed_star.png');
 }
 
 #mail-items-div .table td.from {
@@ -643,7 +653,7 @@ a {
 }
 
 #mail-items-div .table td.subject {
-	width: 60%;
+	width: 65%;
 }
 
 #mail-items-div .table td.subject .text {

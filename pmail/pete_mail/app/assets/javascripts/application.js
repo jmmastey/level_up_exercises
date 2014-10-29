@@ -61,7 +61,51 @@ function setup_event_handlers() {
 		$( "#mail-item-selection-options-div" ).toggle();
 	});
 
+	$( "#mail-item-selection-div input" ).change( function() {
+		if (this.checked) {
+			$( "#mail-items-div .checkbox input" ).prop('checked', true);
+		}
+		else {
+			$( "#mail-items-div .checkbox input" ).prop('checked', false);
+		}
+	});
+
+	// Mail Item Selection: All
+	$( "#mail-item-selection-options-div li.all" ).click( function() {
+		$( "#mail-items-div .checkbox input" ).prop('checked', true);
+		$( "#mail-item-selection-options-div" ).toggle();
+	});
+
+	// Mail Item Selection: None
+	$( "#mail-item-selection-options-div li.none" ).click( function() {
+		$( "#mail-items-div .checkbox input" ).prop('checked', false);
+		$( "#mail-item-selection-options-div" ).toggle();
+	});
+
+	// Mail Item Selection: Starred
+	$( "#mail-item-selection-options-div li.starred" ).click( function() {
+		$( "#mail-items-div .checkbox input" ).each( function() {
+			var star = $( this ).parent().parent().find('td.starred');
+			if ($( star ).hasClass("checked")) {
+				$( this ).prop('checked', true);
+			}
+		});
+		$( "#mail-item-selection-options-div" ).toggle();
+	});
+
+	// Mail Item Selection: Unstarred
+	$( "#mail-item-selection-options-div li.unstarred" ).click( function() {
+		$( "#mail-items-div .checkbox input" ).each( function() {
+			var star = $( this ).parent().parent().find('td.starred');
+			if (!($( star ).hasClass("checked"))) {
+				$( this ).prop('checked', true);
+			}
+		});
+		$( "#mail-item-selection-options-div" ).toggle();
+	});
+
 	
+
 	// Mark All As Read
 	$( "#mark-all-as-read-div" ).click( function() {
 		$( "#mark-all-as-read-menu-div" ).toggle();
@@ -84,6 +128,17 @@ function setup_event_handlers() {
 		$( "#folders li" ).removeClass("selected");
 		$( this ).addClass("selected");
 	});
+
+
+	// Mail Items Starred - Individual
+	$( "#mail-items-div .table td.starred" ).click( function() {
+		if ($( this ).hasClass("checked")) {
+			$( this ).removeClass("checked");
+		}
+		else {
+			$( this ).addClass("checked");
+		}
+	});
 }
 
 function clear_settings_menu_options() {
@@ -91,10 +146,8 @@ function clear_settings_menu_options() {
 }
 
 $(document).ready(function() {
-	console.log("document loaded");
 });
 
 $(window).load(function() {
-	console.log("window loaded");
 	setup_event_handlers();
 });

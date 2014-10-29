@@ -16,12 +16,19 @@ Feature: Shopping Cart
     And "Item 2" which costs $20.00
     And "Item 3" which costs $30.00
 
-  Scenario Outline: Add items to a shopping cart with previous items
+  Scenario: Add products as existing user and log out
+    When I login as "cust111"
+    And I add 1 of "Item 1" to shopping cart
+    Then I should see 1 of "Item 1" in the shopping cart
+    And I log out
+    And I should see items subtotal of $0 in shopping cart
 
 
-
-  Scenario Outline: Add unauthenticated items to a cart with previous items
-
-
-
-  Scenario Outline: Add same item types to a previous shopping cart
+  Scenario: Add products as existing user and log out and log in again
+    When I login as "cust111"
+    And I add 1 of "Item 1" to shopping cart
+    Then I should see 1 of "Item 1" in the shopping cart
+    And I log out
+    Then I should see items subtotal of $0 in shopping cart
+    When I login as "cust111"
+    Then I should see items subtotal of $10.00 in shopping cart

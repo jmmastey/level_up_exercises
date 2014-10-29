@@ -5,34 +5,16 @@ require 'active_support/inflector/inflections'
 require 'display'
 require 'json_export'
 require 'option_parser'
-
-require_relative 'csv_modifier'
+require 'build_csv'
+require 'csv_modifier'
+require 'user_prompts'
 
 class App
+  include BuildCsv
   include CsvModifier
   include Filters
   include Display
   include JsonExport
-
-  USER_SEARCH_PROMPT = <<-HEREDOC.strip_heredoc
-
-    What would you like to do?\n
-    You can enter a phrase that includes the keywords you want to filter the dinosaur catalog by.\n
-    For example:\n
-      Carnivores Big Triassic Bipeds\n
-    Which will return all dinosaurs that meet the four criteria.\n
-    Otherwise, to exit this program, enter 'quit'.\n
-    HEREDOC
-
-  USER_PROCESSING_PROMPT = <<-HEREDOC.strip_heredoc
-
-    You may perform the following action on the search results\n
-      Enter 'Print' to list the dinosaurs that met your search criteria.\n
-      Enter the dinosaur's name to list information on an individual dinosaur.\n
-      Enter 'json' to export the search results as a JSON file.\n
-      Enter 'Search' to perform another search.\n
-    Otherwise, to exit this program, enter 'quit'.\n
-    HEREDOC
 
   SEARCH_REGEX = {
     bipeds: /biped/,
@@ -43,10 +25,6 @@ class App
 
   def initialize(name)
     @app_name = name
-  end
-
-  def normalize_csv_file(csv_file)
-    normalize_csv_headers(csv_file)
   end
 
   def create_dinosaur_entry(name, attributes)
@@ -66,7 +44,7 @@ class App
 
   def obtain_user_filters
     @filtered_dinosaurs = nil
-    print USER_SEARCH_PROMPT
+    print UserPrompts::USER_SEARCH_PROMPT
     print '> '
     user_input = gets.chomp.downcase
     exit! if user_input == 'exit' || user_input == 'quit'
@@ -87,7 +65,7 @@ class App
   # User hash input to be implemented in a later iteration
 
   def user_processing(dinosaurs)
-    print USER_PROCESSING_PROMPT
+    print UserPrompts::USER_PROCESSING_PROMPT
     print '> '
     user_input = gets.chomp.downcase
     exit! if user_input == 'exit' || user_input == 'quit'

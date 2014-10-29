@@ -24,7 +24,29 @@ Eve.Watches =
 			formatResult: Eve.Watches.format_item
 			formatSelection: Eve.Watches.format_item
 			placeholder: "Search for an item"
-	
+
+	init_region_select: ->
+		$('#watch_regions').select2
+			minimumInputLength: 3
+			ajax:
+				url: "/regions/index.json"
+				dataType: "json"
+				data: (term, page) -> {
+					query: term
+					page: page
+				}
+				results: (data, page) -> {
+					results: data
+				}
+			initSelection: (element, callback) ->
+				id = $(element).val()
+				if (id != "")
+					$.ajax("/regions/#{id}.json", { dataType: "json" }).done((data) -> callback(data))
+			formatResult: Eve.Watches.format_region
+			formatSelection: Eve.Watches.format_region
+			placeholder: "Search for a region"
+
 	format_item: (item) -> item.name
+	format_region: (region) -> region.name
 
 $ -> Eve.Watches.init()

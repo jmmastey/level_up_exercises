@@ -124,6 +124,10 @@
  .side_bar{
   width: 90px;
   }
+  .bold{
+    font-weight: bold;
+    color:#dd4b39;
+  }
   .compose{
   margin-top: 20px;
   color:white;
@@ -140,7 +144,10 @@
   ul{
     list-style-type: none;
   }
+  ul li{
+    line-height: 200%;
+  }
   .list{
     font-family:Arial;
-    font-size: 90%;
+    font-size: 80%;
   }

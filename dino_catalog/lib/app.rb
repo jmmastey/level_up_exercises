@@ -61,11 +61,7 @@ class App
     @csv_filename = csv_filename
     normalize_csv_file(csv_filename)
     @catalog = create_catalog("normalized_csv_file.csv")
-    if user_hash_input
-      direct_user_input_search(user_hash_input)
-    else
-      obtain_user_filters
-    end
+    obtain_user_filters
   end
 
   def obtain_user_filters
@@ -81,13 +77,14 @@ class App
     user_processing(@filtered_dinosaurs)
   end
 
-  def direct_user_input_search(search_terms)
-    @filtered_dinosaurs = nil
-    @filtered_dinosaurs = filter_results(@catalog, search_terms)
-    puts "\nYour search resulted in #{@filtered_dinosaurs.size} dinosaurs:"
-    print_search_summary(@filtered_dinosaurs)
-    user_processing(@filtered_dinosaurs)
-  end
+  # def direct_user_input_search(search_terms)
+  #   @filtered_dinosaurs = nil
+  #   @filtered_dinosaurs = filter_results(@catalog, search_terms)
+  #   puts "\nYour search resulted in #{@filtered_dinosaurs.size} dinosaurs:"
+  #   print_search_summary(@filtered_dinosaurs)
+  #   user_processing(@filtered_dinosaurs)
+  # end
+  # User hash input to be implemented in a later iteration
 
   def user_processing(dinosaurs)
     print USER_PROCESSING_PROMPT

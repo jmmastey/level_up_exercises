@@ -4,12 +4,6 @@ class PatternError < RuntimeError
   end
 
   def message
-    @message || default_message
+    @message || "Generated robot name does not conform to the accepted pattern"
   end
-
-  def default_message
-    "Generated robot name does not conform to the accepted pattern"
-  end
-
-  private :default_message
 end

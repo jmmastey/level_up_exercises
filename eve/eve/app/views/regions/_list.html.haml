@@ -1,0 +1,13 @@
+%table.table.table-condensed.table-striped
+  %thead
+    %tr
+      %th EVE ID
+      %th Name
+      %th
+  %tbody
+    - @regions.each do |region|
+      %tr
+        %td= region.in_game_id
+        %td= region.name
+        %td= link_to("View orders", controller: "regions", action: "search", region: region, html_options: { class: "btn btn-info" })
+= paginate @regions

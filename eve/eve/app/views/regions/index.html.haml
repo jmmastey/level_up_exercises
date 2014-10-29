@@ -1,0 +1,8 @@
+.page-header
+  %h1 Regions
+
+- if @regions && !@regions.empty?
+  = render(partial: 'list', locals: { regions: @regions })
+- else
+  %p.alert.alert-info
+    Could not find any regions.

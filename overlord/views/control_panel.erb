@@ -1,0 +1,53 @@
+<div id="controlPanel" class="outerBevel">
+<div id="activation-controls">
+  <div id="activation-codes">
+     <div id="armingControls" class="outerBevel codedControl foregroundSurface">
+      <div id="armingCodeEntry" class="codeEntry">
+        <h1 id="labelArmingCode">Arming code</h1>
+        <div class="controlFrame">
+          <input name="tArmingCode" type="text" value="1234" class="innerBevel">
+        </div>
+      </div>
+      <div id="armingCodeAction" class="controlFrame outerBevel codeActionOuter">
+        <h1 id="labelArmingButton">Arm: use with caution</h1>
+        <div id="armingCodeActionInner" class="innerBevel foregroundSurface codeActionInner">
+          <div id="armingButton" class="squareButton disabled">
+            <p class="buttonLabel">ARMED</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="disarmingControls" class="outerBevel codedControl foregroundSurface">
+      <div id="disarmingCodeEntry" class="codeEntry">
+        <h1 id="labelDisarmingCode">Disarming code</h1>
+        <div class="controlFrame">
+          <input name="tDisarmingCode" type="text" value="0000" class="innerBevel">
+        </div>
+      </div>
+      <div id="disarmingCodeAction" class="controlFrame outerBevel codeActionOuter">
+        <h1 id="labelDisarmingButton">Disarm</h1>
+        <div id="disarmingCodeActionInner" class="innerBevel foregroundSurface codeActionInner">
+            <div id="disarmingButton" class="squareButton enabled">
+              <p class="buttonLabel">DISARMED</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="commitButtons" class="outerBevel foregroundSurface">
+    <div id="commitControlFrame" class="controlFrame">
+      <div id="commitControl" class="actionButton">
+        <h1 id="labelCommit" class="buttonLabel">Commit</h1>
+        <img id="buttonCommit" class="button" src="redbutton.svg">
+      </div>
+    </div>
+    <div id="cancelControlFrame" class="controlFrame">
+      <div id="cancelControl" class="actionButton">
+        <h1 id="labelCancel" class="buttonLabel">Cancel</h1>
+        <img id="buttonCancel" class="button" src="bluebutton.svg">
+      </div>
+    </div>
+  </div>
+</div>
+</div>

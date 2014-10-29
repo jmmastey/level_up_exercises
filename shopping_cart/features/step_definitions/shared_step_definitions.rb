@@ -25,3 +25,11 @@ end
 And(/^I press "([^"]*)"$/) do |arg|
   pending
 end
+
+When(/^I set "([^"]*)" with "([^"]*)"$/) do |arg1, arg2|
+  pending
+end
+
+And(/^I should see message "([^"]*)"$/) do |arg|
+  pending
+end

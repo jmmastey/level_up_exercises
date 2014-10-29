@@ -6,7 +6,6 @@ When(/^I empty the shopping cart$/) do
   pending
 end
 
-
 When(/^I remove "([^"]*)"$/) do |arg|
   pending
 end

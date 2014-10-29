@@ -7,4 +7,15 @@ $(document).ready(function(){
      event.stopPropagation();
      $(this).addClass("bold");
      });
-});
+  
+
+ $('li').hover(
+   function (){
+     $(this).css({"background-color":"#F2F2F0"});
+  },
+  function () {
+           $(this).css({"background-color":"white"});
+  }
+
+  );
+ });

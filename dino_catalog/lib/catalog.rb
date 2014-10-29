@@ -9,7 +9,14 @@ class Catalog
   def initialize(path=nil)
     @path = path
     @dinosaurs = []
+    return if path.nil?
     build_catalog_entries
+  end
+
+  def self.from_array(array)
+    catalog = Catalog.new
+    catalog.instance_variable_set(:@dinosaurs, array)
+    catalog
   end
 
   def build_catalog_entries

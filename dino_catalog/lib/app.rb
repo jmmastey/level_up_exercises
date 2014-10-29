@@ -120,12 +120,12 @@ class App
   end
 
   def filter_results(catalog, filters)
-    filtered_dinosaur_listings = []
+    filtered_dinosaur_listings = catalog.dinosaurs
     filters.each do |search_type, criteria|
       filter_function = "filter_#{search_type}".to_sym
-      filtered_dinosaur_listings << catalog.send(filter_function, criteria)
+      filtered_dinosaur_listings = Catalog.from_array(filtered_dinosaur_listings).send(filter_function, criteria)
     end
-    filtered_dinosaur_listings.flatten.uniq
+    filtered_dinosaur_listings
   end
 
   def print_search_summary(search_results)

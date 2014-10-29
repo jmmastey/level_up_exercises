@@ -1,13 +1,13 @@
 .page-header
   %h2 EVE Online Items
 
-= form_tag("/items", method: "get", role: "form") do
+= form_tag("/items/search", method: "get", role: "form") do
   .form-group
-    = label_tag(:q, "Search", class: "sr-only")
+    = label_tag(:query, "Search", class: "sr-only")
     .input-group
-      = search_field_tag(:q, @search_query, class: "form-control", placeholder: "Search items")
+      = search_field_tag(:query, @search_query, class: "form-control", placeholder: "Search items")
       .input-group-btn
-        %button{type: "submit", class: "btn btn-default"}
+        %button{type: "submit", class: "btn btn-default", title: "Search"}
           &nbsp;
           %span.glyphicon.glyphicon-search
           &nbsp;

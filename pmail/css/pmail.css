@@ -37,7 +37,7 @@
     padding: 10px;
     min-width: 750px;
     color: #c9c9c9;
-    height:35px;
+    height:30px;
   }
   .mail{
    margin-left: 10px;
@@ -111,7 +111,6 @@
   border-bottom-right-radius:4px;
 }
 
-
   /*MAIN CONTENT*/
   .main_content{
   width:586px;
@@ -122,18 +121,19 @@
  /*SIDE BAR*/
 
  .side_bar{
-  width: 90px;
+  width:90px;
+  float:left;
   }
   .bold{
     font-weight: bold;
     color:#dd4b39;
   }
   .compose{
-  margin-top: 20px;
+  margin-top: 10px;
   color:white;
   font-weight: bold;
   background-color: #dd4b39;
-  margin-left: 40px;
+  margin-left: 20px;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   border:1px solid #ae4553;
@@ -145,9 +145,15 @@
     list-style-type: none;
   }
   ul li{
-    line-height: 200%;
+    line-height: 170%;
+    cursor: default;
+  }
+
+  li.active{
+    background: gray;
   }
   .list{
     font-family:Arial;
     font-size: 80%;
+    padding-left: 20px;
   }

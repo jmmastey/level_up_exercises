@@ -2,6 +2,8 @@ require 'csv'
 
 module CsvModifier
 
+  CsV_FILE_NAME = "normalized_csv_file.csv"
+
   @@alias_table = {
     'Genus' => 'Name',
     'Carnivore' => 'Diet',
@@ -10,7 +12,7 @@ module CsvModifier
 
   def normalize_csv_headers(old_csv_file)
     new_headers = replace_header_with_alias(old_csv_file)
-    CSV.open("normalized_csv_file.csv", 'w') do |csv|
+    CSV.open(CsV_FILE_NAME, 'w') do |csv|
       csv << new_headers
       CSV.read(old_csv_file, headers: true).each do |row|
         row['Carnivore'] = 'Carnivore' if row['Carnivore'] == 'Yes'

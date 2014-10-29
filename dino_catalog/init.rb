@@ -32,5 +32,3 @@ else
     app.launch!(user_file)
   end
 end
-
-

@@ -1,40 +1,42 @@
-require 'optparse'
-require 'ostruct'
+####### Option parser for the extra credit #1 will be implemented in Iteration 2########
 
-class OptionParser
+# require 'optparse'
+# require 'ostruct'
 
-  options = OpenStruct.new
-  options.library = []
+# class OptionParser
 
-  def self.parse(args)
-    # The options specified on the command line will be collected in *options*.
-    # We set default values here.
-    options = OpenStruct.new
-    options.search_terms = []
+#   options = OpenStruct.new
+#   options.library = []
 
-    opt_parser = OptionParser.new do |opts|
-      opts.banner = "Usage: example.rb [options]"
+#   def self.parse(args)
+#     # The options specified on the command line will be collected in *options*.
+#     # We set default values here.
+#     options = OpenStruct.new
+#     options.search_terms = []
 
-      opts.separator ""
-      opts.separator "Specific options:"
+#     opt_parser = OptionParser.new do |opts|
+#       opts.banner = "Usage: example.rb [options]"
 
-      # List of arguments.
-      opts.on("--list x,y,z", Array, "Example 'list' of arguments") do |list|
-        options.search_terms = list
-      end
+#       opts.separator ""
+#       opts.separator "Specific options:"
 
-      opts.separator ""
-      opts.separator "Common options:"
+#       # List of arguments.
+#       opts.on("--list x,y,z", Array, "Example 'list' of arguments") do |list|
+#         options.search_terms = list
+#       end
 
-      opts.on_tail("-h", "--help", "Show this message") do
-        puts opts
-        exit
-      end
+#       opts.separator ""
+#       opts.separator "Common options:"
 
-    end
+#       opts.on_tail("-h", "--help", "Show this message") do
+#         puts opts
+#         exit
+#       end
 
-    opt_parser.parse!(args)
-    options
-  end
+#     end
 
-end
+#     opt_parser.parse!(args)
+#     options
+#   end
+
+# end

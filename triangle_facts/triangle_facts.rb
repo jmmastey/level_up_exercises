@@ -1,6 +1,9 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-  attr_accessor :side_1, :side_2, :side_3
+
+  RADIANS_TO_DEGREES_CONVERSION = 180 / Math::PI
+
+  attr_reader :side_1, :side_2, :side_3
 
   def initialize(side_1, side_2, side_3)
     @side_1 = side_1
@@ -29,15 +32,11 @@ class Triangle
   end
 
   def scalene?
-    if equilateral? || isosceles?
-      false
-    else
-      true
-    end
+    side_1 != side_2 && side_1 != side_3 && side_2 != side_3
   end
 
   def right?
-    [angle_1, angle_2, angle_3].include? 90
+    [angle_1, angle_2, angle_3].include?(90)
   end
 
   def recite_facts
@@ -50,7 +49,7 @@ class Triangle
 
     print_angles
 
-    puts "This triangle is also a right triangle!" if right?
+    print_right if right?
 
     puts ""
   end
@@ -71,9 +70,14 @@ class Triangle
     puts "The angles of this triangle are #{angle_1}, #{angle_2}, #{angle_3}"
   end
 
-  def radians_to_degrees(radians)
-    (radians * 180 / Math::PI).round
+  def print_right
+    puts "This triangle is also a right triangle!"
   end
+
+  def radians_to_degrees(radians)
+    (radians * RADIANS_TO_DEGREES_CONVERSION).round
+  end
+
 end
 
 triangles = [

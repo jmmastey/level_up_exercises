@@ -39,7 +39,8 @@ class Triangle
   end
 
   def scalene?
-    side_1 != side_2 && side_1 != side_3 && side_2 != side_3
+    [side_1, side_2, side_3].uniq.length == 3
+    #side_1 != side_2 && side_1 != side_3 && side_2 != side_3
   end
 
   def right?
@@ -84,7 +85,8 @@ triangles = [
   [5, 5, 5],
   [5, 12, 13],
 ]
-triangles.each do |sides|
-  tri = Triangle.new(*sides)
+
+triangles.each do |triangle|
+  tri = Triangle.new(*triangle)
   tri.recite_facts
 end

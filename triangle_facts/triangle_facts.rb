@@ -1,58 +1,90 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-	attr_accessor :side1,:side2,:side3
 
-	def initialize(side1,side2,side3)
-		@side1,@side2,@side3 = side1,side2,side3
-	end
+  RADIANS_TO_DEGREES_CONVERSION = 180 / Math::PI
 
-	def equilateral()
-		return side1 == side2 && side2 == side3
-	end
+  attr_reader :side_1, :side_2, :side_3
 
-	def isosceles()
-		return [side1,side2,side3].uniq.length == 2
-	end
+  def initialize(side_1, side_2, side_3)
+    @side_1 = side_1
+    @side_2 = side_2
+    @side_3 = side_3
+  end
 
-	def scalene()
-		unless ! (equilateral || isosceles)
-	    false
-	  else
-	    true
-	  end
-	end
+  def angle_1
+    radians_to_degrees(Math.acos((@side_2**2 + @side_3**2 - @side_1**2) / (2.0 * @side_2 * @side_3)))
+  end
 
-	def recite_facts
-		puts 'This triangle is equilateral!' if equalateral 
-		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles 
-		puts 'This triangle is scalene and mathematically boring.' if scalene 
+  def angle_2
+    radians_to_degrees(Math.acos((@side_1**2 + @side_3**2 - @side_2**2) / (2.0 * @side_1 * @side_3)))
+  end
 
-		angles = self.calculate_angles(side1,side2,side3)
-		puts 'The angles of this triangle are ' + angles.join(',')
+  def angle_3
+    radians_to_degrees(Math.acos((@side_1**2 + @side_2**2 - @side_3**2) / (2.0 * @side_1 * @side_2)))
+  end
 
-		puts 'This triangle is also a right triangle!' if angles.include? 90
-		puts ''
-	end
+  def equilateral?
+    side_1 == side_2 && side_2 == side_3
+  end
 
-	def calculate_angles(a,b,c)
-		angleA = radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
-		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
-		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
+  def isosceles?
+    [side_1, side_2, side_3].uniq.length == 2
+  end
 
-		return [angleA, angleB, angleC]
-	end
+  def scalene?
+    side_1 != side_2 && side_1 != side_3 && side_2 != side_3
+  end
 
-	def radians_to_degrees(rads)
-		return (rads * 180 / Math::PI).round
-	end
+  def right?
+    [angle_1, angle_2, angle_3].include?(90)
+  end
+
+  def recite_facts
+
+    print_equilateral if equilateral?
+
+    print_isosceles if isosceles?
+
+    print_scalene if scalene?
+
+    print_angles
+
+    print_right if right?
+
+    puts ""
+  end
+
+  def print_equilateral
+    puts "This triangle is equilateral!"
+  end
+
+  def print_isosceles
+    puts "This triangle is isosceles! Also, that word is hard to type."
+  end
+
+  def print_scalene
+    puts "This triangle is scalene and mathematically boring."
+  end
+
+  def print_angles
+    puts "The angles of this triangle are #{angle_1}, #{angle_2}, #{angle_3}"
+  end
+
+  def print_right
+    puts "This triangle is also a right triangle!"
+  end
+
+  def radians_to_degrees(radians)
+    (radians * RADIANS_TO_DEGREES_CONVERSION).round
+  end
+
 end
 
-
 triangles = [
-	[5,5,5],
-	[5,12,13],
+  [5, 5, 5],
+  [5, 12, 13]
 ]
-triangles.each { |sides|
-	tri = Triangle.new(*sides)
-	tri.recite_facts
-}
+triangles.each do |sides|
+  tri = Triangle.new(*sides)
+  tri.recite_facts
+end

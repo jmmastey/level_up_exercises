@@ -1,7 +1,7 @@
 # Class Dinosaur contains the structure of a dinosaur
 class Dinosaur
   # attr methods
-  attr_accessor :name, :period, :continent, :diet,
+  attr_reader :name, :period, :continent, :diet,
                 :carnivore, :weight, :walking, :description
 
   def initialize(details = {})
@@ -15,7 +15,7 @@ class Dinosaur
   end
 
   def to_s
-    output = to_hash.map do |(key, value)|
+    output = to_hash.map do |key, value|
       "#{key.upcase}: #{value}" if value
     end
     output.join(" | ")

@@ -11,6 +11,8 @@ dinodex = DinoDex.new
 
 file_paths = ['dinodex.csv', 'african_dinosaur_export.csv']
 
+WEIGHT_CUTOFF = 4000
+
 puts "**************************************************\n"
 puts 'Voila! Both files merged:'
 puts "**************************************************\n"
@@ -33,13 +35,13 @@ puts dinodex.filter(:period, 'Cretaceous')
 puts "\nHeavy Dinos (> 2tons):"
 puts "**************************************************\n"
 merge_dino.each do |dinos|
-  puts dinos if dinos.weight.to_i > 4000
+  puts dinos if dinos.weight.to_i > WEIGHT_CUTOFF
 end
 
 puts "\nLight Dinos (<= 2tons):"
 puts "**************************************************\n"
 merge_dino.each do |dinos|
-  puts dinos if dinos.weight.to_i <= 4000
+  puts dinos if dinos.weight.to_i <= WEIGHT_CUTOFF
 end
 
 puts "\nChaining Criteria:"

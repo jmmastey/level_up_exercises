@@ -3,7 +3,7 @@ require 'json'
 require_relative 'dinosaur'
 require_relative 'dinodex_mapper'
 require_relative 'african_dino_mapper'
-# Class Dinodex has all the methods for main
+
 class DinoDex
   def initialize(dinosaurs = [])
     @dinosaurs = dinosaurs
@@ -30,7 +30,6 @@ class DinoDex
   def filter(key, value)
     search { |dinosaur| dinosaur.send(key) =~ /#{value}/ }
   end
-  #create an outre dinosaur loop and go thru criteria as .all?
 
   def combined(criteria)
     @dinosaurs.select do |dinosaur|

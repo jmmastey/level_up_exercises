@@ -17,3 +17,6 @@
 
 # Ignore files with API keys
 /notes
+
+# Ignore my personal notes
+scratch_pad.*

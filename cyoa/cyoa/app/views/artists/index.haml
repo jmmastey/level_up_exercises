@@ -7,7 +7,7 @@
   - if @artists.any?
     - @artists.each do |artist|
       %tr
-        %td= link_to artist.nbs_name, artist_path(artist.id) 
+        %td= link_to artist.nbs_name, artist_path(artist) 
         %td= button_to "Remove", artist_path(artist), method: :delete, class: "btn btn-default"
 
 = form_for @artist do |f| 

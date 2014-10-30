@@ -1,4 +1,7 @@
 class Artist < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :nbs_name, use: :slugged
+  
   has_many :songs, dependent: :destroy
   has_many :metrics
   has_and_belongs_to_many :users

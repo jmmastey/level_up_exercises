@@ -31,7 +31,7 @@ class Triangle
   end
 
   def equilateral?
-    side_1 == side_2 && side_2 == side_3
+    [side_1, side_2, side_3].uniq.length == 1
   end
 
   def isosceles?
@@ -40,7 +40,6 @@ class Triangle
 
   def scalene?
     [side_1, side_2, side_3].uniq.length == 3
-    #side_1 != side_2 && side_1 != side_3 && side_2 != side_3
   end
 
   def right?

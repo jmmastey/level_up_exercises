@@ -2,8 +2,7 @@ require 'csv'
 require 'json'
 
 class Dinosaur
-	attr_accessor :genus, :period, :carnivore, :weight, :walking,
- 								:name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
+	attr_accessor :genus, :period, :carnivore, :weight, :walking, :continent, :description
 
 
 	def initialize(atr)
@@ -99,6 +98,7 @@ class Dinosaur
 	def to_s
 		"---> #{output_all}"
 	end
+
 end
 
 class Dino_catalog
@@ -187,6 +187,22 @@ class Dino_catalog
 		end
 	end
 
+	def output_json
+		json_out = {}
+		@dinosaurs.each_with_index { |d, i|
+			json_out[i] = {
+				genus: d.genus,
+				period: d.period,
+				carnivore: d.carnivore,
+				weight: d.weight,
+				walking: d.walking,
+				continent: d.continent,
+				description: d.description
+				}
+		}
+		return json_out.to_json
+	end
+
 	def to_s
 		"Your roladex of all #{dinosaurs.length} friendly and dead dinosaurs!"
 	end
@@ -215,5 +231,7 @@ end
 if __FILE__ == $0
 	Dino_Ctg = Dino_catalog.new(ARGV[0], ARGV[1])
 	# Add filters here if needed
-	Dino_Ctg.biped_filter.carnivore_filter.period_filter.size_filter.output
+	# To print out a string, append '.output' to methods. 
+	# To return json, append '.output_json', (and make sure to add 'puts' statement to view it)
+	Dino_Ctg.biped_filter.carnivore_filter.period_filter.size_filter.output 
 end

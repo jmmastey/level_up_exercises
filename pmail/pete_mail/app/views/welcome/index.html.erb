@@ -1,4 +1,4 @@
-<div id="bar-top-gray">
+<section id="bar-top-gray">
   <img id="logo" src='https://www.google.com/a/enova.com/images/logo.gif'/>
 
   <div id="search-field-div">
@@ -52,9 +52,9 @@
 	  </div>
 	</div>
   </div>
-</div>
+</section>
 
-<div id="bar-top-white">
+<section id="bar-top-white">
   <div id="mail-options-button-div">
 	<div class="label">Mail</div>
 	<div class="down-arrow"></div>
@@ -107,9 +107,9 @@
 	  </ul>
 	</div>
   </div>
-</div>
+</section>
 
-<div id="bar-left-white">
+<nav id="bar-left-white">
   <div id="compose-button">COMPOSE</div>
   <ul id="folders">
 	<li>Inbox</li>
@@ -117,7 +117,7 @@
 	<li>Sent Mail</li>
 	<li>Drafts</li>
   </ul>
-</div>
+</nav>
 
 <!-- This is a mock-up -->
 <% mail_items = [] %>
@@ -127,7 +127,7 @@
 <%   mail_items << {from: "Men's Wearhouse", subject: "Don't miss 50% off everything", text: "Dear Customer, We value your business and simply cannot let you miss this great one-day sale", time: '9:08am'} %>
 <% end %>
 
-<div id="mail-items-div">
+<section id="mail-items-div">
   <table class="table">
 	<% mail_items.each do |item| %>
 	<tr>
@@ -146,4 +146,4 @@
 	</tr>
 	<% end %>
   </table>
-</div>
+</section>

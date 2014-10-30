@@ -12,7 +12,7 @@ set :bind, "0.0.0.0"
 get "/" do
   session[:bomb] = Bomb.new
   @bomb =  session[:bomb]
-  erb :bomb_view
+  erb :inactive
 end
 
 post "/activate" do
@@ -23,12 +23,12 @@ post "/activate" do
     bomb.activate
   end
   @bomb = session[:bomb]
-  erb :bomb_view
+  erb :bomb_view #change to :activated
 end
 
 post "/deactivate" do
   code = params[:deactivation_code]
-  puts 
+  puts
   if valid_code?(code)
   bomb = session[:bomb]
   bomb.enter_code(code.to_i)
@@ -36,6 +36,9 @@ post "/deactivate" do
  end
   @bomb = session[:bomb]
   erb :bomb_view
+  # :activated if code 'attempt' is incorrect but not past limit
+  # :inactive if code 'attempt' is correct
+  # :exploded if code 'attempt' is incorrect and past limit
 end
 
 def valid_code?(code)

@@ -8,8 +8,9 @@ class Bomb
   def initialize(act_code = 2342, deact_code = 0000)
     @deactivation_code = deact_code
     @activation_code  = act_code
-    @active = false
     @failed_attempts = 0
+
+    @active = false
     @exploded = false
   end
 

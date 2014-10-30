@@ -21,4 +21,8 @@ class ArtistsController < ApplicationController
     end
     redirect_to :back
   end
+
+  def show
+    @artist = Artist.find(params[:id])
+  end
 end

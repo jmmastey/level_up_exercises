@@ -1,9 +1,6 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-
   RADIANS_TO_DEGREES_CONVERSION = 180 / Math::PI
-
-  attr_reader :side_1, :side_2, :side_3
 
   def initialize(side_1, side_2, side_3)
     @side_1 = side_1
@@ -11,16 +8,26 @@ class Triangle
     @side_3 = side_3
   end
 
+  def radians_to_degrees(radians)
+    (radians * RADIANS_TO_DEGREES_CONVERSION).round
+  end
+
   def angle_1
-    radians_to_degrees(Math.acos((@side_2**2 + @side_3**2 - @side_1**2) / (2.0 * @side_2 * @side_3)))
+    numerator = @side_2**2 + @side_3**2 - @side_1**2
+    denominator = 2.0 * @side_2 * @side_3
+    radians_to_degrees(Math.acos(numerator / denominator))
   end
 
   def angle_2
-    radians_to_degrees(Math.acos((@side_1**2 + @side_3**2 - @side_2**2) / (2.0 * @side_1 * @side_3)))
+    numerator = @side_1**2 + @side_3**2 - @side_2**2
+    denominator = 2.0 * @side_1 * @side_3
+    radians_to_degrees(Math.acos(numerator / denominator))
   end
 
   def angle_3
-    radians_to_degrees(Math.acos((@side_1**2 + @side_2**2 - @side_3**2) / (2.0 * @side_1 * @side_2)))
+    numerator = @side_1**2 + @side_2**2 - @side_3**2
+    denominator = 2.0 * @side_1 * @side_2
+    radians_to_degrees(Math.acos(numerator / denominator))
   end
 
   def equilateral?
@@ -40,17 +47,11 @@ class Triangle
   end
 
   def recite_facts
-
     print_equilateral if equilateral?
-
     print_isosceles if isosceles?
-
     print_scalene if scalene?
-
     print_angles
-
     print_right if right?
-
     puts ""
   end
 
@@ -74,15 +75,14 @@ class Triangle
     puts "This triangle is also a right triangle!"
   end
 
-  def radians_to_degrees(radians)
-    (radians * RADIANS_TO_DEGREES_CONVERSION).round
-  end
+  protected
 
+  attr_reader :side_1, :side_2, :side_3
 end
 
 triangles = [
   [5, 5, 5],
-  [5, 12, 13]
+  [5, 12, 13],
 ]
 triangles.each do |sides|
   tri = Triangle.new(*sides)

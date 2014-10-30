@@ -40,4 +40,6 @@ class RobotNameRegistry
     raise NameCollisionError if exists?(name)
     raise PatternError unless matches_schema?(name)
   end
+
+  private :default_name_generator, :exists?, :matches_schema?, :validate
 end

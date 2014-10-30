@@ -12,4 +12,6 @@ class Robot
   def generate_name
     @registry.generate_name(@name_generator)
   end
+
+  private :generate_name
 end

@@ -1,91 +1,160 @@
 require 'csv'
-require 'pry'
+require 'json'
 
 class Dinosaur
-	attr_accessor :genus, :period, :carnivore, :weight, :walking
+	attr_accessor :genus, :period, :carnivore, :weight, :walking,
+ 								:name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
 
-	def initialize(atr = {})
-		@genus = atr.fetch(:genus, "Unknown")
-		@period = atr.fetch(:period, "Unknown")
-		@walking = atr.fetch(:walking, "Unknown")
-		@weight = atr.fetch(:weight, 0)
-		@carnivore = atr.fetch(:carnivore, "Unknown")
+
+	def initialize(atr)
+		carnivore_diets = ['carnivore', 'insectivore', 'piscivore']
+
+		if atr[:diet]
+			if carnivore_diets.include? atr.fetch(:diet).downcase
+				@carnivore = 'yes'
+			else
+				@carnivore = 'no'
+			end
+		elsif atr[:carnivore]
+			@carnivore = atr.fetch(:carnivore).downcase
+		else
+			@carnivore = 'unknown'
+		end
+
+		if atr[:genus]
+			@genus = atr.fetch(:genus, "unknown").downcase
+		elsif atr[:name]
+			@genus = atr.fetch(:name, "unknown").downcase
+		else
+			@genus = "unknown"
+		end	
+
+		if atr[:weight_in_lbs]
+			@weight = atr.fetch(:weight_in_lbs, 0)
+		elsif atr[:weight]
+			@weight = atr.fetch(:weight, 0)
+		else
+			@weight = 0
+		end
+
+		if (@period_check = atr.fetch(:period).split(" ") ).length > 1
+			@period_specific = @period_check.first.downcase
+			@period = @period_check.last.downcase
+		elsif @period_check.length == 1
+			@period = @period_check.last.downcase
+		else
+			@period = "unknown"
+		end
+
+		@walking = atr.fetch(:walking, "unknown").downcase
+		@continent = atr.fetch(:continent, "unknown").downcase
+		@diet = atr.fetch(:diet, "unknown").downcase
+		@description = atr.fetch(:description, "unknown")
+		@output = []
 	end
 
-	def genus_str
-			output << "Genus: #{@genus}" if @genus != "Unknown"
+	def genus_str()
+			@output << "Genus: #{@genus}" if @genus != "unknown"
 	end
  
-	def period_str
-			output << "Period: #{@period}" if @period != "Unknown"
+	def period_str()
+			@output << "Period: #{@period_specific if @period_specific} #{@period}" if @period != "unknown"
 	end
 
-	def walking_str
-			output << "Legs for Walking: #{@walking}" if @walking_str != "Unknown"
+	def walking_str()
+			@output << "Legs for Walking: #{@walking}" if @walking_str != "unknown"
 	end
 
-	def carnivore_str
-			output << "Carnivore?: #{@carnivore}" if @carnivore != "Unknown"
+	def carnivore_str()
+			@output << "Carnivore?: #{@carnivore}" if @carnivore != "unknown"
 	end
 
-	def weight_str
-			output << "Weight (lbs): #{@weight}" if @weight != 0
+	def weight_str()
+			@output << "Weight (lbs): #{@weight}" if @weight != 0
 	end
 
-	def output
-		binding.pry
-		puts [genus_str, period_str, walking_str, carnivore_str, weight_str].join(", ")
+	def continent_str()
+		@output << "Continent: #{@continent}" if @weight != "unknown"
+	end
+	def diet_str()
+		@output << "Diet: #{@diet}" if @diet != "unknown"
+	end
+
+	def description_str()
+		@output << "Description: #{@description}" if @description != "unknown"
+	end
+
+	def output_all()
+		genus_str
+		period_str
+		walking_str
+		carnivore_str
+		weight_str
+		continent_str
+		diet_str
+		description_str
+		return @output.join(", ")
 	end
 
 	def to_s
-		"#{output}"
-		# "#{genus}: #{walking} from #{period} period. Weighed #{weight}lbs and #{carnivore ? 'a carnivore' : 'not a carnivore'}"
+		"---> #{output_all}"
 	end
 end
 
 class Dino_catalog
 	attr_reader :dinosaurs
 
-	def initialize(csv)
+	def initialize(*csv_list)
 		@dinosaurs = []
 		@periods = []
 		@transport_mode = []
 		@carnivorousness = []
 
-		parse_index(csv)
-		variable_mapping()
+		csv_list.each do |csv|
+			parse_index(csv)
+			variable_mapping()
+		end
 	end
 
 	def biped_filter()
 		walking = ''
 
-		until @transport_mode.include? walking.downcase
-		  puts "What is the desired transportation mode?"
-			walking = STDIN.gets.chomp
+		until ['b', 'q'].include? walking
+		  puts "B)iped or Q)uadruped?"
+			walking = STDIN.gets.chomp.downcase
 		end
 
-		@dinosaurs.select! { |dino| dino.walking == walking}
+		if walking == 'b'
+ 			@dinosaurs.select! { |dino| dino.walking == 'biped' }
+ 		else
+ 			@dinosaurs.select! { |dino| dino.walking == 'quadruped' }
+ 		end
 		self
 	end
 
 	def carnivore_filter()
 		carnivore = ''
 
-		until @carnivorousness.include? carnivore.downcase
-		  puts "What is the desired transportation mode?"
-			carnivore = STDIN.gets.chomp
+		until ['y', 'yes', 'n', 'no'].include? carnivore
+		  puts "Is it a carnivore?"
+			carnivore = STDIN.gets.chomp.downcase
 		end
 
-		@dinosaurs.select! { |dino| dino.carnivore == carnivore}
+		if carnivore == 'y' || carnivore == 'yes'
+ 			@dinosaurs.select! { |dino| dino.carnivore == 'yes' }
+ 		else
+ 			@dinosaurs.select! { |dino| dino.carnivore == 'no' }
+ 		end
 		self
 	end
 
 	def period_filter()
 		period = ''
 
-		until @periods.include? period.downcase
+		until @periods.include? period
 		  puts "What time period?"
-			period = STDIN.gets.chomp
+		  puts "Options: #{@periods.uniq.join(", ")}"
+			period = STDIN.gets.chomp.downcase
 		end
 
 		@dinosaurs.select! { |dino| dino.period == period}
@@ -95,9 +164,9 @@ class Dino_catalog
 	def size_filter()
 		weight = ''
 
-		until ['l', 's'].include? weight.downcase
+		until ['l', 's'].include? weight
 		  puts "What size (greater or less than 2 tons)? L)arge or S)mall: "
-			weight = STDIN.gets.chomp
+			weight = STDIN.gets.chomp.downcase
 		end
 
 		if weight == 'l'
@@ -108,10 +177,14 @@ class Dino_catalog
  		self
 	end
 
-	def output
-		@dinosaurs.each { |dino|
-			puts dino
-		}
+	def output()
+		if @dinosaurs.length > 0
+			@dinosaurs.each { |dino|
+				puts dino
+			}
+		else
+			puts 'No dinosaurs fit your criteria.'
+		end
 	end
 
 	def to_s
@@ -126,10 +199,10 @@ class Dino_catalog
 	end
 
 	def load_dinos(dino_hash)
-		@dinosaurs =  dino_hash.map! {|dino| Dinosaur.new(dino) }
+	  dino_hash.map! {|dino| @dinosaurs << Dinosaur.new(dino) }
 	end
 
-	def variable_mapping
+	def variable_mapping()
 		@dinosaurs.each do |dino| 
 			@periods << dino.period.downcase
 			@transport_mode << dino.walking.downcase
@@ -140,7 +213,7 @@ class Dino_catalog
 end
 
 if __FILE__ == $0
-	Dino_Ctg = Dino_catalog.new(ARGV[0])
-	# puts Dino_Ctg.dinosaurs
-	Dino_Ctg.size_filter.output
+	Dino_Ctg = Dino_catalog.new(ARGV[0], ARGV[1])
+	# Add filters here if needed
+	Dino_Ctg.biped_filter.carnivore_filter.period_filter.size_filter.output
 end

@@ -6,7 +6,8 @@ class Utility
     file_array.delete_if { |file| !File.exist?(file) }
   end
 
-  def self.read_in(file_array, dino_arr)
+  def self.read_in(file_array)
+    dino_arr = []
     file_array.each do|file|
 
       CSV.foreach(file, headers: true) do |row|
@@ -25,6 +26,7 @@ class Utility
       end
 
     end
+    # Think about inserting a row with the apporaite table columns.
     dino_arr
   end
 

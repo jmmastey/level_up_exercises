@@ -1,1 +1,19 @@
 %h1= @artist.nbs_name
+
+.bubblechart
+  %ul.bubblechains
+    %li
+      %span Artists
+      %table
+        %tr
+          %td Twitter Followers
+          %td= @artist.fan_count("Twitter")
+        %tr
+          %td Facebook Fans
+          %td= @artist.fan_count("Facebook")
+        %tr
+          %td YouTube Likes
+          %td= @artist.fan_count("YouTube")
+
+%script{ src: "http://people.csail.mit.edu/eob/cts/widgets/bubblechart.cts", 
+         type: "text/cts" }

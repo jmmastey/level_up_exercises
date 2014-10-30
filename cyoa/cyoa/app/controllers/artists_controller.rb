@@ -32,9 +32,6 @@ class ArtistsController < ApplicationController
 
   private
     def set_artist
-      # id = params[:id]
-      # if id.is_a
-      # @artist = Artist.find(params[:id])
       @artist = Artist.friendly.find(params[:id])
     end
 

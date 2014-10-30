@@ -9,6 +9,10 @@ class Metric < ActiveRecord::Base
 
   default_scope -> { order('recorded_on DESC') }
 
+  def unix_time
+    recorded_on.to_time.to_i
+  end
+
   private
 
   def set_recorded_on

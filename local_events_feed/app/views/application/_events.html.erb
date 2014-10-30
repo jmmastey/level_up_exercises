@@ -1,29 +1,20 @@
-	<center class='main-body'>
-	  <table>
-		<!--
-		<tr>
-		  <th>Name</th>
-		  <th>Where</th>
-		  <th>Dates</th>
-		  <th># Shows</th>
-		</tr>
-		-->
-		<% Event.all.each do |event| %>
-		<% member = current_user.has_showing_in?(event) %>
-		<% member_class = member ? "member" : "non-member" %>
-		<tr>
-		  <td class=<%= member_class %> align='left'><span class='name'>
-			  <%= link_to event.name.truncate(40), { action: 'show', id: event.id }, 
-		       { id: "#{event.name}-events" } %></span>
-		  </td>
-		  <td class=<%= member_class %> align='left'><span class='location'><%= event.location.truncate(40) %></span></td>
-		  <td class=<%= member_class %> align='center'><span class='date-range'><%= event.pretty_date_range %></span></td>
-		  <td class=<%= member_class %> align='center'><span class='showing-count'><%= event.pretty_showing_count %></span></td>
-		</tr>
-		<% end %>
-	  </table>
-
-	  <h2>
-		<%= link_to 'Scrape for Events', scrape_path, method: :post %>
-	  </h2>
-	</center>
+<section id='all-events'>
+  <table>
+	<% Event.all.each do |event| %>
+	<% member = current_user.has_showing_in?(event) %>
+	<% member_class = member ? "member" : "non-member" %>
+	<tr>
+	  <td class=<%= member_class %> align='left'><span class='name'>
+		  <%= link_to event.name.truncate(40), { action: 'show', id: event.id }, 
+		      { id: "#{event.name}-events" } %></span>
+	  </td>
+	  <td class=<%= member_class %> align='left'><span class='location'><%= event.location.truncate(30) %></span></td>
+	  <td class=<%= member_class %> align='center'><span class='date-range'><%= event.pretty_date_range %></span></td>
+	  <td class=<%= member_class %> align='center'><span class='showing-count'><%= event.pretty_showing_count %></span></td>
+	</tr>
+	<% end %>
+	<div id="scrape_link">
+	  <%= link_to 'Scrape for Events', scrape_path, method: :post %>
+	</div>
+  </table>
+</section>

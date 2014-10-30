@@ -14,8 +14,61 @@
  *= require_self
  */
 
-.main-body {
-	padding-top: 50px;
+body {
+	background-color: black;
+	color: #AAAAAA;
+}
+
+.page-title {
+	position: fixed;
+	left: 50%;
+	top: 5px;
+	margin-left: -50px;
+	color: yellow;
+	z-index: 15;
+	font-size: 25px;
+	font-family: verdana;
+	font-weight: bold;
+}
+
+#user-event-showings {
+	position: fixed;
+	top: 100px;
+	bottom: 40px;
+	left: 10px;
+	right: 50%;
+}
+
+#user-event-showings table {
+	overflow: auto;
+	font-size: 12px;
+}
+
+#all-events {
+	position: absolute;
+	left: 50%;
+	top: 100px;
+	right: 10px;
+}
+
+#all-events table {
+	position: absolute;
+	top: 0px;
+	left: 0px;	
+	overflow-y: hidden;
+	font-size: 15px;
+}
+
+#scrape_link {
+	position: fixed;
+	left: 50%;
+	bottom: 10px;
+	margin-left: -75px;
+	color: salmon;
+	z-index: 15;
+	font-size: 20px;
+	font-family: verdana;
+	font-weight: bold;	
 }
 
 .title-headings {
@@ -58,10 +111,15 @@
 	display: inline;
 }
 
+#events-table-div {
+	position: fixed;
+}
+
 #all-events-title {
 	position: fixed;
-	left: 40%;
-	top: 1%;
+	left: 50%;
+	top: 5px;
+	margin-left: -50px;
 	color: yellow;
 	z-index: 15;
 	font-size: 25px;
@@ -70,64 +128,55 @@
 }
 
 #event-title {
+	position: fixed;
 	z-index: 15;
-	font-size: 25px;
+	font-size: 20px;
 	font-family: verdana;
 	font-weight: bold;
 }
 
-#event-name {
-	position: fixed;
-	left: 40%;
-	top: 1%;
-	color: yellow;
-	z-index: 20;
+#event-title .label {
+	color: #9999FF;
 }
 
-#event-name #label {
-	color: #9999FF;	
-}
-
-#event-name #value {
+#event-title .value {
 	color: #EEEE55;	
 }
 
-#event-location-label {
+#event-title .event-name {
 	position: fixed;
-	left: 5%;
-	top: 96.4%;
-	font-size: 10px;
+	left: 50%;
+	top: 5px;
+	margin-left: -20px;
+	color: yellow;
+}
+
+#event-title .event-location {
+	position: fixed;
+	left: 50px;
+	bottom: 10px;
 	color: #5555CC;
 }
 
-#event-location {
+#event-title .event-link {
 	position: fixed;
-	left: 25%;
-	top: 96.4%;
-	font-size: 15px;
-	z-index: 15;
+	right: 50px;
+	bottom: 10px;
+	color: #5555CC;
 }
 
-#event-location #label {
-	color: #9999FF;
-}
-
-#event-location #value {
-	color: #55FF55;
-}
-
-#event-link {
-	position: fixed;
-	left: 75%;
-	top: 96.4%;
-	font-size: 15px;
-	z-index: 15;
-}
-
-#event-link #label {
-	color: #9999FF;
-}
-
-#event-link #value {
+#event-title .event-link value a {
 	color: salmon;
+}
+
+#event-showings {
+	position: absolute;
+	left: 50%;
+	top: 100px;
+	right: 10px;
+}
+
+#event-showings table {
+	font-size: 18px;
+	font-family: verdana;
 }

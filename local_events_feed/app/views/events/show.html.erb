@@ -1,26 +1,22 @@
 <body>
   <% if signed_in? %>
     <%= render :partial => "session_bar.html.erb" %>
-	<div class='dim-table' style='position: fixed; top: 5%; left: 0%; padding-top: 0px;'>
-	  <%= render :partial => "user.html.erb" %>
-	</div>
-	<div class='focus-table' style='position: absolute; top: 5%; left: 50%; padding-top: 0px;'>
-	  <%= render :partial => "event.html.erb" %>
-	</div>
+	<%= render :partial => "user.html.erb" %>
+	<%= render :partial => "event.html.erb" %>
 	<div id='event-title'>
-	  <div id='event-name'>
-		<span id='label'>Showings For:</span>&nbsp
-		<span id='value'><%= @event.name %></span>
+	  <div class='event-name'>
+		<span class='label'>Showings For:</span>&nbsp
+		<span class='value'><%= @event.name %></span>
 	  </div>
-	  <div id='event-location'>
-		<span id='label'>Location:</span>&nbsp
-		<span id='value'><%= @event.location %></span>
+	  <div class='event-location'>
+		<span class='label'>Location:</span>&nbsp
+		<span class='value'><%= @event.location %></span>
 	  </div>
-	  <div id='event-link'>
-		<span id=label'>Information:</span>&nbsp
-		<span id='value'><%= link_to 'Website', @event.link %></span>
+	  <div class='event-link'>
+		<span class='label'>Information:</span>&nbsp
+		<span class='value'><%= link_to 'Website', @event.link %></span>
 	  </div>
-	</p>
+	</div>
   <% else %>
     <h3>Please <%= link_to 'sign in', new_session_path %></h3>
   <% end %>

@@ -1,15 +1,5 @@
-body {
-	background-color: black;
-	color: #AAAAAA;
-}
-
 table {
-	font-size: 12px;
-}
-
-.showings-table {
-	font-size: 18px;
-	font-family: verdana;
+	font-size: 10px;
 }
 
 th {

@@ -12,7 +12,7 @@ class Dino
   end
 
   def to_s
-    "#{@name} #{@period} #{@continent} #{@diet} #{@weight} \
+    "#{@name} Period: #{@period} #{@continent} #{@diet} #{@weight} \
 #{@walking} #{@description}"
   end
 end

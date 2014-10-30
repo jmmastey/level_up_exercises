@@ -10,13 +10,11 @@ class Dinodex
   dino_array = []
   file_array = options.files.sort
 
-  file_array=Utility.verify_file(file_array)
+  file_array = Utility.verify_file(file_array)
 
-  #look into this
-  Utility.read_in(file_array, dino_array)
+  dino_array = Utility.read_in(file_array, dino_array)
 
-  #look into this one too
-  Utility.pass_off_filters(options, dino_array)
+  dino_array = Utility.pass_off_filters(options, dino_array)
 
   Utility.print(dino_array)
 end

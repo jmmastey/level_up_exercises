@@ -1,5 +1,5 @@
 class PatternError < RuntimeError
-  def initialize(msg=nil)
+  def initialize(msg = nil)
     @message = msg
   end
 

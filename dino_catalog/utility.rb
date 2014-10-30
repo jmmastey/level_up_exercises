@@ -1,46 +1,44 @@
-class Utility
+require_relative 'dino.rb'
+require_relative 'filter.rb'
 
+class Utility
   def self.verify_file(file_array)
-    file_array.each{|file| file_array.delete(file) if !File.exist?(file)}
+    file_array.delete_if { |file| !File.exist?(file) }
   end
 
-  def self.read_in(file_array, my_array) #seperate this off
+  def self.read_in(file_array, dino_array)
+    file_array.each do|file|
+      CSV.foreach(file, headers: true) do |row|
 
-  file_array.each {|file|
-    CSV.foreach(file, headers: true) do |row|
+        name = row['Genus'] || row['NAME']
+        period = row['Period'] || row['PERIOD']
+        continent = row['CONTINENT']
+        diet = row['Carnivore'] || row['DIET']
+        weight = row['Weight'] || row['WEIGHT_IN_LBS']
+        walking = row['Walking'] || row['WALKING']
+        description = row['DESCRIPTION']
 
-      name= row['Genus'] || row['NAME']
-      period=row['Period'] || row['PERIOD']
-      continent=row['CONTINENT']
-      diet=row['Carnivore'] || row['DIET']
-      weight=row['Weight'] || row['WEIGHT_IN_LBS']
-      walking=row['Walking'] || row['WALKING']
-      description=row['DESCRIPTION']
-
-      my_array<< Dino.new(name, period, continent, diet, weight, walking, description) #defaults come last
+        dino_array << Dino.new(name: name, period: period,\
+        continent: continent, diet: diet, weight: weight,\
+        walking: walking, description: description)
+      end
+      dino_array
 
     end
-    my_array
+  end
 
-  }
-  end #end read
-
-  def self.pass_off_filters(options, my_array)
-
-  options=options.to_h.each do |k,v|
-      Filter.filter_by_walking(my_array, v) if k.to_s.eql?("Walking")
-      Filter.filter_by_weight(my_array, v) if k.to_s.eql?("Weight")
-      Filter.filter_by_diet(my_array, v) if k.to_s.eql?("Diet")
-      Filter.filter_by_period(my_array, v) if k.to_s.eql?("Period")
+  def self.pass_off_filters(options, dino_array)
+    options.to_h.each do |catagory, term|
+      Filter.filter_by_walking(dino_array, term) if catagory.to_s.eql?("Walking")
+      Filter.filter_by_weight(dino_array, term) if catagory.to_s.eql?("Weight")
+      Filter.filter_by_diet(dino_array, term) if catagory.to_s.eql?("Diet")
+      Filter.filter_by_period(dino_array, term) if catagory.to_s.eql?("Period")
     end
-    my_array
-  end #pass off
+    dino_array
+  end
 
-  def self.print(my_array)
-    puts my_array
-    puts "Found Nothing uing the option flags inputed" if my_array.empty?
-  end  #end print
-
-
+  def self.print(dino_array)
+    puts dino_array
+    puts "Found Nothing uing the option flags inputed" if dino_array.empty?
+  end
 end
-

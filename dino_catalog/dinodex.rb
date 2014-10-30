@@ -1,22 +1,22 @@
 
 require 'csv'
-require_relative 'dino.rb'
-require_relative 'filter.rb'
-require_relative 'optparse.rb'
+
+require_relative 'option_parser.rb'
 require_relative 'utility.rb'
 
 class Dinodex
+  options = OptionParser.parse(ARGV)
 
-  options = Optparse.parse(ARGV)
+  dino_array = []
+  file_array = options.files.sort
 
-  my_array=[]
+  file_array=Utility.verify_file(file_array)
 
-  Utility.verify_file(file_array=options.files.sort!)
+  #look into this
+  Utility.read_in(file_array, dino_array)
 
-  Utility.read_in(file_array, my_array)
+  #look into this one too
+  Utility.pass_off_filters(options, dino_array)
 
-  Utility.pass_off_filters(options, my_array)
-
-  Utility.print(my_array)
-
+  Utility.print(dino_array)
 end

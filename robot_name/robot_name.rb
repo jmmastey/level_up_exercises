@@ -1,17 +1,13 @@
 require_relative 'registry'
+require_relative 'registry_error'
 
 class Robot
   attr_reader :name
 
   def initialize(registry, parameters = {})
-    @registry = registry
-    @name_generator = parameters[:name_generator]
-    generate_name
-  end
+    raise RegistryError unless registry.is_a? RobotNameRegistry
 
-  def generate_name
-    @registry.generate_name(@name_generator)
+    name_generator = parameters[:name_generator]
+    registry.generate_name(name_generator)
   end
-
-  private :generate_name
 end

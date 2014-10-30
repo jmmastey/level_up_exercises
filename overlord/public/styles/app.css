@@ -1,0 +1,40 @@
+header h1 {
+  color: red;
+  font-size: 30px;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 100px
+}
+
+h2 {
+  color: #006dcc;
+  margin-left: 50px;
+}
+
+.center-bomb {
+  margin: auto;
+  margin-top: 50px;
+  width: 150px;
+}
+
+#bomb-active {
+  width: 150px;
+  height: 150px;
+}
+
+.bomb-form {
+  width: 300px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.bomb-form input {
+  padding: 15px;
+}
+
+.bomb-form button {
+  margin-bottom: 12px;
+}

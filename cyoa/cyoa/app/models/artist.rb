@@ -54,16 +54,20 @@ class Artist < ActiveRecord::Base
   end
 
   def fan_count(service_name = nil)
+    metric = fan_metrics(service_name).first
+
+    return 0 unless metric
+
+    metric.value
+  end
+
+  def fan_metrics(service_name = nil)
     category_name = "fans"
     category_name = "likes" if service_name == "YouTube"
 
     service = Service.find_by_name(service_name)
     category = Category.find_by_name(category_name)
-    metric = metrics.where(category: category, service: service).first
-
-    return 0 unless metric
-
-    metric.value
+    metrics.where(category: category, service: service)
   end
 
   def update_metrics

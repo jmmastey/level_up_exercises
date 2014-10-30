@@ -15,7 +15,7 @@ Feature: Apply Coupons
     And I am on the shopping cart page
 
   Scenario Outline: Attempt to use product coupons
-    When I add <quantity> of "<item>" to shopping cart
+    When I add <quantity> of "<item>" to shopping carto.o
     When I set "Coupon" with "<coupon_code>"
     And I press "Add Coupon"
     Then I should see total discount of "<total_discount>"

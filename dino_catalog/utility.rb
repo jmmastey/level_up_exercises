@@ -38,8 +38,8 @@ class Utility
     dino_arr
   end
 
-  def self.print(dino_array)
-    puts dino_array
-    puts "Found Nothing uing the option flags inputed" if dino_array.empty?
+  def self.print(dino_arr)
+    puts dino_arr
+    puts "Found Nothing uing the option flags inputed" if dino_arr.empty?
   end
 end

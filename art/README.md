@@ -6,4 +6,4 @@ Anyway, now that this mess is your mess, your first job (even before adding the 
 
 ### The Assignment
 
-This codebase is specially prepared to be monstrously slow. Congratulations! Take a look at http://leveluprails.herokuapp.com/scaling.html for the suggested learning and fixes.
+This codebase is specially prepared to be monstrously slow. Congratulations! Take a look at http://leveluprails.com/scaling.html for the suggested learning and fixes.

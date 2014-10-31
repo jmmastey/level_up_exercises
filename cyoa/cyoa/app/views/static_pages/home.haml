@@ -1,3 +1,15 @@
-%h1 Popular Artist Metrics
+%h1 Example Comparisons
+
+- if current_user
+  %h4
+    Go to 
+    = link_to "my artists", artists_path
+    to customize.
+- else
+  %h4
+    = link_to "Sign up", new_user_registration_path
+    or
+    = link_to "login", new_user_session_path
+    to customize.
 
 = render partial: "artists/compare_artists"

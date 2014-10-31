@@ -22,38 +22,6 @@ input[type=submit] {
   background: rgba(255,0,0,0.3); /* red */
 } 
 
-.navbar-default {
-  background: rgba(71,13,96,0.90); /*Purple slightly light*/
-  color: white;
-}
-
-.navbar-default .navbar-brand {
-  color: white;
-}
-
-.navbar-default .navbar-brand a:hover {
-  color: #cccccc;
-}
-
-.navbar-default .navbar-nav > .active > a, 
-.navbar-default .navbar-nav > .active > a:hover, 
-.navbar-default .navbar-nav > .active > a:focus {
-  background: rgba(71,13,96,1); /*Purple dark */
-  color: white;
-}
-
-.navbar-default .navbar-nav > li > a {
-  color: white;
-}
-
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-  color: #cccccc;
-}
-
-.navbar-default .navbar-nav > .open > a, 
-.navbar-default .navbar-nav > .open > a:hover, 
-.navbar-default .navbar-nav > .open > a:focus {
-  background: rgba(71,13,96,1); /*Purple dark */
-  color: #cccccc;
+h1, h2, h4 {
+  text-align: center;
 }

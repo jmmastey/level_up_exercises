@@ -14,8 +14,8 @@ class Triangle
     [side1, side2, side3].uniq.length == 2
   end
 
-  def scalene
-    if ! (equilateral || isosceles)
+  def scalene  #logic fail
+    if (equilateral || isosceles)
       false
     else
       true
@@ -23,9 +23,9 @@ class Triangle
   end
 
   def recite_facts
-    puts 'This triangle is equilateral!' if equalateral
+    puts 'This triangle is equilateral!' if equilateral
     puts 'This triangle is isosceles!' if isosceles
-    puts 'This triangle is scalene and mathematically boring.' if scalene
+    puts 'This triangle is scalene.' if scalene
 
     angles = calculate_angles(side1, side2, side3)
     puts 'The angles of this triangle are ' + angles.join(',')
@@ -50,6 +50,7 @@ end
 triangles = [
   [5, 5, 5],
   [5, 12, 13],
+  [6, 6, 10],
 ]
 triangles.each do |sides|
   tri = Triangle.new(*sides)

@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     showing = Showing.find(params[:showing_id])
     user.remove_showing(showing)
-    redirect_to user
+    redirect_to request.referer
   end
 
   def add_showing_to_calendar

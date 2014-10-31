@@ -3,18 +3,18 @@ require 'optparse'
 class DinosaurOptParser
   BOOLEAN_FILTERING_OPTIONS = [
     # [short_flag, long_flag, description, option_flag_key, option_flag_value]
-    ['-b', '--biped', "Displays bipeds only", :biped, true],
-    ['-q', '--quadruped', "Displays quadrupeds only", :biped, false],
-    ['-c', '--carnivore', "Displays carnivores only", :carnivore, true],
-    ['-r', '--herbivore', "Displays herbivores only", :carnivore, false],
-    ['-l', '--big', "Displays big dinosaurs (> 2 TON) only", :large, true],
-    ['-s', '--small', "Displays small dinosaurs (<= 2 TON) only", :large, false],
+    ['-b', '--biped', "Displays bipeds", :biped, true],
+    ['-q', '--quadruped', "Displays quadrupeds", :biped, false],
+    ['-c', '--carnivore', "Displays carnivores", :carnivore, true],
+    ['-r', '--herbivore', "Displays herbivores", :carnivore, false],
+    ['-l', '--big', "Displays big dinosaurs (> 2 TON)", :large, true],
+    ['-s', '--small', "Displays small dinosaurs (<= 2 TON)", :large, false],
   ]
 
   TEXT_FILTERING_OPTIONS = [
     # [short_flag, long_flag, description, option_flag_key]
-    ['-g', '--continent CONTINENT', "Displays dinosaurs from CONTINENT only", :continent],
-    ['-p', '--period PERIOD', "Displays dinosaurs from PERIOD only", :period],
+    ['-g', '--continent CONTINENT', "Displays dinosaurs from CONTINENT", :continent],
+    ['-p', '--period PERIOD', "Displays dinosaurs from PERIOD", :period],
   ]
 
   def initialize
@@ -24,10 +24,23 @@ class DinosaurOptParser
 
   def parse(args)
     set_all_options
-    # validate_args(args)
     @opt_parser.parse!(args)
     @options
   end
+
+  def set_all_options
+    section_header('Input')
+    set_input_opts
+    section_header('Filtering Options')
+    set_boolean_filtering_opts
+    set_text_filtering_opts
+    section_header('Output')
+    set_output_options
+    section_header('Help')
+    set_help_opts
+  end
+
+  private
 
   def section_header(header)
     @opt_parser.separator("")
@@ -60,22 +73,10 @@ class DinosaurOptParser
   end
 
   def set_output_options
-    @opt_parser.on('-j', '--json [FILE]', 
+    @opt_parser.on('-j', '--json [FILE]',
       "Outputs to a JSON file. [default: dinosaurs.json]") do |f|
       @options[:json] = f || 'dinosaurs.json'
     end
-  end
-
-  def set_all_options
-    section_header('Input')
-    set_input_opts
-    section_header('Filtering Options')
-    set_boolean_filtering_opts
-    set_text_filtering_opts
-    section_header('Output')
-    set_output_options
-    section_header('Help')
-    set_help_opts
   end
 
   def set_help_opts

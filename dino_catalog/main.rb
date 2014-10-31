@@ -9,21 +9,13 @@ opt_parser = DinosaurOptParser.new
 catalog    = DinosaurCatalog.new
 options    = opt_parser.parse(ARGV)
 
-if options[:files].nil? || options[:files].empty?
-  $stderr.puts "ERROR: You should provide a input file name"
-  $stderr.puts ""
-  exit
-end
-
 options[:files].each do |f|
-  dinosaurs = DinosaurParser.parse(f)
+  dinosaurs = DinosaurParser.new(f).parse
   catalog.add(dinosaurs)
 end
 
 options.each do |k, v|
-  unless (k == :files) || (k == :json)
-    catalog.add_filter(k, v)
-  end
+  catalog.add_filter(k, v) unless (k == :files) || (k == :json)
 end
 
 if options.key? :json

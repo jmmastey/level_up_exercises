@@ -1,23 +1,22 @@
 class Dinosaur
   BIPED                  = "Biped"
   QUADRUPED              = "Quadruped"
-  CRETACEOUS             = "Cretaceous"
   BIG_DINOSAUR_THRESHOLD = 4000
   CARNIVORE              = %w(carnivore insectivore piscivore)
-  ATTRIBUTES             = %w(name
-                              period
-                              continent
-                              diet
-                              weight_in_lbs
-                              walking
-                              description
-                           )
 
-  attr_reader :name, :continent, :diet, :weight_in_lbs, :walking, :description
+  ATTRIBUTES             = [:name,
+                            :period,
+                            :continent,
+                            :diet,
+                            :weight_in_lbs,
+                            :walking,
+                            :description]
+
+  attr_reader(*ATTRIBUTES)
 
   def initialize(params = {})
     ATTRIBUTES.each do |attr|
-      instance_variable_set("@#{attr}", params[attr.to_sym])
+      instance_variable_set("@#{attr}", params[attr])
     end
   end
 
@@ -25,16 +24,9 @@ class Dinosaur
     @walking == BIPED
   end
 
-  def period
-    if @period.include? CRETACEOUS
-      CRETACEOUS
-    else
-      @period
-    end
-  end
-
   def carnivore?
-    !!@diet && CARNIVORE.include?(@diet.downcase)
+    return false if @diet.nil?
+    CARNIVORE.include?(@diet.downcase)
   end
 
   def big_dinosaur?
@@ -42,30 +34,29 @@ class Dinosaur
   end
 
   def display
-    ATTRIBUTES.each { |attr| display_by_key attr }
+    ATTRIBUTES.each { |attr| print_attribute(attr) }
   end
 
   def to_hash
-    ATTRIBUTES.inject({}) do |a, e|
-      a[e] = instance_variable_get("@#{e}")
-      a
+    ATTRIBUTES.each_with_object({}) do |key, a|
+      a.store(key, send(key) || "")
     end
   end
 
+  private
+
   def titelize(key)
-    key.split("_").map(&:upcase).join(" ")
+    key.to_s.split("_").map(&:upcase).join(" ")
   end
 
-  def display_by_key(key)
-    return unless value = instance_variable_get("@#{key}")
-
-    title = titelize(key)
-    display_field(title, value)
+  def attribute_as_pair(key)
+    [key, send(key)]
   end
 
-  def display_field(title, value)
-    puts format("%-15s: %s", title, value)
-  end
+  def print_attribute(key)
+    return unless respond_to? key
 
-  private :titelize, :display_by_key, :display_field
+    value = send(key)
+    puts format("%-15s: %s", titelize(key), value) if value
+  end
 end

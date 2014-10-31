@@ -2,101 +2,79 @@ require "csv"
 require_relative "dinosaur.rb"
 
 class DinosaurParser
-  CSV_EXTENSION    = "csv"
-  HEADERS_ALLOWED  = Dinosaur::ATTRIBUTES
-  
-  DIET_CARNIVORE   = "carnivore"
-  DIET_HERBIVORE   = "herbivore"
-
-  CONTINENT_AFRICA = "Africa"
+  HEADERS          = Dinosaur::ATTRIBUTES
 
   HEADER_ALIASES   = {
-    "genus" => "name",
-    "weight" => "weight_in_lbs",
-    "carnivore" => "diet",
+    genus: :name,
+    weight: :weight_in_lbs,
+    carnivore: :diet,
   }
 
-  CONVERTERS       = {
-    "diet"  => :diet_converter,
-    "continent" => :continent_converter,
+  DEFAULT_VALUES = {
+    continent: "Africa",
   }
 
-  class << self
-    attr_accessor :param_hash
+  DIET_CARNIVORE   = "Carnivore"
+  DIET_HERBIVORE   = "Herbivore"
+  CRETACEOUS       = "Cretaceous"
+
+  def initialize(filename)
+    validate(filename)
+
+    @csv_rows = CSV.read(filename,
+      headers: true,
+      header_converters: header_converters,
+      converters: converters,
+    )
+
+    fix_missing_headers
   end
 
-  def self.parse(filename)
-    if valid_file?(filename)
-      process(filename)
-    else
-      err = "ERROR: #{filename} either does not exist or is not a csv file"
-      $stderr.puts err
+  def validate(filename)
+    return if valid?(filename)
+    raise "#{filename} does not exist or is not a csv file"
+  end
+
+  def valid?(filename)
+    (File.extname(filename) == ".csv") && (File.exist?(filename))
+  end
+
+  def parse
+    @csv_rows.inject([]) { |a, e| a << Dinosaur.new(e.to_hash) }
+  end
+
+  private
+
+  def fix_missing_headers
+    @csv_rows.each do |r|
+      HEADERS.each { |h| r << [h, DEFAULT_VALUES[h]] unless r[h] }
     end
   end
 
-  def self.process(filename)
-    rows      = CSV.read filename, headers: true
-
-    rows.inject([]) do |a, e|
-      params = process_row(e)
-      a << Dinosaur.new(params)
-    end
+  def header_converters
+    [
+      ->(h) { h.downcase },
+      lambda(&method(:dinosaur_header_converter)),
+      :symbol,
+    ]
   end
 
-  def self.process_row(row)
-    default_hash = create_default_params
-
-    row.each do |header, value|
-      header = process_header(header)
-      default_hash[header.to_sym] = value if header
-    end
-
-    default_hash.each_with_object({}) do |(key, value), hash|
-      hash[key] = process_value(key.to_s, value)
-    end
+  def converters
+    [lambda(&method(:dinosaur_diet_converter)),
+     lambda(&method(:dinosaur_period_converter))]
   end
 
-  def self.process_header(header)
-    header = header.downcase.gsub(" ", "_")
-
-    if HEADERS_ALLOWED.include?(header)
-      header
-    elsif HEADERS_ALLOWED.include?(HEADER_ALIASES[header])
-      HEADER_ALIASES[header]
-    end
+  def dinosaur_header_converter(header)
+    HEADER_ALIASES[header.to_sym] || header
   end
 
-  def self.process_value(header, value)
-    return value unless CONVERTERS.include?(header)
-
-    send(CONVERTERS[header], value)
+  def dinosaur_diet_converter(value, fields)
+    return value unless (fields.header == :diet) && (value =~ /^(Yes|No)$/)
+    value == 'Yes' ? DIET_CARNIVORE : DIET_HERBIVORE
   end
 
-  def self.create_default_params
-    unless @param_hash
-      @param_hash = HEADERS_ALLOWED.each_with_object({}) do |header, hash|
-        hash[header.to_sym] = nil
-      end
-    end
-
-    @param_hash.clone
-  end
-
-  def self.valid_file?(filename)
-    (File.extname(filename) == ".#{CSV_EXTENSION}") && (File.exist?(filename))
-  end
-
-  def self.diet_converter(value)
-    if value.casecmp("yes") == 0
-      DIET_CARNIVORE
-    elsif value.casecmp("no") == 0
-      DIET_HERBIVORE
-    else
-      value
-    end
-  end
-
-  def self.continent_converter(value)
-    value || CONTINENT_AFRICA
+  def dinosaur_period_converter(value, fields)
+    return value unless (fields.header == :period) && (value =~ /Cretaceous/i)
+    CRETACEOUS
   end
 end

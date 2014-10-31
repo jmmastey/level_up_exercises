@@ -4,11 +4,11 @@ require_relative 'dinosaur_parser.rb'
 
 class DinosaurCatalog
   FILTER_METHODS = {
-    :biped => :filter_bipeds,
-    :carnivore => :filter_carnivores,
-    :continent => :filter_continent,
-    :large => :filter_large,
-    :period => :filter_period,
+    biped: :filter_bipeds,
+    carnivore: :filter_carnivores,
+    continent: :filter_continent,
+    large: :filter_large,
+    period: :filter_period,
   }
 
   DEFAULT_JSON_FILENAME = "dinosaurs.json"
@@ -24,13 +24,8 @@ class DinosaurCatalog
   end
 
   def add_filter(filter, *args)
-    if FILTER_METHODS.key? filter
-      @filters << {
-        :filter => FILTER_METHODS[filter],
-        :args => args,
-      }
-    end
-
+    filter_method = FILTER_METHODS[filter]
+    @filters << { filter: filter_method, args: args } if filter_method
     self
   end
 
@@ -117,7 +112,7 @@ class DinosaurCatalog
   end
 
   def convert_to_array
-    @filtered_dinosaurs.inject([]) { |a, e| a << e.to_hash; a}
+    @filtered_dinosaurs.each_with_object([]) { |e, a| a << e.to_hash }
   end
 
   private :init_filtered_dinosaurs, :execute_all_filters,

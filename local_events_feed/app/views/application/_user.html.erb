@@ -8,7 +8,7 @@
 	  <th>Calendar</th>
       <th>Remove</th>
 	</tr>
-	  <% current_user.showings.each do |showing| %>
+	  <% current_user.sorted_showings.each do |showing| %>
     <tr>
 	  <td class='member'><%= showing.pretty_local_date %></td>
 	  <td class='member'><%= link_to showing.name.truncate(25), showing.event %></td>

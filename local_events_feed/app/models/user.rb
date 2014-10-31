@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
     showings.any? { |showing| showing.in?(event.showings) }
   end
 
+  def sorted_showings
+    Showing.sort_by_time(showings)
+  end
+
   private
 
   def create_member_token

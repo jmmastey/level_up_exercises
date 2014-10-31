@@ -3,7 +3,7 @@
 	Logged-In:
 	<span class='username'> <%= current_user.name %> </span>
 	&nbsp|&nbsp<%= link_to 'Home', current_user %>
-	&nbsp|&nbsp<%= link_to 'Events', events_path %>
+	&nbsp|&nbsp<%= link_to 'Events', events_path, :id => 'session-bar-events' %>
   </nav>
   <div class='logout'>
 	  <%= link_to 'Logout', session_path(id: 0), method: :delete %>

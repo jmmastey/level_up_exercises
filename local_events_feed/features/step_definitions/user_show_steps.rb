@@ -13,7 +13,7 @@ When /^they click on remove for a showing$/ do
 end
 
 When /^they click on the all-events link$/ do
-  click_link("Events")
+  click_link('session-bar-events')
 end
 
 Then /^they see their showings on their page$/ do

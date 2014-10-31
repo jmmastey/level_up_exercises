@@ -39,6 +39,10 @@ describe User do
     expect(user).not_to have_showing_in(event)
   end
 
+  it 'can produce a list of its showings sorted by time' do
+    expect(user_with_showings.sorted_showings[0].time.hour).to eq(8)
+  end
+
   it "will not add duplicate showings" do
     user_with_showings
     expect { user_with_showings.add_showing(showing) }.not_to change{ user_with_showings.showings.count }

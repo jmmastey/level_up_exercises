@@ -8,7 +8,7 @@ end
 
 def create_events_with_showings
   [
-   create_event("Party A", "North Side", "www.party.com/party-a.html", [eight_oclock, nine_oclock, ten_oclock]),
+   create_event("Party A", "North Side", "www.party.com/party-a.html", [ten_oclock, nine_oclock, eight_oclock]),
    create_event("Party B", "South Side", "www.party.com/party-b.html", [eight_oclock]),
    create_event("Party C", "East Side", "www.party.com/party-c.html", [nine_oclock, ten_oclock])
   ]

@@ -7,28 +7,24 @@ class Triangle
   end
 
   def equilateral
-    side1 == side2 && side2 == side3
+    true if side1 == side2 && side2 == side3
   end
 
   def isosceles
-    [side1, side2, side3].uniq.length == 2
+    true if [side1, side2, side3].uniq.length == 2
   end
 
   def scalene
-    if equilateral || isosceles
-      false
-    else
-      true
-    end
+    true if !equilateral && !isosceles
   end
 
   def recite_facts
+    angles = calculate_angles(side1, side2, side3)
+    puts 'The angles of this triangle are ' + angles.join(',')
+
     puts 'This triangle is equilateral!' if equilateral
     puts 'This triangle is isosceles!' if isosceles
     puts 'This triangle is scalene!' if scalene
-
-    angles = calculate_angles(side1, side2, side3)
-    puts 'The angles of this triangle are ' + angles.join(',')
 
     puts 'This triangle is also a right triangle!' if angles.include? 90
     puts ''

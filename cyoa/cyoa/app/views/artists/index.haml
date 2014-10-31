@@ -13,9 +13,9 @@
 = form_for @artist do |f| 
   .form-group
     = f.label :name
-    = f.text_field :name, class: "form-control", placeholder: "Search for another artist"
+    = f.text_field :name, class: "form-control", placeholder: "Search for another artist to compare"
   .form-group
-    = f.submit "Find Artist", class: "btn btn-default"
+    = f.submit "Add Artist", class: "btn btn-default", id: "add-artist"
 
 = render partial: "compare_artists"
 

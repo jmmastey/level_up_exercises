@@ -4,12 +4,12 @@
   %h4
     Go to 
     = link_to "my artists", artists_path
-    to customize.
+    to customize comparisons.
 - else
   %h4
     = link_to "Sign up", new_user_registration_path
     or
     = link_to "login", new_user_session_path
-    to customize.
+    to customize comparisons.
 
 = render partial: "artists/compare_artists"

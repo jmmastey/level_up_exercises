@@ -39,7 +39,12 @@ body {
 	right: 50%;
 }
 
+#user-event-showings.scrollable {
+	position: absolute;
+}
+
 #user-event-showings table {
+	position: absolute;
 	overflow: auto;
 	font-size: 12px;
 }
@@ -49,6 +54,7 @@ body {
 	left: 50%;
 	top: 100px;
 	right: 10px;
+	bottom: 100px;
 }
 
 #all-events table {
@@ -179,4 +185,81 @@ body {
 #event-showings table {
 	font-size: 18px;
 	font-family: verdana;
+}
+
+#home-menu {
+	position: fixed;
+	top: 40px;
+	left: 50%;
+	right: 10px;
+}
+
+.cool-round-button {
+	width: 130px;
+	height: 130px;
+	border: none;
+	border-radius: 65px;
+	background-color: rgba(17, 17, 153, 0.7);
+	top: 50%;
+	text-align: center;
+	padding: 0px;
+	padding: 2px;
+	font-size: 15px;
+	font-family: verdana;
+	font-weight: bold;
+}
+
+.cool-round-button:hover {
+	background-color: rgba(60, 60, 210, 0.7);
+}
+
+.cool-round-button a {
+	position: relative;
+	top: 40%;
+	text-decoration: none;
+	font-size: 15px;
+	font-family: verdana;
+	font-weight: bold;
+}
+
+.cool-round-button a:link {
+	color: rgba(153, 153, 255, 0.9);
+	opacity: 1.0;
+}
+
+.cool-round-button a:visited {
+	color: rgba(153, 153, 255, 0.9);
+}
+
+.cool-round-button a:hover {
+    color: #9999FF;
+}
+
+.cool-round-button a:active {
+    color: #9999FF;
+}
+
+
+#home-menu .cool-round-button.events {
+	position: absolute;
+	right: 200px;
+	top: 150px;
+}
+
+#home-menu .cool-round-button.sources {
+	position: absolute;
+	right: 320px;
+	top: 330px;
+}
+
+#home-menu .cool-round-button.scrape {
+	position: absolute;
+	right: 500px;
+	top: 450px;
+}
+
+#event-showings .cool-round-button.events {
+	position: fixed;
+	top: 200px;
+	right: 100px;
 }

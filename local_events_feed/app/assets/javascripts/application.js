@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function setUserShowingsScrollable() {
+	$( "#user-event-showings" ).addClass("scrollable");
+}

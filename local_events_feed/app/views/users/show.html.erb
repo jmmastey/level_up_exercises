@@ -8,8 +8,15 @@
   <% if signed_in? %>
     <%= render :partial => "session_bar.html.erb" %>
     <%= render :partial => "user.html.erb" %>
+	<%= render :partial => "home_menu.html.erb" %>
 	<div class='page-title'><%= first_name %>'s Events</div>
   <% else %>
     <h3>Please <%= link_to 'sign in', new_session_path %></h3>
   <% end %>
 </body>
+
+<script type="text/javascript">
+$( document ).ready( function() {
+  setUserShowingsScrollable();
+});
+</script>

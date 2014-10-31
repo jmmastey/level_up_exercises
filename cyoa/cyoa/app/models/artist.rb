@@ -77,6 +77,14 @@ class Artist < ActiveRecord::Base
     process_metrics(nbs_service_metrics)
   end
 
+  def graph_metrics(service_name = nil)
+    metrics_array = []
+    fan_metrics(service_name).each do |metric|
+        metrics_array << [metric.unix_time * 1000, metric.value]
+    end
+    metrics_array
+  end
+
   private
 
   def update_start_date

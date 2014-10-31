@@ -23,7 +23,8 @@ class Arrowhead
   end
 
   def self.confirm_region_exists(region)
-    raise "Unknown region, please provide a valid region." unless CLASSIFICATIONS.include? region
+    raise "Unknown region, please provide a valid region."\
+    unless CLASSIFICATIONS.include? region
   end
 
   def self.determine_arrowhead(shapes_in_region, arrowhead_shape)
@@ -33,9 +34,9 @@ class Arrowhead
   end
 
   def self.confirm_shape_in_region(regional_shapes, arrowhead_shape)
-    raise "Unknown shape value. Are you sure you know what you're talking about?" unless regional_shapes.include? arrowhead_shape
+    raise "Unknown shape value. Are you sure you know what you're talking about?"\
+    unless regional_shapes.include? arrowhead_shape
   end
-
 end
 
 puts Arrowhead.classify(:northern_plains, :bifurcated)

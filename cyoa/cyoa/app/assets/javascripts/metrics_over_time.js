@@ -1,7 +1,7 @@
 $(function () {
     var seriesOptions = [],
         seriesCounter = 0,
-        names = ['MSFT', 'AAPL', 'GOOG'],
+        names = ['facebook', 'youtube', 'twitter'],
         // create the chart when all data is loaded
         createChart = function () {
 
@@ -41,7 +41,7 @@ $(function () {
 
     $.each(names, function (i, name) {
 
-        $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?',    function (data) {
+        $.getJSON('http://localhost:3000/artists/beyonce.json', function (data) {
 
             seriesOptions[i] = {
                 name: name,

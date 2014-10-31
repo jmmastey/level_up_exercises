@@ -28,6 +28,11 @@ class ArtistsController < ApplicationController
       flash[:alert] = "Whoops! We were unable to locate that artist you requested :("
       redirect_to artists_path
     end
+
+    respond_to do |format|
+      format.html
+      format.json { render :layout => false }
+    end
   end
 
   private

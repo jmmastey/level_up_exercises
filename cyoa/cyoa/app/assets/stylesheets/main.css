@@ -10,7 +10,13 @@ input[type=submit] {
   box-shadow:none !important;
   margin: 10px 0;
   padding: 6px;
-  background: rgba(71,13,96,0.9); 
+  background: rgba(71,13,96,0.88); 
+  color: white;
+}
+
+input[type=submit]:hover,
+input[type=submit]:focus {
+  background: rgba(71,13,96,1); 
   color: white;
 }
 

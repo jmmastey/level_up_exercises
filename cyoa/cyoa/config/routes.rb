@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  root "static_pages#home"
 
   devise_for :users #, path_name: { sign_in: "login", sign_out: "logout" }
-  root "static_pages#home"
 
   resources :charts, only: :index
   resources :artists, only: [:index, :destroy, :create, :show]

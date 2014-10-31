@@ -1,0 +1,15 @@
+/* Main styles */
+
+input[type=submit] {
+  border-radius: 3px;
+  border:none !important;
+  box-shadow:none !important;
+}
+
+#flash_notice {
+  background: rgba(90,200,50,0.3); /* green */
+} 
+
+#flash_alert {
+  background: rgba(255,0,0,0.3); /* red */
+} 

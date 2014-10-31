@@ -8,7 +8,7 @@
 
   %body
     = render partial: "/layouts/navigation"
-    - flash.each do |name, message|
-      = content_tag :div, message, id: "flash_#{name}", class: "alert alert-#{name}"
     .container
+      - flash.each do |name, message|
+        = content_tag :div, message, id: "flash_#{name}", class: "alert alert-#{name}"
       = yield

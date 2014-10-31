@@ -74,9 +74,10 @@
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   border:1px solid #c9c9c9;
-  /*background:url(../img/glyphicons_085_repeat.png);
+/*  background:url(../img/glyphicons_085_repeat.png);
   background-repeat: no-repeat;*/
 } 
+
  .more{margin-left: 10px;
   width:55px;
   height:30px;
@@ -85,7 +86,6 @@
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   border:1px solid #c9c9c9;
-
 }
 
  .settings{
@@ -134,7 +134,9 @@
   width:90px;
   float:left;
   }
-  .bold{
+ 
+  .active{
+    border-left:4px solid #dd4b39;
     font-weight: bold;
     color:#dd4b39;
   }
@@ -152,14 +154,18 @@
   }
 
   ul{
-    list-style-type: none;
+  list-style-type: none;
   }
   ul li{
-    line-height: 170%;
-    cursor: default;
+  line-height: 170%;
+  cursor: default;
   }
 
-  .list{
-    font-family:Arial;
-    font-size: 80%;
+  .menu{
+  font-family:Arial;
+  font-size: 80%;
+  }
+
+  ul.refresher{
+  display:none
   }

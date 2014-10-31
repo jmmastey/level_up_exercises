@@ -1,19 +1,7 @@
 $(document).ready(function(){
-
-  $('li').click(function() {
-     $("li").removeClass("bold");
-});
-   $('li').click(function(event){
-     event.stopPropagation();
-     $(this).addClass("bold");
-     });
-
-    $('li').click(function() {
-     $(this).css({"border-left": "0px"});
-});
-   $('li').click(function(event){
-     event.stopPropagation();
-     $(this).css({"border-left":"4px solid #dd4b39"});
+   $('.menu li ').click(function(){
+     $(".menu li").removeClass("active");
+     $(this).addClass("active");
 
      });
 

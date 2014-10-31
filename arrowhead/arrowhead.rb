@@ -16,13 +16,9 @@ class Arrowhead
   }
 
   # FIXME: I don't have time to deal with this.
-  def self.classify(region, shape)
-    shapes = regional_shapes(region)
-    determine_arrowhead(shapes, shape) if region?(region)
-  end
-
-  def self.regional_shapes(region)
-    CLASSIFICATIONS[region]
+  def self.classify(region, arrowhead_shape)
+    regional_shapes = CLASSIFICATIONS[region]
+    determine_arrowhead(regional_shapes, arrowhead_shape) if region?(region)
   end
 
   def self.determine_arrowhead(shapes_in_region, shape)

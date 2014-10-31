@@ -31,11 +31,12 @@ class ArtistsController < ApplicationController
   end
 
   private
-    def set_artist
-      @artist = Artist.friendly.find(params[:id])
-    end
 
-    def artist_params
-      params.require(:artist).permit(:slug)
-    end
+  def set_artist
+    @artist = Artist.friendly.find(params[:id])
+  end
+
+  def artist_params
+    params.require(:artist).permit(:slug)
+  end
 end

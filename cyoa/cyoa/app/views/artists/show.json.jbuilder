@@ -1,4 +1,4 @@
-json.extract! @artist, :name
+# json.extract! @artist, :name
 json.twitter @artist.graph_metrics("Twitter")
-#json.facebook @artist.fan_metrics("Facebook"), :unix_time, :value
-#json.youtube @artist.fan_metrics("YouTube"), :unix_time, :value
+json.facebook @artist.graph_metrics("Facebook")
+json.youtube @artist.graph_metrics("YouTube")

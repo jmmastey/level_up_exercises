@@ -79,7 +79,7 @@ class Artist < ActiveRecord::Base
 
   def graph_metrics(service_name = nil)
     metrics_array = []
-    fan_metrics(service_name).each do |metric|
+    fan_metrics(service_name).reverse.each do |metric|
         metrics_array << [metric.unix_time * 1000, metric.value]
     end
     metrics_array

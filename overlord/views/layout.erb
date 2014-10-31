@@ -1,13 +1,24 @@
 <html>
 <head>
-<title>Da BOMB!</title>
+<title>Somebody Set Up Us The Bomb!</title>
 <link type="text/css" rel="stylesheet" href="bomb.css">
+<script type="text/javascript" src="bomb.js"></script>
 </head>
-<body>
+<body onload="initializeInterface()">
+<div id="messagesPanel" class="outerBevel foregroundSurface">
+  <div id="messages" class="foregroundSurface content">
+    <h1 class="label">System messages</h1>
+    <div id="messageFrame" class="controlFrame">
+      <p id="messageDisplay" class="innerBevel textDisplay">
+        <%= @system_message ||= '&nbsp;' %>
+      </p>
+    </div>
+  </div>
+</div>
 <div class="verticalmargin">
   <img src="danger2.svg">
 </div>
-<div id="content">
+<div id="content" class="content">
   <%= yield %>
 </div>
 <div class="verticalmargin">

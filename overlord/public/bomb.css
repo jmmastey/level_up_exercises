@@ -11,7 +11,16 @@ div.verticalmargin img {
   width: 100%;
   height: 30px;
 }
-div#content {
+.textDisplay {
+  overflow: hidden;
+  font-size: 20pt;
+  height: 28pt;
+  background: black;
+  text-align: center;
+  color: green;
+  margin: 0px;
+}
+div.content {
   margin-top: auto;
   margin-bottom: auto;
   overflow: hidden;
@@ -36,15 +45,17 @@ div#content {
   border-right: 5px solid #444444;
   border-radius: 10px;
 }
-h1 {
-  text-align: center;
+.label {
   font-variant: small-caps;
   font-size: 14pt;
+}
+.label:first-letter {
+  text-transform: lowercase;
+}
+h1 {
+  text-align: center;
   padding: 0px;
   margin: 0px;
-}
-h1:first-letter {
-  text-transform: lowercase;
 }
 .controlFrame {
   margin: 0px;
@@ -55,6 +66,9 @@ h1:first-letter {
   border-right: 5px solid #444455;
   border-bottom: 5px solid #444455;
   border-radius: 10px;
+}
+#messagesPanel {
+  position: relative;
 }
 #controlPanel {
   position: relative;
@@ -83,26 +97,25 @@ div#activation-controls {
   position: relative;
 }
 div { position: relative; }
-img.button {
-  display: block;
+input[type="image"].button {
   height: 65px;
   width: 65px;
 }
+img.button {
+  display: inline;
+  height: 65px;
+  width: 65px;
+  margin-left: auto;
+  margin-right: auto;
+}
 div.codeEntry input[type="text"] {
   width: 100%;
-  font-size: 20pt;
-  background: black;
-  text-align: center;
-  color: green;
 }
 div.codeEntry {
   position: absolute;
   top: 5px;
   left: 5px;
   width: 360px;
-}
-p.buttonLabel {
-  display: inline;
 }
 div.codeActionOuter {
   position: absolute;
@@ -114,16 +127,23 @@ div.codeActionOuter {
 div.codeActionInner {
   height: 60px;
 }
-#armingCodeActionInner {
+#armingButton {
   background: #441111;
+}
+div.armingButtonPushed {
+  background: red !important;
+}
+div.disarmingButtonPushed {
+  background: blue !important;
 }
 #disarmingCodeAction .enabled {
 /*  background: #5099ff; */
 }
-#disarmingCodeActionInner {
+#disarmingButton {
   background: #050533;
 }
 .squareButton {
+  margin: 0.5em;
   font-size: 20pt;
   text-align: center;
   vertical-align: middle;
@@ -151,4 +171,23 @@ div.codeActionInner {
 #cancelControlFrame {
   position: absolute;
   top: 140px;
+}
+#timerControlInner {
+  text-align: center;
+}
+#timerControlBox span { 
+  vertical-align: middle;
+}
+#timerEntryFrame {
+  display: inline-block;
+}
+#timerEntry {
+  display: inline-block;
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+  vertical-align: middle;
+}
+#timerControlBox img.button {
+  vertical-align: middle;
 }

@@ -17,9 +17,9 @@ end
 
 USER_MESSAGES =
 {
-  exploded: "All your base are belong to us",
+  exploded: "All your base are belong to us.",
   ready_to_disarm: "Enter disarming code, push DISARMED and commit to confirm.  You have no chance to survive. Make your time. HA HA HA.",
-  ready_to_arm: "Somebody set up us the bomb! Enter arming code, push ARMED and commit to confirm",
+  ready_to_arm: "Somebody set up us the bomb! Enter arming code, push ARMED and commit to confirm.",
   ready_to_lock: "Enter arming and disarming codes and commit to lock in. Take off every zig!"
 }
 def setup_session
@@ -30,6 +30,7 @@ end
 
 before do
   setup_session
+  apply_timer_value if (request.post?)
   determine_system_message
 end
 
@@ -70,6 +71,10 @@ post '/disarm' do
   do_and_report_error_if(bomb.armed?) { bomb.disarm!(params[:disarming_code]) }
 end
 
+not_found do
+  redirect CONTROL_PANEL_URL
+end
+
 def do_and_report_error_if(guard_condition = true)
   check_exploded
 
@@ -85,6 +90,7 @@ def do_and_report_error_if(guard_condition = true)
   rescue Supervillian::InvalidStateError
     set_system_message("Can't be done")
   rescue => ex
+    puts ex.message
     set_system_message("Ooops.. something bad happened. Don't do that again")
   end
 

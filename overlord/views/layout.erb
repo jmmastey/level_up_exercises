@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>Somebody Set Up Us The Bomb!</title>
@@ -9,9 +10,9 @@
   <div id="messages" class="foregroundSurface content">
     <h1 class="label">System messages</h1>
     <div id="messageFrame" class="controlFrame">
-      <p id="messageDisplay" class="innerBevel textDisplay">
+      <marquee id="messageDisplay" class="innerBevel textDisplay">
         <%= @system_message ||= '&nbsp;' %>
-      </p>
+      </marquee>
     </div>
   </div>
 </div>

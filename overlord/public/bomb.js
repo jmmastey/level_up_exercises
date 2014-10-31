@@ -3,7 +3,6 @@ function initializeInterface()
   if (CONTROLPANEL.state == 'armed')
   {
     lightControlButton(armingButton());
-    flashControlButton(disarmingButton(), 1000, 50);
     startCountdown();
   }
   else if (CONTROLPANEL.state == "locked")
@@ -11,10 +10,7 @@ function initializeInterface()
     lightControlButton(disarmingButton());
     lightActionButton(timerEntryUp());
     lightActionButton(timerEntryDown());
-    flashControlButton(armingButton(), 1000, 50);
   }
-
-  window.setInterval(function() { scrollMessage(); }, 100);
 };
 
 function armingButton() { return document.getElementById("armingButton"); }
@@ -180,14 +176,6 @@ function adjustDelayTime(incr)
   var newValue = (timerValue() || 10) + incr;
   if (newValue < 0) newValue = 0;
   timerEntry().value = newValue;
-}
-
-function scrollMessage()
-{
-  var displayElement = messageDisplay();
-  var newMessage = displayElement.innerHTML || ''
-  newMessage = newMessage.substr(1) + newMessage.substr(0, 1);
-  displayElement.innerHTML = newMessage;
 }
 
 function startCountdown()

@@ -109,7 +109,7 @@ img.button {
   margin-right: auto;
 }
 div.codeEntry input[type="text"] {
-  width: 100%;
+  width: 325px;
 }
 div.codeEntry {
   position: absolute;
@@ -164,6 +164,9 @@ div.disarmingButtonPushed {
 #commitControl {
   border: 5px inset gray;
   border-radius: 10px;
+}
+#labelCommit {
+  color: red;
 }
 #cancelControl {
   width: 115px;

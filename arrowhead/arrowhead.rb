@@ -21,11 +21,17 @@ class Arrowhead
     determine_arrowhead(regional_shapes, arrowhead_shape) if region_exists?(region)
   end
 
-  def self.determine_arrowhead(shapes_in_region, shape)
-    if shapes_in_region.include? shape
-      arrowhead = shapes_in_region[shape]
+  def self.determine_arrowhead(shapes_in_region, arrowhead_shape)
+    if shapes_in_region.include? arrowhead_shape
+      arrowhead = shapes_in_region[arrowhead_shape]
       puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-    else
+    end
+  end
+
+  def shape_in_region?(shapes, shape)
+    if shapes.include? shape
+       true
+     else
       raise "Unknown shape value. Are you sure you know what you're talking about?"
     end
   end

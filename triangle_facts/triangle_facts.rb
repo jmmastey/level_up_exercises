@@ -14,8 +14,8 @@ class Triangle
     [side1, side2, side3].uniq.length == 2
   end
 
-  def scalene  #logic fail
-    if (equilateral || isosceles)
+  def scalene
+    if equilateral || isosceles
       false
     else
       true

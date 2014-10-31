@@ -90,7 +90,7 @@ class DinosaurCatalog
     filter_common { |dino| dino.carnivore? == condition }
   end
 
-  def filter_big_dinousaurs(condition = true)
+  def filter_large(condition = true)
     filter_common { |dino| dino.big_dinosaur? == condition }
   end
 
@@ -122,6 +122,6 @@ class DinosaurCatalog
 
   private :init_filtered_dinosaurs, :execute_all_filters,
     :print_filtered_dinosaurs, :reset_filtered_dinosaurs, :filter_bipeds,
-    :filter_carnivores, :filter_big_dinousaurs, :filter_continent,
+    :filter_carnivores, :filter_large, :filter_continent,
     :filter_common, :pre_dump, :to_a
 end

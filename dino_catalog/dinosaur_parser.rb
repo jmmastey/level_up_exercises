@@ -29,30 +29,26 @@ class DinosaurParser
     if valid_file?(filename)
       process(filename)
     else
-      err = "ERR:#{filename} either does not exist or is not a csv file"
+      err = "ERROR: #{filename} either does not exist or is not a csv file"
       $stderr.puts err
     end
   end
 
   def self.process(filename)
-    dinosaurs = []
     rows      = CSV.read filename, headers: true
 
-    rows.each do |row|
-      params = process_row(row)
-      dinosaurs << Dinosaur.new(params)
+    rows.inject([]) do |a, e|
+      params = process_row(e)
+      a << Dinosaur.new(params)
     end
-
-    dinosaurs
   end
 
   def self.process_row(row)
     default_hash = create_default_params
 
     row.each do |header, value|
-      if header = process_header(header)
-        default_hash[header.to_sym] = value
-      end
+      header = process_header(header)
+      default_hash[header.to_sym] = value if header
     end
 
     default_hash.each_with_object({}) do |(key, value), hash|
@@ -67,8 +63,6 @@ class DinosaurParser
       header
     elsif HEADERS_ALLOWED.include?(HEADER_ALIASES[header])
       HEADER_ALIASES[header]
-    else
-      nil
     end
   end
 
@@ -80,9 +74,8 @@ class DinosaurParser
 
   def self.create_default_params
     unless @param_hash
-      @param_hash = {}
-      HEADERS_ALLOWED.each do |header|
-        @param_hash[header.to_sym] = nil
+      @param_hash = HEADERS_ALLOWED.each_with_object({}) do |header, hash|
+        hash[header.to_sym] = nil
       end
     end
 
@@ -95,9 +88,11 @@ class DinosaurParser
 
   def self.diet_converter(value)
     if value.casecmp("yes") == 0
-      value = DIET_CARNIVORE
+      DIET_CARNIVORE
+    elsif value.casecmp("no") == 0
+      DIET_HERBIVORE
     else
-      value = DIET_HERBIVORE
+      value
     end
   end
 

@@ -22,7 +22,7 @@ class Arrowhead
   def self.classify(region, shape)
     if CLASSIFICATIONS.include?(region)==false
       #raise "Not valid region"
-      raise InvalidRegionError.new
+      raise InvalidRegionError, 'Not a Valid region'
     elsif CLASSIFICATIONS.include?(region)==true
        shapes = CLASSIFICATIONS[region]
        if shapes.include?(shape)==true
@@ -30,17 +30,18 @@ class Arrowhead
           puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
        elsif shapes.include?(shape)==false
           #raise "Not a valid shape"
-          raise InvalidShapeError
+          raise InvalidShapeError, "Not a Valid shape"
       end
     end
  end
 end
 
-begin
-  puts Arrowhead.classify(:northern_plains, :bifurcated)
-rescue InvalidRegionError
-  puts "Not a valid region"
-rescue InvalidShapeError
-  puts "Not a valid shape"
-end
+puts Arrowhead.classify(:northern_plains, :bifurcated)
+# begin
+ # puts Arrowhead.classify(:northern_plains, :bifurcated)
+# rescue InvalidRegionError
+  #puts "Not a valid region"
+#rescue InvalidShapeError
+ # puts "Not a valid shape"
+#end
 

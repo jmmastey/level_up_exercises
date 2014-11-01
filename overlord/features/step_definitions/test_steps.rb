@@ -1,8 +1,8 @@
-Given(/^anything$/) do
+Given(/The bomb is not started/)
   true
 end
 
-When(/^I hit the root page$/) do
+When(/^I start the bomb$/)
   visit('/')
 end
 

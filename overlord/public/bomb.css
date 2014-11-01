@@ -19,6 +19,7 @@ div.verticalmargin img {
   text-align: center;
   color: green;
   margin: 0px;
+  font-family: "Lucida Console", Courier, monospace
 }
 div.content {
   margin-top: auto;

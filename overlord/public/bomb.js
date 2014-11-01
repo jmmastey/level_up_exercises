@@ -1,16 +1,26 @@
-function initializeInterface()
+initializations =
 {
-  if (CONTROLPANEL.state == 'armed')
+  'armed': function()
   {
     lightControlButton(armingButton());
     startCountdown();
-  }
-  else if (CONTROLPANEL.state == "locked")
+  },
+  'locked': function()
   {
     lightControlButton(disarmingButton());
     lightActionButton(timerEntryUp());
     lightActionButton(timerEntryDown());
+  },
+  'initial': function()
+  {
+    flashActionButtonLights();
   }
+}
+
+function initializeInterface()
+{
+  var handler = initializations[CONTROLPANEL.state];
+  if (handler) handler();
 };
 
 function armingButton() { return document.getElementById("armingButton"); }
@@ -184,16 +194,16 @@ function startCountdown()
 
   var countdown = function() 
   {
-    var newValue = timerValue();
-
-    if (newValue <= 0)
+    if (timerValue() <= 0)
     {
-      location.reload(true);
+      messageDisplay().stop;
+      messageDisplay().innerHTML =
+        "This bomb will now self-destruct. Have a nice day! :-)";
+      window.setTimeout(function() { location.reload(true); }, 2000);
       return;
     }
 
-    if (newValue > 0) newValue--;
-    timerEntry().value = newValue;
+    timerEntry().value = timerValue() - 1;
     window.setTimeout(countdown, 1000);
   }
 

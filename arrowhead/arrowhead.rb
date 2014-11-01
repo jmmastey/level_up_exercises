@@ -1,3 +1,6 @@
+class InvalidRegionError<StandardError;end
+class InvalidShapeError<StandardError;end
+
 class Arrowhead
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
@@ -15,20 +18,29 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
+
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
+    if CLASSIFICATIONS.include?(region)==false
+      #raise "Not valid region"
+      raise InvalidRegionError.new
+    elsif CLASSIFICATIONS.include?(region)==true
+       shapes = CLASSIFICATIONS[region]
+       if shapes.include?(shape)==true
+          arrowhead = shapes[shape]
+          puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
+       elsif shapes.include?(shape)==false
+          #raise "Not a valid shape"
+          raise InvalidShapeError
       end
-    else
-      raise "Unknown region, please provide a valid region."
     end
-  end
+ end
 end
 
-puts Arrowhead.classify(:northern_plains, :bifurcated)
+begin
+  puts Arrowhead.classify(:northern_plains, :bifurcated)
+rescue InvalidRegionError
+  puts "Not a valid region"
+rescue InvalidShapeError
+  puts "Not a valid shape"
+end
+

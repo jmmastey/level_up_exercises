@@ -1,20 +1,136 @@
+function ControlObject(elementID)
+{
+  var self = this;  // Reference myself wherever JS sets "this" weird
+  var element = document.getElementById(elementID);
+  this.element = function() { return element };
+  
+  this.value = function() { return element.value };
+  this.setValue = function(newValue) { element.value = newValue };
+  this.text = function() { return element.innerHTML };
+  this.setText = function(newText) { element.innerHTML = newText };
+
+  // FLASHING: Subclasses define: isLitUp(), dim(), lightUp()
+
+  function toggleLight()
+    { self.isLitUp() ? self.dim() : self.lightUp() }
+
+  var flash_timer = null;
+  
+  this.stopFlashing = function()
+  {
+    if (!flash_timer) return;
+  
+    window.clearTimeout(flash_timer);
+    flash_timer = null;
+    self.dim();
+  }
+
+  this.flash = function(offtime, ontime)
+  {
+    offtime = offtime || 150
+    ontime = ontime || offtime
+    self.stopFlashing();
+
+    var flashMyself = function() 
+    {
+      if (!flash_timer) return;
+      toggleLight();
+      flash_time = self.isLitUp() ? ontime : offtime;
+      flash_timer = window.setTimeout(flashMyself, flash_time);
+    };
+
+    flash_timer = window.setTimeout(flashMyself, ontime);
+  }
+
+  this.isDisabled = function() 
+    { return element.getAttribute('DISABLED') == 1 || element.disabled }
+
+  this.disabled = function(true_or_false)
+    { element.setAttribute('DISABLED', (element.disabled = true_or_false) ? 1 : 0) }
+ 
+  // For buttons only.
+  this.buttonDown = function() { self.isDisabled() || self.lightUp() };
+  this.buttonUp = function() { self.isDisabled() || self.dim() };
+}
+
+function ControlButton(elementID)
+{
+  var self = this;
+  ControlObject.call(this, elementID);
+
+  var element = this.element();
+  var imageWhenDark = element.getAttribute('IMAGEWHENDARK');
+  var imageWhenLit = element.getAttribute('IMAGEWHENLIT');
+
+  function resourceBasename(resource) { return resource.split('/').pop() }
+
+  this.lightUp = function() { element.src = imageWhenLit };
+  this.dim = function() { element.src = imageWhenDark };
+  this.isLitUp = function() 
+    { return resourceBasename(element.src) == imageWhenLit };
+}
+
+ControlButton.prototype = new ControlObject();
+
+function ActionButton(elementID)
+{
+  ControlObject.call(this, elementID);
+
+  var element = this.element();
+  var classList = element.classList;
+  var classWhenLit = element.getAttribute('CLASSWHENLIT');
+
+  this.isLitUp = function() { return classList.contains(classWhenLit) };
+  this.lightUp = function() { classList.add(classWhenLit) };
+  this.dim = function() { classList.remove(classWhenLit) };
+}
+
+ActionButton.prototype = new ControlObject();
+
+function TimerEntry(elementID, resetToValue)
+{
+  var self = this;
+  ControlObject.call(this, elementID);
+
+  var element = this.element();
+  this.value = function() { return parseInt(element.value) || 0 };
+  this.setValue = function(newValue)
+  {
+    var value = parseInt(newValue);
+    element.value = (isNaN(value) ? resetToValue : value);
+  }
+
+  this.countDown = function(whatToDoAtTheEnd)
+  {
+    self.disabled(true);
+
+    var countdown = function() 
+    {
+      if (self.value() <= 0)
+        return whatToDoAtTheEnd();
+
+      self.setValue(self.value() - 1);
+      window.setTimeout(countdown, 1000);
+    }
+
+    window.setTimeout(countdown, 1000);
+  };
+}
+
 initializations =
 {
   'armed': function()
   {
-    lightControlButton(armingButton());
+    armingButton().lightUp();
     startCountdown();
   },
   'locked': function()
   {
-    lightControlButton(disarmingButton());
-    lightActionButton(timerEntryUp());
-    lightActionButton(timerEntryDown());
+    disarmingButton().lightUp();
+    timerEntryUp().lightUp();
+    timerEntryDown().lightUp();
   },
-  'initial': function()
-  {
-    flashActionButtonLights();
-  }
+  'initial': function() { flashActionButtons() }
 }
 
 function initializeInterface()
@@ -23,150 +139,49 @@ function initializeInterface()
   if (handler) handler();
 };
 
-function armingButton() { return document.getElementById("armingButton"); }
-function disarmingButton() { return document.getElementById("disarmingButton"); }
-function commitButton() { return document.getElementById("buttonCommit"); }
-function cancelButton() { return document.getElementById("buttonCancel"); }
-function timerEntry() { return document.getElementById('timerEntry'); }
-function timerValueField() { return document.getElementById('timerValue'); }
-function timerEntryUp () { return document.getElementById('timerEntryUp'); }
-function timerEntryDown() { return document.getElementById('timerEntryDown'); }
-function messageDisplay() { return document.getElementById('messageDisplay'); }
-function bombCommandField() { return document.getElementById('bombCommand'); }
-function controlPanelForm() { return document.getElementById('controlPanelForm'); }
-function classWhenLit(control) { return control.getAttribute('CLASSWHENLIT'); }
-
-function controlIsDisabled(control_element)
+(function()
 {
-  return control_element.getAttribute('DISABLED') == 1;
+  var ctrls = {}; // Keep private
+
+  getElement = function (elementID, typeConstructor)   // But define externally
+    { return ctrls[elementID] || (ctrls[elementID] = new typeConstructor(elementID)); }
+})()
+
+function armingButton() { return getElement("armingButton", ActionButton) };
+function disarmingButton() { return getElement("disarmingButton", ActionButton) };
+function commitButton() { return getElement("commitButton", ControlButton) };
+function cancelButton() { return getElement("cancelButton", ControlButton) };
+function timerEntry() { return getElement("timerEntry", TimerEntry) };
+function timerEntryUp() { return getElement("timerEntryUp", ControlButton) };
+function timerEntryDown() { return getElement("timerEntryDown", ControlButton) };
+function messageDisplay() { return getElement("messageDisplay", ControlObject) };
+function controlPanelForm() { return getElement("controlPanelForm", ControlObject) };
+
+function armingButtonPushed()
+{
+  if (armingButton().isDisabled()) return;
+  controlPanelForm().element().action = "/arm"
+  armingButton().flash(100);
+  flashActionButtons();
 }
 
-function lightControlButton(button)
+function disarmingButtonPushed()
 {
-  button.classList.add(classWhenLit(button));
+  if (disarmingButton().isDisabled()) return;
+  controlPanelForm().element().action = "/disarm"
+  disarmingButton().flash(100);
+  flashActionButtons();
 }
-
-function dimControlButton(button)
+function flashActionButtons()
 {
-  button.classList.remove(classWhenLit(button));
-}
-
-function buttonIsLit(button)
-{
-  return button.classList.contains(classWhenLit(button));
-}
-
-function controlButtonDown(button)
-{
-  if (controlIsDisabled(button)) return;
-  lightControlButton(button);
-}
-
-function controlButtonUp(button)
-{
-  if (controlIsDisabled(button)) return;
-  dimControlButton(button);
-}
-
-function toggleControlLight(button)
-{
-  if (buttonIsLit(button))
-    dimControlButton(button);
-  else
-    lightControlButton(button);
-}
-
-function stopFlashingControlButton(button)
-{
-  if (!button.flash_timer) return;
-  
-  window.clearTimeout(button.flash_timer);
-  delete button.flash_timer; 
-  dimControlButton(button);
-}
-
-function flashControlButton(button, offtime, ontime)
-{
-  offtime = offtime || 150
-  ontime = ontime || offtime
-  stopFlashingControlButton(button);
-
-  var flashIt = function() 
-  {
-    if (!button.flash_timer) return;
-    toggleControlLight(button); 
-    flash_time = buttonIsLit(button) ? ontime : offtime;
-    button.flash_timer = window.setTimeout(flashIt, flash_time);
-  };
-
-  button.flash_timer = window.setTimeout(flashIt, ontime);
-}
-
-function armingButtonPushed(arming_button)
-{
-  if (controlIsDisabled(arming_button)) return;
-  controlPanelForm().action = "/arm"
-  flashControlButton(arming_button, 100);
-  flashActionButtonLights();
-}
-
-function disarmingButtonPushed(disarming_button)
-{
-  if (controlIsDisabled(disarming_button)) return;
-  controlPanelForm().action = "/disarm"
-  flashControlButton(disarming_button, 100);
-  flashActionButtonLights();
-}
-
-function actionButtonLitImage(button) { return button.getAttribute('IMAGEWHENLIT'); }
-function actionButtonDarkImage(button) { return button.getAttribute('IMAGEWHENDARK'); }
-
-function lightActionButton(button)
-{
-  button.src = actionButtonLitImage(button);
-}
-
-function dimActionButton(button)
-{
-  button.src = actionButtonDarkImage(button);
-}
-
-function toggleActionButtonLight(button)
-{
-  lit_image_src = actionButtonLitImage(button);
-
-  if (button.src.split('/').pop() == lit_image_src)
-    dimActionButton(button);
-  else
-    lightActionButton(button);
-}
-
-function flashActionButtonLights()
-{
-  var commitBtn = commitButton();
-  var cancelBtn = cancelButton();
-
-  lightActionButton(commitBtn);
-  lightActionButton(cancelBtn);
-
-  var flashEm = function() {
-    toggleActionButtonLight(commitBtn);
-    toggleActionButtonLight(cancelBtn);
-  };
-
-  cancelBtn.flash_timer = window.setInterval(flashEm, 500);
+  commitButton().flash(500);
+  cancelButton().flash(500);
 }
 
 function stopFlashingActionButtons()
 {
-  var cancelBtn = cancelButton();
-
-  if (!cancelBtn.flash_timer) return;
-
-  window.cancelInterval(cancelBtn.flash_timer);
-  delete cancelBtn.flash_timer;
-  dimActionButton(cancelBtn);
-  dimActionButton(commitButton());
+  commitButton.stopFlashing();
+  cancelButton.stopFlashing();
 }
 
 function codeEntryFocused(textbox)
@@ -177,35 +192,24 @@ function codeEntryFocused(textbox)
   textbox.already_cleared = true;
 }
 
-function timerValue() { return parseInt(timerEntry().value) || 0 }
-
 function adjustDelayTime(incr)
 {
   if (CONTROLPANEL.state != 'locked') return;
 
-  var newValue = (timerValue() || 10) + incr;
+  var newValue = timerEntry().value() + incr;
   if (newValue < 0) newValue = 0;
-  timerEntry().value = newValue;
+  timerEntry().setValue(newValue);
 }
 
 function startCountdown()
 {
-  timerEntry().disabled = true;
-
-  var countdown = function() 
+  var refreshAfterBombExplodes = function() 
   {
-    if (timerValue() <= 0)
-    {
-      messageDisplay().stop;
-      messageDisplay().innerHTML =
-        "This bomb will now self-destruct. Have a nice day! :-)";
-      window.setTimeout(function() { location.reload(true); }, 2000);
-      return;
-    }
+    messageDisplay().element().stop;
+    messageDisplay().element().innerHTML =
+      "This bomb will now self-destruct. Have a nice day! :-)";
+    window.setTimeout(function() { location.reload(true); }, 2000);
+  };
 
-    timerEntry().value = timerValue() - 1;
-    window.setTimeout(countdown, 1000);
-  }
-
-  window.setTimeout(countdown, 1000);
+  timerEntry().countDown(refreshAfterBombExplodes);
 }

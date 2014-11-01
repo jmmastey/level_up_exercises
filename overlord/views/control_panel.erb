@@ -29,9 +29,9 @@
             <h1 id="labelArmingButton" class="label">Arm: use with caution</h1>
             <div id="armingButton" class="innerBevel foregroundSurface codeActionInner"
                 disabled="<%= arming_button_state %>" classWhenLit="armingButtonPushed"
-                onmousedown="controlButtonDown(this)"
-                onmouseup="controlButtonUp(this)"
-                onclick="armingButtonPushed(this)">
+                onmousedown="armingButton().buttonDown()"
+                onmouseup="armingButton().buttonUp()"
+                onclick="armingButtonPushed()">
                 <p class="buttonLabel squareButton">ARMED</p>
             </div>
           </div>
@@ -50,9 +50,9 @@
             <div id="disarmingButton" class="innerBevel foregroundSurface codeActionInner"
                 disabled="<%= disarming_button_state %>"
                 classWhenLit="disarmingButtonPushed"
-                onmousedown="controlButtonDown(this)"
-                onmouseup="controlButtonUp(this)"
-                onclick="disarmingButtonPushed(this)">
+                onmousedown="disarmingButton().buttonDown()"
+                onmouseup="disarmingButton().buttonUp()"
+                onclick="disarmingButtonPushed()">
                 <p class="buttonLabel squareButton">DISARMED</p>
             </div>
           </div>
@@ -62,20 +62,20 @@
         <div id="commitControlFrame" class="controlFrame">
           <div id="commitControl" class="actionButton">
             <h1 id="labelCommit" class="label">Commit</h1>
-            <input type="image" id="buttonCommit" class="button" src="redbutton.svg"
+            <input type="image" id="commitButton" class="button" src="redbutton.svg"
               imageWhenDark="redbutton.svg" imageWhenLit="redbutton-lit.svg"
-              onmousedown="lightActionButton(this)"
-              onmouseup="dimActionButton(this)">
+              onmousedown="commitButton().buttonDown()"
+              onmouseup="commitButton().buttonUp()">
           </div>
         </div>
         <div id="cancelControlFrame" class="controlFrame">
           <div id="cancelControl" class="actionButton">
             <h1 id="labelCancel" class="label">Cancel</h1>
-            <input type="image" id="buttonCancel" class="button" src="bluebutton.svg"
+            <input type="image" id="cancelButton" class="button" src="bluebutton.svg"
               formaction="/cancel"
               imageWhenDark="bluebutton.svg" imageWhenLit="bluebutton-lit.svg"
-              onmousedown="lightActionButton(this)"
-              onmouseup="dimActionButton(this)">
+              onmousedown="cancelButton().buttonDown()"
+              onmouseup="cancelButton().buttonUp()"
           </div>
         </div>
       </div>

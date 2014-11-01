@@ -9,11 +9,12 @@ class TheatreInChicagoShowingParser
 
   attr_reader :showing_times
 
-  def initialize(body)
+  def initialize(body, today = Time.now)
     @showing_times = []
     @lines = body.split(/\n/)
     @position = 0
     @date_range = []
+    @today = today
     extract_showing_times
   end
 
@@ -175,13 +176,14 @@ class TheatreInChicagoShowingParser
     return unless THRU_RANGE_REGEXP.match(current_line)
     captures = THRU_RANGE_REGEXP.match(current_line).captures
     finish_month, finish_day, finish_year = captures
-    today = Date.today
-    build_date_range("#{today.month} #{today.day}, #{today.year}", "#{finish_month} #{finish_day}, #{finish_year}")
+    today_month = Date::MONTHNAMES[@today.month]
+    build_date_range("#{today_month} #{@today.day}, #{@today.year}", 
+                     "#{finish_month} #{finish_day}, #{finish_year}")
   end
 
   def build_date_range(start_date_s, finish_date_s)
     @date_range << TIME_ZONE.parse(start_date_s)
-    @date_range << TIME_ZONE.parse(finish_date_s)
+    @date_range << TIME_ZONE.parse(finish_date_s).since(1.day)
     reduce_start_year_by_one_if_crossed
   end
 

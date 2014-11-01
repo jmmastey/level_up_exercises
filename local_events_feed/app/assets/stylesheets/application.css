@@ -195,11 +195,11 @@ body {
 }
 
 .cool-round-button {
-	width: 130px;
-	height: 130px;
-	border: none;
+	width: 100px;
+	height: 100px;
+	border: 3px solid rgba(60, 60, 210, 0.3);
 	border-radius: 65px;
-	background-color: rgba(17, 17, 153, 0.7);
+	background-color: rgba(17, 17, 153, 0.6);
 	top: 50%;
 	text-align: center;
 	padding: 0px;
@@ -210,7 +210,8 @@ body {
 }
 
 .cool-round-button:hover {
-	background-color: rgba(60, 60, 210, 0.7);
+	background-color: rgba(17, 17, 153, 0.7);
+	border: 3px solid rgba(60, 60, 210, 0.6);
 }
 
 .cool-round-button a {
@@ -242,24 +243,33 @@ body {
 
 #home-menu .cool-round-button.events {
 	position: absolute;
-	right: 200px;
-	top: 150px;
+	top: 100px;
+	left: 300px;
+	right: 10px;
 }
 
 #home-menu .cool-round-button.sources {
 	position: absolute;
-	right: 320px;
-	top: 330px;
+	top: 300px;
+	left: 180px;
+	right: 10px;
 }
 
 #home-menu .cool-round-button.scrape {
 	position: absolute;
-	right: 500px;
-	top: 450px;
+	top: 300px;
+	left: 420px;
+	right: 10px;
 }
 
 #event-showings .cool-round-button.events {
 	position: fixed;
 	top: 200px;
+	right: 100px;
+}
+
+#event-showings .cool-round-button.home {
+	position: fixed;
+	top: 350px;
 	right: 100px;
 }

@@ -1,9 +1,9 @@
 require 'rails_helper'
-require 'assets/theatre_in_chicago_page_parser'
+require 'assets/theatre_in_chicago/page_parser'
 
-RSpec.describe TheatreInChicagoPageParser, :type => :asset do
+RSpec.describe TheatreInChicago::PageParser, :type => :asset do
   let(:body) { File.open("test/fixtures/theatre_in_chicago_test_page.html").read }
-  let(:parser) { TheatreInChicagoPageParser.new(body, showings_enabled: false) }
+  let(:parser) { TheatreInChicago::PageParser.new(body, showings_enabled: false) }
   let(:events) { parser.events }
 
   it 'should extract all events in the body' do

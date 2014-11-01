@@ -1,11 +1,11 @@
 require 'rails_helper'
-require 'assets/theatre_in_chicago_event'
+require 'assets/theatre_in_chicago/event'
 
-RSpec.describe TheatreInChicagoEvent, :type => :asset do
-  let(:blank_event) { TheatreInChicagoEvent.new }
+RSpec.describe TheatreInChicago::Event, :type => :asset do
+  let(:blank_event) { TheatreInChicago::Event.new }
 
   let(:setted_event) do
-    setted_event = TheatreInChicagoEvent.new
+    setted_event = TheatreInChicago::Event.new
     setted_event.name = "Party"
     setted_event.location = " Everywhere     <tag>  "
     setted_event.showings << DateTime.parse("20141001T073000")

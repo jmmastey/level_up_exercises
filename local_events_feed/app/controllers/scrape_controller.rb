@@ -1,4 +1,4 @@
-require 'assets/theatre_in_chicago_scraper'
+require 'assets/theatre_in_chicago/scraper'
 
 class ScrapeController < ApplicationController
 
@@ -17,7 +17,7 @@ class ScrapeController < ApplicationController
 
   def scrape_for_new_events_in(upcoming)
     future = upcoming.days.from_now
-    events = TheatreInChicagoScraper.get_events(future)
+    events = TheatreInChicago::Scraper.get_events(future)
     events.each(&:add_to_db)
   end
 end

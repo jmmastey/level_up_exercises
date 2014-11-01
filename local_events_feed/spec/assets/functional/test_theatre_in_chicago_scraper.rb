@@ -8,5 +8,5 @@ else
   month = 11
 end
 
-events = TheatreInChicagoScraper.get_events(year, month)
+events = TheatreInChicago::Scraper.get_events(year, month)
 events.each { |event| puts event }

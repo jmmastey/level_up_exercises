@@ -39,14 +39,11 @@ body {
 	right: 50%;
 }
 
-#user-event-showings.scrollable {
-	position: absolute;
-}
-
 #user-event-showings table {
 	position: absolute;
 	overflow: auto;
-	font-size: 12px;
+	font-size: 15px;
+	padding-bottom: 200px;
 }
 
 #all-events {
@@ -54,7 +51,6 @@ body {
 	left: 50%;
 	top: 100px;
 	right: 10px;
-	bottom: 100px;
 }
 
 #all-events table {
@@ -63,6 +59,7 @@ body {
 	left: 0px;	
 	overflow-y: hidden;
 	font-size: 15px;
+	padding-bottom: 200px;
 }
 
 #scrape_link {
@@ -185,6 +182,7 @@ body {
 #event-showings table {
 	font-size: 18px;
 	font-family: verdana;
+	padding-bottom: 200px;
 }
 
 #home-menu {

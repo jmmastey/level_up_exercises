@@ -2,11 +2,12 @@ require_relative 'theatre_in_chicago_page_parser'
 require 'open-uri'
 
 module TheatreInChicagoScraper
-  END_POINT = "http://www.theatreinchicago.com/opening/"
-  QUERY = "CalendarMonthlyResponse.php?"
+  END_POINT = "http://www.theatreinchicago.com/"
+  QUERY = "searchresults.php?"
+  MISC_OPTIONS = "&txtTitle=&txtGenre=&txtArea=&txtDateF=null&txtDateT=null&QFdate=1"
 
   def self.get_events(time)
-    uri = construct_uri(time.year, time.month)
+    uri = construct_uri(time)
     body = get_page_content(uri)
     parser = TheatreInChicagoPageParser.new(body)
     parser.events.map { |chicago_event| chicago_event.to_event_model }
@@ -19,15 +20,10 @@ module TheatreInChicagoScraper
     file.read
   end
 
-  def self.construct_uri(year, month)
-    END_POINT + QUERY + arguments(year, month)
-  end
-
-  def self.arguments(year, month)
-    "ran=#{random_number}&month=#{month}&year=#{year}"
-  end
-
-  def self.random_number
-    Random.new.rand(9998) + 1
+  def self.construct_uri(time)
+    [END_POINT,
+     QUERY,
+     sprintf("txtDate=%04d-%02d-%02d", time.year, time.month, time.day),
+     MISC_OPTIONS].join('')
   end
 end

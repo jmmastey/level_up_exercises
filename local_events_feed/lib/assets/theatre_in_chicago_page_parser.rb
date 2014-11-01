@@ -3,10 +3,15 @@ require_relative 'theatre_in_chicago_showing_parser'
 require 'date'
 
 class TheatreInChicagoPageParser
+  ROOT_LINK = 'http://www.theatreinchicago.com'
+  EVENT_NAME_REGEXP = Regexp.new('<a href="([^"]*)" class="detailhead"[^>]*><strong>([^<]*)</strong></a>');
+  BEGIN_OF_LOCATION_REGEXP = Regexp.new('http://www.theatreinchicago.com/theatredetail.php')
+  END_OF_LOCATION_REGEXP = Regexp.new('</a>')
+
   attr_reader :events
 
   def initialize(body, showings_enabled: true)
-    @lines = body.split(/\n/)
+    @lines = clean_invalid_utf8_chars(body).split(/\n/)
     @position = 0
     @events = []
     @event = create_new_event
@@ -15,6 +20,10 @@ class TheatreInChicagoPageParser
   end
 
   private
+
+  def clean_invalid_utf8_chars(text)
+    text.chars.select(&:valid_encoding?).join
+  end
 
   def create_new_event
     TheatreInChicagoEvent.new
@@ -48,15 +57,15 @@ class TheatreInChicagoPageParser
   end
 
   def extract_fields_from_current_line
-    extract_location_from_current_line
     extract_name_from_current_line
+    extract_location_from_current_line
   end
 
   def reached_end_of_file?
     @position >= @lines.count
   end
   
-  def line
+  def current_line
     return '' if reached_end_of_file?
     @lines[@position]
   end
@@ -67,30 +76,26 @@ class TheatreInChicagoPageParser
   end
 
   def location_is_complete?
-    /<br>/.match(@event.location)
+    END_OF_LOCATION_REGEXP.match(@event.location)
   end
 
   def extract_name_from_current_line
-    match = /<a href=\'(http:\/\/www.theatreinchicago.com\/.*)\'>(.*)<\/a>/.match(line)
-    return unless match && match.captures.count == 2
-    @event.link = match.captures[0]
-    @event.name = match.captures[1]
+    return unless EVENT_NAME_REGEXP.match(current_line)
+    captures = EVENT_NAME_REGEXP.match(current_line).captures
+    @event.link = "#{ROOT_LINK}#{captures[0]}"
+    @event.name = captures[1]
   end
 
   def append_location_from_current_line
     if @event.location.blank?
       extract_beginning_of_location_from_current_line
     else
-      @event.location += line
+      @event.location += current_line
     end
   end
 
   def extract_beginning_of_location_from_current_line
-    return unless /<span class="detailbody">(.*)/.match(line)
-    @event.location = line
-  end
-
-  def extract_month_from_current_line
-    /January|February|March|April|May|June|July|August|September|October|November|December/.match(line)
+    return unless BEGIN_OF_LOCATION_REGEXP.match(current_line)
+    @event.location = current_line
   end
 end

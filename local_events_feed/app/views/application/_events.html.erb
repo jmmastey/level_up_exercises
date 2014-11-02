@@ -1,6 +1,6 @@
 <section id='all-events'>
   <table>
-	<% Event.all.each do |event| %>
+	<% Event.sort_by_name.each do |event| %>
 	<% member = current_user.has_showing_in?(event) %>
 	<% member_class = member ? "member" : "non-member" %>
 	<tr>

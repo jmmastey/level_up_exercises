@@ -185,6 +185,22 @@ body {
 	padding-bottom: 200px;
 }
 
+.event-image-div {
+	position: fixed;
+	top: 100px;
+	right: 100px;
+	background-color: rgba(90, 90, 90, 0.2);
+	padding: 15px 20px 12px 20px;
+	opacity: 0.8;
+	margin: 0px;
+	border: 2px solid rgba(60, 60, 60, 0.4);
+}
+
+.event-image-div img {
+	width: 200px;
+	height: 200px;
+}
+
 #home-menu {
 	position: fixed;
 	top: 40px;
@@ -260,14 +276,20 @@ body {
 	right: 10px;
 }
 
+#event-showings .cool-round-button.website {
+	position: fixed;
+	top: 400px;
+	right: 165px;
+}
+
 #event-showings .cool-round-button.events {
 	position: fixed;
-	top: 200px;
-	right: 100px;
+	top: 550px;
+	right: 165px;
 }
 
 #event-showings .cool-round-button.home {
 	position: fixed;
-	top: 350px;
-	right: 100px;
+	top: 700px;
+	right: 165px;
 }

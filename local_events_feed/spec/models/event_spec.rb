@@ -34,6 +34,10 @@ RSpec.describe Event, :type => :model do
     expect(event).to respond_to(:link)
   end
 
+  it 'responds to image' do
+    expect(event).to respond_to(:image)
+  end
+
   it 'can add a showing' do
     expect{ showing }.to change { event.showings.count }.by(1)
   end

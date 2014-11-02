@@ -8,6 +8,10 @@ class Event < ActiveRecord::Base
 
   has_many :showings, dependent: :destroy
 
+  def Event.sort_by_name
+    Event.all.sort { |a, b| a.name <=> b.name }
+  end
+
   def add_showing(time: nil)
     return unless time.present?
     return if already_have_show_at?(time)

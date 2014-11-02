@@ -22,6 +22,15 @@
 	<% end %>
   </table>
 
+  <% if @event.image.present? %>
+    <div class="event-image-div">
+	  <img src=<%= @event.image %> />
+	</div>
+  <% end %>
+
+  <div class="cool-round-button website">
+	<%= link_to 'Website', @event.link %>
+  </div>
   <div class="cool-round-button events">
 	<%= link_to 'Events', events_path %>
   </div>

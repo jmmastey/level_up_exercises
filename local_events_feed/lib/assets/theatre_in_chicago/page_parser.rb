@@ -1,15 +1,21 @@
 require_relative 'event'
-require_relative 'showing_parser'
+require_relative 'date_list_showing_parser'
+require_relative 'dows_showing_parser'
+require_relative 'name_and_link_extractor'
+require_relative 'location_extractor'
+require_relative 'image_finder'
 require 'date'
 
 module TheatreInChicago
+
   class PageParser
-    ROOT_LINK = 'http://www.theatreinchicago.com'
-    EVENT_NAME_REGEXP = Regexp.new('<a href="([^"]*)" class="detailhead"[^>]*><strong>([^<]*)</strong></a>');
-    BEGIN_OF_LOCATION_REGEXP = Regexp.new('http://www.theatreinchicago.com/theatredetail.php')
-    END_OF_LOCATION_REGEXP = Regexp.new('</a>')
 
     attr_reader :events
+
+    @@extractors = [ NameAndLinkExtractor, LocationExtractor]
+
+    @@showing_parsers = [ TheatreInChicago::DateListShowingParser,
+                          TheatreInChicago::DowsShowingParser ]
 
     def initialize(body, showings_enabled: true)
       @lines = clean_invalid_utf8_chars(body).split(/\n/)
@@ -17,7 +23,7 @@ module TheatreInChicago
       @events = []
       @event = create_new_event
       extract_events
-      add_showings if showings_enabled
+      add_showings_and_image if showings_enabled
     end
 
     private
@@ -27,7 +33,7 @@ module TheatreInChicago
     end
 
     def create_new_event
-      TheatreInChicago::Event.new
+      Event.new
     end
 
     def extract_events
@@ -38,28 +44,18 @@ module TheatreInChicago
       end
     end
 
-    def add_showings
-      events.each do |event|
-        showings_body = open(event.link).read
-        showing_times = TheatreInChicago::ShowingParser.new(showings_body).showing_times
-        event.showings = showing_times
-      end
-    end
-
     def move_to_next_line
       @position += 1
     end
 
     def check_for_complete_event
-      if @event.complete? && location_is_complete?
-        @events << @event.clean.clone
-        @event = create_new_event
-      end
+      return unless @@extractors.all? { |extractor| extractor.complete?(@event) }
+      @events << @event.clean.clone
+      @event = create_new_event
     end
 
     def extract_fields_from_current_line
-      extract_name_from_current_line
-      extract_location_from_current_line
+      @@extractors.each { |extractor| extractor.extract(current_line, @event) }
     end
 
     def reached_end_of_file?
@@ -71,33 +67,17 @@ module TheatreInChicago
       @lines[@position]
     end
 
-    def extract_location_from_current_line
-      return if location_is_complete?
-      append_location_from_current_line
-    end
-
-    def location_is_complete?
-      END_OF_LOCATION_REGEXP.match(@event.location)
-    end
-
-    def extract_name_from_current_line
-      return unless EVENT_NAME_REGEXP.match(current_line)
-      captures = EVENT_NAME_REGEXP.match(current_line).captures
-      @event.link = "#{ROOT_LINK}#{captures[0]}"
-      @event.name = captures[1]
-    end
-
-    def append_location_from_current_line
-      if @event.location.blank?
-        extract_beginning_of_location_from_current_line
-      else
-        @event.location += current_line
+    def add_showings_and_image
+      events.each do |event|
+        showings_body = open(event.link).read
+        @@showing_parsers.each { |parser| event.showings.concat(parser.new(showings_body).showings) }
+        add_image(event, showings_body)
       end
     end
 
-    def extract_beginning_of_location_from_current_line
-      return unless BEGIN_OF_LOCATION_REGEXP.match(current_line)
-      @event.location = current_line
+    def add_image(event, showings_body)
+      return unless image = ImageFinder::find(showings_body)
+      event.image = image
     end
   end
 end

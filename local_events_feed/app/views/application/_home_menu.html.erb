@@ -1,4 +1,8 @@
 <nav id="home-menu">
+  <canvas id="home-menu-canvas"></canvas>
+  <div class="cool-round-button home neutral">
+	<span class="text">Home</span>
+  </div>
   <div class="cool-round-button events">
 	<%= link_to 'Events', events_path %>
   </div>
@@ -9,3 +13,9 @@
 	<%= link_to 'Scrape', scrape_path, :method => 'post' %>
   </div>
 </nav>
+
+<script type="text/javascript">
+$( document ).ready( function() {
+  drawHomeBackground();
+});
+</script>

@@ -40,7 +40,7 @@ RSpec.describe Showing, :type => :model do
   end
 
   it "displays pretty local date correctly" do
-    expect(showing.pretty_local_date).to eq("Oct 1, 2014")
+    expect(showing.pretty_local_date).to eq("Wed, Oct 1, 2014")
   end
 
   it "displays pretty local time correctly" do

@@ -16,10 +16,11 @@ module TheatreInChicago
     end
 
     def construct_date_time(table_cell, year)
-      table_cell.gsub!(/[^,]*, /, '')
-      table_cell.sub!(/:/, " " + year.to_s)
-      table_cell.sub!(/(pm|am)/, " \\1")
-      parse_date_time(table_cell)
+      cell = table_cell.clone
+      cell.gsub!(/[^,]*, /, '')
+      cell.sub!(/:/, " " + year.to_s)
+      cell.sub!(/(pm|am)/, " \\1")
+      parse_date_time(cell)
     end
 
     def parse_date_time(date_time_text)

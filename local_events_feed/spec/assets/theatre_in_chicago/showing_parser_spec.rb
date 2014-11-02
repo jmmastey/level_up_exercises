@@ -16,13 +16,12 @@ RSpec.describe TheatreInChicago::ShowingParser, :type => :asset do
   let(:days_of_week_body) { File.open("test/fixtures/theatre_in_chicago_test_showings_days_of_week.html").read }
   let(:days_of_week_parser) { TheatreInChicago::DowsShowingParser.new(days_of_week_body, pseudo_today) }
 
-
   it 'should extract all events in a body with same year date range' do
     expect(same_year_parser).to have(40).showings
   end
 
   it 'should extract all events in a body with different year date range' do
-    expect(diff_year_parser).to have(48).showings
+    expect(diff_year_parser).to have(26).showings
   end
 
   it 'should extract all events in a body with showings in days of week format' do

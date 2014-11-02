@@ -22,7 +22,7 @@ class Showing < ActiveRecord::Base
   end
 
   def pretty_local_date
-    time.in_time_zone(LOCAL_TIME_ZONE).strftime('%b %-d, %Y')
+    time.in_time_zone(LOCAL_TIME_ZONE).strftime('%a, %b %-d, %Y')
   end
 
   def pretty_local_time

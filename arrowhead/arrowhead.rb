@@ -1,5 +1,4 @@
 class Arrowhead
-  # This seriously belongs in a database.
   CLASSIFICATIONS = {
     far_west: {
       notched: "Archaic Side Notch",
@@ -15,25 +14,15 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
-  def self.classify(region, arrowhead_shape)
-    regional_shapes = CLASSIFICATIONS[region]
-    raise "Unknown region, please provide a valid region." unless region_exists?(region)
-    determine_arrowhead(regional_shapes, arrowhead_shape)
-  end
+  UNKNOWN_REGION = "Unknown region, please provide a valid region."
+  UNKNOWN_SHAPE = "Unknown shape value. Are you sure you know what you're talking about?"
 
-  def self.determine_arrowhead(shapes_in_region, arrowhead_shape)
-    raise "Unknown shape value. Are you sure you know what you're talking about?" unless shape_in_region?(shapes_in_region, arrowhead_shape)
-    arrowhead = shapes_in_region[arrowhead_shape]
+  def self.classify(region, shape)
+    raise UNKNOWN_REGION unless CLASSIFICATIONS.include? region
+    raise UNKNOWN_SHAPE unless CLASSIFICATIONS[region].include? shape
+
+    arrowhead = CLASSIFICATIONS[region][shape]
     puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-  end
-
-  def self.region_exists?(region)
-    CLASSIFICATIONS.include? region
-  end
-
-  def self.shape_in_region?(regional_shapes, arrowhead_shape)
-    regional_shapes.include? arrowhead_shape
   end
 end
 

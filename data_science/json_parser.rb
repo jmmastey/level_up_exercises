@@ -11,4 +11,3 @@ class JSONParser
     JSON.parse(File.read(file_name))
   end
 end
-

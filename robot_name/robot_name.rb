@@ -8,11 +8,9 @@ class Robot
   def initialize(args = {})
     @@registry ||= []
     @name_generator = args[:name_generator] # this will be nil is called without an argument
-
     assign_name
-
     raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+    add_to_registry
   end
 
   def assign_name
@@ -29,7 +27,9 @@ class Robot
     @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
   end
 
-  # New method: add name to registry
+  def add_to_registry
+    @@registry << @name
+  end
 end
 
 robot = Robot.new

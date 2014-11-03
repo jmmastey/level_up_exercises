@@ -43,10 +43,6 @@ class Triangle
     puts "This triangle is also a right triangle!" if right?
     puts
   end
-
-  protected
-
-  attr_reader :side_1, :side_2, :side_3, :angles
 end
 
 triangles = [

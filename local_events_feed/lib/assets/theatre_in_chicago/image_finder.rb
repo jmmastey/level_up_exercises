@@ -8,7 +8,7 @@ module TheatreInChicago
       lines = showings_body.split(/\n/);
       image_line = lines.find { |line| IMAGE_REGEXP.match(line) }      
       return unless image_line
-      IMAGE_REGEXP.match(image_line).captures[0]
+      IMAGE_REGEXP.match(image_line).captures[0].gsub(/\s+/, '')
     end
   end
 end

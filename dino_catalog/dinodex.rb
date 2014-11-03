@@ -45,8 +45,7 @@ class Library
     load_dinos('african_dinosaur_export.csv')
     system('clear')
     tp @dinodex
-    print "\nPress Enter to Continue\n"
-    STDIN.gets
+    @results = @dinodex
     options
   end
 
@@ -61,8 +60,9 @@ class Library
   end
 
   def options
+    STDIN.gets
     system('clear')
-    print "Options\n1: Find Bipeds \n2: Find Carnivores \n3: Find Dinosaurs by Period \n4: Find BIG Dinosaurs\n5: Reset Filters \n6: Print Results\nQ: Quit\nWhat would you like to do? "
+    print "Options\n1: Find Bipeds \n2: Find Carnivores \n3: Find Dinosaurs by Period \n4: Find BIG Dinosaurs\n5: Reset Filters \n6: Print Results\n7: Search Results\nQ: Quit\nWhat would you like to do? "
     choice = gets.chomp
     case choice
     when "1"
@@ -77,14 +77,11 @@ class Library
       @results = @dinodex
       options
     when "6"
-      if @results.length > 0
-        tp @results
-      else
-        tp @dinodex
-      end
-      STDIN.gets
+      tp @results
       options
-    when "Q" || "q"
+    when "7"
+      search
+    when "Q"
       exit
     else
       p "Incorrect choice"
@@ -92,39 +89,33 @@ class Library
     end
   end
 
+  def search
+    found =[]
+    tp @results, :name
+    print "\nWhat dino do you want to find?"
+    selected = gets.chomp
+    @results.each do |dino|
+      found << dino if dino.name.downcase == selected.downcase
+    end
+    tp found
+  end
   def bipeds
-    if results.length > 0
       new_results = []
       @results.each do |dino|
         new_results << dino if dino.legs == 2
       end
       @results = new_results
       tp @results
-    else
-      @dinodex.each do |dino|
-        @results << dino if dino.legs == 2
-      end
-      tp @results
-    end
-    STDIN.gets
     options
   end
 
   def carnivores
-    if results.length > 0
       new_results = []
       @results.each do |dino|
         new_results << dino if dino.diet.downcase == "carnivore"
       end
       @results = new_results
       tp @results
-    else
-      @dinodex.each do |dino|
-        @results << dino if dino.diet.downcase == "carnivore"
-      end
-      tp @results
-    end
-    STDIN.gets
     options
   end
 
@@ -153,38 +144,22 @@ class Library
   end
 
   def era(time_period)
-    if results.length > 0
-      new_results = []
-      @results.each do |dino|
-        new_results << dino if dino.period.downcase.include?(time_period)
-      end
-      @results = new_results
-      tp @results
-    else
-      @dinodex.each do |dino|
-        @results << dino if dino.period.downcase.include?(time_period)
-      end
-      tp @results
+    new_results = []
+    @results.each do |dino|
+      new_results << dino if dino.period.downcase.include?(time_period)
     end
-    STDIN.gets
+    @results = new_results
+    tp @results
     options
   end
 
   def big
-    if results.length > 0
-      new_results = []
-      @results.each do |dino|
-        new_results << dino if dino.weight > 4000
-      end
-      @results = new_results
-      tp @results
-    else
-      @dinodex.each do |dino|
-        @results << dino if dino.weight > 4000
-      end
-      tp @results
+    new_results = []
+    @results.each do |dino|
+      new_results << dino if dino.weight > 4000
     end
-    STDIN.gets
+    @results = new_results
+    tp @results
     options
   end
 end

@@ -35,6 +35,7 @@ FactoryGirl.define do
     nbs_date "16350"
     category
     service
+    artist
   end
 
   factory :user do

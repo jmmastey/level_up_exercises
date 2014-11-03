@@ -1,27 +1,36 @@
 Feature: Arming the Bomb
   As an evil super villian who likes explosions
-  I want to be able to arm the bomb
-  So it is ready to explode
+  I want to arm the bomb with an arming codes and a confirmation sequence
+  So it is ready to explode when I want to explode it and not by accident
 
-Scenario: Enter correct arming code to arm bomb
+@javascript
+Scenario: Visit bomb arming authorization controls
   Given the bomb has activation codes registered
-  And I am viewing the arming authorization controls
-  And the bomb is disarmed
-  When I enter the registered arming code
-  Then I see an arming confirmation button
-  And a detonation delay timer control
-  And I can arm the bomb
+  And I see the bomb is disarmed
+  When I view the bomb controls
+  Then I see the arming authorization controls
+@javascript
 
-Scenario: Arming the bomb
-  Given I can arm the bomb
-  When I enter a detonation delay timer
-  And I push the arming confirmation button
+@javascript
+Scenario: Enter incorrect arming code does not arm bomb
+  Given the bomb has activation codes registered
+  When I enter an incorrect arming code
+  And I press the "arming" button
+  And I press the "commit" button
+  Then I see the bomb is still disarmed
+
+@javascript
+Scenario: Arming code without arming button does not arm bomb
+  Given the bomb has activation codes registered
+  When I enter the correct arming code
+  But I do not press the "arming" button
+  And I press the "commit" button
+  Then I see the bomb is still disarmed
+
+@javascript
+Scenario: Enter correct arming code and sequence to arm bomb
+  Given the bomb has activation codes registered
+  When I enter the correct arming code
+  And I press the "arming" button
+  And I press the "commit" button
   Then I see the bomb is armed
-  And I see the detonation delay timer counting down
-
-Scenario: Enter incorrect arming code to arm bomb
-  Given the bomb has activation codes registered
-  And I am viewing the bomb arming controls
-  And the bomb is disarmed
-  When I enter an unregistered arming code
-  Then I see the bomb is disarmed

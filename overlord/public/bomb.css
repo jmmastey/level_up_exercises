@@ -2,7 +2,7 @@ body {
   width: 800px;
   margin: auto;
   font-family: sans-serif;
-  background: black;
+  background: url("dirty-metal-surface2.jpg")
 }
 div.verticalmargin {
   background: yellow;
@@ -30,7 +30,8 @@ div.content {
   vertical-align: top;
 }
 .foregroundSurface {
-  background: #cccccc;
+  /* background: #cccccc; */
+  background: url("dirty-metal-surface2.jpg");
 }
 .innerBevel {
   border-top: 5px solid #444444;

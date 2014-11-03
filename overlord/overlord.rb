@@ -10,6 +10,8 @@ CONTROL_PANEL_URL = "/control_panel"
 EXPLODED_URL = "/kaboom"
 MASKED_ACTIVATION_CODE = '****'
 
+set :bind, '0.0.0.0'
+
 def bomb
   session[:bomb]
 end

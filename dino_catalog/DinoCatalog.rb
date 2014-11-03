@@ -25,7 +25,7 @@ class Dinosaur
       @genus = atr.fetch(:name, "unknown").downcase
     else
       @genus = "unknown"
-    end 
+    end
 
     if atr[:weight_in_lbs]
       @weight = atr.fetch(:weight_in_lbs, 0)
@@ -54,7 +54,7 @@ class Dinosaur
   def genus_str
       @output << "Genus: #{@genus}" if @genus != "unknown"
   end
- 
+
   def period_str
       @output << "Period: #{@period_specific if @period_specific} #{@period}" if @period != "unknown"
   end
@@ -187,7 +187,7 @@ class DinoCatalog
 
   def output_json
     json_out = {}
-    @dinosaurs.each_with_index { |d, i|
+    @dinosaurs.each_with_index do |d, i|
       json_out[i] = {
         genus: d.genus,
         period: d.period,
@@ -196,8 +196,8 @@ class DinoCatalog
         walking: d.walking,
         continent: d.continent,
         description: d.description
-        }
-    }
+      }
+    end
     json_out.to_json
   end
 

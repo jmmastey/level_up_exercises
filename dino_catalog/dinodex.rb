@@ -7,34 +7,46 @@ class Dinosaur
     @name = options[:name].to_s
     @period = options[:period].to_s
     @continent = options[:continent].to_s
-    @diet = options[:diet].to_s
+    @diet = convert_diet(options[:diet].to_s)
     @weight_in_lbs = options[:weight_in_lbs].to_i
     @legs = convert_legs(options[:walking])
     @description = options[:description].to_s
   end
 
-  def convert_legs(dino)
-    if dino.downcase == "biped"
+  def convert_legs(legs)
+    if legs.downcase == "biped"
       2
-    elsif dino.downcase == "quadruped"
+    elsif legs.downcase == "quadruped"
       4
     else
       "other"
     end
   end
+
+  def convert_diet(food)
+    if food.downcase == "yes"
+      "Carnivore"
+    elsif food.downcase == "no"
+      "Herbivore"
+    else
+      food
+    end
+  end
 end
 
 class Library
-  attr_accessor :dinodex
+  attr_accessor :dinodex, :results
+
 
   def initialize(file)
     @dinodex = []
+    @results = []
     load_dinos('dinodex.csv')
     load_dinos('african_dinosaur_export.csv')
     system('clear')
     tp @dinodex
-    print "\n"
-    sleep(1)
+    print "\nPress Enter to Continue\n"
+    STDIN.gets
     options
   end
 
@@ -50,8 +62,66 @@ class Library
 
   def options
     system('clear')
-    print "What would you like to do? \n1: Find Bipeds \n2: Find Carnivores \n3: Find Dinosaurs by Period \n4: Find BIG Dinosaurs"
-    gets.chomp
+    print "Options\n1: Find Bipeds \n2: Find Carnivores \n3: Find Dinosaurs by Period \n4: Find BIG Dinosaurs\n5: Reset Filters \n6: Print Results\nQ: Quit\nWhat would you like to do? "
+    choice = gets.chomp
+    case choice
+    when "1"
+      bipeds
+    when "2"
+      carnivores
+    when "3"
+      period
+    when "4"
+      big
+    when "5"
+      reset_filters
+    when "6"
+      print_results
+    when "Q"
+      exit
+    else
+      p "Incorrect choice"
+      choice = gets.chomp
+    end
+  end
+
+  def bipeds
+    if results.length > 0
+      new_results = []
+      @results.each do |dino|
+        new_results << dino if dino.legs == 2
+      end
+      @results = new_results
+      tp @results
+    else
+      @dinodex.each do |dino|
+        @results << dino if dino.legs == 2
+      end
+      tp @results
+    end
+    STDIN.gets
+    options
+  end
+
+  def carnivores
+    if results.length > 0
+      new_results = []
+      @results.each do |dino|
+        new_results << dino if dino.diet.downcase == "carnivore"
+      end
+      @results = new_results
+      tp @results
+    else
+      @dinodex.each do |dino|
+        @results << dino if dino.diet.downcase == "carnivore"
+      end
+      tp @results
+    end
+    STDIN.gets
+    options
+  end
+
+  def period
   end
 
 end

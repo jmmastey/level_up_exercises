@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141024195519) do
+ActiveRecord::Schema.define(version: 20141027214856) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20141024195519) do
     t.string   "deed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "date"
   end
 
   create_table "legislators", force: true do |t|
@@ -58,6 +59,10 @@ ActiveRecord::Schema.define(version: 20141024195519) do
     t.string   "facebook_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone"
+    t.string   "website"
+    t.string   "office"
+    t.string   "contact_form"
   end
 
 end

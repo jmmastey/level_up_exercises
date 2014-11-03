@@ -1,8 +1,12 @@
-<h2>List all Bills</h2>
+<h3>All Bills</h3>
 
 <% @results.each do |result| %>
   <% @bill = result %>
   <%= render partial: "bill_list_item", locals: {bill: @bill} %>
 <% end %>
+
+<hr />
+
+<div style="text-align:center;"><%= will_paginate @results %></div>
 
 <%= "There are no bills to show" if @results.count == 0 %>

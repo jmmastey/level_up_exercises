@@ -13,7 +13,8 @@ class Deed < ActiveRecord::Base
         if result.count == 0
           deed = Deed.new(bill_id: bill.bill_id,
                           bioguide_id: bill.sponsor_id,
-                          deed: deed_text)
+                          deed: deed_text,
+                          date: bill.last_vote_at)
           deed.save
 
           puts "Deed created"

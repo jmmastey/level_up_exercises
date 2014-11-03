@@ -2,8 +2,7 @@ class BillsController < ApplicationController
   before_action :set_bill, only: [:show]
 
   def index
-    @results = Bill.all
-    # @results = Deed.new.law_voted_on
+    @results = Bill.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

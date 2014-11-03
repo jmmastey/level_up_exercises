@@ -16,6 +16,10 @@ class Legislator < ActiveRecord::Base
     md5 << obj["state"].to_s
     md5 << obj["twitter_id"].to_s
     md5 << obj["facebook_id"].to_s
+    md5 << obj["phone"].to_s
+    md5 << obj["website"].to_s
+    md5 << obj["office"].to_s
+    md5 << obj["contact_form"].to_s
     md5.hexdigest
   end
 
@@ -32,7 +36,7 @@ class Legislator < ActiveRecord::Base
   end
 
   def fetch
-    http = Curl.get("#{ApplicationHelper::API_BASE_PATH}legislators?apikey=2d3136f6874046c8ba34d5e2f1a96b03&per_page=50&page=12")
+    http = Curl.get("#{ApplicationHelper::API_BASE_PATH}legislators?apikey=2d3136f6874046c8ba34d5e2f1a96b03&per_page=50&page=1")
     @results = JSON.parse(http.body_str)
 
     @results["results"].each do |result|
@@ -53,7 +57,11 @@ class Legislator < ActiveRecord::Base
                           last_name: result['last_name'],
                           state: result['state'],
                           twitter_id: result['twitter_id'],
-                          facebook_id: result['facebook_id'])
+                          facebook_id: result['facebook_id'],
+                          phone: result['phone'],
+                          website: result['website'],
+                          office: result['office'],
+                          contact_form: result['contact_form'])
       else
         legislator = legislator.first
 
@@ -74,7 +82,11 @@ class Legislator < ActiveRecord::Base
                             last_name: result['last_name'],
                             state: result['state'],
                             twitter_id: result['twitter_id'],
-                            facebook_id: result['facebook_id'])
+                            facebook_id: result['facebook_id'],
+                            phone: result['phone'],
+                            website: result['website'],
+                            office: result['office'],
+                            contact_form: result['contact_form'])
         end
       end
     end

@@ -1,21 +1,18 @@
 <div class="panel">
   <div><%= raw "#{link_to deed.deed, deed}" %></div>
+  <div><%= "Date of Deed: #{deed.date}" %></div>
   <br />
   <div class="row">
     <div class="large-6 columns">
       <% if deed.bioguide_id %>
-        <%= "Legislator:" %>
         <% legislator = Legislator.where(bioguide_id: deed.bioguide_id).first %>
-        <%= raw "#{link_to legislator.full_name, legislator}" if legislator %>
-        <%= "#{deed.bioguide_id}" unless legislator %>
+        <%= render partial: "legislators/legislator_stub_item", locals: {legislator: legislator} %>
       <% end %>
     </div>
     <div class="large-6 columns">
       <% if deed.bill_id %>
-        <%= "Bill:" %>
         <% bill = Bill.where(bill_id: deed.bill_id).first %>
-        <%= raw "#{link_to bill.short_title, bill}" if bill %>
-        <%= "#{deed.bill_id}" unless bill %>
+        <%= render partial: "bills/bill_stub_item", locals: {bill: bill} %>
       <% end %>
     </div>
   </div>

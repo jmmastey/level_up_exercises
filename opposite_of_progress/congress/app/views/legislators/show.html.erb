@@ -1,7 +1,24 @@
-<h2><%= "#{@legislator.first_name} #{@legislator.last_name}" %></h2>
+<h3><%= "#{@legislator.full_name}" %></h3>
 
-<p><%= "Twitter: #{@legislator.twitter_id}" if @legislator.twitter_id %></p>
+<h4>Basics</h4>
+<div><%= @legislator.birthday if @legislator.birthday %></div>
+<div><%= Date.today - @legislator.birthday %></div>
 
-<p><%= "Facebook: #{@legislator.facebook_id}" if @legislator.facebook_id %></p>
+<div><%= @legislator.chamber if @legislator.chamber %></div>
+<div><%= @legislator.gender if @legislator.gender %></div>
+<div><%= @legislator.term_start if @legislator.term_start %></div>
+<div><%= @legislator.term_end if @legislator.term_end %></div>
 
-<p><%= link_to "Back to Legislators", legislators_path %></p>
+<h4>Contact</h4>
+<div><%= @legislator.phone if @legislator.phone %></div>
+<div><%= @legislator.website if @legislator.website %></div>
+<div><%= @legislator.office if @legislator.office %></div>
+<div><%= @legislator.contact_form if @legislator.contact_form %></div>
+
+<h4>Social Media</h4>
+<div><%= link_to "Twitter", "http://www.twitter.com/#{@legislator.twitter_id}", target: "_blank" if @legislator.twitter_id %></div>
+<div><%= link_to "Facebook", "http://www.facebook.com/#{@legislator.facebook_id}", target: "_blank" if @legislator.facebook_id %></div>
+
+<hr />
+
+<p align="center"><%= link_to "Back to Legislators", legislators_path %></p>

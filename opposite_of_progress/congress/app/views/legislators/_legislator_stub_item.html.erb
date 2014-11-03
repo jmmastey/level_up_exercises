@@ -1,0 +1,3 @@
+<%= "Legislator:" %>
+<%= raw "#{link_to legislator.full_name, legislator}" if legislator %>
+<%= "#{deed.bioguide_id}" unless legislator %>

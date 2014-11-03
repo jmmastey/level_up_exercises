@@ -16,7 +16,7 @@ class Bill < ActiveRecord::Base
     md5.hexdigest
   end
 
-  def fetch(path = "#{ApplicationHelper::API_BASE_PATH}bills?apikey=#{ApplicationHelper::API_KEY}&per_page=#{ApplicationHelper::API_PAGE_COUNT}&page=5")
+  def fetch(path = "#{ApplicationHelper::API_BASE_PATH}bills?apikey=#{ApplicationHelper::API_KEY}&per_page=#{ApplicationHelper::API_PAGE_COUNT}&page=10")
     http = Curl.get(path)
     @results = JSON.parse(http.body_str)
 

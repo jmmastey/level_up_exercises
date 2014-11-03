@@ -10,15 +10,6 @@
         %td= link_to artist.nbs_name, artist_path(artist) 
         %td= button_to "Remove", artist_path(artist), method: :delete, class: "btn btn-default"
 
-= form_for @artist do |f| 
-  .form-group
-    = f.text_field :name, class: "form-control", placeholder: "Search for another artist to compare", required: true
-  .form-group
-    .div{id: "add-artist-button"}
-      = f.submit "Add Artist", class: "btn btn-default", id: "add-artist"
-
-      
+= render partial: "add_artist_form"
 
 = render partial: "compare_artists"
-
-/#metrics-over-time{ style: "height: 400px; min-width: 310px" }

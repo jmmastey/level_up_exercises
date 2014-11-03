@@ -109,6 +109,7 @@ class Artist < ActiveRecord::Base
       nbs_metrics = nbs_service["metric"]
 
       unless nbs_metrics.blank?
+       
         nbs_metrics.keys.each do |nbs_category|
           category = Category.find_or_create_by(name: nbs_category)
           nbs_metrics[nbs_category].each do |nbs_date, nbs_value|

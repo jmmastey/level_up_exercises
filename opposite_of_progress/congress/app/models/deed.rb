@@ -2,7 +2,6 @@ class Deed < ActiveRecord::Base
   def law_voted_on
     Bill.order(:updated_at).all.each do |bill|
       if bill.last_vote_at && bill.short_title
-        # prep deed text
         deed_text = "#{bill.short_title} was last voted on #{bill.last_vote_at}"
 
         # find an existing deed with the same bill_id and bioguide_id

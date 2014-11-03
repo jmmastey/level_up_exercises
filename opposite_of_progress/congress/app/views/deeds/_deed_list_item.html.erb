@@ -6,13 +6,13 @@
     <div class="large-6 columns">
       <% if deed.bioguide_id %>
         <% legislator = Legislator.where(bioguide_id: deed.bioguide_id).first %>
-        <%= render partial: "legislators/legislator_stub_item", locals: {legislator: legislator} %>
+        <%= render partial: "legislators/legislator_stub_item", locals: {legislator: legislator, deed: deed} %>
       <% end %>
     </div>
     <div class="large-6 columns">
       <% if deed.bill_id %>
         <% bill = Bill.where(bill_id: deed.bill_id).first %>
-        <%= render partial: "bills/bill_stub_item", locals: {bill: bill} %>
+        <%= render partial: "bills/bill_stub_item", locals: {bill: bill, deed: deed} %>
       <% end %>
     </div>
   </div>

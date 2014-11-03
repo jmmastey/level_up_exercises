@@ -2,7 +2,7 @@ class DeedsController < ApplicationController
   before_action :set_deed, only: [:show, :update, :destroy]
 
   def index
-    @results = Deed.all
+    @results = Deed.order(date: :desc, deed: :asc).all
   end
 
   def show

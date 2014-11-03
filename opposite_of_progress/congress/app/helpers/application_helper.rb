@@ -15,4 +15,8 @@ module ApplicationHelper
 
     md5.hexdigest
   end
+
+  def fetch
+    # I really need to create a fetch
+  end
 end

@@ -1,5 +1,5 @@
 class Deed < ActiveRecord::Base
-  def law_voted_on
+  def self.law_voted_on
     Bill.order(:updated_at).all.each do |bill|
       if bill.last_vote_at && bill.short_title
         deed_text = "#{bill.short_title} was last voted on #{bill.last_vote_at}"
@@ -21,7 +21,7 @@ class Deed < ActiveRecord::Base
     end
   end
 
-  def enacted_into_law
+  def self.enacted_into_law
     Bill.order(:updated_at).all.each do |bill|
       if bill.congress == 113 && bill.enacted_at
         deed_text = "#{bill.short_title} was enacted on #{bill.enacted_at}"
@@ -34,7 +34,7 @@ class Deed < ActiveRecord::Base
           deed = Deed.new(bill_id: bill.bill_id,
                           bioguide_id: bill.sponsor_id,
                           deed: deed_text,
-                          date: bill.last_vote_at)
+                          date: bill.enacted_at)
           deed.save
 
           puts "Deed (enacted into law) created"

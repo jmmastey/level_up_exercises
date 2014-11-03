@@ -3,7 +3,7 @@ require "token_selectable"
 # Ambulation
 #
 # Class handling and representing dinosaur locomotion (bi/quradrupedalism).
-module Dinodex
+module DinosaurIndex
   class Ambulation < TokenSelectable
     alias_method :ambulation, :name     # (string) descriptive noun
 

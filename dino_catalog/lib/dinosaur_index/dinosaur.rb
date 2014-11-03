@@ -1,4 +1,4 @@
-module Dinodex
+module DinosaurIndex
   class Dinosaur
     # Fields
     attr_accessor :taxon        # Name of dinosaur
@@ -32,10 +32,7 @@ module Dinodex
     end
 
     def to_hash
-      fields_and_values.reduce({}) do |h, (field, value)|
-        h[field] = value.to_s;
-        h
-      end
+      Hash[fields_and_values.map { |(field, value)| [field, value.to_s] }]
     end
 
     private

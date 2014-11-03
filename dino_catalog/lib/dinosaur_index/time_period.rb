@@ -1,6 +1,6 @@
 # Objects that represent a major interval in evolutionary/geological history.
 # Because this is a fixed list it can be represented as such in software.
-module Dinodex
+module DinosaurIndex
   class TimePeriod < TokenSelectable
     attr_accessor :qualifier    # late, early, ....
 

@@ -1,6 +1,6 @@
 require "csv"
 
-module Dinodex
+module DinosaurIndex
   class CSVLoader
     # Hash of {header => default_value} to place into all rows
     attr_accessor :default_values
@@ -20,7 +20,7 @@ module Dinodex
     end
 
     # Install a custom CSV field converter
-    CSV::Converters[:dinodex_csv] = lambda do |fieldval, fieldinfo|
+    CSV::Converters[:dinosaur_index_csv] = lambda do |fieldval, fieldinfo|
       return nil if fieldval.nil?
 
       case fieldinfo.header
@@ -33,7 +33,7 @@ module Dinodex
     end
 
     # Install a customer CSV header converter
-    CSV::HeaderConverters[:dinodex_rename] = lambda do |header|
+    CSV::HeaderConverters[:dinosaur_index_rename] = lambda do |header|
       case (header = header.downcase.to_sym)
         when :genus then :name
         when :weight_in_lbs then :weight
@@ -46,8 +46,8 @@ module Dinodex
     @@csv_parser_options = {
       headers: true,
       return_headers: false,
-      header_converters: :dinodex_rename,
-      converters: [:dinodex_csv],
+      header_converters: :dinosaur_index_rename,
+      converters: [:dinosaur_index_csv],
     }
 
     def make_dinosaur(csvrow, default_values)

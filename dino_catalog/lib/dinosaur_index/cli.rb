@@ -5,7 +5,7 @@ require "queriable_array"
 # to build a filter for a list of dinosaurs. Default values set on command line
 # are added to every dinosaur created from input files for which they are
 # effective (i.e. subsequently listed).
-module Dinodex
+module DinosaurIndex
   class CommandLineInterface < OptionParser
     attr_accessor :input_files  # [[pathname, {default values}]
     attr_accessor :filtering_list

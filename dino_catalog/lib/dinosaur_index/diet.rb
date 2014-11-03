@@ -1,7 +1,7 @@
 # Diet
 #
 # Objects representing various specific types of diets that dinosaurs can have
-module Dinodex
+module DinosaurIndex
   class Diet < TokenSelectable
     alias_method :diet, :name           # What such a diet is called
 

@@ -1,7 +1,6 @@
 require_relative 'name_collision_error'
 
 class RobotNameRegistry
-  attr_accessor :registry
   def initialize
     @registry = []
   end

@@ -1,10 +1,10 @@
 class Artist < ActiveRecord::Base
   extend FriendlyId
   friendly_id :nbs_name, use: :slugged
-  
+
   has_many :songs, dependent: :destroy
   has_many :metrics
-  has_and_belongs_to_many :users, uniq: true
+  has_and_belongs_to_many :users
 
   validates :name, presence: true,
                    uniqueness: { case_sensitive: false }
@@ -109,7 +109,6 @@ class Artist < ActiveRecord::Base
       nbs_metrics = nbs_service["metric"]
 
       unless nbs_metrics.blank?
-       
         nbs_metrics.keys.each do |nbs_category|
           category = Category.find_or_create_by(name: nbs_category)
           nbs_metrics[nbs_category].each do |nbs_date, nbs_value|

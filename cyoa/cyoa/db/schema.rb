@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030162959) do
+ActiveRecord::Schema.define(version: 20141103214907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,12 +28,16 @@ ActiveRecord::Schema.define(version: 20141030162959) do
   end
 
   add_index "artists", ["name"], name: "index_artists_on_name", using: :btree
+  add_index "artists", ["nbs_id"], name: "index_artists_on_nbs_id", unique: true, using: :btree
   add_index "artists", ["slug"], name: "index_artists_on_slug", unique: true, using: :btree
 
   create_table "artists_users", id: false, force: true do |t|
     t.integer "artist_id"
     t.integer "user_id"
   end
+
+  add_index "artists_users", ["artist_id", "user_id"], name: "index_artists_users_on_artist_id_and_user_id", unique: true, using: :btree
+  add_index "artists_users", ["user_id", "artist_id"], name: "index_artists_users_on_user_id_and_artist_id", unique: true, using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -85,6 +89,7 @@ ActiveRecord::Schema.define(version: 20141030162959) do
     t.date     "recorded_on"
   end
 
+  add_index "metrics", ["artist_id", "service_id", "category_id"], name: "index_metrics_on_artist_id_and_service_id_and_category_id", using: :btree
   add_index "metrics", ["artist_id"], name: "index_metrics_on_artist_id", using: :btree
   add_index "metrics", ["category_id"], name: "index_metrics_on_category_id", using: :btree
   add_index "metrics", ["recorded_on"], name: "index_metrics_on_recorded_on", using: :btree

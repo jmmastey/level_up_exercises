@@ -19,27 +19,9 @@ class Arrowhead
   }
 
   def self.classify(region, shape)
-    if check_region(region) == true
-      shapes = CLASSIFICATIONS[region]
-      if check_shape(shape, shapes) == true
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      end
-    end
-  end
-
-  def self.check_region(region)
-    if CLASSIFICATIONS.include?(region) == false
-      raise InvalidRegionError, 'Not a Valid region'
-    end
-    true
-  end
-
-  def self.check_shape(shape, shapes)
-    if shapes.include?(shape) == false
-      raise InvalidShapeError, "Not a Valid shape"
-    end
-    true
+    shapes = CLASSIFICATIONS.fetch(region) { raise InvalidRegionError }
+    arrowhead = shapes.fetch(shape) { raise InvalidShapeError }
+    puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end
 

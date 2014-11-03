@@ -13,10 +13,8 @@ class Artist < ActiveRecord::Base
 
   after_create :populate_initial_metrics
 
-  default_scope -> { order('lower(name) ASC') }
-
   DEFAULTS = [
-    "Bassnectar", "Beyonce", "Disclosure", "Jay Z", "Kanye West", "Lady Gaga", 
+    "Bassnectar", "Beyonce", "Disclosure", "Jay Z", "Kanye West", "Lady Gaga",
     "Madonna", "Phish", "STS9", "The Rolling Stones"
   ]
 
@@ -28,8 +26,8 @@ class Artist < ActiveRecord::Base
 
   def self.defaults
     default_list = []
-    DEFAULTS.each do |name| 
-      default_list << find_or_create_by_unique_name(name) 
+    DEFAULTS.each do |name|
+      default_list << find_or_create_by_unique_name(name)
     end
     default_list
   end
@@ -43,7 +41,6 @@ class Artist < ActiveRecord::Base
   end
 
   def self.find_or_create_by_unique_name(name)
-
     artist = Artist.find_by_unique_name(name)
     if artist
       artist.update_metrics

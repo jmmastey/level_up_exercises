@@ -31,12 +31,6 @@ describe User do
 
     it "can only have each artist once" do
       expect{ user.artists << beyonce}.to raise_error
-      #user.artists << beyonce
-      #user.artists << beyonce
-      #artists_that_are_beyonce = user.artists.select do |artist|
-      #  artist == beyonce
-      #end
-      #expect(artists_that_are_beyonce.count).to eq(1)
     end
   end
 

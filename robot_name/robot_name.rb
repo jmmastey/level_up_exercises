@@ -12,21 +12,21 @@ class Robot
   def initialize(args = {})
     @@registry ||= []
     @name_generator = args[:name_generator]
-    assign_name
+    @name = assign_name
     assert_valid_name
     add_name_to_registry
   end
 
   def assign_name
     if @name_generator
-      @name = @name_generator.call
+      @name_generator.call
     else
       generate_new_name
     end
   end
 
   def generate_new_name
-    @name = "#{character * 2}#{number * 3}"
+    "#{character * 2}#{number * 3}"
   end
 
   def assert_valid_name

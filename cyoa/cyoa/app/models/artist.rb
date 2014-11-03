@@ -113,7 +113,7 @@ class Artist < ActiveRecord::Base
         nbs_metrics.keys.each do |nbs_category|
           category = Category.find_or_create_by(name: nbs_category)
           nbs_metrics[nbs_category].each do |nbs_date, nbs_value|
-            new_metrics.push "(#{self.id}, #{category.id}, #{service.id}, #{nbs_value}, '#{nbs_date}', '#{recorded_on(nbs_date)}', '#{cur_time}', '#{cur_time}')"
+            new_metrics.push "(#{id}, #{category.id}, #{service.id}, #{nbs_value}, '#{nbs_date}', '#{recorded_on(nbs_date)}', '#{cur_time}', '#{cur_time}')"
           end
         end
       end

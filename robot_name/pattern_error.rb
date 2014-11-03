@@ -1,9 +1,9 @@
 class PatternError < RuntimeError
   def initialize(msg = nil)
-    @message = msg
+    @message = msg || "Robot name does not match the pattern"
   end
 
   def message
-    @message || "Generated robot name does not conform to the accepted pattern"
+    @message
   end
 end

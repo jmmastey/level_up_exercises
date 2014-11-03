@@ -1,9 +1,9 @@
 class NameCollisionError < RuntimeError
   def initialize(msg = nil)
-    @message = msg
+    @message = msg || "Robot name already taken"
   end
 
   def message
-    @message || 'Tried to re-generate previously generated Robot Name'
+    @message
   end
 end

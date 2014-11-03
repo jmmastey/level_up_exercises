@@ -1,9 +1,9 @@
 class RegistryError < RuntimeError
   def initialize(msg = nil)
-    @message = msg
+    @message= msg || "Valid robot name registry was not provided"
   end
 
   def message
-    @message || "Valid robot name registry was not provided"
+    @message
   end
 end

@@ -28,9 +28,8 @@ class Robot
   end
 
   def assert_valid_name
-    if !(name =~ VALID_NAME) || @@registry.include?(name)
-      raise NameCollisionError, 'There was a problem generating the robot name!'
-    end
+    raise NameCollisionError, 'The robot name is not valid!' unless name =~ VALID_NAME
+    raise NameCollisionError, 'The robot name already exists!' if @@registry.include?(name)
   end
 
   def add_to_registry

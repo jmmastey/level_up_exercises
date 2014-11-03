@@ -65,6 +65,7 @@ module TheatreInChicago
     def add_showing(showing)
       return unless showing.present?
       return unless inside_date_range?(showing)
+      return if showing.in?(showings)
       showings << showing
     end
 

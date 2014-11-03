@@ -35,7 +35,7 @@ class Event < ActiveRecord::Base
   def pretty_date_range
     return 'No Showings' unless showings.present?
     return "#{pretty_date(showings.first.time)} Only" if Showing.one_day_only?(showings)
-    pretty_date(showings.first.time) + " - " + pretty_date(showings.last.time)
+    pretty_date_no_year(showings.first.time) + " - " + pretty_date(showings.last.time)
   end
 
   def pretty_showing_count
@@ -82,5 +82,9 @@ class Event < ActiveRecord::Base
 
   def pretty_date(time)
     time.strftime("%b %-d, %Y")
+  end
+
+  def pretty_date_no_year(time)
+    time.strftime("%b %-d")
   end
 end

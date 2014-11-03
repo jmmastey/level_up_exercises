@@ -47,5 +47,5 @@ function drawHomeBackground() {
 	ctx.lineCap = "round";
 
 	ctx.lineWidth = 20;
-	drawTripod(ctx, 250, 308, 75, 160);
+	drawTripod(ctx, 247, 303, 75, 160);
 }

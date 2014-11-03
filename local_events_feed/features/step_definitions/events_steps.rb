@@ -9,7 +9,7 @@ Given /^they are on the events page$/ do
 end
 
 When /^they click on scrape-events$/ do
-  click_link("Scrape for Events")
+  click_link("Scrape")
 end
 
 When /^they click on an event$/ do

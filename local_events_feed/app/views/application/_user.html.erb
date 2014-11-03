@@ -10,16 +10,16 @@
 	</tr>
 	  <% current_user.sorted_showings.each do |showing| %>
     <tr>
-	  <td class='member'><%= showing.pretty_local_date %></td>
-	  <td class='member'><%= link_to showing.name.truncate(25), showing.event %></td>
-	  <td class='member'><%= showing.location.truncate(30) %></td>
-	  <td class='member'><%= showing.pretty_local_time %></td>
-	  <td class='member'>
+	  <td><%= showing.pretty_local_date %></td>
+	  <td><%= link_to showing.name.truncate(25), showing.event %></td>
+	  <td><%= showing.location.truncate(30) %></td>
+	  <td><%= showing.pretty_local_time %></td>
+	  <td>
 		<%= link_to 'Update',
 			{ controller: 'users', action: 'add_showing_to_calendar', showing_id: showing.id, id: current_user[:id] },
 			method: :post, :format => :ics, :id => "add_cal-#{showing.id}" %>
 	  </td>
-	  <td align='center' class='member'>
+	  <td align='center'>
 		<%= link_to image_tag("minus.png", :class => 'minus'), 
 		{ controller: 'users', action: 'remove_showing', showing_id: showing[:id], id: current_user[:id] },
 		method: :post, :id => "remove-#{showing[:id]}-user-show" %>

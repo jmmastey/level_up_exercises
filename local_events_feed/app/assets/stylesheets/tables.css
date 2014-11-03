@@ -42,7 +42,7 @@ a:hover {
 }
 
 .non-member {
-	background-color:rgba(60, 60, 60, 0.5);
+	background-color:rgba(60, 60, 60, 0.4);
 }
 
 .member .name a {

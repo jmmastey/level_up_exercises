@@ -48,7 +48,7 @@ RSpec.describe Event, :type => :model do
   end
 
   it 'can show a date range of showings' do
-    expect(event_with_showings.pretty_date_range).to eq('Oct 1, 2014 - Oct 3, 2014')
+    expect(event_with_showings.pretty_date_range).to eq('Oct 1 - Oct 3, 2014')
   end
 
   it 'can show single-day showings date-range' do

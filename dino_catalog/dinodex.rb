@@ -1,7 +1,8 @@
 require 'csv'
+require 'table_print'
 #
 class Dinosaur
-    attr_reader :name
+    attr_reader :name, :period, :continent, :diet, :weight_in_lbs, :legs, :description
   def initialize(options)
     @name = options[:name].to_s
     @period = options[:period].to_s
@@ -11,7 +12,6 @@ class Dinosaur
     @legs = convert_legs(options[:walking])
     @description = options[:description].to_s
   end
-
 
   def convert_legs(dino)
     if dino.downcase == "biped"
@@ -31,7 +31,11 @@ class Library
     @dinodex = []
     load_dinos('dinodex.csv')
     load_dinos('african_dinosaur_export.csv')
-    p @dinodex[-1].name
+    system('clear')
+    tp @dinodex
+    print "\n"
+    sleep(1)
+    options
   end
 
   def load_dinos(file)
@@ -43,6 +47,13 @@ class Library
       @dinodex << Dinosaur.new(dino)
     end
   end
+
+  def options
+    system('clear')
+    print "What would you like to do? \n1: Find Bipeds \n2: Find Carnivores \n3: Find Dinosaurs by Period \n4: Find BIG Dinosaurs"
+    gets.chomp
+  end
+
 end
 
-dinos = Library.new('dinodex.csv')
+  dinos = Library.new('dinodex.csv')

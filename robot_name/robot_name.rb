@@ -19,12 +19,14 @@ class Robot
     if @name_generator
       @name = @name_generator.call
     else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
-
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+      generate_new_name
     end
+  end
 
+  def generate_new_name
+    generate_char = -> { ('A'..'Z').to_a.sample }
+    generate_num = -> { rand(10) }
+    @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
   end
 
   # New method: add name to registry

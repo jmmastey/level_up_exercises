@@ -1,7 +1,7 @@
 require_relative 'name_collision_error'
 require_relative 'pattern_error'
 
-class RobotNameRegistry
+class RobotNameFactory
   UPPER_COUNT = 2
   DIGIT_COUNT = 3
   DEFAULT_SCHEMA = "[[:upper:]]{#{UPPER_COUNT}}[[:digit:]]{#{DIGIT_COUNT}}"

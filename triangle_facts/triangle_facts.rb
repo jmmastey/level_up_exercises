@@ -16,7 +16,6 @@ class Triangle
 
   def scalene
     true if side1 != side2 && side2 != side3
-    #true if !equilateral && !isosceles
   end
 
   def recite_facts

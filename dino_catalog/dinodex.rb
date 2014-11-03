@@ -25,19 +25,24 @@ class Dinosaur
 end
 
 class Library
-  def initialize
+  attr_accessor :dinodex
+
+  def initialize(file)
+    @dinodex = []
+    load_dinos('dinodex.csv')
+    load_dinos('african_dinosaur_export.csv')
+    p @dinodex[-1].name
   end
 
-  def parser(file)
-    dinosaurs = CSV.read(file, headers:true)
-
-    dinosaurs.each do |dino|
-        row = dino.to_hash
-        mapping = {"Genus" => "Name", "Carnivore" => "Diet", "Weight" => "Weight_in_lbs"}
-        row.keys.each { |k| row[mapping[k]] = row.delete(k) if mapping[k]}
-        row = row.inject({}){|memo,(k,v)| memo[k.downcase.to_sym] = v; memo}
-        library << Dinosaur.new(row)
+  def load_dinos(file)
+    CSV.foreach(file, :headers=> true) do |row|
+      dino = row.to_hash
+      mapping = {"Genus" => "Name", "Carnivore" => "Diet", "Weight" => "Weight_in_lbs"}
+      dino.keys.each { |k| dino[mapping[k]] = dino.delete(k) if mapping[k]}
+      dino = dino.inject({}){|memo,(k,v)| memo[k.downcase.to_sym] = v; memo}
+      @dinodex << Dinosaur.new(dino)
     end
   end
 end
-p library
+
+dinos = Library.new('dinodex.csv')

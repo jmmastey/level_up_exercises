@@ -17,7 +17,8 @@ describe Artist do
     end
 
     it "name of artist is unique" do
-      expect(FactoryGirl.build(:another_artist, name: artist.name.downcase)).not_to be_valid
+      artist_with_same_name = FactoryGirl.build(:another_artist, name: artist.name.downcase)
+      expect(artist_with_same_name).not_to be_valid
     end
 
     it "can be searched case-insensitively" do
@@ -28,15 +29,20 @@ describe Artist do
     end
 
     it "can locate or create a unique entry" do
-      expect(Artist.find_or_create_by_unique_name("Something Whatever")).not_to be_nil
-      expect(Artist.find_or_create_by_unique_name(artist.name.upcase)).to eq(artist)
+      new_artist_to_search_for = "Something Whatever"
+      new_artist_search_result = Artist.find_or_create_by_unique_name(new_artist_to_search_for)
+      expect(new_artist_search_result).not_to be_nil
+
+      artist_search_result_uppercase = Artist.find_or_create_by_unique_name(artist.name.upcase)
+      expect(artist_search_result_uppercase).to eq(artist)
     end
   end
 
   context "Next Big Sound API" do
     describe "#nbs_id" do
       it "has a unique nbs id" do
-        expect(FactoryGirl.build(:another_artist, nbs_id: artist.nbs_id)).not_to be_valid
+        artist_with_duplicate_nbs_id = FactoryGirl.build(:another_artist, nbs_id: artist.nbs_id)
+        expect(artist_with_duplicate_nbs_id).not_to be_valid
       end
     end
 
@@ -50,7 +56,8 @@ describe Artist do
 
   describe "#grooveshark_id" do
     it "has a unique grooveshark id" do
-      expect(FactoryGirl.build(:another_artist, grooveshark_id: artist.grooveshark_id)).not_to be_valid
+      artist_with_duplicate_api_id = FactoryGirl.build(:another_artist, grooveshark_id: artist.grooveshark_id)
+      expect(artist_with_duplicate_api_id).not_to be_valid
     end
   end
 end

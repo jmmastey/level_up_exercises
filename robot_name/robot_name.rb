@@ -3,7 +3,7 @@ class NameCollisionError < RuntimeError; end
 class Robot
   attr_accessor :name
 
-  VALID_NAME = /[[:alpha:]]{2}[[:digit:]]{3}/
+  VALID_NAME = /^[[:alpha:]]{2}[[:digit:]]{3}$/
   INVALID_NAME_ERROR = 'The robot name is not valid!'
   NAME_EXISTS_ERROR = 'The robot name already exists!'
 
@@ -13,7 +13,8 @@ class Robot
     @@registry ||= []
     @name_generator = args[:name_generator]
     assign_name
-    add_to_registry
+    assert_valid_name
+    add_name_to_registry
   end
 
   def assign_name
@@ -22,11 +23,10 @@ class Robot
     else
       generate_new_name
     end
-    assert_valid_name
   end
 
   def generate_new_name
-    @name = "#{character}#{character}#{number}#{number}#{number}"
+    @name = "#{character*3}#{character}#{number}#{number}#{number}"
   end
 
   def assert_valid_name
@@ -34,7 +34,7 @@ class Robot
     raise NameCollisionError, NAME_EXISTS_ERROR if @@registry.include?(name)
   end
 
-  def add_to_registry
+  def add_name_to_registry
     @@registry << @name
   end
 

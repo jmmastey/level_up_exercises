@@ -2,10 +2,16 @@ require_relative 'robot_name'
 
 registry = RobotNameRegistry.new
 
-robot = Robot.new(registry)
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+# With Default options
+sparky = Robot.new(registry)
+puts "Robot name is #{sparky.name}, but we usually call him Sparky"
 
-# Errors!
-generator = -> { 'AA111' }
-Robot.new(registry, name_generator: generator)
-Robot.new(registry, name_generator: generator)
+# Check name collisions
+static_generator = lambda {'AA123'}
+billy = Robot.new(registry, name_generator: static_generator)
+# bobby = Robot.new(registry, name_generator: static_generator)
+
+# Check different schema
+static_generator = lambda {'AA1234'}
+arthur = Robot.new(registry, name_generator: static_generator, schema: "[[:upper:]]{2}[[:digit:]]{4}")
+p arthur.name

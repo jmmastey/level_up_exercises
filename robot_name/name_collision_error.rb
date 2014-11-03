@@ -1,9 +1,6 @@
 class NameCollisionError < RuntimeError
-  def initialize(msg = nil)
-    @message = msg || "Robot name already taken"
-  end
-
-  def message
-    @message
+  def initialize(message = nil)
+    message ||= "Generated name already exists in the registry"
+    super
   end
 end

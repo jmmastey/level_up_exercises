@@ -6,9 +6,9 @@ Feature: Default activation codes
 Scenario: Default arming code is 1234
   Given the bomb is not started
   When I start the bomb
-  I see the arming code 1234
+  Then I see the arming code 1234
 
 Scenario: Default disarming code is 0000
   Given the bomb is not started
   When I start the bomb
-  I see the disarming code 0000
+  Then I see the disarming code 0000

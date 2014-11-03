@@ -7,7 +7,7 @@ Feature: Register Numeric Activation Codes
 Scenario: Visit bomb controls when no activation codes are registered
   Given the bomb has no activation codes registered
   When I see the activation code registration controls
-  And I see a field to register an arming code
+  Then I see a field to register an arming code
   And I see a field to register a disarming code
 
 @javascript
@@ -27,4 +27,3 @@ Scenario: Register non-numeric activation codes
   And I enter a non-numeric disarming code "45G8"
   And I press the "commit" button
   Then I see the bomb has no activation codes registered
-@javascript

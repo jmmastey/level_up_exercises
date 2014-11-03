@@ -12,4 +12,11 @@ FactoryGirl.define do
     f.code "ORD"
     association :location, factory: :ohare_location
   end
+
+  factory :laguardia, class: :airport do |f|
+    f.name "LaGuardia International Airport"
+    f.code "LGA"
+    association :location, factory: :laguardia_location
+  end
+
 end

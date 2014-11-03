@@ -130,6 +130,7 @@ GEM
     multi_json (1.10.1)
     multi_test (0.1.1)
     multipart-post (2.0.0)
+    netrc (0.8.0)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     nokogiri (1.6.3.1-x86-mingw32)
@@ -174,6 +175,13 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.2)
       json (~> 1.4)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
+    rest-client (1.7.2-x86-mingw32)
+      ffi (~> 1.9)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -264,6 +272,7 @@ DEPENDENCIES
   launchy
   pg
   rails (= 4.1.6)
+  rest-client
   rspec-rails (~> 3.0.0)
   rubocop!
   rubocop-rspec

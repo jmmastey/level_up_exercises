@@ -8,6 +8,4 @@ class Flight < ActiveRecord::Base
     :destination_date_time,
     :origin_airport,
     :origin_date_time
-
 end
-

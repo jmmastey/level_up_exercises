@@ -14,4 +14,11 @@ FactoryGirl.define do
     f.state "IL"
     f.postal_code "60666"
   end
+
+  factory :laguardia_location, class: Location do |f|
+    f.address1 "LaGuardia Airport"
+    f.city "New York"
+    f.state "NY"
+    f.postal_code "11371"
+  end
 end

@@ -42,7 +42,7 @@ class Legislator < ActiveRecord::Base
         legislator = legislator.first
 
         old_hash = ApplicationHelper::to_md5_hash legislator
-        new_hash = ApplicationHelper::to_md5_hash result
+        new_hash = ApplicationHelper::to_md5_hash result, Legislator.new
 
         unless old_hash == new_hash
           Legislator.update(legislator.id, 

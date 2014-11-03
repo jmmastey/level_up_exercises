@@ -24,7 +24,7 @@ class Bill < ActiveRecord::Base
         bill = bill.first
 
         old_hash = ApplicationHelper::to_md5_hash bill
-        new_hash = ApplicationHelper::to_md5_hash result
+        new_hash = ApplicationHelper::to_md5_hash result, Bill.new
 
         unless old_hash == new_hash
           Bill.update(bill.id, bill_type: result['bill_type'],

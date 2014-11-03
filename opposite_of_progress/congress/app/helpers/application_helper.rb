@@ -3,14 +3,14 @@ module ApplicationHelper
   API_KEY = "2d3136f6874046c8ba34d5e2f1a96b03"
   API_PAGE_COUNT = "50"
 
-  def self.to_md5_hash(obj)
+  def self.to_md5_hash(obj, empty_obj = obj.class.new)
     md5 = Digest::MD5.new
     md5.update ""
 
     unless obj.nil?
-        obj.attributes.each do |key,_|
-          md5 << obj[key].to_s unless key == "id"
-        end
+      empty_obj.attributes.each do |key,_|
+        md5 << obj[key].to_s unless key == "id"
+      end
     end
 
     md5.hexdigest

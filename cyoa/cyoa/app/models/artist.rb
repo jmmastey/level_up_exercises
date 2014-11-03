@@ -3,7 +3,7 @@ class Artist < ActiveRecord::Base
   friendly_id :nbs_name, use: :slugged
 
   has_many :songs, dependent: :destroy
-  has_many :metrics
+  has_many :metrics, -> { order "recorded_on DESC" }
   has_and_belongs_to_many :users
 
   validates :name, presence: true,

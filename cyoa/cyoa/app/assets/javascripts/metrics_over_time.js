@@ -1,38 +1,33 @@
 $(function () {
-    var artistMetrics = [];
-        // create the chart when all data is loaded
-    createChart = function () {
+  var artistMetrics = [];
 
-        $('#metrics-over-time').highcharts('StockChart', {
+  createChart = function () {
 
-            rangeSelector: {
-                inputEnabled: true
-            },
+     $('#metrics-over-time').highcharts('StockChart', {
+        rangeSelector: {
+          inputEnabled: true
+        },
+        legend: {
+          enabled: true
+        },
+        title: {
+          text: 'Metrics Over Time'
+        },
+        series: artistMetrics
+     });
+  };
 
-            legend: {
-                enabled: true
-            },
+  $.getJSON(window.location.href + '.json', function (data) {
 
-            title: {
-                text: 'Metrics Over Time'
-            },
+    services = Object.keys(data);
 
-            series: artistMetrics
-        });
-    };
+    $.each(services, function(i, service) {
+      artistMetrics.push({
+        name: service,
+        data: data[service]
+      });
 
-
-    $.getJSON(window.location.href + '.json', function (data) {
-
-        services = Object.keys(data)
-
-        $.each(services, function(i, service) {
-            artistMetrics.push({
-                name: service,
-                data: data[service]
-            });
-
-            createChart();
-        });
+      createChart();
     });
+  });
 });

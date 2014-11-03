@@ -1,7 +1,5 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-  RADIANS_TO_DEGREES_CONVERSION = 180 / Math::PI
-
   def initialize(side_1, side_2, side_3)
     @side_1 = side_1
     @side_2 = side_2
@@ -9,7 +7,7 @@ class Triangle
   end
 
   def radians_to_degrees(radians)
-    (radians * RADIANS_TO_DEGREES_CONVERSION).round
+    (radians * 180 / Math::PI).round
   end
 
   def angle_1

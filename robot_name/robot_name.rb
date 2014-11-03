@@ -26,7 +26,7 @@ class Robot
   end
 
   def generate_new_name
-    @name = "#{character*3}#{character}#{number}#{number}#{number}"
+    @name = "#{character * 2}#{number * 3}"
   end
 
   def assert_valid_name
@@ -46,7 +46,7 @@ class Robot
   end
 
   def number
-    generate_num = -> { rand(10) }
+    generate_num = -> { rand(10).to_s }
     generate_num.call
   end
 end

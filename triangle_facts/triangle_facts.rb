@@ -45,32 +45,12 @@ class Triangle
   end
 
   def recite_facts
-    print_equilateral if equilateral?
-    print_isosceles if isosceles?
-    print_scalene if scalene?
-    print_angles
-    print_right if right?
-    puts ""
-  end
-
-  def print_equilateral
-    puts "This triangle is equilateral!"
-  end
-
-  def print_isosceles
-    puts "This triangle is isosceles! Also, that word is hard to type."
-  end
-
-  def print_scalene
-    puts "This triangle is scalene and mathematically boring."
-  end
-
-  def print_angles
+    puts "This triangle is equilateral!" if equilateral?
+    puts "This triangle is isosceles! Also, that word is hard to type." if isosceles?
+    puts "This triangle is scalene and mathematically boring." if scalene?
     puts "The angles of this triangle are #{angle_1}, #{angle_2}, #{angle_3}"
-  end
-
-  def print_right
-    puts "This triangle is also a right triangle!"
+    puts "This triangle is also a right triangle!" if right?
+    puts
   end
 
   protected

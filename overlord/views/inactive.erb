@@ -1,8 +1,12 @@
-<h2> Status: The bomb is inactive </h2>
+<% if !@bomb.active? %>
+  <h2> Status: The bomb is inactive </h2>
+<%end%>
 
-<div class="center-bomb">
-  <img id="bomb-active" src="images/inactive_bomb.jpg">
-</div>
+ <div class="center-bomb">
+   <img id="bomb-inactive" src="images/inactive_bomb.jpg">
+ </div>
+
+
 
 <div class="bomb-form">
   <form action="/activate" method="post">

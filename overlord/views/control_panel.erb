@@ -20,7 +20,7 @@
           <div id="armingCodeEntry" class="codeEntry">
             <h1 id="labelArmingCode" class="label">Arming code</h1>
             <div class="controlFrame">
-              <input name="arming_code" type="text" value="<%= @arming_code %>"
+              <input id="armingCodeInput" name="arming_code" type="text" value="<%= @arming_code %>"
               class="innerBevel codeEntry textDisplay"
               onfocus="codeEntryFocused(this)">
             </div>
@@ -40,7 +40,7 @@
           <div id="disarmingCodeEntry" class="codeEntry">
             <h1 id="labelDisarmingCode" class="label">Disarming code</h1>
             <div class="controlFrame">
-              <input name="disarming_code" type="text" value="<%= @disarming_code %>"
+              <input id="disarmingCodeInput" name="disarming_code" type="text" value="<%= @disarming_code %>"
                class="innerBevel textDisplay"
                onfocus="codeEntryFocused(this)">
             </div>

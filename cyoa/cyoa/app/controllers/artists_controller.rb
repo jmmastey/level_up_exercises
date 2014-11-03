@@ -8,8 +8,7 @@ class ArtistsController < ApplicationController
   end
 
   def destroy
-    artist = Artist.find(params[:id])
-    current_user.remove_artist(artist)
+    current_user.remove_artist(@artist)
     redirect_to :back
   end
 
@@ -31,7 +30,7 @@ class ArtistsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :layout => false }
+      format.json { render layout: false }
     end
   end
 

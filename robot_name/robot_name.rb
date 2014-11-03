@@ -4,6 +4,8 @@ class Robot
   attr_accessor :name
 
   VALID_NAME = /[[:alpha:]]{2}[[:digit:]]{3}/
+  INVALID_NAME_ERROR = 'The robot name is not valid!'
+  NAME_EXISTS_ERROR = 'The robot name already exists!'
 
   @@registry
 
@@ -28,8 +30,8 @@ class Robot
   end
 
   def assert_valid_name
-    raise NameCollisionError, 'The robot name is not valid!' unless name =~ VALID_NAME
-    raise NameCollisionError, 'The robot name already exists!' if @@registry.include?(name)
+    raise NameCollisionError, INVALID_NAME_ERROR unless name =~ VALID_NAME
+    raise NameCollisionError, NAME_EXISTS_ERROR if @@registry.include?(name)
   end
 
   def add_to_registry

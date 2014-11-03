@@ -2,13 +2,13 @@ require 'csv'
 require 'table_print'
 #
 class Dinosaur
-    attr_reader :name, :period, :continent, :diet, :weight_in_lbs, :legs, :description
+    attr_reader :name, :period, :continent, :diet, :weight, :legs, :description
   def initialize(options)
     @name = options[:name].to_s
     @period = options[:period].to_s
     @continent = options[:continent].to_s
     @diet = convert_diet(options[:diet].to_s)
-    @weight_in_lbs = options[:weight_in_lbs].to_i
+    @weight = options[:weight_in_lbs].to_i
     @legs = convert_legs(options[:walking])
     @description = options[:description].to_s
   end
@@ -74,10 +74,17 @@ class Library
     when "4"
       big
     when "5"
-      reset_filters
+      @results = @dinodex
+      options
     when "6"
-      print_results
-    when "Q"
+      if @results.length > 0
+        tp @results
+      else
+        tp @dinodex
+      end
+      STDIN.gets
+      options
+    when "Q" || "q"
       exit
     else
       p "Incorrect choice"
@@ -122,8 +129,64 @@ class Library
   end
 
   def period
+    print "Which Period would you like to see Dinosaurs from?\n1: Cretaceous\n2: Permian\n3: Jurassic\n4: Oxfordian\n5: Albian\n6: Triassic\nEnter Selection or type b to go back:"
+    time_period = gets.chomp
+    case time_period
+    when "1"
+      era("cretaceous")
+    when "2"
+      era("permian")
+    when "3"
+      era("jurassic")
+    when "4"
+      era("oxfordian")
+    when "5"
+      era("albian")
+    when "6"
+      era("triassica")
+    when "b"
+      exit
+    else
+      p "Incorrect choice"
+      time_period = gets.chomp
+    end
   end
 
+  def era(time_period)
+    if results.length > 0
+      new_results = []
+      @results.each do |dino|
+        new_results << dino if dino.period.downcase.include?(time_period)
+      end
+      @results = new_results
+      tp @results
+    else
+      @dinodex.each do |dino|
+        @results << dino if dino.period.downcase.include?(time_period)
+      end
+      tp @results
+    end
+    STDIN.gets
+    options
+  end
+
+  def big
+    if results.length > 0
+      new_results = []
+      @results.each do |dino|
+        new_results << dino if dino.weight > 4000
+      end
+      @results = new_results
+      tp @results
+    else
+      @dinodex.each do |dino|
+        @results << dino if dino.weight > 4000
+      end
+      tp @results
+    end
+    STDIN.gets
+    options
+  end
 end
 
   dinos = Library.new('dinodex.csv')

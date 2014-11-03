@@ -1,3 +1,4 @@
+/* Baseclass representing Elements on page that user interacts with. */
 function ControlObject(elementID)
 {
   var self = this;  // Reference myself wherever JS sets "this" weird
@@ -53,6 +54,7 @@ function ControlObject(elementID)
   this.buttonUp = function() { self.isDisabled() || self.dim() };
 }
 
+/* A user interface element representing a push button */
 function ControlButton(elementID)
 {
   var self = this;
@@ -72,6 +74,7 @@ function ControlButton(elementID)
 
 ControlButton.prototype = new ControlObject();
 
+/* A user interface element representing a dis/arming button */
 function ActionButton(elementID)
 {
   ControlObject.call(this, elementID);
@@ -87,6 +90,7 @@ function ActionButton(elementID)
 
 ActionButton.prototype = new ControlObject();
 
+/* A user interface element implementing the bomb timer */
 function TimerEntry(elementID, resetToValue)
 {
   var self = this;
@@ -117,7 +121,7 @@ function TimerEntry(elementID, resetToValue)
   };
 }
 
-initializations =
+interface_state_initializations =
 {
   'armed': function()
   {
@@ -130,12 +134,16 @@ initializations =
     timerEntryUp().lightUp();
     timerEntryDown().lightUp();
   },
-  'initial': function() { flashActionButtons() }
+  'initial': function()
+  {
+    flashActionButtons();
+    disarmingButton().lightUp();
+  }
 }
 
 function initializeInterface()
 {
-  var handler = initializations[CONTROLPANEL.state];
+  var handler = interface_state_initializations[CONTROLPANEL.state];
   if (handler) handler();
 };
 

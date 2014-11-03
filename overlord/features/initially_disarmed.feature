@@ -4,6 +4,7 @@ Feature: Initial State
   register activation codes, with preset defaults
   So I neither instantly die nor arm the bomb with unknown codes
 
+@javascript
 Scenario: Start up initially disarmed
   Given the bomb is not started
   When I start the bomb

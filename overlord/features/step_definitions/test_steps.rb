@@ -24,7 +24,7 @@ Given(/the bomb is not started/) do
   true
 end
 
-When(/^start the bomb$/) do
+When(/start the bomb$/) do
   visit('/')
 end
 
@@ -79,8 +79,7 @@ Then(/see the ((?:dis)?arming) authorization controls/) do |which_button|
 end
 
 Then(/see the bomb is (?:still )?disarmed/) do
-  fail unless controlpanel_state_is('locked') &&
-              has_css?("#disarmingButton.disarmingButtonPushed")
+  fail unless has_css?("#disarmingButton.disarmingButtonBright")
 end
 
 Given(/(?<!see )the bomb is disarmed/) do
@@ -89,13 +88,13 @@ end
 
 When(/see the bomb is (?:still )?armed/) do
   fail unless controlpanel_state_is('armed') &&
-              has_css?("#armingButton.armingButtonPushed")
+              has_css?("#armingButton.armingButtonBright")
 end
 
 Given(/(?<!see )the bomb is armed/) do
   step "the bomb has activation codes registered"
-  step "enter arming code \"3456\""
-  step "enter disarming code \"5678\""
+  step "enter arming code \"#{ACTIVATION_CODES['arming']['correct']}\""
+  step "enter disarming code \"#{ACTIVATION_CODES['disarming']['correct']}\""
   step "press the \"arming\" button"
   step "press the \"commit\" button"
   step "see the bomb is armed"

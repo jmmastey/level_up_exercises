@@ -28,7 +28,8 @@
           <div id="armingCodeAction" class="controlFrame outerBevel codeActionOuter">
             <h1 id="labelArmingButton" class="label">Arm: use with caution</h1>
             <div id="armingButton" class="innerBevel foregroundSurface codeActionInner"
-                disabled="<%= arming_button_state %>" classWhenLit="armingButtonPushed"
+                disabled="<%= arming_button_state %>"
+                classWhenLit="armingButtonBright"
                 onmousedown="armingButton().buttonDown()"
                 onmouseup="armingButton().buttonUp()"
                 onclick="armingButtonPushed()">
@@ -49,7 +50,7 @@
             <h1 id="labelDisarmingButton" class="label">Disarm</h1>
             <div id="disarmingButton" class="innerBevel foregroundSurface codeActionInner"
                 disabled="<%= disarming_button_state %>"
-                classWhenLit="disarmingButtonPushed"
+                classWhenLit="disarmingButtonBright"
                 onmousedown="disarmingButton().buttonDown()"
                 onmouseup="disarmingButton().buttonUp()"
                 onclick="disarmingButtonPushed()">

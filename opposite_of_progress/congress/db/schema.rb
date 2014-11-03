@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141027214856) do
+ActiveRecord::Schema.define(version: 20141103155626) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20141027214856) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "sponsor_id"
+    t.date     "enacted_at"
   end
 
   create_table "deeds", force: true do |t|

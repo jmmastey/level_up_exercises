@@ -13,10 +13,11 @@ class Bill < ActiveRecord::Base
     md5 << obj["official_title"].to_s
     md5 << obj["short_title"].to_s
     md5 << obj["sponsor_id"].to_s
+    md5 << obj["enacted_at"].to_s
     md5.hexdigest
   end
 
-  def fetch(path = "#{ApplicationHelper::API_BASE_PATH}bills?apikey=#{ApplicationHelper::API_KEY}&per_page=#{ApplicationHelper::API_PAGE_COUNT}&page=10")
+  def fetch(path = "#{ApplicationHelper::API_BASE_PATH}bills?apikey=#{ApplicationHelper::API_KEY}&per_page=#{ApplicationHelper::API_PAGE_COUNT}&page=1")
     http = Curl.get(path)
     @results = JSON.parse(http.body_str)
 
@@ -35,7 +36,8 @@ class Bill < ActiveRecord::Base
                     last_version_on: result['last_version_on'],
                     official_title: result['official_title'],
                     short_title: result['short_title'],
-                    sponsor_id: result['sponsor_id'])
+                    sponsor_id: result['sponsor_id'],
+                    enacted_at: result['history']['enacted_at'])
       else
         bill = bill.first
 
@@ -53,7 +55,8 @@ class Bill < ActiveRecord::Base
                       last_version_on: result['last_version_on'],
                       official_title: result['official_title'],
                       short_title: result['short_title'],
-                      sponsor_id: result['sponsor_id'])
+                      sponsor_id: result['sponsor_id'],
+                      enacted_at: result['history']['enacted_at'])
         end
       end
     end

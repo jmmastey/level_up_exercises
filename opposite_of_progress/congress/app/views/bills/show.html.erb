@@ -1,16 +1,14 @@
 <h2><%= "#{@bill.short_title}" %></h2>
 
-<p><%= "Chamber: #{@bill.chamber}" if @bill.chamber %></p>
-
-<p><%= "Last Vote: #{@bill.last_vote_at}" if @bill.last_vote_at %></p>
-
-<% if @bill.sponsor_id %>
-<p><%= @bill.sponsor_id %></p>
-  <% legislator = Legislator.where(bioguide_id: @bill.sponsor_id).first %>
-  <% if legislator %>
-    <p><%= "Sponsor Id: #{legislator.full_name}"%></p>
-  <% end %>
+<% legislator = Legislator.where(bioguide_id: @bill.sponsor_id).first %>
+<% if legislator %>
+  <h4>Legislator</h4>
+  <div><%= render partial: "legislators/legislator_stub_item", locals: {legislator: legislator} %></div>
 <% end %>
+
+<h4>Basics</h4>
+<div><%= "Chamber: #{@bill.chamber}" if @bill.chamber %></div>
+<div><%= "Last Vote: #{@bill.last_vote_at}" if @bill.last_vote_at %></div>
 
 <hr />
 

@@ -2,7 +2,7 @@
 
 <% @results.each do |result| %>
   <% @bill = result %>
-  <%= render partial: "bill_list_item", locals: {bill: @bill} %>
+  <div><%= render partial: "bill_stub_item", locals: {bill: @bill} %></div>
 <% end %>
 
 <hr />

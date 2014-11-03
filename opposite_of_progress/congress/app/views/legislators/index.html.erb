@@ -2,7 +2,7 @@
 
 <% @results.each do |result| %>
   <% @legislator = result %>
-  <%= render partial: "legislator_list_item", locals: {legislator: @legislator} %>
+  <div><%= render partial: "legislator_stub_item", locals: {legislator: @legislator} %></div>
 <% end %>
 
 <hr />

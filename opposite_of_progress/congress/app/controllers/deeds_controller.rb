@@ -9,7 +9,6 @@ class DeedsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_deed
       @deed = Deed.find(params[:id])
     end

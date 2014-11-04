@@ -16,7 +16,26 @@ module ApplicationHelper
     md5.hexdigest
   end
 
-  def fetch
-    # I really need to create a fetch
+  def fetch path, class_name, match_field
+    http = Curl.get(path)
+    @results = JSON.parse(http.body_str)
+
+    @results["results"].each do |result|
+      obj = class_name.where(match_field: result[match_field])
+
+      if obj.count == 0
+        obj.new.attributes.each do |field|
+          field
+        end
+        # create new obj
+      else
+        obj = obj.first
+
+        # setup hashes for comp
+
+        #update if hashes don't match
+
+      end
+    end
   end
 end

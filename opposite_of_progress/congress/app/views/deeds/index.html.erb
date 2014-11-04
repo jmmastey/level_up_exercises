@@ -4,7 +4,6 @@
   <% @deed = result %>
   <%= render partial: "deed_list_item", locals: {deed: @deed} %>
 <% end %>
+<%= "There are no good deeds to show" if @results.count == 0 %>
 
 <hr />
-
-<%= "There are no good deeds to show" if @results.count == 0 %>

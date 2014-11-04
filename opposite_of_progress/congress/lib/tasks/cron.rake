@@ -1,3 +1,4 @@
+desc "Pulls in legislator and bills data"
 task :cron => :environment do
   puts "Pull in Legislators"
   base_url = "#{ApplicationHelper::API_BASE_PATH}legislators?apikey=#{ApplicationHelper::API_KEY}&per_page=#{ApplicationHelper::API_PAGE_COUNT}"

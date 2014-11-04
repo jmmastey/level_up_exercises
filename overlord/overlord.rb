@@ -16,14 +16,14 @@ def bomb
   session[:bomb]
 end
 
-
 USER_MESSAGES =
 {
   exploded: "All your base are belong to us.",
   ready_to_disarm: "Enter disarming code, push DISARMED and commit to confirm.  You have no chance to survive. Make your time. HA HA HA.",
   ready_to_arm: "Somebody set up us the bomb! Enter arming code, push ARMED and commit to confirm.",
-  ready_to_lock: "Enter arming and disarming codes and commit to lock in. Take off every zig!"
+  ready_to_lock: "Enter arming and disarming codes and commit to lock in. Take off every zig!",
 }
+
 def setup_session
   session[:bomb] ||= Supervillian::Bomb.new
   @arming_code = bomb.locked? ? MASKED_ACTIVATION_CODE : bomb.arming_code
@@ -32,7 +32,7 @@ end
 
 before do
   setup_session
-  apply_timer_value if (request.post?)
+  apply_timer_value if request.post?
   determine_system_message
 end
 
@@ -46,12 +46,12 @@ post '/cancel' do
 end
 
 get EXPLODED_URL do
-  erb :exploded, :layout => false
+  erb :exploded, layout: false
 end
 
 get CONTROL_PANEL_URL do
   check_exploded
-  erb :control_panel, :layout => :layout
+  erb :control_panel, layout: :layout
 end
 
 post '/lock' do
@@ -85,14 +85,9 @@ def do_and_report_error_if(guard_condition = true)
     yield
   rescue Supervillian::ExplodedError
     redirect "/exploded"
-  rescue Supervillian::WrongActivationCodeError
-    set_system_message("Invalid activation code")
-  rescue Supervillian::OperationDeniedError
-    set_system_message("Operation not available")
-  rescue Supervillian::InvalidStateError
-    set_system_message("Can't be done")
+  rescue Supervillian::BombError => ex
+    set_system_message(ex.message)
   rescue => ex
-    puts ex.message
     set_system_message("Ooops.. something bad happened. Don't do that again")
   end
 

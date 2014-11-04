@@ -49,7 +49,7 @@ module Supervillian
 
     def delay=(delay)
       check_exploded
-      raise OperationDeniedError if armed?
+      raiseError(OperationDeniedError) if armed?
       @delay = delay
     end
 
@@ -59,8 +59,8 @@ module Supervillian
 
     def arm!(code)
       check_exploded
-      raise InvalidBombStateError unless locked? && !armed?
-      raise WrongActivationCodeError unless code == arming_code
+      raiseError(InvalidBombStateError) unless locked? && !armed?
+      raiseError(WrongActivationCodeError) unless code == arming_code
       @disarm_retry_count = 0
       do_arm
     end
@@ -83,8 +83,8 @@ module Supervillian
     private
 
     def validate_activation_code(code)
-      raise WrongActivationCodeError,
-            "activation code must be a numeric string" unless code =~ /^\d+$/
+      raiseError(WrongActivationCodeError,
+                 "Activation code must be numeric") unless code =~ /^\d+$/
     end
 
     def do_arm
@@ -98,7 +98,7 @@ module Supervillian
     end
 
     def disarm(code)
-      raise WrongActivationCodeError unless code == disarming_code
+      raiseError(WrongActivationCodeError) unless code == disarming_code
       cancel_explode_timer
       @armed = false
     end
@@ -114,11 +114,11 @@ module Supervillian
 
     def can_be_configured?
       check_exploded
-      raise OperationDeniedError, "Operation not permitted" if locked? || armed?
+      raiseError(OperationDeniedError) if locked? || armed?
     end
 
     def check_exploded
-      raise ExplodedError if exploded?
+      raiseError(ExplodedError) if exploded?
     end
 
     def cancel_explode_timer
@@ -127,6 +127,18 @@ module Supervillian
         @explode_timer.kill
         @explode_timer = nil
       end
+    end
+
+    ERROR_MESSAGES =
+    {
+      InvalidStateError => 'Operation not possible',
+      OperationDeniedError => "Operation not permitted",
+      ExplodedError => "This bomb has already exploded",
+      WrongActivationCodeError => "Invalid activation code",
+    }
+
+    def raiseError(type, message = ERROR_MESSAGES[type])
+      raise type, message
     end
   end
 end

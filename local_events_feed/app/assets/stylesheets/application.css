@@ -107,6 +107,18 @@ a:hover {
 	padding: 0px;
 }
 
+#user-event-showings table .image {
+	background: none;
+	align: center;
+}
+
+#user-event-showings table .image img {
+	height: 80px;
+	width: 80px;
+	opacity: 0.7;
+	border-radius: 5px;
+	vertical-align: middle;
+}
 
 #user-event-showings table td .remove {
 	position: relative;
@@ -186,6 +198,19 @@ a:hover {
 #all-events table .showing-count {
 	color: #999999;
 	font-size: 16px;
+}
+
+#all-events table .image {
+	background: none;
+	align: center;
+}
+
+#all-events table img {
+	height: 110px;
+	width: 110px;
+	opacity: 0.7;
+	border-radius: 5px;
+	vertical-align: middle;
 }
 
 #all-events .nav {
@@ -503,10 +528,6 @@ a:hover {
 	color: #EEFF11;
 }
 
-.member .time {
-	color: #FFFF11;
-}
-
 .member .location {
 	color: #FFAA33;
 }
@@ -515,7 +536,11 @@ a:hover {
 	color: #FF9911;
 }
 
-.non-member .time {
+.member.time {
+	color: #FFFF11;
+}
+
+.non-member.time {
 	color: #FF4411;
 }
 

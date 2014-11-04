@@ -8,8 +8,9 @@
 	  <% member = showing.in?(current_user.showings) %>
 	  <% member_class = member ? 'member' : 'non-member' %>
 	  <tr>
-		<td class="<%= member_class %>"><%= showing.pretty_local_date %></td>
-		<td class="<%= member_class %>"><span class='time'><%= showing.pretty_local_time %></span></td>
+		<td class="<%= member_class %> dow"><%= showing.pretty_local_dow %></td>
+		<td class="<%= member_class %> date"><%= showing.pretty_local_date_no_dow %></td>
+		<td class="<%= member_class %> time"><%= showing.pretty_local_time %></td>
 		<td class="<%= member_class %>" align='center'>
 		  <% association = { showing_id: showing[:id], user_id: current_user[:id] } %>
 		  <% if member %>

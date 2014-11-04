@@ -5,7 +5,7 @@
 	  <% member = current_user.has_showing_in?(event) %>
 	  <% member_class = member ? "member" : "non-member" %>
 	  <tr>
-		<td class=<%= member_class %> align='left'>
+		<td class="<%= member_class %>" align='left'>
 		  <ul>
 			<li>
 			  <span class='name'>
@@ -17,6 +17,11 @@
 			<li><span class='date-range'><%= event.pretty_date_range %></span></li>
 			<li><span class='showing-count'><%= event.pretty_showing_count %></span></li>
 		  </ul>
+		</td>
+		<td class="<%= member_class %> image" %>
+		  <% if event.image.present? %>
+		  <img src=<%= event.image %> />
+		  <% end %>
 		</td>
 	  </tr>
 	  <% end %>

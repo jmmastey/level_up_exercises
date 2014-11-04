@@ -25,6 +25,14 @@ class Showing < ActiveRecord::Base
     time.in_time_zone(LOCAL_TIME_ZONE).strftime('%a, %b %-d, %Y')
   end
 
+  def pretty_local_date_no_dow
+    time.in_time_zone(LOCAL_TIME_ZONE).strftime('%b %-d, %Y')
+  end
+
+  def pretty_local_dow
+    time.in_time_zone(LOCAL_TIME_ZONE).strftime('%a')
+  end
+
   def pretty_local_time
     time.in_time_zone(LOCAL_TIME_ZONE).strftime('%I:%M %P')
   end

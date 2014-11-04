@@ -27,7 +27,7 @@ class BlagPost
     end
 
     @comments = args[:comments].presence || []
-    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
+    @body = args[:body].squish
     @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])).presence || Date.today
   end
 
@@ -88,11 +88,7 @@ class BlagPost
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    body.truncate(200).html_safe
   end
 
 end

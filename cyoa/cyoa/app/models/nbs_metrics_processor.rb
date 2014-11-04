@@ -3,9 +3,13 @@ class NbsMetricsProcessor
 
   def initialize(artist)
     @artist = artist
+    set_defaults
+    update_metrics
+  end
+
+  def set_defaults
     @new_metrics = []
     @cur_time = Time.now
-    update_metrics
   end
 
   def update_metrics
@@ -39,7 +43,9 @@ class NbsMetricsProcessor
         category = Category.find_or_create_by(name: nbs_category)
 
         nbs_metrics[nbs_category].each do |nbs_date, nbs_value|
-          @new_metrics.push "(#{artist.id}, #{category.id}, #{service.id}, #{nbs_value}, '#{nbs_date}', '#{date_recorded(nbs_date)}', '#{cur_time}', '#{cur_time}')"
+          record = "(#{artist.id}, #{category.id}, #{service.id}, #{nbs_value}, '#{nbs_date}', "
+          record += "'#{date_recorded(nbs_date)}', '#{cur_time}', '#{cur_time}')"
+          @new_metrics.push record
         end
       end
     end
@@ -48,10 +54,13 @@ class NbsMetricsProcessor
   def store_processed_metrics
     return unless @new_metrics.any?
 
-    sql_insertion_records = "INSERT INTO metrics (artist_id, category_id, service_id, value, nbs_date, recorded_on, created_at, updated_at) VALUES #{@new_metrics.join(", ")}"
-    ActiveRecord::Base.connection.execute sql_insertion_records
+    ActiveRecord::Base.connection.execute insert_statement
   end
 
+  def insert_statement
+    sql_records = @new_metrics.join(", ")
+    "INSERT INTO metrics (artist_id, category_id, service_id, value, nbs_date, recorded_on, created_at, updated_at) VALUES #{sql_records}"
+  end
 
   def get_nbs_metrics(start_on = 3.months.ago)
     artist.update_api_ids
@@ -65,24 +74,3 @@ class NbsMetricsProcessor
     Time.at(date_unix_sec)
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

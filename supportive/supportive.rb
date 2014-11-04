@@ -14,7 +14,7 @@ class BlagPost
       hash
     end
 
-    unless args[:author].blank? || args[:author_url].blank?
+    if args[:author].present? && args[:author_url].present?
       @author = Author.new(args[:author], args[:author_url])
     end
 

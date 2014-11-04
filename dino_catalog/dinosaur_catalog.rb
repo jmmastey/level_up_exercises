@@ -17,13 +17,13 @@ class DinosaurCatalog
   end
 
   def add_filter(filter, *args)
-    @filters << {filter: filter, args: args} if FILTERS.include?(filter)
+    @filters << { filter: filter, args: args } if FILTERS.include?(filter)
   end
 
   def init_filtered_dinosaurs
     @filtered_dinosaurs = @dinosaurs.clone
   end
- 
+
   def execute_all_filters
     @filters.each do |f|
       send f[:filter], *f[:args]

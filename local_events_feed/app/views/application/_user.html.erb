@@ -30,6 +30,9 @@
 		      method: :post, :id => "remove-#{showing[:id]}-user-show" %>
 		</div>
 	  </td>
+	  <% if showing.image.present? %>
+	  <td class="image-sample" data-image="<%= showing.image %>"></td>
+	  <% end %>
     </tr>
 	<% end %>
   </table>

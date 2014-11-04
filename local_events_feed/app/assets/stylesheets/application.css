@@ -565,3 +565,21 @@ a:hover {
 .remove-x:hover {
 	opacity: 1.0;
 }
+
+.image-sample {
+	display: none;
+}
+
+.on-user-home {
+	display: none;
+}
+
+.random-image {
+	position: fixed;
+	right: 50%;
+	top: 120px;
+	opacity: 0.75;
+	border-radius: 15px;
+	padding: 0px;
+	height: 120px;
+}

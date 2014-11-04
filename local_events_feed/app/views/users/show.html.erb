@@ -11,9 +11,16 @@
       <%= render :partial => "user.html.erb" %>
 	</div>
 	<%= render :partial => "home_menu.html.erb" %>
-	<div class='page-title'><%= first_name %>'s Events</div>
+	<div class="page-title"><%= first_name %>'s Events</div>
+	<div class="on-user-home"></div>
   <% else %>
     <h3>Please <%= link_to 'sign in', new_session_path %></h3>
   <% end %>
 </body>
 
+
+<script type="text/javascript">
+$( document ).ready( function() {
+  drawRandomUserShowing();
+});
+</script>

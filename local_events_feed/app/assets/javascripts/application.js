@@ -46,3 +46,48 @@ function drawHomeBackground() {
 	ctx.lineWidth = 20;
 	drawTripod(ctx, 247, 303, 75, 160);
 }
+
+var timer;
+var lastRandomIndex = 0;
+
+$('#search').keyup(function () {
+});
+
+function drawRandomUserShowing() {
+	population = $( ".image-sample" );
+	$( ".random-image" )
+		.fadeOut(function() {
+			$( this ).remove();
+		});
+
+	// No Longer On User Home
+	if ($( ".on-user-home" ).length == 0) {
+		clearTimeout(timer);
+		return;
+	}
+
+	var n = population.length;
+	if (n == 0) {
+		return;
+	}
+
+	lastRandomIndex = (lastRandomIndex + 1) % n;
+	var sample = population[lastRandomIndex];
+	var image = $( sample ).data("image");
+
+	d = document.createElement('div');
+	$(d).addClass("random-image")
+		.hide()
+		.html('<img src="' + image + '"/>')
+		.appendTo($( "#user-event-showings" ))
+		.fadeIn();
+
+    clearTimeout(timer);
+    timer = setTimeout( function() {
+		drawRandomUserShowing();
+    }, 5000);
+}
+
+window.onbeforeunload = function (e) {
+	clearTimeout(timer);
+};

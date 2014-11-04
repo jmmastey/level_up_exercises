@@ -2,6 +2,9 @@
 
 require 'active_support/all'
 
+# Skip validation, as per deprecation message
+I18n.enforce_available_locales = false
+
 class BlagPost
   attr_accessor :author, :comments, :categories, :body, :publish_date
 
@@ -9,16 +12,10 @@ class BlagPost
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
   def initialize(args)
-    args = args.inject({}) do |hash, (key, value)|
-      hash[key.to_sym] = value
-      hash
-    end
+    args.symbolize_keys!
 
-    if args[:author].present? && args[:author_url].present?
-      @author = Author.new(args[:author], args[:author_url])
-    end
-
-    @categories = (args[:categories].presence && args[:categories] - DISALLOWED_CATEGORIES) || []
+    @author = Author.new(args[:author], args[:author_url]) if args[:author].present? && args[:author_url].present?
+    @categories = (args[:categories].present? && args[:categories] - DISALLOWED_CATEGORIES) || []
     @comments = args[:comments].presence || []
     @body = args[:body].squish
     @publish_date = (args[:publish_date].presence && Date.parse(args[:publish_date])) || Date.today
@@ -31,15 +28,13 @@ class BlagPost
   private
 
   def byline
-    return "" if author.blank?
-
-    "By #{author.name}, at #{author.url}"
+    author.try { |a| "By #{a.name}, at #{a.url}" }
   end
 
   def category_list
     return "" if categories.blank?
 
-    categories.map { |cat| String(cat).titleize }.to_sentence
+    "Category".pluralize(categories.count) + ": " + categories.map { |cat| String(cat).titleize }.to_sentence
   end
 
   def commenters

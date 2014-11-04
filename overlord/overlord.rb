@@ -42,12 +42,14 @@ post "/deactivate" do
      @bomb = session[:bomb]
      if bomb.exploded?
         erb :exploded
-     else
+     elsif !bomb.active
+        erb :inactive
+      else
         erb :activated
      end
   else
     @bomb = session[:bomb]
-    erb :inactive
+    erb :activated
   end
   end
 

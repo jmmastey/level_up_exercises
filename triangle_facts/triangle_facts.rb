@@ -6,7 +6,7 @@ class Triangle
   end
 
   def equilateral
-     side1 == side2 && side2 == side3
+    side1 == side2 && side2 == side3
   end
 
   def isosceles
@@ -16,7 +16,6 @@ class Triangle
   def scalene
     side1 != side2 && side2 != side3
   end
-
 
   def recite_facts
     angles = calculate_angles(side1, side2, side3)

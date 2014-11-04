@@ -2,15 +2,24 @@ require 'csv'
 require 'table_print'
 #
 class Dinosaur
-    attr_reader :name, :period, :continent, :diet, :weight, :legs, :description
+  attr_reader :name, :period, :continent, :diet, :weight, :legs, :description
   def initialize(options)
     @name = options[:name].to_s
     @period = options[:period].to_s
-    @continent = options[:continent].to_s
+    @continent = options[:continent]
     @diet = convert_diet(options[:diet].to_s)
-    @weight = options[:weight_in_lbs].to_i
+    @weight = options[:weight_in_lbs]
     @legs = convert_legs(options[:walking])
     @description = options[:description].to_s
+  end
+
+  def convert_continent(cont, name)
+    if cont.nil?
+      print "Where is the #{name} from? "
+      gets.chomp
+    else
+      cont
+    end
   end
 
   def convert_legs(legs)
@@ -35,26 +44,34 @@ class Dinosaur
 end
 
 class Library
+  ACTION_MAP = {
+    "bipeds" => :bipeds,
+    "search" => :search,
+    "carnivores" => :carnivores,
+    "big" => :big,
+    "reset" => :reset,
+    "q" => :quit,
+    "period" => :period,
+    "else" => :not_an_option,
+  }
+
   attr_accessor :dinodex, :results
-
-
-  def initialize(file)
+  def initialize
     @dinodex = []
     @results = []
     load_dinos('dinodex.csv')
     load_dinos('african_dinosaur_export.csv')
-    system('clear')
     tp @dinodex
     @results = @dinodex
     options
   end
 
   def load_dinos(file)
-    CSV.foreach(file, :headers=> true) do |row|
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
       dino = row.to_hash
-      mapping = {"Genus" => "Name", "Carnivore" => "Diet", "Weight" => "Weight_in_lbs"}
-      dino.keys.each { |k| dino[mapping[k]] = dino.delete(k) if mapping[k]}
-      dino = dino.inject({}){|memo,(k,v)| memo[k.downcase.to_sym] = v; memo}
+      p dino
+      mapping = { genus: :name, carnivore: :diet, weight: :weight_in_lbs }
+      dino.keys.each { |k| dino[mapping[k]] = dino.delete(k) if mapping[k] }
       @dinodex << Dinosaur.new(dino)
     end
   end
@@ -62,84 +79,58 @@ class Library
   def options
     STDIN.gets
     system('clear')
-    print "Options\n1: Find Bipeds \n2: Find Carnivores \n3: Find Dinosaurs by Period \n4: Find BIG Dinosaurs\n5: Reset Filters \n6: Print Results\n7: Search Results\nQ: Quit\nWhat would you like to do? "
     choice = gets.chomp
-    case choice
-    when "1"
-      bipeds
-    when "2"
-      carnivores
-    when "3"
-      period
-    when "4"
-      big
-    when "5"
-      @results = @dinodex
-      options
-    when "6"
-      tp @results
-      options
-    when "7"
-      search
-    when "Q"
-      exit
-    else
-      p "Incorrect choice"
-      choice = gets.chomp
-    end
+    choice = ACTION_MAP[choice] || ACTION_MAP["else"]
+    send(choice)
   end
 
   def search
-    found =[]
+    found = []
     tp @results, :name
-    print "\nWhat dino do you want to find?"
-    selected = gets.chomp
-    @results.each do |dino|
-      found << dino if dino.name.downcase == selected.downcase
-    end
+    print "What dino do you want to find?"
+    selected = gets.chomp.downcase
+    @results.each { |dino|found << dino if dino.name.downcase == selected }
+
     tp found
   end
+
   def bipeds
-      new_results = []
-      @results.each do |dino|
-        new_results << dino if dino.legs == 2
-      end
-      @results = new_results
-      tp @results
+    new_results = []
+    @results.each { |dino| new_results << dino if dino.legs == 2 }
+    tp @results = new_results
     options
   end
 
   def carnivores
-      new_results = []
-      @results.each do |dino|
-        new_results << dino if dino.diet.downcase == "carnivore"
-      end
-      @results = new_results
-      tp @results
+    new_results = []
+    @results.each do |dino|
+      new_results << dino if dino.diet == "Carnivore"
+    end
+    tp @results = new_results
     options
   end
 
   def period
-    print "Which Period would you like to see Dinosaurs from?\n1: Cretaceous\n2: Permian\n3: Jurassic\n4: Oxfordian\n5: Albian\n6: Triassic\nEnter Selection or type b to go back:"
+    print "Which Period1: Cretaceous\n2: Permian\n3: Jurassic\n4: Oxfordian\n5: Albian\n6: Triassic\nEnter Selection or type b to go back:"
     time_period = gets.chomp
     case time_period
-    when "1"
-      era("cretaceous")
-    when "2"
-      era("permian")
-    when "3"
-      era("jurassic")
-    when "4"
-      era("oxfordian")
-    when "5"
-      era("albian")
-    when "6"
-      era("triassica")
-    when "b"
-      exit
-    else
-      p "Incorrect choice"
-      time_period = gets.chomp
+      when "1"
+        era("cretaceous")
+      when "2"
+        era("permian")
+      when "3"
+        era("jurassic")
+      when "4"
+        era("oxfordian")
+      when "5"
+        era("albian")
+      when "6"
+        era("triassica")
+      when "b"
+        exit
+      else
+        p "Incorrect choice"
+        gets.chomp
     end
   end
 
@@ -156,7 +147,7 @@ class Library
   def big
     new_results = []
     @results.each do |dino|
-      new_results << dino if dino.weight > 4000
+      new_results << dino if dino.weight.to_i > 4000
     end
     @results = new_results
     tp @results
@@ -164,4 +155,4 @@ class Library
   end
 end
 
-  dinos = Library.new('dinodex.csv')
+Library.new

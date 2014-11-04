@@ -7,13 +7,11 @@ describe Supervillian::Bomb do
   UNREGISTERED_ARMING_CODE = "7777"
   UNREGISTERED_DISARMING_CODE = "9888"
   TIME_DELAY_S = 1
-  
+
   def swallow_bomb_error
-    begin
-      yield
-    rescue Supervillian::BombError
-      # no-op
-    end
+    yield
+  rescue Supervillian::BombError
+    # no-op
   end
 
   let(:unconfigured_bomb) do
@@ -30,7 +28,7 @@ describe Supervillian::Bomb do
   let(:locked_bomb) do
     locked_bomb = configured_bomb
     locked_bomb.lock!
-    locked_bomb 
+    locked_bomb
   end
 
   let(:armed_bomb) do
@@ -41,10 +39,9 @@ describe Supervillian::Bomb do
   end
 
   it "starts up disarmed" do
-    expect(unconfigured_bomb.armed?).to be_falsey
+    expect(unconfigured_bomb.armed).to be_falsey
   end
 
-  
   it "starts up with default arming code \"1234\"" do
     expect(unconfigured_bomb.arming_code).to eq("1234")
   end
@@ -72,12 +69,12 @@ describe Supervillian::Bomb do
   end
 
   it "does not accept a new arming code when locked" do
-    expect { locked_bomb.arming_code = UNREGISTERED_ARMING_CODE}.to \
+    expect { locked_bomb.arming_code = UNREGISTERED_ARMING_CODE }.to \
       raise_error(Supervillian::OperationDeniedError)
   end
 
   it "does not accept a new disarming code when locked" do
-    expect { locked_bomb.disarming_code = UNREGISTERED_DISARMING_CODE}.to \
+    expect { locked_bomb.disarming_code = UNREGISTERED_DISARMING_CODE }.to \
       raise_error(Supervillian::OperationDeniedError)
   end
 
@@ -87,7 +84,7 @@ describe Supervillian::Bomb do
   end
 
   it "arms using the registered code" do
-    expect(armed_bomb.armed?).to eq(true)
+    expect(armed_bomb.armed).to eq(true)
   end
 
   it "raises an exception on attempt to arm with unregistered arming code" do
@@ -99,12 +96,12 @@ describe Supervillian::Bomb do
     swallow_bomb_error do
       locked_bomb.arm!(UNREGISTERED_DISARMING_CODE)
     end
-    expect(locked_bomb.armed?).to be_falsey
+    expect(locked_bomb.armed).to be_falsey
   end
 
   it "disarms using the registered disarming code" do
     armed_bomb.disarm!(REGISTERED_DISARMING_CODE)
-    expect(armed_bomb.armed?).to be_falsey
+    expect(armed_bomb.armed).to be_falsey
   end
 
   it "raises an exception disarming with an unregistered disarming code" do
@@ -116,7 +113,7 @@ describe Supervillian::Bomb do
     swallow_bomb_error do
       armed_bomb.disarm!(UNREGISTERED_ARMING_CODE)
     end
-    expect(armed_bomb.armed?).to be_truthy
+    expect(armed_bomb.armed).to be_truthy
   end
 
   it "raises an exception on attempt to change arming code when armed" do
@@ -142,7 +139,7 @@ describe Supervillian::Bomb do
     end
     expect(armed_bomb.disarming_code).to eq(REGISTERED_DISARMING_CODE)
   end
-  
+
   it "explodes on three failed disarming attempts" do
     3.times do
       swallow_bomb_error do

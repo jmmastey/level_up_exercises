@@ -26,8 +26,8 @@ USER_MESSAGES =
 
 def setup_session
   session[:bomb] ||= Supervillian::Bomb.new
-  @arming_code = bomb.locked? ? MASKED_ACTIVATION_CODE : bomb.arming_code
-  @disarming_code = bomb.locked? ? MASKED_ACTIVATION_CODE : bomb.disarming_code
+  @arming_code = bomb.locked ? MASKED_ACTIVATION_CODE : bomb.arming_code
+  @disarming_code = bomb.locked ? MASKED_ACTIVATION_CODE : bomb.disarming_code
 end
 
 before do
@@ -55,7 +55,7 @@ get CONTROL_PANEL_URL do
 end
 
 post '/lock' do
-  do_and_report_error_if(!bomb.locked?) do
+  do_and_report_error_if(!bomb.locked) do
     bomb.arming_code = params[:arming_code]
     bomb.disarming_code = params[:disarming_code]
     bomb.lock!
@@ -63,14 +63,14 @@ post '/lock' do
 end
 
 post '/arm' do
-  do_and_report_error_if(bomb.locked?) do
+  do_and_report_error_if(bomb.locked) do
     apply_timer_value
     bomb.arm!(params[:arming_code])
   end
 end
 
 post '/disarm' do
-  do_and_report_error_if(bomb.armed?) { bomb.disarm!(params[:disarming_code]) }
+  do_and_report_error_if(bomb.armed) { bomb.disarm!(params[:disarming_code]) }
 end
 
 not_found do
@@ -86,32 +86,32 @@ def do_and_report_error_if(guard_condition = true)
   rescue Supervillian::ExplodedError
     redirect "/exploded"
   rescue Supervillian::BombError => ex
-    set_system_message(ex.message)
-  rescue => ex
-    set_system_message("Ooops.. something bad happened. Don't do that again")
+    self.system_message = ex.message
+  rescue
+    self.system_message = "Ooops.. something bad happened. Don't do that again"
   end
 
   redirect CONTROL_PANEL_URL
 end
- 
+
 def can_be_armed?
-  bomb.locked? && ! bomb.armed?
+  bomb.locked && !bomb.armed
 end
 
 def can_be_disarmed?
-  bomb.armed?
+  bomb.armed
 end
 
 def apply_timer_value
-  newValue = params[:timer_value].to_i
-  bomb.delay = params[:timer_value].to_i if bomb.locked? && newValue != 0
+  new_value = params[:timer_value].to_i
+  bomb.delay = params[:timer_value].to_i if bomb.locked && new_value != 0
 end
 
 def check_exploded
   redirect EXPLODED_URL if bomb.exploded?
 end
 
-def set_system_message(message)
+def system_message=(message)
   session[:system_message] = message
 end
 
@@ -131,8 +131,8 @@ end
 def system_state_message
   case
     when bomb.exploded? then user_message(:exploded)
-    when bomb.armed? then user_message(:ready_to_disarm)
-    when bomb.locked? then user_message(:ready_to_arm)
+    when bomb.armed then user_message(:ready_to_disarm)
+    when bomb.locked then user_message(:ready_to_arm)
     else user_message(:ready_to_lock)
   end
 end

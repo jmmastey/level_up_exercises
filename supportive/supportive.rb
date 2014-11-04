@@ -26,9 +26,9 @@ class BlagPost
       @categories = []
     end
 
-    @comments = args[:comments] || []
+    @comments = args[:comments].presence || []
     @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
-    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
+    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])).presence || Date.today
   end
 
   def to_s

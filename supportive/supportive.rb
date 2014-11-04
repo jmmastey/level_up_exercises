@@ -14,7 +14,7 @@ class BlagPost
       hash
     end
 
-    if args[:author] != '' && args[:author_url] != ''
+    unless args[:author].blank? || args[:author_url].blank?
       @author = Author.new(args[:author], args[:author_url])
     end
 
@@ -38,15 +38,13 @@ class BlagPost
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    return "" if author.blank?
+
+    "By #{author.name}, at #{author.url}"
   end
 
   def category_list
-    return "" if categories.empty?
+    return "" if categories.blank?
 
     if categories.length == 1
       label = "Category"

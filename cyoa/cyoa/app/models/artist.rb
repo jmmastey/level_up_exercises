@@ -11,7 +11,7 @@ class Artist < ActiveRecord::Base
   validates :grooveshark_id, uniqueness: true, allow_nil: true, allow_blank: true
   validates :nbs_id, uniqueness: true, allow_nil: true, allow_blank: true
 
-  after_create :populate_initial_metrics
+  after_create :update_metrics
 
   DEFAULTS = [
     "Bassnectar", "Beyonce", "Disclosure", "Jay Z", "Kanye West", "Lady Gaga",
@@ -67,65 +67,6 @@ class Artist < ActiveRecord::Base
     metrics.where(category: category, service: service)
   end
 
-  def update_metrics
-    yesterday = Time.now.to_date - 1
-    return if update_start_date >= yesterday
-    nbs_service_metrics = get_nbs_metrics(update_start_date)
-    process_metrics(nbs_service_metrics)
-  end
-
-  def graph_metrics(service_name = nil)
-    metrics_array = []
-    fan_metrics(service_name).reverse.each do |metric|
-        metrics_array << [metric.unix_time * 1000, metric.value]
-    end
-    metrics_array
-  end
-
-  private
-
-  def update_start_date
-    return 3.months.ago if metrics.empty?
-    (metrics.first.recorded_on + 1).to_datetime
-  end
-
-  def populate_initial_metrics
-    return if metrics.any?
-    nbs_services = get_nbs_metrics(3.months.ago)
-    process_metrics(nbs_services)
-  end
-
-  def process_metrics(nbs_services)
-    return if nbs_services.blank?
-    new_metrics = []
-    cur_time = Time.now
-
-    nbs_services.each do |nbs_service|
-      service = Service.find_or_create_by(name: nbs_service["service"]["name"])
-
-      nbs_metrics = nbs_service["metric"]
-
-      unless nbs_metrics.blank?
-        nbs_metrics.keys.each do |nbs_category|
-          category = Category.find_or_create_by(name: nbs_category)
-          nbs_metrics[nbs_category].each do |nbs_date, nbs_value|
-            new_metrics.push "(#{id}, #{category.id}, #{service.id}, #{nbs_value}, '#{nbs_date}', '#{recorded_on(nbs_date)}', '#{cur_time}', '#{cur_time}')"
-          end
-        end
-      end
-    end
-
-    return unless new_metrics.any?
-
-    sql_insertion_records = "INSERT INTO metrics (artist_id, category_id, service_id, value, nbs_date, recorded_on, created_at, updated_at) VALUES #{new_metrics.join(", ")}"
-    ActiveRecord::Base.connection.execute sql_insertion_records
-  end
-
-  def get_nbs_metrics(start_on = 3.months.ago)
-    update_api_ids
-    NextBigSoundLite::Metric.artist(nbs_id, start: start_on)
-  end
-
   def update_api_ids
     return if nbs_id
 
@@ -140,10 +81,15 @@ class Artist < ActiveRecord::Base
     save
   end
 
-  def recorded_on(nbs_date)
-    sec_in_day = 86400
-    date_unix_days = nbs_date.to_i
-    date_unix_sec = date_unix_days * sec_in_day
-    Time.at(date_unix_sec)
+  def update_metrics
+    NbsMetricsProcessor.new(self)
+  end
+
+  def graph_metrics(service_name = nil)
+    metrics_array = []
+    fan_metrics(service_name).reverse.each do |metric|
+        metrics_array << [metric.unix_time * 1000, metric.value]
+    end
+    metrics_array
   end
 end

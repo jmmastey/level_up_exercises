@@ -61,11 +61,11 @@ RSpec.describe Event, :type => :model do
   end
 
   it 'can show a pretty count of showings' do
-    expect(event_with_showings.pretty_showing_count).to eq('3')
+    expect(event_with_showings.pretty_showing_count).to eq('3 Showings')
   end
 
   it 'can show a pretty count of empty showings' do
-    expect(event.pretty_showing_count).to eq('-')
+    expect(event.pretty_showing_count).to eq('No Showings')
   end
 
   it 'can show a sorted list of showings' do

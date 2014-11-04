@@ -1,17 +1,9 @@
 <nav id="home-menu">
   <canvas id="home-menu-canvas"></canvas>
-  <div class="cool-round-button home neutral">
-	<span class="text">Home</span>
-  </div>
-  <div class="cool-round-button events">
-	<%= link_to 'Events', events_path %>
-  </div>
-  <div class="cool-round-button sources">
-	<%= link_to 'Sources', "http://www.theatreinchicago.com/" %>
-  </div>
-  <div class="cool-round-button scrape">
-	<%= link_to 'Scrape', scrape_path, :method => 'post' %>
-  </div>
+  <div class="cool-round-button home neutral">Home</div>
+  <%= link_to 'Events', events_path, :class => 'cool-round-button events' %>
+  <%= link_to 'Sources', "http://www.theatreinchicago.com/", :class => 'cool-round-button sources' %>
+  <%= link_to 'Scrape', scrape_path, :method => 'post', :class => 'cool-round-button scrape' %>
 </nav>
 
 <script type="text/javascript">

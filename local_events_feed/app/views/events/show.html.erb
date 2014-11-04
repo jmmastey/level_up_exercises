@@ -2,21 +2,8 @@
   <% if signed_in? %>
     <%= render :partial => "session_bar.html.erb" %>
 	<%= render :partial => "user.html.erb" %>
-	<%= render :partial => "event.html.erb" %>
-	<div id='event-title'>
-	  <div class='event-name'>
-		<span class='label'>Showings For:</span>&nbsp
-		<span class='value'><%= @event.name %></span>
-	  </div>
-	  <div class='event-location'>
-		<span class='label'>Location:</span>&nbsp
-		<span class='value'><%= @event.location %></span>
-	  </div>
-	  <div class='event-link'>
-		<span class='label'>Information:</span>&nbsp
-		<span class='value'><%= link_to 'Website', @event.link %></span>
-	  </div>
-	</div>
+	<%= render :partial => "event_showings.html.erb" %>
+	<%= render :partial => "event_attributes.html.erb" %>
   <% else %>
     <h3>Please <%= link_to 'sign in', new_session_path %></h3>
   <% end %>

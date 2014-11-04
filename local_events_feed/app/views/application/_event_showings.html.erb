@@ -1,5 +1,5 @@
 <div id='event-showings'>
-  <div class="table">
+  <div class="table-container">
 	<table>
 	  <% if @event.showings.blank? %>
 	  <tr><td colspan=3>No Showings on Record</td></tr>
@@ -31,14 +31,8 @@
 	</div>
 	<% end %>
 
-	<div class="cool-round-button website">
-	  <%= link_to 'Website', @event.link %>
-	</div>
-	<div class="cool-round-button events">
-	  <%= link_to 'Events', events_path %>
-	</div>
-	<div class="cool-round-button home">
-	  <%= link_to 'Home', current_user %>
-	</div>
+	<%= link_to 'Website', @event.link, :class => 'cool-round-button website' %>
+	<%= link_to 'Events', events_path, :class => 'cool-round-button events' %>
+	<%= link_to 'Home', current_user, :class => 'cool-round-button home' %>
   </div>
 </section>

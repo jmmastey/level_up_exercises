@@ -31,11 +31,31 @@ body {
 	font-weight: bold;
 }
 
+.tooltip {
+	display: inline;
+	position: relative;
+}
+
+.tooltip:hover:after {
+	border-radius: 5;
+	bottom: 26px;
+	content: attr(title);
+	left: 20%;
+	padding: 5px 15px;
+	position: absolute;
+	z-index: 100;
+	width: 220px;
+}
+
+.scrollable #user-event-showings {
+	position: absolute;
+}
+
 #user-event-showings {
 	position: fixed;
 	top: 100px;
 	bottom: 40px;
-	left: 10px;
+	left: 100px;
 	right: 50%;
 }
 
@@ -44,10 +64,46 @@ body {
 	overflow: auto;
 	font-size: 15px;
 	padding-bottom: 200px;
+	border-collapse: separate; 
+	border-spacing: 3px;
+}
+
+#user-event-showings table ul {
+	list-style: none;
 }
 
 #user-event-showings table td {
 	background-color:rgba(0, 0, 85, 0.4);
+	padding: 0px;
+}
+
+
+#user-event-showings table td .remove {
+	position: relative;
+	top: -20px;
+	background: none;
+}
+
+#user-event-showings table td .add-to-cal {
+	position: relative;
+	top: -20px;
+}
+
+#user-event-showings table td .add-to-cal .add-image {
+	height: 14px;
+	width: 14px;
+}
+
+#user-event-showings table .time {
+	color: #FFFF99;	
+}
+
+#user-event-showings table .location {
+	color: orange;	
+}
+
+#user-event-showings table li:not(:first-child) {
+	padding-left: 10px;
 }
 
 #all-events {
@@ -57,20 +113,45 @@ body {
 	right: 120px;
 }
 
-#all-events .table {
+#all-events .table-container {
 	position: absolute;
 	left: 0px;
 	top: 0px;
 	right: 120px;
 }
 
-#all-events .table table {
+#all-events table {
 	position: absolute;
 	top: 0px;
 	left: 0px;	
 	overflow-y: hidden;
 	font-size: 15px;
 	padding-bottom: 200px;
+	border-collapse: separate; 
+	border-spacing: 5px;
+}
+
+#all-events table tr  {
+	background: none;
+}
+
+#all-events table td {
+	border-radius: 15px;
+	padding: 0px;
+}
+
+#all-events table .name {
+	font-size: 20px;	
+}
+
+#all-events table .location {
+	color: orange;
+	font-size: 18px;
+}
+
+#all-events table .showing-count {
+	color: #999999;
+	font-size: 16px;
 }
 
 #all-events .nav {
@@ -125,6 +206,17 @@ body {
 	left: 0px;
 	right: 0px;
 	z-index: -1;
+	opacity: 0.5;
+}
+
+.background-image-blurred {
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	left: -300px;
+	right: 0px;
+	z-index: -2;
+	opacity: 0.5;	
 }
 
 .background-image-hide {
@@ -166,7 +258,7 @@ body {
 	font-weight: bold;
 }
 
-#event-title {
+#event-attributes {
 	position: fixed;
 	z-index: 15;
 	font-size: 20px;
@@ -174,37 +266,41 @@ body {
 	font-weight: bold;
 }
 
-#event-title .label {
+#event-attributes .label {
 	color: #9999FF;
 }
 
-#event-title .value {
+#event-attributes .value {
 	color: #EEEE55;	
 }
 
-#event-title .event-name {
+#event-attributes .name {
 	position: fixed;
-	left: 50%;
 	top: 5px;
+	left: 400px;
+	right: 400px;
 	margin-left: -20px;
 	color: yellow;
+	text-align: center;
+	z-index: 9;
+	padding: 0px;
 }
 
-#event-title .event-location {
+#event-attributes .location {
 	position: fixed;
 	left: 50px;
 	bottom: 10px;
 	color: #5555CC;
 }
 
-#event-title .event-link {
+#event-attributes .link {
 	position: fixed;
 	right: 50px;
 	bottom: 10px;
 	color: #5555CC;
 }
 
-#event-title .event-link value a {
+#event-attributes .link value a {
 	color: salmon;
 }
 
@@ -215,7 +311,7 @@ body {
 	right: 120px;
 }
 
-#event-showings .table {
+#event-showings .table-container {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -223,7 +319,7 @@ body {
 	bottom: 100px;
 }
 
-#event-showings .table table {
+#event-showings table {
 	font-size: 18px;
 	font-family: verdana;
 	padding-bottom: 200px;
@@ -262,16 +358,21 @@ body {
 }
 
 .cool-round-button {
+	display: block;
 	width: 100px;
 	height: 100px;
-	border-radius: 65px;
+	border-radius: 50px;
 	background-color: rgba(0, 0, 70, 0.3);
 	top: 50%;
 	text-align: center;
-	padding: 2px;
+	vertical-align: middle;
+	line-height: 100px;
+	padding: 0px;
+	padding-top: 0px;
 	font-size: 15px;
 	font-family: verdana;
 	font-weight: bold;
+	color: rgba(153, 153, 255, 0.9);
 	background-image: radial-gradient(circle at center,
 									  rgba(0, 0, 0, 0) 0%,
 									  rgba(0, 0, 0, 0) 40px,
@@ -279,49 +380,14 @@ body {
 									  rgba(50, 50, 255, 0.0) 50px);
 }
 
+
 .cool-round-button:hover {
+	color: rgba(183, 183, 255, 1.0);
 	background-image: radial-gradient(circle at center,
 									  rgba(0, 0, 0, 0) 0%,
 									  rgba(0, 0, 0, 0) 40px,
 									  rgba(90, 90, 255, 0.6) 45px,
 									  rgba(90, 90, 255, 0.0) 50px);
-}
-
-.cool-round-button a {
-	position: relative;
-	top: 40%;
-	text-decoration: none;
-	font-size: 15px;
-	font-family: verdana;
-	font-weight: bold;
-	padding: 0px;
-}
-
-.cool-round-button .text {
-	position: relative;
-	top: 40%;
-	text-decoration: none;
-	font-size: 15px;
-	font-family: verdana;
-	font-weight: bold;
-	padding: 0px;
-}
-
-.cool-round-button a:link {
-	color: rgba(153, 153, 255, 0.9);
-	opacity: 1.0;
-}
-
-.cool-round-button a:visited {
-	color: rgba(153, 153, 255, 0.9);
-}
-
-.cool-round-button a:hover {
-    color: #9999FF;
-}
-
-.cool-round-button a:active {
-    color: #9999FF;
 }
 
 .cool-round-button.neutral {
@@ -374,18 +440,18 @@ body {
 
 #event-showings .cool-round-button.website {
 	position: fixed;
-	top: 400px;
+	top: 365px;
 	right: 165px;
 }
 
 #event-showings .cool-round-button.events {
 	position: fixed;
-	top: 550px;
+	top: 500px;
 	right: 165px;
 }
 
 #event-showings .cool-round-button.home {
 	position: fixed;
-	top: 700px;
+	top: 635px;
 	right: 165px;
 }

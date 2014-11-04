@@ -1,28 +1,34 @@
 <section id='user-event-showings'>
   <table>
-	<tr>
-	  <th>Date</th>
-      <th>Name</th>
-      <th>Location</th>
-	  <th>Time</th>
-	  <th>Calendar</th>
-      <th>Remove</th>
-	</tr>
-	  <% current_user.sorted_showings.each do |showing| %>
+	<% current_user.sorted_showings.each do |showing| %>
     <tr>
-	  <td><%= showing.pretty_local_date %></td>
-	  <td><%= link_to showing.name.truncate(25), showing.event %></td>
-	  <td><%= showing.location.truncate(30) %></td>
-	  <td><%= showing.pretty_local_time %></td>
 	  <td>
-		<%= link_to 'Update',
-			{ controller: 'users', action: 'add_showing_to_calendar', showing_id: showing.id, id: current_user[:id] },
-			method: :post, :format => :ics, :id => "add_cal-#{showing.id}" %>
+		<div class="add-to-cal">
+		  <%= link_to image_tag("calendar.png", :class => 'add-image tooltip', :title => 'Add Calendar'),
+			  { controller: 'users', action: 'add_showing_to_calendar', showing_id: showing.id, id: current_user[:id] },
+			  method: :post, :format => :ics, :id => "add_cal-#{showing.id}" %>
+		</div>
 	  </td>
-	  <td align='center'>
-		<%= link_to image_tag("minus.png", :class => 'minus'), 
-		{ controller: 'users', action: 'remove_showing', showing_id: showing[:id], id: current_user[:id] },
-		method: :post, :id => "remove-#{showing[:id]}-user-show" %>
+	  <td class="attributes">
+		<ul>
+		  <li>
+			<span class="date"><%= showing.pretty_local_date %></span>&nbsp
+			<span class="time"><%= showing.pretty_local_time %></span>
+		  </li>
+		  <li>
+			<span class="name"><%= link_to showing.name.truncate(50), showing.event %></span>
+		  </li>
+		  <li>
+			<span class="location"><%= showing.location.truncate(50) %></span>
+		  </li>
+		</ul>
+	  </td>
+	  <td>
+		<div class="remove">
+		  <%= link_to image_tag("remove.png", :class => 'remove-x'), 
+		      { controller: 'users', action: 'remove_showing', showing_id: showing[:id], id: current_user[:id] },
+		      method: :post, :id => "remove-#{showing[:id]}-user-show" %>
+		</div>
 	  </td>
     </tr>
 	<% end %>

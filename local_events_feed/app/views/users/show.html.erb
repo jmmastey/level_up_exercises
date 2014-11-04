@@ -7,7 +7,9 @@
 <body>
   <% if signed_in? %>
     <%= render :partial => "session_bar.html.erb" %>
-    <%= render :partial => "user.html.erb" %>
+	<div class="scrollable">
+      <%= render :partial => "user.html.erb" %>
+	</div>
 	<%= render :partial => "home_menu.html.erb" %>
 	<div class='page-title'><%= first_name %>'s Events</div>
   <% else %>
@@ -15,8 +17,3 @@
   <% end %>
 </body>
 
-<script type="text/javascript">
-$( document ).ready( function() {
-  setUserShowingsScrollable();
-});
-</script>

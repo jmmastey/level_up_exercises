@@ -15,9 +15,6 @@
 //= require turbolinks
 //= require_tree .
 
-function setUserShowingsScrollable() {
-	$( "#user-event-showings" ).addClass("scrollable");
-}
 
 function drawTripod(ctx, centerX, centerY, bgnR, endR) {
 	var cos30 = Math.cos(33 * Math.PI / 180.0);

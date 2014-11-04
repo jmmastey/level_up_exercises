@@ -18,17 +18,10 @@ class BlagPost
       @author = Author.new(args[:author], args[:author_url])
     end
 
-    if args[:categories]
-      @categories = args[:categories].reject do |category|
-        DISALLOWED_CATEGORIES.include? category
-      end
-    else
-      @categories = []
-    end
-
+    @categories = (args[:categories].presence && args[:categories] - DISALLOWED_CATEGORIES) || []
     @comments = args[:comments].presence || []
     @body = args[:body].squish
-    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])).presence || Date.today
+    @publish_date = (args[:publish_date].presence && Date.parse(args[:publish_date])) || Date.today
   end
 
   def to_s

@@ -7,8 +7,6 @@ class Robot
   INVALID_NAME_ERROR = 'The robot name is not valid!'
   NAME_EXISTS_ERROR = 'The robot name already exists!'
 
-  #@@registry
-
   def initialize(args = {})
     @@registry ||= []
     @name_generator = args[:name_generator]

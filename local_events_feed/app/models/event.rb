@@ -40,8 +40,8 @@ class Event < ActiveRecord::Base
 
   def pretty_showing_count
     return 'No Showings' unless showings.present?
-    "#{showings.count.to_s} Showing" if showings.count == 1
-    "#{showings.count.to_s} Showings"
+    return "#{showings.count} Showing" if showings.count == 1
+    "#{showings.count} Showings"
   end
 
   def sorted_showings

@@ -47,6 +47,36 @@ body {
 	width: 220px;
 }
 
+td {
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+	color: #33FFCC;
+	background-color:rgba(60, 60, 60, 0.5);
+}
+
+td a {
+	text-decoration: none;
+	color: #AAAAEE;
+}
+
+td a:hover {
+	color: #CCCCFF;
+}
+
+table td ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #AA5F33;
+}
+
+a:hover {
+	color: #DD9266;
+}
+
 .scrollable #user-event-showings {
 	position: absolute;
 }
@@ -62,7 +92,7 @@ body {
 #user-event-showings table {
 	position: absolute;
 	overflow: auto;
-	font-size: 15px;
+	font-size: 16px;
 	padding-bottom: 200px;
 	border-collapse: separate; 
 	border-spacing: 3px;
@@ -100,6 +130,10 @@ body {
 
 #user-event-showings table .location {
 	color: orange;	
+}
+
+#user-event-showings table li:first-child {
+	font-size: 16px;
 }
 
 #user-event-showings table li:not(:first-child) {
@@ -454,4 +488,55 @@ body {
 	position: fixed;
 	top: 635px;
 	right: 165px;
+}
+
+.member {
+	color: #33FFFF;
+	background-color:rgba(17, 17, 85, 0.7);
+}
+
+.non-member {
+	background-color:rgba(60, 60, 60, 0.6);
+}
+
+.member .name a {
+	color: #EEFF11;
+}
+
+.member .time {
+	color: #FFFF11;
+}
+
+.member .location {
+	color: #FFAA33;
+}
+
+.member .date-range {
+	color: #FF9911;
+}
+
+.non-member .time {
+	color: #FF4411;
+}
+
+.plus {
+	height: 16px;
+	width: 16px;
+	background: none;
+}
+
+.minus {
+	height: 20px;
+	width: 20px;
+	background: none;
+}
+
+.remove-x {
+	height: 12px;
+	width: 12px;
+	opacity: 0.2;
+}
+
+.remove-x:hover {
+	opacity: 1.0;
 }

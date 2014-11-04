@@ -46,13 +46,10 @@ class BlagPost
   def category_list
     return "" if categories.blank?
 
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
+    label = "Category"
 
     if categories.length > 1
+      label = label.pluralize
       last_category = categories.pop
       suffix = " and #{as_title(last_category)}"
     else
@@ -98,7 +95,7 @@ blag = BlagPost.new("author"        => "Foo Bar",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
                     "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
                     "publish_date"  => "2013-02-10",
-                    "body"          => <<-ARTICLE
+                    "body"          => <<-ARTICLE.strip_heredoc
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.
                         Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit.
                         Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam

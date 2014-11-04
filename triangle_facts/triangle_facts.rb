@@ -1,4 +1,3 @@
-# Killer facts about triangles AWW YEAH
 class Triangle
   attr_accessor :side1, :side2, :side3
 
@@ -17,6 +16,7 @@ class Triangle
   def scalene
     true if side1 != side2 && side2 != side3
   end
+
 
   def recite_facts
     angles = calculate_angles(side1, side2, side3)

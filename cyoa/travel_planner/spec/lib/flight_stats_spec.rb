@@ -1,4 +1,5 @@
-require 'rails_helper'
+require 'rspec'
+require 'flight_stats'
 
 describe 'FlightStats Schedules API' do
 

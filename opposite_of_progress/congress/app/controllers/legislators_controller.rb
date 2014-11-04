@@ -6,6 +6,7 @@ class LegislatorsController < ApplicationController
   end
 
   def show
+    @related_bills = Bill.where(sponsor_id: @legislator.bioguide_id)
   end
 
   def update

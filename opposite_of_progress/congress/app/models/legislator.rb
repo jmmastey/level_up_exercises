@@ -11,7 +11,7 @@ class Legislator < ActiveRecord::Base
     name_arr.join(" ")
   end
 
-  def fetch(path = "#{ApplicationHelper::API_BASE_PATH}legislators?apikey=#{ApplicationHelper::API_KEY}&per_page=#{ApplicationHelper::API_PAGE_COUNT}&page=1")
+  def fetch path
     http = Curl.get(path)
     @results = JSON.parse(http.body_str)
 

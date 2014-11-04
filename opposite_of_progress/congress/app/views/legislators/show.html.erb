@@ -1,23 +1,13 @@
 <h3><%= "#{@legislator.full_name}" %></h3>
 
 <h4>Basics</h4>
-<div><%= @legislator.birthday if @legislator.birthday %></div>
-<div><%= Date.today - @legislator.birthday %></div>
+<%= render partial: "layouts/generic_object_details", locals: {object: @legislator} %>
 
-<div><%= @legislator.chamber if @legislator.chamber %></div>
-<div><%= @legislator.gender if @legislator.gender %></div>
-<div><%= @legislator.term_start if @legislator.term_start %></div>
-<div><%= @legislator.term_end if @legislator.term_end %></div>
-
-<h4>Contact</h4>
-<div><%= @legislator.phone if @legislator.phone %></div>
-<div><%= @legislator.website if @legislator.website %></div>
-<div><%= @legislator.office if @legislator.office %></div>
-<div><%= @legislator.contact_form if @legislator.contact_form %></div>
-
-<h4>Social Media</h4>
-<div><%= link_to "Twitter", "http://www.twitter.com/#{@legislator.twitter_id}", target: "_blank" if @legislator.twitter_id %></div>
-<div><%= link_to "Facebook", "http://www.facebook.com/#{@legislator.facebook_id}", target: "_blank" if @legislator.facebook_id %></div>
+<h4>Related Bills</h4>
+<% @related_bills.each do |bill| %>
+  <%= render partial: "bills/bill_stub_item", locals: {bill: bill} %>
+<% end %>
+<%= "There are no related bills" if @related_bills.count == 0 %>
 
 <hr />
 

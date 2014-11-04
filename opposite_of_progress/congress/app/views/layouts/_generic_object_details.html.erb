@@ -1,0 +1,5 @@
+<% object.attributes.each do |key,val| %>
+  <% unless ["id", "bill_id", "bioguide_id", "created_at", "updated_at"].include? key %>
+    <div><%= raw "<strong>#{key}</strong>: #{val}" %></div> 
+  <% end %>
+<% end %>

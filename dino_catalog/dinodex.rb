@@ -1,41 +1,23 @@
 require 'csv'
 require 'table_print'
+
 #
 class Dinosaur
   attr_reader :name, :period, :continent, :diet, :weight, :legs, :description
   def initialize(options)
     @name = options[:name].to_s
     @period = options[:period].to_s
-    @continent = options[:continent]
-    @diet = convert_diet(options[:diet].to_s)
-    @weight = options[:weight_in_lbs]
-    @legs = convert_legs(options[:walking])
+    @continent = options[:continent] || "Africa"
+    @diet = convert_diet(options[:diet])
+    @weight = options[:weight_in_lbs] || "Unknown"
+    @legs = options[:walking].to_s
     @description = options[:description].to_s
   end
 
-  def convert_continent(cont, name)
-    if cont.nil?
-      print "Where is the #{name} from? "
-      gets.chomp
-    else
-      cont
-    end
-  end
-
-  def convert_legs(legs)
-    if legs.downcase == "biped"
-      2
-    elsif legs.downcase == "quadruped"
-      4
-    else
-      "other"
-    end
-  end
-
   def convert_diet(food)
-    if food.downcase == "yes"
+    if food == "Yes"
       "Carnivore"
-    elsif food.downcase == "no"
+    elsif food == "No"
       "Herbivore"
     else
       food
@@ -52,6 +34,7 @@ class Library
     "reset" => :reset,
     "q" => :quit,
     "period" => :period,
+    "print" => :print,
     "else" => :not_an_option,
   }
 
@@ -59,17 +42,15 @@ class Library
   def initialize
     @dinodex = []
     @results = []
+    @found = []
     load_dinos('dinodex.csv')
     load_dinos('african_dinosaur_export.csv')
-    tp @dinodex
-    @results = @dinodex
     options
   end
 
   def load_dinos(file)
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
       dino = row.to_hash
-      p dino
       mapping = { genus: :name, carnivore: :diet, weight: :weight_in_lbs }
       dino.keys.each { |k| dino[mapping[k]] = dino.delete(k) if mapping[k] }
       @dinodex << Dinosaur.new(dino)
@@ -77,61 +58,43 @@ class Library
   end
 
   def options
-    STDIN.gets
+    @results = @dinodex
     system('clear')
+    print_options
     choice = gets.chomp
     choice = ACTION_MAP[choice] || ACTION_MAP["else"]
     send(choice)
   end
 
   def search
-    found = []
     tp @results, :name
     print "What dino do you want to find?"
     selected = gets.chomp.downcase
-    @results.each { |dino|found << dino if dino.name.downcase == selected }
-
-    tp found
+    @results.each { |dino| @found << dino if dino.name.downcase == selected }
+    tp @found
+    STDIN.gets
+    options
   end
 
   def bipeds
     new_results = []
-    @results.each { |dino| new_results << dino if dino.legs == 2 }
+    @results.each { |dino| new_results << dino if dino.legs == "Biped" }
     tp @results = new_results
-    options
+    STDIN.gets
   end
 
   def carnivores
-    new_results = []
-    @results.each do |dino|
-      new_results << dino if dino.diet == "Carnivore"
-    end
-    tp @results = new_results
-    options
+    filtered = []
+    meat = %w(Insectivore Piscivore Carnivore)
+    @results.each { |dino| filtered << dino if meat.include?(dino.diet) }
+    tp @results = filtered
+    STDIN.gets
   end
 
   def period
-    print "Which Period1: Cretaceous\n2: Permian\n3: Jurassic\n4: Oxfordian\n5: Albian\n6: Triassic\nEnter Selection or type b to go back:"
+    p "Which Period?"
     time_period = gets.chomp
-    case time_period
-      when "1"
-        era("cretaceous")
-      when "2"
-        era("permian")
-      when "3"
-        era("jurassic")
-      when "4"
-        era("oxfordian")
-      when "5"
-        era("albian")
-      when "6"
-        era("triassica")
-      when "b"
-        exit
-      else
-        p "Incorrect choice"
-        gets.chomp
-    end
+    era(time_period)
   end
 
   def era(time_period)
@@ -141,7 +104,6 @@ class Library
     end
     @results = new_results
     tp @results
-    options
   end
 
   def big
@@ -151,7 +113,16 @@ class Library
     end
     @results = new_results
     tp @results
-    options
+  end
+
+  def not_an_option
+    p "Not a valid option, Please try again"
+    sleep(1)
+  end
+
+  def print_options
+    puts "WELCOME TO DINODEX\nA repository for amazing Dinosaur knowledge"
+    puts ""
   end
 end
 

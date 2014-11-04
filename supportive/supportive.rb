@@ -46,17 +46,7 @@ class BlagPost
   def category_list
     return "" if categories.blank?
 
-    label = "Category"
-
-    if categories.length > 1
-      label = label.pluralize
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
+    categories.map { |cat| as_title(cat) }.to_sentence
   end
 
   def as_title(string)

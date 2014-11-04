@@ -1,6 +1,6 @@
 # An Enumerable collection of objects that's qualified by a filter condition
 module FilteringEnumerable
-  class AttributeRangedEnumerable < AttributeConditionedEnumerable
+  class AttributeRangeFilter < AttributeFilter
     attr_reader :lo_value, :hi_value, :is_exclusive
 
     def initialize(parent, attribute, lo_value, hi_value, exclude_end = false)
@@ -26,9 +26,8 @@ end
 
 # Add interface to FilteringEnumerable mixin to expose this functionality
 module FilteringEnumerable
-  add_filter_method(:between) do
-      |parent, attribute, lo_value, hi_value, exclusive = true|
-    AttributeRangedEnumerable.new(
+  add_filter_type(:between) do |parent, attribute, lo_value, hi_value, exclusive = true|
+    AttributeRangeFilter.new(
       parent, attribute, lo_value, hi_value, exclusive)
   end
 end

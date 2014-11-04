@@ -2,91 +2,97 @@ require "csv"
 
 module DinosaurIndex
   class CSVLoader
-    # Hash of {header => default_value} to place into all rows
-    attr_accessor :default_values
+    attr_accessor :default_field_values
     attr_accessor :path
 
-    def initialize(path = nil, default_values = {})
-      @path, @default_values = path, default_values
+    def initialize(path = nil, default_field_values = {})
+      @path, @default_field_values = path, default_field_values
     end
 
-    # Process CSV file; create and yield each dinosaurs to the given block
-    def read(path = nil, default_values = nil)
+    def read(path = nil, default_field_values = @default_field_values)
       raise AgumentError, "Missing input file" unless path ||= @path
 
-      @csvreader = CSV.foreach(path, @@csv_parser_options) do |csvrow|
-        yield make_dinosaur(csvrow, default_values || @default_values)
-      end
-    end
-
-    # Install a custom CSV field converter
-    CSV::Converters[:dinosaur_index_csv] = lambda do |fieldval, fieldinfo|
-      return nil if fieldval.nil?
-
-      case fieldinfo.header
-        when :period then TimePeriod.decode_instance_token(fieldval)
-        when :diet then Diet.decode_instance_token(fieldval)
-        when :weight then fieldval.to_i
-        when :walking then Ambulation.decode_instance_token(fieldval)
-        else fieldval
-      end
-    end
-
-    # Install a customer CSV header converter
-    CSV::HeaderConverters[:dinosaur_index_rename] = lambda do |header|
-      case (header = header.downcase.to_sym)
-        when :genus then :name
-        when :weight_in_lbs then :weight
-        else header
+      @csvreader = CSV.foreach(path, csv_parser_options) do |csv_row|
+        yield make_dinosaur(csv_row, default_field_values)
       end
     end
 
     protected
 
-    @@csv_parser_options = {
-      headers: true,
-      return_headers: false,
-      header_converters: :dinosaur_index_rename,
-      converters: [:dinosaur_index_csv],
-    }
+    def self.field_converter(for_header)
+      lambda do |fieldval, fieldinfo|
+        return nil if fieldval.nil?
+        fieldinfo.header == for_header ? (yield fieldval) : fieldval
+      end
+    end
 
-    def make_dinosaur(csvrow, default_values)
-      taxon = csvrow.delete(:name).last
-      attrs = extract_csvrow_data(csvrow)
-      apply_default_values(attrs, default_values)
-      determine_diet(attrs)
-      Dinosaur.new(taxon, attrs)
+    FIELDCONVERTERS =
+    [
+      field_converter(:weight) { |v| puts "V IS #{v}"; v.to_i },
+      field_converter(:period) { |v| TimePeriod.decode_instance_token(v) },
+      field_converter(:diet) { |v| Diet.decode_instance_token(v) },
+      field_converter(:walking) { |v| Posture.decode_instance_token(v) },
+    ]
+
+    HEADERCONVERTERS =
+    [
+      lambda { |header| header },
+      lambda { |header| header.downcase.gsub(' ', '_') },
+      lambda { |header| header == 'genus' ? 'name' : header },
+      lambda { |header| header == 'weight_in_lbs' ? 'weight' : header },
+      lambda { |header| header.to_sym }
+        # Conversion to symbol MUST BE LAST (see csv.rb #convert_fields)
+    ]
+
+    def csv_parser_options
+      {
+        headers: true,
+        return_headers: false,
+        header_converters: HEADERCONVERTERS,
+        converters: FIELDCONVERTERS,
+      }
+    end
+
+    def make_dinosaur(csv_row, default_field_values)
+      taxon = csv_row.delete(:name).last
+      csv_row_data = extracted_csv_row_data(csv_row)
+      apply_default_field_values(csv_row_data, default_field_values)
+      determine_diet(csv_row_data)
+      Dinosaur.new(taxon, csv_row_data)
     end
 
     # These CSV headers are translated to names the Dinosaur class recognizes
-    @@header_remapping = {
+    HEADER_REMAPPING = {
       genus: :name,
       weight_in_lbs: :weight,
-      walking: :ambulation,
+      walking: :posture,
       period: :time_period,
     }
 
-    def remap_header(header)
-      @@header_remapping[header] || header
+    def remapped_header(header)
+      HEADER_REMAPPING[header] || header
     end
 
-    def extract_csvrow_data(csvrow)
-      attrs = {}
-      csvrow.headers.each { |hdr| attrs[remap_header(hdr)] = csvrow[hdr] }
-      attrs
+    def extracted_csv_row_data(csv_row)
+      row_data = csv_row.headers.map do |hdr|
+        [remapped_header(hdr), csv_row[hdr]]
+      end
+
+      Hash[row_data]
     end
 
-    def apply_default_values(attrs, default_values)
-      default_values.each { |hdr, value| attrs[hdr] ||= value }
+    def apply_default_field_values(csv_row_data, default_field_values)
+      default_field_values.each { |hdr, value| csv_row_data[hdr] ||= value }
     end
 
-    def determine_diet(attrs)
-      # delete :carnivore because it's only useful to determine missing diet
-      attrs[:diet] ||= case (attrs.delete(:carnivore) || '').downcase
-                         when "yes" then Diet::UNSPECIFIED_CARNIVORE
-                         when "no"  then Diet::UNSPECIFIED_NONCARNIVORE
-                         else nil
-                       end
+    def determine_diet(csv_row_data)
+      is_a_carnivore = 
+        (csv_row_data.delete(:carnivore) || '').casecmp('yes') == 0
+
+      csv_row_data[:diet] ||= if is_a_carnivore
+                              then Diet::UNSPECIFIED_CARNIVORE
+                              else Diet::UNSPECIFIED_NONCARNIVORE
+                              end
     end
   end
 end

@@ -1,9 +1,7 @@
 require "filtering_enumerable/enumerable_wrapper"
 
-# Can be negated
-# imlements the each and offers virtual keep_item? methods
 module FilteringEnumerable
-  class AttributeConditionedEnumerable < EnumerableWrapper
+  class AttributeFilter < EnumerableWrapper
     include FilteringEnumerable
 
     attr_reader :filter_attribute, :negated, :excludes_nil

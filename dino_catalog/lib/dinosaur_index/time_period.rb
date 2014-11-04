@@ -1,10 +1,8 @@
-# Objects that represent a major interval in evolutionary/geological history.
-# Because this is a fixed list it can be represented as such in software.
 module DinosaurIndex
   class TimePeriod < TokenSelectable
-    attr_accessor :qualifier    # late, early, ....
+    attr_accessor :qualifier
 
-    alias_method :period, :name       # Geological time period
+    alias_method :period, :name
 
     def initialize(period, pattern, qualifier = nil)
       super(period, pattern)
@@ -15,7 +13,6 @@ module DinosaurIndex
       period + (qualifier ? " (#{qualifier})" : '')
     end
 
-    # Ignores qualifier, just matches period itself
     def ==(other)
       period == other.period
     end
@@ -23,7 +20,6 @@ module DinosaurIndex
     class << self
       alias_method :decode_token_to_prototype, :decode_instance_token
 
-      # Overridden to select, clone, and configure prototype
       def decode_instance_token(token)
         matches = /(?:(\w+)\s+)?(\w+)/.match(token || '')
         qualifier, period = matches[1, 2]
@@ -39,7 +35,8 @@ module DinosaurIndex
     CRETACEOUS = "Cretaceous"
 
     # This are PROTOTYPES, cloned to make custom instances
-    @all_instances = [
+    PERIODS =
+    [
       new(OXFORDIAN, /oxf/i),
       new(PERMIAN, /perm/i),
       new(ALBIAN, /alb/i),
@@ -47,6 +44,10 @@ module DinosaurIndex
       new(JURASSIC, /jur/i),
       new(CRETACEOUS, /cre/i),
     ]
+
+    def self.token_selectable_instances
+      PERIODS
+    end
 
     def self.find_and_clone_prototype(period_token, qualifier)
       (prototype = decode_token_to_prototype(period_token)) && begin

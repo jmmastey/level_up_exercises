@@ -12,7 +12,8 @@ module DinosaurIndex
       @carnivorous = is_carnivore
     end
 
-    @all_instances = [
+    DIETS =
+    [
       INSECTIVORE               = new("insectivore", true, /insect/i),
       PISCIVORE                 = new("piscivore", true, /pisc/i),
       CARNIVORE                 = new("carnivore", true, /^carn/i),
@@ -21,5 +22,9 @@ module DinosaurIndex
       UNSPECIFIED_NONCARNIVORE  = new("unspecified non-carnivore",
                                       false, /non-?carn/i),
     ]
+
+    def self.token_selectable_instances
+      DIETS
+    end
   end
 end

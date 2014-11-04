@@ -1,13 +1,11 @@
 require "optparse"
 require "queriable_array"
 
-# Implement command-line options to collect information about files to read and
-# to build a filter for a list of dinosaurs. Default values set on command line
-# are added to every dinosaur created from input files for which they are
-# effective (i.e. subsequently listed).
 module DinosaurIndex
   class CommandLineInterface < OptionParser
-    attr_accessor :input_files  # [[pathname, {default values}]
+    InputFile = Struct.new(:pathname, :dino_attribute_defaults);
+
+    attr_accessor :input_files  # [[pathname, {default values}], ...]
     attr_accessor :filtering_list
     attr_accessor :output_json
 
@@ -28,7 +26,7 @@ module DinosaurIndex
     def initialize
       super
 
-      @default_values = {}
+      @file_level_dino_attribute_defaults = {}
       @input_files = []
       @filtering_list = QueriableArray.new
 
@@ -38,7 +36,7 @@ module DinosaurIndex
       separator "Option summary"
 
       on(*@@opt_d) { |defstr| update_default_value(defstr) }
-      on(*@@opt_f) { |f| @input_files << [f, @default_values] }
+      on(*@@opt_f) { |f| store_input_file_with_its_defaults(f) }
       on(*@@opt_s) { |_o| add_small_filter }
       on(*@@opt_l) { |_o| add_large_filter }
       on(*@@opt_2) { |_o| add_biped_filter }
@@ -55,16 +53,19 @@ module DinosaurIndex
     def update_default_value(opt_arg)
       fieldname, value = split_default_setting_optarg(opt_arg)
 
-      # Don't modify current @default_values; stored w/previous input files
-      # Instead duplicate and release, adding new settings to dupl. instead
-      @default_values = @default_values.dup
-
-      if value.nil? then @default_values.delete(fieldname)
-      else @default_values[fieldname] = value
+      if value.nil? then @file_level_dino_attribute_defaults.delete(fieldname)
+      else @file_level_dino_attribute_defaults[fieldname] = value
       end
     end
 
     private
+
+    def store_input_file_with_its_defaults(pathname)
+      @input_files << InputFile.new(
+        pathname,
+        @file_level_dino_attribute_defaults.dup
+      )
+    end
 
     def split_default_setting_optarg(opt_arg)
       fieldname, value = opt_arg.split('=', 2)
@@ -92,12 +93,12 @@ module DinosaurIndex
 
     def add_quadruped_filter
       @filtering_list =
-        @filtering_list.match(:ambulation, Ambulation::QUADRUPEDAL).exclude_nil
+        @filtering_list.match(:posture, Posture::QUADRUPEDAL).exclude_nil
     end
 
     def add_biped_filter
       @filtering_list =
-        @filtering_list.match(:ambulation, Ambulation::BIPEDAL).exclude_nil
+        @filtering_list.match(:posture, Posture::BIPEDAL).exclude_nil
     end
 
     def add_region_filter(pattern)

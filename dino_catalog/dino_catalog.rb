@@ -13,10 +13,10 @@ cli_parser = DinosaurIndex::CommandLineInterface.new
 cli_parser.parse!(ARGV)
 dino_list = cli_parser.filtering_list
 
-cli_parser.input_files.each do |filename, field_defaults|
-  DinosaurIndex::CSVLoader.new(filename, field_defaults).read do |dinosaur|
-    dino_list << dinosaur
-  end
+cli_parser.input_files.each do |inputfile|
+  csvloader = DinosaurIndex::CSVLoader.new(inputfile.pathname,
+                                           inputfile.dino_attribute_defaults)
+  csvloader.read { |dinosaur| dino_list << dinosaur }
 end
 
 if cli_parser.output_json

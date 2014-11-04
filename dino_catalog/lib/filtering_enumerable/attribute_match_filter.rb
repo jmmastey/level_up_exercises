@@ -1,6 +1,6 @@
 # An Enumerable collection of objects that's qualified by a filter condition
 module FilteringEnumerable
-  class AttributeMatchingEnumerable < AttributeConditionedEnumerable
+  class AttributeMatchFilter < AttributeFilter
     attr_reader :match_expressions
 
     def initialize(parent, filter_attribute, *match_expressions)
@@ -16,7 +16,7 @@ module FilteringEnumerable
   end
 
   # Add interface to FilteringEnumerable mixin to expose this functionality
-  add_filter_method(:match) do |parent, attribute, *match_expressions|
-    AttributeMatchingEnumerable.new(parent, attribute, *match_expressions)
+  add_filter_type(:match) do |parent, attribute, *match_expressions|
+    AttributeMatchFilter.new(parent, attribute, *match_expressions)
   end
 end

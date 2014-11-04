@@ -3,14 +3,7 @@ require_relative 'dinosaur.rb'
 require_relative 'dinosaur_parser.rb'
 
 class DinosaurCatalog
-  FILTER_METHODS = {
-    biped: :filter_bipeds,
-    carnivore: :filter_carnivores,
-    continent: :filter_continent,
-    large: :filter_large,
-    period: :filter_period,
-  }
-
+  FILTERS = [:biped, :carnivore, :continent, :large, :period]
   DEFAULT_JSON_FILENAME = "dinosaurs.json"
 
   def initialize
@@ -24,15 +17,13 @@ class DinosaurCatalog
   end
 
   def add_filter(filter, *args)
-    filter_method = FILTER_METHODS[filter]
-    @filters << { filter: filter_method, args: args } if filter_method
-    self
+    @filters << {filter: filter, args: args} if FILTERS.include?(filter)
   end
 
   def init_filtered_dinosaurs
     @filtered_dinosaurs = @dinosaurs.clone
   end
-
+ 
   def execute_all_filters
     @filters.each do |f|
       send f[:filter], *f[:args]
@@ -77,26 +68,26 @@ class DinosaurCatalog
     end
   end
 
-  def filter_bipeds(condition = true)
+  def biped(condition = true)
     filter_common { |dino| dino.biped? == condition }
   end
 
-  def filter_carnivores(condition = true)
+  def carnivores(condition = true)
     filter_common { |dino| dino.carnivore? == condition }
   end
 
-  def filter_large(condition = true)
+  def large(condition = true)
     filter_common { |dino| dino.big_dinosaur? == condition }
   end
 
-  def filter_continent(continent)
+  def continent(continent)
     filter_common do |dino|
       regexp = "^#{continent}"
       dino.continent =~ Regexp.new(regexp, true)
     end
   end
 
-  def filter_period(period)
+  def period(period)
     filter_common do |dino|
       regexp = "^#{period}"
       dino.period =~ Regexp.new(regexp, true)
@@ -116,7 +107,7 @@ class DinosaurCatalog
   end
 
   private :init_filtered_dinosaurs, :execute_all_filters,
-    :print_filtered_dinosaurs, :reset_filtered_dinosaurs, :filter_bipeds,
-    :filter_carnivores, :filter_large, :filter_continent,
+    :print_filtered_dinosaurs, :reset_filtered_dinosaurs, :biped,
+    :carnivores, :large, :continent, :period,
     :filter_common, :pre_dump, :to_a
 end

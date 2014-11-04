@@ -5,9 +5,9 @@ class DinosaurParser
   HEADERS          = Dinosaur::ATTRIBUTES
 
   HEADER_ALIASES   = {
-    genus: :name,
-    weight: :weight_in_lbs,
-    carnivore: :diet,
+    "genus" => "name",
+    "weight" => "weight_in_lbs",
+    "carnivore" => "diet",
   }
 
   DEFAULT_VALUES = {
@@ -65,7 +65,7 @@ class DinosaurParser
   end
 
   def dinosaur_header_converter(header)
-    HEADER_ALIASES[header.to_sym] || header
+    HEADER_ALIASES[header] || header
   end
 
   def dinosaur_diet_converter(value, fields)

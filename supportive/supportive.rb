@@ -39,21 +39,17 @@ class BlagPost
   def category_list
     return "" if categories.blank?
 
-    categories.map { |cat| as_title(cat) }.to_sentence
-  end
-
-  def as_title(string)
-    String(string).titleize
+    categories.map { |cat| String(cat).titleize }.to_sentence
   end
 
   def commenters
-    return '' unless comments_allowed? || comments.length > 0
+    return "" unless comments_allowed? || comments.length > 0
 
     "You will be the #{comments.length.ordinalize} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date.years_since(3) > Date.today
   end
 
   def abstract

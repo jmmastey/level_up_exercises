@@ -1,0 +1,8 @@
+<% if recommendations.any? %>
+  <h3>Recommended Shows</h3>
+  <ul>
+  <% recommendations.each do |show| %>
+    <li><%= link_to show.name, show %></li>
+  <% end %>
+  </ul>
+<% end %>

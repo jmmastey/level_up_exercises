@@ -45,14 +45,20 @@ When /^I type in password$/ do
   fill_in("deactivation_code", with: "password")
 end
 
+When /^I type in 00000$/ do
+  fill_in("deactivation_code", with: "00000")
+end
+
 Given /^I am on the deactivate page$/ do
-  step "I visit the overlord home page"
-  step "I type in the wrong deactivation code"
-  step "I click deactivate"
+ step "I visit the overlord home page"
+ step "I type in the right activation code"
+ step "I click activate"
 end
 
 Given /^I am on the deactivate page after second attempt$/ do
   step "I visit the overlord home page"
+  step "I type in the right activation code"
+  step "I click activate"
   step "I type in the wrong deactivation code"
   step "I click deactivate"
   step "I type in the wrong deactivation code"
@@ -60,5 +66,9 @@ Given /^I am on the deactivate page after second attempt$/ do
 end
 
 Then /^I should see the bomb status as exploded$/ do
-  expect(page).to have_content "Status: The bomb has exploded. Ha!"
+  expect(page).to have_content "Status: The bomb has exploded"
+end
+
+Then /^I dump the page$/ do
+  puts body
 end

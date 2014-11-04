@@ -1,32 +1,13 @@
-class NameCollisionError < RuntimeError; end
+require_relative 'robot_factory'
 
-class Robot
-  attr_accessor :name
+robot_factory = RobotFactory.new
 
-  @@registry
+robot_a = robot_factory.create_robot
+puts "My pet robot's name is #{robot_a.name}, but we usually call him sparky I."
 
-  def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
-
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
-
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
-
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
-  end
-end
-
-robot = Robot.new
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+robot_b = robot_factory.create_robot
+puts "My pet robot's name is #{robot_b.name}, but we usually call him sparky II."
 
 # Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+#robot_factory.create_robot('AA111')
+#robot_factory.create_robot('AA111')

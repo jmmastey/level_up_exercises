@@ -1,0 +1,199 @@
+body {
+  width: 800px;
+  margin: auto;
+  font-family: sans-serif;
+  background: url("dirty-metal-surface2.jpg");
+}
+div.verticalmargin {
+  background: yellow;
+}
+div.verticalmargin img {
+  width: 100%;
+  height: 30px;
+}
+.textDisplay {
+  overflow: hidden;
+  font-size: 20pt;
+  height: 28pt;
+  background: black;
+  text-align: center;
+  color: green;
+  margin: 0px;
+  font-family: "Lucida Console", Courier, monospace
+}
+div.content {
+  margin-top: auto;
+  margin-bottom: auto;
+  overflow: hidden;
+  background: gray;
+  border-width: 5px 5px 5px 5px;
+  vertical-align: top;
+}
+.foregroundSurface {
+  /* background: #cccccc; */
+  background: url("dirty-metal-surface2.jpg");
+}
+.innerBevel {
+  border-top: 5px solid #444444;
+  border-left: 5px solid #444444;
+  border-right: 5px solid #eeeeee;
+  border-bottom: 5px solid #eeeeee;
+  border-radius: 10px;
+}
+.outerBevel {
+  border-top: 5px solid #eeeeee;
+  border-left: 5px solid #eeeeee;
+  border-bottom: 5px solid #444444;
+  border-right: 5px solid #444444;
+  border-radius: 10px;
+}
+.label {
+  font-variant: small-caps;
+  font-size: 14pt;
+}
+.label:first-letter {
+  text-transform: lowercase;
+}
+h1 {
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+}
+.controlFrame {
+  margin: 0px;
+  padding: 7px;
+  /* background: #ddddee; */
+  background: url("brushed-metal.jpg");
+  border-top: 5px solid #ccccdd;
+  border-left: 5px solid #ccccdd;
+  border-right: 5px solid #444455;
+  border-bottom: 5px solid #444455;
+  border-radius: 10px;
+}
+#messagesPanel {
+  position: relative;
+}
+#controlPanel {
+  position: relative;
+}
+div#activation-codes {
+  width: 625px;
+}
+div.codedControl {
+  position: relative;
+  height: 120px;
+  margin: 5px;
+}
+#labelArmingCode {
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+#labelArmingButton {
+  margin-top: -7px;
+  margin-bottom: 2px;
+  color: red;
+}
+#labelDisarmingButton {
+  color: blue;
+}
+div#activation-controls {
+  position: relative;
+}
+div { position: relative; }
+input[type="image"].button {
+  height: 65px;
+  width: 65px;
+}
+img.button {
+  display: inline;
+  height: 65px;
+  width: 65px;
+  margin-left: auto;
+  margin-right: auto;
+}
+div.codeEntry input[type="text"] {
+  width: 325px;
+}
+div.codeEntry {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 360px;
+}
+div.codeActionOuter {
+  position: absolute;
+  top: 2px;
+  left: 370px;
+  width: 205px;
+  height: 90px;
+}
+div.codeActionInner {
+  height: 60px;
+}
+#armingButton {
+  background: #441111;
+}
+div.armingButtonBright {
+  background: red !important;
+}
+div.disarmingButtonBright {
+  background: blue !important;
+}
+#disarmingCodeAction .enabled {
+/*  background: #5099ff; */
+}
+#disarmingButton {
+  background: #050533;
+}
+.squareButton {
+  margin: 0.5em;
+  font-size: 20pt;
+  text-align: center;
+  vertical-align: middle;
+}
+#commitButtons {
+  width: 140px;
+  height: 245px;
+  padding: 5px;
+  text-align: center;
+  position: absolute;
+  top: 5px;
+  left: 625px;
+}
+#commitButtons img {
+  margin-left: auto;
+  margin-right: auto;
+}
+#commitControl {
+  border: 5px inset gray;
+  border-radius: 10px;
+}
+#labelCommit {
+  color: red;
+}
+#cancelControl {
+  width: 115px;
+}
+#cancelControlFrame {
+  position: absolute;
+  top: 140px;
+}
+#timerControlInner {
+  text-align: center;
+}
+#timerControlBox span { 
+  vertical-align: middle;
+}
+#timerEntryFrame {
+  display: inline-block;
+}
+#timerEntry {
+  display: inline-block;
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+  vertical-align: middle;
+}
+#timerControlBox img.button {
+  vertical-align: middle;
+}

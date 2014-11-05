@@ -20,105 +20,95 @@ function hide_toggle_menues_other_than(element) {
 
 function setup_event_handlers() {
 
-	// Search Options
-	$( ".search-options-div" ).mouseenter( function() {
-		$( ".search-options-div .tooltip" ).show();
+	// Tool-Tips
+	$( ".has-tooltip" ).mouseenter( function() {
+
+		var tip_data = $( this ).data("tip");
+		var tip_element = document.createElement('div');
+		console.log(tip_data);
+
+		$( tip_element )
+			.addClass("tooltip")
+			.html(tip_data)
+			.appendTo( $( this ) )
+			.show();
+
+	}).mouseleave( function() {
+		$( this ).find( ".tooltip" ).remove();
 	});
 
-	$( ".search-options-div" ).mouseleave( function() {
-		$( ".search-options-div .tooltip" ).hide();
-	});
 
-	$( ".search-options-div" ).click( function() {
-		$( ".search-options-menu-div" ).toggle();
-	});
-
-
-	// Apps Button
-	$( ".apps-button-div" ).mouseenter( function() {
-		$( ".apps-button-div .tooltip" ).show();
-	});
-
-	$( ".apps-button-div" ).mouseleave( function() {
-		$( ".apps-button-div .tooltip" ).hide();
+	// Search
+	$( ".search .down-arrow" ).click( function() {
+		$( ".search .menu" ).toggle();
 	});
 
 
 	// Manage Account
 	$( ".manage-account" ).click( function() {
-		$( ".manage-account-menu" ).toggle();
+		$( this ).find( ".menu" ).toggle();
 	});
 
 	
 	// Mail Options
-	$( ".mail-options-button-div" ).click( function() {
-		$( ".mail-options-list-div" ).toggle();
+	$( ".mail-options" ).click( function() {
+		$( this ).find( ".menu" ).toggle();
 	});
 
 
 	// Mail Item Selection
-	$( ".mail-item-selection-div .down-arrow" ).click( function() {
-		$( ".mail-item-selection-options-div" ).toggle();
+	$( ".mail-selection .down-arrow" ).click( function() {
+		$( this ).parent().find(".options").toggle();
 	});
 
-	$( ".mail-item-selection-div input" ).change( function() {
-		if (this.checked) {
-			$( ".mail-items-div .checkbox input" ).prop('checked', true);
-		}
-		else {
-			$( ".mail-items-div .checkbox input" ).prop('checked', false);
-		}
+	$( ".mail-selection input.check-all" ).change( function() {
+		$( this ).prop('checked', this.checked);
+		$( ".mail-items .checkbox input" ).prop('checked', this.checked);
 	});
 
 	// Mail Item Selection: All
-	$( ".mail-item-selection-options-div li.all" ).click( function() {
-		$( ".mail-items-div .checkbox input" ).prop('checked', true);
-		$( ".mail-item-selection-options-div" ).toggle();
+	$( ".mail-selection li.all" ).click( function() {
+		$( ".mail-items .checkbox input" ).prop('checked', true);
+		$( ".mail-selection .options" ).toggle();
 	});
 
 	// Mail Item Selection: None
-	$( ".mail-item-selection-options-div li.none" ).click( function() {
-		$( ".mail-items-div .checkbox input" ).prop('checked', false);
-		$( ".mail-item-selection-options-div" ).toggle();
+	$( ".mail-selection li.none" ).click( function() {
+		$( ".mail-items .checkbox input" ).prop('checked', false);
+		$( ".mail-selection .options" ).toggle();
 	});
 
 	// Mail Item Selection: Starred
-	$( ".mail-item-selection-options-div li.starred" ).click( function() {
-		$( ".mail-items-div .checkbox input" ).each( function() {
-			var star = $( this ).parent().parent().find('td.starred');
-			if ($( star ).hasClass("checked")) {
-				$( this ).prop('checked', true);
-			}
+	$( ".mail-selection li.starred" ).click( function() {
+		$( ".mail-items .star.starred" ).each( function() {
+			$( this ).parent().find(".checkbox input").prop('checked', true);
 		});
-		$( ".mail-item-selection-options-div" ).toggle();
+		$( ".mail-selection .options" ).hide();
 	});
 
 	// Mail Item Selection: Unstarred
-	$( ".mail-item-selection-options-div li.unstarred" ).click( function() {
-		$( ".mail-items-div .checkbox input" ).each( function() {
-			var star = $( this ).parent().parent().find('td.starred');
-			if (!($( star ).hasClass("checked"))) {
-				$( this ).prop('checked', true);
+	$( ".mail-selection li.unstarred" ).click( function() {
+		$( ".mail-items .star" ).each( function() {
+			if (!$( this ).hasClass("starred")) {
+				$( this ).parent().find(".checkbox input").prop('checked', true);
 			}
 		});
-		$( ".mail-item-selection-options-div" ).toggle();
+		$( ".mail-selection .options" ).hide();
 	});
 
-	
-
-	// Mark All As Read
-	$( ".mark-all-as-read-div" ).click( function() {
-		$( ".mark-all-as-read-menu-div" ).toggle();
+	// More
+	$( ".more" ).click( function() {
+		$( this ).find(".menu").toggle();
 	});
 
 
 	// Settings
-	$( ".settings-div" ).click( function() {
-		$( ".settings-menu-div" ).toggle();
+	$( ".settings" ).click( function() {
+		$( this ).find(".menu").toggle();
 	});
 
-	$( ".settings-menu-div li.density" ).click( function() {
-		$( ".settings-menu-div li.density" ).removeClass("selected");
+	$( ".settings li.density" ).click( function() {
+		$( this ).siblings( "li.density" ).removeClass("selected")
 		$( this ).addClass("selected");
 	});
 
@@ -131,13 +121,8 @@ function setup_event_handlers() {
 
 
 	// Mail Items Starred - Individual
-	$( ".mail-items-div .table td.starred" ).click( function() {
-		if ($( this ).hasClass("checked")) {
-			$( this ).removeClass("checked");
-		}
-		else {
-			$( this ).addClass("checked");
-		}
+	$( ".mail-items .star" ).click( function() {
+		$( this ).toggleClass("starred");
 	});
 }
 

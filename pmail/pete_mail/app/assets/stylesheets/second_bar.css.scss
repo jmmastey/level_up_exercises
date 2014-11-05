@@ -1,0 +1,242 @@
+.bar-top-white {
+	position: fixed;
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #DDDDDD;
+	top: 60px;
+	left: 0px;
+	height: 40px;
+	right: 0px;
+	z-index: -2;
+}
+
+.mail-options {
+	position: fixed;
+	top: 70px;
+	left: 20px;
+	cursor: pointer;
+
+	.label {
+		font-family: verdana;
+		font-size: 18px;
+		color: #FF4444;
+	}
+
+	.down-arrow {
+		position: absolute;
+		top: 0px;
+		left: 100%;
+	}
+
+	.menu {
+		display: none;
+		position: absolute;
+		border: 1px solid #DDDDDD;
+		background-color: white;
+		padding-top: 0px;
+		padding-left: 10px;
+
+		ul {
+			padding: 0px;
+			
+			li {
+				list-style: none;
+				font-size: 13px;
+				color: black;
+				
+				a {
+					color: black;
+					text-decoration: none;
+				}
+				
+				&:first-child {
+					color: #FF4444;
+				}
+			}
+		}
+	}
+}
+
+.mail-selection {
+	position: fixed;
+	top: 70px;
+	left: 160px;
+	width: 30px;
+	height: 24px;
+	cursor: pointer;
+	border: 1px solid #CCCCCC;
+	padding-right: 10px;
+	background: #EEEEEE;
+
+	&:hover {
+		border: 1px solid #BBBBBB;
+	}
+
+	.down-arrow {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+	}
+
+
+	.options {
+		display: none;
+		position: absolute;
+		top: 101%;
+		left: 0%;
+		width: auto;
+		height: auto;
+		border: 1px solid #CCCCCC;
+		background-color: white;
+		padding: 0px;
+
+		ul {
+			list-style: none;
+			padding: 10px;
+
+			li {
+				list-style: none;
+				font-size: 13px;
+				color: black;
+				padding: 0px;
+
+				&:hover {
+					background-color: #BBBBBB;
+				}
+
+				a {
+					color: black;
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}
+
+.refresh {
+	position: fixed;
+	top: 70px;
+	left: 210px;
+	width: 40px;
+	height: 24px;
+	cursor: pointer;
+	border: 1px solid #CCCCCC;
+	background-image: url('refresh.png');
+	background-repeat: no-repeat;
+	background-size: 20px 20px;
+	background-position: center;
+	background-color: #EEEEEE;
+
+	&:hover {
+		border: 1px solid #BBBBBB;
+	}
+}
+
+.more {
+	position: fixed;
+	top: 70px;
+	left: 260px;
+	width: 50px;
+	height: 24px;
+	cursor: pointer;
+	border: 1px solid #CCCCCC;
+	background-color: #EEEEEE;
+	padding: 0px;
+
+	&:hover {
+		border: 1px solid #BBBBBB;
+	}
+	
+	.label {
+		position: absolute;
+		top: 0px;
+		left: 2px;
+		font-family: verdana;
+		font-size: 10px;
+		color: black;
+		line-height: 24px;
+		vertical-align: middle;
+	}
+
+	.down-arrow {
+		position: absolute;
+		right: 0px;
+		top: 0px;
+	}
+
+	.menu {
+		display: none;
+		position: absolute;
+		left: 0%;
+		top: 110%;
+		width: 250%;
+		height: 100%;
+		background: white;
+		border: 1px solid #CCCCCC;
+
+		.option {
+			position: absolute;
+			left: 10px;
+			font-size: 12px;
+
+			&:hover {
+				background: #CCCCF2;
+			}
+		}
+	}
+}
+
+.settings {
+	position: fixed;
+	top: 70px;
+	right: 1%;
+	width: 40px;
+	height: 24px;
+	cursor: pointer;
+	border: 1px solid #CCCCCC;
+	background-image: url('gear.png');
+	background-repeat: no-repeat;
+	background-size: 20px 20px;
+	background-position: center;
+	background-color: none;
+	background-color: #EEEEEE;
+	padding: 0px;
+
+	&:hover {
+		border: 1px solid #BBBBBB;
+	}
+
+	.menu {
+		display: none;
+		position: absolute;
+		right: 0%;
+		top: 110%;
+		width: 300%;
+		height: auto;
+		background: white;
+		border: 1px solid #CCCCCC;
+
+		ul {
+			padding: 5px;
+
+			li {
+				padding-top: 3px;
+				padding-bottom: 3px;
+				list-style: none;
+				font-size: 10px;
+			
+				&.selected {
+					color: red;
+				}
+
+				&:hover {
+					background-color: #DDDDDD;
+				}
+
+				.separate {
+					border-top: 1px solid #D0D0D0;
+					border-bottom: 1px solid #D0D0D0;
+				}
+			}
+		}
+	}
+}

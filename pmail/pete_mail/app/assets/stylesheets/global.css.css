@@ -1,0 +1,47 @@
+a {
+  text-decoration: none; }
+
+* {
+  font-family: verdana; }
+
+.tooltip {
+  display: none;
+  top: 120%;
+  left: 50%;
+  height: auto;
+  width: auto;
+  font-size: 10px;
+  font-family: verdana;
+  background: #FFFFCC;
+  border: 1px solid #555555;
+  padding: 2px;
+  position: absolute;
+  z-index: 50; }
+
+.down-arrow {
+  width: 24px;
+  height: 24px;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  cursor: pointer;
+  outline: 0;
+  z-index: 25;
+  background: none; }
+
+.down-arrow:after {
+  position: absolute;
+  display: block;
+  content: "";
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  margin: 0px;
+  padding: 0px;
+  background-image: url("down-arrow.png");
+  background-repeat: no-repeat;
+  background-size: 10px 8px;
+  background-position: center;
+  background-color: none;
+  opacity: 0.5; }

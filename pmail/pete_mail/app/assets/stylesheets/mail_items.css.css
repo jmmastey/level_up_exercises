@@ -1,0 +1,51 @@
+.mail-items {
+  position: absolute;
+  top: 100px;
+  left: 160px;
+  right: 0px;
+  height: 100%;
+  border-top: 1px solid #DDDDDD;
+  z-index: -100;
+  padding: 0px;
+  overflow: none; }
+  .mail-items table {
+    position: absolute;
+    background-color: #EEEEEE;
+    border-style: none;
+    font-size: 12px;
+    width: 100%;
+    padding: 0px;
+    border-collapse: collapse;
+    z-index: auto; }
+    .mail-items table tr {
+      width: 100%;
+      padding: 0px; }
+      .mail-items table tr:hover {
+        background-color: #DDDDFF; }
+      .mail-items table tr td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #DDDDDD;
+        border-left: 0px;
+        border-right: 0px; }
+        .mail-items table tr td.checkbox {
+          width: 2%; }
+        .mail-items table tr td.star {
+          width: 3%;
+          background-image: url("open_star.png");
+          background-repeat: no-repeat;
+          background-size: 20px 16px;
+          background-position: center;
+          background-color: none; }
+          .mail-items table tr td.star.starred {
+            background-image: url("closed_star.png"); }
+        .mail-items table tr td.from {
+          width: 20%; }
+        .mail-items table tr td.subject {
+          width: 65%; }
+          .mail-items table tr td.subject .text {
+            color: #555555; }
+        .mail-items table tr td.date-time {
+          width: 10%;
+          text-align: right;
+          padding-right: 10px; }

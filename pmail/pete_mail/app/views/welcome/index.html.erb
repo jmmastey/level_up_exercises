@@ -1,52 +1,56 @@
 <div class="bar-top-gray">
   <img class="logo" src='https://www.google.com/a/enova.com/images/logo.gif'/>
 
-  <div class="search-field-div">
-	<input type='text' class="search-field"/>
-	<div class="search-options-menu-div">
-	  <span class="item-label">From</span><br>
-	  <input class="item-input" type='text' value=""/><br>
-	  <span class="item-label">To</span><br>
-	  <input class="item-input" type='text' value=""/><br>
-	  <span class="item-label">Has the words</span><br>
-	  <input class="item-input" type='text' value=""/><br>
-	  <span class="item-label">Doesn't have</span><br>
-	  <input class="item-input" type='text' value=""/><br>
+  <div class="search">
+	<input type='text' class="text"/>
+	<div class="down-arrow has-tooltip" data-tip="Search Options">
+	</div>
+	<div class="button">
+	  <input type='submit' value=""/>
+	</div>
+	<div class="menu">
+	  <span class="label">From</span><br>
+	  <input class="text" type="text" value=""/><br>
+
+	  <span class="label">To</span><br>
+	  <input class="text" type="text" value=""/><br>
+
+	  <span class="label">Has the words</span><br>
+	  <input class="text" type="text" value=""/><br>
+
+	  <span class="label">Doesn't have</span><br>
+	  <input class="text" type="text" value=""/><br>
+
 	  <br>
-	  <input type='checkbox'>
-	  <span class="item-label">Has attachment</span><br>
+	  <input class="check" type="checkbox" value=""/>
+	  <span class="label">Has attachment</span><br>
+
 	  <br>
-	  <input type='checkbox'>
-	  <span class="item-label">Don't include chats</span><br>
+	  <input class="check" type="checkbox" value=""/>
+	  <span class="label">Don't include chats</span><br>
+
+	  <br>
 	</div>
   </div>
 
-  <div class="search-options-div">
-	<div class="tooltip">Search Options</div>
+
+  <div class="grid-button has-tooltip" data-tip="Apps">
   </div>
 
-  <div class="search-button-div">
-	<input type='submit' class="search-button" value=""/>
-  </div>
-
-  <div class="apps-button-div">
-	<div class="tooltip">Apps</div>
-  </div>
-
-  <div class="manage-account">cdevel@enova.com
-	<div class="manage-account-menu">
-
+  <div class="manage-account">
+	<div class="label">cdevel@enova.com</div>
+	<div class="menu">
 	  <div class="header">		  
 		This class is managed by <b>enova.com</b><br>
 		<a href="#">Learn more</a>
 	  </div>
 
-	  <div class="user-info">
+	  <div class="body">
 		<span class="fullname"><b>Curious Developer</b></span><br>
 		<span class="email">cdevel@enova.com</p></span>
 	  </div>
 
-	  <div class="lower-bar">
+	  <div class="footer">
 		<div class="settings"><a href="#">Settings</a></div>
 		<div class="logout"><a href="#">Logout</a></div>	  
 	  </div>
@@ -55,10 +59,10 @@
 </div>
 
 <div class="bar-top-white">
-  <div class="mail-options-button-div">
+  <div class="mail-options">
 	<div class="label">Mail</div>
 	<div class="down-arrow"></div>
-	<div class="mail-options-list-div">
+	<div class="menu">
 	  <ul>
 		<li>Mail</li>
 		<li><a href="#">Contacts</a></li>
@@ -67,10 +71,10 @@
 	</div>
   </div>
 
-  <div class="mail-item-selection-div">
-	<input type='checkbox' class="check-all"/>
+  <div class="mail-selection">
+	<input class="check-all" type='checkbox'/>
 	<div class="down-arrow"></div>
-	<div class="mail-item-selection-options-div">
+	<div class="options">
 	  <ul>
 		<li class="all">All</li>
 		<li class="none">None</li>
@@ -82,20 +86,20 @@
 	</div>
   </div>
 
-  <div class="refresh-div">
+  <div class="refresh">
 	<a href="#"></a>
   </div>
 
-  <div class="mark-all-as-read-div">	
+  <div class="more">	
 	<div class="label">More</div>
 	<div class="down-arrow"></div>
-	<div class="mark-all-as-read-menu-div">
+	<div class="menu">
 	  <div class="option">Mark all as read</div>
 	</div>
   </div>
 
-  <div class="settings-div">
-	<div class="settings-menu-div">
+  <div class="settings">
+	<div class="menu">
 	  <ul>
 		<li class="density">Comfortable</li>
 		<li class="density">Cozy</li>
@@ -110,7 +114,7 @@
 </div>
 
 <div class="bar-left-white">
-  <div class="compose-button">COMPOSE</div>
+  <div class="glaring-button">COMPOSE</div>
   <ul class="folders">
 	<li>Inbox</li>
 	<li>Starred</li>
@@ -127,13 +131,13 @@
 <%   mail_items << {from: "Men's Wearhouse", subject: "Don't miss 50% off everything", text: "Dear Customer, We value your business and simply cannot let you miss this great one-day sale", time: '9:08am'} %>
 <% end %>
 
-<div class="mail-items-div">
-  <table class="table">
+<div class="mail-items">
+  <table>
 	<% mail_items.each do |item| %>
 	<tr>
 	  <td class="checkbox"><input type='checkbox'>
 	  </td>
-	  <td class="starred">
+	  <td class="star">
 	  </td>
 	  <td class="from"><%= item[:from] %>
 	  </td>

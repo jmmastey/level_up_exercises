@@ -1,0 +1,47 @@
+.bar-left-white {
+	position: fixed;
+	background-color: white;
+	top: 100px;
+	left: 0px;
+	width: 160px;
+	height: 100%;
+	border: none;
+	z-index: -10;
+}
+
+.glaring-button {
+	position: absolute;
+	left: 20px;
+	top: 20px;
+	width: 120px;
+	height: 23px;
+	border-radius: 2px;
+	background-color: #DD0000;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+	padding: 0px;
+	padding-top: 7px;
+	color: white;
+	cursor: pointer;
+}
+
+
+.folders {
+	position: absolute;
+	left: 20px;
+	top: 50px;
+	padding-left: 0px;
+
+	li {
+		list-style: none;
+		font-size: 12px;
+		padding-left: 0px;
+		padding-top: 12px;
+		cursor: pointer;
+
+		&.selected {
+			color: red;
+		}
+	}
+}

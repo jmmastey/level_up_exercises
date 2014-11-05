@@ -7,6 +7,8 @@ class Robot
   VALID_NAME = /^[[:alpha:]]{2}[[:digit:]]{3}$/
   INVALID_NAME_ERROR = 'The robot name is not valid!'
   NAME_EXISTS_ERROR = 'The robot name already exists!'
+  CHARS_IN_NAME = 2
+  DIGITS_IN_NAME = 3
 
   def initialize(args = {})
     @@registry ||= []
@@ -25,7 +27,7 @@ class Robot
   end
 
   def generate_new_name
-    "#{character * 2}#{number * 3}"
+    "#{character * CHARS_IN_NAME}#{number * DIGITS_IN_NAME}"
   end
 
   def assert_valid_name

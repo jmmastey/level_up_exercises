@@ -1,4 +1,4 @@
-
+require 'table_print'
 class Printer
   def self.print_options
     puts "WELCOME TO DINODEX\nA repository for amazing Dinosaur knowledge"
@@ -25,8 +25,14 @@ class Printer
     puts "To Quit type 'q'"
   end
 
-  def self.print
-    tp @results
+  def self.print(results)
+    tp results
     STDIN.gets
+  end
+
+  def self.eras(era)
+    puts 'Available Periods:'
+    era.each { |period| puts period }
+    puts 'Which Period would you like to see Dinos from?'
   end
 end

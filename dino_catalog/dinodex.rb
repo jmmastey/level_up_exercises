@@ -1,30 +1,9 @@
 require 'csv'
 require 'table_print'
 require_relative 'printer'
-
-#
-class Dinosaur
-  attr_reader :name, :period, :continent, :diet, :weight, :legs, :description
-  def initialize(options)
-    @name = options[:name].to_s
-    @period = options[:period].to_s
-    @continent = options[:continent] || "Africa"
-    @diet = convert_diet(options[:diet])
-    @weight = options[:weight_in_lbs] || "Unknown"
-    @legs = options[:walking].to_s
-    @description = options[:description].to_s
-  end
-
-  def convert_diet(food)
-    if food == "Yes"
-      "Carnivore"
-    elsif food == "No"
-      "Herbivore"
-    else
-      food
-    end
-  end
-end
+require_relative 'dinosaur'
+require 'pry'
+require 'pry-nav'
 
 class Library
   ACTION_MAP = {
@@ -72,8 +51,7 @@ class Library
     puts "What dino do you want to find?"
     selected = gets.chomp.downcase
     @results.each { |dino| @found << dino if dino.name.downcase == selected }
-    tp @found
-    STDIN.gets
+    Printer.print(@found)
   end
 
   def bipeds
@@ -87,12 +65,14 @@ class Library
     filtered = []
     meat = %w(Insectivore Piscivore Carnivore)
     @results.each { |dino| filtered << dino if meat.include?(dino.diet) }
-    tp @results = filtered
-    STDIN.gets
+    @results = filtered
+    Printer.print(@results)
   end
 
   def period
-    p "Which Period?"
+    periods = []
+    @dinodex.each { |dino| periods << dino.period }
+    Printer.eras(periods.uniq)
     time_period = gets.chomp
     era(time_period)
   end
@@ -100,11 +80,10 @@ class Library
   def era(time_period)
     new_results = []
     @results.each do |dino|
-      new_results << dino if dino.period.downcase.include?(time_period)
+      new_results << dino if dino.period.downcase.include?(time_period.downcase)
     end
     @results = new_results
-    tp @results
-    STDIN.gets
+    Printer.print(@results)
   end
 
   def big
@@ -113,8 +92,7 @@ class Library
       new_results << dino if dino.weight.to_i > 4000
     end
     @results = new_results
-    tp @results
-    STDIN.gets
+    Printer.print(@results)
   end
 
   def not_an_option
@@ -124,6 +102,10 @@ class Library
 
   def reset
     @results = @dinodex
+  end
+
+  def print
+    Printer.print(@results)
   end
 
   def quit

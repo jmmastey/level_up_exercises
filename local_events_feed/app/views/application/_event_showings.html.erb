@@ -1,0 +1,42 @@
+<div id='event-showings'>
+  <div class="table-container">
+	<table>
+	  <% if @event.showings.blank? %>
+	  <tr><td colspan=3>No Showings on Record</td></tr>
+	  <% else %>
+	  <% @event.sorted_showings.each do |showing| %>
+	  <% member = showing.in?(current_user.showings) %>
+	  <% member_class = member ? 'member' : 'non-member' %>
+	  <tr>
+		<td class="<%= member_class %> dow"><%= showing.pretty_local_dow %></td>
+		<td class="<%= member_class %> date"><%= showing.pretty_local_date_no_dow %></td>
+		<td class="<%= member_class %> time"><%= showing.pretty_local_time %></td>
+		<td class="<%= member_class %>" align='center'>
+		  <% association = { showing_id: showing[:id], user_id: current_user[:id] } %>
+		  <% if member %>
+		  <%= link_to image_tag("minus.png", :class => 'minus'), events_remove_user_showing_path(association), method: :post, :id => "remove-#{showing[:id]}-event-show" %>
+		  <% else %>
+		  <%= link_to image_tag("plus.png", :class => 'plus'), events_add_user_showing_path(association), method: :post, :id => "add-#{showing[:id]}" %>
+		  <% end %>
+		</td>
+	  </tr>
+	  <% end %>
+	  <% end %>
+	</table>
+  </div>
+
+  <div class="nav">
+	<% if @event.image.present? %>
+    <div class="event-image-div">
+	  <img src=<%= @event.image %> />
+	<div class="event-description">
+	  <%= @event.description %>
+	</div>
+	</div>
+	<% end %>
+
+	<%= link_to 'Website', @event.link, :class => 'cool-round-button website', :target => '_blank' %>
+	<%= link_to 'Events', events_path, :class => 'cool-round-button events' %>
+	<%= link_to 'Home', current_user, :class => 'cool-round-button home' %>
+  </div>
+</section>

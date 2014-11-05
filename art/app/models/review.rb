@@ -9,7 +9,7 @@ class Review < ActiveRecord::Base
   }
 
   scope :beloved, -> { where(rating: 5) }
-  scope :recent, -> { where("created_at > ?", 5.days.ago) }
+  scope :recent, -> { where("reviews.created_at > ?", 5.days.ago) }
   scope :for, ->(performance) { where(performance: performance) }
   scope :by, ->(user) { where(user: user) }
 

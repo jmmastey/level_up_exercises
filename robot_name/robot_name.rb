@@ -1,4 +1,5 @@
-class NameCollisionError < RuntimeError; end
+NameCollisionError = Class.new(RuntimeError)
+NameInvalidError = Class.new(RuntimeError)
 
 class Robot
   attr_accessor :name

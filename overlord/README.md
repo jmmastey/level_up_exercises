@@ -17,7 +17,7 @@ But, this is the important part: you're going to write all the tests for the dev
 5. Next, the deactivation code.
   * This code should be configurable as well. A good default code would be 0000.
   * Once the bomb is active, putting in the correct deactivation code should cause the bomb to revert to inactivity, and indicate as such.
-  * If a user puts in the wrong activation code three times, the bomb should explode. I'm not really sure what the interface would look like for this, since the bomb is exploded and all, but let's just indicate it somehow to be sure.
+  * If a user puts in the wrong deactivation code three times, the bomb should explode. I'm not really sure what the interface would look like for this, since the bomb is exploded and all, but let's just indicate it somehow to be sure.
   * Once a bomb has exploded, none of the buttons work anymore. Obv.
 
 

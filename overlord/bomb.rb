@@ -4,26 +4,21 @@ class Bomb
 
   alias_method :active?, :active
   alias_method :exploded?, :exploded
+  ACTIVATION = 2342
+  DEACTIVATION = 0000
 
-  def initialize(act_code = 2342, deact_code = 0000)
-    @deactivation_code = deact_code
-    @activation_code  = act_code
+  def initialize
     @failed_attempts = 0
-
     @active = false
     @exploded = false
   end
 
-  def enter_code(guess)
-    @guess = guess
+  def activate(attempt)
+    @active = true if attempt == ACTIVATION && !@exploded
   end
 
-  def activate
-    @active = true if @guess == @activation_code  && !@exploded
-  end
-
-  def deactivate
-    if @guess == @deactivation_code && !@exploded
+  def deactivate(attempt)
+   if attempt  == DEACTIVATION && !@exploded
        @active = false
     else
       @failed_attempts += 1

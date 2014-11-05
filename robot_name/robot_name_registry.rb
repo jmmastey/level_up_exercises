@@ -1,22 +1,19 @@
-require_relative 'name_collision_error'
+NameCollisionError = Class.new(RuntimeError)
 
 class RobotNameRegistry
   def initialize
     @registry = []
   end
 
-  def add(name)
+  def push(name)
     validate(name)
     @registry << name
-  end
-
-  def exist?(name)
-    @registry.include?(name)
   end
 
   private
 
   def validate(name)
-    raise NameCollisionError if exist?(name)
+    error_message = "Generated name #{name} already exists in the registry"
+    raise NameCollisionError, error_message if @registry.include?(name)
   end
 end

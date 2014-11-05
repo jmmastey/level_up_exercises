@@ -1,30 +1,25 @@
-require_relative 'schema_error'
-require_relative 'name_generator_error'
+FormatError = Class.new(RuntimeError)
 
 class RobotNameGenerator
-  UPPER_COUNT    = 2
-  DIGIT_COUNT    = 3
-  DEFAULT_SCHEMA = "[[:upper:]]{#{UPPER_COUNT}}[[:digit:]]{#{DIGIT_COUNT}}"
+  DEFAULT_FORMAT = /^[[:upper:]]{2}[[:digit:]]{3}$/
 
-  def initialize(schema = nil)
-    @schema = schema || DEFAULT_SCHEMA
+  def initialize(params = {})
+    @generator = params[:name_generator] || method(:default_generator)
+    @pattern   = params[:pattern] || DEFAULT_FORMAT
   end
 
-  def generate(generator = nil)
-    generator ||= method(:default_generator)
-    name = generator.call
-    validate(name)
-    name
+  def generate
+    @generator.call.tap { |name| validate(name) }
   end
 
   private
 
   def validate(name)
-    raise SchemaError unless name =~ Regexp.new(@schema)
+    error_message = "Generated name #{name} is not in a valid format"
+    raise FormatError, error_message unless name =~ @pattern
   end
 
   def default_generator
-    UPPER_COUNT.times.map { ('A'..'Z').to_a.sample }.join +
-      DIGIT_COUNT.times.map { rand(10) }.join
+    2.times.map { ('A'..'Z').to_a.sample }.join + 3.times.map { rand(10) }.join
   end
 end

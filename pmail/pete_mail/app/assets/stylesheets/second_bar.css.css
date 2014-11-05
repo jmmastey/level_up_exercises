@@ -27,7 +27,8 @@
     border: 1px solid #DDDDDD;
     background-color: white;
     padding-top: 0px;
-    padding-left: 10px; }
+    padding-left: 10px;
+    width: 90px; }
     .mail-options .menu ul {
       padding: 0px; }
       .mail-options .menu ul li {
@@ -133,7 +134,9 @@
     .more .menu .option {
       position: absolute;
       left: 10px;
-      font-size: 12px; }
+      font-size: 12px;
+      line-height: 24px;
+      vertical-align: middle; }
       .more .menu .option:hover {
         background: #CCCCF2; }
 

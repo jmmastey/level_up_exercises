@@ -150,10 +150,10 @@
 	.menu {
 		display: none;
 		position: absolute;
-		right: 0px;
+		right: 10px;
 		top: 30px;
 		width: 230px;
-		height: 200px;
+		height: 170px;
 		background-color: #FFFFDD;
 		border: 1px solid #DDDDDD;
 		font-size: 18px;
@@ -167,7 +167,7 @@
 			height: 30%;
 			background-color: #FFFFCC;	
 			font-size: 10px;
-			padding: 10px 0px 0px 20px;
+			padding: 8px 0px 0px 20px;
 		}
 
 		.body {
@@ -181,12 +181,12 @@
 
 
 			.fullname {
-				font-size: 10px;
+				font-size: 13px;
 				font-weight: bold;
 			}
 
 			.email {
-				font-size: 10px;
+				font-size: 12px;
 				color: #333333;
 			}
 		}
@@ -198,13 +198,14 @@
 			width: 100%;
 			height: 30%;
 			background-color: #E3E3E3;
+			padding: 10px 0px 0px 20px;
 
 			.settings {
 				position: absolute;
 				left: 10%;
 				top: 25%;
 				height: auto;
-				width: auto;
+				width: 25%;
 				padding: 2px 5px 5px 5px;
 				border: 1px solid #AAAAAA;
 				background: #EEEEEE;
@@ -223,7 +224,7 @@
 				right: 10%;
 				top: 25%;
 				height: auto;
-				width: auto;
+				width: 25%;
 				padding: 2px 5px 5px 5px;
 				border: 1px solid #AAAAAA;
 				background: #EEEEEE;

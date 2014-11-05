@@ -34,6 +34,7 @@
 		background-color: white;
 		padding-top: 0px;
 		padding-left: 10px;
+		width: 90px;
 
 		ul {
 			padding: 0px;
@@ -177,6 +178,8 @@
 			position: absolute;
 			left: 10px;
 			font-size: 12px;
+			line-height: 24px;
+			vertical-align: middle;
 
 			&:hover {
 				background: #CCCCF2;

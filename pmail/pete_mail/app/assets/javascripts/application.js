@@ -23,13 +23,15 @@ function setup_event_handlers() {
 	// Tool-Tips
 	$( ".has-tooltip" ).mouseenter( function() {
 
-		var tip_data = $( this ).data("tip");
-		var tip_element = document.createElement('div');
-		console.log(tip_data);
+		// Tip
+		var tip = $( this ).data("tip");
 
-		$( tip_element )
+		// Element
+		var element = document.createElement('div');
+
+		$( element )
 			.addClass("tooltip")
-			.html(tip_data)
+			.html(tip)
 			.appendTo( $( this ) )
 			.show();
 
@@ -61,6 +63,7 @@ function setup_event_handlers() {
 		$( this ).parent().find(".options").toggle();
 	});
 
+	// Mail Item Selection: Check/Uncheck All
 	$( ".mail-selection input.check-all" ).change( function() {
 		$( this ).prop('checked', this.checked);
 		$( ".mail-items .checkbox input" ).prop('checked', this.checked);

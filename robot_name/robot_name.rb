@@ -7,31 +7,25 @@ class Robot
   VALID_NAME = /^[[:alpha:]]{2}[[:digit:]]{3}$/
   INVALID_NAME_ERROR = 'The robot name is not valid!'
   NAME_EXISTS_ERROR = 'The robot name already exists!'
-  CHARS_IN_NAME = 2
-  DIGITS_IN_NAME = 3
 
   def initialize(args = {})
     @@registry ||= []
-    @name_generator = args[:name_generator]
-    @name = assign_name
+    @name_generator = args[:name_generator] || method(:default_name)
+    @name = generate_name
     assert_valid_name
     add_name_to_registry
   end
 
-  def assign_name
-    if @name_generator
-      @name_generator.call
-    else
-      generate_new_name
-    end
+  def generate_name
+    @name_generator.call
   end
 
-  def generate_new_name
-    "#{character * CHARS_IN_NAME}#{number * DIGITS_IN_NAME}"
+  def default_name
+    "#{character * 2}#{number * 3}"
   end
 
   def assert_valid_name
-    raise NameCollisionError, INVALID_NAME_ERROR unless name =~ VALID_NAME
+    raise NameInvalidError, INVALID_NAME_ERROR unless name =~ VALID_NAME
     raise NameCollisionError, NAME_EXISTS_ERROR if @@registry.include?(name)
   end
 

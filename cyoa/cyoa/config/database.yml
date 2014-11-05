@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: cyoa_development
+  pool: 5
+  timeout: 5000
+
+test: &test
+  adapter: postgresql
+  encoding: unicode
+  database: cyoa_test
+  pool: 5
+  timeout: 5000
+
+
+cucumber:
+  <<: *test

@@ -1,0 +1,15 @@
+%h1 Custom Comparisons
+
+%table.table.table-striped
+  %tr
+    %th Artist
+    %th 
+  - if @artists.any?
+    - @artists.each do |artist|
+      %tr
+        %td= link_to artist.nbs_name, artist_path(artist) 
+        %td= button_to "Remove", artist_path(artist), method: :delete, class: "btn btn-default"
+
+= render partial: "add_artist_form"
+
+= render partial: "compare_artists"

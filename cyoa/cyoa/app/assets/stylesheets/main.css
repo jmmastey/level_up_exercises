@@ -1,0 +1,33 @@
+/* Main styles */
+
+* {
+  font-family: "Open Sans", sans-serif;
+}
+
+input[type=submit] {
+  border-radius: 3px;
+  border:none !important;
+  box-shadow:none !important;
+  margin: 10px 0;
+  padding: 6px;
+  background: rgba(71,13,96,0.88); 
+  color: white;
+}
+
+input[type=submit]:hover,
+input[type=submit]:focus {
+  background: rgba(71,13,96,1); 
+  color: white;
+}
+
+#flash_notice {
+  background: rgba(90,200,50,0.3); /* green */
+} 
+
+#flash_alert {
+  background: rgba(255,0,0,0.3); /* red */
+} 
+
+h1, h2, h4 {
+  text-align: center;
+}

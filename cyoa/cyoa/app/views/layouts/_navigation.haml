@@ -1,0 +1,11 @@
+= nav_bar class: "fa fa-music", brand: "groovemetrics", static: :top do
+  = menu_group pull: :right do
+    - if current_user
+      = menu_item "my artists", artists_path
+      = drop_down current_user.email.downcase do
+        = menu_item "Edit profile", edit_user_registration_path
+        = drop_down_divider
+        = menu_item "Logout", destroy_user_session_path, method: :delete
+    - else
+      = menu_item "sign up", new_user_registration_path
+      = menu_item "login", new_user_session_path

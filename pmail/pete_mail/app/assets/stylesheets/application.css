@@ -41,7 +41,7 @@ a {
 	z-index: 50;
 }
 
-#bar-top-gray {
+.bar-top-gray {
 	position: fixed;
 	background-color: #EEEEEE;
 	border-bottom: 1px solid #DDDDDD;
@@ -52,14 +52,14 @@ a {
 	z-index: -1;
 }
 
-#logo {
+.logo {
 	position: fixed;
 	left: 10px;
 	height: 54px;
 	z-index: 0;
 }
 
-#search-field-div {
+.search-field-div {
 	position: fixed;
 	left: 160px;
 	top: 18px;
@@ -69,7 +69,7 @@ a {
 	margin: 0px;
 }
 
-#search-field {
+.search-field {
 	position: absolute;
 	left: 0%;
 	top: 0%;
@@ -83,19 +83,19 @@ a {
 	border-bottom: 1px solid #DDDDDD;
 }
 
-#search-field-div:hover {
+.search-field-div:hover {
 	border-top: 1px solid #AAAAAA;
 	border-left: 1px solid #AAAAAA;
 	border-bottom: 1px solid #AAAAAA;
 }
 
-#search-field-div:focus {
+.search-field-div:focus {
 	border-top: 1px solid #7777FF;
 	border-left: 1px solid #7777FF;
 	border-bottom: 1px solid #7777FF;
 }
 
-#search-options-div { 
+.search-options-div { 
 	position: fixed;
 	left: 636px;
 	top: 18px;
@@ -115,12 +115,12 @@ a {
 	opacity: 0.5;
 }
 
-#search-options-div:hover { 
+.search-options-div:hover { 
 	background-opacity: 1.0;
 	opacity: 0.9;
 }
 
-#search-button-div {
+.search-button-div {
 	position: fixed;
 	left: 660px;
 	top: 18px;
@@ -131,7 +131,7 @@ a {
 	border: none;
 }
 
-#search-button { 
+.search-button { 
 	position: absolute;
 	left: 0%;
 	top: 0%;
@@ -150,7 +150,7 @@ a {
 	z-index: 0;
 }
 
-#search-options-menu-div {
+.search-options-menu-div {
 	display: none;
 	position: absolute;
 	left: 0%;
@@ -163,14 +163,14 @@ a {
 	padding-top: 5%;
 }
 
-#search-options-menu-div .item-label {
+.search-options-menu-div .item-label {
 	position: static;
 	color: #999999;
 	font-family: arial;
 	font-size: 15px;
 }
 
-#search-options-menu-div .item-input {
+.search-options-menu-div .item-input {
 	position: static;
 	border-top: 1px solid #999999;
 	border-bottom: 1px solid #DDDDDD;
@@ -179,7 +179,7 @@ a {
 	width: 90%;
 }
 
-#apps-button-div {
+.apps-button-div {
 	position: fixed;
 	right: 180px;
 	top: 18px;
@@ -192,18 +192,18 @@ a {
 	background-color: white;
 }
 
-#apps-button-div:hover {
+.apps-button-div:hover {
 	background-color: #BBBBBB;
 }
 
-#manage-account {
+.manage-account {
 	position: fixed;
 	right: 10px;
 	top: 18px;
 	background: none;
 }
 
-#manage-account-menu {
+.manage-account-menu {
 	display: none;
 	position: absolute;
 	left: -100%;
@@ -214,7 +214,7 @@ a {
 	border: 1px solid #DDDDDD;
 }
 
-#manage-account-menu .header {
+.manage-account-menu .header {
 	position: absolute;
 	left: 0%;
 	top: 0%;
@@ -227,7 +227,7 @@ a {
 	padding-bottom: 0px;
 }
 
-#manage-account-menu .user-info {
+.manage-account-menu .user-info {
 	position: absolute;
 	left: 0%;
 	top: 25%;
@@ -238,16 +238,16 @@ a {
 	padding-left: 30px;
 }
 
-#manage-account-menu .user-info .fullname {
+.manage-account-menu .user-info .fullname {
 	font-size: 10px;
 	font-weight: bold;
 }
 
-#manage-account-menu .user-info .email {
+.manage-account-menu .user-info .email {
 	font-size: 10px;
 }
 
-#manage-account-menu .lower-bar {
+.manage-account-menu .lower-bar {
 	position: absolute;
 	left: 0%;
 	top: 70%;
@@ -256,7 +256,7 @@ a {
 	background-color: #CCCCCC;
 }
 
-#manage-account-menu .lower-bar .settings {
+.manage-account-menu .lower-bar .settings {
 	position: absolute;
 	left: 10%;
 	top: 15%;
@@ -267,7 +267,7 @@ a {
 	font-size: 10px;
 }
 
-#manage-account-menu .lower-bar .logout {
+.manage-account-menu .lower-bar .logout {
 	position: absolute;
 	left: 60%;
 	top: 15%;
@@ -278,7 +278,7 @@ a {
 	font-size: 10px;
 }
 
-#bar-top-white {
+.bar-top-white {
 	position: fixed;
 	background-color: #FFFFFF;
 	border-bottom: 1px solid #DDDDDD;
@@ -289,20 +289,20 @@ a {
 	z-index: -2;
 }
 
-#mail-options-button-div {
+.mail-options-button-div {
 	position: fixed;
 	top: 70px;
 	left: 20px;
 	cursor: pointer;
 }
 
-#mail-options-button-div .label {
+.mail-options-button-div .label {
 	font-family: verdana;
 	font-size: 18px;
 	color: #FF4444;
 }
 
-#mail-options-button-div .down-arrow {
+.mail-options-button-div .down-arrow {
 	position: absolute;
 	left: 100%;
 	top: 10%;
@@ -317,7 +317,7 @@ a {
 }
 
 
-#mail-options-list-div {
+.mail-options-list-div {
 	display: none;
 	position: absolute;
 	border: 1px solid #DDDDDD;
@@ -326,26 +326,26 @@ a {
 	padding-left: 10px;
 }
 
-#mail-options-list-div ul {
+.mail-options-list-div ul {
 	padding: 0px;
 }
 
-#mail-options-list-div li {
+.mail-options-list-div li {
 	list-style: none;
 	font-size: 13px;
 	color: black;
 }
 
-#mail-options-list-div li a {
+.mail-options-list-div li a {
 	color: black;
 	text-decoration: none;
 }
 
-#mail-options-list-div ul li:first-child {
+.mail-options-list-div ul li:first-child {
 	color: #FF4444;
 }
 
-#mail-item-selection-div {
+.mail-item-selection-div {
 	position: fixed;
 	top: 70px;
 	left: 160px;
@@ -357,11 +357,11 @@ a {
 	background: #EEEEEE;
 }
 
-#mail-item-selection-div:hover {
+.mail-item-selection-div:hover {
 	border: 1px solid #BBBBBB;
 }
 
-#mail-item-selection-div .down-arrow {
+.mail-item-selection-div .down-arrow {
 	position: absolute;
 	top: 12%;
 	left: 35%;
@@ -376,7 +376,7 @@ a {
 	padding: 0px;
 }
 
-#mail-item-selection-options-div {
+.mail-item-selection-options-div {
 	display: none;
 	position: absolute;
 	top: 101%;
@@ -388,28 +388,28 @@ a {
 	padding: 0px;
 }
 
-#mail-item-selection-options-div ul {
+.mail-item-selection-options-div ul {
 	list-style: none;
 	padding: 10px;
 }
 
-#mail-item-selection-options-div li {
+.mail-item-selection-options-div li {
 	list-style: none;
 	font-size: 13px;
 	color: black;
 	padding: 0px;
 }
 
-#mail-item-selection-options-div li:hover {
+.mail-item-selection-options-div li:hover {
 	background-color: #BBBBBB;
 }
 
-#mail-item-selection-options-div li a {
+.mail-item-selection-options-div li a {
 	color: black;
 	text-decoration: none;
 }
 
-#refresh-div {
+.refresh-div {
 	position: fixed;
 	top: 70px;
 	left: 210px;
@@ -424,11 +424,11 @@ a {
 	background-color: #EEEEEE;
 }
 
-#refresh-div:hover {
+.refresh-div:hover {
 	border: 1px solid #BBBBBB;
 }
 
-#mark-all-as-read-div {
+.mark-all-as-read-div {
 	position: fixed;
 	top: 70px;
 	left: 260px;
@@ -440,11 +440,11 @@ a {
 	padding: 0px;
 }
 
-#mark-all-as-read-div:hover {
+.mark-all-as-read-div:hover {
 	border: 1px solid #BBBBBB;
 }
 
-#mark-all-as-read-div .label {
+.mark-all-as-read-div .label {
 	position: absolute;
 	top: 3px;
 	left: 2px;
@@ -453,7 +453,7 @@ a {
 	color: black
 }
 
-#mark-all-as-read-div .down-arrow {
+.mark-all-as-read-div .down-arrow {
 	position: absolute;
 	left: 23px;
 	top: 10%;
@@ -466,7 +466,7 @@ a {
 	opacity: 0.5;
 }
 
-#mark-all-as-read-menu-div {
+.mark-all-as-read-menu-div {
 	display: none;
 	position: absolute;
 	left: 0%;
@@ -477,17 +477,17 @@ a {
 	border: 1px solid #CCCCCC;
 }
 
-#mark-all-as-read-menu-div .option {
+.mark-all-as-read-menu-div .option {
 	position: absolute;
 	left: 10px;
 	font-size: 12px;
 }
 
-#mark-all-as-read-menu-div:hover {
+.mark-all-as-read-menu-div:hover {
 	background: #CCCCF2;
 }
 
-#settings-div {
+.settings-div {
 	position: fixed;
 	top: 70px;
 	right: 1%;
@@ -504,11 +504,11 @@ a {
 	padding: 0px;
 }
 
-#settings-div:hover {
+.settings-div:hover {
 	border: 1px solid #BBBBBB;
 }
 
-#settings-menu-div {
+.settings-menu-div {
 	display: none;
 	position: absolute;
 	right: 0%;
@@ -519,31 +519,31 @@ a {
 	border: 1px solid #CCCCCC;
 }
 
-#settings-menu-div ul {
+.settings-menu-div ul {
 	padding: 5px;
 }
 
-#settings-menu-div li {
+.settings-menu-div li {
 	padding-top: 3px;
 	padding-bottom: 3px;
 	list-style: none;
 	font-size: 10px;
 }
 
-#settings-menu-div li.selected {
+.settings-menu-div li.selected {
 	color: red;
 }
 
-#settings-menu-div li:hover {
+.settings-menu-div li:hover {
 	background-color: #DDDDDD;
 }
 
-#settings-menu-div li .separate {
+.settings-menu-div li .separate {
 	border-top: 1px solid #D0D0D0;
 	border-bottom: 1px solid #D0D0D0;
 }
 
-#bar-left-white {
+.bar-left-white {
 	position: fixed;
 	background-color: white;
 	top: 100px;
@@ -554,7 +554,7 @@ a {
 	z-index: -10;
 }
 
-#compose-button {
+.compose-button {
 	position: absolute;
 	left: 20px;
 	top: 20px;
@@ -572,14 +572,14 @@ a {
 }
 
 
-#folders {
+.folders {
 	position: absolute;
 	left: 20px;
 	top: 50px;
 	padding-left: 0px;
 }
 
-#folders li {
+.folders li {
 	list-style: none;
 	font-size: 12px;
 	padding-left: 0px;
@@ -587,11 +587,11 @@ a {
 	cursor: pointer;
 }
 
-#folders li.selected {
+.folders li.selected {
 	color: red;
 }
 
-#mail-items-div {
+.mail-items-div {
 	position: absolute;
 	top: 100px;
 	left: 160px;
@@ -603,7 +603,7 @@ a {
 	overflow: auto;
 }
 
-#mail-items-div .table {
+.mail-items-div .table {
 	position: absolute;
 	background-color: #EEEEEE;
 	border-style: none;
@@ -614,7 +614,7 @@ a {
 	z-index: auto;
 }
 
-#mail-items-div .table td {
+.mail-items-div .table td {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid #DDDDDD;
@@ -622,20 +622,20 @@ a {
 	border-right: 0px;
 }
 
-#mail-items-div .table tr {
+.mail-items-div .table tr {
 	width: 100%;
 	padding: 0px;
 }
 
-#mail-items-div .table tr:hover {
+.mail-items-div .table tr:hover {
 	background-color: #DDDDFF;
 }
 
-#mail-items-div .table td.checkbox {
+.mail-items-div .table td.checkbox {
 	width: 2%;
 }
 
-#mail-items-div .table td.starred {
+.mail-items-div .table td.starred {
 	width: 3%;
 	background-image: url('open_star.png');
 	background-repeat: no-repeat;
@@ -644,23 +644,23 @@ a {
 	background-color: none;
 }
 
-#mail-items-div .table td.starred.checked {
+.mail-items-div .table td.starred.checked {
 	background-image: url('closed_star.png');
 }
 
-#mail-items-div .table td.from {
+.mail-items-div .table td.from {
 	width: 20%;
 }
 
-#mail-items-div .table td.subject {
+.mail-items-div .table td.subject {
 	width: 65%;
 }
 
-#mail-items-div .table td.subject .text {
+.mail-items-div .table td.subject .text {
 	color: #555555;
 }
 
-#mail-items-div .table td.date-time {
+.mail-items-div .table td.date-time {
 	width: 10%;
 	text-align: right;
 	padding-right: 10px;

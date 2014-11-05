@@ -1,9 +1,9 @@
-<section id="bar-top-gray">
-  <img id="logo" src='https://www.google.com/a/enova.com/images/logo.gif'/>
+<div class="bar-top-gray">
+  <img class="logo" src='https://www.google.com/a/enova.com/images/logo.gif'/>
 
-  <div id="search-field-div">
-	<input type='text' id="search-field"/>
-	<div id="search-options-menu-div">
+  <div class="search-field-div">
+	<input type='text' class="search-field"/>
+	<div class="search-options-menu-div">
 	  <span class="item-label">From</span><br>
 	  <input class="item-input" type='text' value=""/><br>
 	  <span class="item-label">To</span><br>
@@ -21,20 +21,20 @@
 	</div>
   </div>
 
-  <div id="search-options-div">
+  <div class="search-options-div">
 	<div class="tooltip">Search Options</div>
   </div>
 
-  <div id="search-button-div">
-	<input type='submit' id="search-button" value=""/>
+  <div class="search-button-div">
+	<input type='submit' class="search-button" value=""/>
   </div>
 
-  <div id="apps-button-div">
+  <div class="apps-button-div">
 	<div class="tooltip">Apps</div>
   </div>
 
-  <div id="manage-account">cdevel@enova.com
-	<div id="manage-account-menu">
+  <div class="manage-account">cdevel@enova.com
+	<div class="manage-account-menu">
 
 	  <div class="header">		  
 		This class is managed by <b>enova.com</b><br>
@@ -52,13 +52,13 @@
 	  </div>
 	</div>
   </div>
-</section>
+</div>
 
-<section id="bar-top-white">
-  <div id="mail-options-button-div">
+<div class="bar-top-white">
+  <div class="mail-options-button-div">
 	<div class="label">Mail</div>
 	<div class="down-arrow"></div>
-	<div id="mail-options-list-div">
+	<div class="mail-options-list-div">
 	  <ul>
 		<li>Mail</li>
 		<li><a href="#">Contacts</a></li>
@@ -67,10 +67,10 @@
 	</div>
   </div>
 
-  <div id="mail-item-selection-div">
+  <div class="mail-item-selection-div">
 	<input type='checkbox' class="check-all"/>
 	<div class="down-arrow"></div>
-	<div id="mail-item-selection-options-div">
+	<div class="mail-item-selection-options-div">
 	  <ul>
 		<li class="all">All</li>
 		<li class="none">None</li>
@@ -82,20 +82,20 @@
 	</div>
   </div>
 
-  <div id="refresh-div">
+  <div class="refresh-div">
 	<a href="#"></a>
   </div>
 
-  <div id="mark-all-as-read-div">	
+  <div class="mark-all-as-read-div">	
 	<div class="label">More</div>
 	<div class="down-arrow"></div>
-	<div id="mark-all-as-read-menu-div">
+	<div class="mark-all-as-read-menu-div">
 	  <div class="option">Mark all as read</div>
 	</div>
   </div>
 
-  <div id="settings-div">
-	<div id="settings-menu-div">
+  <div class="settings-div">
+	<div class="settings-menu-div">
 	  <ul>
 		<li class="density">Comfortable</li>
 		<li class="density">Cozy</li>
@@ -107,17 +107,17 @@
 	  </ul>
 	</div>
   </div>
-</section>
+</div>
 
-<nav id="bar-left-white">
-  <div id="compose-button">COMPOSE</div>
-  <ul id="folders">
+<div class="bar-left-white">
+  <div class="compose-button">COMPOSE</div>
+  <ul class="folders">
 	<li>Inbox</li>
 	<li>Starred</li>
 	<li>Sent Mail</li>
 	<li>Drafts</li>
   </ul>
-</nav>
+</div>
 
 <!-- This is a mock-up -->
 <% mail_items = [] %>
@@ -127,7 +127,7 @@
 <%   mail_items << {from: "Men's Wearhouse", subject: "Don't miss 50% off everything", text: "Dear Customer, We value your business and simply cannot let you miss this great one-day sale", time: '9:08am'} %>
 <% end %>
 
-<section id="mail-items-div">
+<div class="mail-items-div">
   <table class="table">
 	<% mail_items.each do |item| %>
 	<tr>
@@ -146,4 +146,4 @@
 	</tr>
 	<% end %>
   </table>
-</section>
+</div>

@@ -16,7 +16,7 @@ module ApplicationHelper
     md5.hexdigest
   end
 
-  def fetch path, class_name, match_field
+  def fetch(path, class_name, match_field)
     http = Curl.get(path)
     @results = JSON.parse(http.body_str)
 

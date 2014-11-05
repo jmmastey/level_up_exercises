@@ -1,16 +1,21 @@
+// $(document).ready(function(){
+//    $('.menu li ').click(function(){
+//      $(".menu li").removeClass("active");
+//      $(this).addClass("active");
+//   });
+
 $(document).ready(function(){
-   $('.menu li ').click(function(){
-     $(".menu li").removeClass("active");
-     $(this).addClass("active");
+   $('.menu li').click(function(){
+     $(".menu li").removeClass("float-bar");
+     $(this).addClass("float-bar");
+  });
 
-     });
-
- $('li').hover(
+ $('.menu li').hover(
    function (){
      $(this).css({"background-color":"#F2F2F0"});
   },
-  function () {
-      $(this).css({"background-color":"white"});
-  }
-  );
+  function (){
+    $(this).css({"background-color":"white"});
+  });
  });
+ 

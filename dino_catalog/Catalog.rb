@@ -76,7 +76,9 @@ class Catalog
   end
 
   def filter(attrib, value)
-    @dinosaurs.select! { |dino| dino.instance_variable_get("@#{attrib}") == value }
+    @dinosaurs.select! do |dino|
+      dino.instance_variable_get("@#{attrib}") == value
+   end
   end
 
   def parse_csv(csv)

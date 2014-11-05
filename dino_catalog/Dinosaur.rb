@@ -2,7 +2,7 @@ require 'pry'
 class Dinosaur
   @@carnivore_types = ['Carnivore', 'Insectivore', 'Piscivore']
   attr_accessor :name, :diet, :carnivore, :period, :weight,
-	        :walking, :continent, :description
+                :walking, :continent, :description
 
   def initialize(attrib)
     @name                   = (attrib[:name])
@@ -29,8 +29,8 @@ class Dinosaur
   def to_h
     hash = {}
     instance_variables.each do |var| 
-      hash[var.to_s.delete("@")] = instance_variable_get(var) 
+      hash[var.to_s.delete("@")] = instance_variable_get(var)
     end
-    hash 
+    hash
   end
 end

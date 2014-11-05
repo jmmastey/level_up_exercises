@@ -5,14 +5,14 @@ class Dinosaur
 	        :walking, :continent, :description
 
   def initialize(attrib)
-    @name = (attrib[:name] || attrib[:genus])
-    @diet = attrib[:diet]
-    @carnivore = carnivore_check(attrib[:carnivore])
+    @name                   = (attrib[:name])
+    @diet                   = attrib[:diet]
+    @carnivore              = carnivore_check(attrib[:carnivore])
     @period_prefix, @period = period_check(attrib[:period])
-    @weight = (attrib[:weight] || attrib[:weight_in_lbs])
-    @walking = attrib[:walking]
-    @continent = attrib[:continent]
-    @description = attrib[:description]
+    @weight                 = (attrib[:weight])
+    @walking                = attrib[:walking]
+    @continent              = attrib[:continent]
+    @description            = attrib[:description]
   end
 
   def carnivore_check(d)
@@ -22,12 +22,15 @@ class Dinosaur
   end
 
   def period_check(p)
-    p_split = p.split(" ")
+    ps = p.split(" ")
+    ps.length > 1 ? [ps[0], ps[1]] : [nil, ps[0]]
+  end
 
-    if p_split.length > 1
-      [p_split[0], p_split[1]]
-    else
-      [nil, p_split[0]]
+  def to_h
+    hash = {}
+    instance_variables.each do |var| 
+      hash[var.to_s.delete("@")] = instance_variable_get(var) 
     end
+    hash 
   end
 end

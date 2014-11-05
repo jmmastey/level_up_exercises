@@ -1,3 +1,4 @@
+require 'pry'
 require 'csv'
 require 'json'
 require 'table_print'
@@ -15,6 +16,7 @@ class Catalog
     csv_list.each do |csv|
       parse_csv(csv)
     end
+    binding.pry
   end
 
   def biped_filter
@@ -63,39 +65,31 @@ class Catalog
 
   def size_filter
     tp @dinosaurs, :name, :weight
-    weight = ''
+    input = ''
 
-    until ['g', 'l', 'a'].include? weight
+    until ['g', 'l', 'a'].include? input
       puts "G)reater or L)ess than 2 tons? or A)ll"
-      weight = STDIN.gets.chomp.downcase
+      input = STDIN.gets.chomp.downcase
     end
 
-    if weight == 'g'
-      @dinosaurs.select! { |dino| dino.weight && dino.weight.to_i > 2000 }
-    elsif weight == 'l'
-      @dinosaurs.select! { |dino| dino.weight && dino.weight.to_i <= 2000 }
+    if input == 'g'
+      @dinosaurs.select! { |dino| dino.weight && dino.weight > 2000 }
+    elsif input == 'l'
+      @dinosaurs.select! { |dino| dino.weight && dino.weight <= 2000 }
     end
     self
   end
 
   def output
-    @dinosaurs.length > 0 ? tp(dinosaurs) : puts('No dinosaurs fit your criteria.')
+    @dinosaurs.empty? ? puts('No dinosaurs fit your criteria.') : tp(dinosaurs)
   end
 
   def output_json
-    json_out = {}
-    @dinosaurs.each_with_index do |d, i|
-      json_out[i] = {
-        genus: d.genus,
-        period: d.period,
-        carnivore: d.carnivore,
-        weight: d.weight,
-        walking: d.walking,
-        continent: d.continent,
-        description: d.description
-      }
+    results = []
+    @dinosaurs.each do |d|
+      results << d.to_h.to_json
     end
-    json_out.to_json
+    results
   end
 
   private

@@ -1,5 +1,6 @@
 require 'csv'
 require 'table_print'
+require_relative 'printer'
 
 #
 class Dinosaur
@@ -40,11 +41,10 @@ class Library
 
   attr_accessor :dinodex, :results
   def initialize
-    @dinodex = []
-    @results = []
-    @found = []
+    @dinodex, @results, @found = [], [], []
     load_dinos('dinodex.csv')
     load_dinos('african_dinosaur_export.csv')
+    @results = @dinodex
     options
   end
 
@@ -58,22 +58,22 @@ class Library
   end
 
   def options
-    @results = @dinodex
-    system('clear')
-    print_options
-    choice = gets.chomp
-    choice = ACTION_MAP[choice] || ACTION_MAP["else"]
-    send(choice)
+    while 1 > 0
+      system('clear')
+      Printer.print_options
+      choice = gets.chomp
+      choice = ACTION_MAP[choice] || ACTION_MAP["else"]
+      send(choice)
+    end
   end
 
   def search
     tp @results, :name
-    print "What dino do you want to find?"
+    puts "What dino do you want to find?"
     selected = gets.chomp.downcase
     @results.each { |dino| @found << dino if dino.name.downcase == selected }
     tp @found
     STDIN.gets
-    options
   end
 
   def bipeds
@@ -104,6 +104,7 @@ class Library
     end
     @results = new_results
     tp @results
+    STDIN.gets
   end
 
   def big
@@ -113,6 +114,7 @@ class Library
     end
     @results = new_results
     tp @results
+    STDIN.gets
   end
 
   def not_an_option
@@ -120,9 +122,12 @@ class Library
     sleep(1)
   end
 
-  def print_options
-    puts "WELCOME TO DINODEX\nA repository for amazing Dinosaur knowledge"
-    puts ""
+  def reset
+    @results = @dinodex
+  end
+
+  def quit
+    abort
   end
 end
 

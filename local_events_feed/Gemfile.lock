@@ -198,6 +198,7 @@ DEPENDENCIES
   icalendar (~> 2.2.0)
   jbuilder (~> 2.0)
   jquery-rails
+  nokogiri
   pry
   pry-nav
   pry-stack_explorer

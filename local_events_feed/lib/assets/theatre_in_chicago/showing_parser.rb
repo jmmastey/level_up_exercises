@@ -6,10 +6,9 @@ module TheatreInChicago
     TIME_ZONE = ActiveSupport::TimeZone["Central Time (US & Canada)"]
     attr_reader :showings
 
-    def initialize(body, today = Time.now)
+    def initialize(event_node, today = Time.now)
+      @node = event_node
       @showings = []
-      @lines = body.split(/\n/)
-      @position = 0
       @date_range = []
       @today = today
       extract_showings
@@ -32,19 +31,8 @@ module TheatreInChicago
     end
 
     def extract_showings
-      seek_line_with_date_range
-      extract_date_range
+      @date_range = DateRangeBuilder.new(@node, @today).build
       build_showings if date_range_present?
-    end
-
-    def seek_line_with_date_range
-      until end_of_file? || DateRangeBuilder::date_range_detected?(current_line)
-        @position += 1
-      end
-    end
-
-    def extract_date_range
-      @date_range = DateRangeBuilder.new(current_line, @today).build
     end
 
     def date_range_present?
@@ -52,10 +40,15 @@ module TheatreInChicago
     end
 
     def build_showings
-      table = extract_days_table
-      table.each_slice(2) do |slice|
-        extract_showing_from_table_cell(slice.join(' '))
+      return unless table_node = @node.css("table.daysTable td")
+      table_node.each_slice(2) do |slice|
+        extract_showing_from_table_row(slice)
       end
+    end
+
+    def extract_showing_from_table_row(row)
+      return if row.count != 2
+      extract_showing_from_table_cell("#{row[0].text} #{row[1].text}")
     end
 
     def extract_showing_from_table_cell(table_cell)
@@ -67,34 +60,6 @@ module TheatreInChicago
       return unless inside_date_range?(showing)
       return if showing.in?(showings)
       showings << showing
-    end
-
-    def extract_days_table
-      table_begin = seek_line('class="detailbody"')
-      table_end = seek_line('/table')
-      table = @lines[table_begin, table_end - table_begin].map { |line| line.squish }
-      clean_days_table(table)
-    end
-
-    def clean_days_table(table)
-      table.map! { |line| line.gsub(/<[^>]*>/, '') }
-      table.reject!(&:blank?)
-    end
-
-    def seek_line(pattern)
-      until end_of_file? || current_line.match(pattern) do
-        @position += 1
-      end
-      @position
-    end
-
-    def end_of_file?
-      @position >= @lines.count
-    end
-
-    def current_line
-      return '' if end_of_file?
-      @lines[@position]
     end
   end
 end

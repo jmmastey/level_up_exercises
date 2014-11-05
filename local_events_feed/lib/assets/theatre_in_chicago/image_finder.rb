@@ -1,14 +1,15 @@
-require_relative 'event'
-
 module TheatreInChicago
-  IMAGE_REGEXP = Regexp.new('class="bblue".*img src="(http:[^"]*)".*name="PlayImage"')
-
   module ImageFinder
-    def self.find(showings_body)
-      lines = showings_body.split(/\n/);
-      image_line = lines.find { |line| IMAGE_REGEXP.match(line) }      
-      return unless image_line
-      IMAGE_REGEXP.match(image_line).captures[0].gsub(/\s+/, '')
+    def self.find(event_node)
+      return unless image_node = find_image_node(event_node)
+      image_node['src']
+    end
+
+    private
+
+    def self.find_image_node(event_node)
+      return unless image_nodes = event_node.css(".bblue img") 
+      image_nodes.find { |node| node['name'] == 'PlayImage' }
     end
   end
 end

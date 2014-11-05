@@ -2,8 +2,8 @@ require 'rails_helper'
 require 'assets/theatre_in_chicago/page_parser'
 
 RSpec.describe TheatreInChicago::PageParser, :type => :asset do
-  let(:body) { File.open("test/fixtures/theatre_in_chicago_test_page.html").read }
-  let(:parser) { TheatreInChicago::PageParser.new(body, showings_enabled: false) }
+  let(:node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_page.html")) }
+  let(:parser) { TheatreInChicago::PageParser.new(node, details_enabled: false) }
   let(:events) { parser.events }
 
   it 'should extract all events in the body' do
@@ -12,7 +12,7 @@ RSpec.describe TheatreInChicago::PageParser, :type => :asset do
 
   it 'should show the first event' do
     expect(events[0].name).to eq('Agreed Upon Fictions')
-    expect(events[0].location).to eq('Berwyn Cultural Center')
+    expect(events[0].location).to eq('16th Street Theater at Berwyn Cultural Center')
     expect(events[0].link).to eq('http://www.theatreinchicago.com/agreed-upon-fictions/7179/')
   end
 
@@ -24,7 +24,7 @@ RSpec.describe TheatreInChicago::PageParser, :type => :asset do
 
   it 'should show the second-to-last event' do 
     expect(events[83].name).to eq('Whatever We Want')
-    expect(events[83].location).to eq('Heartland Studio Theatre')
+    expect(events[83].location).to eq('Vivarium Theatre Co. at Heartland Studio Theatre')
     expect(events[83].link).to eq('http://www.theatreinchicago.com/whatever-we-want/7265/')
   end
 

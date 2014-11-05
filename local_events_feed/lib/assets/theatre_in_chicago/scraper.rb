@@ -9,17 +9,12 @@ module TheatreInChicago
 
     def self.get_events(time)
       uri = construct_uri(time)
-      body = get_page_content(uri)
-      parser = TheatreInChicago::PageParser.new(body)
+      node = Nokogiri::HTML(open(uri))
+      parser = TheatreInChicago::PageParser.new(node)
       parser.events.map { |chicago_event| chicago_event.to_event_model }
     end
 
     private
-
-    def self.get_page_content(uri)
-      file = open(uri)
-      file.read
-    end
 
     def self.construct_uri(time)
       [END_POINT,

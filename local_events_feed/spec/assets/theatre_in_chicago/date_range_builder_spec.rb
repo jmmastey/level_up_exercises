@@ -1,44 +1,47 @@
 require 'assets/theatre_in_chicago/date_range_builder'
 
 RSpec.describe TheatreInChicago::DateRangeBuilder, :type => :asset do
-  let(:today) { DateTime.new(2014, 10, 1) }
 
-  let(:date_range_line) { '<p class="detailbody bottomPad">Oct 25 - Jan 4, 2015</p>' }
-  let(:date_range_builder) { TheatreInChicago::DateRangeBuilder.new(date_range_line, today) }
-  let(:date_range) { date_range_builder.build }
+  let(:pseudo_today) { DateTime.new(2014, 10, 31) }
 
-  let(:thru_range_line) { '<p class="detailbody bottomPad">Thru - Jan 4, 2015</p>' }
-  let(:thru_range_builder) { TheatreInChicago::DateRangeBuilder.new(thru_range_line, today) }
-  let(:thru_range) { thru_range_builder.build }
+  let(:same_year_node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_showings_same_year.html")) }
+  let(:same_year_date_range) { TheatreInChicago::DateRangeBuilder.new(same_year_node, pseudo_today).build }
 
-  let(:open_range_line) { '<p class="detailbody bottomPad">Open Run </p>' }
-  let(:open_range_builder) { TheatreInChicago::DateRangeBuilder.new(open_range_line, today) }
-  let(:open_range) { open_range_builder.build }
+  let(:diff_year_node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_showings_diff_year.html")) }
+  let(:diff_year_date_range) { TheatreInChicago::DateRangeBuilder.new(diff_year_node, pseudo_today).build }
 
-  it 'detects when line that contains a date range' do
-    expect(TheatreInChicago::DateRangeBuilder.date_range_detected?(date_range_line)).to be_present
+  let(:thru_year_node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_showings_thru_date.html")) }
+  let(:thru_year_date_range) { TheatreInChicago::DateRangeBuilder.new(thru_year_node, pseudo_today).build }
+
+  let(:open_run_node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_showings_open_run.html")) }
+  let(:open_run_date_range) { TheatreInChicago::DateRangeBuilder.new(open_run_node, pseudo_today).build }
+
+  let(:empty_date_node) { Nokogiri::HTML("nonsense") }
+  let(:empty_date_range) { TheatreInChicago::DateRangeBuilder.new(empty_date_node, pseudo_today).build }
+
+
+
+  it 'builds a date range from a document that has same years' do
+    expect(same_year_date_range[0].to_s).to eq("2014-11-13 00:00:00 -0600")
+    expect(same_year_date_range[1].to_s).to eq("2014-12-21 00:00:00 -0600")
   end
 
-  it 'detects when line that contains a thru range' do
-    expect(TheatreInChicago::DateRangeBuilder.date_range_detected?(thru_range_line)).to be_present
+  it 'builds a date range from a document that has different years' do
+    expect(diff_year_date_range[0].to_s).to eq("2014-10-25 00:00:00 -0500")
+    expect(diff_year_date_range[1].to_s).to eq("2015-01-05 00:00:00 -0600")
   end
 
-  it 'detects when line that contains an open range' do
-    expect(TheatreInChicago::DateRangeBuilder.date_range_detected?(open_range_line)).to be_present
+  it 'builds a date range from a document that has thru-year format' do
+    expect(thru_year_date_range[0].to_s).to eq("2014-10-31 00:00:00 -0500")
+    expect(thru_year_date_range[1].to_s).to eq("2015-01-05 00:00:00 -0600")
   end
 
-  it 'builds a date range from a line containing one' do
-    expect(date_range[0].to_s).to eq("2014-10-25 00:00:00 -0500")
-    expect(date_range[1].to_s).to eq("2015-01-05 00:00:00 -0600")
+  it 'builds a date range from a document that has open-run format' do
+    expect(open_run_date_range[0].to_s).to eq("2014-10-31 00:00:00 -0500")
+    expect(open_run_date_range[1].to_s).to eq("2014-11-08 00:00:00 -0600")
   end
 
-  it 'builds a thru range from a line containing one' do
-    expect(thru_range[0].to_s).to eq("2014-10-01 00:00:00 -0500")
-    expect(thru_range[1].to_s).to eq("2015-01-05 00:00:00 -0600")
-  end
-
-  it 'builds a open range of one week from a line containing open-run' do
-    expect(open_range[0].to_s).to eq("2014-10-01 00:00:00 -0500")
-    expect(open_range[1].to_s).to eq("2014-10-09 00:00:00 -0500")
+  it 'returns an empty date range when given a document that contains no date range' do
+    expect(empty_date_range).to be_blank
   end
 end

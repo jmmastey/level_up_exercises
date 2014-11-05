@@ -7,10 +7,11 @@ RSpec.describe TheatreInChicago::Event, :type => :asset do
   let(:setted_event) do
     setted_event = TheatreInChicago::Event.new
     setted_event.name = "Party"
-    setted_event.location = " Everywhere     <tag>  "
-    setted_event.showings << DateTime.parse("20141001T073000")
+    setted_event.location = " Everywhere      "
     setted_event.link = "http://www.event.com"
     setted_event.image = "http://www.event.com/picture.jpg"
+    setted_event.description = "A nice description"
+    setted_event.showings << DateTime.parse("20141001T073000")
     setted_event
   end
 
@@ -40,6 +41,7 @@ RSpec.describe TheatreInChicago::Event, :type => :asset do
     expect(model_event.location).to eq("Everywhere")
     expect(model_event.link).to eq("http://www.event.com")
     expect(model_event.image).to eq("http://www.event.com/picture.jpg")
+    expect(model_event.description).to eq("A nice description")
   end
 
   it 'adds a single show to the event show' do

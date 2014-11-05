@@ -1,4 +1,3 @@
-require 'pry'
 require 'csv'
 require 'json'
 require 'table_print'
@@ -17,39 +16,39 @@ class Catalog
     end
   end
 
-  def biped_filter
+  def bipeds
     tp @dinosaurs.uniq, :name, :walking
-    ansr = request(%W(b q a), "B)iped or Q)uadruped or A)ll?")
-    return self if ansr == 'a'
-    ansr == 'b' ? filter('walking', 'Biped') : filter('walking', 'Quadruped')
+    ansr = ask_user(%w(B Q A), "B)iped or Q)uadruped or A)ll?")
+    return self if ansr == 'A'
+    ansr == 'B' ? filter('walking', 'Biped') : filter('walking', 'Quadruped')
     self
   end
 
-  def carnivore_filter
+  def carnivores
     tp @dinosaurs, :name, :carnivore
-    ansr = request(%W(c n a), "C)arnivore, N)not carnivore, or A)ll")
-    return self if ansr == 'a'
-    ansr == 'c' ? filter('carnivore', 'Yes') : filter('carnivore', 'No')
+    ansr = ask_user(%w(C N A), "C)arnivore, N)not carnivore, or A)ll")
+    return self if ansr == 'A'
+    ansr == 'C' ? filter('carnivore', 'Yes') : filter('carnivore', 'No')
     self
   end
 
-  def period_filter
+  def periods
     tp @dinosaurs.uniq, :name, :period
-    ans = request(
-      @dinosaurs.map{ |dino| dino.period.downcase } << 'a', 
-      "What time period? or A)ll"
+    ans = ask_user(
+      @dinosaurs.map { |dino| dino.period.capitalize } << 'A',
+      "What time period? or A)ll",
     )
-    ans == 'a' ? (return self) : filter('period', ans)
+    ans == 'A' ? (return self) : filter('period', ans.capitalize)
     self
   end
 
-  def size_filter
+  def size
     tp @dinosaurs, :name, :weight
-    ansr = request(%W(g l a), "G)reater or L)ess than 2 tons? or A)ll")
+    ansr = ask_user(%w(G L A), "G)reater or L)ess than 2 tons? or A)ll")
 
-    if ansr == 'g'
+    if ansr == 'G'
       @dinosaurs.select! { |dino| dino.weight && dino.weight > 2000 }
-    elsif ansr == 'l'
+    elsif ansr == 'L'
       @dinosaurs.select! { |dino| dino.weight && dino.weight <= 2000 }
     end
     self
@@ -59,21 +58,19 @@ class Catalog
     @dinosaurs.empty? ? puts('No dinosaurs fit your criteria.') : tp(dinosaurs)
   end
 
-  def output_json
+  def to_json
     results = []
-    @dinosaurs.each do |d|
-      results << d.to_h.to_json
-    end
+    @dinosaurs.each { |d| results << d.to_h.to_json }
     results
   end
 
   private
 
-  def request(vars, prompt)
+  def ask_user(attrs, prompt)
     input = ''
-    until vars.include? input
+    until attrs.include? input
       puts prompt
-      input = STDIN.gets.chomp.downcase
+      input = STDIN.gets.chomp.capitalize
     end
     input
   end
@@ -88,7 +85,7 @@ class Catalog
       header_converters: [:conv_genus, :conv_weight, :symbol],
       converters: [:integer],
     )
-    load_dinos(csv.to_a.map { |r| r.to_hash })
+    load_dinos(csv.to_a.map(&:to_hash))
   end
 
   def load_dinos(dino_hash)
@@ -97,6 +94,6 @@ class Catalog
 end
 
 if __FILE__ == $PROGRAM_NAME
-  Dino_Ctg = Catalog.new(ARGV[0], ARGV[1])
-  Dino_Ctg.biped_filter.carnivore_filter.period_filter.size_filter.output
+  dino_catalog = Catalog.new(ARGV[0], ARGV[1])
+  dino_catalog.bipeds.carnivores.periods.size.output
 end

@@ -3,7 +3,7 @@ require 'csv'
 require 'json'
 require 'table_print'
 require './Dinosaur'
-require './CSVConverters'
+require './CSVConverters.rb'
 
 class Catalog
   include CSVConverters
@@ -11,70 +11,45 @@ class Catalog
 
   def initialize(*csv_list)
     @dinosaurs = []
-    @periods = []
 
     csv_list.each do |csv|
       parse_csv(csv)
     end
-    binding.pry
   end
 
   def biped_filter
     tp @dinosaurs.uniq, :name, :walking
-    input = ''
-
-    until ['b', 'q', 'a'].include? input
-      puts "B)iped or Q)uadruped or A)ll?"
-      input = STDIN.gets.chomp.downcase
-    end
-
-    if input == 'b'
-      @dinosaurs.select! { |dino| dino.walking == 'Biped' }
-    elsif input == 'q'
-      @dinosaurs.select! { |dino| dino.walking == 'Quadruped' }
-    end
+    ansr = request(%W(b q a), "B)iped or Q)uadruped or A)ll?")
+    return self if ansr == 'a'
+    ansr == 'b' ? filter('walking', 'Biped') : filter('walking', 'Quadruped')
     self
-  end 
+  end
 
   def carnivore_filter
     tp @dinosaurs, :name, :carnivore
-    input = ''
-
-    until ['c', 'n', 'a'].include? input
-      puts "C)arnivore, N)not carnivore, or A)ll"
-      input = STDIN.gets.chomp.downcase
-    end
-
-    if input == 'c'
-      @dinosaurs.select! { |dino| dino.carnivore == 'Yes' }
-    elsif input == 'n'
-      @dinosaurs.select! { |dino| dino.carnivore == 'No' }
-    end
+    ansr = request(%W(c n a), "C)arnivore, N)not carnivore, or A)ll")
+    return self if ansr == 'a'
+    ansr == 'c' ? filter('carnivore', 'Yes') : filter('carnivore', 'No')
     self
   end
 
   def period_filter
     tp @dinosaurs.uniq, :name, :period
-    puts "What time period? or A)ll"
-    input = STDIN.gets.chomp.capitalize
-
-    return self if input == 'A' 
-    @dinosaurs.select! { |dino| dino.period == input }
+    ans = request(
+      @dinosaurs.map{ |dino| dino.period.downcase } << 'a', 
+      "What time period? or A)ll"
+    )
+    ans == 'a' ? (return self) : filter('period', ans)
     self
   end
 
   def size_filter
     tp @dinosaurs, :name, :weight
-    input = ''
+    ansr = request(%W(g l a), "G)reater or L)ess than 2 tons? or A)ll")
 
-    until ['g', 'l', 'a'].include? input
-      puts "G)reater or L)ess than 2 tons? or A)ll"
-      input = STDIN.gets.chomp.downcase
-    end
-
-    if input == 'g'
+    if ansr == 'g'
       @dinosaurs.select! { |dino| dino.weight && dino.weight > 2000 }
-    elsif input == 'l'
+    elsif ansr == 'l'
       @dinosaurs.select! { |dino| dino.weight && dino.weight <= 2000 }
     end
     self
@@ -94,13 +69,26 @@ class Catalog
 
   private
 
+  def request(vars, prompt)
+    input = ''
+    until vars.include? input
+      puts prompt
+      input = STDIN.gets.chomp.downcase
+    end
+    input
+  end
+
+  def filter(attrib, value)
+    @dinosaurs.select! { |dino| dino.instance_variable_get("@#{attrib}") == value }
+  end
+
   def parse_csv(csv)
-    csv = CSV.new( File.open(csv), 
-      headers: true, 
-      header_converters: [:symbol, :conv_genus, :conv_weight],
-      converters: [:integer]
+    csv = CSV.new(File.open(csv),
+      headers: true,
+      header_converters: [:conv_genus, :conv_weight, :symbol],
+      converters: [:integer],
     )
-    load_dinos( csv.to_a.map { |row| row.to_hash } )
+    load_dinos(csv.to_a.map { |r| r.to_hash })
   end
 
   def load_dinos(dino_hash)
@@ -108,7 +96,7 @@ class Catalog
   end
 end
 
-if __FILE__ == $0
+if __FILE__ == $PROGRAM_NAME
   Dino_Ctg = Catalog.new(ARGV[0], ARGV[1])
   Dino_Ctg.biped_filter.carnivore_filter.period_filter.size_filter.output
 end

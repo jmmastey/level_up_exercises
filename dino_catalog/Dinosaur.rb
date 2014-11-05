@@ -7,21 +7,21 @@ class Dinosaur
   def initialize(attrib)
     @name                   = (attrib[:name])
     @diet                   = attrib[:diet]
-    @carnivore              = carnivore_check(attrib[:carnivore])
-    @period_prefix, @period = period_check(attrib[:period])
+    @carnivore              = assign_carnivore(attrib[:carnivore])
+    @period_prefix, @period = assign_period(attrib[:period])
     @weight                 = (attrib[:weight])
     @walking                = attrib[:walking]
     @continent              = attrib[:continent]
     @description            = attrib[:description]
   end
 
-  def carnivore_check(d)
+  def assign_carnivore(d)
     return d if d
     return nil if !@diet
     @@carnivore_types.include?(@diet) ? 'Yes' : 'No'
   end
 
-  def period_check(p)
+  def assign_period(p)
     ps = p.split(" ")
     ps.length > 1 ? [ps[0], ps[1]] : [nil, ps[0]]
   end

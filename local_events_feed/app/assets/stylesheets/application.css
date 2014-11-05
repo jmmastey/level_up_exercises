@@ -408,6 +408,14 @@ a:hover {
 	height: 200px;
 }
 
+.event-image-div .event-description {
+	position: absolute;
+	right: 270px;
+	top: 10px;
+	width: 200px;
+	align: left;
+}
+
 #home-menu {
 	position: fixed;
 	top: 40px;
@@ -572,6 +580,7 @@ a:hover {
 
 .on-user-home {
 	display: none;
+	z-index: 50;
 }
 
 .random-image {
@@ -582,4 +591,16 @@ a:hover {
 	border-radius: 15px;
 	padding: 0px;
 	height: 120px;
+	width: 200px;
+}
+
+.random-image-picture {
+	position: relative;
+}
+
+.random-image-caption {
+	position: relative;
+	align: left;
+	padding: 0px;
+	margin: 0px;
 }

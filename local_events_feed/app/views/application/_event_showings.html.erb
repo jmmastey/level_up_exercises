@@ -29,6 +29,9 @@
 	<% if @event.image.present? %>
     <div class="event-image-div">
 	  <img src=<%= @event.image %> />
+	<div class="event-description">
+	  <%= @event.description %>
+	</div>
 	</div>
 	<% end %>
 

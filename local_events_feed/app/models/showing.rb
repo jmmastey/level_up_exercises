@@ -3,7 +3,7 @@ class Showing < ActiveRecord::Base
   validates :time, presence: true
 
   belongs_to :event
-  delegate :name, :location, :link, :image, :to => :event
+  delegate :name, :location, :link, :image, :description, :to => :event
 
   has_and_belongs_to_many :users
 

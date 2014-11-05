@@ -31,7 +31,7 @@
 		</div>
 	  </td>
 	  <% if showing.image.present? %>
-	  <td class="image-sample" data-image="<%= showing.image %>"></td>
+	  <td class="image-sample" data-image="<%= showing.image %>" data-description="<%= showing.description.truncate(500) %>"></td>
 	  <% end %>
     </tr>
 	<% end %>

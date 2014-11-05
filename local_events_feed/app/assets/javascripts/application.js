@@ -48,7 +48,7 @@ function drawHomeBackground() {
 }
 
 var timer;
-var lastRandomIndex = 0;
+var lastImageIndex = 0;
 
 $('#search').keyup(function () {
 });
@@ -71,17 +71,28 @@ function drawRandomUserShowing() {
 		return;
 	}
 
-	lastRandomIndex = (lastRandomIndex + 1) % n;
-	var sample = population[lastRandomIndex];
+	lastImageIndex = (lastImageIndex + 1) % n;
+	var sample = population[lastImageIndex];
 	var image = $( sample ).data("image");
+	var description = $( sample ).data("description");
 
-	d = document.createElement('div');
-	$(d).addClass("random-image")
+	var d = document.createElement('div');
+	$(d).addClass("random-image");
+
+	var imageDiv = document.createElement('div');
+	$(imageDiv).addClass("random-image-picture")
+		.html('<img src="' + image + '"/>');
+
+	var captionDiv = document.createElement('div');
+	$(captionDiv).addClass("random-image-caption")
+		.html(description);
+	
+	d.appendChild(imageDiv);
+	d.appendChild(captionDiv);
+	$(d).appendTo($( "#user-event-showings" ))
 		.hide()
-		.html('<img src="' + image + '"/>')
-		.appendTo($( "#user-event-showings" ))
 		.fadeIn();
-
+	
     clearTimeout(timer);
     timer = setTimeout( function() {
 		drawRandomUserShowing();

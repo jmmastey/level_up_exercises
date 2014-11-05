@@ -39,6 +39,10 @@ RSpec.describe Showing, :type => :model do
     expect(showing).to respond_to(:image)
   end
 
+  it "responds to description (delegated to event)" do
+    expect(showing).to respond_to(:description)
+  end
+
   it "displays local time correctly" do
     expect(showing.to_local_time_s).to eq("10/01/2014 09:30 am")
   end

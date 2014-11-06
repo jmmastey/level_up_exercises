@@ -46,3 +46,6 @@ gem 'foundation-rails'
 
 # Use will_paginate for Pagination
 gem 'will_paginate'
+
+# Use Pry for debugging
+gem 'pry-rails', group: :development

@@ -9,7 +9,7 @@ class Calendar < Struct.new(:view, :date, :callback)
       header + week_rows
     end
   end
- 
+
   def header
     content_tag :tr do
       HEADER.map { |day| content_tag :th, day }.join.html_safe
@@ -40,4 +40,5 @@ class Calendar < Struct.new(:view, :date, :callback)
     last = date.end_of_month.end_of_week(START_DAY)
     (first..last).to_a.in_groups_of(7)
   end
+  
 end

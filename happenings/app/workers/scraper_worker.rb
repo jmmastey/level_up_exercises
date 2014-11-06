@@ -22,6 +22,7 @@ class ScraperWorker
   end
 
   private
+  
   def scrape_events
     puts "hashifying events"
     f = File.open("tmp.xml")
@@ -31,6 +32,7 @@ class ScraperWorker
   end
 
   private
+
   def all_events_array(doc)
     event_date_nodes = scraper_helper.all_date_nodes(doc)
     event_title_nodes = scraper_helper.all_title_nodes(doc)
@@ -41,6 +43,7 @@ class ScraperWorker
   end
 
   private
+
   def save_events(doc)
     events_aray = all_events_array(doc)
     event_time_array.each do|event_time, event_title_node, event_location_node, event_date_node|

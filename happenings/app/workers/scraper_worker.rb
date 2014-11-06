@@ -1,7 +1,7 @@
-require 'open-uri'
-require 'nokogiri'
-require 'capybara/poltergeist'
-require_relative 'scraper_helper.rb'
+require "open-uri"
+require "nokogiri"
+require "capybara/poltergeist"
+require_relative "scraper_helper.rb"
 
 class ScraperWorker
   include Sidekiq::Worker
@@ -22,7 +22,7 @@ class ScraperWorker
   end
 
   private
-  
+
   def scrape_events
     puts "hashifying events"
     f = File.open("tmp.xml")

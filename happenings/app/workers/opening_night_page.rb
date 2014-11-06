@@ -8,4 +8,5 @@ class OpeningNightPage
     @time_xpath = '//td[@id="calendar_details"]//span[@class = "detailbody"]/br'
     @month_xpath = "//div[@id='quickCalender']/table/tbody/tr/th[3]/a[@class='headerNav']"
   end
+  
 end

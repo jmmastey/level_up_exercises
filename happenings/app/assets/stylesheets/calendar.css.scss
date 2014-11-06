@@ -4,11 +4,11 @@
 .calendar {
 	width:1024px;
 	height:455px;
-}
 
-.calendar thead td {
-	height:25px;
-	font: normal normal bold Arial, Helvetica, Sans-Serif;
+  thead td {
+    height:25px;
+    font: normal normal bold Arial, Helvetica, Sans-Serif;
+  }
 }
 
 .day {
@@ -16,30 +16,34 @@
 	width:14.29%;
 	border-right:1px solid #e2e2e2;
 	border-top:1px solid #e2e2e2;
-	vertical-align:top;	
+	vertical-align:top;
+
+  a {
+    display:block;
+    width:100%;
+    height:100%;
+    color:gray;
+    text-decoration:none;
+  }
+
+  &:hover {
+    background:#ddffff;
+  }
+
+  not-month {
+    color: #aaa
+  }
+
+  controls a {
+    color:black;
+  }
+
+  controls {
+    font-size:16px;
+    font-weight:bold;
+  }
 }
 
-.day a {
-	display:block;
-	width:100%;
-	height:100%;
-	color:gray;
-	text-decoration:none;
-}
 
-.day a:hover {
-	background:#ddffff;
-}
 
-.not-month {
-	color: #aaa
-}
 
-.controls a {
-	color:black;
-}
-
-.controls {
-	font-size:16px;
-	font-weight:bold;
-}

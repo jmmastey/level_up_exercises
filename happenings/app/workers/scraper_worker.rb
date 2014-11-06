@@ -17,7 +17,7 @@ class ScraperWorker
       sleep(1)
       scraper_helper.write_to_file('tmp.html')
       events = scrape_events
-      save_events(doc)
+      save_events(events)
     end
   end
 

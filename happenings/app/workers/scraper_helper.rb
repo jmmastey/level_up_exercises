@@ -4,8 +4,12 @@ require 'capybara/poltergeist'
 require_relative 'opening_night_page'
 
 class ScraperHelper
-  session = Capybara::Session.new(:poltergeist)
-  page = OpeningNightPage.new
+
+  def initialize
+    session = Capybara::Session.new(:poltergeist)
+    page = OpeningNightPage.new
+  end
+
   def open_website
     session.visit(page.website_url)
   end
@@ -48,14 +52,11 @@ class ScraperHelper
   def listify_time_nodes(doc_element)
     array_of_event_time = []
     event_time_nodes = doc_element.xpath(page.time_xpath.xpath('text()'))
-    event_time_nodes.each do |event_time_node|
-      event_time = make_pretty_string(event_time_node)
-      array_of_event_time << event_time
-    end
-    array_of_event_time
+    event_time_nodes.map { |event_time_node| make_pretty_string(event_time_node) }
+    event_time_nodes
   end
 
-  def make_pretty_string(str_value)
+  def strip(str_value)
     "#{str_value}".gsub(/\s+/, " ").strip
   end
 end

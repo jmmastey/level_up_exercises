@@ -1,6 +1,6 @@
 class Dinosaur
   attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking
-  attr_accessor :description
+  attr_accessor :description, :carnivore
 
   def initialize(dino_hash)
     data = {}
@@ -26,6 +26,7 @@ class Dinosaur
     @weight_in_lbs = data[:weight_in_lbs]
     @walking       = data[:walking]
     @description   = data[:description]
+    @carnivore     = carnivore?
   end
 
   def to_hash
@@ -40,7 +41,9 @@ class Dinosaur
     to_hash.to_json
   end
 
-  def carnivore
+  private
+
+  def carnivore?
     carnivores = [
       'Carnivore', # obvs
       'Insectivore',

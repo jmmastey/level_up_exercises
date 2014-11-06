@@ -54,3 +54,4 @@ class ScraperWorker
     end
   end
 end
+

@@ -59,5 +59,5 @@ class ScraperHelper
   def strip(str_value)
     "#{str_value}".gsub(/\s+/, " ").strip
   end
-
 end
+

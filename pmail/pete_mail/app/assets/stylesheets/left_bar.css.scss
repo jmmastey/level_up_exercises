@@ -1,3 +1,5 @@
+@import 'defines';
+
 .bar-left-white {
 	position: fixed;
 	background-color: white;
@@ -9,14 +11,14 @@
 	z-index: -10;
 }
 
-.glaring-button {
+.accent-button {
 	position: absolute;
 	left: 20px;
 	top: 20px;
 	width: 120px;
 	height: 23px;
 	border-radius: 2px;
-	background-color: #DD0000;
+	background-color: $accent-background;
 	font-size: 10px;
 	font-weight: bold;
 	text-align: center;
@@ -41,7 +43,7 @@
 		cursor: pointer;
 
 		&.selected {
-			color: red;
+			color: $accent-foreground;
 		}
 	}
 }

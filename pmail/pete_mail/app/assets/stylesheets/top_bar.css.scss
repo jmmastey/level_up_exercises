@@ -1,7 +1,9 @@
+@import 'defines';
+
 .bar-top-gray {
 	position: fixed;
-	background-color: #EEEEEE;
-	border-bottom: 1px solid #DDDDDD;
+	background-color: $primary-background;
+	border-bottom: 1px solid $light-border;
 	top: 0px;
 	left: 0px;
 	height: 60px;
@@ -24,14 +26,14 @@
 	width: 500px;
 	padding: 0px;
 	margin: 0px;
-	border-top: 1px solid #DDDDDD;
-	border-left: 1px solid #DDDDDD;
-	border-bottom: 1px solid #DDDDDD;
+	border-top: 1px solid $light-border;
+	border-left: 1px solid $light-border;
+	border-bottom: 1px solid $light-border;
 
 	&:hover, &:focus {
-		border-top: 1px solid #CCCCCC;
-		border-left: 1px solid #CCCCCC;
-		border-bottom: 1px solid #CCCCCC;
+		border-top: 1px solid $focus-border;
+		border-left: 1px solid $focus-border;
+		border-bottom: 1px solid $focus-border;
 	}
 
 	.text {
@@ -88,7 +90,7 @@
 		top: 100%;
 		height: 1200%;
 		width: 100%;
-		border: 1px solid #DDDDDD;
+		border: 1px solid $light-border;
 		background: white;
 		padding-left: 5%;
 		padding-top: 5%;
@@ -96,7 +98,7 @@
 		.label {
 			position: static;
 			color: #999999;
-			font-family: arial;
+			font-family: $secondary-font;
 			font-size: 15px;
 			height: 1em;
 		}
@@ -104,9 +106,9 @@
 		.text {
 			position: static;
 			border-top: 1px solid #999999;
-			border-bottom: 1px solid #DDDDDD;
-			border-right: 1px solid #DDDDDD;
-			border-left: 1px solid #DDDDDD;
+			border-bottom: 1px solid $light-border;
+			border-right: 1px solid $light-border;
+			border-left: 1px solid $light-border;
 			width: 90%;
 			height: 1em;
 		}
@@ -155,7 +157,7 @@
 		width: 230px;
 		height: 170px;
 		background-color: #FFFFDD;
-		border: 1px solid #DDDDDD;
+		border: 1px solid $light-border;
 		font-size: 18px;
 		padding-left: 10px;
 
@@ -176,7 +178,7 @@
 			top: 25%;
 			width: 100%;
 			height: 40%;
-			background-color: #FFFFFF;
+			background-color: $neutral-background;
 			padding: 10px 0px 0px 20px;
 
 
@@ -208,7 +210,7 @@
 				width: 25%;
 				padding: 2px 5px 5px 5px;
 				border: 1px solid #AAAAAA;
-				background: #EEEEEE;
+				background: $primary-background;
 				font-size: 13px;
 				text-align: center;
 				line-height: 100%;
@@ -227,7 +229,7 @@
 				width: 25%;
 				padding: 2px 5px 5px 5px;
 				border: 1px solid #AAAAAA;
-				background: #EEEEEE;
+				background: $primary-background;
 				font-size: 13px;
 				text-align: center;
 				line-height: 100%;

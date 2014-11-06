@@ -1,7 +1,9 @@
+@import 'defines';
+
 .bar-top-white {
 	position: fixed;
-	background-color: #FFFFFF;
-	border-bottom: 1px solid #DDDDDD;
+	background-color: $neutral-background;
+	border-bottom: 1px solid $light-border;
 	top: 60px;
 	left: 0px;
 	height: 40px;
@@ -16,9 +18,9 @@
 	cursor: pointer;
 
 	.label {
-		font-family: verdana;
+		font-family: $primary-font;
 		font-size: 18px;
-		color: #FF4444;
+		color: $accent-foreground;
 	}
 
 	.down-arrow {
@@ -30,7 +32,7 @@
 	.menu {
 		display: none;
 		position: absolute;
-		border: 1px solid #DDDDDD;
+		border: 1px solid $light-border;
 		background-color: white;
 		padding-top: 0px;
 		padding-left: 10px;
@@ -64,9 +66,9 @@
 	width: 30px;
 	height: 24px;
 	cursor: pointer;
-	border: 1px solid #CCCCCC;
+	border: 1px solid $focus-border;
 	padding-right: 10px;
-	background: #EEEEEE;
+	background: $primary-background;
 
 	&:hover {
 		border: 1px solid #BBBBBB;
@@ -86,7 +88,7 @@
 		left: 0%;
 		width: auto;
 		height: auto;
-		border: 1px solid #CCCCCC;
+		border: 1px solid $focus-border;
 		background-color: white;
 		padding: 0px;
 
@@ -120,12 +122,12 @@
 	width: 40px;
 	height: 24px;
 	cursor: pointer;
-	border: 1px solid #CCCCCC;
+	border: 1px solid $focus-border;
 	background-image: url('refresh.png');
 	background-repeat: no-repeat;
 	background-size: 20px 20px;
 	background-position: center;
-	background-color: #EEEEEE;
+	background-color: $primary-background;
 
 	&:hover {
 		border: 1px solid #BBBBBB;
@@ -139,8 +141,8 @@
 	width: 50px;
 	height: 24px;
 	cursor: pointer;
-	border: 1px solid #CCCCCC;
-	background-color: #EEEEEE;
+	border: 1px solid $focus-border;
+	background-color: $primary-background;
 	padding: 0px;
 
 	&:hover {
@@ -151,7 +153,7 @@
 		position: absolute;
 		top: 0px;
 		left: 2px;
-		font-family: verdana;
+		font-family: $primary-font;
 		font-size: 10px;
 		color: black;
 		line-height: 24px;
@@ -172,7 +174,7 @@
 		width: 250%;
 		height: 100%;
 		background: white;
-		border: 1px solid #CCCCCC;
+		border: 1px solid $focus-border;
 
 		.option {
 			position: absolute;
@@ -195,13 +197,13 @@
 	width: 40px;
 	height: 24px;
 	cursor: pointer;
-	border: 1px solid #CCCCCC;
+	border: 1px solid $focus-border;
 	background-image: url('gear.png');
 	background-repeat: no-repeat;
 	background-size: 20px 20px;
 	background-position: center;
 	background-color: none;
-	background-color: #EEEEEE;
+	background-color: $primary-background;
 	padding: 0px;
 
 	&:hover {
@@ -216,7 +218,7 @@
 		width: 300%;
 		height: auto;
 		background: white;
-		border: 1px solid #CCCCCC;
+		border: 1px solid $focus-border;
 
 		ul {
 			padding: 5px;
@@ -228,11 +230,11 @@
 				font-size: 10px;
 			
 				&.selected {
-					color: red;
+					color: $accent-foreground;
 				}
 
 				&:hover {
-					background-color: #DDDDDD;
+					background-color: $light-border;
 				}
 
 				.separate {

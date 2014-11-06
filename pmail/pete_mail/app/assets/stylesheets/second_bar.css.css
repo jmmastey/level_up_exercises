@@ -1,7 +1,7 @@
 .bar-top-white {
   position: fixed;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #DDDDDD;
+  background-color: white;
+  border-bottom: 1px solid #dddddd;
   top: 60px;
   left: 0px;
   height: 40px;
@@ -16,7 +16,7 @@
   .mail-options .label {
     font-family: verdana;
     font-size: 18px;
-    color: #FF4444; }
+    color: red; }
   .mail-options .down-arrow {
     position: absolute;
     top: 0px;
@@ -24,7 +24,7 @@
   .mail-options .menu {
     display: none;
     position: absolute;
-    border: 1px solid #DDDDDD;
+    border: 1px solid #dddddd;
     background-color: white;
     padding-top: 0px;
     padding-left: 10px;
@@ -48,9 +48,9 @@
   width: 30px;
   height: 24px;
   cursor: pointer;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   padding-right: 10px;
-  background: #EEEEEE; }
+  background: #eeeeee; }
   .mail-selection:hover {
     border: 1px solid #BBBBBB; }
   .mail-selection .down-arrow {
@@ -64,7 +64,7 @@
     left: 0%;
     width: auto;
     height: auto;
-    border: 1px solid #CCCCCC;
+    border: 1px solid #cccccc;
     background-color: white;
     padding: 0px; }
     .mail-selection .options ul {
@@ -88,12 +88,12 @@
   width: 40px;
   height: 24px;
   cursor: pointer;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   background-image: url("refresh.png");
   background-repeat: no-repeat;
   background-size: 20px 20px;
   background-position: center;
-  background-color: #EEEEEE; }
+  background-color: #eeeeee; }
   .refresh:hover {
     border: 1px solid #BBBBBB; }
 
@@ -104,8 +104,8 @@
   width: 50px;
   height: 24px;
   cursor: pointer;
-  border: 1px solid #CCCCCC;
-  background-color: #EEEEEE;
+  border: 1px solid #cccccc;
+  background-color: #eeeeee;
   padding: 0px; }
   .more:hover {
     border: 1px solid #BBBBBB; }
@@ -130,7 +130,7 @@
     width: 250%;
     height: 100%;
     background: white;
-    border: 1px solid #CCCCCC; }
+    border: 1px solid #cccccc; }
     .more .menu .option {
       position: absolute;
       left: 10px;
@@ -147,13 +147,13 @@
   width: 40px;
   height: 24px;
   cursor: pointer;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   background-image: url("gear.png");
   background-repeat: no-repeat;
   background-size: 20px 20px;
   background-position: center;
   background-color: none;
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   padding: 0px; }
   .settings:hover {
     border: 1px solid #BBBBBB; }
@@ -165,7 +165,7 @@
     width: 300%;
     height: auto;
     background: white;
-    border: 1px solid #CCCCCC; }
+    border: 1px solid #cccccc; }
     .settings .menu ul {
       padding: 5px; }
       .settings .menu ul li {
@@ -176,7 +176,7 @@
         .settings .menu ul li.selected {
           color: red; }
         .settings .menu ul li:hover {
-          background-color: #DDDDDD; }
+          background-color: #dddddd; }
         .settings .menu ul li .separate {
           border-top: 1px solid #D0D0D0;
           border-bottom: 1px solid #D0D0D0; }

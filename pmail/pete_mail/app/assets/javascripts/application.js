@@ -15,12 +15,9 @@
 //= require turbolinks
 //= require_tree .
 
-function hide_toggle_menues_other_than(element) {
-}
 
-function setup_event_handlers() {
+function setup_tooltips() {
 
-	// Tool-Tips
 	$( ".has-tooltip" ).mouseenter( function() {
 
 		// Tip
@@ -38,50 +35,54 @@ function setup_event_handlers() {
 	}).mouseleave( function() {
 		$( this ).find( ".tooltip" ).remove();
 	});
+}
 
+function setup_popups() {
 
-	// Search
-	$( ".search .down-arrow" ).click( function() {
-		$( ".search .menu" ).toggle();
+	// Child
+	$( ".has-popup" ).click( function() {
+		$( this ).find(".popup").toggle();
 	});
 
-
-	// Manage Account
-	$( ".manage-account" ).click( function() {
-		$( this ).find( ".menu" ).toggle();
+	// Sibling
+	$( ".has-popup-sibling" ).click( function() {
+		$( this ).find("~.popup").toggle();
 	});
+}
 
-	
-	// Mail Options
-	$( ".mail-options" ).click( function() {
-		$( this ).find( ".menu" ).toggle();
+function setup_select_ones() {
+
+	$( ".select-one" ).click( function() {
+		$( this ).siblings( ".select-one" ).removeClass("selected");
+		$( this ).addClass("selected");
 	});
+}
 
+function setup_event_handlers() {
 
-	// Mail Item Selection
-	$( ".mail-selection .down-arrow" ).click( function() {
-		$( this ).parent().find(".options").toggle();
-	});
+	setup_tooltips();
+	setup_popups();
+	setup_select_ones();
 
-	// Mail Item Selection: Check/Uncheck All
+	// Mail Selection: Check/Uncheck All
 	$( ".mail-selection input.check-all" ).change( function() {
 		$( this ).prop('checked', this.checked);
 		$( ".mail-items .checkbox input" ).prop('checked', this.checked);
 	});
 
-	// Mail Item Selection: All
+	// Mail Selection: All
 	$( ".mail-selection li.all" ).click( function() {
 		$( ".mail-items .checkbox input" ).prop('checked', true);
 		$( ".mail-selection .options" ).toggle();
 	});
 
-	// Mail Item Selection: None
+	// Mail Selection: None
 	$( ".mail-selection li.none" ).click( function() {
 		$( ".mail-items .checkbox input" ).prop('checked', false);
 		$( ".mail-selection .options" ).toggle();
 	});
 
-	// Mail Item Selection: Starred
+	// Mail Selection: Starred
 	$( ".mail-selection li.starred" ).click( function() {
 		$( ".mail-items .star.starred" ).each( function() {
 			$( this ).parent().find(".checkbox input").prop('checked', true);
@@ -89,7 +90,7 @@ function setup_event_handlers() {
 		$( ".mail-selection .options" ).hide();
 	});
 
-	// Mail Item Selection: Unstarred
+	// Mail Selection: Unstarred
 	$( ".mail-selection li.unstarred" ).click( function() {
 		$( ".mail-items .star" ).each( function() {
 			if (!$( this ).hasClass("starred")) {
@@ -99,39 +100,12 @@ function setup_event_handlers() {
 		$( ".mail-selection .options" ).hide();
 	});
 
-	// More
-	$( ".more" ).click( function() {
-		$( this ).find(".menu").toggle();
-	});
-
-
-	// Settings
-	$( ".settings" ).click( function() {
-		$( this ).find(".menu").toggle();
-	});
-
-	$( ".settings li.density" ).click( function() {
-		$( this ).siblings( "li.density" ).removeClass("selected")
-		$( this ).addClass("selected");
-	});
-
-
-	// Folders
-	$( ".folders li" ).click( function() {
-		$( ".folders li" ).removeClass("selected");
-		$( this ).addClass("selected");
-	});
-
-
 	// Mail Items Starred - Individual
 	$( ".mail-items .star" ).click( function() {
 		$( this ).toggleClass("starred");
 	});
 }
 
-function clear_settings_menu_options() {
-	
-}
 
 $(document).ready(function() {
 });

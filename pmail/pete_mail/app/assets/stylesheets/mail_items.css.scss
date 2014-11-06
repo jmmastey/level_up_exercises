@@ -1,17 +1,19 @@
+@import 'defines';
+
 .mail-items {
 	position: absolute;
 	top: 100px;
 	left: 160px;
 	right: 0px;
 	height: 100%;
-	border-top: 1px solid #DDDDDD;
+	border-top: 1px solid $light-border;
 	z-index: -100;
 	padding: 0px;
 	overflow: none;
 
 	table {
 		position: absolute;
-		background-color: #EEEEEE;
+		background-color: $primary-background;
 		border-style: none;
 		font-size: 12px;
 		width: 100%;
@@ -24,13 +26,13 @@
 			padding: 0px;
 
 			&:hover {
-				background-color: #DDDDFF;
+				background-color: $mail-hover;
 			}
 
 			td {
 				padding-top: 5px;
 				padding-bottom: 5px;
-				border-bottom: 1px solid #DDDDDD;
+				border-bottom: 1px solid $light-border;
 				border-left: 0px;
 				border-right: 0px;
 

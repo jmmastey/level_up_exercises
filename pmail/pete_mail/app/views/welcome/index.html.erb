@@ -3,12 +3,12 @@
 
   <div class="search">
 	<input type='text' class="text"/>
-	<div class="down-arrow has-tooltip" data-tip="Search Options">
+	<div class="down-arrow has-tooltip has-popup-sibling" data-tip="Search Options">
 	</div>
 	<div class="button">
 	  <input type='submit' value=""/>
 	</div>
-	<div class="menu">
+	<div class="menu popup">
 	  <span class="label">From</span><br>
 	  <input class="text" type="text" value=""/><br>
 
@@ -37,9 +37,9 @@
   <div class="grid-button has-tooltip" data-tip="Apps">
   </div>
 
-  <div class="manage-account">
+  <div class="manage-account has-popup">
 	<div class="label">cdevel@enova.com</div>
-	<div class="menu">
+	<div class="menu popup">
 	  <div class="header">		  
 		This class is managed by <b>enova.com</b><br>
 		<a href="#">Learn more</a>
@@ -59,10 +59,10 @@
 </div>
 
 <div class="bar-top-white">
-  <div class="mail-options">
+  <div class="mail-options has-popup">
 	<div class="label">Mail</div>
 	<div class="down-arrow"></div>
-	<div class="menu">
+	<div class="menu popup">
 	  <ul>
 		<li>Mail</li>
 		<li><a href="#">Contacts</a></li>
@@ -71,10 +71,10 @@
 	</div>
   </div>
 
-  <div class="mail-selection">
+  <div class="mail-selection has-tooltip" data-tip="Select">
 	<input class="check-all" type='checkbox'/>
-	<div class="down-arrow"></div>
-	<div class="options">
+	<div class="down-arrow has-popup-sibling"></div>
+	<div class="options popup">
 	  <ul>
 		<li class="all">All</li>
 		<li class="none">None</li>
@@ -86,24 +86,24 @@
 	</div>
   </div>
 
-  <div class="refresh">
+  <div class="refresh has-tooltip" data-tip="Refresh">
 	<a href="#"></a>
   </div>
 
-  <div class="more">	
+  <div class="more has-popup">	
 	<div class="label">More</div>
 	<div class="down-arrow"></div>
-	<div class="menu">
+	<div class="menu popup">
 	  <div class="option">Mark all as read</div>
 	</div>
   </div>
 
-  <div class="settings">
-	<div class="menu">
+  <div class="settings has-popup has-tooltip" data-tip="Settings">
+	<div class="menu popup">
 	  <ul>
-		<li class="density">Comfortable</li>
-		<li class="density">Cozy</li>
-		<li class="density">Compact</li>
+		<li class="density select-one selected">Comfortable</li>
+		<li class="density select-one">Cozy</li>
+		<li class="density select-one">Compact</li>
 		<li><span class="separate">Configure Inbox</span></li>
 		<li>Settings</li>
 		<li>Themes</li>
@@ -114,12 +114,12 @@
 </div>
 
 <div class="bar-left-white">
-  <div class="glaring-button">COMPOSE</div>
+  <div class="accent-button">COMPOSE</div>
   <ul class="folders">
-	<li>Inbox</li>
-	<li>Starred</li>
-	<li>Sent Mail</li>
-	<li>Drafts</li>
+	<li class="select-one selected">Inbox</li>
+	<li class="select-one">Starred</li>
+	<li class="select-one">Sent Mail</li>
+	<li class="select-one">Drafts</li>
   </ul>
 </div>
 

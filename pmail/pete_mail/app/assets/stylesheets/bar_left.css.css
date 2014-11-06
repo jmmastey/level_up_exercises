@@ -8,14 +8,14 @@
   border: none;
   z-index: -10; }
 
-.glaring-button {
+.accent-button {
   position: absolute;
   left: 20px;
   top: 20px;
   width: 120px;
   height: 23px;
   border-radius: 2px;
-  background-color: #DD0000;
+  background-color: red;
   font-size: 10px;
   font-weight: bold;
   text-align: center;

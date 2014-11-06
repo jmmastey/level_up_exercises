@@ -4,13 +4,13 @@
   left: 160px;
   right: 0px;
   height: 100%;
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid #dddddd;
   z-index: -100;
   padding: 0px;
   overflow: none; }
   .mail-items table {
     position: absolute;
-    background-color: #EEEEEE;
+    background-color: #eeeeee;
     border-style: none;
     font-size: 12px;
     width: 100%;
@@ -21,11 +21,11 @@
       width: 100%;
       padding: 0px; }
       .mail-items table tr:hover {
-        background-color: #DDDDFF; }
+        background-color: #ddddff; }
       .mail-items table tr td {
         padding-top: 5px;
         padding-bottom: 5px;
-        border-bottom: 1px solid #DDDDDD;
+        border-bottom: 1px solid #dddddd;
         border-left: 0px;
         border-right: 0px; }
         .mail-items table tr td.checkbox {

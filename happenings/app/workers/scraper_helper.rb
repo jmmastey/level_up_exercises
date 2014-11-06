@@ -4,14 +4,14 @@ require "capybara/poltergeist"
 require_relative "opening_night_page"
 
 class ScraperHelper
-  attr_reader :page
+  attr_reader :page, :session
   def initialize
-    session = Capybara::Session.new(:poltergeist)
+    @session = Capybara::Session.new(:poltergeist)
     @page = OpeningNightPage.new
   end
 
   def open_website
-    session.visit(@page.website_url)
+    @session.visit(@page.website_url)
   end
 
   def scrape_events_to_file
@@ -21,11 +21,11 @@ class ScraperHelper
   end
 
   def find_current_event_month
-    session.find(:xpath, @page.month_xpath).text
+    @session.find(:xpath, @page.month_xpath).text
   end
 
   def display_all_events
-    session.find(:xpath, @page.month_xpath).click
+    @session.find(:xpath, @page.month_xpath).click
   end
 
   def write_to_file(filename)
@@ -52,7 +52,7 @@ class ScraperHelper
   def listify_time_nodes(doc_element)
     array_of_event_time = []
     event_time_nodes = doc_element.xpath(@page.time_xpath.xpath('text()'))
-    event_time_nodes.map { |event_time_node| make_pretty_string(event_time_node) }
+    event_time_nodes.map { |event_time_node| strip(event_time_node) }
     event_time_nodes
   end
 

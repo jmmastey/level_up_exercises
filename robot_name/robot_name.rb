@@ -39,7 +39,7 @@ class Robot
     "My pet robot's name is #{name}, but we usually call him sparky"
   end
 
-  def self.display_name
+  def self.display_names
     @@register.to_a.each do | name |
        puts "My pet robot's name is #{name}, but we usually call him sparky"
     end

@@ -1,21 +1,6 @@
-#!/usr/bin/env bundle
-# encoding: utf-8
+# A sample Gemfile
+source "https://rubygems.org"
 
-#ruby '2.1.2'
-
+ruby "2.0.0"
 source 'https://rubygems.org'
 
-# Gemfile:
-group :development, :test do
-  gem 'railties', require: false
-  gem 'coveralls', require: false
-  gem 'guard', require: false
-  gem 'guard-rspec', require: false
-  gem 'guard-rubocop', require: false
-  gem 'guard-shell', require: false
-  gem 'rspec', require: false
-  gem 'rubocop', require: false
-  gem 'terminal-notifier-guard', require: false
-  gem "sinatra"
-  gem 'selenium-webdriver'
-end

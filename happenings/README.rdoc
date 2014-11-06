@@ -1,0 +1,1 @@
+Calendar example app by RichOnRails.com.  See http://richonrails.com/articles/building-a-basic-calendar-in-ruby-on-rails for details.

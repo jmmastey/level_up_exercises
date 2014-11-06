@@ -36,8 +36,8 @@ class BlagPost
   def category_list
     return "" if categories.blank?
 
-    categories_str = categories.map { |category| String(category).titleize }
-    "Category".pluralize(categories.count) + ": " + categories_str.to_sentence
+    categories.map! { |category| String(category).titleize }
+    "Category".pluralize(categories.count) + ": " + categories.to_sentence
   end
 
   def commenters

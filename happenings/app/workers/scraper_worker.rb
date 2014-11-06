@@ -46,7 +46,7 @@ class ScraperWorker
 
   def save_events(doc)
     events_aray = all_events_array(doc)
-    event_time_array.each do|event_time, event_title_node, event_location_node, event_date_node|
+    events_aray.each do|event_time, event_title_node, event_location_node, event_date_node|
       event_location = scraper_helper.strip(event_location_node)
       event_title = scraper_helper.strip(event_title_node.text)
       event_date = scraper_helper.strip(event_date_node)

@@ -1,6 +1,8 @@
 require 'table_print'
 
 class QueryChainer
+  attr_accessor :data
+
   def initialize(data)
     @data = data
   end
@@ -31,8 +33,7 @@ class QueryChainer
   end
 
   def pretty
-    cols = %w(name period continent diet weight_in_lbs walking description)
-    tp @data, cols
+    tp @data, object_keys(@data[0])
   end
 
   def to_json
@@ -77,5 +78,11 @@ class QueryChainer
       hash[key.to_s.delete("@").to_sym] = o.instance_variable_get(key)
     end
     hash
+  end
+
+  def object_keys(o)
+    o.instance_variables.map do |key|
+      key.to_s.delete("@")
+    end
   end
 end

@@ -1,6 +1,6 @@
-require 'open-uri'
-require 'nokogiri'
-require 'capybara/poltergeist'
+require "open-uri"
+require "nokogiri"
+require "capybara/poltergeist"
 
 class Event < ActiveRecord::Base
   def to_ics

@@ -14,7 +14,9 @@ class BlagPost
   def initialize(args)
     args.symbolize_keys!
 
-    @author = Author.new(args[:author], args[:author_url]) if args[:author].present? && args[:author_url].present?
+    if args[:author].present? && args[:author_url].present?
+      @author = Author.new(args[:author], args[:author_url])
+    end
     @categories = (args[:categories].present? && args[:categories] - DISALLOWED_CATEGORIES) || []
     @comments = args[:comments].presence || []
     @body = args[:body].squish
@@ -34,7 +36,8 @@ class BlagPost
   def category_list
     return "" if categories.blank?
 
-    "Category".pluralize(categories.count) + ": " + categories.map { |cat| String(cat).titleize }.to_sentence
+    categories_str = categories.map { |category| String(category).titleize }
+    "Category".pluralize(categories.count) + ": " + categories_str.to_sentence
   end
 
   def commenters

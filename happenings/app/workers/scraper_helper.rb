@@ -1,7 +1,7 @@
-require 'open-uri'
-require 'nokogiri'
-require 'capybara/poltergeist'
-require_relative 'opening_night_page'
+require "open-uri"
+require "nokogiri"
+require "capybara/poltergeist"
+require_relative "opening_night_page"
 
 class ScraperHelper
 
@@ -59,5 +59,5 @@ class ScraperHelper
   def strip(str_value)
     "#{str_value}".gsub(/\s+/, " ").strip
   end
-  
+
 end

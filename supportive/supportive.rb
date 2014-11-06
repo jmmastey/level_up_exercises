@@ -48,7 +48,7 @@ class BlagPost
   end
 
   def abstract
-    body.truncate(200).html_safe
+    body.truncate(200)
   end
 
 end

@@ -2,11 +2,11 @@ require "csv"
 require_relative "dinosaur.rb"
 
 class DinosaurParser
-  HEADERS          = Dinosaur::ATTRIBUTES
+  HEADERS          = Dinosaur::ATTRS
 
   HEADER_ALIASES   = {
     "genus" => "name",
-    "weight" => "weight_in_lbs",
+    "weight_in_lbs" => "weight",
     "carnivore" => "diet",
   }
 
@@ -23,8 +23,8 @@ class DinosaurParser
 
     @csv_rows = CSV.read(filename,
       headers: true,
-      header_converters: header_converters,
-      converters: converters,
+      header_converters: csv_header_converters,
+      converters: csv_value_converters,
     )
 
     fix_missing_headers
@@ -46,35 +46,46 @@ class DinosaurParser
   private
 
   def fix_missing_headers
-    @csv_rows.each do |r|
-      HEADERS.each { |h| r << [h, DEFAULT_VALUES[h]] unless r[h] }
+    @csv_rows.each do |row|
+      HEADERS.each do |header|
+        row[header] = DEFAULT_VALUES[header] unless row[header]
+      end
     end
   end
 
-  def header_converters
-    [
-      ->(h) { h.downcase },
-      lambda(&method(:dinosaur_header_converter)),
-      :symbol,
-    ]
+  def methods_to_lambdas(methods)
+    methods.map { |m| lambda(&method(m)) }
   end
 
-  def converters
-    [lambda(&method(:dinosaur_diet_converter)),
-     lambda(&method(:dinosaur_period_converter))]
+  def csv_header_converters
+    converters = [:header_converter]
+    methods_to_lambdas(converters)
   end
 
-  def dinosaur_header_converter(header)
-    HEADER_ALIASES[header] || header
+  def csv_value_converters
+    converters = [:diet_converter, :period_converter, :weight_converter]
+    methods_to_lambdas(converters)
   end
 
-  def dinosaur_diet_converter(value, fields)
+  def header_converter(header)
+    header.downcase.tap do |h|
+      header_alias = HEADER_ALIASES[h]
+      h.replace(header_alias) if header_alias
+    end.to_sym
+  end
+
+  def diet_converter(value, fields)
     return value unless (fields.header == :diet) && (value =~ /^(Yes|No)$/)
     value == 'Yes' ? DIET_CARNIVORE : DIET_HERBIVORE
   end
 
-  def dinosaur_period_converter(value, fields)
+  def period_converter(value, fields)
     return value unless (fields.header == :period) && (value =~ /Cretaceous/i)
     CRETACEOUS
+  end
+
+  def weight_converter(value, fields)
+    return value unless (fields.header == :weight)
+    value.to_i
   end
 end

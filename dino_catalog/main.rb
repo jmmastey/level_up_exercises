@@ -7,7 +7,14 @@ require_relative 'dinosaur_opt_parser'
 
 opt_parser = DinosaurOptParser.new
 catalog    = DinosaurCatalog.new
-options    = opt_parser.parse(ARGV)
+
+begin
+  options    = opt_parser.parse(ARGV)
+rescue OptionParser::ParseError
+  abort "ERROR: Failed to parse provided options"
+end
+
+abort "ERROR: No input file was provided" unless options[:files]
 
 options[:files].each do |f|
   dinosaurs = DinosaurParser.new(f).parse
@@ -15,7 +22,13 @@ options[:files].each do |f|
 end
 
 options.each do |k, v|
-  catalog.add_filter(k, v) unless (k == :files) || (k == :json)
+  next if (k == :files) || (k == :json)
+
+  if v == true
+    catalog.add_filter(k)
+  else
+    catalog.add_filter(k, v)
+  end
 end
 
 if options.key? :json

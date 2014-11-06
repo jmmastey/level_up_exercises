@@ -1,27 +1,23 @@
 class Dinosaur
-  BIPED                  = "Biped"
-  QUADRUPED              = "Quadruped"
-  BIG_DINOSAUR_THRESHOLD = 4000
-  CARNIVORE              = %w(carnivore insectivore piscivore)
+  LARGE_DINOSAUR_MIN_WEIGHT  = 4000
+  CARNIVORE  = %w(carnivore insectivore piscivore)
+  ATTRS = [:name, :period, :continent, :diet, :weight, :walking, :description]
 
-  ATTRIBUTES             = [:name,
-                            :period,
-                            :continent,
-                            :diet,
-                            :weight_in_lbs,
-                            :walking,
-                            :description]
-
-  attr_reader(*ATTRIBUTES)
+  attr_reader(*ATTRS)
 
   def initialize(params = {})
-    ATTRIBUTES.each do |attr|
+    ATTRS.each do |attr|
       instance_variable_set("@#{attr}", params[attr])
     end
   end
 
   def biped?
-    @walking == BIPED
+    return false if @walking.nil?
+    @walking.downcase == "biped"
+  end
+
+  def quadruped?
+    !biped?
   end
 
   def carnivore?
@@ -29,34 +25,40 @@ class Dinosaur
     CARNIVORE.include?(@diet.downcase)
   end
 
-  def big_dinosaur?
-    @weight_in_lbs >= BIG_DINOSAUR_THRESHOLD
+  def herbivore?
+    !carnivore?
+  end
+
+  def large?
+    return false if @weight.nil?
+    @weight > LARGE_DINOSAUR_MIN_WEIGHT
+  end
+
+  def small?
+    !large?
+  end
+
+  def period?(period)
+    @period =~ /$#{period}/i
+  end
+
+  def continent?(continent)
+    p continent
+    @continent =~ /$#{continent}/i
   end
 
   def display
-    ATTRIBUTES.each { |attr| print_attribute(attr) }
+    ATTRS.each do |attr|
+      value = send(attr)
+      puts format("%-15s: %s", attr.to_s.capitalize, value) unless value.nil?
+    end
+
+    puts '-' * 80
   end
 
   def to_hash
-    ATTRIBUTES.each_with_object({}) do |key, a|
-      a.store(key, send(key) || "")
+    ATTRS.each_with_object({}) do |key, hash|
+      hash[key] = send(attr) || ""
     end
-  end
-
-  private
-
-  def titelize(key)
-    key.to_s.split("_").map(&:upcase).join(" ")
-  end
-
-  def attribute_as_pair(key)
-    [key, send(key)]
-  end
-
-  def print_attribute(key)
-    return unless respond_to? key
-
-    value = send(key)
-    puts format("%-15s: %s", titelize(key), value) if value
   end
 end

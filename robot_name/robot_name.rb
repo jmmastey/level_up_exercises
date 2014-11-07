@@ -1,32 +1,55 @@
-class NameCollisionError < RuntimeError; end
+require 'set'
+
+class NameCollisionError < RuntimeError
+  def message
+    "That Name already exists"
+  end
+end
+
+class IllegalCharactersError < RuntimeError
+  def message
+    "Illegal Characters were found"
+  end
+end
 
 class Robot
   attr_accessor :name
 
-  @@registry
-
   def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+    @@register ||= Set.new
+    @name_gen = args[:name_generator]
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+    r_name = ('A'..'Z').to_a.sample(2).join("") + (0..9).to_a.sample(3).join("")
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    @name_gen.nil? ? create_name { r_name } : create_name { @name_gen.call }
+  end
+
+  def create_name
+    @name = yield
+    validates_name
+  end
+
+  def validates_name
+    raise IllegalCharactersError unless @name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
+    raise NameCollisionError if @@register.include?(@name)
+    @@register << @name
+  end
+
+  def to_s
+    "My pet robot's name is #{name}, but we usually call him sparky"
+  end
+
+  def self.display_names
+    @@register.to_a.each do | name |
+       puts "My pet robot's name is #{name}, but we usually call him sparky"
     end
-
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
   end
 end
 
-robot = Robot.new
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+Robot.new
+Robot.new
+generator = -> { 'AA111' }
+Robot.new(name_generator: generator)
+#puts Robot.new(name_generator: generator)
 
-# Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+Robot.display_names

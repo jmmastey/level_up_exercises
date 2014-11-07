@@ -1,0 +1,12 @@
+.item-select {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  text-align: left;
+  line-height: 100%;
+  vertical-align: middle;
+  cursor: pointer; }
+  .item-select:hover {
+    background-color: #ffffdd; }
+  .item-select.selected, .item-select .selected {
+    color: #ff4444; }

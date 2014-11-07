@@ -1,0 +1,31 @@
+@import "defines";
+
+.mild-button {
+	padding: 2px 5px 5px 5px;
+	border: 1px solid $light-border;
+	background: $primary-background;
+	font-size: 13px;
+	text-align: center;
+	line-height: 100%;
+	vertical-align: middle;
+
+	&:hover {
+		border: 1px solid $focus-border;
+	}
+
+	a, a:link, a:hover {
+		color: #555555;
+	}
+
+}
+
+.glaring-button {
+	background: $glaring-color;
+	color: white;
+	text-align: center;
+	font-size: 10px;
+	font-weight: bold;
+	vertical-align: middle;	
+	padding-top: 10px;
+	border-radius: 2px;
+}

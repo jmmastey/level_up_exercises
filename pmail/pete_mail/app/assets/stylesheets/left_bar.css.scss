@@ -1,8 +1,8 @@
 @import 'defines';
 
-.bar-left-white {
+.left-bar {
 	position: fixed;
-	background-color: white;
+	background-color: $secondary-background;
 	top: 100px;
 	left: 0px;
 	width: 160px;
@@ -11,39 +11,17 @@
 	z-index: -10;
 }
 
-.accent-button {
+.compose {
 	position: absolute;
-	left: 20px;
+	left: 15px;
 	top: 20px;
 	width: 120px;
 	height: 23px;
-	border-radius: 2px;
-	background-color: $accent-background;
-	font-size: 10px;
-	font-weight: bold;
-	text-align: center;
-	padding: 0px;
-	padding-top: 7px;
-	color: white;
-	cursor: pointer;
 }
-
 
 .folders {
 	position: absolute;
 	left: 20px;
 	top: 50px;
 	padding-left: 0px;
-
-	li {
-		list-style: none;
-		font-size: 12px;
-		padding-left: 0px;
-		padding-top: 12px;
-		cursor: pointer;
-
-		&.selected {
-			color: $accent-foreground;
-		}
-	}
 }

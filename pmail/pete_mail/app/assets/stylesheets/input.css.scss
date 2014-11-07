@@ -1,0 +1,9 @@
+@import 'defines';
+
+.plain-input-text {
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid $light-border;
+	border-right: 1px solid $light-border;
+	border-left: 1px solid $light-border;
+	height: 1em;
+}

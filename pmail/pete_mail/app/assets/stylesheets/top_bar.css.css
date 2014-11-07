@@ -1,4 +1,4 @@
-.bar-top-gray {
+.top-bar {
   position: fixed;
   background-color: #eeeeee;
   border-bottom: 1px solid #dddddd;
@@ -14,8 +14,8 @@
   height: 54px;
   z-index: 0; }
 
-.search {
-  position: fixed;
+.text-field-with-options {
+  position: absolute;
   left: 160px;
   top: 18px;
   height: 24px;
@@ -25,11 +25,11 @@
   border-top: 1px solid #dddddd;
   border-left: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd; }
-  .search:hover, .search:focus {
+  .text-field-with-options:hover, .text-field-with-options:focus {
     border-top: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc; }
-  .search .text {
+  .text-field-with-options > .text {
     position: absolute;
     left: 0%;
     top: 0%;
@@ -38,11 +38,11 @@
     padding: 0px;
     margin: 0px;
     border: none; }
-  .search .down-arrow {
+  .text-field-with-options .down-arrow {
     position: fixed;
     top: 18px;
     left: 636px; }
-  .search .button {
+  .text-field-with-options .button {
     position: fixed;
     left: 660px;
     top: 18px;
@@ -51,7 +51,7 @@
     padding: 0px;
     margin: 0px;
     border: none; }
-    .search .button input {
+    .text-field-with-options .button input {
       position: absolute;
       top: 0%;
       left: 0%;
@@ -68,7 +68,7 @@
       cursor: pointer;
       outline: 0;
       z-index: 0; }
-  .search .menu {
+  .text-field-with-options .menu {
     display: none;
     position: absolute;
     left: 0%;
@@ -79,21 +79,16 @@
     background: white;
     padding-left: 5%;
     padding-top: 5%; }
-    .search .menu .label {
+    .text-field-with-options .menu .label {
       position: static;
       color: #999999;
       font-family: arial;
       font-size: 15px;
       height: 1em; }
-    .search .menu .text {
+    .text-field-with-options .menu > .text {
       position: static;
-      border-top: 1px solid #999999;
-      border-bottom: 1px solid #dddddd;
-      border-right: 1px solid #dddddd;
-      border-left: 1px solid #dddddd;
-      width: 90%;
-      height: 1em; }
-    .search .menu .check {
+      width: 90%; }
+    .text-field-with-options .menu .check {
       padding: 0px;
       margin: 0px; }
 
@@ -111,16 +106,16 @@
   .grid-button:hover {
     background-color: #BBBBBB; }
 
-.manage-account {
-  position: fixed;
+.labelled-menu {
+  position: absolute;
   top: 18px;
   right: 10px;
   background: none; }
-  .manage-account .label {
+  .labelled-menu .label {
     position: absolute;
     top: 0px;
     right: 0px; }
-  .manage-account .menu {
+  .labelled-menu .menu {
     display: none;
     position: absolute;
     right: 10px;
@@ -131,7 +126,7 @@
     border: 1px solid #dddddd;
     font-size: 18px;
     padding-left: 10px; }
-    .manage-account .menu .header {
+    .labelled-menu .menu .header {
       position: absolute;
       left: 0%;
       top: 0%;
@@ -140,7 +135,7 @@
       background-color: #FFFFCC;
       font-size: 10px;
       padding: 8px 0px 0px 20px; }
-    .manage-account .menu .body {
+    .labelled-menu .menu .body {
       position: absolute;
       left: 0%;
       top: 25%;
@@ -148,13 +143,7 @@
       height: 40%;
       background-color: white;
       padding: 10px 0px 0px 20px; }
-      .manage-account .menu .body .fullname {
-        font-size: 13px;
-        font-weight: bold; }
-      .manage-account .menu .body .email {
-        font-size: 12px;
-        color: #333333; }
-    .manage-account .menu .footer {
+    .labelled-menu .menu .footer {
       position: absolute;
       left: 0%;
       top: 70%;
@@ -162,33 +151,15 @@
       height: 30%;
       background-color: #E3E3E3;
       padding: 10px 0px 0px 20px; }
-      .manage-account .menu .footer .settings {
+      .labelled-menu .menu .footer .settings {
         position: absolute;
         left: 10%;
         top: 25%;
         height: auto;
-        width: 25%;
-        padding: 2px 5px 5px 5px;
-        border: 1px solid #AAAAAA;
-        background: #eeeeee;
-        font-size: 13px;
-        text-align: center;
-        line-height: 100%;
-        vertical-align: middle; }
-        .manage-account .menu .footer .settings a, .manage-account .menu .footer .settings a:link, .manage-account .menu .footer .settings a:hover {
-          color: #555555; }
-      .manage-account .menu .footer .logout {
+        width: 25%; }
+      .labelled-menu .menu .footer .logout {
         position: absolute;
         right: 10%;
         top: 25%;
         height: auto;
-        width: 25%;
-        padding: 2px 5px 5px 5px;
-        border: 1px solid #AAAAAA;
-        background: #eeeeee;
-        font-size: 13px;
-        text-align: center;
-        line-height: 100%;
-        vertical-align: middle; }
-        .manage-account .menu .footer .logout a, .manage-account .menu .footer .logout a:link, .manage-account .menu .footer .logout a:hover {
-          color: #555555; }
+        width: 25%; }

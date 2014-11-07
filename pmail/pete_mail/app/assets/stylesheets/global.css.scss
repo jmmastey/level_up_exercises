@@ -1,55 +1,18 @@
-a {
-	text-decoration: none;
-}
+@import 'defines';
 
 * {
 	font-family: $primary-font;
 }
 
-.tooltip {
-	display: none;
-    position: absolute;
-	top: 120%;
-	left: -20%;
-    height: auto;
-    width: auto;
-    background: #000000;
-	font-size: 10px;
-	font-family: $primary-font;
-	color: white;
-    border: none;
-	padding: 10px;
-	z-index: 50;
-	line-height: 100%;
-	text-align: center;
+a {
+	color: black;
+	text-decoration: none;
 }
 
-.down-arrow { 
-	width: 24px;
-	height: 24px;
-	padding: 0px;
-	margin: 0px;
-	border: none;
-	cursor: pointer;
-	outline: 0;
-	z-index: 25;
-	background: none;
+ul {
+	list-style: none;
 }
 
-.down-arrow:after {
-	position: absolute;
-	display: block;
-	content: "";
-	top: 0px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-	margin: 0px;
-	padding: 0px;
-	background-image: url('down-arrow.png');
-	background-repeat: no-repeat;
-	background-size: 10px 8px;
-	background-position: center;
-	background-color: none;
-	opacity: 0.5;
+li {
+	text-align: left;
 }

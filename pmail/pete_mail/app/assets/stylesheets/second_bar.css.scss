@@ -1,8 +1,8 @@
 @import 'defines';
 
-.bar-top-white {
+.second-bar {
 	position: fixed;
-	background-color: $neutral-background;
+	background-color: $secondary-background;
 	border-bottom: 1px solid $light-border;
 	top: 60px;
 	left: 0px;
@@ -12,16 +12,10 @@
 }
 
 .mail-options {
-	position: fixed;
-	top: 70px;
+	position: absolute;
+	top: 10px;
 	left: 20px;
 	cursor: pointer;
-
-	.label {
-		font-family: $primary-font;
-		font-size: 18px;
-		color: $accent-foreground;
-	}
 
 	.down-arrow {
 		position: absolute;
@@ -40,46 +34,29 @@
 
 		ul {
 			padding: 0px;
-			
-			li {
-				list-style: none;
-				font-size: 13px;
-				color: black;
-				
-				a {
-					color: black;
-					text-decoration: none;
-				}
-				
-				&:first-child {
-					color: #FF4444;
-				}
-			}
 		}
 	}
 }
 
 .mail-selection {
-	position: fixed;
-	top: 70px;
+	position: absolute;
+	top: 10px;
 	left: 160px;
-	width: 30px;
-	height: 24px;
-	cursor: pointer;
-	border: 1px solid $focus-border;
+	width: 25px;
+	height: 17px;
+	padding-left: 0px;
 	padding-right: 10px;
-	background: $primary-background;
 
-	&:hover {
-		border: 1px solid #BBBBBB;
+	.check-all {
+		position: absolute;
+		left: 1px;
 	}
-
+	
 	.down-arrow {
 		position: absolute;
 		top: 0px;
-		right: 0px;
+		right: -4px;
 	}
-
 
 	.options {
 		display: none;
@@ -93,69 +70,35 @@
 		padding: 0px;
 
 		ul {
-			list-style: none;
 			padding: 10px;
-
-			li {
-				list-style: none;
-				font-size: 13px;
-				color: black;
-				padding: 0px;
-
-				&:hover {
-					background-color: #BBBBBB;
-				}
-
-				a {
-					color: black;
-					text-decoration: none;
-				}
-			}
 		}
 	}
 }
 
 .refresh {
-	position: fixed;
-	top: 70px;
+	position: absolute;
+	top: 10px;
 	left: 210px;
 	width: 40px;
-	height: 24px;
-	cursor: pointer;
-	border: 1px solid $focus-border;
+	height: 17px;
 	background-image: url('refresh.png');
 	background-repeat: no-repeat;
 	background-size: 20px 20px;
 	background-position: center;
 	background-color: $primary-background;
-
-	&:hover {
-		border: 1px solid #BBBBBB;
-	}
 }
 
 .more {
-	position: fixed;
-	top: 70px;
-	left: 260px;
-	width: 50px;
-	height: 24px;
-	cursor: pointer;
-	border: 1px solid $focus-border;
-	background-color: $primary-background;
-	padding: 0px;
+	position: absolute;
+	top: 10px;
+	left: 270px;
+	width: 40px;
+	height: 17px;
 
-	&:hover {
-		border: 1px solid #BBBBBB;
-	}
-	
 	.label {
 		position: absolute;
 		top: 0px;
-		left: 2px;
-		font-family: $primary-font;
-		font-size: 10px;
-		color: black;
+		left: 4px;
 		line-height: 24px;
 		vertical-align: middle;
 	}
@@ -179,36 +122,22 @@
 		.option {
 			position: absolute;
 			left: 10px;
-			font-size: 12px;
 			line-height: 24px;
 			vertical-align: middle;
-
-			&:hover {
-				background: #CCCCF2;
-			}
 		}
 	}
 }
 
 .settings {
-	position: fixed;
-	top: 70px;
-	right: 1%;
+	position: absolute;
+	top: 10px;
+	right: 10px;
 	width: 40px;
-	height: 24px;
-	cursor: pointer;
-	border: 1px solid $focus-border;
+	height: 17px;
 	background-image: url('gear.png');
 	background-repeat: no-repeat;
 	background-size: 20px 20px;
 	background-position: center;
-	background-color: none;
-	background-color: $primary-background;
-	padding: 0px;
-
-	&:hover {
-		border: 1px solid #BBBBBB;
-	}
 
 	.menu {
 		display: none;
@@ -226,18 +155,8 @@
 			li {
 				padding-top: 3px;
 				padding-bottom: 3px;
-				list-style: none;
-				font-size: 10px;
-			
-				&.selected {
-					color: $accent-foreground;
-				}
 
-				&:hover {
-					background-color: $light-border;
-				}
-
-				.separate {
+				&.separate {
 					border-top: 1px solid #D0D0D0;
 					border-bottom: 1px solid #D0D0D0;
 				}

@@ -1,6 +1,7 @@
 // Colors
 $primary-background: #EEEEEE;
-$neutral-background: #FFFFFF;
+$secondary-background: #FFFFFF;
+$select-hover-background: #FFFFDD;
 
 $accent-foreground: #FF0000;
 $accent-background: #FF0000;
@@ -8,7 +9,12 @@ $accent-background: #FF0000;
 $light-border: #DDDDDD;
 $focus-border: #CCCCCC;
 
-$mail-hover: #DDDDFF;
+$tooltip-foreground: #FFFFFF;
+$tooltip-background: #000000;
+
+$mail-item-hover: #DDDDFF;
+$item-selected-color: #FF4444;
+$glaring-color: #FF0000;
 
 // Fonts
 $primary-font: verdana;

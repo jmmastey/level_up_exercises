@@ -1,0 +1,30 @@
+.bold-font {
+  font-family: verdana;
+  font-size: 13px;
+  font-weight: bold; }
+
+.detail-font {
+  font-family: verdana;
+  font-size: 12px;
+  color: #333333; }
+
+.label-font {
+  font-family: verdana;
+  font-size: 16px; }
+
+.small-label-font {
+  font-family: verdana;
+  font-size: 10px; }
+
+.accent-label-font {
+  font-family: verdana;
+  font-size: 18px;
+  color: red; }
+
+.item-font {
+  font-family: verdana;
+  font-size: 13px; }
+
+.small-item-font {
+  font-family: verdana;
+  font-size: 10px; }

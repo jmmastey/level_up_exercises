@@ -1,0 +1,16 @@
+.tooltip {
+  display: none;
+  position: absolute;
+  top: 120%;
+  left: -20%;
+  height: auto;
+  width: auto;
+  background: black;
+  font-size: 10px;
+  font-family: verdana;
+  color: white;
+  border: none;
+  padding: 10px;
+  z-index: 50;
+  line-height: 100%;
+  text-align: center; }

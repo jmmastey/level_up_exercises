@@ -1,0 +1,22 @@
+.left-bar {
+  position: fixed;
+  background-color: white;
+  top: 100px;
+  left: 0px;
+  width: 160px;
+  height: 100%;
+  border: none;
+  z-index: -10; }
+
+.compose {
+  position: absolute;
+  left: 15px;
+  top: 20px;
+  width: 120px;
+  height: 23px; }
+
+.folders {
+  position: absolute;
+  left: 20px;
+  top: 50px;
+  padding-left: 0px; }

@@ -1,0 +1,19 @@
+@import 'defines';
+
+.item-select {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	text-align: left;
+	line-height: 100%;
+	vertical-align: middle;
+	cursor: pointer;
+
+	&:hover {
+		background-color: $select-hover-background;
+	}
+
+	&.selected, .selected {
+		color: $item-selected-color;
+	}
+}

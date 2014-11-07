@@ -3,16 +3,17 @@
 this_dir = File.dirname(__FILE__)
 $LOAD_PATH.unshift(this_dir + "/lib") unless $LOAD_PATH.include?(this_dir)
 
-require "queriable_array"
 require "dinosaur_index"
-require "dinosaur_index/csv_loader"
+#require "dinosaur_index/csv_loader"
 require "dinosaur_index/cli"
 require "json"
 
 cli_parser = DinosaurIndex::CommandLineInterface.new
 cli_parser.parse!(ARGV)
-dino_list = cli_parser.filtering_list
+puts cli_parser.filter_list.inspect
 
+puts cli_parser.inspect
+exit 0
 cli_parser.input_files.each do |inputfile|
   csvloader = DinosaurIndex::CSVLoader.new(inputfile.pathname,
                                            inputfile.dino_attribute_defaults)

@@ -1,9 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>pmail</title>
+    <title>pMail</title>
+    <!-- include Yahoo's Pure, a bootstrap alternative -->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <style type="text/css">
+      #header-bar {
+        background-color: #e9e9e9;
+        border-bottom: 1px solid #eeeeee;
+        padding: 8px;
+        position: relative;
+      }
+
+      #user-menu {
+
+      }
+
+      #tool-bar {
+        border-bottom: 1px solid #eeeeee;
+        padding: 8px;
+        position: relative;
+      }
+
+      #settings-menu {
+        text-align: right;
+      }
+
+      .valign-middle {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    </style>
   </head>
   <body>
-    Ryan says "hi"
+    <!-- header bar; logo, search, user menu -->
+    <div id="header-bar" class="pure-g">
+      <div class="pure-u-1-8">
+        <div class="valign-middle">
+          pMail
+        </div>
+      </div>
+      <div class="pure-u-3-4">
+        <form class="pure-form">
+          <fieldset>
+            <input type="text" id="search" name="search" size="60">
+            <button type="submit" class="pure-button pure-button-primary">MAG</button>
+          </fieldset>
+        </form>
+      </div>
+      <div id="user-menu" class="pure-u-1-8">
+        <div class="valign-middle">
+          [::] rcowan@enova.com
+        </div>
+      </div>
+    </div>
+
+    <!-- tool bar; Mail dropdown, actions, paginator, settings -->
+    <div id="tool-bar" class="pure-g">
+      <div class="pure-u-1-8">
+        <div class="valign-middle">
+          Mail v
+        </div>
+      </div>
+      <div class="pure-u-5-8">
+        <button type="submit" class="pure-button pure-button-primary"><input id="remember" type="checkbox"></button>
+        <button type="submit" class="pure-button pure-button-primary">REF</button>
+        <button type="submit" class="pure-button pure-button-primary">More v</button>
+      </div>
+      <div id="settings-menu" class="pure-u-1-4">
+        <div class="valign-middle">
+          1-12 of 12
+          <button type="submit" class="pure-button pure-button-primary"><</button>
+          <button type="submit" class="pure-button pure-button-primary">></button>
+          <button type="submit" class="pure-button pure-button-primary">GEAR</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

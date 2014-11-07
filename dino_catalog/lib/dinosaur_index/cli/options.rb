@@ -3,6 +3,9 @@ require "optparse"
 module DinosaurIndex
   class CommandLineInterface
     module Options
+      include Data
+      attr_accessor :dinosaur_catalog
+
       STRINGS = {
         banner: "usage #{File.basename($PROGRAM_NAME)} ([-d field=val]* [-f filename]+)+ [selection options]*",
         small_opt_params: ["-s", "--small", "Select small species"],
@@ -38,16 +41,16 @@ module DinosaurIndex
 
       def setup_filter_options
         @opt_parser.on(*STRINGS[:small_opt_params]) \
-          { |_opt| add_filter { weight < LARGE_SIZE_LBS } }
+          { |_opt| add_filter { weight && weight < LARGE_SIZE_LBS } }
 
         @opt_parser.on(*STRINGS[:large_opt_params]) \
-          { |_opt| add_filter { weight >= LARGE_SIZE_LBS } }
+          { |_opt| add_filter { weight && weight >= LARGE_SIZE_LBS } }
 
         @opt_parser.on(*STRINGS[:biped_opt_params]) \
-          { |_opt| add_filter { posture == :bipedal } }
+          { |_opt| add_filter { posture && posture == :biped } }
 
         @opt_parser.on(*STRINGS[:quadruped_opt_params]) \
-          { |_opt| add_filter { posture == :quadrupedal } }
+          { |_opt| add_filter { posture && posture == :quadruped } }
 
         @opt_parser.on(*STRINGS[:carnivore_opt_params]) \
           { |_opt| add_filter { carnivorous? } }
@@ -55,11 +58,16 @@ module DinosaurIndex
         @opt_parser.on(*STRINGS[:noncarnivore_opt_params]) \
           { |_opt| add_filter { !carnivorous? } }
 
-        @opt_parser.on(*STRINGS[:period_opt_params]) \
-          { |_opt, pattern| add_filter { time_period =~ /#{pattern}/i } }
-
         @opt_parser.on(*STRINGS[:continent_opt_params]) \
-          { |_opt, pattern| add_filter { continent =~ /#{pattern}/i } }
+          { |pattern| add_filter { continent && continent =~ /#{pattern}/i } }
+
+        @opt_parser.on(*STRINGS[:period_opt_params]) do |pattern|
+          add_filter { time_period && time_period =~ /#{pattern}/i }
+        end
+      end
+
+      def add_filter(&filter_code)
+        dinosaur_catalog.add_filter(&filter_code)
       end
 
       def setup_other_options
@@ -67,10 +75,10 @@ module DinosaurIndex
           { |_opt| @output_json = true }
 
         @opt_parser.on(*STRINGS[:default_setting_opt_params]) \
-          { |_opt, setting| update_missing_dino_attribute_defaults(setting) }
+          { |setting| update_missing_dino_attribute_defaults(setting) }
 
         @opt_parser.on(*STRINGS[:filename_opt_params]) \
-          { |_opt, filename| store_input_file_with_its_defaults(filename) }
+          { |filename| store_input_file_with_its_defaults(filename) }
 
         @opt_parser.on(*STRINGS[:help_opt_params]) do |_opt|
           puts @opt_parser
@@ -97,11 +105,6 @@ module DinosaurIndex
         raise ArgumentError,
               "Invalid syntax setting default value: #{opt_arg}" unless fieldname
         [fieldname.downcase.to_sym, value]
-      end
-
-      def add_filter(&test_code)
-        @dinosaur_filters << 
-          lambda { |dinosaur| dinosaur.instance_eval(&test_code) }
       end
     end
   end

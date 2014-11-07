@@ -9,10 +9,11 @@ module DinosaurIndex
 
     attr_accessor :input_files, :dinosaur_filters, :output_json
 
-    def initialize
+    def initialize(dinosaur_catalog)
       @missing_dino_attribute_defaults = {}
       @dinosaur_filters = []
       @input_files = []
+      self.dinosaur_catalog = dinosaur_catalog
       setup_option_parser
     end
 

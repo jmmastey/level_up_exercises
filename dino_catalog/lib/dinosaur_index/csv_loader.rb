@@ -10,7 +10,7 @@ module DinosaurIndex
     end
 
     def read(path = nil, default_field_values = @default_field_values)
-      raise AgumentError, "Missing input file" unless path ||= @path
+      raise ArgumentError, "Missing input file" unless path ||= @path
 
       @csvreader = CSV.foreach(path, csv_parser_options) do |csv_row|
         yield make_dinosaur(csv_row, default_field_values)
@@ -29,7 +29,7 @@ module DinosaurIndex
     FIELDCONVERTERS =
     [
       field_converter(:weight) { |v| v.to_i },
-      field_converter(:period) { |v| normalize_field_value(v) }
+      field_converter(:period) { |v| normalize_field_value(v) },
       field_converter(:diet) { |v| normalize_field_value(v) },
       field_converter(:walking) { |v| normalize_field_value(v) },
     ]
@@ -53,8 +53,14 @@ module DinosaurIndex
       }
     end
 
-    def normalize_field_value(csv_field_value)
+    def self.normalize_field_value(csv_field_value)
       csv_field_value.downcase.to_sym
+    end
+
+    def self.decode_time_period(time_period_string)
+      period_strings = /(?:(\w+)\s+)?(\w+)/.match(time_period_string)
+      (early_or_late, period) =
+        period_strings[1].to_sym, period_strings[2].to_sym
     end
 
     def make_dinosaur(csv_row, default_field_values)
@@ -81,14 +87,14 @@ module DinosaurIndex
         [remapped_header(hdr), csv_row[hdr]]
       end
 
-      determine_diet(row_data)
-
-      Hash[row_data]
+      row_data = Hash[row_data]
+      determine_diet(row_data) 
+      row_data
     end
 
     def determine_diet(row_data)
       row_data[:diet] ||= 
-        row_data[:carnivore].casecmp('yes') ? :carnivore : :herbivore
+        row_data[:carnivore].casecmp('yes') == 0 ? :carnivore : :herbivore
     end
 
     def apply_default_field_values(csv_row_data, default_field_values)

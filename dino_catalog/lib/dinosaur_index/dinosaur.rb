@@ -1,11 +1,15 @@
 module DinosaurIndex
   class Dinosaur
-    attr_accessor :taxon, :time_period, :weight, :diet, :posture,
-                  :continent, :description, :other_attributes
+    include Data
+
+    attr_accessor :taxon, :weight, :continent, :description, :other_attributes,
+                  :part_of_period
+
+    attr_reader :diet, :posture, :time_period
 
     def initialize(taxon, other = {})
       @taxon = taxon
-      intialize_from_options(other)
+      initialize_from_options(other)
     end
 
     def to_s
@@ -54,7 +58,7 @@ module DinosaurIndex
 
     def output_field_list
       [:taxon, :time_period, :weight, :diet,
-       :carnivorous, :posture, :continent, :description]
+       :carnivorous?, :posture, :continent, :description]
     end
 
     def fields_and_values

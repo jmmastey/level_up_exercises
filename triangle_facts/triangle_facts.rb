@@ -1,10 +1,31 @@
-# Killer facts about triangles AWW YEAH
 class Triangle
   attr_accessor :side1, :side2, :side3
 
   def initialize(side1, side2, side3)
     @side1, @side2, @side3 = side1, side2, side3
   end
+
+  def recite_facts
+    puts triangle_type
+    puts 'The angles of this triangle are ' + calculate_angles.join(',')
+    puts FACTS[:right] if right?
+    puts ''
+  end
+
+  def triangle_type
+    case
+      when equilateral?
+        FACTS[:equilateral]
+      when isosceles?
+        FACTS[:isosceles]
+      when scalene?
+        FACTS[:scalene]
+      else
+        FACTS[:unknown]
+    end
+  end
+
+  private
 
   def equilateral?
     side1 == side2 && side2 == side3
@@ -20,23 +41,7 @@ class Triangle
 
   def right?
     angles = calculate_angles
-    angles.include? 90
-  end
-
-  def recite_facts
-    puts triangle_type
-
-    angles = calculate_angles
-    puts 'The angles of this triangle are ' + angles.join(',')
-    puts FACTS[:right] if angles.include? 90
-    puts ''
-  end
-
-  def triangle_type
-    return FACTS[:equilateral] if equilateral?
-    return FACTS[:isosceles] if isosceles?
-    return FACTS[:scalene] if scalene?
-    'Are you sure this is even a triangle?'
+    angles.include?(90)
   end
 
   def calculate_angles
@@ -77,6 +82,7 @@ class Triangle
     isosceles: 'This triangle is isosceles! Also, that word is hard to type.',
     scalene: 'This triangle is scalene and mathematically boring.',
     right: 'This triangle is also a right triangle!',
+    unknown: 'Are you sure this is even a triangle?',
   }
 end
 

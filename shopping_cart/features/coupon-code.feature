@@ -115,8 +115,9 @@ Scenario: Submit duplicate coupon codes
 
 # Bad paths: >:^(
 
-Scenario: User submits junk form values
+Scenario: User submits junk request values
   Given I have an order with item subtotal $50 in my cart
-  When I submit a modified form with illegal coupon code characters
+  When I submit a modified cart request with illegal coupon code characters
   Then I see a general-error page 
   And a link returning to the cart item page
+  And my cart is unchanged

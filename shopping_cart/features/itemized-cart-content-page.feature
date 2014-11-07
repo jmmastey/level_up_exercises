@@ -115,7 +115,7 @@ Scenario: Price change for item already in cart
   Then the line item shows a price-change warning
   And the line item price is $25
 
-Scenario: Item in cart is discontinue prior to purchase
+Scenario: Item in cart is discontinued prior to purchase
   Given I have 1 available item priced $3 in my cart
   And the item is discontinued and no longer available
   When I visit the cart item page

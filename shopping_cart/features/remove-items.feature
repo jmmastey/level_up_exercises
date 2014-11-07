@@ -10,6 +10,8 @@ Feature: Remove items from cart
   Bad:
     Remove improperly identified item (invalid/missing SKU)
 
+# Happy: :^D
+
 Scenario: Remove singular item from cart
   Given I have 1 of an item in my cart
   When I remove the item from my cart
@@ -19,6 +21,8 @@ Scenario: Remove multiple of item from cart
   Given I have 4 of an item in my cart
   When I remove the item from my cart
   Then my cart does not show the item
+
+# Sad: ;^D
 
 Scenario: Remove an item from my cart that is not found in cart
   Given an item is in my cart
@@ -31,3 +35,11 @@ Scenario: Remove invalid item from cart
   Given I edit the cart item page to make an item ID invalid
   When I remove the item from my cart
   Then my cart does not show the item
+
+# Bad: >:^(
+
+Scenario: Thwart deliberate malformed input
+  Given I craft a cart request to remove an item with item ID of 1MB length
+  When I submit the cart request
+  Then I see a general error warning page
+  And my cart is not changed

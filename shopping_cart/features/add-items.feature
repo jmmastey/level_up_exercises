@@ -62,3 +62,8 @@ Scenario: Add negative quantity to my cart
 
 # Bad paths: >:^(
 
+Scenario: Thwart deliberate malformed input
+  Given I craft a cart request to add an item with item ID of 1MB length
+  When I submit the cart request
+  Then I see a general error warning page
+  And my cart is not changed

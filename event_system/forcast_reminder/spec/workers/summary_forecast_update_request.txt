@@ -1,0 +1,196 @@
+HTTP/1.1 200 OK
+Server: Apache/2.2.15 (Red Hat)
+X-NIDS-ServerID: www4.mo
+Content-Type: text/xml
+Content-Length: 11139
+Cache-Control: max-age=167
+Expires: Wed, 05 Nov 2014 17:24:37 GMT
+Date: Wed, 05 Nov 2014 17:21:50 GMT
+Connection: keep-alive
+
+<?xml version="1.0"?>
+<dwml version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.nws.noaa.gov/forecasts/xml/DWMLgen/schema/DWML.xsd">
+  <head>
+    <product srsName="WGS 1984" concise-name="dwmlByDay" operational-mode="official">
+      <title>NOAA's National Weather Service Forecast by 12 Hour Period</title>
+      <field>meteorological</field>
+      <category>forecast</category>
+      <creation-date refresh-frequency="PT1H">2014-11-05T17:21:50Z</creation-date>
+    </product>
+    <source>
+      <more-information>http://www.nws.noaa.gov/forecasts/xml/</more-information>
+      <production-center>Meteorological Development Laboratory<sub-center>Product Generation Branch</sub-center></production-center>
+      <disclaimer>http://www.nws.noaa.gov/disclaimer.html</disclaimer>
+      <credit>http://www.weather.gov/</credit>
+      <credit-logo>http://www.weather.gov/images/xml_logo.gif</credit-logo>
+      <feedback>http://www.weather.gov/feedback.php</feedback>
+    </source>
+  </head>
+  <data>
+    <location>
+      <location-key>point1</location-key>
+      <point latitude="41.84" longitude="-87.69"/>
+    </location>
+    <moreWeatherInformation applicable-location="point1">http://forecast.weather.gov/MapClick.php?textField1=41.84&amp;textField2=-87.69</moreWeatherInformation>
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p24h-n7-1</layout-key>
+      <start-valid-time period-name="Today">2014-11-05T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-05T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Tomorrow">2014-11-06T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-06T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Friday">2014-11-07T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-07T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Saturday">2014-11-08T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-08T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Sunday">2014-11-09T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-09T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Monday">2014-11-10T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-10T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Veterans Day">2014-11-11T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-11T18:00:00-06:00</end-valid-time>
+    </time-layout>
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p24h-n7-2</layout-key>
+      <start-valid-time period-name="Tonight">2014-11-05T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-06T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Tomorrow Night">2014-11-06T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-07T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Friday Night">2014-11-07T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-08T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Saturday Night">2014-11-08T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-09T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Sunday Night">2014-11-09T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-10T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Monday Night">2014-11-10T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-11T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Tuesday Night">2014-11-11T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-12T06:00:00-06:00</end-valid-time>
+    </time-layout>
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p12h-n14-3</layout-key>
+      <start-valid-time period-name="Today">2014-11-05T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-05T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Tonight">2014-11-05T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-06T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Tomorrow">2014-11-06T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-06T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Tomorrow Night">2014-11-06T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-07T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Friday">2014-11-07T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-07T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Friday Night">2014-11-07T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-08T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Saturday">2014-11-08T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-08T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Saturday Night">2014-11-08T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-09T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Sunday">2014-11-09T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-09T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Sunday Night">2014-11-09T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-10T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Monday">2014-11-10T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-10T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Monday Night">2014-11-10T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-11T06:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Veterans Day">2014-11-11T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-11T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Tuesday Night">2014-11-11T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-12T06:00:00-06:00</end-valid-time>
+    </time-layout>
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p7d-n1-4</layout-key>
+      <start-valid-time>2014-11-05T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2014-11-12T06:00:00-06:00</end-valid-time>
+    </time-layout>
+    <parameters applicable-location="point1">
+      <temperature type="maximum" units="Fahrenheit" time-layout="k-p24h-n7-1">
+        <name>Daily Maximum Temperature</name>
+        <value>58</value>
+        <value>46</value>
+        <value>43</value>
+        <value>44</value>
+        <value>42</value>
+        <value>46</value>
+        <value>41</value>
+      </temperature>
+      <temperature type="minimum" units="Fahrenheit" time-layout="k-p24h-n7-2">
+        <name>Daily Minimum Temperature</name>
+        <value>46</value>
+        <value>35</value>
+        <value>38</value>
+        <value>31</value>
+        <value>35</value>
+        <value>32</value>
+        <value xsi:nil="true"/>
+      </temperature>
+      <probability-of-precipitation type="12 hour" units="percent" time-layout="k-p12h-n14-3">
+        <name>12 Hourly Probability of Precipitation</name>
+        <value>0</value>
+        <value>33</value>
+        <value>62</value>
+        <value>14</value>
+        <value>1</value>
+        <value>34</value>
+        <value>32</value>
+        <value>8</value>
+        <value>14</value>
+        <value>13</value>
+        <value>15</value>
+        <value>30</value>
+        <value>29</value>
+        <value xsi:nil="true"/>
+      </probability-of-precipitation>
+      <weather time-layout="k-p12h-n14-3">
+        <name>Weather Type, Coverage, and Intensity</name>
+        <weather-conditions weather-summary="Increasing Clouds"/>
+        <weather-conditions weather-summary="Chance Rain Showers">
+          <value coverage="chance" intensity="light" weather-type="rain showers" qualifier="none"/>
+        </weather-conditions>
+        <weather-conditions weather-summary="Rain Showers Likely">
+          <value coverage="likely" intensity="moderate" weather-type="rain showers" qualifier="none"/>
+        </weather-conditions>
+        <weather-conditions weather-summary="Mostly Cloudy"/>
+        <weather-conditions weather-summary="Partly Sunny"/>
+        <weather-conditions weather-summary="Chance Rain Showers">
+          <value coverage="chance" intensity="moderate" weather-type="rain showers" qualifier="none"/>
+        </weather-conditions>
+        <weather-conditions weather-summary="Chance Rain Showers">
+          <value coverage="chance" intensity="light" weather-type="rain showers" qualifier="none"/>
+        </weather-conditions>
+        <weather-conditions weather-summary="Partly Cloudy"/>
+        <weather-conditions weather-summary="Mostly Cloudy"/>
+        <weather-conditions weather-summary="Mostly Cloudy"/>
+        <weather-conditions weather-summary="Mostly Cloudy"/>
+        <weather-conditions weather-summary="Chance Snow">
+          <value coverage="chance" intensity="light" weather-type="snow" qualifier="none"/>
+        </weather-conditions>
+        <weather-conditions weather-summary="Chance Rain/Snow">
+          <value coverage="chance" intensity="light" weather-type="rain" qualifier="none"/>
+          <value coverage="chance" intensity="very light" additive="or" weather-type="snow" qualifier="or"/>
+        </weather-conditions>
+        <weather-conditions xsi:nil="true"/>
+      </weather>
+      <conditions-icon type="forecast-NWS" time-layout="k-p12h-n14-3">
+        <name>Conditions Icons</name>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/sct.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/hi_nshwrs30.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/hi_shwrs60.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/nbkn.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/sct.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/hi_nshwrs30.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/hi_shwrs30.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/nsct.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/bkn.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/nbkn.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/bkn.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/nsn30.jpg</icon-link>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/rasn30.jpg</icon-link>
+        <icon-link xsi:nil="true"/>
+      </conditions-icon>
+      <hazards time-layout="k-p7d-n1-4">
+        <name>Watches, Warnings, and Advisories</name>
+        <hazard-conditions xsi:nil="true"/>
+      </hazards>
+    </parameters>
+  </data>
+</dwml>

@@ -10,9 +10,8 @@ require "json"
 
 cli_parser = DinosaurIndex::CommandLineInterface.new
 cli_parser.parse!(ARGV)
-puts cli_parser.filter_list.inspect
+puts cli_parser.dinosaur_filters.inspect
 
-puts cli_parser.inspect
 exit 0
 cli_parser.input_files.each do |inputfile|
   csvloader = DinosaurIndex::CSVLoader.new(inputfile.pathname,

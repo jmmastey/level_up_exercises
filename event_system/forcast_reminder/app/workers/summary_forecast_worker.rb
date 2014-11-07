@@ -1,6 +1,6 @@
 require 'rest-client'
 
-class SummaryForecast
+class SummaryForecastWorker
   include Sidekiq::Worker
   include WorkerHelpers
   SUMMARY_URL = "http://www.weather.gov/forecasts/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php"

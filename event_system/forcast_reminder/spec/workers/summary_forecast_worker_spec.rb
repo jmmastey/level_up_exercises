@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-describe SummaryForecast, :type => :worker do
+describe SummaryForecastWorker, :type => :worker do
   let (:model) { Forecast.order(:date) }
   let (:summary_url) { "http://www.weather.gov/forecasts/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php" }
   let (:summary_query) { {"zipCodeList" => "60606", "format" => "12 hourly" } }
-  subject { SummaryForecast.new }
+  subject { SummaryForecastWorker.new }
 
   describe "#perform" do
     before do

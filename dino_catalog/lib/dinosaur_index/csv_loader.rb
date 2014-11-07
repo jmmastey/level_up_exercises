@@ -56,7 +56,7 @@ module DinosaurIndex
     end
 
     def decode_time_period(csv_row)
-      period_strings = /(?:(\w+)\s+)?(\w+)/.match(csv_row[:period])
+      period_strings = /(?:(\w+)\s+)?(\w+)/.match(csv_row[:time_period])
       (early_or_late, period) =
         period_strings[1, 2].map { |val| self.class.normalize_field_value(val) }
       csv_row[:time_period] = period
@@ -65,7 +65,7 @@ module DinosaurIndex
 
     def make_dinosaur(csv_row, default_field_values)
       taxon = csv_row.delete(:name).last
-      csv_row_data = csv_row.to_hash
+      csv_row_data = remapped_and_resolved_row_data(csv_row)
       decode_time_period(csv_row_data)
       apply_default_field_values(csv_row_data, default_field_values)
       Dinosaur.new(taxon, csv_row_data)
@@ -84,11 +84,10 @@ module DinosaurIndex
     end
 
     def remapped_and_resolved_row_data(csv_row)
-      row_data = csv_row.headers.map do |hdr|
-        [remapped_header(hdr), csv_row[hdr]]
+      row_data = {}
+      csv_row.headers.each do |hdr|
+        row_data[remapped_header(hdr)] = csv_row[hdr]
       end
-
-      row_data = Hash[row_data]
       determine_diet(row_data)
       row_data
     end

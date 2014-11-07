@@ -10,56 +10,38 @@ module FlightStats
     APPLICATION_ID  = "89cd457c"
     APPLICATION_KEY = "be2705cf426fe89bd49cbf1534d10978"
     HOST            = "api.flightstats.com"
-    HEADERS         = {
-      "appId"  => "#{APPLICATION_ID}",
-      "appKey" => "#{APPLICATION_KEY}"
-    }
-    ARRIVING        = "arriving"
-    DEPARTING       = "departing"
 
-    def arrive(before, from, to)
-      flights = execute(url(from, to, ARRIVING, before))
-      filter(flights, before, true)
+    def get_flights_arriving_before(time, from, to)
+      get_scheduled_flights(url(from, to, "arriving", time)).select! do |f|
+        f["arrivalTime"].to_datetime < strip_timezone(time)
+      end
     end
 
-    def leave(after, from, to)
-      flights = execute(url(from, to, DEPARTING, after))
-      filter(flights, after, false)
+    def get_flights_departing_after(time, from, to)
+      get_scheduled_flights(url(from, to, "departing", time)).select! do |f|
+        f["departureTime"].to_datetime > strip_timezone(time)
+      end
     end
 
     private
 
-    def filter(flights, on, before)
-      flights.select! do |flight|
-        flight_time = comparison_time(before, flight)
-        if before
-          flight_time < strip_timezone(on)
-        else
-          strip_timezone(on) < flight_time
-        end
-      end
-      flights
-    end
-
-    def comparison_time(before, flight)
-      if before
-        time_key = "arrivalTime"
-      else
-        time_key = "departureTime"
-      end
-      DateTime.parse(flight[time_key])
-    end
-
-    def execute(url)
+    def get_scheduled_flights(url)
       json = RestClient::Request.execute(method:     :get,
                                   url:        url,
-                                  headers:    HEADERS,
+                                  headers:    headers,
                                   verify_ssl: false)
       JSON.parse(json)["scheduledFlights"]
     end
 
-    def url(from, to, action, on)
-      "https://#{HOST}/flex/schedules/rest/v1/json/from/#{from}/to/#{to}/#{action}/#{url_date(on)}"
+    def headers
+      {
+        "appId"  => APPLICATION_ID,
+        "appKey" => APPLICATION_KEY
+      }
+    end
+
+    def url(from, to, action, date)
+      "https://#{HOST}/flex/schedules/rest/v1/json/from/#{from}/to/#{to}/#{action}/#{url_date(date)}"
     end
 
     def url_date(date)

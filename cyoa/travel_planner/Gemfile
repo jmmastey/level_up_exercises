@@ -70,6 +70,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'vcr'
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.0.0'
 end

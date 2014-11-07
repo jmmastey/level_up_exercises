@@ -5,11 +5,7 @@ module DinosaurIndex
 
     def initialize(taxon, other = {})
       @taxon = taxon
-      decode_options(other)
-    end
-
-    def carnivorous
-      diet ? diet.carnivorous : nil
+      intialize_from_options(other)
     end
 
     def to_s
@@ -22,13 +18,31 @@ module DinosaurIndex
       end.join("\n")
     end
 
+    def diet=(a_diet)
+      raise InvalidDataError, 
+            "No such diet #{a_diet}" unless legal_diet?(a_diet)
+      @diet = a_diet
+    end
+
+    def time_period=(a_period)
+      raise InvalidDataError,
+            "No such period #{a_period}" unless legal_time_period?(a_period)
+      @time_period = a_period
+    end
+
+    def posture=(a_posture)
+      raise InvalidDataError,
+            "No such posture: #{a_posture}" unless legal_posture?(a_posture)
+      @posture = a_posture
+    end
+
     def to_hash
       Hash[fields_and_values.map { |(field, value)| [field, value.to_s] }]
     end
 
     private
 
-    def decode_options(options)
+    def initialize_from_options(options)
       @time_period = options.delete(:time_period)
       @weight = options.delete(:weight)
       @diet = options.delete(:diet)

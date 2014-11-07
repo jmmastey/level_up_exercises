@@ -28,10 +28,10 @@ module DinosaurIndex
 
     FIELDCONVERTERS =
     [
-      field_converter(:weight) { |v| puts "V IS #{v}"; v.to_i },
-      field_converter(:period) { |v| TimePeriod.decode_instance_token(v) },
-      field_converter(:diet) { |v| Diet.decode_instance_token(v) },
-      field_converter(:walking) { |v| Posture.decode_instance_token(v) },
+      field_converter(:weight) { |v| v.to_i },
+      field_converter(:period) { |v| normalize_field_value(v) }
+      field_converter(:diet) { |v| normalize_field_value(v) },
+      field_converter(:walking) { |v| normalize_field_value(v) },
     ]
 
     HEADERCONVERTERS =
@@ -53,11 +53,14 @@ module DinosaurIndex
       }
     end
 
+    def normalize_field_value(csv_field_value)
+      csv_field_value.downcase.to_sym
+    end
+
     def make_dinosaur(csv_row, default_field_values)
       taxon = csv_row.delete(:name).last
-      csv_row_data = extracted_csv_row_data(csv_row)
+      csv_row_data = remapped_and_resolved_row_data(csv_row)
       apply_default_field_values(csv_row_data, default_field_values)
-      determine_diet(csv_row_data)
       Dinosaur.new(taxon, csv_row_data)
     end
 
@@ -73,26 +76,23 @@ module DinosaurIndex
       HEADER_REMAPPING[header] || header
     end
 
-    def extracted_csv_row_data(csv_row)
+    def remapped_and_resolved_row_data(csv_row)
       row_data = csv_row.headers.map do |hdr|
         [remapped_header(hdr), csv_row[hdr]]
       end
 
+      determine_diet(row_data)
+
       Hash[row_data]
+    end
+
+    def determine_diet(row_data)
+      row_data[:diet] ||= 
+        row_data[:carnivore].casecmp('yes') ? :carnivore : :herbivore
     end
 
     def apply_default_field_values(csv_row_data, default_field_values)
       default_field_values.each { |hdr, value| csv_row_data[hdr] ||= value }
-    end
-
-    def determine_diet(csv_row_data)
-      is_a_carnivore = 
-        (csv_row_data.delete(:carnivore) || '').casecmp('yes') == 0
-
-      csv_row_data[:diet] ||= if is_a_carnivore
-                              then Diet::UNSPECIFIED_CARNIVORE
-                              else Diet::UNSPECIFIED_NONCARNIVORE
-                              end
     end
   end
 end

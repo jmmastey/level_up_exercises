@@ -1,23 +1,48 @@
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>PMAIL</title>
-</head>
-<body>
-<link rel="stylesheet" type="text/css" href="css/pmail.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/pmail.js" ></script>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
+  </head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="css/pmail.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/pmail.js" ></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <div class="banner">
       <input type="text" name="search" class="bannertextbox"/>
       <button name="pmailsearch" class="pmailsearch"/> 
-  </div>
-
-  <div class="nav_banner">
-    <button type=button name="mail" class="mail"/>Mail</button>
-      <button data-role="Search"class="select"><!-- <span class="button-text"></span> --></button>
+    </div>
+    <div class="nav_banner">
+      <button type=button name="mail" class="mail"/>Mail</button>
+      <button data-role="Search"class="select"></button>
+      <button class="refresh" data-role="Refresh"></button>
+      <button class="more" data-role="More"></button>
+      <button class="settings"></button>
+      <button class="older"></button>
+      <button class="newer"></button>
+     </div>
+     <div class="side_bar">
+     <button name="searchcontent" class="compose">COMPOSE</button>
+     <nav class="menu">
+         <ul>
+            <li><div>Inbox</div></li>
+            <li>Starred</li>
+            <li>Important</li>
+            <li>Sent</li>
+            <li>Drafts</li>
+            <li>Archives</li>
+            <li>More</li>
+            </li>
+         </ul>
+      </nav>
+      </div>
+      <div class="main_content">
+        <p>hello world</p>
+      </div>
+  </body>
+</html>
+         <!-- TODO -->
 <!-- 
       <ul class="Mymenu">
     <li>
@@ -32,45 +57,4 @@
         </ul> 
     </li>
 </ul> -->
-
-      <button class="refresh" data-role="Refresh"></button>
-      <button class="more" data-role="More"></button>
-      <button class="settings"></button>
-      <button class="older"></button>
-      <button class="newer"></button>
-     </div>
-
-  <div class="side_bar">
-     <button name="searchcontent" class="compose">COMPOSE</button>
-    <nav class="menu">
-     <ul>
-      <li><div>Inbox</div></li>
-      <li>Starred</li>
-      <li>Important</li>
-      <li>Sent</li>
-      <li>Drafts</li>
-      <li>Archives</li>
-      <li>More</li>
-        <!-- <ul>
-          <li>Mark all as read</li>
-          <li class="ui-state-disabled">Select messages to see more actions</li>
-      </ul> -->
-     </li>
-    </ul>
-  </nav>
-  </div>
-<!--  example -->
-
-  <div class="main_content">
-    <p>hello world</p>
-  </div>
-
-
-</body>
-</html>
-
-<!--    
-
- -->
-
 

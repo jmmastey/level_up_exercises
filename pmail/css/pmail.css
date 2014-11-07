@@ -2,7 +2,7 @@
 body {
   margin:0px;
 }
-.body_content {
+.body-content {
   float: right;
   width: 100px ;
 }
@@ -18,7 +18,7 @@ body {
   padding: 15px
 }
 
-.bannertextbox {
+.banner-textbox {
   border:1px;
   height:28px;
   margin-left:155px;
@@ -26,7 +26,7 @@ body {
   width:570px;
 }
 
-.pmailsearch {
+.pmail-search {
   height:28px;
   width:60px;
   padding:10px;
@@ -48,13 +48,13 @@ body {
   min-width: 750px;
 }
 
-.selectdiv {
+.select-div {
   left: 0px;
   position:absolute;
   top: 0px;
 }
 
-.mail {
+.mail-button {
   color: #CD2309;
   background-color: white;
   border: none;
@@ -64,7 +64,7 @@ body {
   width: 55px;
 }
 
-.select {
+.select-button {
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
   border-radius: 4px;
@@ -78,7 +78,7 @@ body {
   display: none;
 }
 
-.refresh {
+.refresh-button {
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
   border-radius: 4px;
@@ -88,7 +88,7 @@ body {
   width: 55px;
 }
 
-.more {
+.more-button {
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
   border-radius: 4px;
@@ -99,7 +99,7 @@ body {
   width: 55px;
 }
 
-.settings {
+.settings-button {
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
   border-radius: 4px;
@@ -109,7 +109,7 @@ body {
   width: 55px;
 }
 
-.newer {
+.newer-button {
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
   border-bottom-left-radius: 4px;
@@ -120,7 +120,7 @@ body {
   width: 27px;
 }
   
-.older {
+.older-button {
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
   border-top-right-radius: 4px;
@@ -186,7 +186,7 @@ button span:hover:after {
   border-color: #dd4b39;
 }
 
-.compose {
+.compose-button {
   color: white;
   background-color: #dd4b39;
   border: 1px solid #ae4553;

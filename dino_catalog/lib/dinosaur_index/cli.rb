@@ -5,7 +5,7 @@ module DinosaurIndex
   class CommandLineInterface
     include Options
 
-    InputFile = Struct.new(:pathname, :dino_attribute_defaults);
+    InputFile = Struct.new(:pathname, :dino_attribute_defaults)
 
     attr_accessor :input_files, :dinosaur_filters, :output_json
 

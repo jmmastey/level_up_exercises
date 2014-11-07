@@ -11,20 +11,29 @@ require "json"
 include DinosaurIndex
 
 catalog = Catalog.new
+
 cli_parser = CommandLineInterface.new(catalog)
 cli_parser.parse!(ARGV)
 
 cli_parser.input_files.each do |file|
-  csvloader = CSVLoader.new(file.pathname, file.dino_attribute_defaults)
-  csvloader.read { |dinosaur| catalog << dinosaur }
+  CSVLoader.new(file.pathname, file.dino_attribute_defaults).read do |dinosaur|
+    catalog << dinosaur
+  end
 end
 
-if cli_parser.output_json
-  puts dino_list.map(&:to_hash).to_json(
-    indent: ' ', space: ' ', object_nl: "\n", array_nl: "\n")
-else
+def output_as_text(catalog)
   catalog.each do |dinosaur|
     puts "--- #{dinosaur} ---"
     puts dinosaur.full_description, "\n"
   end
+end
+
+def output_as_json(catalog)
+  puts catalog
+        .map(&:to_hash)
+        .to_json(indent: ' ', space: ' ', object_nl: "\n", array_nl: "\n")
+end
+
+if cli_parser.output_json then output_as_json(catalog)
+else output_as_text(catalog)
 end

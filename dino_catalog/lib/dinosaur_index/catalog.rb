@@ -1,5 +1,5 @@
 module DinosaurIndex
-  class Catalog 
+  class Catalog
     include Enumerable
 
     attr_accessor :all_dinosaurs, :filters
@@ -17,8 +17,7 @@ module DinosaurIndex
     end
 
     def add_filter(&test_code)
-      @filters << 
-        lambda { |dinosaur| dinosaur.instance_eval(&test_code) }
+      @filters << ->(dinosaur) { dinosaur.instance_eval(&test_code) }
     end
 
     def each

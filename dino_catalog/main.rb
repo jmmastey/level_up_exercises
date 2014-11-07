@@ -34,5 +34,5 @@ end
 if options.key? :json
   catalog.save_json(options[:json])
 else
-  catalog.display
+  catalog.to_s
 end

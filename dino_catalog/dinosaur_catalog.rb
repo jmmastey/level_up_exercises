@@ -23,34 +23,34 @@ class DinosaurCatalog
     @filters << [filter, args] if FILTERS.include?(filter)
   end
 
-  def display
-    pre_output
+  def to_s
+    execute_all_filters
     print_filtered_dinosaurs
   end
 
   def to_a
-    pre_output
+    execute_all_filters
     convert_to_array
+  end
+
+  def to_json
+    to_a.to_json
   end
 
   def save_json(filename = DEFAULT_JSON_FILENAME)
     File.open(filename, "w") do |f|
-      f.write(to_a.to_json)
+      f.write(to_json)
     end
   end
 
   private
 
-  def init_filtered_dinosaurs
+  def reset_filtered_dinosaurs
     @filtered_dinosaurs = @dinosaurs.clone
   end
 
-  def reset_filtered_dinosaurs
-    @filtered_dinosaurs = nil
-  end
-
   def print_filtered_dinosaurs
-    @filtered_dinosaurs.each(&:display)
+    @filtered_dinosaurs.each(&:to_s)
     puts "Displaying #{@filtered_dinosaurs.length} from #{@dinosaurs.length}"
   end
 
@@ -63,17 +63,16 @@ class DinosaurCatalog
   end
 
   def execute_all_filters
+    reset_filtered_dinosaurs
+
     @filters.each do |f|
       execute_filter(*f)
     end
   end
 
-  def pre_output
-    init_filtered_dinosaurs
-    execute_all_filters
-  end
-
   def convert_to_array
-    @filtered_dinosaurs.each_with_object([]) { |e, a| a << e.to_hash }
+    @filtered_dinosaurs.each_with_object([]) do
+      |dinosaur, dinosaurs| dinosaurs << dinosaur.to_hash
+    end
   end
 end

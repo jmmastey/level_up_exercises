@@ -47,7 +47,7 @@ class Dinosaur
     @continent =~ /$#{continent}/i
   end
 
-  def display
+  def to_s
     ATTRS.each do |attr|
       value = send(attr)
       puts format("%-15s: %s", attr.to_s.capitalize, value) unless value.nil?
@@ -57,8 +57,8 @@ class Dinosaur
   end
 
   def to_hash
-    ATTRS.each_with_object({}) do |key, hash|
-      hash[key] = send(attr) || ""
+    ATTRS.each_with_object({}) do |attr, hash|
+      hash[attr] = send(attr) || ""
     end
   end
 end

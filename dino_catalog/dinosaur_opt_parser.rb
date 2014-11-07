@@ -37,7 +37,7 @@ class DinosaurOptParser
     @opt_parser.banner = "./main.rb -f FILE1[,FILE2] [Options]"
   end
 
-  def input_opts
+  def input_options
     section_header('File Input')
 
     @opt_parser.on('-f', '--file FILE1[,FILE2]', Array,
@@ -46,7 +46,7 @@ class DinosaurOptParser
     end
   end
 
-  def filtering_opts
+  def filtering_options
     section_header('Filtering Options')
 
     FILTERING_OPTIONS.each do |filtering_option_row|
@@ -64,7 +64,7 @@ class DinosaurOptParser
     end
   end
 
-  def help_opts
+  def help_options
     section_header('Help')
 
     @opt_parser.on_tail('-h', '--help', "Show available options") do
@@ -75,9 +75,9 @@ class DinosaurOptParser
 
   def set_all_options
     banner
-    input_opts
-    filtering_opts
+    input_options
+    filtering_options
     output_options
-    help_opts
+    help_options
   end
 end

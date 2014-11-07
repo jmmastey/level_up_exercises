@@ -1,7 +1,6 @@
 class Bomb
 
   attr_reader :active, :exploded
-
   alias_method :active?, :active
   alias_method :exploded?, :exploded
   ACTIVATION = 2342
@@ -14,20 +13,34 @@ class Bomb
   end
 
   def activate(attempt)
-    @active = true if attempt == ACTIVATION && !@exploded
+    @active = true if attempt == ACTIVATION
   end
 
   def deactivate(attempt)
-   if attempt  == DEACTIVATION && !@exploded
+    if attempt == DEACTIVATION
        @active = false
-    else
-      @failed_attempts += 1
-      if @failed_attempts == 3
-         @exploded = true
-         @active = false
-      elsif @failed_attempts == 1
-        @active = true
-      end
-    end
-  end
+     else
+    @failed_attempts += 1
+    blah
+ end
 end
+
+#   private
+#   def success
+#     @attempt == DEACTIVATION
+#   end
+
+def blah
+  if @failed_attempts == 3
+      @exploded = true
+      @active = false
+   end
+end
+#   def exploded
+#     @exploded = true if @failed_attempts == 3
+#   end
+
+#   def failure
+#     @attempt < 3
+#   end
+# end

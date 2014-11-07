@@ -1,25 +1,45 @@
-Feature: User logged in sees shipping estimates for address associated with
-         profile
+Feature: Shipping estimates based on user's location
 
-  Happy:
-    
-Feature: Authnd user enters address for shipping estimates overriding profile
-        address
+# Happy: :^D
+Scenario: Destination ZIP code for calculating shipping
+  Given anything
+  When I am viewing the cart item page
+  Then I see a ZIP code entry control
+  And a message "Enter ZIP code for estimated shipping"
 
+Scenario: Destination ZIP code filled in for authenticated users
+  Given I am an authenticated user
+  When I am viewing the cart item page
+  Then I see my registered ZIP code in the ZIP code entry control
 
-Feature: Anon user enters address for shipping estimates
+Scenario: Shipping line item
+  Given I have an order with item subtotal $10
+  When I enter a valid ZIP code in the ZIP code entry control
+  Then I see a shipping line item
 
-  Happy:
-    User enters valid address: Shipping estimates appear and popup offers to 
-    save data (ie register her)
-  Sad:
-    User enters invalid address: No shipping estimates appear and popup offers
-    to save data (ie register her)
-  Bad:
-    User enters ill-formatted address that can't be checked for validity: No
-    shipping estimates appear and popup offers to save data
-    User enters HTML/SQL/Javascript in order to subvert proper application
-    operation or affect display of deliberatewly misleading rendered content by
-    incorporation w/in the HTML document: No such effects are produced
+Scenario: Override profile ZIP code
+  Given I am an authenticated user
+  And I have an order with item subtotal $10
+  And I see my registered ZIP code in the ZIP code entry control
+  When I enter an alternative valid ZIP code in the ZIP code entry control
+  Then I see an updated shipping line item
+   
+# Sad: ;^(
+
+Scenario: Enter invalid ZIP code
+  Given I have an order with item subtotal $20 in my cart
+  When I enter an invalid ZIP code in the ZIP code entry control
+  Then I see an invalid ZIP code warning
+  And I do not see a shipping line item
+
+# Bad: >:^(
+
+Scenario: Deliberately over-length ZIP
+  Given I have an ordert with item subtotal $20 in my cart
+  And I craft a cart request with a 1MB ZIP code value
+  When I issue the cart request
+  Then I see a general error page
+  And I do not see any of the ZIP code value echoed in page content
+  And no change is made to my cart
 
 

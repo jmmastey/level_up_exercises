@@ -66,23 +66,32 @@ Scenario: Sales Tax line item
   Given I have an order with item subtotal $10
   When the order has sales tax rate 5%
   Then the cart shows a tax line item
-  And the line item has item prce $0.05
-
-Scenario: Destination address for calculating shipping
-  Given I am viewing the cart item page
-  ..?
-
-Scenario: Shipping line item
-  
+  And the line item has item price $0.05
 
 Scenario: Item subtotal
+  Given I have an order with item subtotal $20
+  When I view the cart item page
+  I see an item subtotal $20
 
 Scenario: Item subtotal with coupons
+  Given I have an order with item subtotal $20 excluding coupons
+  And I have an unconditional order-level $5-off coupon in my cart
+  When I view the cart item page
+  I see an item subtotal $15
 
 Scenario: Total order price
+  Given I have an order with item subtotal $20
+  And I have shipping cost $5
+  And I have 5% tax rate
+  And I have $2 shipping
+  When I view the cart item page
+  I see an order total price $23
 
 Scenario: Checkout button
-
+  Given I have an order with item subtotal $5
+  And I am viewing the cart item page
+  When I press the checkout button
+  I see the order payment page:w
 
 # Sad paths: ;-(
 
@@ -93,15 +102,24 @@ Scenario: Line items for out-of-stock item
   And the line item shows an out-of-stock warning
   And the line item shows an expected delivery date
 
-Happy
-  Line for available item with same price appears normally showing name, price, and quantity and
-  contributes to cart total
-Sad:
-  Line for item gone out-of-stock is anunciated with "out of stock" warning and
-  contributes to cart total
-  Line item for item with changed proce is anunciated with "price change"
-  warning
-  Line for discontinued items is anunciated with "discontinued" warning and does
-  not contribute to cart total
-Bad:
+Scenario: Out-of-stock line item prices
+  Given I have 1 available item priced $10 in my cart
+  When I add 1 out-of-stock item priced $10
+  Then I see 2 line items for 2 items
+  And I see item subtotal $20
 
+Scenario: Price change for item already in cart
+  Given I have 1 available item priced $20 in my cart
+  And the item price changes to $25
+  When I visit the cart item page
+  Then the line item shows a price-change warning
+  And the line item price is $25
+
+Scenario: Item in cart is discontinue prior to purchase
+  Given I have 1 available item priced $3 in my cart
+  And the item is discontinued and no longer available
+  When I visit the cart item page
+  Then the line item shows a discontinued-item warning
+  And the line item price is $0
+
+# Bad: >:^(

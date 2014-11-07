@@ -51,7 +51,6 @@ module FlightStats
     end
 
     def execute(url)
-      puts "execute!"
       json = RestClient::Request.execute(method:     :get,
                                   url:        url,
                                   headers:    HEADERS,

@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Watch, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "when initialized with an item and order" do
+    subject(:valid_watch) { FactoryGirl.build(:watch) }
+
+    it { is_expected.to be_valid }
+  end
 end

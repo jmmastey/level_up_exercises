@@ -71,7 +71,7 @@ class DinosaurParserAndSearch
     end
   end
 
-  def as_json
+  def to_json
     hash_json ||= {}
     i = 0
     @search_list_dinosaurs.each do |dinosaur|

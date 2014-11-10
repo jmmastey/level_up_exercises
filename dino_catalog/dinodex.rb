@@ -8,29 +8,28 @@ class DinoDex
   attr_accessor :data
 
   def initialize
-    @data = []
-    @data += DinoDataParser.new('dinodex.csv').dinos
-    @data += DinoDataParserAfrican.new('african_dinosaur_export.csv').dinos
+    @data =  DinoDataParser.parse('dinodex.csv')
+    @data += DinoDataParser.parse_african('african_dinosaur_export.csv')
   end
 
   def all
-    QueryChainer.new(@data)
+    QueryChainer.new(data)
   end
 
   def where(*args)
-    QueryChainer.new(@data).where(*args)
+    QueryChainer.new(data).where(*args)
   end
 
   def limit(args)
-    QueryChainer.new(@data).limit(args)
+    QueryChainer.new(data).limit(args)
   end
 
   def sort(args)
-    QueryChainer.new(@data).sort(args)
+    QueryChainer.new(data).sort(args)
   end
 
   def carnivores
-    QueryChainer.new(@data).where(diet: %w(Carnivore Insectivore Piscivore))
+    QueryChainer.new(data).where(diet: %w(Carnivore Insectivore Piscivore))
   end
 
   def to_json

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104175050) do
+ActiveRecord::Schema.define(version: 20141110002944) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20141104175050) do
     t.string   "image"
     t.string   "description"
   end
+
+  create_table "scrape_times", force: true do |t|
+    t.string   "source"
+    t.datetime "last_scrape_at"
+    t.time     "inter_scrape_delay"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scrape_times", ["source"], name: "index_scrape_times_on_source", unique: true
 
   create_table "showings", force: true do |t|
     t.integer  "event_id"

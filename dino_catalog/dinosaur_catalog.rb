@@ -4,12 +4,10 @@ require 'json'
 class DinosaurParserAndSearch
   attr_accessor :result_dinosaurs
   def initialize
-    @csv_list_dinosaurs = []
     @result_dinosaurs = []
     CSV.foreach('dinodex.csv', :headers => true) do |row|
-      @csv_list_dinosaurs << row.to_hash
+      @result_dinosaurs << row.to_hash
     end
-    @result_dinosaurs =  @csv_list_dinosaurs
   end
 
   def get_name

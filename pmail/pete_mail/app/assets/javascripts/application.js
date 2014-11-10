@@ -41,11 +41,13 @@ function setup_popups() {
 
 	// Child
 	$( ".has-popup" ).click( function() {
+		$( this ).find( ".tooltip" ).remove();
 		$( this ).find(".popup").toggle();
 	});
 
 	// Sibling
 	$( ".has-popup-sibling" ).click( function() {
+		$( this ).parent().find( ".tooltip" ).remove();
 		$( this ).find("~.popup").toggle();
 	});
 }
@@ -92,10 +94,8 @@ function setup_event_handlers() {
 
 	// Mail Selection: Unstarred
 	$( ".mail-selection li.unstarred" ).click( function() {
-		$( ".mail-items .star" ).each( function() {
-			if (!$( this ).hasClass("starred")) {
-				$( this ).parent().find(".checkbox input").prop('checked', true);
-			}
+		$( ".mail-items .star" ).not( ".starred" ).each( function() {
+			$( this ).parent().find(".checkbox input").prop('checked', true);
 		});
 		$( ".mail-selection .options" ).hide();
 	});

@@ -16,5 +16,4 @@ describe ConversionTest do
   it 'creates a sample of data points' do
     expect(@conversion_test.sample).to be_an_instance_of(Sample)
   end
-
 end

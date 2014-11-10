@@ -2,139 +2,40 @@
 <html lang="en">
   <head>
     <title>pInbox - rcowan@pmail.com</title>
+
     <!-- include Yahoo's Pure, a bootstrap alternative -->
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <!-- include custom styles, builds upon Pure -->
+    <link rel="stylesheet" href="styles/pmail.css">
+
     <!-- font icon library -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
     <!-- jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- include custom JS, builds upon jQuery -->
+    <script src="scripts/pmail.js"></script>
 
-    <script type="text/javascript">
-      function showUserProfile() {
-        $("#popup-user-profile").show();
-      }
-
-      function hideUserProfile() {
-        $("#popup-user-profile").hide();
-      }
-    </script>
-
-    <style type="text/css">
-      body {
-        font-size: 13px;
-      }
-
-      hr {
-        color: #dddddd;
-      }
-
-      .pure-button-secondary {
-        background-color: #e9e9e9;
-        border: 1px solid #cccccc;
-        color: #000000;
-      }
-
-      .pure-menu.pure-menu-open {
-        border: none;
-        text-align: left;
-      }
-
-      .pure-menu li a {
-        color: #000000;
-        padding: 5px 0px;
-      }
-
-      #header-bar {
-        background-color: #eeeeee;
-        border-bottom: 1px solid #dddddd;
-        padding: 8px;
-        position: relative;
-      }
-
-      #tool-bar {
-        border-bottom: 1px solid #dddddd;
-        padding: 8px;
-        position: relative;
-      }
-
-      .mail-item {
-        background-color: #eeeeee;
-        border-bottom: 1px solid #dddddd;
-        padding: 10px;
-      }
-
-      .mail-item-action {
-
-      }
-
-      .mail-item-detail {
-
-      }
-
-      .mail-item-date {
-        text-align: right;
-      }
-
-      .mail-item-check {
-        padding: 0px 5px;
-      }
-
-      .mail-item-star {
-        padding: 0px 5px;
-      }
-
-      .message-snippet {
-        color: #999999;
-      }
-
-      #footer {
-        color: #666666;
-        font-size: 12px;
-        padding: 25px 8px 8px 8px;
-      }
-
-      #popup-user-profile {
-        background-color: #ffffff;
-        border: 1px solid #bbbbbb;
-        display: none;
-        font-size: 13px;
-        padding: 0px;
-        position: absolute;
-        right: 15px;
-        top: 50px;
-        width: 250px;
-      }
-
-      .valign-middle {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      .left-margin {
-        margin-left:20px;
-      }
-    </style>
   </head>
   <body>
     <!-- header bar; logo, search, user menu -->
     <div id="header-bar" class="pure-g">
       <div class="pure-u-1-8">
         <div class="valign-middle left-margin">
-          <h2>pMail</h2>
+          <h1>pMail</h1>
         </div>
       </div>
       <div class="pure-u-3-4">
         <form class="pure-form">
           <fieldset>
-            <input type="text" id="search" name="search" size="60">
+            <input type="text" id="search-bar" name="search-bar">
             <button type="submit" class="pure-button pure-button-primary"><i class="fa fa-search"></i></button>
           </fieldset>
         </form>
       </div>
-      <div id="user-menu" class="pure-u-1-8">
-        <div class="valign-middle" style="padding-left:15px;">
-          <i class="fa fa-th"></i>
+      <div id="user-menu-container" class="pure-u-1-8">
+        <div id="user-menu" class="valign-middle">
+          <a href="#"><i class="fa fa-th"></i></a>
           <a href="#" onmouseover="showUserProfile();" onmouseout="hideUserProfile();">rcowan@enova.com <i class="fa fa-caret-down"></i></a>
         </div>
       </div>
@@ -142,14 +43,14 @@
 
     <!-- tool bar; Mail dropdown, actions, paginator, settings -->
     <div id="tool-bar" class="pure-g">
-      <div class="pure-u-1-8">
+      <div id="mail-context" class="pure-u-1-8">
         <div class="valign-middle left-margin">
-          <h3>Mail <i class="fa fa-caret-down"></i></h3>
+          <h2>Mail <i class="fa fa-caret-down"></i></h2>
         </div>
       </div>
       <div id="settings-menu" class="pure-u-7-8">
-        <span style="float:right;">
-          1-12 of 12
+        <span class="right-align">
+          <strong>1-12</strong> of <strong>12</strong>
           <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-chevron-left"></i></button>
           <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-chevron-right"></i></button>
           <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-gear"></i> <i class="fa fa-caret-down"></i></button>
@@ -163,9 +64,9 @@
 
     <!-- mail content; mailbox on left, mail on right -->
     <div id="mail-wrapper" class="pure-g">
-      <div id="mail-action" class="pure-u-1-8">
-        <div class="left-margin" style="padding:8px;">
-          <button type="submit" class="pure-button pure-button-primary">Compose</button>
+      <div id="mail-action-container" class="pure-u-1-8">
+        <div id="mail-action" class="left-margin">
+          <button type="submit" class="pure-button pure-button-compose">Compose</button>
 
           <div class="pure-menu pure-menu-open">
             <ul>
@@ -309,31 +210,27 @@
       </div>
     </div> 
 
-    <div id="popup-user-profile">
-      <div style="padding:15px 20px;">
-        <div>
-          <strong>Ryan Cowan</strong><br />
-          <span style="color:#666666;">rcowan@pmail.com</span><br />
-          <a href="#">Account</a> - <a href="#">Privacy</a>
+    <div id="popup-user-profile-container">
+      <div id="popup-user-profile">
+        <strong>Ryan Cowan</strong><br />
+        <span class="popup-email">rcowan@pmail.com</span><br />
+        <a href="#">Account</a> - <a href="#">Privacy</a>
+      </div>
+
+      <div id="profile-summary-container">
+        <div id="profile-summary">
+          <img src="images/cowan-headshot.png" width="48" height="48" class="profile-photo" />
+
+          Ryan Cowan<br />
+          <span class="popup-email">rcowan@pmail.com</span>
+
+          <br class="clear-both" />
         </div>
       </div>
 
-      <div style="background-color:#e9e9e9; border-bottom: 1px solid #bbbbbb; border-top: 1px solid #bbbbbb;">
-        <div style="padding:10px 20px;">
-          <img src="images/cowan-headshot.png" width="48" height="48" style="float:left; padding:0px 15px 0px 0px" />
-
-          <div>
-            Ryan Cowan<br />
-            <span style="color:#666666;">rcowan@pmail.com</span>
-          </div>
-
-          <br style="clear:both" />
-        </div>
-      </div>
-
-      <div>
-        <div style="background-color:#e9e9e9; padding:10px 20px;">
-          <span style="float:right;">
+      <div id="profile-action-container">
+        <div id="profile-action">
+          <span class="right-align">
             <button type="submit" class="pure-button pure-button-secondary">Sign Out</button>
           </span>
 

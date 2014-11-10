@@ -52,16 +52,19 @@ class QueryChainer
   end
 
   def match?(data_val, arg_val)
-    arg_val = { '==' => arg_val } unless arg_val.is_a? Hash
-    operation(data_val, arg_val)
+    if arg_val.is_a? Hash
+      operation(data_val, arg_val)
+    elsif arg_val.is_a? Array
+      arg_val.map { |v| operation(data_val, '==' => v) }.include?(true)
+    else
+      operation(data_val, '==' => arg_val)
+    end
   end
 
   def operation(data_val, arg_val)
-    accepted_operators = ['<', '>', '>=', '<=', '==']
     operator = arg_val.keys[0]
 
-    return false unless data_val && accepted_operators.include?(operator)
-
+    return false unless data_val && ACCEPTED_OPERATORS.include?(operator)
     comparator = arg_val[operator]
     data_val.send(operator, comparator)
   end
@@ -85,4 +88,6 @@ class QueryChainer
       key.to_s.delete("@")
     end
   end
+
+  ACCEPTED_OPERATORS = ['<', '>', '>=', '<=', '==']
 end

@@ -1,4 +1,3 @@
-require 'csv'
 require 'json'
 
 require_relative 'query_chainer.rb'
@@ -28,6 +27,10 @@ class DinoDex
 
   def sort(args)
     QueryChainer.new(@data).sort(args)
+  end
+
+  def carnivores
+    QueryChainer.new(@data).where(diet: %w(Carnivore Insectivore Piscivore))
   end
 
   def to_json

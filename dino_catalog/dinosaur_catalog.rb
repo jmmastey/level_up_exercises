@@ -62,7 +62,7 @@ class DinosaurParserAndSearch
     idx
   end
   def get_description(name)
-    @search_list_dinosaurs.each do |dinosaur|
+    @result_dinosaurs.each do |dinosaur|
       if dinosaur["NAME"].downcase == name.downcase
         dinosaur.each do |key, value|
           puts key + " => " + value unless value == nil
@@ -71,14 +71,19 @@ class DinosaurParserAndSearch
     end
   end
 
+  def prepare_hash(dinosaur)
+    dino_hash = {}
+    dinosaur.each do |key, value|
+      dino_hash[key] = value
+    end
+    dino_hash
+  end
+
   def to_json
     hash_json ||= {}
     i = 0
-    @search_list_dinosaurs.each do |dinosaur|
-      dinosaur.each do |key, value|
-        hash_json[i] ||= {}
-        hash_json[i][key] = value
-      end
+    @result_dinosaurs.each do |dinosaur|
+      hash_json[i] = prepare_hash(dinosaur)
       i += 1
     end
     hash_json.to_json
@@ -108,3 +113,4 @@ options2['compare'] = "equal"
 
 result1 = dinosaur1.smart_search_dinosaur(options2)
 p result1.get_name.inspect
+p result1.to_json

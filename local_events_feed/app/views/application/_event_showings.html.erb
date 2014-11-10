@@ -25,13 +25,13 @@
 	</table>
   </div>
 
-  <div class="nav">
+  <div class="right-panel">
 	<% if @event.image.present? %>
-    <div class="event-image-div">
+    <div class="image-box">
 	  <img src=<%= @event.image %> />
-	<div class="event-description">
-	  <%= @event.description %>
 	</div>
+	<div class="description">
+	  <%= @event.description %>
 	</div>
 	<% end %>
 

@@ -5,7 +5,6 @@ describe DataPoint do
     @data_point = DataPoint.new({"date"=>"2014-03-20", "cohort"=>"B", "result"=>0})
   end
 
-
   it 'has a date' do
     expect(@data_point.date).to eq("2014-03-20")
   end

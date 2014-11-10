@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>pMail</title>
+    <title>pInbox - rcowan@pmail.com</title>
     <!-- include Yahoo's Pure, a bootstrap alternative -->
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <!-- font icon library -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <style type="text/css">
       body {
         font-size: 14px;
+      }
+
+      hr {
+        color: #dddddd;
       }
 
       .pure-button-secondary {
@@ -60,6 +66,12 @@
         color: #999999;
       }
 
+      #footer {
+        color: #666666;
+        font-size: 12px;
+        padding: 25px 8px 8px 8px;
+      }
+
       .valign-middle {
         position: absolute;
         top: 50%;
@@ -83,13 +95,13 @@
         <form class="pure-form">
           <fieldset>
             <input type="text" id="search" name="search" size="60">
-            <button type="submit" class="pure-button pure-button-primary">MAG</button>
+            <button type="submit" class="pure-button pure-button-primary"><i class="fa fa-search"></i></button>
           </fieldset>
         </form>
       </div>
       <div id="user-menu" class="pure-u-1-8">
         <div class="valign-middle">
-          [::] rcowan@enova.com
+          <i class="fa fa-th"></i> rcowan@enova.com
         </div>
       </div>
     </div>
@@ -98,20 +110,20 @@
     <div id="tool-bar" class="pure-g">
       <div class="pure-u-1-8">
         <div class="valign-middle left-margin">
-          Mail v
+          <h3>Mail <i class="fa fa-caret-down"></i></h3>
         </div>
       </div>
       <div id="settings-menu" class="pure-u-7-8">
         <span style="float:right;">
           1-12 of 12
-          <button type="submit" class="pure-button pure-button-secondary"><</button>
-          <button type="submit" class="pure-button pure-button-secondary">></button>
-          <button type="submit" class="pure-button pure-button-secondary">GEAR</button>
+          <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-chevron-left"></i></button>
+          <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-chevron-right"></i></button>
+          <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-gear"></i></button>
         </span>
 
         <button type="submit" class="pure-button pure-button-secondary"><input id="remember" type="checkbox"></button>
-        <button type="submit" class="pure-button pure-button-secondary">REF</button>
-        <button type="submit" class="pure-button pure-button-secondary">More v</button>
+        <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-refresh"></i></button>
+        <button type="submit" class="pure-button pure-button-secondary">More <i class="fa fa-caret-down"></i></button>
       </div>
     </div>
 
@@ -127,6 +139,11 @@
               <li><a href="#">Starred</a></li>
               <li><a href="#">Sent Mail</a></li>
               <li><a href="#">Drafts</a></li>
+            </ul>
+            <hr />
+            <ul>
+              <li><a href="#">Important</a></li>
+              <li><a href="#">All Mail</a></li>
               <li><a href="#">Spam</a></li>
               <li><a href="#">Trash</a></li>
             </ul>
@@ -139,7 +156,7 @@
           <div class="mail-item pure-g">
             <div class="mail-item-action pure-u-1-4">
               <input id="check-01" type="checkbox">
-              <input id="star-01" type="checkbox">
+              <i class="fa fa-star-o"></i>
               Peralta, Jake, Ryan (155)
             </div>
             <div class="mail-item-detail pure-u-5-8">
@@ -156,7 +173,58 @@
           <div class="mail-item pure-g">
             <div class="mail-item-action pure-u-1-4">
               <input id="check-02" type="checkbox">
-              <input id="star-02" type="checkbox">
+              <i class="fa fa-star-o"></i>
+              Charles, Terry, Gina (5)
+            </div>
+            <div class="mail-item-detail pure-u-5-8">
+              Weekly restaurant review blog
+              <span class="message-snippet">
+                - Sed sem mauris, fermentum eu neque sed, egestas lacinia odio
+              </span>
+            </div>
+            <div class="mail-item-date pure-u-1-8">
+              Nov 10
+            </div>
+          </div>
+
+          <div class="mail-item pure-g">
+            <div class="mail-item-action pure-u-1-4">
+              <input id="check-03" type="checkbox">
+              <i class="fa fa-star-o"></i>
+              Santiago, Amy
+            </div>
+            <div class="mail-item-detail pure-u-5-8">
+              Professional attire in a professional environment
+              <span class="message-snippet">
+                - Praesent congue dui ac tincidunt interdum. Phasellus
+              </span>
+            </div>
+            <div class="mail-item-date pure-u-1-8">
+              Nov 8
+            </div>
+          </div>
+
+          <div class="mail-item pure-g">
+            <div class="mail-item-action pure-u-1-4">
+              <input id="check-01" type="checkbox">
+              <i class="fa fa-star-o"></i>
+              Peralta, Jake, Ryan (155)
+            </div>
+            <div class="mail-item-detail pure-u-5-8">
+              Staff meeting at 10am, Monday
+              <span class="message-snippet">
+                - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+              </span>
+            </div>
+            <div class="mail-item-date pure-u-1-8">
+              Nov 8
+            </div>
+          </div>
+
+          <div class="mail-item pure-g">
+            <div class="mail-item-action pure-u-1-4">
+              <input id="check-02" type="checkbox">
+              <i class="fa fa-star-o"></i>
               Charles, Terry, Gina (5)
             </div>
             <div class="mail-item-detail pure-u-5-8">
@@ -173,7 +241,7 @@
           <div class="mail-item pure-g">
             <div class="mail-item-action pure-u-1-4">
               <input id="check-03" type="checkbox">
-              <input id="star-03" type="checkbox">
+              <i class="fa fa-star-o"></i>
               Santiago, Amy
             </div>
             <div class="mail-item-detail pure-u-5-8">
@@ -187,6 +255,22 @@
             </div>
           </div>
           <!-- end sample mail -->
+        </div>
+
+        <!-- footer -->
+        <div id="footer" class="pure-g">
+          <div align="left" class="pure-u-1-4">
+            1% full<br />
+            Using 0.30 GB of your 30 GB
+          </div>
+          <div align="center" class="pure-u-1-2">
+            &copy;2014 Google - <a href="#">Terms of Service</a> - <a href="#">Privacy Policy</a> - <a href="#">Program Policies</a><br />
+            Powered by [enova]
+          </div>
+          <div align="right" class="pure-u-1-4">
+            Last account activity: 1 hour ago<br />
+            <a href="#">Details</a>
+          </div>
         </div>
       </div>
     </div> 

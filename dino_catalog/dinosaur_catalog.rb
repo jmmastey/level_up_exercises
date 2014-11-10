@@ -39,20 +39,16 @@ class DinosaurParserAndSearch
       dinosaur.each do |key, value|
         if options.has_key?(key) && options[key]
           if symbol == "greater" && options[key] <= value.to_i
-            @result_dinosaurs.delete_at idx
-            idx -= 1
+            idx = reset_resultant(idx)
           end
           if symbol == "lesser" && options[key] >= value.to_i
-            @result_dinosaurs.delete_at idx
-            idx -= 1
+            idx = reset_resultant(idx)
           end
           if symbol == "equal"
             if options[key].is_a?(Array) && !options[key].include?(dinosaur[key].downcase)
-              @result_dinosaurs.delete_at idx
-              idx -= 1
+              idx = reset_resultant(idx)
             elsif options[key] != dinosaur[key].downcase
-              @result_dinosaurs.delete_at idx
-              idx -= 1
+              idx = reset_resultant(idx)
             end
           end
         end
@@ -60,6 +56,11 @@ class DinosaurParserAndSearch
     end
   end
 
+  def reset_resultant(idx)
+    @result_dinosaurs.delete_at idx
+    idx -= 1
+    idx
+  end
   def get_description(name)
     @search_list_dinosaurs.each do |dinosaur|
       if dinosaur["NAME"].downcase == name.downcase

@@ -26,16 +26,15 @@ class Triangle
     angles = calculate_angles(side1, side2, side3)
     puts 'The angles of this triangle are ' + angles.join(',')
 
-    puts 'This triangle is also a right triangle!' if angles.include? 90
+    puts 'This triangle is also a right triangle!' if (angles.include? 90)
     puts ''
   end
 
   def calculate_angles(a, b, c)
-    results = []
-    [[b, c, a], [a, c, b], [a, b, c]].each do |combo|
-      results << trig_function(combo[0], combo[1], combo[2])
-    end
-    results
+    angle_a = arc_cosine_to_deg(b, c, a)
+    angle_b = arc_cosine_to_deg(a, c, b)
+    angle_c = arc_cosine_to_deg(a, b, c)
+    [angle_a, angle_b, angle_c]
   end
 
   private
@@ -44,9 +43,9 @@ class Triangle
     (rads * 180 / Math::PI).round
   end
 
-  def trig_function(a, b, c)
+  def arc_cosine_to_deg(a, b, c)
     radians_to_degrees(Math.acos(
-      (a**2 + b**2 - c**2) / (2.0 * a * b),
+      (a**2 + b**2 - c**2) / (2.0 * a * b)
     ))
   end
 end
@@ -59,3 +58,4 @@ triangles.each do |sides|
   tri = Triangle.new(*sides)
   tri.recite_facts
 end
+

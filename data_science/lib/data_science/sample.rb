@@ -13,4 +13,12 @@ class Sample
       @data_points << data_point
     end
   end
+
+  def sample_size
+    @data_points.size
+  end
+
+  def conversions(group)
+    @data_points.select { |visitor| visitor.cohort == group && visitor.result == 1 }.size
+  end
 end

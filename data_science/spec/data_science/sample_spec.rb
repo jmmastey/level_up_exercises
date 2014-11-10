@@ -40,7 +40,15 @@ describe Sample do
     end
 
     it 'calculates the total sample size' do
+      expect(@sample.sample_size).to eq(10)
+    end
 
+    it 'calculates the number of conversions for the A group' do
+      expect(@sample.conversions("A")).to eq(3)
+    end
+
+    it 'calculates the number of conversions for the B group' do
+      expect(@sample.conversions("B")).to eq(2)
     end
   end
 end

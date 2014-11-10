@@ -6,9 +6,22 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <!-- font icon library -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      function showUserProfile() {
+        $("#popup-user-profile").show();
+      }
+
+      function hideUserProfile() {
+        $("#popup-user-profile").hide();
+      }
+    </script>
+
     <style type="text/css">
       body {
-        font-size: 14px;
+        font-size: 13px;
       }
 
       hr {
@@ -62,6 +75,14 @@
         text-align: right;
       }
 
+      .mail-item-check {
+        padding: 0px 5px;
+      }
+
+      .mail-item-star {
+        padding: 0px 5px;
+      }
+
       .message-snippet {
         color: #999999;
       }
@@ -70,6 +91,18 @@
         color: #666666;
         font-size: 12px;
         padding: 25px 8px 8px 8px;
+      }
+
+      #popup-user-profile {
+        background-color: #ffffff;
+        border: 1px solid #bbbbbb;
+        display: none;
+        font-size: 13px;
+        padding: 0px;
+        position: absolute;
+        right: 15px;
+        top: 50px;
+        width: 250px;
       }
 
       .valign-middle {
@@ -88,7 +121,7 @@
     <div id="header-bar" class="pure-g">
       <div class="pure-u-1-8">
         <div class="valign-middle left-margin">
-          pMail
+          <h2>pMail</h2>
         </div>
       </div>
       <div class="pure-u-3-4">
@@ -100,8 +133,9 @@
         </form>
       </div>
       <div id="user-menu" class="pure-u-1-8">
-        <div class="valign-middle">
-          <i class="fa fa-th"></i> rcowan@enova.com
+        <div class="valign-middle" style="padding-left:15px;">
+          <i class="fa fa-th"></i>
+          <a href="#" onmouseover="showUserProfile();" onmouseout="hideUserProfile();">rcowan@enova.com <i class="fa fa-caret-down"></i></a>
         </div>
       </div>
     </div>
@@ -118,7 +152,7 @@
           1-12 of 12
           <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-chevron-left"></i></button>
           <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-chevron-right"></i></button>
-          <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-gear"></i></button>
+          <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-gear"></i> <i class="fa fa-caret-down"></i></button>
         </span>
 
         <button type="submit" class="pure-button pure-button-secondary"><input id="remember" type="checkbox"></button>
@@ -155,8 +189,8 @@
           <!-- sample mail for the inbox -->
           <div class="mail-item pure-g">
             <div class="mail-item-action pure-u-1-4">
-              <input id="check-01" type="checkbox">
-              <i class="fa fa-star-o"></i>
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
               Peralta, Jake, Ryan (155)
             </div>
             <div class="mail-item-detail pure-u-5-8">
@@ -172,8 +206,8 @@
 
           <div class="mail-item pure-g">
             <div class="mail-item-action pure-u-1-4">
-              <input id="check-02" type="checkbox">
-              <i class="fa fa-star-o"></i>
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
               Charles, Terry, Gina (5)
             </div>
             <div class="mail-item-detail pure-u-5-8">
@@ -189,8 +223,8 @@
 
           <div class="mail-item pure-g">
             <div class="mail-item-action pure-u-1-4">
-              <input id="check-03" type="checkbox">
-              <i class="fa fa-star-o"></i>
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
               Santiago, Amy
             </div>
             <div class="mail-item-detail pure-u-5-8">
@@ -206,8 +240,8 @@
 
           <div class="mail-item pure-g">
             <div class="mail-item-action pure-u-1-4">
-              <input id="check-01" type="checkbox">
-              <i class="fa fa-star-o"></i>
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
               Peralta, Jake, Ryan (155)
             </div>
             <div class="mail-item-detail pure-u-5-8">
@@ -223,8 +257,8 @@
 
           <div class="mail-item pure-g">
             <div class="mail-item-action pure-u-1-4">
-              <input id="check-02" type="checkbox">
-              <i class="fa fa-star-o"></i>
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
               Charles, Terry, Gina (5)
             </div>
             <div class="mail-item-detail pure-u-5-8">
@@ -240,8 +274,8 @@
 
           <div class="mail-item pure-g">
             <div class="mail-item-action pure-u-1-4">
-              <input id="check-03" type="checkbox">
-              <i class="fa fa-star-o"></i>
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
               Santiago, Amy
             </div>
             <div class="mail-item-detail pure-u-5-8">
@@ -274,5 +308,38 @@
         </div>
       </div>
     </div> 
+
+    <div id="popup-user-profile">
+      <div style="padding:15px 20px;">
+        <div>
+          <strong>Ryan Cowan</strong><br />
+          <span style="color:#666666;">rcowan@pmail.com</span><br />
+          <a href="#">Account</a> - <a href="#">Privacy</a>
+        </div>
+      </div>
+
+      <div style="background-color:#e9e9e9; border-bottom: 1px solid #bbbbbb; border-top: 1px solid #bbbbbb;">
+        <div style="padding:10px 20px;">
+          <img src="images/cowan-headshot.png" width="48" height="48" style="float:left; padding:0px 15px 0px 0px" />
+
+          <div>
+            Ryan Cowan<br />
+            <span style="color:#666666;">rcowan@pmail.com</span>
+          </div>
+
+          <br style="clear:both" />
+        </div>
+      </div>
+
+      <div>
+        <div style="background-color:#e9e9e9; padding:10px 20px;">
+          <span style="float:right;">
+            <button type="submit" class="pure-button pure-button-secondary">Sign Out</button>
+          </span>
+
+          <button type="submit" class="pure-button pure-button-secondary">Add Account</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

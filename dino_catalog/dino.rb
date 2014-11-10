@@ -7,7 +7,7 @@ class Dinosaur
     @period        = dino_hash[:period]
     @continent     = dino_hash[:continent]
     @diet          = dino_hash[:diet]
-    @weight_in_lbs = dino_hash[:weight_in_lbs]
+    @weight_in_lbs = dino_hash[:weight_in_lbs].to_i if dino_hash[:weight_in_lbs]
     @walking       = dino_hash[:walking]
     @description   = dino_hash[:description]
   end

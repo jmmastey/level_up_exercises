@@ -4,11 +4,11 @@ Feature: Default activation codes
   So I don't have to think up and remember new ones nor initially key them in
 
 Scenario: Default arming code is 1234
-  Given the bomb is not started
-  When I start the bomb
+  Given a new bomb session
+  When view the bomb controls
   Then I see the arming code 1234
 
 Scenario: Default disarming code is 0000
-  Given the bomb is not started
-  When I start the bomb
+  Given a new bomb session
+  When I view the bomb controls
   Then I see the disarming code 0000

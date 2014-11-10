@@ -25,14 +25,14 @@ describe Supervillian::Bomb do
 
   let(:locked_bomb) do
     locked_bomb = configured_bomb
-    locked_bomb.lock!
+    locked_bomb.lock
     locked_bomb
   end
 
   let(:armed_bomb) do
     armed_bomb = locked_bomb
     armed_bomb.delay = 3
-    configured_bomb.arm!(REGISTERED_ARMING_CODE)
+    configured_bomb.arm(REGISTERED_ARMING_CODE)
     armed_bomb
   end
 
@@ -93,13 +93,13 @@ describe Supervillian::Bomb do
     end
 
     it "raises error on attempt to arm with wrong arming code" do
-      expect { locked_bomb.arm!(UNREGISTERED_ARMING_CODE) }.to \
+      expect { locked_bomb.arm(UNREGISTERED_ARMING_CODE) }.to \
         raise_error(Supervillian::WrongActivationCodeError)
     end
 
     it "does not arm using wrong arming code" do
       swallow_bomb_error do
-        locked_bomb.arm!(UNREGISTERED_DISARMING_CODE)
+        locked_bomb.arm(UNREGISTERED_DISARMING_CODE)
       end
       expect(locked_bomb.armed).to be_falsey
     end
@@ -107,18 +107,18 @@ describe Supervillian::Bomb do
 
   context "when bomb is armed it" do
     it "disarms using the registered disarming code" do
-      armed_bomb.disarm!(REGISTERED_DISARMING_CODE)
+      armed_bomb.disarm(REGISTERED_DISARMING_CODE)
       expect(armed_bomb.armed).to be_falsey
     end
 
     it "raises error disarming with wrong disarming code" do
-      expect { armed_bomb.disarm!(UNREGISTERED_ARMING_CODE) }.to \
+      expect { armed_bomb.disarm(UNREGISTERED_ARMING_CODE) }.to \
         raise_error(Supervillian::WrongActivationCodeError)
     end
 
     it "does not disarm using wrong disarming code" do
       swallow_bomb_error do
-        armed_bomb.disarm!(UNREGISTERED_ARMING_CODE)
+        armed_bomb.disarm(UNREGISTERED_ARMING_CODE)
       end
       expect(armed_bomb.armed).to be_truthy
     end
@@ -150,7 +150,7 @@ describe Supervillian::Bomb do
     it "explodes on three failed disarming attempts" do
       3.times do
         swallow_bomb_error do
-          armed_bomb.disarm!(UNREGISTERED_ARMING_CODE)
+          armed_bomb.disarm(UNREGISTERED_ARMING_CODE)
         end
       end
       expect(armed_bomb.exploded?).to be_truthy

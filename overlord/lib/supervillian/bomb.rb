@@ -10,7 +10,8 @@ module Supervillian
     DEFAULT_DISARMING_CODE = "0000"
     DEFAULT_DELAY = 10
 
-    attr_reader :arming_code, :disarming_code, :delay, :armed, :locked
+    attr_reader :armed, :locked
+    attr_accessor :arming_code, :disarming_code, :delay
 
     def initialize(arming_code = DEFAULT_ARMING_CODE,
                    disarming_code = DEFAULT_DISARMING_CODE,
@@ -20,18 +21,18 @@ module Supervillian
       @locked = @armed = @exploded = false
     end
 
-    def lock!
+    def lock
       check_exploded
       @locked = true
     end
 
     def arming_code=(code)
-      check_if_able_to_set_activation_code(code)
+      error_if_codes_locked(code)
       @arming_code = code
     end
 
     def disarming_code=(code)
-      check_if_able_to_set_activation_code(code)
+      error_if_codes_locked(code)
       @disarming_code = code
     end
 
@@ -45,16 +46,16 @@ module Supervillian
       armed ? (delay - Time.now.to_i + @started_countdown) : delay
     end
 
-    def arm!(code)
+    def arm(code)
       check_exploded
       raise_error(InvalidBombStateError) unless locked && !armed
       raise_error(WrongActivationCodeError) unless code == arming_code
       @disarm_retry_count = 0
-      do_arm
+      setup_armed_state
     end
 
-    def disarm!(code)
-      disarm(code)
+    def disarm(code)
+      setup_disarmed_state(code)
     rescue WrongActivationCodeError
       explode_early if (@disarm_retry_count == 2)
       @disarm_retry_count += 1
@@ -67,14 +68,14 @@ module Supervillian
 
     private
 
-    def check_if_able_to_set_activation_code(code)
+    def error_if_codes_locked(code)
       check_exploded
       raise_error(OperationDeniedError) if locked || armed
       raise_error(WrongActivationCodeError,
                  "Activation code must be numeric") unless code =~ /^\d+$/
     end
 
-    def do_arm
+    def setup_armed_state
       @armed = true
       @started_countdown = Time.now.to_i
       @explode_timer = Thread.new do
@@ -84,7 +85,7 @@ module Supervillian
       end
     end
 
-    def disarm(code)
+    def setup_disarmed_state(code)
       check_exploded
       raise_error(WrongActivationCodeError) unless code == disarming_code
       cancel_explode_timer

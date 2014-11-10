@@ -41,7 +41,7 @@ get '/' do
 end
 
 post '/cancel' do
-  do_and_report_error_if { apply_timer_value }
+  attempt_bomb_command_when { apply_timer_value }
   redirect CONTROL_PANEL_URL
 end
 
@@ -55,42 +55,43 @@ get CONTROL_PANEL_URL do
 end
 
 post '/lock' do
-  do_and_report_error_if(!bomb.locked) do
+  attempt_bomb_command_when(!bomb.locked) do
     bomb.arming_code = params[:arming_code]
     bomb.disarming_code = params[:disarming_code]
-    bomb.lock!
+    bomb.lock
   end
 end
 
 post '/arm' do
-  do_and_report_error_if(bomb.locked) do
+  attempt_bomb_command_when(bomb.locked) do
     apply_timer_value
-    bomb.arm!(params[:arming_code])
+    bomb.arm(params[:arming_code])
   end
 end
 
 post '/disarm' do
-  do_and_report_error_if(bomb.armed) { bomb.disarm!(params[:disarming_code]) }
+  attempt_bomb_command_when(bomb.armed) { bomb.disarm(params[:disarming_code]) }
 end
 
 not_found do
   redirect CONTROL_PANEL_URL
 end
 
-def do_and_report_error_if(guard_condition = true)
+def perform_bomb_command
+  yield
+rescue Supervillian::ExplodedError
+  redirect "/exploded"
+rescue Supervillian::BombError => ex
+  self.system_message = ex.message
+end
+
+def attempt_bomb_command_when(guard_condition = true, &block)
   check_exploded
-
-  begin
-    raise "Guard condition failed" unless guard_condition
-    yield
-  rescue Supervillian::ExplodedError
-    redirect "/exploded"
-  rescue Supervillian::BombError => ex
-    self.system_message = ex.message
-  rescue
-    self.system_message = "Ooops.. something bad happened. Don't do that again"
-  end
-
+  raise "Guard condition failed" unless guard_condition
+  perform_bomb_command(&block)
+rescue
+  self.system_message = "Ooops.. something bad happened. Don't do that again"
+ensure
   redirect CONTROL_PANEL_URL
 end
 
@@ -129,10 +130,8 @@ def reset_system_message
 end
 
 def system_state_message
-  case
-    when bomb.exploded? then user_message(:exploded)
-    when bomb.armed then user_message(:ready_to_disarm)
-    when bomb.locked then user_message(:ready_to_arm)
-    else user_message(:ready_to_lock)
-  end
+  return user_message(:exploded) if bomb.exploded?
+  return user_message(:ready_to_disarm) if bomb.armed
+  return user_message(:ready_to_arm) if bomb.locked
+  user_message(:ready_to_lock)
 end

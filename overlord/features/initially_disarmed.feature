@@ -6,6 +6,6 @@ Feature: Initial State
 
 @javascript
 Scenario: Start up initially disarmed
-  Given the bomb is not started
-  When I start the bomb
+  Given a new bomb session
+  When I view the bomb controls
   Then I see the bomb is disarmed

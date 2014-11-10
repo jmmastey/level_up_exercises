@@ -6,7 +6,8 @@ Feature: Register Numeric Activation Codes
 @javascript
 Scenario: Visit bomb controls when no activation codes are registered
   Given the bomb has no activation codes registered
-  When I see the activation code registration controls
+  When I view the bomb controls
+  Then I see the activation code registration controls
   Then I see a field to register an arming code
   And I see a field to register a disarming code
 

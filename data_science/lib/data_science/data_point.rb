@@ -1,5 +1,5 @@
 class DataPoint
-  attr_reader :date, :cohort, :result
+  attr_accessor :date, :cohort, :result
 
   def initialize(args = {})
     @date = args["date"]

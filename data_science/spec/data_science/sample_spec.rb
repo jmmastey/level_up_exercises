@@ -1,5 +1,5 @@
 require 'data_science/sample'
-
+require_relative '../factories'
 describe Sample do
   before do
     @sample = Sample.new
@@ -15,11 +15,32 @@ describe Sample do
     expect(@sample.data_points.size).to eq(2)
   end
 
-  context 'calculate sample statistics'
+  context 'calculate sample statistics' do
     before do
-
+      data_point_1 = build(:data_point, cohort: "A", result: 0)
+      @sample.data_points << data_point_1
+      data_point_2 = build(:data_point, cohort: "A", result: 0)
+      @sample.data_points << data_point_2
+      data_point_3 = build(:data_point, cohort: "A", result: 1)
+      @sample.data_points << data_point_3
+      data_point_4 = build(:data_point, cohort: "A", result: 1)
+      @sample.data_points << data_point_4
+      data_point_5 = build(:data_point, cohort: "A", result: 1)
+      @sample.data_points << data_point_5
+      data_point_6 = build(:data_point, cohort: "B", result: 0)
+      @sample.data_points << data_point_6
+      data_point_7 = build(:data_point, cohort: "B", result: 0)
+      @sample.data_points << data_point_7
+      data_point_8 = build(:data_point, cohort: "B", result: 0)
+      @sample.data_points << data_point_8
+      data_point_9 = build(:data_point, cohort: "B", result: 1)
+      @sample.data_points << data_point_9
+      data_point_10 = build(:data_point, cohort: "B", result: 1)
+      @sample.data_points << data_point_10
     end
+
     it 'calculates the total sample size' do
 
     end
+  end
 end

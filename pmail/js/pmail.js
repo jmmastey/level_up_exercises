@@ -17,5 +17,9 @@ $(document).ready(function(){
   function (){
     $(this).css({"background-color":"white"});
   });
- });
- 
+
+  $('.select-button').click(function(){
+   $( ".boxmenu" ).toggle();
+  });
+});
+

@@ -1,6 +1,6 @@
 
 body {
-  margin:0px;
+  margin: 0px;
 }
 .body-content {
   float: right;
@@ -10,7 +10,6 @@ body {
 .banner {
   background:url('../img/logo.png') no-repeat;
   background-color:#F2F2F0;
-  background-image:url('../img/logo.png');
   background-repeat:no-repeat;
   border: 1px solid;
   color: #F2F2F0;
@@ -43,7 +42,7 @@ body {
 .nav_banner {
   border: 1px solid;
   color: #c9c9c9;
-  height: 30px;
+ /* height: 30px;*/
   padding: 10px;
   min-width: 750px;
 }
@@ -67,11 +66,23 @@ body {
 .select-button {
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
-  border-radius: 4px;
+  border-radius: 3px;
   height: 30px;
-  margin-left: 90px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  position: absolute;
+  top: 85px;
+  left: 165px;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   width: 55px;
+}
+
+.boxmenu {
+  position: absolute;
+  top: 120%;
+  left: 0px;
+  width:100px;
+  background-color: white;
 }
 
 .tooltip {
@@ -81,20 +92,27 @@ body {
 .refresh-button {
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
-  border-radius: 4px;
+  border-radius: 3px;
   height: 30px;
-  margin-left: 10px;
+  margin-left: 90px;
+  position: absolute;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  left:160px;
+  top:85px;
   width: 55px;
+  margin-bottom: 10px;
 }
 
 .more-button {
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
-  border-radius: 4px;
+  border-radius: 3px;
   height: 30px;
+  left: 315px;
+  top: 85px;
   margin-bottom: 15px;
   margin-left: 10px;
+  position: absolute;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   width: 55px;
 }
@@ -168,6 +186,22 @@ button span:hover:after {
 .button-text {
   display: none;
 }
+
+.boxmenu li{
+  list-style: none;
+  font-family: Arial;
+  font-size: 80%;
+  color:black;
+}
+
+.boxmenu{
+  border: 1px solid;
+}
+
+.boxmenu ul{
+  padding: none;
+}
+
   /*MAIN CONTENT*/
 .main_content {
   border: 1px;
@@ -199,12 +233,12 @@ button span:hover:after {
   width: 115px;
  }
 
-ul {
+nav ul {
   list-style-type: none;
   padding-left: 0px;
 }
 
-ul li {
+nav ul li {
   border-left: 5px solid transparent;
   cursor: default;
   height: 20px;
@@ -212,11 +246,20 @@ ul li {
   padding-left: 20px;
 }
 
-ul li div {
+nav ul li div {
   display: inline-block;
 }
 
 .menu {
   font-family: Arial;
   font-size: 80%;
+  color:black;
 }
+
+a:link {
+    text-decoration: none;
+}
+
+ li:hover{
+   background-color:#c9c9c9;
+ } 

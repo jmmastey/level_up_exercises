@@ -1,60 +1,58 @@
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>PMAIL</title>
-  </head>
-  <body>
-    <link rel="stylesheet" type="text/css" href="css/pmail.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/pmail.js" ></script>
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <div class="banner">
-      <input type="text" name="search" class="bannertextbox"/>
-      <button name="pmailsearch" class="pmailsearch"/> 
+<head>
+  <meta charset="utf-8" />
+  <title>PMAIL</title>
+</head>
+<body>
+  <link rel="stylesheet" type="text/css" href="css/pmail.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/pmail.js" ></script>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <div class="banner">
+    <input type="text" name="search" class="banner-textbox"/>
+    <button name="pmailsearch" class="pmail-search"/> 
+  </div>
+  <div class="nav_banner">
+    <button type=button name="mail" class="mail-button">Mail</button>
+    <div class="select-button">
+      <div class="boxmenu">
+            <ul>
+            <li><a href="#">All</a></li>
+            <li><a href="#">Read</a></li>
+            <li><a href="#">None</a></li>
+            <li><a href="#">Unread</a></li>
+            <li><a href="#">Starred</a></li>
+            <li><a href="#">Unstarred</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="nav_banner">
-      <button type=button name="mail" class="mail"/>Mail</button>
-      <button data-role="Search"class="select"></button>
-      <button class="refresh" data-role="Refresh"></button>
-      <button class="more" data-role="More"></button>
-      <button class="settings"></button>
-      <button class="older"></button>
-      <button class="newer"></button>
-     </div>
-     <div class="side_bar">
-     <button name="searchcontent" class="compose">COMPOSE</button>
+
+      <div class="refresh-button" data-role="Refresh"></div>
+      <div class="more-button" data-role="More"></div>
+      <button class="settings-button"></button>
+      <button class="older-button"></button>
+      <button class="newer-button"></button>
+    </div>
+    <div class="side_bar">
+     <button name="searchcontent" class="compose-button">COMPOSE</button>
      <nav class="menu">
-         <ul>
-            <li><div>Inbox</div></li>
-            <li>Starred</li>
-            <li>Important</li>
-            <li>Sent</li>
-            <li>Drafts</li>
-            <li>Archives</li>
-            <li>More</li>
-            </li>
-         </ul>
-      </nav>
-      </div>
-      <div class="main_content">
-        <p>hello world</p>
-      </div>
-  </body>
+       <ul>
+        <li><div>Inbox</div></li>
+        <li>Starred</li>
+        <li>Important</li>
+        <li>Sent</li>
+        <li>Drafts</li>
+        <li>Archives</li>
+        <li>More</li>
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="main_content">
+  <p>hello world</p>
+</div>
+</body>
 </html>
-         <!-- TODO -->
-<!-- 
-      <ul class="Mymenu">
-    <li>
-        <a href="#">Dropdown</a>
-        <ul>
-        <li><a href="#">All</a></li>
-        <li><a href="#">Read</a></li>
-        <li><a href="#">None</a></li>
-        <li><a href="#">Unread</a></li>
-        <li><a href="#">Starred</a></li>
-        <li><a href="#"><Unstarred</a></li>
-        </ul> 
-    </li>
-</ul> -->
 

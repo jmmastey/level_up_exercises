@@ -1,13 +1,35 @@
 require 'csv'
 require 'json'
 
-class DinosaurParserAndSearch
-  attr_accessor :result_dinosaurs
-  def initialize
+class DinosaurParser
+
+  def parse
     @result_dinosaurs = []
     CSV.foreach('dinodex.csv', :headers => true) do |row|
       @result_dinosaurs << row.to_hash
     end
+
+    CSV.foreach('african_dinosaur_export.csv', :headers => true) do |row|
+      dinosaur = {}
+      dinosaur["NAME"]          = row["Genus"]
+      dinosaur["PERIOD"]        = row["Period"]
+      dinosaur["CONTINENT"]     = "Africa"
+      dinosaur["DIET"]          = row["Carnivore"] == "Yes" ? "Carnivore" : "Vegan"
+      dinosaur["WEIGHT_IN_LBS"] = row["Weight"]
+      dinosaur["WALKING"]       = row["Walking"]
+      dinosaur["DESCRIPTION"]   = ""
+      @result_dinosaurs << dinosaur
+    end
+    @result_dinosaurs
+  end
+
+end
+
+class DinosaurSearch
+  attr_accessor :result_dinosaurs
+
+  def initialize(search_pool)
+    @result_dinosaurs = search_pool
   end
 
   def get_name
@@ -40,13 +62,13 @@ class DinosaurParserAndSearch
         if options.has_key?(key) && options[key]
           if symbol == "greater" && options[key] <= value.to_i
             idx = reset_resultant(idx)
-          end
-          if symbol == "lesser" && options[key] >= value.to_i
+          elsif symbol == "lesser" && options[key] >= value.to_i
             idx = reset_resultant(idx)
-          end
-          if symbol == "equal"
-            if options[key].is_a?(Array) && !options[key].include?(dinosaur[key].downcase)
-              idx = reset_resultant(idx)
+          elsif symbol == "equal"
+            if options[key].is_a?(Array)
+              if !(options[key].include?(dinosaur[key].downcase))
+                idx = reset_resultant(idx)
+              end
             elsif options[key] != dinosaur[key].downcase
               idx = reset_resultant(idx)
             end
@@ -54,6 +76,7 @@ class DinosaurParserAndSearch
         end
       end
     end
+    self
   end
 
   def reset_resultant(idx)
@@ -90,27 +113,29 @@ class DinosaurParserAndSearch
   end
 end
 
-options = Hash.new
-options1 = Hash.new
-options2 = Hash.new
+ options = Hash.new
+ options2 = Hash.new
 
  options['WEIGHT_IN_LBS'] = 2000
  options['compare'] = "greater"
- dinosaur = DinosaurParserAndSearch.new
+
+ parser = DinosaurParser.new
+ resultant_dinosaurs = parser.parse
+ dinosaur = DinosaurSearch.new(resultant_dinosaurs)
 
  result = dinosaur.smart_search_dinosaur(options)
- p result.get_name.inspect
+ #p result.get_name.inspect
 
- dinosaur1 = DinosaurParserAndSearch.new
+ dinosaur1 = DinosaurSearch.new(resultant_dinosaurs)
 
 
-# result = dinosaur1.smart_search_dinosaur(options1)
-# p result.get_name.inspect
 
 options2['DIET'] = ['carnivore', 'insectivore']
 options2['compare'] = "equal"
-#p result.get_name.inspect
 
 result1 = dinosaur1.smart_search_dinosaur(options2)
 p result1.get_name.inspect
 p result1.to_json
+
+
+

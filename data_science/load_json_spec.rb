@@ -2,7 +2,7 @@ require_relative "spec/spec_helper"
 require_relative "load_json"
 
 describe LoadJSON do
-  let(:source_data) { LoadJSON.new("source_data.json") }
+  let(:source_data) { LoadJSON.new("test_data.json") }
 
   it "can locate source file" do
     expect(File.exist?(source_data.file_path)).to be(true)

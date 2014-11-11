@@ -4,7 +4,7 @@ require 'active_support/all'
 require 'flight_stats/schedule'
 require 'flight_stats/local_time'
 
-describe 'FlightStats Schedules API', :vcr do
+describe 'FlightStats Schedules API', :vcr => {:record => :new_episodes } do
   include LocalTime
 
   let(:api) { FlightStats::Schedule.new }

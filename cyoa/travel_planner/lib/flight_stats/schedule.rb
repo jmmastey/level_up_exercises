@@ -2,23 +2,22 @@ require 'active_support/all'
 require 'rest_client'
 require 'json'
 require 'flight_stats/local_time'
+require 'flight_stats/url_builder'
 
 module FlightStats
   class Schedule
     include LocalTime
 
-    APPLICATION_ID  = "89cd457c"
-    APPLICATION_KEY = "be2705cf426fe89bd49cbf1534d10978"
-    HOST            = "api.flightstats.com"
-
     def get_flights_arriving_before(time, from, to)
-      get_scheduled_flights(url(from, to, "arriving", time)).select! do |f|
+      builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
+      get_scheduled_flights(builder.schedule_arriving_url).select! do |f|
         f["arrivalTime"].to_datetime < strip_timezone(time)
       end
     end
 
     def get_flights_departing_after(time, from, to)
-      get_scheduled_flights(url(from, to, "departing", time)).select! do |f|
+      builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
+      get_scheduled_flights(builder.schedule_departing_url).select! do |f|
         f["departureTime"].to_datetime > strip_timezone(time)
       end
     end
@@ -35,17 +34,10 @@ module FlightStats
 
     def headers
       {
-        "appId"  => APPLICATION_ID,
-        "appKey" => APPLICATION_KEY
+        "appId"  => "89cd457c",
+        "appKey" => "be2705cf426fe89bd49cbf1534d10978"
       }
     end
 
-    def url(from, to, action, date)
-      "https://#{HOST}/flex/schedules/rest/v1/json/from/#{from}/to/#{to}/#{action}/#{url_date(date)}"
-    end
-
-    def url_date(date)
-      sprintf("%04d/%02d/%02d", date.year, date.month, date.day)
-    end
   end
 end

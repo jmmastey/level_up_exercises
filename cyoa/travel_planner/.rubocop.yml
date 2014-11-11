@@ -1,0 +1,9 @@
+inherit_from:
+  -  ../../.rubocop.yml
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'lib/tasks/*'
+    - 'script/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/

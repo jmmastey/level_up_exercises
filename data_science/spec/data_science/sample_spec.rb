@@ -50,5 +50,21 @@ describe Sample do
     it 'calculates the number of conversions for the B group' do
       expect(@sample.conversions("B")).to eq(2)
     end
+
+    it 'calculates the cohort size' do
+      expect(@sample.cohort_size("A")).to eq(5)
+    end
+
+    it 'calculates the conversion rate for the A group' do
+      expect(@sample.conversion_rate("A")).to eq(0.6)
+    end
+
+    it 'calculates the standard error' do
+      expect(@sample.standard_error("A")).to be_within(0.01).of(0.21908)
+    end
+
+    it 'calculates the error bars conversion with a 95% confidence for the A group' do
+      expect(@sample.error_bars("A")). to be_within(0.001).of(0.42941)
+    end
   end
 end

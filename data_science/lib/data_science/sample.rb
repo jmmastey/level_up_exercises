@@ -18,7 +18,24 @@ class Sample
     @data_points.size
   end
 
-  def conversions(group)
-    @data_points.select { |visitor| visitor.cohort == group && visitor.result == 1 }.size
+  def conversions(cohort)
+    @data_points.select { |visitor| visitor.cohort == cohort && visitor.result == 1 }.size
   end
+
+  def cohort_size(cohort)
+    @data_points.select { |visitor| visitor.cohort == cohort }.size
+  end
+
+  def conversion_rate(cohort)
+    1.0 * conversions(cohort) / cohort_size(cohort)
+  end
+
+  def standard_error(cohort)
+    Math.sqrt(conversion_rate("A") * (1 - conversion_rate("A")) / cohort_size("A"))
+  end
+
+  def error_bars(cohort)
+    standard_error("A") * 1.96
+  end
+
 end

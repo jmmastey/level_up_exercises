@@ -6,8 +6,7 @@ require "shotgun"
 require_relative "bomb"
 
 def bomb
-  session[:bomb] = Bomb.new unless session[:bomb]
-  session[:bomb]
+  session[:bomb] ||= Bomb.new 
 end
 
 enable :sessions

@@ -1,6 +1,8 @@
 require 'assets/theatre_in_chicago/scraper'
 
 class ScrapeController < ApplicationController
+  
+  #class Scraper
 
   SCRAPERS = {
     theatre_in_chicago: TheatreInChicago::Scraper

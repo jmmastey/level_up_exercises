@@ -7,10 +7,12 @@ class Showing < ActiveRecord::Base
 
   has_and_belongs_to_many :users
 
+  # self
   def Showing.sort_by_time(showings)
     showings.sort { |a, b| a.time <=> b.time }
   end
 
+  # Look into (move to event || delete)
   def Showing.one_day_only?(showings)
     return false unless showings.present?
     sorted = Showing.sort_by_time(showings)
@@ -37,6 +39,7 @@ class Showing < ActiveRecord::Base
     time.in_time_zone(LOCAL_TIME_ZONE).strftime('%I:%M %P')
   end
 
+  # to_ics
   def ics
     ical_event = Icalendar::Event.new
     ical_event.uid         = "#{id}"

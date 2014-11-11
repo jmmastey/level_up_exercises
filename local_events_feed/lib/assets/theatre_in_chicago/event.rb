@@ -14,6 +14,7 @@ module TheatreInChicago
       @showings = []
     end
 
+    # Business
     def complete?
       name.present? && location.present? && link.present?
     end
@@ -22,10 +23,12 @@ module TheatreInChicago
       "#{name}, #{location}, #{link}, #{pretty_image}"
     end
     
+    # Operator==
     def match?(other)
       name == other.name && location == other.location && link == other.link # Skip Image, Description
     end
 
+    # No active support 
     def clean
       @location.squish!
       @description.squish!

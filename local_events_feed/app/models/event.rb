@@ -8,10 +8,12 @@ class Event < ActiveRecord::Base
 
   has_many :showings, dependent: :destroy
 
+  # scope
   def Event.sort_by_name
     Event.all.sort { |a, b| a.name <=> b.name }
   end
 
+  # Fix This
   def add_showing(time: nil)
     return unless time.present?
     return if already_have_show_at?(time)
@@ -24,6 +26,7 @@ class Event < ActiveRecord::Base
     showing
   end
 
+  # operator==()
   def same_as?(other)
     name == other.name && location == other.location && link == other.link
   end
@@ -32,6 +35,7 @@ class Event < ActiveRecord::Base
     list.any? { |other| other.same_as?(self) }
   end
 
+  # Put in helpers
   def pretty_date_range
     return 'No Showings' unless showings.present?
     return "#{pretty_date(showings.first.time)} Only" if Showing.one_day_only?(showings)
@@ -48,7 +52,10 @@ class Event < ActiveRecord::Base
     Showing.sort_by_time(showings)
   end
 
+  # scope (chain sorting filter)
+
   def add_to_db
+    # find or create then add showings
     if unique?
       save
     else

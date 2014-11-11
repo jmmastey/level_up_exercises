@@ -3,6 +3,7 @@ class ScrapeTime < ActiveRecord::Base
   validates :last_scrape_at, presence: true
   validates :inter_scrape_delay, presence: true
 
+  # Initialize in DB
   after_initialize :set_defaults
 
   def set_defaults

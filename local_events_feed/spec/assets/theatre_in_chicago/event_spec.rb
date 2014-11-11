@@ -9,7 +9,7 @@ RSpec.describe TheatreInChicago::Event, :type => :asset do
     setted_event.name = "Party"
     setted_event.location = " Everywhere      "
     setted_event.link = "http://www.event.com"
-    setted_event.image = "http://www.event.com/picture.jpg"
+    setted_event.image = "http://www.event.com/ picture.jpg"
     setted_event.description = "A nice description"
     setted_event.showings << DateTime.parse("20141001T073000")
     setted_event

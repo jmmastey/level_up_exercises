@@ -29,6 +29,7 @@ module TheatreInChicago
     def clean
       @location.squish!
       @description.squish!
+      @image.gsub!(/\s+/, '')
       self
     end
 

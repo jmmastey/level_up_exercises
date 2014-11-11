@@ -5,61 +5,68 @@ class DataBox
   PROBABILITY_THRESHOLD = 0.05
 
   def initialize(data)
-    @results = data
+    @data = data
   end
 
   def sample_size
-    @results.length
+    @data.length
   end
 
-  def total_in_group(cohort)
-    @results.count { |result| result["cohort"] == cohort }
+  def size_of_cohort(cohort)
+    @data.count { |result| result["cohort"] == cohort }
   end
 
-  def amount_of_conversions(cohort)
-    @results.count do |result|
+  def conversions(cohort)
+    @data.count do |result|
       result["cohort"] == cohort && result["result"] == 1
     end
   end
 
-  def percentage_of_conversion(cohort)
-    amount_of_conversions(cohort).to_f / total_in_group(cohort).to_f
+  def conversion_percentage(cohort)
+    conversions(cohort).to_f / size_of_cohort(cohort).to_f
   end
 
-  def calculate_standard_error(cohort)
-    p = percentage_of_conversion(cohort)
-    n = total_in_group(cohort)
-    ((Math.sqrt(p * (1 - p) / n)) * CONFIDENCE_LEVEL)
+  def standard_error(cohort)
+    p = conversion_percentage(cohort)
+    n = size_of_cohort(cohort)
+    (Math.sqrt(p * (1 - p) / n))
   end
 
-  def all_group_types
-    @results.map { |result| result["cohort"] }.uniq
+  def cohorts
+    @data.map { |result| result["cohort"] }.uniq
   end
 
-  def calculate_group_probabilities
-    groups = {}
-    all_group_types.each do |group|
-      clicks = amount_of_conversions(group)
-      total = total_in_group(group)
-
-      groups[group] = { success: clicks, failure: (total - clicks) }
+  def populate_groups_hash(groups)
+    cohorts.each do |cohort|
+      clicks = conversions(cohort)
+      size = size_of_cohort(cohort)
+      groups[cohort] = { success: clicks, failure: (size - clicks) }
     end
+  end
+
+  def cohort_probabilities
+    groups = {}
+    populate_groups_hash(groups)
     ABAnalyzer::ABTest.new(groups).chisquare_p
   end
 
-  def cohort_percentages
+  def sorted_conversion_rates
     percentages = {}
-    all_group_types.each do |group|
-      percentages[group] = percentage_of_conversion(group)
+    cohorts.each do |cohort|
+      percentages[cohort] = conversion_percentage(cohort)
     end
     Hash[percentages.sort_by { |_, percent| percent }]
   end
 
+  def winning_cohort
+    sorted_conversion_rates.to_a.last.first
+  end
+
   def show_winner
-    if calculate_group_probabilities >= PROBABILITY_THRESHOLD
+    if cohort_probabilities >= PROBABILITY_THRESHOLD
       "No clear winner"
     else
-      "Winner: Cohort #{cohort_percentages.to_a.last.first}"
+      "Winner: Cohort #{winning_cohort}"
     end
   end
 end

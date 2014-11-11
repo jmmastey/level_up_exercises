@@ -107,7 +107,7 @@ hr {
   color: #666666;
 }
 
-#popup-user-profile-container {
+#profile-container {
   background-color: #ffffff;
   border: 1px solid #bbbbbb;
   display: none;
@@ -127,13 +127,10 @@ hr {
   color: #666666;
 }
 
-#profile-summary-container {
+#profile-summary {
   background-color: #e9e9e9;
   border-bottom: 1px solid #bbbbbb;
   border-top: 1px solid #bbbbbb;
-}
-
-#profile-summary {
   padding: 10px 20px;
 }
 

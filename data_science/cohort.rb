@@ -14,7 +14,7 @@ class Cohort
 
   def conversion_ratio
     return 0.00 if size == 0
-    @num_converts * 1.00 / size 
+    @num_converts.to_f / size 
   end
 
   def add_converts(num)
@@ -31,7 +31,7 @@ class Cohort
   end
 
   def confidence_interval
-    fluctuation = 1.96 * standard_error
-    [conversion_ratio - fluctuation, conversion_ratio + fluctuation]
+    sigma = 1.96 * standard_error
+    [conversion_ratio - sigma, conversion_ratio + sigma]
   end
 end

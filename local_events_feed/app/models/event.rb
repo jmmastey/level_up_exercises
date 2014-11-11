@@ -65,7 +65,11 @@ class Event < ActiveRecord::Base
   end
 
   def unique?
-    !has_match_in?(Event.all)
+    !has_match_in?(other_events)
+  end
+
+  def other_events
+    Event.all.reject { |e| e.id == self.id }
   end
 
   def find_match

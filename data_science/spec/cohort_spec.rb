@@ -22,11 +22,11 @@ describe Cohort do
 
     it { is_expected.to be_instance_of Cohort }
     it { is_expected.to respond_to(:size).with(0).argument }
-    it { is_expected.to respond_to(:num_converts).with(0).argument }
-    it { is_expected.to respond_to(:num_non_converts).with(0).argument }
-    it { is_expected.to respond_to(:conversion_ratio).with(0).argument }
-    it { is_expected.to respond_to(:add_converts).with(1).argument }
-    it { is_expected.to respond_to(:add_non_converts).with(1).argument }
+    it { is_expected.to respond_to(:num_successes).with(0).argument }
+    it { is_expected.to respond_to(:num_failures).with(0).argument }
+    it { is_expected.to respond_to(:success_ratio).with(0).argument }
+    it { is_expected.to respond_to(:add_successes).with(1).argument }
+    it { is_expected.to respond_to(:add_failures).with(1).argument }
     it { is_expected.to respond_to(:standard_error).with(0).argument }
     it { is_expected.to respond_to(:confidence_interval).with(0).argument }
 
@@ -34,12 +34,12 @@ describe Cohort do
       expect(cohort.size).to eq(0)
     end
 
-    it "has zero converts" do
-      expect(cohort.num_converts).to eq(0)
+    it "has zero successes" do
+      expect(cohort.num_successes).to eq(0)
     end
 
-    it "has zero non-converts" do
-      expect(cohort.num_non_converts).to eq(0)
+    it "has zero failures" do
+      expect(cohort.num_failures).to eq(0)
     end
 
     it "has a name provided in the initialization" do
@@ -59,53 +59,53 @@ describe Cohort do
     end
   end
 
-  context "when converts added" do
+  context "when successes added" do
     let(:cohort) do
       Cohort.new('A').tap do |c|
-        c.add_converts(4)
+        c.add_successes(4)
       end
     end
 
-    it "increases number of converts" do
-      expect(cohort.num_converts).to be(4)
+    it "increases number of successes" do
+      expect(cohort.num_successes).to be(4)
     end
 
     it "increases number of size" do
       expect(cohort.size).to be(4)
     end
 
-    it "calculates conversion_ratio" do
-      expect(cohort.conversion_ratio).to be_within(1e-10).of(1.00)
+    it "calculates success_ratio" do
+      expect(cohort.success_ratio).to be_within(1e-10).of(1.00)
     end
 
 
   end
 
-  context "when non-converts added" do
+  context "when failures added" do
     let(:cohort) do
       Cohort.new('A').tap do |c|
-        c.add_non_converts(5)
+        c.add_failures(5)
       end
     end
 
-    it "increases number of non converts" do
-      expect(cohort.num_non_converts).to be(5)
+    it "increases number of failures" do
+      expect(cohort.num_failures).to be(5)
     end
 
     it "increases number of size" do
       expect(cohort.size).to be(5)
     end
 
-    it "calculates conversion ratio" do
-      expect(cohort.conversion_ratio).to be_within(1e-10).of(0.00)
+    it "calculates success ratio" do
+      expect(cohort.success_ratio).to be_within(1e-10).of(0.00)
     end
   end
 
-  context "when both converts and non-converts added" do
+  context "when both successes and failures added" do
     let(:cohort) do
       Cohort.new('A').tap do |c|
-        c.add_non_converts(35)
-        c.add_converts(40)
+        c.add_failures(35)
+        c.add_successes(40)
       end
     end
 
@@ -113,8 +113,8 @@ describe Cohort do
       expect(cohort.size).to be(75)
     end
 
-    it "calculates current conversion_ratio" do
-      expect(cohort.conversion_ratio).to be_within(1e-10).of(0.5333333333333333)
+    it "calculates current success_ratio" do
+      expect(cohort.success_ratio).to be_within(1e-10).of(0.5333333333333333)
     end
 
     it "calculate standard error" do

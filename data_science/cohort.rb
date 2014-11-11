@@ -1,37 +1,37 @@
 class Cohort
-  attr_reader :name, :num_converts, :num_non_converts
+  attr_reader :name, :num_successes, :num_failures
 
   def initialize(name)
     raise ArgumentError unless name.is_a? String
     @name = name
-    @num_converts = 0
-    @num_non_converts = 0
+    @num_successes = 0
+    @num_failures = 0
   end
 
   def size
-    @num_converts + @num_non_converts
+    @num_successes + @num_failures
   end
 
-  def conversion_ratio
+  def success_ratio
     return 0.00 if size == 0
-    @num_converts.to_f / size 
+    @num_successes.to_f / size 
   end
 
-  def add_converts(num)
-    @num_converts += num
+  def add_successes(num)
+    @num_successes += num
   end
 
-  def add_non_converts(num)
-    @num_non_converts += num
+  def add_failures(num)
+    @num_failures += num
   end
 
   def standard_error
     return 0.00 if size == 0
-    Math.sqrt(conversion_ratio * (1 - conversion_ratio) / size)
+    Math.sqrt(success_ratio * (1 - success_ratio) / size)
   end
 
   def confidence_interval
     sigma = 1.96 * standard_error
-    [conversion_ratio - sigma, conversion_ratio + sigma]
+    [success_ratio - sigma, success_ratio + sigma]
   end
 end

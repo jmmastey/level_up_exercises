@@ -13,9 +13,12 @@ module DataScience
 
     def add_data_to_sample(data_source)
       data_source.each do |data|
-        data_point = DataPoint.new(data)
-        @data_points << data_point
+        @data_points << create_data_point(data)
       end
+    end
+
+    def create_data_point(data)
+      data_point = DataPoint.new(data)
     end
 
     def sample_size

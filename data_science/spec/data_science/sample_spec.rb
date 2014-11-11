@@ -18,54 +18,59 @@ describe Sample do
 
   context 'calculate sample statistics' do
     before do
-      data_point_1 = build(:data_point, cohort: "A", result: 0)
-      @sample.data_points << data_point_1
-      data_point_2 = build(:data_point, cohort: "A", result: 0)
-      @sample.data_points << data_point_2
-      data_point_3 = build(:data_point, cohort: "A", result: 1)
-      @sample.data_points << data_point_3
-      data_point_4 = build(:data_point, cohort: "A", result: 1)
-      @sample.data_points << data_point_4
-      data_point_5 = build(:data_point, cohort: "A", result: 1)
-      @sample.data_points << data_point_5
-      data_point_6 = build(:data_point, cohort: "B", result: 0)
-      @sample.data_points << data_point_6
-      data_point_7 = build(:data_point, cohort: "B", result: 0)
-      @sample.data_points << data_point_7
-      data_point_8 = build(:data_point, cohort: "B", result: 0)
-      @sample.data_points << data_point_8
-      data_point_9 = build(:data_point, cohort: "B", result: 1)
-      @sample.data_points << data_point_9
-      data_point_10 = build(:data_point, cohort: "B", result: 1)
-      @sample.data_points << data_point_10
+      @control_group_non_conversions = build_list(:control_group_no_conversion, 744)
+      @control_group_conversions = build_list(:control_group_conversion, 320)
+      @test_group_non_conversions = build_list(:test_group_no_conversion, 793)
+      @test_group_conversions = build_list(:test_group_conversion, 250)
+
+      @control_group_non_conversions.each { |data_point| @sample.data_points << data_point }
+      @control_group_conversions.each { |data_point| @sample.data_points << data_point }
+      @test_group_non_conversions.each { |data_point| @sample.data_points << data_point }
+      @test_group_conversions.each { |data_point| @sample.data_points << data_point }
     end
 
     it 'calculates the total sample size' do
-      expect(@sample.sample_size).to eq(10)
+      expect(@sample.sample_size).to eq(2107)
     end
 
-    it 'calculates the number of conversions for the A group' do
-      expect(@sample.conversions("A")).to eq(3)
+    it 'calculates the number of conversions for the Control group' do
+      expect(@sample.conversions("A")).to eq(320)
     end
 
-    it 'calculates the number of conversions for the B group' do
-      expect(@sample.conversions("B")).to eq(2)
+    it 'calculates the number of conversions for the Test group' do
+      expect(@sample.conversions("B")).to eq(250)
     end
 
-    it 'calculates the cohort size' do
-      expect(@sample.cohort_size("A")).to eq(5)
+    it 'calculates the cohort size for the Control group' do
+      expect(@sample.cohort_size("A")).to eq(1064)
     end
 
-    it 'calculates the conversion rate for the A group' do
-      expect(@sample.conversion_rate("A")).to eq(0.6)
+    it 'calculates the cohort size for the Test group' do
+      expect(@sample.cohort_size("B")).to eq(1043)
     end
 
-    it 'calculates the standard error' do
-      expect(@sample.standard_error("A")).to be_within(0.01).of(0.21908)
+    it 'calculates the conversion rate for the Control group' do
+      expect(@sample.conversion_rate("A")).to be_within(0.0001).of(0.3008)
     end
 
-    it 'calculates the error bars conversion with a 95% confidence for the A group' do
-      expect(@sample.error_bars("A")). to be_within(0.001).of(0.42941)
+    it 'calculates the conversion rate for the Test group' do
+      expect(@sample.conversion_rate("B")).to be_within(0.0001).of(0.2397)
+    end
+
+    it 'calculates the standard error for the Control group' do
+      expect(@sample.standard_error("A")).to be_within(0.00001).of(0.01406)
+    end
+
+    it 'calculates the standard error for the Test group' do
+      expect(@sample.standard_error("B")).to be_within(0.0001).of(0.0132)
+    end
+
+    it 'calculates the error bars conversion with a 95% confidence for the Control group' do
+      expect(@sample.error_bars("A")). to be_within(0.00001).of(0.02756)
+    end
+
+    it 'calculates the error bars conversion with a 95% confidence for the Test group' do
+      expect(@sample.error_bars("B")). to be_within(0.00001).of(0.02590)
     end
   end
 end

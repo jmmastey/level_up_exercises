@@ -18,7 +18,7 @@ module DataScience
     end
 
     def create_data_point(data)
-      data_point = DataPoint.new(data)
+      DataPoint.new(data)
     end
 
     def sample_size

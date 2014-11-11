@@ -1,4 +1,5 @@
 require_relative 'data_point'
+require 'abanalyzer'
 
 class Sample
   attr_reader :data_points
@@ -24,6 +25,10 @@ class Sample
     @data_points.select { |visitor| visitor.cohort == cohort && visitor.result == 1 }.size
   end
 
+  def non_conversions(cohort)
+    @data_points.select { |visitor| visitor.cohort == cohort && visitor.result == 0 }.size
+  end
+
   def cohort_size(cohort)
     @data_points.select { |visitor| visitor.cohort == cohort }.size
   end
@@ -40,4 +45,11 @@ class Sample
     standard_error(cohort) * CONVERSION_RATE_MULTIPLIER_FOR_95_CONFIDENCE
   end
 
+  def confidence_level(group_1, group_2)
+    values = {}
+    values[:group_1] = { non_conversions: non_conversions(group_1), conversions: conversions(group_1) }
+    values[:group_2] = { non_conversions: non_conversions(group_2), conversions: conversions(group_2) }
+    tester = ABAnalyzer::ABTest.new(values)
+    1 - tester.chisquare_p
+  end
 end

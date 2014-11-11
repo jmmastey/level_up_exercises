@@ -41,6 +41,14 @@ describe Sample do
       expect(@sample.conversions("B")).to eq(250)
     end
 
+    it 'calculates the number of non-conversions for the Control group' do
+      expect(@sample.non_conversions("A")).to eq(744)
+    end
+
+    it 'calculates the number of non-conversions for the Test group' do
+      expect(@sample.non_conversions("B")).to eq(793)
+    end
+
     it 'calculates the cohort size for the Control group' do
       expect(@sample.cohort_size("A")).to eq(1064)
     end
@@ -66,11 +74,15 @@ describe Sample do
     end
 
     it 'calculates the error bars conversion with a 95% confidence for the Control group' do
-      expect(@sample.error_bars("A")). to be_within(0.00001).of(0.02756)
+      expect(@sample.error_bars("A")).to be_within(0.00001).of(0.02756)
     end
 
     it 'calculates the error bars conversion with a 95% confidence for the Test group' do
-      expect(@sample.error_bars("B")). to be_within(0.00001).of(0.02590)
+      expect(@sample.error_bars("B")).to be_within(0.00001).of(0.02590)
+    end
+
+    it 'calculates the confidence level of the sample for cohorts A and B' do
+      expect(@sample.confidence_level("A", "B")).to be_within(0.01).of(0.99)
     end
   end
 end

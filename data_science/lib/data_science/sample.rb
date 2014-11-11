@@ -3,6 +3,8 @@ require_relative 'data_point'
 class Sample
   attr_reader :data_points
 
+  CONVERSION_RATE_MULTIPLIER_FOR_95_CONFIDENCE = 1.96
+
   def initialize
     @data_points = []
   end
@@ -31,11 +33,11 @@ class Sample
   end
 
   def standard_error(cohort)
-    Math.sqrt(conversion_rate("A") * (1 - conversion_rate("A")) / cohort_size("A"))
+    Math.sqrt(conversion_rate(cohort) * (1 - conversion_rate(cohort)) / cohort_size(cohort))
   end
 
   def error_bars(cohort)
-    standard_error("A") * 1.96
+    standard_error(cohort) * CONVERSION_RATE_MULTIPLIER_FOR_95_CONFIDENCE
   end
 
 end

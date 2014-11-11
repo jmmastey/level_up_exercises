@@ -1,5 +1,6 @@
 require 'data_science/sample'
 require_relative '../factories'
+
 describe Sample do
   before do
     @sample = Sample.new

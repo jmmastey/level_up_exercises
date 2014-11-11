@@ -1,0 +1,164 @@
+body {
+  font-size: 13px;
+}
+
+hr {
+  color: #dddddd;
+}
+
+#search-bar {
+  width: 600px;
+}
+
+.pure-button-compose {
+  background-color: #d14836;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 8px 0;
+  text-transform: uppercase;
+  width: 110px;
+}
+
+.pure-button-secondary {
+  background-color: #e9e9e9;
+  border: 1px solid #cccccc;
+  color: #000000;
+}
+
+.pure-menu.pure-menu-open {
+  border: none;
+  text-align: left;
+}
+
+.pure-menu li a {
+  color: #000000;
+  padding: 5px 0;
+}
+
+#header-bar {
+  background-color: #eeeeee;
+  border-bottom: 1px solid #dddddd;
+  padding: 8px;
+  position: relative;
+}
+
+#user-menu {
+  color: #666666;
+  padding-left:15px;
+}
+
+#user-menu a, a:active, a:visited {
+  color: #666666;
+  text-decoration: none;
+}
+
+#user-menu a:hover {
+  color: #000000;
+}
+
+#tool-bar {
+  border-bottom: 1px solid #dddddd;
+  padding: 8px;
+  position: relative;
+}
+
+#mail-context {
+  color: #d14836;
+}
+
+#mail-action { 
+  padding: 8px;
+}
+
+.mail-item {
+  background-color: #eeeeee;
+  border-bottom: 1px solid #dddddd;
+  border-left: 3px solid #eeeeee;
+  padding: 0 10px;
+}
+
+.mail-item-hover {
+  border-left: 3px solid #ff0000;
+}
+
+.mail-item-date {
+  text-align: right;
+}
+
+.mail-item-check {
+  padding: 0 5px;
+}
+
+.mail-item-star {
+  padding: 0 5px;
+}
+
+.message-snippet {
+  color: #999999;
+}
+
+#footer {
+  color: #666666;
+  font-size: 12px;
+  padding: 8px;
+}
+
+#footer a, a:active, a:hover, a:visited {
+  color: #666666;
+}
+
+#profile-container {
+  background-color: #ffffff;
+  border: 1px solid #bbbbbb;
+  display: none;
+  font-size: 13px;
+  padding: 0;
+  position: absolute;
+  right: 15px;
+  top: 50px;
+  width: 250px;
+}
+
+#popup-user-profile {
+  padding: 15px 20px;
+}
+
+.popup-email {
+  color: #666666;
+}
+
+#profile-summary {
+  background-color: #e9e9e9;
+  border-bottom: 1px solid #bbbbbb;
+  border-top: 1px solid #bbbbbb;
+  padding: 10px 20px;
+}
+
+.profile-photo {
+  float: left;
+  padding: 0 15px 0 0;
+}
+
+#profile-action {
+  background-color: #e9e9e9;
+  padding: 10px 20px;
+}
+
+.valign-middle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.left-margin {
+  margin-left: 20px;
+}
+
+.right-align {
+  float: right;
+}
+
+.clear-both {
+  clear: both;
+}

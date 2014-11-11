@@ -49,6 +49,7 @@ hr {
 }
 
 #user-menu a, a:active, a:visited {
+  color: #666666;
   text-decoration: none;
 }
 

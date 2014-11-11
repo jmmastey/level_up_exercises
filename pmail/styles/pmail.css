@@ -15,7 +15,7 @@ hr {
   color: #ffffff;
   font-size: 11px;
   font-weight: bold;
-  padding: 8px 0px;
+  padding: 8px 0;
   text-transform: uppercase;
   width: 110px;
 }
@@ -33,7 +33,7 @@ hr {
 
 .pure-menu li a {
   color: #000000;
-  padding: 5px 0px;
+  padding: 5px 0;
 }
 
 #header-bar {
@@ -73,7 +73,12 @@ hr {
 .mail-item {
   background-color: #eeeeee;
   border-bottom: 1px solid #dddddd;
+  border-left: 3px solid #eeeeee;
   padding: 10px;
+}
+
+.mail-item-hover {
+  border-left: 3px solid #ff0000;
 }
 
 .mail-item-date {
@@ -81,11 +86,11 @@ hr {
 }
 
 .mail-item-check {
-  padding: 0px 5px;
+  padding: 0 5px;
 }
 
 .mail-item-star {
-  padding: 0px 5px;
+  padding: 0 5px;
 }
 
 .message-snippet {
@@ -107,7 +112,7 @@ hr {
   border: 1px solid #bbbbbb;
   display: none;
   font-size: 13px;
-  padding: 0px;
+  padding: 0;
   position: absolute;
   right: 15px;
   top: 50px;
@@ -134,7 +139,7 @@ hr {
 
 .profile-photo {
   float: left;
-  padding: 0px 15px 0px 0px;
+  padding: 0 15px 0 0;
 }
 
 #profile-action {

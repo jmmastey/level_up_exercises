@@ -1,28 +1,31 @@
 class Cohort
-  attr_reader :name, :num_successes, :num_failures
+  attr_reader :name
 
   def initialize(name)
     raise ArgumentError unless name.is_a? String
     @name = name
-    @num_successes = 0
-    @num_failures = 0
+    @results = { success: 0, failure: 0 }
   end
 
   def size
-    @num_successes + @num_failures
+    @results[:success] + @results[:failure]
   end
 
   def success_ratio
     return 0.00 if size == 0
-    @num_successes.to_f / size 
+    @results[:success].to_f / size
   end
 
   def add_successes(num)
-    @num_successes += num
+    @results[:success] += num
   end
 
   def add_failures(num)
-    @num_failures += num
+    @results[:failure] += num
+  end
+
+  def [](key)
+    @results[key]
   end
 
   def standard_error

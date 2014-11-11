@@ -22,8 +22,7 @@ describe Cohort do
 
     it { is_expected.to be_instance_of Cohort }
     it { is_expected.to respond_to(:size).with(0).argument }
-    it { is_expected.to respond_to(:num_successes).with(0).argument }
-    it { is_expected.to respond_to(:num_failures).with(0).argument }
+    it { is_expected.to respond_to(:[]).with(1).argument }
     it { is_expected.to respond_to(:success_ratio).with(0).argument }
     it { is_expected.to respond_to(:add_successes).with(1).argument }
     it { is_expected.to respond_to(:add_failures).with(1).argument }
@@ -35,11 +34,11 @@ describe Cohort do
     end
 
     it "has zero successes" do
-      expect(cohort.num_successes).to eq(0)
+      expect(cohort[:success]).to eq(0)
     end
 
     it "has zero failures" do
-      expect(cohort.num_failures).to eq(0)
+      expect(cohort[:failure]).to eq(0)
     end
 
     it "has a name provided in the initialization" do
@@ -51,11 +50,11 @@ describe Cohort do
     end
 
     it "calculates correct low with 95% confidence" do
-      expect(cohort.confidence_interval[0]).to be_within(1e-10).of(0.00)     
+      expect(cohort.confidence_interval[0]).to be_within(1e-10).of(0.00)
     end
 
     it "calculates correct high with 95% confidence" do
-      expect(cohort.confidence_interval[1]).to be_within(1e-10).of(0.00) 
+      expect(cohort.confidence_interval[1]).to be_within(1e-10).of(0.00)
     end
   end
 
@@ -67,7 +66,7 @@ describe Cohort do
     end
 
     it "increases number of successes" do
-      expect(cohort.num_successes).to be(4)
+      expect(cohort[:success]).to be(4)
     end
 
     it "increases number of size" do
@@ -77,8 +76,6 @@ describe Cohort do
     it "calculates success_ratio" do
       expect(cohort.success_ratio).to be_within(1e-10).of(1.00)
     end
-
-
   end
 
   context "when failures added" do
@@ -89,7 +86,7 @@ describe Cohort do
     end
 
     it "increases number of failures" do
-      expect(cohort.num_failures).to be(5)
+      expect(cohort[:failure]).to be(5)
     end
 
     it "increases number of size" do
@@ -122,11 +119,13 @@ describe Cohort do
     end
 
     it "calculates correct low with 95% confidence" do
-      expect(cohort.confidence_interval[0]).to be_within(1e-10).of(0.42042442872107194)     
+      expect(cohort.confidence_interval[0]).to be_within(1e-10)
+        .of(0.42042442872107194)
     end
 
     it "calculates correct high with 95% confidence" do
-      expect(cohort.confidence_interval[1]).to be_within(1e-10).of(0.6462422379455947) 
+      expect(cohort.confidence_interval[1]).to be_within(1e-10)
+        .of(0.6462422379455947)
     end
   end
 end

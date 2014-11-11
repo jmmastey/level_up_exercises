@@ -625,3 +625,18 @@ a:hover {
 	padding: 0px;
 	margin: 0px;
 }
+
+.big-notice {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	line-height: 100%;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 150px;
+	background: none;
+	color: rgba(180, 180, 180, 0.7);
+	z-index: 10000;
+}

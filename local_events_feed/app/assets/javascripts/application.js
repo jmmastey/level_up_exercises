@@ -99,6 +99,21 @@ function drawRandomUserShowing() {
     }, 5000);
 }
 
+function setUpScrapeHandler() {
+	$( ".scrape" ).click( function() {
+		console.log("Here!");
+		if ($( ".big-notice" ).length == 0) {
+			console.log("Adding class");
+			var d = document.createElement('div');
+			$(d).addClass("big-notice")
+				.html("<p>Please Wait...</p>")
+				.appendTo(document.body)
+				.show();
+			
+		}
+	});
+}
+
 window.onbeforeunload = function (e) {
 	clearTimeout(timer);
 };

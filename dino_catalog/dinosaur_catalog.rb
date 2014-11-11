@@ -124,7 +124,7 @@ end
  dinosaur = DinosaurSearch.new(resultant_dinosaurs)
 
  result = dinosaur.smart_search_dinosaur(options)
- #p result.get_name.inspect
+ p result.get_name.inspect
 
  dinosaur1 = DinosaurSearch.new(resultant_dinosaurs)
 
@@ -135,7 +135,10 @@ options2['compare'] = "equal"
 
 result1 = dinosaur1.smart_search_dinosaur(options2)
 p result1.get_name.inspect
-p result1.to_json
+
+result2 = dinosaur1.smart_search_dinosaur(options2).smart_search_dinosaur(options)
+p result2.get_name.inspect
+#p result1.to_json
 
 
 

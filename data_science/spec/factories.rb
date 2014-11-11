@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :data_point do
+  factory :data_point, class: DataScience::DataPoint do
     date "2014-11-10"
 
     trait :control_group do

@@ -18,8 +18,7 @@
 
   </head>
   <body>
-    <!-- header bar; logo, search, user menu -->
-    <div id="header-bar" class="pure-g">
+    <header id="header-bar" class="pure-g">
       <div class="pure-u-1-8">
         <div class="valign-middle left-margin">
           <h1>pMail</h1>
@@ -37,9 +36,8 @@
         <a href="#"><i class="fa fa-th"></i></a>
         <a href="#" onmouseover="showUserProfile();" onmouseout="hideUserProfile();">rcowan@enova.com <i class="fa fa-caret-down"></i></a>
       </div>
-    </div>
+    </header>
 
-    <!-- tool bar; Mail dropdown, actions, paginator, settings -->
     <div id="tool-bar" class="pure-g">
       <div id="mail-context" class="pure-u-1-8">
         <div class="valign-middle left-margin">
@@ -60,8 +58,7 @@
       </div>
     </div>
 
-    <!-- mail content; mailbox on left, mail on right -->
-    <div id="mail-wrapper" class="pure-g">
+    <div id="mail-content" class="pure-g">
       <div id="mail-action-container" class="pure-u-1-8">
         <nav id="mail-action" class="left-margin">
           <button type="submit" class="pure-button pure-button-compose">Compose</button>
@@ -84,9 +81,9 @@
         </nav>
       </div>
       <div id="mail-detail" class="pure-u-7-8">
-        <div class="pure-menu pure-menu-open">
+        <section class="pure-menu pure-menu-open">
           <!-- sample mail for the inbox -->
-          <section id="mail-1" class="mail-item pure-g">
+          <article id="mail-1" class="mail-item pure-g">
             <p class="mail-item-action pure-u-1-4">
               <span class="mail-item-check"><input type="checkbox"></span>
               <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
@@ -101,9 +98,9 @@
             <p class="mail-item-date pure-u-1-8">
               Nov 10
             </p>
-          </section>
+          </article>
 
-          <section id="mail-2" class="mail-item pure-g">
+          <article id="mail-2" class="mail-item pure-g">
             <p class="mail-item-action pure-u-1-4">
               <span class="mail-item-check"><input type="checkbox"></span>
               <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
@@ -118,9 +115,9 @@
             <p class="mail-item-date pure-u-1-8">
               Nov 10
             </p>
-          </section>
+          </article>
 
-          <section id="mail-3" class="mail-item pure-g">
+          <article id="mail-3" class="mail-item pure-g">
             <p class="mail-item-action pure-u-1-4">
               <span class="mail-item-check"><input type="checkbox"></span>
               <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
@@ -135,9 +132,9 @@
             <p class="mail-item-date pure-u-1-8">
               Nov 8
             </p>
-          </section>
+          </article>
 
-          <section id="mail-4" class="mail-item pure-g">
+          <article id="mail-4" class="mail-item pure-g">
             <p class="mail-item-action pure-u-1-4">
               <span class="mail-item-check"><input type="checkbox"></span>
               <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
@@ -152,9 +149,9 @@
             <p class="mail-item-date pure-u-1-8">
               Nov 8
             </p>
-          </section>
+          </article>
 
-          <section id="mail-5" class="mail-item pure-g">
+          <article id="mail-5" class="mail-item pure-g">
             <p class="mail-item-action pure-u-1-4">
               <span class="mail-item-check"><input type="checkbox"></span>
               <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
@@ -169,9 +166,9 @@
             <p class="mail-item-date pure-u-1-8">
               Nov 5
             </p>
-          </section>
+          </article>
 
-          <section id="mail-6" class="mail-item pure-g">
+          <article id="mail-6" class="mail-item pure-g">
             <p class="mail-item-action pure-u-1-4">
               <span class="mail-item-check"><input type="checkbox"></span>
               <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
@@ -186,12 +183,11 @@
             <p class="mail-item-date pure-u-1-8">
               Oct 22
             </p>
-          </section>
+          </article>
           <!-- end sample mail -->
-        </div>
+        </section>
 
-        <!-- footer -->
-        <aside id="footer" class="pure-g">
+        <footer id="footer" class="pure-g">
           <p align="left" class="pure-u-1-4">
             1% full<br />
             Using 0.30 GB of your 30 GB
@@ -204,11 +200,11 @@
             Last account activity: 1 hour ago<br />
             <a href="#">Details</a>
           </p>
-        </aside>
+        </footer>
       </div>
     </div> 
 
-    <div id="profile-container">
+    <aside id="profile-container">
       <div id="popup-user-profile">
         <strong>Ryan Cowan</strong><br />
         <span class="popup-email">rcowan@pmail.com</span><br />
@@ -231,6 +227,6 @@
 
         <button type="submit" class="pure-button pure-button-secondary">Add Account</button>
       </div>
-    </div>
+    </aside>
   </body>
 </html>

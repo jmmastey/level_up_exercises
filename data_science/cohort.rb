@@ -48,7 +48,7 @@ class Cohort
   private
 
   def confidence_interval_humanized
-    lower, upper = confidence_interval.map { |ci| "%3.2f\%" % (ci * 100) }
+    lower, upper = confidence_interval.map { |ci| format("%3.2f\%" , (ci * 100)) }
     "(#{lower} - #{upper})"
   end
 end

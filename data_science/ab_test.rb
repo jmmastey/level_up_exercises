@@ -3,7 +3,7 @@ require_relative 'cohort'
 InvalidABMatrixError = Class.new(StandardError)
 
 class ABTest
-  CONFIDENCE_LEVEL_CUTOFFS = {
+  CONFIDENCE_LEVEL_THRESHOLDS = {
     0.995 => 7.879,
     0.99 => 6.635,
     0.975 => 5.024,
@@ -27,19 +27,19 @@ class ABTest
 
   def confidence_level
     return nil unless significant?(0.90)
-    CONFIDENCE_LEVEL_CUTOFFS.find { |_, v| v < chi_squared }.first
+    CONFIDENCE_LEVEL_THRESHOLDS.find { |_, v| v < chi_squared }.first
   end
 
   def significant?(confidence = 0.90)
-    raise ArgumentError unless CONFIDENCE_LEVEL_CUTOFFS.key?(confidence)
-    chi_squared > CONFIDENCE_LEVEL_CUTOFFS[confidence]
+    raise ArgumentError unless CONFIDENCE_LEVEL_THRESHOLDS.key?(confidence)
+    chi_squared > CONFIDENCE_LEVEL_THRESHOLDS[confidence]
   end
 
   def to_s
     SEPARATOR + "\n" +
-    @cohorts.sort_by(&:name).map(&:to_s).join("\n") + "\n" +
-    SEPARATOR + "\n" +
-    decision + "\n"
+      @cohorts.sort_by(&:name).map(&:to_s).join("\n") + "\n" +
+      SEPARATOR + "\n" +
+      decision + "\n"
   end
 
   private

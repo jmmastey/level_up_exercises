@@ -1,4 +1,5 @@
 require 'data_science/sample'
+require 'data_science/view_helpers'
 require_relative '../factories'
 
 module DataScience
@@ -92,8 +93,8 @@ module DataScience
 
         describe '#print_conversion_rate' do
           it 'prints the conversion rates rounded to a precision of 2' do
-            expect(@sample.print_conversion_rate("A")).to eq("0.30")
-            expect(@sample.print_conversion_rate("B")).to eq("0.24")
+            expect(@sample.print_conversion_rate("A")).to eq("30.1%")
+            expect(@sample.print_conversion_rate("B")).to eq("24.0%")
           end
         end
 

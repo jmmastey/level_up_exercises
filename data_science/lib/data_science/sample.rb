@@ -1,4 +1,4 @@
-require_relative 'data_point'
+ require_relative 'data_point'
 require 'abanalyzer'
 
 module DataScience
@@ -55,6 +55,18 @@ module DataScience
       values[:group_2] = { non_conversions: non_conversions(group_2), conversions: conversions(group_2) }
       tester = ABAnalyzer::ABTest.new(values)
       1 - tester.chisquare_p
+    end
+
+    def print_error_bars(cohort)
+      error_bars(cohort).to_s(:percentage, precision: 2)
+    end
+
+    def print_conversion_rate(cohort)
+      conversion_rate(cohort).to_s(:rounded, precision: 2)
+    end
+
+    def print_confidence_level(group_1, group_2)
+      (confidence_level(group_1, group_2) * 100).to_s(:percentage, precision: 1)
     end
   end
 end

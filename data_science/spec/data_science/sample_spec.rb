@@ -71,7 +71,6 @@ module DataScience
 
       context 'when using 95% confidence' do
         describe '#error_bars' do
-
           it 'calculates the error bars' do
             expect(@sample.error_bars("A")).to be_within(0.001).of(2.756)
             expect(@sample.error_bars("B")).to be_within(0.001).of(2.590)
@@ -80,7 +79,27 @@ module DataScience
 
         describe '#confidence_level' do
           it 'calculates the confidence level' do
-            expect(@sample.confidence_level("A", "B")).to be_within(0.01).of(0.99)
+            expect(@sample.confidence_level("A", "B")).to be_within(0.001).of(0.998)
+          end
+        end
+
+        describe '#print_error_bars' do
+          it 'prints the error bars in percentage format with a  precision of 2' do
+            expect(@sample.print_error_bars("A")).to eq("2.76%")
+            expect(@sample.print_error_bars("B")).to eq("2.59%")
+          end
+        end
+
+        describe '#print_conversion_rate' do
+          it 'prints the conversion rates rounded to a precision of 2' do
+            expect(@sample.print_conversion_rate("A")).to eq("0.30")
+            expect(@sample.print_conversion_rate("B")).to eq("0.24")
+          end
+        end
+
+        describe '#print_confidence_level' do
+          it 'print the confidence level in percentage format with a precision of 2' do
+            expect(@sample.print_confidence_level("A", "B")).to eq("99.8%")
           end
         end
       end

@@ -51,7 +51,8 @@ module DataScience
     end
 
     def standard_error(cohort)
-      Math.sqrt(conversion_rate(cohort) * (1 - conversion_rate(cohort)) / cohort_size(cohort))
+      error_factor = (1 - conversion_rate(cohort)) / cohort_size(cohort)
+      Math.sqrt(conversion_rate(cohort) * error_factor)
     end
 
     def error_bars(cohort)
@@ -61,9 +62,9 @@ module DataScience
     def confidence_level(group_1, group_2)
       values = {}
       values[:group_1] =
-        { non_conversions: non_conversions(group_1), conversions: conversions(group_1) }
+        { non_conv: non_conversions(group_1), conv: conversions(group_1) }
       values[:group_2] =
-        { non_conversions: non_conversions(group_2), conversions: conversions(group_2) }
+        { non_conv: non_conversions(group_2), conv: conversions(group_2) }
       tester = ABAnalyzer::ABTest.new(values)
       1 - tester.chisquare_p
     end

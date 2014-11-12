@@ -6,8 +6,10 @@ module DataScience
   describe Sample do
     before do
       @sample = Sample.new
-      @sample_data = [{ "date" => "2014-03-20", "cohort" => "B", "result" => 0 },
-        { "date" => "2014-03-20", "cohort" => "B", "result" => 0 }]
+      @sample_data = [
+        { "date" => "2014-03-20", "cohort" => "B", "result" => 0 },
+        { "date" => "2014-03-20", "cohort" => "B", "result" => 0 },
+      ]
     end
 
     it 'is instantiated with an empty array' do
@@ -81,8 +83,8 @@ module DataScience
 
         describe '#confidence_level' do
           it 'calculates the confidence level' do
-            expect(@sample.confidence_level("A", "B")).
-              to be_within(0.001).of(0.998)
+            expect(@sample.confidence_level("A", "B"))
+              .to be_within(0.001).of(0.998)
           end
         end
 

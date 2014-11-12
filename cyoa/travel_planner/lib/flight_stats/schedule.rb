@@ -35,9 +35,8 @@ module FlightStats
     def headers
       {
         "appId"  => "89cd457c",
-        "appKey" => "be2705cf426fe89bd49cbf1534d10978"
+        "appKey" => "be2705cf426fe89bd49cbf1534d10978",
       }
     end
-
   end
 end

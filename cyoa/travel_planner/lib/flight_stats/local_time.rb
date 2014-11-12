@@ -3,4 +3,3 @@ module LocalTime
     DateTime.parse(dt.strftime("%FT%T"))
   end
 end
-

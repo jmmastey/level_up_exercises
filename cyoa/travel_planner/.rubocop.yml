@@ -6,4 +6,6 @@ AllCops:
     - 'config/**/*'
     - 'lib/tasks/*'
     - 'script/**/*'
+    - 'features/support/env.rb'
+    - 'bin/spring'
     - !ruby/regexp /old_and_unused\.rb$/

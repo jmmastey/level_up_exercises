@@ -18,3 +18,9 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+every :hour, at: 15 do
+  runner 'CurrentWeatherWorker.perform_async'
+  runner 'SummaryForecastWorker.perform_async'
+  runner 'HourlyForecastWorker.perform_async'
+end

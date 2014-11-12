@@ -1,3 +1,186 @@
 // Place all the styles related to the forecast controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container {
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+.current_container {
+  width: 100%;
+  position: relative; 
+  overflow: hidden;
+
+  .current_icon {
+    position: relative;
+    width: 125px;
+    float: left;
+    margin: 5px;
+  }
+
+  .current_data {
+    position: relative;
+    width: 15%;
+    min-width: 100px;
+    float: left;
+    margin: 5px;
+    height: 135px;
+
+    .current_conditions {
+      font-size: 12pt;
+      margin: 0px;
+    }
+
+    .current_temperature {
+      font-size: 40pt;
+      font-weight: bold;
+      margin: 0px;
+    }
+  }
+
+  .current_detail {
+    position: relative;
+    width: 35%;
+    min-width: 225px;
+    float: left;
+    margin: 5px;
+    height: 135px;
+
+    ul {
+      margin: 1px;
+      list-style: none !important;
+      margin: 0px;
+      padding-left: 100px;
+      font-size: 10pt;
+    }
+
+    .label {
+      width: 100px;
+      text-align: right;
+      position: absolute;
+      margin: 0px;
+      margin-left: -110px;
+      font-weight: bold;
+    }
+
+    .observation_time {
+      margin: 5px;
+      font-size: 8pt;
+    }
+  }
+
+  .current_location {
+    position: relative;
+    width: 30%;
+    min-width: 100px;
+    float: left;
+    margin: 5px;
+
+    p {
+      margin: 0px;
+    }
+
+    .current_conditions_location {
+      font-size: 15pt;
+      font-weight: bold;
+      font-color: blue;
+    }
+  }
+}
+
+.hourly_container {
+  width: 100%;
+  position: relative; 
+  overflow: hidden;
+
+  .hourly_forecast {
+    position: relative;
+    width: 11%;
+    min-width: 75px;
+    float: left;
+    margin: 5px;
+    text-align: center;
+
+    .hourly_title {
+      font-size: 16pt;
+      text-align: center;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hourly_detail {
+      font-size: 10pt;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hourly_temperature {
+      font-size: 14pt;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+    }
+
+    .hourly_image {
+      width: 100%;
+      height: auto;
+      margin: 0px;
+      padding: 0px;
+    }
+  }
+}
+
+.forecast_container {
+  width: 100%;
+  position: relative; 
+  overflow: hidden;
+
+  .forecast {
+    position: relative;
+    width: 11%;
+    min-width: 75px;
+    float: left;
+    margin: 5px;
+    text-align: center;
+
+    .forecast_title {
+      min-height: 30px;
+      display: block;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 10pt;
+    }
+
+    .forecast_detail {
+      font-size: 11pt;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .forecast_temperature {
+      font-size: 12pt;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+    }
+
+
+    .forecast_image {
+      width: 100%;
+      height: auto;
+      margin: 0px;
+      padding: 0px;
+    }
+  }
+}

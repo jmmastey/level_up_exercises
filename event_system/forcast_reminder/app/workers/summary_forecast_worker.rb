@@ -4,7 +4,8 @@ class SummaryForecastWorker
   include Sidekiq::Worker
   include WorkerHelpers
   SUMMARY_URL = "http://www.weather.gov/forecasts/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php"
-  SUMMARY_PARAMETERS = {"zipCodeList" => "60606", "format" => "12 hourly" }
+  SUMMARY_PARAMETERS = {"zipCodeList" => "60606", "format" => "12 hourly",
+                        "begin" => DateTime.now.iso8601 }
 
   def perform
     data = RestClient.get(SUMMARY_URL, params: SUMMARY_PARAMETERS)
@@ -18,7 +19,7 @@ class SummaryForecastWorker
 
   def build_forecasts
     forecasts = Hash.new do |hash, key| 
-      hash[key] = Forecast.find_or_create_by(date: DateTime.parse(key[:date_time]),
+      hash[key] = Forecast.find_or_create_by(date: key[:date_time],
                                              zip_code: 60606)
       hash[key].date_description = key[:period]
       hash[key]

@@ -6,6 +6,7 @@ module WorkerHelpers
   def save(xml)
     @time_map = get_time_map(xml)
     @parameters = get_parameters(xml)
+    @head = get_base_head(xml)
     build_forecasts.each { |time, forecast| forecast.save }
   end
   
@@ -23,11 +24,15 @@ module WorkerHelpers
     xml.at_xpath('/dwml/data')
   end
 
+  def get_base_head(xml)
+    xml.at_xpath('/dwml/head')
+  end
+
   def get_time_layout_rows(time)
     time.xpath('start-valid-time').map do |t|
       {
         period: t['period-name'],
-        date_time: t.text,
+        date_time: DateTime.parse(t.text),
       }
     end
   end
@@ -40,11 +45,15 @@ module WorkerHelpers
     @parameters
   end
 
-  def get_data(forecasts, attribute, model_attribute, value_path='value', limit=nil, &filter)
+  def head
+    @head
+  end
+
+  def get_data(forecasts, attribute, model_attribute, value_path='value', &filter)
     data = get_worker(attribute, model_attribute, value_path, filter) do |value, time|
-      if value.text.present? && (!limit || limit > 0)
+      if value.text.present? && 
+          (!@time_limit || time[:date_time] <= @time_limit)
         forecasts[time][model_attribute] = value.text
-        limit -= 1 if limit
       end
     end
   end

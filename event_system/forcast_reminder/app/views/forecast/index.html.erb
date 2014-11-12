@@ -1,45 +1,75 @@
-<h1>Forecast for Chicago</h1>
-<div id="current_conditions">
-  <h2>Current Conditions</h2>
-  <% if @conditions %>
-    <p>Current Temperature: <%= @conditions.temperature %></p>
-    <p>Current Condition: <%= @conditions.conditions %></p>
-  <% else %>
-    <p>No current weather information available</p>
-  <% end %>
-</div>
-<div id="hourly_forecast">
-  <h2>Hourly Forecast</h2>
-  <% if @hourly_forecast.any? %>
-    <% @hourly_forecast.each_with_index do |hourly, index| %>
-      <div id="hourly_forecast-<%= index %>">
-        <%= hourly.time.to_s(:time) %><br />
-        <%= hourly.temperature %><br />
-        <%= hourly.dew_point %><br />
-        <%= hourly.precipitation %><br />
-        <%= hourly.wind_speed %><br />
-        <%= hourly.wind_direction %><br />
-        <%= hourly.cloud_cover %><br />
-        <%= hourly.hazard %><br />
-      </div>
+<div class="container">
+  <h1>Forecast Reminder</h1>
+  <div id="current_conditions">
+    <div class="current_container">
+      <h2>Current Conditions</h2>
+      <% if @conditions %>
+          <div class="current_icon">
+            <%= image_tag(@conditions.icon_url, class: 'current_icon') %>
+          </div>
+          <div class="current_data">
+            <p class="current_conditions"><%= @conditions.condition %></p>
+            <p class="current_temperature"><%= @conditions.temperature %>°F</p>
+          </div>
+          <div class="current_detail">
+            <ul class="current__detail">
+              <li><span class="label">Humidity</span> <%= @conditions.humidity %>%</li>
+              <li><span class="label">Wind Speed</span> <%= @conditions.wind %></li>
+              <li><span class="label">Barometer</span> <%= @conditions.pressure %> in</li>
+              <li><span class="label">Dew Point</span> <%= @conditions.dew_point %>°F</li>
+              <li><span class="label">Visibility</span> <%= @conditions.visibility %> mi</li>
+              <li><span class="label">Wind Chill</span> <%= @conditions.wind_chill %>°F</li>
+            </ul>
+            <p class="observation_time"><%= @conditions.observation_time %></p>
+          </div>
+          <div class="current_location">
+            <p style="font-size: 10pt;">Current conditions at</p>
+            <p class="current_conditions_location"><%= @conditions.location_name %> (<%= @conditions.station_id %>)</p>
+            <p><%= link_to("History", @conditions.history_url) %></p>
+          </div>
+      <% else %>
+        <p>No current weather information available</p>
+      <% end %>
+    </div>
+  </div>
+  <div class="hourly_container" id="hourly_forecast">
+    <h2>Next 24 Hours</h2>
+    <% if @hourly_forecast.any? %>
+      <% @hourly_forecast.each_with_index do |hourly, index| %>
+        <div class="hourly_forecast" id="hourly_forecast-<%= index %>">
+          <p class="hourly_title"><%= hourly.time.to_s(:time) %></p>
+          <%= image_tag(hourly.icon_url, class: 'hourly_image') %>
+          <p class="hourly_temperature"><%= hourly.temperature %>°F</p>
+          <p class="hourly_detail">DPT <%= hourly.dew_point %>°F</p>
+          <p class="hourly_detail">
+          <% if hourly.precipitation %>
+            Precip <%= hourly.precipitation %>in
+          <% else %>
+            &nbsp;
+          <% end %>
+          </p>
+          <p class="hourly_detail"> Wind <%= hourly.wind_speed %>kt <%= Geocoder::Calculations.compass_point(hourly.wind_direction) %></p>
+          <p class="hourly_detail"><%= hourly.cloud_cover %>% Clouds</p>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No hourly forecast information available</p>
     <% end %>
-  <% else %>
-    <p>No hourly forecast information available</p>
-  <% end %>
-</div>
-<div id="extended_forecast">
-  <h2>Forecast</h2>
-  <% if @forecasts.any? %>
-    <% @forecasts.each_with_index do |forecast, index| %>
-      <div id="extended_forecast-<%= index %>">
-        <%= forecast.date_description %><br />
-        <%= image_tag(forecast.icon_url) %><br />
-        Temperature: <%= forecast.temperature %><br />
-        Precipitation: <%= forecast.precipitation %><br />
-        Condition: <%= forecast.condition %>
-      </div>
+  </div>
+  <div class="forecast_container" id="extended_forecast">
+    <h2>Extended Forecast</h2>
+    <% if @forecasts.any? %>
+      <% @forecasts.each_with_index do |forecast, index| %>
+        <div class="forecast" id="extended_forecast-<%= index %>">
+          <p class="forecast_title"><%= forecast.date_description %></p>
+          <%= image_tag(forecast.icon_url, class: "forecast_image") %>
+          <p class="forecast_temperature"><%= forecast.temperature %>°F</p>
+          <p class="forecast_detail"><%= forecast.condition %></p>
+          <p class="forecast_detail">Precip <%= forecast.precipitation %>%</p>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No forecast weather information available</p>
     <% end %>
-  <% else %>
-    <p>No forecast weather information available</p>
-  <% end %>
+  </div>
 </div>

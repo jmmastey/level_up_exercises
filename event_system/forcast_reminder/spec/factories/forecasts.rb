@@ -7,7 +7,7 @@ FactoryGirl.define do
     temperature Random.rand(-32..120)
     condition %w"Rain Cloudy Sunny Partly-Cloudy Snow".sample
     precipitation Random.rand(0..100)
-    icon_url Faker::Internet.url
+    icon_url = Faker::Avatar.image
     date_description { "#{Date::DAYNAMES[date.wday]}" }
   end
 

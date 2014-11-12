@@ -11,20 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106180808) do
+ActiveRecord::Schema.define(version: 20141111213036) do
 
   create_table "current_weathers", force: true do |t|
-    t.integer  "zip_code"
-    t.float    "temperature"
-    t.string   "conditions"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "temperature"
+    t.string   "condition"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "station_id"
+    t.string   "location_name"
+    t.string   "observation_time"
+    t.string   "wind"
+    t.float    "pressure"
+    t.integer  "dew_point"
+    t.integer  "wind_chill"
+    t.float    "visibility"
+    t.string   "icon_url"
+    t.string   "history_url"
+    t.integer  "humidity"
   end
 
   create_table "forecasts", force: true do |t|
     t.integer  "zip_code"
     t.datetime "date"
-    t.float    "temperature"
+    t.integer  "temperature"
     t.string   "condition"
     t.integer  "precipitation"
     t.string   "icon_url"
@@ -37,8 +47,8 @@ ActiveRecord::Schema.define(version: 20141106180808) do
 
   create_table "hourly_forecasts", force: true do |t|
     t.datetime "time"
-    t.float    "temperature"
-    t.float    "dew_point"
+    t.integer  "temperature"
+    t.integer  "dew_point"
     t.float    "precipitation"
     t.integer  "wind_speed"
     t.integer  "wind_direction"
@@ -47,6 +57,7 @@ ActiveRecord::Schema.define(version: 20141106180808) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "zip_code"
+    t.string   "icon_url"
   end
 
 end

@@ -1,0 +1,59 @@
+HTTP/1.1 200 OK
+Server: Apache/2.2.15 (Red Hat)
+X-NIDS-ServerID: www1.mo
+Last-Modified: Tue, 11 Nov 2014 18:02:16 GMT
+Accept-Ranges: bytes
+Content-Length: 2261
+Content-Type: application/xml
+Date: Tue, 11 Nov 2014 18:17:35 GMT
+Connection: keep-alive
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<?xml-stylesheet href="latest_ob.xsl" type="text/xsl"?>
+<current_observation version="1.0"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:noNamespaceSchemaLocation="http://www.weather.gov/view/current_observation.xsd">
+	<credit>NOAA's National Weather Service</credit>
+	<credit_URL>http://weather.gov/</credit_URL>
+	<image>
+		<url>http://weather.gov/images/xml_logo.gif</url>
+		<title>NOAA's National Weather Service</title>
+		<link>http://weather.gov</link>
+	</image>
+	<suggested_pickup>15 minutes after the hour</suggested_pickup>
+	<suggested_pickup_period>60</suggested_pickup_period>
+	<location>Chicago Midway Airport, IL</location>
+	<station_id>KMDW</station_id>
+	<latitude>41.79</latitude>
+	<longitude>-87.75</longitude>
+	<observation_time>Last Updated on Nov 11 2014, 11:53 am CST</observation_time>
+        <observation_time_rfc822>Tue, 11 Nov 2014 11:53:00 -0600</observation_time_rfc822>
+	<weather>Light Rain</weather>
+	<temperature_string>41.0 F (5.0 C)</temperature_string>
+	<temp_f>41.0</temp_f>
+	<temp_c>5.0</temp_c>
+	<relative_humidity>86</relative_humidity>
+	<wind_string>West at 15.0 MPH (13 KT)</wind_string>
+	<wind_dir>West</wind_dir>
+	<wind_degrees>270</wind_degrees>
+	<wind_mph>15.0</wind_mph>
+	<wind_kt>13</wind_kt>
+	<pressure_string>1007.9 mb</pressure_string>
+	<pressure_mb>1007.9</pressure_mb>
+	<pressure_in>29.76</pressure_in>
+	<dewpoint_string>37.0 F (2.8 C)</dewpoint_string>
+	<dewpoint_f>37.0</dewpoint_f>
+	<dewpoint_c>2.8</dewpoint_c>
+	<windchill_string>33 F (1 C)</windchill_string>
+      	<windchill_f>33</windchill_f>
+      	<windchill_c>1</windchill_c>
+	<visibility_mi>10.00</visibility_mi>
+ 	<icon_url_base>http://forecast.weather.gov/images/wtf/small/</icon_url_base>
+	<two_day_history_url>http://www.weather.gov/data/obhistory/KMDW.html</two_day_history_url>
+	<icon_url_name>ra.png</icon_url_name>
+	<ob_url>http://www.weather.gov/data/METAR/KMDW.1.txt</ob_url>
+	<disclaimer_url>http://weather.gov/disclaimer.html</disclaimer_url>
+	<copyright_url>http://weather.gov/disclaimer.html</copyright_url>
+	<privacy_policy_url>http://weather.gov/notice.html</privacy_policy_url>
+</current_observation>

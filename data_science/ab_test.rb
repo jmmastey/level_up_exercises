@@ -11,6 +11,9 @@ class ABTest
     0.90 => 2.706,
   }
 
+  RESULTS = [:success, :failure]
+  SEPARATOR = '-' * 100
+
   def initialize(matrix)
     raise InvalidABMatrixError unless valid_matrix?(matrix)
     @cohort_totals = {}
@@ -27,8 +30,16 @@ class ABTest
     CONFIDENCE_LEVEL_CUTOFFS.find { |_, v| v < chi_squared }.first
   end
 
-  def significant?(confidence_level = 0.90)
-    chi_squared > CONFIDENCE_LEVEL_CUTOFFS[confidence_level]
+  def significant?(confidence = 0.90)
+    raise ArgumentError unless CONFIDENCE_LEVEL_CUTOFFS.key?(confidence)
+    chi_squared > CONFIDENCE_LEVEL_CUTOFFS[confidence]
+  end
+
+  def to_s
+    SEPARATOR + "\n" +
+    @cohorts.sort_by(&:name).map(&:to_s).join("\n") + "\n" +
+    SEPARATOR + "\n" +
+    decision + "\n"
   end
 
   private
@@ -38,7 +49,7 @@ class ABTest
 
     matrix.all? do |_, row|
       row.all? do |col_key, col|
-        [:success, :failure].include?(col_key) && col.is_a?(Numeric)
+        RESULTS.include?(col_key) && col.is_a?(Numeric)
       end
     end
   end
@@ -86,9 +97,21 @@ class ABTest
 
   def calculate_chi_squared
     @cohorts.inject(0) do |a, cohort|
-      [:success, :failure].inject(a) do |b, result|
+      RESULTS.inject(a) do |b, result|
         b + chi_squared_component(cohort.name, result, cohort[result])
       end
+    end
+  end
+
+  def leader
+    @cohorts.sort_by(&:success_ratio).last
+  end
+
+  def decision(threshold = 0.90)
+    if significant?(threshold)
+      "Leader is #{leader.name} at #{confidence_level * 100}% confidence level"
+    else
+      "No clear leader at #{threshold * 100}% confidence level"
     end
   end
 end

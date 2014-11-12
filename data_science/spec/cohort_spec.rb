@@ -56,6 +56,10 @@ describe Cohort do
     it "calculates correct high with 95% confidence" do
       expect(cohort.confidence_interval[1]).to be_within(1e-10).of(0.00)
     end
+
+    it "outputs the stats of the cohort" do
+      expect(cohort.to_s).to eq("This cohort does not contain any results")
+    end
   end
 
   context "when successes added" do
@@ -76,6 +80,10 @@ describe Cohort do
     it "calculates success_ratio" do
       expect(cohort.success_ratio).to be_within(1e-10).of(1.00)
     end
+
+    it "displays stats" do
+      expect(cohort.to_s).to eq("A | No. of Samples:     4, success_ratio: 100.00%, 95% confidence interval: (100.00% - 100.00%)")
+    end
   end
 
   context "when failures added" do
@@ -95,6 +103,10 @@ describe Cohort do
 
     it "calculates success ratio" do
       expect(cohort.success_ratio).to be_within(1e-10).of(0.00)
+    end
+
+    it "displays stats" do
+      expect(cohort.to_s).to eq("A | No. of Samples:     5, success_ratio: 0.00%, 95% confidence interval: (0.00% - 0.00%)")
     end
   end
 
@@ -126,6 +138,10 @@ describe Cohort do
     it "calculates correct high with 95% confidence" do
       expect(cohort.confidence_interval[1]).to be_within(1e-10)
         .of(0.6462422379455947)
+    end
+
+    it "displays stats" do
+      expect(cohort.to_s).to eq("A | No. of Samples:    75, success_ratio: 53.33%, 95% confidence interval: (42.04% - 64.62%)")
     end
   end
 end

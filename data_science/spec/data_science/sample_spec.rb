@@ -19,15 +19,10 @@ module DataScience
 
     context 'calculate sample statistics' do
       before do
-        @control_group_non_conversions = build_list(:control_group_no_conversion, 744)
-        @control_group_conversions = build_list(:control_group_conversion, 320)
-        @test_group_non_conversions = build_list(:test_group_no_conversion, 793)
-        @test_group_conversions = build_list(:test_group_conversion, 250)
-
-        @control_group_non_conversions.each { |data_point| @sample.data_points << data_point }
-        @control_group_conversions.each { |data_point| @sample.data_points << data_point }
-        @test_group_non_conversions.each { |data_point| @sample.data_points << data_point }
-        @test_group_conversions.each { |data_point| @sample.data_points << data_point }
+        @sample.data_points += build_list(:data_point, 744, cohort: "A", result: 0)
+        @sample.data_points += build_list(:data_point, 320, cohort: "A", result: 1)
+        @sample.data_points += build_list(:data_point, 793, cohort: "B", result: 0)
+        @sample.data_points += build_list(:data_point, 250, cohort: "B", result: 1)
       end
 
       it 'calculates the total sample size' do
@@ -36,49 +31,31 @@ module DataScience
 
       it 'calculates the number of conversions for the Control group' do
         expect(@sample.conversions("A")).to eq(320)
-      end
-
-      it 'calculates the number of conversions for the Test group' do
         expect(@sample.conversions("B")).to eq(250)
       end
 
-      it 'calculates the number of non-conversions for the Control group' do
+      it 'calculates the number of non-conversions' do
         expect(@sample.non_conversions("A")).to eq(744)
-      end
-
-      it 'calculates the number of non-conversions for the Test group' do
         expect(@sample.non_conversions("B")).to eq(793)
       end
 
       it 'calculates the cohort size for the Control group' do
         expect(@sample.cohort_size("A")).to eq(1064)
-      end
-
-      it 'calculates the cohort size for the Test group' do
         expect(@sample.cohort_size("B")).to eq(1043)
       end
 
       it 'calculates the conversion rate for the Control group' do
         expect(@sample.conversion_rate("A")).to be_within(0.0001).of(0.3008)
-      end
-
-      it 'calculates the conversion rate for the Test group' do
         expect(@sample.conversion_rate("B")).to be_within(0.0001).of(0.2397)
       end
 
       it 'calculates the standard error for the Control group' do
         expect(@sample.standard_error("A")).to be_within(0.00001).of(0.01406)
-      end
-
-      it 'calculates the standard error for the Test group' do
         expect(@sample.standard_error("B")).to be_within(0.0001).of(0.0132)
       end
 
-      it 'calculates the error bars conversion with a 95% confidence for the Control group' do
+      it 'calculates the error bars conversion with a 95% confidence' do
         expect(@sample.error_bars("A")).to be_within(0.00001).of(0.02756)
-      end
-
-      it 'calculates the error bars conversion with a 95% confidence for the Test group' do
         expect(@sample.error_bars("B")).to be_within(0.00001).of(0.02590)
       end
 

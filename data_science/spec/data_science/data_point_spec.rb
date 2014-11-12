@@ -3,7 +3,7 @@ require 'data_science/data_point'
 module DataScience
   describe DataPoint do
     before do
-      @data_point = DataPoint.new({"date"=>"2014-03-20", "cohort"=>"B", "result"=>0})
+      @data_point = DataPoint.new({ "date"=>"2014-03-20", "cohort"=>"B", "result"=>0 })
     end
 
     it 'has a date' do

@@ -10,8 +10,8 @@ module DataScience
       @sample = Sample.new
     end
 
-    def import_json_data(json_data)
-      @sample.add_data_to_sample(json_data)
+    def import_data(data)
+      @sample.add_data_to_sample(data)
     end
 
     def print_statistical_results(group_1, group_2)

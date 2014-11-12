@@ -55,8 +55,8 @@ module DataScience
       end
 
       it 'calculates the error bars conversion with a 95% confidence' do
-        expect(@sample.error_bars("A")).to be_within(0.00001).of(0.02756)
-        expect(@sample.error_bars("B")).to be_within(0.00001).of(0.02590)
+        expect(@sample.error_bars("A")).to be_within(0.001).of(2.756)
+        expect(@sample.error_bars("B")).to be_within(0.001).of(2.590)
       end
 
       it 'calculates the confidence level of the sample for cohorts A and B' do

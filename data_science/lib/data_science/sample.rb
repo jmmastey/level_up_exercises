@@ -25,8 +25,6 @@ module DataScience
       @data_points.size
     end
 
-    # cohort should be an object and has its own attributes; it number of conversions and size
-
     def conversions(cohort)
       @data_points.select { |visitor| visitor.cohort == cohort && visitor.result == 1 }.size
     end
@@ -48,7 +46,7 @@ module DataScience
     end
 
     def error_bars(cohort)
-      standard_error(cohort) * CONVERSION_RATE_MULTIPLIER_FOR_95_CONFIDENCE
+      (standard_error(cohort) * CONVERSION_RATE_MULTIPLIER_FOR_95_CONFIDENCE * 100)
     end
 
     def confidence_level(group_1, group_2)

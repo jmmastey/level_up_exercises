@@ -6,7 +6,8 @@ module DataScience
   describe Sample do
     before do
       @sample = Sample.new
-      @sample_data = [{"date"=>"2014-03-20", "cohort"=>"B", "result"=>0}, {"date"=>"2014-03-20", "cohort"=>"B", "result"=>0}]
+      @sample_data = [{ "date" => "2014-03-20", "cohort" => "B", "result" => 0 },
+        { "date" => "2014-03-20", "cohort" => "B", "result" => 0 }]
     end
 
     it 'is instantiated with an empty array' do
@@ -23,10 +24,10 @@ module DataScience
 
     context 'when calculating sample statistics' do
       before do
-        @sample.data_points += build_list(:data_point, 744, cohort: "A", result: 0)
-        @sample.data_points += build_list(:data_point, 320, cohort: "A", result: 1)
-        @sample.data_points += build_list(:data_point, 793, cohort: "B", result: 0)
-        @sample.data_points += build_list(:data_point, 250, cohort: "B", result: 1)
+        @sample.data_points += build_list(:data, 744, cohort: "A", result: 0)
+        @sample.data_points += build_list(:data, 320, cohort: "A", result: 1)
+        @sample.data_points += build_list(:data, 793, cohort: "B", result: 0)
+        @sample.data_points += build_list(:data, 250, cohort: "B", result: 1)
       end
 
       describe '#sample_size' do
@@ -80,12 +81,13 @@ module DataScience
 
         describe '#confidence_level' do
           it 'calculates the confidence level' do
-            expect(@sample.confidence_level("A", "B")).to be_within(0.001).of(0.998)
+            expect(@sample.confidence_level("A", "B")).
+              to be_within(0.001).of(0.998)
           end
         end
 
         describe '#print_error_bars' do
-          it 'prints the error bars in percentage format with a  precision of 2' do
+          it 'prints the error bars in % format with a precision of 2' do
             expect(@sample.print_error_bars("A")).to eq("2.76%")
             expect(@sample.print_error_bars("B")).to eq("2.59%")
           end
@@ -99,7 +101,7 @@ module DataScience
         end
 
         describe '#print_confidence_level' do
-          it 'print the confidence level in percentage format with a precision of 2' do
+          it 'print the confidence level in % format with a precision of 2' do
             expect(@sample.print_confidence_level("A", "B")).to eq("99.8%")
           end
         end

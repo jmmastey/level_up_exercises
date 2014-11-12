@@ -15,7 +15,8 @@ module DataScience
 
     describe '#import_data' do
       it 'creates a sample of data points from a json file' do
-        json_data = JsonParser.parse_file(File.join(File.dirname(__FILE__), "source_data_test.json"))
+        json_file = File.join(File.dirname(__FILE__), "source_data_test.json")
+        json_data = JsonParser.parse_file(json_file)
         conversion_test.import_data(json_data)
         expect(conversion_test.sample.data_points.size).to eq(4)
       end

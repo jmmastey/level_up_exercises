@@ -5,7 +5,6 @@ require 'active_support/core_ext/numeric/conversions'
 
 module DataScience
   class ConversionTest
-
     attr_reader :name, :sample
 
     def initialize(name)
@@ -18,7 +17,7 @@ module DataScience
     end
 
     def print_statistical_results(group_1, group_2)
-      %Q{
+      %{
       \nBelow are the results of the web conversion data:\n\n
       Total Size of the Control Group: #{@sample.cohort_size(group_1)}
       Number of Conversions for the Control Group: #{@sample.conversions(group_1)}\n\n

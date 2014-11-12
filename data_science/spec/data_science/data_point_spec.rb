@@ -2,7 +2,8 @@ require 'data_science/data_point'
 
 module DataScience
   describe DataPoint do
-    let(:data_point) { DataPoint.new({ "date"=>"2014-03-20", "cohort"=>"B", "result"=>0 }) }
+    json_data = { "date" => "2014-03-20", "cohort" => "B", "result" => 0 }
+    let(:data_point) { DataPoint.new(json_data) }
 
     it 'has a date' do
       expect(data_point.date).to eq("2014-03-20")

@@ -8,7 +8,7 @@ module DataScience
 
     attr_accessor :data_points
 
-    CONVERSION_RATE_MULTIPLIER_FOR_95_CONFIDENCE = 1.96
+    CONVERSION_RATE_MULTIPLIER_95_CONFIDENCE = 1.96
 
     def initialize
       @data_points = []
@@ -29,11 +29,17 @@ module DataScience
     end
 
     def conversions(cohort)
-      @data_points.select { |visitor| visitor.cohort == cohort && visitor.result == 1 }.size
+      number_of_conversions = @data_points.select do |visitor|
+        visitor.cohort == cohort && visitor.result == 1
+      end
+      number_of_conversions.size
     end
 
     def non_conversions(cohort)
-      @data_points.select { |visitor| visitor.cohort == cohort && visitor.result == 0 }.size
+      number_of_non_conversions = @data_points.select do |visitor|
+        visitor.cohort == cohort && visitor.result == 0
+      end
+      number_of_non_conversions.size
     end
 
     def cohort_size(cohort)
@@ -49,13 +55,15 @@ module DataScience
     end
 
     def error_bars(cohort)
-      standard_error(cohort) * CONVERSION_RATE_MULTIPLIER_FOR_95_CONFIDENCE * 100
+      standard_error(cohort) * CONVERSION_RATE_MULTIPLIER_95_CONFIDENCE * 100
     end
 
     def confidence_level(group_1, group_2)
       values = {}
-      values[:group_1] = { non_conversions: non_conversions(group_1), conversions: conversions(group_1) }
-      values[:group_2] = { non_conversions: non_conversions(group_2), conversions: conversions(group_2) }
+      values[:group_1] =
+        { non_conversions: non_conversions(group_1), conversions: conversions(group_1) }
+      values[:group_2] =
+        { non_conversions: non_conversions(group_2), conversions: conversions(group_2) }
       tester = ABAnalyzer::ABTest.new(values)
       1 - tester.chisquare_p
     end

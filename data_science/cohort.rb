@@ -42,12 +42,12 @@ class Cohort
     return "This cohort does not contain any results" if size == 0
 
     format("%s | No. of Samples: %5d, success_ratio: %3.2f%%, 95%% confidence interval: %s",
-      name, size, success_ratio * 100, confidence_interval_humanized)
+      name, size, success_ratio * 100, confidence_interval_human_readable)
   end
 
   private
 
-  def confidence_interval_humanized
+  def confidence_interval_human_readable
     lower, upper = confidence_interval.map { |ci| format("%3.2f\%" , (ci * 100)) }
     "(#{lower} - #{upper})"
   end

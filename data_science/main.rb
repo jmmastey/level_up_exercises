@@ -24,10 +24,11 @@ def data_count_by_result(cohort_data)
 end
 
 def data_to_ab_test_matrix(data)
-  data.group_by { |d| d['cohort'] }
-    .each_with_object({}) do |(name, cohort_data), hash|
-      hash[name] = data_count_by_result(cohort_data)
-    end
+  grouped = data.group_by { |d| d['cohort'] }
+
+  grouped.each_with_object({}) do |(name, cohort_data), hash|
+    hash[name] = data_count_by_result(cohort_data)
+  end
 end
 
 print_usage if ARGV.empty? || help?

@@ -3,6 +3,7 @@
 //      $(".menu li").removeClass("active");
 //      $(this).addClass("active");
 //   });
+//  });
 
 $(document).ready(function(){
    $('.menu li').click(function(){
@@ -10,13 +11,13 @@ $(document).ready(function(){
      $(this).addClass("float-bar");
   });
 
- $('.menu li').hover(
-   function (){
-     $(this).css({"background-color":"#F2F2F0"});
-  },
-  function (){
-    $(this).css({"background-color":"white"});
-  });
+ // $('.menu li').hover(
+ //   function (){
+ //     $(this).css({"background-color":"#F2F2F0"});
+ //  },
+ //  function (){
+ //    $(this).css({"background-color":"white"});
+ //  });
 
   $('.select-button').click(function(){
    $( ".boxmenu" ).toggle();

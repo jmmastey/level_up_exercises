@@ -16,11 +16,11 @@
 		  <% association = { showing_id: showing[:id], user_id: current_user[:id] } %>
 		  <% if member %>
 		  <%= link_to image_tag("minus.png", :class => 'minus'), 
-		    { controller: 'showings', action: 'remove_from_user', showing_id: showing.id },
+		    { controller: 'showings', action: 'remove_from_user', id: showing.id },
 		    method: :post, :id => "remove-#{showing[:id]}-event-show" %>
 		  <% else %>
 		  <%= link_to image_tag("plus.png", :class => 'plus'), 
-		  { controller: 'showings', action: 'add_to_user', showing_id: showing.id},
+		  { controller: 'showings', action: 'add_to_user', id: showing.id },
 		  method: :post, :id => "add-#{showing[:id]}" %>
 		  <% end %>
 		</td>

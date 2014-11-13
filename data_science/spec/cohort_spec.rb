@@ -20,15 +20,6 @@ describe Cohort do
     let(:cohort) { Cohort.new('A') }
     subject { cohort }
 
-    it { is_expected.to be_instance_of Cohort }
-    it { is_expected.to respond_to(:size).with(0).argument }
-    it { is_expected.to respond_to(:[]).with(1).argument }
-    it { is_expected.to respond_to(:success_ratio).with(0).argument }
-    it { is_expected.to respond_to(:add_successes).with(1).argument }
-    it { is_expected.to respond_to(:add_failures).with(1).argument }
-    it { is_expected.to respond_to(:standard_error).with(0).argument }
-    it { is_expected.to respond_to(:confidence_interval).with(0).argument }
-
     it "has a sample size of zero" do
       expect(cohort.size).to eq(0)
     end

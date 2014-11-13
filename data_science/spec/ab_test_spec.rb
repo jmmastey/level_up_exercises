@@ -41,14 +41,12 @@ describe ABTest do
     let(:ab_test) { ABTest.new(insignificant) }
     subject { ab_test }
 
-    it { is_expected.to be_instance_of ABTest }
-
     it "calculates the chi-squared value" do
       expect(ab_test.chi_squared).to be_within(1e-6).of(1.763490909)
     end
 
     it "tells whether significant or not" do
-      expect(ab_test.significant?).to be(false)
+      expect(ab_test).not_to be_significant
     end
 
     it "calculates the confidence level" do
@@ -72,14 +70,12 @@ describe ABTest do
     let(:ab_test) { ABTest.new(significant_99_5) }
     subject { ab_test }
 
-    it { is_expected.to be_instance_of ABTest }
-
     it "calculates the chi-squared value" do
       expect(ab_test.chi_squared).to be_within(1e-6).of(12.96302091)
     end
 
     it "calculates whether significant or not" do
-      expect(ab_test.significant?).to be(true)
+      expect(ab_test).to be_significant
     end
 
     it "calculates the confidence level" do
@@ -103,14 +99,12 @@ describe ABTest do
     let(:ab_test) { ABTest.new(significant_90) }
     subject { ab_test }
 
-    it { is_expected.to be_instance_of ABTest }
-
     it "calculates the chi-squared value" do
       expect(ab_test.chi_squared).to be_within(1e-6).of(3.159214303)
     end
 
     it "calculates whether significant or not" do
-      expect(ab_test.significant?).to be(true)
+      expect(ab_test).to be_significant
     end
 
     it "calculates the confidence level" do

@@ -24,7 +24,11 @@ module ApplicationHelper
     def pretty_date_no_dow
       @time.strftime('%b %-d, %Y')
     end
-    
+
+    def pretty_date_no_year
+      @time.strftime("%b %-d")
+    end
+      
     def pretty_dow
       @time.strftime('%a')
     end
@@ -32,7 +36,7 @@ module ApplicationHelper
     def pretty_time
       @time.strftime('%I:%M %P')
     end
-  
+
     private
     
     def to_local_tz(time)

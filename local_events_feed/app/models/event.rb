@@ -91,12 +91,4 @@ class Event < ActiveRecord::Base
     return if unique?
     errors[:base] << "This is a duplicate event"
   end
-
-  def pretty_date(time)
-    time.strftime("%b %-d, %Y")
-  end
-
-  def pretty_date_no_year(time)
-    time.strftime("%b %-d")
-  end
 end

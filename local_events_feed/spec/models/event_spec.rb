@@ -51,32 +51,6 @@ RSpec.describe Event, :type => :model do
     expect(event).to have(2).showings
   end
 
-  it 'can show a date range of showings' do
-    expect(event_with_showings.pretty_date_range).to eq('Oct 1 - Oct 3, 2014')
-  end
-
-  it 'can show single-day showings date-range' do
-    showing
-    expect(event.pretty_date_range).to eq('Oct 1, 2014 Only')
-  end
-
-  it 'can show an empty showings date-range' do
-    expect(event.pretty_date_range).to eq('No Showings')
-  end
-
-  it 'can show a pretty count of showings' do
-    expect(event_with_showings.pretty_showing_count).to eq('3 Showings')
-  end
-
-  it 'can show a pretty count of empty showings' do
-    expect(event.pretty_showing_count).to eq('No Showings')
-  end
-
-  it 'can show a pretty count of one showings' do
-    showing
-    expect(event.pretty_showing_count).to eq('1 Showing')
-  end
-
   it 'can show a sorted list of showings' do
     expect(event_with_showings.sorted_showings[0].time.day).to eq(1)
     expect(event_with_showings.sorted_showings[1].time.day).to eq(2)

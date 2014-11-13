@@ -13,9 +13,13 @@
 					{ id: "#{event.name}-events" } %>
 			  </span>
 			</li>
+
+			<% pretty_date_range = ShowingsHelper.pretty_date_range(event.showings) %>
+			<% pretty_showing_count = ShowingsHelper.pretty_showing_count(event.showings) %>
+
 			<li><span class='location'><%= event.location.truncate(40) %></span></li>
-			<li><span class='date-range'><%= event.pretty_date_range %></span></li>
-			<li><span class='showing-count'><%= event.pretty_showing_count %></span></li>
+			<li><span class='date-range'><%= pretty_date_range %></span></li>
+			<li><span class='showing-count'><%= pretty_showing_count %></span></li>
 		  </ul>
 		</td>
 		<td class="<%= member_class %> image" %>

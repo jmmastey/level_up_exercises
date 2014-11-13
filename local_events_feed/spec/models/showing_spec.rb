@@ -49,15 +49,6 @@ RSpec.describe Showing, :type => :model do
     expect(sorted_showings[2].time.day).to eq(3)
   end
 
-  it 'can tell if a list of showings are on one day only' do
-    showing
-    expect(Showing.one_day_only?(event.showings)).to be true
-  end
-
-  it 'can tell if a list of showings are on one day only' do
-    expect(Showing.one_day_only?(showings)).to be false
-  end
-
   it "no longer exists when the event is destroyed" do
     expect(Showing.all).to be_empty
   end

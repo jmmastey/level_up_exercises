@@ -16,6 +16,10 @@ RSpec.describe ApplicationHelper, :type => :helper do
     expect(local_time_view.pretty_date_no_dow).to eq("Oct 1, 2014")
   end
 
+  it "displays pretty local date without the year correctly" do
+    expect(local_time_view.pretty_date_no_year).to eq("Oct 1")
+  end
+
   it "displays pretty local day-of-week" do
     expect(local_time_view.pretty_dow).to eq("Wed")
   end

@@ -12,8 +12,9 @@
 	  <td class="attributes">
 		<ul>
 		  <li>
-			<span class="date"><%= showing.pretty_local_date %></span>&nbsp
-			<span class="time"><%= showing.pretty_local_time %></span>
+			<% local_time_view = ApplicationHelper::LocalTimeView.new(showing.time) %>
+			<span class="date"><%= local_time_view.pretty_date %></span>&nbsp
+			<span class="time"><%= local_time_view.pretty_time %></span>
 		  </li>
 		  <li>
 			<span class="name"><%= link_to showing.name.truncate(50), showing.event %></span>

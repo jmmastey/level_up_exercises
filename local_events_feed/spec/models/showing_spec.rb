@@ -43,26 +43,6 @@ RSpec.describe Showing, :type => :model do
     expect(showing).to respond_to(:description)
   end
 
-  it "displays local time correctly" do
-    expect(showing.to_local_time_s).to eq("10/01/2014 09:30 am")
-  end
-
-  it "displays pretty local date correctly" do
-    expect(showing.pretty_local_date).to eq("Wed, Oct 1, 2014")
-  end
-
-  it "displays pretty local date without day of week correctly" do
-    expect(showing.pretty_local_date_no_dow).to eq("Oct 1, 2014")
-  end
-
-  it "displays pretty local day-of-week" do
-    expect(showing.pretty_local_dow).to eq("Wed")
-  end
-
-  it "displays pretty local time correctly" do
-    expect(showing.pretty_local_time).to eq("09:30 am")
-  end
-
   it "sorts a list of showings" do
     expect(sorted_showings[0].time.day).to eq(1)
     expect(sorted_showings[1].time.day).to eq(2)

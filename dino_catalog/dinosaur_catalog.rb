@@ -62,7 +62,7 @@ class DinosaurSearch
             index = reset_resultant(index)
           elsif symbol == "equal"
             if options[key].is_a?(Array)
-              unless (options[key].include?(dinosaur[key].downcase))
+              unless options[key].include?(dinosaur[key].downcase)
                 index = reset_resultant(index)
               end
             elsif options[key] != dinosaur[key].downcase

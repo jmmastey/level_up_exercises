@@ -65,7 +65,7 @@ module FlightStats
 
     def get_offset_from_airports(airport)
       offset                    = @airports.select { |a| a["fs"] == airport }[0]["utcOffsetHours"]
-      @airport_offsets[airport] = '%+05.f' % (offset.to_f * 100.0)
+      @airport_offsets[airport] = sprintf("%+05.f", (offset.to_f * 100.0))
       @airport_offsets[airport]
     end
 

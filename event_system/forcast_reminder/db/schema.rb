@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112173634) do
+ActiveRecord::Schema.define(version: 20141113220928) do
 
   create_table "current_weathers", force: true do |t|
     t.integer  "temperature"
@@ -42,8 +42,6 @@ ActiveRecord::Schema.define(version: 20141112173634) do
     t.datetime "updated_at",       null: false
     t.string   "date_description"
   end
-
-  add_index "forecasts", ["date"], name: "index_forecasts_on_date", unique: true
 
   create_table "hourly_forecasts", force: true do |t|
     t.datetime "time"

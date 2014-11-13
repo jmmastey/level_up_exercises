@@ -16,7 +16,6 @@ class BaseForecastWorker
 
   def base_request_parameters
     raise NotImplementedError, "base_request_parameters needs to be implemented"
-
   end
 
   def zip_codes
@@ -25,7 +24,9 @@ class BaseForecastWorker
 
   def forecast_xml(zip_code)
     data = raw_data(zip_code)
-    unless data.include?("error")
+    if data.include?("error")
+      logger.warn("Failed to get info: #{data}")
+    else
       Nokogiri::XML(data)
     end
   rescue => e
@@ -39,7 +40,8 @@ class BaseForecastWorker
   end
 
   def request_parameters(zip_code)
-    base_request_parameters.merge({ begin: Time.zone.now.iso8601, zipCodeList: zip_code })
+    base_request_parameters.merge({ begin: Time.zone.now.iso8601, 
+                                    zipCodeList: zip_code })
   end
 
   def build_forecasts(parameters = {})
@@ -52,8 +54,6 @@ class BaseForecastWorker
     build_forecasts(options).each { |time, forecast| forecast.save }
   end
 
-  private
-  
   def data
     xml.at_xpath('/dwml/data')
   end

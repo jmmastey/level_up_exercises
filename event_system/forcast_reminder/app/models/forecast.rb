@@ -1,3 +1,3 @@
 class Forecast < ActiveRecord::Base
-  validates :date, uniqueness: true
+  validates_uniqueness_of :date, scope: :zip_code
 end

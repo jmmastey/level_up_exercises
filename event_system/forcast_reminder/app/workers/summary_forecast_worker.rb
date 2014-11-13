@@ -9,17 +9,13 @@ class SummaryForecastWorker < BaseForecastWorker
     { "format" => "12 hourly" }
   end
 
-  def build_forecasts(parameters = {})
+  def build_forecasts(options = {})
     forecasts = Hash.new do |hash, key| 
       hash[key] = Forecast.find_or_create_by(date: key[:date_time],
-                                             zip_code: parameters[:zip_code])
+                                             zip_code: options[:zip_code])
       hash[key].date_description = key[:period]
       hash[key]
     end
-
-    request_time = head.at_xpath('product/creation-date').text
-    request_time = DateTime.parse(request_time).beginning_of_hour
-    @time_limit = request_time + 7.days
 
     forecasts.tap do |fc|
       get_data(fc, 'temperature', :temperature) { |t| t['type'] == 'maximum' }

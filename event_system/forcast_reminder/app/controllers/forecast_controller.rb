@@ -10,7 +10,7 @@ class ForecastController < ApplicationController
 
     @conditions = CurrentWeather.find_by_station_id(station_id)
     @forecasts = Forecast.where(zip_code: zip_code).
-      where("date > ?", Date.today.to_time.utc).
+      where("date > ?", Time.now.utc).
       order(:date).all
     @hourly_forecast = HourlyForecast.where(zip_code: zip_code).
       where("time > ?", Time.zone.now.beginning_of_hour).

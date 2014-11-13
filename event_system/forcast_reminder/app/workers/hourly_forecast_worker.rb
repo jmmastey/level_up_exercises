@@ -1,26 +1,20 @@
-require 'rest-client'
+class HourlyForecastWorker < BaseForecastWorker
+  private
 
-class HourlyForecastWorker
-  include Sidekiq::Worker
-  include WorkerHelpers
-  URL = "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php"
-  PARAMETERS = {"zipCodeList" => "60606", "product" => "time-series",
-                "begin" => Time.now.iso8601, "temp" => "temp",
-                  "dew" => "dew", "qpf" => "qpf", "sky" => "sky",
-                  "wspd" => "wspd", "wdir" => "wdir", 'icons' => 'icons'}
-
-  def perform
-    data = RestClient.get(URL, params: PARAMETERS)
-    unless data.include?("error")
-      xml = Nokogiri::XML(data)
-      save(xml)
-    end
+  def request_url
+    "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php"
   end
 
-  def build_forecasts
+  def base_request_parameters
+    {"product" => "time-series", "temp" => "temp", "dew" => "dew",
+     "qpf" => "qpf", "sky" => "sky", "wspd" => "wspd", "wdir" => "wdir",
+     'icons' => 'icons'}
+  end
+
+  def build_forecasts(parameters = {})
     forecasts = Hash.new do |hash, key| 
       hash[key] = HourlyForecast.find_or_create_by(time: key[:date_time],
-                                                   zip_code: 60606)
+                                                   zip_code: parameters[:zip_code])
     end
 
     request_time = head.at_xpath('product/creation-date').text

@@ -1,0 +1,215 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://w1.weather.gov/xml/current_obs/KMDW.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache/2.2.15 (Red Hat)
+      X-Nids-Serverid:
+      - www13.mo
+      Last-Modified:
+      - Thu, 13 Nov 2014 17:02:20 GMT
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '2264'
+      Content-Type:
+      - application/xml
+      Date:
+      - Thu, 13 Nov 2014 17:38:53 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?> \r\n<?xml-stylesheet
+        href=\"latest_ob.xsl\" type=\"text/xsl\"?>\r\n<current_observation version=\"1.0\"\r\n\t
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\r\n\t xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n\t
+        xsi:noNamespaceSchemaLocation=\"http://www.weather.gov/view/current_observation.xsd\">\r\n\t<credit>NOAA's
+        National Weather Service</credit>\r\n\t<credit_URL>http://weather.gov/</credit_URL>\r\n\t<image>\r\n\t\t<url>http://weather.gov/images/xml_logo.gif</url>\r\n\t\t<title>NOAA's
+        National Weather Service</title>\r\n\t\t<link>http://weather.gov</link>\r\n\t</image>\r\n\t<suggested_pickup>15
+        minutes after the hour</suggested_pickup>\r\n\t<suggested_pickup_period>60</suggested_pickup_period>\n\t<location>Chicago
+        Midway Airport, IL</location>\n\t<station_id>KMDW</station_id>\n\t<latitude>41.79</latitude>\n\t<longitude>-87.75</longitude>\n\t<observation_time>Last
+        Updated on Nov 13 2014, 10:53 am CST</observation_time>\r\n        <observation_time_rfc822>Thu,
+        13 Nov 2014 10:53:00 -0600</observation_time_rfc822>\n\t<weather>Overcast</weather>\n\t<temperature_string>30.0
+        F (-1.1 C)</temperature_string>\r\n\t<temp_f>30.0</temp_f>\r\n\t<temp_c>-1.1</temp_c>\n\t<relative_humidity>54</relative_humidity>\n\t<wind_string>West
+        at 10.4 MPH (9 KT)</wind_string>\n\t<wind_dir>West</wind_dir>\n\t<wind_degrees>290</wind_degrees>\n\t<wind_mph>10.4</wind_mph>\n\t<wind_kt>9</wind_kt>\n\t<pressure_string>1027.5
+        mb</pressure_string>\n\t<pressure_mb>1027.5</pressure_mb>\n\t<pressure_in>30.30</pressure_in>\n\t<dewpoint_string>15.1
+        F (-9.4 C)</dewpoint_string>\r\n\t<dewpoint_f>15.1</dewpoint_f>\r\n\t<dewpoint_c>-9.4</dewpoint_c>\n\t<windchill_string>21
+        F (-6 C)</windchill_string>\r\n      \t<windchill_f>21</windchill_f>\r\n      \t<windchill_c>-6</windchill_c>\n\t<visibility_mi>10.00</visibility_mi>\n
+        \t<icon_url_base>http://forecast.weather.gov/images/wtf/small/</icon_url_base>\n\t<two_day_history_url>http://www.weather.gov/data/obhistory/KMDW.html</two_day_history_url>\n\t<icon_url_name>ovc.png</icon_url_name>\n\t<ob_url>http://www.weather.gov/data/METAR/KMDW.1.txt</ob_url>\n\t<disclaimer_url>http://weather.gov/disclaimer.html</disclaimer_url>\r\n\t<copyright_url>http://weather.gov/disclaimer.html</copyright_url>\r\n\t<privacy_policy_url>http://weather.gov/notice.html</privacy_policy_url>\r\n</current_observation>\n"
+    http_version: 
+  recorded_at: Thu, 13 Nov 2014 17:38:52 GMT
+- request:
+    method: get
+    uri: http://w1.weather.gov/xml/current_obs/KMKE.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache/2.2.15 (Red Hat)
+      X-Nids-Serverid:
+      - www7.mo
+      Last-Modified:
+      - Thu, 13 Nov 2014 17:02:21 GMT
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '2307'
+      Content-Type:
+      - application/xml
+      Date:
+      - Thu, 13 Nov 2014 17:38:53 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?> \r\n<?xml-stylesheet
+        href=\"latest_ob.xsl\" type=\"text/xsl\"?>\r\n<current_observation version=\"1.0\"\r\n\t
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\r\n\t xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n\t
+        xsi:noNamespaceSchemaLocation=\"http://www.weather.gov/view/current_observation.xsd\">\r\n\t<credit>NOAA's
+        National Weather Service</credit>\r\n\t<credit_URL>http://weather.gov/</credit_URL>\r\n\t<image>\r\n\t\t<url>http://weather.gov/images/xml_logo.gif</url>\r\n\t\t<title>NOAA's
+        National Weather Service</title>\r\n\t\t<link>http://weather.gov</link>\r\n\t</image>\r\n\t<suggested_pickup>15
+        minutes after the hour</suggested_pickup>\r\n\t<suggested_pickup_period>60</suggested_pickup_period>\n\t<location>Milwaukee,
+        General Mitchell International Airport, WI</location>\n\t<station_id>KMKE</station_id>\n\t<latitude>42.96</latitude>\n\t<longitude>-87.9</longitude>\n\t<observation_time>Last
+        Updated on Nov 13 2014, 10:52 am CST</observation_time>\r\n        <observation_time_rfc822>Thu,
+        13 Nov 2014 10:52:00 -0600</observation_time_rfc822>\n\t<weather>Mostly Cloudy</weather>\n\t<temperature_string>27.0
+        F (-2.8 C)</temperature_string>\r\n\t<temp_f>27.0</temp_f>\r\n\t<temp_c>-2.8</temp_c>\n\t<relative_humidity>61</relative_humidity>\n\t<wind_string>Northwest
+        at 12.7 MPH (11 KT)</wind_string>\n\t<wind_dir>Northwest</wind_dir>\n\t<wind_degrees>310</wind_degrees>\n\t<wind_mph>12.7</wind_mph>\n\t<wind_kt>11</wind_kt>\n\t<pressure_string>1025.7
+        mb</pressure_string>\n\t<pressure_mb>1025.7</pressure_mb>\n\t<pressure_in>30.26</pressure_in>\n\t<dewpoint_string>15.1
+        F (-9.4 C)</dewpoint_string>\r\n\t<dewpoint_f>15.1</dewpoint_f>\r\n\t<dewpoint_c>-9.4</dewpoint_c>\n\t<windchill_string>16
+        F (-9 C)</windchill_string>\r\n      \t<windchill_f>16</windchill_f>\r\n      \t<windchill_c>-9</windchill_c>\n\t<visibility_mi>10.00</visibility_mi>\n
+        \t<icon_url_base>http://forecast.weather.gov/images/wtf/small/</icon_url_base>\n\t<two_day_history_url>http://www.weather.gov/data/obhistory/KMKE.html</two_day_history_url>\n\t<icon_url_name>bkn.png</icon_url_name>\n\t<ob_url>http://www.weather.gov/data/METAR/KMKE.1.txt</ob_url>\n\t<disclaimer_url>http://weather.gov/disclaimer.html</disclaimer_url>\r\n\t<copyright_url>http://weather.gov/disclaimer.html</copyright_url>\r\n\t<privacy_policy_url>http://weather.gov/notice.html</privacy_policy_url>\r\n</current_observation>\n"
+    http_version: 
+  recorded_at: Thu, 13 Nov 2014 17:38:52 GMT
+- request:
+    method: get
+    uri: http://w1.weather.gov/xml/current_obs/12345.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - Apache/2.2.15 (Red Hat)
+      X-Nids-Serverid:
+      - www8.mo
+      Content-Length:
+      - '6254'
+      Content-Type:
+      - text/html; charset=iso-8859-1
+      Date:
+      - Thu, 13 Nov 2014 17:38:53 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n<html
+        xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n<title>National Weather
+        Service</title>\r\n<style type=\"text/css\"> \r\n#mainContainer\r\n{\r\n\twidth:auto;\r\n\theight:auto;\r\n\tbackground-color:white;\r\n}\r\n#headerArea\r\n{\r\n\tmargin-top:50px;\r\n\tborder:1px
+        solid #cccccc;\r\n\theight:125px;\r\n\tbackground-color: #ffffff;\r\n}\r\n#nwsLogo\r\n{\r\n\tfloat:left;\r\n\twidth:100px;\r\n\t/*border:1px
+        solid black;*/\r\n}\r\n#noaaLogo\r\n{\r\n\tfloat:right;\r\n\twidth:100px;\t\r\n\t/*border:1px
+        solid black;*/\r\n}\r\n#logoTitleArea\r\n{\r\n\t\r\n\tpadding:15px;\r\n\theight:110px;\t\r\n\t/*border:1px
+        solid black;*/\r\n\ttext-align:center;\r\n}\r\n#titleArea\r\n{\r\n\tdisplay:inline;\r\n
+        \   display: -moz-inline-stack;\r\n\tcolor: black;\r\n    font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;\r\n
+        \   font-size: 36px;\r\n    font-weight: bold;\r\n\t/*border:1px solid black;*/\r\n}\r\n
+        \r\n#mainContent\r\n{\r\n\tborder-left:1px solid #cccccc;\r\n\tborder-right:1px
+        solid #cccccc;\r\n\theight:350px;\r\n\ttext-align:left;\r\n\tpadding:25px
+        65px 0px 60px;\r\n\tfont-family: Verdana,Geneva,Arial,Helvetica,sans-serif;\r\n\tfont-size:14px;\r\n}\r\n#footerContainer\r\n{\r\n\tborder-left:1px
+        solid #cccccc;\r\n\tborder-right:1px solid #cccccc;\r\n\tborder-bottom:1px
+        solid #cccccc;\r\n\tborder-top:1px solid #cccccc;\r\n\tmargin:0px;\r\n\tpadding:0px
+        20px 0px 20px;\r\n\theight:110px;\r\n\twidth:auto;\r\n}\r\n#policySection
+        ul, #disclaimerSection ul, #addressSection ul\r\n{\r\n    list-style-type:none;\r\n}\r\n#addressSection\r\n{\r\n\tfloat:left;\r\n\tfont-family:
+        Verdana,Geneva,Arial,Helvetica,sans-serif;\r\n\tfont-size:12px;\r\n\twidth:375px;\r\n\tpadding-right:100px;\r\n}\r\n#disclaimerSection\r\n{\r\n\tfont-family:
+        Verdana,Geneva,Arial,Helvetica,sans-serif;\r\n\tfloat:left;\r\n\tfont-size:12px;\r\n\twidth:150px;\r\n\tpadding-right:100px;\r\n}\r\n#policySection\r\n{\r\n\tfont-family:
+        Verdana,Geneva,Arial,Helvetica,sans-serif;\r\n\tfloat:left;\r\n\tfont-size:12px;\r\n}\r\n
+        \r\n#linkContainerArea\r\n{\r\n\tborder:1px solid #000078; \r\n\theight:190px;\r\n\twidth:900px;\r\n}\r\n
+        \r\n#linkArea1, #linkArea2\r\n{\r\n\t/*border:1px solid black;*/\r\n\theight:170px;\r\n\tmargin:10px;\r\n\tfloat:left;\r\n\twidth:auto;\r\n\ttext-align:left;\r\n\tpadding:5px
+        0px 0px 10px;\r\n}\r\n \r\na:active, a:visited, a:link\r\n{\r\n\tcolor:blue;\r\n}\r\na:hover\r\n{\r\n\tcolor:green;\r\n}\r\n
+        \r\n#textLink\r\n{\r\n\tfont-size:12px;\r\n}\r\n</style>\r\n \r\n<script type=\"text/javascript\">
+        \r\nfunction goToSelectedPage(data)\r\n{\r\n\twindow.open(data);\r\n}\r\n
+        \r\nfunction getMyTime()\r\n{\r\n\tvar myDate = new Date();\r\n\tdocument.getElementById('myTime').innerHTML
+        = myDate;\r\n\tbrowserDetection(); \r\n}\r\nfunction browserDetection()\r\n{\r\n\tif(/MSIE
+        (\\d+\\.\\d+);/.test(navigator.userAgent))\r\n\t{\r\n\t\tvar version = new
+        Number(RegExp.$1);\r\n\t\tif(version < 8)\r\n\t\t{\r\n\t\t\tdocument.getElementById('noaaLogo').style.marginTop
+        = '-45px';\r\n\t\t\tdocument.getElementById('footerContainer').style.paddingTop
+        = '10px';\r\n\t\t}\r\n\t}\r\n}\r\n</script>\r\n</head>\r\n \r\n<body onload=\"getMyTime();\"
+        style=\"background-color:#F0F2F7;\">\r\n<div id=\"mainContainer\">\r\n \r\n\t<div
+        id=\"headerArea\">\r\n\t\t<div id=\"logoTitleArea\">\r\n\t\t\t<div id=\"nwsLogo\">\r\n\t\t\t\t<img
+        src=\"http://dev.nids.noaa.gov/error_nws/nws_logo.gif\"  alt=\"NWS LOGO\"
+        title=\"NWS LOGO\" width=\"94px\" height=\"94px\"></img>\r\n\t\t\t</div>\r\n\t\t\t<div
+        id=\"titleArea\">\r\n\t\t\t\tNational Weather Service\r\n\t\t\t</div>\r\n\t\t\t\r\n\t\t\t<div
+        id=\"noaaLogo\">\r\n\t\t\t\t<img src=\"http://dev.nids.noaa.gov/error_nws/nws_logo.png\"
+        alt=\"NOAA LOGO\" title=\"NOAA LOGO\"></img>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n\t<div
+        id=\"mainContent\">\r\n\t\t<span id=\"myTime\" style=\"font-size:10px;\"></span>\r\n\t\t<p>\r\n\t\t\tThe
+        page you requested cannot be found.  Please check your URL and try again.\r\n\t\t</p>\r\n\t\t<p>\r\n\t\t\tPlease
+        use the following links for NWS forecasts and services.\r\n\t\t</p>\r\n\t\t<div
+        id=\"linkContainerArea\">\r\n\t\t\t<div id=\"linkArea1\">\r\n\t\t\t\t<p>\r\n\t\t\t\t\tForecasts:<br
+        />\r\n\t\t\t\t\t<a id=\"textLink\" href=\"http://forecast.weather.gov/zipcity.php\"
+        target=\"_blank\">http://forecast.weather.gov/zipcity.php</a><br />\r\n\t\t\t\t\t<i
+        style=\"font-size:11px;font-weight:bold;font-style:italic;\">*Please type
+        your zip code into the search box</i>\r\n\t\t\t\t</p>\r\n\t\t\t\t<p>\r\n\t\t\t\t\tRadar:<br
+        />\r\n\t\t\t\t\t<a id=\"textLink\" href=\"http://radar.weather.gov\" target=\"_blank\">http://radar.weather.gov</a>\r\n\t\t\t\t</p>\r\n
+        \                               <p>\r\n                                        Air
+        Quality:<br />\r\n                                        <a id=\"textLink\"
+        href=\"http://airquality.weather.gov\" target=\"_blank\">http://airquality.weather.gov</a>\r\n
+        \                               </p>\r\n\r\n\t\t\t</div>\r\n\t\t\t<div id=\"linkArea2\">\r\n\t\t\t\t<p>\r\n\t\t\t\t\tAviation:<br
+        />\r\n\t\t\t\t\t<a id=\"textLink\" href=\"http://aviationweather.gov/\" target=\"_blank\">http://aviationweather.gov</a>\r\n\t\t\t\t</p>\r\n\t\t\t\t<p>\r\n\t\t\t\t\tRiver
+        and Lake Forecasts and Observations:<br />\r\n\t\t\t\t\t<a id=\"textLink\"
+        href=\"http://water.weather.gov\" target=\"_blank\" id=\"textLink\">http://water.weather.gov</a>\r\n\t\t\t\t</p>\r\n
+        \                               <p>\r\n                                        Graphical
+        Forecasts:<br />\r\n                                        <a id=\"textLink\"
+        href=\"http://graphical.weather.gov\" target=\"_blank\" id=\"textLink\">http://graphical.weather.gov</a>\r\n
+        \                               </p>\r\n\r\n\t\t\t</div>\r\n\t\t\r\n\t\t</div><br
+        />\r\n\t\t<p>We apologize for any inconvenience that this might cause.</p>\r\n\t</div>\r\n\t<div
+        id=\"footerContainer\"> \r\n\t\t\r\n\t\t<div id=\"addressSection\">\r\n\t\t\t<ul>\r\n\t\t\t\t<li>National
+        Weather Service</li>\r\n\t\t\t\t<li>Office of Operational Systems</li>\r\n\t\t\t\t<li>&nbsp;</li>\r\n\t\t\t\t<li>Page
+        Author: NWS Webmaster</li>\r\n\t\t\t\t<li>Web Master's E-mail: <a href=\"mailto:w-nws.webmaster@noaa.gov\">w-nws.webmaster@noaa.gov</a></li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t\t\t\r\n\t\t<div
+        id=\"disclaimerSection\">\r\n\t\t\t<ul>\r\n\t\t\t\t<li><a href=\"http://www.weather.gov/disclaimer.php\"
+        target=\"_blank\">Disclaimer</a></li>\r\n\t\t\t\t<li><a href=\"http://www.weather.gov/credits.php\"
+        target=\"_blank\">Credits</a></li>\r\n\t\t\t\t<li><a href=\"http://www.weather.gov/glossary/\"
+        target=\"_blank\">Glossary</a></li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t\t\t\r\n\t\t<div
+        id=\"policySection\">\r\n\t\t\t<ul>\r\n\t\t\t\t<li><a href=\"http://www.weather.gov/privacy.php\"
+        target=\"_blank\">Privacy Policy</a></li>\r\n\t\t\t\t<li><a href=\"http://www.weather.gov/admin.php\"
+        target=\"_blank\">About Us</a></li>\r\n\t\t\t\t<li><a href=\"http://www.weather.gov/careers.php\"
+        target=\"_blank\">Career Opportunities</a></li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t\t\t\r\n\t</div>\r\n
+        \r\n</div>\r\n \r\n</body>\r\n</html>\r\n\r\n"
+    http_version: 
+  recorded_at: Thu, 13 Nov 2014 17:38:52 GMT
+recorded_with: VCR 2.9.3

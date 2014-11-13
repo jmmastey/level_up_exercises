@@ -1,0 +1,721 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php?begin=2014-11-13T12:20:00-06:00&dew=dew&icons=icons&product=time-series&qpf=qpf&sky=sky&temp=temp&wdir=wdir&wspd=wspd&zipCodeList=60606
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache/2.2.15 (Red Hat)
+      X-Nids-Serverid:
+      - www5.mo
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '13596'
+      Cache-Control:
+      - max-age=163
+      Expires:
+      - Thu, 13 Nov 2014 18:08:36 GMT
+      Date:
+      - Thu, 13 Nov 2014 18:05:53 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0"?>
+        <dwml version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.nws.noaa.gov/forecasts/xml/DWMLgen/schema/DWML.xsd">
+          <head>
+            <product srsName="WGS 1984" concise-name="time-series" operational-mode="official">
+              <title>NOAA's National Weather Service Forecast Data</title>
+              <field>meteorological</field>
+              <category>forecast</category>
+              <creation-date refresh-frequency="PT1H">2014-11-13T18:05:53Z</creation-date>
+            </product>
+            <source>
+              <more-information>http://www.nws.noaa.gov/forecasts/xml/</more-information>
+              <production-center>Meteorological Development Laboratory<sub-center>Product Generation Branch</sub-center></production-center>
+              <disclaimer>http://www.nws.noaa.gov/disclaimer.html</disclaimer>
+              <credit>http://www.weather.gov/</credit>
+              <credit-logo>http://www.weather.gov/images/xml_logo.gif</credit-logo>
+              <feedback>http://www.weather.gov/feedback.php</feedback>
+            </source>
+          </head>
+          <data>
+            <location>
+              <location-key>point1</location-key>
+              <point latitude="41.84" longitude="-87.69"/>
+            </location>
+            <moreWeatherInformation applicable-location="point1">http://forecast.weather.gov/MapClick.php?textField1=41.84&amp;textField2=-87.69</moreWeatherInformation>
+            <time-layout time-coordinate="local" summarization="none">
+              <layout-key>k-p3h-n34-1</layout-key>
+              <start-valid-time>2014-11-13T15:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-13T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-13T21:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T03:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T09:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T15:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T21:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T03:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T09:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T15:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-16T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-16T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-16T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-16T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-17T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-17T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-17T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-17T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-18T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-18T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-18T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-18T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-19T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-19T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-19T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-19T18:00:00-06:00</start-valid-time>
+            </time-layout>
+            <time-layout time-coordinate="local" summarization="none">
+              <layout-key>k-p6h-n9-2</layout-key>
+              <start-valid-time>2014-11-13T12:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-13T18:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-13T18:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-14T00:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-14T00:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-14T06:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-14T06:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-14T12:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-14T12:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-14T18:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-14T18:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-15T00:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-15T00:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-15T06:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-15T06:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-15T12:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-15T12:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-15T18:00:00-06:00</end-valid-time>
+            </time-layout>
+            <parameters applicable-location="point1">
+              <temperature type="hourly" units="Fahrenheit" time-layout="k-p3h-n34-1">
+                <name>Temperature</name>
+                <value>30</value>
+                <value>29</value>
+                <value>27</value>
+                <value>26</value>
+                <value>25</value>
+                <value>24</value>
+                <value>25</value>
+                <value>30</value>
+                <value>32</value>
+                <value>31</value>
+                <value>29</value>
+                <value>26</value>
+                <value>24</value>
+                <value>22</value>
+                <value>26</value>
+                <value>32</value>
+                <value>34</value>
+                <value>32</value>
+                <value>30</value>
+                <value>31</value>
+                <value>34</value>
+                <value>33</value>
+                <value>27</value>
+                <value>23</value>
+                <value>29</value>
+                <value>25</value>
+                <value>22</value>
+                <value>20</value>
+                <value>26</value>
+                <value>26</value>
+                <value>23</value>
+                <value>21</value>
+                <value>33</value>
+                <value>34</value>
+              </temperature>
+              <temperature type="dew point" units="Fahrenheit" time-layout="k-p3h-n34-1">
+                <name>Dew Point Temperature</name>
+                <value>14</value>
+                <value>13</value>
+                <value>15</value>
+                <value>15</value>
+                <value>15</value>
+                <value>16</value>
+                <value>16</value>
+                <value>16</value>
+                <value>15</value>
+                <value>14</value>
+                <value>15</value>
+                <value>15</value>
+                <value>15</value>
+                <value>15</value>
+                <value>13</value>
+                <value>13</value>
+                <value>15</value>
+                <value>17</value>
+                <value>22</value>
+                <value>23</value>
+                <value>24</value>
+                <value>21</value>
+                <value>18</value>
+                <value>15</value>
+                <value>14</value>
+                <value>13</value>
+                <value>12</value>
+                <value>11</value>
+                <value>10</value>
+                <value>11</value>
+                <value>12</value>
+                <value>13</value>
+                <value>16</value>
+                <value>17</value>
+              </temperature>
+              <precipitation type="liquid" units="inches" time-layout="k-p6h-n9-2">
+                <name>Liquid Precipitation Amount</name>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+              </precipitation>
+              <wind-speed type="sustained" units="knots" time-layout="k-p3h-n34-1">
+                <name>Wind Speed</name>
+                <value>13</value>
+                <value>11</value>
+                <value>11</value>
+                <value>10</value>
+                <value>10</value>
+                <value>9</value>
+                <value>9</value>
+                <value>8</value>
+                <value>8</value>
+                <value>8</value>
+                <value>8</value>
+                <value>8</value>
+                <value>8</value>
+                <value>9</value>
+                <value>9</value>
+                <value>9</value>
+                <value>9</value>
+                <value>8</value>
+                <value>8</value>
+                <value>8</value>
+                <value>10</value>
+                <value>10</value>
+                <value>11</value>
+                <value>10</value>
+                <value>13</value>
+                <value>14</value>
+                <value>14</value>
+                <value>13</value>
+                <value>15</value>
+                <value>13</value>
+                <value>12</value>
+                <value>11</value>
+                <value>13</value>
+                <value>12</value>
+              </wind-speed>
+              <direction type="wind" units="degrees true" time-layout="k-p3h-n34-1">
+                <name>Wind Direction</name>
+                <value>290</value>
+                <value>300</value>
+                <value>300</value>
+                <value>300</value>
+                <value>290</value>
+                <value>290</value>
+                <value>290</value>
+                <value>280</value>
+                <value>270</value>
+                <value>270</value>
+                <value>270</value>
+                <value>260</value>
+                <value>260</value>
+                <value>260</value>
+                <value>250</value>
+                <value>240</value>
+                <value>240</value>
+                <value>230</value>
+                <value>250</value>
+                <value>240</value>
+                <value>240</value>
+                <value>240</value>
+                <value>250</value>
+                <value>270</value>
+                <value>280</value>
+                <value>290</value>
+                <value>290</value>
+                <value>290</value>
+                <value>270</value>
+                <value>260</value>
+                <value>260</value>
+                <value>240</value>
+                <value>250</value>
+                <value>240</value>
+              </direction>
+              <cloud-amount type="total" units="percent" time-layout="k-p3h-n34-1">
+                <name>Cloud Cover Amount</name>
+                <value>94</value>
+                <value>90</value>
+                <value>92</value>
+                <value>87</value>
+                <value>82</value>
+                <value>77</value>
+                <value>64</value>
+                <value>52</value>
+                <value>42</value>
+                <value>32</value>
+                <value>22</value>
+                <value>22</value>
+                <value>25</value>
+                <value>27</value>
+                <value>36</value>
+                <value>46</value>
+                <value>59</value>
+                <value>89</value>
+                <value>100</value>
+                <value>100</value>
+                <value>86</value>
+                <value>60</value>
+                <value>53</value>
+                <value>57</value>
+                <value>60</value>
+                <value>77</value>
+                <value>66</value>
+                <value>47</value>
+                <value>53</value>
+                <value>69</value>
+                <value>63</value>
+                <value>55</value>
+                <value>33</value>
+                <value>33</value>
+              </cloud-amount>
+              <conditions-icon type="forecast-NWS" time-layout="k-p3h-n34-1">
+                <name>Conditions Icons</name>
+                <icon-link>http://forecast.weather.gov/images/wtf/sn60.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn60.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/bkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/bkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nfew.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nfew.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nfew.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/bkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn70.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn70.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sn20.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn20.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn20.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn20.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/bkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsct.jpg</icon-link>
+              </conditions-icon>
+            </parameters>
+          </data>
+        </dwml>
+    http_version: 
+  recorded_at: Thu, 13 Nov 2014 18:20:00 GMT
+- request:
+    method: get
+    uri: http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php?begin=2014-11-13T12:20:00-06:00&dew=dew&icons=icons&product=time-series&qpf=qpf&sky=sky&temp=temp&wdir=wdir&wspd=wspd&zipCodeList=53209
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache/2.2.15 (Red Hat)
+      X-Nids-Serverid:
+      - www5.mo
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '13593'
+      Cache-Control:
+      - max-age=172
+      Expires:
+      - Thu, 13 Nov 2014 19:07:28 GMT
+      Date:
+      - Thu, 13 Nov 2014 19:04:36 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0"?>
+        <dwml version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.nws.noaa.gov/forecasts/xml/DWMLgen/schema/DWML.xsd">
+          <head>
+            <product srsName="WGS 1984" concise-name="time-series" operational-mode="official">
+              <title>NOAA's National Weather Service Forecast Data</title>
+              <field>meteorological</field>
+              <category>forecast</category>
+              <creation-date refresh-frequency="PT1H">2014-11-13T19:04:36Z</creation-date>
+            </product>
+            <source>
+              <more-information>http://www.nws.noaa.gov/forecasts/xml/</more-information>
+              <production-center>Meteorological Development Laboratory<sub-center>Product Generation Branch</sub-center></production-center>
+              <disclaimer>http://www.nws.noaa.gov/disclaimer.html</disclaimer>
+              <credit>http://www.weather.gov/</credit>
+              <credit-logo>http://www.weather.gov/images/xml_logo.gif</credit-logo>
+              <feedback>http://www.weather.gov/feedback.php</feedback>
+            </source>
+          </head>
+          <data>
+            <location>
+              <location-key>point1</location-key>
+              <point latitude="43.06" longitude="-87.97"/>
+            </location>
+            <moreWeatherInformation applicable-location="point1">http://forecast.weather.gov/MapClick.php?textField1=43.06&amp;textField2=-87.97</moreWeatherInformation>
+            <time-layout time-coordinate="local" summarization="none">
+              <layout-key>k-p3h-n34-1</layout-key>
+              <start-valid-time>2014-11-13T15:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-13T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-13T21:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T03:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T09:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T15:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-14T21:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T03:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T09:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T15:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-15T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-16T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-16T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-16T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-16T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-17T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-17T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-17T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-17T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-18T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-18T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-18T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-18T18:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-19T00:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-19T06:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-19T12:00:00-06:00</start-valid-time>
+              <start-valid-time>2014-11-19T18:00:00-06:00</start-valid-time>
+            </time-layout>
+            <time-layout time-coordinate="local" summarization="none">
+              <layout-key>k-p6h-n9-2</layout-key>
+              <start-valid-time>2014-11-13T12:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-13T18:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-13T18:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-14T00:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-14T00:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-14T06:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-14T06:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-14T12:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-14T12:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-14T18:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-14T18:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-15T00:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-15T00:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-15T06:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-15T06:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-15T12:00:00-06:00</end-valid-time>
+              <start-valid-time>2014-11-15T12:00:00-06:00</start-valid-time>
+              <end-valid-time>2014-11-15T18:00:00-06:00</end-valid-time>
+            </time-layout>
+            <parameters applicable-location="point1">
+              <temperature type="hourly" units="Fahrenheit" time-layout="k-p3h-n34-1">
+                <name>Temperature</name>
+                <value>29</value>
+                <value>26</value>
+                <value>24</value>
+                <value>23</value>
+                <value>22</value>
+                <value>21</value>
+                <value>23</value>
+                <value>29</value>
+                <value>27</value>
+                <value>25</value>
+                <value>24</value>
+                <value>21</value>
+                <value>20</value>
+                <value>19</value>
+                <value>23</value>
+                <value>29</value>
+                <value>30</value>
+                <value>27</value>
+                <value>26</value>
+                <value>25</value>
+                <value>31</value>
+                <value>27</value>
+                <value>23</value>
+                <value>21</value>
+                <value>25</value>
+                <value>21</value>
+                <value>19</value>
+                <value>17</value>
+                <value>21</value>
+                <value>20</value>
+                <value>18</value>
+                <value>19</value>
+                <value>29</value>
+                <value>27</value>
+              </temperature>
+              <temperature type="dew point" units="Fahrenheit" time-layout="k-p3h-n34-1">
+                <name>Dew Point Temperature</name>
+                <value>15</value>
+                <value>16</value>
+                <value>16</value>
+                <value>16</value>
+                <value>16</value>
+                <value>13</value>
+                <value>15</value>
+                <value>13</value>
+                <value>13</value>
+                <value>13</value>
+                <value>14</value>
+                <value>13</value>
+                <value>13</value>
+                <value>12</value>
+                <value>13</value>
+                <value>11</value>
+                <value>11</value>
+                <value>13</value>
+                <value>21</value>
+                <value>21</value>
+                <value>20</value>
+                <value>19</value>
+                <value>16</value>
+                <value>13</value>
+                <value>13</value>
+                <value>13</value>
+                <value>11</value>
+                <value>8</value>
+                <value>8</value>
+                <value>11</value>
+                <value>10</value>
+                <value>12</value>
+                <value>16</value>
+                <value>17</value>
+              </temperature>
+              <precipitation type="liquid" units="inches" time-layout="k-p6h-n9-2">
+                <name>Liquid Precipitation Amount</name>
+                <value>0.01</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+                <value>0.00</value>
+              </precipitation>
+              <wind-speed type="sustained" units="knots" time-layout="k-p3h-n34-1">
+                <name>Wind Speed</name>
+                <value>12</value>
+                <value>10</value>
+                <value>10</value>
+                <value>10</value>
+                <value>9</value>
+                <value>9</value>
+                <value>9</value>
+                <value>9</value>
+                <value>8</value>
+                <value>7</value>
+                <value>7</value>
+                <value>6</value>
+                <value>7</value>
+                <value>7</value>
+                <value>7</value>
+                <value>9</value>
+                <value>9</value>
+                <value>7</value>
+                <value>8</value>
+                <value>8</value>
+                <value>12</value>
+                <value>10</value>
+                <value>11</value>
+                <value>9</value>
+                <value>15</value>
+                <value>13</value>
+                <value>13</value>
+                <value>12</value>
+                <value>15</value>
+                <value>11</value>
+                <value>12</value>
+                <value>10</value>
+                <value>14</value>
+                <value>11</value>
+              </wind-speed>
+              <direction type="wind" units="degrees true" time-layout="k-p3h-n34-1">
+                <name>Wind Direction</name>
+                <value>290</value>
+                <value>290</value>
+                <value>290</value>
+                <value>290</value>
+                <value>290</value>
+                <value>290</value>
+                <value>290</value>
+                <value>290</value>
+                <value>280</value>
+                <value>280</value>
+                <value>270</value>
+                <value>270</value>
+                <value>270</value>
+                <value>260</value>
+                <value>260</value>
+                <value>250</value>
+                <value>240</value>
+                <value>240</value>
+                <value>240</value>
+                <value>240</value>
+                <value>250</value>
+                <value>240</value>
+                <value>260</value>
+                <value>280</value>
+                <value>290</value>
+                <value>290</value>
+                <value>300</value>
+                <value>290</value>
+                <value>270</value>
+                <value>260</value>
+                <value>270</value>
+                <value>260</value>
+                <value>260</value>
+                <value>250</value>
+              </direction>
+              <cloud-amount type="total" units="percent" time-layout="k-p3h-n34-1">
+                <name>Cloud Cover Amount</name>
+                <value>83</value>
+                <value>83</value>
+                <value>82</value>
+                <value>87</value>
+                <value>85</value>
+                <value>66</value>
+                <value>62</value>
+                <value>53</value>
+                <value>42</value>
+                <value>32</value>
+                <value>28</value>
+                <value>26</value>
+                <value>23</value>
+                <value>24</value>
+                <value>30</value>
+                <value>45</value>
+                <value>74</value>
+                <value>97</value>
+                <value>100</value>
+                <value>94</value>
+                <value>66</value>
+                <value>50</value>
+                <value>63</value>
+                <value>57</value>
+                <value>67</value>
+                <value>79</value>
+                <value>66</value>
+                <value>50</value>
+                <value>62</value>
+                <value>79</value>
+                <value>67</value>
+                <value>46</value>
+                <value>32</value>
+                <value>36</value>
+              </cloud-amount>
+              <conditions-icon type="forecast-NWS" time-layout="k-p3h-n34-1">
+                <name>Conditions Icons</name>
+                <icon-link>http://forecast.weather.gov/images/wtf/sn80.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn80.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/bkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/bkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nfew.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nfew.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/bkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn60.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn60.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sn20.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn20.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sn10.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nbkn.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/sct.jpg</icon-link>
+                <icon-link>http://forecast.weather.gov/images/wtf/nsct.jpg</icon-link>
+              </conditions-icon>
+            </parameters>
+          </data>
+        </dwml>
+    http_version: 
+  recorded_at: Thu, 13 Nov 2014 18:20:00 GMT
+recorded_with: VCR 2.9.3

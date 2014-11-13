@@ -196,10 +196,12 @@ button span:hover:after {
 
 .boxmenu{
   border: 1px solid;
-}
+  display: none;
+ }
 
 .boxmenu ul{
   padding: none;
+
 }
 
   /*MAIN CONTENT*/
@@ -211,13 +213,16 @@ button span:hover:after {
 
 /*SIDE BAR*/
 
-.active {
+/*.active {
   color: #dd4b39;
   font-weight: bold;
 }
-
+*/
 .float-bar {
   border-color: #dd4b39;
+  color: #dd4b39;
+  font-weight: bold;
+ 
 }
 
 .compose-button {
@@ -236,6 +241,7 @@ button span:hover:after {
 nav ul {
   list-style-type: none;
   padding-left: 0px;
+  width: 186px;
 }
 
 nav ul li {
@@ -261,5 +267,9 @@ a:link {
 }
 
  li:hover{
-   background-color:#c9c9c9;
+   background-color: #c9c9c9;
  } 
+.menu li:hover{
+  background-color: white;
+  background-color: #F2F2F0;
+};

@@ -8,6 +8,12 @@ module FlightStats
   class Schedule
     include LocalTime
 
+    attr_accessor :airports, :airport_offsets
+
+    def initialize
+      @airport_offsets = {}
+    end
+
     def get_flights_arriving_before(time, from, to)
       builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
       get_scheduled_flights(builder.schedule_arriving_url).select! do |f|
@@ -29,7 +35,38 @@ module FlightStats
                                   url:        url,
                                   headers:    headers,
                                   verify_ssl: false)
-      JSON.parse(json)["scheduledFlights"]
+      @airports = JSON.parse(json)["appendix"]["airports"]
+      flights = JSON.parse(json)["scheduledFlights"]
+      add_utc_time(flights)
+    end
+
+    def add_utc_time(flights)
+      flights.each do |flight|
+        flight["arrivalTimeUtc"] = arrivalTimeUtc(flight)
+        flight["departureTimeUtc"] = departureTimeUtc(flight)
+      end
+      flights
+    end
+
+    def arrivalTimeUtc(flight)
+      utc = flight["arrivalTime"].to_datetime
+      utc.change(offset: tz_offset(flight["arrivalAirportFsCode"])).to_s
+    end
+
+    def departureTimeUtc(flight)
+      utc = flight["departureTime"].to_datetime
+      utc.change(offset: tz_offset(flight["departureAirportFsCode"])).to_s
+    end
+
+    def tz_offset(airport)
+      return @airport_offsets[airport] unless @airport_offsets[airport].nil?
+      get_offset_from_airports(airport)
+    end
+
+    def get_offset_from_airports(airport)
+      offset                    = @airports.select { |a| a["fs"] == airport }[0]["utcOffsetHours"]
+      @airport_offsets[airport] = '%+05.f' % (offset.to_f * 100.0)
+      @airport_offsets[airport]
     end
 
     def headers

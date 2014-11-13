@@ -1,5 +1,4 @@
-require 'rspec'
-require 'vcr'
+require 'spec_helper'
 require 'active_support/all'
 require 'flight_stats/schedule'
 require 'flight_stats/local_time'
@@ -10,6 +9,7 @@ describe 'FlightStats Schedules API', vcr: { record: :new_episodes } do
   let(:api) { FlightStats::Schedule.new }
   let(:origin) { "ORD" }
   let(:destination) { "LGA" }
+  let(:destination_offset) { "-0500" }
   let(:meeting_start) do
     date = DateTime.parse(2.days.from_now.strftime("%FTT12:06:00"))
     strip_timezone(date)
@@ -20,9 +20,19 @@ describe 'FlightStats Schedules API', vcr: { record: :new_episodes } do
   end
 
   context 'api call gets flights' do
+    subject(:flights) do
+      api.get_flights_arriving_before(meeting_start, origin, destination)
+    end
+
     it 'should show flights from chicago to new york tomorrow' do
-      flts = api.get_flights_arriving_before(meeting_start, origin, destination)
-      expect(flts).to_not be_empty
+      expect(flights).to_not be_empty
+    end
+
+    it 'flights should include UTC times for arrival and departure' do
+      flights.each do |f|
+        utc = f["arrivalTime"].to_datetime.change(offset: destination_offset)
+        expect(f["arrivalTimeUtc"].to_datetime).to eq(utc)
+      end
     end
   end
 

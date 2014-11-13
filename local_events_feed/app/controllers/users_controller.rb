@@ -14,18 +14,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def remove_showing
-    user = User.find(params[:id])
-    showing = Showing.find(params[:showing_id])
-    user.remove_showing(showing)
-    redirect_to request.referer
-  end
-
-  def add_showing_to_calendar
-    @showing = Showing.find(params[:showing_id])
-    headers['Content-Type'] = "text/calendar; charset=UTF-8"
-  end
-
   private
 
   def user_params

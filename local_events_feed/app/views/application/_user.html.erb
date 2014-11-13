@@ -5,7 +5,7 @@
 	  <td>
 		<div class="add-to-cal">
 		  <%= link_to image_tag("calendar.png", :class => 'add-image tooltip', :title => 'Add Calendar'),
-			  { controller: 'users', action: 'add_showing_to_calendar', showing_id: showing.id, id: current_user[:id] },
+			  { controller: 'showings', action: 'add_showing_to_calendar', showing_id: showing.id },
 			  method: :post, :format => :ics, :id => "add_cal-#{showing.id}" %>
 		</div>
 	  </td>
@@ -26,8 +26,8 @@
 	  </td>
 	  <td>
 		<div class="remove">
-		  <%= link_to image_tag("remove.png", :class => 'remove-x'), 
-		      { controller: 'users', action: 'remove_showing', showing_id: showing[:id], id: current_user[:id] },
+		  <%= link_to image_tag("remove.png", :class => 'remove-x'),
+		      { controller: 'showings', action: 'remove_from_user', showing_id: showing.id },
 		      method: :post, :id => "remove-#{showing[:id]}-user-show" %>
 		</div>
 	  </td>

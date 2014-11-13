@@ -1,7 +1,30 @@
+Given(/^I am not logged in$/) do
+  visit('/users/sign_out') # ensure that at least
+end
+
+Given(/^I am a new authenticated user in zip code (\d+) near station "(.*?)"$/) do |zip_code, station_id|
+  email = 'testing@enova.com'
+  password = 'secretpass'
+
+  visit '/users/sign_up'
+  fill_in "user_email", with: email
+  fill_in "user_password", with: password
+  fill_in "user_password_confirmation", with: password
+  fill_in "user_zip_code", with: zip_code
+  fill_in "user_station_id", with: station_id
+  click_button "Sign up"
+  visit '/users/sign_out'
+
+  visit '/users/sign_in'
+  fill_in "user_email", with: email
+  fill_in "user_password", with: password
+  click_button "Log in"
+end
+
 Given(/^current weather exists for station id "(.+)"$/) do |station_id|
   @current_conditions ||= {}
   @current_conditions[station_id] = FactoryGirl.create(:current_weather,
-                                                     station_id: station_id) 
+                                                       station_id: station_id) 
 end
 
 Then(/^I should see the current weather conditions for station id "(.+)"$/) do |station_id|

@@ -1,7 +1,10 @@
 Feature: Today's Weather
   In order to prepare for the day
   As a Chicagoan
-  I would like to be able to see the forecast for the next 24 hours
+  I would like to be able to see the forecast for Chicago
+
+  Background:
+    Given I am not logged in
 
   Scenario: Weather does not exists
     Given I am on the home page

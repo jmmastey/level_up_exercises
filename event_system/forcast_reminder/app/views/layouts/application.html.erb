@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Forcast Reminder</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<title>Forcast Reminder</title>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
 </head>
 <body>
+<div id="wrap">
+  <h1><%= link_to 'Forecast Reminder', root_path %></h1>
+  <ul id="nav">
+    <% if user_signed_in? %>
+      <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+      <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+      <li><a>Logged in as <strong><%= current_user.email %></strong></a></li>
+    <% else %>
+      <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
+      <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+    <% end %>
+  </ul>
 
-<%= yield %>
-
+  <div class="container">
+    <% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: "alert-box #{name}" %>
+    <% end -%>
+    <%= yield %>
+  </div>
+</div>
 </body>
 </html>

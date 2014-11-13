@@ -1,0 +1,96 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+.container {
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#wrap h1 {
+  font-size: 1.5em;
+  padding: 1em 8px;
+  color: #CCC;
+  background-color: #069;
+  margin: 0; 
+}
+
+#wrap h1 a {
+  color: #CCC;
+  text-decoration: none;
+}
+
+/* Begin Navigation Bar Styling */
+#nav {
+  width: 100%;
+  float: left;
+  margin: 0 0 3em 0;
+  padding: 0;
+  list-style: none;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+#nav li {
+  float: right; 
+}
+#nav li a {
+  display: block;
+  padding: 8px 15px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #069;
+  border-right: 1px solid #ccc;
+}
+#nav li a:hover {
+  color: #c00;
+  background-color: #fff;
+}
+/* End navigation bar styling. */
+
+/* This is just styling for this specific page. */
+body {
+  background-color: #555; 
+  font: small/1.3 Arial, Helvetica, sans-serif; 
+}
+
+#wrap {
+  margin: 0 auto;
+  background-color: #fff; 
+}
+
+.alert-box {
+    color:#555;
+    border-radius:10px;
+    font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+    padding:10px 10px 10px 36px;
+    margin:10px;
+    margin-top: 60px;
+}
+
+.alert-box span {
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.alert {
+    background:#ffecec url(<%= asset_path 'error.png' %>) no-repeat 10px 50%;
+    border:1px solid #f5aca6;
+}
+
+.notice {
+    background:#e3f7fc url(<%= asset_path 'notice.png' %>) no-repeat 10px 50%;
+    border:1px solid #8ed9f6;
+}

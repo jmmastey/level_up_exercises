@@ -42,18 +42,18 @@ module FlightStats
 
     def add_utc_time(flights)
       flights.each do |flight|
-        flight["arrivalTimeUtc"] = arrivalTimeUtc(flight)
-        flight["departureTimeUtc"] = departureTimeUtc(flight)
+        flight["arrivalTimeUtc"] = arrival_time_utc(flight)
+        flight["departureTimeUtc"] = departure_time_utc(flight)
       end
       flights
     end
 
-    def arrivalTimeUtc(flight)
+    def arrival_time_utc(flight)
       utc = flight["arrivalTime"].to_datetime
       utc.change(offset: tz_offset(flight["arrivalAirportFsCode"])).to_s
     end
 
-    def departureTimeUtc(flight)
+    def departure_time_utc(flight)
       utc = flight["departureTime"].to_datetime
       utc.change(offset: tz_offset(flight["departureAirportFsCode"])).to_s
     end
@@ -64,7 +64,7 @@ module FlightStats
     end
 
     def get_offset_from_airports(airport)
-      offset                    = @airports.select { |a| a["fs"] == airport }[0]["utcOffsetHours"]
+      offset = @airports.select { |a| a["fs"] == airport }[0]["utcOffsetHours"]
       @airport_offsets[airport] = sprintf("%+05.f", (offset.to_f * 100.0))
       @airport_offsets[airport]
     end

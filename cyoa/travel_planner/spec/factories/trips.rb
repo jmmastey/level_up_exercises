@@ -7,6 +7,6 @@ FactoryGirl.define do
 
   factory :lga_trip, class: Trip do
     association :home_location, factory: :ord_location
-    meetings {[FactoryGirl.create(:meeting_lga)]}
+    meetings { [FactoryGirl.create(:meeting_lga)] }
   end
 end

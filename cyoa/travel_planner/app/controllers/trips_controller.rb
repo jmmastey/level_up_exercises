@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   def create
     trip = Trip.new
-    trip.home_location = Airport.find_by_code(params[:origin_airport]).location
+    trip.home_location = Airport.find_by_code!(params[:origin_airport]).location
     trip.save
     create_meeting(trip)
     redirect_to trip_flights_search_path(trip.id)
@@ -10,6 +10,7 @@ class TripsController < ApplicationController
   def flights_search
     trip = Trip.find(params["trip_id"])
     optimizer = TripOptimizer.new(trip: trip)
+
   end
 
   private
@@ -18,7 +19,7 @@ class TripsController < ApplicationController
     trip.meetings.create(
       start:    datetime_from_select_inputs(params["meeting"], "start"),
       length:   params[:length],
-      location: Airport.find_by_code(params[:destination_airport]).location)
+      location: Airport.find_by_code!(params[:destination_airport]).location)
   end
 
   def datetime_from_select_inputs(param, method)

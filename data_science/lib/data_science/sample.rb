@@ -14,7 +14,7 @@ module DataScience
       @data_points = []
     end
 
-    def add_data_to_sample(data_source)
+    def <<(data_source)
       data_source.each do |data|
         @data_points << create_data_point(data)
       end

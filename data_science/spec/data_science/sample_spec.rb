@@ -16,9 +16,9 @@ module DataScience
       expect(@sample.data_points).to eq([])
     end
 
-    describe '#add_data_to_sample' do
+    describe '#<<' do
       it 'adds a data point' do
-        @sample.add_data_to_sample(@sample_data)
+        @sample << @sample_data
 
         expect(@sample.data_points.size).to eq(2)
       end

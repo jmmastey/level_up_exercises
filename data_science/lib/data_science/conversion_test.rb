@@ -13,7 +13,7 @@ module DataScience
     end
 
     def import_data(data)
-      @sample.add_data_to_sample(data)
+      sample << data
     end
 
     def print_statistical_results(group_1, group_2)

@@ -3,15 +3,15 @@ require 'active_support/all'
 
 class TripOptimizer
   attr_accessor :from,
-                :to,
-                :meeting_start,
-                :meeting_length,
-                :all_departures,
-                :all_returns,
-                :departure,
-                :return
+    :to,
+    :meeting_start,
+    :meeting_length,
+    :all_departures,
+    :all_returns,
+    :departure,
+    :return
 
-  def initialize(options={})
+  def initialize(options = {})
     @schedule = FlightStats::Schedule.new
     if options[:trip].nil?
       initialize_from_params(options)
@@ -27,16 +27,20 @@ class TripOptimizer
     @departure = get_latest_departure(@all_departures)
     @return    = get_earliest_arrival(@all_returns)
 
-    get_departure_and_return
+    departure_and_return
   end
 
   private
 
   def initialize_from_trip(trip)
-    @from           = Airport.find_by!(location: trip.home_location.id).code
-    @to             = Airport.find_by!(location: trip.meetings[0].location.id).code
+    @from           = airport_code(trip.home_location.id)
+    @to             = airport_code(trip.meetings[0].location.id)
     @meeting_start  = trip.meetings[0].start
     @meeting_length = trip.meetings[0].length
+  end
+
+  def airport_code(location_id)
+    Airport.find_by!(location: location_id).code
   end
 
   def initialize_from_params(options)
@@ -54,10 +58,10 @@ class TripOptimizer
     @schedule.get_flights_departing_after(meeting_end, from, to)
   end
 
-  def get_departure_and_return
+  def departure_and_return
     {
       departure: @departure,
-      return:    @return
+      return:    @return,
     }
   end
 

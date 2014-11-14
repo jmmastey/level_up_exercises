@@ -75,6 +75,15 @@ hr {
   color: #d14836;
 }
 
+.mail-menu {
+  position: absolute;
+  width: 156px;
+}
+
+.mail-list {
+  margin-left: 156px;
+}
+
 .mail-action { 
   padding: 8px;
 }

@@ -96,10 +96,6 @@ hr {
   padding: 0 10px;
 }
 
-.mail-item-hover {
-  border-left: 3px solid #ff0000;
-}
-
 .mail-item-date {
   text-align: right;
 }
@@ -136,6 +132,10 @@ hr {
 
 .unread .message-snippet {
   font-weight: normal;
+}
+
+.mail-item-hover {
+  border-left: 3px solid #ff0000;
 }
 
 .footer {

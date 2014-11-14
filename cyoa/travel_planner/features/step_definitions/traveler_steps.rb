@@ -17,4 +17,6 @@ end
 
 Then(/^I should see flight options$/) do
   assert_text("search results for flights")
+  assert_text("Departing flight to LGA")
+  assert_text("Returning flight to ORD")
 end

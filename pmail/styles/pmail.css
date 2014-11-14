@@ -10,7 +10,7 @@ hr {
   width: 600px;
 }
 
-.pure-button-compose {
+.button-compose {
   background-color: #d14836;
   color: #ffffff;
   font-size: 11px;
@@ -36,38 +36,46 @@ hr {
   padding: 5px 0;
 }
 
-#header-bar {
+.header-bar {
   background-color: #eeeeee;
   border-bottom: 1px solid #dddddd;
   padding: 8px;
   position: relative;
 }
 
-#user-menu {
+.title {
+  cursor: pointer;
+}
+
+.user-menu {
   color: #666666;
   padding-left:15px;
 }
 
-#user-menu a, a:active, a:visited {
+.user-menu a, a:active, a:visited {
   color: #666666;
   text-decoration: none;
 }
 
-#user-menu a:hover {
+.user-menu a:hover {
   color: #000000;
 }
 
-#tool-bar {
+.tool-bar {
   border-bottom: 1px solid #dddddd;
   padding: 8px;
   position: relative;
 }
 
-#mail-context {
+.pagination {
+  margin-right: 10px;
+}
+
+.mail-context {
   color: #d14836;
 }
 
-#mail-action { 
+.mail-action { 
   padding: 8px;
 }
 
@@ -75,6 +83,7 @@ hr {
   background-color: #eeeeee;
   border-bottom: 1px solid #dddddd;
   border-left: 3px solid #eeeeee;
+  cursor: pointer;
   padding: 0 10px;
 }
 
@@ -98,13 +107,35 @@ hr {
   color: #999999;
 }
 
-#footer {
+.unread {
+  background-color: #ffffff;
+  border-left: 3px solid #ffffff;
+  color: #000000;
+}
+
+.unread .mail-item-action {
+  font-weight: bold;
+}
+
+.unread .mail-item-date {
+  font-weight: bold;
+}
+
+.unread .mail-item-detail {
+  font-weight: bold;
+}
+
+.unread .message-snippet {
+  font-weight: normal;
+}
+
+.footer {
   color: #666666;
   font-size: 12px;
   padding: 8px;
 }
 
-#footer a, a:active, a:hover, a:visited {
+.footer a, a:active, a:hover, a:visited {
   color: #666666;
 }
 
@@ -120,7 +151,7 @@ hr {
   width: 250px;
 }
 
-#popup-user-profile {
+.popup-user-profile {
   padding: 15px 20px;
 }
 
@@ -128,7 +159,7 @@ hr {
   color: #666666;
 }
 
-#profile-summary {
+.profile-summary {
   background-color: #e9e9e9;
   border-bottom: 1px solid #bbbbbb;
   border-top: 1px solid #bbbbbb;
@@ -140,7 +171,7 @@ hr {
   padding: 0 15px 0 0;
 }
 
-#profile-action {
+.profile-action {
   background-color: #e9e9e9;
   padding: 10px 20px;
 }

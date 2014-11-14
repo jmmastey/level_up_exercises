@@ -15,13 +15,12 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- include custom JS, builds upon jQuery -->
     <script src="scripts/pmail.js"></script>
-
   </head>
   <body>
-    <header id="header-bar" class="pure-g">
+    <header class="pure-g header-bar">
       <div class="pure-u-1-8">
         <div class="valign-middle left-margin">
-          <h1>pMail</h1>
+          <h1 class="title">pMail</h1>
         </div>
       </div>
       <div class="pure-u-3-4">
@@ -32,21 +31,21 @@
           </fieldset>
         </form>
       </div>
-      <div id="user-menu" class="pure-u-1-8 valign-middle">
+      <div class="pure-u-1-8 user-menu valign-middle">
         <a href="#"><i class="fa fa-th"></i></a>
         <a href="#" onmouseover="showUserProfile();" onmouseout="hideUserProfile();">rcowan@enova.com <i class="fa fa-caret-down"></i></a>
       </div>
     </header>
 
-    <div id="tool-bar" class="pure-g">
-      <div id="mail-context" class="pure-u-1-8">
+    <div class="pure-g tool-bar">
+      <div class="pure-u-1-8 mail-context">
         <div class="valign-middle left-margin">
           <h2>Mail <i class="fa fa-caret-down"></i></h2>
         </div>
       </div>
-      <div id="settings" class="pure-u-7-8">
+      <div class="pure-u-7-8">
         <span class="right-align">
-          <strong>1-12</strong> of <strong>12</strong>
+          <span class="pagination"><strong>1-12</strong> of <strong>12</strong></span>
           <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-chevron-left"></i></button>
           <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-chevron-right"></i></button>
           <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-gear"></i> <i class="fa fa-caret-down"></i></button>
@@ -58,10 +57,10 @@
       </div>
     </div>
 
-    <div id="mail-content" class="pure-g">
-      <div id="mail-action-container" class="pure-u-1-8">
-        <nav id="mail-action" class="left-margin">
-          <button type="submit" class="pure-button pure-button-compose">Compose</button>
+    <div class="pure-g mail-content">
+      <div class="pure-u-1-8">
+        <nav class="mail-action left-margin">
+          <button type="submit" class="pure-button button-compose">Compose</button>
 
           <div class="pure-menu pure-menu-open">
             <ul>
@@ -80,7 +79,7 @@
           </div>
         </nav>
       </div>
-      <div id="mail-detail" class="pure-u-7-8">
+      <div class="pure-u-7-8">
         <section class="pure-menu pure-menu-open">
           <!-- sample mail for the inbox -->
           <article id="mail-1" class="mail-item pure-g">
@@ -100,7 +99,7 @@
             </p>
           </article>
 
-          <article id="mail-2" class="mail-item pure-g">
+          <article id="mail-2" class="mail-item unread pure-g">
             <p class="mail-item-action pure-u-1-4">
               <span class="mail-item-check"><input type="checkbox"></span>
               <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
@@ -117,7 +116,7 @@
             </p>
           </article>
 
-          <article id="mail-3" class="mail-item pure-g">
+          <article id="mail-3" class="mail-item unread pure-g">
             <p class="mail-item-action pure-u-1-4">
               <span class="mail-item-check"><input type="checkbox"></span>
               <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
@@ -187,7 +186,7 @@
           <!-- end sample mail -->
         </section>
 
-        <footer id="footer" class="pure-g">
+        <footer class="pure-g footer">
           <p align="left" class="pure-u-1-4">
             1% full<br />
             Using 0.30 GB of your 30 GB
@@ -205,13 +204,13 @@
     </div> 
 
     <aside id="profile-container">
-      <div id="popup-user-profile">
+      <div class="popup-user-profile">
         <strong>Ryan Cowan</strong><br />
         <span class="popup-email">rcowan@pmail.com</span><br />
         <a href="#">Account</a> - <a href="#">Privacy</a>
       </div>
 
-      <div id="profile-summary">
+      <div class="profile-summary">
         <img src="images/cowan-headshot.png" width="48" height="48" class="profile-photo" />
 
         Ryan Cowan<br />
@@ -220,7 +219,7 @@
         <br class="clear-both" />
       </div>
 
-      <div id="profile-action">
+      <div class="profile-action">
         <span class="right-align">
           <button type="submit" class="pure-button pure-button-secondary">Sign Out</button>
         </span>

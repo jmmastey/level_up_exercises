@@ -27,9 +27,11 @@ class BaseForecastWorker
 
   def save(zip_code)
     html = RestClient.get(request_url, params: request_parameters(zip_code))
-    xml = Nokogiri::XML(html)
-    dwml = DwmlParser.new(xml)
+    dwml = DwmlParser.new(Nokogiri::XML(html))
     build_forecasts(dwml, zip_code)
+  rescue => e
+    logger.warn("Failed to get data for zip_code #{zip_code} with status #{e.message}")
+    nil
   end
 
   def build_forecasts(dwml, zip_code)

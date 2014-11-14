@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>pInbox - rcowan@pmail.com</title>
+
+    <!-- include Yahoo's Pure, a bootstrap alternative -->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <!-- include custom styles, builds upon Pure -->
+    <link rel="stylesheet" href="styles/pmail.css">
+
+    <!-- font icon library -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- include custom JS, builds upon jQuery -->
+    <script src="scripts/pmail.js"></script>
+  </head>
+  <body>
+    <header class="pure-g header-bar">
+      <div class="pure-u-1-8">
+        <div class="valign-middle left-margin">
+          <h1 class="title">pMail</h1>
+        </div>
+      </div>
+      <div class="pure-u-3-4">
+        <form class="pure-form">
+          <fieldset>
+            <input type="search" id="search-bar" name="search-bar">
+            <button type="submit" class="pure-button pure-button-primary"><i class="fa fa-search"></i></button>
+          </fieldset>
+        </form>
+      </div>
+      <div class="pure-u-1-8 user-menu valign-middle">
+        <a href="#"><i class="fa fa-th"></i></a>
+        <a href="#" onmouseover="showUserProfile();" onmouseout="hideUserProfile();">rcowan@enova.com <i class="fa fa-caret-down"></i></a>
+      </div>
+    </header>
+
+    <div class="pure-g tool-bar">
+      <div class="pure-u-1-8 mail-context">
+        <div class="valign-middle left-margin">
+          <h2>Mail <i class="fa fa-caret-down"></i></h2>
+        </div>
+      </div>
+      <div class="pure-u-7-8">
+        <span class="right-align">
+          <span class="pagination"><strong>1-12</strong> of <strong>12</strong></span>
+          <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-chevron-left"></i></button>
+          <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-chevron-right"></i></button>
+          <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-gear"></i> <i class="fa fa-caret-down"></i></button>
+        </span>
+
+        <button type="submit" class="pure-button pure-button-secondary"><input id="remember" type="checkbox"></button>
+        <button type="submit" class="pure-button pure-button-secondary"><i class="fa fa-refresh"></i></button>
+        <button type="submit" class="pure-button pure-button-secondary">More <i class="fa fa-caret-down"></i></button>
+      </div>
+    </div>
+
+    <div class="mail-content">
+      <div class="mail-menu">
+        <nav class="mail-action left-margin">
+          <button type="submit" class="pure-button button-compose">Compose</button>
+
+          <div class="pure-menu pure-menu-open">
+            <ul>
+              <li><a href="#">Inbox</a></li>
+              <li><a href="#">Starred</a></li>
+              <li><a href="#">Sent Mail</a></li>
+              <li><a href="#">Drafts</a></li>
+            </ul>
+            <hr />
+            <ul>
+              <li><a href="#">Important</a></li>
+              <li><a href="#">All Mail</a></li>
+              <li><a href="#">Spam</a></li>
+              <li><a href="#">Trash</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="mail-list">
+        <section class="pure-menu pure-menu-open">
+          <!-- sample mail for the inbox -->
+          <article id="mail-1" class="mail-item pure-g">
+            <p class="mail-item-action pure-u-1-4">
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
+              Peralta, Jake, Ryan (155)
+            </p>
+            <p class="mail-item-detail pure-u-5-8">
+              Staff meeting at 10am, Monday
+              <span class="message-snippet">
+                - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+              </span>
+            </p>
+            <p class="mail-item-date pure-u-1-8">
+              Nov 10
+            </p>
+          </article>
+
+          <article id="mail-2" class="unread mail-item pure-g">
+            <p class="mail-item-action pure-u-1-4">
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
+              Charles, Terry, Gina (5)
+            </p>
+            <p class="mail-item-detail pure-u-5-8">
+              Weekly restaurant review blog
+              <span class="message-snippet">
+                - Sed sem mauris, fermentum eu neque sed, egestas lacinia odio
+              </span>
+            </p>
+            <p class="mail-item-date pure-u-1-8">
+              Nov 10
+            </p>
+          </article>
+
+          <article id="mail-3" class="unread mail-item pure-g">
+            <p class="mail-item-action pure-u-1-4">
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
+              Santiago, Amy
+            </p>
+            <p class="mail-item-detail pure-u-5-8">
+              Professional attire in a professional environment
+              <span class="message-snippet">
+                - Praesent congue dui ac tincidunt interdum. Phasellus
+              </span>
+            </p>
+            <p class="mail-item-date pure-u-1-8">
+              Nov 8
+            </p>
+          </article>
+
+          <article id="mail-4" class="mail-item pure-g">
+            <p class="mail-item-action pure-u-1-4">
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
+              Peralta, Jake, Ryan (155)
+            </p>
+            <p class="mail-item-detail pure-u-5-8">
+              Staff meeting at 10am, Monday
+              <span class="message-snippet">
+                - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+              </span>
+            </p>
+            <p class="mail-item-date pure-u-1-8">
+              Nov 8
+            </p>
+          </article>
+
+          <article id="mail-5" class="mail-item pure-g">
+            <p class="mail-item-action pure-u-1-4">
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
+              Charles, Terry, Gina (5)
+            </p>
+            <p class="mail-item-detail pure-u-5-8">
+              Weekly restaurant review blog
+              <span class="message-snippet">
+                - Sed sem mauris, fermentum eu neque sed, egestas lacinia odio
+              </span>
+            </p>
+            <p class="mail-item-date pure-u-1-8">
+              Nov 5
+            </p>
+          </article>
+
+          <article id="mail-6" class="mail-item pure-g">
+            <p class="mail-item-action pure-u-1-4">
+              <span class="mail-item-check"><input type="checkbox"></span>
+              <span class="mail-item-star"><i class="fa fa-star-o"></i></span>
+              Santiago, Amy
+            </p>
+            <p class="mail-item-detail pure-u-5-8">
+              Professional attire in a professional environment
+              <span class="message-snippet">
+                - Praesent congue dui ac tincidunt interdum. Phasellus
+              </span>
+            </p>
+            <p class="mail-item-date pure-u-1-8">
+              Oct 22
+            </p>
+          </article>
+          <!-- end sample mail -->
+        </section>
+
+        <footer class="pure-g footer">
+          <p align="left" class="pure-u-1-4">
+            1% full<br />
+            Using 0.30 GB of your 30 GB
+          </p>
+          <p align="center" class="pure-u-1-2">
+            &copy;2014 Google - <a href="#">Terms of Service</a> - <a href="#">Privacy Policy</a> - <a href="#">Program Policies</a><br />
+            Powered by [enova]
+          </p>
+          <p align="right" class="pure-u-1-4">
+            Last account activity: 1 hour ago<br />
+            <a href="#">Details</a>
+          </p>
+        </footer>
+      </div>
+    </div> 
+
+    <aside id="profile-container">
+      <div class="popup-user-profile">
+        <strong>Ryan Cowan</strong><br />
+        <span class="popup-email">rcowan@pmail.com</span><br />
+        <a href="#">Account</a> - <a href="#">Privacy</a>
+      </div>
+
+      <div class="profile-summary">
+        <img src="images/cowan-headshot.png" width="48" height="48" class="profile-photo" />
+
+        Ryan Cowan<br />
+        <span class="popup-email">rcowan@pmail.com</span>
+
+        <br class="clear-both" />
+      </div>
+
+      <div class="profile-action">
+        <span class="right-align">
+          <button type="submit" class="pure-button pure-button-secondary">Sign Out</button>
+        </span>
+
+        <button type="submit" class="pure-button pure-button-secondary">Add Account</button>
+      </div>
+    </aside>
+  </body>
+</html>

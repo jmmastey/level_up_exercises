@@ -6,7 +6,7 @@ describe Airport, type: :model do
   end
 
   it "has a valid O'Hare factory" do
-    expect(FactoryGirl.create(:ohare)).to be_valid
+    expect(FactoryGirl.create(:ord)).to be_valid
   end
 
   it "requires name" do

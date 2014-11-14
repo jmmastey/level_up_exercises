@@ -16,7 +16,7 @@ Airport.where(name: "O'Hare").first_or_create(name:     "O'Hare",
   code:     "ORD",
   location: Location.find_by_name("O'Hare"))
 
-Airport.where(name: "LaGuardio").first_or_create(name:     "LaGuardia",
+Airport.where(name: "LaGuardia").first_or_create(name:     "LaGuardia",
   code:     "LGA",
   location: Location.find_by_name("LaGuardia"))
 

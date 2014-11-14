@@ -6,7 +6,7 @@ describe Location, type: :model do
   end
 
   it "has a valid o'hare location factory" do
-    expect(FactoryGirl.create(:ohare_location)).to be_valid
+    expect(FactoryGirl.create(:ord_location)).to be_valid
   end
 
   it "requires state" do

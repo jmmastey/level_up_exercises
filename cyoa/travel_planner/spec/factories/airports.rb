@@ -7,16 +7,16 @@ FactoryGirl.define do
     location
   end
 
-  factory :ohare, class: :airport do |f|
+  factory :ord, class: :airport do |f|
     f.name "O'Hare International Airport"
     f.code "ORD"
-    association :location, factory: :ohare_location
+    association :location, factory: :ord_location
   end
 
-  factory :laguardia, class: :airport do |f|
+  factory :lga, class: :airport do |f|
     f.name "LaGuardia International Airport"
     f.code "LGA"
-    association :location, factory: :laguardia_location
+    association :location, factory: :lga_location
   end
 
 end

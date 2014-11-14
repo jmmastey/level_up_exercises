@@ -12,20 +12,20 @@ class TripOptimizer
                 :return
 
   def initialize(options={})
-    @schedule        = FlightStats::Schedule.new
+    @schedule = FlightStats::Schedule.new
     if options[:trip].nil?
       initialize_from_params(options)
     else
-      initialize_from_trip(options)
+      initialize_from_trip(options[:trip])
     end
   end
 
   def pick_shortest_flights
     @all_departures = get_departures(@meeting_start, @from, @to)
-    @all_returns = get_returns(meeting_end, @to, @from)
+    @all_returns    = get_returns(meeting_end, @to, @from)
 
     @departure = get_latest_departure(@all_departures)
-    @return = get_earliest_arrival(@all_returns)
+    @return    = get_earliest_arrival(@all_returns)
 
     get_departure_and_return
   end
@@ -33,7 +33,10 @@ class TripOptimizer
   private
 
   def initialize_from_trip(trip)
-
+    @from           = Airport.find_by!(location: trip.home_location.id).code
+    @to             = Airport.find_by!(location: trip.meetings[0].location.id).code
+    @meeting_start  = trip.meetings[0].start
+    @meeting_length = trip.meetings[0].length
   end
 
   def initialize_from_params(options)

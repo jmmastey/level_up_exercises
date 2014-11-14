@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../app/models/trip_optimizer'
 
-describe 'TripOptimizer', vcr: { record: :new_episodes }  do
+describe 'TripOptimizer', vcr: { record: :new_episodes } do
   context 'Shortest Trip' do
     let(:meeting_start) do
       DateTime.parse(2.days.from_now.strftime("%FTT12:06:00"))
@@ -47,8 +47,12 @@ describe 'TripOptimizer', vcr: { record: :new_episodes }  do
     end
 
     it 'initialize from Rails trip object' do
-      trip = FactoryGirl.create(:lga_trip)
-      trip_optimizer = TripOptimizer.new(trip)
+      ord            = FactoryGirl.create(:ord)
+      lga            = FactoryGirl.create(:lga)
+      meeting_lga    = FactoryGirl.create(:meeting_lga, location: lga.location)
+      trip           = Trip.new(home_location: ord.location,
+                                meetings:      [meeting_lga])
+      trip_optimizer = TripOptimizer.new(trip: trip)
       expect(trip_optimizer.pick_shortest_flights.length).to eq(2)
     end
   end

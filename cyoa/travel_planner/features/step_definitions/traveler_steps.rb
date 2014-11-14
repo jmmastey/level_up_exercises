@@ -16,5 +16,5 @@ When(/^I click find shortest travel time$/) do
 end
 
 Then(/^I should see flight options$/) do
-  assert page.has_content?("flight options")
+  assert_text("search results for flights")
 end

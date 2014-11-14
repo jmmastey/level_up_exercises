@@ -27,9 +27,7 @@ class DinoCatalog
 
     result2 = result1.smart_search_dinosaur(options)
     p result2.get_name
-
   end
 end
 
 DinoCatalog.new.run
-

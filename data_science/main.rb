@@ -16,27 +16,29 @@ def print_error(message)
   $stderr.puts "#{$PROGRAM_NAME} - ERROR : #{message}"
 end
 
-def data_count_by_result(cohort_data)
-  {
-    success: cohort_data.count { |cd| cd['result'] == 1 },
-    failure: cohort_data.count { |cd| cd['result'] == 0 },
-  }
+def create_cohort(name, data)
+  cohort = Cohort.new(name)
+  cohort.successes = data.count { |d| d['result'] == 1 }
+  cohort.failures  = data.count { |d| d['result'] == 0 }
+  cohort
 end
 
-def data_to_ab_test_matrix(data)
-  grouped = data.group_by { |d| d['cohort'] }
+def json_data_to_cohort_collection(json_data)
+  grouped = json_data.group_by { |j| j['cohort'] }
 
-  grouped.each_with_object({}) do |(name, cohort_data), hash|
-    hash[name] = data_count_by_result(cohort_data)
+  cohort_array = grouped.map do |cohort_name, data|
+    create_cohort(cohort_name, data)
   end
+
+  CohortCollection.new(cohort_array)
 end
 
 print_usage if ARGV.empty? || help?
 
 begin
-  data   = JSON.parse(File.read(ARGV[0]))
-  matrix = data_to_ab_test_matrix(data)
-  puts ABTest.new(matrix)
+  json_data         = JSON.parse(File.read(ARGV[0]))
+  cohort_collection = json_data_to_cohort_collection(json_data)
+  puts ABTest.new(cohort_collection)
 rescue JSON::ParserError
   print_error "Provided file is not a valid json file"
 rescue SystemCallError => e

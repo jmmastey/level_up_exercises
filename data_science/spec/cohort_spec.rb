@@ -25,11 +25,11 @@ describe Cohort do
     end
 
     it "has zero successes" do
-      expect(cohort[:success]).to eq(0)
+      expect(cohort.successes).to eq(0)
     end
 
     it "has zero failures" do
-      expect(cohort[:failure]).to eq(0)
+      expect(cohort.failures).to eq(0)
     end
 
     it "has a name provided in the initialization" do
@@ -55,13 +55,13 @@ describe Cohort do
 
   context "when successes added" do
     let(:cohort) do
-      Cohort.new('A').tap do |c|
-        c.add_successes(4)
-      end
+      cohort = Cohort.new('A')
+      cohort.successes = 4
+      cohort
     end
 
     it "increases number of successes" do
-      expect(cohort[:success]).to be(4)
+      expect(cohort.successes).to be(4)
     end
 
     it "increases number of size" do
@@ -79,13 +79,13 @@ describe Cohort do
 
   context "when failures added" do
     let(:cohort) do
-      Cohort.new('A').tap do |c|
-        c.add_failures(5)
-      end
+      cohort = Cohort.new('A')
+      cohort.failures = 5
+      cohort
     end
 
     it "increases number of failures" do
-      expect(cohort[:failure]).to be(5)
+      expect(cohort.failures).to be(5)
     end
 
     it "increases number of size" do
@@ -103,10 +103,10 @@ describe Cohort do
 
   context "when both successes and failures added" do
     let(:cohort) do
-      Cohort.new('A').tap do |c|
-        c.add_failures(35)
-        c.add_successes(40)
-      end
+      cohort = Cohort.new('A')
+      cohort.failures = 35
+      cohort.successes = 40
+      cohort
     end
 
     it "increases number of size" do

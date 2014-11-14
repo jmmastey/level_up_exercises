@@ -1,31 +1,21 @@
 class Cohort
   attr_reader :name
+  attr_accessor :successes, :failures
 
   def initialize(name)
     raise ArgumentError unless name.is_a? String
-    @name = name
-    @results = { success: 0, failure: 0 }
+    @name      = name
+    @successes = 0
+    @failures  = 0
   end
 
-  def size(*)
-    @results[:success] + @results[:failure]
+  def size
+    @successes + @failures
   end
 
   def success_ratio
     return 0.00 if size == 0
-    @results[:success].to_f / size
-  end
-
-  def add_successes(num)
-    @results[:success] += num
-  end
-
-  def add_failures(num)
-    @results[:failure] += num
-  end
-
-  def [](key)
-    @results[key]
+    @successes.to_f / size
   end
 
   def standard_error
@@ -34,8 +24,8 @@ class Cohort
   end
 
   def confidence_interval
-    sigma = 1.96 * standard_error
-    [success_ratio - sigma, success_ratio + sigma]
+    sigmas = 1.96 * standard_error
+    [success_ratio - sigmas, success_ratio + sigmas]
   end
 
   def to_s
@@ -48,7 +38,7 @@ class Cohort
   private
 
   def confidence_interval_human_readable
-    lower, upper = confidence_interval.map { |ci| format("%3.2f\%" , (ci * 100)) }
+    lower, upper = confidence_interval.map { |i| format("%3.2f\%", (i * 100)) }
     "(#{lower} - #{upper})"
   end
 end

@@ -2,7 +2,11 @@ require 'rails_helper'
 
 vcr_options = { cassette_name: "current_weather", record: :none }
 describe CurrentWeatherWorker, vcr: vcr_options, type: :worker do
-  before { Timecop.freeze(DateTime.now) }
+  before do
+    travel_to Time.new(2014, 11, 13, 12, 20, 00)
+  end
+
+  after { travel_back }
 
   let (:model) { CurrentWeather }
   let (:worker) { CurrentWeatherWorker.new }

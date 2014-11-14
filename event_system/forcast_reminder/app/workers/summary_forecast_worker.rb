@@ -1,28 +1,32 @@
 class SummaryForecastWorker < BaseForecastWorker
   private
 
+  def find_or_create_model(time, values, zip_code, dwml)
+    unless values[:temperature].blank?
+      Forecast.find_or_create_by(time: time[:date_time], zip_code: zip_code).
+        tap { |forecast| forecast.date_description = time[:period] }
+    end
+  end
+
   def request_url
     "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php"
   end
 
-  def base_request_parameters
-    { "format" => "12 hourly" }
+  def request_parameters(zip_code)
+    { 
+      format: "12 hourly",
+      begin: Time.zone.now.iso8601, 
+      zipCodeList: zip_code,
+    }
   end
 
-  def build_forecasts(options = {})
-    forecasts = Hash.new do |hash, key| 
-      hash[key] = Forecast.find_or_create_by(date: key[:date_time],
-                                             zip_code: options[:zip_code])
-      hash[key].date_description = key[:period]
-      hash[key]
-    end
-
-    forecasts.tap do |fc|
-      get_data(fc, 'temperature', :temperature) { |t| t['type'] == 'maximum' }
-      get_data(fc, 'temperature', :temperature) { |t| t['type'] == 'minimum' }
-      get_data(fc, 'probability-of-precipitation', :precipitation)
-      get_attribute(fc, 'weather', :condition, 'weather-conditions', 'weather-summary')
-      get_data(fc, 'conditions-icon', :icon_url, 'icon-link')
-    end
+  def data_fields
+    [
+      { attribute: 'temperature', map_name: :temperature, data_path: 'value', type: 'maximum' },
+      { attribute: 'temperature', map_name: :temperature, data_path: 'value', type: 'minimum' },
+      { attribute: 'probability-of-precipitation', map_name: :precipitation, data_path: 'value' },
+      { attribute: 'conditions-icon', map_name: :icon_url, data_path: 'icon-link' },
+      { attribute: 'weather', map_name: :condition, data_path: 'weather-conditions/@weather-summary' }
+    ]
   end
 end

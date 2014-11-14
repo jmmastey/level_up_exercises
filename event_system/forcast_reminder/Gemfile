@@ -63,6 +63,5 @@ group :test do
   gem 'webmock', require: false
   gem 'shoulda-matchers', require: false
   gem 'faker', require: false
-  gem 'timecop', require: false
   gem 'vcr', require: false
 end

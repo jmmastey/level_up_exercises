@@ -1,34 +1,46 @@
 class HourlyForecastWorker < BaseForecastWorker
   private
 
+  def find_or_create_model(time, values, zip_code, dwml)
+    unless values[:temperature].blank?
+      if time[:date_time] < (dwml.request_time + max_time)
+        HourlyForecast.find_or_create_by(time: time[:date_time], zip_code: zip_code)
+      end
+    end
+  end
+
   def request_url
     "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php"
   end
 
-  def base_request_parameters
-    {"product" => "time-series", "temp" => "temp", "dew" => "dew",
-     "qpf" => "qpf", "sky" => "sky", "wspd" => "wspd", "wdir" => "wdir",
-     'icons' => 'icons'}
+  def request_parameters(zip_code)
+    {
+      product: 'time-series',
+      temp: 'temp',
+      dew: 'dew',
+      qpf: 'qpf',
+      sky: 'sky',
+      wspd: 'wspd',
+      wdir: 'wdir',
+      icons: 'icons',
+      begin: Time.zone.now.iso8601, 
+      zipCodeList: zip_code,
+    }
   end
 
-  def build_forecasts(parameters = {})
-    forecasts = Hash.new do |hash, key| 
-      hash[key] = HourlyForecast.find_or_create_by(time: key[:date_time],
-                                                   zip_code: parameters[:zip_code])
-    end
+  def data_fields
+    [
+      { attribute: 'temperature', map_name: :temperature, data_path: 'value', type: 'hourly' },
+      { attribute: 'temperature', map_name: :dew_point, data_path: 'value', type: 'dew point' },
+      { attribute: 'precipitation', map_name: :precipitation, data_path: 'value' },
+      { attribute: 'wind-speed', map_name: :wind_speed, data_path: 'value', type: 'sustained' },
+      { attribute: 'direction', map_name: :wind_direction, data_path: 'value', type: 'wind' },
+      { attribute: 'cloud-amount', map_name: :cloud_cover, data_path: 'value', type: 'total' },
+      { attribute: 'conditions-icon', map_name: :icon_url, data_path: 'icon-link', type: 'forecast-NWS' }
+    ]
+  end
 
-    request_time = head.at_xpath('product/creation-date').text
-    request_time = DateTime.parse(request_time).beginning_of_hour
-    @time_limit = request_time + 1.day
-
-    forecasts.tap do |fc|
-      get_data(fc, 'temperature', :temperature) { |t| t['type'] == 'hourly' }
-      get_data(fc, 'temperature', :dew_point) { |t| t['type'] == 'dew point' }
-      get_data(fc, 'precipitation', :precipitation) { |t| t['type'] == 'liquid' }
-      get_data(fc, 'wind-speed', :wind_speed) { |t| t['type'] == 'sustained' }
-      get_data(fc, 'direction', :wind_direction) { |t| t['type'] == 'wind' }
-      get_data(fc, 'cloud-amount', :cloud_cover) { |t| t['type'] == 'total' }
-      get_data(fc, 'conditions-icon', :icon_url, 'icon-link') { |t| t['type'] == 'forecast-NWS' }
-    end
+  def max_time
+    1.day
   end
 end

@@ -7,14 +7,10 @@ class CurrentWeatherWorker
   DEFAULT_STATION_ID = "KMDW"
 
   def perform
-    stations.each { |station| save(station_data(station)) }
+    Location.stations.each { |station| save(station_data(station)) }
   end
 
   private
-
-  def stations
-    User.uniq.pluck(:station_id) | [DEFAULT_STATION_ID]
-  end
 
   def station_data(station_id)
     data = raw_data(station_id)

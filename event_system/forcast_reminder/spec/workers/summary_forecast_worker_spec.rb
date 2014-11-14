@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-vcr_options = { cassette_name: "summary_forecast", record: :new_episodes }
+vcr_options = { cassette_name: "summary_forecast", record: :none }
 describe SummaryForecastWorker, vcr: vcr_options, type: :worker do
-  let (:model) { Forecast.order(:date) }
+  let (:model) { Forecast.order(:time) }
   let (:zip_code) { 60606 }
   let (:test_url) { "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php" }
   let (:test_query) { {"zipCodeList" => zip_code, "format" => "12 hourly", 
-                          "begin" => "2014-11-13T12:20:00-06:00" } }
+                       "begin" => "2014-11-13T12:20:00-06:00" } }
   let (:worker) { SummaryForecastWorker.new }
 
   describe "#perform" do
@@ -40,19 +40,10 @@ describe SummaryForecastWorker, vcr: vcr_options, type: :worker do
 
       its(:count) { is_expected.to eq number_forecasts }
 
-      it "is expected to have correct temperatures" do
+      it "is expected to have correct date" do
         expect(subject.map { |s| s.temperature }).to eq temperatures
-      end
-
-      it "is expected to have correct precipitation data" do
         expect(subject.map { |s| s.precipitation }).to eq precipitations
-      end
-
-      it "is expected to have correct condition data" do
         expect(subject.map { |s| s.condition }).to eq conditions
-      end
-
-      it "is expected to have first date description equal Today" do
         expect(subject.first.date_description).to eq "Today"
       end
     end
@@ -79,28 +70,29 @@ describe SummaryForecastWorker, vcr: vcr_options, type: :worker do
       its(:count) { is_expected.to eq number_forecasts }
     end
 
-    #context "Update Request" do
-    #before do
-    #travel_to Time.new(2014, 11, 13, 12, 20, 00)
-    #worker.perform
-    #travel_to Time.new(2014, 11, 13, 13, 20, 00)
-    #worker.perform
-    #end
+    context "Update Request" do
+      before do
+        travel_to Time.new(2014, 11, 13, 12, 20, 00)
+        worker.perform
+        travel_to Time.new(2014, 11, 14, 13, 20, 00)
+        worker.perform
+      end
 
-    #let (:number_forecasts) { 14 }
-    #let (:temperatures) { [ 55, 41, 58, 46, 46, 35, 43, 38, 44, 31, 42, 35, 46, 32, 41 ] }
+      let (:number_forecasts) { 15 }
+      let (:temperatures) { [30, 24, 30, 21, 32, 26, 33, 21, 27, 16, 25, 19, 35, 26, 39] }
+      subject { model.all }
 
-    #before do
-    #worker.perform
-    #end
+      before do
+        worker.perform
+      end
 
-    #it "is expected to have correct number of forecasts" do
-    #expect(subject.count).to eq number_forecasts
-    #end
+      it "is expected to have correct number of forecasts" do
+        expect(subject.count).to eq number_forecasts
+      end
 
-    #it "is expected to have correct temperatures" do
-    #expect(subject.map { |s| s.temperature }).to eq temperatures
-    #end
-    #end
+      it "is expected to have correct temperatures" do
+        expect(subject.map { |s| s.temperature }).to eq temperatures
+      end
+    end
   end
 end

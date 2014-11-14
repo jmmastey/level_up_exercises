@@ -20,16 +20,15 @@ describe HourlyForecastWorker, vcr: vcr_options, :type => :worker do
     after { travel_back }
 
     context "Default Request" do
-      let (:number_forecasts) { 9 }
-      let (:temperatures) { [nil, 30, 29, 27, 26, 25, 24, 25, 30] }
-      let (:dew_points) { [nil, 14, 13, 15, 15, 15, 16, 16, 16] }
-      let (:precipitations) { [0.0, nil, 0.0, nil, 0.0, nil, 0.0, nil, 0.0] }
-      let (:wind_speeds) { [nil, 13, 11, 11, 10, 10, 9, 9, 8] }
-      let (:wind_directions) { [nil, 290, 300, 300, 300, 290, 290, 290, 280] }
-      let (:cloud_cover) { [nil, 94, 90, 92, 87, 82, 77, 64, 52] }
+      let (:number_forecasts) { 8 }
+      let (:temperatures) { [30, 29, 27, 26, 25, 24, 25, 30] }
+      let (:dew_points) { [14, 13, 15, 15, 15, 16, 16, 16] }
+      let (:precipitations) { [nil, 0.0, nil, 0.0, nil, 0.0, nil, 0.0] }
+      let (:wind_speeds) { [13, 11, 11, 10, 10, 9, 9, 8] }
+      let (:wind_directions) { [290, 300, 300, 300, 290, 290, 290, 280] }
+      let (:cloud_cover) { [94, 90, 92, 87, 82, 77, 64, 52] }
       let (:icon_urls) { 
         [
-          nil,
           "http://forecast.weather.gov/images/wtf/sn60.jpg",
           "http://forecast.weather.gov/images/wtf/nsn60.jpg",
           "http://forecast.weather.gov/images/wtf/nsn10.jpg", 
@@ -54,39 +53,21 @@ describe HourlyForecastWorker, vcr: vcr_options, :type => :worker do
 
       its(:count) { is_expected.to eq number_forecasts }
 
-      it "is expected to have correct temperatures" do
+      it "is expected to have correct data" do
         binding
         expect(subject.map(&:temperature)).to eq temperatures
-      end
-
-      it "is expected to have correct dew points" do
         expect(subject.map(&:dew_point)).to eq dew_points
-      end
-
-      it "is expected to have correct precipitations" do
         expect(subject.map(&:precipitation)).to eq precipitations
-      end
-
-      it "is expected to have correct wind speed" do
         expect(subject.map(&:wind_speed)).to eq wind_speeds
-      end
-
-      it "is expected to have correct wind directions" do
         expect(subject.map(&:wind_direction)).to eq wind_directions
-      end
-
-      it "is expected to have correct cloud cover" do
         expect(subject.map(&:cloud_cover)).to eq cloud_cover
-      end
-
-      it "is expected to have correct condition icon urls" do
         expect(subject.map(&:icon_url)).to eq icon_urls
       end
     end
 
     context "Request with user" do
       let (:zip_code) { 53209 }
-      let (:number_forecasts) { 9 }
+      let (:number_forecasts) { 8 }
       
       before do
         @user = FactoryGirl.create(:user, zip_code: zip_code)

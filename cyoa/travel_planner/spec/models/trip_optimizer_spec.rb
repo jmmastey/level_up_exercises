@@ -1,13 +1,17 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../app/models/trip_optimizer'
 
-describe 'TripOptimizer', :vcr do
+describe 'TripOptimizer', vcr: { record: :new_episodes }  do
   context 'Shortest Trip' do
+    let(:meeting_start) do
+      DateTime.parse(2.days.from_now.strftime("%FTT12:06:00"))
+    end
+
     subject(:optimizer) do
       TripOptimizer.new(
         from:           "ORD",
         to:             "LGA",
-        meeting_start:  "2014-11-30T12:15:00.000".to_datetime,
+        meeting_start:  meeting_start,
         meeting_length: 1.5,
       )
     end
@@ -40,6 +44,12 @@ describe 'TripOptimizer', :vcr do
         f["arrivalTimeUtc"].to_datetime
       end
       expect(optimizer.return).to eq(best)
+    end
+
+    it 'initialize from Rails trip object' do
+      trip = FactoryGirl.create(:lga_trip)
+      trip_optimizer = TripOptimizer.new(trip)
+      expect(trip_optimizer.pick_shortest_flights.length).to eq(2)
     end
   end
 end

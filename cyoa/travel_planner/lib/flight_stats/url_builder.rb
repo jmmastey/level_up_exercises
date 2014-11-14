@@ -41,9 +41,9 @@ module FlightStats
     end
 
     def validate_schedule_inputs
-      raise(ArgumentError, "Missing to attr") if @to.nil? || @to.empty?
-      raise(ArgumentError, "Missing from attr") if @from.nil? || @from.empty?
-      raise(ArgumentError, "Missing date attr") if @date.nil?
+      raise(ArgumentError, "Missing 'to' attr") if @to.nil? || @to.empty?
+      raise(ArgumentError, "Missing 'from' attr") if @from.nil? || @from.empty?
+      raise(ArgumentError, "Missing 'date' attr") if @date.nil?
     end
   end
 end

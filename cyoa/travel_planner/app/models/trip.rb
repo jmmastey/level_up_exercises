@@ -4,6 +4,4 @@ class Trip < ActiveRecord::Base
   has_and_belongs_to_many :meetings
 
   validates_presence_of :home_location
-
-  # TODO: flight search here
 end

@@ -1,3 +1,4 @@
+=begin rdoc
 = README
 
 This is a simple ruby forecast application that is used to display current and
@@ -29,3 +30,4 @@ To run specific tests:
 # bin/rake spec
 # # Cucumber
 # bin/rake cucumber
+=end

@@ -6,6 +6,7 @@ class DeedsController < ApplicationController
   end
 
   def show
+    @related_deeds = Deed.where('id != ? and (bioguide_id = ? or bill_id = ?)', @deed.id, @deed.bioguide_id, @deed.bill_id)
   end
 
   private

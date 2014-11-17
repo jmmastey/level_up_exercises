@@ -23,7 +23,7 @@ class Deed < ActiveRecord::Base
 
   def self.enacted_into_law
     Bill.order(:updated_at).all.each do |bill|
-      if bill.congress == 113 && bill.enacted_at
+      if bill.congress == 113 && bill.enacted_at && bill.short_title
         deed_text = "#{bill.short_title} was enacted on #{bill.enacted_at}"
 
         # find an existing deed with the same bill_id and bioguide_id

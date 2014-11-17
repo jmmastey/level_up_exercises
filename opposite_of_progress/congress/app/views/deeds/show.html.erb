@@ -21,6 +21,12 @@
   <% end %>
 </div>
 
+<h4>Related Deeds</h4>
+<% @related_deeds.each do |deed| %>
+  <div><%= render partial: "deeds/deed_stub_item", locals: {deed: deed} %></div>
+<% end %>
+<%= "There are no related deeds" if @related_deeds.count == 0 %>
+
 <hr />
 
 <p align="center"><%= link_to "Back to Good Deeds", deeds_path %></p>

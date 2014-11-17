@@ -7,7 +7,7 @@
 
 <h4>Related Bills</h4>
 <% @related_bills.each do |bill| %>
-  <%= render partial: "bills/bill_stub_item", locals: {bill: bill} %>
+  <div><%= render partial: "bills/bill_stub_item", locals: {bill: bill} %></div>
 <% end %>
 <%= "There are no related bills" if @related_bills.count == 0 %>
 

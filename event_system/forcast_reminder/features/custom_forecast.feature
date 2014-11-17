@@ -20,6 +20,7 @@ Feature: Custom weather per user
     And hourly forecast weather data exists for zip code 60606
     When I go to the home page
     Then I should see "Forecast Reminder"
+    And I should see "Logged in as testing@enova.com"
     And I should see "No current weather information available"
     And I should see "No hourly forecast information available"
     And I should see "No forecast weather information available"
@@ -30,6 +31,7 @@ Feature: Custom weather per user
     And hourly forecast weather data exists for zip code 53209
     When I go to the home page
     Then I should see "Forecast Reminder"
+    And I should see "Logged in as testing@enova.com"
     And I should see "Logged in as testing@enova.com"
     And I should see the current weather conditions for station id "KMKE"
     And I should see hourly forecast data for zip code 53209

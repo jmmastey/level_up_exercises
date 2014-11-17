@@ -33,7 +33,9 @@
   </div>
   <div class="hourly_container" id="hourly_forecast">
     <h2>Next 24 Hours</h2>
-    <% if @hourly_forecast.any? %>
+    <% if @hourly_forecast.blank? %>
+      <p>No hourly forecast information available</p>
+    <% else %>
       <% @hourly_forecast.each_with_index do |hourly, index| %>
         <div class="hourly_forecast" id="hourly_forecast-<%= index %>">
           <p class="hourly_title"><%= hourly.time.to_s(:time) %></p>
@@ -51,13 +53,13 @@
           <p class="hourly_detail"><%= hourly.cloud_cover %>% Clouds</p>
         </div>
       <% end %>
-    <% else %>
-      <p>No hourly forecast information available</p>
     <% end %>
   </div>
   <div class="forecast_container" id="extended_forecast">
     <h2>Extended Forecast</h2>
-    <% if @forecasts.any? %>
+    <% if @forecasts.blank? %>
+      <p>No forecast weather information available</p>
+    <% else %>
       <% @forecasts.each_with_index do |forecast, index| %>
         <div class="forecast" id="extended_forecast-<%= index %>">
           <p class="forecast_title"><%= forecast.date_description %></p>
@@ -67,8 +69,6 @@
           <p class="forecast_detail">Precip <%= forecast.precipitation %>%</p>
         </div>
       <% end %>
-    <% else %>
-      <p>No forecast weather information available</p>
     <% end %>
   </div>
 </div>

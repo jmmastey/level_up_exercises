@@ -13,6 +13,21 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :zip_code %><br />
+    <%= f.text_field :zip_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :station_id %><br />
+    <%= f.text_field :station_id %>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :send_reminder %>
+    <%= f.label "Send Reminder Email Daily" %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>

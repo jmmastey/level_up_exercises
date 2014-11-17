@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114205807) do
+ActiveRecord::Schema.define(version: 20141117170913) do
 
   create_table "current_weathers", force: true do |t|
     t.integer  "temperature"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20141114205807) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "send_reminder"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

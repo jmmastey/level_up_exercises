@@ -6,12 +6,6 @@ Feature: Today's Weather
   Background:
     Given I am not logged in
 
-  Scenario: Weather does not exists
-    Given I am on the home page
-    Then I should see "No current weather information available"
-    And I should see "No hourly forecast information available"
-    And I should see "No forecast weather information available"
-
   Scenario: Weather data available
     Given current weather exists for station id "KMDW"
     And forecast weather data exists for zip code 60606

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @user.email %>, Here is Today's Forecast</h1>
+    <% if @current_weather %>
+      <h3>Current Conditions at <%= @current_weather.location_name %>: <%= @current_weather.condition %></h3>
+      <div><%= @current_weather.temperature %>°F with wind chill <%= @current_weather.wind_chill %>°F</div>
+      <div><%= @current_weather.wind %></div>
+      <div>Barometric Pressure <%= @current_weather.pressure %> in</div>
+      <div>Visibility <%= @current_weather.visibility %> mi</div>
+
+    <% else %>
+      <h3>Current weather is not available for your location today</h3>
+    <% end %>
+    <% if @hourly_forecast.blank? %>
+      <h3>Forecast Not Available</h3>
+    <% else %>
+      <h3>Next 24 Hours</h3>
+      <% @hourly_forecast.each_with_index do |forecast, index| %>
+        <div id="hourly_forecast_<%= index %>">
+          <%= forecast.time.strftime("%l%p") %>: <%= forecast.temperature %>°F with wind speed of <%= forecast.wind_speed %>mph (<%= Geocoder::Calculations.compass_point(forecast.wind_direction) %>)<% if forecast.precipitation %> and <%= forecast.precipitation %>% chance rain<% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </body>
+</html>

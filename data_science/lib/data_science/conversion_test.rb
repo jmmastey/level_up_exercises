@@ -1,19 +1,22 @@
 require 'json'
-require_relative 'sample'
+require_relative 'cohort'
 require 'active_support'
 require 'active_support/core_ext/numeric/conversions'
 
 module DataScience
   class ConversionTest
-    attr_reader :name, :sample
+    attr_reader :control_group, :test_group
 
-    def initialize(name)
-      @name = name
-      @sample = Sample.new
+    def initialize
+      @control_group = Cohort.new("A")
+      @test_group = Cohort.new("B")
     end
 
     def import_data(data)
-      sample << data
+      data.each do |point|
+        @control_group << data if point["cohort"] == "A"
+        @test_group << data if point["cohort"] == "B"
+      end
     end
 
     def print_statistical_results(group_1, group_2)

@@ -6,7 +6,7 @@ module DataScience
   class Cohort
     include ViewHelpers
 
-    attr_accessor :type, :data_points
+    attr_accessor :type, :visits
 
     CONVERSION_RATE_MULTIPLIER_95_CONFIDENCE = 1.96
 

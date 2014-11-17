@@ -3,7 +3,7 @@
 require_relative '../lib/data_science/conversion_test'
 require_relative '../lib/data_science/json_parser'
 
-conversion_test = DataScience::ConversionTest.new("A_B_Test")
+conversion_test = DataScience::ConversionTest.new
 
 data_file = ARGV.shift || 'source_data.json'
 default_source_file = File.join( 'lib', 'data_science', data_file)

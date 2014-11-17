@@ -1,18 +1,17 @@
-require 'data_science/sample'
+require 'data_science/cohort'
 require 'data_science/view_helpers'
 require_relative '../factories'
 
 module DataScience
   describe Cohort do
-    let(:control) { Cohort.new }
-    let(:test) { Cohort.new }
+    let(:sample) { Sample.new }
     let(:sample_data) do
       [{ "date" => "2014-03-20", "cohort" => "B", "result" => 0 },
        { "date" => "2014-03-20", "cohort" => "B", "result" => 0 }]
     end
 
-    it 'is instantiated with an empty visit array' do
-      expect(cohort.visits).to be_empty
+    it 'is instantiated with an empty array' do
+      expect(sample.data_points).to be_empty
     end
 
     describe '#add_data_to_sample' do

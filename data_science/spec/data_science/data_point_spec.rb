@@ -14,7 +14,7 @@ module DataScience
     end
 
     it 'has a result' do
-      expect(data_point.result).to eq(0)
+      expect(data_point.result).to be_zero
     end
   end
 end

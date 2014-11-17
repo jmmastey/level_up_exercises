@@ -11,7 +11,7 @@ module DataScience
     ]}
 
     it 'is instantiated with an empty array' do
-      expect(sample.data_points).to eq([])
+      expect(sample.data_points).to be_empty
     end
 
     describe '#add_data_to_sample' do

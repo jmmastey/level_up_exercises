@@ -8,24 +8,22 @@ describe CurrentWeatherWorker, vcr: vcr_options, type: :worker do
 
   after { travel_back }
 
-  let (:model) { CurrentWeather }
-  let (:worker) { CurrentWeatherWorker.new }
-
+  let(:model) { CurrentWeather }
+  let(:worker) { CurrentWeatherWorker.new }
 
   describe "#perform" do
-    let (:default_request_url) { "http://w1.weather.gov/xml/current_obs/KMDW.xml" }
-
+    let(:default_request_url) { "http://w1.weather.gov/xml/current_obs/KMDW.xml" }
 
     context "Default Request" do
       before do
         worker.perform
       end
 
-      let (:station_id) { 'KMDW' }
+      let(:station_id) { 'KMDW' }
       subject { model.find_by_station_id(station_id) }
 
-      let (:icon_url_match) { %r(http://forecast\.weather\.gov/images/wtf/small/.+\.png) }
-      let (:history_url) { "http://www.weather.gov/data/obhistory/#{station_id}.html" }
+      let(:icon_url_match) { %r{http://forecast\.weather\.gov/images/wtf/small/.+\.png} }
+      let(:history_url) { "http://www.weather.gov/data/obhistory/#{station_id}.html" }
 
       it "is expected to call service" do
         expect(a_request(:get, default_request_url)).to have_been_made
@@ -52,8 +50,8 @@ describe CurrentWeatherWorker, vcr: vcr_options, type: :worker do
         worker.perform
       end
 
-      let (:station_id) { 'KMKE' }
-      let (:request_url) { "http://w1.weather.gov/xml/current_obs/#{station_id}.xml" }
+      let(:station_id) { 'KMKE' }
+      let(:request_url) { "http://w1.weather.gov/xml/current_obs/#{station_id}.xml" }
       subject { model.find_by_station_id(station_id) }
 
       it "is expected to call both stations" do
@@ -66,8 +64,8 @@ describe CurrentWeatherWorker, vcr: vcr_options, type: :worker do
     end
 
     context "Bad Station Request" do
-      let (:station_id) { '12345' }
-      let (:request_url) { "http://w1.weather.gov/xml/current_obs/#{station_id}.xml" }
+      let(:station_id) { '12345' }
+      let(:request_url) { "http://w1.weather.gov/xml/current_obs/#{station_id}.xml" }
       subject { model.find_by_station_id(station_id) }
 
       before do

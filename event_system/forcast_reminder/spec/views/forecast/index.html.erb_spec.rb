@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe "forecast/index.html.erb", :type => :view do
+describe "forecast/index.html.erb", type: :view do
   context "No data available" do
-    it "displays no weather available message" do 
+    it "displays no weather available message" do
       render
 
       expect(rendered).to have_content("No current weather information available")
@@ -59,7 +59,7 @@ describe "forecast/index.html.erb", :type => :view do
     end
 
     it "displays weekly forecasts" do
-      forecasts = 14.times.map do |i| 
+      forecasts = 14.times.map do |i|
         FactoryGirl.create(:forecast, zip_code: 60606,
                            time: Time.now.beginning_of_hour + i * 0.5)
       end

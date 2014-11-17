@@ -20,14 +20,14 @@ class ForecastController < ApplicationController
   end
 
   def forecasts
-    Forecast.where(zip_code: zip_code).
-      where("time > ?", Time.now.utc).
-      order(:time).all
+    Forecast.where(zip_code: zip_code)
+      .where("time > ?", Time.now.utc)
+      .order(:time).all
   end
 
   def hourly_forecast
-    HourlyForecast.where(zip_code: zip_code).
-      where("time > ?", Time.zone.now.beginning_of_hour).
-      order(:time).all
+    HourlyForecast.where(zip_code: zip_code)
+      .where("time > ?", Time.zone.now.beginning_of_hour)
+      .order(:time).all
   end
 end

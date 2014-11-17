@@ -11,7 +11,7 @@ describe SendReminderEmailWorker, type: :worker do
   end
 
   context "User not registered for daily forecast email" do
-    let! (:user) { create(:user) }
+    let!(:user) { create(:user) }
     before { subject.perform }
 
     it "should not send any email" do
@@ -20,12 +20,12 @@ describe SendReminderEmailWorker, type: :worker do
   end
 
   context "User registered for daily forecast email" do
-    let! (:user) { create(:user, send_reminder: true) }
-    let (:deliveries) { ActionMailer::Base.deliveries }
-    let (:last_email) { deliveries.last }
+    let!(:user) { create(:user, send_reminder: true) }
+    let(:deliveries) { ActionMailer::Base.deliveries }
+    let(:last_email) { deliveries.last }
 
     it "should not send any email" do
-      expect {subject.perform}.to change(deliveries, :count).by(1)
+      expect { subject.perform }.to change(deliveries, :count).by(1)
       expect(last_email.subject).to eq "Daily Forecast Update"
     end
   end

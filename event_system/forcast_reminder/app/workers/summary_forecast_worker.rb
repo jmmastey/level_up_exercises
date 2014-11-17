@@ -3,8 +3,8 @@ class SummaryForecastWorker < BaseForecastWorker
 
   def find_or_create_model(time, values, zip_code, dwml)
     unless values[:temperature].blank?
-      Forecast.find_or_create_by(time: time[:date_time], zip_code: zip_code).
-        tap { |forecast| forecast.date_description = time[:period] }
+      Forecast.find_or_create_by(time: time[:date_time], zip_code: zip_code)
+        .tap { |forecast| forecast.date_description = time[:period] }
     end
   end
 
@@ -13,9 +13,9 @@ class SummaryForecastWorker < BaseForecastWorker
   end
 
   def request_parameters(zip_code)
-    { 
+    {
       format: "12 hourly",
-      begin: Time.zone.now.iso8601, 
+      begin: Time.zone.now.iso8601,
       zipCodeList: zip_code,
     }
   end

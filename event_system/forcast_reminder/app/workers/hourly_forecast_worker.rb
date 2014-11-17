@@ -22,7 +22,7 @@ class HourlyForecastWorker < BaseForecastWorker
       wspd: 'wspd',
       wdir: 'wdir',
       icons: 'icons',
-      begin: Time.zone.now.iso8601, 
+      begin: Time.zone.now.iso8601,
       zipCodeList: zip_code,
     }
   end

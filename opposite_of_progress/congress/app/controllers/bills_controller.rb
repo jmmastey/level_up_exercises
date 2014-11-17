@@ -2,7 +2,7 @@ class BillsController < ApplicationController
   before_action :set_bill, only: [:show]
 
   def index
-    @results = Bill.paginate(:page => params[:page], :per_page => 10)
+    @results = Bill.paginate(:page => params[:page], :per_page => ApplicationHelper::PAGINATION_COUNT)
   end
 
   def show

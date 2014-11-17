@@ -3,11 +3,11 @@ require "csv"
 class DinosaurParser
   def parse
     @result_dinosaurs = []
-    CSV.foreach("dinodex.csv", :headers => true) do |row|
+    CSV.foreach("dinodex.csv", headers: true) do |row|
       @result_dinosaurs << row.to_hash
     end
 
-    CSV.foreach("african_dinosaur_export.csv", :headers => true) do |row|
+    CSV.foreach("african_dinosaur_export.csv", headers: true) do |row|
       dinosaur = {}
       dinosaur["NAME"]          = row["Genus"]
       dinosaur["PERIOD"]        = row["Period"]
@@ -21,3 +21,4 @@ class DinosaurParser
     @result_dinosaurs
   end
 end
+

@@ -81,7 +81,8 @@ module DataScience
 
         describe '#confidence_level' do
           it 'calculates the confidence level' do
-            expect(sample.confidence_level("A", "B")).to be_within(0.001).of(0.646)
+            confidence_level = sample.confidence_level("A", "B")
+            expect(confidence_level).to be_within(0.001).of(0.646)
           end
         end
 

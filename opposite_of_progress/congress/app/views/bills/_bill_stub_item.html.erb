@@ -1,4 +1,2 @@
 <%= "Bill:" %>
-<% if bill %>
-  <%= raw "#{link_to bill.title, bill}" %>
-<% end %>
+<%= raw "#{link_to bill.title, bill}" if bill %>

@@ -17,7 +17,7 @@
 <div>
   <% if @deed.bill_id %>
     <% bill = Bill.where(bill_id: @deed.bill_id).first %>
-    <%= render partial: "bills/bill_stub_item", locals: {bill: bill, deed: @deed} %>
+    <%= render partial: "bills/bill_stub_item", locals: {bill: bill} %>
   <% end %>
 </div>
 

@@ -55,7 +55,7 @@ Feature: Removing items from my cart
     When I add "<quantity>" "<item>" to my cart
     And I remove "<remove_1>" "<item>" from my cart
     And I remove "<remove_2>" "<item>" from my cart
-    Then I should "<total>" "<item>" in my cart
+    Then I should see "<total>" "<item>" in my cart
     And I should see the message "<message>"
 
   @happy

@@ -11,12 +11,12 @@ Feature: Removing items from my cart
     Then I should see the message "<message>"
 
   @sad
-  Examples
+  Examples:
     | quantity | item          | message           |
     | 0        | Sample Item A | The cart is empty |
 
   @bad
-  Examples
+  Examples:
     | quantity | item          | message                              |
     | 1        | Sample Item A | Item not found in cart               |
     | 1        |               | Select a valid item to remove        |

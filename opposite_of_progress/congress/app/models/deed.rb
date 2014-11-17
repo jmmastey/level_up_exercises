@@ -4,7 +4,6 @@ class Deed < ActiveRecord::Base
       if bill.last_vote_at && bill.short_title
         deed_text = "#{bill.short_title} was last voted on #{bill.last_vote_at}"
 
-        # find an existing deed with the same bill_id and bioguide_id
         result = Deed.where(bill_id: bill.bill_id,
                             bioguide_id: bill.sponsor_id,
                             deed: deed_text)
@@ -26,7 +25,6 @@ class Deed < ActiveRecord::Base
       if bill.congress == 113 && bill.enacted_at && bill.short_title
         deed_text = "#{bill.short_title} was enacted on #{bill.enacted_at}"
 
-        # find an existing deed with the same bill_id and bioguide_id
         result = Deed.where(bill_id: bill.bill_id,
                             bioguide_id: bill.sponsor_id,
                             deed: deed_text)

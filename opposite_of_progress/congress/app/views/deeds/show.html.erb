@@ -7,18 +7,12 @@
 
 <h4>Legislator</h4>
 <div>
-  <% if @deed.bioguide_id %>
-    <% legislator = Legislator.where(bioguide_id: @deed.bioguide_id).first %>
-    <%= render partial: "legislators/legislator_stub_item", locals: {legislator: legislator, deed: @deed} %>
-  <% end %>
+  <%= render partial: "legislators/legislator_stub_item", locals: {legislator: @legislator, deed: @deed} %>
 </div>
 
 <h4>Bill</h4>
 <div>
-  <% if @deed.bill_id %>
-    <% bill = Bill.where(bill_id: @deed.bill_id).first %>
-    <%= render partial: "bills/bill_stub_item", locals: {bill: bill} %>
-  <% end %>
+  <%= render partial: "bills/bill_stub_item", locals: {bill: @bill} %>
 </div>
 
 <h4>Related Deeds</h4>

@@ -12,7 +12,7 @@ FactoryGirl.define do
     dew_point Random.rand(-32..100)
     wind_chill Random.rand(-32..100)
     visibility Random.rand(0.0..10.0)
-    icon_url Faker::Avatar.image
-    history_url Faker::Internet.url
+    icon_url = Faker::Avatar.image
+    history_url = Faker::Internet.url
   end
 end

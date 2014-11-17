@@ -17,3 +17,6 @@
 
 # Ignore Mac OSX cache files
 ./.DS_Store
+
+# Ignore swap files
+*.swp

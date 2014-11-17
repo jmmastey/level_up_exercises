@@ -11,7 +11,7 @@ describe "forecast/index.html.erb", type: :view do
     end
   end
 
-  context "Data available" do
+  context "Current data available" do
     it "displays current weather" do
       condition = create(:current_weather)
       assign(:conditions, condition)

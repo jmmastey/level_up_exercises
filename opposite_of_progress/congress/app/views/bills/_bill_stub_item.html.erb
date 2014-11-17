@@ -1,7 +1,4 @@
 <%= "Bill:" %>
 <% if bill %>
-  <%= raw "#{link_to bill.short_title, bill}" if bill.short_title %>
-  <%= raw "#{link_to bill.bill_id, bill}" unless bill.short_title %>
-<% else %>
-  <%= "#{deed.bill_id}" %>
+  <%= raw "#{link_to bill.title, bill}" %>
 <% end %>

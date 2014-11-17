@@ -1,4 +1,9 @@
 class Bill < ActiveRecord::Base
+  def title
+    return self.short_title if self.short_title
+    return self.bill_id
+  end
+
   def fetch path
     http = Curl.get(path)
     @results = JSON.parse(http.body_str)

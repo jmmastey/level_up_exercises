@@ -21,4 +21,3 @@ class DinosaurParser
     @result_dinosaurs
   end
 end
-

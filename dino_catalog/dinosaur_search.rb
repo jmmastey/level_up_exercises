@@ -85,4 +85,3 @@ class DinosaurSearch
     hash_json.to_json
   end
 end
-

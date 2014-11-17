@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "deeds#index"
+  get 'home' => "deeds#index"
 
   resources :bills
   resources :legislators

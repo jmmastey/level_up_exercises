@@ -1,7 +1,5 @@
 FactoryGirl.define do
-  factory :data, class: DataScience::DataPoint do
-    date "2014-11-10"
-    cohort "A"
+  factory :cohort do
     result 0
   end
 end

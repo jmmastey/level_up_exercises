@@ -1,108 +1,96 @@
 require 'data_science/cohort'
 require 'data_science/view_helpers'
-require_relative '../factories'
 
 module DataScience
   describe Cohort do
-    let(:sample) { Sample.new }
-    let(:sample_data) do
-      [{ "date" => "2014-03-20", "cohort" => "B", "result" => 0 },
-       { "date" => "2014-03-20", "cohort" => "B", "result" => 0 }]
+    let(:cohort) { Cohort.new }
+
+    it 'is instantiated with a 0 conversions' do
+      expect(cohort.conversions).to eq(0)
     end
 
-    it 'is instantiated with an empty array' do
-      expect(sample.data_points).to be_empty
+    it 'is instantiated with a 0 non-conversions' do
+      expect(cohort.non_conversions).to eq(0)
     end
 
-    describe '#add_data_to_sample' do
-      it 'adds a data point' do
-        sample << sample_data
+    it 'sums the conversions for a cohort' do
+      data = [{ "date" => "2014-03-20", "cohort" => "A", "result" => 1 }]
+      cohort.tally_conversions(data)
+      expect(cohort.conversions).to eq(1)
+      expect(cohort.non_conversions).to eq(0)
+    end
 
-        expect(sample.data_points.size).to eq(2)
-      end
+    it 'sums the non-conversions for a cohort' do
+        data = [{ "date" => "2014-03-20", "cohort" => "A", "result" => 0 }]
+      cohort.tally_conversions(data)
+      expect(cohort.conversions).to eq(0)
+      expect(cohort.non_conversions).to eq(1)
     end
 
     context 'when calculating sample statistics' do
-      before do
-        sample.data_points += build_list(:data, 100, cohort: "A", result: 0)
-        sample.data_points += build_list(:data, 50, cohort: "A", result: 1)
-        sample.data_points += build_list(:data, 125, cohort: "B", result: 0)
-        sample.data_points += build_list(:data, 50, cohort: "B", result: 1)
-      end
-
-      describe '#sample_size' do
-        it 'calculates the total sample size' do
-          expect(sample.sample_size).to eq(325)
-        end
-      end
+      let(:conversions) { 50 }
+      let(:non_conversions) { 100 }
 
       describe '#conversions' do
-        it 'calculates the number of conversions' do
-          expect(sample.conversions("A")).to eq(50)
-          expect(sample.conversions("B")).to eq(50)
+        it 'provides the number of conversions' do
+          cohort.conversions = 50
+          expect(cohort.conversions).to eq(50)
         end
       end
 
       describe '#non-conversions' do
-        it 'calculates the number of non-conversions' do
-          expect(sample.non_conversions("A")).to eq(100)
-          expect(sample.non_conversions("B")).to eq(125)
+        it 'provides the number of non-conversions' do
+          cohort.non_conversions = 100
+          expect(cohort.non_conversions).to eq(100)
         end
       end
 
       describe '#cohort_size' do
         it 'calculates the cohort size' do
-          expect(sample.cohort_size("A")).to eq(150)
-          expect(sample.cohort_size("B")).to eq(175)
+          cohort.conversions = 50
+          cohort.non_conversions = 100
+          expect(cohort.size).to eq(150)
         end
       end
 
       describe '#conversion_rate' do
         it 'calculates the conversion rate' do
-          expect(sample.conversion_rate("A")).to be_within(0.0001).of(0.3333)
-          expect(sample.conversion_rate("B")).to be_within(0.0001).of(0.2857)
+          cohort.conversions = 50
+          cohort.non_conversions = 100
+          expect(cohort.conversion_rate).to be_within(0.0001).of(0.3333)
         end
       end
 
       describe '#standard_error' do
         it 'calculates the standard error' do
-          expect(sample.standard_error("A")).to be_within(0.0001).of(0.0384)
-          expect(sample.standard_error("B")).to be_within(0.0001).of(0.0341)
+          cohort.conversions = 50
+          cohort.non_conversions = 100
+          expect(cohort.standard_error).to be_within(0.0001).of(0.0384)
         end
       end
 
       context 'when using 95% confidence' do
         describe '#error_bars' do
           it 'calculates the error bars' do
-            expect(sample.error_bars("A")).to be_within(0.001).of(7.544)
-            expect(sample.error_bars("B")).to be_within(0.001).of(6.693)
-          end
-        end
-
-        describe '#confidence_level' do
-          it 'calculates the confidence level' do
-            confidence_level = sample.confidence_level("A", "B")
-            expect(confidence_level).to be_within(0.001).of(0.646)
+            cohort.conversions = 50
+            cohort.non_conversions = 100
+            expect(cohort.error_bars).to be_within(0.001).of(7.544)
           end
         end
 
         describe '#error_bars_helper' do
           it 'prints the error bars in % format with a precision of 2' do
-            expect(sample.error_bars_helper("A")).to eq("7.54%")
-            expect(sample.error_bars_helper("B")).to eq("6.69%")
+            cohort.conversions = 50
+            cohort.non_conversions = 100
+            expect(cohort.error_bars_helper).to eq("7.54%")
           end
         end
 
-        describe '#onversion_rate_helper' do
+        describe '#conversion_rate_helper' do
           it 'prints the conversion rates rounded to a precision of 2' do
-            expect(sample.conversion_rate_helper("A")).to eq("33.3%")
-            expect(sample.conversion_rate_helper("B")).to eq("28.6%")
-          end
-        end
-
-        describe '#confidence_level_helper' do
-          it 'print the confidence level in % format with a precision of 2' do
-            expect(sample.confidence_level_helper("A", "B")).to eq("64.6%")
+            cohort.conversions = 50
+            cohort.non_conversions = 100
+            expect(cohort.conversion_rate_helper).to eq("33.3%")
           end
         end
       end

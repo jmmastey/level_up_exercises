@@ -1,26 +1,42 @@
 require 'data_science/conversion_test'
 require 'data_science/json_parser'
-require 'pry'
+require 'data_science/view_helpers'
 
 module DataScience
   describe ConversionTest do
     let(:conversion_test) { ConversionTest.new }
 
     it 'has two cohorts' do
-      expect(conversion_test.control_group.type).to eq("A")
-      expect(conversion_test.test_group.type).to eq("B")
+      expect(conversion_test.control_group).to be_an_instance_of(Cohort)
+      expect(conversion_test.test_group).to be_an_instance_of(Cohort)
     end
 
-    it 'adds data points to each the control group cohort' do
-      parsed_json_data = [{ "date" => "2014-03-20", "cohort" => "A", "result" => 0 }]
+    it 'separates the data into the test and control groups' do
+      parsed_json_data = [{ "date" => "2014-03-20", "cohort" => "A", "result" => 1 }, { "date" => "2014-03-20", "cohort" => "B", "result" => 1 }]
       conversion_test.import_data(parsed_json_data)
-      expect(conversion_test.control_group.visits.size).to eq(1)
+      expect(conversion_test.control_group.size).to eq(1)
+      expect(conversion_test.test_group.size).to eq(1)
     end
 
-    it 'adds data points to each the test group cohort' do
-      parsed_json_data = [{ "date" => "2014-03-20", "cohort" => "B", "result" => 0 }]
-      conversion_test.import_data(parsed_json_data)
-      expect(conversion_test.test_group.visits.size).to eq(1)
+    describe '#confidence_level' do
+      it 'calculates the confidence level' do
+        conversion_test.control_group.conversions = 50
+        conversion_test.control_group.non_conversions = 100
+        conversion_test.test_group.conversions = 50
+        conversion_test.test_group.non_conversions = 125
+        confidence_level = conversion_test.confidence_level
+        expect(confidence_level).to be_within(0.001).of(0.646)
+      end
+    end
+
+    describe '#confidence_level_helper' do
+      it 'prints the confidence level in % format with a precision of 2' do
+        conversion_test.control_group.conversions = 50
+        conversion_test.control_group.non_conversions = 100
+        conversion_test.test_group.conversions = 50
+        conversion_test.test_group.non_conversions = 125
+        expect(conversion_test.confidence_level_helper).to eq("64.6%")
+      end
     end
   end
 end

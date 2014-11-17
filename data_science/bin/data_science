@@ -12,4 +12,4 @@ json_data = DataScience::JsonParser.parse_file(default_source_file)
 
 conversion_test.import_data(json_data)
 
-puts conversion_test.print_statistical_results("A", "B")
+puts conversion_test.print_statistical_results

@@ -8,35 +8,24 @@ as sign up for morning reminder emails.
 
 == Installation
 To install clone the git repository and run:
-```
-bundle install
-```
+    bundle install
+
 Create cron to run scheduled jobs
-```
-whenever -w
-```
+    whenever -w
 
 Run Sidekiq
 To run in console use:
-```
-bundle exec sidekiq
-```
+    bundle exec sidekiq
 
 Create database instance
-```
-bin/rake db:setup
-```
+    bin/rake db:setup
 
-## Testing
+== Testing
 To sun test simply execute:
-```
-bin/rake
-```
+    bin/rake
 
 To run specific tests:
-```ruby
-# RSpec
-bin/rake spec
-# Cucumber
-bin/rake cucumber
-```
+    # RSpec
+    bin/rake spec
+    # Cucumber
+    bin/rake cucumber

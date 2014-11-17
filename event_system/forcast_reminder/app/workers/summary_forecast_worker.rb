@@ -26,7 +26,7 @@ class SummaryForecastWorker < BaseForecastWorker
       { attribute: 'temperature', map_name: :temperature, data_path: 'value', type: 'minimum' },
       { attribute: 'probability-of-precipitation', map_name: :precipitation, data_path: 'value' },
       { attribute: 'conditions-icon', map_name: :icon_url, data_path: 'icon-link' },
-      { attribute: 'weather', map_name: :condition, data_path: 'weather-conditions/@weather-summary' }
+      { attribute: 'weather', map_name: :condition, data_path: 'weather-conditions/@weather-summary' },
     ]
   end
 end

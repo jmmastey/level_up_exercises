@@ -7,8 +7,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :zip_code, :station_id, :send_reminder, :password, :password_confirmation) }
-
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :zip_code, :station_id, :send_reminder, :password, :password_confirmation, :current_password) }
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:email, :zip_code, :station_id, :send_reminder, :password,
+               :password_confirmation)
+    end
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit(:email, :zip_code, :station_id, :send_reminder, :password,
+               :password_confirmation, :current_password)
+    end
   end
 end

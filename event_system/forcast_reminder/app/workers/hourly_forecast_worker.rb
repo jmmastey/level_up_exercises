@@ -2,10 +2,9 @@ class HourlyForecastWorker < BaseForecastWorker
   private
 
   def find_or_create_model(time, values, zip_code, dwml)
-    unless values[:temperature].blank?
-      if time[:date_time] < (dwml.request_time + max_time)
-        HourlyForecast.find_or_create_by(time: time[:date_time], zip_code: zip_code)
-      end
+    if !values[:temperature].blank? &&
+        time[:date_time] < (dwml.request_time + max_time)
+      HourlyForecast.find_or_create_by(time: time[:date_time], zip_code: zip_code)
     end
   end
 
@@ -36,7 +35,7 @@ class HourlyForecastWorker < BaseForecastWorker
       { attribute: 'wind-speed', map_name: :wind_speed, data_path: 'value', type: 'sustained' },
       { attribute: 'direction', map_name: :wind_direction, data_path: 'value', type: 'wind' },
       { attribute: 'cloud-amount', map_name: :cloud_cover, data_path: 'value', type: 'total' },
-      { attribute: 'conditions-icon', map_name: :icon_url, data_path: 'icon-link', type: 'forecast-NWS' }
+      { attribute: 'conditions-icon', map_name: :icon_url, data_path: 'icon-link', type: 'forecast-NWS' },
     ]
   end
 

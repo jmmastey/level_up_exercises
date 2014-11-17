@@ -7,7 +7,7 @@ class ForecastMailer < ActionMailer::Base
     @hourly_forecast = HourlyForecast.order(:time).
       where("time > ?", Time.now).
       where(zip_code: user.zip_code).all
-    
+
     mail(to: @user.email, subject: "Daily Forecast Update")
   end
 end

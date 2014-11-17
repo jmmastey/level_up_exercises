@@ -1,18 +1,32 @@
 class ForecastController < ApplicationController
   def index
-    zip_code = 60606
-    station_id = "KMDW"
-    
-    if user_signed_in?
-      zip_code = current_user.zip_code
-      station_id = current_user.station_id
-    end
+    @conditions = conditions
+    @forecasts = forecasts
+    @hourly_forecast = hourly_forecast
+  end
 
-    @conditions = CurrentWeather.find_by_station_id(station_id)
-    @forecasts = Forecast.where(zip_code: zip_code).
+  private
+
+  def zip_code
+    user_signed_in? ? current_user.zip_code : Location::DEFAULT_ZIP_CODE
+  end
+
+  def station_id
+    user_signed_in? ? current_user.station_id : Location::DEFAULT_STATION_ID
+  end
+
+  def conditions
+    CurrentWeather.find_by_station_id(station_id)
+  end
+
+  def forecasts
+    Forecast.where(zip_code: zip_code).
       where("time > ?", Time.now.utc).
       order(:time).all
-    @hourly_forecast = HourlyForecast.where(zip_code: zip_code).
+  end
+
+  def hourly_forecast
+    HourlyForecast.where(zip_code: zip_code).
       where("time > ?", Time.zone.now.beginning_of_hour).
       order(:time).all
   end

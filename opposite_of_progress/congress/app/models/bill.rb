@@ -9,20 +9,8 @@ class Bill < ActiveRecord::Base
     @results = JSON.parse(http.body_str)
 
     @results["results"].each do |result|
-      bill = Bill.where(bill_id: result['bill_id'])
-
-      if bill.count == 0
-        Bill.create(build_object_hash(result))
-      else
-        bill = bill.first
-
-        old_hash = ApplicationHelper::to_md5_hash bill
-        new_hash = ApplicationHelper::to_md5_hash result, Bill.new
-
-        unless old_hash == new_hash
-          Bill.update(bill.id, build_object_hash(result))
-        end
-      end
+      bill = Bill.find_or_create_by(bill_id: result['bill_id'])
+      bill.update(build_object_hash(result))
     end
   end
 

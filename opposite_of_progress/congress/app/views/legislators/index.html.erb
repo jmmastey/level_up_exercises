@@ -1,12 +1,10 @@
 <h3>All Legislators</h3>
 
 <% @results.each do |result| %>
-  <% @legislator = result %>
-  <div><%= render partial: "legislator_stub_item", locals: {legislator: @legislator} %></div>
+  <div><%= render partial: "legislator_stub_item", locals: {legislator: result} %></div>
 <% end %>
+<%= "There are no legislators to show" if @results.count == 0 %>
 
 <hr />
 
 <div style="text-align:center;"><%= will_paginate @results %></div>
-
-<%= "There are no legislators to show" if @results.count == 0 %>

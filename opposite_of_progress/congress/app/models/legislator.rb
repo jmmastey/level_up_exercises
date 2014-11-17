@@ -16,20 +16,8 @@ class Legislator < ActiveRecord::Base
     @results = JSON.parse(http.body_str)
 
     @results["results"].each do |result|
-      legislator = Legislator.where(bioguide_id: result['bioguide_id'])
-
-      if legislator.count == 0
-        Legislator.create(build_object_hash(result))
-      else
-        legislator = legislator.first
-
-        old_hash = ApplicationHelper::to_md5_hash legislator
-        new_hash = ApplicationHelper::to_md5_hash result, Legislator.new
-
-        unless old_hash == new_hash
-          Legislator.update(legislator.id, build_object_hash(result))
-        end
-      end
+      legislator = Legislator.find_or_create_by(bioguide_id: result['bioguide_id'])
+      legislator.update(build_object_hash(result))
     end
   end
 

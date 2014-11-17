@@ -22,5 +22,19 @@ $(document).ready(function(){
   $('.select-button').click(function(){
    $( ".boxmenu" ).toggle();
   });
+
+  $('.more-button').click(function(){
+  $(".morebox").toggle();
+    });
+
+  $('.mail-button').click(function(){
+  $(".mail-dropdown").toggle();
+    });
+
+  $(document).ready(function(){
+  $(".settings-button").click(function(){
+   
+  $('.box').toggle();
+});
 });
 

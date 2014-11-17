@@ -15,7 +15,15 @@
   </div>
   <div class="nav_banner">
     <button type=button name="mail" class="mail-button">Mail</button>
+    <div class="mail-dropdown">
+    <ul>
+   <li>Mail</li>
+   <li>Contacts</li>
+   <li>Tasks</li>
+    </ul>
+  </div>
     <div class="select-button">
+       <span class="checkbox"><input type="checkbox"></span>
       <div class="boxmenu">
             <ul>
             <li><a href="#">All</a></li>
@@ -27,13 +35,32 @@
           </ul>
         </div>
       </div>
-    </div>
+      <div class="refresh-button" data-role="Refresh"><!-- <img src="img/glyphicons_085_repeat.png"/> --></div>
+      <div class="more-button" data-role="More"><span class="morespan">More</span>
 
-      <div class="refresh-button" data-role="Refresh"></div>
-      <div class="more-button" data-role="More"></div>
-      <button class="settings-button"></button>
-      <button class="older-button"></button>
-      <button class="newer-button"></button>
+        <div class="morebox"><p>Mark all as read</p><hr><p>Select messages to see</br> more actions</p></div>
+      </div>
+      <div class="settings-button">
+      <div class ="box">
+      <ul>
+
+      <li>Display density:</li>
+      <li>&nbsp Comfortable(on larger displays)</li>
+      <li>&nbsp Cozy</li>
+      <li>&nbsp Compact</li>
+
+      <li>&nbsp Configure inbox</li>
+
+      <li>&nbsp Settings</li>
+      <li>&nbsp Themes</li>
+      <li>&nbsp Send feedback</li>
+      <li>&nbsp Help</li>
+      </ul>
+      </div>
+
+      </div>
+      <div class="older-button"></div>
+      <div class="newer-button"></div>
     </div>
     <div class="side_bar">
      <button name="searchcontent" class="compose-button">COMPOSE</button>
@@ -51,7 +78,7 @@
   </nav>
 </div>
 <div class="main_content">
-  <p>hello world, check out my body</p>
+  
 </div>
 </body>
 </html>

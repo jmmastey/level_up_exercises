@@ -76,3 +76,18 @@ Feature: Adding items to my cart
     | Sample Item B | 1          |            | 0     | Select a quantity for Sample Item B |
     | Sample Item B | -2         | 1          | 0     | Invalid quantity for Sample Item B  |
     | Sample Item B |            | 1          | 0     | Select a quantity for Sample Item B |
+
+  @happy
+  Scenario Outline: I add items to my cart as an anonymous and registered user
+    When I add "1" "Sample Item A" to my cart
+    And I login as "Sample User 1"
+    And I add "1" "Sample Item B" to my cart
+    Then I should see "1" "Sample Item A" in my cart
+    And I should see "1" "Sample Item B" in my cart
+
+  @happy
+  Scenario Outline: I add items to my cart as a registered user then logout
+    When I login as "Sample User 1"
+    And I add "1" "Sample Item A" to my cart
+    And I logout
+    Then I should see the message "The cart is empty"

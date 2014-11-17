@@ -19,6 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
+every :day, at: "06:00" do
+  runner 'SendReminderEmailWorker.perform_async'
+end
+
 every :hour do
   runner 'CurrentWeatherWorker.perform_async'
   runner 'SummaryForecastWorker.perform_async'

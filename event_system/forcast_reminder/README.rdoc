@@ -1,28 +1,31 @@
-== README
+= README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple ruby forecast application that is used to display current and
+forecast data for guest and logged in users. Guests will see the default 
+location weather information which is for KMDW station and 60606 zip code. 
+Users that sign up and login can set their own station and zip code as well
+as sign up for morning reminder emails.
 
-Things you may want to cover:
+== Installation
+To install clone the git repository and run:
+# bundle install
 
-* Ruby version
+Create cron to run scheduled jobs
+# whenever -w
 
-* System dependencies
+Run Sidekiq
+To run in console use:
+# bundle exec sidekiq
 
-* Configuration
+Create database instance
+# bin/rake db:setup
 
-* Database creation
+## Testing
+To sun test simply execute:
+# bin/rake
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+To run specific tests:
+# # RSpec
+# bin/rake spec
+# # Cucumber
+# bin/rake cucumber

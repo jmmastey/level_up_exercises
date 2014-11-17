@@ -16,7 +16,7 @@ module DataScience
       expect(@sample.data_points).to eq([])
     end
 
-    describe '#<<' do
+    describe '#add_data_to_sample' do
       it 'adds a data point' do
         @sample << @sample_data
 
@@ -88,23 +88,23 @@ module DataScience
           end
         end
 
-        describe '#print_error_bars' do
+        describe '#error_bars_helper' do
           it 'prints the error bars in % format with a precision of 2' do
-            expect(@sample.print_error_bars("A")).to eq("2.76%")
-            expect(@sample.print_error_bars("B")).to eq("2.59%")
+            expect(@sample.error_bars_helper("A")).to eq("2.76%")
+            expect(@sample.error_bars_helper("B")).to eq("2.59%")
           end
         end
 
-        describe '#print_conversion_rate' do
+        describe '#onversion_rate_helper' do
           it 'prints the conversion rates rounded to a precision of 2' do
-            expect(@sample.print_conversion_rate("A")).to eq("30.1%")
-            expect(@sample.print_conversion_rate("B")).to eq("24.0%")
+            expect(@sample.conversion_rate_helper("A")).to eq("30.1%")
+            expect(@sample.conversion_rate_helper("B")).to eq("24.0%")
           end
         end
 
-        describe '#print_confidence_level' do
+        describe '#confidence_level_helper' do
           it 'print the confidence level in % format with a precision of 2' do
-            expect(@sample.print_confidence_level("A", "B")).to eq("99.8%")
+            expect(@sample.confidence_level_helper("A", "B")).to eq("99.8%")
           end
         end
       end

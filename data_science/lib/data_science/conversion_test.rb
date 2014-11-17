@@ -23,9 +23,9 @@ module DataScience
       Number of Conversions for the Control Group: #{@sample.conversions(group_1)}\n\n
       Total Size of the Test Group: #{@sample.cohort_size(group_2)}
       Number of Conversions for the Test Group: #{@sample.conversions(group_2)}\n\n
-      Conversion rate for the Control Group: #{@sample.print_conversion_rate(group_1)} +- #{ @sample.print_error_bars(group_1) }
-      Conversion rate for the Test Group: #{@sample.print_conversion_rate(group_2)} +- #{ @sample.print_error_bars(group_2) }\n\n
-      Confidence Level: #{@sample.print_confidence_level(group_1, group_2)}\n
+      Conversion rate for the Control Group: #{@sample.conversion_rate_helper(group_1)} +- #{ @sample.error_bars_helper(group_1) }
+      Conversion rate for the Test Group: #{@sample.conversion_rate_helper(group_2)} +- #{ @sample.error_bars_helper(group_2) }\n\n
+      Confidence Level: #{@sample.confidence_level_helper(group_1, group_2)}\n
     )
     end
   end

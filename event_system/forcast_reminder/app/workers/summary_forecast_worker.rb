@@ -1,7 +1,7 @@
 class SummaryForecastWorker < BaseForecastWorker
   private
 
-  def find_or_create_model(time, values, zip_code, dwml)
+  def find_or_create_model(time, values, zip_code, _dwml)
     unless values[:temperature].blank?
       Forecast.find_or_create_by(time: time[:date_time], zip_code: zip_code)
         .tap { |forecast| forecast.date_description = time[:period] }

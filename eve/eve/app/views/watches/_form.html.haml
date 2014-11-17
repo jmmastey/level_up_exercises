@@ -15,5 +15,5 @@
     = f.hidden_field :item_id, class: "form-control"
   .form-group
     = f.label :regions
-    = f.select :regions, {}, multiple: true
+    = f.hidden_field :regions, class: "form-control", multiple: true
   = f.submit 'Save', class: "btn btn-primary"

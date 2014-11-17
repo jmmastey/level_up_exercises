@@ -3,12 +3,13 @@ window.Eve or= {}
 Eve.Watches =
 	init: ->
 		this.init_item_select()
+		this.init_region_select()
 
 	init_item_select: ->
 		$('#watch_item_id').select2
 			minimumInputLength: 3
 			ajax:
-				url: "/items/index.json"
+				url: "/items/search.json"
 				dataType: "json"
 				data: (term, page) -> {
 					query: term
@@ -29,7 +30,7 @@ Eve.Watches =
 		$('#watch_regions').select2
 			minimumInputLength: 3
 			ajax:
-				url: "/regions/index.json"
+				url: "/regions/search.json"
 				dataType: "json"
 				data: (term, page) -> {
 					query: term

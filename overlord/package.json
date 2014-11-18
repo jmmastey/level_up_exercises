@@ -1,0 +1,39 @@
+{
+  "name": "overlord",
+  "description": "",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "install_deps": "npm install && bundle install",
+    "server": "grunt up",
+    "all": "npm run install_deps && npm run server"
+  },
+  "browser": {
+    "jquery": "./node_modules/jquery/dist/jquery.min.js"
+  },
+  "browserify-shim": {},
+  "browserify": {
+    "transform": [
+      "partialify",
+      "browserify-shim",
+      "brfs"
+    ]
+  },
+  "dependencies": {
+    "jquery": "^2.1.1"
+  },
+  "devDependencies": {
+    "bower": "*",
+    "brfs": "^1.2.0",
+    "browserify": "^6.3.2",
+    "browserify-shim": "^3.8.0",
+    "grunt": "*",
+    "grunt-browserify": "^3.0.1",
+    "grunt-concurrent": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-exorcise": "^0.2.0",
+    "grunt-shell": "^1.1.1",
+    "partialify": "^3.1.1"
+  }
+}

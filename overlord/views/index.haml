@@ -1,0 +1,7 @@
+%header.header
+  %a.btn.lg.page-callout(href='#' data-js='fullscreen-console' title='Let\'s blow shit up.') Let's blow shit up.
+
+
+.desk
+  .console-splashpage
+    = haml :'components/console', :locals => {:bomb_state => @bomb_state}

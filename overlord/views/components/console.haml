@@ -1,0 +1,13 @@
+
+-# this is super uggo. need this for usability and testing purposes. b/c the
+-# JS console hooks in on Keypress events
+.hidden-plainsight
+  %input.query-input(name='query-input' type='text')
+  %button.js-console-submit Submit Query
+
+.console
+  .content
+    .output=@bomb_state
+    %span.input
+    %span.cursor _
+

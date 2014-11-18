@@ -2,7 +2,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :bill do |b|
-    b.bill_id { Faker::Name.bill_id }
-    b.short_title { Faker::Name.short_title }
+    b.bill_id { Faker::Lorem.characters(9) }
+    b.short_title { Faker::Lorem.sentence }
   end
 end

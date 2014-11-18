@@ -26,3 +26,8 @@ blockquote {
 .back_link {
   text-align: center;
 }
+
+.supporting-date {
+  font-size: 14px;
+  text-align: right;
+}

@@ -5,7 +5,9 @@ describe ForecastWorker, vcr: vcr_options, type: :worker do
   let(:model) { HourlyForecast.order(:time) }
   let(:request_time) { Time.now }
   let(:zip_code) { 60606 }
-  let(:test_url) { "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php" }
+  let(:test_url) do
+    "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php"
+  end
   let(:test_query) do
     {
       "zipCodeList" => zip_code, "product" => "time-series",

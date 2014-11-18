@@ -4,7 +4,9 @@ vcr_options = { cassette_name: "forecast", record: :none }
 describe ForecastWorker, vcr: vcr_options, type: :worker do
   let(:model) { Forecast.order(:time) }
   let(:zip_code) { 60606 }
-  let(:test_url) { "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php" }
+  let(:test_url) do
+    "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php"
+  end
   let(:test_query) do
     {
       "zipCodeList" => zip_code, "format" => "12 hourly",

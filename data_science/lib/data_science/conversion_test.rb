@@ -1,14 +1,19 @@
 require 'json'
 require_relative 'cohort'
+require_relative 'json_parser'
+require_relative 'view_helpers'
 require 'active_support'
 require 'active_support/core_ext/numeric/conversions'
 require 'abanalyzer'
-require_relative 'view_helpers'
-
 
 module DataScience
   class ConversionTest
     include ViewHelpers
+
+    COHORT_MAPPING = {
+      "test_group"    => "A",
+      "control_group" => "B",
+    }
 
     attr_reader :control_group, :test_group
 
@@ -18,9 +23,13 @@ module DataScience
     end
 
     def import_data(data)
-      test_data, control_data = data.partition { |point| point["cohort"] == "A" }
+      test_data, control_data = partition_data(data)
       control_group.tally_conversions(control_data)
       test_group.tally_conversions(test_data)
+    end
+
+    def partition_data(data)
+      data.partition { |point| point["cohort"] == COHORT_MAPPING["test_group"] }
     end
 
     def confidence_level
@@ -40,10 +49,14 @@ module DataScience
       Number of Conversions for the Control Group: #{@control_group.conversions}\n\n
       Total Size of the Test Group: #{@test_group.size}
       Number of Conversions for the Test Group: #{@test_group.conversions}\n\n
-      Conversion rate for the Control Group: #{@control_group.conversion_rate_helper} +- #{ @control_group.error_bars_helper }
-      Conversion rate for the Test Group: #{@test_group.conversion_rate_helper} +- #{ @test_group.error_bars_helper }\n\n
+      Conversion rate for the Control Group: #{conversion_rate_with_error}
+      Conversion rate for the Test Group: #{conversion_rate_with_error}\n\n
       Confidence Level: #{confidence_level_helper}\n
     )
+    end
+
+    def conversion_rate_with_error
+      "#{@control_group.conversion_rate_helper} +- #{@control_group.error_bars_helper}"
     end
   end
 end

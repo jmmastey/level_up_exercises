@@ -15,17 +15,17 @@ module DataScience
 
     def tally_conversions(data)
       data.each do |visit|
-        @conversions += 1 if visit["result"] == 1
+        @conversions += 1 if visit["result"] == 1 # Why must these be instance variables?
         @non_conversions += 1 if visit["result"] == 0
       end
     end
 
     def size
-      @conversions + @non_conversions
+      conversions + non_conversions
     end
 
     def conversion_rate
-      1.0 * @conversions / size
+      1.0 * conversions / size
     end
 
     def standard_error

@@ -22,25 +22,8 @@ describe ForecastWorker, vcr: vcr_options, type: :worker do
 
     context "Default Request" do
       let(:number_forecasts) { 8 }
-      let(:temperatures) { [30, 29, 27, 26, 25, 24, 25, 30] }
-      let(:dew_points) { [14, 13, 15, 15, 15, 16, 16, 16] }
       let(:precipitations) { [nil, 0.0, nil, 0.0, nil, 0.0, nil, 0.0] }
-      let(:wind_speeds) { [13, 11, 11, 10, 10, 9, 9, 8] }
-      let(:wind_directions) { [290, 300, 300, 300, 290, 290, 290, 280] }
-      let(:cloud_cover) { [94, 90, 92, 87, 82, 77, 64, 52] }
-      let(:icon_urls) do
-        [
-          "http://forecast.weather.gov/images/wtf/sn60.jpg",
-          "http://forecast.weather.gov/images/wtf/nsn60.jpg",
-          "http://forecast.weather.gov/images/wtf/nsn10.jpg",
-          "http://forecast.weather.gov/images/wtf/nbkn.jpg",
-          "http://forecast.weather.gov/images/wtf/nbkn.jpg",
-          "http://forecast.weather.gov/images/wtf/nbkn.jpg",
-          "http://forecast.weather.gov/images/wtf/bkn.jpg",
-          "http://forecast.weather.gov/images/wtf/bkn.jpg",
-        ]
-      end
-
+      let(:icon_match) { %r{http://forecast\.weather\.gov/images/wtf/.+\.jpg} }
       subject { model.where(zip_code: zip_code).all }
 
       before do
@@ -56,26 +39,25 @@ describe ForecastWorker, vcr: vcr_options, type: :worker do
 
       it "is expected to have correct data" do
         binding
-        expect(subject.map(&:temperature)).to eq temperatures
-        expect(subject.map(&:dew_point)).to eq dew_points
+        expect(subject.map(&:temperature)).to all(be_an(Numeric))
+        expect(subject.map(&:dew_point)).to all(be_an(Numeric))
         expect(subject.map(&:precipitation)).to eq precipitations
-        expect(subject.map(&:wind_speed)).to eq wind_speeds
-        expect(subject.map(&:wind_direction)).to eq wind_directions
-        expect(subject.map(&:cloud_cover)).to eq cloud_cover
-        expect(subject.map(&:icon_url)).to eq icon_urls
+        expect(subject.map(&:wind_speed)).to all(be_an(Numeric))
+        expect(subject.map(&:wind_direction)).to all(be_an(Numeric))
+        expect(subject.map(&:cloud_cover)).to all(be_an(Numeric))
+        expect(subject.map(&:icon_url)).to all(match(icon_match))
       end
     end
 
     context "Request with user" do
       let(:zip_code) { 53209 }
       let(:number_forecasts) { 8 }
+      subject { model.where(zip_code: zip_code).all }
 
       before do
         @user = FactoryGirl.create(:user, zip_code: zip_code)
         worker.perform
       end
-
-      subject { model.where(zip_code: zip_code).all }
 
       it "is expected call NWS unsummarized service twice" do
         expect(a_request(:get, test_url).with(query: test_query))

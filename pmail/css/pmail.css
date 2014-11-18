@@ -38,6 +38,30 @@ body {
   height: 28px;
   margin-left: 0px;
 }
+.address{
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 130%;
+}
+
+.app-image{
+  position: absolute;
+  top: 20px;
+  right: 200px;
+}
+
+.app-wrapper{
+  width: 320;
+  height: 255;
+  display: none;
+  border: 1px solid #c9c9c9;
+  position: absolute;
+  top:0px;
+  right:5px;
+  background-color: white;
+}
+
 /*NAV-BANNER*/
 .nav_banner {
   border: 1px solid;
@@ -150,7 +174,10 @@ span.morespan{
   position: absolute;
   top: 75;
   right: 50px;
-}
+  background-image: url("../img/glyphicons_136_cogwheel.png");
+  background-repeat:no-repeat;
+  background-position: center;
+ }
 
 .newer-button {
   background-color: #f4f4f4;
@@ -243,15 +270,22 @@ button span:hover:after {
   color:black;
   font-family: arial;
   background-color: white;
+
 }
+
 div.mail-dropdown{
   display: none;
   border: 1px solid;
   width:100px;
   font-family: arial;
   color:black;
-  background-color: pink;
-  z-index: 1;
+  background-color: white;
+  z-index: -1;
+}
+
+.mail-dropdown ul{
+ list-style-type: none;
+ z-index: auto;
 }
 
 .box{
@@ -260,22 +294,27 @@ div.mail-dropdown{
    top: 120%;
    right: 0px;
    border: 1px solid grey;
-  width:200px;
+   width:200px;
+ }
+
+.box ul{
+  padding: 0px;
 }
 
 .box ul li{
 list-style-type: none;
 font-family:arial;
-font-size:70%;
+font-size: 80%;
 background-color:white;
 padding: none;
 color: black;
+text-align: left;
 }
   /*MAIN CONTENT*/
 .main_content {
-  border: 1px;
-  float: right;
-  width: 586px;
+  border: 2px dashed;
+ width: 586px;
+  height: 400px;
 }
 
 /*SIDE BAR*/
@@ -328,6 +367,7 @@ nav ul li div {
   font-family: Arial;
   font-size: 80%;
   color:black;
+  z-index: -1;
 }
 
 a{
@@ -345,8 +385,26 @@ a:active{
 
  li:hover{
    background-color: #F2F2F0;
- } 
+ }
+
 .menu li:hover{
   background-color: white;
   background-color: #F2F2F0;
-};
+}
+/*.firtier img{
+ display: inline-block;
+}
+
+.sectier{
+ display: inline-block;
+ float:left;
+}
+*/
+.firtier {
+display: inline-block;
+font-family: Arial;
+}
+
+.firtier p{
+  margin: 0px;
+}

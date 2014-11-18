@@ -13,15 +13,11 @@ class ForecastWorker
   def save(configuration, zip_code)
     configuration.each do |model, config|
       dwml = get_dwml(config['request_url'],
-        request_parameters(config['request_parameters'],
-          zip_code))
+        request_parameters(config['request_parameters'], zip_code))
       forecasts = build_forecasts(dwml, config['request_fields'])
-      save_model(model, valid_forecasts(forecasts, config), zip_code)
+      create_models(model.constantize, valid_forecasts(forecasts, config),
+        zip_code)
     end
-  end
-
-  def save_model(model, forecasts, zip_code)
-    create_models(model.constantize, forecasts, zip_code)
   end
 
   def get_dwml(url, parameters)
@@ -60,15 +56,9 @@ class ForecastWorker
   end
 
   def create_models(model, forecast_data, zip_code)
-    forecast_data.each do |values|
-      create_model(model, values, zip_code)
+    forecast_data.each do |time, values|
+      model.find_or_create_by(time: time[:date_time], zip_code: zip_code)
+        .update_attributes(values)
     end
-  end
-
-  def create_model(model, forecast_data, zip_code)
-    time, values = forecast_data
-    forecast = model.find_or_create_by(time: time[:date_time],
-      zip_code: zip_code)
-    forecast.update_attributes(values)
   end
 end

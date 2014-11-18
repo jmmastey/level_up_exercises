@@ -24,17 +24,7 @@ class Legislator < ActiveRecord::Base
     end
   end
 
-  def fetch path
-    http = Curl.get(path)
-    @results = JSON.parse(http.body_str)
-
-    @results["results"].each do |result|
-      legislator = Legislator.find_or_create_by(bioguide_id: result['bioguide_id'])
-      legislator.update(build_object_hash(result))
-    end
-  end
-
-  def build_object_hash result
+  def self.build_object_hash result
     {
       bioguide_id: result['bioguide_id'],
       birthday: result['birthday'],

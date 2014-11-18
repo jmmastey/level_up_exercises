@@ -15,3 +15,14 @@
  *= require foundation_and_overrides
 
  */
+blockquote {
+  border-left:0;
+}
+
+.pagination {
+  text-align: center;
+}
+
+.back_link {
+  text-align: center;
+}

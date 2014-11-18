@@ -5,4 +5,5 @@
     <%= "#{deed.bioguide_id}" unless legislator %>
   </h5>
   <p><em><%= "#{legislator.chamber.titleize} #{legislator.full_party} from #{legislator.state}" %></em></p>
+  <p>Term Started: <%= legislator.term_start %></p>
 </div>

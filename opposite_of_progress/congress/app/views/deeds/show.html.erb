@@ -3,24 +3,28 @@
 <hr />
 
 <h4>Basics</h4>
-<%= render partial: "layouts/generic_object_details", locals: {object: @deed} %>
+<blockquote>
+  <%= render partial: "layouts/generic_object_details", locals: {object: @deed} %>
+</blockquote>
 
 <h4>Legislator</h4>
-<div>
+<blockquote>
   <%= render partial: "legislators/legislator_stub_item", locals: {legislator: @legislator, deed: @deed} %>
-</div>
+</blockquote>
 
 <h4>Bill</h4>
-<div>
+<blockquote>
   <%= render partial: "bills/bill_stub_item", locals: {bill: @bill} %>
-</div>
+</blockquote>
 
 <h4>Related Deeds</h4>
-<% @related_deeds.each do |deed| %>
-  <div><%= render partial: "deeds/deed_stub_item", locals: {deed: deed} %></div>
-<% end %>
-<%= "There are no related deeds" if @related_deeds.count == 0 %>
+<blockquote>
+  <% @related_deeds.each do |deed| %>
+    <%= render partial: "deeds/deed_stub_item", locals: {deed: deed} %>
+  <% end %>
+  <%= "There are no related deeds" if @related_deeds.count == 0 %>
+</blockquote>
 
 <hr />
 
-<p align="center"><%= link_to "Back to Good Deeds", deeds_path %></p>
+<p class="back_link"><%= link_to "Back to Good Deeds", deeds_path %></p>

@@ -3,14 +3,18 @@
 <hr />
 
 <h4>Basics</h4>
-<%= render partial: "layouts/generic_object_details", locals: {object: @legislator} %>
+<blockquote>
+  <%= render partial: "layouts/generic_object_details", locals: {object: @legislator} %>
+</blockquote>
 
 <h4>Related Bills</h4>
-<% @related_bills.each do |bill| %>
-  <div><%= render partial: "bills/bill_stub_item", locals: {bill: bill} %></div>
-<% end %>
-<%= "There are no related bills" if @related_bills.count == 0 %>
+<blockquote>
+  <% @related_bills.each do |bill| %>
+    <%= render partial: "bills/bill_stub_item", locals: {bill: bill} %>
+  <% end %>
+  <%= "There are no related bills" if @related_bills.count == 0 %>
+</blockquote>
 
 <hr />
 
-<p align="center"><%= link_to "Back to Legislators", legislators_path %></p>
+<p class="back_link"><%= link_to "Back to Legislators", legislators_path %></p>

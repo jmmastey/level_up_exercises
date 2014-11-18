@@ -1,10 +1,17 @@
+class FileTypeException < Exception
+end
+
 require "json"
 
 class JSONParser
   attr_reader :filename
 
   def initialize(filename)
-    @filename = filename
+    if filename.end_with? ".json"
+      @filename = filename
+    else
+      raise FileTypeException, 'Not a JSON, buddy'
+    end
   end
 
   def fetch_data

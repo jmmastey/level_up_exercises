@@ -50,23 +50,25 @@ class DataBox
     ABAnalyzer::ABTest.new(groups).chisquare_p
   end
 
+  def winning_cohort
+    sorted_conversion_rates.to_a.last.first
+  end
+
+  def winner
+    if cohort_probabilities >= PROBABILITY_THRESHOLD
+      "No clear winner"
+    else
+      "Winner: Cohort #{winning_cohort}"
+    end
+  end
+
+  private
+
   def sorted_conversion_rates
     percentages = {}
     cohorts.each do |cohort|
       percentages[cohort] = conversion_percentage(cohort)
     end
     Hash[percentages.sort_by { |_, percent| percent }]
-  end
-
-  def winning_cohort
-    sorted_conversion_rates.to_a.last.first
-  end
-
-  def show_winner
-    if cohort_probabilities >= PROBABILITY_THRESHOLD
-      "No clear winner"
-    else
-      "Winner: Cohort #{winning_cohort}"
-    end
   end
 end

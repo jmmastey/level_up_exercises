@@ -13,11 +13,9 @@ module DataScience
       @non_conversions = 0
     end
 
-    def tally_conversions(data)
-      data.each do |visit|
-        @conversions += 1 if visit["result"] == 1 # Why must these be instance variables?
-        @non_conversions += 1 if visit["result"] == 0
-      end
+    def <<(data)
+      @conversions +=  data.count { |visit| visit["result"] == 1 }
+      @non_conversions +=  data.count { |visit| visit["result"] == 0 }
     end
 
     def size

@@ -24,8 +24,8 @@ module DataScience
 
     def import_data(data)
       test_data, control_data = partition_data(data)
-      control_group.tally_conversions(control_data)
-      test_group.tally_conversions(test_data)
+      control_group << control_data
+      test_group << test_data
     end
 
     def partition_data(data)

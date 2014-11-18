@@ -6,7 +6,7 @@ module DataScience
       let(:sample_file) { File.join(File.dirname(__FILE__), 'source_data_test.json') }
 
       it "parses a JSON file" do
-        expect(JsonParser.parse_file(sample_file).size).to eq(4)
+        expect(JsonParser.parse_file(sample_file)).to have(4).items
       end
     end
   end

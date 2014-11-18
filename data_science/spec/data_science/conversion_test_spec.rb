@@ -1,11 +1,15 @@
 require 'data_science/conversion_test'
 require 'data_science/json_parser'
 require 'data_science/view_helpers'
-require_relative 'spec_data'
 
 module DataScience
   describe ConversionTest do
     let(:conversion_test) { ConversionTest.new }
+    let(:parsed_json_data) do [
+        { "date" => "2014-03-20", "cohort" => "A", "result" => 1 },
+        { "date" => "2014-03-20", "cohort" => "B", "result" => 1 }
+      ]
+    end
 
     context 'when importing data' do
       it 'has two cohorts' do
@@ -14,10 +18,9 @@ module DataScience
       end
 
       it 'separates the data into the test and control groups' do
-        parsed_json_data = SpecData::PARSED_JSON_DATA
         conversion_test.import_data(parsed_json_data)
-        expect(conversion_test.control_group.size).to eq(1)
-        expect(conversion_test.test_group.size).to eq(1)
+        expect(conversion_test.control_group).to have(1).items
+        expect(conversion_test.test_group).to have(1).items
       end
     end
 

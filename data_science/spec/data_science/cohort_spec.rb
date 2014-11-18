@@ -1,12 +1,11 @@
-require 'data_science/cohort'
+ require 'data_science/cohort'
 require 'data_science/view_helpers'
-require_relative 'spec_data'
 
 module DataScience
   describe Cohort do
     let(:cohort) { Cohort.new }
-    let(:conversion_data) { SpecData::PARSED_JSON_DATA_CONVERSION }
-    let(:non_conversion_data) { SpecData::PARSED_JSON_DATA_NON_CONVERSION }
+    let(:conversion_data) { [{ "date" => "2014-03-20", "cohort" => "A", "result" => 1 }] }
+    let(:non_conversion_data) { [{ "date" => "2014-03-20", "cohort" => "A", "result" => 0 }] }
 
     it 'is instantiated with a 0 conversions' do
       expect(cohort.conversions).to be_zero
@@ -16,15 +15,10 @@ module DataScience
       expect(cohort.non_conversions).to be_zero
     end
 
-    it 'sums the conversions for a cohort' do
-      cohort.tally_conversions(conversion_data)
+    it 'adds parsed split test data to the cohort' do
+      cohort << conversion_data
+      cohort << non_conversion_data
       expect(cohort.conversions).to eq(1)
-      expect(cohort.non_conversions).to be_zero
-    end
-
-    it 'sums the non-conversions for a cohort' do
-      cohort.tally_conversions(non_conversion_data)
-      expect(cohort.conversions).to be_zero
       expect(cohort.non_conversions).to eq(1)
     end
 
@@ -39,20 +33,20 @@ module DataScience
 
       describe '#conversions' do
         it 'sets the number of conversions' do
-          expect(cohort.conversions).to eq(50)
+          expect(cohort.conversions).to be(50)
         end
       end
 
       describe '#non-conversions' do
         it 'sets the number of non-conversions' do
-          expect(cohort.non_conversions).to eq(100)
+          expect(cohort.non_conversions).to be(100)
         end
       end
 
       context 'and calculating cohort statistics' do
         describe '#size' do
           it 'calculates the cohort size' do
-            expect(cohort.size).to eq(150)
+            expect(cohort.size).to be(150)
           end
         end
 
@@ -78,7 +72,8 @@ module DataScience
 
         describe '#error_bars_helper' do
           it 'prints the error bars in % format to a precision of 2' do
-            expect(cohort.error_bars_helper).to eq("7.54%")
+            pretty_error_bars = cohort.error_bars_helper
+            expect(pretty_error_bars).to eq("7.54%")
           end
         end
 

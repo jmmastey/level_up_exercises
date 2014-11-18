@@ -1,2 +1,4 @@
-<%= "Bill:" %>
-<%= raw "#{link_to bill.title, bill}" if bill %>
+<div class="panel">
+  <h5>Bill: <%= raw "#{link_to bill.title, bill}" %></h5>
+  <p><em>"<%= bill.official_title %>"</em></p>
+</div>

@@ -11,6 +11,19 @@ class Legislator < ActiveRecord::Base
     name_arr.join(" ")
   end
 
+  def full_party
+    case self.party
+    when "R"
+      "Republican"
+    when "D"
+      "Democrat"
+    when "I"
+      "Independent"
+    when "G"
+      "Green"
+    end
+  end
+
   def fetch path
     http = Curl.get(path)
     @results = JSON.parse(http.body_str)

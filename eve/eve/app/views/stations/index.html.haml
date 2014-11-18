@@ -1,2 +1,8 @@
-%h1 Stations#index
-%p Find me in app/views/stations/index.html.haml
+.page-header
+  %h1 Stations
+
+- if @stations && !@stations.empty?
+  = render(partial: 'list', locals: { regions: @regions })
+- else
+  %p.alert.alert-info
+    Could not find any stations.

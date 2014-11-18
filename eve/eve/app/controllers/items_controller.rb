@@ -15,7 +15,12 @@ class ItemsController < ApplicationController
 
   def search
     @search_query = params[:query]
-    @items = search_items(@search_query) if @search_query
+
+    if @search_query
+      @items = search_items(@search_query)
+    else
+      @items = get_items
+    end
 
     respond_to do |format|
       format.html do

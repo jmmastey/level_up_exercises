@@ -6,13 +6,19 @@ class DwmlParser
     @time_map = generate_time_map
   end
 
-  def values(attribute: String, map_name: Symbol, data_path: 'value', type: nil)
-    data = parameters_xml
-      .xpath(attribute)
-      .detect { |d| type.nil? || d['type'] == type }
-    data.xpath(data_path).each_with_index.each_with_object({}) do |(value, index), hash|
+  def values(attribute: String, map_name: Symbol, value_path: 'value',
+             type: nil)
+    data = data_xpath(attribute, type)
+    values = data.xpath(value_path)
+    values.each_with_index.each_with_object({}) do |(value, index), hash|
       hash[time_map[data['time-layout']][index]] = { map_name => value.text }
     end
+  end
+
+  def data_xpath(attribute, type)
+    parameters_xml
+      .xpath(attribute)
+      .detect { |d| type.nil? || d['type'] == type }
   end
 
   def request_time

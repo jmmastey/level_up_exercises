@@ -25,6 +25,5 @@ end
 
 every :hour do
   runner 'CurrentWeatherWorker.perform_async'
-  runner 'SummaryForecastWorker.perform_async'
-  runner 'HourlyForecastWorker.perform_async'
+  runner 'ForecastWorker.perform_async'
 end

@@ -1,0 +1,63 @@
+Forecast:
+  request_parameters: 
+    format: 12 hourly
+  request_url: http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php
+  max_days: 7
+  request_fields:
+    - :attribute: temperature
+      :map_name: temperature
+      :value_path: value
+      :type: maximum
+    - :attribute: temperature
+      :map_name: temperature
+      :value_path: value
+      :type: minimum
+    - :attribute: probability-of-precipitation
+      :map_name: precipitation
+      :value_path: value
+    - :attribute: conditions-icon
+      :map_name: icon_url
+      :value_path: icon-link
+    - :attribute: weather
+      :map_name: condition
+      :value_path: weather-conditions/@weather-summary
+HourlyForecast:
+  request_parameters:
+    :product: time-series
+    :temp: temp
+    :dew: dew
+    :qpf: qpf
+    :sky: sky
+    :wspd: wspd
+    :wdir: wdir
+    :icons: icons
+  request_url: http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php
+  max_days: 1
+  request_fields:
+    - :attribute: temperature
+      :map_name: temperature
+      :value_path: value
+      :type: hourly
+    - :attribute: temperature
+      :map_name: dew_point
+      :value_path: value
+      :type: dew point
+    - :attribute: precipitation
+      :map_name: precipitation
+      :value_path: value
+    - :attribute: wind-speed
+      :map_name: wind_speed
+      :value_path: value
+      :type: sustained
+    - :attribute: direction
+      :map_name: wind_direction
+      :value_path: value
+      :type: wind
+    - :attribute: cloud-amount
+      :map_name: cloud_cover
+      :value_path: value
+      :type: total
+    - :attribute: conditions-icon
+      :map_name: icon_url
+      :value_path: icon-link
+      :type: forecast-NWS

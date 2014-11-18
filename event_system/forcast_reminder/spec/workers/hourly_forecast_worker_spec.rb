@@ -1,10 +1,7 @@
 require 'rails_helper'
 
-vcr_options = { cassette_name: "hourly_forecast", record: :none }
-describe HourlyForecastWorker, vcr: vcr_options, type: :worker do
-  # Freeze time so that the request and stub will match and not have jitters
-  # if the request happens to be over a time period
-
+vcr_options = { cassette_name: "forecast", record: :none }
+describe ForecastWorker, vcr: vcr_options, type: :worker do
   let(:model) { HourlyForecast.order(:time) }
   let(:request_time) { Time.now }
   let(:zip_code) { 60606 }
@@ -17,7 +14,7 @@ describe HourlyForecastWorker, vcr: vcr_options, type: :worker do
       "wspd" => "wspd", "wdir" => "wdir", 'icons' => 'icons'
     }
   end
-  let(:worker) { HourlyForecastWorker.new }
+  let(:worker) { ForecastWorker.new }
 
   describe "#perform" do
     before { travel_to Time.new(2014, 11, 13, 12, 20, 00) }

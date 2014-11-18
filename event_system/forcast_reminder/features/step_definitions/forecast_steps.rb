@@ -24,7 +24,7 @@ end
 Given(/^current weather exists for station id "(.+)"$/) do |station_id|
   @current_conditions ||= {}
   @current_conditions[station_id] = FactoryGirl.create(:current_weather,
-                                                       station_id: station_id)
+    station_id: station_id)
 end
 
 Then(/^I should see the current weather conditions for station id "(.+)"$/) do |station_id|
@@ -37,9 +37,8 @@ end
 Given(/^forecast weather data exists for zip code (\d+)$/) do |zip_code|
   @forecasts ||= {}
   @forecasts[zip_code] = 14.times.map do |i|
-    FactoryGirl.create(:forecast,
-                       zip_code: zip_code.to_i,
-                       time: DateTime.now + i * 0.5 + 1)
+    FactoryGirl.create(:forecast, zip_code: zip_code.to_i,
+      time: DateTime.now + i * 0.5 + 1)
   end
 end
 
@@ -57,9 +56,8 @@ end
 Given(/^hourly forecast weather data exists for zip code (\d+)$/) do |zip_code|
   @hourly_forecast ||= {}
   @hourly_forecast[zip_code] = 8.times.map do |i|
-    FactoryGirl.create(:hourly_forecast,
-                       zip_code: zip_code.to_i,
-                       time: Time.zone.now + i.hours * 3)
+    FactoryGirl.create(:hourly_forecast, zip_code: zip_code.to_i,
+      time: Time.zone.now + i.hours * 3)
   end
 end
 

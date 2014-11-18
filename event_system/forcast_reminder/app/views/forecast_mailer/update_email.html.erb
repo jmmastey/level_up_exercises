@@ -21,7 +21,7 @@
       <h3>Next 24 Hours</h3>
       <% @hourly_forecast.each_with_index do |forecast, index| %>
         <div id="hourly_forecast_<%= index %>">
-          <%= forecast.time.strftime("%l%p") %>: <%= forecast.temperature %>°F with wind speed of <%= forecast.wind_speed %>mph (<%= Geocoder::Calculations.compass_point(forecast.wind_direction) %>)<% if forecast.precipitation %> and <%= forecast.precipitation %>% chance rain<% end %>
+          <%= forecast.time.strftime("%l%p") %>: <%= forecast.temperature %>°F with wind speed of <%= forecast.wind_speed %>mph (<%= forecast.wind_direction_string %>)<% if forecast.precipitation %> and <%= forecast.precipitation %>% chance rain<% end %>
         </div>
       <% end %>
     <% end %>

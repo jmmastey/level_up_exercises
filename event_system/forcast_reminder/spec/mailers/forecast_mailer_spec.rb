@@ -10,11 +10,11 @@ describe ForecastMailer, type: :mailer do
       expect(ActionMailer::Base.deliveries).to_not be_empty
     end
 
-    its(:body) { is_expected.to match "Hi #{user.email}, Here is Today's Forecast" }
+    its(:body) { is_expected.to match "Hi #{user.email}, " }
 
     context "No forecast data available" do
       its(:body) do
-        is_expected.to include "Current weather is not available for your location today"
+        is_expected.to include "Current weather is not available"
         is_expected.to include "Forecast Not Available"
       end
     end
@@ -49,7 +49,8 @@ describe ForecastMailer, type: :mailer do
           within("#hourly_forecast_#{index}") do
             is_expected.to include "#{forecast.time.strftime('%l%p')}"
             is_expected.to include "#{forecast.temperature}°F"
-            is_expected.to include "#{forecast.wind_speed}mph (#{Geocoder::Calculations.compass_point(forecast.wind_direction)})"
+            is_expected.to include "#{forecast.wind_speed}mph" \
+              " (#{forecast.wind_direction_string})"
             is_expected.to include "#{forecast.precipitation}% chance rain"
           end
         end

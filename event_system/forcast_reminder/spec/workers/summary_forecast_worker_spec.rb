@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-vcr_options = { cassette_name: "summary_forecast", record: :none }
-describe SummaryForecastWorker, vcr: vcr_options, type: :worker do
+vcr_options = { cassette_name: "forecast", record: :none }
+describe ForecastWorker, vcr: vcr_options, type: :worker do
   let(:model) { Forecast.order(:time) }
   let(:zip_code) { 60606 }
   let(:test_url) { "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php" }
@@ -11,7 +11,7 @@ describe SummaryForecastWorker, vcr: vcr_options, type: :worker do
       "begin" => "2014-11-13T12:20:00-06:00"
     }
   end
-  let(:worker) { SummaryForecastWorker.new }
+  let(:worker) { ForecastWorker.new }
 
   describe "#perform" do
     before do
@@ -44,11 +44,10 @@ describe SummaryForecastWorker, vcr: vcr_options, type: :worker do
 
       its(:count) { is_expected.to eq number_forecasts }
 
-      it "is expected to have correct date" do
+      it "is expected to have correct data" do
         expect(subject.map(&:temperature)).to eq temperatures
         expect(subject.map(&:precipitation)).to eq precipitations
         expect(subject.map(&:condition)).to eq conditions
-        expect(subject.first.date_description).to eq "Today"
       end
     end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117170913) do
+ActiveRecord::Schema.define(version: 20141118200223) do
 
   create_table "current_weathers", force: true do |t|
     t.integer  "temperature"
@@ -38,9 +38,8 @@ ActiveRecord::Schema.define(version: 20141117170913) do
     t.string   "condition"
     t.integer  "precipitation"
     t.string   "icon_url"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "date_description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "hourly_forecasts", force: true do |t|

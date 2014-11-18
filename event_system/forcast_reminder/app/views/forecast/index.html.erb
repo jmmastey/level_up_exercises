@@ -49,7 +49,7 @@
             &nbsp;
           <% end %>
           </p>
-          <p class="hourly_detail"> Wind <%= hourly.wind_speed %>kt <%= Geocoder::Calculations.compass_point(hourly.wind_direction) %></p>
+          <p class="hourly_detail"> Wind <%= hourly.wind_speed %>kt <%= hourly.wind_direction_string %></p>
           <p class="hourly_detail"><%= hourly.cloud_cover %>% Clouds</p>
         </div>
       <% end %>

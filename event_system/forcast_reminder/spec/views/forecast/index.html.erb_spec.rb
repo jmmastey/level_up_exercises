@@ -5,19 +5,36 @@ describe "forecast/index.html.erb", type: :view do
     it "displays no weather available message" do
       render
 
-      expect(rendered).to have_content("No current weather information available")
-      expect(rendered).to have_content("No hourly forecast information available")
-      expect(rendered).to have_content("No forecast weather information available")
+      expect(rendered).to have_content("No current weather")
+      expect(rendered).to have_content("No hourly forecast")
+      expect(rendered).to have_content("No forecast weather")
     end
   end
 
   context "Current data available" do
-    it "displays current weather" do
-      condition = create(:current_weather)
+    let(:condition) { create(:current_weather) }
+    let(:hourly_forecasts) do
+      8.times.map do |i|
+        FactoryGirl.create(:hourly_forecast, zip_code: 60606,
+                           time: Time.zone.now + i.hours * 3)
+      end
+    end
+    let(:forecasts) do
+      14.times.map do |i|
+        create(:forecast, zip_code: 60606,
+               time: Time.now.beginning_of_hour + i * 0.5)
+      end
+    end
+
+    before do
       assign(:conditions, condition)
+      assign(:hourly_forecast, hourly_forecasts)
+      assign(:forecasts, forecasts)
 
       render
+    end
 
+    it "displays current weather" do
       expect(rendered).to have_content("Current Conditions")
       expect(rendered).to have_content("#{condition.temperature}°F")
       expect(rendered).to have_content("#{condition.condition}")
@@ -35,22 +52,14 @@ describe "forecast/index.html.erb", type: :view do
     end
 
     it "displays hourly forecast data" do
-      forecasts = 8.times.map do |i|
-        FactoryGirl.create(:hourly_forecast, zip_code: 60606,
-                           time: Time.zone.now + i.hours * 3)
-      end
-      assign(:hourly_forecast, forecasts)
-
-      render
-
       expect(rendered).to have_content "Next 24 Hours"
-      forecasts.each_with_index do |hourly, index|
+      hourly_forecasts.each_with_index do |hourly, index|
         within("#hourly_forecast-#{index}") do
           expect(rendered).to have_content(hourly.time.to_s(:time))
           expect(rendered).to have_content(hourly.temperature)
           expect(rendered).to have_content(hourly.dew_point)
           expect(rendered).to have_content(hourly.wind_speed)
-          expect(rendered).to have_content(Geocoder::Calculations.compass_point(hourly.wind_direction))
+          expect(rendered).to have_content(hourly.wind_direction_string)
           expect(rendered).to have_content(hourly.cloud_cover)
           expect(rendered).to have_content(hourly.hazard)
         end
@@ -59,13 +68,6 @@ describe "forecast/index.html.erb", type: :view do
     end
 
     it "displays weekly forecasts" do
-      forecasts = 14.times.map do |i|
-        FactoryGirl.create(:forecast, zip_code: 60606,
-                           time: Time.now.beginning_of_hour + i * 0.5)
-      end
-      assign(:forecasts, forecasts)
-
-      render
       expect(rendered).to have_content "Extended Forecast"
       forecasts.each_with_index do |forecast, index|
         within("#extended_forecast-#{index}") do

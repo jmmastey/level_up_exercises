@@ -1,31 +1,31 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  bill_id: MyString
-  bill_type: MyString
-  number: 1
-  congress: 1
-  chamber: MyString
-  introduced_on: 2014-10-24
-  last_action_at: 2014-10-24
-  last_vote_at: 2014-10-24
-  last_version_on: 2014-10-24
-  official_title: MyString
-  short_title: MyString
-  summary: MyString
-  summary_short: MyString
+# one:
+#   bill_id: MyString
+#   bill_type: MyString
+#   number: 1
+#   congress: 1
+#   chamber: MyString
+#   introduced_on: 2014-10-24
+#   last_action_at: 2014-10-24
+#   last_vote_at: 2014-10-24
+#   last_version_on: 2014-10-24
+#   official_title: MyString
+#   short_title: MyString
+#   summary: MyString
+#   summary_short: MyString
 
-two:
-  bill_id: MyString
-  bill_type: MyString
-  number: 1
-  congress: 1
-  chamber: MyString
-  introduced_on: 2014-10-24
-  last_action_at: 2014-10-24
-  last_vote_at: 2014-10-24
-  last_version_on: 2014-10-24
-  official_title: MyString
-  short_title: MyString
-  summary: MyString
-  summary_short: MyString
+# two:
+#   bill_id: MyString
+#   bill_type: MyString
+#   number: 1
+#   congress: 1
+#   chamber: MyString
+#   introduced_on: 2014-10-24
+#   last_action_at: 2014-10-24
+#   last_vote_at: 2014-10-24
+#   last_version_on: 2014-10-24
+#   official_title: MyString
+#   short_title: MyString
+#   summary: MyString
+#   summary_short: MyString

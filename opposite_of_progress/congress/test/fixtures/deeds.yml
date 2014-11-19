@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  bioguide_id: MyString
-  bill_id: MyString
-  deed: MyString
+# one:
+#   bioguide_id: MyString
+#   bill_id: MyString
+#   deed: MyString
 
-two:
-  bioguide_id: MyString
-  bill_id: MyString
-  deed: MyString
+# two:
+#   bioguide_id: MyString
+#   bill_id: MyString
+#   deed: MyString

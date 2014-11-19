@@ -24,7 +24,6 @@ describe ForecastWorker, vcr: vcr_options, type: :worker do
 
     context "Default Request" do
       let(:number_forecasts) { 8 }
-      let(:precipitations) { [nil, 0.0, nil, 0.0, nil, 0.0, nil, 0.0] }
       let(:icon_match) { %r{http://forecast\.weather\.gov/images/wtf/.+\.jpg} }
       subject { model.where(zip_code: zip_code).all }
 
@@ -43,7 +42,7 @@ describe ForecastWorker, vcr: vcr_options, type: :worker do
         binding
         expect(subject.map(&:temperature)).to all(be_an(Numeric))
         expect(subject.map(&:dew_point)).to all(be_an(Numeric))
-        expect(subject.map(&:precipitation)).to eq precipitations
+        expect(subject.map(&:precipitation)).to include(be_an(Numeric))
         expect(subject.map(&:wind_speed)).to all(be_an(Numeric))
         expect(subject.map(&:wind_direction)).to all(be_an(Numeric))
         expect(subject.map(&:cloud_cover)).to all(be_an(Numeric))

@@ -16,7 +16,7 @@ class ForecastController < ApplicationController
   end
 
   def start_time
-    Time.parse(params.fetch(:start_time, Time.now.utc.to_s))
+    Time.parse(params.fetch(:start_time, Time.now.beginning_of_hour.to_s))
   end
 
   def conditions
@@ -31,7 +31,7 @@ class ForecastController < ApplicationController
 
   def hourly_forecast
     HourlyForecast.where(zip_code: zip_code)
-      .where(time: start_time..(start_time + 1.days))
+      .where(time: start_time...(start_time + 1.days))
       .order(:time).all
   end
 end

@@ -2,7 +2,7 @@ Forecast:
   request_parameters: 
     format: 12 hourly
   request_url: http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdBrowserClientByDay.php
-  max_days: 7
+  max_days: 8
   request_fields:
     - :attribute: temperature
       :map_name: temperature

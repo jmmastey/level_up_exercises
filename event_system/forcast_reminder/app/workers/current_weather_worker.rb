@@ -6,7 +6,7 @@ class CurrentWeatherWorker
   URL = 'http://w1.weather.gov/xml/current_obs/'
 
   def perform
-    Location.stations.each { |station| save(station_data(station)) }
+    Location.stations.each { |station| save(station_data(station), station) }
   end
 
   private
@@ -24,8 +24,11 @@ class CurrentWeatherWorker
     RestClient.get("#{URL}#{station_id}.xml")
   end
 
-  def save(xml)
+  def save(xml, station_id)
     return unless xml
     CurrentWeather.find_or_create_from_xml(xml).save
+  rescue => e
+    logger.warn("Failed to save data for station id #{station_id} " \
+                "with status #{e.message}")
   end
 end

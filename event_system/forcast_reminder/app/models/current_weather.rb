@@ -23,6 +23,8 @@ class CurrentWeather < ActiveRecord::Base
 
   def self.get_value(xml, xml_node)
     xml.at_xpath("/current_observation/#{xml_node}").text
+  rescue
+    nil
   end
   private_class_method :get_value
 end

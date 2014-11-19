@@ -249,6 +249,8 @@ GEM
       chronic (>= 0.6.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    zeus (0.15.3)
+      method_source (>= 0.6.7)
 
 PLATFORMS
   ruby
@@ -282,3 +284,4 @@ DEPENDENCIES
   web-console (~> 2.0.0.beta4)
   webmock
   whenever
+  zeus (~> 0.15.3)

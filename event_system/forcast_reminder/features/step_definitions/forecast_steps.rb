@@ -36,9 +36,9 @@ end
 
 Given(/^forecast weather data exists for zip code (\d+)$/) do |zip_code|
   @forecasts ||= {}
-  @forecasts[zip_code] = 14.times.map do |i|
+  @forecasts[zip_code] = (1..12).map do |i|
     FactoryGirl.create(:forecast, zip_code: zip_code.to_i,
-      time: DateTime.now + i * 0.5 + 1)
+      time: Time.now + i.days * 0.5)
   end
 end
 

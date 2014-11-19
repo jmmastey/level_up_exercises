@@ -2,7 +2,7 @@ class LegislatorsController < ApplicationController
   before_action :set_legislator, only: [:show]
 
   def index
-    @results = Legislator.order(:bioguide_id).paginate(:page => params[:page], :per_page => ApplicationHelper::PAGINATION_COUNT)
+    @results = Legislator.order(created_at: :desc).paginate(:page => params[:page], :per_page => ApplicationHelper::PAGINATION_COUNT)
   end
 
   def show

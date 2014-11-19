@@ -1,7 +1,21 @@
+<div style="float:right;">
+  <%
+    sort_options = [["Newly Added", "created_at"],
+                    ["Congress", "congress"],
+                    ["Introduction Date", "introduced_on"],
+                    ["Title", "short_title"]]
+  %>
+  <%= select("sort",
+             "by",
+             sort_options,
+             { prompt: "Sort by...", selected: params["sort_by"] },
+             { :onchange => "window.location.href = '/bills?sort_by=' + document.getElementById('sort_by').value;"}) %>
+</div>
+
 <h3>All Bills</h3>
 
 <% @results.each do |result| %>
-  <div><%= render partial: "bill_stub_item", locals: {bill: result} %></div>
+  <div><%= render partial: "bill_stub_item", locals: { bill: result } %></div>
 <% end %>
 <%= "There are no bills to show" if @results.count == 0 %>
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BillsController, :type => :controller do
+describe LegislatorsController, :type => :controller do
   before :each do
     bioguide_id = Faker::Lorem.characters(7)
     @bill = FactoryGirl.create(:bill, sponsor_id: bioguide_id)
@@ -16,22 +16,22 @@ describe BillsController, :type => :controller do
       assert_equal 200, response.status
     end
 
-    it "populates an array of bills with pagination" do
-      expect(assigns(:results)).to include(@bill)
+    it "populates an array of legislators with pagination" do
+      expect(assigns(:results)).to include(@legislator)
     end
   end
 
   describe "GET #show" do
     before :each do
-      get :show, id: @bill
+      get :show, id: @legislator
     end
 
     it "renders the :show view" do
       assert_equal 200, response.status
     end
 
-    it "assigns the related legislator to @legislator" do
-      expect(assigns(:legislator)).to eq(@legislator)
+    it "assigns the related bill to @related_bills" do
+      expect(assigns(:related_bills)).to include(@bill)
     end
   end
 end

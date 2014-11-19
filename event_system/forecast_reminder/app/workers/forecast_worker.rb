@@ -42,11 +42,15 @@ class ForecastWorker
   end
 
   def build_forecasts(dwml, data_fields)
+    return unless dwml
     data_fields.each_with_object(Hash.new({})) do |fields, hash|
       dwml.values(fields).each do |key, value|
         hash[key] = hash[key].merge(value)
       end
     end
+  rescue => e
+    logger.warn "Failed to build forecast with error #{e.message}"
+    {}
   end
 
   def valid_forecasts(forecast_data, config)

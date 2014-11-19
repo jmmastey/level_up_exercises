@@ -6,8 +6,8 @@ RSpec.describe ForecastController, type: :controller do
     let!(:condition) { create(:current_weather) }
     let!(:hourly_forecasts) do
       10.times.map do |i|
-        FactoryGirl.create(:hourly_forecast, zip_code: 60606,
-                           time: Time.now.beginning_of_hour + i.hours * 3)
+        create(:hourly_forecast, zip_code: 60606,
+               time: Time.now.beginning_of_hour + i.hours * 3)
       end
     end
     let!(:forecasts) do

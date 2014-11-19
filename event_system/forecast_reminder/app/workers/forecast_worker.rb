@@ -49,7 +49,7 @@ class ForecastWorker
       end
     end
   rescue => e
-    logger.warn "Failed to build forecast with error #{e.message}"
+    logger.warn("Failed to build forecast with error #{e.message}")
     {}
   end
 

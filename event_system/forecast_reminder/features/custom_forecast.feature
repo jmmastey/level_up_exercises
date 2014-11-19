@@ -32,7 +32,6 @@ Feature: Custom weather per user
     When I go to the home page
     Then I should see "Forecast Reminder"
     And I should see "Logged in as testing@enova.com"
-    And I should see "Logged in as testing@enova.com"
     And I should see the current weather conditions for station id "KMKE"
     And I should see hourly forecast data for zip code 53209
     And I should see the forecast data for zip code 53209

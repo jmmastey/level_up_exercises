@@ -3,7 +3,10 @@ require 'rails_helper'
 describe SendReminderEmailWorker, type: :worker do
   subject { SendReminderEmailWorker.new }
   context "No users registered" do
-    before { subject.perform }
+    before do
+      ActionMailer::Base.deliveries.clear
+      subject.perform
+    end
 
     it "should not send any email" do
       expect(ActionMailer::Base.deliveries).to be_empty
@@ -12,7 +15,10 @@ describe SendReminderEmailWorker, type: :worker do
 
   context "User not registered for daily forecast email" do
     let!(:user) { create(:user) }
-    before { subject.perform }
+    before do
+      ActionMailer::Base.deliveries.clear
+      subject.perform
+    end
 
     it "should not send any email" do
       expect(ActionMailer::Base.deliveries).to be_empty

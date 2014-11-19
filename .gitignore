@@ -2,3 +2,4 @@
 !/.gitignore
 !/.rubocop.yml
 !/.hound.yml
+.DS_Store

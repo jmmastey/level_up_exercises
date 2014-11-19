@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @user.password %>
+</p>
+
+<p>
+  <strong>Profile img url:</strong>
+  <%= @user.profile_img_url %>
+</p>
+
+<%= render partial: 'recommendations', locals: { recommendations: @recommendations } %>
+
+<h3>Reviews</h3>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Performance</th>
+      <th>Rating</th>
+      <th>Review</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= render @user.reviews %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

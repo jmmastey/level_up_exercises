@@ -10,7 +10,7 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /the home\s?page/
+    when /the bomb interface/
       '/'
 
     # Add more mappings here.

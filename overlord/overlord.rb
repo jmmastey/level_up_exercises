@@ -6,7 +6,9 @@ require 'capybara/rspec'
 enable :sessions
 
 get '/' do
-  "Time to build an app around here. Start time: " + start_time
+  @start_time = start_time
+  erb :index
+  #"Time to build an app around here. Start time: " + start_time
 end
 
 # we can shove stuff into the session cookie YAY!

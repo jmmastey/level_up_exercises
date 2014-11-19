@@ -36,6 +36,9 @@ gem 'will_paginate'
 # Use Pry for debugging
 gem 'pry-rails', group: :development
 
+# Use devise for user authentication
+gem 'devise'
+
 # Use cucumber for BDD
 group :test do
   gem 'cucumber-rails', :require => false

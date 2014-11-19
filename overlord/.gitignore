@@ -1,2 +1,3 @@
 .rspec
 bower_components/
+public/stylesheets/.sass-cache

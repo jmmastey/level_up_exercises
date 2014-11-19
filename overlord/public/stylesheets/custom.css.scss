@@ -1,2 +1,20 @@
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "sass/cover";
+
+input {
+  color: black;
+}
+
+.header {
+  margin-bottom: 10em;
+}
+
+form {
+  input {
+    margin: 3em 0;
+  }
+}
+
+.activation-notice {
+  margin-top: 5em;
+}

@@ -5509,5 +5509,16 @@ body {
   .mastfoot,
   .cover-container {
     width: 700px; } }
+input {
+  color: black; }
+
+.header {
+  margin-bottom: 10em; }
+
+form input {
+  margin: 3em 0; }
+
+.activation-notice {
+  margin-top: 5em; }
 
 /*# sourceMappingURL=custom.css.map */

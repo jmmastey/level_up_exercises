@@ -5,7 +5,7 @@ class CurrentWeatherWorker
 
   URL = 'http://w1.weather.gov/xml/current_obs/'
 
-  def perform(station_id=nil)
+  def perform(station_id = nil)
     locations = station_id ? [station_id] : Location.stations
     locations.each { |station| save(station_data(station), station) }
   end

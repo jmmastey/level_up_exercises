@@ -3,10 +3,10 @@ require 'rest-client'
 class ForecastWorker
   include Sidekiq::Worker
 
-  def perform(zip_code=nil)
+  def perform(zip_code = nil)
     configuration = YAML.load_file('config/forecast_models.yaml')
     zip_codes = zip_code ? [zip_code] : Location.zip_codes
-    zip_codes.each { |zip_code| save(configuration, zip_code) }
+    zip_codes.each { |zip| save(configuration, zip) }
   end
 
   private

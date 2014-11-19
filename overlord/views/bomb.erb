@@ -12,7 +12,7 @@
 
         <link rel="stylesheet" href="../stylesheets/custom.css">
     </head>
-    <body class="index">
+    <body class="bomb">
 
       <div class="site-wrapper">
 
@@ -22,27 +22,24 @@
 
             <div class="row inner cover header">
               <div class="col-xs-12">
-                <h1 class="cover-heading">Welcome to Overlord!</h1>
-                <p>Please set an activation code for the bomb in the box below.</p>
+                <h1 class="cover-heading">Welcome to the bomb!</h1>
+                <p>Please enter an activation code for the bomb.</p>
               </div>
             </div>
             <div class="row inner cover">
               <div class="col-xs-4 col-xs-offset-4">
                 <form role="form" class="lead" action="">
                   <div class="form-group">
-                    <label for="code-entry">Set Activation Code</label>
-                    <input type="text" class="form-control" id="set-activation-code" placeholder="Enter code"/>
+                    <label for="code-entry">Enter Activation Code</label>
+                    <input type="text" class="form-control" id="code-entry" placeholder="Enter Activation code"/>
                   </div>
-                  <button type="submit" class="btn btn-default">Submit New Code and Boot</button>
+                  <button type="submit" class="btn btn-default">Go to the Bomb</button>
                 </form>
               </div>
             </div>
-            <div class="row inner cover boot">
+            <div class="row inner cover activation-notice">
               <div class="col-xs-12">
-                <p>Prefer not to enter a code? Click the button below to boot the bomb. Your activation code will be 1234.</p>
-                <form action="/bomb">
-                  <button type="submit" class="btn btn-danger boot-bomb-button">Boot Bomb</button>
-                </form>
+                <p class="lead activation-state">The bomb is inactivated.</p>
               </div>
             </div>
 
@@ -53,7 +50,6 @@
             </div>
 
           </div>
-
         </div>
       </div>
     </div>

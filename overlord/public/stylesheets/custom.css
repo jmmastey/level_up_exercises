@@ -5512,13 +5512,18 @@ body {
 input {
   color: black; }
 
-.header {
-  margin-bottom: 10em; }
-
 form input {
   margin: 3em 0; }
 
 .activation-notice {
   margin-top: 5em; }
+
+.index .header {
+  margin-bottom: 5em; }
+.index .boot {
+  margin-top: 4em; }
+
+.bomb .header {
+  margin-bottom: 10em; }
 
 /*# sourceMappingURL=custom.css.map */

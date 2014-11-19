@@ -32,7 +32,7 @@ RSpec.describe ForecastController, type: :controller do
       expect(assigns(:forecasts)).to be_empty
       expect(assigns(:hourly_forecast)).to be_empty
     end
-    
+
     it "returns partial data for historical request" do
       get :index, start_time: Time.now - 0.5.days
       expect(response).to have_http_status(:success)

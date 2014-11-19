@@ -2,6 +2,13 @@ AllCops:
   Exclude:
     - triangle_facts/*.rb
     - supportive/supportive.rb
+    - event_system/forcast_reminder/db/schema.rb
+    - event_system/forcast_reminder/config/initializers/devise.rb
+    - event_system/forcast_reminder/bin/*
+    - event_system/forcast_reminder/db/migrate/*
+    - event_system/forcast_reminder/features/support/env.rb
+    - event_system/forcast_reminder/script/cucumber
+    - event_system/forcast_reminder/lib/tasks/cucumber.rake
     
 # C: Missing top-level module documentation comment.
 Style/Documentation:

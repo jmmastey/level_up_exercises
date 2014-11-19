@@ -4,12 +4,12 @@ Feature: Activation of the bomb
   I want to have complete control over the activation process of the bomb
 
   Scenario: Initial State
-    Given I am yet to do anything
+    Given the bomb is deactivated
     When I go to the home page
     Then I should see activate button disabled
-      And the "activation-code" field should contain ""
-      And I should see "Bomb is deactivated"
+      And the bomb should be deactivated
 
+  @javascript
   Scenario Outline: Insert the activation code
     Given I am on the home page
     When I fill in "<code>" for "activation-code"
@@ -21,30 +21,18 @@ Feature: Activation of the bomb
     | 7653 | enabled  |
     | 12b4 | disabled |
     | acvx | disabled |
-    | #### | enabled  |
+    | #### | disabled |
 
+  @javascript
   Scenario Outline: Try to activate the bomb
     Given I have inserted "<code>" as the activation code
     When I press "activate"
-    Then I should be on <page>
+    Then I should be on the home page
+      And the bomb should be <status>
 
     Examples:
-    | code | page            |
-    | 1234 | the active page |
-    | 8988 | the home page   |
-    | 7653 | the home page   |
+    | code | status      |
+    | 1234 | activated   |
+    | 8988 | deactivated |
+    | 7653 | deactivated |
 
-  Scenario: Try to visit the home page when bomb is already activated
-    Given the bomb is activated
-    When I go to the home page
-    Then I should see "Bomb is already activated"
-      And I should not see "activation-code" field
-      And I should not see "activate" button
-
-  Scenario: Try to visit the home page when bomb is exploded
-    Given the bomb is exploded
-    When I go to the home page
-    Then  I should see "Bomb expoloded"
-      And I should see "make_new_bomb" link
-      And I should not see "activation-code" field
-      And I should not see "activate" button

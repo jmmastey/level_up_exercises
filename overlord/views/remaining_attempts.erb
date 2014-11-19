@@ -1,0 +1,5 @@
+<% if bomb.remaining_attempts == 1 %>
+  <p>You have 1 attempt remaining</p>
+<% else %>
+  <p>You have <%= bomb.remaining_attempts %> attempts remaining</p>
+<% end %>

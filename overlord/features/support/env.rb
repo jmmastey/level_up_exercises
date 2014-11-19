@@ -7,8 +7,10 @@ require File.join(File.dirname(__FILE__), '..', '..', 'overlord.rb')
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
+require 'capybara/webkit'
 
-Capybara.app = Overlord
+Capybara.javascript_driver = :webkit
+Capybara.app = Sinatra::Application.new
 
 class OverlordWorld
   include Capybara::DSL

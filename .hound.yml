@@ -2,7 +2,9 @@ AllCops:
   Exclude:
     - triangle_facts/*.rb
     - supportive/supportive.rb
-    
+    - overlord/features/**/*
+    - overlord/spec/**/*
+
 # C: Missing top-level module documentation comment.
 Style/Documentation:
   Enabled: false

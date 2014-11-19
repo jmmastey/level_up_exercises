@@ -4,61 +4,55 @@ Feature: Deactivation of the bomb
   And to make sure the bomb is tamper proof
   I want to have complete control over the deactivation process of the bomb
 
+  @javascript
   Scenario: Initial State
-    Given I am yet to do anything
-    When I go to the active page
+    Given the bomb is activated
+    When I go to the home page
     Then I should see deactivate button disabled
-      And the "deactivation-code" field should contain ""
-      And I should see "Bomb is Activated"
+      And the bomb should be activated
 
+  @javascript
   Scenario Outline: Insert the activation code
-    Given I am on the home page
+    Given the bomb is activated
+      And I am on the home page
     When I fill in "<code>" for "deactivation-code"
     Then I should see deactivate button <status>
 
     Examples:
     | code | status   |
-    | 1234 | enabled  |
+    | 0000 | enabled  |
     | 7653 | enabled  |
     | 12b4 | disabled |
     | acvx | disabled |
-    | #### | enabled  |
+    | #### | disabled |
 
+  @javascript
   Scenario Outline: Try to deactivate the bomb
-    Given I have inserted "<code>" as the activation code
+    Given the bomb is activated
+      And I have inserted "<code>" as the deactivation code
     When I press "deactivate"
-    Then I should be on <page>
+    Then the bomb should be <status>
 
     Examples:
-    | code | page            |
-    | 0000 | the home page   |
-    | 8988 | the active page |
-    | 7653 | the active page |
+    | code | status        |
+    | 0000 | deactivated   |
+    | 8988 | activated     |
+    | 7653 | activated     |
 
+  @javascript
   Scenario: Try to deactivate the bomb with wrong code
-    Given I have tried to deactivate 1 time unsuccesfully
-    Then I should see /You have (.*) tr(ies|y) remaining/
-      And I should see "Bomb is activated"
+    Given the bomb is activated
+      And I have tried to deactivate 1 time unsuccesfully
+    Then I should see "You have 2 attempts remaining"
+      And the bomb should be activated
 
+  @javascript
   Scenario: Try to deactivate the bomb with wrong code too may times
-    Given I have tried to deactivate max times unsuccesfully
+    Given the bomb is activated
+      And I have tried to deactivate max times unsuccesfully
     When I try to deactivate unsuccessfully again
-    Then I should be on the active page
-      And I should see "Bomb exploded"
-      And I should see "make_new_bomb" link
+    Then I should be on the home page
+      And the bomb should be exploded
+      And I should see "Let's make a new bomb" link
 
-    Scenario: Try to visit the active page when bomb is already deactivated
-    Given the bomb is deactivated
-    When I go to the active page
-    Then I should see "Bomb is already deactivated"
-      And I should not see "deactivation-code" field
-      And I should not see "deactivate" button
-
-  Scenario: Try to visit the active page when bomb is exploded
-    Given the bomb is exploded
-    When I go to the active page
-    Then  I should see "Bomb expoloded"
-      And I should see "make_new_bomb" link
-      And I should not see "deactivation-code" field
-      And I should not see "deactivate" button
 

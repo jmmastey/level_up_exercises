@@ -2,12 +2,12 @@ require_relative '../../bomb'
 
 def fill_activate_code(code)
   code = code.to_s unless code.is_a? String
-  fill_in('activation-code', with: code)
+  fill_in('activation-code', :with => code)
 end
 
 def fill_deactivate_code(code)
   code = code.to_s unless code.is_a? String
-  fill_in('deactivation-code', with: code)
+  fill_in('deactivation-code', :with => code)
 end
 
 def activate(code)

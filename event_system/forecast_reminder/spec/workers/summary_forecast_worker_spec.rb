@@ -38,9 +38,9 @@ describe ForecastWorker, vcr: vcr_options, type: :worker do
       its(:count) { is_expected.to eq number_forecasts }
 
       it "is expected to have correct data" do
-        expect(subject.map(&:temperature)).to all(be_an(Numeric))
-        expect(subject.map(&:precipitation)).to all(be_an(Numeric))
-        expect(subject.map(&:condition)).to all(be_an(String))
+        expect(subject.map(&:temperature)).to all(be_a(Numeric))
+        expect(subject.map(&:precipitation)).to all(be_a(Numeric))
+        expect(subject.map(&:condition)).to all(be_a(String))
       end
     end
 
@@ -81,12 +81,9 @@ describe ForecastWorker, vcr: vcr_options, type: :worker do
         worker.perform
       end
 
-      it "is expected to have correct number of forecasts" do
+      it "is expected to have correct data" do
         expect(subject.count).to eq number_forecasts
-      end
-
-      it "is expected to have correct temperatures" do
-        expect(subject.map(&:temperature)).to all(be_an(Numeric))
+        expect(subject.map(&:temperature)).to all(be_a(Numeric))
       end
     end
   end

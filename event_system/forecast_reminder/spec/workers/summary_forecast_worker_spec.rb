@@ -9,7 +9,7 @@ describe ForecastWorker, vcr: vcr_options, type: :worker do
   end
   let(:test_query) do
     {
-      "zipCodeList" => zip_code, "format" => "12 hourly",
+      "zipCodeList" => 60606, "format" => "12 hourly",
       "begin" => "2014-11-13T12:20:00-06:00"
     }
   end
@@ -64,6 +64,22 @@ describe ForecastWorker, vcr: vcr_options, type: :worker do
       end
 
       its(:count) { is_expected.to eq number_forecasts }
+    end
+
+    context "Request with specific zip code" do
+      let(:zip_code) { 53209 }
+
+      before do
+        worker.perform(zip_code)
+      end
+
+      it "is expected call NWS summarized service twice" do
+        expect(a_request(:get, test_url).with(query: test_query))
+          .to_not have_been_made
+        new_query = test_query.merge("zipCodeList" => zip_code)
+        expect(a_request(:get, test_url).with(query: new_query))
+          .to have_been_made
+      end
     end
 
     context "Update Request" do

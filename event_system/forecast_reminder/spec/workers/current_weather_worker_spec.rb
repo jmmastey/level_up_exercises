@@ -50,16 +50,16 @@ describe CurrentWeatherWorker, vcr: vcr_options, type: :worker do
     end
 
     context "Custom User Request" do
-      before do
-        @user = FactoryGirl.create(:user, station_id: station_id)
-        worker.perform
-      end
-
       let(:station_id) { 'KMKE' }
       let(:request_url) do
         "http://w1.weather.gov/xml/current_obs/#{station_id}.xml"
       end
+      let!(:user) { FactoryGirl.create(:user, station_id: station_id) }
       subject { model.find_by_station_id(station_id) }
+
+      before do
+        worker.perform
+      end
 
       it "is expected to call both stations" do
         expect(a_request(:get, default_request_url)).to have_been_made
@@ -70,15 +70,31 @@ describe CurrentWeatherWorker, vcr: vcr_options, type: :worker do
       its(:station_id) { is_expected.to eq station_id }
     end
 
+    context "Request with station_id" do
+      let(:station_id) { 'KMKE' }
+      let(:request_url) do
+        "http://w1.weather.gov/xml/current_obs/#{station_id}.xml"
+      end
+
+      before do
+        worker.perform(station_id)
+      end
+
+      it "is expected to call single station" do
+        expect(a_request(:get, default_request_url)).to_not have_been_made
+        expect(a_request(:get, request_url)).to have_been_made
+      end
+    end
+
     context "Bad Station Request" do
       let(:station_id) { '12345' }
       let(:request_url) do
         "http://w1.weather.gov/xml/current_obs/#{station_id}.xml"
       end
+      let!(:user) { FactoryGirl.create(:user, station_id: station_id) }
       subject { model.find_by_station_id(station_id) }
 
       before do
-        @user = FactoryGirl.create(:user, station_id: station_id)
         worker.perform
       end
 

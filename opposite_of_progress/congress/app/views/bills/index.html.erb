@@ -1,16 +1,16 @@
 <header>
   <div style="float:right;">
-    <%
+    <%=
       sort_options = [["Newly Added", "created_at"],
                       ["Congress", "congress"],
                       ["Introduction Date", "introduced_on"],
                       ["Title", "short_title"]]
+      select("sort",
+             "by",
+             sort_options,
+             { prompt: "Sort by...", selected: params["sort_by"] },
+             { :onchange => "window.location.href = '/bills?sort_by=' + document.getElementById('sort_by').value;"})
     %>
-    <%= select("sort",
-               "by",
-               sort_options,
-               { prompt: "Sort by...", selected: params["sort_by"] },
-               { :onchange => "window.location.href = '/bills?sort_by=' + document.getElementById('sort_by').value;"}) %>
   </div>
 
   <h3>All Bills</h3>

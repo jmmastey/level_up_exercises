@@ -23,23 +23,23 @@
             <div class="row inner cover header">
               <div class="col-xs-12">
                 <h1 class="cover-heading">Welcome to the bomb!</h1>
-                <p>Please enter an activation code for the bomb.</p>
+                <p>Please enter a activation or de-activation code for the bomb.</p>
               </div>
             </div>
             <div class="row inner cover">
               <div class="col-xs-4 col-xs-offset-4">
-                <form role="form" class="lead" action="">
+                <form role="form" class="lead" action="/bomb" method='POST'>
                   <div class="form-group">
-                    <label for="code-entry">Enter Activation Code</label>
-                    <input type="text" class="form-control" id="code-entry" placeholder="Enter Activation code"/>
+                    <label for="code">Enter Code</label>
+                    <input type="text" class="form-control" id="code" name="code" placeholder="Enter Activation code"/>
                   </div>
-                  <button type="submit" class="btn btn-default">Go to the Bomb</button>
+                  <button type="submit" class="btn btn-default">Enter code</button>
                 </form>
               </div>
             </div>
             <div class="row inner cover activation-notice">
               <div class="col-xs-12">
-                <p class="lead activation-state">The bomb is inactivated.</p>
+                <p class="lead activation-state">The bomb is <%= bomb_state %>.</p>
               </div>
             </div>
 

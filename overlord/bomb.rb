@@ -5,7 +5,7 @@ class Bomb
 
   attr_reader :status
 
-  def initialize(params={})
+  def initialize(params = {})
     @activation_code   = params[:activation_code] || DEFAULT_ACTIVATION_CODE
     @deactivation_code = params[:deactivation_code] || DEFAULT_DEACTIVATION_CODE
     @status            = :deactivated

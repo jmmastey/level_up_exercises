@@ -20,13 +20,23 @@ Then(/^I should see a set activation code entry box$/) do
   expect(page).to have_selector('#set-activation-code')
 end
 
+Then(/^I should see a set de\-activation code entry box$/) do
+  expect(page).to have_selector('#set-deactivation-code')
+end
+
 Then(/^I should see a boot button$/) do
   expect(page).to have_selector('.boot-bomb-button')
 end
 
 When(/^I set the activation code to (\d+)$/) do |code|
-  within("form-group") do
-    fill_in('#set-activation-code', with: code)
+  within('form-group') do
+    fill_in('#set-deactivation-code', with: code)
+  end
+end
+
+When(/^I set the deactivation code to (\d+)$/) do |code|
+  within('form-group') do
+
   end
 end
 

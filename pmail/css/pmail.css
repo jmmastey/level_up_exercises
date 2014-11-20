@@ -7,6 +7,80 @@ body {
   width: 100px ;
 }
 /*BANNER CONTENTS*/
+/*
+.search-dropdown{
+ border: 1px solid;
+ width: 10px;
+ height: 28px;
+ position: absolute;
+ top:20;
+ left:200;
+};*/
+
+.container{
+    /*display: none;*/
+    width: 600px;
+    background-color: white;
+    font-family: arial;
+    font-size: 80%;
+    color: grey;
+    border: 1px solid grey;
+    position: absolute;
+    top:50px;
+    left: 173px;
+    padding: 10px;
+    z-index: 1;
+  }
+
+label{
+   /*  display:block; */
+    clear:left;
+    display: inline-block;
+}
+
+.searchparams{
+    margin-top: 40px;
+}
+
+.searchparams input[type="text"]{
+    margin-bottom: 10px;
+    padding: 3px;
+    width: 300px;
+ }
+
+.button{
+  background-color: #f4f4f4;
+  border: 1px solid #c9c9c9;
+  border-radius: 3px;
+  height: 25px;
+  width:100px;
+  margin-left: 5px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 7px;
+  padding-bottom: 0px;
+  color: black;
+}
+
+input[type=checkbox]{
+}
+
+#allmail{
+   position: absolute;
+  top:5px;
+  left:50px;
+}
+#arrange{
+    display: inline-block;
+}
+
+.arrange input{
+    width: 150px;
+}
+#query{
+    background-color: #4d90fe;
+}
+
 .banner {
   background:url('../img/logo.png') no-repeat;
   background-color:#F2F2F0;
@@ -22,7 +96,10 @@ body {
   height:28px;
   margin-left:155px;
   margin-right: 0px;
-  width:570px;
+  width:622px;
+  position: absolute;
+  top:20px;
+  left:20px;
 }
 
 .pmail-search {
@@ -37,6 +114,9 @@ body {
   width: 60px;
   height: 28px;
   margin-left: 0px;
+/*  position: relative;
+  top: 20px;
+  left: 3px;*/
 }
 .address{
   position: absolute;
@@ -60,6 +140,22 @@ body {
   top:0px;
   right:5px;
   background-color: white;
+  z-index: 1;
+}
+
+.app-wrapper li{
+  display: inline-block;
+  list-style-type: none;
+  margin-bottom: 50px;
+  /*margin-right: 5px;*/
+}
+
+.app-wrapper ul li{
+  display: inline-block;
+}
+
+.app-wrapper ul{
+  padding: 0px;
 }
 
 /*NAV-BANNER*/
@@ -273,14 +369,14 @@ button span:hover:after {
 
 }
 
-div.mail-dropdown{
+.mail-dropdown{
   display: none;
   border: 1px solid;
   width:100px;
   font-family: arial;
   color:black;
   background-color: white;
-  z-index: -1;
+  z-index: 3;
 }
 
 .mail-dropdown ul{
@@ -311,12 +407,56 @@ color: black;
 text-align: left;
 }
   /*MAIN CONTENT*/
-.main_content {
-  border: 2px dashed;
- width: 586px;
-  height: 400px;
+
+
+.main-content{
+ /*position: absolute;
+ top: 100px;
+ left: 500px;*/
+ display: inline-block;
+ width: 85%;
 }
 
+.main-parent{
+  position: relative;
+  width: 1400px;
+   }
+
+.main_content div{
+ /*border-bottom: 1px solid #c9c9c9;*/
+ font-family: Arial;
+ font-size: 90%;
+ display: inline-block;
+ width: 85%;
+ margin-bottom: 10px;
+}
+
+.name{
+  font-weight: bold;
+  float: left;
+ text-align: left;
+ width: 25%;
+}
+
+.subject{
+  font-weight: bold;
+  float: left;
+  text-align: left;
+  width: 25%;
+}
+
+.message {
+  color: grey;
+  text-align: left;
+  float: left;
+  width: 25%;
+}
+
+.timestamp{
+  font-weight: bold;
+  float: left;
+  width: 25%;
+}
 /*SIDE BAR*/
 
 /*.active {
@@ -342,13 +482,14 @@ text-align: left;
   margin-left: 20px;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   width: 115px;
-  z-index: -1;
+  z-index: 2;
   }
 
 nav ul {
   list-style-type: none;
   padding-left: 0px;
   width: 186px;
+  z-index: auto;
 }
 
 nav ul li {
@@ -363,12 +504,12 @@ nav ul li div {
   display: inline-block;
 }
 
-.menu {
+.menu{
   font-family: Arial;
   font-size: 80%;
   color:black;
-  z-index: -1;
-}
+  display: inline-block;
+  }
 
 a{
   text-decoration: none;
@@ -400,11 +541,15 @@ a:active{
  float:left;
 }
 */
-.firtier {
+/*.firtier {
 display: inline-block;
 font-family: Arial;
+font-size: 100%;
 }
 
 .firtier p{
   margin: 0px;
 }
+*/
+
+

@@ -4,74 +4,119 @@
   <title>PMAIL</title>
 </head>
 <body>
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/pmail.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/pmail.js" ></script>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.2/j  query-ui.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/j query-ui.js"></script>
   <div class="banner">
     <input type="text" name="search" class="banner-textbox"/>
-    <button name="pmailsearch" class="pmail-search"/> 
+    <div class="search-dropdown">
+    <div class="container">
+
+<label>Search</label>
+<div class="button" id="allmail">All Mail</div>
+    
+<div class="searchparams">
+    <label>From</label><br/>
+    <input type="text" name= "from"/><br/>
+    <label>To</label><br/>
+    <input type="text" name= "to"/><br/>  
+    <label>Subject</label><br/>
+    <input type="text" name= "subject"/><br/>
+    <label>Has the words</label><br/>
+    <input type="text" name= "hasthewords"/><br/>
+    <label>Doesn't have</label><br/>
+    <input type="text" name= "doesnthave"/>
+</div>
+    <div>
+     <input type="checkbox" name= "hasattachment"/>
+     <label>Has attachment</label><br/>    
+     <input type="checkbox" name= "dontincludechats"/>
+     <label> Don't include chats</label><br/>
+    </div>
+    
+     <div class="arrange">
+       <label>Size</label><div class="button" id="arrange">greater than</div> 
+       <input type="text" name="mb" id="arrange"/>
+       <div class="button" id="arrange">MB</div>  
+     </div>
+    
+    <div class="arrange">
+     <label>Date within</label>
+        <div class="button" id="arrange">1 day</div>  <p id="arrange">of</p>
+     <input type="text" id="arrange"/>
+    </div>
+    <div class="button" id="query"></div>
+</div> <!-- container end -->
+</div> <!-- search-dropdown ends -->
+   <!--  <div class="input-button"></div> -->
+    <button name="pmailsearch" class="pmail-search"/>
     <div class="address">smullins@enova.com</div>
     <div class="app-image"><img src="img/apps.png"/>
-     <div class="app-wrapper">
-    <div class="firtier">
-      <img src="img/search.png" height="50" width="50"/>
+    <div class="app-wrapper">
+
+        <ul> <!-- TODO add href link -->
+        <li><div><img src="img/search.png" height="61" width="63"/></div></li>
+        <li><div><img src="img/mail.png" height="60" width="71"/></div></li>
+        <li><div><img src="img/drive.png" height="62" width="76"/></div></li><br/>
+        <li><div><img src="img/calendar.png" height="70" width="83"/></div></li>
+        <li><div><img src="img/groups.png" height="74" width="85" /></div></li>
+        <li><div><img src="img/contacts.png" height="70" width="91"/></div></li>
+        </ul>
+
+    <!-- <div class="firtier">
+      <img src="img/search.png" height="61" width="63"/>
       <p>Search</p>
     </div>
     <div class="firtier">
-      <img src="img/mail.png" height="50" width="50"/>
+      <img src="img/mail.png" height="60" width="71"/>
       <p>Mail</p>
     </div>
     <div class="firtier">
-       <img src="img/drive.png" height="50" width="50"/>
+       <img src="img/drive.png" height="62" width="76"/>
        <p>Drive</p>
     </div>
     </br>
-    <div class ="firtier">
-      <img src="img/calendar.png" height="60" width="50"/>
+    <div class="firtier">
+      <img src="img/calendar.png" height="70" width="83"/>
       <p>Calendar</p>
     </div>
-    <div class ="firtier">
-      <img src="img/groups.png" height="60" width="50"/>
+    <div class="firtier">
+      <img src="img/groups.png" height="74" width="85" />
       <p>Groups</p>
     </div>
-    <div class="firtier">
-      <img src="img/contacts.png" height="60" width="50"/>
+    <div class="firtier" height="70" width="91">
+      <img src="img/contacts.png" height="70" width="91"/>
       <p>Contacts</p>
-    </div>
+    </div> -->
+
   </div>
   </div>
-
-
-
-
-
-
-
-    </div>
+  </div>
     <!-- <div class="maglass"><img src="img/maglass.png"/></div> -->
   </div>
   <div class="nav_banner">
     <button type=button name="mail" class="mail-button">Mail</button>
     <div class="mail-dropdown">
     <ul>
-   <li>Mail</li>
-   <li>Contacts</li>
-   <li>Tasks</li>
+       <li>Mail</li>
+       <li>Contacts</li>
+       <li>Tasks</li>
     </ul>
   </div>
     <div class="select-button">
        <span class="checkbox"><input type="checkbox"></span>
       <div class="boxmenu">
-            <ul>
-            <li><a href="#">All</a></li>
-            <li><a href="#">Read</a></li>
-            <li><a href="#">None</a></li>
-            <li><a href="#">Unread</a></li>
-            <li><a href="#">Starred</a></li>
-            <li><a href="#">Unstarred</a></li>
-          </ul>
+        <ul>
+          <li><a href="#">All</a></li>
+          <li><a href="#">Read</a></li>
+          <li><a href="#">None</a></li>
+          <li><a href="#">Unread</a></li>
+          <li><a href="#">Starred</a></li>
+          <li><a href="#">Unstarred</a></li>
+      </ul>
         </div>
       </div>
       <div class="refresh-button" data-role="Refresh"><!-- <img src="img/glyphicons_085_repeat.png"/> --></div>
@@ -103,9 +148,11 @@
       <div class="older-button"></div>
       <div class="newer-button"></div>
     </div>
-    <div class="side_bar">
-     <button name="searchcontent" class="compose-button">COMPOSE</button>
+   <!--  <div class="side_bar"> -->
+   <div class="main-parent">
+    
      <nav class="menu">
+       <button name="searchcontent" class="compose-button">COMPOSE</button>
        <ul>
         <li><div>Inbox</div></li>
         <li>Starred</li>
@@ -117,40 +164,18 @@
       </li>
     </ul>
   </nav>
-</div>
-<div class="main_content">
+<!-- </div> -->
 
-  <!-- <div class="app-wrapper">
-    <div class="firtier">
-      <img src="img/search.png" height="50" width="50"/>
-      <p>Search</p>
-    </div>
-    <div class="firtier">
-      <img src="img/mail.png" height="50" width="50"/>
-      <p>Mail</p>
-    </div>
-    <div class="firtier">
-       <img src="img/drive.png" height="50" width="50"/>
-       <p>Drive</p>
-    </div>
-    </br>
-    <div class ="firtier">
-      <img src="img/calendar.png" height="60" width="50"/>
-      <p>Calendar</p>
-    </div>
-    <div class ="firtier">
-      <img src="img/groups.png" height="60" width="50"/>
-      <p>Groups</p>
-    </div>
-    <div class="firtier">
-      <img src="img/contacts.png" height="60" width="50"/>
-      <p>Contacts</p>
-    </div>
-  </div>
-  </div> -->
+<div class="main-content">
+   <div><span class="name">Doughboy, Pillbury</span><span class="subject">Yeast</span><span class="message">I am in Nigeria, please forward a check to</span><span class="timestamp">11:44 am</span></div>
+   <div><span class="name">Winfrey, Oprah</span><span class="subject">Oprah's Favorites</span><span class="message">You get a car! Redeem your...</span><span class="timestamp">6:45 am</span></div>
+   <div><span class="name">Stephenson, Robert L.</span><span class="subject">Poetry</span><span class="message">Thank you for purchasing my latest edition of</span><span class="timestamp">Sept 3</span></div>
+   <div><span class="name">Beyonce</span><span class="subject">Concert</span><span class="message">Your reservations for June 2030 confirmed</span><span class="timestamp">Sept 3</span></div>
+   <div><span class="name">Washington, Kerry</span><span class="subject">Scandal</span><span class="message">Explosive episode tonight, watch and find out what...</span><span class="timestamp">Sept 2</span></div>
 </div>
-
 </div>
+</div>
+<i class="fa fa-camera-retro"></i> fa-camera-retro
 </body>
 </html>
 

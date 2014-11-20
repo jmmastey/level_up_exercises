@@ -33,4 +33,9 @@ $(".app-image").click(function(){
   $('.app-wrapper').toggle();
 });
 
+$(".search-dropdown").click(function(){
+  $('.container').toggle();
+});
+
+
 });

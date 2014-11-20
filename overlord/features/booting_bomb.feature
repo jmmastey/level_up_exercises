@@ -10,10 +10,12 @@ Feature: Booting the Bomb
     When I go to the home page
     And I set the activation code to 5678
     And I set the deactivation code to 9123
-    And I click the boot bomb button
+    And I click the Submit New Code and Boot button
     Then I should be on the bomb interface
+    And the bomb should be inactive
 
   Scenario: Do not set activation code and boot the bomb
     When I go to the home page
-    And I click the boot bomb button
+    And I click the Boot Bomb button
     Then I should be on the bomb interface
+    And the bomb should be inactive

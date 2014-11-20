@@ -8,10 +8,7 @@ require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 
-#Capybara.app = Sinatra::Application
-
-Capybara.app = Rack::Builder.parse_file(File.expand_path('../../../config.ru', __FILE__)).first
-# Change this for use with Rack
+Capybara.app = Sinatra::Application
 
 class OverlordWorld
   include Capybara::DSL

@@ -51,12 +51,6 @@ RSpec.describe Event, :type => :model do
     expect(event).to have(2).showings
   end
 
-  it 'can show a sorted list of showings' do
-    expect(event_with_showings.sorted_showings[0].time.day).to eq(1)
-    expect(event_with_showings.sorted_showings[1].time.day).to eq(2)
-    expect(event_with_showings.sorted_showings[2].time.day).to eq(3)
-  end
-
   it 'will not create a duplicate showing' do
     showing
     expect{ duplicate_time_showing }.not_to change { event.showings.count }

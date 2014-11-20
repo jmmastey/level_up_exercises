@@ -4,7 +4,7 @@
 	  <% if @event.showings.blank? %>
 	  <tr><td colspan=3>No Showings on Record</td></tr>
 	  <% else %>
-	  <% @event.sorted_showings.each do |showing| %>
+	  <% @event.showings.sorted.each do |showing| %>
 	  <% member = showing.in?(current_user.showings) %>
 	  <% member_class = member ? 'member' : 'non-member' %>
 	  <% local_time_view = ApplicationHelper::LocalTimeView.new(showing.time) %>

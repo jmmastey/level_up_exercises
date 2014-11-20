@@ -1,7 +1,7 @@
 module ShowingsHelper
   def self.one_day_only?(showings)
     return false unless showings.present?
-    sorted = Showing.sort_by_time(showings)
+    sorted = showings.sorted
     sorted.first.time.to_date == sorted.last.time.to_date
   end
 

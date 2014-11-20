@@ -8,7 +8,7 @@ RSpec.describe Showing, :type => :model do
   let(:showing_times) { [DateTime.parse('20141003'), DateTime.parse('20141001'), DateTime.parse('20141002')] }
   let(:event_with_showings) { create_event('Party', 'Everywhere', "www.link.com", showing_times) }
   let(:showings) { event_with_showings.showings }
-  let(:sorted_showings) { Showing.sort_by_time(showings) }
+  let(:sorted_showings) { showings.sorted }
   let(:destroy_event) { Event.delete(Event.all) }
 
   it "responds to time" do
@@ -43,7 +43,7 @@ RSpec.describe Showing, :type => :model do
     expect(showing).to respond_to(:description)
   end
 
-  it "sorts a list of showings" do
+  it "sorts a list of showings old" do
     expect(sorted_showings[0].time.day).to eq(1)
     expect(sorted_showings[1].time.day).to eq(2)
     expect(sorted_showings[2].time.day).to eq(3)

@@ -1,5 +1,4 @@
 class Showing < ActiveRecord::Base
-  LOCAL_TIME_ZONE = "Central Time (US & Canada)"
   validates :time, presence: true
 
   belongs_to :event
@@ -7,10 +6,7 @@ class Showing < ActiveRecord::Base
 
   has_and_belongs_to_many :users
 
-  # self
-  def Showing.sort_by_time(showings)
-    showings.sort { |a, b| a.time <=> b.time }
-  end
+  scope :sorted, -> { order( :time => :asc ) }
 
   # to_ics
   def ics

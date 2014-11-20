@@ -1,0 +1,16 @@
+<%= erb :unexploded_bomb_image %>
+
+<%= erb :bomb_status %>
+
+<div class="row deactivation-form-wrapper">
+  <div class="col-md-12 text-center">
+    <form class="form-inline" role="form" action="/deactivate" method="post">
+      <div class="form-group">
+        <input type="text" class="form-control code-input" id="deactivation-code" name="deactivation-code" placeholder="Activation code">
+      </div>
+      <button id="deactivate" type="submit" class="btn btn-danger" disabled>Deactivate</button>
+    </form>
+  </div>
+</div>
+
+<%= erb :remaining_attempts %>

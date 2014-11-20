@@ -11,7 +11,7 @@ $(function() {
     is_valid_input(input) ? btn.removeAttr('disabled') : btn.attr('disabled', 'disabled');
   }
 
-  $('body').on('keyup', '.code-input', function() {
+  $('body').on('keyup change', '.code-input', function() {
     activate_on_valid_input(this);
   });
 

@@ -1,3 +1,12 @@
-<h1 class="bomb-status-<%= bomb.status %>">
-  The bomb <%= bomb.exploded? ? "" : "is" %> <%= bomb.status %>
-</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <% if bomb.deactivated? %>
+    <div class="alert alert-warning" role="alert">
+    <% else %>
+    <div class="alert alert-danger" role="alert">
+    <% end %>
+      <strong>The bomb <%= bomb.exploded? ? "" : "is" %> <%= bomb.status %></strong>
+    </div>
+  </div>
+</div>
+

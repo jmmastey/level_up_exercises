@@ -1,5 +1,11 @@
-<% if bomb.remaining_attempts == 1 %>
-  <p>You have 1 attempt remaining</p>
-<% else %>
-  <p>You have <%= bomb.remaining_attempts %> attempts remaining</p>
-<% end %>
+<div class="row remaining-attempts-wrapper">
+  <div class="col-md-12 text-center">
+    <% if bomb.remaining_attempts == 1 %>
+      <p class="text-danger">You have <span class="badge">1</span> attempt remaining</p>
+    <% else %>
+      <p class="text-danger">You have <span class="badge"><%= bomb.remaining_attempts %></span> attempts remaining</p>
+    <% end %>
+  </div>
+</div>
+
+

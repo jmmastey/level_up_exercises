@@ -1,5 +1,4 @@
 require 'json'
-# ABDataParser Module
 module ABDataParser
   def self.read(json_obj, varian_key, result_key)
     @ab_test_data = {}
@@ -12,7 +11,6 @@ module ABDataParser
 
   def self.parse_json_obj(json_obj)
     json_obj = JSON.parse(json_obj)
-    #groups = json_obj.group_by { |record| record[@variant_key.to_s] }.values
     groups = json_obj.partition{ |item| item[@variant_key] == 'A' }
     groups.each { |variant| populate_data(variant) }
     rescue JSON::ParserError

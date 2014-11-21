@@ -5,17 +5,12 @@ Feature: Bomb Detonation
 
   Background:
     Given I am on the home page
-    And I should see "Bomb is inactive"
+    And I have activated the bomb
 
   @javascript
-  Scenario: Activate and detonate the bomb
-    And  I fill in ".query-input" with "activate 1234"
-    And I press "Submit Query"
+  Scenario: Detonate the bomb
+    When I type "detonate 1"
+    And I enter the query
+    And I wait for 1 seconds
     And I wait for ajax request to finish
-    And  I should see "Bomb is active"
-    And  I fill in ".query-input" with "detonate 3"
-    When I press "Submit Query"
-    And I wait for ajax request to finish
-    And  I should see "Detonation in 3 seconds"
-    And I wait for 3 seconds
-    Then I should see "Detonation... done!" within ".console"
+    Then The bomb should be detonated

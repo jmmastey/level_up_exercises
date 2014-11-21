@@ -5,15 +5,10 @@ Feature: De-Activate bomb with default code
 
   Background:
     Given I am on the home page
-      And I should see "activated" within ".console .output"
+      And I have activated the bomb
 
-  Scenario Outline: De-Activate the bomb
-    And I fill in "query-input" with "deactivate <code>"
-    And I press "Submit Query"
-    Then I should see "<state>" within ".console .output"
-
-  Examples:
-    | code | state     |
-    | 0000 | inactive  |
-    | abcd | activated |
-
+  @javascript
+  Scenario: De-Activate the bomb
+    When I type "deactivate 0000"
+    And I enter the query
+    Then The bomb should be deactivated

@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'haml'
 require 'json'
-# require 'run_later'
 
 class Overlord < Sinatra::Base
   configure do

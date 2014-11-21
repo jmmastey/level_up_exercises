@@ -1,7 +1,11 @@
 %header.header
-  %a.btn.lg.page-callout(href='#' data-js='fullscreen-console' title='Let\'s blow shit up.') Let's blow shit up.
+  - if session[:bomb_state] == 'detonated'
+    %a.btn.lg.page-callout(href='/new') Go Again?
+  - else
+    %a.btn.lg.page-callout(href='#' data-js='fullscreen-console') Let's Blow Shit Up
 
 
-.desk
+.desk{:class => session[:countdown_active] ? 'active' : ''}
   .console-splashpage
-    = haml :'components/console', :locals => {:bomb_state => @bomb_state}
+    = haml :'components/console'
+}

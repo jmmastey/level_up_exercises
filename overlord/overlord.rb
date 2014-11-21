@@ -14,13 +14,18 @@ after do
   puts '[Params]'
   p request.params
   p request.session[:bomb]
+  p request.session[:incorrect_attempts]
 end
 
 post '/boot' do
   session.clear
   user_activation_code = params["activation"] || "1234"
   user_deactivation_code = params["deactivation"] || "0000"
+  # helper method to set user_activation_code
+
   session[:bomb] = bomb(user_activation_code, user_deactivation_code)
+  #@bomb = session[:bomb]
+  session[:incorrect_attempts] = 0
   redirect '/bomb'
 end
 
@@ -31,7 +36,7 @@ end
 post '/bomb' do
   user_code_input = params['user-code']
   compare_code(user_code_input)
-
+  explode_bomb if session[:incorrect_attempts] == 3
   erb :bomb, locals: { bomb_state: bomb_state }
 end
 
@@ -44,11 +49,19 @@ def bomb_state
 end
 
 def compare_code(user_code)
-  activate_bomb if match_activation_code?(user_code)
+  if match_activation_code?(user_code)
+    activate_bomb
+  else
+    session[:incorrect_attempts] += 1
+  end
 end
 
 def activate_bomb
   session[:bomb].status = :active
+end
+
+def explode_bomb
+  session[:bomb].status = :exploded
 end
 
 def match_activation_code?(user_code)

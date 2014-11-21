@@ -1,5 +1,5 @@
 require "spec_helper"
-require "visitor.rb"
+require_relative "../lib/visitor"
 
 describe Visitor do
 	let (:visitor) {Visitor.new(date: '2014-03-20', cohort: "A", result: 0)}

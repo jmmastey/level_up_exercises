@@ -1,3 +1,7 @@
+require_relative 'spec_helper'
+require_relative '../lib/visitor'
+require_relative '../lib/cohort'
+require_relative '../lib/split_test'
 
 describe Cohort do
 

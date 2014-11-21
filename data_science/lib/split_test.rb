@@ -9,11 +9,14 @@ class SplitTest
 
 	# at 0.05 level of significance
 	def different? 
-		# tester.chisquare_p
 		tester.different?
 	end
 
-	private 
+	def chisquare_p_value
+		tester.chisquare_p
+	end
+
+	private
 	
 	def tester
 		ABAnalyzer::ABTest.new(values)
@@ -22,11 +25,11 @@ class SplitTest
 	def values
 		{
 			cohort_a: { 
-			  	:sample_size => @cohort_a.sample_size, 
+			  	:sample_size => @cohort_a.sample_size,
 	  			:success => @cohort_a.conversions 
 			},
 			cohort_b: { 
-				:sample_size => @cohort_b.sample_size, 
+				:sample_size => @cohort_b.sample_size,
 				:success => @cohort_b.conversions 
 			}
 		}

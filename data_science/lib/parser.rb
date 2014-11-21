@@ -1,4 +1,4 @@
-require "json"
+require 'json'
 require_relative 'visitor'
 require_relative 'cohort'
 
@@ -11,12 +11,12 @@ module Parser
 		seperate_into_cohorts(visitors)
 	end
 
+	private
+
 	def self.seperate_into_cohorts(visitors)
 		grouped = visitors.group_by { |visitor| visitor.cohort }
 		[build_cohort(grouped['A']), build_cohort(grouped['B']) ]
 	end
-
-	private
 
 	def self.build_cohort(visitors)
 		cohort = Cohort.new

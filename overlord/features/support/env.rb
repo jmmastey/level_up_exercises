@@ -5,12 +5,13 @@ ENV['RACK_ENV'] = 'test'
 require File.join(File.dirname(__FILE__), '..', '..', 'overlord.rb')
 
 require 'capybara'
-require 'capybara-webkit'
+# require 'capybara-webkit'
 require 'capybara/cucumber'
+require 'capybara/poltergeist'
 require 'rspec'
 
 
-Capybara.javascript_driver = :webkit
+Capybara.javascript_driver = :poltergeist
 Capybara.app = Overlord
 
 class OverlordWorld

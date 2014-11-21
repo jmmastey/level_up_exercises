@@ -1,0 +1,23 @@
+.btn {
+  display: inline-block;
+  vertical-align: baseline;
+  padding: @text-spacing-veritical @text-spacing-horizontal;
+
+  text-decoration: none;
+  font-size: @text-size;
+  border-radius: @border-radius;
+
+  border: 1px solid @color-brand;
+  color: @color-brand;
+
+  &:hover {
+    background-color: lighten(@color-brand, 5%);
+    color: #000;
+  }
+
+  &.lg {
+    padding: @text-spacing-veritical-LG @text-spacing-horizontal-LG;
+    font-size: @text-size-LG;
+    border-width: 2px;
+  }
+}

@@ -1,0 +1,9 @@
+%header.header
+  - if session[:bomb_state] == 'detonated'
+    %a.btn.lg.page-callout(href='/new') Go Again?
+  - else
+    %a.btn.lg.page-callout(href='#' data-js='fullscreen-console') Let's Blow Shit Up
+
+.desk{:class => session[:countdown_active] ? 'active' : ''}
+  .console-splashpage
+    = haml :'components/console'

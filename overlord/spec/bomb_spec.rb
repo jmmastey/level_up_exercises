@@ -9,6 +9,10 @@ describe Bomb do
       expect(bomb.activation_code).to eq("1234")
       expect(bomb.deactivation_code).to eq("0000")
     end
+
+    it 'is instantiated with a incorrect deactivation_code tracker' do
+      expect(bomb.incorrect_deactivation_attempts).to be_zero
+    end
   end
 
   context 'instantiated with user codes' do
@@ -37,7 +41,7 @@ describe Bomb do
   context 'after instantiation' do
     let(:bomb) { Bomb.new(activation_code: "8888", deactivation_code: "2222") }
 
-    it 'has an initial status of inactive' do
+    it 'has an initial status of inactivated' do
       expect(bomb.status).to eq(:inactivated)
     end
 
@@ -48,6 +52,13 @@ describe Bomb do
       end
     end
 
+    describe '#activate' do
+      it 'will change the bomb status to inactivated' do
+        bomb.deactivate
+        expect(bomb.status).to eq(:inactivated)
+      end
+    end
+
     describe '#explode' do
       it 'will make the bomb explode' do
         bomb.explode!
@@ -55,17 +66,47 @@ describe Bomb do
       end
     end
 
-    describe '#test_user_code' do
-      it 'will return activate if the provided code matches the activation code' do
-        expect(bomb.test_user_code("8888")).to eq(:activate)
+    describe '#match_user_code' do
+      it 'will activate the bomb if the provided code matches the activation code' do
+        bomb.status = :inactivated
+        bomb.match_user_code("8888")
+        expect(bomb.status).to eq(:active)
       end
 
-      it 'will return deactivate if the provided code matches the activation code' do
-        expect(bomb.test_user_code("2222")).to eq(:deactivate)
+      it 'will deactivate the bomb if the provided code matches the deactivation code' do
+        bomb.status = :active
+        bomb.match_user_code("2222")
+        expect(bomb.status).to eq(:inactivated)
       end
 
-      it 'will return not_a_match if the provided code does not match the activation or deactivation codes' do
-        expect(bomb.test_user_code("5555")).to eq(:not_a_match)
+      it 'will reset the incorrect_deactivation_attempts attribute if the bomb deactivates' do
+        bomb.incorrect_deactivation_attempts = 2
+        bomb.match_user_code("2222")
+        expect(bomb.incorrect_deactivation_attempts).to be_zero
+      end
+    end
+
+    describe '#incorrect_code_entry' do
+      it 'will increment the incorrect attempt tracker if the code does not match the activation or deactivation code' do
+        bomb.incorrect_attempt
+        expect(bomb.incorrect_deactivation_attempts).to eq(1)
+      end
+
+      context 'maximum number of incorrect attempts not exceeded' do
+        it 'will be active' do
+          bomb.status = :active
+          bomb.incorrect_attempt
+          expect(bomb.status).to eq(:active)
+        end
+      end
+
+      context 'maximum number of incorrect attempts exceeded' do
+        it 'will be active' do
+          bomb.incorrect_attempt
+          bomb.incorrect_attempt
+          bomb.incorrect_attempt
+          expect(bomb.status).to eq(:exploded)
+        end
       end
     end
   end

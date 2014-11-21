@@ -5,8 +5,14 @@ end
 Given(/^I have entered the activation and deactivation codes$/) do
   visit '/'
   fill_in('Set Activation Code', with: 4444)
-  fill_in('Set De-activation Code', with: 8888)
+  fill_in('Set Deactivation Code', with: 8888)
   click_button("Submit New Code and Boot")
+end
+
+Given(/^the bomb is active$/) do
+  fill_in('Enter Code', with: 4444)
+  click_button("Enter Code")
+  expect(page).to have_content("active")
 end
 
 Then(/^I should see a code entry box$/) do
@@ -35,7 +41,7 @@ When(/^I set the activation code to (\d+)$/) do |code|
 end
 
 When(/^I set the deactivation code to (\d+)$/) do |code|
-  fill_in('Set De-activation Code', with: code)
+  fill_in('Set Deactivation Code', with: code)
 end
 
 When(/^I click the (.+) button$/) do |button|

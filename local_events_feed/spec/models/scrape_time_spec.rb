@@ -40,18 +40,4 @@ RSpec.describe ScrapeTime, :type => :model do
   it "will fill in a default value for inter_scrape_delay" do
     expect(default_scrape_time.inter_scrape_delay.to_i).to eq(1.day)
   end
-
-  it "gives permission to scrape initially" do
-    expect(valid_scrape_time.permission_to_scrape?(nine_oclock)).to be true 
-  end
-
-  it "will not give permission to scrape immediately after a scrape" do
-    expect(valid_scrape_time.permission_to_scrape?(nine_oclock)).to be true 
-    expect(valid_scrape_time.permission_to_scrape?(nine_oclock)).to be false 
-  end
-
-  it "will update its last scrape time after a valid scrape" do
-    scrape_at_ten
-    expect(valid_scrape_time.last_scrape_at).to eq(ten_oclock)
-  end
 end

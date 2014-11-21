@@ -17,6 +17,13 @@ describe Bomb do
     it 'has an initial status of inactive' do
       expect(bomb.status).to eq(:inactivated)
     end
+
+    describe '#activate' do
+      it 'will change the bomb status to activate' do
+        bomb.activate
+        expect(bomb.status).to eq(:active)
+      end
+    end
   end
 end
 

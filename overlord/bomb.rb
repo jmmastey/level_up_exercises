@@ -7,5 +7,7 @@ class Bomb
     @status = :inactivated
   end
 
-
+  def activate
+    @status = :active
+  end
 end

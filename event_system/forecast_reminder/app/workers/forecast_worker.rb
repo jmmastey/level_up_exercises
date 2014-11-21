@@ -56,13 +56,13 @@ class ForecastWorker
   def valid_forecasts(forecast_data, config)
     forecast_data.select do |time, forecast|
       forecast['temperature'].present? &&
-        time[:date_time] < (Time.now + config.fetch("max_days", 1).to_i.days)
+        time < config.fetch("max_days", 1).to_f.days.from_now
     end
   end
 
   def create_models(model, forecast_data, zip_code)
     forecast_data.each do |time, values|
-      model.find_or_create_by(time: time[:date_time], zip_code: zip_code)
+      model.find_or_create_by(time: time, zip_code: zip_code)
         .update_attributes(values)
     end
   end

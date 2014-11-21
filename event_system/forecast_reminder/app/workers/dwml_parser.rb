@@ -22,8 +22,7 @@ class DwmlParser
   end
 
   def request_time
-    request_time = xml.at_xpath('/dwml/head/product/creation-date').text
-    DateTime.parse(request_time)
+    xml.at_xpath('/dwml/head/product/creation-date').text.to_date_time
   end
 
   private
@@ -42,12 +41,7 @@ class DwmlParser
     end
   end
 
-  def get_time_layout_row(time)
-    time.xpath('start-valid-time').map do |t|
-      {
-        period: t['period-name'],
-        date_time: DateTime.parse(t.text),
-      }
-    end
+  def get_time_layout_row(times)
+    times.xpath('start-valid-time').map(&:text).map(&:to_time)
   end
 end

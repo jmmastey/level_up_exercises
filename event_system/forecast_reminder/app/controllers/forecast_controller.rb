@@ -1,8 +1,8 @@
 class ForecastController < ApplicationController
   def index
     @conditions = conditions unless params.include? :start_time
-    @forecasts = forecasts
-    @hourly_forecast = hourly_forecast
+    @forecasts = Forecast.for_zip_code(zip_code, start_time)
+    @hourly_forecast = HourlyForecast.for_zip_code(zip_code, start_time)
   end
 
   private
@@ -16,22 +16,10 @@ class ForecastController < ApplicationController
   end
 
   def start_time
-    Time.parse(params.fetch(:start_time, Time.now.beginning_of_hour.to_s))
+    params[:start_time].try(:to_time) || Time.now.beginning_of_hour
   end
 
   def conditions
     CurrentWeather.find_by_station_id(station_id)
-  end
-
-  def forecasts
-    Forecast.where(zip_code: zip_code)
-      .where(time: start_time..(start_time + 7.days))
-      .order(:time).all
-  end
-
-  def hourly_forecast
-    HourlyForecast.where(zip_code: zip_code)
-      .where(time: start_time...(start_time + 1.days))
-      .order(:time).all
   end
 end

@@ -12,4 +12,10 @@ class Forecast < ActiveRecord::Base
       description.join(" ")
     end
   end
+
+  def self.for_zip_code(zip_code, start_time = nil)
+    start_time ||= Time.now.beginning_of_hour
+    where(zip_code: zip_code).where(time: start_time..(start_time + 7.days))
+      .order(:time).all
+  end
 end

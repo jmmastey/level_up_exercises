@@ -12,7 +12,6 @@ class Overlord < Sinatra::Base
 
   before do
     session[:bomb_state] ||= 'inactive'
-    session[:countdown_active] ||= false
     session[:codes] ||= {
       activation: ['1234'],
       deactivation: ['0000'],
@@ -27,8 +26,8 @@ class Overlord < Sinatra::Base
       else
         session[:countdown_active] = true
       end
-    rescue => e
-      #
+    rescue
+      session[:countdown_active] = false
     end
   end
 

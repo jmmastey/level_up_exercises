@@ -27,6 +27,6 @@ class Cohort
 	end
 
 	def confidence_interval
-		ABAnalyzer.confidence_interval(conversions, sample_size, CONFIDENCE_LEVEL) # => [-0.19295190759430525, 1.1929519075943054]
+		ABAnalyzer.confidence_interval(conversions, sample_size, CONFIDENCE_LEVEL)
 	end
 end

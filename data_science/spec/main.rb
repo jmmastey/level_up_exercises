@@ -6,5 +6,5 @@ require_relative 'split_test'
 
 
 cohorts = Parser.parse("./source_data.json") #=> [cohortA, cohortB]
-
-puts SplitTest.new(*cohorts).
+split_test =  SplitTest.new(*cohorts)
+# split_test.different?.report

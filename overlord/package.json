@@ -9,9 +9,12 @@
     "all": "npm run install_deps && npm run server"
   },
   "browser": {
-    "jquery": "./node_modules/jquery/dist/jquery.min.js"
+    "jquery": "./node_modules/jquery/dist/jquery.min.js",
+    "moment": "./node_modules/moment/moment.js"
   },
-  "browserify-shim": {},
+  "browserify-shim": {
+    "jquery": "$"
+  },
   "browserify": {
     "transform": [
       "partialify",
@@ -20,7 +23,8 @@
     ]
   },
   "dependencies": {
-    "jquery": "^2.1.1"
+    "jquery": "^2.1.1",
+    "moment": "^2.8.4"
   },
   "devDependencies": {
     "bower": "*",

@@ -15,8 +15,8 @@ class Overlord < Sinatra::Base
     session[:bomb_state] ||= 'inactive'
     session[:countdown_active] ||= false
     session[:codes] ||= {
-      :activation => ['1234'],
-      :deactivation => ['0000'],
+      activation: ['1234'],
+      deactivation: ['0000'],
     }
 
     # if the zero hour has past, set bomb_state to 'detonated'
@@ -51,14 +51,14 @@ class Overlord < Sinatra::Base
   end
 
   get '/api/state' do
-    do_json({
-      :bomb_state => session[:bomb_state],
-      :detonation => session[:detonation],
-    })
+    do_json(
+      bomb_state: session[:bomb_state],
+      detonation: session[:detonation],
+    )
   end
 
   get '/api/zero_hour' do
-    do_json(:zero_hour => session[:detonation][:zero_hour])
+    do_json(zero_hour: session[:detonation][:zero_hour])
   end
 
   post '/api/custom_code' do
@@ -66,34 +66,36 @@ class Overlord < Sinatra::Base
     code = params[:code]
 
     if register_for != 'activation' && register_for != 'deactivation'
-      do_json(:error => 'Cannot set code for method "' + register_for + '"')
+      do_json(error: 'Cannot set code for method "' + register_for + '"')
     elsif session[:codes][register_for.to_sym].include?(code)
-      do_json(:error => 'That registration code already exists')
+      do_json(error: 'That registration code already exists')
     else
       session[:codes][register_for.to_sym] << code
-      do_json(:success => true)
+      do_json(success: true)
     end
   end
 
   post '/api/state' do
-    state = session[:bomb_state]
     code = params[:pass]
-    state = params[:state]
 
-    session[:bomb_state] = 'active' if session[:codes][:activation].include?(code)
+    if session[:codes][:activation].include?(code)
+      session[:bomb_state] = 'active'
+    end
+
     if session[:codes][:deactivation].include?(code)
       session[:bomb_state] = 'inactive'
       session.delete(:detonation)
     end
-    do_json(:bomb_state => session[:bomb_state])
+
+    do_json(bomb_state: session[:bomb_state])
   end
 
   post '/api/detonate' do
     now = Time.now
     wait_seconds = params[:wait].to_i
     session[:detonation] = {
-      :zero_hour => now + wait_seconds,
-      :countdown_start => now
+      zero_hour: now + wait_seconds,
+      countdown_start: now,
     }
 
     do_json(session[:detonation])

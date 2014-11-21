@@ -10,7 +10,7 @@ get '/' do
   erb :index
 end
 
-before do
+after do
   puts '[Params]'
   p request.params
   p request.session[:bomb]
@@ -18,8 +18,8 @@ end
 
 post '/boot' do
   session.clear
-  user_activation_code = params['activation-code'] || "1234"
-  user_deactivation_code = params['deactivation-code'] || "0000"
+  user_activation_code = params["activation"] || "1234"
+  user_deactivation_code = params["deactivation"] || "0000"
   session[:bomb] = bomb(user_activation_code, user_deactivation_code)
   redirect '/bomb'
 end
@@ -29,7 +29,7 @@ get '/bomb' do
 end
 
 post '/bomb' do
-  user_code_input = params['code']
+  user_code_input = params['user-code']
   compare_code(user_code_input)
 
   erb :bomb, locals: { bomb_state: bomb_state }

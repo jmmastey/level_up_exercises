@@ -2,6 +2,13 @@ Given(/^a bomb$/) do
   @bomb = Bomb.new
 end
 
+Given(/^I have entered the activation and deactivation codes$/) do
+  visit '/'
+  fill_in('Set Activation Code', with: 4444)
+  fill_in('Set De-activation Code', with: 8888)
+  click_button("Submit New Code and Boot")
+end
+
 Then(/^I should see a code entry box$/) do
   expect(page).to have_selector('#code')
   expect(page).to have_content('Enter Code')
@@ -24,15 +31,11 @@ Then(/^I should see a boot button$/) do
 end
 
 When(/^I set the activation code to (\d+)$/) do |code|
-  within('form-group') do
-    fill_in('#set-activation-code', with: code)
-  end
+  fill_in('Set Activation Code', with: code)
 end
 
 When(/^I set the deactivation code to (\d+)$/) do |code|
-  within('form-group') do
-    fill_in('#set-deactivation-code', with: code)
-  end
+  fill_in('Set De-activation Code', with: code)
 end
 
 When(/^I click the (.+) button$/) do |button|
@@ -40,9 +43,7 @@ When(/^I click the (.+) button$/) do |button|
 end
 
 When(/^I enter (\d+) in the enter code box$/) do |code|
-  within('form-group') do
-    fill_in('#code', with: code)
-  end
+  fill_in('Enter Code', with: code)
 end
 
 Then(/^the bomb should be (.+)$/) do |state|

@@ -1,5 +1,6 @@
 class Showing < ActiveRecord::Base
   validates :time, presence: true
+  validates :time, uniqueness: { scope: :event, message: 'unique within an event' }
 
   belongs_to :event
   delegate :name, :location, :link, :image, :description, :to => :event

@@ -20,8 +20,8 @@ class User < ActiveRecord::Base
   end
 
   def add_showing(showing)
-    showings << showing unless showing.in?(showings)
-  end
+    showings << showing unless showing.in?(showings) 
+ end
 
   def remove_showing(showing)
     showings.delete(showing)
@@ -29,10 +29,6 @@ class User < ActiveRecord::Base
 
   def has_showing_in?(event)
     showings.any? { |showing| showing.in?(event.showings) }
-  end
-
-  def sorted_showings
-    Showing.sort_by_time(showings)
   end
 
   private

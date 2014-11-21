@@ -3,20 +3,11 @@ require 'models/event_helper'
 
 RSpec.describe Event, :type => :model do
   let(:event) { create_event('Party', 'Everywhere', 'www.link.com') }
-  let(:showing) { event.add_showing(time: DateTime.parse('20141001')) }
-
-  let(:another_event) { new_event('Party', 'Everywhere', 'www.link.com') }
-  let(:another_showing) { another_event.add_showing(time: DateTime.parse('20141002')) }
-  let(:add_another_event) do
-    showing
-    another_showing
-    another_event.add_to_db
+  let(:multiple_events) do
+    create_event('Party-B', 'Everywhere', 'www.link.com')
+    create_event('Party-C', 'Everywhere', 'www.link.com')
+    create_event('Party-A', 'Everywhere', 'www.link.com')
   end
-
-  let(:showing_times) { [DateTime.parse('20141001'), DateTime.parse('20141002'), DateTime.parse('20141003')] }
-  let(:event_with_showings) { create_event('Party', 'Everywhere', 'www.link.com', showing_times) }
-  let(:duplicate_time_showing) { event.add_showing(time: showing.time) }
-  let(:bad_time_showing)  { event.add_showing }
 
   it 'responds to name' do
     expect(event).to respond_to(:name)
@@ -42,21 +33,10 @@ RSpec.describe Event, :type => :model do
     expect(event).to respond_to(:description)
   end
 
-  it 'can add a showing' do
-    expect{ showing }.to change { event.showings.count }.by(1)
-  end
-
-  it 'can add a showing to an existing identical event' do
-    add_another_event
-    expect(event).to have(2).showings
-  end
-
-  it 'will not create a duplicate showing' do
-    showing
-    expect{ duplicate_time_showing }.not_to change { event.showings.count }
-  end
-
-  it 'will not create an invalid showing' do
-    expect{ bad_time_showing }.not_to change { event.showings.count }
+  it 'can sort by event name' do
+    multiple_events
+    expect(Event.all.sorted[0].name).to eq('Party-A')
+    expect(Event.all.sorted[1].name).to eq('Party-B')
+    expect(Event.all.sorted[2].name).to eq('Party-C')
   end
 end

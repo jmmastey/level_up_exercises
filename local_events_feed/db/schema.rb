@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110002944) do
+ActiveRecord::Schema.define(version: 20141121033639) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20141110002944) do
     t.string   "image"
     t.string   "description"
   end
+
+  add_index "events", ["name", "location", "link"], name: "index_events_on_name_and_location_and_link", unique: true
 
   create_table "scrape_times", force: true do |t|
     t.string   "source"

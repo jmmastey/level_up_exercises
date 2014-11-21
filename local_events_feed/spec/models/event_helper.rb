@@ -16,7 +16,7 @@ end
 
 def create_event(name, location, link, showing_times = [])
   event = Event.create(name: name, location: location, link: link)
-  showing_times.each { |time| event.add_showing(time: time) }
+  showing_times.each { |time| event.showings.create(time: time) }
   event
 end
 

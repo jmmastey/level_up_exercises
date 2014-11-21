@@ -7,11 +7,12 @@ module TheatreInChicago
     QUERY = "searchresults.php?"
     MISC_OPTIONS = "&txtTitle=&txtGenre=&txtArea=&txtDateF=null&txtDateT=null&QFdate=1"
 
-    def self.get_events(time)
+    def self.add_events(time)
       uri = construct_uri(time)
       node = Nokogiri::HTML(open(uri))
-      parser = TheatreInChicago::PageParser.new(node)
-      parser.events.map { |chicago_event| chicago_event.to_event_model }
+      TheatreInChicago::PageParser.new(node).events.each do |event|
+        ShowingsHelper.add_theatre_in_chicago(event)
+      end
     end
 
     private

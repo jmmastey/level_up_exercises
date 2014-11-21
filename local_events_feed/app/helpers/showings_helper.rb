@@ -1,3 +1,5 @@
+require 'assets/theatre_in_chicago/event'
+
 module ShowingsHelper
   def self.one_day_only?(showings)
     return false unless showings.present?
@@ -17,5 +19,20 @@ module ShowingsHelper
     return 'No Showings' unless showings.present?
     return "#{showings.count} Showing" if showings.count == 1
     "#{showings.count} Showings"
+  end
+
+  def self.add_theatre_in_chicago(tic_event)
+    event = find_model_event(tic_event)
+    tic_event.showings.each do |time|
+      event.showings.create(time: time)
+    end
+  end
+
+  private
+
+  def self.find_model_event(tic_event)
+    ::Event.find_or_create_by(name: tic_event.name,
+                              location: tic_event.location,
+                              link: tic_event.link)
   end
 end

@@ -17,7 +17,6 @@ RSpec.describe TheatreInChicago::Event, :type => :asset do
 
   let(:cleaned_event) { setted_event.clone.clean }
   let(:other_event) { setted_event.clone }
-  let(:model_event) { cleaned_event.to_event_model }
 
   it 'is not complete when blank' do
     expect(blank_event).to_not be_complete
@@ -32,16 +31,7 @@ RSpec.describe TheatreInChicago::Event, :type => :asset do
   end
 
   it 'matches another event that has identical fields' do
-    expect(setted_event.match?(other_event))
-  end
-
-  it 'converts to a valid Event model' do
-    expect(model_event).to be_valid
-    expect(model_event.name).to eq("Party")
-    expect(model_event.location).to eq("Everywhere")
-    expect(model_event.link).to eq("http://www.event.com")
-    expect(model_event.image).to eq("http://www.event.com/picture.jpg")
-    expect(model_event.description).to eq("A nice description")
+    expect(setted_event).to eq(other_event)
   end
 
   it 'adds a single show to the event show' do

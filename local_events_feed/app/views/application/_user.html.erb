@@ -17,7 +17,7 @@
 			<span class="time"><%= local_time_view.pretty_time %></span>
 		  </li>
 		  <li>
-			<span class="name"><%= link_to showing.name.truncate(50), showing.event %></span>
+			<span class="name"><%= link_to showing.name.truncate(50), event_path(showing.event) %></span>
 		  </li>
 		  <li>
 			<span class="location"><%= showing.location.truncate(50) %></span>

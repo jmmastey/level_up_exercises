@@ -23,8 +23,15 @@ module TheatreInChicago
       "#{name}, #{location}, #{link}, #{pretty_image}"
     end
     
-    # Operator==
-    def match?(other)
+    def to_h
+      { name: self.name, 
+        location: self.location, 
+        link: self.link, 
+        image: self.image,
+        description: self.description }
+    end
+
+    def ==(other)
       name == other.name && location == other.location && link == other.link # Skip Image, Description
     end
 
@@ -36,21 +43,7 @@ module TheatreInChicago
       self
     end
 
-    def to_event_model
-      event = ::Event.new(to_h)
-      showings.each { |showing| event.add_showing(time: showing) }
-      event
-    end
-
     private
-
-    def to_h
-      { name: self.name, 
-        location: self.location, 
-        link: self.link, 
-        image: self.image,
-        description: self.description }
-    end
 
     def pretty_image
       return 'no-image' unless image.present?

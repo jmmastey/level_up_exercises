@@ -17,6 +17,19 @@ RSpec.describe ShowingsHelper, :type => :helper do
                            DateTime.parse('20141003T190000')] }
   let(:multi_day_showings) { create_event('Party', 'Everywhere', "www.link.com", multi_day_times).showings }
 
+  let(:model_event) { one_showing.event }
+
+  let(:tic_event) do
+    tic_event = TheatreInChicago::Event.new
+    tic_event.name = 'Party'
+    tic_event.location = 'Everywhere'
+    tic_event.link = 'www.link.com'
+    tic_event.showings = multi_day_times
+    tic_event
+  end
+
+  let(:add_tic_event) { ShowingsHelper.add_theatre_in_chicago(tic_event) }
+  let(:find_event) { Event.find_by(name: 'Party', location: 'Everywhere', link: 'www.link.com') }
 
 
   it 'can show a multi-day showings date-range' do
@@ -49,5 +62,16 @@ RSpec.describe ShowingsHelper, :type => :helper do
 
   it 'can tell if a list of showings are on one day only' do
     expect(ShowingsHelper.one_day_only?(multi_day_showings)).to be false
+  end
+
+  it 'can add a TheatreInChicago event' do
+    add_tic_event
+    expect(find_event.showings.size).to eq(3)
+  end
+
+  it 'can add a TheatreInChicago event showings to an existing event' do
+    one_showing
+    add_tic_event
+    expect(find_event.showings.size).to eq(3)
   end
 end

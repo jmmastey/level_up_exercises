@@ -1,7 +1,7 @@
 <div id='all-events'>
   <div class="table-container">
 	<table>
-	  <% Event.sort_by_name.each do |event| %>
+	  <% Event.all.sorted.each do |event| %>
 	  <% member = current_user.has_showing_in?(event) %>
 	  <% member_class = member ? "member" : "non-member" %>
 	  <tr>

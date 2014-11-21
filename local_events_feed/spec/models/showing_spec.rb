@@ -3,7 +3,7 @@ require_relative 'event_helper'
 
 RSpec.describe Showing, :type => :model do
   let(:event) { create_event("Party A", "North Side", "www.link.com") }
-  let(:showing) { event.add_showing(time: DateTime.parse("20141001T093000-0500")) }
+  let(:showing) { event.showings.create(time: DateTime.parse("20141001T093000-0500")) }
 
   let(:showing_times) { [DateTime.parse('20141003'), DateTime.parse('20141001'), DateTime.parse('20141002')] }
   let(:event_with_showings) { create_event('Party', 'Everywhere', "www.link.com", showing_times) }

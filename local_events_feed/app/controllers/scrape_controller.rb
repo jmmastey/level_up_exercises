@@ -34,8 +34,7 @@ class ScrapeController < ApplicationController
   def scrape_for_new_events_in(upcoming, source)
     return unless scraper = SCRAPERS[source]
     future = upcoming.days.from_now
-    events = scraper.get_events(future)
-    events.each(&:add_to_db)
+    scraper.add_events(future)
   end
 
   def get_scrape_time_for(source)

@@ -6,7 +6,8 @@
   "scripts": {
     "install_deps": "npm install && bundle install",
     "server": "grunt up",
-    "all": "npm run install_deps && npm run server"
+    "tests": "cucumber",
+    "all": "npm run install_deps && npm run tests && npm run server"
   },
   "browser": {
     "jquery": "./node_modules/jquery/dist/jquery.min.js",

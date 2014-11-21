@@ -2,22 +2,6 @@ Given(/^a bomb$/) do
   @bomb = Bomb.new
 end
 
-Given(/^the default activation and deactivation codes$/) do
-  visit '/'
-  click_button("Boot Bomb")
-end
-
-Given(/^user activation and deactivation codes$/) do
-  visit '/'
-  within('form-group') do
-    fill_in('#set-activation-code', with: 4444)
-  end
-  within('form-group') do
-    fill_in('#set-deactivation-code', with: 8888)
-  end
-  click_button("Submit New Code and Boot")
-end
-
 Then(/^I should see a code entry box$/) do
   expect(page).to have_selector('#code')
   expect(page).to have_content('Enter Code')

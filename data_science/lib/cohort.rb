@@ -12,14 +12,13 @@ class Cohort
     @visitors.length
   end
 
-  # Refactor to allow multiple arguments?
-  def add(visitor)
-    @visitors << visitor
+  def add(visitors)
+    @visitors += Array(visitors)
     self
   end
 
   def conversions
-    @visitors.select { |member| member.result == 1 }.length
+    @visitors.count { |visitor| visitor.result == 1 }
   end
 
   def conversion_percentage

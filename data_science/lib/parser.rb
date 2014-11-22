@@ -11,18 +11,11 @@ module Parser
   private
 
   def self.create_visitors(data)
-    data.inject([]) { |memo, obj| memo << Visitor.new(obj) }
+    data.map { |obj| Visitor.new(obj) }
   end
 
   def self.seperate_into_cohorts(visitors)
     grouped = visitors.group_by(&:cohort)
-    [build_cohort(grouped['A']), build_cohort(grouped['B'])]
-  end
-
-  def self.build_cohort(visitors)
-    cohort = Cohort.new
-    # REFACTOR
-    visitors.each { |visitor| cohort.add(visitor) }
-    cohort
+    [Cohort.new(*grouped['A']), Cohort.new(*grouped['B'])]
   end
 end

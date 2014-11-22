@@ -12,7 +12,7 @@ class SplitTest
   end
 
   def chisquare_p_value
-    tester.chisquare_p
+    tester.chisquare_p.round(4)
   end
 
   private

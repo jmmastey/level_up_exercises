@@ -2,8 +2,10 @@ require_relative 'spec_helper'
 require_relative '../lib/parser'
 
 describe Parser do
-	let(:parser) { Parser.new}
-	it "parses a JSON file into cohorts of visitors" do
+  let(:Parser) { Class.new { include Parser } }
 
-	end
+  it "parses a JSON file into two cohorts" do
+    expect(Parser.parse("./source_data.json")[0].class).to eq(Cohort)
+    expect(Parser.parse("./source_data.json")[1].class).to eq(Cohort)
+  end
 end

@@ -7,8 +7,8 @@ body {
   width: 100px ;
 }
 /*BANNER CONTENTS*/
-/*
-.search-dropdown{
+
+/*.search-dropdown-button{
  border: 1px solid;
  width: 10px;
  height: 28px;
@@ -18,34 +18,33 @@ body {
 };*/
 
 .container{
-    /*display: none;*/
-    width: 600px;
-    background-color: white;
-    font-family: arial;
-    font-size: 80%;
-    color: grey;
-    border: 1px solid grey;
-    position: absolute;
-    top:50px;
-    left: 173px;
-    padding: 10px;
-    z-index: 1;
-  }
+  display: none;
+  width: 600px;
+  background-color: white;
+  font-family: arial;
+  font-size: 80%;
+  color: grey;
+  border: 1px solid grey;
+  position: absolute;
+  top:50px;
+  left: 173px;
+  padding: 10px;
+  z-index: 1;
+}
 
 label{
-   /*  display:block; */
-    clear:left;
-    display: inline-block;
+  clear:left;
+  display: inline-block;
 }
 
 .searchparams{
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .searchparams input[type="text"]{
-    margin-bottom: 10px;
-    padding: 3px;
-    width: 300px;
+  margin-bottom: 10px;
+  padding: 3px;
+  width: 300px;
  }
 
 .button{
@@ -62,23 +61,22 @@ label{
   color: black;
 }
 
-input[type=checkbox]{
-}
-
 #allmail{
-   position: absolute;
+  position: absolute;
   top:5px;
   left:50px;
 }
+
 #arrange{
-    display: inline-block;
+  display: inline-block;
 }
 
 .arrange input{
-    width: 150px;
+  width: 150px;
 }
+
 #query{
-    background-color: #4d90fe;
+  background-color: #4d90fe;
 }
 
 .banner {
@@ -88,7 +86,8 @@ input[type=checkbox]{
   border: 1px solid;
   color: #F2F2F0;
   min-width: 750px;
-  padding: 15px
+  padding: 15px;
+  height:27px;
 }
 
 .banner-textbox {
@@ -103,8 +102,6 @@ input[type=checkbox]{
 }
 
 .pmail-search {
-  height:28px;
-  width:60px;
   padding:10px;
   background-color: #4d90fe;
   border-bottom-right-radius:4px;
@@ -112,17 +109,20 @@ input[type=checkbox]{
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   border: 1px solid #4d90fe;
   width: 60px;
-  height: 28px;
+  height: 6px;
   margin-left: 0px;
-/*  position: relative;
-  top: 20px;
-  left: 3px;*/
+  position: relative;
+  top: 4px;
+  left:781px;
 }
+
 .address{
   position: absolute;
-  top: 20px;
+  top: 21px;
   right: 40px;
-  font-size: 130%;
+  font-size: 91%;
+  color: black;
+  font-family: sans-serif;
 }
 
 .app-image{
@@ -158,16 +158,21 @@ input[type=checkbox]{
   padding: 0px;
 }
 
+.search-wrapper{
+
+}
+
 /*NAV-BANNER*/
-.nav_banner {
+
+.nav-banner {
   border: 1px solid;
   color: #c9c9c9;
-  height: 35px;
+  height: 30px;
   padding: 10px;
   min-width: 750px;
 }
 
-span.checkbox{
+.checkbox{
   width: 1.2em;
   height: 1.2em;
 }
@@ -187,20 +192,6 @@ span.checkbox{
   width: 55px;
 }
 
-.select-button {
-  background-color: #f4f4f4;
-  border: 1px solid #c9c9c9;
-  border-radius: 3px;
-  height: 30px;
-  margin-left: 10px;
-  margin-bottom: 5px;
-  position: absolute;
-  top: 75px;
-  left: 165px;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
-  width: 55px;
-}
-
 .boxmenu {
   position: absolute;
   top: 120%;
@@ -209,8 +200,11 @@ span.checkbox{
   background-color: white;
   text-align: center;
   font-size: 120%;
+  z-index: 1;
+  border: 1px solid;
+  display: none;
   }
-
+  
 .boxmenu ul{
   padding: 0px;
   margin: 5px;
@@ -220,34 +214,35 @@ span.checkbox{
 }
 
 .refresh-button {
-  background-color: #f4f4f4;
-  border: 1px solid #c9c9c9;
-  border-radius: 3px;
-  height: 30px;
-  margin-left: 90px;
-  position: absolute;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   left:160px;
-  top:75px;
-  width: 55px;
   margin-bottom: 10px;
-  background-image: url("../img/glyphicons_085_repeat.png");
-  background-repeat: no-repeat;
+  margin-left: 109px;
  }
 
 .more-button {
+  left: 315px;
+  margin-bottom: 15px;
+  margin-left: 50px;
+}
+
+
+.select-button {
+  left: 165px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+.all-button{
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
   border-radius: 3px;
   height: 30px;
-  left: 315px;
-  top: 75px;
-  margin-bottom: 15px;
-  margin-left: 10px;
+  width: 72px;
   position: absolute;
+  top: 75px;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
-  width: 55px;
 }
+
 
 span.morespan{
   color:#444;
@@ -270,9 +265,12 @@ span.morespan{
   position: absolute;
   top: 75;
   right: 50px;
-  background-image: url("../img/glyphicons_136_cogwheel.png");
   background-repeat:no-repeat;
   background-position: center;
+  z-index: 1;
+ }
+ .settings-button img{
+  margin: 5px;
  }
 
 .newer-button {
@@ -346,11 +344,6 @@ button span:hover:after {
   color:black;
 }
 
-.boxmenu{
-  border: 1px solid;
-  display: none;
-  }
-
 .boxmenu ul{
   padding: none;
 }
@@ -366,31 +359,37 @@ button span:hover:after {
   color:black;
   font-family: arial;
   background-color: white;
-
+  z-index: 1;
 }
 
 .mail-dropdown{
   display: none;
   border: 1px solid;
-  width:100px;
+  width:119px;
   font-family: arial;
   color:black;
   background-color: white;
-  z-index: 3;
+  z-index: 2;
 }
 
 .mail-dropdown ul{
  list-style-type: none;
- z-index: auto;
+ padding: 0px;
+}
+
+.mail-dropdown ul li{
+ text-align: center;
 }
 
 .box{
-   display:none;
-   position: absolute;
-   top: 120%;
-   right: 0px;
-   border: 1px solid grey;
-   width:200px;
+  display:none;
+  position: absolute;
+  top: 120%;
+  right: 0px;
+  border: 1px solid grey;
+  width:200px;
+  background-color: white;
+/*  z-index: 1;*/
  }
 
 .box ul{
@@ -398,44 +397,48 @@ button span:hover:after {
 }
 
 .box ul li{
-list-style-type: none;
-font-family:arial;
-font-size: 80%;
-background-color:white;
-padding: none;
-color: black;
-text-align: left;
+  list-style-type: none;
+  font-family:arial;
+  font-size: 80%;
+  background-color:white;
+  padding: none;
+  color: black;
+  text-align: left;
 }
-  /*MAIN CONTENT*/
 
+/*MAIN CONTENT*/
 
 .main-content{
- /*position: absolute;
- top: 100px;
- left: 500px;*/
  display: inline-block;
  width: 85%;
+ font-family: Arial;
+ font-size: 90%;
+ padding-top: 0px;
+/* border: 1px solid blue;*/
+ position: absolute;
+ top:0px;
+ left: 172px;
 }
 
 .main-parent{
   position: relative;
   width: 1400px;
-   }
+  padding-top: 0px;
+ /* border: 1px dashed orange;*/
+}
 
 .main_content div{
- /*border-bottom: 1px solid #c9c9c9;*/
- font-family: Arial;
- font-size: 90%;
- display: inline-block;
- width: 85%;
- margin-bottom: 10px;
+  display: inline-block;
+  width: 85%;
+  margin-bottom: 10px;
 }
 
 .name{
   font-weight: bold;
   float: left;
- text-align: left;
- width: 25%;
+  text-align: left;
+  width: 25%;
+  border-bottom: 1px solid #c9c9c9;
 }
 
 .subject{
@@ -443,27 +446,24 @@ text-align: left;
   float: left;
   text-align: left;
   width: 25%;
+  border-bottom: 1px solid #c9c9c9;
 }
 
 .message {
-  color: grey;
+  color: gray;
   text-align: left;
   float: left;
   width: 25%;
+  border-bottom: 1px solid #c9c9c9;
 }
 
 .timestamp{
   font-weight: bold;
   float: left;
   width: 25%;
+  border-bottom: 1px solid #c9c9c9
 }
 /*SIDE BAR*/
-
-/*.active {
-  color: #dd4b39;
-  font-weight: bold;
-}
-*/
 
 .float-bar {
   border-color: #dd4b39;
@@ -483,13 +483,13 @@ text-align: left;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   width: 115px;
   z-index: 2;
-  }
+}
 
 nav ul {
   list-style-type: none;
   padding-left: 0px;
   width: 186px;
-  z-index: auto;
+ 
 }
 
 nav ul li {
@@ -508,48 +508,30 @@ nav ul li div {
   font-family: Arial;
   font-size: 80%;
   color:black;
-  display: inline-block;
-  }
+  position: fixed;
+  width:148px;
+ }
 
 a{
   text-decoration: none;
   color:black;
   background-color: transparent;
 }
+
 a:visited{
   text-decoration: none;
 }
+
 a:active{
   text-decoration: none;
   color: black;
 }
 
- li:hover{
-   background-color: #F2F2F0;
- }
+li:hover{
+  background-color: #F2F2F0;
+}
 
 .menu li:hover{
   background-color: white;
   background-color: #F2F2F0;
 }
-/*.firtier img{
- display: inline-block;
-}
-
-.sectier{
- display: inline-block;
- float:left;
-}
-*/
-/*.firtier {
-display: inline-block;
-font-family: Arial;
-font-size: 100%;
-}
-
-.firtier p{
-  margin: 0px;
-}
-*/
-
-

@@ -29,7 +29,8 @@ Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long
 
 ### Technical Notes
 
-1. Your application will most likely run in the console. Ideally the application will have a simple ascii menu and prompts the user for input. For example your application might work like this:
+#### Your Application
+Your application will most likely run in the console and have an interactive prompt for user input. For example your application might work like this:
 ```
 dev-666:~/projects/level_up_exercises/dino_catalog $ ruby ./dinodex.rb
 
@@ -55,6 +56,8 @@ Dinodex - Enter command > carnivores
 
 ```
 
-This is just an example, you may choose to do something entirely different.
+This is just an example - you may choose to do something entirely different.
 
-2. You will probably want to use the [CSV](http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html) class to help with parsing the data-files.
+#### Parsing CSV Files
+
+You will probably want to use the [CSV](http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html) class to help with parsing the data-files.

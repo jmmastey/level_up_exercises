@@ -1,5 +1,5 @@
 .page-header
-  %h1 Stations
+  %h2 Stations
 
 - if @stations && !@stations.empty?
   = render(partial: 'list', locals: { regions: @regions })

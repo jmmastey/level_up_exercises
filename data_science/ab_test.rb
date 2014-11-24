@@ -24,10 +24,7 @@ class ABTest
   end
 
   def to_s
-    SEPARATOR + "\n" +
-      @cohort_collection.to_s + "\n" +
-      SEPARATOR + "\n" +
-      decision + "\n"
+    "#{SEPARATOR}\n#{@cohort_collection}\n#{SEPARATOR}\n#{decision}\n"
   end
 
   private

@@ -7,12 +7,12 @@ describe Cohort do
       expect { Cohort.new }.to raise_error ArgumentError
     end
 
-    it "raises error when there are more that one argument" do
-      expect { Cohort.new('A', 'B') }.to raise_error ArgumentError
-    end
+    # it "raises error when there are more that one argument" do
+    #   expect { Cohort.new('A', 'B') }.to raise_error ArgumentError
+    # end
 
-    it "raises error when the first argument is not a string" do
-      expect { Cohort.new(5) }.to raise_error ArgumentError
+    it "raises error when the first argument is nil" do
+      expect { Cohort.new(nil) }.to raise_error ArgumentError
     end
   end
 
@@ -41,11 +41,11 @@ describe Cohort do
     end
 
     it "calculates correct low with 95% confidence" do
-      expect(cohort.confidence_interval[0]).to be_within(1e-10).of(0.00)
+      expect(cohort.confidence_interval[:lower]).to be_within(1e-10).of(0.00)
     end
 
     it "calculates correct high with 95% confidence" do
-      expect(cohort.confidence_interval[1]).to be_within(1e-10).of(0.00)
+      expect(cohort.confidence_interval[:upper]).to be_within(1e-10).of(0.00)
     end
 
     it "outputs the stats of the cohort" do
@@ -53,11 +53,9 @@ describe Cohort do
     end
   end
 
-  context "when successes added" do
+  context "when initialized with successes only" do
     let(:cohort) do
-      cohort = Cohort.new('A')
-      cohort.successes = 4
-      cohort
+      cohort = Cohort.new('A', 4)
     end
 
     it "increases number of successes" do
@@ -73,15 +71,13 @@ describe Cohort do
     end
 
     it "displays stats" do
-      expect(cohort.to_s).to eq("A | No. of Samples:     4, success_ratio: 100.00%, 95% confidence interval: (100.00% - 100.00%)")
+      expect(cohort.to_s).to eq("A | samples:     4, success ratio: 100.00%, 95% confidence interval: (100.00% - 100.00%)")
     end
   end
 
-  context "when failures added" do
+  context "when initialized with failures only" do
     let(:cohort) do
-      cohort = Cohort.new('A')
-      cohort.failures = 5
-      cohort
+      cohort = Cohort.new('A', 0, 5)
     end
 
     it "increases number of failures" do
@@ -97,16 +93,13 @@ describe Cohort do
     end
 
     it "displays stats" do
-      expect(cohort.to_s).to eq("A | No. of Samples:     5, success_ratio: 0.00%, 95% confidence interval: (0.00% - 0.00%)")
+      expect(cohort.to_s).to eq("A | samples:     5, success ratio: 0.00%, 95% confidence interval: (0.00% - 0.00%)")
     end
   end
 
-  context "when both successes and failures added" do
+  context "when initialized with both successes and failures" do
     let(:cohort) do
-      cohort = Cohort.new('A')
-      cohort.failures = 35
-      cohort.successes = 40
-      cohort
+      cohort = Cohort.new('A', 40, 35)
     end
 
     it "increases number of size" do
@@ -122,17 +115,17 @@ describe Cohort do
     end
 
     it "calculates correct low with 95% confidence" do
-      expect(cohort.confidence_interval[0]).to be_within(1e-10)
+      expect(cohort.confidence_interval[:lower]).to be_within(1e-10)
         .of(0.42042442872107194)
     end
 
     it "calculates correct high with 95% confidence" do
-      expect(cohort.confidence_interval[1]).to be_within(1e-10)
+      expect(cohort.confidence_interval[:upper]).to be_within(1e-10)
         .of(0.6462422379455947)
     end
 
     it "displays stats" do
-      expect(cohort.to_s).to eq("A | No. of Samples:    75, success_ratio: 53.33%, 95% confidence interval: (42.04% - 64.62%)")
+      expect(cohort.to_s).to eq("A | samples:    75, success ratio: 53.33%, 95% confidence interval: (42.04% - 64.62%)")
     end
   end
 end

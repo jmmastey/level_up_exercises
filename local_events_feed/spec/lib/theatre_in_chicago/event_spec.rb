@@ -18,14 +18,6 @@ RSpec.describe TheatreInChicago::Event, :type => :asset do
   let(:cleaned_event) { setted_event.clone.clean }
   let(:other_event) { setted_event.clone }
 
-  it 'is not complete when blank' do
-    expect(blank_event).to_not be_complete
-  end
-
-  it 'is complete when all fields are set' do
-    expect(setted_event).to be_complete
-  end
-
   it 'has a clean location when cleaned' do
     expect(cleaned_event.location).to eq("Everywhere")
   end

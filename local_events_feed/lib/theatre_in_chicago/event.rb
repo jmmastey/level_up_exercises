@@ -14,11 +14,6 @@ module TheatreInChicago
       @showings = []
     end
 
-    # Business
-    def complete?
-      name.present? && location.present? && link.present?
-    end
-
     def to_s
       "#{name}, #{location}, #{link}, #{pretty_image}"
     end

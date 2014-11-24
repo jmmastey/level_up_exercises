@@ -10,9 +10,9 @@ class QuizActivityDecorator < PartialDecorator
   end
 
   def edit_question_paths
-    all_edit_question_paths.merge({
-      QuizActivity.find(object.id).question.decorate.type => 'edit'
-    })
+    all_edit_question_paths.merge(
+      QuizActivity.find(object.id).question.decorate.type => 'edit',
+    )
   end
 
   def next_page_text

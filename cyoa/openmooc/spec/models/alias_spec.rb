@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Alias, :type => :model do
+RSpec.describe Alias, type: :model do
 
   let(:test_case_1) do
     'apple'
@@ -32,7 +32,7 @@ RSpec.describe Alias, :type => :model do
     it 'returns the aliases from a query string' do
       VCR.use_cassette 'alias_query/1', record: :new_episodes do
         expect(
-          described_class.query(test_case_1).map(&:text)
+          described_class.query(test_case_1).map(&:text),
        ).to eq(test_case_1_result)
       end
     end

@@ -1,8 +1,8 @@
 class MultipleChoiceQuestionsController < ApplicationController
-  before_action :set_section, only: [:new, :create_for_section ]
-  before_action :set_quiz_activity, only: [:new, :update_for_quiz_activity ]
-  before_action :set_question, only: [ :submit_answer, :edit, :update ]
-  before_action :set_answer_submission, only: [ :submit_answer ]
+  before_action :set_section, only: [:new, :create_for_section]
+  before_action :set_quiz_activity, only: [:new, :update_for_quiz_activity]
+  before_action :set_question, only: [:submit_answer, :edit, :update]
+  before_action :set_answer_submission, only: [:submit_answer]
 
   def new
     @question = MultipleChoiceQuestion.new(page_content: PageContent.new)
@@ -13,7 +13,7 @@ class MultipleChoiceQuestionsController < ApplicationController
 
   def create_for_section
     @question = MultipleChoiceQuestion.new(question_params)
-    @question.assign_attributes({ quiz_activity: QuizActivity.new(section: @section) })
+    @question.assign_attributes(quiz_activity: QuizActivity.new(section: @section))
     @question.save
     redirect_to @question.page
   end
@@ -51,7 +51,7 @@ class MultipleChoiceQuestionsController < ApplicationController
   end
 
   def incorrect_response
-    flash[:danger] = 
+    flash[:danger] =
       "Incorrect response '#{@answer_submission}'"
     redirect_to @question.quiz_activity.page
   end
@@ -79,7 +79,7 @@ class MultipleChoiceQuestionsController < ApplicationController
     params.require(:multiple_choice_question)
       .permit(
         answers_attributes: [:id, :text, :correct, :_destroy],
-        page_content_attributes: [ :content ],
+        page_content_attributes: [:content],
       )
   end
 end

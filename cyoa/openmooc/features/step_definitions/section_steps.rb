@@ -1,6 +1,4 @@
-def section
-  @section
-end
+attr_reader :section
 
 def section_with_activities
   @section ||= FactoryGirl.create(:section_with_activities)

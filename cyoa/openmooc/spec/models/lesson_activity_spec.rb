@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe LessonActivity, :type => :model do
+RSpec.describe LessonActivity, type: :model do
   subject(:activity) do
     FactoryGirl.create(:lesson_activity_with_content)
   end

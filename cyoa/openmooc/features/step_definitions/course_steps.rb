@@ -16,7 +16,7 @@ end
 
 def course_to_params(course)
   course.slice(:title, :description, :subject, :topic)
-  .inject({}) do |params, (key, value)|
+    .inject({}) do |params, (key, value)|
     params.tap { |p| p[key.capitalize] = value }
   end
 end
@@ -32,19 +32,19 @@ Given(/^a course with one section$/) do
 end
 
 Given(/^I am on a course page$/) do
-    visit(course_path(course))
+  visit(course_path(course))
 end
 
 Given(/^I am on an edit course page$/) do
-    visit(edit_course_path(course))
+  visit(edit_course_path(course))
 end
 
 Given(/^I am on the edit sections page$/) do
-    visit(edit_sections_course_path(course))
+  visit(edit_sections_course_path(course))
 end
 
 Given(/^I am on the courses page$/) do
-    visit(courses_path)
+  visit(courses_path)
 end
 
 ### WHEN ###

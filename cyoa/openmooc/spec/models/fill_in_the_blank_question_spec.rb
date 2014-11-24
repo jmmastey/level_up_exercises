@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FillInTheBlankQuestion, :type => :model do
+RSpec.describe FillInTheBlankQuestion, type: :model do
   subject(:test_question) do
     FactoryGirl.build(:fill_in_the_blank_question_with_answers)
   end

@@ -13,8 +13,8 @@ def sign_up_inputs(user)
 end
 
 def sign_in_inputs(user)
- { Email: user.email,
-   Password: user.password }
+  { Email: user.email,
+    Password: user.password }
 end
 
 def change_password_inputs(user, new_password)
@@ -106,7 +106,7 @@ When(/^I enter invalid sign in credentials$/) do
 end
 
 When(/^I visit the sign in page$/) do
-    visit(new_user_session_path)
+  visit(new_user_session_path)
 end
 
 ###### THEN ######
@@ -132,5 +132,5 @@ Then(/^I should be on the sign up page$/) do
 end
 
 Then(/^I should be on the sign up confirmation page$/) do
-    pending # express the regexp above with the code you wish you had
+  pending # express the regexp above with the code you wish you had
 end

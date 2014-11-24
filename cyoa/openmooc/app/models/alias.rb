@@ -6,7 +6,7 @@ class Alias < ActiveRecord::Base
     return [] if best_topic.nil?
     aliases = full_topic(best_topic.id).property('/common/topic/alias')
     Array(aliases).map do |_alias|
-      self.new(text: _alias.value)
+      new(text: _alias.value)
     end
   end
 

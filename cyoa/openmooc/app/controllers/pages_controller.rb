@@ -1,10 +1,9 @@
 class PagesController < ApplicationController
-  before_action :set_page, only: [ :show, :move_higher, :move_lower ]
+  before_action :set_page, only: [:show, :move_higher, :move_lower]
   respond_to :html
 
   def show
   end
-
 
   def move_higher
     @page.move_higher

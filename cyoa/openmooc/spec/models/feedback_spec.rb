@@ -10,7 +10,6 @@ describe Feedback do
     described_class.new(subject: 'hello')
   end
 
-
   let(:feedback_blank_fields) do
     described_class.new(message: '', subject: '')
   end

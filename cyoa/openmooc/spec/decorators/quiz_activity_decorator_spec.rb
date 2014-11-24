@@ -10,7 +10,7 @@ RSpec.describe QuizActivityDecorator do
       'Multiple choice question' =>
       update_multiple_choice_question_quiz_activity_path(activity.id),
       'Fill in the blank question' =>
-      'edit'
+      'edit',
     }
   end
 

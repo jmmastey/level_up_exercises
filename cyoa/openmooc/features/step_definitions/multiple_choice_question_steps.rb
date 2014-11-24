@@ -37,5 +37,5 @@ end
 Then(/^I should see blank multiple choice question content$/) do
   expect(page).to have_content('Question')
   expect(page.find('#multiple_choice_question_page_content_attributes_content'))
-  .to have_content('')
+    .to have_content('')
 end

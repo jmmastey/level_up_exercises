@@ -1,6 +1,5 @@
 class AliasesController < ApplicationController
-  before_action :set_question, only: [ :find ]
-
+  before_action :set_question, only: [:find]
 
   def find
     @aliases = Alias.query(params[:q])

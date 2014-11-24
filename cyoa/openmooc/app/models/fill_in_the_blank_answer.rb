@@ -3,7 +3,7 @@ class FillInTheBlankAnswer < ActiveRecord::Base
   after_initialize :init
 
   def self.from_alias(_alias)
-    self.new(text: _alias['text'])
+    new(text: _alias['text'])
   end
 
   def init

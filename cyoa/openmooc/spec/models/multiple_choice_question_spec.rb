@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MultipleChoiceQuestion, :type => :model do
+RSpec.describe MultipleChoiceQuestion, type: :model do
   subject(:test_question) do
     FactoryGirl.build(:multiple_choice_question_with_answers)
   end

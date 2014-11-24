@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe QuizActivity, :type => :model do
+RSpec.describe QuizActivity, type: :model do
   subject(:quiz_activity) do
     described_class.new
   end

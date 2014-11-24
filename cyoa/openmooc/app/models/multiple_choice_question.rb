@@ -10,7 +10,7 @@ class MultipleChoiceQuestion < ActiveRecord::Base
 
   def init
     self.page_content ||= PageContent.new
-    self.answers = [ correct_answer, incorrect_answer ] if answers.empty?
+    self.answers = [correct_answer, incorrect_answer] if answers.empty?
   end
 
   def correct_answer?(text)

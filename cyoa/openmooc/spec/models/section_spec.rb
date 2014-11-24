@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Section, :type => :model do
+RSpec.describe Section, type: :model do
   subject(:section) do
     FactoryGirl.create(:section_with_pages)
   end
@@ -31,9 +31,9 @@ RSpec.describe Section, :type => :model do
 
   describe '#update' do
     it 'sets the #postion as the size of the section.activities' do
-      expect {
+      expect do
         new_section.update(course: course)
-      }.to change{ new_section.position }.from(nil).to(4)
+      end.to change { new_section.position }.from(nil).to(4)
     end
   end
 end

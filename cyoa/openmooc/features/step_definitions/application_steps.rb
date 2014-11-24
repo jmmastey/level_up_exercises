@@ -17,4 +17,3 @@ end
 Then(/^I should be on the feedback page$/) do
   expect(current_path).to eq(feedback_path)
 end
-

@@ -51,7 +51,7 @@ class QuizActivitiesController < ApplicationController
   def quiz_activity_for(question)
     QuizActivity.new(
       section: @section,
-      question: question
+      question: question,
     )
   end
 

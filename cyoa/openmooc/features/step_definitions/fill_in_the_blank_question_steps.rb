@@ -1,15 +1,14 @@
 
 def new_question_params
- { 'Question' => 'Why do we fall?',
-   'Answer' => 'To learn to pick ourselves back up again.' }
+  { 'Question' => 'Why do we fall?',
+    'Answer' => 'To learn to pick ourselves back up again.' }
 end
 
-
 def changed_question_params
-  { 'Question' => %q(End? No, the journey doesn't end here.
+  { 'Question' => "End? No, the journey doesn't end here.
     Death is just another path, one that we all must take.
     The grey rain-curtain of this world rolls back,
-    and all turns to silver glass, and then you see it') }
+    and all turns to silver glass, and then you see it'" }
 end
 
 def wrong_answer_params

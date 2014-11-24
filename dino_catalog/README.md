@@ -30,7 +30,7 @@ Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long
 ### Technical Notes
 
 #### Your Application
-Your application will most likely run in the console and have an interactive prompt for user input. For example your application might work like this:
+Your application will most likely run in the console and have an interactive prompt for user input. For example it might work something like this:
 ```
 dev-666:~/projects/level_up_exercises/dino_catalog $ ruby ./dinodex.rb
 

@@ -5,15 +5,16 @@ Feature: Change Quantity of Products in Shopping Cart
 
   Background
     Given I am on the Shopping Cart page
+    And I am logged in
 
   Scenario: Update the Quantity of a Product (Good Path)
-    Given I have added a "hammer" to my cart
+    Given I have added a hammer to my cart
     When I enter 2 in the "Update Quantity" box
     And I click "Update Quantity"
     Then I should have 2 hammers in my cart
 
   Scenario: Update the Quantity of a Product that is Out of Stock (Sad Path)
-    Given I have added a "screwdriver" to my cart
+    Given I have added a screwdriver to my cart
     When I enter 2 in the "Update Quantity" box
     And I click "Update Quantity"
     Then I should see "We are sorry. That item is now out of stock."

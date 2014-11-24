@@ -12,12 +12,16 @@ class DinosaurParser
       dinosaur["NAME"]          = row["Genus"]
       dinosaur["PERIOD"]        = row["Period"]
       dinosaur["CONTINENT"]     = "Africa"
-      dinosaur["DIET"]          = "Carnivore" if row["Carnivore"] == "Yes"
+      dinosaur["DIET"]          = check_diet(row["Carnivore"])
       dinosaur["WEIGHT_IN_LBS"] = row["Weight"]
       dinosaur["WALKING"]       = row["Walking"]
       dinosaur["DESCRIPTION"]   = ""
       @result_dinosaurs << dinosaur
     end
     @result_dinosaurs
+  end
+
+  def check_diet(row_value)
+    return "Carnivore" if row_value == "Yes"
   end
 end

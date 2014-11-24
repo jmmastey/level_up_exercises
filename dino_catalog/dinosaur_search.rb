@@ -6,49 +6,57 @@ class DinosaurSearch
     @result_dinosaurs = search_pool
   end
 
-  def get_name
-    dinosaur_names = []
-    @result_dinosaurs.each { |dinosaur| dinosaur_names << dinosaur["NAME"] }
-    dinosaur_names
+  def names
+    @result_dinosaurs.map { |dinosaur| dinosaur["NAME"] }
   end
 
-  def smart_search_dinosaur(options)
+  def filter(options)
     case options["compare"]
       when "greater"
-        search_dinosaur(options, "greater")
+        filter_greater_characters(options)
       when "lesser"
-        search_dinosaur(options, "lesser")
+        filter_lesser_characters(options)
       when "equal"
-        search_dinosaur(options, "equal")
+        filter_characters(options)
     end
 
     self
   end
 
-  def search_dinosaur(options, symbol)
-    index = -1
-    @result_dinosaurs.each do |dinosaur|
-      index += 1
+  def value_present_in_options?(options, key)
+    options.key?(key) && options[key]
+  end
 
+  def filter_greater_characters(options)
+    @result_dinosaurs.each_with_index do |dinosaur, index|
       dinosaur.each do |key, value|
-        if options.has_key?(key) && options[key]
-          if symbol == "greater" && options[key] <= value.to_i
-            index = reset_resultant(index)
-          elsif symbol == "lesser" && options[key] >= value.to_i
-            index = reset_resultant(index)
-          elsif symbol == "equal"
-            if options[key].is_a?(Array)
-              unless options[key].include?(dinosaur[key].downcase)
-                index = reset_resultant(index)
-              end
-            elsif options[key] != dinosaur[key].downcase
-              index = reset_resultant(index)
-            end
-          end
-        end
+        next unless value_present_in_options?(options, key)
+        index = reset_resultant(index) if options[key] <= value.to_i
       end
     end
-    self
+  end
+
+  def filter_lesser_characters(options)
+    @result_dinosaurs.each_with_index do |dinosaur, index|
+      dinosaur.each do |key, value|
+        next unless value_present_in_options?(options, key)
+        index = reset_resultant(index) if options[key] >= value.to_i
+      end
+    end
+  end
+
+  def filter_characters(options)
+    @result_dinosaurs.each_with_index do |dinosaur, index|
+      dinosaur.each do |key, value|
+        next unless value_present_in_options?(options, key)
+        if options[key].is_a?(Array)
+          unless options[key].include?(value.downcase)
+            index = reset_resultant(index)
+          end
+        end
+        index = reset_resultant(index) if options[key] != value.downcase
+      end
+    end
   end
 
   def reset_resultant(index)
@@ -59,10 +67,9 @@ class DinosaurSearch
 
   def get_description(name)
     @result_dinosaurs.each do |dinosaur|
-      if dinosaur["NAME"].downcase == name.downcase
-        dinosaur.each do |key, value|
-          puts key + " => " + value unless value == nil
-        end
+      next unless dinosaur["NAME"].downcase == name.downcase
+      dinosaur.each do |key, value|
+        puts key + " => " + value unless value.nil?
       end
     end
   end

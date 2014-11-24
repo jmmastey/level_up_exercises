@@ -4,29 +4,22 @@ require_relative 'dinosaur_search'
 
 class DinoCatalog
   def run
-    options  = {}
-    options1 = {}
-
-    options['WEIGHT_IN_LBS'] = 2000
-    options['compare']       = "greater"
-
-    parser = DinosaurParser.new
-    resultant_dinosaurs = parser.parse
-
-    dinosaur = DinosaurSearch.new(resultant_dinosaurs)
-    result = dinosaur.smart_search_dinosaur(options)
-
-    p result.get_name
-    dinosaur1 = DinosaurSearch.new(resultant_dinosaurs)
-
-    options1['DIET'] = ['carnivore', 'insectivore']
-    options1['compare'] = "equal"
-
-    result1 = dinosaur1.smart_search_dinosaur(options1)
-    p result1.get_name
-
-    result2 = result1.smart_search_dinosaur(options)
-    p result2.get_name
+    resultant_dinosaurs = DinosaurParser.new.parse
+    more_than_2k_heavier = DinosaurSearch.new(resultant_dinosaurs).filter(
+                                    "WEIGHT_IN_LBS" => 2000,
+                                    "compare" => "greater",
+                                    )
+    p more_than_2k_heavier.names
+    carnivore_and_insectivore = DinosaurSearch.new(resultant_dinosaurs).filter(
+                                        "DIET"    => %w(carnivore, insectivore),
+                                        "compare" => "equal",
+                                        )
+    p carnivore_and_insectivore.names
+    non_veg_and_more_than_2k_heavier = carnivore_and_insectivore.filter(
+                                                "WEIGHT_IN_LBS" => 2000,
+                                                "compare" => "greater",
+                                                )
+    p non_veg_and_more_than_2k_heavier.names
   end
 end
 

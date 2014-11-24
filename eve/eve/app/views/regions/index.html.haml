@@ -1,5 +1,16 @@
 .page-header
-  %h2 Regions
+  %h2 EVE Online Regions
+
+= form_tag("/regions/search", method: "get", role: "form") do
+  .form-group
+    = label_tag(:query, "Search", class: "sr-only")
+    .input-group
+      = search_field_tag(:query, @search_query, class: "form-control", placeholder: "Search regions")
+      .input-group-btn
+        %button{type: "submit", class: "btn btn-default", title: "Search"}
+          &nbsp;
+          %span.glyphicon.glyphicon-search
+          &nbsp;
 
 - if @regions && !@regions.empty?
   = render(partial: 'list', locals: { regions: @regions })

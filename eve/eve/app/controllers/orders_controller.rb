@@ -19,10 +19,10 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html do
         @orders = @orders.page(params[:page])
-        render haml: @orders
+        render :index, haml: @orders
       end
       format.json do
-        render json: @orders
+        render :index, json: @orders
       end
     end
   end
@@ -38,9 +38,9 @@ class OrdersController < ApplicationController
 
   def search_orders
     orders = get_orders
-    orders = orders.where(item: params[:item]) if params[:item]
-    orders = orders.where(region: params[:region]) if params[:region]
-    orders = orders.where(station: params[:station]) if params[:station]
+    orders = orders.by_item(params[:item]) if params[:item]
+    orders = orders.by_region(params[:region]) if params[:region]
+    orders = orders.by_station(params[:station]) if params[:station]
 
     orders
   end

@@ -1,12 +1,14 @@
 = paginate(@items)
-%table.table.table-condensed.table-striped
+%table.table.table-condensed.table-striped.table-hover
   %thead
     %tr
       %th EVE ID
       %th Name
+      %th.text-right
   %tbody
     - @items.each do |item|
       %tr
         %td= item.in_game_id
         %td= item.name
+        %td.text-right= link_to("View orders", { controller: :orders, action: :search, item: item }, class: "btn btn-info btn-xs")
 = paginate(@items)

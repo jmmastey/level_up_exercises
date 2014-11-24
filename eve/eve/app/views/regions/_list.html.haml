@@ -1,3 +1,4 @@
+= paginate @regions
 %table.table.table-condensed.table-striped
   %thead
     %tr
@@ -9,5 +10,5 @@
       %tr
         %td= region.in_game_id
         %td= region.name
-        %td= link_to("View orders", controller: "orders", action: "search", region: region, html_options: { class: "btn btn-info" })
+        %td
 = paginate @regions

@@ -20,10 +20,10 @@ class StationsController < ApplicationController
     respond_to do |format|
       format.html do
         @stations = @stations.page(params[:page])
-        render haml: @regions
+        render :index, haml: @regions
       end
       format.json do
-        render json: @regions
+        render :index, json: @regions
       end
     end
   end

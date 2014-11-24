@@ -1,3 +1,4 @@
+= paginate @stations
 %table.table.table-condensed.table-striped
   %thead
     %tr
@@ -9,5 +10,5 @@
       %tr
         %td= station.in_game_id
         %td= station.name
-        %td= link_to("View orders", controller: "orders", action: "search", station: station, html_options: { class: "btn btn-info" })
+        %td
 = paginate @stations

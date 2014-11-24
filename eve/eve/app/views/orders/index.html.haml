@@ -1,2 +1,8 @@
-%h1 Orders#index
-%p Find me in app/views/orders/index.html.haml
+.page-header
+  %h2 Orders
+
+- if @orders && !@orders.empty?
+  = render(partial: 'list', locals: { regions: @regions })
+- else
+  %p.alert.alert-info
+    Could not find any orders.

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Order, :type => :model do
-  subject(:order) { FactoryGirl.create(:order) }
+  subject(:order) { FactoryGirl.build(:order) }
 
   it "requires an item" do
     order.item = nil
@@ -70,5 +70,15 @@ RSpec.describe Order, :type => :model do
       order.type = "free"
       expect(order).not_to be_valid
     end
+  end
+
+  describe "::last_pulled_on" do
+    subject(last_pulled) { Order.last_pulled_on(item) }
+
+    context "when no orders exist" do
+      it { is_expected.to be_nil }
+    end
+
+    context "when no orders exist with the given item"
   end
 end

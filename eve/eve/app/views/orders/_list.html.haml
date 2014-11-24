@@ -1,0 +1,25 @@
+= paginate @orders
+%table.table.table-condensed.table-striped
+  %thead
+    %tr
+      %th EVE ID
+      %th Type
+      %th Item
+      %th Location
+      %th Security
+      %th Price
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.in_game-id
+        %td= order.type
+        %td= order.item.name
+        %td
+          = order.station.name
+          %br
+          = order.region.name
+        %td= order.security
+        %td
+          = order.price
+          ISK
+= paginate @orders

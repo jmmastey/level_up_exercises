@@ -1,0 +1,6 @@
+.col-xs-12.col-sm-9.col-md-6.col-lg-3
+  %h1
+    New Quiz
+  = render 'new_question_dropdown'
+.col-xs-12.col-sm-10.col-md-8.col-lg-6
+  = render partial: @quiz_activity.question.decorate.to_partial_path(:section_form)

@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/freebase/v1/search?key=AIzaSyAYmdqHNNXNETdLUaXaYOZXIKTTvnOByhk&lang=en&limit=10&query=really%20wierd%20unknown%20string%20no%20one%20uses
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Sat, 22 Nov 2014 22:49:39 GMT
+      Date:
+      - Sat, 22 Nov 2014 22:49:39 GMT
+      Cache-Control:
+      - private, max-age=0, must-revalidate, no-transform
+      Content-Disposition:
+      - attachment
+      Etag:
+      - ! '"UehxEFcjzflMW6jGml15RaD240Q/MFkSnY1-vw88-b4GMSZJC-vsPTU"'
+      Vary:
+      - Origin
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Length:
+      - '49'
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic,p=0.02
+    body:
+      encoding: US-ASCII
+      string: ! '{"status":"200 OK","result":[],"cost":4,"hits":0}'
+    http_version: 
+  recorded_at: Sat, 22 Nov 2014 22:49:39 GMT
+recorded_with: VCR 2.9.3

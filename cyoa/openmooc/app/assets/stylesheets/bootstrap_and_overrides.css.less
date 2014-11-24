@@ -1,0 +1,62 @@
+@import "twitter/bootstrap/bootstrap";
+@import "flash";
+@import "input";
+@import "headings";
+
+
+// Set the correct sprite paths
+@iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
+@iconWhiteSpritePath: image-url("twitter/bootstrap/glyphicons-halflings-white.png");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+@fontAwesomeEotPath: asset-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: asset-url("fontawesome-webfont.eot?#iefix");
+@fontAwesomeWoffPath: asset-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: asset-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: asset-url("fontawesome-webfont.svg#fontawesomeregular");
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('/assets/glyphicons-halflings-regular.eot');
+  src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+// Font Awesome
+@import "fontawesome/font-awesome";
+
+// Glyphicons
+@import "twitter/bootstrap/glyphicons.less";
+
+// variables and overrides
+
+// Colors
+@dark-green: #22313F;
+@orange: #FA2;
+@purple: #339;
+@dark-blue: #2C3E50;
+@gray-pure: lighten(@gray-base, 100%);
+
+@brand-1-color: @purple;
+@brand-2-color: @orange;
+@brand-3-color: @gray-pure;
+
+@brand-primary: @brand-1-color;
+@grid-float-breakpoint: @screen-desktop;
+
+// Jumbotron
+
+@jumbotron-bg: @gray-pure;
+@jumbotron-heading-color: @brand-1-color;
+
+// Navbar
+
+@navbar-default-color: @brand-3-color;
+@navbar-default-bg: @gray-base;
+@navbar-default-link-color: @brand-3-color;
+@navbar-default-link-hover-color: darken(@navbar-default-link-color, 10%);
+
+// Styling
+
+a.btn-primary:visited {
+  color: #FFF;
+}

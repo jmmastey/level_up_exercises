@@ -1,0 +1,8 @@
+.jumbotron
+  %h1 Problems?
+  %p.lead
+    = t('help.heading')
+  - if user_signed_in?
+    = link_to 'Send feedback', feedback_path, class: 'btn btn-lg btn-primary'
+  - else
+    = link_to 'Sign in to send feedback', new_user_session_path, class: 'btn btn-lg btn-primary'

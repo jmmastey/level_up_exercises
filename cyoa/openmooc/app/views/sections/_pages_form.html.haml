@@ -1,0 +1,21 @@
+.col-xs-12.col-sm-9.col-md-8.col-lg-6
+  %table.table
+    %tr
+      %th Page #
+      %th Type
+      %th
+      %th
+    - @section.pages.each do |page|
+      %tr
+        %td= link_to page.decorate.number, page
+        %td= link_to page.activity.decorate.type, page
+        %td
+          = button_to move_higher_page_path(page), { method: :put, class: 'btn btn-sm btn-default' } do
+            Move up
+        %td
+          = button_to move_lower_page_path(page), { method: :put, class: 'btn btn-sm btn-default' } do
+            Move down
+.col-xs-3.col-md-2
+  = render layout: 'page_form_modal' do |modal_id|
+    %button.btn.btn-default{ 'data-toggle' => 'modal', 'data-target' => modal_id }
+      Add page &plus;

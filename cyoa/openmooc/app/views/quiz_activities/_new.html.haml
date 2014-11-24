@@ -1,0 +1,9 @@
+.dropdown
+  %button.btn.btn-lg.btn-default#lesson-dropdown{ type: 'button', 'data-toggle' => 'dropdown', 'aria-haspopup' => true, 'aria-expanded' => false }
+    = 'Question type'
+    %span.caret
+  %ul.dropdown-menu{ role: 'menu', 'aria-labeledby' => 'question-dropdown' }
+    - @section.decorate.question_links.each do |text, link|
+      %li{ role: 'presentation' }
+        = link_to text, link, role: 'menuitem', tabindex: -1
+= yield

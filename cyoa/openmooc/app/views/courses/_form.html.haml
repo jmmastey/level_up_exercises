@@ -1,0 +1,23 @@
+= form_for @course do |f|
+  .col-xs-12.col-sm-6.col-md-5.col-lg-4
+    .form-group
+      = f.label :title
+      = f.text_field :title, class: 'form-control'
+    .form-group
+      = f.label :subject
+      = f.text_field :subject, class: 'form-control'
+    .form-group
+      = f.label :topic
+      = f.text_field :topic, class: 'form-control'
+  .col-xs-12.col-sm-8.col-md-7
+    .form-group
+      = f.label :description
+      = f.text_area :description, class: 'form-control', rows: '5', maxlength: 400
+  .col-xs-12.col-sm-8.col-md-7
+    = f.fields_for :page_content do |pf|
+      .form-group
+        = pf.label :content
+        = pf.text_area :content, class: 'form-control', rows: '10', maxlength: 1500
+    = link_to 'Cancel', @course, class: 'btn btn-default'
+    = f.submit 'Save', class: 'btn btn-default'
+    = f.submit 'Preview', name: 'preview', class: 'btn btn-primary'

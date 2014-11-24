@@ -1,0 +1,23 @@
+= nested_form_for question, url: url do |f|
+  - extra_params.each do |(key, value)|
+    = f.hidden_field key, value: value
+  = f.fields_for :page_content do |pf|
+    .form-group
+      = pf.label :content, 'Question'
+      = pf.text_area :content, class: 'form-control', rows: '5', maxlength: 150, placeholder: 'question'
+  = f.fields_for :answers do |af|
+    .form-group
+      = af.label :text, 'Answer'
+      .input-group
+        = af.text_field :text, class: 'form-control', placeholder: 'answer'
+        .input-group-btn
+          = af.link_to_remove 'Remove answer', class: 'btn btn-default'
+      .input-group
+        = af.label :correct
+        &nbsp;
+        = af.check_box :correct
+  .form-group
+    = f.link_to_add 'Add answer', :answers, class: 'btn btn-default'
+  .form-group
+    = link_to 'Cancel', @section, class: 'btn btn-default'
+    = f.submit 'Create question', class: 'btn btn-primary'

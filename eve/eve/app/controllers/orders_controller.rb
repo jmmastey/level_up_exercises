@@ -14,8 +14,7 @@ class OrdersController < ApplicationController
   end
 
   def search
-    @search_query = params[:query]
-
+    @orders = search_orders
 
     respond_to do |format|
       format.html do
@@ -35,5 +34,14 @@ class OrdersController < ApplicationController
 
   def get_orders
     Order.all
+  end
+
+  def search_orders
+    orders = get_orders
+    orders = orders.where(item: params[:item]) if params[:item]
+    orders = orders.where(region: params[:region]) if params[:region]
+    orders = orders.where(station: params[:station]) if params[:station]
+
+    orders
   end
 end

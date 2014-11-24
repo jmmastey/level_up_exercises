@@ -29,12 +29,12 @@ describe User do
     expect { user_with_showings.remove_showing(showing) }.to change{ showing.users.count }.from(1).to(0)
   end
 
-  it 'knows whether is has a showing in an event' do
+  it 'knows when it has a showing in an event' do
     user_with_showings
     expect(user_with_showings).to have_showing_in(event)
   end
 
-  it 'knows whether is has a showing in an event' do
+  it 'knows when it does not have a showing in an event' do
     user
     expect(user).not_to have_showing_in(event)
   end

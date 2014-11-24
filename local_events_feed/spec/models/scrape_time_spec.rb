@@ -3,9 +3,7 @@ require 'models/scrape_time_helper'
 
 RSpec.describe ScrapeTime, :type => :model do
   let(:one_hour) { Time.at(1.hour) }
-  let(:eight_oclock) { DateTime.parse("20140901T080000") }
-  let(:nine_oclock) { DateTime.parse("20140901T090000") }
-  let(:ten_oclock) { DateTime.parse("20140901T100000") }
+
   let(:valid_scrape_time) { create_scrape_time("source_A", eight_oclock, one_hour) }
   let(:invalid_scrape_time) { create_scrape_time("", eight_oclock, one_hour) }
   let(:duplicate_source_scrape_time) { create_scrape_time("source_A", eight_oclock, one_hour) }

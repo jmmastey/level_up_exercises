@@ -1,0 +1,25 @@
+At minimum, support the following functionality:
+  Get details on a given flight
+  Get a manifest of passengers for a given flight.
+  Find flights matching some criteria
+  Get details on an airport or destination (use the airport code for this)
+  See the trip an airplane will make regardless of individual itineraries.
+  See when the airplane will have to refuel during that trip.
+  Get a list of itineraries with flights for a given passenger.
+For modifying data:
+  Create new bookings
+  Reroute airplanes through new itineraries
+
+Routes for TrafficControl:
+flight                    GET     /api/flight/:id
+flight_manifest           GET     /api/flight/:id/manifest
+flight_search             GET     /api/flight/search/:criteria
+
+airport                   GET     /api/airport/:code
+
+airplane_trip             GET     /api/airplane/:id/trip
+airplane_refuel           GET     /api/airplane/:id/refuel
+airplane_reroute          PATCH   /api/airplane/:id/itineraries/:itinerary_id
+
+passenger_itineraries     GET     /api/passenger/:id/itineraries
+create_passenger_booking  POST    /api/passenger/:id/booking

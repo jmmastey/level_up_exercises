@@ -4,6 +4,7 @@ class Cohort
   CONFIDENCE_LEVEL = 0.95
   attr_reader :visitors
 
+  # Splat is for variable length args, not array?
   def initialize(*visitors)
     @visitors = visitors
   end

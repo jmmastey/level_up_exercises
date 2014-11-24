@@ -47,8 +47,8 @@ module TheatreInChicago
     end
 
     def add_showings(event, event_node)
-      return unless showings = ShowingFinder::find(event_node)
-      event.showings.concat(showings)
+      showings = ShowingFinder::find(event_node)
+      event.showings.concat(showings.to_a)
     end
 
     def add_image(event, event_node)

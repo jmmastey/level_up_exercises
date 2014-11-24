@@ -1,0 +1,19 @@
+.panel.panel-default
+  .panel-body
+    .col-xs-12.col-sm-11
+      .col-xs-4.col-sm-3.col-md-2
+        = link_to course do
+          = image_tag 'http://placekitten.com/g/90/90', class: 'media-object img-thumbnail', alt: '...'
+      .col-xs-8.col-sm-5.col-md-4.col-lg-3
+        %h3{class: 'media-heading'}
+          = link_to course.title, course
+        %p
+          Subject:
+          %strong #{course.subject}
+        %p
+          Topic:
+          %strong #{course.topic}
+      .col-xs-12.col-md-6.col-lg-6
+        %p= course.description
+    .col-xs-2.col-md-1
+      = link_to 'Preview', course, class: 'btn btn-default'

@@ -1,0 +1,7 @@
+.col-xs-12
+  .page-header
+    %h1
+      Edit quiz
+    = render 'edit_question_dropdown'
+.col-xs-12
+  = render partial: @quiz_activity.question.decorate.to_partial_path('quiz_activity_update_form')

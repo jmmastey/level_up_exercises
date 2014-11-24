@@ -1,0 +1,29 @@
+.col-xs-12.col-sm-8
+  .page-header
+    %h1
+      = link_to "#{@page.section.course.title}", @page.section.course
+    %br
+    .dropdown
+      %button.btn.btn-lg.btn-default#lesson-dropdown{ type: 'button', 'data-toggle' => 'dropdown', 'aria-haspopup' => true, 'aria-expanded' => false }
+        = @page.section.name
+        %span.caret
+      %ul.dropdown-menu{ role: 'menu', 'aria-labeledby' => 'lesson-dropdown' }
+        - @page.course.sections.each do |section|
+          %li{ role: 'presentation' }
+            = link_to section.name, section, role: 'menuitem', tabindex: -1
+  %nav
+    %ul.pagination
+      - @page.section.pages.each do |page|
+        - if @page == page
+          %li.active
+            = link_to page.decorate.number, page
+        - else
+          %li
+            = link_to page.decorate.number, page
+.col-xs-8.col-sm-4
+  = render partial: 'menu'
+.col-xs-12.col-sm-8
+  = render partial: @page.activity.decorate.to_partial_path(:show), locals: { activity: @page.activity }
+.col-xs-12.col-sm-8
+  .pull-right
+    = link_to @page.decorate.next_link[:text], @page.decorate.next_link[:path], class: 'btn btn-primary'

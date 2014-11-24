@@ -1,0 +1,26 @@
+.col-xs-12.col-sm-10.col-md-9.col-lg-8
+  - if @aliases.empty?
+    .panel.panel-info
+      .panel-heading
+        .panel-title
+          %span.glyphicon.glyphicon-warning-sign
+          Sorry
+      .panel-body
+        We could not find any similar answers for '#{params[:q]}'
+        .pull-right
+          = link_to 'Go back', :back, class: 'btn btn-primary'
+  - else
+    = form_tag create_answers_fill_in_the_blank_question_path(@question) do |f|
+      .form-group
+        %table.table
+          %tr
+            %th Answer
+            %th Add to question
+          - @aliases.each do |_alias|
+            %tr
+              %td= _alias.text
+              %td= check_box_tag "aliases[][add]"
+              = hidden_field_tag "aliases[][text]", _alias.text
+      .form-group
+        = link_to 'Cancel', :back, class: 'btn btn-default'
+        = submit_tag 'Update Question', class: 'btn btn-primary'

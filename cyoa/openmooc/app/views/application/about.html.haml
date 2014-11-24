@@ -1,0 +1,11 @@
+.jumbotron
+  %h1
+    = t('app_name')
+  %p.lead
+    = t('about.content')
+  %p
+    - if user_signed_in?
+      = link_to t('about.enroll_in_a_course'), courses_path, class: 'btn btn-lg btn-primary', role: 'button'
+    - else
+      = link_to t('about.signup_to_enroll'), new_user_registration_path, class: 'btn btn-lg btn-primary', role: 'button'
+    = link_to t('about.learn_to_contribute'), about_path, class: 'btn btn-lg btn-default', role: 'button', style: 'white-space: normal'

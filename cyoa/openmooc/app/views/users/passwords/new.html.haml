@@ -1,0 +1,12 @@
+.col-xs-12.col-sm-7.col-md-5.col-lg-4
+  .panel.panel-default
+    .panel-body
+      %h2 Forgot your password?
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        =render partial: 'users/devise_error_messages', locals:{resource: resource}
+        .form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, class: 'form-control'
+        .form-group
+          = f.submit "Reset my password", class: 'btn btn-default'
+      = render "users/shared/links"

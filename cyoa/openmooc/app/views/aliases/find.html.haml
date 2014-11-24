@@ -1,0 +1,15 @@
+- if @aliases.empty?
+  .panel.panel-danger
+    .panel-heading
+      .panel-title
+        Sorry!
+    .panel-body
+      We could not find any similar answers
+- else
+  %ul.list-group
+    = nested_form_for @aliases, url: create_answers_aliases_path do |f|
+      %li.list-group-item
+        = f.object.text
+        = f.check_box :add
+      = link_to :back, 'Cancel', class: 'btn btn-default'
+      = f.submit 'Add answers', class: 'btn btn-primary'

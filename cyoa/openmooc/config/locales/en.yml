@@ -1,0 +1,51 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  app_name: &app_name 'Moocipedia'
+  index:
+    content: 'Explore, Learn, Contribute.'
+    view_courses: 'View courses'
+    about_app: 'Want to learn more?'
+  about:
+    content: >
+      Moocipedia was started to allow anyone to enroll and contribute
+      to online courses. At Moocipedia, everyone contributes
+      to the course and anyone can enroll. It is through
+      everyone's actions that anyone can receive the
+      education they want.
+    learn_to_contribute: 'Learn how to contribute to a course?'
+    signup_to_enroll: 'Sign up to enroll in a course'
+    enroll_in_a_course: 'Enroll in a course'
+  help:
+    heading: >
+      If you are experiencing problems or have suggestions,
+      please click the link below and submit the form.
+    content: >
+      Currently, Moocipedia is run by John McConnell. I am
+      working hard to provide new features. Please don't
+      hesitate to send suggestions.
+    ask_developer: 'Are you a developer? Moocipedia is open source.'
+  lesson:
+    new_page_description: >
+      Awesome! You are about to add a new page to the lesson.
+      You must choose the type of content you want this page
+      to provide.

@@ -1,0 +1,73 @@
+AllCops:
+  Exclude:
+    - lib/tasks/cucumber.rake
+    - features/step_definitions/email_steps.rb
+    - 'db/**/*'
+    
+# C: Missing top-level module documentation comment.
+Style/Documentation:
+  Enabled: false
+
+# C: Prefer inject over reduce.
+Style/CollectionMethods:
+  PreferredMethods:
+    reduce: 'inject'
+
+# don't enforce single- or double-quotes
+Style/StringLiterals:
+  Enabled: false
+
+# library method, leave the violation
+Style/PerlBackrefs:
+  Exclude:
+    - features/support/paths.rb
+
+Style/TrailingComma:
+  EnforcedStyleForMultiline: comma
+
+# This never works for validations
+Style/AlignHash:
+  EnforcedLastArgumentHashStyle: ignore_implicit
+
+# all the cuke syntax fails
+Lint/AmbiguousRegexpLiteral:
+  Exclude:
+    - 'features/step_definitions/*'
+
+# generated file, ignore
+Style/RegexpLiteral:
+  Exclude:
+    - 'Guardfile'
+
+# align multi-line params with previous line
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+# indent `when` clause one step from `case`
+Style/CaseIndentation:
+  IndentOneStep: true
+
+# don't force crappy var names for reduce/inject loops...
+Style/SingleLineBlockParams:
+  Enabled: false
+
+# for method chains, keep the dot with the method name
+Style/DotPosition:
+  EnforcedStyle: leading
+
+# stop nesting so hard.
+Metrics/BlockNesting:
+  Max: 2
+
+# short methods, man...
+Metrics/MethodLength:
+  Max: 7
+
+# fewer parameters
+Metrics/ParameterLists:
+  Max: 3
+
+Style/PredicateName:
+  Exclude:
+    - app/models/user.rb
+    - app/models/guest.rb

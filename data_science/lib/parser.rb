@@ -16,6 +16,6 @@ module Parser
 
   def self.seperate_into_cohorts(visitors)
     grouped = visitors.group_by(&:cohort)
-    [Cohort.new(*grouped['A']), Cohort.new(*grouped['B'])]
+    [Cohort.new(grouped['A']), Cohort.new(grouped['B'])]
   end
 end

@@ -8,10 +8,6 @@ describe Visitor do
     expect(visitor.cohort).to match(/A/ || /B/)
   end
 
-  it 'visted on a date' do
-    expect(visitor.visit_date.class).to eq(Date)
-  end
-
   it 'has a registration status' do
     expect(visitor.result)
   end

@@ -7,36 +7,23 @@ describe SplitTest do
 
   context "with 2 cohorts" do
 
-    let(:cohort_A) do
-      cohort = Cohort.new
-      20.times do
-        cohort.add(Visitor.new(date: '2014-03-20', cohort: "A", result: 0))
+    def create_cohort(conversions, non_conversions)
+      Cohort.new.tap do |cohort|
+        conversions.times     { cohort.add(create_visitor(1)) }
+        non_conversions.times { cohort.add(create_visitor(0)) }
       end
-
-      1.times do
-        cohort.add(Visitor.new(date: '2014-03-20', cohort: "A", result: 1))
-      end
-
-      cohort
     end
 
-    let(:cohort_B) do
-      cohort = Cohort.new
-      1.times do
-        cohort.add(Visitor.new(date: '2014-03-20', cohort: "B", result: 0))
-      end
-
-      20.times do
-        cohort.add(Visitor.new(date: '2014-03-20', cohort: "B", result: 1))
-      end
-
-      cohort
+    def create_visitor(result)
+      Visitor.new(date: '2014-03-20', cohort: "n/a", result: result)
     end
 
-    let(:split_test) { SplitTest.new(cohort_A, cohort_B) }
+    let(:cohort_a) { create_cohort(20, 1) }
+    let(:cohort_b) { create_cohort(1, 20) }
+    let(:split_test) { SplitTest.new(cohort_a, cohort_b) }
 
     it "has a confidence level" do
-      expect(split_test.different?).to be true
+      expect(split_test).to be_different
     end
 
     it "has a chisquare p value" do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120210400) do
+ActiveRecord::Schema.define(version: 20141121151055) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_id"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20141120210400) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.boolean  "email_preferences"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

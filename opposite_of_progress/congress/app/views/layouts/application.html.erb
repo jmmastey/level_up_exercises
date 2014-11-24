@@ -15,6 +15,19 @@
     <div class="row">
       <div class="small-2 large-1 columns">&nbsp;</div>
       <div class="small-8 large-10 columns">
+        <span style="float:right; margin:10px; text-align:right;">
+          <% if current_user %>
+            <%= current_user.email %>
+            <br />
+            <%= link_to "Preferences", edit_user_registration_path %>
+            |
+            <%= link_to "Log out", destroy_user_session_path, :method => 'delete' %>
+          <% else %>
+            <%= link_to "Log in", new_user_session_path %>
+            |
+            <%= link_to "Sign up", new_user_registration_path %>
+          <% end %>
+        </span>
         <h1>Opposite of Progress</h1>
 
         <nav class="top-bar" data-topbar role="navigation">

@@ -4,3 +4,10 @@ source "https://rubygems.org"
 ruby "2.0.0"
 
 gem "sinatra"
+gem "rspec"
+gem "capybara"
+gem "cucumber"
+gem "cucumber-sinatra"
+gem 'bootstrap-sass', '~> 3.3.1.0'
+gem 'sinatra-contrib', require: 'sinatra/reloader'
+gem 'rubocop'

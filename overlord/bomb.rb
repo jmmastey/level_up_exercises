@@ -12,7 +12,7 @@ class Bomb
   def initialize(activation_code: "1234", deactivation_code: "0000")
     @activation_code = validate_numericality(:activation, activation_code)
     @deactivation_code = validate_numericality(:deactivation, deactivation_code)
-    @status = :inactivated
+    @status = :deactivated
     @incorrect_deactivation_attempts = 0
   end
 
@@ -29,7 +29,7 @@ class Bomb
   end
 
   def deactivate
-    @status = :inactivated
+    @status = :deactivated
     @incorrect_deactivation_attempts = 0
   end
 

@@ -5,7 +5,7 @@ Feature: Activating the Bomb
     When I set the activation code to 4444
     And I set the deactivation code to 8888
     And I click the Submit New Code and Boot button
-    Then the bomb should be inactivated
+    Then the bomb should be deactivated
 
   Scenario: Use user activation code to activate bomb
     Given I have entered the activation and deactivation codes
@@ -26,4 +26,4 @@ Feature: Activating the Bomb
     When I click the Boot Bomb button
     And I enter 12343 in the enter code box
     And I click the Enter Code button
-    Then the bomb should be inactivated
+    Then the bomb should be deactivated

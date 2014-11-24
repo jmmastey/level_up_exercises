@@ -53,8 +53,8 @@ describe Bomb do
   context 'after instantiation' do
     let(:bomb) { Bomb.new(activation_code: "8888", deactivation_code: "2222") }
 
-    it 'has an initial status of inactivated' do
-      expect(bomb.status).to eq(:inactivated)
+    it 'has an initial status of deactivated' do
+      expect(bomb.status).to eq(:deactivated)
     end
 
     describe '#activate' do
@@ -68,7 +68,7 @@ describe Bomb do
       it 'will change the bomb status to inactivated' do
         bomb.activate
         bomb.deactivate
-        expect(bomb.status).to eq(:inactivated)
+        expect(bomb.status).to eq(:deactivated)
       end
 
       it 'will reset the incorrect_deactivation_attempts attribute if the bomb deactivates' do
@@ -95,7 +95,7 @@ describe Bomb do
       it 'will deactivate the bomb if the provided code matches the deactivation code' do
         bomb.status = :active
         bomb.analyze_user_code("2222")
-        expect(bomb.status).to eq(:inactivated)
+        expect(bomb.status).to eq(:deactivated)
       end
     end
 

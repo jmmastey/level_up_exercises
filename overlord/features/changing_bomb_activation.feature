@@ -14,4 +14,4 @@ Feature: Changing bomb activation
   Scenario: The bomb deactivates if the correct deactivation code is entered
     When I enter 8888 in the enter code box
     And I click the Enter Code button
-    Then the bomb should be inactivated
+    Then the bomb should be deactivated

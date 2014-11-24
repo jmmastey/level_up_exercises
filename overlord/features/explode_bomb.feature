@@ -24,4 +24,4 @@ Feature: Exploding the bomb
     Then the bomb should be active
     When I enter 8888 in the enter code box
     And I click the Enter Code button
-    Then the bomb should be inactivated
+    Then the bomb should be deactivated

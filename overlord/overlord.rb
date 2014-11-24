@@ -1,20 +1,20 @@
-# run `ruby overlord.rb` to run a webserver for this app
-
 require 'sinatra'
 require 'capybara/rspec'
-require_relative 'bomb'
+require './bomb'
 
 enable :sessions
 
-get '/' do
-  session.clear
-  erb :index
-end
+# For debugging purposes
 
 after do
   puts '[Params]'
   p request.params
   p request.session[:bomb]
+end
+
+get '/' do
+  session.clear
+  erb :index
 end
 
 post '/boot' do
@@ -27,15 +27,15 @@ get '/bomb' do
 end
 
 post '/bomb' do
-  user_code_input = params['user-code']
-  bomb.match_user_code(user_code_input)
+  user_input_code = params['user-code']
+  bomb.analyze_user_code(user_input_code)
   erb :bomb, locals: { bomb_state: bomb.status }
-end
-
-def bomb
-  session[:bomb]
 end
 
 not_found do
   erb :error
+end
+
+def bomb
+  session[:bomb]
 end

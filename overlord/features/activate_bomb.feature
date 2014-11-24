@@ -7,17 +7,17 @@ Feature: Activating the Bomb
     And I click the Submit New Code and Boot button
     Then the bomb should be inactivated
 
-  Scenario: Use user activation code and reenter same code
+  Scenario: Use user activation code to activate bomb
     Given I have entered the activation and deactivation codes
     When I enter 4444 in the enter code box
     And I click the Enter Code button
     Then the bomb should be active
 
-  Scenario: Use default activation code
+  Scenario: Use default activation code to activate bomb
     Given I am on the home page
-    And I click the Boot Bomb button
+    When I click the Boot Bomb button
     Then I should be on the bomb interface
-    And I enter 1234 in the enter code box
+    When I enter 1234 in the enter code box
     And I click the Enter Code button
     Then the bomb should be active
 

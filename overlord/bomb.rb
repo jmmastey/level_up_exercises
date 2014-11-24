@@ -3,11 +3,11 @@ class Bomb
   attr_reader :activation_code, :deactivation_code
 
   DEFAULT_CODES = {
-    :activation => "1234",
-    :deactivation => "0000",
+    activation: "1234",
+    deactivation: "0000",
   }
 
-  MAX_INCORRECT_DEACTIVATION_ATTEMPTS = 3
+  MAX_INCORRECT_ATTEMPTS = 3
 
   def initialize(activation_code: "1234", deactivation_code: "0000")
     @activation_code = validate_numericality(:activation, activation_code)
@@ -37,7 +37,7 @@ class Bomb
     @status = :exploded
   end
 
-  def match_user_code(code)
+  def analyze_user_code(code)
     case code
       when activation_code then activate
       when deactivation_code then deactivate
@@ -47,6 +47,6 @@ class Bomb
 
   def incorrect_attempt
     @incorrect_deactivation_attempts += 1
-    explode! if @incorrect_deactivation_attempts == MAX_INCORRECT_DEACTIVATION_ATTEMPTS
+    explode! if @incorrect_deactivation_attempts == MAX_INCORRECT_ATTEMPTS
   end
 end

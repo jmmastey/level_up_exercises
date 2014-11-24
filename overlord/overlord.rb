@@ -5,12 +5,11 @@ require './bomb'
 enable :sessions
 
 # For debugging purposes
-
-after do
-  puts '[Params]'
-  p request.params
-  p request.session[:bomb]
-end
+# after do
+#   puts '[Params]'
+#   p request.params
+#   p request.session[:bomb]
+# end
 
 get '/' do
   session.clear

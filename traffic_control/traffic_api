@@ -11,15 +11,21 @@ For modifying data:
   Reroute airplanes through new itineraries
 
 Routes for TrafficControl:
+flight                    GET     /api/flight
 flight                    GET     /api/flight/:id
 flight_manifest           GET     /api/flight/:id/manifest
 flight_search             GET     /api/flight/search/:criteria
 
+airport                   GET     /api/airport
 airport                   GET     /api/airport/:code
 
+airplane                  GET     /api/airplane
+airplane                  GET     /api/airplane/:id
 airplane_trip             GET     /api/airplane/:id/trip
 airplane_refuel           GET     /api/airplane/:id/refuel
 airplane_reroute          PATCH   /api/airplane/:id/itineraries/:itinerary_id
 
+passenger                 GET     /api/passenger
+passenger                 GET     /api/passenger/:id
 passenger_itineraries     GET     /api/passenger/:id/itineraries
 create_passenger_booking  POST    /api/passenger/:id/booking

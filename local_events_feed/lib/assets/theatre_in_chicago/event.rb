@@ -24,15 +24,16 @@ module TheatreInChicago
     end
     
     def to_h
-      { name: self.name, 
-        location: self.location, 
-        link: self.link, 
-        image: self.image,
-        description: self.description }
+      { name: name, 
+        location: location, 
+        link: link, 
+        image: image,
+        description: description }
     end
 
+    # Skip Image, Description
     def ==(other)
-      name == other.name && location == other.location && link == other.link # Skip Image, Description
+      name == other.name && location == other.location && link == other.link
     end
 
     # No active support 

@@ -52,13 +52,11 @@ module TheatreInChicago
     end
 
     def days_in_date_range
-      result = []
-      date = start_date
-      while date <= finish_date
-        result << date
-        date = date.tomorrow
-      end
-      result
+      date_range(start_date, finish_date, 1.day)
+    end
+
+    def date_range(start, finish, step)
+      (start.to_i..finish.to_i).step(step.to_i).map { |sec| Time.at(sec) }
     end
   end
 end

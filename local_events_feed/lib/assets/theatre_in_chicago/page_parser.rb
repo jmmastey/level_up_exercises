@@ -33,13 +33,8 @@ module TheatreInChicago
       @events << event
     end
 
-    # Single Trye - Single selector
     def get_location(event_node)
-      return unless cell = event_node.parent
-      return unless row = cell.parent
-      return unless next_row = row.next_element
-      return unless location_node = next_row.css(".body")
-      location_node.text.squish
+      event_node.parent.parent.next_element.css(".body").text.squish
     end
 
     def add_event_details
@@ -51,7 +46,6 @@ module TheatreInChicago
       end
     end
 
-    # Check need for return unless
     def add_showings(event, event_node)
       return unless showings = ShowingFinder::find(event_node)
       event.showings.concat(showings)

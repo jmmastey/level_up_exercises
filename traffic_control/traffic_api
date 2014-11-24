@@ -11,9 +11,9 @@
                 airplane GET   /api/airplanes/:id                           airplanes#show
            airplane_trip GET   /api/airplanes/:id/trip                      airplanes#trip
          airplane_refuel GET   /api/airplanes/:id/refuel                    airplanes#refuel
-        airplane_reroute PATCH /api/airplanes/:id/itineraries/:itinerary_id airplanes#itineraries
+        airplane_reroute PATCH /api/airplanes/:id/itineraries/:itinerary_id airplanes#update_itineraries
 
               passengers GET   /api/passengers                              passengers#index
                passenger GET   /api/passengers/:id                          passengers#show
    passenger_itineraries GET   /api/passengers/:id/itineraries              passengers#itineraries
-create_passenger_booking POST  /api/passengers/:id/booking                  passengers#booking
+create_passenger_booking POST  /api/passengers/:id/booking                  passengers#create_booking

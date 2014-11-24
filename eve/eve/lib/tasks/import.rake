@@ -1,7 +1,7 @@
 require "csv"
 require "rake-progressbar"
 
-namespace :export do
+namespace :import do
   desc "Inserts static information from dump files."
 
   task all: [:items, :regions, :stations]

@@ -2,6 +2,6 @@
 bower_components/
 public/stylesheets/.sass-cache/
 .sass-cache
-overlord/public/stylesheets/sass/
-overlord/public/stylesheets/custom.css.map
-overlord/public/javascripts/
+public/stylesheets/sass/
+public/stylesheets/custom.css.map
+public/javascripts/

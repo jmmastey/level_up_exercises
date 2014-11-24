@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'assets/theatre_in_chicago/page_parser'
+require 'theatre_in_chicago/page_parser'
 
 RSpec.describe TheatreInChicago::PageParser, :type => :asset do
   let(:node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_page.html")) }

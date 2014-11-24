@@ -1,4 +1,4 @@
-require 'assets/theatre_in_chicago/description_finder'
+require 'theatre_in_chicago/description_finder'
 
 RSpec.describe TheatreInChicago::DescriptionFinder, :type => :asset do
   let(:event_node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_showings_same_year.html")) }

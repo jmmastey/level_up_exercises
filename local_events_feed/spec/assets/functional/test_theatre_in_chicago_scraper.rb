@@ -1,4 +1,4 @@
-require_relative '../../../lib/assets/theatre_in_chicago_scraper'
+require_relative '../../../lib/theatre_in_chicago_scraper'
 
 if ARGV.count == 2
   year  = ARGV[0].to_i

@@ -1,6 +1,6 @@
 require 'rails_helper'
-require 'assets/theatre_in_chicago/date_list_showing_parser'
-require 'assets/theatre_in_chicago/dows_showing_parser'
+require 'theatre_in_chicago/date_list_showing_parser'
+require 'theatre_in_chicago/dows_showing_parser'
 
 RSpec.describe TheatreInChicago::ShowingParser, :type => :asset do
   let(:pseudo_today) { DateTime.new(2014, 10, 31) }

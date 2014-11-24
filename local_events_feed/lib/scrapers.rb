@@ -1,4 +1,4 @@
-require 'assets/theatre_in_chicago/scraper'
+require 'theatre_in_chicago/scraper'
 require 'scrape_time_permission'
 
 module Scrapers

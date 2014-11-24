@@ -1,4 +1,4 @@
-require 'assets/theatre_in_chicago/date_range_builder'
+require 'theatre_in_chicago/date_range_builder'
 
 RSpec.describe TheatreInChicago::DateRangeBuilder, :type => :asset do
 

@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'assets/theatre_in_chicago/event'
+require 'theatre_in_chicago/event'
 
 RSpec.describe TheatreInChicago::Event, :type => :asset do
   let(:blank_event) { TheatreInChicago::Event.new }

@@ -1,4 +1,4 @@
-require 'assets/theatre_in_chicago/event'
+require 'theatre_in_chicago/event'
 
 module ShowingsHelper
   def self.one_day_only?(showings)

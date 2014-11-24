@@ -1,4 +1,4 @@
-require 'assets/theatre_in_chicago/scraper'
+require 'theatre_in_chicago/scraper'
 
 def scrape_for_new_events
   [0, 25, 50, 75, 100].each do |upcoming_days|

@@ -1,5 +1,4 @@
 require 'json'
-require_relative 'visitor'
 require_relative 'cohort'
 
 class Parser
@@ -10,8 +9,14 @@ class Parser
 
   private
 
+  Visitor = Struct.new(:visit_date, :cohort, :result) do 
+    def conversion?
+     result == 1
+    end
+  end
+
   def create_visitors(data)
-    data.map { |obj| Visitor.new(obj) }
+    data.map { |obj| Visitor.new(obj[:visit_date], obj[:cohort], obj[:result]) }
   end
 
   def seperate_into_cohorts(visitors)

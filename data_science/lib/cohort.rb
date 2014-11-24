@@ -19,7 +19,7 @@ class Cohort
   end
 
   def conversions
-    @visitors.count { |visitor| visitor.result == 1 }
+    @visitors.count(&:conversion?)
   end
 
   def conversion_percentage

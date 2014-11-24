@@ -10,10 +10,10 @@ However, math is hard. So, you're going to write the Rspec tests manually to mak
 
 1. The data set is a JSON file exported from the database (because Postgres does JSON now and someone went a little overboard). You'll need to parse the input file. However, make sure the data loading is abstracted from the main calculation code.
 2. For a given experiment, we're looking to calculate the conversion rate of visitors as part of a split test. We care about the following factors:
-  A. The total sample size and number of conversions for each cohort
-  B. The conversion rate for each cohort
-  C. A 95% confidence interval for each cohort's conversion rate 
-  D. A confidence level that the current leader is in fact better than random. You should use the Chi-square test for this, feel free to cheat with a [simple calculator](http://www.usereffect.com/split-test-calculator) to get your initial calculations.
+  1. The total sample size and number of conversions for each cohort
+  2. The conversion rate for each cohort
+  3. A 95% confidence interval for each cohort's conversion rate 
+  4. A confidence level that the current leader is in fact better than random. You should use the Chi-square test for this, feel free to cheat with a [simple calculator](http://www.usereffect.com/split-test-calculator) to get your initial calculations.
 
 ## Note
 
@@ -28,6 +28,23 @@ On browsing the JSON file you will see that each data point consists of the foll
   * Cohort
   * Conversion Flag (True/False)
 
-Your application should compute items 2A, 2B and 2C in for each cohort.
+Your application will have to separate data by cohort (typically their names are A and B).
 
-###
+### Calculations
+
+The quantities described in 2(i), 2(ii) and 2(iii) above will need to be computed for each cohort individually. The _sample size_ for a cohort is the total number of data points for that cohort. The _number of conversions_ counts how many of those points are conversions. The _conversion rate_ for a cohort is simply the conversion viewed as a fraction of the sample size.
+
+Item 2(iii) _confidence interval_ may be relatively new to some. It is described using two numbers known as the _lower limit_ and _upper limit_. It basically gives a range of values inside which the true _conversion rate_ is very likely to fall. So for example, the conversion rate for a cohort might be 7%, but a _95% confidence interval_ might be something like [5%,9%]. That is to say, we are 95% confident that the true conversion rate will lie somewhere between 5% and 9%. There is simple formula to compute a 95% confidence interval using conversion rate and the sample size:
+
+```
+p = conversion rate
+n = sample size
+se = p * (1 - p) / n
+95% confidence interval = [p - 1.96 * se, p + 1.96 * se]
+```
+
+Unlike the first three items, item 2(iv) _chi-square test_ is only computed once for the entire data set (not for each cohort). The chi-square test is used to determine if the cohort with the highest conversion rate is in fact a winner ... statistically speaking. You can look up the formula for the test or you can use the [ABAnalyzer](https://rubygems.org/gems/abanalyzer) gem to do the test for you.
+
+### Writing Your Tests
+
+An easy way to write tests for this project is to create a small (artificial) data set similar to the one provided in the JSON file. You can then do almost all the calculations in a simple spreadsheet. If you chose to use ABAnalyzer for the chi-square test then you can use the link above to precompute the test-statistic.

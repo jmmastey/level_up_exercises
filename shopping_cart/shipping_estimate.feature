@@ -42,8 +42,7 @@ Feature: Obtain shipping estimates
     Then I should see "Sorry. You have not added any items to your cart."
 
   Scenario: Address is not valid (Sad Path)
-    Given I have added a hammer to my cart
-    And I am logged in
+    Given I am logged in
     When I enter "" in the "Street Address" box
     And I enter "" in the "City" box
     And I enter "123" in the "State" box

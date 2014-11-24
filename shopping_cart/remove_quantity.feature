@@ -3,11 +3,17 @@ Feature: Remove Products from Shopping Cart
   I want to remove products from my shopping cart
   In order to not purchase them
 
-  Scenario: Remove Product From Cart (Good Path)
+  Background:
     Given I have added a product to my cart
-    And I am logged in
+
+  Scenario: Remove Product From Cart (Good Path)
+    Given I am logged in
     And I am on the Shopping Cart page
     When I click "Remove Product"
     Then I should have 0 products in my cart
 
-  # There are no Sad or Bad Paths for this Feature
+  Scenario: Not logged in (Bad Path)
+    Given I am not logged in
+    And I am on the Shopping Cart page
+    When I click "Remove Product"
+    Then I should see "Please log in to update your cart."

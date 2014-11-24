@@ -9,9 +9,9 @@ class Parser
 
   private
 
-  Visitor = Struct.new(:visit_date, :cohort, :result) do 
+  Visitor = Struct.new(:visit_date, :cohort, :result) do
     def conversion?
-     result == 1
+      result == 1
     end
   end
 

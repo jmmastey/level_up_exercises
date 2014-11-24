@@ -10,7 +10,7 @@ describe Cohort do
     let(:visitor2) { Visitor.new(date: '2013-12-29', cohort: "A", result: 1) }
     let(:empty_cohort) { Cohort.new }
 
-    subject ('cohort') { Cohort.new.add(visitor1).add(visitor2) }
+    subject('cohort') { Cohort.new.add(visitor1).add(visitor2) }
 
     it "has a total sample size of visitors" do
       expect(cohort.sample_size).to eq(2)

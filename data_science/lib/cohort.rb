@@ -5,7 +5,7 @@ class Cohort
   attr_reader :visitors
 
   # Splat is for variable length args, not array?
-  def initialize(visitors=[])
+  def initialize(visitors = [])
     @visitors = visitors
   end
 

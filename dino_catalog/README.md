@@ -57,4 +57,4 @@ Dinodex - Enter command > carnivores
 
 This is just an example, you may choose to do something entirely different.
 
-2. You will probably want to use the CSV gem to help with parsing the data-files.
+2. You will probably want to use the [CSV](http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html) class to help with parsing the data-files.

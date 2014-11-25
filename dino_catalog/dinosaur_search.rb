@@ -87,10 +87,6 @@ class DinosaurSearch
   end
 
   def to_json
-    hash_json ||= {}
-    @result_dinosaurs.each_with_index do |dinosaur, index|
-      hash_json[index] = prepare_hash(dinosaur)
-    end
-    hash_json.to_json
+    @result_dinosaurs.map { |dino| prepare_hash(dino) }.to_json
   end
 end

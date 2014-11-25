@@ -3,7 +3,7 @@ class LegislatorsController < ApplicationController
 
   def index(sort_by = "created_at DESC")
     sort_by = params["sort_by"] if params["sort_by"]
-    @results = Legislator.order(sort_by).paginate(:page => params[:page], :per_page => ApplicationHelper::PAGINATION_COUNT)
+    @results = Legislator.order(sort_by).paginate(page: params[:page], per_page: ApplicationHelper::PAGINATION_COUNT)
   end
 
   def show
@@ -11,7 +11,8 @@ class LegislatorsController < ApplicationController
   end
 
   private
-    def set_legislator
-      @legislator = Legislator.find(params[:id])
-    end
+
+  def set_legislator
+    @legislator = Legislator.find(params[:id])
+  end
 end

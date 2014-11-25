@@ -1,10 +1,10 @@
 class Bill < ActiveRecord::Base
   def title
-    return self.short_title if self.short_title
-    return self.bill_id
+    return short_title if short_title
+    bill_id
   end
 
-  def self.build_object_hash result
+  def self.build_object_hash(result)
     {
       bill_id: result['bill_id'],
       bill_type: result['bill_type'],
@@ -18,7 +18,7 @@ class Bill < ActiveRecord::Base
       official_title: result['official_title'],
       short_title: result['short_title'],
       sponsor_id: result['sponsor_id'],
-      enacted_at: result['history']['enacted_at']
+      enacted_at: result['history']['enacted_at'],
     }
   end
 end

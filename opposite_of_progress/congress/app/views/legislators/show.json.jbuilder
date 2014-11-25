@@ -1,1 +1,4 @@
-json.extract! @legislator, :bioguide_id, :birthday, :chamber, :party, :title, :term_start, :term_end, :gender, :first_name, :nickname, :middle_name, :last_name, :state, :twitter_id, :facebook_id, :created_at, :updated_at, :phone, :website, :office, :contact_form
+json.extract! @legislator, :bioguide_id, :birthday, :chamber, :party, :title,
+  :term_start, :term_end, :gender, :first_name, :nickname, :middle_name,
+  :last_name, :state, :twitter_id, :facebook_id, :created_at, :updated_at,
+  :phone, :website, :office, :contact_form

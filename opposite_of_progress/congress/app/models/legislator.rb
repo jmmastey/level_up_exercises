@@ -2,29 +2,31 @@ class Legislator < ActiveRecord::Base
   def full_name
     name_arr = []
 
-    name_arr << self.title if self.title
-    name_arr << self.first_name if self.first_name
-    name_arr << "'#{self.nickname}'" if self.nickname
-    name_arr << self.last_name if self.last_name
-    name_arr << "(#{self.party})" if self.party
+    name_arr << title if title
+    name_arr << first_name if first_name
+    name_arr << "'#{nickname}'" if nickname
+    name_arr << last_name if last_name
+    name_arr << "(#{party})" if party
 
     name_arr.join(" ")
   end
 
   def full_party
-    case self.party
-    when "R"
-      "Republican"
-    when "D"
-      "Democrat"
-    when "I"
-      "Independent"
-    when "G"
-      "Green"
-    end
+    case party
+      when "R"
+        "Republican"
+      when "D"
+        "Democrat"
+      when "I"
+        "Independent"
+      when "G"
+        "Green"
+      else
+        "Politician"
+      end
   end
 
-  def self.build_object_hash result
+  def self.build_object_hash(result)
     {
       bioguide_id: result['bioguide_id'],
       birthday: result['birthday'],
@@ -44,7 +46,7 @@ class Legislator < ActiveRecord::Base
       phone: result['phone'],
       website: result['website'],
       office: result['office'],
-      contact_form: result['contact_form']
+      contact_form: result['contact_form'],
     }
   end
 end

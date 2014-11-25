@@ -31,3 +31,7 @@ blockquote {
   font-size: 14px;
   text-align: right;
 }
+
+.user-section {
+  float:right; margin:10px; text-align:right;
+}

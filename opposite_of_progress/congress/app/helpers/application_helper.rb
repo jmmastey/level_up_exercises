@@ -9,7 +9,7 @@ module ApplicationHelper
     md5.update ""
 
     unless obj.nil?
-      empty_obj.attributes.each do |key,_|
+      empty_obj.attributes.each do |key, _|
         md5 << obj[key].to_s unless key == "id"
       end
     end
@@ -24,7 +24,7 @@ module ApplicationHelper
 
     @results["results"].each do |result|
       obj = klass.find_or_create_by(match_key => result[match_key])
-      obj.update(klass::build_object_hash(result))
+      obj.update(klass.build_object_hash(result))
     end
   end
 

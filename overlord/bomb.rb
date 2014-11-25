@@ -1,40 +1,21 @@
 class Bomb
-  attr_accessor :status, :incorrect_deactivation_attempts
-  attr_reader :activation_code, :deactivation_code
+  attr_accessor :status
+  attr_reader :activation_code, :deactivation_code,
+              :incorrect_deactivation_attempts
 
   DEFAULT_CODES = {
-    activation: "1234",
+    activation:   "1234",
     deactivation: "0000",
   }
 
   MAX_INCORRECT_ATTEMPTS = 3
 
-  def initialize(activation_code: "1234", deactivation_code: "0000")
-    @activation_code = validate_numericality(:activation, activation_code)
-    @deactivation_code = validate_numericality(:deactivation, deactivation_code)
+  def initialize(activation_code: DEFAULT_CODES[:activation],
+                 deactivation_code: DEFAULT_CODES[:deactivation])
+    @activation_code = valid_code(activation_code) || DEFAULT_CODES[:activation]
+    @deactivation_code = valid_code(deactivation_code) || DEFAULT_CODES[:deactivation]
     @status = :deactivated
     @incorrect_deactivation_attempts = 0
-  end
-
-  def validate_numericality(type, code)
-    if code =~ /^[\d]+$/
-      code
-    else
-      DEFAULT_CODES[type]
-    end
-  end
-
-  def activate
-    @status = :active
-  end
-
-  def deactivate
-    @status = :deactivated
-    @incorrect_deactivation_attempts = 0
-  end
-
-  def explode!
-    @status = :exploded
   end
 
   def analyze_user_code(code)
@@ -45,8 +26,31 @@ class Bomb
     end
   end
 
+  def exploded?
+    @status == :exploded
+  end
+
+  private
+
+  def valid_code(code)
+    code if code =~ /^[\d]+$/
+  end
+
+  def explode!
+    @status = :exploded
+  end
+
   def incorrect_attempt
     @incorrect_deactivation_attempts += 1
     explode! if @incorrect_deactivation_attempts == MAX_INCORRECT_ATTEMPTS
+  end
+
+  def activate
+    @status = :active unless @status == :exploded
+  end
+
+  def deactivate
+    @status = :deactivated unless @status == :exploded
+    @incorrect_deactivation_attempts = 0
   end
 end

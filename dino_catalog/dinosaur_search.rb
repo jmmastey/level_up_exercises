@@ -19,7 +19,6 @@ class DinosaurSearch
       when "equal"
         filter_characters(options)
     end
-
     self
   end
 
@@ -31,7 +30,7 @@ class DinosaurSearch
     @result_dinosaurs.each_with_index do |dinosaur, index|
       dinosaur.each do |key, value|
         next unless value_present_in_options?(options, key)
-        index = reset_resultant(index) if options[key] <= value.to_i
+        reset_resultant(index) if (options[key] > value.to_i) || (value.nil?)
       end
     end
   end
@@ -40,7 +39,7 @@ class DinosaurSearch
     @result_dinosaurs.each_with_index do |dinosaur, index|
       dinosaur.each do |key, value|
         next unless value_present_in_options?(options, key)
-        index = reset_resultant(index) if options[key] >= value.to_i
+        reset_resultant(index) if (options[key] < value.to_i) || (value.nil?)
       end
     end
   end
@@ -49,13 +48,18 @@ class DinosaurSearch
     @result_dinosaurs.each_with_index do |dinosaur, index|
       dinosaur.each do |key, value|
         next unless value_present_in_options?(options, key)
-        if options[key].is_a?(Array)
-          unless options[key].include?(value.downcase)
-            index = reset_resultant(index)
-          end
-        end
-        index = reset_resultant(index) if options[key] != value.downcase
+        index = reset_resultant(index) if present?(options, key, value)
       end
+    end
+  end
+
+  def present?(options, key, value)
+    if options[key].is_a?(Array)
+      return true unless options[key].include?(value)
+    elsif options[key] != value
+      return true
+    else
+      return false
     end
   end
 
@@ -84,10 +88,8 @@ class DinosaurSearch
 
   def to_json
     hash_json ||= {}
-    i = 0
-    @result_dinosaurs.each do |dinosaur|
-      hash_json[i] = prepare_hash(dinosaur)
-      i += 1
+    @result_dinosaurs.each_with_index do |dinosaur, index|
+      hash_json[index] = prepare_hash(dinosaur)
     end
     hash_json.to_json
   end

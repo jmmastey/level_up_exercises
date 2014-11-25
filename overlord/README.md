@@ -41,3 +41,11 @@ Now when someone connects to your Overlord server over the internet, they are vi
 When a visitor triggers an action on your Overlord site, your application will have to react and respond. For example, suppose the user enters an activation code and presses the _Activate!_ button. Then your application will have to validate the code with your Bomb class and then respond back to the user with an indication that the bomb is now activated or an error (in case the code was invalid). This liaising between the view and the model is done by the _Controller_. The controller code will reside in the file `overlord.rb`.
 
 Confused? Don't worry, it will make more and more sense as you build your Overlord. Good luck and start hacking!
+
+#### The Final Product
+
+At the very least your application should be functional. You can probably get away with two views:
+  * Enter-Codes Page: The user enters an activation and deactivation code for the bomb
+  * Game-Page: The user interacts with the bomb by activating it, deactivating it, or even snipping the wires
+
+You also have the option to leverage your Overlord project to learn more about CSS and Javascript. CSS allows you to add style to your views without cluttering your html.erb files. You can use Javascript to make your app more responsive to user input and also to add animations (e.g. a nice explosion!). This is all optional but hey, if you have the time, Overlord is a great place to get your feet wet.

@@ -43,8 +43,10 @@ se = p * (1 - p) / n
 95% confidence interval = [p - 1.96 * se, p + 1.96 * se]
 ```
 
-Unlike the first three items, item 2(iv) _chi-square test_ is only computed once for the entire data set (not for each cohort). The chi-square test is used to determine if the cohort with the highest conversion rate is in fact a winner ... statistically speaking. You can look up the formula for the test or you can use the [ABAnalyzer](https://rubygems.org/gems/abanalyzer) gem to do the test for you.
+Item 2(iv) _chi-square test_, unlike the other items, is computed once for the entire data set (not for each cohort). The chi-square test is used to determine if the cohort with the highest conversion rate is in fact a winner ... statistically speaking. You can use the [ABAnalyzer](https://rubygems.org/gems/abanalyzer) gem to do the test for you. Your application should produce a single chi-square significance number (called _p-value_).
 
 ### Writing Your Tests
 
-An easy way to write tests for this project is to create a small (artificial) data set similar to the one provided in the JSON file. You can then do almost all the calculations in a simple spreadsheet. If you chose to use ABAnalyzer for the chi-square test then you can use the link above to precompute the test-statistic.
+An easy way to write tests for this project is to create a small (artificial) data set similar to the one provided in the JSON file. You can then do almost all the calculations in a simple spreadsheet using the formulas above. If you chose to use ABAnalyzer for the chi-square test, then you can use the provided link above to precompute the chi-square significance.
+
+Some level-up'ers discovered that ABAnalyzer will throw an `insufficient data` error if your data set is two small. You may need a sample size of at least twenty per cohort to get it to work properly.

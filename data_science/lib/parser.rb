@@ -9,12 +9,6 @@ class Parser
 
   private
 
-  Visitor = Struct.new(:visit_date, :cohort, :result) do
-    def conversion?
-      result == 1
-    end
-  end
-
   def create_visitors(data)
     data.map { |obj| Visitor.new(obj[:visit_date], obj[:cohort], obj[:result]) }
   end
@@ -22,5 +16,11 @@ class Parser
   def seperate_into_cohorts(visitors)
     grouped = visitors.group_by(&:cohort)
     [Cohort.new(grouped['A']), Cohort.new(grouped['B'])]
+  end
+end
+
+Visitor = Struct.new(:visit_date, :cohort, :result) do
+  def conversion?
+    result == 1
   end
 end

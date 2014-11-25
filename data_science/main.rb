@@ -1,5 +1,6 @@
 require_relative 'lib/split_test'
 require_relative 'lib/parser'
+require 'pry'
 
 cohorts = Parser.new.parse("./source_data.json") # => [cohortA, cohortB]
 split_test =  SplitTest.new(*cohorts)

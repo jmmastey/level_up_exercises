@@ -4,7 +4,6 @@ class Cohort
   CONFIDENCE_LEVEL = 0.95
   attr_reader :visitors
 
-  # Splat is for variable length args, not array?
   def initialize(visitors = [])
     @visitors = visitors
   end
@@ -14,7 +13,7 @@ class Cohort
   end
 
   def add(visitors)
-    @visitors += Array(visitors)
+    @visitors += [visitors]
     self
   end
 
@@ -28,6 +27,7 @@ class Cohort
   end
 
   def confidence_interval
+    raise ArgumentError, "Sample size cannot be 0" unless sample_size > 0
     ABAnalyzer.confidence_interval(conversions, sample_size, CONFIDENCE_LEVEL)
   end
 end

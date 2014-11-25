@@ -14,14 +14,14 @@ Feature: Add items to the cart
     Given the cart is empty
     When I add 3 units of Item A to the cart
     Then I see 3 units of item A in the cart
-      And I see 3 as total items in the cart
+      And I see 3 as total quantity in the cart
 
   @happy
   Scenario: Add items to an non-empty cart
     Given the cart has 3 units of Item A
     When I add 2 units of Item B to the cart
     Then I see 2 of Item B in the cart
-      And I see 5 as total items in the cart
+      And I see 5 as total quantity in the cart
 
   @sad
   Scenario Outline: Add out-of stock items
@@ -50,6 +50,7 @@ Feature: Add items to the cart
     Given the cart has 3 units of Item A
     When I add 4 units of Item A to the cart
     Then I see only 6 units of Item A in the cart
+      And I should see exeeded the availability error
 
   @bad
   Scenario Outline: Add negative quantities

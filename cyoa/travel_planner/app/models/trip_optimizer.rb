@@ -51,12 +51,14 @@ class TripOptimizer
   end
 
   def get_earliest_arrival(flights)
+    return unless flights
     flights.min_by do |f|
       f["arrivalTimeUtc"].to_datetime
     end
   end
 
   def get_latest_departure(flights)
+    return unless flights
     flights.max_by do |f|
       f["departureTimeUtc"].to_datetime
     end

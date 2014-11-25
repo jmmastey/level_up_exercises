@@ -1,12 +1,10 @@
 require 'active_support/all'
 require 'rest_client'
 require 'json'
-require 'flight_stats/local_time'
 require 'flight_stats/url_builder'
 
 module FlightStats
   class Schedule
-    include LocalTime
 
     attr_accessor :airports, :airport_offsets
 
@@ -17,14 +15,14 @@ module FlightStats
     def get_flights_arriving_before(time, from, to)
       builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
       get_scheduled_flights(builder.schedule_arriving_url).select! do |f|
-        f["arrivalTime"].to_datetime < strip_timezone(time)
+        f["arrivalTimeUtc"].to_datetime < time
       end
     end
 
     def get_flights_departing_after(time, from, to)
       builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
       get_scheduled_flights(builder.schedule_departing_url).select! do |f|
-        f["departureTime"].to_datetime > strip_timezone(time)
+        f["departureTimeUtc"].to_datetime > time
       end
     end
 

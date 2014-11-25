@@ -16,4 +16,5 @@
 /tmp
 
 # Ignore vcr cassettes
-/spec/cassettes
+#/spec/cassettes
+spec/cassettes/schedule/api_call_gets_flights.yml

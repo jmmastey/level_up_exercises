@@ -1,27 +1,23 @@
-require 'spec_helper'
-require 'active_support/all'
-require 'flight_stats/schedule'
-require 'flight_stats/local_time'
+require "faker"
+require "spec_helper"
+require "active_support/all"
+require "flight_stats/schedule"
 
-describe 'FlightStats Schedules API', vcr: { record: :new_episodes } do
-  include LocalTime
+describe 'FlightStats Schedules API' do
 
   let(:api) { FlightStats::Schedule.new }
   let(:origin) { "ORD" }
   let(:destination) { "LGA" }
   let(:destination_offset) { "-0500" }
-  let(:meeting_start) do
-    date = DateTime.parse(2.days.from_now.strftime("%FTT12:06:00"))
-    strip_timezone(date)
-  end
-  let(:meeting_end) do
-    date = DateTime.parse(2.days.from_now.strftime("%FTT13:06:00"))
-    strip_timezone(date)
-  end
+  let(:meeting_start) { "2014-11-27T12:00:00-05:00".to_datetime }
+  let(:meeting_end) { "2014-11-27T13:00:00-05:00".to_datetime }
+  let(:dynamic_meeting_start) { Faker::Time.forward(10, :morning)}
 
-  context 'api call gets flights' do
+  context 'api call gets flights (api call daily)' do
     subject(:flights) do
-      api.get_flights_arriving_before(meeting_start, origin, destination)
+      VCR.use_cassette("schedule/api_call_gets_flights", {record: :new_episodes}) do
+        api.get_flights_arriving_before(dynamic_meeting_start, origin, destination)
+      end
     end
 
     it 'should show flights from chicago to new york tomorrow' do
@@ -36,9 +32,11 @@ describe 'FlightStats Schedules API', vcr: { record: :new_episodes } do
     end
   end
 
-  context 'before meeting' do
+  context 'before meeting (pre-recorded API)' do
     subject(:flights) do
-      api.get_flights_arriving_before(meeting_start, origin, destination)
+      VCR.use_cassette("schedule/get_flights_arriving_before") do
+        api.get_flights_arriving_before(meeting_start, origin, destination)
+      end
     end
 
     it 'flights exist' do
@@ -47,7 +45,7 @@ describe 'FlightStats Schedules API', vcr: { record: :new_episodes } do
 
     it 'arrives before the meeting starts' do
       flights.each do |f|
-        expect(f["departureTime"].to_datetime).to be < meeting_start
+        expect(f["arrivalTimeUtc"].to_datetime).to be < meeting_start
       end
     end
 
@@ -64,9 +62,11 @@ describe 'FlightStats Schedules API', vcr: { record: :new_episodes } do
     end
   end
 
-  context 'after meeting' do
+  context 'after meeting (pre-recorded API)' do
     subject(:flights) do
-      api.get_flights_departing_after(meeting_end, destination, origin)
+      VCR.use_cassette("schedule/get_flights_departing_after") do
+        api.get_flights_departing_after(meeting_end, destination, origin)
+      end
     end
 
     it 'flights exist' do
@@ -75,7 +75,7 @@ describe 'FlightStats Schedules API', vcr: { record: :new_episodes } do
 
     it 'departs after the meeting ends' do
       flights.each do |f|
-        expect(f["departureTime"].to_datetime).to be > meeting_end
+        expect(f["departureTimeUtc"].to_datetime).to be > meeting_end
       end
     end
 

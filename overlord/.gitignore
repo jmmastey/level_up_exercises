@@ -1,0 +1,7 @@
+.rspec
+bower_components/
+public/stylesheets/.sass-cache/
+.sass-cache
+public/stylesheets/sass/
+public/stylesheets/custom.css.map
+public/javascripts/

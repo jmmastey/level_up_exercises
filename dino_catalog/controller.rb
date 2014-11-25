@@ -1,6 +1,4 @@
-require 'pry'
 require 'csv'
-require 'colorize'
 require_relative 'standardized_data'
 require_relative 'dinosaur'
 require_relative 'catalog'

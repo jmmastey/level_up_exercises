@@ -1,0 +1,18 @@
+<h3><%= "#{@bill.title}" %></h3>
+
+<hr />
+
+<h4>Basics</h4>
+<blockquote>
+  <%= render partial: "layouts/generic_object_details", locals: {object: @bill} %>
+</blockquote>
+
+<h4>Related Legislator</h4>
+<blockquote>
+  <%= render partial: "legislators/legislator_stub_item", locals: {legislator: @legislator} if @legislator %>
+  <%= "There is no related legislator" unless @legislator %>
+</blockquote>
+
+<hr />
+
+<p class="back_link"><%= link_to "Back to Bills", bills_path %></p>

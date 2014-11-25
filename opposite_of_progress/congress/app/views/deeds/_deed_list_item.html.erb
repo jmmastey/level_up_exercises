@@ -1,0 +1,18 @@
+<div class="panel">
+  <h4><%= raw "#{link_to deed.deed, deed}" %></h4>
+  
+  <div class="row">
+    <div class="large-6 columns">
+      <% if deed.bioguide_id %>
+        <% legislator = Legislator.where(bioguide_id: deed.bioguide_id).first %>
+        <%= render partial: "legislators/legislator_stub_item", locals: {legislator: legislator, deed: deed} %>
+      <% end %>
+    </div>
+    <div class="large-6 columns">
+      <% if deed.bill_id %>
+        <% bill = Bill.where(bill_id: deed.bill_id).first %>
+        <%= render partial: "bills/bill_stub_item", locals: {bill: bill} %>
+      <% end %>
+    </div>
+  </div>
+</div>

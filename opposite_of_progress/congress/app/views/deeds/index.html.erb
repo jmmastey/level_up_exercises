@@ -1,0 +1,10 @@
+<h3>All Good Deeds</h3>
+
+<% @results.each do |result| %>
+  <%= render partial: "deed_list_item", locals: {deed: result} %>
+<% end %>
+<%= "There are no good deeds to show" if @results.count == 0 %>
+
+<hr />
+
+<div class="pagination"><%= will_paginate @results %></div>

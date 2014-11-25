@@ -1,0 +1,2 @@
+module LegislatorHelper
+end

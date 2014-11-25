@@ -30,7 +30,26 @@ Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long
 ### Technical Notes
 
 #### Your Application
-Your application will most likely run in the console and have an interactive prompt for user input. For example it might work something like this:
+Your application will most likely run in the console. It can run as a single command with options like this:
+```
+dev-666:~/projects/level_up_exercises/dino_catalog $ ruby ./dinodex.rb bipeds
+
+ Found:
+   Albertosaurus
+   Albertonykus
+   Baryonyx
+   Deinonychus
+   Megalosaurus
+   Giganotosaurus
+   Yangchuanosaurus
+   Abrictosaurus
+   Afrovenator
+   Carcharodontosaurus
+   Suchomimus
+```
+
+Or you can have an interactive prompt for user input like this:
+
 ```
 dev-666:~/projects/level_up_exercises/dino_catalog $ ruby ./dinodex.rb
 
@@ -56,7 +75,7 @@ Dinodex - Enter command > carnivores
 
 ```
 
-This is just an example - you may choose to do something entirely different.
+This are just examples - you may choose to do something entirely different.
 
 #### Parsing CSV Files
 

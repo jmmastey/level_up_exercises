@@ -60,11 +60,7 @@ function setup_select_ones() {
 	});
 }
 
-function setup_event_handlers() {
-
-	setup_tooltips();
-	setup_popups();
-	setup_select_ones();
+function setup_mail_selections() {
 
 	// Mail Selection: Check/Uncheck All
 	$( ".mail-selection input.check-all" ).change( function() {
@@ -104,6 +100,14 @@ function setup_event_handlers() {
 	$( ".mail-items .star" ).click( function() {
 		$( this ).toggleClass("starred");
 	});
+}
+
+function setup_event_handlers() {
+
+	setup_tooltips();
+	setup_popups();
+	setup_select_ones();
+	setup_mail_selections();
 }
 
 

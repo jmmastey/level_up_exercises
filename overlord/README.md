@@ -27,3 +27,14 @@ But, this is the important part: you're going to write all the tests for the dev
 * Add a timer. All good bombs have timers.
 * Add wires to snip to stop the bomb from detonating. This guy seems like he might not pay on time.
 * No bonus points for developing an actual electronic detonator. Still, dude, sweet.
+
+### Technical Notes
+
+#### Your First Web App
+
+If you have little or no experience writing web applications, then hopefully this project will serve as a nice introduction. The paradigm you will be learning here (and even more so when you start _Rails_) is known as _Model-View-Controller_ or _MVC_. Here is a brief explanation of the MVC paradigm within the context of Overlord.
+
+Most of your business logic will probably live inside a class called `Bomb`. It will know its own state like `activated` or `exploded` and will be able to react to actions like `set_code` and `activate`. In MVC the Bomb class is the _Model_.
+
+When someone connects to your Overlord server over the internet, they are viewing web-pages rendered by your application. Somewhere in your application you will have to construct these web-pages to display things like _bomb status_ and input fields for entering codes. In MVC this is called the _View_. In Overlord you will use _Embedded Ruby_ (.erb) files to render web-pages whose content depends on your bomb's state.
+

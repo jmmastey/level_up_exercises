@@ -1,7 +1,6 @@
 require "json"
 require_relative 'dinosaur_parser'
 require_relative 'dinosaur_search'
-
 class DinoCatalog
   def run
     resultant_dinosaurs = DinosaurParser.new.parse

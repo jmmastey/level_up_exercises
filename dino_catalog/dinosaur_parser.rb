@@ -1,14 +1,12 @@
 require "csv"
 
 class DinosaurParser
-  def initialize
-    @mapping = { "NAME"          => "Genus",
-                 "PERIOD"        => "Period",
-                 "DIET"          => "Carnivore",
-                 "WEIGHT_IN_LBS" => "Weight",
-                 "WALKING"       => "Walking",
-              }
-  end
+  MAPPING = { "NAME"          => "Genus",
+              "PERIOD"        => "Period",
+              "DIET"          => "Carnivore",
+              "WEIGHT_IN_LBS" => "Weight",
+              "WALKING"       => "Walking",
+            }
 
   def parse
     @result_dinosaurs = []
@@ -17,10 +15,12 @@ class DinosaurParser
     @result_dinosaurs
   end
 
+  private
+
   def parse_csv(file_name)
     CSV.foreach(file_name, headers: true) do |row|
       dinosaur = {}
-      %w(NAME PERIOD CONTINENT DIET WEIGHT_IN_LBS WALKING).each do |param|
+      MAPPING.keys.each do |param|
         dinosaur[param] = extract_csv(row, param)
       end
       @result_dinosaurs << dinosaur
@@ -29,11 +29,11 @@ class DinosaurParser
 
   def extract_csv(row, key)
     if key == "DIET"
-      row[key] || check_diet(row[@mapping[key]])
+      row[key] || check_diet(row[MAPPING[key]])
     elsif key == "CONTINENT"
       row[key] || "Africa"
     else
-      row[key] || row[@mapping[key]]
+      row[key] || row[MAPPING[key]]
     end
   end
 
@@ -41,7 +41,7 @@ class DinosaurParser
     if row_value == "Yes"
       return "Carnivore"
     else
-      return "UNKNOWN"
+      return "Herbivore"
     end
   end
 end

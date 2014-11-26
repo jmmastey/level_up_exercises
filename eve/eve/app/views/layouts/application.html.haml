@@ -1,8 +1,7 @@
 %html
   %head
     %title= t(:title)
-    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag "application", media: "all"
     = csrf_meta_tags
   %body
     = render "shared/menu"
@@ -12,3 +11,4 @@
       - if alert
         %p.alert.alert-danger= alert
       = yield
+    = javascript_include_tag 'application'

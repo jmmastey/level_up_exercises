@@ -5,12 +5,13 @@ require_relative 'catalog'
 require_relative 'options_parser'
 
 class Controller
-  attr_accessor :dinos, :catalog, :action
+  attr_accessor :standardized_data, :dinos, :catalog, :action
 
   def initialize(filepaths)
-    @dinos = build_dinos(filepaths)
-    @catalog = build_catalog
-    @action = OptionsParser.new
+    @standardized_data    = standardize_data(filepaths)
+    @dinos                = build_dinosaurs
+    @catalog              = build_catalog
+    @action               = OptionsParser.new
   end
 
   def run
@@ -28,16 +29,20 @@ class Controller
 
   private
 
-  def build_dinos(filepaths)
-    standardized_rows = filepaths.map { |path| standardize(path) }
-    standardized_rows.flatten.map { |row| Dinosaur.new(row) }
+  def standardize_data(filepaths)
+    standardized_rows = filepaths.map { |path| standardize_file(path) }
+    standardized_rows.flatten
+  end
+
+  def build_dinosaurs
+    standardized_data.map { |row| Dinosaur.new(row) }
   end
 
   def build_catalog
     Catalog.new(dinos)
   end
 
-  def standardize(path)
+  def standardize_file(path)
     StandardizedData.new(path).parsed_rows
   end
 end

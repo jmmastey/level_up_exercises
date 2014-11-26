@@ -30,5 +30,5 @@ Feature: Change quantities in the cart
 
   @bad
   Scenario: change the quantity of item not in the cart
-    When I somehow increase the quantity of Item B to 3
+    When I increase the quantity of Item B to 3
     Then I should see invalid request error

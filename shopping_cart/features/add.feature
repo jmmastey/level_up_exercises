@@ -50,7 +50,7 @@ Feature: Add items to the cart
     Given the cart has 3 units of Item A
     When I add 4 units of Item A to the cart
     Then I see only 6 units of Item A in the cart
-      And I should see exeeded the availability error
+      And I should see exceeds availability error
 
   @bad
   Scenario Outline: Add negative quantities

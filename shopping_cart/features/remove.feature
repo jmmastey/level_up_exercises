@@ -18,8 +18,8 @@ Feature: Remove items from the cart
       But I do not see Item A in the cart
 
   @bad
-  Scenario: Somehow try to remove an item not in the cart
+  Scenario: try to remove an item not in the cart
     Given I have 3 units of Item A in the cart
-    When I somehow remove Item B from the cart
+    When I remove Item B from the cart
     Then I should see a invalid request error
       And I still see 3 units of Item A in the cart

@@ -36,7 +36,6 @@ class Controller
   end
 
   def dino_hashes(path)
-    tmp = StandardizedData.new(path)
-    tmp.rows
+    StandardizedData.new(path).rows
   end
 end

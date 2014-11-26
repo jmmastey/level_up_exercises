@@ -5,41 +5,54 @@ Feature: Add Coupons to Shopping Cart
 
   Background
     Given I am on the Shopping Cart page
+    And the coupon code 111222 takes 20% off an order
     And I have added a hammer to my cart
+    And my total cost is $10.00
 
-  Scenario: Add Valid Coupon (Good Path)
+  Scenario Outline: Using Coupons
+    Given I am logged <login_status>
+    When I add the coupon code <code> to the "Coupon Code" box
+    And I click "Add Coupon"
+    Then I should see <message>
+
+    Examples:
+      | login_status |  code  |                 message                    |
+      |      in      | 111222 | Total cost is $8.00                        | (Good Path)
+      |      in      | 000000 | Sorry. That is not a valid coupon code.    | (Sad Path)
+      |      in      | 999999 | Sorry. That coupon code has expired.       | (Sad Path)
+      |      in      | lkasdd | Please enter a code in the format: 123456. | (Bad Path)
+      |      out     | 111222 | Please log in to enter a coupon code.      | (Bad Path)
+      |      in      |  none  | Please enter a coupon code.                | (Bad Path)
+
+  Scenario: Add the same valid coupon twice (Sad Path)
     Given I am logged in
     And my total cost is $10.00
     When I add the coupon code "111222" to the "Coupon Code" box
     And I click "Add Coupon"
-    Then my total cost is $8.00
-
-  Scenario: Add Invalid Coupon (Sad Path)
-    Given I am logged in
-    When I add the coupon code "000000" to the "Coupon Code" box
+    Then I should see "Total cost is $8.00"
+    When I add the coupon code "111222" to the "Coupon Code" box
     And I click "Add Coupon"
-    Then I should see "Sorry. That is not a valid coupon code. Please enter a valid code."
+    Then I should see "You have already entered that coupon code"
+    And I should see "Total cost is $8.00"
 
-  Scenario: Add Expired Coupon (Sad Path)
+  Scenario: Add two different valid coupons (Sad Path)
     Given I am logged in
-    When I add the coupon code "999999" to the "Coupon Code" box
-    And I click "Add Coupon"
-    Then I should see "Sorry. That coupon code has expired."
-
-  Scenario: Add Incorrectly Formatted Coupon (Bad Path)
-    Given I am logged in
-    When I add the coupon code "lkasdjflkajfd" to the "Coupon Code" box
-    And I click "Add Coupon"
-    Then I should see "Please enter a code in the format: 123456."
-
-  Scenario: Forget to Add Coupon (Bad Path)
-    Given I am logged in
-    And I click "Add Coupon"
-    Then I should see "Please enter a coupon code."
-
-  Scenario: Not logged in (Bad Path)
-    Given I am not logged in
     And my total cost is $10.00
     When I add the coupon code "111222" to the "Coupon Code" box
     And I click "Add Coupon"
-    Then I should see "Please log in to enter a coupon code."
+    Then I should see "Total cost is $8.00"
+    When I add the coupon code "222111" to the "Coupon Code" box
+    And I click "Add Coupon"
+    Then I should see "You have already entered a coupon code"
+    And I should see "Total cost is $8.00"
+
+  Scenario: Add a valid coupon and estimate shipping (Good Path)
+    Given I am logged in
+    And my total cost is $10.00
+    When I enter a valid address
+    And I click "Submit My Address"
+    Then I should see "Your estimated shipping costs are $5.00"
+    And I should see "Total cost is $15.00"
+    When I add the coupon code "111222" to the "Coupon Code" box
+    And I click "Add Coupon"
+    Then I should see "Total cost is $13.00"

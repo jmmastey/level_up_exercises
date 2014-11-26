@@ -35,7 +35,11 @@ class Controller
     Catalog.new(dinos)
   end
 
+<<<<<<< HEAD
   def standardize(path)
+=======
+  def dino_hashes(path)
+>>>>>>> b308b3e660ab7a3d23ff49973617f04578aa2c87
     StandardizedData.new(path).rows
   end
 end

@@ -28,7 +28,7 @@
             </div>
             <div class="row inner cover">
               <div class="col-xs-4 col-xs-offset-4">
-                <form role="form" class="lead" action="/boot" method="POST">
+                <form role="form" class="lead" id="code-form" action="/boot" method="POST">
                   <div class="form-group activation-code">
                     <label for="set-activation-code">Set Activation Code</label>
                     <input type="text" class="form-control" id="set-activation-code" name="activation" placeholder="Enter code"/>
@@ -39,6 +39,7 @@
                   </div>
                   <button type="submit" class="btn btn-default">Submit New Code and Boot</button>
                 </form>
+                <p class="alert alert-danger"></p>
               </div>
             </div>
             <div class="row inner cover boot">

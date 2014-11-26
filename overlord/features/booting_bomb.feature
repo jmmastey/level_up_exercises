@@ -19,3 +19,13 @@ Feature: Booting the Bomb
     When I click the Boot Bomb button
     Then I should be on the bomb interface
     And the bomb should be deactivated
+
+  @javascript
+  Scenario: Use invalid activation code
+    When I enter an invalid activation code
+    Then I should see a form validation error
+
+  @javascript
+  Scenario: Use invalid deactivation code
+    When I enter an invalid deactivation code
+    Then I should see a form validation error

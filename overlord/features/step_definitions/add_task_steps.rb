@@ -81,6 +81,20 @@ When(/^I enter (\d+) in the enter code box$/) do |code|
   fill_in('Enter Code', with: code)
 end
 
+When(/^I enter an invalid activation code$/) do
+  fill_in('Set Activation Code', with: 'aaaa')
+  click_button("Submit New Code and Boot")
+end
+
+When(/^I enter an invalid deactivation code$/) do
+  fill_in('Set Deactivation Code', with: 'aaaa')
+  click_button("Submit New Code and Boot")
+end
+
+Then(/^I should see a form validation error$/) do
+  expect(page).to have_content('Not a valid code. Must be all numbers.')
+end
+
 Then(/^I should see a code entry box$/) do
   expect(page).to have_selector('#code')
   expect(page).to have_content('Enter Code')

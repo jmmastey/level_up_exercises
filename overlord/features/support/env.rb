@@ -10,6 +10,9 @@ require 'rspec'
 
 Capybara.app = Sinatra::Application
 
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+
 class OverlordWorld
   include Capybara::DSL
   include RSpec::Expectations

@@ -38,10 +38,7 @@ class DinosaurParser
   end
 
   def check_diet(row_value)
-    if row_value == "Yes"
-      return "Carnivore"
-    else
-      return "Herbivore"
-    end
+    return "Carnivore" if row_value == "Yes"
+    return "Herbivore"
   end
 end

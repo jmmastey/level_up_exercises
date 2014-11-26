@@ -6,24 +6,12 @@ class DinosaurSearch
     @result_dinosaurs = search_pool
   end
 
-  def names
-    @result_dinosaurs.map { |dinosaur| dinosaur["NAME"] }
-  end
-
   def filter(options)
     if options["compare"] == "equal"
       filter_equal_characteristics(options)
     else
       filter_unequal_characteristics(options)
     end
-    # case options["compare"]
-    #   when "greater"
-    #     filter_greater_characteristics(options)
-    #   when "lesser"
-    #     filter_lesser_characteristics(options)
-    #   when "equal"
-    #     filter_equal_characteristics(options)
-    # end
     self
   end
 
@@ -71,17 +59,5 @@ class DinosaurSearch
     @result_dinosaurs.delete_at index
     index -= 1
     index
-  end
-
-  def description(name)
-    @result_dinosaurs.select { |dinosaur|  dinosaur["NAME"] == name }
-  end
-
-  def to_json
-    dinosaur = {}
-    @result_dinosaurs.each_with_index do |dino, index|
-      dinosaur[index] = dino.to_json
-    end
-    dinosaur.to_json
   end
 end

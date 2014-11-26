@@ -17,7 +17,7 @@ class Controller
   def run
     user_input = nil
     while user_input != 'exit'
-      puts "\n"+'Enter: "All", "Biped", "Large", "Carnivores", "Period", or "Exit"'
+      puts "\n" + 'Enter: "All", "Biped", "Large", "Carnivores", "Period", or "Exit"'
       user_input = gets.downcase.strip
       catalog.send(action.get_action(user_input))
     end

@@ -10,8 +10,8 @@ class StandardizedData
     continent:   ['continent'],
     description: ['description'],
   }
-  HEADER_CONVERSIONS = [:downcase, :standardize_header, :symbol ]
-  VALUE_CONVERSIONS  = [:standardize_weight, :standardize_period, :standardize_diet ]
+  HEADER_CONVERSIONS = [:downcase, :standardize_header, :symbol]
+  VALUE_CONVERSIONS  = [:standardize_weight, :standardize_period, :standardize_diet]
 
   def initialize(filename)
     @parsed_rows = []

@@ -1,7 +1,7 @@
 require 'abanalyzer'
 require_relative 'dataparser.rb'
 
-class Datacalculation
+class DataCalculation
   attr_accessor :summary_hash
   Z_SCORE = 1.96
 
@@ -18,13 +18,13 @@ class Datacalculation
   end
 
   def conversion_rate(cohort)
-    summary_hash[cohort][:conversion] / summary_hash[cohort][:total]
+    number_of_conversion(cohort) / total_size(cohort)
   end
 
-  def conversion_percentage(cohort)
+  def confidence_interval(cohort)
     lower = (conversion_rate(cohort) - error_bars(cohort)) * 100
     higher = (conversion_rate(cohort) + error_bars(cohort)) * 100
-    (lower.round(2)...higher.round(2))
+    [lower.round(2), higher.round(2)]
   end
 
   def confidence_level
@@ -36,7 +36,7 @@ class Datacalculation
 
   def standard_error(cohort)
     p = conversion_rate(cohort)
-    Math.sqrt(p * (1 - p) / summary_hash[cohort][:total].to_i)
+    Math.sqrt(p * (1 - p) / total_size(cohort).to_i)
   end
 
   def error_bars(cohort)

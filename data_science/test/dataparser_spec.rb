@@ -1,8 +1,8 @@
 require 'spec_helper'
 require '../dataparser'
 
-describe Dataparser do
-  let(:parser) { Dataparser.new }
+describe DataParser do
+  let(:parser) { DataParser.new }
   context 'will raise error when' do
     it 'unkown file is passed' do
       expect { parser.load_json_file('nofile.json') }.to raise_error(Errno::ENOENT)

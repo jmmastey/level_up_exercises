@@ -1,5 +1,10 @@
 class Dinosaur
-  attr_accessor :genus, :period, :diet, :weight, :numlegs, :continent, :desc
+  attr_accessor :genus, :period, :diet, :weight, :numlegs, :continent, :description
+
+  LARGE = 4000
+  SMALL = 2000
+
+  SORTED_FIELDS = [:genus, :period, :diet, :weight, :numlegs, :continent, :description]
 
   def initialize(classifications = {})
     @genus       = classifications[:genus]
@@ -8,52 +13,36 @@ class Dinosaur
     @weight      = classifications[:weight]
     @numlegs     = classifications[:numlegs]
     @continent   = classifications[:continent]
-    @description = classifications[:desc]
+    @description = classifications[:description]
   end
 
-  def large
-    4000
-  end
-
-  def small
-    2000
+  def gigantic?
+    @weight > SMALL
   end
 
   def eats_meat?
-    ["carnivore", "insectivore", "piscivore"].include? @diet.downcase
+    ['carnivore', 'insectivore', 'piscivore'].include? @diet.downcase
   end
 
   def biped?
-    numlegs == "Biped"
+    numlegs == 'Biped'
   end
 
   def from_period?(period_name)
-    @period.downcase.include? period_name.downcase
+    @period =~ /#{period_name}/i
   end
 
   def to_s
-    to_hash.map do |_key, val|
-      truncate("#{val}")
-    end.join("\t\t") + "\n"
+    to_h.map do |_key, val|
+      "#{val}".ljust(20)
+    end.join("") + "\n"
   end
 
   private
 
-  def to_hash
-    hash = {}
-    instance_variables.each do |var|
-      hash[var.to_s.delete("@")] = instance_variable_get(var)
-    end
-    hash
-  end
-
-  def truncate(text)
-    if text == "Quadruped"
-      text.slice(0, 4)
-    elsif text == "Albian"
-      "Albian  "
-    else
-      text.slice(0, 15)
+  def to_h
+    SORTED_FIELDS.each_with_object({}) do |field, output|
+      output[field] = instance_variable_get("@#{field}")
     end
   end
 end

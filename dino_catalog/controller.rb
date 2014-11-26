@@ -14,9 +14,12 @@ class Controller
   end
 
   def run
-    puts "\n\nEnter: \"All\", \"Biped\", \"Large\", \"Carnivores\", \"Period\", or \"Exit\""
-    catalog.send(action.get_action(gets.downcase.strip))
-    run
+    user_input = nil
+    while user_input != 'exit'
+      puts "\n"+'Enter: "All", "Biped", "Large", "Carnivores", "Period", or "Exit"'
+      user_input = gets.downcase.strip
+      catalog.send(action.get_action(user_input))
+    end
   end
 
   def length
@@ -26,20 +29,15 @@ class Controller
   private
 
   def build_dinos(filepaths)
-    accumulator = []
-    filepaths.map { |path| accumulator += standardize(path) }
-    accumulator.map { |row| Dinosaur.new(row) }
+    standardized_rows = filepaths.map { |path| standardize(path) }
+    standardized_rows.flatten.map { |row| Dinosaur.new(row) }
   end
 
   def build_catalog
     Catalog.new(dinos)
   end
 
-<<<<<<< HEAD
   def standardize(path)
-=======
-  def dino_hashes(path)
->>>>>>> b308b3e660ab7a3d23ff49973617f04578aa2c87
-    StandardizedData.new(path).rows
+    StandardizedData.new(path).parsed_rows
   end
 end

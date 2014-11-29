@@ -7,51 +7,44 @@ class DinosaurSearch
   end
 
   def filter(options)
-    if options["compare"] == "equal"
-      filter_equal_characteristics(options)
-    else
-      filter_unequal_characteristics(options)
+    case options["compare"]
+      when "equal"
+        filter_equal_characteristics(options)
+      when "greater"
+        filter_unequal_characteristics(options, "greater")
+      when "lesser"
+        filter_unequal_characteristics(options, "lesser")
+      else
+        @result_dinosaurs
     end
     self
   end
 
-  def value_present_in_options?(options, key)
-    options.key?(key) && options[key]
-  end
-
-  def filter_unequal_characteristics(options)
-    @result_dinosaurs.each_with_index do |dinosaur, index|
-      dinosaur.each do |key, value|
-        next unless value_present_in_options?(options, key)
-        reject_resultant_array(options, index, value)
+  def filter_unequal_characteristics(options, comparer)
+    if comparer == "greater"
+      @result_dinosaurs.reject! do |dinosaur|
+        (dinosaur[options.first.first].to_i <= options.first.last) ||
+          dinosaur[options.first.first].nil?
       end
-    end
-  end
-
-  def reject_resultant_array(options, index, value)
-    if options["compare"] == "greater"
-      delete_resultant(index) if (options.first.last > value.to_i) || value.nil?
     else
-      delete_resultant(index) if (options.first.last < value.to_i) || value.nil?
+      @result_dinosaurs.reject! do |dinosaur|
+        (dinosaur[options.first.first].to_i >= options.first.last) ||
+          dinosaur[options.first.first].nil?
+      end
     end
   end
 
   def filter_equal_characteristics(options)
-    @result_dinosaurs.each_with_index do |dinosaur, index|
-      dinosaur.each do |key, value|
-        next unless value_present_in_options?(options, key)
-        delete_resultant(index) if present?(options, key, value)
-      end
+    @result_dinosaurs.select! do |dinosaur|
+      present?(options.first.last, dinosaur[options.first.first])
     end
   end
 
-  def present?(options, key, value)
-    if options[key].is_a?(Array)
-      return true unless options[key].include?(value)
-    elsif options[key] != value
-      return true
+  def present?(value, comparer)
+    if value.is_a?(Array)
+      value.include?(comparer)
     else
-      return false
+      value == comparer
     end
   end
 

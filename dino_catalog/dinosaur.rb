@@ -13,10 +13,10 @@ class Dinosaur
   end
 
   def to_json
-    dinosaur = {}
-    @dinosaurs.each_with_index do |dino, index|
-      dinosaur[index] = dino.to_json
+    dinosaurs = []
+    @dinosaurs.each do |dino|
+      dinosaurs << dino.to_json
     end
-    dinosaur.to_json
+    dinosaurs.to_json
   end
 end

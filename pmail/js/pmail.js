@@ -1,10 +1,3 @@
-// $(document).ready(function(){
-//    $('.menu li ').click(function(){
-//      $(".menu li").removeClass("active");
-//      $(this).addClass("active");
-//   });
-//  });
-
 $(document).ready(function(){
    $('.menu li').click(function(){
      $(".menu li").removeClass("float-bar");
@@ -33,7 +26,7 @@ $(".app-image").click(function(){
   $('.app-wrapper').toggle();
 });
 
-$(".search-dropdown").click(function(){
+$(".search-dropdown-button").click(function(){
   $('.container').toggle();
 });
 

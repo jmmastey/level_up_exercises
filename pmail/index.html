@@ -12,16 +12,17 @@
   <script src="//code.jquery.com/ui/1.11.2/j query-ui.js"></script>
   <div class="banner">
     <div class="search-wrapper">
-       <input type="text" name="search" class="banner-textbox"/>
+       <input type="text" class="banner-textbox"/>
     </div>
     <div class="pmail-search">
-      <!-- <i class="fa fa-search"></i> -->
+     <span class="pepsi"></span>
     </div>
+
     <div class="search-dropdown-button">
-    <div class="container">
+    <div id="container">
 
 <label>Search</label>
-<div class="button" id="allmail">All Mail</div>
+<div class="utton" id="allmail">All Mail</div>
     
 <div class="searchparams">
     <label>From</label><br/>
@@ -43,19 +44,19 @@
     </div>
     
      <div class="arrange">
-       <label>Size</label><div class="button" id="arrange">greater than</div> 
+       <label>Size</label><div class="utton" id="arrange">greater than</div> 
        <input type="text" name="mb" id="arrange"/>
-       <div class="button" id="arrange">MB</div>  
+       <div class="utton" id="arrange">MB</div>  
      </div>
     
     <div class="arrange">
      <label>Date within</label>
-        <div class="button" id="arrange">1 day</div>  <p id="arrange">of</p>
+        <div class="utton" id="arrange">1 day</div>  <p id="arrange">of</p>
      <input type="text" id="arrange"/>
     </div>
-    <div class="button" id="query"></div>
-</div> <!-- container end
-</div> <!-- search-dropdown ends -->
+    <div class="utton" id="query"></div>
+</div>
+</div>
     
    
     <div class="address">smullins@enova.com</div>
@@ -99,8 +100,8 @@
         </div>
       </div>
       <div class="refresh-button all-button" data-role="Refresh">
-
-      <i class="fa fa-rotate-right"style="color:grey;"></i>
+       
+      <span class="refresh-image"></span>
       </div>
       <div class="more-button all-button" data-role="More"><span class="morespan">More</span>
 
@@ -131,8 +132,8 @@
       </div>
 
       </div>
-      <div class="older-button"></div>
-      <div class="newer-button"></div>
+      <div class="older-button"><span class="older-image"></span></div>
+      <div class="newer-button"><span class="newer-image"></span></div>
     </div>
   
     
@@ -153,7 +154,7 @@
 </div>
 <div class="main-parent">
 <div class="main-content">
-   <div><span class="name">Doughboy, Pillbury</span><span class="subject">Yeast</span><span class="message">I am in Nigeria, please forward a check to</span><span class="timestamp">11:44 am</span></div>
+   <div><span class="name">Doughboy, Pillsbury</span><span class="subject">Yeast</span><span class="message">I am in Nigeria, please forward a check to</span><span class="timestamp">11:44 am</span></div>
    <div><span class="name">Winfrey, Oprah</span><span class="subject">Oprah's Favorites</span><span class="message">You get a car! Redeem your...</span><span class="timestamp">6:45 am</span></div>
    <div><span class="name">Stephenson, Robert L.</span><span class="subject">Poetry</span><span class="message">Thank you for purchasing my latest edition of</span><span class="timestamp">Sept 3</span></div>
    <div><span class="name">Beyonce</span><span class="subject">Concert</span><span class="message">Your reservations for June 2030 confirmed</span><span class="timestamp">Sept 3</span></div>

@@ -8,16 +8,8 @@ body {
 }
 /*BANNER CONTENTS*/
 
-/*.search-dropdown-button{
- border: 1px solid;
- width: 10px;
- height: 28px;
- position: absolute;
- top:20;
- left:200;
-};*/
 
-.container{
+ div #container{
   display: none;
   width: 600px;
   background-color: white;
@@ -37,17 +29,17 @@ label{
   display: inline-block;
 }
 
-.searchparams{
+ #container .searchparams{
   margin-top: 40px;
 }
 
-.searchparams input[type="text"]{
+#container .searchparams input[type="text"]{
   margin-bottom: 10px;
   padding: 3px;
   width: 300px;
  }
 
-.button{
+.utton{
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
   border-radius: 3px;
@@ -101,7 +93,18 @@ label{
   left:20px;
 }
 
-.pmail-search {
+div .search-dropdown-button {
+  width:10px;
+  height:28px;
+  background-color: white;
+  position: relative;
+  top:-24px;
+  left:773px;
+  border: 1px solid;
+  cursor: pointer;
+}
+
+div .pmail-search {
   padding:10px;
   background-color: #4d90fe;
   border-bottom-right-radius:4px;
@@ -114,9 +117,17 @@ label{
   position: relative;
   top: 4px;
   left:781px;
+  }
+.pepsi{
   background-image:
-  url('//ssl.gstatic.com/gb/images/v1_fd3cfc85.png');
-  background-repeat: no-repeat;
+  url('https://ssl.gstatic.com/gb/images/v1_fd3cfc85.png');
+  width: 80px;
+  height:30px;
+  opacity: .40px;
+  background-position: 0px -90px;
+  position:absolute;
+  top:-6px;
+  right: -6px; 
 }
 
 .address{
@@ -159,10 +170,6 @@ label{
 
 .app-wrapper ul{
   padding: 0px;
-}
-
-.search-wrapper{
-
 }
 
 /*NAV-BANNER*/
@@ -222,6 +229,17 @@ label{
   margin-left: 109px;
  }
 
+ .refresh-image{
+  background-image:
+  url('https://ssl.gstatic.com/gb/images/v1_fd3cfc85.png');
+  width: 20px;
+  height:30px;
+  background-position: 0px -50px;
+  opacity: .70;
+  position: absolute;
+  top:0px;
+  left: 23px;
+ }
 .more-button {
   left: 315px;
   margin-bottom: 15px;
@@ -288,7 +306,16 @@ span.morespan{
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   width: 27px;
 }
-  
+
+.older-image{
+  background-image: url('https://ssl.gstatic.com/gb/images/v1_fd3cfc85.png');
+  width: 25px;
+  height: 40px;
+  background-position: -12px 640px;
+  position: absolute;
+  top:1px;
+  right:6px;
+}
 .older-button {
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
@@ -302,6 +329,15 @@ span.morespan{
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   width: 27px;
  }
+
+ .newer-image{
+  background-image:
+  url('https://ssl.gstatic.com/gb/images/v1_fd3cfc85.png');
+  width: 25px;
+  height: 50px;
+  background-position: -12px -50px;
+  position:absolute;
+  }
 
 .select:hover:after {
   background: black;
@@ -323,7 +359,7 @@ span.morespan{
   padding: 10px;
 }
 
-button span:hover:after {
+nav button span:hover:after {
   border-bottom: 1em solid black;
   border-left: 1em solid transparent;
   border-right: 1em solid transparent;

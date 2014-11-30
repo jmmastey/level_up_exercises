@@ -18,6 +18,7 @@ class DinosaurParser
   private
 
   def parse_csv(file_name)
+    raise("File not found") unless File.exist?(file_name)
     CSV.foreach(file_name, headers: true) do |row|
       dinosaur = {}
       MAPPING.keys.each do |param|

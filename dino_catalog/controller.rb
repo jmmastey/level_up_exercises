@@ -5,12 +5,11 @@ require_relative 'catalog'
 require_relative 'options_parser'
 
 class Controller
-  attr_accessor :standardized_data, :catalog, :action
+  attr_accessor :action
 
   def initialize(filepaths)
-    @standardized_data    = standardize_data(filepaths)
-    @catalog              = build_catalog
-    @action               = OptionsParser.new
+    @standardized_data     = standardize_data(filepaths)
+    @action                = OptionsParser.new
   end
 
   def run
@@ -24,17 +23,22 @@ class Controller
 
   private
 
-  def standardize_data(filepaths)
+  # returns a value, its a query
+  def rows(filepaths)
     standardized_rows = filepaths.map { |path| parse_file(path) }
     standardized_rows.flatten
   end
 
-  def build_catalog
-    dinosaurs = standardized_data.map { |row| Dinosaur.new(row) }
-    Catalog.new(dinosaurs)
+  def dinosaurs
+    @standardized_data.map { |row| Dinosaur.new(row) }
+  end
+
+  def catalog
+    # memoize
+    @catalog ||= Catalog.new(dinosaurs)
   end
 
   def parse_file(path)
-    StandardizedData.new(path).parsed_rows
+    Transformer.new(path).parsed_rows
   end
 end

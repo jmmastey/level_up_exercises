@@ -8,7 +8,7 @@ Feature: Booting the Bomb
 
   Scenario: Visiting the home page
     Then I should see a set activation code entry box
-    And I should see a set de-activation code entry box
+    And I should see a set deactivation code entry box
     And I should see a boot button
 
   Scenario: Set activation and deactivation codes and boot the bomb

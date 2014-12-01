@@ -108,7 +108,7 @@ Then(/^I should see a set activation code entry box$/) do
   expect(page).to have_selector('#set-activation-code')
 end
 
-Then(/^I should see a set de\-activation code entry box$/) do
+Then(/^I should see a set deactivation code entry box$/) do
   expect(page).to have_selector('#set-deactivation-code')
 end
 

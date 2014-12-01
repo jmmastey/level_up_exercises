@@ -5,7 +5,7 @@ enable :sessions
 
 get '/' do
   session.clear
-  erb :index
+  erb :home, layout: :index
 end
 
 post '/boot' do
@@ -15,22 +15,22 @@ post '/boot' do
 end
 
 get '/bomb' do
-  erb :bomb, locals: { bomb_state: bomb.status }
+  erb :bomb, layout: :index, locals: { bomb_state: bomb.status }
 end
 
 post '/bomb' do
   user_input_code = params['user-code']
   bomb.analyze_user_code(user_input_code)
-  if bomb.incorrect_deactivation_attempts == 3
+  if bomb.incorrect_deactivation_attempts == Bomb::MAX_INCORRECT_ATTEMPTS
     redirect '/exploded'
   else
-    erb :bomb, locals: { bomb_state: bomb.status }
+    erb :bomb, layout: :index, locals: { bomb_state: bomb.status }
   end
 end
 
 get '/exploded' do
   session.clear
-  erb :exploded
+  erb :exploded, layout: :index
 end
 
 not_found do

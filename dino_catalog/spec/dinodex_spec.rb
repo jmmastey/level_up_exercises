@@ -46,13 +46,14 @@ describe Dinodex do
   end
 
   context "#find" do
-    it "throws an ArgumentError if it doesn't get exactly one search criteria" do
+    it "throws an ArgumentError if it doesn't get exactly 1 search criteria" do
       expect { dinodex.find }.to raise_error(ArgumentError)
       expect { dinodex.find(description: "largest hunter", name: "giganotosaurus") }.to raise_error(ArgumentError)
     end
 
     it "finds all dinosaurs without descriptions" do
-      pending("still deciding whether or not this is a requirement that needs to be implemented")
+      pending("still deciding whether or not this is a "\
+              "requirement that needs to be implemented")
       expect(dinodex.find(description: nil).size).to be 9
     end
 
@@ -66,7 +67,8 @@ describe Dinodex do
     end
 
     it "does not find any dinos from the invalid period 'late'" do
-      pending("still deciding whether or not this is a requirement that needs to be implemented")
+      pending("still deciding whether or not this is a "\
+              "requirement that needs to be implemented")
       late_dinos = dinodex.find(period: "late")
       expect(late_dinos.size).to be 0
     end
@@ -101,7 +103,7 @@ describe Dinodex do
       expect(carnivores.size).to be 12
     end
 
-    it "raises an InvalidWeightError if searching for an invalid weight target (anything not 'big' or 'small')" do
+    it "raises an InvalidWeightError if given an invalid weight target" do
       expect { dinodex.find(weight_in_lbs: 200) }.to raise_error(InvalidWeightError)
     end
 
@@ -156,10 +158,12 @@ describe Dinodex do
       expect(megalosaurus_str).to include("diet: carnivore")
       expect(megalosaurus_str).to include("weight_in_lbs: 2200")
       expect(megalosaurus_str).to include("walking: biped")
-      expect(megalosaurus_str).to include("description: originally thought to be a quadruped. first dinosaur to be named.")
+      expect(megalosaurus_str).to include("description: originally thought to "\
+                                          "be a quadruped. first dinosaur to be "\
+                                          "named.")
     end
 
-    it "does not print a description or weight for Dinodex dino 'afrovenator'" do
+    it "does not print description or weight for Dinodex dino 'afrovenator'" do
       afrovenator_str = dinodex.find(name: "afrovenator").to_s
       expect(afrovenator_str).to_not include("description")
       expect(afrovenator_str).to_not include("weight")
@@ -167,9 +171,9 @@ describe Dinodex do
 
     it "prints all dinosaurs from the 'jurassic' period" do
       jurassic_dinos = dinodex.find(period: "jurassic").to_s
-      expected_dinos = ["megalosaurus", "abrictosaurus", "afrovenator", "giraffatitan"]
+      expected_dinos = %w(megalosaurus abrictosaurus afrovenator giraffatitan)
 
-      expected_dinos.each { |expected_dino| expect(jurassic_dinos).to include(expected_dino) }
+      expected_dinos.each { |dino| expect(jurassic_dinos).to include(dino) }
     end
   end
 end

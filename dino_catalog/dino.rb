@@ -4,7 +4,8 @@ class DinodexMatchError < RuntimeError; end
 class InvalidWeightError < DinodexMatchError; end
 
 class Dino
-  attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
+  attr_accessor :name, :period, :continent, :diet,
+    :weight_in_lbs, :walking, :description
 
   def initialize(dino_hash)
     dino_hash.each { |attribute, value| send("#{attribute}=", value) }
@@ -31,6 +32,7 @@ class Dino
   end
 
   private
+
   def matches_arbitrary_target?(attribute, target)
     send(attribute).casecmp(target) == 0
   end
@@ -41,30 +43,31 @@ class Dino
 
   def matches_diet?(target_diet)
     if target_diet.casecmp("carnivore") == 0
-      is_carnivore?
+      carnivore?
     else
       @diet.casecmp(target_diet) == 0
     end
   end
 
-  def is_carnivore?
+  def carnivore?
     CARNIVORES.include?(@diet)
   end
 
   def matches_weight_in_lbs?(weight)
-    method_name = "is_#{weight}?"
+    method_name = "#{weight}?"
     send(method_name)
   rescue NoMethodError
-    raise InvalidWeightError, "Cannot find dinosaurs of weight #{weight}. Try 'big' or 'small' instead"
+    raise InvalidWeightError, "Cannot find dinosaurs of weight #{weight}. "\
+      "Try 'big' or 'small' instead"
   end
 
-  def is_big?
+  def big?
     return false if weight_in_lbs.nil?
     @weight_in_lbs > BIG_DINO_WEIGHT_THRESHOLD
   end
 
-  def is_small?
+  def small?
     return false if weight_in_lbs.nil?
-    !is_big?
+    !big?
   end
 end

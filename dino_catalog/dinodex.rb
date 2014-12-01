@@ -26,10 +26,11 @@ class Dinodex
   end
 
   def to_s
-    @dinos.map { |dino| dino.to_s }.join
+    @dinos.map(&:to_s).join
   end
 
   private
+
   def create_dinos_from(filepaths)
     dino_hashes = filepaths.map { |path| dino_hashes_from(path) }.flatten
     @dinos += dino_hashes.map { |dino_hash| Dino.new(dino_hash) }
@@ -44,7 +45,7 @@ class Dinodex
   end
 
   def read_header(raw_data)
-    return "" if raw_data.nil? or raw_data.empty?
+    return "" if raw_data.nil? || raw_data.empty?
     raw_data.lines.first.chomp
   end
 

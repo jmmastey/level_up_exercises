@@ -18,12 +18,15 @@ class Formatter
     # in case raw_data is nil
     raw_data_str = raw_data.to_s
 
-    csv = CSV(raw_data_str, headers: true, header_converters: header_conversions.flatten,
-                  converters: body_conversions.flatten)
+    csv = CSV(raw_data_str, headers: true,
+              header_converters: header_conversions.flatten,
+              converters: body_conversions.flatten)
+
     csv.map(&:to_hash)
   end
 
   private
+
   def header_conversions
     [:symbol]
   end
@@ -46,6 +49,7 @@ class AfricanFormatter < Formatter
   end
 
   private
+
   HEADER_MAPPINGS = { "genus" => :name, "carnivore" => :diet, "weight" => :weight_in_lbs }
   DIET_MAPPINGS = { "yes" => "carnivore", "no" => "herbivore" }
 

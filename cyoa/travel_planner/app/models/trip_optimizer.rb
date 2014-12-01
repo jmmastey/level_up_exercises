@@ -12,6 +12,7 @@ class TripOptimizer
     :return
 
   def initialize(options = {})
+    @flight_mapper = FlightMapper.new
     @schedule = FlightStats::Schedule.new
     initialize_from_params(options)
   end
@@ -36,11 +37,21 @@ class TripOptimizer
   end
 
   def get_departures(meeting_start, from, to)
-    @schedule.get_flights_arriving_before(meeting_start, from, to)
+    flightstats = @schedule.get_flights_arriving_before(meeting_start, from, to)
+    map_flightstats_to_flights(flightstats)
+  end
+
+  def map_flightstats_to_flights(flightstats)
+    flights = Array.new
+    flightstats.each do |f|
+      flights.push(Flight.new(@flight_mapper.flight_stats_to_flight_h(f)))
+    end
+    flights
   end
 
   def get_returns(meeting_end, from, to)
-    @schedule.get_flights_departing_after(meeting_end, from, to)
+    flightstats = @schedule.get_flights_departing_after(meeting_end, from, to)
+    map_flightstats_to_flights(flightstats)
   end
 
   def departure_and_return
@@ -53,14 +64,14 @@ class TripOptimizer
   def get_earliest_arrival(flights)
     return unless flights
     flights.min_by do |f|
-      f["arrivalTimeUtc"].to_datetime
+      f.destination_date_time
     end
   end
 
   def get_latest_departure(flights)
     return unless flights
     flights.max_by do |f|
-      f["departureTimeUtc"].to_datetime
+      f.origin_date_time
     end
   end
 

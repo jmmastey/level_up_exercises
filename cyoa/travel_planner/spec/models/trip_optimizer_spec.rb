@@ -55,7 +55,7 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
     it 'picks the best departing flight' do
       pick_shortest_flights(optimizer)
       best = optimizer.all_departures.max_by do |f|
-        f["departureTimeUtc"].to_datetime
+        f.origin_date_time
       end
       expect_best_match(optimizer.departure, best)
     end
@@ -63,7 +63,7 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
     it 'picks the best returning flight' do
       pick_shortest_flights(optimizer)
       best = optimizer.all_returns.min_by do |f|
-        f["arrivalTimeUtc"].to_datetime
+        f.destination_date_time
       end
       expect_best_match(optimizer.return, best)
     end

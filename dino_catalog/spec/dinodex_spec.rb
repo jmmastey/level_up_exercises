@@ -156,7 +156,7 @@ describe Dinodex do
       expect(megalosaurus_str).to include("diet: carnivore")
       expect(megalosaurus_str).to include("weight_in_lbs: 2200")
       expect(megalosaurus_str).to include("walking: biped")
-      expect(megalosaurus_str).to include("description: originally thought to be a quadriped. first dinosaur to be named.")
+      expect(megalosaurus_str).to include("description: originally thought to be a quadruped. first dinosaur to be named.")
     end
 
     it "does not print a description or weight for Afrovenator" do

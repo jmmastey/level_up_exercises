@@ -38,8 +38,8 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
     it 'given travel details, pick two flights' do
       flights = pick_shortest_flights(optimizer)
       expect(flights.length).to eq(2)
-      expect(flights[:departure]).to be
-      expect(flights[:return]).to be
+      expect(flights[:departure]).to be_valid
+      expect(flights[:return]).to be_valid
     end
 
     it 'makes all departing flights available' do

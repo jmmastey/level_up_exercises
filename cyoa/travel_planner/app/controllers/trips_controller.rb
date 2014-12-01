@@ -6,9 +6,13 @@ class TripsController < ApplicationController
 
   def flights_search
     @trip = Trip.find(params[:trip_id])
+    #load it up
     @optimizer = TripOptimizer.new(@trip.to_optimizer_h)
-    @picked_flights = @optimizer.pick_shortest_flights
-    @trip.flights = [Flight.new(@picked_flights[:departure]), Flight.new(@picked_flights[:return])]
+    @optimizer.pick_shortest_flights
+
+    #@trip.flights = [Flight.new(@picked_flights[:departure]), Flight.new(@picked_flights[:return])]
+
+    #show the shit here
   end
 
   private

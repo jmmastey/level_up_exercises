@@ -59,12 +59,12 @@ class Dino
   end
 
   def is_big?
-    return false if @weight_in_lbs.nil?
+    return false if weight_in_lbs.nil?
     @weight_in_lbs > BIG_DINO_WEIGHT_THRESHOLD
   end
 
   def is_small?
-    return false if @weight_in_lbs.nil?
+    return false if weight_in_lbs.nil?
     !is_big?
   end
 end

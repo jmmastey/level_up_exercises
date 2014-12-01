@@ -1,5 +1,7 @@
 # Base Bill class
 class Bill < ActiveRecord::Base
+  scope :by_sponsor_id, ->(id) { where(sponsor_id: id) }
+
   def title
     short_title || bill_id
   end

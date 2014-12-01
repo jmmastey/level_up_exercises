@@ -2,9 +2,8 @@
 class BillsController < ApplicationController
   before_action :set_bill, only: [:show]
 
-  def index(sort_by = "created_at DESC")
-    sort_by = params["sort_by"] if params["sort_by"]
-    @results = Bill.order(sort_by).paginate(page: params[:page], per_page: ApplicationHelper::PAGINATION_COUNT)
+  def index
+    @results = Bill.all_sorted(params[:page], params[:sort_by])
   end
 
   def show

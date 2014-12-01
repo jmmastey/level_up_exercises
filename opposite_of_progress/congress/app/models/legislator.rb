@@ -45,4 +45,10 @@ class Legislator < ActiveRecord::Base
       contact_form: result['contact_form'],
     }
   end
+
+  def self.all_sorted(page, sort_by = "created_at DESC")
+    Legislator.order(sort_by)
+              .paginate(page: page,
+                        per_page: ApplicationHelper::PAGINATION_COUNT)
+  end
 end

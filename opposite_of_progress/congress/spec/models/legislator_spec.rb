@@ -11,7 +11,7 @@ describe Legislator do
     assert_equal fake.full_name, "Mrs. Pac Man"
   end
 
-  it "has a full party affilication" do
+  it "has a full party affiliation" do
     fake = FactoryGirl.build(:legislator, party: "D")
     assert_equal fake.full_party, "Democrat"
   end

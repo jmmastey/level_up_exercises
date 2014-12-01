@@ -32,7 +32,7 @@ class Formatter
     [:downcase, :all]
   end
 
-  CSV::Converters[:downcase] = lambda do |body, field_info|
+  CSV::Converters[:downcase] = lambda do |body, _|
     body.downcase unless body.nil?
   end
 end

@@ -6,7 +6,9 @@ Feature: Deactive bomb
   Background:
     Given I have entered the activation and deactivation codes
 
-  Scenario: The bomb deactivates if the correct deactivation code is entered
+  Scenario: The bomb deactivates if the correct deactivation code is entered (Happy Path)
     Given the bomb is active
     When I enter my correct deactivation code
     Then the bomb should be deactivated
+
+

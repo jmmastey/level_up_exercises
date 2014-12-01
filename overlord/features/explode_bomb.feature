@@ -7,16 +7,20 @@ Feature: Exploding the bomb
     Given I have entered the activation and deactivation codes
     And the bomb is active
 
-  Scenario: The bomb explodes if I enter the wrong deactivation code three times
+  Scenario: The bomb explodes if I enter the wrong deactivation code three times (Happy Path)
     Given I have a bomb with two incorrect attempts
     When I enter the incorrect deactivation code
     Then the bomb should be exploded
 
-  Scenario: The bomb should deactivate if I enter the wrong deactivation code twice followed by the correct deactivation code
+  Scenario: The bomb should deactivate if I enter the wrong deactivation code twice followed by the correct deactivation code (Happy Path)
     Given I have a bomb with two incorrect attempts
     When I enter my correct deactivation code
     Then the bomb should be deactivated
 
-  Scenario: The bomb should be disabled after it explodes
+  Scenario: The bomb is still activated if an incorrect code is entered (Sad Path)
+    When I enter the incorrect deactivation code
+    Then the bomb should be active
+
+  Scenario: The bomb should be disabled after it explodes (Sad Path)
     Given the bomb has exploded
     Then the Enter Code button should not work

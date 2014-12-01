@@ -11,9 +11,12 @@ class Dino
   end
 
   def matches?(attribute, target)
+    return false if send(attribute).nil?
     method_name = "matches_#{attribute}?"
 
-    if self.respond_to?(method_name, true)
+    if PARTIAL_MATCHING_ATTRS.include? attribute
+      partially_matches?(attribute, target)
+    elsif self.respond_to?(method_name, true)
       send(method_name, target)
     else
       matches_arbitrary_target?(attribute, target)
@@ -29,9 +32,11 @@ class Dino
 
   private
   def matches_arbitrary_target?(attribute, target)
-    attribute_value = send(attribute)
-    return false if attribute_value.nil?
-    attribute_value.include? target.downcase
+    send(attribute).casecmp(target) == 0
+  end
+
+  def partially_matches?(attribute, target)
+    send(attribute).include? target.downcase
   end
 
   def matches_diet?(target_diet)

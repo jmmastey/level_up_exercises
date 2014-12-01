@@ -80,8 +80,7 @@ describe Dinodex do
       expect(north_american_dinos.size).to be 5
     end
 
-    it "nots find any dinosaurs from 'America'" do
-      pending
+    it "does not find any dinosaurs from 'America'" do
       american_dinos = dinodex.find(continent: "america")
       expect(american_dinos.size).to be 0
     end

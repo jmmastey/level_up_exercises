@@ -43,8 +43,9 @@ Feature: Use coupons
   Scenario Outline: Uses coupons without matching conditions
     Given I am logged in as 'Jones'
       And I have cart filled with $90 worth of goods
-    When I use "<coupon>" coupon
+    When I use <coupon> coupon
     Then my new cart total should be $90
+      And I should see <message>
 
     Examples:
       | coupon  | message                                |

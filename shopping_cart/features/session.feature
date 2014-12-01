@@ -28,4 +28,4 @@ Feature: Session Management
   Scenario: Merge casues item quantity more than the stock level
     When I add 4 units of Item A to the cart
     Then I only see 6 units of Item A in the cart
-      And I should see exeeded the availability error
+      And I should see exceeds availability error

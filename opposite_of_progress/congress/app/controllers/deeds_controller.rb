@@ -3,7 +3,7 @@ class DeedsController < ApplicationController
   before_action :set_deed, only: [:show]
 
   def index
-    @results = Deed.order(date: :desc, deed: :asc).paginate(page: params[:page], per_page: ApplicationHelper::PAGINATION_COUNT)
+    @results = Deed.order(date: :desc, deed: :asc).paginate(page: params[:page], per_page: ENV["PAGINATION_COUNT"])
   end
 
   def show

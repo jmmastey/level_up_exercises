@@ -51,6 +51,6 @@ class Legislator < ActiveRecord::Base
   def self.all_sorted(page, sort_by = "created_at DESC")
     Legislator.order(sort_by)
               .paginate(page: page,
-                        per_page: ApplicationHelper::PAGINATION_COUNT)
+                        per_page: ENV["PAGINATION_COUNT"])
   end
 end

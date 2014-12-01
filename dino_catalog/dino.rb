@@ -14,7 +14,7 @@ class Dino
     return false if send(attribute).nil?
     method_name = "matches_#{attribute}?"
 
-    if PARTIAL_MATCHING_ATTRS.include? attribute
+    if PARTIAL_MATCHING_ATTRS.include?(attribute)
       partially_matches?(attribute, target)
     elsif self.respond_to?(method_name, true)
       send(method_name, target)
@@ -36,7 +36,7 @@ class Dino
   end
 
   def partially_matches?(attribute, target)
-    send(attribute).include? target.downcase
+    send(attribute).include?(target.downcase)
   end
 
   def matches_diet?(target_diet)

@@ -52,7 +52,7 @@ describe Dinodex do
     end
 
     it "finds all dinosaurs without descriptions" do
-      pending
+      pending("still deciding whether or not this is a requirement that needs to be implemented")
       expect(dinodex.find(description: nil).size).to be 9
     end
 
@@ -66,7 +66,7 @@ describe Dinodex do
     end
 
     it "does not find any dinos from the invalid period 'late'" do
-      pending
+      pending("still deciding whether or not this is a requirement that needs to be implemented")
       late_dinos = dinodex.find(period: "late")
       expect(late_dinos.size).to be 0
     end

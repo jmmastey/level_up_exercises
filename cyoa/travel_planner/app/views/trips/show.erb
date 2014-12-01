@@ -1,0 +1,37 @@
+<h1>Your trip</h1>
+
+<div>
+  <% location = @trip.home_location %>
+  <div>Home location: <%= location.address1 %>,
+    <%= location.city %>,
+    <%= location.state %>
+    <%= location.postal_code %></div>
+
+  <% @trip.meetings.each do |meeting| %>
+    <% location = meeting.location %>
+    <div>Meeting location: <%= location.address1 %>,
+      <%= location.city %>,
+      <%= location.state %>
+      <%= location.postal_code %></div>
+    <div>Meeting time: <%= meeting.start %></div>
+    <div>Meeting length: <%= meeting.length %> hours</div>
+  <% end %>
+
+  <table>
+    <tr>
+      <th>Origin</th>
+      <th>Departs</th>
+      <th>Destination</th>
+      <th>Arrives</th>
+    </tr>
+    <% @trip.flights.each do |flight| %>
+      <tr>
+        <td><%= flight.origin_airport.code %></td>
+        <td><%= flight.origin_date_time %></td>
+        <td><%= flight.destination_airport.code %></td>
+        <td><%= flight.destination_date_time %></td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>

@@ -9,10 +9,15 @@ class TripsController < ApplicationController
     #load it up
     @optimizer = TripOptimizer.new(@trip.to_optimizer_h)
     @optimizer.pick_shortest_flights
+  end
 
-    #@trip.flights = [Flight.new(@picked_flights[:departure]), Flight.new(@picked_flights[:return])]
+  def flights_save
+    # TODO: save the flights here. perhaps use flash? or session?
+    redirect_to show
+  end
 
-    #show the shit here
+  def show
+    @trip = Trip.find(params[:trip_id])
   end
 
   private

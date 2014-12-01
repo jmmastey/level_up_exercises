@@ -29,6 +29,4 @@ $(".app-image").click(function(){
 $(".search-dropdown-button").click(function(){
   $('.container').toggle();
 });
-
-
 });

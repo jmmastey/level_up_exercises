@@ -11,12 +11,16 @@ describe 'FlightStats Schedules API' do
   let(:destination_offset) { "-0500" }
   let(:meeting_start) { "2014-11-27T12:00:00-05:00".to_datetime }
   let(:meeting_end) { "2014-11-27T13:00:00-05:00".to_datetime }
-  let(:dynamic_meeting_start) { Faker::Time.forward(10, :morning)}
+  let(:dynamic_meeting_start) { Faker::Time.forward(10, :morning) }
 
   context 'api call gets flights (api call daily)' do
     subject(:flights) do
-      VCR.use_cassette("schedule/api_call_gets_flights", {record: :new_episodes}) do
-        api.get_flights_arriving_before(dynamic_meeting_start, origin, destination)
+      VCR.use_cassette("schedule/api_call_gets_flights",
+        record: :new_episodes) do
+        api.get_flights_arriving_before(
+          dynamic_meeting_start,
+          origin,
+          destination)
       end
     end
 

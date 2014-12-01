@@ -6,10 +6,12 @@ class Trip < ActiveRecord::Base
   validates_presence_of :home_location
 
   def to_optimizer_h
-    { from:           airport_code(self.home_location.id),
-      to:             airport_code(self.meetings[0].location.id),
-      meeting_start:  self.meetings[0].start,
-      meeting_length: self.meetings[0].length }
+    {
+      from:           airport_code(home_location.id),
+      to:             airport_code(meetings[0].location.id),
+      meeting_start:  meetings[0].start,
+      meeting_length: meetings[0].length,
+    }
   end
 
   private
@@ -17,5 +19,4 @@ class Trip < ActiveRecord::Base
   def airport_code(location_id)
     Airport.find_by!(location: location_id).code
   end
-
 end

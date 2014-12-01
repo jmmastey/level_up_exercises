@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Map objects to Flight' do
 
   let(:origin_airport) { "LGA" }
-  let(:origin_date_time) {"2014-12-01T13:00:00-05:00"}
+  let(:origin_date_time) { "2014-12-01T13:00:00-05:00" }
   let(:destination_airport) { "ORD" }
   let(:destination_date_time) { "2014-12-01T14:43:00-06:00" }
 
@@ -22,21 +22,17 @@ describe 'Map objects to Flight' do
       "isCodeshare"             => false,
       "isWetlease"              => false,
       "serviceType"             => "J",
-      "serviceClasses"          => ["F",
-                                    "J",
-                                    "Y"],
+      "serviceClasses"          => %w(F J Y),
       "trafficRestrictions"     => [],
       "codeshares"              => [{ "carrierFsCode"       => "NH",
                                       "flightNumber"        => "7571",
                                       "serviceType"         => "J",
-                                      "serviceClasses"      => ["F",
-                                                                "J",
-                                                                "Y"],
+                                      "serviceClasses"      => %w(F J Y),
                                       "trafficRestrictions" => ["Q"],
-                                      "referenceCode"       => 10709012 }],
+                                      "referenceCode"       => "10709012" }],
       "referenceCode"           => "1192-1974462--",
       "arrivalTimeUtc"          => destination_date_time,
-      "departureTimeUtc"        => origin_date_time
+      "departureTimeUtc"        => origin_date_time,
     }
   end
 

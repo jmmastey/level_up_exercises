@@ -5,7 +5,6 @@ require 'flight_stats/url_builder'
 
 module FlightStats
   class Schedule
-
     attr_accessor :airports, :airport_offsets
 
     def initialize

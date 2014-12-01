@@ -18,7 +18,7 @@ def assert_see_trip_reqs
   assert_text("Meeting length: 1.5 hours")
 end
 
-Given /^I am not yet using the application$/ do
+Given(/^I am not yet using the application$/) do
 end
 
 When(/^I go to the home page$/) do

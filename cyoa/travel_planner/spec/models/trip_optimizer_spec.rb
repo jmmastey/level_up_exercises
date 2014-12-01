@@ -16,7 +16,7 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
       FactoryGirl.create(
         :meeting_lga,
         location: lga.location,
-        start: "20141201T11:00:00-0500".to_datetime
+        start: "20141201T11:00:00-0500".to_datetime,
       )
     end
 
@@ -30,7 +30,8 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
     end
 
     def pick_shortest_flights(opti)
-      VCR.use_cassette("trip_optimizer/pick_shortest_flights", { record: :new_episodes }) do
+      VCR.use_cassette("trip_optimizer/pick_shortest_flights",
+        record: :new_episodes) do
         opti.pick_shortest_flights
       end
     end
@@ -54,17 +55,13 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
 
     it 'picks the best departing flight' do
       pick_shortest_flights(optimizer)
-      best = optimizer.all_departures.max_by do |f|
-        f.origin_date_time
-      end
+      best = optimizer.all_departures.max_by(&:origin_date_time)
       expect_best_match(optimizer.departure, best)
     end
 
     it 'picks the best returning flight' do
       pick_shortest_flights(optimizer)
-      best = optimizer.all_returns.min_by do |f|
-        f.destination_date_time
-      end
+      best = optimizer.all_returns.min_by(&:destination_date_time)
       expect_best_match(optimizer.return, best)
     end
   end

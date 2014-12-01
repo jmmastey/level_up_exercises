@@ -9,9 +9,9 @@ class FlightMapper
   private
 
   def lookup_airports(flight, flightstats)
-    airport                       = Airport.find_by_code!(flightstats["departureAirportFsCode"])
-    flight["origin_airport"]      = airport
-    airport                       = Airport.find_by_code!(flightstats["arrivalAirportFsCode"])
+    airport = Airport.find_by_code!(flightstats["departureAirportFsCode"])
+    flight["origin_airport"] = airport
+    airport = Airport.find_by_code!(flightstats["arrivalAirportFsCode"])
     flight["destination_airport"] = airport
   end
 

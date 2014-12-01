@@ -42,7 +42,7 @@ class TripOptimizer
   end
 
   def map_flightstats_to_flights(flightstats)
-    flights = Array.new
+    flights = []
     flightstats.each do |f|
       flights.push(Flight.new(@flight_mapper.flight_stats_to_flight_h(f)))
     end
@@ -63,16 +63,12 @@ class TripOptimizer
 
   def get_earliest_arrival(flights)
     return unless flights
-    flights.min_by do |f|
-      f.destination_date_time
-    end
+    flights.min_by(&:destination_date_time)
   end
 
   def get_latest_departure(flights)
     return unless flights
-    flights.max_by do |f|
-      f.origin_date_time
-    end
+    flights.max_by(&:origin_date_time)
   end
 
   def meeting_end

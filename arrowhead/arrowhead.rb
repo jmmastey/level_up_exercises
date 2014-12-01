@@ -23,21 +23,19 @@ class Arrowhead
   end
 
   def check_region(region)
-   return CLASSIFICATIONS[region] if CLASSIFICATIONS.include? region
+   return region if CLASSIFICATIONS.include? region
    raise "Unknown region, please provide a valid region."
   end
 
   def check_shape(shape)
-    return describe(@region[shape]) if @region.include? shape
+    return shape if CLASSIFICATIONS[region].include? shape
     raise "Unknown shape value. Are you sure you know what you're talking about?"
   end
 
-  def describe(arrowhead)
+  def classify
+    arrowhead = CLASSIFICATIONS[region][shape]
     puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end
 
-arrowhead = Arrowhead.new(:northern_plains, :bifurcated)
-arrowhead = Arrowhead.new(:far_west, :bifurcated)
-arrowhead = Arrowhead.new(:southern, :bifurcated)
-arrowhead = Arrowhead.new(:northern_plains, :square)
+puts Arrowhead.new(:northern_plains, :bifurcated).classify

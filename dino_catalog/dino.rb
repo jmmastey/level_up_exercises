@@ -31,14 +31,14 @@ class Dino
   def matches_arbitrary_target?(attribute, target)
     attribute_value = send(attribute)
     return false if attribute_value.nil?
-    attribute_value.include? target
+    attribute_value.include? target.downcase
   end
 
   def matches_diet?(target_diet)
-    if target_diet == "carnivore"
+    if target_diet.casecmp("carnivore") == 0
       is_carnivore?
     else
-      @diet == target_diet
+      @diet.casecmp(target_diet) == 0
     end
   end
 

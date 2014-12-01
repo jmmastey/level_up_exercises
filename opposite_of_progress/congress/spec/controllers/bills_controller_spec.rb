@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BillsController, :type => :controller do
+describe BillsController, type: :controller do
   before :each do
     bioguide_id = Faker::Lorem.characters(7)
     @bill = FactoryGirl.create(:bill, sponsor_id: bioguide_id)

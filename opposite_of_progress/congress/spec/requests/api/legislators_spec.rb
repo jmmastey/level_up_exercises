@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Legislators API", :type => :request do
+describe "Legislators API", type: :request do
   before :all do
     @legislator = FactoryGirl.create(:legislator)
   end

@@ -1,7 +1,6 @@
 class Bill < ActiveRecord::Base
   def title
-    return short_title if short_title
-    bill_id
+    short_title || bill_id
   end
 
   def self.build_object_hash(result)

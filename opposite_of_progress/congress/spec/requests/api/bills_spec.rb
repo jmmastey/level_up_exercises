@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Bills API", :type => :request do
+describe "Bills API", type: :request do
   before :all do
     @bill = FactoryGirl.create(:bill)
   end

@@ -43,7 +43,7 @@ Bill.create(bill_id: 'hjres124-113',
             last_action_at: '2014-09-19',
             last_vote_at: '2014-09-18',
             last_version_on: '2014-09-17',
-            official_title: 'aking continuing appropriations for fiscal year 2015, and for other purposes.',
+            official_title: 'Making continuing appropriations for fiscal year.',
             short_title: 'Continuing Appropriations Resolution, 2015')
 
 Bill.create(bill_id: 'hr5404-113',
@@ -55,5 +55,5 @@ Bill.create(bill_id: 'hr5404-113',
             last_action_at: '2014-09-26',
             last_vote_at: '2014-09-18',
             last_version_on: '2014-09-20',
-            official_title: 'To amend title 38, United States Code, to extend certain expiring provisions of law administered by the Secretary of Veterans Affairs, and for other purposes.',
-            short_title: 'Department of Veterans Affairs Expiring Authorities Act of 2014')
+            official_title: 'To amend title 38, United States Code.',
+            short_title: 'VA Expiring Authorities Act of 2014')

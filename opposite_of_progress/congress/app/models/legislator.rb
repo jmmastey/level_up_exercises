@@ -1,3 +1,4 @@
+# Base Legislator class
 class Legislator < ActiveRecord::Base
   def full_name
     name_arr = []
@@ -13,17 +14,12 @@ class Legislator < ActiveRecord::Base
 
   def full_party
     case party
-      when "R"
-        "Republican"
-      when "D"
-        "Democrat"
-      when "I"
-        "Independent"
-      when "G"
-        "Green"
-      else
-        "Politician"
-      end
+      when "R" then "Republican"
+      when "D" then "Democrat"
+      when "I" then "Independent"
+      when "G" then "Green"
+      else "Politician"
+    end
   end
 
   def self.build_object_hash(result)

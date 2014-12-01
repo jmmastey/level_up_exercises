@@ -1,3 +1,4 @@
+# Deeds helper module
 module DeedsHelper
   def self.law_voted_on
     Bill.order(:updated_at).all.each do |bill|

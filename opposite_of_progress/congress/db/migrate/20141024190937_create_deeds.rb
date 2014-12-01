@@ -1,3 +1,4 @@
+# Create the deeds table
 class CreateDeeds < ActiveRecord::Migration
   def change
     create_table :deeds do |t|

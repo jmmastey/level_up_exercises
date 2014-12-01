@@ -1,3 +1,4 @@
+# Add contact information to legislators
 class AddContactInformationToLegislators < ActiveRecord::Migration
   def change
     add_column :legislators, :phone, :string

@@ -1,0 +1,15 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'features/support/env.rb'
+    - 'spec/spec_helper.rb'
+    - 'script/cucumber'
+    - 'lib/tasks/cucumber.rake'
+    - 'features/step_definitions/web_steps.rb'
+    - 'db/migrate/*'
+    - 'config/initializers/*'
+    - 'bin/*'
+
+# Ignore double quotes
+StringLiterals:
+  Enabled: false

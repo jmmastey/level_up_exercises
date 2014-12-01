@@ -1,3 +1,4 @@
+# Deeds controller
 class DeedsController < ApplicationController
   before_action :set_deed, only: [:show]
 

@@ -1,3 +1,4 @@
+# Create the legislators table
 class CreateLegislators < ActiveRecord::Migration
   def change
     create_table :legislators do |t|

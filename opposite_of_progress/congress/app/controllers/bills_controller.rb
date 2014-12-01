@@ -1,3 +1,4 @@
+# Bills controller
 class BillsController < ApplicationController
   before_action :set_bill, only: [:show]
 

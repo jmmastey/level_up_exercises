@@ -1,3 +1,4 @@
+# Base Bill class
 class Bill < ActiveRecord::Base
   def title
     short_title || bill_id

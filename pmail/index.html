@@ -10,95 +10,102 @@
   <script type="text/javascript" src="js/pmail.js" ></script>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.2/j query-ui.js"></script>
+
   <div class="banner">
-    <div class="search-wrapper">
-       <input type="text" class="banner-textbox"/>
-    </div>
+
+    <input type="text" class="banner-textbox"/>
+ 
+
     <div class="pmail-search">
-     <span class="pepsi"></span>
-    </div>
+    <span class="pepsi"></span>
+    </div> <!-- end of pmail-search -->
 
     <div class="search-dropdown-button">
-    <div id="container">
+      <div class="container">
 
-<label>Search</label>
-<div class="utton" id="allmail">All Mail</div>
+        <label>Search</label>
+        <div class="container-button" id="allmail">All Mail</div>
+        
+    <div class="searchparams">
+      <label>From</label><br/>
+      <input type="text" name= "from"/><br/>
+
+      <label>To</label><br/>
+      <input type="text" name= "to"/><br/>
+
+      <label>Subject</label><br/>
+      <input type="text" name= "subject"/><br/>
+
+      <label>Has the words</label><br/>
+      <input type="text" name= "hasthewords"/><br/>
+
+      <label>Doesn't have</label><br/>
+      <input type="text" name= "doesnthave"/>
+    </div> <!-- end of searhparams -->
+
+    <div class= "container-elements">
+      <input type="checkbox" name= "hasattachment"/>
+      <label>Has attachment</label><br/>
+      <input type="checkbox" name= "dontincludechats"/>
+      <label> Don't include chats</label><br/>
+    </div> <!-- end of arrange -->
     
-<div class="searchparams">
-    <label>From</label><br/>
-    <input type="text" name= "from"/><br/>
-    <label>To</label><br/>
-    <input type="text" name= "to"/><br/>
-    <label>Subject</label><br/>
-    <input type="text" name= "subject"/><br/>
-    <label>Has the words</label><br/>
-    <input type="text" name= "hasthewords"/><br/>
-    <label>Doesn't have</label><br/>
-    <input type="text" name= "doesnthave"/>
-</div>
-    <div>
-     <input type="checkbox" name= "hasattachment"/>
-     <label>Has attachment</label><br/>
-     <input type="checkbox" name= "dontincludechats"/>
-     <label> Don't include chats</label><br/>
-    </div>
-    
-     <div class="arrange">
-       <label>Size</label><div class="utton" id="arrange">greater than</div> 
+     <div class="container-elements">
+       <label>Size</label><div class="container-button" id="arrange">greater than</div>
        <input type="text" name="mb" id="arrange"/>
-       <div class="utton" id="arrange">MB</div>  
-     </div>
+       <div class="container-button" id="arrange">MB</div>
+     </div> <!-- end of arrange -->
     
-    <div class="arrange">
-     <label>Date within</label>
-        <div class="utton" id="arrange">1 day</div>  <p id="arrange">of</p>
-     <input type="text" id="arrange"/>
-    </div>
-    <div class="utton" id="query"></div>
-</div>
-</div>
-    
-   
-    <div class="address">smullins@enova.com</div>
-    <div class="app-image"><img src="img/apps.png"/>
-    <div class="app-wrapper">
+    <div class="container-elements">
+      <label>Date within</label>
+        <div class="container-button" id="arrange">1 day</div>
+        <p id="arrange">of</p>
+        <input type="text" id="arrange"/>
+    </div><!-- end of arrange -->
 
-        <ul> <!-- TODO add href link -->
-        <li><div><img src="img/search.png" height="61" width="63"/></div></li>
-        <li><div><img src="img/mail.png" height="60" width="71"/></div></li>
-        <li><div><img src="img/drive.png" height="62" width="76"/></div></li><br/>
-        <li><div><img src="img/calendar.png" height="70" width="83"/></div></li>
-        <li><div><img src="img/groups.png" height="74" width="85" /></div></li>
-        <li><div><img src="img/contacts.png" height="70" width="91"/></div></li>
-        </ul>
-  </div>
-  </div>
-  </div>
-    <!-- <div class="maglass"><img src="img/maglass.png"/></div> -->
-  </div>
+    <div class="container-button" id="query"></div>
+    </div>
+    </div>
+    <div class="address">smullins@enova.com</div>
+      <div class="app-image"><img src="img/apps.png"/>
+        <div class="app-wrapper">
+            <ul> <!-- TODO add href link -->
+            <li><div><img src="img/search.png" height="61" width="63"/></div></li>
+            <li><div><img src="img/mail.png" height="60" width="71"/></div></li>
+            <li><div><img src="img/drive.png" height="62" width="76"/></div></li><br/>
+            <li><div><img src="img/calendar.png" height="70" width="83"/></div></li>
+            <li><div><img src="img/groups.png" height="74" width="85" /></div></li>
+            <li><div><img src="img/contacts.png" height="70" width="91"/></div></li>
+            </ul>
+        </div><!--  end of app-wrapper -->
+      </div> <!-- end of app-image -->
+   </div>
+  </div><!-- end of banner -->
+
+
   <div class="nav-banner">
     <button type=button name="mail" class="mail-button">Mail</button>
-    <div class="mail-dropdown">
-    <ul>
-       <li>Mail</li>
-       <li>Contacts</li>
-       <li>Tasks</li>
-    </ul>
-  </div>
+     <div class="mail-dropdown">
+        <ul>
+          <li>Mail</li>
+          <li>Contacts</li>
+          <li>Tasks</li>
+        </ul>
+     </div>
 
     <div class="select-button all-button">
-       <span class="checkbox"><input type="checkbox"></span>
-      <div class="boxmenu">
-        <ul>
-          <li><a href="#">All</a></li>
-          <li><a href="#">Read</a></li>
-          <li><a href="#">None</a></li>
-          <li><a href="#">Unread</a></li>
-          <li><a href="#">Starred</a></li>
-          <li><a href="#">Unstarred</a></li>
-      </ul>
-        </div>
-      </div>
+      <span class="checkbox"><input type="checkbox"/></span>
+        <div class="boxmenu">
+          <ul>
+            <li><a href="#">All</a></li>
+            <li><a href="#">Read</a></li>
+            <li><a href="#">None</a></li>
+            <li><a href="#">Unread</a></li>
+            <li><a href="#">Starred</a></li>
+            <li><a href="#">Unstarred</a></li>
+          </ul>
+        </div> <!-- end of boxmenu -->
+    </div> <!-- end of select button -->
       <div class="refresh-button all-button" data-role="Refresh">
        
       <span class="refresh-image"></span>
@@ -110,6 +117,7 @@
           <hr><p>Select messages to see</br> more actions</p>
         </div>
       </div>
+
       <div class="settings-button">
        <img src="img/glyphicons_136_cogwheel.png"/>
       <div class ="box">
@@ -134,12 +142,11 @@
       </div>
       <div class="older-button"><span class="older-image"></span></div>
       <div class="newer-button"><span class="newer-image"></span></div>
-    </div>
-  
+  </div> <!-- end of nav-banner -->
     
-     <nav class="menu">
-       <button class="compose-button">COMPOSE</button>
-       <ul>
+  <nav class="menu">
+    <button class="compose-button">COMPOSE</button>
+      <ul>
         <li><div>Inbox</div></li>
         <li>Starred</li>
         <li>Important</li>
@@ -147,26 +154,24 @@
         <li>Drafts</li>
         <li>Archives</li>
         <li>More</li>
-      </li>
-    </ul>
+      </ul>
   </nav>
 
-</div>
-<div class="main-parent">
-<div class="main-content">
-   <div><span class="name">Doughboy, Pillsbury</span><span class="subject">Yeast</span><span class="message">I am in Nigeria, please forward a check to</span><span class="timestamp">11:44 am</span></div>
-   <div><span class="name">Winfrey, Oprah</span><span class="subject">Oprah's Favorites</span><span class="message">You get a car! Redeem your...</span><span class="timestamp">6:45 am</span></div>
-   <div><span class="name">Stephenson, Robert L.</span><span class="subject">Poetry</span><span class="message">Thank you for purchasing my latest edition of</span><span class="timestamp">Sept 3</span></div>
-   <div><span class="name">Beyonce</span><span class="subject">Concert</span><span class="message">Your reservations for June 2030 confirmed</span><span class="timestamp">Sept 3</span></div>
-   <div><span class="name">Washington, Kerry</span><span class="subject">Scandal</span><span class="message">Explosive episode tonight, watch and find out</span><span class="timestamp">Sept 2</span></div>
-</div>
-</div>
-</div>
+  <div class="main-parent">
+    <div class="main-content">
+      <div><span class="name">Doughboy, Pillsbury</span><span class="subject">Yeast</span><span class="message">I am in Nigeria, please forward a check to</span><span class="timestamp">11:44 am</span></div>
+      <div><span class="name">Winfrey, Oprah</span><span class="subject">Oprah's Favorites</span><span class="message">You get a car! Redeem your...</span><span class="timestamp">6:45 am</span></div>
+      <div><span class="name">Stephenson, Robert L.</span><span class="subject">Poetry</span><span class="message">Thank you for purchasing my latest edition of</span><span class="timestamp">Sept 3</span></div>
+      <div><span class="name">Beyonce</span><span class="subject">Concert</span><span class="message">Your reservations for June 2030 confirmed</span><span class="timestamp">Sept 3</span></div>
+      <div><span class="name">Washington, Kerry</span><span class="subject">Scandal</span><span class="message">Explosive episode tonight, watch and find out</span><span class="timestamp">Sept 2</span></div>
+    </div> <!-- end of main-content -->
+  </div> <!-- end of main-parent -->
+
 </body>
 <div class = "footer">
-  <div class="pending-name">3% full <br/>Using 1.11 GB of your 30 GB</div>
-  <div class="pending-name">©2014 Google - <a href="#">Terms of Service</a> - Privacy Policy - <br/> Program Policies</div>
-  <div class="pending-name">Last account activity: 2 hours ago<br/>Details</div>
-</div>
+  <div class="footer-deets">3% full <br/>Using 1.11 GB of your 30 GB</div>
+  <div class="footer-deets">©2014 Google - <a href="#">Terms of Service</a> - Privacy Policy - <br/>Program Policies</div>
+  <div class="footer-deets">Last account activity: 2 hours ago<br/>Details</div>
+</div> <!-- end of footer div -->
 </html>
 

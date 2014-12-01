@@ -9,7 +9,7 @@ body {
 /*BANNER CONTENTS*/
 
 
- div #container{
+ .container{
   display: none;
   width: 600px;
   background-color: white;
@@ -39,7 +39,7 @@ label{
   width: 300px;
  }
 
-.utton{
+.container-button{
   background-color: #f4f4f4;
   border: 1px solid #c9c9c9;
   border-radius: 3px;
@@ -63,7 +63,7 @@ label{
   display: inline-block;
 }
 
-.arrange input{
+.container-elements input{
   width: 150px;
 }
 
@@ -127,7 +127,7 @@ div .pmail-search {
   background-position: 0px -90px;
   position:absolute;
   top:-6px;
-  right: -6px; 
+  right: -6px;
 }
 
 .address{
@@ -569,10 +569,6 @@ li:hover{
   background-color: #F2F2F0;
 }
 
-.menu li:hover{
-  background-color: white;
-  background-color: #F2F2F0;
-}
 .footer{
   position: relative;
   left: 263px;
@@ -581,6 +577,7 @@ li:hover{
 .footer div{
   display: inline-block;
  }
-.pending-name{
+
+.footer-deets{
   margin-left: 95px;
 }

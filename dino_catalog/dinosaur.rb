@@ -1,7 +1,6 @@
 class Dinosaur
   attr_accessor :genus, :period, :diet, :weight, :numlegs, :continent, :description
 
-  LARGE = 4000
   SMALL = 2000
 
   SORTED_FIELDS = [:genus, :period, :diet, :weight, :numlegs, :continent, :description]

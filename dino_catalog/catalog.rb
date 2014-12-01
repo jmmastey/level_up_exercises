@@ -5,10 +5,6 @@ class Catalog
     @dinos = dinos
   end
 
-  def length
-    dinos.length
-  end
-
   def print_all
     style_heading('All The Dinos')
     puts dinos.map(&:to_s)

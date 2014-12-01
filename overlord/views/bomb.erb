@@ -1,0 +1,22 @@
+<div class="row inner cover header">
+  <div class="col-xs-12">
+    <h1 class="cover-heading">Welcome to the bomb!</h1>
+    <p>Please enter a activation or de-activation code for the bomb.</p>
+  </div>
+</div>
+<div class="row inner cover">
+  <div class="col-xs-4 col-xs-offset-4">
+    <form role="form" class="lead" action="/bomb" method='POST'>
+      <div class="form-group">
+        <label for="user-code">Enter Code</label>
+        <input type="text" class="form-control" id="user-code" name="user-code" placeholder="Enter Activation code"/>
+      </div>
+      <button type="submit" class="btn btn-default">Enter Code</button>
+    </form>
+  </div>
+</div>
+<div class="row inner cover activation-notice">
+  <div class="col-xs-12">
+    <p class="lead activation-state">The bomb is <%= bomb_state %>.</p>
+  </div>
+</div>

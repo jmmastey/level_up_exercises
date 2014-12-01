@@ -1,0 +1,30 @@
+<div class="row inner cover header">
+  <div class="col-xs-12">
+    <h1 class="cover-heading">Welcome to Overlord!</h1>
+    <p>Please set an activation code for the bomb in the box below.</p>
+  </div>
+</div>
+<div class="row inner cover">
+  <div class="col-xs-4 col-xs-offset-4">
+    <form role="form" class="lead" id="code-form" action="/boot" method="POST">
+      <div class="form-group activation-code">
+        <label for="set-activation-code">Set Activation Code</label>
+        <input type="text" class="form-control" id="set-activation-code" name="activation" placeholder="Enter code"/>
+      </div>
+      <div class="form-group deactivation-code">
+        <label for="set-deactivation-code">Set Deactivation Code</label>
+        <input type="text" class="form-control" id="set-deactivation-code" name="deactivation" placeholder="Enter code"/>
+      </div>
+      <button type="submit" class="btn btn-default">Submit New Code and Boot</button>
+    </form>
+    <p class="alert alert-danger"></p>
+  </div>
+</div>
+<div class="row inner cover boot">
+  <div class="col-xs-12">
+    <p>Prefer not to enter a code? Click the button below to boot the bomb. Your activation code will be 1234 and your deactivation code will be 0000.</p>
+    <form action="/boot" method="POST">
+      <button type="submit" class="btn btn-danger boot-bomb-button">Boot Bomb</button>
+    </form>
+  </div>
+</div>

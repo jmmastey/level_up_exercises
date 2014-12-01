@@ -1,0 +1,35 @@
+@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "sass/cover";
+
+input {
+  color: black;
+}
+
+form {
+  input {
+    margin: 3em 0;
+  }
+}
+
+.mastfoot {
+  position: static;
+}
+
+.activation-notice {
+  margin-top: 5em;
+}
+
+.index {
+  .header {
+    margin-bottom: 5em;
+  }
+  .boot {
+    margin-top: 4em;
+  }
+}
+
+.bomb {
+  .header {
+    margin-bottom: 10em;
+  }
+}

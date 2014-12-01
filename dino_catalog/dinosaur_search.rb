@@ -50,7 +50,5 @@ class DinosaurSearch
 
   def delete_resultant(index)
     @result_dinosaurs.delete_at index
-    index -= 1
-    index
   end
 end

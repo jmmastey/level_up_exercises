@@ -1,4 +1,4 @@
-class StandardizedData
+class Transformer
   attr_accessor :parsed_rows
 
   HEADER_ALIASES = {

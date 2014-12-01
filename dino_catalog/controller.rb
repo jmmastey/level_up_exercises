@@ -1,5 +1,5 @@
 require 'csv'
-require_relative 'standardized_data'
+require_relative 'transformer'
 require_relative 'dinosaur'
 require_relative 'catalog'
 require_relative 'options_parser'
@@ -8,8 +8,8 @@ class Controller
   attr_accessor :action
 
   def initialize(filepaths)
-    @standardized_data     = standardize_data(filepaths)
-    @action                = OptionsParser.new
+    @standardized_rows    = rows(filepaths)
+    @action               = OptionsParser.new
   end
 
   def run
@@ -23,22 +23,19 @@ class Controller
 
   private
 
-  # returns a value, its a query
   def rows(filepaths)
-    standardized_rows = filepaths.map { |path| parse_file(path) }
-    standardized_rows.flatten
+    filepaths.map { |path| transform_file(path) }.flatten
   end
 
   def dinosaurs
-    @standardized_data.map { |row| Dinosaur.new(row) }
+    @standardized_rows.map { |row| Dinosaur.new(row) }
   end
 
   def catalog
-    # memoize
     @catalog ||= Catalog.new(dinosaurs)
   end
 
-  def parse_file(path)
+  def transform_file(path)
     Transformer.new(path).parsed_rows
   end
 end

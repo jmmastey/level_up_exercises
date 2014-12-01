@@ -1,10 +1,11 @@
 require_relative "../dinodex"
 
 describe Dinodex do
-  let(:african_dinodex_file) { "./african_dinosaur_export.csv" }
-  let(:dinodex_file) { "./dinodex.csv" }
-  let(:invalid_file) { "./spec/fixtures/invalid_format.csv" }
-  let(:missing_file) { "./missing_file.csv" }
+  FIXTURES_PATH = "./spec/fixtures/"
+  let(:african_dinodex_file) { File.join(FIXTURES_PATH, "african_dinosaur_export.csv") }
+  let(:dinodex_file) { File.join(FIXTURES_PATH, "dinodex.csv") }
+  let(:invalid_file) { File.join(FIXTURES_PATH, "invalid_format.csv") }
+  let(:missing_file) { File.join(FIXTURES_PATH, "missing_file.csv") }
 
   let(:african_dinodex) { Dinodex.new(filepaths: african_dinodex_file) }
   let(:single_dinodex) { Dinodex.new(filepaths: dinodex_file) }
@@ -47,7 +48,7 @@ describe Dinodex do
   context "#find" do
     it "throws an ArgumentError if it doesn't get exactly one search criteria" do
       expect { dinodex.find }.to raise_error(ArgumentError)
-      expect { dinodex.find(description: nil, name: "suchomimus") }.to raise_error(ArgumentError)
+      expect { dinodex.find(description: "largest hunter", name: "giganotosaurus") }.to raise_error(ArgumentError)
     end
 
     it "finds all dinosaurs without descriptions" do
@@ -55,47 +56,47 @@ describe Dinodex do
       expect(dinodex.find(description: nil).size).to be 9
     end
 
-    it "finds all dinosaurs named Suchomimus" do
+    it "finds all dinosaurs named 'suchomimus'" do
       expect(dinodex.find(name: "suchomimus").size).to be 1
     end
 
-    it "finds all dinosaurs from the Cretaceous period" do
+    it "finds all dinosaurs from the 'cretaceous' period" do
       cretaceous_dinos = dinodex.find(period: "cretaceous")
       expect(cretaceous_dinos.size).to be 8
     end
 
-    it "does not find any dinos from invalid periods" do
+    it "does not find any dinos from the invalid period 'late'" do
       pending
       late_dinos = dinodex.find(period: "late")
       expect(late_dinos.size).to be 0
     end
 
-    it "finds all dinosaurs from Africa" do
+    it "finds all dinosaurs from continent 'africa'" do
       african_dinos = dinodex.find(continent: "africa")
       expect(african_dinos.size).to be 7
     end
 
-    it "finds all dinosaurs from North America" do
+    it "finds all dinosaurs from continent 'north america'" do
       north_american_dinos = dinodex.find(continent: "north america")
       expect(north_american_dinos.size).to be 5
     end
 
-    it "does not find any dinosaurs from 'America'" do
+    it "does not find any dinosaurs from continent 'america'" do
       american_dinos = dinodex.find(continent: "america")
       expect(american_dinos.size).to be 0
     end
 
-    it "finds all dinosaurs that were piscivores" do
+    it "finds all dinosaurs with diet 'piscivore'" do
       piscivores = dinodex.find(diet: "piscivore")
       expect(piscivores.size).to be 1
     end
 
-    it "finds all dinosaurs that were herbivores" do
+    it "finds all dinosaurs with diet 'herbivore'" do
       herbivores = dinodex.find(diet: "herbivore")
       expect(herbivores.size).to be 4
     end
 
-    it "finds all dinosaurs that were carnivores" do
+    it "finds all dinosaurs with diet 'carnivore'" do
       carnivores = dinodex.find(diet: "carnivore")
       expect(carnivores.size).to be 12
     end
@@ -104,17 +105,17 @@ describe Dinodex do
       expect { dinodex.find(weight_in_lbs: 200) }.to raise_error(InvalidWeightError)
     end
 
-    it "finds all big dinosaurs" do
+    it "finds all 'big' dinosaurs" do
       big_dinos = dinodex.find(weight_in_lbs: "big")
       expect(big_dinos.size).to be 9
     end
 
-    it "finds all small dinosaurs" do
+    it "finds all 'small' dinosaurs" do
       small_dinos = dinodex.find(weight_in_lbs: "small")
       expect(small_dinos.size).to be 4
     end
 
-    it "finds all dinosaurs that were bipeds" do
+    it "finds all dinosaurs with walking type 'biped'" do
       bipeds = dinodex.find(walking: "biped")
       expect(bipeds.size).to be 11
     end
@@ -125,7 +126,7 @@ describe Dinodex do
       expect(flying.to_s.downcase).to include("quetzalcoatlus")
     end
 
-    it "finds all big Jurassic dinos" do
+    it "finds all 'big', 'Jurassic' dinos" do
       jurassic_dinos = dinodex.find(period: "jurassic")
       big_jurassic_dinos = jurassic_dinos.find(weight_in_lbs: "big")
       expect(big_jurassic_dinos.size).to be 2
@@ -147,7 +148,7 @@ describe Dinodex do
   end
 
   context "#to_s" do
-    it "prints all facts about Dinodex dino Megalosaurus" do
+    it "prints all facts about Dinodex dino 'megalosaurus'" do
       megalosaurus_str = dinodex.find(name: "megalosaurus").to_s
       expect(megalosaurus_str).to include("name: megalosaurus")
       expect(megalosaurus_str).to include("period: jurassic")
@@ -158,13 +159,13 @@ describe Dinodex do
       expect(megalosaurus_str).to include("description: originally thought to be a quadruped. first dinosaur to be named.")
     end
 
-    it "does not print a description or weight for Afrovenator" do
+    it "does not print a description or weight for Dinodex dino 'afrovenator'" do
       afrovenator_str = dinodex.find(name: "afrovenator").to_s
       expect(afrovenator_str).to_not include("description")
       expect(afrovenator_str).to_not include("weight")
     end
 
-    it "prints all dinosaurs from the Jurassic period" do
+    it "prints all dinosaurs from the 'jurassic' period" do
       jurassic_dinos = dinodex.find(period: "jurassic").to_s
       expected_dinos = ["megalosaurus", "abrictosaurus", "afrovenator", "giraffatitan"]
 

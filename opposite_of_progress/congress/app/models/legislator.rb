@@ -1,5 +1,7 @@
 # Base Legislator class
 class Legislator < ActiveRecord::Base
+  scope :by_bioguide_id, ->(id) { where(bioguide_id: id).first }
+
   def full_name
     name_arr = []
 

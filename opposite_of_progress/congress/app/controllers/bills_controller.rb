@@ -7,7 +7,7 @@ class BillsController < ApplicationController
   end
 
   def show
-    @legislator = Legislator.where(bioguide_id: @bill.sponsor_id).first
+    @legislator = Legislator.by_bioguide_id(@bill.sponsor_id)
   end
 
   private

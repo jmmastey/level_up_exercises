@@ -17,6 +17,11 @@ RSpec.describe ItemsController, :type => :controller do
       get :index, {}, valid_session
       expect(assigns(:items)).to eq([item])
     end
+
+    it "renders the index template" do
+      get :index
+      expect(response).to render_template("index")
+    end
   end
 
 end

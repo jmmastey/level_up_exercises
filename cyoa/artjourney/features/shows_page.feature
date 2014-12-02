@@ -5,5 +5,5 @@ Feature: View the home page
 
   Scenario: List latest shows
     Given some shows
-    When I visit the home page
-    Then I should see shows
+    When I visit the shows page
+    Then I should see show names

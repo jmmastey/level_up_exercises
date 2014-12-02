@@ -37,7 +37,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
-    arel (6.0.0)
+    arel (6.0.0.beta2)
     awesome_print (1.2.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -207,6 +207,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  arel (= 6.0.0.beta2)
   awesome_print
   byebug
   capybara

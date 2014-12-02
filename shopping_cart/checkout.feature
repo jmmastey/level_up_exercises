@@ -4,7 +4,9 @@ Feature: Checking Out
    I want ensure a user can checkout
 
    Background:
-     Given Cart holds 3 Sriver-3MM-Red, 4 Dozen-Nittaku-Yellow, 1 Yasaka-Stress-Net
+     Given Cart holds 3 Sriver-3MM-Red
+     And Cart holds 4 Dozen-Nittaku-Yellow
+     And Cart holds 1 Yasaka-Stress-Net
      And user vists the checkout page
 
    Scenario: User should see the correct total

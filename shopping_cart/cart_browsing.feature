@@ -4,7 +4,9 @@ Feature: Cart Browsing
    I want ensure a user can browse the items in the cart
 
    Background:
-     Given Cart holds 3 Sriver-3MM-Red, 4 Dozen-Nittaku-Yellow, 1 Yasaka-Stress-Net
+     Given Cart holds 3 Sriver-3MM-Red
+     And Cart holds 4 Dozen-Nittaku-Yellow
+     And Cart holds 1 Yasaka-Stress-Net
      And user vists summary page
 
    Scenario: User selects item in list

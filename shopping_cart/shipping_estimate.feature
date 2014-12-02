@@ -4,7 +4,9 @@ Feature: Shipping Estimate
    I want ensure a user can see shipping estimates
 
    Background:
-     Given Cart holds 3 Sriver-3MM-Red, 4 Dozen-Nittaku-Yellow, 1 Yasaka-Stress-Net
+     Given Cart holds 3 Sriver-3MM-Red
+     And Cart holds 4 Dozen-Nittaku-Yellow
+     And Cart holds 1 Yasaka-Stress-Net
      And user vists shipping page
 
    Scenario: Shipping estimates for 90210

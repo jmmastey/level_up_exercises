@@ -31,5 +31,7 @@ module Eve
     #   g.test_framework :rspec, fixture: true
     #   g.fixture_replacement :factory_girl, dir: "spec/factories"
     # end
+
+    config.action_controller.action_on_unpermitted_paramters = :log
   end
 end

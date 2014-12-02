@@ -36,11 +36,7 @@ class DataScience
   def leader(cohort_name_a, cohort_name_b)
     variation_a_rate = conversion_rate(cohort_name_a)
     variation_b_rate = conversion_rate(cohort_name_b)
-    if variation_a_rate == variation_b_rate
-      'No winner'
-    else
-      variation_a_rate > variation_b_rate ? cohort_name_a : cohort_name_b
-    end
+    variation_a_rate > variation_b_rate ? cohort_name_a : cohort_name_b
   end
 
   private

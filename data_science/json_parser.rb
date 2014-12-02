@@ -14,6 +14,8 @@ class JsonParser
     @test_data
   end
 
+  private
+
   def populate_data(row)
     cohort = row['cohort']
     @test_data[cohort] ||= { total_samples: 0.00, conversions: 0.00 }

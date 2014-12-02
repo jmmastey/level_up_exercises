@@ -1,4 +1,5 @@
 class NameCollisionError < RuntimeError; end
+class DuplicateNameError < RuntimeError; end
 
 class Robot
   attr_accessor :name
@@ -6,13 +7,11 @@ class Robot
   @@registry = ["DT447"]
 
   def initialize(args = {})
-
     @@registry ||= []
-
     @name = args[:name_generator]
 
     begin
-      raise NameCollisionError if invalid_name?(@name)
+      invalid_format?(@name) || registry_duplicate?(@name)
     rescue
       @name = create_name
     end
@@ -22,16 +21,12 @@ class Robot
 
   private
 
-  def invalid_name?(name)
-    invalid_format?(name) || registry_duplicate?(name)
-  end
-
   def invalid_format?(name)
-    !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
+    raise NameCollisionError unless (name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
   end
 
   def registry_duplicate?(name)
-    @@registry.include?(name)
+    raise DuplicateNameError if @@registry.include?(name)
   end
 
   def create_name
@@ -45,7 +40,7 @@ end
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
-robot3 = Robot.new
+robot3 = Robot.new(name_generator: "AA111")
 puts "My pet robot's name is #{robot3.name}, but we usually call him sparky."
 
 robot2 = Robot.new(name_generator: "DT447")

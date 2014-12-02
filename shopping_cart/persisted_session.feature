@@ -25,3 +25,9 @@ Feature: Persisting Sessions
      Given anonymous user with items
      And user logs in as Shinigami
      Then user should see 0 items in cart
+
+   Scenario: Anonymous user adds to cart then logs in and sees merged cart
+     Given user Shinigami has 3 items in cart
+     And anonymous user adds 2 items to cart
+     And user logs in as Shinigami
+     Then user should see 5 items in cart

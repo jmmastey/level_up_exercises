@@ -3,28 +3,32 @@ require_relative 'dino'
 
 class DinoDataParser
   def self.parse(file)
-    data = []
-    csv_parse(file, nil) do |row|
-      data << Dinosaur.new(row)
-    end
-    data
+    dinosaurs(file)
   end
 
   def self.parse_african(file)
-    data = []
-    csv_parse(file, converters: [:all, :diet]) do |row|
+    dinosaurs(file, converters: [:all, :diet]) do |row|
       row[:continent] = 'Africa'
-      data << Dinosaur.new(row)
     end
-    data
   end
 
   private
 
-  def self.csv_parse(file, parse_opts)
-    CSV.foreach(file, PARSE_OPTS.merge!(parse_opts || {})) do |row|
-      yield(row.to_hash)
+  def self.dinosaurs(file, parse_opts = {})
+    csv_data(file, parse_opts).map do |row|
+      yield(row) if block_given?
+      Dinosaur.new(row)
     end
+  end
+
+  def self.csv_data(file, parse_opts)
+    csv_data = []
+
+    CSV.foreach(file, PARSE_OPTS.merge!(parse_opts)) do |row|
+      csv_data << row.to_hash
+    end
+
+    csv_data
   end
 
   PARSE_OPTS = {

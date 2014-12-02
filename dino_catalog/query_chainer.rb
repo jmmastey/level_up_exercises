@@ -37,7 +37,7 @@ class QueryChainer
   end
 
   def to_json
-    data.map { |x| x.to_json }
+    data.map(&:to_json)
   end
 
   private

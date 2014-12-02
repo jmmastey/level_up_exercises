@@ -3,13 +3,13 @@ class DeedsController < ApplicationController
   before_action :set_deed, only: [:show]
 
   def index
-    @results = Deed.order(date: :desc, deed: :asc).paginate(page: params[:page], per_page: ENV["PAGINATION_COUNT"])
+    @results = Deed.all_sorted(params[:page], params[:sort_by])
   end
 
   def show
     @legislator = Legislator.where(bioguide_id: @deed.bioguide_id).first
     @bill = Bill.where(bill_id: @deed.bill_id).first
-    @related_deeds = Deed.where('id != ? and (bioguide_id = ? or bill_id = ?)', @deed.id, @deed.bioguide_id, @deed.bill_id)
+    @related_deeds = Deed.all_related(@deed)
   end
 
   private

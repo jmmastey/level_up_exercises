@@ -27,5 +27,8 @@ module Congress
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
+
+    # Set global pagination per page value
+    WillPaginate.per_page = 3
   end
 end

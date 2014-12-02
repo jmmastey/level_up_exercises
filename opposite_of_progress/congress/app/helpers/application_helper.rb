@@ -1,18 +1,5 @@
 # Application helper module
 module ApplicationHelper
-  def self.to_md5_hash(obj, empty_obj = obj.class.new)
-    md5 = Digest::MD5.new
-    md5.update ""
-
-    unless obj.nil?
-      empty_obj.attributes.each do |key, _|
-        md5 << obj[key].to_s unless key == "id"
-      end
-    end
-
-    md5.hexdigest
-  end
-
   def self.fetch(class_name, raw_json_data, match_key = nil)
     match_key = "#{class_name.downcase}_id" if match_key.nil?
     klass = class_name.constantize

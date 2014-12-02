@@ -10,11 +10,8 @@ class Robot
     @@registry ||= []
     @name = args[:name_generator]
 
-    begin
-      invalid_format?(@name) || registry_duplicate?(@name)
-    rescue
-      @name = create_name
-    end
+    @name = create_name unless @name
+    invalid_format?(@name) || registry_duplicate?(@name)
 
     @@registry << @name
   end

@@ -26,7 +26,7 @@ class SunlightAPI
 
     @results["results"].each do |result|
       obj = klass.find_or_create_by(match_key => result[match_key])
-      obj.update(klass.build_object_hash(result))
+      obj.update(klass.from_api_result(result))
     end
   end
 end

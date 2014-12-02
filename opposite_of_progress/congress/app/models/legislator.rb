@@ -24,7 +24,7 @@ class Legislator < ActiveRecord::Base
     end
   end
 
-  def self.build_object_hash(result)
+  def self.from_api_result(result)
     {
       bioguide_id: result['bioguide_id'],
       birthday: result['birthday'],

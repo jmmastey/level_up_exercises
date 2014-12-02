@@ -6,7 +6,7 @@ class Bill < ActiveRecord::Base
     short_title || bill_id
   end
 
-  def self.build_object_hash(result)
+  def self.from_api_result(result)
     {
       bill_id: result['bill_id'],
       bill_type: result['bill_type'],

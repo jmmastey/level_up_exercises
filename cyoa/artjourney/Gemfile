@@ -50,11 +50,14 @@ group :development, :test do
 
   # Awesome Print
   gem "awesome_print"
+
+  # Cucumber
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
 
 group :test do
   gem 'capybara'
-  gem 'database_cleaner'
   gem "launchy"
 end
 

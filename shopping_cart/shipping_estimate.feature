@@ -7,7 +7,7 @@ Feature: Shipping Estimate
      Given Cart holds 3 Sriver-3MM-Red
      And Cart holds 4 Dozen-Nittaku-Yellow
      And Cart holds 1 Yasaka-Stress-Net
-     And user vists shipping page
+     And user visits shipping page
 
    Scenario: Shipping estimates for 90210
      When user enters zip-code 90210

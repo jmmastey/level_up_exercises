@@ -7,7 +7,7 @@ Feature: Checking Out
      Given Cart holds 3 Sriver-3MM-Red
      And Cart holds 4 Dozen-Nittaku-Yellow
      And Cart holds 1 Yasaka-Stress-Net
-     And user vists the checkout page
+     And user visits the checkout page
 
    Scenario: User should see the correct total
      Then user should see a total cost of 250.09

@@ -7,7 +7,7 @@ Feature: Cart Browsing
      Given Cart holds 3 Sriver-3MM-Red
      And Cart holds 4 Dozen-Nittaku-Yellow
      And Cart holds 1 Yasaka-Stress-Net
-     And user vists summary page
+     And user visits summary page
 
    Scenario: User selects item in list
      When user clicks on item Sriver-3MM-Red

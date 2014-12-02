@@ -1,6 +1,6 @@
 Feature: Select an Item
    In order to test the shopping_cart application
-   As a developer who plans to write it
+   As a customer who plans to use it
    I want to test adding an item, removing an item, and changing item quantity 
 
    Background:

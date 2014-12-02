@@ -1,6 +1,6 @@
 Feature: Cart Browsing
    In order to test the shopping_cart application
-   As a developer who plans to write it
+   As a customer who plans to use it
    I want ensure a user can browse the items in the cart
 
    Background:

@@ -1,6 +1,6 @@
 Feature: Persisting Sessions
    In order to test the shopping_cart application
-   As a developer who plans to write it
+   As a customer who plans to use it
    I want to test persistence of my cart across login sessions
 
    Scenario: User logs in for the first time

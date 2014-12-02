@@ -4,13 +4,7 @@ Feature: Cart Browsing
    I want ensure a user can browse the items in the cart
 
    Background:
-     Given the cart holds 1 <item>
+     Given the cart holds 1 "Sriver 3MM Red"
      And the user visits the summary page
-     When the user clicks on item <item>
-     Then the user should see item-details for <item>
-
-   Examples:
-     |item                |
-     |Sriver-3MM-Red      |
-     |Dozen-Nittaku-Yellow|
-     |Yasaka-Stress-Net   |
+     When the user clicks on item "Sriver 3MM Red"
+     Then the user should see item-details for "Sriver 3MM Red"

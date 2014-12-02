@@ -27,7 +27,6 @@ Feature: Select an Item
    Scenario: Remove an item not in the cart
      When the user removes Sriver-3MM-Red
      Then cart should not contain Sriver-3MM-Red
-     And user should see error message "Item not in cart"
 
    Scenario: Change the quantity of an item with existing quantity in cart
      When the quantity of Sriver-3MM-Red at 5

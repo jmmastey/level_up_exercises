@@ -4,19 +4,17 @@ Feature: Shipping Estimate
    I want ensure a user can see shipping estimates
 
    Background:
-     Given Cart holds 3 Sriver-3MM-Red
-     And Cart holds 4 Dozen-Nittaku-Yellow
-     And Cart holds 1 Yasaka-Stress-Net
-     And user visits shipping page
+     Given the cart has items
+     And the user visits the shipping page
 
    Scenario: Shipping estimates for 90210
-     When user enters zip-code 90210
-     Then user should see shipping estimate of 15.00
+     When the user enters zip-code 90210
+     Then the user should see a shipping estimate of 15.00
 
    Scenario: User enters non-domestic U.S. zip-code
-     When user enters zip-code 96701
-     Then user should see shipping not available message
+     When the user enters zip-code 96701
+     Then the user should see "Shipping Not Available"
 
    Scenario: User enters invalid zip-code and should see error message
-     When user enters zip-code 99999
-     Then user should see invalid zip-code message
+     When the user enters zip-code 99999
+     Then user should see "Invalid Zip-Code"

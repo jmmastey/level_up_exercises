@@ -4,10 +4,10 @@ Feature: Cart Browsing
    I want ensure a user can browse the items in the cart
 
    Background:
-     Given Cart holds 1 <item>
-     And user visits summary page
-     When user clicks on item <item>
-     Then user should see item-details for <item>
+     Given the cart holds 1 <item>
+     And the user visits the summary page
+     When the user clicks on item <item>
+     Then the user should see item-details for <item>
 
    Examples:
      |item                |

@@ -10,13 +10,15 @@ Feature: Persisting Sessions
    Scenario: User adds items then logs out and back in
      Given user logs in as Shinigami
      And user adds 3 items to cart
-     And user logs out and re-logs in as Shinigami
+     And user logs out
+     And user logs in as Shinigami
      Then user should see 3 items in cart
 
    Scenario: User adds items then logs out and back in a someone else
      Given user logs in as Shinigami
      And user adds 3 items to cart
-     And user logs out and re-logs in as Izanami
+     And user logs out
+     And user logs in as Izanami
      Then user should see 0 items in cart
 
    Scenario: Anonymous user adds items then logs in as user

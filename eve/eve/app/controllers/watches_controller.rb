@@ -23,8 +23,7 @@ class WatchesController < ApplicationController
   end
 
   def create
-    @watch = Watch.new(watch_params)
-    @watch.save
+    Watch.create!(watch_params)
     respond_with(@watch)
   end
 
@@ -48,6 +47,6 @@ class WatchesController < ApplicationController
   end
 
   def watch_params
-    params.require(:watch).permit(:nickname, :item_id, :user_id, :regions)
+    params.require(:watch).permit(:nickname, :item_id, :user_id, { regions: [] })
   end
 end

@@ -4,7 +4,7 @@ Feature: Select an Item
    I want to test adding an item, removing an item, and changing item quantity 
 
    Background:
-     User visits page for item Sriver-3MM-Red
+     Given user visits page for item Sriver-3MM-Red
 
    Scenario: Add item to cart
      When the user adds 1 Sriver-3MM-Red
@@ -29,3 +29,7 @@ Feature: Select an Item
      Then cart should not contain Sriver-3MM-Red
      And user should see error message "Item not in cart"
 
+   Scenario: Change the quantity of an item with existing quantity in cart
+     When the quantity of Sriver-3MM-Red at 5
+     And the user changes the quantity of Sriver-3MM-Red to 6
+     Then cart should contain 6 Sriver-3MM-Red

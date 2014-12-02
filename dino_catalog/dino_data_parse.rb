@@ -2,11 +2,11 @@ require 'csv'
 require_relative 'dino'
 
 class DinoDataParser
-  def self.parse(file)
+  def parse(file)
     dinosaurs(file)
   end
 
-  def self.parse_african(file)
+  def parse_african(file)
     dinosaurs(file, converters: [:all, :diet]) do |row|
       row[:continent] = 'Africa'
     end
@@ -14,14 +14,14 @@ class DinoDataParser
 
   private
 
-  def self.dinosaurs(file, parse_opts = {})
+  def dinosaurs(file, parse_opts = {})
     csv_data(file, parse_opts).map do |row|
       yield(row) if block_given?
       Dinosaur.new(row)
     end
   end
 
-  def self.csv_data(file, parse_opts)
+  def csv_data(file, parse_opts)
     csv_data = []
 
     CSV.foreach(file, PARSE_OPTS.merge!(parse_opts)) do |row|

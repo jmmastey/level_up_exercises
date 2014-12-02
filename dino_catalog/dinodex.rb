@@ -5,8 +5,8 @@ class DinoDex
   attr_accessor :dinosaurs
 
   def initialize
-    @dinosaurs =  DinoDataParser.parse('dinodex.csv')
-    @dinosaurs += DinoDataParser.parse_african('african_dinosaur_export.csv')
+    @dinosaurs =  DinoDataParser.new.parse('dinodex.csv')
+    @dinosaurs += DinoDataParser.new.parse_african('african_dinosaur_export.csv')
   end
 
   def all
@@ -14,27 +14,27 @@ class DinoDex
   end
 
   def where(*args)
-    QueryChainer.new(dinosaurs).where(*args)
+    all.where(*args)
   end
 
   def limit(args)
-    QueryChainer.new(dinosaurs).limit(args)
+    all.limit(args)
   end
 
   def sort(args)
-    QueryChainer.new(dinosaurs).sort(args)
+    all.sort(args)
   end
 
   def carnivores
-    QueryChainer.new(dinosaurs).where(diet: %w(Carnivore Insectivore Piscivore))
+    all.where(diet: %w(Carnivore Insectivore Piscivore))
   end
 
   def big
-    QueryChainer.new(dinosaurs).where(weight_in_lbs: { '>=' => 1000 })
+    all.where(weight_in_lbs: { '>=' => 1000 })
   end
 
   def small
-    QueryChainer.new(dinosaurs).where(weight_in_lbs: { '<' => 1000 })
+    all.where(weight_in_lbs: { '<' => 1000 })
   end
 
   def to_json

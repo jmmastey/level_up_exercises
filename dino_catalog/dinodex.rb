@@ -2,7 +2,9 @@ require_relative 'query_chainer.rb'
 require_relative 'dino_data_parse.rb'
 
 class DinoDex
+  extend Forwardable
   attr_accessor :dinosaurs
+  delegate [:sort, :where, :limit, :to_json, :inspect] => :all
 
   def initialize
     @dinosaurs =  DinoDataParser.new.parse('dinodex.csv')
@@ -11,18 +13,6 @@ class DinoDex
 
   def all
     QueryChainer.new(dinosaurs)
-  end
-
-  def where(*args)
-    all.where(*args)
-  end
-
-  def limit(args)
-    all.limit(args)
-  end
-
-  def sort(args)
-    all.sort(args)
   end
 
   def carnivores
@@ -35,13 +25,5 @@ class DinoDex
 
   def small
     all.where(weight_in_lbs: { '<' => 1000 })
-  end
-
-  def to_json
-    all.to_json
-  end
-
-  def inspect
-    all.pretty
   end
 end

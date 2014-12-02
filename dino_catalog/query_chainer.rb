@@ -36,6 +36,8 @@ class QueryChainer
     tp data, object_keys(@data[0])
   end
 
+  alias_method :inspect, :pretty
+
   def to_json
     data.map(&:to_json)
   end

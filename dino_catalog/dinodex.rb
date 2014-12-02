@@ -2,39 +2,39 @@ require_relative 'query_chainer.rb'
 require_relative 'dino_data_parse.rb'
 
 class DinoDex
-  attr_accessor :dinos
+  attr_accessor :dinosaurs
 
   def initialize
-    @dinos =  DinoDataParser.parse('dinodex.csv')
-    @dinos += DinoDataParser.parse_african('african_dinosaur_export.csv')
+    @dinosaurs =  DinoDataParser.parse('dinodex.csv')
+    @dinosaurs += DinoDataParser.parse_african('african_dinosaur_export.csv')
   end
 
   def all
-    QueryChainer.new(dinos)
+    QueryChainer.new(dinosaurs)
   end
 
   def where(*args)
-    QueryChainer.new(dinos).where(*args)
+    QueryChainer.new(dinosaurs).where(*args)
   end
 
   def limit(args)
-    QueryChainer.new(dinos).limit(args)
+    QueryChainer.new(dinosaurs).limit(args)
   end
 
   def sort(args)
-    QueryChainer.new(dinos).sort(args)
+    QueryChainer.new(dinosaurs).sort(args)
   end
 
   def carnivores
-    QueryChainer.new(dinos).where(diet: %w(Carnivore Insectivore Piscivore))
+    QueryChainer.new(dinosaurs).where(diet: %w(Carnivore Insectivore Piscivore))
   end
 
   def big
-    QueryChainer.new(dinos).where(weight_in_lbs: { '>=' => 1000 })
+    QueryChainer.new(dinosaurs).where(weight_in_lbs: { '>=' => 1000 })
   end
 
   def small
-    QueryChainer.new(dinos).where(weight_in_lbs: { '<' => 1000 })
+    QueryChainer.new(dinosaurs).where(weight_in_lbs: { '<' => 1000 })
   end
 
   def to_json

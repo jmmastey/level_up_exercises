@@ -16,9 +16,8 @@
   <h3>All Bills</h3>
 </header>
 
-<% @results.each do |result| %>
-  <div><%= render partial: "bill_stub_item", locals: { bill: result } %></div>
-<% end %>
+<%= render partial: "bill_stub_item", collection: @results %>
+
 <%= "There are no bills to show" if @results.count == 0 %>
 
 <hr />

@@ -10,7 +10,7 @@
 <h4>Related Bills</h4>
 <blockquote>
   <% @related_bills.each do |bill| %>
-    <%= render partial: "bills/bill_stub_item", locals: {bill: bill} %>
+    <%= render partial: "bills/bill_stub_item", locals: {bill_stub_item: bill} %>
   <% end %>
   <%= "There are no related bills" if @related_bills.count == 0 %>
 </blockquote>

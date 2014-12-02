@@ -1,5 +1,5 @@
 <div class="panel">
-  <h5>Bill: <%= raw "#{link_to bill.title, bill}" %></h5>
-  <p><em>"<%= bill.official_title %>"</em></p>
-  <p class="supporting-date">Introduced on: <%= bill.introduced_on.strftime("%B %d %Y") %></p>
+  <h5>Bill: <%= raw "#{link_to bill_stub_item.title, bill_stub_item}" %></h5>
+  <p><em>"<%= bill_stub_item.official_title %>"</em></p>
+  <p class="supporting-date">Introduced on: <%= bill_stub_item.introduced_on.strftime("%B %d %Y") %></p>
 </div>

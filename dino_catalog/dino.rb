@@ -4,14 +4,14 @@ class Dinosaur
   attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking,
     :description
 
-  def initialize(dino_hash)
-    @name          = dino_hash[:name]
-    @period        = dino_hash[:period]
-    @continent     = dino_hash[:continent]
-    @diet          = dino_hash[:diet]
-    @weight_in_lbs = dino_hash[:weight_in_lbs].to_i if dino_hash[:weight_in_lbs]
-    @walking       = dino_hash[:walking]
-    @description   = dino_hash[:description]
+  def initialize(dino)
+    @name          = dino[:name]
+    @period        = dino[:period]
+    @continent     = dino[:continent]
+    @diet          = dino[:diet]
+    @weight_in_lbs = dino[:weight_in_lbs] ? dino[:weight_in_lbs].to_i : nil
+    @walking       = dino[:walking]
+    @description   = dino[:description]
   end
 
   def to_h

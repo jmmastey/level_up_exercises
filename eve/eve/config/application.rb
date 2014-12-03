@@ -32,6 +32,6 @@ module Eve
     #   g.fixture_replacement :factory_girl, dir: "spec/factories"
     # end
 
-    config.action_controller.action_on_unpermitted_paramters = :log
+    config.action_controller.action_on_unpermitted_parameters = :log
   end
 end

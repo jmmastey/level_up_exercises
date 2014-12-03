@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Item, :type => :model do
+RSpec.describe Item, type: :model do
   subject(:item) { FactoryGirl.create(:item) }
 
   it "requires an in-game ID" do

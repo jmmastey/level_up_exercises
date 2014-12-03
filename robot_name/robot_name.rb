@@ -27,12 +27,23 @@ class Robot
   end
 
   def create_name
-    generate_char = -> { ('A'..'Z').to_a.sample }
-    generate_num = -> { rand(10) }
+    name = ''
+    2.times { name << generate_character }
+    3.times { name << generate_number.to_s }
+    name
+  end
 
-    "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+  def generate_character
+    ('A'..'Z').to_a.sample
+  end
+
+  def generate_number
+    rand(10)
   end
 end
+
+robot = Robot.new
+puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 robot = Robot.new(name_generator: "DT447")
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."

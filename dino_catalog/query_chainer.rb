@@ -1,5 +1,4 @@
 require 'table_print'
-require 'pry'
 
 class QueryChainer
   attr_accessor :data

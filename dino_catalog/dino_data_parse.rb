@@ -45,7 +45,12 @@ class DinoDataParser
   end
 
   CSV::Converters[:diet] = lambda do |field, fieldinfo|
-    return field unless fieldinfo.header == :diet
-    (field == 'Yes') ? 'Carnivore' : 'Non Carnivore'
+    column_name = fieldinfo.header
+
+    if column_name == :diet
+      field == 'Yes' ? 'Carnivore' : 'Non Carnivore'
+    else
+      field
+    end
   end
 end

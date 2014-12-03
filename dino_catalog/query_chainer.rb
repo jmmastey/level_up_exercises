@@ -61,6 +61,7 @@ class QueryChainer
   end
 
   def columns_exist?(columns)
-    (headers & columns.map(&:to_s)).length == columns.length
+    columns = columns.map(&:to_s)
+    (headers & columns).length == columns.length
   end
 end

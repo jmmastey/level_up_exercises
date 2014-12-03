@@ -4,7 +4,7 @@ require_relative 'dino_data_parse.rb'
 class DinoDex
   extend Forwardable
   attr_accessor :dinosaurs
-  delegate [:sort, :where, :limit, :to_json, :inspect] => :all
+  delegate [:sort, :where, :limit, :to_json] => :all
 
   def initialize
     @dinosaurs =  DinoDataParser.new.parse('dinodex.csv')

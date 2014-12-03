@@ -71,4 +71,5 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0", require: false
   gem 'rake-progressbar', require: false
   gem "rubysl-irb", require: false
+  gem "pry"
 end

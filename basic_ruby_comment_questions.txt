@@ -1,0 +1,16 @@
+EXERCISE: KNOWS WHY COMMENTS LIE, AND HOW TO WRITE SELF-DOCUMENTING CODE
+--- Q --- Explain why we say that 'comments lie'.
+Comments lie because they are often out of date, they can also describe things that are not factual for ex # sum is 3, while code states 1 + 1.
+
+--- Q ---  If we don't trust comments, how do we explain our code adequately to others?
+The Ruby Rogues podcast seemed to suggest documenting examples of how the code is used, as they stated, “goal oriented documentation,” starting with the most basic or expected use of the program followed by a few edge cases?
+
+--- Q ---  Explain what 'self documenting code' means in your own words
+Self documenting code often involves extracting logic into a well-named method.  The method should try to indicate whether side effects occur (verb),  boolean (?), or a query returns something (noun).  Comments don’t show up in stack traces, so self documenting method names are preferred to well written comments.  When a comment seems neccessary this may be an indication that the single responsibility principle is not being adhered to, and a method or class should be divided further. 
+
+
+EXERCISE: KNOWS THE CASES WHERE COMMENTS ARE REALLY NECESSARY
+--- Q ---  Name (and defend) some cases where you should add comments to your code.
+In Ruby Rougues podcast they initially mentioned commenting when creating a blank rescue, however Avdi suggested creating an empty method called ‘ignore_timeout_because_irrelevant’ - which I think is preferred because it shows up in stack trace.  Comments that seem neccesary and unavoidable by the group were those comment which describes how to handles oddities of other people’s libraries or gems.  They suggested an adapter layer between the library and code, but felt comments would still be needed in the adapter layer.
+
+Additional internet research allowed comments to amplify the importance of something that may seem inconsequential, if this cannot be conveyed in a unit test. Additionally, comment optimized code to prevent a future developer from simplifying optimized code and losing the performance gains in the refactoring, ex a comment that indicates that a test is disabled because of how long it takes to run.

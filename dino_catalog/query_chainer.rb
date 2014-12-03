@@ -1,4 +1,5 @@
 require 'table_print'
+require 'pry'
 
 class QueryChainer
   attr_accessor :data
@@ -13,30 +14,26 @@ class QueryChainer
 
   def where(args)
     query[:where] = query[:where] ? query[:where].merge!(args) : args
-    do_where(args)
+    @data = data.select { |item| matches_all?(item, args) }
     self
   end
 
   def limit(limit)
-    limit = limit.to_it unless limit.is_a? Fixnum
-
+    limit = limit.to_i unless limit.is_a? Fixnum
     query[:limit] = limit
     @data = data.first(limit)
     self
   end
 
-  def sort(on_key)
-    on_key = on_key.to_sym unless on_key.is_a? Hash
-    query[:sort] = on_key
-    do_sort(on_key)
+  def sort(sort_key)
+    query[:sort] = sort_key.to_sym
+    @data = data.sort_by { |item| item.send(query[:sort]) }
     self
   end
 
   def pretty
-    tp data, object_keys(@data[0])
+    tp data, headers
   end
-
-  alias_method :inspect, :pretty
 
   def to_json
     data.map(&:to_json)
@@ -44,52 +41,27 @@ class QueryChainer
 
   private
 
-  def do_where(args)
-    @data = data.map do |x|
-      x_hash = object_to_hash(x) unless x.is_a? Hash
-      matches = 0
-      args.each { |key, val| matches += 1 if match?(x_hash[key.to_sym], val) }
-      x if matches == args.keys.length
-    end.compact
+  def matches_all?(entry, args)
+    raise NoMethodError unless columns_exist?(args.keys)
+    args.all? { |field, criteria| matches?(entry.send(field), criteria) }
+  rescue NoMethodError
+    false
   end
 
-  def match?(data_val, arg_val)
-    if arg_val.is_a? Hash
-      operation(data_val, arg_val)
-    elsif arg_val.is_a? Array
-      arg_val.map { |v| operation(data_val, '==' => v) }.include?(true)
+  def matches?(field, criteria)
+    if criteria.is_a? Array
+      criteria.include?(field)
     else
-      operation(data_val, '==' => arg_val)
+      criteria = { '==' => criteria } unless criteria.is_a? Hash
+      criteria.all? { |op, value| field.send(op, value) }
     end
   end
 
-  def operation(data_val, arg_val)
-    operator = arg_val.keys[0]
-
-    return false unless data_val && ACCEPTED_OPERATORS.include?(operator)
-    comparator = arg_val[operator]
-    data_val.send(operator, comparator)
+  def headers
+    data[0].instance_variables.map { |key| key.to_s.delete("@") }
   end
 
-  def do_sort(on_key)
-    @data = data.map { |x| object_to_hash(x) }.sort_by do |hsh|
-      hsh[on_key]
-    end
+  def columns_exist?(columns)
+    (headers & columns.map(&:to_s)).length == columns.length
   end
-
-  def object_to_hash(o)
-    hash = {}
-    o.instance_variables.each do |key|
-      hash[key.to_s.delete("@").to_sym] = o.instance_variable_get(key)
-    end
-    hash
-  end
-
-  def object_keys(o)
-    o.instance_variables.map do |key|
-      key.to_s.delete("@")
-    end
-  end
-
-  ACCEPTED_OPERATORS = ['<', '>', '>=', '<=', '==']
 end

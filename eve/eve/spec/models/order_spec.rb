@@ -73,27 +73,47 @@ RSpec.describe Order, :type => :model do
   end
 
   describe "::last_queried_on" do
-    subject(last_queried) { Order.last_queried_on(item) }
+    subject(:last_queried) { Order.last_queried_on(item) }
 
     let(:item) do
       FactoryGirl.create(:item, in_game_id: 34, name: "Tritanium")
+    end
+
+    let(:other_item) do
+      FactoryGirl.create(:item, in_game_id: 35, name: "Pyerite")
     end
 
     context "when no orders exist" do
       it { is_expected.to be_nil }
     end
 
-    context "when no orders exist with the given item" do
+    context "when no orders exist for the given item" do
       before(:each) do
-        FactoryGirl.create(:order, item: pyerite)
-      end
-
-      let(:other_item) do
-        FactoryGirl.create(:item, in_game_id: 35, name: "Pyerite")
+        FactoryGirl.create(:order, item: other_item)
       end
 
       it { is_expected.to be_nil }
     end
 
+    context "when orders exist for the given item" do
+      before(:each) do
+        FactoryGirl.create(:order,
+                           item: item,
+                           date_pulled: Date.new(2014,10,01))
+        FactoryGirl.create(:order,
+                           item: item,
+                           date_pulled: Date.new(2014,11,03))
+        FactoryGirl.create(:order,
+                           item: item,
+                           date_pulled: Date.new(2014,10,31))
+        FactoryGirl.create(:order,
+                           item: other_item,
+                           date_pulled: Date.new(2014,11,05))
+      end
+
+      it "is the maximum date_pulled of the orders for that item" do
+        expect(last_queried).to eq(Date.new(2014,11,03))
+      end
+    end
   end
 end

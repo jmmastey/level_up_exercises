@@ -72,13 +72,28 @@ RSpec.describe Order, :type => :model do
     end
   end
 
-  describe "::last_pulled_on" do
-    subject(last_pulled) { Order.last_pulled_on(item) }
+  describe "::last_queried_on" do
+    subject(last_queried) { Order.last_queried_on(item) }
+
+    let(:item) do
+      FactoryGirl.create(:item, in_game_id: 34, name: "Tritanium")
+    end
 
     context "when no orders exist" do
       it { is_expected.to be_nil }
     end
 
-    context "when no orders exist with the given item"
+    context "when no orders exist with the given item" do
+      before(:each) do
+        FactoryGirl.create(:order, item: pyerite)
+      end
+
+      let(:other_item) do
+        FactoryGirl.create(:item, in_game_id: 35, name: "Pyerite")
+      end
+
+      it { is_expected.to be_nil }
+    end
+
   end
 end

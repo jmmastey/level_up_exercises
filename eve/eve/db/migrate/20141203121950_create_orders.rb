@@ -6,7 +6,7 @@ class CreateOrders < ActiveRecord::Migration
       t.decimal :price
       t.string :type
       t.datetime :expires
-      t.datetime :date_pulled
+      t.date :date_pulled
       t.belongs_to :region
       t.belongs_to :station
       t.belongs_to :item

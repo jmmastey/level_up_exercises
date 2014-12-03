@@ -10,12 +10,12 @@ Feature: Change quantities in the cart
 
   @happy
   Scenario: Increase the quantity of an item within the stock level
-    When I increase the quantity of Item A to 5
+    When I change the quantity of Item A to 5
     Then I see 5 units of Item A in the cart
 
   @happy
   Scenario Outline: decrease the quantity of an item
-    When I decrease the quantity of Item A by <quantity>
+    When I change the quantity of Item A to <quantity>
     Then <result>
 
     Examples:
@@ -25,10 +25,10 @@ Feature: Change quantities in the cart
 
   @sad
   Scenario: Increase the quantity beyond the stock level.
-    When I increase the quantity of Item A to 7
+    When I change the quantity of Item A to 7
     Then I see 5 units of Item A in the cart
 
   @bad
   Scenario: change the quantity of item not in the cart
-    When I increase the quantity of Item B to 3
+    When I change the quantity of Item A to 3
     Then I should see invalid request error

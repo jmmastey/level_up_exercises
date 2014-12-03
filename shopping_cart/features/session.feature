@@ -14,7 +14,7 @@ Feature: Session Management
   @happy
   Scenario: Merge with previous session - item already in the cart
     When I add 3 units of Item A to the cart
-      And logs in
+      And I log in
     Then I see 6 items of Item A in the cart
 
   @happy
@@ -27,5 +27,5 @@ Feature: Session Management
   @sad
   Scenario: Merge casues item quantity more than the stock level
     When I add 4 units of Item A to the cart
-    Then I only see 6 units of Item A in the cart
-      And I should see exceeds availability error
+    Then I see 6 units of Item A in the cart
+      And I see exceeds availability error

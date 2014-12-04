@@ -6,4 +6,20 @@ RSpec.describe Watch, type: :model do
 
     it { is_expected.to be_valid }
   end
+
+  context "when initialized without an item" do
+    subject(:invalid_watch) do
+      FactoryGirl.build(:watch, item: nil)
+    end
+
+    it { is_expected.not_to be_valid }
+  end
+
+  context "when initialized without an user" do
+    subject(:invalid_watch) do
+      FactoryGirl.build(:watch, user: nil)
+    end
+
+    it { is_expected.not_to be_valid }
+  end
 end

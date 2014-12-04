@@ -37,9 +37,8 @@ class OrdersController < ApplicationController
   end
 
   def search_orders
-    @orders = orders
-    @orders = @orders.by_item(params[:item]) if params[:item].present?
-    @orders = @orders.by_region(params[:region]) if params[:region].present?
-    @orders = @orders.by_station(params[:station]) if params[:station].present?
+    orders.by_item(params[:item]).
+           by_region(params[:region]).
+           by_station(params[:station])
   end
 end

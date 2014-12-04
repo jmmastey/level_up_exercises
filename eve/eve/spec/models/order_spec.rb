@@ -99,20 +99,20 @@ RSpec.describe Order, type: :model do
       before(:each) do
         FactoryGirl.create(:order,
                            item: item,
-                           date_pulled: Date.new(2014,10,01))
+                           date_pulled: Date.new(2014, 10, 01))
         FactoryGirl.create(:order,
                            item: item,
-                           date_pulled: Date.new(2014,11,03))
+                           date_pulled: Date.new(2014, 11, 03))
         FactoryGirl.create(:order,
                            item: item,
-                           date_pulled: Date.new(2014,10,31))
+                           date_pulled: Date.new(2014, 10, 31))
         FactoryGirl.create(:order,
                            item: other_item,
-                           date_pulled: Date.new(2014,11,05))
+                           date_pulled: Date.new(2014, 11, 05))
       end
 
       it "is the maximum date_pulled of the orders for that item" do
-        expect(last_queried).to eq(Date.new(2014,11,03))
+        expect(last_queried).to eq(Date.new(2014, 11, 03))
       end
     end
   end

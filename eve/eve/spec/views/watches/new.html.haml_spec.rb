@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "watches/new", :type => :view do
+RSpec.describe "watches/new", type: :view do
   before(:each) do
     assign(:watch, Watch.new(
-      :nickname => "MyString",
-      :item => nil,
-      :user => nil
+      nickname: "MyString",
+      item: nil,
+      user: nil
     ))
   end
 

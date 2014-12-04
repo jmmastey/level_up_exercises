@@ -27,7 +27,7 @@ Eve.Watches =
 			placeholder: "Search for an item"
 
 	init_region_select: ->
-		$('input#watch_regions').select2
+		$('input#watch_region_id').select2
 			minimumInputLength: 3
 			ajax:
 				url: "/regions/search.json"

@@ -4,6 +4,8 @@ class CreateWatches < ActiveRecord::Migration
       t.string :nickname
       t.references :item, index: true
       t.references :user, index: true
+      t.references :region
+      t.references :station
 
       t.timestamps null: false
     end

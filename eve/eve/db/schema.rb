@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203121950) do
+ActiveRecord::Schema.define(version: 20141204163900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,14 +53,6 @@ ActiveRecord::Schema.define(version: 20141203121950) do
 
   add_index "regions", ["in_game_id"], name: "index_regions_on_in_game_id", unique: true, using: :btree
 
-  create_table "regions_watches", id: false, force: true do |t|
-    t.integer "region_id", null: false
-    t.integer "watch_id",  null: false
-  end
-
-  add_index "regions_watches", ["region_id", "watch_id"], name: "index_regions_watches_on_region_id_and_watch_id", using: :btree
-  add_index "regions_watches", ["watch_id", "region_id"], name: "index_regions_watches_on_watch_id_and_region_id", using: :btree
-
   create_table "stations", force: true do |t|
     t.integer  "in_game_id"
     t.string   "name"
@@ -69,14 +61,6 @@ ActiveRecord::Schema.define(version: 20141203121950) do
   end
 
   add_index "stations", ["in_game_id"], name: "index_stations_on_in_game_id", unique: true, using: :btree
-
-  create_table "stations_watches", id: false, force: true do |t|
-    t.integer "station_id", null: false
-    t.integer "watch_id",   null: false
-  end
-
-  add_index "stations_watches", ["station_id", "watch_id"], name: "index_stations_watches_on_station_id_and_watch_id", using: :btree
-  add_index "stations_watches", ["watch_id", "station_id"], name: "index_stations_watches_on_watch_id_and_station_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -100,6 +84,8 @@ ActiveRecord::Schema.define(version: 20141203121950) do
     t.string   "nickname"
     t.integer  "item_id"
     t.integer  "user_id"
+    t.integer  "region_id"
+    t.integer  "station_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

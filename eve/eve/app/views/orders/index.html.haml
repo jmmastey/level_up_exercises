@@ -1,6 +1,8 @@
 .page-header
   %h2 Orders
 
+= render(partial: 'search')
+
 - if @orders && !@orders.empty?
   = render(partial: 'list', locals: { regions: @regions })
 - else

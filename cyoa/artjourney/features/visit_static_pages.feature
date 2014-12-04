@@ -12,5 +12,8 @@ Feature: Visiting Static Pages
     Then I should be on the Artists page
 
   Scenario: User visits signup page
+    Given I am on the homepage
+    When I click on Signup
+    Then I should be on the Signup page
 
   Scenario: User visits login page

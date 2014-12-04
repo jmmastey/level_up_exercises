@@ -4,4 +4,7 @@ class StaticPagesController < ApplicationController
 
   def artists
   end
+
+  def signup
+  end
 end

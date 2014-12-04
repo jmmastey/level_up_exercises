@@ -3,7 +3,7 @@ Given(/^I am on the homepage$/) do
 end
 
 When(/^I click on (.+)$/) do |item|
-  click_link('Artists')
+  click_link(item)
 end
 
 Then(/^I should see a link to the (.+) page$/) do |name|

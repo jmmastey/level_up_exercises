@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
   end
 
   def search
-    search_orders
+    @orders = search_orders
 
     respond_to do |format|
       format.html do

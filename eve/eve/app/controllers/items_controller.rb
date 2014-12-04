@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    @items = get_items
+    @items = items
 
     respond_to do |format|
       format.html do
@@ -14,13 +14,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @search_query = params[:query]
-
-    if @search_query
-      @items = search_items(@search_query)
-    else
-      @items = get_items
-    end
+    @items = search_items
 
     respond_to do |format|
       format.html do
@@ -35,13 +29,15 @@ class ItemsController < ApplicationController
 
   private
 
-  def get_items
+  def items
     Item.order(:in_game_id)
   end
 
-  def search_items(query)
-    items = get_items
-    query = query.strip.upcase
-    items.where("UPPER(name) like ?", "%#{query}%")
+  def query
+    @query ||= (params[:query] || "").strip
+  end
+
+  def search_items
+    items.where("UPPER(name) like ?", "%#{query.upcase}%")
   end
 end

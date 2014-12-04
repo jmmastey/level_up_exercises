@@ -29,14 +29,15 @@ class RegionsController < ApplicationController
 
   private
 
+  def query
+    @query = (params[:query] || "").strip
+  end
+
   def regions
     Region.order(:in_game_id)
   end
 
   def search_regions
-    @search_query = params[:query]
-    return regions unless @search_query.present?
-    @search_query = @search_query.strip.upcase
-    regions.where("UPPER(name) like ?", "%#{@search_query}%")
+    regions.where("UPPER(name) like ?", "%#{query.upcase}%")
   end
 end

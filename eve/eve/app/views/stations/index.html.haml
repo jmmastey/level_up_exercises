@@ -5,7 +5,7 @@
   .form-group
     = label_tag(:query, "Search", class: "sr-only")
     .input-group
-      = search_field_tag(:query, @search_query, class: "form-control", placeholder: "Search stations")
+      = search_field_tag(:query, @query, class: "form-control", placeholder: "Search stations")
       .input-group-btn
         %button{type: "submit", class: "btn btn-default", title: "Search"}
           &nbsp;

@@ -37,8 +37,9 @@ class OrdersController < ApplicationController
   end
 
   def search_orders
-    orders.by_item(params[:item]).
-           by_region(params[:region]).
-           by_station(params[:station])
+    orders
+      .by_item(params[:item])
+      .by_region(params[:region])
+      .by_station(params[:station])
   end
 end

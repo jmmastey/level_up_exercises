@@ -1,6 +1,6 @@
 class StationsController < ApplicationController
   def index
-    @stations = get_stations
+    @stations = stations
 
     respond_to do |format|
       format.html do
@@ -14,8 +14,7 @@ class StationsController < ApplicationController
   end
 
   def search
-    @search_query = params[:query]
-    @stations = search_stations(@search_query) if @search_query
+    @stations = search_stations
 
     respond_to do |format|
       format.html do
@@ -33,13 +32,15 @@ class StationsController < ApplicationController
 
   private
 
-  def get_stations
+  def query
+    @query ||= (params[:query] || "").strip
+  end
+
+  def stations
     Station.order(:in_game_id)
   end
 
-  def search_stations(query)
-    stations = get_stations
-    query = query.strip.upcase
-    stations.where("UPPER(name) like ?", "%#{query}%")
+  def search_stations
+    stations.where("UPPER(name) like ?", "%#{query.upcase}%")
   end
 end

@@ -48,6 +48,6 @@ class WatchesController < ApplicationController
   end
 
   def watch_params
-    params.require(:watch).permit(:nickname, :item_id, :user_id, { regions: [] })
+    params.require(:watch).permit(:nickname, :item_id, :user_id, regions: [])
   end
 end

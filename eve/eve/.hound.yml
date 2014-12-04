@@ -4,7 +4,7 @@ AllCops:
   Exclude:
     - 'Gemfile'
     - 'Gemfile.lock'
-    - 'config/initializers/devise.rb'
+    - 'config/initializers/*'
     - 'db/migrate/*'
     - 'db/schema.rb'
     - 'vendor/**/*'

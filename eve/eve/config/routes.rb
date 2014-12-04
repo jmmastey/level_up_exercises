@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
   resources :items, only: [:index, :show] do
-    get 'search', on: :collection, as: :item_search
+    get 'search', on: :collection, as: :search
   end
 
   resources :orders, only: [:index, :show] do
-    get 'search', on: :collection, as: :order_search
+    get 'search', on: :collection, as: :search
   end
 
   resources :regions, only: [:index, :show] do
-    get 'search', on: :collection, as: :region_search
+    get 'search', on: :collection, as: :search
   end
 
   resources :stations, only: [:index, :show] do
-    get 'search', on: :collection, as: :station_search
+    get 'search', on: :collection, as: :search
   end
 
   resources :watches

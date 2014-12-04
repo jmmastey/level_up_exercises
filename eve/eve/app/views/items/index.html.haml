@@ -1,7 +1,7 @@
 .page-header
   %h2 EVE Online Items
 
-= form_tag("/items/search", method: "get", role: "form") do
+= form_tag(search_items_path, method: :get, role: :form) do
   .form-group
     = label_tag(:query, "Search", class: "sr-only")
     .input-group

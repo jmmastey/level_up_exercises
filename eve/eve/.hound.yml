@@ -5,6 +5,6 @@ AllCops:
     - 'Gemfile'
     - 'Gemfile.lock'
     - 'config/initializers/devise.rb'
-    - 'db/migrate/*_devise_*.rb'
+    - 'db/migrate/*'
     - 'db/schema.rb'
     - 'vendor/**/*'

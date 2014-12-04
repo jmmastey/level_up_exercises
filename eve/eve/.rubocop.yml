@@ -7,4 +7,7 @@ AllCops:
     - 'config/initializers/*'
     - 'db/migrate/*'
     - 'db/schema.rb'
+    - 'features/support/env.rb'
+    - 'lib/tasks/cucumber.rake'
+    - 'script/*'
     - 'vendor/**/*'

@@ -1,4 +1,4 @@
-Feature: Visiting Homepage
+Feature: Visiting Static Pages
 
   Scenario: User visits homepage
     Given I am on the homepage

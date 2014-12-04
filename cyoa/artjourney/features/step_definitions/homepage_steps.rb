@@ -1,5 +1,5 @@
 Given(/^I am on the homepage$/) do
-  visit home_path
+  visit '/'
 end
 
 Then(/^I should see a link to the artists page$/) do

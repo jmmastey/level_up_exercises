@@ -3,9 +3,9 @@ class Order < ActiveRecord::Base
   belongs_to :region
   belongs_to :station
 
-  scope :by_item, ->(item) { where item: item }
-  scope :by_region, ->(region) { where region: region }
-  scope :by_station, ->(station) { where station: station }
+  scope :by_item, ->(item) { where(item: item) unless item.blank? }
+  scope :by_region, ->(region) { where(region: region) unless region.blank? }
+  scope :by_station, ->(station) { where(station: station) unless station.blank? }
 
   validates_inclusion_of :type,
                          in: %w(buy sell),

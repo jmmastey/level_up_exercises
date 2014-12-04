@@ -1,9 +1,0 @@
-.col-xs-12
-  .page-header
-    %h1
-      = link_to @quiz_activity.section.name, @quiz_activity.page
-      %br
-      Edit quiz
-    = render 'edit_question_dropdown'
-.col-xs-12
-  = render partial: @quiz_activity.question.decorate.to_partial_path('quiz_activity_edit_form')

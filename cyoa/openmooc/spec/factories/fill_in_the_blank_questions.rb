@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :fill_in_the_blank_question do
     page_content
     answers []
-    quiz_activity
+    page
 
     factory :example_fill_in_the_blank_question do
       answers { create_list(:example_fill_in_the_blank_answer, 3) }

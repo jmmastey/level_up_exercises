@@ -1,4 +1,5 @@
-= nested_form_for question, url: url do |f|
+
+= nested_form_for question do |f|
   - extra_params.each do |(key, value)|
     = f.hidden_field key, value: value
   = f.fields_for :page_content do |pf|
@@ -19,5 +20,5 @@
   .form-group
     = f.link_to_add 'Add answer', :answers, class: 'btn btn-default'
   .form-group
-    = link_to 'Cancel', @section, class: 'btn btn-default'
-    = f.submit 'Create question', class: 'btn btn-primary'
+    = link_to 'Cancel', question.lesson, class: 'btn btn-default'
+    = f.submit question.decorate.submit_button_text, class: 'btn btn-primary'

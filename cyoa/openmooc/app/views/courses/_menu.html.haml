@@ -1,9 +1,9 @@
 .page-header
+  = link_to 'Edit Lessons', edit_lessons_course_path(@course), class: 'btn btn-default'
   = link_to 'Edit Page', edit_course_path(@course), class: 'btn btn-default'
-  = link_to 'Edit Lessons', edit_sections_course_path(@course), class: 'btn btn-default'
 %div.list-group
   %h4 Lessons
-  - @course.sections.each do |section|
-    = link_to section, class: 'list-group-item' do
+  - @course.lessons.each do |lesson|
+    = link_to lesson, class: 'list-group-item' do
       %h5
-        = section.name
+        = lesson.name

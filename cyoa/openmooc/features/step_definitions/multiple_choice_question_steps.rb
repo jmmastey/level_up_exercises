@@ -14,7 +14,7 @@ end
 ### GIVEN ###
 
 Given(/^I am on a multiple choice question page$/) do
-  visit(page_path(mc_question.quiz_activity.page))
+  visit(page_path(mc_question.page))
 end
 
 When(/^I enter a correct multiple choice answer submission$/) do
@@ -27,7 +27,7 @@ When(/^I enter new multiple choice question content$/) do
 end
 
 Then(/^I should be on the multiple choice quiz page$/) do
-  expect(current_path).to eq(page_path(mc_question.quiz_activity.page))
+  expect(current_path).to eq(page_path(mc_question.page))
 end
 
 Then(/^I should see new multiple choice quiz content$/) do

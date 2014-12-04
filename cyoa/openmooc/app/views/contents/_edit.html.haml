@@ -1,0 +1,4 @@
+%h3
+  Edit Material
+- @content = @page.content
+= render @content.decorate.to_partial_path('form')

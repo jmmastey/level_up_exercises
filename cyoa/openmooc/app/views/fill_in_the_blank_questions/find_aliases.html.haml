@@ -10,7 +10,7 @@
         .pull-right
           = link_to 'Go back', :back, class: 'btn btn-primary'
   - else
-    = form_tag create_answers_fill_in_the_blank_question_path(@question) do |f|
+    = form_tag build_answers_fill_in_the_blank_question_path(@question) do |f|
       .form-group
         %table.table
           %tr

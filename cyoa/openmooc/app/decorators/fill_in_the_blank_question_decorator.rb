@@ -1,4 +1,4 @@
-class FillInTheBlankQuestionDecorator < PartialDecorator
+class FillInTheBlankQuestionDecorator < QuestionDecorator
   delegate_all
 
   def self.type

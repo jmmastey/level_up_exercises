@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122204645) do
+ActiveRecord::Schema.define(version: 20141202180723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 20141122204645) do
   end
 
   add_index "aliases", ["fill_in_the_blank_answer_id"], name: "index_aliases_on_fill_in_the_blank_answer_id", using: :btree
+
+  create_table "contents", force: true do |t|
+    t.integer  "page_content_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contents", ["page_content_id"], name: "index_contents_on_page_content_id", using: :btree
 
   create_table "courses", force: true do |t|
     t.string   "title"
@@ -64,13 +72,15 @@ ActiveRecord::Schema.define(version: 20141122204645) do
 
   add_index "fill_in_the_blank_questions", ["page_content_id"], name: "index_fill_in_the_blank_questions_on_page_content_id", using: :btree
 
-  create_table "lesson_activities", force: true do |t|
-    t.integer  "page_content_id"
+  create_table "lessons", force: true do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "lesson_activities", ["page_content_id"], name: "index_lesson_activities_on_page_content_id", using: :btree
+  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id", using: :btree
 
   create_table "multiple_choice_answers", force: true do |t|
     t.integer  "multiple_choice_question_id"
@@ -99,16 +109,16 @@ ActiveRecord::Schema.define(version: 20141122204645) do
 
   create_table "pages", force: true do |t|
     t.string   "type"
-    t.integer  "section_id"
+    t.integer  "lesson_id"
     t.integer  "position"
-    t.integer  "activity_id"
-    t.string   "activity_type"
+    t.integer  "content_id"
+    t.string   "content_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "pages", ["activity_id", "activity_type"], name: "index_pages_on_activity_id_and_activity_type", using: :btree
-  add_index "pages", ["section_id"], name: "index_pages_on_section_id", using: :btree
+  add_index "pages", ["content_id", "content_type"], name: "index_pages_on_content_id_and_content_type", using: :btree
+  add_index "pages", ["lesson_id"], name: "index_pages_on_lesson_id", using: :btree
 
   create_table "quiz_activities", force: true do |t|
     t.integer  "question_id"
@@ -118,16 +128,6 @@ ActiveRecord::Schema.define(version: 20141122204645) do
   end
 
   add_index "quiz_activities", ["question_id", "question_type"], name: "index_quiz_activities_on_question_id_and_question_type", using: :btree
-
-  create_table "sections", force: true do |t|
-    t.string   "name"
-    t.integer  "course_id"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "sections", ["course_id"], name: "index_sections_on_course_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

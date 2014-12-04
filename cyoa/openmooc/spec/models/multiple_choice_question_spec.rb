@@ -5,11 +5,11 @@ RSpec.describe MultipleChoiceQuestion, type: :model do
     FactoryGirl.build(:multiple_choice_question_with_answers)
   end
 
-  describe '::new' do
+  describe '::default' do
     it 'creates a blank answer upon initialization' do
-      expect(described_class.new.page_content).to be_a PageContent
-      expect(described_class.new).to have(2).answers
-      expect(described_class.new.answers.to_a.count(&:correct)).to be 1
+      expect(described_class.default.page_content).to be_a PageContent
+      expect(described_class.default).to have(2).answers
+      expect(described_class.default.answers.to_a.count(&:correct)).to be 1
     end
   end
 

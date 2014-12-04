@@ -6,12 +6,12 @@ def new_course
   @new_course ||= FactoryGirl.build(:new_course)
 end
 
-def course_with_one_section
-  @course ||= FactoryGirl.create(:section).course
+def course_with_one_lesson
+  @course ||= FactoryGirl.create(:lesson).course
 end
 
-def course_with_sections
-  @course ||= FactoryGirl.create(:course_with_sections)
+def course_with_lessons
+  @course ||= FactoryGirl.create(:course_with_lessons)
 end
 
 def course_to_params(course)
@@ -23,12 +23,12 @@ end
 
 ##### GIVEN #####
 
-Given(/^The course has sections$/) do
-  course_with_sections
+Given(/^The course has lessons$/) do
+  course_with_lessons
 end
 
-Given(/^a course with one section$/) do
-  course_with_one_section
+Given(/^a course with one lesson$/) do
+  course_with_one_lesson
 end
 
 Given(/^I am on a course page$/) do
@@ -39,8 +39,8 @@ Given(/^I am on an edit course page$/) do
   visit(edit_course_path(course))
 end
 
-Given(/^I am on the edit sections page$/) do
-  visit(edit_sections_course_path(course))
+Given(/^I am on the edit lessons page$/) do
+  visit(edit_lessons_course_path(course))
 end
 
 Given(/^I am on the courses page$/) do
@@ -63,12 +63,12 @@ Then(/^I should see the new course information$/) do
   expect(page).to have_content(new_course.title)
 end
 
-Then(/^I should be on the edit sections page$/) do
-  expect(current_path).to eq(edit_sections_course_path(course))
+Then(/^I should be on the edit lessons page$/) do
+  expect(current_path).to eq(edit_lessons_course_path(course))
 end
 
-Then(/^I should see section links$/) do
-  course_with_sections.sections.each do |section|
-    expect(page).to have_content(section.name)
+Then(/^I should see lesson links$/) do
+  course_with_lessons.lessons.each do |lesson|
+    expect(page).to have_content(lesson.name)
   end
 end

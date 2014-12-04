@@ -1,7 +1,9 @@
-Then(/^I should see "(.*)"$/) do |content|
-  expect(page).to have_content(content)
+
+def create_content_page
+  @page ||=
+    FactoryGirl.create(:page_with_content)
 end
 
-Then(/^I should see "(.*)" link$/) do |content|
-  expect(page).to have_selector(:link, content)
+Given(/^I am on a lesson content page$/) do
+  visit(page_path(create_content_page))
 end

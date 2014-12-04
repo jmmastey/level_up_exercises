@@ -5,11 +5,11 @@ RSpec.describe FillInTheBlankQuestion, type: :model do
     FactoryGirl.build(:fill_in_the_blank_question_with_answers)
   end
 
-  describe '::new' do
+  describe '::default' do
     it 'creates a blank answer upon initialization' do
-      expect(described_class.new.page_content).to be_a PageContent
-      expect(described_class.new).to have(1).answer
-      expect(described_class.new.answers.first).to be_a FillInTheBlankAnswer
+      expect(described_class.default.page_content).to be_a PageContent
+      expect(described_class.default).to have(1).answer
+      expect(described_class.default.answers.first).to be_a FillInTheBlankAnswer
     end
   end
 
@@ -33,7 +33,9 @@ RSpec.describe FillInTheBlankQuestion, type: :model do
 
   describe '#to_s' do
     it 'uses page_content to_s' do
-      expect(described_class.new.to_s).to eq(described_class.new.page_content.to_s)
+      expect(
+        described_class.new.to_s,
+      ).to eq(described_class.new.page_content.to_s)
     end
   end
 end

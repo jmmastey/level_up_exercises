@@ -8,12 +8,12 @@ FactoryGirl.define do
     topic "Test Topic"
     description "Test Description"
 
-    factory :course_with_sections do
-      sections { create_list(:section, 3) }
+    factory :course_with_lessons do
+      lessons { create_list(:lesson, 3) }
     end
 
     factory :example_course do
-      sections { create_list(:example_section, 3) }
+      lessons { create_list(:example_lesson, 3) }
     end
 
     factory :new_course do

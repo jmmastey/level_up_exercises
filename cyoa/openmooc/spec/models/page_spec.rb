@@ -5,25 +5,26 @@ RSpec.describe Page, type: :model do
     described_class.new
   end
 
-  let(:lesson_page) do
-    FactoryGirl.create(:example_lesson_page)
+  let(:example_page) do
+    FactoryGirl.create(:example_page)
   end
 
-  let(:section) do
-    FactoryGirl.create(:section_with_pages)
+  let(:lesson) do
+    FactoryGirl.create(:lesson_with_pages)
   end
 
-  describe '#section=' do
-    it 'sets the #postion as the size of the section.activities' do
-      expect { page.update(section: section) }.to change { page.position }.from(nil).to(4)
+  describe '#lesson=' do
+    it 'sets the #postion as the size of the lesson.activities' do
+      expect { page.update(lesson: lesson) }.to change { page.position }
+        .from(nil).to(4)
     end
   end
 
   describe '#destroy' do
-    it 'destory the activity associated' do
-      lesson_activity = lesson_page.activity
-      lesson_page.destroy
-      expect(LessonActivity.exists?(id: lesson_activity.id)).to be false
+    it 'destory the content associated' do
+      content = example_page.content
+      example_page.destroy
+      expect(Content.exists?(id: content.id)).to be false
     end
   end
 end

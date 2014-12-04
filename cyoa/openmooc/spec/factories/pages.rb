@@ -3,18 +3,16 @@
 FactoryGirl.define do
   factory :page do
     type ""
-    section
+    lesson
 
-    factory :example_lesson_page do
-      association :activity, factory: :example_lesson_activity
+    factory :example_page do
+      association :content, factory: :example_content
+
+      factory :page_with_content
     end
 
     factory :example_fill_in_the_blank_question_page do
-      association :activity, factory: :example_quiz_activity
-    end
-
-    factory :page_with_fill_in_the_blank_question do
-      association :activity, factory: :quiz_activity_with_fill_in_the_blank_question
+      association :content, factory: :example_fill_in_the_blank_question
     end
   end
 end

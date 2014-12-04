@@ -1,5 +1,9 @@
-= render layout: 'quiz_activities/new' do |f|
-  .col-xs-12.col-sm-10.col-md-8.col-lg-6
+.col-xs-12
+  .page-header
     %h1
-      New fill in the blank question
-    = render 'form'
+      New Fill In The Blank Question
+
+    = render partial: 'shared/new_question_links_dropdown', locals: { lesson: @lesson }
+
+  = render partial: 'form',
+    locals: { question: @question, extra_params: { lesson_id: @lesson.id } }

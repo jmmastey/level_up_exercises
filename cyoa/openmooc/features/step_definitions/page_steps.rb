@@ -1,31 +1,27 @@
-def activity_with_section
-  @activity ||= FactoryGirl.create(
+def page_with_content
+  @page ||= FactoryGirl.create(
     :page,
-    section: new_section,
-    activity: FactoryGirl.create(:lesson_activity_with_content),
+    lesson: new_lesson,
+    content: FactoryGirl.create(:content),
   )
 end
 
-def new_lesson_activity
-  @activity ||= FactoryGirl.build(:lesson_activity_with_content)
+def content_page_params(page)
+  { 'Content' => page.page_content.to_s }
 end
 
-def lesson_activity_params(activity)
-  { 'Content' => activity.page_content.to_s }
+Given(/^I am on an content page$/) do
+  visit(page_path(page_with_content))
 end
 
-Given(/^I am on an activity page$/) do
-  visit(page_path(activity_with_section))
-end
-
-When(/^I enter new lesson activity content$/) do
+When(/^I enter new content page content$/) do
   enter_form('Content' => 'Hello World!')
 end
 
-When(/^I enter edited lesson activity content$/) do
+When(/^I enter edited content page content$/) do
   enter_form('Content' => 'Hello World Again!')
 end
 
-Then(/^I should see the edited lesson activity content$/) do
+Then(/^I should see the edited content page content$/) do
   expect(page).to have_content('Hello World Again!')
 end

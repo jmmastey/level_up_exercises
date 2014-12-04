@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :multiple_choice_question do
     page_content
-    quiz_activity
     answers []
+    page
 
     factory :multiple_choice_question_with_answers do
       answers do

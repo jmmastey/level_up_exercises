@@ -8,9 +8,9 @@
         = @course.page_content
   .col-xs-12
     .pull-right
-      - if @course.sections.empty?
-        = link_to 'This course has no lessons. Add a lesson', edit_sections_course_path(@course), class: 'btn btn-primary'
+      - if @course.lessons.empty?
+        = link_to 'This course has no lessons. Add a lesson', edit_lessons_course_path(@course), class: 'btn btn-primary'
       - else
-        = link_to 'Begin course', @course.sections.first, class: 'btn btn-primary'
+        = link_to 'Begin course', @course.lessons.first, class: 'btn btn-primary'
 .col-xs-12.col-md-4
   = render partial: 'menu', locals: { course: @course }

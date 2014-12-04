@@ -1,8 +1,0 @@
-= form_for @lesson_activity do |f|
-  = f.fields_for :page_content do |pf|
-    .form-group
-      = pf.label :content
-      = pf.text_area :content, class: 'form-control', rows: '10', maxlength: 1500
-  = link_to 'Cancel', @lesson_activity.page, class: 'btn btn-default'
-  = f.submit 'Update page', class: 'btn btn-primary'
-

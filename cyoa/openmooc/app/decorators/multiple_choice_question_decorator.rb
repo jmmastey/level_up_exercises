@@ -1,4 +1,4 @@
-class MultipleChoiceQuestionDecorator < PartialDecorator
+class MultipleChoiceQuestionDecorator < QuestionDecorator
   delegate_all
 
   def self.type
@@ -7,6 +7,10 @@ class MultipleChoiceQuestionDecorator < PartialDecorator
 
   def type
     self.class.type
+  end
+
+  def next_page_text
+    'Skip quiz'.freeze
   end
 
   def create_for_section_url

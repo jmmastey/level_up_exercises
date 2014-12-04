@@ -1,51 +1,43 @@
 class FillInTheBlankQuestionsController < ApplicationController
-  before_action :set_section, only: [:new, :create_for_section]
-  before_action :set_quiz_activity, only: [:new, :update_for_quiz_activity]
-  before_action :set_question, only: [:submit_answer, :edit, :update, :find_aliases, :create_answers]
+  before_action :set_lesson, only: [:new, :create]
+  before_action :set_question, only: [
+    :submit_answer, :edit, :update, :find_aliases, :build_answers
+  ]
   before_action :set_answer_submission, only: [:submit_answer]
+  helper :question
+  respond_to :html
 
   def new
-    @question = FillInTheBlankQuestion.new(page_content: PageContent.new)
+    @question = FillInTheBlankQuestion.default(lesson: @lesson)
   end
 
   def edit
+  end
+
+  def create
+    @page = Page.create(
+      lesson: @lesson,
+      content: FillInTheBlankQuestion.new(
+        question_params,
+      ),
+    )
+    respond_with @page
+  end
+
+  def build_answers
+    answers = answers_from_aliases
+    @question.answers += answers
+    @page = @question.page
+    render 'pages/edit'
   end
 
   def find_aliases
     @aliases = Alias.query(params[:q])
   end
 
-  def create_for_section
-    @question = FillInTheBlankQuestion.new(question_params)
-    @question.quiz_activity = QuizActivity.create(section: @section)
-    @question.save
-    redirect_to @question.page
-  end
-
-  def update_for_quiz_activity
-    old_question = @quiz_activity.question.destroy
-    if @quiz_activity.update!(question: FillInTheBlankQuestion.new(question_params))
-      old_question.destroy
-    end
-    redirect_to @quiz_activity.page
-  end
-
-  def create_answers
-    answers = answers_from_aliases
-    @question.update(answers: @question.answers + answers)
-    redirect_to edit_quiz_activity_path(@question.quiz_activity)
-  end
-
-  def create
-    @question = FillInTheBlankQuestion.new(question_params)
-    @question.save
-    redirect_to @question.quiz_activity.page
-  end
-
   def update
-    activity = @question.quiz_activity
     @question.update(question_params)
-    redirect_to @question.quiz_activity.page
+    respond_with @question.page
   end
 
   def submit_answer
@@ -60,7 +52,9 @@ class FillInTheBlankQuestionsController < ApplicationController
 
   def answers_from_aliases
     answers = aliases_params.keep_if { |a| a['add'] == '1' }
-    answers.map! { |a| FillInTheBlankAnswer.from_alias(a) }
+    answers.map! do |a|
+      FillInTheBlankAnswer.new(text: a['text'])
+    end
   end
 
   def aliases_params
@@ -69,13 +63,13 @@ class FillInTheBlankQuestionsController < ApplicationController
 
   def correct_response
     flash[:success] = 'Great Job!'
-    redirect_to @question.quiz_activity.page.decorate.next_link[:path]
+    redirect_to @question.page.decorate.next_link[:path]
   end
 
   def incorrect_response
     flash[:danger] =
       "Incorrect response '#{@answer_submission}'"
-    redirect_to @question.quiz_activity.page
+    redirect_to @question.page
   end
 
   def set_question
@@ -83,14 +77,10 @@ class FillInTheBlankQuestionsController < ApplicationController
     @question = FillInTheBlankQuestion.find(id)
   end
 
-  def set_section
-    id = params.require(:fill_in_the_blank_question)[:section_id]
-    @section = Section.find(id)
-  end
-
-  def set_quiz_activity
-    id = params.require(:fill_in_the_blank_question)[:quiz_activity_id]
-    @quiz_activity = QuizActivity.find(id)
+  def set_lesson
+    id = params[:lesson_id] ||
+         params.require(:fill_in_the_blank_question)[:lesson_id]
+    @lesson = Lesson.find(id)
   end
 
   def set_answer_submission

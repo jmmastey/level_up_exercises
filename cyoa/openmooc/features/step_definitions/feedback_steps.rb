@@ -15,5 +15,6 @@ Then(/^I should see a feedback confirmation$/) do
 end
 
 Then(/^I should see sign in required$/) do
-  expect(page).to have_content('Sorry! You must be logged in to submit feedback')
+  expect(page).to have_content(
+    'Sorry! You must be logged in to submit feedback')
 end

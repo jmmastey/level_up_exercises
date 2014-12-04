@@ -4,12 +4,14 @@ Feature: Anonymous (unauthenticated) user page
     link, and general site information
   To interest me in using the site to keep apprised events in Chitown
 
+@ignore
 Scenario: Main site page shows highlights from topical feeds
   Given I am an unauthenticated user visiting the "Home" page
   Then I see a heading for "Chicago Highlights"
   And I see a feed highlight for "Opening Night Calendar"
   And I see a feed highlight for "Meetup Events"
 
+@ignore
 Scenario: Main site page shows some topical feed options
   Given I am an unauthenticated user visiting the "Home" page
   Then I see a heading for "What Do You Like To Do"
@@ -17,18 +19,22 @@ Scenario: Main site page shows some topical feed options
   And I see a featured feed category for "Music"
   And I see a featured feed category for "Comedy"
 
+@ignore
 Scenario: Main site page shows new user registration link
   Given I am an unauthenticated user visiting the "Home" page
   Then I see a link for "Register"
 
+@ignore
 Scenario: Main site page shows About Us link
   Given I am an unauthenticated user visiting the "Home" page
   Then I see a link for "About Us"
 
+@ignore
 Scenario: Main site page shows Private Policy link
   Given I am an unauthenticated user visiting the "Home" page
   Then I see a link for "Privacy Policy"
 
+@ignore
 Scenario: Main site page shows Contact Us link
   Given I am an unauthenticated user visiting the "Home" page
   Then I see a link for "Contact Us"

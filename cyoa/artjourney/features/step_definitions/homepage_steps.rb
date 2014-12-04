@@ -2,22 +2,18 @@ Given(/^I am on the homepage$/) do
   visit '/'
 end
 
-When(/^I click on Artists$/) do
+When(/^I click on (.+)$/) do |item|
   click_link('Artists')
 end
 
-Then(/^I should see a link to the artists page$/) do
-  expect(page).to have_selector('a', text: 'Artists')
+Then(/^I should see a link to the (.+) page$/) do |name|
+  expect(page).to have_selector('a', text: name)
 end
 
-Then(/^a login button$/) do
-  expect(page).to have_selector('a', text: 'Login')
+Then(/^a (.+) button$/) do |name|
+  expect(page).to have_selector('a', text: name)
 end
 
-Then(/^a signup button$/) do
-  expect(page).to have_selector('a', text: 'Signup')
-end
-
-Then(/^I should be on the artists page$/) do
-  expect(page).to have_selector('h1', text: 'Artists')
+Then(/^I should be on the (.+) page$/) do |name|
+  expect(page).to have_selector('h1', text: name)
 end

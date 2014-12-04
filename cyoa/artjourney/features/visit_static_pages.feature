@@ -17,3 +17,6 @@ Feature: Visiting Static Pages
     Then I should be on the Signup page
 
   Scenario: User visits login page
+    Given I am on the homepage
+    When I click on Login
+    Then I should be on the Login page

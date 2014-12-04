@@ -38,6 +38,7 @@ class WatchesController < ApplicationController
   end
 
   private
+
   def set_watches
     @watches = Watch.where(user: current_user)
   end

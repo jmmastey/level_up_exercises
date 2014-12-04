@@ -1,6 +1,6 @@
 class RegionsController < ApplicationController
   def index
-    @regions = get_regions
+    @regions = regions
 
     respond_to do |format|
       format.html do
@@ -14,8 +14,7 @@ class RegionsController < ApplicationController
   end
 
   def search
-    @search_query = params[:query]
-    @regions = search_regions(@search_query) if @search_query
+    @regions = search_regions
 
     respond_to do |format|
       format.html do
@@ -30,13 +29,14 @@ class RegionsController < ApplicationController
 
   private
 
-  def get_regions
+  def regions
     Region.order(:in_game_id)
   end
 
-  def search_regions(query)
-    regions = get_regions
-    query = query.strip.upcase
-    regions.where("UPPER(name) like ?", "%#{query}%")
+  def search_regions
+    @search_query = params[:query]
+    return regions unless @search_query.present?
+    @search_query = @search_query.strip.upcase
+    regions.where("UPPER(name) like ?", "%#{@search_query}%")
   end
 end

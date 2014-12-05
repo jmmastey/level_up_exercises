@@ -9,7 +9,7 @@
 
 <h4>Related Legislator</h4>
 <blockquote>
-  <%= render partial: "legislators/legislator_stub_item", locals: {legislator: @legislator} if @legislator %>
+  <%= render @legislator if @legislator %>
   <%= "There is no related legislator" unless @legislator %>
 </blockquote>
 

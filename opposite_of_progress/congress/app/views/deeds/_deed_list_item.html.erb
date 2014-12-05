@@ -5,7 +5,7 @@
     <div class="large-6 columns">
       <% if deed_list_item.bioguide_id %>
         <% legislator = Legislator.where(bioguide_id: deed_list_item.bioguide_id).first %>
-        <%= render partial: "legislators/legislator_stub_item", locals: {legislator: legislator, deed: deed_list_item} %>
+        <%= render partial: "legislators/legislator", locals: {legislator: legislator, deed: deed_list_item} %>
       <% end %>
     </div>
     <div class="large-6 columns">

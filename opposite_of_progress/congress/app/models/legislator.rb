@@ -3,7 +3,11 @@ class Legislator < ActiveRecord::Base
   scope :by_bioguide_id, ->(id) { where(bioguide_id: id).first }
 
   def full_name
-    [title, first_name, nickname, last_name, party].join(" ")
+    [title, first_name, nickname, last_name, display_party].join(" ")
+  end
+
+  def display_party
+    "(#{self.party})"
   end
 
   def full_party

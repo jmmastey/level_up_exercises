@@ -17,7 +17,7 @@
 </header>
 
 <% @results.each do |result| %>
-  <div><%= render partial: "legislator_stub_item", locals: {legislator: result} %></div>
+  <div><%= render result %></div>
 <% end %>
 <%= "There are no legislators to show" if @results.count == 0 %>
 

@@ -1,0 +1,11 @@
+- @question = @page.content
+- if flash[:danger]
+  .alert{class: "alert-danger alert-dismissible", role: "alert"}
+    %button{type: "button", class: "close", data:{dismiss:"alert"}} &times;
+    = flash[:danger]
+= @question
+= form_for @question, url: submit_answer_fill_in_the_blank_question_path(@question), method: :post do |f|
+  .form-group
+    = label_tag :answer
+    = text_field_tag :answer, nil, class: 'form-control', placeholder: 'answer...'
+  = submit_tag 'Submit answer', class: 'btn btn-primary'

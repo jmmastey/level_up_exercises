@@ -1,0 +1,7 @@
+.col-xs-12.col-md-6.col-lg-8
+  = render partial: @page.content.decorate.to_partial_path('form'),
+    locals: { question: @page.content, extra_params: {} }
+
+.col-xs-12.col-sm-8.col-md-6.col-lg-4
+  = render partial: @page.content.decorate.to_partial_path('alias_form'),
+    locals: { question: @page.content, extra_params: {} }

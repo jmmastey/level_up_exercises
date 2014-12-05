@@ -1,0 +1,8 @@
+.col-xs-12.col-sm-8
+  .page-header
+    %h1
+      = link_to "#{@page.lesson.course.title}", @page.lesson.course
+    %h2
+      = link_to "#{@page.lesson.name}", @page.lesson
+.col-xs-12
+  = render partial: @page.content.decorate.to_partial_path('edit')

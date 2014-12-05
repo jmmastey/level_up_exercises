@@ -1,0 +1,6 @@
+- flash.each do |type, messages|
+  - unless (type == :timedout || type == 'timedout')
+    - Array(messages).each do | message |
+      .alert{class: "alert-dismissible alert-#{type}"}
+        %button{type: "button", data:{dismiss: "alert"}, class:"close"} &times;
+        = message

@@ -1,0 +1,9 @@
+.col-xs-12
+  .page-header
+    %h1
+      New Fill In The Blank Question
+
+    = render partial: 'shared/new_question_links_dropdown', locals: { lesson: @lesson }
+
+  = render partial: 'form',
+    locals: { question: @question, extra_params: { lesson_id: @lesson.id } }

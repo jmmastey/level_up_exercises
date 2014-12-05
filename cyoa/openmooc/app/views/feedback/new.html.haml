@@ -1,0 +1,11 @@
+- if user_signed_in?
+  = render partial: 'form'
+- else
+  .jumbotron
+    %h1 Sorry!
+    %p.lead
+      You must be logged in to submit feedback.
+    %p
+      = link_to 'Sign in', new_user_session_path, class: 'btn btn-lg btn-primary'
+      or
+      = link_to 'Sign up', new_user_registration_path, class: 'btn btn-lg btn-default'

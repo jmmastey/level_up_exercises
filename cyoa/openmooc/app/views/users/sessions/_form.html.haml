@@ -1,0 +1,15 @@
+= render partial: 'users/devise_error_messages', locals:{resource: resource}
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .form-group
+    = f.label :email
+    = f.email_field :email, autofocus: true, class: 'form-control', required: true
+  .form-group
+    = f.label :password
+    = f.password_field :password, autocomplete: "off", class: 'form-control', required: true
+  - if devise_mapping.rememberable?
+    .check-box
+      %label
+        = f.check_box :remember_me
+        Remember me
+  .form-group
+    = f.submit "Log in", class: 'btn btn-default'

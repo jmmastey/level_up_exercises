@@ -1,0 +1,6 @@
+= form_tag find_aliases_fill_in_the_blank_question_path(question), method: :get do
+  .form-group
+    = label_tag :q, 'Search for answers like:'
+    = text_field_tag :q, nil, class: 'form-control', placeholder: 'alias'
+  .form-group
+    = submit_tag 'Find answers', class: 'btn btn-default'

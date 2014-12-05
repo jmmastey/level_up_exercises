@@ -1,0 +1,14 @@
+.col-xs-10.col-sm-6.col-md-5.col-lg-4
+  .panel.panel-default
+    .panel-body
+      %h3 Enter message
+      = form_for(@feedback, url: feedback_path, class: 'form') do |f|
+        .form-group
+          = f.label :subject, 'Subject'
+          = f.text_field :subject, class: 'form-control'
+        .form-group
+          = f.label :message, 'Message'
+          = f.text_area :message, class: 'form-control', placeholder: 'enter your message'
+        .form-group
+          = f.submit 'Send feedback', class: 'btn btn-primary btn-large'
+

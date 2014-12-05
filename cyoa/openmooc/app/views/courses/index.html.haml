@@ -1,0 +1,12 @@
+.row
+  .col-xs-12
+    .page-header
+      %h1 #{t('app_name')} Courses
+.row
+  .col-xs-12
+    - @courses.each do |course|
+      .row
+        = render partial: 'list_summary', locals: { course: course }
+.row
+  = link_to new_course_path, class: 'btn btn-lg btn-default', role: 'button' do
+    Add course &plus;

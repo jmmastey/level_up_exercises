@@ -35,11 +35,11 @@ class TripsController < ApplicationController
       location: Airport.find_by_code!(params[:destination_airport]).location)
   end
 
-  def datetime_from_select_inputs(param, method)
-    DateTime.new(param["#{method}(1i)"].to_i,
-      param["#{method}(2i)"].to_i,
-      param["#{method}(3i)"].to_i,
-      param["#{method}(4i)"].to_i,
-      param["#{method}(5i)"].to_i)
+  def datetime_from_select_inputs(form_param, object_attribute)
+    DateTime.new(form_param["#{object_attribute}(1i)"].to_i,
+      form_param["#{object_attribute}(2i)"].to_i,
+      form_param["#{object_attribute}(3i)"].to_i,
+      form_param["#{object_attribute}(4i)"].to_i,
+      form_param["#{object_attribute}(5i)"].to_i)
   end
 end

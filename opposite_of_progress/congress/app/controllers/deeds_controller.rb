@@ -3,7 +3,7 @@ class DeedsController < ApplicationController
   before_action :set_deed, only: [:show]
 
   def index
-    @results = Deed.all_sorted(params[:page], params[:sort_by])
+    @results = Deed.all_sorted(params[:page])
   end
 
   def show

@@ -4,7 +4,7 @@ module DeedsHelper
     Bill.order(:updated_at).all.each do |bill|
       if bill.last_vote_at && bill.short_title
         deed_text = "#{bill.short_title} was last voted on " \
-          "#{bill.last_vote_at.strftime('%B %d %Y')}"
+          "#{ApplicationHelper.date_display(bill.last_vote_at)}"
 
         deed = Deed.find_or_create_by(bill_id: bill.bill_id,
                                       bioguide_id: bill.sponsor_id,
@@ -19,7 +19,7 @@ module DeedsHelper
     Bill.order(:updated_at).all.each do |bill|
       if bill.congress == 113 && bill.enacted_at && bill.short_title
         deed_text = "#{bill.short_title} was enacted on " \
-          "#{bill.enacted_at.strftime('%B %d %Y')}"
+          "#{ApplicationHelper.date_display(bill.enacted_at)}"
 
         deed = Deed.find_or_create_by(bill_id: bill.bill_id,
                                       bioguide_id: bill.sponsor_id,

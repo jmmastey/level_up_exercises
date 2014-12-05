@@ -5,5 +5,5 @@
     <%= "#{deed.bioguide_id}" unless legislator %>
   </h5>
   <p><em><%= "#{legislator.chamber.titleize} #{legislator.full_party} from #{legislator.state}" %></em></p>
-  <p class="supporting-date">Term Started: <%= legislator.term_start.strftime("%B %d %Y") %></p>
+  <p class="supporting-date">Term Started: <%= ApplicationHelper.date_display(legislator.term_start) %></p>
 </div>

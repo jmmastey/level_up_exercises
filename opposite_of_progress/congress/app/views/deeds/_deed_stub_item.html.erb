@@ -3,5 +3,5 @@
     <%= "Deed:" %>
     <%= raw "#{link_to deed.deed, deed}" if deed.deed %>
   </h5>
-  <p class="supporting-date">Date: <%= deed.date.strftime("%B %d %Y") %></p>
+  <p class="supporting-date">Date: <%= ApplicationHelper.date_display(deed.date) %></p>
 </div>

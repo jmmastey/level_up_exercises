@@ -1,28 +1,21 @@
-== README
+== Travel Planner
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The travel planner helps plan business travel to remote locations. Given a meeting date and time, along with home and destination, it picks the best flights for you using the FlightStats API.
 
-Things you may want to cover:
+It's a rails app with postgres as the database. I run windows, this works on ruby 2.1.3p242 (2014-09-19 revision 47630) [i386-mingw32].
 
-* Ruby version
+`bundle install`
 
-* System dependencies
+For anything to work, the db/seeds.db must be run - this creates the two airports used in the tests. Without these, pretty much nothing (even production) will work at this point.
 
-* Configuration
+`bundle exec rake db:seed`
 
-* Database creation
+For testing, it uses rspec, cucumber, and vcr to mock 95% of the remote API calls. Note that in the FlightStats API tests, there are only a few remote calls that are made, and even those are only made once per day, then the response reused if you run the tests again (see the spec/cassettes directory).
 
-* Database initialization
+`bundle exec rspec`
 
-* How to run the test suite
+`bundle exec cucumber`
 
-* Services (job queues, cache servers, search engines, etc.)
+Start it up....
 
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+`bundle exec rails server`

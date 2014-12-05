@@ -5,6 +5,6 @@ class Deed < ActiveRecord::Base
   end
 
   def self.all_sorted(page, sort_by = "date DESC")
-    Deed.order(sort_by).paginate(page: page, per_page: ENV["PAGINATION_COUNT"])
+    Deed.order(sort_by).paginate(page: page)
   end
 end

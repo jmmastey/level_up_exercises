@@ -3,15 +3,16 @@ class Legislator < ActiveRecord::Base
   scope :by_bioguide_id, ->(id) { where(bioguide_id: id).first }
 
   def full_name
-    name_arr = []
+    # name_arr = []
 
-    name_arr << title if title
-    name_arr << first_name if first_name
-    name_arr << "'#{nickname}'" if nickname
-    name_arr << last_name if last_name
-    name_arr << "(#{party})" if party
+    # name_arr << title if title
+    # name_arr << first_name if first_name
+    # name_arr << "'#{nickname}'" if nickname
+    # name_arr << last_name if last_name
+    # name_arr << "(#{party})" if party
 
-    name_arr.join(" ")
+    # name_arr.join(" ")
+    [title, first_name, nickname, last_name, party].join(" ")
   end
 
   def full_party
@@ -50,7 +51,6 @@ class Legislator < ActiveRecord::Base
 
   def self.all_sorted(page, sort_by = "created_at DESC")
     Legislator.order(sort_by)
-              .paginate(page: page,
-                        per_page: ENV["PAGINATION_COUNT"])
+              .paginate(page: page)
   end
 end

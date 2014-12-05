@@ -25,6 +25,6 @@ class Bill < ActiveRecord::Base
   end
 
   def self.all_sorted(page, sort_by = "created_at DESC")
-    Bill.order(sort_by).paginate(page: page, per_page: ENV["PAGINATION_COUNT"])
+    Bill.order(sort_by).paginate(page: page)
   end
 end

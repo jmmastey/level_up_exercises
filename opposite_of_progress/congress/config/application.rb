@@ -29,6 +29,6 @@ module Congress
     end
 
     # Set global pagination per page value
-    WillPaginate.per_page = 3
+    WillPaginate.per_page = 10
   end
 end

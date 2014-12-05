@@ -22,11 +22,10 @@ class TripsController < ApplicationController
   private
 
   def create_trip
-    trip = Trip.new
-    trip.home_location = Airport.find_by_code!(params[:origin_airport]).location
-    trip.save
-    create_meeting(trip)
-    trip
+    location = Airport.find_by_code!(params[:origin_airport]).location
+    Trip.create(home_location: location).tap do |trip|
+      create_meeting(trip)
+    end
   end
 
   def create_meeting(trip)

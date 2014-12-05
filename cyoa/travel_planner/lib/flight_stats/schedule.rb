@@ -34,6 +34,7 @@ module FlightStats
                                   verify_ssl: false)
       @airports = JSON.parse(json)["appendix"]["airports"]
       flights = JSON.parse(json)["scheduledFlights"]
+
       add_utc_time(flights)
     end
 

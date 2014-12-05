@@ -1,3 +1,10 @@
+PATH
+  remote: ../eve_central/
+  specs:
+    eve_central (0.0.1)
+      activemodel
+      nokogiri
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -81,9 +88,6 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    eve_central (0.0.1)
-      activemodel
-      nokogiri
     execjs (2.2.2)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -239,7 +243,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   devise
-  eve_central
+  eve_central!
   factory_girl_rails (~> 4.0)
   haml-rails
   jbuilder (~> 2.0)

@@ -53,7 +53,7 @@ gem 'kaminari'
 
 gem 'requirejs-rails'
 
-gem 'eve_central', require: false
+gem 'eve_central', require: false, path: '../eve_central/'
 
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console

@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-2.0.0.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<style>
+    #info{
+
+        width: 350px;
+        height: 350px;
+        padding-top: 15%;
+        padding-left: 50px;
+        margin-top: 2%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+<div id='info'>
+    <p style='color:red'>The default two codes are used if you don't change</p>
+    <form class='form'role='form' action='/boot' method='GET'>
+        <div class='form-group'>
+            <label for='activation-code'>Activate Code :</label>
+             <input type='text' class='form-control' id='activation-code' name='activation_code' placeholder='1234'>
+        </div>
+
+        <div class='form-group'>
+            <label for='deactivation-code'>Deactivate Code :</label>
+            <input type='text' class='form-control' id='deactivation-code' name='deactivation_code' placeholder='0000'>
+        </div>
+    
+        <button id='btn-boot' class='btn btn-default'>Boot</button>
+    </form>
+</div>

@@ -1,6 +1,7 @@
 # Base Bill class
 class Bill < ActiveRecord::Base
   scope :by_sponsor_id, ->(id) { where(sponsor_id: id) }
+  scope :all_sorted, ->(page, sort_by) { order(sort_by).paginate(page: page) }
 
   def title
     short_title || bill_id
@@ -22,9 +23,5 @@ class Bill < ActiveRecord::Base
       sponsor_id: result['sponsor_id'],
       enacted_at: result['history']['enacted_at'],
     }
-  end
-
-  def self.all_sorted(page, sort_by = "created_at DESC")
-    Bill.order(sort_by).paginate(page: page)
   end
 end

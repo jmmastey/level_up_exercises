@@ -11,7 +11,7 @@
     <div class="large-6 columns">
       <% if deed_list_item.bill_id %>
         <% bill = Bill.where(bill_id: deed_list_item.bill_id).first %>
-        <%= render partial: "bills/bill_stub_item", locals: {bill_stub_item: bill} %>
+        <%= render bill %>
       <% end %>
     </div>
   </div>

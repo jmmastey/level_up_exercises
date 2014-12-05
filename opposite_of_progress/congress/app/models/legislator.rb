@@ -3,15 +3,6 @@ class Legislator < ActiveRecord::Base
   scope :by_bioguide_id, ->(id) { where(bioguide_id: id).first }
 
   def full_name
-    # name_arr = []
-
-    # name_arr << title if title
-    # name_arr << first_name if first_name
-    # name_arr << "'#{nickname}'" if nickname
-    # name_arr << last_name if last_name
-    # name_arr << "(#{party})" if party
-
-    # name_arr.join(" ")
     [title, first_name, nickname, last_name, party].join(" ")
   end
 

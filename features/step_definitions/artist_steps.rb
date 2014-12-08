@@ -10,6 +10,16 @@ Given(/^I have (\d+) artists$/) do |arg1|
   artist_5 = create(:artist, first_name: "Edward",  last_name: "Hopper")
 end
 
+When(/^I click new artist$/) do
+  click_link("Create a New Artist")
+end
+
+When(/^fill in the details for a new artist: Matisse$/) do
+  fill_in("First Name", with: "Henri")
+  fill_in("Last Name", with: "Matisse")
+  click_button("Create Artist")
+end
+
 Then(/^I should see the artist: (.+)$/) do |artist|
   expect(page).to have_content(artist)
 end

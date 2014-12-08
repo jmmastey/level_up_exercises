@@ -7,7 +7,7 @@
       %th.text-right
   %tbody
     - @items.each do |item|
-      %tr
+      %tr{ data: { id: item.id } }
         %td{ data: { field: :in_game_id } }= item.in_game_id
         %td{ data: { field: :name } }= item.name
         %td.text-right= link_to("View orders", { controller: :orders, action: :search, item: item }, class: "btn btn-info btn-xs")

@@ -1,0 +1,8 @@
+= form_tag(search_items_path, method: :get, role: :form) do
+  .form-group
+    = label_tag(:query, "Search", class: "sr-only")
+    .input-group
+      = search_field_tag(:query, @query, class: "form-control", placeholder: "Search items...")
+      .input-group-btn
+        %button.btn.btn-default.icon-button{type: "submit", title: "Search"}
+          %span.glyphicon.glyphicon-search

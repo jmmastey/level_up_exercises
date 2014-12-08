@@ -1,4 +1,7 @@
-Feature: Visiting Static Pages
+Feature: Visiting Home Page
+  As a user
+  I want to visit the homepage
+  In order to sign up, login and view the list of artists
 
   Scenario: User visits homepage
     Given I am on the homepage
@@ -6,15 +9,15 @@ Feature: Visiting Static Pages
     And a Login button
     And a Signup button
 
-  Scenario: User visits artists page
-    Given I am on the homepage
-    When I click on Artists
-    Then I should be on the Artists page
-
   Scenario: User visits signup page
     Given I am on the homepage
     When I click on Signup
     Then I should be on the Signup page
+
+  Scenario: User visits artists page
+    Given I am on the homepage
+    When I click on Artists
+    Then I should be on the artists index
 
   Scenario: User visits login page
     Given I am on the homepage

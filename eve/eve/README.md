@@ -1,4 +1,4 @@
-## EVE Online Market
+## EVE Forecast
 
 The purpose of this application is to provide an interface for users to track and predict item prices in the MMORPG [EVE Online](http://www.eveonline.com/).
 

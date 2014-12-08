@@ -28,6 +28,6 @@ RSpec.describe Trip, type: :model do
   end
 
   it "can be converted to trip optimizer hash" do
-    expect(trip.to_optimizer_h).to eq(trip_optimizer_hash)
+    expect(trip.to_h).to eq(trip_optimizer_hash)
   end
 end

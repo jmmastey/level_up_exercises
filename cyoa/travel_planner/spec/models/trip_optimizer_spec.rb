@@ -26,7 +26,7 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
     end
 
     subject(:optimizer) do
-      TripOptimizer.new(trip.to_optimizer_h)
+      TripOptimizer.new(trip.to_h)
     end
 
     def pick_shortest_flights(opti)

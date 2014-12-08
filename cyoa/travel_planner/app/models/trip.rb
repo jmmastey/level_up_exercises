@@ -5,7 +5,7 @@ class Trip < ActiveRecord::Base
 
   validates_presence_of :home_location
 
-  def to_optimizer_h
+  def to_h
     {
       from:           airport_code(home_location.id),
       to:             airport_code(meetings[0].location.id),

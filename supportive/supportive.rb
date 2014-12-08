@@ -13,22 +13,29 @@ class BlagPost
       hash[key.to_sym] = value
       hash
     end
+    set_author_presence(args)
+    @categories = category_filter(args)
+    set_blag_info(args)
+  end
 
-    if args[:author] != '' && args[:author_url] != ''
-      @author = Author.new(args[:author], args[:author_url])
-    end
-
-    if args[:categories]
-      @categories = args[:categories].reject do |category|
-        DISALLOWED_CATEGORIES.include? category
-      end
-    else
-      @categories = []
-    end
-
+  def set_blag_info(args)
     @comments = args[:comments] || []
     @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
     @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
+  end
+
+  def set_author_presence(args)
+    if args[:author] != '' && args[:author_url] != ''
+      @author = Author.new(args[:author], args[:author_url])
+    end
+  end
+  
+  def category_filter(args)
+    if args[:categories]
+        args[:categories].reject do |category|
+        DISALLOWED_CATEGORIES.include? category ||= []
+      end
+    end
   end
 
   def to_s
@@ -38,71 +45,41 @@ class BlagPost
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    return "" unless author
+    "By #{author.name}, at #{author.url}"
   end
 
   def category_list
     return "" if categories.empty?
-
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
-  end
+    label = categories.length == 1 ? "Category" : "Categories"
+    label + ": " +  (categories.map { |cat| as_title(cat) }).to_sentence
+  end  
 
   def as_title(string)
     string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    words = string.titleize
   end
 
   def commenters
-    return '' unless comments_allowed?
-    return '' unless comments.length > 0
-
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    return '' unless comments_allowed? || comments.length > 0    
+    ordinal = comments.length.ordinalize
+    "You will be the #{ordinal} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date.years_since(3) > Date.today
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    body.truncate(200, omission: '...')
   end
 
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
-                    "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
+                    "categories"    => [:theory_of_computation, :languages, :gossip, :fashion, :editorial],
+                    "comments"      => [ [], [], [], [] ], # because comments are meaningless, get it? ;)
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.

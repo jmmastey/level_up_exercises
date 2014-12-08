@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   root "feeds#index"
 
+  get "/about-us", to: "site#about_us", as: :about_us
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

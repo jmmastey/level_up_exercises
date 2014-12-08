@@ -1,5 +1,5 @@
 Given(/^I am on the homepage$/) do
-  visit '/'
+  visit root_path
 end
 
 When(/^I click on (.+)$/) do |item|

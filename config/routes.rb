@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'login' => 'static_pages#login'
 
   get 'artists' => 'artists#index'
+  get 'artists/:id' => 'artists#show', as: :artist
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

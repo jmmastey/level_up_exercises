@@ -25,6 +25,20 @@ describe 'FlightStats Schedules API' do
       end
     end
 
+    it 'throws an error when a past date is requested for arriving before' do
+      expect{ api.get_flights_arriving_before(
+        -10.days.from_now,
+        origin,
+        destination) }.to raise_error(ArgumentError)
+    end
+
+    it 'throws an error when a past date is requested for departing after' do
+      expect{ api.get_flights_departing_after(
+        -10.days.from_now,
+        origin,
+        destination) }.to raise_error(ArgumentError)
+    end
+
     it 'api response should not be empty' do
       expect(flights).to_not be_empty
     end

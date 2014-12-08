@@ -12,6 +12,8 @@ module FlightStats
     end
 
     def get_flights_arriving_before(time, from, to)
+      raise(ArgumentError, "Time requested in the past") unless time > DateTime.now
+
       builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
       flights = arriving_flights(builder, time)
 
@@ -23,10 +25,14 @@ module FlightStats
     end
 
     def get_flights_departing_after(time, from, to)
+      raise(ArgumentError, "Time requested in the past") unless time > DateTime.now
+
       builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
       get_scheduled_flights(builder.schedule_departing_url).select! do |f|
         f["departureTimeUtc"].to_datetime > time
       end
+
+
     end
 
     private

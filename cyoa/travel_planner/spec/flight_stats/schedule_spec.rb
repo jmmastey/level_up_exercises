@@ -9,9 +9,10 @@ describe 'FlightStats Schedules API' do
   let(:origin) { "ORD" }
   let(:destination) { "LGA" }
   let(:destination_offset) { "-0500" }
-  let(:meeting_start) { "2014-11-27T12:00:00-05:00".to_datetime }
-  let(:meeting_end) { "2014-11-27T13:00:00-05:00".to_datetime }
-  let(:dynamic_meeting_start) { Faker::Time.forward(10, :morning) }
+  let(:meeting_start) { "2014-12-27T12:00:00-05:00".to_datetime }
+  let(:early_start) { "2014-12-27T04:00:00-05:00".to_datetime }
+  let(:meeting_end) { "2014-12-27T13:00:00-05:00".to_datetime }
+  let(:dynamic_meeting_start) { Faker::Time.forward(10, :morning).to_datetime  }
 
   context 'api call gets flights (api call daily)' do
     subject(:flights) do
@@ -24,7 +25,7 @@ describe 'FlightStats Schedules API' do
       end
     end
 
-    it 'should show flights from chicago to new york tomorrow' do
+    it 'api response should not be empty' do
       expect(flights).to_not be_empty
     end
 
@@ -38,8 +39,14 @@ describe 'FlightStats Schedules API' do
 
   context 'before meeting (pre-recorded API)' do
     subject(:flights) do
-      VCR.use_cassette("schedule/get_flights_arriving_before") do
+      VCR.use_cassette("schedule/get_flights_arriving_before", record: :new_episodes) do
         api.get_flights_arriving_before(meeting_start, origin, destination)
+      end
+    end
+
+    let(:early_flights) do
+      VCR.use_cassette("schedule/get_flights_arriving_before_early", record: :new_episodes) do
+        api.get_flights_arriving_before(early_start, origin, destination)
       end
     end
 
@@ -50,6 +57,12 @@ describe 'FlightStats Schedules API' do
     it 'arrives before the meeting starts' do
       flights.each do |f|
         expect(f["arrivalTimeUtc"].to_datetime).to be < meeting_start
+      end
+    end
+
+    it 'uses previous day departures when the meeting is super early' do
+      early_flights.each do |f|
+        expect(f["arrivalTimeUtc"].to_datetime).to be < early_start
       end
     end
 
@@ -68,7 +81,7 @@ describe 'FlightStats Schedules API' do
 
   context 'after meeting (pre-recorded API)' do
     subject(:flights) do
-      VCR.use_cassette("schedule/get_flights_departing_after") do
+      VCR.use_cassette("schedule/get_flights_departing_after", record: :new_episodes) do
         api.get_flights_departing_after(meeting_end, destination, origin)
       end
     end

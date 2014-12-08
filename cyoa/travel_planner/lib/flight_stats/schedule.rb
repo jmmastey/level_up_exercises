@@ -13,9 +13,13 @@ module FlightStats
 
     def get_flights_arriving_before(time, from, to)
       builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
-      get_scheduled_flights(builder.schedule_arriving_url).select! do |f|
-        f["arrivalTimeUtc"].to_datetime < time
+      flights = arriving_flights(builder, time)
+
+      if flights.nil? || flights.length == 0
+        builder.from(from).to(to).date(time - 1)
+        flights = arriving_flights(builder, time)
       end
+      flights
     end
 
     def get_flights_departing_after(time, from, to)
@@ -65,6 +69,12 @@ module FlightStats
       offset = @airports.select { |a| a["fs"] == airport }[0]["utcOffsetHours"]
       @airport_offsets[airport] = sprintf("%+05.f", (offset.to_f * 100.0))
       @airport_offsets[airport]
+    end
+
+    def arriving_flights(builder, time)
+      get_scheduled_flights(builder.schedule_arriving_url).tap do |flights|
+        flights.select! { |f| f["arrivalTimeUtc"].to_datetime < time }
+      end
     end
 
     def headers

@@ -8,9 +8,9 @@ class Trip < ActiveRecord::Base
   def to_h
     {
       from:           home_location.airport.code,
-      to:             meetings[0].location.airport.code,
-      meeting_start:  meetings[0].start,
-      meeting_length: meetings[0].length,
+      to:             meetings.first.location.airport.code,
+      meeting_start:  meetings.first.start,
+      meeting_length: meetings.first.length,
     }
   end
 end

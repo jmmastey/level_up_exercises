@@ -15,7 +15,7 @@ Feature: Signing in
 		When I enter the email <email>
 		And I enter the password <password>
 		And I click the "Sign In" button
-		Then I should see the message "Signed in successfully."
+		Then I see the message "Signed in successfully."
 
 		Examples:
 			| email                 | password |
@@ -28,7 +28,7 @@ Feature: Signing in
 		When I enter the email <email>
 		And I enter the password <password>
 		And I click the "Sign In" button
-		Then I should see the message "Invalid email or password."
+		Then I see the message "Invalid email or password."
 
 		Examples:
 			| email                | password         |
@@ -39,9 +39,9 @@ Feature: Signing in
 	Scenario: Missing email
 		When I enter the password test
 		And I click the "Sign In" button
-		Then I should see the message "Invalid email or password."
+		Then I see the message "Invalid email or password."
 
 	Scenario: Missing password
 		When I enter the email testuser@example.com
 		And I click the "Sign In" button
-		Then I should see the message "Invalid email or password."
+		Then I see the message "Invalid email or password."

@@ -12,8 +12,7 @@
           %span.glyphicon.glyphicon-search
           &nbsp;
 
-- if @items
-  - if @items.empty?
-    %p.info No items found.
-  - else
-    = render(partial: 'list', locals: { items: @items })
+- unless @items.blank?
+  = render(partial: 'list', locals: { items: @items })
+- else
+  %p.info No items found.

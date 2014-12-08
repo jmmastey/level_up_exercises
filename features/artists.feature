@@ -23,3 +23,14 @@ Feature: Artists Page
     And fill in the details for a new artist: Matisse
     Then I should be on the page for Matisse
 
+  Scenario: Edit an artist
+    When I click on Claude Monet
+    And I click Edit Artist
+    And I update the last name to Painter
+    Then I should be on the page for Painter
+
+  Scenario: Delete an artist
+    When I click on Claude Monet
+    And I click Delete Artist
+    Then I should be on the Artists page
+    And I should not see the artist: Monet

@@ -20,8 +20,21 @@ When(/^fill in the details for a new artist: Matisse$/) do
   click_button("Create Artist")
 end
 
+When(/^I click (.+) Artist$/) do |action|
+  click_link("#{action} Artist")
+end
+
+When(/^I update the last name to Painter$/) do
+  fill_in("Last Name", with: "Painter")
+  click_button("Update Artist")
+end
+
 Then(/^I should see the artist: (.+)$/) do |artist|
   expect(page).to have_content(artist)
+end
+
+Then(/^I should not see the artist: (.+)$/) do |artist|
+  expect(page).not_to have_content(artist)
 end
 
 Then(/^I should see details for the artist: Monet$/) do

@@ -7,16 +7,10 @@ class Trip < ActiveRecord::Base
 
   def to_h
     {
-      from:           airport_code(home_location.id),
-      to:             airport_code(meetings[0].location.id),
+      from:           home_location.airport.code,
+      to:             meetings[0].location.airport.code,
       meeting_start:  meetings[0].start,
       meeting_length: meetings[0].length,
     }
-  end
-
-  private
-
-  def airport_code(location_id)
-    Airport.find_by!(location: location_id).code
   end
 end

@@ -1,5 +1,4 @@
 class Dinosaur
-  attr_accessor :dinosaurs
   def initialize(result_dinosaurs)
     @dinosaurs = result_dinosaurs
   end
@@ -13,10 +12,6 @@ class Dinosaur
   end
 
   def to_json
-    dinosaurs = []
-    @dinosaurs.each do |dino|
-      dinosaurs << dino.to_json
-    end
-    dinosaurs.to_json
+    @dinosaurs.map(&:to_json)
   end
 end

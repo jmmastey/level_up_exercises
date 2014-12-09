@@ -10,10 +10,9 @@ class DinosaurSearch
     case options["compare"]
       when "equal"
         filter_equal_characteristics(options)
-      when "greater"
-        filter_unequal_characteristics(options, "greater")
-      when "lesser"
-        filter_unequal_characteristics(options, "lesser")
+      when "greater", "lesser"
+        comparer = options["compare"]
+        filter_unequal_characteristics(options, comparer)
       else
         @result_dinosaurs
     end
@@ -36,19 +35,12 @@ class DinosaurSearch
 
   def filter_equal_characteristics(options)
     @result_dinosaurs.select! do |dinosaur|
-      present?(options.first.last, dinosaur[options.first.first])
+      present?(options.first.last, dinosaur[(options.first.first)])
     end
   end
 
   def present?(value, comparer)
-    if value.is_a?(Array)
-      value.include?(comparer)
-    else
-      value == comparer
-    end
-  end
-
-  def delete_resultant(index)
-    @result_dinosaurs.delete_at index
+    return value.include?(comparer.chomp) if value.is_a?(Array)
+    value.to_s.chomp == comparer.to_s.chomp
   end
 end

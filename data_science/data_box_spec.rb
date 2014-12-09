@@ -5,16 +5,6 @@ describe DataBox do
   let(:json) { JSONParser.new("source_data.json") }
   let(:dataset) { DataBox.new(json.fetch_data) }
 
-  it "gives the correct percentage of conversions" do
-    expect(dataset.conversion_percentage('A').round(4)).to eq(0.0348)
-    expect(dataset.conversion_percentage('B').round(4)).to eq(0.0512)
-  end
-
-  it "gives correct calculation of standard error" do
-    expect(dataset.standard_error('A')).to be_within(0.001).of(0.005)
-    expect(dataset.standard_error('B')).to be_within(0.001).of(0.005)
-  end
-
   context "when calculating the chi-square probability" do
     subject(:probabilities) { DataBox.new({}) }
     it "raises Insufficient Data Error" do

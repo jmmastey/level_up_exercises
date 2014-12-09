@@ -14,6 +14,13 @@ When(/^I click (.+) Artist$/) do |action|
   click_link("#{action} Artist")
 end
 
+When(/^I create an invalid artist$/) do
+  click_link("New Artist")
+  fill_in("First Name", with: "")
+  fill_in("Last Name", with: "")
+  click_button("Create Artist")
+end
+
 When(/^I update the last name to Painter$/) do
   fill_in("Last Name", with: "Painter")
   click_button("Save Changes")
@@ -65,4 +72,11 @@ Then(/^I should see all 5 artists$/) do
   expect(page).to have_content("Van Gogh")
   expect(page).to have_content("Picasso")
   expect(page).to have_content("Hopper")
+end
+
+Then(/^I should see validation errors$/) do
+  expect(page).to have_content("The artist could not be saved.")
+  expect(page).to have_content("Please correct the 2 errors below:")
+  expect(page).to have_content("First name can't be blank.")
+  expect(page).to have_content("Last name can't be blank.")
 end

@@ -14,9 +14,13 @@ Feature: Artists Page
     When I click on Claude Monet
     Then I should be on the page for Monet
 
-  Scenario: Create a new artist
+  Scenario: Create a valid new artist
     When I create a new artist: Henri Matisse
     Then I should be on the page for Henri Matisse
+
+  Scenario: Create an invalid new artist
+    When I create an invalid artist
+    Then I should see validation errors
 
   Scenario: Edit an artist
     When I edit an artist: Claude Monet

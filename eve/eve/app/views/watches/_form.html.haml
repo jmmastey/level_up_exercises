@@ -13,10 +13,26 @@
   .form-group
     = f.label :item_id, "Item"
     = f.hidden_field :item_id, class: "form-control"
-  .form-group
-    = f.label :region_id
-    = f.hidden_field :region_id, class: "form-control"
-  .form-group
-    = f.label :station_id
-    = f.hidden_field :station_id, class: "form-control"
+  .panel.panel-default
+    .panel-heading
+      %strong Location Filter
+    .panel-body
+      .location-filter{ role: :tabpanel }
+        %ul.nav.nav-tabs{ role: :tablist }
+          %li{ role: :presentation, class: tab_class(@watch, nil) }
+            %a{ href: "#tab-none", "aria-controls" => "tab-none", role: :tab, data: { toggle: :tab } } None
+          %li{ role: :presentation, class: tab_class(@watch, :region) }
+            %a{ href: "#tab-region", "aria-controls" => "tab-region", role: :tab, data: { field: :watch_region_id, toggle: :tab } } Region
+          %li{ role: :presentation, class: tab_class(@watch, :station) }
+            %a{ href: "#tab-station", "aria-controls" => "tab-station", role: :tab, data: { field: :watch_station_id, toggle: :tab } } Station
+        .tab-content
+          .tab-pane#tab-none{ role: :tabpanel, class: tab_class(@watch, nil) }
+          .tab-pane#tab-region{ role: :tabpanel, class: tab_class(@watch, :region) }
+            .form-group
+              = f.label :region_id
+              = f.hidden_field :region_id, class: "form-control"
+          .tab-pane#tab-station{ role: :tabpanel, class: tab_class(@watch, :station) }
+            .form-group
+              = f.label :station_id
+              = f.hidden_field :station_id, class: "form-control"
   = f.submit 'Save', class: "btn btn-primary"

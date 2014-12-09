@@ -18,10 +18,6 @@ class WatchesController < ApplicationController
     respond_with(@watch)
   end
 
-  def edit
-    respond_with(@watch)
-  end
-
   def create
     Watch.create!(watch_params)
     respond_with(@watch)

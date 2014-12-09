@@ -11,10 +11,14 @@ Feature: List items
 			| 36         | Mexallon         |
 			| 37         | Isogen           |
 			| 44         | Enriched Uranium |
+
+	Scenario: Counting items
+		When I visit the items page
+		Then I should see 5 items
 	
 	Scenario Outline: Listing items
 		When I visit the items page
-		Then I should see "<in_game_id>" in the EVE ID column
+		Then I should see <in_game_id> in the EVE ID column
 		And I should see "<name>" in the name column
 
 		Examples:

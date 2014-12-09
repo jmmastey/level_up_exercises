@@ -1,4 +1,7 @@
 module ApplicationHelper
+
+  include ShowingsHelper
+
   def render_calendar_publish(showing)
     calendar = Icalendar::Calendar.new
     calendar.add_event(showing.ics)
@@ -6,7 +9,9 @@ module ApplicationHelper
     calendar.to_ical
   end
 
-  LOCAL_TIME_ZONE = "Central Time (US & Canada)"
+  def get_local_time_view(time)
+    LocalTimeView.new(time)
+  end
 
   class LocalTimeView
     def initialize(time)

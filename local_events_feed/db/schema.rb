@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141121033639) do
+ActiveRecord::Schema.define(version: 20141208195110) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20141121033639) do
 
   create_table "scrape_times", force: true do |t|
     t.string   "source"
-    t.datetime "last_scrape_at"
-    t.time     "inter_scrape_delay"
+    t.datetime "last_scrape_at",     default: '1970-01-01 00:00:00'
+    t.datetime "inter_scrape_delay", default: '1970-01-02 00:00:00'
     t.datetime "created_at"
     t.datetime "updated_at"
   end

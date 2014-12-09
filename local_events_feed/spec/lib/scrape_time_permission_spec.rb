@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'scrape_time_permission'
 
-RSpec.describe ScrapeTimePermission, :type => :model do
+describe ScrapeTimePermission, :type => :model do
   let(:source) { "Some-Source" }
 
   let(:today)       { DateTime.parse("20140901T080000") }

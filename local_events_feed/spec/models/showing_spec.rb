@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative 'event_helper'
 
-RSpec.describe Showing, :type => :model do
+describe Showing, :type => :model do
   let(:event) { create_event("Party A", "North Side", "www.link.com") }
   let(:showing) { event.showings.create(time: DateTime.parse("20141001T093000-0500")) }
 

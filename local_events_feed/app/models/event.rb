@@ -1,5 +1,3 @@
-require 'icalendar'
-
 class Event < ActiveRecord::Base
   validates :name, presence: true
   validates :location, presence: true

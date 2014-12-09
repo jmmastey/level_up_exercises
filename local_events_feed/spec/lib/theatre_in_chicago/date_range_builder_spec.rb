@@ -1,19 +1,20 @@
 require 'theatre_in_chicago/date_range_builder'
+require_relative 'fixture_helper'
 
 RSpec.describe TheatreInChicago::DateRangeBuilder, :type => :asset do
 
   let(:pseudo_today) { DateTime.new(2014, 10, 31) }
 
-  let(:same_year_node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_showings_same_year.html")) }
+  let(:same_year_node) { Nokogiri::HTML(open_file("theatre_in_chicago_test_showings_same_year.html")) }
   let(:same_year_date_range) { TheatreInChicago::DateRangeBuilder.new(same_year_node, pseudo_today).build }
 
-  let(:diff_year_node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_showings_diff_year.html")) }
+  let(:diff_year_node) { Nokogiri::HTML(open_file("theatre_in_chicago_test_showings_diff_year.html")) }
   let(:diff_year_date_range) { TheatreInChicago::DateRangeBuilder.new(diff_year_node, pseudo_today).build }
 
-  let(:thru_year_node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_showings_thru_date.html")) }
+  let(:thru_year_node) { Nokogiri::HTML(open_file("theatre_in_chicago_test_showings_thru_date.html")) }
   let(:thru_year_date_range) { TheatreInChicago::DateRangeBuilder.new(thru_year_node, pseudo_today).build }
 
-  let(:open_run_node) { Nokogiri::HTML(File.open("test/fixtures/theatre_in_chicago_test_showings_open_run.html")) }
+  let(:open_run_node) { Nokogiri::HTML(open_file("theatre_in_chicago_test_showings_open_run.html")) }
   let(:open_run_date_range) { TheatreInChicago::DateRangeBuilder.new(open_run_node, pseudo_today).build }
 
   let(:empty_date_node) { Nokogiri::HTML("nonsense") }

@@ -1,14 +1,13 @@
 require 'rails_helper'
 require 'models/scrape_time_helper'
 
-RSpec.describe ScrapeTime, :type => :model do
+describe ScrapeTime, :type => :model do
   let(:one_hour) { Time.at(1.hour) }
 
   let(:valid_scrape_time) { create_scrape_time("source_A", eight_oclock, one_hour) }
   let(:invalid_scrape_time) { create_scrape_time("", eight_oclock, one_hour) }
   let(:duplicate_source_scrape_time) { create_scrape_time("source_A", eight_oclock, one_hour) }
-  let(:default_scrape_time) { create_scrape_time("source_A", nil, nil) }
-  let(:scrape_at_ten) { valid_scrape_time.permission_to_scrape?(ten_oclock) }
+  let(:default_scrape_time) { ScrapeTime.create(source: "source_B").reload }
 
   it "responds to source" do
     expect(valid_scrape_time).to respond_to(:source)

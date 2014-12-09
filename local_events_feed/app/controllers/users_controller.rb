@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
 
-    if @user.valid?
+    if @user.persisted?
       sign_in(@user)
       redirect_to @user
     else
@@ -18,12 +18,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def failed_to_authenticate?(params)
-    user = User.find_by(email: params[:email])
-    return true unless user.present?
-    return true if user.authenticate(params[:password]) != user
-    false
   end
 end

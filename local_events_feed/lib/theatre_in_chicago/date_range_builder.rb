@@ -4,9 +4,9 @@ module TheatreInChicago
 
   class DateRangeBuilder
 
-    DATE_RANGE_REGEXP = Regexp.new('([a-zA-Z]*) ([0-9]*) - ([a-zA-Z]*) ([0-9]*), ([0-9]*)')
-    THRU_RANGE_REGEXP = Regexp.new('Thru - ([a-zA-Z]*) ([0-9]*), ([0-9]*)')
-    OPEN_RUN_REGEXP = Regexp.new('Open Run')
+    DATE_RANGE_REGEXP = /([a-zA-Z]*) ([0-9]*) - ([a-zA-Z]*) ([0-9]*), ([0-9]*)/
+    THRU_RANGE_REGEXP = /Thru - ([a-zA-Z]*) ([0-9]*), ([0-9]*)/
+    OPEN_RUN_REGEXP = /Open Run/
     TIME_ZONE = ActiveSupport::TimeZone["Central Time (US & Canada)"]
 
     def initialize(node, today)

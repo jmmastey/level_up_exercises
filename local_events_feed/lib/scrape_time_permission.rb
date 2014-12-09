@@ -1,6 +1,6 @@
 class ScrapeTimePermission
   def initialize(source, current_time = nil)
-    @scrape_time = ScrapeTime.find_or_create_by(source: source.to_s)
+    @scrape_time = ScrapeTime.find_or_create_by(source: source.to_s).reload
     @now = current_time || Time.now
   end
 
@@ -16,6 +16,7 @@ class ScrapeTimePermission
     return false unless @now.ago(inter_scrape_delay) >= last_scrape_time
     @scrape_time.last_scrape_at = @now
     @scrape_time.save
+    true
   end
 
   def inter_scrape_delay

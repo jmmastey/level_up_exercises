@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'models/event_helper'
 
-RSpec.describe Event, :type => :model do
+describe Event, :type => :model do
   let(:event) { create_event('Party', 'Everywhere', 'www.link.com') }
   let(:multiple_events) do
     create_event('Party-B', 'Everywhere', 'www.link.com')

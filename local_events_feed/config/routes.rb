@@ -10,8 +10,8 @@ Rails.application.routes.draw do
 
   post 'scrape' => 'scrape#index'
 
-  post 'showings/:id/remove_from_user' => 'showings#remove_from_user'
-  post 'showings/:id/add_to_user' => 'showings#add_to_user'
+  post 'showings/:id/remove_from_user' => 'showings#remove_from_user', as: :remove_from_user
+  post 'showings/:id/add_to_user' => 'showings#add_to_user', as: :add_to_user
   get 'showings/:id' => 'showings#show', format: true
 
 

@@ -20,15 +20,6 @@ describe User do
     expect { user.add_showing(showing) }.to change{ showing.users.count }.from(0).to(1)
   end
 
-  it "can delete an showing from its list and shrink user's showings" do
-    expect { user_with_showings.remove_showing(showing) }.to change{ user_with_showings.showings.count }.from(3).to(2)
-  end
-
-  it "can delete an showing from its list and shrink showings's users" do
-    user_with_showings
-    expect { user_with_showings.remove_showing(showing) }.to change{ showing.users.count }.from(1).to(0)
-  end
-
   it 'knows when it has a showing in an event' do
     user_with_showings
     expect(user_with_showings).to have_showing_in(event)

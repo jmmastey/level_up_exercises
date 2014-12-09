@@ -11,7 +11,7 @@ describe JSONParser do
     expect(subject.fetch_data.length).to eq(10)
   end
 
-  context "detects wrong file extentions" do
+  context "detects wrong file extention" do
     subject(:faulty_file) { JSONParser.new("faulty_file.voorhees") }
     it "raises exception when wrong file type is passed" do
       raise_error(FileTypeException, "Not a JSON, buddy")

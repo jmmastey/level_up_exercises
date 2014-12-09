@@ -17,7 +17,7 @@ describe DataBox do
   end
 
   it "gives the correct chi-square p-value" do
-    expect(dataset.cohort_probabilities.round(4)).to eq(0.0316)
+    expect(dataset.winner_significance.round(4)).to eq(0.0316)
   end
 
   it "gives the correct winner" do

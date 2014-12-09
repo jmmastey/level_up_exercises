@@ -16,4 +16,8 @@ describe Cohort do
   it "gives correct calculation of standard error" do
     expect(cohort.standard_error).to be_within(0.1).of(0.2)
   end
+
+  it "gives correct conversions" do
+    expect(cohort.conversions).to eq(6)
+  end
 end

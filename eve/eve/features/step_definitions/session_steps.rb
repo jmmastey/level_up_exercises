@@ -5,6 +5,13 @@ def create_user(email, password)
                      password_confirmation: password)
 end
 
+def sign_in(email, password)
+  visit "/users/sign_in"
+  fill_in "user_email", with: email
+  fill_in "user_password", with: password
+  click_button "Sign In"
+end
+
 Given(/^the following users exist:$/) do |user_table|
   user_table.hashes.each do |user|
     create_user(user[:email], user[:password])
@@ -15,14 +22,15 @@ Given(/^I am on the login screen$/) do
   visit('/users/sign_in')
 end
 
+Given(/^I am signed in$/) do
+  user = create_user("cukeuser@example.com", "testtest")
+  sign_in(user.email, user.password)
+end
+
 When(/^I enter the email (.+)$/) do |email|
   fill_in("user_email", with: email)
 end
 
 When(/^I enter the password (.+)$/) do |password|
   fill_in("user_password", with: password)
-end
-
-Then(/^I should see the message "(.*?)"$/) do |message|
-  expect(page).to have_content(message)
 end

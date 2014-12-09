@@ -26,7 +26,7 @@
               %span.caret
             %ul.dropdown-menu{role: :menu}
               %li#nav_watches= link_to("My Watches", watches_path)
-              %li#nav_logout= link_to("Logout", destroy_user_session_path, method: :delete)
+              %li#nav_logout= link_to("Sign Out", destroy_user_session_path, method: :delete)
         - else
           %li#nav_sign_up= link_to("Sign Up", new_user_registration_path)
           %li#nav_sign_in= link_to("Sign In", new_user_session_path)

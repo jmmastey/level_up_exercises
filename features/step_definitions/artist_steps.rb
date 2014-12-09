@@ -16,7 +16,7 @@ end
 
 When(/^I update the last name to Painter$/) do
   fill_in("Last Name", with: "Painter")
-  click_button("Update Artist")
+  click_button("Save Changes")
 end
 
 When(/^I create a new artist: Henri Matisse$/) do

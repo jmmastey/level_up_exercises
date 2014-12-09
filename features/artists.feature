@@ -17,6 +17,7 @@ Feature: Artists Page
   Scenario: Create a valid new artist
     When I create a new artist: Henri Matisse
     Then I should be on the page for Henri Matisse
+    And I should see a message confirming the artist was created
 
   Scenario: Create an invalid new artist
     When I create an invalid artist
@@ -26,6 +27,7 @@ Feature: Artists Page
     When I edit an artist: Claude Monet
     And I update the last name to Painter
     Then I should be on the page for Claude Painter
+    And I should see a message confirming the artist was updated
 
   Scenario: Update an artist with invalid attributes
     When I edit an artist with invalid data: Claude Monet
@@ -34,3 +36,4 @@ Feature: Artists Page
   Scenario: Delete an artist
     When I delete Claude Monet
     Then I should not see Claude Monet on the Artists page
+    And I should see a message confirming the artist was deleted

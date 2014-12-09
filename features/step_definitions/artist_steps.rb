@@ -88,3 +88,8 @@ Then(/^I should see validation errors$/) do
   expect(page).to have_content("First name can't be blank.")
   expect(page).to have_content("Last name can't be blank.")
 end
+
+Then(/^I should see a message confirming the artist was (.+)$/) do |action|
+  expect(page).to have_content("The artist was successfully #{action}.")
+end
+

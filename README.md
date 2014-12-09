@@ -12,3 +12,7 @@ These are the combined exercises used at http://leveluprails.com. You can do the
 ## The First Lesson
 
 Like everything else in the world, these exercises have errors and problems and typos. We experience this problem whenever we code, and the only way to stay sane as a group is to fix problems as we find them. Be a mensch, send pull requests.
+
+## Some Additional Text
+
+"This is the type of arrant pedantry up with which I will not put."  -- Winston S. Churchill

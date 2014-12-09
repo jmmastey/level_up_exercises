@@ -27,6 +27,10 @@ Feature: Artists Page
     And I update the last name to Painter
     Then I should be on the page for Claude Painter
 
+  Scenario: Update an artist with invalid attributes
+    When I edit an artist with invalid data: Claude Monet
+    Then I should see validation errors
+
   Scenario: Delete an artist
     When I delete Claude Monet
     Then I should not see Claude Monet on the Artists page

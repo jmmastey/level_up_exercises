@@ -43,6 +43,14 @@ When(/^I delete (.+)$/) do |artist|
   click_link("Delete Artist")
 end
 
+When(/^I edit an artist with invalid data: (.+)$/) do |artist|
+  click_link(artist)
+  click_link("Edit Artist")
+  fill_in("First Name", with: "")
+  fill_in("Last Name", with: "")
+  click_button("Save Changes")
+end
+
 Then(/^I should not see (.+) on the Artists page$/) do |artist|
   expect(current_path).to eq(artists_path)
   expect(page).not_to have_content(artist)

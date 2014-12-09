@@ -30,11 +30,7 @@ class DataBox
   private
 
   def sorted_conversion_rates
-    percentages = {}
-    cohorts.each do |cohort|
-      percentages[cohort] = cohort.conversion_percentage
-    end
-    Hash[percentages.sort_by { |_, percent| percent }]
+    cohorts.sort_by { |cohort| cohort.conversion_percentage }
   end
 
   def build_groups
@@ -56,6 +52,6 @@ class DataBox
   end
 
   def winning_cohort
-    sorted_conversion_rates.to_a.last.first
+    sorted_conversion_rates.to_a.last
   end
 end

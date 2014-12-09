@@ -4,7 +4,7 @@ describe JSONParser do
   subject(:file_loader) { JSONParser.new("test_data.json") }
 
   it "works with a real data source" do
-    expect(subject.filename).to end_with(".json")
+    expect(subject.filename).to eq("test_data.json")
   end
 
   it "loads data correctly from a data source" do

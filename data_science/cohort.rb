@@ -1,4 +1,3 @@
-require 'abanalyzer'
 class Cohort
   attr_reader :name
 

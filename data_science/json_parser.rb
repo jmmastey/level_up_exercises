@@ -1,9 +1,10 @@
+require "json"
+
 class FileTypeException < Exception
 end
 
-require "json"
-
 class JSONParser
+  attr_reader :filename
 
   def initialize(filename)
     if filename.end_with? ".json"

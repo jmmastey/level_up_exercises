@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "items/_search", type: :view do
   it "has a form directed to /items/search" do
     render
-    expect(rendered).to have_css("form[action~='items/search']")
+    expect(rendered).to have_css("form[action*='items/search']")
   end
 
   it "has a query search field" do

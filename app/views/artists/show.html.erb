@@ -1,4 +1,11 @@
-<h1><%= @artist.full_name %></h1>
+<section>
+  <h1><%= @artist.full_name %></h1>
+  <p>Nationality: <%= @artist.nationality %></p>
+  <p>Birthday: <%= @artist.birthday %></p>
+  <p>Biography: <%= @artist.biography %></p>
+  <p>Analysis: <%= @artist.analysis %></p>
+
+</section>
 
 <p><%= link_to "Edit Artist", edit_artist_path(@artist) %></p>
 <p><%= link_to "Delete Artist", @artist, method: :delete, data: { confirm: "Are you sure you want to delete this artist?"} %></p>

@@ -1,0 +1,24 @@
+<%= form_for @artist do |f| %>
+
+  <%= render 'shared/form_errors' %>
+
+  <%= f.label :first_name, "First Name" %>
+  <%= f.text_field :first_name %>
+
+  <%= f.label :last_name, "Last Name" %>
+  <%= f.text_field :last_name %>
+
+  <%= f.label :nationality, "Nationality" %>
+  <%= f.text_field :nationality %>
+
+  <%= f.label :birthday, "Birthday" %>
+  <%= f.text_field :birthday %>
+
+  <%= f.label :biography, "Biography" %>
+  <%= f.text_area :biography %>
+
+  <%= f.label :analysis, "Analysis" %>
+  <%= f.text_area :analysis %>
+
+  <%= f.submit %>
+<% end %>

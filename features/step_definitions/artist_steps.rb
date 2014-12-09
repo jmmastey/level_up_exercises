@@ -23,7 +23,7 @@ end
 
 When(/^I update the last name to Painter$/) do
   fill_in("Last Name", with: "Painter")
-  click_button("Save Changes")
+  click_button("Update Artist")
 end
 
 When(/^I create a new artist: Henri Matisse$/) do
@@ -48,7 +48,7 @@ When(/^I edit an artist with invalid data: (.+)$/) do |artist|
   click_link("Edit Artist")
   fill_in("First Name", with: "")
   fill_in("Last Name", with: "")
-  click_button("Save Changes")
+  click_button("Update Artist")
 end
 
 Then(/^I should not see (.+) on the Artists page$/) do |artist|

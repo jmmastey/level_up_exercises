@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe WatchesHelper do
   describe "#no_location_filter?" do
     subject(:no_location_filter?) { helper.no_location_filter?(watch) }

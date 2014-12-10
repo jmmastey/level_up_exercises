@@ -1,0 +1,28 @@
+%html
+  %head
+    %title Activate/Deactivate your BOMB!!!
+    %link{:rel => "Stylesheet", :href => "http://yui.yahooapis.com/pure/0.5.0/pure-min.css"}
+  %body
+    - if (!session[:bomb].active && !session[:bomb].exploded)
+      %center
+        %h1 Activate - BOMB is inactive
+        %span{:id => "comments_id"} #{session[:comment_text]}
+        %form{ :action => "/activate", :method => "post", :class => "pure-form pure-form-stacked"}
+          %fieldset
+          %label{:for => "activation"} Enter activation code:
+          %input{:type => "text", :name => "activationcode", :id => "activationcode_id"}
+          %input{:type => "submit", :value => "Confirm", :class => "pure-button pure-button-primary", :style => "background: green"}
+    - elsif (session[:bomb].active && !session[:bomb].exploded)
+      %center
+        %h1 De-activate - BOMB is now active
+        %span{:id => "time_left_id"} #{session[:comment_text]}
+        %form{ :action => "/deactivate", :method => "post", :class => "pure-form pure-form-stacked"}
+          %fieldset
+          %label{:for => "activation"} Enter de-activation code:
+          %img{:src => "/images/tickingbomb.jpg"}
+          %input{:type => "text", :name => "deactivationcode", :id => "deactivationcode_id"}
+          %input{:type => "submit", :value => "Confirm", :class => "pure-button pure-button-primary", :style => "background: red"}
+    - else session[:bomb].exploded
+      %center
+        %h1 #{session[:comment_text]}
+        %img{:src => "/images/boom.jpg", :style => "width: 600px; height: 400px"}

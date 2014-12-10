@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="http://code.jquery.com/jquery-2.0.0.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script>
+    $(function(){
+        $('.code').on('click', function(){
+            $('#alert-message').css('display', 'none');
+        });
+    });
+    function validate(){
+        var pattern = /^\d+$/
+        var activation_code = $('#activation-code').val();
+        if(activation_code.length != 0 && (activation_code.search(pattern) == -1)){
+            $('#activation-code').val('');
+            displayErrorMessage();
+            return false;
+        }
+        var deactivation_code = $('#deactivation-code').val();
+        if(deactivation_code.length != 0 && (deactivation_code.search(pattern) == -1)){
+            $('#deactivation-code').val('');
+            displayErrorMessage();
+            return false;
+        }
+    }
+    function displayErrorMessage(){
+        $('#alert-message').css('display', 'block');
+    }
+</script>
+<div id='info'>
+    <p style='color:red'>The default two codes are used if you don't change</p>
+    <span>The bomb is <%= session[:state].to_s.sub('_', ' ') %></span>
+    <form class='form'role='form' action='/boot' method='POST' onsubmit='return validate()'>
+        <div class='form-group'>
+            <label for='activation-code'>Activate Code :</label>
+             <input type='text' class='code form-control' id='activation-code' name='activation-:code' placeholder='1234'>
+        </div>
+
+        <div class='form-group'>
+            <label for='deactivation-code'>Deactivate Code :</label>
+            <input type='text' class='code form-control' id='deactivation-code' name='deactivation-code' placeholder='0000'>
+        </div>
+        <input id='btn-boot' type='submit' class='btn btn-default' value='Boot'> 
+    </form>
+    <div id='alert-message' class='alert alert-danger' role='alert' style='display:none'>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        Both activation and deactivation code are numeric only
+    </div>
+</div>

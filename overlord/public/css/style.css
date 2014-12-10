@@ -1,0 +1,41 @@
+#info{
+    width: 350px;
+    height: 350px;
+    padding-top: 15%;
+    padding-left: 50px;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#bomb{
+    background-image: url("../img/bomb.png");
+    width: 640px;
+    height: 558px;
+    padding-top: 15%;
+    padding-left: 50px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+h4 { color:white; }
+#bomb-panel{
+    width: 350px;
+    height: 350px;
+}
+#bomb-timer{
+    width: 100px;
+    height: 50px;
+    margin-left: 16%;
+    color: white;
+    font-size: 30px;
+    display: none;     
+}
+
+#explosion{
+    background-image: url("../img/explosion.png");
+    width: 640px;
+    height: 640px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5%;
+}

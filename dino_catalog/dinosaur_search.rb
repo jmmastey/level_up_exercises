@@ -38,7 +38,7 @@ class DinosaurSearch
   end
 
   def present?(value, comparer)
-    return value.include?(comparer.chomp) if value.is_a?(Array)
+    return value.include?(comparer.chomp) if value.is_a?(Enumerable)
     value.to_s.chomp == comparer.to_s.chomp
   end
 end

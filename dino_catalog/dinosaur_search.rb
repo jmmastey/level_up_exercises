@@ -11,8 +11,7 @@ class DinosaurSearch
       when "equal"
         filter_equal_characteristics(options)
       when "greater", "lesser"
-        comparer = options["compare"]
-        filter_unequal_characteristics(options, comparer)
+        filter_unequal_characteristics(options, options["compare"])
       else
         @result_dinosaurs
     end
@@ -20,15 +19,14 @@ class DinosaurSearch
   end
 
   def filter_unequal_characteristics(options, comparer)
+    @result_dinosaurs.reject! { |dinosaur| dinosaur[options.first.first].nil? }
     if comparer == "greater"
       @result_dinosaurs.reject! do |dinosaur|
-        (dinosaur[options.first.first].to_i <= options.first.last) ||
-          dinosaur[options.first.first].nil?
+        dinosaur[options.first.first].to_i <= options.first.last
       end
     else
       @result_dinosaurs.reject! do |dinosaur|
-        (dinosaur[options.first.first].to_i >= options.first.last) ||
-          dinosaur[options.first.first].nil?
+        dinosaur[options.first.first].to_i >= options.first.last
       end
     end
   end

@@ -20,14 +20,20 @@ class DinosaurParser
   def parse_csv(file_name)
     result_dinosaurs = []
     raise("File not found") unless File.exist?(file_name)
+
     CSV.foreach(file_name, headers: true) do |row|
-      dinosaur = {}
-      CSV_HEADER_MAPPING.keys.each do |param|
-        dinosaur[param] = extract_csv(row, param)
-      end
+      dinosaur = build_dinosaur(row)
       result_dinosaurs << dinosaur
     end
     result_dinosaurs
+  end
+
+  def build_dinosaur(row)
+    dinosaur = {}
+    CSV_HEADER_MAPPING.keys.each do |param|
+      dinosaur[param] = extract_csv(row, param)
+    end
+    dinosaur
   end
 
   def extract_csv(row, key)

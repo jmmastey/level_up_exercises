@@ -4,10 +4,9 @@
       <p>The <%= @artist.class.name.titleize.downcase %> could not be saved.</p>
       <p>Please correct the <%= pluralize(@artist.errors.count, 'error') %> below:</p>
     </header>
-    <ul>
-      <% @artist.errors.full_messages.each do |message| %>
-        <li><%= message %>.</li>
-      <% end %>
-    </ul>
+    <% @artist.errors.full_messages.each do |message| %>
+      <label class="label-error"><%= message %>.</label>
+    <% end %>
   </div>
 <% end %>
+

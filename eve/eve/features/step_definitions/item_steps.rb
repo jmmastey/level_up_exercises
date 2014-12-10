@@ -36,3 +36,8 @@ Then(/^I see "([^"]+)" in the name column$/) do |name|
   expect(page).to have_css("tr.item td.field-name",
                            text: name)
 end
+
+Then(/^I see the orders page for item #(\d+)$/) do |in_game_id|
+  item = find_item(in_game_id.to_i)
+  expect(current_path_with_query).to eq(search_orders_path(item: item))
+end

@@ -10,5 +10,5 @@
       %tr.item{ id: "item-#{item.id}" }
         %td.field-in_game_id= item.in_game_id
         %td.field-name= item.name
-        %td.actions.text-right= link_to("View orders", { controller: :orders, action: :search, item: item }, class: "btn btn-info btn-xs")
+        %td.actions.text-right= link_to("View orders", search_orders_path(item: item), class: "btn btn-info btn-xs")
 = paginate(@items)

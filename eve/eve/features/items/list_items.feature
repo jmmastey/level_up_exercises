@@ -30,4 +30,4 @@ Feature: List items
 	Scenario: Navigating to item orders
 		When I visit the items page
 		And I click the "View orders" link for item #34
-		Then I see the orders page
+		Then I see the orders page for item #34

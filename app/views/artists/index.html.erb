@@ -1,10 +1,12 @@
-<h1>Artists</h1>
+<section class="main-content">
+  <h1>Artists</h1>
 
-  <% @artists.each do |artist| %>
-    <article>
-      <h2><%= link_to artist.full_name, artist %></h2>
-      <p><%= artist.biography %></p>
-    </article>
-  <% end %>
+    <% @artists.each do |artist| %>
+      <article>
+        <h2><%= link_to artist.full_name, artist %></h2>
+        <p><%= artist.biography %></p>
+      </article>
+    <% end %>
 
-<p><%= link_to "Create a New Artist", new_artist_path %></p>
+  <p><%= link_to "Create a New Artist", new_artist_path %></p>
+</section>

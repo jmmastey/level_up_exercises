@@ -16,7 +16,7 @@ class ArtistsController < ApplicationController
     @artist = Artist.new(artist_params)
     if @artist.save
       flash[:notice] = "The artist was successfully created."
-      redirect_to @artist
+      redirect_to artist_url(@artist)
     else
       render 'new'
     end
@@ -28,7 +28,7 @@ class ArtistsController < ApplicationController
   def update
     if @artist.update(artist_params)
       flash[:notice] = "The artist was successfully updated."
-      redirect_to @artist
+      redirect_to artist_url(@artist)
     else
       render 'edit'
     end
@@ -37,7 +37,7 @@ class ArtistsController < ApplicationController
   def destroy
     @artist.destroy
     flash[:notice] = "The artist was successfully deleted."
-    redirect_to artists_path
+    redirect_to artists_url
   end
 
   private

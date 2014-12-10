@@ -25,6 +25,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Specify version of Arel to prevent error on database migrations
 gem 'arel', '6.0.0.beta2'
 
+# Add Bourbon, Neat, Bitters and Refills for styling
+gem 'bourbon'
+gem 'neat'
+gem 'refills'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

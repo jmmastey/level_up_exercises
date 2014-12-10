@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+}
+
+.main-layout {
+  @include outer-container;
+  padding: 2em 0;
+}
+
+.main-content {
+  @include span-columns(10);
+  @include shift(1);
+}

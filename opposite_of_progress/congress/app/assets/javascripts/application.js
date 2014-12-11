@@ -17,3 +17,11 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+$('#legislator_sort_option').change(function() {
+  window.location.href = '/legislators?sort_by=' + this.value;
+});
+
+$('#bill_sort_option').change(function() {
+  window.location.href = '/bills?sort_by=' + this.value;
+});

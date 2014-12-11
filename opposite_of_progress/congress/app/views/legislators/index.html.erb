@@ -1,15 +1,10 @@
 <header>
   <div style="float:right;">
     <%=
-      sort_options = [["Newly Added", "created_at"],
-                      ["Term Start", "term_start"],
-                      ["Last Name", "last_name"],
-                      ["First Name", "first_name"]]
-      select("sort",
-             "by",
-             sort_options,
-             { prompt: "Sort by...", selected: params["sort_by"] },
-             { :onchange => "window.location.href = '/legislators?sort_by=' + document.getElementById('sort_by').value;"})
+      select("legislator_sort",
+             "option",
+             LegislatorsHelper.sort_options,
+             { prompt: "Sort by...", selected: params["sort_by"] })
     %>
   </div>
 

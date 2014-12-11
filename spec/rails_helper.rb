@@ -59,8 +59,13 @@ RSpec.configure do |config|
 
   # Webmock configuration
   config.before(:each) do
-  stub_request(:get, "https://api.artsy.net/api").
-    with(:headers => {'Accept'=>'application/vnd.artsy-v2+json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Faraday v0.9.0'}).
-    to_return(:status => 200, :body => "", :headers => {})
+    stub_request(:get, "https://api.artsy.net").
+      with(:headers => {'Accept'=>'application/vnd.artsy-v2+json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Faraday v0.9.0'}).
+      to_return(:status => 200, :body => "", :headers => {})
   end
+
+  config.before(:each) do
+    stub_request(:any, /api.artsy.net/).to_rack(FakeArtsy)
+  end
+
 end

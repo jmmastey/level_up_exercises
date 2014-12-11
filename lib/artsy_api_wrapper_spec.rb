@@ -7,7 +7,7 @@ RSpec.describe ArtsyApiWrapper do
 
   context "External request" do
     it 'calls the Artsy API' do
-      response = api_instance.api.tokens.xapp_token._post(client_id: client_id, client_secret: client_secret).token
+      response = api_instance.artsy_api.tokens.xapp_token._post(client_id: client_id, client_secret: client_secret).token
 
       expect(response).to be_an_instance_of(String)
     end
@@ -19,6 +19,17 @@ RSpec.describe ArtsyApiWrapper do
       it "creates an instance of the API" do
         expect(api_instance).to be_an_instance_of(ArtsyApiWrapper)
       end
+    end
+  end
+
+  context "API retrieval" do
+    it "retrieves json data for an artist" do
+      uri = URI("https://api.artsy.net/api/artists/andy-warhol")
+
+      response = JSON.load(Net::HTTP.get(uri))
+      puts response
+
+      expect(response["name"]).to eq("Andy Warhol")
     end
   end
 end

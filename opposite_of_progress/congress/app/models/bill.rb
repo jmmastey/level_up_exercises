@@ -21,7 +21,7 @@ class Bill < ActiveRecord::Base
       official_title: result['official_title'],
       short_title: result['short_title'],
       sponsor_id: result['sponsor_id'],
-      enacted_at: result['history']['enacted_at'],
+      enacted_on: result['history']['enacted_on'],
     }
   end
 end

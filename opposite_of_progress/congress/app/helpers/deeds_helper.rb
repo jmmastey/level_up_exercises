@@ -19,12 +19,12 @@ module DeedsHelper
     Bill.order(:updated_at).all.each do |bill|
       if bill.congress == 113 && bill.enacted_at && bill.short_title
         deed_text = "#{bill.short_title} was enacted on " \
-          "#{ApplicationHelper.date_display(bill.enacted_at)}"
+          "#{ApplicationHelper.date_display(bill.enacted_on)}"
 
         deed = Deed.find_or_create_by(bill_id: bill.bill_id,
                                       bioguide_id: bill.sponsor_id,
                                       deed: deed_text,
-                                      occurrence_date: bill.enacted_at)
+                                      occurrence_date: bill.enacted_on)
         deed.save
       end
     end

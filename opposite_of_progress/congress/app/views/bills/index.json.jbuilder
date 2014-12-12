@@ -14,7 +14,7 @@ json.array! @results do |result|
                 :summary,
                 :summary_short,
                 :sponsor_id,
-                :enacted_at,
+                :enacted_on,
                 :created_at,
                 :updated_at
 end

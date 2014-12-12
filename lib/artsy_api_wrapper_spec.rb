@@ -40,4 +40,8 @@ RSpec.describe ArtsyApiWrapper do
   #   end
   # end
 
+  it "retrieves the thumbnail url", :vcr do
+    artist = double()
+  end
+
 end

@@ -8,12 +8,12 @@ class ArtsyApiWrapper
     @api = request_api
   end
 
-  def request_api
-    # Hyperclient.new('https://api.artsy.net/api') do |api|
-    #   api.headers['Accept'] = 'application/vnd.artsy-v2+json'
-    #   api.headers['X-Xapp-Token'] = @token
-    # end
-  end
+  # def request_api
+  #   Hyperclient.new('https://api.artsy.net/api') do |api|
+  #     api.headers['Accept'] = 'application/vnd.artsy-v2+json'
+  #     api.headers['X-Xapp-Token'] = @token
+  #   end
+  # end
 
   # def get_artist(name:)
   #   api.artist(id: name)
@@ -39,3 +39,4 @@ end
 # #puts new_api.token
 # puts new_api.get_artist(name: 'andy-warhol').name
 
+#

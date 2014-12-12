@@ -1,0 +1,3 @@
+class Cohort
+
+end

@@ -1,18 +1,12 @@
-# require 'data_parser'
-# require 'cohort'
 require 'json'
 
-class Loader
-  attr_reader :file_contents
-  
+class Loader  
   def initialize(filepath)
     @filepath = filepath
-    @file_contents = File.read(@filepath)
-    parse
   end
 
   def parse
-    "Parse method called"
+    file_contents = File.read(@filepath)
+    JSON.parse(file_contents)
   end
-
 end

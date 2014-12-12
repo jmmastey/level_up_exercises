@@ -1,0 +1,10 @@
+<div id="ChicagoHighlights">
+  <h2>Chicago Highlights</h2>
+  <div class="row">
+<% @highlight_events.each do |event| %>
+    <div class="col-xs-3">
+  <%= render partial: "event_highlight", locals: { event: event } %>
+    </div>
+<% end %>
+  </div>
+</div>

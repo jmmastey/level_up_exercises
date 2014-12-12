@@ -1,0 +1,88 @@
+$page-color: #ffffff;
+$chicago-blue: #0f0fff;
+$deep-chicago-blue: $chicago-blue - #0f0f33;
+$light-chicago-blue: $chicago-blue + #c0c000;
+
+@font-face {
+  font-family: fancypants;
+  src: url('SavoyeLetPlain.ttf');
+}
+
+body {
+  background-color: $deep-chicago-blue !important;
+}
+
+#PageContainer {
+  background-color: $page-color;
+}
+
+.page-title {
+  font: 60px fancypants;
+  text-shadow: -6px -6px 15px black;
+  color: $light-chicago-blue;
+}
+
+/* div {
+  border: 1px dotted black;
+} */
+
+.event-categories {
+  color: gray;
+}
+
+img.event-image {
+  height: 200px;
+  width: 200px;
+}
+
+#TopBar {
+  border: 1px dotted black;
+  padding: -1px;
+}
+
+#TopBarTitleArea {
+  div.page-title-border {
+    display: block;
+    position: relative;
+    margin-left: -15px;
+    margin-right: -15px;
+    min-height: 15px;
+    background-image: linear-gradient(to right, white, blue);
+  }
+
+  .ptb-top {
+    margin-top: -15px;
+  }
+
+  #PageTitle {
+    margin-top: -15px;
+    display: flex;
+    align-items: center;
+
+    #PageTitleHeader {
+      background-image: linear-gradient(to right, blue, white);
+    }
+
+    .chicago-flag-star {
+      display: inline;
+      width: 40px;
+      height: 40px;
+      margin-top: -15px;
+      margin-left: 10px;
+    }  
+  }
+
+}
+
+#LoginPane {
+  background-color: $chicago-blue;
+  color: white;
+
+  input[type=text],input[type=password],input[type=email] {
+    border-radius: 10px;
+  }
+}
+
+#PageTitle {
+
+}

@@ -1,0 +1,6 @@
+<div id="Logout">
+  <%= form_for(resource, as: resource_name, method: :delete,
+               url: destroy_user_session_path) do |f| %>
+    <%= f.button 'Logout' %>
+ <% end %>
+</div>

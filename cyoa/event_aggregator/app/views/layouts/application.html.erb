@@ -7,13 +7,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= render "shared/top_bar" %>
-<div id="BodyArea">
-  <%= render "shared/left_bar" %>
-  <div id="MainContent" class="container">
-    <%= yield %>
+<div id="PageContainer" class="container">
+
+  <div id="TopBar" class="row">
+    <%= render "shared/top_bar" %>
   </div>
+
+  <div id="BodyArea" class="row">
+
+    <div id="LeftBar" class="col-xs-3">
+      <%= render "shared/left_bar" %>
+    </div>
+
+    <div id="ContentArea" class="col-xs-9">
+    
+      <div id="Messages" class="row">
+        <div id="MessageMarquis" class="col-xs-12">
+          <%= devise_error_messages! %> 
+          <ul>
+          <% flash.each do |key, value| %>
+            <li><%= key %>: <%= value %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div id="MainContent" class="row">
+        <%= yield %>
+      </div>
+  </div>
+  <%= render "shared/bottom_bar" %>
 </div>
-<%= render "shared/bottom_bar" %>
 </body>
 </html>

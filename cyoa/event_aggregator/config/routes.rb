@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   resources :feeds
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+  }
 
-  root "feeds#index"
+  root "site#home"
 
   get "/about-us", to: "site#about_us", as: :about_us
+  get "/contact-us", to: "site#contact_us", as: :contact_us
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

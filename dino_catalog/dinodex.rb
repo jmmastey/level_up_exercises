@@ -1,3 +1,4 @@
+require "table_print"
 require_relative "dinosaur"
 require_relative "dinoloader"
 
@@ -71,40 +72,42 @@ class DinoDex
     self
   end
 
-  def print_all
-    each {|dino| puts dino.to_s}
+  def display_all
+    tp dinos, :name, :period, :diet, :weight, :walking, :continent, :description    
   end
 
 end
 
-dinos = DinoLoader.load("dinodex.csv") + DinoLoader.load("african_dinosaur_export.csv")
+if __FILE__ == $0
+  dinos = DinoLoader.load("dinodex.csv") + DinoLoader.load("african_dinosaur_export.csv")
 
-dinodex = DinoDex.new(dinos)
-dinodex.filter_by_walking! "Biped"
-puts "Bipeds"
-dinodex.print_all
+  dinodex = DinoDex.new(dinos)
+  dinodex.filter_by_walking! "Biped"
+  puts "Bipeds"
+  dinodex.display_all
 
-dinodex = DinoDex.new(dinos)
-dinodex.filter_carnivores!
-puts "Carnivores"
-dinodex.print_all
+  dinodex = DinoDex.new(dinos)
+  dinodex.filter_carnivores!
+  puts "Carnivores"
+  dinodex.display_all
 
-dinodex = DinoDex.new(dinos)
-dinodex.filter_by_period! "Cretaceous"
-puts "Cretaceous Period"
-dinodex.print_all
+  dinodex = DinoDex.new(dinos)
+  dinodex.filter_by_period! "Cretaceous"
+  puts "Cretaceous Period"
+  dinodex.display_all
 
-dinodex = DinoDex.new(dinos)
-dinodex.filter_big!
-puts "Big"
-dinodex.print_all
+  dinodex = DinoDex.new(dinos)
+  dinodex.filter_big!
+  puts "Big"
+  dinodex.display_all
 
-dinodex = DinoDex.new(dinos)
-dinodex.filter_small!
-puts "Small"
-dinodex.print_all
+  dinodex = DinoDex.new(dinos)
+  dinodex.filter_small!
+  puts "Small"
+  dinodex.display_all
 
-dinodex = DinoDex.new(dinos)
-dinodex.filter_by_walking!("Biped").filter_carnivores!.filter_small!
-puts "Small Bipedal Carnivores"
-dinodex.print_all
+  dinodex = DinoDex.new(dinos)
+  dinodex.filter_by_walking!("Biped").filter_carnivores!.filter_small!
+  puts "Small Bipedal Carnivores"
+  dinodex.display_all
+end

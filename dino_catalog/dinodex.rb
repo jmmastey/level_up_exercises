@@ -1,58 +1,13 @@
-require "csv"
-
-class Dinosaur
-  attr_accessor :name, :period, :diet, :weight, :walking, :description, :continent
-
-  def to_s
-    string = "Name: #{name}"
-    string += ", Description: #{description}" if description
-    string += ", Period: #{period}" if period.length
-    string += ", Diet: #{diet}" if diet.length
-    string += ", Weight: #{weight} pounds" if weight.to_i > 0
-    string += ", Walking: #{walking}" if walking
-    string += ", Continent: #{continent}" if continent
-    string
-  end
-
-end
+require_relative "dinosaur"
+require_relative "dinoloader"
 
 class DinoDex
   attr_reader :dinos
 
   include Enumerable
 
-  def initialize
-    @dinos = []
-    @dinos += load_index
-    @dinos += load_african
-  end
-
-  def load_index
-    csv = CSV.read("dinodex.csv", headers: :first_row)
-    csv.map do |row|
-      dino = Dinosaur.new
-      dino.name = row["NAME"]
-      dino.period = row["PERIOD"]
-      dino.diet = row["DIET"]
-      dino.weight = row["WEIGHT_IN_LBS"].to_i
-      dino.walking = row["WALKING"]
-      dino.description = row["DESCRIPTION"]
-      dino.continent = row["CONTINENT"]
-      dino
-    end
-  end
-
-  def load_african
-    csv = CSV.read("african_dinosaur_export.csv", headers: :first_row)
-    csv.map do |row|
-      dino = Dinosaur.new
-      dino.name = row["Genus"]
-      dino.period = row["Period"]
-      dino.diet = row["Carnivore"] == "yes" ? "Carnivore" : ""
-      dino.weight = row["Weight"].to_i
-      dino.walking = row["Walking"]
-      dino
-    end
+  def initialize(dinos)
+    @dinos = dinos
   end
 
   def each
@@ -115,32 +70,34 @@ class DinoDex
 
 end
 
-dinodex = DinoDex.new
+dinos = load_index + load_african
+
+dinodex = DinoDex.new(dinos)
 dinodex.filter_by_walking! "Biped"
 puts "Bipeds"
 dinodex.print_all
 
-dinodex = DinoDex.new
+dinodex = DinoDex.new(dinos)
 dinodex.filter_by_diet! "Carnivore"
 puts "Carnivores"
 dinodex.print_all
 
-dinodex = DinoDex.new
+dinodex = DinoDex.new(dinos)
 dinodex.filter_by_period! "Cretaceous"
 puts "Cretaceous Period"
 dinodex.print_all
 
-dinodex = DinoDex.new
+dinodex = DinoDex.new(dinos)
 dinodex.filter_big!
 puts "Big"
 dinodex.print_all
 
-dinodex = DinoDex.new
+dinodex = DinoDex.new(dinos)
 dinodex.filter_small!
 puts "Small"
 dinodex.print_all
 
-dinodex = DinoDex.new
+dinodex = DinoDex.new(dinos)
 dinodex.filter_by_walking!("Biped").filter_by_diet!("Carnivore").filter_small!
 puts "Small Bipedal Carnivores"
 dinodex.print_all

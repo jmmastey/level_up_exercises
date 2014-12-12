@@ -7,6 +7,11 @@ class Overlord < Sinatra::Base
     erb :index
   end
 
-  post "/" do
+  post "/init" do
+    if session[:status] == "Active"
+      redirect :countdown
+    else
+      erb :index
+    end
   end
 end

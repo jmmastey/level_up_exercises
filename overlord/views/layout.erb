@@ -19,7 +19,7 @@
     <header class="branding">
       <h1>Overlord</h1>
        <br>
-    <div id="status"><h3>Your bomb is: <%=session[:status]%></h3></div>
+    <h3>Your bomb is: <div id="status"><%=session[:status]%></div></h3>
     </header>
 
     <div class="main">
@@ -32,6 +32,7 @@
   </div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="/javascripts/application.js"></script>
   <!--[if lt IE 7]>
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
     <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>

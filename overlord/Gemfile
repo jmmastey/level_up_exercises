@@ -1,6 +1,12 @@
-# A sample Gemfile
-source "https://rubygems.org"
+source "https://rubygems.org/"
 
-ruby "2.0.0"
+# App Stack
+gem "sinatra", "~> 1.4"
 
-gem "sinatra"
+
+group :development do
+  gem "rake", "~> 10.0"
+  gem "cucumber"
+  gem "capybara"
+  gem "rack-test", "~> 0.6"
+end

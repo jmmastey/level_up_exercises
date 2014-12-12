@@ -1,29 +1,36 @@
 require "csv"
+require_relative "dinosaur"
 
-def load_index
-  csv = CSV.read("dinodex.csv", headers: :first_row)
-  csv.map do |row|
-    dino = Dinosaur.new
-    dino.name = row["NAME"]
-    dino.period = row["PERIOD"]
-    dino.diet = row["DIET"]
-    dino.weight = row["WEIGHT_IN_LBS"].to_i
-    dino.walking = row["WALKING"]
-    dino.description = row["DESCRIPTION"]
-    dino.continent = row["CONTINENT"]
-    dino
+class DinoLoader
+
+  def self.load(filename)
+    rows = CSV.read(filename,
+                     headers: :first_row,
+                     header_converters: [:downcase,
+                                         lambda {|h| map_header(h)},
+                                         :symbol])
+    rows.each do |row|
+      case row[:carnivore]
+      when "Yes"
+        row[:diet] = "Carnivore"
+      when "No"
+        row[:diet] = "Herbivore"
+      end
+      row[:weight] = row[:weight].to_i
+    end
+    rows.map {|row| Dinosaur.new(row)}
   end
-end
-                                                                     
-def load_african
-  csv = CSV.read("african_dinosaur_export.csv", headers: :first_row)
-  csv.map do |row|
-    dino = Dinosaur.new
-    dino.name = row["Genus"]
-    dino.period = row["Period"]
-    dino.diet = row["Carnivore"] == "yes" ? "Carnivore" : ""
-    dino.weight = row["Weight"].to_i
-    dino.walking = row["Walking"]
-    dino
+
+  private
+
+  HEADER_MAPPINGS = {
+    "genus" => "name",
+    "weight_in_lbs" => "weight",
+  }
+    
+  def self.map_header(header)
+    HEADER_MAPPINGS[header] || header
   end
+
 end
+

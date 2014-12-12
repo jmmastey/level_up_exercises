@@ -70,7 +70,7 @@ class DinoDex
 
 end
 
-dinos = load_index + load_african
+dinos = DinoLoader.load("dinodex.csv") + DinoLoader.load("african_dinosaur_export.csv")
 
 dinodex = DinoDex.new(dinos)
 dinodex.filter_by_walking! "Biped"

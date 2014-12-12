@@ -55,7 +55,7 @@
       <th>Destination</th>
       <th>Arrives</th>
     </tr>
-    <% @optimizer.all_departures.each do |flight| %>
+    <% @optimizer.departures.each do |flight| %>
     <tr>
       <td><%= flight.origin_airport.code %></td>
       <td><%= flight.origin_date_time %></td>
@@ -73,7 +73,7 @@
       <th>Destination</th>
       <th>Arrives</th>
     </tr>
-    <% @optimizer.all_returns.each do |flight| %>
+    <% @optimizer.returns.each do |flight| %>
     <tr>
       <td><%= flight.origin_airport.code %></td>
       <td><%= flight.origin_date_time %></td>

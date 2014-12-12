@@ -11,31 +11,37 @@ module FlightStats
       @airport_offsets = {}
     end
 
-    def get_flights_arriving_before(time, from, to)
-      raise(ArgumentError, "Time requested in the past") unless time > DateTime.now
+    def get_flights_arriving_before(time, from, to, now = DateTime.now)
+      check_for_past_time(time, now)
 
       builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
       flights = arriving_flights(builder, time)
-
+      puts "flight count original #{time}: #{flights.length}"
       if flights.nil? || flights.length == 0
-        builder.from(from).to(to).date(time - 1)
+        earlier_time = time.to_datetime - 1
+        check_for_past_time(earlier_time, now)
+        builder.from(from).to(to).date(earlier_time)
         flights = arriving_flights(builder, time)
+        puts "flight count previous day(#{earlier_time}): #{flights.length}"
       end
+      puts "flight count final: #{flights.length}"
       flights
     end
 
-    def get_flights_departing_after(time, from, to)
-      raise(ArgumentError, "Time requested in the past") unless time > DateTime.now
+    def get_flights_departing_after(time, from, to, now = DateTime.now)
+      check_for_past_time(time, now)
 
       builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
       get_scheduled_flights(builder.schedule_departing_url).select! do |f|
         f["departureTimeUtc"].to_datetime > time
       end
-
-
     end
 
     private
+
+    def check_for_past_time(time, now = DateTime.now)
+      raise(ArgumentError, "Time requested in the past") unless time > now
+    end
 
     def get_scheduled_flights(url)
       json = RestClient::Request.execute(method:     :get,

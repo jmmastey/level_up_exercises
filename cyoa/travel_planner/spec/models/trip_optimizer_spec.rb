@@ -9,6 +9,10 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
   end
 
   context 'Shortest Trip' do
+    before(:context) do
+      # @meeting_start = Faker::Time.forward(10, :morning).to_datetime
+      @meeting_start = "2014-12-15 13:00:09 UTC".to_datetime
+    end
 
     let(:ord) { FactoryGirl.create(:ord) }
     let(:lga) { FactoryGirl.create(:lga) }
@@ -16,7 +20,7 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
       FactoryGirl.create(
         :meeting_lga,
         location: lga.location,
-        start: "20141201T11:00:00-0500".to_datetime,
+        start: @meeting_start,
       )
     end
 
@@ -29,40 +33,27 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
       TripOptimizer.new(trip.to_h)
     end
 
-    def pick_shortest_flights(opti)
-      VCR.use_cassette("trip_optimizer/pick_shortest_flights",
-        record: :new_episodes) do
-        opti.pick_shortest_flights
-      end
-    end
-
     it 'given travel details, pick two flights' do
-      flights = pick_shortest_flights(optimizer)
-      expect(flights.length).to eq(2)
-      expect(flights[:departure]).to be_valid
-      expect(flights[:return]).to be_valid
+      expect(optimizer.best_departure).to be_valid
+      expect(optimizer.best_return).to be_valid
     end
 
     it 'makes all departing flights available' do
-      pick_shortest_flights(optimizer)
-      expect(optimizer.all_departures.length).to be > 0
+      expect(optimizer.departures.length).to be > 0
     end
 
     it 'makes all returning flights available' do
-      pick_shortest_flights(optimizer)
-      expect(optimizer.all_returns.length).to be > 0
+      expect(optimizer.returns.length).to be > 0
     end
 
     it 'picks the best departing flight' do
-      pick_shortest_flights(optimizer)
-      best = optimizer.all_departures.max_by(&:origin_date_time)
-      expect_best_match(optimizer.departure, best)
+      best = optimizer.departures.max_by(&:origin_date_time)
+      expect_best_match(optimizer.best_departure, best)
     end
 
     it 'picks the best returning flight' do
-      pick_shortest_flights(optimizer)
-      best = optimizer.all_returns.min_by(&:destination_date_time)
-      expect_best_match(optimizer.return, best)
+      best = optimizer.returns.min_by(&:destination_date_time)
+      expect_best_match(optimizer.best_return, best)
     end
   end
 end

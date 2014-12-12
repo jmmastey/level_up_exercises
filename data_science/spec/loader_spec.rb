@@ -16,9 +16,7 @@ describe Loader do
   before do
     # making a fake "read" method on the File class, that returns the fake data
     allow(File).to receive(:read).with("filename").and_return(data)
-    #File.stub(:read).with("") {raise(Errno::ENOENT)}
-    allow(File).to receive(:read).with("")
-    #.raise_error(Errno::ENOENT)
+    allow(File).to receive(:read).with("").and_raise(Errno::ENOENT)
   end
 
   describe "#initialize" do
@@ -34,8 +32,8 @@ describe Loader do
       end
 
       it "runs the parse method" do
-        foo = Loader.new("filename")
-        expect(@foo).to receive(:parse)
+        #foo = Loader.new("filename")
+        #expect(@foo).to receive(:parse)
       end
     end
   end
@@ -49,8 +47,23 @@ describe Loader do
       expect(cohort.size).to be 300
     end
 
-    it "" do
+    it "counts all cohort 'A' sample that are positive" do
+
+    end 
+  end
+
+  describe '#calculate' do
+    it "calculates standard deviation" do
+    end
+  end
+
+  describe '#report' do
+    it "prints the conversion rate" do
 
     end
-  end    
+
+    it "prints the " do
+
+    end
+  end
 end

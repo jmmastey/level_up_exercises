@@ -12,11 +12,11 @@ class DinoDex
   end
 
   def each
-    @dinos.each {|dino| yield dino}
+    @dinos.each { |dino| yield dino }
   end
 
   def filter_by_walking(walking)
-    select {|dino| dino.walking == walking}
+    select { |dino| dino.walking == walking }
   end
 
   def filter_by_walking!(walking)
@@ -25,7 +25,7 @@ class DinoDex
   end
 
   def filter_by_diet(diet)
-    select {|dino| dino.diet == diet}
+    select { |dino| dino.diet == diet }
   end
 
   def filter_by_diet!(diet)
@@ -34,7 +34,7 @@ class DinoDex
   end
 
   def filter_carnivores
-    select {|dino| dino.carnivore?}
+    select(&:carnivore?)
   end
 
   def filter_carnivores!
@@ -55,7 +55,7 @@ class DinoDex
   end
 
   def filter_big
-    select {|dino| dino.weight > 4000}
+    select { |dino| dino.weight > 4000 }
   end
 
   def filter_big!
@@ -64,7 +64,7 @@ class DinoDex
   end
 
   def filter_small
-    select {|dino| dino.weight > 0 && dino.weight < 500}
+    select { |dino| dino.weight > 0 && dino.weight < 500 }
   end
 
   def filter_small!
@@ -73,13 +73,14 @@ class DinoDex
   end
 
   def display_all
-    tp dinos, :name, :period, :diet, :weight, :walking, :continent, :description    
+    tp dinos, :name, :period, :diet, :weight,
+      :walking, :continent, :description
   end
-
 end
 
-if __FILE__ == $0
-  dinos = DinoLoader.load("dinodex.csv") + DinoLoader.load("african_dinosaur_export.csv")
+if __FILE__ == $PROGRAM_NAME
+  dinos = DinoLoader.load("dinodex.csv") +
+          DinoLoader.load("african_dinosaur_export.csv")
 
   dinodex = DinoDex.new(dinos)
   dinodex.filter_by_walking! "Biped"

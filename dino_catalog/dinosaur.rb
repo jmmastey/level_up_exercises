@@ -1,5 +1,6 @@
 class Dinosaur
-  attr_accessor :name, :period, :diet, :weight, :walking, :description, :continent
+  attr_accessor :name, :period, :diet, :weight,
+    :walking, :description, :continent
 
   def initialize(attributes)
     @name = attributes[:name]
@@ -12,8 +13,6 @@ class Dinosaur
   end
 
   def carnivore?
-    ["insectivore", "piscivore", "carnivore"].include? diet.downcase
+    %w(insectivore piscivore carnivore).include? diet.downcase
   end
-
 end
-

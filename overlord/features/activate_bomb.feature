@@ -8,7 +8,7 @@ Feature: villain activates bomb
 		Given a bomb has been created
 
  	Scenario: Activate Bomb
- 		Given a bomb is created
+		Given I'm on the inactive bomb page
  		When I activate a bomb
- 		Then the bomb should be active
- 		And I should see a field to deactivate the bomb
+ 		Then I should be on a new page
+ 		And I should see "Bomb Status: ACTIVE"

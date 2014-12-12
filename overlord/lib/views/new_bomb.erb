@@ -1,7 +1,10 @@
-<h1>Create a new Bomb</h1>
+<h1 id="bomb_status">No bomb</h1>
+
+<h1>Create a bomb!</h1>
+
 <form action="/bomb" method="post">
-    <label> Activation Code
-        <input type="text" name="bomb['create_activation_code']" id="create_activation_code" />
+    <label>Set an Activation Code
+        <input type="text" name="bomb[create_activation_code]" id="create_activation_code" />
     </label>
     <input type="submit" value="Create!">
 </form>

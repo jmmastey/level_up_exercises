@@ -9,4 +9,3 @@ Feature: villain creates bomb
 		And there is no bomb created yet
 		When I create a bomb
 		Then I should see "Bomb Created"
-		And I should see a field to activate the bomb

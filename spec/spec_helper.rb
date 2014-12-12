@@ -12,7 +12,11 @@
 #
 # The `.rspec` file also contains a few flags that are not defaults but that
 # users commonly want.
-#
+
+# Webmock configuration
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
 

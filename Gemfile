@@ -73,6 +73,8 @@ group :test do
   gem "launchy"
   gem "factory_girl_rails", "~> 4.0"
   gem 'sinatra', '~> 1.4.5'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 group :production do

@@ -32,5 +32,5 @@ end
 client_id = '094ac11b91081fbcd043'
 client_secret = 'a1213c1b069c9479db3728a3686a6907'
 new_api = ArtsyApiWrapper.new(client_id: client_id, client_secret: client_secret)
-
+puts new_api.token
 puts new_api.get_artist(name: 'andy-warhol').name

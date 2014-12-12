@@ -7,6 +7,10 @@ RSpec.describe ArtsyApiWrapper do
   context "External request" do
 
     it 'calls the Artsy API' do
+      # stub_request(:get, "https://api.artsy.net/api").
+      # with(:headers => {'Accept'=>'application/vnd.artsy-v2+json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Faraday v0.9.0'}).
+      # to_return(:status => 200, :body => "", :headers => {})
+
       api_instance = ArtsyApiWrapper.new(client_id: client_id, client_secret: client_secret)
 
       response = api_instance.token

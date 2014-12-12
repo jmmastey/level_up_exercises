@@ -9,7 +9,7 @@ module DeedsHelper
         deed = Deed.find_or_create_by(bill_id: bill.bill_id,
                                       bioguide_id: bill.sponsor_id,
                                       deed: deed_text,
-                                      date: bill.last_vote_at)
+                                      occurrence_date: bill.last_vote_at)
         deed.save
       end
     end
@@ -24,7 +24,7 @@ module DeedsHelper
         deed = Deed.find_or_create_by(bill_id: bill.bill_id,
                                       bioguide_id: bill.sponsor_id,
                                       deed: deed_text,
-                                      date: bill.enacted_at)
+                                      occurrence_date: bill.enacted_at)
         deed.save
       end
     end

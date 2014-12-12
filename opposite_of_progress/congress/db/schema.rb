@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141121151055) do
+ActiveRecord::Schema.define(version: 20141212191147) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20141121151055) do
     t.string   "deed"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "date"
+    t.date     "occurrence_date"
   end
 
   create_table "legislators", force: true do |t|

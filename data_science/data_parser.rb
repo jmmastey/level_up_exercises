@@ -1,7 +1,11 @@
 class DataParser
-  attr_reader :file_contents
+  attr_reader :data
 
-  def initialize(filepath)
-    @filepath = filepath
+  def initialize(data)
+    @data = data
+  end
+
+  def hello
+    "hello rspec"
   end
 end

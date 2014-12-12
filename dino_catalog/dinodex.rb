@@ -24,13 +24,20 @@ class DinoDex
   end
 
   def filter_by_diet(diet)
-    diets = [diet]
-    diets += ["Insectivore", "Piscivore"] if diet == "Carnivore"
-    select {|dino| diets.include? dino.diet}
+    select {|dino| dino.diet == diet}
   end
 
   def filter_by_diet!(diet)
     @dinos = filter_by_diet(diet)
+    self
+  end
+
+  def filter_carnivores
+    select {|dino| dino.carnivore?}
+  end
+
+  def filter_carnivores!
+    @dinos = filter_carnivores
     self
   end
 
@@ -78,7 +85,7 @@ puts "Bipeds"
 dinodex.print_all
 
 dinodex = DinoDex.new(dinos)
-dinodex.filter_by_diet! "Carnivore"
+dinodex.filter_carnivores!
 puts "Carnivores"
 dinodex.print_all
 
@@ -98,6 +105,6 @@ puts "Small"
 dinodex.print_all
 
 dinodex = DinoDex.new(dinos)
-dinodex.filter_by_walking!("Biped").filter_by_diet!("Carnivore").filter_small!
+dinodex.filter_by_walking!("Biped").filter_carnivores!.filter_small!
 puts "Small Bipedal Carnivores"
 dinodex.print_all

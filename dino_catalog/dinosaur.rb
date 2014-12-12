@@ -10,7 +10,11 @@ class Dinosaur
     @description = attributes[:description]
     @continent = attributes[:continent]
   end
-  
+
+  def carnivore?
+    ["insectivore", "piscivore", "carnivore"].include? diet.downcase
+  end
+
   def to_s
     string = "Name: #{name}"
     string += ", Description: #{description}" if description

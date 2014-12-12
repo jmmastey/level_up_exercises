@@ -30,6 +30,8 @@ gem 'bourbon'
 gem 'neat'
 gem 'refills'
 
+gem 'hyperclient', '~> 0.6.1'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -70,6 +72,7 @@ group :test do
   gem 'capybara'
   gem "launchy"
   gem "factory_girl_rails", "~> 4.0"
+  gem 'sinatra', '~> 1.4.5'
 end
 
 group :production do

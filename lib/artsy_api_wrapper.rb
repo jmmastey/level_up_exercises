@@ -1,7 +1,7 @@
 require 'hyperclient'
 
 class ArtsyApiWrapper
-  attr_reader :api
+  attr_reader :api, :token
 
   def initialize(client_id:, client_secret:)
     @token = get_token(client_id, client_secret)

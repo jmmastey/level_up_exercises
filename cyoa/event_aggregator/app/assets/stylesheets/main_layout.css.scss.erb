@@ -1,12 +1,4 @@
-$page-color: #ffffff;
-$chicago-blue: #0f0fff;
-$deep-chicago-blue: $chicago-blue - #0f0f33;
-$light-chicago-blue: $chicago-blue + #c0c000;
-
-@font-face {
-  font-family: fancypants;
-  src: url('SavoyeLetPlain.ttf');
-}
+@import "defs";
 
 body {
   background-color: $deep-chicago-blue !important;
@@ -16,15 +8,29 @@ body {
   background-color: $page-color;
 }
 
+#ContentArea {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+#BodyArea {
+  background-color: $light-chicago-blue;
+}
+
+#LeftBarContent {
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+#ContentAreaContainer {
+  background-color: $page-color;
+}
+
 .page-title {
   font: 60px fancypants;
   text-shadow: -6px -6px 15px black;
   color: $light-chicago-blue;
 }
-
-/* div {
-  border: 1px dotted black;
-} */
 
 .event-categories {
   color: gray;
@@ -33,11 +39,6 @@ body {
 img.event-image {
   height: 200px;
   width: 200px;
-}
-
-#TopBar {
-  border: 1px dotted black;
-  padding: -1px;
 }
 
 #TopBarTitleArea {
@@ -75,6 +76,7 @@ img.event-image {
 }
 
 #LoginPane {
+  font-size: 8pt;
   background-color: $chicago-blue;
   color: white;
 

@@ -19,22 +19,23 @@
       <%= render "shared/left_bar" %>
     </div>
 
-    <div id="ContentArea" class="col-xs-9">
-    
-      <div id="Messages" class="row">
-        <div id="MessageMarquis" class="col-xs-12">
-          <%= devise_error_messages! %> 
-          <ul>
-          <% flash.each do |key, value| %>
-            <li><%= key %>: <%= value %></li>
-          <% end %>
-          </ul>
+    <div id="ContentAreaContainer" class="col-xs-9">
+      <div id="ContentArea">
+        <div id="Messages" class="row">
+          <div id="MessageMarquis" class="col-xs-12">
+            <%= devise_error_messages! %> 
+            <ul>
+            <% flash.each do |key, value| %>
+              <li><%= key %>: <%= value %></li>
+            <% end %>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div id="MainContent" class="row">
-        <%= yield %>
-      </div>
+        <div id="MainContent" class="row">
+          <%= yield %>
+        </div>
+     </div>
   </div>
   <%= render "shared/bottom_bar" %>
 </div>

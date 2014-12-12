@@ -1,3 +1,18 @@
 // Place all the styles related to the site controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "defs";
+
+div.event-highlight {
+  background-color: $light-chicago-blue;
+  border-radius: 20px;
+  border: 5px solid $light-chicago-blue;
+
+  h4 {
+    font-style: italic;
+  }
+
+  h5 {
+    font-weight: bold;
+  }
+}

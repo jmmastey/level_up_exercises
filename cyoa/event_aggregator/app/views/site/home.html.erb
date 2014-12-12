@@ -1,10 +1,35 @@
-<div id="ChicagoHighlights">
-  <h2>Chicago Highlights</h2>
+<div id="ChicagoHighlights" class="section">
+  <h2 class="section-title">Chicago Highlights</h2>
   <div class="row">
 <% @highlight_events.each do |event| %>
     <div class="col-xs-3">
   <%= render partial: "event_highlight", locals: { event: event } %>
     </div>
 <% end %>
+  </div>
+</div>
+<div id="HotTopics" class="section">
+  <h2 class="section-title">Hot Topics</h2>
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>Opening Night Calendar</h3>
+      <div class="row">
+<% @opening_night_events.each do |event| %>
+        <div class="col-xs-6">
+  <%= render partial: "event_highlight", locals: { event: event } %>
+        </div>
+<% end %>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h3>Meetups</h3>
+      <div class="row">
+<% @meetups.each do |event| %>
+        <div class="col-xs-6">
+  <%= render partial: "event_highlight", locals: { event: event } %>
+        </div>
+<% end %>
+      </div>
+    </div>
   </div>
 </div>

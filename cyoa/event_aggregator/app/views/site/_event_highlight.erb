@@ -1,8 +1,8 @@
-<div class="thumbnail"> 
-  <h3><%= event.title %></h3>
+<div class="event-highlight thumbnail"> 
+  <h4><%= event.title %></h4>
   <img class="event-image" src="<%= event.image || image_path("generic_event")%>">
   <div class="caption">
-    <h4>Description</h4>
+    <h5>Description</h5>
     <p><%= event.description %></p>
     <p class="event-categories"><%= event.categories.join(" ") %></p>
   </div>

@@ -13,4 +13,21 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def event_categories
+    %w(
+      FIXME
+      Shopping
+      Runnig
+      Walking
+      Sports
+      Stuff
+      Things
+      Theater
+      Comedy
+      Singles
+      Doubles
+      More
+    )
+  end
 end

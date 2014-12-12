@@ -27,10 +27,13 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
-  end
-
   private
+
+  def assign_search_params
+    @item = params[:item]
+    @region = params[:region]
+    @station = params[:station]
+  end
 
   def orders
     Order.all
@@ -38,8 +41,8 @@ class OrdersController < ApplicationController
 
   def search_orders
     orders
-      .by_item(params[:item])
-      .by_region(params[:region])
-      .by_station(params[:station])
+      .by_item(@item)
+      .by_region(@region)
+      .by_station(@station)
   end
 end

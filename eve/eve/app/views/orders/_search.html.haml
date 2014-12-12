@@ -4,15 +4,13 @@
   .panel-body
     = form_tag(search_orders_path, method: :get, role: :form) do
       .form-group
-        = label_tag(:item_id, "Item")
-        = hidden_field_tag(:item_id, class: "form-control")
+        = label_tag(:item, "Item")
+        = hidden_field_tag(:item, @item, class: "form-control")
       .form-group
-        = label_tag(:region_id, "Region")
-        = hidden_field_tag(:region_id, class: "form-control")
+        = label_tag(:region, "Region")
+        = hidden_field_tag(:region, @region, class: "form-control")
       .form-group
-        = label_tag(:station_id, "Station")
-        = hidden_field_tag(:station_id, class: "form-control")
-      %button.btn.btn-primary{type: :submit}
-        &nbsp;
+        = label_tag(:station, "Station")
+        = hidden_field_tag(:station, @station, class: "form-control")
+      %button.btn.btn-primary.icon-button{type: :submit, title: "Search"}
         %span.glyphicon.glyphicon-search
-        &nbsp;

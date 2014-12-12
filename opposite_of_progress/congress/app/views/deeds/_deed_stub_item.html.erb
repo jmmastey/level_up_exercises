@@ -1,7 +1,8 @@
 <div class="panel">
   <h5>
     <%= "Deed:" %>
-    <%= raw "#{link_to deed.deed, deed}" if deed.deed %>
+    <% title = deed.deed %>
+    <%= raw "#{link_to title, deed}" if title %>
   </h5>
   <p class="supporting-date">Date: <%= ApplicationHelper.date_display(deed.date) %></p>
 </div>

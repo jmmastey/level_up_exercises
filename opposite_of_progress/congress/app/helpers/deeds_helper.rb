@@ -29,4 +29,12 @@ module DeedsHelper
       end
     end
   end
+
+  def self.related_legislator deed
+    Legislator.where(bioguide_id: deed.bioguide_id).first
+  end
+
+  def self.related_bill deed
+    Bill.where(bill_id: deed.bill_id).first
+  end
 end

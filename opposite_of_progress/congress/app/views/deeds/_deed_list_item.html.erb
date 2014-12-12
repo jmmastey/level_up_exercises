@@ -4,13 +4,13 @@
   <div class="row">
     <div class="large-6 columns">
       <% if deed_list_item.bioguide_id %>
-        <% legislator = Legislator.where(bioguide_id: deed_list_item.bioguide_id).first %>
+        <% legislator = DeedsHelper.related_legislator deed_list_item %>
         <%= render partial: "legislators/legislator", locals: {legislator: legislator, deed: deed_list_item} %>
       <% end %>
     </div>
     <div class="large-6 columns">
       <% if deed_list_item.bill_id %>
-        <% bill = Bill.where(bill_id: deed_list_item.bill_id).first %>
+        <% bill = DeedsHelper.related_bill deed_list_item %>
         <%= render bill %>
       <% end %>
     </div>

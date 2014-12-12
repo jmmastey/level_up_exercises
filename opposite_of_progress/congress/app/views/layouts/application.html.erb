@@ -17,17 +17,8 @@
       <div class="small-2 large-1 columns">&nbsp;</div>
       <div class="small-8 large-10 columns">
         <span class="user-section">
-          <% if current_user %>
-            <%= current_user.email %>
-            <br />
-            <%= link_to "Preferences", edit_user_registration_path %>
-            |
-            <%= link_to "Log out", destroy_user_session_path, :method => 'delete' %>
-          <% else %>
-            <%= link_to "Log in", new_user_session_path %>
-            |
-            <%= link_to "Sign up", new_user_registration_path %>
-          <% end %>
+          <%= render partial: "layouts/user_menu_logged_in", locals: {current_user: current_user} if current_user %>
+          <%= render partial: "layouts/user_menu_logged_out" unless current_user %>
         </span>
         <h1>Opposite of Progress</h1>
 

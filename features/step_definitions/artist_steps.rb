@@ -10,6 +10,11 @@ Given(/^I have (\d+) artists$/) do |arg1|
   artist_5 = create(:artist, first_name: "Edward",  last_name: "Hopper")
 end
 
+Given(/^I am on a page for an artist$/) do
+  artist = create(:artist, first_name: "Andy",  last_name: "Warhol")
+  visit artist_path(artist)
+end
+
 When(/^I click (.+) Artist$/) do |action|
   click_link("#{action} Artist")
 end
@@ -91,5 +96,10 @@ end
 
 Then(/^I should see a message confirming the artist was (.+)$/) do |action|
   expect(page).to have_content("The artist was successfully #{action}.")
+end
+
+Then(/^I should see a thumbnail image$/) do
+  url = "http://static1.artsy.net/artist_images/52f6bdda4a04f5d504f69b03/1/four_thirds.jpg"
+  expect(page).to have_selector("img[src='#{url}']")
 end
 

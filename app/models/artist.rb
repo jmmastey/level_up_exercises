@@ -4,4 +4,9 @@ class Artist < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def set_thumbnail
+    api_instance = ArtsyApiWrapper.new
+    thumbnail = api_instance.artist_url
+  end
 end

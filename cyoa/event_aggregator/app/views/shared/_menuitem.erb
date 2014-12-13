@@ -1,9 +1,8 @@
 <%
-col_width ||= 2
-display_class = "menu col-xs-#{col_width}"
-display_class.concat(" menu-item-active") if request.path == uri
+display_class = "menu"
+display_class.concat(" active") if request.path == uri
 id ||= (link_name.tr(' ', '').camelize + "Menu")
 %>
-<div id="<%= id %>" class="<%= display_class %>">
+<li id="<%= id %>" class="<%= display_class %>">
   <%= link_to link_name, uri %>
-</div>
+</li>

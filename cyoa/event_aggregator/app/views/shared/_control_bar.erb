@@ -1,19 +1,19 @@
-<div id="CategoryMenuBar" class="menu col-xs-4">
-  <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="CategoryMenuButton"
-        data-toggle="dropdown" aria-expanded="true">
-      I Like To...
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="CategoryMenuButton">
-<% event_categories.each do |category| %>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
-        <%= category %></a></li>
-<% end %>
-    </ul>
-  </div>
-</div>
-
+<div id="CategoryMenuBar" class="menu">
+  <nav id="PageNav" class="navbar navbar-default" role="navigation">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" role="button" id="CategoryMenuButton"
+            data-toggle="dropdown" aria-expanded="false">
+          I Like To...
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="CategoryMenuButton">
+    <% event_categories.each do |category| %>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
+            <%= category %></a></li>
+    <% end %>
+        </ul>
+      </li>
 <%= render partial: "shared/menuitem",
            locals: { link_name: "My Feeds", uri: "#" } %>
 
@@ -25,3 +25,6 @@
 
 <%= render partial: "shared/menuitem",
            locals: { link_name: "Privacy Policy", uri: privacy_policy_path} %>
+    </ul>
+  </nav>
+</div>

@@ -26,12 +26,16 @@ Then /^I see a menu link (?:for|to) "(.*)"$/ do |menu_link|
   expect(has_css?(selector)).to be_truthy
 end
 
-Given /^I am authenticated/ do
-
+Given /^I (fail to )?authenticate/ do |fail_auth|
+  visit("/")
+  #puts "PAGE #{page.source}"
+  fill_in('user[email]', with: AUTH_USERNAME)
+  fill_in('user[password]', with: fail_auth ? AUTH_FAIL_PASSWORD : AUTH_PASSWORD)
+  click_button('Log in')
 end
 
 Given /^I am an (un(?:authenticated)) user visiting the "(.*)" page$/ do |authstate, page|
-  step "I am authenticated" if authstate == "authenticated"
+  step "I authenticate" if authstate == "authenticated"
   step "I am visiting the \"#{page}\" page"
 end
 
@@ -41,4 +45,12 @@ end
 
 Then /^I see a feed category for "(.*)"$/ do |feed_category|
   expect(has_css?('a[role=menuitem]', text: feed_category)).to be_truthy
+end
+
+Then /^I see a login form$/ do
+  expect(has_css?('#Login')).to be_truthy
+end
+
+Then /FIXME/ do
+  raise "FIXME NOT DONE FIXME NOT DONE FIXME"
 end

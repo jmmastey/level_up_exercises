@@ -1,8 +1,10 @@
-<div id="PageTitle" class="row">
-  <div id="PageTitleHeader" class="col-xs-12 col-sm-7">
-    <h1 class="page-title">What's Up In Chicago</h1>
+<div id="PageTitle">
+  <div id="PageTitleHeader">
+    <h1 class="page-title">
+      <%= link_to "What's Up In Chicago", home_path %>
+    </h1>
   </div>
-  <div id="PageTitleGraphic" class="col-md-5 hidden-xs">
+  <div id="PageTitleGraphic">
     <img src="<%= image_path("chicago-flag-star.svg") %>" class="chicago-flag-star">
     <img src="<%= image_path("chicago-flag-star.svg") %>" class="chicago-flag-star">
     <img src="<%= image_path("chicago-flag-star.svg") %>" class="chicago-flag-star">

@@ -1,13 +1,13 @@
 class SiteController < ApplicationController
   skip_before_action :authenticate_user!
 
-  def about_us
-    # Just render the view
-  end
+ # def about_us
+ #   # Just render the view
+ # end
 
-  def contact_us
-    # Just render the view
-  end
+ # def contact_us
+ #   # Just render the view
+ # end
 
   def home
     @highlight_events = highlight_events

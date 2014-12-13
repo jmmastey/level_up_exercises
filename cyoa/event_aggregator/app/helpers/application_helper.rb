@@ -17,6 +17,7 @@ module ApplicationHelper
   def event_categories
     %w(
       FIXME
+      Music
       Shopping
       Runnig
       Walking

@@ -6,10 +6,13 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
 
-  root "site#home"
+  root "site#home", as: :home
 
   get "/about-us", to: "site#about_us", as: :about_us
   get "/contact-us", to: "site#contact_us", as: :contact_us
+  get "/privacy-policy", to: "site#privacy_policy", as: :privacy_policy
+  get "/terms-and-conditions", 
+      to: "site#terms_and_conditions", as: :terms_and_conditions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

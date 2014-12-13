@@ -8,6 +8,14 @@ body {
   background-color: $page-color;
 }
 
+#ControlBar {
+  background-color: $light-chicago-blue;
+
+  div.menu-item-active {
+    background-color: white;
+  }
+}
+
 #ContentArea {
   padding-right: 10px;
   padding-left: 10px;
@@ -41,27 +49,26 @@ img.event-image {
   width: 200px;
 }
 
+#TopBar {
+  background-color: $deep-chicago-blue;
+}
+
 #TopBarTitleArea {
-  div.page-title-border {
-    display: block;
-    position: relative;
-    margin-left: -15px;
-    margin-right: -15px;
-    min-height: 15px;
-    background-image: linear-gradient(to right, white, blue);
-  }
-
-  .ptb-top {
-    margin-top: -15px;
-  }
-
   #PageTitle {
-    margin-top: -15px;
     display: flex;
     align-items: center;
+    background-image:
+      linear-gradient(to right, $deep-chicago-blue 40%, white 70%, $deep-chicago-blue);
 
-    #PageTitleHeader {
-      background-image: linear-gradient(to right, blue, white);
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    #PageTitleGraphic {
+      position: relative;
+      top: 0px;
+      left: 0px;
     }
 
     .chicago-flag-star {
@@ -70,14 +77,14 @@ img.event-image {
       height: 40px;
       margin-top: -15px;
       margin-left: 10px;
-    }  
+    }
   }
 
 }
 
 #LoginPane {
   font-size: 8pt;
-  background-color: $chicago-blue;
+  background-color: $deep-chicago-blue;
   color: white;
 
   input[type=text],input[type=password],input[type=email] {
@@ -87,4 +94,13 @@ img.event-image {
 
 #PageTitle {
 
+}
+
+div.section {
+  .section-title {
+    text-align: center;
+    color: $deep-chicago-blue;
+    background-color: $light-chicago-blue;
+    font-style: italic;
+  }
 }

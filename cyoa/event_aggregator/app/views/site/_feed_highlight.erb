@@ -1,0 +1,16 @@
+<div class="feed-highlight">
+<% if defined? feed_title %>
+<h2 class="feed-highlight-title"><%= feed_title %></h2>
+<% end %>
+  <div class="row">
+<%
+count ||= events.count
+col_width ||= [12 / count, 2].max.to_i
+col_class = "col-xs-#{col_width}"
+events[0, count].each do |event| %>
+      <div class="<%= col_class %> feed-event-highlight">
+  <%= render partial: "event_highlight", locals: { event: event } %>
+      </div>
+<% end %>
+  </div>
+</div>

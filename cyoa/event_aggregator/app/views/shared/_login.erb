@@ -23,7 +23,7 @@
     <div class="actions col-xs-3"><%= f.submit "Log in" %></div>
   </div>
   <% end %>
-  <!--
-  <%= render "devise/shared/links" %>
-  -->
+  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+    <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+  <% end -%>
 </div>

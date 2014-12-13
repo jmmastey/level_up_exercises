@@ -16,3 +16,30 @@ div.event-highlight {
     font-weight: bold;
   }
 }
+
+.mail-address {
+  p.address_line {
+    margin: 0pt;
+    text-align: center;
+    font-family: "Courier", "monospace";
+  }
+}
+
+#ContactUs {
+  margin-top: -3em;
+
+  .section-title {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+
+    h2 {
+      display: inline;
+      margin-left: -2.5em;
+    }
+  }
+
+  span.hard-to-see {
+    opacity: 0.15;
+    font-size: 50%;
+  }
+}

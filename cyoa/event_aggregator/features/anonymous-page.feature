@@ -9,32 +9,31 @@ Scenario: Main site page shows highlights from topical feeds
   Given I am an unauthenticated user visiting the "Home" page
   Then I see a heading for "Chicago Highlights"
   And I see a feed highlight for "Opening Night Calendar"
-  And I see a feed highlight for "Meetup Events"
+  And I see a feed highlight for "Meetups"
 
-@ignore
 Scenario: Main site page shows some topical feed options
   Given I am an unauthenticated user visiting the "Home" page
-  Then I see a heading for "What Do You Like To Do"
-  And I see a featured feed category for "Theater"
-  And I see a featured feed category for "Music"
-  And I see a featured feed category for "Comedy"
+  Then I see a heading for "I Like To"
+  And I see a feed category for "Theater"
+  And I see a feed category for "Music"
+  And I see a feed category for "Comedy"
 
 @ignore
 Scenario: Main site page shows new user registration link
   Given I am an unauthenticated user visiting the "Home" page
-  Then I see a link for "Register"
+  Then I see a link to "Sign up"
 
 @ignore
 Scenario: Main site page shows About Us link
   Given I am an unauthenticated user visiting the "Home" page
-  Then I see a link for "About Us"
+  Then I see a link to "About Us"
 
 @ignore
 Scenario: Main site page shows Private Policy link
   Given I am an unauthenticated user visiting the "Home" page
-  Then I see a link for "Privacy Policy"
+  Then I see a link to "Privacy Policy"
 
 @ignore
 Scenario: Main site page shows Contact Us link
   Given I am an unauthenticated user visiting the "Home" page
-  Then I see a link for "Contact Us"
+  Then I see a link to "Contact Us"

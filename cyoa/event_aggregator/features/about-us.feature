@@ -27,4 +27,4 @@ Scenario: Find the privacy policy
 
 Scenario: Find the terms and conditions
   Given I am visiting the "About Us" page
-  Then I see a heading for "Terms Of Use"
+  Then I see a heading for "Terms and Conditions"

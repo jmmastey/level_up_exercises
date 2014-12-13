@@ -3,9 +3,9 @@ require "uri"
 
 URL_NICKNAMES =
 {
-  'about us' => '/about-us.html',
-  'contact us' => '/contact-us.html',
-  'privacy policy' => '/privacy-policy.html',
+  'about us' => '/about-us',
+  'contact us' => '/contact-us',
+  'privacy policy' => '/privacy-policy',
   'sign up' => '/users/sign_up',
   'the customer service phone number' => EventAggregator.customer_service_telno,
   'the customer service e-mail address' => EventAggregator.customer_service_email,

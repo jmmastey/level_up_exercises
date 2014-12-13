@@ -13,7 +13,7 @@ Scenario: Main site page shows highlights from topical feeds
 
 Scenario: Main site page shows some topical feed options
   Given I am an unauthenticated user visiting the "Home" page
-  Then I see a heading for "I Like To"
+  Then I see a menu for "I Like To"
   And I see a feed category for "Theater"
   And I see a feed category for "Music"
   And I see a feed category for "Comedy"
@@ -26,14 +26,14 @@ Scenario: Main site page shows new user registration link
 @ignore
 Scenario: Main site page shows About Us link
   Given I am an unauthenticated user visiting the "Home" page
-  Then I see a link to "About Us"
+  Then I see a menu link to "About Us"
 
 @ignore
 Scenario: Main site page shows Private Policy link
   Given I am an unauthenticated user visiting the "Home" page
-  Then I see a link to "Privacy Policy"
+  Then I see a menu link to "Privacy Policy"
 
 @ignore
 Scenario: Main site page shows Contact Us link
   Given I am an unauthenticated user visiting the "Home" page
-  Then I see a link to "Contact Us"
+  Then I see a menu link to "Contact Us"

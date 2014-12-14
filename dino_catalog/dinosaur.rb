@@ -1,4 +1,7 @@
 class Dinosaur
+  SMALL_WEIGHT = 500
+  BIG_WEIGHT = 4000
+
   attr_accessor :name, :period, :diet, :weight,
     :walking, :description, :continent
 
@@ -14,5 +17,13 @@ class Dinosaur
 
   def carnivore?
     %w(insectivore piscivore carnivore).include? diet.downcase
+  end
+
+  def small?
+    weight > 0 && weight < SMALL_WEIGHT
+  end
+
+  def big?
+    weight > BIG_WEIGHT
   end
 end

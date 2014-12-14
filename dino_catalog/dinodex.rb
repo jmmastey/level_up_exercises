@@ -33,12 +33,12 @@ class DinoDex
   end
 
   def filter_big
-    @dinos = @dinos.select { |dino| dino.weight > 4000 }
+    @dinos = @dinos.select(&:big?)
     self
   end
 
   def filter_small
-    @dinos = @dinos.select { |dino| dino.weight > 0 && dino.weight < 500 }
+    @dinos = @dinos.select(&:small?)
     self
   end
 

@@ -26,4 +26,8 @@ class Dinosaur
   def big?
     weight > BIG_WEIGHT
   end
+
+  def period_within?(full_period)
+    period.sub(/^(Early|Late)\s+/, "") == full_period
+  end
 end

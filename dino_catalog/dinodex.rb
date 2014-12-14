@@ -25,10 +25,7 @@ class DinoDex
   end
 
   def filter_by_period(period)
-    @dinos = @dinos.select do |dino|
-      clean_period = dino.period.sub(/^(Early|Late)\s+/, "")
-      clean_period == period
-    end
+    @dinos = @dinos.select { |dino| dino.period_within?(period) }
     self
   end
 

@@ -43,4 +43,8 @@ class DinoDex
     tp dinos, :name, :period, :diet, :weight,
       :walking, :continent, :description
   end
+
+  def to_json
+    @dinos.to_json
+  end
 end

@@ -32,3 +32,7 @@ dinodex = DinoDex.new(dinos)
 dinodex.filter_by_walking("Biped").filter_carnivores.filter_small
 puts "Small Bipedal Carnivores"
 dinodex.display_all
+
+puts
+puts "JSON"
+puts dinodex.to_json

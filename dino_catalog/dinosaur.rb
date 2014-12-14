@@ -1,3 +1,5 @@
+require "json"
+
 class Dinosaur
   SMALL_WEIGHT = 500
   BIG_WEIGHT = 4000
@@ -29,5 +31,14 @@ class Dinosaur
 
   def period_within?(full_period)
     period.sub(/^(Early|Late)\s+/, "") == full_period
+  end
+
+  def to_h
+    { name: name, period: period, diet: diet, weight: weight, walking: walking,
+      description: description, continent: continent }
+  end
+
+  def to_json(*)
+    to_h.to_json
   end
 end

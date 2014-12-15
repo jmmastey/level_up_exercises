@@ -4,11 +4,11 @@ class Legislator < ActiveRecord::Base
   scope :all_sorted, ->(page, sort_by) { order(sort_by).paginate(page: page) }
 
   def full_name
-    [title, first_name, nickname, last_name, display_party].join(" ")
+    [title, first_name, nickname, last_name, display_party].compact.join(" ")
   end
 
   def display_party
-    "(#{self.party})"
+    "(#{self.party})" if self.party
   end
 
   def full_party

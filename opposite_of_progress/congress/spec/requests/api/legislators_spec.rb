@@ -10,11 +10,11 @@ describe "Legislators API", type: :request do
       get "/legislators/#{@legislator.id}.json"
     end
 
-    it "retrieves the legislator detail page" do
+    it "which loads properly" do
       expect(response).to be_success
     end
 
-    it "retrieves data of a specific legislator" do
+    it "which retrieves data of a specific legislator" do
       expect(response.body).to include(@legislator.bioguide_id)
     end
   end
@@ -24,11 +24,11 @@ describe "Legislators API", type: :request do
       get "/legislators.json"
     end
 
-    it "retrieves the legislator list page" do
+    it "which loads properly" do
       expect(response).to be_success
     end
 
-    it "retrieves data of a legislator from a list page" do
+    it "which retrieves data of a legislator from a list page" do
       expect(response.body).to include(@legislator.bioguide_id)
     end
   end

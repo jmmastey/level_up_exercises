@@ -17,7 +17,7 @@ module DeedsHelper
 
   def self.enacted_into_law
     Bill.order(:updated_at).all.each do |bill|
-      if bill.congress == 113 && bill.enacted_at && bill.short_title
+      if bill.congress == 113 && bill.enacted_on && bill.short_title
         deed_text = "#{bill.short_title} was enacted on " \
           "#{ApplicationHelper.date_display(bill.enacted_on)}"
 

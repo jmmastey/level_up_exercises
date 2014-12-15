@@ -4,6 +4,6 @@ Feature: Artists Page
   In order to add artist data to my application
 
   Scenario: Get artist data
-    Given a artist search parameter
-    When I request artist data from the API
+    Given I request artist data from the API
+    When I visit the artists page
     Then the new artist appears on the artists page

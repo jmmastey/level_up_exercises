@@ -1,47 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe ArtsyApiWrapper do
-  # let(:client_id) { '094ac11b91081fbcd043' }
-  # let(:client_secret) { 'a1213c1b069c9479db3728a3686a6907' }
 
-  # context "External request" do
+  describe ".get_artist" do
+    let(:json_data_for_artist)  { File.read("spec/support/data_files/warhol.json") }
+    let(:artist_name) { "andy-warhol"}
 
-  #   it 'calls the Artsy API' do
-  #     # stub_request(:get, "https://api.artsy.net/api").
-  #     # with(:headers => {'Accept'=>'application/vnd.artsy-v2+json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Faraday v0.9.0'}).
-  #     # to_return(:status => 200, :body => "", :headers => {})
+    before do
+      stub_request(:get, "https://api.artsy.net/api").
+         with(:headers => {'Accept'=>'application/vnd.artsy-v2+json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Faraday v0.9.0', 'X-Xapp-Token'=>'JvTPWe4WsQO-xqX6Bts49nAYOClaICMrVslCpuIQHvBO7wSjcDB3LCczltV67h8nsZRsjWmQY0ZiQUjFazSwamrazFul1pItKFjG2EUxwTIBBKx29wyASO_ViyxdqMu7qcJpvuLe_ZpjMwZiBC6kXEIynyxI3T584Qg6AjhcT9G0IsGvn6Yxh7toqORqkHrztLU698MgMGQfZP556L6q7gEwLDrUaSm9A4WLp-FjmI8='}).
+         to_return(:status => 200, :body => "", :headers => {})
+    end
 
-  #     api_instance = ArtsyApiWrapper.new(client_id: client_id, client_secret: client_secret)
+    it "returns a hash of artist parameters when provided a JSON file" do
+      allow(ArtsyApiWrapper).to receive(:get_artist_json_data).and_return(json_data_for_artist)
 
-  #     response = api_instance.token
-
-  #     expect(response).to be_an_instance_of(String)
-  #   end
-  # end
-
-  # context "initialize the API" do
-
-  #   describe "initialize" do
-  #     it "creates an instance of the API" do
-  #       api_instance = ArtsyApiWrapper.new(client_id: client_id, client_secret: client_secret)
-
-  #       expect(api_instance).to be_an_instance_of(ArtsyApiWrapper)
-  #     end
-  #   end
-  # end
-
-  # context "API retrieval" do
-  #   it "retrieves json data for an artist" do
-  #     uri = URI("https://api.artsy.net/api/artists/andy-warhol")
-
-  #     response = JSON.load(Net::HTTP.get(uri))
-
-  #     expect(response["name"]).to eq("Andy Warhol")
-  #   end
-  # end
-
-  it "retrieves the thumbnail url", :vcr do
-    artist = double()
+      expect(ArtsyApiWrapper.get_artist_json_data(artist_name)).to include("updated_at")
+    end
   end
 
 end

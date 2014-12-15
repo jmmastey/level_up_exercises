@@ -3,34 +3,22 @@ require 'hyperclient'
 class ArtsyApiWrapper
   # attr_reader :api, :token
 
-  def initialize(client_id:, client_secret:)
-    @token = get_token(client_id, client_secret)
-    @api = request_api
+  def self.get_artist(artist_name)
+    @api_access = make_connection
+    get_artist_json_data(artist_name)
   end
 
-  # def request_api
-  #   Hyperclient.new('https://api.artsy.net/api') do |api|
-  #     api.headers['Accept'] = 'application/vnd.artsy-v2+json'
-  #     api.headers['X-Xapp-Token'] = @token
-  #   end
-  # end
-
-  # def get_artist(name:)
-  #   api.artist(id: name)
-  # end
-
-  def artist_url
-
-  end
-
-  private
-
-  def get_token(client_id, client_secret)
-    api = Hyperclient.new('https://api.artsy.net/api') do |api|
+  def self.make_connection
+    Hyperclient.new('https://api.artsy.net/api') do |api|
       api.headers['Accept'] = 'application/vnd.artsy-v2+json'
+      api.headers['X-Xapp-Token'] = Rails.application.secrets.artsy_key
     end
-    api.tokens.xapp_token._post(client_id: client_id, client_secret: client_secret).token
   end
+
+  def self.get_artist_json_data(name)
+    @api_access.artist(id: name)
+  end
+
 end
 
 # client_id = '094ac11b91081fbcd043'

@@ -1,9 +1,9 @@
-Given(/^a artist search parameter$/) do
- artist = "andy-warhol"
+Given(/^I request artist data from the API$/) do
+  ArtsyApiWrapper.get_artist("andy-warhol")
 end
 
-When(/^I request artist data from the API$/) do
-  RetrieveArtist.get_artist(artist)
+When(/^I visit the artists page$/) do
+  visit artists_path
 end
 
 Then(/^the new artist appears on the artists page$/) do

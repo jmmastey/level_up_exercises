@@ -63,5 +63,3 @@ class Sample
     puts "High Confidence Percent:  #{confidence[:high]}%"
   end
 end
-
-

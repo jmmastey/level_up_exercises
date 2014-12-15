@@ -7,16 +7,17 @@ class TripsController < ApplicationController
   def flights_search
     @trip = Trip.find(params[:trip_id])
     @optimizer = TripOptimizer.new(@trip.to_h)
-    @optimizer.pick_shortest_flights
   end
 
   def flights_save
+    @trip = Trip.find(params[:trip_id])
     # TODO: save the flights here. perhaps use flash? or session?
-    redirect_to show
+
+    # redirect_to @trip
   end
 
   def show
-    @trip = Trip.find(params[:trip_id])
+    @trip = Trip.find(params[:id])
   end
 
   private

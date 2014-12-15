@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :trips do
     get 'flights_search'
-    post 'show'
+    get 'show'
+    post 'flights_save'
   end
 end

@@ -22,21 +22,23 @@
 <div>
   <h2>Shortest flight options for your trip</h2>
 
-  <% flight = @optimizer.departure %>
+  <% flight = @optimizer.best_departure %>
   <h3>Departing flight to <%= flight.destination_airport.code %></h3>
+  <%= radio_button_tag(:departure, flight.destination_airport) %>
   <div>Departs <%= flight.origin_airport.code %></div>
   <div>at <%= flight.origin_date_time %></div>
   <div>Arrives <%= flight.destination_airport.code %></div>
   <div>at <%= flight.destination_date_time %></div>
 
-  <% flight = @optimizer.return %>
+  <% flight = @optimizer.best_return %>
   <h3>Returning flight to <%= flight.destination_airport.code %></h3>
+  <%= radio_button_tag(:return, "child") %>
   <div>Departs <%= flight.origin_airport.code %></div>
   <div>at <%= flight.origin_date_time %></div>
   <div>Arrives <%= flight.destination_airport.code %></div>
   <div>at <%= flight.destination_date_time %></div>
 
-  <%= form_tag({controller: "trips", action: "show" }, method: "POST") do %>
+  <%= form_tag({controller: "trips", action: "flights_save" }, method: "POST") do %>
     <div>
       <%= submit_tag("Go with these") %>
     </div>

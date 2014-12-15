@@ -11,6 +11,7 @@ Feature: Signing in
 			| testuser3@example.com | test4567 |
 		And I am on the login screen
 	
+		# include message in test; combine valid and bad
 	Scenario Outline: Valid logins
 		When I enter the email <email>
 		And I enter the password <password>

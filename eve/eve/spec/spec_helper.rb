@@ -1,4 +1,5 @@
 require "database_cleaner"
+require "rspec/rails"
 
 RSpec.configure do |config|
   config.before(:suite) do

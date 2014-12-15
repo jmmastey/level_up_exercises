@@ -1,21 +1,10 @@
 class RegionsController < ApplicationController
-  def index
-    @regions = regions
-
-    respond_to do |format|
-      format.html do
-        @regions = @regions.page(params[:page])
-        render haml: @regions
-      end
-      format.json do
-        render json: @regions
-      end
-    end
-  end
+  before_action :set_regions, only: :index
+  before_action :set_region, only: :show
+  before_action :search_regions, only: :search
+  respond_to :html, :xml, :json
 
   def search
-    @regions = search_regions
-
     respond_to do |format|
       format.html do
         @regions = @regions.page(params[:page])
@@ -30,7 +19,7 @@ class RegionsController < ApplicationController
   private
 
   def query
-    @query = (params[:query] || "").strip
+    @query ||= (params[:query] || "").strip
   end
 
   def regions
@@ -38,6 +27,14 @@ class RegionsController < ApplicationController
   end
 
   def search_regions
-    regions.where("UPPER(name) like ?", "%#{query.upcase}%")
+    @regions = regions.where("UPPER(name) like ?", "%#{query.upcase}%")
+  end
+
+  def set_regions
+    @regions = regions
+  end
+
+  def set_region
+    @region = regions.find(params[:id])
   end
 end

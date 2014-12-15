@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
-  def index
-    @items = items
+  before_action :set_items, only: :index
+  before_action :set_item, only: :show
 
+  def index
     respond_to do |format|
       format.html do
         @items = @items.page(params[:page])
@@ -9,6 +10,14 @@ class ItemsController < ApplicationController
       end
       format.json do
         render json: @items
+      end
+    end
+  end
+
+  def show
+    respond_to do |format|
+      format.json do
+        render :show, json: @item
       end
     end
   end
@@ -39,5 +48,13 @@ class ItemsController < ApplicationController
 
   def search_items
     items.where("UPPER(name) like ?", "%#{query.upcase}%")
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def set_items
+    @items = items
   end
 end

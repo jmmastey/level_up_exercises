@@ -7,6 +7,7 @@ Eve.SelectBoxes =
 			ajax:
 				url: "/items/search.json"
 				dataType: "json"
+				quietMillis: 1000,
 				data: (term, page) -> {
 					query: term
 					page: page
@@ -27,6 +28,7 @@ Eve.SelectBoxes =
 			ajax:
 				url: "/regions/search.json"
 				dataType: "json"
+				quietMillis: 1000,
 				data: (term, page) -> {
 					query: term
 					page: page
@@ -51,6 +53,7 @@ Eve.SelectBoxes =
 					query: term
 					page: page
 				}
+				quietMillis: 1000,
 				results: (data, page) -> {
 					results: data
 				}

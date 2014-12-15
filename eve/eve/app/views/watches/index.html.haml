@@ -1,6 +1,10 @@
 .page-header
   %h1 My Watches
 
+= link_to(new_watch_path, class: "btn btn-default") do
+  %span.glyphicon.glyphicon-plus
+  Add Watch
+
 - if @watches.empty?
   %p.alert.alert-info You have no watches.
 - else
@@ -9,16 +13,34 @@
       %tr
         %th Nickname
         %th Item
+        %th Location
+        %th.text-right # Orders
         %th.text-right Price (ISK)
-        %th
+        %th.text-right
     %tbody
       - @watches.each do |watch|
         %tr
           %td= link_to(watch.nickname, watch)
-          %td= watch.item.name
+          %td= link_to(watch.item.name, search_orders_path(item: watch.item))
+          %td
+            - if watch.region
+              %span.label.label-region Region
+              = watch.region.name
+            - elsif watch.station
+              %span.label.label-station Station
+              = watch.station.name
+            - else
+              %span.text-muted N/A
+          %td.text-right= watch.orders.count
           %td.text-right
-          %td= link_to('Delete', watch, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger')
-
-= link_to(new_watch_path, class: "btn btn-default") do
-  %span.glyphicon.glyphicon-plus
-  Add Watch
+            - if watch.average_price
+              watch.average_price
+            - elsif
+              %span.text-muted No data
+          %td.text-right
+            = link_to(watch_orders_path(watch), class: 'btn btn-info', title: "View orders") do
+              %span.glyphicon.glyphicon-search
+            = link_to(edit_watch_path(watch), class: 'btn btn-warning', title: "Edit" ) do
+              %span.glyphicon.glyphicon-edit
+            = link_to(watch_path(watch), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', title: "Delete" ) do
+              %span.glyphicon.glyphicon-remove

@@ -5,10 +5,10 @@ class StationsController < ApplicationController
     respond_to do |format|
       format.html do
         @stations = @stations.page(params[:page])
-        render haml: @regions
+        render haml: @stations
       end
       format.json do
-        render json: @regions
+        render json: @stations
       end
     end
   end
@@ -19,10 +19,10 @@ class StationsController < ApplicationController
     respond_to do |format|
       format.html do
         @stations = @stations.page(params[:page])
-        render :index, haml: @regions
+        render :index, haml: @stations
       end
       format.json do
-        render :index, json: @regions
+        render :index, json: @stations
       end
     end
   end

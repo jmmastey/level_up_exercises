@@ -1,7 +1,7 @@
 = form_for(@watch, html: { role: :form } ) do |f|
   - if @watch.errors.any?
-    .alert.alert-error
-      %h4= "#{pluralize(@watch.errors.count, "error")} prohibited this watch from being saved:"
+    .alert.alert-danger
+      %h4 Cannot save watch:
       %ul
         - @watch.errors.full_messages.each do |msg|
           %li= msg

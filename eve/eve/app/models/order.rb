@@ -27,4 +27,8 @@ class Order < ActiveRecord::Base
   def self.last_queried_on(item)
     by_item(item).maximum(:date_pulled)
   end
+
+  def self.update_from_api
+    raise NotImplementedError
+  end
 end

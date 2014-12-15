@@ -8,4 +8,4 @@ Feature: villain creates bomb
 		Given I'm on the homepage
 		And there is no bomb created yet
 		When I create a bomb
-		Then I should see "Bomb Created"
+		Then I should see "Bomb Status: Inactive"

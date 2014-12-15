@@ -2,6 +2,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     rack (1.5.2)
+    rack-flash (0.1.2)
+      rack
     rack-protection (1.5.3)
       rack
     sinatra (1.4.5)
@@ -14,4 +16,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rack-flash
   sinatra

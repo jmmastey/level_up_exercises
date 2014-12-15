@@ -1,29 +1,22 @@
 Feature: villain tries to deactivate an activated bomb
-	
- 	As a villain
- 	I want to be able to deactivate a bomb
- 	So that I can avoid blowing up at the wrong time
+  
+  As a villain
+  I want to be able to deactivate a bomb
+  So that I can avoid blowing up at the wrong time
 
- 	Background:
- 		Given a bomb has been activated
+  Background:
+    Given a bomb has been activated
 
- 	Scenario: Deactivate Bomb
- 		Given a bomb is activated
- 		When I deactivate the bomb
- 		Then I should see "Bomb deactivated"
- 		And I should see a field to re-activate the bomb
+  Scenario: Deactivate Bomb
+    When I deactivate the bomb
+    Then I should see "Bomb has been deactivated"
+    And I should be able to reactivate the bomb
 
-	Scenario: Villain tries to deactivate a bomb 3 times incorrectly
-		Given a bomb is activated
-		When I try to deactivate the bomb
-		And I try 3 times incorrectly
-		Then the bomb should explode
+  Scenario: Villain tries to deactivate a bomb incorrectly
+    When I try to deactivate the bomb incorrectly
+    Then I should be warned that my activation code is incorrect
+    And I should be warned the number of incorrect attempts
 
-# Feature: villain reactivates a deactivated bomb
-# 	As a villain, I want to be able to reactivate a bomb 
-# 	after I have deactivated it, in case I have change my mind
-
-# 	Scenario: Villain re-activates a bomb
-# 		Given a deactivated bomb
-# 		When I re-activate it
-# 		Then the bomb should be active
+  Scenario: Villain tries to deactivate a bomb 3 times incorrectly
+    When I try to deactivate the bomb 3 times incorrectly
+    Then the bomb should explode

@@ -1,4 +1,13 @@
-<h1 id="bomb_status">Bomb Status: Inactive</h1>
+<%= erb :_status, locals: {bomb: @bomb} %>
+
+<% if @activate_errors %>
+	<p><%= @activate_errors %></p>
+<% end %>
+
+<% if @deactived_status %>
+	<p><%= @deactived_status %></p>
+<% end %>
+
 
 <h2>Would you like to activate it?</h2>
 
@@ -7,4 +16,4 @@
         <input type="text" name="activation_code" id="activation_code" />
     </label>
     <input type="submit" value="Activate!">
-</form>
+</form> 

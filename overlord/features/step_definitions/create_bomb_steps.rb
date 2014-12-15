@@ -1,5 +1,5 @@
 Given(/^I'm on the homepage$/) do
-  visit('bomb/new')
+  visit('/')
 end
 
 Given(/^there is no bomb created yet$/) do

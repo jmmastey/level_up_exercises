@@ -5,10 +5,6 @@ RSpec.describe Flight, type: :model do
     FactoryGirl.create(:flight, field => nil)
   end
 
-  it "has a valid factory" do
-    expect(FactoryGirl.create(:flight)).to be_valid
-  end
-
   it "requires destination airport" do
     expect { create_with_nil(:destination_airport) }.to raise_error
   end
@@ -23,6 +19,14 @@ RSpec.describe Flight, type: :model do
 
   it "requires origin time" do
     expect { create_with_nil(:origin_date_time) }.to raise_error
+  end
+
+  it "requires carrier code" do
+    expect { create_with_nil(:carrier) }.to raise_error
+  end
+
+  it "requires flight number" do
+    expect { create_with_nil(:flight_number) }.to raise_error
   end
 
 end

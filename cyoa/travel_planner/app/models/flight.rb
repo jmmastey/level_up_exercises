@@ -7,5 +7,7 @@ class Flight < ActiveRecord::Base
   validates_presence_of :destination_airport,
     :destination_date_time,
     :origin_airport,
-    :origin_date_time
+    :origin_date_time,
+    :flight_number,
+    :carrier
 end

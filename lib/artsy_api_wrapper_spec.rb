@@ -17,4 +17,12 @@ RSpec.describe ArtsyApiWrapper do
       expect(ArtsyApiWrapper.get_artist_json_data(artist_name)).to include("updated_at")
     end
   end
+
+  describe ".get_artist" do
+    it "returns a hash of artist parameters when provided a JSON file" do
+      allow(ArtsyApiWrapper).to receive(:get_artist_json_data).and_return(json_data_for_artist)
+
+      expect(ArtsyApiWrapper.get_artist(artist_name)["name"]).to eq("Andy Warhol")
+    end
+  end
 end

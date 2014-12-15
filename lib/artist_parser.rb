@@ -1,8 +1,5 @@
-require 'json'
-
 module ArtistParser
-
-  def self.parse(file)
-    artist_hash = JSON.parse(file)
+  def self.parse(data)
+    ActiveSupport::JSON.decode(data.to_s)
   end
 end

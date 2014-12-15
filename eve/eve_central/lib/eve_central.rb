@@ -6,7 +6,6 @@ require "eve_central/marketstat_item"
 require "eve_central/marketstat_order_group"
 require "eve_central/quicklook"
 require "eve_central/quicklook_item"
-require "eve_central/station"
 
 module EveCentral
 end

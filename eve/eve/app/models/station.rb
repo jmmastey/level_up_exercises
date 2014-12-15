@@ -7,4 +7,9 @@ class Station < ActiveRecord::Base
                             greater_than_or_equal_to: 0
 
   scope :with_in_game_id, ->(in_game_id) { where(in_game_id: in_game_id) }
+
+  def self.create_unknown(in_game_id)
+    create(in_game_id: in_game_id,
+           name: "Unknown Station")
+  end
 end

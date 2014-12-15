@@ -14,6 +14,7 @@ module EveCentral
     end
 
     def get_node_datetime(parent, xpath, options = {})
+      DateTime.parse(get_node_content(parent, xpath))
     end
 
     def get_node_float(parent, xpath)

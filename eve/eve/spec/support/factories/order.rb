@@ -6,7 +6,7 @@ FactoryGirl.define do
 
     security 0.8
     price 1.50
-    type "sell"
+    order_type "sell"
     date_pulled Date.new(2014, 11, 1)
 
     sequence(:in_game_id, 1)

@@ -61,13 +61,13 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  describe "#type" do
+  describe "#order_type" do
     it "must be 'buy' or 'sell'" do
-      order.type = "sell"
+      order.order_type = "sell"
       expect(order).to be_valid
-      order.type = "buy"
+      order.order_type = "buy"
       expect(order).to be_valid
-      order.type = "free"
+      order.order_type = "free"
       expect(order).not_to be_valid
     end
   end

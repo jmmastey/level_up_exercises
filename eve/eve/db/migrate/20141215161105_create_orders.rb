@@ -4,8 +4,8 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :in_game_id
       t.decimal :security
       t.decimal :price
-      t.string :type
-      t.datetime :expires
+      t.string :order_type
+      t.date :expires
       t.date :date_pulled
       t.belongs_to :region
       t.belongs_to :station
@@ -17,6 +17,6 @@ class CreateOrders < ActiveRecord::Migration
     add_index(:orders, :item_id)
     add_index(:orders, :in_game_id, unique: true)
     add_index(:orders, [:region_id, :station_id])
-    add_index(:orders, :type)
+    add_index(:orders, :order_type)
   end
 end

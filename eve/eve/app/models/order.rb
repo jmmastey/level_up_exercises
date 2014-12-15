@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   scope :by_region, ->(region) { where(region: region) unless region.blank? }
   scope :by_station, ->(station) { where(station: station) unless station.blank? }
 
-  validates_inclusion_of :type,
+  validates_inclusion_of :order_type,
                          in: %w(buy sell),
                          message: "%{value} is not a valid order type"
 
@@ -28,7 +28,14 @@ class Order < ActiveRecord::Base
     by_item(item).maximum(:date_pulled)
   end
 
-  def self.update_from_api
-    raise NotImplementedError
+  def self.update_from_api(item, force_update = false)
+    OrderUpdater.update(item) if force_update || needs_update?(item)
+  end
+
+  private
+
+  def needs_update?(item)
+    last_queried = last_queried_on(item)
+    !last_queried || last_queried < (Time.now.utc - (3600 * 24))
   end
 end

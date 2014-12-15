@@ -20,3 +20,6 @@
 
 # Ignore swap files
 *.swp
+
+# Ignore VCR cassettes
+/spec/cassettes/**/*

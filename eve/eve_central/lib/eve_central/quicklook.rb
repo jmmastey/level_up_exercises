@@ -1,7 +1,7 @@
 require "net/http"
 require "nokogiri"
-require "pry"
 require_relative "errors"
+require_relative "order"
 require_relative "xml_helpers"
 
 module EveCentral
@@ -39,14 +39,15 @@ module EveCentral
 
     def convert_order(order_node)
       Order.new({
+        expires: get_node_date(order_node, "expires"),
         id: order_node["id"].to_i,
-        region: get_node_int(order_node, "region"),
-        station: convert_station(order_node),
-        security: get_node_float(order_node, "security"),
-        price: get_node_float(order_node, "price"),
-        volume_remaining: get_node_int(order_node, "vol_remain"),
         min_volume: get_node_int(order_node, "min_volume"),
-        expires: get_node_date(order_node, "expires")
+        price: get_node_float(order_node, "price"),
+        region_id: get_node_int(order_node, "region"),
+        security: get_node_float(order_node, "security"),
+        station_id: get_node_int(order_node, "station"),
+        station_name: get_node_content(order_node, "station_name"),
+        volume_remaining: get_node_int(order_node, "vol_remain")
       })
     end
 
@@ -71,11 +72,6 @@ module EveCentral
       response_body = Nokogiri::XML(response.body)
       ql_node = response_body.xpath("/evec_api/quicklook")
       convert_quicklook_item(ql_node)
-    end
-
-    def convert_station(order_node)
-      Station.new(get_node_int(order_node, "station"),
-                  get_node_content(order_node, "station_name"))
     end
 
     def create_params(item_id, options)

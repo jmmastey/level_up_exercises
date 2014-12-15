@@ -6,11 +6,11 @@ module EveCentral
     include ActiveModel::Conversion
     extend ActiveModel::Naming
 
-    attr_accessor :id, :region_id, :station, :security, :price,
-      :volume_remaining, :min_volume, :expires
+    attr_accessor :id, :region_id, :station_id, :station_name, :security,
+      :price, :volume_remaining, :min_volume, :expires
 
     validates_presence_of :id
-    validates_numericality_of :id, :region_id, :volume_remaining, :min_volume, only_integer: true, greater_than_or_equal_to: 0, allow_nil: true
+    validates_numericality_of :id, :region_id, :station_id, :volume_remaining, :min_volume, only_integer: true, greater_than_or_equal_to: 0, allow_nil: true
     validates_numericality_of :price, greater_than_or_equal_to: 0, allow_nil: true
     validates_numericality_of :security, allow_nil: true, greater_than_or_equal_to: -1.0, less_than_or_equal_to: 1.0
 
@@ -21,7 +21,8 @@ module EveCentral
       @price = order_data[:price]
       @region_id = order_data[:region_id]
       @security = order_data[:security]
-      @station = order_data[:station]
+      @station_id = order_data[:station_id]
+      @station_name = order_data[:station_name]
       @volume_remaining = order_data[:volume_remaining]
     end
 

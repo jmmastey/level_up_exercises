@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141204163900) do
+ActiveRecord::Schema.define(version: 20141215161105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20141204163900) do
     t.integer  "in_game_id"
     t.decimal  "security"
     t.decimal  "price"
-    t.string   "type"
-    t.datetime "expires"
+    t.string   "order_type"
+    t.date     "expires"
     t.date     "date_pulled"
     t.integer  "region_id"
     t.integer  "station_id"
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 20141204163900) do
 
   add_index "orders", ["in_game_id"], name: "index_orders_on_in_game_id", unique: true, using: :btree
   add_index "orders", ["item_id"], name: "index_orders_on_item_id", using: :btree
+  add_index "orders", ["order_type"], name: "index_orders_on_order_type", using: :btree
   add_index "orders", ["region_id", "station_id"], name: "index_orders_on_region_id_and_station_id", using: :btree
-  add_index "orders", ["type"], name: "index_orders_on_type", using: :btree
 
   create_table "regions", force: true do |t|
     t.integer  "in_game_id"

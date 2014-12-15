@@ -1,6 +1,9 @@
 class Users::SessionsController < Devise::SessionsController
   layout 'login'
-# before_filter :configure_sign_in_params, only: [:create]
+ #before_filter :configure_sign_in_params, only: [:create]
+ before_filter do
+   puts params.map { |k,v| "#{k}=#{v}" }.join("<br/>")
+  end
 
   # GET /resource/sign_in
   #def new

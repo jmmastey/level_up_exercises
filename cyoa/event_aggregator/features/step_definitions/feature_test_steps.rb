@@ -6,7 +6,7 @@ Then /^I see a heading for "(.*)"/ do |heading_text|
   expect(has_major_heading(heading_text)).to be_truthy
 end
 
-Then /^I see a (?:(.*): )?link to "?(.*)"?$/ do |link_type, target|
+Then /^I see a (?:(.*): )?link (?:for|to) "?(.*)"?$/ do |link_type, target|
   selector = "a[href*=\"#{url_by_nickname(target)}\"]"
   selector = selector + "[href^=\"#{link_type}\"]" if link_type
   expect(has_css?(selector)).to be_truthy
@@ -22,21 +22,7 @@ end
 
 Then /^I see a menu link (?:for|to) "(.*)"$/ do |menu_link|
   selector = "li.menu a[href*=\"#{url_by_nickname(menu_link)}\"]"
-  puts "SELECTOR: #{selector}"
   expect(has_css?(selector)).to be_truthy
-end
-
-Given /^I (fail to )?authenticate/ do |fail_auth|
-  visit("/")
-  #puts "PAGE #{page.source}"
-  fill_in('user[email]', with: AUTH_USERNAME)
-  fill_in('user[password]', with: fail_auth ? AUTH_FAIL_PASSWORD : AUTH_PASSWORD)
-  click_button('Log in')
-end
-
-Given /^I am an (un(?:authenticated)) user visiting the "(.*)" page$/ do |authstate, page|
-  step "I authenticate" if authstate == "authenticated"
-  step "I am visiting the \"#{page}\" page"
 end
 
 Then /^I see a feed highlight for "(.*)"$/ do |feed_name|
@@ -53,4 +39,8 @@ end
 
 Then /FIXME/ do
   raise "FIXME NOT DONE FIXME NOT DONE FIXME"
+end
+
+Then /^I see the "(.*)" page$/ do |page_name|
+  expect(current_url).to match(/#{url_by_nickname(page_name)}/)
 end

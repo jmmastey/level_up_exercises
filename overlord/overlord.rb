@@ -22,4 +22,9 @@ class Overlord < Sinatra::Base
     session[:status] = "Inactive"
     redirect '/'
   end
+
+  post "/newsession" do
+    session.clear
+    redirect '/'
+  end
 end

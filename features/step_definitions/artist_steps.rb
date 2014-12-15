@@ -102,4 +102,3 @@ Then(/^I should see a thumbnail image$/) do
   url = "http://static1.artsy.net/artist_images/52f6bdda4a04f5d504f69b03/1/four_thirds.jpg"
   expect(page).to have_selector("img[src='#{url}']")
 end
-

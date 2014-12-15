@@ -3,6 +3,8 @@ class FlightMapper
     Hash.new.tap do |flight|
       lookup_airports(flight, flightstats)
       set_times(flight, flightstats)
+      flight["carrier"] = flightstats["carrierFsCode"]
+      flight["flight_number"] = flightstats["flightNumber"]
     end
   end
 

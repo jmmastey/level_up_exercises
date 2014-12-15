@@ -59,9 +59,7 @@ class DinosaurImport
 
   def self.autoconvert_keys_values
     {'diet' => {'Yes' => 'Carnivore',
-                'No' => nil},
-    'period' => {'Early Cretaceous' => 'Cretaceous',
-                'Late Cretaceous' => 'Cretaceous'} }
+                'No' => nil} }
   end
 
 end

@@ -8,8 +8,8 @@ class DataScience
   values = {}
   @confidence_a = Sample.calculate_values(group_a, :agroup, values)
   @confidence_b = Sample.calculate_values(group_b, :bgroup, values)
-  print(values[:agroup], @confidence_a, "Group A")
+  Sample.print(values[:agroup], @confidence_a, "Group A")
   puts
-  print(values[:bgroup], @confidence_b, "Group B")
+  Sample.print(values[:bgroup], @confidence_b, "Group B")
   Sample.determine_leader(values, [@confidence_a[:high], @confidence_b[:high]])
 end

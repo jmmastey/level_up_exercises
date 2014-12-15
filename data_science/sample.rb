@@ -52,14 +52,16 @@ class Sample
     Sample.find_chi(values)
     puts "Larger of the Two is:     #{confidence_array.max}%"
   end
+
+  def self.print(range, confidence, name)
+    puts "Name:                     #{name} "
+    puts "Conversions:              #{range[:num_convs]}"
+    puts "Sample Size:              #{range[:vistors]}"
+    percent = Sample.calc_percent(range[:num_convs], range[:vistors])
+    puts "Percent:                  #{percent}%"
+    puts "Low  Confidence Percent:  #{confidence[:low]}%"
+    puts "High Confidence Percent:  #{confidence[:high]}%"
+  end
 end
 
-def print(range, confidence, name)
-  puts "Name:                     #{name} "
-  puts "Conversions:              #{range[:num_convs]}"
-  puts "Sample Size:              #{range[:vistors]}"
-  percent = Sample.calc_percent(range[:num_convs], range[:vistors])
-  puts "Percent:                  #{percent}%"
-  puts "Low  Confidence Percent:  #{confidence[:low]}%"
-  puts "High Confidence Percent:  #{confidence[:high]}%"
-end
+

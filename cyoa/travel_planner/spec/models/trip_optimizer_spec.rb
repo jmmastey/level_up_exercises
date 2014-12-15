@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../app/models/trip_optimizer'
 
-describe 'TripOptimizer', vcr: { record: :new_episodes } do
+describe 'TripOptimizer', vcr: { record: :once } do
 
   def expect_best_match(picked_flight, best_flight)
     expect(best_flight).to be
@@ -10,8 +10,8 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
 
   context 'Shortest Trip' do
     before(:context) do
-      # @meeting_start = Faker::Time.forward(10, :morning).to_datetime
       @meeting_start = "2014-12-15 13:00:09 UTC".to_datetime
+      @now = "2014-12-10 13:00:09 UTC".to_datetime
     end
 
     let(:ord) { FactoryGirl.create(:ord) }
@@ -30,7 +30,9 @@ describe 'TripOptimizer', vcr: { record: :new_episodes } do
     end
 
     subject(:optimizer) do
-      TripOptimizer.new(trip.to_h)
+      test_trip_h = trip.to_h
+      test_trip_h[:now] = @now
+      TripOptimizer.new(test_trip_h)
     end
 
     it 'given travel details, pick two flights' do

@@ -10,56 +10,50 @@ describe 'FlightStats Schedules API' do
   let(:destination) { "LGA" }
   let(:destination_offset) { "-0500" }
 
-  let(:meeting_day) do
-    date = 10.days.from_now
-    DateTime.new(date.year, date.month, date.day)
-  end
-
+  let(:meeting_day) { DateTime.new(2014, 12, 25) }
   let(:early_start) { meeting_day + 4.hours }
   let(:meeting_start) { meeting_day + 10.hours }
   let(:meeting_end) { meeting_day + 12.hours }
-  let(:past_date) { -10.days.from_now }
-  let(:tomorrow_morning) do
-    date = 1.days.from_now
-    date = DateTime.new(date.year, date.month, date.day)
-    date + 1.hours
-  end
 
-  let(:dynamic_meeting_start) { Faker::Time.forward(10, :morning).to_datetime  }
-
-  context 'api call gets flights (api call daily)' do
+  context 'api call gets flights', vcr: { record: :new_episodes } do
     subject(:flights) do
-      VCR.use_cassette("schedule/api_call_gets_flights",
-        record: :new_episodes) do
-        api.get_flights_arriving_before(
-          dynamic_meeting_start,
-          origin,
-          destination)
-      end
+      api.get_flights_arriving_before(
+        dynamic_meeting_start,
+        origin,
+        destination)
     end
 
+    let(:tomorrow_morning) do
+      date = 1.days.from_now
+      date = DateTime.new(date.year, date.month, date.day)
+      date + 1.hours
+    end
+
+    let(:dynamic_meeting_start) do
+      Faker::Time.between(5.days.from_now, 10.days.from_now, :morning)
+    end
+
+    let(:past_date) { -10.days.from_now }
+
     it 'throws an error when a past date is requested for arriving before' do
-      expect{ api.get_flights_arriving_before(
+      expect { api.get_flights_arriving_before(
         past_date,
         origin,
         destination) }.to raise_error(ArgumentError)
     end
 
     it 'throws an error when a past date is requested for departing after' do
-      expect{ api.get_flights_departing_after(
+      expect { api.get_flights_departing_after(
         past_date,
         origin,
         destination) }.to raise_error(ArgumentError)
     end
 
     it 'throws an error when tomorrows flight is not early enough, and has to search today' do
-      VCR.use_cassette("schedule/api_call_gets_flights",
-                       record: :new_episodes) do
-      expect{ api.get_flights_arriving_before(
+      expect { api.get_flights_arriving_before(
         tomorrow_morning,
         origin,
         destination) }.to raise_error(ArgumentError)
-      end
     end
 
     it 'api response should not be empty' do
@@ -74,17 +68,13 @@ describe 'FlightStats Schedules API' do
     end
   end
 
-  context 'before meeting (pre-recorded API)' do
+  context 'before meeting', vcr: { record: :once } do
     subject(:flights) do
-      VCR.use_cassette("schedule/get_flights_arriving_before", record: :new_episodes) do
-        api.get_flights_arriving_before(meeting_start, origin, destination)
-      end
+      api.get_flights_arriving_before(meeting_start, origin, destination)
     end
 
     let(:early_flights) do
-      VCR.use_cassette("schedule/get_flights_arriving_before_early", record: :new_episodes) do
-        api.get_flights_arriving_before(early_start, origin, destination)
-      end
+      api.get_flights_arriving_before(early_start, origin, destination)
     end
 
     it 'flights exist' do
@@ -116,11 +106,9 @@ describe 'FlightStats Schedules API' do
     end
   end
 
-  context 'after meeting (pre-recorded API)' do
+  context 'after meeting', vcr: { record: :once } do
     subject(:flights) do
-      VCR.use_cassette("schedule/get_flights_departing_after", record: :new_episodes) do
-        api.get_flights_departing_after(meeting_end, destination, origin)
-      end
+      api.get_flights_departing_after(meeting_end, destination, origin)
     end
 
     it 'flights exist' do

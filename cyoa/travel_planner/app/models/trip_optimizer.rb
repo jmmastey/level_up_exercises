@@ -15,14 +15,14 @@ class TripOptimizer
 
   def departures
     @departures ||= begin
-      flightstats = @schedule.get_flights_arriving_before(meeting_start, from, to)
+      flightstats = @schedule.get_flights_arriving_before(meeting_start, @from, @to, @now)
       map_flightstats_to_flights(flightstats)
     end
   end
 
   def returns
     @returns ||= begin
-      flightstats = @schedule.get_flights_departing_after(meeting_end, @from, @to)
+      flightstats = @schedule.get_flights_departing_after(meeting_end, @from, @to, @now)
       map_flightstats_to_flights(flightstats)
     end
   end
@@ -48,6 +48,7 @@ class TripOptimizer
     @to             = options[:to]
     @meeting_start  = options[:meeting_start]
     @meeting_length = options[:meeting_length]
+    @now            = options[:now] || DateTime.now
   end
 
   def map_flightstats_to_flights(flightstats)

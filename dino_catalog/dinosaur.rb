@@ -4,18 +4,19 @@ class Dinosaur
   attr_accessor :name, :period, :continent, :diet, :walking, :description
 
   def initialize(options)
-    options.each{|key, value| send("#{key}=",value)}
+    options.each{ |key, value| send("#{key} = ", value) }
   end
 
   def weight_in_lbs=(weight_in_lbs)
-    @weight_in_lbs=weight_in_lbs.to_i
+    @weight_in_lbs = weight_in_lbs.to_i
   end
+
   def weight_in_lbs
     @weight_in_lbs
   end
 
-  def is_carnivore
-    @is_carnivore = carnivores.include?(@diet) ? true : false
+  def carnivore?
+    @carnivore = carnivores.include?(@diet) ? true : false
   end
 
   def period_type
@@ -23,25 +24,25 @@ class Dinosaur
   end
 
   def print_dinosaur_info
-    self.instance_variables.each do |attr_name|
-      attr_value = self.instance_variable_get attr_name
+    instance_variables.each do |attr_name|
+      attr_value = instance_variable_get attr_name
       unless attr_value.nil?
-        puts "#{attr_name.to_s.sub('@','').titleize}: #{attr_value}"
+        puts "#{attr_name.to_s.sub('@', '').titleize}: #{attr_value}"
       end
     end
   end
 
   private
+
     def carnivores
-      ["Carnivore","Insectivore","Piscivore"]
+      ["Carnivore", "Insectivore", "Piscivore"]
     end
 
     def period_period_types
       { "Early Cretaceous" => "Cretaceous",
-      "Late Cretaceous" => "Cretaceous",
-      "Cretaceous" => "Cretaceous",
-      "Jurassic" => "Jurassic",
-      "Oxfordian" => "Oxfordian"}
+        "Late Cretaceous" => "Cretaceous",
+        "Cretaceous" => "Cretaceous",
+        "Jurassic" => "Jurassic",
+        "Oxfordian" => "Oxfordian"}
     end
-
 end

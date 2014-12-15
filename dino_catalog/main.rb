@@ -14,10 +14,10 @@ class Main
   options = { "==" => {walking: 'Biped'}}
   puts 'BIPEDS:'
   dino_info.filter_dinosaurs(options)
-  dino_info.dinosaurs_filtered.each { |dinosaur| puts "#{dinosaur.inspect}, @is_carnivore=#{dinosaur.is_carnivore}" }
+  dino_info.dinosaurs_filtered.each { |dinosaur| puts "#{dinosaur.inspect}, @is_carnivore=#{dinosaur.carnivore?}" }
 
 # All Carnivores, Insectivores, Piscivore'
-  dino_info.filter_dinosaurs( { "==" => {is_carnivore: true}} )
+  dino_info.filter_dinosaurs( { "==" => {carnivore?: true}} )
   puts 'CARNIVORES'
   dino_info.dinosaurs_filtered.each { |dinosaur| puts "#{dinosaur.inspect}" }
 

@@ -19,11 +19,12 @@ class DinosaurImport
         dinosaur = {}
         row.to_hash.each_pair do |key,value|
           key_converted = DinosaurImport::convert_import_keys(key)
-          value_converted = DinosaurImport::convert_import_values(key_converted, value)
+          value_converted =
+              DinosaurImport::convert_import_values(key_converted, value)
           dinosaur.merge!({key_converted => value_converted})
         end
         dinosaurs << Dinosaur.new(dinosaur)
-        end
+      end
     end
     @dinosaurs = dinosaurs
   end
@@ -41,7 +42,7 @@ class DinosaurImport
     if self.autoconvert_keys_values.has_key?(key_converted)
       value_convert_hash = self.autoconvert_keys_values[key_converted]
       if value_convert_hash.has_key?(value)
-        value_converted = value_convert_hash[value]
+        value_convert_hash[value]
       else
         value
       end

@@ -1,0 +1,15 @@
+%html
+  %head
+    %title Tick-Tock Tick-Tock
+    %link{rel: "Stylesheet", href: "http://yui.yahooapis.com/pure/0.5.0/pure-min.css"}
+  %body
+    %center
+      %h1 Boot up your BOMB
+      %form{ action: "/bomb", method: "post", class: "pure-form pure-form-stacked"}
+        %fieldset
+        %p #{session[:comment_text]}
+        %label{for: "activation"} Activation Code:
+        %input{type: "text", name: "set_activation_code", id: "set_activation_code"}
+        %label{for: "deactivation"} De-activation Code:
+        %input{type: "text", name: "set_deactivation_code", id: "set_deactivation_code"}
+        %input{type: "submit", value: "Confirm", id: "Confirm_boot_id", class: "pure-button pure-button-primary"}

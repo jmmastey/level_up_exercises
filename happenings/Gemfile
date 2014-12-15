@@ -10,13 +10,14 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bootstrap-sass'
+gem 'httparty'
+
 gem 'devise'
-gem 'rspec'
-gem 'icalendar'
-gem 'whenever'
 gem 'nokogiri'
 gem 'chronic'
-gem "simple_calendar", "~> 1.1.0"
+
+gem 'icalendar'
+# gem "simple_calendar", "~> 1.1.0"
 
 group :development do
   gem 'better_errors'
@@ -26,6 +27,7 @@ end
 
 group :development, :test do
   gem 'pry'
+  gem 'pry-debugger'
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails', '~> 3.0.0'

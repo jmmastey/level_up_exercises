@@ -21,7 +21,7 @@ describe "Legislators API", type: :request do
 
   describe "has a functional legislator list page" do
     before :all do
-      get "/legislators.json"
+      get "/legislators.json?sort_by=created_at%20DESC"
     end
 
     it "which loads properly" do

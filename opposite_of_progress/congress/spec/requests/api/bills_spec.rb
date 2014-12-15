@@ -21,7 +21,7 @@ describe "Bills API", type: :request do
 
   describe "has a functional bill list page" do
     before :all do
-      get "/bills.json"
+      get "/bills.json?sort_by=created_at%20DESC"
     end
 
     it "retrieves the bill list page" do

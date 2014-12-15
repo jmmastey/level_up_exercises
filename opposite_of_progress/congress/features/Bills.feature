@@ -9,7 +9,7 @@ Feature: Viewing the Bill list
   @happy
   Scenario:
     When I follow "All Bills"
-    Then I should see "All Bills" within "h3"
+    Then I should see a title for "All Bills"
 
   @bad
   Scenario:

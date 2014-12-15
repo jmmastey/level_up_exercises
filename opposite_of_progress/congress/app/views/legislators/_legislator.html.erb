@@ -4,6 +4,6 @@
     <%= raw "#{link_to legislator.full_name, legislator}" if legislator %>
     <%= "#{deed.bioguide_id}" unless legislator %>
   </h5>
-  <p><em><%= "#{legislator.chamber.titleize} #{legislator.full_party} from #{legislator.state}" %></em></p>
+  <p><em><%= "#{legislator.chamber.titleize if legislator.chamber} #{legislator.full_party} from #{legislator.state}" %></em></p>
   <p class="supporting-date">Term Started: <%= ApplicationHelper.date_display(legislator.term_start) %></p>
 </div>

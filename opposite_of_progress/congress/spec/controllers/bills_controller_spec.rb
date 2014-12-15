@@ -9,7 +9,7 @@ describe BillsController, type: :controller do
 
   describe "GET #index" do
     before :each do
-      get :index
+      get :index, sort_by: "created_at DESC"
     end
 
     it "renders the :index view" do

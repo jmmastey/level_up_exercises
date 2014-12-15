@@ -71,6 +71,8 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.2)
+    figgy (1.1.0)
+      json
     hike (1.2.3)
     httparty (0.13.3)
       json (~> 1.8)
@@ -199,6 +201,7 @@ DEPENDENCIES
   chronic
   coffee-rails (~> 4.0.0)
   devise
+  figgy
   httparty
   icalendar
   jbuilder (~> 2.0)

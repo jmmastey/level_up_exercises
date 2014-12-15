@@ -1,6 +1,7 @@
 ActiveRecord::Schema.define do
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
+    t.string   "name"
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -12,7 +13,6 @@ ActiveRecord::Schema.define do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
   end
 
   create_table "events", force: true do |t|

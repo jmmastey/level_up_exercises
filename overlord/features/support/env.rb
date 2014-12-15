@@ -7,6 +7,8 @@ require File.join(File.dirname(__FILE__), '..', '..', 'overlord.rb')
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
+require 'capybara/poltergeist'
+
 
 Capybara.app = Overlord
 
@@ -19,3 +21,5 @@ end
 World do
   OverlordWorld.new
 end
+
+Capybara.javascript_driver = :poltergeist

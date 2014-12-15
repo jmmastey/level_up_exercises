@@ -4,8 +4,13 @@ class ArtsyApiWrapper
   # attr_reader :api, :token
 
   def self.get_artist(artist_name)
-    @api_access = make_connection
-    get_artist_json_data(artist_name)
+    api_access
+    json_data = get_artist_json_data(artist_name)
+    Artist_Parser.parse(json_data)
+  end
+
+  def self.api_access
+    make_connection
   end
 
   def self.make_connection
@@ -16,9 +21,8 @@ class ArtsyApiWrapper
   end
 
   def self.get_artist_json_data(name)
-    @api_access.artist(id: name)
+    api_access.artist(id: name)
   end
-
 end
 
 # client_id = '094ac11b91081fbcd043'

@@ -29,7 +29,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.update_from_api(item, force_update = false)
-    OrderUpdater.update(item) if force_update || needs_update?(item)
+    ApiOrder.update(item) if force_update || needs_update?
   end
 
   private

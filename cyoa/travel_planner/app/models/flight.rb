@@ -10,4 +10,8 @@ class Flight < ActiveRecord::Base
     :origin_date_time,
     :flight_number,
     :carrier
+
+  def key
+    "#{carrier}#{flight_number}"
+  end
 end

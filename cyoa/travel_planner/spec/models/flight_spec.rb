@@ -29,4 +29,9 @@ RSpec.describe Flight, type: :model do
     expect { create_with_nil(:flight_number) }.to raise_error
   end
 
+  it "key is made of carrier+flight" do
+    flight = FactoryGirl.create(:flight, carrier: "AA", flight_number: "123")
+    expect(flight.key).to eql("AA123")
+  end
+
 end

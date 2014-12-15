@@ -2,47 +2,26 @@
 
 <div>
   <h2>Trip Requirements</h2>
-  <% location = @trip.home_location %>
-  <div>Home location: <%= location.address1 %>,
-    <%= location.city %>,
-    <%= location.state %>
-    <%= location.postal_code %></div>
 
-  <% @trip.meetings.each do |meeting| %>
-    <% location = meeting.location %>
-    <div>Meeting location: <%= location.address1 %>,
-      <%= location.city %>,
-      <%= location.state %>
-      <%= location.postal_code %></div>
-    <div>Meeting time: <%= meeting.start %></div>
-    <div>Meeting length: <%= meeting.length %> hours</div>
-  <% end %>
+  <%= render @trip %>
+
 </div>
+
+<%= form_tag({controller: "trips", action: "flights_save" }, method: "POST") do %>
 
 <div>
   <h2>Shortest flight options for your trip</h2>
 
   <% flight = @optimizer.best_departure %>
   <h3>Departing flight to <%= flight.destination_airport.code %></h3>
-  <%= radio_button_tag(:departure, flight.destination_airport) %>
-  <div>Departs <%= flight.origin_airport.code %></div>
-  <div>at <%= flight.origin_date_time %></div>
-  <div>Arrives <%= flight.destination_airport.code %></div>
-  <div>at <%= flight.destination_date_time %></div>
 
-  <% flight = @optimizer.best_return %>
-  <h3>Returning flight to <%= flight.destination_airport.code %></h3>
-  <%= radio_button_tag(:return, "child") %>
-  <div>Departs <%= flight.origin_airport.code %></div>
-  <div>at <%= flight.origin_date_time %></div>
-  <div>Arrives <%= flight.destination_airport.code %></div>
-  <div>at <%= flight.destination_date_time %></div>
+  <%= render @optimizer.best_departure, show_radio_button: :departure %>
 
-  <%= form_tag({controller: "trips", action: "flights_save" }, method: "POST") do %>
-    <div>
-      <%= submit_tag("Go with these") %>
-    </div>
-  <% end %>
+  <h3>Returning flight to <%= @optimizer.best_return.destination_airport.code %></h3>
+
+  <%= render @optimizer.best_return, show_radio_button: :return %>
+
+  <%= submit_tag("Go with these") %>
 
 </div>
 
@@ -50,39 +29,16 @@
   <h2>Alternate flight options</h2>
 
   <h3>Departure options</h3>
-  <table>
-    <tr>
-      <th>Origin</th>
-      <th>Departs</th>
-      <th>Destination</th>
-      <th>Arrives</th>
-    </tr>
-    <% @optimizer.departures.each do |flight| %>
-    <tr>
-      <td><%= flight.origin_airport.code %></td>
-      <td><%= flight.origin_date_time %></td>
-      <td><%= flight.destination_airport.code %></td>
-      <td><%= flight.destination_date_time %></td>
-    </tr>
-    <% end %>
-  </table>
+  <% @optimizer.departures.each do |flight| %>
+    <%= render flight, show_radio_button: :departure %>
+  <% end %>
 
   <h3>Return options</h3>
-  <table>
-    <tr>
-      <th>Origin</th>
-      <th>Departs</th>
-      <th>Destination</th>
-      <th>Arrives</th>
-    </tr>
-    <% @optimizer.returns.each do |flight| %>
-    <tr>
-      <td><%= flight.origin_airport.code %></td>
-      <td><%= flight.origin_date_time %></td>
-      <td><%= flight.destination_airport.code %></td>
-      <td><%= flight.destination_date_time %></td>
-    </tr>
-    <% end %>
-  </table>
+  <% @optimizer.returns.each do |flight| %>
+    <%= render flight, show_radio_button: :return %>
+  <% end %>
+
+  <%= submit_tag("Go with these alternatives") %>
 
 </div>
+<% end %>

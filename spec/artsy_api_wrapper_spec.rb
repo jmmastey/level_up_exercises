@@ -25,7 +25,13 @@ RSpec.describe ArtsyApiWrapper do
       json_data = ArtsyApiWrapper.get_artist(artist_name)
 
       expect(json_data["name"]).to eq("Andy Warhol")
-      expect(json_data["updated_at"]).to eq("2014-12-15T17:37:32+00:00")
+      expect(json_data["updated_at"]).to eq("2014-12-16T14:23:56+00:00")
+      expect(json_data["birthday"]).to eq("1928")
+      expect(json_data["hometown"]).to eq("Pittsburgh, Pennsylvania")
+      expect(json_data["location"]).to eq("New York ")
+      expect(json_data["nationality"]).to eq("American")
+      expect(json_data["biography"]).to include("An American painter")
+      expect(json_data["blurb"]).to include("Obsessed with celebrity")
     end
   end
 end

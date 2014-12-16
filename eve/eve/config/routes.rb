@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     get 'search', on: :collection, as: :search
   end
 
-  resources :watches
+  authenticate :user do
+    resources :watches
+  end
 
   devise_for :users
 

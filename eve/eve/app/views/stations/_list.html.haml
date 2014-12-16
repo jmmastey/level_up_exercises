@@ -8,7 +8,7 @@
   %tbody
     - @stations.each do |station|
       %tr
-        %td= station.in_game_id
-        %td= station.name
+        %td.field-in_game_id= station.in_game_id
+        %td.field-name= station.name
         %td
 = paginate @stations

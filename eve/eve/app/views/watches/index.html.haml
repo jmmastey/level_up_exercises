@@ -20,9 +20,9 @@
     %tbody
       - @watches.each do |watch|
         %tr
-          %td= link_to(watch.nickname, watch)
-          %td= link_to(watch.item.name, search_orders_path(item: watch.item))
-          %td
+          %td.field-nickname= link_to(display_name(watch), watch)
+          %td.field-item= link_to(watch.item.name, search_orders_path(item: watch.item), title: "Show orders for #{watch.item.name}")
+          %td.field-location
             - if watch.region
               %span.label.label-region Region
               = watch.region.name
@@ -31,13 +31,13 @@
               = watch.station.name
             - else
               %span.text-muted N/A
-          %td.text-right= watch.orders.count
-          %td.text-right
+          %td.field-order_count.text-right= watch.orders.count
+          %td.field-average_price.text-right
             - if watch.average_price
               watch.average_price
             - elsif
               %span.text-muted No data
-          %td.text-right
+          %td.actions.text-right
             = link_to(watch_orders_path(watch), class: 'btn btn-info', title: "View orders") do
               %span.glyphicon.glyphicon-search
             = link_to(edit_watch_path(watch), class: 'btn btn-warning', title: "Edit" ) do

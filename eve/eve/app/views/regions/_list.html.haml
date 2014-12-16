@@ -8,7 +8,7 @@
   %tbody
     - @regions.each do |region|
       %tr
-        %td= region.in_game_id
-        %td= region.name
+        %td.field-in_game_id= region.in_game_id
+        %td.field-name= region.name
         %td
 = paginate @regions

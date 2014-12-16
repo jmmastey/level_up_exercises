@@ -27,14 +27,6 @@ Then(/^I see (\d+) items$/) do |count|
   expect(page).to have_css("tr.item", count: count)
 end
 
-Then(/^I see (\d+) in the EVE ID column$/) do |id|
-  expect(page).to have_css("tr.item td.field-in_game_id", text: id.to_s)
-end
-
-Then(/^I see "([^"]+)" in the name column$/) do |name|
-  expect(page).to have_css("tr.item td.field-name", text: name)
-end
-
 Then(/^I see the orders page for item #(\d+)$/) do |in_game_id|
   item = find_item(in_game_id.to_i)
   expect(current_path_with_query).to eq(search_orders_path(item: item))

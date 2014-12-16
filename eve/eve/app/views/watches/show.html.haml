@@ -1,6 +1,6 @@
 .page-header
   %h1
-    = @watch.nickname
+    = display_name(@watch)
     %small= @watch.item.name
 
 = link_to 'Back', watches_path

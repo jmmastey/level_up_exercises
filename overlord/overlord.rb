@@ -8,8 +8,12 @@ class Overlord < Sinatra::Base
     if session[:status] == "Active"
       erb :countdown
     else
-      session[:status] = "Inactive"
-      erb :index
+      if session[:status] == "Exploded"
+        erb :index
+      else
+        session[:status] = "Inactive"
+        erb :index
+      end
     end
   end
 
@@ -26,5 +30,10 @@ class Overlord < Sinatra::Base
   post "/newsession" do
     session.clear
     redirect '/'
+  end
+
+  get "/explode" do
+    session[:status] = "Exploded"
+    erb :explode
   end
 end

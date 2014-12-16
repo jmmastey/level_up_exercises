@@ -13,6 +13,7 @@ Scenario: I enter the incorrect codes
   When I enter the incorrect codes and submit
   Then the bomb should be inactive
   Then warning should appear
-
+Scenario: I enter the incorrect codes three times
+  When
 
 

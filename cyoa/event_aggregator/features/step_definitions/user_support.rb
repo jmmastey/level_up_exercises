@@ -8,17 +8,14 @@ Given /^I fill out the registration form as "(.*)"$/ do |username|
   fill_in("user[password_confirmation]", with: params['password'])
 end
 
-Given(/^I have a registered user "(.*)"$/) do |username|
+When /^I register as user "(.*)"$/ do |username|
   step "I fill out the registration form as \"#{username}\""
   click_button('Sign up')
 end
 
-When /^I register as user "(.*)"$/ do |username|
-  step "I have a registered user \"#{username}\""
-end
-
-When /^I leave the "(.*)" input blank"$/ do |input_name|
-  find_field(input_name).value = ""
+Given(/^I have a registered user "(.*)"$/) do |username|
+  step "I register as user \"#{username}\""
+  click_button('Logout')
 end
 
 Given /^I (fail to )?authenticate as "(.*)"/ do |fail_auth, username|
@@ -26,7 +23,7 @@ Given /^I (fail to )?authenticate as "(.*)"/ do |fail_auth, username|
   params = user_creation_params(username)
   fill_in('user[email]', with: params['email'])
   fill_in('user[password]',
-          with: fail_auth.nil? ? params['password '] : 'garbage')
+          with: fail_auth.nil? ? params['password'] : 'garbage')
   click_button('Log in')
 end
 

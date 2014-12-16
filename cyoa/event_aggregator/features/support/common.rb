@@ -10,23 +10,32 @@ URL_NICKNAMES =
   'sign up' => '/users/sign_up',
   'home' => '/',
   'my feeds' => '/my-feeds',
+  'not this person' => '/users/sign_out',
   'the customer service phone number' => EventAggregator.customer_service_telno,
   'the customer service e-mail address' => EventAggregator.customer_service_email,
   'the login page' => '/users/sign_in',
 }
 
 def url_by_nickname(url_nickname)
-  URL_NICKNAMES[url_nickname.downcase]
+  URL_NICKNAMES[url_nickname.downcase] || raise("No such URL #{url_nickname}")
 end
 
-INPUT_NICKNAMES =
+ELEMENT_NICKNAMES =
 {
   'email' => 'user_email',
   'password' => 'user_password',
+  'password confirmation' => 'user_password_confirmation',
+  'first name' => 'user_first_name',
+  'last name' => 'user_last_name',
 }
 
 def id_by_nickname(input_nickname)
-  INPUT_NICKNAMES[input_nickname.downcase]
+  ELEMENT_NICKNAMES[input_nickname.downcase]
+end
+
+def element_by_nickname(element_nickname)
+  element_id = "\##{id_by_nickname(element_nickname)}"
+  find(element_id)
 end
 
 def has_major_heading(heading_text)
@@ -42,7 +51,7 @@ def user_creation_params(username)
   {
     'email' => "#{username.downcase}@test.me",
     'first_name' => username.capitalize,
-    'last_name' => "#{username.reverse}sohn",
+    'last_name' => "#{username.downcase.reverse.capitalize}sohn",
     'password' => user_password(username)
   }
 end

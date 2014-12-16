@@ -16,15 +16,23 @@ Then /^I see a "(.*)" button$/ do |button_label|
 end
 
 When /^I press the "(.*)" button$/ do |button_label|
-save_and_open_page
   click_button(button_label)
-save_and_open_page
 end
 
-Then /^I see a (?:(.*): )?link (?:for|to) "?(.*)"?$/ do |link_type, target|
+Then /^I see a (?:(.*): )?link (?:for|to) ([^"].*)$/ do |link_type, target|
   selector = "a[href*=\"#{url_by_nickname(target)}\"]"
   selector = selector + "[href^=\"#{link_type}\"]" if link_type
+puts "N SELECTOR: #{selector}"
   expect(has_css?(selector)).to be_truthy
+end
+
+Then /^I see a (?:(.*): )?link (?:for|to) "(.*)"$/ do |link_type, target|
+  selector = "a"
+  selector = selector + "[href^=\"#{link_type}\"]" if link_type
+puts "Q SELECTOR: #{selector}"
+  text_pattern = Regexp.new(target, Regexp::IGNORECASE)
+  links = all(selector, text: text_pattern)
+  expect(links.any? { |link| link.visible? }).to be_truthy
 end
 
 Then /^I see the company mailing address$/ do
@@ -61,10 +69,22 @@ Then /^I see the "(.*)" page$/ do |page_name|
 end
 
 Then /^I see text "(.*?)"$/ do |text|
-  expect(has_css?('*', text: Regexp.new("#{text}"))).to be_truthy
+  match_expr = Regexp.new(text, Regexp::IGNORECASE)
+  expect(has_css?('*', text: match_expr)).to be_truthy
 end
 
-Given /^I leave the "(.*)" (?:input|field) blank$/ do |input_name|
-  find_field(input_name).value = ""
+Given /^I leave the "(.*)" (?:input|field) blank$/ do |input_nickname|
+  element_by_nickname(input_nickname).set('')
 end
 
+Given /^I type "(.*)" into the "(.*)" (?:input|field)$/ do |value, input_nickname|
+  element_by_nickname(input_nickname).set(value)
+end
+
+When /^DEBUG$/ do
+  save_and_open_page
+end
+
+When /^DUMP$/ do
+  puts page.source
+end

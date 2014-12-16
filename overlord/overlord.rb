@@ -9,7 +9,7 @@ class Overlord < Sinatra::Base
       erb :countdown
     else
       if session[:status] == "Exploded"
-        erb :index
+        erb :explode
       else
         session[:status] = "Inactive"
         erb :index

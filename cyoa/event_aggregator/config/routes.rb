@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :events
+
   root to: "site#home"
 
   devise_for :users, controllers: {

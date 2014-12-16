@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215161405) do
+ActiveRecord::Schema.define(version: 20141216211040) do
+
+  create_table "events", force: true do |t|
+    t.string   "title",       limit: 256
+    t.datetime "start_time",               null: false
+    t.datetime "end_time",                 null: false
+    t.text     "description", limit: 1024
+    t.string   "event_hash",  limit: 64
+    t.string   "family_hash", limit: 64
+    t.string   "location",    limit: 256
+    t.string   "host",        limit: 256
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "feeds", force: true do |t|
     t.integer  "owner_user_id"

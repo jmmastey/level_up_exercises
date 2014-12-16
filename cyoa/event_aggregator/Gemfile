@@ -49,4 +49,5 @@ group :test, :development do
   gem "cucumber-rails", :require => false
   gem "database_cleaner"
   gem 'launchy', '~> 2.4.3'
+  gem 'factory_girl_rails'
 end

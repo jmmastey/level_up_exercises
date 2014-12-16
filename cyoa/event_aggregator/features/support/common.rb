@@ -19,6 +19,16 @@ def url_by_nickname(url_nickname)
   URL_NICKNAMES[url_nickname.downcase]
 end
 
+INPUT_NICKNAMES =
+{
+  'email' => 'user_email',
+  'password' => 'user_password',
+}
+
+def id_by_nickname(input_nickname)
+  INPUT_NICKNAMES[input_nickname.downcase]
+end
+
 def has_major_heading(heading_text)
   rexp = Regexp.new(heading_text)
   page.has_css?('h1,h2,h3,h4', text: rexp)

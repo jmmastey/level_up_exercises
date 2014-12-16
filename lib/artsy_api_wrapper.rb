@@ -3,9 +3,7 @@ require 'hyperclient'
 class ArtsyApiWrapper
   def self.get_artist(artist_name)
     api_access = make_connection
-    json_data = api_access.artist(id: artist_name)._response.body
-    #ArtistParser.parse(json_data)
-    json_data["id"]
+    api_access.artist(id: artist_name)._response.body
   end
 
   def self.make_connection
@@ -14,10 +12,6 @@ class ArtsyApiWrapper
       api.headers['X-Xapp-Token'] = Rails.application.secrets.artsy_key
     end
   end
-
-  # def self.get_artist_json_data(name)
-  #   api_access.artist(id: name)
-  # end
 end
 
 #puts Rails.application.secrets.artsy_key

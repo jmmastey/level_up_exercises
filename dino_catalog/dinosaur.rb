@@ -32,7 +32,7 @@ class Dinosaur
   private
 
   def carnivores
-    %w[Carnivore Insectivore Piscivore]
+    %w(Carnivore Insectivore Piscivore)
   end
 
   def period_period_types

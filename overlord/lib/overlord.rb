@@ -6,63 +6,64 @@ class Overlord < Sinatra::Base
   enable :sessions
 
   before '/bomb/*' do
-    if session[:incorrect_deactivate_attempts] >= 3 || Time.now >= (session[:timer] + 7)
+    if bomb_exploded?
       redirect "/exploded"
     end
   end
 
   get '/' do
-    session.clear
-    session[:incorrect_deactivate_attempts] = 0
-    session[:timer] = Time.new(3000,11,1)
     erb :new_bomb
   end
 
   post '/bomb' do
-    session[:bomb] = Bomb.new(params[:bomb])
-    @bomb = session[:bomb]
+    @bomb = bomb(params[:bomb])
     redirect "/bomb/inactive"
   end
 
   get '/bomb/inactive' do
-    @bomb = session[:bomb]
-    @activate_errors = session[:activate_errors]
-    @deactived_status = session[:deactived_status]
+    @bomb = bomb
+    # I could just pass in the bomb object, but I like
+    # the explicitness of this code better - I think it makes
+    # clearer what info the view uses, which i find useful
+    @activate_errors = bomb.errors[:activate_errors]
+    @deactived_status = bomb.errors[:deactivate_status]
     erb :inactive_bomb
   end
 
   post '/bomb/activate' do
-    @bomb = session[:bomb]
-    @bomb.activate(params[:activation_code])
-    if @bomb.active?
-      session[:activate_errors] = nil
-      session[:timer] = Time.now
+    @bomb = bomb
+    bomb.activate(params[:activation_code])
+    if bomb.active?
+      bomb.start_timer
+      bomb.errors[:activate_errors] = nil
       redirect "bomb/active"
     else
-      session[:activate_errors] = "Incorrect code - bomb not active"
+      bomb.errors[:activate_errors] = "Incorrect code - bomb not active"
       redirect '/bomb/inactive'
     end
   end
 
   get '/bomb/active' do
-    @bomb = session[:bomb]
-    @deactivate_error = session[:deactivate_error]
-    @attempts = session[:incorrect_deactivate_attempts]
+    @bomb = bomb
+    @deactivate_error = bomb.errors[:deactivate_error]
+    
+    @attempts = bomb.deactivation_attempts
+    bomb.errors[:incorrect_deactivate_attempts]
+
     erb :active_bomb
   end 
 
   post '/bomb/deactivate' do
-    # binding.pry
-    @bomb = session[:bomb]
-    @bomb.deactivate(params[:deactivation_code])
+    @bomb = bomb
+    bomb.deactivate(params[:deactivation_code])
     if @bomb.active?
-      session[:deactivate_error] = "Incorrect code - ur still gonna blow!"
-      session[:incorrect_deactivate_attempts] += 1
+      # The problem with these methods is that they don't
+      # tell me what is being done. Should I care?
+      # Should I name the method better?
+      bomb.bad_deactivation_attempt
       redirect "/bomb/active"
     else
-      session[:timer] = Time.new(3000,11,1)
-      session[:deactivate_error] = nil
-      session[:deactived_status] = "Bomb has been deactivated"
+      bomb.deactivation_sequence
       redirect '/bomb/inactive'
     end
   end
@@ -73,8 +74,12 @@ class Overlord < Sinatra::Base
 
 # ==================================================
 
-  def start_time
-    session[:start_time] ||= (Time.now).to_s
+  def bomb(options = {})
+    session[:bomb] ||= Bomb.new(options)
+  end
+
+  def bomb_exploded?()
+    bomb.too_many_deactivation_attempts? || bomb.timer_ended?
   end
 
   run! if app_file == $0

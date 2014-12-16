@@ -8,6 +8,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'pg'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bootstrap-sass'
 gem 'httparty'
@@ -30,7 +31,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-debugger'
   gem 'pry-rails'
+  # gem 'capybara'
   gem 'pry-rescue'
   gem 'rspec-rails', '~> 3.0.0'
-  gem 'capybara'
 end

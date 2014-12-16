@@ -1,0 +1,4 @@
+development: localhost:6379
+test: localhost:6379
+staging: happenings-db-stg01.nut.happenings.com:6379
+production: redis.happenings.com:6379

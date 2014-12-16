@@ -1,6 +1,6 @@
 var intruder =0
 $(document).ready(function(){
-  $('#reset').hide();
+  // $('#reset').hide();
   $('#activate').on('click', function(event){
     var entered_code = $('#code').val();
     var activate_code = '<%= session[:activate]%>'

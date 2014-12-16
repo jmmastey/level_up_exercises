@@ -1,0 +1,21 @@
+<html>
+<title>Overlords Solution</title>
+<body background = "http://1.bp.blogspot.com/-Oj3NiBb5drQ/TcKz2P88kQI/AAAAAAAAA9k/hXf0lLxyYts/s1600/the_hundreds_Wallpaper_desktop_background_logo_quality5.jpg">
+<center>
+    <h1 style="color: red;  font-size: 2em;" >Welcome to the bomb!</h1>
+                <p style="color: red;  font-size: 1em;" >Please enter a activation or de-activation code for the bomb.</p>
+                
+      <form class="lead" action="/bomb" method='POST'>
+                  <div>
+                     <lable style="color: red; font-size: 1.0em;">Enter Code</lable>
+                    <input type="text" id="user-code" id="user-code" name="user-code" placeholder="Enter Activation-Deactivation code"/>
+                  </div>
+                  <button type="submit" id="enter_code">Enter Code</button>
+      </form>
+
+      <div>
+      <p style="color: red;" id="bomb_state" >The bomb is <%= bomb_state %></p>
+    </div> 
+</center>
+</body>
+</html>

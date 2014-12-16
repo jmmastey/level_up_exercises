@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: happenings_development
   pool: 5
-  username:
+  username: happenings
   password:
   host: localhost
   min_messages: warning
@@ -14,7 +14,7 @@ test: &test
   encoding: unicode
   database: happenings_test
   pool: 5
-  username:
+  username: happenings
   password:
   host: localhost
   min_messages: warning

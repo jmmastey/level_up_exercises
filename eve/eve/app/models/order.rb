@@ -29,13 +29,13 @@ class Order < ActiveRecord::Base
   end
 
   def self.update_from_api(item, force_update = false)
-    ApiOrder.update(item) if force_update || needs_update?
+    ApiOrder.update(item) if force_update || needs_update?(item)
   end
 
   private
 
-  def needs_update?(item)
+  def self.needs_update?(item)
     last_queried = last_queried_on(item)
-    !last_queried || last_queried < (Time.now.utc - (3600 * 24))
+    !last_queried || last_queried < (Date.today - 1)
   end
 end

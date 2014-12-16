@@ -1,7 +1,7 @@
 require "eve_central"
 
 class ApiOrder
-  def self.update(item)
+  def self.update(item, earliest_date)
     api_result = api_client.request(item.in_game_id)
     build_orders(api_result)
   end

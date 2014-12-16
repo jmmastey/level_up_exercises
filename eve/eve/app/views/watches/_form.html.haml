@@ -18,7 +18,7 @@
       %strong Location Filter
     .panel-body
       .location-filter{ role: :tabpanel }
-        %ul.nav.nav-tabs{ role: :tablist }
+        %ul.nav.nav-pills{ role: :tablist }
           %li{ role: :presentation, class: tab_class(@watch, nil) }
             %a{ href: "#tab-none", "aria-controls" => "tab-none", role: :tab, data: { toggle: :tab } } None
           %li{ role: :presentation, class: tab_class(@watch, :region) }
@@ -29,10 +29,8 @@
           .tab-pane#tab-none{ role: :tabpanel, class: tab_class(@watch, nil) }
           .tab-pane#tab-region{ role: :tabpanel, class: tab_class(@watch, :region) }
             .form-group
-              = f.label :region_id
               = f.hidden_field :region_id, class: "form-control"
           .tab-pane#tab-station{ role: :tabpanel, class: tab_class(@watch, :station) }
             .form-group
-              = f.label :station_id
               = f.hidden_field :station_id, class: "form-control"
   = f.submit 'Save', class: "btn btn-primary"

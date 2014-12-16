@@ -8,17 +8,15 @@ class ItemsController < ApplicationController
         @items = @items.page(params[:page])
         render haml: @items
       end
-      format.json do
-        render json: @items
-      end
+      format.json
+      format.xml
     end
   end
 
   def show
     respond_to do |format|
-      format.json do
-        render :show, json: @item
-      end
+      format.json { render json: @item }
+      format.xml { render xml: @item }
     end
   end
 

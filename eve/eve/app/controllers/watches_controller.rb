@@ -29,6 +29,14 @@ class WatchesController < ApplicationController
     respond_with(@watch)
   end
 
+  def show
+    respond_to do |format|
+      format.html { redirect_to watches_path(anchor: "watch-#{@watch.id}") }
+      format.json
+      format.xml
+    end
+  end
+
   private
 
   def watches

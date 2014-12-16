@@ -1,43 +1,36 @@
 require "rails_helper"
+require 'support/data_files/sample_api_data'
 
 describe RetrieveArtist do
-  let(:artist_retriever) { RetrieveArtist.new(File.read("spec/support/data_files/warhol.json")) }
+  let(:name) { "andy-warhol"}
+  let(:artist_hash)  { SampleData::RESPONSE }
 
-  it "retrieves data on an Artist and create a new artist" do
-    allow(artist_retriever).to receive(:artist_name)
-      .and_return("Andy Warhol")
+  describe "#get_artist data" do
+    it "obtains the artist hash from the artsy api wrapper" do
+      artist_retriever = double("retrieve_artist")
 
-    expect(artist_retriever.artist_name).to eq("Andy Warhol")
-  end
+      expect(artist_retriever).to receive(:get_artist_data).with(:name)
 
-  describe "#parse_name" do
-    it "parses the JSON data and returns the artists's name" do
-      expect(artist_retriever.artist_name).to eq("Andy Warhol")
+      artist_retriever.get_artist_data('andy-warhol')
     end
   end
 
-  describe "#parse_nationality" do
-    it "parses the JSON data and returns the artist's nationality" do
-      expect(artist_retriever.nationality).to eq("American")
+  describe "new_record?" do
+    it "returns false if there is an existing record for the artist" do
+      # existing_artist = create(:retrieve_artist)
+      # new_artist = create(:retrieve_artist)
+
+      # expect(new_artist.new_record?).to be false
+    end
+
+    it "returns true if there is no existing record for the artist" do
+      # artist = create(:artist, first_name: "Andy", last_name: "Warhol", api_id: "1234")
+
+      # expect(artist.new_record?).to be true
     end
   end
 
-  describe "#parse_birthday" do
-    it "parses the JSON data and returns the artist's nationality" do
-      expect(artist_retriever.birthday).to eq("1928")
-    end
-  end
+  context "new artist" do
 
-  describe "#parse_biography" do
-    it "parses the JSON data and returns the artist's biography" do
-      expect(artist_retriever.biography).to include("An American painter,")
-    end
   end
-
-  describe "#parse_analysis" do
-    it "parses the JSON data and returns the analysis on the artist" do
-      expect(artist_retriever.analysis).to include("Obsessed with celebrity")
-    end
-  end
-
 end

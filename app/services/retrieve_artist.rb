@@ -1,39 +1,43 @@
 class RetrieveArtist
-  attr_accessor :artist_name, :nationality, :birthday, :biography, :analysis
-  attr_reader :parsed_data
+  attr_accessor :artist_params
 
-  def initialize(data)
-    @parsed_data = parse_data(data)
-    @artist_name = parse_name(data)
-    @nationality = parse_nationality(data)
-    @birthday = parse_birthday(data)
-    @biography = parse_biography(data)
-    @analysis = parse_analysis(data)
+  def initialize(name)
+    @artist_params = get_artist_data(name)
   end
 
-  def parse_name(data)
-    parsed_data["name"]
+  def get_artist_data(name)
+    ArtsyApiWrapper.get_artist(name)
   end
 
-  def parse_nationality(data)
-    parsed_data["nationality"]
+  def update_artist_record
+    if new_record?
+      create_new_artist
+    else
+      ## Update artist
+    end
   end
 
-  def parse_birthday(data)
-    parsed_data["birthday"]
+  def new_record?
+    id = artist_params["id"]
+    if Artist.find_by(api_id: id)
+      false
+    else
+      true
+    end
   end
 
-  def parse_biography(data)
-    parsed_data["biography"]
-  end
-
-  def parse_analysis(data)
-    parsed_data["blurb"]
-  end
-
-  private
-
-  def parse_data(data)
-    JSON.parse(data)
+  def create_new_artist
+    first_name, last_name = artist_params["name"].split(' ')
+    params = Hash.new
+    params[:artist] = {
+      api_id: artist_params["id"],
+      first_name: first_name,
+      last_name: last_name,
+      biography: artist_params["biography"],
+      nationality: artist_params["nationality"],
+      birthday: artist_params["birthday"],
+      analysis: artist_params["blurb"]
+    }
+    Artist.create(params[:artist])
   end
 end

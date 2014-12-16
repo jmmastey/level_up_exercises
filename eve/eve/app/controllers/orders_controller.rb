@@ -4,6 +4,17 @@ class OrdersController < ApplicationController
   before_action :search_orders, only: :search
   respond_to :html, :xml, :json
 
+  def index
+    respond_to do |format|
+      format.html do
+        @orders = @orders.page(params[:page])
+        render haml: @orders
+      end
+      format.json
+      format.xml
+    end
+  end
+
   def search
     respond_to do |format|
       format.html do

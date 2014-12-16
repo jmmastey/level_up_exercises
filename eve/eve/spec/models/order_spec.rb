@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
+  let(:item) do
+    FactoryGirl.create(:item,
+                       in_game_id: 34,
+                       name: "Tritanium")
+  end
+
   subject(:order) { FactoryGirl.build(:order) }
 
   it "requires an item" do
@@ -117,13 +123,19 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  describe ".update_from_api" do
-    let(:item) do
-      FactoryGirl.create(:item,
-                         in_game_id: 34,
-                         name: "Tritanium")
-    end
+  describe ".updated_for_item" do
+    subject(:updated_for_item) { Order.updated_for_item(item) }
 
+    it { is_expected.to all(be_an(Order)) }
+
+    it "is expected to contain only orders for the given item" do
+      updated_for_item.each do |order|
+        expect(order.item).to eq(item)
+      end
+    end
+  end
+
+  describe ".update_from_api" do
     subject(:update_from_api) { Order.update_from_api(item) }
     let(:force_update) { Order.update_from_api(item, true) }
 

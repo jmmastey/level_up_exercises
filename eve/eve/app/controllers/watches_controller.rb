@@ -40,11 +40,12 @@ class WatchesController < ApplicationController
   private
 
   def watches
-    Watch.where(user: current_user).order(:nickname)
+    Watch.where(user: current_user)
+         .order(:nickname)
   end
 
   def set_watches
-    @watches = watches.where(user: current_user).order(:nickname)
+    @watches = watches.includes(:item, :region, :station)
   end
 
   def set_watch

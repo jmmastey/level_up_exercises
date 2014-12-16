@@ -1,7 +1,7 @@
 class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
-      t.integer :in_game_id
+      t.integer :in_game_id, limit: 8
       t.decimal :security
       t.decimal :price
       t.string :order_type

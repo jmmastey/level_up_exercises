@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20141215161105) do
   add_index "items", ["in_game_id"], name: "index_items_on_in_game_id", unique: true, using: :btree
 
   create_table "orders", force: true do |t|
-    t.integer  "in_game_id"
+    t.integer  "in_game_id",  limit: 8
     t.decimal  "security"
     t.decimal  "price"
     t.string   "order_type"
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20141215161105) do
     t.integer  "region_id"
     t.integer  "station_id"
     t.integer  "item_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   add_index "orders", ["in_game_id"], name: "index_orders_on_in_game_id", unique: true, using: :btree

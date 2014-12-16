@@ -28,8 +28,15 @@ class Order < ActiveRecord::Base
     by_item(item).maximum(:date_pulled)
   end
 
+  def self.updated_for_item(item, force_update = false)
+    update_from_api(item, force_update)
+    all.by_item(item)
+  end
+
   def self.update_from_api(item, force_update = false)
-    ApiOrder.update(item) if force_update || needs_update?(item)
+    if force_update || needs_update?(item)
+      ApiOrder.update(item, last_queried_on(item))
+    end
   end
 
   private

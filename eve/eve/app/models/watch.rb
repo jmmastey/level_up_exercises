@@ -7,14 +7,32 @@ class Watch < ActiveRecord::Base
   validates_presence_of :item, :user
   validates_with LocationFilterValidator
 
+  before_validation(:check_nickname)
+
   def average_price
     orders.average(:price)
   end
 
   def orders
-    filtered_orders = item.orders
-    filtered_orders = filtered_orders.where(region: region) if region
-    filtered_orders = filtered_orders.where(station: station) if station
-    filtered_orders
+    filters = {}
+    filters[:region] = region if region
+    filters[:station] = station if station
+
+    Order.updated_for_item(item)
+  end
+
+  private
+
+  def check_nickname
+    nickname = default_nickname if nickname.blank?
+  end
+
+  def default_nickname
+    return nickname unless nickname.blank?
+
+    location = region || station
+    return "#{item.name} in #{location.name}"
+
+    "#{item.name}"
   end
 end

@@ -1,13 +1,4 @@
 module WatchesHelper
-  def display_name(watch)
-    return watch.nickname unless watch.nickname.blank?
-
-    location = watch.region || watch.station
-    return "#{watch.item.name} in #{location.name}"
-
-    "#{watch.item.name}"
-  end
-
   def tab_class(watch, tab_name)
     return :active if visible_location_type(watch) == tab_name
     ""

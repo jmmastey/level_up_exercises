@@ -21,7 +21,7 @@
     %tbody
       - @watches.each do |watch|
         %tr
-          %td.field-nickname= link_to(display_name(watch), watch)
+          %td.field-nickname= watch.nickname
           %td.field-item= link_to(watch.item.name, search_orders_path(item: watch.item), title: "Show orders for #{watch.item.name}")
           %td.field-location
             - if watch.region
@@ -35,7 +35,7 @@
           %td.field-order_count.text-right= watch.orders.count
           %td.field-average_price.text-right
             - if watch.average_price
-              watch.average_price
+              = watch.average_price.to_s(:rounded, precision: 2)
             - elsif
               %span.text-muted No data
           %td.actions.text-right

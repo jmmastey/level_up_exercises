@@ -28,6 +28,8 @@ class StationsController < ApplicationController
   end
 
   def show
+    @station = Station.find(params[:id])
+    respond_to :json, :xml
   end
 
   private

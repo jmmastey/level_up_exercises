@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title Happenings
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    %script(src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js")
+
+  %body
+    #page{class: "c-#{controller_name}"}
+      = render partial: 'layouts/navbar'
+
+      .container
+        - if !notice.nil?
+          .notice= notice
+        - if !alert.nil?
+          .alert= alert
+        = yield

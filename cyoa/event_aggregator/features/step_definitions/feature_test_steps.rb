@@ -6,6 +6,12 @@ Then /^I see a heading for "(.*)"/ do |heading_text|
   expect(has_major_heading(heading_text)).to be_truthy
 end
 
+Then /^I see an? (input|button) for "(.*)"/ do |type, input_label|
+  selector = "#{label}[text*=\"#{input_label}\"]," \
+             "#{type}[value*=\"#{input_label}\"]"
+  expect(has_css?(selector)).to be_truthy
+end
+
 Then /^I see a (?:(.*): )?link (?:for|to) "?(.*)"?$/ do |link_type, target|
   selector = "a[href*=\"#{url_by_nickname(target)}\"]"
   selector = selector + "[href^=\"#{link_type}\"]" if link_type

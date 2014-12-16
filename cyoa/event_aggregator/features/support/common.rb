@@ -15,9 +15,6 @@ URL_NICKNAMES =
   'the login page' => '/users/sign_in',
 }
 
-AUTH_PASSWORD = "sweetpotato"
-AUTH_FAIL_PASSWORD = "blahblah"
-
 def url_by_nickname(url_nickname)
   URL_NICKNAMES[url_nickname.downcase]
 end

@@ -20,11 +20,6 @@
   </div>
 
   <div id="BodyArea" class="row">
-
-    <!-- div id="LeftBar" class="col-xs-3">
-      <%= render "shared/left_bar" %>
-    </div -->
-
     <div id="ContentAreaContainer" class="col-xs-12">
       <div id="ContentArea">
         <div id="Messages" class="row">
@@ -32,7 +27,7 @@
             <%= devise_error_messages! %> 
             <ul>
             <% flash.each do |key, value| %>
-              <li><%= key %>: <%= value %></li>
+              <li><%= value %></li>
             <% end %>
             </ul>
           </div>

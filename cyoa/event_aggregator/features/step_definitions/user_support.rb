@@ -1,11 +1,24 @@
-Given(/^I have a registered user "(.*)"$/) do |username|
-  visit('/users/sign_up')
+
+Given /^I fill out the registration form as "(.*)"$/ do |username|
+  step 'I am visiting the "Sign up" page'
   params = user_creation_params(username)
   params.each_pair do |field, value|
     fill_in("user[#{field}]", with: value)
   end
   fill_in("user[password_confirmation]", with: params['password'])
+end
+
+Given(/^I have a registered user "(.*)"$/) do |username|
+  step "I fill out the registration form as \"#{username}\""
   click_button('Sign up')
+end
+
+When /^I register as user "(.*)"$/ do |username|
+  step "I have a registered user \"#{username}\""
+end
+
+When /^I leave the "(.*)" input blank"$/ do |input_name|
+  find_field(input_name).value = ""
 end
 
 Given /^I (fail to )?authenticate as "(.*)"/ do |fail_auth, username|

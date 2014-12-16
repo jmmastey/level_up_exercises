@@ -2,17 +2,14 @@ require 'active_support/all'
 
 class Dinosaur
   attr_accessor :name, :period, :continent, :diet, :walking, :description
+  attr_reader :weight_in_lbs
 
   def initialize(options)
-    options.each{ |key, value| send("#{key} = ", value) }
+    options.each { |key, value| send("#{key}=", value) }
   end
 
   def weight_in_lbs=(weight_in_lbs)
     @weight_in_lbs = weight_in_lbs.to_i
-  end
-
-  def weight_in_lbs
-    @weight_in_lbs
   end
 
   def carnivore?
@@ -34,15 +31,15 @@ class Dinosaur
 
   private
 
-    def carnivores
-      ["Carnivore", "Insectivore", "Piscivore"]
-    end
+  def carnivores
+    %w[Carnivore Insectivore Piscivore]
+  end
 
-    def period_period_types
-      { "Early Cretaceous" => "Cretaceous",
-        "Late Cretaceous" => "Cretaceous",
-        "Cretaceous" => "Cretaceous",
-        "Jurassic" => "Jurassic",
-        "Oxfordian" => "Oxfordian"}
-    end
+  def period_period_types
+    { "Early Cretaceous" => "Cretaceous",
+      "Late Cretaceous" => "Cretaceous",
+      "Cretaceous" => "Cretaceous",
+      "Jurassic" => "Jurassic",
+      "Oxfordian" => "Oxfordian" }
+  end
 end

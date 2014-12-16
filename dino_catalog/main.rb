@@ -13,6 +13,7 @@ class Main
 # All Biped
   options = { "==" => {walking: 'Biped'}}
   puts 'BIPEDS:'
+
   dino_info.filter_dinosaurs(options)
   dino_info.dinosaurs_filtered.each { |dinosaur| puts "#{dinosaur.inspect}, @is_carnivore=#{dinosaur.carnivore?}" }
 

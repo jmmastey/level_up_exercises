@@ -1,5 +1,5 @@
 class DinosaurInfo
-  attr_accessor :dinosaurs, :dinosaurs_filtered,:filters
+  attr_accessor :dinosaurs, :dinosaurs_filtered, :filters
 
   def initialize(dinosaurs)
     @dinosaurs = dinosaurs
@@ -8,6 +8,7 @@ class DinosaurInfo
   # options should be in the following format
   # { operator <string> => { attribute: value } }
   def filter_dinosaurs(options={})
+
     @dinosaurs_filtered = @dinosaurs
     @filters = options
     options.each do |operator, filters|

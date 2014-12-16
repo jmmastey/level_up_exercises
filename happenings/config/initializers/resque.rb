@@ -1,7 +1,7 @@
 require 'yaml'
 
 require 'resque'
-require 'resque_scheduler'
+require 'resque-scheduler'
 
 rails_root = defined?(Rails) ? Rails.root.to_s : ENV['RAILS_ROOT'] || File.dirname(__FILE__) + '/../..'
 rails_env  = defined?(Rails) ? Rails.env.to_s  : ENV['RAILS_ENV']  || 'development'

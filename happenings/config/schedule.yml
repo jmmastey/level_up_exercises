@@ -1,5 +1,5 @@
 events_update:
   every: 1d
-  queue: happenings
+  queue: normal
   args: EventsUpdate
   class: DispatcherWorker

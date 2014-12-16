@@ -163,7 +163,7 @@ RSpec.describe Order, type: :model do
 
       context "and forced" do
         it "updates the orders" do
-          expect(ApiOrder).to receive(:update)
+          expect(ApiOrder).to receive(:update).once
           force_update
         end
       end

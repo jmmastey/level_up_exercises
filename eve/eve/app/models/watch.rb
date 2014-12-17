@@ -31,8 +31,12 @@ class Watch < ActiveRecord::Base
     return nickname unless nickname.blank?
 
     location = region || station
-    return "#{item.name} in #{location.name}"
 
-    "#{item.name}"
+    begin
+      return "#{item.name} in #{location.name}"
+      "#{item.name}"
+    rescue NoMethodError
+      nil
+    end
   end
 end

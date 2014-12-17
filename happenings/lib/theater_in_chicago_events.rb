@@ -10,7 +10,7 @@ class TheaterInChicagoEvents
   # The following returns all events on a day
   # "http://www.theatreinchicago.com/opening/CalendarSampleResponse.php?id=&ran=0&opendate=2014-12-12"
 
-  def get_events_for_month(month, year = Date.today.year)
+  def self.get_events_for_month(month, year = Date.today.year)
     raise ArgumentError, "invalid month value: #{month}" unless valid_month(month)
     raise ArgumentError, "invalid year value: #{year}" unless valid_year(year)
 

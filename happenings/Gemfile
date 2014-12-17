@@ -10,6 +10,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'pg'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bootstrap-sass'
+gem 'bootstrap_sortable_rails'
+gem 'bootstrap-tooltip-rails'
+
+# Because ERB blows big chunks!
+gem 'haml'
 
 # HTTP Client
 gem 'httparty'

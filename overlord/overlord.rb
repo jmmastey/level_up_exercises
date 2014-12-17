@@ -3,7 +3,6 @@ class Overlord < Sinatra::Base
   set :public_folder => "public", :static => true
   configure(:development) { set :session_secret, "something" }
   enable :sessions
-  attr_accessor :failed, :errors
 
   get "/" do
     session[:status] ||= "Inactive"

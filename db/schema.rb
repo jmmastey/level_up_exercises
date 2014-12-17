@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216163225) do
+ActiveRecord::Schema.define(version: 20141217163648) do
 
   create_table "artists", force: true do |t|
     t.string   "first_name"
@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(version: 20141216163225) do
     t.datetime "updated_at",  null: false
     t.text     "biography"
     t.string   "nationality"
-    t.date     "birthday"
     t.text     "analysis"
     t.string   "thumbnail"
     t.string   "api_id"
+    t.string   "birthyear"
   end
 
 end

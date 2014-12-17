@@ -30,7 +30,7 @@ class RetrieveArtist
       last_name: last_name,
       biography: artist_params["biography"],
       nationality: artist_params["nationality"],
-      birthday: artist_params["birthday"],
+      birthyear: artist_params["birthday"],
       analysis: artist_params["blurb"]
     }
   end

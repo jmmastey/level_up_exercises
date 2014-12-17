@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  lookup_for :event_source, :symbolize
+  lookup_for :event_source, symbolize: true,
     scope: :with_source, inverse_scope: :without_source
 
     def to_ics

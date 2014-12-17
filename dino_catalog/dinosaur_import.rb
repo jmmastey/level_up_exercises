@@ -57,18 +57,13 @@ class DinosaurImport
   end
 
   def convert_import_keys(key)
-    key_converted = key.downcase
-    if AUTOCONVERT_KEYS.key?(key_converted)
-      AUTOCONVERT_KEYS[key_converted]
-    else
-      key_converted
-    end
+    AUTOCONVERT_KEYS.fetch(key.downcase, key.downcase)
   end
 
   def convert_import_values(key_converted, value)
     if AUTOCONVERT_KEYS_VALUES.key?(key_converted)
       value_convert_hash = AUTOCONVERT_KEYS_VALUES[key_converted]
-      value_convert_hash.key?(value) ? value_convert_hash[value] : value
+      value_convert_hash.fetch(value, value)
     else
       value
     end

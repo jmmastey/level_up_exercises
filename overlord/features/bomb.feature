@@ -6,5 +6,5 @@ Feature: I visit the bomb page
 
 Scenario: Once bomb is armed disarm using deactivate code
     Given the bomb should be active
-    When I enter the correct codes and submit
+    When I enter original deactivation code
     Then the bomb should be inactive

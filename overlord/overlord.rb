@@ -35,7 +35,9 @@ class Overlord < Sinatra::Base
   end
 
   post "/defuse" do
-    session[:status] = "Inactive"
+    if params[:defuse] == session[:deactivate]
+      session[:status] = "Inactive"
+    end
     redirect '/'
   end
 

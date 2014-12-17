@@ -38,12 +38,11 @@ class DinosaurInfo
     to_s
   end
 
-  def json_export(include_filter = false)
+  def to_json(include_filter = false)
     if include_filter
-      dinosaurs = @dinosaurs_filtered
+      @dinosaurs_filtered.to_json
     else
-      dinosaurs = @dinosaurs
+      @dinosaurs.to_json
     end
-    dinosaurs.to_json
   end
 end

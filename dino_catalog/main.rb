@@ -40,5 +40,5 @@ class Main
   # Print individual dino info
   puts dino_info.to_s
   puts dino_info.to_s(true)
-  puts dino_info.json_export
+  puts dino_info.to_json
 end

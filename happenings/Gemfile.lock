@@ -73,6 +73,11 @@ GEM
     dotenv (1.0.2)
     erubis (2.7.0)
     execjs (2.2.2)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     figgy (1.1.0)
       json
     foreigner (1.7.1)
@@ -248,6 +253,7 @@ DEPENDENCIES
   chronic
   coffee-rails (~> 4.0.0)
   devise
+  factory_girl_rails
   figgy
   foreigner
   foreman

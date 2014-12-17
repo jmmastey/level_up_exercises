@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  include EventHelper
   def index
   end
 

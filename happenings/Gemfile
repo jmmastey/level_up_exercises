@@ -50,6 +50,7 @@ end
 
 group :development, :test do
   gem 'rubocop'
+  gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-debugger'
   gem 'pry-rails'

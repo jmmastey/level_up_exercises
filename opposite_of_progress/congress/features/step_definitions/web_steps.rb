@@ -1,5 +1,6 @@
 require 'uri'
 require 'cgi'
+require 'json'
 
 module WithinHelpers
   def with_scope(locator)
@@ -94,7 +95,6 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"(?: within "([^\"]*)")?$/ 
 end
 
 Then /^(?:|I )should see JSON:$/ do |expected_json|
-  require 'json'
   expected = JSON.pretty_generate(JSON.parse(expected_json))
   actual   = JSON.pretty_generate(JSON.parse(response.body))
   expected.should == actual

@@ -6,11 +6,7 @@ module DeedsHelper
         deed_text = "#{bill.short_title} was last voted on " \
           "#{ApplicationHelper.date_display(bill.last_vote_at)}"
 
-        deed = Deed.find_or_create_by(bill_id: bill.bill_id,
-                                      bioguide_id: bill.sponsor_id,
-                                      deed: deed_text,
-                                      occurrence_date: bill.last_vote_at)
-        deed.save
+        DeedsHelper.deed_creator bill, "last_vote_at", deed_text
       end
     end
   end
@@ -21,13 +17,17 @@ module DeedsHelper
         deed_text = "#{bill.short_title} was enacted on " \
           "#{ApplicationHelper.date_display(bill.enacted_on)}"
 
-        deed = Deed.find_or_create_by(bill_id: bill.bill_id,
-                                      bioguide_id: bill.sponsor_id,
-                                      deed: deed_text,
-                                      occurrence_date: bill.enacted_on)
-        deed.save
+        DeedsHelper.deed_creator bill, "enacted_on", deed_text
       end
     end
+  end
+
+  def self.deed_creator bill, bill_date_field, deed_text
+    deed = Deed.find_or_create_by(bill_id: bill.bill_id,
+                                  bioguide_id: bill.sponsor_id,
+                                  deed: deed_text,
+                                  occurrence_date: bill[bill_date_field])
+    deed.save
   end
 
   def self.related_legislator deed

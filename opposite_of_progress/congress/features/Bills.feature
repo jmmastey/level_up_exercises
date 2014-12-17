@@ -12,6 +12,8 @@ Feature: Viewing the Bill list
     Then I should see a title for "All Bills"
 
   @bad
-  Scenario:
-    When I do nothing
-    Then I should not see "All Bills" within "h3"
+  Scenario: There are no bills
+    Given there are no bills
+    When I follow "All Bills"
+    Then I should not see any bills
+    And I should see a message "Sorry, there are no bills"

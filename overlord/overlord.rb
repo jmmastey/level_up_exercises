@@ -3,11 +3,13 @@ class Overlord < Sinatra::Base
   set :public_folder => "public", :static => true
   configure(:development) { set :session_secret, "something" }
   enable :sessions
+  attr_accessor :failed, :errors
 
   get "/" do
     session[:status] ||= "Inactive"
     session[:activate] ||= "1234"
-    session[:deactivate]||="4321"
+    session[:deactivate] ||= "4321"
+    session[:failed] ||= 0
     if session[:status] == "Active"
       erb :countdown
     else
@@ -25,6 +27,10 @@ class Overlord < Sinatra::Base
       session[:status] = "Active"
       erb :countdown
     else
+      session[:failed] += 1
+      if session[:failed] == 3
+        redirect "/explode"
+      end
       redirect "/"
     end
   end

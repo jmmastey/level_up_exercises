@@ -20,11 +20,11 @@ class DinosaurImport
                 'No' => nil }
   }
 
-
-
   def initialize(csv_files)
     csv_files_to_dinosaurs(csv_files)
   end
+
+  private
 
   def csv_files_to_dinosaurs(csv_files)
     dinosaurs = []
@@ -75,5 +75,6 @@ class DinosaurImport
         value
       end
     end
+
   end
 end

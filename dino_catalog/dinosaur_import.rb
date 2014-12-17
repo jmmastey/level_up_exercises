@@ -10,6 +10,17 @@ class DinosaurImport
     headers: true,
     col_sep: ',',
   }
+  AUTOCONVERT_KEYS = {
+    'genus' => 'name',
+    'weight' => 'weight_in_lbs',
+    'carnivore' => 'diet',
+  }
+  AUTOCONVERT_KEYS_VALUES = {
+    'diet' => { 'Yes' => 'Carnivore',
+                'No' => nil }
+  }
+
+
 
   def initialize(csv_files)
     csv_files_to_dinosaurs(csv_files)
@@ -49,33 +60,20 @@ class DinosaurImport
 
     def convert_import_keys(key)
       key_converted = key.downcase
-      if autoconvert_keys.key?(key_converted)
-        autoconvert_keys[key_converted]
+      if AUTOCONVERT_KEYS.key?(key_converted)
+        AUTOCONVERT_KEYS[key_converted]
       else
         key_converted
       end
     end
 
     def convert_import_values(key_converted, value)
-      if autoconvert_keys_values.key?(key_converted)
-        value_convert_hash = autoconvert_keys_values[key_converted]
+      if AUTOCONVERT_KEYS_VALUES.key?(key_converted)
+        value_convert_hash = AUTOCONVERT_KEYS_VALUES[key_converted]
         value_convert_hash.key?(value) ? value_convert_hash[value] : value
       else
         value
       end
     end
-
-    def autoconvert_keys
-      { 'genus' => 'name',
-        'weight' => 'weight_in_lbs',
-        'carnivore' => 'diet',
-      }
-    end
-
-    def autoconvert_keys_values
-      { 'diet' => { 'Yes' => 'Carnivore',
-                    'No' => nil } }
-    end
-
   end
 end

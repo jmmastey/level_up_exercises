@@ -11,7 +11,6 @@ Scenario: I enter the correct codes
 Scenario: I enter the incorrect codes
   When I enter the incorrect codes and submit
   Then the bomb should be inactive
-  # And warning should appear
 Scenario: I enter the incorrect codes three times
   When I enter the incorrect codes three times
   Then the bomb should explode

@@ -24,6 +24,7 @@ class Overlord < Sinatra::Base
   post "/init" do
     if authenticate
       session[:status] = "Active"
+      session[:failed] = 0
       erb :countdown
     else
       session[:failed] += 1

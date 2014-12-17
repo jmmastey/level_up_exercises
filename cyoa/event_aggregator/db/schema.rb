@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141217035957) do
+ActiveRecord::Schema.define(version: 20141217044256) do
 
-  create_table "events", force: true do |t|
+  create_table "calendar_events", force: true do |t|
     t.string   "title",       limit: 256
     t.datetime "start_time",               null: false
     t.datetime "end_time",                 null: false
@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 20141217035957) do
     t.datetime "updated_at"
   end
 
-  add_index "events", ["end_time"], name: "index_events_on_end_time"
-  add_index "events", ["event_hash"], name: "index_events_on_event_hash", unique: true
-  add_index "events", ["family_hash"], name: "index_events_on_family_hash"
-  add_index "events", ["start_time"], name: "index_events_on_start_time"
+  add_index "calendar_events", ["end_time"], name: "index_calendar_events_on_end_time"
+  add_index "calendar_events", ["event_hash"], name: "index_calendar_events_on_event_hash", unique: true
+  add_index "calendar_events", ["family_hash"], name: "index_calendar_events_on_family_hash"
+  add_index "calendar_events", ["start_time"], name: "index_calendar_events_on_start_time"
 
   create_table "feeds", force: true do |t|
     t.integer  "owner_user_id"

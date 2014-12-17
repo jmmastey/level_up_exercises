@@ -1,6 +1,6 @@
 require "digest"
 
-class Event < ActiveRecord::Base
+class CalendarEvent < ActiveRecord::Base
   belongs_to :event_source
 
   before_save :refresh_derived_state

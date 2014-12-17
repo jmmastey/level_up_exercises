@@ -1,4 +1,4 @@
-<h1>Listing events</h1>
+<h1>Listing Calendar Events</h1>
 
 <table>
   <thead>
@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+    <% @calendar_events.each do |event| %>
       <tr>
         <td><%= event.title %></td>
         <td><%= event.start_time %></td>

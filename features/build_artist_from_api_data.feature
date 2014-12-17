@@ -4,6 +4,11 @@ Feature: Artists Page
   In order to add artist data to my application
 
   Scenario: Get artist data
-    Given I request artist data from the API
+    Given I request artist data from the API for Andy Warhol
     When I visit the artists page
-    Then the new artist appears on the artists page
+    Then Andy Warhol appears on the artists page
+
+  Scenario: Get artist data with an unusual last name
+    Given I request artist data from the API for Vincent van Gogh
+    When I visit the artists page
+    Then Vincent van Gogh appears on the artists page

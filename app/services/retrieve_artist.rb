@@ -3,31 +3,26 @@ class RetrieveArtist
 
   def initialize(name)
     @artist_params = get_artist_data(name)
-  end
-
-  def get_artist_data(name)
-    ArtsyApiWrapper.get_artist(name)
+    update_artist_record
   end
 
   def update_artist_record
     if new_record?
       create_new_artist
     else
-      ## Update artist
+      update_artist
     end
   end
 
-  def new_record?
-    id = artist_params["id"]
-    if Artist.find_by(api_id: id)
-      false
-    else
-      true
-    end
+  private
+
+  def get_artist_data(name)
+    ArtsyApiWrapper.get_artist(name)
   end
 
-  def create_new_artist
-    first_name, last_name = artist_params["name"].split(' ')
+  def params
+    first_name = artist_params["name"].split(' ')[0]
+    last_name = artist_params["name"].split(' ')[1..-1].join(' ')
     params = Hash.new
     params[:artist] = {
       api_id: artist_params["id"],
@@ -38,6 +33,26 @@ class RetrieveArtist
       birthday: artist_params["birthday"],
       analysis: artist_params["blurb"]
     }
-    Artist.create(params[:artist])
+  end
+
+  def artist
+    id = artist_params["id"]
+    Artist.find_by(api_id: id)
+  end
+
+  def new_record?
+    if artist
+      false
+    else
+      true
+    end
+  end
+
+  def create_new_artist
+    Artist.create(params)
+  end
+
+  def update_artist
+    artist.update(params)
   end
 end

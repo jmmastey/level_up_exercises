@@ -1,4 +1,4 @@
-class TheaterInChicagoEvents
+class TheatreInChicagoEvents
   def initialize(start_date = Date.today, end_date = Date.today)
     @start_date = start_date
     @end_date = end_date
@@ -39,7 +39,7 @@ class TheaterInChicagoEvents
                       url:         event_url,
                       time:        event_time,
                       date:        event_date,
-                      source:      :theater_in_chicago }
+                      source:      :theatre_in_chicago }
     end
     raw_events
   end

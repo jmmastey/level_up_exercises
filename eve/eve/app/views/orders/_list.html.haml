@@ -16,9 +16,9 @@
           %span.label.label-default= order.order_type.capitalize
         %td.field-item_name= order.item.name
         %td.field-location
-          = order.station.name
-          %br
           = order.region.name
+          %span.glyphicon.glyphicon-chevron-right
+          = order.station.name
         %td.field-security.text-center= order.security.to_s(:rounded, precision: 2)
         %td.field-price.text-right
           = order.price.to_s(:rounded, precision: 2)

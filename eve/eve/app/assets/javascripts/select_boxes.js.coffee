@@ -4,6 +4,7 @@ Eve.SelectBoxes =
 	create_item_select: (selector) ->
 		$(selector).select2
 			minimumInputLength: 3
+			allowClear: true,
 			ajax:
 				url: "/items/search.json"
 				dataType: "json"
@@ -25,6 +26,7 @@ Eve.SelectBoxes =
 	create_region_select: (selector) ->
 		$(selector).select2
 			minimumInputLength: 3
+			allowClear: true,
 			ajax:
 				url: "/regions/search.json"
 				dataType: "json"
@@ -46,6 +48,7 @@ Eve.SelectBoxes =
 	create_station_select: (selector) ->
 		$(selector).select2
 			minimumInputLength: 3
+			allowClear: true,
 			ajax:
 				url: "/stations/search.json"
 				dataType: "json"

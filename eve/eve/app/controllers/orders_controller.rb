@@ -41,9 +41,9 @@ class OrdersController < ApplicationController
 
   def search_orders
     assign_search_params
-    @orders = orders.by_item(@item)
-                    .by_region(@region)
-                    .by_station(@station)
+    @orders = Order.updated_for_item(Item.find(@item))
+                   .by_region(@region)
+                   .by_station(@station)
   end
 
   def set_orders

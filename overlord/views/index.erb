@@ -1,5 +1,7 @@
 <h2>Welcome to your Bomb Official Operations Management System</h2>
-
+<%=session[:activate]%>
+<br>
+<%=session[:deactivate]%>
 <div class="content">
   <form class='form' id='login' action='/init' method='POST'>
     <label for='code'> Enter Code:</label>
@@ -13,7 +15,9 @@
 <div class="change">
   <form class='form' id='login' action='/change' method='POST'>
     <label for='new_activate'> Enter New Code </label>
-    <input type='text' id='code' name='new_code' placeholder="What's the new key">
+    <input type='text' id='new_activate' name='new_acode' placeholder="What's the new key">
+    <label for='new_deactivate'> Enter New Code </label>
+    <input type='text' id='new_deactivate' name='new_dcode' placeholder="What's the new key">
     <input type='submit' id='change' value='Change Code'>
   </form>
 </div>

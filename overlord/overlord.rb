@@ -5,6 +5,9 @@ class Overlord < Sinatra::Base
   enable :sessions
 
   get "/" do
+    session[:status] ||= "Inactive"
+    session[:activate] ||= "1234"
+    session[:deactivate]||="4321"
     if session[:status] == "Active"
       erb :countdown
     else
@@ -18,8 +21,12 @@ class Overlord < Sinatra::Base
   end
 
   post "/init" do
-    session[:status] = "Active"
-    erb :countdown
+    if authenticate
+      session[:status] = "Active"
+      erb :countdown
+    else
+      redirect "/"
+    end
   end
 
   post "/defuse" do
@@ -35,5 +42,15 @@ class Overlord < Sinatra::Base
   get "/explode" do
     session[:status] = "Exploded"
     erb :explode
+  end
+
+  post "/change" do
+    session[:activate] = params[:new_acode]
+    session[:deactivate] = params[:new_dcode]
+    redirect '/'
+  end
+
+  def authenticate
+    session[:activate] == params[:code]
   end
 end

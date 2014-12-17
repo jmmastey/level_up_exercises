@@ -24,23 +24,24 @@ class TheaterInChicagoEvents
 
     raw_events = []
 
-    (1..event_titles.count) do |i|
+    (0..event_titles.count-1).each do |i|
       event_body = event_bodies[i].text.split.join(" ")
       time_regex = /\d{1,2}:\d{2}(am|pm)/
 
-      event_description = event_body.gsub(time_regex, "")
+      event_description = event_body.gsub(time_regex, "").strip
       event_time        = event_body[time_regex]
       event_date        = Date.parse(event_dates[i].text)
       event_title       = event_titles[i].text
       event_url         = event_titles[i]["href"]
 
-      raw_events << { description: event_description, 
+      raw_events << { description: event_description,
                       title:       event_title,
                       url:         event_url,
                       time:        event_time,
-                      date:        event_date 
+                      date:        event_date,
                       source:      :theater_in_chicago }
     end
+    raw_events
   end
 
   private

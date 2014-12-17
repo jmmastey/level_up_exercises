@@ -26,12 +26,14 @@ class Dinosaur
     @period_type = PERIOD_PERIOD_TYPES[@period]
   end
 
-  def print_dinosaur_info
+  def to_s
+    to_s = ""
     instance_variables.each do |attr_name|
       attr_value = instance_variable_get attr_name
       unless attr_value.nil?
-        puts "#{attr_name.to_s.sub('@', '').titleize}: #{attr_value}"
+        to_s += "#{attr_name.to_s.sub('@', '').titleize}: #{attr_value}\n"
       end
     end
+    to_s
   end
 end

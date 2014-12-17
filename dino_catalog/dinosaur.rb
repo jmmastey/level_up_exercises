@@ -10,8 +10,8 @@ class Dinosaur
     "Jurassic" => "Jurassic",
     "Oxfordian" => "Oxfordian" }
 
-  def initialize(options)
-    options.each { |key, value| send("#{key}=", value) }
+  def initialize(attributes = {})
+    attributes.each { |key, value| send("#{key}=", value) }
   end
 
   def weight_in_lbs=(weight_in_lbs)
@@ -19,7 +19,7 @@ class Dinosaur
   end
 
   def carnivore?
-    @carnivore = CARNIVORES.include?(@diet) ? true : false
+    CARNIVORES.include?(@diet)
   end
 
   def period_type

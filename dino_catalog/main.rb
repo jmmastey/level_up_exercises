@@ -12,10 +12,10 @@ class Main
   dino_info = DinosaurInfo.new(dino_import.dinosaurs)
 
   # All Biped
-  options = { "==" => { walking: 'Biped' } }
+  attributes = { "==" => { walking: 'Biped' } }
   puts 'BIPEDS:'
 
-  dino_info.filter_dinosaurs(options)
+  dino_info.filter_dinosaurs(attributes)
   dino_info.dinosaurs_filtered.each do |dinosaur|
     puts "#{dinosaur.inspect}, @is_carnivore=#{dinosaur.carnivore?}"
   end

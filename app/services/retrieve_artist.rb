@@ -31,7 +31,8 @@ class RetrieveArtist
       biography: artist_params["biography"],
       nationality: artist_params["nationality"],
       birthyear: artist_params["birthday"],
-      analysis: artist_params["blurb"]
+      analysis: artist_params["blurb"],
+      thumbnail: artist_params["_links"]["thumbnail"]["href"]
     }
   end
 

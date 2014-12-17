@@ -11,7 +11,7 @@ Given(/^I have (\d+) artists$/) do |arg1|
 end
 
 Given(/^I am on a page for an artist$/) do
-  artist = create(:artist, first_name: "Andy",  last_name: "Warhol")
+  artist = create(:artist, first_name: "Andy",  last_name: "Warhol", thumbnail: "http://static1.artsy.net/artist_images/52f6bdda4a04f5d504f69b03/1/four_thirds.jpg")
   visit artist_path(artist)
 end
 

@@ -10,16 +10,29 @@ gem 'jbuilder', '~> 2.0'
 gem 'pg'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bootstrap-sass'
+
+# HTTP Client
 gem 'httparty'
+
+# Config file management
 gem 'figgy'
 
+# Rails caching for performance
+gem 'lookup_by'
+
+# DB tool to add foreign key constraints
+gem 'foreigner'
+
+# Industry standard for adding user functionality to apps
 gem 'devise'
+
 gem 'nokogiri'
 gem 'chronic'
 
 gem 'icalendar'
 # gem "simple_calendar", "~> 1.1.0"
 
+# Background async processing
 gem 'resque'
 gem 'resque-scheduler'
 gem 'foreman'

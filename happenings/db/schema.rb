@@ -16,14 +16,21 @@ ActiveRecord::Schema.define do
   end
 
   create_table "events", force: true do |t|
-    t.string   "name"
-    t.datetime "start_time"
-    t.string   "description"
-    t.string   "link"
-    t.string   "calendar"
+    t.string   "title",                  null: false
+    t.datetime "starts_at",              null: false
+    t.string   "description",            null: false
+    t.string   "url",                    null: false
+    t.integer  "event_source_id",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "event_sources", force: true do |t|
+    t.string "event_source"
+    t.string "description"
+  end
+
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+
+  add_foreign_key "events", "event_sources",  name: "events_event_source_id_fk"
 end

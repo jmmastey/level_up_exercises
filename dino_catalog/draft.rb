@@ -5,36 +5,41 @@ CSV::Converters[:blank_to_nil] = lambda do |field|
 end
 
 $dinos = CSV.read("dinodex.csv", :headers => true, :header_converters => :symbol, :converters => :all)
-#p $dinos[0]
 $dinos = $dinos.map {|row| row.to_hash}
 
 $african_dinos = CSV.read("african_dinosaur_export.csv", :headers => true, :header_converters => :symbol, :converters => :all)
 $african_dinos = $african_dinos.map {|row| row.to_hash}
 
-$african_dinos[0][:name] = $african_dinos[0].delete :genus
-p $african_dinos[0]
-
-#p $dinos[0]
-#puts dinos[0]
+$african_dinos.each do |african_dino|
+  african_dino[:name] = african_dino.delete :genus
+  african_dino[:weight_in_lbs] = african_dino.delete :weight
+  african_dino[:diet] = african_dino.delete :carnivore
+  african_dino[:continent] = "Africa"
+end
 
 class Dino
   attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
   
-  def initialize hash
-    hash.each {|k,v| send("#{k}=", v) }
+  def initialize dino_hash
+    dino_hash.each { |k,v| send("#{k}=", v) }
   end  
   
   def is_fat?
-      weight_in_lbs > 2000 && weight_in_lbs != nil
+      @weight_in_lbs > 2000 && @weight_in_lbs != nil
+  end
+  
+  def is_small?
+    @weight_in_lbs <=2000 && @weight_in_lbs != nil
   end
   
   def is_biped?
-    walking.downcase == "biped"
+    @walking.to_s.eql? "biped"
   end
   
   def is_carnivore?
-    diet.downcase == "carnivore" || "insectivore" || "piscivore" || "yes"
-
+    ["carnivore", "insectivore", "piscivore", "yes"].include? @diet.downcase
+  end
+  
 end
 
 class DinoDex
@@ -42,19 +47,23 @@ class DinoDex
   
   def initialize
     @dinosaurs = []
-    $dinos.each {|dino| @dinosaurs << dino}
-#    $african_dinos.each {|african_dino| @dinosaurs <<}
+    $dinos.each {|dino| @dinosaurs << Dino.new(dino)}
+    $african_dinos.each {|dino| @dinosaurs << Dino.new(dino)}
   end
+  
+  def all_facts dino
+    dino.instance_variables.each do |dino_fact|
+      if dino.instance_variable_get(dino_fact)
+        puts dino_fact.to_s[1..-1].capitalize + ":"
+        puts dino.instance_variable_get dino_fact
+      end
+    end
+    puts "\n"
+  end
+  
 end
 
-albert = Dino.new($dinos[0])
-#albert.weight_in_lbs = 2430
-#puts albert.is_fat?
-#puts albert.weight_in_lbs
-#puts albert.is_biped?
-#puts albert.description
-#abric = Dino.new($african_dinos[0])
-#puts abric.is_fat?
 
 dino_dex = DinoDex.new
-#puts dino_dex.dinosaurs
+dino_dex.all_facts(dino_dex.dinosaurs[15])
+dino_dex.all_facts(dino_dex.dinosaurs[0])

@@ -1,0 +1,10 @@
+= form_for(@event) do |f|
+  = label :title
+  = text_field :title
+  = label :start_time
+  = time_field :start_time
+  = label :start_date
+  = date_field :start_date
+  = label :description
+  = text_field :description
+  %input { type: "submit", value: "Submit" }

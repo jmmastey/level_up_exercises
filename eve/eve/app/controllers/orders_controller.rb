@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def orders
-    Order.all
+    Order.all.order(:order_type, :price)
   end
 
   def search_orders
@@ -44,6 +44,7 @@ class OrdersController < ApplicationController
     @orders = Order.updated_for_item(Item.find(@item))
                    .by_region(@region)
                    .by_station(@station)
+                   .order(:order_type, :price)
   end
 
   def set_orders

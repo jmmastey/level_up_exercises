@@ -16,7 +16,7 @@
         %th Item
         %th Location
         %th.text-right # Orders
-        %th.text-right Price (ISK)
+        %th.text-right Price (Min/Avg/Max)
         %th.text-right
     %tbody
       - @watches.each do |watch|
@@ -34,10 +34,10 @@
               %span.text-muted N/A
           %td.field-order_count.text-right= watch.orders.count
           %td.field-average_price.text-right
-            - if watch.average_price
-              = watch.average_price.to_s(:rounded, precision: 2)
-            - elsif
+            - if watch.orders.empty?
               %span.text-muted No data
+            - elsif
+              = format_watch_prices(watch)
           %td.actions.text-right
             = link_to(watch_orders_path(watch), class: 'btn btn-info', title: "View orders") do
               %span.glyphicon.glyphicon-search

@@ -13,12 +13,16 @@ class Watch < ActiveRecord::Base
     orders.average(:price)
   end
 
-  def orders
-    filters = {}
-    filters[:region] = region if region
-    filters[:station] = station if station
+  def max_price
+    orders.maximum(:price)
+  end
 
-    Order.updated_for_item(item)
+  def min_price
+    orders.minimum(:price)
+  end
+
+  def orders
+    @orders ||= fetch_orders
   end
 
   private
@@ -38,5 +42,13 @@ class Watch < ActiveRecord::Base
     rescue NoMethodError
       nil
     end
+  end
+
+  def fetch_orders
+    filters = {}
+    filters[:region] = region if region
+    filters[:station] = station if station
+
+    Order.updated_for_item(item).where(filters)
   end
 end

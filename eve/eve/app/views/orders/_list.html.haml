@@ -1,26 +1,25 @@
 = paginate @orders
-%table.table.table-condensed.table-striped
-  %thead
-    %tr
-      %th EVE ID
-      %th.text-center Type
-      %th Item
-      %th Location
-      %th.text-center Security
-      %th.text-right Price
-  %tbody
-    - @orders.each do |order|
+.table-responsive
+  %table.table.table-condensed.table-striped
+    %thead
       %tr
-        %td.field-in_game_id= order.in_game_id
-        %td.field-order_type.text-center
-          %span.label.label-default= order.order_type.capitalize
-        %td.field-item_name= order.item.name
-        %td.field-location
-          = order.region.name
-          %span.glyphicon.glyphicon-chevron-right
-          = order.station.name
-        %td.field-security.text-center= order.security.to_s(:rounded, precision: 2)
-        %td.field-price.text-right
-          = order.price.to_s(:rounded, precision: 2)
-          ISK
+        %th.text-center Type
+        %th Item
+        %th Location
+        %th.text-center Security
+        %th.text-right Price
+    %tbody
+      - @orders.each do |order|
+        %tr.order{ id: "order-#{order.id}" }
+          %td.field-order_type.text-center
+            %span.label{ class: "label-#{order.order_type}" }= order.order_type.capitalize
+          %td.field-item_name= order.item.name
+          %td.field-location
+            = order.region.name
+            &rArr;
+            = order.station.name
+          %td.field-security.text-center= order.security.to_s(:rounded, precision: 2)
+          %td.field-price.text-right
+            = order.price.to_s(:rounded, precision: 2)
+            ISK
 = paginate @orders

@@ -33,4 +33,4 @@
           .tab-pane#tab-station{ role: :tabpanel, class: tab_class(@watch, :station) }
             .form-group
               = f.hidden_field :station_id, class: "form-control"
-  = f.submit 'Save', class: "btn btn-primary"
+  = f.submit 'Save', class: %w( btn btn-primary )

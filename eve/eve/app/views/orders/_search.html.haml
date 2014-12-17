@@ -9,11 +9,25 @@
           .form-group
             = label_tag(:item, "Item")
             = hidden_field_tag(:item, @item, class: "form-control")
-          .form-group
-            = label_tag(:region, "Region")
-            = hidden_field_tag(:region, @region, class: "form-control")
-          .form-group
-            = label_tag(:station, "Station")
-            = hidden_field_tag(:station, @station, class: "form-control")
+          .panel.panel-default
+            .panel-heading
+              %strong Location Filter
+            .panel-body
+              .location-filter{ role: :tabpanel }
+                %ul.nav.nav-pills{ role: :tablist }
+                  %li{ role: :presentation, class: order_query_tab_class(@region, @station, nil) }
+                    %a{ href: "#tab-none", aria: { controls: "tab-none" }, role: :tab, data: { toggle: :tab } } None
+                  %li{ role: :presentation, class: order_query_tab_class(@region, @station, :region) }
+                    %a{ href: "#tab-region", aria: { controls: "tab-region" }, role: :tab, data: { field: :watch_region_id, toggle: :tab } } Region
+                  %li{ role: :presentation, class: order_query_tab_class(@region, @station, :station) }
+                    %a{ href: "#tab-station", aria: { controls: "tab-station" }, role: :tab, data: { field: :watch_station_id, toggle: :tab } } Station
+                .tab-content
+                  .tab-pane#tab-none{ role: :tabpanel, class: order_query_tab_class(@region, @station, nil) }
+                  .tab-pane#tab-region{ role: :tabpanel, class: order_query_tab_class(@region, @station, :region) }
+                    .form-group
+                      = hidden_field_tag(:region, @region, class: "form-control")
+                  .tab-pane#tab-station{ role: :tabpanel, class: order_query_tab_class(@region, @station, :station) }
+                    .form-group
+                      = hidden_field_tag(:station, @station, class: "form-control")
           %button.btn.btn-primary.icon-button{type: :submit, title: "Search"}
             %span.glyphicon.glyphicon-search

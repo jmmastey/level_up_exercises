@@ -11,8 +11,8 @@ class TheatreInChicagoEvents
   # "http://www.theatreinchicago.com/opening/CalendarSampleResponse.php?id=&ran=0&opendate=2014-12-12"
 
   def self.get_events_for_month(month, year = Date.today.year)
-    raise ArgumentError, "invalid month value: #{month}" unless valid_month(month)
-    raise ArgumentError, "invalid year value: #{year}" unless valid_year(year)
+    raise ArgumentError, "invalid month value: #{month}" unless valid_month?(month)
+    raise ArgumentError, "invalid year value: #{year}" unless valid_year?(year)
 
     api_url = AppConfig.feeds.base_api_url + "month=#{month}&year=#{year}"
     raw_html = HTTParty.get(api_url)
@@ -46,11 +46,11 @@ class TheatreInChicagoEvents
 
   private
 
-  def valid_month(month)
+  def valid_month?(month)
     month.kind_of?(Integer) && month > 0 && month < 13
   end
 
-  def valid_year(year)
+  def valid_year?(year)
     year.kind_of?(Integer) && year > 1900 && year < 2020
   end
 end

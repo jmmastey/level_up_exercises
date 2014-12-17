@@ -35,7 +35,6 @@ gem 'nokogiri'
 gem 'chronic'
 
 gem 'icalendar'
-# gem "simple_calendar", "~> 1.1.0"
 
 # Background async processing
 gem 'resque'
@@ -44,7 +43,7 @@ gem 'foreman'
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_21]
+  gem 'binding_of_caller', platforms: [:mri_21]
   gem 'rails_layout'
 end
 
@@ -54,7 +53,6 @@ group :development, :test do
   gem 'pry'
   gem 'pry-debugger'
   gem 'pry-rails'
-  # gem 'capybara'
   gem 'pry-rescue'
   gem 'rspec-rails', '~> 3.0.0'
 end

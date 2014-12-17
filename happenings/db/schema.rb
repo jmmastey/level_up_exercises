@@ -17,7 +17,8 @@ ActiveRecord::Schema.define do
 
   create_table "events", force: true do |t|
     t.string   "title",                  null: false
-    t.datetime "starts_at",              null: false
+    t.date     "date",                   null: false
+    t.time     "time",                   null: false
     t.string   "description",            null: false
     t.string   "url",                    null: false
     t.integer  "event_source_id",        null: false

@@ -24,7 +24,7 @@ class TheatreInChicagoEvents
 
     raw_events = []
 
-    (0..event_titles.count-1).each do |i|
+    (0..event_titles.count - 1).each do |i|
       event_body = event_bodies[i].text.split.join(" ")
       time_regex = /\d{1,2}:\d{2}(am|pm)/
 
@@ -47,10 +47,10 @@ class TheatreInChicagoEvents
   private
 
   def valid_month(month)
-    month.is_a?(Integer) && month > 0 && month < 13
+    month.kind_of?(Integer) && month > 0 && month < 13
   end
 
   def valid_year(year)
-    year.is_a?(Integer) && year > 1900 && year < 2020
+    year.kind_of?(Integer) && year > 1900 && year < 2020
   end
 end

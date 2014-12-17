@@ -1,6 +1,8 @@
 class EventsUpdateWorker
+  @queue = :normal
+
   def generate(category = :theatre_in_chicago)
-    events = EventSchedule.get_new_events
+    events = EventAggregator.for(category).get_new_events
     Resque.enqueue(self, event_info)
   end
 

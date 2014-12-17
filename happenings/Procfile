@@ -1,3 +1,3 @@
-worker:     bundle exec rake resque:work QUEUES=normal --trace
+worker:     bundle exec rake resque:workers QUEUES=normal --trace
 scheduler:  bundle exec rake resque:scheduler --trace
 console:    bundle exec resque-web -F config/initializers/resque.rb

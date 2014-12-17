@@ -1,8 +1,8 @@
 <%= erb :_status, locals: {bomb: @bomb} %>
 
-<% if @deactivate_error %>
-	<p><%= @deactivate_error %></p>
-	<p>Incorrect Attempts: <%= @attempts %></p>
+<% if @bomb.messages %>
+	<p><%= @bomb.messages %></p>
+	<p>Incorrect Attempts: <%= @bomb.deactivation_attempts %></p>
 <% end %>
 
 <h2>Would you like to deactivate it?</h2>

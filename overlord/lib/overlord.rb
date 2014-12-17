@@ -22,11 +22,6 @@ class Overlord < Sinatra::Base
 
   get '/bomb/inactive' do
     @bomb = bomb
-    # I could just pass in the bomb object, but I like
-    # the explicitness of this code better - I think it makes
-    # clearer what info the view uses, which i find useful
-    @activate_errors = bomb.errors[:activate_errors]
-    @deactived_status = bomb.errors[:deactivate_status]
     erb :inactive_bomb
   end
 
@@ -35,21 +30,16 @@ class Overlord < Sinatra::Base
     bomb.activate(params[:activation_code])
     if bomb.active?
       bomb.start_timer
-      bomb.errors[:activate_errors] = nil
+      bomb.messages = nil
       redirect "bomb/active"
     else
-      bomb.errors[:activate_errors] = "Incorrect code - bomb not active"
+      bomb.messages = "Incorrect code - bomb not active"
       redirect '/bomb/inactive'
     end
   end
 
   get '/bomb/active' do
     @bomb = bomb
-    @deactivate_error = bomb.errors[:deactivate_error]
-    
-    @attempts = bomb.deactivation_attempts
-    bomb.errors[:incorrect_deactivate_attempts]
-
     erb :active_bomb
   end 
 
@@ -57,13 +47,12 @@ class Overlord < Sinatra::Base
     @bomb = bomb
     bomb.deactivate(params[:deactivation_code])
     if @bomb.active?
-      # The problem with these methods is that they don't
-      # tell me what is being done. Should I care?
-      # Should I name the method better?
-      bomb.bad_deactivation_attempt
+      bomb.deactivation_attempts += 1
+      bomb.messages = "Incorrect code - ur still gonna blow!"
       redirect "/bomb/active"
     else
-      bomb.deactivation_sequence
+      bomb.reset_timer()
+      bomb.messages = "Bomb has been deactivated"
       redirect '/bomb/inactive'
     end
   end

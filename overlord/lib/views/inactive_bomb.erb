@@ -1,13 +1,8 @@
 <%= erb :_status, locals: {bomb: @bomb} %>
 
-<% if @activate_errors %>
-	<p><%= @activate_errors %></p>
+<% if @bomb.messages %>
+	<p><%= @bomb.messages %></p>
 <% end %>
-
-<% if @deactived_status %>
-	<p><%= @deactived_status %></p>
-<% end %>
-
 
 <h2>Would you like to activate it?</h2>
 

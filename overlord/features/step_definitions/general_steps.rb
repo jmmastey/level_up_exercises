@@ -11,15 +11,18 @@ Given(/^a bomb has been created and activated$/) do
   click_button('Create!')
   fill_in "activation_code", :with => 1234
   click_button('Activate!')
-  expect(current_path).to eq("/bomb/active")
+  # expect(current_path).to eq("/bomb/active")
 end
 
 When(/^I wait (\d+) seconds to do something$/) do |arg1|
+  # Make timer an arg to Bomb
+  # Mock?
   sleep(arg1.to_i)
   click_button('Deactivate!')
 end
 
 Then(/^the bomb should have exploded$/) do
+  # Should we be checking paths?
     expect(current_path).to eq("/exploded")
     expect(page).to have_content("Everyone's dead")
 end

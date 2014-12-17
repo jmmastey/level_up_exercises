@@ -8,6 +8,8 @@ Feature: bomb explodes
 	Background:
 		Given a bomb has been created and activated
 
+	# @long, or make this a variable so I can pass 0
+	# TIme customizable at bomb creation
  	Scenario: The bomb should go off by iteslf after 7 seconds
  		When I wait 7 seconds to do something
  		Then the bomb should have exploded

@@ -39,8 +39,8 @@ class DinosaurImport
   def self.convert_import_hash(hash)
     hash_converted = {}
     hash.each_pair do |key, value|
-      key_converted = self.class.convert_import_keys(key)
-      value_converted = self.class.convert_import_values(key_converted, value)
+      key_converted = convert_import_keys(key)
+      value_converted = convert_import_values(key_converted, value)
       hash_converted.merge!(key_converted => value_converted)
     end
     hash_converted

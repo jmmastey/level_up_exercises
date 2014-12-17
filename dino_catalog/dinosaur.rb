@@ -1,8 +1,14 @@
 require 'active_support/all'
 
 class Dinosaur
-  attr_accessor :name, :period, :continent, :diet, :walking, :description
-  attr_reader :weight_in_lbs
+  attr_accessor :name, :period, :continent, :diet, :walking, :description, :weight_in_lbs
+  CARNIVORES = %w(Carnivore Insectivore Piscivore)
+  PERIOD_PERIOD_TYPES =
+  { "Early Cretaceous" => "Cretaceous",
+    "Late Cretaceous" => "Cretaceous",
+    "Cretaceous" => "Cretaceous",
+    "Jurassic" => "Jurassic",
+    "Oxfordian" => "Oxfordian" }
 
   def initialize(options)
     options.each { |key, value| send("#{key}=", value) }
@@ -13,11 +19,11 @@ class Dinosaur
   end
 
   def carnivore?
-    @carnivore = carnivores.include?(@diet) ? true : false
+    @carnivore = CARNIVORES.include?(@diet) ? true : false
   end
 
   def period_type
-    @period_type = period_period_types[@period]
+    @period_type = PERIOD_PERIOD_TYPES[@period]
   end
 
   def print_dinosaur_info
@@ -27,19 +33,5 @@ class Dinosaur
         puts "#{attr_name.to_s.sub('@', '').titleize}: #{attr_value}"
       end
     end
-  end
-
-  private
-
-  def carnivores
-    %w(Carnivore Insectivore Piscivore)
-  end
-
-  def period_period_types
-    { "Early Cretaceous" => "Cretaceous",
-      "Late Cretaceous" => "Cretaceous",
-      "Cretaceous" => "Cretaceous",
-      "Jurassic" => "Jurassic",
-      "Oxfordian" => "Oxfordian" }
   end
 end

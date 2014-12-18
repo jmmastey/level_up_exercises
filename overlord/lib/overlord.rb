@@ -6,9 +6,7 @@ class Overlord < Sinatra::Base
   enable :sessions
 
   before '/bomb/*' do
-    if bomb_exploded?
-      redirect "/exploded"
-    end
+    redirect "/exploded" if bomb_exploded?
   end
 
   get '/' do
@@ -41,7 +39,7 @@ class Overlord < Sinatra::Base
   get '/bomb/active' do
     @bomb = bomb
     erb :active_bomb
-  end 
+  end
 
   post '/bomb/deactivate' do
     @bomb = bomb
@@ -51,7 +49,7 @@ class Overlord < Sinatra::Base
       bomb.messages = "Incorrect code - ur still gonna blow!"
       redirect "/bomb/active"
     else
-      bomb.reset_timer()
+      bomb.reset_timer
       bomb.messages = "Bomb has been deactivated"
       redirect '/bomb/inactive'
     end
@@ -61,15 +59,15 @@ class Overlord < Sinatra::Base
     "<h1>Everyone's dead</h1> <br> <h2>It's a cold world.</h2>"
   end
 
-# ==================================================
+  # ==================================================
 
   def bomb(options = {})
     session[:bomb] ||= Bomb.new(options)
   end
 
-  def bomb_exploded?()
+  def bomb_exploded?
     bomb.too_many_deactivation_attempts? || bomb.timer_ended?
   end
 
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

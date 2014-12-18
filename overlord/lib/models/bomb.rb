@@ -13,21 +13,17 @@ class Bomb
     @deactivation_code = deactivation_check(args[:create_deactivation_code])
     @status = INACTIVE
     # TODO: Better way to do this...
-    @timer = Time.new(3000,11,1) # Far in the futre
+    @timer = Time.new(3000, 11, 1) # Far in the futre
     @deactivation_attempts = 0
     @messages
   end
 
   def activate(input_code)
-    if input_code == activation_code
-      @status = ACTIVE
-    end
+    @status = ACTIVE if input_code == activation_code
   end
 
   def deactivate(input_code)
-    if input_code == @deactivation_code
-      @status = INACTIVE
-    end
+    @status = INACTIVE if input_code == @deactivation_code
   end
 
   def active?
@@ -39,7 +35,7 @@ class Bomb
   end
 
   def reset_timer
-    @timer = Time.new(3000,11,1)
+    @timer = Time.new(3000, 11, 1)
   end
 
   def timer_ended?
@@ -59,5 +55,4 @@ class Bomb
   def deactivation_check(args)
     args.empty? ? DEFAULT_DEACTIVATE : args
   end
-
 end

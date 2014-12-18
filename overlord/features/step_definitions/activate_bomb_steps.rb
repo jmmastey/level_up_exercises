@@ -1,11 +1,11 @@
 # =============== OUTLINE =========================
 When(/^I activate a bomb with (\d+)$/) do |arg1|
-  fill_in "activation_code", :with => arg1
+  fill_in "activation_code", with: arg1
   click_button('Activate!')
 end
 
 When(/^I activate a bomb with "(.*?)"$/) do |arg1|
-  fill_in "activation_code", :with => arg1
+  fill_in "activation_code", with: arg1
   click_button('Activate!')
 end
 
@@ -25,12 +25,12 @@ Given(/^I'm on the inactive bomb page$/) do
 end
 
 When(/^I activate a bomb with a correct numeric code$/) do
-  fill_in "activation_code", :with => 1234
+  fill_in "activation_code", with: 1234
   click_button('Activate!')
 end
 
 When(/^I activate a bomb with a correct string code$/) do
-  fill_in "activation_code", :with => "1234"
+  fill_in "activation_code", with: "1234"
   click_button('Activate!')
 end
 
@@ -40,16 +40,16 @@ Then(/^I should be on a new page$/) do
 end
 
 When(/^I activate a bomb with an incorrect code$/) do
-  fill_in "activation_code", :with => 9999
+  fill_in "activation_code", with: 9999
   click_button('Activate!')
 end
 
 When(/^I activate a bomb with no code$/) do
-    click_button('Activate!')
+  click_button('Activate!')
 end
 
 When(/^I activate a bomb with non\-alphanumeric codes$/) do
-  fill_in "activation_code", :with => "@#^#@#"
+  fill_in "activation_code", with: "@#^#@#"
   click_button('Activate!')
 end
 
@@ -60,4 +60,3 @@ end
 Then(/^I expect to be warned that the bomb is not active$/) do
   expect(page).to have_content("Incorrect code - bomb not active")
 end
-

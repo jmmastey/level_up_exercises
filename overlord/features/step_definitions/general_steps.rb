@@ -9,7 +9,7 @@ Given(/^a bomb has been created and activated$/) do
   fill_in("create_activation_code", with: 1234)
   fill_in("create_deactivation_code", with: 0000)
   click_button('Create!')
-  fill_in "activation_code", :with => 1234
+  fill_in "activation_code", with: 1234
   click_button('Activate!')
   # expect(current_path).to eq("/bomb/active")
 end
@@ -23,6 +23,6 @@ end
 
 Then(/^the bomb should have exploded$/) do
   # Should we be checking paths?
-    expect(current_path).to eq("/exploded")
-    expect(page).to have_content("Everyone's dead")
+  expect(current_path).to eq("/exploded")
+  expect(page).to have_content("Everyone's dead")
 end

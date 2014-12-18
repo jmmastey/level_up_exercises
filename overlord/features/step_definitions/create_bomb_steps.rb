@@ -29,12 +29,9 @@ When(/^I create a bomb with only a deactivation code$/) do
 end
 
 Then(/^I the bomb status should be Inactive$/) do
-    expect(page).to have_content("Bomb Status: Inactive")
+  expect(page).to have_content("Bomb Status: Inactive")
 end
 
 Then(/^I should still see "(.*?)"$/) do |arg1|
-    expect(page).to have_content(arg1)
-end
-
-Then(/^deactivate it with (\d+)$/) do |arg1|
+  expect(page).to have_content(arg1)
 end

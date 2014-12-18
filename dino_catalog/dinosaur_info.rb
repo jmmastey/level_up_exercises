@@ -4,6 +4,7 @@ require 'objects_filter'
 
 class DinosaurInfo
   attr_accessor :dinosaurs, :dinosaurs_filtered, :filters
+  TO_S_LINE = "----------------------\n"
 
   def initialize(dinosaurs)
     @dinosaurs = dinosaurs
@@ -17,20 +18,26 @@ class DinosaurInfo
   end
 
   def to_s(include_filter = false)
-    if include_filter
-      dinosaurs = @dinosaurs_filtered
-      title = "DinoDex current Dinosaur Info Last Filter (#{@filters}):"
-    else
-      dinosaurs = @dinosaurs
-      title = "DinoDex current Dinosaur Info:"
-    end
-    to_s = title + "\n"
-    to_s +=  "----------------------\n"
-    dinosaurs.each do |dinosaur|
-      to_s += dinosaur.to_s + "\n"
-      to_s += "----------------------\n"
-    end
+    dinosaurs = include_filter ? @dinosaurs_filtered : @dinosaurs
+    to_s = to_s_title(include_filter) + $/ + TO_S_LINE
+    to_s += to_s_dinosaurs(dinosaurs)
     to_s
+  end
+
+  def to_s_title(include_filter = false)
+    if include_filter
+      "DinoDex current Dinosaur Info Last Filter (#{@filters}):"
+    else
+      "DinoDex current Dinosaur Info:"
+    end
+  end
+
+  def to_s_dinosaurs(dinosaurs)
+    to_s_dinosaurs = ""
+    dinosaurs.each do |dinosaur|
+      to_s_dinosaurs += dinosaur.to_s + $/ + TO_S_LINE
+    end
+    to_s_dinosaurs
   end
 
   def to_json(include_filter = false)

@@ -44,7 +44,7 @@ class DinosaurImport
       dinosaurs << Dinosaur.new(hash)
     end
     dinosaurs
-  end
+end
 
   def convert_import_hash(hash)
     hash_converted = {}

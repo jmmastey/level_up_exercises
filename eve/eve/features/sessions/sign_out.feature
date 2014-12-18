@@ -1,3 +1,4 @@
+@session
 Feature: Sign out
 	As an account holder
 	I want to sign out

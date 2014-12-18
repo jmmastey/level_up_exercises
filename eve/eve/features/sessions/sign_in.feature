@@ -1,3 +1,4 @@
+@session
 Feature: Signing in
 	As an EVE player
 	I want to sign in to my account

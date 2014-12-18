@@ -2,6 +2,12 @@ Given(/^a station exists with in-game ID (\d+) and name (.+)$/) do |in_game_id, 
   FactoryGirl.create(:station, in_game_id: in_game_id, name: name)
 end
 
+Given(/^I have the following stations:$/) do |stations|
+  stations.hashes.each do |station|
+    FactoryGirl.create(:station, name: station[:name])
+  end
+end
+
 When(/^I visit the stations page$/) do
   visit "/stations"
 end

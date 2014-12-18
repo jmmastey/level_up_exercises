@@ -12,6 +12,10 @@ def sign_in(email, password)
   click_button "Sign In"
 end
 
+Given(/^I am on the registration page$/) do
+  visit "/users/sign_up"
+end
+
 Given(/^the following users exist:$/) do |user_table|
   user_table.hashes.each do |user|
     create_user(user[:email], user[:password])
@@ -27,10 +31,17 @@ Given(/^I am signed in$/) do
   sign_in(user.email, user.password)
 end
 
+When(/^I visit the registration page$/) do
+  visit "/users/sign_up"
+end
+
 When(/^I enter the email (.*)$/) do |email|
   fill_in("user_email", with: email)
 end
 
-When(/^I enter the password (.*)$/) do |password|
-  fill_in("user_password", with: password)
+When(/^I enter the password (confirmation )?(.*)$/) do |confirmation, password|
+  field = "user_password"
+  field << "_confirmation" if confirmation
+
+  fill_in(field, with: password)
 end

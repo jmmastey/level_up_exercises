@@ -2,6 +2,10 @@ When(/^I click the "([^"]+)" link$/) do |link|
   click_link(link)
 end
 
+When(/^I click the "([^"]+)" button$/) do |text|
+  click_button(text)
+end
+
 Then(/^I see the message "([^"]+)"$/) do |message|
   expect(page).to have_content(message)
 end

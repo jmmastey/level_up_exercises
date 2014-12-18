@@ -35,11 +35,11 @@ When(/^I visit the registration page$/) do
   visit "/users/sign_up"
 end
 
-When(/^I enter the email (.*)$/) do |email|
+When(/^I enter the email "([^"]*)"$/) do |email|
   fill_in("user_email", with: email)
 end
 
-When(/^I enter the password (confirmation )?(.*)$/) do |confirmation, password|
+When(/^I enter the password (confirmation )?"([^"]*)"$/) do |confirmation, password|
   field = "user_password"
   field << "_confirmation" if confirmation
 

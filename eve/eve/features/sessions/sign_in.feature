@@ -14,8 +14,8 @@ Feature: Signing in
 	
 	@login
 	Scenario Outline: Login attempts
-		When I enter the email <email>
-		And I enter the password <password>
+		When I enter the email "<email>"
+		And I enter the password "<password>"
 		And I click the "Sign In" button
 		Then I see the message "<message>"
 

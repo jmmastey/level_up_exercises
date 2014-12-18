@@ -9,9 +9,9 @@
   <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 </head>
 </head>
-<body>
+<body class="<%= controller.controller_name %>">
 
-  <div class="wrapper-for-content-outside-of-footer">
+  <div class="wrapper-for-content-outside-of-footer <%= controller.action_name %>">
 
     <%= render 'layouts/header' %>
 
@@ -27,5 +27,6 @@
   </div>
 
   <%= render 'layouts/footer' %>
+  <%= debug(params) if Rails.env.development? %>
 </body>
 </html>

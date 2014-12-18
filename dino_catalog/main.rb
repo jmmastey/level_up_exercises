@@ -17,7 +17,7 @@ class Main
 
   dino_info.filter_dinosaurs(attributes)
   dino_info.dinosaurs_filtered.each do |dinosaur|
-    puts "#{dinosaur.inspect}, @is_carnivore=#{dinosaur.carnivore?}"
+    puts "#{dinosaur.inspect}, @carnivore?=#{dinosaur.carnivore?}"
   end
 
   # All Carnivores, Insectivores, Piscivore'

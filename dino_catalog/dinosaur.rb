@@ -11,7 +11,11 @@ class Dinosaur
     "Oxfordian" => "Oxfordian" }
 
   def initialize(attributes = {})
-    attributes.each { |key, value| send("#{key}=", value) }
+    begin
+      attributes.each { |key, value| send("#{key}=", value) }
+    rescue
+      raise "Invalid attributes hash: must contain attributes of Dinosaur class in format { operator <string> => { attribute: value } }"
+    end
   end
 
   def weight_in_lbs=(weight_in_lbs)

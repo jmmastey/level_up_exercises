@@ -1,3 +1,7 @@
+$LOAD_PATH << '.'
+
+require 'objects_filter'
+
 class DinosaurInfo
   attr_accessor :dinosaurs, :dinosaurs_filtered, :filters
 
@@ -5,20 +9,11 @@ class DinosaurInfo
     @dinosaurs = dinosaurs
   end
 
-  # options should be in the following format
+  # filters should be in the following format
   # { operator <string> => { attribute: value } }
-  def filter_dinosaurs(options = {})
-    dinosaurs_filtered = @dinosaurs
-    @filters = options
-    options.each do |operator, filters|
-      filters.each do |key, value|
-        dinosaurs_filtered =
-            dinosaurs_filtered.select do |dinosaur|
-              dinosaur.send("#{key}").send(operator, value)
-            end
-      end
-    end
-    @dinosaurs_filtered = dinosaurs_filtered
+  def filter_dinosaurs(filters = {})
+    @dinosaurs_filtered = ObjectsFilter::filter_objects(filters, @dinosaurs)
+    @filters = filters
   end
 
   def to_s(include_filter = false)

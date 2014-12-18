@@ -1,0 +1,31 @@
+* The shopping cart behaves a lot like every other cart you've seen on the internet. We're not shooting for the stars on this one.
+* I should be able to add, remove, and change quantities on items in my cart.
+
+
+Feature: Add and remove items from shopping cart
+	As a shopper
+	I want to be able to add and remove items from my shopping cart
+	So I can purchase only the items I need
+
+	Scenario: Add single instance of product to cart
+		Given I am on a product page
+		When I add a single instance of a product to my cart
+		Then I should see the instace of the product in my "cart" page
+		<!-- And I should be able to purchase that product -->
+
+	Scenario: Remove product from cart
+		Given I have added an product to my cart
+		When I remove the product from my cart
+		Then I should no longer see the product in my cart
+
+	Scenario: Add multiple instances of product to cart
+		Given I have added an instance of a product to my cart
+		When I add another instance of the same product
+		Then I should see 2 instance of the product in the shopping cart
+
+	Scenario: Remove single instance of product when multiple exist in cart
+		Given I have 3 instances of product in my cart
+		When I try to remove 2 instances of the product
+		Then I should see 1 instance of the product in my cart 
+
+	Scenario: Add multiple

@@ -2,7 +2,7 @@ class ArtistsController < ApplicationController
   before_action :find_artist, only: [:show, :edit, :update, :destroy]
 
   def index
-    @artists = Artist.all
+    @artists = Artist.most_recent
   end
 
   def show

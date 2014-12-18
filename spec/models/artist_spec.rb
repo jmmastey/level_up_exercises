@@ -23,4 +23,19 @@ RSpec.describe Artist, :type => :model do
       expect(ArtsyApiWrapper).to have_received(:new)
     end
   end
+
+  describe ".most_recent" do
+
+
+    it "orders the artists by updated_date" do
+      artist_1 = create(:artist, first_name: "Artist",  last_name: "One", updated_at: 1.day.ago)
+      artist_2 = create(:artist, first_name: "Artist",  last_name: "Two", updated_at: 3.days.ago)
+      artist_3 = create(:artist, first_name: "Artist",  last_name: "Three", updated_at: 2.days.ago)
+
+      artists = Artist.most_recent
+
+      expect(artists.first).to eq(artist_1)
+      expect(artists.last).to eq(artist_2)
+    end
+  end
 end

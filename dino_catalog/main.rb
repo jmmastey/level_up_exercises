@@ -1,13 +1,11 @@
-require_relative "csvtohashtools"
+require_relative 'csvtohashtools'
 include CSVtoHashTools
 require_relative 'dinodex'
 require_relative 'dinodexcommandline'
 include DinoDexCommandLine
-#include dinodexcommandline
 require_relative 'dinosaur'
-#include dinosaur
 
-joes_dinos = CSVtoHashTools.CSV_to_hash("dinodex.csv")
+joes_dinos = CSVtoHashTools::CSV_to_hash("dinodex.csv")
 piratebay_dinos = CSVtoHashTools::normalize_african_hash(CSVtoHashTools::CSV_to_hash("african_dinosaur_export.csv"))
 merged_dinos = joes_dinos.concat(piratebay_dinos)
 

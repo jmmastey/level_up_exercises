@@ -8,7 +8,7 @@ module CSVtoHashTools
 
   def CSV_to_hash(file)
     @csv = CSV.read(file, :headers => true, :header_converters => :symbol, :converters => :all)
-    @csv = @csv.map {|row| row.to_hash}
+    @csv = @csv.map { |row| row.to_hash }
   end
 
   def normalize_african_hash(dino_hash_array)

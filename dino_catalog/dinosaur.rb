@@ -2,7 +2,7 @@ class Dino
   
   attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
   
-  def initialize dino_hash
+  def initialize(dino_hash)
     dino_hash.each { |k,v| send("#{k}=", v) }
   end  
   
@@ -19,7 +19,7 @@ class Dino
   end
   
   def is_carnivore?
-    ["carnivore", "insectivore", "piscivore"].include? @diet.downcase
+    %w(carnivore insectivore piscivore).include? @diet.downcase
   end
   
 end

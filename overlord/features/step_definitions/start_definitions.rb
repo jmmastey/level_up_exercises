@@ -53,3 +53,17 @@ Then(/^I enter original deactivation code$/) do
   click_on('Destroy')
 end
 
+When(/^I enter bad codes that have letters into the change form$/) do
+  fill_in('new_activate', with: "AAAA")
+  fill_in('new_deactivate', with: "BBBB")
+  click_on('Change Code')
+end
+
+When(/^an error should appear$/) do
+  expect(page).to have_content("Code may only contain numeric values")
+end
+
+Then(/^I enter bad codes into activation form$/) do
+  fill_in('code', with: "AAAA")
+  click_on('Destroy')
+end

@@ -28,7 +28,7 @@ class Overlord < Sinatra::Base
       erb :countdown
     else
       session[:failed] += 1
-      if session[:failed] == 3
+      if session[:failed] >= 3
         redirect "/explode"
       end
       redirect "/"
@@ -38,6 +38,13 @@ class Overlord < Sinatra::Base
   post "/defuse" do
     if params[:defuse] == session[:deactivate]
       session[:status] = "Inactive"
+      session[:failed] = 0
+      erb :countdown
+    else
+      session[:failed] += 1
+      if session[:failed] >= 3
+        redirect "/explode"
+      end
     end
     redirect '/'
   end

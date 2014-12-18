@@ -1,8 +1,7 @@
 FactoryGirl.define do
-  factory :selection_criterium do
-    implementation_class "MyString"
-configuration "MyText"
-sql_expression "MyString"
+  factory :selection_criterion do
+    implementation_class ""
+    configuration ""
+    sql_expression ""
   end
-
 end

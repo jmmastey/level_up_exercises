@@ -1,4 +1,4 @@
-module CSVtoHash
+module CSVtoHashTools
   
   require 'csv'
   
@@ -10,12 +10,6 @@ module CSVtoHash
     @csv = CSV.read(file, :headers => true, :header_converters => :symbol, :converters => :all)
     @csv = @csv.map {|row| row.to_hash}
   end
-    
-#  dinos = CSV.read("dinodex.csv", :headers => true, :header_converters => :symbol, :converters => :all)
-#  dinos = dinos.map {|row| row.to_hash}
-#
-#  african_dinos = CSV.read("african_dinosaur_export.csv", :headers => true, :header_converters => :symbol, :converters => :all)
-#  african_dinos = african_dinos.map {|row| row.to_hash}
 
   def normalize_african_hash(dino_hash_array)
     dino_hash_array.each do |dino|
@@ -30,18 +24,12 @@ module CSVtoHash
       end
     end
   end
-
-#  african_dinos.each do |african_dino|
-#    african_dino[:name] = african_dino.delete :genus
-#    african_dino[:weight_in_lbs] = african_dino.delete :weight
-#    african_dino[:diet] = african_dino.delete :carnivore
-#    african_dino[:continent] = "Africa"
-#  end
 end
 
-include CSVtoHash
+include CSVtoHashTools
 
 class Dino
+  
   attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
   
   def initialize dino_hash
@@ -61,7 +49,7 @@ class Dino
   end
   
   def is_carnivore?
-    ["carnivore", "insectivore", "piscivore", "yes"].include? @diet.downcase
+    ["carnivore", "insectivore", "piscivore"].include? @diet.downcase
   end
   
 end
@@ -69,12 +57,11 @@ end
 
 class DinoDex
 
-# attr_accessor :dinosaurs
+attr_accessor :dinosaurs
   
-  def initialize(dino_hash, african_dino_hash)
+  def initialize(dino_hash)
     @dinosaurs = []
     dino_hash.each {|dino| @dinosaurs << Dino.new(dino)}
-    african_dino_hash.each {|dino| @dinosaurs << Dino.new(dino)}
   end
   
   def print_all_facts dino_name
@@ -89,41 +76,82 @@ class DinoDex
   
   def filter_dinos(filter_array)
     @filtered_dinos = @dinosaurs
-    #puts @filtered_dinos
     filter_array.each do |filter|
       
     if filter.to_s.downcase == "biped"
-    @filtered_dinos.select! do |dino|
+      @filtered_dinos.select! do |dino|
         dino.is_biped?
       end
     end
     
     if filter.to_s.downcase == "fat"
-    @filtered_dinos.select! do |dino|
+      @filtered_dinos.select! do |dino|
         dino.is_fat?
+      end
     end
-  end
   
-  if filter.to_s.downcase == "carnivore"
-  @filtered_dinos.select! do |dino|
-      dino.is_carnivore?
+    if filter.to_s.downcase == "small"
+      @filtered_dinos.select! do |dino|
+        dino.is_small?
+      end
     end
-  end
   
-  if filter.to_s.downcase == "joe"
-  @filtered_dinos.select! do |dino|
-      dino.continent.downcase != "africa"
+    if filter.to_s.downcase == "carnivore"
+      @filtered_dinos.select! do |dino|
+        dino.is_carnivore?
+      end
     end
-  end
   
-  if filter.to_s.downcase == "pirate_bay"
-  @filtered_dinos.select! do |dino|
-      dino.continent.downcase.eql? "africa"
+    if filter.to_s.downcase == "joe"
+      @filtered_dinos.select! do |dino|
+        dino.continent.downcase != "africa"
+      end
     end
-  end
   
+    if filter.to_s.downcase == "pirate_bay"
+      @filtered_dinos.select! do |dino|
+        dino.continent.downcase.eql? "africa"
+      end
     end
-    @filtered_dinos.each {|dino| puts dino.name}
+  
+    if filter.to_s.downcase == "jurassic"
+      @filtered_dinos.select! do |dino|
+        dino.continent.downcase.eql? "jurassic"
+      end
+    end
+  
+    if filter.to_s.downcase == "albian"
+      @filtered_dinos.select! do |dino|
+        dino.continent.downcase.eql? "albian"
+      end
+    end
+  
+    if filter.to_s.downcase == "cretacious"
+      @filtered_dinos.select! do |dino|
+        dino.continent.downcase.eql? "cretacious" || "late cretacious" || "early cretacious"
+      end
+    end
+  
+    if filter.to_s.downcase == "triassic"
+      @filtered_dinos.select! do |dino|
+        dino.continent.downcase.eql? "triassic"
+      end
+    end
+  
+    if filter.to_s.downcase == "permian"
+      @filtered_dinos.select! do |dino|
+        dino.continent.downcase.eql? "permian" || "late permian" || "early permian"
+      end
+    end
+  
+    if filter.to_s.downcase == "oxfordian"
+      @filtered_dinos.select! do |dino|
+        dino.continent.downcase.eql? "oxfordian"
+      end
+    end
+  
+  end
+  @filtered_dinos.each {|dino| puts dino.name}
   end
 
   
@@ -135,27 +163,84 @@ class DinoDex
 end
 
 
-
 joes_dinos = CSV_to_hash("dinodex.csv")
-#puts joes_dinos
 piratebay_dinos = normalize_african_hash(CSV_to_hash("african_dinosaur_export.csv"))
+merged_dinos = joes_dinos.concat(piratebay_dinos)
 
-puts piratebay_dinos
+$dino_names_array = merged_dinos.map{ |dino_hash| dino_hash[:name].downcase }
 
-dino_dex = DinoDex.new(joes_dinos, piratebay_dinos)
-dino_dex.print_all_facts("albertosaurus")
+
+$dino_dex = DinoDex.new(merged_dinos)
+
+$dino_dex.print_all_facts("albertosaurus")
 #dino_dex.print_all_facts("afrovenator")
 #dino_dex.all_dinos
 #dino_dex.print_all_facts("suchomimus")
 #puts dino_dex.dinosaurs[3].is_fat?
 #puts dino_dex.dinosaurs[3].is_small?
 #p dino_dex.dinosaurs[3].weight_in_lbs
-puts "Enter options:"
-user_input = []
-user_input << gets.chomp
-p user_input
-if user_input.include? "afrovenator"
-  puts dino_dex.print_all_facts(user_input[0])
+
+module DinoDexCommandLine
+  
+  def get_and_check_input
+    puts "Enter options (type \"help\" for list of commands): \n"
+    @user_input = []
+    @user_input = gets.chomp.strip.split
+
+    if @user_input == []
+      puts "Invalid command.  Please try again."
+      get_and_check_input
+    end
+    
+    if @user_input.length == 1
+      if @user_input[0].eql? "help"
+        puts "heres help menu heh"
+        get_and_check_input
+      elsif @user_input[0].downcase.eql? "all_dinos"
+        puts "\nLIST OF ALL DINOS:"
+        $dino_dex.all_dinos
+        puts "\n"
+        get_and_check_input
+      elsif $dino_names_array.include? @user_input[0].downcase
+        puts "\n"
+        $dino_dex.print_all_facts(@user_input[0])
+        puts "\n"
+        get_and_check_input
+      elsif @user_input[0].downcase.eql? "exit"
+        return
+      else
+        puts "Invalid command.  Please try again."
+        get_and_check_input
+      end
+    end
+    
+    if @user_input.length > 1
+      if @user_input[0].downcase != "filter"
+        puts "Invalid command.  Please try again."
+        get_and_check_input
+      else
+        if @user_input[1..-1].uniq.length == @user_input[1..-1].length
+          
+#        else
+ #         puts "Invalid command.  Please try again."
+  #        get_and_check_input
+        end
+        
+        #big OR small, bipeds, carnivores, period, collection
+        
+        
+      end
+    end
+    
+    
+  end
 end
+  
+
+
+include DinoDexCommandLine
+
+get_and_check_input
+
 
 #dino_dex.filter_dinos(["joe", "fat", "africa"])

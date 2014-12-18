@@ -7,11 +7,14 @@ module CSVtoHashTools
   end
 
   def CSV_to_hash(file)
+    
     @csv = CSV.read(file, :headers => true, :header_converters => :symbol, :converters => :all)
     @csv = @csv.map { |row| row.to_hash }
+    
   end
 
   def normalize_african_hash(dino_hash_array)
+    
     dino_hash_array.each do |dino|
       dino[:name] = dino.delete :genus
       dino[:weight_in_lbs] = dino.delete :weight

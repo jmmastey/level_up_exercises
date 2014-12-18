@@ -3,23 +3,30 @@ class DinoDex
 attr_accessor :dinosaurs
   
   def initialize(dino_hash)
+    
     @dinosaurs = []
     dino_hash.each { |dino| @dinosaurs << Dino.new(dino) }
+    
   end
   
   def print_all_facts(dino_name)
+    
     dino = @dinosaurs.select { |dino| dino.name.to_s.downcase == dino_name.downcase }
+    
     dino[0].instance_variables.each do |dino_fact|
       if dino[0].instance_variable_get(dino_fact)
         puts dino_fact.to_s[1..-1].capitalize + ":\n" + dino[0].instance_variable_get(dino_fact).to_s
       end
     end
+    
   end
   
   def filter_dinos(filter_array)
+    
     @filtered_dinos = @dinosaurs.dup
+    
     filter_array.each do |filter|
-      
+       
       if filter.to_s.downcase == "biped"
         @filtered_dinos.select! do |dino|
           dino.is_biped?
@@ -96,8 +103,10 @@ attr_accessor :dinosaurs
   end
   
   def all_dinos
+    
     puts "All dinos:"
     @dinosaurs.each { |dino| puts dino.name }
+    
   end
   
 end

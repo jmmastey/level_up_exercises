@@ -5,11 +5,11 @@ require "byebug"
 
 RSpec.describe CalendarEvent, :type => :model do
 
-  let(:raw_event) { build(:basic_event) }
-  let(:saved_event) { create(:basic_event) }
+  let(:raw_event) { build(:calendar_event) }
+  let(:saved_event) { create(:calendar_event) }
 
   let(:sister_event) {
-    e = build(:basic_event)
+    e = build(:calendar_event)
     e.start_time = e.start_time + 1.day
     e.end_time = e.end_time + 1.day
     e
@@ -26,9 +26,12 @@ RSpec.describe CalendarEvent, :type => :model do
     e
   end
 
-
   it "has a title" do
     expect(raw_event.title).not_to be_nil
+  end
+
+  it "has an event source" do
+    expect(raw_event.event_source).not_to be_nil
   end
 
   it "has a start time" do

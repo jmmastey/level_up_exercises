@@ -1,6 +1,7 @@
 FactoryGirl.define do
-  factory :basic_event, class: CalendarEvent do
+  factory :calendar_event, class: CalendarEvent do
     title "History of Armpit Hair Folk Art"
+    event_source
     start_time DateTime.new(2015, 1, 23, 11, 30, 0, -6)
     end_time DateTime.new(2015, 1, 23, 11, 31, 0, -6)
     description <<-EOF

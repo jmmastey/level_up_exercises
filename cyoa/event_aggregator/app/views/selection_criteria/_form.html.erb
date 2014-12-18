@@ -1,0 +1,29 @@
+<%= form_for(@selection_criterium) do |f| %>
+  <% if @selection_criterium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@selection_criterium.errors.count, "error") %> prohibited this selection_criterium from being saved:</h2>
+
+      <ul>
+      <% @selection_criterium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :implementation_class %><br>
+    <%= f.text_field :implementation_class %>
+  </div>
+  <div class="field">
+    <%= f.label :configuration %><br>
+    <%= f.text_area :configuration %>
+  </div>
+  <div class="field">
+    <%= f.label :sql_expression %><br>
+    <%= f.text_field :sql_expression %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :selection_criteria
+
+  resources :event_sources
+
   resources :events
 
   root to: "site#home"

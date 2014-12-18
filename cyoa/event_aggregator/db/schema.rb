@@ -11,19 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141217044256) do
+ActiveRecord::Schema.define(version: 20141218170449) do
 
   create_table "calendar_events", force: true do |t|
-    t.string   "title",       limit: 256
-    t.datetime "start_time",               null: false
-    t.datetime "end_time",                 null: false
-    t.text     "description", limit: 1024
-    t.string   "event_hash",  limit: 64
-    t.string   "family_hash", limit: 64
-    t.string   "location",    limit: 256
-    t.string   "host",        limit: 256
+    t.string   "title",           limit: 256
+    t.datetime "start_time",                   null: false
+    t.datetime "end_time",                     null: false
+    t.text     "description",     limit: 1024
+    t.string   "event_hash",      limit: 64
+    t.string   "family_hash",     limit: 64
+    t.string   "location",        limit: 256
+    t.string   "host",            limit: 256
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_source_id"
   end
 
   add_index "calendar_events", ["end_time"], name: "index_calendar_events_on_end_time"
@@ -31,11 +32,34 @@ ActiveRecord::Schema.define(version: 20141217044256) do
   add_index "calendar_events", ["family_hash"], name: "index_calendar_events_on_family_hash"
   add_index "calendar_events", ["start_time"], name: "index_calendar_events_on_start_time"
 
+  create_table "event_sources", force: true do |t|
+    t.string   "name"
+    t.string   "source_type"
+    t.string   "uri"
+    t.integer  "frequency"
+    t.datetime "last_harvest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "feeds", force: true do |t|
     t.integer  "owner_user_id"
     t.string   "title",         limit: 128
     t.text     "description",   limit: 2048
     t.boolean  "public",                     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feeds_selection_criteria", id: false, force: true do |t|
+    t.integer "feed_id"
+    t.integer "selection_criterion_id"
+  end
+
+  create_table "selection_criteria", force: true do |t|
+    t.string   "implementation_class"
+    t.text     "configuration"
+    t.string   "sql_expression"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

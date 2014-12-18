@@ -1,0 +1,33 @@
+<h1>Listing event_sources</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Source type</th>
+      <th>Uri</th>
+      <th>Frequency</th>
+      <th>Last harvest</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_sources.each do |event_source| %>
+      <tr>
+        <td><%= event_source.name %></td>
+        <td><%= event_source.source_type %></td>
+        <td><%= event_source.uri %></td>
+        <td><%= event_source.frequency %></td>
+        <td><%= event_source.last_harvest %></td>
+        <td><%= link_to 'Show', event_source %></td>
+        <td><%= link_to 'Edit', edit_event_source_path(event_source) %></td>
+        <td><%= link_to 'Destroy', event_source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event source', new_event_source_path %>

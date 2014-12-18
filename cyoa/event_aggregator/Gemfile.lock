@@ -111,6 +111,9 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (2.0.0)
+      byebug (~> 3.4)
+      pry (~> 0.10)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -192,7 +195,6 @@ PLATFORMS
 DEPENDENCIES
   app_config
   bootstrap-sass (~> 3.3.1)
-  byebug
   chronic
   coffee-rails (~> 4.0.0)
   cucumber-rails
@@ -204,6 +206,7 @@ DEPENDENCIES
   launchy (~> 2.4.3)
   nokogiri
   pry
+  pry-byebug
   rails (= 4.1.7)
   rspec-rails
   sass-rails (~> 4.0.3)

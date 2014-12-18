@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event_source.name %>
+</p>
+
+<p>
+  <strong>Source type:</strong>
+  <%= @event_source.source_type %>
+</p>
+
+<p>
+  <strong>Uri:</strong>
+  <%= @event_source.uri %>
+</p>
+
+<p>
+  <strong>Frequency:</strong>
+  <%= @event_source.frequency %>
+</p>
+
+<p>
+  <strong>Last harvest:</strong>
+  <%= @event_source.last_harvest %>
+</p>
+
+<%= link_to 'Edit', edit_event_source_path(@event_source) %> |
+<%= link_to 'Back', event_sources_path %>

@@ -8,11 +8,11 @@ describe Legislator do
                              last_name: 'Man',
                              nickname: nil,
                              party: nil)
-    assert_equal fake.full_name, "Mrs. Pac Man"
+    expect(fake.full_name).to eq("Mrs. Pac Man")
   end
 
   it "has a full party affiliation" do
     fake = FactoryGirl.build(:legislator, party: "D")
-    assert_equal fake.full_party, "Democrat"
+    expect(fake.full_party).to eq("Democrat")
   end
 end

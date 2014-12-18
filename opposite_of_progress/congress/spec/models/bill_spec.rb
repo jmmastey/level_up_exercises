@@ -1,16 +1,14 @@
 require 'spec_helper'
 
 describe Bill do
-  before :each do
-    @fake = FactoryGirl.build(:bill)
-  end
+  let (:fake) { FactoryGirl.build(:bill) }
 
   it "has a short title" do
-    assert_equal @fake.short_title, @fake.title
+    expect(fake.short_title).to eq(fake.title)
   end
 
   it "has a bill id when no short title is available" do
-    @fake.short_title = nil
-    assert_equal @fake.bill_id, @fake.title
+    fake.short_title = nil
+    expect(fake.bill_id).to eq(fake.title)
   end
 end

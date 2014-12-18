@@ -6,11 +6,10 @@ Feature: villain creates bomb
 
 	Background: 
 		Given I'm on the homepage
-		And there is no bomb created yet
 
 	Scenario: create bomb
 		When I create a bomb
-		Then I the bomb status should be Inactive
+		Then the bomb status should be Inactive
 
 	Scenario: create bomb with no inputs
 		When I create a bomb with no activation or deactivation code

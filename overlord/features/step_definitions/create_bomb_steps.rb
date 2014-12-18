@@ -2,10 +2,6 @@ Given(/^I'm on the homepage$/) do
   visit('/')
 end
 
-Given(/^there is no bomb created yet$/) do
-  # Relevant? How to check?
-end
-
 When(/^I create a bomb$/) do
   fill_in("create_activation_code", with: 1234)
   fill_in("create_deactivation_code", with: 1234)
@@ -28,7 +24,7 @@ When(/^I create a bomb with only a deactivation code$/) do
   click_on('Create!')
 end
 
-Then(/^I the bomb status should be Inactive$/) do
+Then(/^the bomb status should be Inactive$/) do
   expect(page).to have_content("Bomb Status: Inactive")
 end
 

@@ -60,8 +60,12 @@ class Overlord < Sinatra::Base
   end
 
   post "/change" do
-    session[:activate] = params[:new_acode]
-    session[:deactivate] = params[:new_dcode]
+    if params[:new_acode].length > 0
+      session[:activate] = params[:new_acode]
+    end
+    if params[:new_dcode].length > 0
+      session[:deactivate] = params[:new_dcode]
+    end
     redirect '/'
   end
 

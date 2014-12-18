@@ -12,7 +12,7 @@
   <%= f.text_field :nationality %>
 
   <%= f.label :birthday, "Birthyear" %>
-  <%= f.date_field :birthyear %>
+  <%= f.text_field :birthyear %>
 
   <%= f.label :biography, "Biography" %>
   <%= f.text_area :biography %>
@@ -20,5 +20,9 @@
   <%= f.label :analysis, "Analysis" %>
   <%= f.text_area :analysis %>
 
-  <%= f.submit %>
+  <%= f.label :thumbnail, "Artist Thumbnail Image URL" %>
+  <%= f.text_field :thumbnail %>
+
+  <%= f.submit %> or
+  <%= link_to "Cancel", @artist, data: { confirm: "Are you sure you want to cancel and go back?" } %>
 <% end %>

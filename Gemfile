@@ -35,6 +35,9 @@ gem 'hyperclient', '~> 0.6.1'
 # Add Redcarpet for Markdown processing
 gem 'redcarpet', '~> 3.2.2'
 
+# Add Pagination
+gem 'kaminari'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

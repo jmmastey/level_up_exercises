@@ -4,6 +4,10 @@
 
 .artists {
 
+  .new_artist_link {
+    text-align: right;
+  }
+
   .show {
     .column-1 {
       @include span-columns(5 of 10);

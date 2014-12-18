@@ -1,4 +1,5 @@
 <section class="main-content type-system-rounded">
+  <p class="new_artist_link"><%= link_to "Create a New Artist", new_artist_path %></p>
   <h1>Artists</h1>
 
     <% @artists.each do |artist| %>
@@ -8,5 +9,6 @@
       </article>
     <% end %>
 
-  <p><%= link_to "Create a New Artist", new_artist_path %></p>
+    <%= paginate @artists %>
+
 </section>

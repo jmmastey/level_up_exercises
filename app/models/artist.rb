@@ -3,6 +3,8 @@ class Artist < ActiveRecord::Base
 
   scope :most_recent, -> { order(updated_at: :desc) }
 
+  paginates_per 2
+
   def full_name
     "#{first_name} #{last_name}"
   end

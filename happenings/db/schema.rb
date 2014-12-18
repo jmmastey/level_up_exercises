@@ -20,8 +20,8 @@ ActiveRecord::Schema.define do
     t.date     "date",                   null: false
     t.time     "time",                   null: false
     t.string   "description",            null: false
-    t.string   "url",                    null: false
     t.integer  "event_source_id",        null: false
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

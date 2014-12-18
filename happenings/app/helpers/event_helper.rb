@@ -1,5 +1,9 @@
 module EventHelper
-  def filter_params(raw_params)
-    raw_params.permit(:title, :time, :date, :description, :url, :source)
+  def event_params
+    params.require(:event).permit(:title, :time, :date, :description, :url, :source)
+  end
+
+  def events_params
+    params.permit(:source)
   end
 end

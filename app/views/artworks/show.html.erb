@@ -3,6 +3,8 @@
   <header>
     <div class="column-1">
       <h1><%= @artwork.title %></h1>
+      <h2>Artist: <%= @artist.full_name %></h2>
+      <p>Year: <%= @artwork.date %></p>
     </div>
     <div class="column-2"><%= image_tag(@artwork.thumbnail, class: "artwork-thumbnail") %></div>
   </header>

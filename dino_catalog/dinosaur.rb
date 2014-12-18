@@ -1,9 +1,9 @@
 require 'active_support/all'
 
 class Dinosaur
-  attr_accessor :name, :period, :continent, :diet, :walking, :description, :weight_in_lbs
+  attr_accessor :name, :period, :continent, :diet, :walking, :description, :weight
   CARNIVORES = %w(Carnivore Insectivore Piscivore)
-  PERIOD_PERIOD_TYPES =
+  PERIOD_TYPE_MAPPING =
   { "Early Cretaceous" => "Cretaceous",
     "Late Cretaceous" => "Cretaceous",
     "Cretaceous" => "Cretaceous",
@@ -18,8 +18,8 @@ class Dinosaur
     end
   end
 
-  def weight_in_lbs=(weight_in_lbs)
-    @weight_in_lbs = weight_in_lbs.to_i
+  def weight=(new_weight)
+    @weight = new_weight.to_i
   end
 
   def carnivore?
@@ -27,7 +27,7 @@ class Dinosaur
   end
 
   def period_type
-    @period_type = PERIOD_PERIOD_TYPES[@period]
+    @period_type = PERIOD_TYPE_MAPPING[@period]
   end
 
   def to_s

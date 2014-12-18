@@ -31,7 +31,7 @@ class Main
   dino_info.dinosaurs_filtered.each { |dinosaur| puts "#{dinosaur.inspect}" }
 
   # Big and small
-  dino_info.filter_dinosaurs(">" => { weight_in_lbs: 4000 })
+  dino_info.filter_dinosaurs(">" => { weight: 4000 })
   puts 'BIG'
   dino_info.dinosaurs_filtered.each do |dinosaur|
     puts "#{dinosaur.inspect}, @period_type=#{dinosaur.period_type}"

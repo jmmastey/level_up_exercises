@@ -11,13 +11,13 @@ class DinosaurImport
     col_sep: ',',
   }
   AUTOCONVERT_KEYS = {
-    'genus' => 'name',
-    'weight' => 'weight_in_lbs',
-    'carnivore' => 'diet',
+    "genus" => "name",
+    "weight_in_lbs" => "weight",
+    "carnivore" => "diet",
   }
   AUTOCONVERT_KEYS_VALUES = {
-    'diet' => { 'Yes' => 'Carnivore',
-                'No' => nil }
+    "diet" => { "Yes" => "Carnivore",
+                "No" => nil }
   }
 
   def initialize(csv_files)

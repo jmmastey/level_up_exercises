@@ -10,10 +10,10 @@
   </header>
   <hr>
   <h3>Biography</h3>
-  <p><%= @artist.biography %></p>
+  <%= markdown(@artist.biography) %>
   <hr>
   <h3>Analysis</h3>
-  <p><%= @artist.analysis %></p>
+  <%= markdown(@artist.analysis) %>
   <p><%= link_to "Edit Artist", edit_artist_path(@artist) %> |
   <%= link_to "Delete Artist", @artist, method: :delete, data: { confirm: "Are you sure you want to delete this artist?"} %></p>
 

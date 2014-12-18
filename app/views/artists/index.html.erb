@@ -4,7 +4,7 @@
     <% @artists.each do |artist| %>
       <article>
         <h2><%= link_to artist.full_name, artist %></h2>
-        <p><%= artist.analysis %></p>
+        <%= markdown(artist.analysis) %>
       </article>
     <% end %>
 

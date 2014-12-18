@@ -1,9 +1,16 @@
-Given(/^there are no bills$/) do
-  
+require 'database_cleaner'
+DatabaseCleaner.strategy = :truncation
+
+Given(/^there are no "(.*?)"$/) do |object_name|
+  DatabaseCleaner.start
 end
 
-Then(/^I should not see any bills$/) do
+Given(/^I create a bill titled "(.*?)"$/) do |title|
+  Bill.create!(short_title: title)
+end
 
+Given(/^I create a legislator named "(.*?)"$/) do |name|
+  Legislator.create!(last_name: name)
 end
 
 Then(/^I should see a message "(.*?)"$/) do |text|

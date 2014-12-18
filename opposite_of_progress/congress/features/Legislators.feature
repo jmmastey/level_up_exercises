@@ -4,14 +4,22 @@ Feature: Viewing the Legislator list
   So that I can see their names (and then view legislator details)
 
   Background:
-    Given I am on the "home" page
+    Given there are no "legislators"
+    And I am on the "home" page
 
   @happy
   Scenario:
     When I follow "All Legislators"
-    Then I should see "All Legislators" within "h3"
+    Then I should see a title for "All Legislators"
 
   @bad
+  Scenario: There are no legislators
+    When I follow "All Legislators"
+    Then I should see a message "There are no legislators to show"
+
+  @happy
   Scenario:
-    When I do nothing
-    Then I should not see "All Legislators" within "h3"
+    And I create a legislator named "Johnson"
+    And I follow "All Legislators"
+    When I follow "Johnson"
+    Then I should see a message "Johnson"

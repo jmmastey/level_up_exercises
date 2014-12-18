@@ -13,10 +13,6 @@ Given /^(?:|I )am on the "(.+)" page$/ do |page_name|
   visit page_name
 end
 
-When(/^I do nothing$/) do
-  # do nothing
-end
-
 When /^(?:|I )go to the "(.+)" page$/ do |page_name|
   visit page_name
 end
@@ -45,17 +41,6 @@ When /^(?:|I )fill in "([^\"]*)" for "([^\"]*)"(?: within "([^\"]*)")?$/ do |val
   end
 end
 
-# Use this to fill in an entire form with data from a table. Example:
-#
-#   When I fill in the following:
-#     | Account Number | 5002       |
-#     | Expiry date    | 2009-11-01 |
-#     | Note           | Nice guy   |
-#     | Wants Email?   |            |
-#
-# TODO: Add support for checkbox, select og option
-# based on naming conventions.
-#
 When /^(?:|I )fill in the following(?: within "([^\"]*)")?:$/ do |selector, fields|
   with_scope(selector) do
     fields.rows_hash.each do |name, value|

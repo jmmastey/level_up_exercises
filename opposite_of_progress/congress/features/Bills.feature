@@ -4,7 +4,8 @@ Feature: Viewing the Bill list
   So that I can see their names (and then view bill details)
 
   Background:
-    Given I am on the "home" page
+    Given there are no "bills"
+    And I am on the "home" page
 
   @happy
   Scenario:
@@ -13,7 +14,12 @@ Feature: Viewing the Bill list
 
   @bad
   Scenario: There are no bills
-    Given there are no bills
     When I follow "All Bills"
-    Then I should not see any bills
-    And I should see a message "Sorry, there are no bills"
+    Then I should see a message "There are no bills to show"
+
+  @happy
+  Scenario:
+    And I create a bill titled "Taxes"
+    And I follow "All Bills"
+    When I follow "Taxes"
+    Then I should see a message "Taxes"

@@ -11,6 +11,7 @@ Feature: Signing in
 			| testuser3@example.com | test4567 |
 		And I am on the login screen
 	
+	@login
 	Scenario Outline: Login attempts
 		When I enter the email <email>
 		And I enter the password <password>

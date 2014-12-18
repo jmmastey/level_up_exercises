@@ -27,10 +27,10 @@ Given(/^I am signed in$/) do
   sign_in(user.email, user.password)
 end
 
-When(/^I enter the email (.+)$/) do |email|
+When(/^I enter the email (.*)$/) do |email|
   fill_in("user_email", with: email)
 end
 
-When(/^I enter the password (.+)$/) do |password|
+When(/^I enter the password (.*)$/) do |password|
   fill_in("user_password", with: password)
 end

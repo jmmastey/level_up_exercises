@@ -24,15 +24,16 @@ class ApiOrder
     region = find_or_create_region(api_order.region_id)
     station = find_or_create_station(api_order.station_id, api_order.station_name)
 
-    Order.create(in_game_id: api_order.id,
-                 security: api_order.security,
-                 price: api_order.price,
-                 order_type: order_type,
-                 expires: api_order.expires,
-                 date_pulled: DateTime.now.utc,
-                 region: region,
-                 station: station,
-                 item: Item.find_by(in_game_id: item_id))
+    Order.find_or_create_by(in_game_id: api_order.id) do |order|
+      order.security = api_order.security
+      order.price = api_order.price
+      order.order_type = order_type
+      order.expires = api_order.expires
+      order.date_pulled = DateTime.now.utc
+      order.region = region
+      order.station = station
+      order.item = Item.find_by(in_game_id: item_id)
+    end
   end
 
   def self.convert_orders(item_id, api_orders, order_type)

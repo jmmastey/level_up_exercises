@@ -13,15 +13,19 @@ class WatchesController < ApplicationController
   def create
     @watch = Watch.new(watch_params)
     if @watch.save
-      redirect_to @watch
+      redirect_to @watch, notice: "Watch saved successfully."
     else
       render :new
     end
   end
 
   def update
-    @watch.update(watch_params)
-    respond_with(@watch)
+    if @watch.update(watch_params)
+      flash[:notice] = "Watch saved successfully."
+      respond_with(@watch)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -41,7 +45,7 @@ class WatchesController < ApplicationController
 
   def watches
     Watch.where(user: current_user)
-         .order(:nickname)
+      .order(:nickname)
   end
 
   def set_watches

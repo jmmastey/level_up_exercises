@@ -1,14 +1,75 @@
-# run `ruby overlord.rb` to run a webserver for this app
+require 'Sinatra'
+class Overlord < Sinatra::Base
+  set :public_folder => "public", :static => true
+  configure(:development) { set :session_secret, "something" }
+  enable :sessions
 
-require 'sinatra'
+  get "/" do
+    session[:status] ||= "Inactive"
+    session[:activate] ||= "1234"
+    session[:deactivate] ||= "4321"
+    session[:failed] ||= 0
+    if session[:status] == "Active"
+      erb :countdown
+    else
+      if session[:status] == "Exploded"
+        erb :explode
+      else
+        session[:status] = "Inactive"
+        erb :index
+      end
+    end
+  end
 
-enable :sessions
+  post "/init" do
+    if authenticate
+      session[:status] = "Active"
+      session[:failed] = 0
+      erb :countdown
+    else
+      session[:failed] += 1
+      if session[:failed] >= 3
+        redirect "/explode"
+      end
+      redirect "/"
+    end
+  end
 
-get '/' do
-  "Time to build an app around here. Start time: " + start_time
-end
+  post "/defuse" do
+    if params[:defuse] == session[:deactivate]
+      session[:status] = "Inactive"
+      session[:failed] = 0
+      erb :countdown
+    else
+      session[:failed] += 1
+      if session[:failed] >= 3
+        redirect "/explode"
+      end
+    end
+    redirect '/'
+  end
 
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
+  post "/newsession" do
+    session.clear
+    redirect '/'
+  end
+
+  get "/explode" do
+    session[:status] = "Exploded"
+    erb :explode
+  end
+
+  post "/change" do
+    if params[:new_acode].length > 0
+      session[:activate] = params[:new_acode]
+    end
+    if params[:new_dcode].length > 0
+      session[:deactivate] = params[:new_dcode]
+    end
+    redirect '/'
+  end
+
+  def authenticate
+    session[:activate] == params[:code]
+  end
 end

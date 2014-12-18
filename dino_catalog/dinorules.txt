@@ -1,4 +1,3 @@
-"
 Welcome to the DinoDex!
 
 All commands are case insensitive. The following commands are available:

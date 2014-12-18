@@ -26,7 +26,54 @@ module CSVtoHashTools
   end
 end
 
-include CSVtoHashTools
+module DinoDexCommandLine
+  
+  def get_and_check_input
+    puts "Enter options (type \"help\" for list of commands): \n"
+    user_input = []
+    user_input = gets.chomp.strip.split
+
+    if user_input == []
+      puts "Invalid command.  Please try again."
+      get_and_check_input
+    end
+    
+    if user_input.length == 1
+      if user_input[0].eql? "help"
+        file = File.open("dinorules.txt", "r")
+        contents = file.read
+        puts contents + "\n"
+        get_and_check_input
+      elsif user_input[0].downcase.eql? "all_dinos"
+        puts "\nLIST OF ALL DINOS:"
+        $dino_dex.all_dinos
+        puts "\n"
+        get_and_check_input
+      elsif $dino_names_array.include? user_input[0].downcase
+        puts "\n"
+        $dino_dex.print_all_facts(user_input[0])
+        puts "\n"
+        get_and_check_input
+      elsif user_input[0].downcase.eql? "exit"
+        return
+      else
+        puts "Invalid command.  Please try again."
+        get_and_check_input
+      end
+    end
+    
+    if user_input.length > 1
+      if user_input[0].downcase != "filter"
+        puts "Invalid command.  Please try again."
+        get_and_check_input
+      else
+        $dino_dex.filter_dinos(user_input[1..-1])
+        puts "\n"
+        get_and_check_input      
+      end
+    end
+  end
+end
 
 class Dino
   
@@ -71,11 +118,10 @@ attr_accessor :dinosaurs
         puts dino_fact.to_s[1..-1].capitalize + ":\n" + dino[0].instance_variable_get(dino_fact).to_s
       end
     end
-    puts "\n"
   end
   
   def filter_dinos(filter_array)
-    @filtered_dinos = @dinosaurs
+    @filtered_dinos = @dinosaurs.dup
     filter_array.each do |filter|
       
     if filter.to_s.downcase == "biped"
@@ -116,37 +162,37 @@ attr_accessor :dinosaurs
   
     if filter.to_s.downcase == "jurassic"
       @filtered_dinos.select! do |dino|
-        dino.continent.downcase.eql? "jurassic"
+        dino.period.downcase.include? "jurassic"
       end
     end
   
     if filter.to_s.downcase == "albian"
       @filtered_dinos.select! do |dino|
-        dino.continent.downcase.eql? "albian"
+        dino.period.downcase.include? "albian"
       end
     end
   
-    if filter.to_s.downcase == "cretacious"
+    if filter.to_s.downcase == "cretaceous"
       @filtered_dinos.select! do |dino|
-        dino.continent.downcase.eql? "cretacious" || "late cretacious" || "early cretacious"
+        dino.period.downcase.include? "cretaceous"
       end
     end
   
     if filter.to_s.downcase == "triassic"
       @filtered_dinos.select! do |dino|
-        dino.continent.downcase.eql? "triassic"
+        dino.period.downcase.include? "triassic"
       end
     end
   
     if filter.to_s.downcase == "permian"
       @filtered_dinos.select! do |dino|
-        dino.continent.downcase.eql? "permian" || "late permian" || "early permian"
+        dino.period.downcase.include? "permian"
       end
     end
   
     if filter.to_s.downcase == "oxfordian"
       @filtered_dinos.select! do |dino|
-        dino.continent.downcase.eql? "oxfordian"
+        dino.period.downcase.include? "oxfordian"
       end
     end
   
@@ -162,85 +208,19 @@ attr_accessor :dinosaurs
   
 end
 
+include CSVtoHashTools
+include DinoDexCommandLine
 
-joes_dinos = CSV_to_hash("dinodex.csv")
-piratebay_dinos = normalize_african_hash(CSV_to_hash("african_dinosaur_export.csv"))
+joes_dinos = CSVtoHashTools::CSV_to_hash("dinodex.csv")
+piratebay_dinos = CSVtoHashTools::normalize_african_hash(CSVtoHashTools::CSV_to_hash("african_dinosaur_export.csv"))
 merged_dinos = joes_dinos.concat(piratebay_dinos)
 
 $dino_names_array = merged_dinos.map{ |dino_hash| dino_hash[:name].downcase }
 
-
 $dino_dex = DinoDex.new(merged_dinos)
 
-$dino_dex.print_all_facts("albertosaurus")
-#dino_dex.print_all_facts("afrovenator")
-#dino_dex.all_dinos
-#dino_dex.print_all_facts("suchomimus")
-#puts dino_dex.dinosaurs[3].is_fat?
-#puts dino_dex.dinosaurs[3].is_small?
-#p dino_dex.dinosaurs[3].weight_in_lbs
+puts "Welcome to the DinoDex!"
+puts "Available comands:  all_dinos, exit, help, filter [filter1] [filter2] ..., [dinosaur_name]
+Please enter \"help\" for detailed command documentation."
 
-module DinoDexCommandLine
-  
-  def get_and_check_input
-    puts "Enter options (type \"help\" for list of commands): \n"
-    @user_input = []
-    @user_input = gets.chomp.strip.split
-
-    if @user_input == []
-      puts "Invalid command.  Please try again."
-      get_and_check_input
-    end
-    
-    if @user_input.length == 1
-      if @user_input[0].eql? "help"
-        puts "heres help menu heh"
-        get_and_check_input
-      elsif @user_input[0].downcase.eql? "all_dinos"
-        puts "\nLIST OF ALL DINOS:"
-        $dino_dex.all_dinos
-        puts "\n"
-        get_and_check_input
-      elsif $dino_names_array.include? @user_input[0].downcase
-        puts "\n"
-        $dino_dex.print_all_facts(@user_input[0])
-        puts "\n"
-        get_and_check_input
-      elsif @user_input[0].downcase.eql? "exit"
-        return
-      else
-        puts "Invalid command.  Please try again."
-        get_and_check_input
-      end
-    end
-    
-    if @user_input.length > 1
-      if @user_input[0].downcase != "filter"
-        puts "Invalid command.  Please try again."
-        get_and_check_input
-      else
-        if @user_input[1..-1].uniq.length == @user_input[1..-1].length
-          
-#        else
- #         puts "Invalid command.  Please try again."
-  #        get_and_check_input
-        end
-        
-        #big OR small, bipeds, carnivores, period, collection
-        
-        
-      end
-    end
-    
-    
-  end
-end
-  
-
-
-include DinoDexCommandLine
-
-get_and_check_input
-
-
-#dino_dex.filter_dinos(["joe", "fat", "africa"])
+DinoDexCommandLine::get_and_check_input

@@ -5,9 +5,6 @@ end
 Given(/^I have (\d+) artists$/) do |arg1|
   artist_1 = create(:artist, first_name: "Claude",  last_name: "Monet")
   artist_2 = create(:artist, first_name: "Edouard", last_name: "Manet")
-  artist_3 = create(:artist, first_name: "Vincent", last_name: "Van Gogh")
-  artist_4 = create(:artist, first_name: "Pablo",   last_name: "Picasso")
-  artist_5 = create(:artist, first_name: "Edward",  last_name: "Hopper")
 end
 
 Given(/^I am on a page for an artist$/) do
@@ -79,12 +76,9 @@ Then(/^I should be on the page for (.+)$/) do |artist|
   expect(page).to have_css('h1', text: artist)
 end
 
-Then(/^I should see all 5 artists$/) do
+Then(/^I should see all the artists$/) do
   expect(page).to have_content("Monet")
   expect(page).to have_content("Manet")
-  expect(page).to have_content("Van Gogh")
-  expect(page).to have_content("Picasso")
-  expect(page).to have_content("Hopper")
 end
 
 Then(/^I should see validation errors$/) do

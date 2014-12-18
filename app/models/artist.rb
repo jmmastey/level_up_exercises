@@ -1,4 +1,6 @@
 class Artist < ActiveRecord::Base
+  has_many :artworks
+
   validates :first_name, :last_name, presence: true
 
   scope :most_recent, -> { order(updated_at: :desc) }

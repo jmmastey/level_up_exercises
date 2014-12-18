@@ -4,11 +4,11 @@ Feature: Artists Page
   In order to manage artists I follow
 
   Background:
-    Given I have 5 artists
+    Given I have 2 artists
     And I am on the artists page
 
   Scenario: View the index of artists
-    Then I should see all 5 artists
+    Then I should see all the artists
 
   Scenario: View an individual artist
     When I click on Claude Monet

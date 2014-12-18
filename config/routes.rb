@@ -12,13 +12,9 @@ Rails.application.routes.draw do
   get 'signup' => 'static_pages#signup'
   get 'login' => 'static_pages#login'
 
-  get    'artists'          => 'artists#index'
-  get    'artists/new'      => 'artists#new',   as: :new_artist
-  get    'artists/:id'      => 'artists#show',  as: :artist
-  get    'artists/:id/edit' => 'artists#edit',  as: :edit_artist
-  post   'artists'          => 'artists#create'
-  patch  'artists/:id'      => 'artists#update'
-  delete 'artists/:id'      => 'artists#destroy'
+  resources :artists do
+    resources :artworks
+  end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

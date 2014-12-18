@@ -1,0 +1,10 @@
+<article class="type-system-rounded">
+  <p class="type"><%= @artwork.class %></p>
+  <header>
+    <div class="column-1">
+      <h1><%= @artwork.title %></h1>
+    </div>
+    <div class="column-2"><%= image_tag(@artwork.thumbnail, class: "artwork-thumbnail") %></div>
+  </header>
+  <hr>
+</article>

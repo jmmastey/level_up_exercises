@@ -1,7 +1,7 @@
 require_relative 'dinosaur_import'
 require_relative 'dinosaur_info'
 
-class Main
+class Example
   csv_files =
       ['/Users/jfinzel/level_up_exercises/dino_catalog/dinodex.csv',
        '/Users/jfinzel/level_up_exercises/dino_catalog/african_dinosaur_export.csv']

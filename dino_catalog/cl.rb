@@ -41,7 +41,7 @@ module DinoDexCommandLine
     if filter_input[0] != "filter"
       invalid_command
     else
-    print_filtered_dinos(filter_input[1..-1])
+    print_filtered_dinos(filter_input[1..-1].map!(&:downcase))
     end
   end
   

@@ -14,95 +14,38 @@ attr_accessor :dinosaurs
     @dino_facts = []
     dino = @dinosaurs.select { |dino| dino.name.to_s.downcase == dino_name.downcase }
     
-    dino[0].instance_variables.map do |dino_fact|
-      if dino[0].instance_variable_get(dino_fact)
-        @dino_facts << dino_fact.to_s[1..-1].capitalize
-        @dino_facts << dino[0].instance_variable_get(dino_fact).to_s
-      end
-    end
-    @dino_facts
+    puts "Name: #{dino[0].name}"
+    puts "Period: #{dino[0].period}" if dino[0].period
+    puts "Continent: #{dino[0].continent}" if dino[0].continent  
+    puts "Diet: #{dino[0].diet}" if dino[0].diet
+    puts "Weight (lbs): #{dino[0].weight_in_lbs}" if dino[0].weight_in_lbs
+    puts "Walking: #{dino[0].walking}" if dino[0].walking
+    puts "Description: #{dino[0].description}" if dino[0].description
+
   end
   
   def filter_dinos(filters)
-    #remove array from variable name
     
     @filtered_dinos = @dinosaurs.dup
-    
+    @filterss = %w( biped fat small carnivore joe pirate_bay jurassic albian cretaceous triassic permian oxfordian )
     filters.each do |filter|
-       
-      if filter.to_s.downcase == "biped"
-        @filtered_dinos.select! do |dino|
-          dino.is_biped?
-        end
-      end
-    
-      if filter.to_s.downcase == "fat"
-        @filtered_dinos.select! do |dino|
-          dino.is_fat?
-        end
-      end
-  
-      if filter.to_s.downcase == "small"
-        @filtered_dinos.select! do |dino|
-          dino.is_small?
-        end
-      end
-  
-      if filter.to_s.downcase == "carnivore"
-        @filtered_dinos.select! do |dino|
-          dino.is_carnivore?
-        end
-      end
-  
-      if filter.to_s.downcase == "joe"
-        @filtered_dinos.select! do |dino|
-          dino.continent.downcase != "africa"
-        end
-      end
-  
-      if filter.to_s.downcase == "pirate_bay"
-        @filtered_dinos.select! do |dino|
-          dino.continent.downcase.eql? "africa"
-        end
-      end
-  
-      if filter.to_s.downcase == "jurassic"
-        @filtered_dinos.select! do |dino|
-          dino.period.downcase.include? "jurassic"
-        end
-      end
-  
-      if filter.to_s.downcase == "albian"
-        @filtered_dinos.select! do |dino|
-          dino.period.downcase.include? "albian"
-        end
-      end
-  
-      if filter.to_s.downcase == "cretaceous"
-        @filtered_dinos.select! do |dino|
-          dino.period.downcase.include? "cretaceous"
-        end
-      end
-  
-      if filter.to_s.downcase == "triassic"
-        @filtered_dinos.select! do |dino|
-          dino.period.downcase.include? "triassic"
-        end
-      end
-  
-      if filter.to_s.downcase == "permian"
-        @filtered_dinos.select! do |dino|
-          dino.period.downcase.include? "permian"
-        end
-      end
-  
-      if filter.to_s.downcase == "oxfordian"
-        @filtered_dinos.select! do |dino|
-          dino.period.downcase.include? "oxfordian"
-        end
-      end
+      @filtered_dinos.select! { |dino| dino.is_biped? } if filter == "biped"
+      @filtered_dinos.select! { |dino| dino.is_fat? } if filter == "fat"
+      @filtered_dinos.select! { |dino| dino.is_small? } if filter == "small"
+      @filtered_dinos.select! { |dino| dino.is_carnivore? } if filter == "carnivore"
+      @filtered_dinos.select! { |dino| dino.continent.downcase != "africa" } if filter == "joe"
+      @filtered_dinos.select! { |dino| dino.continent.downcase.eql? "africa" } if filter == "pirate_bay"
+      @filtered_dinos.select! { |dino| dino.period.downcase.include? "jurassic" } if filter == "jurassic"
+      @filtered_dinos.select! { |dino| dino.period.downcase.include? "albian" } if filter == "albian"
+      @filtered_dinos.select! { |dino| dino.period.downcase.include? "cretaceous" } if filter == "cretaceous"
+      @filtered_dinos.select! { |dino| dino.period.downcase.include? "triassic" } if filter == "triassic"
+      @filtered_dinos.select! { |dino| dino.period.downcase.include? "permian" } if filter == "permian"
+      @filtered_dinos.select! { |dino| dino.period.downcase.include? "oxfordian" } if filter == "oxfordian"
     end
   @filtered_dinos.each { |dino| puts dino.name }
+  end
+  
+  def biped_filter(dinos)
   end
   
   def all_dinos

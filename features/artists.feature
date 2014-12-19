@@ -12,21 +12,21 @@ Feature: Artists Page
 
   Scenario: View an individual artist
     When I click on Claude Monet
-    Then I should be on the page for Monet
+    Then I should be on the artist page for Monet
 
   Scenario: Create a valid new artist
     When I create a new artist: Henri Matisse
-    Then I should be on the page for Henri Matisse
+    Then I should be on the artist page for Henri Matisse
     And I should see a message confirming the artist was created
 
   Scenario: Create an invalid new artist
     When I create an invalid artist
     Then I should see artist validation errors
 
-  Scenario: Edit an artist
+  Scenario: Update an artist with valid attributes
     When I edit an artist: Claude Monet
     And I update the last name to Painter
-    Then I should be on the page for Claude Painter
+    Then I should be on the artist page for Claude Painter
     And I should see a message confirming the artist was updated
 
   Scenario: Update an artist with invalid attributes

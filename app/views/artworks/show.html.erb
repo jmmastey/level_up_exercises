@@ -9,4 +9,6 @@
     <div class="column-2"><%= image_tag(@artwork.thumbnail, class: "artwork-thumbnail") %></div>
   </header>
   <hr>
+
+  <p><%= link_to "Edit Artwork", edit_artist_artwork_path(@artist, @artwork) %> |
 </article>

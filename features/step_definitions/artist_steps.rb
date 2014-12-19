@@ -72,7 +72,7 @@ Then(/^I should be on the artists index$/) do
   expect(current_path).to eq(artists_path)
 end
 
-Then(/^I should be on the page for (.+)$/) do |artist|
+Then(/^I should be on the artist page for (.+)$/) do |artist|
   expect(page).to have_css('h1', text: artist)
 end
 

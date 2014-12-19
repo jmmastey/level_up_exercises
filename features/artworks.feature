@@ -21,3 +21,13 @@ Feature: Artworks Page
   Scenario: Create an invalid new artwork
     When I create an invalid artwork
     Then I should see artwork validation errors
+
+  Scenario: Update an artist with valid attributes
+    When I edit an artwork: Nighthawk
+    And I update the title to Rainy Day in Paris
+    Then I should be on the artwork page for Rainy Day in Paris
+    And I should see a message confirming the artwork was updated
+
+  Scenario: Update an artist with invalid attributes
+    When I edit an artwork with invalid data: Nighthawk
+    Then I should see artwork validation errors

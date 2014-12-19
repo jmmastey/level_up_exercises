@@ -1,8 +1,5 @@
 Given(/^I am on the page for an individual artwork$/) do
-  artist_1 = FactoryGirl.create(:artist) do |artist|
-   artist.artworks << FactoryGirl.create(:artwork)
-  end
-  visit artist_artwork_path(artist_1, artist_1.artworks.first)
+  create_artwork
 end
 
 Given(/^I am on a page for an artist with an artwork$/) do
@@ -18,10 +15,7 @@ Given(/^I am on an artist's artworks page$/) do
 end
 
 When(/^I create a new artwork: (.+)$/) do |artwork|
-  click_link("New Artwork")
-  fill_in("Title", with: artwork)
-  fill_in("Date Created", with: "1931")
-  click_button("Create Artwork")
+  create_a_new_artwork(artwork)
 end
 
 When(/^I create an invalid artwork$/) do
@@ -31,6 +25,24 @@ When(/^I create an invalid artwork$/) do
   fill_in("Title", with: "")
   fill_in("Date Created", with: "")
   click_button("Create Artwork")
+end
+
+When(/^I edit an artwork: (.+)$/) do |artwork|
+  create_a_new_artwork(artwork)
+  click_link("Edit Artwork")
+end
+
+When(/^I edit an artwork with invalid data: (.+)$/) do |artwork|
+  create_a_new_artwork(artwork)
+  click_link("Edit Artwork")
+  fill_in("Title", with: "")
+  fill_in("Date Created", with: "")
+  click_button("Update Artwork")
+end
+
+When(/^I update the title to (.+)$/) do |title|
+  fill_in("Title", with: title)
+  click_button("Update Artwork")
 end
 
 Then(/^I should see the artwork$/) do

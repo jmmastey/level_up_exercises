@@ -6,7 +6,6 @@ class Loader
   end
 
   def parse
-    file_contents = File.read(@filepath)
-    JSON.parse(file_contents)
+    JSON.parse(File.read(@filepath))
   end
 end

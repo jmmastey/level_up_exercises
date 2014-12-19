@@ -1,62 +1,70 @@
 require_relative 'cohort'
 require_relative 'loader'
 
-
 class Controller
-  attr_accessor :cohort
+  attr_accessor :cohorts
 
   def initialize(filename)
     run(filename)
+    @cohorts = []
   end
 
   def run(filename)
-    views = load_views(filename)
-    #require 'pry'; binding.pry
+    views = parse(filename)
+    names = unique_cohort_names(views)
+    create_empty_cohorts(names)
+  end
 
-    count = 0
-    a_positives = 0
-    b_positives = 0
-    a_views = 0
-    b_views = 0
+  def parse(filepath)
+    JSON.parse(File.read(filepath))
+  end
 
-    views.each do |view|
-      count += 1
-      a_positives += 1 if (view["result"] == 1 && view["cohort"] =="A")
-      b_positives += 1 if (view["result"] == 1 && view["cohort"] =="B")
-      a_views += 1 if (view["cohort"] =="A")
-      b_views += 1 if (view["cohort"] =="B")
+  def unique_cohort_names(views)
+    views.map { |view| view['cohort'] }.uniq
+  end
+
+  def create_empty_cohorts(names)
+    @cohorts = names.map do |name|
+      Cohort.new(name)
     end
-
-    puts count
-    puts a_positives
-    puts b_positives
-    puts a_views
-    puts b_views
-
-    # p is conversion rate
-    puts p = (a_positives.to_f/a_views.to_f)
-
-    puts standard_error = Math.sqrt((p*(1-p)/a_views))
-
-    puts sigmas = 1.96 * standard_error
-    puts confidence_interval_lower = p - sigmas
-    puts confidence_interval_higher =  p + sigmas 
-
-    # create a cohort object
-    # parse_json
-    # calculate_conversion_percentage
-    # calculate_confidence_level
-    # report
   end
 
-  def load_views(filename)
-    Loader.new(filename).parse
-  end
-
-  def create_cohort(views)
-
-
+  def sort_views_into_cohorts()
+    views.each do |view|
+      require 'pry'; binding.pry
+      view += cohorts[view["cohort"]
+    end
   end
 end
 
-controller = Controller.new('source_data.json')
+  # count = 0
+  #  a_positives = 0
+  #  a_views = 0
+
+  #  views.each do |view|
+  #    count += 1
+  #    a_positives += 1 if (view["result"] == 1 && view["cohort"] =="A")
+  #    a_views += 1 if (view["cohort"] =="A")
+  #  end
+
+  #  puts count
+  #  puts a_positives
+  #  puts a_views
+
+
+  #  # p is conversion rate
+  #  puts p = (a_positives.to_f/a_views.to_f)
+
+  #  puts standard_error = Math.sqrt((p*(1-p)/a_views))
+
+  #  puts sigmas = 1.96 * standard_error
+  #  puts confidence_interval_lower = p - sigmas
+  #  puts confidence_interval_higher =  p + sigmas
+
+  # create a cohort object
+  # parse_json
+  # calculate_conversion_percentage
+  # calculate_confidence_level
+  # report
+
+controller = Controller.new('test.json')

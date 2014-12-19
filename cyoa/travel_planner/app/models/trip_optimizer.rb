@@ -22,7 +22,7 @@ class TripOptimizer
 
   def returns
     @returns ||= begin
-      flightstats = @schedule.get_flights_departing_after(meeting_end, @from, @to, @now)
+      flightstats = @schedule.get_flights_departing_after(meeting_end, @to, @from, @now)
       map_flightstats_to_flights(flightstats)
     end
   end

@@ -1,22 +1,19 @@
 class ArtworksController < ApplicationController
+  before_action :find_artist
+  before_action :find_artwork, only: [:show, :edit, :update, :destroy]
 
   def index
-    @artist = Artist.find(params[:artist_id])
     @artworks = @artist.artworks.all
   end
 
   def show
-    @artist = Artist.find(params[:artist_id])
-    @artwork = @artist.artworks.find(params[:id])
   end
 
   def new
-    @artist = Artist.find(params[:artist_id])
     @artwork = @artist.artworks.new
   end
 
   def create
-    @artist = Artist.find(params[:artist_id])
     @artwork = @artist.artworks.new(artwork_params)
     if @artwork.save
       flash[:success] = "The artwork was successfully created."
@@ -28,13 +25,9 @@ class ArtworksController < ApplicationController
   end
 
   def edit
-    @artist = Artist.find(params[:artist_id])
-    @artwork = @artist.artworks.find(params[:id])
   end
 
   def update
-    @artist = Artist.find(params[:artist_id])
-    @artwork = @artist.artworks.find(params[:id])
     if @artwork.update(artwork_params)
       flash[:success] = "The artwork was successfully updated."
       redirect_to artist_artwork_url(@artist, @artwork)
@@ -44,8 +37,6 @@ class ArtworksController < ApplicationController
   end
 
   def destroy
-    @artist = Artist.find(params[:artist_id])
-    @artwork = @artist.artworks.find(params[:id])
     @artwork.destroy
     flash[:success] = "The artwork was successfully deleted."
     redirect_to artist_artworks_url(@artist)
@@ -55,5 +46,13 @@ class ArtworksController < ApplicationController
 
   def artwork_params
     params.require(:artwork).permit(:title, :date, :thumbnail)
+  end
+
+  def find_artist
+    @artist = Artist.find(params[:artist_id])
+  end
+
+  def find_artwork
+    @artwork = @artist.artworks.find(params[:id])
   end
 end

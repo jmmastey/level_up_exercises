@@ -2,6 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Artist, :type => :model do
 
+  # Validations
+  it { should validate_presence_of(:first_name) }
+  it { should validate_presence_of(:last_name) }
+
+  # Associations
+  it { should have_many(:artworks) }
+
   describe '#full_name' do
     let(:artist) { FactoryGirl.create(:artist, first_name: "Claude", last_name: "Monet") }
 

@@ -10,17 +10,24 @@ class CreateEvent
   def create
     default_values = { event_source: :theatre_in_chicago }
     attribs = default_values.merge(@event_info)
-   
-    #return nil if event_exists?(convert_attribs(attribs))
+
+    return nil if event_exists?(convert_attribs(attribs))
     Event.create(attribs)
   end
 
   private
 
   def event_exists?(event_info)
-    time = 
-    date = 
-    Event.where(event_info).present?
+    dup_event_info = event_info.dup
+    %w[ time(1i) time(2i) time(3i) ].each { |t| dup_event_info.delete(t) }
+
+    # TODO: validate the specific time as a criteria to event duplication
+    # time = Time.new(2000, 01, 01, dup_event_info.delete("time(4i)"), dup_event_info.delete("time(5i)"))
+    # dup_event_info[:time] = time
+    date = Date.new(dup_event_info.delete("date(1i)").to_i, dup_event_info.delete("date(2i)").to_i, dup_event_info.delete("date(3i)").to_i)
+    dup_event_info[:date] = date
+
+    Event.where(dup_event_info).present?
   end
 
   def convert_attribs(event_info)

@@ -17,11 +17,16 @@ class EventsController < ApplicationController
 
   def create
     @event = CreateEvent.create(event_params)
-    if @event && @event.errors.nil?
-      flash[:notice] = "Created event!"
+    if @event.blank?
+      flash.now[:alert] = "Failed to create event! Event already exists!"
+      @event = Event.new
+    elsif @event.errors.present?
+      flash.now[:alert] = "Failed to create event! errors: #{@event.errors.messages}"
+      @event = Event.new
     else
-      flash[:alert] = "Failed to create event!"
+      flash.now[:notice] = "Created event!"
     end
+
     render :new
   end
 
@@ -31,9 +36,9 @@ class EventsController < ApplicationController
 
   def update
     if UpdateEvent.update(@event, event_params)
-      flash[:notice] = "Updated event!"
+      flash.now[:notice] = "Updated event!"
     else
-      flash[:alert] = "Failed to update event!"
+      flash.now[:alert] = "Failed to update event!"
     end
     render :edit
   end

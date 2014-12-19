@@ -27,19 +27,21 @@ class Arrowhead
   end
 
   def self.region_shape(region)
-    if CLASSIFICATIONS.include?(region)
-      CLASSIFICATIONS[region]
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+    raise region_error unless CLASSIFICATIONS.include?(region)
+    CLASSIFICATIONS[region]
   end
 
   def self.shape_arrowhead(shapes, shape)
-    if shapes.include?(shape)
-      shapes[shape]
-    else
-      raise "Unknown shape value. Are you sure you know what you're talking about?"
-    end
+    raise shape_error unless shapes.include?(shape)
+    shapes[shape]
+  end
+
+  def self.region_error
+    "Unknown region, please provide a valid region."
+  end
+
+  def self.shape_error
+    "Unknown shape value. Are you sure you know what you're talking about?"
   end
 end
 

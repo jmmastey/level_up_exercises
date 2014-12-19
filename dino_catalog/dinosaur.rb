@@ -20,7 +20,7 @@ class Dino
   end
   
   def is_carnivore?
-    %w(carnivore insectivore piscivore).include? @diet.downcase
+    %w( carnivore insectivore piscivore ).include? @diet.downcase
   end
   
 end

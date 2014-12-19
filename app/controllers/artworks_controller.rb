@@ -19,10 +19,10 @@ class ArtworksController < ApplicationController
     @artist = Artist.find(params[:artist_id])
     @artwork = @artist.artworks.new(artwork_params)
     if @artwork.save
-      flash[:notice] = "The artwork was successfully created."
+      flash[:success] = "The artwork was successfully created."
       redirect_to artist_artwork_url(@artist, @artwork)
     else
-      flash[:notice] = "The artwork could not be saved."
+      flash[:success] = "The artwork could not be saved."
       render 'new'
     end
   end
@@ -36,11 +36,19 @@ class ArtworksController < ApplicationController
     @artist = Artist.find(params[:artist_id])
     @artwork = @artist.artworks.find(params[:id])
     if @artwork.update(artwork_params)
-      flash[:notice] = "The artwork was successfully updated."
+      flash[:success] = "The artwork was successfully updated."
       redirect_to artist_artwork_url(@artist, @artwork)
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @artist = Artist.find(params[:artist_id])
+    @artwork = @artist.artworks.find(params[:id])
+    @artwork.destroy
+    flash[:success] = "The artwork was successfully deleted."
+    redirect_to artist_artworks_url(@artist)
   end
 
   private

@@ -40,7 +40,7 @@ When(/^I edit an artist: (.+)$/) do |artist|
   click_link("Edit Artist")
 end
 
-When(/^I delete (.+)$/) do |artist|
+When(/^I delete the artist: (.+)$/) do |artist|
   click_link(artist)
   click_link("Delete Artist")
 end

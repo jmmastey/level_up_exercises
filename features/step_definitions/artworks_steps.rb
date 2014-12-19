@@ -45,6 +45,11 @@ When(/^I update the title to (.+)$/) do |title|
   click_button("Update Artwork")
 end
 
+When(/^I delete the artwork: (.+)$/) do |artwork|
+  create_a_new_artwork(artwork)
+  click_link("Delete Artwork")
+end
+
 Then(/^I should see the artwork$/) do
   expect(page).to have_content("The Old Violin")
 end
@@ -66,4 +71,8 @@ Then(/^I should see artwork validation errors$/) do
   expect(page).to have_content("Please correct the 2 errors below:")
   expect(page).to have_content("Title can't be blank.")
   expect(page).to have_content("Date can't be blank.")
+end
+
+Then(/^I should not see (.+) on the artworks page for the artist$/) do |artwork|
+  expect(page).not_to have_css('h1', text: artwork)
 end

@@ -34,6 +34,6 @@ Feature: Artists Page
     Then I should see artist validation errors
 
   Scenario: Delete an artist
-    When I delete Claude Monet
+    When I delete the artist: Claude Monet
     Then I should not see Claude Monet on the Artists page
     And I should see a message confirming the artist was deleted

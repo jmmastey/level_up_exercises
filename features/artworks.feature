@@ -31,3 +31,8 @@ Feature: Artworks Page
   Scenario: Update an artist with invalid attributes
     When I edit an artwork with invalid data: Nighthawk
     Then I should see artwork validation errors
+
+  Scenario: Delete an artwork
+    When I delete the artwork: Nighthawk
+    Then I should not see Nighthawk on the artworks page for the artist
+    And I should see a message confirming the artwork was deleted

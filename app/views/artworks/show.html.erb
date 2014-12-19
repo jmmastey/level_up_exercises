@@ -11,4 +11,5 @@
   <hr>
 
   <p><%= link_to "Edit Artwork", edit_artist_artwork_path(@artist, @artwork) %> |
+   <%= link_to "Delete Artwork", artist_artwork_path(@artist, @artwork), method: :delete, data: { confirm: "Are you sure you want to delete this artwork?"} %></p>
 </article>

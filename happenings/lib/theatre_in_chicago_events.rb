@@ -1,20 +1,39 @@
 class TheatreInChicagoEvents
-  def initialize(start_date = Date.today, end_date = Date.today)
-    @start_date = start_date
-    @end_date = end_date
+  def initialize(opts = {})
+    @start_date = opts[:start_date]
+    @end_date   = opts[:end_date]
+    @month      = opts[:month]
+    @year       = opts[:year]
+  end
+
+  # TODO: optimize this to not pull for all inclusive years and then filter
+  def self.get_events_between_dates(start_date = Date.today, end_date = Date.today)
+    events = []
+    (start_date.year..end_date.year).each_with_object(events) do |year, arr| 
+      arr << self.get_events_for_year(year)
+    end
+    events.flatten.select { |event| event[:date] >= start_date && event[:date] <= end_date }
+  end
+
+  def self.get_events_for_year(year = Date.today.year)
+    (1..12).each_with_object([]) { |month, arr| arr << self.get_events_for_month(month, year) }.flatten
+  end
+
+  def self.get_events_for_month(month = Date.today.month, year = Date.today.year)
+    new({ month: month, year: year }).get_events_for_month
   end
 
   # Returns all events in a month
   # "http://www.theatreinchicago.com/opening/CalendarMonthlyResponse.php?ran=0&month=1&year=2014"
 
-  # The following returns all events on a day
+  # Returns all events on a day
   # "http://www.theatreinchicago.com/opening/CalendarSampleResponse.php?id=&ran=0&opendate=2014-12-12"
 
-  def self.get_events_for_month(month, year = Date.today.year)
-    raise ArgumentError, "invalid month value: #{month}" unless valid_month?(month)
-    raise ArgumentError, "invalid year value: #{year}" unless valid_year?(year)
+  def get_events_for_month
+    raise ArgumentError, "invalid month value: #{@month}" unless valid_month?(@month)
+    raise ArgumentError, "invalid year value: #{@year}" unless valid_year?(@year)
 
-    api_url = AppConfig.feeds.base_api_url + "month=#{month}&year=#{year}"
+    api_url = AppConfig.feeds.base_api_url + "month=#{@month}&year=#{@year}"
     raw_html = HTTParty.get(api_url)
     parsed_html = Nokogiri::HTML(raw_html)
 
@@ -34,12 +53,12 @@ class TheatreInChicagoEvents
       event_title       = event_titles[i].text
       event_url         = event_titles[i]["href"]
 
-      raw_events << { description: event_description,
-                      title:       event_title,
-                      url:         event_url,
-                      time:        event_time,
-                      date:        event_date,
-                      source:      :theatre_in_chicago }
+      raw_events << { description:    event_description,
+                      title:          event_title,
+                      url:            event_url,
+                      time:           event_time,
+                      date:           event_date,
+                      event_source:   :theatre_in_chicago }
     end
     raw_events
   end

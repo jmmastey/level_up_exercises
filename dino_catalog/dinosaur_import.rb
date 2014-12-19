@@ -15,7 +15,7 @@ class DinosaurImport
   }
   AUTOCONVERT_KEYS_VALUES = {
     "diet" => { "Yes" => "Carnivore",
-                "No" => nil }
+                "No" => nil },
   }
 
   def initialize(csv_files)
@@ -51,6 +51,6 @@ class DinosaurImport
 
   def convert_import_value(key_converted, value)
     return value unless AUTOCONVERT_KEYS_VALUES.key?(key_converted)
-      AUTOCONVERT_KEYS_VALUES[key_converted].fetch(value, value)
+    AUTOCONVERT_KEYS_VALUES[key_converted].fetch(value, value)
   end
 end

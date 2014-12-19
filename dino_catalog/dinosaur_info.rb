@@ -11,14 +11,14 @@ class DinosaurInfo
   # filters should be in the following format
   # { operator <string> => { attribute: value } }
   def filter_dinosaurs(filters = {})
-    self.dinosaurs_filtered = ObjectsFilter::filter_objects(filters, dinosaurs)
+    self.dinosaurs_filtered = ObjectsFilter.filter_objects(filters, dinosaurs)
     self.filters_applied = filters
   end
 
   def to_s(include_filter = false)
-    dinosaurs_selected = include_filter ? dinosaurs_filtered : dinosaurs
-    output = to_s_title(include_filter) + $/ + TO_S_LINE
-    output << to_s_dinosaurs(dinosaurs_selected)
+    dinos = include_filter ? dinosaurs_filtered : dinosaurs
+    output = to_s_title(include_filter) + $RS + TO_S_LINE
+    output << dinosaurs_to_s(dinos)
   end
 
   def to_s_title(include_filter = false)
@@ -29,8 +29,12 @@ class DinosaurInfo
     end
   end
 
-  def to_s_dinosaurs(dinosaurs_selected)
-    dinosaurs_selected.map { |dinosaur_selected| dinosaur_selected.to_s + $/ + TO_S_LINE }.join("")
+  def dinosaurs_to_s(dinos)
+    dinos.map { |dino| dinosaur_line(dino) }.join("")
+  end
+
+  def dinosaur_line(dino)
+    dino.to_s + $RS + TO_S_LINE
   end
 
   def to_json(include_filter = false)

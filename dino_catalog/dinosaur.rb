@@ -8,24 +8,25 @@ class Dinosaur
     "Late Cretaceous" => "Cretaceous",
     "Cretaceous" => "Cretaceous",
     "Jurassic" => "Jurassic",
-    "Oxfordian" => "Oxfordian"
+    "Oxfordian" => "Oxfordian",
   }
 
   def initialize(attributes = {})
-    @name = ""
-    @period = ""
-    @continent = ""
-    @diet = ""
-    @walking = ""
-    @description = ""
-    @weight = 0
+    self.name = ""
+    self.period = ""
+    self.continent = ""
+    self.diet = ""
+    self.walking = ""
+    self.description = ""
+    self.weight = 0
     assign_attributes(attributes)
   end
 
   def assign_attributes(attributes)
-      attributes.each { |key, value| send("#{key}=", value) }
-    rescue
-      raise "Invalid attributes hash: must contain attributes of Dinosaur class in format { attribute: value }"
+    attributes.each { |key, value| send("#{key}=", value) }
+  rescue
+    raise "Invalid attributes hash: must contain attributes "\
+          "of Dinosaur class in format { attribute: value }"
   end
 
   def weight=(new_weight)

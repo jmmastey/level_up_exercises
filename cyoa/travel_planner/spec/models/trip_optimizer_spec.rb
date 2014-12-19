@@ -10,7 +10,7 @@ describe 'TripOptimizer', vcr: { record: :once } do
 
   context 'Shortest Trip' do
     before(:context) do
-      @meeting_start = "2014-12-15 13:00:09 UTC".to_datetime
+      @meeting_start = "2014-12-30 13:00:09 UTC".to_datetime
       @now = "2014-12-10 13:00:09 UTC".to_datetime
     end
 

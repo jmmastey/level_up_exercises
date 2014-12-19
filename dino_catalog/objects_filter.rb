@@ -31,6 +31,6 @@ class ObjectsFilter
   end
 
   def self.filter_exception
-    raise "Invalid filters: must contain attributes of object class in format { operator <string> => { attribute: value } }"
+    raise "Invalid filters: must contain attributes of the class in format { operator <string> => { attribute: value } }, i.e. { \"==\" => { gender: \"male\", age: 45 } } "
   end
 end

@@ -21,9 +21,11 @@ class Triangle
 	end
 
 	def recite_facts
-		puts "This triangle is equilateral!" if equilateral
-		puts "This triangle is isosceles! Also, that word is hard to type." if isosceles 
-		puts "This triangle is scalene and mathematically boring." if scalene 
+    case
+    when equilateral? then puts "This triangle is equilateral!"
+		when isosceles? then puts "This triangle is isosceles! Also, that word is hard to type."
+		else puts "This triangle is scalene and mathematically boring."
+    end
 
 		angles = calculate_angles(side1,side2,side3)
 		puts "The angles of this triangle are #{angles.join(",")}"

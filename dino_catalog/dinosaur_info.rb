@@ -18,9 +18,9 @@ class DinosaurInfo
   end
 
   def to_s(include_filter = false)
-    d = include_filter ? dinosaurs_filtered : dinosaurs
+    dinosaurs_selected = include_filter ? dinosaurs_filtered : dinosaurs
     output = to_s_title(include_filter) + $/ + TO_S_LINE
-    output << to_s_dinosaurs(d)
+    output << to_s_dinosaurs(dinosaurs_selected)
   end
 
   def to_s_title(include_filter = false)
@@ -31,8 +31,8 @@ class DinosaurInfo
     end
   end
 
-  def to_s_dinosaurs(ds)
-    ds.map { |d| d.to_s + $/ + TO_S_LINE }.join("")
+  def to_s_dinosaurs(dinosaurs_selected)
+    dinosaurs_selected.map { |dinosaur_selected| dinosaur_selected.to_s + $/ + TO_S_LINE }.join("")
   end
 
   def to_json(include_filter = false)

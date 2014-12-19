@@ -19,18 +19,18 @@ class ObjectsFilter
   end
 
   def self.add_filter(objects, operator, attribute_value)
-    begin
       objects.select do |object|
         object.send("#{attribute_value.keys[0]}")
             .send(operator, attribute_value.values[0])
       end
+      objects
     rescue
       filter_exception
-    end
-    objects
   end
 
   def self.filter_exception
-    raise "Invalid filters: must contain attributes of the class in format { operator <string> => { attribute: value } }, i.e. { \"==\" => { gender: \"male\", age: 45 } } "
+    raise "Invalid filters: must contain attributes of the class in format "\
+          "{ operator <string> => { attribute: value } }, "\
+          "i.e. { \"==\" => { gender: \"male\", age: 45 } } "
   end
 end

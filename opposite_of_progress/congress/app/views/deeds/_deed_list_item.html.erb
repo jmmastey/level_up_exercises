@@ -1,0 +1,18 @@
+<div class="panel">
+  <h4><%= raw "#{link_to deed_list_item.deed, deed_list_item}" %></h4>
+  
+  <div class="row">
+    <div class="large-6 columns">
+      <% if deed_list_item.bioguide_id %>
+        <% legislator = DeedsHelper.related_legislator deed_list_item %>
+        <%= render partial: "legislators/legislator", locals: {legislator: legislator, deed: deed_list_item} %>
+      <% end %>
+    </div>
+    <div class="large-6 columns">
+      <% if deed_list_item.bill_id %>
+        <% bill = DeedsHelper.related_bill deed_list_item %>
+        <%= render bill %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<h3>User Preferences</h3>
+
+<div>
+  <%= form_tag(preferences_path, method: "post") do %>
+    <div>
+      <%= label_tag(:email) %>
+      <%= text_field_tag(:email, "Email Address") %>
+    </div>
+    <div>
+      <%= check_box_tag(:email_preferences) %>
+      <%= label_tag(:email_preferences, "Receive email notifications for new good deeds") %>
+    </div>
+    <div>
+      <%= link_to("Update Password", edit_user_registration_path) %>
+    </div>
+  <% end %>
+</div>

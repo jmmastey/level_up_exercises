@@ -1,0 +1,35 @@
+== README
+
+* Ruby version
+    ruby 2.0.0p481 (2014-05-08 revision 45883)
+
+* System dependencies
+    curb - simple cURL requests
+    foundation-rails - bootstrap-esque styling
+    will_paginate - simple pagination
+    pry-rails - debugging tool
+    devise - simple user authentication
+    cucumber-rails - BDD testing
+    rspec-rails - TDD testing
+    factory_girl_rails - sample data creation
+    faker - fake sample data creation
+
+* Configuration
+    Set Sunlight API credentials in:
+      app/controllers/helpers/application_helper.rb
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+    TDD tests:
+      bundle exec rspec
+    BDD tests:
+      cucumber features
+
+* Services (job queues, cache servers, search engines, etc.)
+    Sync bills and legislators data:
+      rake cron
+    Create good deeds (typically done after syncing data)
+      rake deeds

@@ -1,0 +1,21 @@
+<header>
+  <div style="float:right;">
+    <%=
+      select("legislator_sort",
+             "option",
+             LegislatorsHelper.sort_options,
+             { prompt: "Sort by...", selected: "first_name" })
+    %>
+  </div>
+
+  <h3>All Legislators</h3>
+</header>
+
+<% @results.each do |result| %>
+  <div><%= render result %></div>
+<% end %>
+<%= "There are no legislators to show" if @results.count == 0 %>
+
+<hr />
+
+<div class="pagination"><%= will_paginate @results %></div>

@@ -1,0 +1,5 @@
+<div class="panel">
+  <h5>Bill: <%= raw "#{link_to bill.title, bill}" %></h5>
+  <p><em>"<%= bill.official_title %>"</em></p>
+  <p class="supporting-date">Introduced on: <%= ApplicationHelper.date_display(bill.introduced_on) %></p>
+</div>

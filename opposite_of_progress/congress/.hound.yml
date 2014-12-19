@@ -1,0 +1,6 @@
+AllCops:
+  Exclude:
+    - opposite_of_progress/congress/db/schema.rb
+    - opposite_of_progress/congress/features/support/env.rb
+    - opposite_of_progress/congress/spec/spec_helper.rb
+    

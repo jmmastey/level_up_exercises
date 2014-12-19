@@ -1,0 +1,20 @@
+<header>
+  <div style="float:right;">
+    <%=
+      select("bill_sort",
+             "option",
+             BillsHelper.sort_options,
+             { prompt: "Sort by...", selected: params["sort_by"] })
+    %>
+  </div>
+
+  <h3>All Bills</h3>
+</header>
+
+<%= render @results %>
+
+<%= "There are no bills to show" if @results.count == 0 %>
+
+<hr />
+
+<div class="pagination"><%= will_paginate @results %></div>

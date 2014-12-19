@@ -13,7 +13,7 @@ Feature: Viewing the Bill list
     Then I should see a title for "All Bills"
 
   @bad
-  Scenario: There are no bills
+  Scenario:
     When I follow "All Bills"
     Then I should see a message "There are no bills to show"
 

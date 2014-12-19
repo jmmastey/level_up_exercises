@@ -22,7 +22,7 @@ module DeedsHelper
     end
   end
 
-  def self.deed_creator bill, bill_date_field, deed_text
+  def self.deed_creator(bill, bill_date_field, deed_text)
     deed = Deed.find_or_create_by(bill_id: bill.bill_id,
                                   bioguide_id: bill.sponsor_id,
                                   deed: deed_text,
@@ -30,11 +30,11 @@ module DeedsHelper
     deed.save
   end
 
-  def self.related_legislator deed
+  def self.related_legislator(deed)
     Legislator.where(bioguide_id: deed.bioguide_id).first
   end
 
-  def self.related_bill deed
+  def self.related_bill(deed)
     Bill.where(bill_id: deed.bill_id).first
   end
 end

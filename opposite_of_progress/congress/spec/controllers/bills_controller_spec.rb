@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe BillsController, type: :controller do
-  let (:bioguide_id) { Faker::Lorem.characters(7) }
-  let (:bill) { FactoryGirl.create(:bill, sponsor_id: bioguide_id) }
-  let (:legislator) { FactoryGirl.create(:legislator, bioguide_id: bioguide_id) }
+  let(:bioguide_id) { Faker::Lorem.characters(7) }
+  let(:bill) { FactoryGirl.create(:bill, sponsor_id: bioguide_id) }
+  let(:legislator) { FactoryGirl.create(:legislator, bioguide_id: bioguide_id) }
 
   describe "GET #index" do
     before :each do

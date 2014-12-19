@@ -8,7 +8,7 @@ class Legislator < ActiveRecord::Base
   end
 
   def display_party
-    "(#{self.party})" if self.party
+    "(#{party})" if party
   end
 
   def full_party

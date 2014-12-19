@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Bill do
-  let (:fake) { FactoryGirl.build(:bill) }
+  let(:fake) { FactoryGirl.build(:bill) }
 
   it "has a short title" do
     expect(fake.short_title).to eq(fake.title)

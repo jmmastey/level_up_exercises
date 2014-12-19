@@ -1,7 +1,7 @@
 require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 
-Given(/^there are no "(.*?)"$/) do |object_name|
+Given(/^there are no "(.*?)"$/) do |_|
   DatabaseCleaner.start
 end
 
@@ -11,6 +11,10 @@ end
 
 Given(/^I create a legislator named "(.*?)"$/) do |name|
   Legislator.create!(last_name: name)
+end
+
+Given(/^I create a deed about "(.*?)"$/) do |subject|
+  Deed.create!(deed: subject)
 end
 
 Then(/^I should see a message "(.*?)"$/) do |text|

@@ -23,6 +23,7 @@ RSpec.describe SelectionCriterion, :type => :model do
   end
 
   it "creates its SQL expression" do
+binding.pry
     criterion.criterion = 5
     expected = ['"start_time" > ?', 5]
     expect(criterion.sql_expression).to eq(expected)

@@ -1,0 +1,44 @@
+<h1>Flight options for your trip</h1>
+
+<div>
+  <h2>Trip Requirements</h2>
+
+  <%= render @trip %>
+
+</div>
+
+<%= form_tag({controller: "trips", action: "flights_save" }, method: "POST") do %>
+
+<div>
+  <h2>Shortest flight options for your trip</h2>
+
+  <% flight = @optimizer.best_departure %>
+  <h3>Departing flight to <%= flight.destination_airport.code %></h3>
+
+  <%= render @optimizer.best_departure, show_radio_button: :departure %>
+
+  <h3>Returning flight to <%= @optimizer.best_return.destination_airport.code %></h3>
+
+  <%= render @optimizer.best_return, show_radio_button: :return %>
+
+  <%= submit_tag("Go with these") %>
+
+</div>
+
+<div>
+  <h2>Alternate flight options</h2>
+
+  <h3>Departure options</h3>
+  <% @optimizer.departures.each do |flight| %>
+    <%= render flight, show_radio_button: :departure %>
+  <% end %>
+
+  <h3>Return options</h3>
+  <% @optimizer.returns.each do |flight| %>
+    <%= render flight, show_radio_button: :return %>
+  <% end %>
+
+  <%= submit_tag("Go with these alternatives") %>
+
+</div>
+<% end %>

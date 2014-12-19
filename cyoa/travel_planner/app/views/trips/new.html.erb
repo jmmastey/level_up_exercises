@@ -1,0 +1,28 @@
+<h1>New trip planner</h1>
+<h2>Please enter your meeting details</h2>
+
+<%= form_tag("/trips", method: "POST") do %>
+  <div>
+    <%= label_tag(:meeting, "Meeting Date:") %>
+    <%= datetime_select(:meeting, :start, default: 3.days.from_now) %>
+  </div>
+
+  <div>
+    <%= label_tag(:length, "Meeting length:") %>
+    <%= number_field_tag(:length, 1.5, in: 1...10, step: 0.25) %>
+  </div>
+
+  <div>
+    <%= label_tag(:origin_airport, "Origin Airport:") %>
+    <%= text_field_tag(:origin_airport, "ORD", size: 3) %>
+  </div>
+
+  <div>
+    <%= label_tag(:destination_airport, "Destination Airport:") %>
+    <%= text_field_tag(:destination_airport, "LGA", size: 3) %>
+  </div>
+
+  <div>
+    <%= submit_tag("Find shortest trip") %>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<h1>Your trip</h1>
+
+<div>
+  <%= render @trip %>
+
+  <% @trip.flights.each do |flight| %>
+    <%= render flight %>
+  <% end %>
+
+</div>

@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+d = "#{File.dirname(__FILE__)}/../vendor/{gems,plugins}/cucumber*/bin/cucumber"
+vendored_cucumber_bin = Dir[d].first
+if vendored_cucumber_bin
+  load File.expand_path(vendored_cucumber_bin)
+else
+  require 'rubygems' unless ENV['NO_RUBYGEMS']
+  require 'cucumber'
+  load Cucumber::BINARY
+end

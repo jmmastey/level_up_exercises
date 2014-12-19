@@ -1,0 +1,7 @@
+<% location = @trip.home_location %>
+<div>Home location: <%= location.address1 %>,
+  <%= location.city %>,
+  <%= location.state %>
+  <%= location.postal_code %></div>
+
+<%= render @trip.meetings %>

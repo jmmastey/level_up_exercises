@@ -1,0 +1,11 @@
+<% show_radio_button ||= false %>
+
+<div>
+<% if show_radio_button %>
+  <%= radio_button_tag(show_radio_button, flight.key) %>
+<% end %>
+<%= flight.carrier %> #<%= flight.flight_number %> departs <%= flight.origin_airport.code %>
+at <%= flight.origin_date_time %>
+Arrives <%= flight.destination_airport.code %>
+at <%= flight.destination_date_time %>
+</div>

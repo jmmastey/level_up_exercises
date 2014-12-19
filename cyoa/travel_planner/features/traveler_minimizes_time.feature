@@ -18,6 +18,7 @@ Feature: traveler minimizes travel time
 
   Scenario: traveler selects default flights
     Given that I am viewing the shortest flights
-    When I click "Go with these"
+    When I select the default flights
+    And I click "Go with these"
     Then I should see a trip summary
 

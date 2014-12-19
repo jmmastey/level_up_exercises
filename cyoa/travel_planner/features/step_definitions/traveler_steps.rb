@@ -41,14 +41,14 @@ Then(/^I should see the shortest trip$/) do
   assert_text("Shortest flight options for your trip")
   assert_text("Departing flight to LGA")
   assert_text("Returning flight to ORD")
-  # TODO: require flight number
+  #assert_text("DL #5938 departs ORD")
 end
 
-And(/^I should see trip requirements$/) do
+Then(/^I should see trip requirements$/) do
   assert_see_trip_reqs
 end
 
-And(/^I should see alternate flight options$/) do
+Then(/^I should see alternate flight options$/) do
   assert_text("Alternate flight options")
   assert_text("Departure options")
   assert_text("Return options")
@@ -62,4 +62,11 @@ end
 
 Then(/^I should see a trip summary$/) do
   pending
+end
+
+When(/^I select the default flights$/) do
+  # choose('user_register_temp_attributes_domain_package_id_1', visible: false)
+  # page.execute_script("document.getElementById('user_register_temp_attributes_dom‌​ain_package_id_1').checked = true")
+  find(:xpath, "(//input[@name='departure'])[1]").click
+  find(:xpath, "(//input[@name='return'])[1]").click
 end

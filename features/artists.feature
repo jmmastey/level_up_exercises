@@ -21,7 +21,7 @@ Feature: Artists Page
 
   Scenario: Create an invalid new artist
     When I create an invalid artist
-    Then I should see validation errors
+    Then I should see artist validation errors
 
   Scenario: Edit an artist
     When I edit an artist: Claude Monet
@@ -31,7 +31,7 @@ Feature: Artists Page
 
   Scenario: Update an artist with invalid attributes
     When I edit an artist with invalid data: Claude Monet
-    Then I should see validation errors
+    Then I should see artist validation errors
 
   Scenario: Delete an artist
     When I delete Claude Monet

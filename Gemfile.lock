@@ -207,6 +207,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    shoulda-matchers (2.7.0)
+      activesupport (>= 3.0.0)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -273,6 +275,7 @@ DEPENDENCIES
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0.0.beta1)
   sdoc (~> 0.4.0)
+  shoulda-matchers
   sinatra (~> 1.4.5)
   spring
   sqlite3

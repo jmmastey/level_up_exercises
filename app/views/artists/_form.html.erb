@@ -1,6 +1,6 @@
 <%= form_for @artist do |f| %>
 
-  <%= render 'shared/form_errors' %>
+  <%= render 'shared/form_errors', object: @artist %>
 
   <%= f.label :first_name, "First Name" %>
   <%= f.text_field :first_name %>

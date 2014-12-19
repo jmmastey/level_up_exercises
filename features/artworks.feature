@@ -8,7 +8,16 @@ Feature: Artworks Page
     When I click on View All Artworks
     Then I should see the artist's artworks
 
-  Scenario: Go to the artwork page
-    Given I am on the page for an artwork
+  Scenario: Go to an individual artwork page
+    Given I am on the page for an individual artwork
     Then I should see the artwork
 
+  Scenario: Create a valid new artwork
+    Given I am on an artist's artworks page
+    When I create a new artwork: Nighthawk
+    Then I should be on the artwork page for Nighthawk
+    And I should see a message confirming the artwork was created
+
+  Scenario: Create an invalid new artwork
+    When I create an invalid artwork
+    Then I should see artwork validation errors

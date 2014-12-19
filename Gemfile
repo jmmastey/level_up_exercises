@@ -81,6 +81,7 @@ group :test do
   gem 'sinatra', '~> 1.4.5'
   gem 'webmock'
   gem 'vcr'
+  gem 'shoulda-matchers'
 end
 
 group :production do

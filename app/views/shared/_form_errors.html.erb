@@ -1,10 +1,10 @@
-<% if @artist.errors.any? %>
+<% if object.errors.any? %>
   <div class="errors">
     <header>
-      <p>The <%= @artist.class.name.titleize.downcase %> could not be saved.</p>
-      <p>Please correct the <%= pluralize(@artist.errors.count, 'error') %> below:</p>
+      <p>The <%= object.class.name.titleize.downcase %> could not be saved.</p>
+      <p>Please correct the <%= pluralize(object.errors.count, 'error') %> below:</p>
     </header>
-    <% @artist.errors.full_messages.each do |message| %>
+    <% object.errors.full_messages.each do |message| %>
       <label class="label-error"><%= message %>.</label>
     <% end %>
   </div>

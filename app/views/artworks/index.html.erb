@@ -1,9 +1,11 @@
 <section class="main-content type-system-rounded">
+  <p class="new_artwork_link"><%= link_to "Create a New Artwork", new_artist_artwork_path %></p>
+
   <h1><%= pluralize(@artworks.size, "Artwork") %> for <%= @artist.full_name %></h1>
 
   <% @artworks.each do |artwork| %>
     <article>
-      <h1><%= artwork.title %></h1>
+      <h1><%= link_to artwork.title, artist_artwork_path(@artist, artwork) %></h1>
       <p>Year: <%= artwork.date %></p>
       <%= image_tag(artwork.thumbnail, class: "artwork-thumbnail") %>
     </article>

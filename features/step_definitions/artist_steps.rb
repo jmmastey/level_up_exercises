@@ -81,7 +81,7 @@ Then(/^I should see all the artists$/) do
   expect(page).to have_content("Manet")
 end
 
-Then(/^I should see validation errors$/) do
+Then(/^I should see artist validation errors$/) do
   expect(page).to have_content("The artist could not be saved.")
   expect(page).to have_content("Please correct the 2 errors below:")
   expect(page).to have_content("First name can't be blank.")

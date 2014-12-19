@@ -11,9 +11,8 @@ module FlightStats
       @airport_offsets = {}
     end
 
-    def get_flights_arriving_before(time, from, to, now = DateTime.now)
+    def flights_arriving_before(time, from, to, now = DateTime.now)
       check_for_past_time(time, now)
-
       builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
       flights = arriving_flights(builder, time)
       if flights.nil? || flights.length == 0
@@ -25,13 +24,15 @@ module FlightStats
       flights
     end
 
-    def get_flights_departing_after(time, from, to, now = DateTime.now)
+    def flights_departing_after(time, from, to, now = DateTime.now)
       check_for_past_time(time, now)
-
       builder = FlightStats::UrlBuilder.new.from(from).to(to).date(time)
-      get_scheduled_flights(builder.schedule_departing_url).select! do |f|
-        f["departureTimeUtc"].to_datetime > time
+      flights = departing_flights(builder, time)
+      if flights.nil? || flights.length == 0
+        builder.from(from).to(to).date(time.to_datetime + 1)
+        flights = departing_flights(builder, time)
       end
+      flights
     end
 
     private
@@ -44,7 +45,7 @@ module FlightStats
       "Time requested in the past (request: #{time}, now: #{now}"
     end
 
-    def get_scheduled_flights(url)
+    def scheduled_flights(url)
       json = RestClient::Request.execute(method:     :get,
                                   url:        url,
                                   headers:    headers,
@@ -75,18 +76,24 @@ module FlightStats
 
     def tz_offset(airport)
       return @airport_offsets[airport] unless @airport_offsets[airport].nil?
-      get_offset_from_airports(airport)
+      offset_from_airports(airport)
     end
 
-    def get_offset_from_airports(airport)
+    def offset_from_airports(airport)
       offset = @airports.select { |a| a["fs"] == airport }[0]["utcOffsetHours"]
       @airport_offsets[airport] = sprintf("%+05.f", (offset.to_f * 100.0))
       @airport_offsets[airport]
     end
 
     def arriving_flights(builder, time)
-      get_scheduled_flights(builder.schedule_arriving_url).tap do |flights|
+      scheduled_flights(builder.schedule_arriving_url).tap do |flights|
         flights.select! { |f| f["arrivalTimeUtc"].to_datetime < time }
+      end
+    end
+
+    def departing_flights(builder, time)
+      scheduled_flights(builder.schedule_departing_url).tap do |flights|
+        flights.select! { |f| f["departureTimeUtc"].to_datetime > time }
       end
     end
 

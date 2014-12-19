@@ -35,14 +35,14 @@ attr_accessor :dinosaurs
       @filtered_dinos.select! { |dino| dino.is_carnivore? } if filter == "carnivore"
       @filtered_dinos.select! { |dino| dino.continent.downcase != "africa" } if filter == "joe"
       @filtered_dinos.select! { |dino| dino.continent.downcase.eql? "africa" } if filter == "pirate_bay"      
-      period_filter(@filtered_dinos, filter) if @period_filters.include? filter
+      filter_by_period(@filtered_dinos, filter) if @period_filters.include? filter
     end
     
   @filtered_dinos.map! { |dino| dino.name.to_s }
   
   end
   
-  def period_filter(dinos, filter)
+  def filter_by_period(dinos, filter)
     dinos.select! {|dino| dino.period.downcase.include? filter }   
   end
   

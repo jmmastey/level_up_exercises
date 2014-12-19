@@ -17,7 +17,6 @@ $dino_dex = DinoDex.new(merged_dinos)
 puts "Welcome to the DinoDex!\n\n"
 puts "Available comands:  all_dinos, exit, help, filter [filter1] [filter2] ..., [dinosaur_name]"
 
-#DinoDexCommandLine::get_and_check_input
 while true do
   DinoDexCommandLine::get_input
 end

@@ -1,0 +1,24 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: happenings_development
+  pool: 5
+  username: happenings
+  password:
+  host: localhost
+  min_messages: warning
+  schema_search_path: public
+
+test: &test
+  adapter: postgresql
+  encoding: unicode
+  database: happenings_test
+  pool: 5
+  username: happenings
+  password:
+  host: localhost
+  min_messages: warning
+  schema_search_path: public
+
+cucumber:
+  <<: *test

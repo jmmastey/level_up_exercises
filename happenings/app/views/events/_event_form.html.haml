@@ -1,0 +1,20 @@
+= form_for(@event) do |f|
+  .wrapper.panel-body.panel-default
+    %fieldset
+      .form-group
+        = f.label :title
+        = f.text_field :title
+      .form-group
+        = f.label :start_time
+        = f.time_select :time
+      .form-group
+        = f.label :start_date
+        = f.date_select :date
+      .form-group
+        = f.label :description
+        = f.text_field :description
+      .form-group
+        = f.label :url
+        = f.text_field :url
+      .submit
+        = f.submit

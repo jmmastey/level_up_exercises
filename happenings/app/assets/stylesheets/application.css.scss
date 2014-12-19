@@ -1,0 +1,56 @@
+//@import 'bootswatch/slate/variables';
+//@import 'bootswatch/slate/bootswatch';
+//@import 'font-awesome';
+@import 'bootstrap';
+@import 'bootstrap-sortable';
+@import 'bootstrap/bootstrap-tooltip';
+
+@import 'variables';
+@import 'happenings';
+
+* {
+  outline: 0;
+  zoom: 1;
+}
+
+a:hover { text-decoration: none; }
+
+body, html {
+  height: 100%;
+}
+
+td, th {
+  text-align: center;
+}
+
+.table tbody tr td {
+  vertical-align: middle;
+}
+
+.table a{
+  text-decoration: none;
+}
+
+table.sortable thead th:hover:not([data-defaultsort=disabled]) {
+  color: $gray-darker;
+  background: $text-color
+}
+
+.alert, .notice {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: white;
+}
+.alert{
+  background-color: $brand-danger;
+}
+
+.notice {
+  background-color: $brand-success;
+}
+
+.center {
+  text-align: center;
+}

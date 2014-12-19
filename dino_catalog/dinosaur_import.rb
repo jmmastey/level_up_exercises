@@ -27,23 +27,23 @@ class DinosaurImport
   private
 
   def csv_files_to_dinosaurs(csv_files)
-    dinosaurs = []
+    new_dinosaurs = []
     csv_files.each do |csv_file|
       data = CSV.read(csv_file, DEFAULT_OPTIONS)
-      dinosaurs_from_file = data_to_dinosaurs(data)
-      dinosaurs.concat(dinosaurs_from_file)
+      dinosaurs_from_data = data_to_dinosaurs(data)
+      new_dinosaurs.concat(dinosaurs_from_data)
     end
-    @dinosaurs = dinosaurs
+    @dinosaurs = new_dinosaurs
   end
 
   def data_to_dinosaurs(data)
-    dinosaurs = []
+    dinosaurs_from_data = []
     data.each do |row|
       hash = row.to_hash
       hash = convert_import_hash(hash)
-      dinosaurs << Dinosaur.new(hash)
+      dinosaurs_from_data << Dinosaur.new(hash)
     end
-    dinosaurs
+    dinosaurs_from_data
 end
 
   def convert_import_hash(hash)

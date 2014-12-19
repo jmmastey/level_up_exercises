@@ -3,48 +3,43 @@ $LOAD_PATH << '.'
 require 'objects_filter'
 
 class DinosaurInfo
-  attr_accessor :dinosaurs, :dinosaurs_filtered, :filters
+  attr_accessor :dinosaurs, :dinosaurs_filtered, :filters_applied
   TO_S_LINE = "----------------------\n"
 
-  def initialize(dinosaurs)
-    @dinosaurs = dinosaurs
+  def initialize(d)
+    @dinosaurs = d
   end
 
   # filters should be in the following format
   # { operator <string> => { attribute: value } }
   def filter_dinosaurs(filters = {})
-    @dinosaurs_filtered = ObjectsFilter::filter_objects(filters, @dinosaurs)
-    @filters = filters
+    self.dinosaurs_filtered = ObjectsFilter::filter_objects(filters, dinosaurs)
+    self.filters_applied = filters
   end
 
   def to_s(include_filter = false)
-    dinosaurs = include_filter ? @dinosaurs_filtered : @dinosaurs
-    to_s = to_s_title(include_filter) + $/ + TO_S_LINE
-    to_s += to_s_dinosaurs(dinosaurs)
-    to_s
+    d = include_filter ? dinosaurs_filtered : dinosaurs
+    output = to_s_title(include_filter) + $/ + TO_S_LINE
+    output << to_s_dinosaurs(d)
   end
 
   def to_s_title(include_filter = false)
     if include_filter
-      "DinoDex current Dinosaur Info Last Filter (#{@filters}):"
+      "DinoDex current Dinosaur Info Last Filter (#{filters_applied}):"
     else
       "DinoDex current Dinosaur Info:"
     end
   end
 
-  def to_s_dinosaurs(dinosaurs)
-    to_s_dinosaurs = ""
-    dinosaurs.each do |dinosaur|
-      to_s_dinosaurs += dinosaur.to_s + $/ + TO_S_LINE
-    end
-    to_s_dinosaurs
+  def to_s_dinosaurs(ds)
+    ds.map { |d| d.to_s + $/ + TO_S_LINE }.join("")
   end
 
   def to_json(include_filter = false)
     if include_filter
-      @dinosaurs_filtered.to_json
+      dinosaurs_filtered.to_json
     else
-      @dinosaurs.to_json
+      dinosaurs.to_json
     end
   end
 end

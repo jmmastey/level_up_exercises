@@ -1,3 +1,4 @@
+
 module CSVtoHashTools
   
   require 'csv'
@@ -6,16 +7,16 @@ module CSVtoHashTools
     field && field.empty? ? nil : field
   end
 
-  def CSV_to_hash(file)
+  def CSV_to_hash_array(file)
     
     @csv = CSV.read(file, :headers => true, :header_converters => :symbol, :converters => :all)
     @csv = @csv.map { |row| row.to_hash }
     
   end
 
-  def normalize_african_hash(dino_hash_array)
+  def normalize_african_hash_array(dinos)
     
-    dino_hash_array.each do |dino|
+    dinos.each do |dino|
       dino[:name] = dino.delete :genus
       dino[:weight_in_lbs] = dino.delete :weight
       dino[:diet] = dino.delete :carnivore

@@ -1,3 +1,4 @@
+
 class DinoDex
 
 attr_accessor :dinosaurs
@@ -10,22 +11,24 @@ attr_accessor :dinosaurs
   end
   
   def print_all_facts(dino_name)
-    
+    @dino_facts = []
     dino = @dinosaurs.select { |dino| dino.name.to_s.downcase == dino_name.downcase }
     
-    dino[0].instance_variables.each do |dino_fact|
+    dino[0].instance_variables.map do |dino_fact|
       if dino[0].instance_variable_get(dino_fact)
-        puts dino_fact.to_s[1..-1].capitalize + ":\n" + dino[0].instance_variable_get(dino_fact).to_s
+        @dino_facts << dino_fact.to_s[1..-1].capitalize
+        @dino_facts << dino[0].instance_variable_get(dino_fact).to_s
       end
     end
-    
+    @dino_facts
   end
   
-  def filter_dinos(filter_array)
+  def filter_dinos(filters)
+    #remove array from variable name
     
     @filtered_dinos = @dinosaurs.dup
     
-    filter_array.each do |filter|
+    filters.each do |filter|
        
       if filter.to_s.downcase == "biped"
         @filtered_dinos.select! do |dino|
@@ -105,7 +108,7 @@ attr_accessor :dinosaurs
   def all_dinos
     
     puts "All dinos:"
-    @dinosaurs.each { |dino| puts dino.name }
+    @dinosaurs.map { |dino| dino.name.to_s }
     
   end
   

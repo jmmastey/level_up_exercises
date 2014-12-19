@@ -1,3 +1,4 @@
+
 class Dino
   
   attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description

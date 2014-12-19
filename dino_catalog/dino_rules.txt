@@ -1,6 +1,7 @@
 Welcome to the DinoDex!
 
-All commands are case insensitive. The following commands are available:
+All commands are case insensitive.  Please enter only one command at a time.
+The following commands are available:
 
 $		all_dinos						
 Prints a list of all dinos in the DinoDex

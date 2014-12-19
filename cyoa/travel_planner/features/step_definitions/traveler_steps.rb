@@ -11,14 +11,21 @@ def fill_in_travel_needs
   fill_in "destination_airport", with: "LGA"
 end
 
-def assert_see_trip_reqs
-  assert_text("Home location: 10000 W O'Hare Ave, Chicago, IL 60666")
-  assert_text("Meeting location: LaGuardia Airport, New York, NY 11371")
-  assert_text("Meeting time: ")
-  assert_text("Meeting length: 1.5 hours")
+def see_trip_requirements
+  expect(page).to have_text("Home location: 10000 W O'Hare Ave, Chicago, IL 60666")
+  expect(page).to have_text("Meeting location: LaGuardia Airport, New York, NY 11371")
+  expect(page).to have_text("Meeting time: ")
+  expect(page).to have_text("Meeting length: 1.5 hours")
+end
+
+def see_trip_flights
+  # AA #392 departs ORD at 2014-12-22 13:30:00 UTC Arrives LGA at 2014-12-22 15:30:00 UTC
+  expect(page).to have_text(/\w{2} #\d+ departs ORD at /)
+  expect(page).to have_text(/\w{2} #\d+ departs LGA at /)
 end
 
 Given(/^I am not yet using the application$/) do
+  #NOOP
 end
 
 When(/^I go to the home page$/) do
@@ -34,39 +41,37 @@ Given(/^that I entered my travel needs$/) do
 end
 
 Then(/^I should see "([^"]*)"$/) do |text|
-  assert_text(text)
+  expect(page).to have_text(text)
 end
 
 Then(/^I should see the shortest trip$/) do
-  assert_text("Shortest flight options for your trip")
-  assert_text("Departing flight to LGA")
-  assert_text("Returning flight to ORD")
-  #assert_text("DL #5938 departs ORD")
+  expect(page).to have_text("Shortest flight options for your trip")
+  expect(page).to have_text("Departing flight to LGA")
+  expect(page).to have_text("Returning flight to ORD")
 end
 
 Then(/^I should see trip requirements$/) do
-  assert_see_trip_reqs
+  see_trip_requirements
 end
 
 Then(/^I should see alternate flight options$/) do
-  assert_text("Alternate flight options")
-  assert_text("Departure options")
-  assert_text("Return options")
+  expect(page).to have_text("Alternate flight options")
+  expect(page).to have_text("Departure options")
+  expect(page).to have_text("Return options")
 end
 
 Given(/^that I am viewing the shortest flights$/) do
   fill_in_travel_needs
   click_button("Find shortest trip")
-  assert_see_trip_reqs
+  see_trip_requirements
 end
 
 Then(/^I should see a trip summary$/) do
-  pending
+  see_trip_requirements
+  see_trip_flights
 end
 
 When(/^I select the default flights$/) do
-  # choose('user_register_temp_attributes_domain_package_id_1', visible: false)
-  # page.execute_script("document.getElementById('user_register_temp_attributes_dom‌​ain_package_id_1').checked = true")
-  find(:xpath, "(//input[@name='departure'])[1]").click
-  find(:xpath, "(//input[@name='return'])[1]").click
+  find(:xpath, "(//input[@name='departure'])[1]").set(true)
+  find(:xpath, "(//input[@name='return'])[1]").set(true)
 end

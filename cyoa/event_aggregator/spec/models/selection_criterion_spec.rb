@@ -21,4 +21,10 @@ RSpec.describe SelectionCriterion, :type => :model do
     selector.field = "bessy"
     expect(criterion.configuration["field"]).to eq("bessy")
   end
+
+  it "creates its SQL expression" do
+    criterion.criterion = 5
+    expected = ['"start_time" > ?', 5]
+    expect(criterion.sql_expression).to eq(expected)
+  end
 end

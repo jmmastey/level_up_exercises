@@ -1,9 +1,15 @@
 class SelectionCriterion < ActiveRecord::Base
   has_and_belongs_to_many :feeds
 
-  before_save :refresh_sql_expression
+  after_initialize { self.configuration ||= {} }
 
   serialize :configuration, JSON
+  serialize :sql_expression, JSON
+
+  def sql_expression
+    refresh_sql_expression
+    super
+  end
 
   def implementation_strategy
     @implementation_strategy ||= create_my_implementation
@@ -12,7 +18,7 @@ class SelectionCriterion < ActiveRecord::Base
   protected
 
   def refresh_sql_expression
-    sql_expression = generate_where_clause
+    self.sql_expression = generate_where_clause
   end
 
   def generate_where_clause 
@@ -30,7 +36,7 @@ class SelectionCriterion < ActiveRecord::Base
     super
   rescue
     if implementation_strategy.respond_to?(method)
-      implementation_strategy.send(method, *args, block)
+      implementation_strategy.send(method, *args, &block)
     else
       super
     end

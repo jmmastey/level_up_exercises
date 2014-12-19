@@ -11,10 +11,12 @@ module Selector
   included do
     AVAILABLE_SELECTORS << self
 
-    def self.config_variable(*var_names)
-      var_names.each do |var|
-        define_method(var) { get_configuration(var) }
-        define_method(:"#{var.to_s}=") { |val| set_configuration(var, val) }
+    def self.config_variable(*vars)
+      vars.each do |var|
+        var_name = var.to_s
+        define_method(var) { get_configuration(var_name) }
+        define_method "#{var_name}=".to_sym,
+                      ->(val) { set_configuration(var_name, val) }
       end
     end
   end
@@ -59,11 +61,11 @@ module Selector
   protected
 
   def get_configuration(var_name)
-    config_source.configuration[var_name.to_s]
+    config_source.configuration[var_name]
   end
 
   def set_configuration(var_name, value)
-    config_source.configuration[var_name.to_s] = value
+    config_source.configuration[var_name] = value
   end
 end
 

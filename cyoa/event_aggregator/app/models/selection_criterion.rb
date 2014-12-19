@@ -7,7 +7,7 @@ class SelectionCriterion < ActiveRecord::Base
 
   protected
 
-  def refresh_sql_clause
+  def refresh_sql_expression
     sql_expression = generate_where_clause
   end
 
@@ -16,6 +16,13 @@ class SelectionCriterion < ActiveRecord::Base
   end
 
   def implementation_strategy
-    @implementation_strategy ||= Object.get_const(implementation_class).new
+    @implementation_strategy ||= create_my_implementation
+  end
+
+  private
+
+  def create_my_implementation
+    klass = Object.get_const(implementation_class)
+    klass.new.with_configuration(configuration)
   end
 end

@@ -1,10 +1,10 @@
 require "active_support"
 
-module SelectionCriteria
+module Selector
   extend ActiveSupport::Concern
 
-  SelectionCriteriaError = Class.new(StandardError)
-  SelectionCriteriaExpressionError = Class.new(SelectionCriteriaError)
+  SelectorError = Class.new(StandardError)
+  SelectorExpressionError = Class.new(SelectorError)
 
   AVAILABLE_SELECTORS = Set.new
 
@@ -30,7 +30,7 @@ module SelectionCriteria
       end
     end
 
-    raise SelectionCriteriaExpressionError, "Expression translation failure"
+    raise SelectorExpressionError, "Expression translation failure"
   end
 
   def self.try_create_selector(selector, expression)
@@ -39,10 +39,11 @@ module SelectionCriteria
     # This expression does not apply to this selector
   end
 
-  attr_accessor :configuration
+  attr_reader :configuration
 
-  def configuration
-    @configuration ||= {}
+  def with_configuration(config_hash)
+    @configuration = config_hash
+    self
   end
 
   def parse_expression(expression)
@@ -55,3 +56,5 @@ module SelectionCriteria
           "#{self.class.name}::#{__method__}: including class must implement" 
   end
 end
+
+require "selector/comparator"

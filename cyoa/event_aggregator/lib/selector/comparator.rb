@@ -1,8 +1,8 @@
 require "set"
 
-module SelectionCriterion
+module Selector
   class Comparator
-    include SelectionCriterion
+    include Selector
 
     config_variable :field, :sql_operator, :criterion
 

@@ -1,6 +1,4 @@
-$LOAD_PATH << '.'
-
-require 'objects_filter'
+require_relative 'objects_filter'
 
 class DinosaurInfo
   attr_accessor :dinosaurs, :dinosaurs_filtered, :filters_applied

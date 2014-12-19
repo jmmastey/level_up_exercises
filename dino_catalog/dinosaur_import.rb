@@ -1,7 +1,5 @@
-$LOAD_PATH << '.'
-
 require 'csv'
-require 'dinosaur'
+require_relative 'dinosaur'
 
 class DinosaurImport
   attr_accessor :dinosaurs

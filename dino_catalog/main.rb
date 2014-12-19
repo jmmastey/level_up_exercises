@@ -1,7 +1,5 @@
-$LOAD_PATH << '.'
-
-require 'dinosaur_import'
-require 'dinosaur_info'
+require_relative 'dinosaur_import'
+require_relative 'dinosaur_info'
 
 class Main
   csv_files =

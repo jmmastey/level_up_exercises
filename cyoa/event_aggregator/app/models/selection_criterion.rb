@@ -16,7 +16,7 @@ class SelectionCriterion < ActiveRecord::Base
   end
 
   def generate_where_clause 
-    implementation_strategy.generate_sql
+    implementation_strategy.generate_sql_fragment
   end
 
   private

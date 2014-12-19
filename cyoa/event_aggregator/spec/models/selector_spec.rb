@@ -37,7 +37,7 @@ RSpec.describe Selector::Comparator do
     expect(comparator.config_source).to be(config_source)
   end
 
-  it "supplies its configuration in the given hash" do
+  it "stores its configuration in the given source" do
     comparator.using_configuration_source(config_source)
     comparator.field = "foo"
     comparator.sql_operator = "!="
@@ -47,5 +47,12 @@ RSpec.describe Selector::Comparator do
                            'sql_operator' => '!=',
                            'criterion' => 'fire',
                         })
+  end
+
+  it "generates a SQL WHERE clause fragment" do
+    comparator.field = "field4"
+    sql_fragment_and_params = comparator.generate_sql_fragment
+    expected_vals = ['"field4" > ?', 5]
+    expect(sql_fragment_and_params).to eq(expected_vals)
   end
 end

@@ -37,7 +37,9 @@ class CreateEvent
 
   def convert_date(event_info)
     unless event_info[:date]
-      date = Date.new(event_info.delete("date(1i)").to_i, event_info.delete("date(2i)").to_i, event_info.delete("date(3i)").to_i)
+      date = Date.new(event_info.delete("date(1i)").to_i,
+                      event_info.delete("date(2i)").to_i,
+                      event_info.delete("date(3i)").to_i)
       event_info[:date] = date
     end
   end

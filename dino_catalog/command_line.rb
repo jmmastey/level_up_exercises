@@ -25,7 +25,7 @@ module DinoDexCommandLine
     case user_input
     when "all_dinos" then print_all_dinos
     when "help" then print_help_menu
-    when "exit" then exit_program
+    when "exit" then exit
     when *$dino_names then print_all_dino_facts(user_input)
     when "filter" then puts "ERROR: Please specify at least one filter."
     else invalid_command
@@ -57,10 +57,6 @@ module DinoDexCommandLine
   
   def print_all_dino_facts(dino_name)
     puts $dino_dex.print_all_facts(dino_name)
-  end
-  
-  def exit_program
-    exit
   end
   
   def print_filtered_dinos(filters)

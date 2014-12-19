@@ -9,8 +9,8 @@ module DinoCSVTools
 
   def CSV_to_hash_array(file)
     
-    @csv = CSV.read(file, :headers => true, :header_converters => :symbol, :converters => :all)
-    @csv = @csv.map { |row| row.to_hash }
+    @csv = CSV.read(file, headers: true, header_converters: :symbol, converters: :all)
+    @csv.map(&:to_hash)
     
   end
 
@@ -21,8 +21,7 @@ module DinoCSVTools
       dino[:weight_in_lbs] = dino.delete :weight
       dino[:diet] = dino.delete :carnivore
       dino[:continent] = "Africa"
-      dino[:diet] = "Carnivore" if dino[:diet].eql? "Yes"
-      dino[:diet] = "Herbivore" if dino[:diet].eql? "No"
+      dino[:diet] =  (dino[:diet].eql? "Yes") ? "Carnivore" : "Herbivore"
     end
   end
   

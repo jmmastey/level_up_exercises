@@ -15,7 +15,7 @@ Scenario Outline: I add address information to get shipping estimates
   When I enter "<address>" in the address field
   And I enter "<zip_code>" in the zip code field
   Then I should see the cart shows "<shipping_total>" in the shipping estimate
-  And I should see the "<message>"
+  And I should see the message "<message>"
 
 @happy
 Examples:

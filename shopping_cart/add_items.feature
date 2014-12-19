@@ -8,7 +8,8 @@ Background:
 
 Scenario Outline: I add an item to the shopping cart
   When I add "<number_of>" of "<item>" to the cart
-  Then I should see the cart shows "<number_of>" of "<item>" and "<message>"
+  Then I should see the cart shows "<number_of>" of "<item>" 
+  And I should see the message "<message>"
 
 @happy
 Examples:
@@ -29,10 +30,12 @@ Examples:
 
 @happy
 Scenario: Add item as anonymous user and then login as registered user
-  Given as an anonymous user I add "item_1" to the cart
+  Given I am an anonymous user
+  And I add "item_1" to the cart
   When I login as a registered user "user_1"
   And I add "item_2" to the cart
-  Then I should see the cart shows "item_1" and "item_2" and message "Items ready for checkout"
+  Then I should see the cart shows "item_1" and "item_2" 
+  And I should see the message "Items ready for checkout"
 
 @happy
 Scenario: Add item as registered user and then logout
@@ -45,6 +48,6 @@ Scenario: Add item as registered user and then logout
 Scenario: Add an item as anonymous user and then add same item as registered user
   Given as an anonymous user I add "item_1" to the cart
   When I login as a registered user "user_1"
-  And I add the same item "item_1" to the cart
-  Then I should see the cart shows two items of "item_1" and message "Items ready for checkout"
-
+  And I add "item_1" to the cart
+  Then I should see the cart shows 2 quantities of "item_1"
+  And I should see the message "Items ready for checkout"

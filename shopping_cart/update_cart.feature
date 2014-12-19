@@ -7,7 +7,8 @@ Scenario Outline: I update the item/items on the cart
 Given the shopping cart is empty
 When I add "<number_of>" of "<item>" to the cart
 And I update the "<update_number>" of the item
-Then I should see the cart shows "<total>" of "<item>" and "<message>"
+Then I should see the cart shows "<total>" of "<item>"
+And I should see the message "<message>"
 
 @happy
 Examples:

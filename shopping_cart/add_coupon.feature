@@ -10,7 +10,7 @@ Background:
 Scenario Outline: Add coupon to receive discount
   When I add coupon "<coupon>" to the cart
   Then I should see the cart shows total amount "<final_price>"
-  And I should see the "<message>"
+  And I should see the message "<message>"
 
 @happy
 Examples:

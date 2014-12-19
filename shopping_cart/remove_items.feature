@@ -9,7 +9,8 @@ Background:
 Scenario Outline: I remove item/items from the cart before checkout
   Given I add "<number_of_item_1>" "item_1" to the cart
   When I remove "<delete_item_1>" "item_1" from the cart
-  Then I should see the cart shows "<number_of_item_1>" "item_1" and "<message>"
+  Then I should see the cart shows "<number_of_item_1>" "item_1" 
+  And I should see the message "<message>"
 
 @happy
 Examples:
@@ -32,5 +33,5 @@ Scenario: I remove same item twice from the cart
   Given I add 2 quantities of "item_1" to the cart
   When I remove 1 quantity of "item_1" from the cart
   And I remove 2 quantities of "item_1" from the cart
-  Then I should see the cart shows message "Select valid number of items to remove"
+  Then I should see the message "Select valid number of items to remove"
 

@@ -21,18 +21,19 @@ namespace :event do
 
   def update_count(result, counts)
     counts[:total] += 1
-    case result
-    when nil
+    if result.nil?
       counts[:exists] += 1
-    when result.try(:errors).present?
+    elsif result.try(:errors).present?
       counts[:invalid] += 1
     end
   end
 
   def print_final_count(counts)
+    puts "Initial events in DB:  #{counts[:init]}"
+    puts "----------------------------------------"
     puts "Total Events received: #{counts[:total]}"
     puts "Total Events created:  #{Event.count - counts[:init]}"
-    puts "Invalid events:        #{counts[:invalid]}"
     puts "Existing(dup) events:  #{counts[:exists]}"
+    puts "Invalid events:        #{counts[:invalid]}"
   end
 end

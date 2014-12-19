@@ -13,8 +13,8 @@ module Selector
 
     def self.config_variable(*var_names)
       var_names.each do |var|
-        define_method(var) { self.configuration[var] }
-        define_method("#{var.to_s}=") { |val| self.configuration[var] = val }
+        define_method(var) { get_configuration(var) }
+        define_method(:"#{var.to_s}=") { |val| set_configuration(var, val) }
       end
     end
   end
@@ -39,10 +39,10 @@ module Selector
     # This expression does not apply to this selector
   end
 
-  attr_reader :configuration
+  attr_reader :config_source
 
-  def with_configuration(config_hash)
-    @configuration = config_hash
+  def using_configuration_source(config_source)
+    @config_source = config_source
     self
   end
 
@@ -54,6 +54,16 @@ module Selector
   def generate_sql(configuration)
     raise NotImplementedError,
           "#{self.class.name}::#{__method__}: including class must implement" 
+  end
+
+  protected
+
+  def get_configuration(var_name)
+    config_source.configuration[var_name.to_s]
+  end
+
+  def set_configuration(var_name, value)
+    config_source.configuration[var_name.to_s] = value
   end
 end
 

@@ -1,7 +1,9 @@
 require "rails_helper"
+require "ostruct"
 
 RSpec.describe Selector::Comparator do
   let(:comparator) { FactoryGirl.build(:selector_comparator) }
+  let(:config_source) { OpenStruct.new(configuration: {}) }
 
   it "has a field name" do
     expect(comparator.field).not_to be_nil
@@ -30,22 +32,20 @@ RSpec.describe Selector::Comparator do
     expect(comparator.criterion).to eq(9)
   end
 
-  it "accepts a configuration hash" do
-    config = {}
-    comparator.with_configuration(config)
-    expect(comparator.configuration).to be(config)
+  it "accepts a configuration source" do
+    comparator.using_configuration_source(config_source)
+    expect(comparator.config_source).to be(config_source)
   end
 
   it "supplies its configuration in the given hash" do
-    config = {}
-    comparator.with_configuration(config)
+    comparator.using_configuration_source(config_source)
     comparator.field = "foo"
     comparator.sql_operator = "!="
     comparator.criterion = "fire"
-    expect(config).to eq({
-                           :field => 'foo',
-                           :sql_operator => '!=',
-                           :criterion => 'fire',
+    expect(config_source.configuration).to eq({
+                           'field' => 'foo',
+                           'sql_operator' => '!=',
+                           'criterion' => 'fire',
                         })
   end
 end

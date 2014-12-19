@@ -5,6 +5,10 @@ class SelectionCriterion < ActiveRecord::Base
 
   serialize :configuration, JSON
 
+  def implementation_strategy
+    @implementation_strategy ||= create_my_implementation
+  end
+
   protected
 
   def refresh_sql_expression
@@ -12,17 +16,23 @@ class SelectionCriterion < ActiveRecord::Base
   end
 
   def generate_where_clause 
-    implementation_strategy.generate_sql(configuration)
-  end
-
-  def implementation_strategy
-    @implementation_strategy ||= create_my_implementation
+    implementation_strategy.generate_sql
   end
 
   private
 
   def create_my_implementation
-    klass = Object.get_const(implementation_class)
-    klass.new.with_configuration(configuration)
+    klass = Object.const_get(implementation_class)
+    klass.new.using_configuration_source(self)
+  end
+
+  def method_missing(method, *args, &block)
+    super
+  rescue
+    if implementation_strategy.respond_to?(method)
+      implementation_strategy.send(method, *args, block)
+    else
+      super
+    end
   end
 end

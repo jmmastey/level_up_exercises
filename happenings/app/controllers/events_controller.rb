@@ -1,9 +1,8 @@
 class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update]
-  include EventHelper
 
   def index
-    session[:event_source] = events_params[:source] if events_params[:source].present?
+    session[:event_source] = events_params[:event_source] if events_params[:event_source].present?
     @events = Event.with_source(session[:event_source] || :theatre_in_chicago)
   end
 
@@ -19,14 +18,13 @@ class EventsController < ApplicationController
     @event = CreateEvent.create(event_params)
     if @event.blank?
       flash.now[:alert] = "Failed to create event! Event already exists!"
-      @event = Event.new
     elsif @event.errors.present?
       flash.now[:alert] = "Failed to create event! errors: #{@event.errors.messages}"
-      @event = Event.new
     else
       flash.now[:notice] = "Created event!"
     end
 
+    @event = Event.new
     render :new
   end
 
@@ -44,6 +42,19 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def event_params
+    params.require(:event).permit(:title, :time, :date, :description, :url, :source)
+  end
+
+  def events_params
+    params.permit(:source)
+  end
+
+  def render_404
+    render file: "#{Rails.root}/public/404",
+           status: 404
+  end
 
   def find_event
     @event = Event.where(id: params[:id]).first

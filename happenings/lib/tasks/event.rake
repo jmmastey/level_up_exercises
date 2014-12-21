@@ -6,7 +6,7 @@ namespace :event do
                total:     0,
                invalid:   0,
                exists:    0 }
-    events = TheatreInChicagoEvents.get_events_for_year
+    events = TheatreInChicagoEvents.get_events_for_year(Date.today.year)
     events.each do |event|
       result = CreateEvent.create(event)
       update_count(result, counts)

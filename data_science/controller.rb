@@ -32,7 +32,7 @@ class Controller
   def sort_views_into_cohorts()
     views.each do |view|
       require 'pry'; binding.pry
-      view += cohorts[view["cohort"]
+      view += cohorts[view["cohort"]]
     end
   end
 end

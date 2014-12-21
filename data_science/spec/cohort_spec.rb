@@ -7,5 +7,7 @@ describe Cohort do
     expect(cohort.name).to eq("A")
   end
 
-  it "counts"
+  it "counts" do
+
+  end
 end

@@ -7,7 +7,7 @@ class TheatreInChicagoEvents
   end
 
   # TODO: optimize this to not pull for all inclusive years and then filter
-  def self.get_events_between_dates(start_date = Date.today, end_date = Date.today)
+  def self.get_events_between_dates(start_date, end_date)
     events = []
     (start_date.year..end_date.year).each_with_object(events) do |year, arr| 
       arr << self.get_events_for_year(year)
@@ -15,11 +15,11 @@ class TheatreInChicagoEvents
     events.flatten.select { |event| event[:date] >= start_date && event[:date] <= end_date }
   end
 
-  def self.get_events_for_year(year = Date.today.year)
-    (1..12).each_with_object([]) { |month, arr| arr << self.get_events_for_month(month, year) }.flatten
+  def self.get_events_for_year(year)
+    (1..12).each_with_object([]) { |month, arr| arr << get_events_for_month(month, year) }.flatten
   end
 
-  def self.get_events_for_month(month = Date.today.month, year = Date.today.year)
+  def self.get_events_for_month(month, year)
     new({ month: month, year: year }).get_events_for_month
   end
 
@@ -30,8 +30,8 @@ class TheatreInChicagoEvents
   # "http://www.theatreinchicago.com/opening/CalendarSampleResponse.php?id=&ran=0&opendate=2014-12-12"
 
   def get_events_for_month
-    raise ArgumentError, "invalid month value: #{@month}" unless valid_month?(@month)
-    raise ArgumentError, "invalid year value: #{@year}" unless valid_year?(@year)
+    raise ArgumentError, "invalid month value: #{@month}" unless @month.in?(1..12)
+    raise ArgumentError, "invalid year value: #{@year}" unless @year.in?(1990..2020)
 
     api_url = AppConfig.feeds.base_api_url + "month=#{@month}&year=#{@year}"
     raw_html = HTTParty.get(api_url)
@@ -61,15 +61,5 @@ class TheatreInChicagoEvents
                       event_source:   :theatre_in_chicago }
     end
     raw_events
-  end
-
-  private
-
-  def valid_month?(month)
-    month.kind_of?(Integer) && month > 0 && month < 13
-  end
-
-  def valid_year?(year)
-    year.kind_of?(Integer) && year > 1900 && year < 2020
   end
 end

@@ -1,6 +1,8 @@
 
 class Dino
   
+  WEIGHT_LIMIT = 4000
+  
   attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
   
   def initialize(dino_hash)
@@ -8,15 +10,19 @@ class Dino
   end  
   
   def fat?
-    @weight_in_lbs != nil && @weight_in_lbs > 2000
+    @weight_in_lbs && @weight_in_lbs > WEIGHT_LIMIT
   end
   
   def small?
-    @weight_in_lbs != nil && @weight_in_lbs <=2000
+    @weight_in_lbs && @weight_in_lbs <= WEIGHT_LIMIT
   end
   
   def biped?
     @walking.to_s.downcase.eql? "biped"
+  end
+  
+  def quadruped?
+    @walking.to_s.downcase.eql? "quadruped"
   end
   
   def carnivore?

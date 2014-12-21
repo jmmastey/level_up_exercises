@@ -3,7 +3,7 @@ require_relative 'dino_csv_tools'
 include DinoCSVTools
 require_relative 'dino_dex'
 require_relative 'command_line'
-include DinoDexCommandLine
+#include DinoDexCommandLine
 require_relative 'dinosaur'
 
 joes_dinos = DinoCSVTools::CSV_to_hash_array("dinodex.csv")
@@ -17,6 +17,8 @@ $dino_dex = DinoDex.new(merged_dinos)
 puts "Welcome to the DinoDex!\n\n"
 puts "Available comands:  all_dinos, exit, help, filter [filter1] [filter2] ..., [dinosaur_name]"
 
+command_line = DinoDexCommandLine.new()
+
 while true do
-  DinoDexCommandLine::get_input
+  command_line.get_input
 end

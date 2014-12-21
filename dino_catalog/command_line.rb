@@ -1,5 +1,5 @@
 
-module DinoDexCommandLine
+class DinoDexCommandLine
 
   def get_input
     
@@ -27,7 +27,8 @@ module DinoDexCommandLine
     when "help" then print_help_menu
     when "exit" then exit
     when *$dino_names then print_all_dino_facts(user_input)
-    when "filter" then puts "ERROR: Please specify at least one filter."
+    when "filter" then puts "ERROR: Please specify at least one filter.
+      To see a list of all dinos, enter \"all_dinos\""
     else invalid_command
     end
     
@@ -52,7 +53,7 @@ module DinoDexCommandLine
   
   def print_all_dinos
     puts "\nLIST OF ALL DINOS: \n"
-    puts $dino_dex.all_dinos
+    puts $dino_dex.to_s
   end
   
   def print_all_dino_facts(dino_name)
@@ -60,7 +61,8 @@ module DinoDexCommandLine
   end
   
   def print_filtered_dinos(filters)
-    puts $dino_dex.filter_dinos(filters)
+    filtered_dinos = $dino_dex.filter_dinos(filters)
+    filtered_dinos.each { |dino| puts dino.name }
   end
   
   def invalid_command

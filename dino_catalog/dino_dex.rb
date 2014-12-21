@@ -11,6 +11,7 @@ attr_accessor :dinosaurs
     
     dino = @dinosaurs.select { |dino| dino.name.to_s.downcase == dino_name.downcase }.pop
     dino.to_s
+    p dino.respond_to?("fat")
 
   end
   
@@ -18,6 +19,8 @@ attr_accessor :dinosaurs
   
     filtered_dinos = @dinosaurs.dup
     period_filters = %w( jurassic albian cretaceous triassic permian oxfordian )
+#    attribute_filters = %w( fat small biped quadruped carnivore herbivore )
+#    collection_filters = %w( joe pirate_bay )
     
     filters.each do |filter|
       filtered_dinos.select! { |dino| dino.biped? } if filter == "biped"
@@ -28,21 +31,30 @@ attr_accessor :dinosaurs
       filtered_dinos.select! { |dino| dino.continent.downcase.eql? "africa" } if filter == "pirate_bay"      
       filter_by_period(filtered_dinos, filter) if period_filters.include? filter
     end
-    
-  filtered_dinos.map(&:name)
+  filtered_dinos
   
+  end
+  
+  def process_filter(dinos, filter)
+    period_filters = %w( jurassic albian cretaceous triassic permian oxfordian )
+    attribute_filters = %w( fat small biped quadruped carnivore herbivore )
+    collection_filters = %w( joe pirate_bay )
+    
+  end
+  
+  def filter_by_attribute(dinos, filter)
+    
   end
   
   def filter_by_period(dinos, filter)
     dinos.select! {|dino| dino.period.downcase.include? filter }   
   end
   
-  def all_other_filters(dinos, filter)
-    
+  def filter_by_continent(dinos, filter)
+    dinos.select! {|dino| dino.continent.downcase.include? filter }   
   end
   
-  def all_dinos 
-    puts "All dinos:"
+  def to_s
     @dinosaurs.map { |dino| dino.name.to_s }   
   end
   

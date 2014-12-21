@@ -1,9 +1,6 @@
 class Cohort
   attr_accessor :name
 
-  #attr_accessor :name, :conversion_rate, :standard_error,
-  #attr_accessor :positive_conversions, :negative_conversions, :views
-
   def initialize(name)
     @name = name
   end
@@ -12,4 +9,23 @@ class Cohort
 
   end
 
+  def conversion_rate
+
+  end
+
+  def standard_error
+
+  end
+
+  def positive_conversions
+
+  end
+
+  def negative_conversions
+
+  end
+
+  def total_views
+    3
+  end
 end

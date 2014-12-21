@@ -7,7 +7,11 @@ describe Cohort do
     expect(cohort.name).to eq("A")
   end
 
-  it "counts" do
+  describe '#total_views' do
+    let(:cohort) {Cohort.new("A")}
 
+    it "total number of views in the cohort"  do
+      expect(cohort.total_views).to eq(3)
+    end
   end
 end

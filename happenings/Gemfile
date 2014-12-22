@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Cause it makes things prrrty and clean!
 gem 'bootstrap-sass'
+gem 'bootstrap-datepicker-rails'
 gem 'bootstrap_sortable_rails'
 gem 'bootstrap-tooltip-rails'
 

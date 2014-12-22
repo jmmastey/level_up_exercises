@@ -3,6 +3,9 @@ class EventsController < ApplicationController
 
   def index
     session[:event_source] = events_params[:event_source] if events_params[:event_source].present?
+    @start_date = events_params[:start_date]
+    @end_date = events_params[:end_date]
+    @description = events_params[:description]
     @events = EventSearch.call(events_params)
   end
 
@@ -52,7 +55,7 @@ class EventsController < ApplicationController
   end
 
   def events_params
-    params.permit(:event_source, :start_date, :end_date)
+    params.permit(:event_source, :start_date, :end_date, :description)
   end
 
   def render_404

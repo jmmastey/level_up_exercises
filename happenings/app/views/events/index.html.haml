@@ -1,9 +1,19 @@
 %h1 Events
+%form
+  %label Start Date
+  %input{ type: "date", name: "start_date", value: @start_date }
+  %label End Date
+  %input{ type: "text", name: "end_date", value: @end_date }
+  %label Description
+  %input{ type: "text", name: "description", value: @description }
+  %input{ type: "submit", class: "button"}
+%hr
 - @events.each do |event|
   = render partial: "event_show", locals: { event: event }
-  = link_to "Edit", edit_event_path(event), class: "dude"
-  |
-  = link_to "Details", event_path(event)
-  |
-  = link_to "Add to iCal", event_path(event, format: :ics)
+  .center
+    = link_to "Edit", edit_event_path(event), class: "dude"
+    |
+    = link_to "Details", event_path(event)
+    |
+    = link_to "Add to iCal", event_path(event, format: :ics)
   %hr

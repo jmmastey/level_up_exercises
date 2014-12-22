@@ -1,13 +1,13 @@
 %dl.dl-horizontal
   %dt Name
   %dd= event.title
+  %dt URL
+  %dd
+    %a{href: "#{event.url}"}
+      = event.url
   %dt Description
   %dd= event.description
   %dt Date
   %dd= event.date
   %dt Time
   %dd= event.time.strftime("%H:%M:%S")
-  %dt URL
-  %dd
-    %a{href: "#{event.url}"}
-      = event.url

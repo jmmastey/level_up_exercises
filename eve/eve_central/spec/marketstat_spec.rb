@@ -14,7 +14,7 @@ describe EveCentral::Marketstat do
     expect(marketstat).not_to be nil
   end
 
-  it "defaults to using 'http://api.eve-central.com/api/marketstat' as the API URL" do
+  it "defaults to using 'api.eve-central.com/api/marketstat' as the API URL" do
     expect(marketstat.url).to eq(api_url)
   end
 

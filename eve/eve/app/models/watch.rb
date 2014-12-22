@@ -27,23 +27,6 @@ class Watch < ActiveRecord::Base
 
   private
 
-  def check_nickname
-    nickname = default_nickname if nickname.blank?
-  end
-
-  def default_nickname
-    return nickname unless nickname.blank?
-
-    location = region || station
-
-    begin
-      return "#{item.name} in #{location.name}"
-      "#{item.name}"
-    rescue NoMethodError
-      nil
-    end
-  end
-
   def fetch_orders
     filters = {}
     filters[:region] = region if region

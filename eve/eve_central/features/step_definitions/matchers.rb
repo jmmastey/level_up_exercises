@@ -7,7 +7,7 @@ RSpec::Matchers.define :have_xpath do |xpath|
     matcher.with_xpath(xpath)
     matcher.with_text(@expected_text) if @expected_text
     matcher.without_text(@unexpected_text) if @unexpected_text
-    matcher.with_value(@comparator, @compare_value) if @comparator && @compare_value
+    matcher.with_value(@comparator, @compare_value) if match_value?
 
     matcher.matches?
   end
@@ -18,5 +18,9 @@ RSpec::Matchers.define :have_xpath do |xpath|
 
   chain :without_text do |text|
     @unexpected_text = text unless text.nil? || text.empty?
+  end
+
+  def match_value?
+    @comparator && @compare_value
   end
 end

@@ -10,12 +10,8 @@ class RegionsController < ApplicationController
         @regions = @regions.page(params[:page])
         render :index, haml: @regions
       end
-      format.json do
-        render :index, json: @regions
-      end
-      format.xml do
-        render :index, xml: @regions
-      end
+      format.json { render :index, json: @regions }
+      format.xml { render :index, xml: @regions }
     end
   end
 
@@ -25,12 +21,8 @@ class RegionsController < ApplicationController
         @regions = @regions.page(params[:page])
         render :index, haml: @regions
       end
-      format.json do
-        render :index, json: @regions
-      end
-      format.xml do
-        render :index, xml: @regions
-      end
+      format.json { render :index, json: @regions }
+      format.xml { render :index, xml: @regions }
     end
   end
 

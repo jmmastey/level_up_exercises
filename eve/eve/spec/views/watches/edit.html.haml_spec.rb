@@ -8,6 +8,6 @@ RSpec.describe "watches/edit", type: :view do
   it "renders the watch form" do
     stub_template("watches/_form.html.haml" => "watch_form")
     render
-    expect(rendered).to match /watch_form/
+    expect(rendered).to match(/watch_form/)
   end
 end

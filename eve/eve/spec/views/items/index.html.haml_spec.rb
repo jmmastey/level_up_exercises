@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "items/index.html.haml", type: :view do
-
   it "renders the search partial" do
     stub_template("items/_search.html.haml" => "search_partial")
     render
@@ -17,8 +16,8 @@ describe "items/index.html.haml", type: :view do
 
   context "when items exist" do
     before(:each) do
-      items = [ FactoryGirl.create(:item),
-                FactoryGirl.create(:item) ]
+      items = [FactoryGirl.create(:item),
+               FactoryGirl.create(:item)]
       assign(:items, items)
     end
 

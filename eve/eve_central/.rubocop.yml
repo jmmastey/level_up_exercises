@@ -1,0 +1,5 @@
+inherit_from: ../../.hound.yml
+
+Metrics/LineLength:
+  Exclude:
+    - 'features/step_definitions/*_steps.rb'

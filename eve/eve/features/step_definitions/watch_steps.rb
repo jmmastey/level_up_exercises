@@ -5,14 +5,14 @@ WATCH_ASSOCIATION_CLASSES = {
 }
 
 def create_watches
-  @watches = [ FactoryGirl.create(:watch, :with_nickname, user: default_user),
-               FactoryGirl.create(:watch,
-                                  :filter_by_region,
-                                  user: default_user),
-               FactoryGirl.create(:watch,
-                                  :with_nickname,
-                                  :filter_by_station,
-                                  user: default_user) ]
+  @watches = [FactoryGirl.create(:watch, :with_nickname, user: default_user),
+              FactoryGirl.create(:watch,
+                                 :filter_by_region,
+                                 user: default_user),
+              FactoryGirl.create(:watch,
+                                 :with_nickname,
+                                 :filter_by_station,
+                                 user: default_user)]
 end
 
 def set_watch_association(type, association_name)

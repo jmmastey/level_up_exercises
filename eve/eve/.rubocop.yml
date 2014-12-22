@@ -11,3 +11,7 @@ AllCops:
     - 'lib/tasks/cucumber.rake'
     - 'script/*'
     - 'vendor/**/*'
+
+Metrics/LineLength:
+  Exclude:
+    - 'features/step_definitions/*_steps.rb'

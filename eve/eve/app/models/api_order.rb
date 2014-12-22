@@ -1,14 +1,16 @@
 require "eve_central"
 
 class ApiOrder
+  EVE_ORIGIN_DATE = Date.new(2003, 05, 06)
+
   def self.update(item, earliest_date)
-    api_result = api_client.request(item.in_game_id)
+    earliest_date ||= EVE_ORIGIN_DATE
+    hours = ((Date.today - earliest_date) * 24).to_i
+    api_result = api_client.request(item.in_game_id, hours: hours)
     build_orders(api_result)
   rescue EveCentral::ConnectionError
     Rails.logger.warn("Failed to retrieve orders for #{item.name}.")
   end
-
-  private
 
   def self.api_client
     @api_client ||= EveCentral::Quicklook.new
@@ -24,7 +26,8 @@ class ApiOrder
 
   def self.convert_order(item_id, api_order, order_type)
     region = find_or_create_region(api_order.region_id)
-    station = find_or_create_station(api_order.station_id, api_order.station_name)
+    station = find_or_create_station(api_order.station_id,
+                                     api_order.station_name)
 
     Order.find_or_create_by(in_game_id: api_order.id) do |order|
       order.security = api_order.security
@@ -56,4 +59,11 @@ class ApiOrder
     Station.create(in_game_id: station_id,
                    name: station_name || "Unknown Station")
   end
+
+  #private_class_method :api_client,
+  #                     :build_orders,
+  #                     :convert_order,
+  #                     :convert_orders,
+  #                     :find_or_create_region,
+  #                     :find_or_create_station
 end

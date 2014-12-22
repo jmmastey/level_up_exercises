@@ -2,7 +2,6 @@ require "nokogiri"
 
 module EveCentral
   module XmlHelpers
-
     private
 
     def get_node_content(parent, xpath)
@@ -13,7 +12,7 @@ module EveCentral
       Date.parse(get_node_content(parent, xpath))
     end
 
-    def get_node_datetime(parent, xpath, options = {})
+    def get_node_datetime(parent, xpath)
       DateTime.parse(get_node_content(parent, xpath))
     end
 

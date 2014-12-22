@@ -5,7 +5,10 @@ class Order < ActiveRecord::Base
 
   scope :by_item, ->(item) { where(item: item) unless item.blank? }
   scope :by_region, ->(region) { where(region: region) unless region.blank? }
-  scope :by_station, ->(station) { where(station: station) unless station.blank? }
+
+  scope :by_station, (lambda do |station|
+    where(station: station) unless station.blank?
+  end)
 
   validates_inclusion_of :order_type,
                          in: %w(buy sell),
@@ -39,10 +42,10 @@ class Order < ActiveRecord::Base
     end
   end
 
-  private
-
   def self.needs_update?(item)
     last_queried = last_queried_on(item)
     !last_queried || last_queried < (Date.today - 1)
   end
+
+  private_class_method :needs_update?
 end

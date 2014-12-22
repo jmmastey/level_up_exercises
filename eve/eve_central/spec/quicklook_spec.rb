@@ -14,7 +14,7 @@ describe EveCentral::Quicklook do
     expect(quicklook).not_to be nil
   end
 
-  it "defaults to using 'http://api.eve-central.com/api/quicklook' as the API URL" do
+  it "defaults to using 'api.eve-central.com/api/quicklook' as the API URL" do
     expect(quicklook.url).to eq(api_url)
   end
 

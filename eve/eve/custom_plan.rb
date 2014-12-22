@@ -7,7 +7,7 @@ class CustomPlan < Zeus::Rails
     @cucumber_runtime = Cucumber::Runtime.new
   end
 
-  def cucumber(argv=ARGV)
+  def cucumber(argv = ARGV)
     cucumber_main = Cucumber::Cli::Main.new(argv.dup)
     had_failures = cucumber_main.execute!(@cucumber_runtime)
     exit_code = had_failures ? 1 : 0
@@ -17,7 +17,6 @@ class CustomPlan < Zeus::Rails
   def test
     exit RSpec::Core::Runner.run(ARGV)
   end
-
 end
 
 Zeus.plan = CustomPlan.new

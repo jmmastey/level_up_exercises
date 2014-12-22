@@ -38,17 +38,15 @@ module EveCentral
     end
 
     def convert_order(order_node)
-      Order.new({
-        expires: get_node_date(order_node, "expires"),
-        id: order_node["id"].to_i,
-        min_volume: get_node_int(order_node, "min_volume"),
-        price: get_node_float(order_node, "price"),
-        region_id: get_node_int(order_node, "region"),
-        security: get_node_float(order_node, "security"),
-        station_id: get_node_int(order_node, "station"),
-        station_name: get_node_content(order_node, "station_name"),
-        volume_remaining: get_node_int(order_node, "vol_remain")
-      })
+      Order.new(expires: get_node_date(order_node, "expires"),
+                id: order_node["id"].to_i,
+                min_volume: get_node_int(order_node, "min_volume"),
+                price: get_node_float(order_node, "price"),
+                region_id: get_node_int(order_node, "region"),
+                security: get_node_float(order_node, "security"),
+                station_id: get_node_int(order_node, "station"),
+                station_name: get_node_content(order_node, "station_name"),
+                volume_remaining: get_node_int(order_node, "vol_remain"))
     end
 
     def convert_orders(order_nodes)
@@ -60,11 +58,9 @@ module EveCentral
     def convert_quicklook_item(quicklook_node)
       buy_nodes = quicklook_node.xpath("buy_orders/order")
       sell_nodes = quicklook_node.xpath("sell_orders/order")
-      QuicklookItem.new({
-        item: convert_item(quicklook_node),
-        buy_orders: convert_orders(buy_nodes),
-        sell_orders: convert_orders(sell_nodes)
-      })
+      QuicklookItem.new(item: convert_item(quicklook_node),
+                        buy_orders: convert_orders(buy_nodes),
+                        sell_orders: convert_orders(sell_nodes))
     end
 
     def convert_response(response)

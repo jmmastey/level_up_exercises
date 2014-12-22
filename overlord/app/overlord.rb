@@ -1,5 +1,4 @@
 require 'sinatra/base'
-require "pry"
 require_relative "models/bomb"
 
 class Overlord < Sinatra::Base

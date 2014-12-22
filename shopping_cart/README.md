@@ -13,3 +13,10 @@ It can be helpful to use something like the Cucumber syntax for this, but you do
 * I should be able to add coupons, which are hopefully not expired.
 * Pay attention to cases such as logging in (if I have items in my cart as an anonymous user, but also have cart items from a previous authenticated session), or adding another item of the same SKU as others in my cart.
 * Don't worry about product pages or checkout.
+
+<!-- 1. Add SKU's -->
+<!-- 2. Change quanitity of SKU -->
+<!-- 3. Remove SKU's -->
+<!-- 4. Reload page and maintain session -->
+<!-- 5. Choose Shipping Location -->
+<!-- 6. Enter promotions and coupons -->

@@ -16,7 +16,7 @@ $		filter [filter1] [filter2] ...
 Prints a list of filtered dinos.  Filters can be chained.  
 Please select no more than one filter from each filter group.
 Available filters:
-	WALKING (select only one)
+	WALKING (select only one):
 		biped		Returns all dinos that are bipeds
 		quadruped	Returns all dins that are quadrupeds
 	SIZE (select only one):

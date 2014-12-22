@@ -69,16 +69,10 @@
   margin-bottom: 15px;
 }
 
-.navbar.navbar-default {
-  ul.btn-danger {
-    li {
-      a {
-        color: white;
-        &:hover {
-          background: transparent;
-        }
-      }
-    }
+.navbar.navbar-default ul.btn-danger li a {
+  color: white;
+  &:hover {
+    background: transparent;
   }
 }
 

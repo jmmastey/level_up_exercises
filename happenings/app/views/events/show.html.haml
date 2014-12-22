@@ -1,17 +1,8 @@
 %h2 Event Details
-%dl.dl-horizontal
-  %dt Name
-  %dd= @event.title
-  %dt Description
-  %dd= @event.description
-  %dt Date
-  %dd= @event.date
-  %dt Time
-  %dd= @event.time
-  %dt URL
-  %dd= @event.url
+= render partial: "event_show", locals: { event: @event }
 %hr
-
 = link_to "Search", events_path(@event)
 |
 = link_to "Edit", edit_event_path(@event)
+|
+= link_to "Add to iCal", event_path(@event, format: :ics)

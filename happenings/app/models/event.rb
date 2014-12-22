@@ -7,11 +7,11 @@ class Event < ActiveRecord::Base
     scope: :with_source, inverse_scope: :without_source
 
   def to_ics
-    ical_event = Icalendar::Event.new
-    ical_event.dtstart = date.strftime("%Y%m%d") + time.strftime("T%H%M%S")
-    ical_event.summary = title
-    ical_event.description = "desc: #{description};  link: #{url}"
-    ical_event.ip_class = "PUBLIC"
-    ical_event
+    Icalendar::Event.new.tap do |ical_event|
+      ical_event.dtstart = date.strftime("%Y%m%d") + time.strftime("T%H%M%S")
+      ical_event.summary = title
+      ical_event.description = "desc: #{description};  link: #{url}"
+      ical_event.ip_class = "PUBLIC"
+    end
   end
 end

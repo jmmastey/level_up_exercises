@@ -1,3 +1,7 @@
 %h1 Update Event
 .containter
   = render partial: 'event_form'
+%hr
+= link_to "Search", events_path(@event)
+|
+= link_to "Details", event_path(@event)

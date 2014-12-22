@@ -1,15 +1,14 @@
-class NameCollisionError < RuntimeError; end
+class NameInvalidError < RuntimeError; end
+class NameDuplicateError < RuntimeError; end
 
 class Robot
   attr_accessor :name
   CHARS = 2
   NUMS = 3
-  @@registry
+  @@registry = []
 
   def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
-    generate_name
+    generate_name(args[:name_generator] || method(:random_name))
     add_name_to_registry
   end
 
@@ -19,26 +18,20 @@ class Robot
 
   private
 
-  def generate_name
-    if @name_generator
-      self.name = @name_generator.call
-    else
-      generator
-    end
+  def generate_name(generator)
+    self.name = generator.call
   end
 
-  def generator
-    self.name = ""
-    add_chars
-    add_nums
+  def random_name
+    (add_chars + add_nums).join
   end
 
   def add_chars
-    (1..CHARS).each { name << generate_char }
+    (1..CHARS).map { generate_char }
   end
 
   def add_nums
-    (1..NUMS).each { name << generate_num.to_s }
+    (1..NUMS).map { generate_num.to_s }
   end
 
   def generate_char
@@ -50,8 +43,10 @@ class Robot
   end
 
   def add_name_to_registry
-    if name_invalid_format? || name_is_duplicate?
-      raise NameCollisionError, 'There was a problem generating the robot name!'
+    if name_invalid_format?
+      raise NameInvalidError, 'Your robot name is in an invalid format!'
+    elsif name_is_duplicate?
+      raise NameDuplicateError, 'Your robot name already exists in the registry!'
     else
       @@registry << name
     end
@@ -66,14 +61,15 @@ class Robot
   end
 end
 
+
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 robot2 = Robot.new
 robot3 = Robot.new
-puts robot3.registry
-
-# # Errors!
-# generator = -> { 'AA111' }
-# robot2 = Robot.new(name_generator: generator)
-# robot3 = Robot.new(name_generator: generator)
 # puts robot3.registry
+
+# Errors!
+generator = -> { 'AA111' }
+robot4 = Robot.new(name_generator: generator)
+# robot5 = Robot.new(name_generator: generator)
+puts robot4.registry

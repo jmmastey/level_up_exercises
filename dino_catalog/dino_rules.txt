@@ -13,8 +13,7 @@ $		help
 Prints this help screen
 
 $		filter [filter1] [filter2] ... 	
-Prints a list of filtered dinos.  Filters can be chained.
-Invalid filters will be ignored.  
+Prints a list of filtered dinos.  Filters can be chained.  
 Please select no more than one filter from each filter group.
 Available filters:
 	WALKING (select only one)
@@ -31,7 +30,7 @@ Available filters:
 		joe		Returns all dinos from Joe's CSV
 		pirate_bay	Returns all dinos from Pirate Bay export
 	PERIODS (select only one):
-		jurassic, albian, cretaceous, triassic, permian,oxfordian	
+		jurassic, albian, cretaceous, triassic, permian, oxfordian	
 				Returns all dinos from the selected period
 	CONTINENTS (select only one):
 		north_america, south_america, europe, africa, asia

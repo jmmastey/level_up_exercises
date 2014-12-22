@@ -6,7 +6,7 @@ attr_accessor :dinosaurs, :dino_names
   def initialize(joes_dinos, piratebay_dinos)
     dino_list = joes_dinos.concat(piratebay_dinos)
     @dinosaurs = dino_list.map { |dino| Dino.new(dino) } 
-    @dino_names = dino_list.map{ |dino_hash| dino_hash[:name] }
+    @dino_names = dino_list.map{ |dino| dino[:name] }
   end
   
   def all_dino_facts(dino_name)  
@@ -40,8 +40,6 @@ attr_accessor :dinosaurs, :dino_names
     end
     
   end
-  
-  private
   
   def filter_by_attribute(dinos, filter)
     dinos.select! { |dino| dino.send("#{filter}?") }

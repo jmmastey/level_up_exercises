@@ -3,11 +3,15 @@ class DinoDexCommandLine
   
   attr_accessor :dino_dex, :dino_names
   
-  def initialize(dino_dex) 
-    @dino_dex = dino_dex
-    @dino_names = dino_dex.dino_names
+  def initialize(joes_csv, pirate_bay_csv) 
+    joes_dinos = JoesDinos.new(joes_csv)
+    piratebay_dinos = PirateBayDinos.new(pirate_bay_csv)
+    @dino_dex = DinoDex.new(joes_dinos.dinos, piratebay_dinos.dinos)
+    
     puts "Welcome to the DinoDex!\n\n"
     puts "Available comands:  \nall_dinos \nexit \nhelp \n[dino_name] \nfilter [filter1] [filter2] ..."
+
+    get_input while true
   end
 
   def get_input  
@@ -32,7 +36,7 @@ class DinoDexCommandLine
     when "all_dinos" then print_all_dinos
     when "help" then print_help_menu
     when "exit" then exit
-    when *@dino_names then print_all_dino_facts(user_input)
+    when *@dino_dex.dino_names then print_all_dino_facts(user_input)
     when "filter" then puts "ERROR: Please specify at least one filter.
       To see a list of all dinos, enter \"all_dinos\""
     else invalid_command
@@ -85,8 +89,7 @@ class DinoDexCommandLine
       
     filter_groups.each do |filter_group|
       if (filter_group & filters).length > 1
-        puts "Invalid filter chaning."
-        invalid_command
+        puts "Invalid filter chaining.  Enter \"help\" for more information."
       end
     end  
      

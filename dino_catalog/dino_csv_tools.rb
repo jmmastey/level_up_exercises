@@ -14,7 +14,7 @@ module DinoCSVTools
     @csv.map(&:to_hash) 
   end
   
-  class PirateBayDinos
+  class PirateBayDinos 
     
     attr_reader :dinos
     

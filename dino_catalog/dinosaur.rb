@@ -36,7 +36,7 @@ class Dino
   def to_s 
     dino_facts = instance_variables.map do |dino_attribute|
       if instance_variable_get(dino_attribute)
-        "#{dino_attribute[1..-1].capitalize} \n #{instance_variable_get(dino_attribute)}\n"
+        "#{dino_attribute[1..-1].capitalize}: \n #{instance_variable_get(dino_attribute)}\n"
       end
     end.compact
   end

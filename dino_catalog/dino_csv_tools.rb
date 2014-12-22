@@ -7,15 +7,12 @@ module DinoCSVTools
     field && field.empty? ? nil : field
   end
 
-  def CSV_to_hash_array(file)
-    
+  def CSV_to_hash_array(file)   
     @csv = CSV.read(file, headers: true, header_converters: :symbol, converters: :all)
-    @csv.map(&:to_hash)
-    
+    @csv.map(&:to_hash) 
   end
 
-  def normalize_african_dinos(dinos)
-    
+  def normalize_african_dinos(dinos) 
     dinos.each do |dino|
       dino[:name] = dino.delete :genus
       dino[:weight_in_lbs] = dino.delete :weight

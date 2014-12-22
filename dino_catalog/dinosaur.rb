@@ -33,14 +33,12 @@ class Dino
     @diet.downcase == "herbivore"
   end
   
-  def to_s
-    puts "Name:\n #{name}"
-    puts "Period:\n #{period}"
-    puts "Continent:\n #{continent}"
-    puts "Diet:\n #{diet}" if @diet
-    puts "Weight (lbs):\n #{weight_in_lbs}" if @weight_in_lbs
-    puts "Walking:\n #{walking}" if @walking
-    puts "Description:\n #{description}" if @description
+  def to_s 
+    @dino_facts = instance_variables.map do |dino_attribute|
+      if instance_variable_get(dino_attribute)
+        "#{dino_attribute[1..-1].capitalize} \n #{instance_variable_get(dino_attribute)}\n"
+      end
+    end
   end
   
 end

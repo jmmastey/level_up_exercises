@@ -14,9 +14,6 @@ dino_names = merged_dinos.map{ |dino_hash| dino_hash[:name].to_s.downcase }
 
 #$dino_dex = DinoDex.new(merged_dinos)
 
-puts "Welcome to the DinoDex!\n\n"
-puts "Available comands:  all_dinos, exit, help, filter [filter1] [filter2] ..., [dinosaur_name]"
-
 command_line = DinoDexCommandLine.new(DinoDex.new(merged_dinos), dino_names)
 
 while true do

@@ -4,6 +4,8 @@ class ApiOrder
   def self.update(item, earliest_date)
     api_result = api_client.request(item.in_game_id)
     build_orders(api_result)
+  rescue EveCentral::ConnectionError
+    Rails.logger.warn("Failed to retrieve orders for #{item.name}.")
   end
 
   private

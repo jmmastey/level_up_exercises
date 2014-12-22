@@ -5,6 +5,10 @@ def create_user(email, password)
                      password_confirmation: password)
 end
 
+def default_user
+  @user ||= create_user("cukeuser@example.com", "testtest")
+end
+
 def sign_in(email, password)
   visit "/users/sign_in"
   fill_in "user_email", with: email
@@ -27,8 +31,7 @@ Given(/^I am on the login screen$/) do
 end
 
 Given(/^I am signed in$/) do
-  user = create_user("cukeuser@example.com", "testtest")
-  sign_in(user.email, user.password)
+  sign_in(default_user.email, default_user.password)
 end
 
 When(/^I visit the registration page$/) do

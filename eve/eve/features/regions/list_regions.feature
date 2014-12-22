@@ -1,3 +1,4 @@
+@region
 Feature: Listing regions
 	As an EVE player
 	I want to list regions

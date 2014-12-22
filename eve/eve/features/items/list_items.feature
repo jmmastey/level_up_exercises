@@ -1,3 +1,4 @@
+@item
 Feature: List items
 	As an EVE player
 	I want to list items

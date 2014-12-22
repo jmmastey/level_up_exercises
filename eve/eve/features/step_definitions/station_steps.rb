@@ -8,6 +8,14 @@ Given(/^I have the following stations:$/) do |stations|
   end
 end
 
+Given(/^I am on the stations page$/) do
+  visit stations_path
+end
+
 When(/^I visit the stations page$/) do
-  visit "/stations"
+  visit stations_path
+end
+
+Then(/^I see (\d+) stations$/) do |count|
+  expect(page).to have_css(".station", count: count)
 end

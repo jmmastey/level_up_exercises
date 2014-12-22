@@ -20,7 +20,7 @@
         %th.text-right
     %tbody
       - @watches.each do |watch|
-        %tr
+        %tr.watch{ id: "watch-#{watch.id}" }
           %td.field-nickname= watch.nickname
           %td.field-item= link_to(watch.item.name, search_orders_path(item: watch.item), title: "Show orders for #{watch.item.name}")
           %td.field-location

@@ -7,7 +7,7 @@
       %th
   %tbody
     - @stations.each do |station|
-      %tr
+      %tr.station{ id: "station-#{station.id}" }
         %td.field-in_game_id= station.in_game_id
         %td.field-name= station.name
         %td

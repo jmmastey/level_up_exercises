@@ -1,3 +1,4 @@
+@order
 Feature: Listing orders
 	As an EVE player
 	I want to list orders

@@ -7,7 +7,7 @@
       %th
   %tbody
     - @regions.each do |region|
-      %tr
+      %tr.region{ id: "region-#{region.id}" }
         %td.field-in_game_id= region.in_game_id
         %td.field-name= region.name
         %td

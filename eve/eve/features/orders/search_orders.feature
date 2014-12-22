@@ -1,3 +1,4 @@
+@order
 Feature: Searching orders
 	As an EVE player
 	I want to search orders

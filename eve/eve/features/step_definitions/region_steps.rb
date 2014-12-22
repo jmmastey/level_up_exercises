@@ -8,6 +8,14 @@ Given(/^I have the following regions:$/) do |regions|
   end
 end
 
+Given(/^I am on the regions page$/) do
+  visit regions_path
+end
+
 When(/^I visit the regions page$/) do
-  visit "/regions"
+  visit regions_path
+end
+
+Then(/^I see (\d+) regions$/) do |count|
+  expect(page).to have_css(".region", count: count)
 end

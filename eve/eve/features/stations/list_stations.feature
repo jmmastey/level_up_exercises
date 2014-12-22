@@ -1,3 +1,4 @@
+@station
 Feature: Listing stations
 	As an EVE player
 	I want to list stations

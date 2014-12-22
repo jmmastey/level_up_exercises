@@ -2,9 +2,8 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update]
 
   def index
-    #@events = EventSearch.call(events_params)
     session[:event_source] = events_params[:event_source] if events_params[:event_source].present?
-    @events = Event.with_source(session[:event_source] || :theatre_in_chicago)
+    @events = EventSearch.call(events_params)
   end
 
   def show

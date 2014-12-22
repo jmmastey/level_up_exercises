@@ -5,10 +5,11 @@ class EventSearch
     @params = params
   end
 
-  def self.search(params)
+  def self.call(params)
     event_scope = Event.order('created_at DESC')
-    event_scope = event_scope.where(event_source: source) if params[:event_source]
+    event_scope = event_scope.with_source(params[:event_source] || :theatre_in_chicago)
     event_scope = event_scope.where('date >= ?', start_date) if params[:start_date]
     event_scope = event_scope.where('date <= ?', end_date) if params[:end_date]
+    event_scope
   end
 end

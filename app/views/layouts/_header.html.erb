@@ -6,8 +6,15 @@
     <a href="" class="centered-navigation-menu-button">MENU</a>
     <ul class="centered-navigation-menu">
       <li class="nav-link"><%= link_to "Artists", artists_path %></li>
-      <li class="nav-link"><%= link_to "Login", login_path %></li>
-      <li class="nav-link"><%= link_to "Signup", signup_path %></li>
+
+      <% if user_signed_in? %>
+        <li class="nav-link">Logged in as <%= current_user.email %></li>
+        <li class="nav-link"><%= link_to "Edit Profile", edit_user_registration_path %></li>
+        <li class="nav-link"><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li class="nav-link"><%= link_to "Signup", new_user_registration_path %></li>
+        <li class="nav-link"><%= link_to "Login", new_user_session_path %></li>
+      <% end %>
     </ul>
   </div>
 </header>

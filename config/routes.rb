@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'static_pages/home'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  get 'users/:id' => 'users#show'
   get 'signup' => 'static_pages#signup'
   get 'login' => 'static_pages#login'
 

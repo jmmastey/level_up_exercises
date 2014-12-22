@@ -29,6 +29,10 @@ class Dino
     %w( carnivore insectivore piscivore ).include? @diet.downcase
   end
   
+  def herbivore?
+    @diet.downcase == "herbivore"
+  end
+  
   def to_s
     puts "Name:\n #{name}"
     puts "Period:\n #{period}"

@@ -21,17 +21,19 @@ attr_accessor :dinosaurs
     period_filters = %w( jurassic albian cretaceous triassic permian oxfordian )
 #    attribute_filters = %w( fat small biped quadruped carnivore herbivore )
 #    collection_filters = %w( joe pirate_bay )
-    
-    filters.each do |filter|
-      filtered_dinos.select! { |dino| dino.biped? } if filter == "biped"
-      filtered_dinos.select! { |dino| dino.fat? } if filter == "fat"
-      filtered_dinos.select! { |dino| dino.small? } if filter == "small"
-      filtered_dinos.select! { |dino| dino.carnivore? } if filter == "carnivore"
-      filtered_dinos.select! { |dino| dino.continent.downcase != "africa" } if filter == "joe"
-      filtered_dinos.select! { |dino| dino.continent.downcase.eql? "africa" } if filter == "pirate_bay"      
-      filter_by_period(filtered_dinos, filter) if period_filters.include? filter
-    end
-  filtered_dinos
+ 
+    filters.each { |filter| process_filter(filtered_dinos, filter) } 
+   
+#    filters.each do |filter|
+#      filtered_dinos.select! { |dino| dino.biped? } if filter == "biped"
+#      filtered_dinos.select! { |dino| dino.fat? } if filter == "fat"
+#      filtered_dinos.select! { |dino| dino.small? } if filter == "small"
+#      filtered_dinos.select! { |dino| dino.carnivore? } if filter == "carnivore"
+#      filtered_dinos.select! { |dino| dino.continent.downcase != "africa" } if filter == "joe"
+#      filtered_dinos.select! { |dino| dino.continent.downcase.eql? "africa" } if filter == "pirate_bay"      
+#      filter_by_period(filtered_dinos, filter) if period_filters.include? filter
+#    end
+    filtered_dinos
   
   end
   
@@ -39,11 +41,19 @@ attr_accessor :dinosaurs
     period_filters = %w( jurassic albian cretaceous triassic permian oxfordian )
     attribute_filters = %w( fat small biped quadruped carnivore herbivore )
     collection_filters = %w( joe pirate_bay )
+    continent_filters = %w( north south africa europe asia )
+    
+    case
+    when period_filters.include?(filter) then filter_by_period(dinos, filter)
+    when attribute_filters.include?(filter) then filter_by_attribute(dinos, filter)
+    when collection_filters.include?(filter) then filter_by_collection(dinos, filter)
+    when continent_filters.include?(filter) then filter_by_continent(dinos, filter)
+    end
     
   end
   
   def filter_by_attribute(dinos, filter)
-    
+    dinos.select! { |dino| dino.send(filter + "?") }
   end
   
   def filter_by_period(dinos, filter)

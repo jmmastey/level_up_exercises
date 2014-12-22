@@ -1,5 +1,10 @@
 
 class DinoDexCommandLine
+  
+  def initialize(dinos, dino_names)
+    @dino_dex = dinos
+    @dino_names = dino_names
+  end
 
   def get_input
     
@@ -26,7 +31,7 @@ class DinoDexCommandLine
     when "all_dinos" then print_all_dinos
     when "help" then print_help_menu
     when "exit" then exit
-    when *$dino_names then print_all_dino_facts(user_input)
+    when *@dino_names then print_all_dino_facts(user_input)
     when "filter" then puts "ERROR: Please specify at least one filter.
       To see a list of all dinos, enter \"all_dinos\""
     else invalid_command
@@ -53,15 +58,15 @@ class DinoDexCommandLine
   
   def print_all_dinos
     puts "\nLIST OF ALL DINOS: \n"
-    puts $dino_dex.to_s
+    puts @dino_dex.to_s
   end
   
   def print_all_dino_facts(dino_name)
-    puts $dino_dex.print_all_facts(dino_name)
+    puts @dino_dex.print_all_facts(dino_name)
   end
   
   def print_filtered_dinos(filters)
-    filtered_dinos = $dino_dex.filter_dinos(filters)
+    filtered_dinos = @dino_dex.filter_dinos(filters)
     filtered_dinos.each { |dino| puts dino.name }
   end
   
@@ -74,9 +79,9 @@ class DinoDexCommandLine
     
     case
     when user_input.uniq.length != user_input.length then puts "\nERROR: Duplicate commands entered.\n"
-    when (user_input & $dino_names).length > 1 
+    when (user_input & @dino_names).length > 1 
       puts "\nERROR: Multiple dino names entered.  Please enter only one name at a time.\n"
-    when (user_input & $dino_names.concat(@commands)).length > 1
+    when (user_input & @dino_names.concat(@commands)).length > 1
       puts "\nERROR: Command chaning.  Please enter only one command at a time.\n"
     end
     

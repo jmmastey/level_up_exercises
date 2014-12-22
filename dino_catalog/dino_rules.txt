@@ -1,0 +1,43 @@
+Welcome to the DinoDex!
+
+All commands are case insensitive.  Please enter only one command at a time.
+The following commands are available:
+
+$		all_dinos						
+Prints a list of all dinos in the DinoDex
+
+$		exit
+Exits the DinoDex
+
+$		help
+Prints this help screen
+
+$		filter [filter1] [filter2] ... 	
+Prints a list of filtered dinos.  Filters can be chained.  
+Please select no more than one filter from each filter group.
+Available filters:
+	WALKING (select only one):
+		biped		Returns all dinos that are bipeds
+		quadruped	Returns all dins that are quadrupeds
+	SIZE (select only one):
+		fat		Returns all dinos that are big (> 2 tons)
+		small		Returns all dinos that are small (<= 2 tons)
+	DIET (select only one):
+		carnivore	Returns all dinos that are carnivores 
+					(includes insectivores and piscivores)
+		herbivore	Returns all dins that are herbivores
+	COLLECTIONS (select only one):
+		joe		Returns all dinos from Joe's CSV
+		pirate_bay	Returns all dinos from Pirate Bay export
+	PERIODS (select only one):
+		jurassic, albian, cretaceous, triassic, permian, oxfordian	
+				Returns all dinos from the selected period
+	CONTINENTS (select only one):
+		north_america, south_america, europe, africa, asia
+				Returns all dinos from the selected continent
+Example: 	filter biped jurassic africa
+		This will return a list of all biped African dinos from the Jurassic period.
+		
+$		[dinosaur_name]
+		Entering a dino name will print out all known facts about that dino.
+		Please enter only one dino name at a time.

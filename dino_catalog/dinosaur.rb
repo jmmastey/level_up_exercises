@@ -6,7 +6,7 @@ class Dino
   attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
   
   def initialize(dino_hash)
-    dino_hash.each { |k,v| send("#{k}=", v) }
+    dino_hash.each { |k, v| send("#{k}=", v) }
   end  
   
   def fat?
@@ -18,27 +18,27 @@ class Dino
   end
   
   def biped?
-    @walking.to_s.downcase.eql? "biped"
+    @walking.eql? "biped"
   end
   
   def quadruped?
-    @walking.to_s.downcase.eql? "quadruped"
+    @walking.eql? "quadruped"
   end
   
   def carnivore?
-    %w( carnivore insectivore piscivore ).include? @diet.downcase
+    %w( carnivore insectivore piscivore ).include? @diet
   end
   
   def herbivore?
-    @diet.downcase == "herbivore"
+    @diet == "herbivore"
   end
   
   def to_s 
-    @dino_facts = instance_variables.map do |dino_attribute|
+    dino_facts = instance_variables.map do |dino_attribute|
       if instance_variable_get(dino_attribute)
         "#{dino_attribute[1..-1].capitalize} \n #{instance_variable_get(dino_attribute)}\n"
       end
-    end
+    end.compact
   end
   
 end

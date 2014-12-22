@@ -36,8 +36,8 @@ Available filters:
 	CONTINENTS (select only one):
 		north_america, south_america, europe, africa, asia
 				Returns all dinos from the selected continent
-Example: 	filter biped jurassic
-		This will return a list of all dinos from the Jurassic period that are bipeds.
+Example: 	filter biped jurassic africa
+		This will return a list of all biped African dinos from the Jurassic period.
 		
 $		[dinosaur_name]
 		Entering a dino name will print out all known facts about that dino.

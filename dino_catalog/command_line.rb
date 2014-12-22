@@ -1,11 +1,13 @@
 
 class DinoDexCommandLine
   
-  def initialize(dinos, dino_names) 
-    @dino_dex = dinos
-    @dino_names = dino_names
+  attr_accessor :dino_dex, :dino_names
+  
+  def initialize(dino_dex) 
+    @dino_dex = dino_dex
+    @dino_names = dino_dex.dino_names
     puts "Welcome to the DinoDex!\n\n"
-    puts "Available comands:  all_dinos, exit, help, filter [filter1] [filter2] ..., [dino_name]"
+    puts "Available comands:  \nall_dinos \nexit \nhelp \n[dino_name] \nfilter [filter1] [filter2] ..."
   end
 
   def get_input  
@@ -14,6 +16,8 @@ class DinoDexCommandLine
     user_input = gets.chomp.strip.downcase.split
     process_input_length(user_input)  
   end
+  
+  private
   
   def process_input_length(user_input)   
     case
@@ -52,12 +56,14 @@ class DinoDexCommandLine
   end
   
   def print_all_dino_facts(dino_name)
-    puts @dino_dex.print_all_facts(dino_name)
+    puts @dino_dex.all_dino_facts(dino_name)
   end
   
   def print_filtered_dinos(filters)
     filtered_dinos = @dino_dex.filter_dinos(filters)
-    filtered_dinos.each { |dino| puts dino.name }
+    if filtered_dinos.length > 0 then filtered_dinos.each { |dino| puts dino.name }
+    else puts "No dinos found.  Please try again."
+    end
   end
   
   def invalid_command
@@ -69,8 +75,6 @@ class DinoDexCommandLine
     check_for_invalid_filters(filters)
     print_filtered_dinos(filters[1..-1].map!(&:downcase))
   end
-  
-  private
   
   def check_for_invalid_filters(filters)
     filter_groups = [%w( fat small ),
@@ -84,7 +88,8 @@ class DinoDexCommandLine
         puts "Invalid filter chaning."
         invalid_command
       end
-    end   
+    end  
+     
   end
   
 end

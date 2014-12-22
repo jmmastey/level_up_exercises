@@ -1,1 +1,14 @@
-%h1 Hello World
+%h1 Events
+- @events.each do |event|
+  %dl.dl-horizontal
+    %dt Name
+    %dd= event.title
+    %dt Description
+    %dd= event.description
+    %dt Date
+    %dd= event.date
+    %dt Time
+    %dd= event.time
+    %dt URL
+    %dd= event.url
+  %hr

@@ -1,0 +1,17 @@
+%h2 Event Details
+%dl.dl-horizontal
+  %dt Name
+  %dd= @event.title
+  %dt Description
+  %dd= @event.description
+  %dt Date
+  %dd= @event.date
+  %dt Time
+  %dd= @event.time
+  %dt URL
+  %dd= @event.url
+%hr
+
+= link_to "Search", events_path(@event)
+|
+= link_to "Edit", edit_event_path(@event)

@@ -1,16 +1,18 @@
 require_relative 'cohort'
+require_relative 'data_point'
+require 'json'
 
 class Controller
   attr_accessor :cohorts
 
   def initialize(filename)
     run(filename)
-    @cohorts = []
+    @data_points = []
   end
 
   def run(filename)
-    views = parse(filename)
-    names = unique_cohort_names(views)
+    @data_points = parse(filename)
+    names  = unique_cohort_names(@views)
     create_empty_cohorts(names)
   end
 
@@ -35,7 +37,3 @@ class Controller
     end
   end
 end
-
-
-
-controller = Controller.new('test.json')

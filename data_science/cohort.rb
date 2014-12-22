@@ -5,10 +5,6 @@ class Cohort
     @name = name
   end
 
-  def its_a_cohort
-
-  end
-
   def conversion_rate
 
   end

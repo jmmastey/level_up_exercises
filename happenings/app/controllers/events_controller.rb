@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update]
 
   def index
-    session[:event_source] = events_params[:event_source] if events_params[:event_source].present?
     @start_date = events_params[:start_date]
     @end_date = events_params[:end_date]
     @description = events_params[:description]

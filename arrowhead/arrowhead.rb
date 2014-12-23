@@ -1,4 +1,8 @@
 class Arrowhead
+  UNKNOWN_REGION = "Unknown region, please provide a valid region."
+  UNKNOWN_SHAPE = "Unknown shape value. " \
+                  "Are you sure you know what you're talking about?"
+
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
     far_west: {
@@ -15,20 +19,28 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+    shapes = shapes_by_region(region)
+    raise UNKNOWN_SHAPE unless shapes.include? shape
+
+    arrowhead = shapes[shape]
+    "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
+  end
+
+  def self.shapes_by_region(region)
+    raise UNKNOWN_REGION unless CLASSIFICATIONS.include? region
+
+    CLASSIFICATIONS[region]
   end
 end
 
-puts Arrowhead.classify(:northern_plains, :bifurcated)
+test_data = [{ region: :northern_plains, shape: :bifurcated },
+             { region: :foo, shape: :bifurcated },
+             { region: :northern_plains, shape: :foo }]
+test_data.each do |data|
+  begin
+    puts Arrowhead.classify(data[:region], data[:shape])
+  rescue StandardError => e
+    puts e.message
+  end
+end

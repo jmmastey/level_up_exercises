@@ -1,15 +1,15 @@
-
 class DinoDex
-  attr_accessor :dinosaurs, :dino_names
+  attr_reader :dinosaurs
 
-  def initialize(joes_dinos, piratebay_dinos)
-    dino_list = joes_dinos.concat(piratebay_dinos)
+  def initialize(joes_csv, pirate_bay_csv)
+    dino_list = CSVtoDinos.csv_to_hash_array(joes_csv) + 
+      CSVtoDinos.normalize(CSVtoDinos.csv_to_hash_array(pirate_bay_csv))
     @dinosaurs = dino_list.map { |dino| Dino.new(dino) }
-    @dino_names = dino_list.map{ |dino| dino[:name] }
+    @dino_names = dino_list.map { |dino| dino[:name] }
   end
 
   def all_dino_facts(dino_name)
-    dino = @dinosaurs.select { |dino| dino.name.to_s == dino_name }.pop
+    dino = @dinosaurs.find { |dino| dino.name == dino_name }
     dino.to_s
   end
 
@@ -32,27 +32,27 @@ class DinoDex
     continents = %w( north_america south_america africa europe asia )
 
     case
-    when periods.include?(filter) then filter_by_period(dinos, filter)
-    when attributes.include?(filter) then filter_by_attribute(dinos, filter)
-    when collections.include?(filter) then filter_by_collection(dinos, filter)
-    when continents.include?(filter) then filter_by_continent(dinos, filter)
+      when periods.include?(filter) then period_filter(dinos, filter)
+      when attributes.include?(filter) then attribute_filter(dinos, filter)
+      when collections.include?(filter) then collection_filter(dinos, filter)
+      when continents.include?(filter) then continent_filter(dinos, filter)
     end
 
   end
 
-  def filter_by_attribute(dinos, filter)
+  def attribute_filter(dinos, filter)
     dinos.select! { |dino| dino.send("#{filter}?") }
   end
 
-  def filter_by_period(dinos, filter)
+  def period_filter(dinos, filter)
     dinos.select! {|dino| dino.period.include? filter }
   end
 
-  def filter_by_continent(dinos, filter)
+  def continent_filter(dinos, filter)
     dinos.select! {|dino| dino.continent.include? filter.tr('_', ' ') }
   end
 
-  def filter_by_collection(dinos, filter)
+  def collection_filter(dinos, filter)
     if filter.eql? "pirate_bay" then filter_by_continent(dinos, "africa")
     else dinos.select! { |dino| dino.continent != "africa" }
     end

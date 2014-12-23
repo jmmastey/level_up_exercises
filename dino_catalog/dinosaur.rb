@@ -1,4 +1,3 @@
-
 class Dino
   WEIGHT_LIMIT = 4000
 

@@ -13,7 +13,8 @@ $		help
 Prints this help screen
 
 $		filter [filter1] [filter2] ... 	
-Prints a list of filtered dinos.  Filters can be chained.  
+Prints a list of filtered dinos.  Filters can be chained.
+At least one filter must be entered.
 Please select no more than one filter from each filter group.
 Available filters:
 	WALKING (select only one):

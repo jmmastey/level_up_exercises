@@ -1,0 +1,72 @@
+// PMail CSS
+
+// Variables
+$background-color: #fff
+$text-color: #111
+$primary-color: #0066ff
+$secondary-color: #00a352
+$accent-background-color: #eee
+$border-color: #ccc
+
+$font-face: Arial, sans-serif
+$font-size: 16px
+
+$sidebar-width: 200px
+
+html
+  margin: 0
+  padding: 0
+
+body
+  background: $background-color
+  font-family: $font-face
+  font-size: $font-size
+  margin: 0
+
+input, select
+  border: thin solid $border-color
+  height: 1.25em
+  padding: 5px
+  -webkit-appearance: none !important
+
+=topbar
+  height: 60px
+  width: 100%
+
+  > *
+    vertical-align: middle
+
+.primary-topbar
+  +topbar
+  background-color: $accent-background-color
+
+.secondary-topbar
+  +topbar
+
+.sidebar
+  width: $sidebar-width
+  max-width: $sidebar-width
+
+.main-pane
+
+.brand
+  background-image: url('../images/logo.gif')
+  background-repeat: no-repeat
+  display: inline-block
+  margin: 0 30px
+  height: 59px
+  width: 149px
+
+.search-form
+  display: inline-block
+
+  input[type="search"]
+    max-width: 598px
+    width: 598px
+    min-width: 200px
+    min-height: 1.2em
+
+input:focus
+  border-color: $primary-color
+  // Remove webkit's border highlight
+  outline: none

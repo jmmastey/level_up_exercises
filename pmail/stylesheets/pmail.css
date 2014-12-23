@@ -1,0 +1,76 @@
+/* line 16, ../sass/pmail.sass */
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 20, ../sass/pmail.sass */
+body {
+  background: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* line 26, ../sass/pmail.sass */
+input, select {
+  border: thin solid #ccc;
+  height: 1.25em;
+  padding: 5px;
+  -webkit-appearance: none !important;
+}
+
+/* line 39, ../sass/pmail.sass */
+.primary-topbar {
+  height: 60px;
+  width: 100%;
+  background-color: #eee;
+}
+/* line 36, ../sass/pmail.sass */
+.primary-topbar > * {
+  vertical-align: middle;
+}
+
+/* line 43, ../sass/pmail.sass */
+.secondary-topbar {
+  height: 60px;
+  width: 100%;
+}
+/* line 36, ../sass/pmail.sass */
+.secondary-topbar > * {
+  vertical-align: middle;
+}
+
+/* line 46, ../sass/pmail.sass */
+.sidebar {
+  width: 200px;
+  max-width: 200px;
+}
+
+/* line 52, ../sass/pmail.sass */
+.brand {
+  background-image: url("../images/logo.gif");
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin: 0 30px;
+  height: 59px;
+  width: 149px;
+}
+
+/* line 60, ../sass/pmail.sass */
+.search-form {
+  display: inline-block;
+}
+/* line 63, ../sass/pmail.sass */
+.search-form input[type="search"] {
+  max-width: 598px;
+  width: 598px;
+  min-width: 200px;
+  min-height: 1.2em;
+}
+
+/* line 69, ../sass/pmail.sass */
+input:focus {
+  border-color: #0066ff;
+  outline: none;
+}

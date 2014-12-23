@@ -1,9 +1,9 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-  attr_accessor :side1, :side2, :side3
+  attr_accessor :side_1, :side_2, :side_3
 
-  def initialize(side1, side2, side3)
-    @side1, @side2, @side3 = side1, side2, side3
+  def initialize(side_1, side_2, side_3)
+    @side_1, @side_2, @side_3 = side_1, side_2, side_3
   end
   
   def calculate_angles(a, b, c)  
@@ -23,11 +23,11 @@ class Triangle
   end
 
   def equilateral?
-    (side1 == side2) && (side2 == side3)
+    (side_1 == side_2) && (side_2 == side_3)
   end
 
   def isosceles?
-    [side1, side2, side3].uniq.length == 2
+    [side_1, side_2, side_3].uniq.length == 2
   end
   
   def recite_facts
@@ -39,7 +39,7 @@ class Triangle
       puts "This triangle is scalene and mathematically boring."
     end
     
-    angles = self.calculate_angles(side1, side2, side3)
+    angles = self.calculate_angles(side_1, side_2, side_3)
 
     puts "The angles of this triangle are #{angles.join(', ')}"
     

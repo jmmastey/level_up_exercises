@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    render_404 if @event.nil?
+    render_404 and return if @event.nil?
     respond_to do |f|
       f.html
       f.ics   {render text: ICalEventPresenter.call([@event])}

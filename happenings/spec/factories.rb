@@ -5,15 +5,10 @@ FactoryGirl.define do
     time          Time.now
     date          Date.today
     url           "http://www.awesomeness.com"
-    event_source  :theatre_in_chicago
+    event_source  { EventSource[:theatre_in_chicago] }
   end
 
-  factory :event_source do
-    event_source  :theatre_in_chicago
-    description   "a source of coolness"
-  end
-
-  sequence(:username) do |n|
+  sequence(:name) do |n|
     "test_#{n}"
   end
   sequence(:email) do |n|
@@ -21,7 +16,7 @@ FactoryGirl.define do
   end
 
   factory :user do
-    username
+    name
     email
     encrypted_password  "dude"
     password            "test_password"

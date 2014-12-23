@@ -14,22 +14,22 @@ class Robot
     check_for_errors
     @@registry << @name
   end
-  
+
   private
   def check_for_errors
     raise NameCollisionError unless (name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
     raise NameCollisionError if @@registry.include?(name)
   end
-  
+
   def generate_name
     name = 2.times.collect { generate_char } + 3.times.collect { generate_num }
     name.join
   end
-  
+
   def generate_char
     ('A'..'Z').to_a.sample
   end
-  
+
   def generate_num
     rand(10)
   end

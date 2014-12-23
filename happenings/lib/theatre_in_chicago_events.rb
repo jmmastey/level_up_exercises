@@ -7,10 +7,15 @@ class TheatreInChicagoEvents
   end
 
   def self.get_events_between_dates(start_date, end_date)
+    raise ArgumentError, "end date is before start date!" if start_date > end_date
     events = []
     (start_date.year..end_date.year).each_with_object(events) do |year, arr|
-      if year <= start_date.year || year >= end_date.year
+      if start_date.year == end_date.year
         arr << self.get_events_for_partial_year(start_date, end_date)
+      elsif year <= start_date.year
+        arr << self.get_events_for_partial_year(start_date, Date.parse("#{start_date.year}-12-31"))
+      elsif year >= end_date.year
+        arr << self.get_events_for_partial_year(Date.parse("#{end_date.year}-1-1"), end_date)
       else
         arr << self.get_events_for_year(year)
       end
@@ -72,8 +77,10 @@ class TheatreInChicagoEvents
     raise ArgumentError, "date range spans multiple years!" if start_date.year != end_date.year
     events = []
     (start_date.month..end_date.month).each do |month|
-      if month <= start_date.month || month >= end_date.month
-        events << self.get_events_for_partial_month(start_date, end_date)
+      if month <= start_date.month
+        events << self.get_events_for_partial_month(month, start_date, end_date)
+      elsif month >= end_date.month
+        events << self.get_events_for_partial_month(month, start_date, end_date)
       else
         events << self.get_events_for_month(month, start_date.year)
       end
@@ -81,9 +88,9 @@ class TheatreInChicagoEvents
     return events.flatten
   end
 
-  def self.get_events_for_partial_month(start_date, end_date)
-    raise ArgumentError, "date range spans multiple months!" if start_date.month != end_date.month
-    events = self.get_events_for_month(start_date.month, start_date.year)
+  def self.get_events_for_partial_month(month, start_date, end_date)
+    raise ArgumentError, "date range spans multiple years!" if start_date.year != end_date.year
+    events = self.get_events_for_month(month, start_date.year)
     events.select { |event| event[:date] >= start_date && event[:date] <= end_date }
   end
 end

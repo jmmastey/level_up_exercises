@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  devise_scope :user do
+    get 'signup' => 'devise/registrations#new'
+    get 'login' => 'devise/sessions#new'
+  end
+
   devise_for :users
   get 'static_pages/home'
 
@@ -10,9 +16,8 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-  get 'users/:id' => 'users#show'
-  get 'signup' => 'devise/registrations#new'
-  get 'login' => 'devise/sessions#new'
+  get 'users/:id' => 'users#show', as: :user
+
 
   resources :artists do
     resources :artworks

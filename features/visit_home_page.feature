@@ -6,12 +6,12 @@ Feature: Visiting Home Page
   Scenario: User visits homepage
     Given I am on the homepage
     Then I should see a link to the Artists page
-    And a Login button
-    And a Signup button
+    And a Log in button
+    And a Sign up button
 
   Scenario: User visits signup page
     Given I am on the homepage
-    When I click on Signup
+    When I click on Sign up
     Then I should be on the Sign up page
 
   Scenario: User visits artists page
@@ -21,5 +21,5 @@ Feature: Visiting Home Page
 
   Scenario: User visits login page
     Given I am on the homepage
-    When I click on Login
+    When I click on Log in
     Then I should be on the Log in page

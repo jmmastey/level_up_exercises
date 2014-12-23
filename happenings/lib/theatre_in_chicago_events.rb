@@ -6,13 +6,16 @@ class TheatreInChicagoEvents
     @year       = opts[:year]
   end
 
-  # TODO: optimize this to not pull for all inclusive years and then filter
   def self.get_events_between_dates(start_date, end_date)
     events = []
-    (start_date.year..end_date.year).each_with_object(events) do |year, arr| 
-      arr << self.get_events_for_year(year)
+    (start_date.year..end_date.year).each_with_object(events) do |year, arr|
+      if year <= start_date.year || year >= end_date.year
+        arr << self.get_events_for_partial_year(start_date, end_date)
+      else
+        arr << self.get_events_for_year(year)
+      end
     end
-    events.flatten.select { |event| event[:date] >= start_date && event[:date] <= end_date }
+    events.flatten
   end
 
   def self.get_events_for_year(year)
@@ -61,5 +64,26 @@ class TheatreInChicagoEvents
                       event_source:   :theatre_in_chicago }
     end
     raw_events
+  end
+
+  private
+
+  def self.get_events_for_partial_year(start_date, end_date)
+    raise ArgumentError, "date range spans multiple years!" if start_date.year != end_date.year
+    events = []
+    (start_date.month..end_date.month).each do |month|
+      if month <= start_date.month || month >= end_date.month
+        events << self.get_events_for_partial_month(start_date, end_date)
+      else
+        events << self.get_events_for_month(month, start_date.year)
+      end
+    end
+    return events.flatten
+  end
+
+  def self.get_events_for_partial_month(start_date, end_date)
+    raise ArgumentError, "date range spans multiple months!" if start_date.month != end_date.month
+    events = self.get_events_for_month(start_date.month, start_date.year)
+    events.select { |event| event[:date] >= start_date && event[:date] <= end_date }
   end
 end

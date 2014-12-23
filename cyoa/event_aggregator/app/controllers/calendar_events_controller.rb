@@ -3,6 +3,9 @@ class CalendarEventsController < ApplicationController
 
   respond_to :html
 
+  PERMITTED_PARAMS = [:title, :start_time, :end_time, :description,
+                      :event_hash, :family_hash, :location, :host]
+
   def index
     @calendar_events = CalendarEvent.all
     respond_with(@calendar_events)
@@ -37,11 +40,12 @@ class CalendarEventsController < ApplicationController
   end
 
   private
-    def set_calendar_event
-      @calendar_event = CalendarEvent.find(params[:id])
-    end
 
-    def calendar_event_params
-      params.require(:calendar_event).permit(:title, :start_time, :end_time, :description, :event_hash, :family_hash, :location, :host)
-    end
+  def set_calendar_event
+    @calendar_event = CalendarEvent.find(params[:id])
+  end
+
+  def calendar_event_params
+    params.require(:calendar_event).permit(PERMITTED_PARAMS)
+  end
 end

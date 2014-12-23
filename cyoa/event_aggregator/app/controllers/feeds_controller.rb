@@ -3,6 +3,8 @@ class FeedsController < ApplicationController
 
   respond_to :html
 
+  PERMITTED_PARAMS = [:owner_user_id, :title, :description, :public]
+
   def index
     @feeds = Feed.all
     respond_with(@feeds)
@@ -37,11 +39,12 @@ class FeedsController < ApplicationController
   end
 
   private
-    def set_feed
-      @feed = Feed.find(params[:id])
-    end
 
-    def feed_params
-      params.require(:feed).permit(:owner_user_id, :title, :description, :public)
-    end
+  def set_feed
+    @feed = Feed.find(params[:id])
+  end
+
+  def feed_params
+    params.require(:feed).permit(PERMITTED_PARAMS)
+  end
 end

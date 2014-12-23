@@ -16,19 +16,8 @@ module ApplicationHelper
 
   def event_categories
     %w(
-      FIXME
-      Music
-      Shopping
-      Runnig
-      Walking
-      Sports
-      Stuff
-      Things
-      Theater
-      Comedy
-      Singles
-      Doubles
-      More
+        FIXME Music Shopping Runnig Walking Sports Stuff
+        Things Theater Comedy Singles Doubles More
     )
   end
 end

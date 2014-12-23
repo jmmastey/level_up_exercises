@@ -1,47 +1,50 @@
 class SelectionCriteriaController < ApplicationController
-  before_action :set_selection_criterium, only: [:show, :edit, :update, :destroy]
+  before_action :set_selection_criterion, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
+  PERMITTED_PARAMS = [:implementation_class, :configuration, :sql_expression]
+
   def index
-    @selection_criteria = SelectionCriterium.all
+    @selection_criteria = SelectionCriterion.all
     respond_with(@selection_criteria)
   end
 
   def show
-    respond_with(@selection_criterium)
+    respond_with(@selection_criterion)
   end
 
   def new
-    @selection_criterium = SelectionCriterium.new
-    respond_with(@selection_criterium)
+    @selection_criterion = SelectionCriterion.new
+    respond_with(@selection_criterion)
   end
 
   def edit
   end
 
   def create
-    @selection_criterium = SelectionCriterium.new(selection_criterium_params)
-    @selection_criterium.save
-    respond_with(@selection_criterium)
+    @selection_criterion = SelectionCriterion.new(selection_criterion_params)
+    @selection_criterion.save
+    respond_with(@selection_criterion)
   end
 
   def update
-    @selection_criterium.update(selection_criterium_params)
-    respond_with(@selection_criterium)
+    @selection_criterion.update(selection_criterion_params)
+    respond_with(@selection_criterion)
   end
 
   def destroy
-    @selection_criterium.destroy
-    respond_with(@selection_criterium)
+    @selection_criterion.destroy
+    respond_with(@selection_criterion)
   end
 
   private
-    def set_selection_criterium
-      @selection_criterium = SelectionCriterium.find(params[:id])
-    end
 
-    def selection_criterium_params
-      params.require(:selection_criterium).permit(:implementation_class, :configuration, :sql_expression)
-    end
+  def set_selection_criterion
+    @selection_criterion = SelectionCriterion.find(params[:id])
+  end
+
+  def selection_criterion_params
+    params.require(:selection_criterion).permit(PERMITTED_PARAMS)
+  end
 end

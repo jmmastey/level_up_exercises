@@ -3,6 +3,8 @@ class EventSourcesController < ApplicationController
 
   respond_to :html
 
+  PERMITTED_PARAMS = [:name, :source_type, :uri, :frequency, :last_harvest]
+
   def index
     @event_sources = EventSource.all
     respond_with(@event_sources)
@@ -37,11 +39,12 @@ class EventSourcesController < ApplicationController
   end
 
   private
-    def set_event_source
-      @event_source = EventSource.find(params[:id])
-    end
 
-    def event_source_params
-      params.require(:event_source).permit(:name, :source_type, :uri, :frequency, :last_harvest)
-    end
+  def set_event_source
+    @event_source = EventSource.find(params[:id])
+  end
+
+  def event_source_params
+    params.require(:event_source).permit(PERMITTED_PARAMS)
+  end
 end

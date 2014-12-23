@@ -23,11 +23,35 @@ describe TheatreInChicagoEvents do
         allow(HTTParty).to receive(:get).and_return(monthly_response)
       end
 
-      it 'should parse stuff' do
+      it 'should parse out the correct number of events' do
         raw_events = described_class.new({ month: 1, year: 2015 }).get_events_for_month
         expect(raw_events.count).to eq(7)
       end
+
+      it 'should parse the data into correct data types for each raw event' do
+        raw_events = described_class.new({ month: 1, year: 2015 }).get_events_for_month
+        raw_events.each do |event|
+          expect(event[:description].class).to eq(String)
+          expect(event[:title].class).to eq(String)
+          expect(event[:url].class).to eq(String)
+          expect(event[:time].class).to eq(String)
+          expect(event[:date].class).to eq(Date)
+          expect(event[:event_source]).to eq(:theatre_in_chicago)
+        end
+      end
+
+      it 'should correctly parse each event attribute' do
+        raw_events = described_class.new({ month: 1, year: 2015 }).get_events_for_month
+        expect(raw_events.first[:description]).to eq("Cor Theatre at Rivendell Theatre")
+        expect(raw_events.first[:url]).to eq("http://www.theatreinchicago.com/a-map-of-virtue/7381/")
+        expect(raw_events.first[:title]).to eq("A Map of Virtue")
+        expect(raw_events.first[:time]).to eq("5:00pm")
+        expect(raw_events.first[:date]).to eq(Date.parse("2015-01-11"))
+      end
     end
+  end
+  
+  describe '#get_events_between_dates' do
   end
 
   describe '#get_events_for_year' do

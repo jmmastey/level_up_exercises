@@ -42,8 +42,11 @@ class Triangle
     angles = self.calculate_angles(side1, side2, side3)
 
     puts "The angles of this triangle are #{angles.join(', ')}"
-
-    puts "This triangle is also a right triangle!" if angles.include? 90
+    
+    if angles.include? 90
+      puts "This triangle is also a right triangle!" 
+    end
+    
     puts ""
   end
   

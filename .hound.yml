@@ -26,4 +26,4 @@ Style/SignalException:
 
 Metrics/LineLength:
   Exclude:
-    - supportive/supportive.rb
+    - 'supportive/supportive.rb'

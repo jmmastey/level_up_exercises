@@ -32,7 +32,7 @@ describe EventsController do
 
     it 'renders 404 if event id isnt found' do
       get :show, { id: event.id + 1 }
-      expect(response).to render_template('404')
+      expect(response).to render_template(file: '404.html')
     end
   end
 
@@ -69,6 +69,7 @@ describe EventsController do
       allow(am_errors).to receive(:messages).and_return('error')
       allow(am_errors).to receive(:present?).and_return(true)
       allow(event).to receive(:errors).and_return(am_errors)
+
       get :create, test_params
       expect(flash[:alert]).to eq("Failed to create event! errors: error")
       expect(assigns(:event)).to be_a_new(Event)
@@ -77,6 +78,7 @@ describe EventsController do
     it 'should display a flash if event was created' do
       allow(CreateEvent).to receive(:create).and_return(event)
       get :create, test_params
+
       expect(flash[:notice]).to eq("Created event!")
       expect(assigns(:event)).to be_a_new(Event)
       expect(Event.last).to eq(event)

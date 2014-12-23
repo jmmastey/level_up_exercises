@@ -1,9 +1,9 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-	attr_accessor :side1,:side2,:side3
+	attr_accessor :side1, :side2, :side3
 
-	def initialize(side1,side2,side3)
-		@side1,@side2,@side3 = side1,side2,side3
+	def initialize(side1, side2, side3)
+		@side1, @side2, @side3 = side1, side2, side3
 	end
 
 	def equilateral()
@@ -11,7 +11,7 @@ class Triangle
 	end
 
 	def isosceles()
-		[side1,side2,side3].uniq.length == 2
+		[side1, side2, side3].uniq.length == 2
 	end
 
 	def scalene()
@@ -31,7 +31,7 @@ class Triangle
 		  puts 'This triangle is scalene and mathematically boring.'
 		end
     
-		angles = self.calculate_angles(side1,side2,side3)
+		angles = self.calculate_angles(side1, side2, side3)
 
 		puts 'The angles of this triangle are ' + angles.join(',')
 
@@ -39,7 +39,7 @@ class Triangle
 		puts ''
 	end
 
-	def calculate_angles(a,b,c)
+	def calculate_angles(a, b, c)
 		angleA = radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
 		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
 		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
@@ -54,8 +54,8 @@ end
 
 
 triangles = [
-	[5,5,5],
-	[5,12,13],
+	[5, 5, 5],
+	[5, 12, 13],
 ]
 triangles.each { |sides|
 	tri = Triangle.new(*sides)

@@ -23,3 +23,7 @@ Style/StringLiterals:
 
 Style/SignalException:
   Enabled: false
+
+Metrics/LineLength:
+  Exclude:
+    - supportive/supportive.rb

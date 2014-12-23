@@ -10,25 +10,28 @@ class BlagPost
 
   def initialize(args)
     args.symbolize_keys!
-
-    if args[:author].present? && args[:author_url].present?
-      @author = Author.new(args[:author], args[:author_url])
-    end
-
-    @categories = (args[:categories] || []).reject do |category|
-      DISALLOWED_CATEGORIES.include?(category)
-    end
-
+    init_author(args)
+    init_categories(args)
     @comments = args[:comments] || []
     @body = args[:body].squish
     @publish_date = args[:publish_date].try(:to_date) || Date.today
   end
 
   def to_s
-    [ category_list, byline, abstract, commenters ].join("\n")
+    [category_list, byline, abstract, commenters].join("\n")
   end
 
   private
+
+  def init_author(args)
+    @author = Author.new(args[:author], args[:author_url]) if args.slice(:author, :author_url).values.all?(&:present?)
+  end
+
+  def init_categories(args)
+    @categories = (args[:categories] || []).reject do |category|
+      DISALLOWED_CATEGORIES.include?(category)
+    end
+  end
 
   def byline
     author.try { |a| "By #{a.name}, at #{a.url}" } || ""
@@ -38,7 +41,8 @@ class BlagPost
     return "" if categories.empty?
 
     formatted_categories = categories.map { |c| as_title(c) }
-    "#{'Category'.pluralize(categories.length)}: #{formatted_categories.to_sentence}"
+    "#{'Category'.pluralize(categories.length)}: " <<
+      formatted_categories.to_sentence
   end
 
   def as_title(string)
@@ -57,13 +61,12 @@ class BlagPost
   def abstract
     body.truncate(200)
   end
-
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
+                    "comments"      => [[], [], []], # because comments are meaningless, get it?
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.

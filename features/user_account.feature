@@ -31,3 +31,8 @@ Feature: User Accounts
   Scenario: Update a user with invalid attributes
     When I edit an user with invalid data
     Then I should see user validation errors
+
+  Scenario: Delete user
+    When I delete a user
+    Then I should not see the user on the Users page
+    And I should see a message confirming the user was deleted

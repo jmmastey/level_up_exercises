@@ -44,6 +44,11 @@ When(/^I edit an user with invalid data$/) do
   click_button("Update Account")
 end
 
+When(/^I delete a user$/) do
+  sign_up_user
+  click_link("Delete Account")
+end
+
 Then(/^I should be on my user page$/) do
   expect(page).to have_selector('h1', text: "Your Account")
   expect(page).to have_content("user@example.com")
@@ -51,6 +56,14 @@ end
 
 Then(/^I should see a message confirming the user was created$/) do
   expect(page).to have_content("Your account was successfully created.")
+end
+
+Then(/^I should see a message confirming the user was updated$/) do
+  expect(page).to have_content("Your account was successfully updated.")
+end
+
+Then(/^I should see a message confirming the user was deleted$/) do
+  expect(page).to have_content("Your account was successfully deleted.")
 end
 
 Then(/^I should see user validation errors$/) do
@@ -72,6 +85,6 @@ Then(/^I should see the updated name$/) do
   expect(page).to have_selector('p', text: "myemail@example.com")
 end
 
-Then(/^I should see a message confirming the user was updated$/) do
-  expect(page).to have_content("Your account was successfully updated.")
+Then(/^I should not see the user on the Users page$/) do
+  expect(page).not_to have_content("user@example.com")
 end

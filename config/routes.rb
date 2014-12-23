@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'signup' => 'devise/registrations#new'
     get 'login' => 'devise/sessions#new'
+    get 'users' => 'users#index'
   end
 
   devise_for :users

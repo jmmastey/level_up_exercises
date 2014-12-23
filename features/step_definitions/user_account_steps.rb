@@ -1,5 +1,14 @@
+Given(/^I have 2 users$/) do
+  user_1 = create(:user, email: "user1@example.com")
+  user_2 = create(:user, email: "user2@example.com")
+end
+
+Given(/^I am on the users page$/) do
+  visit users_path
+end
+
 When(/^I signup as a user$/) do
-  visit path
+  visit root_path
   click_link("Sign up")
   fill_in("Email", with: "user@example.com")
   fill_in("Password", with: "password")
@@ -27,4 +36,9 @@ end
 Then(/^I should see user validation errors$/) do
   expect(page).to have_content("The user could not be saved.")
   expect(page).to have_content("Please correct")
+end
+
+Then(/^I should see all the users$/) do
+  expect(page).to have_content("user1@example.com")
+  expect(page).to have_content("user2@example.com")
 end

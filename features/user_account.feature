@@ -13,3 +13,8 @@ Feature: User Accounts
     Given I am on the homepage
     When I signup as a user with invalid data
     Then I should see user validation errors
+
+  Scenario: View the index of users
+    Given I have 2 users
+    And I am on the users page
+    Then I should see all the users

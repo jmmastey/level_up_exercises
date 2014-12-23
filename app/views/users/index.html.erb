@@ -1,0 +1,10 @@
+<section class="main-content type-system-rounded">
+  <h1>Users</h1>
+
+    <% @users.each do |user| %>
+      <article>
+        <h2><%= link_to user.email, user %></h2>
+      </article>
+    <% end %>
+
+</section>

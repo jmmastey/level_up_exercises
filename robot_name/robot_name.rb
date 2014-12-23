@@ -1,3 +1,5 @@
+require_relative "robotnamegenerator"
+
 class Robot
   attr_accessor :name
 
@@ -18,24 +20,12 @@ class Robot
   end
 
   def initialize(args = {})
-    @name_generator = args[:name_generator] || name_generator
+    @name_generator = args[:name_generator] || RobotNameGenerator.generator
 
     @name = @name_generator.call
     validate_robot
 
     Robot.registry << @name
-  end
-
-  def name_generator
-    -> { "#{generate_chars(2)}#{generate_nums(3)}" }
-  end
-
-  def generate_chars(n = 1)
-    n.times.inject("") { |chars| chars + ('A'..'Z').to_a.sample }
-  end
-
-  def generate_nums(n = 1)
-    n.times.inject("") { |nums| nums + rand(10).to_s }
   end
 
   def validate_robot
@@ -50,8 +40,14 @@ end
 
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+second_robot = Robot.new
+puts "My other pet robot's name is #{second_robot.name}."
 
 # Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+generator = -> { 'AA111' }
+begin
+  Robot.new(name_generator: generator)
+  Robot.new(name_generator: generator)
+rescue RuntimeError => e
+  puts e.message
+end

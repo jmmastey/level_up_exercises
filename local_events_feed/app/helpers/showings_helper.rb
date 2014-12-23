@@ -15,8 +15,20 @@ module ShowingsHelper
     end
   end
 
-  def member_label(member)
-    member ? 'member' : 'non-member'
+  def member_label(showing)
+    member?(showing) ? 'member' : 'non-member'
+  end
+
+  def member_label_for_event(event)
+    member_in_event?(event) ? 'member' : 'non-member'
+  end
+
+  def member?(showing)
+    showing.in?(current_user.showings)
+  end
+
+  def member_in_event?(event)
+    current_user.has_showing_in?(event)
   end
 
   def pretty_date_range(showings)

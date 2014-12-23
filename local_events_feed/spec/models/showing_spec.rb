@@ -19,8 +19,8 @@ describe Showing, :type => :model do
     expect(showing).to respond_to(:event)
   end
 
-  it "responds to ics" do
-    expect(showing).to respond_to(:ics)
+  it "responds to to_ics" do
+    expect(showing).to respond_to(:to_ics)
   end
 
   it "responds to name (delegated to event)" do

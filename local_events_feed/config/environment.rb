@@ -5,3 +5,4 @@ require File.expand_path('../application', __FILE__)
 Rails.application.initialize!
 
 LOCAL_TIME_ZONE = "Central Time (US & Canada)"
+

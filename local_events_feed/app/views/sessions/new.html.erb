@@ -11,11 +11,11 @@
 <% end %>
 
 <% if flash[:failed_to_authenticate] %>
-  <br>
-  <span class='warning-message'>Wrong email and/or password</span>
+  <span class='warning-message'>
+	<%= SessionsController::FAILED_TO_AUTHENTICATE_ERROR_MSG %>
+  </span>
 <% end %>
 
-<br>
 <h4>Don't have an account?
   <%= link_to 'Sign Up', new_user_path %>
 </h4>

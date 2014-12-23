@@ -2,24 +2,18 @@
   <div class="table-container">
     <table>
       <% @events.each do |event| %>
-        <% member = current_user.has_showing_in?(event) %>
-        <% member_class = member_label(member) %>
-        <tr>
-          <td class="<%= member_class %>">
+        <tr class="<%= member_label_for_event(event) %>">
+          <td>
             <ul>
               <li class='name'>
                 <%= link_to event.name.truncate(40), event_url(event), { id: "#{event.name}-events" } %>
               </li>
-  
-              <% date_range = pretty_date_range(event.showings) %>
-              <% showing_count = pretty_showing_count(event.showings) %>
-  
               <li class='location'><%= event.location.truncate(40) %></li>
-              <li class='date-range'><%= date_range %></li>
-              <li class='showing-count'><%= showing_count %></li>
+              <li class='date-range'><%= pretty_date_range(event.showings) %></li>
+              <li class='showing-count'><%= pretty_showing_count(event.showings) %></li>
             </ul>
           </td>
-          <td class="<%= member_class %> image" %>
+          <td class='image' %>
             <% if event.image.present? %>
               <img src=<%= event.image %> />
             <% end %>

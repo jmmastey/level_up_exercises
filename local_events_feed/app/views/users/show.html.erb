@@ -1,20 +1,19 @@
-<head>
-  <% if signed_in? %>
-    <title><%= first_name %>'s Events</title>
-  <% end %>
-</head>
+<header>
+  <title><%= first_name %>'s Events</title>
+</header>
 
 <body>
-  <% if signed_in? %>
-    <%= render :partial => "session_bar.html.erb" %>
-	<div class="scrollable">
-      <%= render :partial => "user.html.erb" %>
-	</div>
-	<%= render :partial => "home_menu.html.erb" %>
-	<div class="page-title"><%= first_name %>'s Events</div>
-  <% else %>
-    <h3>Please <%= link_to 'sign in', new_session_path %></h3>
-  <% end %>
+  <%= render :partial => "session_bar" %>
+
+  <div class="scrollable">
+    <%= render :partial => "user" %>
+  </div>
+
+  <%= render :partial => "home_menu" %>
+
+  <div class="page-title">
+    <%= first_name %>'s Events
+  </div>
 </body>
 
 

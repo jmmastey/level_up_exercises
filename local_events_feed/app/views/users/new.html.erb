@@ -14,13 +14,11 @@
   <%= f.password_field :password_confirmation %><br>
 
   <% if @user.errors.any? %>
-    <font color='red'>
-	  <ul>
-		<% @user.errors.full_messages.each do |error| %>
-		<li>Issue: <%= error %></li>
-		<% end %>
-	  </ul>
-	</font>
+    <ul class="warning-message">
+      <% @user.errors.full_messages.each do |error| %>
+        <li>Issue: <%= error %></li>
+      <% end %>
+    </ul>
   <% end %>
 
   <%= submit_tag 'Sign-Up!' %>

@@ -3,15 +3,17 @@ class ShowingsController < ApplicationController
   before_action :get_showing
 
   def show
-    headers['Content-Type'] = "text/calendar; charset=UTF-8"
+    respond_to do |format|
+      format.ical { render :text => @showing.to_ics }
+    end
   end
 
-  def add_to_user
+  def add
     current_user.add_showing(@showing)
     redirect_to :back
   end
 
-  def remove_from_user
+  def destroy
     current_user.showings.delete(@showing)
     redirect_to :back
   end
@@ -20,9 +22,5 @@ class ShowingsController < ApplicationController
 
   def get_showing
     @showing = Showing.find(params[:id])
-  end
-
-  def login_filter
-    redirect_to :back unless signed_in?
   end
 end

@@ -1,12 +1,11 @@
 <section id='user-event-showings'>
   <table>
-	<% current_user.showings.sorted.each do |showing| %>
+	<% current_user.showings.each do |showing| %>
     <tr>
 	  <td>
 		<div class="add-to-cal">
 		  <%= link_to image_tag("calendar.png", :class => 'add-image tooltip', :title => 'Add Calendar'),
-		  { controller: 'showings', action: 'show', id: showing.id, :format => :ics },
-		  :id => "add_cal-#{showing.id}" %>
+		  showing_path(showing, format: :ical), :id => "add_cal-#{showing.id}" %>
 		</div>
 	  </td>
 	  <td class="attributes">
@@ -27,8 +26,8 @@
 	  <td>
 		<div class="remove">
 		  <%= link_to image_tag("remove.png", :class => 'remove-x'),
-		      { controller: 'showings', action: 'remove_from_user', id: showing.id },
-		      method: :post, :id => "remove-#{showing[:id]}-user-show" %>
+		      showing, method: :delete,
+              :id => "remove-#{showing[:id]}-user-show" %>
 		</div>
 	  </td>
 	  <% if showing.image.present? %>

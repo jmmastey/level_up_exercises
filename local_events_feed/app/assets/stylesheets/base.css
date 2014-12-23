@@ -67,6 +67,10 @@ a:hover {
 	color: #DD9266;
 }
 
+.indented-text {
+	padding-left: 5px;
+}
+
 .scrollable #user-event-showings {
 	position: absolute;
 }

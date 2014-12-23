@@ -2,8 +2,8 @@
   <nav class='navigate'>
     Logged-In:
     <span class='username'> <%= current_user.name %> </span>
-    |<%= link_to 'Home', current_user %>
-    |<%= link_to 'Events', events_path, :id => 'session-bar-events' %>
+    |<%= link_to 'Home', current_user, :class => 'indented-text' %>
+    |<%= link_to 'Events', events_path, :class => 'indented-text', :id => 'session-bar-events' %>
   </nav>
   <div class='logout'>
     <%= link_to 'Logout', session_path(id: 0), method: :delete %>

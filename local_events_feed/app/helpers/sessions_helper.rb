@@ -32,4 +32,8 @@ module SessionsHelper
     name = current_user.try(:name) || 'Someone'
     name.split(/\s+/)[0]
   end
+
+  def login_filter
+    redirect_to new_session_url unless signed_in?
+  end
 end

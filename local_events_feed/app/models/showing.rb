@@ -9,16 +9,15 @@ class Showing < ActiveRecord::Base
 
   scope :sorted, -> { order( :time => :asc ) }
 
-  # to_ics
-  def ics
-    ical_event = Icalendar::Event.new
-    ical_event.uid         = "#{id}"
-    ical_event.dtstart     = time
-    ical_event.summary     = name
-    ical_event.location    = location
-    ical_event.description = "#{name} at #{location}"
-    ical_event.url         = link
-    ical_event.ip_class    = "PRIVATE"
-    ical_event
+  def to_ics
+    Icalendar::Event.new.tap do |ical_event|
+      ical_event.uid         = id
+      ical_event.dtstart     = time
+      ical_event.summary     = name
+      ical_event.location    = location
+      ical_event.description = "#{name} at #{location}"
+      ical_event.url         = link
+      ical_event.ip_class    = "PRIVATE"
+    end
   end
 end

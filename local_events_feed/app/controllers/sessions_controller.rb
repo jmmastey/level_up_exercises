@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  FAILED_TO_AUTHENTICATE_ERROR_MSG = 'Wrong email and/or password'
+
   def new
     redirect_to current_user if signed_in?
   end

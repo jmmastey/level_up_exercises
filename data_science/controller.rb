@@ -1,9 +1,19 @@
 require_relative 'cohort'
 require_relative 'data_point'
+require_relative 'experiment'
 require 'json'
 
+# experiment.data_points.cohort.positive_conversions
+# experiment.data_points.cohort.length
+# experiment.total_views
+# experiment.data_points.
+# cohort.data_points
+
+#experiment.cohorts.data_point = 500
+#experiment.datapoint = 1000
+
+
 class Controller
-  attr_accessor :cohorts
 
   def initialize(filename)
     run(filename)
@@ -11,29 +21,19 @@ class Controller
   end
 
   def run(filename)
-    @data_points = parse(filename)
-    names  = unique_cohort_names(@views)
-    create_empty_cohorts(names)
+    @data_points = create_data_points(parse(filename))
+    experiment = Experiment.new(@data_points)
   end
+
+  private
 
   def parse(filepath)
     JSON.parse(File.read(filepath))
   end
 
-  def unique_cohort_names(views)
-    views.map { |view| view['cohort'] }.uniq
-  end
-
-  def create_empty_cohorts(names)
-    @cohorts = names.map do |name|
-      Cohort.new(name)
-    end
-  end
-
-  def sort_views_into_cohorts()
-    views.each do |view|
-      require 'pry'; binding.pry
-      view += cohorts[view["cohort"]]
-    end
+  def create_data_points(rows)
+    rows.map { |row| DataPoint.new(row["cohort"], row["result"]) }
   end
 end
+
+Controller.new('test.json')

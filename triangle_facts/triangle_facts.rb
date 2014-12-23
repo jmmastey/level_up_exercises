@@ -22,20 +22,20 @@ class Triangle
     [angle_a, angle_b, angle_c]
   end
 
-  def equilateral
+  def equilateral?
     (side1 == side2) && (side2 == side3)
   end
 
-  def isosceles
+  def isosceles?
     [side1, side2, side3].uniq.length == 2
   end
   
   def recite_facts
-    if equilateral
+    if equilateral?
       puts "This triangle is equilateral!"
-    elsif isosceles
+    elsif isosceles?
       puts "This triangle is isosceles! Also, that word is hard to type."
-    elsif scalene
+    elsif scalene?
       puts "This triangle is scalene and mathematically boring."
     end
     
@@ -54,8 +54,8 @@ class Triangle
     (rads * 180 / Math::PI).round
   end
 
-  def scalene
-    !equilateral && !isosceles
+  def scalene?
+    !equilateral? && !isosceles?
   end
 end
 

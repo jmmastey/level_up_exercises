@@ -12,7 +12,7 @@ Feature: Visiting Home Page
   Scenario: User visits signup page
     Given I am on the homepage
     When I click on Signup
-    Then I should be on the Signup page
+    Then I should be on the Sign up page
 
   Scenario: User visits artists page
     Given I am on the homepage
@@ -22,4 +22,4 @@ Feature: Visiting Home Page
   Scenario: User visits login page
     Given I am on the homepage
     When I click on Login
-    Then I should be on the Login page
+    Then I should be on the Log in page

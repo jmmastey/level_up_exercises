@@ -5,6 +5,7 @@ Feature: Artists Page
 
   Background:
     Given I have 2 artists
+    And am logged in
     And I am on the artists page
 
   Scenario: View the index of artists

@@ -12,6 +12,14 @@ Given(/^I am on the page for a user$/) do
   visit user_path(user_1)
 end
 
+Given(/^am logged in$/) do
+  user = create(:user, email: "user@example.com", password: "secret" )
+  visit new_user_session_path
+  fill_in("Email", with: "user@example.com")
+  fill_in("Password", with: "secret")
+  click_button("Log in")
+end
+
 When(/^I signup as a user$/) do
   visit root_path
   click_link("Sign up")

@@ -1,5 +1,6 @@
 class ArtistsController < ApplicationController
   before_action :find_artist, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @artists = Artist.most_recent.page params[:page]

@@ -2,6 +2,7 @@ require "digest"
 
 class CalendarEvent < ActiveRecord::Base
   belongs_to :event_source
+  has_and_belongs_to_many :feeds
 
   before_save :refresh_derived_state
 

@@ -4,10 +4,19 @@ RSpec.describe Feed, :type => :model do
 pending "NOT UNTIL SELECTION CRITERIA ARE IMPLEMENTED"
 
   let(:feed) { FactoryGirl.create(:feed) }
+  let(:owned_feed) { FactoryGirl.create(:feed, :with_owner) }
   let(:configured_feed) { FactoryGirl.create(:feed, :with_selectors) }
-  #let(:populated_feed) {
-  #  FactoryGirl.create(:feed, :with_criteria, :with_events)
-  #}
+  let(:populated_feed) {
+    FactoryGirl.create(:feed, :with_events)
+  }
+  let (:new_selection_criteria) {
+    create(
+      :selection_criterion,
+      field: :start_time,
+      sql_operator: ">",
+      criterion: Time.now + 3.days
+    )
+  }
 
   it "has a title" do
     expect(feed.title).not_to be_nil
@@ -22,8 +31,7 @@ pending "NOT UNTIL SELECTION CRITERIA ARE IMPLEMENTED"
   end
 
   it "has an owner" do
-    pending "Must implement user factory first"
-  #  expect(feed.owner).not_to be_nil
+    expect(owned_feed.user).not_to be_nil
   end
 
   it "has a description" do
@@ -35,26 +43,46 @@ pending "NOT UNTIL SELECTION CRITERIA ARE IMPLEMENTED"
   end
 
   it "can add selection criteria" do
-    pending
+    create(:selection_criterion, field: "foo", feeds: [feed])
+    create(:selection_criterion, sql_operator: "==", feeds: [feed])
+    create(:selection_criterion, criterion: "bar", feeds: [feed])
+    expect(configured_feed.selection_criteria.count).to be(3)
   end
 
   it "can remove selection criteria" do
-    pending
+    configured_feed.selection_criteria.to_a.each { |crit| crit.destroy }
+    expect(configured_feed.selection_criteria.count).to be(0)
   end
 
-  # it "selects different ecents when criteria change"
-  #
-  # it "can be deleted"
-
-  it "selects events" do
-    pending "Must implement event-selection-via-selection-criteria query mechanism"
-  #  expect(populated_feed.events.count).to be > 0
+  it "has events" do
+    expect(populated_feed.calendar_events.count).to be > 0
+  end
+  
+  it "can be deleted" do
+    feed
+    n = Feed.count
+    feed.destroy
+    expect(Feed.count).to be(n - 1)
   end
 
-  #it "acquires new events" do
-  #  orig_event_count = populated_feed.events.count
-    # create_list(more events captured by feed)
-  #  populated_feed.refresh
-  #  expect(populated_feed.events.count).not_to eq(orig_event_count)
-  #end
+  it "acquires new events" do
+    now = Time.now.to_i
+    orig_event_count = populated_feed.calendar_events.count
+    populated_feed.selection_criteria << new_selection_criteria
+    (now .. now + 5.days).step(1.day).map { |sec| Time.at(sec) }.each do |t|
+      create(
+        :calendar_event,
+        title: 'New event',
+        start_time: t,
+        end_time: t + 1.hour
+      )
+    end
+    populated_feed.capture_new_events
+    expect(populated_feed.calendar_events.count).to eq(orig_event_count + 2)
+  end
+
+  it "selects different events when criteria change" do
+    pending "Flush events and criteria, add new criteria, " \
+            "acquire different events"
+  end
 end

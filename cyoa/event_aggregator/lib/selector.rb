@@ -53,7 +53,7 @@ module Selector
           "#{self.class.name}::#{__method__}: including class must implement" 
   end
 
-  def generate_sql_fragment
+  def sql_fragment
     raise NotImplementedError,
           "#{self.class.name}::#{__method__}: including class must implement" 
   end

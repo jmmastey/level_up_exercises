@@ -46,6 +46,7 @@ gem 'app_config'
 
 group :test, :development do
   gem "pry"
+  gem "pry-rails"
   gem "pry-byebug"
   gem "rspec-rails"
   gem "cucumber-rails", :require => false

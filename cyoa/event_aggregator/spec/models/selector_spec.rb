@@ -51,8 +51,8 @@ RSpec.describe Selector::Comparator do
 
   it "generates a SQL WHERE clause fragment" do
     comparator.field = "field4"
-    sql_fragment_and_params = comparator.generate_sql_fragment
-    expected_vals = ['"field4" > ?', 5]
+    sql_fragment_and_params = comparator.sql_fragment
+    expected_vals = ["\"field4\" > '%s'", 5]
     expect(sql_fragment_and_params).to eq(expected_vals)
   end
 end

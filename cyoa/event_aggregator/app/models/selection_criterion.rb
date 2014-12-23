@@ -21,8 +21,8 @@ class SelectionCriterion < ActiveRecord::Base
     self.sql_expression = generate_where_clause
   end
 
-  def generate_where_clause 
-    implementation_strategy.generate_sql_fragment
+  def generate_where_clause
+    implementation_strategy.sql_fragment
   end
 
   private

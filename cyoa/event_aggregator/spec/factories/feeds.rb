@@ -10,7 +10,7 @@ FactoryGirl.define do
     end
 
     trait :with_owner do
-      owner :user
+      user
     end
 
     trait :with_selectors do
@@ -24,9 +24,13 @@ FactoryGirl.define do
     end
 
     trait :with_events do
-      # :with_selectors
-      # :create_events
-      # :refresh feed
+      after(:create) do |feed, evaluator|
+        dates = (Time.now.to_i..10.days.from_now.to_i).step(1.day).each do |sec|
+          t = Time.at(sec)
+          event = create(:calendar_event, start_time: t, end_time: t + 1.hour)
+          feed.calendar_events << event
+        end
+      end
     end
   end
 end

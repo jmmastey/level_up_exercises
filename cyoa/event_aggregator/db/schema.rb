@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141218170449) do
+ActiveRecord::Schema.define(version: 20141223204358) do
 
   create_table "calendar_events", force: true do |t|
     t.string   "title",           limit: 256
@@ -32,6 +32,11 @@ ActiveRecord::Schema.define(version: 20141218170449) do
   add_index "calendar_events", ["family_hash"], name: "index_calendar_events_on_family_hash"
   add_index "calendar_events", ["start_time"], name: "index_calendar_events_on_start_time"
 
+  create_table "calendar_events_feeds", force: true do |t|
+    t.integer "calendar_event_id"
+    t.integer "feed_id"
+  end
+
   create_table "event_sources", force: true do |t|
     t.string   "name"
     t.string   "source_type"
@@ -43,13 +48,17 @@ ActiveRecord::Schema.define(version: 20141218170449) do
   end
 
   create_table "feeds", force: true do |t|
-    t.integer  "owner_user_id"
-    t.string   "title",         limit: 128
-    t.text     "description",   limit: 2048
-    t.boolean  "public",                     default: false
+    t.integer  "user_id"
+    t.string   "title",        limit: 128
+    t.text     "description",  limit: 2048
+    t.boolean  "public",                    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "evaluated_at"
   end
+
+  add_index "feeds", ["evaluated_at"], name: "index_feeds_on_evaluated_at"
+  add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
 
   create_table "feeds_selection_criteria", id: false, force: true do |t|
     t.integer "feed_id"

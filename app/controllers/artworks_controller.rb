@@ -1,6 +1,7 @@
 class ArtworksController < ApplicationController
   before_action :find_artist
   before_action :find_artwork, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @artworks = @artist.artworks.all

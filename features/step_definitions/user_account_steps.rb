@@ -12,7 +12,7 @@ Given(/^I am on the page for a user$/) do
   visit user_path(user_1)
 end
 
-Given(/^am logged in$/) do
+Given(/^I am logged in$/) do
   user = create(:user, email: "user@example.com", password: "secret" )
   visit new_user_session_path
   fill_in("Email", with: "user@example.com")

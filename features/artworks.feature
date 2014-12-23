@@ -3,6 +3,9 @@ Feature: Artworks Page
   I want to view an artist's artworks
   In order to see that they have produced
 
+  Background:
+    Given I am logged in
+
   Scenario: View all the artworks for an artist
     Given I am on a page for an artist with an artwork
     When I click on View All Artworks

@@ -1,0 +1,8 @@
+%h2 Event Details
+= render partial: "event_show", locals: { event: @event }
+%hr
+= link_to "Search", events_path(@event)
+|
+= link_to "Edit", edit_event_path(@event)
+|
+= link_to "Add to iCal", event_path(@event, format: :ics)

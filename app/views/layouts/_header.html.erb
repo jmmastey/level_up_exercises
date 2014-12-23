@@ -10,7 +10,6 @@
       <% if user_signed_in? %>
         <li class="nav-link"><%= link_to "Edit Profile", edit_user_registration_path %></li>
         <li class="nav-link"><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
-        <li class="nav-link">Logged in as <%= current_user.email %></li>
       <% else %>
         <li class="nav-link"><%= link_to "Sign up", signup_path %></li>
         <li class="nav-link"><%= link_to "Log in", login_path %></li>

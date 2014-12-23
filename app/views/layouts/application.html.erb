@@ -18,6 +18,10 @@
     <div class="main-layout">
 
       <section class="main-content">
+        <% if user_signed_in? %>
+          <p class="log-in-notice">Logged in as <%= current_user.email %></p>
+        <% end %>
+
         <%= render 'layouts/flashes' %>
 
         <%= yield %>

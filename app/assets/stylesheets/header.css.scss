@@ -98,6 +98,7 @@
     text-align: right;
     width: 100%;
     z-index: 9999;
+    color: $centered-navigation-color;
 
     @include media($horizontal-bar-mode) {
       background: transparent;

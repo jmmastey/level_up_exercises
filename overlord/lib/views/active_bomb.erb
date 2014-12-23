@@ -1,0 +1,15 @@
+<%= erb :_status, locals: {bomb: @bomb} %>
+
+<% if @bomb.messages %>
+	<p><%= @bomb.messages %></p>
+	<p>Incorrect Attempts: <%= @bomb.deactivation_attempts %></p>
+<% end %>
+
+<h2>Would you like to deactivate it?</h2>
+
+<form action="/bomb/deactivate" method="post" id="deactivate_bomb_form">
+    <label>Enter Secret Deactivation Code:
+        <input type="text" name="deactivation_code" id="deactivation_code" />
+    </label>
+    <input type="submit" value="Deactivate!">
+</form>

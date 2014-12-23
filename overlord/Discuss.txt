@@ -1,0 +1,26 @@
+1. How should my steps be organized?
+	- Some steps overlap, so it's harder to group...
+
+2. Is there a better way to handle repition acoss feature steps?
+	- Make them 'inherit' from eachother?
+
+3. What's the correct level of controller cleaning?
+	- It's all setting and unsetting session vars rather than lots of 
+	logic, so it feel wierd putting such specific "var setting"s
+	into methods. 
+	- Also, it feels done arbitrary based purely on number of lines...
+
+4. Check why the methods are necessary in Bomb init.
+
+5. So much of cucumber (and by extension Capybara) seems reliant
+   on seemingly brittle tests such as specific DOM content and text.
+
+
+
+6. (No Point Yet) It feels like all the testing is so crazy.
+	-So involved...
+		* Gems, testing frameworks
+		* Types of tests
+		* Styles (BDD, EDD, TDD, User_stores)
+		* Tools for testing (Stubs, mocks, factories, fixtures)
+

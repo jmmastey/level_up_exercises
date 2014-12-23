@@ -2,7 +2,7 @@ class DinoDex
   attr_reader :dinosaurs
 
   def initialize(joes_csv, pirate_bay_csv)
-    dino_list = CSVtoDinos.csv_to_hash_array(joes_csv) + 
+    dino_list = CSVtoDinos.csv_to_hash_array(joes_csv) +
       CSVtoDinos.normalize(CSVtoDinos.csv_to_hash_array(pirate_bay_csv))
     @dinosaurs = dino_list.map { |dino| Dino.new(dino) }
     @dino_names = dino_list.map { |dino| dino[:name] }

@@ -30,5 +30,4 @@ module DinoCSVTools
     end
 
   end
-
 end

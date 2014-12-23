@@ -18,3 +18,7 @@ Feature: User Accounts
     Given I have 2 users
     And I am on the users page
     Then I should see all the users
+
+  Scenario: View an individual user
+    Given I am on the page for a user
+    Then I should see the user's information

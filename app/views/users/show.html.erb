@@ -1,3 +1,9 @@
-<h1>User Profile Page</h1>
+<article class="type-system-rounded">
+  <p class="type"><%= @user.class %></p>
+  <header>
+    <h1>Your Account</h1>
+  </header>
+    <p>Email: <%= @user.email %></p>
 
-<%= @user.email %>
+    <p><%= link_to "Back to Users Page", users_path %></p>
+</article>

@@ -7,6 +7,11 @@ Given(/^I am on the users page$/) do
   visit users_path
 end
 
+Given(/^I am on the page for a user$/) do
+  user_1 = create(:user, email: "user1@example.com")
+  visit user_path(user_1)
+end
+
 When(/^I signup as a user$/) do
   visit root_path
   click_link("Sign up")
@@ -25,7 +30,7 @@ When(/^I signup as a user with invalid data$/) do
 end
 
 Then(/^I should be on my user page$/) do
-  expect(page).to have_selector('h1', text: "User Profile Page")
+  expect(page).to have_selector('h1', text: "Your Account")
   expect(page).to have_content("user@example.com")
 end
 
@@ -41,4 +46,9 @@ end
 Then(/^I should see all the users$/) do
   expect(page).to have_content("user1@example.com")
   expect(page).to have_content("user2@example.com")
+end
+
+Then(/^I should see the user's information$/) do
+  expect(page).to have_selector('h1', text: "Your Account")
+  expect(page).to have_selector('p', text: "user1@example.com")
 end

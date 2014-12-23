@@ -69,5 +69,40 @@ describe TheatreInChicagoEvents do
       raw_events = described_class.get_events_between_dates(start_date, end_date)
       expect(raw_events.count).to eq(3)
     end
+
+    it 'should throw an error if the start date isnt before the end date' do
+      start_date = Date.parse("2015-02-12")
+      end_date = Date.parse("2015-01-19")
+      expect { described_class.get_events_between_dates(start_date, end_date)}.
+        to raise_error(ArgumentError, "end date is before start date!")
+    end
+
+    context 'number of API calls' do
+      before(:each) do
+        allow(described_class).to receive(:get_events_for_month).and_return([])
+        @start_date = Date.parse("2013-02-12")
+        @end_date = Date.parse("2015-02-19")
+      end
+
+      it 'should make one full year call' do
+        expect(described_class).to receive(:get_events_for_year).exactly(1).times
+        described_class.get_events_between_dates(@start_date, @end_date)
+      end
+
+      it 'should make two partial year calls' do
+        expect(described_class).to receive(:get_events_for_partial_year).exactly(2).times
+        described_class.get_events_between_dates(@start_date, @end_date)
+      end
+
+      it 'should make four partial month calls' do
+        expect(described_class).to receive(:get_events_for_partial_month).exactly(4).times
+        described_class.get_events_between_dates(@start_date, @end_date)
+      end
+
+      it 'should make 25 full month calls' do
+        expect(described_class).to receive(:get_events_for_month).exactly(25).times
+        described_class.get_events_between_dates(@start_date, @end_date)
+      end
+    end
   end
 end

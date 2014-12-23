@@ -29,13 +29,21 @@ When(/^I signup as a user with invalid data$/) do
   click_button("Sign up")
 end
 
+When(/^I edit a user with valid data$/) do
+  sign_up_user
+  click_link("Edit Account")
+  fill_in("Email", with: "myemail@example.com")
+  fill_in("Current password", with: "password")
+  click_button("Update Account")
+end
+
 Then(/^I should be on my user page$/) do
   expect(page).to have_selector('h1', text: "Your Account")
   expect(page).to have_content("user@example.com")
 end
 
 Then(/^I should see a message confirming the user was created$/) do
-  expect(page).to have_content("user@example.com")
+  expect(page).to have_content("Your account was successfully created.")
 end
 
 Then(/^I should see user validation errors$/) do
@@ -51,4 +59,12 @@ end
 Then(/^I should see the user's information$/) do
   expect(page).to have_selector('h1', text: "Your Account")
   expect(page).to have_selector('p', text: "user1@example.com")
+end
+
+Then(/^I should see the updated name$/) do
+  expect(page).to have_selector('p', text: "myemail@example.com")
+end
+
+Then(/^I should see a message confirming the user was updated$/) do
+  expect(page).to have_content("Your account was successfully updated.")
 end

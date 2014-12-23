@@ -22,3 +22,8 @@ Feature: User Accounts
   Scenario: View an individual user
     Given I am on the page for a user
     Then I should see the user's information
+
+  Scenario: Update a user with valid attributes
+    When I edit a user with valid data
+    Then I should see the updated name
+    And I should see a message confirming the user was updated

@@ -35,7 +35,7 @@ class EventsController < ApplicationController
   end
 
   def edit
-    render_404 if @event.nil?
+    render_404 and return if @event.nil?
   end
 
   def update

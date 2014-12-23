@@ -7,8 +7,6 @@ describe ApiOrder, type: :model do
   describe ".update", :vcr do
     subject(:updated) { ApiOrder.update(item, min_date) }
 
-    it { is_expected.to be_an(Enumerable) }
-
     it "is expected to contain orders" do
       expect(updated).to all(be_an(Order))
     end

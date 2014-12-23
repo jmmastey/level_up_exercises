@@ -10,6 +10,7 @@ class ApiOrder
     build_orders(api_result)
   rescue EveCentral::ConnectionError
     Rails.logger.warn("Failed to retrieve orders for #{item.name}.")
+    nil
   end
 
   def self.api_client
@@ -60,10 +61,10 @@ class ApiOrder
                    name: station_name || "Unknown Station")
   end
 
-  #private_class_method :api_client,
-  #                     :build_orders,
-  #                     :convert_order,
-  #                     :convert_orders,
-  #                     :find_or_create_region,
-  #                     :find_or_create_station
+  private_class_method :api_client,
+                       :build_orders,
+                       :convert_order,
+                       :convert_orders,
+                       :find_or_create_region,
+                       :find_or_create_station
 end

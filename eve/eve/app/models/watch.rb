@@ -7,8 +7,6 @@ class Watch < ActiveRecord::Base
   validates_presence_of :item, :user
   validates_with LocationFilterValidator
 
-  before_validation(:check_nickname)
-
   def average_price
     orders.average(:price)
   end

@@ -37,6 +37,13 @@ When(/^I edit a user with valid data$/) do
   click_button("Update Account")
 end
 
+When(/^I edit an user with invalid data$/) do
+  sign_up_user
+  click_link("Edit Account")
+  fill_in("Email", with: "")
+  click_button("Update Account")
+end
+
 Then(/^I should be on my user page$/) do
   expect(page).to have_selector('h1', text: "Your Account")
   expect(page).to have_content("user@example.com")

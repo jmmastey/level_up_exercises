@@ -36,11 +36,13 @@ class BlagPost
 
   def category_list
     return "" if categories.empty?
-    "#{'Category'.pluralize(categories.length)}: #{categories.to_sentence}"
+
+    formatted_categories = categories.map { |c| as_title(c) }
+    "#{'Category'.pluralize(categories.length)}: #{formatted_categories.to_sentence}"
   end
 
   def as_title(string)
-    string.to_s.titleize
+    string.to_s.humanize.titleize
   end
 
   def commenters

@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe TheatreInChicagoEvents do
+  let(:monthly_response) do
+    File.open(Rails.root + 'spec/support/theatre_monthly_response.html', 'rb') { |f| f.read }
+  end
+
   describe '#get_events_for_month' do
     context 'input validation' do
       it 'should raise an error for invalid month values' do
@@ -15,10 +19,6 @@ describe TheatreInChicagoEvents do
     end
 
     context 'parsing' do
-      let(:monthly_response) do
-        File.open(Rails.root + 'spec/support/theatre_monthly_response.html', 'rb') { |f| f.read }
-      end
-
       before(:each) do
         allow(HTTParty).to receive(:get).and_return(monthly_response)
       end
@@ -52,8 +52,22 @@ describe TheatreInChicagoEvents do
   end
   
   describe '#get_events_between_dates' do
-  end
+    before(:each) do
+      allow(HTTParty).to receive(:get).and_return(monthly_response)
+      allow(TheatreInChicagoEvents).to receive(:get_events_for_month) do |month, year|
+        if month != 1
+          []
+        else
+          TheatreInChicagoEvents.new({ month: month, year: year }).get_events_for_month
+        end
+      end
+    end
 
-  describe '#get_events_for_year' do
+    it 'should filter out events not in range' do
+      start_date = Date.parse("2015-01-12")
+      end_date = Date.parse("2015-01-19")
+      raw_events = described_class.get_events_between_dates(start_date, end_date)
+      expect(raw_events.count).to eq(3)
+    end
   end
 end

@@ -11,3 +11,7 @@ body {
   @include span-columns(10);
   @include shift(1);
 }
+
+.right-aligned-link {
+  text-align: right;
+}

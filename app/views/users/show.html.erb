@@ -5,8 +5,10 @@
   </header>
     <p>Email: <%= @user.email %></p>
 
-    <p><%= link_to "Edit Account", edit_user_registration_path %> |
-    <%= link_to "Delete Account", user_registration_path, method: :delete, data: { confirm: "Are you sure you want to delete your account?"} %></p>
+    <% if current_user == @user %>
+      <p><%= link_to "Edit Account", edit_user_registration_path %> |
+      <%= link_to "Delete Account", user_registration_path, method: :delete, data: { confirm: "Are you sure you want to delete your account?"} %></p>
+    <% end %>
 
     <p><%= link_to "Back to Users Page", users_path %></p>
 </article>

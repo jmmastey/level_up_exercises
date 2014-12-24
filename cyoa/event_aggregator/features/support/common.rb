@@ -1,6 +1,8 @@
 require "rspec/expectations"
 require "uri"
 
+DEFAULT_USERNAME = 'Jack'
+
 URL_NICKNAMES =
 {
   'login' => '/users/sign_in',

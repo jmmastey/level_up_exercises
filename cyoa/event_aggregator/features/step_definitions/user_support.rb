@@ -18,7 +18,8 @@ Given(/^I have a registered user "(.*)"$/) do |username|
   click_button('Logout')
 end
 
-Given /^I (fail to )?authenticate as "(.*)"/ do |fail_auth, username|
+Given /^I (fail to )?authenticate(?: as "(.*)")?/ do |fail_auth, username|
+  username ||= DEFAULT_USERNAME
   visit("/")
   params = user_creation_params(username)
   fill_in('user[email]', with: params['email'])
@@ -27,7 +28,9 @@ Given /^I (fail to )?authenticate as "(.*)"/ do |fail_auth, username|
   click_button('Log in')
 end
 
-Given /^I am an (un(?:authenticated)) user visiting the "(.*)" page$/ do |authstate, page|
-  step "I authenticate" if authstate == "authenticated"
+Given /^I am an ((?:un)?authenticated) user(?: "(\w+)")? visiting the "(.*)" page$/ do |authstate, username, page|
+  username ||= DEFAULT_USERNAME
+  step "I have a registered user \"#{username}\"" if username
+  step "I authenticate as \"#{username}\"" if authstate == "authenticated"
   step "I am visiting the \"#{page}\" page"
 end

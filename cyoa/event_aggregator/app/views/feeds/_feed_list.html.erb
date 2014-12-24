@@ -1,0 +1,32 @@
+<%
+with_owner ||= false
+
+unless feeds.empty?
+%>
+  <table class="feed-list">
+    <thead>
+      <tr class="feed-list-header">
+        <% if with_owner %>
+        <th>Owner user</th>
+        <% end %>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Public</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @feeds.each do |feed| %>
+        <%= render partial: "feed_list_item",
+                   locals: { feed: feed, with_user: with_owner } %>
+      <% end %>
+    </tbody>
+  </table>
+<%
+else
+%>
+<p class="empty-feed-list">No feeds</p>
+<%
+end
+%>

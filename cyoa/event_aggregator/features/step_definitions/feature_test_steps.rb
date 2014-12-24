@@ -29,7 +29,6 @@ end
 Then /^I see a (?:(.*): )?link (?:for|to) "(.*)"$/ do |link_type, target|
   selector = "a"
   selector = selector + "[href^=\"#{link_type}\"]" if link_type
-puts "Q SELECTOR: #{selector}"
   text_pattern = Regexp.new(target, Regexp::IGNORECASE)
   links = all(selector, text: text_pattern)
   expect(links.any? { |link| link.visible? }).to be_truthy

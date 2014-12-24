@@ -3,6 +3,8 @@ class Feed < ActiveRecord::Base
   has_and_belongs_to_many :selection_criteria
   has_and_belongs_to_many :calendar_events
 
+  scope :public_feeds, -> {  where(public: true) }
+
   def clear_events
     calendar_events.delete_all
   end

@@ -6,8 +6,10 @@ class FeedsController < ApplicationController
   PERMITTED_PARAMS = [:owner_user_id, :title, :description, :public]
 
   def index
-    @feeds = Feed.all
-    respond_with(@feeds)
+    @custom_feeds = my_feeds
+    @public_feeds = Feed.public_feeds
+    add_menu_item("Search for Feeds", "FIXME")
+    add_menu_item("Create New Feed", new_feed_path)
   end
 
   def show
@@ -46,5 +48,9 @@ class FeedsController < ApplicationController
 
   def feed_params
     params.require(:feed).permit(PERMITTED_PARAMS)
+  end
+
+  def my_feeds
+    Feed.where(user: current_user)
   end
 end

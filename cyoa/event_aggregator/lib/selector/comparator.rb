@@ -9,5 +9,9 @@ module Selector
     def sql_fragment
       ["\"#{field}\" #{sql_operator} '%s'", criterion]
     end
+
+    def selector_description
+      "Field comparisons"
+    end
   end
 end

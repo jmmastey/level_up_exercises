@@ -2,7 +2,7 @@
 
 <p>
   <strong>Owner user:</strong>
-  <%= @feed.owner_user_id %>
+  <%= @feed.user.full_name %>
 </p>
 
 <p>
@@ -19,6 +19,11 @@
   <strong>Public:</strong>
   <%= @feed.public %>
 </p>
+
+<h2>Event Selection Criteria</h2>
+
+<%= render partial: 'selection_criterium/criteria_list',
+           locals: { criteria: @feed.selection_criteria } %>
 
 <%= link_to 'Edit', edit_feed_path(@feed) %> |
 <%= link_to 'Back', feeds_path %>

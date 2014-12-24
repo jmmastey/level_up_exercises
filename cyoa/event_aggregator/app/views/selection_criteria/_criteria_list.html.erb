@@ -1,0 +1,11 @@
+<% unless criteria.empty? %>
+<table class="criteria-table table table-striped">
+  <tr class="criteria-table-header">
+  <% @feed.selection_criteria.each do |criterion| %>
+    <%= render partial: "selection_criteria/criterion_list_item",
+               locals: { criterion: criterion } %>
+  <% end %>
+</table>
+<% else %>
+<p>No selection criteria</p>
+<% end %>

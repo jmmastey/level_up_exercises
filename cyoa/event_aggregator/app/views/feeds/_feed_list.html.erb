@@ -3,7 +3,7 @@ with_owner ||= false
 
 unless feeds.empty?
 %>
-  <table class="feed-list">
+  <table class="feed-list table table-striped">
     <thead>
       <tr class="feed-list-header">
         <% if with_owner %>
@@ -17,9 +17,9 @@ unless feeds.empty?
     </thead>
 
     <tbody>
-      <% @feeds.each do |feed| %>
+      <% feeds.each do |feed| %>
         <%= render partial: "feed_list_item",
-                   locals: { feed: feed, with_user: with_owner } %>
+                   locals: { feed: feed, with_owner: with_owner } %>
       <% end %>
     </tbody>
   </table>

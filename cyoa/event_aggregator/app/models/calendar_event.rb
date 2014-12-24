@@ -27,7 +27,7 @@ class CalendarEvent < ActiveRecord::Base
   def self.event_hash(params)
     Digest::SHA1.hexdigest(event_hash_string(params))
   end
-
+  
   protected
 
   attr_accessor :state_is_consistent

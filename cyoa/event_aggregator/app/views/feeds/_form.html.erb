@@ -12,10 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :owner_user_id %><br>
-    <%= f.number_field :owner_user_id %>
-  </div>
-  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
@@ -23,9 +19,10 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :public %><br>
-    <%= f.check_box :public %>
+  </div class="criteria-list">
+    <h2>Event Selection Criteria</h2>
+    <%= render partial: 'selection_criteria/criteria_list',
+               locals: { criteria: @feed.selection_criteria } %>
   </div>
   <div class="actions">
     <%= f.submit %>

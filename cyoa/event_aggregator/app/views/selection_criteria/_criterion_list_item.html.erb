@@ -1,0 +1,11 @@
+<%
+  description = Object.const_get(criterion.implementation_class).selector_description
+  partial = criterion.implementation_class.underscore.sub(/selector\//, '')
+%>
+<tr>
+  <td><%= description %></td>
+  <td>
+    <%= render partial: "selectors/#{partial}",
+               locals: { selector: criterion.implementation_strategy } %>
+  </td>
+</tr>

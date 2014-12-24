@@ -10,14 +10,20 @@ module Selector
 
   included do
     AVAILABLE_SELECTORS << self
+  end
 
-    def self.config_variable(*vars)
+  module ClassMethods
+    def config_variable(*vars)
       vars.each do |var|
         var_name = var.to_s
         define_method(var) { get_configuration(var_name) }
         define_method "#{var_name}=".to_sym,
                       ->(val) { set_configuration(var_name, val) }
       end
+    end
+
+    def selector_description
+      'No description'
     end
   end
 

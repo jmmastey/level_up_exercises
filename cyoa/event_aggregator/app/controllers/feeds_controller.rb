@@ -3,7 +3,7 @@ class FeedsController < ApplicationController
 
   respond_to :html
 
-  PERMITTED_PARAMS = [:owner_user_id, :title, :description, :public]
+  PERMITTED_PARAMS = [:title, :description]
 
   def index
     @custom_feeds = my_feeds
@@ -23,7 +23,7 @@ class FeedsController < ApplicationController
   end
 
   def create
-    @feed = Feed.new(feed_params)
+    @feed = Feed.new(feed_params.merge({ user_id: current_user.id }))
     @feed.save
     respond_with(@feed)
   end

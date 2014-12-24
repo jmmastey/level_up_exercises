@@ -21,5 +21,3 @@ render partial: 'shared/op_menu', locals: { commands: commands }
 <h2>Public Feeds</h2>
 
 <%= render partial: "feed_list", locals: { feeds: @public_feeds } %>
-
-<%= link_to 'Create New Feed', new_feed_path %>

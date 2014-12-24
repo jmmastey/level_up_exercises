@@ -3,16 +3,18 @@ Rails.application.routes.draw do
 
   resources :event_sources
 
-  resources :events, :feeds
+  resources :events
+  
+  resources :feeds do
+    resources :selection_criteria, shallow: true
+  end
 
   root to: "site#home"
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
-  } do
-    resources :feeds, shallow: true
-  end
+  } 
 
   get "/about-us", to: "site#about_us", as: :about_us
   get "/contact-us", to: "site#contact_us", as: :contact_us

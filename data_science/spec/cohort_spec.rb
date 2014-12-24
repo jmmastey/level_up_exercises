@@ -11,19 +11,19 @@ require_relative '../cohort.rb'
 
       describe '#total_views' do
         it "counts the total views for a cohort" do
-          expect(cohort.cohort_views).to eq(3)
+          expect(cohort.size).to eq(3)
         end
       end
 
       describe '#positive_conversions' do
         it "counts the positives" do
-          expect(cohort.positive_conversions).to eq(2)
+          expect(cohort.conversions).to eq(2)
         end
       end
 
       describe '#negative_conversions' do
         it "counts the negatives" do
-          expect(cohort.negative_conversions).to eq(1)
+          expect(cohort.rejections).to eq(1)
         end
       end
 
@@ -50,19 +50,19 @@ require_relative '../cohort.rb'
 
       describe '#total_views' do
         it "total number of views in the cohort" do
-          expect(cohort.cohort_views).to eq(3)
+          expect(cohort.size).to eq(3)
         end
       end
 
       describe '#positive_conversions' do
         it "total number of views in the cohort" do
-          expect(cohort.positive_conversions).to eq(0)
+          expect(cohort.conversions).to eq(0)
         end
       end
 
       describe '#negative_conversions' do
         it "total number of views in the cohort" do
-          expect(cohort.negative_conversions).to eq(3)
+          expect(cohort.rejections).to eq(3)
         end
       end
 
@@ -89,19 +89,19 @@ require_relative '../cohort.rb'
 
       describe '#total_views' do
         it "total number of views in the cohort" do
-          expect(cohort.cohort_views).to eq(3)
+          expect(cohort.size).to eq(3)
         end
       end
 
       describe '#positive_conversions' do
         it "total number of views in the cohort" do
-          expect(cohort.positive_conversions).to eq(3)
+          expect(cohort.conversions).to eq(3)
         end
       end
 
       describe '#negative_conversions' do
         it "total number of views in the cohort" do
-          expect(cohort.negative_conversions).to eq(0)
+          expect(cohort.rejections).to eq(0)
         end
       end
 

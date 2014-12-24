@@ -1,8 +1,13 @@
-<h1>My Feeds</h1>
+<%= 
+commands = [
+  { link_name: 'Create New Feeds', uri: new_feed_path },
+  { link_name: 'Search For Feeds', uri: 'FIXME' }
+]
 
-<h2>Search for Feeds</h2>
+render partial: 'shared/op_menu', locals: { commands: commands }
+%>
 
-<p>Feed search goes here</p>
+<h1 class="text-center">My Feeds</h1>
 
 <h2>My Custom Feeds</h2>
 

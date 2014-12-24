@@ -43,6 +43,6 @@ Scenario: Registration attempt with password under 8 characters denied
   Then I see text "Password is too short"
    
 Scenario: Registration attempt with duplicate e-mail address denied
-  Given I have a registered user "Jack"
+  Given There is a registered user "Jack"
   When I register as user "Jack"
   Then I see text "Email has already been taken"

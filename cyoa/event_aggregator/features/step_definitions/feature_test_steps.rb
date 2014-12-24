@@ -47,6 +47,11 @@ Then /^I see a menu link (?:for|to) "(.*)"$/ do |menu_link|
   expect(has_css?(selector)).to be_truthy
 end
 
+Then /^I see a command for "(.*)"$/ do |command|
+  pattern = /#{command}/i
+  expect(has_css?("#OperationMenu a", text: pattern)).to be_truthy
+end
+  
 Then /^I see a feed highlight for "(.*)"$/ do |feed_name|
   expect(has_css?('h2.feed-highlight-title', text: feed_name)).to be_truthy
 end
@@ -60,7 +65,7 @@ Then /^I see a login form$/ do
 end
 
 Then /FIXME/ do
-  raise "FIXME NOT DONE FIXME NOT DONE FIXME"
+  "FIXME NOT DONE FIXME NOT DONE FIXME"
 end
 
 Then /^I see the "(.*)" page$/ do |page_name|

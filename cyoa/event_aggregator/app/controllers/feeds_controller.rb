@@ -8,8 +8,6 @@ class FeedsController < ApplicationController
   def index
     @custom_feeds = my_feeds
     @public_feeds = Feed.public_feeds
-    add_menu_item("Search for Feeds", "FIXME")
-    add_menu_item("Create New Feed", new_feed_path)
   end
 
   def show

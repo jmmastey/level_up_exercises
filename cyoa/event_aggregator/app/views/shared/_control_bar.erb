@@ -18,10 +18,6 @@
       render partial: "shared/menuitem",
              locals: { link_name: "My Feeds", uri: my_feeds_path }
     end %>
-<% @menu_items.each do |item| %>
-    <%= render partial: "shared/menuitem",
-               locals: { link_name: item[:link_name], uri: item[:uri] } %>
-<%  end %>
 <%= render partial: "shared/menuitem",
            locals: { link_name: "Contact Us", uri: contact_us_path } %>
 

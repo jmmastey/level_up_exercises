@@ -43,9 +43,9 @@ pending "NOT UNTIL SELECTION CRITERIA ARE IMPLEMENTED"
   end
 
   it "can add selection criteria" do
-    create(:selection_criterion, field: "foo", feeds: [feed])
-    create(:selection_criterion, sql_operator: "==", feeds: [feed])
-    create(:selection_criterion, criterion: "bar", feeds: [feed])
+    create(:selection_criterion, field: "foo", feed: feed)
+    create(:selection_criterion, sql_operator: "==", feed: feed)
+    create(:selection_criterion, criterion: "bar", feed: feed)
     expect(configured_feed.selection_criteria.count).to be(3)
   end
 

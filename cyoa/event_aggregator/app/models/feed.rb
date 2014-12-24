@@ -1,6 +1,6 @@
 class Feed < ActiveRecord::Base
   belongs_to :user, dependent: :destroy
-  has_and_belongs_to_many :selection_criteria
+  has_many :selection_criteria
   has_and_belongs_to_many :calendar_events
 
   scope :public_feeds, -> {  where(public: true) }

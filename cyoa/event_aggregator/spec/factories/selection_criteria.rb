@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :selection_criterion do
     implementation_class "Selector::Comparator"
+    feed
     configuration {
       {
         'field' => 'start_time',
@@ -8,6 +9,5 @@ FactoryGirl.define do
         'criterion' => 2.days.ago,
       }
     }
-    feeds { |a| [a.association(:feed)] }
   end
 end

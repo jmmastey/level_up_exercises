@@ -1,5 +1,5 @@
 class SelectionCriterion < ActiveRecord::Base
-  has_and_belongs_to_many :feeds
+  belongs_to :feed
 
   after_initialize { self.configuration ||= {} }
 

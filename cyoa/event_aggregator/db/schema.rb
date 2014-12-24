@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223204358) do
+ActiveRecord::Schema.define(version: 20141224215649) do
 
   create_table "calendar_events", force: true do |t|
     t.string   "title",           limit: 256
@@ -60,17 +60,13 @@ ActiveRecord::Schema.define(version: 20141223204358) do
   add_index "feeds", ["evaluated_at"], name: "index_feeds_on_evaluated_at"
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
 
-  create_table "feeds_selection_criteria", id: false, force: true do |t|
-    t.integer "feed_id"
-    t.integer "selection_criterion_id"
-  end
-
   create_table "selection_criteria", force: true do |t|
     t.string   "implementation_class"
     t.text     "configuration"
     t.string   "sql_expression"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "feed_id"
   end
 
   create_table "users", force: true do |t|

@@ -31,12 +31,12 @@ private
     name = "#{generate_chars.call}#{generate_nums.call}"
   end
   
-  def name_is_badly_formed?(name)
-    !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
-  end
-  
   def name_exists_in_registry?(name)
     @@registry.include?(name)
+  end
+  
+  def name_is_badly_formed?(name)
+    !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
   end
   
   def name_is_unacceptable?(name = '')

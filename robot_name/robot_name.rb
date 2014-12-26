@@ -23,11 +23,12 @@ class Robot
   
 private
   
+# TODO: 
   def generate_name
-    generate_char = -> { ('A'..'Z').to_a.sample }
-    generate_num  = -> { rand(10) }
-
-    "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    generate_chars = -> { ('A'..'Z').to_a.sample(2).join('') }
+    generate_nums  = -> { sprintf("%03d", rand(000..999)) }
+    
+    name = "#{generate_chars.call}#{generate_nums.call}"
   end
   
   def name_is_badly_formed?(name)

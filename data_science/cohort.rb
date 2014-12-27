@@ -5,7 +5,7 @@ class Cohort
     @name = name
     @pageviews = pageviews
   end
-  
+
   def conversions
     @pageviews.select { |view| view.result == 1 }.size
   end
@@ -20,13 +20,11 @@ class Cohort
 
   private
 
-  def conversion_rate
-    conversions.to_f / size.to_f
-  end
-
-  def standard_error
-    Math.sqrt((conversion_rate*(1-conversion_rate)/size))
-  end
-
-
+  # def conversion_rate
+  #   conversions.to_f / size.to_f
+  # end
+  #
+  # def standard_error
+  #   Math.sqrt((p*(1-p)/a_views))
+  # end
 end

@@ -26,18 +26,6 @@ require_relative '../cohort.rb'
           expect(cohort.rejections).to eq(1)
         end
       end
-
-      describe '#conversion_rate' do
-        it "gives correct conversion_rate" do
-          expect(cohort.conversion_rate.round(2)).to eq(0.67)
-        end
-      end
-
-      describe '#standard_error' do
-        it "gives correct standard_error" do
-          expect(cohort.standard_error.round(2)).to eq(0.27)
-        end
-      end
     end
 
     context "when view results are all negative" do
@@ -65,18 +53,6 @@ require_relative '../cohort.rb'
           expect(cohort.rejections).to eq(3)
         end
       end
-
-      describe '#conversion_rate' do
-        it "gives correct conversion_rate" do
-          expect(cohort.conversion_rate.round(2)).to eq(0)
-        end
-      end
-
-      describe '#standard_error' do
-        it "gives correct standard_error" do
-          expect(cohort.standard_error.round(2)).to eq(0)
-        end
-      end
     end
 
     context "when view results are all positive" do
@@ -102,18 +78,6 @@ require_relative '../cohort.rb'
       describe '#negative_conversions' do
         it "total number of views in the cohort" do
           expect(cohort.rejections).to eq(0)
-        end
-      end
-
-      describe '#conversion_rate' do
-        it "gives correct conversion_rate" do
-          expect(cohort.conversion_rate.round(2)).to eq(1)
-        end
-      end
-
-      describe '#standard_error' do
-        it "gives correct standard_error" do
-          expect(cohort.standard_error.round(2)).to eq(0)
         end
       end
     end

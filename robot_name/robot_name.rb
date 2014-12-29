@@ -7,14 +7,9 @@ class Robot
 
   def initialize(args = {})
     if args[:name_generator]
-      @name = args[:name_generator].call
+      @name = args[:name_generator].call while name_is_unacceptable?(@name)
     else
-      @name = generate_name
-    end
-
-    if name_is_unacceptable?(name)
-      # TODO: NameCollisionError and MalformedNameError
-      raise NameCollisionError, 'There was a problem generating the robot name!'
+      @name = generate_name while name_is_unacceptable?(@name)
     end
     
     @@registry << @name
@@ -25,8 +20,8 @@ private
   
 # TODO: 
   def generate_name
-    generate_chars = -> { ('A'..'Z').to_a.sample(2).join('') }
-    generate_nums  = -> { sprintf("%03d", rand(000..999)) }
+    generate_chars =-> { ('A'..'Z').to_a.sample(2).join('') }
+    generate_nums  =-> { sprintf("%03d", rand(000..999)) }
     
     name = "#{generate_chars.call}#{generate_nums.call}"
   end

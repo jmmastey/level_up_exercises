@@ -1,12 +1,17 @@
 Feature: Scrape for Events
+  As a signed-in user
+  In order to stay up-to-date on upcoming events
+  I want to be able to search source sites for the latest information
 
-  Scenario: User scrapes for events
-    xGiven a signed-in user
-    xAnd they click on scrape-events
-    xWhen they are on the events page
-    xThen there will be events on the page
+  Background:
+    Given I sign in
 
   Scenario: No events were ever scraped
-    Given a signed-in user
-    And they are on the events page
-    Then there will not be events on the page
+    Given No events exist in the database
+    When I visit the events page
+    Then I do not see events on the page
+
+  Scenario: User scrapes for events
+    xWhen I scrape for events
+    xAnd I visit the events page
+    xThen I see events on the page

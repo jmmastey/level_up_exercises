@@ -1,13 +1,16 @@
 Feature: Signing up
+  As a potential user
+  In order to create an account
+  I want to be able to sign-up
 
   Scenario: Successful Signup
-    Given a user visits the signup page
-    When they submit valid signup information
-    Then they see their own page
-    And they see themselves logged in
+    Given I visit the signup page
+    When I submit valid signup information
+    Then I am logged in
+    And I am on my showings page
 
   Scenario: Unsuccessful Signup
-    Given a user visits the signup page
-    When they submit invalid signup information
-    Then they see the signup page
-    And they see signup errors
+    Given I visit the signup page
+    When I submit invalid signup information
+    Then I see the signup page
+    And I see signup errors

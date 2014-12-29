@@ -1,39 +1,23 @@
-Given /^they are on the event page for one of their shows$/ do
+Given /^I visit the event page for one of my shows$/ do
   visit(events_path)
   click_link("#{user_events.first.name}-events")
 end
 
-When /^they click on the remove-link next to a showing$/ do
+When /^I remove one of my showings from the event's list$/ do
   @removed_showing = a_user_showing
-  click_link(remove_link_id_event_show(a_user_showing))
+  click_link(remove_link_id_via_event(a_user_showing))
 end
 
-When /^they click on the add-link next to a showing$/ do
+When /^I add a showing from the event's list$/ do
   @added_showing = a_non_user_showing
   click_link(add_link_id(a_non_user_showing))
 end
 
-Then /^they can remove showings already in their list$/ do
-  user_events.first.showings.each do |showing|
-    if showing.in?(@user.showings)
-      expect(page).to have_link(remove_link_id_event_show(showing))
-    end
-  end
-end
-
-Then /^they can add showings not already in their list$/ do
-  user_events.first.showings.each do |showing|
-    if !showing.in?(@user.showings)
-      expect(page).to have_link(add_link_id(showing))
-    end
-  end
-end
-
-Then /^the removed showing will have an add-link next to it$/ do
+Then /^I have the option to add the removed showing back to my list$/ do
   expect(page).to have_link(add_link_id(@removed_showing))
 end
 
-Then /^the added showing will have a remove-link next to it$/ do
-  expect(page).to have_link(remove_link_id_event_show(@added_showing))
+Then /^I have the option to remove the added showing$/ do
+  expect(page).to have_link(remove_link_id_via_event(@added_showing))
 end
 

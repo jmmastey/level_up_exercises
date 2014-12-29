@@ -1,40 +1,40 @@
 require_relative 'step_helpers'
 
-Given /^a user visits the welcome page$/ do
+Given /^I visit the welcome page$/ do
   visit(root_path)
 end
 
-Given /^a user visits the signin page$/ do
+Given /^I visit the signin page$/ do
   visit_signin_page
 end
 
-Given /^a user visits the signup page$/ do
+Given /^I visit the signup page$/ do
   visit_signup_page
 end
 
-Given /^the user has an account$/ do
+Given /^I have an account$/ do
   create_user
 end
 
-Given /^a signed-in user$/ do
+Given /^I sign in$/ do
   user_signs_in
 end
 
-When /^they submit valid signin information$/ do
+When /^I submit valid signin information$/ do
   fill_in('Email', with: @user.email)
   fill_in('Password', with: @user.password)
   click_button("Sign-In")
 end
 
-When /^they submit invalid signin information$/ do
+When /^I submit invalid signin information$/ do
   click_button("Sign-In")
 end
 
-When /^they click on signout$/ do
+When /^I click on signout$/ do
   click_link('Logout')
 end
 
-When /^they submit valid signup information$/ do
+When /^I submit valid signup information$/ do
   fill_in('Name', with: 'John Smith')
   fill_in('Email', with: 'jsmith@besthost.com')
   fill_in('Password', with: 'pass-me')
@@ -42,7 +42,7 @@ When /^they submit valid signup information$/ do
   click_button("Sign-Up!")
 end
 
-When /^they submit invalid signup information$/ do
+When /^I submit invalid signup information$/ do
   fill_in('Name', with: 'John Smith')
   fill_in('Email', with: 'jsmith@besthost.com')
   fill_in('Password', with: 'pass-me')
@@ -50,35 +50,35 @@ When /^they submit invalid signup information$/ do
   click_button("Sign-Up!")
 end
 
-Then /^they see the signin page$/ do
+Then /^I see the signin page$/ do
   expect(page).to have_content('Sign in')
 end
 
-Then /^they see the signup page$/ do
+Then /^I see the signup page$/ do
   expect(page).to have_content(signup_heading_msg)
 end
 
-Then /^they see their own page$/ do
+Then /^I am on my showings page$/ do
   expect(page).to have_title(user_page_msg('John'))
 end
 
-Then /^they see themselves logged in$/ do
+Then /^I am logged in$/ do
   expect(page).to have_content(logged_in_msg('John Smith'))
 end
 
-Then /^they see the welcome heading$/ do
+Then /^I see the welcome heading$/ do
   expect(page).to have_content(welcome_heading_msg)
 end
 
-Then /^they see a signout link$/ do
+Then /^I see a signout link$/ do
   expect(page).to have_link('Logout', session_destroy_link)
 end
 
-Then /^they see signup errors$/ do
+Then /^I see signup errors$/ do
   expect(page).to have_content('Issue')
 end
 
-Then /^they see authentication-failure message$/ do
+Then /^I see an authentication-failure message$/ do
   expect(page).to have_content('Wrong email and/or password')
 end
 

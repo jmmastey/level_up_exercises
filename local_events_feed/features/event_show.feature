@@ -1,19 +1,16 @@
-Feature: Event Show page
+Feature: User Showings
+  As a signed-in user
+  In order to manage my personal list of showings
+  I want to be able to add and remove showings
 
   Background:
-    Given a signed-in user that has showings in their list
-	And they are on the event page for one of their shows
+    Given I sign in and have showings in my list
+	And I visit the event page for one of my shows
 
-  Scenario: User has option to remove those showings that are in their own list
-    Then they can remove showings already in their list
+  Scenario: I remove a showing from my list
+    When I remove one of my showings from the event's list
+	Then I have the option to add the removed showing back to my list
 
-  Scenario: User has option to add those showings that are not in their own showings
-    Then they can add showings not already in their list
-
-  Scenario: User removes a showing from their own list
-    When they click on the remove-link next to a showing
-	Then the removed showing will have an add-link next to it
-
-  Scenario: User adds a showing into their own list
-    When they click on the add-link next to a showing
-	Then the added showing will have a remove-link next to it
+  Scenario: I add a showing to my list then have the option to remove it
+    When I add a showing from the event's list
+	Then I have the option to remove the added showing

@@ -1,5 +1,4 @@
 class DinoDexCommandLine
-
   def initialize(joes_csv, pirate_bay_csv)
     @dino_dex = DinoDex.new(joes_csv, pirate_bay_csv)
     puts "\nWelcome to the DinoDex!\n\n"\
@@ -7,15 +6,15 @@ class DinoDexCommandLine
     " \nfilter [filter1] [filter2] ..."
     get_input while true
   end
-
+  
+  private
+  
   def get_input
     puts "\nEnter command (type \"help\" for command documentation"\
     " or \"exit\" to quit): \n"
     user_input = gets.chomp.strip.downcase.split
     process_input_length(user_input)
   end
-
-  private
 
   def process_input_length(user_input)
     case
@@ -30,7 +29,7 @@ class DinoDexCommandLine
       when "all_dinos" then print_all_dinos
       when "help" then print_help_menu
       when "exit" then exit
-      when *@dino_dex.to_s then print_all_dino_facts(user_input)
+      when *@dino_dex.to_a then print_all_dino_facts(user_input)
       when "filter" then puts "ERROR: Please specify at least one filter. "\
         "To see a list of all dinos, enter \"all_dinos\""\
       else invalid_command
@@ -46,18 +45,17 @@ class DinoDexCommandLine
   end
 
   def print_help_menu
-    file = File.open("dino_rules.txt", "r")
-    help_doc = file.read
+    help_doc = File.read("dino_rules.txt")
     puts "#{help_doc} \n"
   end
 
   def print_all_dinos
     puts "\nLIST OF ALL DINOS:\n"
-    puts @dino_dex.to_s
+    puts @dino_dex.to_a
   end
 
   def print_all_dino_facts(dino_name)
-    puts @dino_dex.all_dino_facts(dino_name)
+    puts @dino_dex.find_dino(dino_name).to_s
   end
 
   def print_filtered_dinos(filters)

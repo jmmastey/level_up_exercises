@@ -3,8 +3,8 @@ class Dino
 
   attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
 
-  def initialize(dino_hash)
-    dino_hash.each { |k, v| send("#{k}=", v) }
+  def initialize(attributes)
+    attributes.each { |k, v| send("#{k}=", v) }
   end
 
   def fat?
@@ -32,7 +32,7 @@ class Dino
   end
 
   def to_s
-    dino_facts = instance_variables.map do |dino_attribute|
+    instance_variables.map do |dino_attribute|
       if instance_variable_get(dino_attribute)
         "#{dino_attribute[1..-1].capitalize}: \n "\
         "#{instance_variable_get(dino_attribute)}\n"

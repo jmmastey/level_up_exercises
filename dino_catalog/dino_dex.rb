@@ -7,9 +7,9 @@ class DinoDex
     @dinosaurs = dino_list.map { |dino| Dino.new(dino) }
   end
 
-  def all_dino_facts(dino_name)
-    dino = @dinosaurs.find { |dino| dino.name == dino_name }
-    dino.to_s
+  def find_dino(dino_name)
+    @dinosaurs.detect { |dino| dino.name == dino_name }
+    
   end
 
   def filter_dinos(filters)
@@ -18,7 +18,7 @@ class DinoDex
     filtered_dinos
   end
 
-  def to_s
+  def to_a
     @dinosaurs.map { |dino| dino.name }
   end
 
@@ -44,11 +44,11 @@ class DinoDex
   end
 
   def period_filter(dinos, filter)
-    dinos.select! {|dino| dino.period.include? filter }
+    dinos.select! { |dino| dino.period.include? filter }
   end
 
   def continent_filter(dinos, filter)
-    dinos.select! {|dino| dino.continent.include? filter.tr('_', ' ') }
+    dinos.select! { |dino| dino.continent.include? filter.tr('_', ' ') }
   end
 
   def collection_filter(dinos, filter)

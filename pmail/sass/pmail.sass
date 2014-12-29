@@ -6,6 +6,7 @@ $text-color: #111
 $primary-color: #0066ff
 $secondary-color: #00a352
 $accent-background-color: #eee
+$input-background-color: #fff
 $border-color: #ccc
 
 $font-face: Arial, sans-serif
@@ -13,41 +14,94 @@ $font-size: 16px
 
 $sidebar-width: 200px
 
+// BASE
 html
   margin: 0
   padding: 0
 
 body
-  background: $background-color
   font-family: $font-face
   font-size: $font-size
   margin: 0
 
+a, button, input, select, textarea
+  outline: none
+
+a
+  color: $text-color
+  text-decoration: none
+
 input, select
-  border: thin solid $border-color
+  border: thin solid
   height: 1.25em
   padding: 5px
   -webkit-appearance: none !important
 
-=topbar
-  height: 60px
+ul
+  list-style: none
+
+// LAYOUT
+
+// MODULE
+.dropdown-panel
+  border: thin solid
+  display: none
+  margin: 0
+  padding: 10px
+  position: absolute
+  z-index: 10
+
+  .dropdown-panel.show
+    display: block
+
+.topbar
   width: 100%
 
   > *
     vertical-align: middle
 
-.primary-topbar
-  +topbar
-  background-color: $accent-background-color
+  .right
+    display: inline-block
+    padding-right: 1em
+    position: absolute
+    right: 0
+    text-align: right
+    vertical-align: middle
 
-.secondary-topbar
-  +topbar
+.topbar-links
+  margin-left: auto
+  margin-right: 0
+
+  li
+    display: inline-block
+    margin-left: 2em
 
 .sidebar
-  width: $sidebar-width
   max-width: $sidebar-width
+  padding-top: 1em
+  text-align: center
+  width: $sidebar-width
 
-.main-pane
+  button
+    border: none
+    font-size: 0.8em
+    padding: 5px
+    text-transform: uppercase
+    width: 80%
+
+  ul.sidebar-links
+    font-size: 0.9em
+    padding-left: 0
+    text-align: left
+    width: 100%
+
+    li
+      border-left: 4px solid transparent
+      display: inline-block
+      margin: 0.2em 0
+      padding-left: 20px
+      width: 100%
+
 
 .brand
   background-image: url('../images/logo.gif')
@@ -61,12 +115,79 @@ input, select
   display: inline-block
 
   input[type="search"]
+    border: none
     max-width: 598px
+    padding: 0
     width: 598px
     min-width: 200px
-    min-height: 1.2em
+    min-height: 1.0em
+    
+    &:focus
+      border: none
+
+  button[type="submit"]
+    border: none
+    height: 30px
+    margin-left: 0 !important
+
+.search-box
+  border: thin solid 
+  display: inline-block
+  height: 30px
+  margin: 0
+
+  input
+    margin: 5px
+
+    &:focus
+      border: thin solid
+
+  button.dropdown-toggle
+    background: none
+    border: none
+    outline: none
+    text-align: right
+
+    &:not(:hover)
+      color: #999
+
+// THEME
+body
+  background: $background-color
+
+@each $style, $color in (primary, $primary-color), (secondary, $secondary-color)
+  button.#{$style}-button
+    background-color: $color
+    @if lightness($color) < 60%
+      color: #fff
+    @else
+      color: #000
+
+    &:hover, &:focus
+      background-color: darken($color, 5%)
+    &:active
+      background-color: darken($color, 10%)
+
+input, select
+  background-color: $input-background-color
+  border-color: $border-color
 
 input:focus
   border-color: $primary-color
-  // Remove webkit's border highlight
-  outline: none
+
+ul.sidebar-links li.active
+  border-color: $primary-color
+
+.dropdown-panel
+  background-color: $background-color
+  border-color: $border-color
+
+.search-box
+  background-color: $input-background-color
+  border-color: $border-color
+
+  &.focus
+    border-color: $primary-color
+
+.topbar-primary
+  background-color: $accent-background-color

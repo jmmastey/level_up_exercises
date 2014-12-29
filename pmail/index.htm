@@ -1,28 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>PMail</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="stylesheets/normalize.css" type="text/css" />
-		<link rel="stylesheet" href="stylesheets/pmail.css" type="text/css" />
-	</head>
-	<body>
-		<section class="primary-topbar">
-		<a class="brand" href="#" alt="Enova"></a>
-			<form class="search-form" id="search-form">
-				<input type="search" />
-				<button type="submit">
-					<span class="icon icon-search" />
-				</button>
-			</form>
-		</section>
-		<section class="secondary-topbar">
-		</section>
-		<nav class="sidebar">
-		</nav>
-		<section class="main-pane">
-		</section>
-		<script src="pmail.js"></script>
-	</body>
+<html lang='en'>
+  <head>
+    <title>PMail</title>
+    <meta content='width=device-width, initial-scale=1' name='viewport'>
+    <link href='stylesheets/normalize.css' rel='stylesheet' type='text/css'>
+    <link href='stylesheets/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link href='stylesheets/pmail.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <section class='topbar topbar-primary'>
+      <ul class='topbar-links right'>
+        <li>
+          <a href='#'>
+            <i class='fa fa-th'></i>
+          </a>
+        </li>
+        <li>
+          <a href='#'>
+            dkotowski@enova.com
+            <i class='fa fa-caret-down'></i>
+          </a>
+        </li>
+      </ul>
+      <a alt='Enova' class='brand' href='#'></a>
+      <form class='search-form' id='search-form'>
+        <div class='search-box'>
+          <input type='search'>
+          <button class='dropdown-toggle' type='button'>
+            <i class='fa fa-caret-down'></i>
+          </button>
+          <div class='dropdown-panel'>Test</div>
+        </div>
+        <button class='primary-button' type='submit'>
+          <i class='fa fa-search'></i>
+        </button>
+      </form>
+    </section>
+    <nav class='sidebar'>
+      <div class='topbar'></div>
+      <button class='secondary-button' id='compose'>Compose</button>
+      <ul class='sidebar-links'>
+        <li class='active'>
+          <a href='#'>Inbox</a>
+        </li>
+        <li>
+          <a href='#'>Starred</a>
+        </li>
+        <li>
+          <a href='#'>Sent Mail</a>
+        </li>
+        <li>
+          <a href='#'>Drafts</a>
+        </li>
+        <li>
+          <a href='#'>Projects</a>
+        </li>
+        <li>
+          <a data-target='#' href='#'>
+            More
+            <i class='fa fa-caret-down'></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <section class='main-pane'>
+      <div class='topbar'></div>
+      <div class='message-list'></div>
+      <footer></footer>
+    </section>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='pmail.js'></script>
+  </body>
 </html>

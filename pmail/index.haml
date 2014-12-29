@@ -1,0 +1,52 @@
+!!! XML
+!!!
+%html{lang: :en}
+  %head
+    %title PMail
+    %meta{content: "width=device-width, initial-scale=1", name: :viewport}/
+    %link{href: "stylesheets/normalize.css", rel: :stylesheet, type: "text/css"}/
+    %link{href: "stylesheets/font-awesome.min.css", rel: :stylesheet, type: "text/css"}/
+    %link{href: "stylesheets/pmail.css", rel: :stylesheet, type: "text/css"}/
+  %body
+    %section.topbar.topbar-primary
+      %ul.topbar-links.right
+        %li
+          %a{ href: "#" }
+            %i.fa.fa-th
+        %li
+          %a{ href: "#" }
+            dkotowski@enova.com
+            %i.fa.fa-caret-down
+      %a.brand{alt: "Enova", href: "#"}
+      %form#search-form.search-form
+        .search-box
+          %input{type: :search}/
+          %button.dropdown-toggle{type: :button}
+            %i.fa.fa-caret-down
+          .dropdown-panel Test
+        %button.primary-button{type: :submit}
+          %i.fa.fa-search
+    %nav.sidebar
+      .topbar
+      %button.secondary-button#compose Compose
+      %ul.sidebar-links
+        %li.active
+          %a{ href: "#" } Inbox
+        %li
+          %a{ href: "#" } Starred
+        %li
+          %a{ href: "#" } Sent Mail
+        %li
+          %a{ href: "#" } Drafts
+        %li
+          %a{ href: "#" } Projects
+        %li
+          %a{ href: "#", data: { target: "#" } }
+            More
+            %i.fa.fa-caret-down
+    %section.main-pane
+      .topbar
+      .message-list
+      %footer
+    %script{src: "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}
+    %script{src: "pmail.js"}

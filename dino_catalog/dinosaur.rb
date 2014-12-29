@@ -16,11 +16,11 @@ class Dino
   end
 
   def biped?
-    @walking.eql? "biped"
+    @walking == "biped"
   end
 
   def quadruped?
-    @walking.eql? "quadruped"
+    @walking == "quadruped"
   end
 
   def carnivore?
@@ -28,7 +28,7 @@ class Dino
   end
 
   def herbivore?
-    @diet.eql? "herbivore"
+    @diet == "herbivore"
   end
 
   def to_s

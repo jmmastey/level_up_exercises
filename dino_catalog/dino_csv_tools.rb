@@ -12,21 +12,28 @@ module DinoCSVTools
       header_converters: :symbol,
       converters: [:all, :downcase, :blank_to_nil]
     }
+    
+    MAPPINGS = {
+      genus: :name,
+      weight: :weight_in_lbs,
+      carnivore: :diet
+    }
 
-    def self.csv_to_hash_array(file)
-      @csv = CSV.read(file, CSV_PARAMS)
-      @csv.map(&:to_hash)
+    def self.csv_to_dinos(files)
+      files.map do |file|
+        csv = CSV.read("#{file}", CSV_PARAMS)
+        normalize(csv.map(&:to_hash))
+      end.flatten
     end
 
+    private
     def self.normalize(dinos)
-      dinos.each do |dino|
-        dino[:name] = dino.delete :genus
-        dino[:weight_in_lbs] = dino.delete :weight
-        dino[:diet] = dino.delete :carnivore
-        dino[:continent] = "africa"
-        dino[:diet] = dino[:diet].eql?("yes") ? "carnivore" : "herbivore"
+      dinos.each do |d|
+        d.keys.each { |k| d[MAPPINGS[k]] = d.delete(k) if MAPPINGS[k] }
+        d[:continent] = "africa" unless d.has_key?(:continent)
+        d[:diet] = "carnivore" if d[:diet] == "yes"
+        d[:diet] = "herbivore" if d[:diet] == "no"
       end
     end
-
   end
 end

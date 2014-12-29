@@ -1,6 +1,7 @@
 class DinoDexCommandLine
   def initialize(joes_csv, pirate_bay_csv)
-    @dino_dex = DinoDex.new(joes_csv, pirate_bay_csv)
+    @dino_dex = DinoDex.new([joes_csv, pirate_bay_csv])
+    @help_doc = File.read("dino_rules.txt")
     puts "\nWelcome to the DinoDex!\n\n"\
     "Available comands:  \nall_dinos \nexit \nhelp \n[dino_name]"\
     " \nfilter [filter1] [filter2] ..."
@@ -45,8 +46,7 @@ class DinoDexCommandLine
   end
 
   def print_help_menu
-    help_doc = File.read("dino_rules.txt")
-    puts "#{help_doc} \n"
+    puts "#{@help_doc} \n"
   end
 
   def print_all_dinos
@@ -82,6 +82,7 @@ class DinoDexCommandLine
       %w( fat small ),
       %w( biped quadruped ),
       %w( joe pirate_bay ),
+      %w( carnivore herbivore ),
       %w( jurassic albian cretaceous triassic permian oxfordian ),
       %w( north_america south_america africa europe asia )
     ]

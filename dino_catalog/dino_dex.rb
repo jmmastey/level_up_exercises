@@ -1,9 +1,12 @@
+require_relative 'dino_filter'
+require_relative 'dino_csv_tools'
+include DinoCSVTools
 class DinoDex
+  include DinoFilter
   attr_reader :dinosaurs
 
-  def initialize(joes_csv, pirate_bay_csv)
-    dino_list = CSVtoDinos.csv_to_hash_array(joes_csv) +
-      CSVtoDinos.normalize(CSVtoDinos.csv_to_hash_array(pirate_bay_csv))
+  def initialize(csvs)
+    dino_list = CSVtoDinos.csv_to_dinos(csvs)
     @dinosaurs = dino_list.map { |dino| Dino.new(dino) }
   end
 
@@ -13,9 +16,7 @@ class DinoDex
   end
 
   def filter_dinos(filters)
-    filtered_dinos = @dinosaurs.dup
-    filters.each { |filter| process_filter(filtered_dinos, filter) }
-    filtered_dinos
+    filters.map { |filter| process_filter(@dinosaurs, filter) }.inject(:&)
   end
 
   def to_a
@@ -40,20 +41,20 @@ class DinoDex
   end
 
   def attribute_filter(dinos, filter)
-    dinos.select! { |dino| dino.send("#{filter}?") }
+    dinos.select { |dino| dino.send("#{filter}?") }
   end
 
   def period_filter(dinos, filter)
-    dinos.select! { |dino| dino.period.include? filter }
+    dinos.select { |dino| dino.period.include? filter }
   end
 
   def continent_filter(dinos, filter)
-    dinos.select! { |dino| dino.continent.include? filter.tr('_', ' ') }
+    dinos.select { |dino| dino.continent.include? filter.tr('_', ' ') }
   end
 
   def collection_filter(dinos, filter)
-    if filter.eql? "pirate_bay" then filter_by_continent(dinos, "africa")
-    else dinos.select! { |dino| dino.continent != "africa" }
+    if filter == "pirate_bay" then filter_by_continent(dinos, "africa")
+    else dinos.select { |dino| dino.continent != "africa" }
     end
   end
 

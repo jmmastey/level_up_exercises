@@ -39,6 +39,14 @@ Feature: Artists Page
     Then I should not see Claude Monet on the Artists page
     And I should see a message confirming the artist was deleted
 
-  Scenario: Add an artist from API
+  Scenario: Add a new artist from API
     When I manually add an artist
-    And I should see a message confirming the artist was created
+    Then I should see a message confirming the artist was created
+
+  Scenario: Add an existing artist from API
+    When I manually add an existing artist
+    Then I should see a message stating the artist exists
+
+  Scenario: Add an artist from API that does not exist
+    When I manually add a non-existent artist
+    Then I should see a message stating the artist does not exist

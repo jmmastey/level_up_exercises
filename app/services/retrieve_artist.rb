@@ -2,7 +2,11 @@ class RetrieveArtist
   attr_accessor :artist_params
 
   def initialize(name)
-    @artist_params = ArtsyApiWrapper.get_artist(name)
+    begin
+      @artist_params = ArtsyApiWrapper.get_artist(name)
+    rescue Faraday::ResourceNotFound
+      @artist_params = nil
+    end
   end
 
   def update_record
@@ -21,26 +25,30 @@ class RetrieveArtist
     end
   end
 
+  def record_exist?
+    @artist_params
+  end
+
   private
 
   def params
-    first_name = artist_params.name.split(' ')[0]
-    last_name = artist_params.name.split(' ')[1..-1].join(' ')
+    first_name = artist_params['name'].split(' ')[0]
+    last_name = artist_params['name'].split(' ')[1..-1].join(' ')
     params = Hash.new
     params[:artist] = {
-      api_id: artist_params.id,
+      api_id: artist_params['id'],
       first_name: first_name,
       last_name: last_name,
-      biography: artist_params.biography,
-      nationality: artist_params.nationality,
-      birthyear: artist_params.birthday,
-      analysis: artist_params.blurb,
-      thumbnail: artist_params._links["thumbnail"]["href"]
+      biography: artist_params['biography'],
+      nationality: artist_params['nationality'],
+      birthyear: artist_params['birthday'],
+      analysis: artist_params['blurb'],
+      thumbnail: artist_params["_links"]["thumbnail"]["href"]
     }
   end
 
   def artist
-    id = artist_params.id
+    id = artist_params['id']
     Artist.find_by(api_id: id)
   end
 

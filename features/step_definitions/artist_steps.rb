@@ -54,8 +54,16 @@ When(/^I edit an artist with invalid data: (.+)$/) do |artist|
 end
 
 When(/^I manually add an artist$/) do
-  fill_in("Add a New Artist", with: "Pablo Picasso")
-  click_button("Add Artist")
+  create_artist("Pablo Picasso")
+end
+
+When(/^I manually add an existing artist$/) do
+  create_artist("Pablo Picasso")
+  create_artist("Pablo Picasso")
+end
+
+When(/^I manually add a non\-existent artist$/) do
+  create_artist("na")
 end
 
 Then(/^I should not see (.+) on the Artists page$/) do |artist|
@@ -100,4 +108,12 @@ end
 Then(/^I should see a thumbnail image$/) do
   url = "http://static1.artsy.net/artist_images/52f6bdda4a04f5d504f69b03/1/four_thirds.jpg"
   expect(page).to have_selector("img[src='#{url}']")
+end
+
+Then(/^I should see a message stating the artist exists$/) do
+  expect(page).to have_content("The artist already exists.")
+end
+
+Then(/^I should see a message stating the artist does not exist$/) do
+  expect(page).to have_content("Sorry. Your search returned no results.")
 end

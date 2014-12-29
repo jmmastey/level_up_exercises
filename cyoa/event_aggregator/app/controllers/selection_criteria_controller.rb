@@ -1,5 +1,6 @@
 class SelectionCriteriaController < ApplicationController
   before_action :set_selection_criterion, only: [:show, :edit, :update, :destroy]
+  before_action :set_feed, only: [:new]
 
   respond_to :html
 
@@ -42,6 +43,11 @@ class SelectionCriteriaController < ApplicationController
 
   def set_selection_criterion
     @selection_criterion = SelectionCriterion.find(params[:id])
+  end
+
+  def set_feed
+    @feed = Feed.find_by(id: params[:feed_id], user: current_user)
+    raise "Invalid Feed" unless @feed
   end
 
   def selection_criterion_params

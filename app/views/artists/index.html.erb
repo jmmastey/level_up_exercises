@@ -1,5 +1,20 @@
 <section class="main-content type-system-rounded">
   <p class="right-aligned-link"><%= link_to "Create a New Artist", new_artist_path %></p>
+
+  <div class="right-aligned-search">
+    <%= form_tag(search_for_artist_path, method: "get") do %>
+      <ol>
+        <li>
+          <%= label_tag :search_query, "Add a New Artist" %>
+          <%= text_field_tag :search_query %>
+        </li>
+        <li>
+          <%= submit_tag("Add Artist") %>
+        </li>
+      </ol>
+    <% end %>
+  </div>
+
   <h1>Artists</h1>
 
     <% @artists.each do |artist| %>

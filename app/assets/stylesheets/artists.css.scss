@@ -13,4 +13,10 @@
       text-align: right;
     }
   }
+
+  .right-aligned-search {
+    @include span-columns(3);
+    @include shift(9);
+    text-align: right;
+  }
 }

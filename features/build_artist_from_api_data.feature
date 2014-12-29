@@ -12,3 +12,4 @@ Feature: Artists Page
     Given I request artist data from the API for Vincent van Gogh
     When I visit the artists page
     Then Vincent van Gogh appears on the artists page
+

@@ -3,7 +3,7 @@ require 'hyperclient'
 class ArtsyApiWrapper
   def self.get_artist(artist_name)
     api_access = make_connection
-    api_access.artist(id: artist_name)._response.body
+    api_access.artist(id: artist_name)
   end
 
   def self.make_connection

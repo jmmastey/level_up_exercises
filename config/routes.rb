@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
   get 'users/:id' => 'users#show', as: :user
 
+  get 'search/artist' => 'search_for#artist', as: :search_for_artist
+
 
   resources :artists do
     resources :artworks

@@ -53,6 +53,11 @@ When(/^I edit an artist with invalid data: (.+)$/) do |artist|
   click_button("Update Artist")
 end
 
+When(/^I manually add an artist$/) do
+  fill_in("Add a New Artist", with: "Pablo Picasso")
+  click_button("Add Artist")
+end
+
 Then(/^I should not see (.+) on the Artists page$/) do |artist|
   expect(current_path).to eq(artists_path)
   expect(page).not_to have_content(artist)

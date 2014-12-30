@@ -73,6 +73,15 @@
       %footer
     %nav.sidebar
       .topbar
+        .topbar-links
+          %ul
+            %li
+              %a.dropdown-toggle{ href: "#", data: { target: "#mail-dropdown" } }
+                Mail
+                %i.fa.fa-caret-down
+                %i.fa.fa-caret-up
+              .dropdown-panel.hidden#mail-dropdown
+                List options here
       %main
         %button.secondary-button#compose Compose
         %ul.sidebar-links

@@ -91,7 +91,22 @@
       <footer></footer>
     </section>
     <nav class='sidebar'>
-      <div class='topbar'></div>
+      <div class='topbar'>
+        <div class='topbar-links'>
+          <ul>
+            <li>
+              <a class='dropdown-toggle' data-target='#mail-dropdown' href='#'>
+                Mail
+                <i class='fa fa-caret-down'></i>
+                <i class='fa fa-caret-up'></i>
+              </a>
+              <div class='dropdown-panel hidden' id='mail-dropdown'>
+                List options here
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
       <main>
         <button class='secondary-button' id='compose'>Compose</button>
         <ul class='sidebar-links'>

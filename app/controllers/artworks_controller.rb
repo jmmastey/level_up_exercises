@@ -4,7 +4,7 @@ class ArtworksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @artworks = @artist.artworks.all
+    @artworks = @artist.artworks.all.page params[:page]
   end
 
   def show

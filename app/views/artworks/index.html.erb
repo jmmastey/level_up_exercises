@@ -5,7 +5,7 @@
 
   <% @artworks.each do |artwork| %>
     <article>
-      <h1><%= link_to artwork.title, artist_artwork_path(@artist, artwork) %></h1>
+      <h2><%= link_to artwork.title, artist_artwork_path(@artist, artwork) %></h2>
       <p>Year: <%= artwork.date %></p>
       <%= image_tag(artwork.thumbnail, class: "artwork-thumbnail") %>
     </article>

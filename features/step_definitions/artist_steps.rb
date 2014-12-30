@@ -54,7 +54,7 @@ When(/^I edit an artist with invalid data: (.+)$/) do |artist|
 end
 
 When(/^I manually add an artist$/) do
-  create_artist("Pablo Picasso")
+  create_artist("Paul Cezanne")
 end
 
 When(/^I manually add an existing artist$/) do
@@ -116,4 +116,10 @@ end
 
 Then(/^I should see a message stating the artist does not exist$/) do
   expect(page).to have_content("Sorry. Your search returned no results.")
+end
+
+Then(/^the artist should have associated artworks$/) do
+  click_link("Paul Cézanne")
+  click_link("View All Artworks")
+  expect(page).to have_css('h1', "Still Life with Cherries and Peaches")
 end

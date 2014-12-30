@@ -42,6 +42,7 @@ Feature: Artists Page
   Scenario: Add a new artist from API
     When I manually add an artist
     Then I should see a message confirming the artist was created
+    And the artist should have associated artworks
 
   Scenario: Add an existing artist from API
     When I manually add an existing artist

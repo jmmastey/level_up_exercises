@@ -32,6 +32,22 @@ RSpec.describe Artist, :type => :model do
     it { should have_many(:artworks) }
   end
 
+  describe "dependent destroy" do
+    let(:artist) { create(Artist.new(first_name: "Pablo", last_name: "Picasso")) }
+    let(:artwork) { artist.artworks.create(title: "Artwork", date: 1.day.ago) }
+
+    it "destroys dependent artworks when an artist is destroyed" do
+      artist = Artist.create(first_name: "Pablo", last_name: "Picasso")
+      artwork = artist.artworks.create(title: "Artwork", date: 1.day.ago)
+
+      expect(Artwork.all.size).to eq(1)
+
+      artist.destroy
+
+      expect(Artwork.all.size).to eq(0)
+    end
+  end
+
   describe '#full_name' do
     let(:artist) { FactoryGirl.create(:artist, first_name: "Claude", last_name: "Monet") }
 

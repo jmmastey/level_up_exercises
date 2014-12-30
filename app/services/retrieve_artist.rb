@@ -12,6 +12,7 @@ class RetrieveArtist
   def update_record
     if new_record?
       create_new_artist
+      create_artworks
     else
       update_artist
     end
@@ -52,11 +53,19 @@ class RetrieveArtist
     Artist.find_by(api_id: id)
   end
 
+  def url
+    artist_params["_links"]["artworks"]["href"]
+  end
+
   def create_new_artist
     Artist.create(params)
   end
 
   def update_artist
     artist.update(params)
+  end
+
+  def create_artworks
+    RetrieveArtworks.new(url, artist)
   end
 end

@@ -121,5 +121,5 @@ end
 Then(/^the artist should have associated artworks$/) do
   click_link("Paul Cézanne")
   click_link("View All Artworks")
-  expect(page).to have_css('h1', "Still Life with Cherries and Peaches")
+  expect(page).to have_css('h2', "Still Life with Cherries and Peaches")
 end

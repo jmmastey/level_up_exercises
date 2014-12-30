@@ -1,5 +1,5 @@
 class Artist < ActiveRecord::Base
-  has_many :artworks
+  has_many :artworks, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
 

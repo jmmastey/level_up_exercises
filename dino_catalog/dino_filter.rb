@@ -1,4 +1,5 @@
-module DinoFilter
+module DinoFilterTools
+	class DinoFilter
     FILTER_GROUPS = [
       %w( fat small ),
       %w( carnivore herbivore ),
@@ -12,5 +13,7 @@ module DinoFilter
 	ATTRIBUTES = %w( fat small biped quadruped carnivore herbivore )
 	COLLECTIONS = %w( joe pirate_bay )
 	CONTINENTS = %w( north_america south_america africa europe asia )
+
+	def filter_dinos
   
 end

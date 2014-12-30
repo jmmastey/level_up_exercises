@@ -1,106 +1,194 @@
-/* line 18, ../sass/pmail.sass */
+/* line 28, ../sass/pmail.sass */
 html {
   margin: 0;
   padding: 0;
 }
 
-/* line 22, ../sass/pmail.sass */
+/* line 32, ../sass/pmail.sass */
 body {
   font-family: Arial, sans-serif;
   font-size: 16px;
   margin: 0;
 }
 
-/* line 27, ../sass/pmail.sass */
+/* line 37, ../sass/pmail.sass */
 a, button, input, select, textarea {
   outline: none;
 }
 
-/* line 30, ../sass/pmail.sass */
+/* line 40, ../sass/pmail.sass */
 a {
   color: #111;
   text-decoration: none;
 }
 
-/* line 34, ../sass/pmail.sass */
+/* line 44, ../sass/pmail.sass */
 input, select {
   border: thin solid;
   height: 1.25em;
   padding: 5px;
+  -moz-appearance: none !important;
   -webkit-appearance: none !important;
 }
 
-/* line 40, ../sass/pmail.sass */
+/* line 51, ../sass/pmail.sass */
+input[type="checkbox"] {
+  display: none;
+}
+/* line 54, ../sass/pmail.sass */
+input[type="checkbox"] + label span {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  background: url(../images/input_sprite.png) left top no-repeat;
+}
+/* line 63, ../sass/pmail.sass */
+input[type="checkbox"]:checked + label span {
+  background: url(../images/input_sprite.png) left -19px no-repeat;
+}
+
+/* line 66, ../sass/pmail.sass */
 ul {
   list-style: none;
 }
 
-/* line 46, ../sass/pmail.sass */
-.dropdown-panel {
-  border: thin solid;
-  display: none;
-  margin: 0;
-  padding: 10px;
-  position: absolute;
-  z-index: 10;
-}
-/* line 54, ../sass/pmail.sass */
-.dropdown-panel .dropdown-panel.show {
+/* line 70, ../sass/pmail.sass */
+.main-pane {
   display: block;
+  float: right;
+  font-size: 0.9em;
+  height: 100%;
+  vertical-align: top;
+}
+/* line 77, ../sass/pmail.sass */
+.main-pane > * {
+  min-width: 600px;
 }
 
-/* line 57, ../sass/pmail.sass */
-.topbar {
+/* line 80, ../sass/pmail.sass */
+.message-list {
+  padding-top: 5px;
+  height: 100%;
+  width: 99%;
+}
+
+/* line 85, ../sass/pmail.sass */
+.message {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-left: 2px dotted transparent;
+  cursor: pointer;
+  display: flex;
+  max-height: 1.2em;
+  margin: 0;
+  padding: 4px 0;
   width: 100%;
 }
-/* line 60, ../sass/pmail.sass */
+
+/* line 95, ../sass/pmail.sass */
+.message-actions, .message-field {
+  display: table-cell;
+  padding: 2px 10px;
+}
+
+/* line 100, ../sass/pmail.sass */
+.message-field.date {
+  width: 100px;
+  text-align: right;
+}
+/* line 104, ../sass/pmail.sass */
+.message-field.subject {
+  flex-grow: 1;
+}
+/* line 107, ../sass/pmail.sass */
+.message-field.from {
+  width: 200px;
+}
+
+/* line 110, ../sass/pmail.sass */
+.topbar {
+  border-bottom: thin solid;
+  min-height: 30px;
+  min-width: 600px;
+  width: 100%;
+}
+/* line 116, ../sass/pmail.sass */
 .topbar > * {
   vertical-align: middle;
 }
-/* line 63, ../sass/pmail.sass */
+/* line 119, ../sass/pmail.sass */
 .topbar .right {
-  display: inline-block;
+  display: block;
+  float: right;
   padding-right: 1em;
-  position: absolute;
   right: 0;
   text-align: right;
   vertical-align: middle;
 }
-
-/* line 71, ../sass/pmail.sass */
-.topbar-links {
-  margin-left: auto;
-  margin-right: 0;
+/* line 127, ../sass/pmail.sass */
+.topbar button {
+  border-radius: 4px;
+  padding: 3px 10px;
 }
-/* line 75, ../sass/pmail.sass */
+
+/* line 131, ../sass/pmail.sass */
+.topbar-links {
+  margin-right: 0;
+  -webkit-padding-start: 0;
+}
+/* line 136, ../sass/pmail.sass */
 .topbar-links li {
   display: inline-block;
   margin-left: 2em;
 }
 
-/* line 79, ../sass/pmail.sass */
+/* line 140, ../sass/pmail.sass */
 .sidebar {
+  display: block;
+  float: left;
   max-width: 200px;
-  padding-top: 1em;
   text-align: center;
   width: 200px;
 }
-/* line 85, ../sass/pmail.sass */
+/* line 147, ../sass/pmail.sass */
+.sidebar main {
+  padding-top: 10px;
+}
+/* line 150, ../sass/pmail.sass */
 .sidebar button {
   border: none;
+  border-radius: 4px;
   font-size: 0.8em;
   padding: 5px;
   text-transform: uppercase;
   width: 80%;
 }
-/* line 92, ../sass/pmail.sass */
+/* line 158, ../sass/pmail.sass */
 .sidebar ul.sidebar-links {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   font-size: 0.9em;
-  padding-left: 0;
+  margin: 0;
+  padding: 5px 0;
   text-align: left;
   width: 100%;
 }
-/* line 98, ../sass/pmail.sass */
+/* line 166, ../sass/pmail.sass */
+.sidebar ul.sidebar-links:not(:first-of-type) {
+  border-top: thin solid #ccc;
+}
+/* line 169, ../sass/pmail.sass */
 .sidebar ul.sidebar-links li {
   border-left: 4px solid transparent;
   display: inline-block;
@@ -109,7 +197,62 @@ ul {
   width: 100%;
 }
 
-/* line 106, ../sass/pmail.sass */
+/* line 176, ../sass/pmail.sass */
+.search-form {
+  display: inline-block;
+  vertical-align: middle;
+}
+/* line 180, ../sass/pmail.sass */
+.search-form input[type="search"] {
+  border: none;
+  max-height: 32px;
+  max-width: 598px;
+  padding: 0;
+}
+/* line 186, ../sass/pmail.sass */
+.search-form input[type="search"]:focus {
+  border: none;
+}
+/* line 189, ../sass/pmail.sass */
+.search-form button[type="submit"] {
+  border: none;
+  border-radius: 0 4px 4px 0;
+  float: right;
+  height: 34px;
+  margin-left: 0 !important;
+  min-width: 50px;
+}
+
+/* line 197, ../sass/pmail.sass */
+.search-box {
+  border: thin solid;
+  display: inline-block;
+  height: 32px;
+  max-height: 32px;
+  margin: 0;
+  overflow: hidden;
+}
+/* line 205, ../sass/pmail.sass */
+.search-box input {
+  margin: 5px;
+}
+/* line 208, ../sass/pmail.sass */
+.search-box input:focus {
+  border: thin solid;
+}
+/* line 211, ../sass/pmail.sass */
+.search-box button.dropdown-toggle {
+  background: none;
+  border: none;
+  outline: none;
+  text-align: right;
+}
+/* line 217, ../sass/pmail.sass */
+.search-box button.dropdown-toggle:not(:hover) {
+  color: #999;
+}
+
+/* line 221, ../sass/pmail.sass */
 .brand {
   background-image: url("../images/logo.gif");
   background-repeat: no-repeat;
@@ -119,123 +262,121 @@ ul {
   width: 149px;
 }
 
-/* line 114, ../sass/pmail.sass */
-.search-form {
-  display: inline-block;
-}
-/* line 117, ../sass/pmail.sass */
-.search-form input[type="search"] {
-  border: none;
-  max-width: 598px;
-  padding: 0;
-  width: 598px;
-  min-width: 200px;
-  min-height: 1em;
-}
-/* line 125, ../sass/pmail.sass */
-.search-form input[type="search"]:focus {
-  border: none;
-}
-/* line 128, ../sass/pmail.sass */
-.search-form button[type="submit"] {
-  border: none;
-  height: 30px;
-  margin-left: 0 !important;
-}
-
-/* line 133, ../sass/pmail.sass */
-.search-box {
+/* line 229, ../sass/pmail.sass */
+.dropdown-panel {
   border: thin solid;
-  display: inline-block;
-  height: 30px;
   margin: 0;
-}
-/* line 139, ../sass/pmail.sass */
-.search-box input {
-  margin: 5px;
-}
-/* line 142, ../sass/pmail.sass */
-.search-box input:focus {
-  border: thin solid;
-}
-/* line 145, ../sass/pmail.sass */
-.search-box button.dropdown-toggle {
-  background: none;
-  border: none;
-  outline: none;
-  text-align: right;
-}
-/* line 151, ../sass/pmail.sass */
-.search-box button.dropdown-toggle:not(:hover) {
-  color: #999;
+  padding: 10px;
+  position: absolute;
+  width: 600px;
+  z-index: 10;
 }
 
-/* line 155, ../sass/pmail.sass */
+/* line 237, ../sass/pmail.sass */
+.hidden {
+  display: none;
+}
+
+/* line 241, ../sass/pmail.sass */
+.dropdown-toggle .fa-caret-up {
+  display: none;
+}
+/* line 245, ../sass/pmail.sass */
+.dropdown-toggle.active .fa-caret-up {
+  display: inline;
+}
+/* line 247, ../sass/pmail.sass */
+.dropdown-toggle.active .fa-caret-down {
+  display: none;
+}
+
+/* line 251, ../sass/pmail.sass */
 body {
   background: #fff;
 }
 
-/* line 159, ../sass/pmail.sass */
+/* line 255, ../sass/pmail.sass */
 button.primary-button {
   background-color: #0066ff;
   color: #fff;
 }
-/* line 166, ../sass/pmail.sass */
+/* line 262, ../sass/pmail.sass */
 button.primary-button:hover, button.primary-button:focus {
   background-color: #005ce6;
 }
-/* line 168, ../sass/pmail.sass */
+/* line 264, ../sass/pmail.sass */
 button.primary-button:active {
   background-color: #0052cc;
 }
 
-/* line 159, ../sass/pmail.sass */
+/* line 255, ../sass/pmail.sass */
 button.secondary-button {
   background-color: #00a352;
   color: #fff;
 }
-/* line 166, ../sass/pmail.sass */
+/* line 262, ../sass/pmail.sass */
 button.secondary-button:hover, button.secondary-button:focus {
   background-color: #008a45;
 }
-/* line 168, ../sass/pmail.sass */
+/* line 264, ../sass/pmail.sass */
 button.secondary-button:active {
   background-color: #007038;
 }
 
-/* line 171, ../sass/pmail.sass */
+/* line 267, ../sass/pmail.sass */
 input, select {
   background-color: #fff;
   border-color: #ccc;
 }
 
-/* line 175, ../sass/pmail.sass */
+/* line 271, ../sass/pmail.sass */
 input:focus {
   border-color: #0066ff;
 }
 
-/* line 178, ../sass/pmail.sass */
+/* line 274, ../sass/pmail.sass */
 ul.sidebar-links li.active {
   border-color: #0066ff;
 }
+/* line 277, ../sass/pmail.sass */
+ul.sidebar-links li.active a {
+  color: #0066ff;
+  font-weight: bold;
+}
 
-/* line 181, ../sass/pmail.sass */
+/* line 281, ../sass/pmail.sass */
 .dropdown-panel {
   background-color: #fff;
   border-color: #ccc;
 }
 
-/* line 185, ../sass/pmail.sass */
+/* line 285, ../sass/pmail.sass */
 .search-box {
   background-color: #fff;
   border-color: #ccc;
 }
-/* line 189, ../sass/pmail.sass */
+/* line 289, ../sass/pmail.sass */
 .search-box.focus {
   border-color: #0066ff;
 }
 
-/* line 192, ../sass/pmail.sass */
+/* line 292, ../sass/pmail.sass */
+.topbar {
+  border-color: #ccc;
+}
+
+/* line 295, ../sass/pmail.sass */
 .topbar-primary {
   background-color: #eee;
+}
+
+/* line 298, ../sass/pmail.sass */
+.message {
+  background-color: #eee;
+  border-bottom: thin solid #ccc;
+}
+
+/* line 302, ../sass/pmail.sass */
+.message:hover {
+  border-left: 2px dotted #ccc;
 }

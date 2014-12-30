@@ -2,12 +2,35 @@ require 'rails_helper'
 
 RSpec.describe Artist, :type => :model do
 
-  # Validations
-  it { should validate_presence_of(:first_name) }
-  it { should validate_presence_of(:last_name) }
+  describe "Create new artist" do
 
-  # Associations
-  it { should have_many(:artworks) }
+    it "validates a new valid artist" do
+      artist = Artist.new
+      artist.first_name = "Pablo"
+      artist.last_name = "Picasso"
+
+      expect(artist).to be_valid
+    end
+
+    it "does not validate a new invalid artist" do
+      artist = Artist.new
+      artist.first_name = "Pablo"
+      artist.last_name = ""
+
+      artist.valid?
+
+      expect(artist).not_to be_valid
+    end
+  end
+
+  describe "validations" do
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+  end
+
+  describe "associations" do
+    it { should have_many(:artworks) }
+  end
 
   describe '#full_name' do
     let(:artist) { FactoryGirl.create(:artist, first_name: "Claude", last_name: "Monet") }
@@ -32,7 +55,6 @@ RSpec.describe Artist, :type => :model do
   end
 
   describe ".most_recent" do
-
 
     it "orders the artists by updated_date" do
       artist_1 = create(:artist, first_name: "Artist",  last_name: "One", updated_at: 1.day.ago)

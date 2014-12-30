@@ -6,6 +6,7 @@ $text-color: #111
 $primary-color: #0066ff
 $secondary-color: #00a352
 $secondary-background-color: #eee
+$active-background-color: #eefafa
 $input-background-color: #fff
 $border-color: #ccc
 
@@ -41,6 +42,15 @@ a
   color: $text-color
   text-decoration: none
 
+button
+  background-color: $secondary-background-color
+  border: none
+  min-height: 1em
+  min-width: 100px
+
+  &:active
+    background-color: darken($secondary-background-color, 5%)
+
 input, select
   border: thin solid
   height: 1.25em
@@ -65,6 +75,7 @@ input[type="checkbox"]
 
 ul
   list-style: none
+  margin: 0
 
 // LAYOUT
 .main-pane
@@ -72,6 +83,7 @@ ul
   float: right
   font-size: 0.9em
   height: 100%
+  padding: 0
   vertical-align: top
 
   > *
@@ -109,19 +121,11 @@ ul
     
 .topbar
   border-bottom: thin solid
-  min-height: 30px
-  min-width: 600px
+  min-height: 50px
   width: 100%
+  vertical-align: middle
 
   > *
-    vertical-align: middle
-
-  .right
-    display: block
-    float: right
-    padding-right: 1em
-    right: 0
-    text-align: right
     vertical-align: middle
 
   button
@@ -129,18 +133,28 @@ ul
     padding: 3px 10px
 
 .topbar-links
-  margin-right: 0
+  height: 100%
+  margin: 0
   // Chrome fix:
   -webkit-padding-start: 0
+
+  &.right
+    margin-right: 0
+    float: right
+    padding-right: 1em
+    right: 0
+    text-align: right
 
   li
     display: inline-block
     margin-left: 2em
+    position: relative
 
 .sidebar
   display: block
   float: left
   max-width: $sidebar-width
+  margin: 0
   text-align: center
   width: $sidebar-width
 
@@ -231,8 +245,15 @@ ul
   margin: 0
   padding: 10px
   position: absolute
-  width: 600px
   z-index: 10
+
+  &.center
+    $width: 300px
+    width: $width
+    left: ($width / 2) * -1
+
+  &.right
+    right: 0
 
 .hidden
   display: none
@@ -299,5 +320,11 @@ ul.sidebar-links li.active
   background-color: $secondary-background-color
   border-bottom: thin solid $border-color
 
-.message:hover
-  border-left: 2px dotted $border-color
+  &.new
+    font-weight: bold
+
+  &.active
+    background-color: $active-background-color
+
+  &:hover
+    border-left: 2px dotted $border-color

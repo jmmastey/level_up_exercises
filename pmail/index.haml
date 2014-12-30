@@ -19,17 +19,20 @@
     %link{href: "stylesheets/pmail.css", rel: :stylesheet, type: "text/css"}/
   %body
     %section.topbar.topbar-primary
-      %ul.topbar-links.right
-        %li
-          %a{ href: "#" }
-            %i.fa.fa-th
-        %li
-          %a.dropdown-toggle{ href: "#", data: { target: "#account-dropdown" }}
-            dkotowski@enova.com
-            %i.fa.fa-caret-down
-            %i.fa.fa-caret-up
-          .dropdown-panel.hidden#account-dropdown
-            Test
+      .topbar-links.right
+        %ul
+          %li
+            %a.dropdown-toggle{ href: "#", data: { target: "#app-dropdown" }}
+              %i.fa.fa-th
+            .dropdown-panel.hidden.center#app-dropdown
+              Apps will go here
+          %li
+            %a.dropdown-toggle{ href: "#", data: { target: "#account-dropdown" }}
+              dkotowski@enova.com
+              %i.fa.fa-caret-down
+              %i.fa.fa-caret-up
+            .dropdown-panel.hidden.right#account-dropdown
+              Account dropdown will go here
       %a.brand{alt: "Enova", href: "#"}
       %form#search-form.search-form
         .search-box><
@@ -37,11 +40,26 @@
           %button.dropdown-toggle{ type: :button, data: { target: "#search-dropdown" }}
             %i.fa.fa-caret-down
             %i.fa.fa-caret-up
-          .dropdown-panel.hidden#search-dropdown Test
+          .dropdown-panel.hidden#search-dropdown Advanced Search will go here
         %button.primary-button{type: :submit}
           %i.fa.fa-search
     %section.main-pane
       .topbar
+        .topbar-links
+          %ul
+            %li
+              %button.dropdown-toggle{ data: { target: "#selection-dropdown" }}
+                %i.fa.fa-square-o
+              .dropdown-panel.hidden#selection-dropdown More options here
+            %li
+              %button#refresh
+                %i.fa.fa-refresh
+            %li
+              %button.dropdown-toggle{ data: { target: "#message-options-dropdown" }}
+                More
+                %i.fa.fa-caret-down
+                %i.fa.fa-caret-up
+              .dropdown-panel.hidden#message-options-dropdown More options here
       .message-list
         - messages.each_with_index do |message, index|
           %article.message#message{ id: index, class: message[:new?] ? "new" : nil }

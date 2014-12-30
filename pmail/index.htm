@@ -9,36 +9,65 @@
   </head>
   <body>
     <section class='topbar topbar-primary'>
-      <ul class='topbar-links right'>
-        <li>
-          <a href='#'>
-            <i class='fa fa-th'></i>
-          </a>
-        </li>
-        <li>
-          <a class='dropdown-toggle' data-target='#account-dropdown' href='#'>
-            dkotowski@enova.com
-            <i class='fa fa-caret-down'></i>
-            <i class='fa fa-caret-up'></i>
-          </a>
-          <div class='dropdown-panel hidden' id='account-dropdown'>
-            Test
-          </div>
-        </li>
-      </ul>
+      <div class='topbar-links right'>
+        <ul>
+          <li>
+            <a class='dropdown-toggle' data-target='#app-dropdown' href='#'>
+              <i class='fa fa-th'></i>
+            </a>
+            <div class='dropdown-panel hidden center' id='app-dropdown'>
+              Apps will go here
+            </div>
+          </li>
+          <li>
+            <a class='dropdown-toggle' data-target='#account-dropdown' href='#'>
+              dkotowski@enova.com
+              <i class='fa fa-caret-down'></i>
+              <i class='fa fa-caret-up'></i>
+            </a>
+            <div class='dropdown-panel hidden right' id='account-dropdown'>
+              Account dropdown will go here
+            </div>
+          </li>
+        </ul>
+      </div>
       <a alt='Enova' class='brand' href='#'></a>
       <form class='search-form' id='search-form'><div class='search-box'><input type='search'>
         <button class='dropdown-toggle' data-target='#search-dropdown' type='button'>
           <i class='fa fa-caret-down'></i>
           <i class='fa fa-caret-up'></i>
         </button>
-        <div class='dropdown-panel hidden' id='search-dropdown'>Test</div></div><button class='primary-button' type='submit'>
+        <div class='dropdown-panel hidden' id='search-dropdown'>Advanced Search will go here</div></div><button class='primary-button' type='submit'>
           <i class='fa fa-search'></i>
         </button>
       </form>
     </section>
     <section class='main-pane'>
-      <div class='topbar'></div>
+      <div class='topbar'>
+        <div class='topbar-links'>
+          <ul>
+            <li>
+              <button class='dropdown-toggle' data-target='#selection-dropdown'>
+                <i class='fa fa-square-o'></i>
+              </button>
+              <div class='dropdown-panel hidden' id='selection-dropdown'>More options here</div>
+            </li>
+            <li>
+              <button id='refresh'>
+                <i class='fa fa-refresh'></i>
+              </button>
+            </li>
+            <li>
+              <button class='dropdown-toggle' data-target='#message-options-dropdown'>
+                More
+                <i class='fa fa-caret-down'></i>
+                <i class='fa fa-caret-up'></i>
+              </button>
+              <div class='dropdown-panel hidden' id='message-options-dropdown'>More options here</div>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div class='message-list'>
         <article class='message new' id='message_0'>
           <div class='message-actions'><input id='selected_message_0' name='selected_message' type='checkbox' value='0'><label for='selected_message_0'>

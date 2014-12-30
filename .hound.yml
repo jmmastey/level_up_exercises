@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - pmail/*
     - style_guide/*.rb
     
 # C: Missing top-level module documentation comment.

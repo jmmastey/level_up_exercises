@@ -12,32 +12,32 @@ class DinoDexCommandLine
   
   def get_input
     puts "\nEnter command (type \"help\" for command documentation"\
-    " or \"exit\" to quit): \n"
+    " or a blank line to quit): \n"
     user_input = gets.chomp.strip.downcase.split
     process_input_length(user_input)
   end
 
   def process_input_length(user_input)
+
     case
-      when user_input.length == 0 then invalid_command
+      when user_input.length == 0 then exit
       when user_input.length == 1 then process_single_command(user_input[0])
-      else process_multiple_inputs(user_input)
+      else process_filtering(user_input)
     end
   end
 
   def process_single_command(user_input)
-    case user_input
-      when "all_dinos" then print_all_dinos
-      when "help" then print_help_menu
-      when "exit" then exit
-      when *@dino_dex.to_a then print_all_dino_facts(user_input)
-      when "filter" then puts "ERROR: Please specify at least one filter. "\
-        "To see a list of all dinos, enter \"all_dinos\""\
-      else invalid_command
+
+    if ["print_all_dinos", "print_help_menu"].include?(user_input)
+      send(user_input)
+    elsif @dino_dex.to_a.include?(user_input)
+      print_all_dino_facts(user_input)
+    else
+      invalid_command
     end
   end
 
-  def process_multiple_inputs(user_inputs)
+  def process_filtering(user_inputs)
     if user_inputs[0] != "filter"
       invalid_command
     else

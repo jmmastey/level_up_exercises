@@ -1,12 +1,10 @@
-require_relative 'dino_filter'
 require_relative 'dino_csv_tools'
 include DinoCSVTools
-include DinoFilter
 class DinoDex
   attr_reader :dinosaurs
   PERIODS = %w( jurassic albian cretaceous triassic permian oxfordian )
   ATTRIBUTES = %w( fat small biped quadruped carnivore herbivore )
-  COLLETIONS = %w( joe pirate_bay )
+  COLLECTIONS = %w( joe pirate_bay )
   CONTINENTS = %w( north_america south_america africa europe asia )
 
   def initialize(csvs)
@@ -51,7 +49,7 @@ class DinoDex
   end
 
   def collection_filter(dinos, filter)
-    if filter == "pirate_bay" then filter_by_continent(dinos, "africa")
+    if filter == "pirate_bay" then continent_filter(dinos, "africa")
     else dinos.select { |dino| dino.continent != "africa" }
     end
   end

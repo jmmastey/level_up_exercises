@@ -1,15 +1,13 @@
 Welcome to the DinoDex!
 
 All commands are case insensitive.  Please enter only one command at a time.
+To exit the DinoDex, enter a blank line.
 The following commands are available:
 
-$		all_dinos						
+$		print_all_dinos						
 Prints a list of all dinos in the DinoDex
 
-$		exit
-Exits the DinoDex
-
-$		help
+$		print_help_menu
 Prints this help screen
 
 $		filter [filter1] [filter2] ... 	

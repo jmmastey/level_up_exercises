@@ -14,6 +14,12 @@ module DinoFilterTools
 	COLLECTIONS = %w( joe pirate_bay )
 	CONTINENTS = %w( north_america south_america africa europe asia )
 
-	def filter_dinos
+	def validate_filters
+		FILTER_GROUPS.each do |filter_group|
+		if (filter_group & filters).length > 1
+        puts "Invalid filter chaining.  Enter \"help\" for more information."
+      end
+    end
+	end
   
 end

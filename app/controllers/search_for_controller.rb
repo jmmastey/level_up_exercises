@@ -4,12 +4,12 @@ class SearchForController < ApplicationController
     name = SearchForController.convert_artist_name_for_search(params[:search_query])
     artist = RetrieveArtist.new(name)
     return artist_not_found unless artist.record_exist?
-    if artist.new_record?
-      artist.update_record
-      flash[:success] = "The artist was successfully created."
+    if artist.existing_record?
+      flash[:notice] = "The artist already exists."
       redirect_to artists_path
     else
-      flash[:notice] = "The artist already exists."
+      artist.update_record
+      flash[:success] = "The artist was successfully created."
       redirect_to artists_path
     end
   end

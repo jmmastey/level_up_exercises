@@ -9,6 +9,8 @@ class RetrieveArtworks
     build_artworks unless artwork_collection.empty?
   end
 
+  private
+
   def build_artworks
     artwork_collection.each do |artwork|
       create_new_artwork(artwork)

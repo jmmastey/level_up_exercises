@@ -10,20 +10,16 @@ class RetrieveArtist
   end
 
   def update_record
-    if new_record?
+    if existing_record?
+      update_artist
+    else
       create_new_artist
       create_artworks
-    else
-      update_artist
     end
   end
 
-  def new_record?
-    if artist
-      false
-    else
-      true
-    end
+  def existing_record?
+    artist
   end
 
   def record_exist?

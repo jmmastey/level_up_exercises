@@ -3,19 +3,19 @@ require_relative '../models/event_helper'
 
 RSpec.describe ShowingsHelper, :type => :helper do
 
-  let(:no_showings) { create_event('Party', 'Everywhere', "www.link.com").showings }
+  let(:no_showings) { create(:event).showings }
 
   let(:one_time) { [DateTime.parse('20141001T190000')] }
-  let(:one_showing) { create_event('Party', 'Everywhere', "www.link.com", one_time).showings }
+  let(:one_showing) { create(:event, times: one_time).showings }
 
   let(:one_day_times) { [ DateTime.parse('20141001T190000'),
                           DateTime.parse('20141001T210000')] }
-  let(:one_day_showings) { create_event('Party', 'Everywhere', "www.link.com", one_day_times).showings }
+  let(:one_day_showings) { create(:event, times: one_day_times).showings }
 
   let(:multi_day_times) { [DateTime.parse('20141001T190000'), 
                            DateTime.parse('20141002T190000'), 
                            DateTime.parse('20141003T190000')] }
-  let(:multi_day_showings) { create_event('Party', 'Everywhere', "www.link.com", multi_day_times).showings }
+  let(:multi_day_showings) { create(:event, times: multi_day_times).showings }
 
   let(:model_event) { one_showing.event }
 

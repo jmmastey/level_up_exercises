@@ -2,11 +2,9 @@ require 'rails_helper'
 require 'models/event_helper'
 
 describe Event, :type => :model do
-  let(:event) { create_event('Party', 'Everywhere', 'www.link.com') }
+  let(:event) { create(:event) }
   let(:multiple_events) do
-    create_event('Party-B', 'Everywhere', 'www.link.com')
-    create_event('Party-C', 'Everywhere', 'www.link.com')
-    create_event('Party-A', 'Everywhere', 'www.link.com')
+    ['A', 'B', 'C'].each { |label| create(:event, name: "Party-#{label}") }
   end
 
   it 'responds to name' do

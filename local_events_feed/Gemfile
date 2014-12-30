@@ -42,6 +42,8 @@ gem 'bcrypt-ruby', '3.1.2'
 gem 'icalendar', '~> 2.2.0'
 gem 'whenever'
 gem 'nokogiri'
+gem "factory_girl", "~> 4.0"
+gem "factory_girl_rails", "~> 4.0"
 
 group :development, :test do
   gem 'rspec-rails'

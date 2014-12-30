@@ -2,13 +2,12 @@ require 'rails_helper'
 require_relative 'event_helper'
 
 describe Showing, :type => :model do
-  let(:event) { create_event("Party A", "North Side", "www.link.com") }
-  let(:showing) { event.showings.create(time: DateTime.parse("20141001T093000-0500")) }
+  let(:event) { create(:event) }
+  let(:showing) { event.showings.create(time: Time.now) }
 
   let(:showing_times) { [DateTime.parse('20141003'), DateTime.parse('20141001'), DateTime.parse('20141002')] }
-  let(:event_with_showings) { create_event('Party', 'Everywhere', "www.link.com", showing_times) }
-  let(:showings) { event_with_showings.showings }
-  let(:sorted_showings) { showings.sorted }
+  let(:event_with_showings) { create(:event, times: showing_times) }
+  let(:sorted_showings) { event_with_showings.showings.sorted }
   let(:destroy_event) { Event.delete(Event.all) }
 
   it "responds to time" do
@@ -43,7 +42,7 @@ describe Showing, :type => :model do
     expect(showing).to respond_to(:description)
   end
 
-  it "sorts a list of showings old" do
+  it "sorts a list of showings" do
     expect(sorted_showings[0].time.day).to eq(1)
     expect(sorted_showings[1].time.day).to eq(2)
     expect(sorted_showings[2].time.day).to eq(3)

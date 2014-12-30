@@ -14,20 +14,14 @@ def user_signs_in
 end
 
 def create_events
-  create_event("Party A", "North Side", "www.party.com/party-a.html", [eight_oclock, nine_oclock, ten_oclock])
-  create_event("Party B", "South Side", "www.party.com/party-b.html", [eight_oclock])
-  create_event("Party C", "East Side", "www.party.com/party-c.html", [nine_oclock, ten_oclock])
+  create(:event, name: "Party A", times: [eight_oclock, nine_oclock, ten_oclock])
+  create(:event, name: "Party B", times: [eight_oclock])
+  create(:event, name: "Party C", times: [nine_oclock, ten_oclock])
 end
 
 def create_more_events
-  create_event("Party D", "North Side", "www.party.com/party-d.html", [nine_oclock])
-  create_event("Party E", "South Side", "www.party.com/party-e.html")
-end
-
-def create_event(name, location, link, showing_times = [])
-  event = Event.create(name: name, location: location, link: link)
-  showing_times.each { |time| event.showings.create(time: time) }
-  event
+  create(:event, name: "Party D", times: [nine_oclock])
+  create(:event, name: "Party E")
 end
 
 def user_events

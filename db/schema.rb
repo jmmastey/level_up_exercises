@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141231164253) do
+ActiveRecord::Schema.define(version: 20141231211250) do
 
   create_table "artists", force: true do |t|
     t.string   "first_name"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 20141231164253) do
   end
 
   add_index "artworks", ["artist_id"], name: "index_artworks_on_artist_id"
+
+  create_table "favorites", force: true do |t|
+    t.integer  "artist_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "favorites", ["artist_id"], name: "index_favorites_on_artist_id"
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",              default: "",    null: false

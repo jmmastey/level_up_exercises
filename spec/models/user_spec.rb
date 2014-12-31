@@ -56,5 +56,19 @@ RSpec.describe User, :type => :model do
       it { should validate_uniqueness_of(:email) }
       it { should validate_presence_of(:password) }
     end
+
+    describe "associations" do
+      let(:user) { create(:user) }
+      let(:artist) { create(:artist) }
+
+      it "has favorite artists" do
+        user.favorite_artists << artist
+
+        expect(user.favorite_artists.size).to eq(1)
+      end
+
+      it { should have_many(:favorites) }
+      it { should have_many(:favorite_artists) }
+    end
   end
 end

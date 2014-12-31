@@ -7,5 +7,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @favorite_artists = @user.favorite_artists
   end
 end

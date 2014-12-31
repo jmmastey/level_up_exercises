@@ -7,6 +7,15 @@
 
     <p>Account Type: <%= account_type %></p>
 
+    <% if @favorite_artists.any? %>
+      <h2>My Favorite Artists:</h2>
+      <ul class="artist-list">
+        <% @favorite_artists.each do |artist| %>
+            <li><%= link_to artist.full_name, artist %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
     <% if current_user? %>
       <p><%= link_to "Edit Account", edit_user_registration_path %> |
       <%= link_to "Delete Account", user_registration_path, method: :delete, data: { confirm: "Are you sure you want to delete your account?"} %></p>

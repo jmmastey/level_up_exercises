@@ -1,5 +1,4 @@
 Feature: View item detail for each item in cart
-
 	As a shopper
 	I want to be able to view an items product page from the cart
 	So that I can review an items details before carrying out a purchase

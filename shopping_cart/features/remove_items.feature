@@ -1,5 +1,4 @@
-Feature: Add item to cart
-
+Feature: Remove item from cart
 	As a shopper
 	I want to be able to remove items from my shopping cart
 	So I can purchase only the items I want
@@ -16,7 +15,7 @@ Feature: Add item to cart
 
 	Scenario: I Remove all item from cart with multiple items
 		When I remove all items from the cart
-		Then I should see not see "item_1" or "item_2" in the cart
+		Then I should not see "item_1" or "item_2" in the cart
 		And the total quantity should be 0
 		And the subtotal should $0.00
 

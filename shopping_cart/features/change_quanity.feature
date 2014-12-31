@@ -1,7 +1,7 @@
 Feature: Change Item Quantities
-
 	As a shopper
 	I want to be able to change the quantities of the items I add to my cart
+	So that I can buy only what I want
 
 	Scenario: Increase item quantity by 1
 		Given a cart with 1 car at $10.00

@@ -1,0 +1,21 @@
+<h1>Create a bomb!</h1>
+
+<form action="/" method="post">
+	<div>
+	    <label>Set an Activation Code
+	        <input type="text" name="bomb[create_activation_code]" id="create_activation_code" />
+	    </label>
+    </div>
+    <div>
+	    <label>Set a Deactivation Code
+	        <input type="text" name="bomb[create_deactivation_code]" id="create_deactivation_code" />
+		</label>
+	</div>
+    <div>
+	    <label>Set a fuse
+	        <input type="number" min="1" name="bomb[fuse]" id="create_fuse" />
+		</label>
+	</div>
+
+    <input type="submit" value="Create!">
+</form>

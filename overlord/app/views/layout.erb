@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>OVERLORD</title>
+</head>
+<body>
+
+    <center class="container">
+
+		<% if flash.has?(:notice) %>
+		  <h3 class="notice"><%= flash[:notice] %></h3>
+		<% end %>
+
+        <%= yield %>
+    </center>
+</body>
+</html>

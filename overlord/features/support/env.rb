@@ -1,7 +1,7 @@
 ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', '..', 'app/overlord.rb')
-Dir[File.dirname(__FILE__) + '/helpers/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/helpers/*.rb'].each { |file| require file }
 
 require 'capybara'
 require 'capybara/cucumber'
@@ -14,7 +14,7 @@ class OverlordWorld
   include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers
-  include Form_fill_helpers
+  include FormFillHelpers
 end
 
 World do

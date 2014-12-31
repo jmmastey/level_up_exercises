@@ -1,4 +1,5 @@
-Given(/^a bomb has been created with (\d+), (\d+), (\d+) as inputs$/) do |arg1, arg2, arg3|  visit('/')
+Given(/^a bomb has been created with (\d+), (\d+), (\d+) as inputs$/) do |arg1, arg2, arg3|
+  visit('/')
   create_bomb(create_activation_code: arg1,
               create_deactivation_code: arg2,
               create_fuse: arg3)

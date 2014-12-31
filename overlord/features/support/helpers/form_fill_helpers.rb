@@ -1,4 +1,4 @@
-module Form_fill_helpers
+module FormFillHelpers
   # Coming soon (maybe): FactoryGirl Bombs!
 
   def create_bomb(args = {})

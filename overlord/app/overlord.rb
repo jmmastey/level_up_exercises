@@ -1,13 +1,13 @@
 require 'sinatra/base'
 require 'rubygems'
 require File.dirname(__FILE__) + '/../vendor/bundle/ruby/2.0.0/gems/rack-flash3-1.0.5/lib/rack-flash'
-# require 'rack-flash' # why isn't this working??
+# require 'rack-flash3' # why isn't this working??
 
 require_relative "models/bomb"
 
 class Overlord < Sinatra::Base
   enable :sessions
-  use Rack::Flash, :sweep => true
+  use Rack::Flash, sweep: true
 
   before '/bomb/*' do
     redirect "/" unless session[:bomb]
@@ -50,8 +50,8 @@ class Overlord < Sinatra::Base
     @bomb = bomb
     @bomb.deactivate(params[:deactivation_code])
     if @bomb.active?
-      flash[:notice] = "Incorrect code - ur still gonna blow!" + "<br>" +
-                       "Incorrect Attempts: #{@bomb.deactivation_attempts}"
+      flash[:notice] = "Incorrect code - ur still gonna blow! <br> \
+                       Incorrect Attempts: #{@bomb.deactivation_attempts}"
       redirect "/bomb/active"
     else
       flash[:notice] = "Bomb has been deactivated"

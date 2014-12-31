@@ -12,7 +12,7 @@ end
 
 # This might be a flapping test
 When(/^I create a bomb with no activation or deactivation code$/) do
-  create_bomb()
+  create_bomb
 end
 
 When(/^I create a bomb with only an activation code$/) do

@@ -1,3 +1,4 @@
+require('abanalyzer')
 class Cohort
   attr_accessor :name, :pageviews
 
@@ -17,5 +18,11 @@ class Cohort
   def size
     pageviews.size
   end
+
+  def confidence_interval
+    ABAnalyzer.confidence_interval(conversions, size, confidence)
+  end
+
+
 
 end

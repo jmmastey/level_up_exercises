@@ -6,7 +6,7 @@ class Overlord < Sinatra::Base
 
   before '/bomb/*' do
     @bomb = bomb(params[:bomb])
-    redirect "/exploded" if bomb.bomb_exploded?
+    redirect "/exploded" if bomb.exploded?
   end
 
   get '/' do

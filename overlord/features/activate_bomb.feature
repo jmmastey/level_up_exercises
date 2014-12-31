@@ -5,7 +5,7 @@ Feature: villain activates bomb
     So that I can have it explode
 
     Background:
-        Given a bomb has been created
+        Given a bomb has been created with 1234, 4321, 5 as inputs
         And I'm on the inactive bomb page
 
     Scenario Outline: activating bomb
@@ -19,29 +19,3 @@ Feature: villain activates bomb
         |  " "      |  "Incorrect code - bomb not active" |
         |  999      |  "Incorrect code - bomb not active" |
         |  "@#^#@#" |  "Incorrect code - bomb not active" |
-
-
-# ==========================================================
-# The outline above should replace the code below. 
-# I left the scenarios below as a precation. Delete them
-# ==========================================================
-
-    Scenario: Activate Bomb
-        When I activate a bomb with a correct numeric code
-        Then I expect to be warned that the bomb is active
-
-    Scenario: Activate Bomb
-        When I activate a bomb with a correct string code
-        Then I expect to be warned that the bomb is active
-
-    Scenario: Activate Bomb
-        When I activate a bomb with an incorrect code
-        Then I expect to be warned that the bomb is not active
-
-    Scenario: Activate Bomb
-        When I activate a bomb with non-alphanumeric codes
-        Then I expect to be warned that the bomb is not active
-    
-    Scenario: Activate bomb with no code 
-        When I activate a bomb with no code
-        Then I expect to be warned that the bomb is not active

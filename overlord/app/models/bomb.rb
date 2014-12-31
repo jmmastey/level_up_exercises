@@ -1,17 +1,18 @@
 class Bomb
-  attr_reader :activation_code, :deactivation_code, :timer
+  attr_reader :activation_code, :deactivation_code, :timer, :fuse
   attr_accessor :status, :deactivation_attempts, :messages
 
   ACTIVE = "ACTIVE"
   INACTIVE = "Inactive"
-  BOMB_TIME = 7
 
-  DEFAULT_ACTIVATE = 1234
-  DEFAULT_DEACTIVATE = 1234
+  DEFAULT_ACTIVATE = "1234"
+  DEFAULT_DEACTIVATE = "1234"
+  DEFAULT_FUSE = 7
 
   def initialize(args)
     @activation_code = activation_check(args[:create_activation_code])
     @deactivation_code = deactivation_check(args[:create_deactivation_code])
+    @fuse = fuse_check(args[:fuse])
     @status = INACTIVE
     @deactivation_attempts = 0
   end
@@ -36,6 +37,12 @@ class Bomb
     @status == ACTIVE
   end
 
+  def exploded?
+    too_many_deactivation_attempts? || timer_ended?
+  end
+
+  private
+
   def start_timer
     @timer = Time.now
   end
@@ -45,24 +52,22 @@ class Bomb
   end
 
   def timer_ended?
-    !timer.nil? && (Time.now >= timer + BOMB_TIME)
+    timer && (Time.now >= timer + fuse)
   end
 
   def too_many_deactivation_attempts?
     deactivation_attempts >= 3
   end
 
-  def bomb_exploded?
-    too_many_deactivation_attempts? || timer_ended?
-  end
-
-  private
-
   def activation_check(args)
-    args.empty? ? DEFAULT_ACTIVATE : args
+    args.empty? ? DEFAULT_ACTIVATE : args.to_s
   end
 
   def deactivation_check(args)
-    args.empty? ? DEFAULT_DEACTIVATE : args
+    args.empty? ? DEFAULT_DEACTIVATE : args.to_s
+  end
+
+  def fuse_check(args)
+    args.empty? ? DEFAULT_FUSE : args.to_i
   end
 end

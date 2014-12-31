@@ -3,6 +3,7 @@ require "./config/environment"
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods # Mohammad Addition
+  config.include FactoryGirl::Syntax::Methods # Mohammad Addition
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

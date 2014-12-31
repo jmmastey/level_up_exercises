@@ -1,30 +1,23 @@
 Given(/^a bomb has been activated$/) do
   visit('/')
-  fill_in("create_activation_code", with: 1234)
-  fill_in("create_deactivation_code", with: 0000)
-  click_button('Create!')
-  fill_in "activation_code", with: 1234
-  click_button('Activate!')
-  # expect(current_path).to eq("/bomb/active")
+  create_bomb(create_activation_code: 1111,
+              create_deactivation_code: 2222,
+              create_fuse: 10)
+  activate_bomb(activation_code: 1111)
 end
 
 When(/^I deactivate the bomb$/) do
-  fill_in "deactivation_code", with: 0000
-  click_button('Deactivate!')
-  # expect(current_path).to eq("/bomb/inactive")
+  deactivate_bomb(deactivation_code: 2222)
 end
 
 Then(/^I should be able to reactivate the bomb$/) do
-  fill_in "activation_code", with: 1234
-  click_button('Activate!')
+  activate_bomb(activation_code: 1111)
   expect(current_path).to eq("/bomb/active")
   expect(page).to have_content("Bomb Status: ACTIVE")
 end
 
 When(/^I try to deactivate the bomb incorrectly$/) do
-  fill_in "deactivation_code", with: "wrong"
-  click_button('Deactivate!')
-  # expect(current_path).to eq("/bomb/active")
+  deactivate_bomb(deactivation_code: "wrong")
 end
 
 Then(/^I should be warned that my activation code is incorrect$/) do

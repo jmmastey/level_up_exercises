@@ -1,0 +1,123 @@
+body {
+  background-color: white;
+  margin: 0px;
+}
+
+div,article,p,section,hgroup,header {
+  border: 1px dotted gray;
+}
+
+h1,h2 {
+  padding: 0px;
+  margin: 0px;
+}
+
+.sidebar {
+  width: 250px;
+  padding-left: 8px;
+}
+
+#PageHeader {
+  width: 100%;
+  background-color: #eeeeee;
+  height: 60px;
+}
+
+#TitleHeader {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 250px;
+  height: 60px;
+}
+
+#MailSearch {
+  position: absolute;
+  top: 0px;
+  left: 270px;
+  right: 300px;
+  height: 60px;
+}
+
+#MailSearch > form {
+  height: 30px;
+  top: 50%;
+  margin-top: -15px;
+}
+
+#AccountControl {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 300px;
+  height: 60px;
+}
+
+/* MODULES */
+
+.sidebar-left {
+  width: 300px;
+}
+
+.dropdownbutton-content {
+  position: absolute;
+  display: inline-block;
+  z-index: 2;
+}
+
+.titleheader { text-align: center; }
+.titleheader h1 { font-size: 25px; }
+.titleheader h2 { font-size: 15px; }
+
+/* WIDGETS */
+
+.accountinfo {
+  width: 200px;
+}
+
+.mailsearch-form {
+  width: 100%;
+  position: relative;
+  border: 1px dotted red;
+}
+
+.mailsearch-textfield {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 100px;
+}
+
+.mailsearch-textfield > input {
+  width: 100%;
+}
+
+.mailsearch-submit {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100px;
+  border: 1px dotted red;
+}
+
+.control {
+  position: relative;
+  display: inline-block;
+  height: 40px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.control > *:first-child {
+  height: 100%;
+}
+
+/* STATES */
+
+.collapsed {
+  visibility: hidden;
+  height: 0px;
+}
+
+
+

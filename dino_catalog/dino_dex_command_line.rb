@@ -1,10 +1,16 @@
 class DinoDexCommandLine
+
+#  COMMANDS = { "print_all_dinos": :print_all_dinos,
+#    "print_help_menu": :print_help_menu
+
+
+#  }
   def initialize(joes_csv, pirate_bay_csv)
     @dino_dex = DinoDex.new([joes_csv, pirate_bay_csv])
     @help_doc = File.read("dino_rules.txt")
     puts "\nWelcome to the DinoDex!\n\n"\
-    "Available comands:  \nall_dinos \nexit \nhelp \n[dino_name]"\
-    " \nfilter [filter1] [filter2] ..."
+    "Available comands: \nexit \nprint_all_dinos \nprint_help_menu"\
+    "\n[dino_name] \nfilter [filter1] [filter2] ..."
     get_input while true
   end
   
@@ -14,20 +20,19 @@ class DinoDexCommandLine
     puts "\nEnter command (type \"help\" for command documentation"\
     " or a blank line to quit): \n"
     user_input = gets.chomp.strip.downcase.split
-    process_input_length(user_input)
+    process_input(user_input)
   end
 
-  def process_input_length(user_input)
-
-    case
-      when user_input.length == 0 then exit
-      when user_input.length == 1 then process_single_command(user_input[0])
-      else process_filtering(user_input)
+  def process_input(user_input)
+      exit unless user_input.length > 0
+      if user_input.length == 1
+        process_single_command(user_input[0])
+      else 
+        process_filtering(user_input)
     end
   end
 
   def process_single_command(user_input)
-
     if ["print_all_dinos", "print_help_menu"].include?(user_input)
       send(user_input)
     elsif @dino_dex.to_a.include?(user_input)
@@ -50,7 +55,6 @@ class DinoDexCommandLine
   end
 
   def print_all_dinos
-    puts "\nLIST OF ALL DINOS:\n"
     puts @dino_dex.to_a
   end
 

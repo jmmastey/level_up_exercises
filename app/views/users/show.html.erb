@@ -9,11 +9,12 @@
 
     <% if @favorite_artists.any? %>
       <h2>My Favorite Artists:</h2>
-      <ul class="artist-list">
+      <section class="artist-list">
         <% @favorite_artists.each do |artist| %>
-            <li><%= link_to artist.full_name, artist %></li>
+            <h3><%= link_to artist.full_name, artist %></h3>
+            <%= sample_artwork_image(artist) %>
         <% end %>
-      </ul>
+      </section>
     <% end %>
 
     <% if current_user? %>

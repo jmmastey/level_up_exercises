@@ -11,4 +11,10 @@ module UsersHelper
       "Basic"
     end
   end
+
+  def sample_artwork_image(artist)
+    if artist.artworks.any?
+      image_tag(artist.artworks.first.thumbnail)
+    end
+  end
 end

@@ -11,6 +11,10 @@ Feature: Artists Page
   Scenario: View the index of artists
     Then I should see all the artists
 
+  Scenario: View the index of artists
+    Given I am on a page for an artist
+    Then I should see a thumbnail image
+
   Scenario: View an individual artist
     When I click on Claude Monet
     Then I should be on the artist page for Monet
@@ -38,16 +42,3 @@ Feature: Artists Page
     When I delete the artist: Claude Monet
     Then I should not see Claude Monet on the Artists page
     And I should see a message confirming the artist was deleted
-
-  Scenario: Add a new artist from API
-    When I manually add an artist
-    Then I should see a message confirming the artist was created
-    And the artist should have associated artworks
-
-  Scenario: Add an existing artist from API
-    When I manually add an existing artist
-    Then I should see a message stating the artist exists
-
-  Scenario: Add an artist from API that does not exist
-    When I manually add a non-existent artist
-    Then I should see a message stating the artist does not exist

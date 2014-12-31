@@ -1,9 +1,11 @@
 <article class="type-system-rounded">
   <p class="type"><%= @user.class %></p>
   <header>
-    <h1>Your Account</h1>
+    <h1>User Profile</h1>
   </header>
     <p>Email: <%= @user.email %></p>
+
+    <p>Account Type: <%= account_type %></p>
 
     <% if current_user? %>
       <p><%= link_to "Edit Account", edit_user_registration_path %> |

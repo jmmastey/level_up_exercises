@@ -1,7 +1,7 @@
 <section class="main-content type-system-rounded">
   <p class="right-aligned-link"><%= link_to "Create a New Artist", new_artist_path %></p>
 
-  <% if current_user %>
+  <% if current_user_admin? %>
     <div class="right-aligned-search">
       <%= form_tag(search_for_artist_path, method: "get") do %>
         <ol>

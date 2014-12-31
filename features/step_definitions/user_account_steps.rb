@@ -20,6 +20,14 @@ Given(/^I am logged in$/) do
   click_button("Log in")
 end
 
+Given(/^I am an admin$/) do
+  user = create(:user, email: "admin@example.com", password: "secret", admin: true)
+  visit new_user_session_path
+  fill_in("Email", with: "admin@example.com")
+  fill_in("Password", with: "secret")
+  click_button("Log in")
+end
+
 When(/^I signup as a user$/) do
   visit root_path
   click_link("Sign up")
@@ -58,7 +66,7 @@ When(/^I delete a user$/) do
 end
 
 Then(/^I should be on my user page$/) do
-  expect(page).to have_selector('h1', text: "Your Account")
+  expect(page).to have_selector('h1', text: "User Profile")
   expect(page).to have_content("user@example.com")
 end
 
@@ -85,7 +93,7 @@ Then(/^I should see all the users$/) do
 end
 
 Then(/^I should see the user's information$/) do
-  expect(page).to have_selector('h1', text: "Your Account")
+  expect(page).to have_selector('h1', text: "User Profile")
   expect(page).to have_selector('p', text: "user1@example.com")
 end
 

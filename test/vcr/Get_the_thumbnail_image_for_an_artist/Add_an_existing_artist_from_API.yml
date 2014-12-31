@@ -1,0 +1,748 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.artsy.net/api
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/vnd.artsy-v2+json
+      X-Xapp-Token:
+      - JvTPWe4WsQO-xqX6Bts49jiOpRNLY4AZe8oTj7EwHWopdD0uddCEwumjpTi-btEykT1GRijM-j5w0CJAZNXWZecCBhSsrD3kC0v4J9o8F4e76Qt6_ydSvFaBLoQ_8K7M6S4Sj0ybe34_WE10dK64oitlCVDJ2PCEaPxQSoQiI1jOcGVT7MSNlc-0jPKOrF5kMLsW7uvaelUq7y0gzcSVbg4KP7wwokULfYFxbcVXdXs=
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 31 Dec 2014 18:15:02 GMT
+      Etag:
+      - '"8d485dd29e0ece06db8ce4b8e93b8269"'
+      Expires:
+      - 1970-01-01 00:00:00 UTC
+      Server:
+      - nginx/1.4.7
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - DENY
+      X-Request-Id:
+      - e14b9b09-5592-4c99-88fe-32457faf04d9
+      X-Robots-Tag:
+      - noindex
+      X-Runtime:
+      - '0.016979'
+      Content-Length:
+      - '381'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"https://api.artsy.net/api/"},"docs":{"href":"https://api.artsy.net/api/docs"},"status":{"href":"https://api.artsy.net/api/status"},"search":{"href":"https://api.artsy.net/api/search{?q}","templated":true},"current_user":{"href":"https://api.artsy.net/api/current_user"},"artists":{"href":"https://api.artsy.net/api/artists{?artwork_id,similar_to_artist_id,similarity_type}","templated":true},"artist":{"href":"https://api.artsy.net/api/artists/{id}","templated":true},"users":{"href":"https://api.artsy.net/api/users"},"user":{"href":"https://api.artsy.net/api/users/{id}","templated":true},"profiles":{"href":"https://api.artsy.net/api/profiles"},"profile":{"href":"https://api.artsy.net/api/profiles/{id}","templated":true},"collections":{"href":"https://api.artsy.net/api/collections{?user_id,private}","templated":true},"collection":{"href":"https://api.artsy.net/api/collections/{id}","templated":true},"collection_items":{"href":"https://api.artsy.net/api/collection_items{?user_id,collection_id}","templated":true},"collection_item":{"href":"https://api.artsy.net/api/collection_items/{id}","templated":true},"applications":{"href":"https://api.artsy.net/api/applications"},"application":{"href":"https://api.artsy.net/api/applications/{id}","templated":true},"genes":{"href":"https://api.artsy.net/api/genes{?artist_id,artwork_id}","templated":true},"gene":{"href":"https://api.artsy.net/api/genes/{id}","templated":true},"partners":{"href":"https://api.artsy.net/api/partners"},"partner":{"href":"https://api.artsy.net/api/partners/{id}","templated":true},"shows":{"href":"https://api.artsy.net/api/shows{?partner_id,status}","templated":true},"show":{"href":"https://api.artsy.net/api/shows/{id}","templated":true},"artworks":{"href":"https://api.artsy.net/api/artworks{?artist_id,partner_id,show_id,similar_to_artwork_id,published}","templated":true},"artwork":{"href":"https://api.artsy.net/api/artworks/{id}","templated":true},"edition":{"href":"https://api.artsy.net/api/editions/{id}{?artwork_id}","templated":true},"tokens":{"href":"https://api.artsy.net/api/tokens"}}}'
+    http_version: 
+  recorded_at: Wed, 31 Dec 2014 18:15:01 GMT
+- request:
+    method: get
+    uri: https://api.artsy.net/api/artists/pablo-picasso
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/vnd.artsy-v2+json
+      X-Xapp-Token:
+      - JvTPWe4WsQO-xqX6Bts49jiOpRNLY4AZe8oTj7EwHWopdD0uddCEwumjpTi-btEykT1GRijM-j5w0CJAZNXWZecCBhSsrD3kC0v4J9o8F4e76Qt6_ydSvFaBLoQ_8K7M6S4Sj0ybe34_WE10dK64oitlCVDJ2PCEaPxQSoQiI1jOcGVT7MSNlc-0jPKOrF5kMLsW7uvaelUq7y0gzcSVbg4KP7wwokULfYFxbcVXdXs=
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 31 Dec 2014 18:15:02 GMT
+      Location:
+      - https://api.artsy.net/api/artists/4d8b928b4eb68a1b2c0001f2
+      Server:
+      - nginx/1.4.7
+      Status:
+      - 302 Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - DENY
+      X-Request-Id:
+      - 91eefb3a-cfdc-4fe4-a013-968e7eee2e93
+      X-Robots-Tag:
+      - noindex
+      X-Runtime:
+      - '0.029746'
+      Content-Length:
+      - '108'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"location":{"href":"https://api.artsy.net/api/artists/4d8b928b4eb68a1b2c0001f2"}}}'
+    http_version: 
+  recorded_at: Wed, 31 Dec 2014 18:15:01 GMT
+- request:
+    method: get
+    uri: https://api.artsy.net/api/artists/4d8b928b4eb68a1b2c0001f2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/vnd.artsy-v2+json
+      X-Xapp-Token:
+      - JvTPWe4WsQO-xqX6Bts49jiOpRNLY4AZe8oTj7EwHWopdD0uddCEwumjpTi-btEykT1GRijM-j5w0CJAZNXWZecCBhSsrD3kC0v4J9o8F4e76Qt6_ydSvFaBLoQ_8K7M6S4Sj0ybe34_WE10dK64oitlCVDJ2PCEaPxQSoQiI1jOcGVT7MSNlc-0jPKOrF5kMLsW7uvaelUq7y0gzcSVbg4KP7wwokULfYFxbcVXdXs=
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 31 Dec 2014 18:15:02 GMT
+      Etag:
+      - '"0a98930f6d778b5f1d54a2d1fc62131a"'
+      Expires:
+      - 1970-01-01 00:00:00 UTC
+      Server:
+      - nginx/1.4.7
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - DENY
+      X-Request-Id:
+      - 76f3b501-82d9-4788-898f-60e0f8ef6e9c
+      X-Robots-Tag:
+      - noindex
+      X-Runtime:
+      - '0.018541'
+      Content-Length:
+      - '2537'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6IjRkOGI5MjhiNGViNjhhMWIyYzAwMDFmMiIsImNyZWF0ZWRfYXQi
+        OiIyMDEwLTA4LTAzVDE2OjA5OjMzKzAwOjAwIiwidXBkYXRlZF9hdCI6IjIw
+        MTQtMTItMzFUMTI6MTU6NDArMDA6MDAiLCJuYW1lIjoiUGFibG8gUGljYXNz
+        byIsImdlbmRlciI6Im1hbGUiLCJiaXJ0aGRheSI6IjE4ODEiLCJob21ldG93
+        biI6Ik3DoWxhZ2EsIFNwYWluIiwibG9jYXRpb24iOiJQYXJpcyBhbmQgTW91
+        Z2lucywgRnJhbmNlIiwibmF0aW9uYWxpdHkiOiJTcGFuaXNoIiwic3RhdGVt
+        ZW50IjoiIiwiYmlvZ3JhcGh5IjoiQm9ybiBpbiBNw6FsYWdhLCBTcGFpbiwg
+        aW4gMTg4MSwgUGFibG8gUGljYXNzbyBzaG93ZWQgYW4gZWFybHkgcGFzc2lv
+        biBmb3IgZHJhd2luZy4gSGlzIGZhdGhlciwgYW4gYXJ0IHRlYWNoZXIsIGJl
+        Z2FuIGdpdmluZyBoaW0gbGVzc29ucyBpbiBmaWd1cmUgZHJhd2luZyBhbmQg
+        b2lsIHBhaW50aW5nIGF0IHRoZSBhZ2Ugb2Ygc2V2ZW4uIFBpY2Fzc28gZW5y
+        b2xsZWQgaW4gdGhlIFNjaG9vbCBvZiBGaW5lIEFydHMgaW4gQmFyY2Vsb25h
+        IGFuZCB0aGVuIGF0IE1hZHJpZCwgYnV0IHdpdGhkcmV3IGZyb20gZm9ybWFs
+        IHRyYWluaW5nIGluIDE4OTkgdG8gcmV0dXJuIHRvIEJhcmNlbG9uYSwgd2hl
+        cmUgaGUgd29ya2VkIGFzIGEgZ3JhcGhpYyBhcnRpc3QuIEluIDE5MDAsIFBp
+        Y2Fzc28gbWFkZSBoaXMgZmlyc3QgdmlzaXQgdG8gUGFyaXMsIGFuZCB1bnRp
+        bCAxOTA0LCBoZSBzcGxpdCBoaXMgdGltZSBiZXR3ZWVuIFBhcmlzIGFuZCBC
+        YXJjZWxvbmEuXG5cbkxhdGUgaW4gMTkwMSwgUGljYXNzbyBiZWdhbiBtYWtp
+        bmcgcGFpbnRpbmdzIG9uIHRoZW1lcyBvZiBkZXNvbGF0aW9uIGFuZCBkZXNw
+        YWlyLCBkZXBpY3Rpbmcgc29saXRhcnkgYW5kIG1lbGFuY2hvbHkgZmlndXJl
+        cyBpbiBwYWludGluZ3MgZmxvb2RlZCB3aXRoIGJsdWUuIEluIDE5MDQsIFBp
+        Y2Fzc28gYmVnYW4gaGlzIFJvc2UgUGVyaW9kLCBsaWdodGVuaW5nIGhpcyBw
+        YWxldHRlIGZyb20gdGhlIGRhcmssIG1vb2R5IGJsdWVzIG9mIHRoZSBwcmV2
+        aW91cyB5ZWFycyBpbiBmYXZvciBvZiBiZWlnZSwgcmVkLCBhbmQgcm9zZSB0
+        b25lcy4gQ2FzdGluZyBhc2lkZSB0aGUgbWVsYW5jaG9seSBzdWJqZWN0cyBv
+        ZiB0aGUgQmx1ZSBQZXJpb2QsIFBpY2Fzc28gcGFpbnRlZCBjaXJjdXMgcGVy
+        Zm9ybS0gZXJzLCBoYXJsZXF1aW5zLCBhbmQgY2xvd25zLlxuXG5BZnRlciBt
+        ZWV0aW5nIEdlb3JnZXMgQnJhcXVlIGluIDE5MDcsIFBpY2Fzc28gYW5kIEJy
+        YXF1ZSB3b3JrZWQgY2xvc2VseSB0b2dldGhlciB0byBkZXZlbG9wIEN1Ymlz
+        bS4gQnkgMTkxMCwgdGhleSBoYWQgZGV2ZWxvcGVkIGEgZGlzdGluY3RpdmUg
+        Q3ViaXN0IGlkaW9tLCBmcmFjdHVyaW5nIHRoZWlyIHN1YmplY3RzIGludG8g
+        c21hbGwsIGZhY2V0ZWQgZm9ybXMgYW5kIHdvcmtpbmcgd2l0aCBhIG11dGVk
+        IHBhbGV0dGUuIFJlamVjdGluZyB0aGUgdHJhZGl0aW9uYWwgZGVwaWN0aW9u
+        IG9mIHRocmVlLWRpbWVuc2lvbmFsIG9iamVjdHMgZnJvbSBvbmUgdmlld3Bv
+        aW50LCB0aGV5IGluc3RlYWQgcmVwcmVzZW50ZWQgdGhlIHN1YmplY3QgZnJv
+        bSBhIG11bHRpdHVkZSBvZiBwZXJzcGVjdGl2ZXMuIEluIDE5MTIsIFBpY2Fz
+        c28gYW5kIEJyYXF1ZSBiZWdhbiBleHBlcmltZW50aW5nIHdpdGggY29sbGFn
+        ZSBhbmQgcGFwaWVyIGNvbGzDqSwgaW50cm9kdWNpbmcgcmVhbCBlbGVtZW50
+        cywgc3VjaCBhcyBuZXdzcHJpbnQsIGFydGlmaWNpYWwgd29vZCwgYW5kIHdh
+        bGxwYXBlciwgaW50byB0aGVpciBwYWludGluZ3MgdG8gYWNoaWV2ZSB0cm9t
+        cGUtbOKAmW9laWwgZWZmZWN0cy4gQnkgMTkxMeKAkzEyLCBDdWItIGlzbSBo
+        YWQgYmVjb21lIHBvcHVsYXIgYXMgdGhlIGxhdGVzdCBhdmFudC1nYXJkZSBt
+        b3ZlbWVudCBhbmQgcHJvZ3Jlc3NpdmUgcGFpbnRlcnMgYWNyb3NzIEV1cm9w
+        ZSBiZWdhbiBwYWludGluZyBpbiBDdWJpc3Qgc3R5bGVzLlxuXG5BZnRlciB0
+        aGUgdXBoZWF2YWwgb2YgV29ybGQgV2FyIE9uZSwgUGljYXNzbyAtIHRvZ2V0
+        aGVyIHdpdGggb3RoZXIgRXVyb3BlYW4gYXJ0aXN0cyBpbmNsdWRpbmcgQW5k
+        csOpIERlcmFpbiwgR2lvcmdpbyBkZSBDaGlyaWNvLCBhbmQgRmVybmFuZCBM
+        w6lnZXIgLSByZXR1cm5lZCB0byBhIG1vcmUgdHJhZGl0aW9uYWwgYXJ0aXN0
+        aWNoaXMgZXhwbG9yYXRpb24gb2YgQ3ViaXNtLCBvZnRlbiBwYWludGluZyB3
+        b3JrcyBpbiByZW1hcmthYmx5IGRpZmZlcmVudCBzdHlsZXMgaW4gYSBwZXJp
+        b2Qgb2Ygb25seSBhIGZldyBob3Vycy5cbkJ5IDE5MjcsIFBpY2Fzc28gYmVn
+        YW4gZXhwZXJpbWVudGluZyB3aXRoIFN1cnJlYWxpc3QgaW1hZ2VyeSwgaW5j
+        b3Jwb3JhdGluZyBtb3JwaGVkIGFuZCBkaXN0b3J0ZWQgZmlndXJlcyBpbiBo
+        aXMgcGFpbnRpbmdzLiBXaGVuIHRoZSBTcGFuaXNoIENpdmlsIFdhciBicm9r
+        ZSBvdXQgaW4gMTkzNiwgUGljYXNzbyByZWFjdGVkIHdpdGggZXhwbGljaXQs
+        IGVtb3Rpb25hbCB3b3JrcywgcGFpbnRpbmcgdGhlIG1hc3RlcnBpZWNlIEd1
+        ZXJuaWNhIGluIHJlc3BvbnNlIHRvIHRoZSBib21iaW5nIG9mIHRoZSB0b3du
+        IGJ5IHRoZSBmYXNjaXN0IEdlbmVyYWxpc3NpbW8gRnJhbmNpc2NvIEZyYW5j
+        byBpbiAxOTM3LlxuXG5Gcm9tIHRoZSBsYXRlIDE5NDBzIHRocm91Z2ggdGhl
+        IDE5NjBzLCBQaWNhc3NvIHdvcmtlZCBwcmltYXJpbHkgaW4gdGhlIHNvdXRo
+        IG9mIEZyYW5jZSwgd2hlcmUgaGUgcGFpbnRlZCwgbWFkZSBjZXJhbWljcywg
+        YW5kIGV4cGVyaW1lbnRlZCB3aXRoIHByaW50bWFraW5nLiBJbiB0aGUgMTk1
+        MHMsIFBpY2Fzc28gYmVnYW4gcmVpbnRlcnByZXRpbmcgdGhlIHdvcmsgb2Yg
+        dGhlIGdyZWF0IG1hc3RlcnMsIG1ha2luZyBwYWludGluZ3MgYmFzZWQgb24g
+        VmVsw6F6cXVleiwgR295YSwgTWFuZXQsIENvdXJiZXQsIGFuZCBEZWxhY3Jv
+        aXguIER1cmluZyB0aGUgMTk1MHMsIFBpY2Fzc2/igJlzIGludGVybmF0aW9u
+        YWwgZmFtZSBpbmNyZWFzZWQgZ3JlYXRseSB3aXRoIGxhcmdlIGV4aGliaXRp
+        b25zIGFuZCByZXRyb3NwZWN0aXZlcyBhY3Jvc3MgdGhlIHdvcmxkLiBIZSBj
+        b250aW51ZWQgdG8gd29yayBwcm9saWZpY2FsbHkgdGhyb3VnaCBoaXMgZWln
+        aHRpZXMgYW5kIG5pbmV0aWVzLiBIZSBkaWVkIGluIDE5NzMsIGxlYXZpbmcg
+        YmVoaW5kIGFuIHVucGFyYWxsZWxlZCBsZWdhY3kgdGhhdCBoYXMgc2hhcGVk
+        IHRoZSBkZXZlbG9wbWVudCBvZiBtb2Rlcm4gYW5kIGNvbnRlbXBvcmFyeSBh
+        cnQuIiwiYmx1cmIiOiJBIHByb2xpZmljIGFuZCB0aXJlbGVzcyBpbm5vdmF0
+        b3Igb2YgYXJ0IGZvcm1zLCBQYWJsbyBQaWNhc3NvIGltcGFjdGVkIHRoZSBj
+        b3Vyc2Ugb2YgMjB0aC1jZW50dXJ5IGFydCB3aXRoIHVucGFyYWxsZWxlZCBt
+        YWduaXR1ZGUuIEluc3BpcmVkIGJ5IFByaW1pdGl2aXNtIGFuZCBkZXZlbG9w
+        bWVudHMgaW4gdGhlIHdvcmxkIGFyb3VuZCBoaW0sIFBpY2Fzc28gY29udHJp
+        YnV0ZWQgc2lnbmlmaWNhbnRseSB0byBhIG51bWJlciBvZiBhcnRpc3RpYyBt
+        b3ZlbWVudHMsIG5vdGFibHkgW0N1YmlzbV0oL2dlbmUvY3ViaXNtKSwgW1N1
+        cnJlYWxpc21dKC9nZW5lL3N1cnJlYWxpc20pLCBbTmVvY2xhc3NpY2lzbV0o
+        L2dlbmUvbmVvY2xhc3NpY2lzbSksIGFuZCBbRXhwcmVzc2lvbmlzbV0oL2dl
+        bmUvYXVzdHJpYW4tYW5kLWdlcm1hbi1leHByZXNzaW9uaXNtKS4gQWxvbmcg
+        d2l0aCBbR2VvcmdlcyBCcmFxdWVdKC9hcnRpc3QvZ2Vvcmdlcy1icmFxdWUp
+        LCBQaWNhc3NvIGlzIGJlc3Qga25vd24gZm9yIHBpb25lZXJpbmcgW0N1Ymlz
+        bV0oL2dlbmUvY3ViaXNtKSBpbiBhbiBhdHRlbXB0IHRvIHJlY29uY2lsZSB0
+        aHJlZS1kaW1lbnNpb25hbCBzcGFjZSB3aXRoIHRoZSB0d28tZGltZW5zaW9u
+        YWwgcGljdHVyZSBwbGFuZSwgb25jZSBhc2tpbmcsIOKAnEFyZSB3ZSB0byBw
+        YWludCB3aGF04oCZcyBvbiB0aGUgZmFjZSwgd2hhdOKAmXMgaW5zaWRlIHRo
+        ZSBmYWNlLCBvciB3aGF04oCZcyBiZWhpbmQgaXQ/4oCdIFJlc3BvbmRpbmcg
+        dG8gdGhlIFNwYW5pc2ggQ2l2aWwgV2FyLCBoZSBwYWludGVkIGhpcyBtb3N0
+        IGZhbW91cyB3b3JrLCBfR3Vlcm5pY2FfICgxOTM3KSwgd2hvc2UgdmlvbGVu
+        dCBpbWFnZXMgb2YgYW5ndWlzaGVkIGZpZ3VyZXMgcmVuZGVyZWQgaW4gZ3Jp
+        c2FpbGxlIG1hZGUgaXQgYSBkZWZpbml0aXZlIHdvcmsgb2YgYW50aS13YXIg
+        YXJ0LiDigJxQYWludGluZyBpcyBub3QgbWFkZSB0byBkZWNvcmF0ZSBhcGFy
+        dG1lbnRzLOKAnSBoZSBzYWlkLiDigJxJdOKAmXMgYW4gb2ZmZW5zaXZlIGFu
+        ZCBkZWZlbnNpdmUgd2VhcG9uIGFnYWluc3QgdGhlIGVuZW15LuKAnSBQaWNh
+        c3Nv4oCZcyBzaXphYmxlIG9ldXZyZSBpbmNsdWRlcyBvdmVyIDIwLDAwMCBw
+        YWludGluZ3MsIHByaW50cywgZHJhd2luZ3MsIHNjdWxwdHVyZXMsIGNlcmFt
+        aWNzLCB0aGVhdGVyIHNldHMsIGFuZCBjb3N0dW1lIGRlc2lnbnMuIiwiZWR1
+        Y2F0aW9uIjoiIiwiYXdhcmRzIjoiIiwicHVibGljYXRpb25zIjoiIiwiY29s
+        bGVjdGlvbnMiOiIiLCJzb2xvZXhoaWJpdGlvbnMiOiIiLCJncm91cGV4aGli
+        aXRpb25zIjoiIiwiX2xpbmtzIjp7ImN1cmllcyI6W3sibmFtZSI6ImltYWdl
+        IiwiaHJlZiI6Imh0dHA6Ly9zdGF0aWMwLmFydHN5Lm5ldC9hcnRpc3RfaW1h
+        Z2VzLzUyZjZiZGRkNGEwNGY1ZDUwNGY2OWMyOS97cmVsfSIsInRlbXBsYXRl
+        ZCI6dHJ1ZX1dLCJ0aHVtYm5haWwiOnsiaHJlZiI6Imh0dHA6Ly9zdGF0aWMw
+        LmFydHN5Lm5ldC9hcnRpc3RfaW1hZ2VzLzUyZjZiZGRkNGEwNGY1ZDUwNGY2
+        OWMyOS9mb3VyX3RoaXJkcy5qcGcifSwiaW1hZ2U6c2VsZiI6eyJocmVmIjoi
+        ez9pbWFnZV92ZXJzaW9ufS5qcGciLCJ0ZW1wbGF0ZWQiOnRydWV9LCJzZWxm
+        Ijp7ImhyZWYiOiJodHRwczovL2FwaS5hcnRzeS5uZXQvYXBpL2FydGlzdHMv
+        NGQ4YjkyOGI0ZWI2OGExYjJjMDAwMWYyIn0sInBlcm1hbGluayI6eyJocmVm
+        IjoiaHR0cDovL2FydHN5Lm5ldC9hcnRpc3QvcGFibG8tcGljYXNzbyJ9LCJh
+        cnR3b3JrcyI6eyJocmVmIjoiaHR0cHM6Ly9hcGkuYXJ0c3kubmV0L2FwaS9h
+        cnR3b3Jrcz9hcnRpc3RfaWQ9NGQ4YjkyOGI0ZWI2OGExYjJjMDAwMWYyIn0s
+        InNpbWlsYXJfYXJ0aXN0cyI6eyJocmVmIjoiaHR0cHM6Ly9hcGkuYXJ0c3ku
+        bmV0L2FwaS9hcnRpc3RzP3NpbWlsYXJfdG9fYXJ0aXN0X2lkPTRkOGI5Mjhi
+        NGViNjhhMWIyYzAwMDFmMiJ9LCJzaW1pbGFyX2NvbnRlbXBvcmFyeV9hcnRp
+        c3RzIjp7ImhyZWYiOiJodHRwczovL2FwaS5hcnRzeS5uZXQvYXBpL2FydGlz
+        dHM/c2ltaWxhcl90b19hcnRpc3RfaWQ9NGQ4YjkyOGI0ZWI2OGExYjJjMDAw
+        MWYyJnNpbWlsYXJpdHlfdHlwZT1jb250ZW1wb3JhcnkifSwiZ2VuZXMiOnsi
+        aHJlZiI6Imh0dHBzOi8vYXBpLmFydHN5Lm5ldC9hcGkvZ2VuZXM/YXJ0aXN0
+        X2lkPTRkOGI5MjhiNGViNjhhMWIyYzAwMDFmMiJ9fSwiaW1hZ2VfdmVyc2lv
+        bnMiOlsic3F1YXJlIiwidGFsbCIsImxhcmdlIiwiZm91cl90aGlyZHMiXX0=
+    http_version: 
+  recorded_at: Wed, 31 Dec 2014 18:15:01 GMT
+- request:
+    method: get
+    uri: https://api.artsy.net/api/artworks?artist_id=4d8b928b4eb68a1b2c0001f2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/vnd.artsy-v2+json
+      X-Xapp-Token:
+      - JvTPWe4WsQO-xqX6Bts49jiOpRNLY4AZe8oTj7EwHWopdD0uddCEwumjpTi-btEykT1GRijM-j5w0CJAZNXWZecCBhSsrD3kC0v4J9o8F4e76Qt6_ydSvFaBLoQ_8K7M6S4Sj0ybe34_WE10dK64oitlCVDJ2PCEaPxQSoQiI1jOcGVT7MSNlc-0jPKOrF5kMLsW7uvaelUq7y0gzcSVbg4KP7wwokULfYFxbcVXdXs=
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 31 Dec 2014 18:15:02 GMT
+      Etag:
+      - '"6adeb2a43abdacc948c84c23d741be8c"'
+      Expires:
+      - 1970-01-01 00:00:00 UTC
+      Server:
+      - nginx/1.4.7
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - DENY
+      X-Request-Id:
+      - dc8e4f05-6183-4752-82e6-c2b26cc916ce
+      X-Robots-Tag:
+      - noindex
+      X-Runtime:
+      - '0.045179'
+      Content-Length:
+      - '922'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJ0b3RhbF9jb3VudCI6bnVsbCwiX2xpbmtzIjp7InNlbGYiOnsiaHJlZiI6
+        Imh0dHBzOi8vYXBpLmFydHN5Lm5ldC9hcGkvYXJ0d29ya3M/YXJ0aXN0X2lk
+        PTRkOGI5MjhiNGViNjhhMWIyYzAwMDFmMiJ9LCJuZXh0Ijp7ImhyZWYiOiJo
+        dHRwczovL2FwaS5hcnRzeS5uZXQvYXBpL2FydHdvcmtzP2FydGlzdF9pZD00
+        ZDhiOTI4YjRlYjY4YTFiMmMwMDAxZjImY3Vyc29yPTUxNWIwZjkzMzhhZDJk
+        NzhjYTAwMDU1NCUzQTUxNWIwZjkzMzhhZDJkNzhjYTAwMDU1NCJ9fSwiX2Vt
+        YmVkZGVkIjp7ImFydHdvcmtzIjpbeyJpZCI6IjUxNWIwZjkzMzhhZDJkNzhj
+        YTAwMDU1NCIsImNyZWF0ZWRfYXQiOiIyMDEzLTA0LTAyVDE3OjA0OjE5KzAw
+        OjAwIiwidXBkYXRlZF9hdCI6IjIwMTQtMDgtMTJUMjE6NTE6NTUrMDA6MDAi
+        LCJ0aXRsZSI6IlRoZSBGcnVnYWwgUmVwYXN0IChMZSByZXBhcyBmcnVnYWwp
+        IiwiY2F0ZWdvcnkiOiJQcmludCIsIm1lZGl1bSI6IkV0Y2hpbmcgKHppbmMp
+        IiwiZGF0ZSI6IjE5MDQiLCJkaW1lbnNpb25zIjp7ImluIjp7InRleHQiOiIx
+        OCAxLzQgw5cgMTQgMTMvMTYgaW4iLCJoZWlnaHQiOjE4LjI1LCJ3aWR0aCI6
+        MTQuODEyNSwiZGVwdGgiOm51bGwsImRpYW1ldGVyIjpudWxsfSwiY20iOnsi
+        dGV4dCI6IjQ2LjQgw5cgMzcuNiBjbSIsImhlaWdodCI6NDYuNCwid2lkdGgi
+        OjM3LjYsImRlcHRoIjpudWxsLCJkaWFtZXRlciI6bnVsbH19LCJ3ZWJzaXRl
+        IjoiIiwic2lnbmF0dXJlIjoiIiwic2VyaWVzIjoiIiwicHJvdmVuYW5jZSI6
+        IiIsImxpdGVyYXR1cmUiOiIiLCJleGhpYml0aW9uX2hpc3RvcnkiOiIiLCJj
+        b2xsZWN0aW5nX2luc3RpdHV0aW9uIjoiTmF0aW9uYWwgR2FsbGVyeSBvZiBB
+        cnQsIFdhc2hpbmd0b24gRC5DLiIsImFkZGl0aW9uYWxfaW5mb3JtYXRpb24i
+        OiJcbiAgICBwbGF0ZTogNDYuMyB4IDM3LjcgY20gKDE4IDEvNCB4IDE0IDEz
+        LzE2IGluLilcbiAgICAiLCJpbWFnZV9yaWdodHMiOiJDb3VydGVzeSBOYXRp
+        b25hbCBHYWxsZXJ5IG9mIEFydCwgV2FzaGluZ3RvbiIsImJsdXJiIjoiIiwi
+        dW5pcXVlIjpmYWxzZSwiY3VsdHVyYWxfbWFrZXIiOm51bGwsImNhbl9pbnF1
+        aXJlIjpmYWxzZSwiY2FuX2FjcXVpcmUiOmZhbHNlLCJjYW5fc2hhcmUiOnRy
+        dWUsInNhbGVfbWVzc2FnZSI6bnVsbCwic29sZCI6ZmFsc2UsIl9saW5rcyI6
+        eyJjdXJpZXMiOlt7Im5hbWUiOiJpbWFnZSIsImhyZWYiOiJodHRwOi8vc3Rh
+        dGljMi5hcnRzeS5uZXQvYWRkaXRpb25hbF9pbWFnZXMvNTE1YjBmOTgwNTYz
+        NTFkYzMzMDAwODFmLzMve3JlbH0iLCJ0ZW1wbGF0ZWQiOnRydWV9XSwidGh1
+        bWJuYWlsIjp7ImhyZWYiOiJodHRwOi8vc3RhdGljMi5hcnRzeS5uZXQvYWRk
+        aXRpb25hbF9pbWFnZXMvNTE1YjBmOTgwNTYzNTFkYzMzMDAwODFmLzMvbWVk
+        aXVtLmpwZyJ9LCJpbWFnZTpzZWxmIjp7ImhyZWYiOiJ7P2ltYWdlX3ZlcnNp
+        b259LmpwZyIsInRlbXBsYXRlZCI6dHJ1ZX0sInBhcnRuZXIiOnsiaHJlZiI6
+        Imh0dHBzOi8vYXBpLmFydHN5Lm5ldC9hcGkvcGFydG5lcnMvNGY5OWM3Yjc5
+        M2FiNGIwMDAxMDAwMTc5In0sInNlbGYiOnsiaHJlZiI6Imh0dHBzOi8vYXBp
+        LmFydHN5Lm5ldC9hcGkvYXJ0d29ya3MvNTE1YjBmOTMzOGFkMmQ3OGNhMDAw
+        NTU0In0sInBlcm1hbGluayI6eyJocmVmIjoiaHR0cDovL2FydHN5Lm5ldC9h
+        cnR3b3JrL3BhYmxvLXBpY2Fzc28tdGhlLWZydWdhbC1yZXBhc3QtbGUtcmVw
+        YXMtZnJ1Z2FsIn0sImdlbmVzIjp7ImhyZWYiOiJodHRwczovL2FwaS5hcnRz
+        eS5uZXQvYXBpL2dlbmVzP2FydHdvcmtfaWQ9NTE1YjBmOTMzOGFkMmQ3OGNh
+        MDAwNTU0In0sImFydGlzdHMiOnsiaHJlZiI6Imh0dHBzOi8vYXBpLmFydHN5
+        Lm5ldC9hcGkvYXJ0aXN0cz9hcnR3b3JrX2lkPTUxNWIwZjkzMzhhZDJkNzhj
+        YTAwMDU1NCJ9LCJzaW1pbGFyX2FydHdvcmtzIjp7ImhyZWYiOiJodHRwczov
+        L2FwaS5hcnRzeS5uZXQvYXBpL2FydHdvcmtzP3NpbWlsYXJfdG9fYXJ0d29y
+        a19pZD01MTViMGY5MzM4YWQyZDc4Y2EwMDA1NTQifX0sImltYWdlX3ZlcnNp
+        b25zIjpbInNtYWxsIiwic3F1YXJlIiwibWVkaXVtIiwibWVkaXVtX3JlY3Rh
+        bmdsZSIsImxhcmdlX3JlY3RhbmdsZSIsInRhbGwiLCJsYXJnZSIsImxhcmdl
+        ciIsIm5vcm1hbGl6ZWQiXSwiX2VtYmVkZGVkIjp7ImVkaXRpb25zIjpbXX19
+        XX19
+    http_version: 
+  recorded_at: Wed, 31 Dec 2014 18:15:01 GMT
+- request:
+    method: get
+    uri: https://api.artsy.net/api/artworks?artist_id=4d8b928b4eb68a1b2c0001f2&cursor=515b0f9338ad2d78ca000554:515b0f9338ad2d78ca000554
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/vnd.artsy-v2+json
+      X-Xapp-Token:
+      - JvTPWe4WsQO-xqX6Bts49jiOpRNLY4AZe8oTj7EwHWopdD0uddCEwumjpTi-btEykT1GRijM-j5w0CJAZNXWZecCBhSsrD3kC0v4J9o8F4e76Qt6_ydSvFaBLoQ_8K7M6S4Sj0ybe34_WE10dK64oitlCVDJ2PCEaPxQSoQiI1jOcGVT7MSNlc-0jPKOrF5kMLsW7uvaelUq7y0gzcSVbg4KP7wwokULfYFxbcVXdXs=
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 31 Dec 2014 18:15:02 GMT
+      Etag:
+      - '"b2c46ee89b3e73c892e852f9bbdb5572"'
+      Expires:
+      - 1970-01-01 00:00:00 UTC
+      Server:
+      - nginx/1.4.7
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - DENY
+      X-Request-Id:
+      - cd10c122-4b37-4cfc-8cd3-f114f6093ffd
+      X-Robots-Tag:
+      - noindex
+      X-Runtime:
+      - '0.028588'
+      Content-Length:
+      - '180'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"total_count":null,"_links":{"self":{"href":"https://api.artsy.net/api/artworks?artist_id=4d8b928b4eb68a1b2c0001f2&cursor=515b0f9338ad2d78ca000554%3A515b0f9338ad2d78ca000554"}},"_embedded":{"artworks":[]}}'
+    http_version: 
+  recorded_at: Wed, 31 Dec 2014 18:15:01 GMT
+- request:
+    method: get
+    uri: https://api.artsy.net/api
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/vnd.artsy-v2+json
+      X-Xapp-Token:
+      - JvTPWe4WsQO-xqX6Bts49jiOpRNLY4AZe8oTj7EwHWopdD0uddCEwumjpTi-btEykT1GRijM-j5w0CJAZNXWZecCBhSsrD3kC0v4J9o8F4e76Qt6_ydSvFaBLoQ_8K7M6S4Sj0ybe34_WE10dK64oitlCVDJ2PCEaPxQSoQiI1jOcGVT7MSNlc-0jPKOrF5kMLsW7uvaelUq7y0gzcSVbg4KP7wwokULfYFxbcVXdXs=
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 31 Dec 2014 18:15:03 GMT
+      Etag:
+      - '"8d485dd29e0ece06db8ce4b8e93b8269"'
+      Expires:
+      - 1970-01-01 00:00:00 UTC
+      Server:
+      - nginx/1.4.7
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - DENY
+      X-Request-Id:
+      - 030d0b7e-0a2d-491a-ad18-99e21198721d
+      X-Robots-Tag:
+      - noindex
+      X-Runtime:
+      - '0.033219'
+      Content-Length:
+      - '381'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"https://api.artsy.net/api/"},"docs":{"href":"https://api.artsy.net/api/docs"},"status":{"href":"https://api.artsy.net/api/status"},"search":{"href":"https://api.artsy.net/api/search{?q}","templated":true},"current_user":{"href":"https://api.artsy.net/api/current_user"},"artists":{"href":"https://api.artsy.net/api/artists{?artwork_id,similar_to_artist_id,similarity_type}","templated":true},"artist":{"href":"https://api.artsy.net/api/artists/{id}","templated":true},"users":{"href":"https://api.artsy.net/api/users"},"user":{"href":"https://api.artsy.net/api/users/{id}","templated":true},"profiles":{"href":"https://api.artsy.net/api/profiles"},"profile":{"href":"https://api.artsy.net/api/profiles/{id}","templated":true},"collections":{"href":"https://api.artsy.net/api/collections{?user_id,private}","templated":true},"collection":{"href":"https://api.artsy.net/api/collections/{id}","templated":true},"collection_items":{"href":"https://api.artsy.net/api/collection_items{?user_id,collection_id}","templated":true},"collection_item":{"href":"https://api.artsy.net/api/collection_items/{id}","templated":true},"applications":{"href":"https://api.artsy.net/api/applications"},"application":{"href":"https://api.artsy.net/api/applications/{id}","templated":true},"genes":{"href":"https://api.artsy.net/api/genes{?artist_id,artwork_id}","templated":true},"gene":{"href":"https://api.artsy.net/api/genes/{id}","templated":true},"partners":{"href":"https://api.artsy.net/api/partners"},"partner":{"href":"https://api.artsy.net/api/partners/{id}","templated":true},"shows":{"href":"https://api.artsy.net/api/shows{?partner_id,status}","templated":true},"show":{"href":"https://api.artsy.net/api/shows/{id}","templated":true},"artworks":{"href":"https://api.artsy.net/api/artworks{?artist_id,partner_id,show_id,similar_to_artwork_id,published}","templated":true},"artwork":{"href":"https://api.artsy.net/api/artworks/{id}","templated":true},"edition":{"href":"https://api.artsy.net/api/editions/{id}{?artwork_id}","templated":true},"tokens":{"href":"https://api.artsy.net/api/tokens"}}}'
+    http_version: 
+  recorded_at: Wed, 31 Dec 2014 18:15:02 GMT
+- request:
+    method: get
+    uri: https://api.artsy.net/api/artists/pablo-picasso
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/vnd.artsy-v2+json
+      X-Xapp-Token:
+      - JvTPWe4WsQO-xqX6Bts49jiOpRNLY4AZe8oTj7EwHWopdD0uddCEwumjpTi-btEykT1GRijM-j5w0CJAZNXWZecCBhSsrD3kC0v4J9o8F4e76Qt6_ydSvFaBLoQ_8K7M6S4Sj0ybe34_WE10dK64oitlCVDJ2PCEaPxQSoQiI1jOcGVT7MSNlc-0jPKOrF5kMLsW7uvaelUq7y0gzcSVbg4KP7wwokULfYFxbcVXdXs=
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 31 Dec 2014 18:15:03 GMT
+      Location:
+      - https://api.artsy.net/api/artists/4d8b928b4eb68a1b2c0001f2
+      Server:
+      - nginx/1.4.7
+      Status:
+      - 302 Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - DENY
+      X-Request-Id:
+      - bb91da19-20a3-4fe6-8822-f0cfefa38bb6
+      X-Robots-Tag:
+      - noindex
+      X-Runtime:
+      - '0.020244'
+      Content-Length:
+      - '108'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"location":{"href":"https://api.artsy.net/api/artists/4d8b928b4eb68a1b2c0001f2"}}}'
+    http_version: 
+  recorded_at: Wed, 31 Dec 2014 18:15:02 GMT
+- request:
+    method: get
+    uri: https://api.artsy.net/api/artists/4d8b928b4eb68a1b2c0001f2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/vnd.artsy-v2+json
+      X-Xapp-Token:
+      - JvTPWe4WsQO-xqX6Bts49jiOpRNLY4AZe8oTj7EwHWopdD0uddCEwumjpTi-btEykT1GRijM-j5w0CJAZNXWZecCBhSsrD3kC0v4J9o8F4e76Qt6_ydSvFaBLoQ_8K7M6S4Sj0ybe34_WE10dK64oitlCVDJ2PCEaPxQSoQiI1jOcGVT7MSNlc-0jPKOrF5kMLsW7uvaelUq7y0gzcSVbg4KP7wwokULfYFxbcVXdXs=
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 31 Dec 2014 18:15:03 GMT
+      Etag:
+      - '"0a98930f6d778b5f1d54a2d1fc62131a"'
+      Expires:
+      - 1970-01-01 00:00:00 UTC
+      Server:
+      - nginx/1.4.7
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - DENY
+      X-Request-Id:
+      - df6d274f-922c-4670-9d85-2756a2d317d7
+      X-Robots-Tag:
+      - noindex
+      X-Runtime:
+      - '0.026473'
+      Content-Length:
+      - '2537'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6IjRkOGI5MjhiNGViNjhhMWIyYzAwMDFmMiIsImNyZWF0ZWRfYXQi
+        OiIyMDEwLTA4LTAzVDE2OjA5OjMzKzAwOjAwIiwidXBkYXRlZF9hdCI6IjIw
+        MTQtMTItMzFUMTI6MTU6NDArMDA6MDAiLCJuYW1lIjoiUGFibG8gUGljYXNz
+        byIsImdlbmRlciI6Im1hbGUiLCJiaXJ0aGRheSI6IjE4ODEiLCJob21ldG93
+        biI6Ik3DoWxhZ2EsIFNwYWluIiwibG9jYXRpb24iOiJQYXJpcyBhbmQgTW91
+        Z2lucywgRnJhbmNlIiwibmF0aW9uYWxpdHkiOiJTcGFuaXNoIiwic3RhdGVt
+        ZW50IjoiIiwiYmlvZ3JhcGh5IjoiQm9ybiBpbiBNw6FsYWdhLCBTcGFpbiwg
+        aW4gMTg4MSwgUGFibG8gUGljYXNzbyBzaG93ZWQgYW4gZWFybHkgcGFzc2lv
+        biBmb3IgZHJhd2luZy4gSGlzIGZhdGhlciwgYW4gYXJ0IHRlYWNoZXIsIGJl
+        Z2FuIGdpdmluZyBoaW0gbGVzc29ucyBpbiBmaWd1cmUgZHJhd2luZyBhbmQg
+        b2lsIHBhaW50aW5nIGF0IHRoZSBhZ2Ugb2Ygc2V2ZW4uIFBpY2Fzc28gZW5y
+        b2xsZWQgaW4gdGhlIFNjaG9vbCBvZiBGaW5lIEFydHMgaW4gQmFyY2Vsb25h
+        IGFuZCB0aGVuIGF0IE1hZHJpZCwgYnV0IHdpdGhkcmV3IGZyb20gZm9ybWFs
+        IHRyYWluaW5nIGluIDE4OTkgdG8gcmV0dXJuIHRvIEJhcmNlbG9uYSwgd2hl
+        cmUgaGUgd29ya2VkIGFzIGEgZ3JhcGhpYyBhcnRpc3QuIEluIDE5MDAsIFBp
+        Y2Fzc28gbWFkZSBoaXMgZmlyc3QgdmlzaXQgdG8gUGFyaXMsIGFuZCB1bnRp
+        bCAxOTA0LCBoZSBzcGxpdCBoaXMgdGltZSBiZXR3ZWVuIFBhcmlzIGFuZCBC
+        YXJjZWxvbmEuXG5cbkxhdGUgaW4gMTkwMSwgUGljYXNzbyBiZWdhbiBtYWtp
+        bmcgcGFpbnRpbmdzIG9uIHRoZW1lcyBvZiBkZXNvbGF0aW9uIGFuZCBkZXNw
+        YWlyLCBkZXBpY3Rpbmcgc29saXRhcnkgYW5kIG1lbGFuY2hvbHkgZmlndXJl
+        cyBpbiBwYWludGluZ3MgZmxvb2RlZCB3aXRoIGJsdWUuIEluIDE5MDQsIFBp
+        Y2Fzc28gYmVnYW4gaGlzIFJvc2UgUGVyaW9kLCBsaWdodGVuaW5nIGhpcyBw
+        YWxldHRlIGZyb20gdGhlIGRhcmssIG1vb2R5IGJsdWVzIG9mIHRoZSBwcmV2
+        aW91cyB5ZWFycyBpbiBmYXZvciBvZiBiZWlnZSwgcmVkLCBhbmQgcm9zZSB0
+        b25lcy4gQ2FzdGluZyBhc2lkZSB0aGUgbWVsYW5jaG9seSBzdWJqZWN0cyBv
+        ZiB0aGUgQmx1ZSBQZXJpb2QsIFBpY2Fzc28gcGFpbnRlZCBjaXJjdXMgcGVy
+        Zm9ybS0gZXJzLCBoYXJsZXF1aW5zLCBhbmQgY2xvd25zLlxuXG5BZnRlciBt
+        ZWV0aW5nIEdlb3JnZXMgQnJhcXVlIGluIDE5MDcsIFBpY2Fzc28gYW5kIEJy
+        YXF1ZSB3b3JrZWQgY2xvc2VseSB0b2dldGhlciB0byBkZXZlbG9wIEN1Ymlz
+        bS4gQnkgMTkxMCwgdGhleSBoYWQgZGV2ZWxvcGVkIGEgZGlzdGluY3RpdmUg
+        Q3ViaXN0IGlkaW9tLCBmcmFjdHVyaW5nIHRoZWlyIHN1YmplY3RzIGludG8g
+        c21hbGwsIGZhY2V0ZWQgZm9ybXMgYW5kIHdvcmtpbmcgd2l0aCBhIG11dGVk
+        IHBhbGV0dGUuIFJlamVjdGluZyB0aGUgdHJhZGl0aW9uYWwgZGVwaWN0aW9u
+        IG9mIHRocmVlLWRpbWVuc2lvbmFsIG9iamVjdHMgZnJvbSBvbmUgdmlld3Bv
+        aW50LCB0aGV5IGluc3RlYWQgcmVwcmVzZW50ZWQgdGhlIHN1YmplY3QgZnJv
+        bSBhIG11bHRpdHVkZSBvZiBwZXJzcGVjdGl2ZXMuIEluIDE5MTIsIFBpY2Fz
+        c28gYW5kIEJyYXF1ZSBiZWdhbiBleHBlcmltZW50aW5nIHdpdGggY29sbGFn
+        ZSBhbmQgcGFwaWVyIGNvbGzDqSwgaW50cm9kdWNpbmcgcmVhbCBlbGVtZW50
+        cywgc3VjaCBhcyBuZXdzcHJpbnQsIGFydGlmaWNpYWwgd29vZCwgYW5kIHdh
+        bGxwYXBlciwgaW50byB0aGVpciBwYWludGluZ3MgdG8gYWNoaWV2ZSB0cm9t
+        cGUtbOKAmW9laWwgZWZmZWN0cy4gQnkgMTkxMeKAkzEyLCBDdWItIGlzbSBo
+        YWQgYmVjb21lIHBvcHVsYXIgYXMgdGhlIGxhdGVzdCBhdmFudC1nYXJkZSBt
+        b3ZlbWVudCBhbmQgcHJvZ3Jlc3NpdmUgcGFpbnRlcnMgYWNyb3NzIEV1cm9w
+        ZSBiZWdhbiBwYWludGluZyBpbiBDdWJpc3Qgc3R5bGVzLlxuXG5BZnRlciB0
+        aGUgdXBoZWF2YWwgb2YgV29ybGQgV2FyIE9uZSwgUGljYXNzbyAtIHRvZ2V0
+        aGVyIHdpdGggb3RoZXIgRXVyb3BlYW4gYXJ0aXN0cyBpbmNsdWRpbmcgQW5k
+        csOpIERlcmFpbiwgR2lvcmdpbyBkZSBDaGlyaWNvLCBhbmQgRmVybmFuZCBM
+        w6lnZXIgLSByZXR1cm5lZCB0byBhIG1vcmUgdHJhZGl0aW9uYWwgYXJ0aXN0
+        aWNoaXMgZXhwbG9yYXRpb24gb2YgQ3ViaXNtLCBvZnRlbiBwYWludGluZyB3
+        b3JrcyBpbiByZW1hcmthYmx5IGRpZmZlcmVudCBzdHlsZXMgaW4gYSBwZXJp
+        b2Qgb2Ygb25seSBhIGZldyBob3Vycy5cbkJ5IDE5MjcsIFBpY2Fzc28gYmVn
+        YW4gZXhwZXJpbWVudGluZyB3aXRoIFN1cnJlYWxpc3QgaW1hZ2VyeSwgaW5j
+        b3Jwb3JhdGluZyBtb3JwaGVkIGFuZCBkaXN0b3J0ZWQgZmlndXJlcyBpbiBo
+        aXMgcGFpbnRpbmdzLiBXaGVuIHRoZSBTcGFuaXNoIENpdmlsIFdhciBicm9r
+        ZSBvdXQgaW4gMTkzNiwgUGljYXNzbyByZWFjdGVkIHdpdGggZXhwbGljaXQs
+        IGVtb3Rpb25hbCB3b3JrcywgcGFpbnRpbmcgdGhlIG1hc3RlcnBpZWNlIEd1
+        ZXJuaWNhIGluIHJlc3BvbnNlIHRvIHRoZSBib21iaW5nIG9mIHRoZSB0b3du
+        IGJ5IHRoZSBmYXNjaXN0IEdlbmVyYWxpc3NpbW8gRnJhbmNpc2NvIEZyYW5j
+        byBpbiAxOTM3LlxuXG5Gcm9tIHRoZSBsYXRlIDE5NDBzIHRocm91Z2ggdGhl
+        IDE5NjBzLCBQaWNhc3NvIHdvcmtlZCBwcmltYXJpbHkgaW4gdGhlIHNvdXRo
+        IG9mIEZyYW5jZSwgd2hlcmUgaGUgcGFpbnRlZCwgbWFkZSBjZXJhbWljcywg
+        YW5kIGV4cGVyaW1lbnRlZCB3aXRoIHByaW50bWFraW5nLiBJbiB0aGUgMTk1
+        MHMsIFBpY2Fzc28gYmVnYW4gcmVpbnRlcnByZXRpbmcgdGhlIHdvcmsgb2Yg
+        dGhlIGdyZWF0IG1hc3RlcnMsIG1ha2luZyBwYWludGluZ3MgYmFzZWQgb24g
+        VmVsw6F6cXVleiwgR295YSwgTWFuZXQsIENvdXJiZXQsIGFuZCBEZWxhY3Jv
+        aXguIER1cmluZyB0aGUgMTk1MHMsIFBpY2Fzc2/igJlzIGludGVybmF0aW9u
+        YWwgZmFtZSBpbmNyZWFzZWQgZ3JlYXRseSB3aXRoIGxhcmdlIGV4aGliaXRp
+        b25zIGFuZCByZXRyb3NwZWN0aXZlcyBhY3Jvc3MgdGhlIHdvcmxkLiBIZSBj
+        b250aW51ZWQgdG8gd29yayBwcm9saWZpY2FsbHkgdGhyb3VnaCBoaXMgZWln
+        aHRpZXMgYW5kIG5pbmV0aWVzLiBIZSBkaWVkIGluIDE5NzMsIGxlYXZpbmcg
+        YmVoaW5kIGFuIHVucGFyYWxsZWxlZCBsZWdhY3kgdGhhdCBoYXMgc2hhcGVk
+        IHRoZSBkZXZlbG9wbWVudCBvZiBtb2Rlcm4gYW5kIGNvbnRlbXBvcmFyeSBh
+        cnQuIiwiYmx1cmIiOiJBIHByb2xpZmljIGFuZCB0aXJlbGVzcyBpbm5vdmF0
+        b3Igb2YgYXJ0IGZvcm1zLCBQYWJsbyBQaWNhc3NvIGltcGFjdGVkIHRoZSBj
+        b3Vyc2Ugb2YgMjB0aC1jZW50dXJ5IGFydCB3aXRoIHVucGFyYWxsZWxlZCBt
+        YWduaXR1ZGUuIEluc3BpcmVkIGJ5IFByaW1pdGl2aXNtIGFuZCBkZXZlbG9w
+        bWVudHMgaW4gdGhlIHdvcmxkIGFyb3VuZCBoaW0sIFBpY2Fzc28gY29udHJp
+        YnV0ZWQgc2lnbmlmaWNhbnRseSB0byBhIG51bWJlciBvZiBhcnRpc3RpYyBt
+        b3ZlbWVudHMsIG5vdGFibHkgW0N1YmlzbV0oL2dlbmUvY3ViaXNtKSwgW1N1
+        cnJlYWxpc21dKC9nZW5lL3N1cnJlYWxpc20pLCBbTmVvY2xhc3NpY2lzbV0o
+        L2dlbmUvbmVvY2xhc3NpY2lzbSksIGFuZCBbRXhwcmVzc2lvbmlzbV0oL2dl
+        bmUvYXVzdHJpYW4tYW5kLWdlcm1hbi1leHByZXNzaW9uaXNtKS4gQWxvbmcg
+        d2l0aCBbR2VvcmdlcyBCcmFxdWVdKC9hcnRpc3QvZ2Vvcmdlcy1icmFxdWUp
+        LCBQaWNhc3NvIGlzIGJlc3Qga25vd24gZm9yIHBpb25lZXJpbmcgW0N1Ymlz
+        bV0oL2dlbmUvY3ViaXNtKSBpbiBhbiBhdHRlbXB0IHRvIHJlY29uY2lsZSB0
+        aHJlZS1kaW1lbnNpb25hbCBzcGFjZSB3aXRoIHRoZSB0d28tZGltZW5zaW9u
+        YWwgcGljdHVyZSBwbGFuZSwgb25jZSBhc2tpbmcsIOKAnEFyZSB3ZSB0byBw
+        YWludCB3aGF04oCZcyBvbiB0aGUgZmFjZSwgd2hhdOKAmXMgaW5zaWRlIHRo
+        ZSBmYWNlLCBvciB3aGF04oCZcyBiZWhpbmQgaXQ/4oCdIFJlc3BvbmRpbmcg
+        dG8gdGhlIFNwYW5pc2ggQ2l2aWwgV2FyLCBoZSBwYWludGVkIGhpcyBtb3N0
+        IGZhbW91cyB3b3JrLCBfR3Vlcm5pY2FfICgxOTM3KSwgd2hvc2UgdmlvbGVu
+        dCBpbWFnZXMgb2YgYW5ndWlzaGVkIGZpZ3VyZXMgcmVuZGVyZWQgaW4gZ3Jp
+        c2FpbGxlIG1hZGUgaXQgYSBkZWZpbml0aXZlIHdvcmsgb2YgYW50aS13YXIg
+        YXJ0LiDigJxQYWludGluZyBpcyBub3QgbWFkZSB0byBkZWNvcmF0ZSBhcGFy
+        dG1lbnRzLOKAnSBoZSBzYWlkLiDigJxJdOKAmXMgYW4gb2ZmZW5zaXZlIGFu
+        ZCBkZWZlbnNpdmUgd2VhcG9uIGFnYWluc3QgdGhlIGVuZW15LuKAnSBQaWNh
+        c3Nv4oCZcyBzaXphYmxlIG9ldXZyZSBpbmNsdWRlcyBvdmVyIDIwLDAwMCBw
+        YWludGluZ3MsIHByaW50cywgZHJhd2luZ3MsIHNjdWxwdHVyZXMsIGNlcmFt
+        aWNzLCB0aGVhdGVyIHNldHMsIGFuZCBjb3N0dW1lIGRlc2lnbnMuIiwiZWR1
+        Y2F0aW9uIjoiIiwiYXdhcmRzIjoiIiwicHVibGljYXRpb25zIjoiIiwiY29s
+        bGVjdGlvbnMiOiIiLCJzb2xvZXhoaWJpdGlvbnMiOiIiLCJncm91cGV4aGli
+        aXRpb25zIjoiIiwiX2xpbmtzIjp7ImN1cmllcyI6W3sibmFtZSI6ImltYWdl
+        IiwiaHJlZiI6Imh0dHA6Ly9zdGF0aWMwLmFydHN5Lm5ldC9hcnRpc3RfaW1h
+        Z2VzLzUyZjZiZGRkNGEwNGY1ZDUwNGY2OWMyOS97cmVsfSIsInRlbXBsYXRl
+        ZCI6dHJ1ZX1dLCJ0aHVtYm5haWwiOnsiaHJlZiI6Imh0dHA6Ly9zdGF0aWMw
+        LmFydHN5Lm5ldC9hcnRpc3RfaW1hZ2VzLzUyZjZiZGRkNGEwNGY1ZDUwNGY2
+        OWMyOS9mb3VyX3RoaXJkcy5qcGcifSwiaW1hZ2U6c2VsZiI6eyJocmVmIjoi
+        ez9pbWFnZV92ZXJzaW9ufS5qcGciLCJ0ZW1wbGF0ZWQiOnRydWV9LCJzZWxm
+        Ijp7ImhyZWYiOiJodHRwczovL2FwaS5hcnRzeS5uZXQvYXBpL2FydGlzdHMv
+        NGQ4YjkyOGI0ZWI2OGExYjJjMDAwMWYyIn0sInBlcm1hbGluayI6eyJocmVm
+        IjoiaHR0cDovL2FydHN5Lm5ldC9hcnRpc3QvcGFibG8tcGljYXNzbyJ9LCJh
+        cnR3b3JrcyI6eyJocmVmIjoiaHR0cHM6Ly9hcGkuYXJ0c3kubmV0L2FwaS9h
+        cnR3b3Jrcz9hcnRpc3RfaWQ9NGQ4YjkyOGI0ZWI2OGExYjJjMDAwMWYyIn0s
+        InNpbWlsYXJfYXJ0aXN0cyI6eyJocmVmIjoiaHR0cHM6Ly9hcGkuYXJ0c3ku
+        bmV0L2FwaS9hcnRpc3RzP3NpbWlsYXJfdG9fYXJ0aXN0X2lkPTRkOGI5Mjhi
+        NGViNjhhMWIyYzAwMDFmMiJ9LCJzaW1pbGFyX2NvbnRlbXBvcmFyeV9hcnRp
+        c3RzIjp7ImhyZWYiOiJodHRwczovL2FwaS5hcnRzeS5uZXQvYXBpL2FydGlz
+        dHM/c2ltaWxhcl90b19hcnRpc3RfaWQ9NGQ4YjkyOGI0ZWI2OGExYjJjMDAw
+        MWYyJnNpbWlsYXJpdHlfdHlwZT1jb250ZW1wb3JhcnkifSwiZ2VuZXMiOnsi
+        aHJlZiI6Imh0dHBzOi8vYXBpLmFydHN5Lm5ldC9hcGkvZ2VuZXM/YXJ0aXN0
+        X2lkPTRkOGI5MjhiNGViNjhhMWIyYzAwMDFmMiJ9fSwiaW1hZ2VfdmVyc2lv
+        bnMiOlsic3F1YXJlIiwidGFsbCIsImxhcmdlIiwiZm91cl90aGlyZHMiXX0=
+    http_version: 
+  recorded_at: Wed, 31 Dec 2014 18:15:02 GMT
+recorded_with: VCR 2.9.3

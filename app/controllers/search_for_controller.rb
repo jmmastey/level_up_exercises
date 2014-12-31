@@ -1,4 +1,6 @@
 class SearchForController < ApplicationController
+  before_action :authenticate_user!
+  before_action :require_admin
 
   def artist
     name = SearchForController.convert_artist_name_for_search(params[:search_query])

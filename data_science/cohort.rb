@@ -18,13 +18,4 @@ class Cohort
     pageviews.size
   end
 
-  private
-
-  # def conversion_rate
-  #   conversions.to_f / size.to_f
-  # end
-  #
-  # def standard_error
-  #   Math.sqrt((p*(1-p)/a_views))
-  # end
 end

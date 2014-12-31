@@ -3,81 +3,40 @@ require_relative '../cohort.rb'
 describe Cohort do
   context "when views are a mixed" do
     let(:pageviews) { [double(:result => 1), double(:result => 0), double(:result => 1)] }
+    let(:pageviews_negative) { [double(:result => 0), double(:result => 0),  double(:result => 0), double(:result => 0)] }
+    let(:pageviews_positive) { [double(:result => 1), double(:result => 1)]}
+
     let(:cohort) { Cohort.new("A", pageviews) }
+    let(:cohort_hated_it) { Cohort.new("B", pageviews_negative) }
+    let(:cohort_loved_it) { Cohort.new("C", pageviews_positive) }
 
     it "has a name" do
       expect(cohort.name).to eq("A")
+      expect(cohort_loved_it.name).to eq("C")
+      expect(cohort_hated_it.name).to eq("B")
     end
 
-    describe '#total_views' do
+    describe '#size' do
       it "counts the total views for a cohort" do
         expect(cohort.size).to eq(3)
+        expect(cohort_loved_it.size).to eq(2)
+        expect(cohort_hated_it.size).to eq(4)
       end
     end
 
     describe '#positive_conversions' do
       it "counts the positives" do
         expect(cohort.conversions).to eq(2)
+        expect(cohort_loved_it.conversions).to eq(2)
+        expect(cohort_hated_it.conversions).to eq(0)
       end
     end
 
     describe '#negative_conversions' do
       it "counts the negatives" do
         expect(cohort.rejections).to eq(1)
-      end
-    end
-  end
-
-  context "when view results are all negative" do
-    let(:pageviews) { [double(:result => 0), double(:result => 0), double(:result => 0)] }
-    let(:cohort) { Cohort.new("A", pageviews) }
-
-    it "has a name" do
-      expect(cohort.name).to eq("A")
-    end
-
-    describe '#total_views' do
-      it "total number of views in the cohort" do
-        expect(cohort.size).to eq(3)
-      end
-    end
-
-    describe '#positive_conversions' do
-      it "total number of views in the cohort" do
-        expect(cohort.conversions).to eq(0)
-      end
-    end
-
-    describe '#negative_conversions' do
-      it "total number of views in the cohort" do
-        expect(cohort.rejections).to eq(3)
-      end
-    end
-  end
-
-  context "when view results are all positive" do
-    let(:pageviews) { [double(:result => 1), double(:result => 1), double(:result => 1)] }
-    let(:cohort) { Cohort.new("A", pageviews) }
-
-    it "has a name" do
-      expect(cohort.name).to eq("A")
-    end
-
-    describe '#total_views' do
-      it "total number of views in the cohort" do
-        expect(cohort.size).to eq(3)
-      end
-    end
-
-    describe '#positive_conversions' do
-      it "total number of views in the cohort" do
-        expect(cohort.conversions).to eq(3)
-      end
-    end
-
-    describe '#negative_conversions' do
-      it "total number of views in the cohort" do
-        expect(cohort.rejections).to eq(0)
+        expect(cohort_loved_it.rejections).to eq(0)
+        expect(cohort_hated_it.rejections).to eq(4)
       end
     end
   end

@@ -44,6 +44,12 @@ RSpec.describe User, :type => :model do
       expect(user).not_to be_valid
     end
 
+    it "creates a non-admin user by default" do
+      user = User.create(email: "paul@example.com", password: "secret1", password_confirmation: "secret2")
+
+      expect(user.admin?).to be false
+    end
+
     describe "validations" do
 
       it { should validate_presence_of(:email) }

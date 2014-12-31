@@ -1,0 +1,22 @@
+|-----------------------+-------+-----------------------------------------+------------------------|
+| Prefix                | Verb  | URI Pattern                             | Controller#Action      |
+|-----------------------+-------+-----------------------------------------+------------------------|
+| airports              | GET   | /airports(.:format)                     | airports#index         |
+| airport               | GET   | /airports/:code(.:format)               | airports#show          |
+| search_flights        | GET   | /flights/search(.:format)               | flights#search         |
+|-----------------------+-------+-----------------------------------------+------------------------|
+| flights               | GET   | /flights(.:format)                      | flights#index          |
+| flight                | GET   | /flights/:id(.:format)                  | flights#show           |
+| flight_manifest       | GET   | /flights/:id/passengers(.:format)       | flights#passengers     |
+|-----------------------+-------+-----------------------------------------+------------------------|
+| search_passengers     | GET   | /passengers/search(.:format)            | passengers#search      |
+| passengers            | GET   | /passengers(.:format)                   | passengers#index       |
+| passenger             | GET   | /passenger/:id(.:format)                | passengers#show        |
+| passenger_itineraries | GET   | /passenger/:id/itineraries(.:format)    | passengers#itineraries |
+|-----------------------+-------+-----------------------------------------+------------------------|
+| trips                 | GET   | /trips(.:format)                        | trips#index            |
+| trip                  | GET   | /trips/:airplane_id(.:format)           | trips#show             |
+| trip_refueling        | GET   | /trips/:airplane_id/refueling(.:format) | trips#refueling        |
+| reroute_trip          | PATCH | /trips/:airplane_id/reroute             | trips#reroute          |
+| reroute_trip          | PUT   | /trips/:airplane_id/reroute             | trips#reroute          |
+|-----------------------+-------+-----------------------------------------+------------------------|

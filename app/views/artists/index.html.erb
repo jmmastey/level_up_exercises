@@ -2,18 +2,20 @@
   <p class="right-aligned-link"><%= link_to "Create a New Artist", new_artist_path %></p>
 
   <% if current_user_admin? %>
-    <div class="right-aligned-search">
-      <%= form_tag(search_for_artist_path, method: "get") do %>
-        <ol>
-          <li>
-            <%= label_tag :search_query, "Add a New Artist" %>
-            <%= text_field_tag :search_query %>
-          </li>
-          <li>
-            <%= submit_tag("Add Artist") %>
-          </li>
-        </ol>
-      <% end %>
+    <div class="search-bar">
+      <div class="right-aligned-search search-and-submit">
+        <%= form_tag(search_for_artist_path, method: "get") do %>
+          <ol>
+            <li>
+              <%= label_tag :search_query, "Add a New Artist" %>
+              <%= search_field_tag :search_query, "Search", placeholder: "Enter Search" %>
+            </li>
+            <li>
+              <%= submit_tag("Add Artist") %>
+            </li>
+          </ol>
+        <% end %>
+      </div>
     </div>
   <% end %>
 

@@ -1,19 +1,26 @@
 require 'sinatra/base'
+require 'rubygems'
+require File.dirname(__FILE__) + '/../vendor/bundle/ruby/2.0.0/gems/rack-flash3-1.0.5/lib/rack-flash'
+# require 'rack-flash' # why isn't this working??
+
 require_relative "models/bomb"
 
 class Overlord < Sinatra::Base
   enable :sessions
+  use Rack::Flash, :sweep => true
 
   before '/bomb/*' do
+    redirect "/" unless session[:bomb]
     @bomb = bomb(params[:bomb])
     redirect "/exploded" if bomb.exploded?
   end
 
   get '/' do
+    session.clear
     erb :new_bomb
   end
 
-  post '/bomb' do
+  post '/' do
     @bomb = bomb(params[:bomb])
     redirect "/bomb/inactive"
   end
@@ -29,7 +36,7 @@ class Overlord < Sinatra::Base
     if bomb.active?
       redirect "bomb/active"
     else
-      @bomb.messages = "Incorrect code - bomb not active"
+      flash[:notice] = "Incorrect code - bomb not active"
       redirect '/bomb/inactive'
     end
   end
@@ -43,16 +50,17 @@ class Overlord < Sinatra::Base
     @bomb = bomb
     @bomb.deactivate(params[:deactivation_code])
     if @bomb.active?
-      @bomb.messages = "Incorrect code - ur still gonna blow!"
+      flash[:notice] = "Incorrect code - ur still gonna blow!" + "<br>" +
+                       "Incorrect Attempts: #{@bomb.deactivation_attempts}"
       redirect "/bomb/active"
     else
-      @bomb.messages = "Bomb has been deactivated"
+      flash[:notice] = "Bomb has been deactivated"
       redirect '/bomb/inactive'
     end
   end
 
   get "/exploded" do
-    "<h1>Everyone's dead</h1> <br> <h2>It's a cold world.</h2>"
+    erb :exploded
   end
 
   # ==================================================

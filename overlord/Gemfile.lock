@@ -14,6 +14,8 @@ GEM
     json (1.8.1)
     minitest (5.5.0)
     rack (1.5.2)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (1.5.3)
       rack
     rack-test (0.6.2)
@@ -44,6 +46,7 @@ PLATFORMS
 
 DEPENDENCIES
   factory_girl (~> 4.0)
+  rack-flash3
   rack-test
   rspec
   sinatra

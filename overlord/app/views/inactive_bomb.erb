@@ -1,9 +1,5 @@
 <%= erb :_status, locals: {bomb: @bomb} %>
 
-<% if @bomb.messages %>
-	<p><%= @bomb.messages %></p>
-<% end %>
-
 <h2>Would you like to activate it?</h2>
 
 <form action="/bomb/activate" method="post" id="activate_bomb_form">

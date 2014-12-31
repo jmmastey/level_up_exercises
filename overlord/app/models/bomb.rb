@@ -1,6 +1,6 @@
 class Bomb
   attr_reader :activation_code, :deactivation_code, :timer, :fuse
-  attr_accessor :status, :deactivation_attempts, :messages
+  attr_accessor :status, :deactivation_attempts
 
   ACTIVE = "ACTIVE"
   INACTIVE = "Inactive"
@@ -20,13 +20,13 @@ class Bomb
   def activate(input_code)
     return false unless input_code == activation_code
     @status = ACTIVE
-    @messages = nil
     start_timer
   end
 
   def deactivate(input_code)
     if input_code == @deactivation_code
       @status = INACTIVE
+      @deactivation_attempts = 0
       reset_timer
     else
       @deactivation_attempts += 1

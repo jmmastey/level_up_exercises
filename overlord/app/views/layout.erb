@@ -5,7 +5,13 @@
     <title>OVERLORD</title>
 </head>
 <body>
+
     <center class="container">
+
+		<% if flash.has?(:notice) %>
+		  <h3 class="notice"><%= flash[:notice] %></h3>
+		<% end %>
+
         <%= yield %>
     </center>
 </body>

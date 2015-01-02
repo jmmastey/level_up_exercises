@@ -39,5 +39,17 @@ describe Cohort do
         expect(cohort_hated_it.rejections).to eq(4)
       end
     end
+
+    describe '#conversion_percentage' do
+      it "returns the correct value" do
+        expect(cohort.conversion_percentage.round(4)).to eq(0.6667)
+      end
+    end
+
+    describe '#standard_error' do
+      it "returns the correct value" do
+        expect(cohort.standard_error.round(4)).to eq(0.2722)
+      end
+    end
   end
 end

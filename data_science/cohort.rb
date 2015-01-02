@@ -23,6 +23,13 @@ class Cohort
     ABAnalyzer.confidence_interval(conversions, size, confidence)
   end
 
+  def conversion_percentage
+    conversions.to_f / size.to_f
+  end
 
-
+  def standard_error
+    p = conversion_percentage
+    n = size
+    (Math.sqrt(p * (1 - p) / n))
+  end
 end

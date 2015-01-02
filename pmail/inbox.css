@@ -1,3 +1,5 @@
+/* BASE */
+
 body {
   background-color: white;
   margin: 0px;
@@ -11,18 +13,37 @@ h1,h2 {
   margin: 0px;
 }
 
+/* LAYOUT */
+
 .sidebar {
   display: inline-block;
   width: 270px;
-  box-sizing: border-box;
+}
+
+.content-container {
+  position: absolute;
+  left: 270px;
+  right: 0px;
+  top: 5px;
 }
 
 .sidebar-indented {
   padding-left: 30px;
+  width:  240px;
 }
 
-.right-side {
-  padding-right: 30px;
+.vcenter {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.to-left {
+  float: left;
+}
+
+.to-right {
+  float: right;
 }
 
 #PageHeader {
@@ -30,6 +51,7 @@ h1,h2 {
   background-color: #eeeeee;
   height: 52px;
   border-bottom: 1px solid black;
+  padding-right: 30px;
 }
 
 #TitleHeader {
@@ -38,52 +60,103 @@ h1,h2 {
   left: 0px;
   width: 270px;
   height: 42px;
-  box-sizing: border-box;
 }
 
 #MailSearch {
   position: absolute;
-  top: 5px;
-  left: 270px;
+  top: 0px;
+  left: 0px;
   right: 310px;
   height: 42px;
 }
 
 #AccountControl {
   position: absolute;
-  top: 5px;
+  top: 0px;
   right: 0px;
-  width: 300px;
+  width: 270px;
   height: 42px;
-  padding: 0px 30px 0px 10px;
-  box-sizing: border-box;
 }
 
 #AppControls {
+  position: relative;
   padding: 5px 10px 5px 0px;
   border-bottom: 1px solid black;
   height: 42px;
 }
 
-/* MODULES */
-
-.vcenter {
+#AppMain {
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  padding-right: 30px;
 }
 
+/* MODULES */
+
+/* Generic controls and groups of controls */
+.control {
+  position: relative;
+  display: inline-block;
+  height: 40px;
+  margin: 0px 10px 0px 0px;
+  padding: 0px;
+  vertical-align: top;
+  border: 1px solid gray;
+}
+
+.control > * {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 75px;
+}
+
+.control-group {
+  vertical-align: top;
+  display: inline-block;
+  padding: 0px;
+  margin: 0px 10px 0px 0px;
+}
+
+.control-group > .control {
+  float: left;
+}
+
+/* Dropdown controls */
 .dropdownbutton-content {
   position: absolute;
   display: inline-block;
   z-index: 2;
 }
 
+/* Mailbox */
+.mailbox {
+  overflow: scroll;
+}
+
+.mailbox-list {
+  border-collapse: collapse; 
+}
+
+.mailbox-header {
+  height: 60px;
+}
+
+.mailbox-list-row > td  {
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+}
+
+.mailbox-list-synopsis {
+  width: 100%;
+}
+
+
+/* SPECIFIC WIDGETS */
+
 .titleheader { text-align: center; }
 .titleheader h1 { font-size: 25px; }
 .titleheader h2 { font-size: 15px; }
-
-/* WIDGETS */
 
 .accountinfo {
   width: 200px;
@@ -110,34 +183,6 @@ h1,h2 {
   position: absolute;
   width: 100px;
   right: 0px;
-}
-
-.control {
-  position: relative;
-  display: inline-block;
-  height: 40px;
-  margin: 0px;
-  padding: 0px;
-  vertical-align: top;
-  border: 1px solid gray;
-}
-
-.control > * {
-  display: block;
-  height: 100%;
-  box-sizing: border-box;
-  margin: 0px;
-  min-width: 75px;
-}
-
-.control-group {
-  display: inline-block;
-  padding: 0px;
-  margin-right: 10px;
-}
-
-.to-right {
-  float: right;
 }
 
 /* STATES */

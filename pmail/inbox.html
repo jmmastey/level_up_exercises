@@ -12,40 +12,42 @@
     <h1>Pmail</h1>
     <h2>Online Spigot For Your Spam Beacon</h2>
   </hgroup>
-  <section id="MailSearch">
-    <form class="vcenter control mailsearch-form">
-      <div class="mailsearch-textfield">
-        <input type="text" value="">
-      </div>
-      <input class="vcenter mailsearch-submit"
-             type="image" src="FIXME.jpg" alt="Search Messages">
-    </form>
-  </section>
-  <section id="AccountControl">
-    <div class="vcenter control">
-      <input type="image" class="dropdown-button" alt="Other Apps">
-    </div>
-    <div class="control vcenter">
-      <button class="dropdown-button">
-        <span class="dropdown-label">your@self.net</span>
-      </button>
-      <article class="accountinfo dropdownbutton-content collapsed">
-        <p>This account is managed by <strong>me</strong></p>
-        <p><a class="plain">Learn More</a></p>
-        <h1>Your Name Here</h1>
-        <p>your@self.net<p>
-        <p><a class="plain">Account</a> - <a class="plain">Privacy</a></p>
-        <div class="controlbox">
-          <div class="control plainbutton">
-            <input type="button" class="button">FIXME</input>
-          </div>
-          <div class="control plainbutton">
-            <input type="button" class="button">FIXME TOO</input>
-          </div>
+  <div class="content-container">
+    <section id="MailSearch">
+      <form class="vcenter control mailsearch-form">
+        <div class="mailsearch-textfield">
+          <input type="text" value="">
         </div>
-      </article>
-    </div>
-  </section>
+        <input class="vcenter mailsearch-submit"
+               type="image" src="FIXME.jpg" alt="Search Messages">
+      </form>
+    </section>
+    <section id="AccountControl">
+      <div class="vcenter control">
+        <input type="image" class="dropdown-button" alt="Other Apps">
+      </div>
+      <div class="control vcenter">
+        <button class="dropdown-button">
+          <span class="dropdown-label">your@self.net</span>
+        </button>
+        <article class="accountinfo dropdownbutton-content collapsed">
+          <p>This account is managed by <strong>me</strong></p>
+          <p><a class="plain">Learn More</a></p>
+          <h1>Your Name Here</h1>
+          <p>your@self.net<p>
+          <p><a class="plain">Account</a> - <a class="plain">Privacy</a></p>
+          <div class="controlbox">
+            <div class="control plainbutton">
+              <input type="button" class="button">FIXME</input>
+            </div>
+            <div class="control plainbutton">
+              <input type="button" class="button">FIXME TOO</input>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
 </header>
 <section id="AppControls">
   <div class="sidebar sidebar-indented">
@@ -53,24 +55,69 @@
       <p class="dropdown-button">Mail</p>
     </div>
   </div>
-  <div class="control control-group">
-    <p class="dropdown-button">[]</p>
+  <div class="content-container">
+    <div class="to-left control">
+      <p class="dropdown-button">[]</p>
+    </div>
+    <div class="to-left control">
+      <input type="image" class="button" value="<()>" />
+    </div>
+    <div class="to-left control">
+      <p class="dropdown-button">More</p>
+    </div>
+    <div class="to-right control control-group">
+      <p class="dropdown-button">SETTINGS</p>
+    </div>
   </div>
-  <div class="control control-group">
-    <input type="image" class="button" value="<()>" />
-  </div>
-  <div class="control control-group">
-    <p class="dropdown-button">More</p>
-  </div>
-  <div class="to-right control control-group">
-    <p class="dropdown-button">SETTINGS</p>
-  </div>
-<section>
-<div>
+</section>
+<div id="AppMain">
   <section id="Folders" class="sidebar">
+    <div>
+      <div class="control plainbutton">
+        <button>COMPOSE</button>
+      </div>
+    </div>
   </section>
-  <section id="Mailbox">
-
+  <section id="Mailbox" class="content-container mailbox">
+    <div class="mailbox-header">
+      <div class="to-left control">
+        <p class="dropdown-button">Unread</p>
+      </div>
+      <div class="to-right control">
+        <p class="dropdown-button">[v]</p>
+      </div>
+      <span class="to-right">
+        1-X of X
+      </span>
+    </div>
+    <div>
+      <table class="mailbox-list">
+        <tr class="mailbox-list-row">
+          <td class="mailbox-list-select">FOO</td>
+          <td class="mailbox-list-fav">FOO</td>
+          <td class="mailbox-list-important">FOO</td>
+          <td class="mailbox-list-sender">FOO</td>
+          <td class="mailbox-list-synopsis">FOO</td>
+          <td class="mailbox-list-when">FOO</td>
+        </tr>
+       <tr class="mailbox-list-row">
+          <td class="mailbox-list-select">FOO</td>
+          <td class="mailbox-list-fav">FOO</td>
+          <td class="mailbox-list-important">FOO</td>
+          <td class="mailbox-list-sender">FOO</td>
+          <td class="mailbox-list-synopsis">FOO</td>
+          <td class="mailbox-list-when">FOO</td>
+        </tr>
+       <tr class="mailbox-list-row">
+          <td class="mailbox-list-select">FOO</td>
+          <td class="mailbox-list-fav">FOO</td>
+          <td class="mailbox-list-important">FOO</td>
+          <td class="mailbox-list-sender">FOO</td>
+          <td class="mailbox-list-synopsis">FOO</td>
+          <td class="mailbox-list-when">FOO</td>
+        </tr>
+      </table>
+    </div>
   </section>
 </div>
 </body>

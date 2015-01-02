@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
 
   resources :artists do
+    resources :favorites
     resources :artworks
   end
 

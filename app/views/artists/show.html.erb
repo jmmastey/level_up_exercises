@@ -3,6 +3,9 @@
   <header>
     <div class="column-1">
       <h1><%= @artist.full_name %></h1>
+
+      <%= button_to "Favorite Artist", artist_favorites_path(@artist) %>
+
       <p>Nationality: <%= @artist.nationality %></h3>
       <p>Birthyear: <%= @artist.birthyear %></p>
     </div>

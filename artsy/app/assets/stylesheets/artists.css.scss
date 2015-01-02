@@ -1,0 +1,31 @@
+// Place all the styles related to the artists controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.artists {
+
+  .show {
+    .column-1 {
+      @include span-columns(5 of 10);
+    }
+    .column-2 {
+      @include span-columns(5 of 10);
+      text-align: right;
+    }
+  }
+
+  .right-aligned-search {
+    @include span-columns(3);
+    @include shift(9);
+    text-align: right;
+  }
+
+  .favorite-artist, .unfavorite-artist {
+    margin-bottom: 1.25em;
+  }
+
+  .markdown p a {
+      color: $dark-gray;
+    }
+
+}

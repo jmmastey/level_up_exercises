@@ -1,0 +1,16 @@
+<section class="main-content type-system-rounded">
+  <p class="new_artwork_link right-aligned-link"><%= link_to "Create a New Artwork", new_artist_artwork_path %></p>
+
+  <h1>Artworks by <%= @artist.full_name %></h1>
+
+  <% @artworks.each do |artwork| %>
+    <article>
+      <h2><%= link_to artwork.title, artist_artwork_path(@artist, artwork) %></h2>
+      <p>Year: <%= artwork.date %></p>
+      <%= image_tag(artwork.thumbnail, class: "artwork-thumbnail") %>
+    </article>
+  <% end %>
+
+  <%= paginate @artworks %>
+
+</section>

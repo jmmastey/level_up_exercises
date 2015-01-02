@@ -1,0 +1,33 @@
+<article class="type-system-rounded">
+  <p class="type"><%= @artist.class %></p>
+  <header>
+    <div class="column-1">
+      <h1><%= @artist.full_name %></h1>
+
+      <% if current_user && @favorite_for_user %>
+        <%= button_to "Unfavorite Artist", artist_favorite_path(@artist, @favorite_for_user), method: :delete, class: "unfavorite-artist" %>
+      <% elsif current_user %>
+        <%= button_to "Favorite Artist", artist_favorites_path(@artist), class: "favorite-artist" %>
+      <% end %>
+
+      <p>Nationality: <%= @artist.nationality %></h3>
+      <p>Birthyear: <%= @artist.birthyear %></p>
+    </div>
+    <div class="column-2"><%= image_tag(@artist.thumbnail, class: "artist-thumbnail") %></div>
+  </header>
+  <hr>
+  <h3>Biography</h3>
+  <div class="markdown"><%= markdown(@artist.biography) %></div>
+  <hr>
+  <h3>Analysis</h3>
+  <div class="markdown"><%= markdown(@artist.analysis) %></div>
+  <h3>Artworks</h3>
+  <p><%= link_to "View All Artworks", artist_artworks_path(@artist) %></p>
+
+  <% if current_user %>
+    <p><%= link_to "Edit Artist", edit_artist_path(@artist) %> |
+    <%= link_to "Delete Artist", @artist, method: :delete, data: { confirm: "Are you sure you want to delete this artist?"} %></p>
+  <% end %>
+
+  <p><%= link_to "Back to Artists Page", artists_path %></p>
+</article>

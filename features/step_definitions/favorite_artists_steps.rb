@@ -21,6 +21,7 @@ Given(/^I am logged in and on an artist page$/) do
 end
 
 Given(/^I am not logged in and on an artist page$/) do
+  artist_1 = create(:artist, first_name: "Claude",  last_name: "Monet")
   visit artist_path(artist_1)
 end
 
@@ -54,7 +55,7 @@ Then(/^I should see the artist on my user page$/) do
 end
 
 Then(/^I should not see a Favorite Artist button$/) do
-  expect(page).to_not have_content("Unfavorite Artist")
+  expect(page).to_not have_selector("input.favorite-artist")
 end
 
 Then(/^I should not see the artist on my user page$/) do

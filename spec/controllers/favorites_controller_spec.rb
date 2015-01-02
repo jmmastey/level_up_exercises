@@ -8,6 +8,8 @@ RSpec.describe FavoritesController, :type => :controller do
     context "when not logged in" do
 
       it "cannot favorite an artist" do
+        user_session = nil
+
         post :create, artist_id: artist
 
         expect(response).to redirect_to(new_user_session_url)
@@ -17,12 +19,11 @@ RSpec.describe FavoritesController, :type => :controller do
 
   describe "DELETE #destroy" do
     let(:artist) { create(:artist) }
-    let(:user_id) { 1 }
 
     context "when not logged in" do
 
       it "cannot unfavorite an artist" do
-        delete :destroy, id: user_id, artist_id: artist
+        delete :destroy, artist_id: artist
 
         expect(response).to redirect_to(new_user_session_url)
       end

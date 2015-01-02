@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+gem "activerecord"
+gem "faker"
+gem "factory_girl"
+gem "pg"
+
+group :development, :test do
+  gem "rubysl-irb"
+end

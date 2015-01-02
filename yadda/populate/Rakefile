@@ -1,0 +1,30 @@
+require "factory_girl"
+require_relative "connection"
+require_relative "factories"
+
+Rake::TaskManager.record_task_metadata = true
+
+task :default do
+  system("rake -sT")
+end
+
+namespace :db do
+  desc "Deletes all records from the DB"
+  task :clear do
+    Rating.delete_all
+    Review.delete_all
+    User.delete_all
+    Beer.delete_all
+    Brewery.delete_all
+    Address.delete_all
+  end
+
+  namespace :populate do
+    desc "Generates a collection of beer ratings"
+    task :ratings do
+      breweries = FactoryGirl.create_list(:brewery, :with_beers, 50000)
+      FactoryGirl.create_list(:user, 300000)
+      # TODO: Generate ratings
+    end
+  end
+end

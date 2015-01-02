@@ -1,6 +1,6 @@
 Given(/^I have 2 users$/) do
-  user_1 = create(:user, email: "user1@example.com")
-  user_2 = create(:user, email: "user2@example.com")
+  user_1 = create(:user, email: "user1@example.com", first_name: "first", last_name: "user")
+  user_2 = create(:user, email: "user2@example.com", first_name: "second", last_name: "user")
 end
 
 Given(/^I am on the users page$/) do
@@ -31,6 +31,8 @@ end
 When(/^I signup as a user$/) do
   visit root_path
   click_link("Sign up")
+  fill_in("First Name", with: "Paul")
+  fill_in("Last Name", with: "Haddad")
   fill_in("Email", with: "user@example.com")
   fill_in("Password", with: "password")
   fill_in("Password confirmation", with: "password")
@@ -88,8 +90,8 @@ Then(/^I should see user validation errors$/) do
 end
 
 Then(/^I should see all the users$/) do
-  expect(page).to have_content("user1@example.com")
-  expect(page).to have_content("user2@example.com")
+  expect(page).to have_content("First User")
+  expect(page).to have_content("Second User")
 end
 
 Then(/^I should see the user's information$/) do

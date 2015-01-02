@@ -11,7 +11,7 @@ class FavoritesController < ApplicationController
   def destroy
     favorite = current_user.favorites.find_by(artist_id: params[:artist_id])
     favorite.destroy
-    flash[:success] = "This artist is no longer a favorite of yours."
+    flash[:notice] = "This artist is no longer a favorite of yours."
     redirect_to @artist
   end
 

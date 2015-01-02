@@ -17,10 +17,10 @@
   </header>
   <hr>
   <h3>Biography</h3>
-  <%= markdown(@artist.biography) %>
+  <div class="markdown"><%= markdown(@artist.biography) %></div>
   <hr>
   <h3>Analysis</h3>
-  <%= markdown(@artist.analysis) %>
+  <div class="markdown"><%= markdown(@artist.analysis) %></div>
   <h3>Artworks</h3>
   <p><%= link_to "View All Artworks", artist_artworks_path(@artist) %></p>
 

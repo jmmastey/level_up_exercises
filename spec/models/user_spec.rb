@@ -70,5 +70,22 @@ RSpec.describe User, :type => :model do
       it { should have_many(:favorites) }
       it { should have_many(:favorite_artists) }
     end
+
+    describe "#sample_artworks" do
+      let(:user) { create(:user) }
+      let(:artist_1) { create(:artist, first_name: "Artist",  last_name: "One") }
+      let(:artist_2) { create(:artist, first_name: "Artist",  last_name: "Two") }
+      let(:artist_3) { create(:artist, first_name: "Artist",  last_name: "Three") }
+
+    it "returns one sample artwork from each favorite artist" do
+      user.favorite_artists << artist_1
+      user.favorite_artists << artist_2
+      user.favorite_artists << artist_3
+
+      sample_artworks = user.sample_artworks
+
+      expect(sample_artworks.size).to eq(3)
+    end
+  end
   end
 end

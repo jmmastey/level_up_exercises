@@ -8,11 +8,19 @@
     <p>Account Type: <%= account_type %></p>
 
     <% if @favorite_artists.any? %>
-      <h2>My Favorite Artists:</h2>
       <section class="artist-list">
+      <h2>My favorite artists:</h2>
         <% @favorite_artists.each do |artist| %>
             <h3><%= link_to artist.full_name, artist %></h3>
-            <%= sample_artwork_image(artist) %>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if @favorite_artists.any? %>
+      <section class="artworks-list">
+        <h2>Some works by my favorite artists:</h2>
+        <% @user.sample_artworks.each do |artwork| %>
+          <%= image_tag(artwork.thumbnail) %>
         <% end %>
       </section>
     <% end %>

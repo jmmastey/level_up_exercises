@@ -19,4 +19,13 @@
     @include shift(9);
     text-align: right;
   }
+
+  .favorite-artist, .unfavorite-artist {
+    margin-bottom: 1.25em;
+  }
+
+  .markdown p a {
+      color: $dark-gray;
+    }
+
 }

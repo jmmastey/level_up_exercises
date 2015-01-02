@@ -22,7 +22,7 @@
   <h1>Artists</h1>
 
     <% @artists.each do |artist| %>
-      <article>
+      <article class="markdown">
         <h2><%= link_to artist.full_name, artist %></h2>
         <%= markdown(artist.analysis) %>
       </article>

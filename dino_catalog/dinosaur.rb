@@ -39,5 +39,4 @@ class Dino
       end
     end.compact
   end
-
 end

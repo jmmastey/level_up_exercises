@@ -2,10 +2,13 @@ require_relative 'dino_csv_tools'
 include DinoCSVTools
 class DinoDex
   attr_reader :dinosaurs
-  PERIODS = %w( jurassic albian cretaceous triassic permian oxfordian )
-  ATTRIBUTES = %w( fat small biped quadruped carnivore herbivore )
-  COLLECTIONS = %w( joe pirate_bay )
-  CONTINENTS = %w( north_america south_america africa europe asia )
+
+  FILTER_MAPPING = {
+    period_filter: %w( jurassic albian cretaceous triassic permian oxfordian ),
+    attribute_filter: %w( fat small biped quadruped carnivore herbivore ),
+    collection_filter: %w( joe pirate_bay ),
+    continent_filter: %w( north_america south_america africa europe asia ),
+  }
 
   def initialize(csvs)
     dino_list = CSVtoDinos.csv_to_dinos(csvs)
@@ -13,27 +16,23 @@ class DinoDex
   end
 
   def find_dino(dino_name)
-    @dinosaurs.detect { |dino| dino.name == dino_name }  
+    @dinosaurs.detect { |dino| dino.name == dino_name }
   end
 
   def filter_dinos(filters)
-    filters.map { |filter| process_filter(@dinosaurs, filter) }.inject(:&)
+    filters.map { |f| process_filter(@dinosaurs, f) }.compact.inject(:&)
   end
 
   def to_a
-    @dinosaurs.map { |dino| dino.name }
+    @dinosaurs.map(&:name)
   end
 
   private
 
   def process_filter(dinos, filter)
-    case
-      when PERIODS.include?(filter) then period_filter(dinos, filter)
-      when ATTRIBUTES.include?(filter) then attribute_filter(dinos, filter)
-      when COLLECTIONS.include?(filter) then collection_filter(dinos, filter)
-      when CONTINENTS.include?(filter) then continent_filter(dinos, filter)
+    FILTER_MAPPING.detect do |k, v|
+      return send(k, dinos, filter) if v.include?(filter)
     end
-
   end
 
   def attribute_filter(dinos, filter)
@@ -53,5 +52,4 @@ class DinoDex
     else dinos.select { |dino| dino.continent != "africa" }
     end
   end
-
 end

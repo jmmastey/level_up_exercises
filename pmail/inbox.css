@@ -4,7 +4,6 @@ body {
 }
 
 div,article,p,section,hgroup,header {
-  border: 1px dotted gray;
 }
 
 h1,h2 {
@@ -13,50 +12,65 @@ h1,h2 {
 }
 
 .sidebar {
-  width: 250px;
-  padding-left: 8px;
+  display: inline-block;
+  width: 270px;
+  box-sizing: border-box;
+}
+
+.sidebar-indented {
+  padding-left: 30px;
+}
+
+.right-side {
+  padding-right: 30px;
 }
 
 #PageHeader {
   width: 100%;
   background-color: #eeeeee;
-  height: 60px;
+  height: 52px;
+  border-bottom: 1px solid black;
 }
 
 #TitleHeader {
   position: absolute;
-  top: 0px;
+  top: 5px;
   left: 0px;
-  width: 250px;
-  height: 60px;
+  width: 270px;
+  height: 42px;
+  box-sizing: border-box;
 }
 
 #MailSearch {
   position: absolute;
-  top: 0px;
+  top: 5px;
   left: 270px;
-  right: 300px;
-  height: 60px;
-}
-
-#MailSearch > form {
-  height: 30px;
-  top: 50%;
-  margin-top: -15px;
+  right: 310px;
+  height: 42px;
 }
 
 #AccountControl {
   position: absolute;
-  top: 0px;
+  top: 5px;
   right: 0px;
   width: 300px;
-  height: 60px;
+  height: 42px;
+  padding: 0px 30px 0px 10px;
+  box-sizing: border-box;
+}
+
+#AppControls {
+  padding: 5px 10px 5px 0px;
+  border-bottom: 1px solid black;
+  height: 42px;
 }
 
 /* MODULES */
 
-.sidebar-left {
-  width: 300px;
+.vcenter {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .dropdownbutton-content {
@@ -77,27 +91,25 @@ h1,h2 {
 
 .mailsearch-form {
   width: 100%;
-  position: relative;
-  border: 1px dotted red;
+  position: absolute;
 }
 
-.mailsearch-textfield {
+.mailsearch-form > .mailsearch-textfield {
   position: absolute;
-  top: 0px;
   left: 0px;
   right: 100px;
 }
 
-.mailsearch-textfield > input {
+.mailsearch-textfield > input[type="text"] {
   width: 100%;
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .mailsearch-submit {
   position: absolute;
-  top: 0px;
-  right: 0px;
   width: 100px;
-  border: 1px dotted red;
+  right: 0px;
 }
 
 .control {
@@ -106,10 +118,26 @@ h1,h2 {
   height: 40px;
   margin: 0px;
   padding: 0px;
+  vertical-align: top;
+  border: 1px solid gray;
 }
 
-.control > *:first-child {
+.control > * {
+  display: block;
   height: 100%;
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 75px;
+}
+
+.control-group {
+  display: inline-block;
+  padding: 0px;
+  margin-right: 10px;
+}
+
+.to-right {
+  float: right;
 }
 
 /* STATES */

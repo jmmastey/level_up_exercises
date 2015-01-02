@@ -6,27 +6,29 @@
 <link rel="shortcut icon" href="FIXME.jpg" />
 <script src="inbox.js"></script>
 </head>
+<body>
 <header id="PageHeader">
-  <hgroup id="TitleHeader" class="titleheader sidebar">
+  <hgroup id="TitleHeader" class="titleheader sidebar sidebar-indented">
     <h1>Pmail</h1>
     <h2>Online Spigot For Your Spam Beacon</h2>
   </hgroup>
   <section id="MailSearch">
-    <form class="mailsearch-form">
+    <form class="vcenter control mailsearch-form">
       <div class="mailsearch-textfield">
         <input type="text" value="">
       </div>
-      <div class="mailsearch-submit">
-        <input type="image" src="FIXME.jpg" alt="Search Messages">
-      </div>
+      <input class="vcenter mailsearch-submit"
+             type="image" src="FIXME.jpg" alt="Search Messages">
     </form>
   </section>
   <section id="AccountControl">
-    <div class="control dropdownbutton">
-      <input type="image" class="button" alt="Other Apps">
+    <div class="vcenter control">
+      <input type="image" class="dropdown-button" alt="Other Apps">
     </div>
-    <div class="control dropdownbutton">
-      <button class="button"><span class="dropdown-label">your@self.net</span></button>
+    <div class="control vcenter">
+      <button class="dropdown-button">
+        <span class="dropdown-label">your@self.net</span>
+      </button>
       <article class="accountinfo dropdownbutton-content collapsed">
         <p>This account is managed by <strong>me</strong></p>
         <p><a class="plain">Learn More</a></p>
@@ -46,15 +48,30 @@
   </section>
 </header>
 <section id="AppControls">
-  <div class="sidebar-left dropdowncontrol appmode-selector">
-    <div class="control">
-      <p class="dropdowncontrol-button">Mail</p>
+  <div class="sidebar sidebar-indented">
+    <div class="control control-group">
+      <p class="dropdown-button">Mail</p>
     </div>
   </div>
-  <div class="selection-menu dropdowncontrol">
-    <span class="checkbox unchecked"></span>
+  <div class="control control-group">
+    <p class="dropdown-button">[]</p>
+  </div>
+  <div class="control control-group">
+    <input type="image" class="button" value="<()>" />
+  </div>
+  <div class="control control-group">
+    <p class="dropdown-button">More</p>
+  </div>
+  <div class="to-right control control-group">
+    <p class="dropdown-button">SETTINGS</p>
   </div>
 <section>
-<body>
+<div>
+  <section id="Folders" class="sidebar">
+  </section>
+  <section id="Mailbox">
+
+  </section>
+</div>
 </body>
 </html>

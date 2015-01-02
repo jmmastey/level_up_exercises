@@ -4,7 +4,9 @@
     <div class="column-1">
       <h1><%= @artist.full_name %></h1>
 
-      <% if current_user %>
+      <% if current_user && @favorite_for_user %>
+        <%= button_to "Unfavorite Artist", artist_favorites_path(@artist), class: "unfavorite-artist" %>
+      <% elsif current_user %>
         <%= button_to "Favorite Artist", artist_favorites_path(@artist), class: "favorite-artist" %>
       <% end %>
 

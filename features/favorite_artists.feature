@@ -12,6 +12,10 @@ Feature: Favorite Artists
     Given I am not logged in and on an artist page
     Then I should not see a Favorite Artist button
 
+  Scenario: Show an Unfavorite Artist link if already favorited
+    Given I am logged in and on an artist page I have favorited
+    Then I should see a Unfavorite Artist button
+
   Scenario: Unfavorite an artist while logged in
     Given I am logged in and on an artist page I have favorited
     When I click the Unfavorite Artist button

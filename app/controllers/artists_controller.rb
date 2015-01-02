@@ -7,6 +7,9 @@ class ArtistsController < ApplicationController
   end
 
   def show
+    if current_user
+      @favorite_for_user = current_user.favorites.find_by(artist_id: @artist.id)
+    end
   end
 
   def new

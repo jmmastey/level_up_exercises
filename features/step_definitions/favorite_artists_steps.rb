@@ -66,3 +66,8 @@ end
 Then(/^I should not see a Unfavorite Artist button$/) do
   expect(page).to_not have_content("Unfavorite Artist")
 end
+
+Then(/^I should see a Unfavorite Artist button$/) do
+  expect(page).to have_selector("input.unfavorite-artist")
+end
+

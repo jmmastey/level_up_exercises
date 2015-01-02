@@ -14,23 +14,4 @@ describe RetrieveArtist do
       artist_retriever.get_artist_data('andy-warhol')
     end
   end
-
-  describe "new_record?" do
-    it "returns false if there is an existing record for the artist" do
-      # existing_artist = create(:retrieve_artist)
-      # new_artist = create(:retrieve_artist)
-
-      # expect(new_artist.new_record?).to be false
-    end
-
-    it "returns true if there is no existing record for the artist" do
-      # artist = create(:artist, first_name: "Andy", last_name: "Warhol", api_id: "1234")
-
-      # expect(artist.new_record?).to be true
-    end
-  end
-
-  context "new artist" do
-
-  end
 end

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Artjourney | <%= yield(:title) %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Nunito:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+</head>
+</head>
+<body class="<%= controller.controller_name %>">
+
+  <div class="wrapper-for-content-outside-of-footer <%= controller.action_name %>">
+
+    <%= render 'layouts/header' %>
+
+    <div class="main-layout">
+
+      <section class="main-content">
+        <% if user_signed_in? %>
+          <p class="log-in-notice">Logged in as <%= current_user.email %></p>
+        <% end %>
+
+        <%= render 'layouts/flashes' %>
+
+        <%= yield %>
+      </section>
+
+    </div>
+  </div>
+
+  <%= render 'layouts/footer' %>
+  <%= debug(params) if Rails.env.development? %>
+</body>
+</html>

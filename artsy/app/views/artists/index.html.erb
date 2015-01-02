@@ -1,0 +1,33 @@
+<section class="main-content type-system-rounded">
+  <p class="right-aligned-link"><%= link_to "Create a New Artist", new_artist_path %></p>
+
+  <% if current_user_admin? %>
+    <div class="search-bar">
+      <div class="right-aligned-search search-and-submit">
+        <%= form_tag(search_for_artist_path, method: "get") do %>
+          <ol>
+            <li>
+              <%= label_tag :search_query, "Add a New Artist" %>
+              <%= search_field_tag :search_query, "Search", placeholder: "Enter Search" %>
+            </li>
+            <li>
+              <%= submit_tag("Add Artist") %>
+            </li>
+          </ol>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <h1>Artists</h1>
+
+    <% @artists.each do |artist| %>
+      <article class="markdown">
+        <h2><%= link_to artist.full_name, artist %></h2>
+        <%= markdown(artist.analysis) %>
+      </article>
+    <% end %>
+
+    <%= paginate @artists %>
+
+</section>

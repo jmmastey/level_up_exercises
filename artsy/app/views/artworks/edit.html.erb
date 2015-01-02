@@ -1,0 +1,16 @@
+<%= form_for [@artist, @artwork] do |f| %>
+
+  <%= render 'shared/form_errors', object: @artwork %>
+
+  <%= f.label :title, "Title" %>
+  <%= f.text_field :title %>
+
+  <%= f.label :date, "Date Created" %>
+  <%= f.text_field :date %>
+
+  <%= f.label :thumbnail, "Artwork Thumbnail Image URL" %>
+  <%= f.text_field :thumbnail %>
+
+  <%= f.submit %> or
+  <%= link_to "Cancel", artist_artworks_path, data: { confirm: "Are you sure you want to cancel and go back?" } %>
+<% end %>

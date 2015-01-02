@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.artsy.net/api
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/vnd.artsy-v2+json
+      X-Xapp-Token:
+      - JvTPWe4WsQO-xqX6Bts49jiOpRNLY4AZe8oTj7EwHWopdD0uddCEwumjpTi-btEykT1GRijM-j5w0CJAZNXWZecCBhSsrD3kC0v4J9o8F4e76Qt6_ydSvFaBLoQ_8K7M6S4Sj0ybe34_WE10dK64oitlCVDJ2PCEaPxQSoQiI1jOcGVT7MSNlc-0jPKOrF5kMLsW7uvaelUq7y0gzcSVbg4KP7wwokULfYFxbcVXdXs=
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 31 Dec 2014 18:15:03 GMT
+      Etag:
+      - '"8d485dd29e0ece06db8ce4b8e93b8269"'
+      Expires:
+      - 1970-01-01 00:00:00 UTC
+      Server:
+      - nginx/1.4.7
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Frame-Options:
+      - DENY
+      X-Request-Id:
+      - 39efe8f5-bd66-41a0-b31f-0d174d70eb0a
+      X-Robots-Tag:
+      - noindex
+      X-Runtime:
+      - '0.017329'
+      Content-Length:
+      - '381'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"_links":{"self":{"href":"https://api.artsy.net/api/"},"docs":{"href":"https://api.artsy.net/api/docs"},"status":{"href":"https://api.artsy.net/api/status"},"search":{"href":"https://api.artsy.net/api/search{?q}","templated":true},"current_user":{"href":"https://api.artsy.net/api/current_user"},"artists":{"href":"https://api.artsy.net/api/artists{?artwork_id,similar_to_artist_id,similarity_type}","templated":true},"artist":{"href":"https://api.artsy.net/api/artists/{id}","templated":true},"users":{"href":"https://api.artsy.net/api/users"},"user":{"href":"https://api.artsy.net/api/users/{id}","templated":true},"profiles":{"href":"https://api.artsy.net/api/profiles"},"profile":{"href":"https://api.artsy.net/api/profiles/{id}","templated":true},"collections":{"href":"https://api.artsy.net/api/collections{?user_id,private}","templated":true},"collection":{"href":"https://api.artsy.net/api/collections/{id}","templated":true},"collection_items":{"href":"https://api.artsy.net/api/collection_items{?user_id,collection_id}","templated":true},"collection_item":{"href":"https://api.artsy.net/api/collection_items/{id}","templated":true},"applications":{"href":"https://api.artsy.net/api/applications"},"application":{"href":"https://api.artsy.net/api/applications/{id}","templated":true},"genes":{"href":"https://api.artsy.net/api/genes{?artist_id,artwork_id}","templated":true},"gene":{"href":"https://api.artsy.net/api/genes/{id}","templated":true},"partners":{"href":"https://api.artsy.net/api/partners"},"partner":{"href":"https://api.artsy.net/api/partners/{id}","templated":true},"shows":{"href":"https://api.artsy.net/api/shows{?partner_id,status}","templated":true},"show":{"href":"https://api.artsy.net/api/shows/{id}","templated":true},"artworks":{"href":"https://api.artsy.net/api/artworks{?artist_id,partner_id,show_id,similar_to_artwork_id,published}","templated":true},"artwork":{"href":"https://api.artsy.net/api/artworks/{id}","templated":true},"edition":{"href":"https://api.artsy.net/api/editions/{id}{?artwork_id}","templated":true},"tokens":{"href":"https://api.artsy.net/api/tokens"}}}'
+    http_version: 
+  recorded_at: Wed, 31 Dec 2014 18:15:02 GMT
+- request:
+    method: get
+    uri: https://api.artsy.net/api/artists/na
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/vnd.artsy-v2+json
+      X-Xapp-Token:
+      - JvTPWe4WsQO-xqX6Bts49jiOpRNLY4AZe8oTj7EwHWopdD0uddCEwumjpTi-btEykT1GRijM-j5w0CJAZNXWZecCBhSsrD3kC0v4J9o8F4e76Qt6_ydSvFaBLoQ_8K7M6S4Sj0ybe34_WE10dK64oitlCVDJ2PCEaPxQSoQiI1jOcGVT7MSNlc-0jPKOrF5kMLsW7uvaelUq7y0gzcSVbg4KP7wwokULfYFxbcVXdXs=
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 31 Dec 2014 18:15:03 GMT
+      Server:
+      - nginx/1.4.7
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Request-Id:
+      - aecd091c-c6aa-4940-acae-efdef1e0eae1
+      X-Runtime:
+      - '0.018172'
+      Content-Length:
+      - '75'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"type":"other_error","message":"Artist Not Found"}'
+    http_version: 
+  recorded_at: Wed, 31 Dec 2014 18:15:02 GMT
+recorded_with: VCR 2.9.3

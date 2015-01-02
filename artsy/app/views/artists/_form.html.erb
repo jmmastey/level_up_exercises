@@ -1,0 +1,28 @@
+<%= form_for @artist do |f| %>
+
+  <%= render 'shared/form_errors', object: @artist %>
+
+  <%= f.label :first_name, "First Name" %>
+  <%= f.text_field :first_name %>
+
+  <%= f.label :last_name, "Last Name" %>
+  <%= f.text_field :last_name %>
+
+  <%= f.label :nationality, "Nationality" %>
+  <%= f.text_field :nationality %>
+
+  <%= f.label :birthday, "Birthyear" %>
+  <%= f.text_field :birthyear %>
+
+  <%= f.label :biography, "Biography" %>
+  <%= f.text_area :biography %>
+
+  <%= f.label :analysis, "Analysis" %>
+  <%= f.text_area :analysis %>
+
+  <%= f.label :thumbnail, "Artist Thumbnail Image URL" %>
+  <%= f.text_field :thumbnail %>
+
+  <%= f.submit %> or
+  <%= link_to "Cancel", @artist, data: { confirm: "Are you sure you want to cancel and go back?" } %>
+<% end %>

@@ -1,0 +1,10 @@
+.sessions {
+
+  h1 {
+    margin-bottom: 1.5em;
+  }
+
+  textarea, #{$all-text-inputs}, select[multiple=multiple] {
+    width: 40%;
+  }
+}

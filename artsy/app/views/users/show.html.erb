@@ -1,0 +1,34 @@
+<article class="type-system-rounded">
+  <p class="type"><%= @user.class %></p>
+  <header>
+    <h1>User Profile for <%= @user.full_name %></h1>
+  </header>
+    <p>Email: <%= @user.email %></p>
+
+    <p>Account Type: <%= account_type %></p>
+
+    <% if @favorite_artists.any? %>
+      <section class="artist-list">
+      <h2>My favorite artists:</h2>
+        <% @favorite_artists.each do |artist| %>
+            <h3><%= link_to artist.full_name, artist %></h3>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if @user.sample_artworks.any? %>
+      <section class="artworks-list">
+        <h2>Some works by my favorite artists:</h2>
+        <% @user.sample_artworks.each do |artwork| %>
+          <%= image_tag(artwork.thumbnail) %>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if current_user? %>
+      <p><%= link_to "Edit Account", edit_user_registration_path %> |
+      <%= link_to "Delete Account", user_registration_path, method: :delete, data: { confirm: "Are you sure you want to delete your account?"} %></p>
+    <% end %>
+
+    <p><%= link_to "Back to Users Page", users_path %></p>
+</article>

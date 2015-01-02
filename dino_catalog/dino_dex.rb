@@ -1,6 +1,6 @@
 require_relative 'dino_csv_tools'
-include DinoCSVTools
 class DinoDex
+  include DinoCSVTools
   attr_reader :dinosaurs
 
   FILTER_MAPPING = {

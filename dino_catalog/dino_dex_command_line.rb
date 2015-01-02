@@ -22,7 +22,7 @@ class DinoDexCommandLine
     if user_input.length == 1
       process_single_command(user_input[0])
     else
-      process_multiple_commands(user_input)
+      process_filters(user_input)
     end
   end
 
@@ -36,11 +36,11 @@ class DinoDexCommandLine
     end
   end
 
-  def process_multiple_commands(user_inputs)
+  def process_filters(user_inputs)
     if user_inputs[0] != "filter"
       invalid_command
     else
-      process_filters(user_inputs[1..-1])
+      print_filtered_dinos(user_inputs[1..-1])
     end
   end
 
@@ -67,9 +67,5 @@ class DinoDexCommandLine
 
   def invalid_command
     puts "Invalid command.  Please try again."
-  end
-
-  def process_filters(filters)
-    print_filtered_dinos(filters.map!(&:downcase))
   end
 end

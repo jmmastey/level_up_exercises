@@ -1,6 +1,7 @@
 class Artist < ActiveRecord::Base
   has_many :artworks, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :followers, through: :favorites, source: :user
 
   validates :first_name, :last_name, presence: true
 

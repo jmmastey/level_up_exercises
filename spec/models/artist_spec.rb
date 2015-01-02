@@ -31,6 +31,7 @@ RSpec.describe Artist, :type => :model do
   describe "associations" do
     it { should have_many(:artworks) }
     it { should have_many(:favorites) }
+    it { should have_many(:followers) }
   end
 
   describe "dependent destroy" do

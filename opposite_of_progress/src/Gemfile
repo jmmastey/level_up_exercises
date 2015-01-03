@@ -10,6 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'congress'
 gem 'kaminari'
+gem 'foundation-rails'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

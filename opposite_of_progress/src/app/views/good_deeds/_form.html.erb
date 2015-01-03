@@ -1,0 +1,17 @@
+<%= form_for(@good_deed) do |f| %>
+  <% if @good_deed.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@good_deed.errors.count, "error") %> prohibited this good_deed from being saved:</h2>
+
+      <ul>
+      <% @good_deed.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

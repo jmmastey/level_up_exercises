@@ -18,23 +18,23 @@ describe PageView do
       end
     end
 
-      context "when no argument is passed" do
-        it "raises an error" do
-          expect { PageView.new }.to raise_error
-        end
-      end
-
-      context "when cohort is not passed" do
-        it "raises and error" do
-          expect { PageView.new(result) }.to raise_error
-        end
-      end
-
-      context "when result is not passed" do
-        it "raises and error" do
-          expect { PageView.new(cohort) }.to raise_error
-        end
+    context "when no argument is passed" do
+      it "raises an error" do
+        expect { PageView.new }.to raise_error
       end
     end
+
+    context "when cohort is not passed" do
+      it "raises and error" do
+        expect { PageView.new(result) }.to raise_error
+      end
+    end
+
+    context "when result is not passed" do
+      it "raises and error" do
+        expect { PageView.new(cohort) }.to raise_error
+      end
+    end
+  end
 
 end

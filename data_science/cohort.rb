@@ -7,7 +7,7 @@ class Cohort
   attr_accessor :name, :pageviews
 
   def initialize(name, pageviews)
-    @name = name
+    @name      = name
     @pageviews = pageviews
   end
 

@@ -5,7 +5,7 @@ require_relative 'cohort.rb'
 
 class Experiment
 
-  CONFIDENCE_LEVEL = 1.96
+  CONFIDENCE_LEVEL      = 1.96
   PROBABILITY_THRESHOLD = 0.05
 
   def initialize(results)
@@ -25,6 +25,9 @@ class Experiment
     @test.chisquare_p
   end
 
+  def clear_difference?
+    chisquare_p >= PROBABILITY_THRESHOLD
+  end
 
   private
 
@@ -35,13 +38,13 @@ class Experiment
   def create_cohorts(pageviews)
     @cohorts = []
     pageviews.group_by(&:cohort).each do |c, v|
-      @cohorts << Cohort.new(c,v)
+      @cohorts << Cohort.new(c, v)
     end
   end
 
   def format_for_abanalyzer
-  # [Cohort obj, Cohort obj] --> {:A=>{:success=>30, :failure=>5}, :B=>{:success=>30, :failure=>30}}
-  groups = {}
+    # [Cohort obj, Cohort obj] --> {:A=>{:success=>30, :failure=>5}, :B=>{:success=>30, :failure=>30}}
+    groups = {}
     @cohorts.each do |cohort|
       groups[cohort.name.to_sym] = { success: cohort.conversions, failure: cohort.rejections }
     end
@@ -49,7 +52,7 @@ class Experiment
   end
 
   def winning_cohort
-    "A"
+    @cohorts.sort_by { |cohort| cohort.conversion_percentage }.to_a.last
   end
 
 

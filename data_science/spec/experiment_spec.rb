@@ -19,8 +19,8 @@ describe Experiment do
     array
   end
 
-  describe '#build_groups' do
-    let(:groups){ experiment.send(:build_groups) }
+  describe '#format_for_abanlyzer' do
+    let(:groups){ experiment.send(:format_for_abanalyzer) }
     it 'adds the cohorts' do
       expect(groups.keys).to match_array([:A, :B])
     end
@@ -34,41 +34,18 @@ describe Experiment do
     end
   end
 
-  describe '#winner' do
+  describe '#report' do
     it "returns the correct winner" do
-      expect(experiment.winner).to        eq("Winner: Cohort A")
-      expect(tie_experiment.winner).to    eq("No clear winner")
-      expect(sample_experiment.winner).to eq("Winner: Cohort B")
+      expect(experiment.report).to        eq("Winner: Cohort A")
+      expect(tie_experiment.report).to    eq("No clear winner")
+      expect(sample_experiment.report).to eq("Winner: Cohort B")
     end
   end
 
-  describe '#tester' do
-    # use send it access private method
-    let(:tester){ experiment.send(:tester) }
-
+  describe '#chiquare_p' do
     it "returns the correct chisquare_p value" do
-      expect(tester.chisquare_p.round(4)).to eq(0.0005)
+      expect(experiment.chiquare_p.round(4)).to eq(0.0005)
     end
 
   end
-
-  # describe '#valid_difference?' do
-  #   context 'when there is a valid difference' do
-  #     let(:test) { true }
-  #
-  #     it "returns the correct winner" do
-  #       expect(test).to eq(true)
-  #       # expect(experiment.valid_difference?(test).to eq(true))
-  #     end
-  #   end
-  # end
-
-  # describe '#report' do
-  #   it "gives the correct chi-square p-value" do
-  #     expect(experiment.report).to eq("Chi square 0.0316. true")
-  #   end
-  #
-  #   it "then it creates an array of cohort objects"
-  #   it "returns chisquare_p"
-  # end
 end

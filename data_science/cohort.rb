@@ -1,5 +1,9 @@
-require('abanalyzer')
+require 'abanalyzer'
+
 class Cohort
+
+  CONFIDENCE = 0.95
+
   attr_accessor :name, :pageviews
 
   def initialize(name, pageviews)
@@ -19,12 +23,16 @@ class Cohort
     pageviews.size
   end
 
-  def confidence_interval
-    ABAnalyzer.confidence_interval(conversions, size, confidence)
+  def to_s
+    "Converion percentage was #{conversion_percentage} within a 95% confidence interval of #{confidence_interval}"
   end
 
   def conversion_percentage
     conversions.to_f / size.to_f
+  end
+
+  def confidence_interval
+    ABAnalyzer.confidence_interval(conversions, size, CONFIDENCE)
   end
 
   def standard_error

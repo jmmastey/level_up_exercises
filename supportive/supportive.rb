@@ -26,7 +26,7 @@ class BlagPost
       @categories = []
     end
 
-    @comments = args[:comments] || []
+    @comments = Array.wrap(args[:comments])
     @body = args[:body].squish
     @publish_date = args[:publish_date].try { |publish_date| publish_date.to_date } || Date.today
   end
@@ -86,7 +86,7 @@ end
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ ["hello"], ["hello"], ["hello"] ], # because comments are meaningless, get it?
+                    "comments"      => [  ], # because comments are meaningless, get it?
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.

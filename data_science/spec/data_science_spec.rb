@@ -32,14 +32,14 @@ describe "DataScience" do
     expect(data_science.trials['B']).to eq(1543)
   end
   
-  # it 'calculates the conversion rate for each cohort' do
-  #   data_science = DataScience.new(
-  #     File.read(File.expand_path("data/source_data.json"))
-  #   )
-  #
-  #   expect(data_science.conversion_rates['A']).to eq(0.035)
-  #   expect(data_science.conversion_rates['B']).to eq(0.051)
-  # end
+  it 'calculates the conversion rate for each cohort' do
+    data_science = DataScience.new(
+      File.read(File.expand_path("data/source_data.json"))
+    )
+
+    expect(data_science.conversion_rates['A']).to eq(0.035)
+    expect(data_science.conversion_rates['B']).to eq(0.051)
+  end
   
   # Number of conversions for each part of the test.
   # it 'returns the number/conversions for each part of the test'

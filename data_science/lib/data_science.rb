@@ -16,7 +16,7 @@ class DataScience
     @trials           = Hash.new(0)
     
     extract_trial_and_conversion_counts
-    # calculate_conversion_rates
+    calculate_conversion_rates
   end
   
   def sample_size
@@ -26,11 +26,11 @@ class DataScience
   
 private
   
-  # def calculate_conversion_rates
-  #   @trials.each_pair do |cohort, trial_count|
-  #     @conversion_rates[cohort] = (conversions[cohort].to_f/trial_count.to_f).round(3)
-  #   end
-  # end
+  def calculate_conversion_rates
+    @trials.each_pair do |cohort, trial_count|
+      @conversion_rates[cohort] = (conversions[cohort].to_f/trial_count.to_f).round(3)
+    end
+  end
   
   def extract_trial_and_conversion_counts
     @sample.each do |current_sample|

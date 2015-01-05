@@ -14,7 +14,7 @@ class BlagPost
       hash
     end
 
-    if args[:author] != '' && args[:author_url] != ''
+    if args[:author].present? && args[:author_url].present?
       @author = Author.new(args[:author], args[:author_url])
     end
 
@@ -38,7 +38,7 @@ class BlagPost
   private
 
   def byline
-    if author.nil?
+    if author.blank?
       ""
     else
       "By #{author.name}, at #{author.url}"
@@ -119,3 +119,4 @@ blag = BlagPost.new("author"        => "Foo Bar",
                         ARTICLE
                    )
 puts blag.to_s
+#puts blag.inspect

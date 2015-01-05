@@ -28,7 +28,7 @@ class BlagPost
 
     @comments = args[:comments] || []
     @body = args[:body].squish
-    @publish_date = args[:publish_date].try { |date| Date.parse(date) } || Date.today
+    @publish_date = args[:publish_date].try { |publish_date| publish_date.to_date } || Date.today
   end
 
   def to_s

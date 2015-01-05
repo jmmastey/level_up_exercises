@@ -46,26 +46,24 @@ class BlagPost
   end
 
   def category_list
-    return "" if categories.empty?
-
-    if categories.length == 1
-      label = "Category"
+    if categories.empty?
+      ""
     else
-      label = "Category".pluralize
+      category_titles = categories.map { |category| as_title(category) }
+      "#{pluralizer(categories.length, 'Category')}: #{category_titles.to_sentence}"
     end
+  end
 
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
+  def pluralizer(size, label)
+    if size == 1
+      label.singularize
     else
-      suffix = ""
+      label.pluralize
     end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
   end
 
   def as_title(string)
-    String(string).humanize
+    String(string).humanize.titleize
   end
 
   def commenters

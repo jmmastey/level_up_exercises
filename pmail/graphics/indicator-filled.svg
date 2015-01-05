@@ -1,0 +1,11 @@
+<svg width="100" height="50"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <polygon stroke="#000000" stroke-width="5" 
+    points="5,0 70,0 95,25 70,50 5,50, 5,5"
+    strokeWidth="5" strokecolor="#000000" fill="#ffff56" orient="point" r2="23.62995" r="59.07486"
+    point="5" shape="star" id="svg_1"/>
+ </g>
+</svg>

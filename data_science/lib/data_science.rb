@@ -2,6 +2,8 @@ require 'json'
 
 class DataScience
   attr_reader :conversions, :conversion_rates, :trials
+
+  autoload :Cohort, 'data_science/cohort'
   
   # TODO: make sure the data loading is abstracted from the main 
   # calculation code
@@ -10,7 +12,7 @@ class DataScience
     
     @cohorts = []
 
-    # TODO: go away
+    # TODO: to go away
     @conversion_rates = {}
     @conversions      = Hash.new(0)
     @trials           = Hash.new(0)
@@ -43,6 +45,6 @@ private
   end
   
   def load_raw_json(raw_json)
-    @sample  = JSON.parse(raw_json)   
+    @sample = JSON.parse(raw_json)   
   end
 end

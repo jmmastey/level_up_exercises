@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  avg_price: 9.99
+  low_price: 9.99
+  high_price: 9.99
+  title: MyString
+
+two:
+  avg_price: 9.99
+  low_price: 9.99
+  high_price: 9.99
+  title: MyString

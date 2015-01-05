@@ -5,11 +5,31 @@ Feature: User visits the home page
 
   Background:
     Given I am not logged in
-      And I am on the homepage
+      And I am on home pages
 
   Scenario: Sees navigational links
-    Then I see 'good deeds' link
-      And I see 'bills' link
-      And I see 'legislators' link
+    Then I see Good Deeds link
+      And I see Bills link
+      And I see Legislators link
+      And I see Search link
+
+  Scenario: Sees login and signup links
+    Then I see Login link
+      And I see Signup link
+
+
+  Scenario Outline: Clicks each link to go to that page
+    When I click <link> link
+    Then I am on <link> page
+
+  Examples:
+  | link        |
+  | Good Deeds  |
+  | Bills       |
+  | Legislators |
+  | Search      |
+  | Login       |
+  | Signup      |
+
 
 

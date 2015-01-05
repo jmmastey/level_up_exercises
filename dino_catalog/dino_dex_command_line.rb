@@ -45,7 +45,7 @@ class DinoDexCommandLine
   end
 
   def print_help_menu
-    puts "#{@help_doc}"
+    puts @help_doc
   end
 
   def print_all_dinos
@@ -61,7 +61,7 @@ class DinoDexCommandLine
     if filtered_dinos
       filtered_dinos.each { |dino| puts dino.name }
     else
-      puts "Please enter at least one valid filter."
+      puts "No dinos found."
     end
   end
 

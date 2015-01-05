@@ -1,11 +1,11 @@
 require 'csv'
 module DinoCSVTools
   class CSVtoDinos
-    CSV::Converters[:blank_to_nil] = lambda do |field|
+    CSV::Converters[:blank_to_nil] = -> (field) do
       field && field.empty? ? nil : field
     end
 
-    CSV::Converters[:downcase] = lambda { |s| s.downcase rescue s }
+    CSV::Converters[:downcase] = -> (s) { s.downcase rescue s }
 
     CSV_PARAMS = {
       headers: true,

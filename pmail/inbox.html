@@ -4,13 +4,14 @@
 <meta charset="utf8" />
 <link rel="stylesheet" href="inbox.css" />
 <link rel="shortcut icon" href="FIXME.jpg" />
+<script src="jquery-1.11.2.js"></script>
 <script src="inbox.js"></script>
 </head>
 <body>
 <header id="PageHeader">
   <hgroup id="TitleHeader" class="titleheader sidebar sidebar-indented">
     <h1>Pmail</h1>
-    <h2>Online Spigot For Your Spam Beacon</h2>
+    <h2>Spigot For Your Spam Beacon</h2>
   </hgroup>
   <div class="content-container">
     <section id="MailSearch">
@@ -19,102 +20,227 @@
           <input type="text" value="">
         </div>
         <input class="vcenter mailsearch-submit"
-               type="image" src="FIXME.jpg" alt="Search Messages">
+               type="image" src="graphics/magnifying4.svg" alt="Search Messages">
       </form>
     </section>
     <section id="AccountControl">
-      <div class="vcenter control">
-        <input type="image" class="dropdown-button" alt="Other Apps">
-      </div>
-      <div class="control vcenter">
-        <button class="dropdown-button">
-          <span class="dropdown-label">your@self.net</span>
-        </button>
-        <article class="accountinfo dropdownbutton-content collapsed">
-          <p>This account is managed by <strong>me</strong></p>
-          <p><a class="plain">Learn More</a></p>
-          <h1>Your Name Here</h1>
-          <p>your@self.net<p>
-          <p><a class="plain">Account</a> - <a class="plain">Privacy</a></p>
-          <div class="controlbox">
-            <div class="control plainbutton">
-              <input type="button" class="button">FIXME</input>
-            </div>
-            <div class="control plainbutton">
-              <input type="button" class="button">FIXME TOO</input>
-            </div>
-          </div>
-        </article>
-      </div>
+      <button class="to-right control dropdown-button">
+        <span class="dropdown-label">your@self.net</span>
+        <span class="arrow"></span>
+      </button>
+      <input type="image" src="graphics/home9.svg"
+       class="to-right control dropdown-button" alt="Other Apps">
+      <article class="dropdown-content collapsed application-menu">
+        <ul class="thumbnails">
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/calendar10.svg">
+            <p class="thumbnail-caption">Calendar</p>
+          </li>
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/conversation2.svg">
+            <p class="thumbnail-caption">Blabber</p>
+          </li>
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/information6.svg">
+            <p class="thumbnail-caption">About</p>
+          </li>
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/time4.svg">
+            <p class="thumbnail-caption">World Clock</p>
+          </li>
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/wifi13.svg">
+            <p class="thumbnail-caption">Radio</p>
+          </li>
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/question7.svg">
+            <p class="thumbnail-caption">Feel dumb?</p>
+          </li>
+        </ul>
+      </article>
     </section>
   </div>
 </header>
 <section id="AppControls">
   <div class="sidebar sidebar-indented">
-    <div class="control control-group">
-      <p class="dropdown-button">Mail</p>
-    </div>
+    <p class="control dropdown-button">Mail</p>
+    <span class="arrow"></span>
   </div>
   <div class="content-container">
-    <div class="to-left control">
-      <p class="dropdown-button">[]</p>
-    </div>
-    <div class="to-left control">
-      <input type="image" class="button" value="<()>" />
-    </div>
-    <div class="to-left control">
-      <p class="dropdown-button">More</p>
-    </div>
-    <div class="to-right control control-group">
-      <p class="dropdown-button">SETTINGS</p>
-    </div>
+    <p class="to-left control dropdown-button">[]
+      <span class="arrow"></span>
+    </p>
+    <input type="image" class="to-left control button" value="<()>" />
+    <p class="to-left control dropdown-button">
+      More <span class="arrow"></span>
+    </p>
+    <img src="graphics/wrench3.svg"
+      class="to-right control dropdown-button" alt="Settings">
   </div>
 </section>
 <div id="AppMain">
-  <section id="Folders" class="sidebar">
-    <div>
-      <div class="control plainbutton">
-        <button>COMPOSE</button>
-      </div>
-    </div>
+  <section id="Folders" class="sidebar sidebar-indented">
+    <button class="control plainbutton">COMPOSE</button>
+    <ul class="folder-list">
+      <li class="folder-item folder-item-alert folder-item-inbox">Inbox (8)</li>
+      <li class="folder-item">Starred</li>
+      <li class="folder-item">Sent Mail</li>
+      <li class="folder-item folder-item-alert">Drafts (1)</li>
+      <li class="folder-item">Stuff to keep</li>
+      <li class="folder-item">Not gonna read</li>
+      <li class="folder-item">From da boss</li>
+      <li class="folder-item">Spam</li>
+    </ul>
   </section>
   <section id="Mailbox" class="content-container mailbox">
     <div class="mailbox-header">
-      <div class="to-left control">
-        <p class="dropdown-button">Unread</p>
-      </div>
-      <div class="to-right control">
-        <p class="dropdown-button">[v]</p>
-      </div>
+      <p class="to-left control dropdown-button">
+        Unread <span class="arrow"></span>
+      </p>
+      <p class="to-right control dropdown-button">
+        [v] <span class="arrow"></span>
+      </p>
       <span class="to-right">
         1-X of X
       </span>
     </div>
     <div>
       <table class="mailbox-list">
+        <tr class="mailbox-list-row mailbox-message-unread">
+          <td class="mailbox-list-select">
+            <input type="checkbox" />
+          </td>
+          <td class="mailbox-list-fav">
+            <img src="graphics/star.svg">
+          </td>
+          <td class="mailbox-list-important">
+            <img src="graphics/indicator.svg">
+          </td>
+          <td class="mailbox-list-sender">Somebody, Important</td>
+          <td class="mailbox-list-synopsis">
+            This is important
+            <span class="mailbox-message-preview">- Well not really</span>
+          </td>
+          <td class="mailbox-list-when">3:35</td>
+        </tr>
+        <tr class="mailbox-list-row mailbox-message-unread">
+          <td class="mailbox-list-select">
+            <input type="checkbox" />
+          </td>
+          <td class="mailbox-list-fav">
+            <img src="graphics/star.svg">
+          </td>
+          <td class="mailbox-list-important">
+            <img src="graphics/indicator.svg">
+          </td>
+          <td class="mailbox-list-sender">Somebody, Important</td>
+          <td class="mailbox-list-synopsis">
+            This is important
+            <span class="mailbox-message-preview">- Well not really</span>
+          </td>
+          <td class="mailbox-list-when">3:35</td>
+        </tr>
+       <tr class="mailbox-list-row mailbox-message-unread">
+          <td class="mailbox-list-select">
+            <input type="checkbox" />
+          </td>
+          <td class="mailbox-list-fav">
+            <img src="graphics/star.svg">
+          </td>
+          <td class="mailbox-list-important">
+            <img src="graphics/indicator.svg">
+          </td>
+          <td class="mailbox-list-sender">Somebody, Important</td>
+          <td class="mailbox-list-synopsis">
+            This is important
+            <span class="mailbox-message-preview">- Well not really</span>
+          </td>
+          <td class="mailbox-list-when">3:35</td>
+        </tr>
+        <tr class="mailbox-list-row mailbox-message-unread">
+          <td class="mailbox-list-select">
+            <input type="checkbox" />
+          </td>
+          <td class="mailbox-list-fav">
+            <img src="graphics/star.svg">
+          </td>
+          <td class="mailbox-list-important">
+            <img src="graphics/indicator.svg">
+          </td>
+          <td class="mailbox-list-sender">Somebody, Important</td>
+          <td class="mailbox-list-synopsis">
+            This is important
+            <span class="mailbox-message-preview">- Well not really</span>
+          </td>
+          <td class="mailbox-list-when">3:35</td>
+        </tr>
         <tr class="mailbox-list-row">
-          <td class="mailbox-list-select">FOO</td>
-          <td class="mailbox-list-fav">FOO</td>
-          <td class="mailbox-list-important">FOO</td>
-          <td class="mailbox-list-sender">FOO</td>
-          <td class="mailbox-list-synopsis">FOO</td>
-          <td class="mailbox-list-when">FOO</td>
+          <td class="mailbox-list-select">
+            <input type="checkbox" />
+          </td>
+          <td class="mailbox-list-fav">
+            <img src="graphics/star.svg">
+          </td>
+          <td class="mailbox-list-important">
+            <img src="graphics/indicator.svg">
+          </td>
+          <td class="mailbox-list-sender">Somebody, Important</td>
+          <td class="mailbox-list-synopsis">
+            This is important
+            <span class="mailbox-message-preview">- Well not really</span>
+          </td>
+          <td class="mailbox-list-when">3:35</td>
+        </tr>
+        <tr class="mailbox-list-row">
+          <td class="mailbox-list-select">
+            <input type="checkbox" />
+          </td>
+          <td class="mailbox-list-fav">
+            <img src="graphics/star.svg">
+          </td>
+          <td class="mailbox-list-important">
+            <img src="graphics/indicator.svg">
+          </td>
+          <td class="mailbox-list-sender">Somebody, Important</td>
+          <td class="mailbox-list-synopsis">
+            This is important
+            <span class="mailbox-message-preview">- Well not really</span>
+          </td>
+          <td class="mailbox-list-when">3:35</td>
         </tr>
        <tr class="mailbox-list-row">
-          <td class="mailbox-list-select">FOO</td>
-          <td class="mailbox-list-fav">FOO</td>
-          <td class="mailbox-list-important">FOO</td>
-          <td class="mailbox-list-sender">FOO</td>
-          <td class="mailbox-list-synopsis">FOO</td>
-          <td class="mailbox-list-when">FOO</td>
+          <td class="mailbox-list-select">
+            <input type="checkbox" />
+          </td>
+          <td class="mailbox-list-fav">
+            <img src="graphics/star.svg">
+          </td>
+          <td class="mailbox-list-important">
+            <img src="graphics/indicator.svg">
+          </td>
+          <td class="mailbox-list-sender">Somebody, Important</td>
+          <td class="mailbox-list-synopsis">
+            This is important
+            <span class="mailbox-message-preview">- Well not really</span>
+          </td>
+          <td class="mailbox-list-when">3:35</td>
         </tr>
-       <tr class="mailbox-list-row">
-          <td class="mailbox-list-select">FOO</td>
-          <td class="mailbox-list-fav">FOO</td>
-          <td class="mailbox-list-important">FOO</td>
-          <td class="mailbox-list-sender">FOO</td>
-          <td class="mailbox-list-synopsis">FOO</td>
-          <td class="mailbox-list-when">FOO</td>
+        <tr class="mailbox-list-row mailbox-message-unread">
+          <td class="mailbox-list-select">
+            <input type="checkbox" />
+          </td>
+          <td class="mailbox-list-fav">
+            <img src="graphics/star.svg">
+          </td>
+          <td class="mailbox-list-important">
+            <img src="graphics/indicator.svg">
+          </td>
+          <td class="mailbox-list-sender">Somebody, Important</td>
+          <td class="mailbox-list-synopsis">
+            This is important
+            <span class="mailbox-message-preview">- Well not really</span>
+          </td>
+          <td class="mailbox-list-when">3:35</td>
         </tr>
       </table>
     </div>

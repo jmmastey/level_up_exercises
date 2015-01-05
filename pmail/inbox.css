@@ -1,8 +1,8 @@
 /* BASE */
-
 body {
   background-color: white;
   margin: 0px;
+  font-family: sans-serif;
 }
 
 div,article,p,section,hgroup,header {
@@ -20,16 +20,16 @@ h1,h2 {
   width: 270px;
 }
 
+.sidebar-indented {
+  padding-left: 30px;
+  width: 240px;
+}
+
 .content-container {
   position: absolute;
   left: 270px;
-  right: 0px;
+  right: 30px;
   top: 5px;
-}
-
-.sidebar-indented {
-  padding-left: 30px;
-  width:  240px;
 }
 
 .vcenter {
@@ -51,14 +51,12 @@ h1,h2 {
   background-color: #eeeeee;
   height: 52px;
   border-bottom: 1px solid black;
-  padding-right: 30px;
 }
 
 #TitleHeader {
   position: absolute;
   top: 5px;
   left: 0px;
-  width: 270px;
   height: 42px;
 }
 
@@ -87,12 +85,23 @@ h1,h2 {
 
 #AppMain {
   position: relative;
-  padding-right: 30px;
+  padding-top: 5px;
+}
+
+#Mailbox {
+  right: 0px;
 }
 
 /* MODULES */
 
 /* Generic controls and groups of controls */
+.control-group {
+  vertical-align: top;
+  display: inline-block;
+  padding: 0px;
+  margin: 0px 10px 0px 0px;
+}
+
 .control {
   position: relative;
   display: inline-block;
@@ -101,34 +110,66 @@ h1,h2 {
   padding: 0px;
   vertical-align: top;
   border: 1px solid gray;
-}
-
-.control > * {
-  display: block;
-  height: 100%;
-  box-sizing: border-box;
-  margin: 0px;
   min-width: 75px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-.control-group {
-  vertical-align: top;
-  display: inline-block;
-  padding: 0px;
-  margin: 0px 10px 0px 0px;
+.to-right.control {
+  margin-right: 0px;
+  margin-left: 10px;
 }
 
 .control-group > .control {
-  float: left;
+  margin: 0px;
+  border-right: 0px;
+}
+
+.control-group > .control:last-child {
+  border-right: 1px solid gray;
 }
 
 /* Dropdown controls */
-.dropdownbutton-content {
-  position: absolute;
-  display: inline-block;
-  z-index: 2;
+.dropdown-button .arrow {
+  position: relative;
+  top: 0.6em;
+  border-top: 4px solid black;
+  border-left: 4px dashed transparent;
+  border-right: 4px dashed transparent;
+  margin-left: 5px;
+  vertical-align: middle;
 }
 
+.dropdown-content {
+  position: absolute;
+  z-index: 5;
+  display: block;
+  border: 2px solid black;
+  background-color: white;
+}
+
+/* Thumbnail list */
+.thumbnails {
+  display: block;
+  padding: 0px;
+  list-style-type: none;
+  text-align: center;
+}
+
+.thumbnail {
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  padding: 10px;
+  text-align: center;
+}
+
+.thumbnail-img {
+  width: 100%;
+  display: block;
+  margin: 0px auto 10px auto;
+}
+ 
 /* Mailbox */
 .mailbox {
   overflow: scroll;
@@ -145,18 +186,56 @@ h1,h2 {
 .mailbox-list-row > td  {
   border-bottom: 1px solid gray;
   border-top: 1px solid gray;
+  padding-right: 30px;
 }
 
 .mailbox-list-synopsis {
-  width: 100%;
+  width: 70%;
 }
 
+.mailbox-list-sender { width: 30%; }
+
+.mailbox-list-fav > img {
+  height: 20px;
+  width: 20px;
+}
+
+.mailbox-list-important > img {
+  height: 20px;
+  width: 20px;
+}
+
+.mailbox-message-unread { font-weight: bold; }
+
+.mailbox-message-preview {
+  font-weight: normal; 
+  color: gray;
+}
+
+.folder-list {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.folder-item-inbox { color: red; }
+
+.folder-item-alert { font-weight: bold; }
 
 /* SPECIFIC WIDGETS */
 
-.titleheader { text-align: center; }
-.titleheader h1 { font-size: 25px; }
-.titleheader h2 { font-size: 15px; }
+.application-menu { width: 400px; }
+
+.titleheader h1 {
+  font-size: 30px;
+  float: left;
+  margin-right: 1em;
+  color: orange;
+}
+.titleheader h2 {
+  font-size: 15px;
+  display: inline;
+  color: blue;
+}
 
 .accountinfo {
   width: 200px;
@@ -182,6 +261,7 @@ h1,h2 {
 .mailsearch-submit {
   position: absolute;
   width: 100px;
+  height: 100%;
   right: 0px;
 }
 

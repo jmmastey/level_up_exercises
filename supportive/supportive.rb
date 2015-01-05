@@ -27,7 +27,7 @@ class BlagPost
     end
 
     @comments = args[:comments] || []
-    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
+    @body = args[:body].squish
     @publish_date = args[:publish_date].try { |date| Date.parse(date) } || Date.today
   end
 

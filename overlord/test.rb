@@ -1,0 +1,3 @@
+describe Bomb do
+
+end

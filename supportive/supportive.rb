@@ -51,7 +51,7 @@ class BlagPost
     if categories.length == 1
       label = "Category"
     else
-      label = "Categories"
+      label = "Category".pluralize
     end
 
     if categories.length > 1
@@ -65,11 +65,7 @@ class BlagPost
   end
 
   def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    String(string).humanize
   end
 
   def commenters

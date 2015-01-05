@@ -1,4 +1,7 @@
 %h1 Weather#index
+
+= link_to('Register', register_index_path)
+
 %form{:name => "city", :id => "city", :action => "/weather/index", :method => "get", :enctype => "text/plain"}
   %fieldset
     %li

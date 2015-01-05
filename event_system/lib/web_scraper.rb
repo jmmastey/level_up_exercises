@@ -4,10 +4,10 @@ require 'open-uri'
 class WebScraper
   BASE_URL = "http://forecast.weather.gov/MapClick.php?textField1=41.8500262820005&textField2=-87.65004892899964#.VCXEvOdNbH4"
 
-  def self.scrape
+
+  def self.scrape_temperatures
     doc = Nokogiri::HTML(open(BASE_URL))
 
-    forecast_hash = []
     temp_hash = {}
     d1 = Date.today
     doc.css("div.one-ninth-first").map do |para|
@@ -22,20 +22,20 @@ class WebScraper
                                 .split(" ")[1]
       end
     end
-    doc.css("ul.point-forecast-7-day li").map { |li| forecast_hash << li.text }
-
     temp_hash
   end
 
   def self.detailed_scrape
     doc = Nokogiri::HTML(open(BASE_URL))
-    temp_hash = {}
+    temp_hash_description = {}
     top_level = doc.search('div.point-forecast-7-day > ul > li')
     top_level.each do |li|
       temp_key = li.css("span.label").text
       li.css("span").remove
-      temp_hash[temp_key] = li.text
+      temp_hash_description[temp_key] = li.text
     end
-    temp_hash
+    Rails.logger.info "DETAILED SCRAPE #{temp_hash_description}"
+
+    temp_hash_description
   end
 end

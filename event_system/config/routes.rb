@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  root 'weather#index'
   get 'weather/index'
-
   get 'weather/show'
+
+  get 'register/index'
+  post "register/create" => "register#create"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

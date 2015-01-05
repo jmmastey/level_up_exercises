@@ -1,0 +1,29 @@
+leave request number: 1008313
+doctor should fax it to
+fax number:877-309-0218
+
+24th 10:30
+
+wf = WeatherForecast.new
+wf.weather_day = "2014-11-03".to_date
+wf.low = 23
+wf.high = 45
+wf.save
+
+wf = WeatherForecast.new
+wf.weather_day = "2014-11-04".to_date
+wf.low = 24
+wf.high = 49
+wf.save
+
+wf = WeatherForecast.new
+wf.weather_day = "2014-11-05".to_date
+wf.low = 31
+wf.high = 45
+wf.save
+
+wf = WeatherForecast.new
+wf.weather_day = "2014-11-06".to_date
+wf.low = 30
+wf.high = 60
+wf.save

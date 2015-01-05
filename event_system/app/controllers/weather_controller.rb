@@ -3,7 +3,8 @@ class WeatherController < ApplicationController
   def index
     if params.key? "region"
       if WeatherForecast.where("created_at::date = current_date").count <= 0
-        @scraping =  WebScraper.scrape
+
+        @scraping =  WebScraper.scrape_temperatures
 
         @scraping.each do |key, hash_temp|
           wf = WeatherForecast.new

@@ -12,9 +12,9 @@ describe Experiment do
 
   def results(a_conversions, a_rejections, b_conversions, b_rejections)
     array = []
-    Array.new(a_rejections).each { array << result("A", 0) }
+    Array.new(a_rejections).each  { array << result("A", 0) }
     Array.new(a_conversions).each { array << result("A", 1) }
-    Array.new(b_rejections).each { array << result("B", 0) }
+    Array.new(b_rejections).each  { array << result("B", 0) }
     Array.new(b_conversions).each { array << result("B", 1) }
     array
   end
@@ -30,21 +30,23 @@ describe Experiment do
     end
 
     it 'groups by cohort name and counts successes and failures' do
-      expect(groups).to eq({ :A => { :success => 30, :failure => 5 }, :B => { :success => 30, :failure => 30 } })
+      correct_output = { A: { success: 30, failure: 5 }, B: { success: 30, failure: 30 } }
+      expect(groups).to eq(correct_output)
     end
   end
 
   describe '#report' do
     it "returns the correct winner" do
-      expect(experiment.report).to eq("Winner: Cohort A")
-      expect(tie_experiment.report).to eq("No clear winner")
-      expect(sample_experiment.report).to eq("Winner: Cohort A")
+      expect(experiment.report).to eq("Conversion %: 0.8571428571428571 within 95% confidence interval of [0.7412139741992386, 0.9730717400864756]")
+      expect(tie_experiment.report).to eq("Conversion %: 0.5 within 95% confidence interval of [0.19010248589619616, 0.8098975141038038]")
+      expect(sample_experiment.report).to eq("Conversion %: 0.05119896305897602 within 95% confidence interval of [0.04020173369400816, 0.06219619242394388]")
     end
   end
 
-  describe '#chiquare_p' do
-    it "returns the correct chisquare_p value" do
-      expect(experiment.chiquare_p.round(4)).to eq(0.0005)
+  describe '#difference?' do
+    it "returns whether there is a statistical difference" do
+      expect(experiment.difference?).to eq(true)
+      expect(tie_experiment.difference?).to eq(false)
     end
   end
 end

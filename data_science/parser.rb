@@ -10,4 +10,4 @@ class Parser
 
 end
 
-Experiment.new(Parser.parse('source_data.json')).report
+puts Experiment.new(Parser.parse('source_data.json')).report

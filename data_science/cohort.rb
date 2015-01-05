@@ -1,9 +1,6 @@
 require 'abanalyzer'
-
 class Cohort
-
   CONFIDENCE = 0.95
-
   attr_accessor :name, :pageviews
 
   def initialize(name, pageviews)
@@ -24,7 +21,7 @@ class Cohort
   end
 
   def to_s
-    "Converion percentage was #{conversion_percentage} within a 95% confidence interval of #{confidence_interval}"
+    "Conversion %: #{conversion_percentage} within 95% confidence interval of #{confidence_interval}"
   end
 
   def conversion_percentage
@@ -36,8 +33,7 @@ class Cohort
   end
 
   def standard_error
-    p = conversion_percentage
-    n = size
-    (Math.sqrt(p * (1 - p) / n))
+    Math.sqrt(conversion_percentage * (1 - conversion_percentage) / size)
   end
+
 end

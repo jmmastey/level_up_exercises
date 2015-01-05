@@ -20,7 +20,7 @@ class BlagPost
 
     if args[:categories]
       @categories = args[:categories].reject do |category|
-        DISALLOWED_CATEGORIES.include? category
+        category.in? DISALLOWED_CATEGORIES
       end
     else
       @categories = []

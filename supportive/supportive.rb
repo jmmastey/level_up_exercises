@@ -72,17 +72,11 @@ class BlagPost
     return '' unless comments_allowed?
     return '' unless comments.length > 0
 
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    "You will be the #{comments.length.ordinalize} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date + 3.years > Date.today
   end
 
   def abstract
@@ -94,7 +88,7 @@ end
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
+                    "comments"      => [ ["hello"], ["hello"], ["hello"] ], # because comments are meaningless, get it?
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.
@@ -111,4 +105,4 @@ blag = BlagPost.new("author"        => "Foo Bar",
                         ARTICLE
                    )
 puts blag.to_s
-puts blag.inspect
+#puts blag.inspect

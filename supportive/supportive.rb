@@ -14,28 +14,28 @@ class BlagPost
       hash
     end
 
-    if args[:author].present? && args[:author_url].present?
-      @author = Author.new(args[:author], args[:author_url])
-    end
-
-    if args[:categories]
-      @categories = args[:categories].reject do |category|
-        category.in? DISALLOWED_CATEGORIES
-      end
-    else
-      @categories = []
-    end
-
+    @author = create_author(args)
+    @categories = validate_category(args[:categories]) || []
     @comments = Array.wrap(args[:comments])
     @body = args[:body].squish
-    @publish_date = args[:publish_date].try { |publish_date| publish_date.to_date } || Date.today
+    @publish_date = create_date(args) || Date.today
   end
 
   def to_s
-    [ category_list, byline, abstract, commenters ].join("\n")
+    [category_list, byline, abstract, commenters].split(/\n/)
   end
 
   private
+
+  def create_author(args)
+    if args[:author] && args[:author_url]
+      @author = Author.new(args[:author], args[:author_url])
+    end
+  end
+
+  def create_date(args)
+    args[:publish_date].try(&:to_date)
+  end
 
   def byline
     if author.blank?
@@ -45,20 +45,26 @@ class BlagPost
     end
   end
 
+  def validate_category(categories)
+    categories.reject do |category|
+      category.in? DISALLOWED_CATEGORIES
+    end
+  end
+
   def category_list
     if categories.empty?
       ""
     else
       category_titles = categories.map { |category| as_title(category) }
-      "#{pluralizer(categories.length, 'Category')}: #{category_titles.to_sentence}"
+      "#{pluralizer(categories, 'Category')}: #{category_titles.to_sentence}"
     end
   end
 
-  def pluralizer(size, label)
-    if size == 1
-      label.singularize
-    else
+  def pluralizer(object, label)
+    if object.many?
       label.pluralize
+    else
+      label.singularize
     end
   end
 
@@ -67,10 +73,11 @@ class BlagPost
   end
 
   def commenters
-    return '' unless comments_allowed?
-    return '' unless comments.length > 0
-
-    "You will be the #{comments.length.ordinalize} commenter"
+    if comments_allowed? && comments.length > 0
+      "You will be the #{comments.length.ordinalize} commenter"
+    else
+      ''
+    end
   end
 
   def comments_allowed?
@@ -80,13 +87,12 @@ class BlagPost
   def abstract
     body.truncate(204)
   end
-
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ ["hello"], ["hello"], ["hello"] ], # because comments are meaningless, get it?
+                    "comments"      => [["hello"], ["hello"], ["hello"]],
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.
@@ -103,4 +109,3 @@ blag = BlagPost.new("author"        => "Foo Bar",
                         ARTICLE
                    )
 puts blag.to_s
-#puts blag.inspect

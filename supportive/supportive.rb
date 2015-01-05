@@ -28,7 +28,7 @@ class BlagPost
 
     @comments = args[:comments] || []
     @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
-    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
+    @publish_date = args[:publish_date].try { |date| Date.parse(date) } || Date.today
   end
 
   def to_s
@@ -119,4 +119,4 @@ blag = BlagPost.new("author"        => "Foo Bar",
                         ARTICLE
                    )
 puts blag.to_s
-#puts blag.inspect
+puts blag.inspect

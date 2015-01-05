@@ -10,11 +10,15 @@ CREATE VIEW top_beers AS
     beers.style,
     beers.description,
     beers.year,
-    breweries.name
+    beers.brewery_id
   FROM beers
-  INNER JOIN breweries ON beers.brewery_id = breweries.id
   INNER JOIN ratings ON beers.id = ratings.beer_id
-  GROUP BY beers.id, beers.style, beers.description, beers.year, breweries.id, breweries.name
+  GROUP BY
+    beers.id,
+    beers.style,
+    beers.description,
+    beers.year,
+    beers.brewery_id
   ORDER BY SUM(ratings.overall) DESC;
 
 -- Recent score
@@ -32,15 +36,12 @@ CREATE VIEW recommendations AS
     beers.id,
     beers.style,
     beers.description,
-    beers.year,
-    breweries.name
+    beers.year
   FROM beers
-  INNER JOIN breweries ON breweries.id = beers.brewery_id
   WHERE (SELECT AVG(ratings.overall) FROM ratings WHERE ratings.beer_id = beers.id) > 4
   GROUP BY
     beers.id,
     beers.style,
     beers.description,
-    beers.year,
-    breweries.name
+    beers.year
   ORDER BY RANDOM();

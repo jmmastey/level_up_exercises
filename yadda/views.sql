@@ -5,7 +5,12 @@ DROP VIEW IF EXISTS recommendations;
 
 -- Top beers from a given brewery
 CREATE VIEW top_beers AS
-  SELECT breweries.name, beers.style, beers.description, beers.year
+  SELECT
+    beers.id,
+    beers.style,
+    beers.description,
+    beers.year,
+    breweries.name
   FROM beers
   INNER JOIN breweries ON beers.brewery_id = breweries.id
   INNER JOIN ratings ON beers.id = ratings.beer_id
@@ -14,16 +19,28 @@ CREATE VIEW top_beers AS
 
 -- Recent score
 CREATE VIEW recent_score AS
-  SELECT AVG(overall) AS overall
+  SELECT
+    beer_id,
+    AVG(overall) AS overall_rating
   FROM ratings
-  WHERE ratings.created_at > NOW() - interval '6 months';
+  WHERE created_at > NOW() - interval '6 months'
+  GROUP BY beer_id;
 
 -- You might also enjoy
 CREATE VIEW recommendations AS
-  SELECT beers.*
+  SELECT
+    beers.id,
+    beers.style,
+    beers.description,
+    beers.year,
+    breweries.name
   FROM beers
-  WHERE (
-    SELECT AVG(ratings.overall) FROM ratings WHERE ratings.beer_id = beers.id
-  ) > 4
-  ORDER BY RANDOM()
-  LIMIT 10;
+  INNER JOIN breweries ON breweries.id = beers.brewery_id
+  WHERE (SELECT AVG(ratings.overall) FROM ratings WHERE ratings.beer_id = beers.id) > 4
+  GROUP BY
+    beers.id,
+    beers.style,
+    beers.description,
+    beers.year,
+    breweries.name
+  ORDER BY RANDOM();

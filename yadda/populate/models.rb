@@ -8,6 +8,7 @@ class Beer < ActiveRecord::Base
   belongs_to :brewery
   has_many :ratings
   has_many :reviews
+  scope :sample, ->(count) { order("RANDOM()").limit(count) }
 end
 
 class Brewery < ActiveRecord::Base

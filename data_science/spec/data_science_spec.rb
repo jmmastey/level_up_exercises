@@ -6,7 +6,7 @@ describe "DataScience" do
   # calculate the conversion rate of visitors as part of a split test.
 
   # Total sample size 
-  it 'returns the total sample size' do
+  it 'returns the sample size' do
     data_science = DataScience.new(
       File.read(File.expand_path("data/source_data.json"))    
     )
@@ -22,9 +22,27 @@ describe "DataScience" do
     expect(data_science.conversions['A']).to eq(47)
     expect(data_science.conversions['B']).to eq(79)
   end
+
+  it 'calculates the trials for each cohort' do
+    data_science = DataScience.new(
+      File.read(File.expand_path("data/source_data.json"))    
+    )
+    
+    expect(data_science.trials['A']).to eq(1349)
+    expect(data_science.trials['B']).to eq(1543)
+  end
+  
+  # it 'calculates the conversion rate for each cohort' do
+  #   data_science = DataScience.new(
+  #     File.read(File.expand_path("data/source_data.json"))
+  #   )
+  #
+  #   expect(data_science.conversion_rates['A']).to eq(0.035)
+  #   expect(data_science.conversion_rates['B']).to eq(0.051)
+  # end
   
   # Number of conversions for each part of the test.
-  it 'returns the number/conversions for each part of the test'
+  # it 'returns the number/conversions for each part of the test'
   
   # Percentage of conversion (including error bars) with a 95% confidence.
   it 'returns the percentage of conversions (w/error bars) with 95% confidence'

@@ -10,14 +10,14 @@ class DataScience
   def initialize(raw_json)
     load_raw_json(raw_json)
     
-    @cohorts = []
+    @cohorts = {}
 
     # TODO: to go away
     @conversion_rates = {}
     @conversions      = Hash.new(0)
     @trials           = Hash.new(0)
     
-    extract_trial_and_conversion_counts
+    import_trial_and_conversion_counts
     calculate_conversion_rates
   end
   
@@ -34,12 +34,15 @@ private
     end
   end
   
-  def extract_trial_and_conversion_counts
+  def import_trial_and_conversion_counts
     @sample.each do |current_sample|
-      @trials[current_sample['cohort']] += 1
+      current_cohort = current_sample['cohort']
+      @cohorts[current_cohort] ||= DataScience::Cohort.new(current_cohort)
+      
+      @trials[current_cohort] += 1
     
       if current_sample['result'].to_i > 0
-        @conversions[current_sample['cohort']] += current_sample['result']
+        @conversions[current_cohort] += current_sample['result']
       end
     end 
   end

@@ -11,6 +11,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'congress'
 gem 'kaminari'
 gem 'foundation-rails', '5.4.0'
+gem 'devise'
+gem 'simple_form'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

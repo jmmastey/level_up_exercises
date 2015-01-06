@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'search/index'
 
   root 'good_deeds#index'
-  resources :legislators
-  resources :bills
-  resources :good_deeds
+  devise_for :users
+  resources :legislators, only: [:index, :show]
+  resources :bills, only: [:index, :show]
+  resources :good_deeds, only: [:index]
   get 'search' => 'search#index'
 end

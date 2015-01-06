@@ -5,7 +5,7 @@ Feature: User visits the home page
 
   Background:
     Given I am not logged in
-      And I am on home pages
+      And I visit Home page
 
   Scenario: Sees navigational links
     Then I see Good Deeds link
@@ -13,23 +13,23 @@ Feature: User visits the home page
       And I see Legislators link
       And I see Search link
 
-  Scenario: Sees login and signup links
-    Then I see Login link
-      And I see Signup link
+  # Scenario: Sees login and signup links
+  #   Then I see Login link
+  #     And I see Signup link
 
 
-  Scenario Outline: Clicks each link to go to that page
-    When I click <link> link
-    Then I am on <link> page
+  # Scenario Outline: Clicks each link to go to that page
+  #   When I click <link> link
+  #   Then I am on <link> page
 
-  Examples:
-  | link        |
-  | Good Deeds  |
-  | Bills       |
-  | Legislators |
-  | Search      |
-  | Login       |
-  | Signup      |
+  #   Examples:
+  #   | link        |
+  #   | Good Deeds  |
+  #   | Bills       |
+  #   | Legislators |
+  #   | Search      |
+  #   | Login       |
+  #   | Signup      |
 
 
 

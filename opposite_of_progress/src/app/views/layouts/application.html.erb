@@ -11,9 +11,13 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body>
+  <body class="<%= [controller_name, action_name].join(' ') %>">
     <%= render 'layouts/navigation' %>
-    <%= yield %>
+    <%= render 'layouts/flash_messages' %>
+    <div class="content-container">
+      <%= yield %>
+    </div>
+
     <%= javascript_include_tag "application" %>
   </body>
 </html>

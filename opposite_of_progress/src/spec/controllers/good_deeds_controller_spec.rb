@@ -10,7 +10,7 @@ require 'rails_helper'
 #
 # It only uses APIs available in rails and/or rspec-rails.  There are a number
 # of tools you can use to make these specs even more expressive, but we're
-# sticking to rails and rspec-rails APIs to keep things simple and stable.
+# sticking to rails and rspec-rails  dAPIs to keep things simple and stable.
 #
 # Compared to earlier versions of this generator, there is very limited use of
 # stubs and message expectations in this spec.  Stubs are only used when there

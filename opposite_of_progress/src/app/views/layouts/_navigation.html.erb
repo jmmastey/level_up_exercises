@@ -9,8 +9,14 @@
 
   <section class="top-bar-section">
     <ul class="right">
-      <li><a href="#">Signup</a></li>
-      <li><a href="#">Login</a></li>
+      <% if user_signed_in? %>
+        <li><%= link_to current_user.email, '#' %></a></li>
+        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        <li><%= link_to "Log in", new_user_session_path %></li>
+      <% end %>
+
     </ul>
     <ul class="left">
       <li class="active"><a href="/">Good Deeds</a></li>

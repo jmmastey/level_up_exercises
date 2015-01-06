@@ -1,0 +1,8 @@
+// .content-container {
+//   margin: auto;
+//   padding-left: 20px;
+//   padding-right: 20px;
+// }
+.content-container {
+  @include grid-row();
+}

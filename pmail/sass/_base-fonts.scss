@@ -1,0 +1,34 @@
+// HTML level font declarations are in the styles.scss file
+
+// Mixin to produce font-size in rem and for fallback
+
+@mixin font-size($sizeValue: 1) {
+  font-size: ($sizeValue * 16) + px;
+  font-size: $sizeValue + rem;
+}
+
+// Font-family mixins
+
+@mixin font($font) {
+  @if $font == header-bold {
+    font-family: "proxima-nova",sans-serif;
+    font-style: normal;
+    font-weight: 700;
+  }
+  @else if $font == header {
+    font-family: "proxima-nova",sans-serif;
+    font-style: normal;
+    font-weight: 400;
+  }
+  @else {
+    font-family: "kepler-std",serif;
+    font-style: normal;
+    font-weight: 400;
+  }
+}
+
+// Base link fonts
+
+a {
+
+}

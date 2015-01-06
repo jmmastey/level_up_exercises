@@ -1,5 +1,5 @@
-require 'abanalyzer'
 require 'rspec'
+require 'abanalyzer'
 require_relative '../data_conversion_loader'
 require_relative '../sample'
 require_relative '../sample_comparer'

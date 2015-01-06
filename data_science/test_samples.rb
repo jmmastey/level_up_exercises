@@ -3,7 +3,7 @@ require_relative 'sample'
 require_relative 'sample_comparer'
 require 'abanalyzer'
 
-DATA_FIELDS = %w[date cohort result]
+DATA_FIELDS = %w(date cohort result)
 DATA_SIZE = 1349
 DATA_CONVERSIONS_A = 47
 DATA_NON_CONVERSIONS_A = 1302

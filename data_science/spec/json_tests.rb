@@ -15,11 +15,17 @@ describe JsonParser do
 #		expect(test.data_hash.length).to be > 0
 #	end
 
-	it "should return results for each group" do
+	it "should contain results for each group" do
 		test = JsonParser.new("source_data.json")
-			puts test.data_hash
-			expect(test.data_hash).to include(:a_group, :b_groups)
-			expect(test.data_hash[:a_group]). to include(:pass)
+		expect(test.data_hash).to include(:a_group, :b_group)
+		puts test.data_hash[:a_group]
+		puts test.data_hash[:a_group].length
+		expect(test.data_hash[:a_group]).to include(:pass, :fail)
+		expect(test.data_hash[:b_group]).to include(:pass, :fail)
+		expect(test.data_hash[:a_group][:pass]).to be >= 0
+		expect(test.data_hash[:a_group][:fail]).to be >= 0
+		expect(test.data_hash[:a_group][:pass]).to be >= 0
+		expect(test.data_hash[:a_group][:fail]).to be >= 0
 
 	end
 

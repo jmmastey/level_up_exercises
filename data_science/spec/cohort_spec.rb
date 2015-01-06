@@ -13,14 +13,14 @@ describe "DataScience::Cohort" do
     it 'increments the number of samples by one' do
       cohort = DataScience::Cohort.new('foo')
       
-      expect { cohort.add_sample }.to change{cohort.trials}.from(0).to(1)
+      expect { cohort.add_sample(1) }.to change{cohort.trials}.from(0).to(1)
     end
     
     context 'when a conversion took place' do
       it 'incremented converstions' do
         cohort = DataScience::Cohort.new('foo')
       
-        expect { cohort.add_sample(true) }.to change{cohort.conversions}.from(0).to(1)
+        expect { cohort.add_sample(1) }.to change{cohort.conversions}.from(0).to(1)
       end
     end
   end

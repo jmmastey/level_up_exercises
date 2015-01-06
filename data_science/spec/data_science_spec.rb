@@ -19,8 +19,8 @@ describe "DataScience" do
       File.read(File.expand_path("data/source_data.json"))    
     )
     
-    expect(data_science.conversions['A']).to eq(47)
-    expect(data_science.conversions['B']).to eq(79)
+    expect(data_science.cohorts['A'].conversions).to eq(47)
+    expect(data_science.cohorts['B'].conversions).to eq(79)
   end
 
   it 'calculates the trials for each cohort' do

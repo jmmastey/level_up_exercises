@@ -8,11 +8,11 @@ class DataScience::Cohort
     @trials      = 0
   end
   
-  def add_sample(converted=false)
-    @trials += 1
+  def add_sample(sample)
+    @trials = @trials + 1
     
-    if converted
-      @conversions += 1
+    if sample.to_i > 0
+      @conversions = @conversions + 1
     end
   end
 end

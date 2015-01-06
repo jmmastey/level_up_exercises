@@ -1,7 +1,7 @@
 require 'json'
 
 class DataScience
-  attr_reader :conversions, :conversion_rates, :trials
+  attr_reader :cohorts, :conversions, :conversion_rates, :trials
 
   autoload :Cohort, 'data_science/cohort'
   
@@ -38,6 +38,7 @@ private
     @sample.each do |current_sample|
       current_cohort = current_sample['cohort']
       @cohorts[current_cohort] ||= DataScience::Cohort.new(current_cohort)
+      @cohorts[current_cohort].add_sample(current_sample['result'])
       
       @trials[current_cohort] += 1
     

@@ -13,15 +13,15 @@ class Sample
   end
 
   def size
-    @size = sample.length
+    @size ||= sample.length
   end
 
   def conversions
-    @conversions = sample.count { |user| user[result_key] == valid_result }
+    @conversions ||= sample.count { |user| user[result_key] == valid_result }
   end
 
   def non_conversions
-    @non_conversions = size - conversions
+    @non_conversions ||= size - conversions
   end
 
   def confidence_interval(confidence)

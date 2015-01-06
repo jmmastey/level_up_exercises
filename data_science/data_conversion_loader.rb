@@ -1,6 +1,6 @@
 require 'json'
 
-class LoadConversionData
+class DataConversionLoader
   attr_accessor :data, :sample_key
   SAMPLE_KEY_DEFAULT = "cohort"
 

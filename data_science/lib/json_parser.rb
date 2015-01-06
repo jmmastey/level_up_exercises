@@ -2,14 +2,14 @@ require 'json'
 require 'abanalyzer'
 
 class JsonParser
-  attr_accessor :data_hash
+  attr_accessor :parsed_ab_data
 
   def initialize(json)
-    @data_hash = parse_and_split(json)
+    @parsed_ab_data = parse_and_split(json)
     # puts @data_hash.group_by { |k, v| k == "cohort" and v == "A"  }
     # puts @data_hash
 
-    tester = ABAnalyzer::ABTest.new @data_hash
+    #tester = ABAnalyzer::ABTest.new @data_hash
     # puts tester.different?
 
   end

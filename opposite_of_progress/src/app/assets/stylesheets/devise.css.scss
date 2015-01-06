@@ -6,7 +6,9 @@ body.passwords {
   }
 
   .content-container {
-    width: 50%;
+    @media #{$medium-up} {
+      width: upper-bound($small-range);
+    }
 
     .simple_form {
       margin: 20px 0 20px 0;

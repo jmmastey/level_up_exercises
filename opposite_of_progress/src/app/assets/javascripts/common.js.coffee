@@ -13,13 +13,12 @@ changeActiveNavItem = ->
     $nav_link = $(this)
     $parent_li = $nav_link.parent()
     linkTarget = $nav_link.attr('href')
-    if (path == '/' && linkTarget == '/') || (linkTarget != '/' && path.indexOf(linkTarget) != -1)
+    if (path == '/' && linkTarget == '/good_deeds') || (linkTarget != '/' && path.indexOf(linkTarget) != -1)
       $parent_li.addClass('active')
     else
       $parent_li.removeClass('active')
 
 $(document).on "page:change", ->
-  # popoverBindAll()
   changeActiveNavItem()
 
 popoverPreventDefault()

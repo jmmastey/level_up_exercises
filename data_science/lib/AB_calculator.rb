@@ -2,12 +2,12 @@ require 'json'
 require 'abanalyzer'
 
 class ABCalculator
-  attr_accessor :a_b_data
+  attr_accessor :a_data, :b_data
 
   def initialize(a_b_results)
     @a_data = a_b_results[:a_group]
     @b_data = a_b_results[:b_group]
-    tester = ABAnalyzer::ABTest.new(a_b_results)
+    # tester = ABAnalyzer::ABTest.new(a_b_results)
   end
 
   def sample_size
@@ -23,6 +23,4 @@ class ABCalculator
       b_conversion: @b_data[:pass].to_f / sample_size[:b_total],
     }
   end
-
 end
- 

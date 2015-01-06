@@ -15,23 +15,24 @@ describe JsonParser do
 #		expect(test.data_hash.length).to be > 0
 #	end
 	let(:test) { JsonParser.new("source_data.json") }
+  let(:json_length) { test.json_length }
 	let(:parsed_data) { test.parsed_ab_data }
 	let(:a_data) { parsed_data[:a_group] }
 	let(:b_data) { parsed_data[:b_group] }
-	let(:a_trials) { a_data.values.inject(:+) }
-	let(:b_trials) { b_data.values.inject(:+) }
+	let(:a_no_of_trials) { a_data.values.inject(:+) }
+	let(:b_no_of_trials) { b_data.values.inject(:+) }
+  let(:total_trials) { a_no_of_trials + b_no_of_trials }
+  let(:a_conversion) { a_data[:pass].to_f / a_no_of_trials }
+  let(:b_conversion) { b_data[:pass].to_f / b_no_of_trials }
 
-	it "should contain results for each group" do
-		expect(a_data).to include(:pass, :fail)
-		expect(b_data).to include(:pass, :fail)
-		expect(a_data[:pass]).to be >= 0
-		expect(a_data[:fail]).to be >= 0
-		expect(b_data[:pass]).to be >= 0
-		expect(b_data[:fail]).to be >= 0
-	end
+  it "should have valid conversion data" do
+    expect(total_trials).to be == json_length
+    expect(a_conversion).to be_between(0, 1)
+    expect(b_conversion).to be_between(0, 1)
+  end
 
 	it "should have at least one trial for each group" do
-		expect(a_trials).to be > 0
-		expect(b_trials).to be > 0
+		expect(a_no_of_trials).to be > 0
+		expect(b_no_of_trials).to be > 0
 	end
 end

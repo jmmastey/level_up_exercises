@@ -27,3 +27,10 @@ dino_res = dino_mapper.findByAttr("diet", "carnivore")
 dino_res = dino_mapper.findByAttr("continent", "europe", dino_res)
 dino_mapper.cout dino_res
 
+puts "Carnivores from Europe (take 2)"
+dino_res = dino_mapper.chainFindByAttr(diet: "carnivore", continent: "europe")
+dino_mapper.cout dino_res
+
+puts "Export JSON"
+p dino_mapper.jsonOut
+

@@ -2,6 +2,7 @@
 # Used by dino_data_tester.rb
 
 require 'csv'
+require 'json'
 require './dino_data'
 
 class DinoCSVDataMapper
@@ -54,24 +55,42 @@ class DinoCSVDataMapper
 
   # Find by attribute & value, returns array of dino_obj
   def findByAttr(attr, val, dino_data_in=nil)
-    dino_data = dino_data_in || @dino_data 
+    dino_data = dino_data_in || @dino_data
     dino_data_out = dino_data.select { |dino_obj| (ret = dino_obj.send(attr)) && ret.downcase == val.downcase }
   end
 
   # Find by attribute condition, returns array of dino_obj
   def findByAttrCond(attr, condition, dino_data_in=nil)
-    dino_data = dino_data_in || @dino_data 
+    dino_data = dino_data_in || @dino_data
     dino_data_out = dino_data.select { |dino_obj| (ret = dino_obj.send(attr)) && eval("#{ret} #{condition}")}
   end
 
+  # Chain searches, returns an array of dino_obj
+  def chainFindByAttr(params = {}, dino_data_in=nil)
+    dino_data = dino_data_in || @dino_data
+
+    params.each do |attr, val|
+      dino_data = findByAttr(attr, val, dino_data)
+    end
+
+    return dino_data
+  end
+
   # Output to console
-  def cout(dino_data_in)
-    dino_data = dino_data_in || @dino_data 
+  def cout(dino_data_in=nil)
+    dino_data = dino_data_in || @dino_data
     dino_data.each do |dino_obj|
       puts dino_obj.labels
       puts dino_obj
     end
     puts
+  end
+
+  # Output to json
+  def jsonOut(dino_data_in=nil)
+    dino_data = dino_data_in || @dino_data
+
+    return dino_data.to_json
   end
 
 end

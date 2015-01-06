@@ -14,7 +14,7 @@
     <h2>Spigot For Your Spam Beacon</h2>
   </hgroup>
   <section id="MailSearch" class="pagetop-container">
-    <form class="vcenter control mailsearch-form pagetop-control-height">
+    <form class="mailsearch-form pagetop-control-height">
       <div class="mailsearch-textfield">
         <input type="text" value="">
       </div>
@@ -26,78 +26,95 @@
           FOOBAR
         </div>
       </article>
-      <input class="vcenter mailsearch-submit"
+      <input class="mailsearch-submit"
              type="image" src="graphics/magnifying4.svg" alt="Search Messages">
     </form>
   </section>
-  <section id="OtherAppsControl" class="pagetop-container">
-    <input type="image" src="graphics/home9.svg"
-     class="control dropdown-button dropdown-center-align" alt="Other Apps">
-    <article class="dropdown-frame collapsed application-menu">
-      <ul class="thumbnails">
-        <li class="thumbnail">
-          <img class="thumbnail-img" src="graphics/calendar10.svg">
-          <p class="thumbnail-caption">Calendar</p>
-        </li>
-        <li class="thumbnail">
-          <img class="thumbnail-img" src="graphics/conversation2.svg">
-          <p class="thumbnail-caption">Blabber</p>
-        </li>
-        <li class="thumbnail">
-          <img class="thumbnail-img" src="graphics/information6.svg">
-          <p class="thumbnail-caption">About</p>
-        </li>
-        <li class="thumbnail">
-          <img class="thumbnail-img" src="graphics/time4.svg">
-          <p class="thumbnail-caption">World Clock</p>
-        </li>
-        <li class="thumbnail">
-          <img class="thumbnail-img" src="graphics/wifi13.svg">
-          <p class="thumbnail-caption">Radio</p>
-        </li>
-        <li class="thumbnail">
-          <img class="thumbnail-img" src="graphics/question7.svg">
-          <p class="thumbnail-caption">Feel dumb?</p>
-        </li>
-      </ul>
-      <div class="gray-box centered"><a>More</a></div>
-    </article>
-  </section>
-  <section id="AccountControl" class="pagetop-container">
-    <a class="control dropdown-button dropdown-right-align">
-      <span class="dropdown-label">your@self.net</span>
-      <span class="arrow"></span>
-    </a>
-    <article class="dropdown-frame collapsed account-menu">
-      <div class="dropdown-content">
-        <hgroup>
-          <h1>Your Self</h1>
-          <h2>your@self.net</h2>
-        </hgroup>
-        <a>Account</a> - <a>Privacy</a>
-      </div>
-      <div class="gray-box dropdown-content">
-        <button class="to-right control">Sign Out</button>
-        <button class="to-left control">Add account</button>
-      </div>
-    </article>
+  <div id="PageTopControls" class="pagetop-container right-end">
+    <section id="OtherAppsControl">
+      <input type="image" src="graphics/home9.svg"
+       class="control dropdown-button dropdown-center-align" alt="Other Apps">
+      <article class="dropdown-frame collapsed application-menu">
+        <ul class="thumbnails">
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/calendar10.svg">
+            <p class="thumbnail-caption">Calendar</p>
+          </li>
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/conversation2.svg">
+            <p class="thumbnail-caption">Blabber</p>
+          </li>
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/information6.svg">
+            <p class="thumbnail-caption">About</p>
+          </li>
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/time4.svg">
+            <p class="thumbnail-caption">World Clock</p>
+          </li>
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/wifi13.svg">
+            <p class="thumbnail-caption">Radio</p>
+          </li>
+          <li class="thumbnail">
+            <img class="thumbnail-img" src="graphics/question7.svg">
+            <p class="thumbnail-caption">Feel dumb?</p>
+          </li>
+        </ul>
+        <div class="gray-box centered"><a>More</a></div>
+      </article>
     </section>
+    <section id="AccountControl">
+      <a class="control dropdown-button dropdown-right-align">
+        your@self.net <span class="spaced arrow"></span>
+      </a>
+      <article class="dropdown-frame collapsed account-menu">
+        <div class="dropdown-content spacebox">
+          <hgroup>
+            <h1>Your Self</h1>
+            <h2>your@self.net</h2>
+          </hgroup>
+          <p><a>Account</a> - <a>Privacy</a></p>
+        </div>
+        <div class="gray-box dropdown-content">
+          <button class="to-right control button">Sign Out</button>
+          <button class="to-left control button">Add account</button>
+        </div>
+      </article>
+    </section>
+  </div>
 </header>
 <section id="AppControls">
-  <div class="sidebar sidebar-indented">
-    <p class="control dropdown-button">Mail</p>
-    <span class="arrow"></span>
+  <div class="left-pane appcontrol-container">
+    <p class="appmode-menu control dropdown-button">
+      Mail
+      <span class="spaced arrow"></span>
+    </p>
+    <div class="appmode-menu dropdown-frame collapsed dropdown-left-align">
+      <div class="dropdown-content">
+        <ul>
+          <li>Mail</li>
+          <li>Contacts</li>
+          <li>Tasks</li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class="content-container">
-    <p class="to-left control dropdown-button">[]
-      <span class="arrow"></span>
-    </p>
-    <input type="image" class="to-left control button" value="<()>" />
-    <p class="to-left control dropdown-button">
-      More <span class="arrow"></span>
-    </p>
-    <img src="graphics/wrench3.svg"
-      class="to-right control dropdown-button" alt="Settings">
+  <div id="AppControlBar" class="right-pane right-end appcontrol-container">
+    <div class="app-controls-primary">
+      <a class="control button dropdown-button">
+        []
+        <span class="spaced arrow"></span></a>
+      <div class="dropdown-frame collasped">
+      </div>
+      <input type="image" class="control button" value="<()>" />
+      <a class="control button dropdown-button">More <span class="spaced arrow"></span></a>
+      <div class="dropdown-frame collapsed">
+      </div>
+    </div>
+    <button class="to-right control button dropdown-button">
+        <img src="graphics/wrench3.svg" alt="Settings"> <span class="spaced arrow"></span>
+    </button>
   </div>
 </section>
 <div id="AppMain">
@@ -117,10 +134,10 @@
   <section id="Mailbox" class="content-container mailbox">
     <div class="mailbox-header">
       <p class="to-left control dropdown-button">
-        Unread <span class="arrow"></span>
+        Unread <span class="spaced arrow"></span>
       </p>
       <p class="to-right control dropdown-button">
-        [v] <span class="arrow"></span>
+        [v] <span class="spaced arrow"></span>
       </p>
       <span class="to-right">
         1-X of X

@@ -6,7 +6,6 @@ body {
 }
 
 /* LAYOUT */
-
 #PageTop {
   position: fixed;
   top: 0px;
@@ -16,10 +15,10 @@ body {
   height: 80px;
   padding:-top: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #c0c0c0;
   margin-bottom: 4px;
   box-sizing: border-box;
-  background-color: #e0e0e0;
+  background-color: #f5f5f5;
 }
 
 #TitleHeader {
@@ -113,32 +112,20 @@ body {
   height: 42px;
 }
 
-#AppControls {
-  display: none;
-}
-
-#AppMain {
-  display: none;
-}
-
-.arrow {
-  position: relative;
-  top: 0.6em;
-  border-top: 4px solid black;
-  border-left: 4px dashed transparent;
-  border-right: 4px dashed transparent;
-  vertical-align: middle;
-}
-
-.right-end {
-  padding-right: 30px;
+#PageTopControls {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 350px;
+  text-align: right;
 }
 
 #OtherAppsControl {
-  position: absolute;
-  top: 0px;
-  right: 270px;
-  width: 100px;
+  display: inline-block;
+  margin-right: 30px;
+  width:  50px;
+  clear: none;
+  height: 100%;
 }
 
 #OtherAppsControl > input[type="image"] {
@@ -147,22 +134,33 @@ body {
 }
 
 #AccountControl {
-  position: absolute;
+  position: relative;
+  display: inline-block;
   text-align: right;
-  top: 0px;
-  right: 30px;
-  width: 240px;
+  font-size: 18px;
 }
 
 #AppControls {
+  z-index: -1;
   position: fixed;
   top: 82px;
-  padding: 5px 10px 5px 0px;
+  padding: 0px 10px 0px 0px;
   border-bottom: 1px solid black;
-  height: 42px;
+  height: 65px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.appcontrol-container {
+  height: 55px;
+  line-heignt: 40px;
+  padding-top: 7.5px;
+  padding-bottom: 7.5px;
+  box-sizing: border-box;
 }
 
 #AppMain {
+  display: none;
   position: absolute;
   top: 126px;
   padding-top: 5px;
@@ -172,9 +170,43 @@ body {
   right: 0px;
 }
 
-/* MODULES 
+.arrow {
+  position: relative;
+  top: 0.8em;
+  border-top: 5px solid black;
+  border-left: 5px dashed transparent;
+  border-right: 5px dashed transparent;
+}
 
-/* Generic controls and groups of controls 
+.spaced {
+  margin-left: 5px;
+}
+
+.right-end {
+  padding-right: 30px;
+}
+
+/* MODULES  */
+
+/* Generic controls and groups of controls */
+
+.centered { text-align: center; }
+
+.left-pane {
+  position: absolute;
+  left: 0px;
+  width: 270px;
+  box-sizing: border-box;
+}
+
+.right-pane {
+  position: absolute;
+  left: 270px;
+  right: 0px;
+}
+
+.to-right { float: right; }
+
 .control-group {
   vertical-align: top;
   display: inline-block;
@@ -182,14 +214,29 @@ body {
   margin: 0px 10px 0px 0px;
 }
 
+.button {
+  position: relative;
+  padding: 2px;
+  background-color: #f5f5f5;
+  border: 1px solid #c0c0c0;
+  border-radius: 3px;
+  height: 40px;
+  min-width: 100px;
+  text-align: center;
+}
+
 .control {
+  vertical-align: top;
   white-space: nowrap;
   display: inline-block;
-  height: 40px;
-  padding: 0px 1em 0px 1em;
+  margin: 0px 10px 0px 0px;
   min-width: 75px;
   box-sizing: border-box;
   text-align: center;
+}
+
+.control > img {
+  height: 100%;
 }
 
 .to-right.control {
@@ -203,26 +250,19 @@ body {
 }
 
 .control-group > .control:last-child {
-  border-right: 1px solid gray;
+  border-right: 1px solid #c0c0c0;
 }
 
 .control-active {
-  /* ... 
+  /* ...  */
 }
 
-/* Dropdown controls 
-.dropdown-button .arrow {
-  position: relative;
-  top: 0.6em;
-  border-top: 4px solid black;
-  border-left: 4px dashed transparent;
-  border-right: 4px dashed transparent;
-  margin-left: 5px;
-  vertical-align: middle;
-}
+/* Dropdowns */
 
 .dropdown-frame {
   position: absolute;
+  line-height: normal;
+  text-align: left;
   z-index: 5;
   display: block;
   border: 1px solid #c0c0c0;
@@ -231,11 +271,10 @@ body {
 }
 
 .dropdown-content {
-  padding: 10px 24px 10px 24px;
   overflow: auto;
 }
 
-/* Thumbnail list 
+/* Thumbnail list  */
 .thumbnails {
   display: block;
   padding: 0px;
@@ -261,8 +300,12 @@ body {
   display: block;
   margin: 0px auto 10px auto;
 }
- 
-/* Mailbox 
+
+.app-controls-primary {
+  display: inline-block;
+}
+
+/* Mailbox  */
 .mailbox {
   overflow: scroll;
 }
@@ -276,8 +319,8 @@ body {
 }
 
 .mailbox-list-row > td  {
-  border-bottom: 1px solid gray;
-  border-top: 1px solid gray;
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
   padding-right: 30px;
 }
 
@@ -301,7 +344,7 @@ body {
 
 .mailbox-message-preview {
   font-weight: normal; 
-  color: gray;
+  color: #e5e5e5;
 }
 
 .folder-list {
@@ -313,17 +356,46 @@ body {
 
 .folder-item-alert { font-weight: bold; }
 
-/* A gray box with stuff inside 
+/* A gray box with stuff inside  */
 .gray-box {
-  background-color: #c0c0c0;
+  background-color: #f5f5f5;
   display: block;
   padding: 1em;
 }
 
-/* SPECIFIC WIDGETS 
+.spacebox {
+  margin: 10px;
+}
+
+/* SPECIFIC WIDGETS  */
+
+.account-menu {
+  width: 300px;
+}
+
+.account-menu h1,h2 {
+  font-size: 20px;
+  margin: 0px;
+  font-weight: normal;
+}
+
+.account-menu h2 {
+  color: #a0a0a0;
+}
+
+.account-menu a {
+  color: blue;
+}
+
+.appmode-menu.dropdown-button {
+  position: relative;
+  top: 10px;
+  margin-left: 30px;
+  color: red;
+  font-size: 25px;
+}
 
 .application-menu { width: 400px; }
-
 
 .titleheader h1 {
   font-size: 30px;
@@ -331,61 +403,30 @@ body {
   margin-right: 1em;
   color: orange;
 }
+
 .titleheader h2 {
   font-size: 15px;
   display: inline;
   color: blue;
 }
 
-.accountinfo {
-  width: 200px;
+.appmode-menu ul {
+  list-style-type: none;
+  padding: 0px;
 }
 
-.mailsearch-form {
-  width: 100%;
-  position: absolute;
-  border: 1px solid #c0c0c0;
-  background-color: white;
-  height: 35px;
+.appmode-menu ul > li {
+  padding: 4px 24px 4px 24px;
 }
 
-.mailsearch-form > .mailsearch-textfield {
-  position: absolute;
-  left: 0px;
-  right: 125px;
+.appmode-menu ul > li:first-child {
+  color: red;
 }
 
-.mailsearch-textfield > input[type="text"] {
-  width: 100%;
-  font-size: 20px;
-  height: 30px;
-  margin: 2.5px 2.5px 2.5px 10px;
-  box-sizing: border-box;
-  background-color: white;
-  border: none;
-  display: inline-block;
+.appmode-menu ul > li:hover {
+  background-color: #e5e5e5;
 }
 
-.mailsearch-dropdown {
-  position: absolute;
-  display: inline-block;
-  width: 25px;
-  height: 100%;
-  right: 100px;
-  background-color: white;
-  border: none;
-}
-
-.mailsearch-submit {
-  position: absolute;
-  width: 100px;
-  height: 100%;
-  right: 0px;
-  border: none;
-  background-color: #4285f4;
-}
-
-*/
 /* STATES  */
 
 .collapsed {

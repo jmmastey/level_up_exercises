@@ -5,86 +5,166 @@ body {
   font-family: sans-serif;
 }
 
-div,article,p,section,hgroup,header {
-}
-
-h1,h2 {
-  padding: 0px;
-  margin: 0px;
-}
-
 /* LAYOUT */
 
-.sidebar {
-  display: inline-block;
-  width: 270px;
-}
-
-.sidebar-indented {
-  padding-left: 30px;
-  width: 240px;
-}
-
-.content-container {
-  position: absolute;
-  left: 270px;
-  right: 30px;
-  top: 5px;
-}
-
-.vcenter {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.to-left {
-  float: left;
-}
-
-.to-right {
-  float: right;
-}
-
-#PageHeader {
+#PageTop {
+  position: fixed;
+  top: 0px;
+  margin: 0px;
+  padding: 0px;
   width: 100%;
-  background-color: #eeeeee;
-  height: 52px;
-  border-bottom: 1px solid black;
+  height: 80px;
+  padding:-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+  margin-bottom: 4px;
+  box-sizing: border-box;
+  background-color: #e0e0e0;
 }
 
 #TitleHeader {
   position: absolute;
-  top: 5px;
-  left: 0px;
-  height: 42px;
+  height: 75px;
+}
+
+#TitleHeader > h1 {
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  width: 100px;
+  font-size: 40px; 
+  vertical-align: middle;
+  margin: 0;
+}
+
+#TitleHeader > h2 { 
+  position: absolute;
+  top: 15px;
+  left: 120px;
+  width: 145px;
+  font-size: 18px;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.pagetop-container {
+  height: 40px;
+  margin-top: 17.5px;
+  margin-bottom: 17.5px;
+  line-height: 40px;
 }
 
 #MailSearch {
   position: absolute;
   top: 0px;
-  left: 0px;
-  right: 310px;
-  height: 42px;
+  left: 270px;
+  right: 400px;
 }
 
-#AccountControl {
+.mailsearch-form {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: 1px solid #c0c0c0;
+  box-sizing: border-box;
+}
+
+.mailsearch-textfield {
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 125px;
+  height: 100%;
+  background: white;
+}
+
+.mailsearch-textfield > input[type="text"] { 
+  font-size: 18px;
+  width: 100%; 
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: none;
+}
+
+.mailsearch-dropdown {
+  position: absolute;
+  top: 0px;
+  right: 100px;
+  width: 25px;
+  height: 100%;
+  box-sizing: border-box;
+  border: none;
+  background: white;
+}
+
+.mailsearch-submit {
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 270px;
+  height: 100%;
+  width: 100px;
+  background-color: #4285f4;
+  color: white;
+}
+
+.pagetop-control-height {
   height: 42px;
 }
 
 #AppControls {
+  display: none;
+}
+
+#AppMain {
+  display: none;
+}
+
+.arrow {
   position: relative;
+  top: 0.6em;
+  border-top: 4px solid black;
+  border-left: 4px dashed transparent;
+  border-right: 4px dashed transparent;
+  vertical-align: middle;
+}
+
+.right-end {
+  padding-right: 30px;
+}
+
+#OtherAppsControl {
+  position: absolute;
+  top: 0px;
+  right: 270px;
+  width: 100px;
+}
+
+#OtherAppsControl > input[type="image"] {
+  height: 100%;
+  width: 100%;
+}
+
+#AccountControl {
+  position: absolute;
+  text-align: right;
+  top: 0px;
+  right: 30px;
+  width: 240px;
+}
+
+#AppControls {
+  position: fixed;
+  top: 82px;
   padding: 5px 10px 5px 0px;
   border-bottom: 1px solid black;
   height: 42px;
 }
 
 #AppMain {
-  position: relative;
+  position: absolute;
+  top: 126px;
   padding-top: 5px;
 }
 
@@ -92,9 +172,9 @@ h1,h2 {
   right: 0px;
 }
 
-/* MODULES */
+/* MODULES 
 
-/* Generic controls and groups of controls */
+/* Generic controls and groups of controls 
 .control-group {
   vertical-align: top;
   display: inline-block;
@@ -103,13 +183,10 @@ h1,h2 {
 }
 
 .control {
-  position: relative;
+  white-space: nowrap;
   display: inline-block;
   height: 40px;
-  margin: 0px 10px 0px 0px;
-  padding: 0px;
-  vertical-align: top;
-  border: 1px solid gray;
+  padding: 0px 1em 0px 1em;
   min-width: 75px;
   box-sizing: border-box;
   text-align: center;
@@ -129,7 +206,11 @@ h1,h2 {
   border-right: 1px solid gray;
 }
 
-/* Dropdown controls */
+.control-active {
+  /* ... 
+}
+
+/* Dropdown controls 
 .dropdown-button .arrow {
   position: relative;
   top: 0.6em;
@@ -140,15 +221,21 @@ h1,h2 {
   vertical-align: middle;
 }
 
-.dropdown-content {
+.dropdown-frame {
   position: absolute;
   z-index: 5;
   display: block;
-  border: 2px solid black;
+  border: 1px solid #c0c0c0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   background-color: white;
 }
 
-/* Thumbnail list */
+.dropdown-content {
+  padding: 10px 24px 10px 24px;
+  overflow: auto;
+}
+
+/* Thumbnail list 
 .thumbnails {
   display: block;
   padding: 0px;
@@ -158,19 +245,24 @@ h1,h2 {
 
 .thumbnail {
   display: inline-block;
-  height: 80px;
-  width: 80px;
   padding: 10px;
   text-align: center;
+  border: 1px solid white;
+  box-sizing: border-box;
+}
+
+.thumbnail:hover {
+  border: 1px solid #c0c0c0;
 }
 
 .thumbnail-img {
-  width: 100%;
+  height: 90px;
+  width: 90px;
   display: block;
   margin: 0px auto 10px auto;
 }
  
-/* Mailbox */
+/* Mailbox 
 .mailbox {
   overflow: scroll;
 }
@@ -221,9 +313,17 @@ h1,h2 {
 
 .folder-item-alert { font-weight: bold; }
 
-/* SPECIFIC WIDGETS */
+/* A gray box with stuff inside 
+.gray-box {
+  background-color: #c0c0c0;
+  display: block;
+  padding: 1em;
+}
+
+/* SPECIFIC WIDGETS 
 
 .application-menu { width: 400px; }
+
 
 .titleheader h1 {
   font-size: 30px;
@@ -244,18 +344,36 @@ h1,h2 {
 .mailsearch-form {
   width: 100%;
   position: absolute;
+  border: 1px solid #c0c0c0;
+  background-color: white;
+  height: 35px;
 }
 
 .mailsearch-form > .mailsearch-textfield {
   position: absolute;
   left: 0px;
-  right: 100px;
+  right: 125px;
 }
 
 .mailsearch-textfield > input[type="text"] {
   width: 100%;
-  height: 40px;
+  font-size: 20px;
+  height: 30px;
+  margin: 2.5px 2.5px 2.5px 10px;
   box-sizing: border-box;
+  background-color: white;
+  border: none;
+  display: inline-block;
+}
+
+.mailsearch-dropdown {
+  position: absolute;
+  display: inline-block;
+  width: 25px;
+  height: 100%;
+  right: 100px;
+  background-color: white;
+  border: none;
 }
 
 .mailsearch-submit {
@@ -263,14 +381,14 @@ h1,h2 {
   width: 100px;
   height: 100%;
   right: 0px;
+  border: none;
+  background-color: #4285f4;
 }
 
-/* STATES */
+*/
+/* STATES  */
 
 .collapsed {
   visibility: hidden;
   height: 0px;
 }
-
-
-

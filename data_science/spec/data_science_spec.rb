@@ -28,8 +28,8 @@ describe "DataScience" do
       File.read(File.expand_path("data/source_data.json"))    
     )
     
-    expect(data_science.trials['A']).to eq(1349)
-    expect(data_science.trials['B']).to eq(1543)
+    expect(data_science.cohorts['A'].trials).to eq(1349)
+    expect(data_science.cohorts['B'].trials).to eq(1543)
   end
   
   it 'calculates the conversion rate for each cohort' do
@@ -37,8 +37,8 @@ describe "DataScience" do
       File.read(File.expand_path("data/source_data.json"))
     )
 
-    expect(data_science.conversion_rates['A']).to eq(0.035)
-    expect(data_science.conversion_rates['B']).to eq(0.051)
+    expect(data_science.cohorts['A'].conversion_rate).to eq(0.035)
+    expect(data_science.cohorts['B'].conversion_rate).to eq(0.051)
   end
   
   # Number of conversions for each part of the test.

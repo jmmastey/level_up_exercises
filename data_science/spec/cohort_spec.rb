@@ -23,5 +23,15 @@ describe "DataScience::Cohort" do
         expect { cohort.add_sample(1) }.to change{cohort.conversions}.from(0).to(1)
       end
     end
+    
+    it 'calculates conversion rates' do
+      cohort = DataScience::Cohort.new('foo')
+      cohort.add_sample(0)
+      cohort.add_sample(1)
+      cohort.add_sample(0)
+      cohort.add_sample(0)
+      
+      expect(cohort.conversion_rate).to eq(0.25)
+    end
   end
 end

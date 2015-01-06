@@ -1,6 +1,6 @@
 require 'abanalyzer'
 
-class CompareSamples
+class SampleComparer
   def initialize(sample_a, sample_b)
     @tester = ABAnalyzer::ABTest.new(samples(sample_a, sample_b))
   end

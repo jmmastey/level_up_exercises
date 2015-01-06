@@ -1,7 +1,7 @@
 Feature: Log in
   In order to get access to the access controlled section
   As a user
-  I want to Log in to the site
+  I want to Log in to the site with my account
 
   Background:
     Given I am on Log in page

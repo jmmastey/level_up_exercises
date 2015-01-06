@@ -73,7 +73,7 @@ module.exports = function(grunt) {
       },
 
       styles: {
-          files: ['css/main_unprefixed.css'],
+          files: ['css/build/main_unprefixed.css'],
           tasks: ['autoprefixer']
       },
 

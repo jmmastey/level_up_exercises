@@ -1,12 +1,12 @@
 body {
-  //min-width: 22rem; // Set if a min-width is needed
+  min-width: 30rem; // Set if a min-width is needed
 }
 
 //Float all columns to the left
 [class*='col-'] {
   float: left;
   padding-right: $pad;
-  
+
   // except the right-most column has no right padding
   .grid-pad &:last-of-type {
     padding-right: 0;
@@ -15,7 +15,7 @@ body {
 
 .grid-pad {
   padding: $pad;
-  
+
   // padding values of grid elements
   > section, > footer {
       padding: $pad 5% $pad*2 5%;
@@ -34,7 +34,7 @@ body {
   width: 100%;
   @include bp(delta) {
     width: 50%;
-  } 
+  }
 }
 .col-1-4 {
   width: 25%;

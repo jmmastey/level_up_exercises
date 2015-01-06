@@ -1,6 +1,10 @@
-require_relative '../bomb.rb'
+require_relative 'features_helper'
 
-Given /^I boot the bomb$/ do
+Given /^I have not booted the bomb$/ do
+
+end
+
+When /^I boot the bomb$/ do
   @bomb = Bomb.new
 end
 

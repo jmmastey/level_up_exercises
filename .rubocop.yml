@@ -1,2 +1,8 @@
 inherit_from:
   - .hound.yml
+
+AllCops:
+  Exclude:
+    - /*/.rspec
+    - /*/Gemfile
+    - /*/Gemfile.lock

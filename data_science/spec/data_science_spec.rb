@@ -13,42 +13,6 @@ describe "DataScience" do
     
     expect(data_science.sample_size).to eq(2892)
   end
-  
-  it 'calculates the conversions for each cohort' do
-    data_science = DataScience.new(
-      File.read(File.expand_path("data/source_data.json"))    
-    )
-    
-    expect(data_science.cohorts['A'].conversions).to eq(47)
-    expect(data_science.cohorts['B'].conversions).to eq(79)
-  end
-
-  it 'calculates the trials for each cohort' do
-    data_science = DataScience.new(
-      File.read(File.expand_path("data/source_data.json"))    
-    )
-    
-    expect(data_science.cohorts['A'].trials).to eq(1349)
-    expect(data_science.cohorts['B'].trials).to eq(1543)
-  end
-  
-  it 'calculates the conversion rate for each cohort' do
-    data_science = DataScience.new(
-      File.read(File.expand_path("data/source_data.json"))
-    )
-
-    expect(data_science.cohorts['A'].conversion_rate).to eq(0.035)
-    expect(data_science.cohorts['B'].conversion_rate).to eq(0.051)
-  end
-  
-  it 'calculates the standard error for each cohort' do
-    data_science = DataScience.new(
-      File.read(File.expand_path("data/source_data.json"))
-    )
-
-    expect(data_science.cohorts['A'].standard_error).to eq(0.005)
-    expect(data_science.cohorts['B'].standard_error).to eq(0.006)
-  end
     
   # Percentage of conversion (including error bars) with a 95% confidence.
   it 'returns the percentage of conversions (w/error bars) with 95% confidence'

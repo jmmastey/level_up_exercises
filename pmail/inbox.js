@@ -3,6 +3,7 @@ $(document).ready(init)
 function init()
 {
   init_dropdowns();
+  init_checkboxes();
 }
 
 var CLS_CONTROL_ACTIVE = "control-active";
@@ -20,7 +21,12 @@ var CLS_DPD_ALIGN_LT = "dropdown-left-align";
 var CLS_DPD_ALIGN_CT = "dropdown-center-align";
 var CLS_DPD_MATCH_WIDTH = "dropdown-match-width";
 
+var CLS_CKB_CONTROL = "checkbox";
+var CLS_CHECKED = "checked";
+
 var ATR_DPD_PARENT_ID = "dropdown-parent-id";
+
+var CBK_ON_ACTUATE = "control-on-actuate";
 
 function dot(css_class) { return "." + css_class; }
 
@@ -128,4 +134,50 @@ function dropdown_toggle(control)
   control_is_active(control) ? dropdown_close(control) : dropdown_open(control);
 }
 
-function dropdown_click() { dropdown_toggle($(this)) }
+function dropdown_click(event)
+{
+  event.stopPropagation();
+  dropdown_toggle($(this))
+}
+
+function all_checkboxes() { return $('.' + CLS_CKB_CONTROL) }
+
+function init_checkboxes()
+{
+  all_checkboxes().bind('click', checkbox_click);
+}
+
+function checkbox_click(event)
+{
+  event.stopPropagation();
+  checkbox_toggle($(this))
+}
+
+function checkbox_toggle(control)
+{
+  control_is_active(control) ? checkbox_uncheck(control) : checkbox_check(control);
+}
+
+function control_run_callback(control, callback_name, args)
+{
+  var callback = control.data(callback_name);
+  if (! callback) return;
+
+  var callback_args = arguments.slice(2);
+  callback_args.unshift(control);
+  callback.apply(this, callback_args);
+}
+
+function checkbox_check(checkbox)
+{
+  control_run_callback(checkbox, CBK_ON_ACTUATE);
+  checkbox.addClass(CLS_CHECKED);
+  checkbox.addClass(CLS_CONTROL_ACTIVE);
+}
+
+function checkbox_uncheck(checkbox)
+{
+  control_run_callback(checkbox, CBK_ON_ACTUATE);
+  checkbox.removeClass(CLS_CONTROL_ACTIVE);
+  checkbox.removeClass(CLS_CHECKED);
+}

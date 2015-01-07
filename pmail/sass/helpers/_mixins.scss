@@ -5,3 +5,11 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+// Table Mixins
+
+@mixin truncate-table-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

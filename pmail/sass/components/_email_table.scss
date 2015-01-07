@@ -1,0 +1,41 @@
+.emails {
+
+  table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+
+    tr {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    td {
+      vertical-align: middle;
+
+      &:nth-child(1) {
+        width: 30px;
+        text-align: center;
+      }
+      &:nth-child(2) {
+        width: 30px;
+        text-align: center;
+      }
+      &:nth-child(3) {
+        width: 50px;
+        text-align: center;
+      }
+      &:nth-child(4) {
+        width: 150px;
+        @include truncate-table-cell;
+      }
+      &:nth-child(5) {
+        max-width: 500px;
+        @include truncate-table-cell;
+      }
+      &:nth-child(6) {
+        width: 100px;
+      }
+    }
+  }
+}

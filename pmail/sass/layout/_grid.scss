@@ -1,5 +1,5 @@
 body {
-  min-width: 30rem; // Set if a min-width is needed
+  min-width: 40rem; // Set if a min-width is needed
 }
 
 //Float all columns to the left
@@ -11,10 +11,6 @@ body {
   .grid-pad &:last-of-type, &:last-of-type {
     padding-right: 0;
   }
-}
-
-.col-right {
-  float: right;
 }
 
 .grid-pad {
@@ -52,12 +48,6 @@ body {
 .col-3-5 {
   width: 60%;
 }
-
-.fixed-side-col {
-  width: 13em;
-}
-
-
 
 // Insert any exceptions here
 

@@ -1,10 +1,19 @@
 .main-header {
-  height: 5em;
+  height: 5rem;
   background: $light-gray;
+
+  .header-logo {
+    width: 13rem;
+    float: left;
+  }
 
   h1 {
     @include image-replacement-text;
     margin: 0;
     background: url('../../img/enova_logo.png') no-repeat;
+  }
+
+  .login {
+    float: right;
   }
 }

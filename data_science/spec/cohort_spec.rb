@@ -34,4 +34,17 @@ describe "DataScience::Cohort" do
       expect(cohort.conversion_rate).to eq(0.25)
     end
   end
+  
+  describe '#standard_error' do
+    it 'returns its standard error' do
+      cohort = DataScience::Cohort.new('foo')
+      
+      samples = [0, 1, 0, 0, 1, 0, 0, 1, 0, 0]
+      
+      samples.each { |sample| cohort.add_sample(sample) }
+    
+      expect(cohort.standard_error).to eq(0.145)
+    end
+  end
+  
 end

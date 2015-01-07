@@ -18,6 +18,12 @@ class DataScience::Cohort
     calculate_conversion_rate
   end
   
+  def standard_error
+    # Square root of (p * (1-p) / n)
+
+    (Math.sqrt(@conversion_rate * (1 - @conversion_rate)/ @trials)).round(3)
+  end
+  
 
 private
   

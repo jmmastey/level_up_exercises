@@ -41,9 +41,15 @@ describe "DataScience" do
     expect(data_science.cohorts['B'].conversion_rate).to eq(0.051)
   end
   
-  # Number of conversions for each part of the test.
-  # it 'returns the number/conversions for each part of the test'
-  
+  it 'calculates the standard error for each cohort' do
+    data_science = DataScience.new(
+      File.read(File.expand_path("data/source_data.json"))
+    )
+
+    expect(data_science.cohorts['A'].standard_error).to eq(0.005)
+    expect(data_science.cohorts['B'].standard_error).to eq(0.006)
+  end
+    
   # Percentage of conversion (including error bars) with a 95% confidence.
   it 'returns the percentage of conversions (w/error bars) with 95% confidence'
   
@@ -53,6 +59,5 @@ describe "DataScience" do
   #
   # http://www.usereffect.com/split-test-calculator
   it 'calculates confidence interval that current leader is better than random'
-  
   
 end

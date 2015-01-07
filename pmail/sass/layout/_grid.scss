@@ -8,9 +8,13 @@ body {
   padding-right: $pad;
 
   // except the right-most column has no right padding
-  .grid-pad &:last-of-type {
+  .grid-pad &:last-of-type, &:last-of-type {
     padding-right: 0;
   }
+}
+
+.col-right {
+  float: right;
 }
 
 .grid-pad {
@@ -42,6 +46,17 @@ body {
 .col-1-8 {
   width: 12.5%;
 }
+.col-1-5 {
+  width: 20%;
+}
+.col-3-5 {
+  width: 60%;
+}
+
+.fixed-side-col {
+  width: 13em;
+}
+
 
 
 // Insert any exceptions here

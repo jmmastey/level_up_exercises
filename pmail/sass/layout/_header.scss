@@ -1,13 +1,10 @@
 .main-header {
   height: 5em;
+  background: $light-gray;
+
+  h1 {
+    @include image-replacement-text;
+    margin: 0;
+    background: url('../../img/enova_logo.png') no-repeat;
+  }
 }
-
-// Common mixins
-
-@mixin image-replacement-text {
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-

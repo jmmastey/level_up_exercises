@@ -15,13 +15,14 @@
   </hgroup>
   <section id="MailSearch" class="pagetop-container">
     <form class="mailsearch-form pagetop-control-height">
-      <div class="mailsearch-textfield">
+      <div id="MailSearchTextField" class="mailsearch-textfield">
         <input type="text" value="">
       </div>
       <button type="button" class="dropdown-button mailsearch-dropdown">
         <span class="arrow"></span>
       </button>
-      <article class="dropdown-frame collapsed">
+      <article dropdown-parent-id="MailSearchTextField" 
+               class="dropdown-frame collapsed dropdown-left-align dropdown-match-width">
         <div class="dropdown-content">
           FOOBAR
         </div>
@@ -38,7 +39,7 @@
         <ul class="thumbnails">
           <li class="thumbnail">
             <img class="thumbnail-img" src="graphics/calendar10.svg">
-            <p class="thumbnail-caption">Calendar</p>
+            <p class="thumbnail-caption">What's Up</p>
           </li>
           <li class="thumbnail">
             <img class="thumbnail-img" src="graphics/conversation2.svg">
@@ -46,15 +47,15 @@
           </li>
           <li class="thumbnail">
             <img class="thumbnail-img" src="graphics/information6.svg">
-            <p class="thumbnail-caption">About</p>
+            <p class="thumbnail-caption">Get a Clue</p>
           </li>
           <li class="thumbnail">
             <img class="thumbnail-img" src="graphics/time4.svg">
-            <p class="thumbnail-caption">World Clock</p>
+            <p class="thumbnail-caption">Are you Late?</p>
           </li>
           <li class="thumbnail">
             <img class="thumbnail-img" src="graphics/wifi13.svg">
-            <p class="thumbnail-caption">Radio</p>
+            <p class="thumbnail-caption">On the Air</p>
           </li>
           <li class="thumbnail">
             <img class="thumbnail-img" src="graphics/question7.svg">
@@ -107,12 +108,12 @@
         <span class="spaced arrow"></span></a>
       <div class="dropdown-frame collasped">
       </div>
-      <input type="image" class="control button" value="<()>" />
+      <div class="control button refresh-button"></div>
       <a class="control button dropdown-button">More <span class="spaced arrow"></span></a>
       <div class="dropdown-frame collapsed">
       </div>
     </div>
-    <button class="to-right control button dropdown-button">
+    <button class="to-right control button dropdown-button settings-button">
         <img src="graphics/wrench3.svg" alt="Settings"> <span class="spaced arrow"></span>
     </button>
   </div>

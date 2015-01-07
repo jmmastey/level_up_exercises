@@ -18,6 +18,9 @@ var CLS_DPD_COLLAPSED = "collapsed";
 var CLS_DPD_ALIGN_RT = "dropdown-right-align";
 var CLS_DPD_ALIGN_LT = "dropdown-left-align";
 var CLS_DPD_ALIGN_CT = "dropdown-center-align";
+var CLS_DPD_MATCH_WIDTH = "dropdown-match-width";
+
+var ATR_DPD_PARENT_ID = "dropdown-parent-id";
 
 function dot(css_class) { return "." + css_class; }
 
@@ -40,47 +43,64 @@ function dropdown_content_pane(button) { return $(button).next(); }
 
 function dropdown_right_align(data)
 {
-  with (data) { return button.left + button.width - content.width; }
+  with (data) { return parent.left + parent.width - content.width; }
 }
 
-function dropdown_left_align(data) { return data.button.left; }
+function dropdown_left_align(data) { return data.parent.left; }
 
 function dropdown_center_align(data)
 {
-  with (data) { return button.left + (button.width - content.width) / 2; }
+  with (data) { return parent.left + (parent.width - content.width) / 2; }
 }
 
-function dropdown_align_params(button, content)
+function dropdown_align_params(parent, content)
 {
-  var par_node = button.offsetParent();
-  var par_pos = par_node.position();
-  var button_pos = button.position();
+  var container_node = parent.offsetParent();
+  var container_pos = container_node.offset();
+  var parent_pos = parent.offset();
 
   return {
-    parent: { node: par_node, left: par_pos.left,
-              top: par_pos.top, width: par_node.outerWidth() },
-    button: { node: button, left: button_pos.left,
-              top: button_pos.top, width: button.outerWidth() },
+    container: { node: container_node, left: container_pos.left,
+              top: container_pos.top, width: container_node.outerWidth() },
+    parent: { node: parent, left: parent_pos.left,
+              top: parent_pos.top, width: parent.outerWidth() },
     content: { node: content, width: content.outerWidth() }
   };
 }
 
-function dropdown_set_content_position(button, content)
+function dropdown_parent_control(button, content)
 {
-  var params = dropdown_align_params(button, content);
-  var max_x_pos = $('body').width() - params.content.width
-                  - params.parent.node.offset().left;
-  var ideal_x_pos = dropdown_align_content(button, params);
-  var x_pos = Math.min(ideal_x_pos, max_x_pos);
-
-  content.css('top', (params.button.top + button.outerHeight()) + "px");
-  content.css('left', x_pos + "px");
+  var parent_id = content.attr(ATR_DPD_PARENT_ID);
+  return parent_id ? $('#' + parent_id) : button;
 }
 
-function dropdown_align_content(button, data)
+function dropdown_set_content_position(button, content)
 {
-  align_method = button.data(DPD_POS_METHOD) || dropdown_left_align;
-  return align_method(data)
+  var parent = dropdown_parent_control(button, content);
+  var params = dropdown_align_params(parent, content);
+  dropdown_align_content(params);
+  dropdown_set_width(params);
+}
+
+function dropdown_set_width(data)
+{
+  with (data) {
+    if (content.node.hasClass(CLS_DPD_MATCH_WIDTH))
+      content.node.css('width', parent.width + "px");
+  }
+}
+
+function dropdown_align_content(data)
+{
+  with (data) {
+    var max_x_pos = $('body').width() - content.width;
+    align_method = parent.node.data(DPD_POS_METHOD) || dropdown_left_align;
+    var ideal_x_pos = align_method(data);
+    var x_pos = Math.min(ideal_x_pos, max_x_pos);
+
+    content.node.css('top', (parent.top + parent.node.outerHeight()) + "px");
+    content.node.css('left', x_pos + "px");
+  }
 }
 
 function dropdown_close_all()

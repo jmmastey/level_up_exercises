@@ -1,16 +1,16 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
+require 'json'
+
 describe DataScience do
-  # let(:sample) {  }
+  let (:data_science) do
+    DataScience.new(load_json)
+  end
 
   # calculate the conversion rate of visitors as part of a split test.
 
   # Total sample size
   it 'returns the sample size' do
-    data_science = DataScience.new(
-      File.read(File.expand_path("data/source_data.json"))
-    )
-
     expect(data_science.sample_size).to eq(2892)
   end
 
@@ -24,4 +24,11 @@ describe DataScience do
   # http://www.usereffect.com/split-test-calculator
   it 'calculates confidence interval that current leader is better than random'
 
+  private
+
+  def load_json
+    raw_json = File.read(File.expand_path("data/source_data.json"))
+
+    JSON.parse(raw_json)
+  end
 end

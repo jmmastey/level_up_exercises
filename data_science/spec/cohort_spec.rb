@@ -11,12 +11,12 @@ describe DataScience::Cohort do
 
   describe '#add_sample' do
     it 'increments samples' do
-      expect { cohort.add_sample(1) }.to change { cohort.trials }.from(1349).to(1350)
+      expect { cohort.add_sample(1) }.to change { cohort.trials }.by(1)
     end
 
     context 'when a conversion took place' do
       it 'increments conversions' do
-        expect { cohort.add_sample(1) }.to change { cohort.conversions }.from(47).to(48)
+        expect { cohort.add_sample(1) }.to change { cohort.conversions }.by(1)
       end
     end
 

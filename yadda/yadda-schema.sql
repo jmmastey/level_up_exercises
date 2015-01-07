@@ -7,16 +7,18 @@ CREATE TABLE yadda.brewery (
   zip_code        integer(9),
   description     text,
   founding_year   date
-  modified_on     timestamp DEFAULT current_timestamp
+  modified_on     timestamp DEFAULT current_timestamp,
+  modified_by     integer(9) REFERENCES user
 );
 
 CREATE TABLE yadda.beer (
   beer_id         integer PRIMARY KEY DEFAULT nextval('serial'),
-  brewery_id      integer(9) references brewery(brewery_id),
+  brewery_id      integer(9) REFERENCES brewery,
   style           varchar(25),
   description     text,
   brewing_year    integer(4),
-  modified_on     timestamp DEFAULT current_timestamp
+  modified_on     timestamp DEFAULT current_timestamp,
+  modified_by     integer(9) REFERENCES user
 );
 
 CREATE TABLE yadda.user (
@@ -25,18 +27,20 @@ CREATE TABLE yadda.user (
   email           varchar(100) NOT NULL,
   description     text,
   birthday        date NOT NULL,
-  modified_on     timestamp DEFAULT current_timestamp
+  modified_on     timestamp DEFAULT current_timestamp,
+  modified_by     integer(9) REFERENCES user
 );
 
 CREATE TABLE yadda.rating (
   rating_id       integer PRIMARY KEY DEFAULT nextval('serial'),
-  user_id         integer(9) references user(user_id),
-  beer_id         integer(9) references beer(beer_id),
-  look            numeric(3),
-  smell           numeric(3),
-  taste           numeric(3),
-  feel            numeric(3),
-  overall         numeric(3),
+  user_id         integer(9) REFERENCES user,
+  beer_id         integer(9) REFERENCES beer,
+  look            numeric(3) CHECK (look > 0),
+  smell           numeric(3) CHECK (smell > 0),
+  taste           numeric(3) CHECK (taste > 0),
+  feel            numeric(3) CHECK (feel > 0),
+  overall         numeric(3) CHECK (overall > 0) NOT NULL,
   description     text,
-  modified_on     timestamp DEFAULT current_timestamp
+  modified_on     timestamp DEFAULT current_timestamp,
+  modified_by     integer(9) REFERENCES user
 );

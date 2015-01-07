@@ -13,7 +13,6 @@ class Experiment
   def observed_conversion_rate(cohort)
     cohort_stats = @data[cohort]
     conversion_rate = (100 * (cohort_stats["conversions"].to_f / cohort_stats["total_visits"].to_f)).round(2)
-    puts " #{cohort} --  #{conversion_rate}"
     conversion_rate
   end
 
@@ -29,8 +28,7 @@ class Experiment
     conversion_rate = observed_conversion_rate(cohort)/100
     trials          = @data[cohort]["total_visits"]
     square_error    = (conversion_rate * (1 - conversion_rate))/trials
-    puts " #{cohort} --  #{square_error} #{trials}"
-    error           = Math.sqrt(square_error)*100
+    error           = (Math.sqrt(square_error)*100).round(2)
   end
 
   def true_conversion_rate(cohort)

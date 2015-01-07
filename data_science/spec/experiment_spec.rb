@@ -26,6 +26,6 @@ describe Experiment do
   end
 
   it "calculates standard error" do
-    expect(described_class.new("test_data.json").standard_error("B")).to eq(20)
+    expect(described_class.new("test_data.json").standard_error("B")).to eq(21.91)
   end
 end

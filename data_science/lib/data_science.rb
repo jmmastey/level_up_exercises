@@ -19,7 +19,6 @@ class DataScience
     @sample.length
   end
 
-
   private
 
   def import_trial_and_conversion_counts

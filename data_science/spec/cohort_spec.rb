@@ -11,20 +11,12 @@ describe DataScience::Cohort do
 
   describe '#add_sample' do
     it 'increments samples' do
-      expect {
-        cohort.add_sample(1)
-      }.to change{
-        cohort.trials
-      }.from(1349).to(1350)
+      expect { cohort.add_sample(1) }.to change { cohort.trials }.from(1349).to(1350)
     end
 
     context 'when a conversion took place' do
       it 'increments conversions' do
-        expect {
-          cohort.add_sample(1)
-        }.to change{
-          cohort.conversions
-        }.from(47).to(48)
+        expect { cohort.add_sample(1) }.to change { cohort.conversions }.from(47).to(48)
       end
     end
 
@@ -45,18 +37,17 @@ describe DataScience::Cohort do
     end
   end
 
-
-private
+  private
 
   def load_cohort_data
     cohort   = DataScience::Cohort.new('foo')
     raw_data = File.read(File.expand_path("data/source_data.json"))
-    sample   = JSON.parse(raw_data)
+    json     = JSON.parse(raw_data)
 
-    sample.each do |sample|
-      next unless sample['cohort'] == 'A'
+    json.each do |current_sample|
+      next unless current_sample['cohort'] == 'A'
 
-      cohort.add_sample(sample['result'])
+      cohort.add_sample(current_sample['result'])
     end
 
     cohort

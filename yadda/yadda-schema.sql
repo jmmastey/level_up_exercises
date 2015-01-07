@@ -1,4 +1,7 @@
-CREATE TABLE yadda.brewery (
+DROP DATABASE IF EXISTS yadda;
+CREATE DATABASE yadda;
+
+CREATE TABLE brewery (
   brewery_id      integer PRIMARY KEY DEFAULT nextval('serial'),
   name            varchar(50) NOT NULL,
   address         varchar(100),
@@ -10,10 +13,10 @@ CREATE TABLE yadda.brewery (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
-CREATE INDEX brewery_id_index ON brewery(brewery_id);
+CREATE UNIQUE INDEX brewery_id_index ON brewery(brewery_id);
 COMMENT ON TABLE brewery IS 'Brewery information';
 
-CREATE TABLE yadda.beer (
+CREATE TABLE beer (
   beer_id         integer PRIMARY KEY DEFAULT nextval('serial'),
   brewery_id      integer(9) REFERENCES brewery,
   style           varchar(25),
@@ -22,10 +25,10 @@ CREATE TABLE yadda.beer (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
-CREATE INDEX beer_id_index ON beer(beer_id);
+CREATE UNIQUE INDEX beer_id_to_brewery_id_index ON beer(beer_id, brewery_id);
 COMMENT ON TABLE beer IS 'Beer information, many beers to a brewery';
 
-CREATE TABLE yadda.user (
+CREATE TABLE user (
   user_id         integer PRIMARY KEY DEFAULT nextval('serial'),
   name            varchar(50) NOT NULL,
   email           varchar(100) NOT NULL,
@@ -34,10 +37,10 @@ CREATE TABLE yadda.user (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
-CREATE INDEX user_id_index ON user(user_id);
+CREATE UNIQUE INDEX user_id_index ON user(user_id);
 COMMENT ON TABLE user IS 'User information';
 
-CREATE TABLE yadda.rating (
+CREATE TABLE rating (
   rating_id       integer PRIMARY KEY DEFAULT nextval('serial'),
   user_id         integer(9) REFERENCES user,
   beer_id         integer(9) REFERENCES beer,
@@ -50,6 +53,6 @@ CREATE TABLE yadda.rating (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
-CREATE INDEX rating_id_index ON rating(rating_id);
-CREATE INDEX user_to_beer_index ON rating(user_id, beer_id);
+CREATE UNIQUE INDEX rating_id_index ON rating(rating_id);
+CREATE UNIQUE INDEX user_to_beer_index ON rating(user_id, beer_id);
 COMMENT ON TABLE rating IS 'Rating information, link between a user and a beer';

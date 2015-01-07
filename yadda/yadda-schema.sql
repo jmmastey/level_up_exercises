@@ -10,6 +10,7 @@ CREATE TABLE yadda.brewery (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
+COMMENT ON TABLE brewery IS 'Brewery information';
 
 CREATE TABLE yadda.beer (
   beer_id         integer PRIMARY KEY DEFAULT nextval('serial'),
@@ -20,6 +21,7 @@ CREATE TABLE yadda.beer (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
+COMMENT ON TABLE beer IS 'Beer information, many beers to a brewery';
 
 CREATE TABLE yadda.user (
   user_id         integer PRIMARY KEY DEFAULT nextval('serial'),
@@ -30,6 +32,7 @@ CREATE TABLE yadda.user (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
+COMMENT ON TABLE user IS 'User information';
 
 CREATE TABLE yadda.rating (
   rating_id       integer PRIMARY KEY DEFAULT nextval('serial'),
@@ -44,3 +47,4 @@ CREATE TABLE yadda.rating (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
+COMMENT ON TABLE rating IS 'Rating information, link between a user and a beer';

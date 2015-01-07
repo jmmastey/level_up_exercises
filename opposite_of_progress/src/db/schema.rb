@@ -14,19 +14,53 @@
 ActiveRecord::Schema.define(version: 20150105200239) do
 
   create_table "bills", force: true do |t|
+    t.string   "bill_type"
+    t.string   "official_title"
+    t.string   "chamber"
+    t.integer  "congress"
+    t.integer  "number"
+    t.string   "url"
+    t.text     "summary"
+    t.boolean  "enacted"
+    t.datetime "enacted_at"
+    t.datetime "introduced_on"
+    t.datetime "last_action_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "good_deeds", force: true do |t|
+    t.string   "action"
+    t.integer  "bill_id"
+    t.integer  "legislator_id"
+    t.string   "chamber"
+    t.string   "text"
+    t.date     "acted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "legislators", force: true do |t|
+    t.string   "bioguide_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "middle_name"
+    t.string   "name_suffix"
+    t.string   "title"
+    t.string   "chamber"
+    t.string   "party"
+    t.string   "state"
+    t.integer  "district"
+    t.string   "state_rank"
+    t.string   "phone"
+    t.string   "youtube_id"
+    t.string   "facebook_id"
+    t.string   "twitter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "legislators", ["bioguide_id"], name: "index_legislators_on_bioguide_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

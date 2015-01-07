@@ -1,5 +1,9 @@
+/*------------------------------------*\
+    #LAYOUT - MEDIA QUERIES
+\*------------------------------------*/
+
 @mixin bp($point) {
-  
+
   $bp-alpha: "(min-width: 5rem)";
   $bp-beta: "(min-width: 10rem)";
   $bp-gamma: "(min-width: 15rem)";

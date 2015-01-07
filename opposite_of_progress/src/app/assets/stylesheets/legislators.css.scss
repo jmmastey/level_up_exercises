@@ -1,3 +1,31 @@
 // Place all the styles related to the Legislators controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+section.legislator-index {
+  .legislator {
+    margin: 1em 0 1em 0;
+  }
+
+
+
+    // @include grid-column($columns: 8);
+
+    @media #{large-up} {
+     .legislator-details {
+        @include grid-column($columns: 3, $pull: 4);
+      }
+    }
+
+
+  .legislator-image {
+    img {
+      float: right;
+    }
+    // @include grid-column($columns: 4, $last-column: true);
+
+    @media #{large-up} {
+      @include grid-column($columns: 1, $last-column: true);
+    }
+  }
+}

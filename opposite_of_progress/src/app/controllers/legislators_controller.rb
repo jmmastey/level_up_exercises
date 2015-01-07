@@ -9,7 +9,8 @@ class LegislatorsController < ApplicationController
   end
 
   private
-    def set_legislator
-      @legislator = Legislator.find(params[:id])
-    end
+
+  def set_legislator
+    @legislator = Legislator.find(params[:id])
+  end
 end

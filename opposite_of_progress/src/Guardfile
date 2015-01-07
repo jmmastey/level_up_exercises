@@ -57,6 +57,7 @@ guard :rspec, cmd: "bundle exec rspec" do
   rails.spec_helper = "spec/rails_helper.rb"
   rails.spec_support = %r{^spec/support/(.+)\.rb$}
   rails.views = %r{^app/views/(.+)/.*\.(erb|haml|slim)$}
+  rails.factories = %r{^spec/factories/(.+)\.rb$}
 
   watch(rails.app) { |m| rspec.spec.(m[1]) }
   watch(rails.views_n_layouts) { |m| rspec.spec.("#{m[1]}#{m[2]}") }
@@ -72,6 +73,7 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(rails.spec_helper)     { rspec.spec_dir }
   watch(rails.routes)          { "spec/routing" }
   watch(rails.app_controller)  { "spec/controllers" }
+  watch(rails.factories) { "spec/support/factory_girl_spec.rb" }
 
   # Capybara features specs
   watch(rails.views)     { |m| rspec.spec.("features/#{m[1]}") }

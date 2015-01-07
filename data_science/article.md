@@ -3,7 +3,7 @@ https://vwo.com/blog/what-you-really-need-to-know-about-mathematics-of-ab-split-
 ## What you really need to know about mathematics of A/B split testing
 
 Posted in A/B Split Testing on January 26, 2010
-  
+
 Recently, I published an A/B split testing case study where an eCommerce store
 reduced bounce rate by 20%. Some of the blog readers were worried about
 statistical significance of the results. Their main concern was that a value of
@@ -43,7 +43,7 @@ approaching true conversion rate.
 Mathematically, the **conversion rate** is represented by a **binomial random
 variable**, which is a fancy way of saying that it can have two possible values:
 
-1. conversion 
+1. conversion
 2. non-conversion
 
 Let’s call this variable as `p`. Our job is to estimate the value of `p` and
@@ -68,7 +68,7 @@ standard error is calculated as:
 Without going much into details, to get 95% range for conversion rate multiply
 the standard error value by 2 (or 1.96 to be precise). In other words, you can
 be sure with 95% confidence that your true conversion rate lies within this
-range: 
+range:
 
     p % ± 2 * SE
 

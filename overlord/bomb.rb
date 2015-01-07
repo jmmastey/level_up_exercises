@@ -1,10 +1,10 @@
 class Bomb
-  attr_accessor :detonated
-  attr_reader :active
+  attr_reader :active, :detonated, :invalid_count
 
   def initialize
     @active = false
     @invalid_count = 0
+    @detonated = false
   end
 
   def active?
@@ -29,7 +29,6 @@ class Bomb
 
   private
 
-  attr_accessor :invalid_count
   ACTIVATE_CODE = 1234
   DEACTIVATE_CODE = 0000
   MAX_INVALID = 3
@@ -40,15 +39,11 @@ class Bomb
   end
 
   def deactivate_deny
-    invalid_count++
+    @invalid_count = invalid_count + 1
     self.detonate if invalid_count == MAX_INVALID
   end
 
-  def detonated=(new_detonated)
-    @detonated = new_detonated
-  end
-
   def detonate
-    self.detonated = true
+    @detonated = true
   end
 end

@@ -4,13 +4,10 @@ function init()
 {
   init_dropdowns();
   init_checkboxes();
+  init_radiobuttons();
 }
 
 var CLS_CONTROL_ACTIVE = "control-active";
-
-function activate_control(control) { control.addClass(CLS_CONTROL_ACTIVE); }
-function deactivate_control(control) { control.removeClass(CLS_CONTROL_ACTIVE); }
-function control_is_active(control) { return control.hasClass(CLS_CONTROL_ACTIVE); }
 
 var DPD_POS_METHOD = 'dropdown-position-method';
 
@@ -20,15 +17,48 @@ var CLS_DPD_ALIGN_RT = "dropdown-right-align";
 var CLS_DPD_ALIGN_LT = "dropdown-left-align";
 var CLS_DPD_ALIGN_CT = "dropdown-center-align";
 var CLS_DPD_MATCH_WIDTH = "dropdown-match-width";
+var ATR_DPD_PARENT_ID = "dropdown-parent-id";
 
 var CLS_CKB_CONTROL = "checkbox";
 var CLS_CHECKED = "checked";
 
-var ATR_DPD_PARENT_ID = "dropdown-parent-id";
+var CLS_RDB_CONTROL = "radio-button";
+var CLS_RDB_LIST_ITEM = "radio-button-item";
+var ATR_RDB_GROUP = "radio-group";
 
 var CBK_ON_ACTUATE = "control-on-actuate";
+var CBK_ON_ACTIVATE = "control-on-activate";
+var CBK_ON_DEACTIVATE = "control-on-deactivate";
 
 function dot(css_class) { return "." + css_class; }
+
+/* GENERIC CONTROLS */
+
+function control_activate(control)
+{
+  control_run_callback(control, CBK_ON_ACTIVATE);
+  control.addClass(CLS_CONTROL_ACTIVE);
+}
+
+function control_deactivate(control)
+{
+  control_run_callback(control, CBK_ON_DEACTIVATE);
+  control.removeClass(CLS_CONTROL_ACTIVE);
+}
+
+function control_is_active(control) { return control.hasClass(CLS_CONTROL_ACTIVE); }
+
+function control_run_callback(control, callback_name, args)
+{
+  var callback = control.data(callback_name);
+  if (! callback) return;
+
+  var callback_args = arguments.slice(2);
+  callback_args.unshift(control);
+  callback.apply(this, callback_args);
+}
+
+/* DROPDOWN CONTROLS */
 
 var dpd_position_methods = {};
 dpd_position_methods[dot(CLS_DPD_ALIGN_RT)] = dropdown_right_align;
@@ -117,14 +147,14 @@ function dropdown_close_all()
 function dropdown_close(button)
 {
   dropdown_content_pane(button).addClass(CLS_DPD_COLLAPSED);
-  deactivate_control(button);
+  control_deactivate(button);
 }
 
 function dropdown_open(button)
 {
   dropdown_close_all();
   var content_pane = dropdown_content_pane(button);
-  activate_control(button);
+  control_activate(button);
   dropdown_set_content_position(button, content_pane);
   content_pane.removeClass(CLS_DPD_COLLAPSED);
 }
@@ -140,7 +170,9 @@ function dropdown_click(event)
   dropdown_toggle($(this))
 }
 
-function all_checkboxes() { return $('.' + CLS_CKB_CONTROL) }
+// CHECKBOX LOGIC
+
+function all_checkboxes() { return $(dot(CLS_CKB_CONTROL)) }
 
 function init_checkboxes()
 {
@@ -158,26 +190,62 @@ function checkbox_toggle(control)
   control_is_active(control) ? checkbox_uncheck(control) : checkbox_check(control);
 }
 
-function control_run_callback(control, callback_name, args)
-{
-  var callback = control.data(callback_name);
-  if (! callback) return;
-
-  var callback_args = arguments.slice(2);
-  callback_args.unshift(control);
-  callback.apply(this, callback_args);
-}
-
 function checkbox_check(checkbox)
 {
+  control_activate(checkbox);
   control_run_callback(checkbox, CBK_ON_ACTUATE);
   checkbox.addClass(CLS_CHECKED);
-  checkbox.addClass(CLS_CONTROL_ACTIVE);
 }
 
 function checkbox_uncheck(checkbox)
 {
+  control_deactivate(checkbox);
   control_run_callback(checkbox, CBK_ON_ACTUATE);
-  checkbox.removeClass(CLS_CONTROL_ACTIVE);
   checkbox.removeClass(CLS_CHECKED);
+}
+
+// RADIO BUTTON LOGIC
+
+function all_radiobuttons() { return $(dot(CLS_RDB_CONTROL)); }
+function all_radiobutton_items() { return $(dot(CLS_RDB_LIST_ITEM)); }
+
+function init_radiobuttons()
+{
+  all_radiobuttons().bind('click', radiobutton_click);
+  all_radiobutton_items().bind('click', radiobutton_item_click);
+}
+
+function radiobutton_click(event)
+{
+  radiobutton_select($(this));
+}
+
+function radiobutton_select(radiobutton)
+{
+  var group = radiobutton.attr(ATR_RDB_GROUP);
+  control_activate(radiobutton);
+
+  if (group)
+    $(dot(CLS_RDB_CONTROL) + "[radio-group=\"" + group + "\"]").each(
+      function() {
+        var this_button = $(this);
+        if ((this != radiobutton[0]) && control_is_active(this_button))
+          radiobutton_deselect(this_button);
+      })
+
+  control_run_callback(radiobutton, CBK_ON_ACTUATE);
+  radiobutton.addClass(CLS_CHECKED);
+}
+
+function radiobutton_deselect(radiobutton)
+{
+  control_deactivate(radiobutton);
+  radiobutton.removeClass(CLS_CHECKED);
+}
+
+function radiobutton_item_click(event)
+{
+  var radiobutton = $(this).find(dot(CLS_RDB_CONTROL));
+  if (radiobutton)
+    radiobutton_select(radiobutton);
 }

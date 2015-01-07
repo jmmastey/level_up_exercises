@@ -473,9 +473,26 @@ body {
   padding: 4px 24px 4px 24px;
 }
 
-
 .simple-menu ul > li:hover {
   background-color: #e5e5e5;
+}
+
+.radio-button {
+  position: relative;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+}
+
+.radio-button.checked {
+  background: no-repeat url("graphics/checkmark.png");
+  background-size: 100% 100%;
+  background-position: 0px 0px;
+}
+
+.radio-button-list .radio-button {
+  left: -24px;
+  top: 3px;
 }
 
 /* STATES  */

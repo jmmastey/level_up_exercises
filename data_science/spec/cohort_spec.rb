@@ -10,21 +10,21 @@ describe "DataScience::Cohort" do
   end
   
   describe '#add_sample' do
-    it 'increments the number of samples by one' do
+    it 'increments samples' do
       cohort = load_cohort_data
       
       expect { cohort.add_sample(1) }.to change{cohort.trials}.from(1349).to(1350)
     end
     
     context 'when a conversion took place' do
-      it 'incremented converstions' do
+      it 'increments converstions' do
         cohort = load_cohort_data
       
         expect { cohort.add_sample(1) }.to change{cohort.conversions}.from(47).to(48)
       end
     end
     
-    it 'calculates conversion rates' do
+    it 'calculates the conversion rate' do
       cohort = load_cohort_data
       
       expect(cohort.conversion_rate).to eq(0.035)
@@ -39,14 +39,13 @@ describe "DataScience::Cohort" do
     end
   end
   
-  # describe '#range_for_conversion_rate' do
-  #   it 'returns the range for 95% conversion rate confidence' do
-  #     cohort  = DataScience::Cohort.new('foo')
-  #     samples = [0, 1, 0, 0, 1, 0, 0, 1, 0, 0]
-  #     samples.each { |sample| cohort.add_sample(sample) }
-  #
-  #   end
-  # end
+  describe '#range_for_conversion_rate' do
+    it 'returns the range for 95% conversion rate confidence' do
+      cohort  = load_cohort_data
+
+      expect(cohort.range_for_conversion_rate).to eq(0.01)
+    end
+  end
   
   
 private

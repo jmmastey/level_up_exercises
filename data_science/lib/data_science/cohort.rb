@@ -18,6 +18,11 @@ class DataScience::Cohort
     calculate_conversion_rate
   end
   
+  # TODO: rename confidence_interval or some such?
+  def range_for_conversion_rate
+    (standard_error * 1.98).round(3)
+  end
+  
   def standard_error
     # Square root of (p * (1-p) / n)
 

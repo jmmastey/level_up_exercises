@@ -15,18 +15,20 @@
   </hgroup>
   <section id="MailSearch" class="pagetop-container">
     <form class="mailsearch-form pagetop-control-height">
-      <div id="MailSearchTextField" class="mailsearch-textfield">
-        <input type="text" value="">
-      </div>
-      <button type="button" class="dropdown-button mailsearch-dropdown">
-        <span class="arrow"></span>
-      </button>
-      <article dropdown-parent-id="MailSearchTextField" 
-               class="dropdown-frame collapsed dropdown-left-align dropdown-match-width">
-        <div class="dropdown-content">
-          FOOBAR
+      <div id="MailSearchDropdown">
+        <div id="MailSearchTextField" class="mailsearch-textfield">
+          <input type="text" value="">
         </div>
-      </article>
+        <button type="button" class="dropdown-button mailsearch-dropdown">
+          <span class="arrow"></span>
+        </button>
+        <article dropdown-parent-id="MailSearchDropdown" 
+                 class="dropdown-frame collapsed dropdown-left-align dropdown-match-width">
+          <div class="dropdown-content">
+            FOOBAR
+          </div>
+        </article>
+      </div>
       <input class="mailsearch-submit"
              type="image" src="graphics/magnifying4.svg" alt="Search Messages">
     </form>

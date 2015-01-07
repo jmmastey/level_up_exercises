@@ -53,6 +53,14 @@ body {
   line-height: 40px;
 }
 
+#MailSearchDropdown {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 100px;
+  height: 100%;
+}
+
 #MailSearch {
   position: absolute;
   top: 0px;
@@ -73,7 +81,7 @@ body {
   position: absolute;
   top: 0px;
   left: 0px;
-  right: 125px;
+  right: 25px;
   height: 100%;
   background: white;
 }
@@ -90,7 +98,7 @@ body {
 .mailsearch-dropdown {
   position: absolute;
   top: 0px;
-  right: 100px;
+  right: 0px;
   width: 25px;
   height: 100%;
   box-sizing: border-box;

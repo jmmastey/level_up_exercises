@@ -222,7 +222,7 @@ body {
   margin: 0px 10px 0px 0px;
 }
 
-.button {
+.control.button {
   position: relative;
   padding: 5px 2px 5px 2px;
   line-height: 30px;
@@ -378,8 +378,39 @@ body {
 
 /* SPECIFIC WIDGETS  */
 
-.refresh-button {
-  background: no-repeat url('graphics/whirly.png') 0px 20px / 50px 50px;
+.icon {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: no-repeat url("graphics/whirly.png");
+  background-size: 30px 800px;
+}
+
+.refresh-icon {
+  background-position: 0 -315px;
+}
+
+.checkbox {
+  position: relative;
+  display: inline-block;
+  top: 2px;
+  width: 14px;
+  height:  14px;
+  border: 1px solid #a0a0a0;
+}
+
+.checkbox > img {
+  visibility: hidden;
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  top: -5px;
+  left: -5px;
+}
+
+.checkbox.checked > img {
+  visibility: visible;
 }
 
 .settings-button > .arrow {
@@ -412,6 +443,10 @@ body {
   font-size: 25px;
 }
 
+.appmode-menu ul > li:first-child {
+  color: red;
+}
+
 .application-menu { width: 400px; }
 
 .titleheader h1 {
@@ -427,22 +462,19 @@ body {
   color: blue;
 }
 
-.appmode-menu ul {
+.simple-menu ul {
   list-style-type: none;
   padding: 0px;
-  width: 150px;
+  min-width: 150px;
   margin: 5px 0px 5px 0px;
 }
 
-.appmode-menu ul > li {
+.simple-menu ul > li {
   padding: 4px 24px 4px 24px;
 }
 
-.appmode-menu ul > li:first-child {
-  color: red;
-}
 
-.appmode-menu ul > li:hover {
+.simple-menu ul > li:hover {
   background-color: #e5e5e5;
 }
 

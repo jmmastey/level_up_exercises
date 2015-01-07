@@ -10,6 +10,7 @@ CREATE TABLE yadda.brewery (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
+CREATE INDEX brewery_id_index ON brewery(brewery_id);
 COMMENT ON TABLE brewery IS 'Brewery information';
 
 CREATE TABLE yadda.beer (
@@ -21,6 +22,7 @@ CREATE TABLE yadda.beer (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
+CREATE INDEX beer_id_index ON beer(beer_id);
 COMMENT ON TABLE beer IS 'Beer information, many beers to a brewery';
 
 CREATE TABLE yadda.user (
@@ -32,6 +34,7 @@ CREATE TABLE yadda.user (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
+CREATE INDEX user_id_index ON user(user_id);
 COMMENT ON TABLE user IS 'User information';
 
 CREATE TABLE yadda.rating (
@@ -47,4 +50,6 @@ CREATE TABLE yadda.rating (
   modified_on     timestamp DEFAULT current_timestamp,
   modified_by     integer(9) REFERENCES user
 );
+CREATE INDEX rating_id_index ON rating(rating_id);
+CREATE INDEX user_to_beer_index ON rating(user_id, beer_id);
 COMMENT ON TABLE rating IS 'Rating information, link between a user and a beer';

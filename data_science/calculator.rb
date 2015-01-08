@@ -1,7 +1,6 @@
 require_relative 'experiment'
 
 class Calculator
-
   def initialize(file_name = "source_data.json")
     @file = file_name
     build_experiments
@@ -76,7 +75,7 @@ class Calculator
   def chi_squared_for_experiments
     experiment.data.each_with_object({}) do |(cohort, values), chi_squares|
       observed_conversion = values["conversions"]
-      observed_failure    = ( values["total_visits"] - values["conversions"] )
+      observed_failure    = (values["total_visits"] - values["conversions"])
       chi_squares[cohort] = (chi_squared_numerator(observed_conversion, expected_conversions[cohort]) +
         chi_squared_numerator(observed_failure, expected_failures[cohort])).round(2)
     end

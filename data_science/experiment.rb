@@ -41,4 +41,3 @@ class Experiment
              }
   end
 end
-

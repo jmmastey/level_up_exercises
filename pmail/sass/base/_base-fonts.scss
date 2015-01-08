@@ -11,17 +11,20 @@
 
 @mixin font($font) {
   @if $font == header-bold {
-    font-family: "proxima-nova",sans-serif;
-    font-style: normal;
-    font-weight: 700;
+    font-family: "Arial",sans-serif;
+    font-weight: bold;
   }
   @else if $font == header {
-    font-family: "proxima-nova",sans-serif;
+    font-family: "Arial",sans-serif;
+    font-weight: normal;
+  }
+  @else if $font == body {
+    font-family: "Arial",sans-serif;
     font-style: normal;
     font-weight: 400;
   }
   @else {
-    font-family: "kepler-std",serif;
+    font-family: "Arial",sans-serif;
     font-style: normal;
     font-weight: 400;
   }

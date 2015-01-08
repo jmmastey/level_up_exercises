@@ -8,6 +8,7 @@
   $bp-beta: "(min-width: 10rem)";
   $bp-gamma: "(min-width: 15rem)";
   $bp-delta: "(min-width: 20rem)";
+  $bp-epsilon: "(min-width: 50rem)";
 
   @if $point == alpha {
     @media #{$bp-alpha} { @content; }
@@ -18,8 +19,11 @@
   @else if $point == gamma {
     @media #{$bp-gamma} { @content; }
   }
+  @else if $point == delta {
+    @media #{$bp-delta} { @content; }
+  }
   @else {
-    @media #{$bp-delta}  { @content; }
+    @media #{$bp-epsilon}  { @content; }
   }
 
 }

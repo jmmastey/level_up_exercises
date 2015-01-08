@@ -1,3 +1,27 @@
 /*------------------------------------*\
     #LAYOUT - FORMS
 \*------------------------------------*/
+
+.search-bar {
+
+  form {
+    width: 90%;
+    margin: 1rem 0;
+
+    input {
+      line-height: 1.5;
+    }
+
+    input[type=search] {
+      width: 80%;
+    }
+
+    input[type=submit] {
+      width: 4rem;
+      background: $blue;
+      color: $white;
+      border: none;
+      margin-left: -0.3rem;
+    }
+  }
+}

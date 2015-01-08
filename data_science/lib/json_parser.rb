@@ -13,12 +13,12 @@ class JsonParser
   def parse_and_split(json)
     data = JSON.parse(File.read(json), symbolize_names: true)
     @json_length = data.length
-    { a_group:
+    { a:
       {
         pass: data.count { |hash| hash.value?("A") && hash[:result] == 1 },
         fail: data.count { |hash| hash.value?("A") && hash[:result] == 0 },
       },
-      b_group:
+      b:
       {
         pass: data.count { |hash| hash.value?("B") && hash[:result] == 1 },
         fail: data.count { |hash| hash.value?("B") && hash[:result] == 0 },

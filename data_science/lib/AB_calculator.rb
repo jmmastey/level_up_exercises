@@ -1,40 +1,33 @@
 require 'json'
 require 'abanalyzer'
+require_relative 'cohort'
 include Math
 
 class ABCalculator
   def initialize(a_b_data)
-    @a_data = a_b_data[:a_group]
-    @b_data = a_b_data[:b_group]
+    @a_cohort = Cohort.new("A", a_b_data[:a][:pass], a_b_data[:a][:fail])
+    @b_cohort = Cohort.new("B", a_b_data[:b][:pass], a_b_data[:b][:fail])
     @a_b_tester = ABAnalyzer::ABTest.new(a_b_data)
   end
 
   def sample_size
     {
-      a: @a_data[:pass] + @a_data[:fail],
-      b: @b_data[:pass] + @b_data[:fail],
+      a: @a_cohort.total,
+      b: @b_cohort.total,
     }
   end
 
   def conversion_rate
     {
-      a: @a_data[:pass].to_f / sample_size[:a],
-      b: @b_data[:pass].to_f / sample_size[:b],
+      a: @a_cohort.conversion_rate,
+      b: @b_cohort.conversion_rate,
     }
   end
 
   def conversion_range
     {
-      a: 
-      { 
-        lo: conversion_rate[:a] - 1.96 * standard_error[:a],
-        hi: conversion_rate[:a] + 1.96 * standard_error[:a],
-      },
-      b: 
-      {
-        lo: conversion_rate[:b] - 1.96 * standard_error[:b],
-        hi: conversion_rate[:b] + 1.96 * standard_error[:b],
-      } 
+      a: @a_cohort.conversion_range,
+      b: @b_cohort.conversion_range,
     }
   end
 
@@ -46,8 +39,8 @@ class ABCalculator
 
   def standard_error
     {
-      a: sqrt(conversion_rate[:a] * (1-conversion_rate[:a]) / sample_size[:a]),
-      b: sqrt(conversion_rate[:b] * (1-conversion_rate[:b]) / sample_size[:b]),
+      a: @a_cohort.standard_error,
+      b: @b_cohort.standard_error,
     }
   end
 

@@ -30,7 +30,6 @@ describe ABCalculator do
   end
 
   it "should return confidence level that current leader is better than random" do
-    puts calc.confidence_level
     expect(calc.confidence_level).to be_between(0,1)
   end
 end

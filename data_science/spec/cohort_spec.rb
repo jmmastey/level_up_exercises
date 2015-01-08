@@ -33,7 +33,13 @@ describe DataScience::Cohort do
 
   describe '#range_for_conversion_rate' do
     it 'returns the range for 95% conversion rate confidence' do
-      expect(cohort.range_for_conversion_rate).to eq(0.01)
+      expect(cohort.range_for_conversion).to eq(0.01)
+    end
+  end
+
+  describe '#range_with_confidence_interval' do
+    it 'returns the conversion rate with confidence interval' do
+      expect(cohort.range_with_confidence_interval).to eq("3.5% ± 0.01")
     end
   end
 

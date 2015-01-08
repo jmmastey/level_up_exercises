@@ -11,6 +11,7 @@
         <!-- Place favicon.ico in the root directory -->
 
         <link rel="stylesheet" href="css/build/main.css">
+
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
@@ -38,7 +39,11 @@
 
             <div class="sidebar-container fixed-side-col col-left">
                 <div class="app-control">
-                    <button id="mail-dropdown" class="button no-background">Mail</button>
+                    <button id="mail-dropdown" class="button no-background">Mail
+                        <svg class="icon">
+                          <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                        </svg>
+                    </button>
                 </div>
 
                 <div class="mailboxes">
@@ -59,19 +64,50 @@
             <div class="email-container col-flex">
                 <div class="email-controls clearfix">
                     <div>
-                        <button class="control-button">Select</button>
-                        <button class="control-button">Refresh</button>
-                        <button class="control-button">More</button>
+                        <button class="control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#browser" class="icon-browser"></use>
+                            </svg>
+                        </button>
+                        <button class="control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#reload" class="icon-reload"></use>
+                            </svg>
+                        </button>
+                        <button class="control-button">More
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                            </svg>
+                        </button>
                     </div>
 
                     <div>
                         <button class="control-button">1&mdash;50 of 396</button>
-                        <button class="control-button">L</button>
-                        <button class="control-button">L</button>
-                        <button class="control-button">R</button>
-                        <button class="control-button">I1</button>
-                        <button class="control-button">I2</button>
-                        <button class="control-button">Settings</button>
+                        <button class="control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#chevron-left" class="icon-chevron-left"></use>
+                            </svg>
+                        </button>
+                        <button class="control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#chevron-right" class="icon-chevron-right"></use>
+                            </svg>
+                        </button>
+                        <button class="control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#spreadsheet" class="icon-spreadsheet"></use>
+                            </svg>
+                        </button>
+                        <button class="control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                            </svg>
+                        </button>
+                        <button class="control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#cog" class="icon-cog"></use>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 

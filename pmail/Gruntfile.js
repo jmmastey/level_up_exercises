@@ -43,6 +43,17 @@ module.exports = function(grunt) {
       }
     },
 
+    svgstore: {
+      options: {
+        prefix : 'shape-',
+      },
+      default : {
+          files: {
+            'img/svg-defs.svg': ['svgs/*.svg'],
+          }
+      }
+    },
+
     autoprefixer: {
 
       single_file: {
@@ -89,6 +100,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-svgstore');
 
   // Default task(s).
   // Need to manually run imagemin

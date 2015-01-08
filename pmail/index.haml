@@ -19,6 +19,16 @@
     %link{href: "stylesheets/pmail.css", rel: :stylesheet, type: "text/css"}/
   %body
     %section.topbar.topbar-primary
+      %a.brand{alt: "Enova", href: "#"}
+      %form#search-form.search-form
+        .search-box><
+          %input{type: :search}></
+          %a.dropdown-toggle{ type: :button, data: { target: "#search-dropdown" }}
+            %i.fa.fa-caret-down
+            %i.fa.fa-caret-up
+          .dropdown-panel.hidden#search-dropdown Advanced Search will go here
+        %button.primary-button{type: :submit}
+          %i.fa.fa-search
       .topbar-links.right
         %ul
           %li
@@ -33,16 +43,6 @@
               %i.fa.fa-caret-up
             .dropdown-panel.hidden.right#account-dropdown
               Account dropdown will go here
-      %a.brand{alt: "Enova", href: "#"}
-      %form#search-form.search-form
-        .search-box><
-          %input{type: :search}/
-          %button.dropdown-toggle{ type: :button, data: { target: "#search-dropdown" }}
-            %i.fa.fa-caret-down
-            %i.fa.fa-caret-up
-          .dropdown-panel.hidden#search-dropdown Advanced Search will go here
-        %button.primary-button{type: :submit}
-          %i.fa.fa-search
     %section.main-pane
       .topbar
         .topbar-links
@@ -60,7 +60,7 @@
                 %i.fa.fa-caret-down
                 %i.fa.fa-caret-up
               .dropdown-panel.hidden#message-options-dropdown More options here
-      .message-list
+      %main.message-list
         - messages.each_with_index do |message, index|
           %article.message#message{ id: index, class: message[:new?] ? "new" : nil }
             .message-actions
@@ -82,7 +82,7 @@
                 %i.fa.fa-caret-up
               .dropdown-panel.hidden#mail-dropdown
                 List options here
-      %main
+      .sidebar-main
         %button.secondary-button#compose Compose
         %ul.sidebar-links
           %li.active

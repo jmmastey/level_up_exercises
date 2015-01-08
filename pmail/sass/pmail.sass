@@ -124,6 +124,8 @@ ul
 
 .topbar
   border-bottom: thin solid
+  display: flex
+  flex-direction: row
   min-height: 52px
   width: 100%
   vertical-align: middle
@@ -145,13 +147,6 @@ ul
     padding: 1em 0
     vertical-align: middle
 
-  &.right
-    margin-right: 0
-    float: right
-    padding-right: 1em
-    right: 0
-    text-align: right
-
   li
     display: inline-block
     margin-left: 2em
@@ -165,7 +160,7 @@ ul
   text-align: center
   width: $sidebar-width
 
-  main
+  .sidebar-main
     padding-top: 10px
 
   button
@@ -212,16 +207,15 @@ ul
     border-radius: 0 4px 4px 0
     float: right
     height: 34px
-    margin-left: 0
     min-width: 50px
 
 .search-box
   border: thin solid
-  display: inline-block
+  display: inline-flex
+  flex-direction: row
   height: 32px
   max-height: 32px
   margin: 0
-  overflow: hidden
 
   input
     margin: 5px
@@ -229,11 +223,12 @@ ul
     &:focus
       border: thin solid
 
-  button.dropdown-toggle
-    background: none
-    border: none
+  a.dropdown-toggle
+    cursor: pointer
+    display: inline-block
+    padding: 0.5em
     outline: none
-    text-align: right
+    text-align: center
 
     &:not(:hover)
       color: #999

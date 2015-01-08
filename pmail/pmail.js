@@ -39,7 +39,7 @@
     return $('.sidebar-links li a').click(function(e) {
       var link;
       link = $(e.currentTarget);
-      if (link.attr("data-target") === void 0) {
+      if (!link.attr("data-target")) {
         $('.sidebar-links li').removeClass('active');
         return $(e.currentTarget.parentNode).addClass('active');
       }

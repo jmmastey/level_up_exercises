@@ -1,0 +1,32 @@
+<div id='all-events'>
+  <div class="table-container">
+    <table>
+      <% @events.each do |event| %>
+        <tr class="<%= member_label_for_event(event) %>">
+          <td>
+            <ul>
+              <li class='name'>
+                <%= link_to event.name.truncate(40), event_url(event), { id: "#{event.name}-events" } %>
+              </li>
+              <li class='location'><%= event.location.truncate(40) %></li>
+              <li class='date-range'><%= pretty_date_range(event.showings) %></li>
+              <li class='showing-count'><%= pretty_showing_count(event.showings) %></li>
+            </ul>
+          </td>
+          <td class='image' %>
+            <% if event.image.present? %>
+              <img src=<%= event.image %> />
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+  
+<div class="nav">
+  <div class="cool-round-button events neutral">Events</div>
+    <%= link_to 'Home', current_user, :class => 'cool-round-button home' %>
+    <%= link_to 'Sources', "http://www.theatreinchicago.com/", :class => 'cool-round-button sources', :target => '_blank' %>
+  </div>
+</div>

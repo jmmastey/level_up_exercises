@@ -4,18 +4,22 @@
 
 .emails {
 
+  background: $light-gray-gradient;
+
   table {
     table-layout: fixed;
     border-collapse: collapse;
     width: 100%;
 
     tr {
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid lighten($dark-gray, .8);
     }
 
     td {
       vertical-align: middle;
+      padding: 0.5rem;
+      @include font-size(0.8);
+      color: $off-black;
 
       &:nth-child(1) {
         width: 30px;
@@ -26,11 +30,12 @@
         text-align: center;
       }
       &:nth-child(3) {
-        width: 50px;
+        width: 40px;
         text-align: center;
       }
       &:nth-child(4) {
         width: 150px;
+        padding-right: 1rem;
         @include truncate-table-cell;
       }
       &:nth-child(5) {
@@ -39,6 +44,8 @@
       }
       &:nth-child(6) {
         width: 100px;
+        text-align: right;
+        padding-right: 1.25rem;
       }
     }
   }

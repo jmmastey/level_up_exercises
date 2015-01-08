@@ -4,4 +4,14 @@
 
 .email-controls {
   padding: .5rem 0;
+
+  div {
+
+    &:first-of-type {
+      float: left;
+    }
+    &:last-of-type {
+      float: right;
+    }
+  }
 }

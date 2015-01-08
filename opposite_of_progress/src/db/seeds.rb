@@ -22,6 +22,7 @@ end
   legislator.chamber = %w(house senate).sample
   legislator.party = %w(R D).sample
   legislator.state = Faker::Address.state_abbr
+  legislator.url = Faker::Internet.url('example.com')
 
   if legislator.chamber == 'house'
     legislator.title = 'Rep'
@@ -64,18 +65,19 @@ legislators = Legislator.all
 
 500.times.each do
   good_deed = GoodDeed.new
-  good_deed.action = %(voted enacted sponsored cosponsored)
+  good_deed.action = %w(voted enacted sponsored cosponsored).sample
   bill = bills.sample
   good_deed.bill_id = bill.id
   good_deed.chamber = bill.chamber
+  good_deed.acted_at = rand(1..100).days.ago
 
   if good_deed.action == 'enacted'
     good_deed.text = "Public law #{bill.congress}-#{rand(100..200)}"
   end
 
   if good_deed.action.in? %w(sponsored cosponsored)
-    legislator = legislator.sample
-    legislator_id = legislator_id
+    legislator = legislators.sample
+    good_deed.legislator_id = legislator.id
   end
 
   good_deed.save

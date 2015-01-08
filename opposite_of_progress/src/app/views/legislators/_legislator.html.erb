@@ -1,8 +1,12 @@
-<div class="legislator clearfix">
-  <div class="legislator-details">
-    <%= content_tag :span, "#{legislator.title}. #{legislator.name}", class: 'name' %>
+<article class="legislator clearfix">
+  <div class="legislator-wrapper">
+    <div class="legislator-details">
+      <%= link_to_legislator legislator, class: 'name' %>
+      <%= representation_tag legislator, class: 'represenation' %>
+      <%= party_tag legislator, class: 'party' %>
+    </div>
+    <div class="legislator-image">
+      <%= legislator_image_tag(legislator) %>
+    </div>
   </div>
-  <div class="legislator-image">
-    <%= legislator_image_tag(legislator) %>
-  </div>
-</div>
+</article>

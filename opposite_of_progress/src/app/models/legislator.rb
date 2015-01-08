@@ -14,6 +14,20 @@ class Legislator < ActiveRecord::Base
   # has_many :sponsored_bills, class_name: 'Bill', foreign_key: 'sponsor_id'
   # has_many :cosponsorships
   # has_many :cosponsored_bills, through: :cosponsorships, source: :bill
+  has_many :good_deeds
+
+  TITLES = {
+    'Rep' => 'Representative',
+    'Del' => 'Delegate',
+    'Sen' => 'Senator',
+  }
+
+  PARTIES = {
+    'R' => 'Republican',
+    'D' => 'Democratic',
+    'I' => 'Independent',
+  }
+
 
   def senator?
     chamber == 'senate'
@@ -28,7 +42,18 @@ class Legislator < ActiveRecord::Base
     [first_name, middle_initial, last_name, name_suffix].compact.join(" ")
   end
 
-  def representation
-    "#{party}-#{state}"
+  def long_title
+    TITLES[title]
   end
+
+  def long_party
+    PARTIES[party]
+  end
+
+  def readable_district
+    district.zero? ? 'At-Large' : district.ordinalize
+  end
+  # def representation
+  #   "#{party}-#{state}"
+  # end
 end

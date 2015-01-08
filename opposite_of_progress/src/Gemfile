@@ -13,6 +13,7 @@ gem 'kaminari'
 gem 'foundation-rails', '5.4.0'
 gem 'devise'
 gem 'simple_form'
+gem 'possessive'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

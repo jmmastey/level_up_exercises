@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_legislator_path(@legislator) %> |
-<%= link_to 'Back', legislators_path %>
+<section class="legislator-details">
+  <%= render partial: 'legislator', locals: {legislator: @legislator} %>
+</section>
+<section class="legislator-good-deeds">
+  <% @legislator.good_deeds.each do |g| %>
+    <%= content_tag :div, g.action %>
+  <% end %>
+</section>

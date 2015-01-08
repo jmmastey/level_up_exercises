@@ -26,6 +26,6 @@ describe Experiment do
   end
 
   it "calculates expected conversion rate" do
-    expect(described_class.new("test_data.json").expected_conversion_rate("B")).to eq({:max=>40.44, :min=>39.56})
+    expect(described_class.new("test_data.json").expected_conversion_rate("B")).to eq(max: 40.44, min: 39.56)
   end
 end

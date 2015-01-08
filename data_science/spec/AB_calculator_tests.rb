@@ -13,6 +13,12 @@ describe ABCalculator do
   it "should return sample size and number of conversions for each group" do
     expect(calc.sample_size[:a]).to be > 0
     expect(calc.sample_size[:b]).to be > 0
+    puts calc.sample_size
+    puts calc.no_of_conversions
+    puts calc.conversion_rate
+    puts calc.conversion_range
+    puts calc.standard_error
+    puts calc.confidence_level
   end
 
   it "should return valid %age of conversion data" do

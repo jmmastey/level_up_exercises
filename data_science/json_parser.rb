@@ -21,4 +21,3 @@ class JsonParser
     parsed_json
   end
 end
-

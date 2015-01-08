@@ -18,14 +18,14 @@ describe Experiment do
 
   it "calculates conversion rates" do
     conversion_rate = described_class.new("test_data.json").observed_conversion_rate("B")
-    expect(conversion_rate).to eq(40)
-  end
-
-  it "calculates total sample size" do
-    expect(described_class.new("test_data.json").total_visits).to eq(8)
+    expect(conversion_rate).to eq(0.4)
   end
 
   it "calculates standard error" do
-    expect(described_class.new("test_data.json").standard_error("B")).to eq(21.91)
+    expect(described_class.new("test_data.json").standard_error("B")).to eq(0.2191)
+  end
+
+  it "calculates expected conversion rate" do
+    expect(described_class.new("test_data.json").expected_conversion_rate("B")).to eq({:max=>40.44, :min=>39.56})
   end
 end

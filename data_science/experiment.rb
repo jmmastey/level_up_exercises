@@ -1,39 +1,45 @@
 require_relative 'json_parser'
 
 class Experiment
-  attr_accessor :group_stats
+  attr_accessor :group_stats, :data
 
   STANDARD_DEVIATION = 2 # For 95% confidence rate
 
   def initialize(file_name)
     @data = JsonParser.parse(File.open(file_name,"r"))
     @group_stats ||= {}
+    @data.keys.each do |cohort|
+      @group_stats[cohort] ||= {}
+    end
   end
 
   def observed_conversion_rate(cohort)
+    return @group_stats[cohort]["conversion_rate"] if
+                                                    @group_stats[cohort].key? "conversion_rate"
     cohort_stats = @data[cohort]
-    conversion_rate = (100 * (cohort_stats["conversions"].to_f / cohort_stats["total_visits"].to_f)).round(2)
-    conversion_rate
-  end
-
-  def total_visits
-    total = 0
-    @data.values.each do |data|
-      total += data["total_visits"]
-    end
-    total
+    conversion_rate = ((cohort_stats["conversions"].to_f / cohort_stats["total_visits"].to_f)).round(4)
+    return @group_stats[cohort]["conversion_rate"] = conversion_rate
   end
 
   def standard_error(cohort)
-    conversion_rate = observed_conversion_rate(cohort)/100
+    return @group_stats[cohort]["standard_error"] if
+                                                    @group_stats[cohort].key? "standard_error"
+    conversion_rate = @group_stats[cohort]["conversion_rate"] || observed_conversion_rate(cohort)
     trials          = @data[cohort]["total_visits"]
-    square_error    = (conversion_rate * (1 - conversion_rate))/trials
-    error           = (Math.sqrt(square_error)*100).round(2)
+    error           = Math.sqrt((conversion_rate * (1 - conversion_rate))/trials).round(4)
+    return @group_stats[cohort]["standard_error"] = error
   end
 
-  def true_conversion_rate(cohort)
-    { max: observed_conversion_rate(cohort) + (STANDARD_DEVIATION * standard_error(cohort)),
-      min: observed_conversion_rate(cohort) - (STANDARD_DEVIATION * standard_error(cohort))
-    }
+  def expected_conversion_rate(cohort)
+    return @group_stats[cohort]["expected_conversion_rate"] if
+                              @group_stats[cohort].key? "expected_conversion_rate"
+    conversion_rate = @group_stats[cohort]["conversion_rate"] || observed_conversion_rate(cohort)
+    error           = @group_stats[cohort]["standard_error"]  || standard_error(cohort)
+
+    return @group_stats[cohort]["expected_conversion_rate"] =
+                { max: (conversion_rate * 100 + (STANDARD_DEVIATION * error)).round(2),
+                  min: (conversion_rate * 100 - (STANDARD_DEVIATION * error)).round(2)
+                }
   end
 end
+

@@ -3,5 +3,25 @@
 \*------------------------------------*/
 
 .sidebar-container {
+  padding-left: 1rem;
 
+  .app-control {
+    padding: .3rem 0;
+  }
+
+  .mailboxes {
+    padding: .5rem 0;
+    @include font-size(0.85);
+    @include font(body);
+
+    ul {
+      padding: 0;
+      margin-top: 0.7rem;
+
+      li {
+        list-style-type: none;
+        padding: 0.3rem 0;
+      }
+    }
+  }
 }

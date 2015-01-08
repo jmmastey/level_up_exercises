@@ -18,15 +18,13 @@
     font-family: "Arial",sans-serif;
     font-weight: normal;
   }
-  @else if $font == body {
+  @else if $font == body-bold {
     font-family: "Arial",sans-serif;
-    font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
   }
   @else {
     font-family: "Arial",sans-serif;
-    font-style: normal;
-    font-weight: 400;
+    font-weight: normal;
   }
 }
 

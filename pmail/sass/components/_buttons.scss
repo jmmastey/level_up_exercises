@@ -1,3 +1,30 @@
 /*------------------------------------*\
     #COMPONENTS - BUTTONS
 \*------------------------------------*/
+
+.button {
+  padding: .6rem;
+  border: none
+}
+
+.no-background {
+  @include font(header);
+  @include font-size(1.15);
+  color: $orange-red;
+  font-weight: 400;
+  background: none;
+  padding: .3rem;
+}
+
+.red-button {
+  @extend .button;
+  background: $orange-red;
+  color: white;
+  border: none;
+  width: 7rem;
+  text-transform: uppercase;
+  @include font-size(0.65);
+  @include font(body-bold);
+}
+
+

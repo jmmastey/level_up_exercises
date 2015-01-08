@@ -25,11 +25,11 @@ def create_more_events
 end
 
 def user_events
-  Event.all.select { |event| @user.has_showing_in?(event) }
+  @user.showings.map(&:event)
 end
 
 def non_user_events
-  Event.all.select { |event| !@user.has_showing_in?(event) }
+  Event.all - user_events
 end
 
 def a_user_showing

@@ -16,6 +16,7 @@ module TheatreInChicago
     end
 
     def construct_date_time(table_cell, year)
+      # Converts 'Fri, Jan 9: 7:30pm' to 'Jan 9 2014, 7:30 pm'
       cell = table_cell.clone
       cell.gsub!(/[^,]*, /, '')
       cell.sub!(/:/, " " + year.to_s)

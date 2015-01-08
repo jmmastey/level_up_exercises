@@ -16,11 +16,10 @@ module TheatreInChicago
 
     def build
       return unless @date_node.present?
-      date_range = []
-      @date_node.each do |element|
-        break if date_range = extract_date_range(element.text)
+      @date_node.inject(nil) do |date_range, element|
+        date_range ||= extract_date_range(element.text)
+        date_range
       end
-      date_range
     end
 
     private

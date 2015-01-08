@@ -5,31 +5,14 @@ RSpec.describe ShowingsHelper, :type => :helper do
 
   let(:no_showings) { create(:event).showings }
 
-  let(:one_time) { [DateTime.parse('20141001T190000')] }
+  let(:one_time) { [time(1, 19)] }
   let(:one_showing) { create(:event, times: one_time).showings }
 
-  let(:one_day_times) { [ DateTime.parse('20141001T190000'),
-                          DateTime.parse('20141001T210000')] }
+  let(:one_day_times) { [time(1, 19), time(1, 21)] }
   let(:one_day_showings) { create(:event, times: one_day_times).showings }
 
-  let(:multi_day_times) { [DateTime.parse('20141001T190000'), 
-                           DateTime.parse('20141002T190000'), 
-                           DateTime.parse('20141003T190000')] }
+  let(:multi_day_times) { [time(1, 19), time(2, 19), time(3, 19)] }
   let(:multi_day_showings) { create(:event, times: multi_day_times).showings }
-
-  let(:model_event) { one_showing.event }
-
-  let(:tic_event) do
-    tic_event = TheatreInChicago::Event.new
-    tic_event.name = 'Party'
-    tic_event.location = 'Everywhere'
-    tic_event.link = 'www.link.com'
-    tic_event.showings = multi_day_times
-    tic_event
-  end
-
-  let(:add_tic_event) { ShowingsHelper.add_theatre_in_chicago(tic_event) }
-  let(:find_event) { Event.find_by(name: 'Party', location: 'Everywhere', link: 'www.link.com') }
 
 
   it 'can show a multi-day showings date-range' do
@@ -64,14 +47,21 @@ RSpec.describe ShowingsHelper, :type => :helper do
     expect(one_day_only?(multi_day_showings)).to be false
   end
 
-  it 'can add a TheatreInChicago event' do
-    add_tic_event
-    expect(find_event.showings.size).to eq(3)
-  end
 
-  it 'can add a TheatreInChicago event showings to an existing event' do
-    one_showing
-    add_tic_event
-    expect(find_event.showings.size).to eq(3)
+  context 'given a TheatreInChicago event' do
+    let(:tic_event) { create(:chicago_event, showings: multi_day_times) }
+    let(:add_tic_event) { ShowingsHelper.add_theatre_in_chicago(tic_event) }
+    let(:find_event) { Event.find_by(name: 'Party', location: 'Everywhere', link: 'www.link.com') }
+
+    it 'can add it as a new event when no match exists' do
+      add_tic_event
+      expect(find_event).to have(3).showings
+    end
+
+    it 'can add a its showings to an existing event that matches it' do
+      one_showing
+      add_tic_event
+      expect(find_event).to have(3).showings
+    end
   end
 end

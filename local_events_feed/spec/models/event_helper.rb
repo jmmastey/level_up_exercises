@@ -1,3 +1,8 @@
+def time(day, hour)
+  formatted = sprintf("201410%02dT%02d0000", day, hour)
+  DateTime.parse(formatted)
+end
+
 def create_events
   [
    create(:event, name: "A"),

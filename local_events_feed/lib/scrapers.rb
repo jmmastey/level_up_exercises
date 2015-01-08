@@ -25,9 +25,8 @@ module Scrapers
   end
 
   def self.scrape_for_new_events_in(upcoming, source)
-    return unless scraper = SCRAPERS[source]
     future = upcoming.days.from_now
-    scraper.add_events(future)
+    SCRAPERS[source].add_events(future)
   end
 
   def self.permission(source)

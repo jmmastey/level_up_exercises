@@ -6,6 +6,6 @@ RSpec.describe TheatreInChicago::ShowingFinder, :type => :asset do
   let(:showings) { TheatreInChicago::ShowingFinder.find(event_node) }
 
   it 'extracts the showing from a showings page' do
-    expect(showings.count).to eq(20)
+    expect(showings).to have(20).items
   end
 end

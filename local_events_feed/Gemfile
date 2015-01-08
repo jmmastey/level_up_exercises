@@ -44,6 +44,7 @@ gem 'whenever'
 gem 'nokogiri'
 gem "factory_girl", "~> 4.0"
 gem "factory_girl_rails", "~> 4.0"
+gem "time_difference"
 
 group :development, :test do
   gem 'rspec-rails'

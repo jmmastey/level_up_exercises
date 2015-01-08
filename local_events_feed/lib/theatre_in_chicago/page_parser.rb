@@ -27,9 +27,9 @@ module TheatreInChicago
 
     def extract_event(event_node)
       event = TheatreInChicago::Event.new
-      return unless event.name = event_node.text
-      return unless event.link = ROOT_LINK + event_node['href']
-      return unless event.location = get_location(event_node)
+      event.name = event_node.text
+      event.link = ROOT_LINK + event_node['href']
+      event.location = get_location(event_node)
       @events << event
     end
 
@@ -40,8 +40,8 @@ module TheatreInChicago
     def add_event_details
       events.each do |event|
         event_node = Nokogiri::HTML(open(event.link))
-        add_image(event, event_node)
-        add_description(event, event_node)
+        event.image = ImageFinder::find(event_node)
+        event.description = DescriptionFinder::find(event_node)
         add_showings(event, event_node)
       end
     end
@@ -49,16 +49,6 @@ module TheatreInChicago
     def add_showings(event, event_node)
       showings = ShowingFinder::find(event_node)
       event.showings.concat(showings.to_a)
-    end
-
-    def add_image(event, event_node)
-      return unless image = ImageFinder::find(event_node)
-      event.image = image
-    end
-
-    def add_description(event, event_node)
-      return unless description = DescriptionFinder::find(event_node)
-      event.description = description
     end
   end
 end

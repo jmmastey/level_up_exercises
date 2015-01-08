@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def add_showing(showing)
-    showings << showing unless showing.in?(showings) 
+    showings << showing unless showing.in?(showings)
   end
 
   def has_showing_in?(event)

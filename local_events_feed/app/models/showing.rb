@@ -3,11 +3,11 @@ class Showing < ActiveRecord::Base
   validates :time, uniqueness: { scope: :event, message: 'unique within an event' }
 
   belongs_to :event
-  delegate :name, :location, :link, :image, :description, :to => :event
+  delegate :name, :location, :link, :image, :description, to: :event
 
   has_and_belongs_to_many :users
 
-  scope :sorted, -> { order( :time => :asc ) }
+  scope :sorted, -> { order(time: :asc) }
 
   def to_ics
     Icalendar::Event.new.tap do |ical_event|

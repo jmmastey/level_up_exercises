@@ -17,7 +17,7 @@ module ApplicationHelper
     def initialize(time)
       @time = to_local_tz(time)
     end
-    
+
     def to_s
       @time.strftime('%m/%d/%Y %I:%M %P')
     end
@@ -33,17 +33,17 @@ module ApplicationHelper
     def pretty_date_no_year
       @time.strftime("%b %-d")
     end
-      
+
     def pretty_dow
       @time.strftime('%a')
     end
-    
+
     def pretty_time
       @time.strftime('%I:%M %P')
     end
 
     private
-    
+
     def to_local_tz(time)
       time.in_time_zone(LOCAL_TIME_ZONE)
     end

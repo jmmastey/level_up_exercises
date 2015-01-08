@@ -54,6 +54,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'pry-stack_explorer'
   gem 'gist'
+  gem 'rubocop'
 end
 
 group :test do

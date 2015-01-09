@@ -30,40 +30,41 @@
             <button id="SearchFolders" type="button"
                     class="control button dropdown-button align-middle">
               All Mail
-              <span class="arrow"></span>
+              <span class="spaced arrow"></span>
             </button>
             <div class="dropdown-frame collapsed simple-menu">
               <div class="dropdown-content">
                 <ul>
-                  <li class="simple-menu-item">Inbox</li>
-                  <li class="simple-menu-item">Starred</li>
-                  <li class="simple-menu-item">Sent Mail</li>
-                  <li class="simple-menu-item">Drafts</li>
-                  <li class="simple-menu-item">Chats</li>
-                  <li class="simple-menu-item">Spam</li>
-                  <li class="simple-menu-item">Trash</li>
+                  <li class="simple-menu-item replace-label">All Mail</li>
+                  <li class="simple-menu-item replace-label">Inbox</li>
+                  <li class="simple-menu-item replace-label">Starred</li>
+                  <li class="simple-menu-item replace-label">Sent Mail</li>
+                  <li class="simple-menu-item replace-label">Drafts</li>
+                  <li class="simple-menu-item replace-label">Chats</li>
+                  <li class="simple-menu-item replace-label">Spam</li>
+                  <li class="simple-menu-item replace-label">Trash</li>
                 </ul>
                 <hr>
                 <ul>
-                  <li class="simple-menu-item">Mail &amp; Spam &amp; Trash</li>
+                  <li class="simple-menu-item replace-label">Mail &amp; Spam &amp; Trash</li>
                 </ul>
                 <hr>
                 <ul>
-                  <li class="simple-menu-item">Read Mail</li>
-                  <li class="simple-menu-item">Unread Mail</li>
+                  <li class="simple-menu-item replace-label">Read Mail</li>
+                  <li class="simple-menu-item replace-label">Unread Mail</li>
                 </ul>
                 <hr>
                 <ul>
-                  <li class="simple-menu-item">Social</li>
-                  <li class="simple-menu-item">Promotions</li>
-                  <li class="simple-menu-item">Updates</li>
-                  <li class="simple-menu-item">Forums</li>
+                  <li class="simple-menu-item replace-label">Social</li>
+                  <li class="simple-menu-item replace-label">Promotions</li>
+                  <li class="simple-menu-item replace-label">Updates</li>
+                  <li class="simple-menu-item replace-label">Forums</li>
                 </ul>
                 <hr>
                 <ul>
-                  <li class="simple-menu-item">Stuff</li>
-                  <li class="simple-menu-item">Things</li>
-                  <li class="simple-menu-item">Et Cetera</li>
+                  <li class="simple-menu-item replace-label">Stuff</li>
+                  <li class="simple-menu-item replace-label">Things</li>
+                  <li class="simple-menu-item replace-label">Et Cetera</li>
                 </ul>
               </div>
             </div>
@@ -96,19 +97,20 @@
                 <input id="SearchNoChats" type="checkbox">
                 <label for="SearchNoChats">Don't include chats</label>
               </div>
+
               <div class="field-box">
                 <label>Size</label>
 
                 <button type="button"
                         class="control button dropdown-button align-middle">
                   greater than
-                  <span class="arrow"></span>
+                  <span class="spaced arrow"></span>
                 </button>
                 <div class="dropdown-frame collapsed simple-menu">
                   <div class="dropdown-content">
                     <ul>
-                      <li class="simple-menu-item">greater than</li>
-                      <li class="simple-menu-item">less than</li>
+                      <li class="simple-menu-item replace-label">greater than</li>
+                      <li class="simple-menu-item replace-label">less than</li>
                     </ul>
                   </div>
                 </div>
@@ -118,19 +120,48 @@
                 <button type="button"
                         class="control button dropdown-button align-middle">
                   MB
-                  <span class="arrow"></span>
+                  <span class="spaced arrow"></span>
                 </button>
                 <div class="dropdown-frame collapsed simple-menu">
                   <div class="dropdown-content">
                     <ul>
-                      <li class="simple-menu-item">MB</li>
-                      <li class="simple-menu-item">KB</li>
-                      <li class="simple-menu-item">Bytes</li>
+                      <li class="simple-menu-item replace-label">MB</li>
+                      <li class="simple-menu-item replace-label">KB</li>
+                      <li class="simple-menu-item replace-label">Bytes</li>
                     </ul>
                   </div>
                 </div>
-
               </div>
+
+              <div class="field-box">
+                <label>Date within</label>
+                <button type="button"
+                        class="control button dropdown-button align-middle">
+                  1 day
+                  <span class="spaced arrow"></span>
+                </button>
+                <div class="dropdown-frame collapsed simple-menu">
+                  <div class="dropdown-content">
+                    <ul>
+                      <li class="simple-menu-item replace-label">1 day</li>
+                      <li class="simple-menu-item replace-label">3 days</li>
+                      <li class="simple-menu-item replace-label">1 week</li>
+                      <li class="simple-menu-item replace-label">2 weeks</li>
+                      <li class="simple-menu-item replace-label">1 month</li>
+                      <li class="simple-menu-item replace-label">2 months</li>
+                      <li class="simple-menu-item replace-label">6 months</li>
+                      <li class="simple-menu-item replace-label">1 year</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <span class="drop to-right">
+                <a>Create filter with this search &gg;</a>
+              </span>
+
+              <input class="control button"
+               type="image" src="graphics/magnifying4.svg" alt="Search Messages">
             </form>
           </div>
         </article>

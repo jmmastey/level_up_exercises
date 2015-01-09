@@ -248,6 +248,11 @@ body {
   text-align: center;
 }
 
+.drop {
+  position: relative;
+  top: 1em;
+}
+
 .control > img {
   height: 100%;
 }

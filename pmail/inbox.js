@@ -28,6 +28,7 @@ var CLS_RDB_LIST_ITEM = "radio-button-item";
 var ATR_RDB_GROUP = "radio-group";
 
 var CLS_MNI_SIMPLE = "simple-menu-item";
+var CLS_MNI_REPLACE_LABEL = "replace-label";
 
 var CBK_ON_ACTUATE = "control-on-actuate";
 var CBK_ON_ACTIVATE = "control-on-activate";
@@ -56,7 +57,7 @@ function control_run_callback(control, callback_name, args)
   var callback = control.data(callback_name);
   if (! callback) return;
 
-  var callback_args = arguments.slice(2);
+  var callback_args = Array.prototype.slice.call(arguments, 2);
   callback_args.unshift(control);
   callback.apply(this, callback_args);
 }
@@ -76,9 +77,15 @@ function init_dropdowns()
     $(css_selector).data(DPD_POS_METHOD,
                          dpd_position_methods[css_selector]);
 
-  $(dot(CLS_DPD_CLOSE_CONTROL)).bind("click", dropdown_close_parent);
+  $(dot(CLS_DPD_CLOSE_CONTROL)).bind("click", function() {
+    dropdown_close_parent($(this));
+  });
 
   $(dot(CLS_MNI_SIMPLE)).bind("click", menu_item_click);
+
+  $(dot(CLS_MNI_REPLACE_LABEL)).each(function() {
+    $(this).data(CBK_ON_ACTUATE, menu_item_replace_dropdown_label);
+  });
 }
 
 function all_dropdowns() { return $(dot(CLS_DPD_CONTROL)); }
@@ -199,6 +206,13 @@ function menu_item_click(event)
   item = $(this);
   control_run_callback(item, CBK_ON_ACTUATE);
   dropdown_close_parent(item);
+}
+
+function menu_item_replace_dropdown_label(item)
+{
+  var parent = dropdown_parent(item);
+  parent.text(item.text());
+  parent.append(' <span class="spaced arrow"></span>');
 }
 
 // CHECKBOX LOGIC

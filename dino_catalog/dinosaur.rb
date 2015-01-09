@@ -11,7 +11,7 @@ class Dinosaur
     @diet = options[:diet] || nil
     @weight = options[:weight] || nil
     @ambulation = options[:ambulation] || nil
-    @description = options[:dscription] || nil
+    @description = options[:description] || nil
   end
 
   def to_hash

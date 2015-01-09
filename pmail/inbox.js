@@ -68,9 +68,14 @@ dpd_position_methods[dot(CLS_DPD_ALIGN_CT)] = dropdown_center_align;
 function init_dropdowns()
 {
   all_dropdowns().bind("click", dropdown_click)
+
   for (var css_selector in dpd_position_methods)
     $(css_selector).data(DPD_POS_METHOD,
                          dpd_position_methods[css_selector]);
+
+  $('.close-dropdown').bind("click", function() {
+    dropdown_close(dropdown_parent($(this)));
+  });
 }
 
 function all_dropdowns() { return $(dot(CLS_DPD_CONTROL)); }
@@ -104,7 +109,12 @@ function dropdown_align_params(parent, content)
   };
 }
 
-function dropdown_parent_control(button, content)
+function dropdown_parent(element)
+{
+  return element.parents('.dropdown-frame').prev();
+}
+
+function dropdown_aligning_control(button, content)
 {
   var parent_id = content.attr(ATR_DPD_PARENT_ID);
   return parent_id ? $('#' + parent_id) : button;
@@ -112,7 +122,7 @@ function dropdown_parent_control(button, content)
 
 function dropdown_set_content_position(button, content)
 {
-  var parent = dropdown_parent_control(button, content);
+  var parent = dropdown_aligning_control(button, content);
   var params = dropdown_align_params(parent, content);
   dropdown_align_content(params);
   dropdown_set_width(params);

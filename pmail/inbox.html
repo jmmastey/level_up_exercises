@@ -25,8 +25,10 @@
         <article dropdown-parent-id="MailSearchDropdown" 
                  class="dropdown-frame collapsed dropdown-left-align dropdown-match-width">
           <div class="dropdown-content padded">
-            Search
-            <button type="button" class="control button dropdown-button align-middle">
+            <span class="to-right"><a class="close-dropdown">X</a></span>
+            <label for="SearchFolders">Search</label>
+            <button id="SearchFolders" type="button"
+                    class="control button dropdown-button align-middle">
               All Mail
               <span class="arrow"></span>
             </button>
@@ -65,6 +67,18 @@
                 </ul>
               </div>
             </div>
+            <form class="message-search">
+              <label for="SearchFrom">From</label>
+              <input type="text" id="SearchFrom">
+              <label for="SearchTo">To</label>
+              <input type="text" id="SearchTo">
+              <label for="SearchSubject">Subject</label>
+              <input type="text" id="SearchSubject">
+              <label for="SearchHasWords">Has the words</label>
+              <input type="text" id="SearchHasWords">
+              <label for="SearchDoesntHave">Doesn't have</label>
+              <input type="text" id="SearchDoesntHave">
+            </form>
           </div>
         </article>
       </div>

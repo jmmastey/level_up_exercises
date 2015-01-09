@@ -7,6 +7,10 @@
 
   .app-control {
     padding: .3rem 0;
+
+    button {
+      margin-left: 0.4rem;
+    }
   }
 
   .mailboxes {
@@ -14,14 +18,23 @@
     @include font-size(0.85);
     @include font(body);
 
+    button {
+      margin-left: 0.5rem;
+    }
+
     ul {
       padding: 0;
       margin-top: 0.7rem;
 
-      li {
-        list-style-type: none;
-        padding: 0.3rem 0;
-      }
+      a {
+          color: black;
+          text-decoration: none;
+
+          li {
+            list-style-type: none;
+            padding: 0.3rem 0.5rem;
+          }
+        }
     }
   }
 }

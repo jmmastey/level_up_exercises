@@ -13,4 +13,16 @@
       background: $orange-red;
     }
   }
+
+  li:active, li:hover {
+    outline: 0;
+    background: $light-gray;
+  }
+}
+
+.secondary-links a {
+
+  &:active, &:hover {
+    text-decoration: underline;
+  }
 }

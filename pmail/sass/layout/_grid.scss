@@ -18,7 +18,7 @@ body {
 }
 
 .grid-pad {
-  padding: 0 $pad $pad $pad;
+  padding: 0 $pad $pad $pad/2;
 
   // padding values of grid elements
   > section, > footer {

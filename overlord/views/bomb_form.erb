@@ -1,0 +1,16 @@
+THE BOMB
+<br>
+<br>
+Only super villains allowed
+<br>
+Don't let this brilliant UI design fool you
+<br>
+We mean business
+<br>
+<%= BombFormText.active_warning(@bomb) %>
+<p>Enter <%= BombFormText.activate_type(@bomb) %>ion code:</p>
+<form action="/" method="post">
+  <input type="text" name="code">
+  <input type="hidden" name="bomb" value=<%="\"#{@bomb}\""%>>
+  <input type="submit">
+</form>

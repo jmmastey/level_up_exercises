@@ -1,10 +1,11 @@
 class Bomb
-  attr_reader :active, :detonated, :invalid_count
+  attr_accessor :active, :detonated, :invalid_count
 
-  def initialize
-    @active = false
-    @invalid_count = 0
-    @detonated = false
+
+  def initialize(attributes = {})
+    @active = attributes.fetch(:active,false)
+    @invalid_count = attributes.fetch(:invalid_count,0)
+    @detonated = attributes.fetch(:detonated, false)
   end
 
   def active?
@@ -13,6 +14,14 @@ class Bomb
 
   def detonated?
     detonated
+  end
+
+  def process_code(code)
+    if active?
+      deactivate(code)
+    else
+      activate(code)
+    end
   end
 
   def activate(code)
@@ -40,7 +49,7 @@ class Bomb
 
   def deactivate_deny
     @invalid_count = invalid_count + 1
-    self.detonate if invalid_count == MAX_INVALID
+    detonate if invalid_count == MAX_INVALID
   end
 
   def detonate

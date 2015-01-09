@@ -30,19 +30,15 @@
         text-align: center;
       }
       &:nth-child(3) {
-        width: 40px;
-        text-align: center;
-      }
-      &:nth-child(4) {
         width: 150px;
         padding-right: 1rem;
         @include truncate-table-cell;
       }
-      &:nth-child(5) {
+      &:nth-child(4) {
         max-width: 500px;
         @include truncate-table-cell;
       }
-      &:nth-child(6) {
+      &:nth-child(5) {
         width: 100px;
         text-align: right;
         padding-right: 1.25rem;

@@ -1,14 +1,146 @@
+.icon {
+  width: 14px;
+  height: 14px;
+}
+
 .app-control {
-  use {
-    fill: $orange-red;
+
+  .icon {
+    width: 8px;
+    height: 8px;
+
+    use {
+      fill: $orange-red;
+    }
   }
 }
 
-.icon {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  fill: red;
+.search-query-box {
+
+  svg {
+    width: 8px;
+    height: 8px;
+
+    use {
+      fill: $button-gray;
+    }
+  }
 }
 
+.search-submit-box {
 
+  use {
+    fill: white;
+  }
+}
+
+.email-controls {
+
+  use {
+    fill: $button-gray;
+  }
+}
+
+.selection-button {
+
+  svg:first-of-type {
+    width: 14px;
+    height: 14px;
+  }
+
+  svg:last-of-type {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+.refresh-button {
+
+  svg {
+    width: 14px;
+    height: 14px;
+
+    use {
+      fill: $button-dark-gray;
+    }
+  }
+}
+
+.more-button {
+
+  svg {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+.left-arrow-button, .right-arrow-button {
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.input-1-button {
+
+  svg {
+    width: 12px;
+    height: 12px;
+
+    use {
+      fill: $button-dark-gray;
+    }
+  }
+}
+
+.input-2-button {
+
+  svg {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+.settings-button {
+
+  svg:first-of-type {
+    width: 16px;
+    height: 16px;
+
+    use {
+      fill: $button-dark-gray;
+    }
+  }
+
+  svg:last-of-type {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+.login {
+
+  button {
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  p {
+    svg {
+      width: 8px;
+      height: 8px;
+    }
+  }
+}
+
+.fa-star {
+  color: $star-yellow;
+}
+
+.fa-star-o, .fa-square-o {
+  color: $button-gray;
+}

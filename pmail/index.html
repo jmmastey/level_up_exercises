@@ -11,6 +11,7 @@
         <!-- Place favicon.ico in the root directory -->
 
         <link rel="stylesheet" href="css/build/main.css">
+        <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
 
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
@@ -26,12 +27,28 @@
 
             <div class="search-bar col-1">
                 <form action="/search" method="post">
-                    <input id="search" name="search" type="search">
-                    <input type="submit" name="search-query" value="s">
+                        <input id="search" name="search" type="search" value="">
+                        <div class="search-submit-box">
+                            <input type="submit" name="search-query" value=" ">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#magnifying-glass" class="icon-magnifying-glass"></use>
+                            </svg>
+                        </div>
                 </form>
             </div>
+
             <div class="login">
-                <p>phaddad@enova.com</p>
+                <button class="grid-button control-button">
+                    <svg class="icon">
+                      <use xlink:href="img/sprite.svg#grid-three-up" class="icon-grid-three-up"></use>
+                    </svg>
+                </button>
+
+                <p>phaddad@enova.com
+                    <svg class="icon">
+                      <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                    </svg>
+                </p>
             </div>
         </header>
 
@@ -64,17 +81,20 @@
             <div class="email-container col-flex">
                 <div class="email-controls clearfix">
                     <div>
-                        <button class="control-button">
+                        <button class="selection-button control-button">
                             <svg class="icon">
                               <use xlink:href="img/sprite.svg#browser" class="icon-browser"></use>
                             </svg>
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                            </svg>
                         </button>
-                        <button class="control-button">
+                        <button class="refresh-button control-button">
                             <svg class="icon">
                               <use xlink:href="img/sprite.svg#reload" class="icon-reload"></use>
                             </svg>
                         </button>
-                        <button class="control-button">More
+                        <button class="more-button control-button">More
                             <svg class="icon">
                               <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
                             </svg>
@@ -82,30 +102,33 @@
                     </div>
 
                     <div>
-                        <button class="control-button">1&mdash;50 of 396</button>
-                        <button class="control-button">
+                        <button class="pagination-button control-button">1&mdash;50 of 396</button>
+                        <button class="left-arrow-button control-button">
                             <svg class="icon">
                               <use xlink:href="img/sprite.svg#chevron-left" class="icon-chevron-left"></use>
                             </svg>
                         </button>
-                        <button class="control-button">
+                        <button class="right-arrow-button control-button">
                             <svg class="icon">
                               <use xlink:href="img/sprite.svg#chevron-right" class="icon-chevron-right"></use>
                             </svg>
                         </button>
-                        <button class="control-button">
+                        <button class="input-1-button control-button">
                             <svg class="icon">
                               <use xlink:href="img/sprite.svg#spreadsheet" class="icon-spreadsheet"></use>
                             </svg>
                         </button>
-                        <button class="control-button">
+                        <button class="input-2-button control-button">
                             <svg class="icon">
                               <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
                             </svg>
                         </button>
-                        <button class="control-button">
+                        <button class="settings-button control-button">
                             <svg class="icon">
                               <use xlink:href="img/sprite.svg#cog" class="icon-cog"></use>
+                            </svg>
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
                             </svg>
                         </button>
                     </div>
@@ -114,147 +137,201 @@
                 <section class="emails">
                     <table>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Marks, Jonathan</td>
-                            <td>This is a email message from Jon. This is a email message from Jon</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe possimus nulla, esse ut itaque aperiam repellat iste voluptas commodi. Error voluptatibus quasi earum, temporibus autem debitis labore saepe accusamus modi?</td>
                             <td>8:10 am</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Mastey, Joe</td>
-                            <td>This is a email message from Joe. This is a email message from Joe.</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat laborum illo iusto, molestiae maxime dolorum quos eius dolor ipsam. Nostrum odit cupiditate officia voluptatibus perferendis aliquam omnis, veniam nihil rerum!</td>
                             <td>7:32 am</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Kotowski, Dan</td>
-                            <td>This is a email message from Dan. This is a email message from Dan. </td>
-                            <td>Jan 6</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, perferendis, cumque suscipit minima qui voluptatem alias harum, debitis dicta maiores quasi quam enim ea inventore reprehenderit totam nostrum quis, doloribus.</td>
+                            <td>Jan 9</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star fa-lg"></span>
+                            </td>
                             <td>Marks, Jonathan</td>
-                            <td>This is a email message from Jon. This is a email message from Jon</td>
-                            <td>Jan 6</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus, necessitatibus inventore eos. Quod mollitia ut ullam esse quis nobis doloremque nihil consectetur magnam, eligendi aperiam odit, optio tempora in. Officiis.</td>
+                            <td>Jan 9</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Mastey, Joe</td>
-                            <td>This is a email message from Joe. This is a email message from Joe.</td>
-                            <td>Jan 6</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas quasi inventore non optio, assumenda explicabo placeat dolor culpa, ab sed. Aut deserunt quasi dolores quos voluptatem saepe numquam consequuntur dolore!</td>
+                            <td>Jan 8</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Kotowski, Dan</td>
-                            <td>This is a email message from Dan. This is a email message from Dan. </td>
-                            <td>Jan 6</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, eius excepturi non quidem minima ipsum blanditiis illo, autem necessitatibus ad maiores voluptatem expedita neque! Debitis perspiciatis dicta ad quas voluptatibus!</td>
+                            <td>Jan 8</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star fa-lg"></span>
+                            </td>
                             <td>Marks, Jonathan</td>
-                            <td>This is a email message from Jon. This is a email message from Jon</td>
-                            <td>Jan 6</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quidem deleniti rerum placeat in dolorum suscipit temporibus sunt! Optio eligendi rem tenetur enim ipsum id consequuntur eaque, qui error quasi.</td>
+                            <td>Jan 8</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Mastey, Joe</td>
-                            <td>This is a email message from Joe. This is a email message from Joe.</td>
-                            <td>Jan 6</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste vitae, incidunt, quam, quidem consectetur corrupti eligendi voluptas veritatis reprehenderit dicta id eveniet, voluptatem. Quisquam sapiente saepe, error voluptatibus accusantium, rem.</td>
+                            <td>Jan 8</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Kotowski, Dan</td>
-                            <td>This is a email message from Dan. This is a email message from Dan. </td>
-                            <td>Jan 6</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam sint dolores obcaecati cumque ex eligendi perspiciatis recusandae mollitia, quod nobis tempore aliquid ipsa sapiente laudantium praesentium omnis, non vero ab.</td>
+                            <td>Jan 7</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Marks, Jonathan</td>
-                            <td>This is a email message from Jon. This is a email message from Jon</td>
-                            <td>Jan 6</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In adipisci dolor, distinctio. Tenetur cupiditate hic ad. Culpa debitis excepturi tempora maiores, minima nostrum ipsum ea molestiae ducimus qui quam doloribus.</td>
+                            <td>Jan 7</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Mastey, Joe</td>
-                            <td>This is a email message from Joe. This is a email message from Joe.</td>
-                            <td>Jan 6</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis illo, natus id! Officia excepturi pariatur quas reiciendis totam eos nam, officiis, impedit temporibus autem voluptatum quasi quaerat provident, nobis mollitia.</td>
+                            <td>Jan 7</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Kotowski, Dan</td>
-                            <td>This is a email message from Dan. This is a email message from Dan. </td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab consequuntur dolore, nostrum ut expedita cupiditate a quidem eligendi placeat, nulla eius deserunt consequatur numquam magnam molestias est cumque? Praesentium, unde.</td>
                             <td>Jan 6</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Marks, Jonathan</td>
-                            <td>This is a email message from Jon. This is a email message from Jon</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut esse, ea aperiam officia doloribus quidem quia architecto, fugiat beatae, vero eum assumenda eius, saepe minima suscipit repellat veritatis voluptas ipsam.</td>
                             <td>Jan 6</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star fa-lg"></span>
+                            </td>
                             <td>Mastey, Joe</td>
-                            <td>This is a email message from Joe. This is a email message from Joe.</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore aspernatur officia atque eos mollitia ipsam voluptatem quos, accusamus est consequatur, excepturi voluptas cupiditate, debitis molestias, doloribus. A similique cupiditate, eum?</td>
                             <td>Jan 6</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Kotowski, Dan</td>
-                            <td>This is a email message from Dan. This is a email message from Dan. </td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In enim natus porro, quis vero cum! Fugit perferendis possimus qui alias, nulla vel? Tempora veniam cumque vel, similique beatae minus earum.</td>
                             <td>Jan 6</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star fa-lg"></span>
+                            </td>
                             <td>Marks, Jonathan</td>
-                            <td>This is a email message from Jon. This is a email message from Jon</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium doloremque, dignissimos ipsam. Repellat dicta explicabo blanditiis, natus, dolore qui itaque eligendi quas magnam incidunt sed debitis similique velit quibusdam delectus.</td>
                             <td>Jan 6</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Mastey, Joe</td>
-                            <td>This is a email message from Joe. This is a email message from Joe.</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati ipsam illum, velit quia vel saepe? Excepturi officiis, earum quos nam a quam rem cumque, vero inventore, ipsa, qui beatae necessitaxtibus.</td>
                             <td>Jan 6</td>
                         </tr>
                         <tr>
-                            <td>S</td>
-                            <td>R</td>
-                            <td>A</td>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
                             <td>Kotowski, Dan</td>
-                            <td>This is a email message from Dan. This is a email message from Dan. </td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt repellat ullam, quidem error aliquam aperiam voluptate, tempora! Officia laudantium beatae excepturi similique impedit sint, eaque cumque earum, tempore itaque veritatis!</td>
                             <td>Jan 6</td>
                         </tr>
                     </table>

@@ -5,6 +5,7 @@ function init()
   init_dropdowns();
   init_checkboxes();
   init_radiobuttons();
+  init_rollups();
 }
 
 var CLS_CONTROL_ACTIVE = "control-active";
@@ -12,7 +13,7 @@ var CLS_CONTROL_ACTIVE = "control-active";
 var DPD_POS_METHOD = 'dropdown-position-method';
 
 var CLS_DPD_CONTROL = "dropdown-button";
-var CLS_DPD_COLLAPSED = "collapsed";
+var CLS_STE_COLLAPSED = "collapsed";
 var CLS_DPD_ALIGN_RT = "dropdown-right-align";
 var CLS_DPD_ALIGN_LT = "dropdown-left-align";
 var CLS_DPD_ALIGN_CT = "dropdown-center-align";
@@ -29,6 +30,9 @@ var ATR_RDB_GROUP = "radio-group";
 
 var CLS_MNI_SIMPLE = "simple-menu-item";
 var CLS_MNI_REPLACE_LABEL = "replace-label";
+
+var CLS_RUB_CONTROL = "rollup-button";
+var ATR_RUB_TARGET = "rollup-target";
 
 var CBK_ON_ACTUATE = "control-on-actuate";
 var CBK_ON_ACTIVATE = "control-on-activate";
@@ -177,7 +181,7 @@ function dropdown_close_unrelated(dropdown)
 
 function dropdown_close(button)
 {
-  dropdown_content_pane(button).addClass(CLS_DPD_COLLAPSED);
+  dropdown_content_pane(button).addClass(CLS_STE_COLLAPSED);
   control_deactivate(button);
 }
 
@@ -187,7 +191,7 @@ function dropdown_open(button)
   var content_pane = dropdown_content_pane(button);
   control_activate(button);
   dropdown_set_content_position(button, content_pane);
-  content_pane.removeClass(CLS_DPD_COLLAPSED);
+  content_pane.removeClass(CLS_STE_COLLAPSED);
 }
 
 function dropdown_toggle(control)
@@ -293,4 +297,22 @@ function radiobutton_item_click(event)
   var radiobutton = $(this).find(dot(CLS_RDB_CONTROL));
   if (radiobutton)
     radiobutton_select(radiobutton);
+}
+
+// ROLLUP BUTTON LOGIC
+
+function init_rollups()
+{
+  $(dot(CLS_RUB_CONTROL)).bind("click", rollup_click);
+}
+
+function rollup_click(rollup)
+{
+  rollup_toggle($(rollup));
+}
+
+function rollup_toggle(rollup)
+{
+  var target_selector = rollup.data(ATR_RUB_TARGET);
+  $(target_selector).toggleClass(CLS_STE_COLLAPSED);
 }

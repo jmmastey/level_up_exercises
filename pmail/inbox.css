@@ -167,14 +167,27 @@ body {
 }
 
 #AppMain {
-  display: none;
   position: absolute;
-  top: 126px;
+  top: 145px;
   padding-top: 5px;
+  width: 100%;
+  bottom: 0px;
+  z-index: -2;
+}
+
+#Folders {
+  position: absolute;
+  display: inline-block;
+  width: 270px;
 }
 
 #Mailbox {
+  position: absolute;
+  top: 0px;
+  left: 270px;
   right: 0px;
+  bottom: 0px;
+  box-sizing: border-box;
 }
 
 .arrow {
@@ -327,6 +340,7 @@ body {
 }
 
 /* Mailbox  */
+
 .mailbox {
   overflow: scroll;
 }

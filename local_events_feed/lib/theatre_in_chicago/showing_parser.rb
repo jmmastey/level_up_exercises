@@ -51,7 +51,7 @@ module TheatreInChicago
       extract_showing_from_table_cell("#{row[0].text} #{row[1].text}")
     end
 
-    def extract_showing_from_table_cell(table_cell)
+    def extract_showing_from_table_cell(_table_cell)
       warn('Should not be calling this method in base class')
     end
 

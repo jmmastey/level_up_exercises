@@ -17,19 +17,19 @@ RSpec.describe TheatreInChicago::PageParser, :type => :asset do
     expect(events[0].link).to eq('http://www.theatreinchicago.com/agreed-upon-fictions/7179/')
   end
 
-  it 'should show the second event' do 
+  it 'should show the second event' do
     expect(events[1].name).to eq('Alice')
     expect(events[1].location).to eq('Neo-Futurists')
     expect(events[1].link).to eq('http://www.theatreinchicago.com/alice/7200/')
   end
 
-  it 'should show the second-to-last event' do 
+  it 'should show the second-to-last event' do
     expect(events[83].name).to eq('Whatever We Want')
     expect(events[83].location).to eq('Vivarium Theatre Co. at Heartland Studio Theatre')
     expect(events[83].link).to eq('http://www.theatreinchicago.com/whatever-we-want/7265/')
   end
 
-  it 'should show the last event' do 
+  it 'should show the last event' do
     expect(events[3].name).to eq('All My Sons')
     expect(events[3].location).to eq('Raven Theatre')
     expect(events[3].link).to eq('http://www.theatreinchicago.com/all-my-sons/7031/')

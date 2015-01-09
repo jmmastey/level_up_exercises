@@ -1,7 +1,8 @@
 require 'rails_helper'
 require 'models/event_helper'
 
-describe Event, :type => :model do
+describe Event, type: :model do
+
   let(:event) { create(:event) }
   let(:multiple_events) do
     ['A', 'B', 'C'].each { |label| create(:event, name: "Party-#{label}") }

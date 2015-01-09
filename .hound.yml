@@ -2,7 +2,14 @@ AllCops:
   Exclude:
     - triangle_facts/*.rb
     - supportive/supportive.rb
-    
+    - local_events_feed/Rakefile
+    - local_events_feed/config/*.rb
+    - local_events_feed/db/schema.rb
+    - local_events_feed/bin/*
+    - local_events_feed/lib/tasks/cucumber.rake
+    - local_events_feed/features/support/env.rb
+    - local_events_feed/Gemfile*
+
 # C: Missing top-level module documentation comment.
 Style/Documentation:
   Enabled: false

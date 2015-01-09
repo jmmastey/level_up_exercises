@@ -12,8 +12,8 @@ require 'cucumber/rails'
 # Capybara.default_selector = :xpath
 
 # By default, any exception happening in your Rails application will bubble up
-# to Cucumber so that your scenario will fail. This is a different from how 
-# your application behaves in the production environment, where an error page will 
+# to Cucumber so that your scenario will fail. This is a different from how
+# your application behaves in the production environment, where an error page will
 # be rendered instead.
 #
 # Sometimes we want to override this default behaviour and allow Rails to rescue
@@ -55,4 +55,3 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
-

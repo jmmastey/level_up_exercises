@@ -25,7 +25,7 @@ module TheatreInChicago
     private
 
     def extract_date_range(text)
-      extract_date_range_from_pair(text) || 
+      extract_date_range_from_pair(text) ||
       extract_date_range_from_thru(text) ||
       extract_date_range_from_open(text)
     end
@@ -33,7 +33,7 @@ module TheatreInChicago
     def extract_date_range_from_pair(text)
       return unless captures = get_captures(DATE_RANGE_REGEXP, text)
       start_month, start_day, finish_month, finish_day, year = captures
-      build_date_range("#{start_month} #{start_day}, #{year}", 
+      build_date_range("#{start_month} #{start_day}, #{year}",
                        "#{finish_month} #{finish_day}, #{year}")
     end
 
@@ -41,16 +41,16 @@ module TheatreInChicago
       return unless captures = get_captures(THRU_RANGE_REGEXP, text)
       finish_month, finish_day, finish_year = captures
       today_month = Date::MONTHNAMES[@today.month]
-      build_date_range("#{today_month} #{@today.day}, #{@today.year}", 
+      build_date_range("#{today_month} #{@today.day}, #{@today.year}",
                        "#{finish_month} #{finish_day}, #{finish_year}")
     end
 
     def extract_date_range_from_open(text)
       return unless OPEN_RUN_REGEXP.match(text)
       today_month = Date::MONTHNAMES[@today.month]
-      next_week = @today.since(1.week);
+      next_week = @today.since(1.week)
       next_week_month = Date::MONTHNAMES[next_week.month]
-      build_date_range("#{today_month} #{@today.day}, #{@today.year}", 
+      build_date_range("#{today_month} #{@today.day}, #{@today.year}",
                        "#{next_week_month} #{next_week.day}, #{next_week.year}")
     end
 

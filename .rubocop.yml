@@ -1,2 +1,9 @@
-inherit_from:
-  - .hound.yml
+AllCops:
+  Include:
+    - Rakefile
+    - config.ru
+  Exclude:
+    - db/schema.rb
+    - bin/*
+    - config/*
+  RunRailsCops: true

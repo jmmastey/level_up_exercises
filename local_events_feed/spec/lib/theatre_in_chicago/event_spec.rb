@@ -1,7 +1,8 @@
 require 'rails_helper'
 require 'theatre_in_chicago/event'
 
-RSpec.describe TheatreInChicago::Event, :type => :asset do
+RSpec.describe TheatreInChicago::Event, type: :asset do
+
   let(:event) { create(:chicago_event) }
   let(:dirty_event) { create(:chicago_event, :dirty) }
   let(:other_event) { event.clone }

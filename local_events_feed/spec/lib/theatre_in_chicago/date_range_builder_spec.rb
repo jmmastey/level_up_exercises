@@ -1,7 +1,7 @@
 require 'theatre_in_chicago/date_range_builder'
 require_relative 'fixture_helper'
 
-RSpec.describe TheatreInChicago::DateRangeBuilder, :type => :asset do
+RSpec.describe TheatreInChicago::DateRangeBuilder, type: :asset do
 
   let(:pseudo_today) { DateTime.new(2014, 10, 31) }
 

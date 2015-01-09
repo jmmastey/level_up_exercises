@@ -5,17 +5,17 @@ end
 
 def create_events
   [
-   create(:event, name: "A"),
-   create(:event, name: "B"),
-   create(:event, name: "C")
+    create(:event, name: "A"),
+    create(:event, name: "B"),
+    create(:event, name: "C"),
   ]
 end
 
 def create_events_with_showings
   [
-   create(:event, name: "A", times: [ten_oclock, nine_oclock, eight_oclock]),
-   create(:event, name: "B", times: [eight_oclock]),
-   create(:event, name: "C", times: [nine_oclock, ten_oclock])
+    create(:event, name: "A", times: [ten_oclock, nine_oclock, eight_oclock]),
+    create(:event, name: "B", times: [eight_oclock]),
+    create(:event, name: "C", times: [nine_oclock, ten_oclock]),
   ]
 end
 

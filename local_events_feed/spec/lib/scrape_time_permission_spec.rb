@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'scrape_time_permission'
 
-describe ScrapeTimePermission, :type => :model do
+describe ScrapeTimePermission, type: :model do
   let(:source) { "Some-Source" }
 
   let(:today)       { DateTime.parse("20140901T080000") }
@@ -11,7 +11,6 @@ describe ScrapeTimePermission, :type => :model do
   let(:permission_today)       { ScrapeTimePermission.new(source, today) }
   let(:permission_later_today) { ScrapeTimePermission.new(source, later_today) }
   let(:permission_tomorrow)    { ScrapeTimePermission.new(source, tomorrow) }
-
 
   it "gives permission to scrape initially" do
     expect(permission_today).to be_granted

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ApplicationHelper, :type => :helper do
+RSpec.describe ApplicationHelper, type: :helper do
   let(:time) { DateTime.parse("20141001T093000-0500") }
   let(:local_time_view) { ApplicationHelper::LocalTimeView.new(time) }
 

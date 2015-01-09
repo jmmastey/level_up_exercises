@@ -7,6 +7,7 @@ require 'date'
 module TheatreInChicago
 
   class PageParser
+
     ROOT_LINK = 'http://www.theatreinchicago.com'
     attr_reader :events
 
@@ -39,15 +40,15 @@ module TheatreInChicago
 
     def add_event_details
       events.each do |event|
-        event_node = Nokogiri::HTML(open(event.link))
-        event.image = ImageFinder::find(event_node)
-        event.description = DescriptionFinder::find(event_node)
+        event_node = Nokogiri.HTML(open(event.link))
+        event.image = ImageFinder.find(event_node)
+        event.description = DescriptionFinder.find(event_node)
         add_showings(event, event_node)
       end
     end
 
     def add_showings(event, event_node)
-      showings = ShowingFinder::find(event_node)
+      showings = ShowingFinder.find(event_node)
       event.showings.concat(showings.to_a)
     end
   end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../models/event_helper'
 
-RSpec.describe ShowingsHelper, :type => :helper do
+RSpec.describe ShowingsHelper, type: :helper do
 
   let(:no_showings) { create(:event).showings }
 
@@ -13,7 +13,6 @@ RSpec.describe ShowingsHelper, :type => :helper do
 
   let(:multi_day_times) { [time(1, 19), time(2, 19), time(3, 19)] }
   let(:multi_day_showings) { create(:event, times: multi_day_times).showings }
-
 
   it 'can show a multi-day showings date-range' do
     expect(pretty_date_range(multi_day_showings)).to eq('Oct 1 - Oct 3, 2014')
@@ -46,7 +45,6 @@ RSpec.describe ShowingsHelper, :type => :helper do
   it 'can tell if a list of showings are on one day only' do
     expect(one_day_only?(multi_day_showings)).to be false
   end
-
 
   context 'given a TheatreInChicago event' do
     let(:tic_event) { create(:chicago_event, showings: multi_day_times) }

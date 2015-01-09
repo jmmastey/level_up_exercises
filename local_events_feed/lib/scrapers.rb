@@ -4,7 +4,7 @@ require 'scrape_time_permission'
 module Scrapers
 
   SCRAPERS = {
-    theatre_in_chicago: TheatreInChicago::Scraper
+    theatre_in_chicago: TheatreInChicago::Scraper,
   }
 
   UPCOMING_DAYS = [0, 25, 50, 75, 100]

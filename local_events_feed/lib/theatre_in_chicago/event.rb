@@ -17,11 +17,11 @@ module TheatreInChicago
     def to_s
       "#{name}, #{location}, #{link}, #{pretty_image}"
     end
-    
+
     def to_h
-      { name: name, 
-        location: location, 
-        link: link, 
+      { name: name,
+        location: location,
+        link: link,
         image: image,
         description: description }
     end
@@ -31,7 +31,7 @@ module TheatreInChicago
       name == other.name && location == other.location && link == other.link
     end
 
-    # No active support 
+    # No active support
     def clean
       @location.squish!
       @description.squish!

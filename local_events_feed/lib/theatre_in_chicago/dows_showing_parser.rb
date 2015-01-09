@@ -3,15 +3,14 @@ require_relative 'showing_parser'
 module TheatreInChicago
 
   class DowsShowingParser < ShowingParser
-    DOW_DAYS_REGEXP = Regexp.new('(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)');
+    DOW_DAYS_REGEXP = Regexp.new('(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)')
     DOW_TIME_REGEXP = Regexp.new('([0-9]{1,2}):([0-9]{2})([a|p]m)')
 
     private
 
     def extract_showing_from_table_cell(table_cell)
-      if in_dow_format?(table_cell)
-        add_showings_from_table_cell_in_dow_format(table_cell)
-      end
+      return unless in_dow_format?(table_cell)
+      add_showings_from_table_cell_in_dow_format(table_cell)
     end
 
     def add_showings_from_table_cell_in_dow_format(table_cell)

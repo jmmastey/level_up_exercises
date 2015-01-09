@@ -12,6 +12,6 @@ Feature: Scrape for Events
     Then I do not see events on the page
 
   Scenario: User scrapes for events
-    When I scrape for events
-    And I visit the events page
-    Then I see events on the page
+    xWhen I scrape for events
+    xAnd I visit the events page
+    xThen I see events on the page

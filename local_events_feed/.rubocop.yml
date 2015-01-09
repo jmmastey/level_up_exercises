@@ -5,4 +5,6 @@ AllCops:
     - config.ru
   Exclude:
     - db/schema.rb
+    - bin/*
+    - config/*
   RunRailsCops: true

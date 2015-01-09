@@ -3,7 +3,8 @@ require 'theatre_in_chicago/date_list_showing_parser'
 require 'theatre_in_chicago/dows_showing_parser'
 require_relative 'fixture_helper'
 
-RSpec.describe TheatreInChicago::ShowingParser, :type => :asset do
+RSpec.describe TheatreInChicago::ShowingParser, type: :asset do
+
   let(:pseudo_today) { DateTime.new(2014, 10, 31) }
 
   let(:same_year_node) { Nokogiri::HTML(open_file("theatre_in_chicago_test_showings_same_year.html")) }
@@ -17,7 +18,6 @@ RSpec.describe TheatreInChicago::ShowingParser, :type => :asset do
 
   let(:days_of_week_node) { Nokogiri::HTML(open_file("theatre_in_chicago_test_showings_days_of_week.html")) }
   let(:days_of_week_parser) { TheatreInChicago::DowsShowingParser.new(days_of_week_node, pseudo_today) }
-
 
   it 'should extract all events in a body with same year date range' do
     expect(same_year_parser).to have(20).showings

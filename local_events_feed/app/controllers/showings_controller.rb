@@ -1,10 +1,10 @@
 class ShowingsController < ApplicationController
   before_action :login_filter
-  before_action :get_showing
+  before_action :find_showing
 
   def show
     respond_to do |format|
-      format.ical { render :text => @showing.to_ics }
+      format.ical { render text: @showing.to_ics }
     end
   end
 
@@ -20,7 +20,7 @@ class ShowingsController < ApplicationController
 
   private
 
-  def get_showing
+  def find_showing
     @showing = Showing.find(params[:id])
   end
 end

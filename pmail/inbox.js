@@ -306,13 +306,13 @@ function init_rollups()
   $(dot(CLS_RUB_CONTROL)).bind("click", rollup_click);
 }
 
-function rollup_click(rollup)
+function rollup_click(event)
 {
-  rollup_toggle($(rollup));
+  rollup_toggle($(this));
 }
 
 function rollup_toggle(rollup)
 {
-  var target_selector = rollup.data(ATR_RUB_TARGET);
+  var target_selector = rollup.attr(ATR_RUB_TARGET);
   $(target_selector).toggleClass(CLS_STE_COLLAPSED);
 }

@@ -187,6 +187,7 @@ body {
   left: 270px;
   right: 0px;
   bottom: 0px;
+  padding-right: 25px;
   box-sizing: border-box;
 }
 
@@ -255,7 +256,6 @@ body {
   white-space: nowrap;
   display: inline-block;
   margin: 0px 10px 0px 0px;
-  min-width: 75px;
   box-sizing: border-box;
   text-align: center;
 }
@@ -308,6 +308,21 @@ body {
   padding: 10px;
 }
 
+.image-button {
+  background: no-repeat url("graphics/icons.png");
+  background-size: 200px 175px;
+  height: 20px;
+  width: 20px;
+}
+
+.arrow-button {
+  background-position: -85px -127px;
+}
+
+.arrow-button:hover {
+  background-position: -108px -127px;
+}
+
 /* Thumbnail list  */
 .thumbnails {
   display: block;
@@ -350,13 +365,47 @@ body {
 }
 
 .mailbox-header {
-  height: 60px;
+  margin-top: 20px;
+  height: 40px;
+  font-size: 18px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.mailbox-list-row > td  {
+.mailbox-list-row  {
+  height: 33px;
   border-bottom: 1px solid #e5e5e5;
   border-top: 1px solid #e5e5e5;
+  border-left: 3px solid transparent;
+}
+
+.mailbox-list-row > td {
+  line-height: 12px;
+  padding: 0px 5px 0px 0px;
+}
+
+.mailbox-list-row > td:last-child {
   padding-right: 30px;
+}
+
+.mailbox-list-row:first-child {
+  border-top: none;
+}
+
+.mailbox-list-row.current {
+  border-left: 3px solid #4285f4;
+}
+
+.mailbox-list-handle > img {
+  visibility: hidden;
+}
+
+.mailbox-list-row:hover .mailbox-list-handle > img {
+  visibility: visible;
+}
+
+.mailbox-list-select {
+  min-width: 28px;
+  text-align: center;
 }
 
 .mailbox-list-synopsis {
@@ -365,9 +414,19 @@ body {
 
 .mailbox-list-sender { width: 30%; }
 
+.mailbox-list-fav {
+  min-width: 23px;
+  text-align: center;
+}
+
 .mailbox-list-fav > img {
   height: 20px;
   width: 20px;
+}
+
+.mailbox-list-important {
+  min-width: 25px;
+  text-align: center;
 }
 
 .mailbox-list-important > img {

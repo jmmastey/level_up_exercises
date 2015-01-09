@@ -284,11 +284,10 @@
 
       <div class="app-controls-primary">
 
-        <a class="control button dropdown-button">
+        <div class="control button dropdown-button">
           <div class="checkbox"><img src="graphics/checkmark.png"></div>
           <span class="spaced arrow"></span>
-        </a>
-
+        </div>
         <div class="simple-menu dropdown-frame collapsed dropdown-left-align">
           <div class="dropdown-content">
             <ul>
@@ -301,17 +300,23 @@
             </ul>
           </div>
         </div>
+
         <div class="control button">
           <div class="icon refresh-icon"></div>
         </div>
-        <a class="control button dropdown-button">More <span class="spaced arrow"></span></a>
-        <div class="dropdown-frame simple-menu collapsed">
-        <ul>
-          <li class="simple-menu-item">Mark all as read</li>
-        </ul>
-        <hr>
-        <p class="ital gray">Select messages to see more actions</p>
+
+        <div class="control button dropdown-button">
+          More
+          <span class="spaced arrow"></span>
         </div>
+        <div class="dropdown-frame simple-menu collapsed">
+          <ul>
+            <li class="simple-menu-item">Mark all as read</li>
+          </ul>
+          <hr>
+          <p class="ital gray">Select messages to see more actions</p>
+        </div>
+
       </div> <!-- .app-controls-primary -->
 
       <button class="to-right control button dropdown-button settings-button
@@ -377,9 +382,53 @@
         <p class="to-left control rollup-button" rollup-target="#UnreadMessages">
           Unread <span class="spaced arrow"></span>
         </p>
-        <p class="to-right control dropdown-button">
-          [] <span class="spaced arrow"></span>
-        </p>
+
+        <div class="to-right control dropdown-button image-button arrow-button">
+        </div>
+        <div class="dropdown-frame collapsed simple-menu dropdown-right-align">
+          <div class="dropdown-content">
+
+            <ul>
+              <li class="simple-menu-item">Show more messages</li>
+            </ul>
+
+            <hr>
+
+            <h2>Show up to:</h2>
+            <ul class="radio-button-list">
+              <li class="radio-button-item">
+                <div class="radio-button" radio-group="message-display-count"></div>
+                5 items
+              </li>
+              <li class="radio-button-item">
+                <div class="radio-button" radio-group="message-display-count"></div>
+                10 items
+              </li>
+              <li class="radio-button-item">
+                <div class="radio-button" radio-group="message-display-count"></div>
+                25 items
+              </li>
+              <li class="radio-button-item">
+                <div class="radio-button" radio-group="message-display-count"></div>
+                50 items
+              </li>
+            </ul>
+
+            <hr>
+
+            <ul>
+              <li class="simple-menu-item">Hide section when empty<li>
+            </ul>
+
+            <hr>
+
+            <ul>
+              <li class="simple-menu-item">View all Inbox settings<li>
+            </ul>
+
+          </div>
+        </div>
+
         <span class="to-right">
           1-X of X
         </span>
@@ -389,8 +438,32 @@
 
         <table id="UnreadMessages" class="mailbox-list">
           <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><img src="graphics/grippy_large.png"><a href="#"></a></td>
             <td class="mailbox-list-select">
-              <input type="checkbox" />
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">
+              <img src="graphics/star.svg">
+            </td>
+            <td class="mailbox-list-important">
+              <img src="graphics/indicator.svg">
+            </td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+          <tr class="mailbox-list-row mailbox-message-unread current">
+            <td class="mailbox-list-handle"><img src="graphics/grippy_large.png"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
             </td>
             <td class="mailbox-list-fav">
               <img src="graphics/star.svg">
@@ -407,8 +480,11 @@
           </tr>
 
           <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><img src="graphics/grippy_large.png"><a href="#"></a></td>
             <td class="mailbox-list-select">
-              <input type="checkbox" />
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
             </td>
             <td class="mailbox-list-fav">
               <img src="graphics/star.svg">
@@ -425,43 +501,11 @@
           </tr>
 
           <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><img src="graphics/grippy_large.png"><a href="#"></a></td>
             <td class="mailbox-list-select">
-              <input type="checkbox" />
-            </td>
-            <td class="mailbox-list-fav">
-              <img src="graphics/star.svg">
-            </td>
-            <td class="mailbox-list-important">
-              <img src="graphics/indicator.svg">
-            </td>
-            <td class="mailbox-list-sender">Somebody, Important</td>
-            <td class="mailbox-list-synopsis">
-              This is important
-              <span class="mailbox-message-preview">- Well not really</span>
-            </td>
-            <td class="mailbox-list-when">3:35</td>
-          </tr>
-
-          <tr class="mailbox-list-row mailbox-message-unread">
-            <td class="mailbox-list-select">
-              <input type="checkbox" />
-            </td>
-            <td class="mailbox-list-fav">
-              <img src="graphics/star.svg">
-            </td>
-            <td class="mailbox-list-important">
-              <img src="graphics/indicator.svg">
-            </td>
-            <td class="mailbox-list-sender">Somebody, Important</td>
-            <td class="mailbox-list-synopsis">
-              This is important
-              <span class="mailbox-message-preview">- Well not really</span>
-            </td>
-            <td class="mailbox-list-when">3:35</td>
-          </tr>
-          <tr class="mailbox-list-row">
-            <td class="mailbox-list-select">
-              <input type="checkbox" />
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
             </td>
             <td class="mailbox-list-fav">
               <img src="graphics/star.svg">
@@ -478,8 +522,11 @@
           </tr>
 
           <tr class="mailbox-list-row">
+            <td class="mailbox-list-handle"><img src="graphics/grippy_large.png"><a href="#"></a></td>
             <td class="mailbox-list-select">
-              <input type="checkbox" />
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
             </td>
             <td class="mailbox-list-fav">
               <img src="graphics/star.svg">
@@ -495,27 +542,12 @@
             <td class="mailbox-list-when">3:35</td>
           </tr>
 
-         <tr class="mailbox-list-row">
+          <tr class="mailbox-list-row">
+            <td class="mailbox-list-handle"><img src="graphics/grippy_large.png"><a href="#"></a></td>
             <td class="mailbox-list-select">
-              <input type="checkbox" />
-            </td>
-            <td class="mailbox-list-fav">
-              <img src="graphics/star.svg">
-            </td>
-            <td class="mailbox-list-important">
-              <img src="graphics/indicator.svg">
-            </td>
-            <td class="mailbox-list-sender">Somebody, Important</td>
-            <td class="mailbox-list-synopsis">
-              This is important
-              <span class="mailbox-message-preview">- Well not really</span>
-            </td>
-            <td class="mailbox-list-when">3:35</td>
-          </tr>
-
-          <tr class="mailbox-list-row mailbox-message-unread">
-            <td class="mailbox-list-select">
-              <input type="checkbox" />
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
             </td>
             <td class="mailbox-list-fav">
               <img src="graphics/star.svg">

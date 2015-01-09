@@ -1,5 +1,4 @@
 class Arrowhead
-
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
     far_west: {
@@ -30,9 +29,6 @@ class Arrowhead
       raise "Unknown region, please provide a valid region."
     end
   end
-
 end
 
-
-
-puts Arrowhead::classify(:northern_plains, :bifurcated)
+puts Arrowhead.classify(:northern_plains, :bifurcated)

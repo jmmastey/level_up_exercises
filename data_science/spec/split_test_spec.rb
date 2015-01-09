@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe DataScience::SplitTest do
   let (:split_test) do
-    cohort_a, cohort_b = load_cohort_data
+    cohort_a, cohort_b  = load_cohort_data
     DataScience::SplitTest.new(cohort_a, cohort_b)
   end
 
@@ -27,20 +27,18 @@ describe DataScience::SplitTest do
   private
 
   def load_cohort_data
-    cohort_a = DataScience::Cohort.new('Cohort A')
-    cohort_b = DataScience::Cohort.new('Cohort B')
+    cohorts = {
+      'A' => DataScience::Cohort.new('Cohort A'),
+      'B' => DataScience::Cohort.new('Cohort B')
+    }
 
     raw_data = File.read(File.expand_path("data/source_data.json"))
     json     = JSON.parse(raw_data)
 
     json.each do |current_sample|
-      if current_sample['cohort'] == 'A'
-        cohort_a.add_sample(current_sample['result'])
-      elsif current_sample['cohort'] == 'B'
-        cohort_b.add_sample(current_sample['result'])
-      end
+      cohorts[current_sample['cohort']].add_sample(current_sample['result'])
     end
 
-    [cohort_a, cohort_b]
+    [cohorts['A'], cohorts['B']]
   end
 end

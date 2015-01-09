@@ -234,6 +234,10 @@ body {
   text-align: center;
 }
 
+.control.align-middle {
+  vertical-align: middle;
+}
+
 .control {
   vertical-align: top;
   white-space: nowrap;
@@ -281,6 +285,10 @@ body {
 
 .dropdown-content {
   overflow: auto;
+}
+
+.dropdown-content.padded {
+  padding: 5px;
 }
 
 /* Thumbnail list  */

@@ -288,7 +288,7 @@ body {
 }
 
 .dropdown-content.padded {
-  padding: 5px;
+  padding: 10px;
 }
 
 /* Thumbnail list  */
@@ -521,6 +521,23 @@ body {
   position: absolute;
   left: 3px;
   top: 3px;
+}
+
+.field-box {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.field-box > label {
+  color: #a0a0a0;
+}
+
+.long-text-field {
+  width: 100%;
+  border: 1px solid #a0a0a0;
+  margin-top: 5px;
 }
 
 /* STATES  */

@@ -35,49 +35,102 @@
             <div class="dropdown-frame collapsed simple-menu">
               <div class="dropdown-content">
                 <ul>
-                  <li>Inbox</li>
-                  <li>Starred</li>
-                  <li>Sent Mail</li>
-                  <li>Drafts</li>
-                  <li>Chats</li>
-                  <li>Spam</li>
-                  <li>Trash</li>
+                  <li class="simple-menu-item">Inbox</li>
+                  <li class="simple-menu-item">Starred</li>
+                  <li class="simple-menu-item">Sent Mail</li>
+                  <li class="simple-menu-item">Drafts</li>
+                  <li class="simple-menu-item">Chats</li>
+                  <li class="simple-menu-item">Spam</li>
+                  <li class="simple-menu-item">Trash</li>
                 </ul>
                 <hr>
                 <ul>
-                  <li>Mail &amp; Spam &amp; Trash</li>
+                  <li class="simple-menu-item">Mail &amp; Spam &amp; Trash</li>
                 </ul>
                 <hr>
                 <ul>
-                  <li>Read Mail</li>
-                  <li>Unread Mail</li>
+                  <li class="simple-menu-item">Read Mail</li>
+                  <li class="simple-menu-item">Unread Mail</li>
                 </ul>
                 <hr>
                 <ul>
-                  <li>Social</li>
-                  <li>Promotions</li>
-                  <li>Updates</li>
-                  <li>Forums</li>
+                  <li class="simple-menu-item">Social</li>
+                  <li class="simple-menu-item">Promotions</li>
+                  <li class="simple-menu-item">Updates</li>
+                  <li class="simple-menu-item">Forums</li>
                 </ul>
                 <hr>
                 <ul>
-                  <li>Stuff</li>
-                  <li>Things</li>
-                  <li>Et Cetera</li>
+                  <li class="simple-menu-item">Stuff</li>
+                  <li class="simple-menu-item">Things</li>
+                  <li class="simple-menu-item">Et Cetera</li>
                 </ul>
               </div>
             </div>
             <form class="message-search">
+              <div class="field-box">
               <label for="SearchFrom">From</label>
-              <input type="text" id="SearchFrom">
+              <input type="text" class="long-text-field" id="SearchFrom">
+              </div>
+              <div class="field-box">
               <label for="SearchTo">To</label>
-              <input type="text" id="SearchTo">
+              <input type="text" class="long-text-field" id="SearchTo">
+              </div>
+              <div class="field-box">
               <label for="SearchSubject">Subject</label>
-              <input type="text" id="SearchSubject">
+              <input type="text" class="long-text-field" id="SearchSubject">
+              </div>
+              <div class="field-box">
               <label for="SearchHasWords">Has the words</label>
-              <input type="text" id="SearchHasWords">
+              <input type="text" class="long-text-field" id="SearchHasWords">
+              </div>
+              <div class="field-box">
               <label for="SearchDoesntHave">Doesn't have</label>
-              <input type="text" id="SearchDoesntHave">
+              <input type="text" class="long-text-field" id="SearchDoesntHave">
+              </div>
+              <div class="field-box">
+                <input id="SearchHasAttachment" type="checkbox">
+                <label for="SearchHasAttachment">Has attachment</label>
+              </div>
+              <div class="field-box">
+                <input id="SearchNoChats" type="checkbox">
+                <label for="SearchNoChats">Don't include chats</label>
+              </div>
+              <div class="field-box">
+                <label>Size</label>
+
+                <button type="button"
+                        class="control button dropdown-button align-middle">
+                  greater than
+                  <span class="arrow"></span>
+                </button>
+                <div class="dropdown-frame collapsed simple-menu">
+                  <div class="dropdown-content">
+                    <ul>
+                      <li class="simple-menu-item">greater than</li>
+                      <li class="simple-menu-item">less than</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <input type="text">
+
+                <button type="button"
+                        class="control button dropdown-button align-middle">
+                  MB
+                  <span class="arrow"></span>
+                </button>
+                <div class="dropdown-frame collapsed simple-menu">
+                  <div class="dropdown-content">
+                    <ul>
+                      <li class="simple-menu-item">MB</li>
+                      <li class="simple-menu-item">KB</li>
+                      <li class="simple-menu-item">Bytes</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
             </form>
           </div>
         </article>
@@ -149,9 +202,9 @@
     <div class="simple-menu appmode-menu dropdown-frame collapsed dropdown-left-align">
       <div class="dropdown-content">
         <ul>
-          <li>Mail</li>
-          <li>Contacts</li>
-          <li>Tasks</li>
+          <li class="simple-menu-item">Mail</li>
+          <li class="simple-menu-item">Contacts</li>
+          <li class="simple-menu-item">Tasks</li>
         </ul>
       </div>
     </div>
@@ -164,12 +217,12 @@
       <div class="simple-menu dropdown-frame collapsed dropdown-left-align">
         <div class="dropdown-content">
           <ul>
-            <li>All</li>
-            <li>None</li>
-            <li>Read</li>
-            <li>Unread</li>
-            <li>Starred</li>
-            <li>Unstarred</li>
+            <li class="simple-menu-item">All</li>
+            <li class="simple-menu-item">None</li>
+            <li class="simple-menu-item">Read</li>
+            <li class="simple-menu-item">Unread</li>
+            <li class="simple-menu-item">Starred</li>
+            <li class="simple-menu-item">Unstarred</li>
           </ul>
         </div>
       </div>
@@ -179,7 +232,7 @@
       <a class="control button dropdown-button">More <span class="spaced arrow"></span></a>
       <div class="dropdown-frame simple-menu collapsed">
       <ul>
-        <li>Mark all as read</li>
+        <li class="simple-menu-item">Mark all as read</li>
       </ul>
       <hr>
       <p class="ital gray">Select messages to see more actions</p>
@@ -208,14 +261,14 @@
         </ul>
         <hr>
         <ul>
-          <li>Configure Inbox</li>
+          <li class="simple-menu-item">Configure Inbox</li>
         </ul>
         <hr>
         <ul>
-          <li>Preferences</li>
-          <li>Themes</li>
-          <li>Complain</li>
-          <li>Panic</li>
+          <li class="simple-menu-item">Preferences</li>
+          <li class="simple-menu-item">Themes</li>
+          <li class="simple-menu-item">Complain</li>
+          <li class="simple-menu-item">Panic</li>
         </ul>
       </div>
     </div>

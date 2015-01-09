@@ -17,6 +17,7 @@ var CLS_DPD_ALIGN_RT = "dropdown-right-align";
 var CLS_DPD_ALIGN_LT = "dropdown-left-align";
 var CLS_DPD_ALIGN_CT = "dropdown-center-align";
 var CLS_DPD_MATCH_WIDTH = "dropdown-match-width";
+var CLS_DPD_CLOSE_CONTROL = "close-dropdown";
 var ATR_DPD_PARENT_ID = "dropdown-parent-id";
 
 var CLS_CKB_CONTROL = "checkbox";
@@ -25,6 +26,8 @@ var CLS_CHECKED = "checked";
 var CLS_RDB_CONTROL = "radio-button";
 var CLS_RDB_LIST_ITEM = "radio-button-item";
 var ATR_RDB_GROUP = "radio-group";
+
+var CLS_MNI_SIMPLE = "simple-menu-item";
 
 var CBK_ON_ACTUATE = "control-on-actuate";
 var CBK_ON_ACTIVATE = "control-on-activate";
@@ -73,9 +76,9 @@ function init_dropdowns()
     $(css_selector).data(DPD_POS_METHOD,
                          dpd_position_methods[css_selector]);
 
-  $('.close-dropdown').bind("click", function() {
-    dropdown_close(dropdown_parent($(this)));
-  });
+  $(dot(CLS_DPD_CLOSE_CONTROL)).bind("click", dropdown_close_parent);
+
+  $(dot(CLS_MNI_SIMPLE)).bind("click", menu_item_click);
 }
 
 function all_dropdowns() { return $(dot(CLS_DPD_CONTROL)); }
@@ -111,7 +114,12 @@ function dropdown_align_params(parent, content)
 
 function dropdown_parent(element)
 {
-  return element.parents('.dropdown-frame').prev();
+  return element.parents('.dropdown-frame').first().prev();
+}
+
+function dropdown_close_parent(element)
+{
+  dropdown_close(dropdown_parent($(element)));
 }
 
 function dropdown_aligning_control(button, content)
@@ -184,6 +192,13 @@ function dropdown_click(event)
 {
   event.stopPropagation();
   dropdown_toggle($(this))
+}
+
+function menu_item_click(event)
+{
+  item = $(this);
+  control_run_callback(item, CBK_ON_ACTUATE);
+  dropdown_close_parent(item);
 }
 
 // CHECKBOX LOGIC

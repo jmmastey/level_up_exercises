@@ -1,7 +1,11 @@
+include Math
 
 class Cohort
   attr_reader :cohort, :conversions, :nonconvs
   def initialize(cohort_name, conversions, nonconvs)
+    raise "Invalid cohort name" unless cohort_name == "A" || cohort_name == "B"
+    raise "Invalid data" if conversions < 0 || nonconvs < 0
+    raise "Need at least one trial" unless (conversions + nonconvs) > 0
     @cohort_name = cohort_name
     @conversions = conversions
     @nonconvs = nonconvs

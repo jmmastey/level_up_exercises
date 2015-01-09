@@ -1,18 +1,17 @@
 require 'abanalyzer'
 require_relative 'cohort'
-include Math
 
 class ABCalculator
-  def initialize(parsed_data)
-    @a_cohort = Cohort.new("A", parsed_data[:a][:pass], parsed_data[:a][:fail])
-    @b_cohort = Cohort.new("B", parsed_data[:b][:pass], parsed_data[:b][:fail])
+  def initialize(test_results)
+    @a_cohort = Cohort.new("A", test_results.a_conv, test_results.a_nonconv)
+    @b_cohort = Cohort.new("B", test_results.b_conv, test_results.b_nonconv)
     @a_b_tester = ABAnalyzer::ABTest.new(parsed_data)
   end
 
   def sample_size
     { a: @a_cohort.total_trials, b: @b_cohort.total_trials }
   end
-  
+
   def no_of_conversions
     { a: @a_cohort.conversions, b: @b_cohort.conversions }
   end

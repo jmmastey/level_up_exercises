@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe ABCalculator do
   let(:test) { JsonParser.new("source_data.json") }
-  let(:parsed_data) { test.parsed_a_b_data }
-  let(:calc) { ABCalculator.new(parsed_data) }
+  #let(:parsed_data) { test.parsed_a_b_data }
+  let(:calc) { ABCalculator.new(test) }
   let(:conversion_range) { calc.conversion_range }
 
-	it "should create a new test object" do
-  #puts calc.to_s
+  it "should create a new test object" do
+    # p uts calc.to_s
   end
 
   it "should return sample size and number of conversions for each group" do
@@ -22,8 +22,8 @@ describe ABCalculator do
   end
 
   it "should return valid %age of conversion data" do
-    expect(calc.conversion_rate[:a]).to be_between(0,1)
-    expect(calc.conversion_rate[:b]).to be_between(0,1)
+    expect(calc.conversion_rate[:a]).to be_between(0, 1)
+    expect(calc.conversion_rate[:b]).to be_between(0, 1)
   end
 
   it "should return error bars @ 95% confidence for conversion data" do

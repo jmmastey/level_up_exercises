@@ -1,5 +1,4 @@
-.idea/
-**/.idea
 .DS_Store
-**/*.swp
+**/.idea/
 **/*.swo
+**/*.swp

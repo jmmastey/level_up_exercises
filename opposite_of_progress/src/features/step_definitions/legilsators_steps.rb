@@ -66,17 +66,22 @@ Then(/^I see the details about that legislator$/) do
 end
 
 Then(/^I see the picture of that legislator$/) do
-  pending # express the regexp above with the code you wish you had
+  pending "still we do not have real data"
+  image = find(:css, '.legislator-image img')
+  expect(image['src']).to match("#{@legislator.bioguide_id}.jpg")
 end
 
 Given(/^legislator has previous sponsoships and cosponsorships$/) do
-  pending # express the regexp above with the code you wish you had
+  @sponsoships = FactoryGirl.create_list(:good_deed_with_legislator, 2, legislator: @legislator, action: "sponsored")
+  @cosponsoships = FactoryGirl.create_list(:good_deed_with_legislator, 3, legislator: @legislator, action: "cosponsored")
 end
 
 Then(/^I should see cosponsorships$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content('Sponsorships')
+  expect(page).to have_css('.sponsorships .good-deed', count: 2)
 end
 
 Then(/^I should see sponsorships$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content('Co-sponsorships')
+  expect(page).to have_css('.cosponsorships .good-deed', count: 3)
 end

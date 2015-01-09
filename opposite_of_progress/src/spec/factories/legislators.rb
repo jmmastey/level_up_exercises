@@ -24,5 +24,4 @@ FactoryGirl.define do
     factory :representative
     factory :senator, traits: [:senator_trait]
   end
-
 end

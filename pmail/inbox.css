@@ -384,11 +384,11 @@ body {
   width: 30px;
   height: 30px;
   background: no-repeat url("graphics/whirly.png");
-  background-size: 30px 800px;
+  background-size: 30px 750px;
 }
 
 .refresh-icon {
-  background-position: 0 -315px;
+  background-position: 0 -295px;
 }
 
 .checkbox {
@@ -470,11 +470,30 @@ body {
 }
 
 .simple-menu ul > li {
-  padding: 4px 24px 4px 24px;
+  position: relative;
+  padding: 4px 30px 4px 30px;
 }
 
 .simple-menu ul > li:hover {
   background-color: #e5e5e5;
+}
+
+.simple-menu h2 {
+  padding: 4px 30px 4px 5px;
+  font-size: 16px;
+}
+
+.simple-menu p {
+  padding: 4px 30px 4px 30px;
+  max-width: 200px;
+}
+
+.ital {
+  font-style: italic;
+}
+
+.gray {
+  color: gray;
 }
 
 .radio-button {
@@ -491,7 +510,8 @@ body {
 }
 
 .radio-button-list .radio-button {
-  left: -24px;
+  position: absolute;
+  left: 3px;
   top: 3px;
 }
 

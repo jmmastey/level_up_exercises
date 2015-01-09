@@ -25,7 +25,16 @@
         <article dropdown-parent-id="MailSearchDropdown" 
                  class="dropdown-frame collapsed dropdown-left-align dropdown-match-width">
           <div class="dropdown-content">
-            FOOBAR
+          <p>
+            Search
+            <button type="button" class="dropdown-button">
+              All Mail
+              <span class="arrow">
+            </button>
+            <div class="dropdown-frame">
+
+            </div>
+          </p>
           </div>
         </article>
       </div>
@@ -124,7 +133,12 @@
         <div class="icon refresh-icon"></div>
       </div>
       <a class="control button dropdown-button">More <span class="spaced arrow"></span></a>
-      <div class="dropdown-frame collapsed">
+      <div class="dropdown-frame simple-menu collapsed">
+      <ul>
+        <li>Mark all as read</li>
+      </ul>
+      <hr>
+      <p class="ital gray">Select messages to see more actions</p>
       </div>
     </div>
     <button class="to-right control button dropdown-button settings-button
@@ -133,7 +147,7 @@
     </button>
     <div class="simple-menu dropdown-frame collapsed settings-menu">
       <div class="dropdown-content">
-        Display Density:
+        <h2>Display Density:</h2>
         <ul class="radio-button-list">
           <li class="radio-button-item">
             <div class="radio-button" radio-group="display-density"></div>
@@ -149,8 +163,16 @@
           </li>
         </ul>
         <hr>
-
+        <ul>
+          <li>Configure Inbox</li>
+        </ul>
         <hr>
+        <ul>
+          <li>Preferences</li>
+          <li>Themes</li>
+          <li>Complain</li>
+          <li>Panic</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -175,7 +197,7 @@
         Unread <span class="spaced arrow"></span>
       </p>
       <p class="to-right control dropdown-button">
-        [v] <span class="spaced arrow"></span>
+        [] <span class="spaced arrow"></span>
       </p>
       <span class="to-right">
         1-X of X

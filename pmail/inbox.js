@@ -139,9 +139,15 @@ function dropdown_align_content(data)
   }
 }
 
-function dropdown_close_all()
+function dropdown_close_unrelated(dropdown)
 {
-  all_dropdowns().each(function() { dropdown_close($(this)); });
+  var active_dropdowns = $(dot(CLS_DPD_CONTROL) + dot(CLS_CONTROL_ACTIVE))
+  
+  active_dropdowns.each(function() {
+    var its_dropdown_pane = dropdown_content_pane($(this));
+    if (its_dropdown_pane.has(dropdown).length == 0)
+      dropdown_close($(this));
+  });
 }
 
 function dropdown_close(button)
@@ -152,7 +158,7 @@ function dropdown_close(button)
 
 function dropdown_open(button)
 {
-  dropdown_close_all();
+  dropdown_close_unrelated(button);
   var content_pane = dropdown_content_pane(button);
   control_activate(button);
   dropdown_set_content_position(button, content_pane);

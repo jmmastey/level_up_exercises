@@ -2,6 +2,7 @@ class DataScience
   attr_reader :cohorts
 
   require 'data_science/cohort'
+  require 'data_science/split_test'
 
   # TODO: make sure the data loading is abstracted from the main
   # calculation code

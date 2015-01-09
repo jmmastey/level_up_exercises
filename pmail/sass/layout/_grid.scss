@@ -35,6 +35,7 @@ body {
 }
 .col-1-2 {
   width: 100%;
+
   @include bp(delta) {
     width: 50%;
   }

@@ -11,10 +11,13 @@
  * file per style scope.
  *
  *= require_self
+ *= require font-awesome
  */
 
 @import 'foundation_and_overrides';
 @import 'common';
+@import 'pagination';
 @import 'devise';
 @import 'flash_messages';
-@import 'legislators'
+@import 'legislators';
+@import 'good_deeds'

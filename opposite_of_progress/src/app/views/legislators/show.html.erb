@@ -1,8 +1,22 @@
-<section class="legislator-details">
+<section>
   <%= render partial: 'legislator', locals: {legislator: @legislator} %>
+  <%= render partial: 'contact_details', locals: {legislator: @legislator} %>
 </section>
-<section class="legislator-good-deeds">
-  <% @legislator.good_deeds.each do |g| %>
-    <%= content_tag :div, g.action %>
-  <% end %>
+
+<% if @legislator.sponsorships.present? %>
+<section>
+  <div class="good-deeds">
+    <h6>Sponsorships</h6>
+    <%= render partial: 'good_deed', collection: @legislator.sponsorships %>
+  </div>
 </section>
+<% end %>
+
+<% if @legislator.cosponsorships.present? %>
+<section>
+  <div class="good-deeds">
+    <h6>Co-sponsorships</h6>
+    <%= render partial: 'good_deed', collection: @legislator.cosponsorships %>
+  </div>
+</section>
+<% end %>

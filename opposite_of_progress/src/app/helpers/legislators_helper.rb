@@ -8,8 +8,15 @@ module LegislatorsHelper
   end
 
   def link_to_legislator(legislator, options = {})
-    name_with_title = [legislator.title, legislator.name].join('. ');
-    link_to(name_with_title, legislator, options)
+    name = [legislator.title, legislator.name].join('. ');
+    link_to(name, legislator, options)
+  end
+
+  def link_to_legislator_with_representation(legislator, options = {})
+    name = [legislator.title, legislator.name].join('. ');
+    representation = [legislator.party, legislator.state].join('-')
+    name_with_representation = "#{name} (#{representation})"
+    link_to(name_with_representation, legislator, options)
   end
 
   def representation_tag(legislator, options = {})
@@ -27,5 +34,26 @@ module LegislatorsHelper
   def party_tag(legislator, options = {})
     party = [legislator.long_party, "Party"].join(" ")
     content_tag(:div, party, options)
+  end
+
+  def link_to_facebook(legislator, options = {})
+    return if legislator.facebook_id.blank?
+    facebook_url = "http://facebook.com/#{legislator.facebook_id}"
+    options.merge!(target: '_blank')
+    link_to(legislator.facebook_id, facebook_url, options)
+  end
+
+  def link_to_twitter(legislator, options = {})
+    return if legislator.twitter_id.blank?
+    twitter_url = "http://twitter.com/#{legislator.twitter_id}"
+    options.merge!(target: '_blank')
+    link_to("@#{legislator.twitter_id}", twitter_url, options)
+  end
+
+  def link_to_youtube(legislator, options = {})
+    return if legislator.youtube_id.blank?
+    youtube_url = "http://youtube.com/#{legislator.youtube_id}"
+    options.merge!(target: '_blank')
+    link_to(legislator.youtube_id, youtube_url, options)
   end
 end

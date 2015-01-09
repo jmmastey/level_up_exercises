@@ -1,1 +1,14 @@
-
+<section>
+  <div class="banner">
+    <%= image_tag 'congress.jpg' %>
+  </div>
+</section>
+<section>
+  <div class="good-deeds">
+    <h4>Recent Good Deeeds of 114th Congress</h4>
+    <%= render @good_deeds %>
+  </div>
+</section>
+<section>
+  <%= pagination_wrapper_for(@good_deeds) %>
+</section>

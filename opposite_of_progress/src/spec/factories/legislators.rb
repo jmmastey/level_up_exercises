@@ -8,6 +8,11 @@ FactoryGirl.define do
     chamber 'house'
     title 'Rep'
     district '3'
+    phone { Faker::PhoneNumber.phone_number }
+    youtube_id "youtube_id"
+    twitter_id "twitter_id"
+    facebook_id "twitter_id"
+    url "http:/example.com/sentator"
 
     trait :senator_trait do
       chamber 'senate'

@@ -1,34 +1,61 @@
 // Place all the styles related to the Legislators controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin blue-box {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  height: auto;
+  overflow: auto;
+  background-color: lighten($primary-color, 63);
+  min-width: 450px;
+}
 
-section.legislator-index {
-  .legislator {
-    padding: 10px;
+@mixin round-cornered-box {
+  padding: 10px;
+  overflow: hidden;
+  @include grid-column($columns: 12);
 
+  > div {
+    @include blue-box;
+  }
 
-    overflow: hidden;
-    @include grid-column($columns: 12);
-
-
-    @media #{$large-up} {
-      @include grid-column($columns: 6, $collapse: false);
-    }
+  @media #{$large-up} {
+    @include grid-column($columns: 6, $collapse: false);
   }
 }
 
-.legislator-wrapper {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      height: auto;
-      overflow: auto;
-      background-color: lighten($primary-color, 63);
-      min-width: 500px;
+
+.legislator {
+  @include round-cornered-box;
+}
+
+.legislator-contact-details {
+  @include round-cornered-box;
+
+  > div {
+    padding: 5px 30px;
+    height: 150px;
+
+    > div {
+      font-size: $base-font-size * .8;
+      padding: 2px 0;
+      border-bottom: 1px solid #eee;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  i {
+    margin-right: 20px;
+  }
 }
 
 .legislator-details {
       padding: 15px 30px;
       display: inline-block;
+      height: 150px;
 
       .name {
         font-size: $h4-font-size;
@@ -50,13 +77,13 @@ section.legislator-index {
     height: auto;
 }
 
-section.legislator-details,
-section.legislator-good-deeds,
-section.legislator-contact-details,
-{
-  @include grid-column($columns: 12);
+// section.legislator-details,
+// section.legislator-good-deeds,
+// section.legislator-contact-details,
+// {
+//   @include grid-column($columns: 12);
 
-  @media #{$large-up} {
-    @include grid-column($columns: 8, $offset: 2);
-  }
-}
+//   @media #{$large-up} {
+//     @include grid-column($columns: 6);
+//   }
+// }

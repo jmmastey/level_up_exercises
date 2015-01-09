@@ -1,12 +1,6 @@
-.content-container {
-  section {
-    @include grid-row();
-  }
-}
-
 .pagination-wrapper {
   @include clearfix;
-  margin-top: 20px;
+  @include grid-column($columns: 12);
 
   .pagination-links {
     float: right;

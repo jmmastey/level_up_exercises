@@ -4,4 +4,6 @@ class GoodDeed < ActiveRecord::Base
   validates_presence_of :bill_id
   belongs_to :bill
   belongs_to :legislator
+
+  default_scope { order(acted_at: :desc) }
 end

@@ -2,7 +2,7 @@ class GoodDeedsController < ApplicationController
   before_action :set_good_deed, only: [:show]
 
   def index
-    @good_deeds = GoodDeed.all
+    @good_deeds = GoodDeed.page(params[:page])
   end
 
   def show

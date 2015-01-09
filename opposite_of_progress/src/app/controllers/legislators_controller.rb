@@ -12,6 +12,6 @@ class LegislatorsController < ApplicationController
   private
 
   def set_legislator
-    @legislator = Legislator.find(params[:id])
+    @legislator = Legislator.includes(:sponsorships, :cosponsorships).find(params[:id])
   end
 end

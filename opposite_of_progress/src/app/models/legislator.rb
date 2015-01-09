@@ -15,6 +15,8 @@ class Legislator < ActiveRecord::Base
   # has_many :cosponsorships
   # has_many :cosponsored_bills, through: :cosponsorships, source: :bill
   has_many :good_deeds
+  has_many :sponsorships,  -> { where action: 'sponsored' }, class_name: 'GoodDeed'
+  has_many :cosponsorships, -> { where action: 'cosponsored' }, class_name: 'GoodDeed'
 
   TITLES = {
     'Rep' => 'Representative',

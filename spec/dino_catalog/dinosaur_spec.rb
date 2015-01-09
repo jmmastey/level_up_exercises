@@ -17,12 +17,12 @@ describe Dinosaur do
     end
 
     context "when options are passed" do
-        [:name, :period, :diet, :weight, :ambulation, :description].each do |attribute|
-          it "sets the #{attribute}" do
-            expect(dinosaur.send(attribute)).to_not be_nil
-          end
+      [:name, :period, :diet, :weight, :ambulation, :description].each do |attribute|
+        it "sets the #{attribute}" do
+          expect(dinosaur.send(attribute)).to_not be_nil
         end
       end
+    end
 
     context "when options are not passed" do
       let(:options) {{}}
@@ -37,6 +37,11 @@ describe Dinosaur do
   describe "#to_hash" do
     it "converts the object to a hash" do
       expect(dinosaur.to_hash).to be_a_kind_of(Hash)
+    end
+    [:name, :period, :diet, :weight, :ambulation, :description].each do |attribute|
+      it "contains the key :#{attribute}" do
+        expect(dinosaur.to_hash).to have_key(attribute)
+      end
     end
   end
 end

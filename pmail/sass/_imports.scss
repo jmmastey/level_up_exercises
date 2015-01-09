@@ -4,12 +4,10 @@
 
 @import 'helpers/variables';
 @import 'base/base-fonts';
-@import 'helpers/functions';
 @import 'helpers/mixins';
 @import 'layout/mediaqueries';
 
 @import 'layout/grid';
-@import 'components/module';
 @import 'components/components';
 
 @import 'layout/header';

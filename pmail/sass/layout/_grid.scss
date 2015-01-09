@@ -3,7 +3,7 @@
 \*------------------------------------*/
 
 body {
-  min-width: 55rem; // Set if a min-width is needed
+  min-width: 55rem;
 }
 
 //Float all columns to the left
@@ -24,7 +24,6 @@ body {
   > section, > footer {
       padding: $pad 5% $pad*2 5%;
   }
-
 }
 
 //Column widths
@@ -52,6 +51,3 @@ body {
 .col-3-5 {
   width: 60%;
 }
-
-// Insert any exceptions here
-

@@ -1,13 +1,11 @@
 .icon {
-  width: 14px;
-  height: 14px;
+  @include icon-size(14px, 14px)
 }
 
 .app-control {
 
   .icon {
-    width: 8px;
-    height: 8px;
+    @include icon-size(8px, 8px);
 
     use {
       fill: $orange-red;
@@ -18,8 +16,7 @@
 .search-query-box {
 
   svg {
-    width: 8px;
-    height: 8px;
+    @include icon-size(8px, 8px);
 
     use {
       fill: $button-gray;
@@ -44,21 +41,18 @@
 .selection-button {
 
   svg:first-of-type {
-    width: 14px;
-    height: 14px;
+    @include icon-size(14px, 14px);
   }
 
   svg:last-of-type {
-    width: 8px;
-    height: 8px;
+    @include icon-size(8px, 8px);
   }
 }
 
 .refresh-button {
 
   svg {
-    width: 14px;
-    height: 14px;
+    @include icon-size(14px, 14px);
 
     use {
       fill: $button-dark-gray;
@@ -69,24 +63,21 @@
 .more-button {
 
   svg {
-    width: 8px;
-    height: 8px;
+    @include icon-size(8px, 8px);
   }
 }
 
 .left-arrow-button, .right-arrow-button {
 
   svg {
-    width: 12px;
-    height: 12px;
+    @include icon-size(12px, 12px);
   }
 }
 
 .input-1-button {
 
   svg {
-    width: 12px;
-    height: 12px;
+    @include icon-size(12px, 12px);
 
     use {
       fill: $button-dark-gray;
@@ -97,16 +88,14 @@
 .input-2-button {
 
   svg {
-    width: 8px;
-    height: 8px;
+    @include icon-size(8px, 8px);
   }
 }
 
 .settings-button {
 
   svg:first-of-type {
-    width: 16px;
-    height: 16px;
+    @include icon-size(16px, 16px);
 
     use {
       fill: $button-dark-gray;
@@ -114,8 +103,7 @@
   }
 
   svg:last-of-type {
-    width: 8px;
-    height: 8px;
+    @include icon-size(8px, 8px);
   }
 }
 
@@ -124,15 +112,13 @@
   button {
 
     svg {
-      width: 16px;
-      height: 16px;
+      @include icon-size(16px, 16px);
     }
   }
 
   p {
     svg {
-      width: 8px;
-      height: 8px;
+      @include icon-size(8px, 8px);
     }
   }
 }

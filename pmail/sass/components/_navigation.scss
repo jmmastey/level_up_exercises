@@ -22,3 +22,10 @@ nav {
     }
   }
 }
+
+.secondary-links a {
+
+  &:active, &:hover {
+    text-decoration: underline;
+  }
+}

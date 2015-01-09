@@ -30,7 +30,8 @@
 .control-button {
   @extend .button;
   background: $light-gray-gradient;
-  border: 1px solid lighten($dark-gray, .8);
+  //border: 1px solid lighten($dark-gray, .8);
+  @include border(lighten($dark-gray, .8));
   border-radius: 2px;
   padding: .4rem;
   margin-right: 0.8rem;

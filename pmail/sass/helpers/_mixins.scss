@@ -16,3 +16,10 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
+// Icon Mixins
+
+@mixin icon-size($width, $height) {
+  width: $width;
+  height: $height;
+}

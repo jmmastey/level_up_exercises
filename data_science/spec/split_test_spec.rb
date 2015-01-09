@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe DataScience::SplitTest do
   let (:split_test) do
     cohort_a, cohort_b = load_cohort_data
-    split_test = DataScience::SplitTest.new(cohort_a, cohort_b)
+    DataScience::SplitTest.new(cohort_a, cohort_b)
   end
 
   describe '#new' do

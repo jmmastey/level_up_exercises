@@ -4,7 +4,7 @@ class DataScience::SplitTest
   def initialize(cohort_a, cohort_b)
     @cohort_a = cohort_a
     @cohort_b = cohort_b
-    @test     = ABAnalyzer::ABTest.new(values)
+    @test     = ABAnalyzer::ABTest.new(cohort_values)
   end
 
   def chisquare_p_value
@@ -17,7 +17,7 @@ class DataScience::SplitTest
 
   private
 
-  def values
+  def cohort_values
     {
       cohort_a: {
         sample_size: @cohort_a.trials,

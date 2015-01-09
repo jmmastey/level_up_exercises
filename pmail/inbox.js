@@ -159,8 +159,8 @@ function dropdown_align_content(data)
     var ideal_x_pos = align_method(data);
     var x_pos = Math.min(ideal_x_pos, max_x_pos);
 
-    content.node.css('top', (parent.top + parent.node.outerHeight()) + "px");
-    content.node.css('left', x_pos + "px");
+    content.node.css('top', parent.top + parent.node.outerHeight());
+    content.node.css('left', x_pos);
   }
 }
 

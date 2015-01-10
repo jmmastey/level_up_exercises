@@ -391,16 +391,16 @@ body {
   border-top: none;
 }
 
+.mailbox-list-row:focus {
+  border-left: 3px solid #4285f4;
+}
+
 .mailbox-list-row.current {
   border-left: 3px solid #4285f4;
 }
 
-.mailbox-list-handle > img {
-  visibility: hidden;
-}
-
-.mailbox-list-row:hover .mailbox-list-handle > img {
-  visibility: visible;
+.mailbox-list-row:hover > .mailbox-list-handle {
+  background: no-repeat url("graphics/grippy_large.png");
 }
 
 .mailbox-list-select {

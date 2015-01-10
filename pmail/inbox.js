@@ -6,6 +6,8 @@ function init()
   init_checkboxes();
   init_radiobuttons();
   init_rollups();
+  init_grid_handles();
+  init_grid_rows();
 }
 
 var CLS_CONTROL_ACTIVE = "control-active";
@@ -33,6 +35,10 @@ var CLS_MNI_REPLACE_LABEL = "replace-label";
 
 var CLS_RUB_CONTROL = "rollup-button";
 var ATR_RUB_TARGET = "rollup-target";
+
+var CLS_GDH_CONTROL = "mailbox-list-handle";
+var CLS_GRW_CONTROL = "mailbox-list-row";
+var CLS_GRD_CONTROL = "mailbox-list";
 
 var CBK_ON_ACTUATE = "control-on-actuate";
 var CBK_ON_ACTIVATE = "control-on-activate";
@@ -315,4 +321,39 @@ function rollup_toggle(rollup)
 {
   var target_selector = rollup.attr(ATR_RUB_TARGET);
   $(target_selector).toggleClass(CLS_STE_COLLAPSED);
+}
+
+// GRID 
+
+function init_grid_handles()
+{
+  $(dot(CLS_GDH_CONTROL)).bind("click", grid_handle_click);
+}
+
+function grid_handle_click(event)
+{
+  not_implemented();
+}
+
+var Grids = [];
+
+function init_grid_rows()
+{
+  $(dot(CLS_GRW_CONTROL)).on('keypress', grid_row_keypress);
+  Grids = $(dot(CLS_GRD_CONTROL));
+}
+
+function grid_row_keypress(event)
+{
+  switch(event.which)
+  {
+    case 40: $(this).next().focus();
+  }
+}
+
+// UTILITIES
+
+function not_implemented()
+{
+  alert("OPERATION NOT IMPLEMENTED");
 }

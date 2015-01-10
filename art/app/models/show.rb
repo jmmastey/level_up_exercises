@@ -18,12 +18,13 @@ class Show < ActiveRecord::Base
   end
 
   def self.recently_reviewed(limit)
-    connection.execute("select distinct show_id from (
-      select show_id from reviews
+    connection.execute("select show_id from (
+      select show_id, reviews.created_at from reviews
         join performances on performances.id = reviews.performance_id
         join shows on shows.id = performances.show_id
+      group by show_id, reviews.created_at
       order by reviews.created_at desc
-      ) t limit #{limit}").map { |s| s['show_id'] }
+      limit #{limit}) t").map { |s| s['show_id'] }
   end
 
   def num_reviews

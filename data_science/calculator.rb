@@ -6,6 +6,10 @@ class Calculator
     build_experiments
   end
 
+  def experiment
+    @experiment ||= Experiment.new(@file)
+  end
+
   def build_experiments
     experiment.data.each_key do |cohort|
       experiment.observed_conversion_rate(cohort)
@@ -40,15 +44,11 @@ class Calculator
   end
 
   def total_visits
-    visits_for_experiment.inject(0) do |sum, (_k, v)|
-      sum + v
-    end
+    visits_for_experiment.values.inject(:+)
   end
 
   def total_conversions
-    conversions_for_experiment.inject(0) do |sum, (_k, v)|
-      sum + v
-    end
+    conversions_for_experiment.values.inject(:+)
   end
 
   def expected_conversion_rate_for_experiments
@@ -98,9 +98,5 @@ class Calculator
     chi_squared_for_experiments.inject(0) do |sum, (_k, v)|
       sum + v
     end
-  end
-
-  def experiment
-    @experiment ||= Experiment.new(@file)
   end
 end

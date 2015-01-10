@@ -1,0 +1,43 @@
+require "factory_girl"
+require_relative "connection"
+require_relative "factories"
+
+def generate_ratings(user)
+  beers = Beer.sample(50)
+  beers.each do |beer|
+    FactoryGirl.create(:rating,
+                       user: user,
+                       beer: beer)
+  end
+end
+
+Rake::TaskManager.record_task_metadata = true
+
+task :default do
+  system("rake -sT")
+end
+
+namespace :db do
+  desc "Deletes all records from the DB"
+  task :clear do
+    puts "Clearing records..."
+    Rating.delete_all
+    Review.delete_all
+    User.delete_all
+    Beer.delete_all
+    Brewery.delete_all
+    Address.delete_all
+  end
+
+  desc "Generates all models (except reviews)"
+  task :populate do
+    puts "Creating breweries and beers..."
+    FactoryGirl.create_list(:brewery, 500, :with_beers)
+    puts "Creating users..."
+    users = FactoryGirl.create_list(:user, 3000)
+    puts "Generating ratings..."
+    ActiveRecord::Base.transaction do
+      users.each { |user| generate_ratings(user) }
+    end
+  end
+end

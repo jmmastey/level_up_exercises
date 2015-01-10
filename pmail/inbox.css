@@ -3,6 +3,7 @@ body {
   background-color: white;
   margin: 0px;
   font-family: sans-serif;
+  font-size: 20px;
 }
 
 /* LAYOUT */
@@ -15,7 +16,7 @@ body {
   height: 80px;
   padding:-top: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #c0c0c0;
+  border-bottom: 1px solid #e5e5e5;
   margin-bottom: 4px;
   box-sizing: border-box;
   background-color: #f5f5f5;
@@ -31,17 +32,17 @@ body {
   top: 15px;
   left: 10px;
   width: 100px;
-  font-size: 40px; 
+  font-size: 40px;
   vertical-align: middle;
   margin: 0;
 }
 
-#TitleHeader > h2 { 
+#TitleHeader > h2 {
   position: absolute;
   top: 15px;
   left: 120px;
   width: 145px;
-  font-size: 18px;
+  font-size: 20px;
   vertical-align: middle;
   margin: 0;
 }
@@ -72,7 +73,7 @@ body {
   position: relative;
   display: block;
   width: 100%;
-  border: 1px solid #c0c0c0;
+  border: 1px solid #c5c5c5;
   box-sizing: border-box;
 }
 
@@ -86,9 +87,9 @@ body {
   background: white;
 }
 
-.mailsearch-textfield > input[type="text"] { 
-  font-size: 18px;
-  width: 100%; 
+.mailsearch-textfield > input[type="text"] {
+  font-size: 20px;
+  width: 100%;
   height: 100%;
   padding: 10px;
   box-sizing: border-box;
@@ -104,6 +105,10 @@ body {
   box-sizing: border-box;
   border: none;
   background: white;
+}
+
+.mailsearch-dropdown.arrow:after {
+  margin-left: 0px;
 }
 
 .mailsearch-submit {
@@ -145,7 +150,7 @@ body {
   position: relative;
   display: inline-block;
   text-align: right;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 #AppControls {
@@ -153,8 +158,8 @@ body {
   position: fixed;
   top: 82px;
   padding: 0px 10px 0px 0px;
-  border-bottom: 1px solid black;
-  height: 65px;
+  border-bottom: 1px solid #e5e5e5;
+  height: 60px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -191,12 +196,14 @@ body {
   box-sizing: border-box;
 }
 
-.arrow {
+.arrow:after {
   position: relative;
   top: 0.8em;
-  border-top: 5px solid black;
-  border-left: 5px dashed transparent;
-  border-right: 5px dashed transparent;
+  margin-left: 5px;
+  content: "";
+  border-top: 6px solid black;
+  border-left: 6px dashed transparent;
+  border-right: 6px dashed transparent;
 }
 
 .spaced {
@@ -316,11 +323,16 @@ body {
 }
 
 .arrow-button {
-  background-position: -85px -127px;
+  background-position: -85px -129px;
 }
 
 .arrow-button:hover {
-  background-position: -108px -127px;
+  background-position: -108px -129px;
+}
+
+a.dropdown-button {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Thumbnail list  */
@@ -361,26 +373,27 @@ body {
 }
 
 .mailbox-list {
-  border-collapse: collapse; 
+  border-collapse: collapse;
+  empty-cells: show;
 }
 
 .mailbox-header {
   margin-top: 20px;
   height: 40px;
-  font-size: 18px;
+  font-size: 20px;
   border-bottom: 1px solid #e5e5e5;
 }
 
 .mailbox-list-row  {
-  height: 33px;
+  height: 30px;
   border-bottom: 1px solid #e5e5e5;
   border-top: 1px solid #e5e5e5;
   border-left: 3px solid transparent;
 }
 
 .mailbox-list-row > td {
-  line-height: 12px;
-  padding: 0px 5px 0px 0px;
+  padding: 0px 10px 0px 0px;
+  vertical-align: middle;
 }
 
 .mailbox-list-row > td:last-child {
@@ -403,41 +416,49 @@ body {
   background: no-repeat url("graphics/grippy_large.png");
 }
 
-.mailbox-list-select {
-  min-width: 28px;
+td.mailbox-list-select {
   text-align: center;
+  padding-right: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
-.mailbox-list-synopsis {
+td.mailbox-list-synopsis {
   width: 70%;
 }
 
-.mailbox-list-sender { width: 30%; }
+td.mailbox-list-sender { width: 30%; }
 
-.mailbox-list-fav {
+td.mailbox-list-fav {
   min-width: 23px;
-  text-align: center;
+  padding-right: 5px;
+  background: no-repeat url('graphics/star4.png');
+  background-size: 23px 23px;
+  background-position: center center;
 }
 
-.mailbox-list-fav > img {
-  height: 20px;
-  width: 20px;
+td.mailbox-list-fav.starred {
+  background-image: url('graphics/star-lit4.png');
 }
 
-.mailbox-list-important {
+td.mailbox-list-important {
   min-width: 25px;
-  text-align: center;
+  padding-right: 10px;
+  background: no-repeat url("graphics/sprite_importance2.png");
+  background-size: 65px 65px;
+  background-position: 0px 2px;
+  background-clip: content-box;
+  background-origin: content-box;
 }
 
-.mailbox-list-important > img {
-  height: 20px;
-  width: 20px;
+td.mailbox-list-important.important {
+  background-position: -43.5px 2px;
 }
 
 .mailbox-message-unread { font-weight: bold; }
 
-.mailbox-message-preview {
-  font-weight: normal; 
+td.mailbox-message-preview {
+  font-weight: normal;
   color: #e5e5e5;
 }
 
@@ -450,7 +471,6 @@ body {
 
 .folder-item-alert { font-weight: bold; }
 
-/* A gray box with stuff inside  */
 .gray-box {
   background-color: #f5f5f5;
   display: block;
@@ -479,10 +499,10 @@ body {
 .checkbox {
   position: relative;
   display: inline-block;
-  top: 2px;
   width: 14px;
   height:  14px;
   border: 1px solid #a0a0a0;
+  box-sizing: border-box;
 }
 
 .checkbox > img {
@@ -498,7 +518,7 @@ body {
   visibility: visible;
 }
 
-.settings-button > .arrow {
+.settings-button.arrow:after {
   top: 0px;
 }
 
@@ -565,7 +585,7 @@ body {
 
 .simple-menu h2 {
   padding: 4px 30px 4px 5px;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .simple-menu p {
@@ -615,6 +635,46 @@ body {
   width: 100%;
   border: 1px solid #a0a0a0;
   margin-top: 5px;
+}
+
+/* ROLLUP CONTROL */
+
+a.rollup-button {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Decorations */
+
+.bold {
+  font-weight: bold;
+}
+
+.pre-arrow-down:before {
+  position: relative;
+  top: -4px;
+  margin-right: 3px;
+  content: "";
+  font-size: 0px;
+  line-height: 0px;
+  height: 0px;
+  width: 0px;
+  border-top: 6px solid black;
+  border-left: 6px dashed transparent;
+  border-right: 6px dashed transparent;
+}
+.pre-arrow-right:before {
+  position: relative;
+  top: -7px;
+  margin-right: 8.75px;
+  content: "";
+  font-size: 0px;
+  line-height: 0px;
+  height: 0px;
+  width: 0px;
+  border-left: 6px solid black;
+  border-top: 6px dashed transparent;
+  border-bottom: 6px dashed transparent;
 }
 
 /* STATES  */

@@ -6,7 +6,6 @@ function init()
   init_checkboxes();
   init_radiobuttons();
   init_rollups();
-  init_grid_handles();
   init_grid_rows();
 }
 
@@ -15,7 +14,6 @@ var CLS_CONTROL_ACTIVE = "control-active";
 var DPD_POS_METHOD = 'dropdown-position-method';
 
 var CLS_DPD_CONTROL = "dropdown-button";
-var CLS_STE_COLLAPSED = "collapsed";
 var CLS_DPD_ALIGN_RT = "dropdown-right-align";
 var CLS_DPD_ALIGN_LT = "dropdown-left-align";
 var CLS_DPD_ALIGN_CT = "dropdown-center-align";
@@ -36,13 +34,21 @@ var CLS_MNI_REPLACE_LABEL = "replace-label";
 var CLS_RUB_CONTROL = "rollup-button";
 var ATR_RUB_TARGET = "rollup-target";
 
-var CLS_GDH_CONTROL = "mailbox-list-handle";
-var CLS_GRW_CONTROL = "mailbox-list-row";
 var CLS_GRD_CONTROL = "mailbox-list";
+var CLS_GRW_CONTROL = "mailbox-list-row";
+var CLS_GDH_CONTROL = "mailbox-list-handle";
+var CLS_GDC_FAVORITE = "mailbox-list-fav";
+var CLS_GDC_IMPORTANT = "mailbox-list-important";
 
 var CBK_ON_ACTUATE = "control-on-actuate";
 var CBK_ON_ACTIVATE = "control-on-activate";
 var CBK_ON_DEACTIVATE = "control-on-deactivate";
+
+var CLS_PRE_ARROW_DOWN = "pre-arrow-down";
+var CLS_PRE_ARROW_RIGHT = "pre-arrow-right";
+
+var CLS_STE_COLLAPSED = "collapsed";
+var CLS_STE_CURRENT = "current";
 
 function dot(css_class) { return "." + css_class; }
 
@@ -82,6 +88,7 @@ dpd_position_methods[dot(CLS_DPD_ALIGN_CT)] = dropdown_center_align;
 function init_dropdowns()
 {
   all_dropdowns().bind("click", dropdown_click)
+  $(document).bind("click", dropdown_check_if_mouse_leaves);
 
   for (var css_selector in dpd_position_methods)
     $(css_selector).data(DPD_POS_METHOD,
@@ -131,7 +138,7 @@ function dropdown_align_params(parent, content)
 
 function dropdown_parent(element)
 {
-  return element.parents('.dropdown-frame').first().prev();
+  return element.closest('.dropdown-frame').prev();
 }
 
 function dropdown_close_parent(element)
@@ -198,6 +205,7 @@ function dropdown_open(button)
   control_activate(button);
   dropdown_set_content_position(button, content_pane);
   content_pane.removeClass(CLS_STE_COLLAPSED);
+  content_pane.focus();
 }
 
 function dropdown_toggle(control)
@@ -211,6 +219,20 @@ function dropdown_click(event)
   dropdown_toggle($(this))
 }
 
+function dropdown_check_if_mouse_leaves(event)
+{
+  var open_dropdowns = $(dot(CLS_DPD_CONTROL) + dot(CLS_CONTROL_ACTIVE));
+  var open_panes = open_dropdowns.map(
+    function() { return dropdown_content_pane($(this)); });
+
+  open_panes.each(function() {
+    if (! point_in_element(event.pageX, event.pageY, $(this)))
+      dropdown_close(dropdown_parent($(this)));
+  });
+}
+
+// MENU ITEMS
+
 function menu_item_click(event)
 {
   item = $(this);
@@ -222,7 +244,6 @@ function menu_item_replace_dropdown_label(item)
 {
   var parent = dropdown_parent(item);
   parent.text(item.text());
-  parent.append(' <span class="spaced arrow"></span>');
 }
 
 // CHECKBOX LOGIC
@@ -317,38 +338,97 @@ function rollup_click(event)
   rollup_toggle($(this));
 }
 
-function rollup_toggle(rollup)
+function rollup_content_pane(rollup)
 {
   var target_selector = rollup.attr(ATR_RUB_TARGET);
-  $(target_selector).toggleClass(CLS_STE_COLLAPSED);
+  return $(target_selector);
+}
+
+function rollup_rolled_up(rollup)
+{
+  return rollup_content_pane(rollup).hasClass(CLS_STE_COLLAPSED);
+}
+
+function rollup_roll_up(rollup)
+{
+  rollup.removeClass(CLS_PRE_ARROW_DOWN);
+  rollup.addClass(CLS_PRE_ARROW_RIGHT);
+  rollup_content_pane(rollup).addClass(CLS_STE_COLLAPSED);
+}
+
+function rollup_roll_down(rollup)
+{
+  rollup.removeClass(CLS_PRE_ARROW_RIGHT);
+  rollup.addClass(CLS_PRE_ARROW_DOWN);
+  rollup_content_pane(rollup).removeClass(CLS_STE_COLLAPSED);
+}
+
+function rollup_toggle(rollup)
+{
+  rollup_rolled_up(rollup) ? rollup_roll_down(rollup) : rollup_roll_up(rollup);
 }
 
 // GRID 
-
-function init_grid_handles()
-{
-  $(dot(CLS_GDH_CONTROL)).bind("click", grid_handle_click);
-}
 
 function grid_handle_click(event)
 {
   not_implemented();
 }
 
-var Grids = [];
-
 function init_grid_rows()
 {
-  $(dot(CLS_GRW_CONTROL)).on('keypress', grid_row_keypress);
-  Grids = $(dot(CLS_GRD_CONTROL));
+  $(dot(CLS_GRW_CONTROL)).bind('keydown', grid_row_keypress);
+  $(dot(CLS_GRW_CONTROL)).bind('click', grid_row_click);
+  $(dot(CLS_GDC_FAVORITE)).bind('click', grid_favorite_click);
+  $(dot(CLS_GDC_IMPORTANT)).bind('click', grid_important_click);
+  $(dot(CLS_GDH_CONTROL)).bind("click", grid_handle_click);
+}
+
+function grid_row_set_current(row)
+{
+  $(dot(CLS_GRW_CONTROL) + dot(CLS_STE_CURRENT)).removeClass(CLS_STE_CURRENT);
+  row.addClass(CLS_STE_CURRENT);
+  row.find(dot(CLS_GDH_CONTROL) + ' > a').focus();
+}
+
+function grid_row_click(event)
+{
+  grid_row_set_current($(this));
 }
 
 function grid_row_keypress(event)
 {
   switch(event.which)
   {
-    case 40: $(this).next().focus();
+    case 38:
+      grid_row_set_current(grid_row_previous($(this)));
+      break;
+    case 40:
+      grid_row_set_current(grid_row_next($(this)));
+      break;
   }
+}
+
+function grid_row_previous(row)
+{
+  var prev = row.prev();
+  return (prev.length == 0) ? row : prev;
+}
+
+function grid_row_next(row)
+{
+  var next = row.next();
+  return (next.length == 0) ? row : next;
+}
+
+function grid_favorite_click(event)
+{
+  $(this).toggleClass('starred');
+}
+
+function grid_important_click(event)
+{
+  $(this).toggleClass('important');
 }
 
 // UTILITIES
@@ -356,4 +436,11 @@ function grid_row_keypress(event)
 function not_implemented()
 {
   alert("OPERATION NOT IMPLEMENTED");
+}
+
+function point_in_element(x, y, element)
+{
+  var elem_pos = element.offset();
+  return (x >= elem_pos.left) && (x <= elem_pos.left + element.width()) &&
+         (y >= elem_pos.top) && (y <= elem_pos.top + element.height());
 }

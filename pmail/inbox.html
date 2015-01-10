@@ -25,20 +25,20 @@
             <input type="text" value="">
           </div>
 
-          <button type="button" class="dropdown-button mailsearch-dropdown">
-            <span class="arrow"></span>
+          <button type="button" class="dropdown-button arrow mailsearch-dropdown">
+
           </button>
 
-          <article dropdown-parent-id="MailSearchDropdown" 
+          <article dropdown-parent-id="MailSearchDropdown"
                    class="dropdown-frame collapsed dropdown-left-align dropdown-match-width">
             <div class="dropdown-content padded">
-              <span class="to-right"><a class="close-dropdown">X</a></span>
+              <span class="to-right"><a href="#" class="close-dropdown">X</a></span>
               <label for="SearchFolders">Search</label>
 
               <button id="SearchFolders" type="button"
-                      class="control button dropdown-button align-middle">
+                      class="control button dropdown-button arrow align-middle">
                 All Mail
-                <span class="spaced arrow"></span>
+
               </button>
 
               <div class="dropdown-frame collapsed simple-menu">
@@ -88,7 +88,7 @@
               <div class="field-box">
               <label for="SearchTo">To</label>
               <input type="text" class="long-text-field" id="SearchTo">
-              
+
               </div>
               <div class="field-box">
               <label for="SearchSubject">Subject</label>
@@ -120,9 +120,9 @@
                 <label>Size</label>
 
                 <button type="button"
-                        class="control button dropdown-button align-middle">
+                        class="control button dropdown-button arrow align-middle">
                   greater than
-                  <span class="spaced arrow"></span>
+
                 </button>
                 <div class="dropdown-frame collapsed simple-menu">
                   <div class="dropdown-content">
@@ -136,9 +136,9 @@
                 <input type="text">
 
                 <button type="button"
-                        class="control button dropdown-button align-middle">
+                        class="control button dropdown-button arrow align-middle">
                   MB
-                  <span class="spaced arrow"></span>
+
                 </button>
                 <div class="dropdown-frame collapsed simple-menu">
                   <div class="dropdown-content">
@@ -157,9 +157,9 @@
                 <label>Date within</label>
 
                 <button type="button"
-                        class="control button dropdown-button align-middle">
+                        class="control button dropdown-button arrow align-middle">
                   1 day
-                  <span class="spaced arrow"></span>
+
                 </button>
                 <div class="dropdown-frame collapsed simple-menu">
                   <div class="dropdown-content">
@@ -179,7 +179,7 @@
               </div>
 
               <span class="drop to-right">
-                <a>Create filter with this search &gg;</a>
+                <a href="#">Create filter with this search &gg;</a>
               </span>
 
               <input class="control button"
@@ -188,7 +188,7 @@
             </div>
 
           </article>  <!-- #MailSearchDropdown -->
-        
+
         </div>
 
         <input class="mailsearch-submit"
@@ -203,7 +203,7 @@
       <section id="OtherAppsControl">
 
         <input type="image" src="graphics/home9.svg"
-         class="control dropdown-button dropdown-center-align" alt="Other Apps">
+         class="control dropdown-button arrow dropdown-center-align" alt="Other Apps">
         <article class="dropdown-frame collapsed application-menu">
           <ul class="thumbnails">
             <li class="thumbnail">
@@ -231,15 +231,15 @@
               <p class="thumbnail-caption">Feel dumb?</p>
             </li>
           </ul>
-          <div class="gray-box centered"><a>More</a></div>
+          <div class="gray-box centered"><a href="#">More</a></div>
         </article>
 
       </section> <!-- #OtherAppsControl -->
 
       <section id="AccountControl">
 
-        <a class="control dropdown-button dropdown-right-align">
-          your@self.net <span class="spaced arrow"></span>
+        <a href="#"  class="control dropdown-button arrow dropdown-right-align">
+          your@self.net
         </a>
         <article class="dropdown-frame collapsed account-menu">
           <div class="dropdown-content spacebox">
@@ -247,7 +247,7 @@
               <h1>Your Self</h1>
               <h2>your@self.net</h2>
             </hgroup>
-            <p><a>Account</a> - <a>Privacy</a></p>
+            <p><a href="#">Account</a> - <a href="#">Privacy</a></p>
           </div>
           <div class="gray-box dropdown-content">
             <button class="to-right control button">Sign Out</button>
@@ -264,10 +264,9 @@
 
     <div class="left-pane appcontrol-container">
 
-      <p class="appmode-menu control dropdown-button">
+      <a href="#" class="appmode-menu control dropdown-button arrow">
         Mail
-        <span class="spaced arrow"></span>
-      </p>
+      </a>
       <div class="simple-menu appmode-menu dropdown-frame collapsed dropdown-left-align">
         <div class="dropdown-content">
           <ul>
@@ -284,9 +283,9 @@
 
       <div class="app-controls-primary">
 
-        <div class="control button dropdown-button">
+        <div class="control button dropdown-button arrow">
           <div class="checkbox"><img src="graphics/checkmark.png"></div>
-          <span class="spaced arrow"></span>
+
         </div>
         <div class="simple-menu dropdown-frame collapsed dropdown-left-align">
           <div class="dropdown-content">
@@ -305,9 +304,8 @@
           <div class="icon refresh-icon"></div>
         </div>
 
-        <div class="control button dropdown-button">
+        <div class="control button dropdown-button arrow">
           More
-          <span class="spaced arrow"></span>
         </div>
         <div class="dropdown-frame simple-menu collapsed">
           <ul>
@@ -319,9 +317,9 @@
 
       </div> <!-- .app-controls-primary -->
 
-      <button class="to-right control button dropdown-button settings-button
+      <button class="to-right control button dropdown-button arrow settings-button
       dropdown-right-align">
-          <img src="graphics/wrench3.svg" alt="Settings"> <span class="spaced arrow"></span>
+          <img src="graphics/wrench3.svg" alt="Settings">
       </button>
 
       <div class="simple-menu dropdown-frame collapsed settings-menu">
@@ -379,12 +377,14 @@
 
       <div class="mailbox-header">
 
-        <p class="to-left control rollup-button" rollup-target="#UnreadMessages">
-          Unread <span class="spaced arrow"></span>
-        </p>
+        <a href="#"
+           class="to-left control rollup-button pre-arrow-down"
+           rollup-target="#UnreadMessages">
+          Unread
+        </a>
 
-        <div class="to-right control dropdown-button image-button arrow-button">
-        </div>
+        <a href="#" class="to-right control
+                           dropdown-button image-button arrow-button"></a>
         <div class="dropdown-frame collapsed simple-menu dropdown-right-align">
           <div class="dropdown-content">
 
@@ -430,33 +430,13 @@
         </div>
 
         <span class="to-right">
-          1-X of X
+          <span class="bold">1-8</span> of <span class="bold">8</span>
         </span>
       </div>
 
       <div>
 
         <table id="UnreadMessages" class="mailbox-list">
-          <tr class="mailbox-list-row mailbox-message-unread">
-            <td class="mailbox-list-handle"><a href="#"></a></td>
-            <td class="mailbox-list-select">
-              <div class="checkbox">
-                <img src="graphics/checkmark.png">
-              </div>
-            </td>
-            <td class="mailbox-list-fav">
-              <img src="graphics/star.svg">
-            </td>
-            <td class="mailbox-list-important">
-              <img src="graphics/indicator.svg">
-            </td>
-            <td class="mailbox-list-sender">Somebody, Important</td>
-            <td class="mailbox-list-synopsis">
-              This is important
-              <span class="mailbox-message-preview">- Well not really</span>
-            </td>
-            <td class="mailbox-list-when">3:35</td>
-          </tr>
 
           <tr class="mailbox-list-row mailbox-message-unread">
             <td class="mailbox-list-handle"><a href="#"></a></td>
@@ -465,12 +445,8 @@
                 <img src="graphics/checkmark.png">
               </div>
             </td>
-            <td class="mailbox-list-fav">
-              <img src="graphics/star.svg">
-            </td>
-            <td class="mailbox-list-important">
-              <img src="graphics/indicator.svg">
-            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
             <td class="mailbox-list-sender">Somebody, Important</td>
             <td class="mailbox-list-synopsis">
               This is important
@@ -487,11 +463,27 @@
               </div>
             </td>
             <td class="mailbox-list-fav">
-              <img src="graphics/star.svg">
             </td>
-            <td class="mailbox-list-important">
-              <img src="graphics/indicator.svg">
+            <td class="mailbox-list-important important">
             </td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
             <td class="mailbox-list-sender">Somebody, Important</td>
             <td class="mailbox-list-synopsis">
               This is important
@@ -508,10 +500,8 @@
               </div>
             </td>
             <td class="mailbox-list-fav">
-              <img src="graphics/star.svg">
             </td>
-            <td class="mailbox-list-important">
-              <img src="graphics/indicator.svg">
+            <td class="mailbox-list-important important">
             </td>
             <td class="mailbox-list-sender">Somebody, Important</td>
             <td class="mailbox-list-synopsis">
@@ -521,7 +511,25 @@
             <td class="mailbox-list-when">3:35</td>
           </tr>
 
-          <tr class="mailbox-list-row">
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+          <tr class="mailbox-list-row mailbox-message-unread">
             <td class="mailbox-list-handle"><a href="#"></a></td>
             <td class="mailbox-list-select">
               <div class="checkbox">
@@ -529,10 +537,8 @@
               </div>
             </td>
             <td class="mailbox-list-fav">
-              <img src="graphics/star.svg">
             </td>
-            <td class="mailbox-list-important">
-              <img src="graphics/indicator.svg">
+            <td class="mailbox-list-important important">
             </td>
             <td class="mailbox-list-sender">Somebody, Important</td>
             <td class="mailbox-list-synopsis">
@@ -542,7 +548,25 @@
             <td class="mailbox-list-when">3:35</td>
           </tr>
 
-          <tr class="mailbox-list-row">
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+          <tr class="mailbox-list-row mailbox-message-unread">
             <td class="mailbox-list-handle"><a href="#"></a></td>
             <td class="mailbox-list-select">
               <div class="checkbox">
@@ -550,10 +574,8 @@
               </div>
             </td>
             <td class="mailbox-list-fav">
-              <img src="graphics/star.svg">
             </td>
-            <td class="mailbox-list-important">
-              <img src="graphics/indicator.svg">
+            <td class="mailbox-list-important important">
             </td>
             <td class="mailbox-list-sender">Somebody, Important</td>
             <td class="mailbox-list-synopsis">

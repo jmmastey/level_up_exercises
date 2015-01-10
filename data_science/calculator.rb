@@ -15,7 +15,8 @@ class Calculator
   end
 
   def conversion_rate_for_experiments
-    experiment.group_stats.each_with_object({}) do |(cohort, values), conversions|
+    experiment.group_stats
+      .each_with_object({}) do |(cohort, values), conversions|
       conversions[cohort] = values["conversion_rate"]
     end
   end
@@ -51,7 +52,8 @@ class Calculator
   end
 
   def expected_conversion_rate_for_experiments
-    experiment.group_stats.each_with_object({}) do |(cohort, values), conversions|
+    experiment.group_stats
+      .each_with_object({}) do |(cohort, values), conversions|
       conversions[cohort] = values["expected_conversion_rate"]
     end
   end
@@ -61,23 +63,30 @@ class Calculator
   end
 
   def expected_conversions
-    experiment.data.each_with_object({}) do |(cohort, values), expected_conversions|
-      expected_conversions[cohort] = average_conversions * values["total_visits"]
+    experiment.data
+      .each_with_object({}) do |(cohort, values), expected_conversions|
+      expected_conversions[cohort] = average_conversions *
+        values["total_visits"]
     end
   end
 
   def expected_failures
-    experiment.data.each_with_object({}) do |(cohort, values), expected_failures|
-      expected_failures[cohort] = (1 - average_conversions) * values["total_visits"]
+    experiment.data
+      .each_with_object({}) do |(cohort, values), expected_failures|
+      expected_failures[cohort] = (1 - average_conversions) *
+        values["total_visits"]
     end
   end
 
   def chi_squared_for_experiments
     experiment.data.each_with_object({}) do |(cohort, values), chi_squares|
-      observed_conversion = values["conversions"]
-      observed_failure    = (values["total_visits"] - values["conversions"])
-      chi_squares[cohort] = (chi_squared_numerator(observed_conversion, expected_conversions[cohort]) +
-        chi_squared_numerator(observed_failure, expected_failures[cohort])).round(2)
+      observed_conversions = values["conversions"]
+      observed_failures    = (values["total_visits"] - values["conversions"])
+      e_conv               = expected_conversions[cohort]
+      e_failed             = expected_failures[cohort]
+      conversions_squared  = chi_squared_numerator(observed_conversions, e_conv)
+      failures_squared     = chi_squared_numerator(observed_failures, e_failed)
+      chi_squares[cohort]  = (conversions_squared + failures_squared).round(2)
     end
   end
 

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Calculator do
+  let(:calculator) { described_class.new("test_data.json") }
   before do
     file     = File.open("test_data.json", "w")
     raw_data = [{ date: "2015-01-01", cohort: "A", result: 1 },
@@ -16,7 +17,7 @@ describe Calculator do
   end
 
   it "calculates conversions for each experiment" do
-    conversions = described_class.new("test_data.json").conversion_rate_for_experiments
+    conversions = calculator.conversion_rate_for_experiments
     expect(conversions["B"]).to eq(0.4)
     expect(conversions["A"]).to eq(0.6667)
   end
@@ -36,6 +37,7 @@ describe Calculator do
     total = described_class.new("test_data.json").total_visits
     expect(total).to eq(8)
   end
+
   it "calculates total conversions experiment" do
     total = described_class.new("test_data.json").chi_square
     expect(total).to eq(0.53)

@@ -1,6 +1,7 @@
 require "spec_helper"
 
 describe Experiment do
+  let(:experiment) { described_class.new("test_data.json") }
 
   before do
     file     = File.open("test_data.json", "w")
@@ -17,15 +18,16 @@ describe Experiment do
   end
 
   it "calculates conversion rates" do
-    conversion_rate = described_class.new("test_data.json").observed_conversion_rate("B")
+    conversion_rate = experiment.observed_conversion_rate("B")
     expect(conversion_rate).to eq(0.4)
   end
 
   it "calculates standard error" do
-    expect(described_class.new("test_data.json").standard_error("B")).to eq(0.2191)
+    expect(experiment.standard_error("B")).to eq(0.2191)
   end
 
   it "calculates expected conversion rate" do
-    expect(described_class.new("test_data.json").expected_conversion_rate("B")).to eq(max: 40.44, min: 39.56)
+    expect(experiment.expected_conversion_rate("B")).to eq(max: 40.44,
+      min: 39.56)
   end
 end

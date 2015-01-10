@@ -23,11 +23,11 @@ describe JsonParser do
     end
 
     it "errors when invalid file is passed" do
-      expect { described_class.parse("bogus file") }.to raise_error ArgumentError
+      expect { JsonParser.parse("bogus file") }.to raise_error ArgumentError
     end
 
     it "errors when json is invalid" do
-      expect { described_class.parse(invalid_file) }.to raise_error JSON::ParserError
+      expect { JsonParser.parse(invalid_file) }.to raise_error JSON::ParserError
     end
 
     it "parses json and stores results in to hash with date as keys" do

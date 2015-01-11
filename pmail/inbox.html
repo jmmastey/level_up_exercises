@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf8" />
+<link rel="stylesheet" href="inbox.css" />
+<link rel="shortcut icon" href="FIXME.jpg" />
+<script src="jquery-1.11.2.js"></script>
+<script src="inbox.js"></script>
+</head>
+<body>
+  <header id="PageTop">
+
+    <hgroup id="TitleHeader" class="pageheader-container titleheader sidebar sidebar-indented">
+      <h1>Pmail</h1>
+      <h2 title="Mail">Spigot For Your Spam Beacon</h2>
+    </hgroup>
+
+    <section id="MailSearch" class="pagetop-container">
+
+      <form class="mailsearch-form pagetop-control-height">
+
+        <div id="MailSearchDropdown">
+
+          <div id="MailSearchTextField" class="mailsearch-textfield">
+            <input type="text" value="">
+          </div>
+
+          <button type="button" title="Show search options"
+            class="dropdown-button arrow mailsearch-dropdown">
+
+          </button>
+
+          <article dropdown-parent-id="MailSearchDropdown"
+                   class="dropdown-frame collapsed dropdown-left-align dropdown-match-width">
+            <div class="dropdown-content padded">
+              <span class="to-right">
+                <a href="#" class="control close-dropdown medgray">X</a>
+              </span>
+              <label for="SearchFolders">Search</label>
+
+              <button id="SearchFolders" type="button" title="All Mail"
+                      class="control button dropdown-button arrow align-middle">
+                All Mail
+
+              </button>
+
+              <div class="dropdown-frame collapsed simple-menu">
+                <div class="dropdown-content">
+
+                  <ul>
+                    <li class="simple-menu-item replace-label">All Mail</li>
+                    <li class="simple-menu-item replace-label">Inbox</li>
+                    <li class="simple-menu-item replace-label">Starred</li>
+                    <li class="simple-menu-item replace-label">Sent Mail</li>
+                    <li class="simple-menu-item replace-label">Drafts</li>
+                    <li class="simple-menu-item replace-label">Chats</li>
+                    <li class="simple-menu-item replace-label">Spam</li>
+                    <li class="simple-menu-item replace-label">Trash</li>
+                  </ul>
+                  <hr>
+                  <ul>
+                    <li class="simple-menu-item replace-label">Mail &amp; Spam &amp; Trash</li>
+                  </ul>
+                  <hr>
+                  <ul>
+                    <li class="simple-menu-item replace-label">Read Mail</li>
+                    <li class="simple-menu-item replace-label">Unread Mail</li>
+                  </ul>
+                  <hr>
+                  <ul>
+                    <li class="simple-menu-item replace-label">Social</li>
+                    <li class="simple-menu-item replace-label">Promotions</li>
+                    <li class="simple-menu-item replace-label">Updates</li>
+                    <li class="simple-menu-item replace-label">Forums</li>
+                  </ul>
+                  <hr>
+                  <ul>
+                    <li class="simple-menu-item replace-label">Stuff</li>
+                    <li class="simple-menu-item replace-label">Things</li>
+                    <li class="simple-menu-item replace-label">Et Cetera</li>
+                  </ul>
+
+                </div>
+              </div>
+
+              <div class="field-box">
+              <label for="SearchFrom">From</label>
+              <input type="text" class="long-text-field" id="SearchFrom">
+              </div>
+
+              <div class="field-box">
+              <label for="SearchTo">To</label>
+              <input type="text" class="long-text-field" id="SearchTo">
+
+              </div>
+              <div class="field-box">
+              <label for="SearchSubject">Subject</label>
+              <input type="text" class="long-text-field" id="SearchSubject">
+              </div>
+
+              <div class="field-box">
+              <label for="SearchHasWords">Has the words</label>
+              <input type="text" class="long-text-field" id="SearchHasWords">
+              </div>
+
+              <div class="field-box">
+              <label for="SearchDoesntHave">Doesn't have</label>
+              <input type="text" class="long-text-field" id="SearchDoesntHave">
+              </div>
+
+              <div class="field-box">
+                <input id="SearchHasAttachment" type="checkbox">
+                <label for="SearchHasAttachment">Has attachment</label>
+              </div>
+
+              <div class="field-box">
+                <input id="SearchNoChats" type="checkbox">
+                <label for="SearchNoChats">Don't include chats</label>
+              </div>
+
+              <div class="field-box">
+
+                <label>Size</label>
+
+                <button type="button"
+                        class="control button dropdown-button arrow align-middle">
+                  greater than
+
+                </button>
+                <div class="dropdown-frame collapsed simple-menu">
+                  <div class="dropdown-content">
+                    <ul>
+                      <li class="simple-menu-item replace-label">greater than</li>
+                      <li class="simple-menu-item replace-label">less than</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <input type="text">
+
+                <button type="button"
+                        class="control button dropdown-button arrow align-middle">
+                  MB
+
+                </button>
+                <div class="dropdown-frame collapsed simple-menu">
+                  <div class="dropdown-content">
+                    <ul>
+                      <li class="simple-menu-item replace-label">MB</li>
+                      <li class="simple-menu-item replace-label">KB</li>
+                      <li class="simple-menu-item replace-label">Bytes</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="field-box">
+
+                <label>Date within</label>
+
+                <button type="button"
+                        class="control button dropdown-button arrow align-middle">
+                  1 day
+
+                </button>
+                <div class="dropdown-frame collapsed simple-menu">
+                  <div class="dropdown-content">
+                    <ul>
+                      <li class="simple-menu-item replace-label">1 day</li>
+                      <li class="simple-menu-item replace-label">3 days</li>
+                      <li class="simple-menu-item replace-label">1 week</li>
+                      <li class="simple-menu-item replace-label">2 weeks</li>
+                      <li class="simple-menu-item replace-label">1 month</li>
+                      <li class="simple-menu-item replace-label">2 months</li>
+                      <li class="simple-menu-item replace-label">6 months</li>
+                      <li class="simple-menu-item replace-label">1 year</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+              <span class="drop to-right">
+                <a href="#" class="control medgray">
+                  Create filter with this search &gg;
+                </a>
+              </span>
+
+              <input class="control button" title="Search Mail"
+               type="image" src="graphics/magnifying4.svg" alt="Search Messages">
+
+            </div>
+
+          </article>  <!-- #MailSearchDropdown -->
+
+        </div>
+
+        <input class="mailsearch-submit"
+               type="image" src="graphics/magnifying4.svg" alt="Search Messages">
+
+      </form> <!-- .mailsearch-form -->
+
+    </section>  <!-- #MailSearch -->
+
+    <div id="PageTopControls" class="pagetop-container right-end">
+
+      <section id="OtherAppsControl">
+
+        <input type="image" src="graphics/home9.svg" title="Apps"
+         class="control dropdown-button arrow dropdown-center-align" alt="Other Apps">
+        <article class="dropdown-frame collapsed application-menu">
+          <ul class="thumbnails">
+            <li class="thumbnail">
+              <img class="thumbnail-img" src="graphics/calendar10.svg">
+              <p class="thumbnail-caption">What's Up</p>
+            </li>
+            <li class="thumbnail">
+              <img class="thumbnail-img" src="graphics/conversation2.svg">
+              <p class="thumbnail-caption">Blabber</p>
+            </li>
+            <li class="thumbnail">
+              <img class="thumbnail-img" src="graphics/information6.svg">
+              <p class="thumbnail-caption">Get a Clue</p>
+            </li>
+            <li class="thumbnail">
+              <img class="thumbnail-img" src="graphics/time4.svg">
+              <p class="thumbnail-caption">Are you Late?</p>
+            </li>
+            <li class="thumbnail">
+              <img class="thumbnail-img" src="graphics/wifi13.svg">
+              <p class="thumbnail-caption">On the Air</p>
+            </li>
+            <li class="thumbnail">
+              <img class="thumbnail-img" src="graphics/question7.svg">
+              <p class="thumbnail-caption">Feel dumb?</p>
+            </li>
+          </ul>
+          <div class="gray-box centered"><a href="#">More</a></div>
+        </article>
+
+      </section> <!-- #OtherAppsControl -->
+
+      <section id="AccountControl">
+
+        <a href="#" title="Account your@self.net"
+           class="darkgray control dropdown-button arrow dropdown-right-align">
+          your@self.net
+        </a>
+        <article class="dropdown-frame collapsed account-menu">
+          <div class="dropdown-content spacebox">
+            <hgroup>
+              <h1>Your Self</h1>
+              <h2>your@self.net</h2>
+            </hgroup>
+            <p><a href="#">Account</a> - <a href="#">Privacy</a></p>
+          </div>
+          <div class="gray-box dropdown-content">
+            <button class="to-right control button">Sign Out</button>
+            <button class="to-left control button">Add account</button>
+          </div>
+        </article>
+      </section> <!-- #AccountControl -->
+
+    </div> <!-- #PageTopControls -->
+
+  </header> <!-- #PageTop -->
+
+  <section id="AppControls">
+
+    <div class="left-pane appcontrol-container">
+
+      <a href="#" class="red appmode-menu control dropdown-button arrow">
+        Mail
+      </a>
+      <div class="simple-menu appmode-menu dropdown-frame collapsed dropdown-left-align">
+        <div class="dropdown-content">
+          <ul>
+            <li class="simple-menu-item">Mail</li>
+            <li class="simple-menu-item">Contacts</li>
+            <li class="simple-menu-item">Tasks</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="AppControlBar" class="right-pane right-end appcontrol-container">
+
+      <div class="app-controls-primary">
+
+        <div class="control button dropdown-button arrow" title="Select">
+          <div class="checkbox"><img src="graphics/checkmark.png"></div>
+
+        </div>
+        <div class="simple-menu dropdown-frame collapsed dropdown-left-align">
+          <div class="dropdown-content">
+            <ul>
+              <li class="simple-menu-item">All</li>
+              <li class="simple-menu-item">None</li>
+              <li class="simple-menu-item">Read</li>
+              <li class="simple-menu-item">Unread</li>
+              <li class="simple-menu-item">Starred</li>
+              <li class="simple-menu-item">Unstarred</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="control button" title="Refresh">
+          <div class="icon refresh-icon"></div>
+        </div>
+
+        <div class="control button dropdown-button arrow">
+          More
+        </div>
+        <div class="dropdown-frame simple-menu collapsed">
+          <ul>
+            <li class="simple-menu-item">Mark all as read</li>
+          </ul>
+          <hr>
+          <p class="ital gray">Select messages to see more actions</p>
+        </div>
+
+      </div> <!-- .app-controls-primary -->
+
+      <button class="to-right control button dropdown-button arrow
+                     settings-button dropdown-right-align" title="Settings">
+          <img src="graphics/wrench3.svg" alt="Settings">
+      </button>
+
+      <div class="simple-menu dropdown-frame collapsed settings-menu">
+        <div class="dropdown-content">
+          <h2>Display Density:</h2>
+          <ul class="radio-button-list">
+            <li class="radio-button-item">
+              <div class="radio-button" radio-group="display-density"></div>
+              Comfortable (On larger displays)
+            </li>
+            <li class="radio-button-item">
+              <div class="radio-button" radio-group="display-density"></div>
+              Cozy (On larger displays)
+            </li>
+            <li class="radio-button-item">
+              <div class="radio-button" radio-group="display-density"></div>
+              Compact (Current view)
+            </li>
+          </ul>
+          <hr>
+          <ul>
+            <li class="simple-menu-item">Configure Inbox</li>
+          </ul>
+          <hr>
+          <ul>
+            <li class="simple-menu-item">Preferences</li>
+            <li class="simple-menu-item">Themes</li>
+            <li class="simple-menu-item">Complain</li>
+            <li class="simple-menu-item">Panic</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>  <!-- #AppControlBar -->
+
+  </section> <!-- #AppControls -->
+
+  <div id="AppMain">
+
+    <section id="Folders" class="sidebar sidebar-indented">
+      <button class="control button compose-button">Compose</button>
+      <ul class="folder-list">
+        <li title="Inbox (8)"
+          class="folder-item folder-item-alert folder-selected">Inbox (8)</li>
+        <li title="Starred" class="folder-item">Starred</li>
+        <li title="Sent Mail" class="folder-item">Sent Mail</li>
+        <li title="Drafts (1)" class="folder-item folder-item-alert">Drafts (1)</li>
+        <li title="Stuff to keep" class="folder-item">Stuff to keep</li>
+        <li title="Not gonna read" class="folder-item">Not gonna read</li>
+        <li title="From da boss" class="folder-item">From da boss</li>
+        <li title="Spam" class="folder-item">Spam</li>
+      </ul>
+    </section>
+
+    <section id="Mailbox" class="content-container mailbox">
+
+      <div class="mailbox-header">
+
+        <a href="#"
+           class="to-left control rollup-button pre-arrow-down"
+           rollup-target="#UnreadMessages">
+          Unread
+        </a>
+
+        <a href="#" class="to-right control dropdown-right-align
+                           dropdown-button image-button arrow-button"></a>
+        <div class="dropdown-frame collapsed simple-menu">
+          <div class="dropdown-content">
+
+            <ul>
+              <li class="simple-menu-item">Show more messages</li>
+            </ul>
+
+            <hr>
+
+            <h2>Show up to:</h2>
+            <ul class="radio-button-list">
+              <li class="radio-button-item">
+                <div class="radio-button" radio-group="message-display-count"></div>
+                5 items
+              </li>
+              <li class="radio-button-item">
+                <div class="radio-button" radio-group="message-display-count"></div>
+                10 items
+              </li>
+              <li class="radio-button-item">
+                <div class="radio-button" radio-group="message-display-count"></div>
+                25 items
+              </li>
+              <li class="radio-button-item">
+                <div class="radio-button" radio-group="message-display-count"></div>
+                50 items
+              </li>
+            </ul>
+
+            <hr>
+
+            <ul>
+              <li class="simple-menu-item">Hide section when empty<li>
+            </ul>
+
+            <hr>
+
+            <ul>
+              <li class="simple-menu-item">View all Inbox settings<li>
+            </ul>
+
+          </div>
+        </div>
+
+        <span class="to-right message-count" title="Show more messages">
+          <span class="bold">1-10</span> of <span class="bold">10</span>
+        </span>
+      </div>
+
+      <div>
+
+        <table id="UnreadMessages" class="mailbox-list">
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row"> 
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row"> 
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row"> 
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+        </table>
+
+      </div>
+
+    </section> <!-- #Mailbox -->
+
+  </div> <!-- #AppMain -->
+</body>
+</html>

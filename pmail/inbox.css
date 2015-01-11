@@ -523,7 +523,7 @@ td.mailbox-list-important.important {
 }
 
 .checkbox.checked > img {
-  visibility: visible;
+  visibility: inherit;
 }
 
 .settings-button.arrow:after {

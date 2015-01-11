@@ -32,7 +32,9 @@
           <article dropdown-parent-id="MailSearchDropdown"
                    class="dropdown-frame collapsed dropdown-left-align dropdown-match-width">
             <div class="dropdown-content padded">
-              <span class="to-right"><a href="#" class="close-dropdown">X</a></span>
+              <span class="to-right">
+                <a href="#" class="control close-dropdown medgray">X</a>
+              </span>
               <label for="SearchFolders">Search</label>
 
               <button id="SearchFolders" type="button"
@@ -179,7 +181,9 @@
               </div>
 
               <span class="drop to-right">
-                <a href="#">Create filter with this search &gg;</a>
+                <a href="#" class="control medgray">
+                  Create filter with this search &gg;
+                </a>
               </span>
 
               <input class="control button"
@@ -238,7 +242,8 @@
 
       <section id="AccountControl">
 
-        <a href="#"  class="control dropdown-button arrow dropdown-right-align">
+        <a href="#" class="darkgray control
+                           dropdown-button arrow dropdown-right-align">
           your@self.net
         </a>
         <article class="dropdown-frame collapsed account-menu">
@@ -264,7 +269,7 @@
 
     <div class="left-pane appcontrol-container">
 
-      <a href="#" class="appmode-menu control dropdown-button arrow">
+      <a href="#" class="red appmode-menu control dropdown-button arrow">
         Mail
       </a>
       <div class="simple-menu appmode-menu dropdown-frame collapsed dropdown-left-align">
@@ -360,9 +365,9 @@
   <div id="AppMain">
 
     <section id="Folders" class="sidebar sidebar-indented">
-      <button class="control plainbutton">COMPOSE</button>
+      <button class="control button compose-button">Compose</button>
       <ul class="folder-list">
-        <li class="folder-item folder-item-alert folder-item-inbox">Inbox (8)</li>
+        <li class="folder-item folder-item-alert folder-selected">Inbox (8)</li>
         <li class="folder-item">Starred</li>
         <li class="folder-item">Sent Mail</li>
         <li class="folder-item folder-item-alert">Drafts (1)</li>
@@ -383,9 +388,9 @@
           Unread
         </a>
 
-        <a href="#" class="to-right control
+        <a href="#" class="to-right control dropdown-right-align
                            dropdown-button image-button arrow-button"></a>
-        <div class="dropdown-frame collapsed simple-menu dropdown-right-align">
+        <div class="dropdown-frame collapsed simple-menu">
           <div class="dropdown-content">
 
             <ul>
@@ -429,8 +434,8 @@
           </div>
         </div>
 
-        <span class="to-right">
-          <span class="bold">1-8</span> of <span class="bold">8</span>
+        <span class="to-right message-count">
+          <span class="bold">1-10</span> of <span class="bold">10</span>
         </span>
       </div>
 
@@ -455,6 +460,7 @@
             <td class="mailbox-list-when">3:35</td>
           </tr>
 
+
           <tr class="mailbox-list-row mailbox-message-unread">
             <td class="mailbox-list-handle"><a href="#"></a></td>
             <td class="mailbox-list-select">
@@ -462,10 +468,8 @@
                 <img src="graphics/checkmark.png">
               </div>
             </td>
-            <td class="mailbox-list-fav">
-            </td>
-            <td class="mailbox-list-important important">
-            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
             <td class="mailbox-list-sender">Somebody, Important</td>
             <td class="mailbox-list-synopsis">
               This is important
@@ -492,6 +496,7 @@
             <td class="mailbox-list-when">3:35</td>
           </tr>
 
+
           <tr class="mailbox-list-row mailbox-message-unread">
             <td class="mailbox-list-handle"><a href="#"></a></td>
             <td class="mailbox-list-select">
@@ -499,10 +504,8 @@
                 <img src="graphics/checkmark.png">
               </div>
             </td>
-            <td class="mailbox-list-fav">
-            </td>
-            <td class="mailbox-list-important important">
-            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
             <td class="mailbox-list-sender">Somebody, Important</td>
             <td class="mailbox-list-synopsis">
               This is important
@@ -529,6 +532,7 @@
             <td class="mailbox-list-when">3:35</td>
           </tr>
 
+
           <tr class="mailbox-list-row mailbox-message-unread">
             <td class="mailbox-list-handle"><a href="#"></a></td>
             <td class="mailbox-list-select">
@@ -536,10 +540,8 @@
                 <img src="graphics/checkmark.png">
               </div>
             </td>
-            <td class="mailbox-list-fav">
-            </td>
-            <td class="mailbox-list-important important">
-            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
             <td class="mailbox-list-sender">Somebody, Important</td>
             <td class="mailbox-list-synopsis">
               This is important
@@ -566,6 +568,7 @@
             <td class="mailbox-list-when">3:35</td>
           </tr>
 
+
           <tr class="mailbox-list-row mailbox-message-unread">
             <td class="mailbox-list-handle"><a href="#"></a></td>
             <td class="mailbox-list-select">
@@ -573,10 +576,44 @@
                 <img src="graphics/checkmark.png">
               </div>
             </td>
-            <td class="mailbox-list-fav">
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
             </td>
-            <td class="mailbox-list-important important">
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
             </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row mailbox-message-unread">
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
             <td class="mailbox-list-sender">Somebody, Important</td>
             <td class="mailbox-list-synopsis">
               This is important

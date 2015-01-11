@@ -7,6 +7,7 @@ function init()
   init_radiobuttons();
   init_rollups();
   init_grid_rows();
+  init_folder_items();
 }
 
 var CLS_CONTROL_ACTIVE = "control-active";
@@ -39,6 +40,8 @@ var CLS_GRW_CONTROL = "mailbox-list-row";
 var CLS_GDH_CONTROL = "mailbox-list-handle";
 var CLS_GDC_FAVORITE = "mailbox-list-fav";
 var CLS_GDC_IMPORTANT = "mailbox-list-important";
+
+var CLS_FOL_ITEM = "folder-item";
 
 var CBK_ON_ACTUATE = "control-on-actuate";
 var CBK_ON_ACTIVATE = "control-on-activate";
@@ -429,6 +432,13 @@ function grid_favorite_click(event)
 function grid_important_click(event)
 {
   $(this).toggleClass('important');
+}
+
+// FOLDER ITEMS
+
+function init_folder_items()
+{
+  $(dot(CLS_FOL_ITEM)).bind("click", not_implemented);
 }
 
 // UTILITIES

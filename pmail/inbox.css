@@ -1,9 +1,17 @@
 /* BASE */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   background-color: white;
   margin: 0px;
   font-family: sans-serif;
-  font-size: 20px;
+  font-size: 13px;
 }
 
 /* LAYOUT */
@@ -13,68 +21,48 @@ body {
   margin: 0px;
   padding: 0px;
   width: 100%;
-  height: 80px;
-  padding:-top: 10px;
-  padding-bottom: 10px;
+  height: 60px;
   border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 4px;
-  box-sizing: border-box;
   background-color: #f5f5f5;
+  line-height: 30px;
 }
 
 #TitleHeader {
   position: absolute;
-  height: 75px;
-}
-
-#TitleHeader > h1 {
-  position: absolute;
-  top: 15px;
-  left: 10px;
-  width: 100px;
-  font-size: 40px;
-  vertical-align: middle;
-  margin: 0;
-}
-
-#TitleHeader > h2 {
-  position: absolute;
-  top: 15px;
-  left: 120px;
-  width: 145px;
-  font-size: 20px;
-  vertical-align: middle;
-  margin: 0;
+  height: 100%;
+  padding: 10px;
+  text-align: center;
+  line-height: normal;
+  width: 202px;
 }
 
 .pagetop-container {
+  margin-top: 15px;
   height: 40px;
-  margin-top: 17.5px;
-  margin-bottom: 17.5px;
-  line-height: 40px;
 }
 
 #MailSearchDropdown {
   position: absolute;
   top: 0px;
   left: 0px;
-  right: 100px;
+  right: 60px;
   height: 100%;
 }
 
 #MailSearch {
   position: absolute;
   top: 0px;
-  left: 270px;
+  left: 202px;
   right: 400px;
 }
 
 .mailsearch-form {
   position: relative;
   display: block;
+  height: 30px;
   width: 100%;
+  max-width: 650px;
   border: 1px solid #c5c5c5;
-  box-sizing: border-box;
 }
 
 .mailsearch-textfield {
@@ -92,7 +80,6 @@ body {
   width: 100%;
   height: 100%;
   padding: 10px;
-  box-sizing: border-box;
   border: none;
 }
 
@@ -102,7 +89,6 @@ body {
   right: 0px;
   width: 25px;
   height: 100%;
-  box-sizing: border-box;
   border: none;
   background: white;
 }
@@ -116,13 +102,9 @@ body {
   top: 0px;
   right: 0px;
   height: 100%;
-  width: 100px;
+  width: 60px;
   background-color: #4285f4;
   color: white;
-}
-
-.pagetop-control-height {
-  height: 42px;
 }
 
 #PageTopControls {
@@ -136,7 +118,8 @@ body {
 #OtherAppsControl {
   display: inline-block;
   margin-right: 30px;
-  width:  50px;
+  width:  30px;
+  max-height: 30px;
   clear: none;
   height: 100%;
 }
@@ -150,31 +133,28 @@ body {
   position: relative;
   display: inline-block;
   text-align: right;
-  font-size: 20px;
+  font-size: 13px;
 }
 
 #AppControls {
   z-index: -1;
   position: fixed;
-  top: 82px;
-  padding: 0px 10px 0px 0px;
+  top: 60px;
+  padding: 4px 0px 0px 0px;
   border-bottom: 1px solid #e5e5e5;
-  height: 60px;
+  height: 48px;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .appcontrol-container {
-  height: 55px;
-  padding-top: 7.5px;
-  padding-bottom: 7.5px;
-  box-sizing: border-box;
+  height: 40px;
+  padding-top: 5px;
 }
 
 #AppMain {
   position: absolute;
-  top: 145px;
-  padding-top: 5px;
+  top: 108px;
+  padding-top: 9px;
   width: 100%;
   bottom: 0px;
   z-index: -2;
@@ -183,27 +163,17 @@ body {
 #Folders {
   position: absolute;
   display: inline-block;
-  width: 270px;
+  width: 202px;
+  padding-left: 31px;
 }
 
 #Mailbox {
   position: absolute;
   top: 0px;
-  left: 270px;
+  left: 202px;
   right: 0px;
   bottom: 0px;
-  padding-right: 25px;
-  box-sizing: border-box;
-}
-
-.arrow:after {
-  position: relative;
-  top: 0.8em;
-  margin-left: 5px;
-  content: "";
-  border-top: 6px solid black;
-  border-left: 6px dashed transparent;
-  border-right: 6px dashed transparent;
+  padding-right: 12px;
 }
 
 .spaced {
@@ -223,13 +193,12 @@ body {
 .left-pane {
   position: absolute;
   left: 0px;
-  width: 270px;
-  box-sizing: border-box;
+  width: 202px;
 }
 
 .right-pane {
   position: absolute;
-  left: 270px;
+  left: 202px;
   right: 0px;
 }
 
@@ -244,14 +213,17 @@ body {
 
 .control.button {
   position: relative;
-  padding: 5px 2px 5px 2px;
-  line-height: 30px;
   background-color: #f5f5f5;
-  border: 1px solid #c0c0c0;
-  border-radius: 3px;
-  height: 40px;
-  min-width: 100px;
+  border: 1px solid #e5e5e5;
+  padding: 0px 8px;
+  line-height: 27px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #404040;
+  border-radius: 2px;
+  height: 29px;
   text-align: center;
+  min-width: 72px;
 }
 
 .control.align-middle {
@@ -259,12 +231,16 @@ body {
 }
 
 .control {
+  display: inline-block;
   vertical-align: top;
   white-space: nowrap;
   display: inline-block;
-  margin: 0px 10px 0px 0px;
-  box-sizing: border-box;
+  margin: 0px 12px 0px 0px;
   text-align: center;
+}
+
+.control:last-child {
+  margin-right: 0px;
 }
 
 .drop {
@@ -330,9 +306,8 @@ body {
   background-position: -108px -129px;
 }
 
-a.dropdown-button {
+a.control {
   text-decoration: none;
-  color: inherit;
 }
 
 /* Thumbnail list  */
@@ -348,7 +323,6 @@ a.dropdown-button {
   padding: 10px;
   text-align: center;
   border: 1px solid white;
-  box-sizing: border-box;
 }
 
 .thumbnail:hover {
@@ -368,6 +342,10 @@ a.dropdown-button {
 
 /* Mailbox  */
 
+.message-count {
+  font-size: 13px;
+}
+
 .mailbox {
   overflow: scroll;
 }
@@ -378,14 +356,16 @@ a.dropdown-button {
 }
 
 .mailbox-header {
-  margin-top: 20px;
-  height: 40px;
-  font-size: 20px;
+  height: 32px;
+  padding-left: 5px;
+  padding-top: 8px;
+  line-height: 17px;
+  font-size: 15px;
   border-bottom: 1px solid #e5e5e5;
 }
 
 .mailbox-list-row  {
-  height: 30px;
+  height: 26px;
   border-bottom: 1px solid #e5e5e5;
   border-top: 1px solid #e5e5e5;
   border-left: 3px solid transparent;
@@ -414,13 +394,17 @@ a.dropdown-button {
 
 .mailbox-list-row:hover > .mailbox-list-handle {
   background: no-repeat url("graphics/grippy_large.png");
+  background-size: 5px 25px;
 }
 
 td.mailbox-list-select {
   text-align: center;
   padding-right: 5px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-bottom: 6px;
+}
+
+td.mailbox-list-select > .checkbox {
+  top: 4.5px;
 }
 
 td.mailbox-list-synopsis {
@@ -431,9 +415,9 @@ td.mailbox-list-sender { width: 30%; }
 
 td.mailbox-list-fav {
   min-width: 23px;
-  padding-right: 5px;
+  padding-right: 15px;
   background: no-repeat url('graphics/star4.png');
-  background-size: 23px 23px;
+  background-size: 19px 19px;
   background-position: center center;
 }
 
@@ -442,34 +426,47 @@ td.mailbox-list-fav.starred {
 }
 
 td.mailbox-list-important {
-  min-width: 25px;
-  padding-right: 10px;
+  min-width: 35px;
+  padding-right: 15px;
   background: no-repeat url("graphics/sprite_importance2.png");
-  background-size: 65px 65px;
-  background-position: 0px 2px;
+  background-size: 58px 58px;
+  background-position: 0px -1px;
   background-clip: content-box;
   background-origin: content-box;
 }
 
 td.mailbox-list-important.important {
-  background-position: -43.5px 2px;
+  background-position: -38.5px -1px;
 }
 
 .mailbox-message-unread { font-weight: bold; }
 
-td.mailbox-message-preview {
+.mailbox-message-preview {
   font-weight: normal;
-  color: #e5e5e5;
+  color: #707070;
 }
 
 .folder-list {
   list-style-type: none;
   padding: 0px;
+  margin-top: 10px;
 }
 
-.folder-item-inbox { color: red; }
+.folder-item {
+  position: relative;
+  height: 18px;
+}
 
-.folder-item-alert { font-weight: bold; }
+.folder-item-alert {
+  font-weight: bold;
+}
+
+.folder-selected {
+  border-left: 4px solid #d14836;
+  margin-left: -31px;
+  padding-left: 27px;
+  color: #d14836;
+}
 
 .gray-box {
   background-color: #f5f5f5;
@@ -486,23 +483,28 @@ td.mailbox-message-preview {
 .icon {
   position: relative;
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 21px;
+  height: 21px;
   background: no-repeat url("graphics/whirly.png");
-  background-size: 30px 750px;
+  background-size: 21px 500px;
+  background-clip: content-box;
 }
 
 .refresh-icon {
-  background-position: 0 -295px;
+  background-position: 0 -192px;
 }
 
 .checkbox {
   position: relative;
   display: inline-block;
-  width: 14px;
-  height:  14px;
-  border: 1px solid #a0a0a0;
-  box-sizing: border-box;
+  width: 13px;
+  height:  13px;
+  border: 1px solid #c0c0c0;
+}
+
+.button > .checkbox {
+  position: relative;
+  top: 3px;
 }
 
 .checkbox > img {
@@ -527,7 +529,7 @@ td.mailbox-message-preview {
 }
 
 .account-menu h1,h2 {
-  font-size: 20px;
+  font-size: 15px;
   margin: 0px;
   font-weight: normal;
 }
@@ -542,32 +544,34 @@ td.mailbox-message-preview {
 
 .appmode-menu.dropdown-button {
   position: relative;
-  top: 10px;
-  margin-left: 30px;
-  color: red;
-  font-size: 25px;
+  margin-left: 31px;
+  font-size: 14pt;
+  line-height: 30px;
 }
 
 .appmode-menu ul > li:first-child {
-  color: red;
+  color: #d14836;
 }
 
 .application-menu { width: 400px; }
 
 .titleheader h1 {
-  font-size: 30px;
+  position: relative;
   float: left;
-  margin-right: 1em;
+  top: 7px;
+  font-size: 20px;
+  margin: 0px;
   color: orange;
 }
 
 .titleheader h2 {
   font-size: 15px;
-  display: inline;
+  margin: 0px;
   color: blue;
 }
 
 .simple-menu ul {
+  font-size: 13px;
   list-style-type: none;
   padding: 0px;
   min-width: 150px;
@@ -576,7 +580,7 @@ td.mailbox-message-preview {
 
 .simple-menu ul > li {
   position: relative;
-  padding: 4px 30px 4px 30px;
+  padding: 2px 30px 2px 30px;
 }
 
 .simple-menu ul > li:hover {
@@ -584,8 +588,8 @@ td.mailbox-message-preview {
 }
 
 .simple-menu h2 {
-  padding: 4px 30px 4px 5px;
-  font-size: 20px;
+  padding: 0px 30px 0px 5px;
+  font-size: 13px;
 }
 
 .simple-menu p {
@@ -623,8 +627,8 @@ td.mailbox-message-preview {
 .field-box {
   display: block;
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 4px;
+  margin-bottom: 2px;
 }
 
 .field-box > label {
@@ -634,7 +638,7 @@ td.mailbox-message-preview {
 .long-text-field {
   width: 100%;
   border: 1px solid #a0a0a0;
-  margin-top: 5px;
+  margin-top: 2px;
 }
 
 /* ROLLUP CONTROL */
@@ -650,6 +654,17 @@ a.rollup-button {
   font-weight: bold;
 }
 
+.arrow:after {
+  position: relative;
+  top: 0.7em;
+  margin-left: 5px;
+  content: "";
+  border-top: 4px solid;
+  border-left: 4px dashed transparent;
+  border-right: 4px dashed transparent;
+}
+
+
 .pre-arrow-down:before {
   position: relative;
   top: -4px;
@@ -659,22 +674,47 @@ a.rollup-button {
   line-height: 0px;
   height: 0px;
   width: 0px;
-  border-top: 6px solid black;
-  border-left: 6px dashed transparent;
-  border-right: 6px dashed transparent;
+  border-top: 4px solid black;
+  border-left: 4px dashed transparent;
+  border-right: 4px dashed transparent;
 }
 .pre-arrow-right:before {
   position: relative;
-  top: -7px;
-  margin-right: 8.75px;
+  top: -6px;
+  margin-right: 7px;
   content: "";
   font-size: 0px;
   line-height: 0px;
   height: 0px;
   width: 0px;
-  border-left: 6px solid black;
-  border-top: 6px dashed transparent;
-  border-bottom: 6px dashed transparent;
+  border-left: 4px solid black;
+  border-top: 4px dashed transparent;
+  border-bottom: 4px dashed transparent;
+}
+
+.button.compose-button {
+  background-color: #d14836;
+  color: white;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 115px;
+}
+
+.red {
+  color: #d14836;
+}
+
+.darkgray {
+  color: #404040;
+}
+
+.medgray {
+  color: #858585;
+}
+
+.ltgray {
+  color: #c5c5c5;
 }
 
 /* STATES  */

@@ -1,0 +1,5 @@
+== Chicago upcomming running events
+
+This app list all upcomming running event with 25 miles of Chicago. 
+
+The data sources are  [Active.com](http://www.active.com/running)

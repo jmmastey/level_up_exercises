@@ -1,0 +1,31 @@
+// Place all the styles related to the events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#wrapper{
+  width: 900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+#title_bar{
+  height: 180px;
+  background-image: url(image_path('running.png'));
+  color:white;
+  padding-top:100px;
+}
+#title_bar h1{
+  text-align:center;
+  font-size: 40px;
+}
+.btn-filter{
+  width:100px;
+}
+
+#wrapper form{
+  padding: 10px;
+}
+
+.active_page{
+  background-color: #428bca !important;
+  color: white !important;
+  cursor: default
+}

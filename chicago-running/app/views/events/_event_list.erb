@@ -1,0 +1,11 @@
+<% events = @data['results'] %>
+<% events.each do |event| %>
+  <tr class='event'><td class='col-md-2'><h4><%= event['activityStartDate'][0..9]%></h4></td>
+  <td><div class='event-row'>
+  <span class='col-xs-8'><h4><a href=<%= event['assetSeoUrls'][0]['urlAdr']%> target='_blank'><%= event['assetName'] %></a></h4></span>
+  <% place = event['place'] %>
+  <span class='col-xs-8'><%= "#{place['addressLine1Txt']}, #{place['cityName']} #{place['postalCode']}"%></span>
+  <% geoPoint = "#{place['geoPoint']['lat']}, #{place['geoPoint']['lon']}"%>
+  <span class='col-xs-8'><%= link_to image_tag('map.png',size: '20x20',:alt => 'direction from Google Map'), 'https://www.google.com/maps/dir/Current+Location/' + geoPoint, :target => '_blank' %></span>
+  </div></td></tr>
+<% end %>

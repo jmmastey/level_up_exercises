@@ -38,10 +38,14 @@ var ATR_RUB_TARGET = "rollup-target";
 var CLS_GRD_CONTROL = "mailbox-list";
 var CLS_GRW_CONTROL = "mailbox-list-row";
 var CLS_GDH_CONTROL = "mailbox-list-handle";
+var CLS_GDC_SELECT = "mailbox-list-select";
 var CLS_GDC_FAVORITE = "mailbox-list-fav";
 var CLS_GDC_IMPORTANT = "mailbox-list-important";
 
+var SEL_GDR_SELECT_CKBOX = dot(CLS_GDC_SELECT) + " > " + dot(CLS_CKB_CONTROL);
+
 var CLS_FOL_ITEM = "folder-item";
+var CLS_FOL_COMPOSE = "compose-button";
 
 var CBK_ON_ACTUATE = "control-on-actuate";
 var CBK_ON_ACTIVATE = "control-on-activate";
@@ -50,6 +54,7 @@ var CBK_ON_DEACTIVATE = "control-on-deactivate";
 var CLS_PRE_ARROW_DOWN = "pre-arrow-down";
 var CLS_PRE_ARROW_RIGHT = "pre-arrow-right";
 
+var CLS_STE_SELECTED = "selected";
 var CLS_STE_COLLAPSED = "collapsed";
 var CLS_STE_CURRENT = "current";
 
@@ -78,7 +83,7 @@ function control_run_callback(control, callback_name, args)
 
   var callback_args = Array.prototype.slice.call(arguments, 2);
   callback_args.unshift(control);
-  callback.apply(this, callback_args);
+  callback.apply(control, callback_args);
 }
 
 /* DROPDOWN CONTROLS */
@@ -260,17 +265,24 @@ function init_checkboxes()
 
 function checkbox_click(event)
 {
-  event.stopPropagation();
+  // event.stopPropagation(); - REMOVE ME
   checkbox_toggle($(this))
 }
 
-function checkbox_toggle(control)
+function checkbox_is_checked(checkbox)
 {
-  control_is_active(control) ? checkbox_uncheck(control) : checkbox_check(control);
+  return control_is_active(checkbox);
+}
+
+function checkbox_toggle(checkbox)
+{
+  checkbox_is_checked(checkbox) ? checkbox_uncheck(checkbox) : checkbox_check(checkbox);
 }
 
 function checkbox_check(checkbox)
 {
+  if (control_is_active(checkbox)) return;
+
   control_activate(checkbox);
   control_run_callback(checkbox, CBK_ON_ACTUATE);
   checkbox.addClass(CLS_CHECKED);
@@ -278,6 +290,8 @@ function checkbox_check(checkbox)
 
 function checkbox_uncheck(checkbox)
 {
+  if (! control_is_active(checkbox)) return;
+
   control_deactivate(checkbox);
   control_run_callback(checkbox, CBK_ON_ACTUATE);
   checkbox.removeClass(CLS_CHECKED);
@@ -385,6 +399,7 @@ function init_grid_rows()
   $(dot(CLS_GDC_FAVORITE)).bind('click', grid_favorite_click);
   $(dot(CLS_GDC_IMPORTANT)).bind('click', grid_important_click);
   $(dot(CLS_GDH_CONTROL)).bind("click", grid_handle_click);
+  $(SEL_GDR_SELECT_CKBOX).data(CBK_ON_ACTUATE, grid_row_update_select_state);
 }
 
 function grid_row_set_current(row)
@@ -408,6 +423,9 @@ function grid_row_keypress(event)
       break;
     case 40:
       grid_row_set_current(grid_row_next($(this)));
+      break;
+    case 88:
+      grid_row_toggle_select($(this));
       break;
   }
 }
@@ -434,10 +452,52 @@ function grid_important_click(event)
   $(this).toggleClass('important');
 }
 
+function grid_row_select_checkbox(row)
+{
+  return row.find(SEL_GDR_SELECT_CKBOX);
+}
+
+function grid_row_selected(row)
+{
+  return checkbox_is_checked(grid_row_select_checkbox(row));
+}
+
+function grid_row_select(row)
+{
+  checkbox_check(grid_row_select_checkbox(row));
+}
+
+function grid_row_unselect(row)
+{
+  checkbox_uncheck(grid_row_select_checkbox(row));
+}
+
+function grid_row_toggle_select(row)
+{
+  var select_ckbox = grid_row_select_checkbox(row);
+
+  if (checkbox_is_checked(select_ckbox)) 
+    checkbox_uncheck(select_ckbox)
+  else
+    checkbox_check(select_ckbox);
+}
+
+function grid_row_update_select_state(event)
+{
+  var select_checkbox = $(this);
+  var row = select_checkbox.closest(dot(CLS_GRW_CONTROL));
+
+  if (checkbox_is_checked(select_checkbox))
+    row.addClass(CLS_STE_SELECTED)
+  else
+    row.removeClass(CLS_STE_SELECTED);
+}
+
 // FOLDER ITEMS
 
 function init_folder_items()
 {
+  $(dot(CLS_FOL_COMPOSE)).bind("click", not_implemented);
   $(dot(CLS_FOL_ITEM)).bind("click", not_implemented);
 }
 

@@ -12,7 +12,7 @@
 
     <hgroup id="TitleHeader" class="pageheader-container titleheader sidebar sidebar-indented">
       <h1>Pmail</h1>
-      <h2>Spigot For Your Spam Beacon</h2>
+      <h2 title="Mail">Spigot For Your Spam Beacon</h2>
     </hgroup>
 
     <section id="MailSearch" class="pagetop-container">
@@ -25,7 +25,8 @@
             <input type="text" value="">
           </div>
 
-          <button type="button" class="dropdown-button arrow mailsearch-dropdown">
+          <button type="button" title="Show search options"
+            class="dropdown-button arrow mailsearch-dropdown">
 
           </button>
 
@@ -37,7 +38,7 @@
               </span>
               <label for="SearchFolders">Search</label>
 
-              <button id="SearchFolders" type="button"
+              <button id="SearchFolders" type="button" title="All Mail"
                       class="control button dropdown-button arrow align-middle">
                 All Mail
 
@@ -186,7 +187,7 @@
                 </a>
               </span>
 
-              <input class="control button"
+              <input class="control button" title="Search Mail"
                type="image" src="graphics/magnifying4.svg" alt="Search Messages">
 
             </div>
@@ -206,7 +207,7 @@
 
       <section id="OtherAppsControl">
 
-        <input type="image" src="graphics/home9.svg"
+        <input type="image" src="graphics/home9.svg" title="Apps"
          class="control dropdown-button arrow dropdown-center-align" alt="Other Apps">
         <article class="dropdown-frame collapsed application-menu">
           <ul class="thumbnails">
@@ -242,8 +243,8 @@
 
       <section id="AccountControl">
 
-        <a href="#" class="darkgray control
-                           dropdown-button arrow dropdown-right-align">
+        <a href="#" title="Account your@self.net"
+           class="darkgray control dropdown-button arrow dropdown-right-align">
           your@self.net
         </a>
         <article class="dropdown-frame collapsed account-menu">
@@ -288,7 +289,7 @@
 
       <div class="app-controls-primary">
 
-        <div class="control button dropdown-button arrow">
+        <div class="control button dropdown-button arrow" title="Select">
           <div class="checkbox"><img src="graphics/checkmark.png"></div>
 
         </div>
@@ -305,7 +306,7 @@
           </div>
         </div>
 
-        <div class="control button">
+        <div class="control button" title="Refresh">
           <div class="icon refresh-icon"></div>
         </div>
 
@@ -322,8 +323,8 @@
 
       </div> <!-- .app-controls-primary -->
 
-      <button class="to-right control button dropdown-button arrow settings-button
-      dropdown-right-align">
+      <button class="to-right control button dropdown-button arrow
+                     settings-button dropdown-right-align" title="Settings">
           <img src="graphics/wrench3.svg" alt="Settings">
       </button>
 
@@ -367,14 +368,15 @@
     <section id="Folders" class="sidebar sidebar-indented">
       <button class="control button compose-button">Compose</button>
       <ul class="folder-list">
-        <li class="folder-item folder-item-alert folder-selected">Inbox (8)</li>
-        <li class="folder-item">Starred</li>
-        <li class="folder-item">Sent Mail</li>
-        <li class="folder-item folder-item-alert">Drafts (1)</li>
-        <li class="folder-item">Stuff to keep</li>
-        <li class="folder-item">Not gonna read</li>
-        <li class="folder-item">From da boss</li>
-        <li class="folder-item">Spam</li>
+        <li title="Inbox (8)"
+          class="folder-item folder-item-alert folder-selected">Inbox (8)</li>
+        <li title="Starred" class="folder-item">Starred</li>
+        <li title="Sent Mail" class="folder-item">Sent Mail</li>
+        <li title="Drafts (1)" class="folder-item folder-item-alert">Drafts (1)</li>
+        <li title="Stuff to keep" class="folder-item">Stuff to keep</li>
+        <li title="Not gonna read" class="folder-item">Not gonna read</li>
+        <li title="From da boss" class="folder-item">From da boss</li>
+        <li title="Spam" class="folder-item">Spam</li>
       </ul>
     </section>
 
@@ -434,7 +436,7 @@
           </div>
         </div>
 
-        <span class="to-right message-count">
+        <span class="to-right message-count" title="Show more messages">
           <span class="bold">1-10</span> of <span class="bold">10</span>
         </span>
       </div>
@@ -533,7 +535,25 @@
           </tr>
 
 
-          <tr class="mailbox-list-row mailbox-message-unread">
+          <tr class="mailbox-list-row"> 
+            <td class="mailbox-list-handle"><a href="#"></a></td>
+            <td class="mailbox-list-select">
+              <div class="checkbox">
+                <img src="graphics/checkmark.png">
+              </div>
+            </td>
+            <td class="mailbox-list-fav">&nbsp;</td>
+            <td class="mailbox-list-important">&nbsp;</td>
+            <td class="mailbox-list-sender">Somebody, Important</td>
+            <td class="mailbox-list-synopsis">
+              This is important
+              <span class="mailbox-message-preview">- Well not really</span>
+            </td>
+            <td class="mailbox-list-when">3:35</td>
+          </tr>
+
+
+          <tr class="mailbox-list-row"> 
             <td class="mailbox-list-handle"><a href="#"></a></td>
             <td class="mailbox-list-select">
               <div class="checkbox">
@@ -587,25 +607,7 @@
           </tr>
 
 
-          <tr class="mailbox-list-row mailbox-message-unread">
-            <td class="mailbox-list-handle"><a href="#"></a></td>
-            <td class="mailbox-list-select">
-              <div class="checkbox">
-                <img src="graphics/checkmark.png">
-              </div>
-            </td>
-            <td class="mailbox-list-fav">&nbsp;</td>
-            <td class="mailbox-list-important">&nbsp;</td>
-            <td class="mailbox-list-sender">Somebody, Important</td>
-            <td class="mailbox-list-synopsis">
-              This is important
-              <span class="mailbox-message-preview">- Well not really</span>
-            </td>
-            <td class="mailbox-list-when">3:35</td>
-          </tr>
-
-
-          <tr class="mailbox-list-row mailbox-message-unread">
+          <tr class="mailbox-list-row"> 
             <td class="mailbox-list-handle"><a href="#"></a></td>
             <td class="mailbox-list-select">
               <div class="checkbox">

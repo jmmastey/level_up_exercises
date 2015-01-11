@@ -369,15 +369,19 @@ a.control {
   border-bottom: 1px solid #e5e5e5;
   border-top: 1px solid #e5e5e5;
   border-left: 3px solid transparent;
+  background-color: #f5f5f5;
+}
+
+.mailbox-list-row.selected {
+  background-color: #f0f0c0;
 }
 
 .mailbox-list-row > td {
-  padding: 0px 10px 0px 0px;
   vertical-align: middle;
 }
 
 .mailbox-list-row > td:last-child {
-  padding-right: 30px;
+  padding-right: 20px;
 }
 
 .mailbox-list-row:first-child {
@@ -399,8 +403,7 @@ a.control {
 
 td.mailbox-list-select {
   text-align: center;
-  padding-right: 5px;
-  padding-bottom: 6px;
+  padding: 0px 5px 6px 6px;
 }
 
 td.mailbox-list-select > .checkbox {
@@ -414,8 +417,7 @@ td.mailbox-list-synopsis {
 td.mailbox-list-sender { width: 30%; }
 
 td.mailbox-list-fav {
-  min-width: 23px;
-  padding-right: 15px;
+  min-width: 27px;
   background: no-repeat url('graphics/star4.png');
   background-size: 19px 19px;
   background-position: center center;
@@ -426,7 +428,8 @@ td.mailbox-list-fav.starred {
 }
 
 td.mailbox-list-important {
-  min-width: 35px;
+  min-width: 39px;
+  padding-left: 2px;
   padding-right: 15px;
   background: no-repeat url("graphics/sprite_importance2.png");
   background-size: 58px 58px;
@@ -439,7 +442,10 @@ td.mailbox-list-important.important {
   background-position: -38.5px -1px;
 }
 
-.mailbox-message-unread { font-weight: bold; }
+.mailbox-message-unread {
+  font-weight: bold;
+  background-color: white;
+}
 
 .mailbox-message-preview {
   font-weight: normal;
@@ -510,8 +516,8 @@ td.mailbox-list-important.important {
 .checkbox > img {
   visibility: hidden;
   position: absolute;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
   top: -5px;
   left: -5px;
 }
@@ -699,6 +705,10 @@ a.rollup-button {
   text-transform: uppercase;
   font-weight: bold;
   width: 115px;
+}
+
+.compose-button:hover {
+  background-color: #c53727;
 }
 
 .red {

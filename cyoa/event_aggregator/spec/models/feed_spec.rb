@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Feed, :type => :model do
-pending "NOT UNTIL SELECTION CRITERIA ARE IMPLEMENTED"
 
   let(:feed) { FactoryGirl.create(:feed) }
   let(:owned_feed) { FactoryGirl.create(:feed, :with_owner) }

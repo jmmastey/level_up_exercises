@@ -66,6 +66,7 @@
             %li
               %button.dropdown-toggle
                 %i.fa.fa-square-o
+                %i.fa.fa-caret-down
               .dropdown-panel.hidden
                 %ul.dropdown-menu
                   %li.active
@@ -91,7 +92,7 @@
                     %a{ href: "javascript:;" } Mark All as Read
       %main.message-list
         - messages.each_with_index do |message, index|
-          %article.message#message{ id: index, class: message[:new?] ? "new" : nil }
+          %article.message#message{ id: index, class: message[:new?] ? "unread" : nil }
             .message-actions
               %input#selected_message{ type: :checkbox, name: "selected_message", id: index, value: index }><
               %label{ for: "selected_message_#{index}" }
@@ -103,7 +104,7 @@
         .left
           .line
             %strong 0% full
-          .line Using 150GB of your 500TB
+          .line Using 15GB of your 500TB
         .middle
           .line.segmented
             %span &copy;2015 Polish Dan

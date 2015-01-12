@@ -434,7 +434,7 @@ ul.sidebar-links li.active a {
   min-height: 1.5em;
 }
 /* line 358, ../sass/pmail.sass */
-.message.new {
+.message.unread {
   font-weight: bold;
 }
 /* line 361, ../sass/pmail.sass */

@@ -25,7 +25,6 @@
           %input{type: :search}></
           %a.dropdown-toggle{ type: :button, data: { target: "#search-dropdown" }}
             %i.fa.fa-caret-down
-            %i.fa.fa-caret-up
           .dropdown-panel.hidden#search-dropdown Advanced Search will go here
         %button.primary-button{ type: :submit }
           %i.fa.fa-search
@@ -40,7 +39,6 @@
             %a.dropdown-toggle{ href: "#", data: { target: "#account-dropdown" }}
               dkotowski@enova.com
               %i.fa.fa-caret-down
-              %i.fa.fa-caret-up
             .dropdown-panel.hidden.right#account-dropdown
               Account dropdown will go here
     %section.main-pane
@@ -58,7 +56,6 @@
               %button.dropdown-toggle{ data: { target: "#message-options-dropdown" }}
                 More
                 %i.fa.fa-caret-down
-                %i.fa.fa-caret-up
               .dropdown-panel.hidden#message-options-dropdown More options here
       %main.message-list
         - messages.each_with_index do |message, index|
@@ -97,7 +94,6 @@
               %a.dropdown-toggle{ href: "#", data: { target: "#mail-dropdown" } }
                 Mail
                 %i.fa.fa-caret-down
-                %i.fa.fa-caret-up
               .dropdown-panel.hidden#mail-dropdown
                 List options here
       .sidebar-main
@@ -117,7 +113,6 @@
             %a.dropdown-toggle{ href: "#", data: { target: "#more-links" } }
               More
               %i.fa.fa-caret-down
-              %i.fa.fa-caret-up
         %ul.sidebar-links.hidden#more-links
           %li
             %a{ href: "#" } Important

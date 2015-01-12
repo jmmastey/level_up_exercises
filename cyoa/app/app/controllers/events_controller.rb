@@ -9,8 +9,8 @@ class EventsController < ApplicationController
     @last_updated = Event.all.order('updated_at').last.updated_at.strftime("%d-%m-%Y")
     pull_events if @last_update != Time.now.strftime("%d-%m-%Y") || Event.all.count == 0
 
-    @events =  Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight)
-    @carousel = Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight+6.day).order('avg_price').take(5)
+    @events =  Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight).order('avg_price DESC')
+    @carousel = Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight+6.day).order('avg_price DESC').take(5)
   end
 
   # GET /events/1

@@ -9,5 +9,5 @@ Feature: Explode the Bomb
 
   Scenario: The bomb explodes
     When I enter the wrong deactivation code three times
-    Then the bomb explodes
+    Then the status indicator shows as detonated
     And the buttons do not work

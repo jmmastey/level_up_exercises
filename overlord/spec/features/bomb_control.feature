@@ -8,17 +8,10 @@ Feature: Control the bomb
 
   Scenario: Activate the bomb
     When I enter the right activation code
-    Then the bomb should activate
-
-  Scenario: Display the activated status
-    When I enter the right activation code
-    Then the status indicator should show as activated
-
-  Scenario: Display the deactivated status
-    When I enter the right deactivation code
-    Then the status indicator should show as deactivated
+    Then the status indicator shows as activated
 
   Scenario: Deactivate the bomb
     Given I enter the right activation code
+    And the status indicator shows as activated
     When I enter the right deactivation code
-    Then the bomb should deactivate
+    Then the status indicator shows as deactivated

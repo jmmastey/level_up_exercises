@@ -5,5 +5,5 @@ Feature: Boot the bomb
 
   Scenario: Boot the bomb without activating
     Given I have not booted the bomb
-    When I boot the bomb
-    Then the bomb should not be activated
+    When I have booted the bomb
+    Then the status indicator shows as deactivated

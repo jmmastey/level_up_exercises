@@ -17,19 +17,23 @@ ActiveRecord::Schema.define(version: 20150105174843) do
   enable_extension "plpgsql"
 
   create_table "events", force: true do |t|
-    t.decimal  "avg_price"
-    t.decimal  "low_price"
-    t.decimal  "high_price"
+    t.float    "avg_price"
+    t.float    "low_price"
     t.string   "title"
+    t.string   "picture",    default: "ticket.jpg"
+    t.string   "link"
+    t.integer  "listings"
+    t.integer  "venue_id"
+    t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "venues", force: true do |t|
     t.string   "name"
-    t.string   "city"
     t.string   "address"
-    t.string   "url"
+    t.string   "longitude"
+    t.string   "latitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

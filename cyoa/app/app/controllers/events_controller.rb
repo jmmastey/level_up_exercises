@@ -1,10 +1,16 @@
+require 'open-uri'
+require 'JSON'
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @last_updated = Event.all.order('updated_at').last.updated_at.strftime("%d-%m-%Y")
+    pull_events if @last_update != Time.now.strftime("%d-%m-%Y") || Event.all.count == 0
+
+    @events =  Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight)
+    @carousel = Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight+6.day).order('avg_price').take(5)
   end
 
   # GET /events/1
@@ -71,4 +77,46 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:avg_price, :low_price, :high_price, :title)
     end
+
+    def pull_events
+      date = DateTime.now.strftime('%F')
+      tomorrow = DateTime.now.next_day.strftime('%F')
+      test = open("http://api.seatgeek.com/2/events?geoip=true&per_page=50&range=20mi&datetime_local.gte=#{date}&datetime_local.lt=#{tomorrow}")
+      file = File.read(test)
+      data_hash = JSON.parse(file)
+
+      data_hash['events'].each do |event|
+        venue = Venue.where(id: "#{event['venue']['id']}")
+        unless venue.count > 0
+          venue = Venue.new
+          venue.id = event['venue']['id']
+          venue.name = event['venue']['name']
+          venue.address = event['venue']['address']
+          venue.longitude = event['venue']['location']['lon']
+          venue.latitude = event['venue']['location']['lat']
+          venue.save
+        end
+        venue = Venue.find(event['venue']['id'])
+        new_event = Event.new
+        new_event.id = event['id']
+        new_event.title = event['title']
+        new_event.venue_id = venue.id
+        new_event.listings = event['stats']['listing_count']
+        new_event.link = event['url']
+        new_event.picture = event['image'] if event['image'] != nil
+        new_event.avg_price = event['stats']['average_price'].to_f
+        new_event.low_price = event['stats']['lowest_price'].to_f
+        new_event.date = event['datetime_utc']
+        new_event.save
+      end
+    end
+
+    def date_check
+      if Event.all.count == 0
+        return false
+      end
+      @last_updated = Event.all.order('updated_at').last.updated_at.strftime("%d-%m-%Y")
+      @last_update == Time.now.strftime("%d-%m-%Y")
+    end
+
 end

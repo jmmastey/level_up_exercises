@@ -1,10 +1,11 @@
 class CreateVenues < ActiveRecord::Migration
   def change
-    create_table :venues do |t|
+    create_table :venues, id: false do |t|
+      t.primary_key :id
       t.string :name
-      t.string :city
       t.string :address
-      t.string :url
+      t.string :longitude
+      t.string :latitude
 
       t.timestamps
     end

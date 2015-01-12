@@ -9,7 +9,10 @@
   </ol>
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img data-src="holder.js/1140x500/auto/#777:#555/text:First slide" alt="First slide [1140x500]" src="hawks.jpg" data-holder-rendered="true">
+      <div class="carousel-caption">
+        <h1>@carousel[0].title</h1>
+      </div>
+      <img data-src="holder.js/1140x500/auto/#777:#555/text:First slide" alt="First slide [1140x500]" src=@carousel[0].picture data-holder-rendered="true">
     </div>
     <div class="item">
       <img data-src="holder.js/1140x500/auto/#777:#555/text:Second slide" alt="Second slide [1140x500]" src="https://chairnerd.global.ssl.fastly.net/images/performers-landscape/million-dollar-quartet-957d7b/5184/huge.jpg" data-holder-rendered="true">
@@ -33,7 +36,7 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-  # ::after
+
 
 <table>
   <thead>
@@ -51,7 +54,6 @@
       <tr>
         <td><%= event.avg_price %></td>
         <td><%= event.low_price %></td>
-        <td><%= event.high_price %></td>
         <td><%= event.title %></td>
         <td><%= link_to 'Show', event, class: 'btn btn-primary btn-xs' %></td>
         <td><%= link_to 'Edit', edit_event_path(event), class: 'btn btn-info btn-xs' %></td>

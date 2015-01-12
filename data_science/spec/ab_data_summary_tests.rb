@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe JsonParser do
+describe ABDataSummary do
 
-	let(:test) { JsonParser.new("source_data.json") }
+	let(:test) { ABDataSummary.new("source_data.json") }
   let(:json_length) { test.json_length }
 	let(:parsed_data) { test.parsed_a_b_data }
 	let(:a_no_of_trials) { parsed_data[:a_group].values.inject(:+) }

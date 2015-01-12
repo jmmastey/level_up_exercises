@@ -2,10 +2,11 @@ require 'abanalyzer'
 require_relative 'cohort'
 
 class ABCalculator
-  def initialize(test_results)
-    @a_cohort = Cohort.new("A", test_results.a_conv, test_results.a_nonconv)
-    @b_cohort = Cohort.new("B", test_results.b_conv, test_results.b_nonconv)
-    @a_b_tester = ABAnalyzer::ABTest.new(parsed_data)
+  def initialize(test_data)
+    raise "Invalid input" unless test_data.is_a?(ABDataSummary)
+    @a_cohort = Cohort.new("A", test_data.a_conv, test_data.a_nonconv)
+    @b_cohort = Cohort.new("B", test_data.b_conv, test_data.b_nonconv)
+    @a_b_test = ABAnalyzer::ABTest.new(a: @a_cohort.to_h, b: @b_cohort.to_h)
   end
 
   def sample_size
@@ -29,6 +30,6 @@ class ABCalculator
   end
 
   def confidence_level
-    1 - @a_b_tester.chisquare_p
+    (1 - @a_b_test.chisquare_p).round(6)
   end
 end

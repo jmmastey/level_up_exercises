@@ -16,16 +16,23 @@ class Cohort
   end
 
   def conversion_rate
-    @conversions.to_f / total_trials
+    (@conversions.to_f / total_trials).round(6)
   end
 
   def standard_error
-    sqrt(conversion_rate * (1 - conversion_rate) / total_trials)
+    (sqrt(conversion_rate * (1 - conversion_rate) / total_trials)).round(6)
   end
 
   def conversion_range
     Range.new(
-      conversion_rate - 1.96 * standard_error,
-      conversion_rate + 1.96 * standard_error)
+      (conversion_rate - 1.96 * standard_error).round(6),
+      (conversion_rate + 1.96 * standard_error).round(6))
+  end
+
+  def to_h
+    {
+      conversions: @conversions,
+      nonconvs: @nonconvs,
+    }
   end
 end

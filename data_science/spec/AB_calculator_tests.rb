@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ABCalculator do
-  let(:test) { JsonParser.new("source_data.json") }
+  let(:test) { ABDataSummary.new("source_data.json") }
   #let(:parsed_data) { test.parsed_a_b_data }
   let(:calc) { ABCalculator.new(test) }
   let(:conversion_range) { calc.conversion_range }

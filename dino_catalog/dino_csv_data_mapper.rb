@@ -6,20 +6,19 @@ require 'json'
 require './dino_data'
 
 class DinoCSVDataMapper
-
   def initialize
     @data_source = ['dinodex.csv', 'african_dinosaur_export.csv']
     @dino_data = []
 
     # Load data from data_source
     @data_source.each do |ds|
-      raise "Data source: #{ds} not found" if not File.file? ds
-      loadData ds
+      raise "Data source: #{ds} not found" unless File.file? ds
+      load_data ds
     end
   end
 
   # Load data from CSV files
-  def loadData(csv_file)
+  def load_data(csv_file)
 
     csv_data = CSV.read(csv_file, headers: true)
     csv_data.each do |csv_row|
@@ -54,31 +53,38 @@ class DinoCSVDataMapper
   end
 
   # Find by attribute & value, returns array of dino_obj
-  def findByAttr(attr, val, dino_data_in=nil)
+  def find_by_attr(attr, val, dino_data_in = nil)
     dino_data = dino_data_in || @dino_data
-    dino_data_out = dino_data.select { |dino_obj| (ret = dino_obj.send(attr)) && ret.downcase == val.downcase }
+
+    dino_data_out =
+      dino_data.select do |dino_obj|
+        (ret = dino_obj.send(attr)) && ret.downcase == val.downcase
+      end
   end
 
   # Find by attribute condition, returns array of dino_obj
-  def findByAttrCond(attr, condition, dino_data_in=nil)
+  def find_by_attr_cond(attr, condition, dino_data_in = nil)
     dino_data = dino_data_in || @dino_data
-    dino_data_out = dino_data.select { |dino_obj| (ret = dino_obj.send(attr)) && eval("#{ret} #{condition}")}
+
+    dino_data_out =
+      dino_data.select do |dino_obj|
+        (ret = dino_obj.send(attr)) && eval("#{ret} #{condition}")
+      end
   end
 
   # Chain searches, returns an array of dino_obj
-  def chainFindByAttr(params = {}, dino_data_in=nil)
+  def chain_find_by_attr(params = {}, dino_data_in = nil)
     dino_data = dino_data_in || @dino_data
 
-    params.each do |attr, val|
-      dino_data = findByAttr(attr, val, dino_data)
-    end
+    params.each { |attr, val| dino_data = find_by_attr(attr, val, dino_data) }
 
-    return dino_data
+    dino_data
   end
 
   # Output to console
-  def cout(dino_data_in=nil)
+  def cout(dino_data_in = nil)
     dino_data = dino_data_in || @dino_data
+
     dino_data.each do |dino_obj|
       puts dino_obj.labels
       puts dino_obj
@@ -87,12 +93,10 @@ class DinoCSVDataMapper
   end
 
   # Output to json
-  def jsonOut(dino_data_in=nil)
+  def jsonOut(dino_data_in = nil)
     dino_data = dino_data_in || @dino_data
 
-    return dino_data.to_json
+    dino_data.to_json
   end
 
 end
-
-

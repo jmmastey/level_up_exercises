@@ -31,9 +31,9 @@ Given /^I (fail to )?authenticate(?: as "(.*)")?/ do |fail_auth, username|
   click_button('Log in')
 end
 
-Given /^I am an ((?:un)?authenticated) user(?: "(\w+)")? visiting the "(.*)" page$/ do |authstate, username, page|
+Given /^I am an ((?:un)?authenticated) user(?: "(\w+)")?(?: visiting the "(.*)" page)?$/ do |authstate, username, page|
   username ||= DEFAULT_USERNAME
   step "I am a registered user \"#{username}\"" if username
   step "I authenticate as \"#{username}\"" if authstate == "authenticated"
-  step "I am visiting the \"#{page}\" page"
+  step "I am visiting the \"#{page}\" page" if page.present?
 end

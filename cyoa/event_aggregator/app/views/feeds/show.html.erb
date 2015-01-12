@@ -2,7 +2,7 @@
 
 <p>
   <strong>Owner user:</strong>
-  <%= @feed.user.full_name %>
+  <%= @feed.user.present? ? @feed.user.full_name : "None" %>
 </p>
 
 <p>
@@ -29,6 +29,8 @@
 
 <%= render partial: 'event_sources/event_source_list',
            locals: { sources: @feed.event_sources } %>
+<% if @feed.user == current_user %>
+  <%= link_to 'Edit', edit_feed_path(@feed) %> |
+<% end %>
 
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
 <%= link_to 'Back', feeds_path %>

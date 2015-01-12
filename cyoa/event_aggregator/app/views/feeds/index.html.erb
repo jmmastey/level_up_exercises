@@ -10,7 +10,8 @@
   </a>
 </h2>
 
-<%= render partial: "feed_list", locals: { feeds: @custom_feeds } %>
+<%= render partial: "feed_list",
+           locals: { feeds: @custom_feeds, feed_class: 'feed-custom' } %>
 
 <!-- h2>Shared With Me</h2>
 
@@ -19,4 +20,5 @@
 
 <h2>Public Feeds</h2>
 
-<%= render partial: "feed_list", locals: { feeds: @public_feeds } %>
+<%= render partial: "feed_list",
+           locals: { feeds: @public_feeds, feed_class: 'feed-public' } %>

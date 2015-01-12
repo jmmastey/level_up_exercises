@@ -1,5 +1,6 @@
 <%
 with_owner ||= false
+feed_class ||= []
 
 unless feeds.empty?
 %>
@@ -19,7 +20,12 @@ unless feeds.empty?
     <tbody>
       <% feeds.each do |feed| %>
         <%= render partial: "feed_list_item",
-                   locals: { feed: feed, with_owner: with_owner } %>
+                   locals: {
+                      feed: feed,
+                      with_owner: with_owner,
+                      feed_class: feed_class
+                   }
+        %>
       <% end %>
     </tbody>
   </table>

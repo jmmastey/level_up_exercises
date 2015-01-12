@@ -1,4 +1,4 @@
-<tr class="feed-item">
+<tr class="feed-item<%= Array.wrap(feed_class).map { |cls| " #{cls}" }.join %>">
   <% if with_owner %>
   <td><%= feed.user_id %></td>
   <% end %>
@@ -8,6 +8,7 @@
   <td class="control-cell">
     <%= link_to 'Show', feed %>
   </td>
+<% if (feed.user == current_user) %>
   <td class="control-cell">
     <%= link_to 'Edit', edit_feed_path(feed) %>
   </td>
@@ -15,5 +16,9 @@
     <%= link_to 'Destroy', feed,
                 method: :delete, data: { confirm: 'Are you sure?' } %>
   </td>
+<% else %>
+  <td class="control-cell"></td>
+  <td class="control-cell"></td>
+<% end %>
 </tr>
 

@@ -8,12 +8,13 @@ Then /^I see a (?:(.*): )?link (?:for|to) ([^"].*)$/ do |link_type, target|
   expect(has_css?(selector)).to be_truthy
 end
 
-Then /^I see a (?:(.*): )?link (?:for|to) "(.*)"$/ do |link_type, target|
+Then /^I see (a|no) (?:(.*): )?link (?:for|to) "(.*)"$/ do |sense, link_type, target|
   selector = "a"
   selector = selector + "[href^=\"#{link_type}\"]" if link_type
   text_pattern = Regexp.new(target, Regexp::IGNORECASE)
   links = all(selector, text: text_pattern)
-  expect(links.any? { |link| link.visible? }).to be_truthy
+  be_correct = (sense == "a") ? be_truthy : be_falsey
+  expect(links.any? { |link| link.visible? }).to be_correct
 end
 
 When /^I click the link for "(.*)"$/ do |target|
@@ -36,13 +37,13 @@ Then /^I see a login form$/ do
   expect(has_css?('#Login')).to be_truthy
 end
 
-Then /FIXME/ do
-  "FIXME NOT DONE FIXME NOT DONE FIXME"
-end
-
 Then /^I see text "(.*?)"$/ do |text|
   match_expr = Regexp.new(text, Regexp::IGNORECASE)
   expect(has_css?('*', text: match_expr)).to be_truthy
+end
+
+Then /FIXME/ do
+  puts "FIXME NOT DONE FIXME NOT DONE FIXME"
 end
 
 When /^DEBUG$/ do

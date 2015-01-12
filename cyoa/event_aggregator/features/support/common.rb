@@ -68,3 +68,9 @@ def user_creation_params(username)
   }
 end
 
+def visit_model_page(action, model_class, find_by_attrs)
+  path_helper = "#{model_class}_path".downcase.to_sym
+  path_helper = "#{action}_#{path_helper}" unless action =~ /show/i
+  instance = model_class.find_by(find_by_attrs)
+  visit(self.send(path_helper, instance))
+end

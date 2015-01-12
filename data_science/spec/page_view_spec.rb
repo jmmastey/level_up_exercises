@@ -1,7 +1,6 @@
 require_relative '../page_view.rb'
 
 describe PageView do
-
   describe "#initialize" do
     let(:pageview) { PageView.new(cohort, result) }
     let(:cohort) { "A" }
@@ -37,4 +36,24 @@ describe PageView do
     end
   end
 
+
+  describe "#converted?" do
+    let(:pageview) { PageView.new(cohort, result) }
+    let(:cohort) { "A" }
+    let(:result) { 1 }
+
+    it "returns whether a cohort is converted" do
+      expect(pageview.converted?).to eq(true)
+    end
+  end
+
+  describe "#rejected?" do
+    let(:pageview) { PageView.new(cohort, result) }
+    let(:cohort) { "A" }
+    let(:result) { 1 }
+
+    it "returns whether a cohort is rejected" do
+      expect(pageview.rejected?).to eq(false)
+    end
+  end
 end

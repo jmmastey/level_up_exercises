@@ -5,4 +5,12 @@ class PageView
     @cohort = cohort
     @result = result
   end
+
+  def converted?
+    result == 1
+  end
+
+  def rejected?
+    result == 0
+  end
 end

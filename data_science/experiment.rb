@@ -34,10 +34,17 @@ class Experiment
 
   def format_for_abanalyzer
     # [Cohort obj, Cohort obj]->{A:{success:30, failure:5}, B:{sucs:0, fail:30}}
-    groups = {}
-    @cohorts.each do |cohort|
-      groups[cohort.name.to_sym] = { success: cohort.conversions, failure: cohort.rejections }
+    @cohorts.each_with_object({}) do |(cohort), hash|
+      hash[cohort.name.to_sym] = { success: cohort.conversions, failure: cohort.rejections }
     end
-    groups
+
+
+
+    # groups = {}
+    # @cohorts.each do |cohort|
+    #   groups[cohort.name.to_sym] = { success: cohort.conversions, failure: cohort.rejections }
+    # end
+    # groups
+
   end
 end

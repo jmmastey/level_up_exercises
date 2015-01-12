@@ -2,8 +2,8 @@ require_relative '../experiment.rb'
 
 # Only changes to this file should break the file
 describe Experiment do
-  let(:experiment) { Experiment.new(results(30, 5, 30, 30)) }
-  let(:tie_experiment) { Experiment.new(results(5, 5, 5, 5)) }
+  let(:experiment)        { Experiment.new(results(30, 5, 30, 30)) }
+  let(:tie_experiment)    { Experiment.new(results(5, 5, 5, 5)) }
   let(:sample_experiment) { Experiment.new(Parser.parse('source_data.json')) }
 
   def result(cohort, result)
@@ -12,10 +12,10 @@ describe Experiment do
 
   def results(a_conversions, a_rejections, b_conversions, b_rejections)
     array = []
-    Array.new(a_rejections).each  { array << result("A", 0) }
-    Array.new(a_conversions).each { array << result("A", 1) }
-    Array.new(b_rejections).each  { array << result("B", 0) }
-    Array.new(b_conversions).each { array << result("B", 1) }
+    a_conversions.times { array << result("A", 1) }
+    a_rejections.times  { array << result("A", 0) }
+    b_conversions.times { array << result("B", 1) }
+    b_rejections.times  { array << result("B", 0) }
     array
   end
 
@@ -36,6 +36,8 @@ describe Experiment do
   end
 
   describe '#report' do
+    # test individual components
+    # just test whether cohort.to_s
     it "returns the correct winner" do
       expect(experiment.report).to eq("Conversion %: 0.8571428571428571 within 95% confidence interval of [0.7412139741992386, 0.9730717400864756]")
       expect(tie_experiment.report).to eq("Conversion %: 0.5 within 95% confidence interval of [0.19010248589619616, 0.8098975141038038]")

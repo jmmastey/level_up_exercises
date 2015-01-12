@@ -24,7 +24,7 @@ describe Cohort do
       end
     end
 
-    describe '#positive_conversions' do
+    describe '#conversions' do
       it "counts the positives" do
         expect(cohort.conversions).to eq(2)
         expect(cohort_loved_it.conversions).to eq(2)
@@ -32,7 +32,7 @@ describe Cohort do
       end
     end
 
-    describe '#negative_conversions' do
+    describe '#rejections' do
       it "counts the negatives" do
         expect(cohort.rejections).to eq(1)
         expect(cohort_loved_it.rejections).to eq(0)

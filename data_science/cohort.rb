@@ -3,17 +3,19 @@ class Cohort
   CONFIDENCE = 0.95
   attr_accessor :name, :pageviews
 
+  #instead of array page view objects
+
   def initialize(name, pageviews)
     @name      = name
     @pageviews = pageviews
   end
 
   def conversions
-    @pageviews.select { |view| view.result == 1 }.size
+    pageviews.count(&:converted?)
   end
 
   def rejections
-    @pageviews.select { |view| view.result == 0 }.size
+    pageviews.count {  |view| view.rejected? }
   end
 
   def size

@@ -4,3 +4,22 @@ source "https://rubygems.org"
 ruby "1.9.3"
 
 gem "sinatra"
+gem 'capistrano', '2.14.2'
+gem 'haml', '3.1.7'
+gem 'sass', '3.2.1'
+gem 'shotgun', '0.9'
+gem 'dm-sqlite-adapter'
+gem 'datamapper', require: 'data_mapper'
+
+group :test do
+  gem 'rspec-expectations', require: 'rspec/expectations'
+  gem 'rack-test', require: 'rack/test'
+  gem 'rspec'
+  gem 'cucumber'
+  gem 'cucumber-sinatra'
+  gem 'capybara'
+  gem 'nokogiri'
+  gem 'selenium-webdriver'
+  gem 'capybara-angular'
+  gem 'xpath'
+end

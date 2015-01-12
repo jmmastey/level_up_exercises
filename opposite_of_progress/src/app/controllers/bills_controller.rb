@@ -2,7 +2,7 @@ class BillsController < ApplicationController
   before_action :set_bill, only: [:show]
 
   def index
-    @bills = Bill.page(params[:page])
+    @bills = Bill.order(last_action_at: :desc).page(params[:page])
   end
 
   def show

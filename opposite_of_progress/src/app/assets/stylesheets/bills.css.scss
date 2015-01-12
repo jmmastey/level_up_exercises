@@ -24,6 +24,26 @@
         @include grid-column($columns: 2);
       }
     }
+
+    .official-title {
+      @include grid-column($columns: 12);
+
+      @media #{$large-up} {
+        @include grid-column($columns: 7);
+      }
+    }
+
+    .last-action {
+      @include grid-column($columns: 12);
+
+      @media #{$large-up} {
+        @include grid-column($columns: 3, $float: right);
+      }
+    }
+
+    .last-action-text {
+       color: lighten($body-font-color, 60);
+    }
   }
 }
 

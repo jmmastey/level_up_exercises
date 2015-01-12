@@ -69,4 +69,3 @@ deactivation code and an indicator of the activation state of the bomb.
 
 * No bonus points for developing an actual electronic detonator. Still, dude,
   sweet.
-

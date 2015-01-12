@@ -24,11 +24,6 @@ Then /^I see the company mailing address$/ do
   expect(has_css?('#CompanyAddress')).to be_truthy
 end
 
-Then /^I see a command for "(.*)"$/ do |command|
-  pattern = /#{command}/i
-  expect(has_css?("#OperationMenu a", text: pattern)).to be_truthy
-end
-
 Then /^I see a feed highlight for "(.*)"$/ do |feed_name|
   expect(has_css?('h2.feed-highlight-title', text: feed_name)).to be_truthy
 end

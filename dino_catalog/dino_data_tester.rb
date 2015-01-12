@@ -32,4 +32,4 @@ dino_res = dino_mapper.chain_find_by_attr(diet: "carnivore", continent: "europe"
 dino_mapper.cout dino_res
 
 puts "Export JSON"
-p dino_mapper.jsonOut
+p dino_mapper.json_out

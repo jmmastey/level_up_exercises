@@ -27,22 +27,22 @@ class DinoCSVDataMapper
 
       csv_row.each do |key, val|
         case key
-        when "NAME", "Genus"
-          dino_obj.name = val
-        when "PERIOD", "Period"
-          dino_obj.period = val
-        when "CONTINENT"
-          dino_obj.continent = val
-        when "DIET"
-          dino_obj.diet = val
-        when "Carnivore"
-          dino_obj.diet = "Carnivore" if val == "Yes"
-        when "WEIGHT_IN_LBS", "Weight"
-          dino_obj.weight = val
-        when "WALKING", "Walking"
-          dino_obj.walking = val
-        when "DESCRIPTION"
-          dino_obj.desc = val
+          when "NAME", "Genus"
+            dino_obj.name = val
+          when "PERIOD", "Period"
+            dino_obj.period = val
+          when "CONTINENT"
+            dino_obj.continent = val
+          when "DIET"
+            dino_obj.diet = val
+          when "Carnivore"
+            dino_obj.diet = "Carnivore" if val == "Yes"
+          when "WEIGHT_IN_LBS", "Weight"
+            dino_obj.weight = val
+          when "WALKING", "Walking"
+            dino_obj.walking = val
+          when "DESCRIPTION"
+            dino_obj.desc = val
         end
       end
 
@@ -93,10 +93,9 @@ class DinoCSVDataMapper
   end
 
   # Output to json
-  def jsonOut(dino_data_in = nil)
+  def json_out(dino_data_in = nil)
     dino_data = dino_data_in || @dino_data
 
     dino_data.to_json
   end
-
 end

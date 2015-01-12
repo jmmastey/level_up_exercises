@@ -24,7 +24,7 @@ class DinoData
   # Print this record
   def to_s
     out_str = ''
-    @label.each do |attr, label|
+    @label.each do |attr, _label|
       if (val = send(attr))
         out_str << sprintf("%10s", val)
       end

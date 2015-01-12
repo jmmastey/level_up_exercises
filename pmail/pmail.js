@@ -3,11 +3,8 @@
   var init_dropdown, init_message_list, init_refresh, init_search_box, init_sidebar, resize_main_pane;
 
   init_dropdown = function() {
-    return $('.dropdown-toggle').click(function(e) {
-      var button;
-      button = $(e.currentTarget);
-      button.toggleClass('active');
-      return $(button.attr('data-target')).toggleClass('hidden');
+    return $('.dropdown-toggle').click(function() {
+      return $(this).siblings('.dropdown-panel').toggle();
     });
   };
 
@@ -18,7 +15,7 @@
   };
 
   init_message_list = function() {
-    return $('input[name="selected_message"]').change(function(e) {
+    return $('input[name="selected_message"]').change(function() {
       if ($(this).prop('checked')) {
         return $(this).parents('.message').addClass('active');
       } else {
@@ -40,7 +37,7 @@
   };
 
   init_sidebar = function() {
-    return $('.sidebar-links li a').click(function(e) {
+    return $('.sidebar-links li a').click(function() {
       if (!$(this).attr("data-target")) {
         $('.sidebar-links li').removeClass('active');
         return $(this.parentNode).addClass('active');

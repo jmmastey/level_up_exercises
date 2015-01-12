@@ -2,12 +2,30 @@
 - messages = [{ from: "Mastey, Joseph",
                 count: 1,
                 subject: "Superfun Learning",
-                date: Date.today - 10,
+                date: Date.today - 1,
                 new?: true },
+              { from: "Durko, Steve",
+                count: 15,
+                subject: "More stuff for the training team",
+                date: Date.new(2015, 1, 6),
+                new?: true },
+              { from: "Test",
+                count: 3,
+                subject: "More test messages",
+                date: Date.new(2015, 1, 4),
+                new?: true },
+              { from: "Test",
+                count: 1,
+                subject: "Test message",
+                date: Date.new(2015, 1, 1) },
+              { from: "Mastey, Joseph",
+                count: 3,
+                subject: "Training Things",
+                date: Date.new(2014, 12, 18) },
               { from: "Mastey, Lynch, mullins",
                 count: 6,
                 subject: "Apprentice Things",
-                date: Date.new(2014, 12, 9)}]
+                date: Date.new(2014, 12, 9) }]
 !!! XML
 !!!
 %html{lang: :en}
@@ -19,11 +37,11 @@
     %link{href: "stylesheets/pmail.css", rel: :stylesheet, type: "text/css"}/
   %body
     %section.topbar.topbar-primary
-      %a.brand{alt: "Enova", href: "#"}
+      %a.brand{alt: "Enova", href: "javascript:;"}
       %form#search-form.search-form
         .search-box><
           %input{type: :search}></
-          %a.dropdown-toggle{ type: :button, data: { target: "#search-dropdown" }}
+          %a.dropdown-toggle{ type: :button }
             %i.fa.fa-caret-down
           .dropdown-panel.hidden#search-dropdown Advanced Search will go here
         %button.primary-button{ type: :submit }
@@ -31,12 +49,12 @@
       .topbar-links.right
         %ul
           %li
-            %a.dropdown-toggle{ href: "#", data: { target: "#app-dropdown" }}
+            %a.dropdown-toggle{ href: "javascript:;" }
               %i.fa.fa-th
             .dropdown-panel.hidden.center#app-dropdown
               Apps will go here
           %li
-            %a.dropdown-toggle{ href: "#", data: { target: "#account-dropdown" }}
+            %a.dropdown-toggle{ href: "javascript:;" }
               dkotowski@enova.com
               %i.fa.fa-caret-down
             .dropdown-panel.hidden.right#account-dropdown
@@ -46,17 +64,31 @@
         .topbar-links
           %ul
             %li
-              %button.dropdown-toggle{ data: { target: "#selection-dropdown" }}
+              %button.dropdown-toggle
                 %i.fa.fa-square-o
-              .dropdown-panel.hidden#selection-dropdown More options here
+              .dropdown-panel.hidden
+                %ul.dropdown-menu
+                  %li.active
+                    %a{ href: "javascript:;" } All
+                  %li
+                    %a{ href: "javascript:;" } Read
+                  %li
+                    %a{ href: "javascript:;" } Unread
+                  %li
+                    %a{ href: "javascript:;" } Starred
+                  %li
+                    %a{ href: "javascript:;" } Unstarred
             %li
               %button#refresh
                 %i.fa.fa-refresh
             %li
-              %button.dropdown-toggle{ data: { target: "#message-options-dropdown" }}
+              %button.dropdown-toggle
                 More
                 %i.fa.fa-caret-down
-              .dropdown-panel.hidden#message-options-dropdown More options here
+              .dropdown-panel.hidden
+                %ul.dropdown-menu
+                  %li
+                    %a{ href: "javascript:;" } Mark All as Read
       %main.message-list
         - messages.each_with_index do |message, index|
           %article.message#message{ id: index, class: message[:new?] ? "new" : nil }
@@ -91,37 +123,40 @@
         .topbar-links
           %ul
             %li
-              %a.dropdown-toggle{ href: "#", data: { target: "#mail-dropdown" } }
+              %a.dropdown-toggle{ href: "javascript:;" }
                 Mail
                 %i.fa.fa-caret-down
               .dropdown-panel.hidden#mail-dropdown
-                List options here
+                %ul.dropdown-menu.large
+                  %li.active Mail
+                  %li Contacts
+                  %li Tasks
       .sidebar-main
         %button.secondary-button#compose Compose
         %ul.sidebar-links
           %li.active
-            %a{ href: "#" } Inbox
+            %a{ href: "javascript:;" } Inbox
           %li
-            %a{ href: "#" } Starred
+            %a{ href: "javascript:;" } Starred
           %li
-            %a{ href: "#" } Sent Mail
+            %a{ href: "javascript:;" } Sent Mail
           %li
-            %a{ href: "#" } Drafts
+            %a{ href: "javascript:;" } Drafts
           %li
-            %a{ href: "#" } Projects
+            %a{ href: "javascript:;" } Projects
           %li
-            %a.dropdown-toggle{ href: "#", data: { target: "#more-links" } }
+            %a.dropdown-toggle{ href: "javascript:;" }
               More
               %i.fa.fa-caret-down
         %ul.sidebar-links.hidden#more-links
           %li
-            %a{ href: "#" } Important
+            %a{ href: "javascript:;" } Important
           %li
-            %a{ href: "#" } All Mail
+            %a{ href: "javascript:;" } All Mail
           %li
-            %a{ href: "#" } Spam
+            %a{ href: "javascript:;" } Spam
           %li
-            %a{ href: "#" } Trash
+            %a{ href: "javascript:;" } Trash
 
     %script{src: "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}
     %script{src: "pmail.js"}

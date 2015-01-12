@@ -9,10 +9,9 @@
   </head>
   <body>
     <section class='topbar topbar-primary'>
-      <a alt='Enova' class='brand' href='#'></a>
-      <form class='search-form' id='search-form'><div class='search-box'><input type='search'><a class='dropdown-toggle' data-target='#search-dropdown' type='button'>
+      <a alt='Enova' class='brand' href='javascript:;'></a>
+      <form class='search-form' id='search-form'><div class='search-box'><input type='search'><a class='dropdown-toggle' type='button'>
           <i class='fa fa-caret-down'></i>
-          <i class='fa fa-caret-up'></i>
         </a>
         <div class='dropdown-panel hidden' id='search-dropdown'>Advanced Search will go here</div></div><button class='primary-button' type='submit'>
           <i class='fa fa-search'></i>
@@ -21,7 +20,7 @@
       <div class='topbar-links right'>
         <ul>
           <li>
-            <a class='dropdown-toggle' data-target='#app-dropdown' href='#'>
+            <a class='dropdown-toggle' href='javascript:;'>
               <i class='fa fa-th'></i>
             </a>
             <div class='dropdown-panel hidden center' id='app-dropdown'>
@@ -29,10 +28,9 @@
             </div>
           </li>
           <li>
-            <a class='dropdown-toggle' data-target='#account-dropdown' href='#'>
+            <a class='dropdown-toggle' href='javascript:;'>
               dkotowski@enova.com
               <i class='fa fa-caret-down'></i>
-              <i class='fa fa-caret-up'></i>
             </a>
             <div class='dropdown-panel hidden right' id='account-dropdown'>
               Account dropdown will go here
@@ -46,10 +44,28 @@
         <div class='topbar-links'>
           <ul>
             <li>
-              <button class='dropdown-toggle' data-target='#selection-dropdown'>
+              <button class='dropdown-toggle'>
                 <i class='fa fa-square-o'></i>
               </button>
-              <div class='dropdown-panel hidden' id='selection-dropdown'>More options here</div>
+              <div class='dropdown-panel hidden'>
+                <ul class='dropdown-menu'>
+                  <li class='active'>
+                    <a href='javascript:;'>All</a>
+                  </li>
+                  <li>
+                    <a href='javascript:;'>Read</a>
+                  </li>
+                  <li>
+                    <a href='javascript:;'>Unread</a>
+                  </li>
+                  <li>
+                    <a href='javascript:;'>Starred</a>
+                  </li>
+                  <li>
+                    <a href='javascript:;'>Unstarred</a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li>
               <button id='refresh'>
@@ -57,12 +73,17 @@
               </button>
             </li>
             <li>
-              <button class='dropdown-toggle' data-target='#message-options-dropdown'>
+              <button class='dropdown-toggle'>
                 More
                 <i class='fa fa-caret-down'></i>
-                <i class='fa fa-caret-up'></i>
               </button>
-              <div class='dropdown-panel hidden' id='message-options-dropdown'>More options here</div>
+              <div class='dropdown-panel hidden'>
+                <ul class='dropdown-menu'>
+                  <li>
+                    <a href='javascript:;'>Mark All as Read</a>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
         </div>
@@ -75,10 +96,46 @@
           </div>
           <div class='message-field from'>Mastey, Joseph</div>
           <div class='message-field subject'>Superfun Learning</div>
-          <div class='message-field date'>Jan 2</div>
+          <div class='message-field date'>Jan 11</div>
         </article>
-        <article class='message' id='message_1'>
+        <article class='message new' id='message_1'>
           <div class='message-actions'><input id='selected_message_1' name='selected_message' type='checkbox' value='1'><label for='selected_message_1'>
+              <span></span>
+            </label>
+          </div>
+          <div class='message-field from'>Durko, Steve</div>
+          <div class='message-field subject'>More stuff for the training team</div>
+          <div class='message-field date'>Jan 6</div>
+        </article>
+        <article class='message new' id='message_2'>
+          <div class='message-actions'><input id='selected_message_2' name='selected_message' type='checkbox' value='2'><label for='selected_message_2'>
+              <span></span>
+            </label>
+          </div>
+          <div class='message-field from'>Test</div>
+          <div class='message-field subject'>More test messages</div>
+          <div class='message-field date'>Jan 4</div>
+        </article>
+        <article class='message' id='message_3'>
+          <div class='message-actions'><input id='selected_message_3' name='selected_message' type='checkbox' value='3'><label for='selected_message_3'>
+              <span></span>
+            </label>
+          </div>
+          <div class='message-field from'>Test</div>
+          <div class='message-field subject'>Test message</div>
+          <div class='message-field date'>Jan 1</div>
+        </article>
+        <article class='message' id='message_4'>
+          <div class='message-actions'><input id='selected_message_4' name='selected_message' type='checkbox' value='4'><label for='selected_message_4'>
+              <span></span>
+            </label>
+          </div>
+          <div class='message-field from'>Mastey, Joseph</div>
+          <div class='message-field subject'>Training Things</div>
+          <div class='message-field date'>12/18/14</div>
+        </article>
+        <article class='message' id='message_5'>
+          <div class='message-actions'><input id='selected_message_5' name='selected_message' type='checkbox' value='5'><label for='selected_message_5'>
               <span></span>
             </label>
           </div>
@@ -122,13 +179,16 @@
         <div class='topbar-links'>
           <ul>
             <li>
-              <a class='dropdown-toggle' data-target='#mail-dropdown' href='#'>
+              <a class='dropdown-toggle' href='javascript:;'>
                 Mail
                 <i class='fa fa-caret-down'></i>
-                <i class='fa fa-caret-up'></i>
               </a>
               <div class='dropdown-panel hidden' id='mail-dropdown'>
-                List options here
+                <ul class='dropdown-menu large'>
+                  <li class='active'>Mail</li>
+                  <li>Contacts</li>
+                  <li>Tasks</li>
+                </ul>
               </div>
             </li>
           </ul>
@@ -138,40 +198,39 @@
         <button class='secondary-button' id='compose'>Compose</button>
         <ul class='sidebar-links'>
           <li class='active'>
-            <a href='#'>Inbox</a>
+            <a href='javascript:;'>Inbox</a>
           </li>
           <li>
-            <a href='#'>Starred</a>
+            <a href='javascript:;'>Starred</a>
           </li>
           <li>
-            <a href='#'>Sent Mail</a>
+            <a href='javascript:;'>Sent Mail</a>
           </li>
           <li>
-            <a href='#'>Drafts</a>
+            <a href='javascript:;'>Drafts</a>
           </li>
           <li>
-            <a href='#'>Projects</a>
+            <a href='javascript:;'>Projects</a>
           </li>
           <li>
-            <a class='dropdown-toggle' data-target='#more-links' href='#'>
+            <a class='dropdown-toggle' href='javascript:;'>
               More
               <i class='fa fa-caret-down'></i>
-              <i class='fa fa-caret-up'></i>
             </a>
           </li>
         </ul>
         <ul class='sidebar-links hidden' id='more-links'>
           <li>
-            <a href='#'>Important</a>
+            <a href='javascript:;'>Important</a>
           </li>
           <li>
-            <a href='#'>All Mail</a>
+            <a href='javascript:;'>All Mail</a>
           </li>
           <li>
-            <a href='#'>Spam</a>
+            <a href='javascript:;'>Spam</a>
           </li>
           <li>
-            <a href='#'>Trash</a>
+            <a href='javascript:;'>Trash</a>
           </li>
         </ul>
       </div>

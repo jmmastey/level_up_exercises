@@ -2,17 +2,15 @@
 # Dan Kotowski
 
 init_dropdown = ->
-  $('.dropdown-toggle').click (e) ->
-    button = $(e.currentTarget)
-    button.toggleClass('active')
-    $(button.attr('data-target')).toggleClass('hidden')
+  $('.dropdown-toggle').click ->
+    $(this).siblings('.dropdown-panel').toggle()
 
 init_refresh = ->
   $('button#refresh').click ->
     window.location.reload()
 
 init_message_list = ->
-  $('input[name="selected_message"]').change (e) ->
+  $('input[name="selected_message"]').change ->
     if $(this).prop('checked')
       $(this).parents('.message').addClass('active')
     else
@@ -27,7 +25,7 @@ init_search_box = ->
     search_box.removeClass('focus')
 
 init_sidebar = ->
-  $('.sidebar-links li a').click (e) ->
+  $('.sidebar-links li a').click ->
     unless $(this).attr("data-target")
       $('.sidebar-links li').removeClass('active')
       $(this.parentNode).addClass('active')

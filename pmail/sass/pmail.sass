@@ -257,7 +257,6 @@ ul
 .dropdown-panel
   border: thin solid
   margin: 0
-  padding: 10px
   position: absolute
   z-index: 10
 
@@ -268,6 +267,22 @@ ul
 
   &.right
     right: 0
+
+  .dropdown-menu
+    font-size: 0.9em
+    list-style: none
+
+    li
+      display: block
+      margin: 0
+
+      a
+        display: block
+        margin: 0
+        padding: 5px
+
+        &:hover
+          background-color: $active-background-color
 
 .hidden
   display: none
@@ -333,6 +348,8 @@ ul.sidebar-links li.active
 .message
   background-color: $secondary-background-color
   border-bottom: thin solid $border-color
+  font-size: 0.9em
+  min-height: 1.5em
 
   &.new
     font-weight: bold

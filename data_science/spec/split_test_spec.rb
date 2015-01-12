@@ -16,6 +16,12 @@ describe DataScience::SplitTest do
     it 'returns true if the cohorts are significantly different' do
       expect(split_test).to be_different
     end
+
+    it 'returns false if the cohorts are significantly different' do
+      allow(split_test).to receive(:different?).and_return(false)
+
+      expect(split_test).not_to be_different
+    end
   end
 
   describe '#chisquare_p_value' do

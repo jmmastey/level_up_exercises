@@ -7,13 +7,16 @@ init_dropdown = ->
     button.toggleClass('active')
     $(button.attr('data-target')).toggleClass('hidden')
 
+init_refresh = ->
+  $('button#refresh').click ->
+    window.location.reload()
+
 init_message_list = ->
   $('input[name="selected_message"]').change (e) ->
-    checkbox = $(e.currentTarget)
-    if checkbox.prop('checked')
-      checkbox.parents('.message').addClass('active')
+    if $(this).prop('checked')
+      $(this).parents('.message').addClass('active')
     else
-      checkbox.parents('.message').removeClass('active')
+      $(this).parents('.message').removeClass('active')
 
 init_search_box = ->
   search_box = $('.search-box')
@@ -25,10 +28,9 @@ init_search_box = ->
 
 init_sidebar = ->
   $('.sidebar-links li a').click (e) ->
-    link = $(e.currentTarget)
-    unless link.attr("data-target")
+    unless $(this).attr("data-target")
       $('.sidebar-links li').removeClass('active')
-      $(e.currentTarget.parentNode).addClass('active')
+      $(this.parentNode).addClass('active')
 
 resize_main_pane = ->
   $('.main-pane').css('width', $(window).width() - $('.sidebar').outerWidth())
@@ -36,6 +38,7 @@ resize_main_pane = ->
 $ ->
   init_dropdown()
   init_message_list()
+  init_refresh()
   init_search_box()
   init_sidebar()
   resize_main_pane()

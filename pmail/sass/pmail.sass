@@ -127,8 +127,13 @@ ul
   display: flex
   flex-direction: row
   min-height: 52px
+  min-width: 800px
   width: 100%
   vertical-align: middle
+
+  &.topbar-primary
+    height: 59px
+    vertical-align: middle
 
   > *
     vertical-align: middle
@@ -137,9 +142,10 @@ ul
     border-radius: 4px
     padding: 3px 10px
 
+
 .topbar-links
   height: 50px
-  margin: 0
+  padding: 0 1em
   // Chrome fix:
   -webkit-padding-start: 0
 
@@ -190,13 +196,16 @@ ul
       width: 100%
 
 .search-form
-  display: inline-block
-  vertical-align: middle
+  display: flex
+  flex: 1
+  flex-direction: row
+  flex-grow: 1
+  margin-top: 0.8em
 
   input[type="search"]
     border: none
+    flex: 1
     max-height: 32px
-    max-width: 598px
     padding: 0
 
     &:focus
@@ -213,8 +222,10 @@ ul
   border: thin solid
   display: inline-flex
   flex-direction: row
+  flex: 1
   height: 32px
   max-height: 32px
+  max-width: 598px
   margin: 0
 
   input
@@ -330,3 +341,27 @@ ul.sidebar-links li.active
 
   &:hover
     border-left: 2px dotted $border-color
+
+footer
+  display: flex
+  font-size: 0.8em
+  line-height: 1.4em
+  margin: 2em
+
+  a
+    text-decoration: underline
+
+  .line.segmented
+    > span
+      &:after
+        content: " - "
+
+      &:last-child:after
+        content: ""
+
+  > .middle
+    flex: 1
+    text-align: center
+
+  > .right
+    text-align: right

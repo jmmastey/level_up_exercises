@@ -191,10 +191,9 @@ ul
 
     li
       border-left: 4px solid transparent
-      display: inline-block
+      display: block
       margin: 0.2em 0
       padding-left: 20px
-      width: 100%
 
 .search-form
   display: flex
@@ -321,12 +320,17 @@ input, select
 input:focus
   border-color: $primary-color
 
-ul.sidebar-links li.active
-  border-color: $primary-color
+ul.sidebar-links
+  li
+    &:hover
+      background-color: $active-background-color
 
-  a
-    color: $primary-color
-    font-weight: bold
+    &.active
+      border-color: $primary-color
+
+      a
+        color: $primary-color
+        font-weight: bold
 
 .dropdown-panel
   background-color: $background-color

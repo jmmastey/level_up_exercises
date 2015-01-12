@@ -26,7 +26,9 @@ init_search_box = ->
 
 init_sidebar = ->
   $('.sidebar-links li a').click ->
-    unless $(this).attr("data-target")
+    if $(this).hasClass("dropdown-toggle")
+      $('.sidebar-links#more-links').toggle()
+    else
       $('.sidebar-links li').removeClass('active')
       $(this.parentNode).addClass('active')
 

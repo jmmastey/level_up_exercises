@@ -38,7 +38,9 @@
 
   init_sidebar = function() {
     return $('.sidebar-links li a').click(function() {
-      if (!$(this).attr("data-target")) {
+      if ($(this).hasClass("dropdown-toggle")) {
+        return $('.sidebar-links#more-links').toggle();
+      } else {
         $('.sidebar-links li').removeClass('active');
         return $(this.parentNode).addClass('active');
       }

@@ -1,3 +1,28 @@
+
+
+@mixin minimal-list {
+  margin-top: 30px;
+  @include grid-column($columns: 12);
+
+  h4, h6 {
+    font-weight: bold;
+    line-height: 1em;
+    display: block;
+    margin-bottom: 1em;
+    color: $anchor-font-color;
+  }
+}
+
+@mixin minimal-list-item {
+  border-bottom: 1px solid #eee;
+  padding: 0.5em 0;
+  @include grid-row($behavior: nest);
+
+  &:first-of-type {
+    border-top: 1px solid #eee;
+  }
+}
+
 .content-container {
   section {
     @include grid-row();
@@ -11,4 +36,11 @@
   .pagination-links {
     float: right;
   }
+}
+
+.empty-message {
+  @include grid-column($columns: 12);
+  text-align: center;
+  padding: 10px;
+  background-color: lighten($primary-color, 60);
 }

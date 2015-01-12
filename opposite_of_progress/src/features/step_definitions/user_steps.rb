@@ -27,7 +27,7 @@ def reset_password(email)
   click_button 'Send me reset password instructions'
 end
 
-# ------------------- Givens ---------------------------------------------
+### Givens
 Given /^I exist as a user$/ do
   User.create(credentials)
   @email = credentials[:email]
@@ -37,8 +37,7 @@ Given /^I am not logged in$/ do
   clear_cookies()
 end
 
-# ------------------- Whens  ---------------------------------------------
-
+### Whens
 When /^I log in with valid credentials$/ do
   log_in(credentials)
 end
@@ -79,10 +78,7 @@ When(/^I reset password with non\-registered email$/) do
   reset_password('nonregistered@example.com')
 end
 
-
-
-# ------------------- Thens  ---------------------------------------------
-
+### Thens
 Then /^I should be logged in$/ do
   within('.top-bar') do
     expect(page).not_to have_link('Log in')
@@ -101,8 +97,6 @@ Then /^I should not be logged in$/ do
     expect(page).not_to have_content(@email)
   end
 end
-
-
 
 Then(/^I should be signed up$/) do
   within('.flash-messages') do

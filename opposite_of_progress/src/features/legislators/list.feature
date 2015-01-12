@@ -14,8 +14,8 @@ Feature: Legislator Index
     Given there are additional legislators to exceed the page size
       And I am on legislators page
     Then I should see paginated legislator list
-      And When I click on the next pagination link
-      And I should see previously hidden legislators
+    When I click on pagination next
+    Then I should see previously hidden legislators
 
   Scenario: Clicks a link in the listing to get that legislators page
     Given I am on legislators page

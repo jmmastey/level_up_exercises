@@ -5,6 +5,7 @@ class Bill < ActiveRecord::Base
   # belongs_to :sponsor, class_name: 'Legislator'
   # has_many :cosponsorships
   # has_many :cosponsors, through: :cosponsorships, source: :legislator
+
   def official_id
     "#{bill_type.upcase}#{number}-#{congress}"
   end

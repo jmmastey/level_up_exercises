@@ -1,0 +1,9 @@
+<section>
+  <div class="bills">
+    <h4>Current Bills</h4>
+    <%= render @bills %>
+  </div>
+</section>
+<section>
+  <%= pagination_wrapper_for(@bills) %>
+</section>

@@ -20,3 +20,12 @@
   </div>
 </section>
 <% end %>
+
+<% if @legislator.good_deeds.blank? %>
+<section>
+  <div class="empty-message">
+    <%= link_to_legislator @legislator, class: 'name' %>
+    <span>has not sponsored or co-sponsored any bills yet.</span>
+  </div>
+</section>
+<% end %>

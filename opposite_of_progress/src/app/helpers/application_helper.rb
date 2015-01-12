@@ -6,13 +6,13 @@ module ApplicationHelper
 
   def pagination_wrapper_for(collection)
     content_tag(:div, class: 'pagination-wrapper') do
-      concat content_tag(:div, paginate(@good_deeds), class: 'pagination-links')
-      concat content_tag(:div, page_entries_info(@good_deeds), class: 'page-entries-info')
+      concat content_tag(:div, paginate(collection), class: 'pagination-links')
+      concat content_tag(:div, page_entries_info(collection), class: 'page-entries-info')
     end
   end
 
-def strip_http(url)
-  return '' if url.nil?
-  return url.sub!(/http(s*)\:\/\//, '')
-end
+  def strip_http(url)
+    return '' if url.nil?
+    return url.sub!(/http(s*)\:\/\//, '')
+  end
 end

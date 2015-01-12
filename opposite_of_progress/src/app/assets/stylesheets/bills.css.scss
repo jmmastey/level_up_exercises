@@ -1,3 +1,30 @@
 // Place all the styles related to the Bills controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bills.index {
+  .bills {
+    @include minimal-list;
+  }
+
+  .bill {
+    @include minimal-list-item;
+
+    > div {
+      display: inline-block;
+    }
+
+    .official-id {
+      font-size: 0.8em;
+      color: lighten($body-font-color, 60);
+      @include grid-column($columns: 12);
+
+      @media #{$large-up} {
+        font-size: 1em;
+        @include grid-column($columns: 2);
+      }
+    }
+  }
+}
+
+

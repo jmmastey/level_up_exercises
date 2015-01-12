@@ -30,8 +30,8 @@
       <tr>
         <td><%= event.date.strftime("%m/%d") %></td>
         <td><%= event.title %></td>
-        <td><%= event.avg_price %></td>
-        <td><%= event.low_price %></td>
+        <td><%= number_to_currency(event.avg_price) %></td>
+        <td><%= number_to_currency(event.low_price) %></td>
         <td><%= link_to 'Show', event, class: 'btn btn-primary btn-xs' %></td>
         <td><%= link_to 'Tickets', event.link, class: 'btn btn-info btn-xs' %></td>
       </tr>

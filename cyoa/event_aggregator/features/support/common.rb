@@ -17,6 +17,7 @@ URL_NICKNAMES =
   'the customer service e-mail address' => EventAggregator.customer_service_email,
   'the login page' => '/users/sign_in',
   'create new feed' => '/feeds/new',
+  'edit feed' => '/feeds/\d+/edit'
 }
 
 def url_by_nickname(url_nickname)
@@ -31,6 +32,7 @@ ELEMENT_NICKNAMES =
   'first name' => 'user_first_name',
   'last name' => 'user_last_name',
   'feed title' => 'feed_title',
+  'feed description' => 'feed_description',
 }
 
 def id_by_nickname(input_nickname)
@@ -45,6 +47,12 @@ end
 def has_major_heading(heading_text)
   rexp = Regexp.new(heading_text)
   page.has_css?('h1,h2,h3,h4', text: rexp)
+end
+
+def button(button_label)
+  find("input[value*=\"#{button_label}\"]")
+rescue
+  find(".section-control", text: /#{button_label}/i)
 end
 
 def user_password(username)

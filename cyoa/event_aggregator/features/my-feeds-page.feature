@@ -6,11 +6,11 @@ Feature: My Feeds Page
 
 Scenario: Find create new feed command
   Given I am an authenticated user visiting the "My Feeds" page
-  Then I see a command for "Create New Feed"
+  Then I see a command for "Create new feed"
 
 Scenario: Find feed-search command
   Given I am an authenticated user visiting the "My Feeds" page
-  Then I see a command for "Search for Feeds"
+  Then I see a command for "Search for feeds"
 
 Scenario: Find custom feeds list
   Given I am an authenticated user visiting the "My Feeds" page

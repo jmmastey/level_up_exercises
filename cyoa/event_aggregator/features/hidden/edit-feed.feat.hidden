@@ -33,6 +33,37 @@ Scenario: Add an event selection rule in a feed
 @ignore
 Scenario: Delete an event selection rule from a feed
 
+Scenario: Add data source to feed
+  Given I am visiting the "Create new feed" page
+  When I set new feed title to "Test From ONC and Meetups"
+  And I add data source "Opening Night Calendar" to the data source selector
+  And I add data source "Meetups" to the data source selector
+  And I press the "create feed" button
+  Then I see the "show-feed" page for feed "Test From ONC and Meetups"
+
+Scenario: Create feed including events from authorized feed
+  Given I am visiting the "Create new feed" page
+  When I set new feed title to "My Friends Events"
+  And I add feed "my special events" owned by user "my_friend"
+  And I press the "create feed" button
+  Then I see the "show-feed" page for feed "My Friends Events"
+
+Scenario: Create feed including events from public feed
+  Given I am visiting the "Create new feed" page
+  When I set new feed title to "Republished public feed"
+  And I add public feed "Blue Man Group"
+  And I press the "create feed" button
+  Then I see the "show-feed" page for feed "Republished public feed"
+
+Scenario: Create feed including events from my own feed
+  Given I am visiting the "Create new feed" page
+  And I have a custom feed called "Thursdays"
+  And I have a custom feed called "Fridays"
+  When I set new feed title to "Thursdays and Fridays"
+  And I add my custom feed "Thursdays"
+  And I add my custom feed "Fridays"
+  And I press the "create feed" button
+  Then I see the "show-feed" page for feed "Thursdays and Fridays"
 @ignore
 Scenario: Preview new feed results
 

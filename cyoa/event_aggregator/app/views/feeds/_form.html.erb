@@ -21,6 +21,8 @@
     <%= f.text_area :description, class: 'form-control' %>
   </div>
 
+  <%= link_to 'Cancel', @feed, class: ['section-control', 'pull-right'] %>
+
   <% submit_label ||= "Update feed" %>
   <%= f.submit submit_label, class: ['section-control'] %>
 

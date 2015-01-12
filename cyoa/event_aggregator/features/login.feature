@@ -8,7 +8,7 @@ Scenario: Find the login form on unauthenticated top banner
   Then I see a login form
 
 Scenario: Successful authentication shows user-centric content
-  Given I an a registered user "Jack"
+  Given I am a registered user "Jack"
   And I authenticate as "Jack"
   Then I see text "Jack Kcajsohn"
   And I see a link for "Not this person"

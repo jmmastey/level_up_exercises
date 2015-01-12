@@ -5,6 +5,12 @@ class VenuesController < ApplicationController
   # GET /venues.json
   def index
     @venues = Venue.all
+    @hash = Gmaps4rails.build_markers(@venues) do |user, marker|
+      test = "#{user.name}"
+      marker.lat user.latitude
+      marker.lng user.longitude
+      marker.infowindow test
+    end
   end
 
   # GET /venues/1

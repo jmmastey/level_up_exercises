@@ -1,18 +1,18 @@
+
 <p id="notice"><%= notice %></p>
+
 <p>
   <strong>Title:</strong>
-  <%= @event.title %>
+  <%= @event.title %> @ <strong><%=link_to @venue.name, @venue%></strong>
 </p>
 <p>
   <strong>Avg price:</strong>
-  <%= @event.avg_price %>
+  <%= number_to_currency(@event.avg_price) %>
 </p>
 
 <p>
   <strong>Low price:</strong>
-  <%= @event.low_price %>
+  <%= number_to_currency(@event.low_price) %>
 </p>
 
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

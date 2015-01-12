@@ -1,6 +1,14 @@
-.carousel{width:640px;
-       height:360px;}
+.carousel{
+  width:640px;
+  height:360px;
+  margin: auto;
+  }
 .carousel img {
   width: 100%;
   max-height: 360px;
+}
+#map { height: 180px; }
+
+.gm-style-iw{
+    max-width: 300px;
 }

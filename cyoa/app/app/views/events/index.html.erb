@@ -10,31 +10,31 @@
   <div class="carousel-inner" role="listbox">
     <div class="item active">
       <div class="carousel-caption">
-        <h1><%=@carousel[0].title%></h1>
+        <h1><%=link_to @carousel[0].title, @carousel[0]%></h1>
       </div>
       <img data-src="holder.js/1140x500/auto/#777:#555/text:First slide" alt="First slide [1140x500]" src="<%=@carousel[0].picture%>" data-holder-rendered="true">
     </div>
     <div class="item">
       <div class="carousel-caption">
-        <h1><%=@carousel[1].title%></h1>
+        <h1 class="test"><%=link_to @carousel[1].title, @carousel[1]%></h1>
       </div>
       <img data-src="holder.js/1140x500/auto/#777:#555/text:Second slide" alt="Second slide [1140x500]" src="<%=@carousel[1].picture%>" data-holder-rendered="true">
     </div>
     <div class="item">
       <div class="carousel-caption">
-        <h1><%=@carousel[2].title%></h1>
+        <h1><%=link_to @carousel[2].title, @carousel[2]%></h1>
       </div>
       <img data-src="holder.js/1140x500/auto/#777:#555/text:Third slide" alt="Third slide [1140x500]" src="<%=@carousel[2].picture%>" data-holder-rendered="true">
     </div>
     <div class="item">
       <div class="carousel-caption">
-        <h1><%=@carousel[3].title%></h1>
+        <h1><%=link_to @carousel[3].title, @carousel[3]%></h1>
       </div>
       <img data-src="holder.js/1140x500/auto/#777:#555/text:Fourth slide" alt="Fourth slide [1140x500]" src="<%=@carousel[3].picture%>" data-holder-rendered="true">
     </div>
     <div class="item">
       <div class="carousel-caption">
-        <h1><%=@carousel[4].title%></h1>
+        <h1><%=link_to @carousel[4].title, @carousel[4]%></h1>
       </div>
       <img data-src="holder.js/1140x500/auto/#777:#555/text:Fifth slide" alt="Fifth slide [1140x500]" src="<%=@carousel[4].picture%>" data-holder-rendered="true">
     </div>
@@ -79,6 +79,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Date</th>
       <th>Title</th>
       <th>Avg price</th>
       <th>Low price</th>
@@ -90,6 +91,7 @@
   <tbody>
     <% @week.each do |event| %>
       <tr>
+        <td><%= event.date.strftime("%m/%d") %></td>
         <td><%= event.title %></td>
         <td><%= number_to_currency(event.avg_price) %></td>
         <td><%= number_to_currency(event.low_price) %></td>

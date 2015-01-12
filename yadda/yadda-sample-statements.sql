@@ -13,3 +13,19 @@ INSERT INTO beer (brewery_id, style, description, brewing_year, modified_on, mod
 UPDATE beer SET style='Porter', brewing_year='2013' WHERE beer_id=1 LIMIT 1;
 
 DELETE FROM beer WHERE beer_id=1 LIMIT 1;
+
+/* User sample statements */
+INSERT INTO user (name, email, birthday, modified_by) 
+  VALUES('Ryan', 'rcowan@enova.com', '1984-01-30', 1);
+
+UPDATE user SET description='Ryan works at Enova' WHERE user_id=1 LIMIT 1;
+
+DELETE FROM user WHERE user_id=1 LIMIT 1;
+
+/* Rating sample statements */
+INSERT INTO rating (user_id, beer_id, look, smell, taste, feel, overall, description, modified_by) 
+  VALUES(1, 1, 5, 4, 3, 4, 5, 'A meal in a glass', 1);
+
+UPDATE rating SET look=3, taste=5, overall=4 WHERE rating_id=1 LIMIT 1;
+
+DELETE FROM rating WHERE rating_id=1 LIMIT 1;

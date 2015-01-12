@@ -77,7 +77,7 @@
 
 <br>
 <h2>This week </h2>
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Title</th>
@@ -89,17 +89,16 @@
   </thead>
 
   <tbody>
-    <% @carousel.each do |event| %>
+    <% @week.each do |event| %>
       <tr>
         <td><%= event.title %></td>
         <td><%= event.avg_price %></td>
         <td><%= event.low_price %></td>
         <td><%= link_to 'Show', event, class: 'btn btn-primary btn-xs' %></td>
-        <td><%= link_to 'Edit', edit_event_path(event), class: 'btn btn-info btn-xs' %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
+        <td><%= link_to 'Tickets', event.link, class: 'btn btn-info btn-xs' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= link_to 'New Event', new_event_path %>
+
 

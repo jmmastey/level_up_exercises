@@ -10,6 +10,7 @@ class VenuesController < ApplicationController
   # GET /venues/1
   # GET /venues/1.json
   def show
+    @events = Event.where(venue_id: @venue.id).order('date')
   end
 
   # GET /venues/new

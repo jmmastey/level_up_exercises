@@ -1,12 +1,11 @@
 <h1>Listing venues</h1>
  <div id="map"%></div>
- <table>
+ <table class="table">
   <thead>
     <tr>
       <th>Name</th>
       <th>City</th>
       <th>Address</th>
-      <th>Url</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,12 +14,8 @@
     <% @venues.each do |venue| %>
       <tr>
         <td><%= venue.name %></td>
-        <td><%= venue.city %></td>
         <td><%= venue.address %></td>
-        <td><%= venue.url %></td>
         <td><%= link_to 'Show', venue %></td>
-        <td><%= link_to 'Edit', edit_venue_path(venue) %></td>
-        <td><%= link_to 'Destroy', venue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +23,3 @@
 
 <br>
 
-<%= link_to 'New Venue', new_venue_path %>

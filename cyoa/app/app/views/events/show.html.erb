@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
-
+<p>
+  <strong>Title:</strong>
+  <%= @event.title %>
+</p>
 <p>
   <strong>Avg price:</strong>
   <%= @event.avg_price %>
@@ -10,15 +13,6 @@
   <%= @event.low_price %>
 </p>
 
-<p>
-  <strong>High price:</strong>
-  <%= @event.high_price %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

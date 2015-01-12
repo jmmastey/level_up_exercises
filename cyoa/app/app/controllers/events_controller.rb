@@ -6,11 +6,13 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    pull_events if Event.all.count == 0
     @last_updated = Event.all.order('updated_at').last.updated_at.strftime("%d-%m-%Y")
-    pull_events if @last_update != Time.now.strftime("%d-%m-%Y") || Event.all.count == 0
+    pull_events if @last_update != Time.now.strftime("%d-%m-%Y")
 
     @events =  Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight).order('avg_price DESC')
     @carousel = Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight+6.day).order('avg_price DESC').take(5)
+    @week = Event.where(date: (Time.now.midnight+1.day)..Time.now.midnight+6.day).order('date')
   end
 
   # GET /events/1
@@ -80,7 +82,7 @@ class EventsController < ApplicationController
 
     def pull_events
       date = DateTime.now.strftime('%F')
-      tomorrow = DateTime.now.next_day.strftime('%F')
+      tomorrow = DateTime.now.next_week.strftime('%F')
       test = open("http://api.seatgeek.com/2/events?geoip=true&per_page=50&range=20mi&datetime_local.gte=#{date}&datetime_local.lt=#{tomorrow}")
       file = File.read(test)
       data_hash = JSON.parse(file)

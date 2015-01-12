@@ -1,4 +1,5 @@
 require "active_support"
+require "set"
 
 module Selector
   extend ActiveSupport::Concern

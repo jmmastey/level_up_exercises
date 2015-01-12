@@ -1,6 +1,6 @@
 class SelectionCriteriaController < ApplicationController
   before_action :set_selection_criterion, only: [:show, :edit, :update, :destroy]
-  before_action :set_feed, only: [:new]
+  before_action :set_feed
 
   respond_to :html
 
@@ -8,16 +8,16 @@ class SelectionCriteriaController < ApplicationController
 
   def index
     @selection_criteria = SelectionCriterion.all
-    respond_with(@selection_criteria)
+    respond_with(@feed, @selection_criteria)
   end
 
   def show
-    respond_with(@selection_criterion)
+    respond_with(@feed, @selection_criterion)
   end
 
   def new
     @selection_criterion = SelectionCriterion.new
-    respond_with(@selection_criterion)
+    respond_with(@feed, @selection_criterion)
   end
 
   def edit
@@ -25,18 +25,19 @@ class SelectionCriteriaController < ApplicationController
 
   def create
     @selection_criterion = SelectionCriterion.new(selection_criterion_params)
+    @selection_criterion.feed = @feed
     @selection_criterion.save
-    respond_with(@selection_criterion)
+    respond_with(@feed, @selection_criterion)
   end
 
   def update
     @selection_criterion.update(selection_criterion_params)
-    respond_with(@selection_criterion)
+    respond_with(@feed, @selection_criterion)
   end
 
   def destroy
     @selection_criterion.destroy
-    respond_with(@selection_criterion)
+    respond_with(@feed, @selection_criterion)
   end
 
   private

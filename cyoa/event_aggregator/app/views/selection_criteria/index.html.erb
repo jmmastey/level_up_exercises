@@ -1,29 +1,40 @@
-<h1>Listing selection_criteria</h1>
+<h1>
+  Listing selection_criteria
+  <%= link_to "New selection criterion",
+      new_feed_selection_criterion_path(@feed),
+      class: ['section-control', 'pull-right'] %>
+</h1>
 
-<table>
+<table class="selection-criteria-list table table-striped">
   <thead>
     <tr>
-      <th>Implementation class</th>
-      <th>Configuration</th>
+      <th>Type of Condition</th>
       <th>Sql expression</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @selection_criteria.each do |selection_criterium| %>
+    <% @selection_criteria.each do |selection_criterion| %>
       <tr>
-        <td><%= selection_criterium.implementation_class %></td>
-        <td><%= selection_criterium.configuration %></td>
-        <td><%= selection_criterium.sql_expression %></td>
-        <td><%= link_to 'Show', selection_criterium %></td>
-        <td><%= link_to 'Edit', edit_selection_criterium_path(selection_criterium) %></td>
-        <td><%= link_to 'Destroy', selection_criterium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= selection_criterion.implementation_strategy.selector_description %>
+        </td>
+        <td><%= selection_criterion.sql_expression_as_clause %></td>
+        <td class="control-cell">
+          <%= link_to 'Show', [@feed, selection_criterion] %>
+        </td>
+        <td class="control-cell">
+          <%= link_to 'Edit',
+                edit_feed_selection_criterion_path(@feed, selection_criterion) %>
+        </td>
+        <td class="control-cell">
+          <%= link_to 'Destroy', [@feed, selection_criterion],
+                method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Selection criterium', new_selection_criterium_path %>

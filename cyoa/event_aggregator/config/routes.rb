@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-  resources :selection_criteria
-
   resources :event_sources
-
   resources :events
   
   resources :feeds do
-    resources :selection_criteria, shallow: true
+    resources :selection_criteria
+    resources :event_sources, only: :index
   end
 
   root to: "site#home"

@@ -22,8 +22,13 @@
 
 <h2>Event Selection Criteria</h2>
 
-<%= render partial: 'selection_criterium/criteria_list',
+<%= render partial: 'selection_criteria/criteria_list',
            locals: { criteria: @feed.selection_criteria } %>
+
+<h2>Data Sources</h2>
+
+<%= render partial: 'event_sources/event_source_list',
+           locals: { sources: @feed.event_sources } %>
 
 <%= link_to 'Edit', edit_feed_path(@feed) %> |
 <%= link_to 'Back', feeds_path %>

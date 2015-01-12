@@ -1,5 +1,10 @@
 @import "defs";
 
+a:hover {
+  text-shadow: 2px 2px 5px #ffff10;
+  color: white;
+}
+
 body {
   background-color: $deep-chicago-blue !important;
 }
@@ -19,13 +24,7 @@ body {
     padding-bottom: 0em;
 
   }
-  // margin-bottom: -35px;
   
-  /* & > div {
-    padding-left: 0px;
-    padding-right: 0px;
-  } */
-
   div.menu-item-active {
     background-color: white;
   }
@@ -37,17 +36,34 @@ body {
   margin-bottom: 2em;
 
   h1 {
+    margin-top: 0px;
+    padding-top: 10px;
+    height: 65px;
     color: $chicago-blue;
     font: 55px fancypants;
     background-image: radial-gradient(#eee0e0, white);
   }
 
   h2 {
-    padding: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    height: 40px;
     color: gray;
     font: 40px fancypants;
     background-image: linear-gradient(to right, $light-chicago-blue, white);
   }
+}
+
+.section-control {
+  position: relative;
+  background-color: transparent;
+  margin-top: 2px;
+  border: 2px solid #c0c0c0;
+  padding: 4px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: inherit;
+  font: 16px sans-serif;
 }
 
 #BodyArea {
@@ -164,4 +180,20 @@ div.section {
 .hard-to-see {
   opacity: 0.15;
   font-size: 50%;
+}
+
+.empty-list {
+  color: #a0a0a0;
+}
+
+table {
+
+  td.control-cell {
+    padding: 5px;
+    width: 50px;
+  }
+
+  td.boolean {
+    width: 50px;
+  }
 }

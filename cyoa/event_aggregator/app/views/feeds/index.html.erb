@@ -1,15 +1,14 @@
-<%= 
-commands = [
-  { link_name: 'Create New Feeds', uri: new_feed_path },
-  { link_name: 'Search For Feeds', uri: 'FIXME' }
-]
+<h1 class="text-center">
+  My Feeds
+  <a href="#FIXME" class="section-control pull-right">Search for feeds</a>
+</h1>
 
-render partial: 'shared/op_menu', locals: { commands: commands }
-%>
-
-<h1 class="text-center">My Feeds</h1>
-
-<h2>My Custom Feeds</h2>
+<h2>
+  My Custom Feeds
+  <a href="<%= new_feed_path %>" class="section-control pull-right">
+    Create new feed
+  </a>
+</h2>
 
 <%= render partial: "feed_list", locals: { feeds: @custom_feeds } %>
 

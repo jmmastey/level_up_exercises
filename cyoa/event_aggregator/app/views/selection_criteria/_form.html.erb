@@ -1,4 +1,9 @@
-<%= form_for(@selection_criterion) do |f| %>
+<%
+condition_types = Selector::AVAILABLE_SELECTORS.map do |selector_class|
+  [selector_class.selector_description, selector_class.name]
+end
+%>
+<%= form_for([@feed, @selection_criterion]) do |f| %>
   <% if @selection_criterion.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@selection_criterion.errors.count, "error") %> prohibited this selection_criterion from being saved:</h2>
@@ -12,16 +17,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :implementation_class %><br>
-    <%= f.text_field :implementation_class %>
+    <%= f.label "Condition type" %>
+    <%= select("selection_criterion", "implementation_class",
+               condition_types, {}, class: 'form-control') %>
   </div>
   <div class="field">
-    <%= f.label :configuration %><br>
-    <%= f.text_area :configuration %>
-  </div>
-  <div class="field">
-    <%= f.label :sql_expression %><br>
-    <%= f.text_field :sql_expression %>
+    <%= f.label "Expression" %><br>
+    <%= text_area("selector",
+                  "expression", { class: 'form-control' } ) %>
   </div>
   <div class="actions">
     <%= f.submit %>

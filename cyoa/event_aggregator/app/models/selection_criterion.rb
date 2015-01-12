@@ -11,6 +11,11 @@ class SelectionCriterion < ActiveRecord::Base
     super
   end
 
+  def sql_expression_as_clause
+    expr = sql_expression
+    class_eval { sanitize_sql_array(expr) }
+  end
+
   def implementation_strategy
     @implementation_strategy ||= create_my_implementation
   end

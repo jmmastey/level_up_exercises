@@ -15,7 +15,7 @@ class FeedsController < ApplicationController
   end
 
   def new
-    @feed = Feed.new
+    @feed = Feed.new;
     respond_with(@feed)
   end
 
@@ -25,7 +25,11 @@ class FeedsController < ApplicationController
   def create
     @feed = Feed.new(feed_params.merge({ user_id: current_user.id }))
     @feed.save
-    respond_with(@feed)
+    if @feed.errors.blank?
+      redirect_to(edit_feed_path(@feed))
+    else
+      respond_with(@feed)
+    end
   end
 
   def update

@@ -1,19 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Implementation class:</strong>
-  <%= @selection_criterium.implementation_class %>
-</p>
-
-<p>
-  <strong>Configuration:</strong>
-  <%= @selection_criterium.configuration %>
+  <strong>Type of condition:</strong>
+  <%= @selection_criterion.implementation_strategy.selector_description %>
 </p>
 
 <p>
   <strong>Sql expression:</strong>
-  <%= @selection_criterium.sql_expression %>
+  <%= @selection_criterion.sql_expression_as_clause %>
 </p>
 
-<%= link_to 'Edit', edit_selection_criterium_path(@selection_criterium) %> |
-<%= link_to 'Back', selection_criteria_path %>
+<%= link_to 'Edit',
+      edit_feed_selection_criterion_path(@feed, @selection_criterion) %> |
+<%= link_to 'Back', @selection_criterion.feed %>

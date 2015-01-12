@@ -16,6 +16,7 @@ URL_NICKNAMES =
   'the customer service phone number' => EventAggregator.customer_service_telno,
   'the customer service e-mail address' => EventAggregator.customer_service_email,
   'the login page' => '/users/sign_in',
+  'create new feed' => '/feeds/new',
 }
 
 def url_by_nickname(url_nickname)
@@ -29,6 +30,7 @@ ELEMENT_NICKNAMES =
   'password confirmation' => 'user_password_confirmation',
   'first name' => 'user_first_name',
   'last name' => 'user_last_name',
+  'feed title' => 'feed_title',
 }
 
 def id_by_nickname(input_nickname)

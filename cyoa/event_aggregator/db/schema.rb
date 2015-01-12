@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141224215649) do
+ActiveRecord::Schema.define(version: 20150112021738) do
 
   create_table "calendar_events", force: true do |t|
-    t.string   "title",           limit: 256
+    t.string   "title",           limit: 256,  null: false
     t.datetime "start_time",                   null: false
     t.datetime "end_time",                     null: false
     t.text     "description",     limit: 1024
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20141224215649) do
   end
 
   create_table "event_sources", force: true do |t|
-    t.string   "name"
-    t.string   "source_type"
+    t.string   "name",         null: false
+    t.string   "source_type",  null: false
     t.string   "uri"
     t.integer  "frequency"
     t.datetime "last_harvest"
@@ -47,11 +47,19 @@ ActiveRecord::Schema.define(version: 20141224215649) do
     t.datetime "updated_at"
   end
 
+  create_table "event_sources_feeds", force: true do |t|
+    t.integer "event_source_id"
+    t.integer "feed_id"
+  end
+
+  add_index "event_sources_feeds", ["event_source_id"], name: "index_event_sources_feeds_on_event_source_id"
+  add_index "event_sources_feeds", ["feed_id"], name: "index_event_sources_feeds_on_feed_id"
+
   create_table "feeds", force: true do |t|
     t.integer  "user_id"
-    t.string   "title",        limit: 128
+    t.string   "title",        limit: 128,                  null: false
     t.text     "description",  limit: 2048
-    t.boolean  "public",                    default: false
+    t.boolean  "public",                    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "evaluated_at"
@@ -61,12 +69,12 @@ ActiveRecord::Schema.define(version: 20141224215649) do
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
 
   create_table "selection_criteria", force: true do |t|
-    t.string   "implementation_class"
+    t.string   "implementation_class", null: false
     t.text     "configuration"
     t.string   "sql_expression"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "feed_id"
+    t.integer  "feed_id",              null: false
   end
 
   create_table "users", force: true do |t|

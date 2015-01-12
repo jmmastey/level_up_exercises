@@ -1,4 +1,4 @@
-json.array!(@selection_criteria) do |selection_criterium|
-  json.extract! selection_criterium, :id, :implementation_class, :configuration, :sql_expression
-  json.url selection_criterium_url(selection_criterium, format: :json)
+json.array!(@selection_criteria) do |selection_criteria|
+  json.extract! selection_criteria, :id, :implementation_class, :configuration, :sql_expression
+  json.url feed_selection_criteria_url(@feed, selection_criteria, format: :json)
 end

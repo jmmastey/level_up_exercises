@@ -1,4 +1,3 @@
-
 Given /^I fill out the registration form as "(.*)"$/ do |username|
   step 'I am visiting the "Sign up" page'
   params = user_creation_params(username)
@@ -6,6 +5,10 @@ Given /^I fill out the registration form as "(.*)"$/ do |username|
     fill_in("user[#{field}]", with: value)
   end
   fill_in("user[password_confirmation]", with: params['password'])
+end
+
+Given /^I am an (?:unauthenticated|unregistered) user$/ do
+  # Nothing-  just don't authenticate!
 end
 
 When /^I register as user "(.*)"$/ do |username|

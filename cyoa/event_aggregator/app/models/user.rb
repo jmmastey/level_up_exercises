@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :feeds, dependent: :delete_all, foreign_key: :owner_user_id
+  has_many :feeds, dependent: :destroy
 
   def full_name
     [first_name, last_name].compact.join(" ")

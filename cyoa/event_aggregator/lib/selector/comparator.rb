@@ -1,5 +1,3 @@
-require "set"
-
 module Selector
   class Comparator
     include Selector
@@ -10,8 +8,12 @@ module Selector
       ["\"#{field}\" #{sql_operator} '%s'", criterion]
     end
 
+    def self.selector_description
+      "Field comparison"
+    end
+
     def selector_description
-      "Field comparisons"
+      self.class.selector_description
     end
   end
 end

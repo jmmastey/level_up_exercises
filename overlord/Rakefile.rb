@@ -12,6 +12,14 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
+
+# default task ------------------------
+
+task :default => :spec
+
+
+# rspec -------------------------------
+
 require 'rake'
 
 require 'rspec/core'
@@ -21,4 +29,10 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = FileList['spec/**/*_spec.rb']
 end
 
-task :default => :spec
+
+# cucumber ----------------------------
+
+require 'cucumber/rake/task'
+Cucumber::Rake::Task.new(:features)
+
+

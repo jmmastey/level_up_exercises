@@ -11,5 +11,16 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe BillsHelper, :type => :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context '#link_to_bill_pdf' do
+    let(:pdf) { "http://example.com/docs/test_doc.pdf" }
+    let(:bill) { double('bill', latest_version_pdf: pdf)}
+
+    it 'returns correct link' do
+      allow(bill).to receive(:latest_version_pdf?).and_return(true)
+      output = helper.link_to_bill_pdf(bill)
+      link = Capybara.string(output).find('a')
+      expect(link.text).to eq('test_doc.pdf')
+      expect(link[:href]).to eq(pdf)
+    end
+  end
 end

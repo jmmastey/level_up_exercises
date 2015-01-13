@@ -32,7 +32,7 @@ Given(/^legislator has previous sponsoships and cosponsorships$/) do
 end
 
 ### Whens
-When(/^I click on legsilator's name$/) do
+When(/^I click on legislator's name$/) do
   @legislator = find_legislators().first
   click_link(@legislator.name)
 end

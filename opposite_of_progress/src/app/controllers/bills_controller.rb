@@ -10,6 +10,7 @@ class BillsController < ApplicationController
 
   private
     def set_bill
-      @bill = Bill.find(params[:id])
+      @bill = Bill.includes([:actions, :sponsorships, :cosponsorships]).
+        find(params[:id])
     end
 end

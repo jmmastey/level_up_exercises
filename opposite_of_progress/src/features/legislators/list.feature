@@ -19,7 +19,7 @@ Feature: Legislator Index
 
   Scenario: Clicks a link in the listing to get that legislators page
     Given I am on legislators page
-    When I click on legsilator's name
+    When I click on legislator's name
     Then I should see that legislator's page
 
 

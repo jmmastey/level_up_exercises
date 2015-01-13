@@ -1,9 +1,9 @@
 module LegislatorsHelper
   def legislator_image_tag(legislator)
-    images = Dir.glob('app/assets/images/legislators/150/*.jpg')
-    index  = legislator.id % images.length
-    image  = images[index].sub('app/assets/images/', '')
-
+    # images = Dir.glob('app/assets/images/legislators/150/*.jpg')
+    # index  = legislator.id % images.length
+    # image  = images[index].sub('app/assets/images/', '')
+    image = "legislators/150/#{legislator.bioguide_id.capitalize}.jpg"
     image_tag(image)
   end
 

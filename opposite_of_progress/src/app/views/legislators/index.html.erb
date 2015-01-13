@@ -1,3 +1,4 @@
+<% if @legislators.present? %>
 <section>
   <div class="legislators">
     <%= render @legislators %>
@@ -6,5 +7,13 @@
 <section>
   <%= pagination_wrapper_for(@legislators) %>
 </section>
-
+<% else %>
+<section>
+  <div class="empty">
+    <div>
+      There are no legislators to show
+    </div>
+  </div>
+</section>
+<% end %>
 

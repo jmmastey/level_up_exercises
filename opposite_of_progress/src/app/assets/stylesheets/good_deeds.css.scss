@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .good-deeds {
-  @include minimal-list
+  @include page-content-wrapper;
 }
 
 section.good-deed-paigantion {
@@ -44,5 +44,5 @@ section.good-deed-paigantion {
 }
 
 .banner {
-  // margin-top: 20px;
+  @include grid-column($columns: 12);;
 }

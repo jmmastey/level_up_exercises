@@ -4,7 +4,7 @@
 
 .bills.index {
   .bills {
-    @include minimal-list;
+    @include page-content-wrapper;
   }
 
   .bill {
@@ -43,6 +43,97 @@
 
     .last-action-text {
        color: lighten($body-font-color, 60);
+    }
+  }
+}
+
+.bills.show {
+  .bill {
+    margin-top: 30px;
+    @include grid-column($columns: 12);
+
+    h4, h6 {
+      font-weight: bold;
+      line-height: 1em;
+      display: block;
+      margin-bottom: 1em;
+      color: $anchor-font-color;
+    }
+
+    .bill-details {
+      @include grid-row($behavior: nest);
+    }
+
+    .bill-details-section {
+      @include grid-column($columns: 12);
+
+      @media #{$large-up} {
+        @include grid-column($columns: 6);
+      }
+
+      padding-right: 30px;
+
+      > div {
+        @include minimal-list-item;
+
+        &:last-item {
+          border-top: none;
+        }
+
+        @media #{$large-up} {
+          margin-right: 15px;
+
+          &:last-item {
+            border-top: 1px solid #eee;
+            margin-right: 0px;
+            margin-left: 15px;
+          }
+        }
+
+        .heading {
+          font-weight: bold;
+          @include grid-column($columns: 4);
+        }
+      }
+    }
+
+    .summary {
+      margin-top: 2rem;
+    }
+  }
+
+
+  .good-deeds {
+
+    @include grid-column($columns: 12);
+
+    > div {
+      @include minimal-list-item;
+    }
+  }
+
+  .sponsorship,
+  .cosponsorship
+  {
+    > div {
+      @include grid-column($columns: 12);
+    }
+  }
+
+  .action {
+    > div {
+      display: inline-block;
+    }
+
+    .acted-at {
+      font-size: 0.8em;
+      color: lighten($body-font-color, 60);
+      @include grid-column($columns: 12);
+
+      @media #{$large-up} {
+        font-size: 1em;
+        @include grid-column($columns: 2);
+      }
     }
   }
 }

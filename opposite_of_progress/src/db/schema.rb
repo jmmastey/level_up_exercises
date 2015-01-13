@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108034557) do
+ActiveRecord::Schema.define(version: 20150112232930) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_type"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20150108034557) do
     t.datetime "last_action_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "enacted_as"
+    t.string   "latest_version_pdf"
   end
 
   create_table "good_deeds", force: true do |t|
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150108034557) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
+    t.string   "website"
   end
 
   add_index "legislators", ["bioguide_id"], name: "index_legislators_on_bioguide_id", unique: true

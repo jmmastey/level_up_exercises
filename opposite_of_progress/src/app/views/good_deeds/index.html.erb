@@ -3,6 +3,7 @@
     <%= image_tag 'congress.jpg' %>
   </div>
 </section>
+<% if @good_deeds.present? %>
 <section>
   <div class="good-deeds">
     <h4>Recent Good Deeeds of 114th Congress</h4>
@@ -12,3 +13,12 @@
 <section>
   <%= pagination_wrapper_for(@good_deeds) %>
 </section>
+<% else %>
+<section>
+  <div class="empty">
+    <div>
+      There are no good deeds to show
+    </div>
+  </div>
+</section>
+<% end %>

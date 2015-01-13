@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Good Deeds" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -15,10 +15,12 @@
     <%= render 'layouts/navigation' %>
     <%= render 'layouts/flash_messages' %>
     <div class="content-container">
-      <%= yield %>
+      <section>
+        <div class="devise-content-wrapper">
+          <%= yield %>
+        </div>
+      </section>
     </div>
-
     <%= javascript_include_tag "application" %>
   </body>
 </html>
-

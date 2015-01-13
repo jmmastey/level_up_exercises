@@ -2,7 +2,7 @@
   <div class="legislator-contact-detais-wrapper">
     <div class="url">
       <%= fa_icon 'globe fw' %>
-      <%=  link_to strip_http(legislator.url), legislator.url, target: '_blank'%>
+      <%=  link_to strip_http(legislator.website), "http://#{legislator.website}", target: '_blank'%>
     </div>
     <div class="phone">
       <%= fa_icon 'phone fw' %>

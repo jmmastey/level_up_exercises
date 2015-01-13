@@ -1,5 +1,5 @@
 class Legislator < ActiveRecord::Base
-  validates :bioguide_id, presence: true, uniqueness: true
+  # validates :bioguide_id, presence: true, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :title, presence: true, inclusion: { in: %w(Sen Rep Del Com) }
@@ -30,7 +30,6 @@ class Legislator < ActiveRecord::Base
     'I' => 'Independent',
   }
 
-
   def senator?
     chamber == 'senate'
   end
@@ -55,7 +54,4 @@ class Legislator < ActiveRecord::Base
   def readable_district
     district.zero? ? 'At-Large' : district.ordinalize
   end
-  # def representation
-  #   "#{party}-#{state}"
-  # end
 end

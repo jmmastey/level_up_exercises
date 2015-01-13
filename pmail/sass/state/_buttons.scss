@@ -1,0 +1,17 @@
+.red-button {
+
+  &:active, &:hover {
+    background: darken($orange-red, 5%);
+  }
+}
+
+.email-controls button {
+
+  &:active, &:hover {
+    border: 1px solid darken($dark-gray, 15%);
+
+    use {
+      fill: black;
+    }
+  }
+}

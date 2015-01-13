@@ -1,0 +1,40 @@
+/*------------------------------------*\
+    #LAYOUT - SIDEBAR
+\*------------------------------------*/
+
+.sidebar-container {
+  padding-left: 1rem;
+
+  .app-control {
+    padding: .3rem 0;
+
+    button {
+      margin-left: 0.4rem;
+    }
+  }
+
+  .mailboxes {
+    padding: .5rem 0;
+    @include font-size(0.85);
+    @include font(body);
+
+    button {
+      margin-left: 0.5rem;
+    }
+
+    ul {
+      padding: 0;
+      margin-top: 0.7rem;
+
+      a {
+          color: black;
+          text-decoration: none;
+
+          li {
+            list-style-type: none;
+            padding: 0.3rem 0.5rem;
+          }
+        }
+    }
+  }
+}

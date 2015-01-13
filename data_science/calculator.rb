@@ -6,7 +6,7 @@ class Calculator
   end
 
   def experiment
-    experiment ||= Experiment.new(@file)
+    @experiment ||= Experiment.new(@file)
   end
 
   def expected_conversions(cohort_name)

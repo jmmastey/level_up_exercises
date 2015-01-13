@@ -12,3 +12,4 @@ end
 def start_time
   session[:start_time] ||= (Time.now).to_s
 end
+

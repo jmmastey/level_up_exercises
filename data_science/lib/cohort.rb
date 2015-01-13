@@ -1,13 +1,11 @@
 include Math
 
-class ABCohort
-  attr_reader :cohort, :conversions, :nonconvs
-  def initialize(cohort_name, conversions, nonconvs)
-    raise "Invalid cohort name" unless cohort_name == "A" || cohort_name == "B"
-    raise "Invalid data" if conversions < 0 || nonconvs < 0
-    raise "Need at least one trial" unless (conversions + nonconvs) > 0
+class Cohort
+  attr_reader :conversions, :nonconvs
+  def initialize(conversions, nonconvs)
+    raise ArgumentError if conversions < 0 || nonconvs < 0
+    raise ArgumentError unless (conversions + nonconvs) > 0
     raise TypeError unless conversions.is_a?(Integer) && nonconvs.is_a?(Integer)
-    @cohort_name = cohort_name
     @conversions = conversions
     @nonconvs = nonconvs
   end
@@ -33,7 +31,7 @@ class ABCohort
   def to_h
     {
       conversions: @conversions,
-      nonconvs: @nonconvs
+      nonconvs: @nonconvs,
     }
   end
 end

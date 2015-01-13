@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe ABDataSummary do
+  Dir.chdir("./spec")
   describe "#new" do
     context "with invalid input" do
       it "returns exception for empty files" do
@@ -16,15 +17,16 @@ describe ABDataSummary do
       end
 
       it "returns exception if result is not 1 or 0" do
-        expect { ABDataSummary.new("data_with_invalid_result.json") }.to raise_error
+        expect { ABDataSummary.new("invalid_results.json") }.to raise_error
       end
 
       it "returns exception if only A or B data is present" do
-        expect { ABDataSummary.new("data_without_b_cohort.json") }.to raise_error
+        expect { ABDataSummary.new("no_b_cohort.json") }.to raise_error
       end
 
       it "returns exception when given file is not json data" do
-        expect { ABDataSummary.new("README.md") }.to raise_error
+        puts ABDataSummary.new("README.md")
+        expect { ABDataSummary.new("../README.md") }.to raise_error
       end
     end
 

@@ -6,9 +6,15 @@ describe ABCohort do
       it "returns exception for when cohort is not A or B" do
         expect { ABCohort.new("C", 1, 2) }.to raise_error
       end
+
       it "returns exception if no trials" do
         expect { ABCohort.new("A", 0, 0) }.to raise_error
       end
+
+      it "returns exception if no data are not Integers" do
+        expect { ABCohort.new("A", 0.1, 1.2) }.to raise_error
+      end
+
       it "returns exception for negative data" do
         expect { ABCohort.new("B", 32, -2) }.to raise_error
         expect { ABCohort.new("B", -1, 0) }.to raise_error

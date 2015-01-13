@@ -7,10 +7,10 @@ class ABDataSummary
   def initialize(json)
     results = parse_and_sum(parse_json(json))
     #p results
-    @a_conv = results[:a_1] || 0
-    @a_nonconv = results[:a_0] || 0
-    @b_conv = results[:b_1] || 0
-    @b_nonconv = results[:b_0] || 0
+    @a_conv = results[:a_1]
+    @a_nonconv = results[:a_0]
+    @b_conv = results[:b_1]
+    @b_nonconv = results[:b_0]
     validate_data
   end
 

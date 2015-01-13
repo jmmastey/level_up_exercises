@@ -5,5 +5,8 @@ gem "sinatra"
 group :development do
   gem "bundler", "~> 1.0"
   gem "cucumber"
+  gem "growl"
+  gem "guard"
+  gem "guard-rspec"
   gem "rspec"
 end

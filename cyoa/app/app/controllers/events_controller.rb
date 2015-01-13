@@ -6,9 +6,14 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    pull_events if Event.all.count == 0
+    # pull_events if Event.all.count == 0
     @last_updated = Event.all.order('updated_at').last.updated_at.strftime("%d-%m-%Y")
-    pull_events if @last_update != Time.now.strftime("%d-%m-%Y")
+    # pull_events if @last_update != Time.now.strftime("%d-%m-%Y")
+    if Event.all.count == 0
+      pull_events
+    elsif @last_updated != Time.now.strftime("%d-%m-%Y")
+      pull_events
+    end
 
     @events =  Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight).order('avg_price DESC')
     @carousel = Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight+6.day).order('avg_price DESC').take(5)
@@ -106,7 +111,7 @@ class EventsController < ApplicationController
         new_event.venue_id = venue.id
         new_event.listings = event['stats']['listing_count']
         new_event.link = event['url']
-        new_event.picture = event['image'] if event['image'] != nil
+        new_event.picture = event['performers'][0]['image'] if event['performers'][0]['image'] != nil
         new_event.avg_price = event['stats']['average_price'].to_f
         new_event.low_price = event['stats']['lowest_price'].to_f
         new_event.date = event['datetime_utc']

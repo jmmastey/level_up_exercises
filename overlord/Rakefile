@@ -1,0 +1,12 @@
+require 'bundler'
+
+
+task :default => :spec
+
+require "sinatra/activerecord/rake"
+require_relative "app/overlord"
+
+require "rspec/core/rake_task"
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.verbose = true
+end

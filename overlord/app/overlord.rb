@@ -2,6 +2,8 @@
 
 require 'sinatra'
 require 'dm-sqlite-adapter'
+require "sinatra/activerecord"
+
 enable :sessions
 
 class Hash
@@ -13,13 +15,12 @@ class Hash
   end
 end
 
+set :database, {adapter: "sqlite3", database: "detonation_device"}
+
 class Overlord < Sinatra::Application
  configure :development do
     DataMapper::Logger.new($stdout, :debug)
-    DataMapper.setup(
-        :default,
-        "sqlite3://#{Dir.pwd}/bomb.db"
-    )
+
   end
   get '/' do
     "Time to build an app around here. Start time: " + start_time
@@ -31,5 +32,9 @@ class Overlord < Sinatra::Application
 
   run! if app_file == $PROGRAM_NAME
 end
+
+
 require_relative 'models/init'
 require_relative 'helpers/init'
+require_relative 'routes/init'
+

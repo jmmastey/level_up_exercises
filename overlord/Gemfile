@@ -10,6 +10,10 @@ gem 'sass', '3.2.1'
 gem 'shotgun', '0.9'
 gem 'dm-sqlite-adapter'
 gem 'datamapper', require: 'data_mapper'
+gem "sinatra-activerecord"
+gem "sqlite3"
+gem "rake"
+gem 'pry'
 
 group :test do
   gem 'rspec-expectations', require: 'rspec/expectations'

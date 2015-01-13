@@ -1,4 +1,4 @@
-require File.expand_path '../spec_helper.rb', __FILE__
+require_relative 'spec_helper'
 
 describe 'overlord' do
   it 'should allow accessing the home page' do

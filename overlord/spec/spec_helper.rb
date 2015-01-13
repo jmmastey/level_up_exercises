@@ -8,7 +8,9 @@ ENV["RAILS_ENV"] ||= 'test'
 
 module RSpecMixin
   include Rack::Test::Methods
-  def app() Overlord end
+  def app
+    Overlord
+  end
 end
 
 # For RSpec 2.x

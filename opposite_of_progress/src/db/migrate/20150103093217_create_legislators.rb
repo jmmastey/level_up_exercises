@@ -16,8 +16,6 @@ class CreateLegislators < ActiveRecord::Migration
       t.string  :state
       t.integer :district
       t.string  :state_rank
-      t.string  :title
-      t.string  :party
 
       # Contatct Details
       t.string  :phone

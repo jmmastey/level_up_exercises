@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112232930) do
+ActiveRecord::Schema.define(version: 20150113173732) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "bills", force: true do |t|
     t.string   "bill_type"
@@ -29,6 +32,8 @@ ActiveRecord::Schema.define(version: 20150112232930) do
     t.datetime "updated_at"
     t.string   "enacted_as"
     t.string   "latest_version_pdf"
+    t.boolean  "active"
+    t.string   "offical_id"
   end
 
   create_table "good_deeds", force: true do |t|
@@ -64,7 +69,7 @@ ActiveRecord::Schema.define(version: 20150112232930) do
     t.string   "website"
   end
 
-  add_index "legislators", ["bioguide_id"], name: "index_legislators_on_bioguide_id", unique: true
+  add_index "legislators", ["bioguide_id"], name: "index_legislators_on_bioguide_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -85,8 +90,8 @@ ActiveRecord::Schema.define(version: 20150112232930) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

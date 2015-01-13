@@ -1,10 +1,9 @@
 module LegislatorsHelper
   def legislator_image_tag(legislator)
-    # images = Dir.glob('app/assets/images/legislators/150/*.jpg')
-    # index  = legislator.id % images.length
-    # image  = images[index].sub('app/assets/images/', '')
-    image = "legislators/150/#{legislator.bioguide_id.capitalize}.jpg"
-    image_tag(image)
+    image_path = "legislators/150/#{legislator.bioguide_id.capitalize}.jpg"
+    dir_path = 'app/assets/images'
+    return unless FileTest.exist? Rails.root.join(dir_path, image_path).to_s
+    image_tag(image_path)
   end
 
   def link_to_legislator(legislator, options = {})

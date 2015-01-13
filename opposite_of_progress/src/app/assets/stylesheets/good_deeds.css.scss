@@ -39,7 +39,9 @@ section.good-deed-paigantion {
       @include grid-column($columns: 10);
     }
 
-    overflow: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 

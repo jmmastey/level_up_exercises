@@ -1,0 +1,39 @@
+- require "date"
+- messages = [{ from: "Mastey, Joseph",
+                count: 1,
+                subject: "Superfun Learning",
+                date: Date.today - 1,
+                new?: true },
+              { from: "Durko, Steve",
+                count: 15,
+                subject: "More stuff for the training team",
+                date: Date.new(2015, 1, 6),
+                new?: true },
+              { from: "Test",
+                count: 3,
+                subject: "More test messages",
+                date: Date.new(2015, 1, 4),
+                new?: true },
+              { from: "Test",
+                count: 1,
+                subject: "Test message",
+                date: Date.new(2015, 1, 1) },
+              { from: "Mastey, Joseph",
+                count: 3,
+                subject: "Training Things",
+                date: Date.new(2014, 12, 18) },
+              { from: "Mastey, Lynch, mullins",
+                count: 6,
+                subject: "Apprentice Things",
+                date: Date.new(2014, 12, 9) }]
+
+%main.message-list
+  - messages.each_with_index do |message, index|
+    %article.message#message{ id: index, class: message[:new?] ? "unread" : nil }
+      .message-actions
+        %input#selected_message{ type: :checkbox, name: "selected_message", id: index, value: index }><
+        %label{ for: "selected_message_#{index}" }
+          %span
+      .message-field.from= message[:from]
+      .message-field.subject= message[:subject]
+      .message-field.date= message[:date].year == Date.today.year ? message[:date].strftime('%b %-d') : message[:date].strftime('%-m/%-d/%y')

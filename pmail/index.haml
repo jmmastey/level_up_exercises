@@ -1,31 +1,6 @@
-- require "date"
-- messages = [{ from: "Mastey, Joseph",
-                count: 1,
-                subject: "Superfun Learning",
-                date: Date.today - 1,
-                new?: true },
-              { from: "Durko, Steve",
-                count: 15,
-                subject: "More stuff for the training team",
-                date: Date.new(2015, 1, 6),
-                new?: true },
-              { from: "Test",
-                count: 3,
-                subject: "More test messages",
-                date: Date.new(2015, 1, 4),
-                new?: true },
-              { from: "Test",
-                count: 1,
-                subject: "Test message",
-                date: Date.new(2015, 1, 1) },
-              { from: "Mastey, Joseph",
-                count: 3,
-                subject: "Training Things",
-                date: Date.new(2014, 12, 18) },
-              { from: "Mastey, Lynch, mullins",
-                count: 6,
-                subject: "Apprentice Things",
-                date: Date.new(2014, 12, 9) }]
+- def haml(filename)
+  - Haml::Engine.new(File.read(filename)).render
+
 !!! XML
 !!!
 %html{lang: :en}
@@ -42,165 +17,13 @@
     %link{ href: "stylesheets/font-awesome.min.css", rel: :stylesheet, type: "text/css" }/
     %link{ href: "stylesheets/pmail.css", rel: :stylesheet, type: "text/css" }/
   %body
-    %section.topbar.topbar-primary
-      %a.brand{alt: "Enova", href: "javascript:;"}
-      %form#search-form.search-form
-        .search-box><
-          %input{type: :search}></
-          %a.dropdown-toggle
-            %i.fa.fa-caret-down
-        %button.primary-button{ type: :submit }
-          %i.fa.fa-search
-      .topbar-links.right
-        %ul
-          %li
-            %a.dropdown-toggle{ href: "javascript:;" }
-              %i.fa.fa-th
-            .dropdown-panel.hidden.center#app-dropdown
-              .grid-menu
-                %a.item{ href: "#" }
-                  .icon.icon-search
-                  %figcaption Search
-                %a.item{ href: "#" }
-                  .icon.icon-mail
-                  %figcaption Mail
-                %a.item{ href: "#" }
-                  .icon.icon-calendar
-                  %figcaption Calendar
-                %a.item{ href: "#" }
-                  .icon.icon-drive
-                  %figcaption Drive
-                %a.item{ href: "#" }
-                  .icon.icon-docs
-                  %figcaption Docs
-                %a.item{ href: "#" }
-                  .icon.icon-sheets
-                  %figcaption Sheets
-                %a.item{ href: "#" }
-                  .icon.icon-slides
-                  %figcaption Slides
-              .menu-addendum
-                %a{ href: "#" }
-                  More
-                  %span.fa.fa-caret-down
-          %li
-            %a.dropdown-toggle{ href: "javascript:;" }
-              dkotowski@enova.com
-              %i.fa.fa-caret-down
-            .dropdown-panel.hidden.right#account-dropdown
-              .padded-group
-                .line
-                  %strong Dan Kotowski
-                .line dkotowski@enova.com
-                .line.segmented
-                  %a.inline{ href: "#" } Account
-                  %a.inline{ href: "#" } Privacy
-              .menu-addendum
-                %button Add account
-                %button Sign out
+    = haml("partials/_topbar.haml")
     %section.body
-      %nav.sidebar
-        .topbar
-          .topbar-links
-            %ul
-              %li
-                %a.dropdown-toggle{ href: "javascript:;" }
-                  Mail
-                  %i.fa.fa-caret-down
-                .dropdown-panel.hidden#mail-dropdown
-                  %ul.dropdown-menu.large
-                    %li.active
-                      %a{ href: "javascript:;" } Mail
-                    %li
-                      %a{ href: "javascript:;" } Contacts
-                    %li
-                      %a{ href: "javascript:;" } Tasks
-        .sidebar-main
-          %button.secondary-button#compose Compose
-          %ul.sidebar-links
-            %li.active
-              %a{ href: "javascript:;" } Inbox
-            %li
-              %a{ href: "javascript:;" } Starred
-            %li
-              %a{ href: "javascript:;" } Sent Mail
-            %li
-              %a{ href: "javascript:;" } Drafts
-            %li
-              %a{ href: "javascript:;" } Projects
-            %li
-              %a.dropdown-toggle{ href: "javascript:;" }
-                More
-                %i.fa.fa-caret-down
-          %ul.sidebar-links.hidden#more-links
-            %li
-              %a{ href: "javascript:;" } Important
-            %li
-              %a{ href: "javascript:;" } All Mail
-            %li
-              %a{ href: "javascript:;" } Spam
-            %li
-              %a{ href: "javascript:;" } Trash
+      = haml("partials/_sidebar.haml")
       %section.main-pane
-        .topbar
-          .topbar-links
-            %ul
-              %li
-                %button.dropdown-toggle{ title: "Select" }
-                  %i.fa.fa-square-o
-                  %i.fa.fa-caret-down
-                .dropdown-panel.hidden
-                  %ul.dropdown-menu
-                    %li.active
-                      %a{ href: "javascript:;" } All
-                    %li
-                      %a{ href: "javascript:;" } Read
-                    %li
-                      %a{ href: "javascript:;" } Unread
-                    %li
-                      %a{ href: "javascript:;" } Starred
-                    %li
-                      %a{ href: "javascript:;" } Unstarred
-              %li
-                %button#refresh{ title: "Refresh" }
-                  %i.fa.fa-refresh
-              %li
-                %button.dropdown-toggle
-                  More
-                  %i.fa.fa-caret-down
-                .dropdown-panel.hidden
-                  %ul.dropdown-menu
-                    %li
-                      %a{ href: "javascript:;" } Mark All as Read
-        %main.message-list
-          - messages.each_with_index do |message, index|
-            %article.message#message{ id: index, class: message[:new?] ? "unread" : nil }
-              .message-actions
-                %input#selected_message{ type: :checkbox, name: "selected_message", id: index, value: index }><
-                %label{ for: "selected_message_#{index}" }
-                  %span
-              .message-field.from= message[:from]
-              .message-field.subject= message[:subject]
-              .message-field.date= message[:date].year == Date.today.year ? message[:date].strftime('%b %-d') : message[:date].strftime('%-m/%-d/%y')
-        %footer
-          .left
-            .line
-              %strong 0% full
-            .line Using 15GB of your 500TB
-          .middle
-            .line.segmented
-              %span &copy;2015 Polish Dan
-              %span
-                %a{ href: "javascript:;", onclick: "alert('TOS: All your data are belong to us!');" } Terms of Service
-              %span
-                %a{ href: "javascript:;", onclick: "alert('You have no privacy.');" } Privacy Policy
-              %span
-                %a{ href: "javascript:;" } Program Policies
-            .line Powered by the souls of the damned
-          .right
-            .line Last account activity: 2 days ago
-            .line
-              %a{ href: "javascript:;" } Details
+        = haml("partials/_subtopbar.haml")
+        = haml("partials/_messages.haml")
+        = haml("partials/_footer.haml")
 
     %script{src: "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}
     %script{src: "pmail.js"}

@@ -1,0 +1,30 @@
+.topbar
+  .topbar-links
+    %ul
+      %li
+        %button.dropdown-toggle{ title: "Select" }
+          %i.fa.fa-square-o
+          %i.fa.fa-caret-down
+        .dropdown-panel.hidden
+          %ul.dropdown-menu
+            %li.active
+              %a{ href: "javascript:;" } All
+            %li
+              %a{ href: "javascript:;" } Read
+            %li
+              %a{ href: "javascript:;" } Unread
+            %li
+              %a{ href: "javascript:;" } Starred
+            %li
+              %a{ href: "javascript:;" } Unstarred
+      %li
+        %button#refresh{ title: "Refresh" }
+          %i.fa.fa-refresh
+      %li
+        %button.dropdown-toggle
+          More
+          %i.fa.fa-caret-down
+        .dropdown-panel.hidden
+          %ul.dropdown-menu
+            %li
+              %a{ href: "javascript:;" } Mark All as Read

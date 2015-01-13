@@ -1,0 +1,42 @@
+%nav.sidebar
+  .topbar
+    .topbar-links
+      %ul
+        %li
+          %a.dropdown-toggle{ href: "javascript:;" }
+            Mail
+            %i.fa.fa-caret-down
+          .dropdown-panel.hidden#mail-dropdown
+            %ul.dropdown-menu.large
+              %li.active
+                %a{ href: "javascript:;" } Mail
+              %li
+                %a{ href: "javascript:;" } Contacts
+              %li
+                %a{ href: "javascript:;" } Tasks
+  .sidebar-main
+    %button.secondary-button#compose Compose
+    %ul.sidebar-links
+      %li.active
+        %a{ href: "javascript:;" } Inbox
+      %li
+        %a{ href: "javascript:;" } Starred
+      %li
+        %a{ href: "javascript:;" } Sent Mail
+      %li
+        %a{ href: "javascript:;" } Drafts
+      %li
+        %a{ href: "javascript:;" } Projects
+      %li
+        %a.dropdown-toggle{ href: "javascript:;" }
+          More
+          %i.fa.fa-caret-down
+    %ul.sidebar-links.hidden#more-links
+      %li
+        %a{ href: "javascript:;" } Important
+      %li
+        %a{ href: "javascript:;" } All Mail
+      %li
+        %a{ href: "javascript:;" } Spam
+      %li
+        %a{ href: "javascript:;" } Trash

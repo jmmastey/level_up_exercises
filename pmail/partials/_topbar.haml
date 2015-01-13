@@ -1,0 +1,56 @@
+%section.topbar.topbar-primary
+  %a.brand{alt: "Enova", href: "javascript:;"}
+  %form#search-form.search-form
+    .search-box><
+      %input{type: :search}></
+      %a.dropdown-toggle
+        %i.fa.fa-caret-down
+    %button.primary-button{ type: :submit }
+      %i.fa.fa-search
+  .topbar-links.right
+    %ul
+      %li
+        %a.dropdown-toggle{ href: "javascript:;" }
+          %i.fa.fa-th
+        .dropdown-panel.hidden.center#app-dropdown
+          .grid-menu
+            %a.item{ href: "#" }
+              .icon.icon-search
+              %figcaption Search
+            %a.item{ href: "#" }
+              .icon.icon-mail
+              %figcaption Mail
+            %a.item{ href: "#" }
+              .icon.icon-calendar
+              %figcaption Calendar
+            %a.item{ href: "#" }
+              .icon.icon-drive
+              %figcaption Drive
+            %a.item{ href: "#" }
+              .icon.icon-docs
+              %figcaption Docs
+            %a.item{ href: "#" }
+              .icon.icon-sheets
+              %figcaption Sheets
+            %a.item{ href: "#" }
+              .icon.icon-slides
+              %figcaption Slides
+          .menu-addendum
+            %a{ href: "#" }
+              More
+              %span.fa.fa-caret-down
+      %li
+        %a.dropdown-toggle{ href: "javascript:;" }
+          dkotowski@enova.com
+          %i.fa.fa-caret-down
+        .dropdown-panel.hidden.right#account-dropdown
+          .padded-group
+            .line
+              %strong Dan Kotowski
+            .line dkotowski@enova.com
+            .line.segmented
+              %a.inline{ href: "#" } Account
+              %a.inline{ href: "#" } Privacy
+          .menu-addendum
+            %button Add account
+            %button Sign out

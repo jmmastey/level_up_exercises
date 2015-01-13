@@ -3,6 +3,12 @@
 
 // THEME
 
+a.inline
+  color: $primary-color
+
+  &:active, &:hover
+    color: darken($primary-color, 15%)
+
 body
   background: $background-color
 
@@ -69,3 +75,6 @@ ul.sidebar-links
 
   &:hover
     border-left: 2px dotted $border-color
+
+.menu-addendum
+  background-color: $secondary-background-color

@@ -17,17 +17,32 @@ describe Experiment do
     file.rewind
   end
 
-  it "calculates conversion rates" do
-    conversion_rate = experiment.observed_conversion_rate("B")
-    expect(conversion_rate).to eq(0.4)
+  it "calculates for all cohorts of experiment" do
+    expect(experiment.visits_for_experiment["A"]).to eq(3)
   end
 
-  it "calculates standard error" do
-    expect(experiment.standard_error("B")).to eq(0.2191)
+  it "calculates total conversions experiment" do
+    total = described_class.new("test_data.json").total_conversions
+    expect(total).to eq(4)
   end
 
-  it "calculates expected conversion rate" do
-    expect(experiment.expected_conversion_rate("B")).to eq(max: 40.44,
-      min: 39.56)
+  it "calculates total conversions experiment" do
+    total = described_class.new("test_data.json").total_visits
+    expect(total).to eq(8)
+  end
+
+  it "calculates average conversions experiment" do
+    avg_conversions = described_class.new("test_data.json").average_conversions
+    expect(avg_conversions).to eq(0.5)
+  end
+
+  it "calculates expected failures experiment" do
+    expected_failures = described_class.new("test_data.json").expected_failures
+    expect(expected_failures).to eq({ "A" => 1.5, "B" => 2.5 })
+  end
+
+  it "calculates expected failures experiment" do
+    expected_conversion = described_class.new("test_data.json").expected_conversions
+    expect(expected_conversion).to eq({ "A" => 1.5, "B" => 2.5 })
   end
 end

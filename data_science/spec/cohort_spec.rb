@@ -2,9 +2,11 @@ require_relative '../cohort.rb'
 
 describe Cohort do
   context "when views are a mixed" do
-    let(:pageviews) { [double(result: 1), double(result: 0), double(result: 1)] }
-    let(:pageviews_negative) { [double(result: 0), double(result: 0), double(result: 0), double(result: 0)] }
-    let(:pageviews_positive) { [double(result: 1), double(result: 1)] }
+    let(:pageviews) { [PageView.new("A", 0), PageView.new("A", 1), PageView.new("A", 1)] }
+    let(:pageviews_negative) { [PageView.new("B", 0), PageView.new("B", 0), PageView.new("B", 0), PageView.new("B", 0)] }
+    let(:pageviews_positive) { [PageView.new("C", 1), PageView.new("C", 1)] }
+
+#    let(:pageviews_positive) { [double(result: 1), double(result: 1)] }
 
     let(:cohort) { Cohort.new("A", pageviews) }
     let(:cohort_hated_it) { Cohort.new("B", pageviews_negative) }

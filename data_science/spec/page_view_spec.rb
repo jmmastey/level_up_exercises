@@ -1,11 +1,11 @@
 require_relative '../page_view.rb'
 
 describe PageView do
-  describe "#initialize" do
-    let(:pageview) { PageView.new(cohort, result) }
-    let(:cohort) { "A" }
-    let(:result) { 1 }
+  let(:pageview) { PageView.new(cohort, result) }
+  let(:cohort) { "A" }
+  let(:result) { 1 }
 
+  describe "#initialize" do
     context "when arguments are correct then" do
       it "has a name and result" do
         expect(pageview.cohort).to eq("A")
@@ -23,35 +23,23 @@ describe PageView do
       end
     end
 
-    context "when cohort is not passed" do
+    context "one argument is passed" do
       it "raises and error" do
         expect { PageView.new(result) }.to raise_error
-      end
-    end
-
-    context "when result is not passed" do
-      it "raises and error" do
         expect { PageView.new(cohort) }.to raise_error
       end
     end
-  end
+
+    end
 
 
   describe "#converted?" do
-    let(:pageview) { PageView.new(cohort, result) }
-    let(:cohort) { "A" }
-    let(:result) { 1 }
-
     it "returns whether a cohort is converted" do
       expect(pageview.converted?).to eq(true)
     end
   end
 
   describe "#rejected?" do
-    let(:pageview) { PageView.new(cohort, result) }
-    let(:cohort) { "A" }
-    let(:result) { 1 }
-
     it "returns whether a cohort is rejected" do
       expect(pageview.rejected?).to eq(false)
     end

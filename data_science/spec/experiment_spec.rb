@@ -11,12 +11,12 @@ describe Experiment do
   end
 
   def results(a_conversions, a_rejections, b_conversions, b_rejections)
-    array = []
-    a_conversions.times { array << result("A", 1) }
-    a_rejections.times  { array << result("A", 0) }
-    b_conversions.times { array << result("B", 1) }
-    b_rejections.times  { array << result("B", 0) }
-    array
+    [].tap do |result_set|
+      a_conversions.times { result_set << result("A", 1) }
+      a_rejections.times { result_set << result("A", 0) }
+      b_conversions.times { result_set << result("B", 1) }
+      b_rejections.times { result_set << result("B", 0) }
+    end
   end
 
   describe '#format_for_abanlyzer' do

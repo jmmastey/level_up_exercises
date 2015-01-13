@@ -27,7 +27,7 @@ class Experiment
 
   def create_cohorts(pageviews)
     @cohorts = []
-    pageviews.group_by(&:cohort).each do |name, pageviews|
+    pageviews.group_by(&:cohort).each_with_object([]) do |name, pageviews|
       @cohorts << Cohort.new(name, pageviews)
     end
   end
@@ -37,14 +37,5 @@ class Experiment
     @cohorts.each_with_object({}) do |(cohort), hash|
       hash[cohort.name.to_sym] = { success: cohort.conversions, failure: cohort.rejections }
     end
-
-
-
-    # groups = {}
-    # @cohorts.each do |cohort|
-    #   groups[cohort.name.to_sym] = { success: cohort.conversions, failure: cohort.rejections }
-    # end
-    # groups
-
   end
 end

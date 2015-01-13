@@ -15,7 +15,7 @@ class Cohort
   end
 
   def rejections
-    pageviews.count {  |view| view.rejected? }
+    pageviews.count(&:rejected?)
   end
 
   def size
@@ -37,5 +37,4 @@ class Cohort
   def standard_error
     Math.sqrt(conversion_percentage * (1 - conversion_percentage) / size)
   end
-
 end

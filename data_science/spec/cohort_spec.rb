@@ -9,7 +9,7 @@ describe Cohort do
 
       it "returns exception if inputs are not integers" do
         expect { Cohort.new(0.1, 13) }.to raise_error(TypeError)
-        expect { Cohort.new(15, "fifteen") }.to raise_error(TypeError)
+        expect { Cohort.new(10, "fifteen") }.to raise_error(TypeError)
       end
 
       it "returns exception for negative data" do

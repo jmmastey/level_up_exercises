@@ -1,5 +1,5 @@
 <div class="bill">
-  <%= content_tag :div, bill.official_id, class: 'official-id' %>
+  <%= content_tag :div, bill.official_id.upcase, class: 'official-id' %>
   <%= content_tag :div, link_to_bill(bill, without_id: true), class: 'official-title' %>
   <%= content_tag :div, class: 'last-action' do %>
     <%= content_tag :span, "Last action on", class: 'last-action-text' %>

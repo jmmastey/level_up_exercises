@@ -94,6 +94,12 @@
           font-weight: bold;
           @include grid-column($columns: 4);
         }
+
+        .content {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
       }
     }
 
@@ -113,10 +119,16 @@
   }
 
   .sponsorship,
-  .cosponsorship
   {
     > div {
       @include grid-column($columns: 12);
+    }
+  }
+
+  .cosponsorship,
+  {
+    > div {
+      @include grid-column($columns: 3);
     }
   }
 

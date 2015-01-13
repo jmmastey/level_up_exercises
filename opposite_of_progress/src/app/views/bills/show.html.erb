@@ -23,7 +23,7 @@
       <div class="bill-details-section">
         <div>
           <div class="heading">Official URL</div>
-          <div class="content"><%= link_to(@bill.url, @bill.url) %></div>
+          <div class="content"><%= link_to(@bill.url, @bill.url, target: '_blank') %></div>
         </div>
         <div>
           <div class="heading">Last Version</div>
@@ -42,7 +42,7 @@
     <div class="summary">
       <h6>Summary</h6>
       <p>
-        <%= @bill.summary %>
+        <%= @bill.summary || "Summary is not available for this bill." %>
       </p>
     </div>
   </div>
@@ -59,7 +59,9 @@
 <section>
   <div class="good-deeds cosponsorships">
     <h6>Co-sponsors</h6>
-    <%= render partial: 'cosponsorship', collection: @bill.cosponsorships %>
+    <% @bill.cosponsorships.each_slice(4) do |cosponsorships| %>
+      <%= render partial: 'cosponsorships', locals: {cosponsorships: cosponsorships } %>
+    <% end %>
   </div>
 </section>
 <% end %>

@@ -8,7 +8,7 @@ flight                GET  /flights/:flight_number                              
 plane_trips           GET  /planes/:plane_number/trips                          trips#index
 
 # Item 4
-plane_trips           GET  /planes/:plane_number/trips/:trip_number/refuel      trips#refuel
+plane                 GET  /planes/:plane_number/stops/date/refuel              planes#refuel
 
 # Item 5
 fights                GET  /flights                                             flights#index
@@ -25,6 +25,27 @@ passenger_bookings    POST /passengers/:passenger_id/bookings                   
 # Item 8B
 plane_trip            PUT  /planes/:plane_number/trips/:trip_number             trips#update
 
+Extra Items:
+
+# Item 9
+Get the bookings for a passenger:
+passenger_bookings    GET  /passengers/:passenger_id/bookings                  bookings#index
+
+# Item 10
+Update the status of a flight (delayed, cancelled, etc)
+flight                PUT  /flights/:flight_number                              flights#update
+
+# Item 11
+Get the planes that will pass through a given location (airport)
+location_trips        GET /location/:airport_code/trips                         trips#index
+
+# Item 12
+Remove a plane that is going into retirement
+plane                 DELETE /planes/:plane_number                              planes#destroy
+
+# Item 13
+Update the weather at a location (airport)
+location              PUT /location/:airport_code                               locations#show
 
 Notes:
 1. Bookings is a has_many :through relationship between passengers and flights; a flight has_many bookings and passengers; a passenger has_many bookings and flights
@@ -33,7 +54,7 @@ Notes:
 
 3. Trip is a has_many :through relationship between planes and locations; a plane has_many trips and locations; a location has_many planes
 
-4. For refueling, this specifies a particular trip and the URL routes to a non-RESTful route in the trips controller
+4. Action on a single resource
 
 5. A query to filter the flight can be passed into the URI, in the form: /flights?airline=southwest&date=1_20_2015
 
@@ -44,3 +65,13 @@ Notes:
 8A. Bookings is a has_many :through relationship between passengers and flights; a flight has_many bookings and passengers; a passenger has_many bookings and flights
 
 8B. Trip is a has_many :through relationship between planes and locations; a plane has_many trips and locations; a location has_many planes
+
+9: Bookings is a has_many :through relationship between passengers and flights; a flight has_many bookings and passengers; a passenger has_many bookings and flights
+
+10. Single resource
+
+11. Trip is a has_many :through relationship between planes and locations; a plane has_many trips and locations; a location has_many planes
+
+12. Single resource
+
+13. Single resource

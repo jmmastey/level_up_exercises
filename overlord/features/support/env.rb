@@ -14,8 +14,6 @@ ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', '..', 'overlord.rb')
 
-
-# Move to bundler
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'

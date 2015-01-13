@@ -1,0 +1,60 @@
+@import variables
+@import mixins
+
+// BASE
+
+html
+  height: 100%
+  margin: 0
+  padding: 0
+
+body
+  font-family: $font-face
+  font-size: $font-size
+  margin: 0
+
+a, button, input, select, textarea
+  outline: none
+
+a
+  color: $text-color
+  text-decoration: none
+
+button
+  background-color: $secondary-background-color
+  border: none
+  font-size: 0.8em
+  min-height: 2em
+  min-width: 5em
+
+  &:active
+    background-color: darken($secondary-background-color, 5%)
+
+input, select
+  border: thin solid
+  height: 1.25em
+  padding: 5px
+  -moz-appearance: none !important
+  -webkit-appearance: none !important
+
+input
+  &[type="checkbox"]
+    display: none
+
+    + label span
+      display: inline-block
+      width: 19px
+      height: 19px
+      margin: -1px 4px 0 0
+      vertical-align: middle
+      cursor: pointer
+      background: url(../images/input_sprite.png) left top no-repeat
+
+    &:checked + label span
+      background: url(../images/input_sprite.png) left -19px no-repeat
+
+ul
+  list-style: none
+  margin: 0
+  padding-left: 0
+

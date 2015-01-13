@@ -1,0 +1,71 @@
+@import variables
+@import mixins
+
+// THEME
+
+body
+  background: $background-color
+
+@each $style, $color in (primary, $primary-color), (secondary, $secondary-color)
+  button.#{$style}-button
+    background-color: $color
+    @if lightness($color) < 60%
+      color: #fff
+    @else
+      color: #000
+
+    &:hover, &:focus
+      background-color: darken($color, 5%)
+    &:active
+      background-color: darken($color, 10%)
+
+input, select
+  background-color: $input-background-color
+  border-color: $border-color
+
+input:focus
+  border-color: $primary-color
+
+ul.sidebar-links
+  li
+    &:hover
+      background-color: $active-background-color
+
+    &.active
+      border-color: $primary-color
+
+      a
+        color: $primary-color
+        font-weight: bold
+
+.dropdown-panel
+  background-color: $background-color
+  border-color: $border-color
+
+.search-box
+  background-color: $input-background-color
+  border-color: $border-color
+
+  &.focus
+    border-color: $primary-color
+
+.topbar
+  border-color: $border-color
+
+.topbar-primary
+  background-color: $secondary-background-color
+
+.message
+  background-color: $secondary-background-color
+  border-bottom: thin solid $border-color
+  font-size: 0.9em
+  min-height: 1.5em
+
+  &.unread
+    font-weight: bold
+
+  &.active
+    background-color: $active-background-color
+
+  &:hover
+    border-left: 2px dotted $border-color

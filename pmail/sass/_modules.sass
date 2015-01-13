@@ -1,0 +1,62 @@
+@import variables
+@import mixins
+
+// MODULES
+
+.brand
+  background-image: url('../images/logo.gif')
+  background-repeat: no-repeat
+  display: inline-block
+  margin: 0 30px
+  height: 59px
+  width: 149px
+
+.dropdown-panel
+  border: thin solid
+  margin: 0
+  min-width: 8em
+  position: absolute
+  text-align: left
+  z-index: 10
+
+  &.center
+    $width: 300px
+    width: $width
+    left: ($width / 2) * -1
+
+  &.right
+    right: 0
+
+  .dropdown-menu
+    font-size: 0.9em
+    list-style: none
+
+    li
+      display: block
+      margin: 0
+
+      a
+        display: block
+        margin: 0
+        padding: 5px
+
+        &:hover
+          background-color: $active-background-color
+
+      &.active a
+        color: $primary-color
+        font-weight: bold
+
+.hidden
+  display: none
+
+.dropdown-toggle
+  .fa-caret-up
+    display: none
+
+  &.active
+    .fa-caret-up
+      display: inline
+    .fa-caret-down
+      display: none
+

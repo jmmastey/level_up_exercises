@@ -31,10 +31,16 @@
 %html{lang: :en}
   %head
     %title PMail
-    %meta{content: "width=device-width, initial-scale=1", name: :viewport}/
-    %link{href: "stylesheets/normalize.css", rel: :stylesheet, type: "text/css"}/
-    %link{href: "stylesheets/font-awesome.min.css", rel: :stylesheet, type: "text/css"}/
-    %link{href: "stylesheets/pmail.css", rel: :stylesheet, type: "text/css"}/
+    %meta{ content: "width=device-width, initial-scale=1", name: :viewport }/
+    %meta{ charset: "UTF-8" }
+    %meta{ "http-equiv" => "content-type", content: "text/html; charset=UTF-8" }
+    %meta{ name: "application-name", content: "PMail" }
+    %meta{ name: :description, content: "Pete's Mail" }
+    %meta{ name: :keywords, content: "mail,Enova,email,Pete" }
+    %meta{ name: :author, content: "Dan Kotowski" }
+    %link{ href: "stylesheets/normalize.css", rel: :stylesheet, type: "text/css" }/
+    %link{ href: "stylesheets/font-awesome.min.css", rel: :stylesheet, type: "text/css" }/
+    %link{ href: "stylesheets/pmail.css", rel: :stylesheet, type: "text/css" }/
   %body
     %section.topbar.topbar-primary
       %a.brand{alt: "Enova", href: "javascript:;"}

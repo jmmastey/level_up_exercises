@@ -1,0 +1,46 @@
+# Item 1
+flight_bookings       GET  /flights/:flight_number/bookings                     bookings#index
+
+# Item 2
+flight                GET  /flights/:flight_number                              flights#show
+
+# Item 3
+plane_trips           GET  /planes/:plane_number/trips                          trips#index
+
+# Item 4
+plane_trips           GET  /planes/:plane_number/trips/:trip_number/refuel      trips#refuel
+
+# Item 5
+fights                GET  /flights                                             flights#index
+
+# Item 6
+location              GET  /locations/:airport_code                             locations#show
+
+# Item 7
+passenger_itineraries GET  /passengers/:passenger_id/itineraries                itineraries#index
+
+# Item 8A
+passenger_bookings    POST /passengers/:passenger_id/bookings                   bookings#create
+
+# Item 8B
+plane_trip            PUT  /planes/:plane_number/trips/:trip_number             trips#update
+
+
+Notes:
+1. Bookings is a has_many :through relationship between passengers and flights; a flight has_many bookings and passengers; a passenger has_many bookings and flights
+
+2. Single resource with no association
+
+3. Trip is a has_many :through relationship between planes and locations; a plane has_many trips and locations; a location has_many planes
+
+4. For refueling, this specifies a particular trip and the URL routes to a non-RESTful route in the trips controller
+
+5. A query to filter the flight can be passed into the URI, in the form: /flights?airline=southwest&date=1_20_2015
+
+6. Single resource with no association
+
+7. Itineraries is a has_many :through relationship between passengers and flights; a passenger has_many itineraries and flights; a flight has_many passengers
+
+8A. Bookings is a has_many :through relationship between passengers and flights; a flight has_many bookings and passengers; a passenger has_many bookings and flights
+
+8B. Trip is a has_many :through relationship between planes and locations; a plane has_many trips and locations; a location has_many planes

@@ -338,8 +338,8 @@ footer > .right {
 }
 /* line 22, ../sass/_modules.sass */
 .dropdown-panel.center {
-  width: 300px;
-  left: -150px;
+  width: 265px;
+  left: -132.5px;
 }
 /* line 27, ../sass/_modules.sass */
 .dropdown-panel.right {
@@ -387,6 +387,68 @@ footer > .right {
 /* line 60, ../sass/_modules.sass */
 .dropdown-toggle.active .fa-caret-down {
   display: none;
+}
+
+/* line 65, ../sass/_modules.sass */
+.grid-menu .item {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px;
+}
+/* line 70, ../sass/_modules.sass */
+.grid-menu .item:hover {
+  outline: thin solid #ccc;
+}
+/* line 73, ../sass/_modules.sass */
+.grid-menu .item figcaption {
+  display: block;
+  font-size: 0.9em;
+  margin-top: 4px;
+  text-align: center;
+}
+/* line 79, ../sass/_modules.sass */
+.grid-menu .item .icon {
+  background: url(../images/google_sprite.png) no-repeat;
+  background-size: 112px 2011px;
+  display: block;
+  width: 64px;
+  height: 64px;
+}
+/* line 86, ../sass/_modules.sass */
+.grid-menu .item .icon.icon-calendar {
+  background-position: -35px -735px;
+}
+/* line 89, ../sass/_modules.sass */
+.grid-menu .item .icon.icon-docs {
+  background-position: 0 0;
+}
+/* line 92, ../sass/_modules.sass */
+.grid-menu .item .icon.icon-drive {
+  background-position: 0 -390px;
+}
+/* line 95, ../sass/_modules.sass */
+.grid-menu .item .icon.icon-mail {
+  background-position: -35px -942px;
+}
+/* line 98, ../sass/_modules.sass */
+.grid-menu .item .icon.icon-search {
+  background-position: 0 -459px;
+}
+/* line 101, ../sass/_modules.sass */
+.grid-menu .item .icon.icon-sheets {
+  background-position: 0 -1149px;
+}
+/* line 104, ../sass/_modules.sass */
+.grid-menu .item .icon.icon-slides {
+  background-position: 0 -1460px;
+}
+
+/* line 107, ../sass/_modules.sass */
+.menu-addendum {
+  background-color: #eee;
+  margin-top: 1em;
+  padding: 1em;
+  text-align: center;
 }
 
 /* line 6, ../sass/_theme.sass */

@@ -58,7 +58,32 @@
             %a.dropdown-toggle{ href: "javascript:;" }
               %i.fa.fa-th
             .dropdown-panel.hidden.center#app-dropdown
-              Apps will go here
+              .grid-menu
+                %a.item{ href: "#" }
+                  .icon.icon-search
+                  %figcaption Search
+                %a.item{ href: "#" }
+                  .icon.icon-mail
+                  %figcaption Mail
+                %a.item{ href: "#" }
+                  .icon.icon-calendar
+                  %figcaption Calendar
+                %a.item{ href: "#" }
+                  .icon.icon-drive
+                  %figcaption Drive
+                %a.item{ href: "#" }
+                  .icon.icon-docs
+                  %figcaption Docs
+                %a.item{ href: "#" }
+                  .icon.icon-sheets
+                  %figcaption Sheets
+                %a.item{ href: "#" }
+                  .icon.icon-slides
+                  %figcaption Slides
+              .menu-addendum
+                %a{ href: "#" }
+                  More
+                  %span.fa.fa-caret-down
           %li
             %a.dropdown-toggle{ href: "javascript:;" }
               dkotowski@enova.com
@@ -113,7 +138,7 @@
           .topbar-links
             %ul
               %li
-                %button.dropdown-toggle
+                %button.dropdown-toggle{ title: "Select" }
                   %i.fa.fa-square-o
                   %i.fa.fa-caret-down
                 .dropdown-panel.hidden
@@ -129,7 +154,7 @@
                     %li
                       %a{ href: "javascript:;" } Unstarred
               %li
-                %button#refresh
+                %button#refresh{ title: "Refresh" }
                   %i.fa.fa-refresh
               %li
                 %button.dropdown-toggle

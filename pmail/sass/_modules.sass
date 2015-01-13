@@ -20,7 +20,7 @@
   z-index: 10
 
   &.center
-    $width: 300px
+    $width: 265px
     width: $width
     left: ($width / 2) * -1
 
@@ -60,3 +60,52 @@
     .fa-caret-down
       display: none
 
+.grid-menu
+
+  .item
+    display: inline-block
+    margin: 5px
+    padding: 5px
+
+    &:hover
+      outline: thin solid $border-color
+
+    figcaption
+      display: block
+      font-size: 0.9em
+      margin-top: 4px
+      text-align: center
+
+    .icon
+      background: url(../images/google_sprite.png) no-repeat
+      background-size: 112px 2011px
+      display: block
+      width: 64px
+      height: 64px
+
+      &.icon-calendar
+        background-position: -35px -735px
+
+      &.icon-docs
+        background-position: 0 0
+
+      &.icon-drive
+        background-position: 0 -390px
+
+      &.icon-mail
+        background-position: -35px -942px
+
+      &.icon-search
+        background-position: 0 -459px
+
+      &.icon-sheets
+        background-position: 0 -1149px
+
+      &.icon-slides
+        background-position: 0 -1460px
+
+.menu-addendum
+  background-color: $secondary-background-color
+  margin-top: 1em
+  padding: 1em
+  text-align: center

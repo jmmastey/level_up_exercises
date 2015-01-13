@@ -38,11 +38,11 @@ describe Experiment do
 
   it "calculates expected failures experiment" do
     expected_failures = described_class.new("test_data.json").expected_failures
-    expect(expected_failures).to eq({ "A" => 1.5, "B" => 2.5 })
+    expect(expected_failures).to eq("A" => 1.5, "B" => 2.5)
   end
 
   it "calculates expected failures experiment" do
     expected_conversion = described_class.new("test_data.json").expected_conversions
-    expect(expected_conversion).to eq({ "A" => 1.5, "B" => 2.5 })
+    expect(expected_conversion).to eq("A" => 1.5, "B" => 2.5)
   end
 end

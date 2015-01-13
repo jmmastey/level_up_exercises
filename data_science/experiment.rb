@@ -6,10 +6,7 @@ class Experiment
 
   def initialize(file_name)
     data = JsonParser.parse(File.open(file_name, "r"))
-    @cohorts = []
-    data.each do |dat|
-      @cohorts << Cohort.new({ dat.first => dat.last })
-    end
+    @cohorts = data.map { |key, value| Cohort.new(key => value) }
   end
 
   def visits_for_experiment

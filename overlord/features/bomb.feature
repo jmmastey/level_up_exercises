@@ -1,9 +1,7 @@
-Feature: something something
-  In order to something something
-  A user something something
-  something something something
+Feature: creating a default bomb
+  In order to have a bomb
+  A user visits the web app
 
-  Scenario: something something
-    Given inspiration
-    When I create a sweet new gem
-    Then everyone should see how awesome I am
+  Scenario: visiting the web app
+    When I go to the home page
+    Then the interface for the bomb is displayed

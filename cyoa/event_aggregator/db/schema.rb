@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112021738) do
+ActiveRecord::Schema.define(version: 20150113161317) do
 
   create_table "calendar_events", force: true do |t|
     t.string   "title",           limit: 256,  null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150112021738) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_source_id"
+    t.string   "image_url"
   end
 
   add_index "calendar_events", ["end_time"], name: "index_calendar_events_on_end_time"

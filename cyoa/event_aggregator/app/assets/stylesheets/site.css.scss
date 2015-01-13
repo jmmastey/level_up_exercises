@@ -7,6 +7,12 @@ div.event-highlight {
   background-color: $light-chicago-blue;
   border-radius: 20px;
   border: 5px solid $light-chicago-blue;
+  height: 500px;
+
+  .caption {
+    height: 200px;
+    overflow: hidden;
+  }
 
   h4 {
     font-style: italic;

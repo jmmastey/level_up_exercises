@@ -20,6 +20,7 @@ module Harvester
         location: html_node_text("#theatreName a"),
         description: html_node_text("#theatreName + p + p"),
         host: find_presenter,
+        image_url: find_image,
       })
       enumerate_event_times
     end
@@ -82,6 +83,11 @@ module Harvester
         new_event_attributes[:end_time] = event_time + 1.hour
         event_producer.yield_event
       end
-   end
+    end
+
+    def find_image
+      img = document.css("td.bblue img")[0]
+      img.nil? ? nil : img['src']
+    end
   end
 end

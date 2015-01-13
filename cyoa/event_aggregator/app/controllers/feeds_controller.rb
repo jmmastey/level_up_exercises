@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorize_feed, only: [:edit, :update, :destroy]
   respond_to :html
 
   PERMITTED_PARAMS = [:title, :description]
@@ -54,5 +54,11 @@ class FeedsController < ApplicationController
 
   def my_feeds
     Feed.where(user: current_user)
+  end
+
+  def authorize_feed
+    unless @feed.user == current_user
+      render "public/403", layout: false, status: :forbidden 
+    end
   end
 end

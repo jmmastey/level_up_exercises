@@ -15,6 +15,7 @@ class Experiment
   # if there's no winner you print out another message
   def report
     if winner
+      p winner.to_s
       winner.name
     else
       "There is no clear winner!"

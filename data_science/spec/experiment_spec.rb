@@ -1,6 +1,5 @@
 require_relative '../experiment.rb'
 
-# Only changes to this file should break the file
 describe Experiment do
   let(:experiment) { Experiment.new(results(30, 5, 30, 30)) }
   let(:tie_experiment) { Experiment.new(results(5, 5, 5, 5)) }
@@ -39,7 +38,6 @@ describe Experiment do
 
   describe '#winner' do
     it "returns the correct winner" do
-      # [0.034840622683469234, 0.05119896305897602]
       expect(experiment.report).to eq("A")
       expect(tie_experiment.report).to eq("There is no clear winner!")
     end
@@ -47,12 +45,10 @@ describe Experiment do
 
   describe '#difference?' do
     it "returns if true there is a statistical difference" do
-      expect(experiment.difference?).to eq(true)
-      # 0.0004 <= 0.05
+      expect(experiment.difference?).to eq(true) # 0.0004 <= 0.05
     end
     it "returns false if there is no statistical difference" do
-      expect(tie_experiment.difference?).to eq(false)
-      # 1 <= 0.05
+      expect(tie_experiment.difference?).to eq(false) # 1 <= 0.05
     end
   end
 end

@@ -5,6 +5,7 @@ gem "sinatra"
 group :development do
   gem "bundler", "~> 1.0"
   gem "cucumber"
+  gem "cucumber-sinatra"
   gem "growl"
   gem "guard"
   gem "guard-cucumber"

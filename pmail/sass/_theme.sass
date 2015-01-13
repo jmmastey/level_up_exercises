@@ -12,18 +12,24 @@ a.inline
 body
   background: $background-color
 
-@each $style, $color in (primary, $primary-color), (secondary, $secondary-color)
-  button.#{$style}-button
-    background-color: $color
-    @if lightness($color) < 60%
-      color: #fff
-    @else
-      color: #000
+button
+  background-color: $secondary-background-color
 
-    &:hover, &:focus
-      background-color: darken($color, 5%)
-    &:active
-      background-color: darken($color, 10%)
+  &:active
+    background-color: darken($secondary-background-color, 5%)
+
+  @each $style, $color in (primary, $primary-color), (secondary, $secondary-color)
+    &.#{$style}-button
+      background-color: $color
+      @if lightness($color) < 60%
+        color: #fff
+      @else
+        color: #000
+
+      &:hover, &:focus
+        background-color: darken($color, 5%)
+      &:active
+        background-color: darken($color, 10%)
 
 input, select
   background-color: $input-background-color
@@ -47,6 +53,14 @@ ul.sidebar-links
 .dropdown-panel
   background-color: $background-color
   border-color: $border-color
+
+  .dropdown-menu li
+
+    a:hover
+      background-color: $active-background-color
+
+    &.active a
+      color: $primary-color
 
 .search-box
   background-color: $input-background-color

@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script src='./assets/0.8.0/application.js' type='text/javascript'></script>    
     <link href='./assets/0.8.0/application.css' media='screen, projection, print' rel='stylesheet' type='text/css'>
-    <link rel="shortcut icon" type="image/png" href="./assets/0.8.0/favicon_yellow.png" />
+    <link rel="shortcut icon" type="image/png" href="./assets/0.8.0/favicon_green.png" />
     <link rel="icon" type="image/png" href="./assets/0.8.0/favicon.png" />
   </head>
   
@@ -14,27 +14,27 @@
       <img src="./assets/0.8.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-01-09T14:56:52-06:00">2015-01-09T14:56:52-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-01-12T08:45:37-06:00">2015-01-12T08:45:37-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">88.71%</span></span>
+    (<span class="covered_percent"><span class="green">100.0%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         5.04
+         18.39
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>4</b> files in total.
-    <b>62</b> relevant lines. 
-    <span class="green"><b>55</b> lines covered</span> and
-    <span class="red"><b>7</b> lines missed </span>
+    <b>80</b> relevant lines. 
+    <span class="green"><b>80</b> lines covered</span> and
+    <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -52,12 +52,12 @@
       
       <tr>
         <td class="strong"><a href="#9ef12f3b6e65cc82fb4f6fa9340228c4f35be2d5" class="src_link" title="dino_catalog/dino_dex.rb">dino_catalog/dino_dex.rb</a></td>
-        <td class="red strong">56.25 %</td>
-        <td>35</td>
-        <td>16</td>
-        <td>9</td>
-        <td>7</td>
-        <td>0.6</td>
+        <td class="green strong">100.0 %</td>
+        <td>41</td>
+        <td>19</td>
+        <td>19</td>
+        <td>0</td>
+        <td>10.0</td>
       </tr>
       
       <tr>
@@ -67,17 +67,17 @@
         <td>14</td>
         <td>14</td>
         <td>0</td>
-        <td>14.4</td>
+        <td>82.9</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#ee4b75e4e24df28ac38a2a9300bf8bc8a99be553" class="src_link" title="spec/dino_catalog/dino_dex_spec.rb">spec/dino_catalog/dino_dex_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>20</td>
-        <td>9</td>
-        <td>9</td>
+        <td>44</td>
+        <td>24</td>
+        <td>24</td>
         <td>0</td>
-        <td>1.0</td>
+        <td>1.2</td>
       </tr>
       
       <tr>
@@ -109,11 +109,11 @@
         <div class="source_table" id="9ef12f3b6e65cc82fb4f6fa9340228c4f35be2d5">
   <div class="header">
     <h3>dino_catalog/dino_dex.rb</h3>
-    <h4><span class="red">56.25 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>16</b> relevant lines. 
-      <span class="green"><b>9</b> lines covered</span> and
-      <span class="red"><b>7</b> lines missed.</span>
+      <b>19</b> relevant lines. 
+      <span class="green"><b>19</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -174,8 +174,8 @@
           <code class="ruby">  def initialize</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="10">
-          
+        <li class="covered" data-hits="5" data-linenumber="10">
+          <span class="hits">5</span>
           
           <code class="ruby">    parse</code>
         </li>
@@ -198,26 +198,26 @@
           <code class="ruby">  def parse</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="14">
-          
+        <li class="covered" data-hits="4" data-linenumber="14">
+          <span class="hits">4</span>
           
           <code class="ruby">    @dinosaurs = {}</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="15">
+        <li class="covered" data-hits="4" data-linenumber="15">
+          <span class="hits">4</span>
           
-          
-          <code class="ruby">    [&#39;dinodex.csv&#39;, &#39;african_dinosaur_export.csv&#39;].each do |csv|</code>
+          <code class="ruby">    [&#39;./dino_catalog/dinodex.csv&#39;, &#39;./dino_catalog/african_dinosaur_export.csv&#39;].each do |csv|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="16">
-          
+        <li class="covered" data-hits="8" data-linenumber="16">
+          <span class="hits">8</span>
           
           <code class="ruby">      CSV.foreach(csv, :headers =&gt; true, :header_converters =&gt; :symbol) do |obj|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="17">
-          
+        <li class="covered" data-hits="64" data-linenumber="17">
+          <span class="hits">64</span>
           
           <code class="ruby">        dino = Dinosaur.new(:name =&gt; obj[:name] || obj[:genus],</code>
         </li>
@@ -234,8 +234,8 @@
           <code class="ruby">                            :continent =&gt; obj[:continent],</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="20">
-          
+        <li class="covered" data-hits="28" data-linenumber="20">
+          <span class="hits">28</span>
           
           <code class="ruby">                            :diet =&gt; obj[:diet] || (obj[:carnivore] == &#39;yes&#39; ? &#39;Carnivaore&#39; : &#39;Non-carnivore&#39;),</code>
         </li>
@@ -258,8 +258,8 @@
           <code class="ruby">                            :description =&gt; obj[:description])</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="24">
-          
+        <li class="covered" data-hits="64" data-linenumber="24">
+          <span class="hits">64</span>
           
           <code class="ruby">        @dinosaurs[dino.name.downcase.to_sym] = dino.to_hash</code>
         </li>
@@ -291,40 +291,76 @@
         <li class="covered" data-hits="1" data-linenumber="29">
           <span class="hits">1</span>
           
-          <code class="ruby">  def search</code>
+          <code class="ruby">  def search(options = {})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="30">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="31">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="32">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="32">
+        <li class="covered" data-hits="1" data-linenumber="33">
           <span class="hits">1</span>
           
           <code class="ruby">  def export_to_json</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="33">
+        <li class="covered" data-hits="2" data-linenumber="34">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    if @dinosaurs.empty?</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="35">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      raise &quot;Your dinosaur list is empty! There&#39;s nothing to export!&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="36">
+          
+          
+          <code class="ruby">    else</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="37">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      @dinosaurs.to_json</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="38">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="39">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="34">
+        <li class="never" data-hits="" data-linenumber="40">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="35">
+        <li class="never" data-hits="" data-linenumber="41">
           
           
           <code class="ruby">end</code>
@@ -390,44 +426,44 @@
           <code class="ruby">  def initialize(options = {})</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="8">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="84" data-linenumber="8">
+          <span class="hits">84</span>
           
           <code class="ruby">    @name = options[:name] || nil</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="9">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="84" data-linenumber="9">
+          <span class="hits">84</span>
           
           <code class="ruby">    @period = options[:period] || nil</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="10">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="84" data-linenumber="10">
+          <span class="hits">84</span>
           
           <code class="ruby">    @continent = options[:continent] || nil</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="11">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="84" data-linenumber="11">
+          <span class="hits">84</span>
           
           <code class="ruby">    @diet = options[:diet] || nil</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="12">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="84" data-linenumber="12">
+          <span class="hits">84</span>
           
           <code class="ruby">    @weight = options[:weight] || nil</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="13">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="84" data-linenumber="13">
+          <span class="hits">84</span>
           
           <code class="ruby">    @ambulation = options[:ambulation] || nil</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="14">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="84" data-linenumber="14">
+          <span class="hits">84</span>
           
           <code class="ruby">    @description = options[:description] || nil</code>
         </li>
@@ -450,14 +486,14 @@
           <code class="ruby">  def to_hash</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="18">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="71" data-linenumber="18">
+          <span class="hits">71</span>
           
           <code class="ruby">    Hash[*instance_variables.map { |v|</code>
         </li>
       
-        <li class="covered" data-hits="49" data-linenumber="19">
-          <span class="hits">49</span>
+        <li class="covered" data-hits="497" data-linenumber="19">
+          <span class="hits">497</span>
           
           <code class="ruby">      [v.to_s.delete(&quot;@&quot;).to_sym, instance_variable_get(v)]</code>
         </li>
@@ -489,8 +525,8 @@
     <h3>spec/dino_catalog/dino_dex_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>9</b> relevant lines. 
-      <span class="green"><b>9</b> lines covered</span> and
+      <b>24</b> relevant lines. 
+      <span class="green"><b>24</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -522,97 +558,241 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="5">
+        <li class="covered" data-hits="4" data-linenumber="5">
+          <span class="hits">4</span>
+          
+          <code class="ruby">  let(:dino_dex) { DinoDex.new }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="6">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="7">
           <span class="hits">1</span>
           
           <code class="ruby">  describe &quot;#initialize&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="6">
+        <li class="covered" data-hits="1" data-linenumber="8">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;initializes the object&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="7">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="8">
-          
-          
-          <code class="ruby"></code>
+          <code class="ruby">    it &quot;initializes the object&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="9">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &quot;#parse&quot; do</code>
+          <code class="ruby">      expect(dino_dex).to be_a(DinoDex)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="10">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="10">
           
-          <code class="ruby">    it &quot;parses the csv file into the dinosaur.rb object&quot;</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="11">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="12">
+        <li class="covered" data-hits="1" data-linenumber="12">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    it &quot;calls #parse upon initialization&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="13">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &quot;#search&quot; do</code>
+          <code class="ruby">      dino_dex = DinoDex.allocate</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="14">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;searches the hash using values&quot;</code>
+          <code class="ruby">      expect(dino_dex).to receive(:parse)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="15">
+        <li class="covered" data-hits="1" data-linenumber="15">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">      dino_dex.send(:initialize)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="16">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="17">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  describe &quot;#export_to_json&quot; do</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="18">
+        <li class="never" data-hits="" data-linenumber="17">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="19">
+        <li class="never" data-hits="" data-linenumber="18">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="20">
+        <li class="covered" data-hits="1" data-linenumber="19">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &quot;#parse&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="20">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    let(:dino_dex) { DinoDex.new }</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="21">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;outputs the processed csv files into a hash&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="22">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(dino_dex.dinosaurs).to_not be_empty</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="24">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="26">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &quot;#search&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="27">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    context &quot;when searching for ambulation&quot; do</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="28">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="29">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="30">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="31">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &quot;#export_to_json&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="32">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    context &quot;when :dinosaurs is empty&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="33">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      it &quot;raises an error&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="34">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        dino_dex.dinosaurs = {}</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="35">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        expect{dino_dex.export_to_json}.to raise_error</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="36">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="38">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    context &quot;when :dinosaurs is not empty&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="39">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      it &quot;outputs a json format of the :dinosaurs hash&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="40">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        expect(JSON.parse(dino_dex.export_to_json)).to_not be_empty</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="42">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="43">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="44">
           
           
           <code class="ruby">end</code>

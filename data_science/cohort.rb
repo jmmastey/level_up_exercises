@@ -3,8 +3,6 @@ class Cohort
   CONFIDENCE = 0.95
   attr_accessor :name, :pageviews
 
-  #instead of array page view objects
-
   def initialize(name, pageviews)
     @name      = name
     @pageviews = pageviews
@@ -23,7 +21,8 @@ class Cohort
   end
 
   def to_s
-    "Conversion %: #{conversion_percentage} within 95% confidence interval of #{confidence_interval}"
+    "Conversion %: #{conversion_percentage} in 95% confidence interval \
+     of #{confidence_interval}"
   end
 
   def conversion_percentage

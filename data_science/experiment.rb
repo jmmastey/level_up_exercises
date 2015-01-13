@@ -3,20 +3,30 @@ require_relative 'page_view.rb'
 require_relative 'cohort.rb'
 
 class Experiment
-  CONFIDENCE_LEVEL      = 1.96
-  PROBABILITY_THRESHOLD = 0.05
+  CONFIDENCE_LEVEL      = 1.96 # why
+  PROBABILITY_THRESHOLD = 0.05 # why
 
   def initialize(results)
     create_cohorts(pageviews(results))
     @test = ABAnalyzer::ABTest.new(format_for_abanalyzer)
   end
 
+  # prints out the winner cohort (make a winner method)
+  # if there's no winner you print out another message
   def report
-    @cohorts.sort_by(&:conversion_percentage).to_a.last.to_s if difference?
+    if winner
+      winner.name
+    else
+      "There is no clear winner!"
+    end
+  end
+
+  def winner
+    @cohorts.sort_by(&:conversion_percentage).to_a.last if difference?
   end
 
   def difference?
-    @test.chisquare_p >= PROBABILITY_THRESHOLD
+    @test.chisquare_p <= PROBABILITY_THRESHOLD
   end
 
   private
@@ -27,8 +37,8 @@ class Experiment
 
   def create_cohorts(pageviews)
     @cohorts = []
-    pageviews.group_by(&:cohort).each_with_object([]) do |name, pageviews|
-      @cohorts << Cohort.new(name, pageviews)
+    pageviews.group_by(&:cohort).each do |name, views|
+      @cohorts << Cohort.new(name, views)
     end
   end
 

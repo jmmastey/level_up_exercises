@@ -29,9 +29,7 @@ describe PageView do
         expect { PageView.new(cohort) }.to raise_error
       end
     end
-
-    end
-
+  end
 
   describe "#converted?" do
     it "returns whether a cohort is converted" do

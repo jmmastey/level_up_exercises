@@ -72,26 +72,33 @@ ul {
 }
 
 /* line 6, ../sass/_layout.sass */
+.body {
+  display: flex;
+  width: 100%;
+}
+
+/* line 10, ../sass/_layout.sass */
 .main-pane {
   display: block;
+  flex: 1;
   float: right;
   font-size: 0.9em;
   height: 100%;
   padding: 0;
   vertical-align: top;
 }
-/* line 14, ../sass/_layout.sass */
+/* line 19, ../sass/_layout.sass */
 .main-pane > * {
   min-width: 600px;
 }
 
-/* line 17, ../sass/_layout.sass */
+/* line 22, ../sass/_layout.sass */
 .message-list {
   padding-top: 5px;
   height: 100%;
-  width: 99%;
+  width: 100%;
 }
-/* line 22, ../sass/_layout.sass */
+/* line 27, ../sass/_layout.sass */
 .message-list .message {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -102,31 +109,36 @@ ul {
   border-left: 2px dotted transparent;
   cursor: pointer;
   display: flex;
+  flex-direction: row;
   max-height: 1.2em;
   margin: 0;
   padding: 4px 0;
   width: 100%;
 }
-/* line 32, ../sass/_layout.sass */
+/* line 38, ../sass/_layout.sass */
 .message-list .message .message-actions, .message-list .message .message-field {
-  display: table-cell;
+  display: flex;
   padding: 2px 10px;
 }
-/* line 37, ../sass/_layout.sass */
+/* line 42, ../sass/_layout.sass */
+.message-list .message .message-field {
+  flex-direction: column;
+}
+/* line 44, ../sass/_layout.sass */
 .message-list .message .message-field.date {
   width: 100px;
   text-align: right;
 }
-/* line 41, ../sass/_layout.sass */
+/* line 48, ../sass/_layout.sass */
 .message-list .message .message-field.subject {
   flex-grow: 1;
 }
-/* line 44, ../sass/_layout.sass */
+/* line 51, ../sass/_layout.sass */
 .message-list .message .message-field.from {
   width: 200px;
 }
 
-/* line 47, ../sass/_layout.sass */
+/* line 54, ../sass/_layout.sass */
 .topbar {
   border-bottom: thin solid;
   display: flex;
@@ -136,53 +148,52 @@ ul {
   width: 100%;
   vertical-align: middle;
 }
-/* line 56, ../sass/_layout.sass */
+/* line 63, ../sass/_layout.sass */
 .topbar.topbar-primary {
   height: 59px;
   vertical-align: middle;
 }
-/* line 60, ../sass/_layout.sass */
+/* line 67, ../sass/_layout.sass */
 .topbar > * {
   vertical-align: middle;
 }
-/* line 63, ../sass/_layout.sass */
+/* line 70, ../sass/_layout.sass */
 .topbar button {
   border-radius: 2px;
   padding: 3px 10px;
 }
 
-/* line 68, ../sass/_layout.sass */
+/* line 75, ../sass/_layout.sass */
 .topbar-links {
   height: 50px;
   padding: 0 1em;
   -webkit-padding-start: 0;
 }
-/* line 74, ../sass/_layout.sass */
+/* line 81, ../sass/_layout.sass */
 .topbar-links > ul {
   padding: 1em 0;
   vertical-align: middle;
 }
-/* line 78, ../sass/_layout.sass */
+/* line 85, ../sass/_layout.sass */
 .topbar-links li {
   display: inline-block;
   margin-left: 2em;
   position: relative;
 }
 
-/* line 83, ../sass/_layout.sass */
+/* line 90, ../sass/_layout.sass */
 .sidebar {
   display: block;
-  float: left;
   max-width: 200px;
   margin: 0;
   text-align: center;
   width: 200px;
 }
-/* line 91, ../sass/_layout.sass */
+/* line 97, ../sass/_layout.sass */
 .sidebar .sidebar-main {
   padding-top: 10px;
 }
-/* line 94, ../sass/_layout.sass */
+/* line 100, ../sass/_layout.sass */
 .sidebar button {
   border: none;
   border-radius: 4px;
@@ -191,7 +202,7 @@ ul {
   text-transform: uppercase;
   width: 80%;
 }
-/* line 102, ../sass/_layout.sass */
+/* line 108, ../sass/_layout.sass */
 .sidebar ul.sidebar-links {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -205,11 +216,11 @@ ul {
   text-align: left;
   width: 100%;
 }
-/* line 110, ../sass/_layout.sass */
+/* line 116, ../sass/_layout.sass */
 .sidebar ul.sidebar-links:not(:first-of-type) {
   border-top: thin solid #ccc;
 }
-/* line 113, ../sass/_layout.sass */
+/* line 119, ../sass/_layout.sass */
 .sidebar ul.sidebar-links li {
   border-left: 4px solid transparent;
   display: block;
@@ -217,7 +228,7 @@ ul {
   padding-left: 20px;
 }
 
-/* line 119, ../sass/_layout.sass */
+/* line 125, ../sass/_layout.sass */
 .search-form {
   display: flex;
   flex: 1;
@@ -225,18 +236,18 @@ ul {
   flex-grow: 1;
   margin-top: 0.8em;
 }
-/* line 126, ../sass/_layout.sass */
+/* line 132, ../sass/_layout.sass */
 .search-form input[type="search"] {
   border: none;
   flex: 1;
   max-height: 32px;
   padding: 0;
 }
-/* line 132, ../sass/_layout.sass */
+/* line 138, ../sass/_layout.sass */
 .search-form input[type="search"]:focus {
   border: none;
 }
-/* line 135, ../sass/_layout.sass */
+/* line 141, ../sass/_layout.sass */
 .search-form button[type="submit"] {
   border: none;
   border-radius: 0 4px 4px 0;
@@ -245,7 +256,7 @@ ul {
   min-width: 50px;
 }
 
-/* line 142, ../sass/_layout.sass */
+/* line 148, ../sass/_layout.sass */
 .search-box {
   border: thin solid;
   display: inline-flex;
@@ -256,15 +267,15 @@ ul {
   max-width: 598px;
   margin: 0;
 }
-/* line 152, ../sass/_layout.sass */
+/* line 158, ../sass/_layout.sass */
 .search-box input {
   margin: 5px;
 }
-/* line 155, ../sass/_layout.sass */
+/* line 161, ../sass/_layout.sass */
 .search-box input:focus {
   border: thin solid;
 }
-/* line 158, ../sass/_layout.sass */
+/* line 164, ../sass/_layout.sass */
 .search-box a.dropdown-toggle {
   cursor: pointer;
   display: inline-block;
@@ -272,36 +283,36 @@ ul {
   outline: none;
   text-align: center;
 }
-/* line 165, ../sass/_layout.sass */
+/* line 171, ../sass/_layout.sass */
 .search-box a.dropdown-toggle:not(:hover) {
   color: #999;
 }
 
-/* line 168, ../sass/_layout.sass */
+/* line 174, ../sass/_layout.sass */
 footer {
   display: flex;
   font-size: 0.8em;
   line-height: 1.4em;
   margin: 2em;
 }
-/* line 174, ../sass/_layout.sass */
+/* line 180, ../sass/_layout.sass */
 footer a {
   text-decoration: underline;
 }
-/* line 179, ../sass/_layout.sass */
+/* line 185, ../sass/_layout.sass */
 footer .line.segmented > span:after {
   content: " - ";
 }
-/* line 182, ../sass/_layout.sass */
+/* line 188, ../sass/_layout.sass */
 footer .line.segmented > span:last-child:after {
   content: "";
 }
-/* line 185, ../sass/_layout.sass */
+/* line 191, ../sass/_layout.sass */
 footer > .middle {
   flex: 1;
   text-align: center;
 }
-/* line 189, ../sass/_layout.sass */
+/* line 195, ../sass/_layout.sass */
 footer > .right {
   text-align: right;
 }

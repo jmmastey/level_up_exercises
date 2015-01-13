@@ -65,108 +65,109 @@
               %i.fa.fa-caret-down
             .dropdown-panel.hidden.right#account-dropdown
               Account dropdown will go here
-    %section.main-pane
-      .topbar
-        .topbar-links
-          %ul
+    %section.body
+      %nav.sidebar
+        .topbar
+          .topbar-links
+            %ul
+              %li
+                %a.dropdown-toggle{ href: "javascript:;" }
+                  Mail
+                  %i.fa.fa-caret-down
+                .dropdown-panel.hidden#mail-dropdown
+                  %ul.dropdown-menu.large
+                    %li.active
+                      %a{ href: "javascript:;" } Mail
+                    %li
+                      %a{ href: "javascript:;" } Contacts
+                    %li
+                      %a{ href: "javascript:;" } Tasks
+        .sidebar-main
+          %button.secondary-button#compose Compose
+          %ul.sidebar-links
+            %li.active
+              %a{ href: "javascript:;" } Inbox
             %li
-              %button.dropdown-toggle
-                %i.fa.fa-square-o
-                %i.fa.fa-caret-down
-              .dropdown-panel.hidden
-                %ul.dropdown-menu
-                  %li.active
-                    %a{ href: "javascript:;" } All
-                  %li
-                    %a{ href: "javascript:;" } Read
-                  %li
-                    %a{ href: "javascript:;" } Unread
-                  %li
-                    %a{ href: "javascript:;" } Starred
-                  %li
-                    %a{ href: "javascript:;" } Unstarred
+              %a{ href: "javascript:;" } Starred
             %li
-              %button#refresh
-                %i.fa.fa-refresh
+              %a{ href: "javascript:;" } Sent Mail
             %li
-              %button.dropdown-toggle
-                More
-                %i.fa.fa-caret-down
-              .dropdown-panel.hidden
-                %ul.dropdown-menu
-                  %li
-                    %a{ href: "javascript:;" } Mark All as Read
-      %main.message-list
-        - messages.each_with_index do |message, index|
-          %article.message#message{ id: index, class: message[:new?] ? "unread" : nil }
-            .message-actions
-              %input#selected_message{ type: :checkbox, name: "selected_message", id: index, value: index }><
-              %label{ for: "selected_message_#{index}" }
-                %span
-            .message-field.from= message[:from]
-            .message-field.subject= message[:subject]
-            .message-field.date= message[:date].year == Date.today.year ? message[:date].strftime('%b %-d') : message[:date].strftime('%-m/%-d/%y')
-      %footer
-        .left
-          .line
-            %strong 0% full
-          .line Using 15GB of your 500TB
-        .middle
-          .line.segmented
-            %span &copy;2015 Polish Dan
-            %span
-              %a{ href: "javascript:;", onclick: "alert('TOS: All your data are belong to us!');" } Terms of Service
-            %span
-              %a{ href: "javascript:;", onclick: "alert('You have no privacy.');" } Privacy Policy
-            %span
-              %a{ href: "javascript:;" } Program Policies
-          .line Powered by the souls of the damned
-        .right
-          .line Last account activity: 2 days ago
-          .line
-            %a{ href: "javascript:;" } Details
-    %nav.sidebar
-      .topbar
-        .topbar-links
-          %ul
+              %a{ href: "javascript:;" } Drafts
+            %li
+              %a{ href: "javascript:;" } Projects
             %li
               %a.dropdown-toggle{ href: "javascript:;" }
-                Mail
+                More
                 %i.fa.fa-caret-down
-              .dropdown-panel.hidden#mail-dropdown
-                %ul.dropdown-menu.large
-                  %li.active
-                    %a{ href: "javascript:;" } Mail
-                  %li
-                    %a{ href: "javascript:;" } Contacts
-                  %li
-                    %a{ href: "javascript:;" } Tasks
-      .sidebar-main
-        %button.secondary-button#compose Compose
-        %ul.sidebar-links
-          %li.active
-            %a{ href: "javascript:;" } Inbox
-          %li
-            %a{ href: "javascript:;" } Starred
-          %li
-            %a{ href: "javascript:;" } Sent Mail
-          %li
-            %a{ href: "javascript:;" } Drafts
-          %li
-            %a{ href: "javascript:;" } Projects
-          %li
-            %a.dropdown-toggle{ href: "javascript:;" }
-              More
-              %i.fa.fa-caret-down
-        %ul.sidebar-links.hidden#more-links
-          %li
-            %a{ href: "javascript:;" } Important
-          %li
-            %a{ href: "javascript:;" } All Mail
-          %li
-            %a{ href: "javascript:;" } Spam
-          %li
-            %a{ href: "javascript:;" } Trash
+          %ul.sidebar-links.hidden#more-links
+            %li
+              %a{ href: "javascript:;" } Important
+            %li
+              %a{ href: "javascript:;" } All Mail
+            %li
+              %a{ href: "javascript:;" } Spam
+            %li
+              %a{ href: "javascript:;" } Trash
+      %section.main-pane
+        .topbar
+          .topbar-links
+            %ul
+              %li
+                %button.dropdown-toggle
+                  %i.fa.fa-square-o
+                  %i.fa.fa-caret-down
+                .dropdown-panel.hidden
+                  %ul.dropdown-menu
+                    %li.active
+                      %a{ href: "javascript:;" } All
+                    %li
+                      %a{ href: "javascript:;" } Read
+                    %li
+                      %a{ href: "javascript:;" } Unread
+                    %li
+                      %a{ href: "javascript:;" } Starred
+                    %li
+                      %a{ href: "javascript:;" } Unstarred
+              %li
+                %button#refresh
+                  %i.fa.fa-refresh
+              %li
+                %button.dropdown-toggle
+                  More
+                  %i.fa.fa-caret-down
+                .dropdown-panel.hidden
+                  %ul.dropdown-menu
+                    %li
+                      %a{ href: "javascript:;" } Mark All as Read
+        %main.message-list
+          - messages.each_with_index do |message, index|
+            %article.message#message{ id: index, class: message[:new?] ? "unread" : nil }
+              .message-actions
+                %input#selected_message{ type: :checkbox, name: "selected_message", id: index, value: index }><
+                %label{ for: "selected_message_#{index}" }
+                  %span
+              .message-field.from= message[:from]
+              .message-field.subject= message[:subject]
+              .message-field.date= message[:date].year == Date.today.year ? message[:date].strftime('%b %-d') : message[:date].strftime('%-m/%-d/%y')
+        %footer
+          .left
+            .line
+              %strong 0% full
+            .line Using 15GB of your 500TB
+          .middle
+            .line.segmented
+              %span &copy;2015 Polish Dan
+              %span
+                %a{ href: "javascript:;", onclick: "alert('TOS: All your data are belong to us!');" } Terms of Service
+              %span
+                %a{ href: "javascript:;", onclick: "alert('You have no privacy.');" } Privacy Policy
+              %span
+                %a{ href: "javascript:;" } Program Policies
+            .line Powered by the souls of the damned
+          .right
+            .line Last account activity: 2 days ago
+            .line
+              %a{ href: "javascript:;" } Details
 
     %script{src: "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}
     %script{src: "pmail.js"}

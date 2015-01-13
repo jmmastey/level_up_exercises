@@ -45,209 +45,211 @@
         </ul>
       </div>
     </section>
-    <section class='main-pane'>
-      <div class='topbar'>
-        <div class='topbar-links'>
-          <ul>
-            <li>
-              <button class='dropdown-toggle'>
-                <i class='fa fa-square-o'></i>
-                <i class='fa fa-caret-down'></i>
-              </button>
-              <div class='dropdown-panel hidden'>
-                <ul class='dropdown-menu'>
-                  <li class='active'>
-                    <a href='javascript:;'>All</a>
-                  </li>
-                  <li>
-                    <a href='javascript:;'>Read</a>
-                  </li>
-                  <li>
-                    <a href='javascript:;'>Unread</a>
-                  </li>
-                  <li>
-                    <a href='javascript:;'>Starred</a>
-                  </li>
-                  <li>
-                    <a href='javascript:;'>Unstarred</a>
-                  </li>
-                </ul>
-              </div>
+    <section class='body'>
+      <nav class='sidebar'>
+        <div class='topbar'>
+          <div class='topbar-links'>
+            <ul>
+              <li>
+                <a class='dropdown-toggle' href='javascript:;'>
+                  Mail
+                  <i class='fa fa-caret-down'></i>
+                </a>
+                <div class='dropdown-panel hidden' id='mail-dropdown'>
+                  <ul class='dropdown-menu large'>
+                    <li class='active'>
+                      <a href='javascript:;'>Mail</a>
+                    </li>
+                    <li>
+                      <a href='javascript:;'>Contacts</a>
+                    </li>
+                    <li>
+                      <a href='javascript:;'>Tasks</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class='sidebar-main'>
+          <button class='secondary-button' id='compose'>Compose</button>
+          <ul class='sidebar-links'>
+            <li class='active'>
+              <a href='javascript:;'>Inbox</a>
             </li>
             <li>
-              <button id='refresh'>
-                <i class='fa fa-refresh'></i>
-              </button>
+              <a href='javascript:;'>Starred</a>
             </li>
             <li>
-              <button class='dropdown-toggle'>
-                More
-                <i class='fa fa-caret-down'></i>
-              </button>
-              <div class='dropdown-panel hidden'>
-                <ul class='dropdown-menu'>
-                  <li>
-                    <a href='javascript:;'>Mark All as Read</a>
-                  </li>
-                </ul>
-              </div>
+              <a href='javascript:;'>Sent Mail</a>
             </li>
-          </ul>
-        </div>
-      </div>
-      <main class='message-list'>
-        <article class='message unread' id='message_0'>
-          <div class='message-actions'><input id='selected_message_0' name='selected_message' type='checkbox' value='0'><label for='selected_message_0'>
-              <span></span>
-            </label>
-          </div>
-          <div class='message-field from'>Mastey, Joseph</div>
-          <div class='message-field subject'>Superfun Learning</div>
-          <div class='message-field date'>Jan 12</div>
-        </article>
-        <article class='message unread' id='message_1'>
-          <div class='message-actions'><input id='selected_message_1' name='selected_message' type='checkbox' value='1'><label for='selected_message_1'>
-              <span></span>
-            </label>
-          </div>
-          <div class='message-field from'>Durko, Steve</div>
-          <div class='message-field subject'>More stuff for the training team</div>
-          <div class='message-field date'>Jan 6</div>
-        </article>
-        <article class='message unread' id='message_2'>
-          <div class='message-actions'><input id='selected_message_2' name='selected_message' type='checkbox' value='2'><label for='selected_message_2'>
-              <span></span>
-            </label>
-          </div>
-          <div class='message-field from'>Test</div>
-          <div class='message-field subject'>More test messages</div>
-          <div class='message-field date'>Jan 4</div>
-        </article>
-        <article class='message' id='message_3'>
-          <div class='message-actions'><input id='selected_message_3' name='selected_message' type='checkbox' value='3'><label for='selected_message_3'>
-              <span></span>
-            </label>
-          </div>
-          <div class='message-field from'>Test</div>
-          <div class='message-field subject'>Test message</div>
-          <div class='message-field date'>Jan 1</div>
-        </article>
-        <article class='message' id='message_4'>
-          <div class='message-actions'><input id='selected_message_4' name='selected_message' type='checkbox' value='4'><label for='selected_message_4'>
-              <span></span>
-            </label>
-          </div>
-          <div class='message-field from'>Mastey, Joseph</div>
-          <div class='message-field subject'>Training Things</div>
-          <div class='message-field date'>12/18/14</div>
-        </article>
-        <article class='message' id='message_5'>
-          <div class='message-actions'><input id='selected_message_5' name='selected_message' type='checkbox' value='5'><label for='selected_message_5'>
-              <span></span>
-            </label>
-          </div>
-          <div class='message-field from'>Mastey, Lynch, mullins</div>
-          <div class='message-field subject'>Apprentice Things</div>
-          <div class='message-field date'>12/9/14</div>
-        </article>
-      </main>
-      <footer>
-        <div class='left'>
-          <div class='line'>
-            <strong>0% full</strong>
-          </div>
-          <div class='line'>Using 15GB of your 500TB</div>
-        </div>
-        <div class='middle'>
-          <div class='line segmented'>
-            <span>&copy;2015 Polish Dan</span>
-            <span>
-              <a href='javascript:;' onclick="alert('TOS: All your data are belong to us!');">Terms of Service</a>
-            </span>
-            <span>
-              <a href='javascript:;' onclick="alert('You have no privacy.');">Privacy Policy</a>
-            </span>
-            <span>
-              <a href='javascript:;'>Program Policies</a>
-            </span>
-          </div>
-          <div class='line'>Powered by the souls of the damned</div>
-        </div>
-        <div class='right'>
-          <div class='line'>Last account activity: 2 days ago</div>
-          <div class='line'>
-            <a href='javascript:;'>Details</a>
-          </div>
-        </div>
-      </footer>
-    </section>
-    <nav class='sidebar'>
-      <div class='topbar'>
-        <div class='topbar-links'>
-          <ul>
+            <li>
+              <a href='javascript:;'>Drafts</a>
+            </li>
+            <li>
+              <a href='javascript:;'>Projects</a>
+            </li>
             <li>
               <a class='dropdown-toggle' href='javascript:;'>
-                Mail
+                More
                 <i class='fa fa-caret-down'></i>
               </a>
-              <div class='dropdown-panel hidden' id='mail-dropdown'>
-                <ul class='dropdown-menu large'>
-                  <li class='active'>
-                    <a href='javascript:;'>Mail</a>
-                  </li>
-                  <li>
-                    <a href='javascript:;'>Contacts</a>
-                  </li>
-                  <li>
-                    <a href='javascript:;'>Tasks</a>
-                  </li>
-                </ul>
-              </div>
+            </li>
+          </ul>
+          <ul class='sidebar-links hidden' id='more-links'>
+            <li>
+              <a href='javascript:;'>Important</a>
+            </li>
+            <li>
+              <a href='javascript:;'>All Mail</a>
+            </li>
+            <li>
+              <a href='javascript:;'>Spam</a>
+            </li>
+            <li>
+              <a href='javascript:;'>Trash</a>
             </li>
           </ul>
         </div>
-      </div>
-      <div class='sidebar-main'>
-        <button class='secondary-button' id='compose'>Compose</button>
-        <ul class='sidebar-links'>
-          <li class='active'>
-            <a href='javascript:;'>Inbox</a>
-          </li>
-          <li>
-            <a href='javascript:;'>Starred</a>
-          </li>
-          <li>
-            <a href='javascript:;'>Sent Mail</a>
-          </li>
-          <li>
-            <a href='javascript:;'>Drafts</a>
-          </li>
-          <li>
-            <a href='javascript:;'>Projects</a>
-          </li>
-          <li>
-            <a class='dropdown-toggle' href='javascript:;'>
-              More
-              <i class='fa fa-caret-down'></i>
-            </a>
-          </li>
-        </ul>
-        <ul class='sidebar-links hidden' id='more-links'>
-          <li>
-            <a href='javascript:;'>Important</a>
-          </li>
-          <li>
-            <a href='javascript:;'>All Mail</a>
-          </li>
-          <li>
-            <a href='javascript:;'>Spam</a>
-          </li>
-          <li>
-            <a href='javascript:;'>Trash</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+      </nav>
+      <section class='main-pane'>
+        <div class='topbar'>
+          <div class='topbar-links'>
+            <ul>
+              <li>
+                <button class='dropdown-toggle'>
+                  <i class='fa fa-square-o'></i>
+                  <i class='fa fa-caret-down'></i>
+                </button>
+                <div class='dropdown-panel hidden'>
+                  <ul class='dropdown-menu'>
+                    <li class='active'>
+                      <a href='javascript:;'>All</a>
+                    </li>
+                    <li>
+                      <a href='javascript:;'>Read</a>
+                    </li>
+                    <li>
+                      <a href='javascript:;'>Unread</a>
+                    </li>
+                    <li>
+                      <a href='javascript:;'>Starred</a>
+                    </li>
+                    <li>
+                      <a href='javascript:;'>Unstarred</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <button id='refresh'>
+                  <i class='fa fa-refresh'></i>
+                </button>
+              </li>
+              <li>
+                <button class='dropdown-toggle'>
+                  More
+                  <i class='fa fa-caret-down'></i>
+                </button>
+                <div class='dropdown-panel hidden'>
+                  <ul class='dropdown-menu'>
+                    <li>
+                      <a href='javascript:;'>Mark All as Read</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <main class='message-list'>
+          <article class='message unread' id='message_0'>
+            <div class='message-actions'><input id='selected_message_0' name='selected_message' type='checkbox' value='0'><label for='selected_message_0'>
+                <span></span>
+              </label>
+            </div>
+            <div class='message-field from'>Mastey, Joseph</div>
+            <div class='message-field subject'>Superfun Learning</div>
+            <div class='message-field date'>Jan 12</div>
+          </article>
+          <article class='message unread' id='message_1'>
+            <div class='message-actions'><input id='selected_message_1' name='selected_message' type='checkbox' value='1'><label for='selected_message_1'>
+                <span></span>
+              </label>
+            </div>
+            <div class='message-field from'>Durko, Steve</div>
+            <div class='message-field subject'>More stuff for the training team</div>
+            <div class='message-field date'>Jan 6</div>
+          </article>
+          <article class='message unread' id='message_2'>
+            <div class='message-actions'><input id='selected_message_2' name='selected_message' type='checkbox' value='2'><label for='selected_message_2'>
+                <span></span>
+              </label>
+            </div>
+            <div class='message-field from'>Test</div>
+            <div class='message-field subject'>More test messages</div>
+            <div class='message-field date'>Jan 4</div>
+          </article>
+          <article class='message' id='message_3'>
+            <div class='message-actions'><input id='selected_message_3' name='selected_message' type='checkbox' value='3'><label for='selected_message_3'>
+                <span></span>
+              </label>
+            </div>
+            <div class='message-field from'>Test</div>
+            <div class='message-field subject'>Test message</div>
+            <div class='message-field date'>Jan 1</div>
+          </article>
+          <article class='message' id='message_4'>
+            <div class='message-actions'><input id='selected_message_4' name='selected_message' type='checkbox' value='4'><label for='selected_message_4'>
+                <span></span>
+              </label>
+            </div>
+            <div class='message-field from'>Mastey, Joseph</div>
+            <div class='message-field subject'>Training Things</div>
+            <div class='message-field date'>12/18/14</div>
+          </article>
+          <article class='message' id='message_5'>
+            <div class='message-actions'><input id='selected_message_5' name='selected_message' type='checkbox' value='5'><label for='selected_message_5'>
+                <span></span>
+              </label>
+            </div>
+            <div class='message-field from'>Mastey, Lynch, mullins</div>
+            <div class='message-field subject'>Apprentice Things</div>
+            <div class='message-field date'>12/9/14</div>
+          </article>
+        </main>
+        <footer>
+          <div class='left'>
+            <div class='line'>
+              <strong>0% full</strong>
+            </div>
+            <div class='line'>Using 15GB of your 500TB</div>
+          </div>
+          <div class='middle'>
+            <div class='line segmented'>
+              <span>&copy;2015 Polish Dan</span>
+              <span>
+                <a href='javascript:;' onclick="alert('TOS: All your data are belong to us!');">Terms of Service</a>
+              </span>
+              <span>
+                <a href='javascript:;' onclick="alert('You have no privacy.');">Privacy Policy</a>
+              </span>
+              <span>
+                <a href='javascript:;'>Program Policies</a>
+              </span>
+            </div>
+            <div class='line'>Powered by the souls of the damned</div>
+          </div>
+          <div class='right'>
+            <div class='line'>Last account activity: 2 days ago</div>
+            <div class='line'>
+              <a href='javascript:;'>Details</a>
+            </div>
+          </div>
+        </footer>
+      </section>
+    </section>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src='pmail.js'></script>
   </body>

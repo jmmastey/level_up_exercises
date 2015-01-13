@@ -12,20 +12,20 @@ end
 
 ENV['RACK_ENV'] = 'test'
 
-require File.join(File.dirname(__FILE__), '..', '..', 'overlord.rb')
+require_relative '../../overlord'
 
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 
-Capybara.app = Overload
+Capybara.app = Sinatra::Application.new
 
-class OverloadWorld
+class OverlordWorld
   include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers
 end
 
 World do
-  OverloadWorld.new
+  OverlordWorld.new
 end

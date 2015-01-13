@@ -2,6 +2,8 @@
 
 require 'sinatra'
 
+require_relative './lib/overlord'
+
 enable :sessions
 
 get '/' do

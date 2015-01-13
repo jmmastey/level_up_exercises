@@ -4,16 +4,17 @@ describe Cohort do
   context "with invalid input" do
     describe "#new" do
       it "returns exception if no trials" do
-        expect { Cohort.new(0, 0) }.to raise_error
+        expect { Cohort.new(0, 0) }.to raise_error(ArgumentError)
       end
 
       it "returns exception if inputs are not integers" do
-        expect { Cohort.new(0.1, 1.2) }.to raise_error
+        expect { Cohort.new(0.1, 13) }.to raise_error(TypeError)
+        expect { Cohort.new(15, "fifteen") }.to raise_error(TypeError)
       end
 
       it "returns exception for negative data" do
-        expect { Cohort.new(32, -2) }.to raise_error
-        expect { Cohort.new(-1, 0) }.to raise_error
+        expect { Cohort.new(32, -2) }.to raise_error(ArgumentError)
+        expect { Cohort.new(-1, 0) }.to raise_error(ArgumentError)
       end
     end
   end
@@ -52,12 +53,6 @@ describe Cohort do
         expect(sample_cohort.conversion_range).to cover(0.247)
         expect(sample_cohort.conversion_range).to cover(0.662)
         expect(sample_cohort.conversion_range).not_to cover(0.663)
-      end
-    end
-
-    describe "#to_h" do
-      it "returns conversion data as a hash" do
-        expect(sample_cohort.to_h).to match(conversions: 10, nonconvs: 12)
       end
     end
   end

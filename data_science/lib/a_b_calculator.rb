@@ -17,7 +17,7 @@ class ABCalculator
   private
 
   def validate_inputs(a_tally, b_tally)
-    raise TypeError unless (a_tally + b_tally).all? { |i| i.is_a? Integer }
+    raise TypeError unless (a_tally + b_tally).all? { |i| i.is_a? Fixnum }
     raise ArgumentError unless (a_tally + b_tally).all? { |i| i >= 0 }
     raise ArgumentError unless a_tally.inject(:+) > 0
     raise ArgumentError unless b_tally.inject(:+) > 0

@@ -1,33 +1,41 @@
 require 'spec_helper'
 
 describe ABDataSummary do
+  describe "#new" do
+    context "with invalid input" do
+      it "returns exception for empty files" do
+        expect { ABDataSummary.new("empty.json") }.to raise_error
+      end
 
-	let(:test) { ABDataSummary.new("source_data.json") }
-  let(:json_length) { test.json_length }
-	let(:parsed_data) { test.parsed_a_b_data }
-	let(:a_no_of_trials) { parsed_data[:a_group].values.inject(:+) }
-	let(:b_no_of_trials) { parsed_data[:b_group].values.inject(:+) }
-  let(:total_trials) { a_no_of_trials + b_no_of_trials }
+      it "returns exception with only one data point" do
+        expect { ABDataSummary.new("one_data_point.json") }.to raise_error
+      end
 
-  context "Upon creation" do
-    it "should create a JsonParser instance" do
-      expect(test).to be_an_instance_of(JsonParser)
+      it "returns exception if cohort is not A or B" do
+        expect { ABDataSummary.new("data_with_c_cohort.json") }.to raise_error
+      end
+
+      it "returns exception if result is not 1 or 0" do
+        expect { ABDataSummary.new("data_with_invalid_result.json") }.to raise_error
+      end
+
+      it "returns exception if only A or B data is present" do
+        expect { ABDataSummary.new("data_without_b_cohort.json") }.to raise_error
+      end
+
+      it "returns exception when given file is not json data" do
+        expect { ABDataSummary.new("README.md") }.to raise_error
+      end
     end
 
-    it "should return exception for nonexistent file" do
-      expect { JsonParser.new("does_not_exist.json") }.to raise_error
+    context "with valid input" do
+      let(:source_summary) { ABDataSummary.new("sample_valid_input.json") }
+      it "returns conversion data for A and B cohorts" do
+        expect(source_summary.a_conv).to eq(3)
+        expect(source_summary.a_nonconv).to eq(3)
+        expect(source_summary.b_conv).to eq(4)
+        expect(source_summary.b_nonconv).to eq(1)
+      end
     end
-
-    it "should throw exception for empty json files" do
-      expect { JsonParser.new("empty.json") }.to raise_error
-    end
-    it "should have parsed data with the same # of trials as json input" do
-      expect(total_trials).to be == json_length
-    end
-
-  	it "should have at least one trial for each cohort" do
-  		expect(a_no_of_trials).to be > 0
-  		expect(b_no_of_trials).to be > 0
-  	end
   end
 end

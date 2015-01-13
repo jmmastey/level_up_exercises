@@ -1,6 +1,6 @@
 include Math
 
-class Cohort
+class ABCohort
   attr_reader :cohort, :conversions, :nonconvs
   def initialize(cohort_name, conversions, nonconvs)
     raise "Invalid cohort name" unless cohort_name == "A" || cohort_name == "B"
@@ -32,7 +32,7 @@ class Cohort
   def to_h
     {
       conversions: @conversions,
-      nonconvs: @nonconvs,
+      nonconvs: @nonconvs
     }
   end
 end

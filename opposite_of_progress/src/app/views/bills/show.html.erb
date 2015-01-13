@@ -30,8 +30,8 @@
           <div class="content"><%= link_to_bill_pdf(@bill) %></div>
         </div>
         <div>
-          <div class="heading">Chamber</div>
-          <div class="content"><%= @bill.chamber.titleize %></div>
+          <div class="heading">Enacted</div>
+          <div class="content"><%= @bill.enacted? ? 'Yes' : 'No' %></div>
         </div>
         <div>
           <div class="heading">Enacted As</div>

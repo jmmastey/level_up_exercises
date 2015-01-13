@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   } 
 
+  devise_scope :user do
+    get "/users/sign_out", to: "users/sessions#destroy"
+  end
+
   get "/about-us", to: "site#about_us", as: :about_us
   get "/contact-us", to: "site#contact_us", as: :contact_us
   get "/privacy-policy", to: "site#privacy_policy", as: :privacy_policy

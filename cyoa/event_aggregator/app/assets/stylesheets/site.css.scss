@@ -14,6 +14,11 @@ div.event-highlight {
     overflow: hidden;
   }
 
+  .event-image {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
   h4 {
     font-style: italic;
   }

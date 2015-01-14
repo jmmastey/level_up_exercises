@@ -12,17 +12,17 @@ describe Triangle do
     end
   end
 
-  describe "#equilateral" do
+  describe "#equilateral?" do
     context "when it is equilateral" do
       let(:triangle_parameters) { equilateral }
       it "returns true" do
-        expect(triangle.equilateral).to be_truthy
+        expect(triangle.equilateral?).to be_truthy
       end
     end
     context "when it is not equilateral" do
       let(:triangle_parameters) { [30, 50, 33] }
       it "returns false" do
-        expect(triangle.equilateral).to be_falsey
+        expect(triangle.equilateral?).to be_falsey
       end
     end
   end

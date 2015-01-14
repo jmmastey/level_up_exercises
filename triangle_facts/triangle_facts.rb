@@ -8,8 +8,8 @@ class Triangle
     @side3 = side3
 	end
 
-	def equilateral()
-		return side1 == side2 && side2 == side3
+	def equilateral?
+		side1 == side2 && side2 == side3
 	end
 
 	def isosceles()
@@ -17,7 +17,7 @@ class Triangle
 	end
 
 	def scalene()
-		unless ! (equilateral || isosceles)
+		unless ! (equilateral? || isosceles)
 	    false
 	  else
 	    true
@@ -25,7 +25,7 @@ class Triangle
 	end
 
 	def recite_facts
-		puts 'This triangle is equilateral!' if equilateral
+		puts 'This triangle is equilateral!' if equilateral?
 		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles
 		puts 'This triangle is scalene and mathematically boring.' if scalene
 

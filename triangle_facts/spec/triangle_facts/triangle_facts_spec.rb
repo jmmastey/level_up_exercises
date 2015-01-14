@@ -163,7 +163,14 @@ describe Triangle do
   end
 
   describe "#radians_to_degrees" do
-    it "converts radians into degrees"
+    it "converts radians into degrees" do
+      # NOTE:
+      # The testing done here is using a proven data set calculated outside of this
+      # class or method.
+      expected_output = 60
+      rads = Math.acos((5**2 + 5**2 - 5**2) / (2.0 * 5 * 5))
+      expect(triangle.radians_to_degrees(rads)).to eq(expected_output)
+    end
   end
 
   def capture_stdout(&block)

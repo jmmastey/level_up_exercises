@@ -37,5 +37,11 @@ describe ABCalculator do
         expect(sample_calculator.confidence_level).to eq(0.943788)
       end
     end
+
+    describe "#different?" do
+      it "returns whether the cohorts are different" do
+        expect(sample_calculator.different?).to be false
+      end
+    end
   end
 end

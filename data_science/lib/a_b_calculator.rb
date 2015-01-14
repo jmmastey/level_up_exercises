@@ -14,6 +14,10 @@ class ABCalculator
     (1 - @a_b_test.chisquare_p).round(6)
   end
 
+  def different?
+    @a_b_test.different?
+  end
+
   private
 
   def validate_inputs(a_tally, b_tally)

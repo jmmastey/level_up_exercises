@@ -174,6 +174,8 @@ describe Triangle do
   end
 
   def capture_stdout(&block)
+    # I am not going to write test for this.
+    # Like seriously. :D :D :D - magicalbanana
     unless block_given?
       raise "You need to pass a block sir!"
     end

@@ -12,12 +12,12 @@ class Triangle
 		side1 == side2 && side2 == side3
 	end
 
-	def isosceles()
-		return [side1,side2,side3].uniq.length == 2
+	def isosceles?
+		[side1,side2,side3].uniq.length == 2
 	end
 
 	def scalene()
-		unless ! (equilateral? || isosceles)
+		unless ! (equilateral? || isosceles?)
 	    false
 	  else
 	    true
@@ -26,7 +26,7 @@ class Triangle
 
 	def recite_facts
 		puts 'This triangle is equilateral!' if equilateral?
-		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles
+		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles?
 		puts 'This triangle is scalene and mathematically boring.' if scalene
 
 		angles = self.calculate_angles(side1,side2,side3)

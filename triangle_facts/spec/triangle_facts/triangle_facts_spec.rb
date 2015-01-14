@@ -27,17 +27,17 @@ describe Triangle do
     end
   end
 
-  describe "#isosceles" do
+  describe "#isosceles?" do
     context "when it is an isosceles" do
       let(:triangle_parameters) { isosceles }
       it "returns true" do
-        expect(triangle.isosceles).to be_truthy
+        expect(triangle.isosceles?).to be_truthy
       end
     end
     context "when it s not an isosceles" do
       let(:triangle_parameters) { [31, 32,33] }
       it "returns false" do
-        expect(triangle.isosceles).to be_falsey
+        expect(triangle.isosceles?).to be_falsey
       end
     end
   end

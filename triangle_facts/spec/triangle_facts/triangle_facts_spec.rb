@@ -42,29 +42,29 @@ describe Triangle do
     end
   end
 
-  describe "#scalene" do
+  describe "#scalene?" do
     context "when equilateral is true" do
       let(:triangle_parameters) { equilateral }
-      it "returns false" do
-        expect(triangle.scalene).to be_falsey
+      it "returns true" do
+        expect(triangle.scalene?).to be_truthy
       end
     end
     context "when equilateral is false" do
       let(:triangle_parameters) { [30, 50, 33] }
-      it "returns true" do
-        expect(triangle.scalene).to be_truthy
+      it "returns false" do
+        expect(triangle.scalene?).to be_falsey
       end
     end
     context "when isosceles is true" do
       let(:triangle_parameters) { isosceles }
-      it "returns false" do
-        expect(triangle.scalene).to be_falsey
+      it "returns true" do
+        expect(triangle.scalene?).to be_truthy
       end
     end
     context "when isosceles is false" do
       let(:triangle_parameters) { [31,32,33] }
-      it "returns true" do
-        expect(triangle.scalene).to be_truthy
+      it "returns falsey" do
+        expect(triangle.scalene?).to be_falsey
       end
     end
   end
@@ -104,14 +104,14 @@ describe Triangle do
     end
     context "when checking if it's scalene" do
       context "when it's scalene" do
-      let(:triangle_parameters) { [ [30, 50, 33], [31,32,33] ].sample }
+      let(:triangle_parameters) { [equilateral, isosceles].sample }
        it "contains /This triangle is scalenben and mathematically boring./" do
          output = capture_stdout { triangle.recite_facts }
          expect(output).to include("This triangle is scalene and mathematically boring.")
        end
       end
       context "when it's not scalene" do
-      let(:triangle_parameters) { [equilateral, isosceles].sample }
+      let(:triangle_parameters) { [ [30, 50, 33], [31,32,33] ].sample }
        it "does not contain /This triangle is scalenben and mathematically boring./" do
          output = capture_stdout { triangle.recite_facts }
          expect(output).to_not include("This triangle is scalene and mathematically boring.")

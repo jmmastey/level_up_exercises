@@ -35,7 +35,7 @@ class Triangle
 		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
 		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
 
-		return [angleA, angleB, angleC]
+		[angleA, angleB, angleC]
 	end
 
 	def radians_to_degrees(rads)

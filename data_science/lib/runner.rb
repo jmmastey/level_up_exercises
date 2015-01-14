@@ -11,9 +11,9 @@ a_b_test = ABCalculator.new(
   b_cohort.conversions, b_cohort.nonconvs
 )
 puts "A data: conversions: #{a_cohort.conversions}"
-puts "A data: conversions: #{a_cohort.nonconvs}"
+puts "A data: non-conversions: #{a_cohort.nonconvs}"
 puts "B data: conversions: #{b_cohort.conversions}"
-puts "B data: conversions: #{b_cohort.nonconvs}"
+puts "B data: non-conversions: #{b_cohort.nonconvs}"
 if a_b_test.different?
   puts "Samples are different at 0.05 significance"
   if a_cohort.conversion_rate > b_cohort.conversion_rate
@@ -33,9 +33,9 @@ a_b_test = ABCalculator.new(
   b_cohort.conversions, b_cohort.nonconvs
 )
 puts "A data: conversions: #{a_cohort.conversions}"
-puts "A data: conversions: #{a_cohort.nonconvs}"
+puts "A data: non-conversions: #{a_cohort.nonconvs}"
 puts "B data: conversions: #{b_cohort.conversions}"
-puts "B data: conversions: #{b_cohort.nonconvs}"
+puts "B data: non-conversions: #{b_cohort.nonconvs}"
 if a_b_test.different?
   puts "Samples are different at 0.05 significance"
   if a_cohort.conversion_rate > b_cohort.conversion_rate
@@ -55,9 +55,9 @@ a_b_test = ABCalculator.new(
   b_cohort.conversions, b_cohort.nonconvs
 )
 puts "A data: conversions: #{a_cohort.conversions}"
-puts "A data: conversions: #{a_cohort.nonconvs}"
+puts "A data: non-conversions: #{a_cohort.nonconvs}"
 puts "B data: conversions: #{b_cohort.conversions}"
-puts "B data: conversions: #{b_cohort.nonconvs}"
+puts "B data: non-conversions: #{b_cohort.nonconvs}"
 if a_b_test.different?
   puts "Samples are different at 0.05 significance"
   if a_cohort.conversion_rate > b_cohort.conversion_rate

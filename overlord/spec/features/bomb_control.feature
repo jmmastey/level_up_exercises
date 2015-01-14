@@ -6,12 +6,26 @@ Feature: Control the bomb
   Background:
     Given I have booted the bomb
 
+  @happy
   Scenario: Activate the bomb
     When I enter the right activation code
     Then the status indicator shows as activated
 
+  @happy
   Scenario: Deactivate the bomb
     Given I enter the right activation code
     And the status indicator shows as activated
     When I enter the right deactivation code
     Then the status indicator shows as deactivated
+
+  @sad
+  Scenario: Incorrect code does not activate
+    When I enter the wrong activation code
+    Then the status indicator shows as deactivated
+
+  @sad
+  Scenario: Incorrect code does not deactivate
+    Given I enter the right activation code
+    And the status indicator shows as activated
+    When I enter the wrong deactivation code
+    Then the status indicator shows as activated

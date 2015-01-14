@@ -11,6 +11,16 @@ When(/^I enter the right deactivation code$/) do
   click_button "submit"
 end
 
+When(/^I enter the wrong activation code$/) do
+  fill_in "code", with: "1111"
+  click_button "submit"
+end
+
+When(/^I enter the wrong deactivation code$/) do
+  fill_in "code", with: "1111"
+  click_button "submit"
+end
+
 Then(/^the status indicator shows as activated$/) do
   expect(page).to have_content("Bomb is active")
 end

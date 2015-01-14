@@ -1,5 +1,8 @@
 class Bomb
   attr_accessor :active, :detonated, :invalid_count
+  ACTIVATE_CODE = "1234"
+  DEACTIVATE_CODE = "0000"
+  MAX_INVALID = 3
 
   def initialize(attributes = {})
     @active = attributes.fetch(:active, false)
@@ -36,10 +39,6 @@ class Bomb
   end
 
   private
-
-  ACTIVATE_CODE = "1234"
-  DEACTIVATE_CODE = "0000"
-  MAX_INVALID = 3
 
   def deactivate_confirm
     @active = false

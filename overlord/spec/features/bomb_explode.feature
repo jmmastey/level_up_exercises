@@ -7,6 +7,7 @@ Feature: Explode the Bomb
     Given I have booted the bomb
     And I enter the right activation code
 
+  @sad
   Scenario: The bomb explodes
     When I enter the wrong deactivation code three times
     Then the status indicator shows as detonated

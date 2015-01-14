@@ -3,6 +3,7 @@ Feature: Boot the bomb
   As a super villain
   I want to boot the bomb safely
 
+  @happy
   Scenario: Boot the bomb without activating
     Given I have not booted the bomb
     When I have booted the bomb

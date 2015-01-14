@@ -1,28 +1,71 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
+$PROJECT_ROOT ||= File.dirname(__FILE__)
 
-notification :growl
+load "#{$PROJECT_ROOT}/spec/spec_helper.rb"
 
-## Uncomment and set this to only include directories you want to watch
+CUKE_OPTS = {
+  :all_on_start => true,
+  :bundler      => true,
+  :cli          => "--color --strict --format progress",
+  :feature_sets => [ 'features' ],
+  :notification => true
+}
+
+RSPEC_OPTS = {
+  :all_on_start => true,
+  :cmd          => "bundle exec rspec --tty --color",
+  :notification => true,
+  :spec_paths   => [ 'spec' ]
+}
+
+RUBOCOP_OPTS = {
+  :all_on_start => false,
+  :notification => true
+}
+
+clearing :on          # clear the screen before every task
+notification :growl   # use growl for notifications
+
+# Uncomment and set this to only include directories you want to watch
 # directories %w(lib spec features)
 
-## Uncomment to clear the screen before every task
-clearing :on
 
-guard :rspec, cmd: 'rspec' do
-  watch(%r{^spec/.+_spec\.rb$})
-  watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
-  watch('spec/spec_helper.rb')  { "spec" }
-  watch('overlord.rb')          { "spec" }
-end
+# guard :rspec, :cmd => 'rspec' do
+#   watch(%r{^spec/.+_spec\.rb$})
+#   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+#   watch('spec/spec_helper.rb')  { "spec" }
+#   watch('overlord.rb')          { "spec" }
+# end
 
-guard :cucumber do
-  watch(%r{^features/.+\.feature$})
-  watch(%r{^features/support/.+$})  { "features" }
-  watch('overlord.rb')              { "features" }
+# guard :cucumber do
+#   watch(%r{^features/.+\.feature$})
+#   watch(%r{^features/support/.+$})  { "features" }
+#   watch('overlord.rb')              { "features" }
+#
+#   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
+#     Dir[File.join("**/#{m[1]}.feature")][0] || "features"
+#   end
+# end
 
-  watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
-    Dir[File.join("**/#{m[1]}.feature")][0] || "features"
+group :red_green_refactor, :halt_on_fail => true do
+  guard :cucumber, CUKE_OPTS do
+    watch(%r{^features/.+\.feature$})
+    watch(%r{^features/support/.+$})  { CUKE_OPTS[:feature_sets] }
+    watch('overlord.rb')              { CUKE_OPTS[:feature_sets] }
+
+    watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
+      Dir[File.join("**/#{m[1]}.feature")][0] || "features"
+    end
+  end
+
+  guard :rspec, RSPEC_OPTS do
+    watch(%r{^spec/.+_spec\.rb$})
+    watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+    watch('spec/spec_helper.rb')  { "spec" }
+    watch('overlord.rb')          { "spec" }
+  end
+
+  guard :rubocop, RUBOCOP_OPTS do
+    watch(%r{lib/(.+)\.rb$}) { |m| "#{m[0]}" }
   end
 end
 

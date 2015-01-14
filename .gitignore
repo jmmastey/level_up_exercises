@@ -1,4 +1,5 @@
 .DS_Store
 
 #SimpleCov
-/coverage
+./coverage
+./triangle_facts/coverage

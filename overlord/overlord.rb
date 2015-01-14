@@ -2,10 +2,12 @@
 
 require 'sinatra'
 
+require_relative './lib/overlord'
+
 enable :sessions
 
 get '/' do
-  "Time to build an app around here. Start time: " + start_time
+  "Your bomb is ready. Oh, Yeah! Start time: " + start_time
 end
 
 # we can shove stuff into the session cookie YAY!

@@ -1,6 +1,15 @@
-# A sample Gemfile
 source "https://rubygems.org"
 
-ruby "2.0.0"
-
 gem "sinatra"
+
+group :development do
+  gem "bundler", "~> 1.0"
+  gem "capybara"
+  gem "cucumber"
+  gem "cucumber-sinatra"
+  gem "growl"
+  gem "guard"
+  gem "guard-cucumber"
+  gem "guard-rspec"
+  gem "rspec"
+end

@@ -162,9 +162,13 @@ describe Triangle do
     end
   end
 
+  describe "#radians_to_degrees" do
+    it "converts radians into degrees"
+  end
+
   def capture_stdout(&block)
     unless block_given?
-      raise "You need to pass a block sir"
+      raise "You need to pass a block sir!"
     end
     original_stdout = $stdout
     $stdout = fake = StringIO.new

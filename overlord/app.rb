@@ -1,9 +1,12 @@
 require 'sinatra'
-require_relative 'bomb'
-require_relative 'bomb_form_text'
+require './bomb'
+require './bomb_form_text'
 require 'pry'
+require './bomb_form_errors'
 
 class Overlord < Sinatra::Base
+  attr_accessor :errors
+
   configure do
     enable :sessions
   end
@@ -15,7 +18,11 @@ class Overlord < Sinatra::Base
   end
 
   post '/' do
-    bomb.process_code(params['code'])
+    if params['code'].empty?
+      self.errors = BombFormErrors.no_code
+    else
+      bomb.process_code(params['code'])
+    end
     redirect '/'
   end
 
@@ -25,5 +32,10 @@ class Overlord < Sinatra::Base
 
   def bomb
     session[:bomb] ||= Bomb.new
+  end
+
+  def errors=(new_error)
+    @errors ||= []
+    @errors << new_error
   end
 end

@@ -29,3 +29,8 @@ Feature: Control the bomb
     And the status indicator shows as activated
     When I enter the wrong deactivation code
     Then the status indicator shows as activated
+
+  @bad
+  Scenario: Blank code shows error message
+    When I submit with no activation code
+    Then a blank code warning shows

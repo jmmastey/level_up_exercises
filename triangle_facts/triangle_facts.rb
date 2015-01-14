@@ -39,7 +39,7 @@ class Triangle
 	end
 
 	def radians_to_degrees(rads)
-		return (rads * 180 / Math::PI).round
+		(rads * 180 / Math::PI).round
 	end
 end
 

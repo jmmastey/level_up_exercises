@@ -26,6 +26,7 @@ When(/^I submit with no activation code$/) do
 end
 
 Then(/^a blank code warning shows$/) do
+  expect(page.status_code).to eq(200)
   expect(page).to have_content("You must enter a code")
 end
 

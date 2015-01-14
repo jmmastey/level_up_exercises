@@ -46,9 +46,9 @@ group :red_green_refactor, :halt_on_fail => true do
     watch('overlord.rb')          { "spec" }
   end
 
-  guard :rubocop, RUBOCOP_OPTS do
-    watch(%r{lib/(.+)\.rb$})      { |m| "#{m[0]}" }
-  end
+  # guard :rubocop, RUBOCOP_OPTS do
+  #   watch(%r{lib/(.+)\.rb$})      { |m| "#{m[0]}" }
+  # end
 end
 
 ## Guard internally checks for changes in the Guardfile and exits. If you want

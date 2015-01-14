@@ -4,12 +4,11 @@ class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.json
   def index
-    @venues = Venue.all
+    @venues = Venue.all.order('name')
     @hash = Gmaps4rails.build_markers(@venues) do |user, marker|
-      test = "#{user.name}"
       marker.lat user.latitude
       marker.lng user.longitude
-      marker.infowindow test
+      marker.infowindow "#{user.name}"
     end
   end
 
@@ -17,6 +16,12 @@ class VenuesController < ApplicationController
   # GET /venues/1.json
   def show
     @events = Event.where(venue_id: @venue.id).order('date')
+     @hash = Gmaps4rails.build_markers(@venue) do |user, marker|
+      test = "#{user.name}"
+      marker.lat user.latitude
+      marker.lng user.longitude
+      marker.infowindow test
+    end
   end
 
   # GET /venues/new

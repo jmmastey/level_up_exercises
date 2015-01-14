@@ -6,17 +6,12 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    # pull_events if Event.all.count == 0
-    @last_updated = Event.all.order('updated_at').last.updated_at.strftime("%d-%m-%Y")
-    # pull_events if @last_update != Time.now.strftime("%d-%m-%Y")
-    if Event.all.count == 0
-      pull_events
-    elsif @last_updated != Time.now.strftime("%d-%m-%Y")
-      pull_events
-    end
+    date_today = Time.now.strftime("%d-%m-%Y")
+    last_updated = Event.all.order('updated_at').last.updated_at.strftime("%d-%m-%Y")
+    pull_events if last_updated != date_today
 
     @events =  Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight).order('avg_price DESC')
-    @carousel = Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight+6.day).order('avg_price DESC').take(5)
+    @carousel = Event.where(date: (Time.now.midnight-1.day)..Time.now.midnight+2.day).order('date ASC').take(5)
     @week = Event.where(date: (Time.now.midnight+1.day)..Time.now.midnight+6.day).order('date')
   end
 
@@ -24,6 +19,10 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @venue = Venue.find(@event.venue_id)
+    @hash = Gmaps4rails.build_markers(@venue) do |user, marker|
+      marker.lat user.latitude
+      marker.lng user.longitude
+    end
   end
 
   # GET /events/new
@@ -89,7 +88,7 @@ class EventsController < ApplicationController
     def pull_events
       date = DateTime.now.strftime('%F')
       tomorrow = DateTime.now.next_week.strftime('%F')
-      test = open("http://api.seatgeek.com/2/events?geoip=true&per_page=50&range=20mi&datetime_local.gte=#{date}&datetime_local.lt=#{tomorrow}")
+      test = open("http://api.seatgeek.com/2/events?geoip=true&per_page=70&range=20mi&datetime_local.gte=#{date}&datetime_local.lt=#{tomorrow}")
       file = File.read(test)
       data_hash = JSON.parse(file)
 

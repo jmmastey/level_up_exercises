@@ -68,7 +68,13 @@
         <td><%= number_to_currency(event.avg_price) %></td>
         <td><%= number_to_currency(event.low_price) %></td>
         <td><%= link_to 'Show', event, class: 'btn btn-primary btn-xs' %></td>
-        <td><%= link_to 'Tickets', event.link, class: 'btn btn-info btn-xs' %></td>
+        <<td>
+          <%if event.avg_price ==0%>
+            <%=link_to 'No Tickets', event, class:'btn btn-danger btn-xs'%>
+          <%else%>
+            <%= link_to 'Buy Tickets', event.link, class: 'btn btn-info btn-xs' %>
+          <%end%>
+          </td>
       </tr>
     <% end %>
   </tbody>
@@ -96,7 +102,11 @@
         <td><%= number_to_currency(event.avg_price) %></td>
         <td><%= number_to_currency(event.low_price) %></td>
         <td><%= link_to 'Show', event, class: 'btn btn-primary btn-xs' %></td>
-        <td><%= link_to 'Tickets', event.link, class: 'btn btn-info btn-xs' %></td>
+        <td>
+          <%unless event.avg_price ==0%>
+            <%= link_to 'Tickets', event.link, class: 'btn btn-info btn-xs' %>
+          <%end%>
+          </td>
       </tr>
     <% end %>
   </tbody>

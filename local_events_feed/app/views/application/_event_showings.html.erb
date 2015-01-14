@@ -1,0 +1,43 @@
+<div id='event-showings'>
+  <div class="table-container">
+  <table>
+    <% if @event.showings.blank? %>
+      <tr><td colspan=3>No Showings on Record</td></tr>
+    <% else %>
+      <% @event.showings.sorted.each do |showing| %>
+        <tr class="<%= member_label(showing) %>">
+          <% local_time_view = get_local_time_view(showing.time) %>
+          <td class="dow"><%= local_time_view.pretty_dow %></td>
+          <td class="date"><%= local_time_view.pretty_date_no_dow %></td>
+          <td class="time"><%= local_time_view.pretty_time %></td>
+          <td align="center">
+            <% if member?(showing) %>
+              <%= link_to image_tag("minus.png", :class => 'minus'), 
+                showing, method: :delete,
+                :id => "remove-#{showing[:id]}-via-event" %>
+            <% else %>
+              <%= link_to image_tag("plus.png", :class => 'plus'), 
+                showing, method: :post, :id => "add-#{showing[:id]}" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+  </div>
+
+  <div class="selection-panel">
+    <% if @event.image.present? %>
+      <div class="image-box">
+        <img src=<%= @event.image %> />
+      </div>
+      <div class="description">
+        <%= @event.description %>
+      </div>
+    <% end %>
+
+    <%= link_to 'Website', @event.link, :class => 'cool-round-button website', :target => '_blank' %>
+    <%= link_to 'Events', events_path, :class => 'cool-round-button events' %>
+    <%= link_to 'Home', current_user, :class => 'cool-round-button home' %>
+  </div>
+</section>

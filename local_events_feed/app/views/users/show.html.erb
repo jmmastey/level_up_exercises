@@ -1,0 +1,24 @@
+<header>
+  <title><%= first_name %>'s Events</title>
+</header>
+
+<body>
+  <%= render :partial => "session_bar" %>
+
+  <div class="scrollable">
+    <%= render :partial => "user" %>
+  </div>
+
+  <%= render :partial => "home_menu" %>
+
+  <div class="page-title">
+    <%= first_name %>'s Events
+  </div>
+</body>
+
+
+<script type="text/javascript">
+$( document ).ready( function() {
+  drawRandomUserShowing();
+});
+</script>

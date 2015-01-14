@@ -5,6 +5,7 @@ require 'sinatra'
 enable :sessions
 
 get '/' do
+  "#{Time.now}"
   "Time to build an app around here. Start time: " + start_time
 end
 

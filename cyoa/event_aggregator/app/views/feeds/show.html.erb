@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Owner user:</strong>
+  <%= @feed.user.present? ? @feed.user.full_name : "None" %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @feed.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @feed.description %>
+</p>
+
+<p>
+  <strong>Public:</strong>
+  <%= @feed.public %>
+</p>
+
+<h2>Event Selection Criteria</h2>
+
+<%= render partial: 'selection_criteria/criteria_list',
+           locals: { criteria: @feed.selection_criteria } %>
+
+<h2>Data Sources</h2>
+
+<%= render partial: 'event_sources/event_source_list',
+           locals: { sources: @feed.event_sources } %>
+<% if @feed.user == current_user %>
+  <%= link_to 'Edit', edit_feed_path(@feed) %> |
+<% end %>
+
+<%= link_to 'Back', feeds_path %>

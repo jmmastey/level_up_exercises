@@ -1,0 +1,14 @@
+<div id="Logout" class="pull-right">
+  <h2>Welcome,
+    <span class="user-name">
+      <%= link_to current_user.full_name, edit_user_registration_path %>
+    </span>
+  </h2>
+  <%= form_for(resource, as: resource_name, method: :delete,
+               url: destroy_user_session_path) do |f| %>
+    <%= f.button 'Logout', class: 'small-button' %>
+    <h5><small>
+      <%= link_to "Not this person?", destroy_user_session_path %>
+    </small></h5>
+ <% end %>
+</div>

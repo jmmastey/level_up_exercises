@@ -1,0 +1,39 @@
+<h1>Listing Calendar Events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Description</th>
+      <th>Event hash</th>
+      <th>Family hash</th>
+      <th>Location</th>
+      <th>Host</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @calendar_events.each do |event| %>
+      <tr>
+        <td><%= event.title %></td>
+        <td><%= event.start_time %></td>
+        <td><%= event.end_time %></td>
+        <td><%= event.description %></td>
+        <td><%= event.event_hash %></td>
+        <td><%= event.family_hash %></td>
+        <td><%= event.location %></td>
+        <td><%= event.host %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event', new_event_path %>

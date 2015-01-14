@@ -1,0 +1,8 @@
+<%
+display_class = "menu"
+display_class.concat(" active") if request.path == uri
+id ||= (link_name.tr(' ', '').camelize + "Menu")
+%>
+<li id="<%= id %>" class="<%= display_class %>">
+  <%= link_to link_name, uri %>
+</li>

@@ -1,0 +1,10 @@
+<div id="TopBarTitleArea" class="col-xs-10 col-md-9 col-lg-9 chicago">
+  <%= render "shared/page_title" %>
+</div>
+<div id="TopBarSessionArea" class="col-md-3 col-lg-3 hidden-sm hidden-xs">
+  <%= render "shared/login_pane" %>
+</div>
+<div id="TopBarSessionLink" class="col-xs-2 hidden-md hidden-lg">
+  <%= link_to "Log in", new_session_path(resource_name) %><br />
+  <%= link_to "Sign up", new_registration_path(resource_name) %>
+</div>

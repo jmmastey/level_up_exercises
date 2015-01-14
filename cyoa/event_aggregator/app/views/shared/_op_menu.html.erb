@@ -1,0 +1,13 @@
+<div id="OperationMenu">
+<div class="op-menu btn-group pull-right" role="group">
+<%
+  commands.each do |command|
+%>
+  <a class="op-menu-link btn btn-default" href="<%= command[:uri] %>">
+    <%= command[:link_name] %>
+  </a>
+<%
+  end
+%>
+</div>
+</div>

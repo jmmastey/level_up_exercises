@@ -1,0 +1,31 @@
+<div id="ChicagoHighlights" class="section">
+<h1 class="section-title">Chicago Highlights</h1>
+<%= 
+render partial: 'feed_highlight',
+       locals: { events: @highlight_events }
+%>
+</div>
+<div id="HotTopics" class="section">
+<h1 class="section-title">Hot Topics</h1>
+<div class="row">
+  <div class="col-xs-6">
+<%=
+render partial: 'feed_highlight',
+       locals: {
+         feed_title: 'Opening Night Calendar',
+         events: @opening_night_events,
+         count: 2,
+       }
+%>
+  </div>
+  <div class="col-xs-6">
+<%=
+render partial: 'feed_highlight',
+       locals: {
+         feed_title: "Meetups",
+         events: @meetups,
+         count: 2,
+       }
+%>
+  </div>
+</div>

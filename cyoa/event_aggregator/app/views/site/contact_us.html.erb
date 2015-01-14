@@ -1,0 +1,41 @@
+<%
+  telno = EventAggregator.customer_service_telno
+  email = EventAggregator.customer_service_email
+  address = EventAggregator.customer_service_mail
+%>
+<div id="ContactUs" class="">
+  <h1><span class="hard-to-see">Don't</span><br />Contact Us</h1>
+
+  <div id="CallUs" class="section">
+    <div class="section-title">
+      <h2><span class="hard-to-see">Don't </span>Call Us</h2>
+    </div>
+
+    <p>Customer service (satisfied customers only, please): 
+      <a href="tel:<%= telno %>"><%= telno %></a></p>
+  </div>
+  <div id="EmailUs" class="section">
+    <div class="section-title">
+      <h2><span class="hard-to-see">Don't </span>E-Mail Us</h2>
+    </div>
+
+    <p>Send your inquiries to: <a href="mailto:<%= email %>">
+      Customer Service Elf People &lt;<%= email %>&gt;</a></p>
+  </div>
+  <div id="MailUs" class="section">
+    <div class="section-title">
+      <h2><span class="hard-to-see">Don't </span>Send Us Mail</h2>
+    </div>
+
+    <p>To sue us or serve process, send mail to 
+      <span class="anunciated">
+          <%= link_to "(But please see our Terms and Conditions):",
+                      terms_and_conditions_path %></span></p>
+
+    <div id="CompanyAddress" class="mail-address">
+      <% address.each do |line| %>
+        <p class="address_line"><%= line %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

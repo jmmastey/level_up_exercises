@@ -1,0 +1,18 @@
+<div id="CategoryMenuBar" class="menu">
+  <nav id="PageNav" class="navbar navbar-default" role="navigation">
+    <ul class="nav navbar-nav">
+<%= if user_signed_in?
+      render partial: "shared/menuitem",
+             locals: { link_name: "My Feeds", uri: my_feeds_path }
+    end %>
+<%= render partial: "shared/menuitem",
+           locals: { link_name: "Contact Us", uri: contact_us_path } %>
+
+<%= render partial: "shared/menuitem",
+           locals: { link_name: "About Us", uri: about_us_path } %>
+
+<%= render partial: "shared/menuitem",
+           locals: { link_name: "Privacy Policy", uri: privacy_policy_path} %>
+    </ul>
+  </nav>
+</div>

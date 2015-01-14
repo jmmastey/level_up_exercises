@@ -1,0 +1,24 @@
+<h1 class="text-center">
+  My Feeds
+  <a href="#FIXME" class="section-control pull-right">Search for feeds</a>
+</h1>
+
+<h2>
+  My Custom Feeds
+  <a href="<%= new_feed_path %>" class="section-control pull-right">
+    Create new feed
+  </a>
+</h2>
+
+<%= render partial: "feed_list",
+           locals: { feeds: @custom_feeds, feed_class: 'feed-custom' } %>
+
+<!-- h2>Shared With Me</h2>
+
+ %= render partial: "feed_list",
+    locals: { feeds: @shared_feeds, with_owner: true } % -->
+
+<h2>Public Feeds</h2>
+
+<%= render partial: "feed_list",
+           locals: { feeds: @public_feeds, feed_class: 'feed-public' } %>

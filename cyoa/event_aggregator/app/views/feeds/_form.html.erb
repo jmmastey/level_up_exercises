@@ -1,0 +1,54 @@
+<%= form_for(@feed) do |f| %>
+  <% if @feed.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@feed.errors.count, "error") %> prohibited this feed from being saved:</h2>
+
+      <ul>
+      <% @feed.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+
+  <%= link_to 'Cancel', @feed, class: ['section-control', 'pull-right'] %>
+
+  <% submit_label ||= "Update feed" %>
+  <%= f.submit submit_label, class: ['section-control'] %>
+
+  <div class="criteria-list">
+    <h2>
+      Event Selection Criteria
+      <% if (@feed.id) %>
+      <a href="<%= feed_selection_criteria_path(@feed) %>"
+         class="section-control pull-right">Edit criteria</a>
+      <% end %>
+    </h2>
+
+    <%= render partial: 'selection_criteria/criteria_list',
+               locals: { criteria: @feed.selection_criteria } %>
+  </div>
+
+  <div class="data-sources">
+    <h2>
+      Data Sources
+      <% if (@feed.id) %>
+      <a href="<%= feed_event_sources_path(@feed) %>"
+         class="section-control pull-right">Edit data sources</a>
+      <% end %>
+    </h2>
+
+    <%= render partial: 'event_sources/event_source_list',
+               locals: { sources: @feed.event_sources } %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+require "harvester/implementations/chicagotheater/main_page_scraper"
+require "harvester/implementations/chicagotheater/detail_page_scraper"

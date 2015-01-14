@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type of condition:</strong>
+  <%= @selection_criterion.implementation_strategy.selector_description %>
+</p>
+
+<p>
+  <strong>Sql expression:</strong>
+  <%= @selection_criterion.sql_expression_as_clause %>
+</p>
+
+<%= link_to 'Edit',
+      edit_feed_selection_criterion_path(@feed, @selection_criterion) %> |
+<%= link_to 'Back', @selection_criterion.feed %>

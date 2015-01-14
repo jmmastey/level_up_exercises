@@ -1,0 +1,13 @@
+<html>
+<head>
+Event Aggregator
+</head>
+<body>
+<div>
+  <% flash.each do |key, value| %>
+    <li><%= value %></li>
+  <% end %>
+</div>
+<%= yield %>
+</body>
+</html>

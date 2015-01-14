@@ -1,0 +1,51 @@
+// Place all the styles related to the site controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "defs";
+
+div.event-highlight {
+  background-color: $light-chicago-blue;
+  border-radius: 20px;
+  border: 5px solid $light-chicago-blue;
+  height: 500px;
+
+  .caption {
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .event-image {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  h4 {
+    font-style: italic;
+  }
+
+  h5 {
+    font-weight: bold;
+  }
+}
+
+.mail-address {
+  p.address_line {
+    margin: 0pt;
+    text-align: center;
+    font-family: "Courier", "monospace";
+  }
+}
+
+#ContactUs {
+  margin-top: -3em;
+
+  .section-title {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+
+    h2 {
+      display: inline;
+      margin-left: -2.5em;
+    }
+  }
+}

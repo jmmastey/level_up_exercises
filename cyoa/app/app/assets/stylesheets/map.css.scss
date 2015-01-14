@@ -1,0 +1,74 @@
+.carousel{
+  width:100%;
+  height:360px;
+  margin: auto;
+
+  }
+
+.carousel-caption {
+  background-color: black;
+  opacity: .82;
+  color: green;
+  border-radius: 10px;
+}
+
+.carousel img {
+  width: 100%;
+  max-height: 360px;
+}
+#map {
+  height: 180px;
+  border: 2px solid black;
+  border-radius: 10px; }
+
+.gm-style-iw{
+    max-width: 300px;
+}
+.venues {
+  margin-top: 50px;
+}
+table tbody td{
+  font-family: "Comic Sans";
+  font-size: 16px;
+  color: white;
+}
+body {
+  background: url('http://spotimg.com/wp-content/uploads/2014/04/Chicago-Winter-Photography-Picture-2517.jpg') no-repeat center center fixed;
+}
+table tbody {
+  background-color: gray;
+}
+table thead {
+  background-color: blue;
+  opacity: .85;
+  color: red;
+}
+#event {
+  width: 900px;
+  background-color: gray;
+  border-radius: 10px;
+  padding: 25px;
+  margin-left: -20px;
+  opacity: .9;
+  color: white;
+}
+
+#event a {
+  color: white;
+}
+
+#event h1 {
+  color: red;
+}
+#event img {
+  margin: 20px;
+  opacity: 1;
+}
+#locate {
+  margin-top: 20px;
+}
+
+#description {
+  margin-top: 20px;
+}
+

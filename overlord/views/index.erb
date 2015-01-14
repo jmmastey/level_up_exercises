@@ -1,0 +1,23 @@
+<h2>Welcome to your Bomb Official Operations Management System</h2>
+
+<div class="content">
+  <form class='form' id='login' action='/init' method='POST'>
+    <label for='code'> Enter Code:</label>
+    <input type='text' id='code' name='code' placeholder='Enter key for destruction'>
+    <input type='submit' id='activate' value='Destroy'>
+  </form>
+</div>
+<div id="Warning">
+<%=session[:failed] if session[:failed] > 0%>
+</div>
+<br>
+<div class="sidebar">
+<h3> Change Codes</h3>
+  <form class='form' id='login' action='/change' method='POST'>
+    <label for='new_activate'> Activation Code </label>
+    <input type='text' id='new_activate' name='new_acode' placeholder="New Activation key">
+    <label for='new_deactivate'> Deactivation Code </label>
+    <input type='text' id='new_deactivate' name='new_dcode' placeholder="New Deactivation key">
+    <input type='submit' id='change' value='Change Code'>
+  </form>
+</div>

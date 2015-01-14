@@ -1,0 +1,44 @@
+<%= form_for(@event, html: {class: 'form-horizontal'}) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field form-group">
+    <div class="field">
+      <%= f.label :avg_price, class: 'col-sm2 control-label'%><br>
+      <div class="col-sm-10">
+        <%= f.text_field :avg_price %>
+      </div>
+    </div>
+    <div class="field form-group">
+      <%= f.label :low_price, class: 'col-sm2 control-label' %><br>
+      <div class="col-sm-10">
+        <%= f.text_field :low_price %>
+      </div>
+    </div>
+    <div class="field form-group">
+      <%= f.label :high_price, class: 'col-sm2 control-label' %><br>
+      <div class="col-sm-10">
+        <%= f.text_field :high_price %>
+      </div>
+    </div>
+    <div class="field form-group">
+      <%= f.label :title, class: 'col-sm2 control-label' %><br>
+      <div class="col-sm-10">
+        <%= f.text_field :title %>
+      </div>
+    </div>
+  </div>
+  <div class="actions form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>

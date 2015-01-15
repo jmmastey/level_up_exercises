@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChicagoRunning</title>
+  <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'http://code.jquery.com/jquery-2.0.0.min.js' %>
+  <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id='wrapper'>
+    <div id='title_bar'><h1>Chicago Upcoming Running Events</h1></div>
+    <form id='filters' class='form-horizontal' method='GET' action='events/filter' data-remote=true>
+        <div class="form-group">
+            <label for='running_type' class='col-md-3 control-label'>Running Type</label>
+            <div class='col-md-3'>
+              <select id='running_type' class="form-control" name='running_type'>
+                <option>Running</option>
+                <option>5K</option>
+                <option>8K</option>
+                <option>10K</option>
+                <option>Half Marathon</option>
+                <option>Full Marathon</option>
+              </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for='state-date' id='start-date-label' class='col-md-3 control-label'>Start Date</label>
+            <div class='col-md-3'>
+                <div class="input-group date" id="start_date_picker" data-date="12-02-2012" >
+                  <input type="text" id='start_date' name='start_date' class="form-control" data-date-format="YYYY-MM-DD" readonly/>
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for='state-date' class='col-md-3 control-label'>End Date</label>
+            <div class='col-md-3'>
+                <div class="input-group date" id="end_date_picker" data-date="12-02-2012">
+                  <input type="text" id='end_date' name='end_date' class="form-control" data-date-format="YYYY-MM-DD" readonly/>
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+        </div>
+        <button id="btn-submit" type="submit" class="btn btn-success col-md-offset-4">Submit</button>
+    </form>
+<%= yield %>
+
+</body>
+</html>

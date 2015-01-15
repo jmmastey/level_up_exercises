@@ -1,0 +1,11 @@
+$('.page').remove();
+$('.pagination li:last-child').before("<%= escape_javascript(render(:partial => 'pagination')) %>");
+$('.table tr').remove();
+$("#event-list > tbody").append("<%= escape_javascript(render(:partial => 'event_list')) %>");
+$(".pagination > li:nth-child(2)").children('a').addClass('active_page');
+$(".pagination > li:first > a").prop("href","");
+if ($(".pagination > li.page").length > 0){
+    $(".pagination > li:last > a").prop("href","/events/page/2");
+}else{
+    $(".pagination > li:last > a").prop("href","");
+}

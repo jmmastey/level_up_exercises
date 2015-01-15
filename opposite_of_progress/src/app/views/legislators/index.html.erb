@@ -1,37 +1,14 @@
-<% if @legislators.present? %>
-<section>
-  <div class="legislators-wrapper">
-     <h4>Legislators <%= '(Favorites Only)' if action_name == 'favorites' %></h4>
-    <% if user_signed_in? %>
-
+<% content_for :legislators_header do %>
+  <h4>Legislators</h4>
+  <% if user_signed_in? %>
     <div class="favorite-toggle">
-        <% if action_name == 'favorites' %>
-          <%= link_to "Show All", legislators_path %>
-        <% else %>
-          <%= link_to "Show Favorites Only", legislators_favorites_path %>
-        <% end %>
-      </div>
-    <% end %>
-    <% if action_name != 'favorites' %>
-      <div class="search">
-        <%= select_tag "people", options_for_select(States::STATES_AND_TERRITORIES.values, States.abbr_to_state(@state)), prompt: 'All States', id:'state-select' %>
-      </div>
-    <% end %>
-    <div class="legislators">
-      <%= render @legislators %>
+      <%= link_to "Show Favorites Only", legislators_favorites_path %>
     </div>
+  <% end %>
+  <div class="search">
+    <%= select_tag "people", options_for_select(States::STATES_AND_TERRITORIES.values, States.abbr_to_state(@state)), prompt: 'All States', id:'state-select' %>
   </div>
-</section>
-<section>
-  <%= pagination_wrapper_for(@legislators) %>
-</section>
-<% else %>
-<section>
-  <div class="empty">
-    <div>
-      There are no legislators to show
-    </div>
-  </div>
-</section>
 <% end %>
+
+<%= render :partial => "legislators_base" %>
 

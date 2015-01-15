@@ -17,32 +17,44 @@ class LegislatorsController < ApplicationController
     render :index
   end
 
+  def search_by_location
+    if params[:search].present?
+      set_legislators_by_location
+    end
+  end
+
   def favorites
     set_favorite_legislators
-    render :index
   end
 
   private
 
-  def set_legislators(state = nil)
-    legislators = Legislator.order(
+  def order_params
+    {
       chamber: :desc,
       state: :asc,
       state_rank: :desc,
       district: :asc
-    )
+    }
+  end
+
+  def set_legislators(state = nil)
+    legislators = Legislator.order(order_params)
 
     legislators = legislators.where(state: state) unless state.nil?
     @legislators = legislators.page(params[:page])
   end
 
   def set_favorite_legislators
-    @legislators = current_user.legislators.order(
-      chamber: :desc,
-      state: :asc,
-      state_rank: :desc,
-      district: :asc
-    ).page(params[:page])
+    @legislators = current_user.legislators.order(order_params)
+      .page(params[:page])
+  end
+
+  def set_legislators_by_location
+    @search = params[:search]
+    bioguide_ids = CongressApiService.search_by_address(@search)
+    @legislators = Legislator.where(bioguide_id: bioguide_ids)
+      .order(order_params).page(params[:page])
   end
 
   def set_favorited_ids

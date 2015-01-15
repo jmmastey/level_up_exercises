@@ -1,1 +1,19 @@
-
+<section>
+  <div class="search-wrapper">
+    <h4>Search your legislators</h4>
+    <div class="search-form-wrapper">
+      <%= form_tag search_path, method: :post, class: 'search-form' do %>
+          <div class="small-6">
+            <div class="row collapse">
+              <div class="small-10 columns">
+                <input type="text" placeholder="Find your legislators by address, ZIP or ZIP+4 code">
+              </div>
+              <div class="small-2 columns">
+                <a href="#" class="button postfix">Go</a>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</section>

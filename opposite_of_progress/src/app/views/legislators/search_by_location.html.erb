@@ -1,0 +1,36 @@
+<section>
+  <div class="legislators-wrapper">
+    <h4>Search your legislators</h4>
+    <div class="legislators-search-form">
+      <%= form_tag search_by_location_path, method: :get, class: 'search-form' do %>
+          <div class="small-6">
+            <div class="row collapse">
+              <div class="small-10 columns">
+                <input type="text" name="search" placeholder="Find your legislators by address or ZIP.">
+              </div>
+              <div class="small-2 columns">
+                <!-- <a href="#" class="button postfix">Go</a> -->
+                <%= submit_tag 'Search', class: 'button postfix'%>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <% if @legislators.present? %>
+      <% if @legislators.count > 3 %>
+        <p>There are two or more house representatives for the location given. Please refine your search by using complete address</p>
+      <% end %>
+      <p>Showing legislators for <em><%= @search %></em></p>
+      <div class="legislators">
+        <%= render @legislators %>
+      </div>
+    <% elsif @search.present? %>
+      <p>Could not find legislators for <em><%= @search %></em></p>
+    <% end %>
+  </div>
+</section>
+<% if  @legislators.present? %>
+  <section>
+    <%= pagination_wrapper_for(@legislators) %>
+  </section>
+<% end %>

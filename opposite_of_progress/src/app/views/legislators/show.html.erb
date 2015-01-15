@@ -6,7 +6,7 @@
 <% if @legislator.sponsorships.present? %>
 <section>
   <div class="good-deeds sponsorships">
-    <h6>Sponsorships</h6>
+    <h6>Sponsored Bills (<%= @legislator.sponsorships.count %>)</h6>
     <%= render partial: 'good_deed', collection: @legislator.sponsorships %>
   </div>
 </section>
@@ -15,7 +15,7 @@
 <% if @legislator.cosponsorships.present? %>
 <section>
   <div class="good-deeds cosponsorships">
-    <h6>Co-sponsorships</h6>
+    <h6>Co-sponsored Bills (<%= @legislator.cosponsorships.count %>)</h6>
     <%= render partial: 'good_deed', collection: @legislator.cosponsorships %>
   </div>
 </section>

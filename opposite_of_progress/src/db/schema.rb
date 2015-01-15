@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113233907) do
+ActiveRecord::Schema.define(version: 20150115084243) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_type"
-    t.string   "official_title"
+    t.text     "official_title",     limit: 255
     t.string   "chamber"
     t.integer  "congress"
     t.integer  "number"

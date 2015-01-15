@@ -10,7 +10,7 @@ Anyway. I need to catalog some dinosaurs for my newest project, DinoDex. I've go
 
 Go check out the CSVs and come back. Done? Cool, I've just got a few features I need:
 
-1. I loaded my favorite dinosaurs into a CSV file you'll need to parse. I don't know a lot about African Dinosaurs though, so I downloaded one from The Pirate Bay. It isn't formatted as well as mine, but please try to parse it anyway.
+1. I loaded my favorite dinosaurs into a CSV file you'll need to parse. I don't know a lot about African Dinosaurs though, so I downloaded one from The Pirate Bay. Its formatting is different from the one I created so your application should be prepared to handle both formats.
 2. I have friends who ask me a lot of questions about dinosaurs (I'm kind of a big deal). Please make sure the dinodex is able to answer these things for me:
     * Grab all the dinosaurs that were bipeds.
     * Grab all the dinosaurs that were carnivores (fish and insects count).
@@ -26,3 +26,57 @@ Go check out the CSVs and come back. Done? Cool, I've just got a few features I 
 2. CSV isn't may favorite format in the world. Can you implement a JSON export feature?
 
 Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long and up to 8 tons! Suh-weet.)
+
+### Technical Notes
+
+#### Your Application
+Your application will most likely run in the console. It can run as a single command with options like this:
+```
+dev-666:~/projects/level_up_exercises/dino_catalog $ ruby ./dinodex.rb bipeds
+
+ Found:
+   Albertosaurus
+   Albertonykus
+   Baryonyx
+   Deinonychus
+   Megalosaurus
+   Giganotosaurus
+   Yangchuanosaurus
+   Abrictosaurus
+   Afrovenator
+   Carcharodontosaurus
+   Suchomimus
+```
+
+Or you can have an interactive prompt for user input like this:
+
+```
+dev-666:~/projects/level_up_exercises/dino_catalog $ ruby ./dinodex.rb
+
+Dinodex - Enter command > bipeds
+
+ Found:
+   Albertosaurus
+   Albertonykus
+   Baryonyx
+   Deinonychus
+   Megalosaurus
+   Giganotosaurus
+   Yangchuanosaurus
+   Abrictosaurus
+   Afrovenator
+   Carcharodontosaurus
+   Suchomimus
+
+Dinodex - Enter command > carnivores
+
+   Albertosaurus
+   ...
+
+```
+
+This are just examples - you may choose to do something entirely different.
+
+#### Parsing CSV Files
+
+You will probably want to use the [CSV](http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html) class to help with parsing the data-files.

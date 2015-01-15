@@ -27,3 +27,25 @@ But, this is the important part: you're going to write all the tests for the dev
 * Add a timer. All good bombs have timers.
 * Add wires to snip to stop the bomb from detonating. This guy seems like he might not pay on time.
 * No bonus points for developing an actual electronic detonator. Still, dude, sweet.
+
+### Technical Notes
+
+#### Your First Web App
+
+If you have little or no experience writing web applications, then hopefully this project will serve as a nice introduction. The paradigm you will be learning here (and even more so when you start _Rails_) is known as _Model-View-Controller_ or _MVC_. Here is a brief explanation of the MVC paradigm within the context of Overlord.
+
+Most of your business logic will probably live inside a class called `Bomb`. It will know its own state like `activated` or `exploded` and will be able to react to actions like `set_code` and `activate`. In MVC the Bomb class is the _Model_. This should be relatively easy to build since it is plain ruby and you already have a couple projects under your belt by now!
+
+Now when someone connects to your Overlord server over the internet, they are viewing web-pages rendered by your application. Somewhere in your application you will have to construct these web-pages to display things like _bomb status_ and to supply input fields for entering codes. In MVC this is called the _View_. In Overlord you will use _Embedded Ruby_ (.erb) files to render web-pages whose content depends on your bomb's state.
+
+When a visitor triggers an action on your Overlord site, your application will have to react and respond. For example, suppose the user enters an activation code and presses the _Activate!_ button. Then your application will have to validate the code with your Bomb class and then respond back to the user with an indication that the bomb is now activated or an error (in case the code was invalid). This liaising between the view and the model is done by the _Controller_. The controller code will reside in the file `overlord.rb`.
+
+Confused? Don't worry, it will make more and more sense as you build your Overlord. Good luck and start hacking!
+
+#### The Final Product
+
+At the very least your application should be functional. You can probably get away with two views:
+  * Enter-Codes Page: The user enters an activation and deactivation code for the bomb
+  * Game-Page: The user interacts with the bomb by activating it, deactivating it, or even snipping the wires
+
+You also have the option to leverage your Overlord project to learn more about CSS and Javascript. CSS allows you to add style to your views without cluttering your html.erb files. You can use Javascript to make your app more responsive to user input and also to add animations (e.g. a nice explosion!). This is all optional but hey, if you have the time, Overlord is a great place to get your feet wet.

@@ -28,28 +28,52 @@ notification :growl   # use growl for notifications
 # Uncomment and set this to only include directories you want to watch
 # directories %w(lib spec features)
 
-group :red_green_refactor, :halt_on_fail => true do
-  guard :cucumber, CUKE_OPTS do
-    watch(%r{^features/.+\.feature$})
-    watch(%r{^features/support/.+$})  { CUKE_OPTS[:feature_sets] }
-    watch('overlord.rb')              { CUKE_OPTS[:feature_sets] }
+guard :cucumber, CUKE_OPTS do
+  watch(%r{^features/.+\.feature$})
+  watch(%r{^features/support/.+$})  { CUKE_OPTS[:feature_sets] }
+  watch('overlord.rb')              { CUKE_OPTS[:feature_sets] }
 
-    watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
-      Dir[File.join("**/#{m[1]}.feature")][0] || "features"
+  watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
+    Dir[File.join("**/#{m[1]}.feature")][0] || "features"
+  end
+end
+
+guard :rspec, RSPEC_OPTS do
+  watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch('spec/spec_helper.rb')  { "spec" }
+  watch('overlord.rb')          { "spec" }
+
+  # run cucumber after rspec passes
+  callback(:run_all_end) do
+    unless Guard.guards(:rspec).last_failed
+      Guard.run_all({ :guard => Guard.guards(:cucumber) })
     end
   end
-
-  guard :rspec, RSPEC_OPTS do
-    watch(%r{^spec/.+_spec\.rb$})
-    watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
-    watch('spec/spec_helper.rb')  { "spec" }
-    watch('overlord.rb')          { "spec" }
-  end
-
-  # guard :rubocop, RUBOCOP_OPTS do
-  #   watch(%r{lib/(.+)\.rb$})      { |m| "#{m[0]}" }
-  # end
 end
+
+# group :red_green_refactor, :halt_on_fail => true do
+#   # guard :cucumber, CUKE_OPTS do
+#   #   watch(%r{^features/.+\.feature$})
+#   #   watch(%r{^features/support/.+$})  { CUKE_OPTS[:feature_sets] }
+#   #   watch('overlord.rb')              { CUKE_OPTS[:feature_sets] }
+#   #
+#   #   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
+#   #     Dir[File.join("**/#{m[1]}.feature")][0] || "features"
+#   #   end
+#   # end
+#   #
+#   # guard :rspec, RSPEC_OPTS do
+#   #   watch(%r{^spec/.+_spec\.rb$})
+#   #   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+#   #   watch('spec/spec_helper.rb')  { "spec" }
+#   #   watch('overlord.rb')          { "spec" }
+#   # end
+#
+#   # guard :rubocop, RUBOCOP_OPTS do
+#   #   watch(%r{lib/(.+)\.rb$})      { |m| "#{m[0]}" }
+#   # end
+# end
 
 ## Guard internally checks for changes in the Guardfile and exits. If you want
 ## Guard to automatically start up again, run guard in a shell loop, e.g.:

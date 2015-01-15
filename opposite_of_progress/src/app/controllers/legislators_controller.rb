@@ -11,7 +11,7 @@ class LegislatorsController < ApplicationController
   end
 
   def search
-    state_slug = params[:state_or_chamber]
+    state_slug = params[:state]
     @state = find_by_state_slug(state_slug)
     set_legislators(@state)
     render :index

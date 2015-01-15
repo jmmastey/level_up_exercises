@@ -18,9 +18,9 @@
     </div>
     <% if @legislators.present? %>
       <% if @legislators.count > 3 %>
-        <p>There are two or more house representatives for the location given. Please refine your search by using complete address</p>
+        <p>There are two or more house representatives for the location given. Please refine your search by using complete address.</p>
       <% end %>
-      <p>Showing legislators for <em><%= @search %></em></p>
+      <p><strong>Showing legislators for </strong><em><%= @search %></em></p>
       <div class="legislators">
         <%= render @legislators %>
       </div>

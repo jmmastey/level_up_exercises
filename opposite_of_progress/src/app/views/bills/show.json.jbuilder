@@ -1,1 +1,1 @@
-json.extract! @bill, :id, :created_at, :updated_at
+json.partial! 'bills/bill', bill: @bill

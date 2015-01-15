@@ -17,3 +17,6 @@
 
 # Ignore .env file
 /.env
+
+# Ignore cassetes
+/features/cassettes

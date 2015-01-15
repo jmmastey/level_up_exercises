@@ -9,7 +9,6 @@
                 <input type="text" name="search" placeholder="Find your legislators by address or ZIP.">
               </div>
               <div class="small-2 columns">
-                <!-- <a href="#" class="button postfix">Go</a> -->
                 <%= submit_tag 'Search', class: 'button postfix'%>
               </div>
             </div>
@@ -18,19 +17,18 @@
     </div>
     <% if @legislators.present? %>
       <% if @legislators.count > 3 %>
-        <p>There are two or more house representatives for the location given. Please refine your search by using complete address.</p>
+        <p class="info">There are two or more house representatives for the location given. Please refine your search by using complete address.</p>
       <% end %>
-      <p><strong>Showing legislators for </strong><em><%= @search %></em></p>
+      <p class="info"><strong>Showing legislators for </strong><em><%= @search %></em></p>
       <div class="legislators">
         <%= render @legislators %>
       </div>
     <% elsif @search.present? %>
-      <p>Could not find legislators for <em><%= @search %></em></p>
+      <p class="info">Could not find legislators for <em><%= @search %></em></p>
     <% end %>
   </div>
 </section>
-<% if  @legislators.present? %>
-  <section>
-    <%= pagination_wrapper_for(@legislators) %>
-  </section>
+
+<% if @legislators.present? %>
+  <%= render 'pagination' %>
 <% end %>

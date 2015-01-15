@@ -10,5 +10,9 @@ RSpec.describe BillsController, :type => :routing do
     it "routes to #show" do
       expect(:get => "/bills/1").to route_to("bills#show", :id => "1")
     end
+
+    it "routes to #favorites" do
+      expect(:get => "/bills/favorites").to route_to("bills#favorites")
+    end
   end
 end

@@ -1,7 +1,7 @@
 class LegislatorsController < ApplicationController
   before_action :set_legislator, only: [:show]
   before_action :set_favorited_ids
-  before_action :authenticate_user!, only: [:favorite]
+  before_action :authenticate_user!, only: [:favorites]
 
   def index
     set_legislators

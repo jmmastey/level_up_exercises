@@ -3,4 +3,3 @@ json.results do
 end
 
 json.partial! 'legislators/pagination', legislators: @legislators
-

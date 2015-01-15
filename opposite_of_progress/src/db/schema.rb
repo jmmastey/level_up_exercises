@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20150115084243) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_type"
-    t.text     "official_title",     limit: 255
+    t.text     "official_title"
     t.string   "chamber"
     t.integer  "congress"
     t.integer  "number"

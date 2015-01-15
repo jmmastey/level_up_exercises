@@ -1,5 +1,9 @@
 class ChangeOfficialTitleColumnInBills < ActiveRecord::Migration
-  def change
-    change_column :bills, :official_title, :text
+  def up
+    change_column :bills, :official_title, :text, limit: nil
+  end
+
+  def down
+    change_column :bills, :official_title, :string
   end
 end

@@ -32,7 +32,7 @@ RSpec.describe LegislatorsHelper, :type => :helper do
   context '#party_tag' do
     it 'calls content_tag with long_party name' do
       legislator = double('legislator', long_party: 'Republican')
-      options = double(options)
+      options = {}
 
       allow(helper).to receive(:content_tag)
 

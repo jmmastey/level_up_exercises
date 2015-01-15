@@ -18,16 +18,19 @@ module LegislatorsHelper
     link_to(name_with_representation, legislator, options)
   end
 
-  def representation_tag(legislator, options = {})
+  def representation(legislator)
     state = States.abbr_to_state(legislator.state)
     text = [legislator.long_title, "for", state].join(' ')
-    text = if legislator.senator?
+
+    if legislator.senator?
       [legislator.state_rank.titleize, text].join(' ')
     else
       [text, legislator.readable_district, 'District'].join(' ')
     end
+  end
 
-    content_tag(:div, text, options)
+  def representation_tag(legislator, options = {})
+    content_tag(:div, representation(legislator), options)
   end
 
   def party_tag(legislator, options = {})
@@ -36,25 +39,34 @@ module LegislatorsHelper
     content_tag(:div, legislator.long_party, options)
   end
 
+  def facebook_url(legislator)
+    "http://facebook.com/#{legislator.facebook_id}"
+  end
+
+  def youtube_url(legislator)
+    "http://youtube.com/#{legislator.youtube_id}"
+  end
+
+  def twitter_url(legislator)
+    "http://twitter.com/#{legislator.twitter_id}"
+  end
+
   def link_to_facebook(legislator, options = {})
     return if legislator.facebook_id.blank?
-    facebook_url = "http://facebook.com/#{legislator.facebook_id}"
     options.merge!(target: '_blank')
-    link_to(legislator.facebook_id, facebook_url, options)
+    link_to(legislator.facebook_id, facebook_url(legislator), options)
   end
 
   def link_to_twitter(legislator, options = {})
     return if legislator.twitter_id.blank?
-    twitter_url = "http://twitter.com/#{legislator.twitter_id}"
     options.merge!(target: '_blank')
-    link_to("@#{legislator.twitter_id}", twitter_url, options)
+    link_to("@#{legislator.twitter_id}", twitter_url(legislator), options)
   end
 
   def link_to_youtube(legislator, options = {})
     return if legislator.youtube_id.blank?
-    youtube_url = "http://youtube.com/#{legislator.youtube_id}"
     options.merge!(target: '_blank')
-    link_to(legislator.youtube_id, youtube_url, options)
+    link_to(legislator.youtube_id, youtube_url(legislator), options)
   end
 
   def link_to_legislator_favorite(legislator, favorited_ids, options = {})

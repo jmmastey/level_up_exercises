@@ -6,4 +6,8 @@ class Bill < ActiveRecord::Base
   has_many :actions, -> { where action: %w(voted enacted) }, class_name: 'GoodDeed'
   has_many :sponsorships,  -> { where action: 'sponsored' }, class_name: 'GoodDeed'
   has_many :cosponsorships, -> { where action: 'cosponsored' }, class_name: 'GoodDeed'
+
+  def title_with_id
+    "#{official_id.upcase}: #{official_title}"
+  end
 end

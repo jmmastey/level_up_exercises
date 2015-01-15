@@ -14,6 +14,10 @@ def log_in(credentials)
   click_button 'Log in'
 end
 
+# def log_out()
+#   click_link 'Log out'
+# end
+
 def sign_up(credentials)
   fill_in 'user[email]', with: credentials[:email]
   fill_in 'user[password]', with: credentials[:password]
@@ -35,6 +39,24 @@ end
 
 Given /^I am not logged in$/ do
   clear_cookies()
+end
+
+Given /^I am logged in$/ do
+  @user = User.create(credentials)
+  visit('/users/sign_in')
+  log_in(credentials)
+end
+
+Given(/^I am on Log in page$/) do
+  visit('/users/sign_in')
+end
+
+Given(/^I am on Forgot your password page$/) do
+  visit('/users/password/new')
+end
+
+Given(/^I am on Sign up page$/) do
+  visit('/users/sign_up')
 end
 
 ### Whens

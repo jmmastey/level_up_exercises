@@ -1,7 +1,25 @@
 <% if @legislators.present? %>
 <section>
-  <div class="legislators">
-    <%= render @legislators %>
+  <div class="legislators-wrapper">
+     <h4>Legislators <%= '(Favorites Only)' if action_name == 'favorites' %></h4>
+    <% if user_signed_in? %>
+
+    <div class="favorite-toggle">
+        <% if action_name == 'favorites' %>
+          <%= link_to "Show All", legislators_path %>
+        <% else %>
+          <%= link_to "Show Favorites Only", legislators_favorites_path %>
+        <% end %>
+      </div>
+    <% end %>
+    <% if action_name != 'favorites' %>
+      <div class="search">
+        <%= select_tag "people", options_for_select(States::STATES_AND_TERRITORIES.values, States.abbr_to_state(@state)), prompt: 'All States', id:'state-select' %>
+      </div>
+    <% end %>
+    <div class="legislators">
+      <%= render @legislators %>
+    </div>
   </div>
 </section>
 <section>

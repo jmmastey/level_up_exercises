@@ -22,4 +22,34 @@ Feature: Legislator Index
     When I click on legislator's name
     Then I should see that legislator's page
 
+  @javascript
+  Scenario: Select legislators from a state
+    Given I have a legislator from the state of Illinois
+      And I have a legislator from the state of Indiana
+      And I am on legislators page
+    When I select Illinois as state
+    Then I should see legislator from Illinois
+    But I should not see legislator from Indiana
 
+  Scenario: Guest does not see favorite button in legislators page
+    Given I am not logged in
+      And I am on legislators page
+    Then I should not see favorite buttons
+
+  # Scenario: Logged in user see favorite button in legislators page
+  #   Given I am logged in
+  #     And I am on legislators page
+  #   Then I should see favorite buttons
+
+  # Scenario: User favorites a legislator from legislators page
+  #   Given I am logged in
+  #     And I am on legislators page
+  #   When I favorite a legislator
+  #   Then I should see that legislator favorited
+
+  # Scenario: User unfavorites a legislator from legislators page
+  #   Given I am logged in
+  #     And I have favorited the legislator
+  #     And I am on legislators page
+  #   When I unfavorite one of legislator
+  #   Then I should see that legislator unfavorited

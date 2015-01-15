@@ -59,10 +59,12 @@ class States
   }
 
   def self.abbr_to_state(abbr)
+    return if abbr.nil?
     STATES_AND_TERRITORIES[abbr.to_sym]
   end
 
   def self.state_to_abbr(state, as_sym = false)
+    return if state.nil?
     abbr = STATES_AND_TERRITORIES.key(state)
     as_sym ? abbr : abbr.try(:to_s)
   end

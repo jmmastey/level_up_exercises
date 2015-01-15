@@ -5,9 +5,20 @@
 </section>
 <% if @good_deeds.present? %>
 <section>
-  <div class="good-deeds">
-    <h4>Recent Good Deeeds of 114th Congress</h4>
-    <%= render @good_deeds %>
+  <div class="good-deeds-wrapper">
+    <h4>Recent Good Deeeds of 114th Congress <%= "(Favorites Only)" if  action_name == 'favorites' %></h4>
+    <% if user_signed_in? %>
+      <div class="favorite-toggle">
+        <% if action_name == 'favorites' %>
+          <%= link_to "Show All", good_deeds_path %>
+        <% else %>
+          <%= link_to "Show Favorites Only", good_deeds_favorites_path %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="good-deeds">
+      <%= render @good_deeds %>
+    </div>
   </div>
 </section>
 <section>

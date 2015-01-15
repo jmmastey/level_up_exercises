@@ -1,16 +1,18 @@
-
-
-@mixin page-content-wrapper {
-  margin-top: 30px;
-  @include grid-column($columns: 12);
-
+@mixin page-headers {
   h4, h6 {
     font-weight: bold;
     line-height: 1em;
-    display: block;
-    margin-bottom: 1em;
+    display: inline-block;
     color: $anchor-font-color;
+    margin-bottom: 0px;
+    vertical-align: middle;
   }
+}
+
+@mixin page-content-wrapper {
+  margin-top: 15px;
+  @include grid-column($columns: 12);
+  @include page-headers
 }
 
 @mixin minimal-list-item {
@@ -26,6 +28,13 @@
 .content-container {
   section {
     @include grid-row();
+
+    h6 {
+      font-weight: bold;
+      line-height: 1em;
+      color: $anchor-font-color;
+      margin-bottom: 10px;
+    }
   }
 }
 
@@ -53,5 +62,20 @@ section>.empty {
     @include alert($bg: lighten($success-color, 40));
     font-size: 1rem;
     text-align: center;
+  }
+}
+
+div.favorite-toggle {
+  // @include grid-row();
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+
+  a {
+    @include button($padding: $button-sml, $radius: 8px);
+    margin-bottom: 0px;
+    padding: 8px;
+    vertical-align: middle;
+    margin-left: 20px;
   }
 }

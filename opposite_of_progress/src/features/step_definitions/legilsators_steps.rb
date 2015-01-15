@@ -31,14 +31,40 @@ Given(/^legislator has previous sponsoships and cosponsorships$/) do
   )
 end
 
+Given(/^I have a legislator from the state of Illinois$/) do
+  @legislator_illinois = Legislator.first
+  @legislator_illinois.update(state: 'IL')
+end
+
+Given(/^I have a legislator from the state of Indiana$/) do
+  @legislator_indiana = Legislator.last
+  @legislator_indiana.update(state: 'IN')
+end
+
+Given /^I am on that legislator's page$/ do
+  visit("legislators/#{@legislator.id}")
+end
+
+Given /^I am on legislators page$/ do
+  visit('/legislators')
+end
+
 ### Whens
 When(/^I click on legislator's name$/) do
   @legislator = find_legislators().first
   click_link(@legislator.name)
 end
 
-When(/^I visit that legislator's page$/) do
+When /^I visit that legislator's page$/ do
   visit("legislators/#{@legislator.id}")
+end
+
+When /^I visit legislators page$/ do
+  visit('/legislators')
+end
+
+When(/^I select Illinois as state$/) do
+  select('Illinois', from: 'state-select')
 end
 
 ### Thens
@@ -91,4 +117,52 @@ end
 Then(/^I should see sponsorships$/) do
   expect(page).to have_content('Co-sponsorships')
   expect(page).to have_css('.cosponsorships .good-deed', count: 3)
+end
+
+Then(/^I should see legislator from Illinois$/) do
+  expect(page).to have_content(@legislator_illinois.name)
+end
+
+Then(/^I should not see legislator from Indiana$/) do
+  expect(page).not_to have_content(@legislator_indiana.name)
+end
+
+Then(/^I should not see favorite buttons$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should see favorite buttons$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I favorite a legislator$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should see that legislator favorited$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given(/^I have favorited the legislator$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I unfavorite one of legislator$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should see that legislator unfavorited$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should not see favorite button$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should see favorite button$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I favorite that legislator$/) do
+  pending # express the regexp above with the code you wish you had
 end

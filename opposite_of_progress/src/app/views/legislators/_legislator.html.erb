@@ -1,7 +1,10 @@
-<article class="legislator clearfix">
+<article class="legislator <%= cycle("left", "right") %> clearfix">
   <div class="legislator-wrapper">
     <div class="legislator-details">
-      <%= link_to_legislator legislator, class: 'name' %>
+      <div class="name">
+        <%= link_to_legislator legislator %>
+        <%= link_to_legislator_favorite legislator, @favorited_ids, class: 'favorite' %>
+      </div>
       <%= representation_tag legislator, class: 'represenation' %>
       <%= party_tag legislator, class: 'party' %>
     </div>

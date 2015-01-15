@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113173732) do
+ActiveRecord::Schema.define(version: 20150113233907) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_type"
@@ -31,6 +31,20 @@ ActiveRecord::Schema.define(version: 20150113173732) do
     t.string   "latest_version_pdf"
     t.boolean  "active"
     t.string   "official_id"
+  end
+
+  create_table "favorite_bills", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "bill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "favorite_legislators", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "legislator_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "good_deeds", force: true do |t|

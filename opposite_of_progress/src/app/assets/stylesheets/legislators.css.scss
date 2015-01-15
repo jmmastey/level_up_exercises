@@ -21,9 +21,39 @@
 
   @media #{$large-up} {
     @include grid-column($columns: 6, $collapse: false);
+    padding: 10px 0;
+    margin: 0px;
+
+    &.left {
+      padding-right: 15px;
+    }
+
+    &.right {
+      padding-left: 15px;
+    }
   }
 }
 
+div.search {
+  display: inline-block;
+  float: right;
+  vertical-align: middle;
+  margin: auto;
+
+  > select {
+    // @include grid-column($columns: 12);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.legislators-wrapper {
+  @include page-content-wrapper;
+}
+
+.legislators {
+  margin-top: 20px;
+}
 
 .legislator {
   @include round-cornered-box;
@@ -87,3 +117,19 @@
 //     @include grid-column($columns: 6);
 //   }
 // }
+.party {
+  font-weight: bold;
+  font-size: 0.9em;
+
+  &.democratic {
+    color: $primary-color;
+  }
+
+  &.republican {
+    color: $alert-color;
+  }
+
+  &.independent {
+    color: $success-color;
+  }
+}

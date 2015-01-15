@@ -1,0 +1,21 @@
+<% if @legislators.present? %>
+<section>
+  <div class="favorite-toggle">
+    <%= link_to "Show All", legislators_path %>
+  </div>
+  <div class="legislators">
+    <%= render @legislators %>
+  </div>
+</section>
+<section>
+  <%= pagination_wrapper_for(@legislators) %>
+</section>
+<% else %>
+<section>
+  <div class="empty">
+    <div>
+      There are no legislators to show
+    </div>
+  </div>
+</section>
+<% end %>

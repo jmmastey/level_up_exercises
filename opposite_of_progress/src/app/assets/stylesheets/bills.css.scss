@@ -2,9 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.bills.index {
-  .bills {
+.bills.index,
+.bills.favorites {
+  .bills-wrapper {
     @include page-content-wrapper;
+
+    h4 {
+      text-align: center;
+    }
+  }
+
+  .bills {
+    margin-top: 20px;
   }
 
   .bill {
@@ -12,6 +21,18 @@
 
     > div {
       display: inline-block;
+    }
+
+    .favorite {
+      @include grid-column($columns: 12);
+
+      a {
+        font-size: $h4-font-size;
+      }
+
+      @media #{$large-up} {
+        @include grid-column($columns: 1);
+      }
     }
 
     .official-id {
@@ -29,7 +50,7 @@
       @include grid-column($columns: 12);
 
       @media #{$large-up} {
-        @include grid-column($columns: 7);
+        @include grid-column($columns: 6);
       }
     }
 
@@ -149,5 +170,3 @@
     }
   }
 }
-
-

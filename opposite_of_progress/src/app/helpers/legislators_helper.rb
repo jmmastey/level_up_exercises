@@ -31,8 +31,9 @@ module LegislatorsHelper
   end
 
   def party_tag(legislator, options = {})
-    party = [legislator.long_party, "Party"].join(" ")
-    content_tag(:div, party, options)
+    party = legislator.long_party
+    options[:class] = [options[:class], party.downcase].compact.join(' ')
+    content_tag(:div, legislator.long_party, options)
   end
 
   def link_to_facebook(legislator, options = {})
@@ -54,5 +55,21 @@ module LegislatorsHelper
     youtube_url = "http://youtube.com/#{legislator.youtube_id}"
     options.merge!(target: '_blank')
     link_to(legislator.youtube_id, youtube_url, options)
+  end
+
+  def link_to_legislator_favorite(legislator, favorited_ids, options = {})
+    return unless user_signed_in?
+
+    if favorited_ids.include? legislator.id
+      icon = 'star'
+      action = 'unfavorite'
+    else
+      icon = 'star-o'
+      action = 'favorite'
+    end
+
+    favorite_link = "/user/#{action}/legislator/#{legislator.id}"
+    options.merge!(method: :post, title: "#{action.titleize} this Legislator")
+    link_to(fa_icon(icon), favorite_link, options)
   end
 end

@@ -1,4 +1,7 @@
 <div class="bill">
+  <%= content_tag :div, class: 'favorite' do %>
+    <%= link_to_bill_favorite bill, @favorited_ids %>
+  <% end %>
   <%= content_tag :div, bill.official_id.upcase, class: 'official-id' %>
   <%= content_tag :div, link_to_bill(bill, without_id: true), class: 'official-title' %>
   <%= content_tag :div, class: 'last-action' do %>

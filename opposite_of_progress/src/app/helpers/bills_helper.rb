@@ -10,4 +10,20 @@ module BillsHelper
     pdf = bill.latest_version_pdf.sub(/.*\//, '')
     link_to(pdf, bill.latest_version_pdf)
   end
+
+  def link_to_bill_favorite(bill, favorited_ids, options = {})
+    return unless user_signed_in?
+
+    if favorited_ids.include? bill.id
+      icon = 'star'
+      action = 'unfavorite'
+    else
+      icon = 'star-o'
+      action = 'favorite'
+    end
+
+    favorite_link = "/user/#{action}/bill/#{bill.id}"
+    options.merge!(method: :post, title: "#{action.titleize} this Bill")
+    link_to(fa_icon(icon), favorite_link, options)
+  end
 end

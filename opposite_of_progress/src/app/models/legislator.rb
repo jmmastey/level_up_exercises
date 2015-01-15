@@ -43,6 +43,10 @@ class Legislator < ActiveRecord::Base
     [first_name, middle_initial, last_name, name_suffix].compact.join(" ")
   end
 
+  def name_with_title
+    [title, name].join('. ')
+  end
+
   def long_title
     TITLES[title]
   end

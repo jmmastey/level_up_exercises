@@ -15,6 +15,10 @@ Given(/^there is a bill$/) do
   @bill = create_bill
 end
 
+Given /I am on bills page/ do
+  visit('/bills')
+end
+
 When(/^I visit bills page$/) do
   visit('/bills')
 end

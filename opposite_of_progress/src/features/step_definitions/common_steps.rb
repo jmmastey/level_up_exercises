@@ -1,7 +1,7 @@
 ### Givens
-Given /^I am on\s+(.+)\s+page/ do |page|
-  visit(path(page))
-end
+# Given /^I am on\s+(.+)\s+page/ do |page|
+#   visit(path(page))
+# end
 
 ### Whens
 When /^I click (.+) link$/ do |link|

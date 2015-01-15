@@ -1,6 +1,9 @@
 <section>
   <div class="bill">
-    <h4><%= link_to_bill(@bill) %></h4>
+    <h4>
+    <%= link_to_bill_favorite @bill, @favorited_ids %>
+      <%= link_to_bill(@bill) %>
+    </h4>
     <div class="bill-details">
       <div class="bill-details-section">
         <div>
@@ -58,7 +61,7 @@
 <% if @bill.cosponsorships.present? %>
 <section>
   <div class="good-deeds cosponsorships">
-    <h6>Co-sponsors</h6>
+    <h6>Co-sponsors (<%= @bill.cosponsorships.count %>)</h6>
     <% @bill.cosponsorships.each_slice(4) do |cosponsorships| %>
       <%= render partial: 'cosponsorships', locals: {cosponsorships: cosponsorships } %>
     <% end %>

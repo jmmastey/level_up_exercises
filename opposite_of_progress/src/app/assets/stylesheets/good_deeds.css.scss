@@ -1,12 +1,16 @@
 // Place all the styles related to the GoodDeeds controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.good-deeds {
+.good-deeds-wrapper {
   @include page-content-wrapper;
 }
 
 section.good-deed-paigantion {
    @include grid-column($columns: 12);
+}
+
+.good-deeds {
+  margin-top: 20px;
 }
 
 .good-deed {
@@ -48,3 +52,11 @@ section.good-deed-paigantion {
 .banner {
   @include grid-column($columns: 12);;
 }
+
+// .good_deeds.index,
+// .good_deeds.favorite
+// {
+//   .favorite-toggle {
+//     display: inline-block;
+//   }
+// }

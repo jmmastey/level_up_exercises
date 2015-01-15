@@ -101,6 +101,7 @@ GEM
       multi_json (~> 1.3)
     haml (3.1.7)
     highline (1.6.21)
+    hike (1.2.3)
     i18n (0.7.0)
     json (1.8.2)
     json_pure (1.8.2)
@@ -157,7 +158,14 @@ GEM
     sinatra-activerecord (2.0.3)
       activerecord (>= 3.2)
       sinatra (~> 1.0)
+    sinatra-sprockets-ext (0.0.5)
+      sprockets
     slop (3.6.0)
+    sprockets (2.12.3)
+      hike (~> 1.2)
+      multi_json (~> 1.0)
+      rack (~> 1.0)
+      tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.10)
     stringex (1.5.1)
     templater (1.0.0)
@@ -166,6 +174,7 @@ GEM
       highline (>= 1.4.0)
     thread_safe (0.3.4)
     tilt (1.4.1)
+    timecop (0.7.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uuidtools (2.1.5)
@@ -196,5 +205,7 @@ DEPENDENCIES
   shotgun (= 0.9)
   sinatra
   sinatra-activerecord
+  sinatra-sprockets-ext
   sqlite3
+  timecop
   xpath

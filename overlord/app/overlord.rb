@@ -3,8 +3,11 @@
 require 'sinatra'
 require 'dm-sqlite-adapter'
 require "sinatra/activerecord"
-
+require 'sinatra/sprockets'
+require_relative 'overlord_helpers'
 enable :sessions
+
+register Sinatra::Sprockets
 
 class Hash
   def self.to_ostructs(obj, memo={})
@@ -16,18 +19,15 @@ class Hash
 end
 
 set :database, {adapter: "sqlite3", database: "detonation_device"}
+set :views, "#{File.dirname(__FILE__)}/views"
 
 class Overlord < Sinatra::Application
- configure :development do
+  include OverlordHelpers
+  configure :development do
     DataMapper::Logger.new($stdout, :debug)
-
   end
   get '/' do
-    "Time to build an app around here. Start time: " + start_time
-  end
-
-  def start_time
-    session[:start_time] ||= (Time.now).to_s
+    haml :index
   end
 
   run! if app_file == $PROGRAM_NAME

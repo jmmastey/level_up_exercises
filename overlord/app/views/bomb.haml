@@ -1,0 +1,69 @@
+%link{:href => "/style.css", :rel => "stylesheet"}/
+
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'
+%script{:src => "/bomb.js", :type => "text/javascript"}
+%h4 This is the interface
+.label
+  %label Status
+.input
+  %textarea{ readonly: true, id: "bomb_status", style: "background:gray; font-style: italic;", rows: 10, cols: 50  }
+    ="Inactive"
+#bomb
+  / Screen and clear key
+  .top
+    .screen
+  .keys
+    / operators and other keys
+    %span 7
+    %span 8
+    %span 9
+    %span.operator Activate
+    %span 4
+    %span 5
+    %span 6
+    %span.inactive_operator Deactivate
+    %span 1
+    %span 2
+    %span 3
+
+    %span 0
+    %span.operator Submit
+/ PrefixFree
+
+:javascript
+    $(document).ready( function() {
+      var keys = document.querySelectorAll('#bomb span');
+      for(var i = 0; i < keys.length; i++) {
+        keys[i].onclick = function(e) {
+          var input = document.querySelector('.screen');
+          var inputVal = input.innerHTML;
+          var btnVal = this.innerHTML;
+          if(btnVal == 'Submit') || (tnVal == 'Activate') || (tnVal == 'Deactivate')  {
+            evaluateCode(input.innerHTML)
+          }
+          else {
+            input.innerHTML += btnVal;
+          }
+        }
+      }
+
+    function evaluateCode(code)
+    {
+
+    }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

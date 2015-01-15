@@ -14,9 +14,11 @@ gem "sinatra-activerecord"
 gem "sqlite3"
 gem "rake"
 gem 'pry'
+gem 'sinatra-sprockets-ext'
 
 group :test do
   gem 'rspec-expectations', require: 'rspec/expectations'
+  gem 'timecop'
   gem 'rack-test', require: 'rack/test'
   gem 'rspec'
   gem 'cucumber'

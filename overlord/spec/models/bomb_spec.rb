@@ -23,4 +23,9 @@ describe 'bomb' do
   it "should have default deactivation code" do
     expect(valid_bomb.deactivation_code).to eq("10220")
   end
+
+  it "should have activation_code as numeric only" do
+    invalid_bomb = Bomb.create(activation_code: '12a42')
+    expect(invalid_bomb).not_to be_valid
+  end
 end

@@ -17,25 +17,25 @@ Feature: Legislator page
     Then I should see cosponsorships
       And I should see sponsorships
 
-  # Scenario: Guest does not see favorite button in legislator's page
-  #   Given I am not logged in
-  #     And I am on that legislator's page
-  #   Then I should not see favorite button
+  Scenario: Guest does not see favorite button in legislator's page
+    Given I am not logged in
+      And I am on that legislator's page
+    Then I should not see favorite button
 
-  # Scenario: Logged in user see favorite button in legislator's page
-  #   Given I am logged in
-  #     And I am on that legislator's page
-  #   Then I should see favorite button
+  Scenario: Logged in user see favorite button in legislator's page
+    Given I am logged in
+      And I am on that legislator's page
+    Then I should see favorite button
 
-  # Scenario: User favorites a legislator from legislator's page
-  #   Given I am logged in
-  #     And I am on that legislator's page
-  #   When I favorite that legislator
-  #   Then I should see that legislator favorited
+  Scenario: User favorites a legislator from legislator's page
+    Given I am logged in
+      And I am on that legislator's page
+    When I favorite the legislator
+    Then I should see the legislator favorited
 
-  # Scenario: User unfavorites a legislator from legislator's page
-  #   Given I have favorited the legislator
-  #     And I am logged in
-  #     And I am on that legislator's page
-  #   When I favorite that legislator
-  #   Then I should see that legislator favorited
+  Scenario: User unfavorites a legislator from legislator's page
+    Given I am logged in
+      And I have favorited a legislator
+      And I am on that legislator's page
+    When I unfavorite the legislator
+    Then I should see the legislator unfavorited

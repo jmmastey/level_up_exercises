@@ -18,7 +18,6 @@ section.good-deed-paigantion {
 
   .action {
     margin: 0 5px;
-    // color: lighten($body-font-color, 40);
   }
 
   > div {
@@ -52,11 +51,3 @@ section.good-deed-paigantion {
 .banner {
   @include grid-column($columns: 12);;
 }
-
-// .good_deeds.index,
-// .good_deeds.favorite
-// {
-//   .favorite-toggle {
-//     display: inline-block;
-//   }
-// }

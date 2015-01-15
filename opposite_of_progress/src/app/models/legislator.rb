@@ -11,9 +11,6 @@ class Legislator < ActiveRecord::Base
   validates :district, presence: true, numericality: { only_integer: true },
               if: :representative?
 
-  # has_many :sponsored_bills, class_name: 'Bill', foreign_key: 'sponsor_id'
-  # has_many :cosponsorships
-  # has_many :cosponsored_bills, through: :cosponsorships, source: :bill
   has_many :good_deeds
   has_many :sponsorships,  -> { where action: 'sponsored' }, class_name: 'GoodDeed'
   has_many :cosponsorships, -> { where action: 'cosponsored' }, class_name: 'GoodDeed'

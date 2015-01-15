@@ -41,7 +41,6 @@ div.search {
   margin: auto;
 
   > select {
-    // @include grid-column($columns: 12);
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -107,16 +106,6 @@ div.legislators {
     height: auto;
 }
 
-// section.legislator-details,
-// section.legislator-good-deeds,
-// section.legislator-contact-details,
-// {
-//   @include grid-column($columns: 12);
-
-//   @media #{$large-up} {
-//     @include grid-column($columns: 6);
-//   }
-// }
 .party {
   font-weight: bold;
   font-size: 0.9em;

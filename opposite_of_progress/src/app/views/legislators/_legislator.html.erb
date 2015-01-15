@@ -1,4 +1,4 @@
-<article class="legislator <%= cycle("left", "right") %> clearfix">
+<%= content_tag_for(:div, legislator, class: "#{cycle('left', 'right')} clearfix") do %>
   <div class="legislator-wrapper">
     <div class="legislator-details">
       <div class="name">
@@ -12,4 +12,4 @@
       <%= legislator_image_tag(legislator) %>
     </div>
   </div>
-</article>
+<% end %>

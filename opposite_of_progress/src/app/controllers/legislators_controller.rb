@@ -63,7 +63,8 @@ class LegislatorsController < ApplicationController
   end
 
   def set_legislator
-    @legislator = Legislator.includes(:sponsorships, :cosponsorships).find(params[:id])
+    @legislator = Legislator.includes(:sponsorships, :cosponsorships)
+      .find(params[:id])
   end
 
   def find_by_state_slug(state_slug)

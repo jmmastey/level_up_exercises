@@ -36,20 +36,20 @@ Feature: Legislator Index
       And I am on legislators page
     Then I should not see favorite buttons
 
-  # Scenario: Logged in user see favorite button in legislators page
-  #   Given I am logged in
-  #     And I am on legislators page
-  #   Then I should see favorite buttons
+  Scenario: Logged in user see favorite button in legislators page
+    Given I am logged in
+      And I am on legislators page
+    Then I should see favorite buttons
 
-  # Scenario: User favorites a legislator from legislators page
-  #   Given I am logged in
-  #     And I am on legislators page
-  #   When I favorite a legislator
-  #   Then I should see that legislator favorited
+  Scenario: User favorites a legislator from legislators page
+    Given I am logged in
+      And I am on legislators page
+    When I favorite a legislator
+    Then I should see that legislator favorited
 
-  # Scenario: User unfavorites a legislator from legislators page
-  #   Given I am logged in
-  #     And I have favorited the legislator
-  #     And I am on legislators page
-  #   When I unfavorite one of legislator
-  #   Then I should see that legislator unfavorited
+  Scenario: User unfavorites a legislator from legislators page
+    Given I am logged in
+      And I have favorited the legislator
+      And I am on legislators page
+    When I unfavorite a legislator
+    Then I should see that legislator unfavorited

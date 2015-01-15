@@ -8,7 +8,6 @@ class BillsController < ApplicationController
   end
 
   def show
-
   end
 
   def favorites

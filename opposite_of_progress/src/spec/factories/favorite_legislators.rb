@@ -3,5 +3,4 @@ FactoryGirl.define do
     legislator
     user
   end
-
 end

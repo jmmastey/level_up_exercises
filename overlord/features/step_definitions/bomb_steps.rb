@@ -1,4 +1,5 @@
 
-Then(/^the interface for the bomb is displayed$/) do
-  step 'I should see "Your bomb is ready. Oh, Yeah!"'
+Given(/^the bomb is active$/) do
+  @bomb = Overlord::Bomb.new
+  @bomb.process_code('1234')
 end

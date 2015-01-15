@@ -5,12 +5,22 @@ require 'sinatra'
 require_relative './lib/overlord'
 
 enable :sessions
+enable :logging
 
 get '/' do
-  "Your bomb is ready. Oh, Yeah! Start time: " + start_time
+  @bomb = Overlord::Bomb.new
+
+  erb :index
+end
+
+post '/' do
+  @bomb = Overlord::Bomb.new
+  @bomb.process_code(params[:code])
+
+  erb :index
 end
 
 # we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
-end
+# def start_time
+#   session[:start_time] ||= (Time.now).to_s
+# end

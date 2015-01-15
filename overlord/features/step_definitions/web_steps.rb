@@ -164,7 +164,7 @@ Then /^(?:|I )should not see \/([^\/]*)\/(?: within "([^\"]*)")?$/ do |regexp, s
   end
 end
 
-# the $field field (within $selector) should contain $value
+# the $field (within $selector) should contain $value
 Then /^the "([^\"]*)" field(?: within "([^\"]*)")? should contain "([^\"]*)"$/ do |field, selector, value|
   with_scope(selector) do
     field = find_field(field)
@@ -224,7 +224,7 @@ Then /^(?:|I )should be on (.+)$/ do |page_name|
   end
 end
 
-# (I) should have the following query string:
+# (I) should have the following query string
 Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   query = URI.parse(current_url).query
   actual_params = query ? CGI.parse(query) : {}

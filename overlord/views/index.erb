@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8" />
+  	<title>Bombs Away</title>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+  	<style>
+  /*    * {
+        vertical-align: baseline;
+        border: 0 none;
+        outline: 0;
+        padding: 0;
+        margin: 0;
+        color: #333;
+        background-color: transparent;
+        text-decoration: none;
+      }*/
+
+  		body {
+  			background-color: #EBECE5;
+  			text-align: center;
+  			font-family: Helvetica, sans-serif;
+  			font-size: 113%;
+  			line-height: 144%;
+  		}
+
+  		#content {
+  			margin: 0 auto;
+  			width: 980px;
+  			/*min-height: 57.25em;*/
+  			margin: 0 auto;
+  			text-align: left;
+  		}
+
+  		h1 {
+  			font-family: helvetica, sans-serif;
+  			font-size: 2.5em;
+  			font-weight: normal;
+  			/*padding: 1.5em 0;*/
+  		}
+
+  		h2 {
+  			font-family: helvetica, sans-serif;
+  			font-size: 1.5em;
+  			font-weight: normal;
+  		}
+  	</style>
+  </head>
+
+  <body>
+  	<div id="content">
+      <!-- <img src="images/vector.jpg" width="1920" height="1200" alt="vector"> -->
+
+      <% if @bomb.active?  %>
+        <h1>The Bomb is active.</h1>
+        <h2>Enter the deactivation code if you change your mind.</h2>
+      <% else %>
+        <h1>Your bomb is ready. Oh, yeah!</h1>
+        <h2>Activate it, already.</h2>
+      <% end %>
+
+
+  		<form method="post" action="/">
+  			<input type="text" name="code" maxlength="4" size="4">
+  			<input type="submit" id="submit" />
+  		</form>
+  	</div>
+  </body>
+</html>

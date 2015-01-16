@@ -26,7 +26,7 @@
 
   		#content {
   			margin: 0 auto;
-  			width: 980px;
+  			width: 600px;
   			/*min-height: 57.25em;*/
   			margin: 0 auto;
   			text-align: left;
@@ -44,6 +44,10 @@
   			font-size: 1.5em;
   			font-weight: normal;
   		}
+
+      form {
+        padding-bottom: 20px;
+      }
   	</style>
   </head>
 
@@ -52,18 +56,35 @@
       <!-- <img src="images/vector.jpg" width="1920" height="1200" alt="vector"> -->
 
       <% if @bomb.active?  %>
-        <h1>The Bomb is active.</h1>
-        <h2>Enter the deactivation code if you change your mind.</h2>
+        <h1>The bomb is active.</h1>
+        <% title = "Disarm the Bomb with the Deactivation Code" %>
+        <% verb = "Deactivate Bomb" %>
       <% else %>
-        <h1>Your bomb is ready. Oh, yeah!</h1>
-        <h2>Activate it, already.</h2>
+        <h1>Your bomb is ready but not armed. Oh, yeah!</h1>
+        <% title = "Arm the Bomb with the Activation Code" %>
+        <% verb = "Activate Bomb" %>
       <% end %>
 
+      <% if session[:message] %>
+        <p><%= session[:message] %></p>
+      <% end %>
 
   		<form method="post" action="/">
-  			<input type="text" name="code" maxlength="4" size="4">
-  			<input type="submit" id="submit" />
+        <fieldset>
+          <legend><%= title %></legend>
+    			<input type="text" name="code" maxlength="4" size="4">
+    			<input type="submit" id="submit" value="<%= verb %>" />
+        </fieldset>
   		</form>
+
+  		<form method="post" action="/activation_code">
+        <fieldset>
+          <legend>Update Activation Code</legend>
+    			<input type="text" name="activation_code" maxlength="4" size="4">
+    			<input type="submit" id="update_activation_code" value="Update" />
+        </fieldset>
+  		</form>
+
   	</div>
   </body>
 </html>

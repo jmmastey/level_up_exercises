@@ -45,4 +45,22 @@ describe Overlord::Bomb do
       expect(session[:state]).to eq('activated')
     end
   end
+
+  describe '#update_activation_code' do
+    context 'when supplied a valid activation code' do
+      it 'updates the activation code' do
+        subject.update_activation_code('4567')
+        subject.process_code('4567')
+
+        expect(subject).to be_active
+      end
+
+      it 'ignores the old validation code' do
+        subject.update_activation_code('4567')
+        subject.process_code('1234')
+
+        expect(subject).not_to be_active
+      end
+    end
+  end
 end

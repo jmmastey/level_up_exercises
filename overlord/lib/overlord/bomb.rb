@@ -15,7 +15,8 @@ class Overlord::Bomb
 
   def initialize_session
     {
-      :state => @state
+      :state           => @state,
+      :activation_code => @activation_code
     }
   end
 
@@ -25,6 +26,10 @@ class Overlord::Bomb
     elsif @state == 'activated' && code == @deactivation_code
       deactivate(code)
     end
+  end
+
+  def update_activation_code(activation_code)
+    @activation_code = activation_code
   end
 
   private
@@ -44,6 +49,10 @@ class Overlord::Bomb
   def initialize_from_session(opts)
     if opts[:state]
       @state = opts[:state]
+    end
+
+    if opts[:activation_code]
+      @activation_code = opts[:activation_code]
     end
   end
 end

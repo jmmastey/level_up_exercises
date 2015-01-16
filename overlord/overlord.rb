@@ -20,3 +20,12 @@ post '/' do
 
   erb :index
 end
+
+post '/activation_code' do
+  @bomb = Overlord::Bomb.new(session[:bomb])
+  @bomb.update_activation_code(params[:code])
+  session[:bomb] = @bomb.initialize_session
+
+  session[:message] = "Activation code updated."
+  erb :index
+end

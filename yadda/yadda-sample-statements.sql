@@ -1,10 +1,8 @@
 /* User sample statements */
-INSERT INTO person (name, email, birthday) 
-  VALUES('Ryan', 'rcowan@enova.com', '1984-01-30');
+INSERT INTO person (name, email, birthday, modified_by) 
+  VALUES('Ryan', 'rcowan@enova.com', '1984-01-30', 1);
 
 UPDATE person SET description='Ryan works at Enova' WHERE person_id=1;
-
--- DELETE FROM person WHERE person_id=1 LIMIT 1;
 
 /* Brewery sample statements */
 INSERT INTO brewery (name, address, city, state, zip_code, description, founding_year, modified_on, modified_by) 
@@ -12,15 +10,11 @@ INSERT INTO brewery (name, address, city, state, zip_code, description, founding
 
 UPDATE brewery SET name='Revolution Brewery', address='543 Opposite Ave' WHERE brewery_id=1;
 
--- DELETE FROM brewery WHERE brewery_id=1 LIMIT 1;
-
 /* Beer sample statements */
 INSERT INTO beer (brewery_id, style, description, brewing_year, modified_on, modified_by)
   VALUES(1, 'Stout', 'Rich and filling', '2014', NOW(), 1);
 
 UPDATE beer SET style='Porter', brewing_year='2013' WHERE beer_id=1;
-
--- DELETE FROM beer WHERE beer_id=1 LIMIT 1;
 
 /* Rating sample statements */
 INSERT INTO rating (person_id, beer_id, look, smell, taste, feel, overall, description, modified_by) 
@@ -28,4 +22,8 @@ INSERT INTO rating (person_id, beer_id, look, smell, taste, feel, overall, descr
 
 UPDATE rating SET look=3, taste=5, overall=4 WHERE rating_id=1;
 
--- DELETE FROM rating WHERE rating_id=1 LIMIT 1;
+/* Clean up */
+DELETE FROM rating WHERE rating_id=1;
+DELETE FROM beer WHERE beer_id=1;
+DELETE FROM brewery WHERE brewery_id=1;
+DELETE FROM person WHERE person_id=1;

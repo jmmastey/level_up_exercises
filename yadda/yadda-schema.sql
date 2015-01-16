@@ -10,7 +10,9 @@ CREATE TABLE person (
   description     text,
   birthday        date NOT NULL,
   modified_on     timestamp DEFAULT current_timestamp,
-  modified_by     integer NOT NULL
+  modified_by     integer NOT NULL,
+  CONSTRAINT modified_by_key FOREIGN KEY (modified_by)
+    REFERENCES person (person_id)
 );
 COMMENT ON TABLE person IS 'person information';
 

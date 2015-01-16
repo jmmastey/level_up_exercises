@@ -58,14 +58,13 @@ describe Cohort do
 
     describe "#to_s" do
       it "returns cohort data as string" do
-        puts sample_cohort.to_s
         expect(sample_cohort.to_s).to include(
           sample_cohort.conversions.to_s,
           sample_cohort.nonconvs.to_s,
           sample_cohort.total_trials.to_s,
           sample_cohort.conversion_rate.to_s,
           sample_cohort.standard_error.to_s,
-          sample_cohort.conversion_range.to_s
+          sample_cohort.conversion_range.to_s,
         )
       end
     end

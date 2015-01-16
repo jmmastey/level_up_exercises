@@ -9,13 +9,6 @@ describe Overlord::Bomb do
     it 'returns an inactive bomb' do
       expect(Overlord::Bomb.new).not_to be_active
     end
-
-    # it 'has a default activation code of 1234' do
-    #   bomb = Overlord::Bomb.new
-    #   bomb.activate(1234)
-    #
-    #   expect(bomb).to be_active
-    # end
   end
 
   describe '#process_code' do

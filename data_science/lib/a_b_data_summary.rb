@@ -14,6 +14,13 @@ class ABDataSummary
     @b_nonconv = results[:b_0]
   end
 
+  def to_h
+    {
+      a: { conv: @a_conv, nonconv: @a_nonconv },
+      b: { conv: @b_conv, nonconv: @b_nonconv },
+    }
+  end
+
   private
 
   def tally_data(data)

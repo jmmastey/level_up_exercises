@@ -27,6 +27,12 @@ class Cohort
     )
   end
 
+  def to_s
+    "Conversions: #{conversions}\nNon-conversions #{nonconvs}\n" \
+    "Total trials: #{total_trials}\nConversion rate: #{conversion_rate}\n" \
+    "Standard error: #{standard_error}\nConversion range: #{conversion_range}"
+  end
+
   private
 
   def validate_params(conversions, nonconvs)

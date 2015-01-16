@@ -12,7 +12,7 @@ a_b_test = ABCalculator.new(
 )
 puts "A data: conversions: #{a_cohort.conversions}"
 puts "A data: non-conversions: #{a_cohort.nonconvs}"
-puts "B data: conversions: #{b_cohort.conversions}"
+puts "B data: conversions: #{b_cohort.conversions}" 
 puts "B data: non-conversions: #{b_cohort.nonconvs}"
 if a_b_test.different?
   puts "Samples are different at 0.05 significance"

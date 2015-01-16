@@ -10,7 +10,7 @@ Anyway. I need to catalog some dinosaurs for my newest project, DinoDex. I've go
 
 Go check out the CSVs and come back. Done? Cool, I've just got a few features I need:
 
-1. I loaded my favorite dinosaurs into a CSV file you'll need to parse. I don't know a lot about African Dinosaurs though, so I downloaded one from The Pirate Bay. It isn't formatted as well as mine, but please try to parse it anyway.
+1. I loaded my favorite dinosaurs into a CSV file you'll need to parse. I don't know a lot about African Dinosaurs though, so I downloaded one from The Pirate Bay. It isn't formatted as well as mine, so you'll need to handle both formats.
 2. I have friends who ask me a lot of questions about dinosaurs (I'm kind of a big deal). Please make sure the dinodex is able to answer these things for me:
     * Grab all the dinosaurs that were bipeds.
     * Grab all the dinosaurs that were carnivores (fish and insects count).

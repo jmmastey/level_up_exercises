@@ -1,19 +1,28 @@
 class Overlord::Bomb
-  def initialize
-    @state             = 'deactived'
+  def initialize(opts = {})
+    @state             = 'deactivated'
     @activation_code   = '1234'
     @deactivation_code = '0000'
+
+    if opts && opts.size > 0
+      initialize_from_session(opts)
+    end
   end
 
   def active?
-    @state == 'active'
+    @state == 'activated'
   end
 
+  def initialize_session
+    {
+      :state => @state
+    }
+  end
 
   def process_code(code='')
-    if @state == 'deactived' && code == @activation_code
+    if @state == 'deactivated' && code == @activation_code
       activate(code)
-    elsif @state == 'active' && code == @deactivation_code
+    elsif @state == 'activated' && code == @deactivation_code
       deactivate(code)
     end
   end
@@ -21,14 +30,20 @@ class Overlord::Bomb
   private
 
   def activate(code)
-    return if @state == 'active'
+    return if @state == 'activated'
 
-    @state = 'active'
+    @state = 'activated'
   end
 
   def deactivate(code)
-    return if @state == 'deactive'
+    return if @state == 'deactivated'
 
     @state = 'deactivated'
+  end
+
+  def initialize_from_session(opts)
+    if opts[:state]
+      @state = opts[:state]
+    end
   end
 end

@@ -8,19 +8,15 @@ enable :sessions
 enable :logging
 
 get '/' do
-  @bomb = Overlord::Bomb.new
+  @bomb = Overlord::Bomb.new(session[:bomb])
 
   erb :index
 end
 
 post '/' do
-  @bomb = Overlord::Bomb.new
+  @bomb = Overlord::Bomb.new(session[:bomb])
   @bomb.process_code(params[:code])
+  session[:bomb] = @bomb.initialize_session
 
   erb :index
 end
-
-# we can shove stuff into the session cookie YAY!
-# def start_time
-#   session[:start_time] ||= (Time.now).to_s
-# end

@@ -9,6 +9,10 @@ describe Overlord::Bomb do
     it 'returns an inactive bomb' do
       expect(Overlord::Bomb.new).not_to be_active
     end
+
+    it 'initializes itself to supplied parameters' do
+      expect(Overlord::Bomb.new(:state => "activated")).to be_active
+    end
   end
 
   describe '#process_code' do
@@ -34,6 +38,16 @@ describe Overlord::Bomb do
           expect(bomb).not_to be_active
         end
       end
+    end
+  end
+
+  describe '#initialize_session' do
+    it 'writes its state to the supplied hash' do
+      bomb = Overlord::Bomb.new
+      bomb.process_code('1234')
+      session = bomb.initialize_session
+
+      expect(session[:state]).to eq('activated')
     end
   end
 end

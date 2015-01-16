@@ -7,6 +7,6 @@ Then(/^the buttons work$/) do
 end
 
 Then(/^I am on the control page$/) do
-	expect(page.status_code).to eq(200)
+  expect(page.status_code).to eq(200)
   expect(page).to have_field('code')
 end

@@ -42,7 +42,7 @@ class Bomb
 
   def configured?
     configured
-  end  
+  end
 
   def active?
     active

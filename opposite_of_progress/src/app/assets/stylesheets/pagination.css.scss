@@ -1,0 +1,8 @@
+.pagination-wrapper {
+  @include clearfix;
+  @include grid-column($columns: 12);
+
+  .pagination-links {
+    float: right;
+  }
+}

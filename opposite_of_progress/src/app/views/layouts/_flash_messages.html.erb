@@ -1,0 +1,18 @@
+<section class="flash-messages">
+  <% if flash[:alert] %>
+  <div data-alert class="alert-box flash-alert">
+    <div>
+      <%= alert %>
+      <a href="#" class="close">&times;</a>
+    </div>
+  </div>
+  <% end %>
+  <% if flash[:notice] %>
+  <div data-alert class="alert-box flash-notice">
+    <div>
+      <%= notice %>
+      <a href="#" class="close">&times;</a>
+    </div>
+  </div>
+  <% end %>
+</section>

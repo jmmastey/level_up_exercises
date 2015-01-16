@@ -1,0 +1,15 @@
+<%= content_tag_for(:div, legislator, class: "#{cycle('left', 'right')} clearfix") do %>
+  <div class="legislator-wrapper">
+    <div class="legislator-details">
+      <div class="name">
+        <%= link_to_legislator legislator %>
+        <%= link_to_legislator_favorite legislator, @favorited_ids, class: 'favorite' %>
+      </div>
+      <%= representation_tag legislator, class: 'represenation' %>
+      <%= party_tag legislator, class: 'party' %>
+    </div>
+    <div class="legislator-image">
+      <%= legislator_image_tag(legislator) %>
+    </div>
+  </div>
+<% end %>

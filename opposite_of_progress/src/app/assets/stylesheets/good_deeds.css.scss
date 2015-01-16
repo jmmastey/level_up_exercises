@@ -1,0 +1,53 @@
+// Place all the styles related to the GoodDeeds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.good-deeds-wrapper {
+  @include page-content-wrapper;
+}
+
+section.good-deed-paigantion {
+   @include grid-column($columns: 12);
+}
+
+.good-deeds {
+  margin-top: 20px;
+}
+
+.good-deed {
+  @include minimal-list-item;
+
+  .action {
+    margin: 0 5px;
+  }
+
+  > div {
+    display: inline-block;
+  }
+
+  .acted-at {
+    font-size: 0.8em;
+    color: lighten($body-font-color, 60);
+    @include grid-column($columns: 12);
+
+    @media #{$large-up} {
+      font-size: 1em;
+      @include grid-column($columns: 2);
+    }
+  }
+
+  .details {
+    @include grid-column($columns: 12);
+
+    @media #{$large-up} {
+      @include grid-column($columns: 10);
+    }
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.banner {
+  @include grid-column($columns: 12);;
+}

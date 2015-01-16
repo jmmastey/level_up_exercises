@@ -1,0 +1,24 @@
+<article class="legislator-contact-details">
+  <div class="legislator-contact-detais-wrapper">
+    <div class="url">
+      <%= fa_icon 'globe fw' %>
+      <%=  link_to strip_http(legislator.website), "http://#{legislator.website}", target: '_blank'%>
+    </div>
+    <div class="phone">
+      <%= fa_icon 'phone fw' %>
+      <%= content_tag :span, number_to_phone(legislator.phone, delimiter: ' ') %>
+    </div>
+    <div class="facebook">
+      <%= fa_icon 'facebook fw' %>
+      <%=  link_to_facebook legislator %>
+    </div>
+    <div class="twitter">
+      <%= fa_icon 'twitter fw' %>
+      <%=  link_to_twitter legislator %>
+    </div>
+    <div class="youtube">
+      <%= fa_icon 'youtube fw' %>
+      <%=  link_to_youtube legislator %>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,172 @@
+// Place all the styles related to the Bills controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bills.index,
+.bills.favorites {
+  .bills-wrapper {
+    @include page-content-wrapper;
+
+    h4 {
+      text-align: center;
+    }
+  }
+
+  .bills {
+    margin-top: 20px;
+  }
+
+  .bill {
+    @include minimal-list-item;
+
+    > div {
+      display: inline-block;
+    }
+
+    .favorite {
+      @include grid-column($columns: 12);
+
+      a {
+        font-size: $h4-font-size;
+      }
+
+      @media #{$large-up} {
+        @include grid-column($columns: 1);
+      }
+    }
+
+    .official-id {
+      font-size: 0.8em;
+      color: lighten($body-font-color, 60);
+      @include grid-column($columns: 12);
+
+      @media #{$large-up} {
+        font-size: 1em;
+        @include grid-column($columns: 2);
+      }
+    }
+
+    .official-title {
+      @include grid-column($columns: 12);
+
+      @media #{$large-up} {
+        @include grid-column($columns: 6);
+      }
+    }
+
+    .last-action {
+      @include grid-column($columns: 12);
+
+      @media #{$large-up} {
+        @include grid-column($columns: 3, $float: right);
+      }
+    }
+
+    .last-action-text {
+       color: lighten($body-font-color, 60);
+    }
+  }
+}
+
+.bills.show {
+  .bill {
+    margin-top: 30px;
+    @include grid-column($columns: 12);
+
+    h4, h6 {
+      font-weight: bold;
+      line-height: 1em;
+      display: block;
+      margin-bottom: 1em;
+      color: $anchor-font-color;
+    }
+
+    .bill-details {
+      @include grid-row($behavior: nest);
+    }
+
+    .bill-details-section {
+      @include grid-column($columns: 12);
+
+      @media #{$large-up} {
+        @include grid-column($columns: 6);
+      }
+
+      padding-right: 30px;
+
+      > div {
+        @include minimal-list-item;
+
+        &:last-item {
+          border-top: none;
+        }
+
+        @media #{$large-up} {
+          margin-right: 15px;
+
+          &:last-item {
+            border-top: 1px solid #eee;
+            margin-right: 0px;
+            margin-left: 15px;
+          }
+        }
+
+        .heading {
+          font-weight: bold;
+          @include grid-column($columns: 4);
+        }
+
+        .content {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    .summary {
+      margin-top: 2rem;
+    }
+  }
+
+
+  .good-deeds {
+
+    @include grid-column($columns: 12);
+
+    > div {
+      @include minimal-list-item;
+    }
+  }
+
+  .sponsorship,
+  {
+    > div {
+      @include grid-column($columns: 12);
+    }
+  }
+
+  .cosponsorship,
+  {
+    > div {
+      @include grid-column($columns: 3);
+    }
+  }
+
+  .action {
+    > div {
+      display: inline-block;
+    }
+
+    .acted-at {
+      font-size: 0.8em;
+      color: lighten($body-font-color, 60);
+      @include grid-column($columns: 12);
+
+      @media #{$large-up} {
+        font-size: 1em;
+        @include grid-column($columns: 2);
+      }
+    }
+  }
+}

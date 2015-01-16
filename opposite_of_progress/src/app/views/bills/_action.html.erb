@@ -1,0 +1,12 @@
+<div class="action">
+  <%= content_tag :div, readable_date(action.acted_at), class: 'acted-at' %>
+  <%= content_tag :div, class: 'details' do %>
+    <% if action.action == 'enacted' %>
+      <%= content_tag :span, 'Enacted as' %>
+      <%= content_tag :span, action.text, class: 'enacted_as' %>
+    <% elsif action.action == 'voted' %>
+      <%= content_tag :span, 'Passed by' %>
+      <%= content_tag :span, action.chamber.titleize, class: 'chamber' %>
+    <% end %>
+  <% end %>
+</div>

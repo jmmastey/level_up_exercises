@@ -1,0 +1,4 @@
+<div class="good-deed">
+  <%= content_tag :div, readable_date(good_deed.acted_at), class: 'acted-at' %>
+  <%= content_tag :div, render(partial: "good_deeds/#{good_deed.action}", locals: {good_deed: good_deed}), class: 'details' %>
+</div>

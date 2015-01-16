@@ -1,0 +1,6 @@
+<div class="good-deed">
+  <%= content_tag :div, readable_date(good_deed.acted_at), class: 'acted-at' %>
+  <%= content_tag :div, class: 'details' do %>
+    <%= content_tag :span, link_to_bill(good_deed.bill), class: 'bill' %>
+  <% end %>
+</div>

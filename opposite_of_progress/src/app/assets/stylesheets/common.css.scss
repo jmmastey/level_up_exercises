@@ -1,0 +1,81 @@
+@mixin page-headers {
+  h4, h6 {
+    font-weight: bold;
+    line-height: 1em;
+    display: inline-block;
+    color: $anchor-font-color;
+    margin-bottom: 0px;
+    vertical-align: middle;
+  }
+}
+
+@mixin page-content-wrapper {
+  margin-top: 15px;
+  @include grid-column($columns: 12);
+  @include page-headers
+}
+
+@mixin minimal-list-item {
+  border-bottom: 1px solid #eee;
+  padding: 0.5em 0;
+  @include grid-row($behavior: nest);
+
+  &:first-of-type {
+    border-top: 1px solid #eee;
+  }
+}
+
+.content-container {
+  section {
+    @include grid-row();
+
+    h6 {
+      font-weight: bold;
+      line-height: 1em;
+      color: $anchor-font-color;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.pagination-wrapper {
+  @include clearfix;
+  margin-top: 20px;
+
+  .pagination-links {
+    float: right;
+  }
+}
+
+.empty-message {
+  @include grid-column($columns: 12);
+  text-align: center;
+  padding: 10px;
+  background-color: lighten($primary-color, 60);
+}
+
+section>.empty {
+  padding-top: 20px;
+  @include grid-column($columns: 12);
+
+  > div {
+    @include alert($bg: lighten($success-color, 40));
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+
+div.favorite-toggle {
+  // @include grid-row();
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+
+  a {
+    @include button($padding: $button-sml, $radius: 8px);
+    margin-bottom: 0px;
+    padding: 8px;
+    vertical-align: middle;
+    margin-left: 20px;
+  }
+}

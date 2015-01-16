@@ -1,0 +1,21 @@
+<% if @legislators.present? %>
+<section>
+  <div class="legislators-wrapper">
+    <%= yield :legislators_header %>
+    <div class="legislators">
+      <%= render @legislators %>
+    </div>
+  </div>
+</section>
+<section>
+  <%= pagination_wrapper_for(@legislators) %>
+</section>
+<% else %>
+<section>
+  <div class="empty">
+    <div>
+      There are no legislators to show
+    </div>
+  </div>
+</section>
+<% end %>

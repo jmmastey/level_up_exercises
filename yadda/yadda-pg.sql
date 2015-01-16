@@ -5,43 +5,16 @@
 CREATE SCHEMA yadda;
 
 
--- Brewery Table
-DROP TABLE IF EXISTS yadda.brewery;
-CREATE TABLE yadda.brewery (
+-- Role Table
+DROP TABLE IF EXISTS yadda.role CASCADE;
+CREATE TABLE yadda.role (
   id            serial PRIMARY KEY,
-  name          text NOT NULL,
-  address       text NOT NULL,
-  city          text NOT NULL,
-  state         varchar(2) NOT NULL,
-  zip_code      varchar(5) NOT NULL,
-  description   text,
-  founding_year date,
-  created_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  created_by    int REFERENCES user ON DELETE RESTRICT, -- one-to many relationship between user and breweries; disallow deletion of user if it still references a brewery
-  updated_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_by    int REFERENCES user ON DELETE RESTRICT -- one-to many relationship between user and breweries; disallow deletion of user if it still references a brewery
+  name          text NOT NULL
 );
-
-
--- Beer Table
-DROP TABLE IF EXISTS yadda.beer;
-CREATE TABLE yadda.beer (
-  id            serial PRIMARY KEY,
-  name          text NOT NULL,
-  style         text NOT NULL,
-  description   text,
-  brewing_year  date,
-  created_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  created_by    int REFERENCES user ON DELETE RESTRICT, -- one-to many relationship between user and beer; disallow deletion of user if it still references a beer
-  updated_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_by    int REFERENCES user ON DELETE RESTRICT, -- one-to many relationship between user and beer; disallow deletion of user if it still references a beer
-  brewery_id    int REFERENCES brewery ON DELETE CASCADE -- one-to-many relationship between brewery and beers; delete all associated beers if a brewery is deleted
-);
-
 
 
 -- User Table
-DROP TABLE IF EXISTS yadda.user;
+DROP TABLE IF EXISTS yadda.user CASCADE;
 CREATE TABLE yadda.user (
   id            serial PRIMARY KEY,
   username      varchar(50) UNIQUE NOT NULL,
@@ -57,20 +30,46 @@ CREATE TABLE yadda.user (
   active        boolean DEFAULT true,
   created_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  role_id       int REFERENCES role ON DELETE RESTRICT  -- one-to-many relationship between role and users; disallow deletion of role if it still references a user
+  role_id       int REFERENCES yadda.role ON DELETE RESTRICT  -- one-to-many relationship between role and users; disallow deletion of role if it still references a user
 );
 
 
--- Role Table
-DROP TABLE IF EXISTS yadda.role;
-CREATE TABLE yadda.role (
+-- Brewery Table
+DROP TABLE IF EXISTS yadda.brewery CASCADE;
+CREATE TABLE yadda.brewery (
   id            serial PRIMARY KEY,
-  name          text NOT NULL
+  name          text NOT NULL,
+  address       text NOT NULL,
+  city          text NOT NULL,
+  state         varchar(2) NOT NULL,
+  zip_code      varchar(5) NOT NULL,
+  description   text,
+  founding_year date,
+  created_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_by    int REFERENCES yadda.user ON DELETE RESTRICT, -- one-to many relationship between user and breweries; disallow deletion of user if it still references a brewery
+  updated_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_by    int REFERENCES yadda.user ON DELETE RESTRICT -- one-to many relationship between user and breweries; disallow deletion of user if it still references a brewery
+);
+
+
+-- Beer Table
+DROP TABLE IF EXISTS yadda.beer CASCADE;
+CREATE TABLE yadda.beer (
+  id            serial PRIMARY KEY,
+  name          text NOT NULL,
+  style         text NOT NULL,
+  description   text,
+  brewing_year  date,
+  created_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_by    int REFERENCES yadda.user ON DELETE RESTRICT, -- one-to many relationship between user and beer; disallow deletion of user if it still references a beer
+  updated_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_by    int REFERENCES yadda.user ON DELETE RESTRICT, -- one-to many relationship between user and beer; disallow deletion of user if it still references a beer
+  brewery_id    int REFERENCES yadda.brewery ON DELETE CASCADE -- one-to-many relationship between brewery and beers; delete all associated beers if a brewery is deleted
 );
 
 
 -- Rating Table
-DROP TABLE IF EXISTS yadda.rating;
+DROP TABLE IF EXISTS yadda.rating CASCADE;
 CREATE TABLE yadda.rating (
   look          int CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
   smell         int CHECK (smell BETWEEN 0 AND 5) DEFAULT 0,
@@ -79,13 +78,7 @@ CREATE TABLE yadda.rating (
   overall       int CHECK (overall BETWEEN 0 AND 5) DEFAULT 0,
   created_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- no created_by or updated_by fields because this must be the associated user by definition
   updated_at    timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  user_id       int REFERENCES user ON DELETE RESTRICT, -- one-to many relationship between user and ratings; disallow deletion of user if it still references a rating
-  beer_id       int REFERENCES beer ON DELETE RESTRICT, -- one-to many relationship between beer and ratings; disallow deletion of beer if it still references a rating
-  PRIMARY KEY   (user_id, beer_id), -- composite primary key
-  CONSTRAINT    rating_user_id_fkey FOREIGN KEY (user_id)
-                REFERENCES user (id) MATCH SIMPLE
-                ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT    rating_beer_id_fkey FOREIGN KEY (beer_id)
-                REFERENCES beer (id) MATCH SIMPLE
-                ON UPDATE NO ACTION ON DELETE NO ACTION
+  user_id       int REFERENCES yadda.user ON DELETE RESTRICT, -- one-to many relationship between user and ratings; disallow deletion of user if it still references a rating
+  beer_id       int REFERENCES yadda.beer ON DELETE RESTRICT, -- one-to many relationship between beer and ratings; disallow deletion of beer if it still references a rating
+  PRIMARY KEY   (user_id, beer_id) -- composite primary key
 );

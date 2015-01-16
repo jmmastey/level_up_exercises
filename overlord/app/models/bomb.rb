@@ -13,5 +13,6 @@ class Bomb < ActiveRecord::Base
     self.activation_code ||= "0000"
     self.detonation_time ||= 60
     self.status          ||= "inactive"
+    self.failed_attempts ||= 0
   end
 end

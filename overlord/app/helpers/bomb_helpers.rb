@@ -4,6 +4,7 @@ module BombHelpers
   end
 
   def self.bomb_status(bomb)
+    return {bomb_status: nil}.to_json if bomb.nil?
     if self.bomb_exploded? bomb
       bomb.status = :explode
     end
@@ -12,5 +13,8 @@ module BombHelpers
 
   def self.bomb_exploded?(bomb)
     !(bomb.activated_time.nil?) && (Time.now >= bomb.activated_time + bomb.detonation_time.seconds)
+  end
+
+  def self.bomb_deactivate(bomb)
   end
 end

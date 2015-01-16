@@ -1,1 +1,42 @@
-%h3 "Time to build an app around. Start time: #{start_time}"
+%link{:href => "/style.css", :rel => "stylesheet"}/
+
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'
+%script{:src => "/bomb.js", :type => "text/javascript"}
+
+%table
+  %tr
+    %td
+      %label Activation Code
+    %td
+      %input{type: "text", id: "activation_code" }
+  %tr
+    %td
+      %label Deactivation Code
+    %td
+      %input{type: "text", id: "deactivation_code" }
+  %tr
+    %td
+      %label Detonation time
+    %td
+      %input{type: "text", id: "detonation_time" }
+
+%button.submit
+  Create
+
+:javascript
+    $(document).ready( function() {
+      $(".submit").click(function(){
+        datalist = { activation_code: $("#activation_code").val(), deactivation_code: $("#deactivation_code").val(),detonation_time: $("#detonation_time").val() };
+        $.ajax({
+        type: "POST",
+        url: "http://localhost:9292/bomb",
+        dataType: "json",
+        data: JSON.stringify(datalist),
+        success: function(returnObject)
+        {
+          $(location).attr('href',"http://localhost:9292/bomb");
+        },
+        error: function (xhr){  alert( 'xhr = '+xhr.status ); }
+      });
+      });
+    });

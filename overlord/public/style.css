@@ -19,6 +19,39 @@ html {
 }
 
 /* Using box shadows to create 3D effects */
+.bomb_inactive {
+  background:green;
+  font-style: italic;
+  margin: 100px auto;
+  width: 145px;
+  padding: 20px 20px 9px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bomb_active {
+  background:red;
+  font-style: italic;
+  margin: 100px auto;
+  width: 145px;
+  padding: 20px 20px 9px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bomb_explode {
+  background:gray;
+  font-style: italic;
+  margin: 100px auto;
+  width: 145px;
+  padding: 20px 20px 9px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #bomb {
   width: 325px;
   height: auto;
@@ -82,6 +115,7 @@ html {
   color: #888;
   line-height: 36px;
   text-align: center;
+  font-size: smaller;
 
   /* prevent selection of text inside keys */
   user-select: none;

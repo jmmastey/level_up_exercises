@@ -27,6 +27,7 @@ class Overlord < Sinatra::Application
     DataMapper::Logger.new($stdout, :debug)
   end
   get '/' do
+    Bomb.destroy_all
     haml :index
   end
 

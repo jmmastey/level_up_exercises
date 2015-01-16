@@ -69,10 +69,16 @@ describe 'bomb' do
       status: "active")
     end
 
-    it "rejects the code for deactivation if its wrong" do
+    it "explodes if the the code for deactivation if is wrong thrice" do
       post '/bomb/deactivate', {deactivation_code: '1234'}.to_json
       json = JSON.parse(last_response.body)
       expect(json["bomb_status"]).to eq ("active")
+      post '/bomb/deactivate', {deactivation_code: '2345'}.to_json
+      json = JSON.parse(last_response.body)
+      expect(json["bomb_status"]).to eq ("active")
+      post '/bomb/deactivate', {deactivation_code: '3456'}.to_json
+      json = JSON.parse(last_response.body)
+      expect(json["bomb_status"]).to eq ("explode")
     end
 
     it "accepts the code for deactivation if its correct" do

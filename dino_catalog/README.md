@@ -4,13 +4,13 @@ It may not be immediately evident, but I am a huge fan of dinosaurs. They're hug
 
 ...
 
-Anyway. I need to catalog some dinosaurs for my newest project, DinoDex. I've got a [CSV](http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html) file for the dinosaur facts, and I need the code to read all the dinosaur facts and do some basic manipulations with the data.
+Anyway. I need to catalog some dinosaurs for my newest project, DinoDex. I've got a CSV file for the dinosaur facts, and I need the code to read all the dinosaur facts and do some basic manipulations with the data.
 
 ### Requirements
 
 Go check out the CSVs and come back. Done? Cool, I've just got a few features I need:
 
-1. I loaded my favorite dinosaurs into a CSV file you'll need to parse. I don't know a lot about African Dinosaurs though, so I downloaded one from The Pirate Bay. It isn't formatted as well as mine, so you'll need to handle both formats.
+1. I loaded my favorite dinosaurs into a CSV file you'll need to parse. I don't know a lot about African Dinosaurs though, so I downloaded one from The Pirate Bay. It isn't formatted as well as mine, but please try to parse it anyway.
 2. I have friends who ask me a lot of questions about dinosaurs (I'm kind of a big deal). Please make sure the dinodex is able to answer these things for me:
     * Grab all the dinosaurs that were bipeds.
     * Grab all the dinosaurs that were carnivores (fish and insects count).
@@ -26,3 +26,51 @@ Go check out the CSVs and come back. Done? Cool, I've just got a few features I 
 2. CSV isn't may favorite format in the world. Can you implement a JSON export feature?
 
 Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long and up to 8 tons! Suh-weet.)
+
+
+# How it Works
+
+```ruby
+require './dinodex'
+
+dinodex = Dinodex.new
+
+# Custom CSV formats require custom subclasses of Dino
+african_dinodex = Dinodex.new('african_dinosaur_export.csv', AfricanDino)
+
+# Standard filters
+dinodex.bipeds
+
+dinodex.carnivores
+
+dinodex.big
+
+dinodex.small
+
+dinodex.in_period('jurassic')
+
+# Chain filters together
+results = dinodex.big.carnivores.in_period('cretaceous')
+
+# List only the names of dinos matching your query
+puts results
+
+# Get facts on a given dino
+puts results.first.facts
+
+# Arbitrary search
+# Valid keys are: name, period, continent, diet, weight, walking, description,
+#                 biped, carnivore, big, small (these are boolean-only)
+
+dinodex.search(diet: 'piscivore', walking: 'biped')
+
+
+# You can chain search to other queries, too
+dinodex.bipeds.search(continent: 'africa')
+
+# Any query can be serialized as JSON
+dinodex.bipeds.to_json
+
+# Any individual dino can be as well
+dinodex.bipeds.first.to_json
+```

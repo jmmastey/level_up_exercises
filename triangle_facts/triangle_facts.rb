@@ -1,58 +1,55 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-	attr_accessor :side1,:side2,:side3
+  attr_reader :side1, :side2, :side3
 
-	def initialize(side1,side2,side3)
-		@side1,@side2,@side3 = side1,side2,side3
-	end
+  def initialize(side1, side2, side3)
+    @side1, @side2, @side3 = side1, side2, side3
+  end
 
-	def equilateral()
-		return side1 == side2 && side2 == side3
-	end
+  def recite_facts
+    puts type_facts
+    puts angle_facts + "\n\n"
+  end
 
-	def isosceles()
-		return [side1,side2,side3].uniq.length == 2
-	end
+  def type_facts
+    case triangle_type
+      when :equilateral
+        'This triangle is equilateral!'
+      when :isosceles
+        'This triangle is isosceles! Also, that word is hard to type.'
+      else 'This triangle is scalene and mathematically boring.'
+    end
+  end
 
-	def scalene()
-		unless ! (equilateral || isosceles)
-	    false
-	  else
-	    true
-	  end
-	end
+  def angle_facts
+    angles = calculate_angles
+    "The angles of this triangle are #{angles.join(',')}" \
+      "#{"\nThis triangle is also a right triangle!" if angles.include? 90}"
+  end
 
-	def recite_facts
-		puts 'This triangle is equilateral!' if equilateral
-		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles 
-		puts 'This triangle is scalene and mathematically boring.' if scalene 
+  def triangle_type
+    return :equilateral if side1 == side2 && side2 == side3
+    return :isosceles   if [side1, side2, side3].uniq.length == 2
+    :scalene
+  end
 
-		angles = self.calculate_angles(side1,side2,side3)
-		puts 'The angles of this triangle are ' + angles.join(',')
+  def calculate_angles
+    angle_1 = rad_to_deg(Math.acos((side2**2 + side3**2 - side1**2) / (2.0 * side2 * side3)))
+    angle_2 = rad_to_deg(Math.acos((side1**2 + side3**2 - side2**2) / (2.0 * side1 * side3)))
+    angle_3 = rad_to_deg(Math.acos((side1**2 + side2**2 - side3**2) / (2.0 * side1 * side2)))
+    [angle_1, angle_2, angle_3]
+  end
 
-		puts 'This triangle is also a right triangle!' if angles.include? 90
-		puts ''
-	end
-
-	def calculate_angles(a,b,c)
-		angleA = radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
-		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
-		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
-
-		return [angleA, angleB, angleC]
-	end
-
-	def radians_to_degrees(rads)
-		return (rads * 180 / Math::PI).round
-	end
+  def rad_to_deg(rads)
+    (rads * 180 / Math::PI).round
+  end
 end
 
-
 triangles = [
-	[5,5,5],
-	[5,12,13],
+  [5, 5, 5],
+  [5, 12, 13],
 ]
-triangles.each { |sides|
-	tri = Triangle.new(*sides)
-	tri.recite_facts
-}
+triangles.each do |sides|
+  tri = Triangle.new(*sides)
+  tri.recite_facts
+end

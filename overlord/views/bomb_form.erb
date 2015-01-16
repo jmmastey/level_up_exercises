@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>THE BOMB</title>
+    <meta name="description" content="The Bomb Controller">
+    <meta name="author" content="Dr. No">
+</head>
+
+<h1>THE BOMB</h1>
+<body>
+  <div>Only super villains allowed
+    <p>Don't let this brilliant UI design fool you</p>
+    <p>We mean business</p>
+  </div>
+  <% if @bomb.configured? %>
+    <%= erb :_enter_code %>
+  <% else %>
+    <%= erb :_configure %>
+  <% end %>
+</body>
+</html>
+
+
+

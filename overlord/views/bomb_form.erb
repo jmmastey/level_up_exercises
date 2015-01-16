@@ -15,17 +15,11 @@
     <p>Don't let this brilliant UI design fool you</p>
     <p>We mean business</p>
   </div>
-  <p><%= BombFormText.status_message(@bomb) %></p>
-  <p><%= BombFormText.code_message(@bomb) %></p>
-    <form action="/" method="post">
-      <% if @bomb.detonated? %>
-        <input id="code" type="text" name="code" disabled>
-        <input id="submit" type="submit" name="submit" disabled>
-      <% else %>
-        <input id="code" type="text" name="code" autofocus>
-        <input id="submit" type="submit" name="submit">
-      <% end %>
-    </form>
+  <% if @bomb.configured? %>
+    <%= erb :_enter_code %>
+  <% else %>
+    <%= erb :_configure %>
+  <% end %>
 </body>
 </html>
 

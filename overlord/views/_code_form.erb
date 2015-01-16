@@ -1,0 +1,9 @@
+<form action="/" method="post">
+  <% if @bomb.detonated? %>
+    <input id="code" type="text" name="code" disabled>
+    <input id="submit" type="submit" name="submit" disabled>
+  <% else %>
+    <input id="code" type="text" name="code" autofocus>
+    <input id="submit" type="submit" name="submit">
+  <% end %>
+</form>

@@ -31,5 +31,6 @@ Then(/^a blank code warning shows$/) do
 end
 
 Then(/^the status indicator shows as activated$/) do
+  expect(page.status_code).to eq(200)
   expect(page).to have_content("Bomb is active")
 end

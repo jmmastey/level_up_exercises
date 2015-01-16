@@ -1,5 +1,5 @@
 module BombFormErrors
   def no_code
-  	"Please enter a code."
+  	"You must enter a code."
   end
 end

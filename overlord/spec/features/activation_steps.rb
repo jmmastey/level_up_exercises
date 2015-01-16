@@ -1,3 +1,9 @@
+require './spec/spec_helper.rb'
+include OverlordTest
+
 Given(/^I have an activated bomb$/) do
-  pending # express the regexp above with the code you wish you had
+  Given I have booted the bomb
+  And I have configured the bomb
+  And I have entered the right activation configured
+  And the status indicator shows as activated
 end

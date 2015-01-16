@@ -4,11 +4,8 @@ source "https://rubygems.org"
 ruby "2.1.5"
 
 gem "sinatra"
-
 gem "cucumber"
-
 gem "rspec"
-
 gem "pry"
-
 gem "capybara"
+gem "activesupport"

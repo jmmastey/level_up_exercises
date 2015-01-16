@@ -1,0 +1,2 @@
+class BombError < StandardError
+end

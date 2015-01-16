@@ -1,0 +1,1 @@
+Congress.key = ENV['SUNLIGHT_CONGRESS_API_KEY']

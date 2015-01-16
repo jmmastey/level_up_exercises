@@ -1,0 +1,11 @@
+<%= content_tag_for(:div, bill) do%>
+  <%= content_tag :div, class: 'favorite' do %>
+    <%= link_to_bill_favorite bill, @favorited_ids %>
+  <% end %>
+  <%= content_tag :div, bill.official_id.upcase, class: 'official-id' %>
+  <%= content_tag :div, link_to_bill(bill, without_id: true), class: 'official-title' %>
+  <%= content_tag :div, class: 'last-action' do %>
+    <%= content_tag :span, "Last action on", class: 'last-action-text' %>
+    <%= content_tag :span, readable_date(bill.last_action_at), class: 'last-action-date' %>
+  <% end %>
+<% end %>

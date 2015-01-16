@@ -1,0 +1,31 @@
+<% if @bills.present? %>
+<section>
+  <div class="bills-wrapper">
+    <h4>Bills <%= '(Favorites Only)' if action_name == 'favorites' %></h4>
+
+    <% if user_signed_in? %>
+      <div class="favorite-toggle">
+        <% if action_name == 'favorites' %>
+          <%= link_to "Show All", bills_path %>
+        <% else %>
+          <%= link_to "Show Favorites Only", bills_favorites_path %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="bills">
+      <%= render @bills %>
+    </div>
+  </div>
+</section>
+<section>
+  <%= pagination_wrapper_for(@bills) %>
+</section>
+<% else %>
+<section>
+  <div class="empty">
+    <div>
+      There are no bills to show
+    </div>
+  </div>
+</section>
+<% end %>

@@ -1,0 +1,16 @@
+section.flash-messages {
+
+
+  .alert-box {
+    text-align: center;
+    font-size: 1em;
+  }
+
+  .flash-notice {
+    @include alert-style($info-color);
+  }
+
+  .flash-alert {
+    @include alert-style($alert-color);
+  }
+}

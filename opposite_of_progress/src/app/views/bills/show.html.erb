@@ -1,0 +1,78 @@
+<section>
+  <div class="bill">
+    <h4>
+    <%= link_to_bill_favorite @bill, @favorited_ids %>
+      <%= link_to_bill(@bill) %>
+    </h4>
+    <div class="bill-details">
+      <div class="bill-details-section">
+        <div>
+          <div class="heading">Introduced on</div>
+          <div class="content"><%= readable_date(@bill.introduced_on) %></div>
+        </div>
+        <div>
+          <div class="heading">Last action at</div>
+          <div class="content"><%= @bill.last_action_at.to_s(:long) %></div>
+        </div>
+        <div>
+          <div class="heading">Chamber</div>
+          <div class="content"><%= @bill.chamber.titleize %></div>
+        </div>
+        <div>
+          <div class="heading">Congress</div>
+          <div class="content"><%= @bill.congress.ordinalize %></div>
+        </div>
+      </div>
+      <div class="bill-details-section">
+        <div>
+          <div class="heading">Official URL</div>
+          <div class="content"><%= link_to(@bill.url, @bill.url, target: '_blank') %></div>
+        </div>
+        <div>
+          <div class="heading">Last Version</div>
+          <div class="content"><%= link_to_bill_pdf(@bill) %></div>
+        </div>
+        <div>
+          <div class="heading">Enacted</div>
+          <div class="content"><%= @bill.enacted? ? 'Yes' : 'No' %></div>
+        </div>
+        <div>
+          <div class="heading">Enacted As</div>
+          <div class="content">N/A</div>
+        </div>
+      </div>
+    </div>
+    <div class="summary">
+      <h6>Summary</h6>
+      <p>
+        <%= @bill.summary || "Summary is not available for this bill." %>
+      </p>
+    </div>
+  </div>
+</section>
+<% if @bill.sponsorships.present? %>
+<section>
+  <div class="good-deeds sponsorships">
+    <h6>Sponsor</h6>
+    <%= render partial: 'sponsorship', collection: @bill.sponsorships %>
+  </div>
+</section>
+<% end %>
+<% if @bill.cosponsorships.present? %>
+<section>
+  <div class="good-deeds cosponsorships">
+    <h6>Co-sponsors (<%= @bill.cosponsorships.count %>)</h6>
+    <% @bill.cosponsorships.each_slice(4) do |cosponsorships| %>
+      <%= render partial: 'cosponsorships', locals: {cosponsorships: cosponsorships } %>
+    <% end %>
+  </div>
+</section>
+<% end %>
+<% if @bill.actions.present? %>
+<section>
+  <div class="good-deeds actions">
+    <h6>Activities</h6>
+    <%= render partial: 'action', collection: @bill.actions %>
+  </div>
+</section>
+<% end %>

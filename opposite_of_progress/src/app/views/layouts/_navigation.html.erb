@@ -1,0 +1,31 @@
+<div class="contain-to-grid">
+  <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="/">Congressional Good Deeds</a></h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="/"><span></span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <ul class="right">
+        <% if user_signed_in? %>
+          <%= content_tag :li, link_to(current_user.email, 'javascript:void(0)', 'data-options' => 'is_hover: false') %>
+          <%= content_tag :li, link_to('Log out', destroy_user_session_path, method: :delete) %>
+        <% else %>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
+          <li><%= link_to "Log in", new_user_session_path %></li>
+        <% end %>
+
+      </ul>
+      <ul class="left">
+        <%= content_tag :li, link_to('Good Deeds', good_deeds_path) %>
+        <%= content_tag :li, link_to('Legislators', legislators_path) %>
+        <%= content_tag :li, link_to('Bills', bills_path) %>
+        <%= content_tag :li, link_to('Search', search_by_location_path) %>
+      </ul>
+    </section>
+  </nav>
+</div>
+
+

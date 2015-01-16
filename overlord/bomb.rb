@@ -17,22 +17,22 @@ class Bomb
   end
 
   def activate_code=(new_activate_code)
-    if self.code_is_valid?(new_activate_code)
+    if self.class.code_is_valid?(new_activate_code)
       @activate_code = new_activate_code
     else
-      raise BombError, "Invalid activation code"
+      self.class.raise_error("Invalid activation code - Codes must be numeric")
     end
   end
 
   def deactivate_code
-    @activate_code ||= DEFAULT_DEACTIVATE_CODE
+    @deactivate_code ||= DEFAULT_DEACTIVATE_CODE
   end
 
   def deactivate_code=(new_deactivate_code)
-    if self.code_is_valid?(new_deactivate_code)
+    if self.class.code_is_valid?(new_deactivate_code)
       @deactivate_code = new_deactivate_code
     else
-      raise BombError, "Invalid deactivation code"
+      self.class.raise_error("Invalid deactivation code - Codes must be numeric")
     end
   end
 
@@ -53,10 +53,10 @@ class Bomb
   end
 
   def process_code(code)
-    if active?
-      deactivate(code)
+    if self.class.code_is_valid?(code)
+      active? ? deactivate(code) : activate(code)
     else
-      activate(code)
+      self.class.raise_error("Invalid code - Codes must be numeric")
     end
   end
 
@@ -74,6 +74,10 @@ class Bomb
 
   def self.code_is_valid?(code)
     (code =~ /\A[0-9]+\Z/) == 0
+  end
+
+  def self.raise_error(message)
+    raise BombError, message
   end
 
   private

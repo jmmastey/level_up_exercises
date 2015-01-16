@@ -7,8 +7,6 @@ require './bomb_form_errors'
 include BombFormErrors
 
 class Overlord < Sinatra::Base
-  # attr_accessor :errors
-
   configure do
     enable :sessions
   end
@@ -28,46 +26,61 @@ class Overlord < Sinatra::Base
 
   def process_page
     if bomb.configured?
-      process_code
+      process_code_if_present
     else
       process_configuration
     end
   end
 
   def process_configuration
-    process_activate_code
-    process_deactivate_code
+    process_activate_code_if_present
+    process_deactivate_code_if_present
     unless errors.any?
       bomb.configured = true
     end
-    binding.pry
+  end
+
+  def process_activate_code_if_present
+    if params['activate_code'].present?
+      process_activate_code
+    end
   end
 
   def process_activate_code
     begin
-      if params['activate_code'].present?
-        bomb.activate_code = params['activate_code']
-      end
+      bomb.activate_code = params['activate_code']
     rescue BombError => error
       errors << error.message
+    end
+  end
+
+  def process_deactivate_code_if_present
+    if params['deactivate_code'].present?
+      process_deactivate_code
     end
   end
 
   def process_deactivate_code
     begin
-      if params['deactivate_code'].present?
-        bomb.deactivate_code = params['deactivate_code']
-      end
+      bomb.deactivate_code = params['deactivate_code']
     rescue BombError => error
       errors << error.message
     end
   end
 
-  def process_code
+  def process_code_if_present
     if params['code'].present?
-      bomb.process_code(params['code'])
+      process_code
     else
       errors << BombFormErrors.no_code
+    end
+  end
+
+  def process_code
+    begin
+      bomb.process_code(params['code'])
+    rescue BombError => error
+      errors << error.message
     end
   end
 

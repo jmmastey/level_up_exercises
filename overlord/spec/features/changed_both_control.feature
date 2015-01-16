@@ -26,7 +26,7 @@ Feature: Control the Bomb with Both Codes Changed
     | first_code      | first_times | first_status   | second_code                   | second_times | second_status     | work        |
     | the code "9385" | 1           | activated      | the code "1111"               | 1            | activated         | work        |
     | the code "9385" | 1           | activated      | the default deactivation code | 1            | activated         | work        |
-    | the code "1111" | 1           | deactivated    | the code "3264"               | 1            | activated         | work        |
+    | the code "1111" | 1           | deactivated    | the code "9385"               | 1            | activated         | work        |
     | the code "1111" | 1           | deactivated    | the code "1111"               | 1            | deactivated       | work        |
     | the code "1111" | 1           | deactivated    | the code "1111"               | 3            | deactivated       | work        |
     | the code "9385" | 1           | activated      | the code "1111"               | 3            | detonated         | do not work |

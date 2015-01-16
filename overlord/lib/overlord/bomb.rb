@@ -15,8 +15,9 @@ class Overlord::Bomb
 
   def initialize_session
     {
-      :state           => @state,
-      :activation_code => @activation_code
+      :state             => @state,
+      :activation_code   => @activation_code,
+      :deactivation_code => @deactivation_code
     }
   end
 
@@ -30,6 +31,10 @@ class Overlord::Bomb
 
   def update_activation_code(activation_code)
     @activation_code = activation_code
+  end
+
+  def update_deactivation_code(deactivation_code)
+    @deactivation_code = deactivation_code
   end
 
   private

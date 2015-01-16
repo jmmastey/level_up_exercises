@@ -63,4 +63,22 @@ describe Overlord::Bomb do
       end
     end
   end
+
+  describe '#update_deactivation_code' do
+    context 'when supplied a valid deactivation code' do
+      it 'updates the deactivation code' do
+        subject.update_deactivation_code('0007')
+        subject.process_code('0007')
+
+        expect(subject).not_to be_active
+      end
+
+      it 'ignores the old validation code' do
+        subject.update_activation_code('4567')
+        subject.process_code('1234')
+
+        expect(subject).not_to be_active
+      end
+    end
+  end
 end

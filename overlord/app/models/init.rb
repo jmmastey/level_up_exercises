@@ -1,4 +1,5 @@
 require_relative 'bomb'
+require_relative 'wire'
 require 'data_mapper'
 
 DataMapper.finalize

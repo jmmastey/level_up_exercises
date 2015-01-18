@@ -5,10 +5,11 @@ describe 'bomb' do
   let (:valid_bomb) do
     { activation_code: '12342',
       deactivation_code: '0220',
-      detonation_time: '55'
+      detonation_time: '55',
+      wires: [{color: "red", diffuse: false}, {color: "green", diffuse: true}]
     }.to_json
-
   end
+
   it 'should use default activation code if not given' do
     post '/bomb'
     json = JSON.parse(last_response.body)

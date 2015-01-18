@@ -21,12 +21,19 @@ class Overlord < Sinatra::Application
 
   post '/bomb' do
     request_json = {}
-    request_json = JSON.parse(request.body.read)
+    request_json = JSON.parse(request.body.read) if request.body.try("string") != ""
 
     bomb = Bomb.create(
       activation_code: request_json["activation_code"],
       deactivation_code: request_json["deactivation_code"],
       detonation_time: request_json["detonation_time"])
+
+    if request_json["json"]
+      request_json["wires"].each do |wire|
+        Wire.create(color: wire["color"],
+                 diffuse: wire["diffuse"], bomb_id: wire["bomb_id"] )
+      end
+    end
     bomb.to_json
   end
 

@@ -6,6 +6,7 @@ class Bomb < ActiveRecord::Base
   validates :activation_code,:deactivation_code, :format => { :with => /\A[0-9]*\z/ }
   enum status: %w(active inactive explode)
 
+  has_many :wires
   after_initialize :initialize_defaults
 
   def initialize_defaults

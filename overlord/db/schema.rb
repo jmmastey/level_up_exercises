@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115181654) do
+ActiveRecord::Schema.define(version: 20150118012407) do
 
   create_table "bombs", force: :cascade do |t|
     t.string   "activation_code",   default: "1234"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(version: 20150115181654) do
     t.integer  "status"
     t.datetime "activated_time"
     t.integer  "failed_attempts"
+  end
+
+  create_table "wires", force: :cascade do |t|
+    t.string  "color"
+    t.boolean "diffuse", default: false
+    t.integer "bomb_id"
   end
 
 end

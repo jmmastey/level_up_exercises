@@ -90,6 +90,7 @@
           {
             if(returnObject.bomb_status == "active")
             {
+              $('.timer').css("display", "block");
               $("#bomb_status").removeClass("bomb_inactive");
               $("#bomb_status").removeClass("bomb_explode");
               $("#bomb_status").addClass("bomb_active");
@@ -110,6 +111,8 @@
               $("#bomb_status").removeClass("bomb_inactive");
               $("#bomb_status").addClass("bomb_explode");
               $("#bomb_status").val("Exploded");
+              $('.timer').html(((returnObject.detonation_time) - start) + " Seconds ");
+              start += 1
             }
           },
           error: function (xhr){

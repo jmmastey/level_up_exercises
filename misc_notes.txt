@@ -1,0 +1,3 @@
+On the Git. Just Git. exercise
+May need to be more specific about what you mean by 'add some additional text'
+add text to what? one of the existing files?

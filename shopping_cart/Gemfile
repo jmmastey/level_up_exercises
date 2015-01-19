@@ -1,0 +1,10 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+group :test do
+  gem 'database_cleaner'
+  gem 'cucumber-rails', require: false
+  gem 'capybara'
+  gem 'capybara-screenshot'
+end
+# gem "rails"

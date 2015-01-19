@@ -5,4 +5,4 @@ Feature: Add item to cart
   Scenario: Customer add item to the cart
     Given the cart is empty
     When "item_1" is added to cart
-    Then I should see "item_1" in the cart
+    Then customer should see "item_1" in the cart

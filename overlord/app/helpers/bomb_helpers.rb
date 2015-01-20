@@ -18,4 +18,14 @@ module BombHelpers
     !(bomb.activated_time.nil?) &&
       (Time.now >= bomb.activated_time + bomb.detonation_time.seconds)
   end
+
+  def self.match_activation_code?(bomb, code)
+    bomb.activation_code == code["activation_code"] &&
+      !BombHelpers.active?(bomb)
+  end
+
+  def self.match_deactivation_code?(bomb, code)
+    bomb.deactivation_code == code["deactivation_code"] &&
+      BombHelpers.active?(bomb)
+  end
 end

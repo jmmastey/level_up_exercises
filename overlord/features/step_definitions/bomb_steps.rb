@@ -26,7 +26,6 @@ end
 
 Then(/^"(.*?)" should contain "(.*?)"$/) do |arg1, arg2|
   visit "/bomb"
-  find(:xpath, "//span[@class='"+num+"']").click
   arg2.each_char do |num|
     find(:xpath, "//span[@class='"+num+"']").click
   end

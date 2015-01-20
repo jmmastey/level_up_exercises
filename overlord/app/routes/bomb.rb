@@ -33,7 +33,9 @@ class Overlord < Sinatra::Application
 
   post '/bomb' do
     request_json = {}
-    request_json = JSON.parse(request.body.read) if request.body.try("string") != ""
+    if request.body.try("string") != ""
+      request_json = JSON.parse(request.body.read)
+    end
 
     bomb = Bomb.create(
       activation_code: request_json["activation_code"],
@@ -54,11 +56,10 @@ class Overlord < Sinatra::Application
   end
 
   post '/bomb/activate' do
-    request_json = {}
     request.body
     request_json = JSON.parse(request.body.read)
     bomb = Bomb.last
-    if bomb.activation_code == request_json["activation_code"] && !BombHelpers.active?(bomb)
+    if BombHelpers.match_activation_code?(bomb, request_json)
       bomb.status = :active
       bomb.activated_time = Time.now
       bomb.failed_attempts = 0
@@ -71,7 +72,7 @@ class Overlord < Sinatra::Application
     request_json = {}
     request_json = JSON.parse(request.body.read)
     bomb = Bomb.last
-    if bomb.deactivation_code == request_json["deactivation_code"] && BombHelpers.active?(bomb)
+    if BombHelpers.match_deactivation_code?(bomb, request_json)
       bomb.status = :inactive
       bomb.activated_time = nil
       bomb.failed_attempts = 0

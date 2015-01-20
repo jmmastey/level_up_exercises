@@ -31,15 +31,14 @@ class Overlord < Sinatra::Application
     haml :index
   end
 
-  use Rack::Session::Cookie, :key => 'rack.session',
-                           :domain => 'http://localhost:9292/',
-                           :path => '/',
-                           :expire_after => 2592000, # In seconds
-                           :secret => 'change_me'
+  use Rack::Session::Cookie, key: 'rack.session',
+                           domain: 'http://localhost:9292/',
+                           path: '/',
+                           expire_after: 2592000, # In seconds
+                           secret: 'change_me'
 
   run! if app_file == $PROGRAM_NAME
 end
-
 
 require_relative 'models/init'
 require_relative 'helpers/init'

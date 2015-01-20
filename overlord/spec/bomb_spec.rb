@@ -34,6 +34,15 @@ describe Overlord::Bomb do
         end
       end
 
+      context 'when supplied an invalid deactivation code' do
+        it 'returns an error msg' do
+          subject.process_code('1234')
+
+          subject.process_code('1000')
+          expect(subject.error).to eq("Oops! That was an invalid deactivation code.")
+        end
+      end
+
       context 'when supplied three invalid deactivation codes' do
         it 'explodes' do
           subject.process_code('1234')

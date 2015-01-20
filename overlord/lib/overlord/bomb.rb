@@ -15,6 +15,10 @@ class Overlord::Bomb
     @state == 'activated'
   end
 
+  def error
+    @error
+  end
+
   def exploded?
     @state == 'exploded'
   end
@@ -75,6 +79,7 @@ class Overlord::Bomb
       @state = 'deactivated'
     else
       @bad_deactivation_code_count += 1
+      @error = "Oops! That was an invalid deactivation code."
     end
 
     if @bad_deactivation_code_count > 2

@@ -69,6 +69,10 @@
         <p><%= session[:message] %></p>
       <% end %>
 
+      <% if @bomb.error != '' %>
+        <p><%= @bomb.error %></p>
+      <% end %>
+
   		<form method="post" action="/">
         <fieldset>
           <legend><%= title %></legend>

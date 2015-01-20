@@ -9,10 +9,35 @@ require 'faker'
 def main
   # generate_person_records 5
   # generate_brewery_records 1
-  # beer
+  generate_rating_records 1
   #rating
 
-  display_records "brewery"
+  display_records "rating"
+end
+
+def generate_rating_records count=100
+  count.times do
+    look = Faker::Number.digit
+    smell = Faker::Number.digit
+    taste = Faker::Number.digit
+    feel = Faker::Number.digit
+    overall = Faker::Number.digit
+    description = Faker::Lorem.sentence(3)
+
+    @conn.exec( "INSERT INTO rating (person_id, beer_id, look, smell, taste, feel, overall, description, modified_by)" \
+      "VALUES(1, 1, #{look}, #{smell}, #{taste}, #{feel}, #{overall}, '#{description}', 1)" )
+  end
+end
+
+def generate_beer_records count=100
+  count.times do
+    style = Faker::Hacker.noun
+    description = Faker::Lorem.sentence(3)
+    brewing_year = Faker::Date.between("2000-01-01", Date.today).year
+
+    @conn.exec( "INSERT INTO beer (brewery_id, style, description, brewing_year, modified_on, modified_by)" \
+      "VALUES(1, '#{style}', '#{description}', '#{brewing_year}', NOW(), 1)" )
+  end
 end
 
 def generate_brewery_records count=100
@@ -26,7 +51,7 @@ def generate_brewery_records count=100
     founding_year = Faker::Date.between("1500-01-01", Date.today).year
 
     @conn.exec( "INSERT INTO brewery(name, address, city, state, zip_code, description, founding_year, modified_on, modified_by) " \
-      "VALUES('#{name}', '#{address}', '#{city}', '#{state}', '#{zip_code}', '#{description}', '#{founding_year}', NOW(), 1)" );
+      "VALUES('#{name}', '#{address}', '#{city}', '#{state}', '#{zip_code}', '#{description}', '#{founding_year}', NOW(), 1)" )
   end
 end
 
@@ -38,7 +63,7 @@ def generate_person_records count=100
     description = Faker::Lorem.sentence(3)
 
     @conn.exec( "INSERT INTO person(name, email, description, birthday, modified_by) " \
-      "VALUES('#{name}', '#{email}', '#{description}', '#{birthday}', 1)" );
+      "VALUES('#{name}', '#{email}', '#{description}', '#{birthday}', 1)" )
   end
 end
 

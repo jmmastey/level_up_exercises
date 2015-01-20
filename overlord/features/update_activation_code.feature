@@ -18,3 +18,7 @@ Feature: updating a bomb's activation code
     And press "submit"
     Then I should see "Disarm the Bomb with the Deactivation Code"
 
+  Scenario: updating with an invalid activation code
+    When I fill in "activation_code" with "abcd"
+    And press "update_activation_code"
+    Then I should see "Error: Activation code can only contain digits"

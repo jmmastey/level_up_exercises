@@ -23,10 +23,14 @@ end
 
 post '/activation_code' do
   @bomb = Overlord::Bomb.new(session[:bomb])
-  @bomb.update_activation_code(params[:code])
+  if @bomb.update_activation_code(params[:code])
+    session[:message] = "Activation code updated."
+  else
+    session[:message] = "Error: Activation code can only contain digits."
+  end
+
   session[:bomb] = @bomb.initialize_session
 
-  session[:message] = "Activation code updated."
   erb :index
 end
 

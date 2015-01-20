@@ -30,7 +30,12 @@ class Overlord::Bomb
   end
 
   def update_activation_code(activation_code)
-    @activation_code = activation_code
+    if valid_code?(activation_code)
+      @activation_code = activation_code
+      true
+    else
+      false
+    end
   end
 
   def update_deactivation_code(deactivation_code)
@@ -59,5 +64,9 @@ class Overlord::Bomb
     if opts[:activation_code]
       @activation_code = opts[:activation_code]
     end
+  end
+
+  def valid_code?(code)
+    code =~ /^\d+$/
   end
 end

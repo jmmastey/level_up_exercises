@@ -61,6 +61,16 @@ describe Overlord::Bomb do
 
         expect(subject).not_to be_active
       end
+
+      it 'returns true' do
+        expect(subject.update_activation_code('4567')).to be true
+      end
+    end
+
+    context 'when supplied an invalid activation code' do
+      it 'returns false' do
+        expect(subject.update_activation_code('abcd')).to be false
+      end
     end
   end
 

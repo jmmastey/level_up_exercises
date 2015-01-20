@@ -10,15 +10,15 @@ enable :sessions
 register Sinatra::Sprockets
 
 class Hash
-  def self.to_ostructs(obj, memo={})
+  def self.to_ostructs(obj, memo = {})
     return obj unless obj.is_a? Hash
     os = memo[obj] = OpenStruct.new
-    obj.each { |k,v| os.send("#{k}=", memo[v] || to_ostructs(v, memo)) }
+    obj.each { |k, v| os.send("#{k}=", memo[v] || to_ostructs(v, memo)) }
     os
   end
 end
 
-set :database, {adapter: "sqlite3", database: "detonation_device"}
+set :database, adapter: "sqlite3", database: "detonation_device"
 set :views, "#{File.dirname(__FILE__)}/views"
 
 class Overlord < Sinatra::Application
@@ -31,6 +31,12 @@ class Overlord < Sinatra::Application
     haml :index
   end
 
+  use Rack::Session::Cookie, :key => 'rack.session',
+                           :domain => 'http://localhost:9292/',
+                           :path => '/',
+                           :expire_after => 2592000, # In seconds
+                           :secret => 'change_me'
+
   run! if app_file == $PROGRAM_NAME
 end
 
@@ -38,4 +44,3 @@ end
 require_relative 'models/init'
 require_relative 'helpers/init'
 require_relative 'routes/init'
-

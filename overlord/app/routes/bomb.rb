@@ -40,8 +40,8 @@ class Overlord < Sinatra::Application
       deactivation_code: request_json["deactivation_code"],
       detonation_time: request_json["detonation_time"])
 
-    request_json["wires"] ||= [ {color: "red", diffuse: true},
-                                {color: "green", diffuse: true}]
+    request_json["wires"] ||= [{ color: "red", diffuse: true },
+                                { color: "green", diffuse: true }]
 
     bomb.save!
 
@@ -58,7 +58,7 @@ class Overlord < Sinatra::Application
     request.body
     request_json = JSON.parse(request.body.read)
     bomb = Bomb.last
-    if bomb.activation_code == request_json["activation_code"] && !BombHelpers.is_active?(bomb)
+    if bomb.activation_code == request_json["activation_code"] && !BombHelpers.active?(bomb)
       bomb.status = :active
       bomb.activated_time = Time.now
       bomb.failed_attempts = 0
@@ -71,7 +71,7 @@ class Overlord < Sinatra::Application
     request_json = {}
     request_json = JSON.parse(request.body.read)
     bomb = Bomb.last
-    if bomb.deactivation_code == request_json["deactivation_code"] && BombHelpers.is_active?(bomb)
+    if bomb.deactivation_code == request_json["deactivation_code"] && BombHelpers.active?(bomb)
       bomb.status = :inactive
       bomb.activated_time = nil
       bomb.failed_attempts = 0

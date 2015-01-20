@@ -14,7 +14,15 @@ describe Cohort do
                 { date: "2015-01-02", cohort: "B", result: 0 },
                 { date: "2015-01-02", cohort: "A", result: 1 },
                 { date: "2015-01-02", cohort: "B", result: 0 },
-                { date: "2015-01-02", cohort: "B", result: 1 }]
+                { date: "2015-01-02", cohort: "B", result: 1 },
+                { date: "2015-01-03", cohort: "A", result: 1 },
+                { date: "2015-01-03", cohort: "A", result: 0 },
+                { date: "2015-01-03", cohort: "B", result: 0 },
+                { date: "2015-01-03", cohort: "B", result: 1 },
+                { date: "2015-01-03", cohort: "B", result: 1 },
+                { date: "2015-01-03", cohort: "A", result: 1 },
+                { date: "2015-01-03", cohort: "B", result: 1 },
+                { date: "2015-01-03", cohort: "B", result: 1 }]
     file.write(raw_data.map { |o| Hash[o.each_pair.to_a] }.to_json)
     file.rewind
   end

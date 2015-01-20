@@ -40,8 +40,6 @@ class Calculator
     experiment.cohorts.each do |cohort|
       conversions[cohort.name] = cohort.conversion_rate
     end
-    conversions.select{|cohort,conv| conv == conversions.values.max}.keys.first
+    conversions.select { |_cohort, conv| conv == conversions.values.max }.keys.first
   end
 end
-
-puts Calculator.new.winner

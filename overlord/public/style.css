@@ -18,10 +18,15 @@ html {
   background-size: cover;
 }
 
+.bomb_wires{
+  display: none;
+}
+
+
 /* Using box shadows to create 3D effects */
 
 .timer {
-  background:red;
+  background: white;
   font-style: italic;
   margin: 100px auto;
   width: 145px;

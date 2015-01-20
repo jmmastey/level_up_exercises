@@ -19,6 +19,18 @@ class Overlord < Sinatra::Application
     haml :bomb
   end
 
+  get '/bomb/diffuse' do
+    bomb = Bomb.last
+    wire = Wire.where(color: params["color"]).first
+    if wire.diffuse?
+      bomb.status = "inactive"
+    else
+      bomb.status = "explode"
+    end
+    bomb.save!
+    haml :bomb
+  end
+
   post '/bomb' do
     request_json = {}
     request_json = JSON.parse(request.body.read) if request.body.try("string") != ""
@@ -28,12 +40,16 @@ class Overlord < Sinatra::Application
       deactivation_code: request_json["deactivation_code"],
       detonation_time: request_json["detonation_time"])
 
-    if request_json["json"]
-      request_json["wires"].each do |wire|
-        Wire.create(color: wire["color"],
-                 diffuse: wire["diffuse"], bomb_id: wire["bomb_id"] )
-      end
+    request_json["wires"] ||= [ {color: "red", diffuse: true},
+                                {color: "green", diffuse: true}]
+
+    bomb.save!
+
+    request_json["wires"].each do |wire|
+      wire_string = bomb.wires.build(wire)
+      wire_string.save
     end
+
     bomb.to_json
   end
 

@@ -7,6 +7,7 @@
 %script{:src => "/bomb.js", :type => "text/javascript"}
 %h4 This is the interface
 
+
 #dialog-confirm{:style => "display: none;", :title => "Activate the bomb?"}
   %p
     %span.ui-icon.ui-icon-alert{:style => "float:left; margin:0 7px 20px 0;"}>
@@ -15,6 +16,12 @@
 
 .label
   %label Status
+
+#wires.bomb_wires
+  %a{:href => "http://localhost:9292/bomb/diffuse?color=green"}
+    %font{:color => "green"} Green
+  %a{:href => "http://localhost:9292/bomb/diffuse?color=red"}
+    %font{:color => "red"} Red
 
 %textarea{ readonly: true, id: "bomb_status",class: "bomb_inactive" }
   ="Inactive"
@@ -91,11 +98,23 @@
             if(returnObject.bomb_status == "active")
             {
               $('.timer').css("display", "block");
+              $(".bomb_wires").css("display", "block");
               $("#bomb_status").removeClass("bomb_inactive");
               $("#bomb_status").removeClass("bomb_explode");
               $("#bomb_status").addClass("bomb_active");
               $("#bomb_status").val("Active");
               $('.timer').html(((returnObject.detonation_time) - start) + " Seconds ");
+              var html = ""
+              var str = ""
+              var btn_str = ""
+              returnObject.wires.forEach(function(wire) {
+                for (var item in wire) {
+                  str = "<button style='background-color:lightgreen'>Green</button>"
+                  html.concat(str);
+                }
+              });
+              $(".bomb_wires").append(html);
+
               start += 1
             }
             else if(returnObject.bomb_status == "inactive")
@@ -111,7 +130,6 @@
               $("#bomb_status").removeClass("bomb_inactive");
               $("#bomb_status").addClass("bomb_explode");
               $("#bomb_status").val("Exploded");
-              $('.timer').html(((returnObject.detonation_time) - start) + " Seconds ");
               start += 1
             }
           },

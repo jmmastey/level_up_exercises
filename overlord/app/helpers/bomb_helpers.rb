@@ -7,8 +7,10 @@ module BombHelpers
     return {bomb_status: nil}.to_json if bomb.nil?
     if self.bomb_exploded? bomb
       bomb.status = :explode
+      bomb.save!
     end
-    {bomb_status: bomb.status, detonation_time: bomb.detonation_time }.to_json
+
+    {bomb_status: bomb.status, detonation_time: bomb.detonation_time, wires: bomb.wires }.to_json
   end
 
   def self.bomb_exploded?(bomb)

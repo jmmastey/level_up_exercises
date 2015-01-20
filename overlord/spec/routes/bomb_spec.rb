@@ -31,6 +31,7 @@ describe 'bomb' do
   context "activating the bomb" do
     before (:each) do
       Bomb.destroy_all
+      Wire.destroy_all
       Bomb.create(
       activation_code: "2345")
     end
@@ -65,6 +66,7 @@ describe 'bomb' do
   context "deactivating the live bomb" do
     before do
       Bomb.destroy_all
+      Wire.destroy_all
       Bomb.create(
       deactivation_code: "0000",
       status: "active")
@@ -86,6 +88,30 @@ describe 'bomb' do
       post '/bomb/deactivate', {deactivation_code: '0000'}.to_json
       json = JSON.parse(last_response.body)
       expect(json["bomb_status"]).to eq ("inactive")
+    end
+
+    it "explodes if wrong wire is cut" do
+      post '/bomb', valid_bomb
+      post '/bomb/activate', {activation_code: '12342'}.to_json
+      json = JSON.parse(last_response.body)
+      expect(json["bomb_status"]).to eq ("active")
+
+      get '/bomb/diffuse?color=red'
+
+      bomb = Bomb.last
+      expect(bomb.status).to eq ("explode")
+    end
+
+    it "deactivates if wrong wire is cut" do
+      post '/bomb', valid_bomb
+      post '/bomb/activate', {activation_code: '12342'}.to_json
+      json = JSON.parse(last_response.body)
+      expect(json["bomb_status"]).to eq ("active")
+
+      get '/bomb/diffuse?color=green'
+
+      bomb = Bomb.last
+      expect(bomb.status).to eq ("inactive")
     end
   end
 

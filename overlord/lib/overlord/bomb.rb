@@ -65,10 +65,13 @@ class Overlord::Bomb
   private
 
   def activate(code)
-    return unless code == @activation_code
     return if @state == 'exploded'
 
-    @state = 'activated'
+    if code == @activation_code
+      @state = 'activated'
+    else
+      @error = "Oops! That was an invalid activation code."
+    end
   end
 
   def deactivate(code)

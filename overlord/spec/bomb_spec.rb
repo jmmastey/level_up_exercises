@@ -22,6 +22,14 @@ describe Overlord::Bomb do
           expect(subject).to be_active
         end
       end
+
+      context 'when supplied an invalid activation code' do
+        it 'returns an error msg' do
+          subject.process_code('1000')
+
+          expect(subject.error).to eq("Oops! That was an invalid activation code.")
+        end
+      end
     end
 
     context 'when the bomb is active' do

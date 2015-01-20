@@ -19,3 +19,8 @@ Feature: creating a default bomb
     And press "submit"
     And I go to the home page
     Then I should see "Disarm the Bomb with the Deactivation Code"
+
+  Scenario: on receipt of an invalid deactivation code
+    When I fill in "code" with "9999"
+    And press "submit"
+    Then I should see "Oops! That was an invalid activation code."

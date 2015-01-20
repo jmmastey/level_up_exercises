@@ -20,7 +20,6 @@ Feature: creating a default bomb
     And press "submit"
     Then I should see "Oops! That was an invalid deactivation code."
 
-
   Scenario: three bad attempts to deactivate and the bomb explodes
     Given the bomb is active
     And I go to the home page

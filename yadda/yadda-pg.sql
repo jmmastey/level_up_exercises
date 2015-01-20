@@ -1,7 +1,7 @@
 -- sql -- for PostgreSQL
 -- Prepared by Paul Haddad
 
--- User Table
+-- Users Table
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id            serial PRIMARY KEY,
@@ -23,7 +23,7 @@ CREATE TABLE users (
 );
 
 
--- Brewery Table
+-- Breweries Table
 DROP TABLE IF EXISTS breweries CASCADE;
 CREATE TABLE breweries (
   id            serial PRIMARY KEY,
@@ -49,7 +49,7 @@ CREATE TABLE beer_styles_lookup (
 );
 
 
--- Beer Table
+-- Beers Table
 DROP TABLE IF EXISTS beers CASCADE;
 CREATE TABLE beers (
   id            serial PRIMARY KEY,
@@ -65,7 +65,7 @@ CREATE TABLE beers (
 );
 
 
--- Rating Table
+-- Ratings Table
 DROP TABLE IF EXISTS ratings CASCADE;
 CREATE TABLE ratings (
   id            serial PRIMARY KEY,

@@ -6,6 +6,9 @@ require 'pry'
 require 'faker'
 require './dinosaur.rb'
 require './dino_dex.rb'
+require './dino_csv.rb'
+
+Dir["./spec/support/**/*.rb"].sort.each { |f| require f}
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

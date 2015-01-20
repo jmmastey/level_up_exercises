@@ -7,11 +7,14 @@ require 'faker'
                    dbname: "yadda")
 
 def main
-  # generate_person_records 5
-  # generate_brewery_records 1
-  generate_rating_records 1
-  #rating
+  generate_person_records 1
+  generate_brewery_records 5
+  generate_beer_records 5
+  generate_rating_records 3
 
+  display_records "person"
+  display_records "brewery"
+  display_records "beer"
   display_records "rating"
 end
 

@@ -34,4 +34,14 @@ class Calculator
   def chi_square
     chi_squared_for_experiments.values.inject(:+)
   end
+
+  def winner
+    conversions = {}
+    experiment.cohorts.each do |cohort|
+      conversions[cohort.name] = cohort.conversion_rate
+    end
+    conversions.select{|cohort,conv| conv == conversions.values.max}.keys.first
+  end
 end
+
+puts Calculator.new.winner

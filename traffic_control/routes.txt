@@ -1,0 +1,17 @@
+                   Prefix Verb URI Pattern                                                       Controller#Action
+           search_flights GET  /flights/search(.:format)                                         flights#search
+        flight_passengers GET  /flights/:flight_id/passengers(.:format)                          passengers#index
+                  flights GET  /flights(.:format)                                                flights#index
+                   flight GET  /flights/:id(.:format)                                            flights#show
+           reroute_planes GET  /planes/reroute(.:format)                                         planes#reroute
+  plane_trip_refuel_stops GET  /planes/:plane_id/trips/:trip_id/refuel_stops(.:format)           trips#refuel_stops
+              plane_trips GET  /planes/:plane_id/trips(.:format)                                 trips#index
+                   planes GET  /planes(.:format)                                                 planes#index
+                    plane GET  /planes/:id(.:format)                                             planes#show
+passenger_itenary_flights GET  /passengers/:passenger_id/itenaries/:itenary_id/flights(.:format) flights#index
+      passenger_itenaries GET  /passengers/:passenger_id/itenaries(.:format)                     itenaries#index
+       passenger_bookings POST /passengers/:passenger_id/bookings(.:format)                      bookings#create
+               passengers GET  /passengers(.:format)                                             passengers#index
+                passenger GET  /passengers/:id(.:format)                                         passengers#show
+             destinations GET  /destinations(.:format)                                           destinations#index
+              destination GET  /destinations/:id(.:format)                                       destinations#show {:id=>/[A-Z]{3}/}

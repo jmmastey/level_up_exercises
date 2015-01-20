@@ -26,7 +26,9 @@ post '/' do
 
   if @bomb.exploded?
     session[:message] = 'Oops! The bomb has exploded!'
-    erb :index
+
+    # TODO: confirm necessity of `return` here
+    return erb :index
   end
 
   session[:bomb] = @bomb.initialize_session

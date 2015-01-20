@@ -6,21 +6,16 @@ Feature: creating a default bomb
     Given I go to the home page
 
   Scenario: visiting the web app
-    When I go to the home page
     Then I should see "Your bomb is ready"
 
   Scenario: the bomb can be activated
-    When I fill in "code" with "1234"
-    And press "submit"
+    When I activate the bomb
     Then I should see "Disarm the Bomb with the Deactivation Code"
 
   Scenario: the bomb should retain its state
-    When I fill in "code" with "1234"
-    And press "submit"
-    And I go to the home page
+    When I activate the bomb
     Then I should see "Disarm the Bomb with the Deactivation Code"
 
   Scenario: on receipt of an invalid deactivation code
-    When I fill in "code" with "9999"
-    And press "submit"
+    When I supply an invalid activation code
     Then I should see "Oops! That was an invalid activation code."

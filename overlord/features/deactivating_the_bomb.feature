@@ -6,29 +6,16 @@ Feature: creating a default bomb
     Given I go to the home page
 
   Scenario: the bomb can be deactivated
-    Given the bomb is active
-    When I fill in "code" with "0000"
-    And press "submit"
+    Given I activate the bomb
+    When I deactivate the bomb
     Then I should see "Arm the Bomb with the Activation Code"
 
   Scenario: on receipt of an invalid deactivation code
-    Given the bomb is active
-    And I go to the home page
-    When I fill in "code" with "1234"
-    And press "submit"
-    When I fill in "code" with "9999"
-    And press "submit"
+    Given I activate the bomb
+    When I supply an invalid deactivation code
     Then I should see "Oops! That was an invalid deactivation code."
 
   Scenario: three bad attempts to deactivate and the bomb explodes
-    Given the bomb is active
-    And I go to the home page
-    When I fill in "code" with "1234"
-    And press "submit"
-    When I fill in "code" with "9999"
-    And press "submit"
-    And I fill in "code" with "9999"
-    And press "submit"
-    And I fill in "code" with "9999"
-    And press "submit"
+    Given I activate the bomb
+    And I supply an invalid deactivation code three times
     Then I should see "Oops! The bomb has exploded!"

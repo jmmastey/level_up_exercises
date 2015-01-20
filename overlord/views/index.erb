@@ -69,7 +69,7 @@
         <p><%= session[:message] %></p>
       <% end %>
 
-      <% if @bomb.error != '' %>
+      <% if @bomb.error.to_s != '' %>
         <p><%= @bomb.error %></p>
       <% end %>
 

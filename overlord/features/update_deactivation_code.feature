@@ -6,18 +6,15 @@ Feature: updating a bomb's deactivation code
     Given I go to the home page
 
   Scenario: updating with a valid deactivation code
-    When I fill in "deactivation_code" with "4567"
-    And press "update_deactivation_code"
-    Then I should see "Arm the Bomb with the Activation Code"
+    When I update the bomb's deactivation code
+    Then I should see "Deactivation code updated"
 
   Scenario: updated deactivation code should be sticky
-    Given the bombs deactivation code is updated
-    And I go to the home page
-    And I fill in "code" with "0007"
-    And press "submit"
+    Given I activate the bomb
+    And I update the bomb's deactivation code
+    And I deactivate the bomb with the new deactivation code
     Then I should see "Arm the Bomb with the Activation Code"
 
   Scenario: updating with an invalid deactivation code
-    When I fill in "deactivation_code" with "abcd"
-    And press "update_deactivation_code"
+    When I update the bomb's deactivation code with an invalid value
     Then I should see "Error: Deactivation code can only contain digits"

@@ -11,13 +11,15 @@ describe Dinosaur do
                     :description => Faker::Lorem.word
                 } }
 
+  describe "#attr_accessor" do
+   [:name, :period, :continent, :diet, :weight, :ambulation, :description].each do |attribute|
+     it { expect(dinosaur).to have_attr_accessor(attribute) }
+    end
+  end
+
   describe "#initialize" do
     it "initializes a new object" do
       expect(dinosaur).to be_a(Dinosaur)
-    end
-
-   [:name, :period, :continent, :diet, :weight, :ambulation, :description].each do |attribute|
-     it { expect(dinosaur).to have_attr_accessor(attribute) }
     end
   end
 

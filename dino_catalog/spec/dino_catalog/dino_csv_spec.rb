@@ -4,6 +4,10 @@ describe DinoCsv do
   let(:files) { ["./african_dinosaur_export.csv", "./dinodex.csv"] }
   let(:dino_csv) { DinoCsv.new(files) }
 
+  describe "#attr_accessor" do
+    it { expect(dino_csv).to have_attr_accessor(:results) }
+  end
+
   describe "#initialize" do
     it "initializes a new object" do
       expect(dino_csv).to be_a(DinoCsv)

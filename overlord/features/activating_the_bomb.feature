@@ -14,12 +14,6 @@ Feature: creating a default bomb
     And press "submit"
     Then I should see "Disarm the Bomb with the Deactivation Code"
 
-  Scenario: the bomb can be deactivated
-    Given the bomb is active
-    When I fill in "code" with "0000"
-    And press "submit"
-    Then I should see "Arm the Bomb with the Activation Code"
-
   Scenario: the bomb should retain its state
     When I fill in "code" with "1234"
     And press "submit"

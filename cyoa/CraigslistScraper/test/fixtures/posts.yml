@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  heading: MyString
+  body: MyText
+  price: 9.99
+  neighborhood: MyString
+  external_url: MyString
+  timestamp: MyString
+
+two:
+  heading: MyString
+  body: MyText
+  price: 9.99
+  neighborhood: MyString
+  external_url: MyString
+  timestamp: MyString

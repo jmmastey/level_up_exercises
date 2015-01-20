@@ -16,36 +16,8 @@ describe Dinosaur do
       expect(dinosaur).to be_a(Dinosaur)
     end
 
-    context "when options are passed" do
-      [:name, :period, :diet, :weight, :ambulation, :description].each do |attribute|
-        it "sets the #{attribute}" do
-          expect(dinosaur.send(attribute)).to_not be_nil
-        end
-      end
-    end
-
-    context "when options are not passed" do
-      let(:options) {{}}
-      [:name, :period, :diet, :weight, :ambulation, :description].each do |attribute|
-        it "sets the #{attribute} to nil" do
-          expect(dinosaur.send(attribute)).to be_nil
-        end
-      end
-    end
-  end
-
-  describe "#lower_case" do
-    context "when an attribute is not nil" do
-      it "switches the case to lower" do
-        upper_case_attribute = 'HELLO MY NAME IS MAGIC MIKE'
-        expect(dinosaur.lower_case(upper_case_attribute)).to_not eq(upper_case_attribute)
-      end
-    end
-    context "when an attribute is nil" do
-      it "returns false" do
-        nil_attribute = nil
-        expect(dinosaur.lower_case(nil_attribute)).to be_falsey
-      end
+   [:name, :period, :continent, :diet, :weight, :ambulation, :description].each do |attribute|
+     it { expect(dinosaur).to have_attr_accessor(attribute) }
     end
   end
 

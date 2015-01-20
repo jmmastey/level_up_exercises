@@ -15,6 +15,8 @@ end
 
 post '/' do
   @bomb = Overlord::Bomb.new(session[:bomb])
+  session[:message] = ''
+
   @bomb.process_code(params[:code])
   session[:bomb] = @bomb.initialize_session
 
@@ -23,7 +25,9 @@ end
 
 post '/activation_code' do
   @bomb = Overlord::Bomb.new(session[:bomb])
-  if @bomb.update_activation_code(params[:code])
+  session[:message] = ''
+
+  if @bomb.update_activation_code(params[:activation_code])
     session[:message] = "Activation code updated."
   else
     session[:message] = "Error: Activation code can only contain digits."
@@ -36,9 +40,15 @@ end
 
 post '/deactivation_code' do
   @bomb = Overlord::Bomb.new(session[:bomb])
-  @bomb.update_deactivation_code(params[:code])
+  session[:message] = ''
+
+  if @bomb.update_deactivation_code(params[:deactivation_code])
+    session[:message] = "Deactivation code updated"
+  else
+    session[:message] = "Error: Deactivation code can only contain digits."
+  end
+
   session[:bomb] = @bomb.initialize_session
 
-  session[:message] = "Deactivation code updated."
   erb :index
 end

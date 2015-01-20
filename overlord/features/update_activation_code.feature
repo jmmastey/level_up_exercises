@@ -11,8 +11,7 @@ Feature: updating a bomb's activation code
     Then I should see "Deactivation code updated"
 
   Scenario: updated activation code should be sticky
-    When I fill in "activation_code" with "4567"
-    And press "update_activation_code"
+    When the bombs activation code is updated
     And I go to the home page
     And I fill in "code" with "1234"
     And press "submit"

@@ -39,7 +39,12 @@ class Overlord::Bomb
   end
 
   def update_deactivation_code(deactivation_code)
-    @deactivation_code = deactivation_code
+    if valid_code?(deactivation_code)
+      @deactivation_code = deactivation_code
+      true
+    else
+      false
+    end
   end
 
   private

@@ -90,5 +90,11 @@ describe Overlord::Bomb do
         expect(subject).not_to be_active
       end
     end
+
+    context 'when supplied an invalid deactivation code' do
+      it 'returns false' do
+        expect(subject.update_deactivation_code('abcd')).to be false
+      end
+    end
   end
 end

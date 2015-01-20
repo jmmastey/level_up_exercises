@@ -1,8 +1,10 @@
 class Overlord::Bomb
   def initialize(opts = {})
-    @state             = 'deactivated'
-    @activation_code   = '1234'
-    @deactivation_code = '0000'
+    @state                       = 'deactivated'
+    @activation_code             = '1234'
+    @deactivation_code           = '0000'
+    @exploded                    = false
+    @bad_deactivation_code_count = 0
 
     if opts && opts.size > 0
       initialize_from_session(opts)
@@ -13,23 +15,30 @@ class Overlord::Bomb
     @state == 'activated'
   end
 
+  def exploded?
+    @state == 'exploded'
+  end
+
   def initialize_session
     {
-      :state             => @state,
-      :activation_code   => @activation_code,
-      :deactivation_code => @deactivation_code
+      :activation_code             => @activation_code,
+      :bad_deactivation_code_count => @bad_deactivation_code_count,
+      :deactivation_code           => @deactivation_code,
+      :state                       => @state
     }
   end
 
   def process_code(code='')
-    if @state == 'deactivated' && code == @activation_code
+    if @state == 'deactivated'
       activate(code)
-    elsif @state == 'activated' && code == @deactivation_code
+    elsif @state == 'activated'
       deactivate(code)
     end
   end
 
   def update_activation_code(activation_code)
+    return if @state == 'exploded'
+
     if valid_code?(activation_code)
       @activation_code = activation_code
       true
@@ -39,6 +48,8 @@ class Overlord::Bomb
   end
 
   def update_deactivation_code(deactivation_code)
+    return if @state == 'exploded'
+
     if valid_code?(deactivation_code)
       @deactivation_code = deactivation_code
       true
@@ -50,15 +61,25 @@ class Overlord::Bomb
   private
 
   def activate(code)
-    return if @state == 'activated'
+    return unless code == @activation_code
+    return if @state == 'exploded'
 
     @state = 'activated'
   end
 
   def deactivate(code)
-    return if @state == 'deactivated'
+    return if @state == 'exploded'
 
-    @state = 'deactivated'
+    if code == @deactivation_code
+      @bad_deactivation_code_count = 0
+      @state = 'deactivated'
+    else
+      @bad_deactivation_code_count += 1
+    end
+
+    if @bad_deactivation_code_count > 2
+      @state = 'exploded'
+    end
   end
 
   def initialize_from_session(opts)
@@ -68,6 +89,14 @@ class Overlord::Bomb
 
     if opts[:activation_code]
       @activation_code = opts[:activation_code]
+    end
+
+    if opts[:deactivation_code]
+      @deactivation_code = opts[:deactivation_code]
+    end
+
+    if opts[:bad_deactivation_code_count]
+      @bad_deactivation_code_count = opts[:bad_deactivation_code_count]
     end
   end
 

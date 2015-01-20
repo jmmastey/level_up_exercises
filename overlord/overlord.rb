@@ -10,6 +10,11 @@ enable :logging
 before do
   @bomb = Overlord::Bomb.new(session[:bomb])
   session[:message] = ''
+
+  if @bomb.exploded?
+    session[:message] = 'Oops! The bomb has exploded!'
+    erb :index
+  end
 end
 
 get '/' do
@@ -18,6 +23,12 @@ end
 
 post '/' do
   @bomb.process_code(params[:code])
+
+  if @bomb.exploded?
+    session[:message] = 'Oops! The bomb has exploded!'
+    erb :index
+  end
+
   session[:bomb] = @bomb.initialize_session
 
   erb :index

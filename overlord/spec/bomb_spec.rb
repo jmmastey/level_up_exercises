@@ -30,8 +30,19 @@ describe Overlord::Bomb do
           subject.process_code('1234')
           subject.process_code('0000')
 
-
           expect(subject).not_to be_active
+        end
+      end
+
+      context 'when supplied three invalid deactivation codes' do
+        it 'explodes' do
+          subject.process_code('1234')
+
+          subject.process_code('1000')
+          subject.process_code('1000')
+          subject.process_code('1000')
+
+          expect(subject).to be_exploded
         end
       end
     end

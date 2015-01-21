@@ -4,17 +4,20 @@ require 'table_print'
 require 'csv'
 require 'json'
 require './dinosaur.rb'
+require './dino_csv.rb'
 
 class DinoDex
 
   attr_accessor :dinosaurs
 
-  def initialize
-    parse_csv
+  DEFAULT_FILES = ['./dinodex.csv', './african_dinosaur_export.csv']
+
+  def initialize(files = [])
+    load_csv_files(files)
     print_to_console(@dinosaurs)
   end
 
-  def dinosaurs
+  def all_dinosaurs
     print_to_console(@dinosaurs)
   end
 
@@ -32,11 +35,15 @@ class DinoDex
       end
       result << @dinosaurs.select { |dino| dino[k].send(operator, value) }
     end
-    result.flatten
+    tp result.flatten
   end
 
-  def dinosaur_details(dinosaur)
-    print_to_console(dinosaur = self.search(:name => dinosaur))
+  def load_csv_files(files = [])
+    if files.empty?
+      @dinosaurs = DinoCsv.new(DEFAULT_FILES).results.flatten
+    else
+      @dinosaurs = DinoCsv.new(files).results.flatten
+    end
   end
 
   def export_to_json
@@ -49,30 +56,11 @@ class DinoDex
 
   private
 
-
-    def parse_csv
-      @dinosaurs = []
-      ['./dinodex.csv', './african_dinosaur_export.csv'].each do |csv|
-        CSV.foreach(csv, :headers => true, :header_converters => :symbol) do |obj|
-         dino = Dinosaur.new(:name => obj[:name] || obj[:genus],
-                             :period => obj[:period],
-                             :continent => obj[:continent],
-                             :diet => obj[:diet] || (obj[:carnivore] == 'yes' ? 'Carnivore' : 'Non-carnivore'),
-                             :weight => (obj[:weight_in_lbs] || obj[:weight]).to_i,
-                             :ambulation => obj[:walking],
-                             :description => obj[:description])
-        @dinosaurs << dino.to_hash
-        end
-      end
-      if @dinosaurs.empty?
-        puts "Your have no dinosaurs! Oh noes!"
-      else
-        puts "Your dinosaurs are loaded go and search big boy!"
-      end
-    end
-
     def print_to_console(dinosaurs)
       tp dinosaurs
     end
 
 end
+
+
+dino_catalog = DinoDex.new

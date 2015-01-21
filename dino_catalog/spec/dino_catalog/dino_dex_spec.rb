@@ -1,7 +1,6 @@
 require './spec/spec_helper.rb'
 
 describe DinoDex do
-
   let(:dino_dex) { DinoDex.new }
 
   describe "#initialize" do
@@ -9,11 +8,7 @@ describe DinoDex do
       expect(dino_dex).to be_a(DinoDex)
     end
 
-    it "calls #parse_csv upon initialization" do
-      dino_dex = DinoDex.allocate
-      expect(dino_dex).to receive(:parse_csv)
-      dino_dex.send(:initialize)
-    end
+    it "calls #load_csv_files upon initialization"
   end
 
   describe "#search" do
@@ -49,10 +44,12 @@ describe DinoDex do
         dinos = dino_dex.search(:weight => '+100000')
         expect(dinos.detect { |d| d[:weight] > 100000 } ).to_not be_nil
       end
+
       it "returns dinosaurs with weight less than amount" do
         dinos = dino_dex.search(:weight => '-100000')
         expect(dinos.detect { |d| d[:weight] < 100000 } ).to_not be_nil
       end
+
       context "when searching for a dinosaur weight equal to maount" do
         it "when it yields a result it is not nil" do
           dinos = dino_dex.search(:weight => '10400')
@@ -63,6 +60,15 @@ describe DinoDex do
           expect(dinos.detect { |d| d[:weight] == 23434 } ).to be_nil
         end
       end
+    end
+  end
+
+  describe "#load_csv_files" do
+    context "when files.empty?" do
+      it "uses the default files"
+    end
+    context "when not files.empty?" do
+      it "uses the file inserted"
     end
   end
 

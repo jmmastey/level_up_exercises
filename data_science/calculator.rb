@@ -88,7 +88,7 @@ class Calculator
     p_value.max >= SIGNIFICANT_PERCENTAGE
   end
 
-private
+  private
 
   def percentages
     P_VALUE_TABLE.keys

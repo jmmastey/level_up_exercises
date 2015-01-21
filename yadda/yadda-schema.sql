@@ -3,50 +3,56 @@ CREATE DATABASE yadda;
 
 \connect yadda;
 
+--TODO cascading/restricting deletes
+
 CREATE TABLE person (
   person_id       serial PRIMARY KEY,
   name            varchar(50) NOT NULL,
   email           varchar(100) NOT NULL,
   description     text,
   birthday        date NOT NULL,
-  modified_on     timestamp DEFAULT current_timestamp,
-  modified_by     integer NOT NULL,
-  CONSTRAINT modified_by_key FOREIGN KEY (modified_by)
+  updated_at      timestamp with time zone,
+  updated_by      integer NOT NULL,
+  CONSTRAINT updated_by_key FOREIGN KEY (updated_by)
     REFERENCES person (person_id)
 );
-COMMENT ON TABLE person IS 'person information';
+COMMENT ON TABLE person IS 'Person information';
 
+
+--name
 CREATE TABLE brewery (
   brewery_id      serial PRIMARY KEY,
-  name            varchar(50) NOT NULL,
+  name            varchar(250) NOT NULL,
   address         varchar(100),
   city            varchar(50),
-  state           varchar(2),
-  zip_code        integer,
+  state           char(2),
+  postal_code     varchar(20),
   description     text,
   founding_year   integer,
-  modified_on     timestamp DEFAULT current_timestamp,
-  modified_by     integer NOT NULL,
-  CONSTRAINT modified_by_key FOREIGN KEY (modified_by)
+  updated_at      timestamp with time zone,
+  updated_by      integer NOT NULL,
+  CONSTRAINT updated_by_key FOREIGN KEY (updated_by)
     REFERENCES person (person_id)
 );
 COMMENT ON TABLE brewery IS 'Brewery information';
 
+--style becomes it's own table
 CREATE TABLE beer (
   beer_id         serial PRIMARY KEY,
   brewery_id      integer NOT NULL,
   style           varchar(25),
   description     text,
   brewing_year    integer,
-  modified_on     timestamp DEFAULT current_timestamp,
-  modified_by     integer NOT NULL,
-  CONSTRAINT modified_by_key FOREIGN KEY (modified_by)
+  updated_at      timestamp with time zone,
+  updated_by      integer NOT NULL,
+  CONSTRAINT updated_by_key FOREIGN KEY (updated_by)
     REFERENCES person (person_id),
   CONSTRAINT brewery_id_key FOREIGN KEY (brewery_id)
     REFERENCES brewery (brewery_id)
 );
 COMMENT ON TABLE beer IS 'Beer information, many beers to a brewery';
 
+--overall calculate? see indexing
 CREATE TABLE rating (
   rating_id       serial PRIMARY KEY,
   person_id       integer NOT NULL,
@@ -57,9 +63,9 @@ CREATE TABLE rating (
   feel            numeric(3),
   overall         numeric(3) NOT NULL,
   description     text,
-  modified_on     timestamp DEFAULT current_timestamp,
-  modified_by     integer REFERENCES person(person_id),
-  CONSTRAINT modified_by_key FOREIGN KEY (modified_by)
+  updated_at      timestamp with time zone,
+  updated_by      integer REFERENCES person(person_id),
+  CONSTRAINT updated_by_key FOREIGN KEY (updated_by)
     REFERENCES person (person_id),
   CONSTRAINT person_id_key FOREIGN KEY (person_id)
     REFERENCES person (person_id),

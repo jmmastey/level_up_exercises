@@ -40,8 +40,8 @@ def generate_beer_records count=100
       style: "'#{Faker::Hacker.noun}'",
       description: "'#{Faker::Lorem.sentence(3)}'",
       brewing_year: "'#{Faker::Date.between("2000-01-01", Date.today).year}'",
-      modified_on: "NOW()",
-      modified_by: 1
+      updated_on: "NOW()",
+      updated_by: 1
     }
   end
 end
@@ -56,8 +56,8 @@ def generate_brewery_records count=100
       zip_code: "'#{Faker::Number.number(5)}'",
       description: "'#{Faker::Lorem.sentence(3)}'",
       founding_year: "'#{Faker::Date.between("1500-01-01", Date.today).year}'",
-      modified_on: "NOW()",
-      modified_by: 1
+      updated_on: "NOW()",
+      updated_by: 1
     }
   end
 end
@@ -69,7 +69,7 @@ def generate_person_records count=100
       email: "'#{Faker::Internet.email}'",
       birthday: "'#{Faker::Date.between("1900-01-01", Date.today)}'",
       description: "'#{Faker::Lorem.sentence(3)}'",
-      modified_by: 1
+      updated_by: 1
     }
   end
 end

@@ -2,7 +2,6 @@ require 'csv'
 require './dinosaur.rb'
 
 class DinoCsv
-
   attr_accessor :results
 
   CONTINENTS = ['ASIA', 'AFRICA', 'NORTH AMERICA', 'SOUTH AMERICA', 'ANTARCTICA', 'EUROPE', 'AUSTRALIA']
@@ -11,23 +10,23 @@ class DinoCsv
     @file_paths = file_paths
     @results = []
     @file_paths.each do |file|
-     @results <<  parse(file)
+      @results <<  parse(file)
     end
   end
 
   def parse(file)
     parsed_data = []
     raise "The file = #{file} could not be located" unless file_exists?(file)
-    CSV.foreach(file, :headers => true, :header_converters => :symbol) do |obj|
-     data = Dinosaur.new(:name => process_csv_data(obj.to_h.assoc(:name) || obj.to_h.assoc(:genus)),
-                         :period => process_csv_data(obj.to_h.assoc(:period)),
-                         :continent => process_csv_data(obj.to_h.assoc(:continent)) || assign_continent_from_file_name(file),
-                         :diet => process_csv_data(obj.to_h.assoc(:diet) || obj.to_h.assoc(:carnivore)),
-                         :weight => process_csv_data(obj.to_h.assoc(:weight_in_lbs) || obj.to_h.assoc(:weight)),
-                         :ambulation => process_csv_data(obj.to_h.assoc(:walking)),
-                         :description => process_csv_data(obj.to_h.assoc(:description)))
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |obj|
+      data = Dinosaur.new(name: process_csv_data(obj.to_h.assoc(:name) || obj.to_h.assoc(:genus)),
+                          period: process_csv_data(obj.to_h.assoc(:period)),
+                          continent: process_csv_data(obj.to_h.assoc(:continent)) || assign_continent_from_file_name(file),
+                          diet: process_csv_data(obj.to_h.assoc(:diet) || obj.to_h.assoc(:carnivore)),
+                          weight: process_csv_data(obj.to_h.assoc(:weight_in_lbs) || obj.to_h.assoc(:weight)),
+                          ambulation: process_csv_data(obj.to_h.assoc(:walking)),
+                          description: process_csv_data(obj.to_h.assoc(:description)))
 
-     parsed_data << data.to_hash
+      parsed_data << data.to_hash
     end
     parsed_data
   end
@@ -59,7 +58,6 @@ class DinoCsv
     end
     FormatCsvData.new(result[0].to_s).to_lowercase unless result.empty?
   end
-
 end
 
 class FormatCsvData
@@ -81,7 +79,6 @@ class FormatCsvData
   end
 
   def is_i?
-    Float(@data) != nil rescue false
+    !Float(@data).nil? rescue false
   end
-
 end

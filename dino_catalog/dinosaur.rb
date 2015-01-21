@@ -1,5 +1,5 @@
 class Dinosaur
-  attr_accessor  :name, :period, :continent, :diet, :weight, :ambulation, :description
+  attr_accessor :name, :period, :continent, :diet, :weight, :ambulation, :description
 
   def initialize(options = {})
     @name = options[:name]
@@ -12,9 +12,8 @@ class Dinosaur
   end
 
   def to_hash
-    Hash[*instance_variables.map { |v|
+    Hash[*instance_variables.map do |v|
       [v.to_s.delete("@").to_sym, instance_variable_get(v)]
-    }.flatten]
+    end.flatten]
   end
-
 end

@@ -15,22 +15,22 @@ describe DinoCsv do
   end
 
   describe "#parse" do
-   context "when the file is located" do
-     let(:file) { ["./african_dinosaur_export.csv", "./dinodex.csv"].sample }
-     let(:dino_csv_parse) { dino_csv.parse(file) }
-     it "returns an array" do
-       expect(dino_csv_parse).to be_a(Array)
-     end
-     it "returns an non empty array" do
-       expect(dino_csv_parse).to_not be_empty
-     end
-   end
-   context "wen the file can not be located" do
-     let(:file) { ["./to_my_alient.csv", "./to_my_monkey.csv"] }
-     it "raises an error" do
-       expect{ dino_csv.parse(file) }.to raise_error
-     end
-   end
+    context "when the file is located" do
+      let(:file) { ["./african_dinosaur_export.csv", "./dinodex.csv"].sample }
+      let(:dino_csv_parse) { dino_csv.parse(file) }
+      it "returns an array" do
+        expect(dino_csv_parse).to be_a(Array)
+      end
+      it "returns an non empty array" do
+        expect(dino_csv_parse).to_not be_empty
+      end
+    end
+    context "wen the file can not be located" do
+      let(:file) { ["./to_my_alient.csv", "./to_my_monkey.csv"] }
+      it "raises an error" do
+        expect { dino_csv.parse(file) }.to raise_error
+      end
+    end
   end
 
   describe "#process_csv_data" do
@@ -75,7 +75,7 @@ describe DinoCsv do
           let(:obj) { [:carnivore, nil] }
           it "returns nil" do
             expect(dino_csv_process_csv_data).to be_nil
-        end
+          end
         end
       end
       context "when array[0] = :weight_in_lbs || :weight" do
@@ -171,7 +171,7 @@ describe DinoCsv do
 
   describe "#file_exists?" do
     context "when the file is located" do
-    let(:file) { ["./african_dinosaur_export.csv", "./dinodex.csv"].sample }
+      let(:file) { ["./african_dinosaur_export.csv", "./dinodex.csv"].sample }
       it "returns true" do
         expect(dino_csv.file_exists?(file)).to be_truthy
       end
@@ -225,7 +225,7 @@ describe FormatCsvData do
     context "when the argument is not a Numeric string" do
       let(:data) { 'I AM SVAJONE' } # I realize I didn ot have to keep repeating this but I AM SVAJONE :)
       it "raises an error" do
-        expect{ format_csv_data.to_integer }.to raise_error
+        expect { format_csv_data.to_integer }.to raise_error
       end
     end
   end
@@ -253,5 +253,4 @@ describe FormatCsvData do
       end
     end
   end
-
 end

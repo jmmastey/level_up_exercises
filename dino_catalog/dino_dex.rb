@@ -7,7 +7,6 @@ require './dinosaur.rb'
 require './dino_csv.rb'
 
 class DinoDex
-
   attr_accessor :dinosaurs
 
   DEFAULT_FILES = ['./dinodex.csv', './african_dinosaur_export.csv']
@@ -56,11 +55,9 @@ class DinoDex
 
   private
 
-    def print_to_console(dinosaurs)
-      tp dinosaurs
-    end
-
+  def print_to_console(dinosaurs)
+    tp dinosaurs
+  end
 end
-
 
 dino_catalog = DinoDex.new

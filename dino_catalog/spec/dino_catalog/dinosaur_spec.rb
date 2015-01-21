@@ -2,18 +2,20 @@ require './spec/spec_helper.rb'
 
 describe Dinosaur do
   let(:dinosaur) { Dinosaur.new(options) }
-  let(:options) { { :name => Faker::Lorem.word,
-                    :period => Faker::Lorem.word,
-                    :continent => Faker::Lorem.word,
-                    :diet => Faker::Lorem.word,
-                    :weight => Faker::Lorem.word,
-                    :ambulation => Faker::Lorem.word,
-                    :description => Faker::Lorem.word
-                } }
+  let(:options) do
+    { name: Faker::Lorem.word,
+      period: Faker::Lorem.word,
+      continent: Faker::Lorem.word,
+      diet: Faker::Lorem.word,
+      weight: Faker::Lorem.word,
+      ambulation: Faker::Lorem.word,
+      description: Faker::Lorem.word,
+                }
+  end
 
   describe "#attr_accessor" do
-   [:name, :period, :continent, :diet, :weight, :ambulation, :description].each do |attribute|
-     it { expect(dinosaur).to have_attr_accessor(attribute) }
+    [:name, :period, :continent, :diet, :weight, :ambulation, :description].each do |attribute|
+      it { expect(dinosaur).to have_attr_accessor(attribute) }
     end
   end
 

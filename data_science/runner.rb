@@ -24,11 +24,10 @@ puts Experiment.new("source_data.json").total_visits.to_s
 print "The winner experiment is "
 puts Calculator.new.winner
 
-unless Calculator.new.significant?
-  print "As less than 5% of data is result is by chance we have a clear winner "
-  puts Calculator.new.winner
+if Calculator.new.significant?
+  puts "As more than 5% of data is result is by chance we don't have a clear winner "
 else
-  print "As more than 5% of data is result is by chance we have a clear winner "
+  print "As less than 5% of data is result is by chance we have a clear winner "
   puts Calculator.new.winner
 end
 

@@ -1,7 +1,6 @@
 require_relative 'experiment'
 
 class Calculator
-
   P_VALUE_TABLE = { 25 =>    [1.32, 2.77, 4.11, 5.39, 6.63, 7.84, 9.04,
                               10.22, 11.39, 12.55],
                     20 =>    [1.64, 3.22, 4.64, 5.59, 7.29, 8.56, 5.8,
@@ -11,7 +10,7 @@ class Calculator
                     10 =>    [2.71, 4.61, 6.25, 7.78, 9.24, 10.64,
                               12.02, 13.36, 14.68, 15.99],
                     5  =>    [3.84, 5.99, 7.81, 9.49, 11.07, 12.53,
-                              14.07,15.51, 16.92, 18.31],
+                              14.07, 15.51, 16.92, 18.31],
                     2.5 =>   [5.02, 7.38, 9.35, 11.14, 12.83, 14.45, 16.01,
                               17.53,19.02, 20.48],
                     2 =>     [5.41, 7.82, 9.84, 11.67, 13.33, 15.03,
@@ -97,7 +96,7 @@ private
 
   def previous_percentages_index
     return 0 if  percentages.index(p_value_index)
-    percentages.index(p_value_index)-1
+    percentages.index(p_value_index) - 1
   end
 
   def next_higher_value

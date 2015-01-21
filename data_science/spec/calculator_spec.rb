@@ -32,4 +32,14 @@ describe Calculator do
     total = described_class.new("test_data.json").winner
     expect(total).to eq("A")
   end
+
+  it "calculates the data is significant" do
+    total = described_class.new("test_data.json").significant?
+    expect(total).to eq(true)
+  end
+
+  it "calculates the p_value is significant" do
+    total = described_class.new("test_data.json").p_value
+    expect(total).to eq([25, 25])
+  end
 end

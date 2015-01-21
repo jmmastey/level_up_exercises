@@ -1,14 +1,40 @@
-
 require 'abanalyzer'
-
-require_relative 'data.rb'
-require_relative 'Dataloader.rb'
+require_relative 'traffic'
+require_relative 'Data_loader'
 
 class Sample
   def self.percent
     0.95
   end
 
+  def initialize(group, values)
+    @group = group
+    @values = values
+    @key = @group[0].cohort.to_sym
+  end
+
+  def calc_values
+    num_convs, vistors = Sample.find_conversions(@group)
+    con_l, con_h = Sample.find_confidence(num_convs, vistors, Sample.percent)
+    @values[@key] = { num_convs: num_convs, vistors: vistors }
+    { low: con_l, high: con_h }
+  end
+
+  def print(range, confidence, name)
+    puts "Name:                     #{name} "
+    puts "Conversions:              #{range[:num_convs]}"
+    puts "Sample Size:              #{range[:vistors]}"
+    percent = Sample.calc_percent(range[:num_convs], range[:vistors])
+    puts "Percent:                  #{percent}%"
+    puts "Low  Confidence Percent:  #{confidence[:low]}%"
+    puts "High Confidence Percent:  #{confidence[:high]}%"
+  end
+
+  def to_s
+    "#{@key} #{@confidence} #{@values[@key]}"
+  end
+
+  private
   def self.find_conversions(group)
     num_convs = number_of_conversions(group)
     vistors = group.length
@@ -40,26 +66,10 @@ class Sample
     [low, high]
   end
 
-  def self.calculate_values(group_in, group_name, values)
-    num_convs, vistors = Sample.find_conversions(group_in)
-    con_l, con_h = Sample.find_confidence(num_convs, vistors, Sample.percent)
-    values[group_name] = { num_convs: num_convs, vistors: vistors }
-    { low: con_l, high: con_h }
-  end
-
   def self.determine_leader(values, confidence_array)
     puts
     Sample.find_chi(values)
     puts "Larger of the Two is:     #{confidence_array.max}%"
   end
 
-  def self.print(range, confidence, name)
-    puts "Name:                     #{name} "
-    puts "Conversions:              #{range[:num_convs]}"
-    puts "Sample Size:              #{range[:vistors]}"
-    percent = Sample.calc_percent(range[:num_convs], range[:vistors])
-    puts "Percent:                  #{percent}%"
-    puts "Low  Confidence Percent:  #{confidence[:low]}%"
-    puts "High Confidence Percent:  #{confidence[:high]}%"
-  end
 end

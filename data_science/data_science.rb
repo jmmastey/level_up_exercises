@@ -1,15 +1,22 @@
-require_relative 'DataLoader.rb'
-require_relative 'sample.rb'
+require_relative 'Data_loader'
+require_relative 'sample'
 
 class DataScience
-  data_in = DataLoader.read_in_json(DataLoader.file_name)
-  DataLoader.build_data(data_in)
-  group_a, group_b = DataLoader.seperate_groups
+  my_data = DataLoader.new
+  my_data.read_in_json
+  my_data.build_data
+  group_a, group_b = my_data.seperate_groups
+
   values = {}
-  @confidence_a = Sample.calculate_values(group_a, :agroup, values)
-  @confidence_b = Sample.calculate_values(group_b, :bgroup, values)
-  Sample.print(values[:agroup], @confidence_a, "Group A")
-  puts
-  Sample.print(values[:bgroup], @confidence_b, "Group B")
-  Sample.determine_leader(values, [@confidence_a[:high], @confidence_b[:high]])
+
+  sample_a = Sample.new(group_a, values)
+  sample_b = Sample.new(group_b, values)
+
+  confidence_a = sample_a.calc_values
+  confidence_b = sample_b.calc_values
+
+  sample_a.print(values[:A], confidence_a, "Group A")
+  sample_b.print(values[:B], confidence_b, "Group B")
+
+  Sample.determine_leader(values, [confidence_a[:high], confidence_b[:high]])
 end

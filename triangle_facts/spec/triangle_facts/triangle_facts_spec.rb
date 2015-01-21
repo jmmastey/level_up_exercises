@@ -136,7 +136,7 @@ describe Triangle do
     end
     context "when it displays the calculated angles" do
       it "displays the angles of the triangle" do
-        angles = triangle.calculate_angles(triangle_parameters[0], triangle_parameters[1], triangle_parameters[2])
+        angles = CalculateAngles.new(triangle_parameters[0], triangle_parameters[1], triangle_parameters[2]).calculate
         output = capture_stdout { triangle.recite_facts }
         expect(output).to include(angles.join(','))
       end
@@ -144,32 +144,6 @@ describe Triangle do
         output = capture_stdout { triangle.recite_facts }
         expect(output).to include("The angles of this triangle are")
       end
-    end
-  end
-
-  describe "#calculate_angles" do
-    context "when a calculation is made" do
-      subject(:triangle_calculate) { triangle.calculate_angles(60,60,60) }
-      it "returns an array" do
-        expect(triangle_calculate).to be_a(Array)
-      end
-      it "returns a non empty array" do
-        expect(triangle_calculate).to_not be_empty
-      end
-      it "returns three values in the array" do
-        expect(triangle_calculate.count).to eq(3)
-      end
-    end
-  end
-
-  describe "#radians_to_degrees" do
-    it "converts radians into degrees" do
-      # NOTE:
-      # The testing done here is using a proven data set calculated outside of this
-      # class or method.
-      expected_output = 60
-      rads = Math.acos((5**2 + 5**2 - 5**2) / (2.0 * 5 * 5))
-      expect(triangle.radians_to_degrees(rads)).to eq(expected_output)
     end
   end
 

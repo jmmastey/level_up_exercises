@@ -16,21 +16,7 @@ Feature: Customer logs in before checkout
     | item_2 |
 
     Examples:
-      | right_email           | right_password  |
-      | "johndoe@example.com" | "0000"          |
-
-  Scenario Outline: Customer logs in with invalid credentials
-    Given I log in with email <wrong_email> and password <right_password>
-    Then I see an unsuccessful login message
-
-    Examples:
-      | wrong_email           | right_password  |
-      | "foobar@example.com"  | "0000"          |
-
-  Scenario Outline: Customer logs in with invalid credentials
-    Given I log in with email <right_email> and password <wrong_password>
-    Then I see an unsuccessful login message
-
-    Examples:
-      | wrong_email           | right_password  |
-      | "johndoe@example.com" | "1234"          |
+      | right_email           | right_password  | login_message              |
+      | "johndoe@example.com" | "0000"          | successful login message   |
+      | "foobar@example.com"  | "0000"          | unsuccessful login message |
+      | "johndoe@example.com" | "1234"          | unsuccessful login message |

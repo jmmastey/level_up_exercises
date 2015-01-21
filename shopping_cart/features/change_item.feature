@@ -10,7 +10,9 @@ Feature: Change item to cart
     | item_2 |
 
   Scenario: Customer removes only some items to the cart
-    Given the cart has @item1, @item2
-    When customer remove @item2 from cart
-    Then customer should see @item1 in the cart
-    And  customer should not see @item_2 in the cart
+    Given the cart has following items:
+    | item_1 |
+    | item_2 |
+    When customer remove "item_2" from cart
+    Then customer should see "item_1" in the cart
+    And  customer should not see "item_2" in the cart

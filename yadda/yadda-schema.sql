@@ -18,8 +18,6 @@ CREATE TABLE person (
 );
 COMMENT ON TABLE person IS 'Person information';
 
-
---name
 CREATE TABLE brewery (
   brewery_id      serial PRIMARY KEY,
   name            varchar(250) NOT NULL,
@@ -36,7 +34,6 @@ CREATE TABLE brewery (
 );
 COMMENT ON TABLE brewery IS 'Brewery information';
 
---style becomes it's own table
 CREATE TABLE beer (
   beer_id         serial PRIMARY KEY,
   brewery_id      integer NOT NULL,
@@ -52,7 +49,6 @@ CREATE TABLE beer (
 );
 COMMENT ON TABLE beer IS 'Beer information, many beers to a brewery';
 
---overall calculate? see indexing
 CREATE TABLE rating (
   rating_id       serial PRIMARY KEY,
   person_id       integer NOT NULL,

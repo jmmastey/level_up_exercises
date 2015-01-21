@@ -17,17 +17,20 @@ class Arrowhead
 
   # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+    shapes = CLASSIFICATIONS[region]
+    raise "Unknown region, please provide a valid region." unless shapes
+    identify_shape(shapes, shape)
+  end
+
+  def self.identify_shape(shapes, type)
+    shape = shapes[type]
+    shape_error unless shape
+    "You have a(n) '#{shape}' arrowhead. Probably priceless."
+  end
+
+  def shape_error
+    raise "Unknown shape value. Are you sure you know what you're \
+      talking about?"
   end
 end
 

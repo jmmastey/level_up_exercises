@@ -1,0 +1,51 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/kgan/Git/lue/level_up_exercises/dino_catalog/dinosaur.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/kgan/Git/lue/level_up_exercises/spec/dino_catalog/dinosaur_spec.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1420832683
+  }
+}

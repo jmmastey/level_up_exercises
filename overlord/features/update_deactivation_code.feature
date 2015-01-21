@@ -8,9 +8,10 @@ Feature: updating a bomb's deactivation code
   Scenario: updating with a valid deactivation code
     When I update the bomb's deactivation code
     Then I should see "Deactivation code updated"
+    And I should see "Arm the Bomb with the Activation Code"
 
   Scenario: updated deactivation code should be sticky
-    Given I activate the bomb
+    When I activate the bomb
     And I update the bomb's deactivation code
     And I deactivate the bomb with the new deactivation code
     Then I should see "Arm the Bomb with the Activation Code"

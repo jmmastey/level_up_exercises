@@ -5,6 +5,7 @@ require 'rspec'
 require 'pry'
 require 'faker'
 require './triangle_facts.rb'
+require './calculate_angles.rb'
 #Dir["./dino_catalog/*.rb"].sort.each { |f| require f}
 
 RSpec.configure do |config|

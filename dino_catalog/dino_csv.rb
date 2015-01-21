@@ -21,8 +21,8 @@ class DinoCsv
     CSV.foreach(file, :headers => true, :header_converters => :symbol) do |obj|
      data = Dinosaur.new(:name => process_csv_data(obj.to_h.assoc(:name) || obj.to_h.assoc(:genus)),
                          :period => process_csv_data(obj.to_h.assoc(:period)),
-                         :continent => process_csv_data(obj.to_h.assoc(:continent) || assign_continent_from_file_name(file)),
-                         :diet => process_csv_data(obj.to_h.assoc(:diet)),
+                         :continent => process_csv_data(obj.to_h.assoc(:continent)) || assign_continent_from_file_name(file),
+                         :diet => process_csv_data(obj.to_h.assoc(:diet) || obj.to_h.assoc(:carnivore)),
                          :weight => process_csv_data(obj.to_h.assoc(:weight_in_lbs) || obj.to_h.assoc(:weight)),
                          :ambulation => process_csv_data(obj.to_h.assoc(:walking)),
                          :description => process_csv_data(obj.to_h.assoc(:description)))
@@ -40,7 +40,7 @@ class DinoCsv
         when :continent
           FormatCsvData.new(obj[1]).to_lowercase unless obj[1].nil?
         when :carnivore
-          (obj[1] == 'yes' ? 'carnivore' : 'non-carnivore') unless obj[1].nil?
+          (obj[1].downcase == 'yes' ? 'carnivore' : 'non-carnivore') unless obj[1].nil?
         when :weight_in_lbs || :weight
           FormatCsvData.new(obj[1]).to_integer unless obj[1].nil?
         else # :name, :genus, :period, :diet, :description

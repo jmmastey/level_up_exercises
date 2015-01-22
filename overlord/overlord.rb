@@ -7,11 +7,12 @@ enable :sessions
 
 get '/' do
   session.clear
+  session[:bomb] = nil
   redirect to('/boot_bomb')
 end
 
 get '/boot_bomb' do
-  haml :enter_codes
+  haml :enter_codes, locals: { bomb: bomb }
 end
 
 post '/boot_bomb' do

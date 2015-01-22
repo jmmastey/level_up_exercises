@@ -10,10 +10,11 @@ class Bomb
     @deactivation_code = deact_code.empty? ? DEFAULT_DEACT_CODE : deact_code
     @attempts_remaining = MAX_DEACTIVATION_ATTEMPTS
     @state = false
+    @exploded = false
   end
 
   def try_to_activate(activation_code)
-    if activation_code == @activation_code && @state == false
+    if activation_code == @activation_code && @state == false && !@exploded
       @state = true
     else
       "Error"
@@ -21,7 +22,7 @@ class Bomb
   end
 
   def try_to_deactivate(deactivation_code)
-    if deactivation_code == @deactivation_code && @state == true
+    if deactivation_code == @deactivation_code && @state == true && !@exploded
       @state = false
     elsif @state == true
       @attempts_remaining -= 1
@@ -30,5 +31,9 @@ class Bomb
         "Boom"
       end
     end
+  end
+
+  def exploded?
+    @exploded
   end
 end

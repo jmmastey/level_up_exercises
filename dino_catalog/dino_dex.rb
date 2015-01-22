@@ -32,7 +32,11 @@ class DinoDex
       else
         value = v.downcase
       end
-      result << @dinosaurs.select { |dino| dino[k].send(operator, value) }
+      begin
+        result << @dinosaurs.select { |dino| dino[k].send(operator, value) }
+      rescue
+        next
+      end
     end
     tp result.flatten
   end

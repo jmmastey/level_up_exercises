@@ -40,7 +40,9 @@ class DinoCsv
           FormatCsvData.new(obj[1]).to_lowercase unless obj[1].nil?
         when :carnivore
           (obj[1].downcase == 'yes' ? 'carnivore' : 'non-carnivore') unless obj[1].nil?
-        when :weight_in_lbs || :weight
+        when :weight_in_lbs
+          FormatCsvData.new(obj[1]).to_integer unless obj[1].nil?
+        when :weight
           FormatCsvData.new(obj[1]).to_integer unless obj[1].nil?
         else # :name, :genus, :period, :diet, :description
           FormatCsvData.new(obj[1]).to_lowercase unless obj[1].nil?

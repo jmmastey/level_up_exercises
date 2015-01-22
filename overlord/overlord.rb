@@ -11,18 +11,22 @@ get '/' do
 end
 
 post '/activate' do
-	session[:bomb].try_to_activate(params[:submitted_activation_code])
-
+	session[:bomb].try_to_activate(params[:submitted_act_code])
+	if session[:bomb].state == false
+		session[:bad_act_code] = true
+		redirect to('activate')
+	end
 	haml :activated_bomb, locals: { bomb: session[:bomb] }
 end
 
 get '/activate' do
-  "ABBB"
+  haml :booted_bomb, locals: { bomb: session[:bomb], bad_code: session[:bad_act_code] }
 end
 
 post '/deactivate' do
-	# redirect back if
-	session[:bomb].try_to_deactivate(params[:submitted_deactivation_code])
+	if session[:bomb].attempts_remaining > 0
+		session[:bomb].try_to_deactivate(params[:submitted_deac_code])
+	end
 	haml :active_bomb, locals: { bomb: session[:bomb] }
 end
 
@@ -31,11 +35,7 @@ get '/boot_bomb' do
 end
 
 post '/boot_bomb' do
-	session[:bomb] = Bomb.new(params[:activation_code], params[:deactivation_code])
-	haml :boot_bomb, locals: { bomb: session[:bomb] }
-end
-
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
+	session[:bomb] = Bomb.new(params[:act_code], params[:deact_code])
+	"#{params.keys} #{params.values} #{session[:bomb].activation_code}"
+	# redirect to('/activate')
 end

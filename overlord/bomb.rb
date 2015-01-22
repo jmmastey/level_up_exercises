@@ -1,22 +1,22 @@
 class Bomb
-  DEFAULT_ACTIVATION_CODE = 1234
-  DEFAULT_DEACTIVATION_CODE = 0000
+  DEFAULT_ACTIVATION_CODE = "1234"
+  DEFAULT_DEACTIVATION_CODE = "0000"
   MAX_DEACTIVATION_ATTEMPTS = 3
 
-  attr_reader :attempts_remaining, :state
+  attr_reader :attempts_remaining, :state, :activation_code
 
-  def initialize(
-    activation_code = DEFAULT_ACTIVATION_CODE, 
-    deactivation_code = DEFAULT_DEACTIVATION_CODE
-  )
-    @activation_code = activation_code
-    @deactivation_code = deactivation_code
-    @attempts_remaining = MAX_DEACTIVATION_ATTEMPTS
+  def initialize(activation_code, deactivation_code)
+    if activation_code.empty?
+      @activation_code = DEFAULT_ACTIVATION_CODE
+    else
+      @activation_code = activation_code
+    end
+    if deactivation_code.empty?
+      @deactivation_code = DEFAULT_DEACTIVATION_CODE
+    else
+      @attempts_remaining = MAX_DEACTIVATION_ATTEMPTS
+    end
     @state = false
-  end
-
-  def active?
-    @state
   end
 
   def try_to_activate(activation_code)
@@ -32,13 +32,9 @@ class Bomb
       @state = false
     else
       @attempts_remaining -= 1
-      if exploded?
+      if @attempts_remaining == 0
         "Boom"
       end
     end
-  end
-
-  def exploded?
-    @attempts_remaining == 0
   end
 end

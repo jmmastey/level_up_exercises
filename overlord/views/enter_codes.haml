@@ -6,9 +6,9 @@
   %form{:action => "/boot_bomb", :method => "post"}
     %p 
       Activation code: 
-      %input{:name => "activation_code", :type => "text"}
+      %input{:name => "act_code", :type => "text", :pattern => "[0-9]{4}"}
     %p 
       Deactivation code:
-      %input{:name => "deactivation_code", :type => "text"}
+      %input{:name => "deact_code", :type => "text", :pattern => "[0-9]{4}"}
     %p
       %input{:type => "submit", :value => "Boot bomb"}

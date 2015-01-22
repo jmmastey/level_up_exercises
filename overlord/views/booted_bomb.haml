@@ -1,0 +1,18 @@
+- 5.times do
+  %br
+
+%center
+  %p
+    The bomb has been booted but not activated.
+  %p
+    Bomb state: 
+    =bomb.activation_code
+  %form{:action => "/activate", :method => "post"}
+    %p 
+      Activation code: 
+      %input{:name => "submitted_act_code", :type => "text"}
+    %p
+      %input{:type => "submit", :value => "Submit activation code"}
+  - if bad_code
+    %p
+      Incorrect activation code

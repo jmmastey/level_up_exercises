@@ -1,15 +1,27 @@
-%h3
-  =params
-%h3
-  Attempts remaining:
-  =bomb.attempts_remaining
-- if bomb.attempts_remaining > 0
-  %form{:action => "/deactivate", :method => "post"}
-    %p 
-      Deactivation code: 
-      %input{:name => "submitted_deactivation_code", :type => "text"}
-    %p
-      %input{:type => "submit", :value => "Submit deactivation code"}
-- else
-  %h3 sheit
+- 5.times do
+  %br
 
+%center
+  %p
+    =params
+  %p
+    Attempts remaining:
+    =bomb.attempts_remaining
+  - if bomb.attempts_remaining > 0 && bomb.state == true
+    %form{:action => "/deactivate", :method => "post"}
+      %p 
+        Deactivation code: 
+        %input{:name => "submitted_deact_code", :type => "text"}
+      %p
+        %input{:type => "submit", :value => "Submit deactivation code"}
+  - elsif bomb.attempts_remaining > 0 && bomb.state == false
+    %p Bomb deactivated
+    %p
+      %a{:href => "/"} Return to homepage
+  - elsif bomb.attempts_remaining == 0
+    %marquee{:behavior => "alternate", :scrollamount => "60"} Bomb exploded
+    %p
+      %a{:href => "/"} Return to homepage
+  - if bomb.attempts_remaining < 3 && bomb.state == true
+    %p
+      Incorrect deactivation code

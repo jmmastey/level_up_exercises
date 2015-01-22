@@ -1,5 +1,6 @@
 # run `ruby overlord.rb` to run a webserver for this app
 
+require_relative 'bomb'
 require 'sinatra'
 
 enable :sessions
@@ -18,7 +19,8 @@ get '/form' do
 end
 
 post '/form' do
-	haml :form_post, locals: { :message => params[:message] }
+	@bomb = Bomb.new(params[:activation_code], params[:deactivation_code])
+	haml :form_post, locals: { bomb: @bomb }
 end
 
 # we can shove stuff into the session cookie YAY!

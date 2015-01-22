@@ -5,6 +5,6 @@ Feature: Bomb interface loads on webserver
 
   Scenario: Visit home page
     Given I am on the home page
-    Then I should see the status of the bomb
-    And I should be able to boot the bomb
-    And I should see fields to enter the activation or deactivation codes for the bomb
+    THen the bomb should boot
+    And I should see the status of the bomb
+    And I should see fields to enter the activation and deactivation codes for the bomb

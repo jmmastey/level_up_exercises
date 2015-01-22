@@ -1,3 +1,14 @@
-%form{:action => "/form", :method => "post"}
-  %input{:name => "message", :type => "text"}
-    %input{:type => "submit"}
+- 5.times do
+  %br
+
+%center
+  %p Welcome to the bomb
+  %form{:action => "/form", :method => "post"}
+    %p 
+      Activation code: 
+      %input{:name => "activation_code", :type => "text"}
+    %p 
+      Deactivation code:
+      %input{:name => "deactivation_code", :type => "text"}
+    %p
+      %input{:type => "submit", :value => "Start bomb"}

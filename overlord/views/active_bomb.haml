@@ -11,7 +11,7 @@
     %form{:action => "/deactivate", :method => "post"}
       %p 
         Deactivation code: 
-        %input{:name => "submitted_deact_code", :type => "text"}
+        %input{:name => "submitted_deact_code", :type => "text", :pattern => "[0-9]{4}"}
       %p
         %input{:type => "submit", :value => "Submit deactivation code"}
   - elsif bomb.attempts_remaining > 0 && bomb.state == false

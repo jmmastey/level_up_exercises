@@ -1,0 +1,105 @@
+$PROJECT_ROOT ||= File.dirname(__FILE__)
+
+load "#{$PROJECT_ROOT}/spec/spec_helper.rb"
+
+# Uncomment and set this to only include directories you want to watch
+# directories %w(lib spec features)
+
+clearing :off         # clear the screen before every task
+notification :growl   # use growl for notifications
+
+CUKE_OPTS = {
+  :all_on_start => true,  # run all the features at startup
+  :bundler      => true,  # use "bundle exec" to run the Cucumber command
+  :cli          => "--color --strict --format progress",
+  :feature_sets => [ 'features' ], # default: ['features']
+  :notification => true
+}
+
+RSPEC_OPTS = {
+  :all_on_start => true,      # Run all the specs at startup, default: false
+  :cmd          => "bundle exec rspec --tty --color",
+  :notification => true,
+  :spec_paths   => [ 'spec' ] # Specify a custom array of paths that
+                              # contain spec files
+}
+
+RUBOCOP_OPTS = {
+  :all_on_start => false,
+  :notification => true
+}
+
+
+guard :cucumber, CUKE_OPTS do
+  # Custom. I added this.
+  watch('overlord.rb')              { CUKE_OPTS[:feature_sets] }
+
+  # When a file within the `features` directory that ends in `feature` is
+  #  modified, run that single feature.
+  watch(%r{^features/.+\.feature$})
+
+  # When any file within the `features/support` directory is modified, run
+  # all features.
+  watch(%r{^features/support/.+$})  { CUKE_OPTS[:feature_sets] }
+
+  # When a file within the `features/step_definitions` directory that ends in
+  # `_steps.rb` is modified, run the first feature that matches the name
+  # (`_steps.rb` replaced by `.feature`). When no feature is found, then run
+  # all features.
+  watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
+    Dir[File.join("**/#{m[1]}.feature")][0] || "features"
+  end
+end
+
+guard :rspec, RSPEC_OPTS do
+  watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch('spec/spec_helper.rb')  { "spec" }
+  # watch('overlord.rb')          { "spec" }
+
+  # run cucumber after rspec passes
+  # callback(:run_all_end) do
+  #   unless Guard.guards(:rspec).last_failed
+  #     Guard.run_all({ :guard => Guard.guards(:cucumber) })
+  #   end
+  # end
+end
+
+
+# group :red_green_refactor, :halt_on_fail => true do
+#   # guard :cucumber, CUKE_OPTS do
+#   #   watch(%r{^features/.+\.feature$})
+#   #   watch(%r{^features/support/.+$})  { CUKE_OPTS[:feature_sets] }
+#   #   watch('overlord.rb')              { CUKE_OPTS[:feature_sets] }
+#   #
+#   #   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
+#   #     Dir[File.join("**/#{m[1]}.feature")][0] || "features"
+#   #   end
+#   # end
+#   #
+#   # guard :rspec, RSPEC_OPTS do
+#   #   watch(%r{^spec/.+_spec\.rb$})
+#   #   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+#   #   watch('spec/spec_helper.rb')  { "spec" }
+#   #   watch('overlord.rb')          { "spec" }
+#   # end
+#
+#   # guard :rubocop, RUBOCOP_OPTS do
+#   #   watch(%r{lib/(.+)\.rb$})      { |m| "#{m[0]}" }
+#   # end
+# end
+
+## Guard internally checks for changes in the Guardfile and exits. If you want
+## Guard to automatically start up again, run guard in a shell loop, e.g.:
+##
+##  $ while bundle exec guard; do echo "Restarting Guard..."; done
+##
+## Note: if you are using the `directories` clause above and you are not
+## watching the project directory ('.'), the you will want to move the Guardfile
+## to a watched dir and symlink it back, e.g.
+#
+#  $ mkdir config
+#  $ mv Guardfile config/
+#  $ ln -s config/Guardfile .
+#
+# and, you'll have to watch "config/Guardfile" instead of "Guardfile"

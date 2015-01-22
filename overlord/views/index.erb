@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8" />
+  	<title>Bombs Away</title>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+  	<style>
+  /*    * {
+        vertical-align: baseline;
+        border: 0 none;
+        outline: 0;
+        padding: 0;
+        margin: 0;
+        color: #333;
+        background-color: transparent;
+        text-decoration: none;
+      }*/
+
+  		body {
+  			background-color: #EBECE5;
+  			text-align: center;
+  			font-family: Helvetica, sans-serif;
+  			font-size: 113%;
+  			line-height: 144%;
+  		}
+
+  		#content {
+  			margin: 0 auto;
+  			width: 600px;
+  			/*min-height: 57.25em;*/
+  			margin: 0 auto;
+  			text-align: left;
+  		}
+
+  		h1 {
+  			font-family: helvetica, sans-serif;
+  			font-size: 2.5em;
+  			font-weight: normal;
+  			/*padding: 1.5em 0;*/
+  		}
+
+  		h2 {
+  			font-family: helvetica, sans-serif;
+  			font-size: 1.5em;
+  			font-weight: normal;
+  		}
+
+      form {
+        padding-bottom: 20px;
+      }
+  	</style>
+  </head>
+
+  <body>
+  	<div id="content">
+      <!-- <img src="images/vector.jpg" width="1920" height="1200" alt="vector"> -->
+
+      <% if @bomb.active?  %>
+        <h1>The bomb is active.</h1>
+        <% title = "Disarm the Bomb with the Deactivation Code" %>
+        <% verb = "Deactivate Bomb" %>
+      <% else %>
+        <h1>Your bomb is ready but not armed. Oh, yeah!</h1>
+        <% title = "Arm the Bomb with the Activation Code" %>
+        <% verb = "Activate Bomb" %>
+      <% end %>
+
+      <% if session[:message] %>
+        <p><%= session[:message] %></p>
+      <% end %>
+
+      <% if @bomb.error.to_s != '' %>
+        <p><%= @bomb.error %></p>
+      <% end %>
+
+  		<form method="post" action="/">
+        <fieldset>
+          <legend><%= title %></legend>
+    			<input type="text" name="code" maxlength="4" size="4">
+    			<input type="submit" id="submit" value="<%= verb %>" />
+        </fieldset>
+  		</form>
+
+  		<form method="post" action="/activation_code">
+        <fieldset>
+          <legend>Update Activation Code</legend>
+    			<input type="text" name="activation_code" maxlength="4" size="4">
+    			<input type="submit" id="update_activation_code" value="Update" />
+        </fieldset>
+  		</form>
+
+  		<form method="post" action="/deactivation_code">
+        <fieldset>
+          <legend>Update Deactivation Code</legend>
+    			<input type="text" name="deactivation_code" maxlength="4" size="4">
+    			<input type="submit" id="update_deactivation_code" value="Update" />
+        </fieldset>
+  		</form>
+  	</div>
+  </body>
+</html>

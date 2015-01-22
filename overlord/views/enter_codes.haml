@@ -3,7 +3,7 @@
 
 %center
   %p Welcome to the bomb
-  %form{:action => "/form", :method => "post"}
+  %form{:action => "/boot_bomb", :method => "post"}
     %p 
       Activation code: 
       %input{:name => "activation_code", :type => "text"}
@@ -11,4 +11,4 @@
       Deactivation code:
       %input{:name => "deactivation_code", :type => "text"}
     %p
-      %input{:type => "submit", :value => "Start bomb"}
+      %input{:type => "submit", :value => "Boot bomb"}

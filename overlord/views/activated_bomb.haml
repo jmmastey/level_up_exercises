@@ -1,0 +1,12 @@
+%h3
+  =params
+%h3
+  =bomb.active?
+%h3
+  =bomb.attempts_remaining
+%form{:action => "/deactivate", :method => "post"}
+  %p 
+    Deactivation code: 
+    %input{:name => "submitted_deactivation_code", :type => "text"}
+  %p
+    %input{:type => "submit", :value => "Submit deactivation code"}

@@ -5,22 +5,34 @@ require 'sinatra'
 
 enable :sessions
 
-get '/' do 
-	haml :index
-  # "Time to build an app around here. Start time: " + start_time
+get '/' do
+	session.clear
+	redirect to('/boot_bomb')
 end
 
-get '/test' do
-  haml :test, locals: { keys: session.keys }
+post '/activate' do
+	session[:bomb].try_to_activate(params[:submitted_activation_code])
+
+	haml :activated_bomb, locals: { bomb: session[:bomb] }
 end
 
-get '/form' do
-	haml :form
+get '/activate' do
+  "ABBB"
 end
 
-post '/form' do
-	@bomb = Bomb.new(params[:activation_code], params[:deactivation_code])
-	haml :form_post, locals: { bomb: @bomb }
+post '/deactivate' do
+	# redirect back if
+	session[:bomb].try_to_deactivate(params[:submitted_deactivation_code])
+	haml :active_bomb, locals: { bomb: session[:bomb] }
+end
+
+get '/boot_bomb' do
+	haml :enter_codes
+end
+
+post '/boot_bomb' do
+	session[:bomb] = Bomb.new(params[:activation_code], params[:deactivation_code])
+	haml :boot_bomb, locals: { bomb: session[:bomb] }
 end
 
 # we can shove stuff into the session cookie YAY!

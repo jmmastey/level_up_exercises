@@ -1,11 +1,5 @@
-require './spec/spec_helper'
+require 'rails_helper'
 
-describe User do
-  describe "username" do
-
-  end
-
-  describe "password" do
-    
-  end
+RSpec.describe User, :type => :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

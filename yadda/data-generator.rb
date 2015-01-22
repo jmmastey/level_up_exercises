@@ -7,10 +7,10 @@ require 'faker'
                    dbname: "yadda")
 
 def main
-  generate_person_records 200
-  generate_brewery_records 1
-  generate_beer_records 10
-  generate_rating_records 1000
+  generate_person_records 2000
+  generate_brewery_records 1000
+  generate_beer_records 10000
+  generate_rating_records 1000000
 
   display_records "person"
   display_records "brewery"
@@ -49,9 +49,9 @@ end
 def generate_brewery_records count=100
   count.times do
     insert_record "brewery", {
-      name: Faker::Company.name,
-      address: Faker::Address.street_address,
-      city: Faker::Address.city,
+      name: Faker::Company.name.gsub("'"){""},
+      address: Faker::Address.street_address.gsub("'"){""},
+      city: Faker::Address.city.gsub("'"){""},
       state: Faker::Address.state_abbr,
       postal_code: Faker::Number.number(5),
       description: Faker::Lorem.sentence(3),
@@ -64,7 +64,7 @@ end
 def generate_person_records count=100
   count.times do
     insert_record "person", {
-      name: Faker::Name.first_name,
+      name: Faker::Name.first_name.gsub("'"){""},
       email: Faker::Internet.email,
       birthday: Faker::Date.between("1900-01-01", Date.today),
       description: Faker::Lorem.sentence(3),

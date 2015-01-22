@@ -7,10 +7,10 @@ require 'faker'
                    dbname: "yadda")
 
 def main
-  generate_person_records 1
-  generate_brewery_records 5
-  generate_beer_records 5
-  generate_rating_records 3
+  generate_person_records 200
+  generate_brewery_records 1
+  generate_beer_records 10
+  generate_rating_records 1000
 
   display_records "person"
   display_records "brewery"
@@ -21,15 +21,15 @@ end
 def generate_rating_records count=100
   count.times do
     insert_record "rating", {
-      person_id: 1,
-      beer_id: 1,
+      person_id: (get_record_id "person"),
+      beer_id: (get_record_id "beer"),
       look: Faker::Number.digit,
       smell: Faker::Number.digit,
       taste: Faker::Number.digit,
       feel: Faker::Number.digit,
       overall: Faker::Number.digit,
       description: Faker::Lorem.sentence(3),
-      updated_by: 1
+      updated_by: (get_record_id "person")
     }
   end
 end
@@ -37,11 +37,11 @@ end
 def generate_beer_records count=100
   count.times do
     insert_record "beer", {
-      brewery_id: 1,
+      brewery_id: (get_record_id "brewery"),
       style: Faker::Hacker.noun,
       description: Faker::Lorem.sentence(3),
       brewing_year: Faker::Date.between("2000-01-01", Date.today).year,
-      updated_by: 1
+      updated_by: (get_record_id "person")
     }
   end
 end
@@ -56,7 +56,7 @@ def generate_brewery_records count=100
       postal_code: Faker::Number.number(5),
       description: Faker::Lorem.sentence(3),
       founding_year: Faker::Date.between("1500-01-01", Date.today).year,
-      updated_by: 1
+      updated_by: (get_record_id "person")
     }
   end
 end
@@ -71,6 +71,11 @@ def generate_person_records count=100
       updated_by: 1
     }
   end
+end
+
+def get_record_id table
+  record = @conn.exec( "SELECT #{table}_id FROM #{table} ORDER BY RANDOM() LIMIT 1" ).first
+  record["#{table}_id"]
 end
 
 def insert_record table, info_hash

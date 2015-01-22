@@ -51,6 +51,10 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.1)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -112,10 +116,13 @@ GEM
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
+    pg (0.18.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    psql (0.0.1)
+      cocaine (= 0.5.1)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -222,7 +229,9 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
+  pg
   pry
+  psql
   rails (= 4.2.0)
   rspec
   rspec-rails (~> 3.0)

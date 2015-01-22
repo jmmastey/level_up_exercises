@@ -6,10 +6,6 @@ Feature: Edit Contact Info
   Background:
     Given I am logged in
 
-  Scenario: Edit email
-    When I change my email address and save
-    Then I see my changed email address
-
   Scenario: Edit phone
     When I change my phone number and save
     Then I see my changed phone number
@@ -19,8 +15,7 @@ Feature: Edit Contact Info
     Then I see my changed first and last name
 
   Scenario: Edit all
-    When I change my email address
-    And I change my phone number
+    When I change my phone number
     And I change my first and last name
     And I save my contact info
     Then I see all of my updated contact info

@@ -27,6 +27,12 @@ gem 'devise'
 gem 'psql'
 gem 'pg'
 gem 'capybara'
+gem 'schema_plus'
+gem 'schema_associations'
+gem 'schema_validations'
+gem 'squirm_rails'
+gem 'hairtrigger'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

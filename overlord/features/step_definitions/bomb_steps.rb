@@ -2,30 +2,40 @@ Given(/^"(.*?)" says "(.*?)"$/) do |selector_id, status_text|
   selector_id.should have_content(status_text)
 end
 
+Given(/^a bomb$/) do
+  @bomb ||= Bomb.create(activation_code: "1234",
+                          deactivation_code: "0000",
+                          detonation_time: 45)
+end
+
+Given(/^I am looking at the page bomb$/) do
+  visit (current_url + "/" + @bomb.id.to_s)
+end
+
 Given(/^"(.*?)" is not configured$/) do |arg1|
   Bomb.create(activation_code: "1234")
-  visit "/bomb"
+  visit "/bomb"+ "/" + @bomb.id.to_s
   %w(1 2 3 4).each do |num|
     find(:xpath, "//span[@class='"+num+"']").click
   end
 end
 
 Given(/^"(.*?)" is configured to "(.*?)"$/) do |arg1, arg2|
-  visit "/bomb"
+  visit "/bomb"+ "/" + @bomb.id.to_s
   arg2.each_char do |num|
     find(:xpath, "//span[@class='"+num+"']").click
   end
 end
 
 When(/^I enter right "(.*?)"$/) do |arg1|
-  visit "/bomb"
+  visit "/bomb"+ "/" + @bomb.id.to_s
   %w(1 2 3 4).each do |num|
     find(:xpath, "//span[@class='"+num+"']").click
   end
 end
 
 Then(/^"(.*?)" should contain "(.*?)"$/) do |arg1, arg2|
-  visit "/bomb"
+  visit "/bomb"+ "/" + @bomb.id.to_s
   arg2.each_char do |num|
     find(:xpath, "//span[@class='"+num+"']").click
   end
@@ -33,5 +43,5 @@ end
 
 Then /^(?:|I )should see "([^\"]*)"(?: with id of textarea "([^\"]*)")?$/ \
 do |text, selector|
-  selector.should have_content("Inactive")
+  selector.should have_content(text)
 end

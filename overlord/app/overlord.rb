@@ -9,15 +9,6 @@ enable :sessions
 
 register Sinatra::Sprockets
 
-class Hash
-  def self.to_ostructs(obj, memo = {})
-    return obj unless obj.is_a? Hash
-    os = memo[obj] = OpenStruct.new
-    obj.each { |k, v| os.send("#{k}=", memo[v] || to_ostructs(v, memo)) }
-    os
-  end
-end
-
 set :database, adapter: "sqlite3", database: "detonation_device"
 set :views, "#{File.dirname(__FILE__)}/views"
 
@@ -27,7 +18,8 @@ class Overlord < Sinatra::Application
     DataMapper::Logger.new($stdout, :debug)
   end
   get '/' do
-    Bomb.destroy_all
+    @bombs = Bomb.all
+    @url_base = base_url
     haml :index
   end
 

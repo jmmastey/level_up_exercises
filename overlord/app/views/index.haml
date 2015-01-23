@@ -19,9 +19,21 @@
       %label Detonation time
     %td
       %input{type: "text", id: "detonation_time" }
-
+  %tr
+    %td
+      = @base_url
 %button.submit
   Create
+
+%table
+  -@bombs.each do |bomb|
+    %tr
+      %td= bomb.status
+      %td= bomb.detonation_time
+      %td
+        %button{ id: "#{bomb.id}" }
+          Show
+
 
 :javascript
     $(document).ready( function() {
@@ -34,7 +46,7 @@
         data: JSON.stringify(datalist),
         success: function(returnObject)
         {
-          $(location).attr('href',"http://localhost:9292/bomb");
+          $(location).attr('href',"http://localhost:9292/bomb/"+returnObject.id);
         },
         error: function (xhr){  alert( 'xhr = '+xhr.status ); }
       });

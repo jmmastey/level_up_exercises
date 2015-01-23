@@ -6,28 +6,33 @@ require_relative '../helpers/bomb_helpers'
 class Overlord < Sinatra::Application
   include BombHelpers
 
-  get '/bomb.json' do
-    bomb = Bomb.last
+  get '/bomb.json/:bomb_id' do
+    @bomb = Bomb.where("id = ?", params[:bomb_id]).first
     haml :bomb
     content_type :json
-    BombHelpers.bomb_status(bomb)
+    BombHelpers.explode_bomb(@bomb)
+    @bomb.to_json
   end
 
-  get '/bomb' do
-    bomb = Bomb.last
-    BombHelpers.bomb_status(bomb)
+  get '/bomb/:bomb_id' do
+    @bomb = Bomb.where("id = ?", params[:bomb_id]).first
+    BombHelpers.explode_bomb(@bomb)
     haml :bomb
   end
 
-  get '/bomb/diffuse' do
-    bomb = Bomb.last
+  post '/bomb/diffuse' do
+    params = {}
+    params = JSON.parse(request.body.read)
+    @bomb = Bomb.where("id = ?", params["bomb_id"]).first
     wire = Wire.where(color: params["color"]).first
+
     if wire.diffuse?
-      bomb.status = "inactive"
+      @bomb.inactive!
     else
-      bomb.status = "explode"
+      @bomb.explode!
     end
-    bomb.save!
+    @bomb.save!
+
     haml :bomb
   end
 
@@ -57,23 +62,25 @@ class Overlord < Sinatra::Application
 
   post '/bomb/activate' do
     request.body
+
     request_json = JSON.parse(request.body.read)
-    bomb = Bomb.last
-    if BombHelpers.match_activation_code?(bomb, request_json)
-      bomb.status = :active
+    bomb = Bomb.where("id = ?", request_json["bomb_id"]).first
+    if bomb.match_activation_code?(request_json)
+      bomb.active!
       bomb.activated_time = Time.now
       bomb.failed_attempts = 0
       bomb.save!
     end
-    BombHelpers.bomb_status(bomb)
+    BombHelpers.explode_bomb(bomb)
+    bomb.to_json
   end
 
   post '/bomb/deactivate' do
     request_json = {}
     request_json = JSON.parse(request.body.read)
-    bomb = Bomb.last
-    if BombHelpers.match_deactivation_code?(bomb, request_json)
-      bomb.status = :inactive
+    bomb = Bomb.where("id = ?", request_json["bomb_id"]).first
+    if bomb.match_deactivation_code?(request_json)
+      bomb.inactive!
       bomb.activated_time = nil
       bomb.failed_attempts = 0
       bomb.save!
@@ -81,11 +88,12 @@ class Overlord < Sinatra::Application
       bomb.failed_attempts += 1
       bomb.save!
       if bomb.failed_attempts == 3
-        bomb.status = :explode
+        bomb.explode!
         bomb.activated_time = nil
         bomb.save!
       end
     end
-    BombHelpers.bomb_status(bomb)
+    BombHelpers.explode_bomb(bomb)
+    bomb.to_json
   end
 end

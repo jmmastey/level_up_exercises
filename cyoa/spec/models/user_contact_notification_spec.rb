@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe UserContactNotification, :type => :model do
+RSpec.describe UserContactNotification, :type => :model do
   describe "user_contact_id" do
     it { should_not accept_values_for(:user_contact_id, nil) }
   end

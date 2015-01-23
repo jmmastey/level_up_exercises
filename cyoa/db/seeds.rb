@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+ContactType.create({ name: 'Personal Email', type: 'email' })
+ContactType.create({ name: 'Work Email', type: 'email' })
+ContactType.create({ name: 'Cell Phone', type: 'phone' })

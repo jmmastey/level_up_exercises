@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="header">
+    <h3>
+      <%= @post.heading %>
+    </h3>
+  <p>
+    <%= link_to  @post.external_url, @post.external_url  %>
+  </p>
+</div>
+<div class="row">
+  <div class="col-md-7" id="post-images">
+    <% if @images.blank? %>
+      <%= image_tag "/images/no_image.gif", class: "thumbnail" %>
+    <% else %>
+      <% @images.each do |image| %>
+        <%= image_tag image.url, class: "thumbnail" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-5">
+    <div class="basic-info">
+      <h4>Basic Info</h4>
+      Price: <%= number_to_currency(@post.price, precision:0)  %><br>
+      Last Updated: <%= "#{time_ago_in_words(Time.at(@post.timestamp.to_i))} ago" %><br>
+
+      <% if  @post.neighborhood.present? %>
+        Neighborhood: <%= @post.neighborhood %><br>
+      <% end %>
+      
+      <% if  @post.bedrooms.present? %>
+        Bedrooms: <%= @post.bedrooms %><br>
+      <% end %>
+
+      <% if  @post.bedrooms.present? %>
+        Bathrooms: <%= @post.bathrooms %><br>
+      <% end %>
+
+      <% if  @post.sqft.present? %>
+        Square Footage: <%= @post.sqft %><br>
+      <% end %>
+      
+      <% if  @post.cats.present? %>
+        Cats Allowed: <%= @post.cats %><br>
+      <% end %>
+
+      <% if  @post.dogs.present? %>
+        Dogs Allowed: <%= @post.dogs %><br>
+      <% end %>
+
+      <% if  @post.w_d_in_unit.present? %>
+        Washer/Dryer in unit: <%= @post.w_d_in_unit %><br>
+      <% end %>
+
+      <% if  @post.street_parking.present? %>
+        Street Parking: <%= @post.street_parking %><br>
+      <% end %>
+    </div>
+    <div class="description">
+      <h4>Description</h4>
+      <p> 
+        <%= @post.body %><br>
+      </p>
+    </div>
+  </div>
+</div>

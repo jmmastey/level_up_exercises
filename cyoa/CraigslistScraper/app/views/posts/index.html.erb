@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="center">
+    <h1>Craigslist Scraper</h1>
+    <h3>The easiest way to find apartment rentals in Illinois</h3>
+  </div>
+</div>
+<div class="container">
+  <div class="filter">
+    <%= form_tag posts_path, method: :get, class: "form-inline" do %>
+    
+      <div class="row">
+        <div class="col-md-4">
+          <%= label_tag "Price" %>
+        </div>
+        <div class="col-md-2">
+          <%= label_tag :bedrooms %>
+        </div>
+        <div class="col-md-2">
+          <%= label_tag :bathrooms %>
+        </div>
+        <div class="col-md-4">
+          <%= label_tag :neighborhood %>
+        </div>
+      </div>
+        
+      <div class="row">
+        <div class="col-md-4">
+          <%= text_field_tag :min_price, params[:min_price], placeholder: "minimum", class: "form-control input-sm" %>
+          <%= text_field_tag :max_price, params[:max_price], placeholder: "maximum", class: "form-control input-sm" %>
+        </div>
+        <div class="col-md-2">
+          <%= text_field_tag :bedrooms, params[:bedrooms], placeholder: "# of beds", class: "form-control input-sm" %>
+        </div>
+        <div class="col-md-2">
+          <%= text_field_tag :bathrooms, params[:bathrooms], placeholder: "# of baths", class: "form-control input-sm" %>
+        </div>
+        <div class="col-md-4">
+          <%= select_tag(:neighborhood, options_from_collection_for_select(Location.all, :name, :name, params[:neighborhood]), { include_blank: true, class: "form-control input-sm" }) %>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col-md-4">
+          <%= label_tag "Square Footage" %>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-4">
+          <%= text_field_tag :min_sqft, params[:min_sqft], placeholder: "minimum", class: "form-control input-sm" %>
+          <%= text_field_tag :max_sqft, params[:max_sqft], placeholder: "maximum", class: "form-control input-sm" %>
+        </div>
+        <div class="col-md-1">
+          <%= label_tag :cats %>
+          <%= check_box_tag :cats, "YES", params[:cats] %>
+        </div>
+        <div class="col-md-1">
+          <%= label_tag :dogs %>
+          <%= check_box_tag :dogs, "YES", params[:dogs] %>
+        </div>
+        <div class="col-md-2">
+          <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% if @posts.empty? %>
+    <hr>
+    <h3>No results found</h3>
+  <% else %>
+    <table class="table table-hover table-condensed">
+      <thead>
+        <tr>
+          <th>Heading</th>
+          <th>Price</th>
+          <th>Beds</th>
+          <th>Baths</th>
+          <th>Neighborhood</th>
+          <th>Last Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= link_to post.heading, post %></td>
+            <td><%= number_to_currency(post.price, precision: 0) %></td>
+            <td><%= post.bedrooms %></td>
+            <td><%= post.bathrooms %></td>
+            <td><%= post.neighborhood %></td>
+            <td><%= "#{ time_ago_in_words(Time.at(post.timestamp.to_i)) } ago"%></td>
+           </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+    <br>
+  <% end %>
+</div>

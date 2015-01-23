@@ -1,0 +1,5 @@
+Explain how the Five Second Rule for code review works.in how the Five Second Rule for code review works.
+
+  This generally means that a code should be understood fast by either the author or the peer who is doing the review.
+  If a code isn't easily understood this can mean that it has a complexity that should be simplified. But in cases where
+  simplicity can't be implemented proper commenting must be made.

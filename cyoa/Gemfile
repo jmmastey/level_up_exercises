@@ -46,6 +46,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+  gem "accept_values_for"
   gem 'factory_girl_rails'
   
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

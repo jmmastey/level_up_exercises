@@ -1,13 +1,13 @@
 Then(/^I see weather information$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content("weather information")
 end
 
 Then(/^I see a register now option$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_button("register")
 end
 
 Then(/^I see a login option$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_button("login")
 end
 
 Then(/^I see a logout option$/) do

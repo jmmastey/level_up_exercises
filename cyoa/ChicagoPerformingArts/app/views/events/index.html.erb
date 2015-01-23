@@ -1,0 +1,36 @@
+<html>
+<center>
+<br>
+<br>
+<div class='container'>
+<table class='table table-hover table-condensed'>
+
+  <thead>
+    <tr>
+      <th>Placename</th>
+      <th>CityName</th>
+      <th>ActivityStartDate</th>
+      <th>ActivityEndDate</th>
+      <th>salesStatus</th>
+      </tr>
+  </thead>
+<tbody>
+  <% @events.each do |event| %>
+      <tr>
+      <td><%= event.placename %></td>
+      <td><%= event.cityname %></td>
+      <td><%= event.activity_start_date.strftime("%m/%d/%Y")%></td>
+      <td><%= event.activity_end_date.strftime("%m/%d/%Y") %></td>
+      <td><%= event.sales_status %></td>
+      <td><%= link_to 'show details', event.registration_url_adr, :target => '_blank' %></td>
+      </tr>
+  <% end %>
+</tbody>
+</table>
+</div>
+<%= will_paginate @events%>
+</center>
+<br>
+</html>
+
+ 

@@ -6,6 +6,7 @@ require File.join(File.dirname(__FILE__), '..', '..', 'overlord.rb')
 
 require 'capybara'
 require 'capybara/cucumber'
+require 'capybara/dsl'
 require 'rspec'
 
 Capybara.app = Sinatra::Application

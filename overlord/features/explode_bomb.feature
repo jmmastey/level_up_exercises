@@ -1,7 +1,7 @@
 Feature: Explode the bomb
   As a bomb recipient
   I want to explode the bomb
-  So that I can see if I survive the blast
+  To see if I survive the blast
 
   Background:
   	The bomb has been booted and activated with the default codes

@@ -13,7 +13,7 @@
         Deactivation code:
         %input{:name => "deact_code", :type => "text", :pattern => "[0-9]{4}"}
       %p
-        %input{:type => "submit", :value => "Boot bomb", :id => "boot_bomb"}
+        %input.boot-bomb{:type => "submit", :value => "Boot bomb"}
 - else
   %center
     %p Bomb 

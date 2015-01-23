@@ -1,8 +1,7 @@
-# run `ruby overlord.rb` to run a webserver for this app
-
 require_relative 'bomb'
 require 'sinatra'
 
+set :haml, format: :html5
 enable :sessions
 
 get '/' do

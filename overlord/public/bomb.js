@@ -141,7 +141,7 @@ $(document).ready( function() {
       var refreshId = window.setInterval(function(){
         $.ajax({
           type: "GET",
-          url: "http://localhost:9292/bomb.json/"+$("#bomb_id").val(),
+          url: "http://localhost:9292/bomb/"+$("#bomb_id").val(),
           dataType: "json",
           success: function(returnObject)
           {

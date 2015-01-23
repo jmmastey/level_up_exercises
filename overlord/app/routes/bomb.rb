@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/contrib'
 require 'dm-sqlite-adapter'
 require 'json'
 
@@ -6,18 +7,21 @@ require_relative '../helpers/bomb_helpers'
 class Overlord < Sinatra::Application
   include BombHelpers
 
-  get '/bomb.json/:bomb_id' do
-    @bomb = Bomb.where("id = ?", params[:bomb_id]).first
-    haml :bomb
-    content_type :json
-    BombHelpers.explode_bomb(@bomb)
-    @bomb.to_json
+  before /.*/ do
+    if request.url.match(/.json$/)
+      request.accept.unshift('application/json')
+      request.path_info = request.path_info.gsub(/.json$/,'')
+    end
   end
 
   get '/bomb/:bomb_id' do
     @bomb = Bomb.where("id = ?", params[:bomb_id]).first
     BombHelpers.explode_bomb(@bomb)
-    haml :bomb
+
+    respond_to do |format|
+      format.json { @bomb.to_json }
+      format.html { haml :bomb }
+    end
   end
 
   post '/bomb/diffuse' do
@@ -47,14 +51,14 @@ class Overlord < Sinatra::Application
       deactivation_code: request_json["deactivation_code"],
       detonation_time: request_json["detonation_time"])
 
-    request_json["wires"] ||= [{ color: "red", diffuse: true },
+    request_json["wires"] ||= [{ color: "red", diffuse: false },
                                 { color: "green", diffuse: true }]
 
     bomb.save!
 
-    request_json["wires"].each do |wire|
-      wire_string = bomb.wires.build(wire)
-      wire_string.save
+    request_json["wires"].each do |wire_options|
+      wire = bomb.wires.build(wire_options)
+      wire.save
     end
 
     bomb.to_json

@@ -5,3 +5,8 @@ ruby "2.1.5"
 
 gem "sinatra"
 gem "rack"
+gem "shotgun"
+gem "cucumber"
+gem "capybara"
+gem "rspec"
+gem "webrat"

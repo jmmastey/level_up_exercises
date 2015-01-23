@@ -8,8 +8,9 @@ Build a Rails app that shows off some of the achievements of the current Congres
 
 Use the APIs provided by [The Sunlight Foundation](https://sunlightfoundation.com/api/) (they also provide the [OpenCongress API](http://www.opencongress.org/api)). The rules are as follows:
 
-* Pick a good deed that requires some transformation from the source data itself.
+* Get the list of good deeds from the API.
 * Expose those good deeds as a webpage. If you're segmenting based on bills, or congressmen, or parties etc, then provide pages for each of those folks.
+* Perform some kind of transformation on the source data itself. Give me wiki links, or let me tweet my favorite deeds, or show me something interesting about the data. Who's got the best record?
 * Don't hit the original API every time a page is requested. Grab the data on a schedule and store it locally.
 * Since we love open data, republish the derivative data as a JSON feed.
 * I'm a voter. Let me sign in and tag good deeds I'm interested in (my congressperson, or political party, etc) and get email alerts for new good deeds.

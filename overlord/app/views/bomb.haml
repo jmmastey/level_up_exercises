@@ -1,0 +1,48 @@
+%link{:href => "/style.css", :rel => "stylesheet"}/
+
+%script{:src => "/jquery-1.11.1.min.js"}
+%script{:src => "/jquery-ui.min.js"}
+%link{:href => "https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css", :rel => "stylesheet"}/
+
+%script{:src => "/bomb.js", :type => "text/javascript"}
+%h4 This is the interface
+
+%input{type: "hidden", value: "#{@bomb.id}", id: "bomb_id"}
+
+#dialog-confirm{:style => "display: none;", :title => "Activate the bomb?"}
+  %p
+    %span.ui-icon.ui-icon-alert{:style => "float:left; margin:0 7px 20px 0;"}>
+    These items will be permanently deleted and cannot be recovered. Are you sure?
+.timer
+
+.label
+  %label Status
+
+#wires.bomb_wires
+  %button{ style: "background-color:green", id: "green_btn", class: "wire_btn" } Green
+  %button{ style: "background-color:red",   id: "red_btn", class: "wire_btn" } Red
+
+%textarea{ readonly: true, id: "bomb_status",class: "bomb_inactive" }
+  ="Inactive"
+#bomb
+  / Screen and clear key
+  .top
+    %span.clear C
+    .screen
+  .keys
+    / operators and other keys
+    %span.7 7
+    %span.8 8
+    %span.9 9
+    %span.operator.activate Activate
+    %span.4 4
+    %span.5 5
+    %span.6 6
+    %span.operator.deactivate Deactivate
+    %span.1 1
+    %span.2 2
+    %span.3 3
+    %span.operator Status
+    %span.0 0
+/ PrefixFree
+

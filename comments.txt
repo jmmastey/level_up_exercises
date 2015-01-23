@@ -1,0 +1,7 @@
+So, I lied above obviously. Sometimes comments are actually necessary. Name (and defend) some cases where you should add comments to your code.
+
+  Documentation isn't really commenting but if it were that would be a good place to write them down eg(.md, .rdoc etc)
+  When writing a very complex code that you simply can't simplify to a baby's level.
+  When writing code for an API that can only be blackbox tested.
+  When writing tests that require external data testing (when testing for accuracy or what not, e.g doing Math in a higher level).
+  When trying to explain edge cases or some pecularities on your code or tests.

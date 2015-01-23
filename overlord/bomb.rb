@@ -3,12 +3,12 @@ class Bomb
   DEFAULT_DEACT_CODE = "0000"
   MAX_DEACTIVATION_ATTEMPTS = 3
 
-  attr_reader :attempts_remaining, :state, :activation_code, :active
+  attr_reader :attempts_remaining, :activation_code, :active
 
   def initialize(act_code, deact_code)
-    validate(act_code, deact_code)
     @activation_code = act_code.empty? ? DEFAULT_ACT_CODE : act_code
     @deactivation_code = deact_code.empty? ? DEFAULT_DEACT_CODE : deact_code
+    validate
     @attempts_remaining = MAX_DEACTIVATION_ATTEMPTS
     @active = false
     @exploded = false
@@ -34,9 +34,9 @@ class Bomb
 
   private
 
-  def validate(act_code, deact_code)
-    raise ArugmentError unless act_code === /^\d{4}$/
-    raise ArugmentError unless deact_code === /^\d{4}$/
+  def validate
+    raise ArgumentError unless /^\d{4}$/ === @activation_code
+    raise ArgumentError unless /^\d{4}$/ === @deactivation_code
   end
 
   def incorrect_deactivation_code

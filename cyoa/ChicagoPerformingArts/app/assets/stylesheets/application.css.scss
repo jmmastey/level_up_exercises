@@ -1,0 +1,23 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+textarea {
+    width: 200px;
+}
+
+div.dropdown_container {
+    width: 200px;
+    height:30px;
+}
+
+body {
+  background-color: #FFE4C4 ;
+}
+
+h1 {
+  font-family: Palatino;
+  color: #483D8B;
+}
+h2 {
+  font-family: Consolas;
+  color: #800000;
+}

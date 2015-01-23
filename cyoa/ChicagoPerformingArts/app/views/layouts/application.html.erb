@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <center>
+  <title>ChicagoPerformingArts</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <h1>Chicago Arts n Spirits</h1>
+  <h2>Laugh Drink Paint </h2>
+<img src= "http://www.rentcafe.com/blog/wp-content/uploads/2012/05/Fotolia_40972290_Subscription_XXL.jpg" style="width:304px;height:228px">
+<img src= "http://lillstreet.com/files/Kidtreet_web1.jpg"style="width:304px;height:228px">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7Us7sxBP7oZTeC_XhT2WvKtrHYUM0v0paFmKpeHa-VPUnL3yU" style="width:304px;height:228px">
+
+
+<%= form_tag '/events', method: :get do %>
+<div class="form-group">
+            <h3>Search Art Event</h3>
+            <label for='start_date' id='start-date-label'>Start Date</label>
+            <input type="date" id='start_date' name='start_date' style="width: 200px;height:30px;"/>
+</div>
+<div class="form-group">
+            <label for='city' id='city-label'=>City Name</label>
+            <input type="text" id='city' name='city' style="width:200px;height:30px;"/>
+</div>
+<div class="form-group">
+  <label for='status' id='status' /=>Sales Status</label>
+<select name='status'style="width: 200px;height:30px;"/>
+</div>
+  <option value="">Select Options</option>
+  <option value="registration-open">Registration-open</option>
+  <option value="registration-closed">registration-closed</option>
+  <option value="registration-unavailable">Registration-unavailable</option>
+</select>
+</div>
+<br>
+<button id="btn-submit" type="submit">Search</button>
+<% end %>
+
+
+<body background="light_blue_parchment_paper_background_1800x1600.jpg">
+</head>
+<%= yield %>
+</center>
+</body>
+</html>
+

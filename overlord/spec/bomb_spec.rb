@@ -57,9 +57,9 @@ describe Bomb do
 
     it "does not activate if the bomb has exploded" do
       sample_bomb.try_to_activate("1234")
-      sample_bomb.try_to_deactivate("1111")
-      sample_bomb.try_to_deactivate("1111")
-      sample_bomb.try_to_deactivate("1111")
+      3.times do
+        sample_bomb.try_to_deactivate("1111")
+      end
       sample_bomb.try_to_activate("1234")
       expect(sample_bomb.exploded?).to eq(true)
       expect(sample_bomb.active).to eq(false)
@@ -78,29 +78,27 @@ describe Bomb do
 
     it "does not explode after two incorrect deactivation attempts" do
       sample_bomb.try_to_activate("1234")
-      sample_bomb.try_to_deactivate("4444")
-      expect(sample_bomb.active).to eq(true)
-      expect(sample_bomb.exploded?).to eq(false)
-      sample_bomb.try_to_deactivate("5555")
-      expect(sample_bomb.active).to eq(true)
-      expect(sample_bomb.exploded?).to eq(false)
+      2.times do
+        sample_bomb.try_to_deactivate("4444")
+        expect(sample_bomb.active).to eq(true)
+        expect(sample_bomb.exploded?).to eq(false)
+      end
 
     end
     it "explodes after three incorrect deactivation attempts" do
       sample_bomb.try_to_activate("1234")
-      sample_bomb.try_to_deactivate("4444")
-      sample_bomb.try_to_deactivate("4444")
-      sample_bomb.try_to_deactivate("6666")
+      3.times do
+        sample_bomb.try_to_deactivate("4444")
+      end
       expect(sample_bomb.exploded?).to eq(true)
       expect(sample_bomb.attempts_remaining).to eq(0)
     end
 
     it "does nothing after exploding" do
       sample_bomb.try_to_activate("1234")
-      sample_bomb.try_to_deactivate("4444")
-      sample_bomb.try_to_deactivate("4444")
-      sample_bomb.try_to_deactivate("6666")
-      sample_bomb.try_to_deactivate("6666")
+      4.times do
+        sample_bomb.try_to_deactivate("4444")
+      end
       expect(sample_bomb.exploded?).to eq(true)
       expect(sample_bomb.attempts_remaining).to eq(0)
     end
@@ -121,17 +119,17 @@ describe Bomb do
 
     it "does not explode after one or two incorrect deactivation attempts" do
       sample_bomb.try_to_activate("1234")
-      sample_bomb.try_to_deactivate("4444")
-      expect(sample_bomb.exploded?).to eq(false)
-      sample_bomb.try_to_deactivate("4444")
-      expect(sample_bomb.exploded?).to eq(false)
+      2.times do
+        sample_bomb.try_to_deactivate("4444")
+        expect(sample_bomb.exploded?).to eq(false)
+      end
     end
 
     it "explodes after three incorrect deactivation attempts" do
       sample_bomb.try_to_activate("1234")
-      sample_bomb.try_to_deactivate("4444")
-      sample_bomb.try_to_deactivate("4444")
-      sample_bomb.try_to_deactivate("4444")
+      3.times do
+        sample_bomb.try_to_deactivate("4444")
+      end
       expect(sample_bomb.exploded?).to eq(true)
     end
   end

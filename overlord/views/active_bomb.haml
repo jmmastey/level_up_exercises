@@ -7,21 +7,21 @@
   %p
     Attempts remaining:
     =bomb.attempts_remaining
-  - if bomb.attempts_remaining > 0 && bomb.state == true
+  - if bomb.attempts_remaining > 0 && bomb.active == true
     %form{:action => "/deactivate", :method => "post"}
       %p 
         Deactivation code: 
         %input{:name => "submitted_deact_code", :type => "text", :pattern => "[0-9]{4}"}
       %p
         %input{:type => "submit", :value => "Submit deactivation code"}
-  - elsif bomb.attempts_remaining > 0 && bomb.state == false
+  - elsif bomb.attempts_remaining > 0 && bomb.active == false
     %p Bomb deactivated
     %p
       %a{:href => "/"} Return to homepage
-  - elsif bomb.attempts_remaining == 0
+  - if bomb.exploded?
     %marquee{:behavior => "alternate", :scrollamount => "60"} Bomb exploded
     %p
       %a{:href => "/"} Return to homepage
-  - if bomb.attempts_remaining < 3 && bomb.state == true
+  - if bomb.attempts_remaining < 3 && bomb.active == true
     %p
       Incorrect deactivation code

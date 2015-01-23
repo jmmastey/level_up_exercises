@@ -7,7 +7,8 @@ class NameGenerator
 
   private
 
-  # The reason I put this in private is because this type of method should not be accessible to other classes.
+  # The reason I put this in private is because this type of method
+  # should not be accessible to other classes.
   # It's similar to when you have authentication or what not. - svajone
   def self.generate_name
     # I am using SecureRandom here just for kicks and giggles.
@@ -15,17 +16,16 @@ class NameGenerator
     # random instances of a number. -svajone
     numbers = ('0'..'9').to_a
     letters = ('A'..'Z').to_a
-    alpha_characters = randomizer(letters)
-    numeric_characters = randomizer(numbers)
+    alpha_characters = randomize(letters)
+    numeric_characters = randomize(numbers)
     name = alpha_characters.sample(2) + numeric_characters.sample(3)
     name.join
   end
 
-  private
+  private_class_method
 
-  def self.randomizer(characters)
-    length = 10
-    result = SecureRandom.random_bytes(length).each_char.map do |char|
+  def self.randomize(characters)
+    SecureRandom.random_bytes(characters.length).each_char.map do |char|
       characters[(char.ord % characters.length)]
     end
   end

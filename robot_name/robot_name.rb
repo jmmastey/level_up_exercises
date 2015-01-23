@@ -26,5 +26,5 @@ generator = -> { 'AA111' }
 robot = Robot.new(name_generator: generator)
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
-#THIS SHOULD ERROR
-Robot.new(name_generator: generator)
+#THIS SHOULD ERROR - COMMENTED OUT TO RUN TEST
+#Robot.new(name_generator: generator)

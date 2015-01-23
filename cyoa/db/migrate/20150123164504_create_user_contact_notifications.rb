@@ -1,7 +1,7 @@
-class CreateUserContactNotifications < ActiveRecord::Migration
+class CreateUserNotifications < ActiveRecord::Migration
   def change
-    create_table :user_contact_notifications do |t|
-
+    create_table :user_notifications do |t|
+      
       t.timestamps null: false
     end
   end

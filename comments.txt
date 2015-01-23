@@ -1,0 +1,21 @@
+ Take a break from the exercises for a bit. Explain why we say that 'comments lie'.
+
+  Comments often lie because sometimes when a person writes the comment to their code they either neglect to update it when the
+  refactor or add new features to it. Sometimes when they write the comment, they only focus on the code they wrote and not the
+  entirety of the app or it's impact on the whole of the application. That's why, it is best to write tests for it although a
+  test can also be bad because if the person writing the test does not know the proper way to write it, it can actually yield
+  bad results.
+
+ If we don't trust comments, how do we explain our code adequately to others?
+
+  The first thing would be properly naming methods, variables and should be clear in intent when it comes to writing it out.
+  Another is to write tests that show what the code should be doing, it's desired output, negated output or what not. Because when
+  a peer looks at the code and wonders what it does the best way to show it's functionality is through test either through
+  unit testing or behavior driven tests.
+
+ Explain what 'self documenting code' means in your own words
+
+  A self documenting code (rare in big applications in my opinion, especially complex one) is a code that reads itself that almost
+  makes the tests mute. Let's say I wrote a code for a calculator, since most individuals can do basic arithmetic the code should
+  be written as if you are doing basic math that even perhaps a non programmer would be able to comprehend what you wrote. Example,
+  I wrote a method 'def performs_addition', from that itself you can infer that method will do addition.

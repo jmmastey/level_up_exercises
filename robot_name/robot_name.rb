@@ -1,24 +1,20 @@
+require './name_generator.rb'
+require './validate_name.rb'
+
 class NameCollisionError < RuntimeError; end
+class NameRegexError < RuntimeError; end
 
 class Robot
   attr_accessor :name
 
   @@registry
 
-  def initialize(args = {})
+  def initialize(options = {})
     @@registry ||= []
-    @name_generator = args[:name_generator]
-
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
-
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
-
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+    name_generator = options[:name_generator] || NameGenerator
+    @name = name_generator.call
+    raise NameRegexError, "The name generated does not pass the Regex" unless ValidateName.match_regex?(@name)
+    raise NameCollisionError, "The name '#{@name}' already exists in the registry!" if ValidateName.name_exists?(@@registry, @name)
     @@registry << @name
   end
 end
@@ -26,7 +22,9 @@ end
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
-# Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+generator = -> { 'AA111' }
+robot = Robot.new(name_generator: generator)
+puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+
+#THIS SHOULD ERROR - COMMENTED OUT TO RUN TEST
+#Robot.new(name_generator: generator)

@@ -7,20 +7,23 @@ require_relative '../helpers/bomb_helpers'
 class Overlord < Sinatra::Application
   include BombHelpers
 
-  before /.*/ do
-    if request.url.match(/.json$/)
+   before /.*/ do
+     if request.url.match(/.json$/)
       request.accept.unshift('application/json')
       request.path_info = request.path_info.gsub(/.json$/,'')
-    end
-  end
+     end
+   end
 
   get '/bomb/:bomb_id' do
     @bomb = Bomb.where("id = ?", params[:bomb_id]).first
     BombHelpers.explode_bomb(@bomb)
-
-    respond_to do |format|
-      format.json { @bomb.to_json }
-      format.html { haml :bomb }
+    if request.accept.length == 1
+      haml :bomb
+    else
+      respond_to do |format|
+        format.json { @bomb.to_json }
+        format.html { haml :bomb }
+      end
     end
   end
 

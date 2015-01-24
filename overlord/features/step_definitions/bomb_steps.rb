@@ -1,15 +1,21 @@
+
 Given(/^"(.*?)" says "(.*?)"$/) do |selector_id, status_text|
   selector_id.should have_content(status_text)
 end
 
-Given(/^a bomb$/) do
-  @bomb ||= Bomb.create(activation_code: "1234",
+
+Given(/^a bomb is "(.*?)"$/) do |arg1|
+  @bomb = Bomb.create(activation_code: "12345",
                           deactivation_code: "0000",
-                          detonation_time: 45)
+                          detonation_time: 45,
+                          status: arg1)
+
 end
 
+
 Given(/^I am looking at the page bomb$/) do
-  visit (current_url + "/" + @bomb.id.to_s)
+  visit "/"
+  visit current_url + "/bomb/#{@bomb.id}"
 end
 
 Given(/^"(.*?)" is not configured$/) do |arg1|
@@ -41,7 +47,7 @@ Then(/^"(.*?)" should contain "(.*?)"$/) do |arg1, arg2|
   end
 end
 
-Then /^(?:|I )should see "([^\"]*)"(?: with id of textarea "([^\"]*)")?$/ \
-do |text, selector|
-  selector.should have_content(text)
+Then(/^the bomb status is "(.*?)"$/) do |arg1|
+  selector = page.find_by_id("bomb_status")
+  expect(selector.text.downcase).to eq(arg1.downcase)
 end

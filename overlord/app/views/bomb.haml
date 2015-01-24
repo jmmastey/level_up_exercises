@@ -23,7 +23,7 @@
   %button{ style: "background-color:red",   id: "red_btn", class: "wire_btn" } Red
 
 %textarea{ readonly: true, id: "bomb_status",class: "bomb_inactive" }
-  ="Inactive"
+  ="#{@bomb.status}"
 #bomb
   / Screen and clear key
   .top

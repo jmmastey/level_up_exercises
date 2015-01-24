@@ -4,7 +4,7 @@ require 'sinatra'
 require 'dm-sqlite-adapter'
 require "sinatra/activerecord"
 require 'sinatra/sprockets'
-require_relative 'overlord_helpers'
+
 enable :sessions
 
 register Sinatra::Sprockets
@@ -13,9 +13,15 @@ set :database, adapter: "sqlite3", database: "detonation_device"
 set :views, "#{File.dirname(__FILE__)}/views"
 
 class Overlord < Sinatra::Application
-  include OverlordHelpers
   configure :development do
     DataMapper::Logger.new($stdout, :debug)
+  end
+  def start_time
+    session[:start_time] ||= (Time.now).to_s
+  end
+
+  def base_url
+    @base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
   end
   get '/' do
     @bombs = Bomb.all

@@ -34,14 +34,17 @@ Given(/^"(.*?)" is configured to "(.*?)"$/) do |arg1, arg2|
 end
 
 When(/^I enter right "(.*?)"$/) do |arg1|
-  visit "/bomb"+ "/" + @bomb.id.to_s
-  %w(1 2 3 4).each do |num|
+  #visit "/bomb"+ "/" + @bomb.id.to_s
+  require 'pry'
+  %w(1 2 3 4 5).each do |num|
     find(:xpath, "//span[@class='"+num+"']").click
   end
+
+  binding.pry
 end
 
 Then(/^"(.*?)" should contain "(.*?)"$/) do |arg1, arg2|
-  visit "/bomb"+ "/" + @bomb.id.to_s
+  #visit "/bomb"+ "/" + @bomb.id.to_s
   arg2.each_char do |num|
     find(:xpath, "//span[@class='"+num+"']").click
   end

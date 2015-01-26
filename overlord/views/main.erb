@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Overlord</title>
+  </head>
+  <body>
+    <h1>Status: <%= bomb.status %></h1>
+    <% if bomb.errors.length > 0 %>
+    <h2>Error: <%= bomb.errors.join(", ") %></h2>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

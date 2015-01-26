@@ -3,6 +3,8 @@
 
 %input{type: "hidden", value: "#{@bomb.id}", id: "bomb_id"}
 
+%input{type: "hidden", value: "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}", id: "base_url"}
+
 #dialog-confirm{:style => "display: none;", :title => "Activate the bomb?"}
   %p
     %span.ui-icon.ui-icon-alert{:style => "float:left; margin:0 7px 20px 0;"}>

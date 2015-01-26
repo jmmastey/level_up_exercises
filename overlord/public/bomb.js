@@ -91,7 +91,7 @@ $(document).ready( function() {
         var datalist = { color: btn_color, bomb_id: $("#bomb_id").val() };
         $.ajax({
           type: "POST",
-          url: "http://localhost:9292/bomb/diffuse",
+          url: $("#base_url").val()+"/bomb/diffuse",
           data: JSON.stringify(datalist),
           dataType: "json",
           success: function(returnObject)
@@ -139,9 +139,10 @@ $(document).ready( function() {
       }
       var start = 0;
       var refreshId = window.setInterval(function(){
+        var baseurl = $("#base_url").val();
         $.ajax({
           type: "GET",
-          url: "http://localhost:9292/bomb/"+$("#bomb_id").val(),
+          url: baseurl+"/bomb/"+$("#bomb_id").val(),
           dataType: "json",
           success: function(returnObject)
           {
@@ -201,7 +202,7 @@ $(document).ready( function() {
 
       $.ajax({
         type: "POST",
-        url: " http://localhost:9292/bomb/"+action,
+        url: $("#base_url").val()+"/bomb/"+action,
         dataType: "json",
         data: JSON.stringify(datalist),
         success: function(returnObject)

@@ -18,13 +18,29 @@ Given(/^I am looking at the page bomb$/) do
   visit current_url + "/bomb/#{@bomb.id}"
 end
 
-
-When(/^I enter "(.*?)" for "(.*?)"$/) do |arg1, arg2|
-  find(".screen").set(arg1)
+Given(/^"(.*?)" is not configured$/) do |arg1|
+  Bomb.create(activation_code: "1234")
+  visit "/bomb"+ "/" + @bomb.id.to_s
+  %w(1 2 3 4).each do |num|
+    find(:xpath, "//span[@class='"+num+"']").click
+  end
 end
 
-Then(/^the bomb should not be active$/) do
-  pending # express the regexp above with the code you wish you had
+Given(/^"(.*?)" is configured to "(.*?)"$/) do |arg1, arg2|
+  visit "/bomb"+ "/" + @bomb.id.to_s
+  arg2.each_char do |num|
+    find(:xpath, "//span[@class='"+num+"']").click
+  end
+end
+
+When(/^I enter right "(.*?)"$/) do |arg1|
+  #visit "/bomb"+ "/" + @bomb.id.to_s
+  require 'pry'
+  %w(1 2 3 4 5).each do |num|
+    find(:xpath, "//span[@class='"+num+"']").click
+  end
+
+  binding.pry
 end
 
 Then(/^"(.*?)" should contain "(.*?)"$/) do |arg1, arg2|

@@ -1,4 +1,7 @@
-Feature: Bomb status
+Feature: Bomb
+  In order to activate bomb
+  As a super villain
+  I want to enter an activation code and deactivation code
 
   Scenario: Bomb is inactive
     Given a bomb is "inactive"
@@ -16,9 +19,6 @@ Feature: Bomb status
     Then the bomb status is "Explode"
 
   Scenario: Activate a bomb
-    Given a bomb is "active"
+    Given a bomb is "inactive"
     And I am looking at the page bomb
-    When I enter "0000" for "deactivation_code"
-    Then I press "Deactivate" within "bomb_control"
-    Then the bomb should not be active
-
+    When I enter right "activation_code"

@@ -2,23 +2,21 @@ require 'spec_helper'
 
 describe Bomb do
   describe "#new" do
-    it "raises an error if the activation code is not a 4-digit number" do
-      expect { Bomb.new("1", "2321") }.to raise_error(ArgumentError)
-    end
 
-    it "raises an error if the activation code is not a 4-digit number" do
-      expect { Bomb.new("1234", "2") }.to raise_error(ArgumentError)
+    subject(:bad_input_bomb) { Bomb.new("abcd", "21") }
+
+    it "defaults to 1234/0000 codes with invalid input" do
+      bad_input_bomb.try_to_activate("1234")
+      expect(bad_input_bomb.active).to eq(true)
+      bad_input_bomb.try_to_deactivate("0000")
+      expect(bad_input_bomb.active).to eq(false)
     end
 
     subject(:sample_bomb) { Bomb.new("", "") }
 
-    it "defaults to 1234 as the activation code if no code is entered" do
+    it "defaults to 1234/0000 codes with no input" do
       sample_bomb.try_to_activate("1234")
       expect(sample_bomb.active).to eq(true)
-    end
-
-    it "defaults to 0000 as the deactivation code is no code is entered" do
-      sample_bomb.try_to_activate("1234")
       sample_bomb.try_to_deactivate("0000")
       expect(sample_bomb.active).to eq(false)
     end
@@ -32,7 +30,7 @@ describe Bomb do
     end
 
     it "has not exploded yet" do
-      expect(sample_bomb.exploded?).to eq(false)
+      expect(sample_bomb.exploded).to eq(false)
     end
   end
 
@@ -52,6 +50,7 @@ describe Bomb do
     it "does nothing if the bomb is already active" do
       sample_bomb.try_to_activate("1234")
       expect(sample_bomb.active).to eq(true)
+      expect(sample_bomb.exploded).to eq(false)
     end
 
     it "does not activate if the bomb has exploded" do
@@ -60,7 +59,7 @@ describe Bomb do
         sample_bomb.try_to_deactivate("1111")
       end
       sample_bomb.try_to_activate("1234")
-      expect(sample_bomb.exploded?).to eq(true)
+      expect(sample_bomb.exploded).to eq(true)
       expect(sample_bomb.active).to eq(false)
     end
   end
@@ -71,7 +70,7 @@ describe Bomb do
     it "deactivates the bomb when the correct deactivation code is entered" do
       sample_bomb.try_to_deactivate("0000")
       expect(sample_bomb.active).to eq(false)
-      expect(sample_bomb.exploded?).to eq(false)
+      expect(sample_bomb.exploded).to eq(false)
     end
 
     it "does not explode after two incorrect deactivation attempts" do
@@ -79,7 +78,7 @@ describe Bomb do
       2.times do
         sample_bomb.try_to_deactivate("4444")
         expect(sample_bomb.active).to eq(true)
-        expect(sample_bomb.exploded?).to eq(false)
+        expect(sample_bomb.exploded).to eq(false)
       end
     end
 
@@ -88,7 +87,7 @@ describe Bomb do
       3.times do
         sample_bomb.try_to_deactivate("4444")
       end
-      expect(sample_bomb.exploded?).to eq(true)
+      expect(sample_bomb.exploded).to eq(true)
       expect(sample_bomb.attempts_remaining).to eq(0)
     end
 
@@ -97,28 +96,28 @@ describe Bomb do
       4.times do
         sample_bomb.try_to_deactivate("4444")
       end
-      expect(sample_bomb.exploded?).to eq(true)
+      expect(sample_bomb.exploded).to eq(true)
       expect(sample_bomb.attempts_remaining).to eq(0)
     end
   end
 
-  describe "#exploded?" do
+  describe "#exploded" do
     subject(:sample_bomb) { Bomb.new("", "") }
 
     it "shows that the bomb has not exploded upon boot" do
-      expect(sample_bomb.exploded?).to eq(false)
+      expect(sample_bomb.exploded).to eq(false)
     end
 
     it "shows that the bomb has not exploded after activation" do
       sample_bomb.try_to_activate("1234")
-      expect(sample_bomb.exploded?).to eq(false)
+      expect(sample_bomb.exploded).to eq(false)
     end
 
     it "does not explode after one or two incorrect deactivation attempts" do
       sample_bomb.try_to_activate("1234")
       2.times do
         sample_bomb.try_to_deactivate("4444")
-        expect(sample_bomb.exploded?).to eq(false)
+        expect(sample_bomb.exploded).to eq(false)
       end
     end
 
@@ -127,7 +126,7 @@ describe Bomb do
       3.times do
         sample_bomb.try_to_deactivate("4444")
       end
-      expect(sample_bomb.exploded?).to eq(true)
+      expect(sample_bomb.exploded).to eq(true)
     end
   end
 end

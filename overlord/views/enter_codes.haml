@@ -4,7 +4,7 @@
   %p 
     =bomb.active
   %p 
-    =bomb.exploded?
+    =bomb.exploded
 
 - if bomb == nil
   %center
@@ -24,12 +24,12 @@
     %p Bomb has already been activated.
     %p 
       %a{:href => "/deactivate"} Return to deactivation page
-- elsif bomb.exploded?
+- elsif bomb.exploded
   %center
     %p Bomb has exploded
     %p 
       %a{:href => "/"} Start over
-- elsif !bomb.active && !bomb.exploded?
+- elsif !bomb.active && !bomb.exploded
   %center
     %p Bomb has already been booted.
     %p 

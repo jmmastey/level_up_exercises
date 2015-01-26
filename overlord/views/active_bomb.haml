@@ -2,8 +2,8 @@
   %br
 
 %center
-  %p
-    =params
+  %p.active_bomb
+    Bomb is active.
   %p
     Attempts remaining:
     =bomb.attempts_remaining
@@ -17,11 +17,11 @@
   - elsif bomb.attempts_remaining > 0 && bomb.active == false
     %p Bomb deactivated
     %p
-      %a{:href => "/"} Return to homepage
-  - if bomb.exploded?
+      %a{:href => "/"} Start over
+  - if bomb.exploded
     %marquee{:behavior => "alternate", :scrollamount => "60"} Bomb exploded
     %p
       %a{:href => "/"} Return to homepage
   - if bomb.attempts_remaining < 3 && bomb.active == true
-    %p
+    %p.incorrect_deact_code
       Incorrect deactivation code

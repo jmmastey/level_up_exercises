@@ -8,7 +8,7 @@ Feature: Activate the bomb
 
   Scenario: Bomb activates with default activation code
   	Given The bomb has been booted with the default codes
-  	When I enter the correct activation code
+  	When I enter the default activation code
   	Then the bomb should be activated
 
   Scenario: Bomb activates with entered activation code
@@ -20,3 +20,4 @@ Feature: Activate the bomb
     Given The bomb has been booted with the default codes
     When I enter an incorrect activation code
     Then the bomb should not activate
+    

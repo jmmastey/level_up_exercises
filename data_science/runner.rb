@@ -30,4 +30,3 @@ else
   print "As less than 5% of data is result is by chance we have a clear winner "
   puts Calculator.new.winner
 end
-

@@ -17,10 +17,6 @@ class Cohort
     visits - conversions
   end
 
-  def conversion_percent
-    (conversion_rate * 100.0).round(2)
-  end
-
   def standard_error
     Math.sqrt((conversion_rate * (1 - conversion_rate)) / visits).round(4)
   end
@@ -35,5 +31,9 @@ class Cohort
 
   def standard_mean
     STANDARD_DEVIATION * standard_error
+  end
+
+  def conversion_percent
+    (conversion_rate * 100.0).round(2)
   end
 end

@@ -3,15 +3,15 @@ Then(/^I see weather information$/) do
 end
 
 Then(/^I see a register now option$/) do
-  expect(page).to have_button("register")
+  expect(page).to have_link("register_link")
 end
 
 Then(/^I see a login option$/) do
-  expect(page).to have_button("login")
+  expect(page).to have_link("login_link")
 end
 
 Then(/^I see a logout option$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_link("logout_link")
 end
 
 Then(/^I see a settings option$/) do

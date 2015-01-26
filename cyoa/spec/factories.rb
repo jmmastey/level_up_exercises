@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :user do
     email    'jeremy@example.com'
     phone    '630-849-2299'
-    password 'secret'
+    password 'secret123'
   end
 
   factory :user_notification do

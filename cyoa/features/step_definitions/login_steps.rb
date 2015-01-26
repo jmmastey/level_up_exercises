@@ -3,5 +3,9 @@ Given(/^I am not logged in$/) do
 end
 
 Given(/^I am logged in$/) do
-  pending # express the regexp above with the code you wish you had
+  @user = FactoryGirl.create(:user)
+  visit new_user_session_path
+  fill_in "Email", with: @user.email
+  fill_in "Password", with: @user.password
+  click_button "Log in"
 end

@@ -1,5 +1,0 @@
-<% if user_signed_in? %>
-  <%= button_to "Logout", destroy_user_session, id: "logout_button", method: delete %>
-<% else %>
-  <%= link_to "Register Now", new_user_registration, id: "register_button", method: get %><%= link_to "Login", new_user_session, id: "login_button", method: get %>
-<% end %>

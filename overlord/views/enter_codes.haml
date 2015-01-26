@@ -1,5 +1,10 @@
 - 5.times do
   %br
+- if bomb != nil
+  %p 
+    =bomb.active
+  %p 
+    =bomb.exploded?
 
 - if bomb == nil
   %center
@@ -8,12 +13,24 @@
     %form{:action => "/boot_bomb", :method => "post"}
       %p 
         Activation code: 
-        %input{:name => "act_code", :type => "text", :pattern => "[0-9]{4}"}
+        %input.act_code{:name => "act_code", :type => "text", :pattern => "[0-9]{4}"}
       %p 
         Deactivation code:
-        %input{:name => "deact_code", :type => "text", :pattern => "[0-9]{4}"}
+        %input.deact_code{:name => "deact_code", :type => "text", :pattern => "[0-9]{4}"}
       %p
-        %input.boot-bomb{:type => "submit", :value => "Boot bomb"}
-- else
+        %input.boot_bomb{:type => "submit", :value => "Boot bomb"}
+- elsif bomb.active
   %center
-    %p Bomb 
+    %p Bomb has already been activated.
+    %p 
+      %a{:href => "/deactivate"} Return to deactivation page
+- elsif bomb.exploded?
+  %center
+    %p Bomb has exploded
+    %p 
+      %a{:href => "/"} Start over
+- elsif !bomb.active && !bomb.exploded?
+  %center
+    %p Bomb has already been booted.
+    %p 
+      %a{:href => "/activate"} Return to activation page

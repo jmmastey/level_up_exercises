@@ -10,14 +10,13 @@ Feature: Bomb boots with activation and deactivation codes set
 
   Scenario: Use default activation/deactivation codes
     When I do not enter an activation code or deactivation code
-    Then the bomb should boot
-    And the bomb should not be activated yet
+    Then the bomb should boot and be deactivated
 
   Scenario: Enter custom activation/deactivation codes
-    When I enter "1111" for the activation code
+    When I am on the home page
+    And I enter "1111" for the activation code
     And I enter "2222" for the deactivation code
-    Then the bomb should boot
-    And the bomb should not be activated yet
+    Then the bomb should boot and be deactivated
 
   Scenario: Enter invalid activation/deactivation codes
     When I enter "123" for the activation code

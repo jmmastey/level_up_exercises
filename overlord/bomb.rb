@@ -15,13 +15,13 @@ class Bomb
   end
 
   def try_to_activate(activation_code)
-    if activation_code == @activation_code && @active == false && !@exploded
+    if activation_code == @activation_code && !@active && !@exploded
       @active = true
     end
   end
 
   def try_to_deactivate(deactivation_code)
-    if deactivation_code == @deactivation_code && @active == true && !exploded?
+    if deactivation_code == @deactivation_code && @active && !exploded?
       @active = false
     elsif @active == true && !exploded?
       incorrect_deactivation_code
@@ -41,9 +41,9 @@ class Bomb
 
   def incorrect_deactivation_code
     @attempts_remaining -= 1
-      if @attempts_remaining == 0
-        @active = false
-        @exploded = true
-      end
+    if @attempts_remaining == 0
+      @active = false
+      @exploded = true
+    end
   end
 end

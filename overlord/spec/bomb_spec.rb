@@ -37,7 +37,6 @@ describe Bomb do
   end
 
   describe "#try_to_activate" do
-
     subject(:sample_bomb) { Bomb.new("", "") }
 
     it "does not activate if the activation code is not correct" do
@@ -45,7 +44,7 @@ describe Bomb do
       expect(sample_bomb.active).to eq(false)
     end
 
-  	it "activates when the correct activation code is entered" do
+    it "activates when the correct activation code is entered" do
       sample_bomb.try_to_activate("1234")
       expect(sample_bomb.active).to eq(true)
     end
@@ -67,7 +66,6 @@ describe Bomb do
   end
 
   describe "#try_to_deactivate" do
-
     subject(:sample_bomb) { Bomb.new("", "") }
 
     it "deactivates the bomb when the correct deactivation code is entered" do
@@ -83,8 +81,8 @@ describe Bomb do
         expect(sample_bomb.active).to eq(true)
         expect(sample_bomb.exploded?).to eq(false)
       end
-
     end
+
     it "explodes after three incorrect deactivation attempts" do
       sample_bomb.try_to_activate("1234")
       3.times do
@@ -105,7 +103,6 @@ describe Bomb do
   end
 
   describe "#exploded?" do
-
     subject(:sample_bomb) { Bomb.new("", "") }
 
     it "shows that the bomb has not exploded upon boot" do

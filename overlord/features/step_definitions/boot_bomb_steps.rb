@@ -1,12 +1,30 @@
-Given (/^I am on the home page$/) do
+Given(/^I am on the home page$/) do
   visit "/"
 end
 
-Then(/^I should see fields to enter the activation and deactivation codes for the bomb$/) do
-  expect(page).to have_content('Deactivation code:')
-  expect(page).to have_content('Activation code:')
+When(/^I do not enter an activation code or deactivation code$/) do
+  visit "/"
+  click_button("Boot bomb")
 end
 
-Then(/^I should see a button to boot the bomb$/) do
-  expect(page).to have_selector('.boot-bomb')
+Then(/^the bomb should boot and be deactivated$/) do
+  click_button("Boot bomb")
+  expect(page).to have_selector('.not_activated')
+end
+
+Then(/^I should see fields to enter the activation and deactivation codes for the bomb$/) do
+  expect(page).to have_selector('.act_code')
+  expect(page).to have_selector('.deact_code')
+end
+
+And(/^I should see a button to boot the bomb$/) do
+  expect(page).to have_selector('.boot_bomb')
+end
+
+When(/^I enter "(.*?)" for the activation code$/) do |activation_code|
+  fill_in('act_code', with: activation_code)
+end
+
+When(/^I enter "(.*?)" for the deactivation code$/) do |deactivation_code|
+  fill_in('deact_code', with: deactivation_code)
 end

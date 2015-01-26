@@ -28,24 +28,55 @@ class Calculator
 
   SIGNIFICANT_PERCENTAGE = 5
 
-  def initialize(file_name = "source_data.json")
-    @file = file_name
-  end
+  attr_reader :experiment
 
-  def experiment
-    @experiment ||= Experiment.new(@file)
+  def initialize(file_name = "source_data.json")
+    data = JsonParser.parse(File.open(file_name, "r"))
+    @experiment = Experiment.new(data)
   end
 
   def expected_conversions(cohort_name)
-    experiment.expected_conversions[cohort_name]
+    @experiment.expected_conversions[cohort_name]
   end
 
   def expected_failures(cohort_name)
-    experiment.expected_failures[cohort_name]
+    @experiment.expected_failures[cohort_name]
+  end
+
+  def chi_square
+    chi_squared_for_experiments.values.inject(:+)
+  end
+
+  def degrees_of_freedom
+    @experiment.cohorts.count - 1
+  end
+
+  def p_value
+    [p_value_index, next_higher_value]
+  end
+
+  def winner
+    conversions = {}
+    @experiment.cohorts.each do |cohort|
+      conversions[cohort.name] = cohort.conversion_rate
+    end
+    conversions.find { |_cohort, conv| conv == conversions.values.max }.first
+  end
+
+  def significant?
+    p_value.max >= SIGNIFICANT_PERCENTAGE
+  end
+
+  private
+
+  def p_value_index
+    P_VALUE_TABLE.find do |_percent, dof|
+      p_value_matched?(dof)
+    end.first
   end
 
   def chi_squared_for_experiments
-    experiment.cohorts.each_with_object({}) do |cohort, chi_squares|
+    @experiment.cohorts.each_with_object({}) do |cohort, chi_squares|
       e_conv               = expected_conversions(cohort.name)
       e_failed             = expected_failures(cohort.name)
       conversions_squared  = chi_squared_numerator(cohort.conversions, e_conv)
@@ -58,44 +89,12 @@ class Calculator
     (observed - expected)**2 / expected
   end
 
-  def chi_square
-    chi_squared_for_experiments.values.inject(:+)
-  end
-
-  def degrees_of_freedom
-    experiment.cohorts.count - 1
-  end
-
-  def p_value_index
-    P_VALUE_TABLE.select do |_percent, dof|
-      p_value_matched?(dof)
-    end.keys.first
-  end
-
-  def p_value
-    [p_value_index, next_higher_value]
-  end
-
-  def winner
-    conversions = {}
-    experiment.cohorts.each do |cohort|
-      conversions[cohort.name] = cohort.conversion_rate
-    end
-    conversions.select { |_cohort, conv| conv == conversions.values.max }.keys.first
-  end
-
-  def significant?
-    p_value.max >= SIGNIFICANT_PERCENTAGE
-  end
-
-  private
-
   def percentages
     P_VALUE_TABLE.keys
   end
 
   def previous_percentages_index
-    return 0 if  percentages.index(p_value_index)
+    return 0 if percentages.index(p_value_index)
     percentages.index(p_value_index) - 1
   end
 

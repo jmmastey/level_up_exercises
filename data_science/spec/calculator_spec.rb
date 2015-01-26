@@ -2,44 +2,37 @@ require 'spec_helper'
 
 describe Calculator do
   let(:calculator) { described_class.new("test_data.json") }
-  before do
-    file     = File.open("test_data.json", "w")
-    raw_data = [{ date: "2015-01-01", cohort: "A", result: 1 },
-                { date: "2015-01-01", cohort: "A", result: 0 },
-                { date: "2015-01-01", cohort: "B", result: 0 },
-                { date: "2015-01-01", cohort: "B", result: 1 },
-                { date: "2015-01-02", cohort: "B", result: 0 },
-                { date: "2015-01-02", cohort: "A", result: 1 },
-                { date: "2015-01-02", cohort: "B", result: 0 },
-                { date: "2015-01-02", cohort: "B", result: 1 },
-                { date: "2015-01-03", cohort: "A", result: 1 },
-                { date: "2015-01-03", cohort: "A", result: 0 },
-                { date: "2015-01-03", cohort: "B", result: 0 },
-                { date: "2015-01-03", cohort: "B", result: 1 },
-                { date: "2015-01-03", cohort: "B", result: 1 },
-                { date: "2015-01-03", cohort: "A", result: 1 },
-                { date: "2015-01-03", cohort: "B", result: 1 },
-                { date: "2015-01-03", cohort: "B", result: 1 }]
-    file.write(raw_data.map { |o| Hash[o.each_pair.to_a] }.to_json)
-    file.rewind
-  end
 
   it "calculates total conversions experiment" do
-    total = described_class.new("test_data.json").chi_square
+    total = calculator.chi_square
     expect(total).to eq(0.07)
   end
   it "calculates the winner to be A" do
-    total = described_class.new("test_data.json").winner
+    total = calculator.winner
     expect(total).to eq("A")
   end
 
   it "calculates the data is significant" do
-    total = described_class.new("test_data.json").significant?
+    total = calculator.significant?
     expect(total).to eq(true)
   end
 
+  it "calculates the expected conversions of the cohort" do
+    conversions = calculator.expected_conversions("A")
+    expect(conversions).to eq(3.75)
+  end
+
+  it "calculates the expected failures of the cohort" do
+    failures = calculator.expected_failures("A")
+    expect(failures).to eq(2.25)
+  end
+
   it "calculates the p_value is significant" do
-    total = described_class.new("test_data.json").p_value
-    expect(total).to eq([25, 25])
+    pvalue = calculator.p_value
+    expect(pvalue).to eq([25, 25])
+  end
+  it "calculates the degrees of freedom is significant" do
+    dof = calculator.degrees_of_freedom
+    expect(dof).to eq(1)
   end
 end

@@ -4,8 +4,7 @@ require_relative 'cohort'
 class Experiment
   attr_accessor :cohorts
 
-  def initialize(file_name)
-    data = JsonParser.parse(File.open(file_name, "r"))
+  def initialize(data)
     @cohorts = data.map { |key, value| Cohort.new(key => value) }
   end
 

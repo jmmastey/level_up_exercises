@@ -9,6 +9,7 @@ class Cohort
   end
 
   def conversion_rate
+    return 0 unless visits.nonzero?
     (conversions.to_f / visits).round(4)
   end
 
@@ -26,7 +27,13 @@ class Cohort
 
   def expected_conversion_rate
     sample_mean = conversion_rate * 100
-    { max: (sample_mean + (STANDARD_DEVIATION * standard_error)).round(2),
-      min: (sample_mean - (STANDARD_DEVIATION * standard_error)).round(2) }
+    { max: (sample_mean + standard_mean).round(2),
+      min: (sample_mean - standard_mean).round(2) }
+  end
+
+  private
+
+  def standard_mean
+    STANDARD_DEVIATION * standard_error
   end
 end

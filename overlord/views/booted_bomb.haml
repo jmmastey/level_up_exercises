@@ -10,9 +10,9 @@
     %form{:action => "/activate", :method => "post"}
       %p 
         Activation code: 
-        %input{:name => "submitted_act_code", :type => "text", :pattern => "[0-9]{4}"}
+        %input.act_code{:name => "submitted_act_code", :type => "text", :pattern => "[0-9]{4}"}
       %p
-        %input{:type => "submit", :value => "Submit activation code"}
+        %input.submit{:type => "submit", :value => "Submit activation code"}
     - if bad_code
       %p.incorrect_act_code
         Incorrect activation code

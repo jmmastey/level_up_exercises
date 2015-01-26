@@ -21,6 +21,5 @@ Feature: Bomb boots with activation and deactivation codes set
   Scenario: Enter invalid activation/deactivation codes
     When I am on the home page
     And I enter "123" for the activation code
-    And I enter "456" for the deactivation code
-    Then the bomb should not boot
-    And I should see a message that the codes are not valid
+    And I enter "abc" for the deactivation code
+    Then the bomb should boot and be deactivated

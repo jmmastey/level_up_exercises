@@ -8,7 +8,7 @@ Feature: Deactivate the bomb
 
   Scenario: Bomb deactivates with default deactivation code
   	Given The bomb has been booted and activated with the default codes
-  	When I enter the correct deactivation code
+  	When I enter the default deactivation code
   	Then the bomb should deactivate
 
   Scenario: Bomb does not deactivate after one incorrect deactivation attempt

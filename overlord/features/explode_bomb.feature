@@ -10,3 +10,4 @@ Feature: Explode the bomb
   	Given The bomb has been booted and activated with the default codes
   	When I enter an incorrect deactivation code three times
   	Then the bomb should explode
+  

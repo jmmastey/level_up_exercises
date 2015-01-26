@@ -28,7 +28,7 @@ When(/^I enter "(.*?)" for the deactivation code$/) do |deactivation_code|
   fill_in('deact_code', with: deactivation_code)
   click_button("Boot bomb")
 end
-
+  
 Then(/^the bomb should not boot$/) do
   #click_button("Boot bomb")
   expect(page).to have_selector('.act_code')

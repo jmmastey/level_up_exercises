@@ -12,7 +12,7 @@ module Overlord
     end
 
     post "/setup" do
-      bomb.setup(params[:activation_code], params[:deactivation_code])  
+      bomb.setup(params[:activation_code], params[:deactivation_code])
       redirect to("/")
     end
 

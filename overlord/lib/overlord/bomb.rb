@@ -10,19 +10,12 @@ module Overlord
 
     def setup(activation_code, deactivation_code)
       @errors = []
-      if activation_code.empty?
-        activation_code = "1234"
-      elsif activation_code =~ /\D/
-        @errors << "Invalid Activation Code"
-      end
-      if deactivation_code.empty?
-        deactivation_code = "0000"
-      elsif deactivation_code =~ /\D/
-        @errors << "Invalid Deactivation Code"
-      end
-      return if !@errors.empty?
-      @activation_code = activation_code
-      @deactivation_code = deactivation_code
+      validate_activation_code(activation_code)
+      validate_deactivation_code(deactivation_code)
+      return unless @errors.empty?
+
+      @activation_code = activation_code.empty? ? "1234" : activation_code
+      @deactivation_code = deactivation_code.empty? ? "0000" : deactivation_code
       @status = "Ready"
     end
 
@@ -31,7 +24,7 @@ module Overlord
       if code == @activation_code
         @status = "Activated"
       else
-        @errors = ["Invalid Activation Code"]
+        @errors << "Invalid Activation Code"
       end
     end
 
@@ -40,13 +33,28 @@ module Overlord
       if code == @deactivation_code
         @status = "Ready"
       else
-        @failed_deactivations += 1
-        if @failed_deactivations == 3
-          @status = "BOOM"
-        else
-          @errors << "Invalid Deactivation Code"
-        end
+        @errors << "Invalid Deactivation Code"
+        fail_deactivation
       end
+    end
+
+    private
+
+    def validate_activation_code(code)
+      @errors << "Invalid Activation Code" unless valid_code?(code)
+    end
+
+    def validate_deactivation_code(code)
+      @errors << "Invalid Deactivation Code" unless valid_code?(code)
+    end
+
+    def valid_code?(code)
+      code !~ /\D/
+    end
+
+    def fail_deactivation
+      @failed_deactivations += 1
+      @status = "BOOM" if @failed_deactivations == 3
     end
   end
 end

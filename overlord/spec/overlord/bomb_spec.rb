@@ -12,7 +12,7 @@ module Overlord
 
     describe "#setup" do
       it "sets status to 'Ready' when called with valid codes" do
-        bomb.setup("1234", "0000") 
+        bomb.setup("1234", "0000")
         expect(bomb.status).to eq("Ready")
       end
       it "sets status to 'Ready' when called with blank codes" do

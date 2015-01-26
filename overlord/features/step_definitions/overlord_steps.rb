@@ -56,7 +56,7 @@ Given(/^I have an activated bomb$/) do
   fill_in "deactivation_code", with: "0000"
   click_button "Save"
   fill_in "activation_code", with: "1234"
-  click_button "Activate" 
+  click_button "Activate"
 end
 
 When(/^I enter the correct deactivation code$/) do

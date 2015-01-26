@@ -2,73 +2,86 @@ require "overlord/bomb"
 
 module Overlord
   describe Bomb do
-    describe "#status" do
-      it "returns 'Setup' when first created" do
-        bomb = Bomb.new
+    let(:bomb) { Bomb.new }
+
+    describe "#new" do
+      it "status is 'Setup' when bomb is first created" do
         expect(bomb.status).to eq("Setup")
       end
-      it "returns 'Ready' after codes have been set" do
-        bomb = Bomb.new
+    end
+
+    describe "#setup" do
+      it "sets status to 'Ready' when called with valid codes" do
         bomb.setup("1234", "0000") 
         expect(bomb.status).to eq("Ready")
       end
-      it "returns 'Activated' after activation code has been entered" do
-        bomb = Bomb.new
-        bomb.setup("1234", "0000")
-        bomb.activate("1234")
-        expect(bomb.status).to eq("Activated")
-      end
-      it "returns 'Activated' after default activation code has been entered" do
-        bomb = Bomb.new
+      it "sets status to 'Ready' when called with blank codes" do
         bomb.setup("", "")
-        bomb.activate("1234")
-        expect(bomb.status).to eq("Activated")
-      end
-      it "returns 'Ready' after deactivation" do
-        bomb = Bomb.new
-        bomb.setup("1234", "0000")
-        bomb.activate("1234")
-        bomb.deactivate("0000")
         expect(bomb.status).to eq("Ready")
       end
-      it "returns 'Ready' after deactivation with default code" do
-        bomb = Bomb.new
-        bomb.setup("", "")
-        bomb.activate("1234")
-        bomb.deactivate("0000")
-        expect(bomb.status).to eq("Ready")
+      it "sets errors to 'Invalid Activation Code' when called with invalid activation code" do
+        bomb.setup("abcd", "0000")
+        expect(bomb.errors).to eq(["Invalid Activation Code"])
       end
-      it "returns 'BOOM' after unsuccessful deactivation" do
-        bomb = Bomb.new
-        bomb.setup("1234", "0000")
-        bomb.activate("1234")
-        3.times { bomb.deactivate("9999") }
-        expect(bomb.status).to eq("BOOM")
+      it "sets errors to 'Invalid Deactivation Code' when called with invalid deactivation code" do
+        bomb.setup("1234", "abcd")
+        expect(bomb.errors).to eq(["Invalid Deactivation Code"])
       end
     end
-    describe "#errors" do
-      it "returns 'Invalid Activation Code' after invalid activation code has been entered" do
-        bomb = Bomb.new
+
+    describe "#activate" do
+      it "sets status to 'Activated' when called with correct activation code" do
+        bomb.setup("1234", "0000")
+        bomb.activate("1234")
+        expect(bomb.status).to eq("Activated")
+      end
+      it "sets status to 'Activated' when called with default activation code" do
+        bomb.setup("", "")
+        bomb.activate("1234")
+        expect(bomb.status).to eq("Activated")
+      end
+      it "sets errors to 'Invalid Activation Code' when called with incorrect activation code" do
         bomb.setup("1234", "0000")
         bomb.activate("4321")
         expect(bomb.errors).to eq(["Invalid Activation Code"])
       end
-      it "returns 'Invalid Deactivation Code' after invalid deactivation code has been entered" do
-        bomb = Bomb.new
+      it "does not change status when called with incorrect activation code" do
+        bomb.setup("1234", "0000")
+        bomb.activate("4321")
+        expect(bomb.status).to eq("Ready")
+      end
+    end
+
+    describe "#deactivate" do
+      it "sets status to 'Ready' when called with correct deactivation code" do
+        bomb.setup("1234", "0000")
+        bomb.activate("1234")
+        bomb.deactivate("0000")
+        expect(bomb.status).to eq("Ready")
+      end
+      it "sets status to 'Ready' when called with default deactivation code" do
+        bomb.setup("", "")
+        bomb.activate("1234")
+        bomb.deactivate("0000")
+        expect(bomb.status).to eq("Ready")
+      end
+      it "sets errors to 'Invalid Deactivation Code' when called with incorrect deactivation code" do
         bomb.setup("1234", "0000")
         bomb.activate("1234")
         bomb.deactivate("9999")
         expect(bomb.errors).to eq(["Invalid Deactivation Code"])
       end
-      it "returns 'Invalid Activation Code' after invalid activation code has been entered during setup" do
-        bomb = Bomb.new
-        bomb.setup("abcd", "0000")
-        expect(bomb.errors).to eq(["Invalid Activation Code"])
+      it "does not change status when called with incorrect deactivation code once" do
+        bomb.setup("1234", "0000")
+        bomb.activate("1234")
+        bomb.deactivate("9999")
+        expect(bomb.status).to eq("Activated")
       end
-      it "returns 'Invalid Deactivation Code' after invalid deactivation code has been entered during setup" do
-        bomb = Bomb.new
-        bomb.setup("1234", "abcd")
-        expect(bomb.errors).to eq(["Invalid Deactivation Code"])
+      it "sets status to 'BOOM' when called with incorrect deactivation code too many times" do
+        bomb.setup("1234", "0000")
+        bomb.activate("1234")
+        3.times { bomb.deactivate("9999") }
+        expect(bomb.status).to eq("BOOM")
       end
     end
   end

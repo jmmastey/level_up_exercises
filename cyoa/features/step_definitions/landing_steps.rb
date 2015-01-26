@@ -15,5 +15,5 @@ Then(/^I see a logout option$/) do
 end
 
 Then(/^I see a settings option$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_link("edit_user_link")
 end

@@ -1,11 +1,5 @@
-%link{:href => "/style.css", :rel => "stylesheet"}/
-
-%script{:src => "/jquery-1.11.1.min.js"}
-%script{:src => "/jquery-ui.min.js"}
-%link{:href => "https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css", :rel => "stylesheet"}/
-
-%script{:src => "/bomb.js", :type => "text/javascript"}
-%h4 This is the interface
+= haml :_header
+%h4 This is the bomb interface
 
 %input{type: "hidden", value: "#{@bomb.id}", id: "bomb_id"}
 
@@ -19,8 +13,8 @@
   %label Status
 
 #wires.bomb_wires
-  %button{ style: "background-color:green", id: "green_btn", class: "wire_btn" } Green
-  %button{ style: "background-color:red",   id: "red_btn", class: "wire_btn" } Red
+  %button{ id: "green_btn", class: "wire_btn green_button" } Green
+  %button{ id: "red_btn", class: "wire_btn red_button" } Red
 
 %textarea{ readonly: true, id: "bomb_status",class: "bomb_inactive" }
   ="#{@bomb.status}"
@@ -31,18 +25,18 @@
     .screen
   .keys
     / operators and other keys
-    %span.7 7
-    %span.8 8
-    %span.9 9
+    %span.keypad-7 7
+    %span.keypad-8 8
+    %span.keypad-9 9
     %span.operator.activate Activate
-    %span.4 4
-    %span.5 5
-    %span.6 6
+    %span.keypad-4 4
+    %span.keypad-5 5
+    %span.keypad-6 6
     %span.operator.deactivate Deactivate
-    %span.1 1
-    %span.2 2
-    %span.3 3
+    %span.keypad-1 1
+    %span.keypad-2 2
+    %span.keypad-3 3
     %span.operator Status
-    %span.0 0
+    %span.keypad-0 0
 / PrefixFree
 

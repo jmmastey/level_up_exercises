@@ -18,7 +18,3 @@ Feature: Bomb
     And I am looking at the page bomb
     Then the bomb status is "Explode"
 
-  Scenario: Activate a bomb
-    Given a bomb is "inactive"
-    And I am looking at the page bomb
-    When I enter right "activation_code"

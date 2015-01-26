@@ -20,12 +20,9 @@ class Overlord < Sinatra::Application
     session[:start_time] ||= (Time.now).to_s
   end
 
-  def base_url
-    @base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
-  end
   get '/' do
     @bombs = Bomb.all
-    @url_base = base_url
+    @url_base =  "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
     haml :index
   end
 

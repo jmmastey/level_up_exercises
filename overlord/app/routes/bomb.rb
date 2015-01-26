@@ -44,22 +44,22 @@ class Overlord < Sinatra::Application
   end
 
   post '/bomb' do
-    request_json = {}
+    params = {}
     if request.body.try("string") != ""
-      request_json = JSON.parse(request.body.read)
+      params = JSON.parse(request.body.read)
     end
 
     bomb = Bomb.create(
-      activation_code: request_json["activation_code"],
-      deactivation_code: request_json["deactivation_code"],
-      detonation_time: request_json["detonation_time"])
+      activation_code: params["activation_code"],
+      deactivation_code: params["deactivation_code"],
+      detonation_time: params["detonation_time"])
 
-    request_json["wires"] ||= [{ color: "red", diffuse: false },
-                                { color: "green", diffuse: true }]
+    params["wires"] ||= [{ color: "red", diffuse: false },
+                         { color: "green", diffuse: true }]
 
     bomb.save!
 
-    request_json["wires"].each do |wire_options|
+    params["wires"].each do |wire_options|
       wire = bomb.wires.build(wire_options)
       wire.save
     end
@@ -70,9 +70,9 @@ class Overlord < Sinatra::Application
   post '/bomb/activate' do
     request.body
 
-    request_json = JSON.parse(request.body.read)
-    bomb = Bomb.where("id = ?", request_json["bomb_id"]).first
-    if bomb.match_activation_code?(request_json)
+    params = JSON.parse(request.body.read)
+    bomb = Bomb.where("id = ?", params["bomb_id"]).first
+    if bomb.match_activation_code?(params)
       bomb.active!
       bomb.activated_time = Time.now
       bomb.failed_attempts = 0
@@ -83,10 +83,10 @@ class Overlord < Sinatra::Application
   end
 
   post '/bomb/deactivate' do
-    request_json = {}
-    request_json = JSON.parse(request.body.read)
-    bomb = Bomb.where("id = ?", request_json["bomb_id"]).first
-    if bomb.match_deactivation_code?(request_json)
+    params = {}
+    params = JSON.parse(request.body.read)
+    bomb = Bomb.where("id = ?", params["bomb_id"]).first
+    if bomb.match_deactivation_code?(params)
       bomb.inactive!
       bomb.activated_time = nil
       bomb.failed_attempts = 0

@@ -8,6 +8,12 @@
   font: bold 14px Arial, sans-serif;
 }
 
+.green_button{
+  background-color: green;
+}
+.red_button{
+  background-color: red;
+}
 /* Finally adding some IE9 fallbacks for gradients to finish things up */
 
 /* A nice BG gradient */

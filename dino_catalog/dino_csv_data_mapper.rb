@@ -3,27 +3,25 @@
 
 require 'csv'
 require 'json'
-require './dino_data'
+require './dinosaur'
 
 class DinoCSVDataMapper
   def initialize
     @data_source = ['dinodex.csv', 'african_dinosaur_export.csv']
-    @dino_data = []
+    @dinosaurs = []
 
-    # Load data from data_source
     @data_source.each do |ds|
       raise "Data source: #{ds} not found" unless File.file? ds
       load_data ds
     end
   end
 
-  # Load data from CSV files
   def load_data(csv_file)
 
     csv_data = CSV.read(csv_file, headers: true)
     csv_data.each do |csv_row|
-      # Create a Dino Obj and store data
-      dino_obj = DinoData.new
+
+      dino_obj = Dinosaur.new
 
       csv_row.each do |key, val|
         case key
@@ -46,15 +44,14 @@ class DinoCSVDataMapper
         end
       end
 
-      # Append to dino_data
-      @dino_data << dino_obj
+      @dinosaurs << dino_obj
       dino_obj = nil
     end
   end
 
+  # TODO: Have a better name, simple one
   # Find by attribute & value, returns array of dino_obj
-  def find_by_attr(attr, val, dino_data_in = nil)
-    dino_data = dino_data_in || @dino_data
+  def find(attr, val, dino_data = @dinosaurs)
 
     dino_data_out =
       dino_data.select do |dino_obj|
@@ -62,40 +59,28 @@ class DinoCSVDataMapper
       end
   end
 
-  # Find by attribute condition, returns array of dino_obj
-  def find_by_attr_cond(attr, condition, dino_data_in = nil)
-    dino_data = dino_data_in || @dino_data
-
-    dino_data_out =
-      dino_data.select do |dino_obj|
-        (ret = dino_obj.send(attr)) && eval("#{ret} #{condition}")
-      end
-  end
-
   # Chain searches, returns an array of dino_obj
-  def chain_find_by_attr(params = {}, dino_data_in = nil)
-    dino_data = dino_data_in || @dino_data
+  def chain_find_by_attr(params = {}, dino_data = @dinosaurs)
 
-    params.each { |attr, val| dino_data = find_by_attr(attr, val, dino_data) }
+    params.each { |attr, val| dino_data = find(attr, val, dino_data) }
 
     dino_data
   end
 
+  ## Comments: separate concerns (print)
+  # return same class
+  #
   # Output to console
-  def cout(dino_data_in = nil)
-    dino_data = dino_data_in || @dino_data
+  # TODO: Just call it puts (override to_s)
+  def cout(dino_data = @dinosaurs)
 
     dino_data.each do |dino_obj|
-      puts dino_obj.labels
       puts dino_obj
     end
     puts
   end
 
-  # Output to json
-  def json_out(dino_data_in = nil)
-    dino_data = dino_data_in || @dino_data
-
-    dino_data.to_json
+  def json_out(dino_data = @dinosaurs)
+    dino_data.map{ |dino| dino.to_json }
   end
 end

@@ -3,9 +3,10 @@ require "json"
 require "tempfile"
 
 describe JsonParser do
+  let(:file)              { File.open("test_data.json") }
+  let(:invalid_file)      { Tempfile.open("invalid_json_data.json") }
+  let(:data_json)         { described_class.parse(file) }
   describe "#parse" do
-    let(:file)              { File.open("test_data.json") }
-    let(:invalid_file)      { Tempfile.open("invalid_json_data.json") }
     before do
       invalid_file.write("wrong format")
       invalid_file.rewind
@@ -20,7 +21,6 @@ describe JsonParser do
     end
 
     it "parses json and stores results in to hash with date as keys" do
-      data_json = described_class.parse(file)
       expect(data_json["B"]["total_visits"]).to eq(10)
       expect(data_json["B"]["conversions"]).to eq(6)
     end

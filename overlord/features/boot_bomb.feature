@@ -4,7 +4,7 @@ Feature: Bomb boots with activation and deactivation codes set
   So that I can activate or deactivate the bomb
 
   Scenario: Visit home page
-    When I am on the home page
+    Given I am on the home page
     Then I should see fields to enter the activation and deactivation codes for the bomb
     And I should see a button to boot the bomb
 
@@ -19,7 +19,8 @@ Feature: Bomb boots with activation and deactivation codes set
     Then the bomb should boot and be deactivated
 
   Scenario: Enter invalid activation/deactivation codes
-    When I enter "123" for the activation code
+    When I am on the home page
+    And I enter "123" for the activation code
     And I enter "456" for the deactivation code
     Then the bomb should not boot
     And I should see a message that the codes are not valid

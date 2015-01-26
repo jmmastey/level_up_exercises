@@ -8,7 +8,7 @@ When(/^I do not enter an activation code or deactivation code$/) do
 end
 
 Then(/^the bomb should boot and be deactivated$/) do
-  click_button("Boot bomb")
+  # click_button("Boot bomb")
   expect(page).to have_selector('.not_activated')
 end
 
@@ -27,4 +27,11 @@ end
 
 When(/^I enter "(.*?)" for the deactivation code$/) do |deactivation_code|
   fill_in('deact_code', with: deactivation_code)
+  click_button("Boot bomb")
+end
+
+Then(/^the bomb should not boot$/) do
+  click_button("Boot bomb")
+  expect(page).to have_selector('.act_code')
+  expect(page).to have_selector('.deact_code')
 end

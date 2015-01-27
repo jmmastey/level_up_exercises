@@ -15,16 +15,17 @@ end
 
 Given(/^I am looking at the page bomb$/) do
   visit "/"
-  visit current_url + "/bomb/#{@bomb.id}"
+  visit "/bomb/#{@bomb.id}"
 end
 
 When(/^I enter right "(.*?)"$/) do |arg1|
   %w(1 2 3 4 5).each do |num|
     find(:css, ".keypad-"+num).click
   end
+
   require 'pry'
   binding.pry
-  Capybara.current_driver = :webkit
+    Capybara.current_driver = :webkit
   page.execute_script("jQuery('.screen').click()")
 
   save_and_open_page

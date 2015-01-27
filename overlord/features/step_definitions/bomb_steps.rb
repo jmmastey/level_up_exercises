@@ -24,6 +24,9 @@ When(/^I enter right "(.*?)"$/) do |arg1|
   end
   require 'pry'
   binding.pry
+  Capybara.current_driver = :webkit
+  page.execute_script("jQuery('.screen').click()")
+
   save_and_open_page
 end
 

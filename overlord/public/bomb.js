@@ -3,16 +3,12 @@ var keys = document.querySelectorAll('#bomb span');
 var operators = ['+', '-', 'x', '÷'];
 var decimalAdded = false;
 
-// Add onclick event to all the keys and perform operations
 for(var i = 0; i < keys.length; i++) {
   keys[i].onclick = function(e) {
-    // Get the input and button values
     var input = document.querySelector('.screen');
     var inputVal = input.innerHTML;
     var btnVal = this.innerHTML;
 
-    // Now, just append the key values (btnValue) to the input string and finally use javascript's eval function to get the result
-    // If clear key is pressed, erase everything
     if(btnVal == 'C') {
       input.innerHTML = '';
       decimalAdded = false;

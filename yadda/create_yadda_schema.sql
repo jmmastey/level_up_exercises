@@ -45,8 +45,8 @@ CREATE TABLE yadda.users(
   email         TEXT,
   password      TEXT,
   phone         TEXT,
-  created_by   TEXT         ,
-  created_on   TIMESTAMPTZ  ,
+  created_by    TEXT         ,
+  created_on    TIMESTAMPTZ  ,
   updated_by    TEXT         ,
   updated_on    TIMESTAMPTZ
 );
@@ -56,12 +56,12 @@ CREATE TABLE yadda.ratings(
   beer_id       INTEGER      REFERENCES yadda.beers,
   user_id       INTEGER      REFERENCES yadda.users,
   look          INTEGER      NOT NULL CHECK(look between 0 AND 5),
-  smell         INTEGER      NOT NULL CHECK(look between 0 AND 5),
-  taste         INTEGER      NOT NULL CHECK(look between 0 AND 5),
-  feel          INTEGER      NOT NULL CHECK(look between 0 AND 5),
-  overall       INTEGER      NOT NULL CHECK(look between 0 AND 5),
-  created_by   TEXT         ,
-  created_on   TIMESTAMPTZ  ,
+  smell         INTEGER      NOT NULL CHECK(smell between 0 AND 5),
+  taste         INTEGER      NOT NULL CHECK(taste between 0 AND 5),
+  feel          INTEGER      NOT NULL CHECK(feel between 0 AND 5),
+  overall       INTEGER      NOT NULL CHECK(overall between 0 AND 5),
+  created_by    TEXT         ,
+  created_on    TIMESTAMPTZ  ,
   updated_by    TEXT         ,
   updated_on    TIMESTAMPTZ
 );

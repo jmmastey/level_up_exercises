@@ -1,137 +1,140 @@
 require 'spec_helper'
 
 describe Bomb do
-  subject(:sample_bomb) { Bomb.new("", "") }
+  subject(:bomb) { Bomb.new("", "") }
   
   describe "#new" do
     it "defaults to 1234/0000 codes with no input" do
-      sample_bomb.try_to_activate("1234")
-      expect(sample_bomb.active).to eq(true)
-      sample_bomb.try_to_deactivate("0000")
-      expect(sample_bomb.active).to eq(false)
+      bomb.activate("1234")
+      expect(bomb).to be_activated
+      bomb.deactivate("0000")
+      expect(bomb).not_to be_activated
+      expect(bomb).not_to be_exploded
     end
 
-    it "is initialized with 3 deactivation attempts remaining" do
-      expect(sample_bomb.attempts_remaining).to eq(3)
+    it "is initialized with 3 deactivation attempts" do
+      expect(bomb.attempts_remaining).to eq(3)
     end
 
     it "is not activated upon creation" do
-      expect(sample_bomb.active).to eq(false)
+      expect(bomb).not_to be_activated
     end
 
     it "has not exploded yet" do
-      expect(sample_bomb.exploded).to eq(false)
+      expect(bomb).not_to be_exploded
     end
 
     subject(:bad_input_bomb) { Bomb.new(23, "21") }
 
-    it "defaults to 1234/0000 codes with invalid parameters" do
-      bad_input_bomb.try_to_activate("1234")
-      expect(bad_input_bomb.active).to eq(true)
-      bad_input_bomb.try_to_deactivate("0000")
-      expect(bad_input_bomb.active).to eq(false)
+    it "throws exception with invalid parameters" do
+      expect { Bomb.new("abc", "123") }.to raise_error
+      expect { Bomb.new("2345", false) }.to raise_error
+      expect { Bomb.new([3121], "4444") }.to raise_error
     end
 
     subject(:bomb_with_custom_codes) { Bomb.new("6666", "1357") }
 
     it "accepts valid custom codes" do
-      bomb_with_custom_codes.try_to_activate("6666")
-      expect(bomb_with_custom_codes.active).to eq(true)
-      bomb_with_custom_codes.try_to_deactivate("1357")
-      expect(bomb_with_custom_codes.active).to eq(false)
-      expect(bomb_with_custom_codes.exploded).to eq(false)
+      bomb_with_custom_codes.activate("6666")
+      expect(bomb_with_custom_codes).to be_activated
+      bomb_with_custom_codes.deactivate("1357")
+      expect(bomb_with_custom_codes).not_to be_activated
+      expect(bomb_with_custom_codes).not_to be_exploded
     end
   end
 
-  describe "#try_to_activate" do
+  describe "#activate" do
     it "activates when the correct activation code is entered" do
-      sample_bomb.try_to_activate("1234")
-      expect(sample_bomb.active).to eq(true)
+      bomb.activate("1234")
+      expect(bomb).to be_activated
     end
 
     it "does not activate if the activation code is not correct" do
-      sample_bomb.try_to_activate("1111")
-      expect(sample_bomb.active).to eq(false)
+      bomb.activate("1111")
+      expect(bomb).not_to be_activated
     end
 
     it "does nothing if the bomb is already active" do
-      sample_bomb.try_to_activate("1234")
-      sample_bomb.try_to_activate("1234")
-      expect(sample_bomb.active).to eq(true)
-      expect(sample_bomb.exploded).to eq(false)
-      expect(sample_bomb.attempts_remaining).to eq(3)
+      2.times do
+        bomb.activate("1234")
+      end
+      expect(bomb).to be_activated
+      expect(bomb).not_to be_exploded
+      expect(bomb.attempts_remaining).to eq(3)
     end
 
     it "does not activate if the bomb has exploded" do
-      sample_bomb.try_to_activate("1234")
+      bomb.activate("1234")
       3.times do
-        sample_bomb.try_to_deactivate("1111")
+        bomb.deactivate("1111")
       end
-      sample_bomb.try_to_activate("1234")
-      expect(sample_bomb.exploded).to eq(true)
-      expect(sample_bomb.active).to eq(false)
+      bomb.activate("1234")
+      expect(bomb).to be_exploded
+      expect(bomb).not_to be_activated
     end
   end
 
-  describe "#try_to_deactivate" do
+  describe "#deactivate" do
+    before(:each) do
+      bomb.activate("1234")
+    end
     it "deactivates the bomb when the correct deactivation code is entered" do
-      sample_bomb.try_to_deactivate("0000")
-      expect(sample_bomb.active).to eq(false)
-      expect(sample_bomb.exploded).to eq(false)
+      bomb.deactivate("0000")
+      expect(bomb).not_to be_activated
+      expect(bomb).not_to be_exploded
     end
 
     it "does not explode after two incorrect deactivation attempts" do
-      sample_bomb.try_to_activate("1234")
       2.times do
-        sample_bomb.try_to_deactivate("4444")
-        expect(sample_bomb.active).to eq(true)
-        expect(sample_bomb.exploded).to eq(false)
+        bomb.deactivate("4444")
+        expect(bomb).to be_activated
+        expect(bomb).not_to be_exploded
       end
     end
 
     it "explodes after three incorrect deactivation attempts" do
-      sample_bomb.try_to_activate("1234")
       3.times do
-        sample_bomb.try_to_deactivate("4444")
+        bomb.deactivate("4444")
       end
-      expect(sample_bomb.exploded).to eq(true)
-      expect(sample_bomb.attempts_remaining).to eq(0)
+      expect(bomb).to be_exploded
+      expect(bomb.attempts_remaining).to eq(0)
     end
 
     it "does nothing after exploding" do
-      sample_bomb.try_to_activate("1234")
       4.times do
-        sample_bomb.try_to_deactivate("4444")
+        bomb.deactivate("4444")
       end
-      expect(sample_bomb.exploded).to eq(true)
-      expect(sample_bomb.attempts_remaining).to eq(0)
+      bomb.activate("1234")
+      expect(bomb).not_to be_activated
+      expect(bomb).to be_exploded
+      expect(bomb.attempts_remaining).to eq(0)
     end
   end
 
   describe "#exploded" do
     it "shows that the bomb has not exploded upon boot" do
-      expect(sample_bomb.exploded).to eq(false)
+      expect(bomb).not_to be_exploded
     end
 
     it "shows that the bomb has not exploded after activation" do
-      sample_bomb.try_to_activate("1234")
-      expect(sample_bomb.exploded).to eq(false)
+      bomb.activate("1234")
+      expect(bomb).not_to be_exploded
     end
 
     it "does not explode after one or two incorrect deactivation attempts" do
-      sample_bomb.try_to_activate("1234")
+      bomb.activate("1234")
       2.times do
-        sample_bomb.try_to_deactivate("4444")
-        expect(sample_bomb.exploded).to eq(false)
+        bomb.deactivate("4444")
+        expect(bomb).not_to be_exploded
       end
     end
 
     it "explodes after three incorrect deactivation attempts" do
-      sample_bomb.try_to_activate("1234")
+      bomb.activate("1234")
       3.times do
-        sample_bomb.try_to_deactivate("4444")
+        bomb.deactivate("4444")
       end
-      expect(sample_bomb.exploded).to eq(true)
+      expect(bomb).to be_exploded
     end
   end
 end

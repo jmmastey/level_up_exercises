@@ -16,7 +16,7 @@ Then(/^I should see fields to enter the activation and deactivation codes for th
   expect(page).to have_selector('.deact_code')
 end
 
-And(/^I should see a button to boot the bomb$/) do
+Then(/^I should see a button to boot the bomb$/) do
   expect(page).to have_selector('.boot_bomb')
 end
 
@@ -30,7 +30,10 @@ When(/^I enter "(.*?)" for the deactivation code$/) do |deactivation_code|
 end
   
 Then(/^the bomb should not boot$/) do
-  #click_button("Boot bomb")
   expect(page).to have_selector('.act_code')
   expect(page).to have_selector('.deact_code')
+end
+
+Then(/^the bomb should boot with the default codes and be deactivated$/) do
+  expect(page).to have_selector('.not_activated')
 end

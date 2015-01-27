@@ -1,0 +1,45 @@
+<link href='/style.css' rel='stylesheet' />
+<script src='/jquery-1.11.1.min.js'></script>
+<script src='/jquery-ui.min.js'></script>
+<link href='https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css' rel='stylesheet' />
+<script src='/bomb.js' type='text/javascript'></script>
+<h4>This is the bomb interface</h4>
+<input id='bomb_id' type='hidden' value='2590' />
+<input id='base_url' type='hidden' value='http://www.example.com' />
+<div id='dialog-confirm' style='display: none;' title='Activate the bomb?'>
+  <p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>These items will be permanently deleted and cannot be recovered. Are you sure?
+  </p>
+</div>
+<div class='timer'></div>
+<div class='label'>
+  <label>Status</label>
+</div>
+<div class='bomb_wires' id='wires'>
+  <button class='wire_btn green_button' id='green_btn'>Green</button>
+  <button class='wire_btn red_button' id='red_btn'>Red</button>
+</div>
+<textarea class='bomb_inactive' id='bomb_status' readonly='readonly'>inactive</textarea>
+<div id='bomb'>
+  <!-- Screen and clear key -->
+  <div class='top'>
+    <span class='clear'>C</span>
+    <div class='screen'></div>
+  </div>
+  <div class='keys'>
+    <!-- operators and other keys -->
+    <span class='keypad-7'>7</span>
+    <span class='keypad-8'>8</span>
+    <span class='keypad-9'>9</span>
+    <span class='operator activate'>Activate</span>
+    <span class='keypad-4'>4</span>
+    <span class='keypad-5'>5</span>
+    <span class='keypad-6'>6</span>
+    <span class='operator deactivate'>Deactivate</span>
+    <span class='keypad-1'>1</span>
+    <span class='keypad-2'>2</span>
+    <span class='keypad-3'>3</span>
+    <span class='operator'>Status</span>
+    <span class='keypad-0'>0</span>
+  </div>
+</div>
+<!-- PrefixFree -->

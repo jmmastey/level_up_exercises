@@ -30,4 +30,8 @@ group :test do
   gem 'selenium-webdriver'
   gem 'capybara-angular'
   gem 'xpath'
+  gem 'culerity'
+  gem 'celerity', :require => nil
+  gem 'poltergeist'
+  gem 'vcr'
 end

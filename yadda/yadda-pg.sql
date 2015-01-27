@@ -57,7 +57,7 @@ CREATE TABLE beers (
   name          text NOT NULL,
   style_id      int REFERENCES beer_styles_lookup ON DELETE RESTRICT,
   description   text,
-  brewing_year  date,
+  brewing_year  char(4),
   created_at    timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
   created_by    int REFERENCES users ON DELETE RESTRICT, -- one-to many relationship between user and beer; disallow deletion of user if it still references a beer
   updated_at    timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,

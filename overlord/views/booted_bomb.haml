@@ -1,11 +1,15 @@
 - 5.times do
   %br
+
 %center
-  - if !bomb.active && !bomb.exploded
-    = haml :_booted_bomb
-    - if bad_code
-      = haml :_bad_activation_code
-  - elsif bomb.active && !bomb.exploded
-    = haml :_bomb_already_active
-  - elsif bomb.exploded
-    = haml :_bomb_exploded
+  - if bomb
+    - if !bomb.active && !bomb.exploded
+      = haml :_booted_bomb
+      - if bad_act_code
+        = haml :_bad_activation_code
+    - elsif bomb.active && !bomb.exploded
+      = haml :_bomb_already_active
+    - elsif bomb.exploded
+      = haml :_bomb_exploded
+  - else
+    = haml :_bomb_not_booted

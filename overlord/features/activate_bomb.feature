@@ -27,4 +27,3 @@ Feature: Activate the bomb
     When I enter an incorrect activation code
     Then the bomb should not be activated yet
     And I should see an incorrect activation code error message
-    

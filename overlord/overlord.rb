@@ -20,7 +20,7 @@ post '/boot_bomb' do
 end
 
 get '/activate' do
-  haml :booted_bomb, locals: { bomb: bomb, bad_code: session[:bad_act_code] }
+  haml :booted_bomb, locals: { bomb: bomb, bad_act_code: session[:bad_act_code] }
 end
 
 post '/activate' do
@@ -29,18 +29,18 @@ post '/activate' do
     session[:bad_act_code] = true
     redirect to('/activate')
   end
-  haml :active_bomb, locals: { bomb: bomb }
+  haml :live_bomb, locals: { bomb: bomb }
 end
 
 get '/deactivate' do
-  haml :active_bomb, locals: { bomb: bomb }
+  haml :live_bomb, locals: { bomb: bomb }
 end
 
 post '/deactivate' do
   if bomb.attempts_remaining > 0
     bomb.try_to_deactivate(params[:submitted_deact_code])
   end
-  haml :active_bomb, locals: { bomb: bomb }
+  haml :live_bomb, locals: { bomb: bomb }
 end
 
 def create_bomb(act_code, deact_code)

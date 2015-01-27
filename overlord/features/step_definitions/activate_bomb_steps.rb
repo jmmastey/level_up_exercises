@@ -43,3 +43,4 @@ end
 Then(/^I should see an incorrect activation code error message$/) do
   expect(page).to have_selector('.incorrect_act_code')
 end
+

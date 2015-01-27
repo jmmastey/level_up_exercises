@@ -8,9 +8,9 @@ class Bomb
   def initialize(act_code, deact_code)
     @activation_code = valid?(act_code) ? act_code : DEFAULT_ACT_CODE
     @deactivation_code = valid?(deact_code) ? deact_code : DEFAULT_DEACT_CODE
-    @attempts_remaining = MAX_DEACTIVATION_ATTEMPTS
     @active = false
     @exploded = false
+    @attempts_remaining = MAX_DEACTIVATION_ATTEMPTS
   end
 
   def try_to_activate(activation_code)
@@ -21,7 +21,7 @@ class Bomb
 
   def try_to_deactivate(deactivation_code)
     if deactivation_code == @deactivation_code && @active && !exploded
-      @active = false
+      deactivate_bomb
     elsif @active == true && !exploded
       incorrect_deactivation_code
     end
@@ -39,5 +39,10 @@ class Bomb
       @active = false
       @exploded = true
     end
+  end
+
+  def deactivate_bomb
+    @active = false
+    @attempts_remaining = 3
   end
 end

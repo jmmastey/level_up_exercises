@@ -3,9 +3,6 @@ Feature: Deactivate the bomb
   I want to deactivate the bomb
   So that it does not explode
 
-  Background:
-  	The bomb has been booted and activated
-
   Scenario: Bomb deactivates with default deactivation code
   	Given The bomb has been booted and activated with the default codes
   	When I enter the default deactivation code

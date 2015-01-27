@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%= link_to "Logout", destroy_user_session_path, id: "logout_link" %>
+  <%= link_to "Logout", destroy_user_session_path, id: "logout_link", method: :delete %>
 <% else %>
   <%= link_to "Register Now", new_user_registration_path, id: "register_link" %><%= link_to "Login", new_user_session_path, id: "login_link" %>
 <% end %>

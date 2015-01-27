@@ -1,33 +1,38 @@
 Feature: Login
-	In order to save my shopping history
+  In order to save my shopping history
   As a user
   I want to login
 
   Background:
     Given I navigate to the login page
-
-  Scenario Outline: Try logins
-    Given user <user> with password <password> <exists>
-    When I enter username <user_entry>
-    And I enter password <password_entry>
-    And I submit the login information
-    Then <result>
+    And some registered users
 
   @happy
-  Examples: Successful logins
-    | user | password | exists | user_entry | password_entry | result                                 |
-    | john | secret   | exists | john       | secret         | I see the successful login result page |
+  Scenario: Successful login
+    When I submit a valid login
+    Then I see a successful login message
 
   @sad
-  Examples: Unsuccessful logins
-    | user | password | exists         | user_entry | password_entry | result                                 |
-    | john | secret   | exists         | john       | wrong          | I see an unsuccessful login message    |
-    | john | secret   | exists         | john       | wrong          | I see an unsuccessful login message    |
-    | john | secret   | does not exist | john       | secret         | I see an unsuccessful login message    |
+  Scenario: Invalid Password
+    When I submit an invalid password
+    Then I see an invalid user or password message
+
+  @sad
+  Scenario: Invalid Username
+    When I submit an invalid username
+    Then I see an invalid user or password message
 
   @bad
-  Examples: Invalid logins
-    | user | password | exists         | user_entry | password_entry | result                                        |
-    | john | secret   | exists         |            | wrong          | I see a missing username message              |
-    | john | secret   | exists         | john       |                | I see a missing password message              |
-    | john | secret   | exists         |            |                | I see a missing username and password message |
+  Scenario: Missing Password
+    When I submit with a missing password
+    Then I see a missing password message
+
+  @bad
+  Scenario: Missing Username
+    When I submit with a missing password
+    Then I see a missing username message
+
+  @bad
+  Scenario: Missing Username and Password
+    When I submit with no username or password
+    Then I see a missing username and password message

@@ -6,7 +6,7 @@ require_relative 'cohort'
 class DataScience
   attr_reader :json_file
 
-  def initialize(json_file = 'data_export_2014_06_20_15_59_02.json')
+  def initialize(json_file = 'source_data.json')
     @json_file = json_file
   end
 
@@ -35,7 +35,7 @@ class DataScience
       errors["#{cohort}"] = error.round(3)
     end
   end
- 
+
   def counts
     @counts ||= Parser.counts(data)
   end
@@ -53,9 +53,9 @@ class DataScience
   end
 
   def values
-    { 
+    {
       agroup: { :"1" => counts["A_1"], :"0" => counts["A_0"] },
-      bgroup: { :"1" => counts["B_1"], :"0" => counts["B_0"] } 
+      bgroup: { :"1" => counts["B_1"], :"0" => counts["B_0"] },
     }
   end
 

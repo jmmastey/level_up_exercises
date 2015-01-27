@@ -106,6 +106,14 @@ CREATE TRIGGER check_beers_inserts
   ON yadda.beers
   FOR EACH ROW EXECUTE PROCEDURE yadda.tg_inserts();
 
+DROP TRIGGER IF EXISTS check_ratings_inserts ON yadda.breweries;
+
+CREATE TRIGGER check_ratings_inserts
+  BEFORE INSERT
+  ON yadda.ratings
+  FOR EACH ROW EXECUTE PROCEDURE yadda.tg_inserts();
+
+
 DROP TRIGGER IF EXISTS check_users_inserts ON yadda.breweries;
 
 CREATE TRIGGER check_users_inserts
@@ -141,6 +149,12 @@ CREATE TRIGGER check_users_updates
   ON yadda.users
   FOR EACH ROW EXECUTE PROCEDURE yadda.tg_updates();
 
+DROP TRIGGER IF EXISTS check_ratings_updates ON yadda.breweries;
+
+CREATE TRIGGER check_ratings_updates
+  BEFORE UPDATE
+  ON yadda.ratings
+  FOR EACH ROW EXECUTE PROCEDURE yadda.tg_updates();
 COMMIT;
 
 

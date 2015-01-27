@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe WeatherController do
 
-  describe "GET index" do
+  context "GET index" do
 
   end
 
-  describe "GET show" do
+  context "GET show" do
 
   end
 

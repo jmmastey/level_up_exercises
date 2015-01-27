@@ -9,7 +9,7 @@
     %input{:type => "submit", :value => "Send", :class => "button"}
 
 %table
-  -if @scraping != nil
+  -if parse_temperatures != nil && params["region"]
     - @scraping.each do |key,hash_temp|
       %tr
         %td= key

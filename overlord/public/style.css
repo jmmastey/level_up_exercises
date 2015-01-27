@@ -8,6 +8,11 @@
   font: bold 14px Arial, sans-serif;
 }
 
+.calc_btn {
+  width : 50px;
+}
+
+
 .green_button{
   background-color: green;
 }

@@ -23,22 +23,24 @@
 #bomb
   / Screen and clear key
   .top
-    %span.clear C
+    %button.clear{value: "C"} C
     %textarea.screen{name: "code", id: "code"}0000
   .keys
     / operators and other keys
-    %span.keypad-7 7
-    %span.keypad-8 8
-    %span.keypad-9 9
-    %span.operator.activate Activate
-    %span.keypad-4 4
-    %span.keypad-5 5
-    %span.keypad-6 6
-    %span.operator.deactivate Deactivate
-    %span.keypad-1 1
-    %span.keypad-2 2
-    %span.keypad-3 3
-    %span.operator Status
-    %span.keypad-0 0
+    %button.calc_btn.keypad-7{value: 7} 7
+    %button.calc_btn.keypad-8{value: 8} 8
+    %button.calc_btn.keypad-9{value: 9} 9
+    %button.operator.activate{value: "Activate", name:"activate"} Activate
+    %br/
+    %button.calc_btn.keypad-4{value: 4} 4
+    %button.calc_btn.keypad-5{value: 5} 5
+    %button.calc_btn.keypad-6{value: 6} 6
+    %button.operator.deactivate{value: "Deactivate", name:"deactivate"} Deactivate
+    %br/
+    %button.calc_btn.keypad-1{value: 1} 1
+    %button.calc_btn.keypad-2{value: 2} 2
+    %button.calc_btn.keypad-3{value: 3} 3
+    %br/
+    %button.calc_btn.keypad-0{value: 0} 0
 / PrefixFree
 

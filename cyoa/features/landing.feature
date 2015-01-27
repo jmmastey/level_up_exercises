@@ -11,7 +11,8 @@ Feature: Landing page
     And I see a login option
 
   Scenario: Logged in landing
-    Given I am logged in
+    Given some registered users
+    And I am logged in
     When I navigate to the main URL
     Then I see weather information
     And I see a logout option

@@ -1,0 +1,10 @@
+%p.not_activated
+  The bomb has been booted but not activated.
+%p
+  Please enter the activation code.
+%form{:action => "/activate", :method => "post"}
+  %p 
+    Activation code: 
+    %input.act_code{:name => "submitted_act_code", :type => "text", :pattern => "[0-9]{4}"}
+  %p
+    %input.submit{:type => "submit", :value => "Submit activation code"}

@@ -1,34 +1,12 @@
 - 5.times do
   %br
-
-- if bomb == nil
-  %center
-    %p Welcome to the bomb
-    %p Please enter a 4-digit number for the activation and deactivation codes
-    %p If no code is entered or the entered code is not a 4-digit number then default values will be used
-    %p Default activation code: 1234
-    %p Default deactivation code: 0000
-    %form{:action => "/boot_bomb", :method => "post"}
-      %p 
-        Activation code: 
-        %input.act_code{:name => "act_code", :type => "text", :pattern => "[0-9]{4}"}
-      %p 
-        Deactivation code:
-        %input.deact_code{:name => "deact_code", :type => "text", :pattern => "[0-9]{4}"}
-      %p
-        %input.boot_bomb{:type => "submit", :value => "Boot bomb"}
-- elsif bomb.active
-  %center
-    %p Bomb has already been activated.
-    %p 
-      %a{:href => "/deactivate"} Return to deactivation page
-- elsif bomb.exploded
-  %center
-    %p Bomb has exploded
-    %p 
-      %a{:href => "/"} Start over
-- elsif !bomb.active && !bomb.exploded
-  %center
-    %p Bomb has already been booted.
-    %p 
-      %a{:href => "/activate"} Return to activation page
+  
+%center
+  - if bomb == nil
+    = haml :_welcome_page
+  - elsif bomb.active
+    = haml :_bomb_already_active
+  - elsif bomb.exploded
+    = haml :_bomb_exploded
+  - elsif !bomb.active && !bomb.exploded
+    = haml :_booted_bomb

@@ -6,25 +6,10 @@
     Attempts remaining:
     =bomb.attempts_remaining
   - if bomb.attempts_remaining > 0 && bomb.active == true
-    %p
-      Bomb is active.
-    %form.active_bomb{:action => "/deactivate", :method => "post"}
-      %p 
-        Deactivation code: 
-        %input{:name => "submitted_deact_code", :type => "text", :pattern => "[0-9]{4}"}
-      %p
-        %input{:type => "submit", :value => "Submit deactivation code"}
+    = haml :_active_bomb
   - elsif bomb.attempts_remaining > 0 && bomb.active == false
-    %p.deactivated 
-      Bomb deactivated
-      %a{:href => "/"} Start over
+    = haml :_deactivated_bomb
   - if bomb.exploded
-    %marquee{:behavior => "alternate", :scrollamount => "30"} Bomb exploded
-    %marquee{:behavior => "alternate", :scrollamount => "50"} Bomb exploded
-    %marquee{:behavior => "alternate", :scrollamount => "70"} Bomb exploded
-    %marquee{:behavior => "alternate", :scrollamount => "90"} Bomb exploded
-    %marquee
-      %a{:href => "/"} Return to homepage
+    = haml :_bomb_exploded
   - if bomb.attempts_remaining < 3 && bomb.active == true
-    %p.incorrect_deact_code
-      Incorrect deactivation code
+    =haml :_bad_deactivation_code

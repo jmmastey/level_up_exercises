@@ -1,19 +1,9 @@
 require 'spec_helper'
 
 describe Bomb do
+  subject(:sample_bomb) { Bomb.new("", "") }
+  
   describe "#new" do
-
-    subject(:bad_input_bomb) { Bomb.new("abcd", "21") }
-
-    it "defaults to 1234/0000 codes with invalid input" do
-      bad_input_bomb.try_to_activate("1234")
-      expect(bad_input_bomb.active).to eq(true)
-      bad_input_bomb.try_to_deactivate("0000")
-      expect(bad_input_bomb.active).to eq(false)
-    end
-
-    subject(:sample_bomb) { Bomb.new("", "") }
-
     it "defaults to 1234/0000 codes with no input" do
       sample_bomb.try_to_activate("1234")
       expect(sample_bomb.active).to eq(true)
@@ -32,25 +22,44 @@ describe Bomb do
     it "has not exploded yet" do
       expect(sample_bomb.exploded).to eq(false)
     end
+
+    subject(:bad_input_bomb) { Bomb.new(23, "21") }
+
+    it "defaults to 1234/0000 codes with invalid parameters" do
+      bad_input_bomb.try_to_activate("1234")
+      expect(bad_input_bomb.active).to eq(true)
+      bad_input_bomb.try_to_deactivate("0000")
+      expect(bad_input_bomb.active).to eq(false)
+    end
+
+    subject(:bomb_with_custom_codes) { Bomb.new("6666", "1357") }
+
+    it "accepts valid custom codes" do
+      bomb_with_custom_codes.try_to_activate("6666")
+      expect(bomb_with_custom_codes.active).to eq(true)
+      bomb_with_custom_codes.try_to_deactivate("1357")
+      expect(bomb_with_custom_codes.active).to eq(false)
+      expect(bomb_with_custom_codes.exploded).to eq(false)
+    end
   end
 
   describe "#try_to_activate" do
-    subject(:sample_bomb) { Bomb.new("", "") }
+    it "activates when the correct activation code is entered" do
+      sample_bomb.try_to_activate("1234")
+      expect(sample_bomb.active).to eq(true)
+    end
 
     it "does not activate if the activation code is not correct" do
       sample_bomb.try_to_activate("1111")
       expect(sample_bomb.active).to eq(false)
     end
 
-    it "activates when the correct activation code is entered" do
-      sample_bomb.try_to_activate("1234")
-      expect(sample_bomb.active).to eq(true)
-    end
-
     it "does nothing if the bomb is already active" do
+      sample_bomb.try_to_activate("1234")
       sample_bomb.try_to_activate("1234")
       expect(sample_bomb.active).to eq(true)
       expect(sample_bomb.exploded).to eq(false)
+      expect(sample_bomb.attempts_remaining).to eq(3)
     end
 
     it "does not activate if the bomb has exploded" do
@@ -65,8 +74,6 @@ describe Bomb do
   end
 
   describe "#try_to_deactivate" do
-    subject(:sample_bomb) { Bomb.new("", "") }
-
     it "deactivates the bomb when the correct deactivation code is entered" do
       sample_bomb.try_to_deactivate("0000")
       expect(sample_bomb.active).to eq(false)
@@ -102,8 +109,6 @@ describe Bomb do
   end
 
   describe "#exploded" do
-    subject(:sample_bomb) { Bomb.new("", "") }
-
     it "shows that the bomb has not exploded upon boot" do
       expect(sample_bomb.exploded).to eq(false)
     end

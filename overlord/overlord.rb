@@ -25,7 +25,7 @@ end
 
 post '/activate' do
   bomb.try_to_activate(params[:submitted_act_code])
-  if bomb.active == false
+  if !bomb.active && !bomb.exploded
     session[:bad_act_code] = true
     redirect to('/activate')
   end

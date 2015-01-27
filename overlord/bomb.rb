@@ -6,8 +6,8 @@ class Bomb
   attr_reader :attempts_remaining, :active, :exploded
 
   def initialize(act_code, deact_code)
-    @activation_code = /^\d{4}$/ =~ act_code ? act_code : DEFAULT_ACT_CODE
-    @deactivation_code = /^\d{4}$/ =~ deact_code ? deact_code : DEFAULT_DEACT_CODE
+    @activation_code = /^\d{4}$/ =~ act_code.to_s ? act_code : DEFAULT_ACT_CODE
+    @deactivation_code = /^\d{4}$/ =~ deact_code.to_s ? deact_code : DEFAULT_DEACT_CODE
     @attempts_remaining = MAX_DEACTIVATION_ATTEMPTS
     @active = false
     @exploded = false

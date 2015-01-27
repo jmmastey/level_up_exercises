@@ -1,23 +1,11 @@
 - 5.times do
   %br
-
-- if bomb.active == false
-  %center
-    %p.not_activated
-      The bomb has been booted but not activated.
-    %p
-      Please enter the activation code.
-    %form{:action => "/activate", :method => "post"}
-      %p 
-        Activation code: 
-        %input.act_code{:name => "submitted_act_code", :type => "text", :pattern => "[0-9]{4}"}
-      %p
-        %input.submit{:type => "submit", :value => "Submit activation code"}
+%center
+  - if !bomb.active && !bomb.exploded
+    = haml :_booted_bomb
     - if bad_code
-      %p.incorrect_act_code
-        Incorrect activation code
-- else
-  %center
-    %p Bomb is already active.
-    %p
-      %a{:href => "/deactivate"} Proceed to deactivation screen
+      = haml :_bad_activation_code
+  - elsif bomb.active && !bomb.exploded
+    = haml :_bomb_already_active
+  - elsif bomb.exploded
+    = haml :_bomb_exploded

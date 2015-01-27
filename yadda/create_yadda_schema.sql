@@ -9,8 +9,8 @@ CREATE TABLE yadda.addresses(
   state         TEXT         NOT NULL,
   country       TEXT         NOT NULL,
   zip_code      TEXT         NOT NULL,
-  inserted_by   TEXT         ,
-  inserted_on   TIMESTAMPTZ  ,
+  created_by   TEXT         ,
+  created_on   TIMESTAMPTZ  ,
   updated_by    TEXT         ,
   updated_on    TIMESTAMPTZ
 );
@@ -20,8 +20,8 @@ CREATE TABLE yadda.breweries(
   name          TEXT         NOT NULL,
   address_id    INTEGER      NOT NULL REFERENCES yadda.addresses,
   founding_year INTEGER      NOT NULL,
-  inserted_by   TEXT         ,
-  inserted_on   TIMESTAMPTZ  ,
+  created_by   TEXT         ,
+  created_on   TIMESTAMPTZ  ,
   updated_by    TEXT         ,
   updated_on    TIMESTAMPTZ  ,
   description   TEXT
@@ -32,8 +32,8 @@ CREATE TABLE yadda.beers(
   style         TEXT         NOT NULL,
   brewing_year  INTEGER      NOT NULL,
   brewery_id    INTEGER      REFERENCES yadda.breweries,
-  inserted_by   TEXT         ,
-  inserted_on   TIMESTAMPTZ  ,
+  created_by   TEXT         ,
+  created_on   TIMESTAMPTZ  ,
   updated_by    TEXT         ,
   updated_on    TIMESTAMPTZ  ,
   description   TEXT
@@ -45,8 +45,8 @@ CREATE TABLE yadda.users(
   email         TEXT,
   password      TEXT,
   phone         TEXT,
-  inserted_by   TEXT         ,
-  inserted_on   TIMESTAMPTZ  ,
+  created_by   TEXT         ,
+  created_on   TIMESTAMPTZ  ,
   updated_by    TEXT         ,
   updated_on    TIMESTAMPTZ
 );
@@ -60,8 +60,8 @@ CREATE TABLE yadda.ratings(
   taste         INTEGER      NOT NULL CHECK(look between 0 AND 5),
   feel          INTEGER      NOT NULL CHECK(look between 0 AND 5),
   overall       INTEGER      NOT NULL CHECK(look between 0 AND 5),
-  inserted_by   TEXT         ,
-  inserted_on   TIMESTAMPTZ  ,
+  created_by   TEXT         ,
+  created_on   TIMESTAMPTZ  ,
   updated_by    TEXT         ,
   updated_on    TIMESTAMPTZ
 );
@@ -70,8 +70,8 @@ CREATE TABLE yadda.ratings(
 CREATE OR REPLACE FUNCTION  yadda.tg_inserts()
 RETURNS TRIGGER AS $$
   BEGIN
-    NEW.inserted_on := current_timestamp;
-    NEW.inserted_by := current_user;
+    NEW.created_on := current_timestamp;
+    NEW.created_by := current_user;
     RETURN NEW;
   END;
 $$ LANGUAGE plpgsql;

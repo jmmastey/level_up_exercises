@@ -1,5 +1,6 @@
 -- sql -- for PostgreSQL
 -- Prepared by Paul Haddad
+-- For Level Up 6 - Yadda
 
 -- Users Table
 DROP TABLE IF EXISTS users CASCADE;

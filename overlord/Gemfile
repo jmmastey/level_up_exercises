@@ -34,4 +34,5 @@ group :test do
   gem 'celerity', :require => nil
   gem 'poltergeist'
   gem 'vcr'
+  gem 'capybara-webkit', '~> 1.1.0'
 end

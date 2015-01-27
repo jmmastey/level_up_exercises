@@ -22,7 +22,8 @@ When(/^I enter right "(.*?)"$/) do |arg1|
   %w(1 2 3 4 5).each do |num|
     find(:css, ".keypad-"+num).click
   end
-  fill_in 'code', with: '12345'
+  require 'pry'
+  binding.pry
   save_and_open_page
 end
 

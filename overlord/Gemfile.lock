@@ -35,6 +35,9 @@ GEM
       xpath (~> 2.0)
     capybara-angular (0.1.0)
       capybara
+    capybara-webkit (1.1.0)
+      capybara (~> 2.0, >= 2.0.2)
+      json
     celerity (0.9.2)
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
@@ -209,6 +212,7 @@ DEPENDENCIES
   capistrano (= 2.14.2)
   capybara
   capybara-angular
+  capybara-webkit (~> 1.1.0)
   celerity
   cucumber
   cucumber-sinatra

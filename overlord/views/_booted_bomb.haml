@@ -8,3 +8,6 @@
     %input.act_code{:name => "submitted_act_code", :type => "text", :pattern => "[0-9]{4}"}
   %p
     %input.submit{:type => "submit", :value => "Submit activation code"}
+
+- if bomb.bad_act_code
+  = haml :_bad_activation_code

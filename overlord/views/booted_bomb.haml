@@ -2,14 +2,13 @@
   %br
 
 %center
-  - if bomb
-    - if !bomb.activated?
-      = haml :_booted_bomb
-      - if bad_act_code
-        = haml :_bad_activation_code
-    - elsif bomb.activated?
-      = haml :_bomb_already_active
-    - elsif bomb.exploded?
-      = haml :_bomb_exploded
-  - else
+  - if !bomb.activated? && bomb.booted?
+    = haml :_booted_bomb
+  - elsif bomb.activated?
+    = haml :_bomb_already_active
+  - elsif bomb.exploded?
+    = haml :_bomb_exploded
+  -elsif bomb.deactivated?
+    = haml :_deactivated_bomb
+  -elsif !bomb.activated?
     = haml :_bomb_not_booted

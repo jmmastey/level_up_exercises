@@ -24,16 +24,12 @@ post '/boot' do
 end
 
 get '/activate' do
-  haml :booted_bomb, locals: { bomb: bomb, bad_act_code: false }
+  haml :booted_bomb, locals: { bomb: bomb, bad_code: false }
 end
 
 post '/activate' do
   bomb.activate(params[:submitted_act_code])
-  if !bomb.activated?
-    session[:bad_act_code] = true
-    redirect to('/activate')
-  end
-  haml :live_bomb, locals: { bomb: bomb }
+  haml :booted_bomb, locals: { bomb: bomb, bad_code: !bomb.activated? }
 end
 
 get '/deactivate' do

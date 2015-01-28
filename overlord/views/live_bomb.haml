@@ -2,16 +2,14 @@
   %br
 
 %center
-  - if bomb
-    - if bomb.activated?
-      = haml :_deactivation_attempts_remaining
-    - if bomb.activated? && bomb.attempts_remaining > 0
-      = haml :_active_bomb
-    - elsif !bomb.activated? && bomb.attempts_remaining > 0
-      = haml :_deactivated_bomb
-    - if bomb.exploded?
-      = haml :_bomb_exploded
-    - if bomb.attempts_remaining < 3 && bomb.activated?
-      =haml :_bad_deactivation_code
-  - else
-    = haml :_bomb_not_booted
+  - if bomb.activated?
+    = haml :_active_bomb
+
+  - if !bomb.activated? && bomb.attempts_remaining > 0
+    = haml :_deactivated_bomb
+
+  - if bomb.exploded?
+    = haml :_bomb_exploded
+
+  - if bomb.attempts_remaining < 3 && bomb.activated?
+    =haml :_bad_deactivation_code

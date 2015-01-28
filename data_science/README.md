@@ -17,3 +17,7 @@ However, math is hard. So, you're going to write the Rspec tests manually to mak
 ## Note
 
 You should write both the tests and the code for this exercise. Writing lots of code is the best way to get better.
+
+## HOW TO USE
+cd to the directory
+ruby split_testing.rb

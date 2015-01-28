@@ -3,18 +3,18 @@ class Bomb
   DEFAULT_DEACT_CODE = "0000"
   MAX_DEACTIVATION_ATTEMPTS = 3
 
-  attr_reader :attempts_remaining, :bad_act_code
+  attr_reader :attempts_remaining, :bad_activation_code
 
   def initialize
     @active = false
     @exploded = false
     @booted = false
     @attempts_remaining = MAX_DEACTIVATION_ATTEMPTS
-    @bad_act_code = false
+    @bad_activation_code = false
   end
 
   def boot(act_code = "", deact_code = "")
-    return unless !exploded? && !activated? && !deactivated?
+    return unless not_booted?
     raise ArgumentError unless valid?(act_code) && valid?(deact_code)
     @activation_code = assign_act_code(act_code)
     @deactivation_code = assign_deact_code(deact_code)
@@ -22,16 +22,18 @@ class Bomb
   end
 
   def activate(code)
-    if code == @activation_code && deactivated?
+    return unless deactivated?
+    if code == @activation_code
       @active = true
-      @bad_act_code = false
+      @bad_activation_code = false
     else
-      @bad_act_code = true
+      @bad_activation_code = true
     end
   end
 
   def deactivate(code)
-    if code == @deactivation_code && activated?
+    return unless activated?
+    if code == @deactivation_code
       deactivate_bomb
     elsif activated?
       incorrect_deactivation_code
@@ -39,15 +41,19 @@ class Bomb
   end
 
   def activated?
-    @active && !@exploded && @booted
+    @booted && @active && !@exploded
   end
 
   def exploded?
-    @exploded
+    @booted && @active && @exploded
   end
 
   def deactivated?
-    !@active && !@exploded && @booted
+    @booted && !@active && !@exploded
+  end
+
+  def not_booted?
+    !@booted && !@active && !@exploded
   end
 
   private
@@ -67,7 +73,6 @@ class Bomb
   def incorrect_deactivation_code
     @attempts_remaining -= 1 if @attempts_remaining > 0
     if @attempts_remaining <= 0
-      @active = false
       @exploded = true
     end
   end

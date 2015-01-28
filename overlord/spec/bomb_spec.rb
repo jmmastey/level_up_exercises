@@ -5,7 +5,7 @@ describe Bomb do
   
   describe "#new" do
     it "is not booted upon creation" do
-      expect(bomb).not_to be_booted
+      expect(bomb).to be_not_booted
     end
 
     it "is not activated" do
@@ -28,8 +28,9 @@ describe Bomb do
       end
 
       it "boots the bomb" do
-        expect(bomb).to be_booted
+        expect(bomb).not_to be_not_booted
       end
+
       it "defaults to 1234 activation code" do
         bomb.activate("1234")
         expect(bomb).to be_activated
@@ -41,6 +42,10 @@ describe Bomb do
         expect(bomb).not_to be_activated
         expect(bomb).not_to be_exploded
       end
+
+      it "has no effect after being called once" do
+        expect(bomb.boot).to be_falsey
+      end
     end
 
     context "with valid custom codes" do
@@ -49,7 +54,7 @@ describe Bomb do
       end
 
       it "boots the bomb" do
-        expect(bomb).to be_booted
+        expect(bomb).not_to be_not_booted
       end
 
       it "sets the activation code to 1111" do
@@ -79,7 +84,7 @@ describe Bomb do
       before(:each) do
         bomb.boot
       end
-      it "activates when the correct activation code is entered" do
+      it "activates when default activation code is entered" do
         bomb.activate("1234")
         expect(bomb).to be_activated
       end

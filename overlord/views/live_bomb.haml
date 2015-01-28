@@ -4,12 +4,14 @@
 %center
   - if bomb.activated?
     = haml :_active_bomb
-
-  - if !bomb.activated? && bomb.attempts_remaining > 0
+  - elsif bomb.deactivated?
     = haml :_deactivated_bomb
-
-  - if bomb.exploded?
+  - elsif bomb.exploded?
     = haml :_bomb_exploded
+  -elsif bomb.not_booted?
+    =haml :_welcome_page
+
 
   - if bomb.attempts_remaining < 3 && bomb.activated?
-    =haml :_bad_deactivation_code
+    %p.incorrect_deactivation_code
+      Incorrect deactivation code

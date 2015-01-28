@@ -6,6 +6,6 @@ Feature: View Item from Shopping Cart
   @happy
   Scenario Outline: View a selected item
     Given I am on the shopping cart page
-    And I have 1 of the item in my cart
-    When I click on the item in my cart
+    And I have 1 of an item in my cart
+    When I click on an item in my cart
     Then I see the item's page

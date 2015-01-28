@@ -4,7 +4,7 @@ Feature: View Item from Shopping Cart
   I want to be able to go to the item's page from my shopping cart
 
   @happy
-  Scenario Outline: View a selected item
+  Scenario: View a selected item
     Given I am on the shopping cart page
     And I have 1 of an item in my cart
     When I click on an item in my cart

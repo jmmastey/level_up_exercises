@@ -7,6 +7,7 @@ Feature: Unregistered User Address Check
     Given I am not logged in
     And I am on the shopping cart page
 
+  @happy
   Scenario: Checkout with items
     Given my cart has 1 item
     When I click the checkout button

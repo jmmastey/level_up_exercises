@@ -1,0 +1,18 @@
+Happy:
+I can log in
+I can view my shopping cart
+I can add, remove, change items in my shopping cart
+I can look at items
+I can use coupons on my items
+I can enter my address for shipping
+I can get shipping estimates
+
+Sad:
+Incorrect login doesn't work
+I can't enter an invalid coupon code
+I can't choose items that have run out
+
+Bad:
+I can't enter a text value change for items
+I can't enter my address with no items
+I can't get shipping estimates with no items

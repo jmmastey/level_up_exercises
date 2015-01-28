@@ -10,6 +10,5 @@ Feature: Browse Items
 
   Scenario: Go to Item
     Given I am on the browse items page
-    And the "fishbowl" item exists
-    When I click on item "fishbowl" on the page
-    Then I see the "fishbowl" item page
+    When I click on an item on the page
+    Then I see the item's page

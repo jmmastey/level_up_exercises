@@ -3,14 +3,9 @@ Feature: View Item from Shopping Cart
   As a customer
   I want to be able to go to the item's page from my shopping cart
 
+  @happy
   Scenario Outline: View a selected item
     Given I am on the shopping cart page
-    And I have <number_of_item> "<item_name>" items in my cart
-    When I click on the "<item_name>" item
-    Then <something_happens>
-
-  @happy
-  Examples:
-    | number_of_item | item_name  | something_happens                  |
-    | 1              | fishbowl   | I go to the "fishbowl" item page   |
-    | 2              | monkey hat | I go to the "monkey hat" item page |
+    And I have 1 of the item in my cart
+    When I click on the item in my cart
+    Then I see the item's page

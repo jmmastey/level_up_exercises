@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'abanalyzer', '~> 0.1.0'
+gem 'activesupport', '~> 4.2.0'
 
 group :test do
   gem 'rspec'

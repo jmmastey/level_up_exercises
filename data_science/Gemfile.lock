@@ -65,6 +65,7 @@ PLATFORMS
 
 DEPENDENCIES
   abanalyzer (~> 0.1.0)
+  activesupport (~> 4.2.0)
   factory_girl (~> 4.5.0)
   faker (~> 1.4.3)
   pry (= 0.10.1)

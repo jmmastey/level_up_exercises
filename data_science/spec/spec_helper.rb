@@ -21,6 +21,7 @@ require 'faker'
 require './service/json_parser.rb'
 require './model/datum.rb'
 require './model/sample.rb'
+require './split_testing.rb'
 
 Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 

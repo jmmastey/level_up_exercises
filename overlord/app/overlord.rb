@@ -23,14 +23,10 @@ class Overlord < Sinatra::Application
   get '/' do
     @bombs = Bomb.all
     @url_base =  "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
+    session[:url] = @url_base
     haml :index
   end
 
-  use Rack::Session::Cookie, key: 'rack.session',
-                           domain: 'http://localhost:9292/',
-                           path: '/',
-                           expire_after: 2592000, # In seconds
-                           secret: 'change_me'
 
   run! if app_file == $PROGRAM_NAME
 end

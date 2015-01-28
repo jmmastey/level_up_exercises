@@ -11,12 +11,12 @@ class Bomb < ActiveRecord::Base
   before_validation :initialize_defaults
 
   def match_activation_code?(code)
-    self.activation_code == code["activation_code"] &&
-      !self.active?
+    self.activation_code == code &&
+      self.inactive?
   end
 
   def match_deactivation_code?(code)
-    self.deactivation_code == code["deactivation_code"] &&
+    self.deactivation_code == code &&
       self.active?
   end
 

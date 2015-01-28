@@ -6,7 +6,9 @@ require 'json'
 require_relative '../helpers/bomb_helpers'
 class Overlord < Sinatra::Application
   include BombHelpers
-
+   def set_bomb_session
+    session[:bomb] = Bomb.last
+   end
    before /.*/ do
      if request.url.match(/.json$/)
       request.accept.unshift('application/json')
@@ -16,6 +18,7 @@ class Overlord < Sinatra::Application
 
   get '/bomb/:bomb_id' do
     @bomb = Bomb.where("id = ?", params[:bomb_id]).first
+    session[:bomb] = @bomb
     BombHelpers.explode_bomb(@bomb)
     if request.accept.length == 1
       haml :bomb
@@ -27,11 +30,19 @@ class Overlord < Sinatra::Application
     end
   end
 
+  get "/bomb_activate" do
+    haml :bomb_activate
+  end
+
+  get "/bomb_deactivate" do
+    haml :bomb_deactivate
+  end
+
   post '/bomb/diffuse' do
-    params = {}
-    params = JSON.parse(request.body.read)
-    @bomb = Bomb.where("id = ?", params["bomb_id"]).first
-    wire = Wire.where(color: params["color"]).first
+    params = request.body.read.split('=')
+    set_bomb_session if ENV["RAILS_ENV"] == "test"
+    @bomb = Bomb.where("id = ?", session[:bomb].id).first
+    wire = Wire.where(color: params.last).first
 
     if wire.diffuse?
       @bomb.inactive!
@@ -39,7 +50,7 @@ class Overlord < Sinatra::Application
       @bomb.explode!
     end
     @bomb.save!
-
+    session[:bomb] = @bomb
     haml :bomb
   end
 
@@ -68,25 +79,27 @@ class Overlord < Sinatra::Application
   end
 
   post '/bomb/activate' do
-    request.body
+    params = request.body.read.split('=')
 
-    params = JSON.parse(request.body.read)
-    bomb = Bomb.where("id = ?", params["bomb_id"]).first
-    if bomb.match_activation_code?(params)
+    set_bomb_session if ENV["RAILS_ENV"] == "test"
+    bomb = Bomb.where("id = ?", session[:bomb].id).first
+    if bomb.match_activation_code?(params.last)
       bomb.active!
       bomb.activated_time = Time.now
       bomb.failed_attempts = 0
       bomb.save!
     end
     BombHelpers.explode_bomb(bomb)
-    bomb.to_json
+    @bomb = bomb
+    haml :bomb
   end
 
   post '/bomb/deactivate' do
-    params = {}
-    params = JSON.parse(request.body.read)
-    bomb = Bomb.where("id = ?", params["bomb_id"]).first
-    if bomb.match_deactivation_code?(params)
+    params = request.body.read.split('=')
+    set_bomb_session if ENV["RAILS_ENV"] == "test"
+    bomb = Bomb.where("id = ?", session[:bomb].id).first
+
+    if bomb.match_deactivation_code?(params.last)
       bomb.inactive!
       bomb.activated_time = nil
       bomb.failed_attempts = 0
@@ -101,6 +114,7 @@ class Overlord < Sinatra::Application
       end
     end
     BombHelpers.explode_bomb(bomb)
-    bomb.to_json
+    @bomb = bomb
+    haml :bomb
   end
 end

@@ -1,0 +1,8 @@
+= haml :_header
+
+
+%form{ action: "/bomb/activate", method: "post", name:"activate_form" }
+  %label Activation Code
+  %input{ type: "text", required: true, name: "activation_code", id: "activation_code" }
+  %input{ type:"submit", value: "Activate"}
+

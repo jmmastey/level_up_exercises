@@ -5,6 +5,7 @@ end
 
 
 Given(/^a bomb is "(.*?)"$/) do |arg1|
+  Bomb.destroy_all
   @bomb = Bomb.create(activation_code: "12345",
                           deactivation_code: "0000",
                           detonation_time: 45,
@@ -18,31 +19,48 @@ Given(/^I am looking at the page bomb$/) do
   visit "/bomb/#{@bomb.id}"
 end
 
+Given(/^I am looking at the page "(.*?)"$/) do |arg1|
+  visit "/"
+  visit "/bomb/#{@bomb.id}"
+end
+
 When(/^I enter right "(.*?)"$/) do |arg1|
-  %w(1 2 3 4 5).each do |num|
-    find(:css, ".keypad-"+num).click
-  end
 
-  require 'pry'
-  binding.pry
-    Capybara.current_driver = :webkit
-  page.execute_script("jQuery('.screen').click()")
+  url = status[arg1]["url"]
 
-  save_and_open_page
+  visit "/"
+  visit "/#{url}"
+  find(:css,"#"+"#{arg1}").set(@bomb[arg1])
+  click_button status[arg1]["button"]
+
+end
+
+When(/^I enter wrong "(.*?)"$/) do |arg1|
+  status = {}
+  status["activation_code"] = {}
+  status["deactivation_code"] = {}
+  status["activation_code"]["url"]="bomb_activate"
+  status["activation_code"]["button"]="Activate"
+
+  status["deactivation_code"]["url"]="bomb_deactivate"
+  status["deactivation_code"]["button"]="Deactivate"
+
+  url = status[arg1]["url"]
+
+  visit "/"
+  visit "/#{url}"
+  find(:css,"#"+"#{arg1}").set(@bomb[arg1]+@bomb[arg1].reverse)
+  click_button status[arg1]["button"]
 end
 
 Then(/^"(.*?)" should contain "(.*?)"$/) do |arg1, arg2|
-  #visit "/bomb"+ "/" + @bomb.id.to_s
-  arg2.each_char do |num|
-    find(:css, ".keypad-"+num).click
-  end
+ pending
 end
 
 Then(/^the bomb status is "(.*?)"$/) do |arg1|
-  selector = page.find_by_id("bomb_status")
-  expect(selector.text.downcase).to eq(arg1.downcase)
+  expect(find(:css, "#bomb_status").text).to eq(arg1.downcase)
 end
 
 Then(/^bomb should be "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+  expect(find(:css, "#bomb_status").text).to eq(arg1)
 end

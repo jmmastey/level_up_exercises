@@ -4,6 +4,15 @@
 %input{type: "hidden", value: "#{@bomb.id}", id: "bomb_id"}
 
 %input{type: "hidden", value: "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}", id: "base_url"}
+%meta{:content => "#{@bomb.detonation_time};url=#{session[:url]}/bomb/#{@bomb.id}", "http-equiv" => "refresh"}/
+
+%a{href: "/bomb_activate"} Activate
+%a{href: "/bomb_deactivate"} Deactivate
+
+#wires.bomb_wires
+  %form{ action: "/bomb/diffuse", method: "post" }
+    %button{ id: "green_btn", class: "wire_btn green_button", value: "green", type:"submit", name: "green_btn" } Green
+    %button{ id: "red_btn", class: "wire_btn red_button", name: "red", type:"submit" } Red
 
 #dialog-confirm{:style => "display: none;", :title => "Activate the bomb?"}
   %p
@@ -14,33 +23,8 @@
 .label
   %label Status
 
-#wires.bomb_wires
-  %button{ id: "green_btn", class: "wire_btn green_button" } Green
-  %button{ id: "red_btn", class: "wire_btn red_button" } Red
 
 %textarea{ readonly: true, id: "bomb_status",class: "bomb_inactive" }
   ="#{@bomb.status}"
-#bomb
-  / Screen and clear key
-  .top
-    %button.clear{value: "C"} C
-    %textarea.screen{name: "code", id: "code"}0000
-  .keys
-    / operators and other keys
-    %button.calc_btn.keypad-7{value: 7} 7
-    %button.calc_btn.keypad-8{value: 8} 8
-    %button.calc_btn.keypad-9{value: 9} 9
-    %button.operator.activate{value: "Activate", name:"activate"} Activate
-    %br/
-    %button.calc_btn.keypad-4{value: 4} 4
-    %button.calc_btn.keypad-5{value: 5} 5
-    %button.calc_btn.keypad-6{value: 6} 6
-    %button.operator.deactivate{value: "Deactivate", name:"deactivate"} Deactivate
-    %br/
-    %button.calc_btn.keypad-1{value: 1} 1
-    %button.calc_btn.keypad-2{value: 2} 2
-    %button.calc_btn.keypad-3{value: 3} 3
-    %br/
-    %button.calc_btn.keypad-0{value: 0} 0
 / PrefixFree
 

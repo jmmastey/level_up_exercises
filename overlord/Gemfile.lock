@@ -57,6 +57,7 @@ GEM
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
     slop (3.6.0)
+    state_machine (1.2.0)
     tilt (1.4.1)
 
 PLATFORMS
@@ -71,3 +72,4 @@ DEPENDENCIES
   rspec (~> 3.1.0)
   simplecov (~> 0.8.2)
   sinatra (~> 1.4.5)
+  state_machine (~> 1.2.0)

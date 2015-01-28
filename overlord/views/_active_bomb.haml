@@ -6,6 +6,6 @@
 %form.active_bomb{:action => "/deactivate", :method => "post"}
   %p 
     Deactivation code: 
-    %input{:name => "submitted_deact_code", :type => "text", :pattern => "[0-9]{4}"}
+    %input.deact_code_guess{:name => "deact_code", :type => "text", :pattern => "[0-9]{4}"}
   %p
-    %input{:type => "submit", :value => "Submit deactivation code"}
+    %input.submit_deact_code_guess{:type => "submit", :value => "Submit deactivation code"}

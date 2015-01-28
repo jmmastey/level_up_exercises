@@ -1,30 +1,32 @@
-Given(/^The bomb has been booted and activated with the default codes$/) do
-  visit "/"
-  click_button("Boot bomb")
-  fill_in('submitted_act_code', with: "1234")
-  click_button('Submit activation code')
-end
-
-When(/^I enter the default deactivation code$/) do
-  fill_in('submitted_deact_code', with: "0000")
-  click_button('Submit deactivation code')
+ When(/^I enter the default deactivation code$/) do
+ fill_in("deact_code", with: "0000")
+ click_button("Submit deactivation code")
 end
 
 Then(/^the bomb should deactivate$/) do
-  expect(page).to have_selector('.deactivated')
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I enter an incorrect activation code (\d+) time\(s\)$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
 end
 
 Then(/^the bomb should not deactivate$/) do
-  expect(page).to have_selector('.active_bomb')
+  pending # express the regexp above with the code you wish you had
 end
 
-Then(/^the number of deactivation attempts remaining should be (\d+)$/) do |remaining_attempts|
-  expect(page).to have_content("Attempts remaining: #{remaining_attempts}")
+Then(/^the number of deactivation attempts remaining should be (\d+)$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
 end
 
-When(/^I enter an incorrect activation code (\d+) time\(s\)$/) do |number|
-  number.to_i.times do
-    fill_in('submitted_deact_code', with: "abcd")
-    click_button('Submit deactivation code')
-  end
+When(/^I visit another page$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^the bomb should still be active$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^there should be (\d+) deactivation attempts left$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
 end

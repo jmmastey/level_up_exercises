@@ -5,8 +5,8 @@
   - if bomb.deactivated?
     = haml :_booted_bomb
   - elsif bomb.activated?
-    = haml :_bomb_already_active
+    = haml :_active_bomb
   - elsif bomb.exploded?
     = haml :_bomb_exploded
-  - elsif bomb.not_booted?
+  - elsif bomb.unbooted?
     = haml :_welcome_page

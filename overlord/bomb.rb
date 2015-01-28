@@ -6,54 +6,58 @@ class Bomb
   attr_reader :attempts_remaining, :bad_activation_code
 
   def initialize
-    @active = false
-    @exploded = false
-    @booted = false
+    @state = :unbooted
     @attempts_remaining = MAX_DEACTIVATION_ATTEMPTS
     @bad_activation_code = false
+    @already_booted = false
   end
 
-  def boot(act_code = "", deact_code = "")
-    return unless not_booted?
+  def boot(act_code = '', deact_code = '')
+    return "Bomb already booted" unless @state == :unbooted
     raise ArgumentError unless valid?(act_code) && valid?(deact_code)
     @activation_code = assign_act_code(act_code)
     @deactivation_code = assign_deact_code(deact_code)
-    @booted = true
+    @state = :deactivated
+    "Bomb has been booted"
   end
 
   def activate(code)
-    return unless deactivated?
+    return "Bomb not in deactivated state" unless deactivated?
     if code == @activation_code
-      @active = true
+      @state = :activated
       @bad_activation_code = false
+      "Bomb activated"
     else
       @bad_activation_code = true
+      "Incorrect activation code"
     end
   end
 
   def deactivate(code)
-    return unless activated?
+    return "Bomb not in activated state" unless activated?
     if code == @deactivation_code
       deactivate_bomb
-    elsif activated?
+      "Bomb deactivated"
+    else
       incorrect_deactivation_code
+      "Incorrect deactivation code"
     end
   end
 
-  def activated?
-    @booted && @active && !@exploded
-  end
-
-  def exploded?
-    @booted && @active && @exploded
+  def unbooted?
+    @state == :unbooted
   end
 
   def deactivated?
-    @booted && !@active && !@exploded
+    @state == :deactivated
   end
 
-  def not_booted?
-    !@booted && !@active && !@exploded
+  def activated?
+    @state == :activated
+  end
+
+  def exploded?
+    @state == :exploded
   end
 
   private
@@ -73,12 +77,12 @@ class Bomb
   def incorrect_deactivation_code
     @attempts_remaining -= 1 if @attempts_remaining > 0
     if @attempts_remaining <= 0
-      @exploded = true
+      @state = :exploded
     end
   end
 
   def deactivate_bomb
-    @active = false
+    @state = :deactivated
     @attempts_remaining = MAX_DEACTIVATION_ATTEMPTS
   end
 end

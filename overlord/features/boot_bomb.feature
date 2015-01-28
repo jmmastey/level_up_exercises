@@ -3,23 +3,31 @@ Feature: Bomb boots with activation and deactivation codes set
   I want to boot the bomb
   So that I can activate or deactivate the bomb
 
-  Scenario: Visit home page
+  Background:  
     Given I am on the home page
-    Then I should see fields to enter the activation and deactivation codes for the bomb
+
+  Scenario: Visit home page
+    Then I should see fields to enter codes to boot the bomb
     And I should see a button to boot the bomb
 
   Scenario: Use default activation/deactivation codes
-    When I do not enter an activation code or deactivation code
-    Then the bomb should boot with the default codes and be deactivated
-
-  Scenario: Enter custom activation/deactivation codes
-    When I am on the home page
-    And I enter "1111" for the activation code
-    And I enter "2222" for the deactivation code
+    When I try to boot the bomb
     Then the bomb should boot and be deactivated
 
-  Scenario: Enter invalid activation/deactivation codes
-    When I am on the home page
-    And I enter "123" for the activation code
-    And I enter "abc" for the deactivation code
-    Then the bomb should boot with the default codes and be deactivated
+  Scenario: Enter custom activation/deactivation codes
+    When I enter "1111" for the activation code
+    And I enter "2222" for the deactivation code
+    And I try to boot the bomb
+    Then the bomb should boot and be deactivated
+
+  Scenario: Enter invalid activation code
+    When I enter "abc" for the activation code
+    And I enter "1111" for the deactivation code
+    And I try to boot the bomb
+    Then the bomb should not boot
+
+  Scenario: Enter invalid deactivation code
+    When I enter "2222" for the activation code
+    And I enter "#{]&" for the deactivation code
+    And I try to boot the bomb
+    Then the bomb should not boot

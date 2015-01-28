@@ -8,7 +8,7 @@
     = haml :_deactivated_bomb
   - elsif bomb.exploded?
     = haml :_bomb_exploded
-  -elsif bomb.not_booted?
+  -elsif bomb.unbooted?
     =haml :_welcome_page
 
 

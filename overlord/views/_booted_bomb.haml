@@ -1,14 +1,14 @@
-%p.not_activated
+%p.bomb_deactivated
   The bomb has been booted but not activated.
-%p
-  Please enter the activation code.
-%form{:action => "/activate", :method => "post"}
-  %p 
-    Activation code: 
-    %input.act_code_guess{:name => "submitted_act_code", :type => "text", :pattern => "[0-9]{4}"}
   %p
-    %input.submit_act_code_guess{:type => "submit", :value => "Submit activation code"}
+    Please enter the activation code.
+  %form{:action => "/activate", :method => "post"}
+    %p 
+      Activation code: 
+      %input.act_code_guess{:name => "act_code", :type => "text", :pattern => "[0-9]{4}"}
+    %p
+      %input.submit_act_code_guess{:type => "submit", :value => "Submit activation code"}
 
-- if bomb.bad_activation_code
-  %p.incorrect_act_code_submitted
-    Incorrect activation code.
+  - if bomb.bad_activation_code
+    %p.incorrect_act_code_submitted
+      Incorrect activation code.

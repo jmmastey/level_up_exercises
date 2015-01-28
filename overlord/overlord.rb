@@ -24,12 +24,12 @@ post '/boot' do
 end
 
 get '/activate' do
-  haml :booted_bomb, locals: { bomb: bomb, bad_code: false }
+  haml :booted_bomb, locals: { bomb: bomb }
 end
 
 post '/activate' do
-  bomb.activate(params[:submitted_act_code])
-  haml :booted_bomb, locals: { bomb: bomb, bad_code: !bomb.activated? }
+  bomb.activate(params[:act_code])
+  haml :booted_bomb, locals: { bomb: bomb }
 end
 
 get '/deactivate' do

@@ -3,44 +3,46 @@ Given(/^the bomb has been booted with the default codes$/) do
   click_button("Boot bomb")
 end
 
-When(/^I enter the default activation code$/) do
-  fill_in('submitted_act_code', with: "1234")
-  click_button('Submit activation code')
-end
-
-When(/^I enter the correct activation code$/) do
-  fill_in('submitted_act_code', with: "1111")
-  click_button('Submit activation code')
-end
-
-Then(/^the bomb should be activated$/) do
-  expect(page).to have_selector('.active_bomb')
-end
-
-Given(/^the bomb has been booted with a specified activation code$/) do
-  visit "/"
-  fill_in('act_code', with: "1111")
-  click_button("Boot bomb")
-end
-
-When(/^I enter an incorrect activation code$/) do
-  fill_in('submitted_act_code', with: "2222")
-  click_button('Submit activation code')
-end
-
 Then(/^the bomb should not be activated yet$/) do
-  expect(page).to have_selector('.not_activated')
+    expect(page).to have_selector(".bomb_deactivated")
 end
 
 Then(/^I should see a field to enter the activation code$/) do
-  expect(page).to have_selector('.act_code')
+  expect(page).to have_selector(".act_code_guess")
 end
 
 Then(/^I should see a button to submit the activation code$/) do
-  expect(page).to have_selector('.submit')
+  expect(page).to have_selector(".submit_act_code_guess")
 end
 
-Then(/^I should see an incorrect activation code error message$/) do
-  expect(page).to have_selector('.incorrect_act_code')
+When(/^I enter the default activation code$/) do
+  fill_in("act_code", with: "1234")
+end
+
+When(/^I try to activate the bomb with the default code$/) do
+  click_button("Submit activation code")
+end
+
+Then(/^the bomb should be activated$/) do
+  expect(page).to have_selector(".active_bomb")
+end
+
+Given(/^the bomb has been booted with "(.*?)" as the activation code$/) do |number|
+  visit "/"
+  fill_in("act_code", with: number)
+  click_button("Boot bomb")
+end
+
+When(/^I enter for the "(.*?)" activation code$/) do |number|
+  fill_in("act_code", with: number.to_s)
+end
+
+
+When(/^I enter an incorrect activation code$/) do
+  fill_in("act_code", with: "abc!")
+end
+
+When(/^I try to activate the bomb$/) do
+  click_button("Submit activation code")
 end
 

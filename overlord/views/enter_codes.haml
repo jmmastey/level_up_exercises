@@ -2,11 +2,11 @@
   %br
   
 %center
-  - if !bomb.activated? && !bomb.exploded?
+  - if !bomb.activated? && !bomb.booted?
     = haml :_welcome_page
-  - elsif bomb.active
+  - elsif bomb.activated?
     = haml :_bomb_already_active
-  - elsif bomb.exploded
+  - elsif bomb.exploded?
     = haml :_bomb_exploded
-  - elsif !bomb.active && !bomb.exploded
+  - elsif bomb.booted?
     = haml :_booted_bomb

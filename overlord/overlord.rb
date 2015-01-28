@@ -29,9 +29,10 @@ end
 
 post '/activate' do
   bomb.activate(params[:submitted_act_code])
-  if !bomb.active && !bomb.exploded
+  if !bomb.activated?
     session[:bad_act_code] = true
     redirect to('/activate')
+  end
   haml :live_bomb, locals: { bomb: bomb }
 end
 

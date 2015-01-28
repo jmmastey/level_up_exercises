@@ -1,81 +1,118 @@
 require 'spec_helper'
 
 describe Bomb do
-  subject(:bomb) { Bomb.new("", "") }
+  subject(:bomb) { Bomb.new }
   
   describe "#new" do
-    it "defaults to 1234/0000 codes with no input" do
-      bomb.activate("1234")
-      expect(bomb).to be_activated
-      bomb.deactivate("0000")
-      expect(bomb).not_to be_activated
-      expect(bomb).not_to be_exploded
+    it "is not booted upon creation" do
+      expect(bomb).not_to be_booted
     end
 
-    it "is initialized with 3 deactivation attempts" do
-      expect(bomb.attempts_remaining).to eq(3)
-    end
-
-    it "is not activated upon creation" do
+    it "is not activated" do
       expect(bomb).not_to be_activated
     end
 
-    it "has not exploded yet" do
+    it "has not exploded" do
       expect(bomb).not_to be_exploded
     end
 
-    subject(:bad_input_bomb) { Bomb.new(23, "21") }
+    it "is set for 3 deactivation attempts" do
+      expect(bomb).not_to be_exploded
+    end
+  end
 
-    it "throws exception with invalid parameters" do
-      expect { Bomb.new("abc", "123") }.to raise_error
-      expect { Bomb.new("2345", false) }.to raise_error
-      expect { Bomb.new([3121], "4444") }.to raise_error
+  describe "#boot" do 
+    context "with no codes specified" do
+      before(:each) do
+        bomb.boot
+      end
+
+      it "boots the bomb" do
+        expect(bomb).to be_booted
+      end
+      it "defaults to 1234 activation code" do
+        bomb.activate("1234")
+        expect(bomb).to be_activated
+      end
+
+      it "defaults to 0000 deactivation code" do
+        bomb.activate("1234")
+        bomb.deactivate("0000")
+        expect(bomb).not_to be_activated
+        expect(bomb).not_to be_exploded
+      end
     end
 
-    subject(:bomb_with_custom_codes) { Bomb.new("6666", "1357") }
+    context "with valid custom codes" do
+      before(:each) do
+        bomb.boot("1111","2222")
+      end
 
-    it "accepts valid custom codes" do
-      bomb_with_custom_codes.activate("6666")
-      expect(bomb_with_custom_codes).to be_activated
-      bomb_with_custom_codes.deactivate("1357")
-      expect(bomb_with_custom_codes).not_to be_activated
-      expect(bomb_with_custom_codes).not_to be_exploded
+      it "boots the bomb" do
+        expect(bomb).to be_booted
+      end
+
+      it "sets the activation code to 1111" do
+        bomb.activate("1111")
+        expect(bomb).to be_activated
+      end
+
+      it "sets the deactivation code to 2222" do
+        bomb.activate("1111")
+        bomb.deactivate("2222")
+        expect(bomb).not_to be_activated
+        expect(bomb).not_to be_exploded
+      end
+    end
+
+    context "with invalid codes" do
+      it "throws exception with invalid codes" do
+        expect { bomb.boot("abcd", "123") }.to raise_error
+        expect { bomb.boot("2345", false) }.to raise_error
+        expect { bomb.boot([3121], "4444") }.to raise_error
+      end
     end
   end
 
   describe "#activate" do
-    it "activates when the correct activation code is entered" do
-      bomb.activate("1234")
-      expect(bomb).to be_activated
-    end
-
-    it "does not activate if the activation code is not correct" do
-      bomb.activate("1111")
-      expect(bomb).not_to be_activated
-    end
-
-    it "does nothing if the bomb is already active" do
-      2.times do
+    context "with default codes" do
+      before(:each) do
+        bomb.boot
+      end
+      it "activates when the correct activation code is entered" do
         bomb.activate("1234")
+        expect(bomb).to be_activated
       end
-      expect(bomb).to be_activated
-      expect(bomb).not_to be_exploded
-      expect(bomb.attempts_remaining).to eq(3)
-    end
 
-    it "does not activate if the bomb has exploded" do
-      bomb.activate("1234")
-      3.times do
-        bomb.deactivate("1111")
+      it "does not activate if the activation code is not correct" do
+        bomb.activate("1111")
+        expect(bomb).not_to be_activated
       end
-      bomb.activate("1234")
-      expect(bomb).to be_exploded
-      expect(bomb).not_to be_activated
+
+      it "does nothing if the bomb is already active" do
+        2.times do
+          bomb.activate("1234")
+        end
+        expect(bomb).to be_activated
+        expect(bomb).not_to be_exploded
+        expect(bomb.attempts_remaining).to eq(3)
+      end
+
+      it "does not activate if the bomb has exploded" do
+        bomb.activate("1234")
+        3.times do
+          bomb.deactivate("1111")
+        end
+        bomb.activate("1234")
+        expect(bomb).to be_exploded
+        expect(bomb).not_to be_activated
+      end
     end
   end
 
   describe "#deactivate" do
     before(:each) do
+      bomb.boot
       bomb.activate("1234")
     end
     it "deactivates the bomb when the correct deactivation code is entered" do
@@ -112,6 +149,9 @@ describe Bomb do
   end
 
   describe "#exploded" do
+    before(:each) do
+      bomb.boot
+    end
     it "shows that the bomb has not exploded upon boot" do
       expect(bomb).not_to be_exploded
     end

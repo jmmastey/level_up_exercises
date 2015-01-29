@@ -6,6 +6,7 @@
 #   it { is_expected.to have_event(:status, :event_name, [ :state1, state2 ] => [ state3, state4 ]) }
 #   it { is_expected.to have_event(:status, :event_name, { :state1 => state2, state1 => state3, :state4 => state5 etc })}
 
+require 'ostruct'
 
 RSpec::Matchers.define :have_event do |state_field, event_name, status_flows|
   match do |model|

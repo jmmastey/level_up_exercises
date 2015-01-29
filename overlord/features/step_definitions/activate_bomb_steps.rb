@@ -3,15 +3,15 @@ Given(/^the bomb has been booted with the default codes$/) do
   click_button("Boot bomb")
 end
 
-Then(/^the bomb should not be activated yet$/) do
+Then(/^the bomb is not activated yet$/) do
   expect(page).to have_selector(".bomb_deactivated")
 end
 
-Then(/^I should see a field to enter the activation code$/) do
+Then(/^I see a field to enter the activation code$/) do
   expect(page).to have_selector(".act_code_guess")
 end
 
-Then(/^I should see a button to submit the activation code$/) do
+Then(/^I see a button to submit the activation code$/) do
   expect(page).to have_selector(".submit_act_code_guess")
 end
 
@@ -23,7 +23,7 @@ When(/^I try to activate the bomb with the default code$/) do
   click_button("Submit activation code")
 end
 
-Then(/^the bomb should be activated$/) do
+Then(/^the bomb is activated$/) do
   expect(page).to have_selector(".active_bomb")
 end
 

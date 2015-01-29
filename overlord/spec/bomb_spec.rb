@@ -215,7 +215,7 @@ describe Bomb do
   end
 
   describe "#activated?" do
-    it "is activated calling #activate" do
+    it "is activated after calling #activate" do
       bomb.boot
       bomb.activate(DEFAULT_ACT_CODE)
       expect(bomb).to be_activated

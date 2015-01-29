@@ -13,6 +13,6 @@ When(/^I enter an incorrect deactivation code (\d+) time\(s\)$/) do |number|
   end
 end
 
-Then(/^the bomb should explode$/) do
+Then(/^the bomb explodes$/) do
   expect(page).to have_selector(".bomb_exploded")
 end

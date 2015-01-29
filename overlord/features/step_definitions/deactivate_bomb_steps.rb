@@ -18,11 +18,11 @@ When(/^I enter an incorrect deactivation code$/) do
   fill_in("deact_code", with: "9999")
 end
 
-Then(/^the bomb should deactivate$/) do
+Then(/^the bomb is deactivated$/) do
   page.assert_selector(".bomb_deactivated")
 end
 
-Then(/^the bomb should not deactivate$/) do
+Then(/^the bomb does not deactivate$/) do
   expect(page).to have_selector(".active_bomb")
 end
 

@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20141224234728) do
   create_table "regions", primary_key: "region_id", force: true do |t|
     t.string "country"
     t.string "state"
+    t.string "city"
   end
 
   create_table "weather_forecasts", force: true do |t|

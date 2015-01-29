@@ -81,7 +81,9 @@ class Overlord < Sinatra::Application
       session[:bomb] = @bomb
       haml :bomb
     else
-      Overlord.error_message += @bomb.errors.messages.collect{ |attribute, msg| "#{attribute} : #{msg.first} "}.join(", ")
+      Overlord.error_message += @bomb.errors.messages.collect do |attribute, msg|
+                                  "#{attribute} : #{msg.first} "
+                              end.join(", ")
       redirect "/"
     end
   end

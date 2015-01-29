@@ -1,9 +1,7 @@
 module BombHelpers
   def self.explode_bomb(bomb)
     return if bomb.nil?
-    if self.time_to_explode? bomb
-      bomb.explode!
-    end
+    bomb.explode! if self.time_to_explode? bomb
   end
 
   private

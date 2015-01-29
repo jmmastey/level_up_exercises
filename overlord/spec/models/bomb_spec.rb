@@ -3,10 +3,11 @@ require_relative '../spec_helper'
 describe 'bomb' do
   let(:bomb) { Bomb.create }
 
-  let (:valid_bomb) { Bomb.create(activation_code: '12342',
+  let(:valid_bomb) do
+    Bomb.create(activation_code: '12342',
                         deactivation_code: '10220',
-                        detonation_time: '55') }
-
+                        detonation_time: '55')
+  end
 
   it "should have default activation code" do
     expect(bomb.activation_code).to eq("1234")

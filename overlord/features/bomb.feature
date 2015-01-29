@@ -6,15 +6,15 @@ Feature: Bomb
   Scenario: Bomb is inactive
     Given a bomb is "inactive"
     And I am looking at the page bomb
-    Then the bomb status is "Inactive"
+    Then bomb should be "inactive"
 
   Scenario: Bomb is activated
     Given a bomb is "active"
     And I am looking at the page bomb
-    Then the bomb status is "Active"
+    Then bomb should be "active"
 
   Scenario: Bomb is exploded
     Given a bomb is "explode"
     And I am looking at the page bomb
-    Then the bomb status is "Explode"
+    Then bomb should be "explode"
 

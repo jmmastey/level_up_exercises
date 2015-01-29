@@ -6,15 +6,16 @@ require 'json'
 require_relative '../helpers/bomb_helpers'
 class Overlord < Sinatra::Application
   include BombHelpers
-   def set_bomb_session
+  @error_message = ""
+  def set_bomb_session
     session[:bomb] = Bomb.last
-   end
-   before /.*/ do
-     if request.url.match(/.json$/)
+  end
+  before(/.*/) do
+    if request.url.match(/.json$/)
       request.accept.unshift('application/json')
-      request.path_info = request.path_info.gsub(/.json$/,'')
-     end
-   end
+      request.path_info = request.path_info.gsub(/.json$/, '')
+    end
+  end
 
   get '/bomb/:bomb_id' do
     @bomb = Bomb.where("id = ?", params[:bomb_id]).first
@@ -56,26 +57,38 @@ class Overlord < Sinatra::Application
 
   post '/bomb' do
     params = {}
-    if request.body.try("string") != ""
-      params = JSON.parse(request.body.read)
+    @error_message = ""
+    opt_attributes = request.body.read.split("&")
+    opt_attributes.each do |attribute|
+      column_values = attribute.split("=")
+      params[column_values[0]] = column_values[1]
     end
 
-    bomb = Bomb.create(
+    @bomb = Bomb.create(
       activation_code: params["activation_code"],
       deactivation_code: params["deactivation_code"],
       detonation_time: params["detonation_time"])
 
-    params["wires"] ||= [{ color: "red", diffuse: false },
+    if @bomb.valid?
+      params["wires"] ||= [{ color: "red", diffuse: false },
                          { color: "green", diffuse: true }]
 
-    bomb.save!
+      @bomb.save!
 
-    params["wires"].each do |wire_options|
-      wire = bomb.wires.build(wire_options)
-      wire.save
+      params["wires"].each do |wire_options|
+        wire = @bomb.wires.build(wire_options)
+        wire.save
+      end
+      haml :bomb
+    else
+
+      @bomb.errors.messages.each do |message|
+        message.flatten!
+        @error_message += message.first.to_s + " " + message.last.to_s+", "
+      end
+      @error_message
+      redirect "/"
     end
-
-    bomb.to_json
   end
 
   post '/bomb/activate' do
@@ -83,6 +96,7 @@ class Overlord < Sinatra::Application
 
     set_bomb_session if ENV["RAILS_ENV"] == "test"
     bomb = Bomb.where("id = ?", session[:bomb].id).first
+
     if bomb.match_activation_code?(params.last)
       bomb.active!
       bomb.activated_time = Time.now

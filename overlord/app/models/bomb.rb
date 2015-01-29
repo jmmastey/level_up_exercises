@@ -6,18 +6,17 @@ class Bomb < ActiveRecord::Base
   validates :activation_code, :deactivation_code, format: { with: /\A[0-9]*\z/ }
   enum status: %w(active inactive explode)
 
-
   has_many :wires
   before_validation :initialize_defaults
 
   def match_activation_code?(code)
-    self.activation_code == code &&
-      self.inactive?
+    activation_code == code &&
+      inactive?
   end
 
   def match_deactivation_code?(code)
-    self.deactivation_code == code &&
-      self.active?
+    deactivation_code == code &&
+      active?
   end
 
   private

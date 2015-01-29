@@ -56,7 +56,7 @@ describe 'bomb' do
         expect(bomb.status).to eq("active")
       end
       Timecop.freeze(Time.parse '2015-01-15 12:35:00') do
-        get "/bomb/"+Bomb.last.id.to_s
+        get "/bomb/" + Bomb.last.id.to_s
         expect(Bomb.last.status).to eq("explode")
       end
     end

@@ -22,11 +22,9 @@ class Overlord < Sinatra::Application
 
   get '/' do
     @bombs = Bomb.all
-    @url_base =  "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
-    session[:url] = @url_base
+    session[:url] = "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
     haml :index
   end
-
 
   run! if app_file == $PROGRAM_NAME
 end

@@ -30,9 +30,6 @@ group :test do
   gem 'selenium-webdriver'
   gem 'capybara-angular'
   gem 'xpath'
-  gem 'culerity'
-  gem 'celerity', :require => nil
   gem 'poltergeist'
-  gem 'vcr'
   gem 'capybara-webkit', '~> 1.1.0'
 end

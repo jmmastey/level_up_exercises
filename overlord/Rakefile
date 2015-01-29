@@ -1,7 +1,6 @@
 require 'bundler'
 
-
-task :default => :spec
+task default: :spec
 
 require "sinatra/activerecord/rake"
 require_relative "app/overlord"

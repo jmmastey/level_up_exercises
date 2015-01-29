@@ -2,6 +2,13 @@ BEGIN;
 
 CREATE SCHEMA IF NOT EXISTS yadda AUTHORIZATION sastaputhra;
 
+DROP TABLE IF EXISTS yadda.addresses CASCADE;
+DROP TABLE IF EXISTS yadda.breweries CASCADE;
+DROP TABLE IF EXISTS yadda.beers CASCADE;
+DROP TABLE IF EXISTS yadda.users CASCADE;
+DROP TABLE IF EXISTS yadda.ratings CASCADE;
+DROP TABLE IF EXISTS yadda.beer_styles CASCADE;
+
 CREATE TABLE yadda.addresses(
   id            SERIAL       PRIMARY KEY,
   line_1        TEXT         NOT NULL,
@@ -9,8 +16,8 @@ CREATE TABLE yadda.addresses(
   state         TEXT         NOT NULL,
   country       TEXT         NOT NULL,
   zip_code      TEXT         NOT NULL,
-  created_by   TEXT         ,
-  created_on   TIMESTAMPTZ  ,
+  created_by    TEXT         ,
+  created_on    TIMESTAMPTZ  ,
   updated_by    TEXT         ,
   updated_on    TIMESTAMPTZ
 );
@@ -18,22 +25,27 @@ CREATE TABLE yadda.addresses(
 CREATE TABLE yadda.breweries(
   id            SERIAL       PRIMARY KEY,
   name          TEXT         NOT NULL,
-  address_id    INTEGER      NOT NULL REFERENCES yadda.addresses,
+  address_id    INTEGER      NOT NULL REFERENCES yadda.addresses ON DELETE CASCADE,
   founding_year INTEGER      NOT NULL,
-  created_by   TEXT         ,
-  created_on   TIMESTAMPTZ  ,
+  created_by    TEXT         ,
+  created_on    TIMESTAMPTZ  ,
   updated_by    TEXT         ,
   updated_on    TIMESTAMPTZ  ,
   description   TEXT
   );
 
+CREATE TABLE yadda.beer_styles(
+  id            SERIAL       PRIMARY KEY,
+  style         TEXT         NOT NULL
+);
+
 CREATE TABLE yadda.beers(
   id            SERIAL       PRIMARY KEY,
-  style         TEXT         NOT NULL,
+  style_id      INTEGER      NOT NULL REFERENCES yadda.beer_styles ON DELETE CASCADE,
   brewing_year  INTEGER      NOT NULL,
-  brewery_id    INTEGER      REFERENCES yadda.breweries,
-  created_by   TEXT         ,
-  created_on   TIMESTAMPTZ  ,
+  brewery_id    INTEGER      REFERENCES yadda.breweries ON DELETE CASCADE,
+  created_by    TEXT         ,
+  created_on    TIMESTAMPTZ  ,
   updated_by    TEXT         ,
   updated_on    TIMESTAMPTZ  ,
   description   TEXT
@@ -45,6 +57,7 @@ CREATE TABLE yadda.users(
   email         TEXT,
   password      TEXT,
   phone         TEXT,
+  address_id    INTEGER      NOT NULL REFERENCES yadda.addresses ON DELETE CASCADE,
   created_by    TEXT         ,
   created_on    TIMESTAMPTZ  ,
   updated_by    TEXT         ,
@@ -53,8 +66,8 @@ CREATE TABLE yadda.users(
 
 CREATE TABLE yadda.ratings(
   id            SERIAL       PRIMARY KEY,
-  beer_id       INTEGER      REFERENCES yadda.beers,
-  user_id       INTEGER      REFERENCES yadda.users,
+  beer_id       INTEGER      REFERENCES yadda.beers ON DELETE CASCADE,
+  user_id       INTEGER      REFERENCES yadda.users ON DELETE CASCADE,
   look          INTEGER      NOT NULL CHECK(look between 0 AND 5),
   smell         INTEGER      NOT NULL CHECK(smell between 0 AND 5),
   taste         INTEGER      NOT NULL CHECK(taste between 0 AND 5),
@@ -66,12 +79,13 @@ CREATE TABLE yadda.ratings(
   updated_on    TIMESTAMPTZ
 );
 
-
 CREATE OR REPLACE FUNCTION  yadda.tg_inserts()
 RETURNS TRIGGER AS $$
   BEGIN
     NEW.created_on := current_timestamp;
     NEW.created_by := current_user;
+    -- While inserting/creating a record only created_* are populated
+    -- as we are not updating, anything the updated_* columns are left blank
     RETURN NEW;
   END;
 $$ LANGUAGE plpgsql;
@@ -81,6 +95,7 @@ RETURNS TRIGGER AS $$
   BEGIN
     NEW.updated_on := current_timestamp;
     NEW.updated_by := current_user;
+    -- While updating a record only updated_* are populated
     RETURN NEW;
   END;
 $$ LANGUAGE plpgsql;

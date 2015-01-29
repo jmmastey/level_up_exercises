@@ -6,7 +6,7 @@ require 'json'
 require_relative '../helpers/bomb_helpers'
 class Overlord < Sinatra::Application
   include BombHelpers
-  @error_message = ""
+
   def set_bomb_session
     session[:bomb] = Bomb.last
   end
@@ -57,7 +57,6 @@ class Overlord < Sinatra::Application
 
   post '/bomb' do
     params = {}
-    @error_message = ""
     opt_attributes = request.body.read.split("&")
     opt_attributes.each do |attribute|
       column_values = attribute.split("=")
@@ -79,14 +78,10 @@ class Overlord < Sinatra::Application
         wire = @bomb.wires.build(wire_options)
         wire.save
       end
+      session[:bomb] = @bomb
       haml :bomb
     else
-
-      @bomb.errors.messages.each do |message|
-        message.flatten!
-        @error_message += message.first.to_s + " " + message.last.to_s+", "
-      end
-      @error_message
+      Overlord.error_message += @bomb.errors.messages.collect{ |attribute, msg| "#{attribute} : #{msg.first} "}.join(", ")
       redirect "/"
     end
   end

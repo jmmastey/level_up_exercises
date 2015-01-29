@@ -1,7 +1,7 @@
 %link{:href => "/style.css", :rel => "stylesheet"}/
 
 = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'
-= @error_message if @error_message != ""
+= "#{Overlord.error_message.strip}"
 %form{ action: "/bomb", method: "post", name:"bomb_form" }
   %table
     %tr

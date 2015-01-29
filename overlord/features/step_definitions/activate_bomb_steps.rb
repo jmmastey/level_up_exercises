@@ -4,7 +4,7 @@ Given(/^the bomb has been booted with the default codes$/) do
 end
 
 Then(/^the bomb should not be activated yet$/) do
-    expect(page).to have_selector(".bomb_deactivated")
+  expect(page).to have_selector(".bomb_deactivated")
 end
 
 Then(/^I should see a field to enter the activation code$/) do
@@ -27,7 +27,7 @@ Then(/^the bomb should be activated$/) do
   expect(page).to have_selector(".active_bomb")
 end
 
-Given(/^the bomb has been booted with "(.*?)" as the activation code$/) do |number|
+Given(/^the bomb has been booted with activation code "(.*?)"$/) do |number|
   visit "/"
   fill_in("act_code", with: number)
   click_button("Boot bomb")
@@ -37,7 +37,6 @@ When(/^I enter for the "(.*?)" activation code$/) do |number|
   fill_in("act_code", with: number.to_s)
 end
 
-
 When(/^I enter an incorrect activation code$/) do
   fill_in("act_code", with: "abc!")
 end
@@ -45,4 +44,3 @@ end
 When(/^I try to activate the bomb$/) do
   click_button("Submit activation code")
 end
-

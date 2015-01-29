@@ -13,34 +13,29 @@ class Bomb
   end
 
   def boot(act_code = '', deact_code = '')
-    return "Bomb already booted" unless @state == :unbooted
+    raise RuntimeError unless @state == :unbooted
     raise ArgumentError unless valid?(act_code) && valid?(deact_code)
     @activation_code = assign_act_code(act_code)
     @deactivation_code = assign_deact_code(deact_code)
     @state = :deactivated
-    "Bomb has been booted"
   end
 
   def activate(code)
-    return "Bomb not in deactivated state" unless deactivated?
+    raise RuntimeError unless deactivated?
     if code == @activation_code
       @state = :activated
       @bad_activation_code = false
-      "Bomb activated"
     else
       @bad_activation_code = true
-      "Incorrect activation code"
     end
   end
 
   def deactivate(code)
-    return "Bomb not in activated state" unless activated?
+    raise RuntimeError unless activated?
     if code == @deactivation_code
       deactivate_bomb
-      "Bomb deactivated"
     else
       incorrect_deactivation_code
-      "Incorrect deactivation code"
     end
   end
 

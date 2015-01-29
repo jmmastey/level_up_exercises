@@ -1,5 +1,5 @@
 %p.bomb_deactivated
-  The bomb has been booted but not activated.
+  The bomb is deactivated.
   %p
     Please enter the activation code.
   %form{:action => "/activate", :method => "post"}
@@ -12,3 +12,5 @@
   - if bomb.bad_activation_code
     %p.incorrect_act_code_submitted
       Incorrect activation code.
+%p
+  %a{:href => "/"} Reboot bomb?

@@ -7,40 +7,38 @@ enable :sessions
 get '/' do
   session.clear
   create_bomb
-  redirect to('/boot')
+  redirect to('/bomb')
 end
 
-get '/boot' do
-  haml :enter_codes, locals: { bomb: bomb }
+get '/bomb' do
+  haml :bomb, locals: { bomb: bomb }
 end
 
 post '/boot' do
   begin
     bomb.boot(params[:act_code], params[:deact_code])
+    haml :bomb, locals: { bomb: bomb }
   rescue Bomb::ArgumentError
-    redirect to('/boot')
+    redirect to('/bomb')
   end
-  redirect to('/activate')
-end
-
-get '/activate' do
-  haml :booted_bomb, locals: { bomb: bomb }
 end
 
 post '/activate' do
-  bomb.activate(params[:act_code])
-  haml :booted_bomb, locals: { bomb: bomb }
-end
-
-get '/deactivate' do
-  haml :live_bomb, locals: { bomb: bomb }
+  begin
+    bomb.activate(params[:act_code])
+    haml :bomb, locals: { bomb: bomb }
+  rescue Bomb::RuntimeError
+    redirect to('/bomb')
+  end
 end
 
 post '/deactivate' do
-  if bomb.attempts_remaining > 0
-    bomb.deactivate(params[:submitted_deact_code])
+  begin
+    bomb.deactivate(params[:deact_code])
+    haml :bomb, locals: { bomb: bomb }
+  rescue Bomb::RuntimeError
+    redirect to('/bomb')
   end
-  haml :live_bomb, locals: { bomb: bomb }
 end
 
 def create_bomb

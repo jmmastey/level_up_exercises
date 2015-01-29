@@ -1,32 +1,43 @@
  When(/^I enter the default deactivation code$/) do
- fill_in("deact_code", with: "0000")
- click_button("Submit deactivation code")
+  fill_in("deact_code", with: "0000")
+  click_button("Submit deactivation code")
+end
+
+When(/^I try to deactivate the bomb$/) do
+  click_button("Submit deactivation code")
+end
+
+When(/^I try to deactivate the bomb with an incorrect code (\d+) times$/) do |number|
+  number.to_i.times do
+    fill_in("deact_code", with: "9999")
+    click_button("Submit deactivation code")
+  end
+end
+
+When(/^I enter an incorrect deactivation code$/) do
+  fill_in("deact_code", with: "9999")
 end
 
 Then(/^the bomb should deactivate$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter an incorrect activation code (\d+) time\(s\)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+  page.assert_selector(".bomb_deactivated")
 end
 
 Then(/^the bomb should not deactivate$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_selector(".active_bomb")
 end
 
-Then(/^the number of deactivation attempts remaining should be (\d+)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I visit another page$/) do
-  pending # express the regexp above with the code you wish you had
+When(/^I visit the boot page$/) do
+  visit("/boot")
 end
 
 Then(/^the bomb should still be active$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_selector(".active_bomb")
 end
 
-Then(/^there should be (\d+) deactivation attempts left$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^there are (\d+) deactivation attempts remaining$/) do |number|
+  expect(page).to have_selector(".attempts_remaining", text: /#{number}/i)
+end
+
+Then(/^there is (\d+) deactivation attempt remaining$/) do |number|
+  expect(page).to have_selector(".attempts_remaining", text: /#{number}/i)
 end

@@ -11,16 +11,17 @@ Feature: Deactivate the bomb
   	Then the bomb should deactivate
 
   Scenario: Bomb does not deactivate after one incorrect deactivation attempt
-  	When I enter an incorrect activation code 1 time(s)
+  	When I enter an incorrect deactivation code
+    And I try to deactivate the bomb
   	Then the bomb should not deactivate
-  	And the number of deactivation attempts remaining should be 2
+  	And there are 2 deactivation attempts remaining
 
   Scenario: Bomb does not deactivate after two incorrect deactivation attempts
-  	When I enter an incorrect activation code 2 time(s)
+  	When I try to deactivate the bomb with an incorrect code 2 times
   	Then the bomb should not deactivate
-  	And the number of deactivation attempts remaining should be 1
+  	And there is 1 deactivation attempt remaining
 
   Scenario: Bomb does not deactivate when I navigate elsewhere
-    When I visit another page
+    When I visit the boot page
     Then the bomb should still be active
-    And there should be 3 deactivation attempts left
+    And there are 3 deactivation attempts remaining

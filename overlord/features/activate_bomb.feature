@@ -16,7 +16,7 @@ Feature: Activate the bomb
   	Then the bomb should be activated
 
   Scenario: Bomb activates with custom activation code
-    Given the bomb has been booted with "2222" as the activation code
+    Given the bomb has been booted with activation code "2222"
     When I enter for the "2222" activation code
     And I try to activate the bomb
     Then the bomb should be activated

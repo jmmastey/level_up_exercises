@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Bomb do
   subject(:bomb) { Bomb.new }
-  
+
   describe "#new" do
     it "is not booted upon creation" do
       expect(bomb).to be_unbooted
@@ -13,7 +13,7 @@ describe Bomb do
     end
   end
 
-  describe "#boot" do 
+  describe "#boot" do
     context "with no codes specified" do
       before(:each) do
         bomb.boot
@@ -42,7 +42,7 @@ describe Bomb do
 
     context "with valid custom codes" do
       before(:each) do
-        bomb.boot("1111","2222")
+        bomb.boot("1111", "2222")
       end
 
       it "boots the bomb" do

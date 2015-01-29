@@ -1,6 +1,6 @@
 %p
   Bomb is active.
-%p
+%p.attempts_remaining
   Attempts remaining:
   =bomb.attempts_remaining
 %form.active_bomb{:action => "/deactivate", :method => "post"}
@@ -9,3 +9,6 @@
     %input.deact_code_guess{:name => "deact_code", :type => "text", :pattern => "[0-9]{4}"}
   %p
     %input.submit_deact_code_guess{:type => "submit", :value => "Submit deactivation code"}
+  - if bomb.attempts_remaining < 3 && bomb.activated?
+    %p.incorrect_deactivation_code
+      Incorrect deactivation code

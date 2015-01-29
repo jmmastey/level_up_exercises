@@ -1,0 +1,14 @@
+%p Welcome to the bomb
+%p Please enter a 4-digit number for the activation and deactivation codes
+%p If no code is entered or the entered code is not a 4-digit number then default values will be used
+%p Default activation code: 1234
+%p Default deactivation code: 0000
+%form{:action => "/boot", :method => "post"}
+  %p 
+    Activation code: 
+    %input.act_code_for_booting{:name => "act_code", :type => "text", :pattern => "[0-9]{4}"}
+  %p 
+    Deactivation code:
+    %input.deact_code_for_booting{:name => "deact_code", :type => "text", :pattern => "[0-9]{4}"}
+  %p
+    %input.boot_bomb_button{:type => "submit", :value => "Boot bomb"}

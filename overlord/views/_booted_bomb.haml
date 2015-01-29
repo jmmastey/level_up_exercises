@@ -1,0 +1,16 @@
+%p.bomb_deactivated
+  The bomb is deactivated.
+  %p
+    Please enter the activation code.
+  %form{:action => "/activate", :method => "post"}
+    %p 
+      Activation code: 
+      %input.act_code_guess{:name => "act_code", :type => "text", :pattern => "[0-9]{4}"}
+    %p
+      %input.submit_act_code_guess{:type => "submit", :value => "Submit activation code"}
+
+  - if bomb.bad_activation_code
+    %p.incorrect_act_code_submitted
+      Incorrect activation code.
+%p
+  %a{:href => "/"} Reboot bomb?

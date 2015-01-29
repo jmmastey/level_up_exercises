@@ -1,6 +1,13 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-ruby "2.0.0"
+ruby "2.1.5"
 
 gem "sinatra"
+gem "rack"
+gem "shotgun"
+gem "cucumber"
+gem "capybara"
+gem "rspec"
+gem "webrat"
+gem "haml"

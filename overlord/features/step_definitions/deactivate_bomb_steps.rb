@@ -1,4 +1,4 @@
- When(/^I enter the default deactivation code$/) do
+When(/^I enter the default deactivation code$/) do
   fill_in("deact_code", with: "0000")
   click_button("Submit deactivation code")
 end
@@ -23,14 +23,6 @@ Then(/^the bomb should deactivate$/) do
 end
 
 Then(/^the bomb should not deactivate$/) do
-  expect(page).to have_selector(".active_bomb")
-end
-
-When(/^I visit the boot page$/) do
-  visit("/boot")
-end
-
-Then(/^the bomb should still be active$/) do
   expect(page).to have_selector(".active_bomb")
 end
 

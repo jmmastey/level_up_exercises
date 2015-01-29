@@ -1,5 +1,8 @@
 require 'spec_helper'
 
+DEFAULT_ACT_CODE = "1234"
+DEFAULT_DEACT_CODE = "0000"
+
 describe Bomb do
   subject(:bomb) { Bomb.new }
 
@@ -19,24 +22,36 @@ describe Bomb do
         bomb.boot
       end
 
-      it "boots the bomb" do
+      it "boots the bomb into deactivated state" do
         expect(bomb).to be_deactivated
       end
 
       it "defaults to 1234 activation code" do
-        bomb.activate("1234")
+        bomb.activate(DEFAULT_ACT_CODE)
         expect(bomb).to be_activated
       end
 
       it "defaults to 0000 deactivation code" do
-        bomb.activate("1234")
-        bomb.deactivate("0000")
+        bomb.activate(DEFAULT_ACT_CODE)
+        bomb.deactivate(DEFAULT_DEACT_CODE)
         expect(bomb).to be_deactivated
       end
 
-      it "has no effect after being called once" do
-        bomb.boot
-        expect(bomb).to be_deactivated
+      it "raises exception when bomb is already booted" do
+        expect { bomb.boot }.to raise_error
+      end
+
+      it "raises exception when bomb is activated" do
+        bomb.activate(DEFAULT_ACT_CODE)
+        expect { bomb.boot }.to raise_error
+      end
+
+      it "raises exception if bomb has exploded" do
+        bomb.activate(DEFAULT_ACT_CODE)
+        3.times do
+          bomb.deactivate("1111")
+        end
+        expect { bomb.boot }.to raise_error
       end
     end
 
@@ -62,7 +77,7 @@ describe Bomb do
     end
 
     context "with invalid codes" do
-      it "throws exception with invalid codes" do
+      it "raises exception with invalid codes" do
         expect { bomb.boot("abcd", "123") }.to raise_error
         expect { bomb.boot("2345", false) }.to raise_error
         expect { bomb.boot([3121], "4444") }.to raise_error
@@ -76,8 +91,7 @@ describe Bomb do
         bomb.boot
       end
       it "activates when default activation code is entered" do
-        puts bomb.activate("1234")
-        p bomb.activate("1234")
+        bomb.activate(DEFAULT_ACT_CODE)
         expect(bomb).to be_activated
       end
 
@@ -86,22 +100,28 @@ describe Bomb do
         expect(bomb).to be_deactivated
       end
 
-      it "does nothing if the bomb is already active" do
-        2.times do
-          bomb.activate("1234")
-          bomb.activate("1234")
-        end
+      it "can be reactivated after being deactivated" do
+        bomb.activate(DEFAULT_ACT_CODE)
+        bomb.deactivate(DEFAULT_DEACT_CODE)
+        bomb.activate(DEFAULT_ACT_CODE)
         expect(bomb).to be_activated
-        expect(bomb.attempts_remaining).to eq(3)
       end
 
-      it "does not activate if the bomb has exploded" do
-        bomb.activate("1234")
+      it "raises exception if bomb is already active" do
+        bomb.activate(DEFAULT_ACT_CODE)
+        expect { bomb.activate(DEFAULT_ACT_CODE) }.to raise_error
+      end
+
+      it "raises exception if bomb has exploded" do
+        bomb.activate(DEFAULT_ACT_CODE)
         3.times do
           bomb.deactivate("1111")
         end
-        bomb.activate("1234")
-        expect(bomb).to be_exploded
+        expect { bomb.activate(DEFAULT_ACT_CODE) }.to raise_error
+      end
+
+      it "raises exception if bomb is unbooted" do
+        expect { Bomb.new.activate(DEFAULT_ACT_CODE) }.to raise_error
       end
     end
   end
@@ -109,10 +129,10 @@ describe Bomb do
   describe "#deactivate" do
     before(:each) do
       bomb.boot
-      bomb.activate("1234")
+      bomb.activate(DEFAULT_ACT_CODE)
     end
     it "deactivates the bomb when the correct deactivation code is entered" do
-      bomb.deactivate("0000")
+      bomb.deactivate(DEFAULT_DEACT_CODE)
       expect(bomb).to be_deactivated
     end
 
@@ -130,20 +150,29 @@ describe Bomb do
       expect(bomb).to be_exploded
     end
 
-    it "does nothing after exploding" do
-      4.times do
+    it "raises exception if already deactivated" do
+      bomb.deactivate(DEFAULT_DEACT_CODE)
+      expect { bomb.deactivate(DEFAULT_DEACT_CODE) }.to raise_error
+    end
+
+    it "raises exception if called after exploding" do
+      3.times do
         bomb.deactivate("4444")
       end
-      bomb.activate("1234")
+      expect { bomb.deactivate("4444") }.to raise_error
       expect(bomb).to be_exploded
       expect(bomb.attempts_remaining).to eq(0)
+    end
+
+    it "raises exception if called on unbooted bomb" do
+      expect { Bomb.new.deactivate(DEFAULT_ACT_CODE) }.to raise_error
     end
   end
 
   describe "#exploded?" do
     before(:each) do
       bomb.boot
-      bomb.activate("1234")
+      bomb.activate(DEFAULT_ACT_CODE)
     end
 
     it "shows that the bomb has not exploded after activation" do
@@ -166,28 +195,6 @@ describe Bomb do
       expect(bomb.attempts_remaining).to eq(0)
       expect(bomb).to be_exploded
     end
-
-    it "stays exploded with no attempts remaining after 3 incorrect attempts" do
-      3.times do
-        bomb.deactivate("4444")
-      end
-      3.times do
-        bomb.deactivate("4444")
-        expect(bomb.attempts_remaining).to eq(0)
-      end
-    end
-
-    it "cannot be booted, activated, or deactivated after exploding" do
-      3.times do
-        bomb.deactivate("4444")
-      end
-      bomb.boot
-      expect(bomb).to be_exploded
-      bomb.activate("1234")
-      expect(bomb).to be_exploded
-      bomb.deactivate("0000")
-      expect(bomb).to be_exploded
-    end
   end
 
   describe "#unbooted?" do
@@ -198,7 +205,7 @@ describe Bomb do
     it "is booted when activated, deactivated, or exploded" do
       bomb.boot
       expect(bomb).not_to be_unbooted
-      bomb.activate("1234")
+      bomb.activate(DEFAULT_ACT_CODE)
       expect(bomb).not_to be_unbooted
       3.times do
         bomb.deactivate("1111")
@@ -208,6 +215,49 @@ describe Bomb do
   end
 
   describe "#activated?" do
-    it "is "
+    it "is activated calling #activate" do
+      bomb.boot
+      bomb.activate(DEFAULT_ACT_CODE)
+      expect(bomb).to be_activated
+    end
+
+    it "is not activated if bomb is in any other state" do
+      expect(bomb).not_to be_activated
+      bomb.boot
+      expect(bomb).not_to be_activated
+      bomb.activate(DEFAULT_ACT_CODE)
+      bomb.deactivate(DEFAULT_DEACT_CODE)
+      expect(bomb).not_to be_activated
+      bomb.activate(DEFAULT_ACT_CODE)
+      3.times do
+        bomb.deactivate("1111")
+      end
+      expect(bomb).not_to be_activated
+    end
+  end
+
+  describe "#deactivated" do
+    it "is deactivated after booting" do
+      bomb.boot
+      expect(bomb).to be_deactivated
+    end
+
+    it "is deactivated after correct deactivation code is entered" do
+      bomb.boot
+      bomb.activate(DEFAULT_ACT_CODE)
+      bomb.deactivate(DEFAULT_DEACT_CODE)
+      expect(bomb).to be_deactivated
+    end
+
+    it "is not deactivated in any other state" do
+      expect(bomb).not_to be_deactivated
+      bomb.boot
+      bomb.activate(DEFAULT_ACT_CODE)
+      expect(bomb).not_to be_deactivated
+      3.times do
+        bomb.deactivate("1111")
+      end
+      expect(bomb).not_to be_deactivated
+    end
   end
 end

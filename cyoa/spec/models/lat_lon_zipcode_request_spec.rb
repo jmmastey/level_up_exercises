@@ -1,17 +1,47 @@
 require 'savon'
-require './app/models/lat_lon_zipcode_request.rb'
+require './app/models/lat_lon_zipcode_request'
 
 describe LatLonZipcodeRequest do
-  it "gets latitude and longitude list from the body" do
-    body = {:lat_lon_list_zip_code_response=>{:list_lat_lon_out=>"<?xml version='1.0'?><dwml version='1.0' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd'><latLonList>41.837,-87.685</latLonList></dwml>", :"@xmlns:ns1"=>"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl"}}
+  describe "for one zip code", vcr: { cassette_name: "one zip code" } do
+    let(:request) { LatLonZipcodeRequest.new("60606") }
+    it "has the lat_lon_list parameter in the response" do
+      expect(request.response_parameters).to have_key(:lat_lon_list)
+    end
+
+    it "returns the expected latitude and longetude format" do
+      expect(request.lat_lon_list).to match(/[\-]?\d{1,2}\.\d+,[\-]?\d{1,3}\.\d+( [\-]?\d{1,2}\.\d+,[\-]?\d{1,3}\.\d+)*/)
+    end
+
+    it "returns the correct latitude and longitude for one zipcode" do
+      expect(request.lat_lon_list).to eq("41.837,-87.685")
+    end
+
+    it "returns the zip code with corresponding latitude and longetude" do
+      expect(request.zip_code_lat_lon).to eq({ "60606" => "41.837,-87.685" })
+    end
   end
 
-  it "returns the correct latitude and longitude for one zipcode" do
-    zip_code_list = "60606"
-    response = LatLonZipcodeRequest.lat_lon_list_zip_code(zip_code_list)
-    puts response.body
-    #expect(response).to eq("41.8818,87.6367")
+  describe "for multiple zip codes", vcr: { cassette_name: "multiple zip codes" } do
+    let(:request) { LatLonZipcodeRequest.new("60606 60532") }
+    it "has the lat_lon_list parameter in the response" do
+      expect(request.response_parameters).to have_key(:lat_lon_list)
+    end
+    it "returns the expected latitude and longetude format" do
+      expect(request.lat_lon_list).to match(/[\-]?\d{1,2}\.\d+,[\-]?\d{1,3}\.\d+( [\-]?\d{1,2}\.\d+,[\-]?\d{1,3}\.\d+)*/)
+    end
+    it "returns the correct latitude and longitude for multiple zipcodes" do
+      expect(request.lat_lon_list).to eq("41.837,-87.685 41.7918,-88.0878")
+    end
+
+    it "returns the zip codes with corresponding latitude and longetude" do
+      expect(request.zip_code_lat_lon).to eq({ "60606" => "41.837,-87.685",
+                                               "60532" => "41.7918,-88.0878" })
+    end
   end
 
-
+  # describe "for invalid zip code format", vcr: { cassette_name: "invalid zip code format" } do
+  #   it "should raise" do
+  #     expect(LatLonZipcodeRequest.new("606 60X32")).to raise_error(LatLonZipcodeError)
+  #   end
+  # end
 end

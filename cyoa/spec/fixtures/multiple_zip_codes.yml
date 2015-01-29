@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd"><env:Body><tns:LatLonListZipCode><zipCodeList>60606
+        60532</zipCodeList></tns:LatLonListZipCode></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#LatLonListZipCode"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '467'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache/2.2.15 (Red Hat)
+      X-Nids-Serverid:
+      - www4.mo
+      X-Soap-Server:
+      - NuSOAP/0.9.5 (1.123)
+      Content-Length:
+      - '956'
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+      Cache-Control:
+      - max-age=171
+      Expires:
+      - Thu, 29 Jan 2015 21:09:53 GMT
+      Date:
+      - Thu, 29 Jan 2015 21:07:02 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="ISO-8859-1"?><SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+        xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:LatLonListZipCodeResponse
+        xmlns:ns1="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl"><listLatLonOut
+        xsi:type="xsd:string">&lt;?xml version=&apos;1.0&apos;?&gt;&lt;dwml version=&apos;1.0&apos;
+        xmlns:xsd=&apos;http://www.w3.org/2001/XMLSchema&apos; xmlns:xsi=&apos;http://www.w3.org/2001/XMLSchema-instance&apos;
+        xsi:noNamespaceSchemaLocation=&apos;http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd&apos;&gt;&lt;latLonList&gt;41.837,-87.685
+        41.7918,-88.0878&lt;/latLonList&gt;&lt;/dwml&gt;</listLatLonOut></ns1:LatLonListZipCodeResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+    http_version: 
+  recorded_at: Thu, 29 Jan 2015 21:07:07 GMT
+recorded_with: VCR 2.9.3

@@ -20,6 +20,6 @@ RSpec::Matchers.define :allow_event do |state_field, event_to, status|
   end
 
   description do
-    "trigger event #{event_to} on the #{state_field} field from #{status}"
+    "call event #{event_to} on the #{state_field} field from #{status}"
   end
 end

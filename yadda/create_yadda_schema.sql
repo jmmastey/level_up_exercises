@@ -13,9 +13,10 @@ CREATE TABLE yadda.addresses(
   id            SERIAL       PRIMARY KEY,
   line_1        TEXT         NOT NULL,
   line_2        TEXT,
-  state         TEXT         NOT NULL,
-  country       TEXT         NOT NULL,
-  zip_code      TEXT         NOT NULL,
+  city          TEXT,
+  state         TEXT,
+  country       TEXT,
+  zip_code      TEXT,
   created_by    TEXT         ,
   created_on    TIMESTAMPTZ  ,
   updated_by    TEXT         ,
@@ -34,8 +35,14 @@ CREATE TABLE yadda.breweries(
   description   TEXT
   );
 
+CREATE TABLE yadda.beer_categories(
+  id            SERIAL       PRIMARY KEY,
+  category      TEXT         NOT NULL
+);
+
 CREATE TABLE yadda.beer_styles(
   id            SERIAL       PRIMARY KEY,
+  category_id   INTEGER      NOT NULL REFERENCES yadda.beer_categories ON DELETE CASCADE,
   style         TEXT         NOT NULL
 );
 

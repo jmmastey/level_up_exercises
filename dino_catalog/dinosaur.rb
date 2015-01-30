@@ -14,9 +14,12 @@ class Dinosaur
     end
   end
 
-  def to_json
+  def to_h
     hash = {}
     instance_variables.map{ |x| hash[x.to_s.delete("@")] = instance_variable_get(x) }
-    hash.to_json
+  end
+
+  def to_json
+    to_h.to_json
   end
 end

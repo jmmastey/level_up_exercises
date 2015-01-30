@@ -6,31 +6,24 @@ require './dino_csv_data_mapper'
 # Run it
 dino_mapper = DinoCSVDataMapper.new
 
-puts "Dinos that walk biped"
-dino_res = dino_mapper.find("walking", "biped")
-dino_mapper.cout dino_res
+puts "\nDinos that walk biped"
+puts dino_mapper.find(walking: "biped")
 
-puts "Dinos that are carnivores"
-dino_res = dino_mapper.find("diet", "carnivore")
-dino_mapper.cout dino_res
+puts "\nDinos that are carnivores"
+puts dino_mapper.find(diet: "carnivore")
 
-puts "Dinos from Jurassic period"
-dino_res = dino_mapper.find("period", "jurassic")
-dino_mapper.cout dino_res
+puts "\nDinos from Jurassic period"
+puts dino_mapper.find(period: "jurassic")
 
+puts "Carnivores from Europe"
+puts dino_mapper.find(diet: "carnivore").find(continent: "europe")
+
+puts "Export JSON"
+p dino_mapper.find.to_json
+
+=begin
 #TODO: Do without eval
 puts "Big Dinos > 4000 lbs (2 tons)"
 #dino_res = dino_mapper.find_by_cond("weight", "> 4000")
 #dino_mapper.cout dino_res
-
-puts "Carnivores from Europe"
-dino_res = dino_mapper.find("diet", "carnivore")
-dino_res = dino_mapper.find("continent", "europe", dino_res)
-dino_mapper.cout dino_res
-
-puts "Carnivores from Europe (take 2)"
-dino_res = dino_mapper.chain_find_by_attr(diet: "carnivore", continent: "europe")
-dino_mapper.cout dino_res
-
-puts "Export JSON"
-p dino_mapper.json_out
+=end

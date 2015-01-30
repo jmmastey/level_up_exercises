@@ -1,11 +1,12 @@
-# Map between dino_data and CSV data source
-# Used by dino_data_tester.rb
+# Map between dinosaur and CSV data source
 
 require 'csv'
 require 'json'
 require './dinosaur'
 
 class DinoCSVDataMapper
+  attr_accessor :dinosaurs
+
   def initialize
     @data_source = ['dinodex.csv', 'african_dinosaur_export.csv']
     @dinosaurs = []
@@ -45,42 +46,32 @@ class DinoCSVDataMapper
       end
 
       @dinosaurs << dino_obj
-      dino_obj = nil
     end
   end
 
-  # TODO: Have a better name, simple one
-  # Find by attribute & value, returns array of dino_obj
-  def find(attr, val, dino_data = @dinosaurs)
+  # TODO: Make it work with multiple conditions
+  def find(condition = nil)
 
-    dino_data_out =
-      dino_data.select do |dino_obj|
+    dinosaurs_found = DinoCSVDataMapper.new
+
+    return dinosaurs_found unless (condition)
+    raise "find condition must be a hash" unless condition.is_a? Hash
+
+    (attr, val) = condition.first
+
+    dinosaurs_found.dinosaurs =
+      @dinosaurs.select do |dino_obj|
         (ret = dino_obj.send(attr)) && ret.downcase == val.downcase
       end
+
+    dinosaurs_found
   end
 
-  # Chain searches, returns an array of dino_obj
-  def chain_find_by_attr(params = {}, dino_data = @dinosaurs)
-
-    params.each { |attr, val| dino_data = find(attr, val, dino_data) }
-
-    dino_data
+  def to_s
+    @dinosaurs.inject('') { |string, dino| string << dino.to_s }
   end
 
-  ## Comments: separate concerns (print)
-  # return same class
-  #
-  # Output to console
-  # TODO: Just call it puts (override to_s)
-  def cout(dino_data = @dinosaurs)
-
-    dino_data.each do |dino_obj|
-      puts dino_obj
-    end
-    puts
-  end
-
-  def json_out(dino_data = @dinosaurs)
-    dino_data.map{ |dino| dino.to_json }
+  def to_json
+    @dinosaurs.map{ |dino| dino.to_json }
   end
 end

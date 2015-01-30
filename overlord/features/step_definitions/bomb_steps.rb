@@ -48,6 +48,16 @@ When(/^I enter wrong "(.*?)"$/) do |arg1|
   click_button status[arg1]["button"]
 end
 
+When(/^I enter invalid activation_code of "(.*?)"$/) do |arg1|
+  find(:css, "#activation_code").set(arg1)
+  click_button status["activation_code"]["button"]
+end
+
+When(/^I enter invalid deactivation_code of "(.*?)"$/) do |arg1|
+  find(:css, "#deactivation_code").set(arg1)
+  click_button status["deactivation_code"]["button"]
+end
+
 Then(/^the app should be redirected to bomb page$/) do
   page.should have_content("inactive")
 end

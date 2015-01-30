@@ -4,6 +4,7 @@ require 'dm-sqlite-adapter'
 require 'json'
 
 require_relative '../helpers/bomb_helpers'
+require_relative '../helpers/wire_helpers'
 class Overlord < Sinatra::Application
   include BombHelpers
 
@@ -69,8 +70,7 @@ class Overlord < Sinatra::Application
       detonation_time: params["detonation_time"])
 
     if @bomb.valid?
-      params["wires"] ||= [{ color: "red", diffuse: false },
-                         { color: "green", diffuse: true }]
+      params["wires"] ||= WireHelpers.default_wires
 
       @bomb.save!
 
@@ -95,10 +95,7 @@ class Overlord < Sinatra::Application
     bomb = Bomb.where("id = ?", session[:bomb].id).first
 
     if bomb.match_activation_code?(params.last)
-      bomb.active!
-      bomb.activated_time = Time.now
-      bomb.failed_attempts = 0
-      bomb.save!
+      bomb.activate
     end
     BombHelpers.explode_bomb(bomb)
     @bomb = bomb
@@ -111,17 +108,12 @@ class Overlord < Sinatra::Application
     bomb = Bomb.where("id = ?", session[:bomb].id).first
 
     if bomb.match_deactivation_code?(params.last)
-      bomb.inactive!
-      bomb.activated_time = nil
-      bomb.failed_attempts = 0
-      bomb.save!
+      bomb.deactivate
     else
       bomb.failed_attempts += 1
       bomb.save!
       if bomb.failed_attempts == 3
-        bomb.explode!
-        bomb.activated_time = nil
-        bomb.save!
+        bomb.explode
       end
     end
     BombHelpers.explode_bomb(bomb)

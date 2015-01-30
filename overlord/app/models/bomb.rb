@@ -19,6 +19,26 @@ class Bomb < ActiveRecord::Base
       active?
   end
 
+  def activate
+    active!
+    self.activated_time = Time.now
+    failed_attempts = 0
+    save!
+  end
+
+  def deactivate
+    inactive!
+    self.activated_time = nil
+    failed_attempts = 0
+    save!
+  end
+
+  def explode
+    explode!
+    self.activated_time = nil
+    save!
+  end
+
   private
 
   def initialize_defaults

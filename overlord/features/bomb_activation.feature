@@ -17,3 +17,14 @@ Feature: Activate a bomb
     And I am looking at the page "activate"
     When I enter right "activation_code"
     Then bomb should be "explode"
+
+  Scenario Outline: Activate a bomb with invalid activation code
+    Given a bomb is "inactive"
+    And I am looking at the page "activate"
+    When I enter invalid activation_code of <activation_code>
+    Then bomb should be "inactive"
+
+    Examples:
+      | activation_code |
+      | "asdf"          |
+      | "    "          |

@@ -5,11 +5,14 @@ require 'json'
 
 require_relative '../helpers/bomb_helpers'
 require_relative '../helpers/wire_helpers'
+
+enable :sessions
+
 class Overlord < Sinatra::Application
   include BombHelpers
 
   def set_bomb_session
-    session[:bomb] = Bomb.last
+    session[:bomb] = Bomb.last.id
   end
   before(/.*/) do
     if request.url.match(/.json$/)
@@ -43,7 +46,7 @@ class Overlord < Sinatra::Application
   post '/bomb/diffuse' do
     params = request.body.read.split('=')
     set_bomb_session if ENV["RAILS_ENV"] == "test"
-    @bomb = Bomb.where("id = ?", session[:bomb].id).first
+    @bomb = Bomb.where("id = ?", session[:bomb]).first
     wire = Wire.where(color: params.last).first
 
     if wire.diffuse?
@@ -52,7 +55,7 @@ class Overlord < Sinatra::Application
       @bomb.explode!
     end
     @bomb.save!
-    session[:bomb] = @bomb
+    session[:bomb] = @bomb.id
     haml :bomb
   end
 
@@ -73,12 +76,11 @@ class Overlord < Sinatra::Application
       params["wires"] ||= WireHelpers.default_wires
 
       @bomb.save!
-
       params["wires"].each do |wire_options|
         wire = @bomb.wires.build(wire_options)
         wire.save
       end
-      session[:bomb] = @bomb
+      session[:bomb] = @bomb.id
       haml :bomb
     else
       Overlord.error_message += @bomb.errors.messages.collect do |attribute, msg|
@@ -90,9 +92,8 @@ class Overlord < Sinatra::Application
 
   post '/bomb/activate' do
     params = request.body.read.split('=')
-
     set_bomb_session if ENV["RAILS_ENV"] == "test"
-    bomb = Bomb.where("id = ?", session[:bomb].id).first
+    bomb = Bomb.where("id = ?", session[:bomb]).first
 
     if bomb.match_activation_code?(params.last)
       bomb.activate
@@ -105,7 +106,7 @@ class Overlord < Sinatra::Application
   post '/bomb/deactivate' do
     params = request.body.read.split('=')
     set_bomb_session if ENV["RAILS_ENV"] == "test"
-    bomb = Bomb.where("id = ?", session[:bomb].id).first
+    bomb = Bomb.where("id = ?", session[:bomb]).first
 
     if bomb.match_deactivation_code?(params.last)
       bomb.deactivate

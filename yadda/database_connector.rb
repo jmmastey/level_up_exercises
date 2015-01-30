@@ -9,7 +9,7 @@ db_connection = PG.connect(dbname: 'yadda')
 first_names = ["Amy", "Brian", "Chris", "David", "Emily", "Frank", "George", "Heather", "John", "Isabel", "Mike"]
 last_names = ["Fernandez", "Perham", "Campbell", "Cardarealla", "Souza", "Michael", "Haddad", "Hansson", "Fried", "Kemper", "Matz"]
 
-200000.times do |user|
+200000.times do
   db_connection.exec("INSERT INTO users (username, password, first_name, last_name, address, city, state, zip_code, email, created_by) VALUES ('#{SecureRandom.base64(25)}', 'password', '#{first_names.sample}', '#{last_names.sample}', '123 Main Street', 'Chicago', 'IL', '60614', 'name@enova.com','Paul');")
 end
 
@@ -33,10 +33,10 @@ db_connection.exec("INSERT INTO beer_styles_lookup (name) VALUES ('Hefeweizen');
 
 # Create Beer Records
 breweries = { 1 => "Goose Island", 2 => "Great Lakes", 3 => "Sierra Nevada", 4 => "Stone Brewery", 5 => "Revolution Brewing" }
-beers = ["Beer A", "Beer B", "Beer C", "Beer D", "Beer E", "Beer F", "Beer G", "Beer H", "Beer I", "Beer J", "Beer K"]
+beers = ["Beer A", "Beer B", "Beer C", "Beer D", "Beer E", "Beer F", "Beer G", "Beer H", "Beer I", "Beer J"]
 
-breweries.each do |id, brewery|
-  beers.each do |beer|
+breweries.each do |id, brewery| # 5 breweries
+  beers.each do |beer| # 10 beers per brewery
     user = 1 + rand(200000)
     style = 1 + rand(7)
     db_connection.exec("INSERT INTO beers (name, style_id, description, brewing_year, created_by, updated_by, brewery_id) VALUES ('#{brewery + '-' + beer}', #{style}, 'A great beer', '1988', #{user}, #{user}, #{id});")
@@ -44,3 +44,13 @@ breweries.each do |id, brewery|
 end
 
 # Create Ratings Records
+
+1000000.times do
+  look_rating = (1 + rand(5)) * 1.0
+  smell_rating = (1 + rand(5)) * 1.0
+  taste_rating = (1 + rand(5)) * 1.0
+  feel_rating = (1 + rand(5)) * 1.0
+  user_id = 1 + rand(200000)
+  beer_id = 1 + rand(50)
+  db_connection.exec("INSERT INTO ratings (look, smell, taste, feel, user_id, beer_id) VALUES (#{look_rating}, #{smell_rating}, #{smell_rating}, #{feel_rating}, #{user_id}, #{beer_id});")
+end

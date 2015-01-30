@@ -74,7 +74,6 @@ CREATE TABLE ratings (
   smell         int CHECK (smell BETWEEN 0 AND 5) DEFAULT 0,
   taste         int CHECK (taste BETWEEN 0 AND 5) DEFAULT 0,
   feel          int CHECK (feel BETWEEN 0 AND 5) DEFAULT 0,
-  overall       int CHECK (overall BETWEEN 0 AND 5) DEFAULT 0,
   created_at    timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP, -- no created_by or updated_by fields because this must be the associated user by definition
   updated_at    timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
   user_id       int REFERENCES users ON DELETE RESTRICT, -- one-to many relationship between user and ratings; disallow deletion of user if it still references a rating

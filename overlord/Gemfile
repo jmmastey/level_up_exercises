@@ -8,6 +8,7 @@ gem 'thin', '~> 1.6.3'
 gem 'shotgun', '~> 0.9'
 gem 'state_machine', '~> 1.2.0'
 gem 'virtus', '~> 1.0.4'
+gem 'activemodel', '~> 4.2.0'
 
 group :test do
   gem 'rspec', '~> 3.1.0'

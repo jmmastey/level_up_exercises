@@ -1,10 +1,13 @@
+require 'time'
 require 'nori'
 require 'savon'
-require './app/models/nws_request.rb'
+require './app/models/nws_request'
+require './app/models/weather_request_response'
+require 'pry'
 
 class WeatherRequest
   extend Savon::Model
-  attr_reader :response
+  attr_reader :inputs, :message_inputs, :response
 
   # Ref: graphical.weather.gov/xml/
   # "glance" returns all data between the start and end times
@@ -16,33 +19,81 @@ class WeatherRequest
   PARAMETER_CONTAINER = :dwml
 
   client wsdl: NWSRequest::WSDL, convert_request_keys_to: NWSRequest::REQUEST_KEYS
-  operations :NDFDgen_lat_lon_list
+  operations :ndf_dgen_lat_lon_list
 
   def initialize(inputs = {})
+    @error_messages = []
     @inputs = inputs
-    @response = NDFDgen_lat_lon_list
+    @message_inputs = build_message_inputs
+    check_errors
+    @response = WeatherRequestResponse.new(ndf_dgen_lat_lon_list)
   end
 
-  def body_response
-    response.body.values[0]
+  private
+
+  attr_reader :error_messages
+
+  def default_start_time
+    Time.now
   end
 
-  def body_response_hash
-    body_response.each_with_object({}) do |(key, value), build_hash|
-      build_hash[key] = body_parser.parse(value)
-    end
+  def default_end_time
+    Time.now + (1*7*24*60*60)
   end
 
-  def response_parameters
-    
+  def ndf_dgen_lat_lon_list
+    super(message: message_inputs)
   end
 
-  def NDFDgen_lat_lon_list(inputs = {})
-    super(message: { list_lat_lon:       inputs.fetch(:list_lat_lon, null),
-                     product:            inputs.fetch(:product, DEFAULT_PRODUCT),
-                     start_time:         inputs.fetch(DateTime.iso8601(start_time), null),
-                     end_time:           inputs.fetch(DateTime.iso8601(end_time), null),
-                     unit:               inputs.fetch(:unit, DEFAULT_UNIT),
-                     weather_parameters: inputs.fetch(:weather_parameters, null) })
+  def build_message_inputs
+    new_inputs = {}
+    new_inputs[:list_lat_lon] = list_lat_lon
+    new_inputs[:product] = product
+    new_inputs[:start_time] = start_time
+    new_inputs[:end_time] = end_time
+    new_inputs[:unit] = unit
+    new_inputs[:weather_parameters] = weather_parameters unless weather_parameters.nil?
+    new_inputs
   end
+
+  def list_lat_lon
+    inputs.fetch(:list_lat_lon)
+  end
+
+  def product
+    inputs.fetch(:product, DEFAULT_PRODUCT)
+  end
+
+  def start_time
+    Time.parse(inputs.fetch(:start_time, default_start_time)).iso8601
+  end
+
+  def end_time
+    Time.parse(inputs.fetch(:end_time, default_end_time)).iso8601
+  end
+
+  def unit
+    inputs.fetch(:unit, DEFAULT_UNIT)
+  end
+
+  def weather_parameters
+    inputs.fetch(:weather_parameters, nil)
+  end
+
+  def validate_message_inputs
+     @error_messages << ":list_lat_lon required" if message_inputs[:list_lat_lon].nil?
+     @error_messages << ":start_time required" if message_inputs[:start_time].nil?
+     @error_messages << ":end_time required" if message_inputs[:end_time].nil?
+  end
+
+  def error_messages
+    @error_messages.join(", ")
+  end
+
+  def check_errors
+    raise WeatherRequestError, error_messages unless error_messages.empty?
+  end
+end
+
+class WeatherRequestError < StandardError
 end

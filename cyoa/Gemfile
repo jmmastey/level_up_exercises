@@ -30,6 +30,7 @@ gem 'schema_associations'
 gem 'schema_validations'
 gem 'squirm_rails'
 gem 'hairtrigger'
+gem 'activesupport'
 
 # SOAP API requests
 gem 'savon'
@@ -51,7 +52,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'webmock'
   gem 'vcr'
-  
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

@@ -286,6 +286,7 @@ PLATFORMS
 
 DEPENDENCIES
   accept_values_for
+  activesupport
   byebug
   capybara
   coffee-rails (~> 4.1.0)

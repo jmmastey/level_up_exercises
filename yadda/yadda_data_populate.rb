@@ -3,7 +3,7 @@ require 'ffaker'
 require 'ffaker/address_us'
 require 'populator'
 
- 10.times.each do |n|
+ 1000.times.each do |n|
    @connection.connection.execute("INSERT INTO yadda.addresses (city, line_1, line_2, state, zip_code) VALUES('" +
    Faker::Address.city.gsub("'", " ") + "','" +
    Faker::Address.street_name.gsub("'", " ") + "','" +
@@ -12,7 +12,7 @@ require 'populator'
    Faker::AddressUS.zip_code+"')");
  end
 
-(1..110).each do |n|
+(1..11000).each do |n|
    r = Random.new
    sql = "INSERT INTO yadda.users(name, email, password, phone, address_id) VALUES('"+Faker::Name.name.gsub("'", " ")+
     "','#{Faker::Internet.email}','#{Faker::Internet.password}','#{Faker::PhoneNumber.phone_number}',"+r.rand(1..10).to_s+")"
@@ -25,7 +25,7 @@ end
    "('Other Lager'),('International Lager'),('Other Style')");
 
 (1..11).each do |n|
-  (1..10).each do |m|
+  (1..1000).each do |m|
     @connection.connection.execute("INSERT INTO yadda.beer_styles(category_id, style)
      VALUES(#{n},'"+Populator.words(1..3).titleize+"')")
   end
@@ -45,7 +45,7 @@ end
 
 breweries = "select * from yadda.breweries"
 @result_breweries = @connection.connection.execute(breweries);
-(1..10).each do |m|
+(1..1000).each do |m|
   @result_breweries.each do |row|
     r= Random.new
     @connection.connection.execute("INSERT INTO yadda.beers(style_id, brewery_id, brewing_year, description)
@@ -56,7 +56,7 @@ end
 
 
 (1..5).each do |n|
-  (1..100).each do |m|
+  (1..9999).each do |m|
     r=Random.new
    @connection.connection.execute("INSERT INTO yadda.ratings(beer_id, user_id,  look, smell, taste, feel, overall)
      VALUES("+m.to_s+",#{m+1},"+r.rand(1..5).to_s+","+

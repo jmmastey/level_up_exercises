@@ -50,5 +50,5 @@ CREATE OR REPLACE FUNCTION yadda.you_might_also_enjoy(beer TEXT)
       RETURN QUERY EXECUTE sql
       USING beer;
     END;
-$$
+$$ LANGUAGE plpgsql;
 COMMIT;

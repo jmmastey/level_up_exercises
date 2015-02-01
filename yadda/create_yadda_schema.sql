@@ -91,8 +91,8 @@ RETURNS TRIGGER AS $$
   BEGIN
     NEW.created_on := current_timestamp;
     NEW.created_by := current_user;
-    -- While inserting/creating a record only created_* are populated
-    -- as we are not updating, anything the updated_* columns are left blank
+    NEW.updated_on := current_timestamp;
+    NEW.updated_by := current_user;
     RETURN NEW;
   END;
 $$ LANGUAGE plpgsql;

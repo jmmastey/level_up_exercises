@@ -26,7 +26,7 @@ module WeatherHelper
   end
 
   def self.fetch_document
-    return Nokogiri::HTML(open(BASE_URL)) if !Rails.env.test?
+    # return Nokogiri::HTML(open(BASE_URL)) if !Rails.env.test?
     Nokogiri::HTML(File.open("temperatures.html", "r"))
   end
 end

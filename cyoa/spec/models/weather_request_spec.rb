@@ -33,6 +33,15 @@ describe WeatherRequest do
       end
     end
 
+    it "returns expected attributes as arrays of 1 object" do
+      attributes = [:locations,
+                    :weather_conditions]
+      attributes.each do |attr|
+        expect(weather_data.send(attr)).to be_an(Array)
+        expect(weather_data.send(attr).count).to eq(1)
+      end
+    end
+
     it "returns locations as an array of 1 object" do
       expect(weather_data.locations).to be_an(Array)
       expect(weather_data.locations.count).to eq(1)
@@ -42,9 +51,9 @@ describe WeatherRequest do
       expect(weather_data.locations[0]).to respond_to(:location_key, :latitude, :longitude)
     end
 
-    it "returns time_layouts as an array of 1 object" do
+    it "returns time_layouts as an array of at least 1 object" do
       expect(weather_data.time_layouts).to be_an(Array)
-      expect(weather_data.locations.count).to eq(1)
+      expect(weather_data.time_layouts.count).to be > 0
     end
 
     it "returns time_layouts with layout_key, start_valid_time, end_valid_time" do
@@ -52,6 +61,13 @@ describe WeatherRequest do
                                                          :start_valid_time,
                                                          :end_valid_time)
     end
+
+    it "returns weather conditions as an array of 1 object" do
+      expect(weather_data.send(:weather_conditions)).to be_an(Array)
+      expect(weather_data.send(:weather_conditions).count).to eq(1)
+    end
+
+
   end
 
   describe "for two lat lon points", vcr: { cassette_name: "two lat lon points",

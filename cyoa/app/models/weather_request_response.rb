@@ -1,4 +1,6 @@
 require 'nori'
+require './app/models/parameters/weather_parameter'
+require './app/models/parameters/time_layout_parameter'
 
 class WeatherRequestResponse
   attr_reader :response_hash
@@ -10,8 +12,18 @@ class WeatherRequestResponse
     @response_hash = make_response_hash(response)
   end
 
+  def keys(hash)
+    hash.each_with_object([]) do |(key, value), keys|
+      keys << key
+    end
+  end
+
   def dwml
     response_hash[:dwml_out][:dwml]
+  end
+
+  def head
+    dwml[:head]
   end
 
   def data
@@ -26,8 +38,10 @@ class WeatherRequestResponse
     head[:product]
   end
 
-  def head
-    dwml[:head]
+  def time_layouts
+    data[:time_layout].each_with_object([]) do |layout, all_layouts|
+      all_layouts << TimeLayoutParameter.new(layout)
+    end
   end
 
   def parameters
@@ -50,16 +64,21 @@ class WeatherRequestResponse
     parameters[:cloud_amount][:value]
   end
 
-  def weather_conditions
-    parameters[:weather][:weather_conditions].map(&:values).flatten.each_with_object([]) do |value, final|
-      final << value if value.nil?
-      unless value.nil?
-        final << value.each_with_object({}) do |(key, value), value_final|
-                    value_final[key.to_s.sub('@','').to_sym] = value
-                 end
-      end
-    end
+  def weather
+    parameters[:weather]
+    # WeatherParameter.new(parameters[:weather])
   end
+
+  # def weather_conditions
+  #   parameters[:weather][:weather_conditions].map(&:values).flatten.each_with_object([]) do |value, final|
+  #     final << value if value.nil?
+  #     unless value.nil?
+  #       final << value.each_with_object({}) do |(key, value), value_final|
+  #                   value_final[key.to_s.sub('@','').to_sym] = value
+  #                end
+  #     end
+  #   end
+  # end
 
   private
 

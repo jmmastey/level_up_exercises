@@ -4,6 +4,7 @@ class WeatherConditionsParameter
               :weather_types,
               :qualifiers,
               :additives
+              
   def initialize(weather_condition)
     @coverages = get_value(weather_condition, :@coverage)
     @intensities = get_value(weather_condition, :@intensity)

@@ -27,12 +27,19 @@ class WebScraper
     document = doc
     temp_hash_description = {}
     top_level = document.search('div.point-forecast-7-day > ul > li')
+    d1 = Date.today
     top_level.each do |li|
       temp_key = li.css("span.label").text
       li.css("span").remove
-      temp_hash_description[temp_key] = li.text.strip
+      if temp_key[-5..-1].downcase == "night"
+        temp_hash_description[d1] ||= {}
+        temp_hash_description[d1]["detail_afternoon"] = li.text.strip
+        d1 += 1.day
+      else
+        temp_hash_description[d1] ||= {}
+        temp_hash_description[d1]["detail_night"] = li.text.strip
+      end
     end
-    Rails.logger.info "DETAILED SCRAPE #{temp_hash_description}"
 
     temp_hash_description
   end

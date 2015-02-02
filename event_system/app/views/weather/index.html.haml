@@ -7,12 +7,20 @@
     %li
       %input{:type => "text", :name => "region[name]", :class => "text"}
     %input{:type => "submit", :value => "Send", :class => "button"}
-
-%table
-  -if WeatherHelper.parse_temperatures != nil && params["region"]
-    - @scraping.each do |key,hash_temp|
+-if params["region"]
+  %table
+    - @high_low_temperatures.each do |key,hash_temp|
       %tr
         %td= key
-        %td= hash_temp["low"].to_s  if hash_temp.has_key? "low"
-        %td= hash_temp["high"].to_s if hash_temp.has_key? "high"
+        %td= hash_temp["low"].to_s  if hash_temp["low"]
+        %td= hash_temp["high"].to_s if hash_temp["high"]
 
+  %table
+    - @detail_forecasts.each do |day, details|
+      %tr= day
+      %tr
+        %td Today
+        %td= details["detail_afternoon"] if details["detail_afternoon"]
+      %tr
+        %td Night
+        %td= details["detail_night"] if details["detail_night"]

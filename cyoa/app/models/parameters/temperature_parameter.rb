@@ -9,7 +9,7 @@ class TemperatureParameter
   MINT_NAME = "Daily Minimum Temperature"
 
   def initialize(new_temperature)
-    temperature = new_temperature
+    self.temperature = new_temperature
   end
 
   def maxt

@@ -9,7 +9,7 @@ class WeatherData
   attr_reader :data,
               :locations,
               :time_layouts,
-              :weather_conditions,
+              :weather,
               :temperatures,
               :cloud_covers,
               :conditions_icons,
@@ -17,7 +17,7 @@ class WeatherData
 
   def initialize(new_data)
     @data = new_data
-    @weather_conditions = []
+    @weather = []
     @temperatures = []
     @cloud_covers = []
     @conditions_icons = []
@@ -37,7 +37,7 @@ class WeatherData
 
   def parse_parameters
     parameters.each do |parameter_set|
-      @weather_conditions << weather_builder.new(parameter_set[:weather])
+      @weather << weather_builder.new(parameter_set[:weather])
       @temperatures << temperature_builder.new(parameter_set[:temperature])
       @cloud_covers << cloud_cover_builder.new(parameter_set[:cloud_amount])
       @conditions_icons << conditions_icon_builder.new(parameter_set[:conditions_icon])

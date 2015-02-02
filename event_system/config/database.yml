@@ -58,7 +58,7 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
+test: &test
   <<: *default
   database: weather_forecast_test
 
@@ -86,3 +86,6 @@ production:
   database: event_system_production
   username: event_system
   password: <%= ENV['EVENT_SYSTEM_DATABASE_PASSWORD'] %>
+
+cucumber:
+  <<: *test

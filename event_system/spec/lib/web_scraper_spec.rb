@@ -10,9 +10,9 @@ describe WebScraper do
     expect(temp.size).to eq(5)
   end
 
-  it "gets detailed descrition of forcast" do
+  it "gets detailed descrition of forecast" do
     doc = Nokogiri::HTML(file)
     description = WebScraper.detailed_scrape(doc)
-    expect(description["This Afternoon"]).to match(/Sunny, with a high/)
+    expect(description[Date.today]["detail_afternoon"]).to match(/Sunny, with a high near/)
   end
 end

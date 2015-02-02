@@ -33,11 +33,11 @@ class WebScraper
       li.css("span").remove
       if temp_key[-5..-1].downcase == "night"
         temp_hash_description[d1] ||= {}
-        temp_hash_description[d1]["detail_afternoon"] = li.text.strip
+        temp_hash_description[d1]["detail_night"] = li.text.strip
         d1 += 1.day
       else
         temp_hash_description[d1] ||= {}
-        temp_hash_description[d1]["detail_night"] = li.text.strip
+        temp_hash_description[d1]["detail_afternoon"] = li.text.strip
       end
     end
 

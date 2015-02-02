@@ -5,10 +5,10 @@
 %form{:name => "city", :id => "city", :action => "/weather/index", :method => "get", :enctype => "text/plain"}
   %fieldset
     %li
-      %input{:type => "text", :name => "region[name]", :class => "text"}
-    %input{:type => "submit", :value => "Send", :class => "button"}
--if params["region"]
-  %table
+      %input{:type => "text", :name => "region[name]", :id => "city_name", :class => "text"}
+    %input{:type => "submit", :value => "Send", :id => "send", :class => "button"}
+-if params["region"] && params["region"]["name"] != ""
+  %table{id: "temperatue_forecast_table"}
     - @high_low_temperatures.each do |key,hash_temp|
       %tr
         %td= key

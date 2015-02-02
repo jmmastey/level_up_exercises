@@ -79,3 +79,20 @@ CREATE TABLE ratings (
   user_id       int REFERENCES users ON DELETE RESTRICT, -- one-to many relationship between user and ratings; disallow deletion of user if it still references a rating
   beer_id       int REFERENCES beers ON DELETE RESTRICT -- one-to many relationship between beer and ratings; disallow deletion of beer if it still references a rating
 );
+
+-- Create Views for Part 2 of Yadda
+
+-- Top beers from a given brewery, according to their total ratings.
+
+CREATE VIEW topbeers AS
+
+-- "Recent score" for a beer, where only ratings within the last six months are counted and the ratings within that period are averaged.
+
+CREATE VIEW recentscore AS
+
+-- "You might also enjoy", which picks beers of the same style with high average scores, and then sorts them randomly.
+
+CREATE VIEW mayenjoy AS
+
+
+

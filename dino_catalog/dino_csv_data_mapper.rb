@@ -49,7 +49,6 @@ class DinoCSVDataMapper
     end
   end
 
-  # TODO: Make it work with multiple conditions
   def find(condition = nil)
 
     dinosaurs_found = DinoCSVDataMapper.new
@@ -57,12 +56,14 @@ class DinoCSVDataMapper
     return dinosaurs_found unless (condition)
     raise "find condition must be a hash" unless condition.is_a? Hash
 
-    (attr, val) = condition.first
+    dinosaurs_found.dinosaurs = @dinosaurs
 
-    dinosaurs_found.dinosaurs =
-      @dinosaurs.select do |dino_obj|
-        (ret = dino_obj.send(attr)) && ret.downcase == val.downcase
-      end
+    condition.map do |attr, val|
+      dinosaurs_found.dinosaurs = 
+        dinosaurs_found.dinosaurs.select do |dino_obj|
+          (ret = dino_obj.send(attr)) && ret.downcase == val.downcase
+        end
+    end
 
     dinosaurs_found
   end

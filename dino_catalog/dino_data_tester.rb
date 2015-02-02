@@ -6,6 +6,12 @@ require './dino_csv_data_mapper'
 # Run it
 dino_mapper = DinoCSVDataMapper.new
 
+puts "Carnivores from Europe"
+puts dino_mapper.find(diet: "carnivore", continent: "europe")
+
+puts "\nCarnivores from Europe (take 2)"
+puts dino_mapper.find(diet: "carnivore").find(continent: "europe")
+
 puts "\nDinos that walk biped"
 puts dino_mapper.find(walking: "biped")
 

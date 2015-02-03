@@ -4,7 +4,7 @@ require './app/helpers/private_attr_accessor'
 
 module PointLoader
   def load(zip_code_list)
-    zip_code_list_for_load = zip_code_list_not_in_db
+    zip_code_list_for_load = zip_code_list_not_in_db(zip_code_list)
     unless zip_code_list_for_load.empty?
       call_api_and_load(zip_code_list_for_load)
     end
@@ -21,7 +21,7 @@ module PointLoader
     end
   end
 
-  def zip_code_list_not_in_db
+  def zip_code_list_not_in_db(zip_code_list)
     zip_code_list.split(" ").each_with_object([]) do |zip, not_in_db|
       not_in_db << zip if point_model.find(zipcode: zipcode).empty?
     end.join(" ")

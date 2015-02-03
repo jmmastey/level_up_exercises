@@ -11,19 +11,19 @@ class DinoList < Array
   end
 
   def get_bipeds
-    select!{ |dino| dino.walking.downcase == 'biped'}
+    select! { |dino| dino.walking.downcase == 'biped' }
   end
 
   def get_from_period(period_name)
-    select!{ |dino| dino.period.downcase.include? period_name.downcase}
+    select! { |dino| dino.period.downcase.include? period_name.downcase }
   end
 
   def get_carnivores
-    select!{ |dino| dino.diet.downcase != 'herbivore'}
+    select! { |dino| dino.diet.downcase != 'herbivore' }
   end
 
   def get_by_name(name)
-    select!{ |dino| dino.name.downcase == name}
+    select! { |dino| dino.name.downcase == name }
   end
 
   def pretty_print
@@ -44,7 +44,7 @@ class DinoList < Array
     end
   end
 
-  def set_headers (print_weight, print_desc)
+  def set_headers(print_weight, print_desc)
     headers = ['Name', 'Period']
     headers << 'Continent' unless is_pirate_list
     headers << 'Diet'
@@ -54,7 +54,7 @@ class DinoList < Array
     headers
   end
 
-  def prettify_dino (dino, print_weight, print_desc)
+  def prettify_dino(dino, print_weight, print_desc)
     if is_pirate_list
       arr = [dino.name, dino.period, dino.diet]
       arr << dino.weight if print_weight
@@ -71,7 +71,7 @@ class DinoList < Array
 
   def to_json
     dino_arr = []
-    each{|d| dino_arr << d.to_json}
+    each { |d| dino_arr << d.to_json }
 
     puts dino_arr
   end

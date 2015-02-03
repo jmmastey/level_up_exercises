@@ -84,15 +84,29 @@ CREATE TABLE ratings (
 
 -- Top beers from a given brewery, according to their total ratings.
 
-CREATE VIEW topbeers AS
+CREATE VIEW top_beers_for_brewery AS
+    SELECT beers.name AS "Beer Name", AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel)/4)) AS "Overall Rating"
+    FROM beers
+    INNER JOIN ratings ON beers.id = ratings.beer_id
+    INNER JOIN breweries ON beers.brewery_id = breweries.id
+    WHERE breweries.name = 'Goose Island'
+    GROUP BY beers.name
+    ORDER BY "Overall Rating" DESC
+    LIMIT 5;
 
 -- "Recent score" for a beer, where only ratings within the last six months are counted and the ratings within that period are averaged.
 
 CREATE VIEW recentscore AS
+  SELECT beers.name, AVG((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4) AS "Recent Score"
+  FROM beers
+  INNER JOIN ratings ON beers.id = ratings.beer_id
+  WHERE ratings.created_at > (CURRENT_TIMESTAMP - INTERVAL '6 months')
+  AND beers.id = 1
+  GROUP BY beers.id;
 
 -- "You might also enjoy", which picks beers of the same style with high average scores, and then sorts them randomly.
 
-CREATE VIEW mayenjoy AS
+-- CREATE VIEW mayenjoy AS
 
 
 

@@ -3,6 +3,6 @@ class Dinosaur
 
   def to_json
     { 'name' => @name, 'period' => @period, 'continent' => @continent, 'diet' => @diet,
-      'weight' => @weight, 'walking' => @walking, 'description' => @descriptio n 
+      'weight' => @weight, 'walking' => @walking, 'description' => @description
   end
 end

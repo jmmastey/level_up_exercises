@@ -1,6 +1,5 @@
 require './app/models/point'
 require './app/models/api/lat_lon_zipcode_client'
-require './app/helpers/private_attr_accessor'
 
 module PointLoader
   def load(zip_code_list)

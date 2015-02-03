@@ -1,7 +1,7 @@
 require 'nori'
 require './app/models/api/weather_data'
 
-class WeatherRequestResponse
+class WeatherClientResponse
   attr_reader :response_hash
 
   def initialize(response)

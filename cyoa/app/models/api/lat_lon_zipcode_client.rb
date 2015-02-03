@@ -1,12 +1,12 @@
 require 'nori'
 require 'savon'
-require './app/models/api/nws_request.rb'
+require './app/models/api/nws_client.rb'
 require './app/models/api/lat_lon_zipcode_client_response'
 
 class LatLonZipcodeClient
   extend Savon::Model
 
-  client wsdl: NWSRequest::WSDL, convert_request_keys_to: NWSRequest::REQUEST_KEYS
+  client wsdl: NWSClient::WSDL, convert_request_keys_to: NWSClient::REQUEST_KEYS
   operations :lat_lon_list_zip_code
 
   def request(zip_code_list)

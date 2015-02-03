@@ -1,11 +1,11 @@
 require 'time'
 require 'nori'
 require 'savon'
-require './app/models/api/nws_request'
+require './app/models/api/nws_client'
 require './app/models/api/weather_client_response'
 require 'pry'
 
-class WeatherRequest
+class WeatherClient
   extend Savon::Model
   attr_reader :inputs, :message_inputs, :response
 
@@ -18,7 +18,7 @@ class WeatherRequest
   DEFAULT_UNIT = "e"
   PARAMETER_CONTAINER = :dwml
 
-  client wsdl: NWSRequest::WSDL, convert_request_keys_to: NWSRequest::REQUEST_KEYS
+  client wsdl: NWSClient::WSDL, convert_request_keys_to: NWSClient::REQUEST_KEYS
   operations :ndf_dgen_lat_lon_list
 
   def initialize(inputs = {})
@@ -91,9 +91,9 @@ class WeatherRequest
   end
 
   def check_errors
-    raise WeatherRequestError, error_messages unless error_messages.empty?
+    raise WeatherClientError, error_messages unless error_messages.empty?
   end
 end
 
-class WeatherRequestError < StandardError
+class WeatherClientError < StandardError
 end

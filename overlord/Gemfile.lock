@@ -59,6 +59,8 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
+    rack-test (0.6.3)
+      rack (>= 1.0)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
@@ -104,10 +106,12 @@ PLATFORMS
 DEPENDENCIES
   activemodel (~> 4.2.0)
   faker (~> 1.4.3)
+  json (~> 1.8.2)
   pry (= 0.10.1)
   pry-byebug (~> 2.0.0)
   pry-rescue (~> 1.4.1)
   pry-stack_explorer (~> 0.4.9.1)
+  rack-test (~> 0.6.3)
   rspec (~> 3.1.0)
   shotgun (~> 0.9)
   simplecov (~> 0.8.2)

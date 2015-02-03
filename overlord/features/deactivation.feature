@@ -46,4 +46,4 @@ Feature: Deactivation of the bomb
     When I try to deactivate unsuccessfully again
     Then I should be on the home page
       And the bomb should be exploded
-      And I should see "Let's make a new bomb" link
+      And I should see "Start up a new bomb" link

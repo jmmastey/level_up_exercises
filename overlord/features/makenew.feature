@@ -6,5 +6,5 @@ Feature: Making a branch new bomb
   @javascript
   Scenario: Start up a brand new bomb
     Given the bomb is exploded
-    When I follow "Let's make a new bomb"
+    When I follow "Start up a new bomb"
     Then the bomb should be a new one

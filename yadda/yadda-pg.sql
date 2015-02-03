@@ -106,7 +106,15 @@ CREATE VIEW recentscore AS
 
 -- "You might also enjoy", which picks beers of the same style with high average scores, and then sorts them randomly.
 
--- CREATE VIEW mayenjoy AS
+-- CREATE VIEW youmayenjoy AS
+  SELECT beer_styles_lookup.name AS "Style", beers.name AS "Beer Name", AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel)/4)) AS "Overall Rating"
+  FROM beers
+  INNER JOIN beer_styles_lookup on beers.style_id = beer_styles_lookup.id
+  INNER JOIN ratings on beers.id = ratings.beer_id
+  WHERE beer_styles_lookup.name = 'Pilsner'
+  GROUP BY beer_styles_lookup.name, beers.name
+  ORDER BY "Overall Rating" DESC
+  LIMIT 3;
 
 
 

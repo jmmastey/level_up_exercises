@@ -10,10 +10,11 @@ end
 describe WeatherClient do
   describe "for one lat lon point", vcr: { cassette_name: "one lat lon point",
                                            record: :new_episodes } do
-    let(:request) { WeatherClient.new({ list_lat_lon: "41.837,-87.685",
+    let(:client) { WeatherClient.new }
+    let(:response) { client.request({ list_lat_lon: "41.837,-87.685",
                                           start_time:   "2015-01-30",
                                           end_time:     "2015-02-08" }) }
-    let(:weather_data) { request.response.weather_data }
+    let(:weather_data) { response.weather_data }
 
     it "has the expected parameters nested under data" do
       parameters = [:location, :time_layout]
@@ -101,10 +102,11 @@ describe WeatherClient do
 
   describe "for two lat lon points", vcr: { cassette_name: "two lat lon points",
                                            record: :new_episodes } do
-    let(:request) { WeatherClient.new({ list_lat_lon: "41.837,-87.685 41.7918,-88.0878",
-                                          start_time:   "2015-02-02",
-                                          end_time:     "2015-02-10" }) }
-    let(:weather_data) { request.response.weather_data }
+    let(:client) { WeatherClient.new }
+    let(:response) { client.request({ list_lat_lon: "41.837,-87.685 41.7918,-88.0878",
+                                      start_time:   "2015-02-02",
+                                      end_time:     "2015-02-10" }) }
+    let(:weather_data) { response.weather_data }
 
     it "has the expected parameters nested under data" do
       parameters = [:location, :time_layout]

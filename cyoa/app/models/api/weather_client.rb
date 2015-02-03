@@ -7,7 +7,7 @@ require 'pry'
 
 class WeatherClient
   extend Savon::Model
-  attr_reader :inputs, :message_inputs, :response
+  attr_reader :inputs, :message_inputs
 
   # Ref: graphical.weather.gov/xml/
   # "glance" returns all data between the start and end times
@@ -21,12 +21,12 @@ class WeatherClient
   client wsdl: NWSClient::WSDL, convert_request_keys_to: NWSClient::REQUEST_KEYS
   operations :ndf_dgen_lat_lon_list
 
-  def initialize(inputs = {})
+  def request(inputs = {})
     @error_messages = []
     @inputs = inputs
     @message_inputs = build_message_inputs
     check_errors
-    @response = WeatherClientResponse.new(ndf_dgen_lat_lon_list)
+    WeatherClientResponse.new(ndf_dgen_lat_lon_list)
   end
 
   private

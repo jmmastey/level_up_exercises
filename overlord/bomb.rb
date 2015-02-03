@@ -15,13 +15,13 @@ class Bomb
 
   def activate(code)
     raise RuntimeError unless deactivated?
-    @status = :activated if deactivated? && activation_code?(code)
+    @status = :activated if deactivated? && is_activation_code?(code)
   end
 
   def deactivate(code)
     raise RuntimeError unless activated?
 
-    if deactivation_code?(code)
+    if is_deactivation_code?(code)
       @status = :deactivated
     else
       increment_attempt_count
@@ -52,11 +52,11 @@ class Bomb
     /^\d{4}$/ =~ code.to_s || code.to_s.empty?
   end
 
-  def activation_code?(code)
+  def is_activation_code?(code)
     @activation_code == code
   end
 
-  def deactivation_code?(code)
+  def is_deactivation_code?(code)
     @deactivation_code == code
   end
 

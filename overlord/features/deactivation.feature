@@ -1,15 +1,7 @@
 Feature: Deactivation of the bomb
-  As a super villain
-  In order to accomodate possible change of mind
-  And to make sure the bomb is tamper proof
-  I want to have complete control over the deactivation process of the bomb
-
-  @javascript
-  Scenario: Initial State
-    Given the bomb is activated
-    When I go to the home page
-    Then I should see the deactivate button disabled
-      And the bomb should be activated
+  As the one and only mastermind
+  In order to stop the bomb if my cape gets stuck
+  I want to be able to stop the bomb
 
   @javascript
   Scenario Outline: Insert the activation code

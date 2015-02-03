@@ -9,7 +9,8 @@ Given /^the bomb is deactivated$/ do
 end
 
 Given /^the bomb is exploded$/ do
-  step "the bomb is activated"
+  visit path_to('the home page')
+  activate(1234)
   visit path_to('the home page')
   attempt_deactivate('8888', (Bomb::MAX_ALLOWED_DEACTIVATION_ATTEMPTS + 1))
 end
@@ -45,5 +46,5 @@ Then /^the bomb should be ([^\s]+)$/ do |status|
 end
 
 Then /^the bomb should be a new one$/ do
-  step "the bomb should be deactivated"
+  step "I should see \"The bomb is deactivated\""
 end

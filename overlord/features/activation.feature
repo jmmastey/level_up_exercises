@@ -2,12 +2,6 @@ Feature: Activate Bomb
   As the almighty overlord
   I want to be able to start it(The rest is a blast(hah))
 
-  Scenario: Initialized Bomb
-    Given the bomb is deactivated
-    When I go to the home page
-    Then I should see the activate button disabled
-      And the bomb should be deactivated
-
   @javascript
   Scenario Outline: Fill in the activation code
     Given I am on the home page

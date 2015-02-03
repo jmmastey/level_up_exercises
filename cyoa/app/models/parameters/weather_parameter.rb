@@ -18,8 +18,14 @@ class WeatherParameter
       if key.nil?
         final << key
       else
-        final << WeatherConditionsParameter.new(key[:value])
+        final << weather_conditions_builder.new(key[:value])
       end
     end
+  end
+
+  private
+
+  def weather_conditions_builder
+    WeatherConditionsParameter
   end
 end

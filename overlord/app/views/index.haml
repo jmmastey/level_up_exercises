@@ -1,0 +1,34 @@
+%link{:href => "/style.css", :rel => "stylesheet"}/
+
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'
+= "#{Overlord.error_message.strip}"
+%form{ action: "/bomb", method: "post", name:"bomb_form" }
+  %table
+    %tr
+      %td
+        %label Activation Code
+      %td
+        %input{type: "text", id: "activation_code", name: "activation_code", required: true, title: "Activation code is required" }
+    %tr
+      %td
+        %label Deactivation Code
+      %td
+        %input{type: "text", id: "deactivation_code", name: "deactivation_code", required: true, title: "Deactivation code is required" }
+    %tr
+      %td
+        %label Detonation time
+      %td
+        %input{type: "text", id: "detonation_time", name: "detonation_time", required: true, title: "Detonation time is required" }
+  %button.submit
+    Create
+
+%table
+  -@bombs.each do |bomb|
+    %tr
+      %td= bomb.status
+      %td= bomb.detonation_time
+      %td
+        %button{ id: "#{bomb.id}" }
+          Show
+
+

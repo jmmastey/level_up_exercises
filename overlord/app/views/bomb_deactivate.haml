@@ -1,0 +1,6 @@
+= haml :_header
+
+%form{ action: "/bomb/deactivate", method: "post" }
+  %label Deactivation Code
+  %input{ type: "text", required: true, name: "deactivation_code", id: "deactivation_code" }
+  %input{ type:"submit", value: "Deactivate"}

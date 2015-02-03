@@ -1,0 +1,26 @@
+file_properties:
+  image:
+    absolute_path: 'media/image'
+    link_path:     'public/media/image'
+  video:
+    absolute_path: 'media/video'
+    link_path:     'public/media/video'
+supported_mime_types:
+  - extension:     'jpeg'
+    mime_type:     'image/jpeg'
+    type:          'image'
+  - extension:     'jpg'
+    mime_type:     'image/jpeg'
+    type:          'image'
+  - extension:     'm4v'
+    mime_type:     'video/mv4'
+    type:          'video'
+  - extension:     'mov'
+    mime_type:     'video/quicktime'
+    type:          'video'
+  - extension:     'mp4'
+    mime_type:     'video/mp4'
+    type:          'video'
+  - extension:     'png'
+    mime_type:     'image/png'
+    type:          'image'

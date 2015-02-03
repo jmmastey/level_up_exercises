@@ -1,0 +1,31 @@
+= haml :_header
+%body
+  %h4 This is the bomb interface
+
+  %input{type: "hidden", value: "#{@bomb.id}", id: "bomb_id"}
+
+  %input{type: "hidden", value: "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}", id: "base_url"}
+  %meta{:content => "#{@bomb.detonation_time};url=#{session[:url]}/bomb/#{@bomb.id}", "http-equiv" => "refresh"}/
+
+  %a{href: "/bomb_activate"} Activate
+  %a{href: "/bomb_deactivate"} Deactivate
+
+  #wires.bomb_wires
+    %form{ action: "/bomb/diffuse", method: "post" }
+      %button{ id: "green_btn", class: "wire_btn green_button", value: "green", type:"submit", name: "green_btn" } Green
+      %button{ id: "red_btn", class: "wire_btn red_button", name: "red", type:"submit" } Red
+
+  #dialog-confirm{:style => "display: none;", :title => "Activate the bomb?"}
+    %p
+      %span.ui-icon.ui-icon-alert{:style => "float:left; margin:0 7px 20px 0;"}>
+      These items will be permanently deleted and cannot be recovered. Are you sure?
+  .timer
+
+  .label
+    %label Status
+
+
+  %textarea{ readonly: true, id: "bomb_status",class: "bomb_inactive" }
+    ="#{@bomb.status}"
+/ PrefixFree
+

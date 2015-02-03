@@ -17,7 +17,7 @@ class Bomb
     end
 
     event :disarm do
-      transition :activated => :disarmed
+      transition :armed => :disarmed
     end
 
     event :deactivate do

@@ -44,11 +44,11 @@ RSpec.describe Bomb do
     describe "#event.disarm" do
       it { is_expected.to have_event(:state, :disarm, [:activated => :disarmed]) }
       context "when calling event.disarm = true" do
-        states = [:activated]
+        states = [:armed]
         states.each { |state| it { is_expected.to allow_event(:state, :disarm, state) } }
       end
       context "when calling event.disarm = false" do
-        states = [:deactivated, :activated, :armed, :disarmed, :detonated] - [:activated]
+        states = [:deactivated, :activated, :armed, :disarmed, :detonated] - [:armed]
         states.each { |state| it { is_expected.to_not allow_event(:state, :disarm, state) } }
       end
     end

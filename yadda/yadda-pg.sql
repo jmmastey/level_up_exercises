@@ -83,38 +83,33 @@ CREATE TABLE ratings (
 -- Create Views for Part 2 of Yadda
 
 -- Top beers from a given brewery, according to their total ratings.
+-- Example Usage: SELECT * FROM top_beers_for_brewery WHERE brewery_name = 'Goose Island' LIMIT 3;
 
 CREATE VIEW top_beers_for_brewery AS
-    SELECT beers.name AS "Beer Name", AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel)/4)) AS "Overall Rating"
-    FROM beers
-    INNER JOIN ratings ON beers.id = ratings.beer_id
-    INNER JOIN breweries ON beers.brewery_id = breweries.id
-    WHERE breweries.name = 'Goose Island'
-    GROUP BY beers.name
-    ORDER BY "Overall Rating" DESC
-    LIMIT 5;
+  SELECT breweries.name AS "brewery_name", beers.name AS "Beer Name", AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel)/4)) AS "Overall Rating" --name as: overall_rating
+  FROM beers
+  INNER JOIN ratings ON beers.id = ratings.beer_id
+  INNER JOIN breweries ON beers.brewery_id = breweries.id
+  GROUP BY breweries.name, beers.name
+  ORDER BY "Overall Rating" DESC;
 
 -- "Recent score" for a beer, where only ratings within the last six months are counted and the ratings within that period are averaged.
+-- Example Usage: SELECT * from recent_score WHERE beer_name = 'Goose Island-Beer A';
 
-CREATE VIEW recentscore AS
-  SELECT beers.name, AVG((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4) AS "Recent Score"
+CREATE VIEW recent_score AS
+  SELECT beers.name AS "beer_name", AVG((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4) AS "Recent Score"
   FROM beers
   INNER JOIN ratings ON beers.id = ratings.beer_id
   WHERE ratings.created_at > (CURRENT_TIMESTAMP - INTERVAL '6 months')
-  AND beers.id = 1
   GROUP BY beers.id;
 
 -- "You might also enjoy", which picks beers of the same style with high average scores, and then sorts them randomly.
+-- Example Usage: SELECT * FROM you_may_enjoy WHERE beer_style = 'Pale Ale' LIMIT 3;
 
--- CREATE VIEW youmayenjoy AS
-  SELECT beer_styles_lookup.name AS "Style", beers.name AS "Beer Name", AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel)/4)) AS "Overall Rating"
+CREATE VIEW you_may_enjoy AS
+  SELECT beer_styles_lookup.name AS "beer_style", beers.name AS "Beer Name", AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel)/4)) AS "Overall Rating"
   FROM beers
   INNER JOIN beer_styles_lookup on beers.style_id = beer_styles_lookup.id
   INNER JOIN ratings on beers.id = ratings.beer_id
-  WHERE beer_styles_lookup.name = 'Pilsner'
   GROUP BY beer_styles_lookup.name, beers.name
-  ORDER BY "Overall Rating" DESC
-  LIMIT 3;
-
-
-
+  ORDER BY RANDOM();

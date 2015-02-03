@@ -1,9 +1,7 @@
 require 'state_machine'
 
 class Bomb
-
   state_machine :state, :initial => :deactivated do
-
     state :deactivated
     state :activated
     state :armed
@@ -29,7 +27,6 @@ class Bomb
     event :detonate do
       transition :armed => :detonated
     end
-
   end
 
   def initialize
@@ -37,5 +34,4 @@ class Bomb
     # will not get initialized. - believe in me, Svajone.
     super()
   end
-
 end

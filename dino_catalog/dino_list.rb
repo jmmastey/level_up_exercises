@@ -1,5 +1,4 @@
 require_relative 'dinosaur'
-
 class DinoList < Array
 
   def is_pirate_list
@@ -35,8 +34,8 @@ class DinoList < Array
   end
 
   def pretty_print
-    print_weight = self.select{ |dino| dino.weight != nil}.any? ? true : false
-    print_desc = self.select{ |dino| dino.description != nil}.any? ? true : false
+    print_weight = self.select { |dino| dino.weight }.any?
+    print_desc = self.select { |dino| dino.description }.any?
 
     table = Terminal::Table.new do |t|
       t << set_headers(print_weight, print_desc)
@@ -47,7 +46,7 @@ class DinoList < Array
     end
 
     table
-  end 
+  end
 
   def set_headers (print_weight, print_desc)
     headers = ['Name', 'Period']
@@ -65,7 +64,7 @@ class DinoList < Array
       arr << dino.weight if print_weight
       arr << dino.walking
       arr
-    else      
+    else
       arr = [dino.name, dino.period, dino.continent, dino.diet]
       arr << dino.weight if print_weight
       arr << dino.walking
@@ -80,5 +79,5 @@ class DinoList < Array
 
     puts dino_arr
   end
-  
+
 end

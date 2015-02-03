@@ -39,7 +39,7 @@ class Dinosaur
     @weight = weight
   end
 
-  def walking 
+  def walking
     @walking
   end
 
@@ -56,7 +56,7 @@ class Dinosaur
   end
 
   def to_json
-    {'name' => @name, 'period' => @period, 'continent' => @continent, 'diet' => @diet, 
+    {'name' => @name, 'period' => @period, 'continent' => @continent, 'diet' => @diet,
       'weight' => @weight, 'walking' => @walking, 'description' => @description}
   end
 end

@@ -1,4 +1,5 @@
 require 'csv'
+require 'json'
 require 'terminal-table'
 require_relative 'dinosaur'
 require_relative 'dino_list'
@@ -71,3 +72,5 @@ while(!exit)
   puts dino_arr.pretty_print 
 
 end
+
+puts dino_arr.to_json

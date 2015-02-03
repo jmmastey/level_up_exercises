@@ -54,4 +54,9 @@ class Dinosaur
   def description=(description)
     @description = description
   end
+
+  def to_json
+    {'name' => @name, 'period' => @period, 'continent' => @continent, 'diet' => @diet, 
+      'weight' => @weight, 'walking' => @walking, 'description' => @description}
+  end
 end

@@ -49,6 +49,13 @@ class DinoList < Array
     table
   end 
 
+  def to_json
+    dino_arr = []
+    self.each{|d| dino_arr << d.to_json}
+
+    puts dino_arr
+  end
+  
   def prettify_dino dino, print_weight, print_desc
     if @is_pirate_list
       arr = [dino.name, dino.period, dino.diet]

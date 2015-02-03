@@ -4,7 +4,7 @@ class CreateBomb < ActiveRecord::Migration
       t.string :activation_code, default: '1234'
       t.string :deactivation_code, default: '0000'
       t.integer :detonation_time, default: 60
-      t.integer :status
+      t.integer :status, default: 1
     end
   end
 end

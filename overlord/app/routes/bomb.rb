@@ -21,6 +21,15 @@ class Overlord < Sinatra::Application
     end
   end
 
+  before :method => :post do
+    params = {}
+    opt_attributes = request.body.read.split("&")
+    opt_attributes.each do |attribute|
+      column_values = attribute.split("=")
+      params[column_values[0]] = column_values[1]
+    end
+  end
+
   get '/bomb/:bomb_id' do
     @bomb = Bomb.where("id = ?", params[:bomb_id]).first
     session[:bomb] = @bomb
@@ -44,10 +53,9 @@ class Overlord < Sinatra::Application
   end
 
   post '/bomb/diffuse' do
-    params = request.body.read.split('=')
     set_bomb_session if ENV["RAILS_ENV"] == "test"
     @bomb = Bomb.where("id = ?", session[:bomb]).first
-    wire = Wire.where(color: params.last).first
+    wire = Wire.where(color: params["color"]).first
 
     if wire.diffuse?
       @bomb.inactive!
@@ -60,16 +68,9 @@ class Overlord < Sinatra::Application
   end
 
   post '/bomb' do
-    params = {}
-    opt_attributes = request.body.read.split("&")
-    opt_attributes.each do |attribute|
-      column_values = attribute.split("=")
-      params[column_values[0]] = column_values[1]
-    end
-
     @bomb = Bomb.create(
-      activation_code: params["activation_code"],
-      deactivation_code: params["deactivation_code"],
+      activation_code: params["activation_code"] || "1234",
+      deactivation_code: params["deactivation_code"] || "0000",
       detonation_time: params["detonation_time"])
 
     if @bomb.valid?
@@ -91,11 +92,10 @@ class Overlord < Sinatra::Application
   end
 
   post '/bomb/activate' do
-    params = request.body.read.split('=')
     set_bomb_session if ENV["RAILS_ENV"] == "test"
     bomb = Bomb.where("id = ?", session[:bomb]).first
 
-    if bomb.match_activation_code?(params.last)
+    if bomb.match_activation_code?(params["activation_code"])
       bomb.activate
     end
     BombHelpers.explode_bomb(bomb)
@@ -104,11 +104,10 @@ class Overlord < Sinatra::Application
   end
 
   post '/bomb/deactivate' do
-    params = request.body.read.split('=')
     set_bomb_session if ENV["RAILS_ENV"] == "test"
     bomb = Bomb.where("id = ?", session[:bomb]).first
 
-    if bomb.match_deactivation_code?(params.last)
+    if bomb.match_deactivation_code?(params["deactivation_code"])
       bomb.deactivate
     else
       bomb.failed_attempts += 1

@@ -7,7 +7,6 @@ class Bomb < ActiveRecord::Base
   enum status: %w(active inactive explode)
 
   has_many :wires
-  before_validation :initialize_defaults
 
   def match_activation_code?(code)
     activation_code == code &&
@@ -37,15 +36,5 @@ class Bomb < ActiveRecord::Base
     explode!
     self.activated_time = nil
     save!
-  end
-
-  private
-
-  def initialize_defaults
-    self.activation_code   ||= "1234"
-    self.deactivation_code ||= "0000"
-    self.detonation_time   ||= 60
-    self.status            ||= "inactive"
-    self.failed_attempts   ||= 0
   end
 end

@@ -8,6 +8,7 @@ Given(/^a bomb is "(.*?)"$/) do |arg1|
                           deactivation_code: "0000",
                           detonation_time: 45,
                           status: arg1)
+  @bomb.save!
 end
 
 Given(/^I am looking at the page bomb$/) do

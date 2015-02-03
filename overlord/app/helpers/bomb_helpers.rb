@@ -7,8 +7,12 @@ module BombHelpers
   private
 
   def self.time_to_explode?(bomb)
-    !(bomb.activated_time.nil?) &&
-      (Time.now >= bomb.activated_time + bomb.detonation_time.seconds) &&
-      (bomb.active?)
+      self.is_bomb_active?(bomb) &&
+      (Time.now >= bomb.activated_time + bomb.detonation_time.seconds)
+
+  end
+
+  def self.is_bomb_active?(bomb)
+    !(bomb.activated_time.nil?) && (bomb.active?)
   end
 end

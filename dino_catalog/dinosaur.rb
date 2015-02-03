@@ -5,7 +5,7 @@ class Dinosaur
 
   def to_s
     label = { name: "Name", period: "Period", continent: "Continent",
-        diet: "Diet", weight: "Weight", walking: "Walk", desc: "Description"
+        diet: "Diet", weight: "Weight(lbs)", walking: "Walk", desc: "Description"
             }
 
     label.keys.inject("\n") do |values, key|

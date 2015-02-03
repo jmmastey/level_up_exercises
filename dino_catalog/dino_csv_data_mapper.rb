@@ -29,7 +29,8 @@ class DinoCSVDataMapper
           when "NAME", "Genus"
             dino_obj.name = val
           when "PERIOD", "Period"
-            dino_obj.period = val
+            # Normalize Cretaceous since we don't care if early or late
+            dino_obj.period = (val =~ /Cretaceous/i) ? 'Cretaceous' : val
           when "CONTINENT"
             dino_obj.continent = val
           when "DIET"
@@ -37,7 +38,7 @@ class DinoCSVDataMapper
           when "Carnivore"
             dino_obj.diet = "Carnivore" if val == "Yes"
           when "WEIGHT_IN_LBS", "Weight"
-            dino_obj.weight = val
+            dino_obj.weight = val.to_i
           when "WALKING", "Walking"
             dino_obj.walking = val
           when "DESCRIPTION"
@@ -66,6 +67,17 @@ class DinoCSVDataMapper
     end
 
     dinosaurs_found
+  end
+
+  # Find large dinosaurs (> 2tons)
+  TONS_TO_POUNDS = 2000
+  def find_large
+
+    dinosaurs_found = DinoCSVDataMapper.new
+    dinosaurs_found.dinosaurs = @dinosaurs
+    dinosaurs_found.dinosaurs.select do |dino_obj|
+      dino_obj.weight > 2 * TONS_TO_POUNDS
+    end
   end
 
   def to_s

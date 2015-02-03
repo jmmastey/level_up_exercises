@@ -1,5 +1,4 @@
 require 'csv'
-require 'json'
 require 'terminal-table'
 require_relative 'dinosaur'
 require_relative 'dino_list'
@@ -32,11 +31,11 @@ CSV.foreach(ARGV[0], headers:true) do |row|
 end
 
 exit = false
-dino_arr.each{|d| original_array << d.dup}
-original_array.is_pirate_list = dino_arr.is_pirate_list
+original_array = reset_arr dino_arr
 
 while(!exit)
-  puts "Enter a letter (or multiple) for your choice(s):"
+  puts "Note: if entering more than one "
+  puts "Enter a letter (or multiple) for your choice(s): "
   puts "A) Display all bipeds"
   puts "B) Display all carnivores"
   puts "C) Display all from a time period"
@@ -51,8 +50,7 @@ while(!exit)
 
   exit = true and next if user_input == 'exit'
   dino_arr = reset_arr original_array if user_input.include? 'r'
-  dino_arr.get_big if user_input.include? 'd'
-  dino_arr.get_small if user_input.include? 'e'
+  
   dino_arr.get_bipeds if user_input.include? 'a'
   dino_arr.get_carnivores if user_input.include? 'b'
 
@@ -61,6 +59,9 @@ while(!exit)
     period_input = $stdin.gets.chomp.downcase
     dino_arr.get_from_period period_input
   end
+
+  dino_arr.get_big if user_input.include? 'd'
+  dino_arr.get_small if user_input.include? 'e'
 
   if user_input.include? 'f'
     puts "Please enter a dinosaur's name/genus: "
@@ -72,5 +73,3 @@ while(!exit)
   puts dino_arr.pretty_print 
 
 end
-
-puts dino_arr.to_json

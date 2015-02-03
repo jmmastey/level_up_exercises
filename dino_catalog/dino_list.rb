@@ -49,13 +49,16 @@ class DinoList < Array
     table
   end 
 
-  def to_json
-    dino_arr = []
-    self.each{|d| dino_arr << d.to_json}
-
-    puts dino_arr
+  def set_headers print_weight, print_desc
+    headers = ['Name', 'Period']
+    headers << 'Continent' unless @is_pirate_list
+    headers << 'Diet'
+    headers << 'Weight' unless !print_weight
+    headers << 'Walking'
+    headers << 'Description' unless @is_pirate_list || !print_desc
+    headers
   end
-  
+
   def prettify_dino dino, print_weight, print_desc
     if @is_pirate_list
       arr = [dino.name, dino.period, dino.diet]
@@ -71,13 +74,11 @@ class DinoList < Array
     end
   end
 
-  def set_headers print_weight, print_desc
-    headers = ['Name', 'Period']
-    headers << 'Continent' unless @is_pirate_list
-    headers << 'Diet'
-    headers << 'Weight' unless !print_weight
-    headers << 'Walking'
-    headers << 'Description' unless @is_pirate_list || !print_desc
-    headers
+  def to_json
+    dino_arr = []
+    self.each{|d| dino_arr << d.to_json}
+
+    puts dino_arr
   end
+  
 end

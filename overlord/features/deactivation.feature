@@ -8,7 +8,7 @@ Feature: Deactivation of the bomb
   Scenario: Initial State
     Given the bomb is activated
     When I go to the home page
-    Then I should see deactivate button disabled
+    Then I should see the deactivate button disabled
       And the bomb should be activated
 
   @javascript
@@ -16,7 +16,7 @@ Feature: Deactivation of the bomb
     Given the bomb is activated
       And I am on the home page
     When I fill in "<code>" for "deactivation-code"
-    Then I should see deactivate button <status>
+    Then I should see the deactivate button <status>
 
     Examples:
     | code | status   |

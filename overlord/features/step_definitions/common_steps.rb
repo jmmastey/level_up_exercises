@@ -1,4 +1,4 @@
-Then /^I should see (.*) button(?: (.*))?$/ do |button, status|
+Then /^I should see the (.*) button(?: (.*))?$/ do |button, status|
   if status == 'disabled'
     expect(find_button(button, disabled:true)[:disabled]).to be_truthy
   else

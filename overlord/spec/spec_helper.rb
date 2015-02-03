@@ -1,3 +1,4 @@
+require 'rack/test'
 require 'rspec'
 require 'pry'
 require 'faker'
@@ -5,6 +6,8 @@ require './overlord.rb'
 
 Dir["./model/*.rb"].sort.each { |f| require f }
 Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
+
+ENV['RACK_ENV'] = 'test'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -25,7 +28,9 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.include Helpers::RSpecMixin
   config.include Helpers::StateMachine
+  config.include Helpers::Session
 
   begin
     config.filter_run :focus

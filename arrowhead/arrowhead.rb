@@ -1,4 +1,9 @@
 class Arrowhead
+  # Exception msgs
+  UNKNOWN_REGION_EXCEPTION = "Unknown region, please provide a valid region."
+  UNKNOWN_SHAPE_EXCEPTION =
+    "Unknown shape value. Are you sure you know what you're talking about?"
+
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
     far_west: {
@@ -15,19 +20,12 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+    raise UNKNOWN_REGION_EXCEPTION unless CLASSIFICATIONS.include? region
+    shapes = CLASSIFICATIONS[region]
+
+    raise UNKNOWN_SHAPE_EXCEPTION unless shapes.include? shape
+    puts "You have a(n) '#{shapes[shape]}' arrowhead. Probably priceless."
   end
 end
 

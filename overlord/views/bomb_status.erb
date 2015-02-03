@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <% if bomb.deactivated? %>
+    <div class="alert alert-warning" role="alert">
+    <% else %>
+    <div class="alert alert-danger" role="alert">
+    <% end %>
+      <strong>The bomb <%= bomb.exploded? ? "" : "is" %> <%= bomb.status %></strong>
+    </div>
+  </div>
+</div>
+
+<div class="row remaining-attempts-wrapper">
+  <div class="col-md-12 text-center">
+    <% if bomb.remaining_attempts == 1 %>
+      <p class="text-danger">You have <span class="badge">1</span> attempt remaining</p>
+    <% else %>
+      <p class="text-danger">You have <span class="badge"><%= bomb.remaining_attempts %></span> attempts remaining</p>
+    <% end %>
+  </div>
+</div>

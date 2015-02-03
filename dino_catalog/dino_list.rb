@@ -22,7 +22,7 @@ class DinoList < Array
     self.select!{ |dino| dino.walking.downcase == 'biped'}
   end
 
-  def get_from_period period_name
+  def get_from_period(period_name)
     self.select!{ |dino| dino.period.downcase.include? period_name}
   end
 
@@ -30,7 +30,7 @@ class DinoList < Array
     self.select!{ |dino| dino.diet.downcase != 'herbivore'}
   end
 
-  def get_by_name name
+  def get_by_name(name)
     self.select!{ |dino| dino.name.downcase == name}
   end
 
@@ -49,7 +49,7 @@ class DinoList < Array
     table
   end 
 
-  def set_headers print_weight, print_desc
+  def set_headers (print_weight, print_desc)
     headers = ['Name', 'Period']
     headers << 'Continent' unless @is_pirate_list
     headers << 'Diet'
@@ -59,7 +59,7 @@ class DinoList < Array
     headers
   end
 
-  def prettify_dino dino, print_weight, print_desc
+  def prettify_dino (dino, print_weight, print_desc)
     if @is_pirate_list
       arr = [dino.name, dino.period, dino.diet]
       arr << dino.weight if print_weight

@@ -3,26 +3,26 @@ require 'terminal-table'
 require_relative 'dinosaur'
 require_relative 'dino_list'
 
-def reset_arr original
-  d_arr = DinoList.new()
+def reset_arr(original)
+  d_arr = DinoList.new
   original.each{|d| d_arr << d.dup}
   d_arr.is_pirate_list = original.is_pirate_list
 
   d_arr
 end
 
-dino_arr = DinoList.new()
-original_array = DinoList.new()
-is_pirate_table = nil
+dino_arr = DinoList.new
+original_array = DinoList.new
 
-CSV.foreach(ARGV[0], headers:true) do |row|
+CSV.foreach(ARGV[0], headers: true) do |row|
   dino_arr.is_pirate_list |= !row.header?('DESCRIPTION')
 
-  new_dino = Dinosaur.new()
+  new_dino = Dinosaur.new
   new_dino.name = row['Genus'] || row['NAME']
   new_dino.period = row['Period'] || row['PERIOD']
   new_dino.continent = row['CONTINENT']
-  new_dino.diet = row['DIET'] || (row['Carnivore'] == 'Yes' ? 'Carnivore' : 'Herbivore')
+  new_dino.diet = row['DIET'] || 
+                  (row['Carnivore'] == 'Yes' ? 'Carnivore' : 'Herbivore')
   new_dino.weight = row['Weight'] || row['WEIGHT_IN_LBS']
   new_dino.walking = row['Walking'] || row['WALKING']
   new_dino.description = row['DESCRIPTION']
@@ -33,7 +33,7 @@ end
 exit = false
 original_array = reset_arr dino_arr
 
-while(!exit)
+while (!exit)
   puts "Note: if entering more than one "
   puts "Enter a letter (or multiple) for your choice(s): "
   puts "A) Display all bipeds"

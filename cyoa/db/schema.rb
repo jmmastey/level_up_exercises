@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123184505) do
+ActiveRecord::Schema.define(version: 20150203154941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "points", force: :cascade do |t|
+    t.decimal  "lat",                   precision: 6, scale: 4, null: false
+    t.decimal  "lon",                   precision: 6, scale: 4, null: false
+    t.string   "zip",        limit: 20,                         null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.index ["lat", "lon"], :name => "index_points_on_lat_and_lon", :unique => true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 100, default: "", null: false

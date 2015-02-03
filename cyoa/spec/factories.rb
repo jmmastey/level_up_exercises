@@ -1,4 +1,7 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :point do
+    
+  end
+
   factory :user do
     email    'jeremy@example.com'
     phone    '630-849-2299'

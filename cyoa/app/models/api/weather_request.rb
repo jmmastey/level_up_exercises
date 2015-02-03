@@ -2,7 +2,7 @@ require 'time'
 require 'nori'
 require 'savon'
 require './app/models/api/nws_request'
-require './app/models/api/weather_request_response'
+require './app/models/api/weather_client_response'
 require 'pry'
 
 class WeatherRequest
@@ -26,7 +26,7 @@ class WeatherRequest
     @inputs = inputs
     @message_inputs = build_message_inputs
     check_errors
-    @response = WeatherRequestResponse.new(ndf_dgen_lat_lon_list)
+    @response = WeatherClientResponse.new(ndf_dgen_lat_lon_list)
   end
 
   private

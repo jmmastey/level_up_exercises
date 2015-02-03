@@ -1,7 +1,7 @@
 require 'nori'
 require 'savon'
 require './app/models/api/nws_request.rb'
-require './app/models/api/lat_lon_zipcode_response'
+require './app/models/api/lat_lon_zipcode_client_response'
 
 class LatLonZipcodeClient
   extend Savon::Model
@@ -29,7 +29,7 @@ class LatLonZipcodeClient
   end
 
   def response_builder
-    LatLonZipcodeResponse
+    LatLonZipcodeClientResponse
   end
 end
 

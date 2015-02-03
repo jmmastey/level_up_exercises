@@ -1,4 +1,4 @@
-class LatLonZipcodeResponse
+class LatLonZipcodeClientResponse
   attr_reader :response, :zip_code_list
   PARAMETER_CONTAINER = :dwml
 
@@ -47,9 +47,9 @@ class LatLonZipcodeResponse
   end
 
   def validate_lat_lon_list
-    raise LatLonZipcodeResponseError, "Invalid return lat lon list" unless lat_lon_list_is_valid?
+    raise LatLonZipcodeClientResponseError, "Invalid return lat lon list" unless lat_lon_list_is_valid?
   end
 end
 
-class LatLonZipcodeResponseError < StandardError
+class LatLonZipcodeClientResponseError < StandardError
 end

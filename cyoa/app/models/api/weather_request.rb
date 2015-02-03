@@ -1,8 +1,8 @@
 require 'time'
 require 'nori'
 require 'savon'
-require './app/models/nws_request'
-require './app/models/weather_request_response'
+require './app/models/api/nws_request'
+require './app/models/api/weather_request_response'
 require 'pry'
 
 class WeatherRequest

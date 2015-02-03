@@ -1,9 +1,9 @@
-require './app/models/parameters/location_parameter'
-require './app/models/parameters/weather_parameter'
-require './app/models/parameters/time_layout_parameter'
-require './app/models/parameters/temperature_parameter'
-require './app/models/parameters/cloud_cover_parameter'
-require './app/models/parameters/conditions_icon_parameter'
+require './app/models/api/parameters/location_parameter'
+require './app/models/api/parameters/weather_parameter'
+require './app/models/api/parameters/time_layout_parameter'
+require './app/models/api/parameters/temperature_parameter'
+require './app/models/api/parameters/cloud_cover_parameter'
+require './app/models/api/parameters/conditions_icon_parameter'
 
 class WeatherData
   attr_reader :data,

@@ -1,5 +1,5 @@
 require 'savon'
-require './app/models/lat_lon_zipcode_request'
+require './app/models/api/lat_lon_zipcode_request'
 
 describe LatLonZipcodeRequest do
   describe "for one zip code", vcr: { cassette_name: "one zip code" } do

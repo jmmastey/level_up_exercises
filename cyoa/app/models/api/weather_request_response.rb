@@ -1,5 +1,5 @@
 require 'nori'
-require './app/models/weather_data'
+require './app/models/api/weather_data'
 
 class WeatherRequestResponse
   attr_reader :response_hash

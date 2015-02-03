@@ -1,6 +1,6 @@
 require 'nori'
 require 'savon'
-require './app/models/nws_request.rb'
+require './app/models/api/nws_request.rb'
 
 class LatLonZipcodeRequest
   extend Savon::Model

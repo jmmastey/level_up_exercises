@@ -1,5 +1,5 @@
 require 'savon'
-require './app/models/weather_request'
+require './app/models/api/weather_request'
 
 def keys(hash)
   hash.each_with_object([]) do |(key, value), keys|

@@ -1,6 +1,6 @@
 require './app/helpers/private_attr_accessor'
-require './app/models/parameters/weather_conditions_parameter'
-require './app/models/parameters/time_layout_parameter'
+require './app/models/api/parameters/weather_conditions_parameter'
+require './app/models/api/parameters/time_layout_parameter'
 
 class WeatherParameter
   extend PrivateAttrAccessor

@@ -1,5 +1,5 @@
 require './app/helpers/private_attr_accessor'
-require './app/models/parameters/temperature_type_parameter'
+require './app/models/api/parameters/temperature_type_parameter'
 
 class TemperatureParameter
   extend PrivateAttrAccessor

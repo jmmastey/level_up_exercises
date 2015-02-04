@@ -70,9 +70,44 @@ class DinoList < Array
   end
 
   def to_json
-    dino_arr = []
-    each { |d| dino_arr << d.to_json }
+    dinos = []
+    each { |dino| dinos << dino.to_json }
 
-    puts dino_arr
+    puts dinos
+  end
+
+  def load_csv(csv)
+    CSV.foreach(csv, headers: true) do |row|
+      self.is_pirate_list |= !row.header?('DESCRIPTION')
+
+      new_dino = Dinosaur.new
+      new_dino.name = row['Genus'] || row['NAME']
+      new_dino.period = row['Period'] || row['PERIOD']
+      new_dino.continent = row['CONTINENT']
+      new_dino.diet = extract_diet(row)
+      new_dino.weight = row['Weight'] || row['WEIGHT_IN_LBS']
+      new_dino.walking = row['Walking'] || row['WALKING']
+      new_dino.description = row['DESCRIPTION']
+
+      push(new_dino)
+    end
+  end
+
+  def extract_diet(row)
+    row['DIET'] || (row['Carnivore'] == 'Yes' ? 'Carnivore' : 'Herbivore')
+  end
+
+  def reset(original)
+    clear
+    original.each { |dino| push(dino.dup) }
+    self.is_pirate_list = original.is_pirate_list
+  end
+
+  def copy
+    copied_dinos = DinoList.new
+    each { |d| copied_dinos << d.dup }
+    copied_dinos.is_pirate_list = is_pirate_list
+
+    copied_dinos
   end
 end

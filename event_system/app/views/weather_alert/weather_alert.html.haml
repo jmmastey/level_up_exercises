@@ -4,6 +4,8 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
     %h1
-      Hi #{@user}
+      Hi
+      = @user
     %p
       Today's weather seems to be
+      = @weather_forecast

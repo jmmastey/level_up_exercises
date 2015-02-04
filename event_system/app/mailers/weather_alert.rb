@@ -3,6 +3,8 @@ class WeatherAlert < ActionMailer::Base
 
   def weather_alert(contact, weather)
     Rails.logger.info " BEFORE SENDING #{contact.inspect}"
-    mail(to: contact.first.email, subject: 'Weather Alert')
+    @user = contact.first.email
+    @weather_forecast = weather
+    mail(to: @user, subject: 'Weather Alert')
   end
 end

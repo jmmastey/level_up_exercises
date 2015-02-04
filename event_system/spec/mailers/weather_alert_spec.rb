@@ -1,5 +1,5 @@
-require "rails_helper"
+require 'spec_helper'
+require 'rspec/rails'
 
-RSpec.describe WeatherAlert, :type => :mailer do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe WeatherAlert, :type => :mailer do
 end

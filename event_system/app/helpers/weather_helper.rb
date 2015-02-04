@@ -32,8 +32,8 @@ module WeatherHelper
       scraping.each do |key, hash_temp|
         wfd = WeatherForecastDetail.new
         wfd.weather_day = key
-        wfd.detail_afternoon    = hash_temp["detail_afternoon"]  if hash_temp["detail_afternoon"]
-        wfd.detail_night        = hash_temp["detail_night"] if hash_temp["detail_night"]
+        wfd.detail_afternoon = hash_temp["detail_afternoon"]  if hash_temp["detail_afternoon"]
+        wfd.detail_night     = hash_temp["detail_night"] if hash_temp["detail_night"]
         wfd.save!
       end
     else
@@ -49,7 +49,7 @@ module WeatherHelper
   end
 
   def self.fetch_document
-    return Nokogiri::HTML(open(BASE_URL)) if !Rails.env.test?
+    # return Nokogiri::HTML(open(BASE_URL)) if !Rails.env.test?
     Nokogiri::HTML(File.open("temperatures.html", "r"))
   end
 end

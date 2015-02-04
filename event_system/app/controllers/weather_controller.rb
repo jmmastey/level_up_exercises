@@ -7,8 +7,12 @@ class WeatherController < ApplicationController
       @detail_forecasts = WeatherHelper.parse_details
       region_id = Region.where(:city => "Chicago").first.region_id
 
-      WeatherAlert.weather_alert(EmailContact.where(region_id: region_id),
-        @detail_forecasts).deliver
+      today_forecast = WEATHER_WEAR.keys.select do |word|
+        @detail_forecasts.last.last.values.first.downcase.match(word)
+      end
+      @user = EmailContact.where(region_id: region_id)
+      @todays_forecast = today_forecast.first.capitalize
+      WeatherAlert.weather_alert(@user, @todays_forecast).deliver
     end
   end
 

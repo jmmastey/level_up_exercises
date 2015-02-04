@@ -11,27 +11,29 @@ class Catalog
   end
 
   def run
-    done = false
-
-    while !done
-      puts ["Enter your choice(s): ",
-            "Bipeds - Display all bipeds",
-            "Carnivores - Display all carnivores",
-            "Time Period - Display all from a specified time period",
-            "Big - Display all big dinos",
-            "Small - Display all small dinos",
-            "Select - Select one dion to view",
-            "Reset - Remove all filter",
-            "Exit - quit program",
-            "You can also hit enter to view current list again"].join("\n")
+    while true
+      puts menu
 
       user_input = $stdin.gets.chomp.downcase
-      done = true and next if user_input == 'exit'
+      break if user_input == 'exit'
 
       process_filters(user_input)
       puts dino_list.pretty_print
 
     end
+  end
+
+  def menu
+    ["Enter your choice(s): ",
+    "Bipeds - Display all bipeds",
+    "Carnivores - Display all carnivores",
+    "Time Period - Display all from a specified time period",
+    "Big - Display all big dinos",
+    "Small - Display all small dinos",
+    "Select - Select one dion to view",
+    "Reset - Remove all filter",
+    "Exit - quit program",
+    "You can also hit enter to view current list again"].join("\n")
   end
 
   def process_filters(user_input)
@@ -52,7 +54,6 @@ class Catalog
     if user_input.include?('select')
       puts "Please enter a dinosaur's name/genus: "
       name_input = $stdin.gets.chomp.downcase
-
       dino_list.get_by_name(name_input)
     end
   end

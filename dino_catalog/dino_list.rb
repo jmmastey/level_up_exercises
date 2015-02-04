@@ -70,10 +70,7 @@ class DinoList < Array
   end
 
   def to_json
-    dinos = []
-    each { |dino| dinos << dino.to_json }
-
-    puts dinos
+    puts map { |dino| dino.to_json }
   end
 
   def load_csv(csv)

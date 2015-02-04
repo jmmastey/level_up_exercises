@@ -14,8 +14,6 @@ class DinosaurCollection
     return dinosaurs_found unless condition
     raise "find condition must be a hash" unless condition.is_a? Hash
 
-    dinosaurs_found.dinosaurs = @dinosaurs
-
     condition.map do |attr, val|
       dinosaurs_found.dinosaurs = 
         dinosaurs_found.dinosaurs.select do |dino_obj|

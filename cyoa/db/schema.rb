@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203154941) do
+ActiveRecord::Schema.define(version: 20150203224801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,42 @@ ActiveRecord::Schema.define(version: 20150203154941) do
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
     t.index ["lat", "lon"], :name => "index_points_on_lat_and_lon", :unique => true
+  end
+
+  create_table "forecasts", force: :cascade do |t|
+    t.integer  "point_id",                null: false
+    t.datetime "start_time",              null: false
+    t.datetime "end_time",                null: false
+    t.integer  "maxt"
+    t.integer  "mint"
+    t.integer  "cloud_cover"
+    t.string   "icon_link",   limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["point_id"], :name => "fk__forecasts_point_id"
+    t.index ["start_time", "end_time"], :name => "index_forecasts_on_start_time_and_end_time", :unique => true
+    t.foreign_key ["point_id"], "points", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_forecasts_point_id"
+  end
+
+  create_table "weather_types", force: :cascade do |t|
+    t.string   "weather_type", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "forecast_weather_types", force: :cascade do |t|
+    t.integer  "forecast_id",                 null: false
+    t.integer  "weather_type_id",             null: false
+    t.string   "additive",        limit: 100
+    t.string   "coverage",        limit: 100
+    t.string   "qualifier",       limit: 100
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["forecast_id", "weather_type_id"], :name => "index_forecast_weather_types_on_forecast_id_and_weather_type_id", :unique => true
+    t.index ["forecast_id"], :name => "fk__forecast_weather_types_forecast_id"
+    t.index ["weather_type_id"], :name => "fk__forecast_weather_types_weather_type_id"
+    t.foreign_key ["forecast_id"], "forecasts", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_forecast_weather_types_forecast_id"
+    t.foreign_key ["weather_type_id"], "weather_types", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_forecast_weather_types_weather_type_id"
   end
 
   create_table "users", force: :cascade do |t|

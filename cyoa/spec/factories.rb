@@ -1,4 +1,13 @@
-FactoryGirl.define do  factory :point do
+FactoryGirl.define do  factory :forecast_weather_type do
+    
+  end
+  factory :weather_type do
+    
+  end
+  factory :forecast do
+    
+  end
+  factory :point do
     
   end
 

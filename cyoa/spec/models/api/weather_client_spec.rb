@@ -69,6 +69,8 @@ describe WeatherClient do
                                                   :weather_types,
                                                   :qualifiers,
                                                   :additives)
+      a = existing_conditions
+      binding.pry
     end
 
     it "returns temperatures with maxt and mint" do

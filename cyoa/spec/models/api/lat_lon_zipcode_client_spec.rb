@@ -17,7 +17,7 @@ describe LatLonZipcodeClient do
       expect(response.lat_lon_list).to eq("41.837,-87.685")
     end
 
-    it "returns the zip code with corresgponding latitude and longetude" do
+    it "returns the zip code with corresponding latitude and longetude" do
       expect(response.zip_code_lat_lon).to eq({ "60606" => [41.837,-87.685] })
     end
   end

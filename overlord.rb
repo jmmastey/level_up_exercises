@@ -5,7 +5,7 @@ require 'sinatra/flash'
 module Overlord
   class App < Sinatra::Base
     enable :sessions
-    use Sinatra::Flash
+    register Sinatra::Flash
 
     get '/' do
       session[:state] = :exploded if bomb_exploded?

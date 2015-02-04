@@ -5,7 +5,7 @@ class Dinosaur
 
   def to_s
     label = { name: "Name", period: "Period", continent: "Continent",
-        diet: "Diet", weight: "Weight(lbs)", walking: "Walk", desc: "Description"
+      diet: "Diet", weight: "Weight(lbs)", walking: "Walk", desc: "Description"
             }
 
     label.keys.inject("\n") do |values, key|
@@ -16,7 +16,9 @@ class Dinosaur
 
   def to_h
     hash = {}
-    instance_variables.map{ |x| hash[x.to_s.delete("@")] = instance_variable_get(x) }
+    instance_variables.map do |x|
+      hash[x.to_s.delete("@")] = instance_variable_get(x)
+    end
   end
 
   def to_json

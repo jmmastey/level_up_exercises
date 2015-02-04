@@ -1,5 +1,4 @@
 # Map between dinosaur and CSV data source
-
 require 'csv'
 require 'json'
 require './dinosaur'
@@ -18,7 +17,6 @@ class DinoCSVDataMapper
   end
 
   def load_data(csv_file)
-
     csv_data = CSV.read(csv_file, headers: true)
     csv_data.each do |csv_row|
 
@@ -51,10 +49,9 @@ class DinoCSVDataMapper
   end
 
   def find(condition = nil)
-
     dinosaurs_found = DinoCSVDataMapper.new
 
-    return dinosaurs_found unless (condition)
+    return dinosaurs_found unless condition
     raise "find condition must be a hash" unless condition.is_a? Hash
 
     dinosaurs_found.dinosaurs = @dinosaurs
@@ -69,10 +66,8 @@ class DinoCSVDataMapper
     dinosaurs_found
   end
 
-  # Find large dinosaurs (> 2tons)
   TONS_TO_POUNDS = 2000
   def find_large
-
     dinosaurs_found = DinoCSVDataMapper.new
     dinosaurs_found.dinosaurs = @dinosaurs
     dinosaurs_found.dinosaurs.select do |dino_obj|
@@ -85,6 +80,6 @@ class DinoCSVDataMapper
   end
 
   def to_json
-    @dinosaurs.map{ |dino| dino.to_json }
+    @dinosaurs.map { |dino| dino.to_json }
   end
 end

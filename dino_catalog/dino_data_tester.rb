@@ -27,4 +27,3 @@ puts dino_mapper.find_large
 
 puts "\nExport JSON"
 p dino_mapper.find.to_json
-

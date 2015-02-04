@@ -1,0 +1,20 @@
+<%= erb :_header, :layout => false %>
+<body id="index">
+  <div>
+    <img id="youdontsay" src="youdontsay.jpg">
+    <span class="title">setup your bomb</span>
+    <div class="code_inputs">
+      <form action="/start" method="POST">
+        <span>activation code
+        <input class="right" type="text" name="activation_code">
+        </span>
+        <br/>
+        <span>deactivation code
+        <input class="right" type="text" name="deactivation_code">
+        </span>
+        <br/>
+        <input class="submit" type="submit">
+      </form>
+    </div>
+  </div>
+</body>

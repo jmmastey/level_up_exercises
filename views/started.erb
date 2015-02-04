@@ -1,0 +1,20 @@
+<%= erb :_header, :layout => false %>
+<body id="started">
+  <div>
+    <img id="bomb" src="bomb.jpg">
+    <span class="title">activate bomb</span>
+    <div class="code_inputs">
+      <form action="/activate" method="POST">
+        <span>activation code
+        <input class="right" type="text" name="activation_code">
+        </span>
+        <br/>
+        <span>countdown seconds
+        <input class="right" type="text" name="countdown">
+        </span>
+        <br/>
+        <input class="submit" type="submit">
+      </form>
+    </div>
+  </div>
+</body>

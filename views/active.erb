@@ -1,0 +1,30 @@
+<%= erb :_header, :layout => false %>
+<% if flash[:notice] %>
+    <span><p class="notice"><%= flash[:notice] %></span></p>
+<% end %>
+
+<body id="active">
+  <img id="malkovich_bunny" src="malkovich_bunny.jpg">
+  <span id="countdown"></span>
+  <div class="code_inputs">
+    <form action="/deactivate" method="POST">
+      <span><%= session[:remaining_tries] %> attempts left
+      </span>
+      <br/>
+      <span>deactivation code
+      <input class="right" type="text" name="deactivation_code">
+      </span>
+      <br/>
+      <input id="activated_submit" class="submit" type="submit">
+    </form>
+  </div>
+</body>
+
+<script type="text/javascript">
+  window.onload = function(){
+    countdown("<%= session[:explosion_time].to_f * 1000 %>");
+  };
+</script>
+
+<script type="text/javascript" src="countdown.js">
+</script>

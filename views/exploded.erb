@@ -1,0 +1,12 @@
+<%= erb :_header, :layout => false %>
+<%= erb :_tubular, :layout => false %>
+
+<div id="wrapper" class="black-50">
+  <a class="startanother" href="/reset">Start another bomb</a>
+</div>
+
+<script type="text/javascript">
+  $().ready(function() {
+    $('#wrapper').tubular({videoId: 'oUltheRpJNw', mute: false, start: 26});
+  });
+</script>

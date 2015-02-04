@@ -10,11 +10,17 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    daemons (1.1.9)
+    eventmachine (1.0.6)
     rack (1.6.0)
     rack-protection (1.5.3)
       rack
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
+    thin (1.6.3)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0)
+      rack (~> 1.0)
     tilt (2.0.1)
 
 PLATFORMS
@@ -23,3 +29,4 @@ PLATFORMS
 DEPENDENCIES
   sinatra!
   sinatra-flash
+  thin

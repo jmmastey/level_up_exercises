@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203224801) do
+ActiveRecord::Schema.define(version: 20150204031751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20150203224801) do
     t.string   "icon_link",   limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.index ["point_id", "start_time", "end_time"], :name => "index_forecasts_on_point_id_and_start_time_and_end_time", :unique => true
     t.index ["point_id"], :name => "fk__forecasts_point_id"
-    t.index ["start_time", "end_time"], :name => "index_forecasts_on_start_time_and_end_time", :unique => true
     t.foreign_key ["point_id"], "points", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_forecasts_point_id"
   end
 

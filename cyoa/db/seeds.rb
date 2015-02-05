@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+ForecastType.create(forecast_type: "3-hour")
+ForecastType.create(forecast_type: "24-hour")

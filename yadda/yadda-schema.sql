@@ -37,6 +37,7 @@ COMMENT ON TABLE brewery IS 'Brewery information';
 CREATE TABLE beer (
   beer_id         serial PRIMARY KEY,
   brewery_id      integer NOT NULL,
+  name            varchar(250) NOT NULL,
   style           varchar(25),
   description     text,
   brewing_year    integer,

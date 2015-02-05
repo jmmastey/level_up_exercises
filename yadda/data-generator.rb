@@ -7,10 +7,10 @@ require 'faker'
                    dbname: "yadda")
 
 def main
-  generate_person_records 2000
-  generate_brewery_records 1000
-  generate_beer_records 10000
-  generate_rating_records 1000000
+  generate_person_records 2
+  generate_brewery_records 1
+  generate_beer_records 10
+  generate_rating_records 1000
 
   display_records "person"
   display_records "brewery"
@@ -38,6 +38,7 @@ def generate_beer_records count=100
   count.times do
     insert_record "beer", {
       brewery_id: (get_record_id "brewery"),
+      name: Faker::Company.name.gsub("'"){""},
       style: Faker::Hacker.noun,
       description: Faker::Lorem.sentence(3),
       brewing_year: Faker::Date.between("2000-01-01", Date.today).year,

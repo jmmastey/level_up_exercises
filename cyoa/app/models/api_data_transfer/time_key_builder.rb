@@ -5,14 +5,14 @@ module TimeKeyBuilder
     time_layouts.each_with_object({}) do |time_layout, final|
       time_layout.start_valid_time.each_with_index do |st, index|
         tk = time_key(time_layout, st, index)
-        if tk[0].kind_of(Array)
-          tk_1 = tk[0]
-          tk_2 = tk[1]
-          final = add_value_pair(tk_1, pair, final)
-          final = add_value_pair(tk_2, pair, final)
+        pair = { time_layout.layout_key => index }
+        if tk[0].class == Array
+          tk.each do |k|
+            final = add_value_pair(k, pair, final)
+          end
         else
-          pair = { time_layout.layout_key => index }
           final = add_value_pair(tk, pair, final)
+        end
       end
     end
   end
@@ -25,6 +25,7 @@ module TimeKeyBuilder
     else
       final[tk] = [pair]
     end
+    final
   end
 
   def self.time_unit_end(time_layout, start_valid_time)
@@ -76,15 +77,15 @@ module TimeKeyBuilder
     lk = time_layout.layout_key
     id = layout_key_forecast_type(lk)
     et = end_time_for_start_time(time_layout, st, index)
-    if layout_key_is_literal?(lk)
+    if layout_key_is_literal(lk)
       [id, st, et]
     else
-      st = start_time_for_24_hour_start(st)
-      et = end_time_for_24_hour_start(st)
+      st_1 = start_time_for_24_hour_start(st)
+      et_1 = end_time_for_24_hour_start(st)
       st_2 = start_time_for_24_hour_end(et)
       et_2 = end_time_for_24_hour_end(et)
-      return [id, st, et] unless st != st_2
-      [[id, st, et],[id, st_2, et_2]]
+      return [id, st_1, et_1] unless st_1 != st_2
+      [[id, st_1, et_1],[id, st_2, et_2]]
     end
   end
 end

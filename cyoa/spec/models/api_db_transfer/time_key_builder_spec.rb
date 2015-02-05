@@ -11,9 +11,8 @@ describe TimeKeyBuilder do
     let(:weather_data) { response.weather_data }
 
     it "builds the time key" do
-      time_key = TimeKeyBuilder.time_key(weather_data.time_layouts)
-      expect(time_key).to be_kind_of(Hash)
-      pp time_key
+      times = TimeKeyBuilder.times(weather_data.time_layouts)
+      expect(times).to be_kind_of(Hash)
     end
   end
 end

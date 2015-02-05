@@ -32,7 +32,7 @@ CREATE TABLE breweries (
   address       text NOT NULL,
   city          text NOT NULL,
   state         varchar(2) NOT NULL,
-  zip_code      varchar(5) NOT NULL,
+  zip_code      varchar(20) NOT NULL,
   description   text,
   founding_year char(4),
   created_at    timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -83,21 +83,23 @@ CREATE TABLE ratings (
 -- Create Views for Part 2 of Yadda
 
 -- Top beers from a given brewery, according to their total ratings.
--- Example Usage: SELECT * FROM top_beers_for_brewery WHERE brewery_name = 'Goose Island' LIMIT 3;
+-- Example Usage: SELECT * FROM top_beers_for_brewery WHERE brewery_name = 'Great Lakes' LIMIT 3;
 
 CREATE VIEW top_beers_for_brewery AS
-  SELECT breweries.name AS "brewery_name", beers.name AS "Beer Name", AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel)/4)) AS "Overall Rating" --name as: overall_rating
+  SELECT breweries.name AS "brewery_name", beers.name AS "Beer Name",
+   COUNT(ratings.id) AS "Total Ratings"
   FROM beers
   INNER JOIN ratings ON beers.id = ratings.beer_id
   INNER JOIN breweries ON beers.brewery_id = breweries.id
   GROUP BY breweries.name, beers.name
-  ORDER BY "Overall Rating" DESC;
+  ORDER BY "Total Ratings" DESC;
 
 -- "Recent score" for a beer, where only ratings within the last six months are counted and the ratings within that period are averaged.
 -- Example Usage: SELECT * from recent_score WHERE beer_name = 'Goose Island-Beer A';
 
 CREATE VIEW recent_score AS
-  SELECT beers.name AS "beer_name", AVG((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4) AS "Recent Score"
+  SELECT beers.name AS "beer_name", AVG((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4)
+    AS "Rating"
   FROM beers
   INNER JOIN ratings ON beers.id = ratings.beer_id
   WHERE ratings.created_at > (CURRENT_TIMESTAMP - INTERVAL '6 months')
@@ -107,9 +109,12 @@ CREATE VIEW recent_score AS
 -- Example Usage: SELECT * FROM you_may_enjoy WHERE beer_style = 'Pale Ale' LIMIT 3;
 
 CREATE VIEW you_may_enjoy AS
-  SELECT beer_styles_lookup.name AS "beer_style", beers.name AS "Beer Name", AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel)/4)) AS "Overall Rating"
+  SELECT beer_styles_lookup.name AS "beer_style", beers.name AS "Beer Name",
+    AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4))
+    AS "Overall Rating"
   FROM beers
   INNER JOIN beer_styles_lookup on beers.style_id = beer_styles_lookup.id
   INNER JOIN ratings on beers.id = ratings.beer_id
   GROUP BY beer_styles_lookup.name, beers.name
+  HAVING AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4)) > 2.5
   ORDER BY RANDOM();

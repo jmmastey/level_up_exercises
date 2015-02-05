@@ -1,0 +1,78 @@
+Query 1:
+
+[local] phaddad@yadda=# EXPLAIN ANALYZE SELECT * FROM top_beers_for_brewery WHERE brewery_name = 'Great Lakes' LIMIT 3;
+                                                                  QUERY PLAN
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=23196.29..23196.33 rows=3 width=72) (actual time=253.532..253.532 rows=3 loops=1)
+   ->  Sort  (cost=23196.29..23196.64 rows=138 width=68) (actual time=253.530..253.530 rows=3 loops=1)
+         Sort Key: (count(ratings.id))
+         Sort Method: top-N heapsort  Memory: 25kB
+         ->  HashAggregate  (cost=23190.01..23191.39 rows=138 width=68) (actual time=253.485..253.486 rows=10 loops=1)
+               Group Key: breweries.name, beers.name
+               ->  Hash Join  (cost=31.11..23164.15 rows=3448 width=68) (actual time=0.160..203.582 rows=199732 loops=1)
+                     Hash Cond: (ratings.beer_id = beers.id)
+                     ->  Seq Scan on ratings  (cost=0.00..19346.00 rows=1000000 width=8) (actual time=0.007..79.065 rows=1000000 loops=1)
+                     ->  Hash  (cost=31.08..31.08 rows=2 width=68) (actual time=0.136..0.136 rows=10 loops=1)
+                           Buckets: 1024  Batches: 1  Memory Usage: 1kB
+                           ->  Hash Join  (cost=13.64..31.08 rows=2 width=68) (actual time=0.112..0.130 rows=10 loops=1)
+                                 Hash Cond: (beers.brewery_id = breweries.id)
+                                 ->  Seq Scan on beers  (cost=0.00..15.40 rows=540 width=40) (actual time=0.004..0.009 rows=50 loops=1)
+                                 ->  Hash  (cost=13.62..13.62 rows=1 width=36) (actual time=0.014..0.014 rows=1 loops=1)
+                                       Buckets: 1024  Batches: 1  Memory Usage: 1kB
+                                       ->  Seq Scan on breweries  (cost=0.00..13.62 rows=1 width=36) (actual time=0.011..0.012 rows=1 loops=1)
+                                             Filter: (name = 'Great Lakes'::text)
+                                             Rows Removed by Filter: 4
+ Planning time: 0.281 ms
+ Execution time: 253.591 ms
+(21 rows)
+
+Query 2:
+
+[local] phaddad@yadda=# EXPLAIN ANALYZE SELECT * from recent_score WHERE beer_name = 'Goose Island-Beer A';
+                                                             QUERY PLAN
+-------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on recent_score  (cost=30751.29..30751.35 rows=3 width=64) (actual time=397.200..397.200 rows=1 loops=1)
+   ->  HashAggregate  (cost=30751.29..30751.32 rows=3 width=52) (actual time=397.200..397.200 rows=1 loops=1)
+         Group Key: beers.id
+         ->  Hash Join  (cost=16.79..30667.96 rows=5555 width=52) (actual time=0.087..391.939 rows=19915 loops=1)
+               Hash Cond: (ratings.beer_id = beers.id)
+               ->  Seq Scan on ratings  (cost=0.00..26846.00 rows=999900 width=20) (actual time=0.014..308.823 rows=1000000 loops=1)
+                     Filter: (created_at > (now() - '6 mons'::interval))
+               ->  Hash  (cost=16.75..16.75 rows=3 width=36) (actual time=0.015..0.015 rows=1 loops=1)
+                     Buckets: 1024  Batches: 1  Memory Usage: 1kB
+                     ->  Seq Scan on beers  (cost=0.00..16.75 rows=3 width=36) (actual time=0.006..0.014 rows=1 loops=1)
+                           Filter: (name = 'Goose Island-Beer A'::text)
+                           Rows Removed by Filter: 49
+ Planning time: 0.277 ms
+ Execution time: 397.314 ms
+(14 rows)
+
+Query 3:
+
+[local] phaddad@yadda=# EXPLAIN ANALYZE SELECT * FROM you_may_enjoy WHERE beer_style = 'Pale Ale' LIMIT 3;
+                                                                          QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=23372.56..23372.60 rows=3 width=96) (actual time=283.484..283.485 rows=3 loops=1)
+   ->  Subquery Scan on you_may_enjoy  (cost=23372.56..23375.01 rows=196 width=96) (actual time=283.482..283.482 rows=3 loops=1)
+         ->  Sort  (cost=23372.56..23373.05 rows=196 width=80) (actual time=283.481..283.481 rows=3 loops=1)
+               Sort Key: (random())
+               Sort Method: quicksort  Memory: 26kB
+               ->  HashAggregate  (cost=23361.18..23365.10 rows=196 width=80) (actual time=283.436..283.440 rows=8 loops=1)
+                     Group Key: beer_styles_lookup.name, beers.name
+                     Filter: (avg(((((ratings.look + ratings.smell) + ratings.taste) + ratings.feel) / 4)) > 2.5)
+                     ->  Hash Join  (cost=42.94..23194.50 rows=5556 width=80) (actual time=0.064..225.753 rows=159706 loops=1)
+                           Hash Cond: (ratings.beer_id = beers.id)
+                           ->  Seq Scan on ratings  (cost=0.00..19346.00 rows=1000000 width=20) (actual time=0.010..106.037 rows=1000000 loops=1)
+                           ->  Hash  (cost=42.91..42.91 rows=3 width=68) (actual time=0.044..0.044 rows=8 loops=1)
+                                 Buckets: 1024  Batches: 1  Memory Usage: 1kB
+                                 ->  Hash Join  (cost=25.45..42.91 rows=3 width=68) (actual time=0.034..0.042 rows=8 loops=1)
+                                       Hash Cond: (beers.style_id = beer_styles_lookup.id)
+                                       ->  Seq Scan on beers  (cost=0.00..15.40 rows=540 width=40) (actual time=0.015..0.021 rows=50 loops=1)
+                                       ->  Hash  (cost=25.38..25.38 rows=6 width=36) (actual time=0.012..0.012 rows=1 loops=1)
+                                             Buckets: 1024  Batches: 1  Memory Usage: 1kB
+                                             ->  Seq Scan on beer_styles_lookup  (cost=0.00..25.38 rows=6 width=36) (actual time=0.009..0.011 rows=1 loops=1)
+                                                   Filter: (name = 'Pale Ale'::text)
+                                                   Rows Removed by Filter: 6
+ Planning time: 0.221 ms
+ Execution time: 283.576 ms
+(23 rows)

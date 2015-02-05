@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204031751) do
+ActiveRecord::Schema.define(version: 20150205164755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "forecast_types", force: :cascade do |t|
+    t.string   "forecast_type", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "points", force: :cascade do |t|
     t.decimal  "lat",                   precision: 6, scale: 4, null: false
@@ -26,17 +32,20 @@ ActiveRecord::Schema.define(version: 20150204031751) do
   end
 
   create_table "forecasts", force: :cascade do |t|
-    t.integer  "point_id",                null: false
-    t.datetime "start_time",              null: false
-    t.datetime "end_time",                null: false
+    t.integer  "point_id",                     null: false
+    t.datetime "start_time",                   null: false
+    t.datetime "end_time",                     null: false
     t.integer  "maxt"
     t.integer  "mint"
     t.integer  "cloud_cover"
-    t.string   "icon_link",   limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "icon_link",        limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "forecast_type_id"
+    t.index ["forecast_type_id"], :name => "fk__forecasts_forecast_type_id"
     t.index ["point_id", "start_time", "end_time"], :name => "index_forecasts_on_point_id_and_start_time_and_end_time", :unique => true
     t.index ["point_id"], :name => "fk__forecasts_point_id"
+    t.foreign_key ["forecast_type_id"], "forecast_types", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_forecasts_forecast_type_id"
     t.foreign_key ["point_id"], "points", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_forecasts_point_id"
   end
 

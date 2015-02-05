@@ -1,4 +1,7 @@
-FactoryGirl.define do  factory :forecast_weather_type do
+FactoryGirl.define do  factory :forecast_type do
+    
+  end
+  factory :forecast_weather_type do
     
   end
   factory :weather_type do

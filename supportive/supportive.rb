@@ -9,92 +9,57 @@ class BlagPost
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
   def initialize(args)
-    args = args.inject({}) do |hash, (key, value)|
-      hash[key.to_sym] = value
-      hash
-    end
+    args.symbolize_keys!
 
-    if args[:author] != '' && args[:author_url] != ''
+    @categories = []
+    if args[:author].present? && args[:author_url].present?
       @author = Author.new(args[:author], args[:author_url])
     end
 
-    if args[:categories]
-      @categories = args[:categories].reject do |category|
-        DISALLOWED_CATEGORIES.include? category
-      end
-    else
-      @categories = []
-    end
+    @categories = args[:categories] - DISALLOWED_CATEGORIES if args[:categories]
 
     @comments = args[:comments] || []
-    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
+    @body = args[:body].squish
     @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
   end
 
   def to_s
-    [ category_list, byline, abstract, commenters ].join("\n")
+    <<-EOF.strip_heredoc
+      #{category_list}
+      #{byline}
+      #{abstract}
+      #{commenters}
+    EOF
   end
 
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    author.nil? ? "" : "By #{author.name}, at #{author.url}"
   end
 
   def category_list
     return "" if categories.empty?
+    label = "Category".pluralize(categories.count)
 
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
-  end
-
-  def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    label + ": " + categories.map(&:to_s).map(&:titleize).to_sentence
   end
 
   def commenters
     return '' unless comments_allowed?
-    return '' unless comments.length > 0
+    return '' if comments.blank?
+    commenter_number = (comments.length % 10).ordinalize
 
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    "You will be the #{commenter_number} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date > 3.years.ago.to_date
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    return body.truncate(204) if body.length >= 200
+    body
   end
 
 end

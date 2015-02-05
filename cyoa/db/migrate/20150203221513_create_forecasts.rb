@@ -12,6 +12,7 @@ class CreateForecasts < ActiveRecord::Migration
     end
     ActiveRecord::Base.connection.execute("ALTER TABLE forecasts ALTER start_time TYPE timestamptz")
     ActiveRecord::Base.connection.execute("ALTER TABLE forecasts ALTER end_time TYPE timestamptz")
+    # Changed in later migration
     add_index :forecasts, [:start_time, :end_time], unique: true
   end
 end

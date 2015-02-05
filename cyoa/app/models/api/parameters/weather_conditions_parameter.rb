@@ -20,7 +20,7 @@ class WeatherConditionsParameter
     if weather_condition.kind_of?(Array)
       weather_condition.each_with_object([]) { |wc, final| final << wc[key] }
     else
-      weather_condition[key]
+      [weather_condition[key]]
     end
   end
 end

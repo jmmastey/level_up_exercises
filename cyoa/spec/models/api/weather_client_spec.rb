@@ -69,7 +69,7 @@ describe WeatherClient do
                                                   :weather_types,
                                                   :qualifiers,
                                                   :additives)
-      a = existing_conditions
+      w = weather_data.weather[0].weather_conditions
       binding.pry
     end
 
@@ -153,7 +153,6 @@ describe WeatherClient do
 
     it "returns time_layouts with layout_key, start_valid_time, end_valid_time" do
       expect(weather_data.time_layouts[0]).to respond_to(:layout_key, :start_valid_time, :end_valid_time)
-      expect(weather_data.time_layouts[1]).to respond_to(:layout_key, :start_valid_time, :end_valid_time)
     end
 
     # Some may be nil in the array

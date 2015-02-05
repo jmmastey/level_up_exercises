@@ -1,1 +1,6 @@
 <div>This is day weather information</div>
+<ul id="day_forecasts">
+<% @day_forecasts.each do |forecast| %>
+<li><%= forecast.start_time %></li>
+<% end %>
+</ul>

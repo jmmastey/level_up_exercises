@@ -17,52 +17,6 @@ class DinoDex
     prune_period_values(merge_data(dino_data1, dino_data2))
   end
 
-  def display_all_bipeds
-    display_header "All Bipeds"
-    display_names grab_all_bipeds
-  end
-
-  def display_all_carnivores
-    display_header "All Carnivores"
-    display_names grab_all_carnivores
-  end
-
-  def display_all_jurassics
-    display_header "All Jurassics"
-    display_names grab_all_jurassics
-  end
-
-  def display_all_big_dinos
-    display_header "All Big Dino's"
-    display_names grab_all_big_dinos
-  end
-
-  def display_all_small_dinos
-    display_header "All Small Dino's"
-    display_names grab_all_small_dinos
-  end
-
-  def display_all_facts_about(dino_name)
-    display_header "All About #{dino_name}"
-    display_dino grab_dino_by_name(dino_name)
-  end
-
-  def display_dino(csv_table)
-    csv_table.each do |row|
-      row.each do |header, field|
-        if field
-          display header + ": " + field
-        end
-      end
-      display_line_break
-    end
-  end
-
-  def display_dinos(dino_list)
-    display_header "List of Dino's!"
-    display_dino dino_list
-  end
-
   def grab_all_bipeds
     filter_by_column("WALKING", "Biped")
   end
@@ -145,6 +99,63 @@ class DinoDex
     return "Carnivore" if carnivore_bool == "Yes"
     "Herbivore"
   end
+end
+
+class DinoDexPresenter
+
+  attr_accessor :dinodex
+
+  def initialize
+    @dinodex = DinoDex.new
+  end
+
+  def display_all_bipeds
+    display_header "All Bipeds"
+    display_names dinodex.grab_all_bipeds
+  end
+
+  def display_all_carnivores
+    display_header "All Carnivores"
+    display_names dinodex.grab_all_carnivores
+  end
+
+  def display_all_jurassics
+    display_header "All Jurassics"
+    display_names dinodex.grab_all_jurassics
+  end
+
+  def display_all_big_dinos
+    display_header "All Big Dino's"
+    display_names dinodex.grab_all_big_dinos
+  end
+
+  def display_all_small_dinos
+    display_header "All Small Dino's"
+    display_names dinodex.grab_all_small_dinos
+  end
+
+  def display_all_facts_about(dino_name)
+    display_header "All About #{dino_name}"
+    display_dino dinodex.grab_dino_by_name(dino_name)
+  end
+
+  def display_dino(csv_table)
+    csv_table.each do |row|
+      row.each do |header, field|
+        if field
+          display header + ": " + field
+        end
+      end
+      display_line_break
+    end
+  end
+
+  def display_dinos(dino_list)
+    display_header "List of Dino's!"
+    display_dino dino_list
+  end
+
+  private
 
   def display(message)
     puts message
@@ -172,7 +183,7 @@ class DinoDex
 end
 
 # 1. parse both csv files
-dino = DinoDex.new
+dino = DinoDexPresenter.new
 
 # 2. answer these questions
 ## display all dinosaurs that were bipeds
@@ -194,4 +205,4 @@ dino.display_all_small_dinos
 dino.display_all_facts_about "Albertosaurus"
 
 # 4. display all the dinosaurs in a given collection
-dino.display_dinos dino.grab_all_small_dinos
+dino.display_dinos dino.dinodex.grab_all_small_dinos

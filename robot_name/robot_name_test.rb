@@ -16,8 +16,8 @@ class RobotTest < MiniTest::Unit::TestCase
   def test_robot_name_conflict
     assert_raises NameCollisionError do
       generator = -> { 'AA111' }
-      r1d2 = Robot.new(name_generator: generator)
-      r2d2 = Robot.new(name_generator: generator)
+      Robot.new(name_generator: generator)
+      Robot.new(name_generator: generator)
     end
   end
 end

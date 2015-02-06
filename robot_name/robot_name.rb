@@ -12,14 +12,19 @@ class Robot
     if @name_generator
       @name = @name_generator.call
     else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
-
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+      @name = generate_name
     end
 
     raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+
     @@registry << @name
+  end
+
+  def generate_name
+      generate_char = -> { ('A'..'Z').to_a.sample }
+      generate_num = -> { rand(10) }
+
+      "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
   end
 end
 

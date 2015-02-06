@@ -16,7 +16,7 @@ module WeatherLoader
     response.weather_data.applicable_locations.each_with_index do |location_key, index|
       location = location_by_key(response, location_key)
       point = Point.where(lat: location.latitude, lon: location.longitude).first
-      load_point_time_layouts(response, index, point)
+      load_point_times(response, { point: point, point_index: index })
     end
   end
 
@@ -24,33 +24,20 @@ module WeatherLoader
     response.locations.select { |location| location[:location_key] == location_key }.first
   end
 
-  def load_point_time_layouts(response, point_index, point)
-    response.time_layouts.each do |time_layout|
-      time_layout.start_valid_time.each_with_index do |start_valid_time, time_index|
-        end_valid_time = end_time_for_start_time(time_layout, start_valid_time, time_index)
-        load_forecast(response, { point: point,
-                                  point_index: point_index,
-                                  time_layout: time_layout,
-                                  start_valid_time: start_valid_time,
-                                  end_valid_time: end_valid_time,
-                                  time_index: time_index })
-      end
+  def load_point_times(response, load_params = {})
+    times = TimeKeyBuilder.times(response.weather_data.time_layouts)
+    times.each do |key, value|
+      load_params.merge({ time_key: key,
+                          time_value: value })
+      load_forecast(response, load_params)
     end
-  end
-
-  def end_time_for_start_time(time_layout, start_valid_time, index)
-    return time_layout.end_valid_time[index] unless time_layout.end_valid_time[index].nil?
-    start_valid_time + layout_key_hour_interval.hours
-  end
-
-  def layout_key_hour_interval(layout_key)
-    layout_key.split("-")[1].split("p")[1].split("h")[0]
   end
 
   def load_forecast(response, load_params = {})
     forecast = Forecast.find(point_id: load_params[:point][:id],
-                             start_time: load_params[:start_valid_time],
-                             end_time: load_params[:end_valid_time]).first
+                             forecast_type_id: load_params[:time_key][:forecast_id]
+                             start_time: load_params[:time_key][:start_time],
+                             end_time: load_params[:time_key][:end_time]).first
     if forecast.empty?
       insert_forecast(response, load_params)
     else
@@ -62,8 +49,9 @@ module WeatherLoader
   def insert_forecast(response, load_params = {})
     load_params.merge(get_forecast_params(response, load_params))
     Forecast.new(point_id: load_params[:point][:id],
-                 start_time: load_params[:start_valid_time],
-                 end_time: load_params[:end_valid_time],
+                 forecast_id: load_params[:time_key][:forecast_id]
+                 start_time: load_params[:time_key][:start_time],
+                 end_time: load_params[:time_key][:end_time],
                  maxt: load_params[:maxt],
                  mint: load_params[:mint],
                  cloud_cover: load_params[:cloud_cover],
@@ -89,54 +77,76 @@ module WeatherLoader
   end
 
   def add_forecast_weather!(response, load_params)
-    if weather_matches_layout?(response, load_params)
+    if weather_has_time?(response, load_params)
       ForecastWeatherType.destroy_all(forecast_id: load_params[:forecast][:id])
       insert_weather!(response, load_params)
     end
   end
 
   def get_maxt(response, load_params = {})
-    return nil unless maxt_matches_layout?(response, load_params)
-    response.weather_data.temperatures[load_params[:point_index]].maxt.value[:time_index].to_i
+    indexes = maxt_time_indexes(response, load_params)
+    return nil if indexes.empty?
+    if indexes.count == 0
+      response.weather_data.temperatures[load_params[:point_index]].maxt.value[indexes[0]].to_i
+    else
+      indexes.each_with_object([]) do |index, maxts|
+        maxts << response.weather_data.temperatures[load_params[:point_index]].maxt.value[indexes[index]].to_i
+      end.max
+    end
   end
 
   def get_mint(response, load_params = {})
-    return nil unless mint_matches_layout?(response, load_params)
-    response.weather_data.temperatures[load_params[:point_index]].mint.value[:time_index].to_i
+    indexes = mint_time_indexes(response, load_params)
+    return nil if indexes.empty?
+    if indexes.count == 0
+      response.weather_data.temperatures[load_params[:point_index]].mint.value[indexes[0]].to_i
+    else
+      indexes.each_with_object([]) do |index, mints|
+        mints << response.weather_data.temperatures[load_params[:point_index]].mint.value[indexes[index]].to_i
+      end.min
+    end
   end
 
   def get_cloud_cover(response, load_params = {})
-    return nil unless cloud_cover_matches_layout?(response, load_params)
-    response.weather_data.cloud_covers[load_params[:point_index]].value[:time_index].to_i
+    indexes = cloud_cover_indexes(response, load_params)
+    return nil if indexes.empty?
+    raise WeatherLoaderError, "Unhandled multiple cloud cover times" if indexes.count > 0
+    response.weather_data.cloud_covers[load_params[:point_index]].value[indexes[0]].to_i
   end
 
   def get_icon_link(response, load_params = {})
-    return nil unless icon_link_matches_layout?(response, load_params)
-    response.weather_data.conditions_icons[load_params[:point_index]].icon_link[:time_index]
+    indexes = icon_link_indexes(response, load_params)
+    return nil if indexes.empty?
+    raise WeatherLoaderError, "Unhandled multiple icon link times" if indexes.count > 0
+    response.weather_data.conditions_icons[load_params[:point_index]].icon_link[indexes[0]]
   end
 
-  def weather_matches_layout(response, load_params = {})
-    response.weather_data.weather[load_params[:point_index]].time_layout == load_params[:time_layout]
+  def maxt_time_indexes(response, load_params = {})
+    load_params[:time_value].each_with_object([]) do |(key, value), indexes|
+      layout = response.weather_data.temperatures[load_params[:point_index]].maxt.time_layout
+      indexes << value if layout == key
+    end
+  end
+  
+  def mint_time_indexes(response, load_params = {})
+    load_params[:time_value].each_with_object([]) do |(key, value), indexes|
+      layout = response.weather_data.temperatures[load_params[:point_index]].mint.time_layout
+      indexes << value if layout == key
+    end
   end
 
-  def maxt_matches_layout(response, load_params = {})
-    response.weather_data.temperatures[load_params[:point_index]].maxt.time_layout == load_params[:time_layout]
+  def cloud_cover_indexes(response, load_params = {})
+    load_params[:time_value].each_with_object([]) do |(key, value), indexes|
+      layout = response.weather_data.cloud_covers[load_params[:point_index]].time_layout
+      indexes << value if layout == key
+    end
   end
 
-  def mint_matches_layout(response, load_params = {})
-    response.weather_data.temperatures[load_params[:point_index]].mint.time_layout == load_params[:time_layout]
-  end
-
-  def cloud_cover_matches_layout(response, load_params = {})
-    response.weather_data.cloud_covers[load_params[:point_index]].time_layout == load_params[:time_layout]
-  end
-
-  def icon_link_matches_layout(response, load_params = {})
-    response.weather_data.conditions_icons[load_params[:point_index]].time_layout == load_params[:time_layout]
-  end
-
-  def param_matches_layout(response, load_params = {}, param)
-    response.weather_data.send(param)[load_params[:point_index]].time_layout == load_params[:time_layout]
+  def weather_time_indexes(response, load_params = {})
+    load_params[:time_value].each_with_object([]) do |(key, value), indexes|
+      layout = response.weather_data.weather[load_params[:point_index]].time_layout
+      indexes << value if layout == key
+    end
   end
 
   def insert_weather!(response, load_params = {})
@@ -170,4 +180,7 @@ module WeatherLoader
   def requester
     WeatherClient
   end
+end
+
+class WeatherLoaderError < StandardError
 end

@@ -9,10 +9,16 @@ describe TimeKeyBuilder do
                                       start_time:   "2015-02-02",
                                       end_time:     "2015-02-10" }) }
     let(:weather_data) { response.weather_data }
-
+    let(:times) { TimeKeyBuilder.times(weather_data.time_layouts) }
     it "builds the time key" do
-      times = TimeKeyBuilder.times(weather_data.time_layouts)
       expect(times).to be_kind_of(Hash)
+    end
+
+    it "has expected keys in each hash" do
+      expect(times.keys[0]).to have_key(:forecast_id)
+      expect(times.keys[0]).to have_key(:start_time)
+      expect(times.keys[0]).to have_key(:end_time)
+      binding.pry
     end
   end
 end

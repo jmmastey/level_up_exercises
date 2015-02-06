@@ -6,12 +6,12 @@ module TimeKeyBuilder
       time_layout.start_valid_time.each_with_index do |st, index|
         tk = time_key(time_layout, st, index)
         pair = { time_layout.layout_key => index }
-        if tk[0].class == Array
+        if tk.count > 1
           tk.each do |k|
             final = add_value_pair(k, pair, final)
           end
         else
-          final = add_value_pair(tk, pair, final)
+          final = add_value_pair(tk[0], pair, final)
         end
       end
     end
@@ -78,14 +78,15 @@ module TimeKeyBuilder
     id = layout_key_forecast_type(lk)
     et = end_time_for_start_time(time_layout, st, index)
     if layout_key_is_literal(lk)
-      [id, st, et]
+      [{ forecast_id: id, start_time: st, end_time: et }]
     else
       st_1 = start_time_for_24_hour_start(st)
       et_1 = end_time_for_24_hour_start(st)
       st_2 = start_time_for_24_hour_end(et)
       et_2 = end_time_for_24_hour_end(et)
-      return [id, st_1, et_1] unless st_1 != st_2
-      [[id, st_1, et_1],[id, st_2, et_2]]
+      return [{ forecast_id: id, start_time: st_1, end_time: et_1 }] unless st_1 != st_2
+      [{ forecast_id: id, start_time: st_1, end_time: et_1 },
+       { forecast_id: id, start_time: st_2, end_time: et_2 }]
     end
   end
 end

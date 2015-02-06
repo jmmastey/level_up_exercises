@@ -1,7 +1,8 @@
+require './spec/rails_helper'
 require 'vcr'
 
 RSpec.configure do |config|
-  # config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = true
   
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

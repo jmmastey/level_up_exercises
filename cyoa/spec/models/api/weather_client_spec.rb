@@ -12,8 +12,8 @@ describe WeatherClient do
                                            record: :new_episodes } do
     let(:client) { WeatherClient.new }
     let(:response) { client.request({ list_lat_lon: "41.837,-87.685",
-                                          start_time:   "2015-01-30",
-                                          end_time:     "2015-02-08" }) }
+                                      start_time:   "2015-01-30",
+                                      end_time:     "2015-02-08" }) }
     let(:weather_data) { response.weather_data }
 
     it "has the expected parameters nested under data" do

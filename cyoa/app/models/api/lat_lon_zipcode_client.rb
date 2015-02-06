@@ -10,7 +10,7 @@ class LatLonZipcodeClient
   operations :lat_lon_list_zip_code
 
   def request(zip_code_list)
-    response_builder.new(lat_lon_list_zip_code(zip_code_list), zip_code_list)
+    response_builder.new(lat_lon_list_zip_code(zip_code_list), zip_code_list).zip_code_lat_lon
   end
 
   private

@@ -4,13 +4,13 @@ CREATE DATABASE yadda;
 \connect yadda;
 
 --TODO cascading/restricting deletes
-
 CREATE TABLE person (
   person_id       serial PRIMARY KEY,
   name            varchar(50) NOT NULL,
   email           varchar(100) NOT NULL,
   description     text,
   birthday        date NOT NULL,
+  created_at      timestamp with time zone,
   updated_at      timestamp with time zone,
   updated_by      integer NOT NULL,
   CONSTRAINT updated_by_key FOREIGN KEY (updated_by)
@@ -27,6 +27,7 @@ CREATE TABLE brewery (
   postal_code     varchar(20),
   description     text,
   founding_year   integer,
+  created_at      timestamp with time zone,
   updated_at      timestamp with time zone,
   updated_by      integer NOT NULL,
   CONSTRAINT updated_by_key FOREIGN KEY (updated_by)
@@ -41,6 +42,7 @@ CREATE TABLE beer (
   style           varchar(25),
   description     text,
   brewing_year    integer,
+  created_at      timestamp with time zone,
   updated_at      timestamp with time zone,
   updated_by      integer NOT NULL,
   CONSTRAINT updated_by_key FOREIGN KEY (updated_by)
@@ -60,6 +62,7 @@ CREATE TABLE rating (
   feel            numeric(3),
   overall         numeric(3) NOT NULL,
   description     text,
+  created_at      timestamp with time zone,
   updated_at      timestamp with time zone,
   updated_by      integer REFERENCES person(person_id),
   CONSTRAINT updated_by_key FOREIGN KEY (updated_by)
@@ -69,4 +72,4 @@ CREATE TABLE rating (
   CONSTRAINT beer_id_key FOREIGN KEY (beer_id)
     REFERENCES beer (beer_id)
 );
-COMMENT ON TABLE rating IS 'Rating information, link between a person and a beer';
+COMMENT ON TABLE rating IS 'Rating information, link between person and a beer';

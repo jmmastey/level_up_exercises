@@ -8,9 +8,8 @@ rescue LoadError => e
 end
 
 class ArrowheadTest < MiniTest::Unit::TestCase
-
   def test_classify_northern_plains_bifurcated
-    out, err = capture_io do
+    out, _err = capture_io do
       Arrowhead.classify(:northern_plains, :bifurcated)
     end
     assert_equal "You have a(n) 'Oxbow' arrowhead. Probably priceless.\n", out
@@ -27,7 +26,6 @@ class ArrowheadTest < MiniTest::Unit::TestCase
       Arrowhead.classify(:whatevs, :bifurcated)
     end
   end
-
 end
 
 __END__

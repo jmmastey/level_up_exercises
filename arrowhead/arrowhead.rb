@@ -1,6 +1,7 @@
 class Arrowhead
   REGION_ERROR = "Unknown region, please provide a valid region."
-  SHAPE_ERROR = "Unknown shape value. Are you sure you know what you're talking about?"
+  SHAPE_ERROR =
+    "Unknown shape value. Are you sure you know what you're talking about?"
 
   # This seriously belongs in a database.
   CLASSIFICATIONS = {

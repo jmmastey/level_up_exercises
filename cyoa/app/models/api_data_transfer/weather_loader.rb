@@ -3,6 +3,7 @@ require './app/models/forecast'
 require './app/models/weather_type'
 require './app/models/forecast_weather_type'
 require './app/models/api/weather_client'
+require './app/models/api_data_transfer/time_key_builder'
 
 module WeatherLoader
   def load(inputs = {})

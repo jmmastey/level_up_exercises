@@ -102,7 +102,6 @@ class DinoDex
 end
 
 class DinoDexPresenter
-
   attr_accessor :dinodex
 
   def initialize

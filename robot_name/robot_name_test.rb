@@ -12,4 +12,12 @@ class RobotTest < MiniTest::Unit::TestCase
     robot = Robot.new
     assert !robot.name.nil?, robot.name
   end
+
+  def test_robot_name_conflict
+    assert_raises NameCollisionError do
+      generator = -> { 'AA111' }
+      r1d2 = Robot.new(name_generator: generator)
+      r2d2 = Robot.new(name_generator: generator)
+    end
+  end
 end

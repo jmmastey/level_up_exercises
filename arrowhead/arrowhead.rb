@@ -24,8 +24,7 @@ class Arrowhead
     shapes = CLASSIFICATIONS[region]
     raise SHAPE_ERROR unless shapes.include?(shape)
 
-    arrowhead = shapes[shape]
-    puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
+    puts "You have a(n) '#{shapes[shape]}' arrowhead. Probably priceless."
   end
 end
 

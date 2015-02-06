@@ -1,7 +1,6 @@
 require 'pg'
 require 'faker'
 
-# Connect to the db
 @conn = PG.connect(user: "rcowan",
                    password: "",
                    dbname: "yadda")
@@ -11,11 +10,6 @@ def main
   generate_brewery_records 1
   generate_beer_records 10
   generate_rating_records 1000
-
-  display_records "person"
-  display_records "brewery"
-  display_records "beer"
-  display_records "rating"
 end
 
 def generate_rating_records count=100
@@ -29,6 +23,7 @@ def generate_rating_records count=100
       feel: Faker::Number.digit,
       overall: Faker::Number.digit,
       description: Faker::Lorem.sentence(3),
+      created_at: Faker::Date.between("2014-01-01", Date.today),
       updated_by: (get_record_id "person")
     }
   end
@@ -42,6 +37,7 @@ def generate_beer_records count=100
       style: Faker::Hacker.noun,
       description: Faker::Lorem.sentence(3),
       brewing_year: Faker::Date.between("2000-01-01", Date.today).year,
+      created_at: Faker::Date.between("2014-01-01", Date.today),
       updated_by: (get_record_id "person")
     }
   end
@@ -57,6 +53,7 @@ def generate_brewery_records count=100
       postal_code: Faker::Number.number(5),
       description: Faker::Lorem.sentence(3),
       founding_year: Faker::Date.between("1500-01-01", Date.today).year,
+      created_at: Faker::Date.between("2014-01-01", Date.today),
       updated_by: (get_record_id "person")
     }
   end
@@ -69,27 +66,24 @@ def generate_person_records count=100
       email: Faker::Internet.email,
       birthday: Faker::Date.between("1900-01-01", Date.today),
       description: Faker::Lorem.sentence(3),
+      created_at: Faker::Date.between("2014-01-01", Date.today),
       updated_by: 1
     }
   end
 end
 
+#refactor, move focus off DB
 def get_record_id table
   record = @conn.exec( "SELECT #{table}_id FROM #{table} ORDER BY RANDOM() LIMIT 1" ).first
   record["#{table}_id"]
 end
 
 def insert_record table, info_hash
-  @conn.exec( "INSERT INTO #{table} (#{info_hash.keys.join(",")})" \
-    "VALUES('#{info_hash.values.join("','")}')" )
-end
+  placeholder = []
+  info_hash.keys.each_index {|x| placeholder << "$#{x+1}"}
 
-def display_records table
-  @conn.exec( "SELECT * FROM #{table}" ) do |result|
-    result.each do |row|
-      puts row
-    end
-  end
+  @conn.exec_params("INSERT INTO #{table} (#{info_hash.keys.join(",")}) VALUES(#{placeholder.join(",")})",
+    info_hash.values)
 end
 
 main

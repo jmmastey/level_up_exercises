@@ -1,7 +1,6 @@
 require 'csv'
 
 class DinoDex
-  DEBUG = false
   DINO_FILENAME1 = "dinodex.csv"
   DINO_FILENAME2 = "african_dinosaur_export.csv"
 

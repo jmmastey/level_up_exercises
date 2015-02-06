@@ -1,7 +1,6 @@
-require 'csv' 
+require 'csv'
 
 class DinoDex
-
   DEBUG = false
   DINO_FILENAME1 = "dinodex.csv"
   DINO_FILENAME2 = "african_dinosaur_export.csv"
@@ -13,12 +12,12 @@ class DinoDex
   end
 
   def parse_dino_files
-    dino_data1 = CSV.read(DINO_FILENAME1, {:headers => true})
-    dino_data2 = CSV.read(DINO_FILENAME2, {:headers => true})
+    dino_data1 = CSV.read(DINO_FILENAME1, headers: true)
+    dino_data2 = CSV.read(DINO_FILENAME2, headers: true)
 
     prune_period_values(merge_data(dino_data1, dino_data2))
   end
-  
+
   def display_all_bipeds
     display_header "All Bipeds"
     display_names grab_all_bipeds
@@ -52,7 +51,7 @@ class DinoDex
   def display_dino(csv_table)
     csv_table.each do |row|
       row.each do |header, field|
-        if field != nil
+        if field
           display header + ": " + field
         end
       end
@@ -90,7 +89,8 @@ class DinoDex
   end
 
   private
-  # Duplicating this CSV table is inefficient and won't scale with larger sets 
+
+  # Duplicating this CSV table is inefficient and won't scale with larger sets
   # of data.  I'm lazy.
   def duplicate_csv_table(csv_table)
     CSV.parse(csv_table.to_s, headers: true)
@@ -98,14 +98,14 @@ class DinoDex
 
   def filter_by_weight_greater_than_or_equal_to(weight)
     duplicate_csv_table(@dino_data).delete_if do |row|
-      (row["WEIGHT_IN_LBS"].to_i <= weight.to_i) || 
+      (row["WEIGHT_IN_LBS"].to_i <= weight.to_i) ||
         (row["WEIGHT_IN_LBS"].to_i == 0)
     end
   end
 
   def filter_by_weight_less_than(weight)
     duplicate_csv_table(@dino_data).delete_if do |row|
-      (row["WEIGHT_IN_LBS"].to_i > weight.to_i) || 
+      (row["WEIGHT_IN_LBS"].to_i > weight.to_i) ||
         (row["WEIGHT_IN_LBS"].to_i == 0)
     end
   end
@@ -127,7 +127,7 @@ class DinoDex
         row["Weight"],                        # WEIGHT_IN_LBS
         row["Walking"],                       # WALKING
         nil                                   # DESCRIPTION
-      ] 
+      ]
     end
 
     csv_table1
@@ -170,9 +170,7 @@ class DinoDex
   def display_line_break
     display "--------------------------------------"
   end
-
 end
-
 
 # 1. parse both csv files
 dino = DinoDex.new
@@ -198,4 +196,3 @@ dino.display_all_facts_about "Albertosaurus"
 
 # 4. display all the dinosaurs in a given collection
 dino.display_dinos dino.grab_all_small_dinos
-

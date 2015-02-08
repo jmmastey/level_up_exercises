@@ -15,10 +15,9 @@ describe TimeKeyBuilder do
     end
 
     it "has expected keys in each hash" do
-      expect(times.keys[0]).to have_key(:forecast_id)
+      expect(times.keys[0]).to have_key(:forecast_type_id)
       expect(times.keys[0]).to have_key(:start_time)
       expect(times.keys[0]).to have_key(:end_time)
-      binding.pry
     end
   end
 end

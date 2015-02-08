@@ -6,19 +6,31 @@ def stub_client_return(return_value)
 end
 
 describe WeatherLoader do
+
+  let!(:params)   { { list_lat_lon: "41.837,-87.685 41.7918,-88.0878",
+                                    start_time:   "2015-02-02",
+                                    end_time:     "2015-02-10" } }
+  let!(:client)   { WeatherClient.new }
+  let!(:response) { client.request(params) }
+
+  let!(:stub)     { stub_client_return(response) }
+  let!(:loader)   { WeatherLoader.load(params) }
+
   describe "for two lat lon points", vcr: { cassette_name: "two lat lon points",
                                            record: :new_episodes } do
-    let(:params) { { list_lat_lon: "41.837,-87.685 41.7918,-88.0878",
-                                      start_time:   "2015-02-02",
-                                      end_time:     "2015-02-10" } }
-    let(:client) { WeatherClient.new }
-    let(:response) { client.request(params) }
 
-    it "transfers data into the forecasts table" do
-      stub_client_return(response)
-      WeatherLoader.load(params)
+    it "has 84 time periods, 42 for each point" do
       count = Forecast.count
-      expect(count).to be > 0
+      expect(count).to eq(84)
+      binding.pry
+    end
+
+    describe "for a given 24 hour period" do
+      it "has the right maxt in the database" do
+        
+        test = Forecast.daily.first
+
+      end
     end
 
   end

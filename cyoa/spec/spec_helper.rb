@@ -1,5 +1,6 @@
 require './spec/rails_helper'
 require 'vcr'
+require './db/seeds'
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true

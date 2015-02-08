@@ -1,0 +1,7 @@
+.unread {
+  @include font(body-bold);
+}
+
+.checked {
+  background-color: $yellow;
+}

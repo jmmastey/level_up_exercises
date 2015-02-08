@@ -1,0 +1,98 @@
+/*------------------------------------*\
+    #COMPONENTS - BUTTONS
+\*------------------------------------*/
+
+.button {
+  padding: .6rem;
+  border: none
+}
+
+.no-background {
+  @include font(header);
+  @include font-size(1.15);
+  color: $orange-red;
+  font-weight: 400;
+  background: none;
+  padding: .3rem;
+}
+
+.red-button {
+  @extend .button;
+  background: $orange-red;
+  color: white;
+  border: none;
+  width: 7rem;
+  text-transform: uppercase;
+  @include font-size(0.65);
+  @include font(body-bold);
+}
+
+.control-button {
+  @extend .button;
+  background: $light-gray-gradient;
+  //border: 1px solid lighten($dark-gray, .8);
+  @include border(lighten($dark-gray, .8));
+  border-radius: 2px;
+  padding: .4rem;
+  margin-right: 0.8rem;
+  @include font-size(0.7);
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.search-submit-box {
+  display: inline-block;
+  position: relative;
+
+  svg {
+    position: relative;
+    left: -39px;
+  }
+}
+
+.more-button {
+  @include font(body-bold);
+  @include font-size(.7);
+  line-height: 1.4;
+}
+
+.pagination-button {
+  background: none;
+  border: none;
+  margin-right: 0;
+  @include font(body-bold);
+  @include font-size(.75);
+}
+
+.left-arrow-button {
+  margin-right: -5px;
+}
+
+.left-arrow-button, .right-arrow-button {
+  width: 2.4rem;
+}
+
+.selection-button, .refresh-button, .more-button, .delete-button {
+  width: 4.25rem;
+}
+
+.input-1-button {
+  width: 2.5rem;
+  margin-right: -5px;
+}
+
+.input-2-button {
+  width: 1.25rem;
+}
+
+.settings-button {
+  width: 4.5rem;
+}
+
+.login button {
+  border: none;
+  margin-right: 2rem;
+}
+

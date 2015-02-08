@@ -1,0 +1,424 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pmail</title>
+        <meta name="description" content="This is the new Pmail web application for email!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/build/main.css">
+        <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <header class="main-header clearfix">
+
+            <div class="header-logo">
+                <h1>enova</h1>
+            </div>
+
+            <div class="search-bar col-1">
+                <form action="/search" method="post">
+                        <input id="search" name="search" type="search" value="">
+                        <div class="search-submit-box">
+                            <input type="submit" name="search-query" value=" ">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#magnifying-glass" class="icon-magnifying-glass"></use>
+                            </svg>
+                        </div>
+                </form>
+            </div>
+
+            <div class="login">
+
+                <button class="grid-button control-button">
+                    <svg class="icon">
+                      <use xlink:href="img/sprite.svg#grid-three-up" class="icon-grid-three-up"></use>
+                    </svg>
+                </button>
+
+                <p>phaddad@enova.com
+                    <svg class="icon">
+                      <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                    </svg>
+                </p>
+
+            </div>
+
+        </header>
+
+        <div class="grid-pad main-content clearfix">
+
+            <div class="sidebar-container fixed-side-col col-left">
+
+                <div class="app-control">
+                    <button id="mail-dropdown" class="button no-background">Mail
+                        <svg class="icon">
+                          <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                        </svg>
+                    </button>
+                    <ul id="mailbox-dropdown-menu">
+                        <a href="#" class="current-app"><li>Gmail</li></a>
+                        <a href="#"><li>Contacts</li></a>
+                        <a href="#"><li>Tasks</li></a>
+                    </ul>
+                </div>
+
+                <div class="mailboxes">
+                    <button class="red-button">Compose</button>
+
+                    <ul>
+                        <a href="#"><li class="current">Inbox</li></a>
+                        <a href="#"><li>Starred</li></a></a>
+                        <a href="#"><li>Sent Mail</li></a>
+                        <a href="#"><li>Drafts</li></a>
+                        <a href="#"><li>Database</li></a>
+                        <a href="#"><li>More</li></a>
+
+                        <a href="#"><li>Important</li></a>
+                        <a href="#"><li>All Mail</li></a>
+                        <a href="#"><li>Spam</li></a>
+                        <a href="#"><li>Trash</li></a>
+                    </ul>
+                </div>
+
+            </div>
+
+
+            <div class="email-container col-flex">
+
+                <div class="email-controls clearfix">
+                    <div id="email-controls-1">
+                        <button class="selection-button control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#browser" class="icon-browser"></use>
+                            </svg>
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                            </svg>
+                        </button>
+
+                        <button class="refresh-button control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#reload" class="icon-reload"></use>
+                            </svg>
+                        </button>
+
+                        <button class="delete-button control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#trash" class="icon-trash"></use>
+                            </svg>
+                        </button>
+
+                        <button class="more-button control-button">More
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                            </svg>
+                        </button>
+
+                    </div>
+
+                    <div>
+                        <button class="pagination-button control-button">1&mdash;50 of 396</button>
+
+                        <button class="left-arrow-button control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#chevron-left" class="icon-chevron-left"></use>
+                            </svg>
+                        </button>
+
+                        <button class="right-arrow-button control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#chevron-right" class="icon-chevron-right"></use>
+                            </svg>
+                        </button>
+
+                        <button class="input-1-button control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#spreadsheet" class="icon-spreadsheet"></use>
+                            </svg>
+                        </button>
+
+                        <button class="input-2-button control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                            </svg>
+                        </button>
+
+                        <button class="settings-button control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#cog" class="icon-cog"></use>
+                            </svg>
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
+                            </svg>
+                        </button>
+
+                    </div>
+                </div>
+
+                <section class="emails">
+                    <table>
+
+                        <tr class="unread">
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Marks, Jonathan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe possimus nulla, esse ut itaque aperiam repellat iste voluptas commodi. Error voluptatibus quasi earum, temporibus autem debitis labore saepe accusamus modi?</td>
+                            <td>8:10 am</td>
+                        </tr>
+
+                        <tr class="unread">
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Mastey, Joe</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat laborum illo iusto, molestiae maxime dolorum quos eius dolor ipsam. Nostrum odit cupiditate officia voluptatibus perferendis aliquam omnis, veniam nihil rerum!</td>
+                            <td>7:32 am</td>
+                        </tr>
+
+                        <tr class="unread">
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Kotowski, Dan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, perferendis, cumque suscipit minima qui voluptatem alias harum, debitis dicta maiores quasi quam enim ea inventore reprehenderit totam nostrum quis, doloribus.</td>
+                            <td>Jan 9</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star fa-lg"></span>
+                            </td>
+                            <td>Marks, Jonathan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus, necessitatibus inventore eos. Quod mollitia ut ullam esse quis nobis doloremque nihil consectetur magnam, eligendi aperiam odit, optio tempora in. Officiis.</td>
+                            <td>Jan 9</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Mastey, Joe</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas quasi inventore non optio, assumenda explicabo placeat dolor culpa, ab sed. Aut deserunt quasi dolores quos voluptatem saepe numquam consequuntur dolore!</td>
+                            <td>Jan 8</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Kotowski, Dan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, eius excepturi non quidem minima ipsum blanditiis illo, autem necessitatibus ad maiores voluptatem expedita neque! Debitis perspiciatis dicta ad quas voluptatibus!</td>
+                            <td>Jan 8</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star fa-lg"></span>
+                            </td>
+                            <td>Marks, Jonathan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quidem deleniti rerum placeat in dolorum suscipit temporibus sunt! Optio eligendi rem tenetur enim ipsum id consequuntur eaque, qui error quasi.</td>
+                            <td>Jan 8</td>
+                        </tr>
+
+                        <tr class="unread">
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Mastey, Joe</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste vitae, incidunt, quam, quidem consectetur corrupti eligendi voluptas veritatis reprehenderit dicta id eveniet, voluptatem. Quisquam sapiente saepe, error voluptatibus accusantium, rem.</td>
+                            <td>Jan 8</td>
+                        </tr>
+
+                        <tr class="unread">
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Kotowski, Dan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam sint dolores obcaecati cumque ex eligendi perspiciatis recusandae mollitia, quod nobis tempore aliquid ipsa sapiente laudantium praesentium omnis, non vero ab.</td>
+                            <td>Jan 7</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Marks, Jonathan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In adipisci dolor, distinctio. Tenetur cupiditate hic ad. Culpa debitis excepturi tempora maiores, minima nostrum ipsum ea molestiae ducimus qui quam doloribus.</td>
+                            <td>Jan 7</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Mastey, Joe</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis illo, natus id! Officia excepturi pariatur quas reiciendis totam eos nam, officiis, impedit temporibus autem voluptatum quasi quaerat provident, nobis mollitia.</td>
+                            <td>Jan 7</td>
+                        </tr>
+
+                        <tr class="unread">
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Kotowski, Dan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab consequuntur dolore, nostrum ut expedita cupiditate a quidem eligendi placeat, nulla eius deserunt consequatur numquam magnam molestias est cumque? Praesentium, unde.</td>
+                            <td>Jan 6</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Marks, Jonathan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut esse, ea aperiam officia doloribus quidem quia architecto, fugiat beatae, vero eum assumenda eius, saepe minima suscipit repellat veritatis voluptas ipsam.</td>
+                            <td>Jan 6</td>
+                        </tr>
+
+                        <tr class="unread">
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star fa-lg"></span>
+                            </td>
+                            <td>Mastey, Joe</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore aspernatur officia atque eos mollitia ipsam voluptatem quos, accusamus est consequatur, excepturi voluptas cupiditate, debitis molestias, doloribus. A similique cupiditate, eum?</td>
+                            <td>Jan 6</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Kotowski, Dan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In enim natus porro, quis vero cum! Fugit perferendis possimus qui alias, nulla vel? Tempora veniam cumque vel, similique beatae minus earum.</td>
+                            <td>Jan 6</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star fa-lg"></span>
+                            </td>
+                            <td>Marks, Jonathan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium doloremque, dignissimos ipsam. Repellat dicta explicabo blanditiis, natus, dolore qui itaque eligendi quas magnam incidunt sed debitis similique velit quibusdam delectus.</td>
+                            <td>Jan 6</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Mastey, Joe</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati ipsam illum, velit quia vel saepe? Excepturi officiis, earum quos nam a quam rem cumque, vero inventore, ipsa, qui beatae necessitaxtibus.</td>
+                            <td>Jan 6</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="fa fa-square-o fa-lg"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-star-o fa-lg"></span>
+                            </td>
+                            <td>Kotowski, Dan</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt repellat ullam, quidem error aliquam aperiam voluptate, tempora! Officia laudantium beatae excepturi similique impedit sint, eaque cumque earum, tempore itaque veritatis!</td>
+                            <td>Jan 6</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <footer class="clearfix main-footer">
+
+                    <div class="col-1-4 capacity">
+                        <p>0% full</p>
+                        <p>Using 0.17 GB of your 30 GB</p>
+                    </div>
+
+                    <nav class="col-1-2 secondary-links">
+
+                        <nav>
+                            <ul>
+                                <li>&copy;2014 Google</li>
+                                <li><a href="">Terms of Service</a></li>
+                                <li><a href="">Privacy</a></li>
+                                <li><a href="">Program Policies</a></li>
+                            </ul>
+                        </nav>
+                        <p>Powered by <img src="img/google_logo.png"></p>
+                        <p>Google</p>
+                    </nav>
+
+                    <div class="col-1-4 account-activity">
+                        <p>Last account activity: 18 minutes ago</p>
+                        <p><a href="">Details</a></p>
+                    </div>
+
+                </footer>
+            </div>
+
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="js/build/production.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+/*------------------------------------*\
+    #COMPONENTS - EMAIL CONTROLS
+\*------------------------------------*/
+
+.email-controls {
+  padding: .5rem 0;
+  border-bottom: 1px $dark-gray solid;
+
+  div {
+
+    &:first-of-type {
+      float: left;
+    }
+    &:last-of-type {
+      float: right;
+    }
+
+    p {
+      position: absolute;
+      z-index: 10;
+      background: $yellow;
+      left: 35%;
+      padding: .25rem;
+      top: -2rem;
+      @include font-size(0.8);
+      @include font(body-bold);
+    }
+  }
+}

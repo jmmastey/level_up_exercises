@@ -1,0 +1,48 @@
+/*------------------------------------*\
+    #LAYOUT - FOOTER
+\*------------------------------------*/
+
+.main-footer {
+  padding: 0.7rem 0;
+
+  .capacity {
+    @include font-size(0.7);
+
+    p {
+      margin: 0;
+      line-height: 1;
+
+      &:first-of-type {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .secondary-links {
+    @include font-size(0.7);
+
+    p {
+      text-align: center;
+      margin-top: .3rem;
+
+      &:last-of-type {
+        display: none;
+      }
+
+      span {
+        background: url('../../img/google_logo.png') no-repeat center center;
+      }
+    }
+  }
+
+  .account-activity {
+    @include font-size(0.7);
+    padding-right: 0;
+
+    p {
+      margin: 0;
+      line-height: 1;
+      text-align: right;
+    }
+  }
+}

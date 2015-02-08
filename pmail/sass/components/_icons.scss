@@ -1,0 +1,132 @@
+.icon {
+  @include icon-size(14px, 14px)
+}
+
+.app-control {
+
+  .icon {
+    @include icon-size(8px, 8px);
+
+    use {
+      fill: $orange-red;
+    }
+  }
+}
+
+.search-query-box {
+
+  svg {
+    @include icon-size(8px, 8px);
+
+    use {
+      fill: $button-gray;
+    }
+  }
+}
+
+.search-submit-box {
+
+  use {
+    fill: white;
+  }
+}
+
+.email-controls {
+
+  use {
+    fill: $button-gray;
+  }
+}
+
+.selection-button {
+
+  svg:first-of-type {
+    @include icon-size(14px, 14px);
+  }
+
+  svg:last-of-type {
+    @include icon-size(8px, 8px);
+  }
+}
+
+.refresh-button {
+
+  svg {
+    @include icon-size(14px, 14px);
+
+    use {
+      fill: $button-dark-gray;
+    }
+  }
+}
+
+.more-button {
+
+  svg {
+    @include icon-size(8px, 8px);
+  }
+}
+
+.left-arrow-button, .right-arrow-button {
+
+  svg {
+    @include icon-size(12px, 12px);
+  }
+}
+
+.input-1-button {
+
+  svg {
+    @include icon-size(12px, 12px);
+
+    use {
+      fill: $button-dark-gray;
+    }
+  }
+}
+
+.input-2-button {
+
+  svg {
+    @include icon-size(8px, 8px);
+  }
+}
+
+.settings-button {
+
+  svg:first-of-type {
+    @include icon-size(16px, 16px);
+
+    use {
+      fill: $button-dark-gray;
+    }
+  }
+
+  svg:last-of-type {
+    @include icon-size(8px, 8px);
+  }
+}
+
+.login {
+
+  button {
+
+    svg {
+      @include icon-size(16px, 16px);
+    }
+  }
+
+  p {
+    svg {
+      @include icon-size(8px, 8px);
+    }
+  }
+}
+
+.fa-star {
+  color: $star-yellow;
+}
+
+.fa-star-o, .fa-square-o {
+  color: $button-gray;
+}

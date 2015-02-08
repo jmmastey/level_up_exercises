@@ -1,0 +1,44 @@
+/*------------------------------------*\
+    #LAYOUT - HEADER
+\*------------------------------------*/
+
+.main-header {
+  height: 4rem;
+  background: $light-gray;
+
+  .header-logo {
+    width: 13rem;
+    float: left;
+
+    h1 {
+      @include image-replacement-text;
+      margin: 0;
+      background: url('../../img/enova_logo.png') no-repeat center center;
+      height: 59px;
+    }
+  }
+
+  .search-bar {
+    min-width: 30rem;
+    position: absolute;
+    left: 13rem;
+    right: 13rem;
+  }
+
+  .login {
+    float: right;
+    width: 15rem;
+    padding-left: 2.3rem;
+
+    button, p {
+      display: inline-block;
+    }
+
+    p {
+      @include font(body);
+      @include font-size(0.8);
+      margin: 1.5rem 0;
+      text-align: right;
+    }
+  }
+}

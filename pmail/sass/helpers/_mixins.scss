@@ -1,0 +1,25 @@
+/*------------------------------------*\
+    #HELPERS - MIXINS
+\*------------------------------------*/
+
+// Header Mixins
+
+@mixin image-replacement-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// Table Mixins
+
+@mixin truncate-table-cell {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// Icon Mixins
+
+@mixin icon-size($width, $height) {
+  width: $width;
+  height: $height;
+}

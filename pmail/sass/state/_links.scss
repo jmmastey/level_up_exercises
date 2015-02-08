@@ -1,0 +1,25 @@
+.sidebar-container {
+
+  .current {
+    @include font(body-bold);
+    color: #d14836;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: .25rem;
+      height: 1.75rem;
+      background: $orange-red;
+    }
+  }
+
+  a:focus {
+    outline: 0;
+  }
+
+  li:active, li:hover {
+    outline: 0;
+    background: $light-gray;
+  }
+}

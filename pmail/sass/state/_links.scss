@@ -14,6 +14,10 @@
     }
   }
 
+  a:focus {
+    outline: 0;
+  }
+
   li:active, li:hover {
     outline: 0;
     background: $light-gray;

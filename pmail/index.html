@@ -65,6 +65,11 @@
                           <use xlink:href="img/sprite.svg#caret-bottom" class="icon-caret-bottom"></use>
                         </svg>
                     </button>
+                    <ul id="mailbox-dropdown-menu">
+                        <a href="#" class="current-app"><li>Gmail</li></a>
+                        <a href="#"><li>Contacts</li></a>
+                        <a href="#"><li>Tasks</li></a>
+                    </ul>
                 </div>
 
                 <div class="mailboxes">
@@ -77,6 +82,11 @@
                         <a href="#"><li>Drafts</li></a>
                         <a href="#"><li>Database</li></a>
                         <a href="#"><li>More</li></a>
+
+                        <a href="#"><li>Important</li></a>
+                        <a href="#"><li>All Mail</li></a>
+                        <a href="#"><li>Spam</li></a>
+                        <a href="#"><li>Trash</li></a>
                     </ul>
                 </div>
 
@@ -86,7 +96,7 @@
             <div class="email-container col-flex">
 
                 <div class="email-controls clearfix">
-                    <div>
+                    <div id="email-controls-1">
                         <button class="selection-button control-button">
                             <svg class="icon">
                               <use xlink:href="img/sprite.svg#browser" class="icon-browser"></use>
@@ -97,6 +107,12 @@
                         </button>
 
                         <button class="refresh-button control-button">
+                            <svg class="icon">
+                              <use xlink:href="img/sprite.svg#reload" class="icon-reload"></use>
+                            </svg>
+                        </button>
+
+                        <button class="delete-button control-button">
                             <svg class="icon">
                               <use xlink:href="img/sprite.svg#reload" class="icon-reload"></use>
                             </svg>

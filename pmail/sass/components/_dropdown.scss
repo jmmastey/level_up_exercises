@@ -1,3 +1,22 @@
 /*------------------------------------*\
     #COMPONENTS - DROPDOWN
 \*------------------------------------*/
+
+#mailbox-dropdown-menu {
+  @extend .mailboxes;
+  position: absolute;
+  background: white;
+  width: 7rem;
+  left: 2rem;
+  top: 6rem;
+  box-shadow: 1px 1px 3px 4px $dark-gray;
+  
+  .current-app {
+    color: $orange-red;
+    @include font(body-bold);
+  }
+
+  li {
+    padding-left: 1rem;
+  }
+}

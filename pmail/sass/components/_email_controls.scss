@@ -14,5 +14,16 @@
     &:last-of-type {
       float: right;
     }
+
+    p {
+      position: absolute;
+      z-index: 10;
+      background: $yellow;
+      left: 35%;
+      padding: .25rem;
+      top: -2rem;
+      @include font-size(0.8);
+      @include font(body-bold);
+    }
   }
 }

@@ -13,7 +13,7 @@
     }
   }
 
-  .mailboxes {
+  .mailboxes, .app-control {
     padding: .5rem 0;
     @include font-size(0.85);
     @include font(body);

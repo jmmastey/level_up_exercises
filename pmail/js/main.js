@@ -10,6 +10,7 @@ $(function() {
   });
 
   // Add delete button when email is checked
+  
   var $deleteButton = $('.delete-button'); // Initially hide the delete button
   $deleteButton.hide();
 
@@ -33,20 +34,6 @@ $(function() {
     }
   }
 
-  // Star and unstar emails
-  $('.emails').on('click', 'tr td:nth-child(2) span', function() {
-    var $star = $(this);
-    $star.toggleClass('fa-star-o fa-star');
-  });
-
-  // Animate in additional inbox items
-
-  $('.mailboxes a:gt(5)').hide();
-
-  $('.mailboxes li:contains(More)').on('click', function() {
-    $(this).closest('ul').find('a:gt(5)').toggle();
-  });
-
   // Delete Checkmarked Emails
 
   $('.delete-button').on('click', function() {
@@ -57,14 +44,30 @@ $(function() {
     displayFlash("The conversation has been deleted.");
   });
 
-  // Display Flash message
+  // Display Flash message upon deleting emails
 
   function displayFlash(message) {
     var $flashMessage = $('<p>' + message + '</p>');
     $('#email-controls-1').append($flashMessage);
   }
 
-  // Display Gmail menu
+
+  // Star and unstar emails
+
+  $('.emails').on('click', 'tr td:nth-child(2) span', function() {
+    var $star = $(this);
+    $star.toggleClass('fa-star-o fa-star');
+  });
+
+  // Animate in additional inbox items by clicking 'More'
+
+  $('.mailboxes a:gt(5)').hide();
+
+  $('.mailboxes li:contains(More)').on('click', function() {
+    $(this).closest('ul').find('a:gt(5)').toggle();
+  });
+
+  // Display Gmail menu items (Inbox; Contacts; Tasks)
 
   var $mailboxDropdownMenu = $('#mailbox-dropdown-menu');
   $mailboxDropdownMenu.hide();
@@ -73,7 +76,7 @@ $(function() {
     $mailboxDropdownMenu.toggle();
   });
 
-  $(document).on('click', function() {
+  $(document).on('click', function() { // close menu if click is outside menu
     if (!$(event.target).closest('.app-control').length) {
       $mailboxDropdownMenu.hide();
     }

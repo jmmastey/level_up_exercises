@@ -1,0 +1,46 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    abanalyzer (0.1.0)
+      statistics2 (>= 0.54)
+    ast (2.0.0)
+    astrolabe (1.3.0)
+      parser (>= 2.2.0.pre.3, < 3.0)
+    diff-lcs (1.2.5)
+    hash_validator (0.3.0)
+    json (1.8.2)
+    parser (2.2.0.2)
+      ast (>= 1.1, < 3.0)
+    powerpack (0.1.0)
+    rainbow (2.0.0)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+    rspec-core (3.2.0)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.1)
+    rubocop (0.29.0)
+      astrolabe (~> 1.3)
+      parser (>= 2.2.0.1, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.4)
+    ruby-progressbar (1.7.1)
+    statistics2 (0.54)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  abanalyzer
+  hash_validator
+  json
+  rspec
+  rubocop

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206173451) do
+ActiveRecord::Schema.define(version: 20150209151034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,16 +33,18 @@ ActiveRecord::Schema.define(version: 20150206173451) do
   end
 
   create_table "forecasts", force: :cascade do |t|
-    t.integer  "point_id",                     null: false
-    t.datetime "start_time",                   null: false
-    t.datetime "end_time",                     null: false
+    t.integer  "point_id",                            null: false
+    t.datetime "start_time",                          null: false
+    t.datetime "end_time",                            null: false
     t.integer  "maxt"
     t.integer  "mint"
     t.integer  "cloud_cover"
-    t.string   "icon_link",        limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "icon_link",               limit: 255
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "forecast_type_id"
+    t.datetime "last_refresh_begin_time"
+    t.datetime "last_refresh_end_time"
     t.index ["forecast_type_id"], :name => "fk__forecasts_forecast_type_id"
     t.index ["point_id", "start_time", "end_time"], :name => "index_forecasts_on_point_id_and_start_time_and_end_time", :unique => true
     t.index ["point_id"], :name => "fk__forecasts_point_id"

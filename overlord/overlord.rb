@@ -1,11 +1,21 @@
-# run `ruby overlord.rb` to run a webserver for this app
-
 require 'sinatra'
 
 enable :sessions
 
 get '/' do
-  "Time to build an app around here. Start time: " + start_time
+  haml :index
+end
+
+post '/boot' do
+  haml :booted
+end
+
+post '/activate' do
+  haml :activated
+end
+
+post '/exploded' do
+  haml :exploded
 end
 
 # we can shove stuff into the session cookie YAY!

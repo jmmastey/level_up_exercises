@@ -1,14 +1,15 @@
 require 'json'
-require_relative 'test_result'
-class TestDataList < Array
-  def parse(filepath)
-    results_hash = {}
-    File.open(filepath, "r") do |f|
-      results_hash = JSON.load(f)
-    end
+class TestDataList
+  TestResult = Struct.new(:cohort, :date, :result)
+  attr_accessor :data
 
-    results_hash.map do |result|
-      push(TestResult.new(result['cohort'], result['date'], result['result']))
+  def initialize(filepath)
+    @data = []
+    raise "File Not Found!" unless File.exist?(filepath)
+
+    json_data = JSON.parse(File.read(filepath))
+    json_data.each do |result|
+      data.push(TestResult.new(result['cohort'], result['date'], result['result']))
     end
   end
 end

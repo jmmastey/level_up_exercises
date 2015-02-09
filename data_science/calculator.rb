@@ -1,66 +1,65 @@
 require_relative 'test_data_list'
-require 'abanalyzer'
+require_relative 'cohort'
 class Calculator
-  attr_accessor :test_data_list
+  attr_accessor :test_data_list, :cohorts
 
-  def initialize
-    @test_data_list = TestDataList.new
+  def initialize(filepath)
+    @test_data_list = TestDataList.new(filepath).data
+    setup_cohorts(test_data_list)
   end
 
-  def setup_data(filepath)
-    test_data_list.parse(filepath)
+  def calculate_stats
+    sample_sizes = sample_size_data()
+    conversions = conversions_data()
+    conversion_rates = conversion_rates_data()
+
+    puts ["Cohort A has a sample size of #{sample_sizes[:A]}",
+          "Cohort A has #{conversions[:A]} conversions",
+          "Cohort A has a conversion rate between: #{conversion_rates[:A][0]} and #{conversion_rates[:A][1]}",
+          "",
+          "Cohort B has a sample size of #{sample_sizes[:B]}",
+          "Cohort B has #{conversions[:B]} conversions",
+          "Cohort B has a conversion rate between: #{conversion_rates[:B][0]} and #{conversion_rates[:B][1]}",
+          ""].join("\n")
+
+    if confident?
+      puts "The two sets are statistically different enough to matter"
+    else
+      puts "The two sets are not statistically different enough to matter"
+    end
   end
 
-  def conversions
-    keys = get_cohorts(test_data_list)
-    Hash[keys.map { |key| [key.to_sym, cohort_conversions(key)] }]
+  def conversions_data
+    Hash[cohorts.map { |cohort| [cohort.name, cohort.conversion_count] }]
   end
 
-  def conversion_rates
-    keys = get_cohorts(test_data_list)
-    Hash[keys.map { |key| [key.to_sym, cohort_rates(key)] }]
+  def conversion_rates_data
+    Hash[cohorts.map { |cohort| [cohort.name, cohort.conversion_rate] }]
   end
 
-  def sample_size
-    keys = get_cohorts(test_data_list)
-    Hash[keys.map { |key| [key.to_sym, cohort_sample_size(key)] }]
-  end
-
-  def cohort_conversions(cohort)
-    converted_results = test_data_list.select { |data| data.result == 1 }
-    converted_results.select { |result| result.cohort == cohort }.count
-  end
-
-  def cohort_rates(cohort)
-    sample_size = cohort_sample_size(cohort)
-    conversions = cohort_conversions(cohort)
-    rates = ABAnalyzer.confidence_interval(conversions, sample_size, 0.95)
-
-    rates.map { |x| (x * 100).round(2).to_s + '%' }
-  end
-
-  def cohort_sample_size(cohort)
-    test_data_list.select { |result| result.cohort == cohort }.count
-  end
-
-  def get_cohorts(results_set)
-    results_set.map(&:cohort).uniq { |x| x }
+  def sample_size_data
+    Hash[cohorts.map { |cohort| [cohort.name, cohort.sample_size] }]
   end
 
   def confident?
-    keys = get_cohorts(test_data_list)
-
     values = {}
-    values[:agroup] = setup_confidence_hash(keys.first)
-    values[:bgroup] = setup_confidence_hash(keys.last)
+    values[:agroup] = setup_confidence_hash(cohorts.first)
+    values[:bgroup] = setup_confidence_hash(cohorts.last)
 
     ABAnalyzer::ABTest.new(values).different?
   end
 
+  private
+  def setup_cohorts(test_data_list)
+    cohort_names = test_data_list.map(&:cohort).uniq
+    raise 'Only 2 Cohorts allowed!' if cohort_names.count != 2
+    self.cohorts = cohort_names.map { |name| Cohort.new(name, test_data_list) }
+  end
+
   def setup_confidence_hash(cohort)
     {
-      visitors: cohort_sample_size(cohort),
-      converted: cohort_conversions(cohort),
+      visitors: cohort.sample_size,
+      converted: cohort.conversion_count,
     }
   end
 end

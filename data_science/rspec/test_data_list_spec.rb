@@ -1,24 +1,32 @@
 require_relative '../test_data_list'
 
 describe TestDataList do
-  test_data_list = TestDataList.new
-  json_file_path = "test_data.json"
+  context "happy" do
+    let(:filepath) { 'test_data.json' }
+    subject(:test_data_list) { TestDataList.new(filepath).data }
 
-  test_data_list.parse(json_file_path)
+    it "should parse a json file of test result data" do
+      expect(test_data_list).not_to be_empty
+    end
 
-  it "should parse a json file of test result data" do
-    expect(test_data_list.count).to be > 0
+    it "should not have any results without a cohort" do
+      expect(test_data_list.select { |result| result.cohort.nil? }).to be_empty
+    end
+
+    it "should not have any results without a date" do
+      expect(test_data_list.select { |result| result.date.nil? }).to be_empty
+    end
+
+    it "should not have any results without a result" do
+      expect(test_data_list.select { |result| result.result.nil? }).to be_empty
+    end
   end
 
-  it "should not have any results without a cohort" do
-    expect(test_data_list.select { |result| result.cohort.nil? }.count).to eq(0)
-  end
+  context "sad" do
+    let(:filepath) { 'fake.file' }
 
-  it "should not have any results without a date" do
-    expect(test_data_list.select { |result| result.date.nil? }.count).to eq(0)
-  end
-
-  it "should not have any results without a cohort" do
-    expect(test_data_list.select { |result| result.result.nil? }.count).to eq(0)
+    it "should raise an error is the file does not exist" do
+      expect { Calculator.new(filepath) }.to raise_error
+    end
   end
 end

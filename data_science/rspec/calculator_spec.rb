@@ -5,11 +5,11 @@ describe Calculator do
     subject(:calculator) { Calculator.new(filepath) }
 
     it "should have a test data list" do
-      expect(calculator.test_data_list).not_to be_empty
+      expect(calculator.test_data).not_to be_empty
     end
 
     it "should calculate sample size" do
-      sample_size = calculator.sample_size_data
+      sample_size = calculator.sample_size
       expect(sample_size).to include(:A, :B)
       expect(sample_size).to include(A: 558)
       expect(sample_size).to include(B: 641)
@@ -17,7 +17,7 @@ describe Calculator do
     end
 
     it "should calculate the number of conversions" do
-      conversions = calculator.conversions_data
+      conversions = calculator.conversions
       expect(conversions).to include(:A, :B)
       expect(conversions).to include(A: 22)
       expect(conversions).to include(B: 41)
@@ -25,7 +25,7 @@ describe Calculator do
     end
 
     it "should calculate the conversion rates" do
-      conversion_rates = calculator.conversion_rates_data
+      conversion_rates = calculator.conversion_rates
       expect(conversion_rates).to include(:A, :B)
       expect(conversion_rates).to include(A: ["2.33%", "5.56%"])
       expect(conversion_rates).to include(B: ["4.5%", "8.29%"])

@@ -2,10 +2,10 @@ require 'abanalyzer'
 class Cohort
   attr_accessor :name, :conversion_count, :sample_size, :conversion_rate
 
-  def initialize(name, data_list)
-    raise "Corrupted Data!?" unless name && data_list
+  def initialize(name, data)
+    raise "Corrupted Data!?" unless name && data
     @name = name.to_sym
-    cohort_data = data_list.select { |data| data.cohort == name }
+    cohort_data = data.select { |data| data.cohort == name }
     @sample_size = cohort_data.count
     @conversion_count = count_conversions(cohort_data)
     @conversion_rate = conversion_rates
@@ -13,8 +13,8 @@ class Cohort
 
   private
 
-  def count_conversions(data_list)
-    data_list.select { |data| data.result == 1 }.count
+  def count_conversions(data)
+    data.select { |data| data.result == 1 }.count
   end
 
   def conversion_rates

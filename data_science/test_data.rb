@@ -1,5 +1,5 @@
 require 'json'
-class TestDataList
+class TestData
   TestResult = Struct.new(:cohort, :date, :result)
   attr_accessor :data
 

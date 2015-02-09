@@ -38,3 +38,4 @@ module PointLoader
     Point
   end
 end
+

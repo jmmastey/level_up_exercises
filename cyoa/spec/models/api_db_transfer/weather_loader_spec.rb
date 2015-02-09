@@ -25,13 +25,13 @@ describe WeatherLoader do
       binding.pry
     end
 
-    describe "for a given 24 hour period" do
-      it "has the right maxt in the database" do
+    # describe "for a given 24 hour period" do
+    #   it "has the right maxt in the database" do
         
-        test = Forecast.daily.first
+    #     test = Forecast.daily.first
 
-      end
-    end
+    #   end
+    # end
 
   end
 

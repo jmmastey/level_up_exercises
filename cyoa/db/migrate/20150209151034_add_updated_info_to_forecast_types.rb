@@ -1,16 +1,16 @@
 class AddUpdatedInfoToForecastTypes < ActiveRecord::Migration
   def up
     update <<-SQL
-      ALTER TABLE forecasts
-        ADD COLUMN last_refresh_begin_time timestamptz,
+      ALTER TABLE forecast_types
+        ADD COLUMN last_refresh_start_time timestamptz,
         ADD COLUMN last_refresh_end_time timestamptz;
     SQL
   end
 
   def down
     update <<-SQL
-      ALTER TABLE forecasts
-        DROP COLUMN last_refresh_begin_time,
+      ALTER TABLE forecast_types
+        DROP COLUMN last_refresh_start_time,
         DROP COLUMN last_refresh_end_time;
     SQL
   end

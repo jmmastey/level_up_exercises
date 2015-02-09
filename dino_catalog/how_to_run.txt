@@ -1,0 +1,20 @@
+# to print all dinos without any filter
+ruby dinodex.rb
+
+# to print bipeds
+ruby dinodex.rb walking:biped
+
+# to print carnivores
+ruby dinodex.rb diet:carnivore
+
+# to print dinosaurs of specific period
+ruby dinodex.rb period:Cretaceous
+
+# to print big dinosaurs
+ruby dinodex.rb weight:big
+
+# to print big carnivores
+ruby dinodex.rb	weight:big diet:carnivore
+
+# to print all facts for given dino
+ruby dinodex.rb name:Giganotosaurus

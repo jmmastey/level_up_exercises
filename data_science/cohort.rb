@@ -7,17 +7,18 @@ class Cohort
     @name = name.to_sym
     cohort_data = data_list.select { |data| data.cohort == name }
     @sample_size = cohort_data.count
-    @conversion_count = set_conversion_count(cohort_data)
+    @conversion_count = count_conversions(cohort_data)
     @conversion_rate = conversion_rates
   end
 
   private
-  def set_conversion_count(data_list)
+
+  def count_conversions(data_list)
     data_list.select { |data| data.result == 1 }.count
   end
 
   def conversion_rates
-    rates = ABAnalyzer.confidence_interval(self.conversion_count, self.sample_size, 0.95)
+    rates = ABAnalyzer.confidence_interval(conversion_count, sample_size, 0.95)
     rates.map { |x| (x * 100).round(2).to_s + '%' }
   end
 end

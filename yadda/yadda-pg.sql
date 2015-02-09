@@ -98,7 +98,7 @@ CREATE VIEW top_beers_for_brewery AS
 -- Example Usage: SELECT * from recent_score WHERE beer_name = 'Goose Island-Beer A';
 
 CREATE VIEW recent_score AS
-  SELECT beers.name AS "beer_name", AVG((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4)
+  SELECT beers.id, beers.name AS "beer_name", AVG((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4)
     AS "Rating"
   FROM beers
   INNER JOIN ratings ON beers.id = ratings.beer_id
@@ -109,12 +109,33 @@ CREATE VIEW recent_score AS
 -- Example Usage: SELECT * FROM you_may_enjoy WHERE beer_style = 'Pale Ale' LIMIT 3;
 
 CREATE VIEW you_may_enjoy AS
-  SELECT beer_styles_lookup.name AS "beer_style", beers.name AS "Beer Name",
+  SELECT beer_styles_lookup.id, beer_styles_lookup.name AS "beer_style", beers.name AS "Beer Name",
     AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4))
     AS "Overall Rating"
   FROM beers
   INNER JOIN beer_styles_lookup on beers.style_id = beer_styles_lookup.id
   INNER JOIN ratings on beers.id = ratings.beer_id
-  GROUP BY beer_styles_lookup.name, beers.name
+  GROUP BY beer_styles_lookup.id, beer_styles_lookup.name, beers.name
   HAVING AVG(((ratings.look + ratings.smell + ratings.taste + ratings.feel) / 4)) > 2.5
   ORDER BY RANDOM();
+
+
+-- Create Views for Part 4 of Yadda
+
+-- Index for beers.name
+CREATE INDEX beers_name_index ON beers (name);
+
+-- Index for overall ratings expression
+CREATE INDEX beers_brewery_id_index ON beers (brewery_id);
+
+-- Index for beer_styles_lookup.name
+CREATE INDEX beer_styles_lookup_name_index ON beer_styles_lookup (name);
+
+-- Index for ratings.created_at
+CREATE INDEX ratings_created_at_index ON ratings (created_at);
+
+-- Index for ratings.beer_id
+CREATE INDEX ratings_beer_id_index ON ratings (beer_id);
+
+-- Index for overall ratings expression
+CREATE INDEX overall_ratings_index ON ratings (((look + smell + taste + feel) / 4));

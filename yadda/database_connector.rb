@@ -7,10 +7,10 @@ db_connection = PG.connect(dbname: 'yadda')
 
 # Helper Methods
 
-user_id_array = Array((1..200000))
-beer_id_array = Array((1..50))
-rating_array = Array((1..5))
-style_id_array = Array((1..7))
+user_id_array = (1..200000).to_a
+beer_id_array = (1..50).to_a
+rating_array = (1..5).to_a
+style_id_array = (1..7).to_a
 
 def beer_id(id_array)
   id_array.sample

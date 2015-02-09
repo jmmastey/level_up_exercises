@@ -20,7 +20,6 @@ module ForecastTypeRefresher
       value.min_by { |h| h[:start_time] }
     end.each do |forecast_refresh|
       forecast_type = ForecastType.find(forecast_refresh[:forecast_type_id])
-      binding.pry
       forecast_type.update(last_refresh_start_time: forecast_refresh[:start_time])
       forecast_type.save!
     end

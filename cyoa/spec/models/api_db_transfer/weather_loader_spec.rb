@@ -22,12 +22,10 @@ describe WeatherLoader do
     it "has 84 time periods, 42 for each point" do
       count = Forecast.count
       expect(count).to eq(84)
-      binding.pry
     end
 
     # describe "for a given 24 hour period" do
     #   it "has the right maxt in the database" do
-        
     #     test = Forecast.daily.first
 
     #   end

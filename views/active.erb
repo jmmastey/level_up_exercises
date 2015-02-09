@@ -1,30 +1,24 @@
 <%= erb :_header, :layout => false %>
-<% if flash[:notice] %>
-    <span><p class="notice"><%= flash[:notice] %></span></p>
-<% end %>
-
 <body id="active">
-  <img id="malkovich_bunny" src="malkovich_bunny.jpg">
-  <span id="countdown"></span>
+  <%= erb :_flash, :layout => false %>
+  <img id="malkovich_bunny" src="http://s3.amazonaws.com/nicolascage/malkovich_bunny.jpg">
+  <span id="countdown"><%= @time_left %></span>
   <div class="code_inputs">
     <form action="/deactivate" method="POST">
-      <span><%= session[:remaining_tries] %> attempts left
+      <span><%= session[:remaining_tries] %> attempts left</span>
+      <br/>
+      <span>
+        <label for="deactivation_code">Deactivation Code</label>
+        <input id="deactivation_code" class="right" type="number" name="deactivation_code">
       </span>
       <br/>
-      <span>deactivation code
-      <input class="right" type="text" name="deactivation_code">
-      </span>
-      <br/>
-      <input id="activated_submit" class="submit" type="submit">
+      <input id="activated_submit" class="submit" type="submit" value="Submit">
     </form>
   </div>
 </body>
 
 <script type="text/javascript">
-  window.onload = function(){
-    countdown("<%= session[:explosion_time].to_f * 1000 %>");
-  };
+  window.onload = function(){ countdown(<%= @seconds_left %>); };
 </script>
 
-<script type="text/javascript" src="countdown.js">
-</script>
+<script type="text/javascript" src="countdown.js"></script>

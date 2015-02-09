@@ -1,9 +1,11 @@
 <%= erb :_header, :layout => false %>
 <%= erb :_tubular, :layout => false %>
 
-<div id="wrapper" class="black-50">
-  <a class="startanother" href="/reset">Start another bomb</a>
-</div>
+<body id="exploded">
+  <div id="wrapper" class="black-50">
+    <a class="startanother" href="/reset">Start another bomb</a>
+  </div>
+</body>
 
 <script type="text/javascript">
   $().ready(function() {

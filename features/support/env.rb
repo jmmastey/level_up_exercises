@@ -7,11 +7,16 @@ require File.join(File.dirname(__FILE__), '..', '..', 'overlord.rb')
 require 'capybara'
 require 'capybara/cucumber'
 require 'capybara/session'
+require 'capybara-screenshot/cucumber'
 require 'capybara/poltergeist'
 require 'rspec'
+require 'pry'
+require 'simplecov'
+SimpleCov.start
 
-Capybara.app = Overlord
+Capybara.app = Overlord::App
 Capybara.javascript_driver = :poltergeist
+Capybara.save_and_open_page_path = 'tmp/capybara'
 
 class OverlordWorld
   include Capybara::DSL

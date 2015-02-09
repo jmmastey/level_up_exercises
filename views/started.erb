@@ -1,19 +1,22 @@
 <%= erb :_header, :layout => false %>
 <body id="started">
+  <%= erb :_flash, :layout => false %>
   <div>
     <img id="bomb" src="bomb.jpg">
-    <span class="title">activate bomb</span>
+    <span class="title">Activate Bomb</span>
     <div class="code_inputs">
       <form action="/activate" method="POST">
-        <span>activation code
-        <input class="right" type="text" name="activation_code">
+        <span>
+          <label for="activation_code">Activation Code</label>
+          <input id="activation_code" class="right" type="number" name="activation_code">
         </span>
         <br/>
-        <span>countdown seconds
-        <input class="right" type="text" name="countdown">
+        <span>
+          <label for="countdown">Countdown Seconds</label>
+          <input id="countdown" class="right" type="number" name="countdown">
         </span>
         <br/>
-        <input class="submit" type="submit">
+        <input class="submit" type="submit" value="Submit">
       </form>
     </div>
   </div>

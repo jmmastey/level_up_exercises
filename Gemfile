@@ -10,6 +10,10 @@ gem 'thin'
 group :development, :test do
   gem 'rspec', '~> 3.2'
   gem 'cucumber-sinatra'
+  gem 'cucumber'
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'poltergeist'
+  gem 'pry'
+  gem 'simplecov'
 end

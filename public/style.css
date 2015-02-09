@@ -14,7 +14,7 @@ a:hover {
   color: #bdc3c7;
 }
 .black-50 { 
-  background: url('black-50-trans.png');
+  background: url('http://s3.amazonaws.com/nicolascage/black-50-trans.png');
   color: #fff;
 }
 .title {
@@ -28,7 +28,7 @@ span {
   text-align: center;
   color: #27ae60;
 }
-#countdown {
+span#countdown {
   font-family: 'Orbitron', sans-serif;
   font-size: 600%;
   color: #e74c3c;
@@ -38,7 +38,7 @@ input {
   border-radius: 5px;
 }
 #deactivated {
-  background-image: url("niccageclapshort.gif")
+  background-image: url('http://s3.amazonaws.com/nicolascage/niccageclapshort.gif')
 }
 img {
   width: 60%;
@@ -70,6 +70,9 @@ img {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+.submit:hover {
+  cursor: pointer;
+}
 #activated_submit {
   background: #27ae60;
 }
@@ -90,4 +93,9 @@ img {
   text-decoration: none;
   display: block;
   text-align: center;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }

@@ -11,9 +11,9 @@ describe Code do
 
   let(:number)  { '1234' }
   let(:letters) { 'abcd' }
-  let(:code)    { }
-  let(:type)    { }
-  
+  let(:code)    {}
+  let(:type)    {}
+
   describe '#valid' do
     let(:subject) { described_class.new(code, type) }
 

@@ -28,12 +28,12 @@ class Code
 
   def default
     case type
-    when :activation_code
-      '1234'
-    when :deactivation_code
-      '0000'
-    when :countdown
-      '30'
+      when :activation_code
+        '1234'
+      when :deactivation_code
+        '0000'
+      when :countdown
+        '30'
     end
   end
 

@@ -33,7 +33,7 @@ Current EXPLAIN ANALYZE results:
 Planning time: 0.189 ms
 Execution time: 22.817 ms
 
-**Analysis of Query 2 after changes:**
+**Analysis of Query 3 after changes:**
 
 Previous EXPLAIN ANALYZE results:
 

@@ -127,6 +127,7 @@ if ARGV.length == 0
   puts ''
   puts '#multiple conditions AND search'
   puts '  walking.biped and diet.Carnivore'
+  puts "  diet.carnivore and walking.biped and period.Cretaceous and continent.'north America'"
   puts ''
   puts '#Dinosaurs facts search'
   puts '  facts.Albertosaurus'

@@ -38,4 +38,4 @@ create or replace view also_enjoy AS
                AVG(rating.overall) as computed 
              from rating 
              group by beer_id) ratings on ratings.beer_id = beer.beer_id
-  order by computed desc;
+  order by RANDOM();

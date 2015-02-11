@@ -20,11 +20,11 @@ Then(/^the bomb is booted, but deactivated$/) do
 end
 
 When(/^I enter "(.*?)" for the activation code$/) do |code|
-  fill_in('activation_code', with: code )
+  fill_in('activation_code', with: code)
 end
 
 When(/^I enter "(.*?)" for the deactivation code$/) do |code|
-  fill_in('deactivation_code', with: code )
+  fill_in('deactivation_code', with: code)
 end
 
 Then(/^the bomb is not booted$/) do

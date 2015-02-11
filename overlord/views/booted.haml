@@ -4,7 +4,8 @@
       Activation code:
       %input.activation_code{:name => "activation_code", :type => "text", :pattern => "[0-9]{4}"}
     %p
-      Deactivation code:
-      %input.deactivation_code{:name => "deactivation_code", :type => "text", :pattern => "[0-9]{4}"}
-    %p
-      %input.activation_button{:type => "submit", :value => "Boot"}
+      %input.activation_button{:type => "submit", :value => "Activate"}
+
+  - if bomb.status == :invalid
+    %p.incorrect_code_submitted
+      Incorrect activation code

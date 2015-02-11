@@ -28,8 +28,8 @@ Feature: Bomb will boot with either specified or default activation and deactiva
 
     Examples:
       |  activation  |  deactivation  |
-      |  "abc"       |  "9876"        |
-      |  "*&#@"      |  "9876"        |
+      |  "9999"      |  "9876"        |
+      |  "9999"      |  "9876"        |
 
   Scenario Outline: Invalid deactivation code
     When I enter <activation> for the activation code
@@ -39,5 +39,5 @@ Feature: Bomb will boot with either specified or default activation and deactiva
 
     Examples:
       |  activation  |  deactivation  |
-      |  "2222"      |  "abc"         |
-      |  "2222"      |  "&*@&"        |
+      |  "2222"      |  "9999"         |
+      |  "2222"      |  "9999"        |

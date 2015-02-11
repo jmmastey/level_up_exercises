@@ -1,9 +1,10 @@
-%form{:action => "/boot", :method => "post"}
-  %p
-    Activation code:
-    %input.boot_activation_code{:name => "activation_code", :type => "text", :pattern => "[0-9]{4}"}
-  %p
-    Deactivation code:
-    %input.boot_deactivation_code{:name => "deactivation_code", :type => "text", :pattern => "[0-9]{4}"}
-  %p
-    %input.boot_button{:type => "submit", :value => "Boot"}
+%p.start
+  %form{:action => "/boot", :method => "post"}
+    %p
+      Activation code:
+      %input.boot_activation_code{:name => "activation_code", :type => "text", :pattern => "[0-9]{4}"}
+    %p
+      Deactivation code:
+      %input.boot_deactivation_code{:name => "deactivation_code", :type => "text", :pattern => "[0-9]{4}"}
+    %p
+      %input.boot_button{:type => "submit", :value => "Boot"}

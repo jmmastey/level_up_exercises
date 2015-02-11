@@ -1,3 +1,5 @@
+require 'nori'
+
 class LatLonZipcodeClientResponse
   attr_reader :response, :zip_code_list
   PARAMETER_CONTAINER = :dwml

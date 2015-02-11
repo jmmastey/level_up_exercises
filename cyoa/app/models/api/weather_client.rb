@@ -17,6 +17,8 @@ class WeatherClient
   # "e" is English, "m" is Metric
   DEFAULT_UNIT = "e"
   PARAMETER_CONTAINER = :dwml
+  LAT_LON_DELIMITER = ","
+  LAT_LON_PAIR_DELIMITER = " "
 
   client wsdl: NWSClient::WSDL, convert_request_keys_to: NWSClient::REQUEST_KEYS
   operations :ndf_dgen_lat_lon_list
@@ -38,7 +40,7 @@ class WeatherClient
   end
 
   def default_end_time
-    Time.now + (1*7*24*60*60)
+    7.days.from_now
   end
 
   def ndf_dgen_lat_lon_list
@@ -65,11 +67,11 @@ class WeatherClient
   end
 
   def start_time
-    Time.parse(inputs.fetch(:start_time, default_start_time)).iso8601
+    Time.parse(inputs.fetch(:start_time, default_start_time.to_s)).iso8601
   end
 
   def end_time
-    Time.parse(inputs.fetch(:end_time, default_end_time)).iso8601
+    Time.parse(inputs.fetch(:end_time, default_end_time.to_s)).iso8601
   end
 
   def unit

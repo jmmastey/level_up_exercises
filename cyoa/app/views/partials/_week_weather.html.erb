@@ -1,1 +1,18 @@
 <div>This is week weather information</div>
+<ul id="three_hour_forecasts">
+<% @forecast_three_hour.group_by { |row| row.start_date_in_app_time_zone }.each do |date, forecasts| %>
+<li><%= date %>
+  <ul>
+  <% forecasts.each do |forecast| %>
+    <li><%= forecast.start_time_in_app_time_zone %>
+      <ul>
+        <li>Cloud Cover: <%= forecast.cloud_cover_pct %></li>
+        <li><img src="<%= forecast.icon_link %>" /></li>
+        <li></li>
+      </ul>
+    </li>
+  <% end %>
+  </ul>
+</li>
+<% end %>
+</ul>

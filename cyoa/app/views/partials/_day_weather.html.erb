@@ -1,7 +1,11 @@
 <div>This is day weather information</div>
 <ul id="day_forecasts">
-<% @day_forecasts.each do |forecast| %>
-<li><%= forecast.start_time %>
-</li>
+<% @forecast_daily.each do |forecast| %>
+<li><%= forecast.start_date_in_app_time_zone %>
+  <ul>
+    <li>Min Temperature: <%= forecast.mint %></li>
+    <li>Max Temperature: <%= forecast.maxt %></li>
+  </ul>
+</li> 
 <% end %>
 </ul>

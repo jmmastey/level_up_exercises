@@ -70,7 +70,6 @@ describe WeatherClient do
                                                   :qualifiers,
                                                   :additives)
       w = weather_data.weather[0].weather_conditions
-      binding.pry
     end
 
     it "returns temperatures with maxt and mint" do
@@ -202,6 +201,17 @@ describe WeatherClient do
                       end
       difference = weather_data.applicable_locations - location_keys
       expect(difference).to be_empty
+    end
+  end
+
+  describe "for one lat lon point with default times", vcr: { cassette_name: "one lat lon point default times",
+                                                              record: :new_episodes } do
+    let(:client) { WeatherClient.new }
+    let(:response) { client.request({ list_lat_lon: "41.837,-87.685" }) }
+    let(:weather_data) { response.weather_data }
+
+    it "returns locations with location_key, latitude, and longitude" do
+      expect(weather_data.locations[0]).to respond_to(:location_key, :latitude, :longitude)
     end
   end
 end

@@ -9,4 +9,7 @@ RSpec.describe HomeController, :type => :controller do
     end
   end
 
+  it "returns the default lat lon in the right format" do
+    expect(HomeController.default_lat_lon).to match(/[\-]?\d{1,2}\.\d+,[\-]?\d{1,3}\.\d+( [\-]?\d{1,2}\.\d+,[\-]?\d{1,3}\.\d+)*/)
+  end
 end

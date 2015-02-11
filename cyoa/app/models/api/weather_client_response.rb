@@ -13,7 +13,7 @@ class WeatherClientResponse
   end
 
   def weather_data
-    weather_data_builder.new(data)
+    WeatherData.new(data)
   end
 
   private
@@ -42,9 +42,5 @@ class WeatherClientResponse
 
   def body_parser
     @body_parser ||= Nori.new(:convert_tags_to => lambda { |tag| tag.snakecase.to_sym })
-  end
-
-  def weather_data_builder
-    WeatherData
   end
 end

@@ -10,7 +10,7 @@ class LatLonZipcodeClient
   operations :lat_lon_list_zip_code
 
   def request(zip_code_list)
-    response_builder.new(lat_lon_list_zip_code(zip_code_list), zip_code_list).zip_code_lat_lon
+    LatLonZipcodeClientResponse.new(lat_lon_list_zip_code(zip_code_list), zip_code_list).zip_code_lat_lon
   end
 
   private
@@ -26,10 +26,6 @@ class LatLonZipcodeClient
 
   def validate_zip_code_list(zip_code_list)
     raise LatLonZipcodeError, "Invalid zip code format" unless zip_code_list_is_valid?(zip_code_list)
-  end
-
-  def response_builder
-    LatLonZipcodeClientResponse
   end
 end
 

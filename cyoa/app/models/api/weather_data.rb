@@ -26,21 +26,21 @@ class WeatherData
   end
 
   def locations
-    build_parameter_list(data[:location], location_builder)
+    build_parameter_list(data[:location], LocationParameter)
   end
 
   def time_layouts
-    build_parameter_list(data[:time_layout], time_layout_builder)
+    build_parameter_list(data[:time_layout], TimeLayoutParameter)
   end
 
   private
 
   def parse_parameters
     parameters.each do |parameter_set|
-      @weather << weather_builder.new(parameter_set[:weather])
-      @temperatures << temperature_builder.new(parameter_set[:temperature])
-      @cloud_covers << cloud_cover_builder.new(parameter_set[:cloud_amount])
-      @conditions_icons << conditions_icon_builder.new(parameter_set[:conditions_icon])
+      @weather << WeatherParameter.new(parameter_set[:weather])
+      @temperatures << TemperatureParameter.new(parameter_set[:temperature])
+      @cloud_covers << CloudCoverParameter.new(parameter_set[:cloud_amount])
+      @conditions_icons << ConditionsIconParameter.new(parameter_set[:conditions_icon])
       @applicable_locations << parameter_set[:@applicable_location]
     end
   end
@@ -59,29 +59,5 @@ class WeatherData
     parameter_set.each_with_object([]) do |parameter, all|
       all << parameter_builder.new(parameter)
     end
-  end
-
-  def time_layout_builder
-    TimeLayoutParameter
-  end
-
-  def location_builder
-    LocationParameter
-  end
-
-  def weather_builder
-    WeatherParameter
-  end
-
-  def temperature_builder
-    TemperatureParameter
-  end
-
-  def cloud_cover_builder
-    CloudCoverParameter
-  end
-
-  def conditions_icon_builder
-    ConditionsIconParameter
   end
 end

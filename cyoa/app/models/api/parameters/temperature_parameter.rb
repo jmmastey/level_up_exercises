@@ -13,11 +13,11 @@ class TemperatureParameter
   end
 
   def maxt
-    temperature_type_builder.new(maxt_attrs)
+    TemperatureTypeParameter.new(maxt_attrs)
   end
 
   def mint
-    temperature_type_builder.new(mint_attrs)
+    TemperatureTypeParameter.new(mint_attrs)
   end
 
   private
@@ -28,9 +28,5 @@ class TemperatureParameter
 
   def mint_attrs
     temperature.select { |key| key[:name] == MINT_NAME }.first
-  end
-
-  def temperature_type_builder
-    TemperatureTypeParameter
   end
 end

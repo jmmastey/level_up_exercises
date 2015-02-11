@@ -14,7 +14,7 @@ describe WeatherLoader do
   let!(:response) { client.request(params) }
 
   let!(:stub)     { stub_client_return(response) }
-  let!(:loader)   { WeatherLoader.load(params) }
+  let!(:loader)   { WeatherLoader.load(WeatherClient, params) }
 
   describe "for two lat lon points", vcr: { cassette_name: "two lat lon points",
                                            record: :new_episodes } do
@@ -24,6 +24,13 @@ describe WeatherLoader do
       expect(count).to eq(84)
     end
 
+    it "does not re-load when refresh is not needed" do
+      count = Forecast.count
+      refreshed = WeatherLoader.load_if_refresh_needed(WeatherClient, params)
+      expect(refreshed).to be_false
+    end
+  end
+
     # describe "for a given 24 hour period" do
     #   it "has the right maxt in the database" do
     #     test = Forecast.daily.first
@@ -31,6 +38,5 @@ describe WeatherLoader do
     #   end
     # end
 
-  end
 
 end

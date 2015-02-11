@@ -1,14 +1,14 @@
+require 'active_support/all'
 require './app/models/point'
 require './app/models/forecast'
 require './app/models/weather_type'
 require './app/models/forecast_weather_type'
-require './app/models/api/weather_client'
 require './app/models/api_data_transfer/time_key_builder'
 require './app/models/api_data_transfer/forecast_refresher'
 require './app/models/api_data_transfer/forecast_type_refresher'
 
 module WeatherLoader
-  def self.load(inputs = {})
+  def self.load(requester, inputs = {})
     response = requester.new.request(inputs)
     load_points(response)
   end
@@ -19,8 +19,9 @@ module WeatherLoader
     ActiveRecord::Base.transaction do
       response.weather_data.applicable_locations.each_with_index do |location_key, index|
         location = location_by_key(response, location_key)
-        point = Point.where("round(lat, 2) = #{location.latitude}",
-                            "round(lon, 2) = #{location.longitude}").first
+        point = Point.where("round(lat, 2) = :lat AND round(lon, 2) = :lon",
+                            { lat: location.latitude,
+                              lon: location.longitude }).first
         load_point_times(response, { point: point, point_index: index })
       end
     end
@@ -38,10 +39,6 @@ module WeatherLoader
       ForecastRefresher.refresh!(response, load_params)
     end
     ForecastTypeRefresher.refresh!(times)
-  end
-
-  def self.requester
-    WeatherClient
   end
 end
 

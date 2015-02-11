@@ -5,3 +5,7 @@
       %input.deactivation_code{:name => "deactivation_code", :type => "text", :pattern => "[0-9]{4}"}
     %p
       %input.deactivation_button{:type => "submit", :value => "Deactivate"}
+  - if bomb.status == :invalid
+    %p.incorrect_code_submitted
+      Attempts remaining: 
+      = bomb.attempts_remaining

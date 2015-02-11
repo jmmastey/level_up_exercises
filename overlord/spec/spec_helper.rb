@@ -2,12 +2,20 @@ require 'rack/test'
 require 'rspec'
 require 'pry'
 require 'faker'
+require 'simplecov'
 require './overlord.rb'
 
-Dir["./model/*.rb"].sort.each { |f| require f }
+SimpleCov.start
+
 Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
-ENV['RACK_ENV'] = 'test'
+# set test environment
+Sinatra::Base.set :environment, :test
+Sinatra::Base.set :run, false
+Sinatra::Base.set :raise_errors, true
+Sinatra::Base.set :logging, true
+
+DataMapper.setup(:default, "sqlite::memory")
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -29,6 +37,13 @@ RSpec.configure do |config|
   end
 
   config.include Helpers::RSpecMixin
+
+  # Let's clean the database here cause Svajone
+  # likes it clean.
+  config.before(:each) do
+    DataMapper.auto_migrate!
+  end
+
   config.include Helpers::StateMachine
   config.include Helpers::Session
 

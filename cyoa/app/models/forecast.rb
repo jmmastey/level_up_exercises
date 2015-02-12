@@ -16,10 +16,35 @@ class Forecast < ActiveRecord::Base
       .order(:start_time)
   end
   scope :three_hour_for_next_week, -> do 
-      joins(:forecast_type)
+      select(:id,
+             :start_time,
+             :end_time,
+             :maxt,
+             :mint,
+             :cloud_cover,
+             :icon_link,
+             <<-SQL
+             string_agg(CASE 
+                          WHEN fwt.additive IS NULL THEN '' 
+                          ELSE fwt.additive 
+                          END || fwt.coverage || ' of ' || wt.weather_type
+                            ,',') 
+              AS weather_type_info
+             SQL
+             )
+      .joins(:forecast_type)
       .merge(ForecastType.three_hour)
+      .joins("LEFT JOIN forecast_weather_types fwt ON fwt.forecast_id = forecasts.id")
+      .joins("LEFT JOIN weather_types wt ON wt.id = fwt.weather_type_id")
       .where("start_time >= :start", { start: beginning_of_three_hour })
       .where("end_time <= :end", { end: end_of_week })
+      .group("forecasts.id",
+             "forecasts.start_time",
+             "forecasts.end_time",
+             "forecasts.maxt",
+             "forecasts.mint",
+             "forecasts.cloud_cover",
+             "forecasts.icon_link")
       .order(:start_time)
   end
 

@@ -12,7 +12,7 @@ module ForecastRefresher
     if forecast.empty?
       insert_forecast(response, load_params)
     else
-      load_params[:forecast] = forecast
+      load_params[:forecast] = forecast.first
       update_forecast(response, load_params)
     end
   end
@@ -33,10 +33,12 @@ module ForecastRefresher
   end
 
   def self.update_forecast(response, load_params = {})
-    load_params[:forecast].update(maxt: load_params[:maxt],
-                                  mint: load_params[:mint],
-                                  cloud_cover: load_params[:cloud_cover],
-                                  icon_link: load_params[:icon_link])
+    forecast = load_params[:forecast]
+    forecast.maxt = load_params[:maxt]
+    forecast.mint = load_params[:mint]
+    forecast.cloud_cover = load_params[:cloud_cover]
+    forecast.icon_link = load_params[:icon_link]
+    forecast.save!
     add_forecast_weather!(response, load_params)
   end
 

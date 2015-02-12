@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   def index
     refresh_weather_if_needed
     @forecast_daily = Forecast.daily_for_next_week
-    @forecast_three_hour = Forecast.three_hour_for_next_week
+    @forecast_three_hour = Forecast.three_hour_for_next_week.includes(:forecast_weather_types)
   end
 
   def self.default_lat_lon

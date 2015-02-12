@@ -24,14 +24,14 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.2)
     multi_json (1.10.1)
-    multi_test (0.1.1)
+    multi_test (0.1.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    rack (1.5.2)
+    rack (1.6.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -49,6 +49,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.1)
+    sass (3.4.11)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -73,6 +74,7 @@ DEPENDENCIES
   pry
   rack
   rspec
+  sass
   sinatra
   state_machine
   webrat

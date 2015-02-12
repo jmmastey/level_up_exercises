@@ -4,7 +4,7 @@ class Bomb
   DEFAULT_DEACTIVATION_CODE = "0000"
   MAX_ATTEMPTS = 3
 
-  attr_accessor :attempts_remaining, :activation_code, :deactivation_code, :state
+  attr_accessor :attempts_remaining, :activation_code, :deactivation_code, :state, :time_activated
 
   state_machine :state, initial: :pending do
     event :build do
@@ -46,6 +46,8 @@ class Bomb
   def activation_attempt(code)
     raise ArgumentError unless valid?(code)
     code == activation_code ? self.activate! : self.invalidate!
+
+    self.time_activated = Time.now
   end
 
   def deactivation_attempt(code)
@@ -55,6 +57,14 @@ class Bomb
 
   def status
     state.to_sym
+  end
+
+  def seconds_to_disarm
+    if activated? || invalid?
+      300 - (Time.now - time_activated)
+    else
+      0
+    end
   end
 
   private

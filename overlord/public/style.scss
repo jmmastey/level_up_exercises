@@ -1,0 +1,31 @@
+@import "bourbon/bourbon";
+@import "neat/near";
+
+.countdown {
+  @include span-columns(6);
+}
+
+.screen {
+  @include span-columns(6);
+}
+
+
+.red {
+  @include span-columns(3);
+}
+
+.green {
+  @include span-columns(3);
+  @include shift(3);
+}
+
+.container {
+  @include outer-container;
+  background-image: url('http://www.deluzions.net/blog/wp-content/uploads/2012/03/warm-beige-worn-leather-texture.jpg');
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

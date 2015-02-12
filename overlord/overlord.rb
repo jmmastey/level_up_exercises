@@ -4,6 +4,13 @@ require 'sinatra'
 
 enable :sessions
 set :haml, format: :html5
+set :assets_css_compressor, :scss
+
+get '/assets/css/:name.scss' do |name|
+  require './views/scss/bourbon/lib/bourbon.rb'
+  content_type :css
+  scss "scss/#{name}".to_sym, :layout => false
+end
 
 get '/' do
   develop_bomb

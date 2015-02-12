@@ -1,11 +1,26 @@
+= haml :_header, layout: false
 %p.inactive
+  #my_countdown
   %form{:action => "/activate", :method => "post"}
     %p
       Activation code:
-      %input.activation_code{:name => "activation_code", :type => "text", :pattern => "[0-9]{4}"}
+      %input.activation_code{:name => "activation_code", :type => "number", min: 1000, :maxlength => 4}
     %p
       %input.activation_button{:type => "submit", :value => "Activate"}
+
+  / hide actual activation button, and show fake one. Then onClick, show real one as large red confirmation
 
   - if bomb.status == :invalid
     %p.incorrect_code_submitted
       Incorrect activation code
+
+:javascript
+  var myCountdown1 = new Countdown({
+              time      : "#{bomb.seconds_to_disarm}",
+              width     : 300,
+              height    : 200,
+              rangeHi   : "minute",
+              target    : "my_countdown",
+              padding  : 0.7,
+              hideLine  : true
+              });

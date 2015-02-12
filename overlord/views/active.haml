@@ -1,11 +1,25 @@
-%p.active
-  %form{:action => "/deactivate", :method => "post"}
-    %p
-      Deactivation code:
-      %input.deactivation_code{:name => "deactivation_code", :type => "text", :pattern => "[0-9]{4}"}
-    %p
-      %input.deactivation_button{:type => "submit", :value => "Deactivate"}
-  - if bomb.status == :invalid
-    %p.incorrect_code_submitted
-      Attempts remaining: 
-      = bomb.attempts_remaining
+= haml :_header, layout: false
+.container
+  %p.active
+    #my_countdown
+    %form{:action => "/deactivate", :method => "post"}
+      %p
+        Deactivation code:
+        %input.deactivation_code{:name => "deactivation_code", :type => "number", min: 1000, :maxlength => 4}
+      %p
+        %input.deactivation_button{:type => "submit", :value => "Deactivate"}
+    - if bomb.status == :invalid
+      %p.incorrect_code_submitted
+        Attempts remaining: 
+        = bomb.attempts_remaining
+
+:javascript
+  var myCountdown1 = new Countdown({
+              time      : "#{bomb.seconds_to_disarm}",
+              width     : 400,
+              height    : 300,
+              rangeHi   : "minute",
+              target    : "my_countdown",
+              padding  : 0.7,
+              hideLine  : true
+              });

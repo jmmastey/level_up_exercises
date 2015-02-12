@@ -1,10 +1,24 @@
+= haml :_header, layout: false
 %p.start
+  #my_countdown
   %form{:action => "/boot", :method => "post"}
     %p
       Activation code:
-      %input.boot_activation_code{:name => "activation_code", :type => "text", :pattern => "[0-9]{4}"}
+      %input.boot_activation_code{:name => "activation_code", :type => "number", min: 1000, :maxlength => 4}
     %p
       Deactivation code:
-      %input.boot_deactivation_code{:name => "deactivation_code", :type => "text", :pattern => "[0-9]{4}"}
+      %input.boot_deactivation_code{:name => "deactivation_code", :type => "number", min: 1000, :maxlength => 4}
     %p
       %input.boot_button{:type => "submit", :value => "Boot"}
+
+
+:javascript
+  var myCountdown1 = new Countdown({
+              time      : "#{bomb.seconds_to_disarm}",
+              width     : 400,
+              height    : 300,
+              rangeHi   : "minute",
+              target    : "my_countdown",
+              padding  : 0.7,
+              hideLine  : true
+              });

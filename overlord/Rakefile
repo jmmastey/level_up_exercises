@@ -1,17 +1,14 @@
-require 'bundler'
-Bundler.require
+require 'rspec/core/rake_task'
+require 'data_mapper'
 
 task :default => :test
 task :test => :spec
 
-if !defined?(RSpec)
-  puts "spec targets require RSpec"
-else
+if defined?(RSpec)
   desc "Run all examples"
-  RSpec::Core::RakeTask.new(:spec) do |t|
-    #t.pattern = 'spec/**/*_spec.rb' # not needed this is default
-    t.rspec_opts = ['-cfs']
-  end
+  RSpec::Core::RakeTask.new(:spec)
+else
+  puts "spec targets require RSpec"
 end
 
 namespace :db do
@@ -29,3 +26,5 @@ end
 task :environment do
   require File.join(File.dirname(__FILE__), 'environment')
 end
+
+# cucumber spec/features/main_structure.feature -r spec/features

@@ -19,6 +19,7 @@ $(function() {
 // Add function to setup FlipClock
 
 $(document).ready(function() {
+  var timer = document.getElementById('timer').value;
   var clock;
 
   clock = $("#pendulum").FlipClock({
@@ -35,8 +36,7 @@ $(document).ready(function() {
           }
         }
     });
-
-    clock.setTime(30);
+    clock.setTime(parseInt(timer));
     clock.setCountdown(true);
     clock.start();
 });

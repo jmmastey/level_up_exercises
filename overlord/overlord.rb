@@ -52,7 +52,7 @@ class Overlord < Sinatra::Base
     unless valid_event?('armed')
       redirect to payload_state_redirect
     end
-    erb :disarm_bomb
+    erb :disarm_bomb, :locals => { :timer => session_interface.payload.timer }
   end
 
   post '/disarm_bomb' do

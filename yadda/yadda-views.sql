@@ -1,3 +1,5 @@
+-- Usage: psql -d yadda -f yadda/yadda-views.sql
+
 #try to keep inner joins
 #preferable over subqueries
 

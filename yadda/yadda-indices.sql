@@ -1,4 +1,4 @@
--- Usage: psql -d postgres -f yadda/yadda-indices.sql
+-- Usage: psql -d yadda -f yadda/yadda-indices.sql
 
 -- indices
 CREATE UNIQUE INDEX brewery_id_index ON brewery(brewery_id);

@@ -1,14 +1,61 @@
-# run `ruby overlord.rb` to run a webserver for this app
-
+require_relative 'bomb'
 require 'sinatra'
+# require 'pry'
 
 enable :sessions
+set :haml, format: :html5
 
 get '/' do
-  "Time to build an app around here. Start time: " + start_time
+  develop_bomb
+  haml :index, locals: { bomb: bomb }
 end
 
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
+post '/boot' do
+  bomb.boot(params['activation_code'], params['deactivation_code'])
+  haml :booted, locals: { bomb: bomb }
+end
+
+get '/boot' do
+  haml :booted, locals: { bomb: bomb }
+end
+
+post '/activate' do
+  bomb.activation_attempt(params['activation_code'])
+  page_to_load = bomb.status == :activated ? :active : :booted
+  haml page_to_load, locals: { bomb: bomb }
+end
+
+post '/deactivate' do
+  bomb.deactivation_attempt(params['deactivation_code'])
+  haml load_page_by_status, locals: { bomb: bomb }
+end
+
+get '/explode' do
+  bomb.explode
+  haml :explode
+end
+
+get '/reset' do
+  session.clear
+  develop_bomb
+  haml :index, locals: { bomb: bomb }
+end
+
+def develop_bomb
+  session[:bomb] = Bomb.new
+end
+
+def bomb
+  session[:bomb]
+end
+
+def load_page_by_status
+  case bomb.status
+    when :invalid
+      :active
+    when :deactivated
+      :booted
+    when :exploded
+      :explode
+  end
 end

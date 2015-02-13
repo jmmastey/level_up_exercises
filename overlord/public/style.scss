@@ -1,0 +1,93 @@
+.container {
+  background-image: url('http://www.deluzions.net/blog/wp-content/uploads/2012/03/warm-beige-worn-leather-texture.jpg');
+  height: 100%;
+}
+
+.viewport {
+  width: 90%;
+  margin: 0 auto;
+}
+
+
+#my_countdown {
+  margin-left: 15%;
+  margin-top: 15%;
+}
+
+.top-row {
+  padding-top: 10px;
+}
+
+.screen-text {
+  color: #33ff33;
+  margin: 4px;
+}
+
+.text-box {
+  margin-left: 5px;
+}
+
+.text-output {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  height: 60%;
+  border: 10px ridge silver;
+}
+
+.screen-btn {
+  margin: auto;
+  color: silver;
+  display: table;
+  padding-top: 10px;
+}
+
+.circle-btn {
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%;
+  font-size: 20px;
+  display: table-cell;
+}
+
+.boot-btn, .act-btn, .deact-btn {
+  background: linear-gradient(#D61414, #8D0000);
+  border: 2px solid silver;
+}
+
+.next-step-btn, .reset-btn {
+  background: linear-gradient(#00AF3B, #005A1E);
+  border: 2px solid silver;
+}
+
+.button-input {
+  height: 40%;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.exploded {
+  background-image: url('http://25.media.tumblr.com/e305b736f1c131f7abe4960572b1f4d0/tumblr_mkxryidwN41s4bl2qo1_400.gif')
+}
+
+input {
+  background-color: black;
+  color: #33ff33;
+  border-bottom: 2px dotted #33ff33;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  margin-bottom: 2px;
+}
+
+input:focus {
+  outline: none;
+}
+
+input[type=submit]{
+    visibility: hidden;
+}

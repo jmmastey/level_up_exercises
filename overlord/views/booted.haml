@@ -1,0 +1,72 @@
+= haml :_header, layout: false
+.inactive.unit.whole.container
+  .viewport
+    .grid.top-row
+      .unit.half
+        .grid.text-output
+          .unit.whole
+            %p.screen-text
+              Initializing activation sequence
+            - if bomb.status == :invalid
+              %p.screen-text.incorrect_code_submitted
+                The previous code was incorrect. Try again?
+            %p.screen-text
+              Please confirm activation code
+            %form{:action => "/activate", :method => "post"}
+              .act-code-input.text-box
+                %input.activation_code{:name => "activation_code", pattern: "[0-9]{4}", autocomplete: "off"}
+              %p
+                %input.activation_button{:type => "submit", :value => "Activate"}
+        .grid.button-input
+          .unit.half.no-gutters
+            .screen-btn
+              .circle-btn.reset-btn
+                Reset
+          .unit.half.no-gutters
+            .screen-btn
+              .circle-btn.act-btn
+                Activate!
+      .unit.half
+        #my_countdown
+
+:javascript
+  $(document).ready(function() {
+    $(window).keydown(function(event){
+      if(event.keyCode == 13) {
+        event.preventDefault();
+        $(".deact-sequence").removeClass("hidden");
+        return false;
+      }
+    });
+
+    $('.reset-btn').click(function() {
+      console.log("TEST");
+      window.location.href = "/reset";
+    });
+
+    $('.act-btn').click(function() {
+      $('.activation_button').click();
+    });
+
+    $('input').keydown(function(e) {
+        var a=[8,9,13,16,17,18,20,27,35,36,37,38,39,40,45,46,91,92];
+        var k = e.which;
+        for (i = 48; i < 58; i++)
+            a.push(i);
+        for (i = 96; i < 106; i++)
+            a.push(i);
+        if (!(a.indexOf(k)>=0))
+            e.preventDefault();
+    });
+  });
+
+  var myCountdown1 = new Countdown({
+              time      : 0,
+              width     : 400,
+              height    : 300,
+              rangeHi   : "minute",
+              target    : "my_countdown",
+              padding  : 0.7,
+              hideLine  : true,
+              hideLabels: true
+              });

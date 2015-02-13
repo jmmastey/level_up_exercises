@@ -1,0 +1,67 @@
+= haml :_header, layout: false
+.active.unit.whole.container
+  .viewport
+    .grid.top-row
+      .unit.half
+        .grid.text-output
+          .unit.whole
+            %form{:action => "/deactivate", :method => "post"}
+              - if bomb.status == :invalid
+                %p.screen-text.incorrect_code_submitted
+                  Incorrect Attempt!!!!
+                %p.screen-text
+                  Attempts remaining:
+                  = bomb.attempts_remaining
+              %p.screen-text
+                Hurry up and enter the deactivation code!
+              %input.deactivation_code{:name => "deactivation_code", pattern: "[0-9]{4}", autocomplete: "off"}
+              %p
+                %input.deactivation_button{id: "deact_code", :type => "submit", :value => "Deactivate"}
+        .grid.button-input
+          .unit.whole.no-gutters
+            .screen-btn
+              .circle-btn.deact-btn
+                Deactivate
+      .unit.half
+        #my_countdown
+
+:javascript
+  $(document).ready(function() {
+    $(window).keydown(function(event){
+      if(event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+      }
+    });
+
+    $('.deact-btn').click(function() {
+      $('#deact_code').click();
+    });
+
+    $('input').keydown(function(e) {
+        var a=[8,9,13,16,17,18,20,27,35,36,37,38,39,40,45,46,91,92];
+        var k = e.which;
+        for (i = 48; i < 58; i++)
+            a.push(i);
+        for (i = 96; i < 106; i++)
+            a.push(i);
+        if (!(a.indexOf(k)>=0))
+            e.preventDefault();
+    });
+  });
+
+  var myCountdown1 = new Countdown({
+              time      : #{bomb.seconds_to_disarm},
+              width     : 400,
+              height    : 300,
+              rangeHi   : "minute",
+              target    : "my_countdown",
+              padding  : 0.7,
+              hideLine  : true,
+              hideLabels: true,
+              onComplete: countdownComplete
+              });
+
+  function countdownComplete(){
+      window.location.href = "/explode";
+  }

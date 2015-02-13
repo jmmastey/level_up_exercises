@@ -1,0 +1,81 @@
+= haml :_header, layout: false
+.start.unit.whole.container
+  .viewport
+    .grid.top-row
+      .unit.half
+        .grid.text-output
+          .unit.whole
+            %form#boot-form{:action => "/boot", :method => "post"}
+              %p.screen-text
+                Welcome
+              %p.screen-text
+                Let's make a bomb!
+              %p.screen-text
+                Initializing.................
+              %p.screen-text
+                Press boot anytime to use defaults, or enter your own
+              %p.screen-text
+                Please Enter Activation Code (4 numbers):
+              .act-code-input.text-box
+                %input.boot_activation_code{:name => "activation_code", pattern: "[0-9]{4}", autocomplete: "off"}
+              .deact-sequence.hidden
+                %p.screen-text
+                  Please Enter Deactivation Code (4 numbers):
+                .deaect-code-input.text-box
+                  %input.boot_deactivation_code{id: "deact_code", :name => "deactivation_code", pattern: "[0-9]{4}", autocomplete: "off"}
+              %p
+                %input.boot_button{id: "boot_button", :type => "submit", :value => "Boot"}
+        .grid.button-input
+          .unit.half.no-gutters
+            .screen-btn
+              .circle-btn.next-step-btn
+                Continue
+          .unit.half.no-gutters
+            .screen-btn
+              .circle-btn.boot-btn
+                Boot!
+      .unit.half
+        #my_countdown
+
+:javascript
+  $(document).ready(function() {
+    $(window).keydown(function(event){
+      if(event.keyCode == 13) {
+        event.preventDefault();
+        $(".deact-sequence").removeClass("hidden");
+        $("#deact_code").focus();
+        return false;
+      }
+    });
+
+    $('.next-step-btn').click(function() {
+      $(".deact-sequence").removeClass("hidden");
+      $("#deact_code").focus();
+    });
+
+    $('.boot-btn').click(function() {
+      $('#boot_button').click();
+    });
+
+    $('input').keydown(function(e) {
+        var a=[8,9,13,16,17,18,20,27,35,36,37,38,39,40,45,46,91,92];
+        var k = e.which;
+        for (i = 48; i < 58; i++)
+            a.push(i);
+        for (i = 96; i < 106; i++)
+            a.push(i);
+        if (!(a.indexOf(k)>=0))
+            e.preventDefault();
+    });
+  });
+
+  var myCountdown1 = new Countdown({
+              time      : 0,
+              width     : 400,
+              height    : 300,
+              rangeHi   : "minute",
+              target    : "my_countdown",
+              padding  : 0.7,
+              hideLine  : true,
+              hideLabels: true
+              });

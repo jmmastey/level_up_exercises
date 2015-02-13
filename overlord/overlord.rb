@@ -4,13 +4,6 @@ require 'sinatra'
 
 enable :sessions
 set :haml, format: :html5
-set :assets_css_compressor, :scss
-
-get '/assets/css/:name.scss' do |name|
-  require './views/scss/bourbon/lib/bourbon.rb'
-  content_type :css
-  scss "scss/#{name}".to_sym, :layout => false
-end
 
 get '/' do
   develop_bomb
@@ -34,10 +27,18 @@ end
 
 post '/deactivate' do
   bomb.deactivation_attempt(params['deactivation_code'])
+  haml load_page_by_status, locals: { bomb: bomb }
+end
 
-  page_to_load = load_page_by_status
-  puts page_to_load
-  haml page_to_load, locals: { bomb: bomb }
+get '/explode' do
+  bomb.explode
+  haml :explode
+end
+
+get '/reset' do
+  session.clear
+  develop_bomb
+  haml :index, locals: { bomb: bomb }
 end
 
 def develop_bomb

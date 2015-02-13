@@ -47,7 +47,7 @@ class Bomb
     raise ArgumentError unless valid?(code)
     code == activation_code ? self.activate! : self.invalidate!
 
-    self.time_activated = Time.now
+    self.time_activated = Time.now unless invalid?
   end
 
   def deactivation_attempt(code)

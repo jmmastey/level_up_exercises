@@ -12,6 +12,3 @@ When(/^I will enter my boot code:$/) do |table|
   fill_in "boot_code", :with => code[:code]
 end
 
-When(/^click the submit button$/) do
-  page.find("button[type=submit]").trigger(:click)
-end

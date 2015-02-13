@@ -12,7 +12,7 @@ Feature: Bomb Activation
       And should see the button "submit" within "row"
     When I will enter my boot code:
       | code | 6969 |
-      And click the submit button
+      And I click the submit button
     Then I should be on bomb creation page
 
   Scenario: Activating a bomb with an invalid code
@@ -25,8 +25,8 @@ Feature: Bomb Activation
     Then I am on bomb activation page
       And should see the field "boot_code" within "row"
       And should see the button "submit" within "row"
-      When I will enter my boot code:
+    When I will enter my boot code:
       | code | 1000 |
-      And click the submit button
+      And I click the submit button
     Then I should not be on bomb creation page
       And I am on bomb activation page

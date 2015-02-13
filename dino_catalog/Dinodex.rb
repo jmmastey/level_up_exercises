@@ -6,120 +6,123 @@ $Dinodex = Hash.new
 
 class Dinosaur
 
-    attr_reader :name, :period, :period_prefix, :diet, :weight, :movement, :continent, :description
-    def extract_period(period)
-        if /(.+)\s(.+)/.match(period)
-            @period_prefix = $1
-            @period = $2
-        else
-            @period_prefix = nil
-            @period = period
-        end
+ attr_reader :name, :period, :diet, :weight, :movement, :continent, :description
+  def extract_period(period)
+    period.each do |row, column|
+      if /(.+)\s(.+)/.match(period)
+        @period << [Regexp.last_match(1), Regexp.last_match(2)]
+      else
+        @period << ["",period]
+      end
     end
+  end
     
-    def to_json
-        {'name' => @name,
-         'period_prefix' => @period_prefix,
-         'period' => @period,
-         'diet' => @diet,
-         'weight' => @weight,
-         'movement' => @movement,
-         'continent' => @continetn,
-         'description' => @description}.to_json
+  def get_period period
+    period.each do |index|
+      @output = @output + "" + index
     end
+      @output
+  end
+    
+  def to_json
+    {'name' => @name,
+     'period' => (get_period period).to_s,
+     'diet' => @diet,
+     'weight' => @weight,
+     'movement' => @movement,
+     'continent' => @continetn,
+     'description' => @description}.to_json
+  end
 
-    def initialize(dino)
-        @name = dino[0]
-        extract_period(dino[1])
-        @diet = dino[3]
-        @weight = dino[4]
-        @movement = dino[5]
-        @continent = dino[6]
-        @description = dino[7]
-    end 
+  def initialize(dino)
+    @name = dino[0]
+    extract_period(dino[1])
+    @diet = dino[2]
+    @weight = dino[3]
+    @movement = dino[4]
+    @continent = dino[5]
+    @description = dino[6]
+  end 
 end
 
 class African_Dinosaur < Dinosaur
     
-    def is_carnivore?(diet)
-        if diet == 'Yes'
-            "Carnivore"
-        else
-            "Herbivore"
-        end
+  def is_carnivore?(diet)
+    if diet == 'Yes'
+      "Carnivore"
+    else
+      "Herbivore"
     end
+  end
     
-    def initialize(dino)
-        @dino=[]
-        @dino[0] = dino['Genus']
-        @dino[1] = dino['Period']
-        @dino[2] = nil
-        @dino[3] = is_carnivore?(dino['Carnivore'])
-        @dino[4] = dino['Weight']
-        @dino[5] = dino['Walking']
-        @dino[6] = "Africa"
-        @dino[7] = nil
-
-        super(@dino)
-    end
+  def initialize(dino)
+    @dino=[]
+    @dino[0] = dino['Genus']
+    @dino[1] = split_period dino['PERIOD']
+    @dino[2] = is_carnivore?(dino['Carnivore'])
+    @dino[3] = dino['Weight']
+    @dino[4] = dino['Walking']
+    @dino[5] = "Africa"
+    @dino[6] = nil
+    super(@dino)
+  end
 end
 
 class Normal_Dinosaur < Dinosaur
-    @@version = 0
-
-    def initialize(dino)
-        @dino=[]
-        if !(/(.+)\sor\s(.+)/.match(dino['PERIOD']))
-            @dino[0] = dino['NAME']
-            @dino[1] = dino['PERIOD']
-            @dino[2] = nil
-            @dino[3] = dino['DIET']
-            @dino[4] = dino['WEIGHT_IN_LBS']
-            @dino[5] = dino['WALKING']
-            @dino[6] = dino['CONTINENT']
-            @dino[7] = dino['DESCRIPTION']
-            super(@dino)
-        else
-            @@version = @@version + 1
-            dino2 = dino
-            dino2['PERIOD'] = $2
-            $Dinodex[dino2['NAME']+"_v"+@@version.to_s] = Normal_Dinosaur.new(dino2)
-            @dino[0] = dino['NAME']
-            @dino[1] = $1
-            @dino[2] = nil
-            @dino[3] = dino['DIET']
-            @dino[4] = dino['WEIGHT_IN_LBS']
-            @dino[5] = dino['WALKING']
-            @dino[6] = dino['CONTINENT']
-            @dino[7] = dino['DESCRIPTION']
-            super(@dino)
-        end
-    end
+     def split_period period
+     unless /(.+)\sor\s(.+)/.match(period)
+       @period << dino['PERIOD']
+     else
+       @period << Regexp.last_match(1)
+       split_period Regexp.last_match(2)
+     end
+  initialize(dino)
+    @dino=[]
+      @dino[0] = dino['NAME']
+      @dino[1] = split_period dino['PERIOD']
+      @dino[2] = dino['DIET']
+      @dino[3] = dino['WEIGHT_IN_LBS']
+      @dino[4] = dino['WALKING']
+      @dino[5] = dino['CONTINENT']
+      @dino[6] = dino['DESCRIPTION']
+      super(@dino)
+  end
 end        
 
-CSV.foreach('african_dinosaur_export.csv', converters: :numeric, headers:true) do |row|
-     $Dinodex[row['Genus']] = African_Dinosaur.new(row)
-end
+#CSV.foreach('african_dinosaur_export.csv', converters: :numeric, headers:true) do |row|
+ #    $Dinodex[row['Genus']] = African_Dinosaur.new(row)
+#end
 
 CSV.foreach('dinodex.csv', converters: :numeric, headers:true) do |row|
      $Dinodex[row['NAME']] = Normal_Dinosaur.new(row)
 end 
 
-include Dino_Methods
+def match_period(dino, period)
+  dino.period.each do |index|
+    if dino.period[index].include? period
+      @flag = true
+    end
+  end
+  @flag ||= false
+end
+
+def match_attribute(dino, attribute, key)
+  attribute == dino.send(key.to_s)
+end
+  
 
 def find(params)
-    @flag
-    search_terms = eval(params.gsub(':','=>'))
-    $Dinodex.each do|key, dinosaur|
-        @flag = false
-        search_terms.each do|search_key, search_value|
-            if search_value == dinosaur.send(search_key.to_s)
-                @flag = true
-            else
-                @flag = false
-            end
+  search_terms = eval(params.gsub(':','=>'))
+  $Dinodex.each do|key, dinosaur|
+    @flag = false
+      search_terms.each do|search_key, search_value|
+        if search_key == 'period'
+          @flag = match_period(dinosaur, search_value)
+        else
+          @flag = match_attribute(dinosaur, search_value, search_key)
         end
-        print_dino($Dinodex.fetch(key)) if @flag == true
+      end
+      print_dino($Dinodex.fetch(key)) if @flag == true
     end
 end
 

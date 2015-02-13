@@ -1,0 +1,11 @@
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+      	<% for attribute in @legislator.attributes.keys %>
+  		<p><%= attribute.humanize %> <%= @legislator.attributes[attribute].to_s %></p>
+		<% end %>
+      </h1>
+    </section>
+  </aside>
+</div>

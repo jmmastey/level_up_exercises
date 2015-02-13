@@ -23,14 +23,10 @@ class Forecast < ActiveRecord::Base
              :mint,
              :cloud_cover,
              :icon_link,
-             <<-SQL
-             string_agg(CASE 
-                          WHEN fwt.additive IS NULL THEN '' 
-                          ELSE fwt.additive 
-                          END || fwt.coverage || ' of ' || wt.weather_type
-                            ,',') 
-              AS weather_type_info
-             SQL
+             "array_agg(wt.weather_type ORDER BY wt.weather_type ASC, fwt.additive DESC) AS weather_types_a",
+             "array_agg(fwt.coverage ORDER BY wt.weather_type ASC, fwt.additive DESC) AS coverages",
+             "array_agg(fwt.additive ORDER BY wt.weather_type ASC, fwt.additive DESC) AS additives",
+             "array_agg(fwt.qualifier ORDER BY wt.weather_type ASC, fwt.additive DESC) AS qualifiers"
              )
       .joins(:forecast_type)
       .merge(ForecastType.three_hour)
@@ -46,6 +42,33 @@ class Forecast < ActiveRecord::Base
              "forecasts.cloud_cover",
              "forecasts.icon_link")
       .order(:start_time)
+  end
+
+  def weather_type_display
+    return nil unless has_weather_type_display
+    return nil unless self.weather_types_a.any?
+    final, wt, c = [], nil, ""
+    self.weather_types_a.each_with_index do |weather_type, index|
+      if wt == weather_type
+        final.pop
+        c = "#{c} #{self.coverages[index]}"
+        final << "#{c} #{wt}"
+      else
+        wt = weather_type
+        c = self.coverages[index]
+        final << "#{assign_additive(index)}#{c} #{wt}"
+      end
+    end
+    final.join(", ")
+  end
+
+  def assign_additive(index)
+    return "" if self.additives[index].nil?
+    "#{self.additives[index]} "
+  end
+
+  def has_weather_type_display
+    self.attributes.keys & ["weather_types_a","coverages", "additives", "qualifiers"]
   end
 
   def start_date_in_app_time_zone

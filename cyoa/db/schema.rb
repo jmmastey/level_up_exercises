@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209151034) do
+ActiveRecord::Schema.define(version: 20150213150736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20150209151034) do
     t.string   "qualifier",       limit: 100
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.index ["forecast_id", "weather_type_id"], :name => "index_forecast_weather_types_on_forecast_id_and_weather_type_id", :unique => true
+    t.index ["forecast_id", "weather_type_id"], :name => "index_forecast_weather_types_on_forecast_id_and_weather_type_id"
     t.index ["forecast_id"], :name => "fk__forecast_weather_types_forecast_id"
     t.index ["weather_type_id"], :name => "fk__forecast_weather_types_weather_type_id"
     t.foreign_key ["forecast_id"], "forecasts", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_forecast_weather_types_forecast_id"

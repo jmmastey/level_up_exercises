@@ -1,5 +1,5 @@
 require_relative 'dinodex'
-require_relative 'dinodaur'
+require_relative 'dinosaur'
 require_relative 'parser'
 
 class RunDinodex
@@ -10,7 +10,8 @@ class RunDinodex
 
   def parse_dinos
     parser = Parser.new
-    dinos_hash = parser.parse_dinodex("dinodex.csv").concat parser.parse_african_dinosaurs
+    dinos_hash = parser.parse_dinodex("dinodex.csv").
+          concat parser.parse_african_dinosaurs("african_dinosaur_export.csv")
     dinos_hash.map { |dino| Dinosaur.new(dino) }
   end
 

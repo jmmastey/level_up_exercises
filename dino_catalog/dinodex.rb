@@ -8,6 +8,8 @@ class Dinodex
   def search_by_criteria(header, value)
     @dinodex = Dinodex.new(@dinos)
     case header
+      when :weight
+        dinodex.dinos = search_by_weight(value)
       when :diet
         dinodex.dinos = search_by_diet(value)
       else

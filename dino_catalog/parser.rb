@@ -11,8 +11,8 @@ class Parser
     csv.map(&:to_hash)
   end
 
-  def parse_african_dinosaurs
-    african_dinos_hash = parse_dinodex("african_dinosaur_export.csv")
+  def parse_african_dinosaurs(filename)
+    african_dinos_hash = parse_dinodex(filename)
     african_dinos_hash.each do |row|
       row[:continent] = "Africa"
       row[:diet] = row[:diet] == "Yes" ? "Carnivore" : "Herbivore"

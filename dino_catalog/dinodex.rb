@@ -1,48 +1,46 @@
-require_relative 'dino_catalog'
-
 class Dinodex
-  attr_reader :dinos
+  attr_accessor :dinos, :dinodex
 
-  def initialize
-    dino_catalog = DinoCatalog.new
-    @dinos = dino_catalog.dinosaurs
+  def initialize(dinos)
+    @dinos = dinos
   end
 
-  def parse_input
-    #Initializing the filtered dinos with all dinos initially
-    filtered_dinos = @dinos
-
-    puts "Dinosaurs with #{ARGV}" unless ARGV.empty?
-    ARGV.each do|a|
-      criteria = a.split(':')
-      filtered_dinos = search_by_criteria(criteria[0], criteria[1], filtered_dinos)
+  def search_by_criteria(header, value)
+    @dinodex = Dinodex.new(@dinos)
+    case header
+      when :diet
+        dinodex.dinos = search_by_diet(value)
+      else
+        dinodex.dinos = dinodex.dinos.select do |dino|
+          dino.send(header).downcase.include? value
+        end
     end
-    print_dinos(filtered_dinos)
+    dinodex
   end
 
-  def search_by_criteria(header, value, filtered_dinos)
-    #Assumes that weight is only called with big or small parameters
-    if header == 'weight'
-      value.downcase == 'big' ? filtered_dinos.select(&:big?)
-                              : filtered_dinos.select(&:small?)
+  def search_by_weight(size)
+    dinodex = Dinodex.new(@dinos)
+    if size == 'big'
+      dinodex.dinos.select(&:big?)
     else
-      filtered_dinos.select do |dino|
-        #Used include instead of == to not differentiate between early and late Cretaceous
-        dino.send(header).downcase.include? (value.downcase)
+      dinodex.dinos.select(&:small?)
+    end
+  end
+
+  def search_by_diet(value)
+    dinodex = Dinodex.new(@dinos)
+    if value == 'carnivore'
+      dinodex.dinos.select(&:carnivore?)
+    else
+      dinodex.dinos.select do |dino|
+        dino.send(:diet).downcase.include? value
       end
     end
   end
 
-  def print_dinos(results)
-    results.each do |dino|
-      puts dino.to_s
+  def to_s
+    @dinos.each do |dino|
+      puts dino
     end
   end
 end
-
-def main
-  dinodex = Dinodex.new
-  dinodex.parse_input
-end
-
-main

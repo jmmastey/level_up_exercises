@@ -1,4 +1,8 @@
 class Arrowhead
+
+  UNKNOWN_METHOD = "Unknown region, please provide a valid region."
+  UNKNOWN_SHAPE = %"Unknown shape value. Are you sure you know what you're
+    talking about?"
 # This seriously belongs in a database.
   CLASSIFICATIONS = {
     far_west: {
@@ -24,17 +28,17 @@ class Arrowhead
   def self.exists_shape?(region, shape)
     CLASSIFICATIONS[region].include? shape
   end
-
+  
   def self.classify(region, shape)
+    arrowhead = %"You have a(n) '#{CLASSIFICATIONS[region][shape]}' 
+      arrowhead. Probably priceless."
     unless exists_region? region
-      raise "Unknown region, please provide a valid region."
+      raise UNKNOWN_REGION
     end
     unless exists_shape?(region, shape)
-      raise "Unknown shape value. Are you sure you know what you're "
-        +"talking about?"
+      raise UNKNOWN_SHAPE
     end
-    puts "You have a(n) '#{CLASSIFICATIONS[region][shape]}' arrowhead. "
-      +"Probably priceless."
+    puts arrowhead
   end
 
 end

@@ -69,7 +69,7 @@ class Overlord < Sinatra::Base
       redirect to payload_state_redirect
     end
 
-    erb :disarm_bomb
+    erb :disarm_bomb, :locals => { :timer => session_interface.payload.timer }
   end
 
   get '/disarmed_bomb' do

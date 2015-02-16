@@ -11,4 +11,3 @@ When(/^I will enter my boot code:$/) do |table|
   code = table.rows_hash
   fill_in "boot_code", :with => code[:code]
 end
-

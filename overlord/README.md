@@ -8,6 +8,11 @@ Afer that run db:migrate
 be shotgun
 Boot Code = 6969
 
+To run test
+rake
+
+Or read the rakefile
+
 ## Super Villain's Detonation Device
 
 You've been contacted by a super villain in search of help. He says he has a great idea, and needs only your genius to bring it to completion. Turns out the idea is going to be a bomb. I mean, literally. It's a bomb. Still, he's offering equity.

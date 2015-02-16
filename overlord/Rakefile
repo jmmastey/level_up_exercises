@@ -1,14 +1,32 @@
 require 'rspec/core/rake_task'
+require 'cucumber/rake/task'
 require 'data_mapper'
 
-task :default => :test
-task :test => :spec
+task :default => :full_test
+task :full_test => ['unit_testing:unit_test', 'feature_testing:feature_test']
 
-if defined?(RSpec)
-  desc "Run all examples"
+if defined?(RSpec) && defined?(Cucumber)
   RSpec::Core::RakeTask.new(:spec)
 else
   puts "spec targets require RSpec"
+end
+
+if defined?(Cucumber)
+  Cucumber::Rake::Task.new(:cucumber) do |c|
+    c.cucumber_opts = "spec/features"
+  end
+else
+  puts "feature targets require Cucumber"
+end
+
+namespace :unit_testing do
+  desc "Run all RSpec tests"
+  task :unit_test => :spec
+end
+
+namespace :feature_testing do
+  desc "Run all Cucumber feature tests"
+  task :feature_test => :cucumber
 end
 
 namespace :db do

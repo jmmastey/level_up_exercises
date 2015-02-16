@@ -24,24 +24,27 @@ require 'json'
   def get_size
     puts("Big or Small? B/S")
     loop do 
-      size = gets.chomp
-      if size == 'B' || size == 'b'
-        size = 'Big'
+      @size = gets.chomp
+      if @size == 'B' || @size == 'b'
+        @size = 'Big'
         break
-      elsif size == 'S' || size == 's'
-        size = 'Small'
+      elsif @size == 'S' || @size == 's'
+        @size = 'Small'
         break
       else
         puts("Valid sizes are B/S Please re-enter an appropriate size")  
       end
     end
-    size
+    @size
   end
 
   def get_user_selection
     puts("Would you like to chain another option Y/N")
     user_selection = gets.chomp
-    if user_selection == 'Y'|| user_selection == 'y'
+    if user_selection == 'Y'|| user_selection == 'y' 
+      true
+    else
+      false
     end
   end
     
@@ -51,28 +54,27 @@ require 'json'
       @size = nil
       @period = nil
       loop do      
-      option_temp = option_temp - user_option
-      print_menu(option_temp)
-      temp = gets.chomp.to_i
-      if temp < 1 || temp > 4
-        puts("Please pick a valid option")
-        next
-      else
-        user_option << temp
-        case temp
+        option_temp = $OPTION
+        option_temp = option_temp - user_option
+        print_menu(option_temp)
+        temp = gets.chomp.to_i
+        if temp < 1 || temp > 4
+          puts("Please pick a valid option")
+          next
+        else
+          user_option << temp
+          case temp
           when 3
             @period = get_period
           when 4
-            @size = get size
+            @size = get_size
+          end
         end
-      end
-        if user_option.length < 4
-          if get_user_selection
+        if (get_user_selection) || option_temp.length < 4
             next
-          else
+        else
             search(dinos, user_option, @period, @size)
             user_option = []
-          end
         end
       end
   end
@@ -126,14 +128,6 @@ require 'json'
       puts "JSON output file output.json has been created"
     end
   end
-  def split_period period
-    unless /(.+)\sor\s(.+)/.match(period)
-      @period << dino['PERIOD']
-    else
-      @period << Regexp.last_match(1)
-      split_period Regexp.last_match(2)
-    end
-  end 
 end
                 
                         

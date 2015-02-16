@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  congress_number: 1
+  congress_url: MyString
+  official_title: MyText
+  introduced_on: 2015-02-16
+  legislator_id: 
+
+two:
+  congress_number: 1
+  congress_url: MyString
+  official_title: MyText
+  introduced_on: 2015-02-16
+  legislator_id: 

@@ -4,6 +4,7 @@ one:
   title: MyString
   firstname: MyString
   lastname: MyString
+  bioguide_id: MyString
   party: MyString
   state: MyString
   gender: MyString
@@ -15,6 +16,7 @@ two:
   title: MyString
   firstname: MyString
   lastname: MyString
+  bioguide_id: MyString
   party: MyString
   state: MyString
   gender: MyString

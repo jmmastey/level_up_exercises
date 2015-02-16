@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'good_deeds/index'
+
+  get 'good_deeds/show'
+
   get 'legislators/index'
 
   get 'legislators/show'

@@ -11,34 +11,27 @@ class CongressApiParser
   def bills
     response = self.class.get("/bills/search?history.enacted=true&per_page=50&order=introduced_on")
     response["results"].map do |bill|
-      #bill.slice("congress", "urls", "official_title", "sponsor", "introduced_on")
       {
-        congress_number: bill["congress"],
-        congress_url: bill["urls"]["congress"],
-        official_title: bill["official_title"],
-        sponsor_title: bill["sponsor"]["title"],
-        sponsor_firstname: bill["sponsor"]["first_name"],
-        sponsor_lastname: bill["sponsor"]["last_name"],
-        introduced_on: bill["introduced_on"]
+        "congress_number" => bill["congress"],
+        "congress_url" => bill["urls"]["congress"],
+        "official_title" => bill["official_title"],
+        "introduced_on" => bill["introduced_on"],
+        "bioguide_id" => bill["sponsor_id"]
       }
     end
   end
 
   def find_legislator(state)
-    response = self.class.get("/legislators?per_page=50&state=#{state}")
+    response = self.class.get("/legislators?per_page=50&bioguide_id=R000487")
     response["results"].map do |legislator|
-      legislator.slice("birthday", "facebook_id", "gender", "first_name", 
-        "last_name", "state_name", "term_start", "term_end", "title", "website")
-    end
+      legislator#.slice("birthday", "facebook_id", "gender", "first_name", 
+        #{}"last_name", "state_name", "term_start", "term_end", "title", "website")
+    end.sample
   end
 
 end
 
-  
-
 api = CongressApiParser.new
 #puts api.bills
-puts api.bills
-# puts api.bills
-#puts response.message
-#puts response.headers.inspect
+#puts "\n\n\n\n"
+#puts api.find_legislator("WY")

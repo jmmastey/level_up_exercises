@@ -1,0 +1,81 @@
+<div id="forecast">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Forecast for <%= @forecast.zip_code %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">&nbsp;</div>
+    <div class="col-xs-4">
+      <h1>Today</h1>
+    </div>
+    <div class="col-xs-4">
+      <h1>Tonight</h1>
+    </div>
+    <div class="col-xs-2">&nbsp;</div>
+  </div>
+  <% today = periods_by_day(@forecast).first
+     today_name = today[0].name
+     tonight_name = today[1].name %>
+  <div class="row">
+    <div class="col-xs-2">&nbsp;</div>
+    <div class="col-xs-4" id="<%= today_name.parameterize + "-conditions" %>">
+      <%= @forecast.prediction_for_period("Conditions", today_name) %>
+    </div>
+    <div class="col-xs-4" id="<%= tonight_name.parameterize + "-conditions" %>">
+      <%= @forecast.prediction_for_period("Conditions", tonight_name) %>
+    </div>
+    <div class="col-xs-2">&nbsp;</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">&nbsp;</div>
+    <div class="col-xs-2" id="<%= today_name.parameterize + "-high" %>">
+      <h2><%= @forecast.prediction_for_period("High Temperature", today_name) %></h2> high
+    </div>
+    <div class="col-xs-2" id="<%= today_name.parameterize + "-precip" %>">
+      <h2><%= @forecast.prediction_for_period("Chance of Precipitation", today_name) %>%</h2> chance of precipitation
+    </div>
+    <div class="col-xs-2" id="<%= tonight_name.parameterize + "-low" %>">
+      <h2><%= @forecast.prediction_for_period("Low Temperature", tonight_name) %></h2> low
+    </div>
+    <div class="col-xs-2" id="<%= tonight_name.parameterize + "-precip" %>">
+      <h2><%= @forecast.prediction_for_period("Chance of Precipitation", tonight_name) %>%</h2> chance of precipitation
+    </div>
+    <div class="col-xs-2">&nbsp;</div>
+  </div>
+  <br />
+  <table class="table table-striped" id="week-forecast">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th colspan="3">Day</th>
+        <th colspan="3">Night</th>
+      </tr>
+      <tr>
+        <th>&nbsp;</th>
+        <th>High</th>
+        <th>Chance of Precipitation</th>
+        <th>Conditions</th>
+        <th>Low</th>
+        <th>Chance of Precipitation</th>
+        <th>Conditions</th>
+      </tr>
+    </thead>
+    <tbody>
+  <% periods_by_day(@forecast).each do |day|
+    day_name = day[0].name
+    night_name = day[1].name
+    next if day_name == today_name %>
+      <tr>
+        <td><%= day_name %></td>
+        <td><%= @forecast.prediction_for_period("High Temperature", day_name) %></td>
+        <td><%= @forecast.prediction_for_period("Chance of Precipitation", day_name) %>%</td>
+        <td><%= @forecast.prediction_for_period("Conditions", day_name) %></td>
+        <td><%= @forecast.prediction_for_period("Low Temperature", night_name) %></td>
+        <td><%= @forecast.prediction_for_period("Chance of Precipitation", night_name) %>%</td>
+        <td><%= @forecast.prediction_for_period("Conditions", night_name) %></td>
+      </tr>
+  <% end %>
+    </tbody>
+  </table>
+</div>

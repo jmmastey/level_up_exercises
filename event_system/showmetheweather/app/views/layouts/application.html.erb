@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Show Me The Weather!</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <%= link_to image_tag("logo.png", size: "35x35"), root_path,
+          class: "navbar-brand" %>
+        <div class="navbar-text">Show Me The Weather!</div>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+          <li><p class="navbar-text">Signed In As <%= link_to current_user.name, edit_user_registration_path, class: "navbar-link" %></p></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path,
+            method: :delete %></li>
+          <% else %>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li><%= link_to "Sign In", new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <% flash.each do |type, message| %>
+  <div class="alert alert-<%= type %>">
+    <%= message %>
+  </div>
+  <% end %>
+  <%= yield %>
+
+</body>
+</html>

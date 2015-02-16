@@ -10,8 +10,8 @@ class RunDinodex
 
   def parse_dinos
     parser = Parser.new
-    dinos_hash = parser.parse_dinodex("dinodex.csv").
-          concat parser.parse_african_dinosaurs("african_dinosaur_export.csv")
+    dinos_hash = parser.parse_dinodex("dinodex.csv")
+         .concat parser.parse_african_dinosaurs("african_dinosaur_export.csv")
     dinos_hash.map { |dino| Dinosaur.new(dino) }
   end
 
@@ -19,7 +19,7 @@ class RunDinodex
     puts "Dinosaurs with #{ARGV}" unless ARGV.empty?
     ARGV.each do |arg|
       header, value = arg.split(':')
-      @dinodex = @dinodex.search_by_criteria(header.to_sym.downcase, value.downcase)
+      @dinodex = @dinodex.find_by(header.to_sym, value.downcase)
     end
   end
 end

@@ -1,27 +1,24 @@
 class Dinodex
-  attr_accessor :dinos, :dinodex
+  attr_accessor :dinos
 
   def initialize(dinos)
     @dinos = dinos
   end
 
-  def search_by_criteria(header, value)
-    @dinodex = Dinodex.new(@dinos)
+  def find_by(header, value)
+    dinodex = Dinodex.new(@dinos)
     case header
       when :weight
-        dinodex.dinos = search_by_weight(value)
+        dinodex.dinos = search_by_weight(value, dinodex)
       when :diet
-        dinodex.dinos = search_by_diet(value)
+        dinodex.dinos = search_by_diet(value, dinodex)
       else
-        dinodex.dinos = dinodex.dinos.select do |dino|
-          dino.send(header).downcase.include? value
-        end
+        dinodex.dinos = search_by_criteria(header, value, dinodex)
     end
     dinodex
   end
 
-  def search_by_weight(size)
-    dinodex = Dinodex.new(@dinos)
+  def search_by_weight(size, dinodex)
     if size == 'big'
       dinodex.dinos.select(&:big?)
     else
@@ -29,14 +26,17 @@ class Dinodex
     end
   end
 
-  def search_by_diet(value)
-    dinodex = Dinodex.new(@dinos)
+  def search_by_diet(value, dinodex)
     if value == 'carnivore'
       dinodex.dinos.select(&:carnivore?)
     else
-      dinodex.dinos.select do |dino|
-        dino.send(:diet).downcase.include? value
-      end
+      search_by_criteria(:diet, value, dinodex)
+    end
+  end
+
+  def search_by_criteria(header, value, dinodex)
+    dinodex.dinos.select do |dino|
+      dino.send(header).downcase.include? value
     end
   end
 

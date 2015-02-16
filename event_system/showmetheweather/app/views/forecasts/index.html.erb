@@ -1,0 +1,12 @@
+<div class="container">
+  <div id="search_form">
+    <%= form_for :forecast, url: forecasts_search_path,
+      html: { class: "form-inline" } do |f| %>
+      <div class="form-group">
+        <%= f.label :zip_code, "ZIP Code" %>:
+        <%= f.text_field :zip_code, size: 5, class: "form-control" %>
+      </div>
+      <%= f.button "Show Me The Weather!", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

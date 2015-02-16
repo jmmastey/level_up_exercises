@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<dwml version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.nws.noaa.gov/forecasts/xml/DWMLgen/schema/DWML.xsd">
+  <head>
+    <product srsName="WGS 1984" concise-name="dwmlByDay" operational-mode="official">
+      <title>NOAA's National Weather Service Forecast by 12 Hour Period</title>
+      <field>meteorological</field>
+      <category>forecast</category>
+      <creation-date refresh-frequency="PT1H">2015-02-03T21:31:19Z</creation-date>
+    </product>
+    <source>
+      <more-information>http://www.nws.noaa.gov/forecasts/xml/</more-information>
+      <production-center>Meteorological Development Laboratory<sub-center>Product Generation Branch</sub-center></production-center>
+      <disclaimer>http://www.nws.noaa.gov/disclaimer.html</disclaimer>
+      <credit>http://www.weather.gov/</credit>
+      <credit-logo>http://www.weather.gov/images/xml_logo.gif</credit-logo>
+      <feedback>http://www.weather.gov/feedback.php</feedback>
+    </source>
+  </head>
+  <data>
+    <location>
+      <location-key>point1</location-key>
+      <point latitude="41.84" longitude="-87.69"/>
+    </location>
+    <moreWeatherInformation applicable-location="point1">http://forecast.weather.gov/MapClick.php?textField1=41.84&amp;textField2=-87.69</moreWeatherInformation>
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p24h-n1-1</layout-key>
+      <start-valid-time period-name="Today">2015-02-03T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2015-02-03T18:00:00-06:00</end-valid-time>
+    </time-layout>
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p24h-n1-2</layout-key>
+      <start-valid-time period-name="Tonight">2015-02-03T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2015-02-04T06:00:00-06:00</end-valid-time>
+    </time-layout>
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p12h-n2-3</layout-key>
+      <start-valid-time period-name="Today">2015-02-03T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2015-02-03T18:00:00-06:00</end-valid-time>
+      <start-valid-time period-name="Tonight">2015-02-03T18:00:00-06:00</start-valid-time>
+      <end-valid-time>2015-02-04T06:00:00-06:00</end-valid-time>
+    </time-layout>
+    <time-layout time-coordinate="local" summarization="12hourly">
+      <layout-key>k-p1d-n1-4</layout-key>
+      <start-valid-time>2015-02-03T06:00:00-06:00</start-valid-time>
+      <end-valid-time>2015-02-04T06:00:00-06:00</end-valid-time>
+    </time-layout>
+    <parameters applicable-location="point1">
+      <temperature type="maximum" units="Fahrenheit" time-layout="k-p24h-n1-1">
+        <name>Daily Maximum Temperature</name>
+        <value>24</value>
+      </temperature>
+      <temperature type="minimum" units="Fahrenheit" time-layout="k-p24h-n1-2">
+        <name>Daily Minimum Temperature</name>
+        <value>20</value>
+      </temperature>
+      <probability-of-precipitation type="12 hour" units="percent" time-layout="k-p12h-n2-3">
+        <name>12 Hourly Probability of Precipitation</name>
+        <value>82</value>
+        <value>99</value>
+      </probability-of-precipitation>
+      <weather time-layout="k-p12h-n2-3">
+        <name>Weather Type, Coverage, and Intensity</name>
+        <weather-conditions xsi:nil="true"/>
+        <weather-conditions weather-summary="Snow">
+          <value coverage="definitely" intensity="light" weather-type="snow" qualifier="none"/>
+        </weather-conditions>
+      </weather>
+      <conditions-icon type="forecast-NWS" time-layout="k-p12h-n2-3">
+        <name>Conditions Icons</name>
+        <icon-link xsi:nil="true"/>
+        <icon-link>http://www.nws.noaa.gov/weather/images/fcicons/nsn100.jpg</icon-link>
+      </conditions-icon>
+      <hazards time-layout="k-p1d-n1-4">
+        <name>Watches, Warnings, and Advisories</name>
+        <hazard-conditions xsi:nil="true"/>
+      </hazards>
+    </parameters>
+  </data>
+</dwml>

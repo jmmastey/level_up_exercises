@@ -1,6 +1,6 @@
 class LegislatorsController < ApplicationController
   def index
-  	@legislators = Legislator.all
+  	@legislators = Legislator.paginate(page: params[:page])
   end
 
   def show

@@ -1,23 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  birthday: 2015-02-13
-  gender: MyString
-  first_name: MyString
-  last_name: MyString
-  state_name: MyString
-  term_state: 2015-02-13
-  term_end: 2015-02-13
   title: MyString
+  firstname: MyString
+  lastname: MyString
+  party: MyString
+  state: MyString
+  gender: MyString
   website: MyString
+  twitter_id: MyString
+  birthdate: 2015-02-16
 
 two:
-  birthday: 2015-02-13
-  gender: MyString
-  first_name: MyString
-  last_name: MyString
-  state_name: MyString
-  term_state: 2015-02-13
-  term_end: 2015-02-13
   title: MyString
+  firstname: MyString
+  lastname: MyString
+  party: MyString
+  state: MyString
+  gender: MyString
   website: MyString
+  twitter_id: MyString
+  birthdate: 2015-02-16

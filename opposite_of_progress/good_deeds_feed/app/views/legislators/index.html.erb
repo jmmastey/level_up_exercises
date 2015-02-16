@@ -1,6 +1,10 @@
 <% provide(:title, 'All legislators') %>
 <h1>All legislators</h1>
 
+<%= will_paginate %>
+
 <ul class="legislators">
 	<%= render @legislators %>
 </ul>
+
+<%= will_paginate %>

@@ -34,10 +34,10 @@ module ForecastRefresher
 
   def self.update_forecast(response, load_params = {})
     forecast = load_params[:forecast]
-    forecast.maxt = load_params[:maxt]
-    forecast.mint = load_params[:mint]
-    forecast.cloud_cover = load_params[:cloud_cover]
-    forecast.icon_link = load_params[:icon_link]
+    forecast.maxt = load_params[:maxt] unless load_params[:maxt].nil?
+    forecast.mint = load_params[:mint] unless load_params[:mint].nil?
+    forecast.cloud_cover = load_params[:cloud_cover] unless load_params[:cloud_cover].nil?
+    forecast.icon_link = load_params[:icon_link] unless load_params[:icon_link].nil?
     forecast.save!
     add_forecast_weather!(response, load_params)
   end

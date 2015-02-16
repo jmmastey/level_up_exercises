@@ -1,9 +1,15 @@
-<%= form_for :user do |f| %>
-  <p>
+<%= form_for(@user) do |f| %>
+  <div class="field">
     <%= f.label :phone %>
     <%= f.telephone_field :phone %>
-  </p>
-  <p>
+  </div>
+
+  <%= f.fields_for :user_notifications do |builder| %>
+    <%= render 'user_notification_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields "Add Notification", f, :user_notifications %>
+
+  <div class="actions">
     <%= f.submit %>
   </p>
 <% end %>

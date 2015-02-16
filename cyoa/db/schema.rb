@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213150736) do
+ActiveRecord::Schema.define(version: 20150213213049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,11 +92,11 @@ ActiveRecord::Schema.define(version: 20150213150736) do
   end
 
   create_table "user_notifications", force: :cascade do |t|
-    t.integer  "user_id",                           null: false
-    t.time     "notification_time",                 null: false
-    t.boolean  "active",            default: false, null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.integer  "user_id",                          null: false
+    t.time     "notification_time",                null: false
+    t.boolean  "active",            default: true, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.index ["user_id"], :name => "fk__user_notifications_user_id"
     t.foreign_key ["user_id"], "users", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_user_notifications_user_id"
   end

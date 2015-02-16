@@ -1,4 +1,4 @@
-<div>This is week weather information</div>
+<div>Detail Forecast Every 3 Hours</div>
 <ul id="three_hour_forecasts">
 <% @forecast_three_hour.group_by { |row| row.start_date_in_app_time_zone }.each do |date, forecasts| %>
 <li><%= date %>

@@ -23,10 +23,10 @@ class Forecast < ActiveRecord::Base
              :mint,
              :cloud_cover,
              :icon_link,
-             "array_agg(wt.weather_type ORDER BY wt.weather_type ASC, fwt.additive DESC) AS weather_types_a",
-             "array_agg(fwt.coverage ORDER BY wt.weather_type ASC, fwt.additive DESC) AS coverages",
-             "array_agg(fwt.additive ORDER BY wt.weather_type ASC, fwt.additive DESC) AS additives",
-             "array_agg(fwt.qualifier ORDER BY wt.weather_type ASC, fwt.additive DESC) AS qualifiers"
+             "array_agg(wt.weather_type ORDER BY fwt.additive DESC, wt.weather_type ASC) AS weather_types_a",
+             "array_agg(fwt.coverage ORDER BY fwt.additive DESC, wt.weather_type ASC) AS coverages",
+             "array_agg(fwt.additive ORDER BY fwt.additive DESC, wt.weather_type ASC) AS additives",
+             "array_agg(fwt.qualifier ORDER BY fwt.additive DESC, wt.weather_type ASC) AS qualifiers"
              )
       .joins(:forecast_type)
       .merge(ForecastType.three_hour)
@@ -68,7 +68,9 @@ class Forecast < ActiveRecord::Base
   end
 
   def has_weather_type_display
-    self.attributes.keys & ["weather_types_a","coverages", "additives", "qualifiers"]
+    (self.attributes.keys & 
+     ["weather_types_a","coverages", "additives", "qualifiers"])
+    .count == 4
   end
 
   def start_date_in_app_time_zone

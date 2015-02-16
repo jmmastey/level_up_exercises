@@ -6,6 +6,7 @@ require 'capybara'
 require 'capybara-webkit'
 require 'capybara/cucumber'
 require 'rspec'
+require 'faker'
 
 Capybara.configure do |config|
   config.app = Overlord

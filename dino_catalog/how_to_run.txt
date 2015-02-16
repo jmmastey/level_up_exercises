@@ -1,0 +1,91 @@
+# to print all facts of a given dino
+ruby run_dinodex.rb name:Giganotosaurus
+Dinosaurs with ["name:Giganotosaurus"]
+Giganotosaurus is a Biped from Late Cretaceous period and South America continent with Carnivore diet and 30420lbs weight. Largest hunter and also the coolest ever.
+
+# to print bipeds
+ruby run_dinodex.rb walking:biped
+Dinosaurs with ["walking:biped"]
+Albertosaurus is a Biped from Late Cretaceous period and North America continent with Carnivore diet and 2000lbs weight. Like a T-Rex but smaller.
+Albertonykus is a Biped from Early Cretaceous period and North America continent with Insectivore diet. Earliest known Alvarezsaurid.
+Baryonyx is a Biped from Early Cretaceous period and Europe continent with Piscivore diet and 6000lbs weight. One of the only known dinosaurs with a fish-only diet.
+Deinonychus is a Biped from Early Cretaceous period and North America continent with Carnivore diet and 150lbs weight.
+Megalosaurus is a Biped from Jurassic period and Europe continent with Carnivore diet and 2200lbs weight. Originally thought to be a Quadruped. First dinosaur to be named.
+Giganotosaurus is a Biped from Late Cretaceous period and South America continent with Carnivore diet and 30420lbs weight. Largest hunter and also the coolest ever.
+Yangchuanosaurus is a Biped from Oxfordian period and Asia continent with Carnivore diet and 7200lbs weight.
+Abrictosaurus is a Biped from Jurassic period and Africa continent with Herbivore diet and 100lbs weight.
+Afrovenator is a Biped from Jurassic period and Africa continent with Carnivore diet.
+Carcharodontosaurus is a Biped from Albian period and Africa continent with Carnivore diet and 3000lbs weight.
+Suchomimus is a Biped from Cretaceous period and Africa continent with Carnivore diet and 10400lbs weight.
+
+# to print carnivores
+ruby run_dinodex.rb diet:carnivore
+Dinosaurs with ["diet:carnivore"]
+Albertosaurus is a Biped from Late Cretaceous period and North America continent with Carnivore diet and 2000lbs weight. Like a T-Rex but smaller.
+Albertonykus is a Biped from Early Cretaceous period and North America continent with Insectivore diet. Earliest known Alvarezsaurid.
+Baryonyx is a Biped from Early Cretaceous period and Europe continent with Piscivore diet and 6000lbs weight. One of the only known dinosaurs with a fish-only diet.
+Deinonychus is a Biped from Early Cretaceous period and North America continent with Carnivore diet and 150lbs weight.
+Diplocaulus is a Quadruped from Late Permian period and North America continent with Carnivore diet. They actually had fins on the side of their body.
+Megalosaurus is a Biped from Jurassic period and Europe continent with Carnivore diet and 2200lbs weight. Originally thought to be a Quadruped. First dinosaur to be named.
+Giganotosaurus is a Biped from Late Cretaceous period and South America continent with Carnivore diet and 30420lbs weight. Largest hunter and also the coolest ever.
+Quetzalcoatlus is a Quadruped from Late Cretaceous period and North America continent with Carnivore diet and 440lbs weight. Largest known flying animal of all time.
+Yangchuanosaurus is a Biped from Oxfordian period and Asia continent with Carnivore diet and 7200lbs weight.
+Afrovenator is a Biped from Jurassic period and Africa continent with Carnivore diet.
+Carcharodontosaurus is a Biped from Albian period and Africa continent with Carnivore diet and 3000lbs weight.
+Suchomimus is a Biped from Cretaceous period and Africa continent with Carnivore diet and 10400lbs weight.
+
+# to print dinosaurs of specific period
+ruby run_dinodex.rb period:Cretaceous
+Dinosaurs with ["period:Cretaceous"]
+Albertosaurus is a Biped from Late Cretaceous period and North America continent with Carnivore diet and 2000lbs weight. Like a T-Rex but smaller.
+Albertonykus is a Biped from Early Cretaceous period and North America continent with Insectivore diet. Earliest known Alvarezsaurid.
+Baryonyx is a Biped from Early Cretaceous period and Europe continent with Piscivore diet and 6000lbs weight. One of the only known dinosaurs with a fish-only diet.
+Deinonychus is a Biped from Early Cretaceous period and North America continent with Carnivore diet and 150lbs weight.
+Giganotosaurus is a Biped from Late Cretaceous period and South America continent with Carnivore diet and 30420lbs weight. Largest hunter and also the coolest ever.
+Quetzalcoatlus is a Quadruped from Late Cretaceous period and North America continent with Carnivore diet and 440lbs weight. Largest known flying animal of all time.
+Dracopelta is a Quadruped from Early Cretaceous or Late Jurassic period and South America continent with Herbivore diet. One of the most primitive known Ankylosauria.
+Paralititan is a Quadruped from Cretaceous period and Africa continent with Herbivore diet and 120000lbs weight.
+Suchomimus is a Biped from Cretaceous period and Africa continent with Carnivore diet and 10400lbs weight.
+
+# to print big dinosaurs
+ruby run_dinodex.rb weight:big
+Dinosaurs with ["weight:big"]
+Baryonyx is a Biped from Early Cretaceous period and Europe continent with Piscivore diet and 6000lbs weight. One of the only known dinosaurs with a fish-only diet.
+Megalosaurus is a Biped from Jurassic period and Europe continent with Carnivore diet and 2200lbs weight. Originally thought to be a Quadruped. First dinosaur to be named.
+Giganotosaurus is a Biped from Late Cretaceous period and South America continent with Carnivore diet and 30420lbs weight. Largest hunter and also the coolest ever.
+Yangchuanosaurus is a Biped from Oxfordian period and Asia continent with Carnivore diet and 7200lbs weight.
+Carcharodontosaurus is a Biped from Albian period and Africa continent with Carnivore diet and 3000lbs weight.
+Giraffatitan is a Quadruped from Jurassic period and Africa continent with Herbivore diet and 6600lbs weight.
+Paralititan is a Quadruped from Cretaceous period and Africa continent with Herbivore diet and 120000lbs weight.
+Suchomimus is a Biped from Cretaceous period and Africa continent with Carnivore diet and 10400lbs weight.
+Melanorosaurus is a Quadruped from Triassic period and Africa continent with Herbivore diet and 2400lbs weight.
+
+# to print big carnivores
+ruby run_dinodex.rb	weight:big diet:carnivore
+Dinosaurs with ["weight:big", "diet:carnivore"]
+Baryonyx is a Biped from Early Cretaceous period and Europe continent with Piscivore diet and 6000lbs weight. One of the only known dinosaurs with a fish-only diet.
+Megalosaurus is a Biped from Jurassic period and Europe continent with Carnivore diet and 2200lbs weight. Originally thought to be a Quadruped. First dinosaur to be named.
+Giganotosaurus is a Biped from Late Cretaceous period and South America continent with Carnivore diet and 30420lbs weight. Largest hunter and also the coolest ever.
+Yangchuanosaurus is a Biped from Oxfordian period and Asia continent with Carnivore diet and 7200lbs weight.
+Carcharodontosaurus is a Biped from Albian period and Africa continent with Carnivore diet and 3000lbs weight.
+Suchomimus is a Biped from Cretaceous period and Africa continent with Carnivore diet and 10400lbs weight.
+
+# to print all dinos without any filter
+ruby run_dinodex.rb
+Albertosaurus is a Biped from Late Cretaceous period and North America continent with Carnivore diet and 2000lbs weight. Like a T-Rex but smaller.
+Albertonykus is a Biped from Early Cretaceous period and North America continent with Insectivore diet. Earliest known Alvarezsaurid.
+Baryonyx is a Biped from Early Cretaceous period and Europe continent with Piscivore diet and 6000lbs weight. One of the only known dinosaurs with a fish-only diet.
+Deinonychus is a Biped from Early Cretaceous period and North America continent with Carnivore diet and 150lbs weight.
+Diplocaulus is a Quadruped from Late Permian period and North America continent with Carnivore diet. They actually had fins on the side of their body.
+Megalosaurus is a Biped from Jurassic period and Europe continent with Carnivore diet and 2200lbs weight. Originally thought to be a Quadruped. First dinosaur to be named.
+Giganotosaurus is a Biped from Late Cretaceous period and South America continent with Carnivore diet and 30420lbs weight. Largest hunter and also the coolest ever.
+Quetzalcoatlus is a Quadruped from Late Cretaceous period and North America continent with Carnivore diet and 440lbs weight. Largest known flying animal of all time.
+Yangchuanosaurus is a Biped from Oxfordian period and Asia continent with Carnivore diet and 7200lbs weight.
+Dracopelta is a Quadruped from Early Cretaceous or Late Jurassic period and South America continent with Herbivore diet. One of the most primitive known Ankylosauria.
+Abrictosaurus is a Biped from Jurassic period and Africa continent with Herbivore diet and 100lbs weight.
+Afrovenator is a Biped from Jurassic period and Africa continent with Carnivore diet.
+Carcharodontosaurus is a Biped from Albian period and Africa continent with Carnivore diet and 3000lbs weight.
+Giraffatitan is a Quadruped from Jurassic period and Africa continent with Herbivore diet and 6600lbs weight.
+Paralititan is a Quadruped from Cretaceous period and Africa continent with Herbivore diet and 120000lbs weight.
+Suchomimus is a Biped from Cretaceous period and Africa continent with Carnivore diet and 10400lbs weight.
+Melanorosaurus is a Quadruped from Triassic period and Africa continent with Herbivore diet and 2400lbs weight.

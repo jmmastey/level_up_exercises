@@ -8,7 +8,9 @@
       <ul>
         <li>Cloud Cover: <%= forecast.cloud_cover_pct %></li>
         <li><img src="<%= forecast.icon_link %>" /></li>
-        <li>Weather: <%= forecast.weather_type_display %></li>
+        <% if forecast.has_weather_type_display_data? %>
+          <li><%= forecast.weather_type_display.titleize %></li>
+        <% end %>
       </ul>
     </li>
   <% end %>

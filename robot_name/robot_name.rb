@@ -5,9 +5,8 @@ class Robot
   
   def initialize(args = {})
     @@registry ||= []
-    name_generator args[:name_generator]
-    name_generator
-    @@registry << @name 
+    @name_generator = args[:name_generator]
+    generate_name
   end
 
   def generate_char
@@ -18,13 +17,14 @@ class Robot
     rand(10)
   end
 
-  def name_generator (name_arg)
-    if name_arg
-      @name = name_arg
+  def generate_name
+    if @name_generator
+      @name = @name_generator.call
     else
       @name = "#{generate_char}#{generate_char}#{generate_num}#{generate_num}#{generate_num}"
     end
     error?
+    @@registry << @name
   end
 
   def error?

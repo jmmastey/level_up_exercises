@@ -2,7 +2,7 @@ class NameCollisionError < RuntimeError; end
 
 class Robot
   attr_accessor :name
-  
+
   def initialize(args = {})
     @@registry ||= []
     @name_generator = args[:name_generator]
@@ -21,7 +21,8 @@ class Robot
     if @name_generator
       @name = @name_generator.call
     else
-      @name = "#{generate_char}#{generate_char}#{generate_num}#{generate_num}#{generate_num}"
+      @name = "#{generate_char}#{generate_char}"\
+        "#{generate_num}#{generate_num}#{generate_num}"
     end
     error?
     @@registry << @name
@@ -32,7 +33,6 @@ class Robot
       raise NameCollisionError, 'There was a problem generating the robot name!'
     end
   end
-
 end
 
 robot = Robot.new
@@ -40,6 +40,8 @@ puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
 generator = -> { 'AA111' }
-Robot.new(name_generator: generator)
-Robot.new(name_generator: generator)
+robot_2 = Robot.new(name_generator: generator)
+puts "My pet robot's name is #{robot_2.name}, but we usually call him sparky."
+robot_3 = Robot.new(name_generator: generator)
+puts "My pet robot's name is #{robot_3.name}, but we usually call him sparky."
 

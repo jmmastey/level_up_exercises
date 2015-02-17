@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       redirect_to @user, notice: "Successfully updated user settings."
     else
       render :edit
@@ -18,7 +18,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user)
-          .permit(user_notifications_attributes: [:notification_time,
+          .permit(:phone,
+                  user_notifications_attributes: [:id,
+                                                  :notification_time,
                                                   :active])
   end
 end

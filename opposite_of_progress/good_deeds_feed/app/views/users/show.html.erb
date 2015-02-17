@@ -14,5 +14,12 @@
       </ol>
       <%= will_paginate @microposts %>
     <% end %>
+
+    <% if @user.favorites.any? %>
+      <h3>Favorites (<%= @user.favorites.count %>)</h3>
+      <ol class="legislators">
+          <%= render @user.favorites %>
+      </ol>
+    <% end %>
   </div>
 </div>

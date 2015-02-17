@@ -5,5 +5,6 @@ class LegislatorsController < ApplicationController
 
   def show
     @legislator = Legislator.find(params[:id])
+    @good_deeds = @legislator.good_deeds.paginate(page: params[:page])
   end
 end

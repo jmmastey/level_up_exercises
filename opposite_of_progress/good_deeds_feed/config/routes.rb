@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'favorites/create'
+
+  get 'favorites/destroy'
+
   get 'good_deeds/index'
 
   get 'good_deeds/show'
@@ -16,15 +20,17 @@ Rails.application.routes.draw do
   get 'static_pages/help'
 
   get 'sessions/new'
-  root 'static_pages#home'
+  root 'good_deeds#index'
   get 'users/new'
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   resources :legislators
+  resources :good_deeds
   resources :users
   resources :microposts, only: [:create, :destroy]
+    resources :favorites, only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

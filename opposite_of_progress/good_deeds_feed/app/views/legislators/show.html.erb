@@ -1,11 +1,22 @@
 <div class="row">
-  <aside class="col-md-4">
+  <aside class="col-md-6">
     <section class="user_info">
-      <h1>
-      	<% for attribute in @legislator.attributes.keys %>
-  		<p><%= attribute.humanize %> <%= @legislator.attributes[attribute].to_s %></p>
-		<% end %>
-      </h1>
+      <p>Legislator:</p>
+      <p><%= @legislator.title %> <%= @legislator.firstname %> <%= @legislator.lastname %></p>
+      <p>Party: <%= @legislator.party %></p>
+      <p>State: <%= @legislator.state %></p>
+      <p>Birthdate: <%= @legislator.birthdate %></p>
+      <p>Twitter ID: <%= @legislator.twitter_id %></p>
+      <p><%= link_to "Website", @legislator.website %></p>
     </section>
   </aside>
+    <div class="col-md-6">
+    <% if @legislator.good_deeds.any? %>
+      <h3>Good Deeds (<%= @legislator.good_deeds.count %>)</h3>
+      <ol class="good_deeds">
+        <%= render @good_deeds %>
+      </ol>
+      <%= will_paginate @good_deeds %>
+    <% end %>
+  </div>
 </div>

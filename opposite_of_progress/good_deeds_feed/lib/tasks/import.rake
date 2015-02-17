@@ -18,7 +18,7 @@ namespace :import_deeds do
     deeds = api.bills
     deeds.each do |deed|
       legislator = Legislator.find_by(bioguide_id: deed["bioguide_id"])
-      new_deed = GoodDeed.find_or_create_by(deed.except("bioguide_id", "name"))
+      new_deed = GoodDeed.find_or_create_by(deed.except("bioguide_id"))
       new_deed.legislator_id = legislator.id
       new_deed.save
     end

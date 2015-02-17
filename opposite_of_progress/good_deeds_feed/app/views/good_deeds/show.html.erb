@@ -1,2 +1,11 @@
-<h1>GoodDeeds#show</h1>
-<p>Find me in app/views/good_deeds/show.html.erb</p>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="good_deed_info">
+		<p>Congress number: <%= @good_deed.congress_number.to_s %></p>
+		<p><%= link_to "Congress.gov page", @good_deed.congress_url %></p>
+		<p>Title: <%= @good_deed.official_title %></p>
+		<p>Introduced on: <%= @good_deed.introduced_on %></p>
+		<p><%= link_to "Sponsor: #{@good_deed.legislator.title} #{@good_deed.legislator.lastname}", @good_deed.legislator %></p>
+    </section>
+  </aside>
+</div>

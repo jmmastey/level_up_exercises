@@ -1,2 +1,11 @@
-<h1>GoodDeeds#index</h1>
-<p>Find me in app/views/good_deeds/index.html.erb</p>
+<% provide(:title, 'All good deeds') %>
+<h1>All good deeds</h1>
+
+
+<%= will_paginate %>
+
+<ul class="good_deeds">
+	<%= render @good_deeds %>
+</ul>
+
+<%= will_paginate %>

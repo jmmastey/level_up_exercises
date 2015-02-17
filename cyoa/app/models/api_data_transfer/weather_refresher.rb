@@ -1,5 +1,6 @@
 require './app/models/point'
 require './app/models/forecast_type'
+require './app/models/api/weather_client'
 require './app/models/api_data_transfer/weather_loader'
 
 module WeatherRefresher
@@ -7,7 +8,7 @@ module WeatherRefresher
 
   def self.refresh_if_needed
     if ForecastType.needs_refresh?
-      WeatherLoader.load(WeatherClient, list_lat_lon: self.class.default_lat_lon)
+      WeatherLoader.load(WeatherClient, list_lat_lon: default_lat_lon)
     end
   end
 

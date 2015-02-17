@@ -8,9 +8,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find(params[:id])
-    
-    redirect_to home_index_path
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      redirect_to @user, notice: "Successfully updated user settings."
+    else
+      render :edit
+    end
   end
 
   def user_params

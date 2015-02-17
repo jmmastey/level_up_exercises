@@ -70,7 +70,7 @@ require 'json'
             @size = get_size
           end
         end
-        if (get_user_selection) || option_temp.length < 4
+        if (user_option.length < 4) && (get_user_selection)
             next
         else
             search(dinos, user_option, @period, @size)

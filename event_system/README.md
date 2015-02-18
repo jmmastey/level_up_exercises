@@ -10,7 +10,9 @@ Thankfully, because of friendly governmental agencies we can fight back, and glo
 
 ### Your Mission
 
-Build a Rails app to parse National Weather Service forecast data. The data is all public domain, but as of writing there is no xml / json feed for Chicago. The weather page is pretty predictable, so you'll need to write a wrapper to scrape those pages and return the data in a usable format.
+Build a Rails app to parse National Weather Service forecast data. The data is all public domain, and a REST service is available. The NWS knows that users of its API enjoy a challenge, so they created their own dialect of XML called Digital Weather Markup Language.
+
+http://graphical.weather.gov/xml/rest.php
 
 Some requirements to get you started:
 

@@ -1,6 +1,6 @@
 <div class="row">
   <aside class="col-md-6">
-    <section class="user_info">
+    <section class="legislator_info">
       <p>Legislator:</p>
       <p><%= @legislator.title %> <%= @legislator.firstname %> <%= @legislator.lastname %></p>
       <p>Party: <%= @legislator.party %></p>
@@ -8,6 +8,8 @@
       <p>Birthdate: <%= @legislator.birthdate %></p>
       <p>Twitter ID: <%= @legislator.twitter_id %></p>
       <p><%= link_to "Website", @legislator.website %></p>
+
+      <%= render 'shared/favorite_legislator' %>
     </section>
   </aside>
     <div class="col-md-6">

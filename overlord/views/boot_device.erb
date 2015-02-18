@@ -1,0 +1,30 @@
+<section id="boot_device">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Time to boot the device.</h2>
+                <hr class="star-primary">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+              <form action="/boot_device" method="post" >
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Boot Code</label>
+                        <input type="text" class="form-control" placeholder="Boot Code" id="boot_code" name="boot_code" required data-validation-required-message="Please enter the Boot Code." >
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <br>
+                <div id="success"></div>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <button type="submit" class="btn btn-success btn-lg">Send</button>
+                    </div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</section>

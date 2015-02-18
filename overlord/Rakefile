@@ -1,0 +1,48 @@
+require 'rspec/core/rake_task'
+require 'cucumber/rake/task'
+require 'data_mapper'
+
+task :default => :full_test
+task :full_test => ['unit_testing:unit_test', 'feature_testing:feature_test']
+
+if defined?(RSpec) && defined?(Cucumber)
+  RSpec::Core::RakeTask.new(:spec)
+else
+  puts "spec targets require RSpec"
+end
+
+if defined?(Cucumber)
+  Cucumber::Rake::Task.new(:cucumber) do |c|
+    c.cucumber_opts = "spec/features"
+  end
+else
+  puts "feature targets require Cucumber"
+end
+
+namespace :unit_testing do
+  desc "Run all RSpec tests"
+  task :unit_test => :spec
+end
+
+namespace :feature_testing do
+  desc "Run all Cucumber feature tests"
+  task :feature_test => :cucumber
+end
+
+namespace :db do
+  desc 'Auto-migrate the database (destroys data)'
+  task :migrate => :environment do
+    DataMapper.auto_migrate!
+  end
+
+  desc 'Auto-upgrade the database (preserves data)'
+  task :upgrade => :environment do
+    DataMapper.auto_upgrade!
+  end
+end
+
+task :environment do
+  require File.join(File.dirname(__FILE__), 'environment')
+end
+
+# cucumber spec/features/main_structure.feature -r spec/features

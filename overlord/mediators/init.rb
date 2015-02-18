@@ -1,0 +1,1 @@
+require './mediators/interface.rb'

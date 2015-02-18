@@ -1,0 +1,44 @@
+<section id="create_bomb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Configure Bomb.</h2>
+                <hr class="star-primary">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+              <form action="/create_bomb" method="post" >
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Disarming Code</label>
+                        <input type="text" class="form-control" placeholder="Enter a code to disarm the bomb" id="disarming_code" name="disarming_code" required data-validation-required-message="Please enter a code to disarm the bomb.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Timer</label>
+                        <input type="text" class="form-control" placeholder="Enter a desired timer countown for the bomb (1 = 1 second)" id="timer" name="timer" required data-validation-required-message="Please enter the Boot Code.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Max Attempts</label>
+                        <input type="text" class="form-control" placeholder="Enter desired maximum attempts to disable bomb" id="max_attempts" name="max_attempts" required data-validation-required-message="Please enter a maximum attempt.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <br>
+                <div id="success"></div>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <button type="submit" class="btn btn-success btn-lg">Send</button>
+                    </div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</section>

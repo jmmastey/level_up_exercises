@@ -1,8 +1,23 @@
+## I decided to go with a regular Sinatra-Boostrap here instead of
+## my dreams of AngulaJs/EmberJs + Sinatra API, will do that with my
+## CYOA
+
+Clone and cd into it.
+Afer that run db:migrate
+
+be shotgun
+Boot Code = 6969
+
+To run test
+rake
+
+Or read the rakefile
+
 ## Super Villain's Detonation Device
 
 You've been contacted by a super villain in search of help. He says he has a great idea, and needs only your genius to bring it to completion. Turns out the idea is going to be a bomb. I mean, literally. It's a bomb. Still, he's offering equity.
 
-One tricky problem is that bombs are quite expensive to debug in prod. To avoid an embarrassing dud, you're going to develop and test the bomb in the relative safety of your own workshop (desk, really). Thankfully, you've got requirements, so mostly this is just an exercise of translating those requirements into working tests and then writing the software to control the bomb. 
+One tricky problem is that bombs are quite expensive to debug in prod. To avoid an embarrassing dud, you're going to develop and test the bomb in the relative safety of your own workshop (desk, really). Thankfully, you've got requirements, so mostly this is just an exercise of translating those requirements into working tests and then writing the software to control the bomb.
 
 But, this is the important part: you're going to write all the tests for the device before you write any of the app code. You cleverly realize that by writing the tests the way you'd like the code to work, you'll make your resulting code that much better. Well done, smartie.
 

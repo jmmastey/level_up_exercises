@@ -1,0 +1,11 @@
+<div>This Week's Temperatures at a Glance</div>
+<ul id="day_forecasts">
+<% @forecast_daily.each do |forecast| %>
+<li><%= forecast.start_date_in_app_time_zone %>
+  <ul>
+    <li>Min Temperature: <%= forecast.mint %></li>
+    <li>Max Temperature: <%= forecast.maxt %></li>
+  </ul>
+</li> 
+<% end %>
+</ul>

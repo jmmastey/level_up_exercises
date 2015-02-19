@@ -1,0 +1,971 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache/2.2.15 (Red Hat)
+      X-Nids-Serverid:
+      - www5.mo
+      Last-Modified:
+      - Thu, 13 Mar 2014 18:05:49 GMT
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '28583'
+      Content-Type:
+      - application/wsdl+xml
+      Date:
+      - Fri, 30 Jan 2015 19:47:17 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\"?>\n\n<!--   **********************************************************************
+        \  \n                                                                           \n
+        \      ndfdXML.wsdl   \n\n       John L. Schattel          MDL                4
+        July 2007  \n       Aniesha L. Alford\n       Red Hat Linux                                Apache
+        Server  \n   \n       SOURCE CODE CONTROL INFORMATION   \n\n       Name:  \n
+        \        %PM%  \n         %PID%  \n\n       Status:  \n         %PS%   \n\n
+        \      History:  \n         %PL%                                                             \n\n
+        \      Change Document History:                                            \n
+        \        %PIRC%                                                           \n\n
+        \     *************************************************************************
+        \  -->\n\n<definitions xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        \n             xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \n             xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
+        \n             xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        \n             xmlns:si=\"http://soapinterop.org/xsd\" \n             xmlns:tns=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        \n             xmlns:typens=\"http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd\"
+        \n             xmlns:soap=\"http://schemas.xmlsoap.org/wsdl/soap/\" \n             xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\"
+        \n             xmlns=\"http://schemas.xmlsoap.org/wsdl/\" \n             targetNamespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\">\n<types>\n
+        <xsd:schema targetNamespace=\"http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd\">\n
+        <xsd:import namespace=\"http://schemas.xmlsoap.org/soap/encoding/\" />\n <xsd:import
+        namespace=\"http://schemas.xmlsoap.org/wsdl/\" />\n\n <xsd:simpleType name=\"sectorType\">\n
+        \ <xsd:restriction base='xsd:string'>\n   <xsd:enumeration value='conus'/>\n
+        \  <xsd:enumeration value='nhemi'/>\n   <xsd:enumeration value='alaska'/>\n
+        \  <xsd:enumeration value='guam'/>\n   <xsd:enumeration value='hawaii'/>\n
+        \  <xsd:enumeration value='puertori'/>\n   <xsd:enumeration value='npacocn'/>\n
+        \ </xsd:restriction>\n </xsd:simpleType>\n\n <xsd:simpleType name=\"unitType\">\n
+        \ <xsd:restriction base='xsd:string'>\n   <xsd:enumeration value='e'/>\n   <xsd:enumeration
+        value='m'/>\n  </xsd:restriction>\n </xsd:simpleType>\n\n <xsd:simpleType
+        name=\"formatType\">\n  <xsd:restriction base='xsd:string'>\n   <xsd:enumeration
+        value='24 hourly'/>\n   <xsd:enumeration value='12 hourly'/>\n  </xsd:restriction>\n
+        </xsd:simpleType>\n\n <xsd:simpleType name=\"productType\">\n  <xsd:restriction
+        base='xsd:string'>\n   <xsd:enumeration value='time-series'/>\n   <xsd:enumeration
+        value='glance'/>\n  </xsd:restriction>\n </xsd:simpleType>\n\n <xsd:simpleType
+        name=\"latLonPairType\">\n  <xsd:restriction base='xsd:string'>\n   <xsd:pattern
+        value=\"[\\-]?\\d{1,2}\\.\\d+,[\\-]?\\d{1,3}\\.\\d+\" />\n  </xsd:restriction>\n
+        </xsd:simpleType>\n\n <xsd:simpleType name=\"listLatLonType\">\n  <xsd:restriction
+        base='xsd:string'>\n   <xsd:pattern value=\"[\\-]?\\d{1,2}\\.\\d+,[\\-]?\\d{1,3}\\.\\d+(
+        [\\-]?\\d{1,2}\\.\\d+,[\\-]?\\d{1,3}\\.\\d+)*\" />\n  </xsd:restriction>\n
+        </xsd:simpleType>\n\n <xsd:simpleType name=\"zipCodeType\">\n  <xsd:restriction
+        base='xsd:string'>\n   <xsd:pattern value=\"\\d{5}(\\-\\d{4})?\" />\n  </xsd:restriction>\n
+        </xsd:simpleType>\n\n <xsd:simpleType name=\"zipCodeListType\">\n  <xsd:restriction
+        base='xsd:string'>\n   <xsd:pattern value=\"\\d{5}(\\-\\d{4})?( \\d{5}(\\-\\d{4})?)*\"
+        />\n  </xsd:restriction>\n </xsd:simpleType>\n\n <xsd:simpleType name=\"featureTypeType\">\n
+        \ <xsd:restriction base='xsd:string'>\n   <xsd:enumeration value='Forecast_Gml2Point'/>\n
+        \  <xsd:enumeration value='Forecast_Gml2AllWx'/>\n   <xsd:enumeration value='Forecast_GmlsfPoint'/>\n
+        \  <xsd:enumeration value='Forecast_GmlObs'/>\n   <xsd:enumeration value='NdfdMultiPointCoverage'/>\n
+        \  <xsd:enumeration value='Ndfd_KmlPoint'/>\n  </xsd:restriction>\n </xsd:simpleType>\n\n
+        <xsd:simpleType name=\"compTypeType\">\n  <xsd:restriction base='xsd:string'>\n
+        \  <xsd:enumeration value='IsEqual'/>\n   <xsd:enumeration value='Between'/>\n
+        \  <xsd:enumeration value='GreaterThan'/>\n   <xsd:enumeration value='GreaterThanEqualTo'/>\n
+        \  <xsd:enumeration value='LessThan'/>\n   <xsd:enumeration value='LessThanEqualTo'/>\n
+        \ </xsd:restriction>\n </xsd:simpleType>\n\n <xsd:simpleType name=\"listCityNamesType\">\n
+        \ <xsd:restriction base='xsd:string'>\n   <xsd:pattern value=\"[a-zA-Z'\\-]*(
+        ?[a-zA-Z'\\-]*)*,[A-Z][A-Z](\\|[a-zA-Z'\\-]*( ?[a-zA-Z'\\-]*)*,[A-Z][A-Z])*\"
+        />\n  </xsd:restriction>\n </xsd:simpleType>\n\n <xsd:simpleType name=\"displayLevelType\">\n
+        \ <xsd:restriction base='xsd:integer'>\n   <xsd:enumeration value='1'/>\n
+        \  <xsd:enumeration value='2'/>\n   <xsd:enumeration value='3'/>\n   <xsd:enumeration
+        value='4'/>\n   <xsd:enumeration value='12'/>\n   <xsd:enumeration value='34'/>\n
+        \  <xsd:enumeration value='1234'/>\n  </xsd:restriction>\n </xsd:simpleType>\n\n
+        <xsd:complexType name=\"weatherParametersType\">\n  <xsd:all>\n   <xsd:element
+        name=\"maxt\"         type=\"xsd:boolean\"/>\n   <xsd:element name=\"mint\"
+        \        type=\"xsd:boolean\"/>\n   <xsd:element name=\"temp\"         type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"dew\"          type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"pop12\"        type=\"xsd:boolean\"/>\n   <xsd:element name=\"qpf\"
+        \         type=\"xsd:boolean\"/>\n   <xsd:element name=\"sky\"          type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"snow\"         type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"wspd\"         type=\"xsd:boolean\"/>\n   <xsd:element name=\"wdir\"
+        \        type=\"xsd:boolean\"/>\n   <xsd:element name=\"wx\"           type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"waveh\"        type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"icons\"        type=\"xsd:boolean\"/>\n   <xsd:element name=\"rh\"
+        \          type=\"xsd:boolean\"/>\n   <xsd:element name=\"appt\"         type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"incw34\"       type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"incw50\"       type=\"xsd:boolean\"/>\n   <xsd:element name=\"incw64\"
+        \      type=\"xsd:boolean\"/>\n   <xsd:element name=\"cumw34\"       type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"cumw50\"       type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"cumw64\"       type=\"xsd:boolean\"/>\n   <xsd:element name=\"critfireo\"
+        \   type=\"xsd:boolean\"/>\n   <xsd:element name=\"dryfireo\"     type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"conhazo\"      type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"ptornado\"     type=\"xsd:boolean\"/>\n   <xsd:element name=\"phail\"
+        \       type=\"xsd:boolean\"/>\n   <xsd:element name=\"ptstmwinds\"   type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"pxtornado\"    type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"pxhail\"       type=\"xsd:boolean\"/>\n   <xsd:element name=\"pxtstmwinds\"
+        \ type=\"xsd:boolean\"/>\n   <xsd:element name=\"ptotsvrtstm\"  type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"pxtotsvrtstm\" type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"tmpabv14d\"    type=\"xsd:boolean\"/>\n   <xsd:element name=\"tmpblw14d\"
+        \   type=\"xsd:boolean\"/>\n   <xsd:element name=\"tmpabv30d\"    type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"tmpblw30d\"    type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"tmpabv90d\"    type=\"xsd:boolean\"/>\n   <xsd:element name=\"tmpblw90d\"
+        \   type=\"xsd:boolean\"/>\n   <xsd:element name=\"prcpabv14d\"   type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"prcpblw14d\"   type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"prcpabv30d\"   type=\"xsd:boolean\"/>\n   <xsd:element name=\"prcpblw30d\"
+        \  type=\"xsd:boolean\"/>\n   <xsd:element name=\"prcpabv90d\"   type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"prcpblw90d\"   type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"precipa_r\"    type=\"xsd:boolean\"/>\n   <xsd:element name=\"sky_r\"
+        \       type=\"xsd:boolean\"/>\n   <xsd:element name=\"td_r\"         type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"temp_r\"       type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"wdir_r\"       type=\"xsd:boolean\"/>\n   <xsd:element name=\"wspd_r\"
+        \      type=\"xsd:boolean\"/>\n   <xsd:element name=\"wwa\"          type=\"xsd:boolean\"/>\n
+        \  <xsd:element name=\"wgust\"        type=\"xsd:boolean\"/>\n   <xsd:element
+        name=\"iceaccum\"     type=\"xsd:boolean\"/>\n   <xsd:element name=\"maxrh\"
+        \       type=\"xsd:boolean\"/>\n   <xsd:element name=\"minrh\"        type=\"xsd:boolean\"/>\n
+        \ </xsd:all>\n </xsd:complexType>\n\n</xsd:schema>\n</types>\n\n<message name=\"NDFDgenRequest\">\n
+        \  <part name=\"latitude\"          type=\"xsd:decimal\" />\n   <part name=\"longitude\"
+        \        type=\"xsd:decimal\" />\n   <part name=\"product\"           type=\"typens:productType\"
+        />\n   <part name=\"startTime\"         type=\"xsd:dateTime\" />\n   <part
+        name=\"endTime\"           type=\"xsd:dateTime\" />\n   <part name=\"Unit\"
+        \             type=\"typens:unitType\" />   \n   <part name=\"weatherParameters\"
+        type=\"typens:weatherParametersType\" />\n</message>\n\n<message name=\"NDFDgenResponse\">\n
+        \  <part name=\"dwmlOut\"           type=\"xsd:string\" />\n</message>\n\n<message
+        name=\"NDFDgenLatLonListRequest\">\n   <part name=\"listLatLon\"        type=\"typens:listLatLonType\"
+        />\n   <part name=\"product\"           type=\"typens:productType\" />\n   <part
+        name=\"startTime\"         type=\"xsd:dateTime\" />\n   <part name=\"endTime\"
+        \          type=\"xsd:dateTime\" />\n   <part name=\"Unit\"              type=\"typens:unitType\"
+        />   \n   <part name=\"weatherParameters\" type=\"typens:weatherParametersType\"
+        />\n</message>\n\n<message name=\"NDFDgenLatLonListResponse\">\n   <part name=\"dwmlOut\"
+        \          type=\"xsd:string\" />\n</message>\n\n<message name=\"LatLonListSubgridRequest\">\n
+        \  <part name=\"lowerLeftLatitude\"   type=\"xsd:decimal\" />\n   <part name=\"lowerLeftLongitude\"
+        \ type=\"xsd:decimal\" />\n   <part name=\"upperRightLatitude\"  type=\"xsd:decimal\"
+        />\n   <part name=\"upperRightLongitude\" type=\"xsd:decimal\" />\n   <part
+        name=\"resolution\"          type=\"xsd:decimal\" />\n</message>\n\n<message
+        name=\"LatLonListSubgridResponse\">\n   <part name=\"listLatLonOut\"     type=\"typens:listLatLonType\"
+        />\n</message>\n\n<message name=\"LatLonListLineRequest\">\n   <part name=\"endPoint1Lat\"
+        \     type=\"xsd:decimal\" />\n   <part name=\"endPoint1Lon\"      type=\"xsd:decimal\"
+        />\n   <part name=\"endPoint2Lat\"      type=\"xsd:decimal\" />\n   <part
+        name=\"endPoint2Lon\"      type=\"xsd:decimal\" />\n</message>\n\n<message
+        name=\"LatLonListLineResponse\">\n   <part name=\"listLatLonOut\"     type=\"typens:listLatLonType\"
+        />\n</message>\n\n<message name=\"LatLonListZipCodeRequest\">\n   <part name=\"zipCodeList\"
+        \      type=\"typens:zipCodeListType\" />\n</message>\n\n<message name=\"LatLonListZipCodeResponse\">\n
+        \  <part name=\"listLatLonOut\"     type=\"typens:listLatLonType\" />\n</message>\n\n<message
+        name=\"LatLonListSquareRequest\">\n   <part name=\"centerPointLat\"    type=\"xsd:decimal\"
+        />\n   <part name=\"centerPointLon\"    type=\"xsd:decimal\" />\n   <part
+        name=\"distanceLat\"       type=\"xsd:decimal\" />\n   <part name=\"distanceLon\"
+        \      type=\"xsd:decimal\" />\n   <part name=\"resolution\"        type=\"xsd:decimal\"
+        />\n</message>\n\n<message name=\"LatLonListSquareResponse\">\n   <part name=\"listLatLonOut\"
+        \    type=\"typens:listLatLonType\" />\n</message>\n\n<message name=\"CornerPointsRequest\">\n
+        \  <part name=\"sector\"            type=\"typens:sectorType\" />\n</message>\n\n<message
+        name=\"CornerPointsResponse\">\n   <part name=\"listLatLonOut\"     type=\"typens:listLatLonType\"
+        />\n</message>\n\n<message name=\"LatLonListCityNamesRequest\">\n   <part
+        name=\"displayLevel\"      type=\"typens:displayLevelType\" />\n</message>\n\n<message
+        name=\"LatLonListCityNamesResponse\">\n   <part name=\"listCityNamesOut\"
+        \ type=\"typens:listCityNamesType\" />\n</message>\n\n<message name=\"NDFDgenByDayRequest\">\n
+        \  <part name=\"latitude\"          type=\"xsd:decimal\" />\n   <part name=\"longitude\"
+        \        type=\"xsd:decimal\" />\n   <part name=\"startDate\"         type=\"xsd:date\"
+        />\n   <part name=\"numDays\"           type=\"xsd:integer\" />\n   <part
+        name=\"Unit\"              type=\"typens:unitType\" />   \n   <part name=\"format\"
+        \           type=\"typens:formatType\" />\n</message>\n\n<message name=\"NDFDgenByDayResponse\">\n
+        \  <part name=\"dwmlByDayOut\" type=\"xsd:string\" />\n</message>\n\n<message
+        name=\"NDFDgenByDayLatLonListRequest\">\n   <part name=\"listLatLon\"        type=\"typens:listLatLonType\"
+        />\n   <part name=\"startDate\"         type=\"xsd:date\" />\n   <part name=\"numDays\"
+        \          type=\"xsd:integer\" />\n   <part name=\"Unit\"              type=\"typens:unitType\"
+        />   \n   <part name=\"format\"            type=\"typens:formatType\" />\n</message>\n\n<message
+        name=\"NDFDgenByDayLatLonListResponse\">\n   <part name=\"dwmlByDayOut\"      type=\"xsd:string\"
+        />\n</message>\n\n<message name=\"GmlLatLonListRequest\">\n   <part name=\"listLatLon\"
+        \       type=\"typens:listLatLonType\" />\n   <part name=\"requestedTime\"
+        \    type=\"xsd:dateTime\" />\n   <part name=\"featureType\"       type=\"typens:featureTypeType\"
+        />\n   <part name=\"weatherParameters\" type=\"typens:weatherParametersType\"
+        />\n</message>\n\n<message name=\"GmlLatLonListResponse\">\n   <part name=\"dwGmlOut\"
+        \         type=\"xsd:string\" />\n</message>\n\n<message name=\"GmlTimeSeriesRequest\">\n
+        \  <part name=\"listLatLon\"        type=\"typens:listLatLonType\" />\n   <part
+        name=\"startTime\"         type=\"xsd:dateTime\" />\n   <part name=\"endTime\"
+        \          type=\"xsd:dateTime\" />\n   <part name=\"compType\"          type=\"typens:compTypeType\"
+        />\n   <part name=\"featureType\"       type=\"typens:featureTypeType\" />\n
+        \  <part name=\"propertyName\"      type=\"xsd:string\" />\n</message>\n\n<message
+        name=\"GmlTimeSeriesResponse\">\n   <part name=\"dwGmlOut\"          type=\"xsd:string\"
+        />\n</message>\n\n<portType name=\"ndfdXMLPortType\">\n\n   <operation name=\"NDFDgen\">\n
+        \     <documentation>Returns National Weather Service digital weather forecast
+        data</documentation>\n      <input  message=\"tns:NDFDgenRequest\"/>\n      <output
+        message=\"tns:NDFDgenResponse\"/>\n   </operation>\n\n   <operation name=\"NDFDgenByDay\">\n
+        \     <documentation>Returns National Weather Service digital weather forecast
+        data summarized over either 24- or 12-hourly periods</documentation>\n      <input
+        \ message=\"tns:NDFDgenByDayRequest\"/>\n      <output message=\"tns:NDFDgenByDayResponse\"/>\n
+        \  </operation>\n\n   <operation name=\"NDFDgenLatLonList\">\n      <documentation>Returns
+        National Weather Service digital weather forecast data</documentation>\n      <input
+        \ message=\"tns:NDFDgenLatLonListRequest\"/>\n      <output message=\"tns:NDFDgenLatLonListResponse\"/>\n
+        \  </operation>\n\n   <operation name=\"NDFDgenByDayLatLonList\">\n      <documentation>Returns
+        National Weather Service digital weather forecast data summarized over either
+        24- or 12-hourly periods</documentation>\n      <input  message=\"tns:NDFDgenByDayLatLonListRequest\"/>\n
+        \     <output message=\"tns:NDFDgenByDayLatLonListResponse\"/>\n   </operation>\n\n
+        \  <operation name=\"GmlLatLonList\">\n      <documentation>Returns National
+        Weather Service digital weather forecast data encoded in GML for a single
+        time</documentation>\n      <input  message=\"tns:GmlLatLonListRequest\"/>\n
+        \     <output message=\"tns:GmlLatLonListResponse\"/>\n   </operation>\n\n
+        \  <operation name=\"GmlTimeSeries\">\n      <documentation>Returns National
+        Weather Service digital weather forecast data encoded in GML for a time period</documentation>\n
+        \     <input  message=\"tns:GmlTimeSeriesRequest\"/>\n      <output message=\"tns:GmlTimeSeriesResponse\"/>\n
+        \  </operation>\n\n   <operation name=\"LatLonListSubgrid\">\n      <documentation>Returns
+        a list of latitude and longitude pairs in a rectangular subgrid defined by
+        the lower left and upper right points</documentation>\n      <input  message=\"tns:LatLonListSubgridRequest\"/>\n
+        \     <output message=\"tns:LatLonListSubgridResponse\"/>\n   </operation>\n\n
+        \  <operation name=\"LatLonListLine\">\n      <documentation>Returns a list
+        of latitude and longitude pairs along a line defined by the latitude and longitude
+        of the 2 endpoints</documentation>\n      <input  message=\"tns:LatLonListLineRequest\"/>\n
+        \     <output message=\"tns:LatLonListLineResponse\"/>\n   </operation>\n\n
+        \  <operation name=\"LatLonListZipCode\">\n      <documentation>Returns a
+        list of latitude and longitude pairs with each pair corresponding to an input
+        zip code.</documentation>\n      <input  message=\"tns:LatLonListZipCodeRequest\"/>\n
+        \     <output message=\"tns:LatLonListZipCodeResponse\"/>\n   </operation>\n\n
+        \  <operation name=\"LatLonListSquare\">\n      <documentation>Returns a list
+        of latitude and longitude pairs in a rectangle defined by a central point
+        and distance from that point in the latitudinal and longitudinal directions</documentation>\n
+        \     <input  message=\"tns:LatLonListSquareRequest\"/>\n      <output message=\"tns:LatLonListSquareResponse\"/>\n
+        \  </operation>\n\n   <operation name=\"CornerPoints\">\n      <documentation>Returns
+        four latitude and longitude pairs for corners of an NDFD grid and the minimum
+        resolution that will return the entire grid</documentation>\n      <input
+        \ message=\"tns:CornerPointsRequest\"/>\n      <output message=\"tns:CornerPointsResponse\"/>\n
+        \  </operation>\n\n   <operation name=\"LatLonListCityNames\">\n      <documentation>Returns
+        a list of latitude and longitude pairs paired with the city names they correspond
+        to</documentation>\n      <input  message=\"tns:LatLonListCityNamesRequest\"/>\n
+        \     <output message=\"tns:LatLonListCityNamesResponse\"/>\n   </operation>\n\n</portType>\n\n<binding
+        name=\"ndfdXMLBinding\" type=\"tns:ndfdXMLPortType\">\n   <soap:binding style=\"rpc\"
+        transport=\"http://schemas.xmlsoap.org/soap/http\"/>\n\n   <operation name=\"NDFDgen\">\n
+        \     <soap:operation soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#NDFDgen\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"NDFDgenByDay\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#NDFDgenByDay\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"NDFDgenLatLonList\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#NDFDgenLatLonList\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"NDFDgenByDayLatLonList\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#NDFDgenByDayLatLonList\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"GmlLatLonList\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#GmlLatLonList\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"GmlTimeSeries\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#GmlTimeSeries\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"LatLonListSubgrid\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#LatLonListSubgrid\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"LatLonListLine\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#LatLonListLine\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"LatLonListZipCode\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#LatLonListZipCode\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"LatLonListSquare\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#LatLonListSquare\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"CornerPoints\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#CornerPoints\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n   <operation name=\"LatLonListCityNames\">\n      <soap:operation
+        soapAction=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#LatLonListCityNames\"
+        style=\"rpc\"/>\n      <input>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </input>\n
+        \     <output>\n         <soap:body use=\"encoded\" namespace=\"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl\"
+        encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>\n      </output>\n
+        \  </operation>\n\n</binding>\n\n<service name=\"ndfdXML\">\n   <documentation>The
+        service has 12 exposed functions, NDFDgen, NDFDgenLatLonList, NDFDgenByDay,
+        NDFDgenByDayLatLonList, \n                  LatLonListSubgrid, LatLonListLine,
+        LatLonListZipCode, CornerPoints, LatLonListSquare, GmlLatLonList, GmlTimeSeries,
+        and LatLonListCityNames. \n                  For the NDFDgen function, the
+        client needs to provide a latitude and longitude pair and the product type.
+        The Unit will default\n                  to U.S. Standard (english) unless
+        Metric is chosen by client. The client also needs to provide the start and
+        end time (Local) \n                  of the period that it wants data for
+        (if shorter than the 7 days is wanted).  For the time-series product, the
+        client needs to \n                  provide an array of boolean values corresponding
+        to which NDFD values are desired.\n                  For the NDFDgenByDay
+        function, the client needs to provide a latitude and longitude pair, the date
+        (Local) it wants to start \n                  retrieving data for and the
+        number of days worth of data.  The Unit will default to U.S. Standard (english)
+        unless Metric is \n                  chosen by client. The client also needs
+        to provide the format that is desired.  \n                  For the multi
+        point versions, NDFDgenLatLonList and NDFDgenByDayLatLonList a space delimited
+        list of latitude and longitude \n\t\t  pairs are substituted for the single
+        latitude and longitude input.  Each latitude and longitude \n                  pair
+        is composed of a latitude and longitude delimited by a comma.  \n\t\t  For
+        the LatLonListSubgrid, the user provides a comma delimited latitude and longitude
+        pair for the lower left and for \n                  the upper right corners
+        of a rectangular subgrid.  The function can also take a integer \n                  resolution
+        to reduce the number of grid points returned. The service then returns a list
+        of \n                  latitude and longitude pairs for all the grid points
+        contained in the subgrid. \n                  weather values should appear
+        in the time series product.  \n\t\t  For the LatLonListLine, The inputs are
+        the same as the function NDFDgen except the latitude and longitude pair is
+        \n\t\t  replaced by two latitude and longitude pairs, one for each end point
+        a line. The two points are delimited with a space.  \n                  The
+        service then returns data for all the NDFD points on the line formed by the
+        two points.  \n\t\t  For the LatLonListZipCode function, the input is the
+        same as the NDFDgen function except the latitude and longitude values \n\t\t
+        \ are relaced by a zip code for the 50 United States and Puerto Rico.\n\t\t
+        \ For the LatLonListSquare function, the input is the same as the NDFDgen
+        function except the latitude and longitude values \n\t\t  are relaced by a
+        zip code for the 50 United States and Puerto Rico.\n\t\t  For the CornerPoints
+        function, the service requires a valid NDFD grid name.  The function returns
+        a \n                  list of four latitude and longitude pairs, one for each
+        corner of the NDFD grid.  The function \n                  also returns the
+        minimum resolution required to return the entire grid below the maximum points
+        \n                  threshold.\n                  For the GmlLatLonList function,
+        the service requires a list of latitude and longitude pairs, the time (UTC)
+        the user \n\t\t  wants data for, the GML feature type and the array of boolean
+        values corresponding to which NDFD values are desired.\n                  For
+        the GmlTimeSeries function, the service requires a list of latitude and longitude
+        pairs, the start and end time (UTC) the user \n\t\t  wants data for, a comparison
+        type (IsEqual, Between, GreaterThan, GreaterThan, GreaterThanEqualTo, LessThan,
+        and  \n                  LessThanEqualTo), the GML feature type and The input
+        variable \"propertyName\" contains a comma delimited string of NDFD element
+        to \n                  indicate which weather parameters are being requested.\n
+        \                 For the LatLonListCityNames function, the services requires
+        a detail level that that ranges from 1 to 4.  Level 1 generally represents\n
+        \                 large main cities.  Level 2 represents progressively smaller
+        cities or large cities that are close to another even larger city.  Levels\n
+        \                 3 and 4 are part one and two of a list of cities that help
+        increase the areal coverage of the cities dataset.  This functions\n                  returns
+        a list of latitude and longitude values along with a seperate list of city
+        name for those point.</documentation>\n\n   <port name=\"ndfdXMLPort\" binding=\"tns:ndfdXMLBinding\">\n
+        \     <soap:address location=\"http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php\"/>\n
+        \  </port>\n</service>\n\n</definitions>\n"
+    http_version: 
+  recorded_at: Fri, 30 Jan 2015 19:47:17 GMT
+- request:
+    method: post
+    uri: http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd"><env:Body><tns:NDFDgenLatLonList><listLatLon>41.837,-87.685</listLatLon><product>glance</product><startTime>2015-01-30T00:00:00-06:00</startTime><endTime>2015-02-08T00:00:00-06:00</endTime><unit>e</unit></tns:NDFDgenLatLonList></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#NDFDgenLatLonList"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '599'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache/2.2.15 (Red Hat)
+      X-Nids-Serverid:
+      - www4.mo
+      X-Soap-Server:
+      - NuSOAP/0.9.5 (1.123)
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - max-age=180
+      Expires:
+      - Fri, 30 Jan 2015 20:42:52 GMT
+      Date:
+      - Fri, 30 Jan 2015 20:39:52 GMT
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - Transfer-Encoding
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="ISO-8859-1"?><SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:NDFDgenLatLonListResponse xmlns:ns1="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl"><dwmlOut xsi:type="xsd:string">&lt;?xml version=&quot;1.0&quot;?&gt;
+        &lt;dwml version=&quot;1.0&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:noNamespaceSchemaLocation=&quot;http://www.nws.noaa.gov/forecasts/xml/DWMLgen/schema/DWML.xsd&quot;&gt;
+          &lt;head&gt;
+            &lt;product srsName=&quot;WGS 1984&quot; concise-name=&quot;glance&quot; operational-mode=&quot;official&quot;&gt;
+              &lt;title&gt;NOAA&apos;s National Weather Service Forecast at a Glance&lt;/title&gt;
+              &lt;field&gt;meteorological&lt;/field&gt;
+              &lt;category&gt;forecast&lt;/category&gt;
+              &lt;creation-date refresh-frequency=&quot;PT1H&quot;&gt;2015-01-30T20:39:52Z&lt;/creation-date&gt;
+            &lt;/product&gt;
+            &lt;source&gt;
+              &lt;more-information&gt;http://www.nws.noaa.gov/forecasts/xml/&lt;/more-information&gt;
+              &lt;production-center&gt;Meteorological Development Laboratory&lt;sub-center&gt;Product Generation Branch&lt;/sub-center&gt;&lt;/production-center&gt;
+              &lt;disclaimer&gt;http://www.nws.noaa.gov/disclaimer.html&lt;/disclaimer&gt;
+              &lt;credit&gt;http://www.weather.gov/&lt;/credit&gt;
+              &lt;credit-logo&gt;http://www.weather.gov/images/xml_logo.gif&lt;/credit-logo&gt;
+              &lt;feedback&gt;http://www.weather.gov/feedback.php&lt;/feedback&gt;
+            &lt;/source&gt;
+          &lt;/head&gt;
+          &lt;data&gt;
+            &lt;location&gt;
+              &lt;location-key&gt;point1&lt;/location-key&gt;
+              &lt;point latitude=&quot;41.84&quot; longitude=&quot;-87.69&quot;/&gt;
+            &lt;/location&gt;
+            &lt;moreWeatherInformation applicable-location=&quot;point1&quot;&gt;http://forecast.weather.gov/MapClick.php?textField1=41.84&amp;amp;textField2=-87.69&lt;/moreWeatherInformation&gt;
+            &lt;time-layout time-coordinate=&quot;local&quot; summarization=&quot;none&quot;&gt;
+              &lt;layout-key&gt;k-p24h-n7-1&lt;/layout-key&gt;
+              &lt;start-valid-time period-name=&quot;Today&quot;&gt;2015-01-30T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-01-30T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Tomorrow&quot;&gt;2015-01-31T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-01-31T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Sunday&quot;&gt;2015-02-01T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-01T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Monday&quot;&gt;2015-02-02T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-02T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Tuesday&quot;&gt;2015-02-03T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-03T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Wednesday&quot;&gt;2015-02-04T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-04T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Thursday&quot;&gt;2015-02-05T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-05T19:00:00-06:00&lt;/end-valid-time&gt;
+            &lt;/time-layout&gt;
+            &lt;time-layout time-coordinate=&quot;local&quot; summarization=&quot;none&quot;&gt;
+              &lt;layout-key&gt;k-p24h-n6-2&lt;/layout-key&gt;
+              &lt;start-valid-time period-name=&quot;Tonight&quot;&gt;2015-01-30T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-01-31T08:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Tomorrow Night&quot;&gt;2015-01-31T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-01T08:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Sunday Night&quot;&gt;2015-02-01T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-02T08:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Monday Night&quot;&gt;2015-02-02T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-03T08:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Tuesday Night&quot;&gt;2015-02-03T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-04T08:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Wednesday Night&quot;&gt;2015-02-04T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-05T08:00:00-06:00&lt;/end-valid-time&gt;
+            &lt;/time-layout&gt;
+            &lt;time-layout time-coordinate=&quot;local&quot; summarization=&quot;none&quot;&gt;
+              &lt;layout-key&gt;k-p3h-n34-3&lt;/layout-key&gt;
+              &lt;start-valid-time&gt;2015-01-30T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-30T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-30T21:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T03:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T09:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T21:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T03:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T09:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-02T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-02T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-02T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-02T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-03T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-03T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-03T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-03T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-04T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-04T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-04T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-04T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-05T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-05T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-05T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-05T18:00:00-06:00&lt;/start-valid-time&gt;
+            &lt;/time-layout&gt;
+            &lt;time-layout time-coordinate=&quot;local&quot; summarization=&quot;none&quot;&gt;
+              &lt;layout-key&gt;k-p1h-n60-4&lt;/layout-key&gt;
+              &lt;start-valid-time&gt;2015-01-30T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-30T16:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-30T17:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-30T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-30T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-30T20:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-30T21:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-30T22:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-30T23:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T01:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T02:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T03:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T04:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T05:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T08:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T09:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T10:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T11:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T13:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T14:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T16:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T17:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T20:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T21:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T22:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-01-31T23:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T01:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T02:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T03:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T04:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T05:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T08:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T09:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T10:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T11:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T13:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T14:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T16:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T17:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-01T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-02T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-02T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-02T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-02T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-03T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-03T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-03T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-03T18:00:00-06:00&lt;/start-valid-time&gt;
+            &lt;/time-layout&gt;
+            &lt;parameters applicable-location=&quot;point1&quot;&gt;
+              &lt;temperature type=&quot;maximum&quot; units=&quot;Fahrenheit&quot; time-layout=&quot;k-p24h-n7-1&quot;&gt;
+                &lt;name&gt;Daily Maximum Temperature&lt;/name&gt;
+                &lt;value&gt;25&lt;/value&gt;
+                &lt;value&gt;35&lt;/value&gt;
+                &lt;value&gt;25&lt;/value&gt;
+                &lt;value&gt;18&lt;/value&gt;
+                &lt;value&gt;29&lt;/value&gt;
+                &lt;value&gt;24&lt;/value&gt;
+                &lt;value&gt;17&lt;/value&gt;
+              &lt;/temperature&gt;
+              &lt;temperature type=&quot;minimum&quot; units=&quot;Fahrenheit&quot; time-layout=&quot;k-p24h-n6-2&quot;&gt;
+                &lt;name&gt;Daily Minimum Temperature&lt;/name&gt;
+                &lt;value&gt;20&lt;/value&gt;
+                &lt;value&gt;25&lt;/value&gt;
+                &lt;value&gt;12&lt;/value&gt;
+                &lt;value&gt;14&lt;/value&gt;
+                &lt;value&gt;22&lt;/value&gt;
+                &lt;value&gt;9&lt;/value&gt;
+              &lt;/temperature&gt;
+              &lt;cloud-amount type=&quot;total&quot; units=&quot;percent&quot; time-layout=&quot;k-p3h-n34-3&quot;&gt;
+                &lt;name&gt;Cloud Cover Amount&lt;/name&gt;
+                &lt;value&gt;40&lt;/value&gt;
+                &lt;value&gt;35&lt;/value&gt;
+                &lt;value&gt;29&lt;/value&gt;
+                &lt;value&gt;22&lt;/value&gt;
+                &lt;value&gt;33&lt;/value&gt;
+                &lt;value&gt;44&lt;/value&gt;
+                &lt;value&gt;50&lt;/value&gt;
+                &lt;value&gt;56&lt;/value&gt;
+                &lt;value&gt;78&lt;/value&gt;
+                &lt;value&gt;100&lt;/value&gt;
+                &lt;value&gt;100&lt;/value&gt;
+                &lt;value&gt;100&lt;/value&gt;
+                &lt;value&gt;100&lt;/value&gt;
+                &lt;value&gt;100&lt;/value&gt;
+                &lt;value&gt;100&lt;/value&gt;
+                &lt;value&gt;100&lt;/value&gt;
+                &lt;value&gt;100&lt;/value&gt;
+                &lt;value&gt;100&lt;/value&gt;
+                &lt;value&gt;99&lt;/value&gt;
+                &lt;value&gt;68&lt;/value&gt;
+                &lt;value&gt;34&lt;/value&gt;
+                &lt;value&gt;49&lt;/value&gt;
+                &lt;value&gt;73&lt;/value&gt;
+                &lt;value&gt;77&lt;/value&gt;
+                &lt;value&gt;70&lt;/value&gt;
+                &lt;value&gt;86&lt;/value&gt;
+                &lt;value&gt;85&lt;/value&gt;
+                &lt;value&gt;71&lt;/value&gt;
+                &lt;value&gt;56&lt;/value&gt;
+                &lt;value&gt;68&lt;/value&gt;
+                &lt;value&gt;44&lt;/value&gt;
+                &lt;value&gt;37&lt;/value&gt;
+                &lt;value&gt;34&lt;/value&gt;
+                &lt;value&gt;34&lt;/value&gt;
+              &lt;/cloud-amount&gt;
+              &lt;weather time-layout=&quot;k-p3h-n34-3&quot;&gt;
+                &lt;name&gt;Weather Type, Coverage, and Intensity&lt;/name&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;definitely&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;definitely&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;definitely&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;definitely&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;definitely&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;definitely&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                  &lt;value coverage=&quot;areas&quot; intensity=&quot;none&quot; additive=&quot;and&quot; weather-type=&quot;blowing snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;definitely&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                  &lt;value coverage=&quot;areas&quot; intensity=&quot;none&quot; additive=&quot;and&quot; weather-type=&quot;blowing snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;likely&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                  &lt;value coverage=&quot;areas&quot; intensity=&quot;none&quot; additive=&quot;and&quot; weather-type=&quot;blowing snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+              &lt;/weather&gt;
+              &lt;conditions-icon type=&quot;forecast-NWS&quot; time-layout=&quot;k-p3h-n34-3&quot;&gt;
+                &lt;name&gt;Conditions Icons&lt;/name&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nfew.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/bkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/bkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn10.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn90.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn90.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn90.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn90.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sn90.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sn90.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sn90.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn90.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn70.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nbkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn10.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn20.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn20.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sn20.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn20.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn30.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn30.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sn20.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn20.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn20.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsct.jpg&lt;/icon-link&gt;
+              &lt;/conditions-icon&gt;
+              &lt;hazards time-layout=&quot;k-p1h-n60-4&quot;&gt;
+                &lt;name&gt;Watches, Warnings, and Advisories&lt;/name&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions&gt;
+                  &lt;hazard hazardCode=&quot;WS.A&quot; phenomena=&quot;Winter Storm&quot; significance=&quot;Watch&quot; hazardType=&quot;long duration&quot;&gt;
+                    &lt;hazardTextURL&gt;http://forecast.weather.gov/wwamap/wwatxtget.php?cwa=usa&amp;amp;wwa=Winter%20Storm%20Watch&lt;/hazardTextURL&gt;
+                  &lt;/hazard&gt;
+                &lt;/hazard-conditions&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+              &lt;/hazards&gt;
+            &lt;/parameters&gt;
+          &lt;/data&gt;
+        &lt;/dwml&gt;
+        </dwmlOut></ns1:NDFDgenLatLonListResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+    http_version: 
+  recorded_at: Fri, 30 Jan 2015 20:39:52 GMT
+recorded_with: VCR 2.9.3

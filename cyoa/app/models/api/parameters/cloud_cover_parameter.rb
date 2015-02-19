@@ -1,0 +1,2 @@
+class CloudCoverParameter < TemperatureTypeParameter
+end

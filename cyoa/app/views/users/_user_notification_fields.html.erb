@@ -1,0 +1,6 @@
+<fieldset>
+  <%= f.label :notification_time, "Notification Time" %><br />
+  <%= f.time_field :notification_time %><br />
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "Remove Notification", '#', class: "remove_fields" %>
+</fieldset>

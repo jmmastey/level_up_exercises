@@ -1,0 +1,482 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd"><env:Body><tns:NDFDgenLatLonList><listLatLon>41.837,-87.685</listLatLon><product>glance</product><startTime>2015-02-11T11:15:49-06:00</startTime><endTime>2015-02-18T17:15:49Z</endTime><unit>e</unit></tns:NDFDgenLatLonList></env:Body></env:Envelope>
+    headers:
+      Soapaction:
+      - '"http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#NDFDgenLatLonList"'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '594'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache/2.2.15 (Red Hat)
+      X-Nids-Serverid:
+      - www5.mo
+      X-Soap-Server:
+      - NuSOAP/0.9.5 (1.123)
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - max-age=180
+      Expires:
+      - Wed, 11 Feb 2015 17:18:45 GMT
+      Date:
+      - Wed, 11 Feb 2015 17:15:45 GMT
+      Content-Length:
+      - '27332'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="ISO-8859-1"?><SOAP-ENV:Envelope SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:NDFDgenLatLonListResponse xmlns:ns1="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl"><dwmlOut xsi:type="xsd:string">&lt;?xml version=&quot;1.0&quot;?&gt;
+        &lt;dwml version=&quot;1.0&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:noNamespaceSchemaLocation=&quot;http://www.nws.noaa.gov/forecasts/xml/DWMLgen/schema/DWML.xsd&quot;&gt;
+          &lt;head&gt;
+            &lt;product srsName=&quot;WGS 1984&quot; concise-name=&quot;glance&quot; operational-mode=&quot;official&quot;&gt;
+              &lt;title&gt;NOAA&apos;s National Weather Service Forecast at a Glance&lt;/title&gt;
+              &lt;field&gt;meteorological&lt;/field&gt;
+              &lt;category&gt;forecast&lt;/category&gt;
+              &lt;creation-date refresh-frequency=&quot;PT1H&quot;&gt;2015-02-11T17:15:45Z&lt;/creation-date&gt;
+            &lt;/product&gt;
+            &lt;source&gt;
+              &lt;more-information&gt;http://www.nws.noaa.gov/forecasts/xml/&lt;/more-information&gt;
+              &lt;production-center&gt;Meteorological Development Laboratory&lt;sub-center&gt;Product Generation Branch&lt;/sub-center&gt;&lt;/production-center&gt;
+              &lt;disclaimer&gt;http://www.nws.noaa.gov/disclaimer.html&lt;/disclaimer&gt;
+              &lt;credit&gt;http://www.weather.gov/&lt;/credit&gt;
+              &lt;credit-logo&gt;http://www.weather.gov/images/xml_logo.gif&lt;/credit-logo&gt;
+              &lt;feedback&gt;http://www.weather.gov/feedback.php&lt;/feedback&gt;
+            &lt;/source&gt;
+          &lt;/head&gt;
+          &lt;data&gt;
+            &lt;location&gt;
+              &lt;location-key&gt;point1&lt;/location-key&gt;
+              &lt;point latitude=&quot;41.84&quot; longitude=&quot;-87.69&quot;/&gt;
+            &lt;/location&gt;
+            &lt;moreWeatherInformation applicable-location=&quot;point1&quot;&gt;http://forecast.weather.gov/MapClick.php?textField1=41.84&amp;amp;textField2=-87.69&lt;/moreWeatherInformation&gt;
+            &lt;time-layout time-coordinate=&quot;local&quot; summarization=&quot;none&quot;&gt;
+              &lt;layout-key&gt;k-p24h-n7-1&lt;/layout-key&gt;
+              &lt;start-valid-time period-name=&quot;Today&quot;&gt;2015-02-11T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-11T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Tomorrow&quot;&gt;2015-02-12T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-12T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Friday&quot;&gt;2015-02-13T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-13T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Saturday&quot;&gt;2015-02-14T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-14T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Sunday&quot;&gt;2015-02-15T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-15T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Presidents Day&quot;&gt;2015-02-16T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-16T19:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Tuesday&quot;&gt;2015-02-17T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-17T19:00:00-06:00&lt;/end-valid-time&gt;
+            &lt;/time-layout&gt;
+            &lt;time-layout time-coordinate=&quot;local&quot; summarization=&quot;none&quot;&gt;
+              &lt;layout-key&gt;k-p24h-n6-2&lt;/layout-key&gt;
+              &lt;start-valid-time period-name=&quot;Tonight&quot;&gt;2015-02-11T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-12T08:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Tomorrow Night&quot;&gt;2015-02-12T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-13T08:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Friday Night&quot;&gt;2015-02-13T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-14T08:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Saturday Night&quot;&gt;2015-02-14T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-15T08:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Sunday Night&quot;&gt;2015-02-15T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-16T08:00:00-06:00&lt;/end-valid-time&gt;
+              &lt;start-valid-time period-name=&quot;Monday Night&quot;&gt;2015-02-16T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;end-valid-time&gt;2015-02-17T08:00:00-06:00&lt;/end-valid-time&gt;
+            &lt;/time-layout&gt;
+            &lt;time-layout time-coordinate=&quot;local&quot; summarization=&quot;none&quot;&gt;
+              &lt;layout-key&gt;k-p3h-n35-3&lt;/layout-key&gt;
+              &lt;start-valid-time&gt;2015-02-11T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T21:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T03:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T09:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T21:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T03:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T09:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-14T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-14T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-14T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-14T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-15T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-15T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-15T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-15T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-16T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-16T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-16T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-16T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-17T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-17T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-17T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-17T18:00:00-06:00&lt;/start-valid-time&gt;
+            &lt;/time-layout&gt;
+            &lt;time-layout time-coordinate=&quot;local&quot; summarization=&quot;none&quot;&gt;
+              &lt;layout-key&gt;k-p1h-n63-4&lt;/layout-key&gt;
+              &lt;start-valid-time&gt;2015-02-11T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T13:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T14:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T16:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T17:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T20:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T21:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T22:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-11T23:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T01:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T02:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T03:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T04:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T05:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T08:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T09:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T10:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T11:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T13:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T14:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T16:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T17:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T19:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T20:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T21:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T22:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-12T23:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T01:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T02:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T03:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T04:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T05:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T07:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T08:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T09:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T10:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T11:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T13:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T14:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T15:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T16:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T17:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-13T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-14T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-14T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-14T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-14T18:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-15T00:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-15T06:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-15T12:00:00-06:00&lt;/start-valid-time&gt;
+              &lt;start-valid-time&gt;2015-02-15T18:00:00-06:00&lt;/start-valid-time&gt;
+            &lt;/time-layout&gt;
+            &lt;parameters applicable-location=&quot;point1&quot;&gt;
+              &lt;temperature type=&quot;maximum&quot; units=&quot;Fahrenheit&quot; time-layout=&quot;k-p24h-n7-1&quot;&gt;
+                &lt;name&gt;Daily Maximum Temperature&lt;/name&gt;
+                &lt;value&gt;34&lt;/value&gt;
+                &lt;value&gt;11&lt;/value&gt;
+                &lt;value&gt;22&lt;/value&gt;
+                &lt;value&gt;11&lt;/value&gt;
+                &lt;value&gt;11&lt;/value&gt;
+                &lt;value&gt;23&lt;/value&gt;
+                &lt;value&gt;25&lt;/value&gt;
+              &lt;/temperature&gt;
+              &lt;temperature type=&quot;minimum&quot; units=&quot;Fahrenheit&quot; time-layout=&quot;k-p24h-n6-2&quot;&gt;
+                &lt;name&gt;Daily Minimum Temperature&lt;/name&gt;
+                &lt;value&gt;7&lt;/value&gt;
+                &lt;value&gt;5&lt;/value&gt;
+                &lt;value&gt;10&lt;/value&gt;
+                &lt;value&gt;0&lt;/value&gt;
+                &lt;value&gt;7&lt;/value&gt;
+                &lt;value&gt;19&lt;/value&gt;
+              &lt;/temperature&gt;
+              &lt;cloud-amount type=&quot;total&quot; units=&quot;percent&quot; time-layout=&quot;k-p3h-n35-3&quot;&gt;
+                &lt;name&gt;Cloud Cover Amount&lt;/name&gt;
+                &lt;value&gt;97&lt;/value&gt;
+                &lt;value&gt;86&lt;/value&gt;
+                &lt;value&gt;83&lt;/value&gt;
+                &lt;value&gt;72&lt;/value&gt;
+                &lt;value&gt;79&lt;/value&gt;
+                &lt;value&gt;76&lt;/value&gt;
+                &lt;value&gt;72&lt;/value&gt;
+                &lt;value&gt;59&lt;/value&gt;
+                &lt;value&gt;45&lt;/value&gt;
+                &lt;value&gt;46&lt;/value&gt;
+                &lt;value&gt;48&lt;/value&gt;
+                &lt;value&gt;54&lt;/value&gt;
+                &lt;value&gt;59&lt;/value&gt;
+                &lt;value&gt;65&lt;/value&gt;
+                &lt;value&gt;70&lt;/value&gt;
+                &lt;value&gt;83&lt;/value&gt;
+                &lt;value&gt;96&lt;/value&gt;
+                &lt;value&gt;87&lt;/value&gt;
+                &lt;value&gt;79&lt;/value&gt;
+                &lt;value&gt;58&lt;/value&gt;
+                &lt;value&gt;56&lt;/value&gt;
+                &lt;value&gt;70&lt;/value&gt;
+                &lt;value&gt;46&lt;/value&gt;
+                &lt;value&gt;35&lt;/value&gt;
+                &lt;value&gt;46&lt;/value&gt;
+                &lt;value&gt;67&lt;/value&gt;
+                &lt;value&gt;60&lt;/value&gt;
+                &lt;value&gt;62&lt;/value&gt;
+                &lt;value&gt;61&lt;/value&gt;
+                &lt;value&gt;65&lt;/value&gt;
+                &lt;value&gt;79&lt;/value&gt;
+                &lt;value&gt;95&lt;/value&gt;
+                &lt;value&gt;86&lt;/value&gt;
+                &lt;value&gt;79&lt;/value&gt;
+                &lt;value&gt;65&lt;/value&gt;
+              &lt;/cloud-amount&gt;
+              &lt;weather time-layout=&quot;k-p3h-n35-3&quot;&gt;
+                &lt;name&gt;Weather Type, Coverage, and Intensity&lt;/name&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;moderate&quot; weather-type=&quot;snow showers&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions/&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+                &lt;weather-conditions&gt;
+                  &lt;value coverage=&quot;slight chance&quot; intensity=&quot;light&quot; weather-type=&quot;snow&quot; qualifier=&quot;none&quot;&gt;
+                    &lt;visibility xsi:nil=&quot;true&quot;/&gt;
+                  &lt;/value&gt;
+                &lt;/weather-conditions&gt;
+              &lt;/weather&gt;
+              &lt;conditions-icon type=&quot;forecast-NWS&quot; time-layout=&quot;k-p3h-n35-3&quot;&gt;
+                &lt;name&gt;Conditions Icons&lt;/name&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/ovc.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/bkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nbkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn30.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn30.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn30.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn30.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sn20.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nbkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nbkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nbkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sn30.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sn30.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sn30.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn30.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn20.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nbkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/bkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsct.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/bkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nbkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nbkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nbkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/bkn.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn10.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn40.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn40.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/sn20.jpg&lt;/icon-link&gt;
+                &lt;icon-link&gt;http://forecast.weather.gov/images/wtf/nsn20.jpg&lt;/icon-link&gt;
+              &lt;/conditions-icon&gt;
+              &lt;hazards time-layout=&quot;k-p1h-n63-4&quot;&gt;
+                &lt;name&gt;Watches, Warnings, and Advisories&lt;/name&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+                &lt;hazard-conditions/&gt;
+              &lt;/hazards&gt;
+            &lt;/parameters&gt;
+          &lt;/data&gt;
+        &lt;/dwml&gt;
+        </dwmlOut></ns1:NDFDgenLatLonListResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+    http_version: 
+  recorded_at: Wed, 11 Feb 2015 17:15:49 GMT
+recorded_with: VCR 2.9.3

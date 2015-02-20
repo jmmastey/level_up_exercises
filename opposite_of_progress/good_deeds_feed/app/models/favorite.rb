@@ -1,4 +1,4 @@
 class Favorite < ActiveRecord::Base
-  belongs_to :legislator
   belongs_to :user
+  belongs_to :legislator
 end

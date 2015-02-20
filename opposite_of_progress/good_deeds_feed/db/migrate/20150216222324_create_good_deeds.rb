@@ -3,6 +3,7 @@ class CreateGoodDeeds < ActiveRecord::Migration
     create_table :good_deeds do |t|
       t.integer :congress_number
       t.string :congress_url
+      t.string :short_title
       t.text :official_title
       t.date :introduced_on
       t.references :legislator, index: true

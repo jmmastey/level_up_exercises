@@ -1,11 +1,15 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="good_deed_info">
+    	<p><h3>Good deed (enacted bill) info:</h3></p>
 		<p>Congress number: <%= @good_deed.congress_number.to_s %></p>
 		<p><%= link_to "Congress.gov page", @good_deed.congress_url %></p>
 		<p>Title: <%= @good_deed.official_title %></p>
+		<p>Short title: <%= @good_deed.short_title %></p>
 		<p>Introduced on: <%= @good_deed.introduced_on %></p>
 		<p><%= link_to "Sponsor: #{@good_deed.legislator.title} #{@good_deed.legislator.lastname}", @good_deed.legislator %></p>
+		<p></p>
+		<p><%= link_to "Search Wikipedia for this deed", "http://en.wikipedia.org/w/index.php?search=#{@good_deed.short_title}", target: "_blank" %></p>
     </section>
   </aside>
 </div>

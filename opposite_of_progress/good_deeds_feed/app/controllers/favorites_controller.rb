@@ -1,19 +1,25 @@
 class FavoritesController < ApplicationController
+  before_action :logged_in_user
+
   def create
-    @favorite = current_user.favorites.build(user_id: current_user.id,
-      legislator_id: legislator_id)
-    if @favorite.save
-      flash[:success] = "Legislator added to favorites!"
-      redirect_to root_url
-    else
-      render 'static_pages/home'
-    end
+    legislator = Legislator.find(params[:id])
+    current_user.favorite_legislator(legislator)
+    redirect_to user_url(current_user)
   end
 
   def destroy
-    @favorite = current_user.favorites.find_by(id: params[:id])
-    @favorite.destroy
-    flash[:success] = "Favorite deleted"
-    redirect_to request.referrer || root_url
+    current_user.unfavorite_legislator(params[:id])
+    flash[:success] = "Favorite removed"
+    redirect_to user_url(current_user)
+  end
+
+  private
+
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger].now = "Please log in."
+      redirect_to login_url
+    end
   end
 end

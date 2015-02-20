@@ -15,12 +15,15 @@ end
 namespace :import_deeds do
   task create_deeds: :environment do
     api = CongressApiParser.new
-    deeds = api.bills
+    deeds = api.bills(6)
+    puts deeds.count
     deeds.each do |deed|
+      puts deed["bioguide_id"]
       legislator = Legislator.find_by(bioguide_id: deed["bioguide_id"])
-      new_deed = GoodDeed.find_or_create_by(deed.except("bioguide_id"))
-      new_deed.legislator_id = legislator.id
-      new_deed.save
+      if Legislator.find_by(bioguide_id: deed["bioguide_id"])
+        legislator.good_deeds << GoodDeed.find_or_create_by(deed.except("bioguide_id"))
+        legislator.save
+      end
     end
   end
 end

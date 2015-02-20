@@ -6,17 +6,17 @@ module DinoDict
   OPTION = [:movement, :diet, :period, :size]
 
   def self.menu_printer(option)
-    @@printer ||= {}
-    @@printer[:movement] = "1) All dinosaurs that were bipeds"
-    @@printer[:diet] = "2) All dinosaurs that were carnivores"
-    @@printer[:period] = "3) Grab all dinosaurs in a specific period"
-    @@printer[:size] = "4) Grab either small or big dinosaurs"
-  
+    printer ||= {}
+    printer[:movement] = "1) All dinosaurs that were bipeds"
+    printer[:diet] = "2) All dinosaurs that were carnivores"
+    printer[:period] = "3) Grab all dinosaurs in a specific period"
+    printer[:size] = "4) Grab either small or big dinosaurs"
+
     option.each do |key|
-      puts(@@printer.fetch(key))
+      puts(printer.fetch(key))
     end
-  end 
-  
+  end
+
   def self.convert_user_input(value)
     case value
     when 1
@@ -28,7 +28,7 @@ module DinoDict
     when 4
       [:size]
     end
-  end    
+  end
 
   def self.user_input
     option = gets.chomp.to_i
@@ -51,7 +51,7 @@ module DinoDict
 
   def self.big?(size)
     size == "B" || size == "b"
-  end  
+  end
 
   def self.validate_movement(dino)
     dino.movement == 'Biped'
@@ -67,7 +67,7 @@ module DinoDict
   end
 
   def self.validate_period(period, dino)
-    true if dino.period.include?(period)
+    true if dino.period.select { |p| p =~ /#{period}/ }.any?
   end
 
   def self.evaluate_size(size, dino)
@@ -79,7 +79,7 @@ module DinoDict
       false
     end
   end
-      
+
   def self.evaluate_case(user_key, dino, period, size)
     case user_key
     when :movement
@@ -104,13 +104,13 @@ module DinoDict
 
   def self.find(user_option, dinosaurs, period, size)
     dinosaurs.dino_collection.each do |key, dino|
-      if evaluate_dino(user_option, dino, period, size) 
+      if evaluate_dino(user_option, dino, period, size)
         print_dino(dino)
         dino.to_h
       end
     end
   end
-   
+
   def self.print_dino(dinosaur)
     puts("Name: "+dinosaur.name.to_s)
     puts("Diet: "+dinosaur.diet.to_s) if dinosaur.diet!=nil
@@ -120,7 +120,7 @@ module DinoDict
     puts("Continent: "+dinosaur.continent.to_s) if dinosaur.movement != nil
     puts("Description: "+dinosaur.description.to_s) if dinosaur.description\
       != nil
-    puts        
+    puts
   end
 
   def self.get_user_period(option)
@@ -145,21 +145,23 @@ module DinoDict
     rescue
       puts "Valid sizes are B/S. Please enter a valid size."
       retry
-  end       
-  
+  end
+
   def self.output_json(output_file)
     File.open('dino.json', 'w') do |file|
       file.puts output_file
       puts "JSON output file dino.json has been created"
     end
   end
-  
+
   def match_attribute(dino, attribute, key)
     attribute == dino.send(key.to_s)
   end
 
   def self.hash_search(params, dinosaurs)
+puts (params.gsub(':', '=>'))
     search_terms = eval(params.gsub(':', '=>'))
+
     dinosaurs.dino_collection.each do |key, value|
       search_terms.each do |search_key, search_value|
         if search_key == 'period'
@@ -170,7 +172,7 @@ module DinoDict
         print_dino(value)
       end
     end
-  end         
+  end
 
   def self.main
     user_option = [:movement, :diet, :period, :size]
@@ -179,20 +181,20 @@ module DinoDict
     dinosaurs.normal_dino_parser('dinodex.csv')
     json_output = ""
     if ARGV.length == 0
-      loop do 
+      loop do
         DinoDict.menu_printer(user_option)
         input = convert_user_input(user_input)
         period = get_user_period(input)
         size = get_user_size(input)
         user_option -= input
-        unless chain 
+        unless chain
           json_output += find((OPTION  - user_option), dinosaurs, period,\
             size).to_s
           break
         end
       end
     else
-      hash_search(ARGV[0])
+      hash_search(ARGV[0], dinosaurs)
     end
     output_json(json_output)
   end

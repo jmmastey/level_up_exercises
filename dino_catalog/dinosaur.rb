@@ -16,20 +16,17 @@ class Dinosaur
   end
 
   def to_h
-    {name: @name,
-     period: period_to_string.to_s,
-     diet: @diet,
-     weight: @weight,
-     movement: @movement,
-     continent: @continent,
-     description: @description}.to_json
+    { name: @name,
+      period: period_to_string.to_s,
+      diet: @diet,
+      weight: @weight,
+      movement: @movement,
+      continent: @continent,
+      description: @description }.to_json
   end
 
   def period_to_string
-    @per = ""
-    @period.each do |val|
-      @per += val
-    end
+    @period.join(" or ")
   end
 end
 

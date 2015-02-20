@@ -40,6 +40,6 @@ class CongressApiParser
 end
 
 api = CongressApiParser.new
-# puts api.bills(1).first
+puts api.bills(1).first
 #puts "\n\n\n\n"
 #puts api.find_legislator("WY")

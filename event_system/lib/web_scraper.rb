@@ -2,7 +2,6 @@ require 'nokogiri'
 require 'open-uri'
 
 class WebScraper
-
   def self.scrape_temperatures(doc)
     document = doc
 

@@ -1,6 +1,6 @@
 
 class WeatherController < ApplicationController
-  include WeatherHelper
+  include ParseWeather
   def index
     if params["region"] && params["region"]["name"] != ""
       @high_low_temperatures = parse_temperatures

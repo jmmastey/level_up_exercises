@@ -1,6 +1,6 @@
 require 'spec_helper'
-
-describe WeatherHelper do
+require 'parse_weather'
+describe ParseWeather do
   context "data is first time to be pulled" do
 
     before do
@@ -8,7 +8,7 @@ describe WeatherHelper do
     end
 
     it "saves the data to database" do
-      parse_temperatures
+      Class.new.extend(ParseWeather).parse_temperatures
       expect(WeatherForecast.count).to eq(5)
     end
   end
@@ -28,7 +28,7 @@ describe WeatherHelper do
 
      it "does not do the web call to pull data" do
       expect(subject).to_not receive(:fetch_document)
-      parse_temperatures
+      Class.new.extend(ParseWeather).parse_temperatures
      end
   end
 end

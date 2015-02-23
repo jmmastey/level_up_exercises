@@ -1,6 +1,6 @@
 %h1 Register#email
-%form{:name => "city", :id => "city", :action => "/register/create", :method => "post", :enctype => "text/plain"}
+%form{:name => "city", :id => "city", :action => "/register/create", :method => "post"}
   %fieldset
     %li
-      %input{:type => "text", :name => "email", :class => "text"}
+      %input{:type => "text", :name => "email", :class => "text", :id => "email",}
     %input{:type => "submit", :value => "Send", :class => "button"}

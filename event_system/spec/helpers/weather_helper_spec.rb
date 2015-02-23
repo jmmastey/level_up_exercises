@@ -8,7 +8,7 @@ describe WeatherHelper do
     end
 
     it "saves the data to database" do
-      WeatherHelper.parse_temperatures
+      parse_temperatures
       expect(WeatherForecast.count).to eq(5)
     end
   end
@@ -28,7 +28,7 @@ describe WeatherHelper do
 
      it "does not do the web call to pull data" do
       expect(subject).to_not receive(:fetch_document)
-      WeatherHelper.parse_temperatures
+      parse_temperatures
      end
   end
 end

@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 module WeatherHelper
   BASE_URL = "http://forecast.weather.gov/MapClick.php?textField1=41.8500262820005&textField2=-87.65004892899964"
-  def self.parse_temperatures
+  def parse_temperatures
     if WeatherForecast.where("created_at::date = current_date").count <= 0
       document = fetch_document
       scraping =  WebScraper.scrape_temperatures document
@@ -25,7 +25,7 @@ module WeatherHelper
     scraping
   end
 
-  def self.parse_details
+  def parse_details
     if WeatherForecastDetail.where("created_at::date = current_date").count <= 0
       document = fetch_document
       scraping =  WebScraper.detailed_scrape document
@@ -45,7 +45,7 @@ module WeatherHelper
         scraping[rec.weather_day] = { "detail_afternoon" => rec.detail_afternoon, "detail_night" => rec.detail_night }
       end
     end
-    scraping.first(1)
+    Hash[*scraping.first]
   end
 
   def self.fetch_document
@@ -53,5 +53,3 @@ module WeatherHelper
     Nokogiri::HTML(File.open("temperatures.html", "r"))
   end
 end
-
-WeatherHelper.parse_details

@@ -4,8 +4,8 @@ class RegisterController < ApplicationController
   end
 
   def create
-    EmailContact.create(email: params["region"],
-      region_id: Region.select("region_id").where(city: params["region"]))
+    EmailContact.create(email: params["email"],
+      region_id: Region.region_id("Chicago").pluck("region_id").first)
     render :index
   end
 end

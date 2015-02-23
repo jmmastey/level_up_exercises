@@ -3,8 +3,9 @@
 
 <%= will_paginate %>
 
-<ul class="users">
-	<%= render @users %>
-</ul>
-
+<% if current_user.admin? %>
+	<ul class="users">
+		<%= render @users %>
+	</ul>
+<% end %>
 <%= will_paginate %>

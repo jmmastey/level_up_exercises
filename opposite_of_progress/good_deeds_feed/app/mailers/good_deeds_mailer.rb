@@ -8,7 +8,6 @@ class GoodDeedsMailer < ApplicationMailer
   #
   def new_deed_notification(legislator)
     @greeting = "Hi"
-
     @users = legislator.users.all
     @users.each do |user|
       mail to: user.email, subject: "New Deed Introduced!"

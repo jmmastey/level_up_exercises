@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'active_support'
-require 'HTTParty'
+require 'httparty'
+
 class CongressApiParser
   include HTTParty
 
@@ -41,6 +42,4 @@ class CongressApiParser
 end
 
 api = CongressApiParser.new
-puts api.bills_by_page("first")
-#puts "\n\n\n\n"
-#puts api.find_legislator("WY")
+puts api.bills_by_page(1)

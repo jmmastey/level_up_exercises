@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   get 'static_pages/help'
 
   get 'sessions/new'
+
   root 'good_deeds#index'
+
   get 'users/new'
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
@@ -29,7 +31,6 @@ Rails.application.routes.draw do
   resources :legislators
   resources :good_deeds
   resources :users
-  # resources :microposts, only: [:create, :destroy]
   resources :favorites, only: [:create, :destroy]
 
 

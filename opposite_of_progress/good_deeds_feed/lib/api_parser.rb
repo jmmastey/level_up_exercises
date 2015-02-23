@@ -12,7 +12,8 @@ class CongressApiParser
   def initialize
   end
 
-  def bills(page)
+  def bills_by_page(page)
+    raise ArgumentError unless page.is_a?(Fixnum) && page >= 1
     api_response = get_bills(page)
     raise RuntimeError unless api_response.code == OK_STATUS_CODE
     api_response["results"].map do |bill|
@@ -40,6 +41,6 @@ class CongressApiParser
 end
 
 api = CongressApiParser.new
-puts api.bills(1).first
+puts api.bills_by_page("first")
 #puts "\n\n\n\n"
 #puts api.find_legislator("WY")

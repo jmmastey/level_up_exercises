@@ -14,9 +14,12 @@ end
 
 namespace :import_deeds do
   task create_deeds: :environment do
-    api = CongressApiParser.new
-    deeds = api.bills(2)
-    deeds.each do |deed|
+    congress_data = CongressApiParser.new
+    deeds = []
+    1.upto(6) do |page|
+      deeds << congress_data.bills_by_page(page)
+    end
+    deeds.flatten.each do |deed|
       if legislator = Legislator.find_by(bioguide_id: deed[:bioguide_id])
         legislator.good_deeds << GoodDeed.find_or_create_by(deed.except(:bioguide_id))
         legislator.save

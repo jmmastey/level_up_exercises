@@ -1,15 +1,13 @@
-$(".message").click(function(event) {
+$(".message").click(function() {
   checkbox = $(this).find(":checkbox");
-  checkbox_status = checkbox.prop("checked");
-  checkbox.prop("checked", !checkbox_status);
+  checkboxStatus = checkbox.prop("checked");
+  checkbox.prop("checked", !checkboxStatus);
 });
 
 $(":checkbox").click(function(event) {
-  message = $(this).closest("article.message");
   event.stopPropagation();
 });
 
 $("label").click(function(event) {
-  message = $(this).closest("article.message");
   event.stopPropagation();
 });

@@ -1,0 +1,21 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.message {
+  margin-right: 20px;
+  border: 1px solid gray;
+}
+
+.message:hover {
+  background-color: #ffffe0;
+}
+
+.unread {
+  background-color: white;
+}
+
+.read {
+  background-color: #ddd;
+}

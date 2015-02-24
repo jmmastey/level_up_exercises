@@ -12,10 +12,10 @@ body {
   background-color: #ffffe0;
 }
 
-.unread {
+.is-unread {
   background-color: white;
 }
 
-.read {
+.is-read {
   background-color: #ddd;
 }

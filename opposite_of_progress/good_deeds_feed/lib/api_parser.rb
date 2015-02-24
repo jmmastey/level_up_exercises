@@ -13,6 +13,10 @@ class CongressApiParser
   def initialize
   end
 
+  def all_bills
+
+  end
+
   def bills_by_page(page)
     raise ArgumentError unless page.is_a?(Fixnum) && page >= 1
     api_response = get_bills(page)
@@ -22,11 +26,16 @@ class CongressApiParser
     end
   end
 
+  def number_of_bills
+    #get_bills(1)["count"]
+    get_bills(1)
+  end
+ # CHECK FOR MULTIPLE SPONSORS
   private
 
   def get_bills(page)
     bill_params = { query: { per_page: 50, page: page, order: "introduced_on" } }
-    self.class.get("/bills/search?history.enacted=true", bill_params)
+    self.class.get("/bills/?history.enacted=true", bill_params)
   end
 
   def parse(bill)
@@ -42,4 +51,9 @@ class CongressApiParser
 end
 
 api = CongressApiParser.new
-puts api.bills_by_page(1)
+# puts api.bills_by_page(1).count
+#api.number_of_bills.each do |k, v|
+#  p k
+#  p v
+#  puts "\n\n\n\n\n\n"
+#end

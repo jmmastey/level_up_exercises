@@ -16,7 +16,7 @@ namespace :import_deeds do
   task create_deeds: :environment do
     congress_data = CongressApiParser.new
     deeds = []
-    1.upto(6) do |page|
+    1.upto(20) do |page|
       deeds << congress_data.bills_by_page(page)
     end
     deeds.flatten.each do |deed|

@@ -1,4 +1,5 @@
 <li>
 	Sponsor: <%= link_to "#{good_deed.legislator.title} #{good_deed.legislator.lastname}", good_deed.legislator %> ---
   <%= link_to "#{good_deed.official_title.truncate(70)}", good_deed %>
+  Introduced on: <%=  good_deed.introduced_on %>
 </li>

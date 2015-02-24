@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
 
   has_many :favorites
   has_many :legislators, through: :favorites
+  has_many :good_deeds, through: :legislators
 
-  has_many :microposts, dependent: :destroy
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -28,10 +28,6 @@ class User < ActiveRecord::Base
     Favorite.create()
   end
 
-  def feed
-    Micropost.where("user_id = ?", id)
-  end
-
   def favorite_legislator(legislator)
     legislators << legislator
   end
@@ -42,6 +38,12 @@ class User < ActiveRecord::Base
 
   def following_legislator?(legislator)
     legislators.include?(legislator)
+  end
+
+  def recent_deeds
+    legislators.map do |legislator|
+      legislator.good_deeds
+    end
   end
 
   def remember

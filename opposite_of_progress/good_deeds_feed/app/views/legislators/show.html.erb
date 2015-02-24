@@ -16,9 +16,8 @@
     <% if @legislator.good_deeds.any? %>
       <h3>Good Deeds (<%= @legislator.good_deeds.count %>)</h3>
       <ol class="good_deeds">
-        <%= render @good_deeds %>
+        <%= render @legislator.good_deeds %>
       </ol>
-      <%= will_paginate @good_deeds %>
     <% end %>
   </div>
 </div>

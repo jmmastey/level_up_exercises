@@ -1,5 +1,4 @@
 <div class="row">
-  <aside class="col-md-4">
     <section class="good_deed_info">
     	<p><h3>Good deed (enacted bill) info:</h3></p>
 		<p>Congress number: <%= @good_deed.congress_number.to_s %></p>
@@ -11,5 +10,4 @@
 		<p></p>
 		<p><%= link_to "Search Wikipedia for this deed", "http://en.wikipedia.org/w/index.php?search=#{@good_deed.short_title}", target: "_blank" %></p>
     </section>
-  </aside>
 </div>

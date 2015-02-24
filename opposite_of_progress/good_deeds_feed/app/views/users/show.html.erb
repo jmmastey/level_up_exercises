@@ -8,6 +8,13 @@
     </section>
   </aside>
   <div class="col-md-8">
+      <h3>Recent good deeds sponsored by your favorite legislators</h3>
+  <% @user.good_deeds.all.order(:introduced_on).limit(5).each do |good_deed| %>
+      <ol class="good_deeds">
+        <%= render good_deed %>
+      </ol>
+    <% end %>
+
       <h3>Favorite Legislators (<%= @user.favorites.count %>)</h3>
       <ol class="favorites">
           <%= render @user.favorites %>

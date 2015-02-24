@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  get 'legislators_by_party' => 'legislators#by_party'
   resources :legislators
   resources :good_deeds
   resources :users

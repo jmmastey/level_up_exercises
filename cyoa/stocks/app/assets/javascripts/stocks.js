@@ -1,16 +1,16 @@
-function goToStock(stock_sym) {
-  window.location.href = "/stocks/" + stock_sym
+function goToStock(stockSym) {
+  window.location.href = "/stocks/" + stockSym;
 };
 
-function toggleWatchlist(stock_sym) {
-  $.post("/watchlist/" + stock_sym);
-  var id = stock_sym + "-icon";
+function toggleWatchlist(stockSym) {
+  $.post("/watchlist/" + stockSym);
+  var id = stockSym + "-icon";
   $('#' + id).toggleClass('fa-star fa-star-o');
 };
 
-function addStockToWatchlistIndex(stock_sym) {
-  $.post("/watchlist/" + stock_sym);
-  var id = stock_sym + "-icon";
+function addStockToWatchlistIndex(stockSym) {
+  $.post("/watchlist/" + stockSym);
+  var id = stockSym + "-icon";
   $('#' + id).toggleClass('fa-star fa-star-o');
 };
 

@@ -1,0 +1,29 @@
+passenger list                GET    /passengers
+passenger details             GET    /passengers/:id
+passenger itineraries         GET    /passengers/:id/itineraries
+passenger itinerary details   GET    /passengers/:id/itineraries/:id
+new passenger                 POST   /passengers
+new passenger itinerary       POST   /passengers/:id/itineraries
+
+flight list                   GET    /flights
+flight details                GET    /flights/:id
+flight segments               GET    /flights/:id/segments
+flight passenger list         GET    /flights/:id/passengers
+new flight                    POST   /flights
+new flight segment            POST   /flights/:id/segments
+search flights                GET    /flights/search
+  Example: /flights/search?date=20150101&destination=ORD
+
+airplane list                 GET    /airplanes
+airplane details              GET    /airplanes/:id
+airplane segments             GET    /airplanes/:id/segments
+airplane refuelings           GET    /airplanes/:id/refuelings
+new airplane                  POST   /airplanes
+new airplane segment          PUT    /airplanes/:id:/segments
+delete airplane segment       DELETE /airplanes/:id/segments/:id
+
+airport list                  GET    /airports
+airport details               GET    /airports/:id
+airport flights               GET    /airports/:id/flights
+airport airplanes             GET    /airports/:id/airplanes
+new airport                   POST   /airports

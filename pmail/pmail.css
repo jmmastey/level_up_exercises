@@ -10,6 +10,7 @@ body {
 
 .message:hover {
   background-color: #ffffe0;
+  cursor: default;
 }
 
 .is-unread {

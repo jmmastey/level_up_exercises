@@ -1,0 +1,39 @@
+%h1.stock_index Stocks
+.input-group
+  %span.input-group-addon Filter
+  %input#filter.form-control{:placeholder => "Type here...", :type => "text"}
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Symbol
+      %th Name
+      %th Sector
+      %th Price
+      %th Market Capitalization
+      - if user_signed_in?
+        %th Watch
+  %tbody.searchable
+    - @stocks.each do |stock|
+      %tr
+        %td{:onclick=>"goToStock('#{stock.symbol}');"}
+          = stock.symbol
+        %td{:onclick=>"goToStock('#{stock.symbol}');"}
+          = stock.name
+        %td{:onclick=>"goToStock('#{stock.symbol}');"}
+          = stock.sector
+        %td{:onclick=>"goToStock('#{stock.symbol}');"}
+          $
+          = number_with_precision(stock.asking_price, precision: 2)
+        %td{:onclick=>"goToStock('#{stock.symbol}');"}
+          = stock.market_cap
+        - if user_signed_in?
+          %td
+            %button.watchlist-btn{class: "#{stock.symbol}-btn",:onclick=>"toggleWatchlist('#{stock.symbol}');"}
+              - if current_user.stocks.include?(stock)
+                %span.fa-stack
+                  = fa_icon "square", class: "fa-stack-2x"
+                  = fa_icon "star 2x", id: "#{stock.symbol}-icon", class: "fa-stack-1x"
+              - else
+                %span.fa-stack
+                  = fa_icon "square", class: "fa-stack-2x"
+                  = fa_icon "star-o 2x", id: "#{stock.symbol}-icon", class: "fa-stack-1x"

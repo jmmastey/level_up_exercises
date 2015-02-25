@@ -1,0 +1,51 @@
+.row
+  .stock-info-row
+    %span.details-label
+      Sector:
+    %span.data.pull-right
+      = @stock.sector
+  .stock-info-row
+    %span.details-label
+      Market Cap:
+    %span.data.pull-right
+      = @stock.market_cap
+  .stock-info-row
+    %span.details-label
+      Asking Price:
+    %span.data.pull-right
+      = @stock.asking_price
+  .stock-info-row
+    %span.details-label
+      Bid Price:
+    %span.data.pull-right
+      = @stock.bid_price
+  .stock-info-row
+    %span.details-label
+      Ticker Trend (Last 5):
+    %span.data.pull-right
+      = @stock.converted_ticker
+  .stock-info-row
+    %span.details-label
+      50 Day Moving Average:
+    %span.data.pull-right
+      = @stock.moving_average_50_day
+  .stock-info-row
+    %span.details-label
+      200 Day Moving Average:
+    %span.data.pull-right
+      = @stock.moving_average_200_day
+  .stock-info-row
+    %span.details-label
+      PE Ratio:
+    %span.data.pull-right
+      = @stock.pe_ratio
+  .stock-info-row
+    %span.details-label
+      PEG Ratio:
+    %span.data.pull-right
+      = @stock.peg_ratio
+  .stock-info-row
+    %span.details-label
+      Rating:
+    %span.data.pull-right
+      = @stock.rating

@@ -1,0 +1,23 @@
+%nav.navbar.navbar-default{:role => "navigation"}
+  .container-fluid
+    / Brand and toggle get grouped for better mobile display
+    .navbar-header
+      %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.stocks_btn.navbar-brand{:href => "/"} Stocks
+    / Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li= link_to "My Watchlist", watchlist_path, class: 'watchlist_btn'
+          %li= link_to "Account Settings", edit_user_registration_path
+          %li= link_to "Log out", destroy_user_session_path, method: :delete
+        - else
+          %li= link_to "Sign in", new_user_session_path
+
+.test
+  = auto_discovery_link_tag :atom, "/feed"
+  = auto_discovery_link_tag :rss, "/feed.rss"

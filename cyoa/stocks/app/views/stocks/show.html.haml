@@ -1,0 +1,32 @@
+.row.stock-title
+  .col-lg-6.name-symbol
+    = @stock.name
+    %span
+      (
+    %span
+      = @stock.symbol
+    %span
+      )
+  .col-lg-3.col-lg-offset-3
+    - if user_signed_in?
+      %button.watchlist-btn.pull-right{:onclick=>"toggleWatchlist('#{@stock.symbol}'); toggleWatchlistText();"}
+        - if current_user.stocks.include?(@stock)
+          .watchlist-box
+            %span#watchlist
+              Remove From Watchlist
+            %span= fa_icon "star", id: "#{@stock.symbol}-icon"
+        - else
+          .watchlist-box
+            %span#watchlist
+              Add To Watchlist
+            %span= fa_icon "star-o", id: "#{@stock.symbol}-icon"
+.row.stock-details
+  .col-lg-3.col-xs-12
+    .stock-info
+      = render 'stock_info'
+  .col-lg-9.col-xs-12
+    .stock-history
+      = area_chart(@data, library: {chart: {zoomType: 'x'}, title: {text: "Historical Prices"}, 
+      yAxis: {title: {text: "Price ($)", :margin => 10}}})
+
+:javascript

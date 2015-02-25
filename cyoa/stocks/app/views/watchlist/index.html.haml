@@ -1,0 +1,22 @@
+%h1.watchlist_index My Watchlist
+.input-group
+  %span.input-group-addon Filter
+  %input#filter.form-control{:placeholder => "Type here...", :type => "text"}
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Symbol
+      %th Name
+      %th Sector
+      %th Price
+      %th Market Capitalization
+  %tbody.searchable
+    - @stocks.each do |stock|
+      %tr.watched_stock{:onclick=>"goToStock('#{stock.symbol}');"}
+        %td= stock.symbol
+        %td= stock.name
+        %td= stock.sector
+        %td
+          $
+          = number_with_precision(stock.asking_price, precision: 2)
+        %td= stock.market_cap

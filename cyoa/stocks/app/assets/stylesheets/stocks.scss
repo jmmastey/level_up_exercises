@@ -1,0 +1,66 @@
+th {
+  text-align: center;
+}
+
+.stock-info-row {
+  border-bottom: 2px solid lightgray;
+  margin-bottom: 3px;
+  padding-bottom: 3px
+}
+
+.stock-details {
+  border-top: 2px solid black;
+  padding-top: 15px;
+}
+
+.stock-title {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.details-label {
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.data {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.fa-square {
+  color: transparent;
+}
+
+.watchlist-btn {
+  display: block;
+  margin:auto;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  background-color: #1874cd;
+  color: white;
+  font-size: 14px;
+  font-weight: 300;
+
+  .fa-star, .fa-star-o {
+    color: #ffb90f;
+  }
+
+  &:hover {
+    background-color: #1c86ee;
+
+    .fa-star, .fa-star-o {
+      color: #eead0e;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.stock-history {
+  border-left: 3px solid lightgray;
+}

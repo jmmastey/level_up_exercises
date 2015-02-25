@@ -1,0 +1,3 @@
+== Setup
+
+You must run `rake import_stocks` to populate initial data

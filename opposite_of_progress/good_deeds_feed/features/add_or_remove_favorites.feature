@@ -3,14 +3,16 @@ Feature: Add or remove legislator from favorites
   I want to add or remove legislators from my favorites
   To select which legislators will be included in my email updates
 
+  Background:
+    Given a legislator exists
+    Given a user exists and is logged in
+
   Scenario: Find link to add legislator to favorites
     Given I am at a legislator's page
-    And the legislator is not in my favorites
     Then I see a link to add the legislator to my favorites
 
   Scenario: Add legislator to favorites
     Given I am at a legislator's page
-    And the legislator is not in my favorites
     When I add the legislator to my favorites
     Then I see the legislator in my favorites
 

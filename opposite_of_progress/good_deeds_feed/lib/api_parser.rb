@@ -1,11 +1,15 @@
 require 'rubygems'
 require 'active_support'
 require 'httparty'
+require 'webmock'
 
 class CongressApiParser
   include HTTParty
 
+  WebMock.disable!
+
   OK_STATUS_CODE = 200
+  BILLS_PER_PAGE = 50
 
   base_uri 'congress.api.sunlightfoundation.com'
   default_params apikey: '23b3ee3083ea405dbb84c2b3476efcd6'
@@ -26,9 +30,8 @@ class CongressApiParser
     end
   end
 
-  def number_of_bills
-    #get_bills(1)["count"]
-    get_bills(1)
+  def number_of_pages
+    (get_bills(1)['count']/50.0).ceil
   end
  # CHECK FOR MULTIPLE SPONSORS
   private
@@ -51,7 +54,7 @@ class CongressApiParser
 end
 
 api = CongressApiParser.new
-# puts api.bills_by_page(1).count
+puts api.number_of_pages
 #api.number_of_bills.each do |k, v|
 #  p k
 #  p v

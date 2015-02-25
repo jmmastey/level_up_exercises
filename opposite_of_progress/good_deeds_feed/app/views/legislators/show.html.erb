@@ -13,11 +13,11 @@
     </section>
   </aside>
     <div class="col-md-6">
-    <% if @legislator.good_deeds.any? %>
       <h3>Good Deeds (<%= @legislator.good_deeds.count %>)</h3>
-      <ol class="good_deeds">
-        <%= render @legislator.good_deeds %>
+      <ol class="legislators_good_deeds">
+        <% if @legislator.good_deeds.any? %>
+          <%= render @legislator.good_deeds %>
+        <% end %>
       </ol>
-    <% end %>
   </div>
 </div>

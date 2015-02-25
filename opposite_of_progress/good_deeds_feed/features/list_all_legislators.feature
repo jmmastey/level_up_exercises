@@ -3,17 +3,21 @@ Feature: Viewing all legislators
   I want to see a list of all legislators
   To see which legislators I can add to my favorites
 
+  Background:
+    Given many legislators exist
+    
   Scenario: View first page of legislators
-    When I click on the "Legislators" link in the header
-    Then I am taken to the first page of legislators
+    Given I am at the "legislators" page
+    Then I see the first page of legislators
     And I see pagination links for the list of legislators
+    And I see links to filter by party
 
   Scenario: Navigate to second page of legislators
-    Given I am at the "Legislators" page
-    And I click on the "next" navigation link
+    Given I am at the "legislators" page
+    And I navigate to the next page of legislators
     Then I am taken to the second page of legislators
 
   Scenario: View legislator details
-    Given I am at the "Legislators" page
+    Given I am at the "legislators" page
     And I click on a legislator
-    Then I am taken to the legislator info page for that legislator
+    Then I am taken to the legislator info page for that legislators

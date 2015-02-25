@@ -7,9 +7,9 @@ When(/^I visit that legislator's page$/) do
 end
 
 Then(/^I should see the legislator's details$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_selector(".legislator_info")
 end
 
 Then(/^I should see a list of their good deeds$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_selector(".legislators_good_deeds")
 end

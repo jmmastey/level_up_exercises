@@ -6,8 +6,8 @@
 		<p>Title: <%= @good_deed.official_title %></p>
 		<p>Short title: <%= @good_deed.short_title %></p>
 		<p>Introduced on: <%= @good_deed.introduced_on %></p>
-		<p><%= link_to "Sponsor: #{@good_deed.legislator.title} #{@good_deed.legislator.lastname}", @good_deed.legislator %></p>
+		<p><%= link_to "Sponsor: #{@good_deed.legislator.title} #{@good_deed.legislator.lastname}", @good_deed.legislator, id: "sponsor_link" %></p>
 		<p></p>
-		<p><%= link_to "Search Wikipedia for this deed", "http://en.wikipedia.org/w/index.php?search=#{@good_deed.short_title}", target: "_blank" %></p>
+		<p><%= link_to "Search Wikipedia for this deed", "http://en.wikipedia.org/w/index.php?search=#{@good_deed.short_title}", target: "_blank", id: "wiki_link" %></p>
     </section>
 </div>

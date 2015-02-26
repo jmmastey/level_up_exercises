@@ -1,0 +1,105 @@
+American Amber / Red Ale
+American Barleywine
+American Black Ale
+American Blonde Ale
+American Brown Ale
+American Dark Wheat Ale
+American Double / Imperial IPA
+American Double / Imperial Stout
+American IPA
+American Pale Ale (APA)
+American Pale Wheat Ale
+American Porter
+American Stout
+American Strong Ale
+American Wild Ale
+Black & Tan
+Chile Beer
+Cream Ale
+Pumpkin Ale
+Rye Beer
+Wheatwine
+Belgian Dark Ale
+Belgian IPA
+Belgian Pale Ale
+Belgian Strong Dark Ale
+Belgian Strong Pale Ale
+Bière de Champagne / Bière Brut
+Bière de Garde
+Dubbel
+Faro
+Flanders Oud Bruin
+Flanders Red Ale
+Gueuze
+Lambic - Fruit
+Lambic - Unblended
+Quadrupel (Quad)
+Saison / Farmhouse Ale
+Tripel
+Witbier
+Baltic Porter
+Braggot
+English Barleywine
+English Bitter
+English Brown Ale
+English Dark Mild Ale
+English India Pale Ale (IPA)
+English Pale Ale
+English Pale Mild Ale
+English Porter
+English Stout
+English Strong Ale
+Extra Special / Strong Bitter (ESB)
+Foreign / Export Stout
+Milk / Sweet Stout
+Oatmeal Stout
+Old Ale
+Russian Imperial Stout
+Winter Warmer
+Sahti
+Altbier
+Berliner Weissbier
+Dunkelweizen
+Gose
+Hefeweizen
+Kölsch
+Kristalweizen
+Roggenbier
+Weizenbock
+Irish Dry Stout
+Irish Red Ale
+Kvass
+Scotch Ale / Wee Heavy
+Scottish Ale
+Scottish Gruit / Ancient Herbed Ale
+American Adjunct Lager
+American Amber / Red Lager
+American Double / Imperial Pilsner
+American Malt Liquor
+American Pale Lager
+California Common / Steam Beer
+Light Lager
+Low Alcohol Beer
+Czech Pilsener
+Euro Dark Lager
+Euro Pale Lager
+Euro Strong Lager
+Bock
+Doppelbock
+Dortmunder / Export Lager
+Eisbock
+German Pilsener
+Kellerbier / Zwickelbier
+Maibock / Helles Bock
+Märzen / Oktoberfest
+Munich Dunkel Lager
+Munich Helles Lager
+Rauchbier
+Schwarzbier
+Vienna Lager
+Happoshu
+Japanese Rice Lager
+Fruit / Vegetable Beer
+Herbed / Spiced Beer
+Smoked Beer
+

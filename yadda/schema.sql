@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS yadda;
+CREATE DATABASE yadda;
+\connect yadda;
+
 CREATE TABLE users (
   id            SERIAL                   PRIMARY KEY,
   created_on    TIMESTAMP WITH TIME ZONE NOT NULL,
@@ -25,15 +29,24 @@ CREATE TABLE breweries (
   year_founded  SMALLINT
 );
 
+CREATE TABLE beer_styles (
+  id            SERIAL                   PRIMARY KEY,
+  created_on    TIMESTAMP WITH TIME ZONE NOT NULL,
+  created_by    INTEGER                  NOT NULL REFERENCES users ON DELETE RESTRICT,
+  updated_on    TIMESTAMP WITH TIME ZONE NOT NULL,
+  updated_by    INTEGER                  NOT NULL REFERENCES users ON DELETE RESTRICT,
+  name          VARCHAR(100)             NOT NULL
+);
+
 CREATE TABLE beers (
   id            SERIAL                   PRIMARY KEY,
   brewery_id    INTEGER                  NOT NULL REFERENCES breweries ON DELETE CASCADE,
+  beer_style_id INTEGER                  NOT NULL REFERENCES beer_styles ON DELETE RESTRICT,
   created_on    TIMESTAMP WITH TIME ZONE NOT NULL,
   created_by    INTEGER                  NOT NULL REFERENCES users ON DELETE RESTRICT,
   updated_on    TIMESTAMP WITH TIME ZONE NOT NULL,
   updated_by    INTEGER                  NOT NULL REFERENCES users ON DELETE RESTRICT,
   name          VARCHAR(100)             NOT NULL,
-  style         VARCHAR(100)             NOT NULL,
   description   TEXT,
   year_brewed   SMALLINT
 );

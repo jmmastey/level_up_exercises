@@ -3,7 +3,7 @@ class Legislator < ActiveRecord::Base
   has_many :favorites
   has_many :users, through: :favorites
   default_scope -> { order(lastname: :asc) }
-  validates :firstname, presence: true #, uniqueness: { case_sensitive: false }
+  validates :firstname, presence: true
   validates :lastname, presence: true
   validates :bioguide_id, presence: true, uniqueness: { case_sensitive: false }
   validates :party, presence: true

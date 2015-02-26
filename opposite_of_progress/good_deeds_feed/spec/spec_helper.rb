@@ -18,7 +18,11 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'webmock/rspec'
 
+WebMock.disable_net_connect!(allow_localhost: true)
+
+
 RSpec.configure do |config|
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -42,11 +46,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.include WebMock
-
-  config.before(:all, type: :request) do
-    WebMock.allow_net_connect!
-  end
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.

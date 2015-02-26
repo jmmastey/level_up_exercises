@@ -1,12 +1,9 @@
 require 'rubygems'
 require 'active_support'
 require 'httparty'
-require 'webmock'
 
 class CongressApiParser
   include HTTParty
-
-  WebMock.disable!
 
   OK_STATUS_CODE = 200
   BILLS_PER_PAGE = 50
@@ -18,8 +15,14 @@ class CongressApiParser
   end
 
   def all_bills
-
+    bills = []
+    1.upto(number_of_pages) do |page|
+      bills << bills_by_page(page)
+    end
+    bills.flatten
   end
+
+  private
 
   def bills_by_page(page)
     raise ArgumentError unless page.is_a?(Fixnum) && page >= 1
@@ -31,12 +34,13 @@ class CongressApiParser
   end
 
   def number_of_pages
-    (get_bills(1)['count']/50.0).ceil
+    api_response = get_bills
+    raise RuntimeError unless api_response.code == OK_STATUS_CODE
+    (api_response['count']/50.0).ceil
   end
  # CHECK FOR MULTIPLE SPONSORS
-  private
 
-  def get_bills(page)
+  def get_bills(page = 1)
     bill_params = { query: { per_page: 50, page: page, order: "introduced_on" } }
     self.class.get("/bills/?history.enacted=true", bill_params)
   end
@@ -53,10 +57,6 @@ class CongressApiParser
   end
 end
 
-api = CongressApiParser.new
-puts api.number_of_pages
+#api = CongressApiParser.new
+#puts api.all_bills.first
 #api.number_of_bills.each do |k, v|
-#  p k
-#  p v
-#  puts "\n\n\n\n\n\n"
-#end

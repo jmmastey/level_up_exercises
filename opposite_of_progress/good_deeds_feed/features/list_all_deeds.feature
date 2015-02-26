@@ -10,12 +10,8 @@ Feature: Viewing all deeds
     Given I am at the good deeds page
     Then I see the first page of good deeds
     And I see pagination links for the list of good deeds
-    # And I see links to filter by party
-
-  Scenario: Navigate to second page of legislators
-    Given I am at the good deeds page
-    And I navigate to the next page of good deeds
-    Then I am taken to the second page of good deeds
+    And I see links to filter by party
+    And I see a link to a good deed JSON feed
 
   Scenario: View good deed details
     Given I am at the good deeds page

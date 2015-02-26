@@ -7,22 +7,27 @@ Feature: Add or remove legislator from favorites
     Given a legislator exists
     Given a user exists and is logged in
 
-  Scenario: Find link to add legislator to favorites
+  Scenario: Find button to add legislator to favorites
     Given I am at a legislator's page
-    Then I see a link to add the legislator to my favorites
+    Then I see a button to add the legislator to my favorites
 
   Scenario: Add legislator to favorites
     Given I am at a legislator's page
     When I add the legislator to my favorites
     Then I see the legislator in my favorites
 
-  Scenario: Find link to remove legislator from favorites
+  Scenario: Find button to remove legislator from favorites
     Given I am at a legislator's page
     And the legislator is already in my favorites
-    Then I see a link to remove the legislator from my favorites
+    Then I see a button to remove the legislator from my favorites
 
-    Scenario: Remove legislator from favorites through legislator's page
-    Given I am at a legislator's page
-    And the legislator is already in my favorites
+  Scenario: Remove legislator from favorites through legislator's page
+    Given the legislator is already in my favorites
+    And I am at a legislator's page
     When I remove the legislator from my favorites
     Then the legislator is removed my favorites
+
+  Scenario: Can't add to favorites if logged out
+    Given I have logged out of my account
+    When I am at a legislator's page
+    Then I do not see a button to add the legislator to my favorites

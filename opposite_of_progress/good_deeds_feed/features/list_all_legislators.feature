@@ -12,11 +12,6 @@ Feature: Viewing all legislators
     And I see pagination links for the list of legislators
     And I see links to filter by party
 
-  Scenario: Navigate to second page of legislators
-    Given I am at the "legislators" page
-    And I navigate to the next page of legislators
-    Then I am taken to the second page of legislators
-
   Scenario: View legislator details
     Given I am at the "legislators" page
     And I click on a legislator

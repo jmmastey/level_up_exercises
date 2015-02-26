@@ -22,10 +22,6 @@ Given(/^I navigate to the next page of legislators$/) do
   visit("/legislators/index?page=2")
 end
 
-Then(/^I am taken to the second page of legislators$/) do
-  pending
-end
-
 Given(/^I click on a legislator$/) do
   first(:css, "#legislator").click
 end

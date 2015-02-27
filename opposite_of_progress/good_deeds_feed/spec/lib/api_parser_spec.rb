@@ -3,17 +3,19 @@ require 'api_parser'
 require 'webmock/rspec'
 
 
-describe CongressApiParser do
-  #WebMock.allow_net_connect!
+RSpec.describe CongressApiParser do
   subject(:api) { CongressApiParser.new }
-  #let(:bills) { api.all_bills }
   let(:raw_response_file) { File.new("./spec/lib/raw_api_data.txt") }
+  let(:bill_keys) { [:congress_number, :congress_url, :official_title,
+                    :introduced_on, :bioguide_id, :short_title] }
   
   describe "#all_bills" do
-    it "returns all bills" do
+    it "returns all bills with correct hash keys" do
       stub_request(:get, /congress.api.sunlightfoundation.com/).
         to_return(raw_response_file)
-      expect(api.all_bills).not_to be_empty
+      api.all_bills.each do |bill|
+        expect(bill).to include(*bill_keys)
+      end
     end
 
     it "throws an exception if HTTP status code is not 200" do

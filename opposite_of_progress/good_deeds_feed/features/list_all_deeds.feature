@@ -11,7 +11,7 @@ Feature: Viewing all deeds
     Then I see the first page of good deeds
     And I see pagination links for the list of good deeds
     And I see links to filter by party
-    And I see a link to a good deed JSON feed
+    And I see a link to the good deeds JSON feed
 
   Scenario: View good deed details
     Given I am at the good deeds page

@@ -21,3 +21,7 @@ end
 Then(/^I am taken to the deed details page for that good deed$/) do
   expect(page).to have_selector(".good_deed_info")
 end
+
+Then(/^I see a link to the good deeds JSON feed$/) do
+  expect(page).to have_selector("#deeds_json")
+end

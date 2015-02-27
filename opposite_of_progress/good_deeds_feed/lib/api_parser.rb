@@ -45,10 +45,9 @@ class CongressApiParser
 
   def number_of_pages
     api_response = get_bills
-    raise RuntimeError unless api_response.code == OK_STATUS_CODE
+    raise ArgumentError unless api_response.code == OK_STATUS_CODE
     (api_response['count']/50.0).ceil
   end
- # CHECK FOR MULTIPLE SPONSORS
 
   def get_bills(page = 1)
     bill_params = { query: { per_page: 50, page: page, order: "introduced_on" } }

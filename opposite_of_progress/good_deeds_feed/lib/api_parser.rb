@@ -7,6 +7,8 @@ class CongressApiParser
 
   OK_STATUS_CODE = 200
   BILLS_PER_PAGE = 50
+  BILL_KEYS = %w( congress urls official_title introduced_on sponsor_id 
+                  short_title )
 
   base_uri 'congress.api.sunlightfoundation.com'
   default_params apikey: '23b3ee3083ea405dbb84c2b3476efcd6'
@@ -22,14 +24,22 @@ class CongressApiParser
     bills.flatten
   end
 
-  private
 
   def bills_by_page(page)
     raise ArgumentError unless page.is_a?(Fixnum) && page >= 1
     api_response = get_bills(page)
-    raise RuntimeError unless api_response.code == OK_STATUS_CODE
+    raise ArgumentError unless api_response.code == OK_STATUS_CODE
+    check_bill_format(api_response["results"])
     api_response["results"].map do |bill|
       parse(bill)
+    end
+  end
+
+  private
+
+  def check_bill_format(api_data)
+    api_data.each do |bill|
+      raise ArgumentError unless BILL_KEYS.all? { |key| bill.key? key}
     end
   end
 
@@ -57,6 +67,5 @@ class CongressApiParser
   end
 end
 
-#api = CongressApiParser.new
-#puts api.all_bills.first
-#api.number_of_bills.each do |k, v|
+ api = CongressApiParser.new
+ puts api.all_bills.count

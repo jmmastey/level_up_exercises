@@ -1,0 +1,66 @@
+yadda=# EXPLAIN SELECT * FROM top_beers WHERE brewery_id = 1;
+                                                            QUERY PLAN
+-----------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=272.63..272.66 rows=11 width=134)
+   Sort Key: (round(avg((((((ratings.appearance + ratings.aroma) + ratings.taste) + ratings.texture) + ratings.overall) * 2)), 0))
+   ->  HashAggregate  (cost=272.16..272.33 rows=11 width=112)
+         Group Key: b.id
+         ->  Hash Join  (cost=27.64..270.24 rows=110 width=112)
+               Hash Cond: (ratings.beer_id = b.id)
+               ->  Seq Scan on ratings  (cost=0.00..204.00 rows=10000 width=14)
+               ->  Hash  (cost=27.50..27.50 rows=11 width=102)
+                     ->  Seq Scan on beers b  (cost=0.00..27.50 rows=11 width=102)
+                           Filter: (brewery_id = 1)
+(10 rows)
+
+Table scans are being performed on beers and ratings. Indexes should be added to
+beers.brewery_id and ratings.beer_id. Scores are being calculated on the fly
+every time. A materialized view that is updated once or twice per day would help
+with this and provide adequate accuracy for beer scoring.
+
+yadda=# EXPLAIN SELECT * FROM beers_with_recent_scores WHERE id = 1;
+                                                     QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=0.28..262.55 rows=1 width=112)
+   Group Key: b.id
+   ->  Nested Loop  (cost=0.28..262.38 rows=9 width=112)
+         ->  Index Scan using beers_pkey on beers b  (cost=0.28..8.29 rows=1 width=102)
+               Index Cond: (id = 1)
+         ->  Seq Scan on ratings  (cost=0.00..254.00 rows=9 width=14)
+               Filter: ((created_on > '2015-02-02 11:18:41.842404'::timestamp without time zone) AND (beer_id = 1))
+(7 rows)
+
+A table scan is being performed on ratings. An index could be added on
+ratings.created_on.
+
+yadda=# EXPLAIN SELECT * FROM recommended_beers WHERE beer_style_id = 1;
+                                                                            QUERY PLAN
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on recommended_beers  (cost=272343.65..272343.70 rows=4 width=102)
+   ->  Sort  (cost=272343.65..272343.66 rows=4 width=102)
+         Sort Key: (random())
+         ->  Seq Scan on beers b  (cost=0.00..272343.61 rows=4 width=102)
+               Filter: ((beer_style_id = 1) AND (SubPlan 1))
+               SubPlan 1
+                 ->  Limit  (cost=272.29..272.33 rows=3 width=4)
+                       ->  Subquery Scan on tb  (cost=272.29..272.42 rows=10 width=4)
+                             ->  Sort  (cost=272.29..272.32 rows=10 width=134)
+                                   Sort Key: (round(avg((((((ratings.appearance + ratings.aroma) + ratings.taste) + ratings.texture) + ratings.overall) * 2)), 0))
+                                   ->  HashAggregate  (cost=271.88..272.02 rows=10 width=112)
+                                         Group Key: b_1.id
+                                         ->  Hash Join  (cost=27.62..270.12 rows=100 width=112)
+                                               Hash Cond: (ratings.beer_id = b_1.id)
+                                               ->  Seq Scan on ratings  (cost=0.00..204.00 rows=10000 width=14)
+                                               ->  Hash  (cost=27.50..27.50 rows=10 width=102)
+                                                     ->  Seq Scan on beers b_1  (cost=0.00..27.50 rows=10 width=102)
+                                                           Filter: (beer_style_id = b.beer_style_id)
+(18 rows)
+
+Table scans are being performed on beers and ratings. Indexes should be added on
+beer.beer_style_id and ratings.beer_id. Again, a materialized view would help
+with calculating scores. Sorting randomly is expensive. A materialized view that
+is updated once or twice per day could help here as well.
+
+Generally, foreign keys should have indexes. Materialized views that are updated
+once or twice per day would help with several issues and would probably be more
+than adequate for this application.

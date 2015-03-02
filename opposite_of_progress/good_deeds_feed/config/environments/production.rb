@@ -1,5 +1,4 @@
 Rails.application.configure do
-
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -32,11 +31,9 @@ Rails.application.configure do
 
   config.assets.digest = true
 
-
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
-
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.

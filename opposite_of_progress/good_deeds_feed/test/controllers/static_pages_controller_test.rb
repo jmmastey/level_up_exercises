@@ -10,5 +10,4 @@ class StaticPagesControllerTest < ActionController::TestCase
     get :help
     assert_response :success
   end
-
 end

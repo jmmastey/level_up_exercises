@@ -24,6 +24,7 @@ class CongressApiParser
     bills.flatten
   end
 
+  private
 
   def bills_by_page(page)
     raise ArgumentError unless page.is_a?(Fixnum) && page >= 1
@@ -35,11 +36,9 @@ class CongressApiParser
     end
   end
 
-  private
-
   def check_bill_format(api_data)
     api_data.each do |bill|
-      raise ArgumentError unless BILL_KEYS.all? { |key| bill.key? key}
+      raise ArgumentError unless BILL_KEYS.all? { |key| bill.key? key }
     end
   end
 

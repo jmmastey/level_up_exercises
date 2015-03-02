@@ -6,17 +6,17 @@ namespace :import_legislators do
   task create_legislators: :environment do
     CSV.foreach("./db/legislators.csv", headers: true) do |legislator|
       Legislator.find_or_create_by(legislator.to_h.slice(
-                                    "title",
-                                    "firstname",
-                                    "lastname",
-                                    "bioguide_id",
-                                    "party",
-                                    "state",
-                                    "gender",
-                                    "website",
-                                    "twitter_id",
-                                    "birthdate",
-                                  ))
+        "title",
+        "firstname",
+        "lastname",
+        "bioguide_id",
+        "party",
+        "state",
+        "gender",
+        "website",
+        "twitter_id",
+        "birthdate",
+      ))
     end
   end
 end

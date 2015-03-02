@@ -6,7 +6,7 @@ RSpec.describe CongressApiParser do
   subject(:api) { CongressApiParser.new }
   let(:raw_response_file) { File.new("./spec/lib/raw_api_data.txt") }
   let(:bill_keys) { [:congress_number, :congress_url, :official_title,
-                      :introduced_on, :bioguide_id, :short_title] 
+                      :introduced_on, :bioguide_id, :short_title]
                     }
 
   describe "#all_bills" do

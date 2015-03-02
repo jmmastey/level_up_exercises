@@ -7,7 +7,7 @@ class GoodDeed < ActiveRecord::Base
   validates :congress_number, presence: true
   validates :congress_url, presence: true, uniqueness: { case_sensitive: false }
   validates :short_title, presence: true, uniqueness: { case_sensitive: false }
-  validates :official_title,  presence: true, 
+  validates :official_title,  presence: true,
                               uniqueness: { case_sensitive: false }
   validates :introduced_on, presence: true
   validates :legislator_id, presence: true

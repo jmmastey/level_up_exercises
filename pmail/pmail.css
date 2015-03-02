@@ -1,0 +1,143 @@
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  min-width: 800px;
+  background-color: whitesmoke;
+  height: 60px;
+  vertical-align: middle; }
+
+.brand-logo {
+  margin: 0 0 0 30px;
+  width: 150px;
+  display: inline-block; }
+
+.search {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-grow: 1;
+  vertical-align: middle; }
+  .search input[type='text'] {
+    flex: 1;
+    outline: none; }
+  .search input[type='button'] {
+    float: right;
+    height: 30px;
+    min-width: 50px; }
+  .search .search-box {
+    max-width: 590px;
+    display: inline-flex;
+    flex-direction: row;
+    flex: 1;
+    height: 30px;
+    margin-top: 15px;
+    margin-left: 30px;
+    border: 1px solid lightgrey; }
+    .search .search-box:focus {
+      border: 1px solid #4485F5; }
+  .search .search-btn {
+    max-height: 32px;
+    margin-top: 15px;
+    min-width: 60px;
+    color: white;
+    background-color: #4485F5;
+    border-radius: 0 4px 4px 0; }
+
+.header-links {
+  height: 50px;
+  padding: 0 1em; }
+  .header-links > ul {
+    padding: 1em 0;
+    vertical-align: middle; }
+  .header-links li {
+    display: inline-block;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 8px;
+    position: relative; }
+
+.dropdown-panel {
+  border: 1px solid #5B5A5C;
+  margin: 0;
+  min-width: 128px;
+  position: absolute;
+  text-align: left;
+  z-index: 999;
+  background-color: white;
+  margin-top: 10px; }
+  .dropdown-panel.apps {
+    width: 270px;
+    left: -135px; }
+  .dropdown-panel.account {
+    right: 0; }
+  .dropdown-panel .menu-btn {
+    background-color: whitesmoke;
+    height: 20px;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px; }
+    .dropdown-panel .menu-btn a {
+      text-decoration: none; }
+    .dropdown-panel .menu-btn button {
+      border: 1px solid lightgrey;
+      background: transparent;
+      padding: 3px 6px;
+      font-size: 15px; }
+  .dropdown-panel .account-info {
+    line-height: 25px;
+    padding: 15px 50px 20px 15px; }
+
+.app-menu a {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px; }
+  .app-menu a:hover {
+    outline: thin solid #5B5A5C; }
+  .app-menu a .app-caption {
+    display: block;
+    font-size: 0.9em;
+    margin-top: 4px;
+    text-align: center; }
+  .app-menu a .app {
+    background: url(google_sprite.png) no-repeat;
+    background-size: 112px 2011px;
+    display: block;
+    width: 64px;
+    height: 64px; }
+    .app-menu a .app.icon-calendar {
+      background-position: -35px -735px; }
+    .app-menu a .app.icon-docs {
+      background-position: 0 0; }
+    .app-menu a .app.icon-drive {
+      background-position: 0 -390px; }
+    .app-menu a .app.icon-mail {
+      background-position: -35px -942px; }
+    .app-menu a .app.icon-search {
+      background-position: 0 -459px; }
+    .app-menu a .app.icon-sheets {
+      background-position: 0 -1149px; }
+    .app-menu a .app.icon-slides {
+      background-position: 0 -1460px; }
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+.no-gutter {
+  margin-left: 0; }
+
+ul {
+  list-style-type: none; }
+
+.hidden {
+  display: none; }
+
+/*# sourceMappingURL=pmail.css.map */

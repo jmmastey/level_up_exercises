@@ -1,0 +1,183 @@
+$gmail-grey:  #5B5A5C;
+$gmail-blue:  #4485F5;
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  min-width: 800px;
+  background-color: whitesmoke;
+  height: 60px;
+  vertical-align: middle;
+}
+
+.brand-logo {
+  margin: 0 0 0 30px;
+  width: 150px;
+  display: inline-block;
+}
+
+.search {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-grow: 1;
+  vertical-align: middle;
+
+  input[type = 'text'] {
+    flex: 1;
+    outline: none;
+  }
+
+  input[type = 'button'] {
+    float: right;
+    height: 30px;
+    min-width: 50px;
+  }
+
+  .search-box {
+    max-width: 590px;
+    display: inline-flex;
+    flex-direction: row;
+    flex: 1;
+    height: 30px;
+    margin-top: 15px;
+    margin-left: 30px;
+    border: 1px solid lightgrey;
+
+    &:focus {
+      border: 1px solid $gmail-blue;
+    }
+  }
+
+  .search-btn {
+    max-height: 32px;
+    margin-top: 15px;
+    min-width: 60px;
+    color: white;
+    background-color: $gmail-blue;
+    border-radius: 0 4px 4px 0;
+  }
+}
+
+.header-links {
+  height: 50px;
+  padding: 0 1em;
+
+  > ul {
+      padding: 1em 0;
+      vertical-align: middle;
+  }
+
+  li {
+      display: inline-block;
+      margin-left: 16px;
+      margin-right: 16px;
+      margin-top: 8px;
+      position: relative;
+    }
+}
+
+.dropdown-panel {
+  border: 1px solid $gmail-grey;
+  margin: 0;
+  min-width: 128px;
+  position: absolute;
+  text-align: left;
+  z-index: 999;
+  background-color: white;
+  margin-top: 10px;
+
+  &.apps {
+    width: 270px;
+    left: -135px;
+  }
+
+  &.account {
+    right: 0;
+  }
+
+  .menu-btn {
+    background-color: whitesmoke;
+    height: 20px;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+
+    a {
+      text-decoration: none;
+    }
+
+    button {
+      border: 1px solid lightgrey;
+      background: transparent;
+      padding: 3px 6px;
+      font-size: 15px;
+    }
+  }
+
+  .account-info {
+    line-height: 25px;
+    padding: 15px 50px 20px 15px;
+  }
+}
+
+.app-menu {
+  a {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+
+    &:hover {
+      outline: thin solid $gmail-grey;
+    }
+
+    .app-caption {
+      display: block;
+      font-size: 0.9em;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    .app {
+      background: url(google_sprite.png) no-repeat;
+      background-size: 112px 2011px;
+      display: block;
+      width: 64px;
+      height: 64px;
+
+      &.icon-calendar {
+        background-position: -35px -735px
+      }
+
+      &.icon-docs {
+        background-position: 0 0
+      }
+
+      &.icon-drive {
+        background-position: 0 -390px
+      }
+
+      &.icon-mail {
+        background-position: -35px -942px
+      }
+
+      &.icon-search {
+        background-position: 0 -459px
+      }
+
+      &.icon-sheets {
+        background-position: 0 -1149px
+      }
+
+      &.icon-slides {
+        background-position: 0 -1460px
+      }
+    }
+  }
+}

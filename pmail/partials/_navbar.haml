@@ -1,0 +1,53 @@
+%section.nav-bar
+  %img.brand-logo{alt: "Enova", src: "https://www.google.com/a/enova.com/images/logo.gif?alpha=1&service=google_default"}
+  %form.search
+    %input.search-box{type: "text"}
+    %button.search-btn{type: "button"}
+      %span.fa.fa-search
+  .header-links.right
+    %ul
+      %li
+        %a.top-dropdown{ href: "#" }
+          %i.fa.fa-th.fa-lg
+        .dropdown-panel.hidden.apps
+          .app-menu
+            %a{ href: "#" }
+              .app.icon-search
+              .app-caption Search
+            %a{ href: "#" }
+              .app.icon-mail
+              .app-caption Mail
+            %a{ href: "#" }
+              .app.icon-calendar
+              .app-caption Calendar
+            %a{ href: "#" }
+              .app.icon-drive
+              .app-caption Drive
+            %a{ href: "#" }
+              .app.icon-docs
+              .app-caption Docs
+            %a{ href: "#" }
+              .app.icon-sheets
+              .app-caption Sheets
+            %a{ href: "#" }
+              .app.icon-slides
+              .app-caption Slides
+          .menu-btn
+            %a{ href: "#" }
+              More
+              %span.fa.fa-caret-down
+      %li
+        %a.top-dropdown{ href: "#" }
+          zbright@pmail.com
+          %i.fa.fa-caret-down
+        .dropdown-panel.hidden.account
+          .account-info
+            %strong.name Zach Bright
+            .email zbright@pmail.com
+            .links
+              %a{href: '#'} Account
+              %span --
+              %a{href: '#'} Privacy
+          .menu-btn
+            %button Add account
+            %button Sign out

@@ -1,0 +1,19 @@
+- def haml(filename)
+  - Haml::Engine.new(File.read(filename)).render
+
+!!!
+%html
+  %head
+    %meta{charset: "UTF-8"}
+      %link{href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css", rel: "stylesheet"}
+      %link{href: "normalize.css", rel: "stylesheet"}
+      %link{href: "pmail.css", rel: "stylesheet"}
+      %script{src: "https://code.jquery.com/jquery-2.1.3.min.js"}
+  %body
+    = haml("partials/_navbar.haml")
+    
+
+:javascript
+  $('.top-dropdown').click(function() {
+        return $(this).siblings('.dropdown-panel').toggle();
+      });

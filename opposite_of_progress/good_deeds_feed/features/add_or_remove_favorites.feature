@@ -25,7 +25,13 @@ Feature: Add or remove legislator from favorites
     Given the legislator is already in my favorites
     And I am at a legislator's page
     When I remove the legislator from my favorites
-    Then the legislator is removed my favorites
+    Then the legislator is removed from my favorites
+
+  Scenario: Remove legislator from user's profile page
+    Given the legislator is already in my favorites
+    And I am at my user profile page
+    When I remove the legislator from my favorites through my profile
+    Then the legislator is removed from my favorites
 
   Scenario: Can't add to favorites if logged out
     Given I have logged out of my account

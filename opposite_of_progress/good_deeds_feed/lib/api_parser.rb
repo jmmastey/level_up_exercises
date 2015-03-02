@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'active_support'
+require 'active_support/all'
 require 'httparty'
 
 class CongressApiParser
@@ -7,7 +7,7 @@ class CongressApiParser
 
   OK_STATUS_CODE = 200
   BILLS_PER_PAGE = 50
-  BILL_KEYS = %w( congress urls official_title introduced_on sponsor_id 
+  BILL_KEYS = %w( congress urls official_title introduced_on sponsor_id
                   short_title )
 
   base_uri 'congress.api.sunlightfoundation.com'
@@ -46,7 +46,7 @@ class CongressApiParser
   def number_of_pages
     api_response = get_bills
     raise ArgumentError unless api_response.code == OK_STATUS_CODE
-    (api_response['count']/50.0).ceil
+    (api_response['count'] / 50.0).ceil
   end
 
   def get_bills(page = 1)
@@ -65,6 +65,3 @@ class CongressApiParser
     }
   end
 end
-
-# api = CongressApiParser.new
-#ß puts api.all_bills.count

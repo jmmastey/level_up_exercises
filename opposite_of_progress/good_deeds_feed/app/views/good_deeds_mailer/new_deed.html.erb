@@ -1,5 +1,11 @@
-<h1>GoodDeedsMailer#new_deed</h1>
-
 <p>
-  <%= @greeting %>, find me in app/views/good_deeds_mailer/new_deed.html.erb
+Hi,
+
+This email is to inform you of a new good deed sponsored by one of your favorite legislators.
+
+ <%= @good_deed.legislator.firstname %> <%= @good_deed.legislator.lastname %> sponsored this new bill:
+
+Short title: <%= @good_deed.short_title %>
+Official title: <%= @good_deed.official_title %>
+
 </p>

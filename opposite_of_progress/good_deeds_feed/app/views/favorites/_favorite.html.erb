@@ -1,5 +1,5 @@
 <li id="favorite-<%= favorite.id %>">
   <span class="content"><%= link_to "#{favorite.legislator.title} #{favorite.legislator.firstname} #{favorite.legislator.lastname}", favorite.legislator %></span>
       <small><%= link_to "delete", favorite, method: :delete,
-                                  data: { confirm: "You sure?" } %></small>
+                                  id: "delete_favorite" %></small>
 </li>

@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :legislator do
     firstname { Faker::Name.first_name }
     lastname { Faker::Name.last_name }
-    sequence(:bioguide_id) { |n| "DD#{n}001"}
+    sequence(:bioguide_id) { |n| "DD#{n}001" }
     party %w( D R I ).sample
     state { Faker::Address.state_abbr }
     birthdate { Faker::Date.between(70.years.ago, 20.years.ago) }
@@ -16,11 +16,12 @@ FactoryGirl.define do
 
   factory :good_deed do
     congress_number 114
-    sequence(:congress_url) { |n| "http://beta.congress.gov/bill/114th/house-bill/#{n}" }
+    sequence(:congress_url) do |n|
+      "http://beta.congress.gov/bill/114th/house-bill/#{n}"
+    end
     short_title { Faker::Lorem.sentence }
     official_title { Faker::Lorem.sentence }
     introduced_on { Faker::Date.between(600.days.ago, 2.days.ago) }
     legislator
   end
-
 end

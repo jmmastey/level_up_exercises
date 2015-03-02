@@ -15,6 +15,10 @@ Then(/^I see a button to add the legislator to my favorites$/) do
   expect(page).to have_selector(".new_favorite")
 end
 
+Given(/^I am at my user profile page$/) do
+  visit("/users/1")
+end
+
 When(/^I add the legislator to my favorites$/) do
   click_button("Add to favorites")
 end
@@ -38,7 +42,7 @@ When(/^I remove the legislator from my favorites$/) do
   click_button("Remove from favorites")
 end
 
-Then(/^the legislator is removed my favorites$/) do
+Then(/^the legislator is removed from my favorites$/) do
   expect(page).not_to have_selector(".favorite-1")
 end
 
@@ -48,4 +52,8 @@ end
 
 Then(/^I do not see a button to add the legislator to my favorites$/) do
   expect(page).not_to have_button("Add to favorites")
+end
+
+When(/^I remove the legislator from my favorites through my profile$/) do
+  first(:css, "#delete_favorite").click
 end

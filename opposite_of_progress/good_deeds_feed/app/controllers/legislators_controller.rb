@@ -5,7 +5,7 @@ class LegislatorsController < ApplicationController
 
   def by_party
     @legislators = Legislator.where(party: params[:party]).
-      paginate(page: params[:page])
+                    paginate(page: params[:page])
     render :index
   end
 

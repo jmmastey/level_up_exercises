@@ -8,7 +8,8 @@ class GoodDeedsController < ApplicationController
   end
 
   def by_party
-    @good_deeds = GoodDeed.by_party(params[:party]).paginate(page: params[:page])
+    @good_deeds = GoodDeed.by_party(params[:party]).
+                    paginate(page: params[:page])
     render :index
   end
 

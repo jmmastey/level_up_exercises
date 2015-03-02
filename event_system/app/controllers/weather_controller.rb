@@ -7,10 +7,10 @@ class WeatherController < ApplicationController
       @detail_forecasts = parse_details
       region_id = Region.where(city: "Chicago").pluck(:region_id)
 
-      todays_forecast = Hash[*@detail_forecasts.values].values[0].downcase
+      forecast_now = Hash[*@detail_forecasts.values].values[0].downcase
 
       @todays_forecast = WEATHER_WEAR.keys.select do |word|
-        todays_forecast.match(word)
+        forecast_now.match(word)
       end.first.capitalize
 
       @user = EmailContact.where(region_id: region_id)

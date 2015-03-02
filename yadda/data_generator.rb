@@ -4,7 +4,7 @@ class DataGenerator
   end
 
   def self.last_names
-    @last_names ||= File.new("lastnames.txt").map { |name| name.chomp }
+    @last_names ||= File.new("lastnames.txt").map(&:chomp)
   end
 
   def self.first_name
@@ -12,7 +12,7 @@ class DataGenerator
   end
 
   def self.first_names
-    @first_names ||= File.new("firstnames.txt").map { |name| name.chomp }
+    @first_names ||= File.new("firstnames.txt").map(&:chomp)
   end
 
   def self.beer_style
@@ -20,7 +20,7 @@ class DataGenerator
   end
 
   def self.beer_styles
-    @beer_styles ||= File.new("beerstyles.txt").map { |style| style.chomp }
+    @beer_styles ||= File.new("beerstyles.txt").map(&:chomp)
   end
 
   def self.beer_rating

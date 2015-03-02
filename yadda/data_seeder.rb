@@ -2,7 +2,6 @@ require "sequel"
 require_relative "data_generator"
 
 class DataSeeder
-
   def initialize(database, host = "localhost",
     total_users = 100, total_ratings = 1000,
     total_breweries = nil, total_beers = nil)

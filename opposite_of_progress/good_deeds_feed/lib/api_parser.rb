@@ -66,5 +66,5 @@ class CongressApiParser
   end
 end
 
- api = CongressApiParser.new
- puts api.all_bills.count
+# api = CongressApiParser.new
+#ß puts api.all_bills.count

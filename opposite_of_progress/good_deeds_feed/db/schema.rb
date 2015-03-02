@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150218231256) do
     t.date     "birthdate"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.boolean  "notified",    default: true
   end
 
   add_index "legislators", ["bioguide_id"], name: "index_legislators_on_bioguide_id", unique: true, using: :btree

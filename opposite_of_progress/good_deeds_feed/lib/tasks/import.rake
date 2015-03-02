@@ -24,11 +24,22 @@ end
 namespace :import_deeds do
   task create_deeds: :environment do
     congress_data = CongressApiParser.new
-    congress_data.all_bills.each do |deed|
-      if legislator = Legislator.find_by(bioguide_id: deed[:bioguide_id])
-        legislator.good_deeds << GoodDeed.find_or_create_by(deed.except(:bioguide_id))
-        legislator.save
+    begin
+      all_bills = congress_data.all_bills
+      all_bills.each do |deed|
+        if legislator = Legislator.find_by(bioguide_id: deed[:bioguide_id])
+          legislator.good_deeds << GoodDeed.find_or_create_by(deed.except(:bioguide_id))
+          legislator.save
+        end
       end
+    rescue ArgumentError
+      puts "API isn't working"
     end
+    #congress_data.all_bills.each do |deed|
+    #  if legislator = Legislator.find_by(bioguide_id: deed[:bioguide_id])
+    #    legislator.good_deeds << GoodDeed.find_or_create_by(deed.except(:bioguide_id))
+    #    legislator.save
+    #  end
+    #end
   end
 end

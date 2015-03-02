@@ -1,5 +1,5 @@
 <% if logged_in? %>
-	<% if current_user.legislators.find_by(id: params[:id]) %>
+	<% if current_user.following_legislator?(Legislator.find(params[:id])) %>
 	<%= form_for(current_user.favorites.find_by(legislator_id: params[:id]),
              html: { method: :delete }) do |f| %>
   <%= f.submit "Remove from favorites", class: "btn" %>

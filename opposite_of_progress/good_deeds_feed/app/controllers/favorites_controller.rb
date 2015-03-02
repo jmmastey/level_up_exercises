@@ -6,13 +6,17 @@ class FavoritesController < ApplicationController
       legislator = Legislator.find(params[:id])
       current_user.favorite_legislator(legislator)
       redirect_to user_url(current_user)
+    else
+      redirect_to user_url(current_user)
     end
   end
 
   def destroy
-    if current_user.following_legislator?(Legislator.find(params[:id]))
+    if current_user.favorites.exists?(id: params[:id])
       current_user.unfavorite_legislator(params[:id])
       flash[:success] = "Favorite removed"
+      redirect_to user_url(current_user)
+    else
       redirect_to user_url(current_user)
     end
   end

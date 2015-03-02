@@ -25,11 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def favorite_legislator(legislator)
-    legislators << legislator
-  end
-
-  def unfavorite_legislator(id)
-    favorites.find(id).destroy
+    legislators << legislator unless following_legislator?(legislator)
   end
 
   def following_legislator?(legislator)

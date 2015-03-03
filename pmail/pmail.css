@@ -153,15 +153,13 @@ a {
 
 .sidebar {
   display: block;
-  max-width: 200px;
-  margin: 0;
-  width: 200px;
+  min-width: 175px;
+  width: 175px;
   font-size: 14px; }
   .sidebar .active {
     border-left: 5px solid #DA4B39;
     color: #DA4B39; }
   .sidebar button {
-    border: none;
     border-radius: 2px;
     margin-left: 35px;
     text-transform: uppercase;
@@ -173,15 +171,14 @@ a {
     color: white;
     font-size: 11px; }
   .sidebar li {
-    margin: 5px 0;
-    padding: 5px 5px 5px 30px; }
+    padding: 5px 0px 5px 30px; }
     .sidebar li:not(.active) {
       border-left: 5px solid transparent; }
     .sidebar li:hover {
       background-color: whitesmoke; }
 
 .more-list {
-  border-top: 2px solid whitesmoke; }
+  border-top: 1px solid lightgrey; }
 
 .email-list {
   margin-left: 45px;
@@ -232,7 +229,7 @@ a {
       color: lightgrey; }
 
 .footer {
-  margin-left: 210px;
+  margin-left: 185px;
   min-height: 250px;
   padding-top: 60px;
   padding-right: 20px;

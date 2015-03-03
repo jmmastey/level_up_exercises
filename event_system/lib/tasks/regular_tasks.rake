@@ -1,5 +1,5 @@
 namespace :regular_tasks do
-  desc "TODO"
+  desc "Sends email to alert weather conditions"
   task cron: :environment do
 
     @detail_forecasts = Class.new.extend(ParseWeather).parse_details

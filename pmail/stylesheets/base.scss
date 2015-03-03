@@ -10,11 +10,11 @@ ul {
 }
 
 a {
-  color: black;
+  color: #000;
   text-decoration: none;
 
   &.active {
     font-weight: 500;
-    color: red;
+    color: $gmail-red;
   }
 }

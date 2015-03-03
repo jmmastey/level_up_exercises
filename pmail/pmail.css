@@ -8,11 +8,11 @@ ul {
   list-style-type: none; }
 
 a {
-  color: black;
+  color: #000;
   text-decoration: none; }
   a.active {
     font-weight: 500;
-    color: red; }
+    color: #DA4B39; }
 
 .options-bar {
   min-width: 800px;
@@ -39,7 +39,7 @@ a {
   margin-top: 9px;
   font-size: 18px; }
   .mail-dropdown button {
-    background-color: white; }
+    background-color: #FFF; }
 
 .options-bar-dropdown {
   min-width: 50px;
@@ -78,7 +78,7 @@ a {
     max-height: 32px;
     margin-top: 15px;
     min-width: 50px;
-    color: white;
+    color: #FFF;
     background-color: #4485F5;
     border-radius: 0 3px 3px 0; }
 
@@ -96,7 +96,7 @@ a {
 .dropdown-panel {
   border: 1px solid #5B5A5C;
   position: absolute;
-  background-color: white;
+  background-color: #FFF;
   margin-top: 10px;
   z-index: 999; }
   .dropdown-panel.apps {
@@ -168,7 +168,7 @@ a {
     margin-top: 10px;
     background-color: #DA4B39;
     font-weight: 600;
-    color: white;
+    color: #FFF;
     font-size: 11px; }
   .sidebar li {
     padding: 5px 0px 5px 30px; }

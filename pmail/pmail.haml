@@ -1,3 +1,4 @@
+- require "date"
 - def haml(filename)
   - Haml::Engine.new(File.read(filename)).render
 
@@ -11,9 +12,12 @@
       %script{src: "https://code.jquery.com/jquery-2.1.3.min.js"}
   %body
     = haml("partials/_navbar.haml")
-    
+    = haml("partials/_options_bar.haml")
+    %section.main
+      = haml("partials/_sidebar.haml")
+      = haml("partials/_threads.haml")
+    = haml("partials/_footer.haml")
 
-:javascript
-  $('.top-dropdown').click(function() {
-        return $(this).siblings('.dropdown-panel').toggle();
-      });
+  %script{src: "pmail.js"}
+
+

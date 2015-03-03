@@ -1,0 +1,20 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+
+  &.active {
+    font-weight: 500;
+    color: red;
+  }
+}

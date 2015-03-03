@@ -1,0 +1,23 @@
+- threads = [ {date: Date.new(2015, 3, 2), count: 4, favorite: false, read: false, from: "Joe Mastey", subject: "You are not yet done with training, young one"},
+              {date: Date.new(2015, 3, 1), count: 1, favorite: false, read: true, from: "Barack Obama", subject: "Matter of National Security"},
+              {date: Date.new(2015, 3, 1), count: 2, favorite: false, read: false, from: "Optimus Prime", subject: "Megatron stole our toys though!"},
+              {date: Date.new(2015, 2, 28), count: 2, favorite: false, read: true, from: "Megatron", subject: "Optimus wont let me play with the other robots"},
+              {date: Date.new(2015, 2, 15), count: 1, favorite: true, read: false, from: "Big Fish", subject: "I run the show"},
+              {date: Date.new(2015, 2, 10), count: 1, favorite: false, read: true, from: "Little Fish", subject: "Just keep swimming"},
+              {date: Date.new(2015, 1, 15), count: 1, favorite: true, read: true, from: "Red Fish", subject: "Blue fish bit me first!!!"},
+              {date: Date.new(2015, 1, 1), count: 2, favorite: true, read: true, from: "Blue Fish", subject: "Red fish bit me"},
+              {date: Date.new(2014, 12, 21), count: 6, favorite: false, read: true, from: "Jay Cutler", subject: "I'm sad, wanna come for a swim?"} ]
+
+%main.email-list
+  - threads.each_with_index do |thread, index|
+    %article.email{class: thread[:read] ? "unread" : nil }
+      .left
+        %i.fa.fa-square-o{id: "check-" + index.to_s, onclick: "toggleSelection('#check-' + #{index.to_s})" }
+        %i.fa.fa-lg{id: "star-" + index.to_s, class: thread[:favorite] ? "fa-star" : "fa-star-o", onclick: "toggleFavorite('#star-' + #{index.to_s})"}
+        %span
+          .from= thread[:from]
+          - if thread[:count] > 1
+            (#{thread[:count]})
+      .subject= thread[:subject]
+      .right
+        = thread[:date].year == Date.today.year ? thread[:date].strftime('%b %-d') : thread[:date].strftime('%-m/%-d/%y')

@@ -1,0 +1,52 @@
+.options-bar {
+  z-index: 9999;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  min-width: 800px;
+  background-color: white;
+  border-bottom: 1px solid whitesmoke;
+  height: 40px;
+  vertical-align: middle;
+}
+
+.options-links {
+
+  li {
+    display: inline-block;
+    position: relative;
+    padding-left: 35px;
+  }
+}
+
+.dropdown-menu {
+  li {
+    font-size: 14px;
+    display: block;
+    padding: 10px;
+
+
+    &:hover {
+      background-color: whitesmoke;
+    }
+  }
+}
+
+.mail-dropdown {
+  width: 137px;
+  color: $gmail-red;
+  margin-top: 12px;
+
+  button {
+    background-color: white;
+  }
+}
+
+.options-bar-dropdown {
+  min-width: 50px;
+  min-height: 26px;
+  background-color: whitesmoke;
+  border: 1px solid darkgrey;
+  border-radius: 4px;
+  font-size: 14px;
+}

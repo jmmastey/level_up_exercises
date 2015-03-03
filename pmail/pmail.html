@@ -21,7 +21,7 @@
         <ul>
           <li>
             <a class='top-dropdown' href='#'>
-              <i class='fa fa-th fa-lg'></i>
+              <i class='fa fa-th'></i>
             </a>
             <div class='dropdown-panel hidden apps'>
               <div class='app-menu'>
@@ -54,7 +54,7 @@
                   <div class='app-caption'>Slides</div>
                 </a>
               </div>
-              <div class='menu-btn'>
+              <div class='account-options'>
                 <a href='#'>
                   More
                   <span class='fa fa-caret-down'></span>
@@ -77,7 +77,7 @@
                   <a href='#'>Privacy</a>
                 </div>
               </div>
-              <div class='menu-btn'>
+              <div class='account-options'>
                 <button>Add account</button>
                 <button>Sign out</button>
               </div>
@@ -86,10 +86,280 @@
         </ul>
       </div>
     </section>
+    <section>
+      <div class='options-bar'>
+        <div class='options-links'>
+          <ul>
+            <li class='mail-dropdown'>
+              <button class='top-dropdown'>
+                Mail
+                <i class='fa fa-caret-down'></i>
+              </button>
+              <div class='dropdown-panel hidden'>
+                <ul class='dropdown-menu'>
+                  <li>
+                    <a class='active' href='#'>Mail</a>
+                  </li>
+                  <li>
+                    <a href='#'>Contacts</a>
+                  </li>
+                  <li>
+                    <a href='#'>Tasks</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <button class='top-dropdown options-bar-dropdown' title='Select'>
+                <i class='fa fa-square-o'></i>
+                <i class='fa fa-caret-down'></i>
+              </button>
+              <div class='dropdown-panel hidden'>
+                <ul class='dropdown-menu'>
+                  <li>
+                    <a class='active' href='#'>All</a>
+                  </li>
+                  <li>
+                    <a href='#'>Read</a>
+                  </li>
+                  <li>
+                    <a href='#'>Unread</a>
+                  </li>
+                  <li>
+                    <a href='#'>Starred</a>
+                  </li>
+                  <li>
+                    <a href='#'>Unstarred</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <button class='options-bar-dropdown' title='Refresh'>
+                <i class='fa fa-refresh'></i>
+              </button>
+            </li>
+            <li>
+              <button class='options-bar-dropdown top-dropdown'>
+                More
+                <i class='fa fa-caret-down'></i>
+              </button>
+              <div class='dropdown-panel hidden'>
+                <ul class='dropdown-menu'>
+                  <li>
+                    <a href='#'>Mark All as Read</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class='main'>
+      <nav class='sidebar'>
+        <button>Compose</button>
+        <ul class='sidebar-menu'>
+          <li class='active'>
+            <a href='#'>Inbox</a>
+          </li>
+          <li>
+            <a href='#'>Starred</a>
+          </li>
+          <li>
+            <a href='#'>Sent Mail</a>
+          </li>
+          <li>
+            <a href='#'>Drafts</a>
+          </li>
+          <li>
+            <a href='#'>Projects</a>
+          </li>
+          <li>
+            <a class='top-dropdown' href='#'>
+              More
+              <i class='fa fa-caret-down'></i>
+            </a>
+          </li>
+        </ul>
+        <div class='more-list hidden'>
+          <ul class='sidebar-menu'>
+            <li>
+              <a href='#'>Important</a>
+            </li>
+            <li>
+              <a href='#'>All Mail</a>
+            </li>
+            <li>
+              <a href='#'>Spam</a>
+            </li>
+            <li>
+              <a href='#'>Trash</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <main class='email-list'>
+        <article class='email'>
+          <div class='left'>
+            <i class='fa fa-square-o' id='check-0' onclick="toggleSelection('#check-' + 0)"></i>
+            <i class='fa fa-lg fa-star-o' id='star-0' onclick="toggleFavorite('#star-' + 0)"></i>
+            <span>
+              <div class='from'>Joe Mastey</div>
+              (4)
+            </span>
+          </div>
+          <div class='subject'>You are not yet done with training, young one</div>
+          <div class='right'>
+            Mar 2
+          </div>
+        </article>
+        <article class='email unread'>
+          <div class='left'>
+            <i class='fa fa-square-o' id='check-1' onclick="toggleSelection('#check-' + 1)"></i>
+            <i class='fa fa-lg fa-star-o' id='star-1' onclick="toggleFavorite('#star-' + 1)"></i>
+            <span>
+              <div class='from'>Barack Obama</div>
+            </span>
+          </div>
+          <div class='subject'>Matter of National Security</div>
+          <div class='right'>
+            Mar 1
+          </div>
+        </article>
+        <article class='email'>
+          <div class='left'>
+            <i class='fa fa-square-o' id='check-2' onclick="toggleSelection('#check-' + 2)"></i>
+            <i class='fa fa-lg fa-star-o' id='star-2' onclick="toggleFavorite('#star-' + 2)"></i>
+            <span>
+              <div class='from'>Optimus Prime</div>
+              (2)
+            </span>
+          </div>
+          <div class='subject'>Megatron stole our toys though!</div>
+          <div class='right'>
+            Mar 1
+          </div>
+        </article>
+        <article class='email unread'>
+          <div class='left'>
+            <i class='fa fa-square-o' id='check-3' onclick="toggleSelection('#check-' + 3)"></i>
+            <i class='fa fa-lg fa-star-o' id='star-3' onclick="toggleFavorite('#star-' + 3)"></i>
+            <span>
+              <div class='from'>Megatron</div>
+              (2)
+            </span>
+          </div>
+          <div class='subject'>Optimus wont let me play with the other robots</div>
+          <div class='right'>
+            Feb 28
+          </div>
+        </article>
+        <article class='email'>
+          <div class='left'>
+            <i class='fa fa-square-o' id='check-4' onclick="toggleSelection('#check-' + 4)"></i>
+            <i class='fa fa-lg fa-star' id='star-4' onclick="toggleFavorite('#star-' + 4)"></i>
+            <span>
+              <div class='from'>Big Fish</div>
+            </span>
+          </div>
+          <div class='subject'>I run the show</div>
+          <div class='right'>
+            Feb 15
+          </div>
+        </article>
+        <article class='email unread'>
+          <div class='left'>
+            <i class='fa fa-square-o' id='check-5' onclick="toggleSelection('#check-' + 5)"></i>
+            <i class='fa fa-lg fa-star-o' id='star-5' onclick="toggleFavorite('#star-' + 5)"></i>
+            <span>
+              <div class='from'>Little Fish</div>
+            </span>
+          </div>
+          <div class='subject'>Just keep swimming</div>
+          <div class='right'>
+            Feb 10
+          </div>
+        </article>
+        <article class='email unread'>
+          <div class='left'>
+            <i class='fa fa-square-o' id='check-6' onclick="toggleSelection('#check-' + 6)"></i>
+            <i class='fa fa-lg fa-star' id='star-6' onclick="toggleFavorite('#star-' + 6)"></i>
+            <span>
+              <div class='from'>Red Fish</div>
+            </span>
+          </div>
+          <div class='subject'>Blue fish bit me first!!!</div>
+          <div class='right'>
+            Jan 15
+          </div>
+        </article>
+        <article class='email unread'>
+          <div class='left'>
+            <i class='fa fa-square-o' id='check-7' onclick="toggleSelection('#check-' + 7)"></i>
+            <i class='fa fa-lg fa-star' id='star-7' onclick="toggleFavorite('#star-' + 7)"></i>
+            <span>
+              <div class='from'>Blue Fish</div>
+              (2)
+            </span>
+          </div>
+          <div class='subject'>Red fish bit me</div>
+          <div class='right'>
+            Jan 1
+          </div>
+        </article>
+        <article class='email unread'>
+          <div class='left'>
+            <i class='fa fa-square-o' id='check-8' onclick="toggleSelection('#check-' + 8)"></i>
+            <i class='fa fa-lg fa-star-o' id='star-8' onclick="toggleFavorite('#star-' + 8)"></i>
+            <span>
+              <div class='from'>Jay Cutler</div>
+              (6)
+            </span>
+          </div>
+          <div class='subject'>I'm sad, wanna come for a swim?</div>
+          <div class='right'>
+            12/21/14
+          </div>
+        </article>
+      </main>
+    </section>
+    <div class='footer'>
+      <div class='left'>
+        <strong>10% full</strong>
+        <div class='usage bottom'>Using 10GB of your 100GB</div>
+      </div>
+      <div class='middle'>
+        <div class='top'>
+          <span>&copy;2015 Zach Bright</span>
+          <span>-</span>
+          <span>
+            <a href='#'>Terms of Service</a>
+          </span>
+          <span>-</span>
+          <span>
+            <a href='#'>Privacy Policy</a>
+          </span>
+          <span>-</span>
+          <span>
+            <a href='#'>Program Policies</a>
+          </span>
+        </div>
+        <div class='bottom'>
+          Powered by LevelUp
+        </div>
+      </div>
+      <div class='right'>
+        <div class='top'>
+          <span>Last account activity: 1 hour ago</span>
+        </div>
+        <div class='bottom'>
+          <span>
+            <a href='#'>Details</a>
+          </span>
+        </div>
+      </div>
+    </div>
   </body>
+  <script src='pmail.js'></script>
 </html>
-<script>
-  $('.top-dropdown').click(function() {
-        return $(this).siblings('.dropdown-panel').toggle();
-      });
-</script>

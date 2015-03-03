@@ -1,0 +1,25 @@
+.footer {
+  margin-left: $sidebar-width + 10;
+  min-height: 250px;
+  padding-top: 60px;
+  padding-right: 20px;
+  display: flex;
+  font-size: 12px;
+
+  a {
+    text-decoration: underline;
+  }
+
+  .middle {
+    flex: 1;
+    text-align: center;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .bottom {
+    margin-top: 5px;
+  }
+}

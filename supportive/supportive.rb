@@ -23,7 +23,7 @@ class BlagPost
   end
 
   def to_s
-    [ category_list, byline, abstract, commenters ].join("\n")
+    [category_list, byline, abstract, commenters].join("\n")
   end
 
   private
@@ -45,69 +45,39 @@ class BlagPost
   end
 
   def byline
-    if author.nil?
-      ""
-      author."By #{author.name}, at #{author.url}"
+    author.try { |a| "By #{a.name}, at #{a.url}" } || ''
   end
 
   def category_list
-    return "" if categories.empty?
-
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
+    categories.try { |cat| 'Category'.pluralize(cat.length) + ": " +
+      cat.to_sentence.humanize } || ''
   end
 
   def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    string.titleize
   end
 
   def commenters
-    return '' unless comments_allowed?
-    return '' unless comments.length > 0
-
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
+    if comments_allowed? && comments.present?
+      "You will be the #{comments.length.ordinalize} commenter"
+    else
+      return ''
     end
-    "You will be the #{comments.length}#{ordinal} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date > 3.years.ago
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body.truncate(200)
-    end
+    body.truncate(200)
   end
-
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
+                    "comments"      => [[], [], []], # because comments are meaningless, get it?
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.

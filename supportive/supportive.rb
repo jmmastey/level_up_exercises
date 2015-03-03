@@ -1,6 +1,7 @@
 # In case you missed them, here are the extensions: http://guides.rubyonrails.org/active_support_core_extensions.html
 
 require 'active_support/all'
+require 'faker'
 
 class BlagPost
   attr_accessor :author, :comments, :categories, :body, :publish_date
@@ -14,21 +15,11 @@ class BlagPost
       hash
     end
 
-    if args[:author] != '' && args[:author_url] != ''
-      @author = Author.new(args[:author], args[:author_url])
-    end
-
-    if args[:categories]
-      @categories = args[:categories].reject do |category|
-        DISALLOWED_CATEGORIES.include? category
-      end
-    else
-      @categories = []
-    end
-
-    @comments = args[:comments] || []
-    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
-    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
+    create_author(args[:author], args[:author_url])
+    assign_categories(args[:categories])
+    @comments = Array.wrap(args[:comments])
+    @body = args[:body].squish
+    @publish_date = args[:publish_date].to_date || Date.today
   end
 
   def to_s
@@ -37,12 +28,26 @@ class BlagPost
 
   private
 
+  def create_author(name, url)
+    if name.present? && url.present?
+      @author = Author.new(name, url)
+    end
+  end
+
+  def assign_categories(categories)
+    if categories
+      @categories = categories.reject do |category|
+        DISALLOWED_CATEGORIES.include? category
+      end
+    else
+      @categories = []
+    end
+  end
+
   def byline
     if author.nil?
       ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+      author."By #{author.name}, at #{author.url}"
   end
 
   def category_list
@@ -93,7 +98,7 @@ class BlagPost
     if body.length < 200
       body
     else
-      body[0..200] + "..."
+      body.truncate(200)
     end
   end
 

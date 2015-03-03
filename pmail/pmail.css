@@ -15,15 +15,10 @@ a {
     color: red; }
 
 .options-bar {
-  z-index: 9999;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
   min-width: 800px;
-  background-color: white;
   border-bottom: 1px solid whitesmoke;
   height: 40px;
-  vertical-align: middle; }
+  font-size: 14px; }
 
 .options-links li {
   display: inline-block;
@@ -31,16 +26,18 @@ a {
   padding-left: 35px; }
 
 .dropdown-menu li {
-  font-size: 14px;
   display: block;
-  padding: 10px; }
+  padding: 10px;
+  white-space: nowrap;
+  font-size: 14px; }
   .dropdown-menu li:hover {
     background-color: whitesmoke; }
 
 .mail-dropdown {
   width: 137px;
   color: #DA4B39;
-  margin-top: 12px; }
+  margin-top: 9px;
+  font-size: 18px; }
   .mail-dropdown button {
     background-color: white; }
 
@@ -49,8 +46,7 @@ a {
   min-height: 26px;
   background-color: whitesmoke;
   border: 1px solid darkgrey;
-  border-radius: 4px;
-  font-size: 14px; }
+  border-radius: 4px; }
 
 .nav-bar {
   display: flex;
@@ -101,7 +97,8 @@ a {
   border: 1px solid #5B5A5C;
   position: absolute;
   background-color: white;
-  margin-top: 10px; }
+  margin-top: 10px;
+  z-index: 999; }
   .dropdown-panel.apps {
     width: 270px;
     left: -135px; }
@@ -119,6 +116,12 @@ a {
   .dropdown-panel .account-info {
     line-height: 25px;
     padding: 15px 50px 20px 15px; }
+    .dropdown-panel .account-info .email {
+      color: darkgrey; }
+    .dropdown-panel .account-info a {
+      color: #4485F5; }
+      .dropdown-panel .account-info a:hover {
+        text-decoration: underline; }
 
 .app-menu a {
   display: inline-block;

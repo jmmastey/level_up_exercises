@@ -3,9 +3,9 @@
   width: 100%;
   min-height: 350px;
   padding-right: 20px;
+  min-width: $content-width;
 
   .email {
-    min-width: 500px;
     font-weight: 800;
     border-bottom: 1px solid lightgrey;
     padding: 8px 10px;

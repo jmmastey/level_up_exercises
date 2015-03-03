@@ -1,6 +1,7 @@
 # In case you missed them, here are the extensions: http://guides.rubyonrails.org/active_support_core_extensions.html
 
 require 'active_support/all'
+require 'faker'
 
 class BlagPost
   attr_accessor :author, :comments, :categories, :body, :publish_date
@@ -14,95 +15,69 @@ class BlagPost
       hash
     end
 
-    if args[:author] != '' && args[:author_url] != ''
-      @author = Author.new(args[:author], args[:author_url])
-    end
+    create_author(args[:author], args[:author_url])
+    assign_categories(args[:categories])
+    @comments = Array.wrap(args[:comments])
+    @body = args[:body].squish
+    @publish_date = args[:publish_date].to_date || Date.today
+  end
 
-    if args[:categories]
-      @categories = args[:categories].reject do |category|
+  def to_s
+    [category_list, byline, abstract, commenters].join("\n")
+  end
+
+  private
+
+  def create_author(name, url)
+    if name.present? && url.present?
+      @author = Author.new(name, url)
+    end
+  end
+
+  def assign_categories(categories)
+    if categories
+      @categories = categories.reject do |category|
         DISALLOWED_CATEGORIES.include? category
       end
     else
       @categories = []
     end
-
-    @comments = args[:comments] || []
-    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
-    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
   end
-
-  def to_s
-    [ category_list, byline, abstract, commenters ].join("\n")
-  end
-
-  private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    author.try { |a| "By #{a.name}, at #{a.url}" } || ''
   end
 
   def category_list
-    return "" if categories.empty?
-
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
+    categories.try { |cat| 'Category'.pluralize(cat.length) + ": " +
+      cat.to_sentence.humanize } || ''
   end
 
   def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    string.titleize
   end
 
   def commenters
-    return '' unless comments_allowed?
-    return '' unless comments.length > 0
-
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
+    if comments_allowed? && comments.present?
+      "You will be the #{comments.length.ordinalize} commenter"
+    else
+      return ''
     end
-    "You will be the #{comments.length}#{ordinal} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date > 3.years.ago
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    body.truncate(200)
   end
-
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
+                    "comments"      => [[], [], []], # because comments are meaningless, get it?
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.

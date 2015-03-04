@@ -1,0 +1,61 @@
+passengers                    GET    /passengers
+                              POST   /passengers
+
+passenger                     GET    /passengers/:id
+                              PUT    /passengers/:id
+                              DELETE /passengers/:id
+
+flights                       GET    /flights
+                              POST   /flights
+
+flight                        GET    /flights/:id
+                              PUT    /flights/:id
+                              DELETE /flights/:id
+
+airplanes                     GET    /airplanes
+                              POST   /airplanes
+
+airplane                      GET    /airplanes/:id
+                              PUT    /airplanes/:id
+                              DELETE /airplanes/:id
+
+airports                      GET    /airports
+                              POST   /airports
+
+airport                       GET    /airports/:id
+                              PUT    /airports/:id
+                              DELETE /airports/:id
+
+passenger_itineraries         GET    /passengers/:id/itineraries
+                              POST   /passengers/:id/itineraries
+
+passenger_itinerary           GET    /passengers/:id/itineraries/:id
+                              PUT    /passengers/:id/itineraries/:id
+                              DELETE /passengers/:id/itineraries/:id
+
+flight_itineraries            GET    /flights/:id/itineraries
+                              POST   /flights/:id/itineraries
+
+flight_itinerary              GET    /flights/:id/itineraries/:id
+                              PUT    /flights/:id/itineraries/:id
+                              DELETE /flights/:id/itineraries/:id
+
+airplane_itineraries          GET    /airplanes/:id/itineraries
+                              POST   /airplanes/:id/itineraries
+
+airplane_itinerary            GET    /airplanes/:id/itineraries/:id
+                              PUT    /airplanes/:id/itineraries/:id
+                              DELETE /airplanes/:id/itineraries/:id
+
+flight_refuel                 GET    /refuel/flights/:id
+                              POST   /refuel/flights/:id
+                              PUT    /refuel/flights/:id
+                              DELETE /refuel/flights/:id
+
+airplane_refuel               GET    /refuel/airplanes/:id
+                              POST   /refuel/airplanes/:id
+                              PUT    /refuel/airplanes/:id
+                              DELETE /refuel/airplanes/:id
+
+flight_passengers             GET    /flights/:id/passengers
+flight_search                 GET    /flights/search

@@ -47,15 +47,15 @@ airplane_itinerary            GET    /airplanes/:id/itineraries/:id
                               PUT    /airplanes/:id/itineraries/:id
                               DELETE /airplanes/:id/itineraries/:id
 
-flight_refuel                 GET    /refuel/flights/:id
-                              POST   /refuel/flights/:id
-                              PUT    /refuel/flights/:id
-                              DELETE /refuel/flights/:id
+flight_refuel                 GET    /flights/refuel/:id
+                              POST   /flights/refuel/:id
+                              PUT    /flights/refuel/:id
+                              DELETE /flights/refuel/:id
 
-airplane_refuel               GET    /refuel/airplanes/:id
-                              POST   /refuel/airplanes/:id
-                              PUT    /refuel/airplanes/:id
-                              DELETE /refuel/airplanes/:id
+airplane_refuel               GET    /airplanes/refuel/:id
+                              POST   /airplanes/refuel/:id
+                              PUT    /airplanes/refuel/:id
+                              DELETE /airplanes/refuel/:id
 
 flight_passengers             GET    /flights/:id/passengers
 flight_search                 GET    /flights/search

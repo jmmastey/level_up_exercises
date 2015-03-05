@@ -1,0 +1,15 @@
+@import 'variables';
+@import 'base';
+@import 'options_bar';
+@import 'nav';
+@import 'sidebar';
+@import 'threads';
+@import 'footer';
+
+.hidden {
+  display: none;
+}
+
+.main {
+  display: flex;
+}

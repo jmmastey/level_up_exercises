@@ -1,0 +1,43 @@
+%section
+  .options-bar
+    .options-links
+      %ul
+        %li.mail-dropdown
+          %button.top-dropdown
+            Mail
+            %i.fa.fa-caret-down
+          .dropdown-panel.hidden
+            %ul.dropdown-menu
+              %li
+                %a.active{ href: '#' } Mail
+              %li
+                %a{ href: '#' } Contacts
+              %li
+                %a{ href: '#' } Tasks
+        %li
+          %button.top-dropdown.options-bar-dropdown{ title: 'Select'}
+            %i.fa.fa-square-o
+            %i.fa.fa-caret-down
+          .dropdown-panel.hidden
+            %ul.dropdown-menu
+              %li
+                %a.active{ href: "#" } All
+              %li
+                %a{ href: "#" } Read
+              %li
+                %a{ href: "#" } Unread
+              %li
+                %a{ href: "#" } Starred
+              %li
+                %a{ href: "#" } Unstarred
+        %li
+          %button.options-bar-dropdown{ title: "Refresh" }
+            %i.fa.fa-refresh
+        %li
+          %button.options-bar-dropdown.top-dropdown
+            More
+            %i.fa.fa-caret-down
+          .dropdown-panel.hidden
+            %ul.dropdown-menu
+              %li
+                %a{ href: "#" } Mark All as Read

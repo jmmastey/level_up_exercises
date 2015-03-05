@@ -1,0 +1,250 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+ul {
+  list-style-type: none; }
+
+a {
+  color: #000;
+  text-decoration: none; }
+  a.active {
+    font-weight: 500;
+    color: #DA4B39; }
+
+.options-bar {
+  min-width: 800px;
+  border-bottom: 1px solid whitesmoke;
+  height: 40px;
+  font-size: 14px; }
+
+.options-links li {
+  display: inline-block;
+  position: relative;
+  padding-left: 35px; }
+
+.dropdown-menu li {
+  display: block;
+  padding: 10px;
+  white-space: nowrap;
+  font-size: 14px; }
+  .dropdown-menu li:hover {
+    background-color: whitesmoke; }
+
+.mail-dropdown {
+  width: 137px;
+  color: #DA4B39;
+  margin-top: 9px;
+  font-size: 18px; }
+  .mail-dropdown button {
+    background-color: #FFF; }
+
+.options-bar-dropdown {
+  min-width: 50px;
+  min-height: 26px;
+  background-color: whitesmoke;
+  border: 1px solid darkgrey;
+  border-radius: 4px; }
+
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  min-width: 800px;
+  background-color: whitesmoke;
+  height: 60px;
+  font-size: 14px; }
+
+.brand-logo {
+  margin: 0 0 0 30px;
+  width: 150px; }
+
+.search {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1; }
+  .search .search-box {
+    max-width: 590px;
+    flex: 1;
+    height: 30px;
+    margin-top: 15px;
+    margin-left: 30px;
+    border: 1px solid lightgrey;
+    text-indent: 5px; }
+    .search .search-box:focus {
+      border: 1px solid #4485F5; }
+  .search .search-btn {
+    max-height: 32px;
+    margin-top: 15px;
+    min-width: 50px;
+    color: #FFF;
+    background-color: #4485F5;
+    border-radius: 0 3px 3px 0; }
+
+.header-links {
+  padding: 0 16px; }
+  .header-links > ul {
+    padding: 16px 0; }
+  .header-links li {
+    display: inline-block;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 8px;
+    position: relative; }
+
+.dropdown-panel {
+  border: 1px solid #5B5A5C;
+  position: absolute;
+  background-color: #FFF;
+  margin-top: 10px;
+  z-index: 999; }
+  .dropdown-panel.apps {
+    width: 270px;
+    left: -135px; }
+  .dropdown-panel.account {
+    right: 0; }
+  .dropdown-panel .account-options {
+    background-color: whitesmoke;
+    height: 20px;
+    text-align: center;
+    padding: 10px; }
+    .dropdown-panel .account-options button {
+      border: 1px solid lightgrey;
+      background: transparent;
+      padding: 3px 6px; }
+  .dropdown-panel .account-info {
+    line-height: 25px;
+    padding: 15px 50px 20px 15px; }
+    .dropdown-panel .account-info .email {
+      color: darkgrey; }
+    .dropdown-panel .account-info a {
+      color: #4485F5; }
+      .dropdown-panel .account-info a:hover {
+        text-decoration: underline; }
+
+.app-menu a {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px; }
+  .app-menu a:hover {
+    outline: thin solid #5B5A5C; }
+  .app-menu a .app-caption {
+    text-align: center; }
+  .app-menu a .app {
+    background: url(google_sprite.png) no-repeat;
+    background-size: 112px 2011px;
+    width: 64px;
+    height: 64px; }
+    .app-menu a .app.icon-calendar {
+      background-position: -35px -735px; }
+    .app-menu a .app.icon-docs {
+      background-position: 0 0; }
+    .app-menu a .app.icon-drive {
+      background-position: 0 -390px; }
+    .app-menu a .app.icon-mail {
+      background-position: -35px -942px; }
+    .app-menu a .app.icon-search {
+      background-position: 0 -459px; }
+    .app-menu a .app.icon-sheets {
+      background-position: 0 -1149px; }
+    .app-menu a .app.icon-slides {
+      background-position: 0 -1460px; }
+
+.sidebar {
+  display: block;
+  min-width: 175px;
+  width: 175px;
+  font-size: 14px; }
+  .sidebar .active {
+    border-left: 5px solid #DA4B39;
+    color: #DA4B39; }
+  .sidebar button {
+    border-radius: 2px;
+    margin-left: 35px;
+    text-transform: uppercase;
+    width: 70%;
+    height: 30px;
+    margin-top: 10px;
+    background-color: #DA4B39;
+    font-weight: 600;
+    color: #FFF;
+    font-size: 11px; }
+  .sidebar li {
+    padding: 5px 0px 5px 30px; }
+    .sidebar li:not(.active) {
+      border-left: 5px solid transparent; }
+    .sidebar li:hover {
+      background-color: whitesmoke; }
+
+.more-list {
+  border-top: 1px solid lightgrey; }
+
+.email-list {
+  margin-left: 35px;
+  width: 100%;
+  min-height: 350px;
+  padding-right: 20px;
+  min-width: 550px; }
+  .email-list .email {
+    font-weight: 800;
+    border-bottom: 1px solid lightgrey;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    display: flex; }
+    .email-list .email .left {
+      min-width: 250px; }
+      .email-list .email .left * {
+        padding-left: 10px; }
+      .email-list .email .left .fa-check-square {
+        padding-left: 9px; }
+    .email-list .email .right {
+      flex-grow: 1;
+      float: right;
+      white-space: nowrap;
+      text-align: right; }
+    .email-list .email .subject {
+      max-width: 750px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden; }
+    .email-list .email * {
+      display: inline-block; }
+    .email-list .email:hover {
+      border-left: 3px dotted lightgrey;
+      cursor: pointer; }
+    .email-list .email.unread {
+      background-color: whitesmoke;
+      font-weight: 100; }
+    .email-list .email.selected {
+      background-color: #FFFFCC; }
+    .email-list .email .fa-star {
+      color: gold; }
+    .email-list .email .fa-star-o {
+      color: lightgrey; }
+
+.footer {
+  margin-left: 210px;
+  padding-right: 20px;
+  display: flex;
+  font-size: 12px;
+  min-width: 550px; }
+  .footer a {
+    text-decoration: underline; }
+  .footer .middle {
+    flex: 1;
+    text-align: center;
+    padding: 0 10px; }
+  .footer .right {
+    text-align: right; }
+  .footer .bottom {
+    margin-top: 5px; }
+
+.hidden {
+  display: none; }
+
+.main {
+  display: flex; }
+
+/*# sourceMappingURL=pmail.css.map */

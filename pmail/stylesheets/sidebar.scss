@@ -1,0 +1,40 @@
+.sidebar {
+  display: block;
+  min-width: $sidebar-width;
+  width: $sidebar-width;
+  font-size: 14px;
+
+  .active {
+    border-left: 5px solid $gmail-red;
+    color: $gmail-red;
+  }
+
+  button {
+    border-radius: 2px;
+    margin-left: 35px;
+    text-transform: uppercase;
+    width: 70%;
+    height: 30px;
+    margin-top: 10px;
+    background-color: $gmail-red;
+    font-weight: 600;
+    color: #FFF;
+    font-size: 11px;
+  }
+
+  li {
+    padding: 5px 0px 5px 30px;
+
+    &:not(.active) {
+      border-left: 5px solid transparent;
+    }
+
+    &:hover {
+      background-color: whitesmoke;
+    }
+  }
+}
+
+.more-list {
+  border-top: 1px solid lightgrey;
+}

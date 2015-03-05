@@ -1,0 +1,20 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+
+  &.active {
+    font-weight: 500;
+    color: $gmail-red;
+  }
+}

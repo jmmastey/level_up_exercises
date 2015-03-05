@@ -1,0 +1,27 @@
+%nav.sidebar
+  %button Compose
+  %ul.sidebar-menu
+    %li.active
+      %a{ href: "#" } Inbox
+    %li
+      %a{ href: "#" } Starred
+    %li
+      %a{ href: "#" } Sent Mail
+    %li
+      %a{ href: "#" } Drafts
+    %li
+      %a{ href: "#" } Projects
+    %li
+      %a.top-dropdown{ href: "#" }
+        More
+        %i.fa.fa-caret-down
+  .more-list.hidden
+    %ul.sidebar-menu
+      %li
+        %a{ href: "#" } Important
+      %li
+        %a{ href: "#" } All Mail
+      %li
+        %a{ href: "#" } Spam
+      %li
+        %a{ href: "#" } Trash

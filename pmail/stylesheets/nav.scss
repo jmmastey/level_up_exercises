@@ -1,0 +1,136 @@
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  min-width: 800px;
+  background-color: whitesmoke;
+  height: 60px;
+  font-size: 14px;
+}
+
+.brand-logo {
+  margin: 0 0 0 30px;
+  width: 150px;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  .search-box {
+    max-width: 590px;
+    flex: 1;
+    height: 30px;
+    margin-top: 15px;
+    margin-left: 30px;
+    border: 1px solid lightgrey;
+    text-indent: 5px;
+
+    &:focus {
+      border: 1px solid $gmail-blue;
+    }
+  }
+
+  .search-btn {
+    max-height: 32px;
+    margin-top: 15px;
+    min-width: 50px;
+    color: #FFF;
+    background-color: $gmail-blue;
+    border-radius: 0 3px 3px 0;
+  }
+}
+
+.header-links {
+  padding: 0 16px;
+
+  > ul {
+      padding: 16px 0;
+  }
+
+  li {
+      display: inline-block;
+      margin-left: 16px;
+      margin-right: 16px;
+      margin-top: 8px;
+      position: relative;
+    }
+}
+
+.dropdown-panel {
+  border: 1px solid $gmail-grey;
+  position: absolute;
+  background-color: #FFF;
+  margin-top: 10px;
+  z-index: 999;
+
+  &.apps {
+    width: 270px;
+    left: -135px;
+  }
+
+  &.account {
+    right: 0;
+  }
+
+  .account-options {
+    background-color: whitesmoke;
+    height: 20px;
+    text-align: center;
+    padding: 10px;
+
+    button {
+      border: 1px solid lightgrey;
+      background: transparent;
+      padding: 3px 6px;
+    }
+  }
+
+  .account-info {
+    line-height: 25px;
+    padding: 15px 50px 20px 15px;
+
+    .email {
+      color: darkgrey;
+    }
+
+    a {
+      color: $gmail-blue;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.app-menu {
+  a {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+
+    &:hover {
+      outline: thin solid $gmail-grey;
+    }
+
+    .app-caption {
+      text-align: center;
+    }
+
+    .app {
+      background: url(google_sprite.png) no-repeat;
+      background-size: 112px 2011px;
+      width: 64px;
+      height: 64px;
+
+      &.icon-calendar { background-position: -35px -735px }
+      &.icon-docs { background-position: 0 0 }
+      &.icon-drive { background-position: 0 -390px }
+      &.icon-mail { background-position: -35px -942px }
+      &.icon-search { background-position: 0 -459px }
+      &.icon-sheets { background-position: 0 -1149px }
+      &.icon-slides { background-position: 0 -1460px }
+    }
+  }
+}

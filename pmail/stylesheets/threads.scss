@@ -1,0 +1,68 @@
+.email-list {
+  margin-left: 35px;
+  width: 100%;
+  min-height: 350px;
+  padding-right: 20px;
+  min-width: $content-width;
+
+  .email {
+    font-weight: 800;
+    border-bottom: 1px solid lightgrey;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    display: flex;
+
+    .left {
+      min-width: 250px;
+
+      * {
+        padding-left: 10px;
+      }
+
+      .fa-check-square {
+        padding-left: 9px; //1px larger than the square without a check
+      }
+    }
+
+    .right {
+      flex-grow: 1;
+      float: right;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .subject {
+      max-width: 750px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    * {
+      display: inline-block;
+    }
+
+    &:hover {
+      border-left: 3px dotted lightgrey;
+      cursor: pointer;
+    }
+
+    &.unread {
+      background-color: whitesmoke;
+      font-weight: 100;
+    }
+
+    &.selected {
+      background-color: #FFFFCC;
+    }
+
+    .fa-star {
+      color: gold;
+    }
+
+    .fa-star-o {
+      color: lightgrey;
+    }
+  }
+}

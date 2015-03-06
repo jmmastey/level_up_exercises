@@ -1,7 +1,12 @@
 require 'CSV'
 
-@default_dinos = CSV.read("dinodex.csv", headers: true, header_converters: :symbol)
-@african_dinos = CSV.read("african_dinosaur_export.csv", headers: true, header_converters: :symbol)
+@default_dinos = CSV.read('dinodex.csv',
+                          headers: true,
+                          header_converters: :symbol)
+
+@african_dinos = CSV.read('african_dinosaur_export.csv',
+                          headers: true,
+                          header_converters: :symbol)
 @last_result = []
 @chain = []
 
@@ -63,13 +68,15 @@ def main
 end
 
 def get_dino_by_name(name)
-  @last_result = get_default_dino_by_name(name).concat(get_african_dino_by_name(name)) & @chain
+  @last_result = get_default_dino_by_name(name)
+    .concat(get_african_dino_by_name(name)) & @chain
 end
 
 def get_dinos_by_names(names)
   results = []
   names.each do |name|
-    results << get_default_dino_by_name(name).concat(get_african_dino_by_name(name))
+    results << get_default_dino_by_name(name)
+      .concat(get_african_dino_by_name(name))
   end
   @last_result = results.flatten! & @chain
 end
@@ -93,7 +100,8 @@ def setup_chain
 end
 
 def get_dinos_by_size(size)
-  @last_result = get_default_dinos_by_size(size).concat(get_african_dinos_by_size(size)) & @chain
+  @last_result = get_default_dinos_by_size(size)
+    .concat(get_african_dinos_by_size(size)) & @chain
 end
 
 def get_default_dinos_by_size(size)
@@ -105,7 +113,8 @@ def get_african_dinos_by_size(size)
 end
 
 def get_bipeds
-  @last_result = get_default_dinos_bipeds.concat(get_african_dinos_bipeds) & @chain
+  @last_result = get_default_dinos_bipeds
+    .concat(get_african_dinos_bipeds) & @chain
 end
 
 def get_default_dinos_bipeds
@@ -117,13 +126,23 @@ def get_african_dinos_bipeds
 end
 
 def get_carnivores
-  @last_result = get_default_dinos_carnivores.concat(get_african_dinos_carnivores) & @chain
+  @last_result = get_default_dinos_carnivores
+    .concat(get_african_dinos_carnivores) & @chain
 end
 
 def get_default_dinos_carnivores
-  filter_dinos_by_and_return_by(@default_dinos, :diet, 'carnivore', :name)
-    .concat(filter_dinos_by_and_return_by(@default_dinos, :diet, 'insectivore', :name))
-    .concat(filter_dinos_by_and_return_by(@default_dinos, :diet, 'piscivore', :name))
+  filter_dinos_by_and_return_by(@default_dinos,
+                                :diet,
+                                'carnivore',
+                                :name)
+    .concat(filter_dinos_by_and_return_by(@default_dinos,
+                                          :diet,
+                                          'insectivore',
+                                          :name))
+    .concat(filter_dinos_by_and_return_by(@default_dinos,
+                                          :diet,
+                                          'piscivore',
+                                          :name))
 end
 
 def get_african_dinos_carnivores
@@ -131,7 +150,8 @@ def get_african_dinos_carnivores
 end
 
 def get_dinos_by_period(period)
-  @last_result = get_default_dinos_by_period(period).concat(get_african_dinos_by_period period) & @chain
+  @last_result = get_default_dinos_by_period(period)
+    .concat(get_african_dinos_by_period period) & @chain
 end
 
 def get_default_dinos_by_period(period)

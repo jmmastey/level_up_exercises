@@ -8,7 +8,7 @@ require 'CSV'
                           headers: true,
                           header_converters: :symbol)
 @last_result = []
-@chain = []
+@chained_result = []
 
 def main
   setup_chain
@@ -93,7 +93,7 @@ def handle_name_option
 end
 
 def handle_chain_option
-  @chain &= @last_result unless @last_result.empty?
+  @chained_result &= @last_result unless @last_result.empty?
   puts 'chain updated'
 end
 
@@ -108,7 +108,7 @@ end
 
 def get_dino_by_name(name)
   @last_result = get_default_dino_by_name(name)
-    .concat(get_african_dino_by_name(name)) & @chain
+    .concat(get_african_dino_by_name(name)) & @chained_result
 end
 
 def get_dinos_by_names(names)
@@ -117,7 +117,7 @@ def get_dinos_by_names(names)
     results << get_default_dino_by_name(name)
       .concat(get_african_dino_by_name(name))
   end
-  @last_result = results.flatten! & @chain
+  @last_result = results.flatten! & @chained_result
 end
 
 def get_default_dino_by_name(name)
@@ -130,17 +130,17 @@ end
 
 def setup_chain
   @default_dinos.each do |dino|
-    @chain << dino[:name]
+    @chained_result << dino[:name]
   end
 
   @african_dinos.each do |dino|
-    @chain << dino[:genus]
+    @chained_result << dino[:genus]
   end
 end
 
 def get_dinos_by_size(size)
   @last_result = get_default_dinos_by_size(size)
-    .concat(get_african_dinos_by_size(size)) & @chain
+    .concat(get_african_dinos_by_size(size)) & @chained_result
 end
 
 def get_default_dinos_by_size(size)
@@ -153,7 +153,7 @@ end
 
 def get_bipeds
   @last_result = get_default_dinos_bipeds
-    .concat(get_african_dinos_bipeds) & @chain
+    .concat(get_african_dinos_bipeds) & @chained_result
 end
 
 def get_default_dinos_bipeds
@@ -166,7 +166,7 @@ end
 
 def get_carnivores
   @last_result = get_default_dinos_carnivores
-    .concat(get_african_dinos_carnivores) & @chain
+    .concat(get_african_dinos_carnivores) & @chained_result
 end
 
 def get_default_dinos_carnivores
@@ -190,7 +190,7 @@ end
 
 def get_dinos_by_period(period)
   @last_result = get_default_dinos_by_period(period)
-    .concat(get_african_dinos_by_period period) & @chain
+    .concat(get_african_dinos_by_period period) & @chained_result
 end
 
 def get_default_dinos_by_period(period)
@@ -201,37 +201,37 @@ def get_african_dinos_by_period(period)
   filter_dinos_by_and_return_by(@african_dinos, :period, period, :genus)
 end
 
-def filter_dinos_by_and_return_by(dinos, filter_by, filter_value, key)
+def filter_dinos_by_and_return_by(dinos, filter_by, filter_value, header_to_return)
   results = []
   dinos.each do |dino|
     case filter_by
     when :period
-      filter_by_period(dino, filter_by, filter_value, results, key)
+      filter_by_period(dino, filter_by, filter_value, results, header_to_return)
     when :name, :genus
-      filter_by_name(dino, filter_by, filter_value, results, key)
+      filter_by_name(dino, filter_by, filter_value, results, header_to_return)
     when :weight_in_lbs, :weight
-      filter_by_weight(dino, filter_by, filter_value, results, key)
+      filter_by_weight(dino, filter_by, filter_value, results, header_to_return)
     else
-      filter_by_other(dino, filter_by, filter_value, results, key)
+      filter_by_other(dino, filter_by, filter_value, results, header_to_return)
     end
   end
 
   results
 end
 
-def filter_by_period(dino, filter_by, filter_value, results, key)
+def filter_by_period(dino, filter_by, filter_value, results, header_to_return)
   return if dino[filter_by].nil?
 
   period = dino[filter_by].downcase
-  results << dino[key] if period.include? filter_value.downcase
+  results << dino[header_to_return] if period.include? filter_value.downcase
 end
 
-def filter_by_name(dino, filter_by, filter_value, results, key)
+def filter_by_name(dino, filter_by, filter_value, results, header_to_return)
   return if dino[filter_by].nil?
 
   name = dino[filter_by].downcase
   if name == filter_value.downcase
-    results << dino[key]
+    results << dino[header_to_return]
     print_dino_details dino
   end
 
@@ -246,23 +246,23 @@ def print_dino_details dino
   puts ''
 end
 
-def filter_by_weight(dino, filter_by, filter_value, results, key)
+def filter_by_weight(dino, filter_by, filter_value, results, header_to_return)
   return if dino[filter_by].nil?
 
   weight = dino[filter_by].downcase.to_i
   case filter_value
   when 'b'
-    results << dino[key] if weight > 4000
+    results << dino[header_to_return] if weight > 4000
   when 's'
-    results << dino[key] if weight < 4001
+    results << dino[header_to_return] if weight < 4001
   end
 end
 
-def filter_by_other(dino, filter_by, filter_value, results, key)
+def filter_by_other(dino, filter_by, filter_value, results, header_to_return)
   return if dino[filter_by].nil?
 
   other = dino[filter_by].downcase
-  results << dino[key] if other == filter_value.downcase
+  results << dino[header_to_return] if other == filter_value.downcase
 end
 
 main

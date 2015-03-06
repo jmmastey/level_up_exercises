@@ -1,7 +1,7 @@
 require 'CSV'
 
-@default_dinos = CSV.read("dinodex.csv", :headers => true, :header_converters => :symbol)
-@african_dinos = CSV.read("african_dinosaur_export.csv", :headers => true, :header_converters => :symbol)
+@default_dinos = CSV.read("dinodex.csv", headers: true, header_converters: :symbol)
+@african_dinos = CSV.read("african_dinosaur_export.csv", headers: true, header_converters: :symbol)
 @last_result = []
 @chain = []
 

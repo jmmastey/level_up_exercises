@@ -14,57 +14,96 @@ def main
   setup_chain
 
   loop do
-    puts '1. bipeds'
-    puts '2. carnivores'
-    puts '3. period'
-    puts '4. size'
-    puts '5. name'
-    puts 'c. chain'
-    puts 'r. reset chain'
-    puts 'p. print last result'
-    puts 'q. quit'
-    print 'select: '
+    print_prompt
 
-    user_selection = gets.chomp
+    user_input = gets.chomp
     puts ''
 
-    case user_selection
-    when '1'
-      puts get_bipeds.join(', ')
-    when '2'
-      puts get_carnivores.join(', ')
-    when '3'
-      print 'period: '
-      period = gets.chomp
-      puts ''
-
-      puts get_dinos_by_period(period).join(', ')
-    when '4'
-      print '(b)ig or (s)mall: '
-      size = gets.chomp
-      puts ''
-
-      puts get_dinos_by_size(size).join(', ')
-    when '5'
-      print 'enter: '
-      name = gets.chomp
-      puts ''
-
-      get_dino_by_name(name)
-    when 'c'
-      @chain &= @last_result unless @last_result.empty?
-      puts 'chain updated'
-    when 'r'
-      setup_chain
-      puts 'chain reset'
-    when 'p'
-      get_dinos_by_names(@last_result)
-    when 'q'
-      exit
-    end
-
+    handle_user_input(user_input)
     puts ''
   end
+end
+
+def print_prompt
+  puts '1. bipeds'
+  puts '2. carnivores'
+  puts '3. period'
+  puts '4. size'
+  puts '5. name'
+  puts 'c. chain'
+  puts 'r. reset chain'
+  puts 'p. print last result'
+  puts 'q. quit'
+  print 'select: '
+end
+
+def handle_user_input(user_input)
+  case user_input
+  when '1'
+    handle_bipeds_option
+  when '2'
+    handle_carnivores_option
+  when '3'
+    handle_period_option
+  when '4'
+    handle_size_option
+  when '5'
+    handle_name_option
+  when 'c'
+    handle_chain_option
+  when 'r'
+    handle_reset_option
+  when 'p'
+    handle_print_option
+  when 'q'
+    exit
+  end
+end
+
+def handle_bipeds_option
+  puts get_bipeds.join(', ')
+end
+
+def handle_carnivores_option
+  puts get_carnivores.join(', ')
+end
+
+def handle_period_option
+  print 'period: '
+  period = gets.chomp
+  puts ''
+
+  puts get_dinos_by_period(period).join(', ')
+end
+
+def handle_size_option
+  print '(b)ig or (s)mall: '
+  size = gets.chomp
+  puts ''
+
+  puts get_dinos_by_size(size).join(', ')
+end
+
+def handle_name_option
+  print 'enter: '
+  name = gets.chomp
+  puts ''
+
+  get_dino_by_name(name)
+end
+
+def handle_chain_option
+  @chain &= @last_result unless @last_result.empty?
+  puts 'chain updated'
+end
+
+def handle_reset_option
+  setup_chain
+  puts 'chain reset'
+end
+
+def handle_print_option
+  get_dinos_by_names(@last_result)
 end
 
 def get_dino_by_name(name)
@@ -173,7 +212,7 @@ def filter_dinos_by_and_return_by(dinos, filter_by, filter_value, key)
     when :weight_in_lbs, :weight
       filter_by_weight(dino, filter_by, filter_value, results, key)
     else
-      filter_by_walk_type(dino, filter_by, filter_value, results, key)
+      filter_by_other(dino, filter_by, filter_value, results, key)
     end
   end
 
@@ -184,9 +223,7 @@ def filter_by_period(dino, filter_by, filter_value, results, key)
   return if dino[filter_by].nil?
 
   period = dino[filter_by].downcase
-  if period.include? filter_value.downcase
-    results << dino[key]
-  end
+  results << dino[key] if period.include? filter_value.downcase
 end
 
 def filter_by_name(dino, filter_by, filter_value, results, key)
@@ -195,15 +232,18 @@ def filter_by_name(dino, filter_by, filter_value, results, key)
   name = dino[filter_by].downcase
   if name == filter_value.downcase
     results << dino[key]
-    puts ''
-    dino.each do |dino_key, value|
-      unless value.nil?
-        puts "#{dino_key.capitalize}: \t#{value}"
-      end
-    end
+    print_dino_details dino
   end
 
   results
+end
+
+def print_dino_details dino
+  dino.each do |dino_key, value|
+    puts "#{dino_key.capitalize}: \t#{value}" unless value.nil?
+  end
+
+  puts ''
 end
 
 def filter_by_weight(dino, filter_by, filter_value, results, key)
@@ -218,13 +258,11 @@ def filter_by_weight(dino, filter_by, filter_value, results, key)
   end
 end
 
-def filter_by_walk_type(dino, filter_by, filter_value, results, key)
+def filter_by_other(dino, filter_by, filter_value, results, key)
   return if dino[filter_by].nil?
 
-  walk_type = dino[filter_by].downcase
-  if walk_type == filter_value.downcase
-    results << dino[key]
-  end
+  other = dino[filter_by].downcase
+  results << dino[key] if other == filter_value.downcase
 end
 
 main

@@ -1,0 +1,23 @@
+<% provide(:title, 'All good deeds') %>
+<h1>Latest good deeds</h1>
+
+<p id="party_filters">Filter by party</p>
+<p>
+	<%= link_to "Democrats", good_deeds_by_party_path(party: "D") %>
+	<%= link_to "Republicans", good_deeds_by_party_path(party: "R") %>
+	<%= link_to "Independents", good_deeds_by_party_path(party: "I") %>
+</p>
+
+<p>
+	<%= link_to "Good Deeds JSON feed", good_deeds_json_feed_path %>
+</p>
+
+<%= will_paginate %>
+
+<ul class="good_deeds_index">
+	<%= render @good_deeds %>
+</ul>
+
+<%= will_paginate %>
+
+<%= link_to "Good Deeds JSON feed", good_deeds_json_feed_path, id: "deeds_json" %>

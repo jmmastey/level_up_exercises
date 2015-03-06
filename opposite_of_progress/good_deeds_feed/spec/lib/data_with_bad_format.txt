@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Server: nginx/1.1.19
+Date: Fri, 27 Feb 2015 03:35:08 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 83929
+Connection: keep-alive
+Vary: Accept-Encoding
+Status: 200 OK
+
+{"results":[{"congress_no”:114,"cosponsors_count":39,"enacted_as":{"congress":114,"law_type":"public","number":2},"introduced_on":"2015-01-07","urls":{"html":"http://www.gpo.gov/fdsys/pkg/BILLS-114hr203enr/html/BILLS-114hr203enr.htm","pdf":"http://www.gpo.gov/fdsys/pkg/BILLS-114hr203enr/pdf/BILLS-114hr203enr.pdf","xml":"http://www.gpo.gov/fdsys/pkg/BILLS-114hr203enr/xml/BILLS-114hr203enr.xml"},"pages":8},"last_version_on":"2015-02-10","last_vote_at":"2015-02-03","number":203,"officialtitle":"To direct the Secretary of Veterans Affairs to provide for the conduct of annual evaluations of mental health care and suicide prevention programs of the Department of Veterans Affairs, to require a pilot program on loan repayment for psychiatrists who agree to serve in the Veterans Health Administration of the Department of Veterans Affairs, and for other purposes.","popular_title":null,"related_bill_ids":["s167-114"],"short_title":"Clay Hunt SAV Act","sponsor":{"first_name":"Timothy","last_name":"Walz","middle_name":"James","name_suffix":null,"nickname":null,"title":"Rep"},"sponsor_id":"W000799","urls":{"congress":"http://beta.congress.gov/bill/114th/house-bill/203","govtrack":"https://www.govtrack.us/congress/bills/114/hr203","opencongress":"https://www.opencongress.org/bill/hr203-114"},"withdrawn_cosponsors_count”:0}],"count":967,"page":{"count":50,"per_page":50,"page":1}}

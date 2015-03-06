@@ -1,0 +1,23 @@
+<div class="row">
+  <aside class="col-md-6">
+    <section class="legislator_info">
+      <p><h3>Legislator info:</h3></p>
+      <p><%= @legislator.title %> <%= @legislator.firstname %> <%= @legislator.lastname %></p>
+      <p>Party: <%= @legislator.party %></p>
+      <p>State: <%= @legislator.state %></p>
+      <p>Birthdate: <%= @legislator.birthdate %></p>
+      <p>Twitter ID: <%= @legislator.twitter_id %></p>
+      <p><%= link_to "Website", @legislator.website %></p>
+
+      <%= render 'shared/favorite_legislator' %>
+    </section>
+  </aside>
+    <div class="col-md-6">
+      <h3>Good Deeds (<%= @legislator.good_deeds.count %>)</h3>
+      <ol class="legislators_good_deeds">
+        <% if @legislator.good_deeds.any? %>
+          <%= render @legislator.good_deeds %>
+        <% end %>
+      </ol>
+  </div>
+</div>

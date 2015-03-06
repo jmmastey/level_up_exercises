@@ -1,0 +1,16 @@
+<% provide(:title, 'All legislators') %>
+<h1>All legislators</h1>
+
+<p id="party_filters">Filter by party</p>
+<p>
+	<%= link_to "Democrats", legislators_by_party_path(party: "D") %>
+	<%= link_to "Republicans", legislators_by_party_path(party: "R") %>
+	<%= link_to "Independents", legislators_by_party_path(party: "I") %>
+</p>
+<%= will_paginate %>
+
+<ul class="legislators_index">
+	<%= render @legislators %>
+</ul>
+
+<%= will_paginate %>

@@ -1,0 +1,15 @@
+<% if logged_in? %>
+	<% if current_user.following_legislator?(Legislator.find(params[:id])) %>
+	<%= form_for(current_user.favorites.find_by(legislator_id: params[:id]),
+             html: { method: :delete }) do |f| %>
+  <%= f.submit "Remove from favorites", class: "btn" %>
+<% end %>
+	<% else %>
+		<p>
+		<%= form_for(current_user.favorites.build) do |f| %>
+		  <div><%= hidden_field_tag :id, params[:id] %></div>
+		  <%= f.submit "Add to favorites", class: "btn btn-primary" %>
+		<% end %>
+		</p>
+	<% end %>
+<% end %>

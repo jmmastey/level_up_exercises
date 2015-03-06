@@ -181,26 +181,24 @@ def filter_dinos_by_and_return_by(dinos, filter_by, filter_value, key)
 end
 
 def filter_by_period(dino, filter_by, filter_value, results, key)
-  unless dino[filter_by].nil?
-    period = dino[filter_by].downcase
+  return if dino[filter_by].nil?
 
-    if period.include? filter_value.downcase
-      results << dino[key]
-    end
+  period = dino[filter_by].downcase
+  if period.include? filter_value.downcase
+    results << dino[key]
   end
 end
 
 def filter_by_name(dino, filter_by, filter_value, results, key)
-  unless dino[filter_by].nil?
-    name = dino[filter_by].downcase
+  return if dino[filter_by].nil?
 
-    if name == filter_value.downcase
-      results << dino[key]
-      puts ''
-      dino.each do |key, value|
-        unless value.nil?
-          puts "#{key.capitalize}: \t#{value}"
-        end
+  name = dino[filter_by].downcase
+  if name == filter_value.downcase
+    results << dino[key]
+    puts ''
+    dino.each do |dino_key, value|
+      unless value.nil?
+        puts "#{dino_key.capitalize}: \t#{value}"
       end
     end
   end
@@ -209,25 +207,23 @@ def filter_by_name(dino, filter_by, filter_value, results, key)
 end
 
 def filter_by_weight(dino, filter_by, filter_value, results, key)
-  unless dino[filter_by].nil?
-    weight = dino[filter_by].downcase.to_i
+  return if dino[filter_by].nil?
 
-    case filter_value
-    when 'b'
-      results << dino[key] if weight > 4000
-    when 's'
-      results << dino[key] if weight < 4001
-    end
+  weight = dino[filter_by].downcase.to_i
+  case filter_value
+  when 'b'
+    results << dino[key] if weight > 4000
+  when 's'
+    results << dino[key] if weight < 4001
   end
 end
 
 def filter_by_walk_type(dino, filter_by, filter_value, results, key)
-  unless dino[filter_by].nil?
-    walk_type = dino[filter_by].downcase
+  return if dino[filter_by].nil?
 
-    if walk_type == filter_value.downcase
-      results << dino[key]
-    end
+  walk_type = dino[filter_by].downcase
+  if walk_type == filter_value.downcase
+    results << dino[key]
   end
 end
 

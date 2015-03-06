@@ -1,4 +1,3 @@
-require 'pry'
 class NameCollisionError < RuntimeError
   def to_s
     "There was a problem generating the robot name!"

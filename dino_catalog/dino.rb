@@ -22,4 +22,3 @@ class Dino
     puts ''
   end
 end
-

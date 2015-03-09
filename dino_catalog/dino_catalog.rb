@@ -21,7 +21,9 @@ class DinoCatalog
   end
 
   def add_default_csv
-    @dinos = CSV.read('dinodex.csv', headers: true, header_converters: :symbol)
+    @dinos = CSV.read('dinodex.csv',
+                      headers: true,
+                      header_converters: :symbol)
 
     @dinos.each do |dino|
       restructured_dino = {
@@ -39,7 +41,9 @@ class DinoCatalog
   end
 
   def add_african_csv
-    @dinos = CSV.read('african_dinosaur_export.csv', headers: true, header_converters: :symbol)
+    @dinos = CSV.read('african_dinosaur_export.csv',
+                      headers: true,
+                      header_converters: :symbol)
 
     @dinos.each do |dino|
       restructured_dino = {
@@ -57,9 +61,7 @@ class DinoCatalog
   end
 
   def self.print(dino_catalog)
-    dino_catalog.each do |dino|
-      dino.print
-    end
+    dino_catalog.each { |dino| dino.print }
   end
 
   def &(rvalue)
@@ -71,7 +73,7 @@ class DinoCatalog
   end
 
   def get_bipeds
-    @dino_catalog.select { |dino| dino.walking.downcase == 'biped'}
+    @dino_catalog.select { |dino| dino.walking.downcase == 'biped' }
   end
 
   def get_carnivores
@@ -80,7 +82,7 @@ class DinoCatalog
   end
 
   def get_by_period(period)
-    @dino_catalog.select { |dino| dino.period.downcase.include? period}
+    @dino_catalog.select { |dino| dino.period.downcase.include? period }
   end
 
   def get_small

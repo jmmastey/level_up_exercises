@@ -3,34 +3,27 @@ class Triangle
   attr_accessor :side1, :side2, :side3
 
   def initialize(side1, side2, side3)
-    @side1, @side2, @side3 = side1, side2, side3
+    @side1 = side1
+    @side2 = side2
+    @side3 = side3
   end
 
-  def equilateral
+  def equilateral?
     side1 == side2 && side2 == side3
   end
 
-  def isosceles
+  def isosceles?
     [side1, side2, side3].uniq.length == 2
   end
 
-  def scalene
-    if equilateral || isosceles
-      true
-    else
-      false
-    end
+  def scalene?
+    equilateral? || isosceles?
   end
 
   def recite_facts
-    case
-    when equilateral
-      puts 'This triangle is equilateral!'
-    when isosceles
-      puts 'This triangle is isosceles! Also, that word is hard to type.'
-    when scalene
-      puts 'This triangle is scalene and mathematically boring.'
-    end
+    puts 'This triangle is equilateral!' if equilateral?
+    puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles?
+    puts 'This triangle is scalene and mathematically boring.' if scalene?
 
     angles = calculate_angles(side1, side2, side3)
     puts 'The angles of this triangle are ' + angles.join(', ')

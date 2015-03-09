@@ -1,4 +1,5 @@
 require 'CSV'
+require './dino'
 
 class DinoCatalog
   include Enumerable

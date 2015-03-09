@@ -94,6 +94,6 @@ class DinoCatalog
   end
 
   def get_by_name(name)
-    @dino_catalog.select { |dino| dino.name.downcase.include? name}
+    @dino_catalog.select { |dino| dino.name.downcase.include? name }
   end
 end

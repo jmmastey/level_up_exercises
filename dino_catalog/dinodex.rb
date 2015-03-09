@@ -1,14 +1,9 @@
-require 'CSV'
+require './dino'
+require './dino_catalog'
 
-@default_dinos = CSV.read('dinodex.csv',
-                          headers: true,
-                          header_converters: :symbol)
-
-@african_dinos = CSV.read('african_dinosaur_export.csv',
-                          headers: true,
-                          header_converters: :symbol)
+@dino_catalog = DinoCatalog.new
+@result_chain ||= []
 @last_result = []
-@chained_result = []
 
 def main
   setup_chain
@@ -61,11 +56,17 @@ def handle_user_input(user_input)
 end
 
 def handle_bipeds_option
-  puts get_bipeds.join(', ')
+  bipeds = DinoCatalog.new(@dino_catalog.get_bipeds) & @result_chain
+  bipeds.each { |dino| puts dino.name }
+
+  @last_result = bipeds
 end
 
 def handle_carnivores_option
-  puts get_carnivores.join(', ')
+  carnivores = DinoCatalog.new(@dino_catalog.get_carnivores) & @result_chain
+  carnivores.each { |dino| puts dino.name }
+
+  @last_result = carnivores
 end
 
 def handle_period_option
@@ -73,7 +74,9 @@ def handle_period_option
   period = gets.chomp
   puts ''
 
-  puts get_dinos_by_period(period).join(', ')
+  period_dinos = DinoCatalog.new(@dino_catalog.get_by_period(period)) & @result_chain
+  period_dinos.each { |dino| puts dino.name }
+  @last_result = period_dinos
 end
 
 def handle_size_option
@@ -81,7 +84,11 @@ def handle_size_option
   size = gets.chomp
   puts ''
 
-  puts get_dinos_by_size(size).join(', ')
+  size_dinos = DinoCatalog.new(@dino_catalog.get_big) & @result_chain if size == 'b'
+  size_dinos = DinoCatalog.new(@dino_catalog.get_small) & @result_chain if size == 's'
+
+  size_dinos.each { |dino| puts dino.name }
+  @last_result = size_dinos
 end
 
 def handle_name_option
@@ -89,11 +96,13 @@ def handle_name_option
   name = gets.chomp
   puts ''
 
-  get_dino_by_name(name)
+  name_dinos = DinoCatalog.new(@dino_catalog.get_by_name(name)) & @result_chain
+  name_dinos.each { |dino| puts dino.name }
+  @last_result = name_dinos
 end
 
 def handle_chain_option
-  @chained_result &= @last_result unless @last_result.empty?
+  @result_chain &= @last_result unless @last_result.empty?
   puts 'chain updated'
 end
 
@@ -103,166 +112,11 @@ def handle_reset_option
 end
 
 def handle_print_option
-  get_dinos_by_names(@last_result)
-end
-
-def get_dino_by_name(name)
-  @last_result = get_default_dino_by_name(name)
-    .concat(get_african_dino_by_name(name)) & @chained_result
-end
-
-def get_dinos_by_names(names)
-  results = []
-  names.each do |name|
-    results << get_default_dino_by_name(name)
-      .concat(get_african_dino_by_name(name))
-  end
-  @last_result = results.flatten! & @chained_result
-end
-
-def get_default_dino_by_name(name)
-  filter_dinos_by_and_return_by(@default_dinos, :name, name, :name)
-end
-
-def get_african_dino_by_name(name)
-  filter_dinos_by_and_return_by(@african_dinos, :genus, name, :genus)
+  DinoCatalog.print(@last_result)
 end
 
 def setup_chain
-  @default_dinos.each do |dino|
-    @chained_result << dino[:name]
-  end
-
-  @african_dinos.each do |dino|
-    @chained_result << dino[:genus]
-  end
-end
-
-def get_dinos_by_size(size)
-  @last_result = get_default_dinos_by_size(size)
-    .concat(get_african_dinos_by_size(size)) & @chained_result
-end
-
-def get_default_dinos_by_size(size)
-  filter_dinos_by_and_return_by(@default_dinos, :weight_in_lbs, size, :name)
-end
-
-def get_african_dinos_by_size(size)
-  filter_dinos_by_and_return_by(@african_dinos, :weight, size, :genus)
-end
-
-def get_bipeds
-  @last_result = get_default_dinos_bipeds
-    .concat(get_african_dinos_bipeds) & @chained_result
-end
-
-def get_default_dinos_bipeds
-  filter_dinos_by_and_return_by(@default_dinos, :walking, 'biped', :name)
-end
-
-def get_african_dinos_bipeds
-  filter_dinos_by_and_return_by(@african_dinos, :walking, 'biped', :genus)
-end
-
-def get_carnivores
-  @last_result = get_default_dinos_carnivores
-    .concat(get_african_dinos_carnivores) & @chained_result
-end
-
-def get_default_dinos_carnivores
-  filter_dinos_by_and_return_by(@default_dinos,
-                                :diet,
-                                'carnivore',
-                                :name)
-    .concat(filter_dinos_by_and_return_by(@default_dinos,
-                                          :diet,
-                                          'insectivore',
-                                          :name))
-    .concat(filter_dinos_by_and_return_by(@default_dinos,
-                                          :diet,
-                                          'piscivore',
-                                          :name))
-end
-
-def get_african_dinos_carnivores
-  filter_dinos_by_and_return_by(@african_dinos, :carnivore, 'yes', :genus)
-end
-
-def get_dinos_by_period(period)
-  @last_result = get_default_dinos_by_period(period)
-    .concat(get_african_dinos_by_period period) & @chained_result
-end
-
-def get_default_dinos_by_period(period)
-  filter_dinos_by_and_return_by(@default_dinos, :period, period, :name)
-end
-
-def get_african_dinos_by_period(period)
-  filter_dinos_by_and_return_by(@african_dinos, :period, period, :genus)
-end
-
-def filter_dinos_by_and_return_by(dinos, filter_by, filter_value, header_to_return)
-  results = []
-  dinos.each do |dino|
-    case filter_by
-    when :period
-      filter_by_period(dino, filter_by, filter_value, results, header_to_return)
-    when :name, :genus
-      filter_by_name(dino, filter_by, filter_value, results, header_to_return)
-    when :weight_in_lbs, :weight
-      filter_by_weight(dino, filter_by, filter_value, results, header_to_return)
-    else
-      filter_by_other(dino, filter_by, filter_value, results, header_to_return)
-    end
-  end
-
-  results
-end
-
-def filter_by_period(dino, filter_by, filter_value, results, header_to_return)
-  return if dino[filter_by].nil?
-
-  period = dino[filter_by].downcase
-  results << dino[header_to_return] if period.include? filter_value.downcase
-end
-
-def filter_by_name(dino, filter_by, filter_value, results, header_to_return)
-  return if dino[filter_by].nil?
-
-  name = dino[filter_by].downcase
-  if name == filter_value.downcase
-    results << dino[header_to_return]
-    print_dino_details dino
-  end
-
-  results
-end
-
-def print_dino_details dino
-  dino.each do |dino_key, value|
-    puts "#{dino_key.capitalize}: \t#{value}" unless value.nil?
-  end
-
-  puts ''
-end
-
-def filter_by_weight(dino, filter_by, filter_value, results, header_to_return)
-  return if dino[filter_by].nil?
-
-  weight = dino[filter_by].downcase.to_i
-  case filter_value
-  when 'b'
-    results << dino[header_to_return] if weight > 4000
-  when 's'
-    results << dino[header_to_return] if weight < 4001
-  end
-end
-
-def filter_by_other(dino, filter_by, filter_value, results, header_to_return)
-  return if dino[filter_by].nil?
-
-  other = dino[filter_by].downcase
-  results << dino[header_to_return] if other == filter_value.downcase
+  @result_chain = @dino_catalog
 end
 
 main

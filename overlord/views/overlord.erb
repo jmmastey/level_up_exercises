@@ -1,0 +1,19 @@
+<head>
+  <script src="validation.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="overlord.css" media="all">
+    <form class="page-container" action="/boot" method="post">
+        <div class="form-container">
+        <div class="form-title"><h2>Welcome to Overlord!!!</h2></div>
+        <div class="form-title"><h3>Enter four digit activation and deactivation code to boot bomb.</h3></div>
+        </br>
+        </br>
+        <div class="form-title">Activation Code</div>
+        <input class="form-field" type="text" name="activationcode" id="activationcode" placeholder="1234" maxlength="4" size="4" onkeypress="return validatedigit();"/><br />
+        <div class="form-title">Deactivation Code</div>
+        <input class="form-field" type="text" name="deactivationcode" id="deactivationcode" placeholder="0000" maxlength="4" size="4" onkeypress="return validatedigit();"/><br />
+        <div class="submit-container">
+            <input class="submit-button" type="submit" id="Boot" name="Boot" value="Boot" />
+        </div>
+        </div>
+    </form>
+</head>

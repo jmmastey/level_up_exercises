@@ -84,7 +84,7 @@ class DinoCatalog
   end
 
   def match_diet?(diet, dino)
-    val = dino["DIET"]
+    val = dino["DIET"].downcase
 
     if diet == "carnivore"
       return true if carnivore?(val)

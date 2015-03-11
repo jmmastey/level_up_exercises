@@ -36,7 +36,7 @@ class DinoCatalog
   end
 
   def to_json
-    json = JSON.generate(@dinos)
+    json = JSON.pretty_generate(@dinos)
     puts json
   end
 

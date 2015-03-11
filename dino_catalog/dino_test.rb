@@ -4,11 +4,11 @@ require_relative 'dino_catalog'
 
 def show_help
   puts ""
-  puts "Available commands: find, print, exit"
+  puts "Available commands: find, print, verbose, exit"
   puts ""
   puts "Usage:"
-  puts "=> find category1=val1,...,categoryN=valN"
-  puts "   Find dinos matching the specified criteria "
+  puts "=> find category1=val1, ... , categoryN=valN"
+  puts "   Find dinos matching the specified criteria (case insensitive)"
   puts "   category can be one of " \
        "NAME, PERIOD, CONTINENT, DIET, WEIGHT, WALKING"
   puts ""

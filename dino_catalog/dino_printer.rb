@@ -21,8 +21,10 @@ class DinoPrinter
     categories = get_categories(list)
     print_table_header(categories)
 
+    verbose = list.length == 1 ? true : false
+
     list.each do |dino|
-      print_dino(categories, dino)
+      print_dino(categories, dino, verbose)
     end
   end
 
@@ -46,15 +48,24 @@ class DinoPrinter
     printf "\n"
   end
 
-  def print_dino(categories, dino)
+  def print_dino(categories, dino, verbose)
     categories.each do |category|
-      col_width = @col_widths[category]
-      max_width = col_width - 2
-      entry = truncate_entry(dino[category], max_width)
-      printf "%-#{col_width}s", entry
+      print_entry(category, dino, verbose)
     end
 
     printf "\n"
+  end
+
+  def print_entry(category, dino, verbose)
+    col_width = @col_widths[category]
+
+    if verbose
+      entry = dino[category]
+    else
+      entry = truncate_entry(dino[category], col_width - 2)
+    end
+
+    printf "%-#{col_width}s", entry
   end
 
   def truncate_entry(entry, max_width)

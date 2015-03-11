@@ -4,7 +4,6 @@ require_relative "dino_printer"
 class DinoCatalog
   def initialize
     @dinos = []
-    @categories = nil
     @results = []
 
     @csv_parser = DinoCsvParser.new
@@ -25,28 +24,31 @@ class DinoCatalog
   end
 
   def parse_search_params(criteria)
+    params = criteria.split(",")
+
     begin
-      params = criteria.split(",")
-      parsed_params = params.map do |param|
-        args = param.split(/[=<>]/)
-        [args[0], args[1]]
-      end
+      map_to_key_val_pairs(params)
     rescue
       puts "Invalid parameters"
-      parsed_params = []
+      []
     end
+  end
 
-    parsed_params
+  def map_to_key_val_pairs(params)
+    params.map do |param|
+      args = param.split("=")
+
+      raise ArgumentError if args[0].nil? || args[1].nil?
+
+      [args[0].strip, args[1].strip]
+    end
   end
 
   def find(criteria)
-    if criteria.length == 0
-      puts "You must enter search criteria for the find command"
-      return
-    end
-
     @results = []
     params = parse_search_params(criteria)
+
+    return if params.length == 0
 
     @dinos.each do |dino|
       @results << dino if match?(params, dino)
@@ -84,12 +86,12 @@ class DinoCatalog
   end
 
   def match_diet?(diet, dino)
-    val = dino["DIET"].downcase
+    dino_val = dino["DIET"].downcase
 
     if diet == "carnivore"
-      return true if carnivore?(val)
+      return true if carnivore?(dino_val)
     else
-      return true if diet == val
+      return true if diet == dino_val
     end
 
     false
@@ -104,14 +106,19 @@ class DinoCatalog
   end
 
   def match_weight?(weight, dino)
-    val = dino["WEIGHT"].to_i
+    dino_weight = dino["WEIGHT"].to_i
 
-    return false if val == 0
+    return false if dino_weight == 0
 
-    return true if weight == "big" && val.to_i > 4000
-    return true if weight == "small" && val.to_i <= 4000
-    return true if weight.to_i == val.to_i
+    return true if big_or_small?(weight, dino_weight)
+    return true if weight.to_i == dino_weight
 
+    false
+  end
+
+  def big_or_small?(weight, dino_weight)
+    return true if weight == "big" && dino_weight > 4000
+    return true if weight == "small" && dino_weight <= 4000
     false
   end
 

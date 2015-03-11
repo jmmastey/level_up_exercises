@@ -1,5 +1,6 @@
 require_relative "dino_csv_parser"
 require_relative "dino_printer"
+require 'json'
 
 class DinoCatalog
   def initialize
@@ -12,10 +13,37 @@ class DinoCatalog
     load_all_csv_files
   end
 
-  def load_all_csv_files
-    filenames = Dir["./*.csv"]
+  def find(criteria)
+    @results = []
+    params = parse_search_params(criteria)
 
-    filenames.each do |filename|
+    return if params.length == 0
+
+    @dinos.each do |dino|
+      @results << dino if match?(params, dino)
+    end
+
+    print_find_result
+  end
+
+  def print_results(params)
+    if params.downcase == "all"
+      @printer.display(@dinos)
+    else
+      return printf "\nNo results to print\n" if @results.empty?
+      @printer.display(@results)
+    end
+  end
+
+  def to_json
+    json = JSON.generate(@dinos)
+    puts json
+  end
+
+  private
+
+  def load_all_csv_files
+    Dir["./*.csv"].each do |filename|
       @csv_parser.parse_file(filename)
       @dinos << @csv_parser.dinos
     end
@@ -44,22 +72,8 @@ class DinoCatalog
     end
   end
 
-  def find(criteria)
-    @results = []
-    params = parse_search_params(criteria)
-
-    return if params.length == 0
-
-    @dinos.each do |dino|
-      @results << dino if match?(params, dino)
-    end
-
-    print_find_result
-  end
-
   def print_find_result
-    puts ""
-    print "Found #{@results.length} match(es): "
+    printf "\nFound #{@results.length} match(es): "
     matches = @results.map { |dino| dino["NAME"] }
     puts matches.join(", ")
   end
@@ -120,14 +134,5 @@ class DinoCatalog
     return true if weight == "big" && dino_weight > 4000
     return true if weight == "small" && dino_weight <= 4000
     false
-  end
-
-  def print_results(params)
-    if params.downcase == "all"
-      @printer.display(@dinos)
-    else
-      return printf "\nNo results to print\n" if @results.empty?
-      @printer.display(@results)
-    end
   end
 end

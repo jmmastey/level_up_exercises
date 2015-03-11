@@ -4,7 +4,7 @@ require_relative 'dino_catalog'
 
 def show_help
   puts ""
-  puts "Available commands: find, print, verbose, exit"
+  puts "Available commands: find, print, export, exit"
   puts ""
   puts "Usage:"
   puts "=> find category1=val1, ... , categoryN=valN"
@@ -22,6 +22,9 @@ def show_help
   puts ""
   puts "=> print"
   puts "   Print dino data for the results of a find operation"
+  puts ""
+  puts "=> export"
+  puts "   Display dino data in JSON format"
   puts ""
   puts "=> exit"
   puts "   Exit the program"
@@ -49,6 +52,8 @@ loop do
       dc.print_results(params)
     when "find"
       dc.find(params)
+    when "export"
+      dc.to_json
     when "exit"
       exit
     else

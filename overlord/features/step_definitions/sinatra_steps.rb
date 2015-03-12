@@ -68,3 +68,23 @@ Then /^the bomb doesn't deactivate$/ do
   expect(page.find_by_id('deactivation')).to be_truthy
 end
 
+When /^I enter the correct deactivation code$/ do
+  fill_in('deactivation_code', with: '0000')
+end
+
+Then /^the bomb is deactivated$/ do
+  click_button('Deactivate')
+  expect(page.find_by_id('saved')).to be_truthy
+end
+
+When /^I enter the incorrect deactivation code thrice$/ do
+  3.times do
+    fill_in('deactivation_code', with: '4567')
+    click_button('Deactivate')
+  end
+end
+
+Then /^the bomb should explode$/ do
+  expect(page.find_by_id('blast')).to be_truthy
+end
+

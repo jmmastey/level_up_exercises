@@ -91,6 +91,8 @@ enable :sessions
     if bomb.status != "detonated"
       if bomb.deactivate(params['deactivation_code'])
         erb :saved
+      elsif bomb.status == "detonated"
+        erb :blast
       else
         @message = 'Incorrect deactivation code'
         erb :countdown

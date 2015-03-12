@@ -62,7 +62,7 @@ class DinoCatalog
   end
 
   def self.print(dino_catalog)
-    dino_catalog.each { |dino| dino.print }
+    dino_catalog.each(&:print)
   end
 
   def &(rvalue)

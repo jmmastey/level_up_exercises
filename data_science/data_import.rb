@@ -4,7 +4,7 @@ require './data_analyzer'
 class DataImport
   attr_reader :data_hash
 
-  def initialize(file_name='data_export_2014_06_20_15_59_02.json')
+  def initialize(file_name = 'data_export_2014_06_20_15_59_02.json')
     data_file = File.read(file_name)
     @data_hash = JSON.parse(data_file)
   end
@@ -19,7 +19,7 @@ class DataImport
     formatted_data.each do |cohort, cohort_data|
       successes = cohort_data[:conversions]
       fails = cohort_data[:fails]
-      total = successes+fails
+      total = successes + fails
       conversion_rates[cohort.to_sym] = DataAnalyzer.conversion_rate(successes, total)
     end
 

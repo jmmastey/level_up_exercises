@@ -73,28 +73,28 @@ class DinoCatalog
     @dino_catalog.empty?
   end
 
-  def get_bipeds
+  def bipeds
     @dino_catalog.select { |dino| dino.walking.downcase == 'biped' }
   end
 
-  def get_carnivores
+  def carnivores
     valid_carnivores = ['carnivore', 'piscivore', 'insectivore']
     @dino_catalog.select { |dino| valid_carnivores.include? dino.diet.downcase }
   end
 
-  def get_by_period(period)
+  def by_period(period)
     @dino_catalog.select { |dino| dino.period.downcase.include? period }
   end
 
-  def get_small
+  def small
     @dino_catalog.select { |dino| dino.weight.to_i < 4001 }
   end
 
-  def get_big
+  def big
     @dino_catalog.select { |dino| dino.weight.to_i > 4000 }
   end
 
-  def get_by_name(name)
+  def find_by_name(name)
     @dino_catalog.select { |dino| dino.name.downcase.include? name }
   end
 end

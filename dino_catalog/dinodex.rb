@@ -1,7 +1,8 @@
 require './dinodex_handler'
 
 def main
-  DinodexHandler.setup_chain
+  @dinodex_handler = DinodexHandler.new
+  @dinodex_handler.setup_chain
 
   loop do
     print_prompt
@@ -30,21 +31,21 @@ end
 def handle_user_input(user_input)
   case user_input
   when '1'
-    DinodexHandler.handle_bipeds_option
+    @dinodex_handler.handle_bipeds_option
   when '2'
-    DinodexHandler.handle_carnivores_option
+    @dinodex_handler.handle_carnivores_option
   when '3'
-    DinodexHandler.handle_period_option
+    @dinodex_handler.handle_period_option
   when '4'
-    DinodexHandler.handle_size_option
+    @dinodex_handler.handle_size_option
   when '5'
-    DinodexHandler.handle_name_option
+    @dinodex_handler.handle_name_option
   when 'c'
-    DinodexHandler.handle_chain_option
+    @dinodex_handler.handle_chain_option
   when 'r'
-    DinodexHandler.handle_reset_option
+    @dinodex_handler.handle_reset_option
   when 'p'
-    DinodexHandler.handle_print_option
+    @dinodex_handler.handle_print_option
   when 'q'
     exit
   end

@@ -23,7 +23,7 @@ class Arrowhead
     raise ERR_REGION unless CLASSIFICATIONS.include? region
 
     shapes = CLASSIFICATIONS[region]
-    raise ERROR_SHAPE unless shapes.include? shape
+    raise ERR_SHAPE unless shapes.include? shape
 
     arrowhead = shapes[shape]
     puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."

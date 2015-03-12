@@ -1,0 +1,11 @@
+<section id="activate_bomb">
+  <h1><%= @error %></h1>
+  <h1 id="status">Bomb status: <%= bomb.status %></h1>
+  <form action="/activate" method="post">
+    Please enter the activation code:
+    <input type="text" name="activation_code" id="activation_code">
+    </br>
+    <input type="submit" value="Activate">
+  </form>
+</section>
+    

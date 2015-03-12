@@ -1,0 +1,13 @@
+<section id="deactivation">
+
+<span id="countdown"></span>
+
+<h1><%= @message %></h1>
+
+<form action="/countdown" method="post">
+  Enter the deactivation code:
+  <input type="text" id="deactivation_code" name="deactivation_code">
+  </br>
+  <input type="submit" value="Deactivate">
+</form>
+</section>

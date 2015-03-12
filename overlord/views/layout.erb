@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf8">
+  <title>Welcome to the bomb</title>
+  <link href="/reset.css" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet">
+  <script src="validationScript.js"></script>
+</head>
+<body>
+  <script src="validationScript.js"></script>
+  <header>
+    <hgroup>
+      <h1><a href="/">Go back home</a></h1>
+      <h2>It's a beautiful day </h2>
+    </hgroup>
+  </header>
+ 
+  <div id="main">
+    <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %>
+    <% end %>
+
+    <%= yield %>
+  </div>
+ 
+  <footer>
+    <p><small>An app for crazy people</small></p>
+  </footer>
+</body>
+</html>
+

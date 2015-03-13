@@ -3,9 +3,12 @@ require './dino_catalog'
 require './dino'
 
 class DinoParser
-  def self.parse(files = ['dinodex.csv', 'african_dinosaur_export.csv'], dino_catalog)
+  def self.parse(files = ['dinodex.csv', 'african_dinosaur_export.csv'])
+    dino_catalog = DinoCatalog.new
     add_default_csv(files[0], dino_catalog)
     add_african_csv(files[1], dino_catalog)
+
+    dino_catalog
   end
 
   private

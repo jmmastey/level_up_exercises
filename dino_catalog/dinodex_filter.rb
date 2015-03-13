@@ -25,4 +25,3 @@ class DinodexFilter
     @last_result.print
   end
 end
-

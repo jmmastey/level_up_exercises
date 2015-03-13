@@ -25,7 +25,7 @@ class DinoCatalog
       public_send(method) if respond_to?(method)
     else
       method = "find_by_#{attribute}"
-      self.public_send(method, value) if self.respond_to? method
+      public_send(method, value) if respond_to?(method)
     end
   end
 

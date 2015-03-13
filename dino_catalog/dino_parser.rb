@@ -11,8 +11,6 @@ class DinoParser
     dino_catalog
   end
 
-  private
-
   def self.add_default_csv(default_file_name, dino_catalog)
     @dinos = CSV.read(default_file_name,
                       headers: true,

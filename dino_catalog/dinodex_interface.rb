@@ -1,7 +1,7 @@
-require './dinodex_filter'
+require './dinodex'
 
 def main
-  @dinodex_filter = DinodexFilter.new
+  @dinodex = DinodexFilter.new
 
   loop do
     print_menu
@@ -29,25 +29,25 @@ end
 def handle_user_input(user_input)
   case user_input
   when '1'
-    @dinodex_filter.filter('bipeds')
+    @dinodex.filter('bipeds')
   when '2'
-    @dinodex_filter.filter('carnivores')
+    @dinodex.filter('carnivores')
   when '3'
     period = prompt_and_get_user_input('period: ')
-    @dinodex_filter.filter('period', period)
+    @dinodex.filter('period', period)
   when '4'
-    @dinodex_filter.filter('big')
+    @dinodex.filter('big')
   when '5'
-    @dinodex_filter.filter('small')
+    @dinodex.filter('small')
   when '6'
     name = prompt_and_get_user_input('name: ')
-    @dinodex_filter.filter('name', name)
+    @dinodex.filter('name', name)
   when 'c'
-    @dinodex_filter.update_filtered_catalog
+    @dinodex.update_filtered_catalog
   when 'r'
-    @dinodex_filter.reset_filtered_catalog
+    @dinodex.reset_filtered_catalog
   when 'p'
-    @dinodex_filter.print_last_result
+    @dinodex.print_last_result
   when 'q'
     exit
   end

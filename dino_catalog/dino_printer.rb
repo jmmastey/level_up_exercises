@@ -1,3 +1,5 @@
+require_relative "dino"
+
 class DinoPrinter
   def initialize
     # Fixed column widths for formatting output
@@ -7,17 +9,24 @@ class DinoPrinter
     }
   end
 
-  def get_categories(list)
-    categories = []
-
-    list.each do |dino|
-      categories << dino.keys
+  def display_dinos(params, catalog)
+    if params.downcase == "all"
+      display_table(catalog.dinos)
+    else
+      return printf "\nNo results to print\n" if catalog.results.empty?
+      display_table(catalog.results)
     end
-
-    categories.flatten.uniq
   end
 
-  def display(list)
+  def display_results(results)
+    printf "\nFound #{results.length} match(es): "
+    matches = results.map { |dino| dino.name }
+    puts matches.join(", ")
+  end
+
+  private
+
+  def display_table(list)
     categories = get_categories(list)
     print_table_header(categories)
 
@@ -28,42 +37,48 @@ class DinoPrinter
     end
   end
 
+  def get_categories(list)
+    categories = []
+
+    list.each do |dino|
+#      categories << dino.keys
+    end
+
+    categories.flatten.uniq
+    categories = ["NAME", "PERIOD", "CONTINENT", "DIET", "WEIGHT", "WALKING", "DESCRIPTION"]
+  end
+
   def print_table_header(list)
     print_categories(list)
     print_separators(list)
   end
 
   def print_categories(list)
-    printf "\n"
+    puts ""
     list.each do |category|
       printf "%-#{@col_widths[category]}s", category
     end
-    printf "\n"
+    puts ""
   end
 
   def print_separators(list)
     list.each do |category|
       printf "%-#{@col_widths[category]}s", "-" * category.length
     end
-    printf "\n"
+    puts ""
   end
 
   def print_dino(categories, dino, verbose)
     categories.each do |category|
       print_entry(category, dino, verbose)
     end
-
-    printf "\n"
+    puts ""
   end
 
   def print_entry(category, dino, verbose)
     col_width = @col_widths[category]
-
-    if verbose
-      entry = dino[category]
-    else
-      entry = truncate_entry(dino[category], col_width - 2)
-    end
+    entry = dino.send(category.downcase)
+    entry = truncate_entry(entry, col_width - 2) if !verbose
 
     printf "%-#{col_width}s", entry
   end

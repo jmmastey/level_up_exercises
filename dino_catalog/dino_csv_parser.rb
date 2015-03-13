@@ -1,19 +1,31 @@
+require_relative "dino"
+
 class DinoCsvParser
-  attr_reader :dinos
+  CATEGORY_REMAP = { "GENUS" => "NAME", "CARNIVORE" => "DIET",
+                     "WEIGHT_IN_LBS" => "WEIGHT" }
+  DIET_REMAP = { "Yes" => "Carnivore", "No" => "Herbivore" }
+
+  def initialize
+    @dinos = []
+    @categories = []
+  end
 
   def parse_file(filename)
-    @dinos = []
-    @categories = nil
+    initialize
 
     File.open(filename) do |file|
       while (line = file.gets)
         parse_line(line)
       end
     end
+
+    @dinos
   end
 
+  private
+
   def parse_line(line)
-    if @categories.nil?
+    if @categories.empty?
       parse_categories(line)
     else
       @dinos << parse_data(line)
@@ -26,26 +38,19 @@ class DinoCsvParser
   end
 
   def normalize_categories!
-    @categories[0] = "NAME" if @categories[0] == "GENUS"
-
-    idx = @categories.index("WEIGHT_IN_LBS")
-    @categories[idx] = "WEIGHT" if idx
+    @categories.map! { |cat| CATEGORY_REMAP[cat] || cat }
   end
 
   def parse_data(line)
+    dino = Dino.new
+
     params = line.strip.split(',')
-    paired_params = params.each_with_index.map do |param, i|
-      category_data_pair(param, @categories[i])
+
+    params.each_with_index do |param, i|
+      category = @categories[i].downcase
+      dino.send(category + '=', param)
     end
 
-    Hash[paired_params]
-  end
-
-  def category_data_pair(param, category)
-    if category == "CARNIVORE"
-      param == "Yes" ? %w(DIET Carnivore) : %w(DIET Non-Carnivore)
-    else
-      [category, param]
-    end
+    dino
   end
 end

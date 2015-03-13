@@ -1,4 +1,3 @@
-require 'CSV'
 require './dino'
 
 class DinoCatalog
@@ -10,63 +9,14 @@ class DinoCatalog
 
   def initialize(catalog = [])
     @dino_catalog = catalog
-
-    if @dino_catalog.empty?
-      add_default_csv
-      add_african_csv
-    end
   end
 
   def add(dino)
     dino_catalog << dino
   end
 
-  def add_default_csv
-    @dinos = CSV.read('dinodex.csv',
-                      headers: true,
-                      header_converters: :symbol)
-
-    @dinos.each do |dino|
-      restructured_dino = {
-        name: dino[:name],
-        period: dino[:period],
-        continent: dino[:continent],
-        diet: dino[:diet],
-        weight: dino[:weight_in_lbs],
-        walking: dino[:walking],
-        description: dino[:description]
-      }
-
-      add Dino.new(restructured_dino)
-    end
-  end
-
-  def add_african_csv
-    @dinos = CSV.read('african_dinosaur_export.csv',
-                      headers: true,
-                      header_converters: :symbol)
-
-    @dinos.each do |dino|
-      restructured_dino = {
-        name: dino[:genus],
-        period: dino[:period],
-        continent: 'Africa',
-        diet: dino[:carnivore].downcase == 'yes' ? 'Carnivore' : 'Herbivore',
-        weight: dino[:weight],
-        walking: dino[:walking],
-        description: dino[:description]
-      }
-
-      add Dino.new(restructured_dino)
-    end
-  end
-
   def self.print(dino_catalog)
     dino_catalog.each(&:print)
-  end
-
-  def &(rvalue)
-    DinoCatalog.new(@dino_catalog & rvalue.dino_catalog)
   end
 
   def empty?
@@ -74,27 +24,27 @@ class DinoCatalog
   end
 
   def bipeds
-    @dino_catalog.select { |dino| dino.walking.downcase == 'biped' }
+    DinoCatalog.new(@dino_catalog.select { |dino| dino.walking.downcase == 'biped' })
   end
 
   def carnivores
     valid_carnivores = ['carnivore', 'piscivore', 'insectivore']
-    @dino_catalog.select { |dino| valid_carnivores.include? dino.diet.downcase }
+    DinoCatalog.new(@dino_catalog.select { |dino| valid_carnivores.include? dino.diet.downcase })
   end
 
   def by_period(period)
-    @dino_catalog.select { |dino| dino.period.downcase.include? period }
+    DinoCatalog.new(@dino_catalog.select { |dino| dino.period.downcase.include? period })
   end
 
   def small
-    @dino_catalog.select { |dino| dino.weight.to_i < 4001 }
+    DinoCatalog.new(@dino_catalog.select { |dino| dino.weight.to_i < 4001 })
   end
 
   def big
-    @dino_catalog.select { |dino| dino.weight.to_i > 4000 }
+    DinoCatalog.new(@dino_catalog.select { |dino| dino.weight.to_i > 4000 })
   end
 
   def find_by_name(name)
-    @dino_catalog.select { |dino| dino.name.downcase.include? name }
+    DinoCatalog.new(@dino_catalog.select { |dino| dino.name.downcase.include? name })
   end
 end

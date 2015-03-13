@@ -2,7 +2,6 @@ require './dinodex_handler'
 
 def main
   @dinodex_handler = DinodexHandler.new
-  @dinodex_handler.setup_chain
 
   loop do
     print_prompt

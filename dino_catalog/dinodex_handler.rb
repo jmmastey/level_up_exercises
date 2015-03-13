@@ -1,21 +1,24 @@
-require './dino_catalog'
+require './dino_parser'
 
 class DinodexHandler
-  def initialize
+  #todo: filter, attr, value, comparator
+  def initialize(files = ['dinodex.csv', 'african_dinosaur_export.csv'])
     @result_chain ||= []
     @last_result = []
     @dino_catalog = DinoCatalog.new
+    DinoParser.parse(files, @dino_catalog)
+    setup_chain
   end
 
   def handle_bipeds_option
-    bipeds = DinoCatalog.new(@dino_catalog.bipeds) & @result_chain
+    bipeds = @result_chain.bipeds
     bipeds.each { |dino| puts dino.name }
 
     @last_result = bipeds
   end
 
   def handle_carnivores_option
-    carnivores = DinoCatalog.new(@dino_catalog.carnivores) & @result_chain
+    carnivores = @result_chain.carnivores
     carnivores.each { |dino| puts dino.name }
 
     @last_result = carnivores
@@ -26,7 +29,7 @@ class DinodexHandler
     period = gets.chomp
     puts ''
 
-    period_dinos = DinoCatalog.new(@dino_catalog.by_period(period)) & @result_chain
+    period_dinos = @result_chain.by_period(period)
     period_dinos.each { |dino| puts dino.name }
     @last_result = period_dinos
   end
@@ -36,8 +39,8 @@ class DinodexHandler
     size = gets.chomp
     puts ''
 
-    size_dinos = DinoCatalog.new(@dino_catalog.big) & @result_chain if size == 'b'
-    size_dinos = DinoCatalog.new(@dino_catalog.small) & @result_chain if size == 's'
+    size_dinos = @result_chain.big if size == 'b'
+    size_dinos = @result_chain.small if size == 's'
 
     size_dinos.each { |dino| puts dino.name }
     @last_result = size_dinos
@@ -48,13 +51,13 @@ class DinodexHandler
     name = gets.chomp
     puts ''
 
-    name_dinos = DinoCatalog.new(@dino_catalog.find_by_name(name)) & @result_chain
+    name_dinos = @result_chain.find_by_name(name)
     name_dinos.each { |dino| puts dino.name }
     @last_result = name_dinos
   end
 
   def handle_chain_option
-    @result_chain &= @last_result unless @last_result.empty?
+    @result_chain = @last_result unless @last_result.empty?
     puts 'chain updated'
   end
 

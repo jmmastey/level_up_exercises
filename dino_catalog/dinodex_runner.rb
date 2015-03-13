@@ -1,6 +1,6 @@
 require './dino_parser'
 
-class DinodexHandler
+class DinodexRunner
   #todo: filter, attr, value, comparator
   def initialize(files = ['dinodex.csv', 'african_dinosaur_export.csv'])
     @result_chain ||= []

@@ -12,13 +12,13 @@ class Dino
   end
 
   def print
-    puts "Name: #{@name}" unless name.nil?
-    puts "Period: #{@period}" unless period.nil?
-    puts "Continent: #{@continent}" unless continent.nil?
-    puts "Diet: #{@diet}" unless diet.nil?
-    puts "Weight: #{@weight}" unless weight.nil?
-    puts "Walking: #{@walking}" unless walking.nil?
-    puts "Description: #{@description}" unless description.nil?
+    puts "Name: #{@name}" if name
+    puts "Period: #{@period}" if period
+    puts "Continent: #{@continent}" if continent
+    puts "Diet: #{@diet}" if diet
+    puts "Weight: #{@weight}" if weight
+    puts "Walking: #{@walking}" if walking
+    puts "Description: #{@description}" if description
     puts ''
   end
 end

@@ -1,4 +1,4 @@
-require './dinodex'
+require './dinodex_filter'
 
 def main
   @dinodex = DinodexFilter.new

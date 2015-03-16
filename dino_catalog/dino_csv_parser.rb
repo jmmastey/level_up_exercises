@@ -24,6 +24,7 @@ class DinoCsvParser
 
   def parse_line(line)
     return parse_categories(line) if @categories.empty?
+
     @dinos << parse_data(line)
   end
 

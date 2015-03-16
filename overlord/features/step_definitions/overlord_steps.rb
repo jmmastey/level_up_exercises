@@ -3,11 +3,20 @@ Given(/^I am on bomb interface page$/) do
 end
 
 Then(/^On home page I see activation code box with default code$/) do
-  expect(page.find_by_id('activationcode')[:placeholder]).to eq('1234')
+  checkcode('actcode', '1234')
 end
 
 Then(/^I see deactivation code box with default code$/) do
-  expect(page.find_by_id('deactivationcode')[:placeholder]).to eq('0000')
+  checkcode('deactcode', '0000')
+end
+
+def checkcode(textbox, code)
+  expect(page.find_by_id(textbox)[:placeholder]).to eq(code)
+end
+
+def fill_active_deactive_code(active_code, deactive_code)
+  fill_in('actcode', with: active_code)
+  fill_in('deactcode', with: deactive_code)
 end
 
 Then(/^I see "(.*?)" button$/) do |button_name|
@@ -15,8 +24,7 @@ Then(/^I see "(.*?)" button$/) do |button_name|
 end
 
 When(/^I set the activation and deactivation code$/) do
-  fill_in('activationcode', with: '1111')
-  fill_in('deactivationcode', with: '2222')
+  fill_active_deactive_code('1111', '2222')
 end
 
 When(/^I click "(.*?)" button$/) do |button_name|
@@ -27,15 +35,21 @@ Then(/^On bomb interface page$/) do
   visit '/bomb'
 end
 
+When(/^I enter incorrect activation and deactivation code$/) do
+  fill_active_deactive_code('11', '22')
+end
+
+Then(/^I see popup "(.*?)"$/) do |arg1|
+  expect(page.driver.browser.switch_to.alert.text).to eq(arg1)
+end
+
 Given(/^I am using default activation code$/) do
   visit('/')
-  fill_in('activationcode', with: '1234')
-  click_button('Boot')
+  text_fill_action('actcode', '1234', 'Boot')
 end
 
 When(/^I enter default activation code$/) do
-  fill_in('bombcode', with: '1234')
-  click_button('Submit')
+  text_fill_action('bombcode', '1234', 'Submit')
 end
 
 Then(/^Bomb is activated$/) do
@@ -44,29 +58,24 @@ end
 
 Given(/^I am using customized activation code$/) do
   visit('/')
-  fill_in('activationcode', with: '1111')
-  click_button('Boot')
+  text_fill_action('actcode', '1111', 'Boot')
 end
 
 When(/^I enter custom activation code$/) do
-  fill_in('bombcode', with: '1111')
-  click_button('Submit')
+  text_fill_action('bombcode', '1111', 'Submit')
   expect(page).to have_content('activated')
 end
 
 Given(/^Bomb is in active state$/) do
   visit('/')
-  fill_in('activationcode', with: '1234')
-  fill_in('deactivationcode', with: '2222')
-  click_button('Boot')
-  fill_in('bombcode', with: '1234')
-  click_button('Submit')
+  fill_in('actcode', with: '1234')
+  text_fill_action('deactcode', '2222', 'Boot')
+  text_fill_action('bombcode', '1234', 'Submit')
   expect(page).to have_content('activated')
 end
 
 When(/^I enter correct deactivation code$/) do
-  fill_in('bombcode', with: '2222')
-  click_button('Submit')
+  text_fill_action('bombcode', '2222', 'Submit')
 end
 
 Then(/^Bomb is deactivated$/) do
@@ -74,8 +83,7 @@ Then(/^Bomb is deactivated$/) do
 end
 
 When(/^I enter incorrect deactivation code$/) do
-  fill_in('bombcode', with: '3333')
-  click_button('Submit')
+  text_fill_action('bombcode', '3333', 'Submit')
 end
 
 Then(/^Bomb is in activated state$/) do
@@ -84,11 +92,15 @@ end
 
 When(/^I enter incorrect deactivation code "(.*?)" 3 times$/) do |bombcode|
   3.times do
-    fill_in('bombcode', with: bombcode)
-    click_button('Submit')
+    text_fill_action('bombcode', bombcode, 'Submit')
   end
 end
 
 Then(/^Bomb is in blast page$/) do
   visit '/blast'
+end
+
+def text_fill_action(textbox, code, button_name)
+  fill_in(textbox, with: code)
+  click_button(button_name)
 end

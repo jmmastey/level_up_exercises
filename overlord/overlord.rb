@@ -1,7 +1,5 @@
 require 'sinatra'
 require './bomb'
-require 'timers'
-require 'eventmachine'
 
 enable :sessions
 set :public_folder, proc { File.join(File.dirname(__FILE__), 'views') }
@@ -13,18 +11,16 @@ get '/' do
 end
 
 post '/boot' do
-  session[:bomb] = Bomb.new(params['activationcode'],
-                            params['deactivationcode'])
+  session[:bomb] = Bomb.new(params['actcode'], params['deactcode'])
   redirect '/bomb'
 end
 
 get '/bomb' do
-  erb :bomb,
-      locals:
-        {
-          incorrect_attempts: bomb.incorrect_attempts,
-          bomb_status: bomb.status
-        }
+  erb :bomb, locals:
+      {
+        incorrect_attempts: bomb.incorrect_attempts,
+        bomb_status: bomb.status
+      }
 end
 
 post '/bomb' do
@@ -34,12 +30,11 @@ post '/bomb' do
   if bomb.incorrect_attempts == 3
     redirect '/blast'
   else
-    erb :bomb,
-        locals:
-          {
-            incorrect_attempts: bomb.incorrect_attempts,
-            bomb_status: bomb.status
-          }
+    erb :bomb, locals:
+        {
+          incorrect_attempts: bomb.incorrect_attempts,
+          bomb_status: bomb.status
+        }
   end
 end
 

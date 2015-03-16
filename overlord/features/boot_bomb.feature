@@ -16,3 +16,8 @@ Feature: Booting the bomb
     When I set the activation and deactivation code
     And I click "Boot" button
     Then On bomb interface page
+
+  Scenario: I boot bomb with invalid codes
+    When I enter incorrect activation and deactivation code
+    And I click "Boot" button
+    Then I see popup "Please enter four digit codes."

@@ -5,6 +5,7 @@ require 'Capybara/cucumber'
 require 'rspec'
 
 Capybara.app = Sinatra::Application
+Capybara.default_driver = :selenium
 
 class OverLordWorld
   include Capybara::DSL
@@ -14,4 +15,8 @@ end
 
 World do
   OverLordWorld.new
+end
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
 end

@@ -1,11 +1,13 @@
 Feature: Deactivate Bomb
 
-  Scenario: Deactivate bomb with correct deactivation code
+  Background: Deactivate bomb with correct and incorrect codes
+
+  Scenario: Enter correct deactivation code to deactivate bomb
     Given Bomb is in active state
     When I enter correct deactivation code
     Then Bomb is deactivated
 
-  Scenario: Deactivate bomb with incorrect deactivation code
+  Scenario: Enter incorrect deactivation code to deactivate bomb
     Given Bomb is in active state
     When I enter incorrect deactivation code
     Then Bomb is in activated state

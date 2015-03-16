@@ -33,11 +33,9 @@ class DinoApp
 
   def load_all_csv_files
     dinos = []
-
     Dir["./*.csv"].each do |filename|
       dinos << @parser.parse_file(filename)
     end
-
     @catalog.dinos = dinos.flatten!
   end
 
@@ -54,13 +52,16 @@ class DinoApp
     args = input.split(" ", 2)
     command = (args[0] || "").to_sym
     params = args[1] ? args[1] : ""
-
     action = ACTIONS.fetch(command, :show_help)
     send(action, params)
   end
 
   def print_results(params)
-    @printer.display_dinos(params, @catalog)
+    if params.downcase == "all"
+      @printer.display_dinos(params, @catalog.dinos)
+    else
+      @printer.display_dinos(params, @catalog.results)
+    end
   end
 
   def find(params)

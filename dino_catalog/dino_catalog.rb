@@ -13,28 +13,22 @@ class DinoCatalog
     params = parse_search_params(criteria)
     return if params.length == 0
 
-    @results = []
-    @dinos.each do |dino|
-      @results << dino if dino.match?(params)
-    end
+    @results =  @dinos.select { |dino| dino.match?(params) }
   end
 
   def to_json
-    json = convert_to_json
-    JSON.pretty_generate(json)
+    hash_array = convert_dinos_to_hashes
+    JSON.pretty_generate(hash_array)
   end
 
   private
 
   def parse_search_params(criteria)
     params = criteria.split(",")
-
-    begin
-      map_to_key_val_pairs(params)
-    rescue
-      puts "Invalid parameters"
-      []
-    end
+    map_to_key_val_pairs(params)
+  rescue
+    puts "Invalid parameters"
+    []
   end
 
   def map_to_key_val_pairs(params)
@@ -45,21 +39,7 @@ class DinoCatalog
     end
   end
 
-  def convert_to_json
-    @dinos.map do |dino|
-      vars_to_hash(dino)
-    end
-  end
-
-  def vars_to_hash(dino)
-    hash = {}
-
-    dino.instance_variables.each do |var|
-      varname = var[1..-1]
-      val = dino.send(varname).to_s
-      hash[varname.upcase] = val if val.length > 0
-    end
-
-    hash
+  def convert_dinos_to_hashes
+    @dinos.map { |dino| dino.to_hash }
   end
 end

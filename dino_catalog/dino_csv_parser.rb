@@ -12,24 +12,19 @@ class DinoCsvParser
 
   def parse_file(filename)
     initialize
-
     File.open(filename) do |file|
       while (line = file.gets)
         parse_line(line)
       end
     end
-
     @dinos
   end
 
   private
 
   def parse_line(line)
-    if @categories.empty?
-      parse_categories(line)
-    else
-      @dinos << parse_data(line)
-    end
+    return parse_categories(line) if @categories.empty?
+    @dinos << parse_data(line)
   end
 
   def parse_categories(line)
@@ -43,14 +38,11 @@ class DinoCsvParser
 
   def parse_data(line)
     dino = Dino.new
-
     params = line.strip.split(',')
-
     params.each_with_index do |param, i|
       category = @categories[i].downcase
       dino.send(category + '=', param)
     end
-
     dino
   end
 end

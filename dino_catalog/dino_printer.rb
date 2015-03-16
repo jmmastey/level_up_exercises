@@ -5,17 +5,14 @@ class DinoPrinter
     # Fixed column widths for formatting output
     @col_widths = {
       "NAME" => 22, "PERIOD" => 20, "CONTINENT" => 18, "DIET" => 16,
-      "WEIGHT" => 8, "WALKING" => 12, "DESCRIPTION" => 40
+      "WEIGHT" => 8, "WALKING" => 12, "DESCRIPTION" => 40,
     }
   end
 
-  def display_dinos(params, catalog)
-    if params.downcase == "all"
-      display_table(catalog.dinos)
-    else
-      return printf "\nNo results to print\n" if catalog.results.empty?
-      display_table(catalog.results)
-    end
+  def display_dinos(params, list)
+    return printf "\nNo results to print\n" if list.empty?
+
+    display_table(list)
   end
 
   def display_results(results)
@@ -29,9 +26,7 @@ class DinoPrinter
   def display_table(list)
     categories = get_categories(list)
     print_table_header(categories)
-
     verbose = list.length == 1 ? true : false
-
     list.each do |dino|
       print_dino(categories, dino, verbose)
     end
@@ -39,13 +34,11 @@ class DinoPrinter
 
   def get_categories(list)
     categories = []
-
     list.each do |dino|
-#      categories << dino.keys
+      hash = dino.to_hash  
+      categories << hash.keys
     end
-
     categories.flatten.uniq
-    categories = ["NAME", "PERIOD", "CONTINENT", "DIET", "WEIGHT", "WALKING", "DESCRIPTION"]
   end
 
   def print_table_header(list)
@@ -79,7 +72,6 @@ class DinoPrinter
     col_width = @col_widths[category]
     entry = dino.send(category.downcase)
     entry = truncate_entry(entry, col_width - 2) if !verbose
-
     printf "%-#{col_width}s", entry
   end
 

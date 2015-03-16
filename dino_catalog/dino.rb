@@ -46,7 +46,6 @@ class Dino
   def match_other?(param)
     key = param[0]
     val = param[1]
-
     dino_val = send(key)
     dino_val.downcase.index(val)
   end
@@ -61,5 +60,15 @@ class Dino
 
   def small?
     weight.to_i.between?(1, SMALL_WEIGHT)
+  end
+
+  def to_hash
+    hash = {}
+    self.instance_variables.each do |var|
+      category = var.to_s.delete("@").upcase
+      val = self.instance_variable_get(var)
+      hash[category] = val if val.to_s.length > 0
+    end
+    hash
   end
 end

@@ -1,0 +1,12 @@
+.bomb {
+  width: 600px;
+  position: absolute;
+  left: 50%;
+  margin-left: -300px;
+}
+
+.bomb-button {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 4px;
+}

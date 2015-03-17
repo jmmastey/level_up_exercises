@@ -1,1 +1,27 @@
-hello
+!!!
+%html
+  %head
+    %title Bomb :^)
+    %link(type='text/css' rel='stylesheet' href='index.css')
+    %script(src='//code.jquery.com/jquery-1.11.2.min.js')
+    %script(src='index.js')
+
+  %body
+    .bomb
+      - if bomb
+        - if bomb.is_detonated?
+          ur ded 8(((
+
+          = haml :new_bomb
+        - elsif bomb.is_active?
+          bomb active 8)
+
+          = haml :existing_bomb
+        - else
+          bomb inactive 8(
+
+          = haml :existing_bomb
+      - else
+        = haml :new_bomb
+
+      = haml :bomb_keypad

@@ -2,7 +2,7 @@ class InvalidCodeError < ArgumentError; end
 class LockedCodeError < StandardError; end
 
 class Bomb
-  attr_reader :state
+  attr_reader :arm_code, :state
 
   ARM_CODE_DEFAULT = "1234"
   DISARM_CODE_DEFAULT = "0000"

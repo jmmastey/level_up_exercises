@@ -1,0 +1,30 @@
+<script type="text/javascript">
+<!--
+// Form validation code will come here.
+function validate()
+{
+  if (/^\d{4}$/.test(document.activate.user_submit.value) == false)
+  {
+    alert( "Please provide an Activation Code that is four numberic characters long" );
+    document.activate.user_submit.focus() ;
+    return false;
+  }
+  return( true );
+}
+//-->
+</script>
+
+<form action="/activate" method="post" name='activate' onsubmit="return(validate());">
+   The Bomb is <%= session[:status] %>
+  <table style="width:25%">
+
+  <tr>
+   <td> Activation Code  </td>
+   <td><input type="text" id='activation' name="user_submit" value="Enter a number"></td>
+  </tr>
+  <tr>
+  <td><input type="submit" value='Submit'></td>
+  </tr>
+</table>
+
+</form>

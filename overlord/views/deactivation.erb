@@ -1,0 +1,32 @@
+<script type="text/javascript">
+<!--
+// Form validation code will come here.
+function validate()
+{
+  if (/^\d{4}$/.test(document.deactivate.user_submit_de.value) == false)
+  {
+    alert( "Please provide a Dectivation Code that is four numberic characters long" );
+    document.deactivate.user_submit_de.focus() ;
+    return false;
+  }
+  return( true );
+}
+//-->
+</script>
+
+
+<form action="/deactivate" method="post" name='deactivate' onsubmit="return(validate());">
+   The Bomb is <%= session[:status] %> <p>
+   You have <%= 3 - session[:attempts] %> attempts to deactivate the bomb.
+  <table style="width:25%">
+
+  <tr>
+   <td>Deactivation Code  </td>
+   <td><input type="text" id='de_code_in' name="user_submit_de" value="Enter a Number"></td>
+  </tr>
+  <tr>
+  <td><input type="submit" value='Submit'></td>
+  </tr>
+</table>
+
+</form>

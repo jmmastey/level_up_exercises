@@ -1,0 +1,52 @@
+<script type="text/javascript">
+<!--
+// Form validation code will come here.
+function validate()
+{
+
+  //alert(/^\d{4}$/.test(document.setup.act.value));
+  if (/^\d{4}$/.test(document.setup.act.value) == false)
+  {
+    alert( "Please provide an Activation Code that is four numberic characters long" );
+    document.setup.act.focus() ;
+    return false;
+  }
+
+  if (/^\d{4}$/.test(document.setup.deact.value) == false)
+  {
+    alert( "Please provide an Deactivation Code that is four numberic characters long" );
+    document.setup.deact.focus() ;
+    return false;
+  }
+
+  return (true);
+}
+//-->
+</script>
+<title> Configure a bomb</title>
+<form action="/config" method="post" name='setup' onsubmit="return(validate());">
+<br> Configure a bomb
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,--.!,
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__/&nbsp;&nbsp;&nbsp;-*-
+<br>&nbsp;&nbsp;,d08b.&nbsp;&nbsp;&nbsp;'|`
+<br>0088MM
+<br>`9MMP'
+
+
+  <table style="width:25%">
+  <tr>
+   <td> Activation Code  </td>
+   <td><input type="text" id='activation' name="act" value="1234"></td>
+  </tr>
+  <tr>
+    <td> Deactivation Code </td>
+    <td><input type='text' id='deactivation' name='deact' value="0000"> </td>
+  </tr>
+  <tr>
+  <td>
+    <input type="Submit" value="Submit">
+  </td>
+  </tr>
+</table>
+
+</form>

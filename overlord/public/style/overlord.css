@@ -1,0 +1,20 @@
+body {
+  text-align: center;
+  width: 100%;
+}
+
+input {
+  font-size: 16pt;
+}
+
+.inactive {
+  color: #888;
+}
+
+.armed {
+  color: #0f0;
+}
+
+.exploded {
+  color: #d00;
+}

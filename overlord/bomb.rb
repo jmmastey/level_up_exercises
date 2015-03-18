@@ -11,7 +11,7 @@ class Bomb
     :inactive => "INACTIVE",
     :armed => "ARMED",
     :exploded => "EXPLODED",
-   }
+  }
 
   def initialize
     @arm_code = ARM_CODE_DEFAULT
@@ -19,13 +19,13 @@ class Bomb
     @state = STATES[:inactive]
     @disarm_retries = DISARM_RETRIES_MAX
 
-    if !(valid_code?(@arm_code) && valid_code?(@disarm_code))
+    unless valid_code?(@arm_code) && valid_code?(@disarm_code)
       raise InvalidCodeError
     end
   end
 
   def valid_code?(code)
-    code.match(/[^0-9]/) ? false : true 
+    code.match(/[^0-9]/) ? false : true
   end
 
   def arm_code=(code)

@@ -9,8 +9,11 @@ class Overlord < Sinatra::Base
   get '/' do
     session[:bomb] ||= Bomb.new
     bomb = session[:bomb]
+
     read_bomb_state(bomb)
-    set_prompt(bomb.state)
+    redirect to('/boom') if @bomb_state == "EXPLODED"
+
+    generate_prompt(bomb.state)
     erb :index
   end
 
@@ -18,8 +21,15 @@ class Overlord < Sinatra::Base
     bomb = session[:bomb]
     code = params[:code]
     process_code(bomb, code)
+
     read_bomb_state(bomb)
+    redirect to('/boom') if @bomb_state == "EXPLODED"
+
     erb :index
+  end
+
+  get '/boom' do
+    erb :boom
   end
 
   def read_bomb_state(bomb)
@@ -30,24 +40,21 @@ class Overlord < Sinatra::Base
 
   def process_code(bomb, code)
     state = bomb.state
-    if (state == "INACTIVE")
-      bomb.arm(code)
-    elsif (state == "ARMED")
-      bomb.disarm(code)
-    end
+    bomb.arm(code) if state == "INACTIVE"
+    bomb.disarm(code) if state == "ARMED"
 
     state = bomb.state
-    set_prompt(state)
+    generate_prompt(state)
   end
 
-  def set_prompt(state)
+  def generate_prompt(state)
     @prompt = ""
     if state == "INACTIVE"
-        @prompt = "Enter activation code to arm bomb:"
+      @prompt = "Enter activation code to arm bomb:"
     elsif state == "ARMED"
-        @prompt = "Enter deactivation code to disarm bomb:"
+      @prompt = "Enter deactivation code to disarm bomb:"
     end
   end
 
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

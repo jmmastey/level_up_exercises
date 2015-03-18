@@ -12,9 +12,13 @@ input {
 }
 
 .armed {
-  color: #0f0;
+  color: #0a0;
 }
 
 .exploded {
   color: #d00;
+}
+
+.spacer {
+  height: 20px;
 }

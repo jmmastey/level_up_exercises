@@ -1,8 +1,10 @@
 <h2>Welcome to BareBonesBomb v1.0</h2>
-<p id="bomb_state">Bomb is currently: <span class="<%= @bomb_state_class %>"><%= @bomb_state %></span></p>
+<h3 id="bomb_state">Bomb is currently: <span class="<%= @bomb_state_class %>"><%= @bomb_state %></span></h3>
+<div class="spacer"></div>
 <p id="prompt"><%= @prompt %></p>
 <form action="/" method="post">
   <input type="text" name="code">
-  <input type="submit">
+  <br />
+  <input style="margin-top: 10px" type="submit">
 </form>
 <p id="status_msg"><%= @msg %></p>

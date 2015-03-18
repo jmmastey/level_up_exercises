@@ -1,162 +1,48 @@
-require 'csv'
+load 'dinosaur.rb'
+load 'dinosaur_data_parser.rb'
+load 'dino_catalog.rb'
 
-class Dinosaur
-  attr_reader :name
-  attr_reader :period
-  attr_reader :continent
-  attr_reader :diet
-  attr_reader :weight
-  attr_reader :walk
-  attr_reader :descrp
+files_to_read = ["dinodex.csv", "african_dinosaur_export.csv"]
+dino_catalog = DinoCatalog.new(DinosaurDataReader.new(files_to_read).dinosaurs)
+option = ARGV[0]
+criteria = ARGV.to_s
 
-  def initialize(name, period, continent, diet, weight, walk, descrp)
-    @name = name
-    @period = period
-    @continent = continent
-    @diet = diet
-    @weight = weight
-    @walk = walk
-    @descrp = descrp
-  end
+def displayUsage
+  puts "Usage:\nruby dinodex.rb <search_options>\n-w  <WALK_TYPE>\t\t\treturn all <WALK_TYPE> dinosaurs\n-d  <DIET_TYPE>\t\t\treturn all <DIET_TYPE> dinosaurs"
+  puts "-a\t\t\t\treturn dinosaur collection\n-n  <NAME>\t\t\treturn facts for this dinosaur\n"
+  puts "-b\t\t\t\treturn dinosaurs weighing more than 2 tons\n-s\t\t\t\treturn dinosaurs weighing less or equal to 2 tons\n-p  <PERIOD>\t\t\treturn dinosaurs in this <PERIOD>"
+  puts "You can also combine the criteria\nExample 1: ruby dinodex.rb -w Biped -d Carnivore -p Late\twill return all biped dinosaurs that are carnivores in 'Late' period."
+  puts "Example 2: ruby dinodex.rb -w Biped -b\twill return all biped dinosaurs who weigh more than 2 tons."
+end
 
-  def display
-    if !@name.nil?
-      puts "NAME: #{@name}\n"
-    end    
-    if !@period.nil?
-      puts "PERIOD: #{@period}\n"
-    end
-    if !@continent.nil?
-      puts "CONTINENT: #{@continent}\n"
-    end
-    if !@diet.nil?
-      puts "DIET: #{@diet}\n"
-    end
-    if !@weight.nil?
-      puts "WEIGHT: #{@weight} lbs\n"
-    end
-    if !@walk.nil?
-      puts "WALK: #{@walk}\n"
-    end
-    if !@descrp.nil?
-      puts "DESCRIPTION: #{@descrp}\n"
-    end
+def is_valid_option(criteria)
+  if criteria.include?("-w") ||
+      criteria.include?("-d") ||
+      criteria.include?("-n") ||
+      criteria.include?("-b") ||
+      criteria.include?("-s") ||
+      criteria.include?("-p") ||
+      criteria.include?("-a")
+  return true
   end
 end
 
+unless option.nil?    
+  dino_catalog = DinoCatalog.new(dino_catalog.get_walking(criteria)) if criteria.include?("-w")
+  dino_catalog = DinoCatalog.new(dino_catalog.get_diet(criteria)) if criteria.include?("-d")
+  dino_catalog = DinoCatalog.new(dino_catalog.get_specific_dinosaur(criteria)) if criteria.include?("-n")
+  dino_catalog = DinoCatalog.new(dino_catalog.get_big_dinosaurs) if criteria.include?("-b")
+  dino_catalog = DinoCatalog.new(dino_catalog.get_small_dinosaurs) if criteria.include?("-s")
+  dino_catalog = DinoCatalog.new(dino_catalog.get_period_specific_dinosaurs(criteria)) if criteria.include?("-p")
+  dino_catalog = DinoCatalog.new(dino_catalog.get_dinosaur_collection) if criteria.include?("-a")
+  puts "\n"
 
-class DinosaurCollection
-  attr_accessor :dinosaurs
-  def initialize 
-    @dinosaurs = {}
-
-    dino = CSV.new(File.read("dinodex.csv"), headers: true, :header_converters => :symbol, :converters => :all)
-    dino_hash = dino.to_a.map {|row| row.to_hash}
-    dino_hash.each do |dino|
-      @dinosaurs[dino[:name]] = Dinosaur.new(dino[:name], dino[:period], 
-                                dino[:continent], dino[:diet], 
-                                dino[:weight_in_lbs], dino[:walking], dino[:description])
-    end
-    
-    african_dino = CSV.new(File.read("african_dinosaur_export.csv"), headers: true, :header_converters => :symbol, :converters => :all)
-    african_dino_hash = african_dino.to_a.map {|row| row.to_hash}
-
-    african_dino_hash.each do |h|
-      h[:continent] = nil
-      h[:description] = nil
-    end
-    
-    african_dino_hash.each do |dino|
-      if dino[:carnivore] == "Yes"
-        dino[:carnivore] = "Carnivore"
-      else
-        dino[:carnivore] = nil  
-      end
-        @dinosaurs[dino[:genus]] = Dinosaur.new(dino[:genus], dino[:period], 
-                                  dino[:continent], dino[:carnivore], 
-                                  dino[:weight], dino[:walking],dino[:description])
-    end
+  if is_valid_option(criteria)
+    dino_catalog.print_filtered_catalog
+  else
+    displayUsage
   end
+else
+  displayUsage
 end
 
-class Finder
-  def initialize
-    @dinoCol = DinosaurCollection.new
-    search
-  end
-
-  def getBipeds
-    @dinoCol.dinosaurs = @dinoCol.dinosaurs.select { |k, v| v.walk == "Biped" }
-  end
-
-  def getCarnivores
-    @dinoCol.dinosaurs = @dinoCol.dinosaurs.select { |k, v| v.diet == "Carnivore" }
-  end
-
-  def getSpecificDinosaur(param)
-    @dinoCol.dinosaurs = @dinoCol.dinosaurs.select { |k, v| k == param }
-    if @dinoCol.dinosaurs.empty?
-      puts "No records found matching your criteria for #{param}"
-    end 
-  end
- 
-  def getBigDinosaurs(param)
-    @dinoCol.dinosaurs = @dinoCol.dinosaurs.select { |k, v| v.weight.to_i > param.to_i * 2000 }
-    if @dinoCol.dinosaurs.empty?
-      puts "No records found matching your criteria for #{param}"
-    end
-  end
-
-  def getSmallDinosaurs(param)
-    @dinoCol.dinosaurs = @dinoCol.dinosaurs.select { |k, v| v.weight.to_i <= param.to_i * 2000 }
-    if @dinoCol.dinosaurs.empty?
-      puts "No records found matching your criteria for #{param}"
-    end
-  end
-  
-  def getPeriodSpecificDinosaurs(param)
-    @dinoCol.dinosaurs = @dinoCol.dinosaurs.select { |k, v| v.period =~ /#{param}/ }
-    if @dinoCol.dinosaurs.empty?
-      puts "No records found matching your criteria for #{param}"
-    end
-  end
-  
-  def getDinosaurCollection
-  end
-  
-  def displayUsage
-    puts "Usage:\nruby dinodex.rb <search_options>\n-b\t\t\t\treturn all biped dinosaurs\n-c\t\t\t\treturn all carnivore dinosaurs"
-    puts "-a\t\t\t\treturn dinosaur collection\n-n  <NAME>\t\t\treturn facts for this dinosaur\n"
-    puts "-wg <WEIGHT IN TONS>\t\treturn dinosaurs weighing more than <WEIGHT IN TONS>\n-wl <WEIGHT IN TONS>\t\treturn dinosaurs weighing less or equal to <WEIGHT IN TONS                >\n-p  <PERIOD>\t\t\treturn dinosaurs in this <PERIOD>"
-    puts "You can also combine the criteria\nExample 1: ruby dinodex.rb -bcp Late\twill return all biped dinosaurs that are carnivores in 'Late' period."
-    puts "Example 2: ruby dinodex.rb -bwg 2\twill return all biped dinosaurs who weigh more than 2 tons."
-
-  end
- 
-  def displayDinosaurData
-    @dinoCol.dinosaurs.each do |k, v|
-      v.display
-      puts "\n"
-    end
-  end  
-  
-  def search
-    option = ARGV[0]
-    param = ARGV[1]
-    
-    if !option.nil?    
-      getBipeds if option =~ /b/
-      getCarnivores if option =~ /c/
-      getSpecificDinosaur(param) if option =~ /n/
-      getBigDinosaurs(param) if option =~ /wg/
-      getSmallDinosaurs(param) if option =~ /wl/
-      getPeriodSpecificDinosaurs(param) if option =~ /p/
-      getDinosaurCollection if option =~ /a/
-      puts "\n"
-      displayDinosaurData
-    else
-      displayUsage
-    end   
-   end
-end
-obj = Finder.new

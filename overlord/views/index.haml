@@ -10,18 +10,10 @@
     .bomb
       - if bomb
         - if bomb.is_detonated?
-          ur ded 8(((
-
-          = haml :new_bomb
+          = haml :_bomb_detonated
         - elsif bomb.is_active?
-          bomb active 8)
-
-          = haml :existing_bomb
+          = haml :_bomb_active
         - else
-          bomb inactive 8(
-
-          = haml :existing_bomb
+          = haml :_bomb_inactive
       - else
-        = haml :new_bomb
-
-      = haml :bomb_keypad
+        = haml :_bomb_new

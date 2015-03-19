@@ -7,20 +7,20 @@ class Bomb
     @detonated = false
     @deactivation_attempts = 0
 
-    @activation_code = is_correct_format?(activation_code) ? activation_code : '1234'
-    @deactivation_code = is_correct_format?(deactivation_code) ? deactivation_code : '0000'
+    @activation_code = correct_format?(activation_code) ? activation_code : '1234'
+    @deactivation_code = correct_format?(deactivation_code) ? deactivation_code : '0000'
   end
 
-  def is_active?
-    return @active
+  def active?
+    @active
   end
 
-  def is_detonated?
-    return @detonated
+  def detonated?
+    @detonated
   end
 
   def activate(code)
-    return false if is_active?
+    return false if active?
 
     if code == @activation_code
       @active = true
@@ -32,7 +32,7 @@ class Bomb
   end
 
   def deactivate(code)
-    return false if !(is_active?)
+    return false if !(active?)
 
     if code == @deactivation_code
       @active = false
@@ -49,7 +49,7 @@ class Bomb
     end
   end
 
-  def is_correct_format?(code)
+  def correct_format?(code)
     (code !~ /\D/) && (code.length > 3)
   end
 end

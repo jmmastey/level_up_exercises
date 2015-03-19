@@ -12,11 +12,11 @@ describe Bomb do
 
   context 'when initializing' do
     it 'is not active' do
-      expect(Bomb.new.is_active?).to eql(false)
+      expect(Bomb.new.active?).to eql(false)
     end
 
     it 'is not detonated' do
-      expect(Bomb.new.is_detonated?).to eql(false)
+      expect(Bomb.new.detonated?).to eql(false)
     end
 
     it 'has no activation attempts' do
@@ -53,29 +53,29 @@ describe Bomb do
     it 'activates when activation code is entered' do
       activation = bomb.activate(correct_activation_code)
       expect(activation).to eql(true)
-      expect(bomb.is_active?).to eql(true)
+      expect(bomb.active?).to eql(true)
     end
 
     it 'does nothing when activation code is entered again' do
       bomb.activate(correct_activation_code)
       activation = bomb.activate(correct_activation_code)
       expect(activation).to eql(false)
-      expect(bomb.is_active?).to eql(true)
+      expect(bomb.active?).to eql(true)
     end
 
     it 'does nothing when wrong activation code is entered' do
       activation = bomb.activate(incorrect_activation_code)
       expect(activation).to eql(false)
-      expect(bomb.is_active?).to eql(false)
+      expect(bomb.active?).to eql(false)
     end
 
     it 'deactivates when deactivation code is entered' do
       bomb.activate(correct_activation_code)
-      expect(bomb.is_active?).to eql(true)
+      expect(bomb.active?).to eql(true)
 
       deactivation = bomb.deactivate(correct_deactivation_code)
       expect(deactivation).to eql(true)
-      expect(bomb.is_active?).to eql(false)
+      expect(bomb.active?).to eql(false)
     end
 
     it 'does nothing when deactivation code is entered if bomb not active' do
@@ -90,22 +90,22 @@ describe Bomb do
 
     it 'explodes when deactivation code is entered incorrectly 3 times' do
       bomb.activate(correct_activation_code)
-      expect(bomb.is_active?).to eql(true)
+      expect(bomb.active?).to eql(true)
 
       deactivation = bomb.deactivate(incorrect_deactivation_code)
       expect(deactivation).to eql(false)
       expect(bomb.deactivation_attempts).to eql(1)
-      expect(bomb.is_detonated?).to eql(false)
+      expect(bomb.detonated?).to eql(false)
 
       deactivation = bomb.deactivate(incorrect_deactivation_code)
       expect(deactivation).to eql(false)
       expect(bomb.deactivation_attempts).to eql(2)
-      expect(bomb.is_detonated?).to eql(false)
+      expect(bomb.detonated?).to eql(false)
 
       deactivation = bomb.deactivate(incorrect_deactivation_code)
       expect(deactivation).to eql(false)
-      expect(bomb.is_detonated?).to eql(true)
-      expect(bomb.is_active?).to eql(false)
+      expect(bomb.detonated?).to eql(true)
+      expect(bomb.active?).to eql(false)
     end
   end
 

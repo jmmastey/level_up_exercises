@@ -7,7 +7,7 @@ enable :sessions
 $bomb ||= nil
 
 get '/' do
-  haml :index, locals: {bomb: $bomb}
+  haml :index, locals: { bomb: $bomb }
 end
 
 post '/initialize' do

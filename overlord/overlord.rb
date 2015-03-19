@@ -1,31 +1,31 @@
-# run `ruby overlord.rb` to run a webserver for this app
-
 require 'sinatra/base'
 require_relative 'bomb'
 
 class Overlord < Sinatra::Base
   set :sessions, true
 
+  STATES = { :inactive => "INACTIVE", :armed => "ARMED",
+             :exploded => "EXPLODED" }
+
   get '/' do
     redirect to('/configure') unless session[:bomb]
 
     bomb = session[:bomb]
-    read_bomb_state(bomb)
-    redirect to('/boom') if @bomb_state == "EXPLODED"
+    redirect to('/boom') if bomb.exploded?
 
-    set_index_page_vars
-    erb :index
+    set_home_page_vars
+    erb :home_page
   end
 
   post '/' do
     bomb = session[:bomb]
-    process_code(bomb, params[:code])
+    success = process_code(bomb, params[:code])
+    set_error_message if bomb.armed? && !success
 
-    read_bomb_state(bomb)
-    redirect to('/boom') if @bomb_state == "EXPLODED"
+    redirect to('/boom') if bomb.exploded?
 
-    set_index_page_vars
-    erb :index
+    set_home_page_vars
+    erb :home_page
   end
 
   get '/configure' do
@@ -73,32 +73,40 @@ class Overlord < Sinatra::Base
     Bomb.code_valid?(arm_code) && Bomb.code_valid?(disarm_code)
   end
 
-  def read_bomb_state(bomb)
+  def set_home_page_vars
     bomb = session[:bomb]
     @bomb_state = bomb.state
-  end
-
-  def set_index_page_vars
     @bomb_state_class = @bomb_state.downcase
     @prompt = generate_prompt
   end
 
   def generate_prompt
-    prompt = ""
-    if @bomb_state == "INACTIVE"
+    bomb = session[:bomb]
+    if bomb.inactive?
       prompt = "Enter activation code to arm bomb:"
-    elsif @bomb_state == "ARMED"
+    elsif bomb.armed?
       prompt = "Enter deactivation code to disarm bomb:"
     end
-    prompt
+    prompt || ""
   end
 
   def process_code(bomb, code)
-    return if code.strip == ""
+    return true if code.strip == ""
 
-    state = bomb.state
-    bomb.arm(code) if state == "INACTIVE"
-    bomb.disarm(code) if state == "ARMED" && code != bomb.arm_code
+    success = false
+    success = bomb.arm(code) if bomb.inactive?
+    success = bomb.disarm(code) if bomb.armed? && code != bomb.arm_code
+    success
+  end
+
+  def set_error_message
+    bomb = session[:bomb]
+    @error_msg = "Incorrect code. "
+    if bomb.disarm_retries == 1
+      @error_msg += "You have 1 try remaining."
+    else
+      @error_msg += "You have #{bomb.disarm_retries} tries remaining."
+    end
   end
 
   run! if app_file == $PROGRAM_NAME

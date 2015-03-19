@@ -1,7 +1,7 @@
 class InvalidCodeError < ArgumentError; end
 
 class Bomb
-  attr_reader :arm_code, :state
+  attr_reader :arm_code, :disarm_retries, :state
 
   ARM_CODE_DFLT = "1234"
   DISARM_CODE_DFLT = "0000"
@@ -36,7 +36,7 @@ class Bomb
   end
 
   def disarm(code)
-    return false unless state == STATES[:armed]
+    return false unless armed?
 
     if disarm_code_match?(code)
       disarm_code_success
@@ -48,9 +48,21 @@ class Bomb
   end
 
   def arm(code)
-    return false unless state == STATES[:inactive]
+    return false unless inactive?
     @state = STATES[:armed] if arm_code_match?(code)
     true
+  end
+
+  def inactive?
+    state == STATES[:inactive]
+  end
+
+  def armed?
+    state == STATES[:armed]
+  end
+
+  def exploded?
+    state == STATES[:exploded]
   end
 
   private

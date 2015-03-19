@@ -7,13 +7,13 @@ class Overlord < Sinatra::Base
   set :sessions, true
 
   get '/' do
-    session[:bomb] ||= Bomb.new
-    bomb = session[:bomb]
+    redirect to('/configure') unless session[:bomb]
 
+    bomb = session[:bomb]
     read_bomb_state(bomb)
     redirect to('/boom') if @bomb_state == "EXPLODED"
 
-    generate_index_page_vars
+    set_index_page_vars
     erb :index
   end
 
@@ -24,12 +24,53 @@ class Overlord < Sinatra::Base
     read_bomb_state(bomb)
     redirect to('/boom') if @bomb_state == "EXPLODED"
 
-    generate_index_page_vars
+    set_index_page_vars
     erb :index
+  end
+
+  get '/configure' do
+    redirect to('/') if session[:bomb]
+    set_configure_page_vars
+    erb :configure
+  end
+
+  post '/configure' do
+    arm_code = fetch_arm_code
+    disarm_code = fetch_disarm_code
+
+    if codes_valid?(arm_code, disarm_code)
+      session[:bomb] = Bomb.new(arm_code, disarm_code)
+      redirect to('/')
+    end
+
+    @error_msg = "You entered an invalid code"
+    set_configure_page_vars
+    erb :configure
   end
 
   get '/boom' do
     erb :boom
+  end
+
+  def fetch_arm_code
+    arm_code = params[:arm_code].strip
+    arm_code = Bomb.arm_code_default if arm_code == ""
+    arm_code
+  end
+
+  def fetch_disarm_code
+    disarm_code = params[:disarm_code].strip
+    disarm_code = Bomb.disarm_code_default if disarm_code == ""
+    disarm_code
+  end
+
+  def set_configure_page_vars
+    @arm_code_default = Bomb.arm_code_default
+    @disarm_code_default = Bomb.disarm_code_default
+  end
+
+  def codes_valid?(arm_code, disarm_code)
+    Bomb.code_valid?(arm_code) && Bomb.code_valid?(disarm_code)
   end
 
   def read_bomb_state(bomb)
@@ -37,7 +78,7 @@ class Overlord < Sinatra::Base
     @bomb_state = bomb.state
   end
 
-  def generate_index_page_vars
+  def set_index_page_vars
     @bomb_state_class = @bomb_state.downcase
     @prompt = generate_prompt
   end

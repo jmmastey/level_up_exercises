@@ -1,11 +1,10 @@
 class InvalidCodeError < ArgumentError; end
-class LockedCodeError < StandardError; end
 
 class Bomb
   attr_reader :arm_code, :state
 
-  ARM_CODE_DEFAULT = "1234"
-  DISARM_CODE_DEFAULT = "0000"
+  ARM_CODE_DFLT = "1234"
+  DISARM_CODE_DFLT = "0000"
   DISARM_RETRIES_MAX = 3
   STATES = {
     :inactive => "INACTIVE",
@@ -13,31 +12,27 @@ class Bomb
     :exploded => "EXPLODED",
   }
 
-  def initialize
-    @arm_code = ARM_CODE_DEFAULT
-    @disarm_code = DISARM_CODE_DEFAULT
-    @state = STATES[:inactive]
-    @disarm_retries = DISARM_RETRIES_MAX
-
-    unless valid_code?(@arm_code) && valid_code?(@disarm_code)
+  def initialize(arm_code = ARM_CODE_DFLT, disarm_code = DISARM_CODE_DFLT)
+    unless Bomb.code_valid?(arm_code) && Bomb.code_valid?(disarm_code)
       raise InvalidCodeError
     end
+
+    @arm_code = arm_code
+    @disarm_code = disarm_code
+    @state = STATES[:inactive]
+    @disarm_retries = DISARM_RETRIES_MAX
   end
 
-  def valid_code?(code)
+  def self.code_valid?(code)
     code.match(/[^0-9]/) ? false : true
   end
 
-  def arm_code=(code)
-    raise LockedCodeError unless state == STATES[:inactive]
-    raise InvalidCodeError unless valid_code?(code)
-    @arm_code = code
+  def self.arm_code_default
+    ARM_CODE_DFLT
   end
 
-  def disarm_code=(code)
-    raise LockedCodeError unless state == STATES[:inactive]
-    raise InvalidCodeError unless valid_code?(code)
-    @disarm_code = code
+  def self.disarm_code_default
+    DISARM_CODE_DFLT
   end
 
   def disarm(code)

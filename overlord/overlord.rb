@@ -4,9 +4,6 @@ require_relative 'bomb'
 class Overlord < Sinatra::Base
   set :sessions, true
 
-  STATES = { :inactive => "INACTIVE", :armed => "ARMED",
-             :exploded => "EXPLODED" }
-
   get '/' do
     redirect to('/configure') unless session[:bomb]
 
@@ -18,8 +15,8 @@ class Overlord < Sinatra::Base
   end
 
   post '/' do
+    success = process_code(params[:code])
     bomb = session[:bomb]
-    success = process_code(bomb, params[:code])
     set_error_message if bomb.armed? && !success
 
     redirect to('/boom') if bomb.exploded?
@@ -90,13 +87,14 @@ class Overlord < Sinatra::Base
     prompt || ""
   end
 
-  def process_code(bomb, code)
-    return true if code.strip == ""
-
-    success = false
-    success = bomb.arm(code) if bomb.inactive?
-    success = bomb.disarm(code) if bomb.armed? && code != bomb.arm_code
-    success
+  def process_code(code)
+    bomb = session[:bomb]
+    # ignore empty codes
+    # ignore the correct activation code after the bomb is armed
+    return true if code.strip == "" || (bomb.armed? && code == bomb.arm_code)
+    return bomb.arm(code) if bomb.inactive?
+    return bomb.disarm(code) if bomb.armed?
+    false
   end
 
   def set_error_message

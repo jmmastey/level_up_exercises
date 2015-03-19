@@ -1,0 +1,14 @@
+How to run dinodex
+
+Usage:
+ruby dinodex.rb <search_options>
+-b        return all biped dinosaurs
+-c        return all carnivore dinosaurs
+-a        return dinosaur collection
+-n  <NAME>      return facts for this dinosaur
+-wg <WEIGHT IN TONS>    return dinosaurs weighing more than <WEIGHT IN TONS>
+-wl <WEIGHT IN TONS>    return dinosaurs weighing less or equal to <WEIGHT IN TONS                >
+-p  <PERIOD>      return dinosaurs in this <PERIOD>
+You can also combine the criteria
+Example 1: ruby dinodex.rb -bcp Late  will return all biped dinosaurs that are carnivores in 'Late' period.
+Example 2: ruby dinodex.rb -bwg 2 will return all biped dinosaurs who weigh more than 2 tons.

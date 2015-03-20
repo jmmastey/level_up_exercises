@@ -38,8 +38,7 @@ class BlagPost
   private
 
   def byline
-    return "" if author.nil?
-    "By #{author.name}, at #{author.url}"
+    author.try { |a| "By #{author.name}, at #{author.url}" } || ""
   end
 
   def category_list
@@ -96,7 +95,8 @@ class BlagPost
 
 end
 
-blag = BlagPost.new("author"        => "Foo Bar",
+blag = BlagPost.new(
+  # "author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
                     "comments"      => [ [], [], [] ], # because comments are meaningless, get it?

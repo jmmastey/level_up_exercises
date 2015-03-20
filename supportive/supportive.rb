@@ -7,6 +7,7 @@ class BlagPost
 
   Author = Struct.new(:name, :url)
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
+  ABSTRACT_LIMIT = 204
 
   def initialize(args)
     args.symbolize_keys!
@@ -70,13 +71,9 @@ class BlagPost
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    # 204 here returns the same as [0..200]
+    body.truncate(ABSTRACT_LIMIT) + "..."
   end
-
 end
 
 blag = BlagPost.new(

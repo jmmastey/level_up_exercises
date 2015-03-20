@@ -43,10 +43,6 @@ class BlagPost
     categories_label + ": " + categories_title + categories_suffix
   end
 
-  def categories_title
-    categories.map { |cat| String(cat).titleize }.join(", ")
-  end
-
   def categories_label
     if categories.length == 1
       "Category"
@@ -55,22 +51,18 @@ class BlagPost
     end
   end
 
+  def categories_title
+    categories.map { |cat| String(cat).titleize }.join(", ")
+  end
+
   def categories_suffix
     return "" unless categories.length > 1
     " and #{String(categories.pop).titleize}"
   end
 
   def commenters
-    return '' unless comments_allowed?
-    return '' unless comments.length > 0
-
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    return '' unless comments_allowed? && comments.length > 0
+    "You will be the #{comments.length.ordinalize} commenter"
   end
 
   def comments_allowed?

@@ -17,9 +17,10 @@ class BlagPost
     end
 
     if args[:categories]
-      @categories = args[:categories].reject do |category|
-        DISALLOWED_CATEGORIES.include? category
-      end
+      @categories = args[:categories] - DISALLOWED_CATEGORIES
+      # reject do |category|
+      #   DISALLOWED_CATEGORIES.include? category
+      # end
     else
       @categories = []
     end
@@ -41,7 +42,7 @@ class BlagPost
 
   def category_list
     return "" if categories.empty?
-    categories_label + ": " + categories_title + categories_suffix
+    categories_label + ": " + categories_title
   end
 
   def categories_label
@@ -53,12 +54,7 @@ class BlagPost
   end
 
   def categories_title
-    categories.map { |cat| String(cat).titleize }.join(", ")
-  end
-
-  def categories_suffix
-    return "" unless categories.length > 1
-    " and #{String(categories.pop).titleize}"
+    categories.map { |cat| String(cat).titleize }.to_sentence
   end
 
   def commenters

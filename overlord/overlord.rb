@@ -21,6 +21,8 @@ get '/' do
 end
 
 post '/initialize' do
+  return if $bomb
+
   activation_code = params['activation_code']
   deactivation_code = params['deactivation_code']
 

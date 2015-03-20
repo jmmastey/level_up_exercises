@@ -7,7 +7,17 @@ enable :sessions
 $bomb ||= nil
 
 get '/' do
-  haml :index, locals: { bomb: $bomb }
+  if $bomb
+    if $bomb.detonated?
+      haml :index, locals: { bomb_view: :_bomb_detonated }
+    elsif $bomb.active?
+      haml :index, locals: { bomb_view: :_bomb_active }
+    else
+      haml :index, locals: { bomb_view: :_bomb_inactive }
+    end
+  else
+    haml :index, locals: { bomb_view: :_bomb_new }
+  end
 end
 
 post '/initialize' do

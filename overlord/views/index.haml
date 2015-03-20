@@ -8,12 +8,4 @@
 
   %body
     .bomb
-      - if bomb
-        - if bomb.is_detonated?
-          = haml :_bomb_detonated
-        - elsif bomb.is_active?
-          = haml :_bomb_active
-        - else
-          = haml :_bomb_inactive
-      - else
-        = haml :_bomb_new
+      = haml bomb_view

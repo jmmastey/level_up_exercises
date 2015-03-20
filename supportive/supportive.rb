@@ -38,11 +38,8 @@ class BlagPost
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    return "" if author.nil?
+    "By #{author.name}, at #{author.url}"
   end
 
   def category_list

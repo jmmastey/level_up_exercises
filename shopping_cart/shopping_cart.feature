@@ -69,7 +69,7 @@ Feature: Website shopping cart
   Scenario: Preserve anonymous cart contents after login
     Given I am not logged in
     And I have added item X to my cart
-    When I login with a valid username and password
+    When I login to my account
     Then I should see item X in my cart
     And The quantity field should contain 1
 
@@ -105,17 +105,24 @@ Feature: Website shopping cart
     And I should see an error message
 
 # Bad path tests
-  Scenario: Invalid quantity
+  Scenario: Negative quantity
     Given I am logged in to my account
     And I have added item X to my cart
-    When I enter an invalid value in the quantity field
+    When I enter an negative value in the quantity field
+    And I click the "Update" button
+    Then I should see an error message
+
+  Scenario: Too large quantity
+    Given I am logged in to my account
+    And I have added item X to my cart
+    When I enter 1000000 in the quantity field
     And I click the "Update" button
     Then I should see an error message
 
   Scenario: Apply non-existent coupon to cart
     Given I am logged in to my account
     And I have added item X to my cart
-    When I submit a non-existant coupon code
+    When I submit a non-existent coupon code
     Then I should see an error message
 
   Scenario: Apply expired coupon to cart
@@ -124,9 +131,23 @@ Feature: Website shopping cart
     When I submit an expired coupon code
     Then I should see an error message
 
-  Scenario: Invalid address in shipping estimate
+  Scenario: Invalid city in shipping estimate
     Given I am logged in to my account
     And I have added item X to my cart
-    When I enter invalid address information
+    When I enter a non-existent city
+    And I click "Shipping estimate"
+    Then I should see an error message
+
+  Scenario: Invalid state in shipping estimate
+    Given I am logged in to my account
+    And I have added item X to my cart
+    When I enter a non-existent state
+    And I click "Shipping estimate"
+    Then I should see an error message
+
+  Scenario: Invalid zip code in shipping estimate
+    Given I am logged in to my account
+    And I have added item X to my cart
+    When I enter a non-existent zip code
     And I click "Shipping estimate"
     Then I should see an error message

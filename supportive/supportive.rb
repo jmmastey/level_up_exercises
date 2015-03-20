@@ -22,7 +22,7 @@ class BlagPost
     else
       @categories = []
     end
-
+    
     @comments = args[:comments] || []
     @body = args[:body].squish
     @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
@@ -40,29 +40,24 @@ class BlagPost
 
   def category_list
     return "" if categories.empty?
-
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
+    categories_label + ": " + categories_title + categories_suffix
   end
 
-  def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
+  def categories_title
+    categories.map { |cat| String(cat).titleize }.join(", ")
+  end
 
-    words.map!(&:capitalize)
-    words.join(' ')
+  def categories_label
+    if categories.length == 1
+      "Category"
+    else
+      "Categories"
+    end
+  end
+
+  def categories_suffix
+    return "" unless categories.length > 1
+    " and #{String(categories.pop).titleize}"
   end
 
   def commenters

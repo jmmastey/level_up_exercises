@@ -9,12 +9,9 @@ class BlagPost
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
   def initialize(args)
-    args = args.inject({}) do |hash, (key, value)|
-      hash[key.to_sym] = value
-      hash
-    end
+    args.symbolize_keys!
 
-    if args[:author] != '' && args[:author_url] != ''
+    if args[:author].present? && args[:author_url].present?
       @author = Author.new(args[:author], args[:author_url])
     end
 
@@ -96,7 +93,7 @@ class BlagPost
 end
 
 blag = BlagPost.new(
-  # "author"        => "Foo Bar",
+  "author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
                     "comments"      => [ [], [], [] ], # because comments are meaningless, get it?

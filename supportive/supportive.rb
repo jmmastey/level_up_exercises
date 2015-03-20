@@ -16,11 +16,8 @@ class BlagPost
       @author = Author.new(args[:author], args[:author_url])
     end
 
-    if args[:categories]
+    if args[:categories].present?
       @categories = args[:categories] - DISALLOWED_CATEGORIES
-      # reject do |category|
-      #   DISALLOWED_CATEGORIES.include? category
-      # end
     else
       @categories = []
     end
@@ -46,11 +43,7 @@ class BlagPost
   end
 
   def categories_label
-    if categories.length == 1
-      "Category"
-    else
-      "Categories"
-    end
+    "Category".pluralize(categories.length)
   end
 
   def categories_title

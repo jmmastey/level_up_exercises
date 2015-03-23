@@ -4,7 +4,7 @@ def submit
 end
 
 def content_check(text)
-   expect(page).to have_content(text)
+  expect(page).to have_content(text)
 end
 
 Given(/^I am on the home page$/) do
@@ -35,10 +35,10 @@ Then(/^My bomb is activated and I have '(\d+)' attempts to disarm$/) do |count|
   expect(page).to have_content("You have #{count} attempts")
 end
 
-When(/^I enter '(\d+)' as my deactivation code '(\d+)' times$/) do |de_act, times|
+When(/^I enter '(\d+)' as my deact code '(\d+)' times$/) do |de_act, times|
   1.upto(times.to_i) do
-     fill_in 'de_code_in', with: de_act
-     submit
+    fill_in 'de_code_in', with: de_act
+    submit
   end
 end
 

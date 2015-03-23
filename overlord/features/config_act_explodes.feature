@@ -7,8 +7,7 @@ Scenario: Mastermind Lands on the main page and uses the default codes
   Then I land on the Activate page
   When I enter '1234' to activate the bomb
   Then My bomb is activated and I have '3' attempts to disarm
-
-  When I enter '0001' as my deactivation code '3' times
+  When I enter '0001' as my deact code '3' times
   Then My bomb goes off and everyone dies
 
 Scenario: Mastermind Lands on the main page and uses the custom codes
@@ -17,14 +16,5 @@ Scenario: Mastermind Lands on the main page and uses the custom codes
   Then I land on the Activate page
   When I enter '6789' to activate the bomb
   Then My bomb is activated and I have '3' attempts to disarm
-  When I enter '0001' as my deactivation code '3' times
-
-
-  #When I enter '0001' as my deactivation code
-  #Then My bomb is activated and I have '2' attempts to disarm
-
-  #When I enter '0001' as my deactivation code
-  #Then My bomb is activated and I have '1' attempts to disarm
-
-  #When I enter '0001' as my deactivation code
+  When I enter '0001' as my deact code '3' times
   Then My bomb goes off and everyone dies

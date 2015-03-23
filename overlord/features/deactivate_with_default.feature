@@ -9,17 +9,17 @@ Background:
   Then My bomb is activated and I have '3' attempts to disarm
 
 Scenario: Mastermind Lands on the main page and uses the default codes deactivates 1st time
-  When I enter '0000' as my deactivation code '1' times
+  When I enter '0000' as my deact code '1' times
   Then The bomb is deactivated and I can config a new one
 
 Scenario: Mastermind Lands on the main page and uses the default codes deactivates 2nd time
-  When I enter '0001' as my deactivation code '1' times
+  When I enter '0001' as my deact code '1' times
   Then My bomb is activated and I have '2' attempts to disarm
-  When I enter '0000' as my deactivation code '1' times
+  When I enter '0000' as my deact code '1' times
   Then The bomb is deactivated and I can config a new one
 
 Scenario: Mastermind Lands on the main page and uses the default codes deactivates 3rd time
-  When I enter '0001' as my deactivation code '2' times
+  When I enter '0001' as my deact code '2' times
   Then My bomb is activated and I have '1' attempts to disarm
-  When I enter '0000' as my deactivation code '1' times
+  When I enter '0000' as my deact code '1' times
   Then The bomb is deactivated and I can config a new one

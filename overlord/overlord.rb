@@ -25,7 +25,6 @@ get '/activate' do
 end
 
 post '/activate' do
-  @user_submit = params[:user_submit]
   bomb_status = session[:bomb].activate(params[:user_submit])
   redirect back if bomb_status.eql?('inactive')
   redirect "/deactivate" if bomb_status.eql?('active')

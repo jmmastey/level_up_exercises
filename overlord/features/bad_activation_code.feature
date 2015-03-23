@@ -8,20 +8,10 @@ and puts the wrong activation code in
   Then I land on the Activate page
   When I enter '1235' to activate the bomb
   Then the bomb status is 'inactive'
-  When I enter '1234' to activate the bomb
-  Then the bomb status is 'active'
 
 Scenario: Mastermind Lands on the main page and enters values for the codes and puts the wrong activation code in
   Given I am on the home page
-  When I enter '6789' and '9876' into the bomb
+  When I use '6789' as a act code, '9876' as a deact code
   Then I land on the Activate page
   When I enter '1235' to activate the bomb
   Then the bomb status is 'inactive'
-  When I enter '9876' to activate the bomb
-  Then the bomb status is 'active'
-
-
-
-
-
-

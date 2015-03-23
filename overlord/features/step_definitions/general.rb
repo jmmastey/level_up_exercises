@@ -1,47 +1,58 @@
+
+def submit
+  find("input[value='Submit']").click
+end
+
+def content_check(text)
+   expect(page).to have_content(text)
+end
+
 Given(/^I am on the home page$/) do
   visit '/config'
 end
 
-When (/^I enter '(\d+)' and '(\d+)' into the bomb$/) do |act_code, deact_code|
-  fill_in 'act', with: act_code
-  fill_in 'deact', with: deact_code
-  find(:xpath, "//input[@value='Submit']").click
+When(/^I use '(\d+)' as a act code, '(\d+)' as a deact code$/) do |act, deact|
+  fill_in 'act', with: act
+  fill_in 'deact', with: deact
+  submit
 end
 
 When(/^I use the default codes$/) do
-  find(:xpath, "//input[@value='Submit']").click
+  submit
 end
 
 Then 'I land on the Activate page' do
   find(:xpath, "//td[contains(text(),'Activation Code')]")
-  expect(page).to have_content('The Bomb is inactive')
+  content_check('The Bomb is inactive')
 end
 
 When(/^I enter '(\d+)' to activate the bomb$/) do |act_code|
   fill_in 'activation', with: act_code
-  find(:xpath, "//input[@value='Submit']").click
+  submit
 end
 
-Then(/^My bomb is activiated and I have '(\d+)' attempts to disarm$/) do |count|
+Then(/^My bomb is activated and I have '(\d+)' attempts to disarm$/) do |count|
   expect(page).to have_content("You have #{count} attempts")
 end
 
-When(/^I enter '(\d+)' as my deactivation code$/) do |de_act|
-  fill_in 'de_code_in', with: de_act
-  find(:xpath, "//input[@value='Submit']").click
+When(/^I enter '(\d+)' as my deactivation code '(\d+)' times$/) do |de_act, times|
+  1.upto(times.to_i) do
+     fill_in 'de_code_in', with: de_act
+     submit
+  end
 end
 
-Then(/^I the bomb is deactivated and I can config a new one$/) do
-  expect(page).to have_content("Configure a bomb ")
+Then(/^The bomb is deactivated and I can config a new one$/) do
+  content_check("Configure a bomb ")
 end
 
 Then(/^My bomb goes off and everyone dies$/) do
-  expect(page).to have_content("KABOOM!")
+  content_check("KABOOM!")
 end
 
 When(/^I enter no code in the '([^"]*)' box$/) do |box|
   fill_in box, with: ''
-  find(:xpath, "//input[@value='Submit']").click
+  submit
 end
 
 Then(/^I see the alert box and I accept the alert$/) do
@@ -52,10 +63,10 @@ When(/^I enter '(.*?)' in the '(.*?)' box$/) do |code, box|
   fill_in box, with: code
 end
 
-Then(/^I have '(.*?)' in the '(.*?)' box$/) do | _code, box|
-  expect(page).to have_content(box)
+Then(/^I have '(.*?)' in the '(.*?)' box$/) do |_code, box|
+  content_check(box)
 end
 
 Then(/^the bomb status is '([^"]*)'$/) do |status|
-  expect(page).to have_content(status)
+  content_check(status)
 end

@@ -9,23 +9,23 @@ class Bomb
     @attempts = 0
   end
 
-  def activate(act_user)
-    if @activate_code.eql?(act_user) && @status.eql?('inactive')
+  def activate(user_inputted_code)
+    if @activate_code.eql?(user_inputted_code) && @status.eql?('inactive')
       @status = 'active'
     else
       @status
     end
   end
 
-  def deactivate(dact_user)
+  def deactivate(user_inputted_code)
     @attempts += 1
-    explode if @attempts >=  3
-    @status = 'inactive' if @deactivate_code.eql?(dact_user)
+    explode if @attempts ==  3
+    @status = 'inactive' if @deactivate_code.eql?(user_inputted_code)
   end
 
   def explode
     return @status unless @status.eql?('active')
-    @status, @activate_code, @deactivate_code = 'explode', 'explode', 'explode'
+    @status = 'explode'
   end
 
   def valid_code?(pin)
@@ -33,8 +33,7 @@ class Bomb
   end
 
   def check_code?(pin)
-    return pin if valid_code?(pin) == true
-    return 'invalid' if valid_code?(pin) == false
+    return pin if valid_code?(pin)
   end
 
   def to_s

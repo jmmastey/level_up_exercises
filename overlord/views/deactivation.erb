@@ -16,8 +16,8 @@ function validate()
 
 
 <form action="/deactivate" method="post" name='deactivate' onsubmit="return(validate());">
-   The Bomb is <%= session[:status] %> <p>
-   You have <%= 3 - session[:attempts] %> attempts to deactivate the bomb.
+   The Bomb is <%= session[:bomb].status %> <p>
+   You have <%= 3 - session[:bomb].attempts %> attempts to deactivate the bomb.
   <table style="width:25%">
 
   <tr>

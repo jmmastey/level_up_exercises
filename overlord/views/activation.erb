@@ -15,7 +15,7 @@ function validate()
 </script>
 
 <form action="/activate" method="post" name='activate' onsubmit="return(validate());">
-   The Bomb is <%= session[:status] %>
+   The Bomb is <%= session[:bomb].status %>
   <table style="width:25%">
 
   <tr>

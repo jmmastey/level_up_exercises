@@ -14,9 +14,9 @@ end
 
 def generate_rating_records count=100
   count.times do
-    insert_record "rating", {
-      person_id: (get_record_id "person"),
-      beer_id: (get_record_id "beer"),
+    insert_record "ratings", {
+      person_id: (get_record_id "persons"),
+      beer_id: (get_record_id "beers"),
       look: Faker::Number.digit,
       smell: Faker::Number.digit,
       taste: Faker::Number.digit,
@@ -24,28 +24,28 @@ def generate_rating_records count=100
       overall: Faker::Number.digit,
       description: Faker::Lorem.sentence(3),
       created_at: Faker::Date.between("2014-01-01", Date.today),
-      updated_by: (get_record_id "person")
+      updated_by: (get_record_id "persons")
     }
   end
 end
 
 def generate_beer_records count=100
   count.times do
-    insert_record "beer", {
-      brewery_id: (get_record_id "brewery"),
+    insert_record "beers", {
+      brewery_id: (get_record_id "breweries"),
       name: Faker::Company.name.gsub("'"){""},
       style: Faker::Hacker.noun,
       description: Faker::Lorem.sentence(3),
       brewing_year: Faker::Date.between("2000-01-01", Date.today).year,
       created_at: Faker::Date.between("2014-01-01", Date.today),
-      updated_by: (get_record_id "person")
+      updated_by: (get_record_id "persons")
     }
   end
 end
 
 def generate_brewery_records count=100
   count.times do
-    insert_record "brewery", {
+    insert_record "breweries", {
       name: Faker::Company.name.gsub("'"){""},
       address: Faker::Address.street_address.gsub("'"){""},
       city: Faker::Address.city.gsub("'"){""},
@@ -54,14 +54,14 @@ def generate_brewery_records count=100
       description: Faker::Lorem.sentence(3),
       founding_year: Faker::Date.between("1500-01-01", Date.today).year,
       created_at: Faker::Date.between("2014-01-01", Date.today),
-      updated_by: (get_record_id "person")
+      updated_by: (get_record_id "persons")
     }
   end
 end
 
 def generate_person_records count=100
   count.times do
-    insert_record "person", {
+    insert_record "persons", {
       name: Faker::Name.first_name.gsub("'"){""},
       email: Faker::Internet.email,
       birthday: Faker::Date.between("1900-01-01", Date.today),

@@ -1,0 +1,48 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+#errors ul {
+  list-style-type: none;
+}
+
+#logo {
+  color: #fff;
+  font-size: 1.7em;
+  font-weight: bold;
+  &:hover {
+    color: #ccc;
+  }
+}
+
+.big-quote {
+  padding-right: 50px;
+}
+
+.center {
+  text-align: center;
+}
+
+.form-title {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.jumbotron h1 {
+  font-weight: bold;
+}
+
+.quoter {
+  color: #888;
+  font-size: 1.1em;
+}
+
+.taglines {
+  margin-top: 15px !important;
+  margin-bottom: 25px !important;
+}

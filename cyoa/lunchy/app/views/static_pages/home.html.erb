@@ -7,19 +7,24 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "Lunchy", '#', class: "navbar-brand", id: "logo" %>
+      <%= link_to "Lunchy", root_path, class: "navbar-brand", id: "logo" %>
     </div>
+    <% if logged_in? %>
+      <%= link_to "Log Out", logout_path, method: :delete %>
+    <% else %>
     <div id="sign_in" class="navbar-collapse collapse">
+      <%= form_for(:session, url: login_path, :html => { :class => "navbar-form navbar-right" }) do |f| %>
       <form class="navbar-form navbar-right">
         <div class="form-group">
-          <input type="text" placeholder="Email" class="form-control">
+          <%= f.email_field :email, class: "form-control", placeholder: "Enter email address" %>
         </div>
         <div class="form-group">
-          <input type="password" placeholder="Password" class="form-control">
+          <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
         </div>
-        <button type="submit" class="btn btn-success">Sign In</button>
-      </form>
+        <%= f.submit "Log In", class: "btn btn-success" %>
+      <% end %>
     </div> 
+    <% end %>
   </div>
 </nav>
 <div class="jumbotron">
@@ -28,7 +33,7 @@
     <p class="taglines">
       Tired of wasting time trying to figure out where to go for lunch?<br />
       Let Lunchy pick for you and spend that time stuffing your face instead!</p>
-    <%= link_to "Sign Up", '#', class: "btn btn-primary btn-lg", role: "button" %>
+    <%= link_to "Sign Up", signup_path, class: "btn btn-primary btn-lg", role: "button" %>
   </div>
 </div>
 <div class="container">

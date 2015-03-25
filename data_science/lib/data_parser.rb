@@ -12,12 +12,12 @@ class DataParser
   end
 
   def build_cohorts(data_set)
-    @cohort_a = data_set.select {|data| data["cohort"] == "A"}
-    @cohort_b = data_set.select {|data| data["cohort"] == "B"}
+    @cohort_a = data_set.select { |data| data["cohort"] == "A" }
+    @cohort_b = data_set.select { |data| data["cohort"] == "B" }
   end
 
   def validate_cohort_data_size
     raise 'Insufficient data' unless @cohort_a.length >= MIN_DATA_SIZE ||
-                                        @cohort_b.length >= MIN_DATA_SIZE 
+                                     @cohort_b.length >= MIN_DATA_SIZE
   end
 end

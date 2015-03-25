@@ -16,8 +16,8 @@ class DataAnalyzer
 
   def build_ab_analyzer_data
     data = {}
-    data[:acohort] = { :success => @cohort_a.conversions, :fails => @cohort_a.non_conversions }
-    data[:bcohort] = { :success => @cohort_b.conversions, :fails => @cohort_b.non_conversions }
+    data[:acohort] = { success: @cohort_a.conversions, fails: @cohort_a.non_conversions }
+    data[:bcohort] = { success: @cohort_b.conversions, fails: @cohort_b.non_conversions }
     data
   end
 
@@ -33,8 +33,6 @@ class DataAnalyzer
     puts @cohort_b
     puts "Confidence Level: #{calculate_confidence_level * 100}%"
   end
-
 end
-
-#analyzer = DataAnalyzer.new('../data_export_2014_06_20_15_59_02.json')
-#analyzer.display_data
+# analyzer = DataAnalyzer.new('../data_export_2014_06_20_15_59_02.json')
+# analyzer.display_data

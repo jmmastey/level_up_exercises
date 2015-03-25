@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
       redirect_to user
     else
       flash.now[:danger] = "Invalid email and/or password"
+      @hide_login_fields = true
       render 'new'
     end
   end

@@ -11,10 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324182049) do
+ActiveRecord::Schema.define(version: 20150325224303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blacklists", force: :cascade do |t|
+    t.string   "venue_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "blacklists", ["user_id"], name: "index_blacklists_on_user_id", using: :btree
+
+  create_table "favorites", force: :cascade do |t|
+    t.string   "venue_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+
+  create_table "histories", force: :cascade do |t|
+    t.string   "venue_id"
+    t.date     "visited"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "histories", ["user_id"], name: "index_histories_on_user_id", using: :btree
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "repeat_interval"
+    t.decimal  "min_rating",      precision: 3, scale: 1
+    t.integer  "max_distance"
+    t.integer  "user_id"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -26,4 +65,8 @@ ActiveRecord::Schema.define(version: 20150324182049) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "blacklists", "users"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "histories", "users"
+  add_foreign_key "profiles", "users"
 end

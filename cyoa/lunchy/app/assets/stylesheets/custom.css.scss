@@ -39,6 +39,15 @@ hr {
   text-align: center;
 }
 
+.field_with_errors {
+  input {
+    background-color: #f2dede;
+  }
+  label {
+    color: #a94442;
+  }
+}
+
 .form-title {
   margin-bottom: 40px;
   text-align: center;

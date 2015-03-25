@@ -1,7 +1,10 @@
 class StaticPagesController < ApplicationController
   def home
-  end
-
-  def signup
+    if logged_in?
+      @user = current_user
+      render "users/show" 
+    else
+      render "home"
+    end
   end
 end

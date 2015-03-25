@@ -1,32 +1,3 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sign_in">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to "Lunchy", root_path, class: "navbar-brand", id: "logo" %>
-    </div>
-    <% if logged_in? %>
-      <%= link_to "Log Out", logout_path, method: :delete %>
-    <% else %>
-    <div id="sign_in" class="navbar-collapse collapse">
-      <%= form_for(:session, url: login_path, :html => { :class => "navbar-form navbar-right" }) do |f| %>
-      <form class="navbar-form navbar-right">
-        <div class="form-group">
-          <%= f.email_field :email, class: "form-control", placeholder: "Enter email address" %>
-        </div>
-        <div class="form-group">
-          <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
-        </div>
-        <%= f.submit "Log In", class: "btn btn-success" %>
-      <% end %>
-    </div> 
-    <% end %>
-  </div>
-</nav>
 <div class="jumbotron">
   <div class="container center">
     <h1>Welcome to Lunchy</h1>

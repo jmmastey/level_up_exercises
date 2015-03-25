@@ -7,6 +7,17 @@ body {
   padding-bottom: 20px;
 }
 
+/* Bootstrap style overrides */
+.navbar-inverse {
+  background-color: #555;
+  border-color: #444;
+}
+
+hr {
+  border-top-color: #ccc;
+}
+
+/* App styles */
 #errors ul {
   list-style-type: none;
 }

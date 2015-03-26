@@ -2,7 +2,7 @@ require 'foursquare_client'
 
 namespace :import do
   desc "Imports food venues using the Foursquare API"
-  task import_venues: :environment do
+  task venues: :environment do
     # Maximum search radius in meters. We'll set the radius large enough
     # to hit the northeast corner of the loop.
     MAX_RADIUS = 1200

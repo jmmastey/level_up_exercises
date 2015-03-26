@@ -51,6 +51,7 @@
 }
 
 .bomb-code-input {
+  font-size: 30px;
   height: 35px;
 }
 
@@ -83,8 +84,4 @@
 
 .bomb-neutral {
   color: #888;
-}
-
-.bomb-code-input {
-  font-size: 30px;
 }

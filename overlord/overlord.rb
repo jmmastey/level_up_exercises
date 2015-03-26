@@ -20,7 +20,7 @@ get '/' do
 end
 
 post '/initialize' do
-  return if session[:bomb]
+  return unless session[:bomb].detonated? if session[:bomb]
 
   activation_code = params['activation_code']
   deactivation_code = params['deactivation_code']

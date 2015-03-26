@@ -44,20 +44,20 @@ Feature: Using the bomb
     Given The bomb has been booted
     And The bomb has been configured with default codes
     And The bomb has been activated
-    When I submit an incorrect deactivation code one time
+    When I submit an incorrect deactivation code 1 time
     Then I should see "Incorrect code. You have 2 tries remaining."
 
   Scenario: Enter incorrect deactivation code twice
     Given The bomb has been booted
     And The bomb has been configured with default codes
     And The bomb has been activated
-    When I submit an incorrect deactivation code two times
+    When I submit an incorrect deactivation code 2 times
     Then I should see "Incorrect code. You have 1 try remaining."
 
   Scenario: Enter incorrect deactivation code thrice
     Given The bomb has been booted
     And The bomb has been configured with default codes
     And The bomb has been activated
-    When I submit an incorrect deactivation code three times
+    When I submit an incorrect deactivation code 3 times
     Then I should be on the boom page
     And I should see "Boom!"

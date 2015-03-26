@@ -1,3 +1,13 @@
+def submit_correct_activation_code
+  fill_in('code', :with => '1234')
+  click_button('submit')
+end
+
+def submit_incorrect_deactivation_code
+  fill_in('code', :with => '9999')
+  click_button('submit')
+end
+
 Given(/^The bomb has been booted$/) do
   visit '/'
   click_button('save')
@@ -37,24 +47,6 @@ When(/^I submit the correct deactivation code$/) do
   click_button('submit')
 end
 
-When(/^I submit an incorrect deactivation code one time$/) do
-  submit_incorrect_deactivation_code
-end
-
-When(/^I submit an incorrect deactivation code two times$/) do
-  2.times { submit_incorrect_deactivation_code }
-end
-
-When(/^I submit an incorrect deactivation code three times$/) do
-  3.times { submit_incorrect_deactivation_code }
-end
-
-def submit_correct_activation_code
-  fill_in('code', :with => '1234')
-  click_button('submit')
-end
-
-def submit_incorrect_deactivation_code
-  fill_in('code', :with => '9999')
-  click_button('submit')
+When(/^I submit an incorrect deactivation code ([0-9]+) times?$/) do |count|
+  count.to_i.times { submit_incorrect_deactivation_code }
 end

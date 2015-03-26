@@ -72,7 +72,7 @@ class Overlord < Sinatra::Base
 
   def set_home_page_vars
     bomb = session[:bomb]
-    @bomb_state = bomb.state
+    @bomb_state = bomb.state.upcase
     @bomb_state_class = @bomb_state.downcase
     @prompt = generate_prompt
   end

@@ -6,11 +6,11 @@ class Bomb
   ARM_CODE_DFLT = "1234"
   DISARM_CODE_DFLT = "0000"
   DISARM_RETRIES_MAX = 3
-  STATES = {
-    :inactive => "INACTIVE",
-    :armed => "ARMED",
-    :exploded => "EXPLODED",
-  }
+
+  # Possible Bomb states are
+  #  :inactive
+  #  :armed
+  #  :exploded
 
   def initialize(arm_code = ARM_CODE_DFLT, disarm_code = DISARM_CODE_DFLT)
     unless Bomb.code_valid?(arm_code) && Bomb.code_valid?(disarm_code)
@@ -19,12 +19,12 @@ class Bomb
 
     @arm_code = arm_code
     @disarm_code = disarm_code
-    @state = STATES[:inactive]
+    @state = :inactive
     @disarm_retries = DISARM_RETRIES_MAX
   end
 
   def self.code_valid?(code)
-    code.match(/[^0-9]/) ? false : true
+    code.match(/^[0-9]+$/)
   end
 
   def self.arm_code_default
@@ -49,20 +49,20 @@ class Bomb
 
   def arm(code)
     return false unless inactive?
-    @state = STATES[:armed] if arm_code_match?(code)
+    @state = :armed if arm_code_match?(code)
     true
   end
 
   def inactive?
-    state == STATES[:inactive]
+    state == :inactive 
   end
 
   def armed?
-    state == STATES[:armed]
+    state == :armed
   end
 
   def exploded?
-    state == STATES[:exploded]
+    state == :exploded
   end
 
   private
@@ -76,7 +76,7 @@ class Bomb
   end
 
   def disarm_code_success
-    @state = STATES[:inactive]
+    @state = :inactive
     @disarm_retries = DISARM_RETRIES_MAX
   end
 
@@ -86,6 +86,6 @@ class Bomb
   end
 
   def explode
-    @state = STATES[:exploded]
+    @state = :exploded
   end
 end

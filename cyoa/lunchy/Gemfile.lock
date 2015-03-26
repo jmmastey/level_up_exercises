@@ -61,8 +61,17 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.4.0)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
+    foursquare2 (2.0.1)
+      faraday (~> 0.8)
+      faraday_middleware (>= 0.8)
+      hashie (>= 1.0, < 3.0.0)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
+    hashie (2.1.2)
     hike (1.2.3)
     i18n (0.7.0)
     jbuilder (2.2.12)
@@ -81,6 +90,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.5.1)
     multi_json (1.11.0)
+    multipart-post (2.0.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.18.1)
@@ -175,6 +185,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)
+  foursquare2
   jbuilder (~> 2.0)
   jquery-rails
   pg

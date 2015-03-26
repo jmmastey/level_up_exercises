@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  has_one :profile, dependent: destroy
-  has_many :blacklists, dependent: destroy
-  has_many :favorites, dependent: destroy
-  has_many :histories, dependent: destroy
+  has_one :profile, dependent: :destroy
+  has_many :blacklists, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :histories, dependent: :destroy
 
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 80 }

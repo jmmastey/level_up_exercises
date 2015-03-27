@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for @profile do |f| %>
+      <div class="form-group col-md-3">
+        <%= f.label :min_rating, class: "control-label" %>
+        <%= f.text_field :min_rating, class: "form-control", placeholder: "0.0 - 10.0" %>
+      </div>
+      <div class="form-group col-md-3">
+        <%= f.label :repeat_interval, class: "control-label" %>
+        <%= f.text_field :repeat_interval, class: "form-control", placeholder: "" %>
+      </div>
+      <div class="form-group col-md-3">
+        <%= f.label :max_distance, "Max distance (in meters)", class: "control-label" %>
+        <%= f.text_field :max_distance, class: "form-control", placeholder: "100 - 1200" %>
+      </div>
+      <div class="form-group col-md-3">
+        <%= f.submit "Save Settings", class: "btn btn-primary" %>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <%= render 'shared/error_messages' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

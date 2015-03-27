@@ -1,14 +1,19 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show, :edit, :update]
   before_action :logged_out_user, only: [:new]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_user, only: [:show, :edit, :update]
 
   def new
     @user = User.new
   end
 
   def show
-    @user = User.find(params[:id])
+    @profile = current_profile
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      redirect_to root_url
+    end
   end
 
   def create
@@ -16,7 +21,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = "Welcome to Lunchy!"
       log_in @user
-      redirect_to @user
+      redirect_to root_url
     else
       render "new"
     end
@@ -46,7 +51,11 @@ class UsersController < ApplicationController
   end
  
   def correct_user
-    @user = User.find(params[:id])
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      @user = nil
+    end
     redirect_to root_url unless current_user?(@user)
   end
 end

@@ -7,6 +7,7 @@ module SessionsHelper
     return if !logged_in?
     session.delete(:user_id)
     @current_user = nil
+    @current_profile = nil
   end
 
   def current_user
@@ -15,6 +16,10 @@ module SessionsHelper
 
   def current_user?(user)
     user == current_user
+  end
+
+  def current_profile
+    @current_profile ||= Profile.find_by(user_id: session[:user_id])
   end
 
   def logged_in?

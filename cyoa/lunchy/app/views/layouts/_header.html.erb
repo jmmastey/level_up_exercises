@@ -16,7 +16,7 @@
         </li>
       </ul>
     <% else %>
-      <% if !current_page?(login_path) && !@hide_login_fields %>
+      <% if current_page?(root_url) %>
       <div id="sign_in" class="navbar-collapse collapse">
         <%= form_for(:session, url: login_path, :html => { :class => "navbar-form navbar-right" }) do |f| %>
         <form class="navbar-form navbar-right">

@@ -35,6 +35,10 @@ hr {
   padding-right: 50px;
 }
 
+.blue {
+  color: #337ab7;
+}
+
 .center {
   text-align: center;
 }
@@ -49,13 +53,20 @@ hr {
 }
 
 .form-title {
-  margin-bottom: 40px;
+  margin: 30px 0;
   text-align: center;
 }
 
-.gravatar {
-  width: 80px;
+.gravatar-big {
   height: 80px;
+  margin-right: 8px;
+  width: 80px;
+}
+
+.gravatar-small {
+  height: 40px;
+  margin-right: 8px;
+  width: 40px;
 }
 
 .jumbotron h1 {
@@ -67,7 +78,48 @@ hr {
   font-size: 1.1em;
 }
 
+.table-venue {
+  width: 100%;
+  thead > tr > th {
+    background-color: #ddd;
+  }
+}
+
 .taglines {
   margin-top: 15px !important;
   margin-bottom: 25px !important;
+}
+
+.user-info {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.venue-icon-64 {
+  background-color: #aaa;
+  width: 64px;
+  height: 64px;
+}
+
+.venue-icon-32 {
+  background-color: #aaa;
+  width: 32px;
+  height: 32px;
+}
+
+.venue-info {
+  margin-left: 15px;
+}
+
+.venue-link {
+  font-weight: bold;
+}
+
+.venue {
+  margin: 0;
+  font-size: 16px;
+}
+
+.venue-name {
+  font-weight: bold;
 }

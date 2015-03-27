@@ -1,0 +1,20 @@
+<% provide(:title, 'People') %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" style="margin-bottom: 10px">
+        <h2>All People</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <% @users.each do |user| %>
+      <section class="user-info">
+        <div>
+          <%= gravatar_for(user, "small") %>
+          <%= "#{user.name} (#{user.email})" %>
+        </div>
+      </section>
+      <% end %>
+    </div>
+  </div>
+</div>

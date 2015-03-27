@@ -7,6 +7,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def index
+    @users = User.order(name: :asc)
+  end
+
   def show
     @profile = current_profile
     begin

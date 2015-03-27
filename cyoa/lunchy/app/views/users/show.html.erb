@@ -13,5 +13,18 @@
   <div class="row">
     <hr style="margin-top: 10px">
   </div>
+  <div class="row" style="min-height: 88px">
+    <div class="col-md-3">
+      <%= form_tag "/venues/recommend" do %>
+        <%= submit_tag "Get Recommendation", class: "btn btn-success" %>
+      <% end %>
+    </div>
+    <div class="col-md-9">
+      <%= render 'venues/recommendation' %>
+    </div>
+  </div>
+  <div class="row">
+    <hr>
+  </div>
   <%= render 'profiles/profile' %>
 </div>

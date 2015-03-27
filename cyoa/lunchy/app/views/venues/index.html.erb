@@ -1,0 +1,30 @@
+<% provide(:title, 'Venues') %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" style="margin-bottom: 10px">
+        <h2>All Venues</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped table-venue">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Street</th>
+            <th>Rating</th>
+            <th>Distance (m)</th>
+          </tr>
+        </thead>
+        <% @venues.each do |venue| %>
+        <tr>
+          <td><%= link_to venue.name, foursquare_path(venue), class: "venue-link", target: "_blank" %></td>
+          <td><%= venue.street %></td>
+          <td><%= venue.rating %></td>
+          <td><%= venue.distance %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

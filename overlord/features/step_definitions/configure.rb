@@ -3,19 +3,8 @@ VALID_DISARM_CODE = "2222"
 INVALID_ARM_CODE = "xyz"
 INVALID_DISARM_CODE = "abc"
 
-Given(/^I have not booted the bomb$/) do
-  # not sure if this is kosher but I'm not sure how to test this condition
-  true
-end
-
-When(/^I visit the home page$/) do
-  visit '/'
-end
-
-Then(/^I should see a configuration form$/) do
-  expect(page).to have_field('arm_code')
-  expect(page).to have_field('disarm_code')
-  expect(page).to have_selector('input#save')
+Given(/^I am on the configure page$/) do
+  visit '/configure'
 end
 
 When(/^I submit an invalid activation code$/) do

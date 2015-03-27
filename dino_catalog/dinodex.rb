@@ -18,7 +18,7 @@ def filter_by_string(field, value)
   @array_of_dinos.select {|dino| dino.like?(field, value)}
 end
 
-def filter_by_string_external_dino(field, value, dinos) # b/c ruby doesn't support overloading methods
+def filter_by_string_external_dinos(field, value, dinos) # b/c ruby doesn't support overloading methods
   dinos.select {|dino| dino.like?(field, value)}
 end
 
@@ -26,7 +26,7 @@ def filter_by_strings(fields, values)
   i = 0
   filtered_array = @array_of_dinos
   fields.count.times {
-    filtered_array = filter_by_string_external_dino(fields[i], values[i], filtered_array)
+    filtered_array = filter_by_string_external_dinos(fields[i], values[i], filtered_array)
     i += 1
   }
   return filtered_array

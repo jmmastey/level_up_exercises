@@ -32,6 +32,14 @@ def get_small_dinos # didn't use !heavier_than b/c then entries with nil weight 
   @array_of_dinos.select {|dino| dino.lighter_than?(@big)}
 end
 
+def get_carnivores # I'm hacking this in because my system doesn't support OR filter chains. Whoops. We'll do it in 1.1
+  carnivores = @array_of_dinos.select { |dino| dino.like?("DIET", "Carnivore")}
+  piscivores = @array_of_dinos.select { |dino| dino.like?("DIET", "Piscivore")}
+  insectivores = @array_of_dinos.select { |dino| dino.like?("DIET", "Insectivore")}
+
+  return carnivores+piscivores+insectivores
+end
+
 private
 def filter_selection_by_string(field, value, dinos)
   dinos.select {|dino| dino.like?(field, value)}

@@ -53,7 +53,7 @@ def self.prompt_user_for_constraints
 end
 
 def self.choose_function
-  puts "Select function to run:\nQUERY\nBIG\nSMALL\n\n"
+  puts "Select function to run:\nQUERY\nBIG\nSMALL\nCARNIVORES\n"
   input = STDIN.gets.strip.downcase
 end
 
@@ -71,6 +71,10 @@ def self.run(files)
     pp dex.get_big_dinos
   when "small"
     pp dex.get_small_dinos
+  when "carnivores"
+    pp dex.get_carnivores
+  else
+    abort("You're not even reading the instructions are you?")
   end
 end
 

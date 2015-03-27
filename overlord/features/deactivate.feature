@@ -20,3 +20,10 @@ Feature: Deactivate the bomb
     And the bomb has been activated
     When I submit an incorrect deactivation code 2 times
     Then I should see "Incorrect code. You have 1 try remaining."
+
+  Scenario: Deactivate bomb after submitting incorrect deactivation code
+    Given the bomb has been booted with default codes
+    And the bomb has been activated
+    When I submit an incorrect deactivation code 1 time
+    And I submit the correct deactivation code
+    Then I should see "Bomb is currently: INACTIVE"

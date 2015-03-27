@@ -45,7 +45,7 @@ class Bomb
   end
 
   def inactive?
-    state == :inactive 
+    state == :inactive
   end
 
   def armed?

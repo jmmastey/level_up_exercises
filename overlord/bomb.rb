@@ -35,6 +35,29 @@ class Bomb
     DISARM_CODE_DFLT
   end
 
+  def process_code(code)
+    # ignore empty codes
+    # ignore the correct activation code after the bomb is armed
+    return true if code.strip == "" || (armed? && code == arm_code)
+    return arm(code) if inactive?
+    return disarm(code) if armed?
+    false
+  end
+
+  def inactive?
+    state == :inactive 
+  end
+
+  def armed?
+    state == :armed
+  end
+
+  def exploded?
+    state == :exploded
+  end
+
+  private
+
   def disarm(code)
     return false unless armed?
 
@@ -52,20 +75,6 @@ class Bomb
     @state = :armed if arm_code_match?(code)
     true
   end
-
-  def inactive?
-    state == :inactive 
-  end
-
-  def armed?
-    state == :armed
-  end
-
-  def exploded?
-    state == :exploded
-  end
-
-  private
 
   def arm_code_match?(code)
     code == @arm_code

@@ -5,23 +5,17 @@ class Overlord < Sinatra::Base
   set :sessions, true
 
   get '/' do
-    redirect to('/configure') unless session[:bomb]
-
-    bomb = session[:bomb]
-    redirect to('/boom') if bomb.exploded?
-
-    set_home_page_vars
+    @bomb = session[:bomb]
+    redirect to('/configure') unless @bomb
+    redirect to('/boom') if @bomb.exploded?
     erb :home_page
   end
 
   post '/' do
-    success = process_code(params[:code])
-    bomb = session[:bomb]
-    set_error_message if bomb.armed? && !success
-
-    redirect to('/boom') if bomb.exploded?
-
-    set_home_page_vars
+    @bomb = session[:bomb]
+    success = @bomb.process_code(params[:code])
+    set_error_message if @bomb.armed? && !success
+    redirect to('/boom') if @bomb.exploded?
     erb :home_page
   end
 
@@ -68,33 +62,6 @@ class Overlord < Sinatra::Base
 
   def codes_valid?(arm_code, disarm_code)
     Bomb.code_valid?(arm_code) && Bomb.code_valid?(disarm_code)
-  end
-
-  def set_home_page_vars
-    bomb = session[:bomb]
-    @bomb_state = bomb.state.upcase
-    @bomb_state_class = @bomb_state.downcase
-    @prompt = generate_prompt
-  end
-
-  def generate_prompt
-    bomb = session[:bomb]
-    if bomb.inactive?
-      prompt = "Enter activation code to arm bomb:"
-    elsif bomb.armed?
-      prompt = "Enter deactivation code to disarm bomb:"
-    end
-    prompt || ""
-  end
-
-  def process_code(code)
-    bomb = session[:bomb]
-    # ignore empty codes
-    # ignore the correct activation code after the bomb is armed
-    return true if code.strip == "" || (bomb.armed? && code == bomb.arm_code)
-    return bomb.arm(code) if bomb.inactive?
-    return bomb.disarm(code) if bomb.armed?
-    false
   end
 
   def set_error_message

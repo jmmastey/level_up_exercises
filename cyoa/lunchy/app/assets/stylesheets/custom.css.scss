@@ -22,6 +22,10 @@ hr {
   list-style-type: none;
 }
 
+#get_rec_btn {
+  margin-bottom: 20px;
+}
+
 #logo {
   color: #fff;
   font-size: 1.7em;
@@ -41,6 +45,16 @@ hr {
 
 .center {
   text-align: center;
+}
+
+.control-label {
+  white-space: nowrap;
+}
+
+.edit_profile {
+  .form-group {
+      padding-left: 0
+  }
 }
 
 .field_with_errors {
@@ -85,6 +99,10 @@ hr {
   font-size: 1.1em;
 }
 
+.rec-row {
+  min-height: 106px;
+}
+
 .table-venue {
   width: 100%;
   thead > tr > th {
@@ -114,19 +132,19 @@ hr {
   height: 32px;
 }
 
-.venue-info {
-  margin-left: 15px;
-}
-
-.venue-link {
-  font-weight: bold;
-}
-
 .venue {
   margin: 0;
   font-size: 16px;
 }
 
-.venue-name {
+.venue-info {
+  margin-left: 15px;
+}
+
+.venue-link, .venue-name, .venue-street {
   font-weight: bold;
+}
+
+.venue-category, .venue-url, .venue-misc {
+  font-size: 14px;
 }

@@ -1,13 +1,16 @@
-<% if !@rec.nil? %>
+<% unless @rec.nil? %>
 <div>
   <div class="pull-left">
     <%= icon_for @rec %> 
   </div>
   <div class="venue-info pull-left">
     <%= link_to @rec.name, foursquare_path(@rec), class: "venue venue-name", target: "_blank" %>
+    <p class="venue venue-street"><%= @rec.street %></p>
     <p class="venue venue-category"><%= @rec.category_name %></p>
+    <% unless @rec.url.nil? %>
     <p class="venue venue-url"><%= link_to @rec.url, @rec.url, target: "_blank" %></p>
-    <p class="venue"><%= "Rating: #{@rec.rating}, Distance: #{@rec.distance} meters" %></p>
+    <% end %>
+    <p class="venue venue-misc"><%= "Rating: #{@rec.rating}, Distance: #{@rec.distance} meters" %></p>
   </div>
   <div class="clear: both"></div>
   <span id="venue_id" class="hidden"><%= @rec.venue_id %></span>

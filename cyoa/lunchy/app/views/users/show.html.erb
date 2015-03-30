@@ -13,10 +13,10 @@
   <div class="row">
     <hr style="margin-top: 10px">
   </div>
-  <div class="row" style="min-height: 88px">
+  <div class="row rec-row">
     <div class="col-md-3">
       <%= form_tag("/venues/recommend", remote: true) do %>
-        <%= submit_tag "Get Recommendation", class: "btn btn-success" %>
+        <%= submit_tag "Get Recommendation", class: "btn btn-success", id: "get_rec_btn" %>
       <% end %>
     </div>
     <div class="col-md-9">
@@ -28,3 +28,6 @@
   </div>
   <%= render 'profiles/profile' %>
 </div>
+<script>
+  $("#flash_box").addClass("flash-fixed");
+</script>

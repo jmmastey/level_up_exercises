@@ -14,6 +14,4 @@ $(document).ready(function() {
     $("#flash_box").empty();
     $("#profile_save").removeClass("disabled");
   });
-
-  $("#flash_box").addClass("flash-fixed");
 });

@@ -1,26 +1,31 @@
 class DinoConverter 
-  require_relative 'dino'
-  require 'CSV'
 
-  # ...these methods could be a lot smaller, Ava
+	require_relative 'dino'
+	require 'CSV'
+
+	MAPPINGS = 
+	{
+	"Genus" => "NAME", 
+	"Period" => "PERIOD", 
+	"Carnivore" => "DIET", 
+	"Weight" => "WEIGHT_IN_LBS", 
+	"Walking" => "WALKING"
+	}
 
   def self.csv_file_to_dino_array(file)
     csv = CSV::parse(File.open(file, 'r') {|f| f.read })
     fields = csv.shift
     hash_array = csv.collect { |record| Hash[*fields.zip(record).flatten ] } 
-    fixed_headers_array = hash_array.collect { |hash| 
-      fix_pirate_hash(hash)
-    }    
+    fixed_headers_array = hash_array.collect { |hash| fix_pirate_hash(hash) }
     dino_array = []
-    fixed_headers_array.collect do |dino|
+    fixed_headers_array.each do |dino|
       dino_array << Dino.new(dino)
     end
-    puts "procesed #{file.to_s} and found #{dino_array.count} records!"
-    return dino_array
+    dino_array
   end
 
   def self.csv_files_to_dino_array(files)
-    return nil if files == []
+    abort("No files given") if files == []
     arrays = files.collect do |file|
       csv_file_to_dino_array(file)
     end
@@ -33,15 +38,7 @@ class DinoConverter
 
   def self.fix_pirate_hash(hash)
     if hash.keys.include? "Genus"
-      mappings = 
-      {
-        "Genus" => "NAME", 
-        "Period" => "PERIOD", 
-        "Carnivore" => "DIET", 
-        "Weight" => "WEIGHT_IN_LBS", 
-        "Walking" => "WALKING"
-      }
-      fixed_h = Hash[hash.map {|k, v| [mappings[k], v] }]
+      fixed_h = Hash[hash.map {|k, v| [MAPPINGS[k], v] }]
       case fixed_h["DIET"]
       when "Yes"
         fixed_h["DIET"] = "Carnivore"

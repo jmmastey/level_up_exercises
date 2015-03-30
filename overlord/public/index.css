@@ -1,0 +1,87 @@
+.bomb {
+  width: 460px;
+  position: absolute;
+  left: 50%;
+  margin-left: -230px;
+}
+
+.bomb-button {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 4px;
+  font-size: 50px;
+  color: #666;
+  background-color: #f8f8f8;
+  border: 1px solid rgb(128,128,128);
+  border-radius: 4px;
+}
+
+.bomb-button.disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.bomb-button#button_0 {
+  margin-left: 154px;
+}
+
+.bomb-status {
+  height: 100px;
+}
+
+.bomb-message {
+  padding-top: 35px;
+  text-align: center;
+  font-size: 30px;
+  font-family: sans-serif;
+}
+
+.bomb-screen {
+  padding-bottom: 10px;
+}
+
+.bomb-screen.existing > .bomb-code-input {
+  width: 320px;
+  text-align: center;
+}
+
+.bomb-screen.new > .bomb-code-input {
+  width: 190px;
+  text-align: center;
+}
+
+.bomb-code-input {
+  font-size: 30px;
+  height: 35px;
+}
+
+.bomb-activation-button {
+  background-color: #bd5;
+}
+
+.bomb-deactivation-button {
+  background-color: #f44;
+}
+
+.bomb-form-button {
+  border: 1px solid rgb(32,32,32);
+  border-radius: 4px;
+  vertical-align: top;
+  height: 41px;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.bomb-good {
+  color: #bd5;
+}
+
+.bomb-bad {
+  color: #f44;
+}
+
+.bomb-neutral {
+  color: #888;
+}

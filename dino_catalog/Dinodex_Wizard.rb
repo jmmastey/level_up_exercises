@@ -46,7 +46,7 @@ class DinodexWizard
     if input == "y" 
       prompt_user_multiple_constraints(constraint_array)
     else
-      return constraint_array
+      constraint_array
     end
   end
 

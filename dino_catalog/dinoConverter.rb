@@ -33,7 +33,7 @@ class DinoConverter
     arrays.each do |array|
       dino_array += array
     end
-    return dino_array
+    dino_array
   end
 
   def self.fix_pirate_hash(hash)
@@ -45,9 +45,9 @@ class DinoConverter
       else
         fixed_h["DIET"] = "Unknown"
       end
-      return fixed_h
+      fixed_h
     else
-      return hash
+      hash
     end
   end
 end

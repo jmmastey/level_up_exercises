@@ -13,10 +13,6 @@ class Dinodex
     @array_of_dinos
   end
 
-  def self.supported_fields
-    SUPPORTED_FIELDS
-  end
-
   def filter_by_string(field, value)
     @array_of_dinos.select {|dino| dino.like?(field, value)}
   end

@@ -3,10 +3,17 @@ class ProfilesController < ApplicationController
     @user = current_user
     @profile = current_profile
 
-    if @profile.update_attributes(profile_params)
-      flash.now[:success] = "Settings updated successfully."
+    respond_to do |format|
+      if @profile.update_attributes(profile_params)
+        flash.now[:success] = "Settings updated successfully."
+        format.html { render 'users/show' }
+        format.js { @success = true }
+      else
+        flash.now[:danger] = "Oops! Settings could not be saved."
+        format.html { render 'users/show' }
+        format.js { @success = false }
+      end
     end
-    render 'users/show'
   end
 
   private

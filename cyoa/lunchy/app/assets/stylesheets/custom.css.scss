@@ -52,15 +52,22 @@ hr {
   }
 }
 
+.flash-fixed {
+  position: absolute;
+  top: 51px;
+  width: 100%;
+  z-index: 999;
+}
+
 .form-title {
   margin: 30px 0;
   text-align: center;
 }
 
 .gravatar-big {
-  height: 80px;
+  height: 64px;
   margin-right: 8px;
-  width: 80px;
+  width: 64px;
 }
 
 .gravatar-small {

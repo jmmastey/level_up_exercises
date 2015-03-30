@@ -1,6 +1,10 @@
 class StaticPagesController < ApplicationController
   def home
     if logged_in?
+      # These values are used to generate random venue recommendations
+      session[:rng_seed] = rand(1...100)
+      session[:rec_idx] = 0
+
       @user = current_user
       @profile = init_profile
       render "users/show" 

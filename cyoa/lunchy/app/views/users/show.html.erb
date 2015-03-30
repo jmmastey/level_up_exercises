@@ -3,10 +3,10 @@
   <div class="row">
     <div class="col-md-10">
       <section class="user_info">
-        <h1>
+        <h3>
           <%= gravatar_for @user %>
-          <%= @user.name %>
-        </h1>
+          <strong><%= @user.name %></strong>
+        </h3>
       </section>
     </div>
   </div>
@@ -15,12 +15,12 @@
   </div>
   <div class="row" style="min-height: 88px">
     <div class="col-md-3">
-      <%= form_tag "/venues/recommend" do %>
+      <%= form_tag("/venues/recommend", remote: true) do %>
         <%= submit_tag "Get Recommendation", class: "btn btn-success" %>
       <% end %>
     </div>
     <div class="col-md-9">
-      <%= render 'venues/recommendation' %>
+      <div id="venue_rec"></div>
     </div>
   </div>
   <div class="row">

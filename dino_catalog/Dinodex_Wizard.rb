@@ -1,7 +1,4 @@
 class DinodexWizard
-
-  # this acts as an interactive interface for the dinodex class
-
   require_relative 'dinodex'
   require 'pp'
 
@@ -22,7 +19,6 @@ class DinodexWizard
   end
 
   def self.prompt_user_for_constraint
-
     puts "Valid fields listed below:\n#{SUPPORTED_FIELDS}"
     puts "Please type a field to search and the value to look for, separated by ="
     puts "{ex: name = velociraptor}"
@@ -35,8 +31,8 @@ class DinodexWizard
       x.strip!
     end
 
-  	return input if SUPPORTED_FIELDS.include? input[0]
-  	abort("That's not a valid field.")
+    return input if SUPPORTED_FIELDS.include? input[0]
+    abort("That's not a valid field.")
   end
 
   def self.prompt_user_multiple_constraints(constraint_array = [])
@@ -62,17 +58,17 @@ class DinodexWizard
     pp "Here's the entire set."
     choice = choose_function
     case choice
-    when "query"
-      constraints = prompt_user_multiple_constraints()
-      pp dex.filter_by_strings(constraints)
-    when "big"
-      pp dex.big_dinos
-    when "small"
-      pp dex.small_dinos
-    when "carnivores"
-      pp dex.carnivores
-    else
-      abort("You're not even reading the instructions. Get out of here.")
+      when "query"
+        constraints = prompt_user_multiple_constraints()
+        pp dex.filter_by_strings(constraints)
+      when "big"
+        pp dex.big_dinos
+      when "small"
+        pp dex.small_dinos
+      when "carnivores"
+        pp dex.carnivores
+      else
+        abort("You're not even reading the instructions. Get out of here.")
     end
   end
 end

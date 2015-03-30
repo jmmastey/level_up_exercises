@@ -1,5 +1,4 @@
 class DinoConverter 
-
 	require_relative 'dino'
 	require 'CSV'
 
@@ -40,10 +39,10 @@ class DinoConverter
     if hash.keys.include? "Genus"
       fixed_h = Hash[hash.map {|k, v| [MAPPINGS[k], v] }]
       case fixed_h["DIET"]
-      when "Yes"
-        fixed_h["DIET"] = "Carnivore"
-      else
-        fixed_h["DIET"] = "Unknown"
+        when "Yes"
+          fixed_h["DIET"] = "Carnivore"
+        else
+          fixed_h["DIET"] = "Unknown"
       end
       fixed_h
     else

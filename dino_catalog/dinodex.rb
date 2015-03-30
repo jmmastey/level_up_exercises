@@ -1,5 +1,4 @@
 class Dinodex
-
   require_relative 'dinoConverter'
   require 'pp'
 

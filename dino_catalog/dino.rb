@@ -11,9 +11,9 @@ class Dino
     @description = attr_hash["DESCRIPTION"]
   end
 
-  def like?(field, value) 
-    if self.respond_to? field.downcase
-      (self.send field.downcase).include? value
+  def like?(field, value)
+    if respond_to? field.downcase
+      (send field.downcase).include? value
     else
       false
     end

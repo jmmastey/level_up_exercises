@@ -37,9 +37,24 @@ class VenuesController < ApplicationController
 
   def load_filtered_venues
     venues ||= Venue.order(distance: :asc)
-    venues.select do |venue|
-      venue.rating >= @profile.min_rating &&
-      venue.distance <= @profile.max_distance
+    venues.select { |v| rating_ok?(v) && distance_ok?(v) && !repeat?(v) }
+  end
+
+  def rating_ok?(venue) 
+    venue.rating >= @profile.min_rating
+  end
+
+  def distance_ok?(venue) 
+    venue.distance <= @profile.max_distance
+  end
+
+  def repeat?(venue)
+    return false if @profile.repeat_interval == 1
+
+    @entries = History.where(user_id: session[:user_id])
+    @entries.index do |entry|
+      entry.venue_id == venue.id &&
+      (Date.today - entry.visited) < @profile.repeat_interval
     end
   end
 end

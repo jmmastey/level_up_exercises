@@ -36,6 +36,10 @@ describe Bomb do
       expect(bomb.deactivation_code).to eql(correct_deactivation_code)
     end
 
+    it 'sets a flag to let user know if the bomb is using default codes' do
+      expect(bomb.default_codes?).to eql(true)
+    end
+
     it 'allows custom activation and deactivation codes' do
       bomb = Bomb.new(custom_activation_code, custom_deactivation_code)
       expect(bomb.activate(custom_activation_code)).to be(true)

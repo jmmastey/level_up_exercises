@@ -33,6 +33,12 @@ class Bomb
     @status == DETONATED
   end
 
+  def default_codes?
+    return true if @activation_code == ACTIVATION_CODE && @deactivation_code == DEACTIVATION_CODE
+
+    false
+  end
+
   def activate(code)
     return false if active?
     return false unless code == @activation_code

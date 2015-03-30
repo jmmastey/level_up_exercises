@@ -8,14 +8,14 @@ enable :sessions
 get '/' do
   if session[:bomb]
     if session[:bomb].detonated?
-      haml :index, locals: { bomb_view: :_bomb_detonated }
+      haml :index, locals: { bomb_view: :_bomb_detonated, default_codes: nil }
     elsif session[:bomb].active?
-      haml :index, locals: { bomb_view: :_bomb_active }
+      haml :index, locals: { bomb_view: :_bomb_active, default_codes: session[:bomb].default_codes? }
     else
-      haml :index, locals: { bomb_view: :_bomb_inactive }
+      haml :index, locals: { bomb_view: :_bomb_inactive, default_codes: session[:bomb].default_codes? }
     end
   else
-    haml :index, locals: { bomb_view: :_bomb_new }
+    haml :index, locals: { bomb_view: :_bomb_new, default_codes: nil }
   end
 end
 

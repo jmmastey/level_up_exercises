@@ -1,7 +1,7 @@
 Given(/^there is a bomb$/) do
   step 'there is currently no bomb'
-  step 'I enter a number in the activation field'
-  step 'I enter a number in the deactivation field'
+  step 'I enter an activation code in the activation field'
+  step 'I enter a deactivation code in the deactivation field'
   step 'I click on the initialize button'
   step 'I should be redirected to a page with an inactive bomb'
 end

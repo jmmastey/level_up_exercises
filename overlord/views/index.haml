@@ -9,3 +9,7 @@
   %body
     .bomb
       = haml bomb_view
+
+      - if default_codes
+        .bomb-bad.bomb-message
+          using default codes

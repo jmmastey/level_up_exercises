@@ -7,7 +7,16 @@ Feature: bomb deactivation
     Given there is a bomb
     And it has been activated
 
-  Scenario: attempting to deactivate with an invalid code
-    When I enter an incorrect code in the code field
+  Scenario: attempting to deactivate with an incorrect deactivation code
+    When I enter an incorrect deactivation code in the code field
     And I click on the deactivate button
     Then I should be redirected to a page with an active bomb
+
+  Scenario: attempting to deactivate with a correct deactivation code
+    When I enter the correct deactivation code in the code field
+    And I click on the deactivate button
+    Then I should be redirected to a page with an inactive bomb
+
+  Scenario: attempting to detonate the bomb
+    When I deactivate the bomb incorrectly three times
+    Then I should be redirected to a page with a detonated bomb

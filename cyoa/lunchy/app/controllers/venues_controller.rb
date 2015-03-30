@@ -22,7 +22,7 @@ class VenuesController < ApplicationController
 
     respond_to do |format|
       format.html { render 'users/show' }
-      format.js {}
+      format.js { @history_add_url = "/history/add/#{@rec.venue_id}" }
     end
   end
 

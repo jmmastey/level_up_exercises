@@ -1,8 +1,8 @@
-<% provide(:title, 'Venues') %>
+<% provide(:title, 'History') %>
 <div class="container">
   <div class="row">
     <div class="col-md-12" style="margin-bottom: 10px">
-        <h3><strong>All Venues</strong></h2>
+        <h3><strong>History</strong></h2>
     </div>
   </div>
   <div class="row">
@@ -13,17 +13,15 @@
             <th>Name</th>
             <th>Category</th>
             <th>Street</th>
-            <th>Rating</th>
-            <th>Distance (m)</th>
+            <th>Date Visited</th>
           </tr>
         </thead>
-        <% @venues.each do |venue| %>
+        <% @entries.each do |entry| %>
         <tr>
-          <td><%= link_to venue.name, foursquare_path(venue), class: "venue-link", target: "_blank" %></td>
-          <td><%= venue.category_name %></td>
-          <td><%= venue.street %></td>
-          <td><%= venue.rating %></td>
-          <td><%= venue.distance %></td>
+          <td><%= link_to entry[1].name, foursquare_path(entry[1]), class: "venue-link", target: "_blank" %></td>
+          <td><%= entry[1].category_name %></td>
+          <td><%= entry[1].street %></td>
+          <td><%= entry[0].visited %></td>
         </tr>
         <% end %>
       </table>

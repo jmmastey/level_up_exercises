@@ -1,4 +1,7 @@
 class ProfilesController < ApplicationController
+  before_action :logged_in_user, only: [:update]
+  before_action :correct_profile, only: [:update]
+
   def update
     @user = current_user
     @profile = current_profile
@@ -6,6 +9,9 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       if @profile.update_attributes(profile_params)
         flash.now[:success] = "Settings updated successfully."
+        # This index must be reset here since changing the profile settings
+        # can change the length of the list of recommended venues
+        session[:rec_idx] = 0
         format.html { render 'users/show' }
         format.js { @success = true }
       else
@@ -21,5 +27,16 @@ class ProfilesController < ApplicationController
   def profile_params
     params.require(:profile).permit(:repeat_interval, :min_rating,
                                     :max_distance)
+  end
+
+  def correct_profile
+    begin
+      @profile = Profile.find(params[:id])
+      @user = User.find(@profile.user_id)
+    rescue ActiveRecord::RecordNotFound => e
+      @profile = nil
+      @user = nil
+    end
+    redirect_to root_url unless current_user?(@user)
   end
 end

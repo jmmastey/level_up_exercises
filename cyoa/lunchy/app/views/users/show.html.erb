@@ -16,8 +16,9 @@
   <div class="row rec-row">
     <div class="col-md-3">
       <%= form_tag("/venues/recommend", remote: true) do %>
-        <%= submit_tag "Get Recommendation", class: "btn btn-success", id: "get_rec_btn" %>
+        <%= submit_tag "Get Recommendation", class: "btn btn-primary", id: "get_rec_btn" %>
       <% end %>
+      <div id="action_buttons"></div>
     </div>
     <div class="col-md-9">
       <div id="venue_rec"></div>

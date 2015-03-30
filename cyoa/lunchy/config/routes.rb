@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  root                   'static_pages#home'
-  get    'signup'     => 'users#new'
-  get    'login'      => 'sessions#new'
-  post   'login'      => 'sessions#create'
-  delete 'logout'     => 'sessions#destroy'
-  get    'venues'     => 'venues#index'
+  root                          'static_pages#home'
+  get    'signup'            => 'users#new'
+  get    'login'             => 'sessions#new'
+  post   'login'             => 'sessions#create'
+  delete 'logout'            => 'sessions#destroy'
+  get    'history'           => 'histories#index'
+  post   'history/add/:id'   => 'histories#add'
+  get    'venues'            => 'venues#index'
   post   'venues/recommend'  => 'venues#recommend'
   resources :users
   resources :profiles, only: [:update]

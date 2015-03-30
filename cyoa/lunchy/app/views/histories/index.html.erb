@@ -16,13 +16,15 @@
             <th>Date Visited</th>
           </tr>
         </thead>
-        <% @entries.each do |entry| %>
-        <tr>
-          <td><%= link_to entry[1].name, foursquare_path(entry[1]), class: "venue-link", target: "_blank" %></td>
-          <td><%= entry[1].category_name %></td>
-          <td><%= entry[1].street %></td>
-          <td><%= entry[0].visited %></td>
-        </tr>
+        <% unless @entries.nil? %>
+          <% @entries.each do |entry| %>
+          <tr>
+            <td><%= link_to entry.venue.name, foursquare_path(entry.venue), class: "venue-link", target: "_blank" %></td>
+            <td><%= entry.venue.category_name %></td>
+            <td><%= entry.venue.street %></td>
+            <td><%= entry.visited %></td>
+          </tr>
+          <% end %>
         <% end %>
       </table>
     </div>

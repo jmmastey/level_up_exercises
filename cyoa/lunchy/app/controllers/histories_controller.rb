@@ -2,14 +2,12 @@ class HistoriesController < ApplicationController
   before_action :logged_in_user, only: [:index, :add]
 
   def index
-    @history = History.where(user_id: session[:user_id]).order(visited: :desc)
-    @venues = Venue.joins('INNER JOIN histories ON histories.venue_id = venues.venue_id')
-    @entries = @history.zip(@venues)
+    @entries = History.where(user_id: session[:user_id]).order(visited: :desc)
   end
 
   def add
     venue = Venue.find_by(venue_id: params[:id])
-    entry = History.new(user_id: session[:user_id], venue_id: venue.venue_id,
+    entry = History.new(user_id: session[:user_id], venue_id: venue.id,
                         visited: Date.today)
 
     respond_to do |format|

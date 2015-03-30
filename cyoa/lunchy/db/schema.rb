@@ -11,38 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326192018) do
+ActiveRecord::Schema.define(version: 20150325224303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "blacklists", force: :cascade do |t|
-    t.string   "venue_id"
+    t.integer  "venue_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "blacklists", ["user_id"], name: "index_blacklists_on_user_id", using: :btree
+  add_index "blacklists", ["venue_id"], name: "index_blacklists_on_venue_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
-    t.string   "venue_id"
+    t.integer  "venue_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+  add_index "favorites", ["venue_id"], name: "index_favorites_on_venue_id", using: :btree
 
   create_table "histories", force: :cascade do |t|
-    t.string   "venue_id"
     t.date     "visited"
+    t.integer  "venue_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "histories", ["user_id"], name: "index_histories_on_user_id", using: :btree
+  add_index "histories", ["venue_id"], name: "index_histories_on_venue_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "repeat_interval"
@@ -82,7 +85,10 @@ ActiveRecord::Schema.define(version: 20150326192018) do
   add_index "venues", ["venue_id"], name: "index_venues_on_venue_id", unique: true, using: :btree
 
   add_foreign_key "blacklists", "users"
+  add_foreign_key "blacklists", "venues"
   add_foreign_key "favorites", "users"
+  add_foreign_key "favorites", "venues"
   add_foreign_key "histories", "users"
+  add_foreign_key "histories", "venues"
   add_foreign_key "profiles", "users"
 end

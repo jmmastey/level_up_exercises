@@ -38,8 +38,8 @@ class DinodexWizard
   def self.prompt_user_multiple_constraints(constraint_array = [])
     constraint_array << prompt_user_for_constraint
     puts "add a constraint? (y/n)"
-      input = STDIN.gets.strip.downcase
-    if input == "y" 
+    input = STDIN.gets.strip.downcase
+    if input == "y"
       prompt_user_multiple_constraints(constraint_array)
     else
       constraint_array

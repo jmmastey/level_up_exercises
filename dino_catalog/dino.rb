@@ -30,4 +30,3 @@ class Dino
   end
 
 end
-

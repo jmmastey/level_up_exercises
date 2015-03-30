@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   delete 'logout'            => 'sessions#destroy'
   get    'history'           => 'histories#index'
   post   'history/add/:id'   => 'histories#add'
+  post   'blacklist/add/:id' => 'blacklists#add'
+  delete 'blacklist/del/:id' => 'blacklists#del'
   get    'venues'            => 'venues#index'
   post   'venues/recommend'  => 'venues#recommend'
   resources :users

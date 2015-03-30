@@ -1,4 +1,10 @@
-<% unless @rec.nil? %>
+<% if @rec.nil? %>
+<div>
+  <h2 style="margin-top: 0"><strong>:-(</strong></h2>
+  <h4><strong>No venues found matching your search criteria.</strong></h4>
+  <p class="no-rec">Maybe there's something good in the kitchen?</p>
+</div>
+<% else %>
 <div>
   <div class="pull-left">
     <%= icon_for @rec %> 

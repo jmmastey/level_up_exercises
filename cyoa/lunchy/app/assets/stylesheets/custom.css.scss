@@ -17,6 +17,11 @@ hr {
   border-top-color: #ccc;
 }
 
+div.checkbox {
+  margin: 0;
+  padding: 0;
+}
+
 /* App styles */
 #errors ul {
   list-style-type: none;
@@ -92,6 +97,11 @@ hr {
 
 .jumbotron h1 {
   font-weight: bold;
+}
+
+.no-rec {
+  font-size: 16px;
+  color: #888;
 }
 
 .quoter {

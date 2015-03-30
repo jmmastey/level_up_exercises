@@ -1,2 +1,6 @@
+<% if @rec.nil? %>
+  $("#action_buttons").empty();
+<% else %>
+  $("#action_buttons").html('<%= escape_javascript(render "histories/add") %>');
+<% end %>
 $("#venue_rec").html('<%= escape_javascript(render "venues/recommendation") %>');
-$("#action_buttons").html('<%= escape_javascript(render "histories/add") %>');

@@ -15,6 +15,7 @@
             <th>Street</th>
             <th>Rating</th>
             <th>Distance (m)</th>
+            <th style="color: #a00">Blacklisted</th>
           </tr>
         </thead>
         <% @venues.each do |venue| %>
@@ -24,6 +25,14 @@
           <td><%= venue.street %></td>
           <td><%= venue.rating %></td>
           <td><%= venue.distance %></td>
+          <td style="text-align: center">
+            <div class="checkbox">
+              <label>
+                <% @checked = blacklisted?(venue) ? 'checked="checked"' : '' %>
+                <input type="checkbox" class="cb-blacklist" <%= @checked %> aria-label="blacklisted" data-venue-id="<%= venue.id %>" >
+              </label>
+            </div>
+          </td>
         </tr>
         <% end %>
       </table>

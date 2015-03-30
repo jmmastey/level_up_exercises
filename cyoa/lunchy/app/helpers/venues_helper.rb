@@ -9,4 +9,8 @@ module VenuesHelper
     icon_url = "#{venue.category_icon_prefix}#{size}#{venue.category_icon_suffix}"
     image_tag(icon_url, alt: venue.name, class: "venue-icon-#{size}")
   end
+
+  def blacklisted?(venue)
+    @blacklist.index { |entry| entry.venue_id == venue.id }
+  end
 end

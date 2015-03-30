@@ -1,5 +1,8 @@
 class VenuesController < ApplicationController
+  include VenuesHelper
+ 
   def index
+    @blacklist = Blacklist.where(user_id: session[:user_id])
     @venues = Venue.order(distance: :asc)
   end
 
@@ -18,11 +21,16 @@ class VenuesController < ApplicationController
     @profile = current_profile
     @rec = next_recommendation
 
-    session[:rec_idx] = (session[:rec_idx] + 1) % @length
+    session[:rec_idx] = (session[:rec_idx] + 1) % @length if @length > 0
 
     respond_to do |format|
-      format.html { render 'users/show' }
-      format.js { @history_add_url = "/history/add/#{@rec.venue_id}" }
+      if @rec.nil?
+        format.html { render 'users/show' }
+        format.js {}
+      else
+        format.html { render 'users/show' }
+        format.js { @history_add_url = "/history/add/#{@rec.venue_id}" }
+      end
     end
   end
 
@@ -36,8 +44,11 @@ class VenuesController < ApplicationController
   end
 
   def load_filtered_venues
+    @blacklist = Blacklist.where(user_id: session[:user_id])
     venues ||= Venue.order(distance: :asc)
-    venues.select { |v| rating_ok?(v) && distance_ok?(v) && !repeat?(v) }
+    venues.select do |v|
+      rating_ok?(v) && distance_ok?(v) && !repeat?(v) & !blacklisted?(v)
+    end
   end
 
   def rating_ok?(venue) 

@@ -59,7 +59,7 @@ class DinodexWizard
     choice = choose_function
     case choice
       when "query"
-        constraints = prompt_user_multiple_constraints()
+        constraints = prompt_user_multiple_constraints
         pp dex.filter_by_strings(constraints)
       when "big"
         pp dex.big_dinos

@@ -1,15 +1,15 @@
 class DinoConverter 
-	require_relative 'dino'
-	require 'CSV'
+  require_relative 'dino'
+  require 'CSV'
 
-	MAPPINGS = 
-	{
-	"Genus" => "NAME", 
-	"Period" => "PERIOD", 
-	"Carnivore" => "DIET", 
-	"Weight" => "WEIGHT_IN_LBS", 
-	"Walking" => "WALKING"
-	}
+  MAPPINGS = 
+  {
+  "Genus" => "NAME", 
+  "Period" => "PERIOD", 
+  "Carnivore" => "DIET", 
+  "Weight" => "WEIGHT_IN_LBS", 
+  "Walking" => "WALKING"
+  }
 
   def self.csv_file_to_dino_array(file)
     csv = CSV::parse(File.open(file, 'r') {|f| f.read })

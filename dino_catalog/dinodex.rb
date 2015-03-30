@@ -35,9 +35,9 @@ class Dinodex
 
   def carnivores
     carnivores = @array_of_dinos.select { |dino| 
-    	dino.like?("DIET", "Carnivore") || 
-    	dino.like?("DIET", "Piscivore") || 
-    	dino.like?("DIET", "Insectivore")
+      dino.like?("DIET", "Carnivore") || 
+      dino.like?("DIET", "Piscivore") || 
+      dino.like?("DIET", "Insectivore")
     }
   end
 

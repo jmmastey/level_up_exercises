@@ -56,7 +56,7 @@ CREATE TABLE beers (
   beer_id         serial PRIMARY KEY,
   brewery_id      integer NOT NULL,
   name            varchar(250) NOT NULL,
-  style_id        integer REFERENCES styles(style_id),
+  style_id        integer NOT NULL,
   description     text,
   brewing_year    integer,
   created_at      timestamp with time zone,
@@ -71,6 +71,9 @@ CREATE TABLE beers (
     ON DELETE RESTRICT,
   CONSTRAINT brewery_id_key FOREIGN KEY (brewery_id)
     REFERENCES breweries (brewery_id)
+    ON DELETE RESTRICT,
+  CONSTRAINT style_id_key FOREIGN KEY (style_id)
+    REFERENCES styles (style_id)
     ON DELETE RESTRICT
 );
 COMMENT ON TABLE beers IS 'Beer information, many beers to a brewery';

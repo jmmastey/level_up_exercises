@@ -33,7 +33,7 @@ class ProfilesController < ApplicationController
     begin
       @profile = Profile.find(params[:id])
       @user = User.find(@profile.user_id)
-    rescue ActiveRecord::RecordNotFound => e
+    rescue ActiveRecord::RecordNotFound
       @profile = nil
       @user = nil
     end

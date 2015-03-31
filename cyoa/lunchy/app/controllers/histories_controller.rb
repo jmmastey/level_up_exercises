@@ -11,7 +11,7 @@ class HistoriesController < ApplicationController
                         visited: Date.today)
 
     respond_to do |format|
-      if entry.save 
+      if entry.save
         flash.now[:success] = "'#{venue.name}' has been added to your history."
         format.html { render 'users/show' }
         format.js { @success = true }

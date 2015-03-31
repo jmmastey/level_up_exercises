@@ -1,9 +1,12 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
   after_initialize :init
-  validates :min_rating, presence: true, :numericality => { :greater_than_or_equal_to => 0.0, :less_than_or_equal_to => 10.0 }
-  validates :repeat_interval, presence: true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 31 }
-  validates :max_distance, presence: true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 1200 }
+  validates :min_rating, presence: true, numericality: {
+    greater_than_or_equal_to: 0.0, less_than_or_equal_to: 10.0 }
+  validates :repeat_interval, presence: true, numericality: {
+    greater_than: 0, less_than_or_equal_to: 31 }
+  validates :max_distance, presence: true, numericality: {
+    greater_than: 0, less_than_or_equal_to: 1200 }
 
   DEFAULT_REPEAT_INTERVAL = 5
   DEFAULT_MIN_RATING = 0.0

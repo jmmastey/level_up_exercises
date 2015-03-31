@@ -9,15 +9,12 @@ module ApplicationHelper
   end
 
   def logged_in_user
-    unless logged_in?
-      flash[:danger] = "You must be logged in to view this page."
-      redirect_to login_url
-    end
+    return if logged_in?
+    flash[:danger] = "You must be logged in to view this page."
+    redirect_to login_url
   end
 
   def logged_out_user
-    if logged_in?
-      redirect_to root_url
-    end
+    redirect_to root_url if logged_in?
   end
 end

@@ -4,7 +4,7 @@ module SessionsHelper
   end
 
   def log_out
-    return if !logged_in?
+    return unless logged_in?
     session.delete(:user_id)
     @current_user = nil
     @current_profile = nil

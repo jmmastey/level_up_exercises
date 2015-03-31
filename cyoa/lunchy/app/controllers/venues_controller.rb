@@ -1,6 +1,8 @@
 class VenuesController < ApplicationController
+  before_action :logged_in_user, only: [:index, :recommend]
+
   include VenuesHelper
- 
+
   def index
     @blacklist = Blacklist.where(user_id: session[:user_id])
     @venues = Venue.order(distance: :asc)
@@ -21,8 +23,6 @@ class VenuesController < ApplicationController
     @profile = current_profile
     @rec = next_recommendation
 
-    session[:rec_idx] = (session[:rec_idx] + 1) % @length if @length > 0
-
     respond_to do |format|
       if @rec.nil?
         format.html { render 'users/show' }
@@ -38,9 +38,11 @@ class VenuesController < ApplicationController
 
   def next_recommendation
     venues = load_filtered_venues
-    @length = venues.length
     venues.shuffle!(random: Random.new(session[:rng_seed]))
-    venues[session[:rec_idx]]
+    curr_idx = session[:rec_idx]
+    length = venues.length
+    session[:rec_idx] = (curr_idx + 1) % length if length > 0
+    venues[curr_idx]
   end
 
   def load_filtered_venues
@@ -51,11 +53,11 @@ class VenuesController < ApplicationController
     end
   end
 
-  def rating_ok?(venue) 
+  def rating_ok?(venue)
     venue.rating >= @profile.min_rating
   end
 
-  def distance_ok?(venue) 
+  def distance_ok?(venue)
     venue.distance <= @profile.max_distance
   end
 
@@ -63,9 +65,10 @@ class VenuesController < ApplicationController
     return false if @profile.repeat_interval == 1
 
     @entries = History.where(user_id: session[:user_id])
-    @entries.index do |entry|
-      entry.venue_id == venue.id &&
-      (Date.today - entry.visited) < @profile.repeat_interval
-    end
+    @entries.index { |item| item.venue_id == venue.id && too_soon?(item) }
+  end
+
+  def too_soon?(item)
+    (Date.today - item.visited) < @profile.repeat_interval
   end
 end

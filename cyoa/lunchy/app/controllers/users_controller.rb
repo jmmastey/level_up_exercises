@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @profile = current_profile
     begin
       @user = User.find(params[:id])
-    rescue ActiveRecord::RecordNotFound => e
+    rescue ActiveRecord::RecordNotFound
       redirect_to root_url
     end
   end
@@ -39,11 +39,11 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation)
   end
- 
+
   def correct_user
     begin
       @user = User.find(params[:id])
-    rescue ActiveRecord::RecordNotFound => e
+    rescue ActiveRecord::RecordNotFound
       @user = nil
     end
     redirect_to root_url unless current_user?(@user)

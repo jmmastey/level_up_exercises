@@ -15,8 +15,8 @@ end
 def generate_rating_records count=100
   count.times do
     insert_record "ratings", {
-      person_id: (get_record_id "persons"),
-      beer_id: (get_record_id "beers"),
+      person_id: (get_record_id "persons", "person_id"),
+      beer_id: (get_record_id "beers", "beer_id"),
       look: Faker::Number.digit,
       smell: Faker::Number.digit,
       taste: Faker::Number.digit,
@@ -24,7 +24,7 @@ def generate_rating_records count=100
       overall: Faker::Number.digit,
       description: Faker::Lorem.sentence(3),
       created_at: Faker::Date.between("2014-01-01", Date.today),
-      updated_by: (get_record_id "persons")
+      updated_by: (get_record_id "persons", "person_id")
     }
   end
 end
@@ -32,13 +32,13 @@ end
 def generate_beer_records count=100
   count.times do
     insert_record "beers", {
-      brewery_id: (get_record_id "breweries"),
+      brewery_id: (get_record_id "breweries", "brewery_id"),
       name: Faker::Company.name.gsub("'"){""},
       style: Faker::Hacker.noun,
       description: Faker::Lorem.sentence(3),
       brewing_year: Faker::Date.between("2000-01-01", Date.today).year,
       created_at: Faker::Date.between("2014-01-01", Date.today),
-      updated_by: (get_record_id "persons")
+      updated_by: (get_record_id "persons", "person_id")
     }
   end
 end
@@ -54,7 +54,7 @@ def generate_brewery_records count=100
       description: Faker::Lorem.sentence(3),
       founding_year: Faker::Date.between("1500-01-01", Date.today).year,
       created_at: Faker::Date.between("2014-01-01", Date.today),
-      updated_by: (get_record_id "persons")
+      updated_by: (get_record_id "persons", "person_id")
     }
   end
 end
@@ -73,9 +73,9 @@ def generate_person_records count=100
 end
 
 #refactor, move focus off DB
-def get_record_id table
-  record = @conn.exec( "SELECT #{table}_id FROM #{table} ORDER BY RANDOM() LIMIT 1" ).first
-  record["#{table}_id"]
+def get_record_id table, primary_key
+  record = @conn.exec( "SELECT #{primary_key} FROM #{table} ORDER BY RANDOM() LIMIT 1" ).first
+  record["#{primary_key}"]
 end
 
 def insert_record table, info_hash

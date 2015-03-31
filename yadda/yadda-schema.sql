@@ -26,7 +26,7 @@ CREATE TABLE persons (
     REFERENCES persons (person_id)
     ON DELETE RESTRICT
 );
-COMMENT ON TABLE person IS 'Person information';
+COMMENT ON TABLE persons IS 'Person information';
 
 DROP TABLE IF EXISTS breweries CASCADE;
 CREATE TABLE breweries (
@@ -49,14 +49,14 @@ CREATE TABLE breweries (
     REFERENCES persons (person_id)
     ON DELETE RESTRICT
 );
-COMMENT ON TABLE brewery IS 'Brewery information';
+COMMENT ON TABLE breweries IS 'Brewery information';
 
 DROP TABLE IF EXISTS beers CASCADE;
 CREATE TABLE beers (
   beer_id         serial PRIMARY KEY,
   brewery_id      integer NOT NULL,
   name            varchar(250) NOT NULL,
-  style           varchar(25),
+  style_id        integer REFERENCES styles(style_id),
   description     text,
   brewing_year    integer,
   created_at      timestamp with time zone,
@@ -73,7 +73,24 @@ CREATE TABLE beers (
     REFERENCES breweries (brewery_id)
     ON DELETE RESTRICT
 );
-COMMENT ON TABLE beer IS 'Beer information, many beers to a brewery';
+COMMENT ON TABLE beers IS 'Beer information, many beers to a brewery';
+
+DROP TABLE IF EXISTS styles CASCADE;
+CREATE TABLE styles (
+  style_id        serial PRIMARY KEY,
+  style           varchar(25),
+  created_at      timestamp with time zone,
+  created_by      integer REFERENCES persons(person_id),
+  updated_at      timestamp with time zone,
+  updated_by      integer REFERENCES persons(person_id),
+  CONSTRAINT created_by_key FOREIGN KEY (created_by)
+    REFERENCES persons (person_id)
+    ON DELETE RESTRICT,
+  CONSTRAINT updated_by_key FOREIGN KEY (updated_by)
+    REFERENCES persons (person_id)
+    ON DELETE RESTRICT
+);
+COMMENT ON TABLE styles IS 'Style information, describes a beer';
 
 DROP TABLE IF EXISTS ratings CASCADE;
 CREATE TABLE ratings (
@@ -103,4 +120,4 @@ CREATE TABLE ratings (
     REFERENCES beers (beer_id)
     ON DELETE RESTRICT
 );
-COMMENT ON TABLE rating IS 'Rating information, link between person and a beer';
+COMMENT ON TABLE ratings IS 'Rating information, link between person and a beer';

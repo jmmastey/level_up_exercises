@@ -75,6 +75,7 @@ GEM
       mime-types (>= 1.16, < 3)
       nokogiri (~> 1.5)
       rails (>= 3, < 5)
+    database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -220,6 +221,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   cucumber-rails
+  database_cleaner
   factory_girl_rails
   faker
   foursquare2

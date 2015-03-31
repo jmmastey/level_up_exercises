@@ -22,8 +22,8 @@ class FoursquareClient
 
   def initialize
     @client = Foursquare2::Client.new(
-      :client_id => CLIENT_ID,
-      :client_secret => CLIENT_SECRET,
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
     )
   end
 
@@ -34,11 +34,13 @@ class FoursquareClient
 
   def api_options(max_distance, num_results)
     {
-      :v => API_VERSION,
-      :ll => "#{LAT},#{LONG}",
-      :radius => max_distance,
-      :section => SECTION_FOOD,
-      :limit => num_results > 0 ? num_results : MAX_RESULTS,
+      v: API_VERSION,
+      ll: "#{LAT},#{LONG}",
+      radius: max_distance,
+      section: SECTION_FOOD,
+      limit: (num_results > 0 ? num_results : MAX_RESULTS),
+      price: "1,2,3,4",
+      sortByDistance: 1
     }
   end
 
@@ -95,15 +97,15 @@ class FoursquareClient
   def to_h(item)
     venue = item.venue
     {
-      :venue_id => venue.id,
-      :name => venue.name,
-      :street => venue.location.address,
-      :distance => venue.location.distance,
-      :rating => venue.rating,
-      :url => venue.url,
-      :category => venue.categories.first.name,
-      :icon_prefix => venue.categories.first.icon.prefix,
-      :icon_suffix  => venue.categories.first.icon.suffix,
+      venue_id: venue.id,
+      name: venue.name,
+      street: venue.location.address,
+      distance: venue.location.distance,
+      rating: venue.rating,
+      url: venue.url,
+      category: venue.categories.first.name,
+      icon_prefix: venue.categories.first.icon.prefix,
+      icon_suffix: venue.categories.first.icon.suffix,
     }
   end
 end

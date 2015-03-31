@@ -19,14 +19,16 @@ namespace :import do
       venue.name = item[:name]
       venue.street = item[:street]
       venue.distance = item[:distance]
-      venue.rating = item[:rating]
+      # Some venues don't have an official rating, so to allow these
+      # records to be added to the database, we'll just default to 0.0
+      venue.rating = item[:rating] || 0.0
       venue.url = item[:url]
       venue.category_name = item[:category]
       venue.category_icon_prefix = item[:icon_prefix]
       venue.category_icon_suffix = item[:icon_suffix]
 
       if venue.valid?
-        venue.save 
+        venue.save
         new_venues += 1
       end
     end

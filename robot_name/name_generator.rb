@@ -8,7 +8,7 @@ class NameGenerator
   UNIQUE_NAME_MAX_ATTEMPTS = 10
 
   def self.generate_char
-    ('A'..'Z').to_a.sample 
+    ('A'..'Z').to_a.sample
   end
 
   def self.generate_num
@@ -16,7 +16,7 @@ class NameGenerator
   end
 
   def self.generate_name
-    name = "#{generate_char}#{generate_char}"+ 
+    "#{generate_char}#{generate_char}"+ 
     "#{generate_num}#{generate_num}#{generate_num}"
   end
 
@@ -27,7 +27,7 @@ class NameGenerator
     while REGISTERY.contains? name
       name = generate_name
       attempts += 1
-      raise NameRegistryError, 
+      raise NameRegistryError,
         "Unique name cannot be generated." if attempts == max_attempts
     end
 
@@ -43,7 +43,7 @@ class NameGenerator
   def self.call
     name = generate_unique_name(UNIQUE_NAME_MAX_ATTEMPTS)
     check_name_format(name)
-    REGISTERY.add_name(name)  
+    REGISTERY.add_name(name)
     name
   end
 end

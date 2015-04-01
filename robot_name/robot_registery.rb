@@ -1,4 +1,4 @@
-class RobotRegistery 
+class RobotRegistery
   attr_reader :names
 
   def initialize(names = [])

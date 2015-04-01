@@ -1,17 +1,5 @@
-VALID_NAME = "John Doe"
-VALID_EMAIL = "jdoe@example.com"
-VALID_PASSWORD = "foobar"
-
 def parent(field_id)
   find_field(field_id).find(:xpath, ".//..")
-end
-
-Given(/^I am on the (.*?) page$/) do |arg1|
-  if arg1 == "home"
-    visit('/')
-  else
-    visit("/#{arg1}")
-  end
 end
 
 When(/^I click the signup button$/) do

@@ -55,6 +55,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webkit (1.5.0)
+      capybara (>= 2.3.0, < 2.5.0)
+      json
+    childprocess (0.5.5)
+      ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -91,6 +96,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
+    ffi (1.9.8)
     foursquare2 (2.0.1)
       faraday (~> 0.8)
       faraday_middleware (>= 0.8)
@@ -173,6 +179,7 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
+    rubyzip (1.1.7)
     sass (3.4.13)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -183,6 +190,11 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    selenium-webdriver (2.45.0)
+      childprocess (~> 0.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     spring (1.3.3)
     sprockets (2.12.3)
       hike (~> 1.2)
@@ -208,6 +220,7 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    websocket (1.2.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -219,6 +232,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   capybara
+  capybara-webkit
   coffee-rails (~> 4.1.0)
   cucumber-rails
   database_cleaner
@@ -233,6 +247,7 @@ DEPENDENCIES
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  selenium-webdriver
   spring
   turbolinks
   uglifier (>= 1.3.0)

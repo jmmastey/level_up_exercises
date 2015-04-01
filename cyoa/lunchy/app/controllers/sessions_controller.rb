@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to root_url
     else
-      flash.now[:danger] = "Invalid email and/or password"
-      render 'new'
+      flash[:danger] = "Invalid email and/or password"
+      redirect_to login_url
     end
   end
 

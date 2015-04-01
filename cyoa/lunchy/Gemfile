@@ -48,6 +48,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
+  gem 'selenium-webdriver'
 end
 
 group :test do
@@ -55,4 +56,5 @@ group :test do
   gem 'database_cleaner'
   gem 'faker'
   gem 'capybara'
+  gem 'capybara-webkit'
 end

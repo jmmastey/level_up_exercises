@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :user do |f|
     f.name { "#{Faker::Name.first_name} #{Faker::Name.last_name}" }
     f.email { Faker::Internet.email }
-    f.password { Faker::Internet.password(8, 16) }
   end
 
   factory :profile do |f|
@@ -22,7 +21,7 @@ FactoryGirl.define do
     f.rating { "#{Faker::Number.digit}.#{Faker::Number.digit}" }
     f.url { Faker::Internet.url }
     f.category_name { Faker::Internet.slug }
-    f.category_icon_prefix "64"
+    f.category_icon_prefix "https://ss3.4sqi.net/img/categories_v2/food/breakfast_"
     f.category_icon_suffix ".png"
   end
 

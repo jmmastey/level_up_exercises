@@ -17,7 +17,7 @@ class NameGenerator
 
   def self.generate_name
     "#{generate_char}#{generate_char}"+ 
-    "#{generate_num}#{generate_num}#{generate_num}"
+      "#{generate_num}#{generate_num}#{generate_num}"
   end
 
   def self.generate_unique_name(max_attempts)

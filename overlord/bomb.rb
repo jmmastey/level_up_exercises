@@ -1,16 +1,11 @@
 class InvalidCodeError < ArgumentError; end
 
 class Bomb
-  attr_reader :arm_code, :disarm_retries, :state
+  attr_reader :disarm_retries, :state
 
   ARM_CODE_DFLT = "1234"
   DISARM_CODE_DFLT = "0000"
   DISARM_RETRIES_MAX = 3
-
-  # Possible Bomb states are
-  #  :inactive
-  #  :armed
-  #  :exploded
 
   def initialize(arm_code = ARM_CODE_DFLT, disarm_code = DISARM_CODE_DFLT)
     unless Bomb.code_valid?(arm_code) && Bomb.code_valid?(disarm_code)
@@ -38,7 +33,7 @@ class Bomb
   def process_code(code)
     # ignore empty codes
     # ignore the correct activation code after the bomb is armed
-    return true if code.strip == "" || (armed? && code == arm_code)
+    return true if code.strip == "" || (armed? && code == @arm_code)
     return arm(code) if inactive?
     return disarm(code) if armed?
     false

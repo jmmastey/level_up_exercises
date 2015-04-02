@@ -1,5 +1,5 @@
 def submit_correct_activation_code
-  fill_in('code', :with => '1234')
+  fill_in('code', with: '1234')
   click_button('submit')
 end
 
@@ -21,7 +21,7 @@ Then(/^I should see a submit button$/) do
 end
 
 When(/^I submit an incorrect activation code$/) do
-  fill_in('code', :with => '9999')
+  fill_in('code', with: '9999')
   click_button('submit')
 end
 

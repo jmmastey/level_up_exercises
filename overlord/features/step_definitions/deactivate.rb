@@ -1,10 +1,10 @@
 def submit_incorrect_deactivation_code
-  fill_in('code', :with => '9999')
+  fill_in('code', with: '9999')
   click_button('submit')
 end
 
 When(/^I submit the correct deactivation code$/) do
-  fill_in('code', :with => '0000')
+  fill_in('code', with: '0000')
   click_button('submit')
 end
 

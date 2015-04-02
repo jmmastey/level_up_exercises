@@ -16,33 +16,28 @@ class NameGenerator
     end
   end
 
-  private
   def self.random_letter_sequence(number_of_characters)
     number_of_characters.times.inject('') { |string, _iteration|
       string << VALID_LETTERS.sample
     }
   end
 
-  private
   def self.random_number_sequence(number_of_digits)
     number_of_digits.times.inject('') { |int, _iteration|
       int << VALID_NUMBERS.sample.to_s
     }
   end
 
-  private
   def self.generate_name
     "#{random_letter_sequence(2)}#{random_number_sequence(3)}"
     # IB "Magic numbers." Cost of changing later is identical to now.
   end
 
-  private
   def self.generate_name_and_register
     name = generate_name
     REGISTRY.add_name(name) ? name : nil # is this weird?
   end
 
-  private
   def self.generate_unique_name(max_attempts)
     attempts = 0
 
@@ -55,7 +50,6 @@ class NameGenerator
     raise NameRegistryError, "Unique name cannot be generated."
   end
 
-  private
   def self.check_name_format(name)
     unless name =~ ROBOT_NAME_FORMAT
       raise NameFormatError, "The robot's name sucks! (#{name})"

@@ -62,9 +62,7 @@ class VenuesController < ApplicationController
   end
 
   def repeat?(venue)
-    return false if @profile.repeat_interval == 1
-
-    @entries = History.where(user_id: session[:user_id])
+    @entries ||= History.where(user_id: session[:user_id])
     @entries.index { |item| item.venue_id == venue.id && too_soon?(item) }
   end
 

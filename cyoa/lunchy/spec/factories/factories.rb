@@ -28,7 +28,7 @@ FactoryGirl.define do
   factory :history do |f|
     f.venue_id { Faker::Number.digit }
     f.user_id { Faker::Number.digit }
-    f.date { Faker::Date.between(10.days.ago, Date.today) }
+    f.visited { Faker::Date.between(10.days.ago, Date.today) }
   end
 
   factory :blacklist do |f|

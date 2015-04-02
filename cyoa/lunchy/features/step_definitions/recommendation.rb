@@ -36,6 +36,10 @@ When(/^I click the Get Recommendation button$/) do
   click_button("get_rec_btn")
 end
 
+When(/^I change the search radius selector$/) do
+  find("#profile_max_distance").find(:xpath, "option[1]").select_option
+end
+
 Given(/^a venue exists$/) do
   create_venue(1)
   fill_in("profile_min_rating", with: 0.0) 

@@ -6,12 +6,6 @@ When(/^I click the signup button$/) do
   click_link('Sign Up')
 end
 
-Then(/^I should be on the (.*?) page$/) do |arg1|
-  current_path = URI.parse(current_url).path
-  expected_path = (arg1 == "home") ? "/" : "/#{arg1}"
-  expect(current_path).to eql(expected_path)
-end
-
 When(/^I leave the signup fields empty$/) do
   fill_in("user_name", with: "")
   fill_in("user_email", with: "")

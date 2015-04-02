@@ -1,14 +1,14 @@
 Feature: Create user account
   As a user
   I want to create a Lunchy account
-  So I can use the Lunchy service
+  So I can login to the Lunchy service
 
   Scenario: Access Sign Up page
     Given I am on the home page
     When I click the signup button
     Then I should be on the signup page
 
-  Scenario: Attempt to create account with no name
+  Scenario: Attempt to create account with empty signup form 
     Given I am on the signup page
     When I leave the signup fields empty
     And I attempt to create an account

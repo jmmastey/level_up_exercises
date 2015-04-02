@@ -1,10 +1,11 @@
 When(/^I click the blacklist checkbox$/) do
-puts page.body
   find("input[type='checkbox']").click
 end
 
 Then(/^the venue should be stored in the blacklist$/) do
-  true
+  visit("/venues")
+  checkbox = find("input[type='checkbox']")
+  expect(checkbox).to be_checked
 end
 
 Given(/^I have blacklisted a venue$/) do
@@ -12,6 +13,8 @@ Given(/^I have blacklisted a venue$/) do
   visit("/venues")
   find("input[type='checkbox']").click
   visit("/venues")
+  checkbox = find("input[type='checkbox']")
+  expect(checkbox).to be_checked
 end
 
 When(/^I clear the blacklist checkbox$/) do
@@ -19,7 +22,9 @@ When(/^I clear the blacklist checkbox$/) do
 end
 
 Then(/^the venue should be removed from the blacklist$/) do
-  pending # express the regexp above with the code you wish you had
+  visit("/venues")
+  checkbox = find("input[type='checkbox']")
+  expect(checkbox).not_to be_checked
 end
 
 

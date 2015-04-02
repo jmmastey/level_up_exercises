@@ -27,6 +27,12 @@ Feature: Get restaurant recommendation
     And I save my settings
     Then I should see a success alert box 
 
+  Scenario: Save new search radius setting
+    Given I am logged into my account
+    When I change the search radius selector
+    And I save my settings
+    Then I should see a success alert box 
+
   Scenario: Get a restaurant recommendation
     Given I am logged into my account
     And a venue exists

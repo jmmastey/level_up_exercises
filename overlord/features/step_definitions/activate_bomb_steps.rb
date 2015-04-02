@@ -6,6 +6,6 @@ Given(/^there is a bomb$/) do
   step 'I should be redirected to a page with an inactive bomb'
 end
 
-And(/^I click on the activate button$/) do
+When(/^I click on the activate button$/) do
   click_button('activate')
 end

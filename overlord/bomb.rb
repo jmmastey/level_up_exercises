@@ -3,12 +3,9 @@ class Bomb
 
   ACTIVATION_CODE = '1234'
   DEACTIVATION_CODE = '0000'
-  INACTIVE = 0
-  ACTIVE = 1
-  DETONATED = 2
 
   def initialize(activation_code = ACTIVATION_CODE, deactivation_code = DEACTIVATION_CODE)
-    @status = INACTIVE
+    @status = :inactive
     @deactivation_attempts = 0
 
     @activation_code = correct_format?(activation_code) ? activation_code : ACTIVATION_CODE
@@ -22,18 +19,18 @@ class Bomb
   end
 
   def active?
-    @status == ACTIVE
+    @status == :active
   end
 
   def inactive?
-    @status == INACTIVE
+    @status == :inactive
   end
 
   def detonated?
-    @status == DETONATED
+    @status == :detonated
   end
 
-  def default_codes?
+  def using_default_codes?
     return true if @activation_code == ACTIVATION_CODE && @deactivation_code == DEACTIVATION_CODE
 
     false
@@ -48,7 +45,7 @@ class Bomb
   end
 
   def successful_activation
-    @status = ACTIVE
+    @status = :active
     @deactivation_attempts = 0
   end
 
@@ -56,7 +53,7 @@ class Bomb
     return false unless active?
     return failed_deactivation unless code == @deactivation_code
 
-    @status = INACTIVE
+    @status = :inactive
     true
   end
 
@@ -67,7 +64,7 @@ class Bomb
   end
 
   def detonate
-    @status = DETONATED
+    @status = :detonated
   end
 
   def correct_format?(code)

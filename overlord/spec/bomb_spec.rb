@@ -9,13 +9,10 @@ describe Bomb do
   let (:custom_activation_code) { '4321' }
   let (:custom_deactivation_code) { '1111' }
   let (:invalid_code) { 'asdf' }
-  let (:inactive) { :inactive }
-  let (:active) { :active }
-  let (:detonated) { :detonated }
 
   context 'when initializing' do
     it 'is not active' do
-      expect(bomb.status).to be(inactive)
+      expect(bomb.status).to be(:inactive)
     end
 
     it 'has no activation attempts' do
@@ -37,7 +34,7 @@ describe Bomb do
     end
 
     it 'sets a flag to let user know if the bomb is using default codes' do
-      expect(bomb.default_codes?).to eql(true)
+      expect(bomb).to be_using_default_codes
     end
 
     it 'allows custom activation and deactivation codes' do
@@ -45,66 +42,57 @@ describe Bomb do
       expect(bomb.activate(custom_activation_code)).to be(true)
       expect(bomb.deactivate(custom_deactivation_code)).to be(true)
     end
-
-    it 'does not allow activation and deactivation codes shorter than 4 characters' do
-      expect(bomb.activation_code).to eql(correct_activation_code)
-      expect(bomb.deactivation_code).to eql(correct_deactivation_code)
-    end
   end
 
   context 'when inputting codes' do
-    it 'activates when activation code is entered' do
-      activation = bomb.activate(correct_activation_code)
-      expect(activation).to be(true)
-      expect(bomb.status).to be(active)
-    end
-
-    it 'does nothing when activation code is entered again' do
-      bomb.activate(correct_activation_code)
-      activation = bomb.activate(correct_activation_code)
-      expect(activation).to be(false)
-      expect(bomb.status).to be(active)
-    end
-
-    it 'does nothing when wrong activation code is entered' do
-      activation = bomb.activate(incorrect_activation_code)
-      expect(activation).to be(false)
-      expect(bomb.status).to be(inactive)
-    end
-
-    it 'deactivates when deactivation code is entered' do
-      bomb.activate(correct_activation_code)
-      expect(bomb.status).to be(active)
-
-      deactivation = bomb.deactivate(correct_deactivation_code)
-      expect(deactivation).to be(true)
-      expect(bomb.status).to be(inactive)
-    end
-
-    it 'does nothing when deactivation code is entered if bomb not active' do
-      deactivation = bomb.deactivate(correct_deactivation_code)
-      expect(deactivation).to be(false)
-
-      deactivation = bomb.deactivate(incorrect_deactivation_code)
-      expect(deactivation).to be(false)
-
-      expect(bomb.deactivation_attempts).to be(0)
-    end
-
-    it 'explodes when deactivation code is entered incorrectly 3 times' do
-      bomb.activate(correct_activation_code)
-      expect(bomb.status).to be(active)
-
-      2.times do |i|
-        deactivation = bomb.deactivate(incorrect_deactivation_code)
-        expect(deactivation).to be(false)
-        expect(bomb.deactivation_attempts).to be(i+1)
-        expect(bomb.status).to be(active)
+    describe '#activate' do
+      it 'activates when activation code is entered' do
+        bomb.activate(correct_activation_code)
+        expect(bomb.status).to be(:active)
       end
 
-      deactivation = bomb.deactivate(incorrect_deactivation_code)
-      expect(deactivation).to be(false)
-      expect(bomb.status).to be(detonated)
+      it 'does nothing when activation code is entered again' do
+        bomb.activate(correct_activation_code)
+        bomb.activate(correct_activation_code)
+        expect(bomb.status).to be(:active)
+      end
+
+      it 'does nothing when wrong activation code is entered' do
+        bomb.activate(incorrect_activation_code)
+        expect(bomb.status).to be(:inactive)
+      end
+    end
+
+    describe '#deactivate' do
+      it 'deactivates when deactivation code is entered' do
+        bomb.activate(correct_activation_code)
+        expect(bomb.status).to be(:active)
+
+        bomb.deactivate(correct_deactivation_code)
+        expect(bomb.status).to be(:inactive)
+      end
+
+      it 'does nothing when deactivation codes are entered if bomb not active' do
+        bomb.deactivate(correct_deactivation_code)
+        expect(bomb.status).to be(:inactive)
+
+        bomb.deactivate(incorrect_deactivation_code)
+        expect(bomb.status).to be(:inactive)
+
+        expect(bomb.deactivation_attempts).to be_zero
+      end
+
+      it 'explodes when deactivation code is entered incorrectly 3 times' do
+        bomb.activate(correct_activation_code)
+
+        2.times do |i|
+          bomb.deactivate(incorrect_deactivation_code)
+          expect(bomb.deactivation_attempts).to eq(i+1)
+        end
+
+        bomb.deactivate(incorrect_deactivation_code)
+        expect(bomb.status).to be(:detonated)
+      end
     end
   end
 

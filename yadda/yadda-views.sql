@@ -35,11 +35,12 @@ create or replace view recent_score AS
 -- "You might also enjoy", which picks beers of the same style with high average scores, and then sorts them randomly. 
 create or replace view also_enjoy AS
   select beers.name as beername,
-    beers.style as beerstyle,
+    styles.style as beerstyle,
     ratings.computed
   from beers
+  inner join styles on beers.style_id = styles.style_id
   inner join (select beer_id,
-               AVG(rating.overall) as computed 
+               AVG(ratings.overall) as computed 
              from ratings 
              group by beer_id) ratings on ratings.beer_id = beers.beer_id
   order by RANDOM();

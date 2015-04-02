@@ -29,12 +29,24 @@ def generate_rating_records count=100
   end
 end
 
+def generate_style_records count=25
+  count.times do
+    insert_record "styles", {
+      style: Faker::Hacker.noun,
+      created_at: Faker::Date.between("2014-01-01", Date.today),
+      created_by: (get_record_id "persons", "person_id"),
+      updated_at: Faker::Date.between("2014-01-01", Date.today),
+      updated_by: (get_record_id "persons", "person_id")
+    }
+  end
+end
+
 def generate_beer_records count=100
   count.times do
     insert_record "beers", {
       brewery_id: (get_record_id "breweries", "brewery_id"),
       name: Faker::Company.name.gsub("'"){""},
-      style: Faker::Hacker.noun,
+      style_id: (get_record_id "styles", "style_id"),
       description: Faker::Lorem.sentence(3),
       brewing_year: Faker::Date.between("2000-01-01", Date.today).year,
       created_at: Faker::Date.between("2014-01-01", Date.today),

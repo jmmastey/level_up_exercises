@@ -1,0 +1,16 @@
+<h2>Welcome to BareBonesBomb v1.0</h2>
+<h3>Please configure your bomb</h3>
+<div class="spacer"></div>
+<p style="margin-bottom: 30px">[ You can leave a field empty if you wish to keep the current value ]</p>
+<form action="/configure" method="post">
+  <div style="margin-bottom: 20px">
+    <label for="arm_code">Enter an activation code (<%= @arm_code_default %>):</label><br />
+    <input type="text" name="arm_code" id="arm_code">
+  </div>
+  <div>
+    <label for="disarm_code">Enter a deactivation code (<%= @disarm_code_default %>):</label><br />
+    <input type="text" name="disarm_code" id="disarm_code">
+  </div>
+  <input style="margin-top: 10px" type="submit" value="Save Codes" id="save">
+</form>
+<p id="error_msg" class="error"><%= @error_msg %></p>

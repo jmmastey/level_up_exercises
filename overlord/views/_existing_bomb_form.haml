@@ -1,0 +1,6 @@
+.bomb-screen.existing
+  %input.bomb-code-input{placeholder: 'code'}
+  %button.bomb-activation-button.bomb-form-button activate
+  %button.bomb-deactivation-button.bomb-form-button deactivate
+
+= haml :_bomb_keypad, locals: { keypad_enabled: true }

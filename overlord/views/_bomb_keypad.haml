@@ -1,0 +1,8 @@
+.bomb-keypad
+  - 10.times do |button|
+    - button_value = (button+1)%10
+    - button_id = "button_"+button_value.to_s
+    - if keypad_enabled
+      %button.bomb-button{id: button_id} #{button_value}
+    - else
+      %button.bomb-button.disabled{id: button_id} #{button_value}

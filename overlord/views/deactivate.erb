@@ -1,0 +1,40 @@
+<body bgcolor="black">
+<div style="margin-top: 300px">
+<center>    
+<h2><font color="red">Bomb is active!!!</font></h2>
+
+<script src ="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <script> 
+    <!--  
+    var seconds=<%= session[:countdown].to_i%>;
+
+    function display(){ 
+      if (seconds<=-1){ 
+        window.location = "explode"
+      } 
+     else
+        $('#d2').val(seconds+"s"); 
+        seconds -= 1
+        setTimeout("display()",1000)
+    } 
+    $(function(){
+        display();
+    }); 
+    --> 
+</script> 
+<form action="/deactivate" method="post">
+  <input type="text" size="8" name="d2" id="d2" style="background-color: red; font-size: 30px; font-weight: bold; width: 55px">
+  <br />
+  <br />
+  <font color="red">Enter deactivation code:</font>
+  <input type="text" name="deactivate_code" id="deactivate_code">
+  <br />
+  <br />
+  <input style="margin-top: 10px; background-color: green; font-size: 20px; font-weight: bold; height: 50px; width: 120px"
+    type="submit" value="Deactivate" id="Deactivate">
+</form>
+<font color="red"><p id="error_msg"><%= @error_msg %></p></font>
+</center>
+</div>
+</body>

@@ -1,0 +1,18 @@
+<body bgcolor="black">
+<div style="margin-top: 300px">
+<center>
+<h2><font color="yellow">Are you ready to boot the bomb?!</font></h2>
+<form action="/configure" method="post">
+  <font color="blue">Configure activation code:</font>
+  <input type="text" name="activation_code" id="activation_code">
+  <br />
+  <br />
+  <br />
+  <font color="blue">Configure deacivation code:</font>
+  <input type="text" name="deactivation_code" id="deactivation_code">
+  <br />
+  <br />
+  <input style="margin-top: 10px; background-color: green; font-size: 20px; font-weight: bold; height: 50px; width: 90px"
+    type="submit" value="Boot" id="boot">
+</form>
+<font color="red"><p id="error_msg"><%= @error_msg %></p></font>

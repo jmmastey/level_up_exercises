@@ -1,0 +1,16 @@
+<body bgcolor="black">
+<div style="margin-top: 300px">
+<center>
+<h2><font color="gainsboro">Time to activate the bomb!</font></h2>
+<form action="/activate" method="post">
+  <font color="gainsboro">Enter activation code:</font>
+  <input type="text" name="activate_code" id="activate_code">
+  <br />
+  <br />
+  <input style="margin-top: 10px; background-color: red; font-size: 20px; font-weight: bold; height: 50px; width: 100px"
+    type="submit" value="Activate" id="Activate">
+</form>
+<font color="red"><p id="error_msg"><%= @error_msg %></p></font>
+</center>
+</div>
+</body>

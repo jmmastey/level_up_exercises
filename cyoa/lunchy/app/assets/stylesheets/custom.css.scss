@@ -1,0 +1,160 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+/* Bootstrap style overrides */
+.navbar-inverse {
+  background-color: #555;
+  border-color: #444;
+}
+
+hr {
+  border-top-color: #ccc;
+}
+
+div.checkbox {
+  margin: 0;
+  padding: 0;
+}
+
+/* App styles */
+#errors ul {
+  list-style-type: none;
+}
+
+#get_rec_btn {
+  margin-bottom: 20px;
+}
+
+#logo {
+  color: #fff;
+  font-size: 1.7em;
+  font-weight: bold;
+  &:hover {
+    color: #ccc;
+  }
+}
+
+.big-quote {
+  padding-right: 50px;
+}
+
+.blue {
+  color: #337ab7;
+}
+
+.center {
+  text-align: center;
+}
+
+.control-label {
+  white-space: nowrap;
+}
+
+.edit_profile {
+  .form-group {
+      padding-left: 0
+  }
+}
+
+.field_with_errors {
+  input {
+    background-color: #f2dede;
+  }
+  label {
+    color: #a94442;
+  }
+}
+
+.flash-fixed {
+  position: absolute;
+  top: 51px;
+  width: 100%;
+  z-index: 999;
+}
+
+.form-title {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.gravatar-big {
+  height: 64px;
+  margin-right: 8px;
+  width: 64px;
+}
+
+.gravatar-small {
+  height: 40px;
+  margin-right: 8px;
+  width: 40px;
+}
+
+.jumbotron h1 {
+  font-weight: bold;
+}
+
+.no-rec {
+  font-size: 16px;
+  color: #888;
+}
+
+.quoter {
+  color: #888;
+  font-size: 1.1em;
+}
+
+.rec-row {
+  min-height: 106px;
+}
+
+.table-venue {
+  width: 100%;
+  thead > tr > th {
+    background-color: #ddd;
+  }
+}
+
+.taglines {
+  margin-top: 15px !important;
+  margin-bottom: 25px !important;
+}
+
+.user-info {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.venue-icon-64 {
+  background-color: #aaa;
+  width: 64px;
+  height: 64px;
+}
+
+.venue-icon-32 {
+  background-color: #aaa;
+  width: 32px;
+  height: 32px;
+}
+
+.venue {
+  margin: 0;
+  font-size: 16px;
+}
+
+.venue-info {
+  margin-left: 15px;
+}
+
+.venue-link, .venue-name, .venue-street {
+  font-weight: bold;
+}
+
+.venue-category, .venue-url, .venue-misc {
+  font-size: 14px;
+}

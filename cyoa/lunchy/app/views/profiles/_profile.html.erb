@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for(@profile, remote: true) do |f| %>
+      <div class="form-group col-md-2">
+        <%= f.label :min_rating, "Minimum rating", class: "control-label" %>
+        <%= f.text_field :min_rating, class: "form-control", placeholder: "0.0 - 10.0" %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= f.label :repeat_interval, "Repeat interval (days)", class: "control-label" %>
+        <%= f.text_field :repeat_interval, class: "form-control", placeholder: "1 - 31" %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= f.label :max_distance, "Search radius (m)", class: "control-label" %>
+        <%= f.select :max_distance, [
+                      ['100', 100], ['200', 200], ['300', 300],
+                      ['400', 400], ['500', 500], ['600', 600],
+                      ['700', 700], ['800', 800], ['900', 900],
+                      ['1000', 1000], ['1100', 1100], ['1200', 1200],
+                     ], {}, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-2">
+        <div style="margin-top: 25px">
+          <%= f.submit "Save Settings", id: "profile_save", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+    <div style="clear: both">
+      <div style="height: 20px"></div>
+      <p><strong class="blue">Minimum rating [0.0-10.0]:</strong>  Minimum Foursquare rating value for recommended places.</p>
+      <p><strong class="blue">Repeat interval [1-31]:</strong>  Number of days to wait before recommending a previously visited place.</p>
+      <p><strong class="blue">Search radius [100-1200]:</strong>  Maximum distance in meters that a place can be located from the office.</p>
+    </div>
+  </div>
+</div>

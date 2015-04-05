@@ -1,0 +1,34 @@
+<% provide(:title, @user.name) %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <section class="user_info">
+        <h3>
+          <%= gravatar_for @user %>
+          <strong><%= @user.name %></strong>
+        </h3>
+      </section>
+    </div>
+  </div>
+  <div class="row">
+    <hr style="margin-top: 10px">
+  </div>
+  <div class="row rec-row">
+    <div class="col-md-3">
+      <%= form_tag("/venues/recommend", remote: true) do %>
+        <%= submit_tag "Get Recommendation", class: "btn btn-primary", id: "get_rec_btn" %>
+      <% end %>
+      <div id="action_buttons"></div>
+    </div>
+    <div class="col-md-9">
+      <div id="venue_rec"></div>
+    </div>
+  </div>
+  <div class="row">
+    <hr>
+  </div>
+  <%= render 'profiles/profile' %>
+</div>
+<script>
+  $("#flash_box").addClass("flash-fixed");
+</script>

@@ -1,0 +1,32 @@
+<% provide(:title, 'History') %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" style="margin-bottom: 10px">
+        <h3><strong>History</strong></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped table-venue">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Street</th>
+            <th>Date Visited</th>
+          </tr>
+        </thead>
+        <% unless @entries.nil? %>
+          <% @entries.each do |entry| %>
+          <tr>
+            <td><%= link_to entry.venue.name, foursquare_path(entry.venue), class: "venue-link", target: "_blank" %></td>
+            <td><%= entry.venue.category_name %></td>
+            <td><%= entry.venue.street %></td>
+            <td><%= entry.visited %></td>
+          </tr>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

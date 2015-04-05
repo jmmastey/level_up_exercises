@@ -1,0 +1,8 @@
+<% if @success == true %>
+  $("#profile_save").addClass("disabled");
+<% end %>
+$("#flash_box").html('<%= escape_javascript(render "shared/flash") %>')
+  .delay(1000).fadeOut(2000, function() {
+    $(this).empty();
+    $(this).show();
+  });

@@ -1,0 +1,24 @@
+<% if @rec.nil? %>
+<div>
+  <h2 style="margin-top: 0"><strong>:-(</strong></h2>
+  <h4><strong>No venues found matching your search criteria.</strong></h4>
+  <p class="no-rec">Maybe there's something good in the kitchen?</p>
+</div>
+<% else %>
+<div>
+  <div class="pull-left">
+    <%= icon_for @rec %> 
+  </div>
+  <div class="venue-info pull-left">
+    <%= link_to @rec.name, foursquare_path(@rec), class: "venue venue-name", target: "_blank" %>
+    <p class="venue venue-street"><%= @rec.street %></p>
+    <p class="venue venue-category"><%= @rec.category_name %></p>
+    <% unless @rec.url.nil? %>
+    <p class="venue venue-url"><%= link_to @rec.url, @rec.url, target: "_blank" %></p>
+    <% end %>
+    <p class="venue venue-misc"><%= "Rating: #{@rec.rating}, Distance: #{@rec.distance} meters" %></p>
+  </div>
+  <div class="clear: both"></div>
+  <span id="venue_id" class="hidden"><%= @rec.venue_id %></span>
+</div>
+<% end %>

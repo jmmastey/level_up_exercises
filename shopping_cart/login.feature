@@ -9,8 +9,8 @@ Feature: Login
 	Given I have registered with the website
 	When I click on 'Sign In'
 	Then I should see 'Username' field
-	And 'Password' field
-	And 'Login' button
+	And I should see 'Password' field
+	And I should see 'Login' button
 
 	Scenario: Successful login
 

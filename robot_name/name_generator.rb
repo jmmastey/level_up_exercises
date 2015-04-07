@@ -44,9 +44,9 @@ class NameGenerator
   def generate_unique_name(max_attempts = 10)
     attempts = 0
     while attempts < max_attempts
-      attempts += 1
-      name = generate_name
       begin
+        attempts += 1
+        name = generate_name
         register_name(name)
         return name
       rescue NameRegistryError

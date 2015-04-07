@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe SplitTestData do 
   before :each do 
     @data = SplitTestData.new(json)

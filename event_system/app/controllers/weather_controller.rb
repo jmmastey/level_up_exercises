@@ -3,18 +3,12 @@ class WeatherController < ApplicationController
   include ParseWeather
   def index
     if params["region"] && params["region"]["name"] != ""
-      @high_low_temperatures = parse_temperatures
-      @detail_forecasts = parse_details
-      region_id = Region.where(city: "Chicago").pluck(:region_id)
+      @high_low_temperatures = ParseTemperatures.call
+      @detail_forecasts = ParseDetails.call
+      puts @detail_forecasts
+      puts @high_low_temperatures
+      #forecast_now = Hash[*@detail_forecasts.values].values[0].downcase
 
-      forecast_now = Hash[*@detail_forecasts.values].values[0].downcase
-
-      @todays_forecast = WEATHER_WEAR.keys.select do |word|
-        forecast_now.match(word)
-      end.first.capitalize
-
-      @user = EmailContact.where(region_id: region_id)
-      WeatherAlert.weather_alert(@user, @todays_forecast).deliver
     end
   end
 

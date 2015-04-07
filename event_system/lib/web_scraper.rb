@@ -2,6 +2,8 @@ require 'nokogiri'
 require 'open-uri'
 
 class WebScraper
+  BASE_URL = "http://forecast.weather.gov/MapClick.php?textField1=41.8500262820005&textField2=-87.65004892899964"
+
   def self.scrape_temperatures(doc)
     document = doc
 

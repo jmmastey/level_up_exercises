@@ -37,7 +37,7 @@ class NameGenerator
     if !REGISTRY.contains?(name)
       REGISTRY.add_name(name)
     else
-      raise NameRegistryError, "This name is already in the registry."
+      raise NameRegistryError, "#{name} is already in the registry."
     end
   end
 

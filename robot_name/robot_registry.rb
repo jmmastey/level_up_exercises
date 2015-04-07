@@ -8,9 +8,6 @@ class RobotRegistry
   def add_name(name)
     if !@names.include?(name)
       @names << name
-      true
-    else
-      false
     end
   end
 

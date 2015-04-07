@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe SplitTestData do 
   before :each do 
-    file = 'spec/test_data.json'
-    file_contents = File.open(file, 'r') {|f| f.read }
-    @data = SplitTestData.new(file_contents)
+    @data = SplitTestData.new('spec/test_data.json')
   end
 
   describe "#new" do

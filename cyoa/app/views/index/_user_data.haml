@@ -1,0 +1,6 @@
+.user-info.display-none{align: 'center'}
+  %span.user-name{class: "user-name-#{column}"}
+  .flag-placeholder
+  .flag{class: "flag-#{column}"}
+
+  = render partial: 'team_data', locals: { column: column }

@@ -1,0 +1,17 @@
+.charts-container.display-none
+  .keys.chart.chart-active
+    = render partial: 'chart', locals: { chart_type: 'keys' }
+
+  .clicks.chart
+    = render partial: 'chart', locals: { chart_type: 'clicks' }
+
+  .download.chart
+    = render partial: 'chart', locals: { chart_type: 'download', chart_units: 'MB' }
+
+  .upload.chart
+    = render partial: 'chart', locals: { chart_type: 'upload', chart_units: 'MB' }
+
+  .uptime.chart
+    = render partial: 'chart', locals: { chart_type: 'uptime', chart_units: 'sec' }
+
+  = render partial: 'chart_control'

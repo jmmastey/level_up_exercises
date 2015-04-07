@@ -1,0 +1,29 @@
+@import 'mixins';
+
+@for $i from 0 through 359 {
+  .deg#{$i} {
+    $should_be_upside_down: $i>90 and $i<270;
+    $angle: #{(90-$i)*-1}deg;
+    @include rotate_label($angle, $should_be_upside_down);
+  }
+}
+
+.chart {
+  position: absolute;
+  background: #fff;
+  opacity: 0;
+  @include transition(all 0.5s);
+
+  &.chart-active {
+    opacity: 1;
+  }
+}
+
+.chart-control {
+  margin-top: 410px;
+  position: absolute;
+}
+
+.charts-container {
+  margin-top: 150px;
+}

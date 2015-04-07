@@ -62,5 +62,4 @@ class NameGenerator
       raise NameFormatError, "The robot's name sucks! (#{name})"
     end
   end
-
 end

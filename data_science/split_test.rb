@@ -11,12 +11,8 @@ class SplitTest
     @test_data = split_test_data
   end
 
-  def count(field, value)
-    count = 0
-    @test_data.data.each do |row|
-      count += 1 if row[field] == value
-    end
-    count
+  def run
+
   end
 
   def confidence(successes, attempts, level_of_confidence = 0.95)

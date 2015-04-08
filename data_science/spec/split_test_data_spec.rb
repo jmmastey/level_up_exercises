@@ -10,4 +10,10 @@ describe SplitTestData do
       expect(@data).instance_of? SplitTestData
     end
   end
+
+  describe "#count" do
+    it "counts how many rows have a specific value in a specific field." do
+      expect(@data.count("cohort", "A")).to eq(60)
+    end
+  end
 end

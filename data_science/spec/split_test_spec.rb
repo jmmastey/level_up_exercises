@@ -23,10 +23,4 @@ describe SplitTest do
       expect(@test.sample_size(0.1, 0.11, 0.05, 0.8)).to eq(14751)
     end
   end
-
-  describe "#count" do
-    it "counts how many rows have a specific value in a specific field." do
-      expect(@test.count("cohort", "A")).to eq(60)
-    end
-  end
 end

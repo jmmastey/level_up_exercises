@@ -16,6 +16,14 @@ class SplitTestData
     end
   end
 
+  def count(field, value)
+    count = 0
+    @data.each do |row|
+      count += 1 if row[field] == value
+    end
+    count
+  end
+
   private
 
   def file_contents(file_path)

@@ -11,6 +11,21 @@ $ ->
 
     submitAPIRequest(requestComplete)
 
+  moveQueryContainerToTop = () ->
+    $('.query-container').addClass('query-container-top')
+
+  resetCanvases = () ->
+    $.each $('canvas'), (index, canvas) ->
+      $(canvas).attr('height', 400)
+      $(canvas).attr('width', 400)
+
+  submitAPIRequest = (completionCallback) ->
+    user1 = $('#user1').val()
+    user2 = $('#user2').val()
+    route = '/poll?user1='+user1+'&user2='+user2
+
+    $.get route, completionCallback
+
   requestComplete = (results) ->
     NProgress.done()
 
@@ -20,24 +35,10 @@ $ ->
     fadeInUserDetailsAndChart()
     delayedFadeInChartLabels()
 
-  submitAPIRequest = (completionCallback) ->
-    user1 = $('#user1').val()
-    user2 = $('#user2').val()
-    route = '/poll?user1='+user1+'&user2='+user2
-
-    $.get route, completionCallback
-
-  setBothUserDetails = (user1, user2, results) ->
-    resetFlags()
-    setUserDetails(user1, results[0], 'left')
-    setUserDetails(user2, results[1], 'right')
-
-  setChartData = (results) ->
-    for stat in STATS
-      chart = $(getChartIdCss(stat)).get(0).getContext("2d")
-      new Chart(chart).Doughnut(parseAttribute(results, stat))
-      resetLabels(stat)
-      setAndAlignLabels(results, stat, getLabelLeftCss(stat), getLabelRightCss(stat))
+  fadeInUserDetailsAndChart = () ->
+      $('.user-info').fadeIn()
+      $('.charts-container').fadeIn()
+      $('.chart-label').fadeIn()
 
   delayedFadeInChartLabels = () ->
     showAndArcChartLabels = () ->
@@ -47,17 +48,25 @@ $ ->
 
     setTimeout showAndArcChartLabels, 2000
 
-  fadeInUserDetailsAndChart = () ->
-      $('.user-info').fadeIn()
-      $('.charts-container').fadeIn()
-      $('.chart-label').fadeIn()
+  setBothUserDetails = (user1, user2, results) ->
+    resetFlags()
+    setUserDetails(user1, results[0], 'left')
+    setUserDetails(user2, results[1], 'right')
 
-  moveQueryContainerToTop = () ->
-    $('.query-container').addClass('query-container-top')
+  resetFlags = () ->
+    $('.flag-left').removeClass().addClass('flag-left flag')
+    $('.flag-right').removeClass().addClass('flag-right flag')
 
   setUserDetails = (userName, userData, column) ->
     setUserData(userName, userData['country'], column)
     setTeamData(userData['team'], column)
+
+  setChartData = (results) ->
+    for stat in STATS
+      chart = $(getChartIdCss(stat)).get(0).getContext("2d")
+      new Chart(chart).Doughnut(parseAttribute(results, stat))
+      resetLabels(stat)
+      setAndAlignLabels(results, stat, getLabelLeftCss(stat), getLabelRightCss(stat))
 
   setUserData = (userName, country, column) ->
     $('.user-name-'+column).html(userName)
@@ -68,6 +77,11 @@ $ ->
 
     for stat in STATS
       $(getTeamStatCss(stat, column)).html(commaify(userTeamData[stat]))
+
+  resetLabels = (stat) ->
+    baseClasses = 'chart-data-label display-none '
+    $(getLabelLeftCss(stat)).removeClass().addClass(baseClasses+stat+'-left')
+    $(getLabelRightCss(stat)).removeClass().addClass(baseClasses+stat+'-right')
 
   getTeamStatCss = (stat, column) ->
     '.team-'+stat+'-'+column
@@ -84,20 +98,6 @@ $ ->
   parseAttribute = (results, resultKey) ->
       [ { value: parseInt(results[1][resultKey]), color: LEFT_USER_COLOR },\
         { value: parseInt(results[0][resultKey]), color: RIGHT_USER_COLOR }]
-
-  resetCanvases = () ->
-    $.each $('canvas'), (index, canvas) ->
-      $(canvas).attr('height', 400)
-      $(canvas).attr('width', 400)
-
-  resetFlags = () ->
-    $('.flag-left').removeClass().addClass('flag-left flag')
-    $('.flag-right').removeClass().addClass('flag-right flag')
-
-  resetLabels = (stat) ->
-    baseClasses = 'chart-data-label display-none '
-    $(getLabelLeftCss(stat)).removeClass().addClass(baseClasses+stat+'-left')
-    $(getLabelRightCss(stat)).removeClass().addClass(baseClasses+stat+'-right')
 
   setAndAlignLabels = (results, resultKey, labelLeft, labelRight) ->
     user2Stat = parseInt(results[1][resultKey])

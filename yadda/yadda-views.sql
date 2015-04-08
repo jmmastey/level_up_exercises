@@ -26,7 +26,7 @@ create or replace view recent_score AS
   from breweries 
   inner join beers on beers.brewery_id = breweries.brewery_id 
   left join (select beer_id,
-               AVG(rating.overall) as computed 
+               AVG(ratings.overall) as computed 
              from ratings 
              where created_at >= (NOW() - interval '6 months')
              group by beer_id) ratings on ratings.beer_id = beers.beer_id

@@ -6,13 +6,20 @@ require 'faker'
                    dbname: "yadda")
 
 def main
-  generate_person_records 2000
-  generate_brewery_records 1000
-  generate_beer_records 10000
-  generate_rating_records 1000000
+  generate_person_records
+  generate_brewery_records
+  generate_style_records
+  generate_beer_records
+  generate_rating_records
+
+  # generate_person_records 2000
+  # generate_brewery_records 1000
+  # generate_style_records 10000
+  # generate_beer_records 10000
+  # generate_rating_records 1000000
 end
 
-def generate_rating_records count=100
+def generate_rating_records count=1000
   count.times do
     insert_record "ratings", {
       person_id: (get_record_id "persons", "person_id"),
@@ -29,7 +36,7 @@ def generate_rating_records count=100
   end
 end
 
-def generate_style_records count=25
+def generate_style_records count=10
   count.times do
     insert_record "styles", {
       style: Faker::Hacker.noun,
@@ -55,7 +62,7 @@ def generate_beer_records count=100
   end
 end
 
-def generate_brewery_records count=100
+def generate_brewery_records count=20
   count.times do
     insert_record "breweries", {
       name: Faker::Company.name.gsub("'"){""},

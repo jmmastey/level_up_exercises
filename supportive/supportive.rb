@@ -14,21 +14,21 @@ class BlagPost
       hash
     end
 
-    if args[:author] != '' && args[:author_url] != ''
+    if args[:author].present? && args[:author_url].present?
       @author = Author.new(args[:author], args[:author_url])
     end
+
+    @categories = []
 
     if args[:categories]
       @categories = args[:categories].reject do |category|
         DISALLOWED_CATEGORIES.include? category
       end
-    else
-      @categories = []
     end
 
     @comments = args[:comments] || []
-    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
-    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
+    @body = args[:body].squish
+    @publish_date = args[:publish_date].to_date || Date.current
   end
 
   def to_s
@@ -38,63 +38,40 @@ class BlagPost
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    return "" if author.blank?
+    "By #{author.name}, at #{author.url}"
   end
 
   def category_list
     return "" if categories.empty?
 
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
+    label = "Category"
+    suffix = ""
+
+    if categories.many?
+      label = label.pluralize
+      suffix = " and #{as_title(categories.pop)}"
     end
 
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
+    "#{label}: #{categories.map { |cat| as_title(cat)}.join(", ")}#{suffix}"
   end
 
   def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    string.to_s.titleize
   end
 
   def commenters
-    return '' unless comments_allowed?
-    return '' unless comments.length > 0
+    return '' unless comments_allowed? || comments.present?
 
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    "You will be the #{comments.length.ordinalize} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date.years_since(3) > Date.current
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    body.truncate(204)
   end
 
 end

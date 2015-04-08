@@ -1,46 +1,26 @@
 Feature: Shipping Estimate
+	
 	As a user
 	I want to know the shipping cost and time for the things I purchased
+	So that I can decicde whether to purchase the items or not
 
-	Scenario: Get shipping estimate
+	Scenario: Selecting valid address for shipping estimate
+	
 	Given I am logged in to the website
-	And I have added item 'X' to my cart
-	When I enter valid address information
-	And click 'Shipping Estimate'
-	Then I should see an estimated shipping cost
-	And I should an estimated shipping time
+		And I have added item 'X' to my cart
+	When click 'Shipping Estimate'
+		And I select existing address on my account
+	Then I see an estimated shipping cost
+		And I see an estimated shipping time
 
-	Scenario: Invalid street code in shipping address
+	Scenario: Entering invalid address for shipping estimate
+	
 	Given I am logged in to the website
-	And I have added item 'X' to my cart
-	When I enter street code that does not exist
-	And I click 'Shipping Estimate'
-	Then I should see error message
+		And I have added item 'X' to my cart
+	When click 'Shipping Estimate'
+		And I select to use a different address not listed on account
+	Then I see an address information form
+	When I enter invalid address information
+	Then I see an error message
 
-	Scenario: Invalid street name in shipping address
-	Given I am logged in to the website
-	And I have added item 'X' to my cart
-	When I enter street name that does not exist
-	And I click 'Shipping Estimate'
-	Then I should see error message
-
-	Scenario: Invalid city in shipping address
-	Given I am logged in to the website
-	And I have added item 'X' to my cart
-	When I enter city that does not exist
-	And I click 'Shipping Estimate'
-	Then I should see error message
-
-	Scenario: Invalid state in shipping address
-	Given I am logged in to the website
-	And I have added item 'X' to my cart
-	When I enter state that does not exist
-	And I click 'Shipping Estimate'
-	Then I should see error message
-
-	Scenario: Invalid zip code in shipping address
-	Given I am logged in to the website
-	And I have added item 'X' to my cart
-	When I enter zip code that does not exist
-	And I click 'Shipping Estimate'
-	Then I should see error message
+	

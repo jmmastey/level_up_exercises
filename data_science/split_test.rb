@@ -11,10 +11,6 @@ class SplitTest
     @test_data = split_test_data
   end
 
-  def run
-
-  end
-
   def confidence(successes, attempts, level_of_confidence = 0.95)
     ABAnalyzer.confidence_interval(successes, attempts, level_of_confidence)
   end

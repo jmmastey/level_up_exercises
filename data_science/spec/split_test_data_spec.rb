@@ -16,4 +16,11 @@ describe SplitTestData do
       expect(@data.count("cohort", "A")).to eq(60)
     end
   end
+
+  describe "#summary" do 
+    it "sums the number of hits for each group" do
+      pp @data.summary
+      expect(@data.summary).to eq({'A' => 36, 'B' => 30})
+    end
+  end
 end

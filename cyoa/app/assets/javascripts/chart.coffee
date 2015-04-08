@@ -1,63 +1,85 @@
 $ ->
   LEFT_USER_COLOR = '#79bd9a'
   RIGHT_USER_COLOR = '#3b8686'
-  statsTracked = [ 'keys', 'clicks', 'download', 'upload', 'uptime' ]
+  STATS = [ 'keys', 'clicks', 'download', 'upload', 'uptime' ]
 
   $('#users_form').submit ->
     NProgress.start()
+
     moveQueryContainerToTop()
     resetCanvases()
 
+    submitAPIRequest(requestComplete)
+
+  requestComplete = (results) ->
+    NProgress.done()
+
+    setBothUserDetails($('#user1').val(), $('#user2').val(), results)
+    setChartData(results)
+
+    fadeInUserDetailsAndChart()
+    delayedFadeInChartLabels()
+
+  submitAPIRequest = (completionCallback) ->
     user1 = $('#user1').val()
     user2 = $('#user2').val()
-    apiRoute = '/poll?user1='+user1+'&user2='+user2
+    route = '/poll?user1='+user1+'&user2='+user2
 
-    $.get apiRoute, (results) ->
-      NProgress.done()
+    $.get route, completionCallback
 
-      resetFlags()
-      setUserDetails(user1, results[0], 'left')
-      setUserDetails(user2, results[1], 'right')
+  setBothUserDetails = (user1, user2, results) ->
+    resetFlags()
+    setUserDetails(user1, results[0], 'left')
+    setUserDetails(user2, results[1], 'right')
 
+  setChartData = (results) ->
+    for stat in STATS
+      chart = $(getChartIdCss(stat)).get(0).getContext("2d")
+      new Chart(chart).Doughnut(parseAttribute(results, stat))
+      resetLabels(stat)
+      setAndAlignLabels(results, stat, getLabelLeftCss(stat), getLabelRightCss(stat))
+
+  delayedFadeInChartLabels = () ->
+    showAndArcChartLabels = () ->
+      $('.chart-data-label').fadeIn()
+      $('.arc_down').arctext({radius:120, dir:1})
+      $('.arc_up').arctext({radius:120, dir:-1})
+
+    setTimeout showAndArcChartLabels, 2000
+
+  fadeInUserDetailsAndChart = () ->
       $('.user-info').fadeIn()
       $('.charts-container').fadeIn()
       $('.chart-label').fadeIn()
-
-      for statistic in statsTracked
-        chart = $(getChartId(statistic)).get(0).getContext("2d")
-        new Chart(chart).Doughnut(parseAttribute(results, statistic))
-        resetLabels(statistic)
-        setAndAlignLabels(results, statistic, getLabelLeft(statistic), getLabelRight(statistic))
-
-      showChartDataLabels = () ->
-        $('.chart-data-label').fadeIn()
-        $('.arc_down').arctext({radius:120, dir:1})
-        $('.arc_up').arctext({radius:120, dir:-1})
-
-      setTimeout showChartDataLabels, 2000
 
   moveQueryContainerToTop = () ->
     $('.query-container').addClass('query-container-top')
 
   setUserDetails = (userName, userData, column) ->
-    userTeamData = userData['team']
+    setUserData(userName, userData['country'], column)
+    setTeamData(userData['team'], column)
+
+  setUserData = (userName, country, column) ->
     $('.user-name-'+column).html(userName)
+    $('.flag-'+column).addClass('flag-'+country.toLowerCase())
+
+  setTeamData = (userTeamData, column) ->
     $('.team-name-'+column).html(userTeamData['name'])
-    $('.team-keys-'+column).html(commaify(userTeamData['keys']))
-    $('.team-clicks-'+column).html(commaify(userTeamData['clicks']))
-    $('.team-download-'+column).html(commaify(userTeamData['download']))
-    $('.team-upload-'+column).html(commaify(userTeamData['upload']))
-    $('.team-uptime-'+column).html(commaify(userTeamData['uptime']))
-    $('.flag-'+column).addClass('flag-'+userData['country'].toLowerCase())
 
-  getChartId = (statistic) ->
-    '#'+statistic+'-chart'
+    for stat in STATS
+      $(getTeamStatCss(stat, column)).html(commaify(userTeamData[stat]))
 
-  getLabelLeft = (statistic) ->
-    '.'+statistic+'-left'
+  getTeamStatCss = (stat, column) ->
+    '.team-'+stat+'-'+column
 
-  getLabelRight = (statistic) ->
-    '.'+statistic+'-right'
+  getChartIdCss = (stat) ->
+    '#'+stat+'-chart'
+
+  getLabelLeftCss = (stat) ->
+    '.'+stat+'-left'
+
+  getLabelRightCss = (stat) ->
+    '.'+stat+'-right'
 
   parseAttribute = (results, resultKey) ->
       [ { value: parseInt(results[1][resultKey]), color: LEFT_USER_COLOR },\
@@ -72,30 +94,41 @@ $ ->
     $('.flag-left').removeClass().addClass('flag-left flag')
     $('.flag-right').removeClass().addClass('flag-right flag')
 
-  resetLabels = (statistic) ->
-    $(getLabelLeft(statistic)).removeClass().addClass('chart-data-label display-none '+statistic+'-left')
-    $(getLabelRight(statistic)).removeClass().addClass('chart-data-label display-none '+statistic+'-right')
+  resetLabels = (stat) ->
+    baseClasses = 'chart-data-label display-none '
+    $(getLabelLeftCss(stat)).removeClass().addClass(baseClasses+stat+'-left')
+    $(getLabelRightCss(stat)).removeClass().addClass(baseClasses+stat+'-right')
 
   setAndAlignLabels = (results, resultKey, labelLeft, labelRight) ->
-    user2_statistic = parseInt(results[1][resultKey])
-    user1_statistic = parseInt(results[0][resultKey])
-    user2_rotate = parseInt(user2_statistic/(user2_statistic+user1_statistic)*360/2)
-    user1_rotate = parseInt(user1_statistic/(user2_statistic+user1_statistic)*360/2)+(user2_rotate*2)
+    user2Stat = parseInt(results[1][resultKey])
+    user1Stat = parseInt(results[0][resultKey])
+    user2Angle = parseInt(user2Stat/(user2Stat+user1Stat)*360/2)
+    user1Angle = parseInt(user1Stat/(user2Stat+user1Stat)*360/2)+(user2Angle*2)
 
-    $(labelRight).html(commaify(user2_statistic))
-    $(labelLeft).html(commaify(user1_statistic))
-    $(labelRight).addClass('deg'+user2_rotate)
-    $(labelLeft).addClass('deg'+user1_rotate)
+    setLabelValues(labelLeft, labelRight, user1Stat, user2Stat)
+    setLabelRotationCss(labelLeft, labelRight, user1Angle, user2Angle)
+    setLabelArcCss(labelLeft, labelRight, user1Angle, user2Angle)
 
-    if user2_rotate > 90 and user2_rotate < 270
-      $(labelRight).addClass('arc_up')
+  setLabelValues = (labelLeft, labelRight, user1Stat, user2Stat) ->
+    $(labelLeft).html(commaify(user1Stat))
+    $(labelRight).html(commaify(user2Stat))
+
+  setLabelRotationCss = (labelLeft, labelRight, user1Angle, user2Angle) ->
+    $(labelLeft).addClass(cssRotationClass(user1Angle))
+    $(labelRight).addClass(cssRotationClass(user2Angle))
+
+  setLabelArcCss = (labelLeft, labelRight, user1Angle, user2Angle) ->
+    $(labelLeft).addClass(calculateArcDirection(user1Angle))
+    $(labelRight).addClass(calculateArcDirection(user2Angle))
+
+  cssRotationClass = (rotationAngle) ->
+    'deg'+rotationAngle
+
+  calculateArcDirection = (rotationAngle) ->
+    if rotationAngle > 90 and rotationAngle < 270
+      'arc_up'
     else
-      $(labelRight).addClass('arc_down')
-
-    if user1_rotate > 90 and user1_rotate < 270
-      $(labelLeft).addClass('arc_up')
-    else
-      $(labelLeft).addClass('arc_down')
+      'arc_down'
 
   commaify = (number) ->
     number = number.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2')\

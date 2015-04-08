@@ -34247,3 +34247,777 @@ Started GET "/poll?user1=dragonslayerxx&user2=smegs" for 127.0.0.1 at 2015-04-06
 Processing by IndexController#poll as */*
   Parameters: {"user1"=>"dragonslayerxx", "user2"=>"smegs"}
 Completed 200 OK in 452ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:07:36 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (2.3ms)
+  Rendered index/_user_data.haml (4.1ms)
+  Rendered index/_form.haml (1.3ms)
+  Rendered index/_chart.haml (1.5ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (1.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (1.4ms)
+  Rendered index/_charts.haml (10.2ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/index.haml within layouts/application (24.6ms)
+Completed 500 Internal Server Error in 209ms
+
+ActionView::Template::Error ([stdin]:97:61: error: unmatched OUTDENT
+    $(labelLeft).addClass(calculateArcDirection(user1Rotate)
+                                                            ^
+  (in /Users/kshu/wpcompare/app/assets/javascripts/chart.coffee)):
+    4:     %title WPC
+    5:     = csrf_meta_tags
+    6:     = stylesheet_link_tag 'application', media: 'all'
+    7:     = javascript_include_tag 'application'
+    8:     %link{rel: 'stylesheet', type:'text/css', href:'http://bootswatch.com/lumen/bootstrap.min.css'}
+    9: 
+   10:   %body
+  app/views/layouts/application.haml:7:in `_app_views_layouts_application_haml___1279421539347740009_70171006015220'
+
+
+  Rendered /Users/kshu/.gem/ruby/2.1.3/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /Users/kshu/.gem/ruby/2.1.3/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/kshu/.gem/ruby/2.1.3/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (14.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:08:00 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.5ms)
+  Rendered index/_user_data.haml (1.4ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.5ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (4.4ms)
+  Rendered index/_team_data.haml (0.2ms)
+  Rendered index/_user_data.haml (0.8ms)
+  Rendered index/index.haml within layouts/application (9.3ms)
+Completed 200 OK in 209ms (Views: 208.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=dragonslayerxx&user2=smegs" for 127.0.0.1 at 2015-04-08 13:08:06 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"dragonslayerxx", "user2"=>"smegs"}
+Completed 200 OK in 687ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:12:23 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.5ms)
+  Rendered index/_user_data.haml (1.6ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.1ms)
+  Rendered index/_charts.haml (4.5ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/index.haml within layouts/application (10.2ms)
+Completed 200 OK in 186ms (Views: 185.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:12:25 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 556ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:13:27 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (1.2ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart_control.haml (0.2ms)
+  Rendered index/_charts.haml (5.3ms)
+  Rendered index/_team_data.haml (0.6ms)
+  Rendered index/_user_data.haml (1.6ms)
+  Rendered index/index.haml within layouts/application (10.8ms)
+Completed 200 OK in 187ms (Views: 186.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:13:29 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 487ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:13:58 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/_form.haml (0.5ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (4.1ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.8ms)
+  Rendered index/index.haml within layouts/application (8.6ms)
+Completed 200 OK in 199ms (Views: 198.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:14:00 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 442ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:14:05 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/_form.haml (0.5ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (3.8ms)
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/index.haml within layouts/application (8.5ms)
+Completed 200 OK in 16ms (Views: 15.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:14:06 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 495ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:16:55 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/_form.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (3.3ms)
+  Rendered index/_team_data.haml (0.2ms)
+  Rendered index/_user_data.haml (0.8ms)
+  Rendered index/index.haml within layouts/application (7.3ms)
+Completed 200 OK in 209ms (Views: 208.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:16:56 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 469ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:24:59 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.5ms)
+  Rendered index/_user_data.haml (1.4ms)
+  Rendered index/_form.haml (0.5ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (4.2ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/index.haml within layouts/application (9.4ms)
+Completed 200 OK in 186ms (Views: 185.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:25:00 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 460ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:26:13 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.5ms)
+  Rendered index/_user_data.haml (1.2ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (3.9ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/index.haml within layouts/application (8.5ms)
+Completed 200 OK in 182ms (Views: 181.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:26:15 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 483ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:26:18 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (4.3ms)
+  Rendered index/_form.haml (0.3ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (4.0ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (11.4ms)
+Completed 200 OK in 18ms (Views: 17.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=dragonslayerxx&user2=smegs" for 127.0.0.1 at 2015-04-08 13:26:22 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"dragonslayerxx", "user2"=>"smegs"}
+Completed 200 OK in 516ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:28:37 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (4.3ms)
+  Rendered index/_team_data.haml (0.2ms)
+  Rendered index/_user_data.haml (0.8ms)
+  Rendered index/index.haml within layouts/application (9.0ms)
+Completed 200 OK in 180ms (Views: 179.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:28:39 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 443ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:29:55 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (3.9ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (8.2ms)
+Completed 200 OK in 183ms (Views: 182.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:29:57 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 455ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:33:13 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (1.4ms)
+  Rendered index/_form.haml (0.7ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (4.8ms)
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/index.haml within layouts/application (10.2ms)
+Completed 200 OK in 201ms (Views: 200.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:33:14 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 450ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:40:44 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.1ms)
+  Rendered index/_charts.haml (3.7ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (8.1ms)
+Completed 200 OK in 198ms (Views: 197.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:40:45 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 1464ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:40:57 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.4ms)
+  Rendered index/_chart_control.haml (0.1ms)
+  Rendered index/_charts.haml (4.7ms)
+  Rendered index/_team_data.haml (0.2ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (9.1ms)
+Completed 200 OK in 199ms (Views: 197.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:40:59 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 448ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:46:22 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.1ms)
+  Rendered index/_charts.haml (4.3ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/index.haml within layouts/application (9.5ms)
+Completed 200 OK in 202ms (Views: 201.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:46:24 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 505ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:48:29 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.1ms)
+  Rendered index/_charts.haml (3.7ms)
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (8.1ms)
+Completed 200 OK in 194ms (Views: 193.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:49:03 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.4ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (4.0ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (8.3ms)
+Completed 200 OK in 193ms (Views: 192.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:49:04 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 490ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:49:36 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.6ms)
+  Rendered index/_user_data.haml (1.4ms)
+  Rendered index/_form.haml (0.7ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (3.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (7.4ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.8ms)
+  Rendered index/index.haml within layouts/application (12.6ms)
+Completed 200 OK in 197ms (Views: 196.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:49:37 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 474ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 13:51:47 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.2ms)
+  Rendered index/_form.haml (0.5ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.1ms)
+  Rendered index/_charts.haml (3.7ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/index.haml within layouts/application (8.7ms)
+Completed 200 OK in 199ms (Views: 198.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 13:51:48 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 444ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 14:45:14 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (4.5ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.8ms)
+  Rendered index/index.haml within layouts/application (8.8ms)
+Completed 200 OK in 281ms (Views: 280.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 14:45:16 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 583ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 14:46:44 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/_form.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (3.6ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.0ms)
+  Rendered index/index.haml within layouts/application (7.9ms)
+Completed 200 OK in 113ms (Views: 112.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 14:46:46 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 1508ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 14:47:19 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.2ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.0ms)
+  Rendered index/_charts.haml (3.7ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (8.0ms)
+Completed 200 OK in 109ms (Views: 108.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 14:47:20 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 1478ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 14:52:02 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (1.4ms)
+  Rendered index/_form.haml (0.5ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (2.2ms)
+  Rendered index/_charts.haml (6.4ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (11.8ms)
+Completed 200 OK in 113ms (Views: 112.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 14:52:03 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 474ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 14:53:16 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (1.3ms)
+  Rendered index/_form.haml (0.5ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.3ms)
+  Rendered index/_charts.haml (4.4ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (9.5ms)
+Completed 200 OK in 55ms (Views: 54.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 14:53:17 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 1009ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 14:54:14 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.4ms)
+  Rendered index/_user_data.haml (1.2ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.3ms)
+  Rendered index/_charts.haml (4.6ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (9.4ms)
+Completed 200 OK in 220ms (Views: 219.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=wyaeiga&user2=avrex" for 127.0.0.1 at 2015-04-08 14:54:16 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"wyaeiga", "user2"=>"avrex"}
+Completed 200 OK in 1014ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 14:55:31 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (1.1ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.2ms)
+  Rendered index/_charts.haml (3.7ms)
+  Rendered index/_team_data.haml (0.2ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (8.2ms)
+Completed 200 OK in 14ms (Views: 13.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=igmas&user2=avrex" for 127.0.0.1 at 2015-04-08 14:55:33 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"igmas", "user2"=>"avrex"}
+Completed 200 OK in 491ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:05:52 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (1.9ms)
+  Rendered index/_user_data.haml (2.7ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart_control.haml (0.3ms)
+  Rendered index/_charts.haml (4.1ms)
+  Rendered index/_team_data.haml (0.6ms)
+  Rendered index/_user_data.haml (1.2ms)
+  Rendered index/index.haml within layouts/application (10.5ms)
+Completed 200 OK in 17ms (Views: 16.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=igmas&user2=avrex" for 127.0.0.1 at 2015-04-08 15:05:54 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"igmas", "user2"=>"avrex"}
+Completed 200 OK in 458ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:06:49 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (2.6ms)
+  Rendered index/_user_data.haml (3.3ms)
+  Rendered index/_form.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.3ms)
+  Rendered index/_charts.haml (4.7ms)
+  Rendered index/_team_data.haml (0.2ms)
+  Rendered index/_user_data.haml (0.8ms)
+  Rendered index/index.haml within layouts/application (11.3ms)
+Completed 200 OK in 18ms (Views: 17.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=igmas&user2=avrex" for 127.0.0.1 at 2015-04-08 15:06:51 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"igmas", "user2"=>"avrex"}
+Completed 200 OK in 481ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:07:02 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (2.7ms)
+  Rendered index/_user_data.haml (3.4ms)
+  Rendered index/_form.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.3ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.3ms)
+  Rendered index/_charts.haml (4.4ms)
+  Rendered index/_team_data.haml (0.2ms)
+  Rendered index/_user_data.haml (0.8ms)
+  Rendered index/index.haml within layouts/application (11.1ms)
+Completed 200 OK in 18ms (Views: 17.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=igmas&user2=avrex" for 127.0.0.1 at 2015-04-08 15:07:03 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"igmas", "user2"=>"avrex"}
+Completed 200 OK in 470ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:07:12 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (3.2ms)
+  Rendered index/_user_data.haml (4.1ms)
+  Rendered index/_form.haml (0.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (0.3ms)
+  Rendered index/_charts.haml (4.2ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (12.1ms)
+Completed 200 OK in 24ms (Views: 23.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=igmas&user2=avrex" for 127.0.0.1 at 2015-04-08 15:07:13 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"igmas", "user2"=>"avrex"}
+Completed 200 OK in 439ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:14:47 -0500
+Processing by IndexController#index as HTML
+  Rendered index/_team_data.haml (2.5ms)
+  Rendered index/_user_data.haml (4.7ms)
+  Rendered index/_form.haml (1.5ms)
+  Rendered index/_chart.haml (1.6ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (2.4ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart.haml (0.2ms)
+  Rendered index/_chart_control.haml (1.9ms)
+  Rendered index/_charts.haml (11.7ms)
+  Rendered index/_team_data.haml (0.3ms)
+  Rendered index/_user_data.haml (0.9ms)
+  Rendered index/index.haml within layouts/application (26.9ms)
+Completed 200 OK in 116ms (Views: 107.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/poll?user1=igmas&user2=avrex" for 127.0.0.1 at 2015-04-08 15:14:49 -0500
+Processing by IndexController#poll as */*
+  Parameters: {"user1"=>"igmas", "user2"=>"avrex"}
+Completed 200 OK in 436ms (Views: 0.1ms | ActiveRecord: 0.0ms)

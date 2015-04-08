@@ -26,12 +26,12 @@ class IndexController < ApplicationController
   end
 
   def index
-    @user1 = params[:user1] || 'wyaeiga'
+    @user1 = params[:user1] || 'igmas'
     @user2 = params[:user2] || 'avrex'
   end
 
   def poll
-    @user1 = params[:user1] || 'wyaeiga'
+    @user1 = params[:user1] || 'igmas'
     @user2 = params[:user2] || 'avrex'
 
     user1_data = poll_external_api(@user1)

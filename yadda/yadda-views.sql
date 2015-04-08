@@ -12,7 +12,7 @@ create or replace view top_beers AS
   from breweries 
   left join beers on beers.brewery_id = breweries.brewery_id 
   left join (select beer_id,
-               COUNT(rating.overall) as ratings_count 
+               COUNT(ratings.overall) as ratings_count 
              from ratings 
              group by beer_id) ratings on ratings.beer_id = beers.beer_id
   order by ratings_count desc;

@@ -1,11 +1,11 @@
 Then(/^I should see both country flags$/) do
-  expect(page).to have_selector('.flag-left.flag.flag-us')
+  expect(page).to have_selector('.flag-left.flag.flag-fi')
   expect(page).to have_selector('.flag-right.flag.flag-us')
 end
 
 Then(/^I should see both team names$/) do
   left_team_name = page.find('.team-name-left')
-  expect(left_team_name.text).to eq('420_BLAZE_IT')
+  expect(left_team_name.text).to eq('#Team.Quakenet')
 
   right_team_name = page.find('.team-name-right')
   expect(right_team_name.text).to eq('420_BLAZE_IT')

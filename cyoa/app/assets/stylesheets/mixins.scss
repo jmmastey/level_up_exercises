@@ -5,11 +5,13 @@
   @keyframes #{$animationName} { @content; }
 }
 
-@mixin animation($animationName, $duration, $delay: 0, $direction: normal) {
+@mixin animation($animationName, $duration, $delay: 0ms, $direction: normal) {
   -webkit-animation: $animationName $duration ease-out $delay 1 $direction;
+     -moz-animation: $animationName $duration ease-out $delay 1 $direction;
           animation: $animationName $duration ease-out $delay 1 $direction;
 
   -webkit-animation-fill-mode: forwards;
+     -moz-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
 

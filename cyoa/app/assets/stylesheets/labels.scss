@@ -1,0 +1,24 @@
+.label {
+  text-align: center;
+  vertical-align: middle;
+  width: 200px;
+  position: absolute;
+  margin-left: 100px;
+}
+
+.chart-label {
+  @extend .label;
+  margin-top: 180px;
+  font-size: 200%;
+}
+
+.chart-data-label {
+  @extend .label;
+  margin-top: -225px;
+  font-size: 200%;
+  color: #fffef7;
+}
+
+.label-detail {
+  font-size: 50%;
+}

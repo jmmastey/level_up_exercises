@@ -1,0 +1,12 @@
+.container
+  .left-column
+    = render partial: 'user_data', locals: { column: 'left' }
+
+  .center-column
+    .query-container
+      = render partial: 'form'
+
+    = render partial: 'charts'
+
+  .right-column
+    = render partial: 'user_data', locals: { column: 'right' }

@@ -1,0 +1,36 @@
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} { @content; }
+  @-moz-keyframes #{$animationName} { @content; }
+  @-o-keyframes #{$animationName} { @content; }
+  @keyframes #{$animationName} { @content; }
+}
+
+@mixin animation($animationName, $duration, $delay: 0ms, $direction: normal) {
+  -webkit-animation: $animationName $duration ease-out $delay 1 $direction;
+     -moz-animation: $animationName $duration ease-out $delay 1 $direction;
+          animation: $animationName $duration ease-out $delay 1 $direction;
+
+  -webkit-animation-fill-mode: forwards;
+     -moz-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@mixin rotate_label($angle, $should_be_upside_down) {
+  @if($should_be_upside_down) {
+    -webkit-transform: rotate($angle) translate(5.3em) rotate(270deg);
+         -o-transform: rotate($angle) translate(5.3em) rotate(270deg);
+            transform: rotate($angle) translate(5.3em) rotate(270deg);
+  } @else {
+    -webkit-transform: rotate($angle) translate(5.3em) rotate(90deg);
+         -o-transform: rotate($angle) translate(5.3em) rotate(90deg);
+            transform: rotate($angle) translate(5.3em) rotate(90deg);
+  }
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}

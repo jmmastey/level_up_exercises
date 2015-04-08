@@ -1,0 +1,10 @@
+%section.chart-container
+  %p.chart-label.display-none
+    = chart_type.capitalize
+    - if defined? chart_units
+      %span.label-detail (in #{chart_units})
+
+  %canvas{id: "#{chart_type}-chart", width: '400', height: '400'}
+
+  %p.chart-data-label.display-none{class: "#{chart_type}-right"}
+  %p.chart-data-label.display-none{class: "#{chart_type}-left"}

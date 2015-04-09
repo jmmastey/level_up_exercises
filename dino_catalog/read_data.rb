@@ -10,7 +10,7 @@ def read_data()
    #Loop over the csv files.  Create dino object and append them to a list of dino objects
    CSV.foreach('dino_csv_list') do |new_file|
       filename = new_file[0]
-      dino_data = CSV.read(filename, :headers => true)
+      dino_data = CSV.read(filename, :headers => true, :header_converters => :symbol)
       dino_data.each do |row| 
          new_dino = Dinos.new(row.to_hash)
          dino_objects.push(new_dino)

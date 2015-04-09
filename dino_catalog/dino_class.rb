@@ -9,31 +9,29 @@ class Dinos
    def initialize(dino_data)
 
       # These are the instance variables for the Dinos class
-      @dino_name = nil
-      @dino_period = nil
-      @dino_continent = nil
-      @dino_diet = nil
-      @dino_weight = nil
-      @dino_feet = nil
-      @dino_description = nil
+#     @dino_name = nil
+#     @dino_period = nil
+#     @dino_continent = nil
+#     @dino_diet = nil
+#     @dino_weight = nil
+#     @dino_feet = nil
+#     @dino_description = nil
 
       # Different csv files have different headers (dictionary keys).  We want 
       # to translate from the dictionary key into the proper variable.  We 
       # translate using the translation dictionary, which maps headers to 
       # instance variables. 
       translate = {}
-      translate[ 'Genus' ] = 'dino_name'
-      translate[ 'Period' ] = 'dino_period'
-      translate[ 'Carnivore' ] = 'dino_diet' 
-      translate[ 'Weight' ] = 'dino_weight'
-      translate[ 'Walking' ] = 'dino_feet'
-      translate[ 'NAME' ]= 'dino_name'
-      translate[ 'PERIOD' ] = 'dino_period'
-      translate[ 'CONTINENT' ] = 'dino_continent'
-      translate[ 'DIET' ] = 'dino_diet'
-      translate[ 'WEIGHT_IN_LBS' ] = 'dino_weight'
-      translate[ 'WALKING' ] = 'dino_feet'
-      translate[ 'DESCRIPTION' ] = 'dino_description'
+      translate[ :genus ] = :dino_name
+      translate[ :period ] = :dino_period
+      translate[ :carnivore ] = :dino_diet
+      translate[ :weight ] = :dino_weight
+      translate[ :walking ] = :dino_feet
+      translate[ :name ]= :dino_name
+      translate[ :continent ] = :dino_continent
+      translate[ :diet ] = :dino_diet
+      translate[ :weight_in_lbs ] = :dino_weight
+      translate[ :description ] = :dino_description
 
       # Loop over the dino_data.  Map dino_data key to its corresponding 
       # variable name.  Set the corresponding 
@@ -42,6 +40,7 @@ class Dinos
          # Look up dino_key in the translate dictionary. dino_var is currently a string. 
          dino_var = translate[dino_key]
          # Convert dino_var to a variable (from its string name) and assign data to it.
+     #   instance_variable_set("@#{dino_var}", dino_value)
          instance_variable_set("@#{dino_var}", dino_value)
       end
 

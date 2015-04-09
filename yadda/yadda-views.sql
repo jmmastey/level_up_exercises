@@ -24,7 +24,7 @@ create or replace view recent_score AS
     beers.name as beername,
     ratings.computed
   from breweries 
-  inner join beers on beers.brewery_id = breweries.brewery_id 
+  left join beers on beers.brewery_id = breweries.brewery_id 
   left join (select beer_id,
                AVG(ratings.overall) as computed 
              from ratings 
@@ -38,8 +38,8 @@ create or replace view also_enjoy AS
     styles.style as beerstyle,
     ratings.computed
   from beers
-  inner join styles on beers.style_id = styles.style_id
-  inner join (select beer_id,
+  left join styles on beers.style_id = styles.style_id
+  left join (select beer_id,
                AVG(ratings.overall) as computed 
              from ratings 
              group by beer_id) ratings on ratings.beer_id = beers.beer_id

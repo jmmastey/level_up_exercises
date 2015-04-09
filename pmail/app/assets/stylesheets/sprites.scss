@@ -1,0 +1,29 @@
+$category-sprites: image-url('sprites.png');
+$application-sprites: image-url('more_sprites.png');
+$down-arrow-sprite: image-url('down-arrow.png');
+
+.application-sprites {
+  background-image: $application-sprites;
+  background-size: 112px 2011px;
+}
+
+.search-icon {
+  background-position: -69px -1623px;
+  display: inline-block;
+  margin: -1px;
+  height: 30px;
+  width: 30px;
+}
+
+.app-icon {
+  background-position: 0 -735px;
+  opacity: 0.55;
+  height: 30px;
+  width: 30px;
+}
+
+.down-arrow {
+  background: $down-arrow-sprite no-repeat center;
+  height: 4px;
+  width: 7px;
+}

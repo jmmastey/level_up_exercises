@@ -22,19 +22,24 @@ class DinoFilters
 
   def find_dinos_specific_period(period)
     # ignore case of the text in period with /i in regular expression
-    filtered_list = @dino_objects.select { |dino| \
-                                     dino.period[/#{period}/i].nil?   }
+    filtered_list = @dino_objects.select do |dino|
+      dino.period[/#{period}/i].nil?
+    end
     DinoFilters.new(filtered_list)
   end
 
   def find_big_dinos(size)
     # size should be an integer that is the cutoff for the weight
-    filtered_list = @dino_objects.select { |dino| dino.weight > size unless dino.weight.nil? }
+    filtered_list = @dino_objects.select do |dino|
+      dino.weight > size unless dino.weight.nil?
+    end
     DinoFilters.new(filtered_list)
   end
 
   def find_small_dinos(size)
-    filtered_list = @dino_objects.select { |dino| dino.weight < size unless dino.weight.nil? }
+    filtered_list = @dino_objects.select do |dino|
+      dino.weight < size unless dino.weight.nil?
+    end
     # size should be an integer that is the cutoff for the weight
     DinoFilters.new(filtered_list)
   end

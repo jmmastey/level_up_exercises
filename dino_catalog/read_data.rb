@@ -10,7 +10,7 @@ def read_data
   # list of dino objects
   CSV.foreach('dino_csv_list') do |new_file|
     filename = new_file[0]
-    dino_data = CSV.read(filename, :headers => true, :header_converters => :symbol)
+    dino_data = CSV.read(filename, headers: true, header_converters: :symbol)
     dino_data.each do |row|
       new_dino = Dinos.new(row.to_hash)
       dino_objects.push(new_dino)
@@ -21,5 +21,5 @@ def read_data
   dino_filter_object = DinoFilters.new(dino_objects)
 
   # return the dino objects so that they can be queried.
-  return dino_filter_object, dino_objects
+  [dino_filter_object, dino_objects]
 end

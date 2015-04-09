@@ -56,15 +56,15 @@ class Dinos
   def print_dino
     # This function prints out all of the data that was collected about this
     # particular dino
-    dino_variables = ["name", "continent", "period", "diet", "weight", "feet",\
-                      "description"]
+    dino_variables = %w(name continent period diet weight feet description)
 
     # Build up the string of dino info using a loop
     dino_string = "**************************************************\n"
     for var in dino_variables
       dino_info = instance_variable_get("@#{var}")
-      dino_string << var + ": " + dino_string_helper(var, dino_info) + "\n"\
-                                                            if dino_info
+      if dino_info
+        dino_string << var + ": " + dino_string_helper(var, dino_info) + "\n"
+      end
     end
     puts dino_string
   end

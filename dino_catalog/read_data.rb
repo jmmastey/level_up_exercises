@@ -21,5 +21,6 @@ def read_data
   dino_filter_object = DinoFilters.new(dino_objects)
 
   # return the dino objects so that they can be queried.
-  [dino_filter_object, dino_objects]
+  # [dino_filter_object, dino_objects]
+  dino_filter_object
 end

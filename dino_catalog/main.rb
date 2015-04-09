@@ -6,7 +6,7 @@ load 'dino_filters.rb'
 # If you want to run your own queries, you can just call
 # the read_data function and store the output in variables
 # like the following line of code!
-dino_filter_object, dino_objects = read_data
+dino_filter_object = read_data
 
 # Find bipeds
 puts "**********These are the bipeds!************"
@@ -33,4 +33,4 @@ puts "**********These are the carnivorous bipeds!*******"
 dino_filter_object.find_carnivores.find_bipeds.print_list
 
 # Print one dino
-dino_objects[0].print_dino
+dino_filter_object.print_dino_by_index(0)

@@ -49,4 +49,9 @@ class DinoFilters
       dino.print_dino
     end
   end
+
+  # Choose to print a single dino's data based on its index in the list of dinos
+  def print_dino_by_index(dino_index)
+    @dino_objects[dino_index].print_dino
+  end
 end

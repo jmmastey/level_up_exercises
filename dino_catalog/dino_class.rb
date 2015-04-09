@@ -1,96 +1,90 @@
 class Dinos
+  attr_reader :period
+  attr_reader :diet
+  attr_reader :feet
+  attr_reader :weight
+  attr_reader :name
 
-   attr_reader :dino_period
-   attr_reader :dino_diet
-   attr_reader :dino_feet
-   attr_reader :dino_weight
-   attr_reader :dino_name
+  def initialize(dino_data)
+    # These are the instance variables for the Dinos class
+    #     @name = nil
+    #     @period = nil
+    #     @continent = nil
+    #     @diet = nil
+    #     @weight = nil
+    #     @feet = nil
+    #     @description = nil
 
-   def initialize(dino_data)
+    # Different csv files have different headers (dictionary keys).  We want
+    # to translate from the dictionary key into the proper variable.  We
+    # translate using the translation dictionary, which maps headers to
+    # instance variables.
+    translate = {}
+    translate[:genus] = :name
+    translate[:period] = :period
+    translate[:carnivore] = :diet
+    translate[:weight] = :weight
+    translate[:walking] = :feet
+    translate[:name] = :name
+    translate[:continent] = :continent
+    translate[:diet] = :diet
+    translate[:weight_in_lbs] = :weight
+    translate[:description] = :description
 
-      # These are the instance variables for the Dinos class
-#     @dino_name = nil
-#     @dino_period = nil
-#     @dino_continent = nil
-#     @dino_diet = nil
-#     @dino_weight = nil
-#     @dino_feet = nil
-#     @dino_description = nil
+    # Loop over the dino_data.  Map dino_data key to its corresponding
+    # variable name.  Set the corresponding
+    # variable equal to the value associated with the dino_data key.
+    dino_data.each do |dino_key, dino_value|
+      # Look up dino_key in the translate dictionary. dino_var is currently a
+      # string.
+      dino_var = translate[dino_key]
+      # Convert dino_var to a variable (from its string name) and assign data to
+      # it.
+      instance_variable_set("@#{dino_var}", dino_value)
+    end
 
-      # Different csv files have different headers (dictionary keys).  We want 
-      # to translate from the dictionary key into the proper variable.  We 
-      # translate using the translation dictionary, which maps headers to 
-      # instance variables. 
-      translate = {}
-      translate[ :genus ] = :dino_name
-      translate[ :period ] = :dino_period
-      translate[ :carnivore ] = :dino_diet
-      translate[ :weight ] = :dino_weight
-      translate[ :walking ] = :dino_feet
-      translate[ :name ]= :dino_name
-      translate[ :continent ] = :dino_continent
-      translate[ :diet ] = :dino_diet
-      translate[ :weight_in_lbs ] = :dino_weight
-      translate[ :description ] = :dino_description
+    # Some instance fields need special treatment
+    @continent = 'Africa' unless @continent
 
-      # Loop over the dino_data.  Map dino_data key to its corresponding 
-      # variable name.  Set the corresponding 
-      # variable equal to the value associated with the dino_data key.
-      dino_data.each do |dino_key, dino_value|
-         # Look up dino_key in the translate dictionary. dino_var is currently a string. 
-         dino_var = translate[dino_key]
-         # Convert dino_var to a variable (from its string name) and assign data to it.
-     #   instance_variable_set("@#{dino_var}", dino_value)
-         instance_variable_set("@#{dino_var}", dino_value)
-      end
+    # Set @diet to false if all carnivorous diets are false
+    @diet = (@diet == 'Yes' || @diet == 'Carnivore' || \
+                                         diet == 'Insectivore')
+    # Convert weight into an integer
+    @weight = @weight.to_i unless @weight.nil?
+  end
 
-      # Some instance fields need special treatment
-      @dino_continent = 'Africa' if not @dino_continent 
-  
-      # Set @dino_diet to false if all carnivorous diets are false
-      @dino_diet = (@dino_diet == 'Yes' || @dino_diet == 'Carnivore' ||  \
-                                           @dino_diet == 'Insectivore') 
-     
-      # Convert weight into an integer
-      @dino_weight = @dino_weight.to_i if @dino_weight != nil
-         
-   end  
+  def print_dino
+    # This function prints out all of the data that was collected about this
+    # particular dino
+    dino_variables = ["name", "continent", "period", "diet", "weight", "feet",\
+                      "description"]
 
+    # Build up the string of dino info using a loop
+    dino_string = "**************************************************\n"
+    for var in dino_variables
+      dino_info = instance_variable_get("@#{var}")
+      dino_string << var + ": " + dino_string_helper(var, dino_info) + "\n"\
+                                                            if dino_info
+    end
+    puts dino_string
+  end
 
-   def print_dino()
-      # This function prints out all of the data that was collected about this 
-      # particular dino
-  
-      # Dino variables
-      dino_variables = ["dino_name", "dino_continent", "dino_period", \
-                  "dino_diet", "dino_weight", "dino_feet", "dino_description"]
+  def dino_string_helper(var_name_string, value)
+    # This function helps make the dino info string pretty when it is printed.
+    if var_name_string == "diet"
+      return dino_diet_helper(value)
+    elsif var_name_string == "weight"
+      return value.to_s + " lbs"
+    else
+      return value
+    end
+  end
 
-      # Build up the string of dino info using a loop
-      dino_string = "**************************************************\n"
-      for var in dino_variables
-         dino_info = instance_variable_get("@#{var}")
-         dino_string << var + ": " + dino_string_helper(var, dino_info) + "\n"\
-                                                              if dino_info
-      end
-      puts dino_string
-     
-   end
-
-
-   def dino_string_helper(var_name_string, value)
-      # This function helps make the dino info string pretty when it is printed.
-      if var_name_string == "dino_diet"
-         if value
-            return "Carnivore"
-         else
-            return "Not Carnivore"
-         end
-      elsif var_name_string == "dino_weight"
-         return value.to_s + " lbs"
-      else
-         return value
-      end
-   end
-      
-
+  def dino_diet_helper(value)
+    if value
+      return "Carnivore"
+    else
+      return "Not Carnivore"
+    end
+  end
 end

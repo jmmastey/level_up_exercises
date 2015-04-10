@@ -1,17 +1,39 @@
-//TODO add hover classes
 .userbar
   .logo
     %a{href:'/'}
       = image_tag "netflix.png", class: "logo-md"
   .search
     %input.search-input
-    .search-extra-options.down-arrow
+    .search-extra-options
+      .down-arrow-icon
     %button.search-button
       %span.application-sprites.search-icon
   .dropdowns
     .more-applications
-      .application-sprites.app-icon
+      .application-sprites.app-icon.app-drawer
     .user-menu
       %span.user-email kshu@enova.com
-      .more-user-options.down-arrow
-
+      .more-user-options.down-arrow-icon
+  .dropdown-modeless
+    .angled-nub
+    .account-manager-information
+      .account-manager-text
+        .manager-domain
+          This account is managed by
+          %strong enova.com.
+        .learn-more
+          %a.learn-more-link{href:'#'} Learn more
+    .account-details
+      .account-details-content
+        .user-full-name
+          %strong Kevin Shu
+        .user-email
+          kshu@enova.com
+        .user-links
+          %a.account-link{href:'#'} Account
+          %span.account-privacy-link-separator –
+          %a.privacy-link{href:'#'} Privacy
+    .account-actions
+      .account-actions-buttons
+        %button.add-account Add Account
+        %button.sign-out Sign Out

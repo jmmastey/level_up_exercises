@@ -1,0 +1,40 @@
+There are two classes in this repository.  One class, Dinos, (in the
+dino_class.rb file) takes in a dictionary of data for *one* dinosaur
+and stores it in a Dinos object.  
+Methods in this class for external use are:
+
+initialize(dictionary of dino data for one dino)
+print_dino()
+
+
+
+The other class is called Dino_filters.  This class has only one
+instance variable which is a list of Dinos objects.  This class
+contains methods for filtering the list of Dinos objects by some
+search criteria.  It always returns a Dino_filters object so that
+the output of one of the search methods can be used as the input
+for a next search  method (to allow method chaining).  
+Methods in this class are:
+
+initialize(list of dino objects)
+find_bipeds()
+find_carnivores()
+find_dinos_specific_period(string_with_period_name)
+find_big_dinos(cutoff_weight_in_lbs_as_integer)
+find_small_dinos(cutoff_weight_in_lbs_as_integer)
+print_list()
+
+
+There is a function called read_data in read_data.rb.  This function
+reads the CSV files and creates both a Dino_filters object (dino_filter_objects)
+and a list of Dinos (dino_objects).  
+
+If you want to print the info an a specific dino, you can call
+print_dino on a Dinos object (dino_objects).  
+Ex.  dino_objects[2].print_dino   (to print the info on dino #3)
+
+If you want to print info on a list of dinos,  you can call print_list
+on the Dino_filters object.
+Ex. dino_filter_objects.print_list
+
+Examples for filtering are in the main.rb script.

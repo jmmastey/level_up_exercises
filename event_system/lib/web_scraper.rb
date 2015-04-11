@@ -1,15 +1,10 @@
 require 'nokogiri'
-require 'open-uri'
-
 class WebScraper
-  BASE_URL = "http://forecast.weather.gov/MapClick.php?textField1=41.8500262820005&textField2=-87.65004892899964"
-
   def self.scrape_temperatures(doc)
     document = doc
-
     low_high_temp = {}
     d1 = Date.today
-    document.css("div.one-ninth-first").each do |para|
+    document.css("li.forecast-tombstone").each do |para|
       if para.css("p.txt-ctr-caps").text[-5..-1].downcase == "night"
         low_high_temp[d1] ||= {}
         low_high_temp[d1]["low"] = para.css("p.point-forecast-icons-low").text
@@ -27,20 +22,21 @@ class WebScraper
   def self.detailed_scrape(doc)
     document = doc
     temp_hash_description = {}
-    top_level = document.search('div.point-forecast-7-day > ul > li')
+
+    top_level = document.css('div#detailed-forecast-body')
     d1 = Date.today
-    top_level.each do |li|
-      temp_key = li.css("span.label").text
-      li.css("span").remove
-      if temp_key[-5..-1].downcase == "night"
-        temp_hash_description[d1] ||= {}
-        temp_hash_description[d1]["detail_night"] = li.text.strip
-        d1 += 1.day
-      else
-        temp_hash_description[d1] ||= {}
-        temp_hash_description[d1]["detail_afternoon"] = li.text.strip
-      end
+    document.css('div.row-forecast').each do |para|
+      temp_key = para.css('div.forecast-label').text
+        if temp_key[-5..-1].downcase == "night"
+          temp_hash_description[d1] ||= {}
+          temp_hash_description[d1]["detail_night"] = para.css('div.forecast-text').text.strip
+          d1 += 1.day
+        else
+          temp_hash_description[d1] ||= {}
+          temp_hash_description[d1]["detail_afternoon"] = para.css('div.forecast-text').text.strip
+        end
     end
+
 
     temp_hash_description
   end

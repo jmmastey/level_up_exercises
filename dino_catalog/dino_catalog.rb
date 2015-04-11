@@ -33,19 +33,41 @@ class Dino
     big_or_small.join
   end
 
+  def from_jurassic
+    jurassic = []
+    dinos.map { |e| jurassic << e if e['PERIOD'] =~ /Jurassic/ }
+    jurassic.join
+  end
+
+  def from_cretaceous
+    cretaceous = []
+    dinos.map { |e| cretaceous << e if e['PERIOD'] =~ /Cretaceous/ }
+    cretaceous.join
+  end
+
+  def from_late_permian
+    late_permian = []
+    dinos.map { |e| late_permian << e if e['PERIOD'] == 'Late Permian' }
+    late_permian.join
+  end
+
+  def from_oxfordian
+    oxfordian = []
+    dinos.map { |e| oxfordian << e if e['PERIOD'] == 'Oxfordian' }
+    oxfordian.join
+  end
+
   def period(arg)
-    period = []
     case arg
       when 'Jurassic'
-        dinos.map { |e| period << e if e['PERIOD'] =~ /Jurassic/ }
+        from_jurassic
       when 'Late Permian'
-        dinos.map { |e| period << e if e['PERIOD'] == 'Late Permian' }
+        from_late_permian
       when 'Cretaceous'
-        dinos.map { |e| period << e if e['PERIOD'] =~ /Cretaceous/ }
+        from_cretaceous
       when 'Oxfordian'
-        dinos.map { |e| period << e if e['PERIOD'] == 'Oxfordian' }
+        from_oxfordian
     end
-    period.join
   end
 end
 
@@ -58,20 +80,39 @@ class African < Dino
     carnivores.join
   end
 
+  def from_jurrasic
+    dinos.map { |e| period << e if e['PERIOD'] =~ /Jurassic/ }
+  end
+
+  def from_albian
+    albian = []
+    dinos.map { |e| albian << e if e['PERIOD'] == 'Albian' }
+    albian.join
+  end
+
+  def from_cretaceous
+    cretaceous = []
+    dinos.map { |e| cretaceous << e if e['PERIOD'] =~ /Cretaceous/ }
+    cretaceous.join
+  end
+
+  def from_triassic
+    triassic = []
+    dinos.map { |e| triassic << e if e['PERIOD'] == 'Triassic' }
+    triassic.join
+  end
+
   def period(arg)
-    period = []
     case arg
       when 'Jurassic'
-        dinos.map { |e| period << e if e['PERIOD'] =~ /Jurassic/ }
+        from_jurrasic
       when 'Albian'
-        dinos.map { |e| period << e if e['PERIOD'] == 'Albian' }
+        from_albian
       when 'Cretaceous'
-        dinos.map { |e| period << e if e['PERIOD'] =~ /Cretaceous/ }
+        from_cretaceous
       when 'Triassic'
-        dinos.map { |e| period << e if e['PERIOD'] == 'Triassic' }
     end
-    period.join
   end
 end
-dinos = Dino.new('dinodex.csv', headers: true)
-puts dinos.bipeds
+dinos = Dino.new('african_dinosaur_export.csv', headers: true)
+puts dinos.period('Jurassic')

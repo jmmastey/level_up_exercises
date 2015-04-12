@@ -56,19 +56,6 @@ class Dino
     dinos.map { |e| oxfordian << e if e['PERIOD'] == 'Oxfordian' }
     oxfordian.join
   end
-
-  def period(arg)
-    case arg
-      when 'Jurassic'
-        from_jurassic
-      when 'Late Permian'
-        from_late_permian
-      when 'Cretaceous'
-        from_cretaceous
-      when 'Oxfordian'
-        from_oxfordian
-    end
-  end
 end
 
 class African < Dino
@@ -80,7 +67,7 @@ class African < Dino
     carnivores.join
   end
 
-  def from_jurrasic
+  def from_jurassic
     dinos.map { |e| period << e if e['PERIOD'] =~ /Jurassic/ }
   end
 
@@ -101,18 +88,6 @@ class African < Dino
     dinos.map { |e| triassic << e if e['PERIOD'] == 'Triassic' }
     triassic.join
   end
-
-  def period(arg)
-    case arg
-      when 'Jurassic'
-        from_jurrasic
-      when 'Albian'
-        from_albian
-      when 'Cretaceous'
-        from_cretaceous
-      when 'Triassic'
-    end
-  end
 end
-dinos = Dino.new('african_dinosaur_export.csv', headers: true)
-puts dinos.period('Jurassic')
+dinos = African.new('african_dinosaur_export.csv', headers: true)
+puts dinos.from_triassic

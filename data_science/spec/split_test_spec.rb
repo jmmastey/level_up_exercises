@@ -14,13 +14,23 @@ describe SplitTest do
 
   describe "#confidence" do 
     it "finds min/max predictions for a given confidence level" do
-      expect(@test.confidence(1000, 4000, 0.95)).to eq([0.23658104401082297, 0.26341895598917703])
+      expect(@test.confidence).to eq(
+        {
+          "A"=>[0.968846875179678, 0.9978197914869885], 
+          "B"=>[0.2897785784092367, 0.3768880882574299]
+        })
     end
   end
 
   describe "#sample_size" do
     it "finds the required sample size for accurate analysis" do 
       expect(@test.sample_size(0.1, 0.11, 0.05, 0.8)).to eq(14751)
+    end
+  end
+
+  describe "#chi_square" do 
+    it "returns the p values for a chi_square test" do 
+      expect(@test.chi_square).to eq(0)
     end
   end
 end

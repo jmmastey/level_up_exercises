@@ -7,7 +7,7 @@ class SplitTestData
     @data = JSON.parse(file_contents(json_file))
   end
 
-  def summary
+  def successes
     data_summary = Hash.new(0)
     @data.each do |row|
       data_summary[row["cohort"]] += row["result"]
@@ -15,12 +15,12 @@ class SplitTestData
     data_summary
   end
 
-  def count(field, value)
-    count = 0
+  def attempts
+    data_summary = Hash.new(0)
     @data.each do |row|
-      count += 1 if row[field] == value
+      data_summary[row["cohort"]] += 1
     end
-    count
+    data_summary
   end
 
   def file_contents(file_path)

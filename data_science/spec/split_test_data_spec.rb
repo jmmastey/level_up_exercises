@@ -12,15 +12,14 @@ describe SplitTestData do
   end
 
   describe "#count" do
-    it "counts how many rows have a specific value in a specific field." do
-      expect(@data.count("cohort", "A")).to eq(60)
+    it "counts number of attempts per cohort." do
+      expect(@data.attempts).to eq({'A' => 300, 'B' => 450})
     end
   end
 
-  describe "#summary" do 
+  describe "#successes" do 
     it "sums the number of hits for each group" do
-      pp @data.summary
-      expect(@data.summary).to eq({'A' => 36, 'B' => 30})
+      expect(@data.successes).to eq({'A' => 295, 'B' => 150})
     end
   end
 end

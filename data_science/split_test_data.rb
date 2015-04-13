@@ -23,6 +23,17 @@ class SplitTestData
     data_summary
   end
 
+  def conversion_rates
+    goals = successes
+    visitors = attempts
+    conversion_percentages = Hash.new
+
+    goals.each do |cohort, successes|
+      conversion_percentages[cohort] = successes/visitors[cohort]
+    end
+    conversion_percentages
+  end
+
   def file_contents(file_path)
     File.open(file_path, 'r') {|f| f.read }
   end

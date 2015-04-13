@@ -22,4 +22,10 @@ describe SplitTestData do
       expect(@data.successes).to eq({'A' => 295, 'B' => 150})
     end
   end
+
+  describe "#conversion_rates" do
+    it "shows the conversion rate of each cohort" do
+      expect(@data.conversion_rates).to eq({'A' => 0.95, 'B' => 0.46})
+    end
+  end
 end

@@ -24,7 +24,7 @@ describe SplitTest do
 
   describe "#chi_square" do 
     it "returns the p values for a chi_square test" do 
-      expect(@test.chi_square).to eq(0)
+      expect(@test.chi_square).to eq(0) 
     end
   end
 end

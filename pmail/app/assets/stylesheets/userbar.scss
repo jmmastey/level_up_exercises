@@ -43,7 +43,7 @@
 
   &:hover {
     border: 1px solid $gray-1;
-    box-shadow: inset 0 1px 0px $gray-1, inset 0 -1px 1px $gray-1;
+    box-shadow: inset 0px 0px 8px -2px $gray-1;
   }
 }
 
@@ -69,7 +69,7 @@
 
 .search-button {
   width: 72px;
-  height: 34px;
+  height: 35px;
   left: 578px;
   top: 13px;
   position: absolute;

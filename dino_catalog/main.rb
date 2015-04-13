@@ -1,5 +1,5 @@
 require 'csv'
-load 'dino_class.rb'
+load 'dinos.rb'
 load 'dino_filters.rb'
 
 # This script reads the data and runs the queries of interest

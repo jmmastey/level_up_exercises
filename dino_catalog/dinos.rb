@@ -1,4 +1,4 @@
-class Dinos
+class Dino
   attr_reader :period
   attr_reader :diet
   attr_reader :feet
@@ -6,7 +6,7 @@ class Dinos
   attr_reader :name
 
   def initialize(dino_data)
-    # These are the instance variables for the Dinos class
+    # These are the instance variables for the Dino class
     #     @name = nil
     #     @period = nil
     #     @continent = nil
@@ -15,31 +15,9 @@ class Dinos
     #     @feet = nil
     #     @description = nil
 
-    # Different csv files have different headers (dictionary keys).  We want
-    # to translate from the dictionary key into the proper variable.  We
-    # translate using the translation dictionary, which maps headers to
-    # instance variables.
-    translate = {}
-    translate[:genus] = :name
-    translate[:period] = :period
-    translate[:carnivore] = :diet
-    translate[:weight] = :weight
-    translate[:walking] = :feet
-    translate[:name] = :name
-    translate[:continent] = :continent
-    translate[:diet] = :diet
-    translate[:weight_in_lbs] = :weight
-    translate[:description] = :description
-
-    # Loop over the dino_data.  Map dino_data key to its corresponding
-    # variable name.  Set the corresponding
-    # variable equal to the value associated with the dino_data key.
-    dino_data.each do |dino_key, dino_value|
-      # Look up dino_key in the translate dictionary. dino_var is currently a
-      # string.
-      dino_var = translate[dino_key]
-      # Convert dino_var to a variable (from its string name) and assign data to
-      # it.
+    # Loop over the dino_data.  Each defined instance variable in Dino is a key
+    # in the dictionary.  Set dino_value equal to its instance variable.
+    dino_data.each do |dino_var, dino_value|
       instance_variable_set("@#{dino_var}", dino_value)
     end
 

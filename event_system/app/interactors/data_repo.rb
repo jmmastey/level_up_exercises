@@ -5,11 +5,24 @@ class DataRepo
 
   BASE_URL = "http://forecast.weather.gov/MapClick.php?textField1=41.8500262820005&textField2=-87.65004892899964"
   def self.document
-    if Rails.env.test?
-      @document ||= Nokogiri::HTML(File.open("temperatures.html", "r"))
+    @document ||= Nokogiri::HTML(File.open("temperatures.html", "r"))
+    # if Rails.env.test?
+    #   @document ||= Nokogiri::HTML(File.open("temperatures.html", "r"))
+    # else
+    #   @document ||= Nokogiri::HTML(open(BASE_URL))
+    # end
+  end
+
+  def self.call(model_name, method_name, attributes)
+    if model_name.today.empty?
+      temp = parse_scraped_data(model_name)
+      scraping = temp.call(method_name)
     else
-      @document ||= Nokogiri::HTML(open(BASE_URL))
+      forecast = model_name.today.as_json
+      details = structure_data(attributes)
+      scraping = details.call(forecast)
     end
+    scraping
   end
 
   def self.parse_scraped_data(model_name)
@@ -29,12 +42,12 @@ class DataRepo
     end
   end
 
-  def self.save_scraped_data(day, scraped_data, wf)
-    wf[:weather_day] = day
-    wf.attributes.each do |attr, value|
+  def self.save_scraped_data(day, scraped_data, forecast_model)
+    forecast_model[:weather_day] = day
+    forecast_model.attributes.each do |attr, value|
       next unless scraped_data[attr]
-      wf[attr.to_sym] = scraped_data[attr]
+      forecast_model[attr.to_sym] = scraped_data[attr]
     end
-    wf.save!
+    forecast_model.save!
   end
 end

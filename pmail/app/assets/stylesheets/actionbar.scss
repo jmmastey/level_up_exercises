@@ -24,6 +24,9 @@
   font-size: 19px;
   color: $gmail-red;
   width: 50px;
+  position: absolute;
+  left: 32px;
+  top: 14px;
 
   &:hover {
     cursor: pointer;
@@ -38,8 +41,8 @@
 
 .mail-selector {
   position: absolute;
-  top: 0;
-  left: 168px;
+  top: 15px;
+  left: 200px;
 
   .button {
     width: 69px;
@@ -142,7 +145,8 @@
 
 .page-selector {
   position: absolute;
-  right: 180px;
+  right: 135px;
+  top: 37px;
 }
 
 .page-information {
@@ -200,8 +204,8 @@
 
 .settings-selector {
   position: absolute;
-  top: -6px;
-  right: 75px;
+  top: 9px;
+  right: 30px;
 }
 
 .settings-button {

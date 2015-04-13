@@ -29,6 +29,7 @@ class Dino
                                          diet == 'Insectivore')
     # Convert weight into an integer
     @weight = @weight.to_i unless @weight.nil?
+
   end
 
   def print_dino
@@ -40,7 +41,7 @@ class Dino
     dino_string = "**************************************************\n"
     for var in dino_variables
       dino_info = instance_variable_get("@#{var}")
-      if dino_info
+      if dino_info != nil
         dino_string << var + ": " + dino_string_helper(var, dino_info) + "\n"
       end
     end

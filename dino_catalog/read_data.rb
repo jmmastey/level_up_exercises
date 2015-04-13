@@ -51,5 +51,6 @@ def translate_headers(row)
     # Set value for the key we just translated.
     translated_row[translate[key]] = value
   end
+  return translated_row
 
 end

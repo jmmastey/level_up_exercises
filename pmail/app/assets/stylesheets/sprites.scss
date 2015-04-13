@@ -1,10 +1,23 @@
 $category-sprites: image-url('sprites.png');
-$application-sprites: image-url('more_sprites.png');
+$application-sprites: image-url('more-sprites.png');
 $down-arrow-sprite: image-url('down-arrow.png');
+$down-arrow-red-sprite: image-url('down-arrow-red.png');
+$icon-sprites: image-url('icon-sprites.png');
+$more-fucking-sprites: image-url('more-fucking-sprites.png');
 
 .application-sprites {
   background-image: $application-sprites;
   background-size: 112px 2011px;
+}
+
+.icon-sprites {
+  background-image: $icon-sprites;
+  background-size: 21px 493px;
+}
+
+.more-fucking-sprites {
+  background-image: $more-fucking-sprites;
+  background-size: 105px 105px;
 }
 
 .search-icon {
@@ -26,4 +39,32 @@ $down-arrow-sprite: image-url('down-arrow.png');
   background: $down-arrow-sprite no-repeat center;
   height: 4px;
   width: 7px;
+
+  &.red {
+    background: $down-arrow-red-sprite no-repeat center;
+  }
+}
+
+.refresh-icon {
+  background-position: 0 -193px;
+  height: 20px;
+  width: 20px;
+}
+
+.gear-icon {
+  background-position: 0 -472px;
+  height: 20px;
+  width: 20px;
+}
+
+.arrow-left {
+  background-position: 83px -20px;
+  height: 20px;
+  width: 20px;
+}
+
+.arrow-right {
+  background-position: 63px -20px;
+  height: 20px;
+  width: 20px;
 }

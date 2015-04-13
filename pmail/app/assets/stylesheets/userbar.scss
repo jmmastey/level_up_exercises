@@ -1,4 +1,5 @@
 @import 'mixins';
+@import 'variables';
 
 .userbar {
   width: 100%;
@@ -6,16 +7,16 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #eee;
+  background-color: $gray-3;
   z-index: 999;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $gray-2;
 }
 
 .logo {
   width: 200px;
   height: 100%;
   position: absolute;
-  padding: 0 40px;
+  padding: 0 40px 0 30px;
 }
 
 .logo-md {
@@ -38,11 +39,11 @@
   margin: 0;
   top: 13px;
   position: absolute;
-  border: 1px solid #ddd;
+  border: 1px solid $gray-2;
 
   &:hover {
-    border: 1px solid #ccc;
-    box-shadow: inset 0 1px 0px #ccc, inset 0 -1px 1px #ccc;
+    border: 1px solid $gray-1;
+    box-shadow: inset 0 1px 0px $gray-1, inset 0 -1px 1px $gray-1;
   }
 }
 
@@ -56,6 +57,7 @@
 
   &:hover {
     opacity: 0.7;
+    cursor: pointer;
   }
 
   .down-arrow-icon {
@@ -71,7 +73,7 @@
   left: 578px;
   top: 13px;
   position: absolute;
-  background-color: #4273fc;
+  background-color: $gmail-blue;
   border-width: 0px;
   border-radius: 0 3px 3px 0;
 }
@@ -105,8 +107,9 @@
 }
 
 .user-email {
-  font-family: Arial, sans-serif;
+  font-family: $gmail-font;
   font-size: 13px;
+  color: $gmail-black;
 }
 
 .app-drawer {
@@ -121,8 +124,8 @@
   width: 255px;
   top: 60px;
   right: 40px;
-  border: 1px solid #ccc;
-  box-shadow: 0px 0px 8px 0px #ccc;
+  border: 1px solid $gray-1;
+  box-shadow: 0px 0px 8px 0px $gray-1;
 }
 
 .angled-nub {
@@ -131,8 +134,8 @@
   height: 10px;
   top: -6px;
   right: 10px;
-  background-color: #fef9db;
-  border: 1px solid #ccc;
+  background-color: $background-yellow;
+  border: 1px solid $gray-1;
 
   border-right: none;
   border-bottom: none;
@@ -143,13 +146,13 @@
 .account-manager-information {
   width: 100%;
   height: 50px;
-  background-color: #fef9db;
+  background-color: $background-yellow;
 }
 
 .account-manager-text {
   margin: 0;
   padding: 10px 20px;
-  font-family: Arial, sans-serif;
+  font-family: $gmail-font;
   font-size: 11px;
 }
 
@@ -163,13 +166,17 @@
 
 .account-details {
   width: 100%;
-  height: 80px;
+  height: 90px;
 }
 
 .account-details-content {
   margin: 0;
   padding: 15px 20px;
-  font-family: Arial, sans-serif;
+  font-family: $gmail-font;
+
+  .user-email {
+    color: $gmail-gray;
+  }
 }
 
 .user-full-name {
@@ -198,15 +205,15 @@
 }
 
 .account-privacy-link-separator {
-  color: #ccc;
+  color: $gray-1;
 }
 
 .account-actions {
   width: 100%;
   height: 50px;
   border-top: 1px solid;
-  border-color: #ccc;
-  background-color: #f5f5f5;
+  border-color: $gray-1;
+  background-color: $background-gray-1;
 }
 
 .account-actions-buttons {
@@ -216,9 +223,10 @@
     position: absolute;
     height: 30px;
     font-size: 13px;
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
+    font-family: $gmail-font;
+    color: $gmail-gray;
+    background-color: $background-gray-2;
+    border: 1px solid $gray-1;
     border-radius: 2px;
   }
 }
@@ -229,4 +237,8 @@
 
 .sign-out {
   right: 20px;
+}
+
+.page-link {
+  color: $gmail-link-blue;
 }

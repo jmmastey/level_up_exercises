@@ -1,3 +1,4 @@
+require_relative './dinos.rb'
 # This file contains functions that can be used to filter the dinosaurs to find
 # ones with specific attributes.
 
@@ -16,7 +17,9 @@ class DinoFilters
   end
 
   def find_carnivores
-    filtered_list = @dino_objects.select { |dino| dino.diet == true }
+    filtered_list = @dino_objects.select do  |dino| 
+      dino.diet != 'Not carnivore' && dino.diet != 'Herbivore'
+    end
     DinoFilters.new(filtered_list)
   end
 

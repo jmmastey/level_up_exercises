@@ -1,5 +1,5 @@
-load 'dinos.rb'
-load 'dino_filters.rb'
+require_relative './dinos.rb'
+require_relative './dino_filters.rb'
 require 'csv'
 
 def read_data
@@ -46,9 +46,9 @@ def translate_headers(row)
   }
   translated_row = {}
   row.each do |key, value|
-    puts 'dino keys and value', key, translate[key], value
     # Look up key in the translate dictionary. Map key to correspoding variable name.
     # Set value for the key we just translated.
+    return 'Key Error' if not translate[key]
     translated_row[translate[key]] = value
   end
   return translated_row

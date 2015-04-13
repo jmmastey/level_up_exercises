@@ -1,6 +1,7 @@
 require 'csv'
-load 'dinos.rb'
-load 'dino_filters.rb'
+require_relative './dinos.rb'
+require_relative './dino_filters.rb'
+require_relative './read_data.rb'
 
 # This script reads the data and runs the queries of interest
 # If you want to run your own queries, you can just call

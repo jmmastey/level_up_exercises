@@ -24,46 +24,30 @@ class Dino
     # Some instance fields need special treatment
     @continent = 'Africa' unless @continent
 
-    # Set @diet to false if all carnivorous diets are false
-    @diet = (@diet == 'Yes' || @diet == 'Carnivore' || \
-                                         diet == 'Insectivore')
+    @diet = 'Carnivore' if @diet == 'Yes' 
+    @diet = 'Not carnivore' if @diet == 'No'
+
     # Convert weight into an integer
     @weight = @weight.to_i unless @weight.nil?
 
   end
 
   def print_dino
-    # This function prints out all of the data that was collected about this
-    # particular dino
-    dino_variables = %w(name continent period diet weight feet description)
-
-    # Build up the string of dino info using a loop
-    dino_string = "**************************************************\n"
-    for var in dino_variables
-      dino_info = instance_variable_get("@#{var}")
+    # Print out all of the data that was collected about this particular dino
+    dino_values = self.instance_variables.map do |var|
+      dino_info = instance_variable_get("#{var}")
       if dino_info != nil
-        dino_string << var + ": " + dino_string_helper(var, dino_info) + "\n"
+        var_string = var.to_s.slice(1..-1)
+        "#{var_string} : #{format_string(var_string, dino_info)} \n"
       end
     end
-    puts dino_string
+    dino_values = dino_values.select { |dino_string| dino_string != nil}
+    puts dino_values
   end
 
-  def dino_string_helper(var_name_string, value)
-    # This function helps make the dino info string pretty when it is printed.
-    if var_name_string == "diet"
-      return dino_diet_helper(value)
-    elsif var_name_string == "weight"
-      return value.to_s + " lbs"
-    else
-      return value
-    end
+  def format_string(var_name_string, value)
+    return value.to_s + " lbs" if var_name_string == "weight"
+    return value
   end
 
-  def dino_diet_helper(value)
-    if value
-      return "Carnivore"
-    else
-      return "Not Carnivore"
-    end
-  end
 end

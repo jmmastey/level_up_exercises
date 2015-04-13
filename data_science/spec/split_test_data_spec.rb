@@ -11,7 +11,7 @@ describe SplitTestData do
     end
   end
 
-  describe "#count" do
+  describe "#attempts" do
     it "counts number of attempts per cohort." do
       expect(@data.attempts).to eq({'A' => 300, 'B' => 450})
     end

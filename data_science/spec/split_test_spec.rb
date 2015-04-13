@@ -22,12 +22,6 @@ describe SplitTest do
     end
   end
 
-  describe "#sample_size" do
-    it "finds the required sample size for accurate analysis" do 
-      expect(@test.sample_size(0.1, 0.11, 0.05, 0.8)).to eq(14751)
-    end
-  end
-
   describe "#chi_square" do 
     it "returns the p values for a chi_square test" do 
       expect(@test.chi_square).to eq(0)

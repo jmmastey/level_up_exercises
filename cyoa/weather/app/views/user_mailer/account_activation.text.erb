@@ -1,0 +1,5 @@
+Hi <%= @user.name %>
+
+Welcome to the Weather App! Click on the link below to activate your accoutn:
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>

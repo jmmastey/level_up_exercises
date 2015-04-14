@@ -17,7 +17,7 @@ class DinoFilters
   end
 
   def find_carnivores
-    filtered_list = @dino_objects.select do  |dino| 
+    filtered_list = @dino_objects.select do  |dino|
       dino.diet != 'Not carnivore' && dino.diet != 'Herbivore'
     end
     DinoFilters.new(filtered_list)

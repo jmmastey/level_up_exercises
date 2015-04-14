@@ -23,15 +23,14 @@ class Dino
     # Some instance fields need special treatment
     @continent = 'Africa' unless @continent
 
-    @diet = 'Carnivore' if @diet == 'Yes' 
+    @diet = 'Carnivore' if @diet == 'Yes'
     @diet = 'Not carnivore' if @diet == 'No'
 
     @weight = @weight.to_i unless @weight.nil?
-
   end
 
   def print_dino
-    # Print out all of the data that was collected about this particular dino
+    # Print out all of the data associated with particular dino
     dino_values = self.instance_variables.map do |var|
       dino_info = instance_variable_get("#{var}")
       if dino_info != nil
@@ -39,13 +38,12 @@ class Dino
         "#{var_string} : #{format_string(var_string, dino_info)} \n"
       end
     end
-    dino_values = dino_values.select { |dino_string| dino_string != nil}
+    dino_values = dino_values.select { |dino_string| not dino_string.nil? }
     puts dino_values
   end
 
   def format_string(var_name_string, value)
-    return "#{value.to_s}  lbs" if var_name_string == "weight"
+    return "#{value}  lbs" if var_name_string == "weight"
     return value
   end
-
 end

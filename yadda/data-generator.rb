@@ -11,12 +11,6 @@ def main
   generate_style_records
   generate_beer_records
   generate_rating_records
-
-  # generate_person_records 2000
-  # generate_brewery_records 1000
-  # generate_style_records 10000
-  # generate_beer_records 10000
-  # generate_rating_records 1000000
 end
 
 def generate_rating_records count=1000
@@ -91,7 +85,6 @@ def generate_person_records count=100
   end
 end
 
-#refactor, move focus off DB
 def get_record_id table, primary_key
   record = @conn.exec( "SELECT #{primary_key} FROM #{table} ORDER BY RANDOM() LIMIT 1" ).first
   record["#{primary_key}"]

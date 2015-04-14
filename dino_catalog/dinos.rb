@@ -15,8 +15,7 @@ class Dino
     #     @feet = nil
     #     @description = nil
 
-    # Loop over the dino_data.  Each defined instance variable in Dino is a key
-    # in the dictionary.  Set dino_value equal to its instance variable.
+    # Each instance variable in Dino is a key in the dino_data dictionary.
     dino_data.each do |dino_var, dino_value|
       instance_variable_set("@#{dino_var}", dino_value)
     end
@@ -27,7 +26,6 @@ class Dino
     @diet = 'Carnivore' if @diet == 'Yes' 
     @diet = 'Not carnivore' if @diet == 'No'
 
-    # Convert weight into an integer
     @weight = @weight.to_i unless @weight.nil?
 
   end
@@ -46,7 +44,7 @@ class Dino
   end
 
   def format_string(var_name_string, value)
-    return value.to_s + " lbs" if var_name_string == "weight"
+    return "#{value.to_s}  lbs" if var_name_string == "weight"
     return value
   end
 

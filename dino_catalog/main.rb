@@ -9,29 +9,22 @@ require_relative './read_data.rb'
 # like the following line of code!
 dino_filter_object = read_data
 
-# Find bipeds
 puts "**********These are the bipeds!************"
 dino_filter_object.find_bipeds.print_list
 
-# Find carnivores
 puts "**********These are the carnivores!**********"
 dino_filter_object.find_carnivores.print_list
 
-# Find dinos from Cretaceous periods
 puts "**********These are the Cretaceous dinos!**********"
 dino_filter_object.find_dinos_specific_period('Cretaceous').print_list
 
-# Find big dinos
 puts "**********These are the dinos over 2 tons!******"
 dino_filter_object.find_big_dinos(4000).print_list
 
-# Find small dinos
 puts "**********These are the dinos under 2 tons!*****"
 dino_filter_object.find_small_dinos(4000).print_list
 
-# Use multiple filters
 puts "**********These are the carnivorous bipeds!*******"
 dino_filter_object.find_carnivores.find_bipeds.print_list
 
-# Print one dino
 dino_filter_object.print_dino_by_index(0)

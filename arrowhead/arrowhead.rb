@@ -23,11 +23,11 @@ class Arrowhead
     CLASSIFICATIONS[region]
   end
 
-  def self.classify_shape(region, shape)
+  def self.classify(region, shape)
     raise SHAPE_ERROR unless shapes_for(region).include? shape
     puts "You have a(n) '#{shapes_for(region)[shape]}' arrowhead.\
     Probably priceless."
   end
 end
 
-puts Arrowhead.classify_shape(:northern_plains, :bifurcated)
+puts Arrowhead.classify(:northern_plains, :bifurcated)

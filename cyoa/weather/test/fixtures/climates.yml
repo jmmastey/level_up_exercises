@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2015-04-13 12:00:40
+  max_temp: 9.99
+  min_temp: 9.99
+  precipitation_probability: 9.99
+  precipitation_type: MyString
+  humidity: 9.99
+  summary: MyString
+
+two:
+  date: 2015-04-13 12:00:40
+  max_temp: 9.99
+  min_temp: 9.99
+  precipitation_probability: 9.99
+  precipitation_type: MyString
+  humidity: 9.99
+  summary: MyString

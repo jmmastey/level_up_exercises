@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407183244) do
+ActiveRecord::Schema.define(version: 20150413201412) do
+
+  create_table "climates", force: :cascade do |t|
+    t.datetime "date"
+    t.decimal  "max_temp"
+    t.decimal  "min_temp"
+    t.decimal  "precipitation_probability"
+    t.string   "precipitation_type"
+    t.decimal  "humidity"
+    t.string   "summary"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "day"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

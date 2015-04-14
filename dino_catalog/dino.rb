@@ -52,4 +52,9 @@ class Dino
   def big_dino?(weight_cutoff)
     return self.weight > weight_cutoff if !self.weight.nil?
   end
+
+  def dino_in_period?(period)
+    # ignore case of the text in period with /i in regular expression
+    return !self.period[/#{period}/i].nil?
+  end
 end

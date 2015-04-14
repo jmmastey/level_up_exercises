@@ -22,10 +22,7 @@ class DinoFilters
   end
 
   def find_dinos_specific_period(period)
-    # ignore case of the text in period with /i in regular expression
-    filtered_list = @dino_objects.select do |dino|
-      dino.period[/#{period}/i].nil?
-    end
+    filtered_list = @dino_objects.select { |dino| dino.dino_in_period?(period) }
     DinoFilters.new(filtered_list)
   end
 

@@ -12,7 +12,7 @@ class DinoFilters
   end
 
   def find_bipeds
-    filtered_list = @dino_objects.select { |dino| dino.walking_style[/Biped/] == "Biped" }
+    filtered_list = @dino_objects.select { |dino| dino.biped? }
     DinoFilters.new(filtered_list)
   end
 

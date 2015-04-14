@@ -57,4 +57,8 @@ class Dino
     # ignore case of the text in period with /i in regular expression
     return !self.period[/#{period}/i].nil?
   end
+
+  def biped?
+    return self.walking_style[/Biped/] == "Biped" 
+  end
 end

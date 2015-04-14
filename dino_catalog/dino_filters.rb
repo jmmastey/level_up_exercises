@@ -1,4 +1,4 @@
-require_relative './dinos.rb'
+require_relative './dino.rb'
 # This file contains functions that can be used to filter the dinosaurs to find
 # ones with specific attributes.
 

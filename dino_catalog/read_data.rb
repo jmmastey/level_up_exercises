@@ -1,4 +1,4 @@
-require_relative './dinos.rb'
+require_relative './dino.rb'
 require_relative './dino_filters.rb'
 require 'csv'
 

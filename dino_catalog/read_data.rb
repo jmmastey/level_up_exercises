@@ -26,7 +26,7 @@ def translate_header(header_name)
     period: :period,
     carnivore: :diet,
     weight: :weight,
-    walking: :feet,
+    walking: :walking_style,
     name: :name,
     continent: :continent,
     diet: :diet,

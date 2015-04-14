@@ -1,6 +1,6 @@
 require_relative './dino.rb'
-# This file contains functions that can be used to filter the dinosaurs to find
-# ones with specific attributes.
+# The purpose of this class is to have methods that allow us to filter the 
+# dinosaur list based on values in its instance variables. 
 
 class DinoFilters
   attr_reader :dino_objects
@@ -12,14 +12,12 @@ class DinoFilters
   end
 
   def find_bipeds
-    filtered_list = @dino_objects.select { |dino| dino.feet[/Biped/] == "Biped" }
+    filtered_list = @dino_objects.select { |dino| dino.walking_style[/Biped/] == "Biped" }
     DinoFilters.new(filtered_list)
   end
 
   def find_carnivores
-    filtered_list = @dino_objects.select do  |dino|
-      dino.diet != 'Not carnivore' && dino.diet != 'Herbivore'
-    end
+    filtered_list = @dino_objects.select { |dino| dino.carnivore? }
     DinoFilters.new(filtered_list)
   end
 
@@ -31,19 +29,14 @@ class DinoFilters
     DinoFilters.new(filtered_list)
   end
 
-  def find_big_dinos(size)
-    # size should be an integer that is the cutoff for the weight
-    filtered_list = @dino_objects.select do |dino|
-      dino.weight > size unless dino.weight.nil?
-    end
+  def find_big_dinos(weight_cutoff)
+    # weight_cutoff should be in pounds
+    filtered_list = @dino_objects.select { |dino| dino.big_dino?(weight_cutoff) }
     DinoFilters.new(filtered_list)
   end
 
-  def find_small_dinos(size)
-    filtered_list = @dino_objects.select do |dino|
-      dino.weight < size unless dino.weight.nil?
-    end
-    # size should be an integer that is the cutoff for the weight
+  def find_small_dinos(weight_cutoff)
+    filtered_list = @dino_objects.select { |dino| dino.small_dino?(weight_cutoff) }
     DinoFilters.new(filtered_list)
   end
 
@@ -53,7 +46,7 @@ class DinoFilters
     end
   end
 
-  # Choose to print a single dino's data based on its index in the list of dinos
+  # Want the ability to print single dino's data based on its index in dino list
   def print_dino_by_index(dino_index)
     @dino_objects[dino_index].print_dino
   end

@@ -1,19 +1,13 @@
 class Dino
-  attr_reader :period
-  attr_reader :diet
-  attr_reader :feet
-  attr_reader :weight
   attr_reader :name
+  attr_reader :period
+  attr_reader :continent
+  attr_reader :diet
+  attr_reader :walking_style
+  attr_reader :weight
+  attr_reader :description
 
   def initialize(dino_data)
-    # These are the instance variables for the Dino class
-    #     @name = nil
-    #     @period = nil
-    #     @continent = nil
-    #     @diet = nil
-    #     @weight = nil
-    #     @feet = nil
-    #     @description = nil
 
     # Each instance variable in Dino is a key in the dino_data dictionary.
     dino_data.each do |dino_var, dino_value|
@@ -45,5 +39,17 @@ class Dino
   def format_string(var_name_string, value)
     return "#{value}  lbs" if var_name_string == "weight"
     return value
+  end
+
+  def carnivore?
+    ["Carnivore", "Insectivore", "Piscivore"].include?(self.diet)
+  end
+
+  def small_dino?(weight_cutoff)
+    return self.weight < weight_cutoff if !self.weight.nil?
+  end
+
+  def big_dino?(weight_cutoff)
+    return self.weight > weight_cutoff if !self.weight.nil?
   end
 end

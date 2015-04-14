@@ -8,8 +8,7 @@ require_relative './data_reader.rb'
 # to get the dino_filter_object
 
 data_reader_object = DataReader.new('dino_csv_list')
-dino_filter_object = data_reader.read_data
-
+dino_filter_object = data_reader_object.read_data
 
 puts "**********These are the bipeds!************"
 dino_filter_object.find_bipeds.print_list

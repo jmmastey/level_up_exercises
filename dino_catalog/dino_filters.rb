@@ -1,6 +1,6 @@
 require_relative './dino.rb'
-# The purpose of this class is to have methods that allow us to filter the 
-# dinosaur list based on values in its instance variables. 
+# The purpose of this class is to have methods that allow us to filter the
+# dinosaur list based on values in its instance variables.
 
 class DinoFilters
   attr_reader :dino_objects

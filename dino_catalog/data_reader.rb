@@ -12,7 +12,7 @@ class DataReader
   def read_data
     dino_objects = []
 
-    # Create dino object from each row in csv file and append to dino_objects list
+    # Each row in csv file is a separate dino object
     CSV.foreach(@csv_list_file) do |new_file|
       filename = new_file[0]
       dino_data = CSV.read(filename, headers: true, header_converters: lambda { |h| translate_header(h) })
@@ -27,7 +27,7 @@ class DataReader
   end
 
   def translate_header(header_name)
-    # Need to translate csv header value to instance variable name in Dino class.
+    # Need to translate csv header to instance variable name in Dino class
     translate = {
       genus: :name,
       period: :period,

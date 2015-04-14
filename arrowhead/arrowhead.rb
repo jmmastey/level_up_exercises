@@ -15,19 +15,18 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
+  REGION_ERROR = "Unknown region, please provide a valid region."
+  SHAPE_ERROR = "Unknown shape value. Are you sure you know what you're talking about?"
+
+  def self.shapes_for(region)
+    raise REGION_ERROR unless CLASSIFICATIONS.include? region
+    CLASSIFICATIONS[region]
+  end
+
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+    raise SHAPE_ERROR unless shapes_for(region).include? shape
+    puts "You have a(n) '#{shapes_for(region)[shape]}' arrowhead.\
+    Probably priceless."
   end
 end
 

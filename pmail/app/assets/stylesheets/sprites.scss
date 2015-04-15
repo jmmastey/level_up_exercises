@@ -1,3 +1,5 @@
+@import 'variables';
+
 $category-sprites: image-url('sprites.png');
 $application-sprites: image-url('more-sprites.png');
 $down-arrow-sprite: image-url('down-arrow.png');
@@ -31,7 +33,7 @@ $gmail-plus-icon: image-url('gmail-plus-icon.png');
 
 .app-icon {
   background-position: 0 -735px;
-  opacity: 0.55;
+  opacity: $gmail-transparent;
   height: 30px;
   width: 30px;
 }

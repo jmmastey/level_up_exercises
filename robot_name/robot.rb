@@ -5,14 +5,15 @@ class Robot
 
   @@name_registry
 
-  def initialize(args = {})
+  def initialize(name_gen = nil)
     @@name_registry ||= []
-    @name_generator = args[:name_generator]
+    @name_generator = name_gen
 
     attempts = 0
     while attempts < 3
       if @name_generator
         @robot_name = @name_generator.call
+        puts "robot name is #{@robot_name}"
       else
         @robot_name = generate_name
       end
@@ -56,11 +57,11 @@ class Robot
   end
 end
 
-robot = Robot.new
-puts "My pet robot's name is #{robot.robot_name}, but we usually call him Rob."
+#robot = Robot.new
+#puts "My pet robot's name is #{robot.robot_name}, but we usually call him Rob."
 
 # Errors!
 #  generator = -> { 'AA111' }
-generator = -> { ('A'..'Z').to_a.sample }  # Will give incorrect format error
-Robot.new(name_generator: generator)
-Robot.new(name_generator: generator)
+#generator = -> { ('A'..'Z').to_a.sample }  # Will give incorrect format error
+#Robot.new(name_generator: generator)
+#Robot.new(name_generator: generator)

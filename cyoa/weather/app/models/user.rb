@@ -68,6 +68,11 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
 
+  # Send the daily weather email to all the users
+  def send_daily_weather_email
+    WeatherMailer.mail_weather.deliver_now
+  end
+
   private
 
     # Converts email to all lower-case.

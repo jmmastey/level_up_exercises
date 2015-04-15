@@ -6,3 +6,8 @@ scheduler = Rufus::Scheduler.new
 scheduler.cron("0 00 * * * ") do
   persist_weather
 end
+
+# Send weather updates to users
+scheduler.cron("0 06 * * *") do
+  WeatherMailer.mail_weather
+end

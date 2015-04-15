@@ -5,12 +5,11 @@ class DataRepo
 
   BASE_URL = "http://forecast.weather.gov/MapClick.php?textField1=41.8500262820005&textField2=-87.65004892899964"
   def self.document
-    @document ||= Nokogiri::HTML(File.open("temperatures.html", "r"))
-    # if Rails.env.test?
-    #   @document ||= Nokogiri::HTML(File.open("temperatures.html", "r"))
-    # else
-    #   @document ||= Nokogiri::HTML(open(BASE_URL))
-    # end
+    if Rails.env.test?
+      @document ||= Nokogiri::HTML(File.open("temperatures.html", "r"))
+    else
+      @document ||= Nokogiri::HTML(open(BASE_URL))
+    end
   end
 
   def self.call(model_name, method_name, attributes)

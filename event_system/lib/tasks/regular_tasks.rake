@@ -1,13 +1,12 @@
+
 namespace :regular_tasks do
   desc "Sends email to alert weather conditions"
   task cron: :environment do
 
-    @detail_forecasts = Class.new.extend(ParseWeather).parse_details
-
-    forecast_now = Hash[*@detail_forecasts.values].values[0].downcase
+    @forecast_description = forecast_now
 
     @todays_forecast = WEATHER_WEAR.keys.select do |word|
-      forecast_now.match(word)
+      @forecast_description.match(word)
     end.first.capitalize
 
     @user = EmailContact.where(region_id: region_id)
@@ -16,5 +15,11 @@ namespace :regular_tasks do
 
   def region_id
     @region_id ||= Region.where(city: "Chicago").pluck(:region_id).first
+  end
+
+  def forecast_now
+    require 'parse_details'
+    date, forecast = ParseDetails.call.first
+    forecast.values.find { |x| !x.nil? }
   end
 end

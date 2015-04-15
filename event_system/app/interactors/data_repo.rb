@@ -14,8 +14,8 @@ class DataRepo
 
   def self.call(model_name, method_name, attributes)
     if model_name.today.empty?
-      temp = parse_scraped_data(model_name)
-      scraping = temp.call(method_name)
+      forecast = parse_scraped_data(model_name)
+      scraping = forecast.call(method_name)
     else
       forecast = model_name.today.as_json
       details = structure_data(attributes)
@@ -27,16 +27,17 @@ class DataRepo
   def self.parse_scraped_data(model_name)
     return Proc.new  do |method|
       scraping = WebScraper.send method, document
-      scraping.each do |day, hash_temp|
-        save_scraped_data(day, hash_temp, model_name.new)
+      scraping.each do |day, scraped_data|
+        save_scraped_data(day, scraped_data, model_name.new)
       end
     end
   end
 
-  def self.structure_data(params)
+  def self.structure_data(key_params)
     return Proc.new do |model|
       model.each_with_object({}) do |hash, return_hash|
-        return_hash[hash["weather_day"]] = { params[0] => hash[params[0]], params[1] => hash[params[1]] }
+        return_hash[hash["weather_day"]] = { key_params[0] => hash[key_params[0]],
+                                             key_params[1] => hash[key_params[1]] }
       end
     end
   end

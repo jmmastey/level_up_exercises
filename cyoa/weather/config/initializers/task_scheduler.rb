@@ -1,6 +1,8 @@
-#scheduler = Rufus::Scheduler.start_new
+require 'rufus-scheduler'
 
-#Get the weather every day at noon
-#scheduler.cron("0 12 * * * ") do
-#  save_weather
-#end
+scheduler = Rufus::Scheduler.new
+
+# Get the weather every day at midnight
+scheduler.cron("0 00 * * * ") do
+  persist_weather
+end

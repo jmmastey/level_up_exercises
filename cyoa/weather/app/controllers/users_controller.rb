@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @climate = Climate.where date: Date.today
   end
 
   def new

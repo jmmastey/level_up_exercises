@@ -1,0 +1,108 @@
+@import 'variables';
+
+.mailboxes {
+  width: 200px;
+  height: 500px;
+  position: fixed;
+  top: 120px;
+  left: 0;
+}
+
+.compose-button {
+  &:before {
+    content: "COMPOSE";
+  }
+
+  font-family: $gmail-font;
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+
+  text-align: center;
+  padding-top: 9px;
+
+  position: absolute;
+  width: 115px;
+  height: 21px;
+  background-color: $gmail-compose-red-dark;
+  left: 32px;
+  border-radius: 3px;
+  background-image:
+    -webkit-linear-gradient(top, $gmail-compose-red, $gmail-compose-red-dark);
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 1px 0px;
+    background-image:
+      -webkit-linear-gradient(top, $gmail-compose-red, $gmail-compose-red-darker);
+    background-color: $gmail-compose-red-darker;
+  }
+}
+
+.mailbox-options {
+  position: absolute;
+  top: 37px;
+}
+
+.mailbox-option {
+  font-family: $gmail-font;
+  font-size: 13px;
+
+  position: relative;
+  width: 152px;
+  padding-top: 7px;
+  padding-left: 28px;
+  height: 21px;
+  border-left: 4px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+
+  &.active {
+    border-left: 4px solid $gmail-red;
+    font-weight: bold;
+    color: $gmail-red;
+  }
+
+  &:hover {
+    background-color: $background-gray-1;
+  }
+}
+
+.inbox {
+  &:before {
+    content: "Inbox"
+  }
+}
+
+.starred {
+  &:before {
+    content: "Starred"
+  }
+}
+
+.sent {
+  &:before {
+    content: "Sent Mail"
+  }
+}
+
+.drafts {
+  &:before {
+    content: "Drafts"
+  }
+}
+
+.more {
+  &:before {
+    content: "More"
+  }
+
+  &:hover {
+    background-color: white;
+  }
+
+  .down-arrow-icon {
+    position: absolute;
+    top: 13px;
+    left: 61px;
+    opacity: 0.65;
+  }
+}

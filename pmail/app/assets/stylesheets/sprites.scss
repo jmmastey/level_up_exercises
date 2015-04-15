@@ -4,6 +4,7 @@ $down-arrow-sprite: image-url('down-arrow.png');
 $down-arrow-red-sprite: image-url('down-arrow-red.png');
 $icon-sprites: image-url('icon-sprites.png');
 $more-fucking-sprites: image-url('more-fucking-sprites.png');
+$gmail-plus-icon: image-url('gmail-plus-icon.png');
 
 .application-sprites {
   background-image: $application-sprites;
@@ -67,4 +68,45 @@ $more-fucking-sprites: image-url('more-fucking-sprites.png');
   background-position: 63px -20px;
   height: 20px;
   width: 20px;
+}
+
+.gmail-plus-icon {
+  background: $gmail-plus-icon;
+  height: 8px;
+  width: 8px;
+}
+
+.category-sprites {
+  background: $category-sprites;
+  background-size: 250px 39px;
+}
+
+.primary-icon {
+  background-position: 0px 0px;
+  height: 39px;
+  width: 50px;
+}
+
+.social-icon {
+  background-position: -50px 0px;
+  height: 39px;
+  width: 50px;
+}
+
+.promotions-icon {
+  background-position: -100px 0px;
+  height: 39px;
+  width: 50px;
+}
+
+.updates-icon {
+  background-position: -150px 0px;
+  height: 39px;
+  width: 50px;
+}
+
+.forums-icon {
+  background-position: -200px 0px;
+  height: 39px;
+  width: 50px;
 }

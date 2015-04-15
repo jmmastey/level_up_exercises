@@ -36,7 +36,7 @@ class Dino
 
   def format_string(attribute, value)
     return "#{value}  lbs" if attribute == "weight"
-    return value
+    value
   end
 
   def carnivore?

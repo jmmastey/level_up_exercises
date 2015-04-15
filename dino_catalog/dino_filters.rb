@@ -21,8 +21,8 @@ class DinoFilters
     DinoFilters.new(filtered_list)
   end
 
-  def find_dinos_specific_period(period)
-    filtered_list = @dino_objects.select { |dino| dino.dino_in_period?(period) }
+  def find_dinos_specific_era(era_of_interest)
+    filtered_list = @dino_objects.select { |dino| dino.dino_in_era?(era_of_interest) }
     DinoFilters.new(filtered_list)
   end
 

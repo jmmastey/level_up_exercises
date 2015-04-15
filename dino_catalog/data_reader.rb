@@ -4,16 +4,11 @@ require 'csv'
 
 class DataReader
   
-  def initialize(csv_list_file)
-    #Input is a file containing a list of csv filenames
-    @csv_list_file = csv_list_file
-  end
-
-  def read_data
+  def read_data(csv_files)  # csv_files = file containing list of csv filenames
     dino_objects = []
 
     # Each row in csv file is a separate dino object
-    CSV.foreach(@csv_list_file) do |new_file|
+    CSV.foreach(csv_files) do |new_file|
       filename = new_file[0]
       dino_data = CSV.read(filename, headers: true, header_converters: lambda { |h| translate_header(h) })
       dino_data.each do |row|
@@ -27,10 +22,9 @@ class DataReader
   end
 
   def translate_header(header_name)
-    # Need to translate csv header to instance variable name in Dino class
     translate = {
       genus: :name,
-      period: :period,
+      period: :era,
       carnivore: :diet,
       weight: :weight,
       walking: :walking_style,
@@ -42,9 +36,7 @@ class DataReader
     }
     if !translate[header_name.downcase.to_sym]
       raise 'Key Error.  Ensure CSV headers are in the translate dictionary.'
-    else
-      return translate[header_name.downcase.to_sym]
     end
+    translate[header_name.downcase.to_sym]
   end
-
-end 
+end

@@ -1,6 +1,6 @@
 class Dino
   attr_reader :name
-  attr_reader :period
+  attr_reader :era
   attr_reader :continent
   attr_reader :diet
   attr_reader :walking_style
@@ -8,10 +8,9 @@ class Dino
   attr_reader :description
 
   def initialize(dino_data)
-
     # Each instance variable in Dino is a key in the dino_data dictionary.
-    dino_data.each do |dino_var, dino_value|
-      instance_variable_set("@#{dino_var}", dino_value)
+    dino_data.each do |attribute, value|
+      instance_variable_set("@#{attribute}", value)
     end
 
     # Some instance fields need special treatment
@@ -24,41 +23,40 @@ class Dino
   end
 
   def print_dino
-    # Print out all of the data associated with particular dino
-    dino_values = self.instance_variables.map do |var|
+    dino_values = instance_variables.map do |var|
       dino_info = instance_variable_get("#{var}")
-      if dino_info != nil
-        var_string = var.to_s.slice(1..-1)
-        "#{var_string} : #{format_string(var_string, dino_info)} \n"
+      if dino_info
+        attribute = var.to_s.slice(1..-1)
+        "#{attribute} : #{format_string(attribute, dino_info)} \n"
       end
     end
-    dino_values = dino_values.select { |dino_string| not dino_string.nil? }
+    dino_values = dino_values.select { |dino_string| !dino_string.nil? }
     puts dino_values
   end
 
-  def format_string(var_name_string, value)
-    return "#{value}  lbs" if var_name_string == "weight"
+  def format_string(attribute, value)
+    return "#{value}  lbs" if attribute == "weight"
     return value
   end
 
   def carnivore?
-    ["Carnivore", "Insectivore", "Piscivore"].include?(self.diet)
+    ["Carnivore", "Insectivore", "Piscivore"].include?(@diet)
   end
 
   def small_dino?(weight_cutoff)
-    self.weight < weight_cutoff unless self.weight.nil?
+    @weight < weight_cutoff if @weight
   end
 
   def big_dino?(weight_cutoff)
-    self.weight > weight_cutoff unless self.weight.nil?
+    @weight > weight_cutoff if @weight
   end
 
-  def dino_in_period?(period)
-    # ignore case of the text in period with /i in regular expression
-    !self.period[/#{period}/i].nil?
+  def dino_in_era?(era_of_interest)
+    # ignore case of the text in era with /i in regular expression
+    !@era[/#{era_of_interest}/i].nil?
   end
 
   def biped?
-    self.walking_style[/Biped/] == "Biped"
+    @walking_style[/Biped/] == "Biped"
   end
 end

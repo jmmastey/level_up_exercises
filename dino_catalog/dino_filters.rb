@@ -12,12 +12,12 @@ class DinoFilters
   end
 
   def find_bipeds
-    filtered_list = @dino_objects.select { |dino| dino.biped? }
+    filtered_list = @dino_objects.select(&:biped?)
     DinoFilters.new(filtered_list)
   end
 
   def find_carnivores
-    filtered_list = @dino_objects.select { |dino| dino.carnivore? }
+    filtered_list = @dino_objects.select(&:carnivore?)
     DinoFilters.new(filtered_list)
   end
 
@@ -38,9 +38,7 @@ class DinoFilters
   end
 
   def print_list
-    for dino in @dino_objects
-      dino.print_dino
-    end
+    @dino_objects.each(&:print_dino)
   end
 
   # Want the ability to print single dino's data based on its index in dino list

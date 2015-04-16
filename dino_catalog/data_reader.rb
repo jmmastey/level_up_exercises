@@ -3,7 +3,12 @@ require_relative './dino_filters.rb'
 require 'csv'
 
 class DataReader
-  
+  attr_reader :dino_filter
+
+  def initialize(csv_files)
+    read_data(csv_files)
+  end
+
   def read_data(csv_files)  # csv_files = file containing list of csv filenames
     dino_objects = []
 
@@ -16,9 +21,8 @@ class DataReader
         dino_objects.push(new_dino)
       end
     end
-
     # Create DinoFilters object so that methods in dino_filters can be used
-    DinoFilters.new(dino_objects)
+    @dino_filter = DinoFilters.new(dino_objects)
   end
 
   def translate_header(header_name)
@@ -34,7 +38,7 @@ class DataReader
       weight_in_lbs: :weight,
       description: :description,
     }
-    if !translate[header_name.downcase.to_sym]
+    unless translate[header_name.downcase.to_sym]
       raise 'Key Error.  Ensure CSV headers are in the translate dictionary.'
     end
     translate[header_name.downcase.to_sym]

@@ -7,25 +7,25 @@ require_relative './data_reader.rb'
 # If you want to run your own queries, you can just need
 # to get the dino_filter_object
 
-data_reader_object = DataReader.new
-dino_filter_object = data_reader_object.read_data('dino_csv_list')
+data_reader = DataReader.new('dino_csv_list')
+dino_filter = data_reader.dino_filter
 
 puts "**********These are the bipeds!************"
-dino_filter_object.find_bipeds.print_list
+dino_filter.find_bipeds.print_list
 
 puts "**********These are the carnivores!**********"
-dino_filter_object.find_carnivores.print_list
+dino_filter.find_carnivores.print_list
 
 puts "**********These are the Cretaceous dinos!**********"
-dino_filter_object.find_dinos_specific_period('Cretaceous').print_list
+dino_filter.find_dinos_specific_era('Cretaceous').print_list
 
 puts "**********These are the dinos over 2 tons!******"
-dino_filter_object.find_big_dinos(4000).print_list
+dino_filter.find_big_dinos(4000).print_list
 
 puts "**********These are the dinos under 2 tons!*****"
-dino_filter_object.find_small_dinos(4000).print_list
+dino_filter.find_small_dinos(4000).print_list
 
 puts "**********These are the carnivorous bipeds!*******"
-dino_filter_object.find_carnivores.find_bipeds.print_list
+dino_filter.find_carnivores.find_bipeds.print_list
 
-dino_filter_object.print_dino_by_index(0)
+dino_filter.print_dino_by_index(0)

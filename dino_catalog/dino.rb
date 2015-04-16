@@ -14,7 +14,7 @@ class Dino
     end
 
     # Some instance fields need special treatment
-    @continent = 'Africa' unless @continent
+    @continent ||= 'Africa'
 
     @diet = 'Carnivore' if @diet == 'Yes'
     @diet = 'Not carnivore' if @diet == 'No'
@@ -30,7 +30,7 @@ class Dino
         "#{attribute} : #{format_string(attribute, dino_info)} \n"
       end
     end
-    dino_values = dino_values.select { |dino_string| !dino_string.nil? }
+    dino_values.reject! { |dino_string| dino_string.nil? }
     puts dino_values
   end
 
@@ -44,11 +44,11 @@ class Dino
   end
 
   def small_dino?(weight_cutoff)
-    @weight < weight_cutoff if @weight
+    @weight && @weight < weight_cutoff
   end
 
   def big_dino?(weight_cutoff)
-    @weight > weight_cutoff if @weight
+    @weight && @weight > weight_cutoff
   end
 
   def dino_in_era?(era_of_interest)

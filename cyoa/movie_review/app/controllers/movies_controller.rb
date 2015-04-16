@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
   def new
-  	@movie = Movie.first
+  	@movie = Movie.find(params[:id])
   end
 end

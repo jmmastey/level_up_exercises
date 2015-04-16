@@ -1,11 +1,14 @@
+<% if !user_signed_in? %>
 <div class="center jumbotron">
-  <h1>Welcome to the Sample App</h1>
+  <h1>Welcome to Critique</h1>
+  <p><%= link_to "Sign Up to Write A Review", new_user_registration_path, class: "btn btn-primary btn-lg" %></p>
+</div>
+<% end %>
 
-  <h2>
-    This is the home page for the
-    <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-    sample application.
-  </h2>
+<div class="center jumbotron">
+	<% @movies.each do |movie| %>
+		<% @movie = movie %>
+		<%= link_to image_tag( movie.poster_path, class: "thumbnails" ), controller: "movies", action: "new", id: @movie %>
+	<% end %>
 </div>
 
-<%= link_to 'Movies', movies_path%>

@@ -13,7 +13,7 @@ def main
   generate_rating_records
 end
 
-def generate_rating_records count=1000
+def generate_rating_records(count=1000)
   count.times do
     insert_record "ratings", {
       person_id: (get_record_id "persons", "person_id"),
@@ -30,7 +30,7 @@ def generate_rating_records count=1000
   end
 end
 
-def generate_style_records count=10
+def generate_style_records(count=10)
   count.times do
     insert_record "styles", {
       style: Faker::Hacker.noun,
@@ -42,7 +42,7 @@ def generate_style_records count=10
   end
 end
 
-def generate_beer_records count=100
+def generate_beer_records(count=100)
   count.times do
     insert_record "beers", {
       brewery_id: (get_record_id "breweries", "brewery_id"),
@@ -56,7 +56,7 @@ def generate_beer_records count=100
   end
 end
 
-def generate_brewery_records count=20
+def generate_brewery_records(count=20)
   count.times do
     insert_record "breweries", {
       name: Faker::Company.name.gsub("'"){""},
@@ -72,7 +72,7 @@ def generate_brewery_records count=20
   end
 end
 
-def generate_person_records count=100
+def generate_person_records(count=100)
   count.times do
     insert_record "persons", {
       name: Faker::Name.first_name.gsub("'"){""},
@@ -85,12 +85,12 @@ def generate_person_records count=100
   end
 end
 
-def get_record_id table, primary_key
-  record = @conn.exec( "SELECT #{primary_key} FROM #{table} ORDER BY RANDOM() LIMIT 1" ).first
+def get_record_id(table, primary_key)
+  record = @conn.exec("SELECT #{primary_key} FROM #{table} ORDER BY RANDOM() LIMIT 1").first
   record["#{primary_key}"]
 end
 
-def insert_record table, info_hash
+def insert_record(table, info_hash)
   placeholder = []
   info_hash.keys.each_index {|x| placeholder << "$#{x+1}"}
 

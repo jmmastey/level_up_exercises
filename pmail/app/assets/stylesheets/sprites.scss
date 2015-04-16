@@ -7,6 +7,7 @@ $down-arrow-red-sprite: image-url('down-arrow-red.png');
 $icon-sprites: image-url('icon-sprites.png');
 $more-fucking-sprites: image-url('more-fucking-sprites.png');
 $gmail-plus-icon: image-url('gmail-plus-icon.png');
+$gmail-star-icon: image-url('gmail-star-icon.png');
 
 .application-sprites {
   background-image: $application-sprites;
@@ -111,4 +112,10 @@ $gmail-plus-icon: image-url('gmail-plus-icon.png');
   background-position: -200px 0px;
   height: 39px;
   width: 50px;
+}
+
+.gmail-star-icon {
+  background: $gmail-star-icon no-repeat center;
+  height: 19px;
+  width: 19px;
 }

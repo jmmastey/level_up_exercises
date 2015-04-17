@@ -9,6 +9,3 @@ CREATE INDEX ratings_created_at_index ON ratings(created_at);
 
 -- multicolumn indices
 CREATE INDEX persons_to_beers_index ON ratings(person_id, beer_id);
-
--- attempt at functional index
--- CREATE INDEX rating_avg_computed_idx ON rating (AVG(overall));

@@ -40,25 +40,25 @@ class Robot
 
   private
 
-  def name_already_in_list?
-    @@name_registry.include?(@robot_name)
+  def new_name?
+    !@@name_registry.include?(@robot_name)
   end
 
   private
 
-  def wrong_name_format?
-    @robot_name[/^[[:alpha:]]{2}[[:digit:]]{3}$/].nil?
+  def correct_name_format?
+    !!(@robot_name =~ /^[[:alpha:]]{2}[[:digit:]]{3}$/)
   end
 
   def valid_name?
-    !(name_already_in_list? || wrong_name_format?)
+    (new_name? && correct_name_format?)
   end
 
   private
 
   def find_error
-    raise NameCollisionError, 'Name already in list.' if name_already_in_list?
-    raise NameFormatError, 'Name has wrong format.' if wrong_name_format?
+    raise NameCollisionError, 'Name already in list.' if !new_name?
+    raise NameFormatError, 'Name has wrong format.' if !correct_name_format?
   end
 end
 
@@ -67,6 +67,6 @@ puts "My pet robot's name is #{robot.robot_name}, but we usually call him Rob."
 
 # Errors!
 #  generator = -> { 'AA111' }
-# generator = -> { ('A'..'Z').to_a.sample }  # Will give incorrect format error
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+ generator = -> { ('A'..'Z').to_a.sample }  # Will give incorrect format error
+ Robot.new(generator)
+ Robot.new(generator)

@@ -23,7 +23,7 @@ class SplitTest
     values = {}
     @cohorts.each do |cohort|
       values[cohort.name] =
-      { 
+      {
         converted: cohort.successes,
         unconverted: cohort.failures
       }

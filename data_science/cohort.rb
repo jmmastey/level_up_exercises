@@ -1,7 +1,7 @@
 require 'pp'
 
 class Cohort
-attr_reader :name, :attempts, :successes
+  attr_reader :name, :attempts, :successes
 
   def initialize(attributes)
     @name = attributes[:name].to_s
@@ -10,7 +10,7 @@ attr_reader :name, :attempts, :successes
   end
 
   def conversion_rate
-    @successes.to_f/@attempts.to_f
+    @successes.to_f / @attempts.to_f
   end
 
   def failures

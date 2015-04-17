@@ -19,8 +19,8 @@ class CohortConverter
   private
 
   def cohorts_map
-    cohorts = cohort_names.inject([]) { |cohorts, name| cohorts << Cohort.new({ :name => name }) }
-    cohorts.each_with_object({}) { |cohort, map| map[cohort.name] = cohort }
+    cohort_collection = cohort_names.inject([]) { |cohorts, name| cohorts << Cohort.new({ name: name }) }
+    cohort_collection.each_with_object({}) { |cohort, map| map[cohort.name] = cohort }
   end
 
   def cohort_names

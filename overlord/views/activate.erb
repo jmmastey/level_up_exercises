@@ -1,0 +1,11 @@
+<center>
+  <h2 id="bomb_status"> Bomb Status: <%= @bomb.status %> </h2>
+  <form action="/activate" method="post">
+    <div> Activate Bomb:
+      <input type="text" name="activate_code" id="activate_code" pattern="[0-9]{4,}">
+    </div>
+    <br/>
+    <input type="submit" value="Activate" id="activate">
+  </form>
+  <%= @error %>
+</center>

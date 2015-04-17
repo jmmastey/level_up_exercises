@@ -1,0 +1,18 @@
+<center>
+<h1>Setup your Bomb </h1>
+<form action="/" method="post">
+  <div>
+    <h3>Configure your activation code:
+      <input type="text" name="activation_code" id="activation_code" value="<%=DEFAULT_ACTIVATION_CODE%>" pattern="[0-9]{4,}" title="atleast 4 digits, numbers only">
+    </h3>
+  </div>
+  <div>
+    <h3>Configure your deactivation code:
+      <input type="text" name="deactivation_code" id="deactivation_code" value=<%=DEFAULT_DEACTIVATION_CODE%> pattern="[0-9]{4,}" title="atleast 4 digits, numbers only">
+    </h3>
+  </div>
+  <br/>
+  <input type="submit" value="Plant the BOMB" id="boot">
+</form>
+<%=@error%>
+<center/>

@@ -1,0 +1,11 @@
+<center>
+  <h2 id="bomb_status"> Bomb Status: <%= @bomb.status %> </h2>
+  <form action="/deactivate" method="post">
+    <div> Deactivate Bomb:
+      <input type="text" name="deactivate_code" id="deactivate_code" pattern="[0-9]{4,}">
+    </div>
+    <br/>
+    <input type="submit" value="Deactivate" id="deactivate">
+  </form>
+  <%= @error %>
+</center>

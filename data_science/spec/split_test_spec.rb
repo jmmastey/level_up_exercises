@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SplitTest do 
+describe SplitTest do
   let(:converter) { CohortConverter.new('spec/test_data.json') }
   let(:test) { SplitTest.new(converter.cohorts) }
 

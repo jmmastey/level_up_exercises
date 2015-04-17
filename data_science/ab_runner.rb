@@ -1,25 +1,27 @@
 require 'pp'
 require_relative 'split_test'
-require_relative 'split_test_data'
+require_relative 'cohort_converter'
 
 abort('Please include one json file as an argument.') unless ARGV.count == 1
 
-data = SplitTestData.new(ARGV[0]) #this runner is very lazy.
-test = SplitTest.new(data)
-successes = data.successes
-attempts = data.attempts
-conf_intervals = test.confidence
-chi_square = test.chi_square
+converter = CohortConverter.new(ARGV[0]) #this runner is very lazy.
+cohorts = converter.cohorts
+test = SplitTest.new(cohorts)
 
-puts "Successes for each cohort: "
+successes = cohorts.each_with_object(Hash.new) { |cohort, memo| memo[cohort.name] = cohort.successes }
+attempts = cohorts.each_with_object(Hash.new) { |cohort, memo| memo[cohort.name] = cohort.attempts }
+
+puts 'Successes for each cohort: '
 pp successes
-puts "Attempts for each cohort: "
+puts 'Attempts for each cohort: '
 pp attempts
-puts "95% of the time, the resulting proportion will be between..."
-pp conf_intervals
-puts "Probability that data at least as surprising as the observed sample " <<
-"results would be generated under a model of random chance: "
-pp chi_square
+puts 'Conversion rates: '
+pp test.conversion_rates
+puts '95% of the time, the resulting proportion will be between...'
+pp test.confidence
+puts 'Probability that data at least as surprising as the observed sample ' <<
+         'results would be generated under a model of random chance: '
+pp test.chi_square
 
 # ruby ab_runner.rb data_export_2014_06_20_15_59_02.json 
 # > Successes for each cohort: 

@@ -1,30 +1,35 @@
 require 'spec_helper'
 
 describe SplitTest do 
-  before :each do 
-    @data = SplitTestData.new('spec/test_data.json')
-    @test = SplitTest.new(@data)
-  end
+  let(:converter) { CohortConverter.new('spec/test_data.json') }
+  let(:test) { SplitTest.new(converter.cohorts) }
 
-  describe "#new" do
-    it "takes a SplitTestData object and returns a SplitTest object" do
-      expect(@test).instance_of? SplitTest
+  describe '#new' do
+    it 'takes a collection of cohorts and returns a SplitTest object' do
+      expect(test).instance_of? SplitTest
     end
   end
 
-  describe "#confidence" do 
-    it "finds min/max predictions for a given confidence level" do
-      expect(@test.confidence).to eq(
-        {
-          "A"=>[0.968846875179678, 0.9978197914869885], 
-          "B"=>[0.2897785784092367, 0.3768880882574299]
-        })
+  describe '#cohorts' do
+    it 'returns a collection of cohorts' do
+      expect(test).instance_of? SplitTest
     end
   end
 
-  describe "#chi_square" do 
-    it "returns the p values for a chi_square test" do 
-      expect(@test.chi_square).to eq(0) 
+  describe '#conversion_rates'
+    it 'returns a collection of conversion rates, one for each cohort' do
+      expect(test.conversion_rates[0]).to eq(0.9833333333333333)
+    end
+
+  describe '#confidence' do
+    it 'finds min/max predictions for a given confidence level' do
+      expect(test.confidence[0]).to eq([0.968846875179678, 0.9978197914869885])
+    end
+  end
+
+  describe '#chi_square' do
+    it 'returns the p values for a chi_square test' do
+      expect(test.chi_square).to eq(0.0)
     end
   end
 end

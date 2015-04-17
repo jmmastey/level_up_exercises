@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CohortConverter do 
+describe CohortConverter do
   let(:data) { CohortConverter.new('spec/test_data.json') }
 
   describe '#new' do

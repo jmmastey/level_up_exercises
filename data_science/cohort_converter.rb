@@ -2,7 +2,6 @@ require 'json'
 require_relative 'cohort'
 
 class CohortConverter
-
   def initialize(json_file)
     @data = JSON.parse(file_contents(json_file))
   end
@@ -24,11 +23,10 @@ class CohortConverter
   end
 
   def cohort_names
-    names = @data.inject([]) { |names, row| names << row['cohort'] }
-    names.uniq
+    @data.inject([]) { |names, row| names << row['cohort'] }.uniq
   end
 
   def file_contents(file_path)
-    File.open(file_path, 'r') {|f| f.read }
+    File.open(file_path, 'r') { |f| f.read }
   end
 end

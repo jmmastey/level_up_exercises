@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Cohort do
   attributes =
       {
-          :name => 'A',
-          :successes => '900',
-          :attempts => '1200'
+        name: 'A',
+        successes: '900',
+        attempts: '1200'
       }
   let(:cohort) { Cohort.new(attributes) }
 

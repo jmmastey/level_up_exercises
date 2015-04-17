@@ -5,6 +5,19 @@ require 'csv'
 class DataReader
   attr_reader :dino_filter
 
+  TRANSLATE = {
+    genus: :name,
+    period: :era,
+    carnivore: :diet,
+    weight: :weight,
+    walking: :walking_style,
+    name: :name,
+    continent: :continent,
+    diet: :diet,
+    weight_in_lbs: :weight,
+    description: :description,
+  }
+
   def initialize(csv_files)
     read_data(csv_files)
   end
@@ -26,21 +39,9 @@ class DataReader
   end
 
   def translate_header(header_name)
-    translate = {
-      genus: :name,
-      period: :era,
-      carnivore: :diet,
-      weight: :weight,
-      walking: :walking_style,
-      name: :name,
-      continent: :continent,
-      diet: :diet,
-      weight_in_lbs: :weight,
-      description: :description,
-    }
-    unless translate[header_name.downcase.to_sym]
-      raise 'Key Error.  Ensure CSV headers are in the translate dictionary.'
+    unless TRANSLATE[header_name.downcase.to_sym]
+      raise KeyError,  'Ensure CSV headers are in the translate dictionary.'
     end
-    translate[header_name.downcase.to_sym]
+    TRANSLATE[header_name.downcase.to_sym]
   end
 end

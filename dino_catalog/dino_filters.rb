@@ -3,43 +3,41 @@ require_relative './dino.rb'
 # dinosaur list based on values in its instance variables.
 
 class DinoFilters
-  attr_reader :dino_objects
-
-  @dino_objects = nil
+  attr_reader :dinos
 
   def initialize(input_list)
-    @dino_objects = input_list
+    @dinos = input_list
   end
 
   def find_bipeds
-    filtered_list = @dino_objects.select(&:biped?)
+    filtered_list = @dinos.select(&:biped?)
     DinoFilters.new(filtered_list)
   end
 
   def find_carnivores
-    filtered_list = @dino_objects.select(&:carnivore?)
+    filtered_list = @dinos.select(&:carnivore?)
     DinoFilters.new(filtered_list)
   end
 
   def find_dinos_specific_era(era_of_interest)
-    filtered_list = @dino_objects.select { |dino| dino.dino_in_era?(era_of_interest) }
+    filtered_list = @dinos.select { |dino| dino.dino_in_era?(era_of_interest) }
     DinoFilters.new(filtered_list)
   end
 
   def find_big_dinos(weight_cutoff)
     # weight_cutoff should be in pounds
-    filtered_list = @dino_objects.select { |dino| dino.big_dino?(weight_cutoff) }
+    filtered_list = @dinos.select { |dino| dino.big_dino?(weight_cutoff) }
     DinoFilters.new(filtered_list)
   end
 
   def find_small_dinos(weight_cutoff)
-    filtered_list = @dino_objects.select { |dino| dino.small_dino?(weight_cutoff) }
+    filtered_list = @dinos.select { |dino| dino.small_dino?(weight_cutoff) }
     DinoFilters.new(filtered_list)
   end
 
   def summarize_list
     summarized_dinos = []
-    @dino_objects.each do |dino|
+    @dinos.each do |dino|
       summarized_dinos += dino.summarize_dino
     end
     summarized_dinos
@@ -47,6 +45,6 @@ class DinoFilters
 
   # Want the ability to print single dino's data based on its index in dino list
   def get_dino_by_index(dino_index)
-    @dino_objects[dino_index].summarize_dino
+    @dinos[dino_index].summarize_dino
   end
 end

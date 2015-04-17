@@ -12,10 +12,6 @@ data_reader = DataReader.new('dino_csv_list')
 dino_filter = data_reader.dino_filter
 
 user_input = UserInput.new
-
 user_input.query_user
-user_input.process_user_input
-query = "dino_filter." + user_input.build_user_query
 
-puts eval(query)
-
+puts eval("dino_filter." + user_input.build_user_query)

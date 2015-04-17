@@ -22,10 +22,10 @@ class SplitTest
   def chi_square
     values = {}
     @cohorts.each do |cohort|
-      values[cohort.name] = 
+      values[cohort.name] =
       { 
-        :converted => cohort.successes, 
-        :unconverted => cohort.failures
+        converted: cohort.successes,
+        unconverted: cohort.failures
       }
     end
     tester = ABAnalyzer::ABTest.new values

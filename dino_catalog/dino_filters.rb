@@ -37,12 +37,16 @@ class DinoFilters
     DinoFilters.new(filtered_list)
   end
 
-  def print_list
-    @dino_objects.each(&:print_dino)
+  def summarize_list
+    summarized_dinos = []
+    @dino_objects.each do |dino|
+      summarized_dinos += dino.summarize_dino
+    end
+    summarized_dinos
   end
 
   # Want the ability to print single dino's data based on its index in dino list
-  def print_dino_by_index(dino_index)
-    @dino_objects[dino_index].print_dino
+  def get_dino_by_index(dino_index)
+    @dino_objects[dino_index].summarize_dino
   end
 end

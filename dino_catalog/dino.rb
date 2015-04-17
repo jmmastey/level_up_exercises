@@ -22,7 +22,7 @@ class Dino
     @weight = @weight.to_i unless @weight.nil?
   end
 
-  def print_dino
+  def summarize_dino
     dino_values = instance_variables.map do |var|
       dino_info = instance_variable_get("#{var}")
       if dino_info
@@ -31,7 +31,7 @@ class Dino
       end
     end
     dino_values.reject! { |dino_string| dino_string.nil? }
-    puts dino_values
+    dino_values
   end
 
   def format_string(attribute, value)

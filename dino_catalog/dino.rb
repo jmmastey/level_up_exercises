@@ -4,7 +4,7 @@ class Dino
 
   def initialize(file, headers)
     @dinos = CSV.read(file, headers)
-    @dinos.headers.each(&:upcase!)
+    #@dinos.headers.each(&:upcase!)
   end
 
   def bipeds
@@ -56,6 +56,29 @@ class Dino
     dinos.map { |e| oxfordian << e if e['PERIOD'] == 'Oxfordian' }
     oxfordian.join
   end
+
+  def walking(legs)
+    @walk = []
+    dinos.map { |e| @walk << e if e['WALKING'] == legs }
+    self
+  end
+
+  def period(from)
+    time = []
+    dinos.map { |e| time << e if e['PERIOD'] == from }
+    time.join
+    self
+  end
+
+  def diet(food)
+    @diet = []
+    dinos.map { |e| @diet << e if e['DIET'] == food }
+    self
+  end
+
+  def output
+    [@walk.join, @diet.join].join(' ')
+  end
 end
 dinos = Dino.new('dinodex.csv', headers: true)
-puts dinos.from_late_permian
+puts dinos.diet('Piscivore')

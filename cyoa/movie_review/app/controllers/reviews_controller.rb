@@ -7,14 +7,12 @@ class ReviewsController < ApplicationController
 	end
 
 	def create
-
 		@review = Review.new(review_params)
 		@review.user_id = current_user.id
 		@review.movie_id = @movie.id
 		if @review.save
 			redirect_to @movie
 		else
-			flash.now[:error] = @review.errors.messages[:rating][0] if @review.errors.messages[:rating]
 			flash.now[:error] = @review.errors.messages[:comment][0] if @review.errors.messages[:comment]
 			render 'new'
 		end

@@ -13,7 +13,7 @@
 			<% end %>
 		<% end %>
 </div>
-
+<div class="star-rating" data-score= <%= @avg_rating %> ></div>
 <h2>Title: <%= @movie.name %></h2>
 <h2>Release Date: <%= @movie.release_date %></h2>
 <p><%= link_to "Write a Review", new_movie_review_path(@movie) %></p>

@@ -38,23 +38,15 @@ class BlagPost
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    author.try { |a| "By #{a.name}, at #{a.url}" }
   end
 
   def category_list
     return "" if categories.empty?
 
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
+    label = "Category".pluralize(categories.length)
 
-    if categories.length > 1
+    if categories.many?
       last_category = categories.pop
       suffix = " and #{as_title(last_category)}"
     else
@@ -65,24 +57,14 @@ class BlagPost
   end
 
   def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    string.to_s.humanize.titleize
   end
 
   def commenters
     return '' unless comments_allowed?
     return '' unless comments.length > 0
 
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    "You will be the #{comments.length.ordinalize} commenter"
   end
 
   def comments_allowed?

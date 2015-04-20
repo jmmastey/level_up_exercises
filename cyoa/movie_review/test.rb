@@ -1,5 +1,6 @@
 require 'net/http'
 require 'json'
+require 'date'
 
 MY_API_KEY = '7f052176a77b44b47431f908b840ace8'
 uri = 'http://api.themoviedb.org/3/configuration?api_key=' << MY_API_KEY
@@ -20,4 +21,7 @@ result = JSON.parse(response.body) if response.is_a?(Net::HTTPSuccess)
 result = result['results']
 result.each do |r|
   puts r['title']
+  d = Date.strptime(r['release_date'], "%Y-%m-%d")
+  d1 = Date.new(d.year, d.month, d.day)
+  puts d1
 end

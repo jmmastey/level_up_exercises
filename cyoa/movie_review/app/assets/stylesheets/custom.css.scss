@@ -45,6 +45,10 @@ h2 {
   color: #777;
 }
 
+h3 {
+  text-align: center;
+}
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -85,4 +89,10 @@ footer ul li {
 .thumbnails {
   width: 200px;
   margin: 3px 0px 0px 0px
+}
+
+.inbl {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 150px;
 }

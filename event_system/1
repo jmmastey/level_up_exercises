@@ -1,0 +1,11 @@
+require 'spec_helper'
+require 'rspec/rails'
+
+describe WeatherAlert, type: :mailer do
+  context "when the weather is extreme" do
+
+    it "sends email, if there is a subscriber" do
+    end
+
+  end
+end

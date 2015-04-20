@@ -1,0 +1,26 @@
+%h1 Weather#index
+
+= link_to('Register', register_index_path)
+
+%form{:name => "city", :id => "city", :action => "/weather/index", :method => "get", :enctype => "text/plain"}
+  %fieldset
+    %li
+      %input{:type => "text", :name => "region[name]", :id => "city_name", :class => "text"}
+    %input{:type => "submit", :value => "Send", :id => "send", :class => "button"}
+-if params["region"] && params["region"]["name"] != ""
+  %table{id: "temperatue_forecast_table"}
+    - @high_low_temperatures.each do |key,hash_temp|
+      %tr
+        %td= key
+        %td= hash_temp["low"].to_s  if hash_temp["low"]
+        %td= hash_temp["high"].to_s if hash_temp["high"]
+
+  %table
+    - @detail_forecasts.each do |day, details|
+      %tr= day
+      %tr
+        %td Today
+        %td= details["detail_afternoon"] if details["detail_afternoon"]
+      %tr
+        %td Night
+        %td= details["detail_night"] if details["detail_night"]

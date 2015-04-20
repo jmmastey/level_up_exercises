@@ -1,0 +1,29 @@
+<%= image_tag @movie.poster_path, class: "thumbnails" %>
+	<div style = "clear: right; float: right;">
+		<h1 class="review_title"><%= @movie.name %></h1>
+		<% if @reviews.blank? %>
+			<h3>No reviews just yet, would you like to add the first!</h3>
+			<%= link_to "Write a Review", new_movie_review_path(@movie), class: "btn btn-danger" %>
+		<% else %>
+			<% @reviews.each do |review| %>
+				<div class="reviews">
+					<div class="star-rating" data-score= <%= review.rating %> ></div>
+					<p><%= review.comment %></p>
+				</div>
+			<% end %>
+		<% end %>
+</div>
+
+<h2>Title: <%= @movie.name %></h2>
+<h2>Release Date: <%= @movie.release_date %></h2>
+<p><%= link_to "Write a Review", new_movie_review_path(@movie) %></p>
+
+<script>
+	$('.star-rating').raty({
+		path: '/assets/',
+		readOnly: true,
+		score: function() {
+			return $(this).attr('data-score');
+		}
+	});
+</script>

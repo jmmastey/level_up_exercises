@@ -7,8 +7,7 @@
 
 <div class="center jumbotron">
 	<% @movies.each do |movie| %>
-		<% @movie = movie %>
-		<%= link_to image_tag( movie.poster_path, class: "thumbnails" ), controller: "movies", action: "new", id: @movie %>
+		<%= link_to image_tag( movie.poster_path, class: "thumbnails" ), movie_path(movie.id)%>
 	<% end %>
 </div>
 

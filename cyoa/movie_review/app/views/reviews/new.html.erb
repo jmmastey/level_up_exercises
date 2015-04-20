@@ -1,0 +1,18 @@
+<% if user_signed_in? %>
+	<%= form_for ([@movie, @review]) do |f| %>
+	<br><br>
+	<div class="filed">
+  	<%= f.label :Rating %>:
+  	<%= f.text_field :rating %><br />
+	</div>
+	<br><br>
+  <div class="field">
+  	<%= f.label :Comment %>:
+  	<%= f.text_field :comment %><br />
+	</div>
+	<br><br>
+	<div class="actions">
+  	<%= f.submit %>
+  </div>
+<% end %>
+<% end %>

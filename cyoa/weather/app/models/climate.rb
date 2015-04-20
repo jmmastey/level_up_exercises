@@ -9,7 +9,7 @@ class Climate < ActiveRecord::Base
   def self.persist_weather
     days = ClimateHelper.day_array
     weekly_weather.first(7).each_with_index do |daily_weather, indx|
-      Climate.create({ max_temp:                  daily_weather.temperatureMax,
+      create({ max_temp:                  daily_weather.temperatureMax,
                        min_temp:                  daily_weather.temperatureMin,
                        precipitation_probability: daily_weather.precipProbability,
                        precipitation_type:        daily_weather.precipType,

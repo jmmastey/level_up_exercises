@@ -9,5 +9,5 @@ end
 
 # Send weather updates to users
 scheduler.cron("0 06 * * *") do
-  WeatherMailer.mail_weather
+  WeatherMailer.mail_weather.deliver_now
 end

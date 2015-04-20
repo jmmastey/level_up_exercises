@@ -1,0 +1,9 @@
+Hi <%= @current_user.name %>
+
+The weather forecast for today is as follows
+
+|   Max|   Min|Chance of Precipitation|Precipitation Type|Humidity|Summary|
+|<%= @weather.max_temp.to_f.round %>|<%= @weather.min_temp.to_f.round %>|<%= @weather.precipitation_probability.to_f.round
+%>|<%= @weather.precipitation_type %>|<%= @weather.humidity.to_f.round %>|>%= @weather.summary %>|
+
+Have a great day!

@@ -1,0 +1,25 @@
+<table class="weathertable">
+  <tr>
+    <th>Day</th>
+    <th>Max</th>
+    <th>Min</th>
+    <th>Precipitation Type</th>
+    <th>Precipitation Probability</th>
+    <th>Humidity</th>
+    <th>Summary</th>
+  </tr>
+  <% unless @climate.nil? %>
+    <% @climate.each do |day| %>
+      <tr>
+        <th><%= day.day %></th>
+        <th><%= day.max_temp.to_f.round %></th>
+        <th><%= day.min_temp.to_f.round %></th>
+        <th><%= day.precipitation_type %></th>
+        <th><%= day.precipitation_probability.to_f.round %></th>
+        <th><%= day.humidity.to_f.round %></th>
+        <th><%= day.summary %></th>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+

@@ -1,0 +1,31 @@
+<h1>Weather Service</h1>
+
+<p>Hi <%= @current_user.name %> <p>
+
+<p>The forecast for today is a s follows</p>
+<br/>
+
+<table class="weathertable">
+  <tr>
+    <th>Day</th>
+    <th>Max</th>
+    <th>Min</th>
+    <th>Precipitation Type</th>
+    <th>Precipitation Probability</th>
+    <th>Humidity</th>
+    <th>Summary</th>
+  </tr>
+  <% unless @climate.nil? %>
+    <tr>
+      <th><%= @climate.day %></th>
+      <th><%= @climate.max_temp.to_f.round %></th>
+      <th><%= @climate.min_temp.to_f.round %></th>
+      <th><%= @climate.precipitation_type %></th>
+      <th><%= @climate.precipitation_probability.to_f.round %></th>
+      <th><%= @climate.humidity.to_f.round %></th>
+      <th><%= @climate.summary %></th>
+    </tr>
+  <% end %>
+</table>
+
+<p>Have a great day!</p>

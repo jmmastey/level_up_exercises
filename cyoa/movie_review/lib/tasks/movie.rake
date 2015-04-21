@@ -1,14 +1,16 @@
 namespace :movie do
-  desc "TODO"
+  desc "Get a list of popular movies"
   MY_API_KEY = '7f052176a77b44b47431f908b840ace8'
   task update: :environment do
-    records = get_movies['results']
-    records.each do |record|
-      movie = Movie.new
-      movie.name = record['title']
-      movie.release_date = record['release_date']
-      movie.poster_path = build_image_path << record['poster_path']
-      movie.save
+    if Movie.count == 0
+      records = get_movies['results']
+      records.each do |record|
+        movie = Movie.new
+        movie.name = record['title']
+        movie.release_date = record['release_date']
+        movie.poster_path = build_image_path << record['poster_path']
+        movie.save
+      end
     end
   end
 

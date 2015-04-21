@@ -1,25 +1,31 @@
-class NameCollisionError < RuntimeError; end
+class NameCollisionError < RuntimeError
+end
 
 class Robot
-  attr_accessor :name
+  attr_accessor :name, :registry
+  NAME_ERROR = 'There was a problem generating the robot name!'
 
-  @@registry
+  def initialize(_args = {})
+    @registry ||= []
+    @name = name_generator
+    check_name
+  end
 
-  def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+  def name_generator
+    (characters + numbers).join
+  end
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+  def characters
+    2.times.map { ('A'..'Z').to_a.sample }
+  end
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
+  def numbers
+    3.times.map { ('0'..'9').to_a.sample }
+  end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+  def check_name
+    raise NameCollisionError, NAME_ERROR unless
+    (name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || registry.include?(name)
   end
 end
 

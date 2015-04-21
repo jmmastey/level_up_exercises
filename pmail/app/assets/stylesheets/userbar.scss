@@ -1,0 +1,245 @@
+@import 'mixins';
+@import 'variables';
+
+.userbar {
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $gray-3;
+  z-index: 999;
+  border-bottom: 1px solid $gray-2;
+}
+
+.logo {
+  width: 200px;
+  height: 100%;
+  position: absolute;
+  padding: 0 40px 0 30px;
+}
+
+.logo-md {
+  width: 120px;
+  height: 100%;
+}
+
+.search {
+  width: 650px;
+  height: 100%;
+  left: 200px;
+  top: 0;
+  position: absolute;
+}
+
+.search-input {
+  width: 577px;
+  height: 33px;
+  padding: 0;
+  margin: 0;
+  top: 13px;
+  position: absolute;
+  border: 1px solid $gray-2;
+
+  &:hover {
+    border: 1px solid $gray-1;
+    box-shadow: inset 0px 0px 8px -2px $gray-1;
+  }
+}
+
+.search-extra-options {
+  position: absolute;
+  top: 13px;
+  left: 557px;
+  width: 20px;
+  height: 34px;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  .down-arrow-icon {
+    position: absolute;
+    top: 15px;
+    left: 5px;
+  }
+}
+
+.search-button {
+  width: 72px;
+  height: 35px;
+  left: 578px;
+  top: 13px;
+  position: absolute;
+  background-color: $gmail-blue;
+  border-width: 0px;
+  border-radius: 0 3px 3px 0;
+}
+
+.dropdowns {
+  width: 200px;
+  height: 100%;
+  right: -12px;
+  top: 0;
+  position: absolute;
+}
+
+.more-applications {
+  position: absolute;
+  top: 15px;
+}
+
+.user-menu {
+  position: absolute;
+  top: 22px;
+  height: 30px;
+  width: 125px;
+  left: 38px;
+  cursor: default;
+}
+
+.more-user-options {
+  position: absolute;
+  left: 113px;
+  top: 8px;
+}
+
+.user-email {
+  font-family: $gmail-font;
+  font-size: 13px;
+  color: $gmail-black;
+}
+
+.app-drawer {
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.dropdown-modeless {
+  display: none;
+  position: absolute;
+  width: 255px;
+  top: 60px;
+  right: 40px;
+  border: 1px solid $gray-1;
+  box-shadow: 0px 0px 8px 0px $gray-1;
+}
+
+.angled-nub {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -6px;
+  right: 10px;
+  background-color: $background-yellow;
+  border: 1px solid $gray-1;
+
+  border-right: none;
+  border-bottom: none;
+
+  @include rotate(45deg);
+}
+
+.account-manager-information {
+  width: 100%;
+  height: 50px;
+  background-color: $background-yellow;
+}
+
+.account-manager-text {
+  margin: 0;
+  padding: 10px 20px;
+  font-family: $gmail-font;
+  font-size: 11px;
+}
+
+.learn-more-link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.account-details {
+  width: 100%;
+  height: 90px;
+}
+
+.account-details-content {
+  margin: 0;
+  padding: 15px 20px;
+  font-family: $gmail-font;
+  background-color: white;
+
+  .user-email {
+    color: $gmail-gray;
+  }
+}
+
+.user-full-name {
+  font-size: 13px;
+}
+
+.user-links {
+  padding-top: 5px;
+  font-size: 13px;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.account-link {
+  padding-right: 7px;
+}
+
+.privacy-link {
+  padding-left: 7px;
+}
+
+.account-privacy-link-separator {
+  color: $gray-1;
+}
+
+.account-actions {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid;
+  border-color: $gray-1;
+  background-color: $background-gray-1;
+}
+
+.account-actions-buttons {
+  padding: 10px;
+
+  button {
+    position: absolute;
+    height: 30px;
+    font-size: 13px;
+    font-family: $gmail-font;
+    color: $gmail-gray;
+    background-color: $background-gray-2;
+    border: 1px solid $gray-1;
+    border-radius: 2px;
+  }
+}
+
+.add-account {
+  left: 20px;
+}
+
+.sign-out {
+  right: 20px;
+}
+
+.page-link {
+  color: $gmail-link-blue;
+}

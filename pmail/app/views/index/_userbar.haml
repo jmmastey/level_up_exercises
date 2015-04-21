@@ -1,0 +1,39 @@
+.userbar
+  .logo
+    %a{href:'/'}
+      = image_tag "netflix.png", class: "logo-md"
+  .search
+    %input.search-input
+    .search-extra-options
+      .down-arrow-icon
+    %button.search-button
+      %span.application-sprites.search-icon
+  .dropdowns
+    .more-applications
+      .application-sprites.app-icon.app-drawer
+    .user-menu
+      %span.user-email kshu@netflix.com
+      .more-user-options.down-arrow-icon
+  .dropdown-modeless
+    .angled-nub
+    .account-manager-information
+      .account-manager-text
+        .manager-domain
+          This account is managed by
+          %strong netflix.com.
+        .learn-more
+          %a.learn-more-link.page-link{href:'#'} Learn more
+    .account-details
+      .account-details-content
+        .user-full-name
+          %strong Kevin Shu
+        .user-email
+          kshu@netflix.com
+        .user-links
+          %a.account-link.page-link{href:'#'} Account
+          %span.account-privacy-link-separator –
+          %a.privacy-link.page-link{href:'#'} Privacy
+    .account-actions
+      .account-actions-buttons
+        %button.add-account Add Account
+        %button.sign-out Sign Out

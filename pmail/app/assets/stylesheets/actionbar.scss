@@ -1,0 +1,266 @@
+@import 'variables';
+
+.actionbar {
+  z-index: 99;
+  background-color: white;
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid $gray-2;
+}
+
+
+.actionbar-contents {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 15px;
+  left: 32px;
+}
+
+.app-selector {
+  font-family: $gmail-font;
+  font-size: 19px;
+  color: $gmail-red;
+  width: 50px;
+  position: absolute;
+  left: 32px;
+  top: 14px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.app-selector-arrow {
+  position: absolute;
+  top: 9px;
+  left: 40px;
+}
+
+.mail-selector {
+  position: absolute;
+  top: 15px;
+  left: 200px;
+
+  .button {
+    width: 69px;
+    height: 30px;
+    border: 1px solid $gray-2;
+    border-radius: 3px;
+    background-color: $background-gray-1;
+
+    &:hover {
+      background-color: $background-gray-2;
+      border: 1px solid $gray-1;
+      box-shadow: 0 1px 2px -1px $gray-1;
+    }
+  }
+}
+
+.checkbox-selector {
+  position: absolute;
+  top: -6px;
+}
+
+.refresh-button {
+  position: absolute;
+  top: -6px;
+  left: 90px;
+}
+
+.down-arrow-icon-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.more-selector {
+  position: absolute;
+  top: -6px;
+  left: 180px;
+  font-family: $gmail-font;
+  font-size: 11px;
+  font-weight: bold;
+  color: $gmail-black;
+  width: 100%;
+  height: 100%;
+}
+
+.more-selector-text {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+.more-selector-down-arrow {
+  position: absolute;
+  top: 12px;
+  left: 45px;
+}
+
+.checkbox-down-arrow {
+  position: absolute;
+  top: 12px;
+  left: 40px;
+}
+
+.refresh-button-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: $gmail-transparent;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.refresh-icon-center {
+  position: absolute;
+  left: 25px;
+  top: 5px;
+}
+
+.checkbox {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: 7px;
+  left: 19px;
+  border: 1px solid $gmail-black;
+  opacity: 0.30;
+
+  &:hover {
+    opacity: $gmail-transparent;
+    box-shadow: inset 0px 0px 10px -4px #000;
+  }
+}
+
+.page-selector {
+  position: absolute;
+  right: 135px;
+  top: 37px;
+}
+
+.page-information {
+  font-family: $gmail-font;
+  font-size: 13px;
+  position: absolute;
+  right: 68px;
+  top: -22px;
+  width: 62px;
+  padding: 3px;
+
+  &:hover {
+    border: 1px solid $gray-2;
+    right: 67px;
+    top: -23px;
+    cursor: pointer;
+  }
+}
+
+.email-range {
+  font-weight: bold;
+  display: inline;
+}
+
+.email-total {
+  font-weight: bold;
+  display: inline;
+}
+
+.email-range-total-separator {
+  font-weight: normal;
+  display: inline;
+}
+
+.half-button {
+  position: absolute;
+  top: -28px;
+  height: 30px;
+  width: 36px;
+  border: 1px solid $gray-2;
+  background-color: $background-gray-1;
+
+  display: inline;
+}
+
+.page-right {
+  right: -12px;
+  border-radius: 0 3px 3px 0;
+}
+
+.page-left {
+  right: 25px;
+  border-radius: 3px 0 0 3px;
+}
+
+.settings-selector {
+  position: absolute;
+  top: 9px;
+  right: 30px;
+}
+
+.settings-button {
+  height: 30px;
+  width: 75px;
+  border: 1px solid $gray-2;
+  border-radius: 3px;
+  background-color: $background-gray-1;
+
+  &:hover {
+    background-color: $background-gray-2;
+    border: 1px solid $gray-1;
+    box-shadow: 0 1px 2px -1px $gray-1;
+  }
+}
+
+.settings-button-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: $gmail-transparent;
+  }
+}
+
+.gear-icon-center {
+  position: absolute;
+  top: 4px;
+  left: 22px;
+}
+
+.settings-down-arrow {
+  position: absolute;
+  top: 13px;
+  left: 47px;
+}
+
+.gear-icon-overlay {
+  opacity: $gmail-transparent;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.arrow-overlay {
+  opacity: 0.3;
+}
+
+.center-arrow {
+  position: absolute;
+  top: 3px;
+  left: 8px;
+}

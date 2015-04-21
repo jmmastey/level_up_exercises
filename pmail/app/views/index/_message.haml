@@ -1,0 +1,14 @@
+.message
+  .checkbox
+  .star
+    .gmail-star-icon-overlay
+      .gmail-star-icon
+  .sender
+    = message[:sender]
+  .content
+    %span.subject
+      = message[:subject]
+    %span.body
+      = message[:body]
+  .time
+    = message[:time]

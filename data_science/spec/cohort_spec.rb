@@ -4,7 +4,7 @@ require 'json'
 
 describe Cohort do
   before :all do
-    file = File.read('abbreviated_data.json')
+    file = File.read('smaller_data_set.json')
     all_data = JSON.parse(file)
     pop_data = all_data.select { |record| record["cohort"] == "A" }
     @cohort = Cohort.new(pop_data)
@@ -24,22 +24,22 @@ describe Cohort do
 
   describe("#sample_size") do
     it "returns the size of the cohort" do
-      expect(@cohort.sample_size).to(eql(12))
+      expect(@cohort.sample_size).to(eql(72))
     end
   end
 
   describe("#num_conversions") do
     it "returns the number of successes" do
-      expect(@cohort.num_conversions).to(eql(3.0))
+      expect(@cohort.num_conversions).to(eql(5))
     end
   end
 
   it "returns the conversion rate for this cohort" do
-    expect(@cohort.compute_conversion_rate).to(eql(0.25))
+    expect(@cohort.compute_conversion_rate).to(eql(5/72.0))
   end
 
   it "returns the standard deviation for this cohort" do
-    expect(@cohort.compute_std_dev).to(eql(0.125))
+    expect(@cohort.compute_std_dev).to(eql(0.029958747929501817))
   end
 
   it "returns the 95% confidence level for this cohort" do

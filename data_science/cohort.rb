@@ -28,7 +28,7 @@ class Cohort
   private
 
   def get_num_conversions(population_data)
-    @num_conversions = 0.0
+    @num_conversions = 0
     population_data.each do |entry|
       @num_conversions += entry["result"]
     end

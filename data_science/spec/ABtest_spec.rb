@@ -4,7 +4,7 @@ require 'json'
 
 describe ABtest do
   before :all do
-    file = File.read('abbreviated_data.json')
+    file = File.read('smaller_data_set.json')
     all_data = JSON.parse(file)
     pop_a = all_data.select { |record| record["cohort"] == "A" }
     pop_b = all_data.select { |record| record["cohort"] == "B" }
@@ -30,6 +30,6 @@ describe ABtest do
   end
 
   it "determines if there is a signifcant leader" do
-    expect(@ab_test.compute_leader_confidence_level).to(eql(0.9817441394125406))
+    expect(@ab_test.compute_leader_confidence_level).to(eql(0.3640661012729629))
   end
 end

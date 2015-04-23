@@ -1,7 +1,6 @@
 CohortNameError = Class.new(RuntimeError)
 
 class Cohort
-
   attr_accessor :name
   attr_accessor :sample_size
   attr_accessor :num_conversions
@@ -17,15 +16,17 @@ class Cohort
   end
 
   private
+
   def get_cohort_name(population_data)
-    current_cohort = population_data[0]["cohort"] 
+    current_cohort = population_data[0]["cohort"]
     population_data.each do |entry|
       raise CohortNameError if entry["cohort"] != current_cohort
     end
     @name = current_cohort.to_sym
   end
 
-  private 
+  private
+
   def get_num_conversions(population_data)
     @num_conversions = 0.0
     population_data.each do |entry|
@@ -35,18 +36,17 @@ class Cohort
   end
 
   public
+
   def compute_conversion_rate
-    @conversion_rate = @num_conversions/@sample_size
+    @conversion_rate = @num_conversions / @sample_size
   end
 
   def compute_std_dev
-    @std_dev = Math.sqrt(@conversion_rate*(1-@conversion_rate)/@sample_size)
+    @std_dev = Math.sqrt(@conversion_rate * (1 - @conversion_rate) / @sample_size)
   end
 
   def compute_confidence_interval_95pct
-    interval = @std_dev*1.96
+    interval = @std_dev * 1.96
     [@conversion_rate - interval, @conversion_rate + interval]
   end
-    
-
 end

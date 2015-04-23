@@ -1,35 +1,34 @@
 require 'abanalyzer'
 class ABtest
-
-  attr_accessor :cohort_A
-  attr_accessor :cohort_B
+  attr_accessor :cohort_a
+  attr_accessor :cohort_b
   attr_accessor :leader
 
-  def initialize(cohort_A, cohort_B)
-    @cohort_A = cohort_A
-    @cohort_B = cohort_B
+  def initialize(cohort_a, cohort_b)
+    @cohort_a = cohort_a
+    @cohort_b = cohort_b
     @leader = find_leader
   end
 
   def find_leader
-    return @cohort_A.name if @cohort_A.conversion_rate > @cohort_B.conversion_rate
-    return @cohort_B.name if @cohort_B.conversion_rate > @cohort_A.conversion_rate
-    return nil if @cohort_A.conversion_rate == @cohort_B.conversion_rate
+    return @cohort_a.name if @cohort_a.conversion_rate > @cohort_b.conversion_rate
+    return @cohort_b.name if @cohort_b.conversion_rate > @cohort_a.conversion_rate
+    return nil if @cohort_a.conversion_rate == @cohort_b.conversion_rate
   end
 
   def compute_leader_confidence_level
     sample_data = {}
-    sample_data[@cohort_A.name] = {:failures => compute_failures(@cohort_A), 
-                                   :successes => @cohort_A.num_conversions }
-    sample_data[@cohort_B.name] = {:failures => compute_failures(@cohort_B), 
-                                   :successes => @cohort_B.num_conversions}
+    sample_data[@cohort_a.name] = { failures: compute_failures(@cohort_a),
+                                    successes: @cohort_a.num_conversions }
+    sample_data[@cohort_b.name] = { failures: compute_failures(@cohort_b),
+                                    successes: @cohort_b.num_conversions }
     compare_cohorts = ABAnalyzer::ABTest.new(sample_data)
-    return 1.0 - compare_cohorts.chisquare_p
+    1.0 - compare_cohorts.chisquare_p
   end
 
-  private 
+  private
+
   def compute_failures(cohort)
-   cohort.sample_size - cohort.num_conversions
+    cohort.sample_size - cohort.num_conversions
   end
-
 end

@@ -30,7 +30,7 @@ class Cohort
   def get_num_conversions(population_data)
     @num_conversions = 0.0
     population_data.each do |entry|
-      @num_conversions += entry["result"].to_f
+      @num_conversions += entry["result"]
     end
     @num_conversions
   end
@@ -38,7 +38,7 @@ class Cohort
   public
 
   def compute_conversion_rate
-    @conversion_rate = @num_conversions / @sample_size
+    @conversion_rate = @num_conversions.to_f / @sample_size
   end
 
   def compute_std_dev

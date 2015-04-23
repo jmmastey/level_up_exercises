@@ -15,7 +15,7 @@ describe ABtest do
 
   describe("#new") do
     it "takes 2 cohorts and returns and ABtest object" do
-      expect(@ABtest).to(be_an_instance_of(ABtest))
+      expect(@ab_test).to(be_an_instance_of(ABtest))
     end
   end
   describe("@new") do
@@ -26,7 +26,7 @@ describe ABtest do
   end
 
   it "finds the leader in conversion rates" do
-    expect(@ab_test.leader).to(eql(@ab_test.cohort_B.name))
+    expect(@ab_test.leader).to(eql(@ab_test.cohort_b.name))
   end
 
   it "determines if there is a signifcant leader" do

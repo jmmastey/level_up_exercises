@@ -4,8 +4,7 @@ require_relative 'cohort_converter'
 
 abort('Please include one json file as an argument.') unless ARGV.count == 1
 
-converter = CohortConverter.new(ARGV[0])
-cohorts = converter.cohorts
+cohorts = CohortConverter.new(ARGV[0]).cohorts
 test = SplitTest.new(cohorts)
 
 successes = cohorts.each_with_object(Hash.new) { |cohort, memo| memo[cohort.name] = cohort.successes }

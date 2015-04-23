@@ -10,13 +10,11 @@ class SplitTest
   end
 
   def conversion_rates
-    @cohorts.each_with_object([]) { |cohort, rates| rates << cohort.conversion_rate }
+    @cohorts.map(&:conversion_rate)
   end
 
   def confidence(level_of_confidence = 0.95)
-    @cohorts.each_with_object([]) do |cohort, levels|
-      levels << ABAnalyzer.confidence_interval(cohort.successes, cohort.attempts, level_of_confidence)
-    end
+    @cohorts.map { |cohort| ABAnalyzer.confidence_interval(cohort.successes, cohort.attempts, level_of_confidence) }
   end
 
   def chi_square

@@ -10,11 +10,11 @@ class Cohort
   end
 
   def conversion_rate
-    @successes.to_f / @attempts.to_f
+    successes.to_f / attempts.to_f
   end
 
   def failures
-    @attempts - @successes
+    attempts - successes
   end
 
   def add_attempt

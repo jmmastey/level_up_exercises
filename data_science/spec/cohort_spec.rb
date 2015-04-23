@@ -1,17 +1,12 @@
 require 'spec_helper'
 
 describe Cohort do
-  attributes =
-      {
-        name: 'A',
-        successes: '900',
-        attempts: '1200'
-      }
-  let(:cohort) { Cohort.new(attributes) }
+  let(:attributes) { { name: 'A', successes: '900', attempts: '1200' } }
+  let(:cohort) { described_class.new(attributes) }
 
   describe '#new' do
     it 'takes attributes and returns a Cohort object' do
-      expect(cohort).instance_of? Cohort
+      expect(cohort).to be_a(described_class)
     end
   end
 

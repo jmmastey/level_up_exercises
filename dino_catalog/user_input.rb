@@ -1,7 +1,4 @@
-require 'csv'
-require_relative './dino.rb'
 require_relative './dino_filters.rb'
-require_relative './data_reader.rb'
 
 ERAS_IN_DATA = ["Cretaceous (Early and Late)", "Jurassic", "Oxfordian",\
                 "Late Permian", "Triassic"]

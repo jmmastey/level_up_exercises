@@ -21,7 +21,7 @@ class UserInput
     self.carnivores = gets.chomp
 
     puts "filter for a specific era (enter name of era or leave blank)?"
-    puts "Press 1 to print options."
+    puts "Press 1 to print options. Type option you want."
     self.era = gets.chomp
 
     puts "filter for big dinos (enter the min weight cutoff or leave blank)?"

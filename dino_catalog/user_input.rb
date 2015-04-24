@@ -56,23 +56,22 @@ class UserInput
     @small_dinos = value.to_i if value.to_i != 0
   end
 
-  def build_user_query
+  def perform_user_query(dino_filters)
     user_query = FILTERS.map do |var|
       var_info = instance_variable_get("@#{var}")
       if var_info
-        format_query(var, var_info)
+        dino_filters = select_filter(var, var_info, dino_filters)
       end
     end
-    user_query += ["summarize_list"]
-    user_query = user_query.join
+    return dino_filters.summarize_list
   end
     
-  def format_query(var, var_info)
-    return "find_bipeds." if var == "bipeds"
-    return "find_carnivores." if var == "carnivores"
-    return "find_big_dinos(#{var_info})." if var == "big_dinos"
-    return "find_small_dinos(#{var_info})." if var == "small_dinos"
-    return "find_dinos_specific_era('#{var_info}')." if var == "era"
+  def select_filter(var, var_info, dino_filters)
+    return dino_filters.find_bipeds if var == "bipeds"
+    return dino_filters.find_carnivores if var == "carnivores"
+    return dino_filters.find_big_dinos(var_info) if var == "big_dinos"
+    return dino_filters.find_small_dinos(var_info) if var == "small_dinos"
+    return dino_filters.find_dinos_specific_era(var_info) if var == "era"
     raise "There was a problem."
   end
 

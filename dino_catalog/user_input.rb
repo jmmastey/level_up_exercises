@@ -3,6 +3,8 @@ require_relative './dino.rb'
 require_relative './dino_filters.rb'
 require_relative './data_reader.rb'
 
+ERAS_IN_DATA = ["Cretaceous (Early and Late)", "Jurassic", "Oxfordian", "Late Permian", "Triassic"] 
+
 class UserInput
   FILTERS = %w(bipeds carnivores era big_dinos small_dinos)
 
@@ -20,12 +22,13 @@ class UserInput
     self.carnivores = gets.chomp
 
     puts "Do you want to filter for dinos from a specific era (enter name of era or leave blank)?"
+    puts "Press 1 to print options."
     self.era = gets.chomp
 
-    puts "Do you want to filter for big dinos (enter the minimum weight cutoff)?"
+    puts "Do you want to filter for big dinos (enter the minimum weight cutoff or leave blank)?"
     self.big_dinos = gets.chomp
 
-    puts "Do you want to filter for small dinos (enter the maximum weight cutoff)?"
+    puts "Do you want to filter for small dinos (enter the maximum weight cutoff or leave blank)?"
     self.small_dinos = gets.chomp
   end
 
@@ -38,6 +41,10 @@ class UserInput
   end
 
   def era=(value)
+    if value =~ /^[1]/
+      ERAS_IN_DATA.each { |option| puts option }
+      value = gets.chomp
+    end
     @era = value if value =~ /^[A-Z]+/i
   end 
 

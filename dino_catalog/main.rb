@@ -12,6 +12,10 @@ dino_filter = DataReader.new('dino_csv_list').dino_filter
 user_input = UserInput.new
 user_input.query_user
 
-puts user_input.perform_user_query(dino_filter)
+dino_summary =  user_input.perform_user_query(dino_filter)
 
-#puts eval("dino_filter." + user_input.build_user_query)
+if dino_summary.length > 0
+  puts dino_summary
+else
+  puts "No dinos remain after filtering."
+end

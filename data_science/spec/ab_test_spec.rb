@@ -1,4 +1,4 @@
-require_relative '../ABtest'
+require_relative '../ab_test'
 
 require 'json'
 

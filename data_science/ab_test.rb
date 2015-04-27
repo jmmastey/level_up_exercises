@@ -1,8 +1,8 @@
 require 'abanalyzer'
 class ABtest
-  attr_accessor :cohort_a
-  attr_accessor :cohort_b
-  attr_accessor :leader
+  attr_reader :cohort_a
+  attr_reader :cohort_b
+  attr_reader :leader
 
   def initialize(cohort_a, cohort_b)
     @cohort_a = cohort_a

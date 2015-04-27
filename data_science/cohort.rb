@@ -1,18 +1,18 @@
 CohortNameError = Class.new(RuntimeError)
 
 class Cohort
-  attr_accessor :name
-  attr_accessor :sample_size
-  attr_accessor :num_conversions
-  attr_accessor :conversion_rate
-  attr_accessor :std_dev
+  attr_reader :name
+  attr_reader :sample_size
+  attr_reader :num_conversions
+  attr_reader :conversion_rate
+  attr_reader :std_dev
 
   def initialize(population_data)
-    @name = cohort_name(population_data)
-    @sample_size = population_data.length
-    @num_conversions = compute_num_conversions(population_data)
-    @conversion_rate = compute_conversion_rate
-    @std_dev = compute_std_dev
+    @name ||= cohort_name(population_data)
+    @sample_size ||= population_data.length
+    @num_conversions ||= compute_num_conversions(population_data)
+    @conversion_rate ||= @num_conversions.to_f / @sample_size
+    @std_dev ||= compute_std_dev
   end
 
   def compute_confidence_interval_95pct
@@ -36,10 +36,6 @@ class Cohort
       @num_conversions += entry["result"]
     end
     @num_conversions
-  end
-
-  def compute_conversion_rate
-    @conversion_rate = @num_conversions.to_f / @sample_size
   end
 
   def compute_std_dev

@@ -1,6 +1,6 @@
 require 'json'
 require_relative './cohort.rb'
-require_relative './ABtest.rb'
+require_relative './ab_test.rb'
 
 def print_cohort_info(cohort)
   interval = cohort.compute_confidence_interval_95pct

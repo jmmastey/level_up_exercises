@@ -8,9 +8,9 @@ class Cohort
   attr_accessor :std_dev
 
   def initialize(population_data)
-    @name = get_cohort_name(population_data)
+    @name = cohort_name(population_data)
     @sample_size = population_data.length
-    @num_conversions = get_num_conversions(population_data)
+    @num_conversions = compute_num_conversions(population_data)
     @conversion_rate = compute_conversion_rate
     @std_dev = compute_std_dev
   end
@@ -22,7 +22,7 @@ class Cohort
 
   private
 
-  def get_cohort_name(population_data)
+  def cohort_name(population_data)
     current_cohort = population_data[0]["cohort"]
     population_data.each do |entry|
       raise CohortNameError if entry["cohort"] != current_cohort
@@ -30,7 +30,7 @@ class Cohort
     @name = current_cohort.to_sym
   end
 
-  def get_num_conversions(population_data)
+  def compute_num_conversions(population_data)
     @num_conversions = 0
     population_data.each do |entry|
       @num_conversions += entry["result"]

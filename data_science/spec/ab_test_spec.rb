@@ -2,7 +2,7 @@ require_relative '../ab_test'
 require_relative '../cohort'
 require 'json'
 
-describe "let" do 
+describe "let" do
   let(:leading_cohort_name) { :B }
   let(:confidence_in_leader) { 0.3640661012729629 }
   all_data = JSON.parse(File.read('smaller_data_set.json'))
@@ -27,8 +27,9 @@ describe "let" do
       expect(ab_test.leader).to(eql(leading_cohort_name))
     end
 
-    it "determines if there is a signifcant leader" do
-    expect(ab_test.compute_leader_confidence_level).to(be_within(0.0001).of(confidence_in_leader))
+    it "determines confidence that leader is actually the leader" do
+      leader_confidence = ab_test.compute_leader_confidence_level
+      expect(leader_confidence).to(be_within(0.0001).of(confidence_in_leader))
     end
   end
 end

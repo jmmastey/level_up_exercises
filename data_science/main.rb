@@ -5,8 +5,8 @@ require_relative './ab_test.rb'
 def print_cohort_info(cohort)
   interval = cohort.compute_confidence_interval_95pct
   conversion_rate = cohort.conversion_rate * 100
-  printf("Cohort %s sample size: %d and conversions: %d \n",cohort.name, 
-        cohort.sample_size, cohort.num_conversions)
+  printf("Cohort %s sample size: %d and conversions: %d \n", cohort.name,
+                              cohort.sample_size, cohort.num_conversions)
   printf("Cohort %s conversion rate: %2.2f%% and " \
          "range %2.2f%% - %2.2f%% (at 95%% confidence). \n", cohort.name, \
          conversion_rate, interval[0] * 100, interval[1] * 100)

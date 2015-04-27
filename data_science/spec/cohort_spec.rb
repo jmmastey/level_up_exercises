@@ -3,20 +3,20 @@ require_relative '../cohort'
 require 'json'
 
 describe "let" do
-  let (:cohort_name) { :A }
-  let (:sample_size) { 72 }
-  let (:num_conversions) { 5 }
-  let (:conversion_rate) { 0.06944444444444445 }
-  let (:std_dev) { 0.029958747929501817}
+  let(:cohort_name) { :A }
+  let(:sample_size) { 72 }
+  let(:num_conversions) { 5 }
+  let(:conversion_rate) { 0.06944444444444445 }
+  let(:std_dev) { 0.029958747929501817 }
   let(:confidence_95pct) { 0.05871914594182356 }
-  let(:all_data) { JSON.parse(File.read('smaller_data_set.json')) } 
+  let(:all_data) { JSON.parse(File.read('smaller_data_set.json')) }
   let(:pop_data) { all_data.select { |record| record["cohort"] == "A" } }
   let(:cohort) { Cohort.new(pop_data) }
 
   describe Cohort do
     # When would a before :all block be used (if everything is done in let)?
-   #before :all do
-   #end
+    # before :all do
+    # end
 
     describe("#new") do
       it "takes a list of dictionaries and returns a Cohort object" do

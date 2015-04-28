@@ -10,12 +10,6 @@ class ABtest
     @leader = find_leader
   end
 
-  def find_leader
-    return @cohort_a.name if @cohort_a.conversion_rate > @cohort_b.conversion_rate
-    return @cohort_b.name if @cohort_b.conversion_rate > @cohort_a.conversion_rate
-    return nil if @cohort_a.conversion_rate == @cohort_b.conversion_rate
-  end
-
   def compute_leader_confidence_level
     sample_data = {}
     sample_data[@cohort_a.name] = { failures: compute_failures(@cohort_a),
@@ -27,6 +21,12 @@ class ABtest
   end
 
   private
+
+  def find_leader
+    return @cohort_a.name if @cohort_a.conversion_rate > @cohort_b.conversion_rate
+    return @cohort_b.name if @cohort_b.conversion_rate > @cohort_a.conversion_rate
+    return nil if @cohort_a.conversion_rate == @cohort_b.conversion_rate
+  end
 
   def compute_failures(cohort)
     cohort.sample_size - cohort.num_conversions

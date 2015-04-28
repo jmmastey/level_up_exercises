@@ -9,9 +9,7 @@ STD_DEV =  0.029958747929501817
 CONFIDENCE_95PCT = 0.05871914594182356
 
 describe Cohort do
-  let(:all_data) { JSON.parse(File.read('smaller_data_set.json')) }
-  let(:pop_data) { all_data.select { |record| record["cohort"] == "A" } }
-  let(:cohort) { Cohort.new(pop_data) }
+  let(:cohort) { Cohort.new(COHORT_NAME, SAMPLE_SIZE, NUM_CONVERSIONS) }
 
   describe("#new") do
     it "takes a list of dictionaries and returns a Cohort object" do

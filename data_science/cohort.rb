@@ -7,35 +7,17 @@ class Cohort
   attr_reader :conversion_rate
   attr_reader :std_dev
 
-  def initialize(population_data)
-    @name ||= cohort_name(population_data)
-    @sample_size ||= population_data.length
-    @num_conversions ||= compute_num_conversions(population_data)
-    @conversion_rate ||= @num_conversions.to_f / @sample_size
-    @std_dev ||= compute_std_dev
+  def initialize(name, sample_size, num_conversions)
+    @name = name
+    @sample_size = sample_size
+    @num_conversions = num_conversions
+    @conversion_rate = @num_conversions.to_f / @sample_size
+    @std_dev = compute_std_dev
   end
 
   def compute_confidence_interval_95pct
     interval = @std_dev * 1.96
     [@conversion_rate - interval, @conversion_rate + interval]
-  end
-
-  private
-
-  def cohort_name(population_data)
-    current_cohort = population_data[0]["cohort"]
-    population_data.each do |entry|
-      raise CohortNameError if entry["cohort"] != current_cohort
-    end
-    @name = current_cohort.to_sym
-  end
-
-  def compute_num_conversions(population_data)
-    @num_conversions = 0
-    population_data.each do |entry|
-      @num_conversions += entry["result"]
-    end
-    @num_conversions
   end
 
   def compute_std_dev

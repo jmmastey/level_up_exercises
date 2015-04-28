@@ -29,8 +29,6 @@ def build_list_of_cohorts(unique_cohorts, unique_cohorts_conversions)
   cohorts
 end
 
-
-
 parsed_data = DataParser.new('data_export_2014_06_20_15_59_02.json')
 all_cohorts = build_list_of_cohorts(parsed_data.unique_cohorts, parsed_data.unique_cohorts_conversions)
 

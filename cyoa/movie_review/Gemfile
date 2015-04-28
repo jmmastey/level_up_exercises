@@ -43,5 +43,8 @@ group :development, :test do
   gem 'spring'
   gem 'pry'
   gem 'paperclip', '~> 4.2.1'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'rspec'
 end
 

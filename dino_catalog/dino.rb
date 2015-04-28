@@ -30,7 +30,7 @@ class Dino
         "#{attribute} : #{format_string(attribute, dino_info)} \n"
       end
     end
-    dino_values.reject! { |dino_string| dino_string.nil? }
+    dino_values.select! { |dino_string| dino_string }
     dino_values
   end
 

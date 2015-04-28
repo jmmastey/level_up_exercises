@@ -1,4 +1,3 @@
-require_relative '../cohort'
 require_relative '../data_parser'
 
 LIST_LENGTH = 2

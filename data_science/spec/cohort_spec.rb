@@ -1,5 +1,4 @@
 require_relative '../cohort'
-require 'json'
 
 COHORT_NAME = :A
 SAMPLE_SIZE = 72

@@ -19,22 +19,27 @@ class DataReader
   }
 
   def initialize(csv_files)
-    read_data(csv_files)
+    dino_data = read_data(csv_files)
+    create_dino_filter_object(dino_data)
   end
 
-  def read_data(csv_files)  # csv_files = file containing list of csv filenames
-    dino_objects = []
+  private
 
-    # Each row in csv file is a separate dino object
-    CSV.foreach(csv_files) do |new_file|
-      filename = new_file[0]
-      dino_data = CSV.read(filename, headers: true, header_converters: lambda { |h| translate_header(h) })
-      dino_data.each do |row|
-        new_dino = Dino.new(row.to_hash)
-        dino_objects.push(new_dino)
-      end
+  def read_data(file_list)
+    dino_data = []
+    file_list.each do |file|
+      new_data = CSV.read(file, headers: true, header_converters: lambda { |h| translate_header(h) } )
+      dino_data << new_data.map { |row| row.to_hash}
     end
-    # Create DinoFilters object so that methods in dino_filters can be used
+    dino_data.flatten!
+  end
+
+  def create_dino_filter_object(dino_data)
+    dino_objects = []
+    dino_data.each do |dino_info|
+      dino_objects << Dino.new(dino_info)
+    end
+    # DinoFilters object needed so that methods in dino_filters can be used
     @dino_filter = DinoFilters.new(dino_objects)
   end
 

@@ -1,4 +1,4 @@
-require_relative './dino_filters.rb'
+require './dino_filters.rb'
 
 ERAS_IN_DATA = ["Cretaceous (Early and Late)", "Jurassic", "Oxfordian",\
                 "Late Permian", "Triassic"]

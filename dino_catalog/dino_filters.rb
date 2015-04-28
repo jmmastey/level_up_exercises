@@ -1,4 +1,4 @@
-require_relative './dino.rb'
+require './dino.rb'
 # The purpose of this class is to have methods that allow us to filter the
 # dinosaur list based on values in its instance variables.
 

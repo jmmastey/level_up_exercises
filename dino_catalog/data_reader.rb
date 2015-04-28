@@ -1,5 +1,5 @@
-require_relative './dino.rb'
-require_relative './dino_filters.rb'
+require './dino.rb'
+require './dino_filters.rb'
 require 'csv'
 
 class DataReader

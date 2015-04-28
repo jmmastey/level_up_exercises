@@ -1,5 +1,5 @@
-require_relative './data_reader.rb'
-require_relative './user_input.rb'
+require './data_reader.rb'
+require './user_input.rb'
 
 # If you want to run your own queries, you just need
 # to get the dino_filter object.

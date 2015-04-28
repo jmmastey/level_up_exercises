@@ -11,12 +11,6 @@ CONFIDENCE_95PCT = 0.05871914594182356
 describe Cohort do
   let(:cohort) { Cohort.new(COHORT_NAME, SAMPLE_SIZE, NUM_CONVERSIONS) }
 
-  describe("#new") do
-    it "takes a list of dictionaries and returns a Cohort object" do
-      expect(cohort).to(be_an_instance_of(Cohort))
-    end
-  end
-
   describe("#name") do
     it "returns the correct cohort name" do
       expect(cohort.name).to(eql(COHORT_NAME))

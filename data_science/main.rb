@@ -1,6 +1,7 @@
 require 'json'
 require_relative './cohort.rb'
 require_relative './ab_test.rb'
+require_relative './data_parser.rb'
 
 def print_cohort_info(cohort)
   interval = cohort.compute_confidence_interval_95pct
@@ -17,17 +18,25 @@ def print_cohort_comparison(compare)
                                compare.compute_leader_confidence_level * 100)
 end
 
-data_file = File.read('data_export_2014_06_20_15_59_02.json')
-all_data = JSON.parse(data_file)
+def build_list_of_cohorts(unique_cohorts, unique_cohorts_conversions)
+  cohorts = []
+  unique_cohorts.keys.each do |cohort_name|
+    sample_size = unique_cohorts[cohort_name]
+    num_conversions = unique_cohorts_conversions[cohort_name]
+    new_cohort = Cohort.new(cohort_name, sample_size, num_conversions)
+    cohorts.push(new_cohort)
+  end
+  cohorts
+end
 
-group_a = all_data.select { |record| record["cohort"] == "A" }
-group_b = all_data.select { |record| record["cohort"] == "B" }
 
-cohort_a = Cohort.new(group_a)
-cohort_b = Cohort.new(group_b)
 
-print_cohort_info(cohort_a)
-print_cohort_info(cohort_b)
+parsed_data = DataParser.new('data_export_2014_06_20_15_59_02.json')
+all_cohorts = build_list_of_cohorts(parsed_data.unique_cohorts, parsed_data.unique_cohorts_conversions)
 
-compare = ABtest.new(cohort_a, cohort_b)
+all_cohorts.each do |cohort|
+  print_cohort_info(cohort)
+end
+
+compare = ABtest.new(all_cohorts[0], all_cohorts[1])
 print_cohort_comparison(compare)

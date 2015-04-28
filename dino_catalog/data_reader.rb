@@ -44,9 +44,6 @@ class DataReader
   end
 
   def translate_header(header_name)
-    unless TRANSLATE[header_name.downcase.to_sym]
-      raise KeyError,  'Ensure CSV headers are in the translate dictionary.'
-    end
-    TRANSLATE[header_name.downcase.to_sym]
+    TRANSLATE.fetch(header_name.downcase.to_sym, "Your CSV header (#{header_name}) is not in the TRANSLATE dictionary.")
   end
 end

@@ -32,7 +32,7 @@ When(/^I enter invalid email$/) do
 end
 
 Then(/^I see error message for invalid email$/) do
-expect(page). to have_content('Email is invalid')
+	expect(page). to have_content('Email is invalid')
 end
 
 When(/^I do not enter password$/) do

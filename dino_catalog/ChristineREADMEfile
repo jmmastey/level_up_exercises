@@ -1,0 +1,52 @@
+There are four classes in this repository.  One class, Dinos, (in the
+dino.rb file) takes in a dictionary of data for *one* dinosaur
+and stores it in a Dinos object.  
+Methods in this class for external use are:
+
+initialize(dictionary of dino data for one dino)
+summarize_dino()
+carnivore?
+small_dino?
+big_dino?
+dino_in_era?
+biped?
+
+
+
+The second class is called Dino_filters.  This class has only one
+instance variable which is a list of Dinos objects.  This class
+contains methods for filtering the list of Dinos objects by some
+search criteria.  It always returns a Dino_filters object so that
+the output of one of the search methods can be used as the input
+for a next search  method (to allow method chaining).  
+Methods in this class are:
+
+initialize(list of dino objects)
+find_bipeds()
+find_carnivores()
+find_dinos_specific_era(string_with_period_name)
+find_big_dinos(cutoff_weight_in_lbs_as_integer)
+find_small_dinos(cutoff_weight_in_lbs_as_integer)
+summarize_list()
+
+The third class id the DataReader class.  To initialize a DataReader
+object, you need to pass a list (array) of csv filenames (as strings) to
+instantiate the object.  After the object is instantiated, you can
+fetch the dino_filters instance variable.  This is the variable that
+contains a list of all dinos and will be used for the filtering.
+
+The fourth class is the UserInput class.  The UserInput object is
+instantiated without input arguments.  The function query_user
+can be called on this object to ask the user which attributes to
+filter on.  To actually perform the query, call perform_user_query
+on the UserInput object.
+
+
+If you want to summarize the info an a specific dino, you can call
+summarize_dino on a Dinos object (dino_objects).  
+Ex.  dino_objects[2].print_dino   (to print the info on dino #3)
+
+If you want to summarize info on a list of dinos,  you can call summarize_list
+on the Dino_filters object.  It returns a list of strings that can be printed.
+Ex.puts  dino_filter_objects.summarize_list
+

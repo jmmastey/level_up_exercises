@@ -17,26 +17,9 @@ class Dino
     @continent ||= 'Africa'
 
     @diet = 'Carnivore' if @diet == 'Yes'
-    @diet = 'Not carnivore' if @diet == 'No'
+    @diet = 'Herbivore' if @diet == 'No'
 
-    @weight = @weight.to_i unless @weight.nil?
-  end
-
-  def summarize_dino
-    dino_values = instance_variables.map do |var|
-      dino_info = instance_variable_get("#{var}")
-      if dino_info
-        attribute = var.to_s.slice(1..-1)
-        "#{attribute} : #{format_string(attribute, dino_info)} \n"
-      end
-    end
-    dino_values.select! { |dino_string| dino_string }
-    dino_values
-  end
-
-  def format_string(attribute, value)
-    return "#{value}  lbs" if attribute == "weight"
-    value
+    @weight = @weight.to_i if @weight
   end
 
   def carnivore?
@@ -53,10 +36,29 @@ class Dino
 
   def dino_in_era?(era_of_interest)
     # ignore case of the text in era with /i in regular expression
-    !@era[/#{era_of_interest}/i].nil?
+    #!@era[/#{era_of_interest}/i].nil?
+    @era.downcase.include?(era_of_interest.downcase)
   end
 
   def biped?
     @walking_style[/Biped/] == "Biped"
+  end
+
+  def summarize_dino
+    dino_values = instance_variables.map do |dino_attribute|
+      dino_info = instance_variable_get("#{dino_attribute}")
+      if dino_info
+        attribute = dino_attribute.to_s.slice(1..dino_attribute.length)
+        "#{attribute} : #{formatted_string(attribute, dino_info)} \n"
+      end
+    end
+    dino_values.select { |dino_string| dino_string }
+  end
+
+  private 
+
+  def formatted_string(attribute, value)
+    return "#{value}  lbs" if attribute == "weight"
+    value
   end
 end

@@ -21,7 +21,7 @@ class UserInput
     self.carnivores = gets.chomp
 
     puts "filter for a specific era (enter name of era or leave blank)?"
-    puts "Press 1 to print options. Type option you want."
+    puts "Press 1 to print options. Type the option you want."
     self.era = gets.chomp
 
     puts "filter for big dinos (enter the min weight cutoff or leave blank)?"
@@ -31,34 +31,34 @@ class UserInput
     self.small_dinos = gets.chomp
   end
 
-  def bipeds=(value)
-    @bipeds = true if value =~ /^Y/i # otherise nil
+  def bipeds=(input)
+    @bipeds = true if input =~ /^Y/i # otherise nil
   end
 
-  def carnivores=(value)
-    @carnivores = true if value =~ /^Y/i
+  def carnivores=(input)
+    @carnivores = true if input =~ /^Y/i
   end
 
-  def era=(value)
-    if value =~ /^[1]/
-      ERAS_IN_DATA.each { |option| puts option }
-      value = gets.chomp
+  def era=(input)
+    if input =~ /^[1]/
+      ERAS_IN_DATA.each { |era_option| puts era_option }
+      input = gets.chomp
     end
-    @era = value if value =~ /^[A-Z]+/i
+    @era = input if input =~ /^[A-Z]+/i
   end
 
-  def big_dinos=(value)
-    @big_dinos = value.to_i if value.to_i != 0
+  def big_dinos=(input)
+    @big_dinos = input.to_i if input.to_i != 0
   end
 
-  def small_dinos=(value)
-    @small_dinos = value.to_i if value.to_i != 0
+  def small_dinos=(input)
+    @small_dinos = input.to_i if input.to_i != 0
   end
 
   def perform_user_query(dino_filters)
-    FILTERS.each do |var|
-      var_info = instance_variable_get("@#{var}")
-      dino_filters = select_filter(var, var_info, dino_filters) if var_info
+    FILTERS.each do |filter|
+      filter_val = instance_variable_get("@#{filter}")
+      dino_filters = select_filter(filter, filter_val, dino_filters) if filter_val
     end
     dino_filters.summarize_list
   end
@@ -69,6 +69,13 @@ class UserInput
     return dino_filters.find_big_dinos(var_info) if var == "big_dinos"
     return dino_filters.find_small_dinos(var_info) if var == "small_dinos"
     return dino_filters.find_dinos_specific_era(var_info) if var == "era"
-    raise "There was a problem."
+    raise "Error: the instance variable you want to filter on doesn't exist."
+#   filter_options = {}
+#   filter_options["bipeds"] = :find_bipeds
+#   filter_options["carnivores"] = :find_carnivores
+#   filter_options["big_dinos"] = :find_big_dinos
+#   filter_options["small_dinos"] = :find_small_dinos
+#   filter_options["era"] = :find_dinos_specific_era
+#   dino_filters.send(filter_options[var], var_info)
   end
 end

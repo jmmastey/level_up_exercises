@@ -55,7 +55,7 @@ class Dino
     dino_values.select { |dino_string| dino_string }
   end
 
-  private 
+  private
 
   def formatted_string(attribute, value)
     return "#{value}  lbs" if attribute == "weight"

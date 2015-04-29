@@ -28,8 +28,8 @@ class DataReader
   def read_data(file_list)
     dino_data = []
     file_list.each do |file|
-      new_data = CSV.read(file, headers: true, header_converters: lambda { |h| translate_header(h) } )
-      dino_data << new_data.map { |row| row.to_hash}
+      new_data = CSV.read(file, headers: true, header_converters: lambda { |h| translate_header(h) })
+      dino_data << new_data.map { |row| row.to_hash }
     end
     dino_data.flatten!
   end

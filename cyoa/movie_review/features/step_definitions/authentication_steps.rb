@@ -31,9 +31,11 @@ When(/^I click 'Log in' button$/) do
 end
 
 Given(/^I am logged in$/) do
+  FactoryGirl.create(:user)
+  @user = User.first
   visit('https://be-a-critique.herokuapp.com/users/sign_in')
-  fill_in('user_email', with: 'khadilkar.c@gmail.com')
-  fill_in('user_password', with: 'khadilkarc123')
+  fill_in('user_email', with: "#{@user.email}")
+  fill_in('user_password', with: "fake_password")
   click_button('Log in')
 end
 

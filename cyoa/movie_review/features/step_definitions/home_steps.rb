@@ -16,6 +16,10 @@ Then(/^I see welcome message$/) do
 	expect(page).to have_content('Welcome to Critique')
 end
 
+Then(/^I see movie posters$/) do
+	expect(page).to have_css(".thumbnails")
+end
+
 Then(/^I see a link to sign up$/) do
 	expect(page).to have_link('Sign Up to Write A Review')
 end
@@ -30,4 +34,3 @@ end
 Given(/^I am on home page$/) do
   visit('https://be-a-critique.herokuapp.com/')
 end
-	

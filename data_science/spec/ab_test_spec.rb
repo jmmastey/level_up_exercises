@@ -11,24 +11,24 @@ COHORT2_NUM_CONVERSIONS = 8
 LEADING_COHORT_NAME = :B
 CONFIDENCE_IN_LEADER = 0.3640661012729629
 
-describe ABtest do
-let(:cohort_a) { Cohort.new(COHORT1_NAME, COHORT1_SAMPLE_SIZE, COHORT1_NUM_CONVERSIONS) }
-let(:cohort_b) { Cohort.new(COHORT2_NAME, COHORT2_SAMPLE_SIZE, COHORT2_NUM_CONVERSIONS) }
-let(:ab_test) { ABtest.new(cohort_a, cohort_b) }
+describe ABTest do
+  let(:cohort_a) { Cohort.new(COHORT1_NAME, COHORT1_SAMPLE_SIZE, COHORT1_NUM_CONVERSIONS) }
+  let(:cohort_b) { Cohort.new(COHORT2_NAME, COHORT2_SAMPLE_SIZE, COHORT2_NUM_CONVERSIONS) }
+  let(:ab_test) { ABTest.new(cohort_a, cohort_b) }
 
-  describe("#new") do
-    it "has 2 instance variables, cohort_A, cohort_B of type Cohort" do
+  describe("#ABTest object") do
+    it "contains 2 cohorts objects" do
       expect(ab_test.cohort_a).to(be_an_instance_of(Cohort))
       expect(ab_test.cohort_b).to(be_an_instance_of(Cohort))
     end
-  end
 
-  it "finds the leader in conversion rates" do
-    expect(ab_test.leader).to(eql(LEADING_COHORT_NAME))
-  end
+    it "has a method to find which of the 2 cohorts has highest conversion rate" do
+      expect(ab_test.leader).to(eql(LEADING_COHORT_NAME))
+    end
 
-  it "determines confidence that leader is actually the leader" do
-    leader_confidence = ab_test.compute_leader_confidence_level
-    expect(leader_confidence).to(be_within(0.0001).of(CONFIDENCE_IN_LEADER))
+    it "has a method to determine how confident you can be that the leader is a statistically significant leader" do
+      leader_confidence = ab_test.compute_leader_confidence_level
+      expect(leader_confidence).to(be_within(0.0001).of(CONFIDENCE_IN_LEADER))
+    end
   end
 end

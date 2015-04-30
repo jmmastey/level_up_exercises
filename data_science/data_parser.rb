@@ -2,8 +2,8 @@ require_relative './cohort.rb'
 require 'json'
 
 class DataParser
-  attr_reader :unique_cohorts
-  attr_reader :unique_cohorts_conversions
+  attr_reader :cohorts_sample_size
+  attr_reader :cohorts_num_conversions
 
   def initialize(input_file)
     input_data = read_data(input_file)
@@ -17,14 +17,12 @@ class DataParser
   end
 
   def find_cohorts_and_conversions(input_data)
-    unique_cohorts = Hash.new(0)
-    unique_cohorts_conversions = Hash.new(0)
+    @cohorts_sample_size = Hash.new(0)
+    @cohorts_num_conversions = Hash.new(0)
     input_data.each do |data_point|
       cohort_name = data_point["cohort"].to_sym
-      unique_cohorts[cohort_name] += 1
-      unique_cohorts_conversions[cohort_name] += data_point["result"].to_i
+      @cohorts_sample_size[cohort_name] += 1
+      @cohorts_num_conversions[cohort_name] += data_point["result"].to_i
     end
-    @unique_cohorts = unique_cohorts
-    @unique_cohorts_conversions =  unique_cohorts_conversions
   end
 end

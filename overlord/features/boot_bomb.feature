@@ -8,7 +8,8 @@ Feature: boot the bomb
     Given I am on the bomb home page
     When I boot the bomb
     Then I am prompted to provide activation and deactivation codes
-
+  
+  @wip
   Scenario: enter valid activation and deactivation codes
     Given I am on the bomb home page
     And I boot the bomb
@@ -16,7 +17,8 @@ Feature: boot the bomb
     Then I see the bomb has successfully booted
     And I see a prompt to enter activation code
 
-   Scenario: enter valid activation and deactivation codes                  
+  @wip
+   Scenario: enter invalid activation and deactivation codes                  
      Given I am on the bomb home page                          
      And I boot the bomb
      When I submit invalid codes

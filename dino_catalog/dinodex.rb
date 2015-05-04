@@ -87,3 +87,4 @@ dinodex.search('WALKING' => 'Biped')
 
 # Print out details of a specific dinosaur
 # dinodex.search('NAME' => 'Albertonykus')
+# 

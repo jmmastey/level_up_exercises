@@ -33,7 +33,7 @@ class DinoDex
 
     results = []
 
-    search_filters.each { |key, value| 
+    search_filters.each do |key, value|
 
       case value
 
@@ -41,11 +41,11 @@ class DinoDex
 
           # Match against multiple string values
 
-          results.push(@@dino_database.select { |dino| 
+          results.push(@@dino_database.select) do |dino| 
 
             value.downcase.include?(dino[key].downcase)
 
-          })
+          end
 
         else
 
@@ -55,26 +55,26 @@ class DinoDex
 
             # We treat min_weight differently than a regular string match
 
-            results.push(@@dino_database.select { |dino| 
+            results.push(@@dino_database.select do |dino| 
 
               if dino['WEIGHT_IN_LBS']
                 dino['WEIGHT_IN_LBS'].to_i >= value
               end
-            })
+            end
 
           else
 
           # Match against string value
 
-          results.push(@@dino_database.select { |dino| 
+          results.push(@@dino_database.select do |dino| 
 
             if dino[key]
               dino[key].downcase.include? value.downcase
             end
-          })
+          end
         end
       end
-    }
+    end
 
     # print JSON
     puts results.to_json

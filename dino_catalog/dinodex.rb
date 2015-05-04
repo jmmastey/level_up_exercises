@@ -13,7 +13,7 @@ class DinoDex
   # Read Pirate Bay CSV file and merge the results
 
   CSV.foreach('african_dinosaur_export.csv', headers: true) do |row|
-    diet = row[:Carnivore].downcase == 'yes' ? 'Carnivore' : nil
+    diet = row['Carnivore'].downcase == 'yes' ? 'Carnivore' : nil
 
     @@dino_database << {
       :NAME => row['Genus'],

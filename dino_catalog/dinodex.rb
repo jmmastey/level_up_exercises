@@ -34,7 +34,6 @@ class DinoDex
     results = []
 
     search_filters.each do |key, value|
-
       case value
 
         when Array
@@ -42,36 +41,33 @@ class DinoDex
           # Match against multiple string values
 
           results.push(@@dino_database.select) do |dino| 
-
             value.downcase.include?(dino[key].downcase)
-
           end
 
         else
 
-        case key
+          case key
 
-          when 'min_weight'
+            when 'min_weight'
 
-            # We treat min_weight differently than a regular string match
+              # We treat min_weight differently than a regular string match
 
-            results.push(@@dino_database.select do |dino| 
-
-              if dino['WEIGHT_IN_LBS']
-                dino['WEIGHT_IN_LBS'].to_i >= value
+              results.push(@@dino_database.select do |dino| 
+                if dino['WEIGHT_IN_LBS']
+                  dino['WEIGHT_IN_LBS'].to_i >= value
+                end
               end
-            end
 
-          else
+            else
 
-          # Match against string value
+              # Match against string value
 
-          results.push(@@dino_database.select do |dino| 
+              results.push(@@dino_database.select do |dino| 
+                if dino[key]
+                  dino[key].downcase.include? value.downcase
+                end
+              end
 
-            if dino[key]
-              dino[key].downcase.include? value.downcase
-            end
-          end
         end
       end
     end
@@ -85,16 +81,16 @@ end
 dinodex = DinoDex.new
 
 # Grab all dinosaurs that were bipeds
-dinodex.search({ 'WALKING' => 'Biped' })
+dinodex.search('WALKING' => 'Biped', 'NAME' => 'Albertonykus')
 
 # Grab all the dinosaurs that were carnivores (fish and insects count).
-#dinodex.search({ 'DIET' => ['Carnivore', 'Insectivore', 'Piscivore'] })
+#dinodex.search('DIET' => ['Carnivore', 'Insectivore', 'Piscivore'])
 
 # Grab dinosaurs for specific periods (no need to differentiate between Early and Late Cretaceous, btw).
-#dinodex.search({ 'PERIOD' => 'Cretaceous' })
+#dinodex.search('PERIOD' => 'Cretaceous')
 
 # Grab only big (> 2 tons) or small dinosaurs.
-#dinodex.search({ 'min_weight' => 2000 })
+#dinodex.search('min_weight' => 2000)
 
 # Print out details of a specific dinosaur
-#dinodex.search({ 'NAME' => 'Albertonykus' })
+#dinodex.search('NAME' => 'Albertonykus')

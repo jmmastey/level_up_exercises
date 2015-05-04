@@ -1,5 +1,5 @@
-require './dino_csv_import1.rb'
-require './dinodex_class1.rb'
+require './dino_csv_import.rb'
+require './dinodex_class.rb'
 
 
 dino_input_files = ['./dinodex.csv', './african_dinosaur_export.csv']

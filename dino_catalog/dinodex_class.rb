@@ -1,4 +1,4 @@
-require './dino_class1.rb'
+require './dino_class.rb'
 
 class DinoDex
     def initialize(dino_arry)

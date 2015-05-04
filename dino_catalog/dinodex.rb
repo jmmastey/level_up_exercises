@@ -8,13 +8,14 @@ class DinoDex
   # Read main CSV file into an array of hashes
 
   CSV.foreach('dinodex.csv', headers:true) do |row|
+
     @@dino_database << row.to_hash
+
   end
 
   # Read Pirate Bay CSV file and merge the results
 
   CSV.foreach('african_dinosaur_export.csv', headers:true) do |row|
-
     diet = row['Carnivore'].downcase == 'yes' ? 'Carnivore' : nil
 
     @@dino_database << {

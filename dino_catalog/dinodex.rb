@@ -74,16 +74,16 @@ end
 dinodex = DinoDex.new
 
 # Grab all dinosaurs that were bipeds
-dinodex.search({ 'WALKING' => 'Biped' })
+dinodex.search('WALKING' => 'Biped')
 
 # Grab all the dinosaurs that were carnivores (fish and insects count).
-# dinodex.search({ 'DIET' => ['Carnivore', 'Insectivore', 'Piscivore'] })
+# dinodex.search('DIET' => ['Carnivore', 'Insectivore', 'Piscivore'])
 
 # Grab dinosaurs for specific periods
-# dinodex.search({ 'PERIOD' => 'Cretaceous' })
+# dinodex.search('PERIOD' => 'Cretaceous')
 
 # Grab only big (> 2 tons) or small dinosaurs.
-# dinodex.search({ 'min_weight' => 2000 })
+# dinodex.search('min_weight' => 2000)
 
 # Print out details of a specific dinosaur
-# dinodex.search({ 'NAME' => 'Albertonykus' })
+# dinodex.search('NAME' => 'Albertonykus')

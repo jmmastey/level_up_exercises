@@ -1,5 +1,4 @@
 class DinoDex
-
   require 'csv'
   require 'json'
 
@@ -17,20 +16,19 @@ class DinoDex
     diet = row['Carnivore'].downcase == 'yes' ? 'Carnivore' : nil
 
     @@dino_database << {
-      'NAME' 				=> row['Genus'],
-      'PERIOD' 			=> row['Period'],
-      'CONTINENT' 		=> nil,
-      'DIET' 				=> diet,
-      'WEIGHT_IN_LBS' 	=> row['Weight'],
-      'WALKING' 			=> row['Walking'],
-      'DESCRIPTION' 		=> nil
+      'NAME' => row['Genus'],
+      'PERIOD' => row['Period'],
+      'CONTINENT' => nil,
+      'DIET' => diet,
+      'WEIGHT_IN_LBS' => row['Weight'],
+      'WALKING' => row['Walking'],
+      'DESCRIPTION' => nil
     }
   end
 
   # Search for dinosaurs based on various criteria
 
   def search(search_filters)
-
     results = []
 
     search_filters.each do |key, value|
@@ -63,30 +61,29 @@ class DinoDex
               dino[key].downcase.include? value.downcase
             end
           end)
-          
+
         end
       end
     end
 
     # print JSON
     puts results.to_json
-
   end
 end
 
 dinodex = DinoDex.new
 
 # Grab all dinosaurs that were bipeds
-dinodex.search({'WALKING' => 'Biped'})
+dinodex.search({ 'WALKING' => 'Biped' })
 
 # Grab all the dinosaurs that were carnivores (fish and insects count).
-#dinodex.search('DIET' => ['Carnivore', 'Insectivore', 'Piscivore'])
+#dinodex.search({ 'DIET' => ['Carnivore', 'Insectivore', 'Piscivore'] })
 
-# Grab dinosaurs for specific periods (no need to differentiate between Early and Late Cretaceous, btw).
-#dinodex.search('PERIOD' => 'Cretaceous')
+# Grab dinosaurs for specific periods
+#dinodex.search({ 'PERIOD' => 'Cretaceous' })
 
 # Grab only big (> 2 tons) or small dinosaurs.
-#dinodex.search('min_weight' => 2000)
+#dinodex.search({ 'min_weight' => 2000 })
 
 # Print out details of a specific dinosaur
-#dinodex.search('NAME' => 'Albertonykus')
+#dinodex.search({ 'NAME' => 'Albertonykus' })

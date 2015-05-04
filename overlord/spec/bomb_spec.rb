@@ -8,29 +8,29 @@ TIME_REMAINING = 30
 
 describe Bomb do
   let(:newbomb_valid) {Bomb.new(VALID_ACT_CODE, VALID_DEACT_CODE) }
-  let(:newbomb_invalid) {Bomb.new(INVALID_ACT_CODE, INVALID_DEACT_CODE) }
+#  let(:newbomb_invalid) {Bomb.new(INVALID_ACT_CODE, INVALID_DEACT_CODE) }
   
   describe("bomb object contains all data needed to operate the bomb") do
     it "has #{TIME_REMAINING} seconds after the bomb is created but before activation." do
-      expect(:newbomb_valid).to eql(TIME_REMAINING)
+      expect(newbomb_valid.time_remaining).to eql(TIME_REMAINING)
     end
 
     it "is in an inactive state before start_bomb is called" do 
-      expect(:newbomb_valid.active).to eql(false)
+      expect(newbomb_valid.active).to eql(false)
     end
 
     it "is not exploded before bomb_bstart is called" do
-      expect(:newbomb_valid.exploded).to eql(false)
+      expect(newbomb_valid.exploded).to eql(false)
     end
  
     it "can become active by calling the start_bomb function" do 
       newbomb_valid.start_bomb(VALID_ACT_CODE)
-      expect(:newbomb_valid.active).to eql(true)
+      expect(newbomb_valid.active).to eql(true)
     end
 
     it "can be deactivated using the deactivation code" do 
       newbomb_valid.attempt_deactivation(VALID_DEACT_CODE)
-      expect(:newbomb_valid.active).to eql(false)
+      expect(newbomb_valid.active).to eql(false)
     end
 
     it "can be restarted after successful deactivation" do 
@@ -39,9 +39,9 @@ describe Bomb do
     end
 
     it "explodes after #{TIME_REMAINING} seconds" do
-      sleep(TIME_REMAINING)
-      expect(:newbomb_valid.active).to eql(false)
-      expect(:newbomb_valid.exploded).to eql(true)
+      newbomb_valid.restart_bomb(VALID_ACT_CODE)
+      sleep(TIME_REMAINING+2)
+      expect(newbomb_valid.exploded).to eql(true)
     end
   end
 end

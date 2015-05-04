@@ -9,7 +9,6 @@ class Bomb
   attr_reader :time_remaining
   attr_reader :exploded
   attr_reader :active 
-  attr_reader :exploded
 
   def initialize(activation_code, deactivation_code)
     @activation_code = set_code(activation_code, 1234)
@@ -54,6 +53,7 @@ class Bomb
   end
 
   def restart_bomb(activation_code)
+    return "Can't restart because bomb never activated." if not @scheduler.paused?
     @active = true
     @scheduler.resume
   end

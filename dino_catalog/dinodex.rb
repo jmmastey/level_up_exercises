@@ -34,40 +34,36 @@ class DinoDex
     results = []
 
     search_filters.each do |key, value|
-      case value
+      if value.class == Array
 
-        when Array
+        # Match against multiple string values
 
-          # Match against multiple string values
+        results.push(@@dino_database.select) do |dino| 
+          value.downcase.include?(dino[key].downcase)
+        end
 
-          results.push(@@dino_database.select) do |dino| 
-            value.downcase.include?(dino[key].downcase)
-          end
+      else
+
+        if key == 'min_weight'
+
+          # We treat min_weight differently than a regular string match
+
+          results.push(@@dino_database.select do |dino| 
+            if dino['WEIGHT_IN_LBS']
+              dino['WEIGHT_IN_LBS'].to_i >= value
+            end
+          end)
 
         else
 
-          case key
+          # Match against string value
 
-            when 'min_weight'
-
-              # We treat min_weight differently than a regular string match
-
-              results.push(@@dino_database.select do |dino| 
-                if dino['WEIGHT_IN_LBS']
-                  dino['WEIGHT_IN_LBS'].to_i >= value
-                end
-              end
-
-            else
-
-              # Match against string value
-
-              results.push(@@dino_database.select do |dino| 
-                if dino[key]
-                  dino[key].downcase.include? value.downcase
-                end
-              end
-
+          results.push(@@dino_database.select do |dino| 
+            if dino[key]
+              dino[key].downcase.include? value.downcase
+            end
+          end)
+          
         end
       end
     end
@@ -81,7 +77,7 @@ end
 dinodex = DinoDex.new
 
 # Grab all dinosaurs that were bipeds
-dinodex.search('WALKING' => 'Biped', 'NAME' => 'Albertonykus')
+dinodex.search({'WALKING' => 'Biped'})
 
 # Grab all the dinosaurs that were carnivores (fish and insects count).
 #dinodex.search('DIET' => ['Carnivore', 'Insectivore', 'Piscivore'])

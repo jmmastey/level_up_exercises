@@ -1,4 +1,5 @@
 class DinoDex
+
   require 'csv'
   require 'json'
 
@@ -7,9 +8,7 @@ class DinoDex
   # Read main CSV file into an array of hashes
 
   CSV.foreach('dinodex.csv', headers:true) do |row|
-
     @@dino_database << row.to_hash
-
   end
 
   # Read Pirate Bay CSV file and merge the results

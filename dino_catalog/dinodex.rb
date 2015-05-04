@@ -1,87 +1,87 @@
 class DinoDex
+  require 'csv'
+  require 'json'
 
-	require 'csv'
-	require 'json'
+  @@dino_database = []
 
-	@@dino_database = []
+  # Read main CSV file into an array of hashes
 
-	# Read main CSV file into an array of hashes
-	
-	CSV.foreach('dinodex.csv', headers:true) do |row|
+  CSV.foreach('dinodex.csv', headers:true) do |row|
 
-		@@dino_database << row.to_hash
+    @@dino_database << row.to_hash
 
-	end
+  end
 
-	# Read Pirate Bay CSV file and merge the results
-	
-	CSV.foreach('african_dinosaur_export.csv', headers:true) do |row|
+  # Read Pirate Bay CSV file and merge the results
 
-		diet = row['Carnivore'].downcase == 'yes' ? 'Carnivore' : nil
+  CSV.foreach('african_dinosaur_export.csv', headers:true) do |row|
 
-		@@dino_database << {
-			'NAME' 				=> row['Genus'],
-			'PERIOD' 			=> row['Period'],
-			'CONTINENT' 		=> nil,
-			'DIET' 				=> diet,
-			'WEIGHT_IN_LBS' 	=> row['Weight'],
-			'WALKING' 			=> row['Walking'],
-			'DESCRIPTION' 		=> nil
-		}
-	end
+    diet = row['Carnivore'].downcase == 'yes' ? 'Carnivore' : nil
 
-	# Search for dinosaurs based on various criteria
-	
-	def search(search_filters)
+    @@dino_database << {
+      'NAME' 				=> row['Genus'],
+      'PERIOD' 			=> row['Period'],
+      'CONTINENT' 		=> nil,
+      'DIET' 				=> diet,
+      'WEIGHT_IN_LBS' 	=> row['Weight'],
+      'WALKING' 			=> row['Walking'],
+      'DESCRIPTION' 		=> nil
+    }
+  end
 
-		results = []
+  # Search for dinosaurs based on various criteria
 
-		search_filters.each { |key,value| 
+  def search(search_filters)
 
-			case value
+    results = []
 
-				when Array
+    search_filters.each { |key,value| 
 
-					# Match against multiple string values
-					
-					results.push(@@dino_database.select { |dino| 
+      case value
 
-						value.downcase.include?(dino[key].downcase)
+        when Array
 
-					})
+          # Match against multiple string values
 
-				else
-					
-					case key
+          results.push(@@dino_database.select { |dino| 
 
-						when 'min_weight'
+            value.downcase.include?(dino[key].downcase)
 
-							# We treat min_weight differently than a regular string match
-							
-							results.push(@@dino_database.select { |dino| 
+          })
 
-								if dino['WEIGHT_IN_LBS']
-									dino['WEIGHT_IN_LBS'].to_i >= value
-								end
-							})
-							
-						else
+        else
 
-							# Match against string value
-							
-							results.push(@@dino_database.select { |dino| 
+        case key
 
-								if dino[key]
-									dino[key].downcase.include? value.downcase
-								end
-							})
-					end
-			end
-		}
+          when 'min_weight'
 
-		# return as JSON
-		puts results.to_json
-	end
+            # We treat min_weight differently than a regular string match
+
+            results.push(@@dino_database.select { |dino| 
+
+              if dino['WEIGHT_IN_LBS']
+                dino['WEIGHT_IN_LBS'].to_i >= value
+              end
+            })
+
+          else
+
+          # Match against string value
+
+          results.push(@@dino_database.select { |dino| 
+
+            if dino[key]
+              dino[key].downcase.include? value.downcase
+            end
+          })
+        end
+      end
+    }
+
+    # print JSON
+    puts results.to_json
+
+  end
 end
 
 dinodex = DinoDex.new

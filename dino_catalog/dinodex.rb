@@ -13,16 +13,16 @@ class DinoDex
   # Read Pirate Bay CSV file and merge the results
 
   CSV.foreach('african_dinosaur_export.csv', headers: true) do |row|
-    diet = row['Carnivore'].downcase == 'yes' ? 'Carnivore' : nil
+    diet = row[:Carnivore].downcase == 'yes' ? 'Carnivore' : nil
 
     @@dino_database << {
-      'NAME' => row['Genus'],
-      'PERIOD' => row['Period'],
-      'CONTINENT' => nil,
-      'DIET' => diet,
-      'WEIGHT_IN_LBS' => row['Weight'],
-      'WALKING' => row['Walking'],
-      'DESCRIPTION' => nil
+      :NAME => row['Genus'],
+      :PERIOD => row['Period'],
+      :CONTINENT => nil,
+      :DIET => diet,
+      :WEIGHT_IN_LBS => row['Weight'],
+      :WALKING => row['Walking'],
+      :DESCRIPTION => nil
     }
   end
 
@@ -47,8 +47,8 @@ class DinoDex
           # We treat min_weight differently than a regular string match
 
           results.push(@@dino_database.select do |dino|
-            if dino['WEIGHT_IN_LBS']
-              dino['WEIGHT_IN_LBS'].to_i >= value
+            if dino[:WEIGHT_IN_LBS]
+              dino[:WEIGHT_IN_LBS].to_i >= value
             end
           end)
 
@@ -74,7 +74,7 @@ end
 dinodex = DinoDex.new
 
 # Grab all dinosaurs that were bipeds
-dinodex.search('WALKING' => 'Biped')
+dinodex.search(:WALKING => 'Biped')
 
 # Grab all the dinosaurs that were carnivores (fish and insects count).
 # dinodex.search('DIET' => ['Carnivore', 'Insectivore', 'Piscivore'])

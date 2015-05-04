@@ -6,13 +6,13 @@ class DinoDex
 
   # Read main CSV file into an array of hashes
 
-  CSV.foreach('dinodex.csv', headers:true) do |row|
+  CSV.foreach('dinodex.csv', headers: true) do |row|
     @@dino_database << row.to_hash
   end
 
   # Read Pirate Bay CSV file and merge the results
 
-  CSV.foreach('african_dinosaur_export.csv', headers:true) do |row|
+  CSV.foreach('african_dinosaur_export.csv', headers: true) do |row|
     diet = row['Carnivore'].downcase == 'yes' ? 'Carnivore' : nil
 
     @@dino_database << {
@@ -46,7 +46,7 @@ class DinoDex
 
           # We treat min_weight differently than a regular string match
 
-          results.push(@@dino_database.select do |dino| 
+          results.push(@@dino_database.select do |dino|
             if dino['WEIGHT_IN_LBS']
               dino['WEIGHT_IN_LBS'].to_i >= value
             end
@@ -56,7 +56,7 @@ class DinoDex
 
           # Match against string value
 
-          results.push(@@dino_database.select do |dino| 
+          results.push(@@dino_database.select do |dino|
             if dino[key]
               dino[key].downcase.include? value.downcase
             end
@@ -77,13 +77,13 @@ dinodex = DinoDex.new
 dinodex.search({ 'WALKING' => 'Biped' })
 
 # Grab all the dinosaurs that were carnivores (fish and insects count).
-#dinodex.search({ 'DIET' => ['Carnivore', 'Insectivore', 'Piscivore'] })
+# dinodex.search({ 'DIET' => ['Carnivore', 'Insectivore', 'Piscivore'] })
 
 # Grab dinosaurs for specific periods
-#dinodex.search({ 'PERIOD' => 'Cretaceous' })
+# dinodex.search({ 'PERIOD' => 'Cretaceous' })
 
 # Grab only big (> 2 tons) or small dinosaurs.
-#dinodex.search({ 'min_weight' => 2000 })
+# dinodex.search({ 'min_weight' => 2000 })
 
 # Print out details of a specific dinosaur
-#dinodex.search({ 'NAME' => 'Albertonykus' })
+# dinodex.search({ 'NAME' => 'Albertonykus' })

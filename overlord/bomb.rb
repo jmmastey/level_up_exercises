@@ -54,6 +54,7 @@ class Bomb
 
   def restart_bomb(activation_code)
     return "Can't restart because bomb never activated." if not @scheduler.paused?
+    return "Can't restart bomb with wrong activation code." if @activation_code != activation_code
     @active = true
     @scheduler.resume
   end

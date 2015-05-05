@@ -2,12 +2,10 @@ require 'abanalyzer'
 class ABTest
   attr_reader :cohort_a
   attr_reader :cohort_b
-  attr_reader :leader
 
   def initialize(cohort_a, cohort_b)
     @cohort_a = cohort_a
     @cohort_b = cohort_b
-    @leader = leader
   end
 
   def compute_leader_confidence_level

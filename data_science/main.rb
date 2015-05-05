@@ -1,6 +1,6 @@
 require 'json'
 require_relative './cohort.rb'
-require_relative './ab_test.rb'
+require_relative './ab_compare.rb'
 require_relative './data_parser.rb'
 
 def print_cohort_info(cohort)

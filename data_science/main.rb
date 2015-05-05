@@ -34,5 +34,5 @@ all_cohorts.each do |cohort|
   print_cohort_info(cohort)
 end
 
-compare = ABTest.new(all_cohorts[0], all_cohorts[1])
+compare = ABCompare.new(all_cohorts[0], all_cohorts[1])
 print_cohort_comparison(compare)

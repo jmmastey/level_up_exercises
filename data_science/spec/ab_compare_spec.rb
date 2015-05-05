@@ -11,12 +11,12 @@ COHORT2_NUM_CONVERSIONS = 8
 LEADING_COHORT_NAME = :B
 CONFIDENCE_IN_LEADER = 0.3640661012729629
 
-describe ABTest do
+describe ABCompare do
   let(:cohort_a) { Cohort.new(COHORT1_NAME, COHORT1_SAMPLE_SIZE, COHORT1_NUM_CONVERSIONS) }
   let(:cohort_b) { Cohort.new(COHORT2_NAME, COHORT2_SAMPLE_SIZE, COHORT2_NUM_CONVERSIONS) }
-  let(:ab_test) { ABTest.new(cohort_a, cohort_b) }
+  let(:ab_test) { ABCompare.new(cohort_a, cohort_b) }
 
-  describe("#ABTest object") do
+  describe("#ABCompare object") do
     it "contains 2 cohorts objects" do
       expect(ab_test.cohort_a).to(be_an_instance_of(Cohort))
       expect(ab_test.cohort_b).to(be_an_instance_of(Cohort))

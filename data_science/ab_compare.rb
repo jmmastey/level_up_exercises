@@ -1,5 +1,5 @@
 require 'abanalyzer'
-class ABTest
+class ABCompare
   attr_reader :cohort_a
   attr_reader :cohort_b
 

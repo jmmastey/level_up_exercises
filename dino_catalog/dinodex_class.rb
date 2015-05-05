@@ -10,8 +10,7 @@ class DinoDex
         keys = ["name", "period", "continent", "diet", "weight", "walking"]
         keys.each { |k| prompt_user_for_filter(k)}
         p @filter_query
-        #p @filter_query[0]
-        #filter_dinos(@filter_query[0])
+        filter_dinos1(@filter_query)
     end
 
     def prompt_user_for_filter(filter_name)
@@ -24,18 +23,26 @@ class DinoDex
                 values << val
             end
             users_selection = values[gets.chomp.to_i - 1]
-            p filter_name.to_sym
+            #p filter_name.to_sym
             @filter_query[filter_name.to_sym] = users_selection
-            
-            p users_selection
+            #p users_selection
         end
     end
 
 
-   # def filter_dinos(filter)
-    #    p filter[0]
-    
-
+    def filter_dinos1(filter)
+        matching_dinos= Array.new
+        p filter[:name]
+        p filter[:period]
+        p filter[:diet]
+        
+        @dino_array.each do |i|
+            if i.name.include?(filter[:name]) && i.period.include?(filter[:period])  && i.diet.include?(filter[:diet])
+                matching_dinos << i.name
+                puts "#{i.name} is a match"
+            end
+        end
+    end
 
 
     def filter_dinos(filter_params)

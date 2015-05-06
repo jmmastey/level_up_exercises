@@ -27,10 +27,11 @@ class Bomb
   end 
 
   def start_bomb(activation_code)
-    if @activation_code == activation_code
-      @active = true
-      schedule_bomb_timer
-    end
+    return 'Bomb is already active' if @active 
+    return 'Invalid activation code' if @activation_code != activation_code
+    @active = true
+    schedule_bomb_timer
+    true
   end
 
   def schedule_bomb_timer
@@ -46,9 +47,11 @@ class Bomb
     if @deactivation_code == deactivation_code and @num_deactivation_attempts > 0
       @active = false
       @scheduler.pause
+      'Bomb is deactivated.'
     else
       @num_deactivation_attempts -= 1
       explode_bomb if @num_deactivation_attempts <= 0
+      "Wrong deactivation code. #{@num_deactivation_attempts} attempt(s) and #{@time_remaining} s remain."
     end
   end
 
@@ -57,6 +60,7 @@ class Bomb
     return "Can't restart bomb with wrong activation code." if @activation_code != activation_code
     @active = true
     @scheduler.resume
+    @num_deactivation_attemps = 3
   end
 
   def explode_bomb

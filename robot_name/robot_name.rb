@@ -5,21 +5,20 @@ class Robot
 
   @@registry
 
-  def initialize(args = {})
+  def initialize
     @@registry ||= []
-    @name_generator = args[:name_generator]
-
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
-
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    @name = generate_name
+    if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+      raise NameCollisionError, 'There was a problem generating the robot name!'
     end
-
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
     @@registry << @name
+  end
+
+  def generate_name
+    generated_name = ''
+    (0..1).each { generated_name += ('A'..'Z').to_a.sample }
+    (0..2).each { generated_name += rand(10).to_s }
+    generated_name
   end
 end
 

@@ -1,7 +1,15 @@
-Current bomb timer 
-Time remaining <%= @time_remaining %>
-
-<form action="/attemptdeactivation" method = "POST">
-  Deactivation Code: <input type="text" name = "deactivation_code"> <br>
-<input type="submit" value = "Submit" >
-</form>
+<% if @time_remaining %>
+   Current bomb timer 
+   Time remaining <%= @time_remaining %>
+  <form action="/attemptdeactivation" method = "POST">
+    Deactivation Code: <input type="text" name = "deactivation_code"> <br>
+  <input type="submit" value = "Submit" >
+  </form>
+<% else %>
+<h1> Error! </h1>
+ <h4> <%= @error_message %> </h4>
+ <form action="/startbomb" method = "POST" >
+    Activation Code: <input type="text" name = "activation_code"> <br>
+    <input type = "submit" value = "Submit" > 
+  </form>
+<% end %>

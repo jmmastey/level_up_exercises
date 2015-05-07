@@ -5,10 +5,10 @@ require './bomb.rb'
 
 enable :sessions
 
+@@bomb_booted = false
+
 get '/' do
   #"Time to build an app around here. Start time: " + start_time
-  @greeter = "Welcome Mr/Ms Overlord!"
-  @instruction = "Click the button when you are ready to boot the bomb."
   erb :index
 end
 
@@ -16,26 +16,27 @@ get '/bootbomb' do
   erb :activation_page
 end
 
-post '/attemptactivation' do
+post '/attemptboot' do
   activation_code = params[:activation_code]
   deactivation_code = params[:deactivation_code]
   begin
     @@user_bomb = Bomb.new(activation_code, deactivation_code)
-    erb :activation_status_successful
+    @@bomb_booted = true
+    erb :activation_status
   rescue
-    erb :activation_status_unsuccessful
+    erb :activation_status
   end
 end
 
 post '/startbomb' do
   activation_code = params[:activation_code]
   out = @@user_bomb.start_bomb(activation_code)
-  if out == true
+  if @@user_bomb.active 
     @time_remaining = @@user_bomb.time_remaining
     erb :bomb_status
   else
     @error_message = out
-    erb :error_page
+    erb :bomb_status
   end
 end
   
@@ -43,23 +44,14 @@ post '/attemptdeactivation' do
   deactivation_code = params[:deactivation_code]
   @out = @@user_bomb.attempt_deactivation(deactivation_code)
   if !@@user_bomb.exploded && !@@user_bomb.active
-    erb :reactivation_option
+    @reactivate = true
+    erb :deactivation_status
   elsif !@@user_bomb.exploded && @@user_bomb.active
+    @deactivation_failed = true
     erb :deactivation_status
   else
+    @bomb_exploded = true
     erb :bomb_exploded
-  end
-end
-
-post '/attemptreactivation' do
-  activation_code = params[:activation_code]
-  out = @@user_bomb.restart_bomb(activation_code)
-  @time_remaining = @@user_bomb.time_remaining
-  if out.class != String
-    erb :bomb_status
-  else
-    @error_message = out
-    erb :error_page
   end
 end
 

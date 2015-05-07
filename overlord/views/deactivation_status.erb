@@ -1,6 +1,16 @@
-<%= @out %>
+<% if @deactivation_failed %> 
+  <%= @out %>
+  <form action="/attemptdeactivation" method = "POST">
+    Deactivation Code: <input type="text" name = "deactivation_code"> <br>
+  <input type="submit" value = "Submit" >
+  </form>
+<% end %>
 
-<form action="/attemptdeactivation" method = "POST">
-  Deactivation Code: <input type="text" name = "deactivation_code"> <br>
-<input type="submit" value = "Submit" >
-</form>
+<% if @reactivate %>
+  <h1> <%= @out %> </h1>
+  <h3> Can I interest you in reactivating? </h3>
+  <form action="/startbomb" method="POST">
+    Activation Code: <input type="text" name="activation_code"><br>
+    <input type="submit" value ="Submit">
+  </form>
+<% end %>

@@ -23,6 +23,8 @@ class CsvImporter
       row[:continent] = "Africa" if row[:continent].nil?
       row[:diet] = "Herbivore" if row[:carnivore] == "No"
       row[:diet] = "Carnivore" if row[:diet] != "Herbivore" || row[:carnivore] == "yes"
+      row[:weight] = row[:weight_in_lbs] if row[:weight].nil?
+      row[:weight] = row[:weight].to_i
       @dinos[i] = Dino.new(row)
     end
     @dinos

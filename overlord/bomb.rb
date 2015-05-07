@@ -32,7 +32,7 @@ class Bomb
     @active = true
     if @scheduler.paused?
       @scheduler.resume
-      @num_deactivation_attemps = 3
+      @num_deactivation_attempts = 3
     else
       schedule_bomb_timer
     end
@@ -55,8 +55,13 @@ class Bomb
     else
       @num_deactivation_attempts -= 1
       explode_bomb if @num_deactivation_attempts <= 0
-      "Wrong deactivation code. #{@num_deactivation_attempts} attempt(s) and #{@time_remaining} s remain."
+      "Wrong deactivation code. #{@num_deactivation_attempts} attempt(s) remain."
     end
+  end
+
+  def get_remaining_time
+    return @time_remaining if @time_remaining > 0
+    return @exploded if @time_remaining == 0
   end
 
   def explode_bomb

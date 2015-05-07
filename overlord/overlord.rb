@@ -8,12 +8,11 @@ enable :sessions
 @@bomb_booted = false
 
 get '/' do
-  #"Time to build an app around here. Start time: " + start_time
   erb :index
 end
 
 get '/bootbomb' do
-  erb :activation_page
+  erb :boot_page
 end
 
 post '/attemptboot' do
@@ -22,9 +21,9 @@ post '/attemptboot' do
   begin
     @@user_bomb = Bomb.new(activation_code, deactivation_code)
     @@bomb_booted = true
-    erb :activation_status
+    erb :boot_status
   rescue
-    erb :activation_status
+    erb :boot_status
   end
 end
 
@@ -48,21 +47,13 @@ post '/attemptdeactivation' do
     erb :deactivation_status
   elsif !@@user_bomb.exploded && @@user_bomb.active
     @deactivation_failed = true
+    @time = @@user_bomb.time_remaining
     erb :deactivation_status
   else
     @bomb_exploded = true
     erb :bomb_exploded
   end
 end
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,17 +1,48 @@
+<html>
+
+
+<body>
+<div id="count_down">
 <% if @deactivation_failed %> 
-  <%= @out %>
-  <h2> There are <%= @time %> second left to deactivate. </h2>
+<%= @out %>
+<h2> Time remaining to deactivate </h2>
+<h2 id="time_remaining"> </h2>
+<button type="button" onclick="updateTime()"> Update Time </button> 
   <form action="/attemptdeactivation" method = "POST">
     Deactivation Code: <input type="text" name = "deactivation_code"> <br>
-  <input type="submit" value = "Submit" >
+    <input type="submit" value = "Submit" >
   </form>
+
 <% end %>
+</div>
 
 <% if @reactivate %>
-  <h1> <%= @out %> </h1>
-  <h3> Can I interest you in reactivating? </h3>
-  <form action="/startbomb" method="POST">
-    Activation Code: <input type="text" name="activation_code"><br>
-    <input type="submit" value ="Submit">
-  </form>
+<h1> <%= @out %> </h1>
+<h3> Can I interest you in reactivating? </h3>
+<form action="/startbomb" method="POST">
+Activation Code: <input type="text" name="activation_code"><br>
+<input type="submit" value ="Submit">
+</form>
 <% end %>
+
+</body>
+
+
+<script>
+function updateTime() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if(xmlhttp.readyState==4 ) { 
+      document.getElementById("time_remaining").innerHTML = xmlhttp.responseText; 
+    } }
+  xmlhttp.open("GET","getremainingtime",true);
+  xmlhttp.send();
+}
+
+function callUpdateTime() {
+  window.setInterval(updateTime,500)
+}
+
+callUpdateTime()
+</script>
+</html>

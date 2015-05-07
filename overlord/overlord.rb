@@ -47,12 +47,18 @@ post '/attemptdeactivation' do
     erb :deactivation_status
   elsif !@@user_bomb.exploded && @@user_bomb.active
     @deactivation_failed = true
-    @time = @@user_bomb.time_remaining
+   # @time = @@user_bomb.time_remaining
     erb :deactivation_status
   else
     @bomb_exploded = true
     erb :bomb_exploded
   end
+end
+
+get '/getremainingtime' do
+  return (@@user_bomb.get_remaining_time).to_s if @@user_bomb.time_remaining > 0
+  send_file("views/bomb_exploded.erb")
+
 end
 
 

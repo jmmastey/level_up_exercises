@@ -7,7 +7,6 @@
        }
   </style>
 
-
   <body>
 
     <% if @deactivation_failed %> 
@@ -20,7 +19,7 @@
       </form>
     <% end %>
 
-  <% if @reactivate %>
+  <% if @reactivation_possible %>
     <h1> <%= @out %> </h1>
     <h3> Can I interest you in reactivating? </h3>
     <form action="/startbomb" method="POST">
@@ -36,13 +35,13 @@
     function updateTime() {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange=function() {
-        if(xmlhttp.readyState==4 ) { 
+        if( xmlhttp.readyState == 4 ) { 
           document.getElementById("time_remaining").innerHTML = xmlhttp.responseText; }
         } 
         xmlhttp.open("GET","/getremainingtime",true);
         xmlhttp.send();
       }
-
+  
     function callUpdateTime() {
       window.setInterval(updateTime,500);
     }

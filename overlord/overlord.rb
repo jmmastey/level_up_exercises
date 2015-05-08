@@ -2,6 +2,7 @@
 
 require 'sinatra'
 require './bomb.rb'
+require 'pry'
 
 enable :sessions
 
@@ -43,11 +44,10 @@ post '/attemptdeactivation' do
   deactivation_code = params[:deactivation_code]
   @out = @@user_bomb.attempt_deactivation(deactivation_code)
   if !@@user_bomb.exploded && !@@user_bomb.active
-    @reactivate = true
+    @reactivation_possible = true
     erb :deactivation_status
   elsif !@@user_bomb.exploded && @@user_bomb.active
     @deactivation_failed = true
-   # @time = @@user_bomb.time_remaining
     erb :deactivation_status
   else
     @bomb_exploded = true
@@ -56,11 +56,8 @@ post '/attemptdeactivation' do
 end
 
 get '/getremainingtime' do
-  puts 'time now', @@user_bomb.get_remaining_time
   return (@@user_bomb.get_remaining_time).to_s if @@user_bomb.time_remaining > 0
-#  send_file("views/bomb_exploded.erb")
   erb :bomb_exploded
-
 end
 
 

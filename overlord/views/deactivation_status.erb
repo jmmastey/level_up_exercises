@@ -6,7 +6,6 @@
 <%= @out %>
 <h2> Time remaining to deactivate </h2>
 <h2 id="time_remaining"> </h2>
-<button type="button" onclick="updateTime()"> Update Time </button> 
   <form action="/attemptdeactivation" method = "POST">
     Deactivation Code: <input type="text" name = "deactivation_code"> <br>
     <input type="submit" value = "Submit" >

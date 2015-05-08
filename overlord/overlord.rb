@@ -56,8 +56,10 @@ post '/attemptdeactivation' do
 end
 
 get '/getremainingtime' do
+  puts 'time now', @@user_bomb.get_remaining_time
   return (@@user_bomb.get_remaining_time).to_s if @@user_bomb.time_remaining > 0
-  send_file("views/bomb_exploded.erb")
+#  send_file("views/bomb_exploded.erb")
+  erb :bomb_exploded
 
 end
 

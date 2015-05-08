@@ -2,7 +2,7 @@ BombCodeError = Class.new(RuntimeError)
 
 require 'rufus-scheduler'
 
-BOMB_DURATION = 10
+BOMB_DURATION = 30
 
 class Bomb
 

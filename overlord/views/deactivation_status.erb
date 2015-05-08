@@ -2,7 +2,6 @@
 
 
 <body>
-<div id="count_down">
 <% if @deactivation_failed %> 
 <%= @out %>
 <h2> Time remaining to deactivate </h2>
@@ -14,7 +13,6 @@
   </form>
 
 <% end %>
-</div>
 
 <% if @reactivate %>
 <h1> <%= @out %> </h1>
@@ -35,7 +33,7 @@ function updateTime() {
     if(xmlhttp.readyState==4 ) { 
       document.getElementById("time_remaining").innerHTML = xmlhttp.responseText; 
     } }
-  xmlhttp.open("GET","getremainingtime",true);
+  xmlhttp.open("GET","/getremainingtime",true);
   xmlhttp.send();
 }
 

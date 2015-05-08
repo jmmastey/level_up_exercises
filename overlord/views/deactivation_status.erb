@@ -1,45 +1,52 @@
 <html>
 
+  <style>
+    h3 {
+       height: 25px;
+       width: 700px;
+       }
+  </style>
 
-<body>
-<% if @deactivation_failed %> 
-<%= @out %>
-<h2> Time remaining to deactivate </h2>
-<h2 id="time_remaining"> </h2>
-  <form action="/attemptdeactivation" method = "POST">
-    Deactivation Code: <input type="text" name = "deactivation_code"> <br>
-    <input type="submit" value = "Submit" >
-  </form>
 
-<% end %>
+  <body>
 
-<% if @reactivate %>
-<h1> <%= @out %> </h1>
-<h3> Can I interest you in reactivating? </h3>
-<form action="/startbomb" method="POST">
-Activation Code: <input type="text" name="activation_code"><br>
-<input type="submit" value ="Submit">
-</form>
-<% end %>
+    <% if @deactivation_failed %> 
+      <%= @out %>
+      <h2> Time remaining to deactivate </h2>
+      <h3 id="time_remaining"> </h3>
+      <form action="/attemptdeactivation" method = "POST">
+        Deactivation Code: <input type="text" name = "deactivation_code"> <br>
+        <input type="submit" value = "Submit" >
+      </form>
+    <% end %>
+
+  <% if @reactivate %>
+    <h1> <%= @out %> </h1>
+    <h3> Can I interest you in reactivating? </h3>
+    <form action="/startbomb" method="POST">
+      Activation Code: <input type="text" name="activation_code"><br>
+      <input type="submit" value ="Submit">
+    </form>
+  <% end %>
 
 </body>
 
 
-<script>
-function updateTime() {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange=function() {
-    if(xmlhttp.readyState==4 ) { 
-      document.getElementById("time_remaining").innerHTML = xmlhttp.responseText; 
-    } }
-  xmlhttp.open("GET","/getremainingtime",true);
-  xmlhttp.send();
-}
+  <script>
+    function updateTime() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange=function() {
+        if(xmlhttp.readyState==4 ) { 
+          document.getElementById("time_remaining").innerHTML = xmlhttp.responseText; }
+        } 
+        xmlhttp.open("GET","/getremainingtime",true);
+        xmlhttp.send();
+      }
 
-function callUpdateTime() {
-  window.setInterval(updateTime,500)
-}
+    function callUpdateTime() {
+      window.setInterval(updateTime,500);
+    }
 
-callUpdateTime()
-</script>
+    callUpdateTime()
+  </script>
 </html>

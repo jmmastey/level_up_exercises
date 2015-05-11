@@ -1,10 +1,10 @@
 require './bomb.rb'
 
-VALID_ACT_CODE = 2468
-VALID_DEACT_CODE = 1357
+VALID_ACT_CODE = "2468"
+VALID_DEACT_CODE = "1357"
 INVALID_ACT_CODE = "abcd"
 INVALID_DEACT_CODE = "hello"
-TIME_REMAINING = 30
+TIME_REMAINING = 5
 
 describe Bomb do
   let(:newbomb_valid) {Bomb.new(VALID_ACT_CODE, VALID_DEACT_CODE) }
@@ -32,14 +32,14 @@ describe Bomb do
   it "can be restarted after successful deactivation" do 
     newbomb_valid.start_bomb(VALID_ACT_CODE)
     newbomb_valid.attempt_deactivation(VALID_DEACT_CODE)
-    newbomb_valid.restart_bomb(VALID_ACT_CODE)
+    newbomb_valid.start_bomb(VALID_ACT_CODE)
     expect(newbomb_valid.exploded).to eql(false)
     expect(newbomb_valid.active).to eql(true)
   end
 
   it "explodes after #{TIME_REMAINING} seconds" do
     newbomb_valid.start_bomb(VALID_ACT_CODE)
-    sleep(40)  #Why do I wait 40 s?
+    sleep(TIME_REMAINING+2)
     expect(newbomb_valid.exploded).to eql(true)
   end
 

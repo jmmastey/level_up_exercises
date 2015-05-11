@@ -1,14 +1,15 @@
 <h1> Status of the bomb: </h1>
 
-<% if @@bomb_booted %>
-  <h2> Successfully created.</h2>
-  <form action="/startbomb" method = "POST">
-    Enter activation code: <input type="text" name = "activation_code"> <br>
-    <input type="Submit">
-  </form>
-<% else %>
-  <h2> Not created. </h2>
-  <form action="/bootbomb" method = "GET" >
-    <input type="submit" value = "Boot Bomb">
-  </form>
-<% end %>
+  <% if @@bomb_booted %>
+    <h2> Successfully created.</h2>
+    <form action="/startbomb" method = "POST">
+      Enter activation code: <input type="text" name = "activation_code"> <br>
+      <input type="Submit">
+    </form>
+
+  <% else %>
+    <h2> Not created. </h2>
+    <form action="/bootbomb" method = "GET" >
+      <input type="submit" value = "Boot Bomb">
+    </form>
+  <% end %>

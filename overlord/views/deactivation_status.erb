@@ -8,7 +8,7 @@
   </style>
 
   <body>
-
+  <div id = "active_bomb_display"> 
     <% if @deactivation_failed %> 
       <%= @out %>
       <h2> Time remaining to deactivate </h2>
@@ -19,33 +19,18 @@
       </form>
     <% end %>
 
-  <% if @reactivation_possible %>
-    <h1> <%= @out %> </h1>
-    <h3> Can I interest you in reactivating? </h3>
-    <form action="/startbomb" method="POST">
-      Activation Code: <input type="text" name="activation_code"><br>
-      <input type="submit" value ="Submit">
-    </form>
-  <% end %>
-
+    <% if @reactivation_possible %>
+      <h1> <%= @out %> </h1>
+      <h3> Can I interest you in reactivating? </h3>
+      <form action="/startbomb" method="POST">
+        Activation Code: <input type="text" name="activation_code"><br>
+        <input type="submit" value ="Submit">
+      </form>
+    <% end %>
+  </div>
 </body>
 
 
-  <script>
-    function updateTime() {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange=function() {
-        if( xmlhttp.readyState == 4 ) { 
-          document.getElementById("time_remaining").innerHTML = xmlhttp.responseText; }
-        } 
-        xmlhttp.open("GET","/getremainingtime",true);
-        xmlhttp.send();
-      }
-  
-    function callUpdateTime() {
-      window.setInterval(updateTime,500);
-    }
+<script type = "text/javascript" src="update_time.js"> </script>
 
-    callUpdateTime()
-  </script>
 </html>

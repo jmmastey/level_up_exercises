@@ -6,6 +6,7 @@
        }
   </style>
 
+<div id="active_bomb_display">
 
   <% if @time_remaining %>
      <h2> Time remaining: </h2> 
@@ -22,24 +23,7 @@
       <input type = "submit" value = "Submit" > 
     </form>
   <% end %>
+</div>
+<script type="text/javascript" src="update_time.js"> </script>
 
-
-
-  <script>
-    function updateTime() {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange=function() {
-      if(xmlhttp.readyState==4 ) { 
-        document.getElementById("time_remaining").innerHTML = xmlhttp.responseText; }
-       } 
-    xmlhttp.open("GET","/getremainingtime",true);
-    xmlhttp.send();
-    }
-
-    function callUpdateTime() {
-      window.setInterval(updateTime,500)
-     }
-
-    callUpdateTime()
-  </script>
 </html>

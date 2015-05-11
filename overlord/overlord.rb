@@ -57,7 +57,7 @@ end
 
 get '/getremainingtime' do
   return (@@user_bomb.get_remaining_time).to_s if @@user_bomb.time_remaining > 0
-  erb :bomb_exploded
+  return :bomb_exploded
 end
 
 

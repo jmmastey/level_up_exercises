@@ -4,7 +4,8 @@ require './dinodex_class.rb'
 class UserInterface
   def initialize
     dino_input_files = ['./dinodex.csv', './african_dinosaur_export.csv']
-    @my_dinodex = DinoDex.new(CsvImporter.new(dino_input_files).create_dinos)
+    dinos = CsvImporter.new(dino_input_files).create_dinos
+    @my_dinodex = DinoDex.new(dinos)
   end
 
   def run_user_interface
@@ -18,7 +19,9 @@ class UserInterface
     puts "Would you like to view dinosaurs by #{filter_name}? Y/N"
     if gets.chomp.downcase == 'y'
       puts "Choose the number of the #{filter_name} you wish to view:"
-      @filter_query[filter_name.to_sym] = print_values(filter_name)[gets.chomp.to_i - 1]
+      user_choices =  print_values(filter_name)
+      choice = gets.chomp.to_i - 1
+      @filter_query[filter_name.to_sym] = user_choices[choice]
     end
   end
 

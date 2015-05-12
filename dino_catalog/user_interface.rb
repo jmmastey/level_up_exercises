@@ -9,7 +9,8 @@ class UserInterface
   end
 
   def run_user_interface
-    @filter_query = { name: "", period: "", continent: "", diet: "", weight: 0, walking: "" }
+    @filter_query = { name: "", period: "", continent: "", diet: "", weight: 0,
+                      walking: "" }
     @filter_query.each_key { |k| prompt_user_for_inputs(k) }
     p @filter_query
     print_output(@my_dinodex.filter_dinos(@filter_query))
@@ -17,12 +18,11 @@ class UserInterface
 
   def prompt_user_for_inputs(filter_name)
     puts "Would you like to view dinosaurs by #{filter_name}? Y/N"
-    if gets.chomp.downcase == 'y'
-      puts "Choose the number of the #{filter_name} you wish to view:"
-      user_choices =  print_values(filter_name)
-      choice = gets.chomp.to_i - 1
-      @filter_query[filter_name.to_sym] = user_choices[choice]
-    end
+    return unless gets.chomp.downcase == 'y'
+    puts "Choose the number of the #{filter_name} you wish to view:"
+    user_choices =  print_values(filter_name)
+    choice = gets.chomp.to_i - 1
+    @filter_query[filter_name.to_sym] = user_choices[choice]
   end
 
   def print_values(filter_name)

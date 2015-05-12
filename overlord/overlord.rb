@@ -23,6 +23,7 @@ post '/attemptboot' do
   begin
     @@user_bomb = Bomb.new(activation_code, deactivation_code)
     @@bomb_booted = true
+    puts 'value of @@bomb_booted now', @@bomb_booted
     erb :boot_status
   rescue
     erb :boot_status
@@ -30,6 +31,7 @@ post '/attemptboot' do
 end
 
 post '/startbomb' do
+  return erb :boot_page if !@@bomb_booted
   activation_code = params[:activation_code]
   out_message = @@user_bomb.start_bomb(activation_code)
   if @@user_bomb.active 
@@ -42,6 +44,8 @@ post '/startbomb' do
 end
   
 post '/attemptdeactivation' do
+  return erb :boot_page if !@@bomb_booted
+  return erb :boot_status if @@bomb_booted && !@@user_bomb.active
   deactivation_code = params[:deactivation_code]
   @out = @@user_bomb.attempt_deactivation(deactivation_code)
   if !@@user_bomb.exploded && !@@user_bomb.active
@@ -57,11 +61,15 @@ post '/attemptdeactivation' do
 end
 
 get '/getremainingtime' do
+  puts '@@bomb_booted here?', @@bomb_booted
+  return erb :index if !@@bomb_booted
   return (@@user_bomb.get_remaining_time).to_s if @@user_bomb.time_remaining > 0
 end
 
 get '/bombexploded' do
-  erb :bomb_exploded
+  return erb :boot_status if !@@bomb_booted
+  return erb :bomb_status if @@bomb_booted && !@@user_bomb.exploded
+  return erb :bomb_exploded
 end
 
 

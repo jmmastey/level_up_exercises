@@ -9,6 +9,7 @@ enable :sessions
 @@bomb_booted = false
 
 get '/' do
+  @@bomb_booted = false
   erb :index
 end
 

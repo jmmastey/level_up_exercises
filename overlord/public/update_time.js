@@ -11,9 +11,10 @@ function updateTime() {
         document.getElementById("time_remaining").innerHTML = xmlhttp.responseText; }
       else {
         clearInterval(status_checker);   
-        var new_html_file = txtFile.open("GET","bomb_exploded.html",false);
-        txtFile.send();
-        document.getElementById("active_bomb_display").innerHTML = txtFile.responseText; } 
+     //   window.location = '/bomb_exploded' }
+          var new_html_file = txtFile.open("GET","bomb_exploded.html",false);
+          txtFile.send();
+          document.getElementById("active_bomb_display").innerHTML = txtFile.responseText; } 
     } }
     xmlhttp.open("GET","/getremainingtime",true);
     xmlhttp.send();

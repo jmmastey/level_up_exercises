@@ -1,5 +1,5 @@
-require './dino_csv_import.rb'
-require './dinodex_class.rb'
+require './csv_importer.rb'
+require './dino_dex.rb'
 
 class UserInterface
   def initialize

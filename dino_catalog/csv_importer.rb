@@ -1,5 +1,5 @@
 require 'csv'
-require './dino_class.rb'
+require './dino.rb'
 
 class CsvImporter
   def initialize(input_files)

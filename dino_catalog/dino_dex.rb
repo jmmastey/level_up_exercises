@@ -1,4 +1,4 @@
-require './dino_class.rb'
+require './dino.rb'
 class DinoDex
   def initialize(dino)
     @dinos = dino

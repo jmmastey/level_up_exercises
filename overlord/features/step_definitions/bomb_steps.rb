@@ -64,3 +64,46 @@ Then(/^I see an error message and a prompt to activate$/) do
 end
 
 
+Given(/^I successfully boot and activate the bomb$/) do
+  visit('/')
+  click_button('Boot Bomb')
+  fill_in('activation_code', with: "2468")
+  fill_in('deactivation_code', with: "1357")
+  click_button('Submit')
+  fill_in('activation_code', with: "2468")
+  click_button('Submit')
+end
+
+When(/^I submit the valid deactivation code$/) do
+  fill_in('deactivation_code', with: "1357")
+  click_button('Submit')
+end
+
+Then(/^I see the bomb has successfully deactivated$/) do
+  expect(page).to have_content('Bomb has been successfully deactivated')
+end
+
+When(/^I submit an invalid deactivation code$/) do
+  fill_in('deactivation_code', with: "2468")
+  click_button('Submit')
+end
+
+Then(/^I see the bomb has not deactivated$/) do
+  expect(page).to have_content("Wrong deactivation code")
+end
+
+When(/^I submit (\d+) invalid activation codes$/) do |arg1|
+  (1..3).each do
+    fill_in('deactivation_code', with: "hello")
+    click_button('Submit')
+  end
+end
+
+Then(/^I see the bomb exploded$/) do
+  expect(page).to have_content("The bomb went off")
+end
+
+
+
+
+

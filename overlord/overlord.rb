@@ -31,12 +31,12 @@ end
 
 post '/startbomb' do
   activation_code = params[:activation_code]
-  out = @@user_bomb.start_bomb(activation_code)
+  out_message = @@user_bomb.start_bomb(activation_code)
   if @@user_bomb.active 
     @time_remaining = @@user_bomb.time_remaining
     erb :bomb_status
   else
-    @error_message = out
+    @error_message = out_message
     erb :bomb_status
   end
 end
@@ -58,9 +58,11 @@ end
 
 get '/getremainingtime' do
   return (@@user_bomb.get_remaining_time).to_s if @@user_bomb.time_remaining > 0
-  return :bomb_exploded
 end
 
+get '/bombexploded' do
+  erb :bomb_exploded
+end
 
 
 # we can shove stuff into the session cookie YAY!

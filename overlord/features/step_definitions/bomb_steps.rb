@@ -35,13 +35,32 @@ Then(/^I see that the bomb has not been created$/) do
   expect(page).to have_content('Not created.')
 end
 
+Given(/^I successfully boot the bomb$/) do
+  visit('/')
+  click_button('Boot Bomb')
+  fill_in('activation_code', with: "2468")
+  fill_in('deactivation_code', with: "1357")
+  click_button('Submit')
+end
+
 When(/^I submit the correct activation code$/) do
   fill_in('activation_code', with: "2468")
+  click_button('Submit')
 end
 
 Then(/^I see the bomb timer start$/) do
   expect(page).to have_content('Time remaining:')
   expect(page).to have_css("input.deactivation_code")
+end
+
+When(/^I submit incorrect activation code$/) do
+  fill_in('activation_code', with: "2469")
+  click_button('Submit')
+end
+
+Then(/^I see an error message and a prompt to activate$/) do
+  expect(page).to have_content("Error!")
+  expect(page).to have_css("input.activation_code")
 end
 
 

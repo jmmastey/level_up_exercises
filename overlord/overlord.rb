@@ -12,10 +12,8 @@ get '/' do
 end
 
 post '/attemptboot' do
-  activation_code = params[:activation_code]
-  deactivation_code = params[:deactivation_code]
   begin
-    @user_bomb = Bomb.new(activation_code, deactivation_code)
+    @user_bomb = Bomb.new(params[:activation_code], params[:deactivation_code])
     update_bomb(@user_bomb)
     erb :start_bomb_page
   rescue
@@ -26,8 +24,7 @@ end
 post '/startbomb' do
   @user_bomb = retrieve_bomb
   return erb :boot_page unless @user_bomb
-  activation_code = params[:activation_code]
-  @user_bomb.start_bomb(activation_code)
+  @user_bomb.start_bomb(params[:activation_code])
   update_bomb(@user_bomb)
   if @user_bomb.state == "active"
     erb :countdown_page
@@ -40,8 +37,7 @@ post '/attemptdeactivation' do
   @user_bomb = retrieve_bomb
   return erb :boot_page unless @user_bomb
   return erb :start_bomb_page if @user_bomb.state == "inactive"
-  deactivation_code = params[:deactivation_code]
-  @user_bomb.attempt_deactivation(deactivation_code)
+  @user_bomb.attempt_deactivation(params[:deactivation_code])
   update_bomb(@user_bomb)
   return erb :reactivate_page if @user_bomb.state == "inactive"
   return erb :countdown_page_error if @user_bomb.state == "active"

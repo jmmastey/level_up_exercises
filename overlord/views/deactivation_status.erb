@@ -8,29 +8,26 @@
   </style>
 
   <body>
-  <div id = "active_bomb_display"> 
-    <% if @deactivation_failed %> 
-      <%= @out %>
+    <% if active %> 
+      <%= message %>
       <h2> Time remaining to deactivate </h2>
       <h3 id="time_remaining"> </h3>
       <form action="/attemptdeactivation" method = "POST">
         Deactivation Code: <input type="text" name = "deactivation_code"> <br>
         <input type="submit" value = "Submit" >
       </form>
+      <script type = "text/javascript" src="update_time.js"> </script>
     <% end %>
 
-    <% if @reactivation_possible %>
-      <h1> <%= @out %> </h1>
+    <% if !exploded && !active  %>
+      <h1> <%= message %> </h1>
       <h3> Can I interest you in reactivating? </h3>
       <form action="/startbomb" method="POST">
         Activation Code: <input type="text" name="activation_code"><br>
         <input type="submit" value ="Submit">
       </form>
     <% end %>
-  </div>
-</body>
+  </body>
 
-
-<script type = "text/javascript" src="update_time.js"> </script>
 
 </html>

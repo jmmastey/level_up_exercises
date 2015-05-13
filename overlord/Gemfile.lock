@@ -91,6 +91,7 @@ DEPENDENCIES
   cucumber
   cucumber-sinatra
   pry
+  rack (= 1.5.2)
   rspec
   rufus-scheduler
   selenium

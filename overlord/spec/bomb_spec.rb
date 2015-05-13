@@ -4,7 +4,7 @@ VALID_ACT_CODE = "2468"
 VALID_DEACT_CODE = "1357"
 INVALID_ACT_CODE = "abcd"
 INVALID_DEACT_CODE = "hello"
-TIME_REMAINING = 5
+TIME_REMAINING = 10
 
 describe Bomb do
   let(:newbomb_valid) {Bomb.new(VALID_ACT_CODE, VALID_DEACT_CODE) }
@@ -39,7 +39,8 @@ describe Bomb do
 
   it "explodes after #{TIME_REMAINING} seconds" do
     newbomb_valid.start_bomb(VALID_ACT_CODE)
-    sleep(TIME_REMAINING+2)
+    sleep(TIME_REMAINING)
+    newbomb_valid.get_remaining_time
     expect(newbomb_valid.exploded).to eql(true)
   end
 

@@ -7,10 +7,10 @@ INVALID_DEACT_CODE = "hello"
 TIME_REMAINING = 10
 
 describe Bomb do
-  let(:newbomb_valid) {Bomb.new(VALID_ACT_CODE, VALID_DEACT_CODE) }
-  let(:newbomb_invalid) {Bomb.new(INVALID_ACT_CODE, INVALID_DEACT_CODE) }
-  
-  it "is in an inactive state before start_bomb is called" do 
+  let(:newbomb_valid) { Bomb.new(VALID_ACT_CODE, VALID_DEACT_CODE) }
+  let(:newbomb_invalid) { Bomb.new(INVALID_ACT_CODE, INVALID_DEACT_CODE) }
+
+  it "is in an inactive state before start_bomb is called" do
     expect(newbomb_valid.active).to eql(false)
   end
 
@@ -18,18 +18,18 @@ describe Bomb do
     expect(newbomb_valid.exploded).to eql(false)
   end
 
-  it "can become active by calling the start_bomb function" do 
+  it "can become active by calling the start_bomb function" do
     newbomb_valid.start_bomb(VALID_ACT_CODE)
     expect(newbomb_valid.active).to eql(true)
   end
 
-  it "can be deactivated using the deactivation code" do 
+  it "can be deactivated using the deactivation code" do
     newbomb_valid.start_bomb(VALID_ACT_CODE)
     newbomb_valid.attempt_deactivation(VALID_DEACT_CODE)
     expect(newbomb_valid.active).to eql(false)
   end
 
-  it "can be restarted after successful deactivation" do 
+  it "can be restarted after successful deactivation" do
     newbomb_valid.start_bomb(VALID_ACT_CODE)
     newbomb_valid.attempt_deactivation(VALID_DEACT_CODE)
     newbomb_valid.start_bomb(VALID_ACT_CODE)
@@ -45,6 +45,6 @@ describe Bomb do
   end
 
   it "complains when the activation code is not four digits" do
-    expect{Bomb.new(INVALID_ACT_CODE,VALID_DEACT_CODE)}.to raise_error(BombCodeError)
+    expect { Bomb.new(INVALID_ACT_CODE, VALID_DEACT_CODE) }.to raise_error(BombCodeError)
   end
 end

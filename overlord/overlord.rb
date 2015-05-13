@@ -6,7 +6,6 @@ require 'pry'
 
 enable :sessions
 
-
 get '/' do
   session[:user_bomb] = nil
   erb :index
@@ -29,30 +28,33 @@ post '/attemptboot' do
 end
 
 post '/startbomb' do
-  @user_bomb = get_bomb
-  return erb :boot_page if !@user_bomb
+  @user_bomb = retrieve_bomb
+  return erb :boot_page unless @user_bomb
   activation_code = params[:activation_code]
   out_message = @user_bomb.start_bomb(activation_code)
-  locals = {bomb: @user_bomb, error_message: out_message }
+  locals = { bomb: @user_bomb, error_message: out_message }
   if @user_bomb.active
     update_bomb(@user_bomb)
-    erb :bomb_status, locals: locals 
+    erb :bomb_status, locals: locals
   else
     update_bomb(@user_bomb)
     erb :bomb_status, locals: locals
   end
 end
-  
+
 post '/attemptdeactivation' do
-  @user_bomb = get_bomb
-  return erb :boot_page if !@user_bomb
+  @user_bomb = retrieve_bomb
+  return erb :boot_page unless @user_bomb
   return erb :boot_status if @user_bomb && !@user_bomb.active
   deactivation_code = params[:deactivation_code]
   out_message = @user_bomb.attempt_deactivation(deactivation_code)
-  # either failed to deactivate or have option to reactivate (bomb hasn't exploded)
+  locals = { exploded: @user_bomb.exploded,
+               active: @user_bomb.active,
+              message: out_message }
+  # either failed to deactivate or can now reactivate (bomb hasn't exploded)
   if !@user_bomb.exploded
     update_bomb(@user_bomb)
-    erb :deactivation_status, :locals => {:exploded => @user_bomb.exploded, :active => @user_bomb.active, :message => out_message} 
+    erb :deactivation_status, locals: locals
   else
     update_bomb(@user_bomb)
     erb :bomb_exploded
@@ -60,26 +62,25 @@ post '/attemptdeactivation' do
 end
 
 get '/getremainingtime' do
-  @user_bomb = get_bomb
-  @user_bomb.get_remaining_time
+  @user_bomb = retrieve_bomb
+  @user_bomb.update_remaining_time
   update_bomb(@user_bomb)
   return (@user_bomb.time_remaining).to_s if @user_bomb.time_remaining > 0
 end
 
 get '/bombexploded' do
-  @user_bomb = get_bomb
-  locals = {bomb: @user_bomb}
-  return erb :boot_status if !@user_bomb
+  @user_bomb = retrieve_bomb
+  locals = { bomb: @user_bomb }
+  return erb :boot_status unless @user_bomb
   return erb :boot_status if @user_bomb && !@user_bomb.active && !@user_bomb.exploded
   return erb :bomb_status, locals: locals if @user_bomb && @user_bomb.active
   return erb :bomb_exploded
 end
 
-def get_bomb
+def retrieve_bomb
   session[:user_bomb]
 end
 
 def update_bomb(bomb)
   session[:user_bomb] = bomb
 end
-

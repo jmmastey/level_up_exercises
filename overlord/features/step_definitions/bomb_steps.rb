@@ -1,18 +1,16 @@
- Given(/^I am on the bomb home page$/) do
-   visit('/')
- end
+Given(/^I am on the bomb home page$/) do
+  visit('/')
+end
 
- When(/^I boot the bomb$/) do
-   click_button('Boot Bomb')
- end
+When(/^I boot the bomb$/) do
+  click_button('Boot Bomb')
+end
 
 Then(/^I am prompted to provide activation and deactivation codes$/) do
   expect(page).to have_css("input.activation_code")
   expect(page).to have_css("input.deactivation_code")
   expect(page).to have_button("Submit")
 end
-
-
 
 When(/^I submit valid codes$/) do
   fill_in('activation_code', with: "2468")
@@ -63,7 +61,6 @@ Then(/^I see an error message and a prompt to activate$/) do
   expect(page).to have_css("input.activation_code")
 end
 
-
 Given(/^I successfully boot and activate the bomb$/) do
   visit('/')
   click_button('Boot Bomb')
@@ -102,8 +99,3 @@ end
 Then(/^I see the bomb exploded$/) do
   expect(page).to have_content("The bomb went off")
 end
-
-
-
-
-

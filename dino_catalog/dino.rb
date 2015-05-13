@@ -1,6 +1,6 @@
 class Dino
   attr_reader :all_info, :name, :period, :continent, :diet,
-              :weight, :walking, :description
+    :weight, :walking, :description
 
   def initialize(row)
     @all_info = row.to_s

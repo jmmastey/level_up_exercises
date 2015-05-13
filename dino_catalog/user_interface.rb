@@ -20,7 +20,7 @@ class UserInterface
     puts "Would you like to view dinosaurs by #{filter_name}? Y/N"
     return unless gets.chomp.downcase == 'y'
     puts "Choose the number of the #{filter_name} you wish to view:"
-    user_choices =  print_values(filter_name)
+    user_choices = print_values(filter_name)
     choice = gets.chomp.to_i - 1
     @filter_query[filter_name.to_sym] = user_choices[choice]
   end

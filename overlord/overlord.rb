@@ -8,10 +8,6 @@ enable :sessions
 
 get '/' do
   session[:user_bomb] = nil
-  erb :index
-end
-
-get '/bootbomb' do
   erb :boot_page
 end
 
@@ -21,9 +17,9 @@ post '/attemptboot' do
   begin
     @user_bomb = Bomb.new(activation_code, deactivation_code)
     update_bomb(@user_bomb)
-    erb :boot_status
+    erb :start_bomb_page
   rescue
-    erb :boot_status
+    erb :boot_page_failed
   end
 end
 
@@ -31,34 +27,25 @@ post '/startbomb' do
   @user_bomb = retrieve_bomb
   return erb :boot_page unless @user_bomb
   activation_code = params[:activation_code]
-  out_message = @user_bomb.start_bomb(activation_code)
-  locals = { bomb: @user_bomb, error_message: out_message }
-  if @user_bomb.active
-    update_bomb(@user_bomb)
-    erb :bomb_status, locals: locals
+  @user_bomb.start_bomb(activation_code)
+  update_bomb(@user_bomb)
+  if @user_bomb.state == "active"
+    erb :countdown_page
   else
-    update_bomb(@user_bomb)
-    erb :bomb_status, locals: locals
+    erb :start_bomb_page_failed
   end
 end
 
 post '/attemptdeactivation' do
   @user_bomb = retrieve_bomb
   return erb :boot_page unless @user_bomb
-  return erb :boot_status if @user_bomb && !@user_bomb.active
+  return erb :start_bomb_page if @user_bomb.state == "inactive"
   deactivation_code = params[:deactivation_code]
-  out_message = @user_bomb.attempt_deactivation(deactivation_code)
-  locals = { exploded: @user_bomb.exploded,
-               active: @user_bomb.active,
-              message: out_message }
-  # either failed to deactivate or can now reactivate (bomb hasn't exploded)
-  if !@user_bomb.exploded
-    update_bomb(@user_bomb)
-    erb :deactivation_status, locals: locals
-  else
-    update_bomb(@user_bomb)
-    erb :bomb_exploded
-  end
+  @user_bomb.attempt_deactivation(deactivation_code)
+  update_bomb(@user_bomb)
+  return erb :reactivate_page if @user_bomb.state == "inactive"
+  return erb :countdown_page_error if @user_bomb.state == "active"
+  return erb :bomb_exploded if @user_bomb.state == "exploded"
 end
 
 get '/getremainingtime' do
@@ -70,11 +57,10 @@ end
 
 get '/bombexploded' do
   @user_bomb = retrieve_bomb
-  locals = { bomb: @user_bomb }
-  return erb :boot_status unless @user_bomb
-  return erb :boot_status if @user_bomb && !@user_bomb.active && !@user_bomb.exploded
-  return erb :bomb_status, locals: locals if @user_bomb && @user_bomb.active
-  return erb :bomb_exploded
+  return erb :boot_page unless @user_bomb
+  return erb :countdown_page if @user_bomb.state == "active"
+  return erb :start_bomb_page if @user_bomb.state == "inactive"
+  return erb :bomb_exploded if @user_bomb.state == "exploded"
 end
 
 def retrieve_bomb

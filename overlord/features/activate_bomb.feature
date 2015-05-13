@@ -6,7 +6,6 @@ Feature: activate the bomb
 
   Scenario: successfully boot the bomb
     Given I am on the bomb home page
-    And I boot the bomb
     When I submit valid codes
     Then I see the bomb has successfully booted
 

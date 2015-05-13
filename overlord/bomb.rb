@@ -3,15 +3,13 @@ BombCodeError = Class.new(RuntimeError)
 BOMB_DURATION = 10
 class Bomb
   attr_reader :time_remaining
-  attr_reader :exploded
-  attr_reader :active
+  attr_reader :state
+  attr_reader :num_deactivation_attempts
 
   def initialize(activation_code, deactivation_code)
     @activation_code = set_code(activation_code, "1234")
     @deactivation_code = set_code(deactivation_code, "0000")
-    @time_remaining = BOMB_DURATION # seconds
-    @active = false
-    @exploded = false
+    @state = "inactive" # inactive, active, exploded
     @num_deactivation_attempts = 3
     @time_remaining = BOMB_DURATION # seconds
     @explosion_time = nil  # This shouldn't be set until the bomb is activated
@@ -24,9 +22,9 @@ class Bomb
   end
 
   def start_bomb(activation_code)
-    return 'Bomb is already active' if @active
+    return "Bomb cannot be started (wrong state)." if @state != "inactive"
     return 'Invalid activation code' if @activation_code != activation_code
-    @active = true
+    @state = "active"
     @explosion_time = Time.now + @time_remaining
     @num_deactivation_attempts = 3
   end
@@ -38,21 +36,18 @@ class Bomb
   end
 
   def attempt_deactivation(deactivation_code)
-    return 'Bomb already exploded.' if @exploded
-    return 'Bomb is not currently active.' unless @active
+    return 'Bomb already exploded.' if @state == "exploded"
+    return 'Bomb is not currently active.' if @state == "inactive"
     if @deactivation_code == deactivation_code && @num_deactivation_attempts > 0
-      @active = false
+      @state = "inactive"
       update_remaining_time
-      'Bomb has been successfully deactivated!'
     else
       @num_deactivation_attempts -= 1
       explode_bomb if @num_deactivation_attempts <= 0
-      "Wrong deactivation code #{@num_deactivation_attempts} attempt(s) remain."
     end
   end
 
   def explode_bomb
-    @exploded = true
-    @active = false
+    @state = "exploded"
   end
 end

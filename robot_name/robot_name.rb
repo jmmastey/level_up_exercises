@@ -7,7 +7,6 @@ class RobotNames
   end
 end
 
-
 class Robot
   attr_accessor :name
   NAME_ERROR = "There was a problem generating the robot name!"

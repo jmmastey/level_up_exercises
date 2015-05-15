@@ -9,7 +9,7 @@ class Bomb
   def initialize(activation_code, deactivation_code)
     @activation_code = set_code(activation_code, "1234")
     @deactivation_code = set_code(deactivation_code, "0000")
-    @state = "inactive" # inactive, active, exploded
+    @state = :inactive # :inactive, :active, :exploded
     @num_deactivation_attempts = 3
     @time_remaining = BOMB_DURATION # seconds
     @explosion_time = nil  # This shouldn't be set until the bomb is activated
@@ -22,9 +22,9 @@ class Bomb
   end
 
   def start_bomb(activation_code)
-    return "Bomb cannot be started (wrong state)." if @state != "inactive"
+    return "Bomb cannot be started (wrong state)." if @state != :inactive
     return 'Invalid activation code' if @activation_code != activation_code
-    @state = "active"
+    @state = :active
     @explosion_time = Time.now + @time_remaining
     @num_deactivation_attempts = 3
   end
@@ -36,10 +36,10 @@ class Bomb
   end
 
   def attempt_deactivation(deactivation_code)
-    return 'Bomb already exploded.' if @state == "exploded"
-    return 'Bomb is not currently active.' if @state == "inactive"
+    return 'Bomb already exploded.' if @state == :exploded
+    return 'Bomb is not currently active.' if @state == :inactive
     if @deactivation_code == deactivation_code && @num_deactivation_attempts > 0
-      @state = "inactive"
+      @state = :inactive
       update_remaining_time
     else
       @num_deactivation_attempts -= 1
@@ -48,6 +48,6 @@ class Bomb
   end
 
   def explode_bomb
-    @state = "exploded"
+    @state = :exploded
   end
 end

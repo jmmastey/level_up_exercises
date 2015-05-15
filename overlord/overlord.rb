@@ -26,7 +26,7 @@ post '/startbomb' do
   return erb :boot_page unless @user_bomb
   @user_bomb.start_bomb(params[:activation_code])
   update_bomb(@user_bomb)
-  if @user_bomb.state == "active"
+  if @user_bomb.state == :active
     erb :countdown_page
   else
     erb :start_bomb_page_failed
@@ -36,12 +36,12 @@ end
 post '/attemptdeactivation' do
   @user_bomb = retrieve_bomb
   return erb :boot_page unless @user_bomb
-  return erb :start_bomb_page if @user_bomb.state == "inactive"
+  return erb :start_bomb_page if @user_bomb.state == :inactive
   @user_bomb.attempt_deactivation(params[:deactivation_code])
   update_bomb(@user_bomb)
-  return erb :reactivate_page if @user_bomb.state == "inactive"
-  return erb :countdown_page_error if @user_bomb.state == "active"
-  return erb :bomb_exploded if @user_bomb.state == "exploded"
+  return erb :reactivate_page if @user_bomb.state == :inactive
+  return erb :countdown_page_error if @user_bomb.state == :active
+  return erb :bomb_exploded if @user_bomb.state == :exploded
 end
 
 get '/getremainingtime' do
@@ -54,9 +54,9 @@ end
 get '/bombexploded' do
   @user_bomb = retrieve_bomb
   return erb :boot_page unless @user_bomb
-  return erb :countdown_page if @user_bomb.state == "active"
-  return erb :start_bomb_page if @user_bomb.state == "inactive"
-  return erb :bomb_exploded if @user_bomb.state == "exploded"
+  return erb :countdown_page if @user_bomb.state == :active
+  return erb :start_bomb_page if @user_bomb.state == :inactive
+  return erb :bomb_exploded if @user_bomb.state == :exploded
 end
 
 def retrieve_bomb

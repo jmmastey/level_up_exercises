@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Overlord</title>
+		<link href="/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/assets/app/css/main.css" rel="stylesheet">
+	</head>
+	<body>
+		<h1>Overlord Example</h1>
+		<form name="security" action="/" method="post">
+			<input type="number" name="code" max="9999">
+            <input type="submit">
+		</form>
+		<h3>
+		Bomb Status:
+		<span class="bomb-status"><%= bomb_status %></span>
+		</h3>
+		<h4 class="bomb-errors"></h4>
+		<script src="/assets/lib/jquery/jquery-1.11.3.min.js"></script>
+		<script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/assets/app/js/main.js"></script>
+	</body>
+</html>

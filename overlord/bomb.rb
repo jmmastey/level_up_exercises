@@ -18,7 +18,7 @@ class Bomb
   end
 
   def set_code(code, default)
-    return code if code =~ /^\d{4}$/
+    return code if code_valid?(code)
     return default if code == ""
     raise BombCodeError, "Your code, #{code}, is invalid. Choose a 4 digit code."
   end
@@ -67,4 +67,9 @@ class Bomb
   def explode_bomb
     @state = :exploded
   end
+
+  def code_valid?(code)
+    code =~ /^\d{4}$/
+  end
+    
 end

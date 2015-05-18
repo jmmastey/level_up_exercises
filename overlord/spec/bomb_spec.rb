@@ -25,6 +25,12 @@ describe Bomb do
     expect(newbomb_valid.state).to eql(:inactive)
   end
 
+  it "retains information indicating that the bomb has been active" do
+    newbomb_valid.attempt_activation(VALID_ACT_CODE)
+    newbomb_valid.attempt_deactivation(VALID_DEACT_CODE)
+    expect(newbomb_valid.has_been_activated).to eql(true)
+  end
+
   it "can be restarted after successful deactivation" do
     newbomb_valid.attempt_activation(VALID_ACT_CODE)
     newbomb_valid.attempt_deactivation(VALID_DEACT_CODE)

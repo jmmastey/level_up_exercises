@@ -49,7 +49,10 @@ end
 post '/attemptdeactivation' do
   redirect '/' unless @user_bomb.state == :active 
   @user_bomb.attempt_deactivation(params[:deactivation_code])
-  flash[:failed_deactivation] = "Incorrect deactivation code. #{@user_bomb.num_deactivation_attempts} attempt(s) remain." if @user_bomb.state == :active
+  if @user_bomb.state == :active
+    flash[:failed_deactivation] = "Incorrect deactivation code. \
+               #{@user_bomb.num_deactivation_attempts} attempt(s) remain."
+  end
   redirect '/' 
 end
 

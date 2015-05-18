@@ -1,5 +1,5 @@
 Given(/^I am on the bomb home page$/) do
-  visit('/')
+  visit('/newbomb')
 end
 
 When(/^I submit valid codes$/) do
@@ -20,11 +20,11 @@ When(/^I submit invalid codes$/) do
 end
 
 Then(/^I see that the bomb has not been created$/) do
-  expect(page).to have_content('Error! There was a problem with your codes.')
+  expect(page).to have_content('Your activation codes were not accepted.')
 end
 
 Given(/^I successfully boot the bomb$/) do
-  visit('/')
+  visit('/newbomb')
   fill_in('activation_code', with: "2468")
   fill_in('deactivation_code', with: "1357")
   click_button('Boot Bomb')
@@ -46,12 +46,12 @@ When(/^I submit incorrect activation code$/) do
 end
 
 Then(/^I see an error message and a prompt to activate$/) do
-  expect(page).to have_content("Error!")
+  expect(page).to have_content("Incorrect activation code")
   expect(page).to have_css("input.activation_code")
 end
 
 Given(/^I successfully boot and activate the bomb$/) do
-  visit('/')
+  visit('/newbomb')
   fill_in('activation_code', with: "2468")
   fill_in('deactivation_code', with: "1357")
   click_button('Boot Bomb')

@@ -1,5 +1,11 @@
 <h2> Bomb successfully created.</h2>
+
 <form action="/startbomb" method = "POST">
    Enter activation code: <input type="text" name="activation_code" class="activation_code"> <br>
    <input type="submit" value="Submit">
 </form>
+
+
+<% if flash[:failed_activation] %>
+  <h2> <%= flash[:failed_activation] %> </h2>
+<% end %>

@@ -3,64 +3,70 @@
 require 'sinatra'
 require './bomb.rb'
 require 'pry'
+require 'sinatra/flash'
 
 enable :sessions
 
+before do
+  @user_bomb = retrieve_bomb
+end
+
+after do
+  update_bomb(@user_bomb)
+end
+
+
 get '/' do
-  session[:user_bomb] = nil
-  erb :boot_page
+  if @user_bomb
+    puts 'what is the bomb doing now', @user_bomb.state, @user_bomb.has_been_activated
+  end
+  return erb :boot_page if !@user_bomb
+  return erb :start_bomb_page if @user_bomb.state == :inactive && !@user_bomb.has_been_activated 
+  return erb :countdown_page if @user_bomb.state == :active
+  return erb :reactivate_page if @user_bomb.state == :inactive && @user_bomb.has_been_activated
+  return erb :bomb_exploded if@user_bomb.state == :exploded
+end
+
+get '/newbomb' do
+  @user_bomb = nil
+  redirect '/'
 end
 
 post '/attemptboot' do
   begin
     @user_bomb = Bomb.new(params[:activation_code], params[:deactivation_code])
-    update_bomb(@user_bomb)
-    erb :start_bomb_page
   rescue
-    erb :boot_page_failed
+    flash[:failed_boot] = "Your activation codes were not accepted. Ensure they are 4 digits."
   end
+  redirect '/'
 end
 
 post '/startbomb' do
-  @user_bomb = retrieve_bomb
-  return erb :boot_page unless @user_bomb
-  @user_bomb.start_bomb(params[:activation_code])
-  update_bomb(@user_bomb)
-  if @user_bomb.state == :active
-    erb :countdown_page
-  else
-    erb :start_bomb_page_failed
-  end
+  redirect '/' unless @user_bomb
+  @user_bomb.attempt_activation(params[:activation_code])
+  flash[:failed_activation] = "Incorrect activation code" if @user_bomb.state == :inactive
+  redirect '/'
 end
 
+
 post '/attemptdeactivation' do
-  @user_bomb = retrieve_bomb
-  return erb :boot_page unless @user_bomb
-  return erb :start_bomb_page if @user_bomb.state == :inactive
+  redirect '/' unless @user_bomb.state == :active 
   @user_bomb.attempt_deactivation(params[:deactivation_code])
-  update_bomb(@user_bomb)
-  return erb :reactivate_page if @user_bomb.state == :inactive
-  return erb :countdown_page_error if @user_bomb.state == :active
-  return erb :bomb_exploded if @user_bomb.state == :exploded
+  flash[:failed_deactivation] = "Incorrect deactivation code. #{@user_bomb.num_deactivation_attempts} attempt(s) remain." if @user_bomb.state == :active
+  redirect '/' 
 end
 
 get '/getremainingtime' do
-  @user_bomb = retrieve_bomb
   @user_bomb.update_remaining_time
-  update_bomb(@user_bomb)
   return (@user_bomb.time_remaining).to_s if @user_bomb.time_remaining > 0
 end
 
 get '/bombexploded' do
-  @user_bomb = retrieve_bomb
-  return erb :boot_page unless @user_bomb
-  return erb :countdown_page if @user_bomb.state == :active
-  return erb :start_bomb_page if @user_bomb.state == :inactive
-  return erb :bomb_exploded if @user_bomb.state == :exploded
+  redirect '/'
 end
 
 def retrieve_bomb
-  session[:user_bomb]
+  session[:user_bomb] if session[:user_bomb]
 end
 
 def update_bomb(bomb)

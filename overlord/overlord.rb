@@ -17,9 +17,6 @@ end
 
 
 get '/' do
-  if @user_bomb
-    puts 'what is the bomb doing now', @user_bomb.state, @user_bomb.has_been_activated
-  end
   return erb :boot_page if !@user_bomb
   return erb :start_bomb_page if @user_bomb.state == :inactive && !@user_bomb.has_been_activated 
   return erb :countdown_page if @user_bomb.state == :active

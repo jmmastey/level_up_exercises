@@ -17,5 +17,6 @@ Feature: activate the bomb
   Scenario: enter the incorrect activation code and do not start the bomb
     Given I successfully boot the bomb
     When I submit incorrect activation code
-    Then I see an error message and a prompt to activate
+    Then I see an error message 
+    And I see a prompt to activate
 

@@ -45,8 +45,11 @@ When(/^I submit incorrect activation code$/) do
   click_button('Submit')
 end
 
-Then(/^I see an error message and a prompt to activate$/) do
+Then(/^I see an error message$/) do
   expect(page).to have_content("Incorrect activation code")
+end
+
+Then(/^I see a prompt to activate$/) do
   expect(page).to have_css("input.activation_code")
 end
 

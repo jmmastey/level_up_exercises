@@ -1,6 +1,12 @@
-# A sample Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby '2.0.0'
 
-gem "sinatra"
+gem 'capybara'
+gem 'capybara-webkit'
+gem 'cucumber'
+gem 'poltergeist'
+gem 'pry'
+gem 'rspec'
+gem 'selenium-webdriver'
+gem 'sinatra'

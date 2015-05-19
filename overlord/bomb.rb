@@ -12,7 +12,7 @@ class Bomb
     @activation_code = set_code(activation_code, "1234")
     @deactivation_code = set_code(deactivation_code, "0000")
     @state = :inactive # :inactive, :active, :exploded
-    @has_been_activated = false #tracks whether bomb activated at least once
+    @has_been_activated = false # tracks whether bomb activated at least once
     @num_deactivation_attempts = 3
     @time_remaining = BOMB_DURATION # seconds
     @explosion_time = nil  # This shouldn't be set until the bomb is activated
@@ -21,7 +21,7 @@ class Bomb
   def set_code(code, default)
     return code if code_valid?(code)
     return default if code == ""
-    raise BombCodeError, "Your code, #{code}, is invalid. Choose a 4 digit code."
+    raise BombCodeError, "Your code (#{code}) is invalid. Choose 4 digit code."
   end
 
   def attempt_activation(activation_code)
@@ -41,8 +41,9 @@ class Bomb
     deactivate if possible_to_deactivate?(deactivation_code)
     apply_penalty if !possible_to_deactivate?(deactivation_code)
   end
-    
+
   private
+
   def start_bomb
     @state = :active
     @has_been_activated = true
@@ -71,5 +72,4 @@ class Bomb
   def code_valid?(code)
     code =~ /^\d{4}$/
   end
-    
 end

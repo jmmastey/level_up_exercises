@@ -2,5 +2,15 @@
 source "https://rubygems.org"
 
 ruby "2.0.0"
-
-gem "sinatra"
+gem "rack", "1.5.2"
+#gem 'sinatra', :git => 'git@github.com:sinatra/sinatra.git'
+gem 'sinatra'
+gem "cucumber-sinatra"
+gem "capybara"
+gem "cucumber"
+gem "rspec"
+gem "rufus-scheduler"
+gem "selenium"
+gem "selenium-webdriver"
+gem "pry"
+gem "sinatra-flash"

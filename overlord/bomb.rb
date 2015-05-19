@@ -1,4 +1,5 @@
 BombCodeError = Class.new(RuntimeError)
+BombStateError = Class.new(RuntimeError)
 
 BOMB_DURATION = 10
 class Bomb
@@ -11,7 +12,7 @@ class Bomb
     @activation_code = set_code(activation_code, "1234")
     @deactivation_code = set_code(deactivation_code, "0000")
     @state = :inactive # :inactive, :active, :exploded
-    @has_been_activated = false
+    @has_been_activated = false #tracks whether bomb activated at least once
     @num_deactivation_attempts = 3
     @time_remaining = BOMB_DURATION # seconds
     @explosion_time = nil  # This shouldn't be set until the bomb is activated
@@ -24,8 +25,8 @@ class Bomb
   end
 
   def attempt_activation(activation_code)
-    return "Bomb cannot be started (wrong state)." if @state != :inactive
-    return 'Invalid activation code' if @activation_code != activation_code
+    raise BombStateError if @state != :inactive
+    raise BombCodeError if @activation_code != activation_code
     start_bomb
   end
 
@@ -36,8 +37,7 @@ class Bomb
   end
 
   def attempt_deactivation(deactivation_code)
-    return 'Bomb already exploded.' if @state == :exploded
-    return 'Bomb is not currently active.' if @state == :inactive
+    raise BombStateError if @state != :active
     deactivate if possible_to_deactivate?(deactivation_code)
     apply_penalty if !possible_to_deactivate?(deactivation_code)
   end

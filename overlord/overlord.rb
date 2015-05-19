@@ -33,13 +33,13 @@ post '/attemptboot' do
   begin
     @user_bomb = Bomb.new(params[:activation_code], params[:deactivation_code])
   rescue
-    flash[:failed_boot] = "Your activation codes were not accepted. Ensure they are 4 digits."
+    flash[:failed_boot] = "Codes were not accepted. Ensure they are 4 digits."
   end
   redirect '/'
 end
 
 post '/startbomb' do
-  redirect '/' unless @user_bomb
+  redirect '/' if !@user_bomb || @user_bomb.state == :active
   @user_bomb.attempt_activation(params[:activation_code])
   flash[:failed_activation] = "Incorrect activation code" if @user_bomb.state == :inactive
   redirect '/'

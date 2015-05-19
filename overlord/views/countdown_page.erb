@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+     <h2> Time remaining: </h2> 
+     <h3 id="time_remaining"> </h3>
+      
+     <form action="/attemptdeactivation" method = "POST">
+       Deactivation Code: <input type="text" name = "deactivation_code" class="deactivation_code"> <p>
+       <input type="submit" value = "Submit" >
+       <script type="text/javascript" src="update_time.js"> </script>
+     </form>
+
+     <% if flash[:failed_deactivation] %>
+       <h2> <%= flash[:failed_deactivation] %> </h2>
+      <% end %>
+
+</html>

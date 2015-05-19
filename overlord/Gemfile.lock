@@ -1,17 +1,102 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    builder (3.2.2)
+    capybara (2.4.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    childprocess (0.5.6)
+      ffi (~> 1.0, >= 1.0.11)
+    coderay (1.1.0)
+    cucumber (2.0.0)
+      builder (>= 2.1.2)
+      cucumber-core (~> 1.1.3)
+      diff-lcs (>= 1.1.3)
+      gherkin (~> 2.12)
+      multi_json (>= 1.7.5, < 2.0)
+      multi_test (>= 0.1.2)
+    cucumber-core (1.1.3)
+      gherkin (~> 2.12.0)
+    cucumber-sinatra (0.5.0)
+      templater (>= 1.0.0)
+    diff-lcs (1.2.5)
+    extlib (0.9.16)
+    ffi (1.9.8)
+    gherkin (2.12.2)
+      multi_json (~> 1.3)
+    highline (1.7.2)
+    jar_wrapper (0.1.8)
+      zip
+    method_source (0.8.2)
+    mime-types (2.5)
+    mini_portile (0.6.2)
+    multi_json (1.11.0)
+    multi_test (0.1.2)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
+    rack-test (0.6.3)
+      rack (>= 1.0)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+    rspec-core (3.2.3)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.2)
+    rubyzip (1.1.7)
+    rufus-scheduler (3.1.1)
+    selenium (0.2.11)
+      jar_wrapper
+    selenium-webdriver (2.45.0)
+      childprocess (~> 0.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    sinatra-flash (0.3.0)
+      sinatra (>= 1.0.0)
+    slop (3.6.0)
+    templater (1.0.0)
+      diff-lcs (>= 1.1.2)
+      extlib (>= 0.9.5)
+      highline (>= 1.4.0)
     tilt (1.4.1)
+    websocket (1.2.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
+    zip (2.0.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  capybara
+  cucumber
+  cucumber-sinatra
+  pry
+  rack (= 1.5.2)
+  rspec
+  rufus-scheduler
+  selenium
+  selenium-webdriver
   sinatra
+  sinatra-flash

@@ -20,7 +20,7 @@ When(/^I submit invalid codes$/) do
 end
 
 Then(/^I see that the bomb has not been created$/) do
-  expect(page).to have_content('Your activation codes were not accepted.')
+  expect(page).to have_content('Codes were not accepted.')
 end
 
 Given(/^I successfully boot the bomb$/) do

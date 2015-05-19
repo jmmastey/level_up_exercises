@@ -14,15 +14,23 @@ describe Bomb do
     expect(newbomb_valid.state).to eql(:inactive)
   end
 
-  it "can become active by calling the start_bomb function" do
-    newbomb_valid.attempt_activation(VALID_ACT_CODE)
-    expect(newbomb_valid.state).to eql(:active)
+  describe "#start_bomb" do
+    context "with valid activation code" do
+       it "sets the state to :active" do
+         newbomb_valid.attempt_activation(VALID_ACT_CODE)
+         expect(newbomb_valid.state).to eql(:active)
+       end
+    end
   end
 
-  it "can be deactivated using the deactivation code" do
-    newbomb_valid.attempt_activation(VALID_ACT_CODE)
-    newbomb_valid.attempt_deactivation(VALID_DEACT_CODE)
-    expect(newbomb_valid.state).to eql(:inactive)
+  describe "#stop_bomb" do
+    context "with valid deactivation code" do
+      it "changes the state to :inactive" do 
+        newbomb_valid.attempt_activation(VALID_ACT_CODE)
+        newbomb_valid.attempt_deactivation(VALID_DEACT_CODE)
+        expect(newbomb_valid.state).to eql(:inactive)
+      end
+    end
   end
 
   it "retains information indicating that the bomb has been active" do
@@ -31,11 +39,15 @@ describe Bomb do
     expect(newbomb_valid.has_been_activated).to eql(true)
   end
 
-  it "can be restarted after successful deactivation" do
-    newbomb_valid.attempt_activation(VALID_ACT_CODE)
-    newbomb_valid.attempt_deactivation(VALID_DEACT_CODE)
-    newbomb_valid.attempt_activation(VALID_ACT_CODE)
-    expect(newbomb_valid.state).to eql(:active)
+  describe "#restart_bomb" do 
+    context "with valid activation code" do 
+      it "is restarted (changes state to :active) after deactivation" do
+        newbomb_valid.attempt_activation(VALID_ACT_CODE)
+        newbomb_valid.attempt_deactivation(VALID_DEACT_CODE)
+        newbomb_valid.attempt_activation(VALID_ACT_CODE)
+        expect(newbomb_valid.state).to eql(:active)
+      end
+    end
   end
 
   it "explodes after #{TIME_REMAINING} seconds" do

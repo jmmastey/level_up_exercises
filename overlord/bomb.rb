@@ -25,8 +25,8 @@ class Bomb
   end
 
   def attempt_activation(activation_code)
-    raise BombStateError if @state != :inactive
-    raise BombCodeError if @activation_code != activation_code
+    return BombStateError if @state != :inactive
+    return BombCodeError if @activation_code != activation_code
     start_bomb
   end
 
@@ -37,7 +37,7 @@ class Bomb
   end
 
   def attempt_deactivation(deactivation_code)
-    raise BombStateError if @state != :active
+    return BombStateError if @state != :active
     deactivate if possible_to_deactivate?(deactivation_code)
     apply_penalty if !possible_to_deactivate?(deactivation_code)
   end

@@ -6,6 +6,7 @@ require 'pry'
 require 'sinatra/flash'
 
 enable :sessions
+set :bind, '0.0.0.0'
 
 before do
   @user_bomb = retrieve_bomb

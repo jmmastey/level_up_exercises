@@ -18,7 +18,7 @@ describe Bomb do
     expect{ Bomb.new(LONG_ACT_CODE, DEACT_CODE) }.to raise_error(BombCodeError)
   end
   # bad
-  it "complains when the activation code is 4 characters but not 4 digits is used to boot" do
+  it "complains when an activation code with 4 letters is used to boot" do
     expect { Bomb.new(BAD_ACT_CODE, DEACT_CODE) }.to raise_error(BombCodeError)
   end
   # sad?

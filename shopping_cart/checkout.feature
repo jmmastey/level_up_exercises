@@ -21,18 +21,18 @@ Feature: Finalize order
     And I click the Update Address button
     Then I see an estimate for the cost of shipping
 
-  Scenario: enter valid coupon for order
-    Given I am on the checkout page
-    When I enter a valid coupon code
-    And I click the Add Coupon button
-    Then I see a message stating that the coupon is invalid
-
   Scenario: enter invalid coupon for order
     Given I am on the checkout page
     When I enter an invalid coupon code
     And I click the Add Coupon button
+    Then I see a message stating that the coupon is invalid
+
+  Scenario: enter valid coupon for order
+    Given I am on the checkout page
+    When I enter a valid coupon code for 10% savings
+    And I click the Add Coupon button
     Then I see a message starting that the coupon has been accepted
-    And I see that the order total cost has been adjusted
+    And I see that the order total cost has reduced by 10%
 
   Scenario: enter a invalid credit card number
     Given I am on the checkout page

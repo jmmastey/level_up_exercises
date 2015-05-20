@@ -6,15 +6,15 @@ Feature: Navigate to/from shopping cart
 
   Scenario: navigate to specific item using name link
     Given I am on the cart page
-    When I click on the name of an item
+    When I click on JellyBelly link in the cart
     Then I see the item page
 
   Scenario: navigate to specific item using picture of item
     Given I am on the cart page
-    When I click on the picture of an item
+    When I click on the picture of JellyBelly item
     Then I see the item page
 
   Scenario: navigate to shopping cart from item page
-    Given I am on an item page
+    Given I am on the Nerds Candy item page
     When I click on the cart icon
     Then I see the cart page

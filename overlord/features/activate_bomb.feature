@@ -14,7 +14,7 @@ Feature: activate the bomb
     When I submit the correct activation code
     Then I see the bomb timer start
 
-  Scenario: enter the incorrect activation code and do not start the bomb
+  Scenario: enter a wrong (but valid) activation code and do not start the bomb
     Given I successfully boot the bomb
     When I submit incorrect activation code
     Then I see an error message 

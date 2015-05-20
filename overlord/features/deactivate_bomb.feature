@@ -13,8 +13,15 @@ Feature: deactivate the bomb
     Given I successfully boot and activate the bomb
     When I submit an invalid deactivation code
     Then I see the bomb has not deactivated
+    Then I see that I have 2 attempt(s) remaining
+
+  Scenario: unsuccessfully deactivate the bomb in 2 attempts
+    Given I successfully boot and activate the bomb
+    When I submit 2 invalid deactivation codes
+    Then I see the bomb has not deactivated
+    And I see that I have 1 attempt(s) remaining
 
   Scenario: unsuccessfully deactivate the bomb after 3 attempts
     Given I successfully boot and activate the bomb
-    When I submit 3 invalid activation codes
+    When I submit 3 invalid deactivation codes
     Then I see the bomb exploded

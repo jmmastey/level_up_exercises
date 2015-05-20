@@ -85,7 +85,11 @@ Then(/^I see the bomb has not deactivated$/) do
   expect(page).to have_content("attempt(s) remain")
 end
 
-When(/^I submit (\d+) invalid activation codes$/) do |num_attempts|
+Then(/^I see that I have (\d+) attempt\(s\) remaining$/) do |remaining_attempts|
+  expect(page).to have_content("#{remaining_attempts} attempt(s) remain")
+end
+
+When(/^I submit (\d+) invalid deactivation codes$/) do |num_attempts|
   num_attempts.to_i.times do
     fill_in('deactivation_code', with: "hello")
     click_button('Submit')

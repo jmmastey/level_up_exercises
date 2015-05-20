@@ -7,6 +7,8 @@ class Bomb
   attr_reader :state
   attr_reader :num_deactivation_attempts
   attr_reader :has_been_activated
+  attr_reader :activation_code
+  attr_reader :deactivation_code
 
   def initialize(activation_code, deactivation_code)
     @activation_code = set_code(activation_code, "1234")
@@ -15,17 +17,17 @@ class Bomb
     @has_been_activated = false # tracks whether bomb activated at least once
     @num_deactivation_attempts = 3
     @time_remaining = BOMB_DURATION # seconds
-    @explosion_time = nil  # This shouldn't be set until the bomb is activated
+    @explosion_time = nil  # This isn't known until the bomb is activated
   end
 
   def set_code(code, default)
     return code if code_valid?(code)
-    return default if code == ""
+    return default if code.empty?
     raise BombCodeError, "Your code (#{code}) is invalid. Choose 4 digit code."
   end
 
   def attempt_activation(activation_code)
-    return BombStateError if @state != :inactive
+    return BombStateError unless @state == :inactive
     return BombCodeError if @activation_code != activation_code
     start_bomb
   end

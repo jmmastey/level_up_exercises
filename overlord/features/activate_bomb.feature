@@ -20,3 +20,9 @@ Feature: activate the bomb
     Then I see an error message 
     And I see a prompt to activate
 
+  Scenario: enter invalid activation code and do not start the bomb
+    Given I successfully boot the bomb
+    When I submit an invalid activation code
+    Then I see an error message
+    And I see a prompt to activate
+

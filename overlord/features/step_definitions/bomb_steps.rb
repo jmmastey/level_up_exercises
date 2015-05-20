@@ -45,6 +45,11 @@ When(/^I submit incorrect activation code$/) do
   click_button('Submit')
 end
 
+When(/^I submit an invalid activation code$/) do
+  fill_in('activation_code', with: "hellooooooooooooooooooooooooooo")
+  click_button('Submit')
+end
+
 Then(/^I see an error message$/) do
   expect(page).to have_content("Incorrect activation code")
 end

@@ -20,6 +20,6 @@ Feature: Allow user to maintain shopping cart after logging in (from anonymous u
   Scenario: Cart combines old and new items when I login
     Given I am not logged in
     And my anonymous user cart contains 3 cat figurines
-    And my current cart contains 2 mouse figurines
+    And my account cart contains 2 mouse figurines
     When I login
     Then I see my shopping cart now contains 3 cat figurines and 2 mouse figurines

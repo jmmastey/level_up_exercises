@@ -1,138 +1,99 @@
 # DinoDex is the main class
+require 'csv'
+require_relative 'dinosaur.rb'
+# DinoDex is the main class
 class DinoDex
-  require 'csv'
   SIZE_VALUE = 4000
+  NAME_CONVERTER = lambda do |field|
+    field = 'NAME' if field == 'Genus'
+    field
+  end
 
+  DIET_CONVERTER = lambda do |field|
+    field = 'DIET' if field == 'Carnivore'
+    field
+  end
+
+  WEIGHT_CONVERTER = lambda do |field|
+    field = 'WEIGHT_IN_LBS' if field == 'Weight'
+    field
+  end
+
+  CONVERTERS = [DIET_CONVERTER, WEIGHT_CONVERTER, NAME_CONVERTER, :downcase]
   def initialize(name_csv)
-    @dinosaurs = {}
+    @dinosaurs = []
     CSV.foreach(name_csv,
                 headers: true,
-                header_converters: :symbol,
-                converters: :all)do |row|
-      @dinosaurs[row.fields[0]] =
-          Hash[row.headers[0..-1].zip(row.fields[0..-1])]
+                header_converters: CONVERTERS
+               )do |row|
+      a = Dinosaur.new(row.to_hash)
+      @dinosaurs << a
     end
   end
 
-  def simple_dino_filter(dino_attrb, dino_value)
-    dino_attrb_sym = dino_attrb.to_sym
-
-    puts @dinosaurs.select {|_dinosaur, dinoatrributes|
-           dinoatrributes[dino_attrb_sym] == dino_value
-         }
+  def find_simple(attrb, value)
+    result = @dinosaurs.select { |dino| dino.simple_filter?(attrb, value) }
+    puts result.to_s
+    Dinosaur.new(result.to_s)
   end
 
-  def diet_dino_filter(dino_attrb, dino_value)
-    dino_attrb_sym = dino_attrb.to_sym
-    puts @dinosaurs.select {|_dinosaur, dinoatrributes|
-           dino_value.include? dinoatrributes[dino_attrb_sym]
-         }
+  def find_carnivore(attrb, value)
+    result = @dinosaurs.select { |dino| dino.carnivore?(attrb, value) }
+    puts result.to_s
+    Dinosaur.new(result.to_s)
   end
 
-  def size_dino_filter_big(dino_size_attrb)
-    dino_attrb_sym = dino_size_attrb.to_sym
-    puts @dinosaurs.select{|_dinosaur, dinoatrributes|
-           dinoatrributes[dino_attrb_sym] &&
-             dinoatrributes[dino_attrb_sym] > SIZE_VALUE
-         }
+  def find_big
+    result = @dinosaurs.select { |dino| dino.big? }
+    puts result.to_s
+    Dinosaur.new(result.to_s)
   end
 
-  def size_dino_filter_small(dino_size_attrb)
-    dino_attrb_sym = dino_size_attrb.to_sym
-    puts @dinosaurs.select{|_dinosaur, dinoatrributes|
-           dinoatrributes[dino_attrb_sym] &&
-             dinoatrributes[dino_attrb_sym] < SIZE_VALUE
-         }
-  end
-
-  def size_dino_complexfilter_big(dino_size_attrb, dino_attrb, dino_value)
-    dino_size_sym = dino_size_attrb.to_sym
-    dino_attrb_sym =  dino_attrb.to_sym
-    puts @dinosaurs.select{|_dinosaur, dinoatrributes|
-           dinoatrributes[dino_size_sym] &&
-             dinoatrributes[dino_size_sym] > SIZE_VALUE &&
-             dinoatrributes[dino_attrb_sym] == dino_value
-         }
-  end
-
-  def size_dino_complexfilter_small(dino_size_attrb, dino_attrb, dino_value)
-    dino_size_sym = dino_size_attrb.to_sym
-    dino_attrb_sym =  dino_attrb.to_sym
-    puts @dinosaurs.select{|_dinosaur, dinoatrributes|
-           dinoatrributes[dino_size_sym] &&
-             dinoatrributes[dino_size_sym] < SIZE_VALUE &&
-             dinoatrributes[dino_attrb_sym] == dino_value
-         }
-  end
-
-  # need one for Diet and other attributes.
-  def diet_dino_complex(dino_attrb_one, dino_value_one,
-                        dino_attrb_two, dino_value_two)
-    dino_attrb_sym_one = dino_attrb_one.to_sym
-    dino_attrb_sym_two = dino_attrb_two.to_sym
-    puts @dinosaurs.select{|_dinosaur, dinoatrributes|
-           dinoatrributes[dino_attrb_sym_one] &&
-             dinoatrributes[dino_attrb_sym_two] &&
-             dinoatrributes[dino_attrb_sym_one] == dino_value_one &&
-             dinoatrributes[dino_attrb_sym_two] == dino_value_two
-         }
-  end
-
-  # need one for Diet and other attributes.
-  def size_dino_complex(dino_attrb_one, dino_value_one,
-                        dino_attrb_two, dino_value_two)
-    dino_attrb_sym_one = dino_attrb_one.to_sym
-    dino_attrb_sym_two = dino_attrb_two.to_sym
-    puts @dinosaurs.select{|_dinosaur, dinoatrributes|
-           dino_value_one.include? dinoatrributes[dino_attrb_sym_one]
-           dinoatrributes[dino_attrb_sym_two] == dino_value_two
-         }
+  def find_small
+    result = @dinosaurs.select { |dino| dino.small? }
+    puts result.to_s
+    Dinosaur.new(result.to_s)
   end
 end
-
 # Just uncomment any condition/filter you want to test.
-# and uncomment the creation of dinodex
-# choose which csv to work with
-
-# dinoDex = DinoDex.new("dinodex.csv")
-# dinoDex = DinoDex.new("african_dinosaur_export.csv")
-
-# Grab all dinosars that were bipeds
-# dinoDex.simple_dino_filter("walking", "Biped" )
+dino_dex = DinoDex.new('dinodex.csv')
+dino_dex.find_carnivore(:diet, (MEAT_EATERS))
 
 # Grab all dinosaurs that were carnivores
 # and grab all dinosaurs who ate fish and insect
-# dinoDex.diet_dino_filter("diet",
-# ['Carnivore','Insectivore','Piscivore'] )
+MEAT_EATERS = %w(Carnivore Insectivore Piscivore)
+dino_dex.find_carnivore(:diet, (MEAT_EATERS))
+
+# Grab all dinosars that were bipeds
+dino_dex.find_simple(:walking, 'Biped')
 
 # Grab dinosaurs for specific periods(no need to
 # differentiate between Early and Late Cretaceous)
-# dinoDex.simple_dino_filter("period", "Late Cretaceous" )
+dino_dex.find_simple(:period, 'Late Cretaceous')
 
 # Grab all dinosaurs that are big
-# dinoDex.size_dino_filter_big("weight_in_lbs" )
+dino_dex.find_big
 
 # Grab all dinosaurs that are small
-# dinoDex.size_dino_filter_small("weight_in_lbs" )
+dino_dex.find_small
+
+# can handle the african dinos
+dino_dex = DinoDex.new('african_dinosaur_export.csv')
+dino_dex.find_simple(:period, 'Jurassic')
 
 # Combine criteria, you can select big and another criteria
-# dinoDex.size_dino_complexfilter_big("weight_in_lbs",
-# "period","Early Cretaceous")
+dino_dex.find_big.simple_filter?(:walking, 'Bipded')
 
 # Combine criteria, you can select small and another criteria
-# dinoDex.size_dino_complexfilter_small('weight_in_lbs','period',
-# 'Early Cretaceous')
+dino_dex.find_small.simple_filter?(:walking, 'Bipded')
 
 # Combine Criteria,  you can select carnivore and any other criteria
-#  dinoDex.size_dino_complex('diet',['Carnivore','Insectivore','Piscivore'],
-# 'continent', 'North America')
-
-# This also works for african_dinosaur_export.csv,
-# sample filters just change the file
-# in the constructor to african_dinosaur_export.csv
-# dinoDex.simple_dino_filter("genus", "Abrictosaurus" )
-# dinoDex.simple_dino_filter("period", "Cretaceous")
+dino_dex.find_simple(:walking, 'Biped').carnivore?(:diet, %w(MEAT_EATERS))
 
 # For a given dino,
 # I'd like to be able print all the known facts about a dinosaur
-# dinoDex.simple_dino_filter("name", "Albertosaurus" )
+dino_dex.find_simple(:name, 'Yangchuanosaurus')
+
+
+
+

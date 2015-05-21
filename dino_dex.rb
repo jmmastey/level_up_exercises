@@ -93,7 +93,3 @@ dino_dex.find_simple(:walking, 'Biped').carnivore?(:diet, %w(MEAT_EATERS))
 # For a given dino,
 # I'd like to be able print all the known facts about a dinosaur
 dino_dex.find_simple(:name, 'Yangchuanosaurus')
-
-
-
-

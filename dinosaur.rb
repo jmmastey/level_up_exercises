@@ -28,5 +28,3 @@ class Dinosaur
     @data[:weight] && @data[:weight].to_i < SIZE_VALUE
   end
 end
-
-

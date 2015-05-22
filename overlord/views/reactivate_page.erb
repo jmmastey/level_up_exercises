@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" >
+  </head>
+
+  <body>
+      <h1> Successful deactivation! </h1>
+      <h3> Can I interest you in reactivating? </h3>
+      <form action="/startbomb" method="POST">
+         Activation Code: <input type="text" name="activation_code"><p>
+         <input type="submit" value ="Submit">
+      </form>
+
+      <% if flash[:failed_activation] %> 
+        <h2> <%= flash[:failed_activation] %> </h2>
+      <% end %>
+
+
+
+  </body>
+
+
+</html>

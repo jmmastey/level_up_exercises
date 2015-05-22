@@ -17,7 +17,7 @@ class DinoCatalogTest < Minitest::Test
   def test_load_catalog_african
     # skip
     african_catalog = DinoCatalog.new("african_dinosaur_export.csv")
-    assert_equal 7, african_catalog.dino_count, "We loaded african_dinosaur_export.csv, we need to get 11 Dinos"
+    assert_equal 7, african_catalog.dino_count, "We loaded african_dinosaur_export.csv, we need to get 7 Dinos"
   end
 
   def test_dino_init

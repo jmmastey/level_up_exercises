@@ -1,19 +1,17 @@
 require_relative 'classifications.rb'
-require_relative 'exceptions.rb'
-# This is the main class for the exercise
-# This class is used to define errors
+# This class is used to define errors for Regions
 class UnknownRegionError < RuntimeError
- def message
-   'Unknown region, please provide a valid region.'
- end
+  def message
+    'Unknown region, please provide a valid region.'
+  end
 end
-
+# This class is used to define errors for shapes
 class UnknownShapeError < RuntimeError
   def message
     "Unknown shape value. Are you sure you know what you're talking about?"
   end
 end
-
+# This is the main Arrowhead class
 class Arrowhead
   @classify_class = Classify.new
   @my_classify =   Classify::CLASSIFICATIONS
@@ -24,4 +22,4 @@ class Arrowhead
   end
 end
 
-puts Arrowhead.classify(:northern_plains, :bifurcated)
+puts Arrowhead.classify(:northern_plains, :bifucated)

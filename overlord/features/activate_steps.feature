@@ -9,4 +9,3 @@ Feature: Activation
     Then I see the countdown start
 
 
-

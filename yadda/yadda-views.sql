@@ -31,8 +31,8 @@ CREATE OR REPLACE VIEW also_enjoy AS
     styles.style AS beerstyle,
     AVG(ratings.overall) AS average_rating
   FROM beers
-  LEFT JOIN styles ON beers.style_id = styles.style_id
   LEFT JOIN ratings ON ratings.beer_id = beers.beer_id
-  GROUP BY styles.style_id, beers.beer_id
+  LEFT JOIN styles ON beers.style_id = styles.style_id
+  GROUP BY styles.style, beers.beer_id
   HAVING AVG(ratings.overall) > 4
   ORDER BY RANDOM();

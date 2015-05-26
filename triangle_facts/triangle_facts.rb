@@ -57,8 +57,8 @@ class Triangle
 
   def recite_facts
     puts "This triangle is equilateral!" if equilateral?
-    puts "This triangle is isosceles! Also, that word is \
-      hard to type." if isosceles?
+    puts "This triangle is isosceles! Also, that word is "\
+      "hard to type." if isosceles?
     puts "This triangle is scalene and mathematically boring." if scalene?
 
     puts "The angles of this triangle are #{angle_a},#{angle_b},#{angle_c}"

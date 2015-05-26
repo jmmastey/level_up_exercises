@@ -6,11 +6,11 @@ require 'faker'
                    dbname: "yadda")
 
 def main
-  generate_person_records
-  generate_brewery_records
-  generate_style_records
-  generate_beer_records
-  generate_rating_records
+  generate_person_records 200000
+  generate_brewery_records 1000
+  generate_style_records 25
+  generate_beer_records 10000
+  generate_rating_records 1000000
 end
 
 def generate_rating_records(count=1000)

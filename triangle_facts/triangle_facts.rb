@@ -18,25 +18,29 @@ class Triangle
     @side1 = side1
     @side2 = side2
     @side3 = side3
-    calculate_angles
+    @angle_a = determine_angle(@side2, @side3, @side1)
+    @angle_b = determine_angle(@side1, @side3, @side2)
+    @angle_c = determine_angle(@side1, @side2, @side3)
   end
 
-  def angleize(a, b, c)
-    (Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)) * (180 / Math::PI)).round
+  def law_of_cosines(a, b, c)
+    (a**2 + b**2 - c**2) / (2.0 * a * b)
   end
 
-  def calculate_angles
-    @angle_a = angleize(@side2, @side3, @side1)
-    @angle_b = angleize(@side1, @side3, @side2)
-    @angle_c = angleize(@side1, @side2, @side3)
+  def radians_to_degrees(rads)
+    (rads * 180 / Math::PI).round
+  end
+
+  def determine_angle(a, b, c)
+    radians_to_degrees(Math.acos(law_of_cosines(a, b, c)))
   end
 
   def equilateral?
-    side1 == side2 && side2 == side3
+    @side1 == @side2 && @side2 == @side3
   end
 
   def isosceles?
-    [side1, side2, side3].uniq.length == 2
+    [@side1, @side2, @side3].uniq.length == 2
   end
 
   def scalene?

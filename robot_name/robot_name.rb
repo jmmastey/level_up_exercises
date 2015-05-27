@@ -28,8 +28,8 @@ class Robot
     generate_char = -> { ('A'..'Z').to_a.sample }
     generate_num = -> { rand(10) }
 
-    2.times.collect { generate_char.call }.join +
-      3.times.collect { generate_num.call }.join
+    2.times.map { generate_char.call }.join +
+      3.times.map { generate_num.call }.join
   end
 end
 

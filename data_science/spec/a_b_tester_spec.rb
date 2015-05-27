@@ -28,8 +28,10 @@ RSpec.describe ABSplitTester do
 
   describe "Get conversion rate for cohort" do
     it "returns the count of rows where result is 1" do
-      expect(@ab_split_obj.conversion_rate("A")).to eq([0.21691521438944278, 0.6402276427534144])
-      expect(@ab_split_obj.conversion_rate("B")).to eq([0.5596750807463663, 0.918585788818851])
+      expect(@ab_split_obj.conversion_rate("A")).to \
+        eq([0.21691521438944278, 0.6402276427534144])
+      expect(@ab_split_obj.conversion_rate("B")).to \
+        eq([0.5596750807463663, 0.918585788818851])
     end
   end
 

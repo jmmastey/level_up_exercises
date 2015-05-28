@@ -1,4 +1,5 @@
 require './dinodex'
+require 'pry'
 
 class DinoInterface
   PROMPT_MESSAGES = {
@@ -38,7 +39,30 @@ class DinoInterface
       break unless gets.chomp.downcase == 'n'
       exit_session
     end
-    ask_questions
+    proceed_to_next_step
+  end
+
+  def exit_session
+    p PROMPT_MESSAGES[:exit]
+    exit
+  end
+
+  def proceed_to_next_step
+    if @search_criteria.length >= QUESTIONS.length
+      finish
+    else
+      ask_next_question
+    end
+  end
+
+  def ask_next_question
+    question = QUESTIONS[@search_criteria.length]
+    p question[:question]
+    answer = gets.chomp.downcase
+    if question[:answers].key?(answer)
+      @search_criteria[question[:search_key]] = question[:answers][answer]
+    end
+    proceed_to_next_step
   end
 
   def finish
@@ -51,35 +75,7 @@ class DinoInterface
   end
 
   def list_results(results)
-    output = ''
-    results.each_with_index do |dino, i|
-      output += dino[:name]
-      output += ', ' if i < results.length - 1
-    end
-    output
-  end
-
-  def exit_session
-    p PROMPT_MESSAGES[:exit]
-    exit
-  end
-
-  def ask_questions
-    QUESTIONS.each_with_index do |data, i|
-      sleep(1) while @search_criteria.length < i - 1
-      question(data)
-    end
-    finish
-  end
-
-  def question(data)
-    loop do
-      p data[:question]
-      answer = gets.chomp.downcase
-      if data[:answers].key?(answer)
-        @search_criteria[data[:search_key]] = data[:answers][answer]
-        break
-      end
-    end
+    dino_names = results.map { |dino| dino[:name] }
+    dino_names.join(', ')
   end
 end

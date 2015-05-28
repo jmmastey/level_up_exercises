@@ -27,7 +27,7 @@ class DinoDexData
     end
   end
 
-  def header_converters
+  def implement_csv_header_converters
     CSV::HeaderConverters[:map_to_main] = lambda do |header|
       header = header.downcase.to_sym
       return FIELD_MAPPING[header] if FIELD_MAPPING.key?(header)
@@ -35,7 +35,7 @@ class DinoDexData
     end
   end
 
-  def converters
+  def implement_csv_converters
     CSV::Converters[:map_to_main] = lambda do |value, field_info|
       if field_info.header == 'diet' && !value.nil? && value.downcase == 'yes'
         return 'Carnivore'
@@ -45,8 +45,8 @@ class DinoDexData
   end
 
   def get_pb_data
-    header_converters
-    converters
+    implement_csv_header_converters
+    implement_csv_converters
     parse_pb_file
   end
 

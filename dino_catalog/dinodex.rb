@@ -3,60 +3,53 @@ require './dinodexdata'
 
 class DinoDex
   def initialize
-    @dinodexdata ||= DinoDexData.new
+    @dino_database ||= DinoDexData.new
   end
 
   def search(search_filters, format = '')
-    results = []
-    search_filters.each do |key, value|
-      results << generate_results(key, value)
-    end
-    results = parse_results(results)
-    return results.to_json if format == 'json'
-    results
+    search_results = retrieve_matching_results(search_filters)
+    return search_results.to_json if format == 'json'
+    search_results
   end
 
   private
 
-  # Analyze key/value and generate results properly
+  def retrieve_matching_results(filters)
+    merged_results = []
+    filters.each do |key, value|
+      filter_results = generate_results(key, value)
+      merged_results = filter_results if merged_results.empty?
+      merged_results &= filter_results
+    end
+    merged_results
+  end
 
   def generate_results(key, value)
     if value.is_a?(Enumerable)
-      get_results(key, value)
+      retrieve_results(key, value)
     elsif key == 'min_weight'
-      get_results_from_min_weight(value)
+      retrieve_results_from_min_weight(value)
     else
-      get_results_from_string(key, value)
+      retrieve_results_from_string(key, value)
     end
   end
 
-  def get_results(key, values = [])
+  def retrieve_results(key, values = [])
     values = values.map(&:downcase)
-    @dinodexdata.data.select do |dino|
+    @dino_database.data.select do |dino|
       dino[key] && values.include?(dino[key].downcase)
     end
   end
 
-  def get_results_from_min_weight(min_weight)
-    @dinodexdata.data.select do |dino|
+  def retrieve_results_from_min_weight(min_weight)
+    @dino_database.data.select do |dino|
       dino['weight_in_lbs'] && dino['weight_in_lbs'].to_i >= min_weight
     end
   end
 
-  def get_results_from_string(key, value)
-    @dinodexdata.data.select do |dino|
+  def retrieve_results_from_string(key, value)
+    @dino_database.data.select do |dino|
       dino[key] && dino[key].downcase.include?(value.downcase)
     end
-  end
-
-  # Look for dinos that exist across all results
-
-  def parse_results(results)
-    return nil if results.length < 1
-    common_results = results.first
-    (1..(results.length - 1)).each do |i|
-      common_results &= results[i]
-    end
-    common_results
   end
 end

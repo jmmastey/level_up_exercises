@@ -1,4 +1,10 @@
-class NameCollisionError < RuntimeError; end
+# This class is used to define errors for Regions
+class NameCollisionError < RuntimeError
+  def message
+    'There was a problem generating the robot name!'
+  end
+end
+
 # Generate Robot Name Code
 class Robot
   attr_accessor :name
@@ -18,7 +24,7 @@ class Robot
 
   def check_error
     puts @name
-    raise NameCollisionError, 'There was a problem generating the robot name!' unless (@name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @registry.include?(@name)
+    raise NameCollisionError unless (@name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @registry.include?(@name)
   end
 
   def initialize(args = {})
@@ -28,8 +34,8 @@ class Robot
     @registry << @name
   end
 end
-
-robot = Robot.new()
+generator = -> { 'AA111' }
+robot = Robot.new(name_generator: generator)
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!

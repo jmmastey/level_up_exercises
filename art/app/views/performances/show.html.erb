@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Show:</strong>
+  <%= @performance.show %>
+</p>
+
+<p>
+  <strong>Performed on:</strong>
+  <%= @performance.performed_on %>
+</p>
+
+<%= link_to 'Edit', edit_performance_path(@performance) %> |
+<%= link_to 'Back', performances_path %>

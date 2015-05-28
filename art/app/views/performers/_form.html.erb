@@ -1,0 +1,25 @@
+<%= form_for(@performer) do |f| %>
+  <% if @performer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@performer.errors.count, "error") %> prohibited this performer from being saved:</h2>
+
+      <ul>
+      <% @performer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

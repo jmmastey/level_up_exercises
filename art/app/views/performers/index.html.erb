@@ -1,0 +1,27 @@
+<h1>Listing performers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @performers.each do |performer| %>
+      <tr>
+        <td><%= performer.name %></td>
+        <td><%= performer.description %></td>
+        <td><%= link_to 'Show', performer %></td>
+        <td><%= link_to 'Edit', edit_performer_path(performer) %></td>
+        <td><%= link_to 'Destroy', performer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Performer', new_performer_path %>

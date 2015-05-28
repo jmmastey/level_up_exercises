@@ -58,5 +58,4 @@ class Triangle
   end
 end
 
-triangles = [[5, 5, 5], [5, 12, 13]]
-triangles.each { |sides| Triangle.new(sides).recite_facts }
+[[5, 5, 5], [5, 12, 13]].each { |sides| Triangle.new(sides).recite_facts }

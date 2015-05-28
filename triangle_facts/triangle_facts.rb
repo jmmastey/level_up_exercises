@@ -1,9 +1,9 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-  attr_accessor :side1,:side2,:side3
+  attr_accessor :side1, :side2, :side3
 
-  def initialize(side1,side2,side3)
-    @side1,@side2,@side3 = side1,side2,side3
+  def initialize(sides)
+    @side1, @side2, @side3 = sides
   end
 
   def equilateral()
@@ -48,11 +48,9 @@ class Triangle
 end
 
 
-triangles = [
-  [5,5,5],
-  [5,12,13],
-]
-triangles.each { |sides|
-  tri = Triangle.new(*sides)
+triangles = [[5, 5, 5], [5, 12, 13]]
+
+triangles.each do |sides|
+  tri = Triangle.new(sides)
   tri.recite_facts
-}
+end

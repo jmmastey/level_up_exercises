@@ -27,3 +27,9 @@ But, this is the important part: you're going to write all the tests for the dev
 * Add a timer. All good bombs have timers.
 * Add wires to snip to stop the bomb from detonating. This guy seems like he might not pay on time.
 * No bonus points for developing an actual electronic detonator. Still, dude, sweet.
+
+### How to run
+
+* **cd** to the root directory
+* run **ruby start.rb**
+* Visit **http://localhost:4567**

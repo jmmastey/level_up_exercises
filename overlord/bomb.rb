@@ -10,13 +10,13 @@ class Bomb
   end
 
   def activate(code)
-    return false if code != @activation_code || @status == 'exploded'
+    return if code != @activation_code || @status == 'exploded'
     @status = 'active'
     reset_errors
   end
 
   def deactivate(code)
-    return false if @status == 'exploded'
+    return if @status == 'exploded'
     if code == @deactivation_code
       @status = 'inactive'
       reset_errors

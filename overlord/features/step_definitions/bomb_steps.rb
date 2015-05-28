@@ -29,14 +29,17 @@ module SessionStepsHarness
   end
 
   def submit_random_code(blacklist = [])
-    new_code = ''
-    loop do
-      new_code = ''
-      4.times { new_code += rand(9).to_s }
-      break unless blacklist.include? new_code
-    end
-    code_field.set new_code
+    code = generate_random_code(blacklist)
+    code_field.set(code)
     submit_security_form
+  end
+
+  def generate_random_code(blacklist = [])
+    loop do
+      code = ''
+      4.times { code += rand(9).to_s }
+      return code unless blacklist.include?(code)
+    end
   end
 
   def submit_security_form

@@ -12,7 +12,7 @@ $(function()
 
       // display failed attempts to deactivate
       error_text = '';
-      if (typeof response.error_count !== 'undefined' && response.error_count > 0) {
+      if (response.error_count > 0) {
         error_text = 'Failed attempts: ' + response.error_count;
       }
       $('.bomb-errors').html(error_text);

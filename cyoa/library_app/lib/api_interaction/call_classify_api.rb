@@ -1,9 +1,9 @@
 require 'httparty'
 
 module CallClassifyAPI
-  MultiResponseCode = "4"
-  SingleResponseSummaryCode = "0"
-  SingleResponseVerboseCode = "2"
+  MultiResponseCode = 4
+  SingleResponseSummaryCode = 0
+  SingleResponseVerboseCode = 2
 
   BaseURI = "http://classify.oclc.org/classify2/Classify"
   QueryFields = %w(stdndr oclc isbn issn upc owi author title)
@@ -25,18 +25,30 @@ module CallClassifyAPI
   end
 
   def self.delegate_output(response)
-    response_code = response["classify"]["response"]["code"]
+    response_code = self.find_response_code(response)
+    return self.find_error(response_code) if response_code >= 100
     if response_code == MultiResponseCode #passes a list
-      response_display = self.display_response(response["classify"]["works"]["work"])
+      return self.display_response(response["classify"]["works"]["work"])
     end
     if response_code == SingleResponseSummaryCode #passes a hash 
-      response_display = self.display_single_entry(response["classify"]["work"],SummaryResponseFields)
+      return self.display_single_entry(response["classify"]["work"],SummaryResponseFields)
     end
     if response_code == SingleResponseVerboseCode #passes a hash 
-      response_display = self.display_single_entry(response["classify"]["editions"]["edition"][0], VerboseResponseFields)
+      return self.display_single_entry(response["classify"]["editions"]["edition"][0], VerboseResponseFields)
     end
-    response_display
   end
+
+  def self.find_response_code(response)
+    response["classify"]["response"]["code"].to_i
+  end
+
+  def self.find_error(code)
+    return "No input." if code == 100
+    return "Invalid input." if code == 101
+    return "No data found for this search" if code == 102
+    return "Unexpected error" if code == 200
+  end
+
 
   def self.display_single_entry(entry, display_fields)
     #Build a string containing the info that should be displayed about the title

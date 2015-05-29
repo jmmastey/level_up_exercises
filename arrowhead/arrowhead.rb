@@ -15,20 +15,25 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+
+    shapes = CLASSIFICATIONS[region]
+    regions = CLASSIFICATIONS
+    raise "Unknown shape value. Are you sure you know /
+            what you're talking about?" unless shapes.include?(shape)
+    raise  "Unknown region, please provide a /
+                         valid region." unless regions.include?(region)
+    arrowhead = shapes[shape]
+    puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end
 
 puts Arrowhead.classify(:northern_plains, :bifurcated)
+puts Arrowhead.classify(:northern_plains, :bifurcated)
+#puts Arrowhead.classify(:southern_plains, :bifurcated)
+#puts Arrowhead.classify(:northern_plains, :oblong)
+puts Arrowhead.classify(:northern_plains, :bifurcated)
+puts Arrowhead.classify(:northern_plains, :bifurcated)
+puts Arrowhead.classify(:northern_plains, :notched)
+puts Arrowhead.classify(:northern_plains, :lanceolate)
+

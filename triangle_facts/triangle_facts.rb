@@ -10,7 +10,9 @@ class Triangle
   }
 
   def initialize(side1,side2,side3)
-    @side1,@side2,@side3 = side1,side2,side3
+    @side1 = side1
+    @side2 = side2
+    @side3 = side3
   end
 
   def equilateral?
@@ -39,7 +41,7 @@ class Triangle
   def type
     return :equilateral if equilateral?
     return :isoceles    if isosceles?
-    return :scalene     if scalene?
+    return :scalene
   end
 
   def calculate_angles(a,b,c)
@@ -70,5 +72,3 @@ triangles.each do |sides|
   tri = Triangle.new(*sides)
   tri.recite_facts
 end
-
-

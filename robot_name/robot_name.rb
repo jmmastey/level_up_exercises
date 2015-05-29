@@ -1,4 +1,5 @@
 class NameCollisionError < RuntimeError; end
+class NameFormatError < RuntimeError; end
 
 class Robot
   class << self
@@ -8,13 +9,16 @@ class Robot
 
   attr_accessor :name
 
-  ERR = { name: 'There was a problem generating the robot name!' }
+  ERR = {
+    conflict: 'Robot name already exists: ',
+    format: 'Robot name format incorrect! (two capital letters, 3 numbers)'
+  }
 
   def initialize(args = {})
     @name_generator = args[:name_generator] || method(:generator)
 
     @name = generate_name
-    raise NameCollisionError, ERR[:name] unless valid?(name)
+    validate_name(name)
 
     self.class.registry << @name
   end
@@ -30,12 +34,15 @@ class Robot
   end
 
   def name=(val)
-    raise NameCollisionError, ERR[:name] unless valid?(val)
+    validate_name(val)
     @name = val
   end
 
-  def valid?(vname)
-    valid_name?(vname) && !name_conflict?(vname)
+  def validate_name(vname)
+    if name_conflict?(vname)
+      raise NameCollisionError, ERR[:conflict] + "#{vname}"
+    end
+    raise NameFormatError, ERR[:format] unless valid_name?(vname)
   end
 
   def valid_name?(vname)
@@ -51,6 +58,6 @@ robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+generator = -> { 'AA111' }
+Robot.new(name_generator: generator)
+Robot.new(name_generator: generator)

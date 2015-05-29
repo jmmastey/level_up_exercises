@@ -11,7 +11,7 @@ class Robot
 
   ERR = {
     conflict: 'Robot name already exists: ',
-    format: 'Robot name format incorrect! (two capital letters, 3 numbers)'
+    format: 'Robot name format incorrect! (two capital letters, 3 numbers)',
   }
 
   def initialize(args = {})
@@ -46,7 +46,7 @@ class Robot
   end
 
   def valid_name?(vname)
-    vname =~ /[[:alpha:]]{2}[[:digit:]]{3}/
+    vname =~ /[A-Z]{2}[0-9]{3}/
   end
 
   def name_conflict?(vname)

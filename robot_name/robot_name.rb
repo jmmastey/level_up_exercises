@@ -29,6 +29,11 @@ class Robot
     rname.join
   end
 
+  def name=(val)
+    raise NameCollisionError, ERR[:name] unless valid?(val)
+    @name = val
+  end
+
   def valid?(vname)
     valid_name?(vname) && !name_conflict?(vname)
   end

@@ -46,14 +46,10 @@ class Triangle
 
   def calculate_angles(a,b,c)
     sides = [a, b, c]
-    angles = []
-    (0..2).each do |i|
-      # swap element i with the first element
-      sides[0], sides[i] = sides[i], sides[0]
-      # get ith angle
-      angles << calculate_angle(*sides)
-    end
-    angles
+    angleA = calculate_angle(a, b, c)
+    angleB = calculate_angle(b, a, c)
+    angleC = calculate_angle(c, a, b)
+    [angleA, angleB, angleC]
   end
   
   def calculate_angle(a, b, c)
@@ -69,6 +65,10 @@ end
 
 triangles = [[5, 5, 5], [5,12,13]]
 triangles.each do |sides|
+  tri = Triangle.new(*sides)
+  tri.recite_facts
+end
+.each do |sides|
   tri = Triangle.new(*sides)
   tri.recite_facts
 end

@@ -2,8 +2,10 @@
 class Triangle
   attr_accessor :side1, :side2, :side3
 
-  def initialize(sides)
-    @side1, @side2, @side3 = sides
+  def initialize(side1, side2, side3)
+    @side1 = side1
+    @side2 = side2
+    @side3 = side3
   end
 
   def equilateral?
@@ -58,4 +60,4 @@ class Triangle
   end
 end
 
-[[5, 5, 5], [5, 12, 13]].each { |sides| Triangle.new(sides).recite_facts }
+[[5, 5, 5], [5, 12, 13]].each { |sides| Triangle.new(*sides).recite_facts }

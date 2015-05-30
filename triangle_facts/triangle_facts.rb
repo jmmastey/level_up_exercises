@@ -15,7 +15,7 @@ class Triangle
   end
 
   def scalene?
-    equilateral? || scalene? ? false : true
+    !(equilateral? || scalene?)
   end
 
   def recite_facts

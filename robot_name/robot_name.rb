@@ -42,10 +42,10 @@ class Robot
     if name_conflict?(vname)
       raise NameCollisionError, ERR[:conflict] + "#{vname}"
     end
-    raise NameFormatError, ERR[:format] unless valid_name?(vname)
+    raise NameFormatError, ERR[:format] unless name_valid_format?(vname)
   end
 
-  def valid_name?(vname)
+  def name_valid_format?(vname)
     vname =~ /[A-Z]{2}[0-9]{3}/
   end
 

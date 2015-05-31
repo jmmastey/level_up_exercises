@@ -32,55 +32,61 @@ class DinoDex
 
   def find_biped
     result = @dinosaurs.select(&:biped?)
-    puts result.to_s
+    print_val(result.to_s)
     Dinosaur.new(result.to_s)
   end
 
   def find_late_cretaceous
     result = @dinosaurs.select(&:late_cretaceous?)
-    puts result.to_s
+    print_val(result.to_s)
     Dinosaur.new(result.to_s)
   end
 
   def find_early_cretaceous
     result = @dinosaurs.select(&:early_cretaceous?)
-    puts result.to_s
+    print_val(result.to_s)
     Dinosaur.new(result.to_s)
   end
 
   def find_jurassic
     result = @dinosaurs.select(&:jurassic?)
-    puts result.to_s
+    print_val(result.to_s)
     Dinosaur.new(result.to_s)
   end
 
   def find_abrictosaurus
     result = @dinosaurs.select(&:abrictosaurus?)
-    puts result.to_s
+    print_val(result.to_s)
     Dinosaur.new(result.to_s)
   end
 
   def find_albertosaurus
     result = @dinosaurs.select(&:albertosaurus?)
-    puts result.to_s
+    print_val(result.to_s)
     Dinosaur.new(result.to_s)
   end
 
   def find_carnivore
     result = @dinosaurs.select(&:carnivore?)
-    puts result.to_s
+    print_val(result.to_s)
     Dinosaur.new(result.to_s)
   end
 
   def find_big
     result = @dinosaurs.select(&:big?)
-    puts result.to_s
+    print_val(result.to_s)
     Dinosaur.new(result.to_s)
   end
 
   def find_small
     result = @dinosaurs.select(&:small?)
-    puts result.to_s
+    print_val(result.to_s)
     Dinosaur.new(result.to_s)
+  end
+
+  def print_val(results)
+    results.gsub!(/@/, ' ')
+    results.gsub!(/#/, "\r\n")
+    puts results
   end
 end

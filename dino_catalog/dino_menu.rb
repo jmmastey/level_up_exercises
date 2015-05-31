@@ -54,8 +54,8 @@ DINOPTIONS
   end
 
   def run
+    p MENU_OPTIONS
     loop do
-      p MENU_OPTIONS
       user_input = $stdin.gets.chomp.downcase.to_sym
       break if user_input == :exit
       filter(user_input) unless CHAINED_OPTIONS.include? user_input

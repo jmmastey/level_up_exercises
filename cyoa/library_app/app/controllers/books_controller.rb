@@ -7,11 +7,7 @@ class BooksController < ApplicationController
 
   def perform_search
     response = CallClassifyAPI::query_api(params, true)
-    @response_list = CallClassifyAPI::parse_response(response)
-  end
-
-  def search_again
-    redirect_to "/books/new/search"
+    @parsed_response = CallClassifyAPI::parse_response(response)
   end
 
   def select_item

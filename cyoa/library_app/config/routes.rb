@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   #Some book routes
   get 'books/new/search', to: 'books#get_search_query'
   get 'books/new/perform_search', to: 'books#perform_search'
-  get 'books/new/search_again', to: 'books#search_again'
   get 'books/new/select_item/:owi', to: 'books#select_item'
 
   # Example of regular route:

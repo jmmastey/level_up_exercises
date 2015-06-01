@@ -1,25 +1,58 @@
 class NameCollisionError < RuntimeError; end
+class NameFormatError < RuntimeError; end
 
 class Robot
+  class << self
+    attr_accessor :registry
+  end
+  @registry = []
+
   attr_accessor :name
 
-  @@registry
+  ERR = {
+    conflict: 'Robot name already exists: ',
+    format: 'Robot name format incorrect! (two capital letters, 3 numbers)',
+  }
 
   def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+    @name_generator = args[:name_generator] || method(:generator)
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+    @name = generate_name
+    validate_name(name)
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
+    self.class.registry << @name
+  end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+  def generate_name
+    @name_generator.call
+  end
+
+  def generator
+    name = [*'A'..'Z'].sample(2)
+    3.times { name << rand(10) }
+    name.join
+  end
+
+  def name=(val)
+    validate_name(val)
+    @name = val
+  end
+
+  def validate_name(name)
+    raise NameCollisionError, name_err_msg(name) if name_conflict?(name)
+    raise NameFormatError, ERR[:format] unless name_valid_format?(name)
+  end
+
+  def name_err_msg(name)
+    ERR[:conflict] + "#{name}"
+  end
+
+  def name_valid_format?(name)
+    name =~ /[A-Z]{2}[0-9]{3}/
+  end
+
+  def name_conflict?(name)
+    self.class.registry.include?(name)
   end
 end
 
@@ -27,6 +60,6 @@ robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+generator = -> { 'AA111' }
+Robot.new(name_generator: generator)
+Robot.new(name_generator: generator)

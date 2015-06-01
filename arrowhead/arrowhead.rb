@@ -1,5 +1,11 @@
 class Arrowhead
-  # This seriously belongs in a database.
+  INVALID_REGION_MSG = "Unknown region, please provide a valid region."
+  INVALID_SHAPE_MSG = "Unknown shape value. Are you sure you know what you're"\
+                      " talking about?"
+  SUCCESS_SHAPE = lambda do |var|
+    "You have a(n) '#{var}' arrowhead. Probably priceless."
+  end
+
   CLASSIFICATIONS = {
     far_west: {
       notched: "Archaic Side Notch",
@@ -15,19 +21,19 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
+  def self.known_region?(region)
+    CLASSIFICATIONS.include? region
+  end
+
+  def self.known_shape?(region, shape)
+    CLASSIFICATIONS[region].include? shape
+  end
+
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+    raise INVALID_REGION_MSG unless known_region?(region)
+    raise INVALID_SHAPE_MSG unless known_shape?(region, shape)
+    arrowhead = CLASSIFICATIONS[region][shape]
+    puts SUCCESS_SHAPE.call arrowhead
   end
 end
 

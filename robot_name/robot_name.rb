@@ -28,9 +28,9 @@ class Robot
   end
 
   def generator
-    rname = [*'A'..'Z'].sample(2)
-    3.times { rname << rand(10) }
-    rname.join
+    name = [*'A'..'Z'].sample(2)
+    3.times { name << rand(10) }
+    name.join
   end
 
   def name=(val)
@@ -38,19 +38,21 @@ class Robot
     @name = val
   end
 
-  def validate_name(vname)
-    if name_conflict?(vname)
-      raise NameCollisionError, ERR[:conflict] + "#{vname}"
-    end
-    raise NameFormatError, ERR[:format] unless valid_name?(vname)
+  def validate_name(name)
+    raise NameCollisionError, name_err_msg(name) if name_conflict?(name)
+    raise NameFormatError, ERR[:format] unless valid_name?(name)
   end
 
-  def valid_name?(vname)
-    vname =~ /[A-Z]{2}[0-9]{3}/
+  def name_err_msg(name)
+    ERR[:conflict] + "#{name}"
   end
 
-  def name_conflict?(vname)
-    self.class.registry.include?(vname)
+  def valid_name?(name)
+    name =~ /[A-Z]{2}[0-9]{3}/
+  end
+
+  def name_conflict?(name)
+    self.class.registry.include?(name)
   end
 end
 

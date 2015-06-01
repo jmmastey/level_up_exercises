@@ -24,20 +24,6 @@ module CallClassifyAPI
     HTTParty.get(BaseURI, :query => query_string)
   end
 
-  def self.delegate_output(response)
-    response_code = self.find_response_code(response)
-    return self.find_error(response_code) if response_code >= 100
-    if response_code == MultiResponseCode #passes a list
-      return self.display_response(response["classify"]["works"]["work"])
-    end
-    if response_code == SingleResponseSummaryCode #passes a hash 
-      return self.display_single_entry(response["classify"]["work"],SummaryResponseFields)
-    end
-    if response_code == SingleResponseVerboseCode #passes a hash 
-      return self.display_single_entry(response["classify"]["editions"]["edition"][0], VerboseResponseFields)
-    end
-  end
-
   def self.parse_response(response)
     response_code = self.find_response_code(response)
     return self.find_error(response_code) if response_code >= 100
@@ -71,26 +57,7 @@ module CallClassifyAPI
     return "Unexpected error" if code == 200
   end
 
-
-  def self.display_single_entry(entry, display_fields)
-    #Build a string containing the info that should be displayed about the title
-    display_string = display_fields.map do |field|
-      if entry[field]
-        "#{field}: #{entry[field]} \n"
-      end
-    end
-    display_string.select { |book_string| book_string }
-  end
-
-  def self.display_response(entries)
-    all_results = entries.map do |entry|
-      self.display_single_entry(entry, SummaryResponseFields)
-    end
-    all_results
-  end
-
   def self.book_dict(entry, display_fields)
-    puts 'display_fields is', display_fields.class
     book_dict = {}
     display_fields.each do |field|
       if entry[field]

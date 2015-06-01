@@ -15,3 +15,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+custom_plan.rb
+zeus.json

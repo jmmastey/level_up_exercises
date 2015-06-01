@@ -1,56 +1,54 @@
 Feature: Shopping Cart
 
-Scenario: Viewing an empty Cart (new user)
-  Given I am a User with no previous site sessions
-    And I am viewing the Cart page
-  Then I see messaging telling me that the Cart is currently empty
-
-Scenario: Viewing an empty Cart (no items)
+Scenario: Viewing an empty Cart
   Given I am a User
-    And I am viewing the Cart page
-    And there are 0 items in the Cart
+    And my Cart is empty
+  When I view the Cart page
   Then I see messaging telling me that the Cart is currently empty
 
 Scenario: View order totals
-  Given I am an User
-    And I am viewing the Cart page
-    And I have 1 or more Items in my Cart
-  Then the subtotal displayed is a total of all Items in my Cart (before tax and minus discounts)
-    And the total displayed is a total of all Items in my Cart (after tax)
+  Given I am a User
+    And I have 2 Widgets in my Cart
+  When I view the Cart page
+  Then I my subtotal is $20.00
+    And my total is $25.00
 
 Scenario: Revisiting a previous Cart
-  Given I am a User with a previous site session
-    And I have a Items in my Cart from a previous session
-  Then the contents of my previous Cart remain as part of my current Cart
-    And the order totals are updated accordingly
+  Given I am a User
+    And I have previous Cart data in my cookie
+  When I view the Cart page
+  Then I see the contents of my previous Cart
 
 Scenario: User adds Items to the Cart
   Given I am a User
-    And I am viewing an Item page
-  When I click "Add To Cart"
-  Then the quantity of the corresponding Item in my Cart increases by the number selected in the "Quantity" dropdown
-    And the order totals are updated accordingly
+    And my Cart is empty
+  When I am view the Widget product page
+    And I click "Add To Cart"
+  Then I have one Widget in my Cart
+    And my subtotal is $10.00
+    And my total is $15.00
 
 Scenario: User removes Item from the Cart
   Given I am a User
-    And I am viewing the Cart page
-    And I have 1 or more Items in my Cart
-  When I click one of the "Remove From Cart" buttons
-  Then the corresponding Item is removed form my Cart completely
-    And the order totals are updated accordingly
+    And I have 2 Widgets in my Cart
+  When I view the Cart page
+    And I click "Remove From Cart"
+  Then I have no Widgets in my Cart
+    And my subtotal is $0.00
+    And my total is $0.00
 
 Scenario: User changes product quantities in the Cart
   Given I am a User
-    And I am viewing the Cart page
-    And I have 1 or more Items in my Cart
-    And I make one or more changes to the "Quantity" dropdowns
-  When I click the "Update Cart" button
-  Then the all of the Item quantities update to reflect the numbers selected in the corresponding "Quantity" dropdowns
-    And the order totals are updated accordingly
+    And I have 2 Widgets in my Cart
+  When I view the Cart page
+    And I change the "Quantity" dropdown to 4
+    And I click the "Update Cart" button
+  Then I have 4 Widgets in my Cart
+    And my subtotal is $40.00
+    And my total is $45.00
 
 Scenario: User views product information for Items in the Cart
-  Given I am a User
-    And I am viewing the Cart page
-    And I have 1 or more Items in my Cart
-  When I click an Item's title
-  Then I am taken to the corresponding Item page
+  Given I am a User with 2 Widgets in my Cart
+  When I view the Cart page
+    And I click the Widget's title
+  Then I am taken to the Widget product page

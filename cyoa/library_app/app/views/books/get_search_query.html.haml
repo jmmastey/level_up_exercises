@@ -1,0 +1,25 @@
+%h1 Please enter the search criteria for your book.
+
+= form_tag('perform_search', :method => "get") do
+  = field_set_tag do
+    = label_tag :title, 'Title:'
+    = text_field_tag :title
+    %br
+    %br
+    = label_tag :author, 'Author:'
+    = text_field_tag :author
+    %br
+    %br
+    = label_tag :isbn, 'ISBN:'
+    = text_field_tag :isbn
+    %br
+    %br
+    = label_tag :oclc, 'OCLC:'
+    = text_field_tag :oclc
+    %br
+    %br
+    = submit_tag 'Search' 
+  
+  
+
+

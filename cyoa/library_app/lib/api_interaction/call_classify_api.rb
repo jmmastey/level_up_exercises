@@ -38,6 +38,28 @@ module CallClassifyAPI
     end
   end
 
+  def self.parse_response(response)
+    response_code = self.find_response_code(response)
+    return self.find_error(response_code) if response_code >= 100
+    if response_code == MultiResponseCode
+      return self.build_list_of_books(response["classify"]["works"]["work"])
+    end
+    if response_code == SingleResponseSummaryCode
+      return self.book_dict(response["classify"]["work"], SummaryResponseFields)
+    end
+    if response_code == SingleResponseVerboseCode
+      return self.book_dict(response["classify"]["editions"]["edition"][0], VerboseResponseFields)
+    end
+  end
+
+  def self.build_list_of_books(entries)
+    all_results = []
+    entries.each do |book|
+      all_results.push(self.book_dict(book, SummaryResponseFields))
+    end
+    all_results
+  end  
+
   def self.find_response_code(response)
     response["classify"]["response"]["code"].to_i
   end
@@ -66,4 +88,16 @@ module CallClassifyAPI
     end
     all_results
   end
+
+  def self.book_dict(entry, display_fields)
+    puts 'display_fields is', display_fields.class
+    book_dict = {}
+    display_fields.each do |field|
+      if entry[field]
+        book_dict[field] = entry[field]
+      end
+    end
+    book_dict
+  end
+    
 end

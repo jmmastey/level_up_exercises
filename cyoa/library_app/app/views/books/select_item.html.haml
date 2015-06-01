@@ -1,0 +1,21 @@
+%h1 The item you selected was added to your library:
+
+%h4 Title: 
+= @book["title"]
+%br
+%h4 Author: 
+= @book["author"]
+%br
+%h4 Format:
+= @book["format"]
+%br
+%h4 Language:
+= @book["language"]
+%br
+
+
+
+= form_tag('/books/new/search_again', :method => "get") do
+  = field_set_tag do
+    = submit_tag 'Add Another Book'
+

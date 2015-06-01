@@ -3,8 +3,16 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  resources :books
+  resources :users
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+
+  #Some book routes
+  get 'books/new/search', to: 'books#get_search_query'
+  get 'books/new/perform_search', to: 'books#perform_search'
+  get 'books/new/search_again', to: 'books#search_again'
+  get 'books/new/select_item/:owi', to: 'books#select_item'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

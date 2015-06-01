@@ -1,0 +1,12 @@
+%h1 Your search results:
+
+= form_tag('search_again', :method => "get") do
+  = field_set_tag do
+    = submit_tag 'Try another search'
+
+  -@response_list.each do |book|
+    - link_display = "Title: #{book["title"]} Author: #{book["author"]} Format: #{book["format"]}"
+    - query_params = {owi: book["owi"] }
+    = link_to(name = link_display, url = "/books/new/select_item/#{book["owi"]}" )
+    %br
+    %br

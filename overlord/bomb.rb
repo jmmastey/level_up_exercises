@@ -1,7 +1,6 @@
 class Bomb
   attr_accessor :status
-
-  def initialize(name: "Uchiha", activation_code: "1234", deactivation_code: "0000")
+  def initialize(activation_code: "1234", deactivation_code: "0000")
     @activation_code = activation_code.to_s
     @deactivation_code = deactivation_code.to_s
     @status = :inactive
@@ -36,9 +35,5 @@ class Bomb
       @attempt_count += 1
       @status = :detonated if @attempt_count >= 3
     end
-  end
-
-  def detonated?
-    @status == :detonated
   end
 end

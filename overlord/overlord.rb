@@ -3,14 +3,13 @@ require 'facets'
 require_relative 'super_villain_tools'
 
 class Overlord < Sinatra::Base
-
   enable :sessions
-  set :public_folder, Proc.new { File.join(File.dirname(__FILE__), 'public') }
+  set :public_folder, proc { File.join(File.dirname(__FILE__), 'public') }
 
   before do
     session[:tools] ||= SuperVillainTools.new
     @tools = session[:tools]
-    params.map { |key,_| key.to_sym }
+    params.map { |key, _| key.to_sym }
   end
 
   get '/' do
@@ -18,7 +17,7 @@ class Overlord < Sinatra::Base
   end
 
   get '/bomb_status' do
-    return "No Bomb" unless @tools.has_bomb?
+    return "No Bomb" unless @tools.bomb?
     @tools.bomb.status.to_s.capitalize + " Bomb"
   end
 
@@ -26,8 +25,8 @@ class Overlord < Sinatra::Base
     options = params["options"].nil? ? {} : params["options"].symbolize_keys
     begin
       @tools.create_bomb(options: options)
-      message = @tools.has_bomb? ? "Bomb is created" : "Bomb not created"
-    rescue Exception => e
+      message = @tools.bomb? ? "Bomb is created" : "Bomb not created"
+    rescue StandardError => e
       message = e.to_s
     end
     message
@@ -49,7 +48,4 @@ class Overlord < Sinatra::Base
   def start_time
     session[:start_time] ||= (Time.now).to_s
   end
-
-  # start the server if ruby file executed directly
-  run! if app_file == $0
 end

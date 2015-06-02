@@ -1,11 +1,11 @@
 require_relative 'bomb.rb'
 class SuperVillainTools
   attr_accessor :tools
-  def initialize(type: :bomb)
+  def initialize
     @tools = {}
   end
 
-  def has_bomb?
+  def bomb?
     !bomb.nil?
   end
 
@@ -28,7 +28,7 @@ class SuperVillainTools
     end
   end
 
-  def is_number?(input)
+  def number?(input)
     input.to_i.to_s == input.to_s
   end
 
@@ -38,7 +38,7 @@ class SuperVillainTools
     activation_code = options[:activation_code]
     deactivation_code = options[:deactivation_code]
 
-    (activation_code.nil? || is_number?(activation_code)) &&
-      (deactivation_code.nil? || is_number?(deactivation_code))
+    (activation_code.nil? || number?(activation_code)) &&
+      (deactivation_code.nil? || number?(deactivation_code))
   end
 end

@@ -27,7 +27,6 @@ class Robot
     @@registry.include?(name)
   end
   
-
   def char_generator
     -> { ('A'..'Z').to_a.sample }
   end
@@ -58,8 +57,4 @@ generator = -> { 'AA111' }
 #Robot.new(name_generator: generator)
 Robot.new(name_generator: generator)
 #Robot.new(name_generator: generator)
-
-
-erator: generator)
-
 

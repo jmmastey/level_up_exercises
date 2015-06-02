@@ -4,9 +4,9 @@ require_relative './data_loader.rb'
 class ABSplitTester
   def initialize(data)
     @cohorts = []
-    @visitors = {}
+    @visits = {}
     @conversions = {}
-
+    @CONFIDENCE_INTERVAL = 0.95
     process(data)
   end
 
@@ -15,15 +15,15 @@ class ABSplitTester
   end
 
   def conversion_count(cohort)
-    raise "Invalid Cohort" unless @cohorts.include? cohort
+    raise "Invalid Cohort" unless @cohorts.include?(cohort)
+    
     @conversions[cohort]
   end
 
-  def conversion_rate(cohort)
-    raise "Invalid Cohort" unless @cohorts.include? cohort
+  def confidence_interval(cohort)
+    raise "Invalid Cohort" unless @cohorts.include?(cohort)
 
-    ABAnalyzer.confidence_interval(@conversions[cohort],
-      @visitors[cohort], 0.95)
+    ABAnalyzer.confidence_interval(@conversions[cohort], @visits[cohort], @CONFIDENCE_INTERVAL)
   end
 
   def confidence_score
@@ -36,11 +36,12 @@ class ABSplitTester
 
   def process(data)
     data.each do |row|
-      @cohorts << row["cohort"] unless @cohorts.include? row["cohort"]
-      @conversions[row["cohort"]] ||= 0
-      @visitors[row["cohort"]] ||= 0
-      @conversions[row["cohort"]] += row["result"]
-      @visitors[row["cohort"]] += 1
+      cohort = row["cohort"]
+      @cohorts << cohort unless @cohorts.include? row["cohort"]
+      @conversions[cohort] ||= 0
+      @visits[cohort] ||= 0
+      @conversions[cohort] += row["result"]
+      @visits[cohort] += 1
     end
   end
 
@@ -48,7 +49,7 @@ class ABSplitTester
     values = {}
     @conversions.each do |cohort, value|
       values[cohort] = {
-        converted: value, not_converted: (@visitors[cohort] - value)
+        converted: value,not_converted: (@visits[cohort] - value)
       }
     end
     values

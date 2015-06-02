@@ -3,7 +3,6 @@ require_relative '../data_loader.rb'
 require 'rspec'
 
 RSpec.describe ABSplitTester do
-
   let(:data) { DataLoader.new('ab_test_data.json') }
   let(:ab_split_tester) { ABSplitTester.new(data.value) }
 

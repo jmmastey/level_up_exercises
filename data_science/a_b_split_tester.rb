@@ -6,7 +6,7 @@ class ABSplitTester
     @cohorts = []
     @visits = {}
     @conversions = {}
-    @CONFIDENCE_INTERVAL = 0.95
+    @confidence_interval = 0.95
     process(data)
   end
 
@@ -16,14 +16,14 @@ class ABSplitTester
 
   def conversion_count(cohort)
     raise "Invalid Cohort" unless @cohorts.include?(cohort)
-    
+
     @conversions[cohort]
   end
 
   def confidence_interval(cohort)
     raise "Invalid Cohort" unless @cohorts.include?(cohort)
 
-    ABAnalyzer.confidence_interval(@conversions[cohort], @visits[cohort], @CONFIDENCE_INTERVAL)
+    ABAnalyzer.confidence_interval(@conversions[cohort], @visits[cohort], @confidence_interval)
   end
 
   def confidence_score
@@ -37,7 +37,7 @@ class ABSplitTester
   def process(data)
     data.each do |row|
       cohort = row["cohort"]
-      @cohorts << cohort unless @cohorts.include? row["cohort"]
+      @cohorts << cohort unless @cohorts.include?(cohort)
       @conversions[cohort] ||= 0
       @visits[cohort] ||= 0
       @conversions[cohort] += row["result"]
@@ -49,7 +49,7 @@ class ABSplitTester
     values = {}
     @conversions.each do |cohort, value|
       values[cohort] = {
-        converted: value,not_converted: (@visits[cohort] - value)
+        converted: value, not_converted: (@visits[cohort] - value)
       }
     end
     values

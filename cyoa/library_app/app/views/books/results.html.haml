@@ -11,6 +11,6 @@
     -@parsed_response.each do |book|
       - link_display = "Title: #{book["title"]} Author: #{book["author"]} Format: #{book["format"]}"
       - query_params = {owi: book["owi"] }
-      = link_to(name = link_display, url = "/books/new/select_item/#{book["owi"]}" )
+      = link_to(name = link_display, url = "/books/select_item/#{book["owi"]}" )
       %br
       %br

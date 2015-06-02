@@ -27,35 +27,29 @@ module CallClassifyAPI
   def self.parse_response(response)
     response_code = self.find_response_code(response)
     return self.find_error(response_code) if response_code >= 100
-    if response_code == MultiResponseCode
-      return self.build_list_of_books(response["classify"]["works"]["work"])
-    end
-    if response_code == SingleResponseSummaryCode
-      return self.book_dict(response["classify"]["work"], SummaryResponseFields)
-    end
-    if response_code == SingleResponseVerboseCode
-      return self.book_dict(response["classify"]["editions"]["edition"][0], VerboseResponseFields)
-    end
+    tidy_response = clean_up_response(response, response_code)
+    return self.build_list_of_books(tidy_response, response_code)
   end
-
-  def self.build_list_of_books(entries)
-    all_results = []
-    entries.each do |book|
-      all_results.push(self.book_dict(book, SummaryResponseFields))
-    end
-    all_results
-  end  
 
   def self.find_response_code(response)
     response["classify"]["response"]["code"].to_i
   end
 
-  def self.find_error(code)
-    return "No input." if code == 100
-    return "Invalid input." if code == 101
-    return "No data found for this search" if code == 102
-    return "Unexpected error" if code == 200
+  def self.clean_up_response(response, response_code)
+    #Want an array of books so I can send all data to build_list_of_books
+    return response["classify"]["works"]["work"] if response_code == MultiResponseCode #already an Array
+    return [].push(response["classify"]["work"]) if response_code == SingleResponseSummaryCode
+    return [].push(response["classify"]["editions"]["edition"][0]) if response_code == SingleResponseVerboseCode
   end
+
+  def self.build_list_of_books(entries, response_code)
+    response_fields = response_code == SingleResponseVerboseCode ? VerboseResponseFields : SummaryResponseFields
+    all_results = []
+    entries.each do |book|
+      all_results.push(self.book_dict(book, response_fields))
+    end
+    all_results
+  end  
 
   def self.book_dict(entry, display_fields)
     book_dict = {}
@@ -66,5 +60,11 @@ module CallClassifyAPI
     end
     book_dict
   end
-    
+
+  def self.find_error(code)
+    return "No input." if code == 100
+    return "Invalid input." if code == 101
+    return "No data found for this search" if code == 102
+    return "Unexpected error" if code == 200
+  end
 end

@@ -1,6 +1,6 @@
 %h1 Please enter the search criteria for your book.
 
-= form_tag('perform_search', :method => "get") do
+= form_tag('results', :method => "get") do
   = field_set_tag do
     = label_tag :title, 'Title:'
     = text_field_tag :title

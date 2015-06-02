@@ -9,7 +9,7 @@ class Robot
 
   def initialize(args = {})
     @@registry ||= []
-    @name_generator = args[:name_generator] || name_generator
+    @name_generator = args[:name_generator] || lambda { name_generator }
     @name = @name_generator.call
     raise NameFormatError, 'Could not create Robot' unless valid_name?(name)
     @@registry << @name
@@ -37,16 +37,14 @@ class Robot
   end
 
   def name_generator
-    lambda {
-      name = ""
-      2.times do 
-        name += char_generator.call
-      end
-      3.times do
-        name += num_generator.call.to_s
-      end   
-      name
-    }
+    name = ""
+    2.times do 
+      name += char_generator.call
+    end
+    3.times do
+      name += num_generator.call.to_s
+    end   
+    name    
   end 
 
 end
@@ -60,5 +58,8 @@ generator = -> { 'AA111' }
 #Robot.new(name_generator: generator)
 Robot.new(name_generator: generator)
 #Robot.new(name_generator: generator)
+
+
+erator: generator)
 
 

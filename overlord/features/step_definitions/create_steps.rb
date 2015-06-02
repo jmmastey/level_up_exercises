@@ -4,7 +4,7 @@ require_relative '../../super_villain_tools.rb'
 require_relative '../../overlord.rb'
 
 Before  do
-  visit "/"
+  visit "/bomb_status"
   @options = {}
   # @activation_code = ""
   # @deactivation_code = ""

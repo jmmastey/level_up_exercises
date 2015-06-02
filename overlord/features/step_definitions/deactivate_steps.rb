@@ -10,7 +10,7 @@ Given(/^a bomb is activated$/) do
 end
 
 When(/^click on deactivate button$/) do
-  page.driver.post '/deactivate_bomb', code: @options[:deactivation_code]
+  page.driver.post '/deactivate_bomb', @options
 end
 
 Then(/^deactivate the bomb$/) do

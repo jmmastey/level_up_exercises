@@ -1,8 +1,11 @@
 require 'sinatra/base'
 require 'facets'
+require_relative 'super_villain_tools'
+
 class Overlord < Sinatra::Base
 
   enable :sessions
+  set :public_folder, Proc.new { File.join(File.dirname(__FILE__), 'public') }
 
   before do
     session[:tools] ||= SuperVillainTools.new
@@ -11,8 +14,12 @@ class Overlord < Sinatra::Base
   end
 
   get '/' do
+    File.read(File.join('public', 'index.html'))
+  end
+
+  get '/bomb_status' do
     return "No Bomb" unless @tools.has_bomb?
-    @tools.bomb.status.to_s + " Bomb"
+    @tools.bomb.status.to_s.capitalize + " Bomb"
   end
 
   post '/create_bomb' do
@@ -27,12 +34,13 @@ class Overlord < Sinatra::Base
   end
 
   post '/activate_bomb' do
-    @tools.bomb.activate(params[:code])
+    puts "params: " + params.inspect
+    @tools.bomb.activate(params[:activation_code])
     @tools.bomb.active? ? "Bomb Activated" : "Wrong Code"
   end
 
   post '/deactivate_bomb' do
-    @tools.bomb.deactivate(params[:code])
+    @tools.bomb.deactivate(params[:deactivation_code])
     message = @tools.bomb.active? ? "Wrong Code" : "Bomb deactivated"
     message = "Wrong Code, Bomb detonated" if @tools.bomb.detonated?
     message

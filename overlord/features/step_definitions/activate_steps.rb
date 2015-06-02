@@ -12,7 +12,7 @@ When(/^click on activate button$/) do
 end
 
 Then(/^activate the bomb$/) do
-  page.driver.post '/activate_bomb', code: @options[:activation_code]
+  page.driver.post '/activate_bomb', @options
 end
 
 Then(/^do not activate bomb$/) do

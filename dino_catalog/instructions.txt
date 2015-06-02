@@ -1,0 +1,20 @@
+Welcome to your Poke... erhm, I mean DinoDex
+I will allow you to filter all of your known dinosaurs by certain criteria.
+Your Available search parameters are:
+  locomotion: Returns all dinosaurs that are bipeds
+  diet: Returns all dinosaurs that are carnivores
+  period: Returns all dinosaurs that were alive in that period
+  size: 
+    Options:
+      big: Returns all dinosaurs over 2 tons
+      small: Returns all dinosaurs with a weight 2 tons or under
+  weight: Returns all dinosaurs weight this exact number
+  exit: exits DinoDex
+
+Each of your queries will build off of eachother, to reset your query please relaod your dinodex
+
+Example 1: This will print all information for small bipedal dinosaurs that you know about
+  locomotion biped
+  size small
+Example 2: This will print all information for small bipedal dinosaurs that you know about
+  locomotion biped.size small

@@ -1,98 +1,52 @@
+class ParameterError < RuntimeError; end
 $LOAD_PATH << '.'
 require 'dinosaur'
 
-
-
-class Dinosaur_Catalog
+class DinosaurCatalog
+  ERROR_MESSAGE = "Please use valid search parameters"
   attr_reader :dinosaurs
 
-  #Auto Load dinosaurs DB
+  # Auto Load dinosaurs DB
   def initialize(dinosaurs)
     @dinosaurs = dinosaurs
   end
 
-  def filter(hash)
-    if hash.length > 0
-      k, v = hash.shift
-        if k.to_s == "period"
-           return self.send(k,v).filter(hash)
-         elsif v == true
-           return self.send(k).filter(hash)
-         else
-           puts "Invalid filter: " + k.to_s + ": " + v.to_s + " bypassing filter..."
-           return self.filter(hash)
-         end
-       else
-         return self
-       end
-
+  Query = Struct.new(:function, :param)
+  def make_query(raw_query)
+    raw_query = raw_query.split(" ")
+    Query.new(raw_query[0] + '?', raw_query[1].downcase)
   end
 
-  def bipeds
-    value = []
-    @dinosaurs.each do |item|
-      if item.walking.chomp == "Biped" && !item.walking.empty?
-        value.push(item)
-      end
+  def process_query(query)
+    query.each do |command|
+      formatted_query = make_query(command)
+      send_query(formatted_query.function, formatted_query.param)
     end
-    return Dinosaur_Catalog.new(value)
+    DinosaurCatalog.new(@dinosaurs)
   end
 
-  def carnivores
-    value = []
-    @dinosaurs.each do |item|
-      puts item.facts
-      if item.diet == "Carnivore" && !item.diet.empty?
-        value.push(item)
-      end
-      if item.carnivore == "Yes" && !item.carnivore.empty?
-        value.push(item)
-      end
+  def send_query(function, param)
+    @dinosaurs = @dinosaurs.select do |dino|
+      dino.send(function.to_sym, param)
     end
-    return Dinosaur_Catalog.new(value)
-  end
-
-  def period(str)
-    value = []
-    @dinosaurs.each do |item|
-      if str.downcase.chomp.include? item.period.downcase.chomp && !item.period.empty?
-        value.push(item)
-      end
-    end
-    return Dinosaur_Catalog.new(value)
-  end
-
-  def big
-    value = []
-    @dinosaurs.each do |item|
-      if item.weight.to_i > 4000 && !item.weight.empty?
-        value.push(item)
-      end
-    end
-    return Dinosaur_Catalog.new(value)
-  end
-
-  def small
-    value = []
-    @dinosaurs.each do |item|
-      if item.weight.to_i <= 4000 && !item.weight.empty?
-        value.push(item)
-      end
-    end
-    return Dinosaur_Catalog.new(value)
+    @dinosaurs.uniq
   end
 
   def facts
-    @dinosaurs.each do |item|
-      item.facts
+    @dinosaurs.each do |dinosaur|
+      puts ""
+      puts instance_variable_collection(dinosaur)
+      puts ""
     end
-    return Dinosaur_Catalog.new(@dinosaurs)
   end
 
-  def print
-    @dinosaurs.each do |item|
-      item.print
+  def instance_variable_collection(dinosaur)
+    value = []
+    dinosaur.instance_variables.each do |var|
+      if dinosaur.instance_variable_get(var)
+        value << var.to_s + ": " + dinosaur.instance_variable_get(var).to_s
+      end
     end
-    return Dinosaur_Catalog.new(@dinosaurs)
+    value
   end
 end

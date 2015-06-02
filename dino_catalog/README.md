@@ -1,45 +1,5 @@
 ## Dinosaur Catalog
 
-
-IMPLEMENTATION:
-This version of the Dinosaur Catalog houses each file that needs to be loaded in the "catalogs" directory.
-
-You can use the Dinosaur Catalog by typing ruby dino.rb in the base directory that is checked out.
-Once you are in the dino REPL you will be presented with further instructions
-
-
-
-TODO:
-Better Error handling for passing hashes.
-  Actually... redo how hashes are accepted
-  There is something wrong with chaning certain search criteria when hashes are included.
-
-Make the clear command clear the screen if possible, show instructions again...
-
-Colorize output to be cool
-
-Better search terms..
-  Maybe the user would like to search on more sizes...etc.
-  Allow seach on any field....? description at least
-
-refactor process out of dinosaur.rb
-  maybe it makes sense in its own class.
-
-refactory facts method in Dinosaur class
-  that's anaweful lot of nil-checking.
-
-Maybe DinosaurCatalog can have a filter method that dosn't change based on input.
-
-
-
-
-
-
-
-
-
-ACCEPTANCE CRITERIA:
-
 It may not be immediately evident, but I am a huge fan of dinosaurs. They're huge and dangerous and have cool names like Giganotosaurus (not to be confused with Gigantosaurus).
 
 ...

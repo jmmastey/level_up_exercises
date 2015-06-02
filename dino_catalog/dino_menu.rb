@@ -54,7 +54,7 @@ DINOPTIONS
   end
 
   def run
-    p MENU_OPTIONS
+    puts MENU_OPTIONS
     loop do
       user_input = $stdin.gets.chomp.downcase.to_sym
       break if user_input == :exit

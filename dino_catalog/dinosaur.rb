@@ -1,13 +1,13 @@
 # Dinosaur provides the filter functionality
 class Dinosaur
   SIZE_VALUE = 4000
-  attr_accessor :name
-  attr_accessor :period
-  attr_accessor :continent
-  attr_accessor :diet
-  attr_accessor :weight
-  attr_accessor :walking
-  attr_accessor :description
+  attr_reader :name
+  attr_reader :period
+  attr_reader :continent
+  attr_reader :diet
+  attr_reader :weight
+  attr_reader :walking
+  attr_reader :description
 
   def initialize(attributes)
     @name  = attributes['name']
@@ -20,32 +20,33 @@ class Dinosaur
   end
 
   def biped?
-    send('walking') == 'Biped'
+    @walking  == 'Biped'
   end
 
+
   def late_cretaceous?
-    send('period') == 'Late Cretaceous'
+     @period == 'Late Cretaceous'
   end
 
   def early_cretaceous?
-    send('period') == 'Early Cretaceous'
+     @period == 'Early Cretaceous'
   end
 
   def jurassic?
-    send('period') == 'Jurassic'
+      @period  == 'Jurassic'
   end
 
   def abrictosaurus?
-    send('name') == 'Abrictosaurus'
+      @name == 'Abrictosaurus'
   end
 
   def albertosaurus?
-    send('name') == 'Albertosaurus'
+      @name == 'Albertosaurus'
   end
 
   def carnivore?
     value = %w(Carnivore Insectivore Piscivore)
-    value.include? send('diet')
+    value.include? @diet
   end
 
   def big?

@@ -11,7 +11,7 @@ MENU_OPTIONS =  <<DINOPTIONS
      AD - african_dinosaur_export.csv
      Exit - to exit
 DINOPTIONS
-p MENU_OPTIONS
+puts MENU_OPTIONS
 loop do
   begin
     user_input = $stdin.gets.chomp.downcase

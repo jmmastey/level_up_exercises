@@ -1,0 +1,10 @@
+%h1 Welcome to MyLibrary.
+%h4 MyLibrary helps you create and manage a collection of books that interest you. 
+%h4 You can also keep notes about the books, recommend them, and look at recommendations from other users.
+
+-if !user_signed_in?
+  = link_to(name = "Sign in or Sign up!", new_user_session_path)
+-else
+  = link_to(name = "User's Library", url = "/books/collection" )
+
+

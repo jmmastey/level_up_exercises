@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :books
   resources :users
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'books#index'
 
   #Some book routes
   get 'books/new/search', to: 'books#get_search_query'

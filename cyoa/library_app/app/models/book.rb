@@ -1,7 +1,9 @@
 class Book < ActiveRecord::Base
   validates(:title, presence: true)
 
-  def query_api(search_params)
-    results = CallClassifyAPI.query_api(search_params, true)
-    CallClassifyAPI.delegate_output(results)
+  attr_reader :title
+  attr_reader :author
+  attr_reader :oclc_num
+  attr_reader :work_format
+  attr_reader :year_published
 end

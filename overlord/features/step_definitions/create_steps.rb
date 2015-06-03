@@ -15,7 +15,7 @@ Given(/^no bomb is booted\/created$/) do
 end
 
 When(/^I click on create button$/) do
-  page.driver.post('/create_bomb', { options: @options })
+  page.driver.post('/create_bomb', options: @options)
 end
 
 Then(/^create a bomb$/) do
@@ -35,7 +35,7 @@ Then(/^set activation code to (\d+)$/) do |activation_code|
 end
 
 When(/^I input an activation code "([^"]*)"$/) do |activation_code|
-  @options = {activation_code: activation_code}
+  @options[:activation_code] = activation_code
 end
 
 Then(/^set the activation code to "([^"]*)"$/) do |activation_code|
@@ -52,5 +52,5 @@ Then(/^set deactivation code to "([^"]*)"$/) do |deactivation_code|
 end
 
 When(/^I input a deactivation code "([^"]*)"$/) do |deactivation_code|
-  @options = {deactivation_code: deactivation_code}
+  @options[:deactivation_code] = deactivation_code
 end

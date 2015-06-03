@@ -8,7 +8,7 @@ Given(/^a bomb is created\/booted$/) do
 end
 
 When(/^click on activate button$/) do
-  #do nothing yet
+  # do nothing yet
 end
 
 Then(/^activate the bomb$/) do

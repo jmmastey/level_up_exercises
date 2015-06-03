@@ -14,17 +14,17 @@ When(/^click on deactivate button$/) do
 end
 
 Then(/^deactivate the bomb$/) do
-  #do nothing here
+  # do nothing here
 end
 
 Then(/^do not deactivate the bomb$/) do
-  #do nothing here
+  # do nothing here
 end
 
-Given(/^number of previous attempts is equal to (\d+)$/) do |arg1|
-  step 'I input a deactivation code "1234"'
+Given(/^number of previous attempts is equal to (\d+)$/) do |code|
+  step 'I input a deactivation code "'+code+'"'
   step "click on deactivate button"
-  step 'I input a deactivation code "1234"'
+  step 'I input a deactivation code "'+code+'"'
   step "click on deactivate button"
 end
 

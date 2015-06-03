@@ -18,9 +18,10 @@ class BooksController < ApplicationController
     #Query the api again with the owi number for the user's selected book to get detailed listing (and oclc num)
     query = { "owi" => params["owi"] }
     response = CallClassifyAPI::query_api(query, false)
-    puts 'got the api response'
-    @book = CallClassifyAPI::parse_response(response)[0]
+    @book_data = CallClassifyAPI::parse_response(response)[0]
     #need to check if the book is already in book table and in user's collection
+    @book = Book.new(@book_data)
+    
  
   end
 

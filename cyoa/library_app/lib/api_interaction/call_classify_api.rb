@@ -51,9 +51,9 @@ module CallClassifyAPI
     all_results
   end  
 
-  def self.book_dict(entry, display_fields)
+  def self.book_dict(entry, response_fields)
     book_dict = {}
-    display_fields.each do |field|
+    response_fields.each do |field|
       if entry[field]
         book_dict[field] = entry[field]
       end

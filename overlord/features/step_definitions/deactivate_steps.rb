@@ -22,9 +22,9 @@ Then(/^do not deactivate the bomb$/) do
 end
 
 Given(/^number of previous attempts is equal to (\d+)$/) do |code|
-  step 'I input a deactivation code "'+code+'"'
+  step 'I input a deactivation code "' + code + '"'
   step "click on deactivate button"
-  step 'I input a deactivation code "'+code+'"'
+  step 'I input a deactivation code "' + code + '"'
   step "click on deactivate button"
 end
 

@@ -2,7 +2,8 @@ ENV['RACK_ENV'] = 'test'
 require 'rack/test'
 require_relative '../../super_villain_tools.rb'
 require_relative '../../overlord.rb'
-Before  do
+
+Before do
   visit "/bomb_status"
   @options = {}
 end

@@ -1,3 +1,4 @@
+var manageButtonAction = "";
 var checkStatus = function(){
   $.get("/bomb_status",function(status){
     $("#status").html("Status: "+status);
@@ -21,17 +22,17 @@ var checkStatus = function(){
   });
 };
 
+var postProcess = function(){
+  checkStatus();
+};
+
 $("#manageBtn").click(function(){
   // var activationCode =
   $.post(manageButtonAction, $("form").serialize())
     .done(function(response){
-      postProcess(response);
+      postProcess();
     });
 });
-
-var postProcess = function(response){
-  checkStatus();
-}
 
 $(function(){
   manageButtonAction = "";

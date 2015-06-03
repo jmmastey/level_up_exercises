@@ -29,7 +29,16 @@ class SuperVillainTools
   end
 
   def number?(input)
-    input.to_i.to_s == input.to_s
+    # FIXME: weird hack. may need to fix
+    # int.to_i.to_s != int.to_s for "0000"
+    init_len = input.length
+    input_int = input.to_i
+    input_str = input_int.to_s
+    new_len = input_str.length
+
+    # new_input_str = "0" * (init_len - new_len) + input_str
+
+    new_input_str == input.to_s
   end
 
   def valid_bomb_options?(options)

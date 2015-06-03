@@ -22,7 +22,7 @@ class Overlord < Sinatra::Base
   end
 
   post '/create_bomb' do
-    options = params["options"].nil? ? {} : params["options"].symbolize_keys
+    options = params["options"].nil? ? params.symbolize_keys : params["options"].symbolize_keys
     begin
       @tools.create_bomb(options: options)
       message = @tools.bomb? ? "Bomb is created" : "Bomb not created"
@@ -33,7 +33,6 @@ class Overlord < Sinatra::Base
   end
 
   post '/activate_bomb' do
-    puts "params: " + params.inspect
     @tools.bomb.activate(params[:activation_code])
     @tools.bomb.active? ? "Bomb Activated" : "Wrong Code"
   end

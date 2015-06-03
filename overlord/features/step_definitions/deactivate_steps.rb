@@ -4,8 +4,14 @@ require_relative '../../super_villain_tools.rb'
 require_relative '../../overlord.rb'
 
 Given(/^a bomb is activated$/) do
-  step "create a bomb"
-  step 'I input an activation code "1234"'
+  step "activation code input is empty"
+  step 'I input an activation code "4242"'
+  step 'I input a deactivation code "0000"'
+  step "I click on create button"
+  step 'set the activation code to "4242"'
+  step 'set deactivation code to "0000"'
+  step 'I input an activation code "4242"'
+  step "click on activate button"
   step "activate the bomb"
 end
 

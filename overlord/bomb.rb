@@ -16,7 +16,6 @@ class Bomb
   end
 
   def activate(code)
-    puts code.inspect
     @status = :active if valid_activation_code? code
   end
 

@@ -5,7 +5,7 @@ Feature: Activate Bomb
 
   Scenario: Click on activate button
     Given a bomb is created/booted
-    When I input an activation code "1234"
+    When I input an activation code "4242"
     And click on activate button
     Then activate the bomb
     And show a notification "Bomb Activated"

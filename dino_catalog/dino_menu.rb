@@ -10,10 +10,7 @@ class DinoMenu
         ec: :find_early_cretaceous,
         j:  :find_jurassic,
         ab: :find_abrictosaurus,
-        al: :find_albertosaurus,
-        bic: [:find_biped, :find_carnivore],
-        bib: [:find_biped, :find_big],
-        cs:  [:find_carnivore, :find_small]
+        al: :find_albertosaurus
    }
 
   MENU_OPTIONS =  <<DINOPTIONS

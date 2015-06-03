@@ -2,7 +2,6 @@ AllCops:
   Exclude:
     - triangle_facts/*.rb
     - supportive/supportive.rb
-    - bootstrap.*
 
 # C: Missing top-level module documentation comment.
 Style/Documentation:

@@ -1,5 +1,5 @@
-require_relative 'dino_dex.rb'
-# This class is used to define a user input error for dino the menu
+require_relative 'dino_dex'
+# This class is used to define a menu for the dino application
 class DinoMenu
   FILTER_OPTIONS =
    {    bi: :find_biped,
@@ -27,39 +27,45 @@ class DinoMenu
      J - Display all dinos from Jurassic
      AB -  Display ABRICTOSAURUS
      AL -  Display ALBERTOSAURUS
-     BIC - Diplay Biped and Carnivore
-     BIB - Display Biped and Big
-     CS - Display Carnivore and Small
+     Chained Commands - Enter each command followed by a space Ex. B EC
      Exit - quit program
 DINOPTIONS
 
   CHAINED_OPTIONS = [:bic, :bib, :cs]
 
+  def initialize(dinos)
+    @dinodex = DinoDex.new(dinos)
+  end
+
   def filter(user_input)
-    begin
-      @dinodex.send FILTER_OPTIONS[user_input]
-    rescue TypeError
-      puts 'Please only enter these options' + FILTER_OPTIONS.keys.to_s.upcase
-    end
+    print_val(@dinodex.send FILTER_OPTIONS[user_input])
+  rescue TypeError
+    puts 'Please only enter these options' + FILTER_OPTIONS.keys.to_s.upcase
   end
 
-  def call_methods(methods)
-    methods.inject(self) do |_obj, method|
-      @dinodex.send method
+  def chain_methods(methods)
+    individual_method   =  methods.to_s.split(' ')
+    result = @dinodex
+    individual_method.each do |meth|
+      meth_sym = meth.to_sym
+      result = result.send(FILTER_OPTIONS[meth_sym])
     end
+    puts result.inspect
+  rescue TypeError
+    puts 'Please only enter these options' + FILTER_OPTIONS.keys.to_s.upcase
   end
 
-  def initialize(csv_file)
-    @dinodex = DinoDex.new(csv_file)
+  def print_val(dino_object)
+    puts dino_object.inspect
   end
 
   def run
     puts MENU_OPTIONS
     loop do
-      user_input = $stdin.gets.chomp.downcase.to_sym
+      user_input = gets.chomp.downcase.to_sym
       break if user_input == :exit
-      filter(user_input) unless CHAINED_OPTIONS.include? user_input
-      call_methods(FILTER_OPTIONS[user_input]) if CHAINED_OPTIONS.include? user_input
+      filter(user_input) if user_input.length <= 2
+      chain_methods(user_input) if user_input.length > 2
     end
   end
 end

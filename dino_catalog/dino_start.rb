@@ -1,5 +1,5 @@
-require_relative('dino_menu.rb')
-
+require_relative('dino_menu')
+require_relative('dino_parse')
 CSV_OPTIONS =
     {    dd: 'dinodex.csv',
          ad:  'african_dinosaur_export.csv'
@@ -14,8 +14,9 @@ DINOPTIONS
 puts MENU_OPTIONS
 loop do
   begin
-    user_input = $stdin.gets.chomp.downcase
-    dino =  DinoMenu.new(CSV_OPTIONS[user_input.to_sym])
+    user_input = gets.chomp.downcase
+    dino_parse = DinoParse.new
+    dino =  DinoMenu.new(dino_parse.parse_csv(CSV_OPTIONS[user_input.to_sym]))
     dino.run
     break
   rescue TypeError

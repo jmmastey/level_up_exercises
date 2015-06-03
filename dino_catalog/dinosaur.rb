@@ -20,28 +20,27 @@ class Dinosaur
   end
 
   def biped?
-    @walking  == 'Biped'
+    @walking == 'Biped'
   end
 
-
   def late_cretaceous?
-     @period == 'Late Cretaceous'
+    @period == 'Late Cretaceous'
   end
 
   def early_cretaceous?
-     @period == 'Early Cretaceous'
+    @period == 'Early Cretaceous'
   end
 
   def jurassic?
-      @period  == 'Jurassic'
+    @period == 'Jurassic'
   end
 
   def abrictosaurus?
-      @name == 'Abrictosaurus'
+    @name == 'Abrictosaurus'
   end
 
   def albertosaurus?
-      @name == 'Albertosaurus'
+    @name == 'Albertosaurus'
   end
 
   def carnivore?

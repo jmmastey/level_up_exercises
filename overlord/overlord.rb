@@ -48,4 +48,6 @@ class Overlord < Sinatra::Base
   def start_time
     session[:start_time] ||= (Time.now).to_s
   end
+
+  run! if app_file == $0
 end

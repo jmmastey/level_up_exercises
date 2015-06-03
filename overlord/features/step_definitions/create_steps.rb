@@ -2,12 +2,9 @@ ENV['RACK_ENV'] = 'test'
 require 'rack/test'
 require_relative '../../super_villain_tools.rb'
 require_relative '../../overlord.rb'
-
 Before  do
   visit "/bomb_status"
   @options = {}
-  # @activation_code = ""
-  # @deactivation_code = ""
 end
 
 Given(/^no bomb is booted\/created$/) do
@@ -47,7 +44,6 @@ Given(/^deactivation code input is empty$/) do
 end
 
 Then(/^set deactivation code to "([^"]*)"$/) do |deactivation_code|
-
   step "create a bomb"
 end
 

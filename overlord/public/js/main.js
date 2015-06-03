@@ -1,11 +1,3 @@
-/*
-  On click of
-*/
-$(function(){
-  manageButtonAction = "";
-  checkStatus();
-});
-
 var checkStatus = function(){
   $.get("/bomb_status",function(status){
     $("#status").html("Status: "+status);
@@ -27,7 +19,8 @@ var checkStatus = function(){
     }
 
   });
-}
+};
+
 $("#manageBtn").click(function(){
   // var activationCode =
   $.post(manageButtonAction, $("form").serialize())
@@ -37,6 +30,10 @@ $("#manageBtn").click(function(){
 });
 
 var postProcess = function(response){
-  console.log(response);
   checkStatus();
 }
+
+$(function(){
+  manageButtonAction = "";
+  checkStatus();
+});

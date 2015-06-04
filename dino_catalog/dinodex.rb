@@ -1,3 +1,5 @@
+require 'json'
+
 class Dinosaur
   attr_reader :name, :period, :continent, :diet, :weight, :walking, :description
       
@@ -6,7 +8,7 @@ class Dinosaur
     @period      = args[:period]
     @continent   = args[:continent]
     @diet        = args[:diet]
-    @weight      = args[:weight].to_i
+    @weight      = args[:weight].nil? ? nil : args[:weight].to_i
     @walking     = args[:walking]
     @description = args[:description]
   end
@@ -16,11 +18,11 @@ class Dinosaur
   end
 
   def bigger?(lbs)
-    @weight > 0 && @weight > lbs
+    @weight && @weight > lbs
   end 
 
   def smaller?(lbs)
-    @weight > 0 && @weight < lbs
+    @weight && @weight < lbs
   end
 
   def carnivore?
@@ -37,6 +39,25 @@ class Dinosaur
 
   def period?(per)
     !(@period  =~ Regexp.new(per)).nil?
+  end
+  
+  def print_facts
+    facts = ""
+    ["Name", "Period", "Continent", "Diet", "Weight", "Walking", "Description"].each do |field|
+      value = self.send(field.downcase.to_sym)
+      facts += "#{field.ljust(15,'.')}#{value.to_s.rjust(25, '.')} \n" unless value.nil? 
+    end
+    facts += "-" * 20
+    puts facts
+  end
+  
+    def to_json
+    obj = {}
+    ["Name", "Period", "Continent", "Diet", "Weight", "Walking", "Description"].each do |field|
+      value = self.send(field.downcase.to_sym)
+      obj[field] = value if value 
+    end
+    obj.to_json
   end
 
 end
@@ -81,24 +102,59 @@ class Dinodex
     end
     Dinodex.new(new_dinos) 
   end
-end
-in
-    case field
-    when :biggers
-      new_dinos = @dinos.select {|d| d.bigger?(criteria) }
-    when :smallers
-      new_dinos = @dinos.select {|d| d.smaller?(criteria) }      
-    when :bipeds
-      new_dinos = @dinos.select {|d| d.biped? }
-    when :carnivores
-      new_dinos = @dinos.select {|d| d.carnivore? }
-    when :periods
-      new_dinos = @dinos.select {|d| d.period?(criteria)}   
-    else
-      raise "invalid dino-filter"
+  
+   def dino_table
+    print " " + "Name".ljust(15)
+    print " " + "Period".ljust(18)
+    print " " + "Continent".ljust(15) 
+    print " " + "Diet".ljust(10)
+    print " " + "Walking".ljust(10)
+    print " " + "Weight".ljust(10) + "\n"
+    puts "-" * 80
+    @dinos.each do |d|
+      line = " " + d.name.to_s.ljust(15)
+      line << d.period.to_s.ljust(18)
+      line << d.continent.to_s.ljust(15)
+      line << d.diet.to_s.ljust(10)
+      line << d.walking.to_s.ljust(10)
+      line << d.weight.to_s.ljust(10)
+      puts line
     end
-  Dinodex.new(new_dinos) 
   end
-=end
-end
+  
+  def to_json(filename)
+    File.open(filename,"w") do |f|
+      @dinos.each do |d|
+        f.puts d.to_json
+      end
+    end
+  end
+end  
 
+
+
+dinos = Dinodex.parse_file("dinodex.csv")
+d = Dinodex.new(dinos)
+d.dino_table
+d.dinos[1].print_facts
+puts "Bipeds:"
+d.dino_filter(:bipeds).dino_table
+
+puts "carnivores:"
+d.dino_filter(:carnivores).dino_table
+
+puts "Bigger than 2000 lbs:"
+d.dino_filter(:biggers, 2000).dino_table
+
+puts "From the Cretaceous period"
+d.dino_filter(:periods, "Cretaceous").dino_table
+
+puts "Chained call: carnivores smaller than 2500 lbs: "
+d.dino_filter(:carnivores).dino_filter(:smallers, 2500).dino_table
+puts 
+puts
+puts "Info about a specific dino: "
+d.dinos[2].print_facts
+
+puts "Exporting to json"
+d.to_json("dinodex.json")

@@ -7,3 +7,24 @@
 %h3 Link to library resources:
 %h3  Enter your zip code to find a local library that has this work. 
 = link_to(name = "Click here to enter your zip code", url="http://worldcat.org/oclc/#{@book_of_interest[:oclc]}" )
+
+%h3 Do you want to add a comment?
+= form_tag("/comments/#{@book_of_interest[:oclc]}", :method => "post") do
+  = field_set_tag do
+    = text_area_tag(:comment, content = "Enter your comment", options = {:size => "100x10"})
+    %br
+  = submit_tag 'Submit'
+
+
+%h2 Your saved comments:
+
+- @book_comments.each do |comment|
+  = comment.created_at
+  %br
+  = comment.comment
+  %br
+  %br
+  = form_tag("/comments/delete/#{comment.id}", :method => "post") do
+    = submit_tag 'Delete Comment'
+
+

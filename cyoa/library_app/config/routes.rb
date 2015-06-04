@@ -13,6 +13,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :comments do
+    collection do
+      post ":oclc", to: 'comments#add_comment'
+      post "/delete/:comment_id", to: 'comments#delete_comment'
+    end
+  end
+
   resources :users
   # You can have the root of your site routed with "root"
   root 'static_pages#index'

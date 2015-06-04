@@ -39,10 +39,15 @@ class BooksController < ApplicationController
   def detailed_book_info
     #Fetch info about book
     oclc_num = params["oclc"]
-    puts 'oclc_num', oclc_num, oclc_num.class
-    @book_of_interest = Book.where(oclc: oclc_num)[0]  
+    @book_of_interest = Book.where(oclc: oclc_num)[0]
     #Does user have comments about the book to display?
-    puts 'book of interest', @book_of_interest
+    puts 'any comments?', current_user.comments.all.length
+    @book_comments = current_user.comments.all.select do |comment|
+      puts 'comment book, book of interest'
+      puts comment.book_id,  @book_of_interest.id
+    end
+    @book_comments = current_user.comments.all.select { |comment| comment.book_id == @book_of_interest.id }
+    puts 'how many comments?', @book_comments.length
   end
 
 end

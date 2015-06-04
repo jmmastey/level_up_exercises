@@ -36,7 +36,7 @@ class SuperVillainTools
     input_str = input_int.to_s
     new_len = input_str.length
 
-    # new_input_str = "0" * (init_len - new_len) + input_str
+    new_input_str = "0" * (init_len - new_len) + input_str
 
     new_input_str == input.to_s
   end

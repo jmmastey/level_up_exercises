@@ -66,21 +66,37 @@ class Dinodex
   
   @dinos=[]
   
-  def self.parse_file(filename)
+  def self.parse_file(filename, opts={})
     dinos = []
     File.readlines(filename).drop(1).each do |line|
-      dinos << Dinosaur.new(convert_line(line.chomp))
+      dinos << Dinosaur.new(convert_line(line.chomp, opts[:tpb]))
     end
     dinos 
   end
   
-  def self.convert_line(line)
+  def self.convert_line(line, tpb=false)
     # convert line to canonical hash
-    col_names = [:name, :period, :continent, :diet, :weight, :walking, :description]
-    Hash[col_names.zip(line.split(",").map { |x| x==""? nil: x})]
+    if tpb
+      col_names = [:name, :period, :carnivore, :weight, :walking]
+    else
+      col_names = [:name, :period, :continent, :diet, :weight, :walking, :description]
+    end
+    dino_hash = Hash[col_names.zip(line.split(",").map { |x| x==""? nil: x})]
+    tpb ? tpb_to_canonical(dino_hash) : dino_hash
   end
 
-
+  def self.tpb_to_canonical(tpb_hash)
+    canonical_hash = tpb_hash
+    if tpb_hash[:carnivore] == "Yes"
+      canonical_hash[:diet] = "Carnivore"
+    else
+      canonical_hash[:diet] = nil
+    end
+    canonical_hash.delete(:carnivore)
+    canonical_hash[:continent] = "Africa"
+    canonical_hash
+  end
+  
   def initialize(initial_dinos)
     @dinos = initial_dinos
   end
@@ -132,28 +148,43 @@ class Dinodex
 end  
 
 
-
+puts "Read csv file"
 dinos = Dinodex.parse_file("dinodex.csv")
 d = Dinodex.new(dinos)
+
+
+puts "Reading tpb file"
+tpb_dinos = Dinodex.parse_file("african_dinosaur_export.csv", tpb: true)
+d.add_dinos(tpb_dinos)
+
+puts "-" * 30
+puts "All dinos:"
+puts "-" * 30
 d.dino_table
-d.dinos[1].print_facts
+puts "-" * 30
 puts "Bipeds:"
+puts "-" * 30
 d.dino_filter(:bipeds).dino_table
-
-puts "carnivores:"
+puts "-" * 30
+puts "Carnivores:"
+puts "-" * 30
 d.dino_filter(:carnivores).dino_table
-
+puts "-" * 30
 puts "Bigger than 2000 lbs:"
+puts "-" * 30
 d.dino_filter(:biggers, 2000).dino_table
-
+puts "-" * 30
 puts "From the Cretaceous period"
+puts "-" * 30
 d.dino_filter(:periods, "Cretaceous").dino_table
-
+puts "-" * 30
 puts "Chained call: carnivores smaller than 2500 lbs: "
+puts "-" * 30
 d.dino_filter(:carnivores).dino_filter(:smallers, 2500).dino_table
 puts 
 puts
 puts "Info about a specific dino: "
+puts "-" * 30
 d.dinos[2].print_facts
 
 puts "Exporting to json"

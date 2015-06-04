@@ -1,1 +1,6 @@
-%h1 This page will display the users books
+%h1 Your Library
+
+- @current_user_library.each do |book|
+  - link_display = "Title: #{book[:title]}"
+  
+  = link_to(name = link_display, url = "/books/item/#{book[:oclc]}")

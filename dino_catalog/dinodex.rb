@@ -61,38 +61,56 @@ class Dinosaur
 
 end
 
+
+class FileParser
+
+=begin
+  here's what i'd like:
+  def self.parse_csv_file(filename)
+    col_names = []....
+    iterate through file lines with... dino_hash
+  end
+
+  def self.parse_tpb_file(filename)
+    colnames = []
+    iterate through file lines with ... canonical(dino_hash)
+
+=end
+
+  def self.parse_csv_file(filename)
+    col_names = [:name, :period, :continent, :diet, :weight, :walking, :description]
+    File.readlines(filename).drop(1).each_with_object([]) do |line, dinos|
+      dino_hash = make_hash(line, col_names)
+      dinos << Dinosaur.new(dino_hash)
+    end
+  end
+
+  def self.make_hash(line, col_names)
+    Hash[col_names.zip(line.split(",").map { |x| x==""? nil: x})]
+  end
+
+  def self.parse_tpb_file(filename)
+    col_names = [:name, :period, :carnivore, :weight, :walking]
+    File.readlines(filename).drop(1).each_with_object([]) do |line, dinos|
+      dino_hash = make_hash(line, col_names)
+      dinos << Dinosaur.new(canonical_hash(dino_hash))
+    end
+  end
+
+  def self.canonical_hash(tpb_hash)
+    if tpb_hash[:carnivore] == "Yes"
+      tpb_hash[:diet] = "Carnivore"
+      tpb_hash[:carnivore] = nil
+    end
+    tpb_hash[:continent] = "Africa"
+  end
+end
+
+
+
 class Dinodex
   
   @dinos=[]
-  
-  def self.parse_file(filename, opts={})
-    File.readlines(filename).drop(1).each_with_object([]) do |line, dinos|
-      dinos << Dinosaur.new(convert_line(line.chomp, opts[:tpb]))
-    end
-  end
-  
-  def self.convert_line(line, tpb=false)
-    # convert line to canonical hash
-    if tpb
-      col_names = [:name, :period, :carnivore, :weight, :walking]
-    else
-      col_names = [:name, :period, :continent, :diet, :weight, :walking, :description]
-    end
-    dino_hash = Hash[col_names.zip(line.split(",").map { |x| x==""? nil: x})]
-    tpb ? tpb_to_canonical(dino_hash) : dino_hash
-  end
-
-  def self.tpb_to_canonical(tpb_hash)
-    canonical_hash = tpb_hash
-    if tpb_hash[:carnivore] == "Yes"
-      canonical_hash[:diet] = "Carnivore"
-    else
-      canonical_hash[:diet] = nil
-    end
-    canonical_hash.delete(:carnivore)
-    canonical_hash[:continent] = "Africa"
-    canonical_hash
-  end
   
   def initialize(initial_dinos)
     @dinos = initial_dinos
@@ -116,7 +134,7 @@ class Dinodex
     Dinodex.new(new_dinos) 
   end
   
-   def dino_table
+  def dino_table
     print " " + "Name".ljust(20)
     print " " + "Period".ljust(18)
     print " " + "Continent".ljust(15) 
@@ -146,14 +164,11 @@ end
 
 
 puts "Read csv file"
-dinos = Dinodex.parse_file("dinodex.csv")
+dinos = Dinodex.parse_csv_file("dinodex.csv")
 d = Dinodex.new(dinos)
-
-
 puts "Reading tpb file"
-tpb_dinos = Dinodex.parse_file("african_dinosaur_export.csv", tpb: true)
+tpb_dinos = Dinodex.parse_tpb_file("african_dinosaur_export.csv")
 d.add_dinos(tpb_dinos)
-
 puts "-" * 30
 puts "All dinos:"
 puts "-" * 30

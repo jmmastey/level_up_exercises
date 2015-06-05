@@ -43,23 +43,20 @@ class Dinosaur
     !!(@period  =~ /#{per}/)
   end
   
-  def print_facts
-    facts = ""
-    ["Name", "Period", "Continent", "Diet", "Weight", "Walking", "Description"].each do |field|
+  def facts  
+    %w(Name Period Continent Diet Weight Walking Description)
+    .inject("") do |acc, field|
       value = self.send(field.downcase.to_sym)
-      facts += "#{field.ljust(15,'.')}#{value.to_s.rjust(25, '.')} \n" unless value.nil? 
-    end
-    facts += "-" * 20
-    puts facts
+      acc += "#{field.ljust(15,'.')}#{value.to_s.rjust(25, '.')} \n" unless value.nil? 
+    end 
   end
   
     def to_json
-    obj = {}
-    ["Name", "Period", "Continent", "Diet", "Weight", "Walking", "Description"].each do |field|
-      value = self.send(field.downcase.to_sym)
-      obj[field] = value if value 
+      %w(Name Period Continent Diet Weight Walking Description).each_with_object({}) do |f, acc|
+      field = f.downcase.to_sym
+      value = self.send(field)
+      acc[field] = value if value 
     end
-    obj.to_json
   end
 
 end
@@ -69,11 +66,9 @@ class Dinodex
   @dinos=[]
   
   def self.parse_file(filename, opts={})
-    dinos = []
-    File.readlines(filename).drop(1).each do |line|
+    File.readlines(filename).drop(1).each_with_object([]) do |line, dinos|
       dinos << Dinosaur.new(convert_line(line.chomp, opts[:tpb]))
     end
-    dinos 
   end
   
   def self.convert_line(line, tpb=false)
@@ -122,7 +117,7 @@ class Dinodex
   end
   
    def dino_table
-    print " " + "Name".ljust(15)
+    print " " + "Name".ljust(20)
     print " " + "Period".ljust(18)
     print " " + "Continent".ljust(15) 
     print " " + "Diet".ljust(10)
@@ -130,7 +125,7 @@ class Dinodex
     print " " + "Weight".ljust(10) + "\n"
     puts "-" * 80
     @dinos.each do |d|
-      line = " " + d.name.to_s.ljust(15)
+      line = " " + d.name.to_s.ljust(20)
       line << d.period.to_s.ljust(18)
       line << d.continent.to_s.ljust(15)
       line << d.diet.to_s.ljust(10)
@@ -187,7 +182,7 @@ puts
 puts
 puts "Info about a specific dino: "
 puts "-" * 30
-d.dinos[2].print_facts
+puts d.dinos[2].facts
 
 puts "Exporting to json"
 d.to_json("dinodex.json")

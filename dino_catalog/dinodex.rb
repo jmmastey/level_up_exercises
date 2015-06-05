@@ -40,7 +40,7 @@ class Dinosaur
   end
 
   def period?(per)
-    !(@period  =~ Regexp.new(per)).nil?
+    !!(@period  =~ /#{per}/)
   end
   
   def print_facts

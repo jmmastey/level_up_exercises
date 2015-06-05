@@ -8,13 +8,15 @@ class Dinosaur
     @period      = args[:period]
     @continent   = args[:continent]
     @diet        = args[:diet]
-    @weight      = args[:weight].nil? ? nil : args[:weight].to_i
+    @weight      = args[:weight].to_i if args[:weight]
     @walking     = args[:walking]
     @description = args[:description]
   end
 
   def to_s
-    "#{@name}, #{@period}, #{@continent}, #{@diet}, #{@weight}, #{@walking}"
+    "Name: #{@name}, Period: #{@period}, Continent: #{@continent}, " +
+    "Diet: #{@diet}, Weight: #{@weight}, Walking: #{@walking}, " +
+    "Description: #{@description}"
   end
 
   def bigger?(lbs)
@@ -189,3 +191,4 @@ d.dinos[2].print_facts
 
 puts "Exporting to json"
 d.to_json("dinodex.json")
+puts d.dinos[2].to_s

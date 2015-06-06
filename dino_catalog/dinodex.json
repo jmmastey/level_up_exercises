@@ -1,17 +1,17 @@
-{:name=>"Albertosaurus", :period=>"Late Cretaceous", :continent=>"North America", :diet=>"Carnivore", :weight=>2000, :walking=>"Biped", :description=>"Like a T-Rex but smaller.\n"}
-{:name=>"Albertonykus", :period=>"Early Cretaceous", :continent=>"North America", :diet=>"Insectivore", :walking=>"Biped", :description=>"Earliest known Alvarezsaurid.\n"}
-{:name=>"Baryonyx", :period=>"Early Cretaceous", :continent=>"Europe", :diet=>"Piscivore", :weight=>6000, :walking=>"Biped", :description=>"One of the only known dinosaurs with a fish-only diet.\n"}
-{:name=>"Deinonychus", :period=>"Early Cretaceous", :continent=>"North America", :diet=>"Carnivore", :weight=>150, :walking=>"Biped", :description=>"\n"}
-{:name=>"Diplocaulus", :period=>"Late Permian", :continent=>"North America", :diet=>"Carnivore", :walking=>"Quadruped", :description=>"They actually had fins on the side of their body.\n"}
-{:name=>"Megalosaurus", :period=>"Jurassic", :continent=>"Europe", :diet=>"Carnivore", :weight=>2200, :walking=>"Biped", :description=>"Originally thought to be a Quadruped. First dinosaur to be named.\n"}
-{:name=>"Giganotosaurus", :period=>"Late Cretaceous", :continent=>"South America", :diet=>"Carnivore", :weight=>30420, :walking=>"Biped", :description=>"Largest hunter and also the coolest ever.\n"}
-{:name=>"Quetzalcoatlus", :period=>"Late Cretaceous", :continent=>"North America", :diet=>"Carnivore", :weight=>440, :walking=>"Quadruped", :description=>"Largest known flying animal of all time.\n"}
-{:name=>"Yangchuanosaurus", :period=>"Oxfordian", :continent=>"Asia", :diet=>"Carnivore", :weight=>7200, :walking=>"Biped", :description=>"\n"}
-{:name=>"Dracopelta", :period=>"Early Cretaceous or Late Jurassic", :continent=>"South America", :diet=>"Herbivore", :walking=>"Quadruped", :description=>"One of the most primitive known Ankylosauria.\n"}
-{:name=>"Abrictosaurus", :period=>"Jurassic", :continent=>"Africa", :weight=>100, :walking=>"Biped\n"}
-{:name=>"Afrovenator", :period=>"Jurassic", :continent=>"Africa", :diet=>"Carnivore", :walking=>"Biped\n"}
-{:name=>"Carcharodontosaurus", :period=>"Albian", :continent=>"Africa", :diet=>"Carnivore", :weight=>3000, :walking=>"Biped\n"}
-{:name=>"Giraffatitan", :period=>"Jurassic", :continent=>"Africa", :weight=>6600, :walking=>"Quadruped\n"}
-{:name=>"Paralititan", :period=>"Cretaceous", :continent=>"Africa", :weight=>120000, :walking=>"Quadruped\n"}
-{:name=>"Suchomimus", :period=>"Cretaceous", :continent=>"Africa", :diet=>"Carnivore", :weight=>10400, :walking=>"Biped\n"}
-{:name=>"Melanorosaurus", :period=>"Triassic", :continent=>"Africa", :weight=>2400, :walking=>"Quadruped\n"}
+{:name=>"Albertosaurus", :period=>"Late Cretaceous", :continent=>"North America", :diet=>"Carnivore", :weight=>2000, :walking=>"Biped", :description=>"Like a T-Rex but smaller."}
+{:name=>"Albertonykus", :period=>"Early Cretaceous", :continent=>"North America", :diet=>"Insectivore", :walking=>"Biped", :description=>"Earliest known Alvarezsaurid."}
+{:name=>"Baryonyx", :period=>"Early Cretaceous", :continent=>"Europe", :diet=>"Piscivore", :weight=>6000, :walking=>"Biped", :description=>"One of the only known dinosaurs with a fish-only diet."}
+{:name=>"Deinonychus", :period=>"Early Cretaceous", :continent=>"North America", :diet=>"Carnivore", :weight=>150, :walking=>"Biped"}
+{:name=>"Diplocaulus", :period=>"Late Permian", :continent=>"North America", :diet=>"Carnivore", :walking=>"Quadruped", :description=>"They actually had fins on the side of their body."}
+{:name=>"Megalosaurus", :period=>"Jurassic", :continent=>"Europe", :diet=>"Carnivore", :weight=>2200, :walking=>"Biped", :description=>"Originally thought to be a Quadruped. First dinosaur to be named."}
+{:name=>"Giganotosaurus", :period=>"Late Cretaceous", :continent=>"South America", :diet=>"Carnivore", :weight=>30420, :walking=>"Biped", :description=>"Largest hunter and also the coolest ever."}
+{:name=>"Quetzalcoatlus", :period=>"Late Cretaceous", :continent=>"North America", :diet=>"Carnivore", :weight=>440, :walking=>"Quadruped", :description=>"Largest known flying animal of all time."}
+{:name=>"Yangchuanosaurus", :period=>"Oxfordian", :continent=>"Asia", :diet=>"Carnivore", :weight=>7200, :walking=>"Biped"}
+{:name=>"Dracopelta", :period=>"Early Cretaceous or Late Jurassic", :continent=>"South America", :diet=>"Herbivore", :walking=>"Quadruped", :description=>"One of the most primitive known Ankylosauria."}
+{:name=>"Abrictosaurus", :period=>"Jurassic", :continent=>"Africa", :diet=>"100"}
+{:name=>"Afrovenator", :period=>"Jurassic", :continent=>"Africa"}
+{:name=>"Carcharodontosaurus", :period=>"Albian", :continent=>"Africa", :diet=>"3000"}
+{:name=>"Giraffatitan", :period=>"Jurassic", :continent=>"Africa", :diet=>"6600"}
+{:name=>"Paralititan", :period=>"Cretaceous", :continent=>"Africa", :diet=>"120000"}
+{:name=>"Suchomimus", :period=>"Cretaceous", :continent=>"Africa", :diet=>"10400"}
+{:name=>"Melanorosaurus", :period=>"Triassic", :continent=>"Africa", :diet=>"2400"}

@@ -44,15 +44,15 @@ class Dinosaur
   end
   
   def facts  
-    %w(Name Period Continent Diet Weight Walking Description)
-    .inject("") do |acc, field|
-      value = self.send(field.downcase.to_sym)
-      acc += "#{field.ljust(15,'.')}#{value.to_s.rjust(25, '.')} \n" unless value.nil? 
+    %w(Name Period Continent Diet Weight Walking Description).each_with_object("") do |f, acc|
+      field = f.downcase.to_sym
+      value = self.send(field)
+      acc << "#{f.ljust(15,'.')}#{value.to_s.rjust(25, '.')} \n" if value
     end 
   end
   
-    def to_json
-      %w(Name Period Continent Diet Weight Walking Description).each_with_object({}) do |f, acc|
+  def to_json
+    %w(Name Period Continent Diet Weight Walking Description).each_with_object({}) do |f, acc|
       field = f.downcase.to_sym
       value = self.send(field)
       acc[field] = value if value 
@@ -116,39 +116,47 @@ end
 
 class FileParser
 
-  def self.parse_csv_file(filename)
-    col_names = [ :name, :period, :continent, :diet, :weight, :walking, :description]
-    File.readlines(filename).drop(1).each_with_object([]) do |line, dinos|
-      dino_hash = make_hash(line, col_names)
-      dinos << Dinosaur.new(dino_hash)
-    end
+  def self.parse_joes_file(filename)
+    converter = lambda(&method(:convert_from_joe))
+    build_dinos(filename, converter)
   end
 
   def self.parse_tpb_file(filename)
-    col_names = [ :name, :period, :carnivore, :weight, :walking]
+    converter = lambda(&method(:convert_from_tpb))
+    build_dinos(filename, converter)
+  end
+
+  def self.build_dinos(filename, converter)
+    array_of_hashes = parse_file(filename)
+    array_of_hashes.map(&converter).each_with_object([]) do |h, acc|
+      acc << Dinosaur.new(h)
+    end 
+  end
+
+  def self.parse_file(filename)
+    cols = File.readlines("dinodex.csv")[0].chomp.split(",").map { |col| col.downcase.to_sym } 
     File.readlines(filename).drop(1).each_with_object([]) do |line, dinos|
-      dino_hash = make_hash(line, col_names)
-      dinos << Dinosaur.new(canonical_hash(dino_hash)) 
+      dinos <<  Hash[cols.zip(line.chomp.split(",").map { |x| x==""? nil: x})]
     end
   end
 
-  def self.make_hash(line, col_names)
-    Hash[col_names.zip(line.split(",").map { |x| x==""? nil: x})]
-  end
-
-  def self.canonical_hash(tpb_hash)
-    if tpb_hash[:carnivore] == "Yes"
-      tpb_hash[:diet] = "Carnivore"
-      tpb_hash[:carnivore] = nil
-    end
+  def self.convert_from_tpb(tpb_hash)
     tpb_hash[:continent] = "Africa"
+    if tpb_hash.delete(:carnivore) == "Yes"
+      tpb_hash[:diet] = "Carnivore"
+    end
     tpb_hash
+  end
+ 
+  def self.convert_from_joe(joe_hash)
+    joe_hash[:weight] = joe_hash.delete(:weight_in_lbs)
+    joe_hash
   end
 end
 
 
 puts "Read csv file"
-dinos = FileParser.parse_csv_file("dinodex.csv")
+dinos = FileParser.parse_joes_file("dinodex.csv")
 d = Dinodex.new(dinos)
 puts "Reading tpb file"
 tpb_dinos = FileParser.parse_tpb_file("african_dinosaur_export.csv")
@@ -182,7 +190,7 @@ puts
 puts "Info about a specific dino: "
 puts "-" * 30
 puts d.dinos[2].facts
-
 puts "Exporting to json"
 d.to_json("dinodex.json")
 puts d.dinos[2].to_s
+

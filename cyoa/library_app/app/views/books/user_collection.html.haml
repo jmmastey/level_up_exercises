@@ -1,6 +1,7 @@
 %h1 Your Library
 
-- @current_user_library.each do |book|
-  - link_display = "Title: #{book[:title]}"
-  
-  = link_to(name = link_display, url = "/books/item/#{book[:oclc]}")
+%ul
+  - @current_user_library.each do |book|
+    - link_display = "Title: #{book[:title]}"
+    %li 
+      = link_to(name = link_display, url = "/books/item/#{book[:oclc]}")

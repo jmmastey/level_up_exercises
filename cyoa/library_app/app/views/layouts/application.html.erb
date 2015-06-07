@@ -5,20 +5,29 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
 </head>
 <body>
-  
-    <div class="nav">
-      <ul> 
-        <li> <a href="/books/search">Book Search</a></li>
-        <li> <a href="/books/collection">My Library</a></li>
+  <header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <%= link_to "MyLibrary", "/", id: "logo" %>
+      <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li> <%= link_to("Book Search", "/books/search") %> </li>
         <% if user_signed_in? %>
+          <li> <a href="/books/collection"><%=current_user.email%>'s Library</a></li>
           <li> <%= link_to("Logout", destroy_user_session_path, method: :delete) %> </li>
         <% else %>
+          <li> <%= link_to("User's Library", "/books/collection") %> </li>
           <li> <%= link_to("Login", new_user_session_path) %></li>
         <% end %>
-     </ul>
+      </ul>
+     </nav>
     </div>
+  </header>
 
 
 

@@ -1,17 +1,22 @@
 %h3 
-  Title: 
-  = @book_of_interest[:title] 
+  %strong Title: 
+  %i
+    = @book_of_interest[:title] 
 %h3 
-  Author:
+  %strong Author:
   = @book_of_interest[:author]
 %h3 
-  Link to library resources:
+  %strong Link to library resources:
   = link_to(name = "#{@book_of_interest[:title]}", url="http://worldcat.org/oclc/#{@book_of_interest[:oclc]}" )
-
-%h3 Do you want to add a comment?
+%br
+%br
+= form_tag("/books/#{@book_of_interest[:id]}", :method => "delete") do
+  = submit_tag("Delete Book")
+%br
+%br
 = form_tag("/comments/#{@book_of_interest[:oclc]}", :method => "post") do
   = field_set_tag do
-    = text_area_tag(:comment, content = "Enter your comment", options = {:size => "100x5"})
+    = text_area_tag(:comment, content = "Add a comment about this work...", options = {:size => "100x5"})
     %br
   = submit_tag 'Submit'
 

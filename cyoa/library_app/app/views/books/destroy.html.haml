@@ -1,0 +1,7 @@
+- if @transaction
+  %h3 Your book was successfully deleted
+- else
+  %h3 Error: you attempted to delete a book that was not in your library.
+
+%h3
+  = link_to("Return to your library", "/books/collection") 

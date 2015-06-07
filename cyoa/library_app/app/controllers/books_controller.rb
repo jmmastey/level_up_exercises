@@ -20,13 +20,18 @@ class BooksController < ApplicationController
     response = CallClassifyAPI::query_api(query, false)
     @book_data = CallClassifyAPI::parse_response(response)[0]
     #need to check if the book is already in book table and in user's collection
-    book = Book.new(@book_data)
-    book.save if !Book.exists?(oclc: book[:oclc])
+    if Book.where(oclc: @book_data["oclc"]).length == 1
+      book = Book.where(oclc: @book_data["oclc"])[0]
+    else
+      book = Book.new(@book_data)
+      book.save
+    end
     #Need the id of the book
-    if current_user.books.all.select { |existing_book| existing_book[:oclc] == book[:oclc] }.length == 0
+    book_match = current_user.books.all.select{ |existing_book| existing_book.oclc == book.oclc }
+    if book_match.length == 0
       current_user.books << book
     else
-      "The book is already in your library"
+      @message = "The book is already in your library"
     end
   end
 
@@ -41,13 +46,12 @@ class BooksController < ApplicationController
     oclc_num = params["oclc"]
     @book_of_interest = Book.where(oclc: oclc_num)[0]
     #Does user have comments about the book to display?
-    puts 'any comments?', current_user.comments.all.length
-    @book_comments = current_user.comments.all.select do |comment|
-      puts 'comment book, book of interest'
-      puts comment.book_id,  @book_of_interest.id
-    end
     @book_comments = current_user.comments.all.select { |comment| comment.book_id == @book_of_interest.id }
-    puts 'how many comments?', @book_comments.length
   end
 
+  def destroy
+    book_id = params[:id]
+    #Remove book from user's library
+    @transaction = current_user.books.delete(book_id) if current_user.books.find_by(id:book_id)
+  end
 end

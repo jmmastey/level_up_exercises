@@ -1,5 +1,6 @@
 #require_relative '../../lib/api_interaction/call_classify_api.rb'
 require "api_interaction/call_classify_api"
+require "api_interaction/call_googlebooks_api"
 
 class BooksController < ApplicationController
   before_filter :authenticate_user!
@@ -19,6 +20,12 @@ class BooksController < ApplicationController
     query = { "owi" => params["owi"] }
     response = CallClassifyAPI::query_api(query, false)
     @book_data = CallClassifyAPI::parse_response(response)[0]
+    google_query = {"OCLC" => @book_data["oclc"] }
+    puts 'google query is', google_query
+    @book_thumbnail = CallGoogleBooksAPI::query_api(google_query)
+    @book_thumbnail = CallGoogleBooksAPI::get_thumbnail_url(@book_thumbnail, google_query)
+    @book_data["thumbnail_url"] = @book_thumbnail
+    puts 'book data now', @book_data
     #need to check if the book is already in book table and in user's collection
     if Book.where(oclc: @book_data["oclc"]).length == 1
       book = Book.where(oclc: @book_data["oclc"])[0]

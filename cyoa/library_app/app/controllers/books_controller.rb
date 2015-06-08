@@ -3,7 +3,7 @@ require "api_interaction/call_classify_api"
 require "api_interaction/call_googlebooks_api"
 
 class BooksController < ApplicationController
-  before_filter :authenticate_user!
+ # before_filter :authenticate_user!
 
   def search
   end
@@ -14,7 +14,7 @@ class BooksController < ApplicationController
   end
 
   def select_item
-    redirect_to new_user_session_path if !user_signed_in?
+    authenticate_user! if !user_signed_in?
     puts 'who is the current user', current_user.email
     #Query the api again with the owi number for the user's selected book to get detailed listing (and oclc num)
     query = { "owi" => params["owi"] }
@@ -43,12 +43,15 @@ class BooksController < ApplicationController
   end
 
   def user_collection
+    authenticate_user! if !user_signed_in?
+    puts 'user signed in?', user_signed_in?
     #Allows user to view the library
     @current_user_library = current_user.books.all
     @current_user_name = current_user.email
   end
 
   def detailed_book_info
+    authenticate_user! if !user_signed_in?
     #Fetch info about book
     oclc_num = params["oclc"]
     @book_of_interest = Book.where(oclc: oclc_num)[0]
@@ -57,6 +60,7 @@ class BooksController < ApplicationController
   end
 
   def destroy
+    authenticate_user! if !user_signed_in?
     book_id = params[:id]
     #Remove book from user's library
     @transaction = current_user.books.delete(book_id) if current_user.books.find_by(id:book_id)

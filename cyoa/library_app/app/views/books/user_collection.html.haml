@@ -1,9 +1,9 @@
 %h1 My Library
 
-%ul.row
+%ul.spaceUnder
   - @current_user_library.each do |book|
     - link_display = "#{book[:title]}"
-    %li.col-lg-2.col-md-2.col-sm-3.col-xs-4
+    %li.col-md-3
       = image_tag("#{book[:thumbnail_url]}", :class => "thumbnails")
       %br
       = link_to(name = link_display, url = "/books/item/#{book[:oclc]}")

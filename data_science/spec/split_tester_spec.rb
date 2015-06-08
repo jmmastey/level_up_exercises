@@ -19,10 +19,10 @@ RSpec.describe SplitTestAB do
 
   describe 'Get conversion rate for cohort' do
     it 'returns conversion rate for each cohort' do
-      expect(ab_test_split.conversion_rate(ab_test_split.conversiona)).to \
-       eq([0.09461601518408944, 0.276812556244482])
-      expect(ab_test_split.conversion_rate(ab_test_split.conversionb)).to \
-       eq([0.06088304359232875, 0.22483124212195693])
+      expect(ab_test_split.conversion_rate(ab_test_split.conversiona,ab_test_split.nonconversiona)).to \
+       eq([0.26727411833986714, 0.6292776057980639])
+      expect(ab_test_split.conversion_rate(ab_test_split.conversionb,ab_test_split.nonconversionb)).to \
+       eq([0.11245469104354977, 0.3753501870052307])
     end
   end
 

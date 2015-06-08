@@ -10,9 +10,12 @@ end
 
 # This class is used for a Split test
 class SplitTestAB
+  CONV_FACTOR = 0.95
   attr_accessor :json_data
   attr_accessor :conversiona
   attr_accessor :conversionb
+  attr_accessor :nonconversiona
+  attr_accessor :nonconversionb
   attr_accessor :visitors
 
   def initialize(data)
@@ -50,8 +53,9 @@ class SplitTestAB
     @nonconversionb += 1 if element['result'] == 0
   end
 
-  def conversion_rate(conversion)
-    ABAnalyzer.confidence_interval(conversion, @visitors.size, 0.95)
+  def conversion_rate(conversion, nonconversion)
+    total__conversion = conversion + nonconversion
+    ABAnalyzer.confidence_interval(conversion, total__conversion, CONV_FACTOR)
   end
 
   def create_converhash(conversion, nonconversion)

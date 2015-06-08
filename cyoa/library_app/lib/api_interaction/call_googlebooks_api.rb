@@ -28,7 +28,7 @@ module CallGoogleBooksAPI
     response.slice!('var _GBSBookInfo =')
     response.slice!(";")   
     response = JSON.parse(response)
-    response[bibkey]["thumbnail_url"]
+    return response[bibkey]["thumbnail_url"] if response[bibkey]
   end
 
 end 

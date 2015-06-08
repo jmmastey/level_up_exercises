@@ -4,6 +4,6 @@
   - @current_user_library.each do |book|
     - link_display = "#{book[:title]}"
     %li.col-lg-2.col-md-2.col-sm-3.col-xs-4
-      = image_tag("#{book[:thumbnail_url]}", :class => "style_image")
+      = image_tag("#{book[:thumbnail_url]}", :class => "thumbnails")
       %br
       = link_to(name = link_display, url = "/books/item/#{book[:oclc]}")

@@ -29,8 +29,8 @@ RSpec.describe ConversionCalculator do
   end
 
   it "#conversion_rate" do
-    expect(@calc.conversion_rate('A')).to eq ABAnalyzer.confidence_interval(@a_conversion, @a_sample, @confidence)
-    expect(@calc.conversion_rate('B')).to eq ABAnalyzer.confidence_interval(@b_conversion, @b_sample, @confidence)
+    expect(@calc.conversion_rate('A')).to eq [0.47702328622933254, 0.5532797440736977]
+    expect(@calc.conversion_rate('B')).to eq [0.4856925781577534, 0.5582634657982906]
   end
 
   it "#chi_square" do

@@ -36,7 +36,7 @@ class ExportDinos
   end
 
   def get_filename(flags)
-    flags.reduce("export") do |_memo, flag|
+    flags.inject("export") do |_memo, flag|
       flag.last if flag.first == "-n"
     end
   end

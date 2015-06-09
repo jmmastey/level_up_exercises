@@ -3,15 +3,15 @@ require_relative 'input_parser.rb'
 
 class ListDinos
   LISTMAP = {
-    "-c"  => "continent",
     "-c?" => "carnivore?",
-    "-d"  => "diet",
-    "-i"  => "info",
-    "-n"  => "name",
-    "-p"  => "period",
-    "-l"  => "locomotion",
-    "-s"  => "size",
-    "-w"  => "weight",
+    "-c" => "continent",
+    "-d" => "diet",
+    "-i" => "info",
+    "-n" => "name",
+    "-p" => "period",
+    "-l" => "locomotion",
+    "-s" => "size",
+    "-w" => "weight",
   }
 
   FLAGS = %w(-c -c? -d -f -i -l -n -p -s -w)
@@ -41,7 +41,7 @@ class ListDinos
   end
 
   def extract_full_flags(flags)
-    full_flags = flags.find_all { |flag| flag.first == "-f" }.uniq
+    full_flags = flags.select { |flag| flag.first == "-f" }.uniq
     flags -= full_flags
     [full_flags, flags]
   end
@@ -52,7 +52,7 @@ class ListDinos
   end
 
   def filter_list(flags)
-    flags.reduce([]) do |memo, flag|
+    flags.inject([]) do |memo, flag|
       filtered = @registry.find_all(flag.first, flag.last)
       next filtered if memo.empty?
       memo & filtered
@@ -75,7 +75,7 @@ class ListDinos
   end
 
   def results(list, method)
-    list.reduce("\n") do |memo, instance|
+    list.inject("\n") do |memo, instance|
       memo + instance.send(method) + "\n"
     end + "\n"
   end

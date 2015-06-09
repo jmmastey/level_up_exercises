@@ -19,7 +19,7 @@ class Registry
   end
 
   def find_all(key, match_str)
-    @list.reduce([]) do |memo, instance|
+    @list.inject([]) do |memo, instance|
       val = instance.send(key)
       match = [instance] if str_contains?(val, match_str)
       memo + (match || [])
@@ -27,7 +27,7 @@ class Registry
   end
 
   def json_string(inst_method)
-    arr = @list.sort.reduce([]) do |memo, instance|
+    arr = @list.sort.inject([]) do |memo, instance|
       memo + [instance.send(inst_method)]
     end
     JSON.pretty_generate(arr)

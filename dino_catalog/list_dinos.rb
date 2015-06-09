@@ -3,15 +3,15 @@ require_relative 'input_parser.rb'
 
 class ListDinos
   LISTMAP = {
-    "-c"  => "continent",
     "-c?" => "carnivore?",
-    "-d"  => "diet",
-    "-i"  => "info",
-    "-n"  => "name",
-    "-p"  => "period",
-    "-l"  => "locomotion",
-    "-s"  => "size",
-    "-w"  => "weight",
+    "-c" => "continent",
+    "-d" => "diet",
+    "-i" => "info",
+    "-n" => "name",
+    "-p" => "period",
+    "-l" => "locomotion",
+    "-s" => "size",
+    "-w" => "weight",
   }
 
   FLAGS = %w(-c -c? -d -f -i -l -n -p -s -w)

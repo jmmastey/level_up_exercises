@@ -33,7 +33,7 @@ class ListDinos
 
   def display_results(filtered_list, full)
     method = full ? "properties_string" : "name"
-    return puts "No matches found!\n\n" unless filtered_list.size > 0
+    filtered_list = @registry.list unless filtered_list.size > 0
     puts results(filtered_list, method)
   end
 

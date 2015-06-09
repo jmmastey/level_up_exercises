@@ -47,7 +47,7 @@ class ListDinos
   end
 
   def filtered_list(flags)
-    return @registry.list if flags.empty?
+    return @registry.list unless flags
     filter_list(flags)
   end
 

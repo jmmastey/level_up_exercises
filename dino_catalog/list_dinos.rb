@@ -40,7 +40,7 @@ class ListDinos
   end
 
   def extract_full_flags(flags)
-    full_flags = flags.find_all { |flag| flag.first == "-f" }.uniq
+    full_flags = flags.select { |flag| flag.first == "-f" }.uniq
     flags -= full_flags
     [full_flags, flags]
   end

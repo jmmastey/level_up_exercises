@@ -36,7 +36,7 @@ class Dinodex
   end
 
   def get_data(configs)
-    configs.reduce([]) do |memo, config|
+    configs.inject([]) do |memo, config|
       keys, rows = data_from_file(config)
       format_data(keys, rows) + memo
     end
@@ -44,7 +44,7 @@ class Dinodex
 
   def help_msgs
     config = @fs.json_to_hash(CONFIG[:help])
-    config.reduce({}) do |memo, (key, val)|
+    config.inject({}) do |memo, (key, val)|
       memo.merge(key => @fs.txt_to_string(val))
     end
   end
@@ -57,7 +57,7 @@ class Dinodex
   end
 
   def row_to_hash(keys, row)
-    row.each.with_index.reduce({}) do |hash, (val, idx)|
+    row.each.with_index.inject({}) do |hash, (val, idx)|
       hash.merge(keys[idx] => val)
     end
   end

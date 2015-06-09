@@ -46,7 +46,7 @@ class ListDinos
   end
 
   def filter_list(flags)
-    flags.reduce([]) do |memo, flag|
+    flags.inject([]) do |memo, flag|
       filtered = @registry.find_all(flag.first, flag.last)
       next filtered if memo.empty?
       memo & filtered
@@ -68,7 +68,7 @@ class ListDinos
   end
 
   def results(filtered_list, method)
-    filtered_list.reduce("\n") do |memo, instance|
+    filtered_list.inject("\n") do |memo, instance|
       memo + instance.send(method) + "\n"
     end + "\n"
   end

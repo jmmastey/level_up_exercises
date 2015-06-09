@@ -1,11 +1,6 @@
 module Commands
   COMMANDS = %w(help list export exit manual)
 
-  FLAGS = {
-    list: %w(-c -d -f -h -n -p -s -w),
-    export: %w(-n),
-  }
-
   def self.err_cmd(cmd)
     "> Unrecognized command: #{cmd}\n\n"
   end

@@ -5,10 +5,6 @@ require './dinodex'
 
 dinos = CSVParser.read('dinodex.csv', 'african_dinosaur_export.csv')
 
-dinos = dinos.map do |dino|
-  Dinosaur.new(dino)
-end
-
 dinodex = Dinodex.new(dinos)
 original_dinodex = dinodex
 

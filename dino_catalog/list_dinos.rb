@@ -33,16 +33,22 @@ class ListDinos
 
   private
 
-  def display_results(filtered_list, full)
+  def display_results(flags, full)
     method = full ? "properties_string" : "name"
-    filtered_list = @registry.list unless filtered_list.size > 0
-    puts results(filtered_list, method)
+    list = filtered_list(flags)
+    return puts "\n> No matches found!\n\n" if list.empty?
+    puts results(list, method)
   end
 
   def extract_full_flags(flags)
     full_flags = flags.find_all { |flag| flag.first == "-f" }.uniq
     flags -= full_flags
     [full_flags, flags]
+  end
+
+  def filtered_list(flags)
+    return @registry.list if flags.empty?
+    filter_list(flags)
   end
 
   def filter_list(flags)
@@ -64,11 +70,12 @@ class ListDinos
   def parse(flags)
     full_flags, flags = extract_full_flags(flags)
     flags = flags_to_keys(flags)
-    display_results(filter_list(flags), full_flags.size > 0)
+    flags =  false if flags.empty?
+    display_results(flags, full_flags.size > 0)
   end
 
-  def results(filtered_list, method)
-    filtered_list.reduce("\n") do |memo, instance|
+  def results(list, method)
+    list.reduce("\n") do |memo, instance|
       memo + instance.send(method) + "\n"
     end + "\n"
   end

@@ -70,7 +70,7 @@ class ListDinos
   def parse(flags)
     full_flags, flags = extract_full_flags(flags)
     flags = flags_to_keys(flags)
-    flags =  false if flags.empty?
+    flags = false if flags.empty?
     display_results(flags, full_flags.size > 0)
   end
 

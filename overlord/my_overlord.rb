@@ -21,7 +21,7 @@ get '/activate' do
   my_bomb = session[:my_bomb]
   state = my_bomb.bomb_state
   if state
-    @state_message = "bomb is #{state}"
+    @state_message = "bomb is #{state.to_s}"
   else
     @state_message = "We're sorry, the bomb is not ready yet. Try again later."
   end
@@ -32,13 +32,13 @@ end
 get '/deactivate' do
   my_bomb = session[:my_bomb]
   state = my_bomb.bomb_state
-  if my_bomb.deactivate(params[:code]) 
-    @state_message = "Bomb is #{state}" 
+#  if my_bomb.deactivate(params[:code]) 
+    @state_message = "Bomb is #{state.to_s}" 
     session[:my_bomb] = my_bomb
-    redirect('/activate')
-  else
-    @state_message = "Wrong activation code. Bomb is #{state}. Try again."
-  end
+#    redirect('/activate')
+#  else
+#    @state_message = "Wrong activation code. Bomb is #{state.to_s}. Try again."
+#  end
   erb :deactivate
 end
 
@@ -59,17 +59,18 @@ end
 
 post '/activate' do
   my_bomb = session[:my_bomb]
-  if my_bomb.bomb_state == "Active"
+  if my_bomb.bomb_state == :active
     redirect('/deactivate')
   end
   if my_bomb.activate(params[:code]) 
-    @state_message = "Bomb is #{my_bomb.bomb_state}" 
+    @state_message = "Bomb is #{my_bomb.bomb_state.to_s}" 
     p my_bomb
-    
+
     session[:my_bomb] = my_bomb
+    session[:count] = 30
     redirect('/deactivate')
   else
-    @state_message = "Wrong activation code. Bomb is #{my_bomb.bomb_state}. Try again."
+    @state_message = "Wrong activation code. Bomb is #{my_bomb.bomb_state.to_s}. Try again."
   end
   # if code is correct, then redirect('/deactivate')  else stay on :activate
   erb :activate
@@ -79,11 +80,11 @@ post '/deactivate' do
   my_bomb = session[:my_bomb]
   state = my_bomb.bomb_state
   if my_bomb.deactivate(params[:code]) 
-    @state_message = "Bomb is #{state}" 
+    @state_message = "Bomb is #{state.to_s}" 
     session[:my_bomb] = my_bomb
     redirect('/activate')
   else
-    @state_message = "Wrong activation code. Bomb is #{state}. Try again."
+    @state_message = "Wrong activation code. Bomb is #{state.to_s}. Try again."
   end
   erb :deactivate
 end

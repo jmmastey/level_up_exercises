@@ -1,1 +1,0 @@
-class CommandError < RuntimeError; end

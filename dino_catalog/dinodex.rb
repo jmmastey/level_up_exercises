@@ -1,8 +1,8 @@
 require_relative 'dino.rb'
-require_relative 'registry.rb'
-require_relative 'file_system.rb'
-require_relative 'data_transformer.rb'
 require_relative 'interface.rb'
+require_relative 'file_system.rb'
+require_relative 'util/data_transformer.rb'
+require_relative 'util/registry.rb'
 
 class Dinodex
   CONFIG = {

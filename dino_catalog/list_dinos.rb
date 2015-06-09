@@ -6,6 +6,7 @@ class ListDinos
     "-c"  => "continent",
     "-c?" => "carnivore?",
     "-d"  => "diet",
+    "-i"  => "info",
     "-n"  => "name",
     "-p"  => "period",
     "-l"  => "locomotion",
@@ -13,7 +14,7 @@ class ListDinos
     "-w"  => "weight",
   }
 
-  FLAGS = %w(-c -c? -d -f -l -n -p -s -w)
+  FLAGS = %w(-c -c? -d -f -i -l -n -p -s -w)
 
   public
 

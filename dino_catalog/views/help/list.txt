@@ -24,6 +24,8 @@ Options
 
     -f     Full: Display all of the dinosaur information, not just the name
 
+    -i     Info: Filter by additional information about the dinosaur
+
     -l     Locomotion: Filter by animal locomotion (biped/quadraped)
 
     -n     Name: Filter by name

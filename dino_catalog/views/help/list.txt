@@ -18,7 +18,9 @@ Options
 
     -c     Continent: Filter by continent
 
-    -d     Diet: Filter by diet (carnivore/herbivore)
+    -c?    Carnivore?: Filters all non-herbivores (true/false)
+
+    -d     Diet: Filter by diet (carnivore/herbivore/insectivore/piscivore)
 
     -f     Full: Display all of the dinosaur information, not just the name
 

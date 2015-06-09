@@ -24,6 +24,10 @@ class Dino
     end.join('')
   end
 
+  def carnivore?
+    (@diet.downcase != 'herbivore').to_s
+  end
+
   def properties_hash
     instance_variables.inject({}) do |hash, key|
       key = key.to_s.gsub(/^@/, '')

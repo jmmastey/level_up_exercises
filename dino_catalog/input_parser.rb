@@ -19,7 +19,7 @@ class InputParser
   private
 
   def flags_param(flags)
-    match_extract(flags, /-\w\s[^-{]+/)
+    match_extract(flags, /-\w\??\s[^-{]+/)
   end
 
   def flags_hash(flags)

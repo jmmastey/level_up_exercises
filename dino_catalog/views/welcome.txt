@@ -1,0 +1,5 @@
+
+Welcome to the Dinodex
+-----------------------
+What can I help you with today? (type "help" to get started)
+

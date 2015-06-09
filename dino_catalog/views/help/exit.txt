@@ -1,0 +1,14 @@
+
+---------
+
+Name
+    exit -- exit the Dinodex
+
+Synopsis
+    exit
+
+Description
+    exit will terminate the Dinodex program
+
+---------
+

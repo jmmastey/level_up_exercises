@@ -5,7 +5,7 @@ Name
     list -- list the dinosaurs in the database
 
 Synopsis
-    list [-cdfhnpsw] [filter-string / hash]
+    list [-cdfnpsw] [filter-string / hash]
 
 Description
     list will list all dinosaurs in the database. You can pass in options to filter the dinosaurs to be displayed, and to format how they are displayed. By default list will only display the names of dinosaurs.
@@ -22,8 +22,6 @@ Options
 
     -f     Full: Display all of the dinosaur information, not just the name
 
-    -h     Hash: Pass in a hash to be used as a filtering map
-
     -l     Locomotion: Filter by animal locomotion (biped/quadraped)
 
     -n     Name: Filter by name
@@ -38,9 +36,6 @@ Examples
 
     list -s big -f -p biped
     => Display full dinosaur information for all big dinosaurs in the database who are also bipeds
-
-    list -h {continent: north america, size: small}
-    => Display the names of all small dinosaurs in the database who were found in North America
 
 ---------
 

@@ -1,34 +1,45 @@
 class Arrowhead
-  # This seriously belongs in a database.
-  CLASSIFICATIONS = {
-    far_west: {
-      notched: "Archaic Side Notch",
-      stemmed: "Archaic Stemmed",
-      lanceolate: "Agate Basin",
-      bifurcated: "Cody",
-    },
-    northern_plains: {
-      notched: "Besant",
-      stemmed: "Archaic Stemmed",
-      lanceolate: "Humboldt Constricted Base",
-      bifurcated: "Oxbow",
-    },
-  }
+  attr_reader :classifications
 
-  # FIXME: I don't have time to deal with this.
-  def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
+  def initialize(classifications)
+    @classifications = classifications
+  end
+
+  def region_check(region)
+    raise "Unknown region, please provide a valid region." \
+    unless classifications.include? region
+  end
+
+  def shape_check(region, input_shape)
+    if classifications[region].include? input_shape
+      arrowhead = classifications[region][input_shape]
+      puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
     else
-      raise "Unknown region, please provide a valid region."
+      raise "Unknown shape value. Are you sure you know \
+      what you're talking about?"
     end
+  end
+
+  def classify(region, input_shape)
+    region_check(region)
+    shape_check(region, input_shape)
   end
 end
 
-puts Arrowhead.classify(:northern_plains, :bifurcated)
+CLASSIFICATIONS = {
+  far_west: {
+    notched: "Archaic Side Notch",
+    stemmed: "Archaic Stemmed",
+    lanceolate: "Agate Basin",
+    bifurcated: "Cody",
+  },
+  northern_plains: {
+    notched: "Besant",
+    stemmed: "Archaic Stemmed",
+    lanceolate: "Humboldt Constricted Base",
+    bifurcated: "Oxbow",
+  },
+}
+
+Arrowhead_first = Arrowhead.new(CLASSIFICATIONS)
+puts Arrowhead_first.classify(:northern_plains, :bifurcated)

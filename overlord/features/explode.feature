@@ -6,12 +6,20 @@ Feature: Explode
   Scenario: Explode: Timer Exiration
     Given I have a newly active default bomb
     When 30 seconds has passed
-    Then the bomb should explode
+    Then I should not see the status of the bomb
+    And I should not see the remaining defusal attempts
+    And I should not see a bomb timer
+    And I should not be able to click any buttons
+    And I should see an eplosion
 
   Scenario: Explode: Too many attempts
     Given I have a active default bomb
     And I am on the bomb page
     And the bomb has 1 attempt remaining
     When I use "DARBY" on the bomb
-    Then the bomb should explode
+    Then I should not see the status of the bomb
+    And I should not see the remaining defusal attempts
+    And I should not see a bomb timer
+    And I should not be able to click any buttons
+    And I should see an eplosion
     

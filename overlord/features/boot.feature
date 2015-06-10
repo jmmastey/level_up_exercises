@@ -3,15 +3,14 @@ Feature: Boot
   I want to be able to boot the bomb
   In order to begin extorting society
 
-  Scenario: Offline Bomb until booted
-    Given I am logged in as "villain"
-    When the bomb has not been booted
-    Then I should see "Offline"
+  Scenario: Bomb offline until booted
+    When I login as "villain"
+    Then I should see the status of the bomb is "Offline"
 
   Scenario: Freshly booted bomb is inactive
     Given I am logged in as "villian"
     When I click the "boot" button
-    Then I should see an active bomb
+    Then I should see the status of the bomb is "Inactive"
 
   Scenario: Only villians can boot the bomb: generic
     Given I am logged in as "generic"
@@ -34,4 +33,3 @@ Feature: Boot
     And I boot the bomb with an activation code of "G4m3s"
     When I click the "boot" button 
     Then I should see "Activation codes must be numeric"
-    

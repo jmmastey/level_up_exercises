@@ -4,7 +4,7 @@ Feature: Reset
   In order to make the bomb usable more than once without clearing muy cache.
 
   Scenario: Empty Session
-    Given I visit the "reset" page
-    When I am redirected to the "home" page
+    When I visit the "reset" page
+    And I am redirected to the "home" page
     Then I should have an empty session
     

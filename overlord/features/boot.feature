@@ -1,7 +1,7 @@
 Feature: Boot
   As a villain
   I want to be able to boot the bomb
-  In order to start extorting society
+  In order to begin extorting society
 
   Scenario: Offline Bomb until booted
     Given I am logged in as "villain"
@@ -9,10 +9,29 @@ Feature: Boot
     Then I should see "Offline"
 
   Scenario: Freshly booted bomb is inactive
-    Given I am logged in as villian
+    Given I am logged in as "villian"
     When I click the "boot" button
-    Then I should see "Inactive"
+    Then I should see an active bomb
 
-  Scenario: Only villians can boot the bomb
+  Scenario: Only villians can boot the bomb: generic
     Given I am logged in as "generic"
+    When I visit the "bomb" page
     Then I should not see the "boot" button
+
+  Scenario: Only villians can boot the bomb: dev
+    Given I am logged in as "dev"
+    When I visit the "bomb" page
+    Then I should not see the "boot" button
+
+  Scenario: Only one bomb can be booted at a time
+    Given I am logged in as "villain"
+    And the bomb has been booted
+    When I click the "boot" button 
+    Then nothing should happen
+
+  Scenario: Cannot boot bomb with non-numeric activation code
+    Given I am logged in as "villain"
+    And I boot the bomb with an activation code of "G4m3s"
+    When I click the "boot" button 
+    Then I should see "Activation codes must be numeric"
+    

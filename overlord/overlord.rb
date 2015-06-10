@@ -7,6 +7,7 @@ enable :sessions
 
 get '/' do
   bomb = Bomb.new
+  puts bomb
   session[:bomb_status] = bomb.status
   erb :home
 end

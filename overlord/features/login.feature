@@ -7,7 +7,7 @@ Feature: Login
   Scenario: Redirect to Login
     Given I am not logged in
     When I am not on the home page
-    Then I should be redirected to the "home" page
+    Then I should be redirected to the home page
       And I should not be logged in
 
   Scenario Outline: Login Redirects
@@ -25,5 +25,5 @@ Feature: Login
   Scenario: Logout
     Given I am logged in as "generic"
     When I click the logout link
-    Then I should be redirected to the "home" page
+    Then I should be redirected to the home page
       And I should not be logged in

@@ -9,13 +9,6 @@ require 'json'
 class Interface
   attr_reader :quit
 
-  COMMANDS = %w(help list export exit manual)
-
-  FLAGS = {
-    list: %w(-c -d -f -h -n -p -s -w),
-    export: %w(-n),
-  }
-
   public
 
   def initialize(registry, help_msgs, welcome_msg)

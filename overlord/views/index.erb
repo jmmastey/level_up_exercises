@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Overlord</title>
+		<title>Home | Overlord</title>
 		<link href="/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/assets/app/css/main.css" rel="stylesheet">
 	</head>
 	<body>
 		<h1>Overlord Example</h1>
-		<form name="security" action="/" method="post">
+		<form name="security" action="/" method="post" <% if bomb_status == :exploded %>style="display:none"<% end %>>
 			<input type="number" name="code" max="9999">
-            <input type="submit">
+      <input type="submit">
 		</form>
 		<h3>
-		Bomb Status:
-		<span class="bomb-status"><%= bomb_status %></span>
+  		Bomb Status:
+  		<span class="bomb-status"><%= bomb_status %></span>
 		</h3>
 		<h4 class="bomb-errors"></h4>
+    <div class="create-instructions" <% if bomb_status != :exploded %>style="display:none"<% end %>>
+      <h4>To create a new bomb with default security codes, <a class="create-bomb" href="/">click here</a></h3>
+      <h4>To create a bomb with custom security codes, send a <b>POST</b> to <b>/create</b> (include <i>activation_code</i> and <i>deactivation code</i> parameters).</h4>
+    </h4>
 		<script src="/assets/lib/jquery/jquery-1.11.3.min.js"></script>
 		<script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
 		<script src="/assets/app/js/main.js"></script>

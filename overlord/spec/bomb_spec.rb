@@ -2,41 +2,42 @@ require 'pry'
 require './bomb.rb'
 
 describe Bomb do
+  DEFAULT_ACTIVATION_CODE = '1234'
+  DEFAULT_DEACTIVATION_CODE = '0000'
+
   def random_code(num = 4)
     loop do
       code = ''
       num.times { code += rand(9).to_s }
-      return code unless @security_codes.include? code
+      return code unless [DEFAULT_ACTIVATION_CODE, DEFAULT_DEACTIVATION_CODE].include? code
     end
   end
 
   def activate_bomb
-    subject.activate(@security_codes[:activate])
+    bomb.activate(activation_code)
   end
 
   def deactivate_bomb
-    subject.deactivate(@security_codes[:deactivate])
+    bomb.deactivate(deactivation_code)
   end
 
   def explode_bomb
     activate_bomb
-    3.times { subject.deactivate(random_code) }
-  end
-
-  before(:all) do
-    @security_codes = {
-      activate: '1234', # default
-      deactivate: '0000', #default
-    }
+    3.times { bomb.deactivate(random_code) }
   end
 
   shared_examples 'mutable bomb' do
-
-    subject { Bomb.new(@security_codes[:activate], @security_codes[:deactivate]) }
+    let(:params) do
+      {
+        activation_code: activation_code,
+        deactivation_code: deactivation_code,
+      }
+    end
+    subject(:bomb) { Bomb.new(params) }
 
     context 'is initialized' do
       it 'state should be in "inactive" state upon initialization' do
-        expect(subject.status).to eq('inactive')
+        expect(bomb.status).to eq(:inactive)
       end
     end
 
@@ -47,12 +48,12 @@ describe Bomb do
 
       it 'should be in "active" state when we enter the correct activation code' do
         activate_bomb
-        expect(subject.status).to eq('active')
+        expect(bomb.status).to eq(:active)
       end
 
       it 'should remain in "inactive" state when we enter the correct deactivation code' do
         deactivate_bomb
-        expect(subject.status).to eq('inactive')
+        expect(bomb.status).to eq(:inactive)
       end
     end
 
@@ -62,18 +63,18 @@ describe Bomb do
       end
 
       it 'should remain in "active" state when an incorrect deactivation code is entered once' do
-        subject.deactivate(random_code)
-        expect(subject.status).to eq('active')
+        bomb.deactivate(random_code)
+        expect(bomb.status).to eq(:active)
       end
 
       it 'should remain in "active" state when an incorrect deactivation code is entered twice consecutively' do
-        2.times { subject.deactivate(random_code) }
-        expect(subject.status).to eq('active')
+        2.times { bomb.deactivate(random_code) }
+        expect(bomb.status).to eq(:active)
       end
 
       it 'should be in "exploded" state when an incorrect deactivation code was entered 3 times consecutively' do
         explode_bomb
-        expect(subject.status).to eq('exploded')
+        expect(bomb.status).to eq(:exploded)
       end
     end
 
@@ -84,39 +85,37 @@ describe Bomb do
 
       it 'should remain in "exploded" state when we enter the correct activation code' do
         activate_bomb
-        expect(subject.status).to eq('exploded')
+        expect(bomb.status).to eq(:exploded)
       end
 
       it 'should remain in "exploded" state when we enter the correct deactivation code' do
         deactivate_bomb
-        expect(subject.status).to eq('exploded')
+        expect(bomb.status).to eq(:exploded)
       end
 
       it 'should remain in "exploded" state when we enter the incorrect activation code' do
-        subject.activate(random_code)
-        expect(subject.status).to eq('exploded')
+        bomb.activate(random_code)
+        expect(bomb.status).to eq(:exploded)
       end
 
       it 'should remain in "exploded" state when we enter the correct deactivation code' do
-        subject.deactivate(random_code)
-        expect(subject.status).to eq('exploded')
+        bomb.deactivate(random_code)
+        expect(bomb.status).to eq(:exploded)
       end
     end
   end
 
   context 'using default security codes' do
     it_behaves_like 'mutable bomb' do
+      let(:activation_code) { DEFAULT_ACTIVATION_CODE }
+      let(:deactivation_code) { DEFAULT_DEACTIVATION_CODE }
     end
   end
 
   context 'using custom security codes' do
     it_behaves_like 'mutable bomb' do
-      before(:context) do
-        @security_codes = {
-          activate: random_code,
-          deactivate: random_code,
-        }
-      end
+      let(:activation_code) { random_code }
+      let(:deactivation_code) { random_code }
     end
   end
 end

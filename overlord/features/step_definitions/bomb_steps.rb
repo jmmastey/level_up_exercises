@@ -1,3 +1,5 @@
+require 'pry'
+
 module SessionStepsHarness
   def activate_bomb
     code_field.set default_activation_code
@@ -6,6 +8,10 @@ module SessionStepsHarness
 
   def code_field
     find_field('code')
+  end
+
+  def create_bomb
+    page.first('.create-bomb').click
   end
 
   def deactivate_bomb
@@ -50,6 +56,7 @@ World(SessionStepsHarness)
 
 Given(/^I am viewing an (.*) bomb$/) do |bomb_status|
   visit '/'
+  create_bomb
   case bomb_status
   when 'active'
     activate_bomb

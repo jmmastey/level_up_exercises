@@ -33,3 +33,5 @@ But, this is the important part: you're going to write all the tests for the dev
 * **cd** to the root directory
 * run **ruby start.rb**
 * Visit **http://localhost:4567**
+
+A bomb with default security codes will be created for you when you load the main page for the first time. To scrap your existing bomb and create a new one, send a POST request to **/security**. If you would like to set custom security codes, include *activation_code* and *deactivation_code* parameters in your post request.

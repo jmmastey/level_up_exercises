@@ -10,6 +10,7 @@ class BooksController < ApplicationController
 
   def results
     response = CallClassifyAPI::query_api(params, true)
+    #puts 'owi number', book["owi"]
     @parsed_response = CallClassifyAPI::parse_response(response)
   end
 
@@ -18,14 +19,13 @@ class BooksController < ApplicationController
     puts 'who is the current user', current_user.email
     #Query the api again with the owi number for the user's selected book to get detailed listing (and oclc num)
     query = { "owi" => params["owi"] }
+    puts 'what is the query', query, false
     response = CallClassifyAPI::query_api(query, false)
     @book_data = CallClassifyAPI::parse_response(response)[0]
     google_query = {"OCLC" => @book_data["oclc"] }
-    puts 'google query is', google_query
     @book_thumbnail = CallGoogleBooksAPI::query_api(google_query)
     @book_thumbnail = CallGoogleBooksAPI::get_thumbnail_url(@book_thumbnail, google_query)
     @book_data["thumbnail_url"] = @book_thumbnail
-    puts 'book data now', @book_data
     #need to check if the book is already in book table and in user's collection
     if Book.where(oclc: @book_data["oclc"]).length == 1
       book = Book.where(oclc: @book_data["oclc"])[0]
@@ -44,8 +44,6 @@ class BooksController < ApplicationController
 
   def user_collection
     authenticate_user! if !user_signed_in?
-    puts 'user signed in?', user_signed_in?
-    #Allows user to view the library
     @current_user_library = current_user.books.all
     @current_user_name = current_user.email
   end
@@ -54,9 +52,10 @@ class BooksController < ApplicationController
     authenticate_user! if !user_signed_in?
     #Fetch info about book
     oclc_num = params["oclc"]
-    @book_of_interest = Book.where(oclc: oclc_num)[0]
-    #Does user have comments about the book to display?
-    @book_comments = current_user.comments.all.select { |comment| comment.book_id == @book_of_interest.id }
+    @book_of_interest = Book.where(oclc: oclc_num).first
+    @book_comments = current_user.comments.where(book_id: @book_of_interest.id)
+    book_recommendation = current_user.recommendations.where(recommended:true, book_id:@book_of_interest.id)
+    @recommended = book_recommendation.length == 1
   end
 
   def destroy

@@ -1,0 +1,9 @@
+%h1 Recommended Books
+
+%ul.spaceUnder
+  - @recommended_books.each do |book|
+    - link_display = "#{book[:title]}"
+    %li.col-md-3
+      = image_tag("#{book[:thumbnail_url]}", :class => "thumbnails")
+      %br
+      = link_to(name = link_display, url = "/books/item/#{book[:oclc]}")

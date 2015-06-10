@@ -16,6 +16,7 @@
       <%= link_to "MyLibrary", "/", id: "logo" %>
       <nav>
       <ul class="nav navbar-nav navbar-right">
+        <li> <%= link_to("Recommended Books", "/recommendations/recommended_books") %> </li>
         <li> <%= link_to("Book Search", "/books/search") %> </li>
         <% if user_signed_in? %>
           <li> <a href="/books/collection"><%=current_user.email%>'s Library</a></li>

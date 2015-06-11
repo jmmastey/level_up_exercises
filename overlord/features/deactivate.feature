@@ -3,34 +3,40 @@ Feature: Deactivate
   I want to be able to deactivate the bomb
   In order to save the world (cheerleader)
 
-  Scenario: Deactivate success: Default
-    Given I have a newly active default bomb
-    And I am on the bomb page
+  Scenario: Deactivation success: Default
+    Given I login as "villain"
+    And I boot the bomb
+    And I use 1234 on the bomb
     When I use 0000 on the bomb
-    Then I should see the status of the bomb as "Inactive"
+    Then I should see the status of the bomb is "Inactive"
     And I should not see the remaining defusal attempts
     And I should not see a bomb timer
 
-  Scenario: Deactivate success: Custom
-    Given I have a newly active bomb with a deactivation code of "DARBY"
-    And I am on the bomb page
+  Scenario: Deactivation success: Custom
+    Given I login as "villain"
+    And I enter deactivation code "DARBY"
+    And I boot the bomb
+    And I use 1234 on the bomb
     When I use "DARBY" on the bomb
-    Then I should see the status of the bomb as "Inactive"
+    Then I should see the status of the bomb is "Inactive"
     And I should not see the remaining defusal attempts
     And I should not see a bomb timer
 
   Scenario: Deactivate failure: Decrement counter default
-    Given I have a newly active default bomb
-    And I am on the bomb page
+    Given I login as "villain"
+    And I boot the bomb
+    And I use 1234 on the bomb
     When I use 2222 on the bomb
-    Then I should see the status of the bomb as "Active"
+    Then I should see the status of the bomb is "Active"
     And I should see the remaining defusal attempts is 2
     And I should see a bomb timer
 
   Scenario: Deactivate failure: Decrement counter custom
-    Given I have a newly active bomb with a deactivation code of "DARBY"
-    And I am on the bomb page
+    Given I login as "villain"
+    And I enter deactivation code "DARBY"
+    And I boot the bomb
+    And I use 1234 on the bomb
     When I use 0000 on the bomb
-    Then I should see the status of the bomb as "Active"
+    Then I should see the status of the bomb is "Active"
     And I should see the remaining defusal attempts is 2
     And I should see a bomb timer

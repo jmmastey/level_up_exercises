@@ -8,28 +8,34 @@ Feature: Boot
     Then I should see the status of the bomb is "Offline"
 
   Scenario: Freshly booted bomb is inactive
-    Given I am logged in as "villian"
-    When I click the "boot" button
+    Given I login as "villain"
+    When I boot the bomb
     Then I should see the status of the bomb is "Inactive"
 
   Scenario: Only villians can boot the bomb: generic
-    Given I am logged in as "generic"
-    When I visit the "bomb" page
-    Then I should not see the "boot" button
+    Given I login as "generic"
+    When I boot the bomb
+    Then I should see the status of the bomb is "Offline"
 
   Scenario: Only villians can boot the bomb: dev
-    Given I am logged in as "dev"
-    When I visit the "bomb" page
-    Then I should not see the "boot" button
+    Given I login as "dev"
+    When I boot the bomb
+    Then I should see the status of the bomb is "Offline"
 
   Scenario: Only one bomb can be booted at a time
-    Given I am logged in as "villain"
-    And the bomb has been booted
-    When I click the "boot" button 
-    Then nothing should happen
+    Given I login as "villain"
+    And I boot the bomb
+    When I boot the bomb
+    Then I should see "The bomb has already been booted"
 
   Scenario: Cannot boot bomb with non-numeric activation code
-    Given I am logged in as "villain"
-    And I boot the bomb with an activation code of "G4m3s"
-    When I click the "boot" button 
+    Given I login as "villain"
+    And I enter activation code "G4m3s"
+    When I boot the bomb
     Then I should see "Activation codes must be numeric"
+
+  Scenario: Cannot boot exploded bomb
+    Given the bomb has exploded
+    And I login as "villain"
+    When I boot the bomb
+    Then I should see "Dead men can't boot bombs"

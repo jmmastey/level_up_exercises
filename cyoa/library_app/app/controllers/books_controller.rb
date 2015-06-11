@@ -10,7 +10,6 @@ class BooksController < ApplicationController
 
   def results
     response = CallClassifyAPI::query_api(params, true)
-    #puts 'owi number', book["owi"]
     @parsed_response = CallClassifyAPI::parse_response(response)
   end
 
@@ -64,4 +63,12 @@ class BooksController < ApplicationController
     #Remove book from user's library
     @transaction = current_user.books.delete(book_id) if current_user.books.find_by(id:book_id)
   end
+
+  def add_rec_book
+    authenticate_user! if !user_signed_in?
+    oclc_num = params[:oclc]
+    @book = Book.where(oclc: oclc_num).first
+    current_user.books << @book if current_user.books.where(oclc: oclc_num).length == 0
+  end
+    
 end

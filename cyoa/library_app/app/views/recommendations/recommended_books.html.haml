@@ -6,4 +6,4 @@
     %li.col-md-3
       = image_tag("#{book[:thumbnail_url]}", :class => "thumbnails")
       %br
-      = link_to(name = link_display, url = "/books/item/#{book[:oclc]}")
+      = link_to(name = link_display, url = "/recommendations/recommended_book/#{book[:oclc]}")

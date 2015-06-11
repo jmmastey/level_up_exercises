@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get "select_item/:owi", to: 'books#select_item'
       get "collection", to: 'books#user_collection'
       get "item/:oclc", to: 'books#detailed_book_info'
+      post "add_rec_book/:oclc", to: 'books#add_rec_book'
     end
   end
 
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
   resources :recommendations do
     collection do
       get "recommended_books", to: 'recommendations#recommended_books'
+      get "recommended_book/:oclc", to: 'recommendations#detailed_rec_info'
     end
   end
 

@@ -1,0 +1,16 @@
+%h3 
+  %strong Title: 
+  %i
+    = @book[:title] 
+%h3 
+  %strong Author:
+  = @book[:author]
+%h3 
+  %strong Link to library resources:
+  = link_to(name = "#{@book[:title]}", url="http://worldcat.org/oclc/#{@book[:oclc]}" )
+
+%br
+%br
+%h3
+  This book was added to 
+  = link_to(name = "your library.", url = "/books/collection")

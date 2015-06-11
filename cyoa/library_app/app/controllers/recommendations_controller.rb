@@ -21,14 +21,12 @@ class RecommendationsController < ApplicationController
    end
    @recommended_books = Book.where(id: book_ids)
    #Take out books that are already in this user's library?
-   @recommended_books = @recommended_books.select { |book| current_user.books.where(id: book.id).length == 0 }
+   @recommended_books = @recommended_books.select { |book| current_user.books.where(id: book.id).first.nil? }
   end
    
   def detailed_rec_info
-    oclc_num = params[:oclc]
-    puts 'did we get the book oclc', oclc_num
-    @book = Book.where(oclc: oclc_num).first
-    puts 'what about the book', @book
+    oclc = params[:oclc]
+    @book = Book.where(oclc: oclc).first
   end
 
 end

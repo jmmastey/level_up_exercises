@@ -11,9 +11,11 @@ class CommentsController < ApplicationController
 
   def delete_comment
     comment_id = params[:comment_id].to_i
-    puts 'what is comment id?'
-    comment_to_delete = Comment.all.select { |comment| comment.id == comment_id }[0]
-    return 'Cannot delete comment from a different user' if comment_to_delete.user_id != current_user.id
+    #Is it better to look up the comment from the comments table and then see 
+    #if it belongs to the user or to look up all the users comments and then 
+    #find the one we are looking for?
+    comment_to_delete = current_user.comments.where(id: comment_id).first
+    return 'Cannot find a comment with this id for current user' if !comment_to_delete
     comment_to_delete.destroy
   end
     

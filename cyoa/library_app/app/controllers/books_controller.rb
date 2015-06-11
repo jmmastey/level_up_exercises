@@ -3,42 +3,30 @@ require "api_interaction/call_classify_api"
 require "api_interaction/call_googlebooks_api"
 
 class BooksController < ApplicationController
- # before_filter :authenticate_user!
 
   def search
   end
 
   def results
-    response = CallClassifyAPI::query_api(params, true)
-    @parsed_response = CallClassifyAPI::parse_response(response)
+    response = CallClassifyAPI.query_api(params, true)
+    @parsed_response = CallClassifyAPI.parse_response(response)
   end
 
   def select_item
     authenticate_user! if !user_signed_in?
-    puts 'who is the current user', current_user.email
-    #Query the api again with the owi number for the user's selected book to get detailed listing (and oclc num)
-    query = { "owi" => params["owi"] }
-    puts 'what is the query', query, false
-    response = CallClassifyAPI::query_api(query, false)
-    @book_data = CallClassifyAPI::parse_response(response)[0]
+    # Query the api again with the owi number for the user's selected book to 
+    # get detailed listing (and oclc num needed by google books api)
+    classify_query = { "owi" => params["owi"] }
+    @book_data = CallClassifyAPI.query_and_extract_book(classify_query, false)
     google_query = {"OCLC" => @book_data["oclc"] }
-    @book_thumbnail = CallGoogleBooksAPI::query_api(google_query)
-    @book_thumbnail = CallGoogleBooksAPI::get_thumbnail_url(@book_thumbnail, google_query)
-    @book_data["thumbnail_url"] = @book_thumbnail
-    #need to check if the book is already in book table and in user's collection
-    if Book.where(oclc: @book_data["oclc"]).length == 1
-      book = Book.where(oclc: @book_data["oclc"])[0]
+    @book_data["thumbnail_url"] = CallGoogleBooksAPI.query_and_extract_thumbnail_url(google_query)
+    if Book.in_database?(@book_data["oclc"])
+      book = Book.where(oclc: @book_data["oclc"]).first
     else
-      book = Book.new(@book_data)
-      book.save
+      book = Book.create(@book_data)
     end
-    #Need the id of the book
-    book_match = current_user.books.all.select{ |existing_book| existing_book.oclc == book.oclc }
-    if book_match.length == 0
-      current_user.books << book
-    else
-      @message = "The book is already in your library"
-    end
+    return @message = "The book is already in your library" if Book.book_in_library?(current_user, book)
+    current_user.books << book
   end
 
   def user_collection
@@ -67,8 +55,7 @@ class BooksController < ApplicationController
   def add_rec_book
     authenticate_user! if !user_signed_in?
     oclc_num = params[:oclc]
-    @book = Book.where(oclc: oclc_num).first
-    current_user.books << @book if current_user.books.where(oclc: oclc_num).length == 0
+    @book = Book.find_by_oclc(oclc_num)
+    current_user.books << @book if !Book.book_in_library?(current_user, @book)
   end
-    
 end

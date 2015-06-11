@@ -31,4 +31,9 @@ module CallGoogleBooksAPI
     return response[bibkey]["thumbnail_url"] if response[bibkey]
   end
 
+  def self.query_and_extract_thumbnail_url(user_query)
+    query_result = self.query_api(user_query)
+    self.get_thumbnail_url(query_result, user_query)
+  end
+
 end 

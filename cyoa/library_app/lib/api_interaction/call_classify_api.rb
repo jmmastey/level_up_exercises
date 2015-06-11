@@ -73,4 +73,9 @@ module CallClassifyAPI
     return "No data found for this search" if code == 102
     return "Unexpected error" if code == 200
   end
+
+  def self.query_and_extract_book(user_query, return_summary)
+    response = self.query_api(user_query, return_summary)
+    self.parse_response(response).first
+  end
 end

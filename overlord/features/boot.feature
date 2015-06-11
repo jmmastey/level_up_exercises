@@ -4,38 +4,34 @@ Feature: Boot
   In order to begin extorting society
 
   Scenario: Bomb offline until booted
-    When I login as "villain"
-    Then I should see the status of the bomb is "Offline"
-
-  Scenario: Freshly booted bomb is inactive
-    Given I login as "villain"
-    When I boot the bomb
-    Then I should see the status of the bomb is "Inactive"
-
-  Scenario: Only villians can boot the bomb: generic
-    Given I login as "generic"
-    When I boot the bomb
-    Then I should see the status of the bomb is "Offline"
-
-  Scenario: Only villians can boot the bomb: dev
-    Given I login as "dev"
-    When I boot the bomb
-    Then I should see the status of the bomb is "Offline"
+    When I login as a villain
+    Then I should see the status of the bomb is offline
 
   Scenario: Only one bomb can be booted at a time
-    Given I login as "villain"
-    And I boot the bomb
+    Given I am logged in as a villain
+    And the bomb has been booted
     When I boot the bomb
-    Then I should see "The bomb has already been booted"
+    Then I should see a notification that the bomb has already been booted
 
   Scenario: Cannot boot bomb with non-numeric activation code
-    Given I login as "villain"
-    And I enter activation code "G4m3s"
-    When I boot the bomb
-    Then I should see "Activation codes must be numeric"
+    Given I am logged in as a villain
+    When I enter an invalid activation code
+    And I boot the bomb
+    Then I should see notification with the rules for valid activation codes
 
-  Scenario: Cannot boot exploded bomb
-    Given the bomb has exploded
-    And I login as "villain"
+  @User_Roles
+  Scenario: Freshly booted bomb is inactive
+    Given I am logged in as a villain
     When I boot the bomb
-    Then I should see "Dead men can't boot bombs"
+    Then I should see the status of the bomb is inactive
+
+  Scenario: Only villians can boot the bomb: generic
+    Given I am logged in as a citizen
+    When I boot the bomb
+    Then I should see the status of the bomb is offline
+
+  Scenario: Only villians can boot the bomb: dev
+    Given I am logged in as a dev
+    When I boot the bomb
+    Then I should see the status of the bomb is offline
+    

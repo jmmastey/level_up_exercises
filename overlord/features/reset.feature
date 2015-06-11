@@ -4,11 +4,21 @@ Feature: Reset
   In order to make the bomb usable more than once without clearing muy cache.
 
   Scenario: Reset redirection
-    Given I visit the "reset" page
-    Then I should be redirected to the "home" page
+    When I visit the reset page
+    Then I should be redirected to the login page
 
-  Scenario: Reset kills the bomb
-    Given I visit the "reset" page
-    And I log in as "villain"
-    Then I should see the status of the bomb is "Offline"
+  Scenario: Reset logs user out
+    When I visit the reset page
+    Then I should not be logged in
+
+  Scenario: Reset allows use of the site
+    Given the bomb has exploded
+    When I visit the reset page
+    Then I should be able to login
+
+  Scenario: Reset allows use of the site
+    Given the bomb has exploded
+    When I visit the reset page
+    And I login as a villain
+    Then I should see the bomb is offline
     

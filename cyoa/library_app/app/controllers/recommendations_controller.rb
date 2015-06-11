@@ -1,16 +1,15 @@
 class RecommendationsController < ApplicationController
 
-  def update
+  def update   #change current recommendation status
     book_id = params[:id]
     user_id = current_user.id
     @user_recommendation = Recommendation.find_by(book_id:book_id, user_id:user_id)
     if @user_recommendation
       @user_recommendation.recommended = !@user_recommendation.recommended
+      @user_recommendation.save
     else
-      @user_recommendation = Recommendation.new({:user_id => current_user.id, :book_id => book_id})
-      @user_recommendation.recommended = !@user_recommendation.recommended
+      @user_recommendation = Recommendation.create({:user_id => current_user.id, :book_id => book_id, :recommended => true})
     end
-    @user_recommendation.save
   end
  
   def recommended_books

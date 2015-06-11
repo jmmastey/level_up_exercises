@@ -51,12 +51,14 @@ $(function() {
 
     if (bomb.error_count > 0) {
       bomb_errors.html('Failed attempts: ' + bomb.error_count);
+    } else {
+      bomb_errors.html('');
     }
 
     if (bomb.status == 'exploded') {
       security_form.remove();
       bomb_errors.remove();
-      create_bomb.show();
+      create_instructions.show();
     }
   };
 

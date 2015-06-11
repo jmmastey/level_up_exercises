@@ -24,7 +24,7 @@ class Bomb
 
   def activate(code = '', key = :activation_code)
     collect_errors do
-      validate_status
+      validate_bomb_can_activate
       validate_codes([key], activation_code: code) if @errors.length == 0
       valid_activation_code?(code) if @errors.length == 0
       @status = :active if @errors.length == 0
@@ -33,7 +33,7 @@ class Bomb
 
   def deactivate(code = '', key = :deactivation_code)
     collect_errors do
-      validate_status
+      validate_bomb_can_deactivate
       validate_codes([key], deactivation_code: code)
       valid_deactivation_code?(code) if @errors.length == 0
       @status = :inactive if @errors.length == 0
@@ -76,7 +76,17 @@ class Bomb
     new_params
   end
 
-  def validate_status
+  def validate_bomb_can_activate
+    @errors << ERRORS[:already_active] if @status == :active
+    validate_bomb_is_exploded
+  end
+
+  def validate_bomb_can_deactivate
+    @errors << ERRORS[:already_inactive] if @status == :inactive
+    validate_bomb_is_exploded
+  end
+
+  def validate_bomb_is_exploded
     @errors << ERRORS[:exploded] if @status == :exploded
   end
 

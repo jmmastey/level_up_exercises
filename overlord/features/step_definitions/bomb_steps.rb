@@ -1,6 +1,8 @@
 require 'pry'
 
 module SessionStepsHarness
+  @alert_message = ''
+
   def activate_bomb
     code_field.set default_activation_code
     submit_security_form
@@ -11,7 +13,7 @@ module SessionStepsHarness
   end
 
   def create_bomb
-    page.first('.create-bomb').click
+    first('.create-bomb').click
   end
 
   def deactivate_bomb
@@ -50,8 +52,18 @@ module SessionStepsHarness
 
   def submit_security_form
     find('form[name="security"] input[type="submit"]').click
+    capture_error_message
+  end
+
+  def capture_error_message
+    alert = page.driver.browser.switch_to.alert
+    @alert_message = alert.text
+    alert.accept
+  rescue Selenium::WebDriver::Error::NoAlertPresentError
+    return
   end
 end
+
 World(SessionStepsHarness)
 
 Given(/^I am viewing an (.*) bomb$/) do |bomb_status|
@@ -60,32 +72,41 @@ Given(/^I am viewing an (.*) bomb$/) do |bomb_status|
   case bomb_status
   when 'active'
     activate_bomb
-  when 'inactive'
-    deactivate_bomb
   when 'exploded'
     explode_bomb
   end
 end
 
-When(/^I enter any code that is not the (.*) code (\d+) times?$/) do |code_type, attempts|
-  attempts.to_i.times do
-    case code_type
-    when 'activation'
-      submit_random_code([default_activation_code])
-    when 'deactivation'
-      submit_random_code([default_deactivation_code])
-    end
-  end
+Given(/^there is no bomb present$/) do
+  visit '/'
 end
 
-When(/^I enter the (.*) code$/) do |code_type|
-  case code_type
-  when 'activation'
-    code_field.set default_activation_code
-  when 'deactivation'
-    code_field.set default_deactivation_code
-  end
-  submit_security_form
+When(/^I submit any code that is not the activation code$/) do
+  submit_random_code([default_activation_code])
+end
+
+When(/^I submit any code that is not the deactivation code$/) do
+  submit_random_code([default_deactivation_code])
+end
+
+When(/^I submit any code that is not the activation code or deactivation code$/) do
+  submit_random_code([default_activation_code, default_deactivation_code])
+end
+
+When(/^I submit any code that is not the deactivation code (\d+) times$/) do |arg1|
+  3.times { submit_random_code([default_deactivation_code]) }
+end
+
+When(/^I submit the deactivation code$/) do
+  deactivate_bomb
+end
+
+When(/^I submit the activation code$/) do
+  activate_bomb
+end
+
+Then(/^I get an alert that says "([^"]*)"$/) do |alert|
+  fail unless @alert_message.downcase.include? alert.downcase
 end
 
 Then(/^the bomb is (.*)$/) do |bomb_status|
@@ -96,6 +117,6 @@ Then(/^the security code form should be gone$/) do
   fail unless first('form').nil?
 end
 
-Then(/^nothing happens$/) do
-  # do nothing
+Then(/^I should see a link to create a new bomb$/) do
+  fail if first('.create-bomb').nil?
 end

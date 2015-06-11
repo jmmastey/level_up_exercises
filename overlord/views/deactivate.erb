@@ -24,12 +24,12 @@ Click me to display Date and Time.</button>
 <p id="demo"></p>
 
 You will be logged out in <span id="timer"></span>
-  <script src= "main.js"></script>
   
 
 
 
-  <form action="/deactivate" method="post">
+  <form>
+  <!-- <form action="/deactivate" method="post"> -->
     
     Enter code.  Hint -> 666
     <input type="text" name="code" id="code">
@@ -37,5 +37,10 @@ You will be logged out in <span id="timer"></span>
   </form>
   <font color="red"><p id="error_msg"><%= @error_msg %><p></font>
 </div>
+<script type="text/javascript">
+  var deactivation_code = "<%= @deactivation_code %>";
+  localStorage.setItem("deactivation_code", deactivation_code);
+</script>
+<script src= "main.js"></script>
 </body>
 

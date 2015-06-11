@@ -40,6 +40,8 @@ class Bomb
     end
   end
 
+  
+
   def countdown
   end
 

@@ -34,6 +34,7 @@ get '/deactivate' do
   state = my_bomb.bomb_state
 #  if my_bomb.deactivate(params[:code]) 
     @state_message = "Bomb is #{state.to_s}" 
+    @deactivation_code = my_bomb.deactivation_code
     session[:my_bomb] = my_bomb
 #    redirect('/activate')
 #  else
@@ -79,13 +80,16 @@ end
 post '/deactivate' do
   my_bomb = session[:my_bomb]
   state = my_bomb.bomb_state
-  if my_bomb.deactivate(params[:code]) 
-    @state_message = "Bomb is #{state.to_s}" 
-    session[:my_bomb] = my_bomb
-    redirect('/activate')
-  else
-    @state_message = "Wrong activation code. Bomb is #{state.to_s}. Try again."
-  end
+  p my_bomb.deactivation_code
+  @deactivation_code = my_bomb.deactivation_code
+
+  #if my_bomb.deactivate(params[:code]) 
+  #  @state_message = "Bomb is #{state.to_s}" 
+  #  session[:my_bomb] = my_bomb
+  #  redirect('/activate')
+  #else
+  #  @state_message = "Wrong activation code. Bomb is #{state.to_s}. Try again."
+  #end
   erb :deactivate
 end
 

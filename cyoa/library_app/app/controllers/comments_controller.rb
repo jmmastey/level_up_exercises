@@ -4,11 +4,9 @@ class CommentsController < ApplicationController
   def add_comment
     oclc = params[:oclc]
     comment = params[:comment]
-    book = Book.all.select { |current_book| current_book.oclc == oclc }
-    return 'Error with finding book' if book.length == 0
-    book = book[0] if book.length > 0
-    user_comment = Comment.new({:user_id => current_user.id, :book_id => book.id, :comment => comment} )
-    user_comment.save
+    book = current_user.books.where(oclc: oclc).first
+    return 'Error with finding book' if !book 
+    Comment.create({:user_id => current_user.id, :book_id => book.id, :comment => comment} )
   end
 
   def delete_comment

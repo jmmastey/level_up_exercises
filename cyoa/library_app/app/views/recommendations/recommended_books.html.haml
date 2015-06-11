@@ -1,9 +1,12 @@
 %h1 Recommended Books
 
-%ul.spaceUnder
+%ul
   - @recommended_books.each do |book|
     - link_display = "#{book[:title]}"
-    %li.col-md-3
-      = image_tag("#{book[:thumbnail_url]}", :class => "thumbnails")
+    %li.images.col-md-4.col-md-4.col-md-4.col-md-4
+      - if book[:thumbnail_url]
+        = image_tag("#{book[:thumbnail_url]}", :class => "thumbnails")
+      - else
+        = image_tag("http://upload.wikimedia.org/wikipedia/en/f/f9/No-image-available.jpg", :class => "thumbnails")        
       %br
       = link_to(name = link_display, url = "/recommendations/recommended_book/#{book[:oclc]}")

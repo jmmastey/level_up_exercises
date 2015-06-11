@@ -1,4 +1,5 @@
 class RecommendationsController < ApplicationController
+  before_filter :authenticate_user!
 
   def update   #change current recommendation status
     book_id = params[:id]

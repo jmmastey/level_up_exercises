@@ -80,7 +80,6 @@ end
 post '/deactivate' do
   my_bomb = session[:my_bomb]
   state = my_bomb.bomb_state
-  p my_bomb.deactivation_code
   @deactivation_code = my_bomb.deactivation_code
 
   #if my_bomb.deactivate(params[:code]) 

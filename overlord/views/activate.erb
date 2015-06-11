@@ -16,6 +16,17 @@
   <h1>Hello innocent civilian!</h1>
   <p>Not a civilian? <a href="/boot">Click here</a></p>
   <p><%=  @state_message %></p>
+
+  <script type="text/javascript">
+  var time_remaining = localStorage.getItem("remaining");
+
+  if (time_remaining <= 30 && time_remaining > 0){ 
+    time_message.innerHTML = time_remaining;}
+
+  console.log(time_remaining, time_message);
+
+  </script>
+<span id="time_message"></span>
   <h2>Would you like to activate this bomb?  Please say yes.</h3>
   <form action="/activate" method="post">
     Enter code.  Hint -> 1234

@@ -1,6 +1,6 @@
 
 <style>
-  #grad1 {
+  #grad {
   font-family: verdana;
   color: #101010;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -12,7 +12,7 @@
 </style>
 <body bgcolor="#C1C1C1">
 
-<div id="grad1">
+<div id="grad">
   <h1>Hello innocent civilian!</h1>
   <p>Not a civilian? <a href="/boot">Click here</a></p>
   <p><%=  @state_message %></p>
@@ -39,7 +39,6 @@ You will be logged out in <span id="timer"></span>
 </div>
 <script type="text/javascript">
   var deactivation_code = "<%= @deactivation_code %>";
-  localStorage.setItem("deactivation_code", deactivation_code);
 </script>
 <script src= "main.js"></script>
 </body>

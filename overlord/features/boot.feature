@@ -15,9 +15,9 @@ Feature: Boot
 
   Scenario: Cannot boot bomb with non-numeric activation code
     Given I am logged in as a villain
-    When I enter an invalid activation code
+    When I use an invalid activation code
     And I boot the bomb
-    Then I should see notification with the rules for valid activation codes
+    Then I should see a notification with the rules for valid activation codes
 
   @User_Roles
   Scenario: Freshly booted bomb is inactive
@@ -34,4 +34,3 @@ Feature: Boot
     Given I am logged in as a dev
     When I boot the bomb
     Then I should see the status of the bomb is offline
-    

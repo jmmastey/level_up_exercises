@@ -35,6 +35,9 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack_session_access (0.1.1)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -54,6 +57,7 @@ DEPENDENCIES
   capybara
   cucumber
   cucumber-sinatra
+  rack_session_access
   sinatra
 
 BUNDLED WITH

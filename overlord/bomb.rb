@@ -8,4 +8,5 @@ class Bomb
   def default_status
     "Inactive"
   end
+
 end

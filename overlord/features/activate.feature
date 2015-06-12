@@ -12,7 +12,7 @@ Feature: Activate
   Scenario: Cannot activate a bomb with the wrong code
     Given I am logged in as a villain
     And the bomb is inactive
-    When I use the wrong activiation code on the bomb
+    When I use the wrong activation code
     Then I should see an inactive bomb
 
   Scenario: Cannot activate bombs that have not been booted
@@ -24,25 +24,25 @@ Feature: Activate
   Scenario: Incorrect activation code
     Given I am logged in as a villain
     And the bomb is inactive
-    When I use the wrong activiation code on the bomb
+    When I use the wrong activation code
     Then I should see a notification that I have used the wrong activation code
 
   Scenario: Activation code rules
     Given I am logged in as a villain
     And the bomb is inactive
-    When I use an invalid activation code on the bomb
+    When I use an invalid activation code
     Then I should see a notification with the rules for valid activation codes
 
   @Confirmation_Button
   Scenario: Confirmation button exists
     Given I am logged in as a villain
     And the bomb is inactive
-    When I use the activation code on the bomb
+    When I use the activation code
     Then I should see a confirm button
 
   Scenario: Bailing on confirmation should not activate the bomb
     Given I am logged in as a villain
     And the bomb is inactive
-    When I use the activation code on the bomb
+    When I use the activation code
     And I cancel the activation sequence
     Then I should see an inactive bomb

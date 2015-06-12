@@ -33,7 +33,7 @@ describe Bomb do
 
   describe '#initialize' do
     it 'has correct initial status' do
-      expect(bomb.status).to equal(DEFAULT_STATUS)
+      expect(bomb.status).to eq(DEFAULT_STATUS)
     end
   end
 
@@ -43,11 +43,11 @@ describe Bomb do
         bomb.boot
       end
       it 'has correct default activation code' do
-        expect(bomb.activation_code).to equal(DEFAULT_ACTIVATION_CODE)
+        expect(bomb.activation_code).to eq(DEFAULT_ACTIVATION_CODE)
       end
 
       it 'has correct default deactivation code' do
-        expect(bomb.deactivation_code).to equal(DEFAULT_DEACTIVATION_CODE)
+        expect(bomb.deactivation_code).to eq(DEFAULT_DEACTIVATION_CODE)
       end
     end
 
@@ -56,11 +56,11 @@ describe Bomb do
         bomb.boot(activation_code: 2355, deactivation_code: "FACE")
       end      
       it 'has correct default activation code' do
-        expect(bomb.activation_code).to equal(2355)
+        expect(bomb.activation_code).to eq(2355)
       end
 
       it 'has correct default deactivation code' do
-        expect(bomb.deactivation_code).to equal('FACE')
+        expect(bomb.deactivation_code).to eq('FACE')
       end
     end
   end
@@ -69,14 +69,14 @@ describe Bomb do
     context 'the bomb is offline' do
       it 'does not react to codes' do 
         bomb.apply_code(bomb.activation_code)
-        expect(bomb.status).to equal(DEFAULT_STATUS)
+        expect(bomb.status).to eq(DEFAULT_STATUS)
       end
     end
 
     context 'the bomb is inactive' do
       it 'is active' do 
         bomb.apply_code(bomb.activation_code)
-        expect(bomb.status).to equal("Active")
+        expect(bomb.status).to eq("Active")
       end
     end
 
@@ -85,7 +85,7 @@ describe Bomb do
         boot(bomb)
         activate(bomb)
         bomb.apply_code(DEFAULT_ACTIVATION_CODE)
-        expect(bomb.status).to equal("Active")
+        expect(bomb.status).to eq("Active")
       end
     end
 
@@ -94,7 +94,7 @@ describe Bomb do
         boot(bomb)
         activate(bomb)
         DEFAULT_DEFUSE_ATTEMPTS.times { bomb.apply_code("dd") }
-        expect(bomb.status).to equal("Exploded")
+        expect(bomb.status).to eq("Exploded")
       end
     end
   end
@@ -104,7 +104,7 @@ describe Bomb do
       boot(bomb)
       activate(bomb)
       sleep(DEFAULT_TIMER)
-      expect(bomb.status).to equal("Exploded")
+      expect(bomb.status).to eq("Exploded")
     end
   end
 

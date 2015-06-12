@@ -9,13 +9,14 @@ class Bomb
   def boot(args={})
     @activaiton_code = args.fetch(:activaiton_code, default_activation_code)
     @deactivaiton_code = args.fetch(:deactivaiton_code, default_deactivation_code)
+    @status = "Inactive"
   end
 
   def apply_code(code)
   end
 
   def default_status
-    "Inactive"
+    "Offline"
   end
 
   def default_activation_code

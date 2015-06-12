@@ -1,0 +1,2 @@
+class DataAnalyzer
+end

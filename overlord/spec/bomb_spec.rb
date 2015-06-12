@@ -63,6 +63,13 @@ describe Bomb do
         expect(bomb.deactivation_code).to eq('FACE')
       end
     end
+
+    context 'booted bombs can not be booted' do
+      it 'should raise' do
+        boot(bomb)
+        expect { bomb.boot }.to raise_error(BootError)
+      end
+    end
   end
 
   describe '#apply_code' do
@@ -75,6 +82,7 @@ describe Bomb do
 
     context 'the bomb is inactive' do
       it 'is active' do 
+        boot(bomb)
         bomb.apply_code(bomb.activation_code)
         expect(bomb.status).to eq("Active")
       end

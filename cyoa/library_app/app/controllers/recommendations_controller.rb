@@ -1,7 +1,7 @@
 class RecommendationsController < ApplicationController
-  before_filter :authenticate_user!
 
   def update   #change current recommendation status
+    authenticate_user! is !user_signed_in?
     book_id = params[:id]
     user_id = current_user.id
     @user_recommendation = Recommendation.find_by(book_id:book_id, user_id:user_id)
@@ -22,7 +22,9 @@ class RecommendationsController < ApplicationController
    end
    @recommended_books = Book.where(id: book_ids)
    #Take out books that are already in this user's library?
-   @recommended_books = @recommended_books.select { |book| current_user.books.where(id: book.id).first.nil? }
+   if user_signed_in?
+     @recommended_books = @recommended_books.select { |book| current_user.books.where(id: book.id).first.nil? }
+   end 
   end
    
   def detailed_rec_info

@@ -1,0 +1,28 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.message {
+  margin-right: 20px;
+  border: 1px solid gray;
+}
+
+.is-unread {
+  background-color: rgba(255,255,255,.9);
+}
+
+.is-read {
+  background-color: rgba(243,243,243,.85);
+}
+
+.btn-primary {
+	background-color: #d14836;
+	border-color: transparent;
+	min-width: 97px;
+	padding: auto;
+}
+
+a {
+	color: #000;
+}

@@ -7,9 +7,17 @@ module TestDataFactory
     stub
   end
 
-  def self.invalid_key_sample(stub = [])
+  def self.invalid_cohort_sample(stub = [])
     12.times { stub << hash_entry('A', 0) }
-    8.times { stub << invalid_key_entry('A', 1) }
+    8.times { stub << invalid_cohort_entry('A', 1) }
+    20.times { stub << hash_entry('B', 0) }
+    10.times { stub << hash_entry('B', 1) }
+    stub
+  end
+
+  def self.invalid_result_sample(stub = [])
+    12.times { stub << hash_entry('A', 0) }
+    8.times { stub << invalid_result_entry('A', 1) }
     20.times { stub << hash_entry('B', 0) }
     10.times { stub << hash_entry('B', 1) }
     stub
@@ -18,7 +26,7 @@ module TestDataFactory
   def self.invalid_value_sample(stub = [])
     12.times { stub << hash_entry('A', 0) }
     8.times { stub << hash_entry('A', 3) }
-    20.times { stub << hash_entry('B', 0) }
+    20.times { stub << hash_entry('B', -2) }
     10.times { stub << hash_entry('B', 1) }
     stub
   end
@@ -49,10 +57,17 @@ module TestDataFactory
 
   private
 
-  def self.invalid_key_entry(cohort, result)
+  def self.invalid_cohort_entry(cohort, result)
     {
       group: cohort,
       result: result,
+    }
+  end
+
+  def self.invalid_result_entry(cohort, result)
+    {
+      cohort: cohort,
+      visits: result,
     }
   end
 

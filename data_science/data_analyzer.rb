@@ -12,12 +12,12 @@ class DataAnalyzer
     @dataset = dataset
   end
 
-  def sample_size(id)
-    group(id).size
-  end
-
-  def num_conversions(id)
-    group(id).count { |entry| entry[:result] == 1 }
+  def conclusive?(precision = 0.95)
+    raise error[:range] unless (0.0..1.0).include?(precision)
+    chisquare_p_threshhold = 1 - precision
+    values = values_hash(@dataset)
+    chisquare_p = ABAnalyzer::ABTest.new(values).chisquare_p
+    chisquare_p <= chisquare_p_threshhold
   end
 
   def conversion_rate(id)
@@ -27,26 +27,15 @@ class DataAnalyzer
     { rate: (high - deviation).round(2), deviation: deviation.round(2) }
   end
 
-  def conclusive?(precision = 0.95)
-    raise "Value must be between 0 and 1" unless (0.0..1.0).include?(precision)
-    chisquare_p_threshhold = 1 - precision
-    values = values_hash(@dataset)
-    chisquare_p = ABAnalyzer::ABTest.new(values).chisquare_p
-    chisquare_p <= chisquare_p_threshhold
+  def num_conversions(id)
+    group(id).count { |entry| entry[:result] == 1 }
+  end
+
+  def sample_size(id)
+    group(id).size
   end
 
   private
-
-  def group(group_id)
-    @dataset.select { |data| data[GROUP] == group_id }
-  end
-
-  def values_hash(dataset)
-    dataset.each_with_object(base_hash) do |data, memo|
-      memo[data[GROUP]][:conversions] += 1 if data[:result] == 1
-      memo[data[GROUP]][:non_conversions] += 1 if data[:result] == 0
-    end
-  end
 
   def base_hash
     @dataset.each_with_object({}) do |data, memo|
@@ -63,10 +52,29 @@ class DataAnalyzer
     ABAnalyzer.confidence_interval(converted, group.size, confidence)
   end
 
+  def error
+    {
+      keys: "Data entries must contain keys :cohort and :result",
+      values: "Values for data entries :result must be 0 or 1",
+      range: "Precision value must be between 0 and 1",
+    }
+  end
+
+  def group(group_id)
+    @dataset.select { |data| data[GROUP] == group_id }
+  end
+
+  def values_hash(dataset)
+    dataset.each_with_object(base_hash) do |data, memo|
+      memo[data[GROUP]][:conversions] += 1 if data[:result] == 1
+      memo[data[GROUP]][:non_conversions] += 1 if data[:result] == 0
+    end
+  end
+
   def validate(dataset)
     dataset.each do |data|
-      raise "Data must contain keys :cohort and :result" unless data.key?(GROUP) && data.key?(:result)
-      raise "Data values for :result must be 0 or 1" unless data[:result] == 0 || data[:result] == 1
+      raise error[:keys] unless data.key?(GROUP) && data.key?(:result)
+      raise error[:values] unless data[:result] == 0 || data[:result] == 1
     end
   end
 end

@@ -18,15 +18,7 @@
   <p><%=  @state_message %></p>
   <h2>Good luck deactivating the bomb!</h3>
 
-  <button type="button"
-onclick="document.getElementById('demo').innerHTML = Date()">
-Click me to display Date and Time.</button>
-<p id="demo"></p>
-
 You will be logged out in <span id="timer"></span>
-  
-
-
 
   <form>
   <!-- <form action="/deactivate" method="post"> -->
@@ -37,6 +29,8 @@ You will be logged out in <span id="timer"></span>
   </form>
   <font color="red"><p id="error_msg"><%= @error_msg %><p></font>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
   var deactivation_code = "<%= @deactivation_code %>";
 </script>

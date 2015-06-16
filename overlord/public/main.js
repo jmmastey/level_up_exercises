@@ -30,10 +30,16 @@ function validCode(input_code) {
 function submitHandler(e) {
 	e.preventDefault();
 	var input = document.getElementById('code').value;
-	console.log(input);
+	console.log("input", input);
 	if (validCode(input)) {
 		console.log("valid code entered")
-		window.location.href = "/activate";
+		// change bomb state on server
+
+		$.post( "/state", {'input': input}, function( data ) {
+			console.log(data);
+  			console.log("successful response from server");
+  			window.location.href = "/activate";
+		});
 	}
 }
 
@@ -47,6 +53,7 @@ function countdown(remaining) {
 		
 		if (remaining < 0) {
 			clearInterval(countdown_timer);
+			//change bomb state to detonated on server
 			window.location.href = "/detonate";
 		} else {
 			localStorage.setItem("remaining", remaining);

@@ -1,4 +1,5 @@
 
+
 <style>
   #grad1 {
   font-family: verdana;
@@ -21,9 +22,10 @@
   var time_remaining = localStorage.getItem("remaining");
 
   if (time_remaining <= 30 && time_remaining > 0){ 
-    time_message.innerHTML = time_remaining;}
+    //time_message.innerHTML = time_remaining;
+  }
 
-  console.log(time_remaining, time_message);
+  //console.log(time_remaining, time_message);
 
   </script>
 <span id="time_message"></span>
@@ -35,5 +37,6 @@
   </form>
   <font color="red"><p id="error_msg"><%= @error_msg %><p></font>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </body>
 

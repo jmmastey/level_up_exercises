@@ -58,6 +58,21 @@ post '/boot' do
   # add feature that accepts act and deact codes from Villian
 end
 
+post '/state' do
+  #p "params "
+  #p params 
+
+  #p params['input']
+  code = params['input']
+  my_bomb = session[:my_bomb]  
+  if my_bomb.bomb_state == :active
+    my_bomb.deactivate(code)
+    session[:my_bomb] = my_bomb
+  end
+  true
+end
+
+
 post '/activate' do
   my_bomb = session[:my_bomb]
   if my_bomb.bomb_state == :active

@@ -2,6 +2,7 @@
 
 require 'sinatra'
 require './bomb.rb'
+require 'json.rb'
 #class MyOverlord < Sinatra::Application
 
 enable :sessions
@@ -59,17 +60,17 @@ post '/boot' do
 end
 
 post '/state' do
-  #p "params "
-  #p params 
-
-  #p params['input']
   code = params['input']
+  code_is_valid = false
   my_bomb = session[:my_bomb]  
   if my_bomb.bomb_state == :active
-    my_bomb.deactivate(code)
-    session[:my_bomb] = my_bomb
+    if my_bomb.deactivate(code)
+      code_is_valid = true
+      session[:my_bomb] = my_bomb
+    end
   end
-  true
+  content_type :json
+  { :valid => code_is_valid }.to_json
 end
 
 

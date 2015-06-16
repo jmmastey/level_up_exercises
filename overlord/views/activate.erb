@@ -18,18 +18,19 @@
   <p>Not a civilian? <a href="/boot">Click here</a></p>
   <p><%=  @state_message %></p>
 
+ <h2>Would you like to activate this bomb?  Please say yes.</h2>
+
+  You will have <span id="time_message"></span> seconds to deactivate the bomb after activation.<br><br>
+
   <script type="text/javascript">
-  var time_remaining = localStorage.getItem("remaining");
-
-  if (time_remaining <= 30 && time_remaining > 0){ 
-    //time_message.innerHTML = time_remaining;
+  if (localStorage.getItem("remaining")!==null) {
+    var time_remaining = localStorage.getItem("remaining");
+    if (time_remaining <= 30 && time_remaining > 0) {  
+      time_message.innerHTML = time_remaining;
+    }
   }
-
-  //console.log(time_remaining, time_message);
-
   </script>
-<span id="time_message"></span>
-  <h2>Would you like to activate this bomb?  Please say yes.</h3>
+ 
   <form action="/activate" method="post">
     Enter code.  Hint -> 1234
     <input type="text" name="code" id="code">

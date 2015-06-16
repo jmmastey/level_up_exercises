@@ -2,7 +2,7 @@ class Bomb
 
   ACTIVATION_CODE = '1234'
   DEACTIVATION_CODE = '0000'
-  COUNTDOWN = 60
+  COUNTDOWN = 30
   ALLOWED_RETRIES = 3
   attr_accessor :activation_code, :deactivation_code, :state, :retries
 
@@ -37,11 +37,6 @@ class Bomb
     else
       false
     end
-  end
-
-  
-
-  def countdown
   end
 
   def valid_activation_code?(code)

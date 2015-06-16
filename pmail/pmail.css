@@ -3,6 +3,18 @@ body {
   padding-bottom: 70px;
 }
 
+.navbar-btn {
+	text-align: center;
+}
+
+.navbar-brand {
+	min-width: 202px;
+	max-width: 202px;
+	height: 60px;
+	vertical-align: middle;
+	text-align: center;
+}
+
 .message {
   margin-right: 20px;
   border: 1px solid gray;

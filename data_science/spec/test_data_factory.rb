@@ -1,4 +1,4 @@
-class TestDataFactory
+module TestDataFactory
   def self.small_sample(stub = [])
     12.times { stub << hash_entry('A', 0) }
     8.times { stub << hash_entry('A', 1) }
@@ -47,10 +47,12 @@ class TestDataFactory
     stub
   end
 
+  private
+
   def self.invalid_key_entry(cohort, result)
     {
       group: cohort,
-      result: result
+      result: result,
     }
   end
 

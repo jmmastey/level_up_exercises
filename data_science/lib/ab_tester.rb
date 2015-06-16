@@ -1,13 +1,12 @@
 require 'abanalyzer'
 require 'cohort'
 
-
 class ABTester
   attr_reader :groups
 
   def initialize(args)
     groups = make_groups(args)
-    @groups = groups.reduce  Hash.new, :merge
+    @groups = groups.reduce({}, :merge)
   end
 
   def calculate_better_than_random
@@ -15,6 +14,7 @@ class ABTester
   end
 
   private
+
   def make_groups(groups)
     data_groups = []
     groups.each do |item|
@@ -23,4 +23,3 @@ class ABTester
     data_groups
   end
 end
-

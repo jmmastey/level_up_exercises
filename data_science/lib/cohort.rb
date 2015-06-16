@@ -1,7 +1,7 @@
 require 'abanalyzer'
 
 class Cohort
-  attr_reader :conversion_rate, :error_bars, :sample_size, 
+  attr_reader :conversion_rate, :error_bars, :sample_size,
     :conversions, :non_conversions, :name, :confidence_interval,
     :data
 
@@ -16,7 +16,7 @@ class Cohort
   end
 
   def parse_args(args)
-    args.each do |key, value|
+    args.each do |key, _value|
       @name = key
       @conversions = args[key].values.first
       @non_conversions = args[key].values.last

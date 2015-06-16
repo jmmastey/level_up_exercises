@@ -17,9 +17,9 @@ class CohortImporter
     @cohorts = make_cohorts(@groups)
   end
 
-  def setup_groups(groups={})
+  def setup_groups(groups = {})
     @data.each do |record|
-      groups[record[GROUP]] = { :conversions => 0, :non_conversions => 0 }
+      groups[record[GROUP]] = { conversions: 0, non_conversions: 0 }
     end
     groups
   end

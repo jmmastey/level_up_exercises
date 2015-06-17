@@ -49,6 +49,10 @@ describe Bomb do
       it 'has correct default deactivation code' do
         expect(bomb.deactivation_code).to eq(DEFAULT_DEACTIVATION_CODE)
       end
+
+      it 'has correct defuse attempts' do
+        expect(bomb.defuse_attempts).to eq(DEFAULT_DEFUSE_ATTEMPTS)
+      end
     end
 
     context 'custom boot parameters are given' do
@@ -89,18 +93,33 @@ describe Bomb do
     end
 
     context 'the bomb is active' do
-      it 'is active' do 
-        boot(bomb)
+      before do
         activate(bomb)
+      end
+
+      it 'is active' do 
         bomb.apply_code(DEFAULT_ACTIVATION_CODE)
         expect(bomb.status).to eq("Active")
+      end
+
+      it 'activation code does not effect defuse attempts' do 
+        bomb.apply_code(DEFAULT_ACTIVATION_CODE)
+        expect(bomb.defuse_attempts).to eq(3)
+      end
+
+      it 'incorrect deactivation_code results in decreased defuse attempts' do 
+        bomb.apply_code("TREEBEARD")
+        expect(bomb.defuse_attempts).to eq(2)
+      end
+
+      it 'explodes after too many defuse attempts' do 
+        DEFAULT_DEFUSE_ATTEMPTS.times { bomb.apply_code("dd") }
+        expect(bomb.status).to eq("Exploded")
       end
     end
 
     context 'the bomb is exploded' do
       it 'is exploded' do
-        boot(bomb)
-        activate(bomb)
         DEFAULT_DEFUSE_ATTEMPTS.times { bomb.apply_code("dd") }
         expect(bomb.status).to eq("Exploded")
       end
@@ -109,7 +128,6 @@ describe Bomb do
 
   describe 'bomb timer' do
     it 'explodes after timer reaches zero' do
-      boot(bomb)
       activate(bomb)
       sleep(DEFAULT_TIMER)
       expect(bomb.status).to eq("Exploded")

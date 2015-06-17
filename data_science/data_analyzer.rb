@@ -4,8 +4,12 @@ class DataAnalyzer
   attr_reader :dataset
 
   GROUP = :cohort
-
   CONVERSION_CONFIDENCE = 0.95
+  ERROR = {
+    keys: "Data entries must contain keys :cohort and :result",
+    values: "Values for data entries :result must be 0 or 1",
+    range: "Precision value must be between 0 and 1",
+  }
 
   def initialize(dataset)
     validate(dataset)
@@ -13,7 +17,7 @@ class DataAnalyzer
   end
 
   def conclusive?(precision = 0.95)
-    raise error[:range] unless (0.0..1.0).include?(precision)
+    raise ERROR[:range] unless (0.0..1.0).include?(precision)
     chisquare_p_threshhold = 1 - precision
     values = values_hash(@dataset)
     chisquare_p = ABAnalyzer::ABTest.new(values).chisquare_p
@@ -52,14 +56,6 @@ class DataAnalyzer
     ABAnalyzer.confidence_interval(converted, group.size, confidence)
   end
 
-  def error
-    {
-      keys: "Data entries must contain keys :cohort and :result",
-      values: "Values for data entries :result must be 0 or 1",
-      range: "Precision value must be between 0 and 1",
-    }
-  end
-
   def group(group_id)
     @dataset.select { |data| data[GROUP] == group_id }
   end
@@ -73,8 +69,8 @@ class DataAnalyzer
 
   def validate(dataset)
     dataset.each do |data|
-      raise error[:keys] unless data.key?(GROUP) && data.key?(:result)
-      raise error[:values] unless data[:result] == 0 || data[:result] == 1
+      raise ERROR[:keys] unless data.key?(GROUP) && data.key?(:result)
+      raise ERROR[:values] unless data[:result] == 0 || data[:result] == 1
     end
   end
 end

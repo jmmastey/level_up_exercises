@@ -26,10 +26,6 @@ function validCode(input_code) {
 function submitHandler(e) {
 	e.preventDefault();
 	var input = document.getElementById('code').value;
-	//if (validCode(input)) {
-	//	console.log("valid code entered")
-		// change bomb state on server
-
 		$.post( "/state", {'input': input}, function( data ) {
 			if (data["valid"]) {
   			window.location.href = "/activate"; }
@@ -38,7 +34,6 @@ function submitHandler(e) {
 }
 
 function countdown(remaining) {
-	//var remaining = 30;
 	var countdown_timer = setInterval(function(){
 		var str = --remaining + " seconds";
 		timer.innerHTML = str;

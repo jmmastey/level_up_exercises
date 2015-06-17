@@ -27,7 +27,7 @@ describe Bomb do
   DEFAULT_ACTIVATION_CODE = 1234
   DEFAULT_DEACTIVATION_CODE = "0000"
   DEFAULT_DEFUSE_ATTEMPTS = 3
-  DEFAULT_TIMER = 10
+  DEFAULT_TIMER = 10.1
 
   subject(:bomb) { Bomb.new }
 
@@ -48,10 +48,6 @@ describe Bomb do
 
       it 'has correct default deactivation code' do
         expect(bomb.deactivation_code).to eq(DEFAULT_DEACTIVATION_CODE)
-      end
-
-      it 'has correct defuse attempts' do
-        expect(bomb.defuse_attempts).to eq(DEFAULT_DEFUSE_ATTEMPTS)
       end
     end
 
@@ -85,7 +81,7 @@ describe Bomb do
     end
 
     context 'the bomb is inactive' do
-      it 'is active' do 
+      it 'is active after applying activation code' do 
         boot(bomb)
         bomb.apply_code(bomb.activation_code)
         expect(bomb.status).to eq("Active")
@@ -97,9 +93,13 @@ describe Bomb do
         activate(bomb)
       end
 
-      it 'is active' do 
+      it 'is active after applying default activation code' do
         bomb.apply_code(DEFAULT_ACTIVATION_CODE)
         expect(bomb.status).to eq("Active")
+      end
+
+      it 'has correct defuse attempts' do
+        expect(bomb.defuse_attempts).to eq(DEFAULT_DEFUSE_ATTEMPTS)
       end
 
       it 'activation code does not effect defuse attempts' do 
@@ -119,7 +119,7 @@ describe Bomb do
     end
 
     context 'the bomb is exploded' do
-      it 'is exploded' do
+      it 'explodes after defuse attempts runs out' do
         DEFAULT_DEFUSE_ATTEMPTS.times { bomb.apply_code("dd") }
         expect(bomb.status).to eq("Exploded")
       end

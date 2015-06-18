@@ -5,7 +5,8 @@ ruby "2.0.0"
 
 gem "sinatra"
 gem "cucumber"
+gem "sinatra-contrib"
 gem "cucumber-sinatra"
 gem "capybara"
 gem "rspec"
-
+gem "selenium-webdriver"

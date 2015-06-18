@@ -1,16 +1,15 @@
 class Bomb
-
   ACTIVATION_CODE = '1234'
   DEACTIVATION_CODE = '0000'
   COUNTDOWN = 30
   ALLOWED_RETRIES = 3
   attr_accessor :activation_code, :deactivation_code, :state, :retries
 
-  def initialize(activation_code = ACTIVATION_CODE, deactivation_code = DEACTIVATION_CODE)
+  def initialize
     @activation_code = ACTIVATION_CODE
     @deactivation_code = DEACTIVATION_CODE
     @state = :unbooted
-    @retries = 0 
+    @retries = 0
   end
 
   def bomb_state

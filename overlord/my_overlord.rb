@@ -37,12 +37,12 @@ end
 
 post '/activate' do
   my_bomb = session[:my_bomb]
-  state = my_bomb.bomb_state 
+  state = my_bomb.bomb_state
   if state == :active
     redirect('/deactivate')
   end
-  if my_bomb.activate(params[:code]) 
-    @state_message = "Bomb is #{state.to_s}" 
+  if my_bomb.activate(params[:code])
+    @state_message = "Bomb is #{state.to_s}"
     session[:my_bomb] = my_bomb
     redirect('/deactivate')
   else
@@ -54,7 +54,7 @@ end
 route :get, :post, '/deactivate' do
   my_bomb = session[:my_bomb]
   state = my_bomb.bomb_state
-  @state_message = "Bomb is #{state.to_s}" 
+  @state_message = "Bomb is #{state.to_s}"
   session[:my_bomb] = my_bomb
   erb :deactivate
 end
@@ -66,11 +66,11 @@ end
 post '/state' do
   code = params['input']
   code_is_valid = false
-  my_bomb = session[:my_bomb]  
+  my_bomb = session[:my_bomb]
   if (my_bomb.bomb_state == :active) && my_bomb.deactivate(code)
-      code_is_valid = true
-      session[:my_bomb] = my_bomb
+    code_is_valid = true
+    session[:my_bomb] = my_bomb
   end
   content_type :json
-  { :valid => code_is_valid }.to_json
+  { valid: code_is_valid }.to_json
 end

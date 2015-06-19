@@ -1,0 +1,33 @@
+<style>
+  #grad {
+  font-family: verdana;
+  color: #101010;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+  height: 1200px;
+  opacity: 0.9;
+  background: -webkit-linear-gradient(left top, red, black);
+  background: linear-gradient(to bottom right, red, black);
+}
+</style>
+<body bgcolor="#C1C1C1">
+
+<div id="grad">
+  <h1>Hello innocent civilian!</h1>
+  <p>Not a civilian? <a href="/boot">Click here</a></p>
+  <p><%=  @state_message %></p>
+  <h2>Good luck deactivating the bomb!</h3>
+
+You will be blown up in <span id="timer"></span><br><br>
+
+  <form>
+    Enter code.  Hint -> 666
+    <input type="text" name="code" id="code">
+    <input type="submit" value="Deactivate" id="deactivate">
+  </form>
+  <font color="red"><p id="error_msg"><%= @error_msg %><p></font>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src= "main.js"></script>
+</body>
+

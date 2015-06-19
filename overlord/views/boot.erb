@@ -1,0 +1,39 @@
+<style>
+  #grad1 {
+  font-family: verdana;
+  color: #101010;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+  height: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
+  background: -webkit-linear-gradient(left top, red, black);
+  background: linear-gradient(to bottom right, red, black);
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+  }
+
+</style>
+<body bgcolor="#C1C1C1">
+
+<div id="grad1">
+  <div class="center">
+    <h1>Hello Villian!</h1>
+    <p>You are looking particularly handsome today. Not a villian? <a href="/activate">Click here</a></p>
+
+    <h2>Would you like to boot the bomb?  Mmwahhhhhh</h3>
+    <form action="/boot" method="post">
+      <input type="submit" value="Boot" id="Boot">
+    </form>
+    <font color="red"><p id="error_msg"><%= @error_msg %><p></font>
+    <div class="center"><img src="ConductRiskGuy.jpg"></div>
+  </div>
+</div>
+<script type="text/javascript">
+  localStorage.setItem("remaining", 30); </script>
+</body>
+

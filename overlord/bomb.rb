@@ -1,13 +1,12 @@
 class BootError < RuntimeError; end
-class TimeError < RuntimeError; end
+class InvalidActivationCode < RuntimeError; end
 
 class Bomb
-  attr_accessor :status
-  attr_reader :activation_code, :deactivation_code,
-    :booted, :defuse_attempts, :max_defuse_time, :time_remaining
+  attr_reader :status, :activation_code, :deactivation_code,
+    :booted, :defuse_attempts
   alias_method :booted?, :booted
 
-  def initialize(args={})
+  def initialize
     @status = default_status
     @booted = false
     @defuse_attempts = 3
@@ -15,8 +14,8 @@ class Bomb
 
   def boot(args={})
     raise BootError, "The bomb has already been booted" if booted?
-    @activation_code = args.fetch(:activation_code, default_activation_code)
-    @deactivation_code = args.fetch(:deactivation_code, default_deactivation_code)
+    @activation_code = set_activation_code(args[:activation_code])
+    @deactivation_code = set_deactivation_code(args[:deactivation_code])
     @max_defuse_time = default_defuse_time
     @booted = true
     @status = "Inactive"
@@ -34,45 +33,27 @@ class Bomb
   end
 
   def activate_bomb
-    activate_timer
     @status = "Active"
   end
 
   def defuse_bomb
     @status = "Inactive"
-    kill_timer
   end  
 
   def explode_bomb
     @status = "Exploded"
-    kill_timer
-  end
-
-  def activate_timer
-    @activation_time = Time.now
-    @timer = Thread.new { sleep max_defuse_time; explode_bomb; }
-  end
-
-  def time_remaining
-    raise TimeError, "The bomb must be active to have time remaining" if !@activation_time
-    return Time.now - @activation_time
-  end
-
-  def kill_timer
-    @timer.kill if @timer
-    @activation_time = nil
   end
 
   def default_status
     "Offline"
   end
 
-  def default_activation_code
-    1234
+  def set_activation_code(code)
+    (code.nil? || code.empty?) ? "1234" : code
   end
 
-  def default_deactivation_code
-    "0000"
+  def set_deactivation_code(code)
+    (code.nil? || code.empty?) ? "0000" : code
   end
 
   def default_defuse_time

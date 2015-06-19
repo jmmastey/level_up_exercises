@@ -18,7 +18,8 @@ Feature: Activate
   Scenario: Cannot activate bombs that have not been booted
     Given I am logged in as a villain
     And the bomb has not been booted
-    Then I should not be able to activate the bomb
+    When I activate the bomb
+    Then I should see a message about the bomb not being booted
 
   @Validation
   Scenario: Incorrect activation code
@@ -34,12 +35,6 @@ Feature: Activate
     Then I should see a notification with the rules for valid activation codes
 
   @Confirmation_Button
-  Scenario: Confirmation button exists
-    Given I am logged in as a villain
-    And the bomb is inactive
-    When I use the activation code
-    Then I should see a confirm button
-
   Scenario: Bailing on confirmation should not activate the bomb
     Given I am logged in as a villain
     And the bomb is inactive

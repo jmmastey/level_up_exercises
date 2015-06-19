@@ -6,58 +6,65 @@ Given(/^I am logged in as a villain$/) do
 end
 
 Given(/^the bomb is inactive$/) do
-  step 'I login as villain'
   step 'I boot the bomb'
 end
 
 When(/^I activate the bomb$/) do
-  fill_in('code', :with => 1234)
+  fill_in('code', :with => "1234")
+  click_button('Apply Code')
+  page.find("#confirm_apply")
+  click_button('Confirm Code')
 end
 
 Then(/^I should see an active bomb$/) do
-  page.should have_content('Online')
-  page.should have_content('Bomb Timer')
+  page.should have_content('Active')
 end
 
 When(/^I use the wrong activation code$/) do
-  fill_in('code', :with => 4321)
+  fill_in('code', :with => "4321")
+  click_button('Apply Code')
+  page.find("#confirm_apply")
+  click_button('Confirm Code')
 end
 
 Then(/^I should see an inactive bomb$/) do
   page.should have_content('Inactive')
-  page.should_not have_content('Bomb Timer')
-end
+end 
 
 Given(/^the bomb has not been booted$/) do
-  # Filler.. this sentance is here just to make more sense to the reader.
 end
 
-Then(/^I should not be able to activate the bomb$/) do
-  expect(page).to have_button('Submit', disabled: true)
+Then(/^I should see a message about the bomb not being booted$/) do
+  expect(page).to have_content('The bomb has not been booted')
 end
 
 Then(/^I should see a notification that I have used the wrong activation code$/) do
-  find('error').text.should have_content('Incorrect activation code')
+  expect(page).to have_content('Incorrect activation code')
 end
 
 When(/^I use an invalid activation code$/) do
   fill_in('code', :with => "DARBY")
+  click_button('Apply Code')
+  page.find("#confirm_apply")
+  click_button('Confirm Code')
+end
+
+When(/^I boot with an invalid activation code$/) do
+  fill_in('activation_code', :with => "DARBY")
 end
 
 Then(/^I should see a notification with the rules for valid activation codes$/) do
-  find('error').text.should have_content('Activation codes must be numeric')
+  expect(page).to have_content('Activation codes must be numeric')
 end
 
 When(/^I use the activation code$/) do
-  step 'I activate the bomb'
-end
-
-Then(/^I should see a confirm button$/) do
-  expect(page).to have_button('Confirm')
+  fill_in('code', :with => "1234")
+  click_button('Apply Code')
 end
 
 When(/^I cancel the activation sequence$/) do
-  click('cancel')
+  page.find("#cancel_apply")
+  click_button('Cancel')
 end
 
 When(/^I login as a villain$/) do
@@ -73,11 +80,11 @@ Given(/^the bomb has been booted$/) do
 end
 
 When(/^I boot the bomb$/) do
-  click('Boot')
+  click_on('Boot')
 end
 
 Then(/^I should see a notification that the bomb has already been booted$/) do
-  find('error').text.should have_content('The bomb has already been booted')
+  page.should have_content('The bomb has already been booted')
 end
 
 Then(/^I should see the status of the bomb is inactive$/) do
@@ -86,13 +93,14 @@ end
 
 Given(/^I am logged in as a citizen$/) do
   step 'I visit the login page'
-  fill_in('Username', :with => 'citizen')
-  click('Login')
+  fill_in('username', :with => 'citizen')
+  click_on('Submit')
 end
 
 Given(/^I am logged in as a dev$/) do
-  fill_in('Username', :with => 'dev')
-  click('Login')
+  step 'I visit the login page'
+  fill_in('username', :with => 'dev')
+  click_on('Submit')
 end
 
 Given(/^the bomb is active$/) do
@@ -100,27 +108,28 @@ Given(/^the bomb is active$/) do
 end
 
 When(/^I use the correct deactivation code$/) do
-  fill_in('code', :with => 0000)
+  fill_in('code', :with => "0000")
+  click_button('Apply Code')
+  page.find("#confirm_apply")
+  click_button('Confirm Code')
 end
 
 Given(/^I use the wrong deactivation code$/) do
   fill_in('code', :with => "DARBY")
+  click_button('Apply Code')
+  click_button('Confirm Code')
 end
 
 Then(/^the number of defusal attempts should decrease$/) do
-  find('defusal_attempts').text.should have_content(0)
-end
-
-When(/^the bomb timer runs out$/) do
-  find_field('timer').value == 0
+  expect(page).to have_content('Defuse Attempts: 2')
 end
 
 Then(/^I should see an explosion$/) do
-  page.should have_content('activate')
+  page.should have_content('Exploded')
 end
 
 When(/^the number of defusal attempts hits zero$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  3.times { step 'I use the wrong deactivation code' }
 end
 
 Given(/^bomb has exploded$/) do
@@ -128,7 +137,7 @@ Given(/^bomb has exploded$/) do
 end
 
 Then(/^I should not be able to press buttons$/) do
-  page.should have_content('activate')
+  expect(page).should_not have_css('.explodable')
 end
 
 When(/^I visit the bomb page$/) do
@@ -136,12 +145,13 @@ When(/^I visit the bomb page$/) do
 end
 
 Then(/^I should be redirected to the login page$/) do
-  current_path.should == '/login'
+  current_path.should == '/'
 end
 
 When(/^I login as villain$/) do
-  fill_in('Username', :with => 'villain')
-  click('Login')
+  visit '/'
+  fill_in('username', :with => 'villain')
+  click_on('Submit')
 end
 
 Then(/^I should be redirected to the bomb page$/) do
@@ -153,8 +163,8 @@ Then(/^I should be logged in as villian$/) do
 end
 
 When(/^I login as dev$/) do
-  fill_in('Username', :with => 'dev')
-  click('Login')
+  fill_in('username', :with => 'dev')
+  click_on('Submit')
 end
 
 Then(/^I should be logged in as dev$/) do
@@ -162,8 +172,8 @@ Then(/^I should be logged in as dev$/) do
 end
 
 When(/^I login as civilian$/) do
-  fill_in('Username', :with => 'civilian')
-  click('Login')
+  fill_in('username', :with => 'civilian')
+  click_on('Submit')
 end
 
 Then(/^I should be logged in as civilian$/) do
@@ -175,7 +185,11 @@ Given(/^I am logged in$/) do
 end
 
 When(/^I visit the login page$/) do
-  visit '/login'
+  visit '/'
+end
+
+Given(/^I am on the login page$/) do
+  visit '/'
 end
 
 When(/^I click the logout link$/) do
@@ -183,7 +197,7 @@ When(/^I click the logout link$/) do
 end
 
 Then(/^I should not be logged in$/) do
-  current_path.should == '/login'
+  current_path.should == '/'
   page.should_not have_content('villain')
 end
 
@@ -192,7 +206,10 @@ When(/^I visit the reset page$/) do
 end
 
 Given(/^the bomb has exploded$/) do
-  page.should_not have_content('explosion')
+  step 'I am logged in as a villain'
+  step 'the bomb has been booted'
+  step 'the bomb is active'
+  step 'the number of defusal attempts hits zero'
 end
 
 Then(/^I should be able to login$/) do

@@ -24,10 +24,9 @@ end
 describe Bomb do
   DEFAULT_STATUS = "Offline"
   DEFAULT_BOOT_STATUS = "Inactive"
-  DEFAULT_ACTIVATION_CODE = 1234
+  DEFAULT_ACTIVATION_CODE = "1234"
   DEFAULT_DEACTIVATION_CODE = "0000"
   DEFAULT_DEFUSE_ATTEMPTS = 3
-  DEFAULT_TIMER = 10.1
 
   subject(:bomb) { Bomb.new }
 
@@ -53,10 +52,10 @@ describe Bomb do
 
     context 'custom boot parameters are given' do
       before do
-        bomb.boot(activation_code: 2355, deactivation_code: "FACE")
+        bomb.boot(activation_code: "2355", deactivation_code: "FACE")
       end      
       it 'has correct default activation code' do
-        expect(bomb.activation_code).to eq(2355)
+        expect(bomb.activation_code).to eq("2355")
       end
 
       it 'has correct default deactivation code' do
@@ -125,14 +124,4 @@ describe Bomb do
       end
     end
   end
-
-  describe 'bomb timer' do
-    it 'explodes after timer reaches zero' do
-      activate(bomb)
-      sleep(DEFAULT_TIMER)
-      expect(bomb.status).to eq("Exploded")
-    end
-  end
-
-
 end

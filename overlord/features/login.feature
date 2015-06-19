@@ -8,6 +8,7 @@ Feature: Login
     Then I should be redirected to the login page
 
   Scenario Outline: Login redirects to bomb
+    Given I am on the login page
     When I login as <username>
     Then I should be redirected to the <redirect_page> page
     And I should be logged in as <user>

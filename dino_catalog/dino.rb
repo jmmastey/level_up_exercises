@@ -5,11 +5,9 @@ class Dino
   public
 
   def size
-    if @weight
-      @weight.to_i > 4000 ? 'big' : 'small'
-    else
-      ""
-    end
+    return '' unless @weight
+    return 'big' if @weight.to_i > 4000
+    'small'
   end
 
   def weight

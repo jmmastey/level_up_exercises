@@ -34,7 +34,7 @@ class ListDinos
   private
 
   def display_results(flags, full)
-    method = full ? "properties_string" : "name"
+    method = full ? "details" : "name"
     list = filtered_list(flags)
     return puts "\n> No matches found!\n\n" if list.empty?
     puts results(list, method)

@@ -14,7 +14,7 @@ class Dino
     separate_comma(@weight) + ' lbs' if @weight
   end
 
-  def properties_string
+  def details
     instance_variables.map do |prop|
       prop_name = prop.to_s.gsub(/^@/, '')
       val = send(prop_name)

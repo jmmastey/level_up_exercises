@@ -27,12 +27,8 @@ class ExportDinos
     dir = @fs.pwd + '/exports'
     @fs.create_dir(dir)
     file = dir + "/#{filename}.json"
-    @fs.write(@registry.json_string("properties_hash"), file)
+    @fs.write(@registry.json, file)
     puts "> File successfully saved to #{file}"
-  end
-
-  def dinodex_json_string
-    @registry.json_string("properties_hash")
   end
 
   def get_filename(flags)

@@ -26,14 +26,6 @@ class Dino
     (@diet.downcase != 'herbivore').to_s
   end
 
-  def properties_hash
-    instance_variables.inject({}) do |hash, key|
-      key = key.to_s.gsub(/^@/, '')
-      hash[key] = send(key) if send(key)
-      hash
-    end
-  end
-
   def <=>(other)
     name <=> other.name
   end

@@ -26,9 +26,9 @@ class Registry
     end
   end
 
-  def json_string(inst_method)
+  def json
     arr = @list.sort.inject([]) do |memo, instance|
-      memo + [instance.send(inst_method)]
+      memo + [obj_to_hash(instance)]
     end
     JSON.pretty_generate(arr)
   end
@@ -46,5 +46,12 @@ class Registry
   def str_contains?(search_str, match_str)
     return false unless search_str && match_str
     search_str.downcase.include?(match_str.downcase)
+  end
+
+  def obj_to_hash(instance)
+    instance.instance_variables.each_with_object({}) do |key, memo|
+      val = instance.instance_variable_get(key)
+      memo[key.to_s.delete('@')] = val
+    end
   end
 end

@@ -1,0 +1,45 @@
+
+---------
+
+Name
+    list -- list the dinosaurs in the database
+
+Synopsis
+    list [-cdfnpsw] [filter-string / hash]
+
+Description
+    list will list all dinosaurs in the database. You can pass in options to filter the dinosaurs to be displayed, and to format how they are displayed. By default list will only display the names of dinosaurs.
+
+    The filter-string must be a single word (no spaces!).
+
+    A hash can be passed in with the -h flag, to be used as a filtering map.
+
+Options
+
+    -c     Continent: Filter by continent
+
+    -c?    Carnivore?: Filters all non-herbivores (true/false)
+
+    -d     Diet: Filter by diet (carnivore/herbivore/insectivore/piscivore)
+
+    -f     Full: Display all of the dinosaur information, not just the name
+
+    -i     Info: Filter by additional information about the dinosaur
+
+    -l     Locomotion: Filter by animal locomotion (biped/quadraped)
+
+    -n     Name: Filter by name
+
+    -p     Period: Filter by period
+
+    -s     Size: Filter by size (big/small)
+
+    -w     Weight: Filter by weight (number only)
+
+Examples
+
+    list -s big -f -p biped
+    => Display full dinosaur information for all big dinosaurs in the database who are also bipeds
+
+---------
+

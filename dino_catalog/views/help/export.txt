@@ -1,0 +1,25 @@
+
+---------
+
+Name
+    export -- export the Dinodex database to a file
+
+Synopsis
+    export [-n] [option-string]
+
+Description
+    export will write the database to a file. Files are automatically placed in a /exports directory.
+
+    Currently supported file output formats: JSON
+
+Options
+
+    -n    Name: Name of export file (will overwrite existing files)
+
+Examples
+
+    export -n dinos
+    => Exports a file dinos.json and places it in the /exports directory.
+
+---------
+

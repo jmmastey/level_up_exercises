@@ -1,0 +1,19 @@
+[{
+  "keysmap": {
+    "info": "DESCRIPTION",
+    "weight": "WEIGHT_IN_LBS",
+    "locomotion": "WALKING"
+  },
+  "file": "data/dinodex.csv"
+},{
+  "keysmap": {
+    "name": "Genus",
+    "diet": "Carnivore",
+    "locomotion": "Walking"
+  },
+  "valuesmap": {
+    "Carnivore": "Yes",
+    "Herbivore": "No"
+  },
+  "file": "data/african_dinosaur_export.csv"
+}]

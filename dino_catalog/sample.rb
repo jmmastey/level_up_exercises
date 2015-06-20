@@ -4,11 +4,12 @@
 require 'csv'
 require 'pry'
 require 'rails'
-require './dinoparse'
+require './dinodex'
 
 files = ['african_dinosaur_export.csv', 'dinodex.csv']
 
-dinos = DinoParse.new(files)
+dex = DinoDex.new(files)
+dinos = dex.dinos
 binding.pry
 a = 1
 

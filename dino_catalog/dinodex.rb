@@ -3,24 +3,29 @@ require './dinoparse'
 class DinoDex
   attr_accessor :dinos
 
-  def initialize(files)
-    @dinos = DinoParse.new(files)
+  def self.new_from_files(files)
+    dinos = DinoParse.new(files)
+    DinoDex.new(dinos)
+  end
+
+  def initialize(dinos)
+    @dinos = dinos
   end
 
   def bipeds
-    dinos.select { |dino| dino.walking.downcase == "biped"}
+    DinoDex.new(dinos.select { |dino| dino.walking.downcase == "biped"})
   end
 
   def carnivores
-    dinos.select { |dino| dino.carnivore.downcase == "yes"}
+    DinoDex.new(dinos.select { |dino| dino.carnivore.downcase == "yes"})
   end
 
   def big
-    dinos.select { |dino| dino.weight.to_i > 4000 }
+    DinoDex.new(dinos.select { |dino| dino.weight.to_i > 4000 })
   end
 
   def period(search)
-    dinos.select { |dino| dino.period.map{ |a| a[:period].downcase == search.downcase}.reduce { |a, b| a || b} }
+    DinoDex.new(dinos.select { |dino| dino.period.map{ |a| a[:period].downcase == search.downcase}.reduce { |a, b| a || b} })
   end
 
   def cretaceous
@@ -52,6 +57,13 @@ class DinoDex
     filters.each do |filter|
       individual_results << self.send(filter)
     end
-    individual_results.reduce(&:&)
+    DinoDex.new(individual_results.map{|dex| dex.dinos}.reduce(&:&))
+  end
+
+  def to_s
+    dinos.each_with_index do |dino, index|
+      puts "" unless index == 0
+      puts dino
+    end
   end
 end

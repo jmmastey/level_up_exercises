@@ -8,7 +8,7 @@ require './dinodex'
 
 files = ['african_dinosaur_export.csv', 'dinodex.csv']
 
-dex = DinoDex.new(files)
+dex = DinoDex.new_from_files(files)
 dinos = dex.dinos
 binding.pry
 a = 1

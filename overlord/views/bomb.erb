@@ -1,0 +1,55 @@
+<style type="text/css">
+.hidden {
+  display:none;
+}
+</style>
+
+<div>
+  <h1>Welcome to Overlord, <%= session[:username] %>!</h1>
+
+  <p id="status">Status: <%= session[:bomb].status %></p>
+  <p id="defuse">Defuse Attempts: <%= session[:bomb].defuse_attempts %></p>
+  <%= flash[:error] %>
+  <form class="explodable" action="/boot" method="post">
+    <label for="activation_code">Activation Code:</label>
+    <input id="activation_code" type="text" name="activation_code"/><br />
+    <label for="deactivation_code">Dectivation Code: </label>
+    <input id="deactivation_code" type="text" name="deactivation_code"/>
+    <input type="submit" value="Boot">
+  </form>
+
+  <form class="explodable" action="/apply_code" method="post">
+    <label for="code">Code</label>
+    <input id="code" type="text" name="code"/>
+    <input id="apply_code" type="button" value="Apply Code">
+    <input id="confirm_apply" type="submit" value="Confirm Code">
+    <input id="cancel_apply" type="button" value="Cancel">
+  </form>
+
+  <a class="explodable" href="/logout">logout</a>
+</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#confirm_apply').hide();
+  $('#cancel_apply').hide();
+  $('#defuse').show();
+  $('#apply_code').click(function() {
+    $('#confirm_apply').show();
+    $('#cancel_apply').show();
+  });
+  $('#cancel_apply').click(function() {
+    $('#confirm_apply').hide();
+    $('#cancel_apply').hide();
+  });
+
+  if ($('#status').text() == 'Status: Active') {
+    $('#defuse').show();
+  }
+
+  if ($('#status').text() == 'Status: Exploded') {
+    $('.explodable').addClass('hidden');
+  }
+});
+</script>

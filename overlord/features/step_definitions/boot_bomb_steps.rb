@@ -7,7 +7,8 @@ Then(/^I should see an activation code text box prefilled with an activation cod
   find_field('activation_code').value.should == "1234"
 end
 
-Then(/^I should see a deactivation text box prefilled with a deactivation code (\d+)$/) do |arg1|
+
+Then(/^I should see a deactivation code text box prefilled with a deactivation code (\d+)$/) do |arg1|
   find_field('deactivation_code').value.should == "0000"
 end
 

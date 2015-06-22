@@ -9,11 +9,7 @@
 
   <p id="status">Status: <%= session[:bomb].status %></p>
   <p id="defuse">Defuse Attempts: <%= session[:bomb].defuse_attempts %></p>
-
-  <%= flash[:bomb_not_booted] %>
-  <%= flash[:invalid_activation_code] %>
-  <%= flash[:incorrect_activation_code] %>
-  <%= flash[:bomb_already_booted] %>
+  <%= flash[:error] %>
   <form class="explodable" action="/boot" method="post">
     <label for="activation_code">Activation Code:</label>
     <input id="activation_code" type="text" name="activation_code"/><br />
@@ -55,8 +51,5 @@ $(document).ready(function() {
   if ($('#status').text() == 'Status: Exploded') {
     $('.explodable').addClass('hidden');
   }
-
-
-
 });
 </script>

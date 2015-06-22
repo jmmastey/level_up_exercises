@@ -11,6 +11,10 @@ BOMB_ALREADY_BOOTED = "The bomb has already been booted"
 INVALID_ACTIVATION_CODE = "Activation codes must be numeric"
 INCORRECT_ACTIVATION_CODE = "Incorrect activation code"
 
+def flash_message(message)
+  flash[:error] = message
+end
+
 def set_session
   session[:bomb] = session[:bomb]
 end
@@ -49,7 +53,7 @@ get '/bomb' do
 end
 
 post '/boot' do
-  flash[:invalid_activation_code] = INVALID_ACTIVATION_CODE unless valid_activation_code(params[:activation_code])
+  flash_message(INVALID_ACTIVATION_CODE) unless valid_activation_code(params[:activation_code])
   args = {
     activation_code: params[:activation_code],
     deactivation_code: params[:deactivation_code],
@@ -57,15 +61,15 @@ post '/boot' do
   begin
     session[:bomb].boot(args) if session[:username] == "villain"
   rescue BootError
-    flash[:bomb_already_booted] = BOMB_ALREADY_BOOTED
+    flash_message(BOMB_ALREADY_BOOTED)
   end
   redirect '/bomb'
 end
 
 post '/apply_code' do
-  flash[:bomb_not_booted] = BOMB_NOT_BOOTED unless session[:bomb].booted?
-  flash[:invalid_activation_code] = INVALID_ACTIVATION_CODE if !valid_activation_code(params[:code]) && session[:bomb].status == "Inactive"
-  flash[:incorrect_activation_code] = INCORRECT_ACTIVATION_CODE if params[:code] != session[:bomb].activation_code
+  flash_message(INCORRECT_ACTIVATION_CODE) if params[:code] != session[:bomb].activation_code
+  flash_message(INVALID_ACTIVATION_CODE) if !valid_activation_code(params[:code]) && session[:bomb].status == "Inactive"
+  flash_message(BOMB_NOT_BOOTED) unless session[:bomb].booted?
   session[:bomb].apply_code(params[:code])
   redirect '/bomb'
 end

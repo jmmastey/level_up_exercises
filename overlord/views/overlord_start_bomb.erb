@@ -1,0 +1,29 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+<body>
+
+   <h1>Overlord! The bomb has been successfully booted.</h1>
+
+<div class = "statushappybomb" >
+  <H2>Status:<%=session[:bomb].status_indicator%></H2>
+</div>
+<span class = "error_activation_field">
+    <% if session[:bomb].wrong_activate_attempts >= 1  %>
+     <h2> ******<%= "Please enter a valid 4 digit activation number"  %>****** </h2>
+    <% end %></span>
+   <div class="startbomb">
+  <img class="happybomb" src ='/images/happybomb.jpeg' alt="Smiley face" height="42" width="42">
+  <form name="start" action="/startbomb" method = "POST" >
+    Enter activation code: <input type="text" name="entered_activation_code" class="entered_activation_code" size="8"> <p>
+  <input type="submit" value="activate">
+</form>
+
+</div>
+
+</body>
+</html>

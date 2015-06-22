@@ -1,0 +1,23 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+<body>
+
+<h1> Welcome Master Overlord  The bomb is finally ready!  </h1></div>
+
+<img class="overlord" src ='/images/villain.jpeg' alt="Smiley face" height="42" width="42">
+<div class="activationcodes"><h2> Choose 4 digit activation and deactivation codes. Then click Start Destruction to boot the bomb</h2></div>
+<span class = "error_field">
+    <% if flash[:failed_boot] %>
+     <h2> ******<%= flash[:failed_boot]  %>****** </h2>
+    <% end %></span>
+<div class="activation">
+  <form name=activation action="/attemptboot" method="POST">
+    Activation Code: <input type="text" size="8" name="activation_code" class="activation_code" value="1234"  ><p>
+    Deactivation Code: <input type="text" size="8" name="deactivation_code" class="deactivation_code" value="0000"><p>
+    <input type="submit" value ="Boot Bomb" >
+  </form>
+</div>
+</body>
+</html>

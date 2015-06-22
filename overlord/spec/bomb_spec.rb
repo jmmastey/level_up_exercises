@@ -17,7 +17,7 @@ RSpec.describe Bomb do
 
   describe 'valid_boot_codes?' do
     it 'returns true if boot codes are valid' do
-      expect(bomb.valid_boot_codes?('7655','8659')).to eq(true)
+      expect(bomb.valid_boot_codes?('7655','8659')).to be true
     end
   end
 

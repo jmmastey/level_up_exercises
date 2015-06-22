@@ -26,6 +26,12 @@ describe WireBundle do
     it { is_expected.to all(be_detonating) }
   end
 
+  context "when no exploding wires exist" do
+    let(:detonating_wire_count) { 0 }
+
+    it { is_expected.not_to be_detonating }
+  end
+
   context "when all exploding wires are intact" do
     shared_examples "not exploding" do
       it { is_expected.not_to be_detonating}

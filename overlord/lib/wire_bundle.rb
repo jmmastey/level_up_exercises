@@ -7,11 +7,11 @@ class WireBundle
   end
 
   def disarming?
-    disarming_wires.none?(&:intact?)
+    disarming_wires.any? && disarming_wires.none?(&:intact?)
   end
 
   def detonating?
-    !detonating_wires.all?(&:intact?)
+    detonating_wires.any? && !detonating_wires.all?(&:intact?)
   end
 
   def disarming_wires

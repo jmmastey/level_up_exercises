@@ -103,7 +103,7 @@ describe Bomb do
     context "when disarmed" do
       before(:each) do
         bomb.wires = WireBundle.new(1, 3)
-        bomb.wires.disarming_wires.each { |wire| wire.cut }
+        bomb.wires.disarming_wires.each(&:cut)
       end
 
       include_examples "code entering"

@@ -3,7 +3,8 @@ class WireBundle
 
   def initialize(disarming_wire_count, detonating_wire_count)
     @wires = (1..disarming_wire_count).map { Wire.new(:disarm) }
-    @wires.concat ((1..detonating_wire_count).map { Wire.new(:detonating) })
+    detonating_wires = (1..detonating_wire_count).map { Wire.new(:detonating) }
+    @wires.concat(detonating_wires)
   end
 
   def disarming?

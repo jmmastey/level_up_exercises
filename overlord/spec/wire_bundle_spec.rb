@@ -4,7 +4,9 @@ describe WireBundle do
   let(:disarming_wire_count) { 3 }
   let(:detonating_wire_count) { 2 }
   let(:total_wire_count) { disarming_wire_count + detonating_wire_count }
-  subject(:bundle) { described_class.new(disarming_wire_count, detonating_wire_count) }
+  subject(:bundle) do
+    described_class.new(disarming_wire_count, detonating_wire_count)
+  end
 
   describe "#new" do
     it "requires a number of disarm and detonating wires" do
@@ -34,7 +36,7 @@ describe WireBundle do
 
   context "when all exploding wires are intact" do
     shared_examples "not exploding" do
-      it { is_expected.not_to be_detonating}
+      it { is_expected.not_to be_detonating }
     end
 
     context "and all disarming wires are intact" do

@@ -1,5 +1,5 @@
 class Wire
-  attr_reader :type
+  attr_reader :intact, :type
 
   def initialize(type)
     @intact = true
@@ -22,6 +22,6 @@ class Wire
   end
 
   def intact?
-    @intact
+    intact
   end
 end

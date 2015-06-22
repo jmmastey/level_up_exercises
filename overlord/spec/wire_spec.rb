@@ -17,14 +17,25 @@ describe Wire do
   end
 
   describe "#cut" do
-    before(:each) { disarm_wire.cut }
+    let(:wire_cut) { disarm_wire.cut }
 
-    it "cuts the wire" do
-      expect(disarm_wire).not_to be_intact
+    context "when intact" do
+      it "cuts the wire" do
+        wire_cut
+        expect(disarm_wire).not_to be_intact
+      end
+
+      it "returns true" do
+        expect(wire_cut).to be true
+      end
     end
 
-    it "returns the wire" do
-      expect(disarm_wire.cut).to eq(disarm_wire)
+    context "when not intact" do
+      before(:each) { disarm_wire.cut }
+
+      it "returns false" do
+        expect(wire_cut).to be false
+      end
     end
   end
 end

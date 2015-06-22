@@ -7,8 +7,10 @@ class Wire
   end
 
   def cut
+    return false unless @intact
+
     @intact = false
-    self
+    true
   end
 
   def disarming?

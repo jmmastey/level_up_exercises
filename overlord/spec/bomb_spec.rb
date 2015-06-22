@@ -116,12 +116,5 @@ describe Bomb do
         expect(bomb.status).to eq("Exploded")
       end
     end
-
-    context 'the bomb is exploded' do
-      it 'explodes after defuse attempts runs out' do
-        DEFAULT_DEFUSE_ATTEMPTS.times { bomb.apply_code("dd") }
-        expect(bomb.status).to eq("Exploded")
-      end
-    end
   end
 end

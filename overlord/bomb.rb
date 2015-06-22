@@ -12,24 +12,34 @@ class Bomb
     @defuse_attempts = 3
   end
 
-  def boot(args={})
+  def boot(args = {})
     raise BootError, "The bomb has already been booted" if booted?
-    @activation_code = set_activation_code(args[:activation_code])
-    @deactivation_code = set_deactivation_code(args[:deactivation_code])
-    @max_defuse_time = default_defuse_time
+    @activation_code = default_activation_code(args[:activation_code])
+    @deactivation_code = default_deactivation_code(args[:deactivation_code])
     @booted = true
     @status = "Inactive"
   end
 
   def apply_code(code)
-    return activate_bomb if @status == "Inactive" && code == activation_code
-    return defuse_bomb if @status == "Active" && code == deactivation_code
-    return @defuse_attempts -= 1 if code != activation_code && defuse_attempts > 1
-    if code != activation_code && defuse_attempts == 1
-      explode_bomb
-      @defuse_attempts -= 1
-      return
+    case @status
+      when "Inactive"
+        apply_inactive(code)
+      when "Active"
+        apply_active(code)
     end
+  end
+
+  def apply_inactive(code)
+    activate_bomb if code == activation_code
+  end
+
+  def apply_active(code)
+    code == deactivation_code ? defuse_bomb : attempt_defuse(code)
+  end
+
+  def attempt_defuse(code)
+    @defuse_attempts -= 1 unless code == activation_code
+    explode_bomb if @defuse_attempts <= 0
   end
 
   def activate_bomb
@@ -38,7 +48,7 @@ class Bomb
 
   def defuse_bomb
     @status = "Inactive"
-  end  
+  end
 
   def explode_bomb
     @status = "Exploded"
@@ -48,15 +58,11 @@ class Bomb
     "Offline"
   end
 
-  def set_activation_code(code)
-    (code.nil? || code.empty?) ? "1234" : code
+  def default_activation_code(code)
+    code.to_s.empty? ? "1234" : code
   end
 
-  def set_deactivation_code(code)
-    (code.nil? || code.empty?) ? "0000" : code
-  end
-
-  def default_defuse_time
-    10
+  def default_deactivation_code(code)
+    code.to_s.empty? ? "0000" : code
   end
 end

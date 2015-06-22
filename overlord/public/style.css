@@ -1,0 +1,206 @@
+body {
+    background-color:#D0D0D0 }
+
+
+h1 {
+    display: block;
+    font-size: 2em;
+    text-align:center;
+    color:red;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+h2 {
+    display: block;
+    font-size: 1em;
+    text-align:center;
+    color:red;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+h3 {
+    display: block;
+    font-size: 1em;
+    text-align:center;
+    color:red;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+.activationcodes{
+    position: fixed;
+    top: 330px;
+    left: 310px;
+    width: 700px;
+    height: 200px;
+}
+.activation {
+    position: fixed;
+    top: 400px;
+    left: 340px;
+    width: 700px;
+    height: 200px;
+
+}
+
+.error_field{
+    color:red;
+    font-size:1em;
+    position: fixed;
+    top: 365px;
+    left: 370px;
+    width: 700px;
+    height: 200px;
+}
+
+.error_activation_field{
+    color:red;
+    font-size:1em;
+    position: fixed;
+    top: 395px;
+    left: 370px;
+    width: 700px;
+    height: 200px;
+}
+
+.error_deactivation_field{
+    color:red;
+    font-size:1em;
+    position: fixed;
+    top: 525px;
+    left: 370px;
+    width: 900px;
+    height: 200px;
+}
+
+
+.overlord {
+    position: fixed;
+    top: 120px;
+    left: 460px;
+    width: 250px;
+    height: 200px;
+
+
+
+}
+
+.statushappybomb {
+    background-color:#FFFFFF;
+    position: fixed;
+    top: 90px;
+    left: 555px;
+    width:  350px;
+    height: 50px;
+
+}
+
+
+.happybomb {
+    background-color:#FFFFFF;
+    position: fixed;
+    top: 140px;
+    left: 555px;
+    width: 350px;
+    height: 250px;
+
+}
+
+
+.startbomb {
+    position: fixed;
+    top: 430px;
+    left: 555px;
+    width: 700px;
+    height: 200px;
+
+}
+
+
+
+
+.deactivation {
+    position: fixed;
+    top: 490px;
+    left: 460px;
+    width: 550px;
+    height: 50px;
+
+}
+
+.statusangrybomb {
+    background-color:#FFFFFF;
+    position: fixed;
+    top: 140px;
+    left: 460px;
+    width:  350px;
+    height: 50px;
+
+}
+
+
+.angrybomb {
+    position: fixed;
+    top: 180px;
+    left: 460px;
+    width: 350px;
+    height: 250px;
+
+}
+
+.timeremaining {
+    position: fixed;
+    top: 12px;
+    left: 1000px;
+    width: 350px;
+    height: 350px;
+
+}
+
+.attemptedeactiv {
+    position: fixed;
+    top: 52px;
+    left: 460px;
+    width: 350px;
+    height: 350px;
+
+}
+
+
+#time {
+    font-size: 50px;
+    color: red;
+
+}
+
+.explosion
+{
+    position: fixed;
+    top: 112px;
+    left: 460px;
+    width: 550px;
+    height: 550px;
+
+
+}
+.activateagain
+{
+    position: fixed;
+    top: 10px;
+    left: 190px;
+    width: 1050px;
+    height: 550px;
+
+
+
+}

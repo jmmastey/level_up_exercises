@@ -1,0 +1,34 @@
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script src="/js/timer.js" type="text/javascript"></script>
+</head>
+<body onload="javascript:countdown();">
+<h1> Time remaining until your destruction: </h1>
+<div class="timeremaining"><span id="time">10 </span></div>
+<%if session[:bomb].wrong_deactivate_attempts >= 1%><div class="attemptedeactiv"><h3>You have made <%=session[:bomb].wrong_deactivate_attempts%> wrong attempts so far!</h3></div><%end%>
+
+<div class = "statusangrybomb" >
+  <H2>Status:<%=session[:bomb].status_indicator%></H2>
+</div>
+<div class="angrybomb">
+  <img class="angrybomb" src ='/images/angrybomb.jpg' alt="Smiley face" height="242" width="342">
+</div>
+<span class = "error_deactivation_field">
+    </span>
+<div class="deactivation">
+<form name="deactivation" action="/attemptdeactivation" method = "POST" id="deactivation">
+  <% if session[:bomb].wrong_deactivate_attempts >= 1  %>
+    <h2> ******<%= "Please enter a valid 4 digit deactivation number"  %>****** </h2>
+  <% end %>
+  Deactivation Code: <input type="text" name = "entered_deactivation_code" id="entered_deactivation_code" class="entered_deactivation_code" size="8"> <p>
+  <input type="submit" value = "deactivate" >
+  <script type="text/javascript" src="update_time.js"> </script>
+<input type="hidden" name="countdown" id="countdown" value="">
+</form>
+
+  </div>
+
+</body>
+
+</html>

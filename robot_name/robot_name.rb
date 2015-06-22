@@ -3,23 +3,41 @@ class NameCollisionError < RuntimeError; end
 class Robot
   attr_accessor :name
 
-  @@registry
+  @registry ||= []
 
   def initialize(args = {})
-    @@registry ||= []
     @name_generator = args[:name_generator]
+    generate_name
+    check_name_collision
+    @registry << @name
+  end
 
+  def check_name_collision
+    return unless invalid_generated_name
+    raise NameCollisionError, 'There was a problem generating the robot name!'
+  end
+
+  def generate_name
     if @name_generator
       @name = @name_generator.call
     else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
-
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+      @name = defualt_name_generator
     end
+  end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+  def defualt_name_generator
+    generate_char = -> { ('A'..'Z').to_a.sample }
+    generate_num = -> { rand(10) }
+    "#{generate_char.call}#{generate_char.call}"\
+    "#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+  end
+
+  def invalid_generated_name
+    !does_generated_name_follow_pattern || @registry.include?(name)
+  end
+
+  def does_generated_name_follow_pattern
+    (name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
   end
 end
 

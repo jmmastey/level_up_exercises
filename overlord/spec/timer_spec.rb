@@ -30,7 +30,7 @@ describe Timer do
     it { is_expected.not_to be_expired }
   end
 
-  context "when time does not remain on the timer" do
+  context "when no time remains on the timer" do
     let(:duration) { 0 }
 
     it { is_expected.to be_expired }

@@ -27,8 +27,21 @@ def check_status
   end
 end
 
-def valid_activation_code(code)
-  code =~ /\A\d+\z/ || code == '' ? true : false
+def validate_boot_step
+  flash_message(BOMB_NOT_BOOTED) unless session[:bomb].booted?
+end
+
+def validate_activation_code(code)
+  if code =~ /\A\d+\z/ || code == ''
+    true
+  else
+    flash_message(INVALID_ACTIVATION_CODE)
+    false
+  end
+end
+
+def validate_code(code)
+  flash_message(INCORRECT_ACTIVATION_CODE) if code != session[:bomb].activation_code
 end
 
 get '/' do
@@ -53,13 +66,13 @@ get '/bomb' do
 end
 
 post '/boot' do
-  flash_message(INVALID_ACTIVATION_CODE) unless valid_activation_code(params[:activation_code])
+  is_valid = validate_activation_code(params[:activation_code])
   args = {
     activation_code: params[:activation_code],
     deactivation_code: params[:deactivation_code],
   }
   begin
-    session[:bomb].boot(args) if session[:username] == "villain"
+    session[:bomb].boot(args) if session[:username] == "villain" && is_valid
   rescue BootError
     flash_message(BOMB_ALREADY_BOOTED)
   end
@@ -67,9 +80,9 @@ post '/boot' do
 end
 
 post '/apply_code' do
-  flash_message(INCORRECT_ACTIVATION_CODE) if params[:code] != session[:bomb].activation_code
-  flash_message(INVALID_ACTIVATION_CODE) if !valid_activation_code(params[:code]) && session[:bomb].status == "Inactive"
-  flash_message(BOMB_NOT_BOOTED) unless session[:bomb].booted?
+  validate_code(params[:code])
+  validate_activation_code(params[:code])
+  validate_boot_step
   session[:bomb].apply_code(params[:code])
   redirect '/bomb'
 end

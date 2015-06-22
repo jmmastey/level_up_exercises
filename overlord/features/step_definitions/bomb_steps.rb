@@ -10,7 +10,7 @@ Given(/^the bomb is inactive$/) do
 end
 
 When(/^I activate the bomb$/) do
-  fill_in('code', :with => "1234")
+  fill_in('code', with: "1234")
   click_button('Apply Code')
   page.find("#confirm_apply")
   click_button('Confirm Code')
@@ -21,7 +21,7 @@ Then(/^I should see an active bomb$/) do
 end
 
 When(/^I use the wrong activation code$/) do
-  fill_in('code', :with => "4321")
+  fill_in('code', with: "4321")
   click_button('Apply Code')
   page.find("#confirm_apply")
   click_button('Confirm Code')
@@ -29,7 +29,7 @@ end
 
 Then(/^I should see an inactive bomb$/) do
   page.should have_content('Inactive')
-end 
+end
 
 Given(/^the bomb has not been booted$/) do
 end
@@ -43,14 +43,14 @@ Then(/^I should see a notification that I have used the wrong activation code$/)
 end
 
 When(/^I use an invalid activation code$/) do
-  fill_in('code', :with => "DARBY")
+  fill_in('code', with: "DARBY")
   click_button('Apply Code')
   page.find("#confirm_apply")
   click_button('Confirm Code')
 end
 
 When(/^I boot with an invalid activation code$/) do
-  fill_in('activation_code', :with => "DARBY")
+  fill_in('activation_code', with: "DARBY")
 end
 
 Then(/^I should see a notification with the rules for valid activation codes$/) do
@@ -58,7 +58,7 @@ Then(/^I should see a notification with the rules for valid activation codes$/) 
 end
 
 When(/^I use the activation code$/) do
-  fill_in('code', :with => "1234")
+  fill_in('code', with: "1234")
   click_button('Apply Code')
 end
 
@@ -93,13 +93,13 @@ end
 
 Given(/^I am logged in as a citizen$/) do
   step 'I visit the login page'
-  fill_in('username', :with => 'citizen')
+  fill_in('username', with: 'citizen')
   click_on('Submit')
 end
 
 Given(/^I am logged in as a dev$/) do
   step 'I visit the login page'
-  fill_in('username', :with => 'dev')
+  fill_in('username', with: 'dev')
   click_on('Submit')
 end
 
@@ -108,14 +108,14 @@ Given(/^the bomb is active$/) do
 end
 
 When(/^I use the correct deactivation code$/) do
-  fill_in('code', :with => "0000")
+  fill_in('code', with: "0000")
   click_button('Apply Code')
   page.find("#confirm_apply")
   click_button('Confirm Code')
 end
 
 Given(/^I use the wrong deactivation code$/) do
-  fill_in('code', :with => "DARBY")
+  fill_in('code', with: "DARBY")
   click_button('Apply Code')
   click_button('Confirm Code')
 end
@@ -145,12 +145,12 @@ When(/^I visit the bomb page$/) do
 end
 
 Then(/^I should be redirected to the login page$/) do
-  current_path.should == '/'
+  current_path.should eq '/'
 end
 
 When(/^I login as villain$/) do
   visit '/'
-  fill_in('username', :with => 'villain')
+  fill_in('username', with: 'villain')
   click_on('Submit')
 end
 
@@ -163,7 +163,7 @@ Then(/^I should be logged in as villian$/) do
 end
 
 When(/^I login as dev$/) do
-  fill_in('username', :with => 'dev')
+  fill_in('username', with: 'dev')
   click_on('Submit')
 end
 
@@ -172,7 +172,7 @@ Then(/^I should be logged in as dev$/) do
 end
 
 When(/^I login as civilian$/) do
-  fill_in('username', :with => 'civilian')
+  fill_in('username', with: 'civilian')
   click_on('Submit')
 end
 
@@ -197,7 +197,7 @@ When(/^I click the logout link$/) do
 end
 
 Then(/^I should not be logged in$/) do
-  current_path.should == '/'
+  current_path.should eq '/'
   page.should_not have_content('villain')
 end
 

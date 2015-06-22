@@ -16,7 +16,7 @@ def set_session
 end
 
 def check_status
-  while true
+  loop do
     set_session
     redirect '/explosion' if session[:bomb].status == "Exploded"
     sleep 1
@@ -28,7 +28,7 @@ def valid_activation_code(code)
 end
 
 get '/' do
-  redirect '/reset' if !session[:bomb]
+  redirect '/reset' unless session[:bomb]
   redirect '/bomb' if session[:username]
   erb :login
 end
@@ -49,10 +49,10 @@ get '/bomb' do
 end
 
 post '/boot' do
-  flash[:invalid_activation_code] = INVALID_ACTIVATION_CODE if !valid_activation_code(params[:activation_code])
-  args = { 
+  flash[:invalid_activation_code] = INVALID_ACTIVATION_CODE unless valid_activation_code(params[:activation_code])
+  args = {
     activation_code: params[:activation_code],
-    deactivation_code: params[:deactivation_code] 
+    deactivation_code: params[:deactivation_code],
   }
   begin
     session[:bomb].boot(args) if session[:username] == "villain"
@@ -69,7 +69,6 @@ post '/apply_code' do
   session[:bomb].apply_code(params[:code])
   redirect '/bomb'
 end
-
 
 get '/reset' do
   session[:status_thread].kill if session[:status_thread]

@@ -9,7 +9,6 @@ class Bomb
   def initialize
     @status = default_status
     @booted = false
-    @defuse_attempts = 3
   end
 
   def boot(args = {})
@@ -43,10 +42,12 @@ class Bomb
   end
 
   def activate_bomb
+    @defuse_attempts = 3
     @status = "Active"
   end
 
   def defuse_bomb
+    @defuse_attempts = nil
     @status = "Inactive"
   end
 

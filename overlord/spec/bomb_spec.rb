@@ -1,7 +1,6 @@
 require 'spec_helper'
 require './bomb.rb'
 
-
 def boot(bomb)
   bomb.boot
 end
@@ -53,7 +52,7 @@ describe Bomb do
     context 'custom boot parameters are given' do
       before do
         bomb.boot(activation_code: "2355", deactivation_code: "FACE")
-      end      
+      end
       it 'has correct default activation code' do
         expect(bomb.activation_code).to eq("2355")
       end
@@ -73,14 +72,14 @@ describe Bomb do
 
   describe '#apply_code' do
     context 'the bomb is offline' do
-      it 'does not react to codes' do 
+      it 'does not react to codes' do
         bomb.apply_code(bomb.activation_code)
         expect(bomb.status).to eq(DEFAULT_STATUS)
       end
     end
 
     context 'the bomb is inactive' do
-      it 'is active after applying activation code' do 
+      it 'is active after applying activation code' do
         boot(bomb)
         bomb.apply_code(bomb.activation_code)
         expect(bomb.status).to eq("Active")
@@ -101,17 +100,17 @@ describe Bomb do
         expect(bomb.defuse_attempts).to eq(DEFAULT_DEFUSE_ATTEMPTS)
       end
 
-      it 'activation code does not effect defuse attempts' do 
+      it 'activation code does not effect defuse attempts' do
         bomb.apply_code(DEFAULT_ACTIVATION_CODE)
         expect(bomb.defuse_attempts).to eq(3)
       end
 
-      it 'incorrect deactivation_code results in decreased defuse attempts' do 
+      it 'incorrect deactivation_code results in decreased defuse attempts' do
         bomb.apply_code("TREEBEARD")
         expect(bomb.defuse_attempts).to eq(2)
       end
 
-      it 'explodes after too many defuse attempts' do 
+      it 'explodes after too many defuse attempts' do
         DEFAULT_DEFUSE_ATTEMPTS.times { bomb.apply_code("dd") }
         expect(bomb.status).to eq("Exploded")
       end

@@ -4,11 +4,11 @@
   = field_set_tag do
     = submit_tag 'Try another search'
  
-  -if @parsed_response.class == String
+  -if @book_list.class == String
     %h3 
-      = @parsed_response
+      = @book_list
   -else
-    -@parsed_response.each do |book|
+    -@book_list.each do |book|
       - link_display = "Title: #{book["title"]} Author: #{book["author"]} Format: #{book["format"]}"
       - query_params = {owi: book["owi"] }
       = link_to(name = link_display, url = "/books/select_item/#{book["owi"]}" )

@@ -9,17 +9,13 @@ class BooksController < ApplicationController
   end
 
   def results
-    response = CallClassifyAPI.query_api(params, true)
-    @parsed_response = CallClassifyAPI.parse_response(response)
+    @book_list = CallClassifyAPI.query_and_extract_booklist(params, true)
   end
 
   def select_item
-    # Query the api again with the owi number for the user's selected book to 
-    # get detailed listing (and oclc num needed by google books api)
-    classify_query = { "owi" => params["owi"] }
-    @book_data = CallClassifyAPI.query_and_extract_book(classify_query, false)
-    google_query = {"OCLC" => @book_data["oclc"] }
-    @book_data["thumbnail_url"] = CallGoogleBooksAPI.query_and_extract_thumbnail_url(google_query)
+    # Query api again with owi number for selected book to get detailed listing (including oclc needed by GoogleBooksAPI)
+    @book_data = CallClassifyAPI.query_and_extract_book({ "owi" => params["owi"] }, false)
+    @book_data["thumbnail_url"] = CallGoogleBooksAPI.query_and_extract_thumbnail_url({"OCLC" => @book_data["oclc"] })
     book = Book.create_with(@book_data).find_or_create_by(oclc: @book_data["oclc"])
     return @message = "The book is already in your library" if Book.book_in_library?(current_user, book)
     current_user.books << book

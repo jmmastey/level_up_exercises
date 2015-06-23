@@ -75,4 +75,9 @@ module CallClassifyAPI
     response = self.query_api(user_query, return_summary)
     self.parse_response(response).first
   end
+
+  def self.query_and_extract_booklist(user_query, return_summary)
+    response = self.query_api(user_query, return_summary)
+    self.parse_response(response)
+  end
 end

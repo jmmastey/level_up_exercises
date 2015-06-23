@@ -1,3 +1,4 @@
+require_relative './data_parser'
 require_relative './data_analyzer'
 
 require 'json'
@@ -6,8 +7,8 @@ class DataScience
   DATAFILE = 'data_export_2014_06_20_15_59_02.json'
 
   def initialize
-    @analysis = DataAnalyzer.new(data)
-    puts "\n"
+    @parser = DataParser.new(data)
+    @analysis = DataAnalyzer.new(@parser.summary)
     display_cohort_info
     display_cohort_conversion
     display_confidence
@@ -16,6 +17,7 @@ class DataScience
   private
 
   def display_cohort_info
+    puts "\n"
     print_cohort_info("A")
     print_cohort_info("B")
     puts "\n"
@@ -40,9 +42,9 @@ class DataScience
 
   def print_cohort_info(cohort)
     print "Cohort #{cohort} sample size: "
-    puts @analysis.sample_size(cohort)
+    puts @parser.sample_size(cohort)
     print "Cohort #{cohort} number of conversions: "
-    puts @analysis.num_conversions(cohort)
+    puts @parser.num_conversions(cohort)
   end
 
   def data

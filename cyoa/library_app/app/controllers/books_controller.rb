@@ -20,11 +20,7 @@ class BooksController < ApplicationController
     @book_data = CallClassifyAPI.query_and_extract_book(classify_query, false)
     google_query = {"OCLC" => @book_data["oclc"] }
     @book_data["thumbnail_url"] = CallGoogleBooksAPI.query_and_extract_thumbnail_url(google_query)
-    if Book.in_database?(@book_data["oclc"])
-      book = Book.where(oclc: @book_data["oclc"]).first
-    else
-      book = Book.create(@book_data)
-    end
+    book = Book.create_with(@book_data).find_or_create_by(oclc: @book_data["oclc"])
     return @message = "The book is already in your library" if Book.book_in_library?(current_user, book)
     current_user.books << book
   end
@@ -44,8 +40,8 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    book_id = params[:id]
     #Remove book from user's library
+    book_id = params[:id]
     @transaction = current_user.books.delete(book_id) if current_user.books.find_by(id:book_id)
   end
 

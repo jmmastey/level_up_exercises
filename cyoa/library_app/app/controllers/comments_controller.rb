@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     oclc = params[:oclc]
     comment = params[:comment]
     book = current_user.books.where(oclc: oclc).first
-    return 'Book now found' if !book 
+    return 'Book not found' if !book 
     Comment.create({:user_id => current_user.id, :book_id => book.id, :comment => comment} )
   end
 

@@ -9,11 +9,11 @@ class Book < ActiveRecord::Base
   end
 
   def self.find_by_oclc(oclc_num)
-    self.where(oclc: oclc_num).first
+    self.find_by(oclc: oclc_num)
   end
 
   def self.book_in_library?(current_user, book)
-    current_user.books.where(oclc: book.oclc).length == 1
+    current_user.books.find_by(oclc: book.oclc)
   end
     
 

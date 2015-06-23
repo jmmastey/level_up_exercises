@@ -36,9 +36,6 @@ module CallClassifyAPI
   end
 
   def self.clean_up_response(response, response_code)
-    puts 'what is response', response
-    puts 'what is response code', response_code
-    #puts 'response fields', response["classify"]["editions"]["edition"].keys if response_code == 2
     #Want an array of books so I can send all data to build_list_of_books
     return response["classify"]["works"]["work"] if response_code == MultiResponseCode #already an Array
     return [].push(response["classify"]["work"]) if response_code == SingleResponseSummaryCode

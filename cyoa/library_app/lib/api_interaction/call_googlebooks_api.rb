@@ -12,7 +12,7 @@ module CallGoogleBooksAPI
         query_string["bibkeys"] = bibkey
       end
     end
-    return query_string
+    query_string
   end
     
   def self.query_api(params)
@@ -28,7 +28,7 @@ module CallGoogleBooksAPI
     response.slice!('var _GBSBookInfo =')
     response.slice!(";")   
     response = JSON.parse(response)
-    return response[bibkey]["thumbnail_url"] if response[bibkey]
+    response[bibkey]["thumbnail_url"] if response[bibkey]
   end
 
   def self.query_and_extract_thumbnail_url(user_query)

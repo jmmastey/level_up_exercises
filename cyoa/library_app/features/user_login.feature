@@ -9,20 +9,20 @@ Feature: login to my user account
     When I click on Login
     Then I am redirected to the login page
 
+  Scenario: successfully create and account
     Given I am on the login page
-    When I enter my user credentials
+    When I click to create an account
+    And I enter my new account credentials
+    Then I see that I have successfully created an account
+
+  Scenario: successfully login
+    Given I have created an account
+    And I am on the login page
+    When I enter my credentials
     Then I see that I have successfully logged in
- 
+
+  Scenario: see that login attempt is unsuccessful with incorrect password
+    Given I have created an account
     Given I am on the login page
     When I enter incorrect user credentials
-    Then I see I did not successfully login
-    And I am again presented with the login page
-
-   Given I am on the login page
-   When I click on Create User Account
-   Then I am directed to the Account Creation Page
-
-   Given I am on the Account Creation Page
-   When I enter valid account information
-   And I click Create Account
-   Then I see that I successfully made a user account
+    Then I see that I did not successfully login

@@ -1,7 +1,7 @@
 class RecommendationsController < ApplicationController
 
   def update   #change current recommendation status
-    authenticate_user! is !user_signed_in?
+    authenticate_user! if !user_signed_in?
     book_id = params[:id]
     user_id = current_user.id
     @user_recommendation = Recommendation.find_by(book_id:book_id, user_id:user_id)

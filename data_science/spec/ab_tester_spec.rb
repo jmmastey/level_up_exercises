@@ -12,11 +12,11 @@ describe ABTester do
 
   describe "#calculate_better_than_random" do
     it "knows when the leader is better than random" do
-      expect(abtest_a.calculate_better_than_random).to eq false
+      expect(abtest_a.calculate_better_than_random).to be_falsy
     end
 
     it "knows when the leader is not better than random" do
-      expect(abtest_b.calculate_better_than_random).to eq true
+      expect(abtest_b.calculate_better_than_random).to be_truthy
     end
   end
 end

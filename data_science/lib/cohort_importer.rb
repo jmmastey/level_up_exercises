@@ -18,26 +18,23 @@ class CohortImporter
 
   private
 
-  def setup_groups(groups = {})
-    @data.each do |record|
+  def setup_groups
+    groups = {}
+    @data.each_with_object(groups) do |record|
       groups[record[@group]] = { conversions: 0, non_conversions: 0 }
     end
-    groups
   end
 
   def transform_conversions(groups)
-    @data.each do |record|
-      groups[record[@group]][:conversions] += 1 if record[@result] == 1
-      groups[record[@group]][:non_conversions] += 1 if record[@result] == 0
+    @data.each_with_object(groups) do |record|
+      type = record[@result] == 1 ? :conversions : :non_conversions
+      groups[record[@group]][type] += 1
     end
-    groups
   end
 
   def make_cohorts(groups)
-    cohorts = []
-    groups.each do |key, value|
-      cohorts << Cohort.new(Hash[[[key, value]]])
+    groups.reduce(Array.new) do |cohort, (key, value)|
+      cohort << Cohort.new(Hash[[[key, value]]])
     end
-    cohorts
   end
 end

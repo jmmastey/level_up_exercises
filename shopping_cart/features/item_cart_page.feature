@@ -1,4 +1,4 @@
-Feature: navigating to item pages from the individual cart item lines
+Feature: Navigating to item pages from the individual cart item lines
 
   As a shopper I want to be able to go to the item pages from my shopping cart
   so I can get more details on the product I am buying

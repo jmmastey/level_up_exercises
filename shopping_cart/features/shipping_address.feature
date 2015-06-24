@@ -26,7 +26,7 @@ Feature: Get shipping estimates
    When I select the checkbox that says use the same address as listed for the credit card
    Then the shipping address fields are automatically populated correctly
 
-  Scenario Outline: enter invalid characters
+   Scenario Outline: enter invalid characters
     Given I am on the checkout page
     When I enter <invalid > characters in the <field> field in my address
     Then I should see an error message

@@ -44,10 +44,22 @@ class Triangle
     puts ''
   end
 
+  def calculate_angle_a(a, b, c)
+    radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
+  end
+
+  def calculate_angle_b(a, b, c)
+    radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
+  end
+
+  def calculate_angle_c(a, b, c)
+    radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
+  end
+
   def calculate_angles(a, b, c)
-    angle_a = radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
-    angle_b = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
-    angle_c = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
+    angle_a = calculate_angle_a(a, b, c)
+    angle_b = calculate_angle_b(a, b, c)
+    angle_c = calculate_angle_c(a, b, c)
 
     [angle_a, angle_b, angle_c]
   end

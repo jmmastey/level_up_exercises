@@ -8,6 +8,20 @@ class Triangle
     @side3 = side3
   end
 
+  def recite_facts
+    check_equilateral
+    check_isosceles
+    check_scalene
+
+    angles = calculate_angles(side1, side2, side3)
+    puts 'The angles of this triangle are ' + angles.join(',')
+
+    puts 'This triangle is also a right triangle.' if angles.include? 90
+    puts ''
+  end
+
+  private
+
   def equilateral
     side1 == side2 && side2 == side3
   end
@@ -30,18 +44,6 @@ class Triangle
 
   def check_scalene
     puts 'This triangle is scalene.' if scalene
-  end
-
-  def recite_facts
-    check_equilateral
-    check_isosceles
-    check_scalene
-
-    angles = calculate_angles(side1, side2, side3)
-    puts 'The angles of this triangle are ' + angles.join(',')
-
-    puts 'This triangle is also a right triangle.' if angles.include? 90
-    puts ''
   end
 
   def calculate_angle_a(a, b, c)

@@ -59,11 +59,11 @@ class Triangle
   end
 
   def calculate_angles
-    angle_a = calculate_angle_a(side1, side2, side3)
-    angle_b = calculate_angle_b(side1, side2, side3)
-    angle_c = calculate_angle_c(side1, side2, side3)
-
-    [angle_a, angle_b, angle_c]
+    [
+      calculate_angle_a(side1, side2, side3),
+      calculate_angle_b(side1, side2, side3),
+      calculate_angle_c(side1, side2, side3),
+    ]
   end
 
   def radians_to_degrees(rads)

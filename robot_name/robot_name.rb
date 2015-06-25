@@ -1,4 +1,8 @@
-class NameCollisionError < RuntimeError; end
+class NameCollisionError < RuntimeError
+  def message
+    'There was a problem generating the robot name!'
+  end
+end
 
 class Robot
   attr_accessor :name
@@ -20,7 +24,7 @@ class Robot
   end
 
   def validate_generated_name
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+    raise NameCollisionError if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
   end
 
   def initialize(args = {})

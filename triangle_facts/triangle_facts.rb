@@ -24,15 +24,27 @@ class Triangle
     end
   end
 
+  def check_equilateral
+    puts 'This triangle is equilateral.' if equilateral
+  end
+
+  def check_isosceles
+    puts 'This triangle is isosceles.' if isosceles
+  end
+
+  def check_scalene
+    puts 'This triangle is scalene.' if scalene
+  end
+
   def recite_facts
-    puts 'This triangle is equilateral!' if equilateral
-    puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles
-    puts 'This triangle is scalene and mathematically boring.' if scalene
+    check_equilateral
+    check_isosceles
+    check_scalene
 
     angles = calculate_angles(side1, side2, side3)
     puts 'The angles of this triangle are ' + angles.join(',')
 
-    puts 'This triangle is also a right triangle!' if angles.include? 90
+    puts 'This triangle is also a right triangle.' if angles.include? 90
     puts ''
   end
 

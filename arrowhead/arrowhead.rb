@@ -1,5 +1,6 @@
 class Arrowhead
   REGION_IS_INVALID = "Unknown region. Please provide a valid region."
+  SHAPE_IS_INVALID = "Unknown shape value. Are you sure you know what you're talking about?"
 
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
@@ -28,14 +29,13 @@ class Arrowhead
   # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
     raise REGION_IS_INVALID unless valid_region(region)
+    raise SHAPE_IS_INVALID unless valid_shape(region, shape)
 
     if valid_region(region)
       shapes = CLASSIFICATIONS[region]
       if valid_shape(region, shape)
         arrowhead = shapes[shape]
         "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
       end
     end
   end

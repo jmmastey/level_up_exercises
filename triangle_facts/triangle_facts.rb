@@ -46,23 +46,15 @@ class Triangle
     puts 'This triangle is scalene.' if scalene
   end
 
-  def calculate_angle_a(a, b, c)
+  def angle_in_degrees(a, b, c)
     radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
-  end
-
-  def calculate_angle_b(a, b, c)
-    radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
-  end
-
-  def calculate_angle_c(a, b, c)
-    radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
   end
 
   def calculate_angles
     [
-      calculate_angle_a(side1, side2, side3),
-      calculate_angle_b(side1, side2, side3),
-      calculate_angle_c(side1, side2, side3),
+      angle_in_degrees(side1, side2, side3),
+      angle_in_degrees(side2, side3, side1),
+      angle_in_degrees(side3, side1, side2),
     ]
   end
 

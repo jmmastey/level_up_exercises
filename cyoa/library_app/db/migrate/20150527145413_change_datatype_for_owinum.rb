@@ -4,7 +4,7 @@ class ChangeDatatypeForOwinum < ActiveRecord::Migration
       t.change :owi_num, :string
     end
   end
- 
+
   def self.down
     change_table :books do |t|
       t.change :owi_num, :integer

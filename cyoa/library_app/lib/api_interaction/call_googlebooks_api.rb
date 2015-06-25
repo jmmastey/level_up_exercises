@@ -8,7 +8,6 @@ module CallGoogleBooksAPI
     Bibkeys.each do |key|
       if params[key]
         bibkey = "#{key}:#{params[key]}"
-        puts 'the bibkey is', bibkey
         query_string["bibkeys"] = bibkey
       end
     end
@@ -17,7 +16,6 @@ module CallGoogleBooksAPI
     
   def self.query_api(params)
     query_string = self.generate_query(params)
-    puts 'query_tring', query_string
     HTTParty.get(BaseURI, :query => query_string)
   end
     

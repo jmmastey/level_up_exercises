@@ -15,7 +15,4 @@ class Book < ActiveRecord::Base
   def self.book_in_library?(current_user, book)
     current_user.books.find_by(oclc: book.oclc)
   end
-    
-
-
 end

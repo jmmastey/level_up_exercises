@@ -45,7 +45,7 @@ class BooksController < ApplicationController
     oclc_num = params[:oclc]
     @book = Book.find_by_oclc(oclc_num)
     if !Book.book_in_library?(current_user, @book)
-      current_user.books << @book 
+      current_user.books << @book
       @message = "This book was added to"
     else
       @message = "This book is already in"

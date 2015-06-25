@@ -27,7 +27,7 @@ class Robot
     @@registry ||= []
 
     name_generator(args)
-    random_name_generator if !@name_generator
+    random_name_generator unless @name_generator
     validate_generated_name
 
     @@registry << @name

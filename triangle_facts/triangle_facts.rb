@@ -22,28 +22,28 @@ class Triangle
 
   private
 
-  def equilateral
+  def equilateral?
     side1 == side2 && side2 == side3
   end
 
-  def isosceles
+  def isosceles?
     [side1, side2, side3].uniq.length == 2
   end
 
-  def scalene
-    ! (equilateral || isosceles)
+  def scalene?
+    ! (equilateral? || isosceles?)
   end
 
   def check_equilateral
-    puts 'This triangle is equilateral.' if equilateral
+    puts 'This triangle is equilateral.' if equilateral?
   end
 
   def check_isosceles
-    puts 'This triangle is isosceles.' if isosceles
+    puts 'This triangle is isosceles.' if isosceles?
   end
 
   def check_scalene
-    puts 'This triangle is scalene.' if scalene
+    puts 'This triangle is scalene.' if scalene?
   end
 
   def angle_in_degrees(a, b, c)

@@ -16,13 +16,17 @@ class Robot
     @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
   end
 
+  def validate_generated_name
+    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+  end
+
   def initialize(args = {})
     @@registry ||= []
 
     name_generator(args)
     random_name_generator if !@name_generator
+    validate_generated_name
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
     @@registry << @name
   end
 end

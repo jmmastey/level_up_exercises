@@ -30,14 +30,8 @@ class Arrowhead
   def self.classify(region, shape)
     raise REGION_IS_INVALID unless valid_region(region)
     raise SHAPE_IS_INVALID unless valid_shape(region, shape)
-
-    if valid_region(region)
-      shapes = CLASSIFICATIONS[region]
-      if valid_shape(region, shape)
-        arrowhead = shapes[shape]
-        "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      end
-    end
+    arrowhead = CLASSIFICATIONS[region][shape]
+    "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end
 

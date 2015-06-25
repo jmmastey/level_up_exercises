@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get "select_item/:owi", to: 'books#select_item'
       get "collection", to: 'books#user_collection'
       get "item/:oclc", to: 'books#detailed_book_info'
-      post "add_rec_book/:oclc", to: 'books#add_rec_book'
+      get "add_rec_book/:oclc", to: 'books#add_rec_book'
     end
   end
 

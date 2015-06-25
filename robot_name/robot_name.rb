@@ -35,7 +35,11 @@ class Robot
   end
 
   def error_output(e)
-    puts "#{e.message} (#{e})"
+    puts "#{e.message} (#{e} with #{name})"
+  end
+
+  def name_output
+    puts "My pet robot's name is #{name}, but we usually call him sparky."
   end
 
   def initialize(args = {})
@@ -46,6 +50,7 @@ class Robot
 
     begin
       validate_generated_name
+      name_output
     rescue StandardError => e
       error_output(e)
     end
@@ -55,7 +60,7 @@ class Robot
 end
 
 robot = Robot.new
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+#puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
 generator = -> { 'CHAPPIE' }

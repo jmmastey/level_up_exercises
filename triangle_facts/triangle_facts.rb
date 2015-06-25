@@ -13,7 +13,7 @@ class Triangle
     check_isosceles
     check_scalene
 
-    angles = calculate_angles(side1, side2, side3)
+    angles = calculate_angles
     puts 'The angles of this triangle are ' + angles.join(',')
 
     puts 'This triangle is also a right triangle.' if angles.include? 90
@@ -58,10 +58,10 @@ class Triangle
     radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
   end
 
-  def calculate_angles(a, b, c)
-    angle_a = calculate_angle_a(a, b, c)
-    angle_b = calculate_angle_b(a, b, c)
-    angle_c = calculate_angle_c(a, b, c)
+  def calculate_angles
+    angle_a = calculate_angle_a(side1, side2, side3)
+    angle_b = calculate_angle_b(side1, side2, side3)
+    angle_c = calculate_angle_c(side1, side2, side3)
 
     [angle_a, angle_b, angle_c]
   end

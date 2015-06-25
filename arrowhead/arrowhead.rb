@@ -1,4 +1,6 @@
 class Arrowhead
+  REGION_IS_INVALID = "Unknown region. Please provide a valid region."
+
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
     far_west: {
@@ -25,6 +27,8 @@ class Arrowhead
 
   # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
+    raise REGION_IS_INVALID unless valid_region(region)
+
     if valid_region(region)
       shapes = CLASSIFICATIONS[region]
       if valid_shape(region, shape)
@@ -33,8 +37,6 @@ class Arrowhead
       else
         raise "Unknown shape value. Are you sure you know what you're talking about?"
       end
-    else
-      raise "Unknown region, please provide a valid region."
     end
   end
 end

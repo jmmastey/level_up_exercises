@@ -9,9 +9,7 @@ class Triangle
   end
 
   def recite_facts
-    check_equilateral
-    check_isosceles
-    check_scalene
+    display_triangle_type
 
     angles = calculate_angles
     puts 'The angles of this triangle are ' + angles.join(',')
@@ -34,16 +32,10 @@ class Triangle
     ! (equilateral? || isosceles?)
   end
 
-  def check_equilateral
+  def display_triangle_type
     puts 'This triangle is equilateral.' if equilateral?
-  end
-
-  def check_isosceles
-    puts 'This triangle is isosceles.' if isosceles?
-  end
-
-  def check_scalene
-    puts 'This triangle is scalene.' if scalene?
+    puts 'This triangle is isosceles.'   if isosceles?
+    puts 'This triangle is scalene.'     if scalene?
   end
 
   def angle_in_degrees(a, b, c)

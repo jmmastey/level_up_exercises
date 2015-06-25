@@ -34,12 +34,21 @@ class Robot
     raise NameFormatError if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
   end
 
+  def error_output(e)
+    puts "#{e.message} (#{e})"
+  end
+
   def initialize(args = {})
     @@registry ||= []
 
     name_generator(args)
     random_name_generator unless @name_generator
-    validate_generated_name
+
+    begin
+      validate_generated_name
+    rescue StandardError => e
+      error_output(e)
+    end
 
     @@registry << @name
   end
@@ -49,8 +58,8 @@ robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
-#generator = -> { 'CHAPPIE' }
-#Robot.new(name_generator: generator)
+generator = -> { 'CHAPPIE' }
+Robot.new(name_generator: generator)
 
 generator = -> { 'AA111' }
 Robot.new(name_generator: generator)

@@ -1,0 +1,49 @@
+%h3 
+  %strong Title: 
+  %i
+    = @book_of_interest[:title] 
+%h3 
+  %strong Author:
+  = @book_of_interest[:author]
+%h3 
+  %strong Link to library resources:
+  = link_to(name = "#{@book_of_interest[:title]}", url="http://worldcat.org/oclc/#{@book_of_interest[:oclc]}" )
+
+%br
+= form_tag("/books/#{@book_of_interest[:id]}", :method => "delete") do
+  = submit_tag("Delete Book")
+%br
+%br
+  - if @recommended
+    %h4 You recommended this book.  
+  - else 
+    %h4 You have not recommended this book.
+  = form_tag("/recommendations/#{@book_of_interest[:id]}", :method => "patch") do
+    = submit_tag("Change your recommendation")
+%br
+
+%br
+%br
+= form_tag("/comments/#{@book_of_interest[:oclc]}", :method => "post") do
+  = field_set_tag do
+    = text_area_tag(:comment, content = "", options = {:size => "100x5", placeholder: "Add a comment about this work..."})
+    %br
+  = submit_tag 'Submit'
+
+
+
+- if @book_comments.length > 0
+  %h2 Your saved comments:
+
+  - @book_comments.each do |comment|
+    = comment.created_at
+    %br
+    = comment.comment
+    %br
+    = form_tag("/comments/delete/#{comment.id}", :method => "post") do
+      = submit_tag 'Delete Comment'
+    %br
+    %br
+    %br
+
+

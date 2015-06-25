@@ -1,0 +1,14 @@
+%h3 
+  %strong Title: 
+  %i
+    = @book[:title] 
+%h3 
+  %strong Author:
+  = @book[:author]
+%h3 
+  %strong Link to library resources:
+  = link_to(name = "#{@book[:title]}", url="http://worldcat.org/oclc/#{@book[:oclc]}" )
+
+%br
+= form_tag("/books/add_rec_book/#{@book[:oclc]}", :method => "get") do
+  = submit_tag("Add book to my collection")

@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://classify.oclc.org/classify2/Classify?summary=true&title=Isaac's%20Storm
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '1741'
+      Date:
+      - Mon, 22 Jun 2015 21:03:35 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <classify xmlns="http://classify.oclc.org">
+          <response code="4"/>
+          <!--Classify is a product of OCLC Online Computer Library Center: http://classify.oclc.org-->
+          <workCount>6</workCount>
+          <start>0</start>
+          <maxRecs>25</maxRecs>
+          <orderBy>thold desc</orderBy>
+          <input type="title">Isaac%27s+Storm</input>
+          <works>
+            <work author="Larson, Erik, 1954- | Cline, Isaac Monroe, 1861-1955 [Author]" editions="28" format="Book" holdings="3945" hyr="2011" itemtype="itemtype-book" lyr="1999" owi="793833894" title="Isaac's storm : a man, a time, and the deadliest hurricane in history" wi="229333333"/>
+            <work author="Larson, Erik, 1954-" editions="21" format="Audiobook on Cassette" holdings="632" hyr="2007" itemtype="itemtype-audiobook-cassette" lyr="1999" owi="428560" title="Isaac's storm a man, a time, and the deadliest hurricane in history" wi="123097191"/>
+            <work author="Larson, Erik, 1954-" editions="7" format="Book" holdings="148" hyr="2001" itemtype="itemtype-book" lyr="1999" owi="836995808" title="Isaac's storm : the drowning of Galveston, 8 September 1900" wi="44013770"/>
+            <work editions="2" format="DVD video" holdings="66" hyr="2004" itemtype="itemtype-video-dvd" lyr="2004" owi="478659007" title="Isaac's storm" wi="56721966"/>
+            <work author="Larson, Erik, 1954-" editions="2" format="Book" holdings="6" hyr="1999" itemtype="itemtype-book" lyr="1999" owi="1441116113" title="Isaac's storm : the drowning of Galveston" wi="237198343"/>
+            <work editions="1" format="Audiobook" holdings="1" hyr="????" itemtype="itemtype-audiobook" lyr="????" owi="751995597" title="Isaac's storm : Unabridged narration by Richard M. Davidson." wi="681423705"/>
+          </works>
+        </classify>
+    http_version: 
+  recorded_at: Mon, 22 Jun 2015 21:03:36 GMT
+recorded_with: VCR 2.9.3

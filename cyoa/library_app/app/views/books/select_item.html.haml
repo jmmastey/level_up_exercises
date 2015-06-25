@@ -1,0 +1,25 @@
+- if @message
+  %h1  
+    = @message
+- else
+  %h1 The item you selected was added to your library:
+
+  %h4 Title: 
+  = @book_data["title"]
+  %br
+  %h4 Author: 
+  = @book_data["author"]
+  %br
+  %h4 Format:
+  = @book_data["format"]
+  %br
+  %h4 Language:
+  = @book_data["language"]
+  %br
+
+
+
+= form_tag('/books/search', :method => "get") do
+  = field_set_tag do
+    = submit_tag 'Add Another Book'
+

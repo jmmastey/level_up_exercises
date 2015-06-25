@@ -1,0 +1,457 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://classify.oclc.org/classify2/Classify?summary=true&title=Isaac's%20Storm
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '1741'
+      Date:
+      - Thu, 25 Jun 2015 19:31:37 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <classify xmlns="http://classify.oclc.org">
+          <response code="4"/>
+          <!--Classify is a product of OCLC Online Computer Library Center: http://classify.oclc.org-->
+          <workCount>6</workCount>
+          <start>0</start>
+          <maxRecs>25</maxRecs>
+          <orderBy>thold desc</orderBy>
+          <input type="title">Isaac%27s+Storm</input>
+          <works>
+            <work author="Larson, Erik, 1954- | Cline, Isaac Monroe, 1861-1955 [Author]" editions="28" format="Book" holdings="3945" hyr="2011" itemtype="itemtype-book" lyr="1999" owi="793833894" title="Isaac's storm : a man, a time, and the deadliest hurricane in history" wi="229333333"/>
+            <work author="Larson, Erik, 1954-" editions="21" format="Audiobook on Cassette" holdings="632" hyr="2007" itemtype="itemtype-audiobook-cassette" lyr="1999" owi="428560" title="Isaac's storm a man, a time, and the deadliest hurricane in history" wi="123097191"/>
+            <work author="Larson, Erik, 1954-" editions="7" format="Book" holdings="148" hyr="2001" itemtype="itemtype-book" lyr="1999" owi="836995808" title="Isaac's storm : the drowning of Galveston, 8 September 1900" wi="44013770"/>
+            <work editions="2" format="DVD video" holdings="66" hyr="2004" itemtype="itemtype-video-dvd" lyr="2004" owi="478659007" title="Isaac's storm" wi="56721966"/>
+            <work author="Larson, Erik, 1954-" editions="2" format="Book" holdings="6" hyr="1999" itemtype="itemtype-book" lyr="1999" owi="1441116113" title="Isaac's storm : the drowning of Galveston" wi="237198343"/>
+            <work editions="1" format="Audiobook" holdings="1" hyr="????" itemtype="itemtype-audiobook" lyr="????" owi="751995597" title="Isaac's storm : Unabridged narration by Richard M. Davidson." wi="681423705"/>
+          </works>
+        </classify>
+    http_version: 
+  recorded_at: Thu, 25 Jun 2015 19:31:37 GMT
+- request:
+    method: get
+    uri: http://classify.oclc.org/classify2/Classify?owi=793833894&summary=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Thu, 25 Jun 2015 19:31:38 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGNsYXNz
+        aWZ5IHhtbG5zPSJodHRwOi8vY2xhc3NpZnkub2NsYy5vcmciPgogIDxyZXNw
+        b25zZSBjb2RlPSIyIi8+CiAgPCEtLUNsYXNzaWZ5IGlzIGEgcHJvZHVjdCBv
+        ZiBPQ0xDIE9ubGluZSBDb21wdXRlciBMaWJyYXJ5IENlbnRlcjogaHR0cDov
+        L2NsYXNzaWZ5Lm9jbGMub3JnLS0+CiAgPHdvcmsgYXV0aG9yPSJMYXJzb24s
+        IEVyaWssIDE5NTQtIHwgQ2xpbmUsIElzYWFjIE1vbnJvZSwgMTg2MS0xOTU1
+        IFtBdXRob3JdIiBlZGl0aW9ucz0iMjgiIGVob2xkaW5ncz0iMjMxIiBmb3Jt
+        YXQ9IkJvb2siIGhvbGRpbmdzPSIzNzE0IiBpdGVtdHlwZT0iaXRlbXR5cGUt
+        Ym9vayIgb3dpPSI3OTM4MzM4OTQiIHRpdGxlPSJJc2FhYydzIHN0b3JtIDog
+        YSBtYW4sIGEgdGltZSwgYW5kIHRoZSBkZWFkbGllc3QgaHVycmljYW5lIGlu
+        IGhpc3RvcnkiPjIyOTMzMzMzMzwvd29yaz4KICA8YXV0aG9ycz4KICAgIDxh
+        dXRob3IgbGM9Im45OTAyMTI5NiIgdmlhZj0iMzg3MDQyNjUiPkNsaW5lLCBJ
+        c2FhYyBNb25yb2UsIDE4NjEtMTk1NSBbQXV0aG9yXTwvYXV0aG9yPgogICAg
+        PGF1dGhvciBsYz0ibjkyMDQwOTc1IiB2aWFmPSI1MjU1NjAyNCI+TGFyc29u
+        LCBFcmlrLCAxOTU0LTwvYXV0aG9yPgogIDwvYXV0aG9ycz4KICA8b3JkZXJC
+        eT50aG9sZCBkZXNjPC9vcmRlckJ5PgogIDxpbnB1dCB0eXBlPSJvd2kiPjc5
+        MzgzMzg5NDwvaW5wdXQ+CiAgPHN0YXJ0PjA8L3N0YXJ0PgogIDxtYXhSZWNz
+        PjI1PC9tYXhSZWNzPgogIDxlZGl0aW9ucz4KICAgIDxlZGl0aW9uIGF1dGhv
+        cj0iTGFyc29uLCBFcmlrLCAxOTU0LSIgZWhvbGRpbmdzPSIwIiBmb3JtYXQ9
+        IkJvb2siIGhvbGRpbmdzPSIyNTEzIiBpdGVtdHlwZT0iaXRlbXR5cGUtYm9v
+        ayIgbGFuZ3VhZ2U9ImVuZyIgb2NsYz0iNDEwMDI4ODIiIHRpdGxlPSJJc2Fh
+        YydzIHN0b3JtIDogYSBtYW4sIGEgdGltZSwgYW5kIHRoZSBkZWFkbGllc3Qg
+        aHVycmljYW5lIGluIGhpc3RvcnkiPgogICAgICA8Y2xhc3NpZmljYXRpb25z
+        PgogICAgICAgIDxjbGFzcyBpbmQxPSIwIiBpbmQyPSIwIiBzZmE9IkYzOTQu
+        RzIiIHRhZz0iMDUwIi8+CiAgICAgICAgPGNsYXNzIGVkaXRpb249IjIxIiBp
+        bmQxPSIwIiBpbmQyPSIwIiBzZjI9IjIxIiBzZmE9Ijk3Ni40MTM5IiB0YWc9
+        IjA4MiIvPgogICAgICA8L2NsYXNzaWZpY2F0aW9ucz4KICAgIDwvZWRpdGlv
+        bj4KICAgIDxlZGl0aW9uIGF1dGhvcj0iTGFyc29uLCBFcmlrLCAxOTU0LSIg
+        ZWhvbGRpbmdzPSIwIiBmb3JtYXQ9IkxhcmdlIHByaW50IGJvb2siIGhvbGRp
+        bmdzPSI1NTAiIGl0ZW10eXBlPSJpdGVtdHlwZS1ib29rLWxhcmdlcHJpbnQi
+        IGxhbmd1YWdlPSJlbmciIG9jbGM9IjQyNzk4MTY3IiB0aXRsZT0iSXNhYWMn
+        cyBzdG9ybSA6IGEgbWFuLCBhIHRpbWUsIGFuZCB0aGUgZGVhZGxpZXN0IGh1
+        cnJpY2FuZSBpbiBoaXN0b3J5Ij4KICAgICAgPGNsYXNzaWZpY2F0aW9ucz4K
+        ICAgICAgICA8Y2xhc3MgZWRpdGlvbj0iMjEiIGluZDE9IjAiIGluZDI9IjAi
+        IHNmMj0iMjEiIHNmYT0iOTc2LjQxMzkiIHRhZz0iMDgyIi8+CiAgICAgICAg
+        PGNsYXNzIGluZDE9IjEiIGluZDI9IjAiIHNmYT0iRjM5NC5HMiIgdGFnPSIw
+        NTAiLz4KICAgICAgPC9jbGFzc2lmaWNhdGlvbnM+CiAgICA8L2VkaXRpb24+
+        CiAgICA8ZWRpdGlvbiBhdXRob3I9IkxhcnNvbiwgRXJpaywgMTk1NC0iIGVo
+        b2xkaW5ncz0iMCIgZm9ybWF0PSJCb29rIiBob2xkaW5ncz0iNTQ0IiBpdGVt
+        dHlwZT0iaXRlbXR5cGUtYm9vayIgbGFuZ3VhZ2U9ImVuZyIgb2NsYz0iNDQ5
+        ODk3NjciIHRpdGxlPSJJc2FhYydzIHN0b3JtIDogYSBtYW4sIGEgdGltZSwg
+        YW5kIHRoZSBkZWFkbGllc3QgaHVycmljYW5lIGluIGhpc3RvcnkiPgogICAg
+        ICA8Y2xhc3NpZmljYXRpb25zPgogICAgICAgIDxjbGFzcyBpbmQxPSIgIiBp
+        bmQyPSI0IiBzZmE9IkYzOTQuRzIiIHRhZz0iMDUwIi8+CiAgICAgICAgPGNs
+        YXNzIGluZDE9IjAiIGluZDI9IjQiIHNmYT0iOTc2LjQxMzkiIHRhZz0iMDgy
+        Ii8+CiAgICAgIDwvY2xhc3NpZmljYXRpb25zPgogICAgPC9lZGl0aW9uPgog
+        ICAgPGVkaXRpb24gYXV0aG9yPSJMYXJzb24sIEVyaWssIDE5NTQtIiBlaG9s
+        ZGluZ3M9IjE2MSIgZm9ybWF0PSJlQm9vayIgaG9sZGluZ3M9IjAiIGl0ZW10
+        eXBlPSJpdGVtdHlwZS1ib29rLWRpZ2l0YWwiIGxhbmd1YWdlPSJlbmciIG9j
+        bGM9Ijc4MDI5MTY3NiIgdGl0bGU9IklzYWFjJ3Mgc3Rvcm0gYSBtYW4sIGEg
+        dGltZSwgYW5kIHRoZSBkZWFkbGllc3QgaHVycmljYW5lIGluIGhpc3Rvcnki
+        PgogICAgICA8Y2xhc3NpZmljYXRpb25zPgogICAgICAgIDxjbGFzcyBpbmQx
+        PSIgIiBpbmQyPSI0IiBzZmE9IkYzOTQuRzIiIHRhZz0iMDUwIi8+CiAgICAg
+        ICAgPGNsYXNzIGVkaXRpb249IjIyIiBpbmQxPSIwIiBpbmQyPSI0IiBzZjI9
+        IjIyIiBzZmE9Ijk3Ni40MTM5IiB0YWc9IjA4MiIvPgogICAgICA8L2NsYXNz
+        aWZpY2F0aW9ucz4KICAgIDwvZWRpdGlvbj4KICAgIDxlZGl0aW9uIGF1dGhv
+        cj0iTGFyc29uLCBFcmlrLCAxOTU0LSIgZWhvbGRpbmdzPSI2NCIgZm9ybWF0
+        PSJlQm9vayIgaG9sZGluZ3M9IjAiIGl0ZW10eXBlPSJpdGVtdHlwZS1ib29r
+        LWRpZ2l0YWwiIGxhbmd1YWdlPSJlbmciIG9jbGM9IjcwNzY4OTg2IiB0aXRs
+        ZT0iSXNhYWMncyBzdG9ybSBhIG1hbiwgYSB0aW1lLCBhbmQgdGhlIGRlYWRs
+        aWVzdCBodXJyaWNhbmUgaW4gaGlzdG9yeSI+CiAgICAgIDxjbGFzc2lmaWNh
+        dGlvbnM+CiAgICAgICAgPGNsYXNzIGVkaXRpb249IjIxIiBpbmQxPSIwIiBp
+        bmQyPSI0IiBzZjI9IjIxIiBzZmE9Ijk3Ni40MTM5IiB0YWc9IjA4MiIvPgog
+        ICAgICAgIDxjbGFzcyBpbmQxPSIgIiBpbmQyPSI0IiBzZmE9IkYzOTQuRzIi
+        IHRhZz0iMDUwIi8+CiAgICAgIDwvY2xhc3NpZmljYXRpb25zPgogICAgPC9l
+        ZGl0aW9uPgogICAgPGVkaXRpb24gYXV0aG9yPSJMYXJzb24sIEVyaWssIDE5
+        NTQtIiBlaG9sZGluZ3M9IjAiIGZvcm1hdD0iQm9vayIgaG9sZGluZ3M9IjI2
+        IiBpdGVtdHlwZT0iaXRlbXR5cGUtYm9vayIgbGFuZ3VhZ2U9ImVuZyIgb2Ns
+        Yz0iNTE5NzQyMTQ4IiB0aXRsZT0iSXNhYWMncyBTdG9ybS4iPgogICAgICA8
+        Y2xhc3NpZmljYXRpb25zPgogICAgICAgIDxjbGFzcyBpbmQxPSIwIiBpbmQy
+        PSI0IiBzZmE9IltGSUNdIiB0YWc9IjA4MiIvPgogICAgICA8L2NsYXNzaWZp
+        Y2F0aW9ucz4KICAgIDwvZWRpdGlvbj4KICAgIDxlZGl0aW9uIGF1dGhvcj0i
+        TGFyc29uLCBFcmlrLCAxOTU0LSIgZWhvbGRpbmdzPSIwIiBmb3JtYXQ9IkJv
+        b2siIGhvbGRpbmdzPSIxOSIgaXRlbXR5cGU9Iml0ZW10eXBlLWJvb2siIGxh
+        bmd1YWdlPSJlbmciIG9jbGM9IjczMTM5NzgxNCIgdGl0bGU9IklzYWFjJ3Mg
+        c3Rvcm0gOiBhIG1hbiwgYSB0aW1lLCBhbmQgdGhlIGRlYWRsaWVzdCBodXJy
+        aWNhbmUgaW4gaGlzdG9yeSIvPgogICAgPGVkaXRpb24gYXV0aG9yPSJMYXJz
+        b24sIEVyaWssIDE5NTQtIiBlaG9sZGluZ3M9IjAiIGZvcm1hdD0iQm9vayIg
+        aG9sZGluZ3M9IjEzIiBpdGVtdHlwZT0iaXRlbXR5cGUtYm9vayIgbGFuZ3Vh
+        Z2U9ImR1dCIgb2NsYz0iNjY4NTQ5NTciIHRpdGxlPSJEZSBtZXRlb3JvbG9v
+        ZyBlbiBkZSBzdG9ybSA6IGhldCBkcmFtYXRpc2NoZSB2ZXJoYWFsIHZhbiBk
+        ZSBnZXZhYXJsaWprc3RlIG9ya2FhbiB1aXQgZGUgZ2VzY2hpZWRlbmlzIi8+
+        CiAgICA8ZWRpdGlvbiBhdXRob3I9IkxhcnNvbiwgRXJpaywgMTk1NC0iIGVo
+        b2xkaW5ncz0iMCIgZm9ybWF0PSJCb29rIiBob2xkaW5ncz0iOSIgaXRlbXR5
+        cGU9Iml0ZW10eXBlLWJvb2siIGxhbmd1YWdlPSJlbmciIG9jbGM9Ijc3OTA1
+        OTYxMyIgdGl0bGU9IklzYWFjJ3Mgc3Rvcm0gOiBhIG1hbiwgYSB0aW1lLCBh
+        bmQgdGhlIGRlYWRsaWVzdCBodXJyaWNhbmUgaW4gaGlzdG9yeSI+CiAgICAg
+        IDxjbGFzc2lmaWNhdGlvbnM+CiAgICAgICAgPGNsYXNzIGVkaXRpb249IjIx
+        IiBpbmQxPSIwIiBpbmQyPSIwIiBzZjI9IjIxIiBzZmE9Ijk3Ni40MTM5IiB0
+        YWc9IjA4MiIvPgogICAgICAgIDxjbGFzcyBpbmQxPSIwIiBpbmQyPSIwIiBz
+        ZmE9IkYzOTQuRzIiIHRhZz0iMDUwIi8+CiAgICAgIDwvY2xhc3NpZmljYXRp
+        b25zPgogICAgPC9lZGl0aW9uPgogICAgPGVkaXRpb24gYXV0aG9yPSJMYXJz
+        b24sIEVyaWssIDE5NTQtIiBlaG9sZGluZ3M9IjAiIGZvcm1hdD0iQm9vayIg
+        aG9sZGluZ3M9IjgiIGl0ZW10eXBlPSJpdGVtdHlwZS1ib29rIiBsYW5ndWFn
+        ZT0idW5kIiBvY2xjPSI3MzM2MzM0MDYiIHRpdGxlPSJJc2FhYydzIFN0b3Jt
+        LiIvPgogICAgPGVkaXRpb24gYXV0aG9yPSJMYXJzb24sIEVyaWssIDE5NTQt
+        IiBlaG9sZGluZ3M9IjAiIGZvcm1hdD0iTGFyZ2UgcHJpbnQgYm9vayIgaG9s
+        ZGluZ3M9IjUiIGl0ZW10eXBlPSJpdGVtdHlwZS1ib29rLWxhcmdlcHJpbnQi
+        IGxhbmd1YWdlPSJlbmciIG9jbGM9IjIyOTMzMzMzMyIgdGl0bGU9IklzYWFj
+        J3Mgc3Rvcm0gOiBhIG1hbiwgYSB0aW1lLCBhbmQgdGhlIGRlYWRsaWVzdCBo
+        dXJyaWNhbmUgaW4gaGlzdG9yeSIvPgogICAgPGVkaXRpb24gYXV0aG9yPSJM
+        YXJzb24sIEVyaWssIDE5NTQtIiBlaG9sZGluZ3M9IjAiIGZvcm1hdD0iQm9v
+        ayIgaG9sZGluZ3M9IjQiIGl0ZW10eXBlPSJpdGVtdHlwZS1ib29rIiBsYW5n
+        dWFnZT0iZW5nIiBvY2xjPSI1NTQ5NTQ2NCIgdGl0bGU9IklzYWFjJ3Mgc3Rv
+        cm0gPSBJc2FhY3MgU3R1cm0iPgogICAgICA8Y2xhc3NpZmljYXRpb25zPgog
+        ICAgICAgIDxjbGFzcyBpbmQxPSIgIiBpbmQyPSI0IiBzZmE9Ijk3Ni40MTM5
+        IiB0YWc9IjA4MiIvPgogICAgICA8L2NsYXNzaWZpY2F0aW9ucz4KICAgIDwv
+        ZWRpdGlvbj4KICAgIDxlZGl0aW9uIGF1dGhvcj0iTGFyc29uLCBFcmlrLCAx
+        OTU0LSIgZWhvbGRpbmdzPSIwIiBmb3JtYXQ9IkJvb2siIGhvbGRpbmdzPSIz
+        IiBpdGVtdHlwZT0iaXRlbXR5cGUtYm9vayIgbGFuZ3VhZ2U9Iml0YSIgb2Ns
+        Yz0iNzk3NTUzNzg2IiB0aXRsZT0iSWwgdGlmb25lIGRpIEdhbHZlc3RvbiA6
+        IGlsIHBpw7kgdGVycmliaWxlIHVyYWdhbm8gZGVsbGEgc3RvcmlhIj4KICAg
+        ICAgPGNsYXNzaWZpY2F0aW9ucz4KICAgICAgICA8Y2xhc3MgaW5kMT0iMCIg
+        aW5kMj0iNCIgc2ZhPSI5NzYuNCIgdGFnPSIwODIiLz4KICAgICAgPC9jbGFz
+        c2lmaWNhdGlvbnM+CiAgICA8L2VkaXRpb24+CiAgICA8ZWRpdGlvbiBhdXRo
+        b3I9IkxhcnNvbiwgRXJpaywgMTk1NC0iIGVob2xkaW5ncz0iMCIgZm9ybWF0
+        PSJCb29rIiBob2xkaW5ncz0iMyIgaXRlbXR5cGU9Iml0ZW10eXBlLWJvb2si
+        IGxhbmd1YWdlPSJlbmciIG9jbGM9IjczMTMyNDA4OSIgdGl0bGU9IklzYWFj
+        J3Mgc3Rvcm0gYSBtYW4sIGEgdGltZSwgYW5kIHRoZSBkZWFkbGllc3QgaHVy
+        cmljYW5lIGluIGhpc3RvcnkiPgogICAgICA8Y2xhc3NpZmljYXRpb25zPgog
+        ICAgICAgIDxjbGFzcyBpbmQxPSIgIiBpbmQyPSI0IiBzZmE9Ijk3Ni40MTM5
+        IiB0YWc9IjA4MiIvPgogICAgICA8L2NsYXNzaWZpY2F0aW9ucz4KICAgIDwv
+        ZWRpdGlvbj4KICAgIDxlZGl0aW9uIGF1dGhvcj0iTGFyc29uLCBFcmlrLCAx
+        OTU0LSIgZWhvbGRpbmdzPSIwIiBmb3JtYXQ9IkJvb2siIGhvbGRpbmdzPSIz
+        IiBpdGVtdHlwZT0iaXRlbXR5cGUtYm9vayIgbGFuZ3VhZ2U9ImVuZyIgb2Ns
+        Yz0iNjExMDQ3NDkzIiB0aXRsZT0iSXNhYWMncyBzdG9ybSA6IGEgbWFuLCBh
+        IHRpbWUsIGFuZCB0aGUgZGVhZGxpZXN0IGh1cnJpY2FuZSBpbiBoaXN0b3J5
+        Ij4KICAgICAgPGNsYXNzaWZpY2F0aW9ucz4KICAgICAgICA8Y2xhc3MgaW5k
+        MT0iMCIgaW5kMj0iICIgc2ZhPSI5NzYuNDEzOSIgdGFnPSIwODIiLz4KICAg
+        ICAgICA8Y2xhc3MgaW5kMT0iICIgaW5kMj0iICIgc2ZhPSJGMzk0LkcyIiB0
+        YWc9IjA1MCIvPgogICAgICA8L2NsYXNzaWZpY2F0aW9ucz4KICAgIDwvZWRp
+        dGlvbj4KICAgIDxlZGl0aW9uIGVob2xkaW5ncz0iMCIgZm9ybWF0PSJMYXJn
+        ZSBwcmludCBib29rIiBob2xkaW5ncz0iMyIgaXRlbXR5cGU9Iml0ZW10eXBl
+        LWJvb2stbGFyZ2VwcmludCIgbGFuZ3VhZ2U9ImVuZyIgb2NsYz0iNDg4ODQ2
+        MjA3IiB0aXRsZT0iSXNhYWMncyBzdG9ybSA6IGEgbWFuLCBhIHRpbWUsIGFu
+        ZCB0aGUgZGVhZGxpZXN0IGh1cnJpY2FuZSBpbiBoaXN0b3J5Ij4KICAgICAg
+        PGNsYXNzaWZpY2F0aW9ucz4KICAgICAgICA8Y2xhc3MgaW5kMT0iMSIgaW5k
+        Mj0iNCIgc2ZhPSJGMzk0LkcyIiB0YWc9IjA1MCIvPgogICAgICA8L2NsYXNz
+        aWZpY2F0aW9ucz4KICAgIDwvZWRpdGlvbj4KICAgIDxlZGl0aW9uIGF1dGhv
+        cj0iTGFyc29uLCBFcmlrLCAxOTU0LSIgZWhvbGRpbmdzPSIwIiBmb3JtYXQ9
+        IkJvb2siIGhvbGRpbmdzPSIzIiBpdGVtdHlwZT0iaXRlbXR5cGUtYm9vayIg
+        bGFuZ3VhZ2U9ImVuZyIgb2NsYz0iNjQyNDMwMjkwIiB0aXRsZT0iSXNhYWMn
+        cyBzdG9ybSA6IGEgbWFuLCBhIHRpbWUsIGFuZCB0aGUgZGVhZGxpZXN0IGh1
+        cnJpY2FuZSBpbiBoaXN0b3J5LiI+CiAgICAgIDxjbGFzc2lmaWNhdGlvbnM+
+        CiAgICAgICAgPGNsYXNzIGVkaXRpb249IjIxIiBpbmQxPSIwIiBpbmQyPSIw
+        IiBzZjI9IjIxIiBzZmE9Ijk3Ni40MTM5IiB0YWc9IjA4MiIvPgogICAgICAg
+        IDxjbGFzcyBpbmQxPSIwIiBpbmQyPSIwIiBzZmE9IkYzOTQuRzIiIHRhZz0i
+        MDUwIi8+CiAgICAgIDwvY2xhc3NpZmljYXRpb25zPgogICAgPC9lZGl0aW9u
+        PgogICAgPGVkaXRpb24gYXV0aG9yPSJMYXJzb24sIEVyaWssIDE5NTQtIiBl
+        aG9sZGluZ3M9IjMiIGZvcm1hdD0iZUJvb2siIGhvbGRpbmdzPSIwIiBpdGVt
+        dHlwZT0iaXRlbXR5cGUtYm9vay1kaWdpdGFsIiBsYW5ndWFnZT0iZW5nIiBv
+        Y2xjPSI4NDEzMzI1NTIiIHRpdGxlPSJJc2FhYydzIFN0b3JtIj4KICAgICAg
+        PGNsYXNzaWZpY2F0aW9ucz4KICAgICAgICA8Y2xhc3MgaW5kMT0iMCIgaW5k
+        Mj0iNCIgc2ZhPSI5NzYuNDEzOSIgdGFnPSIwODIiLz4KICAgICAgICA8Y2xh
+        c3MgaW5kMT0iICIgaW5kMj0iNCIgc2ZhPSJGMzk0LkcyIiB0YWc9IjA1MCIv
+        PgogICAgICA8L2NsYXNzaWZpY2F0aW9ucz4KICAgIDwvZWRpdGlvbj4KICAg
+        IDxlZGl0aW9uIGVob2xkaW5ncz0iMCIgZm9ybWF0PSJCb29rIiBob2xkaW5n
+        cz0iMiIgaXRlbXR5cGU9Iml0ZW10eXBlLWJvb2siIGxhbmd1YWdlPSJlbmci
+        IG9jbGM9IjQ3NTIwNTk2OSIgdGl0bGU9IklzYWFjJ3Mgc3Rvcm0gOiBhIG1h
+        biwgYSB0aW1lLCBhbmQgdGhlIGRlYWRsaWVzdCBodXJyaWNhbmUgaW4gaGlz
+        dG9yeS4iLz4KICAgIDxlZGl0aW9uIGF1dGhvcj0iTGFyc29uLCBFcmlrLCAx
+        OTU0LSIgZWhvbGRpbmdzPSIwIiBmb3JtYXQ9IkJvb2siIGhvbGRpbmdzPSIx
+        IiBpdGVtdHlwZT0iaXRlbXR5cGUtYm9vayIgbGFuZ3VhZ2U9Iml0YSIgb2Ns
+        Yz0iNjM2MTI2Nzg2IiB0aXRsZT0iSWwgdGlmb25lIGRpIEdhbHZlc3RvbiA6
+        IGlsIHBpw7kgdGVycmliaWxlIHVyYWdhbm8gZGVsbGEgc3RvcmlhIi8+CiAg
+        ICA8ZWRpdGlvbiBlaG9sZGluZ3M9IjAiIGZvcm1hdD0iQm9vayIgaG9sZGlu
+        Z3M9IjEiIGl0ZW10eXBlPSJpdGVtdHlwZS1ib29rIiBsYW5ndWFnZT0iZW5n
+        IiBvY2xjPSI3Mjc0ODEzOTYiIHRpdGxlPSJJc2FhYydzIHN0b3JtIFtEVkRd
+        Ii8+CiAgICA8ZWRpdGlvbiBhdXRob3I9IkxhcnNvbiwgRXJpaywgMTk1NC0i
+        IGVob2xkaW5ncz0iMCIgZm9ybWF0PSJCb29rIiBob2xkaW5ncz0iMSIgaXRl
+        bXR5cGU9Iml0ZW10eXBlLWJvb2siIGxhbmd1YWdlPSJnZXIiIG9jbGM9Ijcz
+        MjY0OTY5NCIgdGl0bGU9IklzYWFjJ3Mgc3Rvcm0gPSBJc2FhY3MgU3R1cm0i
+        Lz4KICAgIDxlZGl0aW9uIGF1dGhvcj0iTGFyc29uLCBFcmlrLCAxOTU0LSIg
+        ZWhvbGRpbmdzPSIwIiBmb3JtYXQ9IkJvb2siIGhvbGRpbmdzPSIxIiBpdGVt
+        dHlwZT0iaXRlbXR5cGUtYm9vayIgbGFuZ3VhZ2U9ImVuZyIgb2NsYz0iNjM3
+        NDk1NTkxIiB0aXRsZT0iSXNhYWMncyBzdG9ybSA9IElzYWFjcyBTdHVybSIv
+        PgogICAgPGVkaXRpb24gYXV0aG9yPSJMYXJzb24sIEVyaWssIDE5NTQtIiBl
+        aG9sZGluZ3M9IjAiIGZvcm1hdD0iQm9vayIgaG9sZGluZ3M9IjEiIGl0ZW10
+        eXBlPSJpdGVtdHlwZS1ib29rIiBsYW5ndWFnZT0iZ2VyIiBvY2xjPSI3NjM3
+        MjAzOSIgdGl0bGU9IklzYWFjJ3Mgc3Rvcm0gPSBJc2FhY3MgU3R1cm0iLz4K
+        ICAgIDxlZGl0aW9uIGF1dGhvcj0iTGFyc29uLCBFcmlrLCAxOTU0LSIgZWhv
+        bGRpbmdzPSIwIiBmb3JtYXQ9IkJvb2siIGhvbGRpbmdzPSIxIiBpdGVtdHlw
+        ZT0iaXRlbXR5cGUtYm9vayIgbGFuZ3VhZ2U9ImVuZyIgb2NsYz0iNTAxMzM2
+        NjcwIiB0aXRsZT0iSXNhYWMncyBzdG9ybSBhIG1hbiwgYSB0aW1lLCBhbmQg
+        dGhlIGRlYWRsaWVzdCBodXJyaWNhbmUgaW4gaGlzdG9yeSIvPgogIDwvZWRp
+        dGlvbnM+CiAgPHJlY29tbWVuZGF0aW9ucz4KICAgIDxncmFwaD5odHRwOi8v
+        Y2hhcnQuYXBpcy5nb29nbGUuY29tL2NoYXJ0P2NodD1wJmFtcDtjaHM9MzUw
+        eDIwMCZhbXA7Y2hkPXQ6OTguNjA1ODMsMS4zOTQxNjk5JmFtcDtjaHR0PUFs
+        bCtFZGl0aW9ucyZhbXA7Y2hkbD1DbGFzc2lmaWVkICg5OC42MSUpfFVuY2xh
+        c3NpZmllZCAoMS4zOSUpPC9ncmFwaD4KICAgIDxmYXN0PgogICAgICA8Z3Jh
+        cGg+aHR0cDovL2NoYXJ0LmFwaXMuZ29vZ2xlLmNvbS9jaGFydD9jaHQ9cCZh
+        bXA7Y2hzPTQ3NXgxNzUmYW1wO2NoZD10Ojk4LjYwNTgzLDk4LjYwNTgzLDk4
+        LjQyODM5JmFtcDtjaGRsPUZsb29kc3xIdXJyaWNhbmVzfFRleGFzLS1HYWx2
+        ZXN0b248L2dyYXBoPgogICAgICA8aGVhZGluZ3M+CiAgICAgICAgPGhlYWRp
+        bmcgaGVsZGJ5PSIzODkwIiBpZGVudD0iOTI3NTczIiBzcmM9ImZhc3QiPkZs
+        b29kczwvaGVhZGluZz4KICAgICAgICA8aGVhZGluZyBoZWxkYnk9IjM4OTAi
+        IGlkZW50PSI5NjQzNjAiIHNyYz0iZmFzdCI+SHVycmljYW5lczwvaGVhZGlu
+        Zz4KICAgICAgICA8aGVhZGluZyBoZWxkYnk9IjM4ODMiIGlkZW50PSIxMjEy
+        MTA2IiBzcmM9ImZhc3QiPlRleGFzLS1HYWx2ZXN0b248L2hlYWRpbmc+CiAg
+        ICAgIDwvaGVhZGluZ3M+CiAgICA8L2Zhc3Q+CiAgICA8ZGRjPgogICAgICA8
+        bW9zdFBvcHVsYXIgaG9sZGluZ3M9IjM4NTciIG5zZmE9Ijk3Ni40MTM5IiBz
+        ZmE9Ijk3Ni40MTM5Ii8+CiAgICAgIDxtb3N0UmVjZW50IGhvbGRpbmdzPSIz
+        ODU3IiBzZmE9Ijk3Ni40MTM5Ii8+CiAgICAgIDxsYXRlc3RFZGl0aW9uIGhv
+        bGRpbmdzPSIxNjEiIHNmMj0iMjIiIHNmYT0iOTc2LjQxMzkiLz4KICAgICAg
+        PGdyYXBoPmh0dHA6Ly9jaGFydC5hcGlzLmdvb2dsZS5jb20vY2hhcnQ/Y2h0
+        PXAmYW1wO2Nocz0zNTB4MjAwJmFtcDtjaGQ9dDo5Ny43NjkzMjUsMC42NTkw
+        NjIxLDAuMDc2MDQ1NjI1LDEuNDk1NTY0JmFtcDtjaHR0PUREQyZhbXA7Y2hk
+        bD05NzYuNDEzOXxGSUN8OTc2LjR8VW5jbGFzc2lmaWVkPC9ncmFwaD4KICAg
+        IDwvZGRjPgogICAgPGxjYz4KICAgICAgPG1vc3RQb3B1bGFyIGhvbGRpbmdz
+        PSIzODU0IiBuc2ZhPSJGMzk0LkcyIiBzZmE9IkYzOTQuRzIiLz4KICAgICAg
+        PG1vc3RSZWNlbnQgaG9sZGluZ3M9IjM4NTQiIHNmYT0iRjM5NC5HMiIvPgog
+        ICAgICA8Z3JhcGg+aHR0cDovL2NoYXJ0LmFwaXMuZ29vZ2xlLmNvbS9jaGFy
+        dD9jaHQ9cCZhbXA7Y2hzPTM1MHgyMDAmYW1wO2NoZD10Ojk3LjY5MzI4LDIu
+        MzA2NzE3NCZhbXA7Y2h0dD1MQ0MmYW1wO2NoZGw9RjM5NC5HMnxVbmNsYXNz
+        aWZpZWQ8L2dyYXBoPgogICAgPC9sY2M+CiAgPC9yZWNvbW1lbmRhdGlvbnM+
+        CiAgPG5hdmlnYXRpb24+CiAgICA8cGFnZXM+CiAgICAgIDxwYWdlPgogICAg
+        ICAgIDxsYWJlbD4xPC9sYWJlbD4KICAgICAgPC9wYWdlPgogICAgICA8cGFn
+        ZT4KICAgICAgICA8bGFiZWw+MjwvbGFiZWw+CiAgICAgICAgPGxpbms+MjU8
+        L2xpbms+CiAgICAgIDwvcGFnZT4KICAgIDwvcGFnZXM+CiAgICA8bmV4dD4y
+        NTwvbmV4dD4KICAgIDxsYXN0PjI1PC9sYXN0PgogIDwvbmF2aWdhdGlvbj4K
+        PC9jbGFzc2lmeT4K
+    http_version: 
+  recorded_at: Thu, 25 Jun 2015 19:31:38 GMT
+- request:
+    method: get
+    uri: http://www.books.google.com/books?bibkeys=OCLC:41002882&jscmd=viewapi
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Location:
+      - http://books.google.com/books?jscmd=viewapi&bibkeys=OCLC%3A41002882
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Thu, 25 Jun 2015 19:31:38 GMT
+      Expires:
+      - Sat, 25 Jul 2015 19:31:38 GMT
+      Cache-Control:
+      - public, max-age=2592000
+      Server:
+      - sffe
+      Content-Length:
+      - '268'
+      X-Xss-Protection:
+      - 1; mode=block
+      Alternate-Protocol:
+      - 80:quic,p=0
+    body:
+      encoding: UTF-8
+      string: "<HTML><HEAD><meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<TITLE>301
+        Moved</TITLE></HEAD><BODY>\n<H1>301 Moved</H1>\nThe document has moved\n<A
+        HREF=\"http://books.google.com/books?jscmd=viewapi&amp;bibkeys=OCLC%3A41002882\">here</A>.\r\n</BODY></HTML>\r\n"
+    http_version: 
+  recorded_at: Thu, 25 Jun 2015 19:31:38 GMT
+- request:
+    method: get
+    uri: http://books.google.com/books?bibkeys=OCLC:41002882&jscmd=viewapi
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Location:
+      - https://books.google.com/books?jscmd=viewapi&bibkeys=OCLC:41002882&hl=en
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/html; charset=UTF-8
+      P3p:
+      - CP="This is not a P3P policy! See http://www.google.com/support/accounts/bin/answer.py?hl=en&answer=151657
+        for more info."
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Thu, 25 Jun 2015 19:31:38 GMT
+      Server:
+      - OFE/0.1
+      Content-Length:
+      - '277'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Set-Cookie:
+      - NID=68=ZUgj9moBr9gzSO4OjErDngGX2Wg3-28ExrWLMRH9Y3f6e0s1KhVSjswd4gp-nHxnO94E28xjCqTqjRPqkVcntgkcJJLgqpL2S0niLD-NNw2xJAjNxWFCokus-jHNzxF_;
+        expires=Fri, 25-Dec-2015 19:31:38 GMT; path=/; domain=.google.com; HttpOnly
+      - PREF=ID=1111111111111111:TM=1435260698:LM=1435260698:V=1:S=oq-G-PT41RuvDAta;
+        expires=Sat, 24-Jun-2017 19:31:38 GMT; path=/; domain=.google.com
+      Alternate-Protocol:
+      - 80:quic,p=0
+    body:
+      encoding: UTF-8
+      string: "<HTML><HEAD><meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<TITLE>302
+        Moved</TITLE></HEAD><BODY>\n<H1>302 Moved</H1>\nThe document has moved\n<A
+        HREF=\"https://books.google.com/books?jscmd=viewapi&amp;bibkeys=OCLC:41002882&amp;hl=en\">here</A>.\r\n</BODY></HTML>\r\n"
+    http_version: 
+  recorded_at: Thu, 25 Jun 2015 19:31:38 GMT
+- request:
+    method: get
+    uri: https://books.google.com/books?bibkeys=OCLC:41002882&hl=en&jscmd=viewapi
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Cookie:
+      - PREF=ID=1111111111111111:TM=1435260698:LM=1435260698:V=1:S=oq-G-PT41RuvDAta;
+        NID=68=ZUgj9moBr9gzSO4OjErDngGX2Wg3-28ExrWLMRH9Y3f6e0s1KhVSjswd4gp-nHxnO94E28xjCqTqjRPqkVcntgkcJJLgqpL2S0niLD-NNw2xJAjNxWFCokus-jHNzxF_
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 25 Jun 2015 19:31:38 GMT
+      Expires:
+      - Thu, 25 Jun 2015 19:31:38 GMT
+      Cache-Control:
+      - private, must-revalidate, max-age=0
+      P3p:
+      - policyref="http://www.google.com/googlebooks/p3p.xml", CP="DSP NON ADM DEV
+        OUR BUS NAV COM INT STA"
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Strict-Transport-Security:
+      - max-age=604800
+      Content-Type:
+      - application/javascript; charset=ISO-8859-1
+      X-Content-Type-Options:
+      - nosniff
+      Content-Disposition:
+      - attachment; filename="f.txt"
+      Server:
+      - OFE/0.1
+      Alternate-Protocol:
+      - 443:quic,p=1
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: var _GBSBookInfo = {"OCLC:41002882":{"bib_key":"OCLC:41002882","info_url":"https://books.google.com/books?id=sOsTAAAAYAAJ\u0026ie=ISO-8859-1\u0026source=gbs_ViewAPI","preview_url":"https://books.google.com/books?id=sOsTAAAAYAAJ\u0026ie=ISO-8859-1\u0026source=gbs_ViewAPI","thumbnail_url":"https://books.google.com/books/content?id=sOsTAAAAYAAJ\u0026printsec=frontcover\u0026img=1\u0026zoom=5","preview":"noview","embeddable":false,"can_download_pdf":false,"can_download_epub":false,"is_pdf_drm_enabled":false,"is_epub_drm_enabled":false}};
+    http_version: 
+  recorded_at: Thu, 25 Jun 2015 19:31:38 GMT
+recorded_with: VCR 2.9.3

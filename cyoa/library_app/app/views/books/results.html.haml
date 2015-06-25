@@ -1,0 +1,16 @@
+%h1 Your search results:
+
+= form_tag('search', :method => "get") do
+  = field_set_tag do
+    = submit_tag 'Try another search'
+ 
+  -if @book_list.class == String
+    %h3 
+      = @book_list
+  -else
+    -@book_list.each do |book|
+      - link_display = "Title: #{book["title"]} Author: #{book["author"]} Format: #{book["format"]}"
+      - query_params = {owi: book["owi"] }
+      = link_to(name = link_display, url = "/books/select_item/#{book["owi"]}" )
+      %br
+      %br

@@ -17,11 +17,7 @@ class Triangle
   end
 
   def scalene
-    if ! (equilateral || isosceles)
-      true
-    else
-      false
-    end
+    ! (equilateral || isosceles)
   end
 
   def check_equilateral

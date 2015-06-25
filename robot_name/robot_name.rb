@@ -4,6 +4,12 @@ class NameCollisionError < RuntimeError
   end
 end
 
+class NameFormatError < RuntimeError
+  def message
+    'The robot name was not in the correct format.'
+  end
+end
+
 class Robot
   attr_accessor :name
 
@@ -24,7 +30,8 @@ class Robot
   end
 
   def validate_generated_name
-    raise NameCollisionError if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+    raise NameCollisionError if @@registry.include?(name)
+    raise NameFormatError if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
   end
 
   def initialize(args = {})
@@ -42,6 +49,9 @@ robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
+#generator = -> { 'CHAPPIE' }
+#Robot.new(name_generator: generator)
+
 generator = -> { 'AA111' }
 Robot.new(name_generator: generator)
 Robot.new(name_generator: generator)

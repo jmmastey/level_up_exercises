@@ -5,13 +5,17 @@ class Robot
 
   @@registry
 
+  def name_generator(args)
+    @name_generator = args[:name_generator]
+    @name = @name_generator.call if @name_generator
+  end
+
   def initialize(args = {})
     @@registry ||= []
-    @name_generator = args[:name_generator]
 
-    if @name_generator
-      @name = @name_generator.call
-    else
+    name_generator(args)
+    
+    if !@name_generator
       generate_char = -> { ('A'..'Z').to_a.sample }
       generate_num = -> { rand(10) }
 
@@ -27,6 +31,6 @@ robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+generator = -> { 'AA111' }
+Robot.new(name_generator: generator)
+Robot.new(name_generator: generator)

@@ -61,6 +61,5 @@ triangles = [
 ]
 
 triangles.each do |sides|
-  tri = Triangle.new(*sides)
-  tri.recite_facts
+  Triangle.new(*sides).recite_facts
 end

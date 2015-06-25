@@ -13,7 +13,10 @@ class Robot
   def random_name_generator
     generate_char = -> { ('A'..'Z').to_a.sample }
     generate_num = -> { rand(10) }
-    @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+
+    alpha = "#{generate_char.call}#{generate_char.call}"
+    numeric = "#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    @name = alpha + numeric
   end
 
   def validate_generated_name

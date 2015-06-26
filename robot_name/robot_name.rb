@@ -31,7 +31,7 @@ class Robot
 
   def validate_generated_name
     raise NameCollisionError if @@registry.include?(name)
-    raise NameFormatError if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
+    raise NameFormatError unless name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
   end
 
   def error_output(e)
@@ -59,10 +59,8 @@ class Robot
   end
 end
 
-robot = Robot.new
-#puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+Robot.new
 
-# Errors!
 generator = -> { 'CHAPPIE' }
 Robot.new(name_generator: generator)
 

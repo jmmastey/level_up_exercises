@@ -18,11 +18,11 @@ Options
 
     -c     Continent: Filter by continent
 
-    -c?    Carnivore?: Filters all non-herbivores (true/false)
-
     -d     Diet: Filter by diet (carnivore/herbivore/insectivore/piscivore)
 
-    -f     Full: Display all of the dinosaur information, not just the name
+    -f     Full Synopsis: Display all dinosaur information, not just the names
+
+    -h     Herbivore?: Filter by herbivores/non-herbivores (true/false)
 
     -i     Info: Filter by additional information about the dinosaur
 

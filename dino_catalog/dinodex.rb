@@ -1,86 +1,68 @@
-require_relative 'dino.rb'
-require_relative 'interface.rb'
-require_relative 'file_system.rb'
-require_relative 'util/data_transformer.rb'
-require_relative 'util/registry.rb'
+require_relative 'dino_importer'
+require_relative 'dino_help'
+require_relative 'dino_exporter'
+require_relative 'dino_lister'
+require_relative 'util/commands'
 
 class Dinodex
-  CONFIG = {
-    data: "config/data.json",
-    help: "config/help.json",
-    welcome: "views/welcome.txt",
-  }
+  WELCOME_FILE = "views/welcome.txt"
+  ALIASES = { "exit" => "end" }
 
   def initialize
-    @fs = FileSystem.new
-    @registry = registry
-    @cli = dino_cli
+    @dino_data = DinoImporter.new.import
+    @exporter = DinoExporter.new(@dino_data)
+    @lister = DinoLister.new(@dino_data)
+    @help = DinoHelp.new
+    start
+  end
 
-    @cli.read("dino:> ") until @cli.quit
+  def start(prompt = "dino:>")
+    print_welcome_message
+    loop { read(prompt) }
   end
 
   private
 
-  def data_from_file(config)
-    data = @fs.csv_to_array(config["file"])
-    keysmap, valsmap = config.values_at("keysmap", "valuesmap")
-    transform_data(keysmap, valsmap, data)
+  def evaluate(input)
+    cmd, params = parse(input)
+    return puts Commands.err_cmd(cmd) unless Commands.valid_cmd?(cmd)
+    cmd = ALIASES[cmd] if ALIASES.key?(cmd)
+    send(cmd, params)
   end
 
-  def dino_cli
-    Interface.new(@registry, help_msgs, welcome_msg)
+  def end(params)
+    return puts Commands.err_params(params) if params.size > 0
+    exit
   end
 
-  def format_data(keys, rows)
-    rows.map { |row| row_to_hash(keys, row) }
+  def export(params)
+    puts @exporter.export(params)
   end
 
-  def get_data(configs)
-    configs.inject([]) do |memo, config|
-      keys, rows = data_from_file(config)
-      format_data(keys, rows) + memo
-    end
+  def filepath(file)
+    File.join(File.expand_path(File.dirname(__FILE__)), file)
   end
 
-  def help_msgs
-    config = @fs.json_to_hash(CONFIG[:help])
-    config.inject({}) do |memo, (key, val)|
-      memo.merge(key => @fs.txt_to_string(val))
-    end
+  def help(params)
+    puts @help.evaluate(params)
   end
 
-  def registry
-    data = get_data(@fs.json_to_hash(CONFIG[:data]))
-    registry = Registry.new(Dino)
-    registry.register_all(data)
-    registry
+  def list(params)
+    puts @lister.evaluate(params)
   end
 
-  def row_to_hash(keys, row)
-    row.each.with_index.inject({}) do |hash, (val, idx)|
-      hash.merge(keys[idx] => val)
-    end
+  def read(prompt)
+    print prompt + ' '
+    evaluate(gets.chomp)
   end
 
-  def transform_data(keysmap, valsmap, data)
-    keys, values = data
-    keys = transform_keys(DataTransformer.new(keysmap), keys)
-    rows = transform_values(DataTransformer.new(valsmap), values)
-    [keys, rows]
+  def parse(input)
+    words = input.split(' ')
+    [words.shift, words.join(' ')]
   end
 
-  def transform_keys(key_transformer, keys)
-    keys.map { |key| key_transformer.transform(key).downcase }
-  end
-
-  def transform_values(val_transformer, rows)
-    rows.map do |row|
-      row.map! { |val| val_transformer.transform(val) }
-    end
-  end
-
-  def welcome_msg
-    @fs.txt_to_string(CONFIG[:welcome])
+  def print_welcome_message(file = WELCOME_FILE)
+    puts File.read(filepath(file))
   end
 end
 

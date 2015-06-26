@@ -10,14 +10,27 @@ class NameFormatError < RuntimeError
   end
 end
 
+class RobotRegistry
+  attr_accessor :names
+
+  def initialize
+    @names = []
+  end
+
+  def add(name)
+    if name.start_with?('ERROR: ')
+      puts "The name '#{name[7..name.length]}' was not added to the repository."
+    else
+      @names << name
+    end
+  end
+end
+
 class Robot
-  attr_accessor :name
+  attr_accessor :name, :generator, :registry
 
-  @@registry
-
-  def name_generator(args)
-    @name_generator = args[:name_generator]
-    @name = @name_generator.call if @name_generator
+  def apply_name
+    @name = generator[:name].call
   end
 
   def random_name_generator
@@ -30,8 +43,8 @@ class Robot
   end
 
   def validate_generated_name
-    raise NameCollisionError if @@registry.include?(name)
     raise NameFormatError unless name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
+    raise NameCollisionError if registry.names.include?(name)
   end
 
   def error_output(e)
@@ -43,8 +56,8 @@ class Robot
   end
 
   def generate_robot_name
-    name_generator(@args)
-    random_name_generator unless @name_generator
+    apply_name if generator[:name]
+    random_name_generator unless generator[:name]
   end
 
   def validate_robot_name
@@ -53,25 +66,38 @@ class Robot
       name_output
     rescue StandardError => e
       error_output(e)
+      @name = "ERROR: #{name}"
     end
   end
 
-  def initialize(args = {})
-    @args = args
-    @@registry ||= []
+  def initialize(registry, generator={})
+    @generator = generator
+    @registry = registry
 
     generate_robot_name
     validate_robot_name
-
-    @@registry << @name
   end
 end
 
-Robot.new
+registry = RobotRegistry.new
+
+robot = Robot.new(registry)
+registry.add(robot.name)
+
+puts '---------------------------'
 
 generator = -> { 'CHAPPIE' }
-Robot.new(name_generator: generator)
+robot = Robot.new(registry, name: generator)
+registry.add(robot.name)
+
+puts '---------------------------'
 
 generator = -> { 'AA111' }
-Robot.new(name_generator: generator)
-Robot.new(name_generator: generator)
+robot = Robot.new(registry, name: generator)
+registry.add(robot.name)
+
+puts '---------------------------'
+
+generator = -> { 'AA111' }
+robot = Robot.new(registry, name: generator)
+registry.add(robot.name)

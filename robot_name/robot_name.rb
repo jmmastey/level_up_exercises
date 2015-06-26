@@ -42,18 +42,26 @@ class Robot
     puts "My pet robot's name is #{name}, but we usually call him sparky."
   end
 
-  def initialize(args = {})
-    @@registry ||= []
-
-    name_generator(args)
+  def generate_robot_name
+    name_generator(@args)
     random_name_generator unless @name_generator
+  end
 
+  def validate_robot_name
     begin
       validate_generated_name
       name_output
     rescue StandardError => e
       error_output(e)
     end
+  end
+
+  def initialize(args = {})
+    @args = args
+    @@registry ||= []
+
+    generate_robot_name
+    validate_robot_name
 
     @@registry << @name
   end

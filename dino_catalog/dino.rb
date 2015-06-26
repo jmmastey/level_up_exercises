@@ -1,6 +1,6 @@
 class Dino
   attr_accessor :name, :period, :continent,
-                :diet, :weight, :locomotion, :info
+    :diet, :weight, :locomotion, :info
 
   def size(threshhold = 4000)
     return '' unless @weight

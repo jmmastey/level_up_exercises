@@ -6,7 +6,7 @@ require_relative 'util/commands'
 
 class Dinodex
   WELCOME_FILE = "views/welcome.txt"
-  ALIASES = { "exit" => "end" }
+  ALIASES = { "exit" => "quit" }
 
   def initialize
     @dino_data = DinoImporter.new.import
@@ -30,7 +30,7 @@ class Dinodex
     send(cmd, params)
   end
 
-  def end(params)
+  def quit(params)
     return puts Commands.err_params(params) if params.size > 0
     exit
   end

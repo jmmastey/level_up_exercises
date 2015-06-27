@@ -7,7 +7,7 @@ class DinosaurFileReader
   end
 
   def read_file
-    @values = CSV.read (@path )
+    @values = CSV.read @path, headers: true
     parse_raw_data
   end
 

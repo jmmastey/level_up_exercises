@@ -52,9 +52,7 @@ class DinosaurCollection
   end
 
   def select_carnivores
-    @dinosaurs = @dinosaurs.select do |dino|
-      (dino.carnivore?)
-    end
+    @dinosaurs = @dinosaurs.select { |dino| (dino.carnivore?) }
     self
   end
 
@@ -67,18 +65,15 @@ class DinosaurCollection
     self
   end
 
+
+
   def select_big
-    @dinosaurs = @dinosaurs.select do |dino|
-      (!dino.weight_in_tons.nil? && dino.weight_in_tons > 2.0)
-    end
+    @dinosaurs = @dinosaurs.select { |dino| (dino.big?) }
     self
   end
 
   def select_small
-    @dinosaurs = @dinosaurs.select do |dino|
-      #  p dino.is_a?(Dinosaur)
-      (!dino.weight_in_tons.nil? && dino.weight_in_tons <= 2.0)
-    end
+    @dinosaurs = @dinosaurs.select { |dino| (dino.small?) }
     self
   end
 

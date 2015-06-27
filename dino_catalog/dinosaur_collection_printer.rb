@@ -7,7 +7,7 @@ class DinosaurCollectionPrinter
   end
 
   def print_delimiter(output)
-    output + ("_")*40+"\n"
+    output + ("_") * 40 + "\n"
   end
 
   def print_header

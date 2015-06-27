@@ -11,7 +11,6 @@ class UserFileReader < DinosaurFileReader
       dino.description = row[6]
       dinosaurs << dino
     end
-    dinosaurs.delete_at(0)
     dinosaurs
   end
 end

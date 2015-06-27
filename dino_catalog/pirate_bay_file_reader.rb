@@ -9,7 +9,6 @@ class PirateBayFileReader < DinosaurFileReader
       dino.walking = row[4]
       dinosaurs << dino
     end
-    dinosaurs.delete_at(0)
     dinosaurs
   end
 end

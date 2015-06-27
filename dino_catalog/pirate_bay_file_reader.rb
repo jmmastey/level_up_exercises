@@ -2,11 +2,11 @@ class PirateBayFileReader < DinosaurFileReader
   def parse_raw_data
     dinosaurs = []
     values.each do |row|
-      dino = Dinosaur.new(row[0])
-      dino.period = row[1]
-      row[2] == 'Yes' ? (dino.diet = 'Carnivore') : (dino.diet = 'Vegetarian')
-      dino.weight = row[3]
-      dino.walking = row[4]
+      dino = Dinosaur.new(row['Genus'])
+      dino.period = row['Period']
+      row['Carnivore'] == 'Yes' ? (dino.diet = 'Carnivore') : (dino.diet = 'Vegetarian')
+      dino.weight = row['Weight']
+      dino.walking = row['Walking']
       dinosaurs << dino
     end
     dinosaurs

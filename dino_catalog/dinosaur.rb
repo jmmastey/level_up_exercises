@@ -17,11 +17,11 @@ class Dinosaur
   WEIGHT_LIMIT = 2.0
 
   def big?
-    !weight_in_tons.nil? && weight_in_tons > WEIGHT_LIMIT
+    weight_in_tons > WEIGHT_LIMIT unless weight_in_tons.nil?
   end
 
   def small?
-    !weight_in_tons.nil? && weight_in_tons <= WEIGHT_LIMIT
+    weight_in_tons <= WEIGHT_LIMIT unless weight_in_tons.nil?
   end
 
   def facts_hash

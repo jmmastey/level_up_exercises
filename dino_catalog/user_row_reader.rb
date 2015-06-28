@@ -1,7 +1,5 @@
-class UserFileReader < DinosaurFileReader
-  def parse_raw_data
-    dinosaurs = []
-    values.each do |row|
+class UserRowReader < DinosaurRowReader
+  def parse_row(row)
       dino = Dinosaur.new(row['NAME'])
       dino.period = row['PERIOD']
       dino.continent = row['CONTINENT']
@@ -9,8 +7,8 @@ class UserFileReader < DinosaurFileReader
       dino.weight = row['WEIGHT_IN_LBS']
       dino.walking = row['WALKING']
       dino.description = row['DESCRIPTION']
-      dinosaurs << dino
+      dino
     end
-    dinosaurs
+
   end
-end
+

@@ -1,8 +1,9 @@
 require 'csv'
-require_relative 'dinosaur_file_reader.rb'
-require_relative 'pirate_bay_file_reader.rb'
-require_relative 'user_file_reader.rb'
+
 require_relative 'dinosaur.rb'
+require_relative 'dinosaur_row_reader.rb'
+require_relative 'pirate_row_reader.rb'
+require_relative 'user_row_reader.rb'
 require_relative 'dinosaur_collection_printer.rb'
 
 class DinosaurCollection
@@ -14,26 +15,22 @@ class DinosaurCollection
   end
 
   def init_readers
+    options ={ headers: true}
     Dir["*.csv"].each do |file|
-      line = CSV.read file
-      case line[0][0]
-        when "Genus"
-          init_pirate_bay_reader(file)
-        when "NAME"
-          init_user_file_reader(file)
-        else
-          raise "Unknown csv file found: :{file}"
+      CSV.foreach(file, options) do |row|
+          init_pirate_bay_row(row) if row.header?("Genus")
+          init_user_row(row) if row.header?("NAME")
+        #  raise "Unknown csv row found: :{file}-:{row}"
       end
     end
   end
 
-  def init_user_file_reader(file)
-    @dinosaurs += UserFileReader.new(file).dinosaurs
+  def init_pirate_bay_row(row)
+    @dinosaurs << PirateBayRowReader.new.parse_row(row)
   end
 
-  def init_pirate_bay_reader(file)
-    pirate_bay_reader = PirateBayFileReader.new(file)
-    @dinosaurs += pirate_bay_reader.dinosaurs
+  def init_user_row(row)
+    @dinosaurs << UserRowReader.new.parse_row(row)
   end
 
   def select_by_walk_type(walk_type = 'Biped')
@@ -57,15 +54,11 @@ class DinosaurCollection
   end
 
   def get_by_period(period = 'Jurassic')
-    # p @dinosaurs[0].is_a?(Dinosaur)
     @dinosaurs = @dinosaurs.select do |dino|
-      #  p dino.is_a?(Dinosaur)
       (dino.period.include? period)
     end
     self
   end
-
-
 
   def select_big
     @dinosaurs = @dinosaurs.select { |dino| (dino.big?) }

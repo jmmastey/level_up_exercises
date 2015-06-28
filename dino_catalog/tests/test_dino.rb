@@ -27,42 +27,6 @@ class TestDinosaur < Minitest::Test
   end
 end
 
-class TestPirateBayFileReader < Minitest::Test
-  def setup
-    @dino_reader = PirateBayFileReader.new 'african_dinosaur_export.csv'
-  end
-
-  def test_that_dinasours_is_an_array
-    assert_equal true, @dino_reader.dinosaurs.instance_of?(Array)
-  end
-
-  def test_that_dinasours_has_7_items
-    assert_equal 7, @dino_reader.dinosaurs.length
-  end
-
-  def test_that_first_dinasour_is_abrictosaurus
-    assert_equal 'Abrictosaurus', @dino_reader.dinosaurs[0].name
-  end
-end
-
-class TestUserFileReader < Minitest::Test
-  def setup
-    @dino_reader = UserFileReader.new 'dinodex.csv'
-  end
-
-  def test_that_dinasours_is_an_array
-    assert_equal true, @dino_reader.dinosaurs.instance_of?(Array)
-  end
-
-  def test_that_dinasours_has_10_items
-    assert_equal 10, @dino_reader.dinosaurs.length
-  end
-
-  def test_that_first_dinasour_is_albertosaurus
-    assert_equal 'Albertosaurus', @dino_reader.dinosaurs[0].name
-  end
-end
-
 class TestDinosaurCollection < Minitest::Test
   def setup
     @dinos = DinosaurCollection.new

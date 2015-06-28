@@ -8,12 +8,12 @@ class Dinodex
   WELCOME_FILE = "views/welcome.txt"
   ALIASES = { "exit" => "quit" }
 
-  def initialize
+  def initialize(welcome_file = WELCOME_FILE)
     @dino_data = DinoImporter.new.import
     @exporter = DinoExporter.new(@dino_data)
     @lister = DinoLister.new(@dino_data)
     @help = DinoHelp.new
-    start
+    @welcome_msg = File.read(filepath(welcome_file))
   end
 
   def start(prompt = "dino:>")
@@ -61,9 +61,9 @@ class Dinodex
     [words.shift, words.join(' ')]
   end
 
-  def print_welcome_message(file = WELCOME_FILE)
-    puts File.read(filepath(file))
+  def print_welcome_message
+    puts @welcome_msg
   end
 end
 
-Dinodex.new
+Dinodex.new.start

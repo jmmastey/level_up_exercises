@@ -1,0 +1,12 @@
+
+---------
+
+Commands:
+
+    help:     Use "help [command]" for information about a command
+    list:     Use "list [options]" to list the dinosaurs in the database
+    export:   Export the database to a file
+    exit:     Use "exit" to quit the Dinodex
+
+---------
+

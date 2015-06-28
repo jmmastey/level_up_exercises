@@ -1,0 +1,19 @@
+
+---------
+
+Name
+    help -- get more information about a command
+
+Synopsis
+    help [command]
+
+Description
+    help formats and displays the manual pages. If you specify a command, help only looks in that section of the manual.
+
+Example
+
+    help list
+    => Display the manual page for the "list" command
+
+---------
+

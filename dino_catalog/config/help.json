@@ -1,0 +1,7 @@
+{
+  "exit": "views/help/exit.txt",
+  "export": "views/help/export.txt",
+  "help": "views/help/help.txt",
+  "list": "views/help/list.txt",
+  "manual": "views/help/manual.txt"
+}

@@ -17,7 +17,7 @@ class Dinodex
   end
 
   def start(prompt = "dino:>")
-    print_welcome_message
+    puts @welcome_msg
     loop { read(prompt) }
   end
 
@@ -59,10 +59,6 @@ class Dinodex
   def parse(input)
     words = input.split(' ')
     [words.shift, words.join(' ')]
-  end
-
-  def print_welcome_message
-    puts @welcome_msg
   end
 end
 

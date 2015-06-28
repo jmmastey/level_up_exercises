@@ -1,7 +1,7 @@
 require 'csv'
 require_relative 'dinosaur.rb'
 require_relative 'dinosaur_row_reader.rb'
-require_relative 'pirate_row_reader.rb'
+require_relative 'pirate_bay_row_reader.rb'
 require_relative 'user_row_reader.rb'
 require_relative 'dinosaur_collection_printer.rb'
 
@@ -14,11 +14,11 @@ class DinosaurCollection
   end
 
   def init_readers
-    options ={ headers: true}
+    options = { headers: true }
     Dir["*.csv"].each do |file|
       CSV.foreach(file, options) do |row|
-          init_pirate_bay_row(row) if row.header?("Genus")
-          init_user_row(row) if row.header?("NAME")
+        init_pirate_bay_row(row) if row.header?("Genus")
+        init_user_row(row) if row.header?("NAME")
       end
     end
   end

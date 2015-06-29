@@ -42,3 +42,4 @@ confidence(cohorts[1], 'B')
 puts
 
 # 3. Confidence level that the current leader is in fact better than random.
+# (done in confidence)

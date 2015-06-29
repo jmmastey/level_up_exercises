@@ -7,8 +7,8 @@ class RobotFactory
     @registry = registry
   end
 
-  def create_robot(options = {})
-    name = get_robot_name(options)
+  def create_robot(name = nil)
+    name ||= generator.random_name
     validator.validate_name(name, registry)
   rescue StandardError => e
     report_creation_error(e, name)
@@ -23,11 +23,6 @@ class RobotFactory
     registry.add_name(robot.name)
     report_robot_creation(robot.name)
     robot
-  end
-
-  def get_robot_name(options)
-    return options[:name] if options[:name]
-    generator.random_name
   end
 
   def report_robot_creation(name)

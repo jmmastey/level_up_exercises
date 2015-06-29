@@ -1,32 +1,44 @@
 class NameCollisionError < RuntimeError; end
 
+class RobotRegistry
+  @registry = []
+  NAME_COLL_ERR_MSG = "There was a problem generating the robot name!"
+
+  def self.add_to_registry(name)
+    raise NameCollisionError, NAME_COLL_ERR_MSG if @registry.include?(name)
+    @registry << name
+    puts "robot list is #{@registry}"
+    rescue NameCollisionError => e
+      puts "Error is #{e}"
+  end
+end
+
 class Robot
   attr_accessor :name
 
-  @@registry
-
   def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+    @name = args[:name_generator] || generate_name
+    puts "Name is #{@name}"
+    RobotRegistry.add_to_registry(@name)
+  end
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+  def generate_name
+    @name = ('A'..'Z').to_a.sample(2).join + rand(0..999).to_s.rjust(3, "0")
+  end
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
-
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+  def name_valid?
+    @name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
   end
 end
 
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
-
+robot = Robot.new
+puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 # Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+generator = -> { 'AA111' }
+Robot.new(name_generator: generator.call)
+puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+Robot.new(name_generator: generator.call)
+robot = Robot.new
+puts "My pet robot's name is #{robot.name}, but we usually call him sparky."

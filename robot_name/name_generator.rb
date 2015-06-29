@@ -1,17 +1,15 @@
 class NameGenerator
   def random_name
-    alpha = "#{generate_char}#{generate_char}"
-    numeric = "#{generate_num}#{generate_num}#{generate_num}"
-    alpha << numeric
+    "#{random_char(2)}#{random_num(3)}"
   end
 
   private
 
-  def generate_char
-    ('A'..'Z').to_a.sample
+  def random_char(value)
+    ('A'..'Z').to_a.sample(value).join('')
   end
 
-  def generate_num
-    rand(10)
+  def random_num(value)
+    (0..10).to_a.sample(value).join('')
   end
 end

@@ -1,6 +1,6 @@
 class Arrowhead
   # This seriously belongs in a database.
-  UNKNOWN_REG_MSG =  "Unknown region, please provide a valid region."
+  UNKNOWN_REG_MSG = "Unknown region, please provide a valid region."
   UNKNOWN_SHAPE_MSG = 'Unknown shape value.' \
   'Are you sure you know what you\'re talking about?'
 

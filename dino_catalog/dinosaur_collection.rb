@@ -81,4 +81,6 @@ class DinosaurCollection
     end
     output
   end
+
+  private :init_pirate_bay_row, :init_pirate_bay_row, :init_user_row
 end

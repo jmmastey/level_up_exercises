@@ -1,4 +1,3 @@
-
 # Killer facts about triangles AWW YEAH
 class Triangle
   attr_accessor :side1, :side2, :side3
@@ -10,32 +9,37 @@ class Triangle
   end
 
   def recite_facts
-    puts equilateral || isosceles || scalene
+    recite_triangle_type
     angles = calculate_angles(side1, side2, side3)
-    puts 'The angles of this triangle are ' + angles.join(',')
-    puts 'This triangle is also a right triangle!' if angles.include? 90
+    puts 'The angles of this triangle are ' << angles.join(',')
+    puts 'This triangle is also a right triangle!' if angles.include?(90)
     puts ''
   end
 
-  def equilateral
-    return false unless side1 == side2 && side2 == side3
-    'This triangle is equilateral!'
+  def recite_triangle_type
+    puts "This triangle is equilateral!" if equilateral?
+    puts "This triangle is isosceles! "\
+    "Also, that word is hard to type." if isosceles?
+    puts "This triangle is scalene and mathematically boring." if scalene?
   end
 
-  def isosceles
-    return false unless [side1, side2, side3].uniq.length == 2
-    puts 'This triangle is isosceles! Also, that word is hard to type.'
+  def equilateral?
+    side1 == side2 && side2 == side3
   end
 
-  def scalene
-    return false if equilateral || isosceles
-    'This triangle is scalene and mathematically boring.'
+  def isosceles?
+    [side1, side2, side3].uniq.length == 2
+  end
+
+  def scalene?
+    !(equilateral? || isosceles?)
   end
 
   def calculate_angles(a, b, c)
-    [radians_to_degrees(get_radians(a, b, c)),
-     radians_to_degrees(get_radians(b, c, a)),
-     radians_to_degrees(get_radians(c, b, a)),
+    [
+      radians_to_degrees(get_radians(a, b, c)),
+      radians_to_degrees(get_radians(b, c, a)),
+      radians_to_degrees(get_radians(c, b, a)),
     ]
   end
 
@@ -51,6 +55,7 @@ end
 triangles = [
   [5, 5, 5],
   [5, 12, 13],
+  [4, 3, 4],
 ]
 triangles.each do |sides|
   tri = Triangle.new(*sides)

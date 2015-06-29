@@ -9,7 +9,11 @@ class RobotFactory
 
   def create_robot(options = {})
     name = get_robot_name(options)
-    check_robot_name(name)
+    validator.validate_name(name, registry)
+  rescue StandardError => e
+    report_creation_error(e, name)
+  else
+    create_new_robot_in_registry(name)
   end
 
   private
@@ -24,14 +28,6 @@ class RobotFactory
   def get_robot_name(options)
     return options[:name] if options[:name]
     generator.random_name
-  end
-
-  def check_robot_name(name)
-    validator.validate_name(name, registry)
-  rescue StandardError => e
-    report_creation_error(e, name)
-  else
-    create_new_robot_in_registry(name)
   end
 
   def report_robot_creation(name)

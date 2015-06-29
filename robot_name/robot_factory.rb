@@ -28,13 +28,11 @@ class RobotFactory
   end
 
   def check_robot_name(name)
-    begin
-      validator.validate_name(name, registry)
-    rescue StandardError => e
-      report_creation_error(e, name)
-    else
-      create_new_robot_in_registry(name)
-    end
+    validator.validate_name(name, registry)
+  rescue StandardError => e
+    report_creation_error(e, name)
+  else
+    create_new_robot_in_registry(name)
   end
 
   def report_robot_creation(name)

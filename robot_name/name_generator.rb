@@ -5,6 +5,6 @@ class NameGenerator
 
     alpha = "#{generate_char.call}#{generate_char.call}"
     numeric = "#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    alpha + numeric
+    alpha << numeric
   end
 end

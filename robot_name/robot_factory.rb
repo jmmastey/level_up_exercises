@@ -13,13 +13,13 @@ class RobotFactory
   rescue StandardError => e
     report_creation_error(e, name)
   else
-    create_new_robot_in_registry(name)
+    robot = Robot.new(name)
+    add_robot_to_registry(robot)
   end
 
   private
 
-  def create_new_robot_in_registry(name)
-    robot = Robot.new(name)
+  def add_robot_to_registry(robot)
     registry.add_name(robot.name)
     report_robot_creation(robot.name)
     robot

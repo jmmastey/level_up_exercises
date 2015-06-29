@@ -1,32 +1,26 @@
-class NameCollisionError < RuntimeError; end
+require_relative 'errors'
+require_relative 'robot'
+require_relative 'name_generator'
+require_relative 'name_validator'
+require_relative 'robot_registry'
+require_relative 'robot_factory'
 
-class Robot
-  attr_accessor :name
+generator = NameGenerator.new
+validator = NameValidator.new
+registry = RobotRegistry.new
 
-  @@registry
+factory = RobotFactory.new(generator, validator, registry)
 
-  def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+# Will generate a name for this robot since no name was provided.
+factory.create_robot
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+# Will attempt to create a robot with this name, but will fail
+# due to format violation.
+factory.create_robot('CHAPPIE')
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
+# Will create the first robot with name; second robot creation will fail.
+factory.create_robot('AA111')
+factory.create_robot('AA111')
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
-  end
-end
-
-robot = Robot.new
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
-
-# Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+# Demonstrates only the valid robot names were stored in the registry.
+puts registry.names

@@ -22,9 +22,8 @@ class RobotFactory
   end
 
   def give_robot_name(options)
-    name = options[:name] if options[:name]
-    name = generator.random_name unless options[:name]
-    name
+    return options[:name] if options[:name]
+    generator.random_name
   end
 
   def check_robot_name(name)

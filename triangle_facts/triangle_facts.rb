@@ -9,45 +9,37 @@ class Triangle
   end
 
   def recite_facts
-    recite_triangle_type
-    angles = calculate_angles(side1, side2, side3)
-    puts 'The angles of this triangle are ' << angles.join(',')
-    puts 'This triangle is also a right triangle!' if angles.include?(90)
-    puts ''
-  end
-
-  def recite_triangle_type
     puts "This triangle is equilateral!" if equilateral?
     puts "This triangle is isosceles! "\
     "Also, that word is hard to type." if isosceles?
     puts "This triangle is scalene and mathematically boring." if scalene?
+    puts "The angles of this triangle are #{angles.join(',')}"
+    puts "This triangle is also a right triangle!" if angles.include?(90)
+    puts "\n"
   end
 
   def equilateral?
-    side1 == side2 && side2 == side3
+    @side1 == @side2 && @side2 == @side3
   end
 
   def isosceles?
-    [side1, side2, side3].uniq.length == 2
+    [@side1, @side2, @side3].uniq.length == 2
   end
 
   def scalene?
     !(equilateral? || isosceles?)
   end
 
-  def calculate_angles(a, b, c)
+  def angles
     [
-      radians_to_degrees(get_radians(a, b, c)),
-      radians_to_degrees(get_radians(b, c, a)),
-      radians_to_degrees(get_radians(c, b, a)),
+      calculate_angle(@side1, @side2, @side3),
+      calculate_angle(@side2, @side3, @side1),
+      calculate_angle(@side3, @side2, @side1),
     ]
   end
 
-  def get_radians(a, b, c)
-    Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c))
-  end
-
-  def radians_to_degrees(rads)
+  def calculate_angle(a, b, c)
+    rads = Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c))
     (rads * 180 / Math::PI).round
   end
 end

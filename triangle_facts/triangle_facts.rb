@@ -19,11 +19,11 @@ class Triangle
   end
 
   def equilateral?
-    @side1 == @side2 && @side2 == @side3
+    side1 == side2 && side2 == side3
   end
 
   def isosceles?
-    [@side1, @side2, @side3].uniq.length == 2
+    [side1, side2, side3].uniq.length == 2
   end
 
   def scalene?
@@ -32,14 +32,14 @@ class Triangle
 
   def angles
     [
-      calculate_angle(@side1, @side2, @side3),
-      calculate_angle(@side2, @side3, @side1),
-      calculate_angle(@side3, @side2, @side1),
+      calculate_angle(side1, side2, side3),
+      calculate_angle(side2, side3, side1),
+      calculate_angle(side3, side2, side1),
     ]
   end
 
-  def calculate_angle(a, b, c)
-    rads = Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c))
+  def calculate_angle(sideA, sideB, sideC)
+    rads = Math.acos((sideB**2 + sideC**2 - sideA**2) / (2.0 * sideB * sideC))
     (rads * 180 / Math::PI).round
   end
 end

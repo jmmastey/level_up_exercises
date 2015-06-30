@@ -15,19 +15,17 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
-    else
-      raise "Unknown region, please provide a valid region."
+    shapes = get_if_included(:region, region, CLASSIFICATIONS)
+    arrowhead = get_if_included(:shape, shape, shapes)
+    "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
+  end
+
+  def self.get_if_included(category, key, collection)
+    unless collection.include? key
+      raise "Unknown #{category}.  Please provide a valid #{category}."
     end
+    collection[key]
   end
 end
 

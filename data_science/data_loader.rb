@@ -1,5 +1,4 @@
 require 'json'
-require 'pry'
 # This class handles the json data.
 class DataLoader
   attr_accessor :json_data

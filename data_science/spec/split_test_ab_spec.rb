@@ -1,12 +1,11 @@
 require_relative 'spec_helper'
-require 'pry'
 RSpec.describe SplitTestAB do
   let(:data) { DataLoader.new('../testabdata_sample.json') }
   let(:splitTestAb) { SplitTestAB.new(data.json_data) }
   NUM_CONVER_A = 13
   NUM_CONVER_B = 10
-  COHORTA_ERROR_BAR = [0.26727411833986714,0.6292776057980639]
-  COHORTB_ERROR_BAR = [0.11245469104354977,0.3753501870052307]
+  COHORTA_ERROR_BAR = [0.26727411833986714, 0.6292776057980639]
+  COHORTB_ERROR_BAR = [0.11245469104354977, 0.3753501870052307]
   CONVERA_RATE = 0.4482758620689655
   CONVERB_RATE = 0.24390243902439024
   CONFI_SCORE =  0.07292591052499331
@@ -21,18 +20,18 @@ RSpec.describe SplitTestAB do
   describe '#error_bars' do
     it 'returns error bars for each cohort' do
       expect(splitTestAb.cohorta.error_bars).to \
-       eq(COHORTA_ERROR_BAR)
+        eq(COHORTA_ERROR_BAR)
       expect(splitTestAb.cohortb.error_bars).to \
-       eq(COHORTB_ERROR_BAR)
+        eq(COHORTB_ERROR_BAR)
     end
   end
 
   describe '#conversion_rate' do
     it 'returns the conversion rate for each cohort' do
       expect(splitTestAb.cohorta.conversion_rate).to \
-       eq(CONVERA_RATE)
+        eq(CONVERA_RATE)
       expect(splitTestAb.cohortb.conversion_rate).to \
-       eq(CONVERB_RATE)
+        eq(CONVERB_RATE)
     end
   end
 

@@ -1,5 +1,4 @@
 require_relative 'spec_helper'
-require 'pry'
 RSpec.describe DataLoader do
   let(:data) { DataLoader.new('../testabdata_sample.json') }
   SAMPLE_SIZE = 70

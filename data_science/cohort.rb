@@ -1,4 +1,3 @@
-require 'pry'
 # This class is used to define errors for invalid cohorts
 class InvalidCohortError < RuntimeError
   def message
@@ -35,4 +34,3 @@ class Cohort
     @nonconversions += 1 if result == 0
   end
 end
-

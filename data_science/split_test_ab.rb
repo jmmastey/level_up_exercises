@@ -1,7 +1,6 @@
 require_relative 'data_loader.rb'
 require_relative 'cohort.rb'
 require 'abanalyzer'
-require 'pry'
 # Error classes for missing labels
 class InvalidCohortLblError < RuntimeError
   def message

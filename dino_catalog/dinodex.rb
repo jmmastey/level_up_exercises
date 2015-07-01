@@ -18,10 +18,17 @@ class DinoDex
   private
 
   def create_file_path
-    if File.extname(options[:path]).empty?
-      @options[:path] += '/' unless options[:path].split('').last == '/'
-      @options[:path] += '*.csv' if File.extname(options[:path]).empty?
-    end
+    return unless File.extname(options[:path]).empty?
+    @options[:path] += '/' unless ends_with_slash?(options[:path])
+    @options[:path] += '*.csv' if no_extension?(options[:path])
+  end
+
+  def no_extension?(path)
+    File.extname(path).empty?
+  end
+
+  def ends_with_slash?(path)
+    path.split('').last == '/'
   end
 end
 

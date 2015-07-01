@@ -14,7 +14,16 @@ class Importer
   end
 
   def load_file(file)
-    CSV.read(file)
+    create_data_set(CSV.read(file, headers: true))
+  end
+
+  def create_data_set(file_contents)
+    file_contents.by_row.each do |row|
+      data = {}
+      row.headers.each do |header|
+        data[header] = row[header]
+      end
+    end
   end
 
   def file_is_csv?(file)

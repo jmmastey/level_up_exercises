@@ -1,2 +1,3 @@
-require_relative '../split_test.rb'
-require_relative '../load_data.rb'
+require_relative '../split_test_ab'
+require_relative '../data_loader'
+require_relative '../cohort'

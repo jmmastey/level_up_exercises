@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative 'importer'
+require_relative 'dinosaur'
 
 class DinoDex
   attr_accessor :path
@@ -8,7 +9,7 @@ class DinoDex
   def initialize(path = 'data/*.csv')
     @path = path
     create_file_path
-    @data = Importer.new(path)
+    @data = Importer.new(path, Dinosaur)
   end
 
   private

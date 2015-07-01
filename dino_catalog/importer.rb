@@ -1,7 +1,12 @@
 require 'csv'
 
 class Importer
-  def initialize(path)
+  attr_reader :entity
+  attr_accessor :data_set
+
+  def initialize(path, entity)
+    self.data_set = {}
+    @entity = entity
     get_data_files(path)
   end
 
@@ -23,6 +28,7 @@ class Importer
       row.headers.each do |header|
         data[header] = row[header]
       end
+      data_set[data[:name]] = entity.new(data)
     end
   end
 

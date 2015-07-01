@@ -1,13 +1,14 @@
 require 'csv'
 
 class Importer
-  attr_reader :entity
+  attr_reader :entity, :options
   attr_accessor :data_set
 
-  def initialize(path, entity)
+  def initialize(options, entity)
     self.data_set = {}
     @entity = entity
-    get_data_files(path)
+    @options = options
+    get_data_files(options[:path])
   end
 
   private
@@ -19,7 +20,11 @@ class Importer
   end
 
   def load_file(file)
-    create_data_set(CSV.read(file, headers: true))
+    # The next line is necessary to make sure that the option for
+    # the path is not sent to the CSV reading functionality.
+    options.delete(:path)
+    
+    create_data_set(CSV.read(file, options))
   end
 
   def create_data_set(file_contents)

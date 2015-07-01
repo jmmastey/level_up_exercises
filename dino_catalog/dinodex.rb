@@ -4,22 +4,24 @@ require_relative 'importer'
 require_relative 'dinosaur'
 
 class DinoDex
-  attr_accessor :path
+  attr_accessor :options
 
-  def initialize(path = 'data/*.csv')
-    @path = path
+  def initialize(config = {})
+    @options = {
+      path: config[:path] || 'data/*.csv',
+      headers: true
+    }
     create_file_path
-    @data = Importer.new(path, Dinosaur)
+    @data = Importer.new(options, Dinosaur)
   end
 
   private
 
   def create_file_path
-    if File.extname(path).empty?
-      @path = path + '/' unless path.split('').last == '/'
-      @path = path + '*.csv' if File.extname(path).empty?
+    if File.extname(options[:path]).empty?
+      @options[:path] += '/' unless options[:path].split('').last == '/'
+      @options[:path] += '*.csv' if File.extname(options[:path]).empty?
     end
-    @path
   end
 end
 

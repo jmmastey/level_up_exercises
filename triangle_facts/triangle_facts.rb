@@ -8,43 +8,44 @@ class Triangle
     @side3 = side3
   end
 
-  def equilateral?
+  def equilateral
     side1 == side2 && side2 == side3
   end
 
-  def isosceles?
+  def isosceles
     [side1, side2, side3].uniq.length == 2
   end
 
-  def scalene?
-    !(equilateral || isosceles)
+  def scalene
+    ! (equilateral || isosceles)
   end
 
   def recite_facts
     recite_side_facts
     recite_angle_facts
-    puts('')
+    puts ''
   end
 
   def recite_side_facts
-    puts('This triangle is equilateral!') if equilateral?
-    if isosceles?
-      puts('This triangle is isosceles! Also, that word is hard to type.')
+    puts 'This triangle is equilateral!' if equilateral
+    if isosceles
+      puts 'This triangle is isosceles! Also, that word is hard to type.'
     end
-    puts('This triangle is scalene and mathematically boring.') if scalene?
+    puts 'This triangle is scalene and mathematically boring.' if scalene
   end
 
   def recite_angle_facts
     angles = calculate_angles(side1, side2, side3)
-    puts('The angles of this triangle are ' << angles.join(','))
+    puts 'The angles of this triangle are ' + angles.join(',')
 
-    puts('This triangle is also a right triangle!') if angles.include? 90
+    puts 'This triangle is also a right triangle!' if angles.include? 90
   end
 
   def calculate_angles(a, b, c)
     [calculate_angle_opposite_first_side(a, b, c),
      calculate_angle_opposite_first_side(b, a, c),
-     calculate_angle_opposite_first_side(c, b, a)]
+     calculate_angle_opposite_first_side(c, b, a),
+    ]
   end
 
   def radians_to_degrees(rads)

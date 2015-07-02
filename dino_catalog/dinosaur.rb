@@ -18,6 +18,8 @@ class Dinosaur
   end
 
   def initialize(data)
-    puts "Dinosaur Data: #{data}"
+    data.each do |header, value|
+      method("#{header}=").call(value)
+    end
   end
 end

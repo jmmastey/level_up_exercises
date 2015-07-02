@@ -16,7 +16,7 @@ class DinoDex
       path: config[:path] || 'data/*.csv',
       headers: true,
       converters: config[:converters] || Converter.dino_data_convert,
-      header_converters: config[:header_converters] || header_normalize,
+      header_converters: config[:header_converters] || Converter.header_convert,
     }
     create_file_path
     @data = Importer.new(options, Dinosaur)
@@ -67,21 +67,6 @@ class DinoDex
 
   def ends_with_slash?(path)
     path.split('').last == '/'
-  end
-
-  def header_normalize
-    lambda do |header|
-      header.downcase!
-      rename_columns(header)
-      header.to_sym
-    end
-  end
-
-  def rename_columns(header)
-    header.gsub!('genus', 'name')
-    header.gsub!('weight_in_lbs', 'weight')
-    header.gsub!('walking', 'movement')
-    header.gsub!('carnivore', 'diet')
   end
 end
 

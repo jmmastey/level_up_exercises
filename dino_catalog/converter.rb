@@ -15,4 +15,19 @@ class Converter
       diet_type
     end
   end
+
+  def self.header_convert
+    lambda do |header|
+      header.downcase!
+      rename_columns(header)
+      header.to_sym
+    end
+  end
+
+  def self.rename_columns(header)
+    header.gsub!('genus', 'name')
+    header.gsub!('weight_in_lbs', 'weight')
+    header.gsub!('walking', 'movement')
+    header.gsub!('carnivore', 'diet')
+  end
 end

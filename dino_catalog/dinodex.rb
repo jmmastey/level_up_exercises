@@ -16,9 +16,27 @@ class DinoDex
     }
     create_file_path
     @data = Importer.new(options, Dinosaur)
+    display_title
+    execute_command_loop
   end
 
   private
+
+  def display_title
+    puts '-' * 30 << "\nDINODEX\n" << '-' * 30
+  end
+
+  def execute_command_loop
+    loop do
+      print 'DinoDex $ '
+      command = gets.chomp
+      exit if command == 'quit'
+      execute_command(command)
+    end
+  end
+
+  def execute_command(command)
+  end
 
   def create_file_path
     return unless File.extname(options[:path]).empty?

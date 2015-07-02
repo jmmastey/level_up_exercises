@@ -20,7 +20,7 @@ class DinoDex
     }
     create_file_path
     @data = Importer.new(options, Dinosaur)
-    @rolodex = Rolodex.new
+    @rolodex = Rolodex.new(Dinosaur::HEADERS)
     display_title
     execute_command_loop
   end
@@ -61,7 +61,8 @@ class DinoDex
     until command == 'exit'
       print 'DinoDex <Query Mode> $ '
       command = gets.chomp
-      @rolodex.query(@data.data_set, command)
+      results = @rolodex.query(@data.data_set, command)
+      table(results.values, fields: Dinosaur.headers)
     end
   end
 

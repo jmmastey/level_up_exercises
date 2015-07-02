@@ -43,6 +43,7 @@ class DinoDex
   def execute_command(command)
     list if command == 'list'
     details if command == 'details'
+    query if command == 'query'
   end
 
   def list
@@ -53,6 +54,15 @@ class DinoDex
     list = menu(@data.data_set.values, fields: Dinosaur.headers)
     item = @rolodex.show_details(@data.data_set, *list)
     table(item.values, fields: Dinosaur.headers)
+  end
+
+  def query
+    command = ''
+    until command == 'exit'
+      print 'DinoDex <Query Mode> $ '
+      command = gets.chomp
+      @rolodex.query(@data.data_set, command)
+    end
   end
 
   def create_file_path

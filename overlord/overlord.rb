@@ -1,14 +1,33 @@
 # run `ruby overlord.rb` to run a webserver for this app
 
+require 'json'
 require 'sinatra'
+require './classes/bomb.rb'
 
 enable :sessions
 
-get '/' do
-  "Time to build an app around here. Start time: " + start_time
+get '/index' do
+  create_bomb
+  haml :index, :locals => {:bomb => session[:bomb]}
+end
+
+get '/hack' do
+  b = params[:binary].split(//).map(&:to_i)
+  p = params[:panel].to_i
+
+  content_type :json
+  {'success' => session[:bomb].attempt_hack(b, p),
+    'done' => session[:bomb].all_hacked? }.to_json
+end
+
+get '/code' do
+  session[:bomb].enter_code(params[:code].to_i)
+
+  content_type :json
+  {'armed' => session[:bomb].armed? }.to_json
 end
 
 # we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
+def create_bomb
+  session[:bomb] = Bomb.new
 end

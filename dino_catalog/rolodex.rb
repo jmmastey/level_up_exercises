@@ -1,19 +1,23 @@
 class Rolodex
   def initialize(headers)
     extend Hirb::Console
-
+    @options = []
     @headers = headers
     create_header_methods
   end
 
-  def query(data_set, command)
-    puts "command: #{command}"
-    return unless command.downcase.include?('=')
-    key, value = command.split('=')
-    query_command = { key => value }
-    puts "query command: #{query_command}"
+  def query(data_set, conditions)
+    query_data_set = data_set.dup
+    search_conditions = parse_conditions(conditions)
+    puts "Search Conditions: #{search_conditions}"
 
-    method("query_#{key}").call(data_set, value)
+    search_conditions.each do |condition|
+      condition.each do |key, value|
+        query_data_set = method("query_#{key}").call(data_set, value)
+      end
+    end
+
+    query_data_set
   end
 
   def show_details(data_set, *values)
@@ -21,6 +25,21 @@ class Rolodex
   end
 
   private
+
+  def parse_conditions(conditions)
+    conditions.split(',').each_with_index do |condition, index|
+      return unless condition.downcase.include?('=')
+      key, value = condition.split('=')
+      query_conditions = { key => value }
+      puts "query conditions: #{query_conditions}"
+      add_to_conditions(query_conditions, index)
+    end
+    @options
+  end
+
+  def add_to_conditions(condition, index)
+    @options[index] = condition
+  end
 
   def create_header_methods
     @headers.each do |header|

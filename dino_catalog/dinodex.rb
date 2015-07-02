@@ -57,11 +57,12 @@ class DinoDex
   end
 
   def query
-    command = ''
-    until command == 'exit'
+    conditions = ''
+    loop do
       print 'DinoDex <Query Mode> $ '
-      command = gets.chomp
-      results = @rolodex.query(@data.data_set, command)
+      conditions = gets.chomp
+      break if conditions == 'exit'
+      results = @rolodex.query(@data.data_set, conditions)
       table(results.values, fields: Dinosaur.headers)
     end
   end

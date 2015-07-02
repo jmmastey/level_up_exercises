@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'hirb'
+
 require_relative 'importer'
 require_relative 'converter'
 require_relative 'dinosaur'
@@ -8,6 +10,7 @@ class DinoDex
   attr_accessor :options
 
   def initialize(config = {})
+    extend Hirb::Console
     @options = {
       path: config[:path] || 'data/*.csv',
       headers: true,
@@ -36,6 +39,11 @@ class DinoDex
   end
 
   def execute_command(command)
+    list if command == 'list'
+  end
+
+  def list
+    table(@data.data_set.values, fields: Dinosaur.headers)
   end
 
   def create_file_path

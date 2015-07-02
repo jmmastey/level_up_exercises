@@ -4,6 +4,7 @@ require 'hirb'
 
 require_relative 'importer'
 require_relative 'converter'
+require_relative 'rolodex'
 require_relative 'dinosaur'
 
 class DinoDex
@@ -19,6 +20,7 @@ class DinoDex
     }
     create_file_path
     @data = Importer.new(options, Dinosaur)
+    @rolodex = Rolodex.new
     display_title
     execute_command_loop
   end
@@ -49,6 +51,8 @@ class DinoDex
 
   def details
     list = menu(@data.data_set.values, fields: Dinosaur.headers)
+    item = @rolodex.show_details(@data.data_set, *list)
+    table(item.values, fields: Dinosaur.headers)
   end
 
   def create_file_path

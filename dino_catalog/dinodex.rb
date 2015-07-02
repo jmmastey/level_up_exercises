@@ -40,10 +40,15 @@ class DinoDex
 
   def execute_command(command)
     list if command == 'list'
+    details if command == 'details'
   end
 
   def list
     table(@data.data_set.values, fields: Dinosaur.headers)
+  end
+
+  def details
+    list = menu(@data.data_set.values, fields: Dinosaur.headers)
   end
 
   def create_file_path

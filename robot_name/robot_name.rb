@@ -9,8 +9,8 @@ class RobotRegistry
   def self.add_name_to_registry(robot_name)
     @robot_name = robot_name
     raise RegistryError, DUP_NAME_ERR_MSG if @registry.include?(robot_name)
-      @registry << robot_name
-      puts "Added #{robot_name} to registry: #{@registry}"
+    @registry << robot_name
+    puts "Added #{robot_name} to registry: #{@registry}"
   end
 end
 
@@ -51,13 +51,14 @@ puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 name_generator = -> { 'AA111' }
 robot = Robot.new(name_generator)
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
-robot = Robot.new(name_generator)
+Robot.new(name_generator)
 puts "Will show error message above"
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 name_generator = -> { 'ZZZ' }
 puts "Will show error message above"
 robot = Robot.new(name_generator)
+puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 name_generator = -> { 'AA111' }

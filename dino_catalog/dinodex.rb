@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative 'importer'
+require_relative 'converter'
 require_relative 'dinosaur'
 
 class DinoDex
@@ -10,6 +11,7 @@ class DinoDex
     @options = {
       path: config[:path] || 'data/*.csv',
       headers: true,
+      converters: config[:converters] || Converter.dino_data_convert,
       header_converters: config[:header_converters] || header_normalize,
     }
     create_file_path

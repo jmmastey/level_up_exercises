@@ -70,8 +70,6 @@ class Rolodex
   end
 
   def search_data_text(data_set, term)
-    # key = value from data set
-    # value = Dinosaur objects
     data_set.select do |key, value|
       result = (key == term)
       value.instance_variables.each do |header_variable|
@@ -85,16 +83,19 @@ class Rolodex
   def create_header_methods
     @headers.each do |header|
       self.class.class_eval do
-        define_method "query_#{header.downcase}" do |data_set, data|
-          # data = jurassic (command)
-          # data_set = {"Abrictosaurs"=>#<Dinosaur:000>}
-          data_set.select do |_key, value|
-            # key = Abrictosaurus || value = <Dinosaur:000>
-            values = value.method("#{header.downcase}").call
-            values.to_s.include?(data)
-          end
+        define_method "query_#{header.downcase}" do |data_set, *data|
+          query_by_header(header, data_set, data)
         end
       end
+    end
+  end
+
+  def query_by_header(header, data_set, data)
+    data_set.select do |_key, value|
+      valid_data = false
+      values = value.method("#{header.downcase}").call
+      data.each { |item| valid_data = values.to_s.include?(item) }
+      valid_data
     end
   end
 end

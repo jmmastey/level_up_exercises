@@ -84,12 +84,16 @@ class Rolodex
   def search_data_text(data_set, term)
     data_set.select do |key, value|
       result = (key == term)
-      value.instance_variables.each do |header_variable|
-        values = value.instance_variable_get(header_variable)
-        result = values.to_s.include?(term) unless result
-      end
-      result
+      search_by_header_column(value, term, result)
     end
+  end
+
+  def search_by_header_column(value, term, result)
+    value.instance_variables.each do |header_variable|
+      values = value.instance_variable_get(header_variable)
+      result = values.to_s.include?(term) unless result
+    end
+    result
   end
 
   def create_header_methods

@@ -12,21 +12,8 @@ class DinoDex
 
   def initialize(config = {})
     extend Hirb::Console
-    @options = {
-      path: config[:path] || 'data/*.csv',
-      headers: true,
-      converters: config[:converters] || Converter.dino_data_convert,
-      header_converters: config[:header_converters] || Converter.header_convert,
-    }
+    setup_options(config)
     start_dinodex
-  end
-
-  def start_dinodex
-    create_file_path
-    @data = Importer.new(options, Dinosaur)
-    @rolodex = Rolodex.new(Dinosaur::HEADERS, self)
-    display_title
-    execute_command_loop
   end
 
   def big(data_set)
@@ -42,6 +29,23 @@ class DinoDex
   end
 
   private
+
+  def setup_options(config)
+    @options = {
+      path: config[:path] || 'data/*.csv',
+      headers: true,
+      converters: config[:converters] || Converter.dino_data_convert,
+      header_converters: config[:header_converters] || Converter.header_convert,
+    }
+  end
+
+  def start_dinodex
+    create_file_path
+    @data = Importer.new(options, Dinosaur)
+    @rolodex = Rolodex.new(Dinosaur::HEADERS, self)
+    display_title
+    execute_command_loop
+  end
 
   def display_title
     puts '-' * 30 << "\nDINODEX\n" << '-' * 30

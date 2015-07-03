@@ -11,27 +11,27 @@ class Rolodex
 
   def query(data_set, conditions)
     query_data_set = data_set.dup
-    search_conditions = parse_conditions(conditions)
+    parse_conditions(conditions).each do |condition|
+      query_data_set = check_conditions(condition, query_data_set)
+    end
+    query_data_set
+  end
 
-    search_conditions.each do |condition|
-      if condition.class == Array
-        condition.each do |term|
-          if term.class == Symbol
-            query_data_set = entity.send term, query_data_set
-          else
-            query_data_set = search_data_text(query_data_set, term)
-          end
-        end
-      end
-
-      if condition.class == Hash
-        condition.each do |key, value|
-          query_data_set = method("query_#{key}").call(data_set, value)
-        end
+  def check_conditions(condition, data)
+    if condition.class == Array
+      condition.each do |term|
+        data = entity.send term, data if term.class == Symbol
+        data = search_data_text(data, term) unless term.class == Symbol
       end
     end
 
-    query_data_set
+    if condition.class == Hash
+      condition.each do |key, value|
+        data = method("query_#{key}").call(data, value)
+      end
+    end
+
+    data
   end
 
   def show_details(data_set, *values)
@@ -72,7 +72,6 @@ class Rolodex
     query_conditions = {}
     key, value = condition.split('=')
     query_conditions[key.delete(' ')] = value.delete(' ')
-    puts "query conditions: #{query_conditions}"
     add_to_conditions(query_conditions, index)
     true
   end

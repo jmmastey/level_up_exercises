@@ -5,15 +5,13 @@ class Converter
 
   def self.carnivore_convert
     lambda do |value, field|
-      diet_type = value
-      if field[:header].to_s == 'diet'
-        diet_value = value.to_s.downcase
-        if diet_value =~ /yes|no/
-          diet_value == 'yes' ? diet_type = 'Carnivore' : diet_type = ''
-        end
-      end
-      diet_type
+      field[:header].to_s == 'diet' ? diet_type(value) || value : value
     end
+  end
+
+  def self.diet_type(diet_value)
+    diet_value = diet_value.to_s.downcase
+    diet_value == 'yes' ? 'Carnivore' : '' if diet_value =~ /yes|no/
   end
 
   def self.header_convert

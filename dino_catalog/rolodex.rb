@@ -59,7 +59,7 @@ class Rolodex
   def column_condition(condition, index)
     return false unless condition.downcase.include?('=')
     key, value = condition.split('=')
-    query_conditions = { key => value }
+    query_conditions = { key.delete(' ') => value.delete(' ') }
     puts "query conditions: #{query_conditions}"
     add_to_conditions(query_conditions, index)
     true

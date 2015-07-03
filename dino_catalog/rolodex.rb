@@ -1,8 +1,11 @@
 class Rolodex
-  def initialize(headers)
+  attr_reader :entity
+
+  def initialize(headers, entity)
     extend Hirb::Console
     @options = []
     @headers = headers
+    @entity = entity
     create_header_methods
   end
 
@@ -12,13 +15,16 @@ class Rolodex
     puts "Search Conditions: #{search_conditions}"
 
     search_conditions.each do |condition|
-      puts "Condition: #{condition}" # ["jurassic"]
-      # Column conditions will be hashes.
-      # Text conditions will be arrays of strings.
+      puts "Condition: #{condition} (and class: #{condition.class})"
 
       if condition.class == Array
         condition.each do |term|
-          query_data_set = search_data_text(query_data_set, term)
+          if term.class == Symbol
+            #query_data_set = method(term).call(query_data_set)
+            query_data_set = entity.send term, query_data_set
+          else
+            query_data_set = search_data_text(query_data_set, term)
+          end
         end
       end
 
@@ -40,8 +46,9 @@ class Rolodex
 
   def parse_conditions(conditions)
     conditions.split(',').each_with_index do |condition, index|
-      text = text_condition(condition, index)
-      column_condition(condition, index) unless text
+      valid_text_condition = text_condition(condition, index)
+      valid_qualifier_condition = qualifier_condition(condition, index) unless valid_text_condition
+      column_condition(condition, index) unless valid_text_condition || valid_qualifier_condition
     end
     @options
   end
@@ -56,10 +63,19 @@ class Rolodex
     true
   end
 
+  def qualifier_condition(condition, index)
+    return unless condition.match(/big|small/)
+    qualifiers = []
+    qualifiers << condition.to_sym
+    add_to_conditions(qualifiers, index)
+    true
+  end
+
   def column_condition(condition, index)
     return false unless condition.downcase.include?('=')
+    query_conditions = {}
     key, value = condition.split('=')
-    query_conditions = { key.delete(' ') => value.delete(' ') }
+    query_conditions[key.delete(' ')] = value.delete(' ')
     puts "query conditions: #{query_conditions}"
     add_to_conditions(query_conditions, index)
     true

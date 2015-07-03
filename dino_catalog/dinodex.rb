@@ -20,9 +20,21 @@ class DinoDex
     }
     create_file_path
     @data = Importer.new(options, Dinosaur)
-    @rolodex = Rolodex.new(Dinosaur::HEADERS)
+    @rolodex = Rolodex.new(Dinosaur::HEADERS, self)
     display_title
     execute_command_loop
+  end
+
+  def big(data_set)
+    data_set.select do |_k, v|
+      v.weight.to_i > 2000
+    end
+  end
+
+  def small(data_set)
+    data_set.select do |_k, v|
+      v.weight.to_i <= 2000
+    end
   end
 
   private

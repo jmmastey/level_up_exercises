@@ -12,8 +12,20 @@ class Rolodex
     puts "Search Conditions: #{search_conditions}"
 
     search_conditions.each do |condition|
-      condition.each do |key, value|
-        query_data_set = method("query_#{key}").call(data_set, value)
+      puts "Condition: #{condition}" # ["jurassic"]
+      # Column conditions will be hashes.
+      # Text conditions will be arrays of strings.
+
+      if condition.class == Array
+        condition.each do |term|
+          query_data_set = search_data_text(query_data_set, term)
+        end
+      end
+
+      if condition.class == Hash
+        condition.each do |key, value|
+          query_data_set = method("query_#{key}").call(data_set, value)
+        end
       end
     end
 
@@ -28,17 +40,46 @@ class Rolodex
 
   def parse_conditions(conditions)
     conditions.split(',').each_with_index do |condition, index|
-      return unless condition.downcase.include?('=')
-      key, value = condition.split('=')
-      query_conditions = { key => value }
-      puts "query conditions: #{query_conditions}"
-      add_to_conditions(query_conditions, index)
+      text = text_condition(condition, index)
+      column_condition(condition, index) unless text
     end
     @options
   end
 
+  def text_condition(condition, index)
+    match = condition.to_s.match(/[^'"].*['"]/)
+    return false unless match
+    search_term = []
+    terms = condition.to_s.delete('"').delete("'")
+    search_term << terms.strip
+    add_to_conditions(search_term, index)
+    true
+  end
+
+  def column_condition(condition, index)
+    return false unless condition.downcase.include?('=')
+    key, value = condition.split('=')
+    query_conditions = { key => value }
+    puts "query conditions: #{query_conditions}"
+    add_to_conditions(query_conditions, index)
+    true
+  end
+
   def add_to_conditions(condition, index)
     @options[index] = condition
+  end
+
+  def search_data_text(data_set, term)
+    # key = value from data set
+    # value = Dinosaur objects
+    data_set.select do |key, value|
+      result = (key == term)
+      value.instance_variables.each do |header_variable|
+        values = value.instance_variable_get(header_variable)
+        result = values.to_s.include?(term) unless result
+      end
+      result
+    end
   end
 
   def create_header_methods

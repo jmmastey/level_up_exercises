@@ -64,6 +64,17 @@ class DinoDex
     list if command == 'list'
     details if command == 'details'
     query if command == 'query'
+    help if command == 'help'
+  end
+
+  def help
+    puts
+    puts "The following commands are available:\n\n"
+    puts "list:\t\tDisplay a list of all data."
+    puts "details:\tDisplasy a list that you can select data from."
+    puts "query:\t\tGo into query mode."
+    puts "quit:\t\tquit the application."
+    puts
   end
 
   def list

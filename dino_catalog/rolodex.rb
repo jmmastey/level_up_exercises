@@ -1,6 +1,4 @@
 class Rolodex
-  attr_reader :entity
-
   def initialize(headers, entity)
     extend Hirb::Console
     @options = []
@@ -25,7 +23,7 @@ class Rolodex
 
   def process_condition_array(condition, data)
     condition.each do |term|
-      data = entity.send term, data if term.class == Symbol
+      data = @entity.send term, data if term.class == Symbol
       data = search_data_text(data, term) unless term.class == Symbol
     end
     data
@@ -54,8 +52,7 @@ class Rolodex
   end
 
   def text_condition(condition, index)
-    match = condition.to_s.match(/[^'"].*['"]/)
-    return false unless match
+    return false unless condition.to_s.match(/[^'"].*['"]/)
     search_term = []
     terms = condition.to_s.delete('"').delete("'")
     search_term << terms.strip

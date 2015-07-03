@@ -12,15 +12,11 @@ class Rolodex
   def query(data_set, conditions)
     query_data_set = data_set.dup
     search_conditions = parse_conditions(conditions)
-    puts "Search Conditions: #{search_conditions}"
 
     search_conditions.each do |condition|
-      puts "Condition: #{condition} (and class: #{condition.class})"
-
       if condition.class == Array
         condition.each do |term|
           if term.class == Symbol
-            #query_data_set = method(term).call(query_data_set)
             query_data_set = entity.send term, query_data_set
           else
             query_data_set = search_data_text(query_data_set, term)
@@ -46,9 +42,9 @@ class Rolodex
 
   def parse_conditions(conditions)
     conditions.split(',').each_with_index do |condition, index|
-      valid_text_condition = text_condition(condition, index)
-      valid_qualifier_condition = qualifier_condition(condition, index) unless valid_text_condition
-      column_condition(condition, index) unless valid_text_condition || valid_qualifier_condition
+      valid_text = text_condition(condition, index)
+      valid_qualifier = qualifier_condition(condition, index) unless valid_text
+      column_condition(condition, index) unless valid_text || valid_qualifier
     end
     @options
   end

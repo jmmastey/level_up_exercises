@@ -18,6 +18,10 @@ class DinoDex
       converters: config[:converters] || Converter.dino_data_convert,
       header_converters: config[:header_converters] || Converter.header_convert,
     }
+    start_dinodex
+  end
+
+  def start_dinodex
     create_file_path
     @data = Importer.new(options, Dinosaur)
     @rolodex = Rolodex.new(Dinosaur::HEADERS, self)
@@ -74,9 +78,13 @@ class DinoDex
       print 'DinoDex <Query Mode> $ '
       conditions = gets.chomp
       break if conditions == 'exit'
-      results = @rolodex.query(@data.data_set, conditions)
-      table(results.values, fields: Dinosaur.headers)
+      present_results(conditions)
     end
+  end
+
+  def present_results(conditions)
+    results = @rolodex.query(@data.data_set, conditions)
+    table(results.values, fields: Dinosaur.headers)
   end
 
   def create_file_path

@@ -18,19 +18,23 @@ class Rolodex
   end
 
   def check_conditions(condition, data)
-    if condition.class == Array
-      condition.each do |term|
-        data = entity.send term, data if term.class == Symbol
-        data = search_data_text(data, term) unless term.class == Symbol
-      end
-    end
+    data = process_condition_array(condition, data) if condition.class == Array
+    data = process_condition_hash(condition, data) if condition.class == Hash
+    data
+  end
 
-    if condition.class == Hash
-      condition.each do |key, value|
-        data = method("query_#{key}").call(data, value)
-      end
+  def process_condition_array(condition, data)
+    condition.each do |term|
+      data = entity.send term, data if term.class == Symbol
+      data = search_data_text(data, term) unless term.class == Symbol
     end
+    data
+  end
 
+  def process_condition_hash(condition, data)
+    condition.each do |key, value|
+      data = method("query_#{key}").call(data, value)
+    end
     data
   end
 

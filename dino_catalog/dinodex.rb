@@ -17,14 +17,14 @@ class DinoDex
   end
 
   def big(data_set)
-    data_set.select do |_k, v|
-      v.weight.to_i > 2000
+    data_set.select do |_name, dinosaur|
+      dinosaur.weight.to_i > 2000
     end
   end
 
   def small(data_set)
-    data_set.select do |_k, v|
-      v.weight.to_i <= 2000
+    data_set.select do |_name, dinosaur|
+      dinosaur.weight.to_i <= 2000
     end
   end
 

@@ -1,0 +1,5 @@
+asset 'bootstrap-sass'
+asset 'angular'
+asset 'angular-google-maps'
+asset 'jquery-timeago'
+asset 'twitter-text-js'

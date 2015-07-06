@@ -1,0 +1,10 @@
+{
+  "name": "dsl-generated dependencies",
+  "dependencies": {
+    "bootstrap-sass": "latest",
+    "angular": "latest",
+    "angular-google-maps": "latest",
+    "jquery-timeago": "latest",
+    "twitter-text-js": "latest"
+  }
+}

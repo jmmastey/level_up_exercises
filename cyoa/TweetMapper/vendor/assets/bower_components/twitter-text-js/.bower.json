@@ -1,0 +1,14 @@
+{
+  "name": "twitter-text-js",
+  "homepage": "https://github.com/twitter/twitter-text",
+  "version": "1.12.1",
+  "_release": "1.12.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.12.1",
+    "commit": "a4cae015c9b5a76fc394e43320f5dda5df0e3df1"
+  },
+  "_source": "git://github.com/twitter/twitter-text.git",
+  "_target": "*",
+  "_originalSource": "twitter-text-js"
+}

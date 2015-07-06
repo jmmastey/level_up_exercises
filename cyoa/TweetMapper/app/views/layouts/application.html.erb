@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TweetMapper</title>
+  <%= stylesheet_link_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body ng-app="TweetMapper" ng-controller="AppCtrl">
+
+  <%= yield %>
+  
+  <%= javascript_include_tag "application" %>
+</body>
+</html>

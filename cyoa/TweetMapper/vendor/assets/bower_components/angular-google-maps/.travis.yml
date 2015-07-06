@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+    - "0.10.38"
+    - "0.12.4"
+    - "iojs"
+before_script: PATH="$(npm bin):$PATH" npm install
+script: grunt
+branches:
+  only:
+    - master
+    - 2.0.X
+    - 2.1.X
+    - 1.2.X
+    - 1.0.X
+    - website

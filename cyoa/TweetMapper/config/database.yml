@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  database: tweet_mapper
+  pool: 5
+  username: tweet_mapper
+  password: z4yMcPt84CmAmdaPYa
+
+development:
+  <<: *default
+  database: tweet_mapper_dev
+
+test: &test
+  <<: *default
+  database: tweet_mapper_test
+
+production:
+  <<: *default
+
+cucumber:
+  <<: *test

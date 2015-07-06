@@ -1,0 +1,26 @@
+/*
+ *= require_self
+ *= require_tree .
+ */
+
+@import "bootstrap-sass/assets/stylesheets/_bootstrap-sprockets";
+@import "bootstrap-sass/assets/stylesheets/_bootstrap";
+
+html,
+body { height: 100%; }
+
+.angular-google-map,
+.angular-google-map-container { height: 100%; }
+
+.infowindow {
+  .author_name {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .author_screen_name { }
+  .tweet_text { }
+  .tweet_created_at {
+    font-size: 0.8em;
+    font-style: italic;
+  }
+}

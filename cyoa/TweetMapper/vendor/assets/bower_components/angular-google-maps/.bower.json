@@ -1,0 +1,43 @@
+{
+  "name": "angular-google-maps",
+  "version": "2.1.5",
+  "main": "./dist/angular-google-maps.js",
+  "dependencies": {
+    "angular": "1.2 - 1.4",
+    "lodash": ">=3.8.0"
+  },
+  "ignore": [
+    "*.json",
+    ".gitignore",
+    "travis.yml",
+    "*.html",
+    "package.js",
+    "*.markdown",
+    "example",
+    "src",
+    "grunt",
+    "website_libs",
+    "scripts",
+    "spec/coffee/directives",
+    "spec/coffee/providers",
+    "spec/coffee/usage",
+    "tmp"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.3.x",
+    "uuid": "http://github.com/LiosK/UUID.js/archive/v3.2.tar.gz",
+    "angular-route": "~1.3.0",
+    "bootstrap-without-jquery": "git://github.com/tagawa/bootstrap-without-jquery.git",
+    "data-structures": "~1.4.2"
+  },
+  "homepage": "https://github.com/angular-ui/angular-google-maps",
+  "_release": "2.1.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.1.5",
+    "commit": "318313247b1de9d4f397635dc657bfc1b295af65"
+  },
+  "_source": "git://github.com/angular-ui/angular-google-maps.git",
+  "_target": "*",
+  "_originalSource": "angular-google-maps"
+}

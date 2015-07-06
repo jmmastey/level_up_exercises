@@ -1,0 +1,44 @@
+source 'https://rubygems.org'
+
+ruby '2.0.0'
+
+gem 'bundler'
+gem 'rails'
+
+gem 'bower-rails'
+gem 'sass-rails'
+gem 'uglifier'
+
+gem 'pg'
+gem 'puma'
+
+gem 'jc-validates_timeliness'
+gem 'geokit-rails'
+gem 'missing_validators'
+gem 'twitter'
+gem 'upsert'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder'
+
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
+
+group :development, :test do
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'pry'
+  gem 'rspec-rails'
+  gem 'rspec-its'
+end
+
+group :development do
+  gem 'spring'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+end

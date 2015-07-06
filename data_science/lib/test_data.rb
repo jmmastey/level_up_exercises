@@ -18,4 +18,8 @@ class TestData
       data[group_name] == group_member && data[result] == 1
     end
   end
+
+  def group_members(group_name)
+    data_sample.map { |data| data[group_name] }.uniq
+  end
 end

@@ -10,7 +10,7 @@ RSpec.describe TestData do
       expect(test_data.sample_size).to eq(23)
     end
 
-    it 'will determine the amount of members in a group' do
+    it 'will determine the number of members in a group' do
       expect(test_data.group_count('cohort', 'B')).to eq(13)
       expect(test_data.group_count('cohort', 'A')).to eq(10)
     end
@@ -18,6 +18,10 @@ RSpec.describe TestData do
     it 'will determine the number of conversions in a group' do
       expect(test_data.conversions_count('cohort', 'B', 'result')).to eq(2)
       expect(test_data.conversions_count('cohort', 'A', 'result')).to eq(0)
+    end
+
+    it 'will determine all group members' do
+      expect(test_data.group_members('cohort')).to eq(%w(B A))
     end
   end
 end

@@ -53,11 +53,9 @@ class TestData
     groups = {}
 
     group_variants.each do |variant|
-      trials = trial_size(variant)
-      conversions = conversions_count(variant)
-      non_conversions = trials - conversions
-
-      groups[variant] = { conversions: conversions, non_conversions: non_conversions }
+      groups[variant] = {
+        conversions: conversions_count(variant),
+        non_conversions: trial_size(variant) - conversions_count(variant) }
     end
 
     ABAnalyzer::ABTest.new(groups).chisquare_p

@@ -7,6 +7,8 @@ class TestData
   # normal distribution. This is multiplied by the standard error.
   CONFIDENCE_INTERVAL = 1.96
 
+  PROBABILITY_OF_CHANCE = 0.05
+
   def initialize(data_sample, group_name)
     @data_sample = data_sample
     @group_name = group_name
@@ -59,5 +61,18 @@ class TestData
     end
 
     ABAnalyzer::ABTest.new(groups).chisquare_p
+  end
+
+  # This represents a check of the p-value, which is the probability that the
+  # deviation of the observed from that which was expected is due to chance
+  # alone. When checking for a goodness of fit value that is greater than the
+  # probability of chance, it means you would expect any deviation to be due
+  # solely to chance 5% of the time or less.
+  def winner
+    if goodness_of_fit >= PROBABILITY_OF_CHANCE
+      'The data favored none of the variants.'
+    else
+      'The data favored a particular variant.'
+    end
   end
 end

@@ -17,7 +17,7 @@ RSpec.describe TestData do
 
     it 'will determine the number of conversions in a group' do
       expect(test_data.conversions_count('B')).to eq(5)
-      expect(test_data.conversions_count('A')).to eq(13)
+      expect(test_data.conversions_count('A')).to eq(14)
     end
 
     it 'will determine all group variants' do
@@ -26,16 +26,20 @@ RSpec.describe TestData do
 
     it 'will calculate the conversion percentage of group members' do
       expect(test_data.conversion_percentage('B')).to eq(0.3333333333333333)
-      expect(test_data.conversion_percentage('A')).to eq(0.65)
+      expect(test_data.conversion_percentage('A')).to eq(0.7)
     end
 
     it 'will calculate the standard error' do
       expect(test_data.standard_error('B')).to eq(0.23856360282447234)
-      expect(test_data.standard_error('A')).to eq(0.2090411442754751)
+      expect(test_data.standard_error('A')).to eq(0.20084023501280815)
     end
 
     it 'will calculate the goodness-of-fit' do
-      expect(test_data.goodness_of_fit).to eq(0.06360087877990361)
+      expect(test_data.goodness_of_fit).to eq(0.03116881881121958)
+    end
+
+    it 'will indicate the data favors A' do
+      expect(test_data.winner).to eq('The data favored a particular variant.')
     end
   end
 end

@@ -30,7 +30,8 @@ RSpec.describe TestData do
     end
 
     it 'will calculate the standard error' do
-      #expect(test_data.standard_error('B')).to eq(123)
+      expect(test_data.standard_error('B')).to eq(0.1961337731926865)
+      expect(test_data.standard_error('A')).to eq(0.0)
     end
   end
 end

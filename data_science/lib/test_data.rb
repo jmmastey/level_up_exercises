@@ -25,16 +25,13 @@ class TestData
   end
 
   def conversion_percentage(group_member)
-    conversions_count(group_member).to_f /
-      trial_size(group_member).to_f
+    conversions_count(group_member).to_f / trial_size(group_member).to_f
   end
 
   def standard_error(group_member)
-    #Standard Error (SE) = Square root of (p * (1-p) / n)
-    p = conversions_count(group_member)
+    p = conversion_percentage(group_member)
     n = trial_size(group_member)
 
-    #((Math.sqrt(p * (1 - p) / n)))
+    ((Math.sqrt(p * (1 - p) / n)) * 1.96)
   end
-
 end

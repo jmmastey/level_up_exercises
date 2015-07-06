@@ -38,8 +38,12 @@ RSpec.describe TestData do
       expect(test_data.goodness_of_fit).to eq(0.03116881881121958)
     end
 
+    it 'will determine the variant percentages' do
+      expect(test_data.variant_percentages.first).to eq(['A', 0.7])
+    end
+
     it 'will indicate the data favors A' do
-      expect(test_data.winner).to eq('The data favored a particular variant.')
+      expect(test_data.favored_variant).to eq('The data favored variant A.')
     end
   end
 end

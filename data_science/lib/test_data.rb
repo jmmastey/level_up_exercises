@@ -63,16 +63,26 @@ class TestData
     ABAnalyzer::ABTest.new(groups).chisquare_p
   end
 
+  def variant_percentages
+    percentages = {}
+
+    group_variants.each do |variant|
+      percentages[variant] = conversion_percentage(variant)
+    end
+
+    percentages
+  end
+
   # This represents a check of the p-value, which is the probability that the
   # deviation of the observed from that which was expected is due to chance
   # alone. When checking for a goodness of fit value that is greater than the
   # probability of chance, it means you would expect any deviation to be due
   # solely to chance 5% of the time or less.
-  def winner
+  def favored_variant
     if goodness_of_fit >= PROBABILITY_OF_CHANCE
       'The data favored none of the variants.'
     else
-      'The data favored a particular variant.'
+      "The data favored variant #{variant_percentages.first[0]}."
     end
   end
 end

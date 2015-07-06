@@ -33,5 +33,9 @@ RSpec.describe TestData do
       expect(test_data.standard_error('B')).to eq(0.1961337731926865)
       expect(test_data.standard_error('A')).to eq(0.0)
     end
+
+    it 'will calculate the goodness-of-fit' do
+      expect(test_data.goodness_of_fit).to eq(1)
+    end
   end
 end

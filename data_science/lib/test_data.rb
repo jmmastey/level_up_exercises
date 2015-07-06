@@ -1,3 +1,5 @@
+require 'abanalyzer'
+
 class TestData
   attr_reader :data_sample, :group_name
 
@@ -37,5 +39,27 @@ class TestData
     n = trial_size(variant)
 
     ((Math.sqrt(p * (1 - p) / n)) * CONFIDENCE_INTERVAL)
+  end
+
+  # Using the binomial distribution, you can calculate the exact probability
+  # of getting a particular set of values over a particular set of trials by
+  # defining the number of successes, the number of trials, and the probability
+  # of success. If the outcomes are mutually exclusive, then for each possible
+  # outcome you can subtract the expected number of that outcome from the
+  # observed number of that outcome. Then square the result and divide that
+  # squared value by the expected number. Then you sum those values across all
+  # possible outcomes and you get the chi-square statistic.
+  def goodness_of_fit
+    groups = {}
+
+    group_variants.each do |variant|
+      trials = trial_size(variant)
+      conversions = conversions_count(variant)
+      non_conversions = trials - conversions
+
+      groups[variant] = { conversions: conversions, non_conversions: non_conversions }
+    end
+
+    ABAnalyzer::ABTest.new(groups).chisquare_p
   end
 end

@@ -9,12 +9,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  #config.filter_run :focus
-  #config.run_all_when_everything_filtered = true
-
   config.disable_monkey_patching!
 
-  if config.files_to_run.one?
-    config.default_formatter = 'doc'
-  end
+  config.default_formatter = 'doc' if config.files_to_run.one?
 end

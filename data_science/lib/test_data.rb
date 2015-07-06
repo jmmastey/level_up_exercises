@@ -1,6 +1,10 @@
 class TestData
   attr_reader :data_sample, :group_name
 
+  # The value of 1.96 refers to the 95th percentile of a standard
+  # normal distribution. This is multiplied by the standard error.
+  CONFIDENCE_INTERVAL = 1.96
+
   def initialize(data_sample, group_name)
     @data_sample = data_sample
     @group_name = group_name
@@ -32,6 +36,6 @@ class TestData
     p = conversion_percentage(group_member)
     n = trial_size(group_member)
 
-    ((Math.sqrt(p * (1 - p) / n)) * 1.96)
+    ((Math.sqrt(p * (1 - p) / n)) * CONFIDENCE_INTERVAL)
   end
 end

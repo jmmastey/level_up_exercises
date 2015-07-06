@@ -23,7 +23,7 @@ describe 'Data Manager' do
     end
   end
 
-  describe '.total_sample_size' do
+  describe '.sample_size' do
     before :each do
       @reader = JsonReader.new
       @reader.load_data(JSON_FILE_PATH)
@@ -32,31 +32,31 @@ describe 'Data Manager' do
     end
 
     context 'before loading a reader' do
-      it 'should have an empty total sample size' do
-        expect(DataManager.new.total_sample_size).to eq(0)
+      it 'should raise an exception' do
+        expect { DataManager.new.sample_size }.to raise_error ArgumentError
       end
     end
 
     context 'after loading a reader' do
       it 'should have the total sample size' do
-        expect(@data_manager.total_sample_size).to eq(2892)
+        expect(@data_manager.sample_size).to eq(2892)
       end
     end
 
     context 'sample size per cohort' do
       it 'should have a total sample size of 1543 for cohort B' do
-        expect(@data_manager.total_sample_size("B")).to eq(1543)
+        expect(@data_manager.sample_size("B")).to eq(1543)
       end
     end
 
     context 'sample size per cohort' do
       it 'should have a total sample size of 0 for cohort C' do
-        expect(@data_manager.total_sample_size("C")).to eq(0)
+        expect(@data_manager.sample_size("C")).to eq(0)
       end
     end
   end
 
-  describe '.total_conversions_size' do
+  describe '.conversions_size' do
     before :each do
       @reader = JsonReader.new
       @reader.load_data(JSON_FILE_PATH)
@@ -65,20 +65,20 @@ describe 'Data Manager' do
     end
 
     context 'before loading a reader' do
-      it 'should have an empty total conversion size' do
-        expect(DataManager.new.total_conversion_size).to eq(0)
+      it 'should raise an error' do
+        expect { DataManager.new.conversion_size }.to raise_error ArgumentError
       end
     end
 
     context 'after loading a reader' do
       it 'should have the total conversion size' do
-        expect(@data_manager.total_conversion_size).to eq(126)
+        expect(@data_manager.conversion_size).to eq(126)
       end
     end
 
     context 'conversion count per cohort' do
       it 'should have a total conversion rate for cohort B' do
-        expect(@data_manager.total_conversion_size("A")).to eq(47)
+        expect(@data_manager.conversion_size("A")).to eq(47)
       end
     end
   end
@@ -92,8 +92,8 @@ describe 'Data Manager' do
     end
 
     context 'before loading a reader' do
-      it 'should have zero conversion rate' do
-        expect(DataManager.new.conversion_rate).to eq(0)
+      it 'should raise an error' do
+        raise ArgumentError, "reader not initialized" if @reader.nil?
       end
     end
 
@@ -118,8 +118,8 @@ describe 'Data Manager' do
       @data_manager.load(@reader)
     end
 
-    it 'should have 0.42 rate' do
-      expect(@data_manager.calculate_chi_square).to eq(0.042)
+    it 'should have 0.32 rate' do
+      expect(@data_manager.calculate_chi_square).to eq(0.032)
     end
   end
 end

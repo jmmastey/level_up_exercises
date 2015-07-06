@@ -7,54 +7,50 @@ class DataManager
     @reader = reader
   end
 
-  def total_sample_size(cohort_name = nil)
-    if @reader.nil?
-      0
-    else if cohort_name.nil?
-           @reader.data_hash.count
-         else
-           @reader.data_hash.count { |item| (item['cohort']) == cohort_name }
-
-         end
+  def sample_size(cohort_name = nil)
+    raise ArgumentError, "reader not initialized" if @reader.nil?
+    if cohort_name.nil?
+      @reader.data_hash.count
+    else
+      @reader.data_hash.count { |item| (item['cohort']) == cohort_name }
     end
   end
 
-  def total_conversion_size(cohort_name = nil)
-    if @reader.nil?
-      0
-    else if cohort_name.nil?
-           @reader.data_hash.count { |item| (item['result']) == 1 }
-         else
-           @reader.data_hash.count { |item| (item['cohort']) == cohort_name && (item['result'] == 1) }
-         end
+  def conversion_size(cohort_name = nil)
+    raise ArgumentError, "reader not initialized" if @reader.nil?
+    if cohort_name.nil?
+      @reader.data_hash.count { |item| (item['result']) == 1 }
+    else
+      cohort_conversion_size(cohort_name)
     end
   end
+
+  def cohort_conversion_size(name)
+    @reader.data_hash.count do |item|
+      (item['cohort']) == name && (item['result'] == 1)
+    end
+  end
+  private :cohort_conversion_size
 
   def conversion_rate(cohort = nil)
-    if @reader.nil?
-      0
-    else
-      converted = total_conversion_size(cohort)
-      total = total_sample_size(cohort)
-      ((converted.to_f / total.to_f) * 100).round(2)
-    end
+    raise ArgumentError, "reader not initialized" if @reader.nil?
+    converted = conversion_size(cohort)
+    total = sample_size(cohort)
+    ((converted.to_f / total.to_f) * 100).round(2)
   end
 
   def calculate_chi_square
     values = {}
-    a_1 = total_conversion_size("A")
-    a_0 = total_sample_size("A") - a_1
-    b_1 = total_conversion_size("B")
-    b_0 = total_sample_size("B") - a_1
-
-    values[:agroup] = { convert: a_1, no_convert: a_0 }
-    values[:bgroup] = { convert: b_1, no_convert: b_0 }
-
-    values[:agroup] = { convert: a_1, no_convert: a_0 }
-    values[:bgroup] = { convert: b_1, no_convert: b_0 }
-
+    prepare_data_by_group(values, :agroup, "A")
+    prepare_data_by_group(values, :bgroup, "B")
     tester = ABAnalyzer::ABTest.new values
     # if this number is smaller than 0.05 we are good
     tester.chisquare_p.round(3)
+  end
+
+  def prepare_data_by_group(values, group_name, group_code)
+    converted_group_size = conversion_size(group_code)
+    total = sample_size(group_code) - converted_group_size
+    values[group_name] = { convert: converted_group_size, no_convert: total }
   end
 end

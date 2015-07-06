@@ -7,7 +7,8 @@ class Bomb
     @hacked = [false] * 6
     @armed = false
 
-    @secret_code = 8005882300
+    @secret_arm_code = 1234
+    @secret_disarm_code = 1234
   end
 
   def hacked?(panel_num)
@@ -51,9 +52,12 @@ class Bomb
     @hacked[panel_num] = match
   end
 
-  def enter_code(code)
-    same = (code == @secret_code)
-    @armed = !(@armed && same) if same
+  def arm(code)
+    @armed = (code == @secret_arm_code)
+  end
+
+  def disarm(code)
+    @armed = (code == @secret_disarm_code)
   end
 
   def armed?

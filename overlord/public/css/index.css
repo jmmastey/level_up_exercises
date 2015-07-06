@@ -11,7 +11,11 @@
 }
 body {
   font-family: "Trebuchet MS", sans-serif;
-  background: #eee;
+  background: url('../images/ocean-bg.jpg') no-repeat 0 0;
+  width: 100%;
+  height: 100%;
+  background-size: 110% 110%;
+  /*background: #eee;*/
 }
 /****************************
           MESSAGES

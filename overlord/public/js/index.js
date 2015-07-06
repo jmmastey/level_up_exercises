@@ -1,4 +1,4 @@
-var ticker;
+var ticker = false;
 
 $(function() {
   $('.connector').click(depress_button);
@@ -33,6 +33,7 @@ function tick() {
     var mi = parseInt(m) - 1;
     if(mi == -1) {
       clearInterval(ticker);
+      ticker = false;
       $('.bomb').addClass('detonated');
       $('.explosion-overlay').fadeIn(10);
     }
@@ -85,16 +86,22 @@ function attempt_hack(col, seq, binary, panel) {
 
 function enter_code(event) {
   if($('.bomb').hasClass('hacked')) return;
+  if($('.bomb').hasClass('detonated')) return;
 
   var code = $('input[type="password"]').val();
   $.get('/code', {'code' : code }, function(data) {
     if(data['armed']) {
       $('.bomb').removeClass('disarmed')
-      ticker = setInterval(tick, 1000);
+      $('input[type="button"]').val('Disarm');
+      if(!ticker)
+        ticker = setInterval(tick, 1000);
     }
     else {
       $('.bomb').addClass('disarmed');
+      $('input[type="button"]').val('Arm');
       clearInterval(ticker);
+      ticker = false;
     }
+    $('input[type="password"]').val('');
   });
 }

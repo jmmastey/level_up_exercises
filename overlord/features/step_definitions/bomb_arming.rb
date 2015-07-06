@@ -2,11 +2,11 @@
 require './classes/bomb.rb'
 
 Given(/^the bomb is disarmed$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  find('.bomb.disarmed')
 end
 
-Given(/^I (don't )?know the correct bomb code$/) do |arg1|
-  @code = arg1 ? 1234567890 : 8005882300
+Given(/^I (don't )?know the correct bomb code$/) do |unknown|
+  @code = unknown ? 1234567890 : 8005882300
 end
 
 When(/^I enter the code and submit$/) do

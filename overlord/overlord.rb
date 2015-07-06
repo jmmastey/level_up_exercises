@@ -6,6 +6,11 @@ require './classes/bomb.rb'
 
 enable :sessions
 
+get '/test' do
+  create_bomb
+  haml :test
+end
+
 get '/index' do
   create_bomb
   haml :index, :locals => {:bomb => session[:bomb]}
@@ -21,7 +26,11 @@ get '/hack' do
 end
 
 get '/code' do
-  session[:bomb].enter_code(params[:code].to_i)
+  if(session[:bomb].armed?)
+    session[:bomb].disarm(params[:code].to_i)
+  else
+    session[:bomb].arm(params[:code].to_i)
+  end
 
   content_type :json
   {'armed' => session[:bomb].armed? }.to_json

@@ -20,8 +20,8 @@ RSpec.describe TestData do
       expect(test_data.conversions_count('A')).to eq(0)
     end
 
-    it 'will determine all group members' do
-      expect(test_data.group_members).to eq(%w(B A))
+    it 'will determine all group variants' do
+      expect(test_data.group_variants).to eq(%w(B A))
     end
 
     it 'will calculate the conversion percentage of group members' do

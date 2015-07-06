@@ -14,27 +14,27 @@ class TestData
     data_sample.length
   end
 
-  def trial_size(group_member)
-    data_sample.count { |data| data[group_name] == group_member }
+  def trial_size(variant)
+    data_sample.count { |data| data[group_name] == variant }
   end
 
-  def conversions_count(group_member, result = 'result')
+  def conversions_count(variant, result = 'result')
     data_sample.count do |data|
-      data[group_name] == group_member && data[result] == 1
+      data[group_name] == variant && data[result] == 1
     end
   end
 
-  def group_members
+  def group_variants
     data_sample.map { |data| data[group_name] }.uniq
   end
 
-  def conversion_percentage(group_member)
-    conversions_count(group_member).to_f / trial_size(group_member).to_f
+  def conversion_percentage(variant)
+    conversions_count(variant).to_f / trial_size(variant).to_f
   end
 
-  def standard_error(group_member)
-    p = conversion_percentage(group_member)
-    n = trial_size(group_member)
+  def standard_error(variant)
+    p = conversion_percentage(variant)
+    n = trial_size(variant)
 
     ((Math.sqrt(p * (1 - p) / n)) * CONFIDENCE_INTERVAL)
   end

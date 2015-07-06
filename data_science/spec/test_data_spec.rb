@@ -10,9 +10,9 @@ RSpec.describe TestData do
       expect(test_data.sample_size).to eq(23)
     end
 
-    it 'will determine the number of members in a group' do
-      expect(test_data.group_count('B')).to eq(13)
-      expect(test_data.group_count('A')).to eq(10)
+    it 'will determine the number of trials for group members' do
+      expect(test_data.trial_size('B')).to eq(13)
+      expect(test_data.trial_size('A')).to eq(10)
     end
 
     it 'will determine the number of conversions in a group' do

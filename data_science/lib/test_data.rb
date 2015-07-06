@@ -10,8 +10,7 @@ class TestData
     data_sample.length
   end
 
-  # should this be trial_size?
-  def group_count(group_member)
+  def trial_size(group_member)
     data_sample.count { |data| data[group_name] == group_member }
   end
 
@@ -27,13 +26,13 @@ class TestData
 
   def conversion_percentage(group_member)
     conversions_count(group_member).to_f /
-      group_count(group_member).to_f
+      trial_size(group_member).to_f
   end
 
   def standard_error(group_member)
     #Standard Error (SE) = Square root of (p * (1-p) / n)
     p = conversions_count(group_member)
-    n = group_count(group_member)
+    n = trial_size(group_member)
 
     #((Math.sqrt(p * (1 - p) / n)))
   end

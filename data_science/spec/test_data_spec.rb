@@ -23,5 +23,14 @@ RSpec.describe TestData do
     it 'will determine all group members' do
       expect(test_data.group_members('cohort')).to eq(%w(B A))
     end
+
+    it 'will calculate the conversion percentage of group members' do
+      expect(test_data.conversion_percentage('cohort', 'B')).to eq(0.15384615384615385)
+      expect(test_data.conversion_percentage('cohort', 'A')).to eq(0)
+    end
+
+    it 'will calculate the standard error' do
+      expect(test_data.standard_error('cohort', 'B')).to eq(123)
+    end
   end
 end

@@ -63,14 +63,14 @@ class TestData
     ABAnalyzer::ABTest.new(groups).chisquare_p
   end
 
-  def variant_percentages
+  def variant_percents
     percentages = {}
 
     group_variants.each do |variant|
       percentages[variant] = conversion_percentage(variant)
     end
 
-    percentages
+    percentages.to_a
   end
 
   # This represents a check of the p-value, which is the probability that the
@@ -82,7 +82,7 @@ class TestData
     if goodness_of_fit >= PROBABILITY_OF_CHANCE
       'The data favored none of the variants.'
     else
-      "The data favored variant #{variant_percentages.first[0]}."
+      "The data favored variant #{variant_percents.first[0]}."
     end
   end
 end

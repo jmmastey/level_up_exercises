@@ -80,7 +80,7 @@ class TestData
   # solely to chance 5% of the time or less.
   def favored_variant
     if goodness_of_fit >= PROBABILITY_OF_CHANCE
-      'The data favored none of the variants.'
+      'The data favored no variants.'
     else
       "The data favored variant #{variant_percents.first[0]}."
     end

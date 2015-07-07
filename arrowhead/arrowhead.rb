@@ -1,5 +1,4 @@
 class Arrowhead
-  # This seriously belongs in a database.
   CLASSIFICATIONS = {
     far_west: {
       notched: "Archaic Side Notch",
@@ -15,42 +14,32 @@ class Arrowhead
     },
   }
 
-  INVALID_REGION = 0
-  INVALID_SHAPE = 1
-  VALID_REGION_SHAPE = 2
+  ERRs = "Unknown shape value. Are you sure you know what you're talking about?"
+  ERRr = "Unknown region, please provide a valid region"
 
-  # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
-    state = check_status(region, shape)
-    case state
-    when VALID_REGION_SHAPE
+    if check_status(region, shape)
       arrowhead = CLASSIFICATIONS[region][shape]
       puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-    when INVALID_SHAPE
-      puts "Unknown shape value. Are you sure you know what you're talking about?"
-    when INVALID_REGION
-      puts "Unknown region, please provide a valid region."
     end
   end
 
-  def check_status(region, shape)
+  def self.check_status(region, shape)
     if valid_region?(region) && valid_shape?(region, shape)
-      VALID_REGION_SHAPE
+      return true
     elsif valid_region?(region)
-      INVALID_SHAPE
+      raise NameError, ERRs
     else
-      INVALID_REGION
+      raise NameError, ERRr
     end
   end
 
-  def valid_region?(region)
-    CLASSIFICATIONS.include? region
+  def self.valid_region?(region)
+    CLASSIFICATIONS.include?(region)
   end
 
-  def valid_shape?(region, shape)
-    CLASSIFICATIONS[region].include? shape
-  rescue
-    false
+  def self.valid_shape?(region, shape)
+    CLASSIFICATIONS[region].include?(shape)
   end
 end
 

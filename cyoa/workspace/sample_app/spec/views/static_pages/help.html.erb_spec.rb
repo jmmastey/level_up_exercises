@@ -11,16 +11,12 @@ RSpec.describe "static_pages/help.html.erb", type: :view do
       #rendered.should have_content('Find')
       expect(rendered).to match(/Find/)
     end
-  end
 
-  describe "#PageContent" do
     it 'displays the word CNUapp', focus: true do
-      expect(rendered).to match(/CNUapp/)
+      expect(rendered).to match(/static_pages/)
       #rendered.should have_content('CNUapp')
     end
-  end
 
-  describe "#PageContent" do
     it 'contains SampleApp', focus: true do
       expect(rendered).to have_content("Find")
     end

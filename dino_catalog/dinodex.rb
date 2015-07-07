@@ -48,7 +48,7 @@ class DinoDex
   end
 
   def display_title
-    puts '-' * 30 << "\nDINODEX\n" << '-' * 30
+    puts ('-' * 30) << "\nDINODEX\n" << ('-' * 30)
   end
 
   def execute_command_loop
@@ -61,17 +61,14 @@ class DinoDex
   end
 
   def execute_command(command)
-    list if command == 'list'
-    details if command == 'details'
-    query if command == 'query'
-    help if command == 'help'
+    send command.to_sym
   end
 
   def help
     puts
     puts "The following commands are available:\n\n"
     puts "list:\t\tDisplay a list of all data."
-    puts "details:\tDisplasy a list that you can select data from."
+    puts "details:\tDisplay a list that you can select data from."
     puts "query:\t\tGo into query mode."
     puts "quit:\t\tquit the application."
     puts

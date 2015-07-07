@@ -7,6 +7,20 @@ require_relative 'converter'
 require_relative 'rolodex'
 require_relative 'dinosaur'
 
+DINODEX_HELP = <<TEXT
+The following commands are available:
+
+list:    Display a list of all data.
+details: Display a list that you can select data from.
+query:   Go into query mode.
+quit:    Quit the application.
+
+Query mode is a special interface that lets you search
+the data. To exit query mode:
+
+exit:    Exits query mode.
+TEXT
+
 class DinoDex
   attr_accessor :options
 
@@ -14,18 +28,6 @@ class DinoDex
     extend Hirb::Console
     setup_options(config)
     start_dinodex
-  end
-
-  def big(data_set)
-    data_set.select do |_name, dinosaur|
-      dinosaur.weight.to_i > 2000
-    end
-  end
-
-  def small(data_set)
-    data_set.select do |_name, dinosaur|
-      dinosaur.weight.to_i <= 2000
-    end
   end
 
   private
@@ -42,13 +44,16 @@ class DinoDex
   def start_dinodex
     create_file_path
     @data = Importer.new(options, Dinosaur)
-    @rolodex = Rolodex.new(Dinosaur::HEADERS, self)
+    @rolodex = Rolodex.new(Dinosaur::HEADERS, Dinosaur)
     display_title
     execute_command_loop
   end
 
   def display_title
-    puts ('-' * 30) << "\nDINODEX\n" << ('-' * 30)
+    puts '-' * 70
+    puts "DINODEX\n"
+    puts "Type help for more details."
+    puts '-' * 70
   end
 
   def execute_command_loop
@@ -65,13 +70,7 @@ class DinoDex
   end
 
   def help
-    puts
-    puts "The following commands are available:\n\n"
-    puts "list:\t\tDisplay a list of all data."
-    puts "details:\tDisplay a list that you can select data from."
-    puts "query:\t\tGo into query mode."
-    puts "quit:\t\tquit the application."
-    puts
+    puts DINODEX_HELP
   end
 
   def list
@@ -99,7 +98,7 @@ class DinoDex
     if results.empty?
       puts 'No results found with your criteria.'
     else
-      table(results.values, fields: Dinosaur.headers)
+      table(results.values, fields: Dinosaur.columns)
     end
   end
 

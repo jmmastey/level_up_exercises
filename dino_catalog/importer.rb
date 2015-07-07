@@ -15,12 +15,11 @@ class Importer
 
   def load_data_files(path)
     Dir.glob(path).each do |file|
-      if file_is_csv?(file)
-        # The next line is necessary to make sure that the option for
-        # the path is not sent to the CSV reading functionality.
-        options.delete(:path)
-        create_data_set(CSV.read(file, options))
-      end
+      next unless file_is_csv?(file)
+      # The next line is necessary to make sure that the option for
+      # the path is not sent to the CSV reading functionality.
+      options.delete(:path)
+      create_data_set(CSV.read(file, options))
     end
   end
 

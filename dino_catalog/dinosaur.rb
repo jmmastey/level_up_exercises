@@ -24,10 +24,10 @@ class Dinosaur
   end
 
   def big?
-    self.weight.to_i > MAX_SMALL_WEIGHT
+    weight.to_i > MAX_SMALL_WEIGHT
   end
 
   def small?
-    self.weight.to_i <= MAX_SMALL_WEIGHT
+    weight.to_i <= MAX_SMALL_WEIGHT
   end
 end

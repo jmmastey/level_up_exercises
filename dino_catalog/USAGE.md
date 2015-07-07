@@ -34,8 +34,6 @@ Now I can talk about some of the requirements and how my implementation attempts
 
     DinoDex <Query Mode> $ "Carnivore"
 
-???????????????????
-
 *Grab dinosaurs for specific periods (no need to differentiate between Early and Late Cretaceous, btw).*
 
     DinoDex <Query Mode> $ period=Jurassic

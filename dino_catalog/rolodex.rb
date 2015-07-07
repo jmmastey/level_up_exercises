@@ -44,36 +44,42 @@ class Rolodex
 
   def parse_conditions(conditions)
     conditions.split(',').each_with_index do |condition, index|
-      valid_text = text_condition(condition, index)
-      valid_qualifier = qualifier_condition(condition, index) unless valid_text
-      column_condition(condition, index) unless valid_text || valid_qualifier
+      add_text_query(condition, index) if text_condition?(condition)
+      add_qualifier_query(condition, index) if qualifier_condition?(condition)
+      add_column_query(condition, index) if column_condition?(condition)
     end
     @options
   end
 
-  def text_condition(condition, index)
-    return false unless condition.to_s.match(/[^'"].*['"]/)
+  def add_text_query(condition, index)
     search_term = []
     terms = condition.to_s.delete('"').delete("'")
     search_term << terms.strip
     add_to_conditions(search_term, index)
-    true
   end
 
-  def qualifier_condition(condition, index)
-    return unless condition.match(/big|small/)
+  def add_qualifier_query(condition, index)
     qualifiers = [condition.strip.to_sym]
     add_to_conditions(qualifiers, index)
-    true
   end
 
-  def column_condition(condition, index)
-    return false unless condition.downcase.include?('=')
+  def add_column_query(condition, index)
     query_conditions = {}
     key, value = condition.split('=')
     query_conditions[key.delete(' ')] = value.delete(' ')
     add_to_conditions(query_conditions, index)
-    true
+  end
+
+  def text_condition?(condition)
+    condition.to_s.match(/[^'"].*['"]/)
+  end
+
+  def qualifier_condition?(condition)
+    condition.match(/big|small/)
+  end
+
+  def column_condition?(condition)
+    condition.downcase.include?('=')
   end
 
   def add_to_conditions(condition, index)

@@ -8,6 +8,7 @@ require_relative 'rolodex'
 require_relative 'dinosaur'
 
 DINODEX_HELP = <<TEXT
+--------------------------------------------------------------------------
 The following commands are available:
 
 list:    Display a list of all data.
@@ -19,6 +20,34 @@ Query mode is a special interface that lets you search
 the data. To exit query mode:
 
 exit:    Exits query mode.
+
+While in query mode, you can perform queries based on a column.
+
+    movement=Biped
+
+You can chain such queries, if you wish.
+
+    period=Jurassic, continent=Europe
+
+You can also perform text queries. The same examples from above would be:
+
+    "Biped"
+    "Jurassic", "Europe"
+
+Do note that text queries must be in single or double quotes.
+
+There are certain qualifier terms you can use to query on. Currently the
+known qualifiers that DinoDex responds to are:
+
+    big
+    small
+
+You can combine criteria and chain filter calls together. For example:
+
+    period=Jurassic,"Carnivore"
+    "Europe",big,"Biped"
+--------------------------------------------------------------------------
+
 TEXT
 
 class DinoDex
@@ -50,10 +79,10 @@ class DinoDex
   end
 
   def display_title
-    puts '-' * 70
+    puts('-' * 70)
     puts "DINODEX\n"
     puts "Type help for more details."
-    puts '-' * 70
+    puts('-' * 70)
   end
 
   def execute_command_loop

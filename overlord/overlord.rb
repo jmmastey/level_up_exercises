@@ -6,11 +6,6 @@ require './classes/bomb.rb'
 
 enable :sessions
 
-get '/test' do
-  create_bomb
-  haml :test
-end
-
 get '/index' do
   create_bomb
   haml :index, :locals => {:bomb => session[:bomb]}

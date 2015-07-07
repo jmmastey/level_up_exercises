@@ -25,7 +25,10 @@ class Robot
   private
 
   def generate_name
-    "#{generate_char}#{generate_char}#{generate_num}#{generate_num}#{generate_num}"
+    "".tap do |name|
+      2.times { name << generate_char }
+      3.times { name << generate_num.to_s }
+    end
   end
 
   def generate_char

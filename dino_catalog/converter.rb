@@ -1,17 +1,30 @@
 class Converter
+  # This method exists to call other conversions should they be necessary.
+  # This seems useful to me because in my setup_options() in dinodex.rb,
+  # I don't want to have to pass in multiple method calls. This keeps the
+  # interface consistent and less subject to change. So even though this
+  # is planning ahead a bit, it seems a useful bit of planning ahead.
   def self.dino_data_convert
     carnivore_convert
   end
 
   def self.carnivore_convert
     lambda do |value, field|
-      field[:header].to_s == 'diet' ? diet_type(value) || value : value
+      if field[:header].to_s == 'diet'
+        diet_type(value) || value
+      else
+        value
+      end
     end
   end
 
   def self.diet_type(diet_value)
-    diet_value = diet_value.to_s.downcase
-    diet_value == 'yes' ? 'Carnivore' : '' if diet_value =~ /yes|no/
+    value = diet_value.to_s.downcase
+    if value == 'yes'
+      'Carnivore'
+    elsif value == 'no'
+      ''
+    end
   end
 
   def self.header_convert

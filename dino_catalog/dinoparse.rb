@@ -4,11 +4,11 @@ class DinoParse
   def self.new(files)
     raw_dinosaurs = read(files)
     clean_dinosaurs = standardize(raw_dinosaurs)
-    dinos = convert_to_object(clean_dinosaurs)
+    convert_to_object(clean_dinosaurs)
   end
 
   def self.convert_to_object(dinosaurs)
-    standardized_dinosaurs = dinosaurs.map{ |dinosaur| Dinosaur.new(dinosaur) }
+    dinosaurs.map{ |dinosaur| Dinosaur.new(dinosaur) }
   end
 
   def self.standardize(dinosaurs)
@@ -21,18 +21,19 @@ class DinoParse
       temp[:continent] = dinosaur[:continent]
       temp[:description] = dinosaur[:description]
       temp[:diet_details] = dinosaur[:diet]
-      temp[:carnivore] = dinosaur[:carnivore] || (dinosaur[:diet] == "Carnivore" ? "Yes" : "No")
-      temp[:period] = dino_period_processor(dinosaur[:period])
+      temp[:carnivore] = dinosaur[:carnivore] ||
+                        (dinosaur[:diet] == "Carnivore" ? "Yes" : "No")
+      temp[:periods] = dino_periods_processor(dinosaur[:period])
       standardized << temp
     end
     standardized
   end
 
-  def self.dino_period_processor(period)
+  def self.dino_periods_processor(periods)
     results = []
-    period.split(" or ").each do |segment|
+    periods.split(" or ").each do |segment|
       temp = {}
-      parts = segment.strip().split(" ")
+      parts = segment.strip.split(" ")
       temp[:period] = parts.last
       if (parts.last != parts.first)
         temp[:modifier] = parts.first

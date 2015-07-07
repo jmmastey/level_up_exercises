@@ -13,43 +13,43 @@ class DinoDex
   end
 
   def bipeds
-    DinoDex.new(dinos.select { |dino| dino.walking.downcase == "biped"})
+    DinoDex.new(dinos.select { |dino| dino.walking.downcase == "biped" })
   end
 
   def carnivores
-    DinoDex.new(dinos.select { |dino| dino.carnivore.downcase == "yes"})
+    DinoDex.new(dinos.select { |dino| dino.carnivore.downcase == "yes" })
   end
 
   def big
     DinoDex.new(dinos.select { |dino| dino.weight.to_i > 4000 })
   end
 
-  def period(search)
-    DinoDex.new(dinos.select { |dino| dino.period.map{ |a| a[:period].downcase == search.downcase}.reduce { |a, b| a || b} })
+  def periods(search)
+    DinoDex.new(dino_period_search(search))
   end
 
   def cretaceous
-    period("cretaceous")
+    periods("cretaceous")
   end
 
   def permian
-    period("permian")
+    periods("permian")
   end
 
   def jurassic
-    period("jurassic")
+    periods("jurassic")
   end
 
   def oxfordian
-    period("oxfordian")
+    periods("oxfordian")
   end
 
   def albian
-    period("albian")
+    periods("albian")
   end
 
   def triassic
-    period("triassic")
+    periods("triassic")
   end
 
   def filter(*filters)
@@ -57,13 +57,28 @@ class DinoDex
     filters.each do |filter|
       individual_results << self.send(filter)
     end
-    DinoDex.new(individual_results.map{|dex| dex.dinos}.reduce(&:&))
+    DinoDex.new(individual_results.map(&:dinos).inject(&:&))
   end
 
   def to_s
     dinos.each_with_index do |dino, index|
       puts "" unless index == 0
       puts dino
+    end
+  end
+
+  private
+
+  def dino_period_search(search)
+    dinos.select do |dino|
+      matches = dino_periods_to_match_list(dino, search)
+      matches.reduce { |a, b| a || b}
+    end
+  end
+
+  def dino_periods_to_match_list(dino, search)
+    dino.periods.map do |period|
+      period[:period].downcase == search.downcase
     end
   end
 end

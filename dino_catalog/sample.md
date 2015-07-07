@@ -1,13 +1,19 @@
-# Dino Catalog
-# Sample Program
+# Dino Catalog Sample Program
 
+### Dependencies
+```sh
 require 'csv'
 require 'rails'
-require 'pry'
 require './dinodex'
+```
 
-files = ['african_dinosaur_export.csv', 'dinodex.csv']
+### Required Input
+```sh
+# Array of Include Files (What you want to load data from)
+files = ['african_dinosaur_export.csv', 'dinodex.csv']```
 
+###Usage
+```sh
 # Generate DinoDex
 dex = DinoDex.new_from_files(files)
 
@@ -21,6 +27,6 @@ bipeds_arr = bipeds.dinos
 
 # Combine Filters
 mixed = dex.filter(:big, :cretaceous)
-
 # Print a DinoDex
-puts dex.jurassic
+puts mixed
+```

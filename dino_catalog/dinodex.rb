@@ -55,7 +55,7 @@ class DinoDex
   def filter(*filters)
     individual_results = []
     filters.each do |filter|
-      individual_results << self.send(filter)
+      individual_results << send(filter)
     end
     DinoDex.new(individual_results.map(&:dinos).inject(&:&))
   end

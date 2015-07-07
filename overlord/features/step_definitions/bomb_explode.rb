@@ -1,13 +1,21 @@
 #encoding: utf-8
 
 When(/^the timer hits zero$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  submit_button = '.columns > '
+  submit_button << '.column:first-child > '
+  submit_button << 'input[type="submit"]'
+
+  12.times do
+    find(submit_button).click
+  end
 end
 
 Then(/^the bomb should explode$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @start_time = "0000"
+  find('.bomb.detonated')
 end
 
-Then(/^it should no longer be disarmable$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I should be unable to (?:dis)?arm the bomb$/) do
+  find('#password[disabled]')
+  find('#confirm[disabled]')
 end

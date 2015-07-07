@@ -40,23 +40,69 @@ Given(/^I choose a panel$/) do
 end
 
 Given(/^the depressed buttons on the panel form a(?:n)? (in)?correct sequence$/) do |incorrect|
-  selector = @panel
-  if(incorrect)
-    selector << " .message p"
-    puts find(selector).content
-  else 
 
+  answer = find(@panel + " .message p").text.to_i
+  @bomb.codes[0] = answer
+
+  binary = @bomb.sequence_for(0)
+  binary[0] = 1 - binary[0] if incorrect
+
+  binary.each_with_index do |val, button_number|
+    next unless val == 1
+    selector = ".columns > .column:first-child "
+    selector << ".connector:nth-child(#{button_number+1})"
+    find(selector).click
   end
+
+  @bomb.attempt_hack(binary, 0)
 end
 
 When(/^I press submit on that panel$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  submit_button = '.columns > '
+  submit_button << '.column:first-child > '
+  submit_button << 'input[type="submit"]'
+
+  find(submit_button).click
 end
 
 Then(/^the panel should turn green$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  find('.columns > .column.hacked')
 end
 
 Then(/^the panel buttons should reset$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  find('.columns > .column:not(.hacked):first-child')
+
+  (1..6).each do |button_number|
+    selector = ".columns > .column:first-child "
+    selector << ".connector:nth-child(#{button_number})"
+
+    expect(find(selector).text).to eq('0')
+  end
+end
+
+Given(/^I enter correct sequences for all panels$/) do
+  (1..6).each do |panel|
+    answer = find("#panel#{panel-1} .message p").text.to_i
+    @bomb.codes[panel - 1] = answer
+
+    binary = @bomb.sequence_for(panel-1)
+    binary.each_with_index do |val, button_number|
+      next unless val == 1
+      selector = ".columns > .column:nth-child(#{panel}) "
+      selector << ".connector:nth-child(#{button_number+1})"
+      find(selector).click
+    end
+
+    submit_button = ".columns > "
+    submit_button << ".column:nth-child(#{panel}) > "
+    submit_button << "input[type='submit']"
+
+    find(submit_button).click
+  end
+
+  @start_time = find('.minutes').text + find('.seconds').text
+end
+
+Then(/^the bomb should be hacked$/) do
+  find('.bomb.hacked')
 end

@@ -1,14 +1,14 @@
 class Bomb
   attr_accessor :codes, :seqs, :armed, :hacked
 
-  def initialize
+  def initialize(code_hash)
     @codes = (1...64).to_a.sample(6)
     @seqs = [[],[],[],[],[],[]].map{|_| [0] * 6 }
     @hacked = [false] * 6
     @armed = false
 
-    @secret_arm_code = 1234
-    @secret_disarm_code = 1234
+    @secret_arm_code = code_hash[:arm]
+    @secret_disarm_code = code_hash[:disarm]
   end
 
   def hacked?(panel_num)
@@ -57,7 +57,7 @@ class Bomb
   end
 
   def disarm(code)
-    @armed = (code == @secret_disarm_code)
+    @armed = (code != @secret_disarm_code)
   end
 
   def armed?

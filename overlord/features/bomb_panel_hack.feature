@@ -1,4 +1,6 @@
 #encoding: utf-8
+
+@panel
 Feature: Hacking into a panel
   In order to hack into a panel
   As an evil overlord
@@ -30,3 +32,12 @@ Feature: Hacking into a panel
     And the depressed buttons on the panel form an incorrect sequence
     When I press submit on that panel
     Then the panel buttons should reset
+
+  Scenario: Hacking all panels
+    Given I'm at the bomb page
+    And the bomb is armed
+    And I enter correct sequences for all panels
+    Then the timer should stop
+    And I should be unable to arm the bomb
+    And I should be unable to disarm the bomb
+    And the bomb should be hacked

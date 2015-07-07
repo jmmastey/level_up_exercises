@@ -7,7 +7,6 @@ require './classes/bomb.rb'
 enable :sessions
 
 get '/index' do
-  create_bomb
   haml :index, :locals => {:bomb => session[:bomb]}
 end
 
@@ -22,16 +21,16 @@ end
 
 get '/code' do
   if(session[:bomb].armed?)
-    session[:bomb].disarm(params[:code].to_i)
+    session[:bomb].disarm(params[:code])
   else
-    session[:bomb].arm(params[:code].to_i)
+    session[:bomb].arm(params[:code])
   end
 
   content_type :json
   {'armed' => session[:bomb].armed? }.to_json
 end
 
-# we can shove stuff into the session cookie YAY!
-def create_bomb
-  session[:bomb] = Bomb.new
+post "/setcodes" do
+  puts params
+  session[:bomb] = Bomb.new(params)
 end

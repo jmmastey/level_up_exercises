@@ -1,4 +1,6 @@
 #encoding: utf-8
+
+@explode
 Feature: Bomb timer expires
   In order to explode
   As the bomb
@@ -9,5 +11,6 @@ Feature: Bomb timer expires
     And the bomb is armed
     When the timer hits zero
     Then the bomb should explode
-    And it should no longer be disarmable
+    And I should be unable to arm the bomb
+    And I should be unable to disarm the bomb
     And the timer should stop

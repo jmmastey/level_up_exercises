@@ -200,22 +200,27 @@ body {
   -webkit-animation: none;
   animation: none;
 }
+.bomb.hacked .column:after {
+  background-color: #0c8;
+}
 .bomb.disarmed .message:after,
 .bomb.detonated .message:after,
 .bomb.hacked .message:after{
-  content: "Disarmed";
   padding-top: 55%;
   width: 50%;
   height: 100px;
   border-radius: 5px;
-  background: url('../images/padlock.png') no-repeat 50% 10px;
-  background-size: 50%;
 
   position: absolute;
   z-index: 11;
   top: 50%;
   left: 25%;
   margin-top: -50px;
+}
+.bomb.disarmed .message:after {
+  content: "Disarmed";
+  background: url('../images/padlock.png') no-repeat 50% 10px;
+  background-size: 50%;
 }
 
 .bomb.detonated .message:after {
@@ -227,6 +232,7 @@ body {
   content: "Hacked";
   background: url('../images/checkmark.svg') no-repeat 50% 10px;
   background-size: 60%;
+  opacity: 0.5;
 }
 
 /****************************
@@ -250,6 +256,13 @@ body {
 }
 .footer input[type='button'] {
   cursor: pointer;
+}
+.footer #password[disabled] {
+  background: #ccc;
+}
+.footer #confirm[disabled] {
+  color: #ccc;
+  cursor: default;
 }
 .footer .footer-section {
   display: inline-block;
@@ -290,6 +303,42 @@ body {
   display: none;
 }
 
+/****************************
+        CODE INPUT
+****************************/
+.code-input {
+  position: fixed;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: rgba(0,0,0,0.8);
+  z-index: 50;
+  text-align: center;
+}
+.code-input .message.box {
+  top: 50%;
+  width: 600px;
+  left: 50%;
+  position: absolute;
+  margin-top: -75px;
+  margin-left: -300px;
+  padding: 20px;
+}
+.code-input input {
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  font-style: italic;
+  color: #444;
+  font-size: 18px;
+  outline: none;
+}
+.code-input input[type="button"] {
+  cursor: pointer;
+}
 
 /****************************
         ANIMATIONS

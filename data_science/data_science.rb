@@ -56,7 +56,7 @@ class DataScience
   def calc_confidence(cohort_name)
     p, se = calc_mean_error(cohort_name)
 
-    [p - se, p, p + se].map{ |num| num.round(3) }
+    [p - se, p, p + se].map { |num| num.round(3) }
   end
 
   # 3. Confidence level that the current leader is in fact better than random.
@@ -78,4 +78,4 @@ class DataScience
   end
 end
 
-#DataScience.new('data_export_2014_06_20_15_59_02.json').report_all
+# DataScience.new('data_export_2014_06_20_15_59_02.json').report_all

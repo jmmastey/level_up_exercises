@@ -1,10 +1,9 @@
 require '../data_science.rb'
 
-
 describe DataScience do
-  before :all do 
+  before :all do
     data_file = '../data_export_2014_06_20_15_59_02.json'
-    @ds = DataScience.new(data_file);
+    @ds = DataScience.new(data_file)
   end
 
   it "should have the correct sample size" do

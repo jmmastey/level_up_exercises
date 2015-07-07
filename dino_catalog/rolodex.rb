@@ -23,7 +23,7 @@ class Rolodex
 
   def process_condition_array(condition, data)
     condition.each do |term|
-      data = @entity.send term, data if term.class == Symbol
+      data = @entity.send(term, data) if term.class == Symbol
       data = search_data_text(data, term) unless term.class == Symbol
     end
     data
@@ -62,8 +62,7 @@ class Rolodex
 
   def qualifier_condition(condition, index)
     return unless condition.match(/big|small/)
-    qualifiers = []
-    qualifiers << condition.to_sym
+    qualifiers = [condition.strip.to_sym]
     add_to_conditions(qualifiers, index)
     true
   end
@@ -82,25 +81,25 @@ class Rolodex
   end
 
   def search_data_text(data_set, term)
-    data_set.select do |key, value|
-      result = (key == term)
-      search_by_header_column(value, term, result)
+    data_set.select do |_key, value|
+      search_by_header_column(value, term)
     end
   end
 
-  def search_by_header_column(value, term, result)
+  def search_by_header_column(value, term)
+    term_found = false
     value.instance_variables.each do |header_variable|
-      values = value.instance_variable_get(header_variable)
-      result = values.to_s.include?(term) unless result
+      column_cell = value.instance_variable_get(header_variable)
+      term_found = column_cell.to_s.include?(term) unless term_found
     end
-    result
+    term_found
   end
 
   def create_header_methods
     @headers.each do |header|
       self.class.class_eval do
-        define_method "query_#{header.downcase}" do |data_set, *data|
-          query_by_header(header, data_set, data)
+        define_method "query_#{header.downcase}" do |data_set, *query_term|
+          query_by_header(header, data_set, query_term)
         end
       end
     end
@@ -108,10 +107,8 @@ class Rolodex
 
   def query_by_header(header, data_set, data)
     data_set.select do |_key, value|
-      valid_data = false
-      values = value.method("#{header.downcase}").call
-      data.each { |item| valid_data = values.to_s.include?(item) }
-      valid_data
+      cell_data = value.method("#{header.downcase}").call
+      data.any? { |item| cell_data.to_s.include?(item) }
     end
   end
 end

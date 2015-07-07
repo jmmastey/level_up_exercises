@@ -21,11 +21,13 @@ the data. To exit query mode:
 
 exit:    Exits query mode.
 
-While in query mode, you can perform queries based on a column.
+While in query mode, you can perform queries based on a column. You must use
+the format below.
 
     movement=Biped
 
-You can chain such queries, if you wish.
+Please do not use spaces in these queries. You can chain such queries, if
+you wish.
 
     period=Jurassic, continent=Europe
 
@@ -80,7 +82,7 @@ class DinoDex
 
   def display_title
     puts('-' * 70)
-    puts "DINODEX\n"
+    puts "DINODEX"
     puts "Type help for more details."
     puts('-' * 70)
   end
@@ -96,6 +98,9 @@ class DinoDex
 
   def execute_command(command)
     send command.to_sym
+  rescue NoMethodError
+    puts "There is no command '#{command}'."
+    puts "Type help for available commands.\n"
   end
 
   def help

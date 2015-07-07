@@ -75,11 +75,11 @@ class DinoDex
   end
 
   def list
-    table(@data.data_set.values, fields: Dinosaur.headers)
+    table(@data.data_set.values, fields: Dinosaur.columns)
   end
 
   def details
-    list = menu(@data.data_set.values, fields: Dinosaur.headers)
+    list = menu(@data.data_set.values, fields: Dinosaur.columns)
     item = @rolodex.show_details(@data.data_set, *list)
     table(item.values, fields: Dinosaur.headers)
   end

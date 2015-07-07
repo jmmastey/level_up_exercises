@@ -1,20 +1,11 @@
 class Dinosaur
-  %i(
-    name
-    period
-    continent
-    diet
-    weight
-    movement
-    description
-  ).each { |s| attr_accessor s }
+  attr_accessor :name, :period, :continent, :diet, :weight, :movement,
+    :description
 
   HEADERS = %w(Name Period Continent Diet Weight Movement Description)
 
-  def self.headers
-    columns = []
-    HEADERS.each { |header| columns << header.downcase }
-    columns
+  def self.columns
+    HEADERS.map(&:downcase)
   end
 
   def initialize(data)

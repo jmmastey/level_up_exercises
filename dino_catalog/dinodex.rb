@@ -114,7 +114,7 @@ class DinoDex
   def details
     list = menu(@data.data_set.values, fields: Dinosaur.columns)
     item = @rolodex.show_details(@data.data_set, *list)
-    table(item.values, fields: Dinosaur.headers)
+    table(item.values, fields: Dinosaur.columns)
   end
 
   def query

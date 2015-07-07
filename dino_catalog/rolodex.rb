@@ -30,10 +30,9 @@ class Rolodex
   end
 
   def process_condition_hash(condition, data)
-    condition.each do |key, value|
-      data = method("query_#{key}").call(data, value)
+    condition.reduce(data) do |entity_list, (key, value)|
+      method("query_#{key}").call(entity_list, value)
     end
-    data
   end
 
   def show_details(data_set, *values)

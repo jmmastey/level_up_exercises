@@ -8,32 +8,28 @@ class Importer
     self.data_set = {}
     @entity = entity
     @options = options
-    get_data_files(options[:path])
+    load_data_files(options[:path])
   end
 
   private
 
-  def get_data_files(path)
+  def load_data_files(path)
     Dir.glob(path).each do |file|
-      load_file(file) if file_is_csv?(file)
+      if file_is_csv?(file)
+        # The next line is necessary to make sure that the option for
+        # the path is not sent to the CSV reading functionality.
+        options.delete(:path)
+        create_data_set(CSV.read(file, options))
+      end
     end
-  end
-
-  def load_file(file)
-    # The next line is necessary to make sure that the option for
-    # the path is not sent to the CSV reading functionality.
-    options.delete(:path)
-
-    create_data_set(CSV.read(file, options))
   end
 
   def create_data_set(file_contents)
     file_contents.by_row.each do |row|
-      data = {}
-      row.headers.each do |header|
+      row.headers.each_with_object({}) do |header, data|
         data[header] = row[header]
+        data_set[data[:name]] = entity.new(data)
       end
-      data_set[data[:name]] = entity.new(data)
     end
   end
 

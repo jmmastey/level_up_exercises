@@ -95,11 +95,8 @@ class DinoDex
 
   def present_results(conditions)
     results = @rolodex.query(@data.data_set, conditions)
-    if results.empty?
-      puts 'No results found with your criteria.'
-    else
-      table(results.values, fields: Dinosaur.columns)
-    end
+    return puts 'No results found with your criteria.' if results.empty?
+    table(results.values, fields: Dinosaur.columns)
   end
 
   def create_file_path

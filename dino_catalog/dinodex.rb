@@ -72,7 +72,7 @@ class DinoDex
   def dino_period_search(search)
     dinos.select do |dino|
       matches = dino_periods_to_match_list(dino, search)
-      matches.reduce { |a, b| a || b}
+      matches.inject { |a, b| a || b }
     end
   end
 

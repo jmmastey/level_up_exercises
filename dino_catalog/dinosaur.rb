@@ -22,7 +22,7 @@ class Dinosaur
       if field
         result << "\n#{field.to_s.titleize}: "
         if (field != :periods)
-          result << self.send(field).to_s
+          result << send(field).to_s
         else
           result << generate_period_string
         end
@@ -35,14 +35,14 @@ class Dinosaur
   private
 
   def generate_period_string
-    period_string = formatted_periods.join(" or ")
+    formatted_periods.join(" or ")
   end
 
   def formatted_periods
-    periods.map{ |period| formatted_period(period) }
+    periods.map { |period| formatted_period(period) }
   end
 
-  def formatted_period period
+  def formatted_period(period)
     [period[:modifier], period[:period]].compact.join(" ")
   end
 end

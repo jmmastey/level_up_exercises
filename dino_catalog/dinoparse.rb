@@ -22,7 +22,7 @@ class DinoParse
       temp[:description] = dinosaur[:description]
       temp[:diet_details] = dinosaur[:diet]
       temp[:carnivore] = dinosaur[:carnivore] ||
-                        (dinosaur[:diet] == "Carnivore" ? "Yes" : "No")
+                         (dinosaur[:diet] == "Carnivore" ? "Yes" : "No")
       temp[:periods] = dino_periods_processor(dinosaur[:period])
       standardized << temp
     end

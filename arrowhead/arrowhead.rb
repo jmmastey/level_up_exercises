@@ -14,8 +14,10 @@ class Arrowhead
     },
   }
 
-  ERRs = "Unknown shape value. Are you sure you know what you're talking about?"
-  ERRr = "Unknown region, please provide a valid region"
+  ERRORS = {
+    shape: "Unknown shape value. Are you sure you know what you're talking about?",
+    region: "Unknown region, please provide a valid region"
+  }
 
   def self.classify(region, shape)
     if check_status(region, shape)
@@ -28,9 +30,9 @@ class Arrowhead
     if valid_region?(region) && valid_shape?(region, shape)
       return true
     elsif valid_region?(region)
-      raise NameError, ERRs
+      raise NameError, ERRORS[:shape]
     else
-      raise NameError, ERRr
+      raise NameError, ERRORS[:region]
     end
   end
 

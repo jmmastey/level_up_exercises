@@ -1,5 +1,4 @@
 class DinosaurCollectionPrinter
-
   def initialize(collection)
     @dinos = collection
   end
@@ -28,5 +27,5 @@ class DinosaurCollectionPrinter
     "results:\n"
   end
 
-  private :prepare_header, :prepare_row ,:prepare_delimiter
+  private :prepare_header, :prepare_row, :prepare_delimiter
 end

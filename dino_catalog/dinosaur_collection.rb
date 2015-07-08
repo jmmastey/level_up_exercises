@@ -6,7 +6,6 @@ require_relative 'user_row_reader.rb'
 require_relative 'dinosaur_collection_printer.rb'
 
 class DinosaurCollection
-
   def initialize
     @filter = []
     @dinosaurs = []
@@ -21,7 +20,6 @@ class DinosaurCollection
         init_user_row(row) if row.header?("NAME")
       end
     end
-    @dino_copy = @dinosaurs.dup
   end
 
   def init_pirate_bay_row(row)
@@ -32,51 +30,50 @@ class DinosaurCollection
     @dinosaurs << UserRowReader.new.parse_row(row)
   end
 
-  def select_by_walk_type(walk_type = 'Biped')
-    @dinosaurs = @dinosaurs.select do |dino|
+  def select_by_walk_type!(walk_type = 'Biped')
+    @dinosaurs.select! do |dino|
       dino.is_a?(Dinosaur) && dino.walking == walk_type
     end
     self
   end
 
-  def get_by_name(dino_name)
+  def get_by_name!(dino_name)
     raise ArgumentError, 'Missing name' if dino_name.nil?
-    @dinosaurs = @dinosaurs.select do |dino|
+    @dinosaurs.select! do |dino|
       dino.name == dino_name
     end
     self
   end
 
-  def select_carnivores
-    @dinosaurs = @dinosaurs.select &:carnivore?
+  def select_carnivores!
+    @dinosaurs.select!(&:carnivore?)
     self
   end
 
-  def get_by_period(period = 'Jurassic')
-    @dinosaurs = @dinosaurs.select do |dino|
-      dino.period.include? (period)
+  def get_by_period!(period = 'Jurassic')
+    @dinosaurs.select! do |dino|
+      dino.period.include? period
     end
     self
   end
 
-  def select_big
-    @dinosaurs.select! &:big?
+  def select_big!
+    @dinosaurs.select!(&:big?)
     self
   end
 
-  def select_small
-    @dinosaurs.select! &:small?
+  def select_small!
+    @dinosaurs.select!(&:small?)
     self
   end
 
-  def select
-    @dinosaurs
+  def filter
+    @dinosaurs.dup
   end
 
   def print_filter
     printer = DinosaurCollectionPrinter.new @dinosaurs.dup
     printer.prepare_view
-
   end
 
   private :init_pirate_bay_row, :init_pirate_bay_row, :init_user_row

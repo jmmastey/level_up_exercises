@@ -33,36 +33,36 @@ class TestDinosaurCollection < Minitest::Test
   end
 
   def test_that_dinasourscollection_grabs_all_11_bipeds
-    assert_equal 11, @dinos.select_by_walk_type('Biped').select.length
+    assert_equal 11, @dinos.select_by_walk_type!('Biped').filter.length
   end
 
   def test_that_grabs_all_12_carnivores_period
-    assert_equal 12, @dinos.select_carnivores.select.length
+    assert_equal 12, @dinos.select_carnivores!.filter.length
   end
 
   def test_that_grabs_all_5_jurasic_period
-    assert_equal 5, @dinos.get_by_period('Jurassic').select.length
+    assert_equal 5, @dinos.get_by_period!('Jurassic').filter.length
   end
 
   def test_that_grabs_all_1_albian_period
-    assert_equal 1, @dinos.get_by_period('Albian').select.length
+    assert_equal 1, @dinos.get_by_period!('Albian').filter.length
   end
 
   def test_that_grabs_all_9_cretaceous_period
-    assert_equal 9, @dinos.get_by_period('Cretaceous').select.length
+    assert_equal 9, @dinos.get_by_period!('Cretaceous').filter.length
   end
 
   def test_that_grabs_all_big
-    assert_equal 6, @dinos.select_big.select.length
+    assert_equal 6, @dinos.select_big!.filter.length
   end
 
   def test_that_grabs_all_small
-    assert_equal 7, @dinos.select_small.select.length
+    assert_equal 7, @dinos.select_small!.filter.length
   end
 
   def test_that_grabs_all_small_biped
-    puts @dinos.select_small.select_by_walk_type('Biped').print_filter
-    actual = @dinos.select_small.select_by_walk_type('Biped').select.length
+    puts @dinos.select_small!.select_by_walk_type!('Biped').print_filter
+    actual = @dinos.select_small!.select_by_walk_type!('Biped').filter.length
     assert_equal 5, actual
   end
 
@@ -70,7 +70,7 @@ class TestDinosaurCollection < Minitest::Test
     expected_output = "results:\nname: Carcharodontosaurus\nperiod: Albian\n"\
         "diet: Carnivore\nweight: 3000\nwalking: Biped\n"\
         "________________________________________\n"
-    actual = @dinos.get_by_name('Carcharodontosaurus').print_filter
+    actual = @dinos.get_by_name!('Carcharodontosaurus').print_filter
     assert_equal expected_output, actual
   end
 end

@@ -9,7 +9,7 @@ class Dinosaur
   end
 
   def carnivore?
-    %w{Insectivore Carnivore Piscivore}.include?(diet)
+    %w(Insectivore Carnivore Piscivore).include?(diet)
   end
 
   def weight_in_tons

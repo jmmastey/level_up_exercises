@@ -8,7 +8,7 @@ class DinoParse
   end
 
   def self.convert_to_object(dinosaurs)
-    dinosaurs.map{ |dinosaur| Dinosaur.new(dinosaur) }
+    dinosaurs.map { |dinosaur| Dinosaur.new(dinosaur) }
   end
 
   def self.standardize(dinosaurs)

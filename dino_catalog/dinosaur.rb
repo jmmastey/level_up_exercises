@@ -62,6 +62,6 @@ class Dinosaur
   end
 
   def titleize(word)
-    word.split("_").map { |word| word.capitalize }.join(" ")
+    word.split("_").map(&:capitalize).join(" ")
   end
 end

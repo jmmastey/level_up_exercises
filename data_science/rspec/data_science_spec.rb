@@ -15,6 +15,5 @@ describe DataScience do
     it "should have a status of cohorts different" do
       expect(data_science.cohorts_different?).to be true
     end
-
   end
 end

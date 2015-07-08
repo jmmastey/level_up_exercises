@@ -25,5 +25,4 @@ describe FileReader do
       expect { FileReader.new(file_path_invalid) }.to raise_error(IOError)
     end
   end
-
 end

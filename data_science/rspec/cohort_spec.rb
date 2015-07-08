@@ -3,16 +3,22 @@ require_relative '../cohort'
 describe Cohort do
   context "basic check" do
     let(:name) { "A" }
-    let(:valid_record) { { date: "03/12/2015",
-                           cohort: "A",
-                           result: 0 } }
+    let(:valid_record) do
+      { date: "03/12/2015",
+        cohort: "A",
+        result: 0 }
+    end
 
-    let(:invalid_record) { { date: "03/12/2015",
-                             result: 0 } }
+    let(:invalid_record) do
+      { date: "03/12/2015",
+        result: 0 }
+    end
 
-    let(:wrong_record) { { date: "03/12/2015",
-                           cohort: "B",
-                           result: 0 } }
+    let(:wrong_record) do
+      { date: "03/12/2015",
+        cohort: "B",
+        result: 0 }
+    end
 
     subject(:cohort) { Cohort.new(name) }
 
@@ -54,7 +60,6 @@ describe Cohort do
     it "accepts multiple records" do
       expect(cohort.records.size).to eq(21)
     end
-
 
     it "returns correct conversion ranges" do
       expect(cohort.conversion_rate).to eq([31.02, 73.74])

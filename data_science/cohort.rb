@@ -23,7 +23,7 @@ class Cohort
 
   def conversion_rate
     interval = ABAnalyzer.confidence_interval(@conversions, @records.size, 0.95)
-    interval.map { |val| (val*100).round(2) }
+    interval.map { |val| (val * 100).round(2) }
   end
 
   def to_s
@@ -39,8 +39,8 @@ class Cohort
 
   def validate_hash(record)
     unless record.include?(:date) &&
-        record.include?(:result) &&
-        record.include?(:cohort)
+           record.include?(:result) &&
+           record.include?(:cohort)
       raise ArgumentError, "Invalid Record"
     end
   end

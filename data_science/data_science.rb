@@ -12,7 +12,6 @@ class DataScience
   def cohorts_different?
     values = {}
     @cohorts.each do |name, cohort|
-      symbol_name = (name.downcase + "group").to_sym
       values[name] = {}
       values[name][:conversions] = cohort.conversions
       values[name][:records] = cohort.records.size
@@ -22,7 +21,7 @@ class DataScience
 
   def to_s
     string = ""
-    @cohorts.each do |name, cohort|
+    @cohorts.each do |_name, cohort|
       string << cohort.to_s
       string << "\n"
     end
@@ -51,4 +50,3 @@ class DataScience
     result
   end
 end
-

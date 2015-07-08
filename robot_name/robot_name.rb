@@ -15,8 +15,7 @@ class Robot
       @name = generate_name
     end
 
-    check_valid_name(name)
-    check_new_name(name)
+    validate_name(namee)
 
     @@registry << @name
   end
@@ -37,6 +36,11 @@ class Robot
 
   def generate_num
     rand(10)
+  end
+
+  def validate_name(name)
+    check_valid_name(name)
+    check_new_name(name)
   end
 
   def check_valid_name(name)

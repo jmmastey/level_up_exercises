@@ -7,11 +7,10 @@ require_relative 'dinosaur_collection_printer.rb'
 
 class DinosaurCollection
 
-  def initialize (collection = nil)
+  def initialize
     @filter = []
     @dinosaurs = []
-    # collection.nil? ? @dinosaurs = [] : @dinosaurs = collection
-    init_readers# if collection.nil?
+    init_readers
   end
 
   def init_readers
@@ -49,7 +48,7 @@ class DinosaurCollection
   end
 
   def select_carnivores
-    @dinosaurs = @dinosaurs.select { |dino| (dino.carnivore?) }
+    @dinosaurs = @dinosaurs.select &:carnivore?
     self
   end
 
@@ -61,12 +60,12 @@ class DinosaurCollection
   end
 
   def select_big
-    @dinosaurs.select! { |dino| (dino.big?) }
+    @dinosaurs.select! &:big?
     self
   end
 
   def select_small
-    @dinosaurs.select! { |dino| (dino.small?) }
+    @dinosaurs.select! &:small?
     self
   end
 

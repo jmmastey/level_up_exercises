@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  before do
+  before(:each) do
     @new_user = User.create(name: "A Nother", email: "another@example.org")
+    #@new_photo = Photo.create(first: "t", last: "j", photo_url: "sfs@dfs.com")
+    #p @new_photo
   end
 
 

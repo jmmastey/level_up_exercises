@@ -1,4 +1,4 @@
-Feature: User cansort people's photos by attribute
+Feature: User can sort people's photos by attribute
   In order to get insight into Enova's people
   As the user
   I want to sort photos by facial attribute

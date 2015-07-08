@@ -20,20 +20,14 @@ class Arrowhead
   }
 
   def self.classify(region, shape)
-    if check_status(region, shape)
-      arrowhead = CLASSIFICATIONS[region][shape]
-      puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-    end
+    check_status(region, shape)
+    arrowhead = CLASSIFICATIONS[region][shape]
+    puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 
   def self.check_status(region, shape)
-    if valid_region?(region) && valid_shape?(region, shape)
-      return true
-    elsif valid_region?(region)
-      raise NameError, ERRORS[:shape]
-    else
-      raise NameError, ERRORS[:region]
-    end
+    raise NameError, ERRORS[:region] unless valid_region?(region)
+    raise NameError, ERRORS[:shape] unless valid_shape?(region, shape)
   end
 
   def self.valid_region?(region)

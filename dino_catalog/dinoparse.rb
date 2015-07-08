@@ -12,44 +12,59 @@ class DinoParse
   end
 
   def self.standardize(dinosaurs)
-    standardized = []
-    dinosaurs.each do |dinosaur|
-      temp = {}
-      temp[:genus] = dinosaur[:name] || dinosaur[:genus]
-      temp[:weight] = dinosaur[:weight_in_lbs] || dinosaur[:weight]
-      temp[:walking] = dinosaur[:walking]
-      temp[:continent] = dinosaur[:continent]
-      temp[:description] = dinosaur[:description]
-      temp[:diet_details] = dinosaur[:diet]
-      temp[:carnivore] = dinosaur[:carnivore] ||
-                         (dinosaur[:diet] == "Carnivore" ? "Yes" : "No")
-      temp[:periods] = dino_periods_processor(dinosaur[:period])
-      standardized << temp
+    dinosaurs.map do |dinosaur|
+      new_dino = {}
+      new_dino[:genus] = dinosaur[:name] || dinosaur[:genus]
+      new_dino[:weight] = dinosaur[:weight_in_lbs] || dinosaur[:weight]
+      new_dino[:walking] = dinosaur[:walking]
+      new_dino[:continent] = dinosaur[:continent]
+      new_dino[:description] = dinosaur[:description]
+      new_dino[:diet_details] = dinosaur[:diet]
+      new_dino[:carnivore] = standardize_carnivore(dinosaur)
+      new_dino[:periods] = dino_periods_processor(dinosaur[:period])
+      new_dino
     end
-    standardized
   end
 
   def self.dino_periods_processor(periods)
-    results = []
-    periods.split(" or ").each do |segment|
+    periods.split(" or ").map do |segment|
       temp = {}
       parts = segment.strip.split(" ")
       temp[:period] = parts.last
       if (parts.last != parts.first)
         temp[:modifier] = parts.first
       end
-      results << temp
+      temp
     end
-    results
   end
 
   def self.read(files)
-    raw_dinosaurs = []
-    files.each do |file|
+    files.each_with_object([]) do |file, raw_dinosaurs|
       CSV.foreach(file, headers: true, header_converters: :downcase) do |row|
-        raw_dinosaurs << row.to_hash.symbolize_keys
+        raw_dinosaurs << symbolize_keys(row.to_hash)
       end
     end
-    raw_dinosaurs
+  end
+
+  private
+
+  def self.standardize_carnivore(dinosaur)
+    if dinosaur.include?(:carnivore)
+      return dinosaur[:carnivore] == "Yes"
+    else
+      if dinosaur[:diet] == "Carnivore"
+        return true
+      else
+        return false
+      end
+    end
+  end
+
+  def self.symbolize_keys(hash)
+    result = {}
+    hash.each do |key, value|
+      result[key.to_sym] = value
+    end
+    result
   end
 end

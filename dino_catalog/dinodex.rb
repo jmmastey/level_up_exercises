@@ -13,15 +13,15 @@ class DinoDex
   end
 
   def bipeds
-    DinoDex.new(dinos.select { |dino| dino.walking.downcase == "biped" })
+    DinoDex.new(dinos.select(&:biped?))
   end
 
   def carnivores
-    DinoDex.new(dinos.select { |dino| dino.carnivore.downcase == "yes" })
+    DinoDex.new(dinos.select(&:carnivore?))
   end
 
   def big
-    DinoDex.new(dinos.select { |dino| dino.weight.to_i > 4000 })
+    DinoDex.new(dinos.select(&:big?))
   end
 
   def periods(search)
@@ -53,18 +53,18 @@ class DinoDex
   end
 
   def filter(*filters)
-    individual_results = []
-    filters.each do |filter|
-      individual_results << send(filter)
-    end
+    individual_results = filters.map { |filter| send(filter) }
     DinoDex.new(individual_results.map(&:dinos).inject(&:&))
   end
 
   def to_s
+    result = ""
     dinos.each_with_index do |dino, index|
-      puts "" unless index == 0
-      puts dino
+      result << "\n" unless index == 0
+      result << dino.to_s
+      result << "\n"
     end
+    result
   end
 
   private
@@ -72,7 +72,7 @@ class DinoDex
   def dino_period_search(search)
     dinos.select do |dino|
       matches = dino_periods_to_match_list(dino, search)
-      matches.inject { |a, b| a || b }
+      matches.any?
     end
   end
 

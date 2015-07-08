@@ -1,6 +1,10 @@
 class Dinosaur
   attr_accessor :genus, :weight, :walking, :continent, :description,
     :carnivore, :diet_details, :periods
+
+  PRINT_ORDER = [:genus, :periods, :description, :weight, :walking,
+                 :continent, :carnivore, :diet_details]
+
   def initialize(dinosaur)
     @genus = dinosaur[:genus]
     @weight = dinosaur[:weight]
@@ -15,21 +19,32 @@ class Dinosaur
   def to_s
     result = "Dino Details:"
 
-    print_order = [:genus, :periods, :description, :weight, :walking,
-                   :continent, :carnivore, :diet_details]
+    PRINT_ORDER.each do |field|
+      next if send(field).to_s.empty?
 
-    print_order.each do |field|
-      if field
-        result << "\n#{field.to_s.titleize}: "
-        if (field != :periods)
-          result << send(field).to_s
-        else
-          result << generate_period_string
-        end
+      result << "\n#{titleize(field.to_s)}: "
+      if (field != :periods && field != :carnivore)
+        result << send(field).to_s
+      elsif field == :periods
+        result << generate_period_string
+      else
+        result << (@carnivore ? "Yes" : "No")
       end
     end
 
     result
+  end
+
+  def biped?
+    @walking.downcase == "biped"
+  end
+
+  def carnivore?
+    @carnivore.downcase == "yes"
+  end
+
+  def big?
+    @weight.to_i > 4000
   end
 
   private
@@ -44,5 +59,9 @@ class Dinosaur
 
   def formatted_period(period)
     [period[:modifier], period[:period]].compact.join(" ")
+  end
+
+  def titleize(word)
+    word.split("_").map { |word| word.capitalize }.join(" ")
   end
 end

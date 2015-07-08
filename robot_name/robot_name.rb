@@ -15,9 +15,8 @@ class Robot
       @name = generate_name
     end
 
-    if !valid_name?(name) || @@registry.include?(name)
-      raise NameCollisionError, 'There was a problem generating the robot name!'
-    end
+    check_valid_name(name)
+    check_new_name(name)
 
     @@registry << @name
   end
@@ -40,8 +39,16 @@ class Robot
     rand(10)
   end
 
-  def valid_name?(name)
-    (name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
+  def check_valid_name(name)
+    if (name =~ /\A[[:alpha:]]{2}[[:digit:]]{3}\Z/).nil?
+      raise NameError, "Name is not valid"
+    end
+  end
+
+  def check_new_name(name)
+    if @@registry.include?(name)
+      raise NameCollisionError, 'There was a problem generating the robot name!'
+    end
   end
 end
 

@@ -8,6 +8,10 @@ get '/' do
   "Time to build an app around here. Start time: " + start_time
 end
 
+get '/:name' do
+  "Hello, #{params[:name]}!, it is: " + start_time
+end
+
 # we can shove stuff into the session cookie YAY!
 def start_time
   session[:start_time] ||= (Time.now).to_s

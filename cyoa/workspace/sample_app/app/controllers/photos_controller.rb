@@ -3,53 +3,47 @@ require 'face'
 require 'csv'
 
 class PhotosController < ApplicationController
-  FILENAME = Rails.root.join('app', 'controllers','photos.csv') 
-  API_KEY = 'aab4cf0d3e724b2fab4986c6a05696e3' 
+  FILENAME = Rails.root.join('app', 'controllers', 'photos.csv')
+  API_KEY = 'aab4cf0d3e724b2fab4986c6a05696e3'
   API_SECRET = 'f16c30aa0277468fb378f43533ab69a3'
 
   def new
+    
+    @all_moods = { happy: "happiness", sad: "sadness", angry: "anger",
+                  surprised: "surprise", disgusted: "disgust", scared: "fear" }
     update_photos
+    @selected_mood = @all_moods[:surprised]
+    sort_photos(@selected_mood)
   end
 
-  def update_photos 
-    client = Face.get_client(:api_key => 'aab4cf0d3e724b2fab4986c6a05696e3', :api_secret => 'f16c30aa0277468fb378f43533ab69a3')
-
-  	@imported_photos = import_csv_file(FILENAME)
-    @imported_photos.each do |i|
-     
-      my_face = client.faces_detect(:urls => [ i[:photo_url]], :attributes => 'all')
-
-      p i[:first], i[:last], i[:photo_url]
-      p my_face["photos"][0]["tags"][0]["attributes"]["happiness"]["confidence"]
-      mood = my_face["photos"][0]["tags"][0]["attributes"]["mood"]["value"]
-      happiness = my_face["photos"][0]["tags"][0]["attributes"]["happiness"]["confidence"]
-      Photo.create( first: i[:first], last: i[:last], photo_url: i[:photo_url], mood: mood, happiness: happiness)
+  def update_photos
+    client = Face.get_client(api_key: API_KEY, api_secret: API_SECRET)
+    import_csv_file(FILENAME).each do |i|
+      unless Photo.exists?(photo_url: i[:photo_url])
+        my_face = client.faces_detect(urls: [i[:photo_url]], attributes: 'all')
+        attrib = my_face["photos"][0]["tags"][0]["attributes"]
+        mood = attrib["mood"]["value"]
+        moods = {first: i[:first], last: i[:last], photo_url: i[:photo_url]}
+        @all_moods.each_value do |v|
+          moods[v.to_sym] = attrib[v]["confidence"]
+        end
+        moods[:mood] = mood
+        Photo.create(moods)
+      end
     end
-
-    #p @raw_photos
-    #client = Face.get_client(:api_key => 'aab4cf0d3e724b2fab4986c6a05696e3', :api_secret => 'f16c30aa0277468fb378f43533ab69a3')
-    #my_face = client.faces_detect(:urls => ['https://lh3.googleusercontent.com/C8Zj-lDdfjl6dysDz4K9N2jobmoDJg1tKhNNz9X0U2X8=w475-h665-no'], :attributes => 'all')
-    #p my_face["status"]
-    #p my_face["photos"][0]["tags"][0]["attributes"]["happiness"]["confidence"]
-    #newest = Photo.create( first: "Tracyy" , last: "Tangy", photo_url: "lfsdlf@dfdd.com")
   end
-	
-	def import_csv_file(filename)
+
+  def import_csv_file(filename)
     csv = []
-    CSV.foreach( filename, headers: true, header_converters: :symbol) do |row|
+    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
       csv << row
     end
     csv
   end
 
-  #def group_photos
-  #  @raw_photos.map do |row|
-  #    Photo.new(row)
-  #  end
-  #end
-
+  def sort_photos(attribute)
+    attrib_hash = { attribute.to_sym => :desc }
+    @matching_photos = Photo.order(attrib_hash)
+    #@matching_photos = Photo.where(mood: 'happy').order(happiness: :desc)
+  end
 end
-
-
-
- 

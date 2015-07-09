@@ -6,7 +6,7 @@ enable :sessions
 
 get '/' do
   #"Time to build an app around here. Start time: " + start_time
-  "Evil Bomb Controller 5.0"
+  "Evil Bomb Controller 5.0" + "<div class=\"config\">TEST</div>"
 end
 
 # we can shove stuff into the session cookie YAY!

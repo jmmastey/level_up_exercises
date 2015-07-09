@@ -13,7 +13,7 @@ Then(/^I should see "([^"]*)"$/) do |text|
 end
 
 Then(/^I should see an unbooted bomb$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(response_body).to have_selector(".config")
 end
 
 Given(/^I boot the bomb with default codes$/) do

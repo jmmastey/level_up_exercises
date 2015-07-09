@@ -17,7 +17,7 @@ get '/hack' do
 
   content_type :json
   { 'success' => session[:bomb].attempt_hack(b, p),
-    'done' => session[:bomb].all_hacked? }.to_json
+    'done' => session[:bomb].state == 3 }.to_json
 end
 
 get '/code' do

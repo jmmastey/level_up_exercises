@@ -45,6 +45,7 @@ class Triangle
 	end
 end
 
+
 triangles = [
 	[5,5,5],
 	[5,12,13],

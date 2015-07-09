@@ -14,39 +14,40 @@ class Dinodex
   end
 
   def less_than(field, value)
-    Dinodex.new(_lt(field, value))
+    Dinodex.new(lt(field, value))
   end
 
   def greater_than(field, value)
-    Dinodex.new(_gt(field, value))
+    slt = select_less_than(field, value)
+    seq = select_equal(field, value)
+    Dinodex.new(@dinos - slt - seq)
   end
 
   def equal(field, value)
-    Dinodex.new(_eq(field, value))
+    Dinodex.new(select_equal(field, value))
   end
 
   def not_equal(field, value)
-    Dinodex.new(@dinos - _eq(field, value))
+    Dinodex.new(@dinos - select_equal(field, value))
   end
 
   def less_or_equal(field, value)
-    Dinodex.new(
-      _lt(field, value) + _eq(field, value),
-    )
+    slt = select_less_than(field, value)
+    seq = select_equal(field, value)
+    Dinodex.new(slt + seq)
   end
 
   def greater_or_equal(field, value)
-    Dinodex.new(
-      _gt(field, value) + _eq(field, value),
-    )
+    slt = select_less_than(field, value)
+    Dinodex.new(@dinos - slt)
   end
 
   def like(field, value)
-    Dinodex.new(_like(field, value))
+    Dinodex.new(select_like(field, value))
   end
 
   def not_like(field, value)
-    Dinodex.new(@dinos - _like(field, value))
+    Dinodex.new(@dinos - select_like(field, value))
   end
 
   def search(hash)
@@ -56,16 +57,15 @@ class Dinodex
   end
 
   def sort(field)
-    Dinodex.new(
-      @dinos.sort do |a, b|
-        a.compare(field, b.attrs[field])
-      end,
-    )
+    sorted = @dinos.sort do |a, b|
+      a.compare(field, b.send(field))
+    end
+    Dinodex.new(sorted)
   end
 
-  def json
+  def to_json
     {
-      'dinos' => @dinos.map(&:attrs),
+      'dinos' => @dinos.map { |dino| Hash[dino.properties] }
     }.to_json
   end
 
@@ -75,19 +75,15 @@ class Dinodex
 
   private
 
-  def _lt(field, value)
+  def select_less_than(field, value)
     @dinos.select { |dino| dino.less_than?(field, value) }
   end
 
-  def _gt(field, value)
-    @dinos.select { |dino| dino.greater_than?(field, value) }
-  end
-
-  def _eq(field, value)
+  def select_equal(field, value)
     @dinos.select { |dino| dino.equal?(field, value) }
   end
 
-  def _like(field, value)
+  def select_like(field, value)
     @dinos.select { |dino| dino.like?(field, value) }
   end
 end

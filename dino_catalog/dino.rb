@@ -1,23 +1,30 @@
 class Dino
-  attr_accessor :attrs
+  ATTRIBUTES = %w(name period continent diet weight walking description)
+
+  attr_accessor :name, :period, :continent
+  attr_accessor :diet, :weight, :walking, :description
 
   def initialize(data)
-    keys = %w(name period continent diet weight walking description)
-    @attrs = Hash[keys.zip([nil] * keys.count)]
-    @attrs.merge!(data)
+    data.keys.each do |attr|
+      send("#{attr}=", data[attr])
+    end
+  end
+
+  def properties
+    ATTRIBUTES.map { |attr| [attr, send(attr)] }
   end
 
   def dino_facts
-    @attrs.each do |attribute, value|
-      fattr = "#{attribute.capitalize}:".ljust(20)
-      fval = value.nil? ? '---' : value
+    properties.each do |attr, val|
+      fattr = "#{attr.capitalize}:".ljust(20)
+      fval = val.nil? ? '---' : val
       puts "#{fattr}#{fval}"
     end
     puts
   end
 
   def compare(field, with)
-    myval = attrs[field]
+    myval = send(field)
     if !(myval && with)
       myval.__id__ <=> with.__id__
     elsif field == 'weight'
@@ -40,9 +47,9 @@ class Dino
   end
 
   def like?(field, value)
-    myval = attrs[field]
+    myval = send(field)
     if myval.nil? || value.nil?
-      (myval.nil? && value.nil?)
+      myval.nil? && value.nil?
     else
       myval.downcase =~ /#{value.downcase}/
     end

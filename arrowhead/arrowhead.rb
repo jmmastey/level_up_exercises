@@ -16,7 +16,7 @@ class Arrowhead
   }
 
   def self.get_region(region)
-    unless CLASSIFICATIONS.include? region
+    unless CLASSIFICATIONS.include?(region)
       raise "Unknown region, please provide a valid region."
     end
 
@@ -24,7 +24,7 @@ class Arrowhead
   end
 
   def self.get_shape(shapes, shape)
-    unless shapes.include? shape
+    unless shapes.include?(shape)
       raise "Unknown shape value. Are you sure you know what " \
             "you're talking about?"
     end

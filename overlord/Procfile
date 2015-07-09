@@ -1,0 +1,2 @@
+web: ruby overlord.rb
+guard: bundle exec guard -i

@@ -1,28 +1,24 @@
 class Bomb
-  attr_accessor :codes, :seqs, :armed, :hacked
+  attr_accessor :codes, :state, :states
+  attr_accessor :hacked, :hack_count, :attempts_remain
 
-  def initialize(code_hash)
+  def initialize
     @codes = (1...64).to_a.sample(6)
-    @seqs = [[],[],[],[],[],[]].map{|_| [0] * 6 }
     @hacked = [false] * 6
-    @armed = false
+    @hack_count = 0
 
+    @attempts_remain = 3
+    @states = {0 => 'armed', 1 => 'disarmed', 2 => 'detonated', 3 => 'hacked'}
+    @state = 1
+  end
+
+  def set_codes(code_hash)
     @secret_arm_code = code_hash[:arm]
     @secret_disarm_code = code_hash[:disarm]
   end
 
   def hacked?(panel_num)
     @hacked[panel_num]
-  end
-
-  def all_hacked?
-    (0..5).all? do |panel_num|
-      @hacked[panel_num]
-    end
-  end
-
-  def panel_input(panel_num, button_num)
-    @seqs[panel_num][button_num]
   end
 
   def sequence_for(panel_num)
@@ -49,18 +45,46 @@ class Bomb
 
   def attempt_hack(binary, panel_num)
     match = validate(binary, @codes[panel_num])
-    @hacked[panel_num] = match
+    if(@hacked[panel_num] = match)
+      @hack_count += 1
+      @state = 3 if @hack_count == 6
+      true
+    else
+      false
+    end
   end
 
   def arm(code)
-    @armed = (code == @secret_arm_code)
+    return false if @state > 1
+
+    if code != @secret_arm_code
+      @attempts_remain -= 1
+      @state = 2 if @attempts_remain == 0
+      false
+    else
+      @state = 0
+      true
+    end
   end
 
   def disarm(code)
-    @armed = (code != @secret_disarm_code)
+    return false if @state > 1
+
+    if code != @secret_disarm_code
+      @attempts_remain -= 1
+      @state = 2 if @attempts_remain == 0
+      false
+    else
+      @state = 1
+      true
+    end
+  end
+
+  def state_to_s
+    @states[@state]
   end
 
   def armed?
-    @armed
+    @state == 0
   end
 end

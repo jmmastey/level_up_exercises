@@ -7,16 +7,17 @@
   %body
     .code-input
       .message.box
-        %h1 First enter your arm / disarm codes.
-        %input{:id => 'arm-code-input', :type => 'text', :placeholder => 'Arm Code'}
-        %input{:id => 'disarm-code-input', :type => 'text', :placeholder => 'Disarm Code'}
-        %input{:id => 'submit-codes', :type => 'button', :value => 'Use Codes'}
-        .flash
+        %h4 Welcome back our one, true, dearest overlord.
+        %h1 Please enter your arm / disarm codes.
+        %input.enterable{:id => 'arm-code-input', :type => 'text', :placeholder => 'Arm Code', :autofocus => true}
+        %input.enterable{:id => 'disarm-code-input', :type => 'text', :placeholder => 'Disarm Code'}
+        %input.enterable{:id => 'submit-codes', :type => 'button', :value => 'Use Codes'}
+        #dialog-flash.flash
     .welcome.message.box
       %span
         %img{:src => "images/pipboy.png", :width => 150, :height => 150}
       %span
-        %h2 Hello, pathetic bomb defuser.
+        %h2 To whatever pathetic bomb defuser this may concern.
         %p SECURITY WARNING: This ocean-annihilating bomb is currently inactive. Once armed with the secret code, there are three extremely tedious and difficult ways to disarm it again (so you might as well not try, especially since you will be underwater):
         %ol
           %li Hack into each of the 6 panels on the bomb by specifying the correct binary sequences.
@@ -38,13 +39,13 @@
               %p= bomb.codes[id]
             %input{:type => 'submit'}
         %span.stretch
-      %img.explosion-overlay{:src => 'images/explosion.gif-c200'}
     .footer.box
       .footer-section
         %span.minutes 02
         %span :
         %span.seconds 00
       .footer-section
-        %p Evil Overlord, enter your code to arm the bomb and blow up the ocean.
-        %input{:id => 'password', :type => "password"}
-        %input{:id => 'confirm', :type => "button", :value => "Arm"}
+        %p Evil Overlord, you may now enter your code to arm the bomb and blow up the ocean.
+        %input.enterable{:id => 'password', :type => "password"}
+        %input.enterable{:id => 'confirm', :type => "button", :value => "Arm"}
+        #code-flash.flash

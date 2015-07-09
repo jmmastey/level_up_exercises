@@ -4,6 +4,15 @@ require './classes/bomb.rb'
 Given(/^I'm at the bomb page$/) do
   visit('/index')
   @bomb = Bomb.new
+  @default_arm = '1234'
+  @default_disarm = '0000'
+
+  @my_arm_code = '8008'
+  @my_disarm_code = '0880'
+
+  @arm_actual = @my_arm_code
+  @disarm_actual = @my_disarm_code
+  @default_incorrect = '9999'
 end
 
 When(/^I press a (\d+) button on a panel$/) do |arg1|

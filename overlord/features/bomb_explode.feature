@@ -8,6 +8,7 @@ Feature: Bomb timer expires
 
   Scenario: The timer hits zero
     Given I'm at the bomb page
+    And I have already submitted my codes
     And the bomb is armed
     When the timer hits zero
     Then the bomb should explode

@@ -6,7 +6,7 @@ Given(/^the bomb is (dis)?armed$/) do |disarmed|
   if disarmed
     selector << '.disarmed'
   else 
-    find('#password').set('1234')
+    find('#password').set(@arm_actual)
     find('#confirm').click
 
     selector << ":not(.disarmed)"
@@ -14,16 +14,14 @@ Given(/^the bomb is (dis)?armed$/) do |disarmed|
   find(selector)
 end
 
-Given(/^I (don't )?know the correct (dis)?arm code$/) do |unknown, disarm|
-  if disarm
-    @code = unknown ? '1111' : '0000'
+When(/^I enter the (in)?correct (arm|disarm) code(?: again)?$/) do |incorrect, mode|
+  if mode == 'arm'
+    code = incorrect ? @default_incorrect : @arm_actual
   else
-    @code = unknown ? '4321' : '1234'
+    code = incorrect ? @default_incorrect : @disarm_actual
   end
-end
 
-When(/^I enter the code and submit$/) do
-  find('#password').set(@code)
+  find('#password').set(code)
   find('#confirm').click
 
   @start_time = find('.minutes').text + find('.seconds').text

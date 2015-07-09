@@ -7,6 +7,7 @@ require './classes/bomb.rb'
 enable :sessions
 
 get '/index' do
+  session[:bomb] = Bomb.new
   haml :index, :locals => {:bomb => session[:bomb]}
 end
 
@@ -20,17 +21,23 @@ get '/hack' do
 end
 
 get '/code' do
-  if(session[:bomb].armed?)
-    session[:bomb].disarm(params[:code])
-  else
-    session[:bomb].arm(params[:code])
+  success = false
+  if(session[:bomb].attempts_remain > 0)
+    if(session[:bomb].armed?)
+      success = session[:bomb].disarm(params[:code])
+    else
+      success = session[:bomb].arm(params[:code])
+    end
   end
 
   content_type :json
-  {'armed' => session[:bomb].armed? }.to_json
+  response = {'success' => success}
+  response['attempts_remain'] = session[:bomb].attempts_remain
+  response['state'] = session[:bomb].state_to_s
+
+  response.to_json
 end
 
 post "/setcodes" do
-  puts params
-  session[:bomb] = Bomb.new(params)
+  session[:bomb].set_codes(params)
 end

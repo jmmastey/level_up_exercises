@@ -26,11 +26,11 @@ class Dinoparse
 
   def parse(dinofile)
     dinos = CSV.parse(open(dinofile, &:read))
-    
+
     keys = dinos.shift.map(&:downcase)
     dinos.map do |dino_attrs|
-      raw_hash = Hash[keys.zip(dino_attrs)]
-      consolidate(raw_hash)
+      unparsed_data = Hash[keys.zip(dino_attrs)]
+      consolidate(unparsed_data)
     end
   end
 end

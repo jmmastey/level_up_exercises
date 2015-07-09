@@ -25,12 +25,12 @@ class Arrowhead
   end
 
   def self.check_region(region)
-    CLASSIFICATIONS.include? region || (raise "Unknown region, \
+    CLASSIFICATIONS.include?(region) || (raise "Unknown region, \
       please provide a valid region.")
   end
 
   def self.check_shape(all_shapes, shape)
-    all_shapes.include? shape || (raise "Unknown shape value. \
+    all_shapes.include?(shape) || (raise "Unknown shape value. \
       Are you sure you know what you're talking about?")
   end
 end

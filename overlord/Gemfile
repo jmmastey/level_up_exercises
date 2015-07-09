@@ -3,4 +3,12 @@ source "https://rubygems.org"
 
 ruby "2.0.0"
 
-gem "sinatra"
+gem 'sinatra'
+gem 'cucumber'
+gem 'rspec'
+gem 'webrat'
+gem 'rack'
+gem 'rack-test'
+gem 'guard'
+gem 'guard-cucumber'
+gem 'foreman'

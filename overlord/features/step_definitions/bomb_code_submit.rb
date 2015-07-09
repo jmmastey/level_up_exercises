@@ -1,3 +1,4 @@
+# encoding: utf-8
 
 When(/^I press Submit Codes$/) do
   find('#submit-codes').click
@@ -9,7 +10,7 @@ When(/^I enter nothing$/) do
 end
 
 When(/^I enter the (dis)?arm code only$/) do |disarm|
-  if(disarm)
+  if disarm
     @disarm_actual = @my_disarm_code
     @arm_actual = @default_arm
     find('#disarm-code-input').set(@disarm_actual)

@@ -26,7 +26,7 @@ Feature: Hacking into a panel
     And I have already submitted my codes
     And the bomb is armed
     And I choose a panel
-    And the depressed buttons on the panel form a correct sequence
+    And the depressed buttons form a correct sequence
     When I press submit on that panel
     Then the panel should turn green
 
@@ -35,7 +35,7 @@ Feature: Hacking into a panel
     And I have already submitted my codes
     And the bomb is armed
     And I choose a panel
-    And the depressed buttons on the panel form an incorrect sequence
+    And the depressed buttons form an incorrect sequence
     When I press submit on that panel
     Then the panel buttons should reset
 

@@ -1,4 +1,4 @@
-#encoding: utf-8
+# encoding: utf-8
 require './classes/bomb.rb'
 
 Given(/^an armed bomb$/) do

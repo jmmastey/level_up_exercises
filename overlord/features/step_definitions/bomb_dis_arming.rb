@@ -1,11 +1,11 @@
-#encoding: utf-8
+# encoding: utf-8
 require './classes/bomb.rb'
 
 Given(/^the bomb is (dis)?armed$/) do |disarmed|
   selector = '.bomb'
   if disarmed
     selector << '.disarmed'
-  else 
+  else
     find('#password').set(@arm_actual)
     find('#confirm').click
 
@@ -14,11 +14,11 @@ Given(/^the bomb is (dis)?armed$/) do |disarmed|
   find(selector)
 end
 
-When(/^I enter the (in)?correct (arm|disarm) code(?: again)?$/) do |incorrect, mode|
-  if mode == 'arm'
-    code = incorrect ? @default_incorrect : @arm_actual
+When(/^I enter the (in)?correct (dis)?arm code(?: again)?$/) do |wrong, disarm|
+  if disarm
+    code = wrong ? @default_incorrect : @disarm_actual
   else
-    code = incorrect ? @default_incorrect : @disarm_actual
+    code = wrong ? @default_incorrect : @arm_actual
   end
 
   find('#password').set(code)

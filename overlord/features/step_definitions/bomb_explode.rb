@@ -1,4 +1,4 @@
-#encoding: utf-8
+# encoding: utf-8
 
 Given(/^I have already submitted my codes$/) do
   @arm_actual = @default_arm
@@ -22,7 +22,7 @@ Then(/^the bomb should explode$/) do
 end
 
 Then(/^I should be (un)?able to (?:dis)?arm the bomb$/) do |unable|
-  if(unable)
+  if unable
     find('#password[disabled]')
     find('#confirm[disabled]')
   else

@@ -8,11 +8,11 @@ class Bomb
     @hack_count = 0
 
     @attempts_remain = 3
-    @states = {0 => 'armed', 1 => 'disarmed', 2 => 'detonated', 3 => 'hacked'}
+    @states = { 0 => 'armed', 1 => 'disarmed', 2 => 'detonated', 3 => 'hacked' }
     @state = 1
   end
 
-  def set_codes(code_hash)
+  def secret_codes(code_hash)
     @secret_arm_code = code_hash[:arm]
     @secret_disarm_code = code_hash[:disarm]
   end
@@ -25,59 +25,50 @@ class Bomb
     code = @codes[panel_num]
     (0..5).to_a.reverse.map do |idx|
       pow = 2**idx
-      if pow <= code
-        code -= pow
-        1
-      else
-        0
-      end
+      code -= pow if pow <= code
+      pow <= code ? 1 : 0
     end
   end
 
   def validate(binary, decimal)
     sum = binary.reverse
-      .each_with_index
-      .map { |bin, idx| bin * (2**idx) }
-      .inject(&:+)
+          .each_with_index
+          .map { |bin, idx| bin * (2**idx) }
+          .inject(&:+)
 
     sum == decimal
   end
 
   def attempt_hack(binary, panel_num)
     match = validate(binary, @codes[panel_num])
-    if(@hacked[panel_num] = match)
+    if match
       @hack_count += 1
       @state = 3 if @hack_count == 6
-      true
+    end
+    @hacked[panel_num] = match
+  end
+
+  def check_code(code, with, state)
+    if code != with
+      @attempts_remain -= 1
+      @state = 2 if @attempts_remain == 0
     else
-      false
+      @state = state
     end
   end
 
   def arm(code)
     return false if @state > 1
 
-    if code != @secret_arm_code
-      @attempts_remain -= 1
-      @state = 2 if @attempts_remain == 0
-      false
-    else
-      @state = 0
-      true
-    end
+    check_code(code, @secret_arm_code, 0)
+    code != @secret_arm_code
   end
 
   def disarm(code)
     return false if @state > 1
 
-    if code != @secret_disarm_code
-      @attempts_remain -= 1
-      @state = 2 if @attempts_remain == 0
-      false
-    else
-      @state = 1
-      true
-    end
+    check_code(code, @secret_disarm_code, 1)
+    code != @secret_disarm_code
   end
 
   def state_to_s

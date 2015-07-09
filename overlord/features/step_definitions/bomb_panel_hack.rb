@@ -1,4 +1,4 @@
-#encoding: utf-8
+# encoding: utf-8
 require './classes/bomb.rb'
 
 Given(/^I'm at the bomb page$/) do
@@ -34,7 +34,7 @@ Then(/^it should change its value to (\d+)$/) do |arg1|
   selector = '.columns'
   selector << ' .column:first-child'
   selector << ' .connector:first-child'
-  
+
   if arg1 == '0'
     selector << ':not(.depressed)'
   else
@@ -48,18 +48,17 @@ Given(/^I choose a panel$/) do
   @panel = "#panel0"
 end
 
-Given(/^the depressed buttons on the panel form a(?:n)? (in)?correct sequence$/) do |incorrect|
-
+Given(/^the depressed buttons form a(?:n)? (in)?correct sequence$/) do |wrong|
   answer = find(@panel + " .message p").text.to_i
   @bomb.codes[0] = answer
 
   binary = @bomb.sequence_for(0)
-  binary[0] = 1 - binary[0] if incorrect
+  binary[0] = 1 - binary[0] if wrong
 
   binary.each_with_index do |val, button_number|
     next unless val == 1
     selector = ".columns > .column:first-child "
-    selector << ".connector:nth-child(#{button_number+1})"
+    selector << ".connector:nth-child(#{button_number + 1})"
     find(selector).click
   end
 
@@ -91,14 +90,14 @@ end
 
 Given(/^I enter correct sequences for all panels$/) do
   (1..6).each do |panel|
-    answer = find("#panel#{panel-1} .message p").text.to_i
+    answer = find("#panel#{panel - 1} .message p").text.to_i
     @bomb.codes[panel - 1] = answer
 
-    binary = @bomb.sequence_for(panel-1)
+    binary = @bomb.sequence_for(panel - 1)
     binary.each_with_index do |val, button_number|
       next unless val == 1
       selector = ".columns > .column:nth-child(#{panel}) "
-      selector << ".connector:nth-child(#{button_number+1})"
+      selector << ".connector:nth-child(#{button_number + 1})"
       find(selector).click
     end
 

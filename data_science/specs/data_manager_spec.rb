@@ -24,8 +24,9 @@ describe 'DataManager' do
   end
 
   describe '.load' do
-    it "should load a 'JSON reader' without blowing up" do
-      double_reader = [instance_double(JsonReader)]
+    it 'should load a reader without blowing up' do
+      double_reader = double
+      allow(double_reader).to receive(:data_hash).and_return(test_hash)
       expect(data_manager.load(double_reader)).not_to be_nil
     end
   end

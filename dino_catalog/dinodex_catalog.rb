@@ -56,7 +56,7 @@ class DinoFilter
   end
 
   def search_using_block(dinosaurs, block)
-    dinos = dinosaurs.collect do |dino|
+    dinos = dinosaurs.map do |dino|
       attr_value = dino.method(@dino_attr).call
       downcase_attr_value = attr_value.to_s.downcase
       dino if block.call(downcase_attr_value, @desired_value)
@@ -109,7 +109,7 @@ class Dinosaur
 
   def searchable_attrs
     attr_symbols = ATTRS + [:size, :carnivore]
-    attr_symbols.collect(&:id2name)
+    attr_symbols.map(&:id2name)
   end
 
   # Defining comparison operators for easier testing with Minitest.
@@ -152,7 +152,7 @@ class DinoFile
     return nil unless [:original, :p_b_africa].include?(format)
     lambda do
       converter_method = method("#{format}_format_hash_to_dinosaur")
-      csv_file_to_hashes.collect do |dino_hash|
+      csv_file_to_hashes.map do |dino_hash|
         converter_method.call(dino_hash)
       end
     end

@@ -3,6 +3,11 @@ require 'abanalyzer'
 class DataManager
   @sample_size = 0
   attr_accessor :reader
+
+  def initialize(reader = nil)
+    load(reader) if reader
+  end
+
   def load(reader)
     @reader = reader
   end

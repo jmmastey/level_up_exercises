@@ -19,7 +19,7 @@ class Bomb
   end
 
   def status
-    @state
+    state
   end
 
   def exploded?
@@ -88,6 +88,15 @@ class Bomb
 
   def to_s
     "Bomb"
+  end
+
+  def time_left
+    end_time = timer + 120
+    time_remaining = (end_time - Time.now).round(0)
+    return "0:00" if time_remaining < 0
+    seconds = time_remaining % 60
+    minutes = (time_remaining - seconds) / 60
+    minutes.to_s + ":" + "%02d" % seconds
   end
 
   private

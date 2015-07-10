@@ -1,34 +1,40 @@
 require 'rspec'
 require_relative '../lib/data_manager'
-require_relative '../lib/json_reader'
-require_relative 'constants'
 
-describe 'Data Manager' do
-  describe 'Initialization' do
-    before :each do
-      @reader = JsonReader.new
-      @data_manager = DataManager.new
-    end
+def test_hash
+  result = []
+  1464.times { result << { 'cohort' => "B", "result" => 0 } }
+  1302.times { result << { 'cohort' => "A", "result" => 0 } }
+  47.times { result << { 'cohort' => "A", "result" => 1 } }
+  79.times { result << { 'cohort' => "B", "result" => 1 } }
+  result
+end
 
+describe 'DataManager' do
+  before :each do
+    @data_manager = DataManager.new
+  end
+  let(:data_manager) { DataManager.new }
+  describe '#new' do
     context 'when initialized data manager' do
       it 'should not be nil' do
-        expect(@data_manager).not_to be_nil
+        expect(data_manager).not_to be_nil
       end
     end
+  end
 
-    describe ".load" do
-      it "should load a 'JSON reader' without blowing up" do
-        expect(@data_manager.load(@reader)).not_to be_nil
-      end
+  describe '.load' do
+    it "should load a 'JSON reader' without blowing up" do
+      double_reader = [instance_double(JsonReader)]
+      expect(data_manager.load(double_reader)).not_to be_nil
     end
   end
 
   describe '.sample_size' do
     before :each do
-      @reader = JsonReader.new
-      @reader.load_data(JSON_FILE_PATH)
-      @data_manager = DataManager.new
-      @data_manager.load(@reader)
+      double_reader = double
+      allow(double_reader).to receive(:data_hash).and_return(test_hash)
+      @data_manager.load(double_reader)
     end
 
     context 'before loading a reader' do
@@ -58,15 +64,14 @@ describe 'Data Manager' do
 
   describe '.conversions_size' do
     before :each do
-      @reader = JsonReader.new
-      @reader.load_data(JSON_FILE_PATH)
-      @data_manager = DataManager.new
-      @data_manager.load(@reader)
+      double_reader = double
+      allow(double_reader).to receive(:data_hash).and_return(test_hash)
+      @data_manager.load(double_reader)
     end
 
     context 'before loading a reader' do
       it 'should raise an error' do
-        expect { DataManager.new.conversion_size }.to raise_error ArgumentError
+        expect { DataManager.new.conversion_rate }.to raise_error ArgumentError
       end
     end
 
@@ -85,15 +90,14 @@ describe 'Data Manager' do
 
   describe '.conversion_rate' do
     before :each do
-      @reader = JsonReader.new
-      @reader.load_data(JSON_FILE_PATH)
-      @data_manager = DataManager.new
-      @data_manager.load(@reader)
+      double_reader = double
+      allow(double_reader).to receive(:data_hash).and_return(test_hash)
+      @data_manager.load(double_reader)
     end
 
     context 'before loading a reader' do
       it 'should raise an error' do
-        raise ArgumentError, "reader not initialized" if @reader.nil?
+        expect { DataManager.new.conversion_rate }.to raise_error ArgumentError
       end
     end
 
@@ -112,14 +116,19 @@ describe 'Data Manager' do
 
   describe '.calculate_chi_square' do
     before :each do
-      @reader = JsonReader.new
-      @reader.load_data(JSON_FILE_PATH)
-      @data_manager = DataManager.new
-      @data_manager.load(@reader)
+      double_reader = double
+      allow(double_reader).to receive(:data_hash).and_return(test_hash)
+      @data_manager.load(double_reader)
+    end
+
+    context 'before loading a reader' do
+      it 'should raise an error' do
+        expect { DataManager.new.calc_chi_square }.to raise_error ArgumentError
+      end
     end
 
     it 'should have 0.32 rate' do
-      expect(@data_manager.calculate_chi_square).to eq(0.032)
+      expect(@data_manager.calc_chi_square).to eq(0.032)
     end
   end
 end

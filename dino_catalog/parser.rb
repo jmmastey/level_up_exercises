@@ -6,7 +6,7 @@ class Parser
   def initialize(filepath)
     @file = filepath
     @file += '.csv' unless filepath =~ /\.csv$/
-    @content = {}
+    @content = []
   end
 
   def parse
@@ -19,15 +19,17 @@ class Parser
 
   def load_lines_and_process_headers
     lines = CSV.read(file)
-    @headers = lines.shift
+    @headers = lines.shift.each(&:downcase!)
     lines
   end
 
   def load_content(lines)
     lines.each do |line|
+      object = {}
       line.each_with_index do |value, index|
-        content[headers[index]] = value
+        object[headers[index]] = value
       end
+      content << object
     end
   end
 end

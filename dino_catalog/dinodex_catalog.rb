@@ -67,7 +67,6 @@ end
 
 class Dinosaur
   ATTRS = [:name, :period, :continent, :diet, :weight, :walking, :description]
-
   attr_accessor(*ATTRS)
 
   def initialize(options = {})

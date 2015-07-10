@@ -8,37 +8,40 @@ class PhotosController < ApplicationController
   API_SECRET = 'f16c30aa0277468fb378f43533ab69a3'
 
   def new
-    
     @all_moods = { happy: "happiness", sad: "sadness", angry: "anger",
                   surprised: "surprise", disgusted: "disgust", scared: "fear" }
     update_photos
-    @selected_mood = @all_moods[:surprised]
+    @selected_mood = @all_moods[:happy]
     sort_photos(@selected_mood)
   end
 
   def update_photos
-    client = Face.get_client(api_key: API_KEY, api_secret: API_SECRET)
     import_csv_file(FILENAME).each do |i|
       unless Photo.exists?(photo_url: i[:photo_url])
-        my_face = client.faces_detect(urls: [i[:photo_url]], attributes: 'all')
-        attrib = my_face["photos"][0]["tags"][0]["attributes"]
-        mood = attrib["mood"]["value"]
-        moods = {first: i[:first], last: i[:last], photo_url: i[:photo_url]}
-        @all_moods.each_value do |v|
-          moods[v.to_sym] = attrib[v]["confidence"]
-        end
-        moods[:mood] = mood
-        Photo.create(moods)
+        store_photo_attributes(i)
       end
     end
   end
 
   def import_csv_file(filename)
     csv = []
-    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      csv << row
-    end
+    CSV.foreach(filename, headers: true, header_converters: :symbol) { |row| csv << row }
     csv
+  end
+
+  def store_photo_attributes(photo_id)
+    detected_moods = run_api_call(photo_id)
+    Photo.create(detected_moods)
+  end
+
+  def run_api_call(id)
+    client = Face.get_client(api_key: API_KEY, api_secret: API_SECRET)
+    my_face = client.faces_detect(urls: [id[:photo_url]], attributes: 'all')
+    attrib = my_face["photos"][0]["tags"][0]["attributes"]
+    moods = { first: id[:first], last: id[:last], photo_url: id[:photo_url],
+               mood: attrib["mood"]["value"] }
+    @all_moods.each_value { |v| moods[v.to_sym] = attrib[v]["confidence"] }
+    moods
   end
 
   def sort_photos(attribute)

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "static_pages/about.html.erb", type: :view do
-  before do
+  before(:each) do
     render
     #expect(rendered).to eql("Finder")
   end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "photos/new.html.erb", type: :view do
+RSpec.describe "static_pages/help.html.erb", type: :view do
   before do
     render
     #expect(rendered).to eql("Finder")
@@ -9,7 +9,7 @@ RSpec.describe "photos/new.html.erb", type: :view do
   describe "#PageContent" do
     it 'displays the word Dave', focus: true do
       #rendered.should have_content('Find')
-      expect(rendered).to match(/Dave/)
+      expect(rendered).to match(/me/)
     end
 
     it 'displays the word CNUapp', focus: true do

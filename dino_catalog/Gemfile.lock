@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    table_print (1.5.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  table_print
+
+BUNDLED WITH
+   1.10.5

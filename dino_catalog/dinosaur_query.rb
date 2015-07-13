@@ -54,7 +54,6 @@ class DinosaurQuery
   end
 
   def run_query_part
-    puts criteria
     case criteria[:filter]
       when '>'
         dinosaurs.select { |d| d.greater_than?(criteria[:key], criteria[:value]) }

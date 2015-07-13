@@ -39,8 +39,10 @@ Then /^submit code "([^"]*)" (.*)$/ do |code, result|
   case result
   when "succeeds"
     body.should have_content(code)
-  when "fails"
+  when "fails (not booted)"
     body.should eq("Code Entry Requires a Booted Bomb")
+  when "fails (invalid)"
+    body.should have_content("Incorrect Code")
   else
     raise "Invalid Step Definition Choice"
   end

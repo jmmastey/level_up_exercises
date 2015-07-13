@@ -6,6 +6,13 @@ Feature: Custom Bomb
     And I booted the bomb
 
   Scenario:
+    Then submit code "1234" fails (invalid)
+
+  Scenario:
+    Given I submit code "5567"
+    Then submit code "0000" fails (invalid)
+
+  Scenario:
     Given I submit code "1234"
     Then the bomb is inactive
 

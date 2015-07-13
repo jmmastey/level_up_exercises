@@ -13,7 +13,7 @@ Feature: Brand New Bomb
     Then the time is "0:00"
 
   Scenario:
-    Then submit code "1234" fails
+    Then submit code "1234" fails (not booted)
 
   Scenario:
     Then set activation key to "0123" succeeds

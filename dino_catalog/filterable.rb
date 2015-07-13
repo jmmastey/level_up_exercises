@@ -16,6 +16,6 @@ class Filterable
   end
 
   def contains(key, value)
-    instance_variable_get("@#{key}").include?(value)
+    instance_variable_get("@#{key}").to_s.include?(value)
   end
 end

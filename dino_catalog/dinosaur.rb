@@ -17,9 +17,9 @@ class Dinosaur < Filterable
     end
   end
 
-  def diet=(value)
-    value = 'Carnivore' if value =~ /Insect|Pisci|Yes/
-    write_attribute(:diet, value)
+  def diet
+    return 'Carnivore' if @diet =~ /Insect|Pisci|Yes/
+    @diet
   end
 
   def to_hash

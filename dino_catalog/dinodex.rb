@@ -1,6 +1,7 @@
 require 'json'
 require 'table_print'
 require_relative 'dinosaur_loader'
+require_relative 'dinosaur_query'
 
 def csv_file
   csv_file = ARGV[0]
@@ -32,14 +33,15 @@ dinosaurs = DinosaurLoader.load(csv_file)
 
 input = ''
 until input.eql?('q')
-  putsq
+  puts
   print menu
   input = gets
   input.chomp!.downcase!
 
   case input
     when '1'
-      next
+      query = DinosaurQuery.new(dinosaurs)
+      tp query.process
     when '2'
       tp dinosaurs.select { |dinosaur| dinosaur.filter('walking', 'Biped') }
     when '3'

@@ -1,6 +1,5 @@
 class Bomb
   attr_accessor :timer, :state, :misses
-  # attr_accessor :activation_key, :deactivation_key, :timer, :state, :exploded
 
   STATES = [:active, :inactive, :off, :exploded]
 
@@ -9,7 +8,6 @@ class Bomb
     @activation_key = validate_key(options[:activation_key]) || "1234"
     @deactivation_key = validate_key(options[:deactivation_key]) || "0000"
     @timer = nil
-    @exploded = false
     @misses = 0
   end
 

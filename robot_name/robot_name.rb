@@ -8,7 +8,7 @@ class Robot
     @name_generator = args[:name_generator]
 
     @name_generator ? @name = @name_generator.call : generate_name
-    check_name
+    @registry << @name if valid_name?
   end
 
   def generate_name
@@ -18,11 +18,19 @@ class Robot
     @name << "#{generate_num.call}#{generate_num.call}#{generate_num.call}"
   end
 
-  def check_name
-    if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @registry.include?(name)
+  def valid_name?
+    if !name_is_correct_format || name_in_registry
       raise NameCollisionError, 'There was a problem generating the robot name!'
     end
-    @registry << @name
+    true
+  end
+
+  def name_is_correct_format?
+    @name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
+  end
+
+  def name_in_registry?
+    @registry.include?(@name)
   end
 end
 

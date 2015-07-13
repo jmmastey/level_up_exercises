@@ -1,63 +1,55 @@
-require 'json'
 require 'table_print'
 require_relative 'dinosaur_loader'
-require_relative 'dinosaur_query'
 
-def csv_file
+MENU =
+  ['query       - Query dinodex',
+   'bipeds      - Bipeds only',
+   'carnivores  - Carnivores only',
+   'periods     - Specific periods only',
+   'big         - Only big (2 tons+)',
+   'json        - Output JSON',
+   'quit        - Quit',
+   '> ',
+  ].join("\n")
+
+def csv_filename
   csv_file = ARGV[0]
-  puts "test" if csv_file
   return csv_file if csv_file
 
-  ask_user_for_csv_file
+  ask_user_for_csv_filename
 end
 
-def ask_user_for_csv_file
+def ask_user_for_csv_filename
   print "Enter the csv filename for the dinosaurs (ext optional)\n> "
-  csv_file = gets
-  csv_file.chomp!
+  gets.chomp!
 end
 
 p 'Welcome to Dinodex (Gotta catch em all)'
+dinosaurs = DinosaurLoader.new(csv_filename)
 
-menu = "Enter any of the options below\n" \
-    "\t1  - Query dinodex\n" \
-    "\t2  - Bipeds only\n" \
-    "\t3  - Carnivores only\n" \
-    "\t4  - Specific periods only\n" \
-    "\t5  - Only big (2 ton +)]\n" \
-    "\t9  - Output JSON\n" \
-    "\tq  - Quit\n" \
-    '> '
-
-dinosaurs = DinosaurLoader.load(csv_file)
+actions = {}
+actions['query'] = dinosaurs.method(:query)
+actions['bipeds'] = dinosaurs.method(:walking)
+actions['carnivores'] = dinosaurs.method(:carnivore)
+actions['periods'] = dinosaurs.method(:period)
+actions['big'] = dinosaurs.method(:big)
+actions['json'] = dinosaurs.method(:json)
 
 input = ''
-until input.eql?('q')
+until input.eql?('quit')
   puts
-  print menu
+  print MENU
   input = gets
   input.chomp!.downcase!
 
-  case input
-    when '1'
-      query = DinosaurQuery.new(dinosaurs)
-      tp query.process
-    when '2'
-      tp dinosaurs.select { |dinosaur| dinosaur.filter('walking', 'Biped') }
-    when '3'
-      tp dinosaurs.select { |dinosaur| dinosaur.filter('diet', 'Carnivore') }
-    when '4'
-      print "Enter period:\n> "
-      value = gets.chomp!
-      tp dinosaurs.select { |dinosaur| dinosaur.contains('period', value) }
-    when '5'
-      tp dinosaurs.select { |dinosaur| dinosaur.greater_than?('weight', 2000) }
-    when '9'
-      p JSON.generate(dinosaurs.map(&:to_hash))
-    when 'q'
-      next
-    else
-      p 'Invalid input...'
-      next
+  puts input
+
+  next unless actions.key?(input)
+
+  result = actions[input].call
+  if input.eql?('json')
+    p result
+  else
+    tp result
   end
 end

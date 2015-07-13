@@ -5,7 +5,6 @@ class Parser
 
   def initialize(filepath)
     @file = filepath
-    @file += '.csv' unless filepath =~ /\.csv$/
     @content = []
   end
 

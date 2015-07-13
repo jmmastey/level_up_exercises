@@ -47,10 +47,8 @@ class DinosaurQuery
   end
 
   def run_criteria
-    results = run_query_part
-    results.each do |dinosaur|
-      filtered << dinosaur unless filtered.include?(dinosaur)
-    end
+    @filtered += run_query_part
+    @filtered.uniq!
   end
 
   def run_query_part
@@ -66,9 +64,9 @@ class DinosaurQuery
       when 'eq'
         dinosaurs.select { |d| d.contains(criteria[:key], criteria[:value]) }
       when '!='
-        dinosaurs.select { |d| !d.filter(criteria[:key], criteria[:value]) }
+        dinosaurs.reject { |d| d.filter(criteria[:key], criteria[:value]) }
       when 'ne'
-        dinosaurs.select { |d| !d.contains(criteria[:key], criteria[:value]) }
+        dinosaurs.reject { |d| d.contains(criteria[:key], criteria[:value]) }
     end
   end
 

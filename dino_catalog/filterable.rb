@@ -1,4 +1,4 @@
-class Filterable
+module Filterable
   def filter(key, value)
     instance_variable_get("@#{key}") == value
   end

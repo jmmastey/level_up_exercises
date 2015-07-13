@@ -1,5 +1,7 @@
 require_relative('filterable')
-class Dinosaur < Filterable
+
+class Dinosaur
+  include Filterable
   attr_accessor :name, :period, :continent, :diet, :weight,
                 :walking, :description
 
@@ -22,18 +24,16 @@ class Dinosaur < Filterable
     @diet
   end
 
-  def to_hash
-    attributes = {}
-    instance_variables.each do |variable|
+  def to_h
+    instance_variables.each_with_object({}) do |variable, attributes|
       attributes[variable.to_s.delete('@')] = instance_variable_get(variable)
     end
-    attributes
   end
 
   private
 
   def map_keys(key)
-    return KEY_MAPS[key.to_sym] if KEY_MAPS.member?(key.to_sym)
+    return KEY_MAPS[key.to_sym] if KEY_MAPS.key?(key.to_sym)
     key
   end
 end

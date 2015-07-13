@@ -1,11 +1,22 @@
-Feature: Bomb
+Feature: Brand New Bomb
   Background:
     Given I have a new bomb
 
-  Scenario: New Bomb
+  Scenario:
     Then I should see an unbooted bomb
 
-  Scenario: Boot Bomb
+  Scenario:
     When I boot the bomb
-    Then The bomb is inactive
+    Then the bomb is inactive
 
+  Scenario:
+    Then the time is "0:00"
+
+  Scenario:
+    Then submit code "1234" fails
+
+  Scenario:
+    Then set activation key to "0123" succeeds
+
+  Scenario:
+    Then set deactivation key to "9999" succeeds

@@ -1,7 +1,7 @@
 require 'capybara/cucumber'
 
 Given(/^Super villain is booting a bomb$/) do
-  visit "http://localhost:8080/newbomb"
+  visit "http://localhost:8080/mybomb"
 end
 
 When(/^Super villain is on the main page$/) do
@@ -41,9 +41,12 @@ And(/^the Super villain should see a message that a new bomb was not created$/) 
 end
 
 Given(/^Super villain has an already booted and activated the bomb$/) do
+  visit "http://localhost:8080/mybomb"
   expect(page).to have_text("Bomb status: Inactive")
 end
 
 And(/^the bomb activation code should not change$/) do
   expect(page).to have_text("Bomb activation code: 9999").to eq false
 end
+
+

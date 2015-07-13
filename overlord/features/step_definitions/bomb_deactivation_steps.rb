@@ -2,7 +2,7 @@
 # Capybara.app = BombManager
 
 Given(/^A bomb is active$/) do
-  visit "http://localhost:8080/deactivate"
+  visit "http://localhost:8080/mybomb"
 end
 
 # When /I sign in/ do
@@ -14,7 +14,7 @@ end
 # end
 
 When(/^Super villain enters the deactivation code$/) do
-  pending
+  expect(page).to have_text("Bomb Inactive")
 end
 
 When(/^Super villain enters the deactivation code "([^"]*)"$/) do |code|

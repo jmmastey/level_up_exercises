@@ -5,12 +5,12 @@ Feature: Set a bomb Deactivation code
     I want to setup a secret deactivation code for the bomb
 
     Scenario: super villain does not enter a custom deactivation code
-        Given A custom deactivation code was not provided
-        When Super villain activates the bomb
-        Then the bomb deactivation code should be default to 0000
+        Given A bomb was booted
+        When Super villain does not enter a a custom deactivation code
+        Then the bomb deactivation code should be set to 0000
 
+    Scenario: super villain enters a custom deactivation code
+        Given A bomb was booted
+        When Super villain does enter a a custom deactivation code 4321
+        Then the bomb deactivation code should be set to 4321
 
-    Scenario: super villain sets a custom deactivation code
-        Given The bomb is not yet active
-        When Super villain sets a custom deactivation code
-        Then the bomb deactivation code should be set to the provided custom code

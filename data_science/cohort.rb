@@ -9,14 +9,14 @@ class Cohort
     @sample_size = samples.count
     @conversions = calc_conversions(samples)
 
-    @conversion_rate, @standard_error = calc_mean_error(samples)
+    @conversion_rate, @standard_error = calc_mean_error
     @ci_low, @ci_high = calc_confidence_interval
   end
 
   def conversion_hash
-    { 
-      :converted => @conversions, 
-      :not_converted => @sample_size - @conversions 
+    {
+      converted: @conversions,
+      not_converted: @sample_size - @conversions
     }
   end
 
@@ -70,7 +70,7 @@ class Cohort
     samples.inject(0) { |sum, data| sum + data['result'] }
   end
 
-  def calc_mean_error(samples)
+  def calc_mean_error
     sample_mean = @conversions.to_f / @sample_size.to_f
 
     numerator = sample_mean * (1 - sample_mean)

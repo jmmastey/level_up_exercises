@@ -10,6 +10,9 @@ Feature: Default Bomb
     Then set deactivation key to "0000" fails
 
   Scenario:
+    Then the time is "0:00"
+
+  Scenario:
     Given I submit code "1234"
     Then the bomb is active
     And the time is "2:00"

@@ -1,4 +1,4 @@
-@bomb_deactivation_configuration
+@ignore @bomb_deactivation_configuration
 Feature: Set a bomb Deactivation code
     In order to deactivate a bomb
     As a super villain

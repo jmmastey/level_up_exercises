@@ -1,4 +1,4 @@
-@bomb_activation
+@ignore @bomb_activation
 Feature: Activate A Bomb
     In order to activate a bomb
     As a super villain

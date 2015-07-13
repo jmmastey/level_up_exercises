@@ -91,6 +91,7 @@ class Bomb
   end
 
   def time_left
+    return "0:00" unless state == :active
     end_time = timer + 120
     time_remaining = (end_time - Time.now).round(0)
     return "0:00" if time_remaining < 0

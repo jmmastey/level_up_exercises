@@ -1,10 +1,10 @@
 require_relative '../bomb'
 
 describe Bomb do
-  context "activate_deactivate methods" do
+  context "activate deactivate methods" do
     let(:bomb) { Bomb.new }
 
-    it "allows activate to be used instead of send_code when inactive" do
+    it "allows activate to be used instead of enter_code when inactive" do
       bomb.boot
       expect(bomb.status).to eq(:inactive)
       bomb.activate("1234")

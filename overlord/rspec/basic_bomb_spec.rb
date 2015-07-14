@@ -34,5 +34,44 @@ describe Bomb do
       bomb.enter_code("0000")
       expect(bomb.status).to eq(:inactive)
     end
+
+    it "allows one wrong deactivation code" do
+      bomb.boot
+      bomb.enter_code("1234")
+      expect(bomb.status).to eq(:active)
+      expect { bomb.enter_code("0001") }.to raise_error(StandardError)
+      expect(bomb.status).to eq(:active)
+    end
+
+    it "allows two wrong deactivation codes" do
+      bomb.boot
+      bomb.enter_code("1234")
+      expect(bomb.status).to eq(:active)
+      expect { bomb.enter_code("0001") }.to raise_error(StandardError)
+      expect { bomb.enter_code("0001") }.to raise_error(StandardError)
+      expect(bomb.status).to eq(:active)
+    end
+
+    it "explodes after three wrong attempts" do
+      bomb.boot
+      bomb.enter_code("1234")
+      expect(bomb.status).to eq(:active)
+      expect { bomb.enter_code("0001") }.to raise_error(StandardError)
+      expect { bomb.enter_code("0001") }.to raise_error(StandardError)
+      expect { bomb.enter_code("0001") }.to raise_error(StandardError)
+      expect(bomb.status).to eq(:exploded)
+    end
+
+    it "only allows preset states to be the bomb's state" do
+      bomb.state = :off
+      bomb.state = :inactive
+      bomb.state = :active
+      bomb.state = :exploded
+      expect { bomb.state = :on }.to raise_error(StandardError)
+      expect { bomb.state = :detonated }.to raise_error(StandardError)
+      expect { bomb.state = :armed }.to raise_error(StandardError)
+      expect { bomb.state = :broken }.to raise_error(StandardError)
+      expect { bomb.state = :hacked }.to raise_error(StandardError)
+    end
   end
 end

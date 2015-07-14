@@ -1,7 +1,7 @@
 require_relative '../bomb'
 
 describe Bomb do
-  context "activate_deactivate methods" do
+  context "timer function check" do
     let(:bomb) { Bomb.new }
 
     it "has a time of 0:00 when off" do

@@ -1,5 +1,5 @@
 Given /^I have a new bomb$/ do
-  page.driver.put("/bomb")
+  page.driver.post("/bomb")
 end
 
 Given /^I booted the bomb$/ do

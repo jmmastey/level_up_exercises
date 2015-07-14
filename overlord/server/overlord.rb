@@ -35,7 +35,7 @@ post '/set_deactivation_key' do
 end
 
 # Temporary Debug Method
-put '/bomb' do
+post '/bomb' do
   bomb = Bomb.new
   "new bomb"
 end

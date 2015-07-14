@@ -1,10 +1,9 @@
 #encoding: utf-8
 
 Feature: Sad Shipping Estimates
-  In order to get shipping estimates
+  In order to not get shipping estimates
   As an online shopper
-  I should enter my address correctly
-  And have items in my cart
+  I should enter my address correctly with no items in my cart
 
   Scenario: No items in cart
     Given I'm at the online store

@@ -11,3 +11,4 @@ Feature: Visiting an item page
     When I click on that item
     Then I should be taken to that item's page
     And my cart should be unchanged
+    

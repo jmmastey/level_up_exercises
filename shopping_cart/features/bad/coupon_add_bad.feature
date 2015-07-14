@@ -1,10 +1,9 @@
 #encoding: utf-8
 
 Feature: Bad Coupon Adding
-  In order to get a discount
+  In order to not get a discount
   As an online shopper
-  I should enter a valid coupon
-  And it should apply to an item in my cart
+  I should enter an expired coupon
 
   Scenario: Coupon expires after entry and before checkout
     Given I'm at the online store

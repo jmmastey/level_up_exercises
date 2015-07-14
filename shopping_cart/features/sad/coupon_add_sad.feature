@@ -1,10 +1,9 @@
 #encoding: utf-8
 
 Feature: Sad Coupon Adding
-  In order to get a discount
+  In order to not get a discount
   As an online shopper
-  I should enter a valid coupon
-  And it should apply to an item in my cart
+  I should enter invalid coupon codes
 
   Scenario: Coupon is expired
     Given I'm at the online store
@@ -20,15 +19,9 @@ Feature: Sad Coupon Adding
     Then an error message should display
     And tell me that coupon does not work at this store
 
-  Scenario: Multiple coupons entered for one item
+  Scenario: Coupon valid for item not in cart
     Given I'm at the online store
-    When I enter a valid coupon code for an item
-    And I enter another valid coupon code for that same item
-    Only the first coupon should apply
-    And the second one should not be applied to the item
-
-  Scenario: Using a coupon code across multiple purchases
-    Given I'm at the online store
-    When I enter a valid coupon code for an item
-    And complete my purchase of that item
-    Then I should be unable to use that coupon again
+    When I enter a valid coupon code
+    And the item it discounts is not in my cart
+    Then an error message should display
+    And tell me that coupon does not apply to anything in my cart

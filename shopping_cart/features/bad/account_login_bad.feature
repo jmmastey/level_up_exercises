@@ -1,10 +1,9 @@
 #encoding: utf-8
 
 Feature: Bad Logging In
-  In order to register
+  In order to log in and view my cart
   As an online shopper
-  I should log in
-  And begin shopping
+  I should enter valid credentials
 
   Scenario: I log in while in a guest session
     Given I have an open session with items in my cart
@@ -25,5 +24,3 @@ Feature: Bad Logging In
     And I have an account on the shopping site
     When I log into both sessions
     Then my items from both sessions will merge into my login cart
-
-

@@ -1,10 +1,9 @@
 #encoding: utf-8
 
 Feature: Sad Logging In
-  In order to register
+  In order to not log in
   As an online shopper
-  I should log in
-  And begin shopping
+  I should enter invalid credentials or nothing
 
   Scenario: I enter invalid credentials
     Given I have an account on the shopping site
@@ -17,4 +16,3 @@ Feature: Sad Logging In
     When I enter nothing into the username and password fields
     Then I will not be taken to the home page
     And an error message will appear
-

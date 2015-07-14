@@ -1,10 +1,9 @@
 #encoding: utf-8
 
 Feature: Happy Logging In
-  In order to register
+  In order to log in
   As an online shopper
-  I should log in
-  And begin shopping
+  I should enter valid credentials
 
   Scenario: I enter valid credentials
     Given I have an account on the shopping site

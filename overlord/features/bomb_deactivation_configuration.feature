@@ -1,4 +1,4 @@
-@ignore @bomb_deactivation_configuration
+@javascript @bomb_setup
 Feature: Set a bomb Deactivation code
     In order to deactivate a bomb
     As a super villain
@@ -6,11 +6,11 @@ Feature: Set a bomb Deactivation code
 
     Scenario: super villain does not enter a custom deactivation code
         Given A bomb was booted
-        When Super villain does not enter a a custom deactivation code
+        When I do not enter a a custom deactivation code
         Then the bomb deactivation code should be set to 0000
 
     Scenario: super villain enters a custom deactivation code
         Given A bomb was booted
-        When Super villain does enter a a custom deactivation code 4321
+        When I enter a a custom deactivation code 4321
         Then the bomb deactivation code should be set to 4321
 

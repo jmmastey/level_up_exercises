@@ -60,4 +60,3 @@ Then /^set (.*) key to "([^"]*)" (.*)$/ do |dest, key, result|
     raise "Invalid Step Definition Choice"
   end
 end
-

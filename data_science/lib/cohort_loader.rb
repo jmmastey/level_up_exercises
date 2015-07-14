@@ -20,13 +20,14 @@ class CohortLoader
   end
 
   def conversions(cohort_name = nil)
-    all_conversions if cohort_name.nil?
+    return all_conversions if cohort_name.nil?
     cohorts.count do |cohort|
       cohort.name.eql?(cohort_name) && cohort.conversion?
     end
   end
 
   def all_conversions
-    cohorts.count { |cohort| cohort.conversion? }
+    cohorts.count(&:conversion?)
   end
+
 end

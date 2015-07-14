@@ -39,4 +39,14 @@ RSpec.describe CohortLoader do
       expect(cohort_loader.conversions).to eq(2)
     end
   end
+
+  context '.conversion_rate' do
+    it 'should determine the conversion rate for cohort' do
+      cohort_loader = CohortLoader.new(filename)
+      cohort_loader.load
+
+     # expect(cohort_loader.conversion_rate('A')).to eq(0.5)
+     # expect(cohort_loader.conversion_rate('B')).to eq(0.5)
+    end
+  end
 end

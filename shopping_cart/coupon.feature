@@ -27,3 +27,5 @@ Feature:
     | valid   | 75    | SNES    | Coupon Applied | 375    |
     | valid   | 10    | all     | Coupon Applied | 540    |
     | valid   | 90    | all     | Coupon Applied | 60     |
+    | valid   | 110   | all     | Invalid Coupon | 600    |
+    | valid   | .01   | all     | Invalid Coupon | 600    |

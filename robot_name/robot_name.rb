@@ -36,7 +36,7 @@ class Robot
   end
 
   def name_is_correct_format?
-    @name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
+    !!(@name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
   end
 
   def name_in_registry?

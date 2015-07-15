@@ -22,6 +22,29 @@ When /^the user presses boot bomb$/ do
   sleep(1)
 end
 
+When /^the user submits (.*)code (\d+)$/ do |type, code|
+  case type
+  when "deactivation "
+    text_field = browser.find_element(:id => "deactivation_key_text")
+    text_field.send_keys(code)
+    button = browser.find_element(:id => "deactivation_key_btn")
+    button.click
+  when "activation "
+    text_field = browser.find_element(:id => "activation_key_text")
+    text_field.send_keys(code)
+    button = browser.find_element(:id => "activation_key_btn")
+    button.click
+  when ""
+    text_field = browser.find_element(:id => "submit_code_text")
+    text_field.send_keys(code)
+    button = browser.find_element(:id => "submit_code_btn")
+    button.click
+  else
+    raise "Invalid Submission Type"
+  end
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
 Then /^the user should see the bomb state$/ do
   browser.find_elements(:id => "bomb_state").any?.should eq(true)
 end

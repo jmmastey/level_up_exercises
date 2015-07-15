@@ -13,3 +13,11 @@ Feature:
   Scenario:
     When the user presses boot bomb
     Then the bomb is booted
+
+  Scenario:
+    When the user submits activation code 5432
+    Then the activation code will be 5432
+
+  Scenario:
+    When the user submits deactivation code 2323
+    Then the deactivation code will be 2323

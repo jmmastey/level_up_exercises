@@ -5,6 +5,7 @@ Feature: Visiting an item page
   As an online shopper
   I should click on an item in my cart
 
+  @happy
   Scenario: Clicking on an item in my cart
     Given I'm at the online store
     And I have an item in my shopping cart

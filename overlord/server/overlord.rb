@@ -1,43 +1,62 @@
 # run `ruby overlord.rb` to run a webserver for this app
 
 require 'sinatra'
+require 'json'
 require './bomb'
 require 'pry'
+
+before do
+   content_type :json
+   headers 'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Methods' => 'OPTIONS, GET, POST, PUT'
+end
+
+set :protection, false
 
 bomb = Bomb.new
 
 get '/' do
-  bomb.status.to_s
+  content_type :json
+  { :message => bomb.status.to_s }.to_json
 end
 
 post '/boot' do
-  try_method(-> { bomb.boot },
-             -> { bomb.status.to_s })
+  content_type :json
+  { :message => try_method(-> { bomb.boot },
+                           -> { bomb.status.to_s }) }.to_json
 end
 
 post '/submit_code' do
-  try_method(-> { bomb.enter_code(params[:code]) },
-             -> { bomb.status.to_s })
+  content_type :json
+  { :message => try_method(-> { bomb.enter_code(params[:code]) },
+                           -> { bomb.status.to_s }) }.to_json
 end
 
 get '/timer' do
-  bomb.time_left
+  content_type :json
+  { :message => bomb.time_left }.to_json
 end
 
 post '/set_activation_key' do
-  try_method(-> { bomb.activation_key = params[:key] },
-             -> { bomb.activation_key })
+  content_type :json
+  { :message => try_method(-> { bomb.activation_key = params[:key] },
+                           -> { bomb.activation_key }) }.to_json
 end
 
 post '/set_deactivation_key' do
-  try_method(-> { bomb.deactivation_key = params[:key] },
-             -> { bomb.deactivation_key })
+  content_type :json
+  { :message => try_method(-> { bomb.deactivation_key = params[:key] },
+                           -> { bomb.deactivation_key }) }.to_json
 end
 
-# Temporary Debug Method
-post '/bomb' do
+options "*" do
+  200
+end
+
+put '/bomb' do
+  content_type :json
   bomb = Bomb.new
-  "new bomb"
+  { :message => "new bomb" }.to_json
 end
 
 def try_method(action, success)

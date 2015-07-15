@@ -8,3 +8,8 @@ Feature:
 
   Scenario:
     Then the user should see the bomb state
+    And the bomb state is valid
+
+  Scenario:
+    When the user presses boot bomb
+    Then the bomb is booted

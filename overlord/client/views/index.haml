@@ -3,15 +3,20 @@
   %head
     %title Bomb Client v1.0
     %script{type: "text/javascript", src: "jquery-2.1.4.min.js"}
+    %script{type: "text/javascript", src: "overlord.js"}
   %body
-    %div
-      Bomb Controller
-    %div#bomb_state
-      STATE
-    %form{:name => "bomb_reset", :id => "bomb_reset_form",
-          :action => "http://localhost:4567/bomb",
-          :method => "post"}
-      %input{:type => "submit",
-             :value => "Send",
-             :class => "button",
-             :id => "bomb_reset_btn"}
+    .banner
+      .title
+        Bomb Controller
+      .toolbar
+        .button_bar
+          %button.button#bomb_reset_btn
+            Reset Bomb
+          .status
+    .main
+      .button_bar
+        %button.button#bomb_boot_btn
+          Boot Bomb
+        .status
+      #bomb_state
+        off

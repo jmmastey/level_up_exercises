@@ -1,5 +1,5 @@
 Given /^I have a new bomb$/ do
-  page.driver.post("/bomb")
+  page.driver.put("/bomb")
 end
 
 Given /^I booted the bomb$/ do
@@ -17,7 +17,8 @@ end
 
 Then /^I should see an unbooted bomb$/ do
   visit "/"
-  body.should have_content("off")
+  response = JSON.parse(body)
+  response["message"].should have_content("off")
 end
 
 When /^I boot the bomb$/ do
@@ -26,7 +27,8 @@ end
 
 Then /^the bomb is (.+)$/ do |status|
   visit "/"
-  body.should eq(status)
+  response = JSON.parse(body)
+  response["message"].should eq(status)
 end
 
 Then /^the time is "([^"]*)"$/ do |time|
@@ -36,13 +38,14 @@ end
 
 Then /^submit code "([^"]*)" (.*)$/ do |code, result|
   page.driver.post("/submit_code", code: code)
+  response = JSON.parse(body)
   case result
   when "succeeds"
-    body.should have_content(code)
+    response["message"].should have_content(code)
   when "fails (not booted)"
-    body.should eq("Code Entry Requires a Booted Bomb")
+    response["message"].should eq("Code Entry Requires a Booted Bomb")
   when "fails (invalid)"
-    body.should have_content("Incorrect Code")
+    response["message"].should have_content("Incorrect Code")
   else
     raise "Invalid Step Definition Choice"
   end
@@ -51,11 +54,12 @@ end
 Then /^set (.*) key to "([^"]*)" (.*)$/ do |dest, key, result|
   path = "/set_" + dest + "_key"
   page.driver.post(path, key: key)
+  response = JSON.parse(body)
   case result
   when "succeeds"
-    body.should eq(key)
+    response["message"].should eq(key)
   when "fails"
-    body.should have_content("Cannot Change Once Bomb is Booted")
+    response["message"].should have_content("Cannot Change Once Bomb is Booted")
   else
     raise "Invalid Step Definition Choice"
   end

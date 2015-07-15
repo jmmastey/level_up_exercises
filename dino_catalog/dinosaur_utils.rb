@@ -1,11 +1,12 @@
 class DinosaurUtils
   TWO_TONS = 4000
-  def self.biped_list(dinosaurs)
-    biped_list = []
+  def self.dinosaur_list_by_walking(walking_type, dinosaurs)
+    return [] if walking_type.nil?
+    dino_list = []
     dinosaurs.each do |dinosaur|
-      biped_list << dinosaur.name if dinosaur.walking == "Biped"
+      dino_list << dinosaur.name if dinosaur.walking == walking_type
     end
-    biped_list
+    dino_list
   end
 
   def self.dinosaur_list_from_period(period, dinosaurs)
@@ -69,7 +70,7 @@ class DinosaurUtils
     criteria[:name].nil? ? dino_array = [] : dino_array = [[criteria[:name]]]
     dino_array << dinosaur_list_from_period(criteria[:period], dinosaurs)
     dino_array << dinosaur_list_by_weight(criteria[:weight], dinosaurs)
-    dino_array << biped_list(dinosaurs) if criteria[:walking] == "Biped"
+    dino_array << dinosaur_list_by_walking(criteria[:walking], dinosaurs)
     dino_array << dinosaur_list_from_diet(criteria[:diet], dinosaurs)
     dino_array << dinosaur_list_by_continent(criteria[:continent], dinosaurs)
     get_common_dinosaurs_in_lists(remove_empty_sets(dino_array))

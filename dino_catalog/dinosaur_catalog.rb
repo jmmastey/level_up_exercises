@@ -83,4 +83,4 @@ end
 
 # For dinodex file
 catalog = DinosaurCatalog.new("dino_catalog/dinodex.csv")
-catalog.print_dinosaur_facts_by_criteria({weight: 2000, diet: "Carnivore"})
+catalog.print_dinosaur_facts_by_criteria(weight: 2000, diet: "Carnivore")

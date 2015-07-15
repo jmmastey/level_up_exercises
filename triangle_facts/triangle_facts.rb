@@ -17,13 +17,9 @@ class Triangle
   end
 
   def triangle_type
-    if equilateral?
-      'This triangle is equilateral!'
-    elsif isosceles?
-      'This triangle is isosceles! Also, that word is hard to type.'
-    else
-      'This triangle is scalene and mathematically boring.'
-    end
+    return "This triangle is equilateral!" if equilateral?
+    return "This triangle is isosceles!" if isosceles?
+    "This triangle is scalene and mathematically boring."
   end
 
   def recite_facts
@@ -31,7 +27,7 @@ class Triangle
 
     angles = calculate_angles(side1, side2, side3)
 
-    puts 'The angles of this triangle are ' + angles.join(', ')
+    puts 'The angles of this triangle are ' + angles.map(&:to_s).join(', ')
     puts 'This triangle is also a right triangle!' if angles.include?(90)
     puts
   end
@@ -40,7 +36,7 @@ class Triangle
     angle_a = calculate_angle(a, b, c)
     angle_b = calculate_angle(b, a, c)
     angle_c = calculate_angle(c, a, b)
-    %w(angle_a angle_b angle_c)
+    [angle_a, angle_b, angle_c]
   end
 
   def calculate_angle(a, b, c)

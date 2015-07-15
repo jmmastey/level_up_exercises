@@ -4,25 +4,35 @@ class Robot
   attr_accessor :name
 
   def initialize(args = {})
-    @registry ||= []
+    @@registry ||= []
     @name_generator = args[:name_generator]
 
-    @name_generator ? @name = @name_generator.call : generate_name
-    @registry << @name if valid_name?
+    @name = @name_generator ? @name_generator.call : generate_name
+    add_name_to_registry
+  end
+
+  def add_name_to_registry
+    if valid_name?
+      @@registry << @name
+    else
+      raise NameCollisionError, 'There was a problem generating the robot name!'
+    end
   end
 
   def generate_name
-    generate_char = -> { ('A'..'Z').to_a.sample }
-    generate_num = -> { rand(10) }
-    @name = "#{generate_char.call}#{generate_char.call}"
-    @name << "#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    "#{rand_char}#{rand_char}#{rand_num}#{rand_num}#{rand_num}"
+  end
+
+  def rand_char
+    ('A'..'Z').to_a.sample
+  end
+
+  def rand_num
+    rand(10)
   end
 
   def valid_name?
-    if !name_is_correct_format || name_in_registry
-      raise NameCollisionError, 'There was a problem generating the robot name!'
-    end
-    true
+    name_is_correct_format? && !name_in_registry?
   end
 
   def name_is_correct_format?
@@ -30,7 +40,7 @@ class Robot
   end
 
   def name_in_registry?
-    @registry.include?(@name)
+    @@registry.include?(@name)
   end
 end
 

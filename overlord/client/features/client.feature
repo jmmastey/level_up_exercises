@@ -7,6 +7,9 @@ Feature:
     And the user presses reset
 
   Scenario:
+    Then the bomb is off
+
+  Scenario:
     Then the user should see the bomb state
     And the bomb state is valid
 
@@ -21,3 +24,7 @@ Feature:
   Scenario:
     When the user submits deactivation code 2323
     Then the deactivation code will be 2323
+
+  Scenario:
+    Then the user should see the time
+    And the time is 0:00

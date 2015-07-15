@@ -48,12 +48,24 @@ Then /^the bomb state is valid$/ do
   bomb_states.should include(element.text)
 end
 
-Then /^the bomb is booted$/ do
-  element = browser.find_element(:id => "bomb_state")
-  booted_states.should include(element.text)
-end
-
 Then /^the (.*) code will be (\d+)$/ do |type, code|
   region = browser.find_element(id: type+"_key")
   region.find_element(class: "status").text.should eq(code)
+end
+
+Then /^the user should see the time$/ do
+  browser.find_elements(:id => "timer").any?.should eq(true)
+end
+
+Then /^the time is (.*)$/ do |time|
+  browser.find_element(:id => "timer").text.should eq(time)
+end
+
+Then /^the bomb is (.*)$/ do |state|
+  if state == "booted"
+    element = browser.find_element(:id => "bomb_state")
+    booted_states.should include(element.text)
+  else
+    browser.find_element(:id => "bomb_state").text.should eq(state)
+  end
 end

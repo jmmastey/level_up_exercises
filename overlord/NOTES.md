@@ -33,3 +33,14 @@ That, however, led me to realize that just having a field by itself means nothin
 I now had some idea of how the client was visualizing the bomb application working but I wasn't mired in implementation details. So I started in on the behavior:
 
 * "When the bomb is first booted, it should not be activated."
+
+So I was able to make the simplest possible implementation: initially just a Sinatra route that served up text. And then a bare-bones web page that contained that exact text. So now what? I could just keep designing more Cucumber specs or I could start getting into actual code. However, going with the thrust of test-first I didn't know the code I wanted yet since we hadn't fleshed out the design. So we went back to one of our initial statements:
+
+* "A new bomb can be activated with a valid activation code."
+
+This begs the question of what "valid" means.
+
+* "Valid activation codes are only numeric."
+* "Valid activation codes are exactly four digits."
+
+But where do I do this? In order to get the initial test to pass, I created some web pages and some JavaScript. That was all that was needed to provide a simple form and handle a click. Should I put the validation in the JavaScript as well? At this point, I could start constructing this entire app in JavaScript -- so why do I even need any Ruby code at all, beyond the bare minimum of Sinatra providing the routing? So far nothing in the design was calling out the need for anything beyond HTML and JS. At this point, however, "valid" was not called out in the spec file so anything was valid.

@@ -9,3 +9,9 @@ body {
 .bottom-spacer {
   margin-bottom: 20px;
 }
+
+.errors {
+  min-height: 200px;
+  max-height: 200px;
+  overflow: scroll;
+}

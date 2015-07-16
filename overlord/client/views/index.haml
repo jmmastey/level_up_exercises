@@ -4,7 +4,7 @@
     %title Bomb Client v1.0
     %script{type: "text/javascript", src: "jquery-2.1.4.min.js"}
     %script{type: "text/javascript", src: "overlord.js"}
-    %link{:href=>"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", :rel=>"stylesheet"}
+    %link{:href=>"https://bootswatch.com/slate/bootstrap.min.css", :rel=>"stylesheet"}
     %link{:href=>"overlord.css", :rel=>"stylesheet"}
     .container
       .navbar.navbar-default.navbar-fixed-top
@@ -15,19 +15,12 @@
           .navbar-btn
             %button.button.btn.btn-danger#bomb_reset_btn
               Reset Bomb
-              (
-              %span.status
-              )
+
   %body
-    .container
       .row.bottom-spacer
         .col-sm-4.col-sm-offset-4
           %button.button.btn.btn-success.btn-block#bomb_boot_btn
-            %span
-              Boot Bomb
-              (
-              %span.status
-              )
+            Boot Bomb
       .row
         .col-sm-4.col-sm-offset-4
           .panel.panel-default
@@ -38,18 +31,16 @@
                     .title
                       Activation Key
                     %input.textbox.form-control
-                    %button.button.btn.btn-default
+                    %button.btn.btn-default
                       Submit
-                    .status.label.label-info
               .form-inline
                 .form-group
                   .text_bar#deactivation_key
                     .title
                       Deactivation Key
                     %input.textbox.form-control
-                    %button.button.btn.btn-default
+                    %button.btn.btn-default
                       Submit
-                    .status.label.label-info
       .row
         .col-sm-4.col-sm-offset-4
           .panel.panel-default
@@ -60,18 +51,21 @@
                     .title
                       Submit Code
                     %input.textbox.form-control
-                    %button.button.btn.btn-default
+                    %button.btn.btn-default
                       Submit
-                    .status.label.label-info
+
       .row
         .col-sm-4.col-sm-offset-4
           .panel.panel-default
+            .panel-heading
+              .panel-title
+                Status
             .panel-body
               .row
                 .col-sm-12
                   %span
                     Bomb State:
-                    %span.label.label-default#bomb_state
+                    %span.label.label-primary#bomb_state
                       off
               .row
                 .col-sm-12
@@ -79,3 +73,11 @@
                     Timer:
                     %span.label.label-danger#timer
                       0:00
+      .row
+        .col-sm-4.col-sm-offset-4
+          .panel.panel-default
+            .panel-heading
+              .panel-title
+                Errors
+            .panel-body.errors
+              %ul#error_list

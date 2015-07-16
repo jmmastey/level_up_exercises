@@ -18,3 +18,18 @@ If you are using tools like Cucumber, your elaborated requirements _are_ the tes
 * Building this with Sinatra, as opposed to Rails. We use Rails, not Sinatra. So that's ... interesting.
 * Using Puma as the web server because that seems to be recommended over Unicorn, Thin, and WEBrick.
 * Timer is "extra credit"? Without a timer, the bomb would explode immediately.
+
+### Initial Spec Workshop
+
+I started with the feature-level tests. In doing so, I started with the statements from the README, largely as if I was having a discussion with the client. In talking with my client, getting the minimum viable product up and working seemed important. What I'm going to do here is introduce aspects of the README as if they had come up in conversation. We started with this:
+
+* "The bomb interface should include a field to type in an activation / deactivation code."
+
+That, however, led me to realize that just having a field by itself means nothing unless there is something viable to type into it. What really matters it the behavior, which means I need to focus on what will occur when this field is used. So I talked with my user and we first brought up some interface aspects:
+
+* "The bomb interface should include a field to type in an activation / deactivation code."
+* "The bomb interface should include an indicator of the activation state of the bomb."
+
+I now had some idea of how the client was visualizing the bomb application working but I wasn't mired in implementation details. So I started in on the behavior:
+
+* "When the bomb is first booted, it should not be activated."

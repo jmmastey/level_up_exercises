@@ -11,7 +11,7 @@ module Project
     enable :sessions
 
     get '/' do
-      'Time to build an app around here. Start time: ' + start_time
+      'Bomb is inactive.'
     end
 
     def start_time

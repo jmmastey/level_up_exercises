@@ -6,7 +6,6 @@ class RobotNameRegistry
 
   def self.add_name(name)
     @names << name if self.valid?(name) && self.unique?(name)
-    true
   end
 
   def self.valid?(name)
@@ -56,7 +55,12 @@ end
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
-# # Errors!
+# Errors!
+# Test duplicates
 # generator = -> { 'AA111' }
 # Robot.new(name_generator: generator)
+# Robot.new(name_generator: generator)
+
+# Test invalid name
+# generator = -> { 'AAA11' }
 # Robot.new(name_generator: generator)

@@ -1,37 +1,39 @@
 InvalidNameError = Class.new(RuntimeError)
 NameCollisionError = Class.new(RuntimeError)
 
+class RobotNameRegistry
+  @names = []
+
+  def self.add_name(name)
+    @names << name if self.valid?(name) && self.unique?(name)
+    true
+  end
+
+  def self.valid?(name)
+    unless name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
+      raise InvalidNameError, 'The given/generated name is invalid.'
+    end
+    true
+  end
+
+  def self.unique?(name)
+    if @names.include? name
+      raise NameCollisionError, "The given/generated name already exists."
+    end
+    true
+  end
+end
+
 class Robot
   attr_accessor :name
-
-  @@registry = []
 
   GEN_CHAR = -> { ('A'..'Z').to_a.sample }
   GEN_NUM = -> { rand(10) }
 
   def initialize(args = {})
     @name_generator = args[:name_generator]
-    if @name_generator
-      given_name = @name_generator.call
-      @name = given_name if valid?(given_name) && unique?(given_name)
-    else
-      @name = generate_name
-    end
-    add_name_to_registry(@name)
-  end
-
-  def valid?(name)
-    unless (name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
-      raise InvalidNameError, 'The given/generated name is invalid.'
-    end
-    true
-  end
-
-  def unique?(name)
-    if @@registry.include? name
-      raise NameCollisionError, "The given/generated name already exists."
-    end
-    true
+    give_name
+    add_name_to_registry
   end
 
   def generate_name
@@ -42,8 +44,12 @@ class Robot
     name
   end
 
-  def add_name_to_registry(name)
-    @@registry << name
+  def give_name
+    @name = @name_generator ? @name_generator.call : generate_name
+  end
+
+  def add_name_to_registry
+    RobotNameRegistry.add_name(@name)
   end
 end
 

@@ -9,9 +9,11 @@ module Project
 
     configure { set :server, :puma }
     enable :sessions
+    set :views, 'app/views'
+    set :haml, format: :html5
 
     get '/' do
-      'Bomb is inactive.'
+      haml :index
     end
 
     def start_time

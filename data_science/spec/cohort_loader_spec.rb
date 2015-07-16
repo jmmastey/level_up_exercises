@@ -86,6 +86,6 @@ RSpec.describe CohortLoader do
       expect(values['A'].key?(:fail)).to be true
       expect(values['B'].key?(:pass)).to be true
       expect(values['B'].key?(:fail)).to be true
-    end 
+    end
   end
 end

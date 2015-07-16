@@ -1,15 +1,23 @@
 #!/usr/bin/env ruby
 
-require 'sinatra'
+require 'sinatra/base'
+require 'sinatra/reloader'
 
-configure { set :server, :puma }
+module Project
+  class Overlord < Sinatra::Base
+    register Sinatra::Reloader
 
-enable :sessions
+    configure { set :server, :puma }
+    enable :sessions
 
-get '/' do
-  'Time to build an app around here. Start time: ' + start_time
+    get '/' do
+      'Time to build an app around here. Start time: ' + start_time
+    end
+
+    def start_time
+      session[:start_time] ||= (Time.now).to_s
+    end
+  end
 end
 
-def start_time
-  session[:start_time] ||= (Time.now).to_s
-end
+Project::Overlord.run! port: 9292 if __FILE__ == $PROGRAM_NAME

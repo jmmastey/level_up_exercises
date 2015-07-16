@@ -4,3 +4,4 @@ ruby '2.2.2'
 
 gem 'puma'
 gem 'sinatra'
+gem 'sinatra-reloader'

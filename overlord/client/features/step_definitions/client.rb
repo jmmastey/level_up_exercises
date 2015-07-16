@@ -5,7 +5,7 @@ browser = Selenium::WebDriver.for :firefox
 bomb_states = ["off", "active", "inactive", "exploded"]
 booted_states = bomb_states.reject { |e| e == "off" }
 
-Given /^the user presses reset$/ do
+Given /^there is a new bomb$/ do
   reset_button = browser.find_element(:id => "bomb_reset_btn")
   reset_button.click
 end
@@ -19,7 +19,7 @@ When /^the user presses boot bomb$/ do
   boot = browser.find_element(:id => "bomb_boot_btn")
   boot.click
   # Wait for view to update
-  sleep(1)
+  sleep(0.5)
 end
 
 When /^the user submits (.*)code (\d+)$/ do |type, code|
@@ -35,7 +35,9 @@ When /^the user submits (.*)code (\d+)$/ do |type, code|
     raise "Invalid Submission Type"
   end
   region = browser.find_element(id: field_id)
-  region.find_element(class: "textbox").send_keys(code)
+  textbox = region.find_element(class: "textbox")
+  textbox.clear
+  textbox.send_keys(code)
   region.find_element(class: "button").click
 end
 
@@ -62,10 +64,27 @@ Then /^the time is (.*)$/ do |time|
 end
 
 Then /^the bomb is (.*)$/ do |state|
+  sleep(0.5)
   if state == "booted"
     element = browser.find_element(:id => "bomb_state")
     booted_states.should include(element.text)
   else
     browser.find_element(:id => "bomb_state").text.should eq(state)
   end
+end
+
+Then /^the (.*) code fails$/ do |id|
+  msg = browser.find_element(id: id+"_key").find_element(class: "status").text
+  msg.should eq("Cannot Change Once Bomb is Booted")
+end
+
+When /^submit code (\d+) is invalid$/ do |code|
+  field_id = "submit_code"
+  region = browser.find_element(id: field_id)
+  textbox = region.find_element(class: "textbox")
+  textbox.clear
+  textbox.send_keys(code)
+  region.find_element(class: "button").click
+  sleep(0.1)
+  region.find_element(class: "status").text.should eq("Incorrect Code")
 end

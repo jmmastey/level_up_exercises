@@ -1,6 +1,5 @@
 require 'csv'
 require_relative './dinosaur.rb'
-require 'pry'
 
 class Parser
   FILES = %w(dinodex.csv african_dinosaur_export.csv)
@@ -29,8 +28,10 @@ class Parser
 
   def handle_diet
     index = @header.index("carnivore")
-    @header[index] = "diet" unless index.nil?
-    adjust_diet_values(index) if index
+    return unless index
+
+    @header[index] = "diet"
+    adjust_diet_values(index)
   end
 
   def fix_discrepancies
@@ -41,17 +42,13 @@ class Parser
 
   def adjust_diet_values(index)
     @data.each do |row|
-      if !index.nil? && row[index] == "Yes"
-        row[index] = "Carnivore"
-      elsif !index.nil?
-        row[index] = nil
-      end
+      row[index] = row[index] == "Yes" ? "Carnivore" : "Herbivore"
     end
   end
 
   def build_dino_array
     fix_discrepancies
-    @header = @header & Dinosaur::WHITELIST_ATTR
+    @header &= Dinosaur::WHITELIST_ATTR
     @data.map do |row|
       args = @header.zip(row).to_h
       dino = Dinosaur.new(args)

@@ -11,7 +11,7 @@ Feature: Bad Shipping Estimates
     And I have entered a correct address
     And I have 100+ items in my shopping cart
     When I try to get a shipping estimate
-    Then an error message should appear
+    Then an overloaded cart error message should appear
     And tell me to continue on the phone with a representative
 
   @bad
@@ -21,7 +21,7 @@ Feature: Bad Shipping Estimates
     And I have any number of items in my shopping cart
     And their value is larger than $10000
     When I try to get a shipping estimate
-    Then an error message should appear
+    Then a costly cart error message should appear
     And tell me to continue on the phone with a representative
 
   @happy

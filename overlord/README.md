@@ -22,6 +22,7 @@ But, this is the important part: you're going to write all the tests for the dev
 
 
 ### Super Optional Bonus Points
+
 * The super villain doesn't have much aesthetic sense, but you do, so go ahead and make the interface look awesome and malevolent.
 * Add a "confirm" button to the activation sequence. Once the activation code is entered, the user must confirm by pressing a big red button. Figure out what happens if you bail from the confirmation.
 * Add a timer. All good bombs have timers.

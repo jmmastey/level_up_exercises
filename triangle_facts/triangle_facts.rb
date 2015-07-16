@@ -42,15 +42,11 @@ class Triangle
   end
 
   def calculate_angles(a, b, c)
-    angle_a_rad = Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c))
-    angle_b_rad = Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c))
-    angle_c_rad = Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b))
-
-    angle_a = radians_to_degrees(angle_a_rad)
-    angle_b = radians_to_degrees(angle_b_rad)
-    angle_c = radians_to_degrees(angle_c_rad)
-
-    [angle_a, angle_b, angle_c]
+    [
+      radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c))),
+      radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c))),
+      radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b))),
+    ]
   end
 
   def radians_to_degrees(rads)

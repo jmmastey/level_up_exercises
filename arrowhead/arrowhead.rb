@@ -18,7 +18,7 @@ class Arrowhead
   def self.classify(region, shape)
     unless CLASSIFICATIONS.include? region
       raise "Unknown region, please provide a valid region."
-    end    
+    end
     
     shapes = CLASSIFICATIONS[region]
 

@@ -1,6 +1,11 @@
+require 'json'
+
 class Dinosaur
-  attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking,
-                :description, :genus, :carnivore
+  TWO_TONS = 4480
+  WHITELIST_ATTR = %w(name period continent diet weight walking description)
+
+  attr_accessor :name, :period, :continent, :diet, :weight, :walking
+  attr_accessor :description
 
   def initialize(args = {})
     args.each_pair do |key, value|
@@ -9,36 +14,44 @@ class Dinosaur
   end
 
   def carnivore?
-    %w(Carnivore Piscivore Insectivore).include?(diet) || carnivore == "Yes"
+    return false if diet.nil?
+    %w(Carnivore Piscivore Insectivore).include?(diet)
   end
 
   def biped?
+    return false if walking.nil?
     walking == "Biped"
   end
 
   def big?
-    weight_in_lbs > 4480
+    return false if weight.nil?
+    weight.to_i > TWO_TONS
   end
 
   def small?
+    return false if weight.nil?
     !big?
   end
 
+  def from_period?(prd)
+    return false if period.nil?
+    period.include?(prd)
+  end
+
   def print_facts
-    instance_variables.each do |attr|
-      value = instance_variable_get(attr)
-      puts "#{attr}: #{value}" unless value.nil?
+    to_hash.each_pair do |key, value|
+      puts "#{key}: #{value}" unless value.nil?
     end
-    nil
+    puts
   end
 
-  def self.print(dinos)
-    dinos.each(&:print_facts)
+  def to_hash
+    WHITELIST_ATTR.map do |iv|
+      [iv.to_sym, instance_variable_get('@' << iv)]
+    end.to_h
   end
 
-  def self.partition_by_period(dinosaurs)
-    grouped_dinos = dinosaurs.group_by(&:period)
-    grouped_dinos["Cretaceous"] = grouped_dinos.delete("Early Cretaceous") +
-                                  grouped_dinos.delete("Late Cretaceous")
+  def to_json
+    to_hash.to_json
   end
 end

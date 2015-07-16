@@ -4,43 +4,78 @@
     %title Bomb Client v1.0
     %script{type: "text/javascript", src: "jquery-2.1.4.min.js"}
     %script{type: "text/javascript", src: "overlord.js"}
-    %link{type: "text/css", rel: "stylesheet", href: "overlord.css"}
+    %link{:href=>"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", :rel=>"stylesheet"}
+    %link{:href=>"overlord.css", :rel=>"stylesheet"}
+    .container
+      .navbar.navbar-default.navbar-fixed-top
+        .navbar-header.pull-left
+          %a.navbar-brand{href:"#"}
+            Bomb Controller
+        .navbar-header.navbar-right
+          .navbar-btn
+            %button.button.btn.btn-danger#bomb_reset_btn
+              Reset Bomb
+              (
+              %span.status
+              )
   %body
-    .banner
-      .title
-        Bomb Controller
-      .toolbar
-        .button_bar
-          %button.button#bomb_reset_btn
-            Reset Bomb
-          .status
-    .main
-      .button_bar
-        %button.button#bomb_boot_btn
-          Boot Bomb
-        .status
-      .text_bar#activation_key
-        .title
-          activation key
-        %input.textbox
-        %button.button
-          submit
-        .status
-      .text_bar#deactivation_key
-        .title
-          deactivation key
-        %input.textbox
-        %button.button
-          submit
-        .status
-      .text_bar#submit_code
-        .title
-          submit code
-        %input.textbox
-        %button.button
-          submit
-        .status
-      #bomb_state
-        off
-      #timer
-        0:00
+    .container
+      .row.bottom-spacer
+        .col-sm-4.col-sm-offset-4
+          %button.button.btn.btn-success.btn-block#bomb_boot_btn
+            %span
+              Boot Bomb
+              (
+              %span.status
+              )
+      .row
+        .col-sm-4.col-sm-offset-4
+          .panel.panel-default
+            .panel-body
+              .form-inline
+                .form-group
+                  .text_bar#activation_key
+                    .title
+                      Activation Key
+                    %input.textbox.form-control
+                    %button.button.btn.btn-default
+                      Submit
+                    .status.label.label-info
+              .form-inline
+                .form-group
+                  .text_bar#deactivation_key
+                    .title
+                      Deactivation Key
+                    %input.textbox.form-control
+                    %button.button.btn.btn-default
+                      Submit
+                    .status.label.label-info
+      .row
+        .col-sm-4.col-sm-offset-4
+          .panel.panel-default
+            .panel-body
+              .form-inline
+                .form-group
+                  .text_bar#submit_code
+                    .title
+                      Submit Code
+                    %input.textbox.form-control
+                    %button.button.btn.btn-default
+                      Submit
+                    .status.label.label-info
+      .row
+        .col-sm-4.col-sm-offset-4
+          .panel.panel-default
+            .panel-body
+              .row
+                .col-sm-12
+                  %span
+                    Bomb State:
+                    %span.label.label-default#bomb_state
+                      off
+              .row
+                .col-sm-12
+                  %span
+                    Timer:
+                    %span.label.label-danger#timer
+                      0:00

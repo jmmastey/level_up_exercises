@@ -1,3 +1,11 @@
+.navbar-btn {
+  margin-right: 30px;
+}
+
 body {
-  background-color: #123456;
+  padding-top: 65px;
+}
+
+.bottom-spacer {
+  margin-bottom: 20px;
 }

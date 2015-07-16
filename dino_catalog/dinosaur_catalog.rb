@@ -23,7 +23,7 @@ class DinosaurCatalog
   end
 
   def filter_by_name(name)
-    dino = @dinosaurs.find { |dinosaur| dinosaur.name == name }
+    dino = @dinosaurs.detect { |dinosaur| dinosaur.name == name }
     dino_array = dino.nil? ? [] : [dino]
     pass_new_instance_for_filter(dino_array)
   end

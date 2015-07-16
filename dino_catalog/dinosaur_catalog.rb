@@ -1,86 +1,109 @@
 require_relative 'csv_parser'
-require_relative 'dinosaur_utils'
+require_relative 'printer'
 
 class DinosaurCatalog
+  TWO_TONS = 4000
+  attr_accessor :dinosaurs
+
   def initialize(*file_paths)
     @dinosaurs = []
     file_paths.each do |file_path|
-      @dinosaurs.concat Parser.read_csv_file(file_path)
+      @dinosaurs.concat(Parser.read_csv_file(file_path))
     end
   end
 
-  def print_individual_dinosaur_facts(dinosaur_name)
-    dinosaur = get_dinosaur_by_name(dinosaur_name)
-    if dinosaur
-      fact_string = print_fact_string(dinosaur)
+  def pass_new_instance_for_filter(dinosaurs)
+    new_catalog = DinosaurCatalog.new
+    new_catalog.dinosaurs = dinosaurs
+    new_catalog
+  end
+
+  def all_dinosaurs
+    pass_new_instance_for_filter(@dinosaurs)
+  end
+
+  def filter_by_name(name)
+    dino = @dinosaurs.find { |dinosaur| dinosaur.name == name }
+    dino_array = dino.nil? ? [] : [dino]
+    pass_new_instance_for_filter(dino_array)
+  end
+
+  def filter_by_walking(walking_type)
+    dinos = @dinosaurs.select { |dino| dino.walking == walking_type }
+    pass_new_instance_for_filter(dinos)
+  end
+
+  def filter_by_period(period)
+    dinos = @dinosaurs.select { |dino| dino.period.include?(period) }
+    pass_new_instance_for_filter(dinos)
+  end
+
+  def filter_by_diet(diet)
+    if diet == "Carnivore"
+      dinos = @dinosaurs.select(&:carnivorous?)
     else
-      fact_string = "That dinosaur couldn't be found in our database. Sorry!\n"
+      dinos = @dinosaurs.select { |dino| dino.diet == diet }
     end
-
-    puts fact_string
+    pass_new_instance_for_filter(dinos)
   end
 
-  def print_dinosaur_facts_by_criteria(criteria = {})
-    if !criteria.empty?
-      dinos = DinosaurUtils.list_of_dinosaurs_by_criteria(criteria, @dinosaurs)
-      check_returned_dinos_and_print(dinos)
-    else
-      @dinosaurs.each { |dino| print_individual_dinosaur_facts(dino.name) }
-    end
-  end
-
-  def check_returned_dinos_and_print(dinosaurs)
-    if !dinosaurs.nil?
-      dinosaurs.each { |dino| print_individual_dinosaur_facts(dino) }
-    else
-      puts "That dinosaur couldn't be found in our database. Sorry!\n"
-    end
-  end
-
-  def print_fact_string(dinosaur)
-    puts "The #{dinosaur.name} was from the #{dinosaur.period} period."
-    get_continent_string(dinosaur.continent)
-    get_weight_string(dinosaur.weight)
-    get_walking_string(dinosaur.walking)
-    get_diet_string(dinosaur)
-    get_description_string(dinosaur.description)
-  end
-
-  def get_continent_string(continent)
-    puts "It lived in #{continent}." if continent
-  end
-
-  def get_walking_string(walking)
-    puts "It was a #{walking.downcase}." if walking
-  end
-
-  def get_weight_string(weight)
-    puts "It weighed #{weight} pounds!" if weight
-  end
-
-  def get_description_string(description)
-    puts "Fun fact: #{description}\n" if description
-  end
-
-  def get_diet_string(dinosaur)
-    if dinosaur.diet
-      puts "This dinosaur was a #{dinosaur.diet.downcase}."
-    elsif dinosaur.carnivorous
-      puts "This dinosaur was a carnivore."
-    else
-      puts "This dinosaur was not a carnivore."
-    end
-  end
-
-  def get_dinosaur_by_name(name)
-    dinosaur = nil
+  def big_dinos
+    dinos = []
     @dinosaurs.each do |dino|
-      dinosaur = dino if dino.name == name
+      dinos << dino if !dino.weight.nil? && dino.weight.to_i > TWO_TONS
     end
-    dinosaur
+    pass_new_instance_for_filter(dinos)
+  end
+
+  def small_dinos
+    dinos = []
+    @dinosaurs.each do |dino|
+      dinos << dino if !dino.weight.nil? && dino.weight.to_i <= TWO_TONS
+    end
+    pass_new_instance_for_filter(dinos)
+  end
+
+  def filter_by_weight(weight)
+    if weight > TWO_TONS
+      big_dinos
+    else
+      small_dinos
+    end
+  end
+
+  def filter_by_continent(continent)
+    dinos = @dinosaurs.select { |dino| dino.continent == continent }
+    pass_new_instance_for_filter(dinos)
+  end
+
+  def print
+    Printer.print_just_names(@dinosaurs)
+    puts
+  end
+
+  def print_with_facts
+    Printer.print_with_facts(@dinosaurs)
+    puts
   end
 end
 
 # For dinodex file
 catalog = DinosaurCatalog.new("dino_catalog/dinodex.csv")
-catalog.print_dinosaur_facts_by_criteria(weight: 2000, diet: "Carnivore")
+puts "Carnivore, Weight 4001"
+catalog.filter_by_diet("Carnivore").filter_by_weight(4001).print
+puts "Name: Albertosaurus"
+catalog.filter_by_name("Albertosaurus").print
+puts "Walking: Biped"
+catalog.filter_by_walking("Biped").print
+puts "Period: Cretaceous"
+catalog.filter_by_period("Cretaceous").print
+puts "Continent: North America"
+catalog.filter_by_continent("North America").print
+puts "Diet: Insectivore"
+catalog.filter_by_diet("Insectivore").print
+puts "No matches"
+catalog.filter_by_period("Nothing").print
+puts "All dinosuars"
+catalog.all_dinosaurs.print
+puts "All dinosaurs with facts"
+catalog.all_dinosaurs.print_with_facts

@@ -8,20 +8,15 @@ class Parser
   end
 
   def self.analyze_csv_array(array)
-    dinosaur_array = []
     headers_array = array.shift
-    array.each do |row|
-      facts = get_facts_from_each_row(headers_array, row)
-      dinosaur_array << Dinosaur.new(facts)
+    array.each_with_object([]) do |row, dino_array|
+      dino_array << Dinosaur.new(get_facts_from_each_row(headers_array, row))
     end
-    dinosaur_array
   end
 
   def self.get_facts_from_each_row(headers, row)
-    facts = {}
-    headers.each do |header|
-      facts[header.downcase] = row[headers.index(header)]
+    headers.each_with_object({}) do |header, fact_hash|
+      fact_hash[header.downcase] = row[headers.index(header)]
     end
-    facts
   end
 end

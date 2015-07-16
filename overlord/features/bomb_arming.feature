@@ -6,6 +6,7 @@ Feature: Arming the bomb
   As an evil overlord
   I should have to enter the correct code
 
+  @happy
   Scenario: Arming the bomb with a correct code
     Given I'm at the bomb page
     And I have already submitted my codes
@@ -14,6 +15,7 @@ Feature: Arming the bomb
     Then the bomb should arm
     And the timer should start
 
+  @sad
   Scenario: Arming the bomb with an incorrect code
     Given I'm at the bomb page
     And I have already submitted my codes

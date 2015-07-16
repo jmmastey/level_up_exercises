@@ -7,6 +7,7 @@ Feature: Submitting The Arm / Disarm Codes
   I should enter two valid 4-digit numbers
   And press submit
 
+  @happy
   Scenario: I enter nothing and arm
     Given I'm at the bomb page
     And I enter nothing
@@ -16,6 +17,7 @@ Feature: Submitting The Arm / Disarm Codes
     Then the bomb should arm
     And I should be able to disarm the bomb
 
+  @happy
   Scenario: I enter nothing and disarm
     Given I'm at the bomb page
     And I enter nothing
@@ -25,6 +27,7 @@ Feature: Submitting The Arm / Disarm Codes
     Then the bomb should disarm
     And I should be able to arm the bomb
 
+  @happy
   Scenario: I enter only the arm code
     Given I'm at the bomb page
     When I enter the arm code only
@@ -34,6 +37,7 @@ Feature: Submitting The Arm / Disarm Codes
     Then the bomb should arm
     And I should be able to disarm the bomb
 
+  @happy
   Scenario: I enter only the disarm code
     Given I'm at the bomb page
     When I enter the disarm code only
@@ -43,6 +47,7 @@ Feature: Submitting The Arm / Disarm Codes
     Then the bomb should disarm
     And I should be able to arm the bomb
 
+  @happy
   Scenario: I enter both codes and arm
     Given I'm at the bomb page
     When I enter both the arm and disarm code
@@ -52,6 +57,7 @@ Feature: Submitting The Arm / Disarm Codes
     Then the bomb should arm
     And I should be able to disarm the bomb
 
+  @happy
   Scenario: I enter both codes and disarm
     Given I'm at the bomb page
     When I enter both the arm and disarm code
@@ -61,6 +67,7 @@ Feature: Submitting The Arm / Disarm Codes
     Then the bomb should disarm
     And I should be able to arm the bomb
 
+  @bad
   Scenario: I enter either code incorrectly
     Given I'm at the bomb page
     When I enter incorrect codes

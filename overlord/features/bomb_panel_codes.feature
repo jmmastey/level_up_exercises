@@ -5,12 +5,14 @@ Feature: Bomb Code Verification and Generation
   I should be able to generate valid panel codes
   And entering the codes should result in successful hacks
   
+  @happy
   Scenario: Valid panel codes
     Given an armed bomb
     When it generates panel codes
     Then they should be less than 64
     And greater than 0
 
+  @happy
   Scenario: Example panel hacking step
     Given an armed bomb
     And a panel on that bomb
@@ -18,6 +20,7 @@ Feature: Bomb Code Verification and Generation
     When I enter the correct sequence
     Then it should hack the panel
 
+  @happy
   Scenario: Example panel mis-hack step
     Given an armed bomb
     And a panel on that bomb

@@ -6,6 +6,7 @@ Feature: Entering incorrect bomb codes
   As an unfortunate soul
   I should enter an incorrect code 3 times
 
+  @happy
   Scenario: Entering the incorrect code 3 times
     Given I'm at the bomb page
     And I have already submitted my codes

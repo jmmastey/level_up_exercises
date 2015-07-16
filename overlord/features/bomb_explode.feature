@@ -6,6 +6,7 @@ Feature: Bomb timer expires
   As the bomb
   I should hit zero without being disarmed
 
+  @happy
   Scenario: The timer hits zero
     Given I'm at the bomb page
     And I have already submitted my codes

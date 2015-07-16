@@ -6,6 +6,7 @@ Feature: Disarming a bomb
   As the overlord's bomb technician
   I should have to enter the correct code
 
+  @happy
   Scenario: Disarming the bomb with a correct code
     Given I'm at the bomb page
     And I have already submitted my codes
@@ -14,6 +15,7 @@ Feature: Disarming a bomb
     Then the bomb should disarm
     And the timer should stop
 
+  @happy
   Scenario: Disarming the bomb with an incorrect code
     Given I'm at the bomb page
     And I have already submitted my codes

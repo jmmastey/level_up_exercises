@@ -16,16 +16,10 @@ class Arrowhead
   }
 
   def self.classify(region, shape)
-    unless CLASSIFICATIONS.include? region
-      raise "Unknown region, please provide a valid region."
-    end
+    raise "Must provide valid region." unless CLASSIFICATIONS.include? region
     
     shapes = CLASSIFICATIONS[region]
-
-    unless shapes.include? shape
-      raise "Unknown shape value. Are you sure you know what you're talking
-             about?"
-    end
+    raise "Must provide valid shape." unless shapes.include? shape
 
     arrowhead = shapes[shape]
     "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."

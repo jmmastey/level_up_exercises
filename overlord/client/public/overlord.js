@@ -1,4 +1,6 @@
 $(function() {
+  remote_url = "http://localhost:4567";
+
   insert_message = function(msg) {
     try {
       type = msg.substr(0, msg.indexOf(' '));
@@ -29,7 +31,7 @@ $(function() {
   bind_button = function(btn, path, request, error) {
     $(btn).click(function() {
       $.ajax({
-        url: 'http://localhost:4567' + path,
+        url: remote_url + path,
         type: request,
         crossDomain: true,
         success: function(data) {
@@ -49,7 +51,7 @@ $(function() {
   bind_text_field = function(id, path, request, error) {
     $(id).find('.btn').click(function() {
       $.ajax({
-        url: 'http://localhost:4567' + path,
+        url: remote_url + path,
         type: request,
         crossDomain: true,
         data: { 'code' : $(id).find('.textbox')[0].value },
@@ -70,7 +72,7 @@ $(function() {
 
   status_timer = setInterval(function() {
     $.ajax({
-      url: 'http://localhost:4567/',
+      url: remote_url,
       type: 'GET',
       crossDomain: true,
       success: function(data) {
@@ -85,7 +87,7 @@ $(function() {
 
   bomb_timer = setInterval(function() {
     $.ajax({
-      url: 'http://localhost:4567/timer',
+      url: remote_url + '/timer',
       type: 'GET',
       crossDomain: true,
       success: function(data) {

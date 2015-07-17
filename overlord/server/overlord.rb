@@ -23,13 +23,15 @@ end
 post '/boot' do
   content_type :json
   { :message => try_method(-> { bomb.boot },
-                           -> { bomb.status.to_s }) }.to_json
+                           -> { "Update: Bomb Status " +
+                                bomb.status.to_s }) }.to_json
 end
 
 post '/submit_code' do
   content_type :json
   { :message => try_method(-> { bomb.enter_code(params[:code]) },
-                           -> { bomb.status.to_s }) }.to_json
+                           -> { "Update: Bomb Status " +
+                                bomb.status.to_s }) }.to_json
 end
 
 get '/timer' do
@@ -40,13 +42,15 @@ end
 post '/set_activation_code' do
   content_type :json
   { :message => try_method(-> { bomb.activation_key = params[:code] },
-                           -> { bomb.activation_key }) }.to_json
+                           -> { "Alert: Activation Code set to: " +
+                                bomb.activation_key }) }.to_json
 end
 
 post '/set_deactivation_code' do
   content_type :json
   { :message => try_method(-> { bomb.deactivation_key = params[:code] },
-                           -> { bomb.deactivation_key }) }.to_json
+                           -> { "Alert: Deactivation Code set to: " +
+                                bomb.deactivation_key }) }.to_json
 end
 
 options "*" do
@@ -56,12 +60,12 @@ end
 put '/bomb' do
   content_type :json
   bomb = Bomb.new
-  { :message => "new bomb" }.to_json
+  { :message => "Alert: New Bomb" }.to_json
 end
 
 def try_method(action, success)
   action.()
   success.()
 rescue StandardError => e
-  e.message
+  "Error: " + e.message
 end

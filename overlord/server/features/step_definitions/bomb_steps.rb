@@ -28,7 +28,7 @@ end
 Then /^the bomb is (.+)$/ do |status|
   visit "/"
   response = JSON.parse(body)
-  response["message"].should eq(status)
+  response["message"].should have_content(status)
 end
 
 Then /^the time is "([^"]*)"$/ do |time|
@@ -43,7 +43,7 @@ Then /^submit code "([^"]*)" (.*)$/ do |code, result|
   when "succeeds"
     response["message"].should have_content(code)
   when "fails (not booted)"
-    response["message"].should eq("Code Entry Requires a Booted Bomb")
+    response["message"].should have_content("Code Entry Requires a Booted Bomb")
   when "fails (invalid)"
     response["message"].should have_content("Incorrect Code")
   else
@@ -57,7 +57,7 @@ Then /^set (.*) code to "([^"]*)" (.*)$/ do |dest, code, result|
   response = JSON.parse(body)
   case result
   when "succeeds"
-    response["message"].should eq(code)
+    response["message"].should have_content(code)
   when "fails"
     response["message"].should have_content("Cannot Change Once Bomb is Booted")
   else

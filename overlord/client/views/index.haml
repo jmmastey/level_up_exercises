@@ -4,6 +4,7 @@
     %title Bomb Client v1.0
     %script{type: "text/javascript", src: "jquery-2.1.4.min.js"}
     %script{type: "text/javascript", src: "overlord.js"}
+    %link{:href=>"reset.css", :rel=>"stylesheet"}
     %link{:href=>"https://bootswatch.com/slate/bootstrap.min.css", :rel=>"stylesheet"}
     %link{:href=>"overlord.css", :rel=>"stylesheet"}
     .container
@@ -19,65 +20,69 @@
   %body
     .container
       .row.bottom-spacer
-        .col-sm-4.col-sm-offset-4
+        .col-sm-8.col-sm-offset-2
           %button.button.btn.btn-success.btn-block#bomb_boot_btn
             Boot Bomb
       .row
-        .col-sm-4.col-sm-offset-4
+        .col-sm-8.col-sm-offset-2
           .panel.panel-default
-            .panel-body
-              .form-inline
-                .form-group
-                  .text_bar#activation_code
-                    .title
-                      Activation Code
-                    %input.textbox.form-control
-                    %button.btn.btn-default
-                      Submit
-              .form-inline
-                .form-group
-                  .text_bar#deactivation_code
-                    .title
-                      Deactivation Code
-                    %input.textbox.form-control
-                    %button.btn.btn-default
-                      Submit
-      .row
-        .col-sm-4.col-sm-offset-4
-          .panel.panel-default
-            .panel-body
-              .form-inline
-                .form-group
-                  .text_bar#submit_code
-                    .title
-                      Submit Code
-                    %input.textbox.form-control
-                    %button.btn.btn-default
-                      Submit
-      .row
-        .col-sm-4.col-sm-offset-4
-          .panel.panel-default
-            .panel-heading
-              .panel-title
-                Status
             .panel-body
               .row
-                .col-sm-12
-                  %span
-                    Bomb State:
-                    %span.label.label-primary#bomb_state
-                      off
-              .row
-                .col-sm-12
-                  %span
-                    Timer:
-                    %span.label.label-danger#timer
-                      0:00
+                .col-sm-6
+                  .form-inline
+                    .form-group
+                      .text_bar#activation_code
+                        .title
+                          Activation Code
+                        %input.textbox.form-control
+                        %button.btn.btn-default
+                          Submit
+                .col-sm-6
+                  .form-inline
+                    .form-group
+                      .text_bar#deactivation_code
+                        .title
+                          Deactivation Code
+                        %input.textbox.form-control
+                        %button.btn.btn-default
+                          Submit
       .row
-        .col-sm-4.col-sm-offset-4
+        .col-sm-4.col-sm-offset-2
+          .row
+            .col-sm-12
+              .panel.panel-default
+                .panel-body
+                  .form-inline
+                    .form-group
+                      .text_bar#submit_code
+                        .title
+                          Submit Code
+                        %input.textbox.form-control
+                        %button.btn.btn-default
+                          Submit
+          .row
+            .col-sm-12
+              .panel.panel-default
+                .panel-heading
+                  .panel-title
+                    Status
+                .panel-body
+                  .row
+                    .col-sm-12
+                      %span
+                        Bomb State:
+                        %span.label.label-primary#bomb_state
+                          off
+                  .row
+                    .col-sm-12
+                      %span
+                        Timer:
+                        %span.label.label-danger#timer
+                          0:00
+        .col-sm-4
           .panel.panel-default
             .panel-heading
               .panel-title
                 Messages
             .panel-body.errors
-              %ul#error_list
+              %ul.list_group#error_list

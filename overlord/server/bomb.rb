@@ -121,7 +121,7 @@ class Bomb
 
   def validate_key(key)
     return nil if key.nil?
-    raise "Invalid Key" unless (key =~ /\A[[:digit:]]{4}\Z/) == 0
+    raise "Error: Invalid Key" unless (key =~ /\A[[:digit:]]{4}\Z/) == 0
     key
   end
 end

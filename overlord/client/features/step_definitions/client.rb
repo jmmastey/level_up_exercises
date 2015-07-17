@@ -52,7 +52,7 @@ end
 
 Then /^the (.*) code will be (\d+)$/ do |type, code|
   region = browser.find_element(id: type+"_code")
-  browser.find_element(class: "status").text.should eq(code)
+  browser.find_element(class: "status").text.should have_content(code)
 end
 
 Then /^the user should see the time$/ do
@@ -60,7 +60,7 @@ Then /^the user should see the time$/ do
 end
 
 Then /^the time is (.*)$/ do |time|
-  browser.find_element(:id => "timer").text.should eq(time)
+  browser.find_element(:id => "timer").text.should have_content(time)
 end
 
 Then /^the bomb is (.*)$/ do |state|
@@ -69,13 +69,13 @@ Then /^the bomb is (.*)$/ do |state|
     element = browser.find_element(:id => "bomb_state")
     booted_states.should include(element.text)
   else
-    browser.find_element(:id => "bomb_state").text.should eq(state)
+    browser.find_element(:id => "bomb_state").text.should have_content(state)
   end
 end
 
 Then /^the (.*) code fails$/ do |id|
   msg = browser.find_element(class: "status").text
-  msg.should eq("Cannot Change Once Bomb is Booted")
+  msg.should have_content("Cannot Change Once Bomb is Booted")
 end
 
 When /^submit code (\d+) is invalid$/ do |code|
@@ -86,5 +86,6 @@ When /^submit code (\d+) is invalid$/ do |code|
   textbox.send_keys(code)
   region.find_element(class: "btn").click
   sleep(0.1)
-  browser.find_element(class: "status").text.should eq("Incorrect Code")
+  result = browser.find_element(class: "status").text
+  result.should have_content("Incorrect Code")
 end

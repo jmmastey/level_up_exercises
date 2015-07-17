@@ -7,7 +7,7 @@ $(function() {
         crossDomain: true,
         success: function(data) {
           message = data['message'];
-          $("ul#error_list").prepend('<li class="status">' + message + '</li>');
+          $("ul#error_list").prepend('<li class="status list-group-item">' + message + '</li>');
         },
         error: function(data) {
           alert(error);
@@ -28,7 +28,7 @@ $(function() {
         data: { 'code' : $(id).find('.textbox')[0].value },
         success: function(data) {
           message = data['message'];
-          $("ul#error_list").prepend('<li class="status">' + message + '</li>');
+          $("ul#error_list").prepend('<li class="status list-group-item">' + message + '</li>');
         },
         error: function(data) {
           alert(error);

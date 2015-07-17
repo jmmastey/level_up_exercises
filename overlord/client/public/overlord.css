@@ -11,7 +11,7 @@ body {
 }
 
 .errors {
-  min-height: 200px;
-  max-height: 200px;
+  min-height: 180px;
+  max-height: 400px;
   overflow: scroll;
 }

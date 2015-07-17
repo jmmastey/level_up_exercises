@@ -77,7 +77,27 @@ $(function() {
       crossDomain: true,
       success: function(data) {
         message = data['message'];
-        $('#bomb_state').text(message)
+        $('#bomb_state').text(message);
+        $('#bomb_state').removeClass();
+        $('#bomb_state').addClass('label');
+
+        switch (message) {
+          case "off":
+            $('#bomb_state').addClass('label-primary');
+            break;
+          case "inactive":
+            $('#bomb_state').addClass('label-info');
+            break;
+          case "active":
+            $('#bomb_state').addClass('label-warning');
+            break;
+          case "exploded":
+            $('#bomb_state').addClass('label-danger');
+            break;
+          default:
+            $('#bomb_state').addClass('label-default');
+            break;
+        }
       },
       error: function(data) {
         alert('Error Resetting Bomb');

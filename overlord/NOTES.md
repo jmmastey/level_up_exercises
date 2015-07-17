@@ -43,4 +43,9 @@ This begs the question of what "valid" means.
 * "Valid activation codes are only numeric."
 * "Valid activation codes are exactly four digits."
 
+This also led to the display:
+
+* "A bomb that is activated will display it is active."
+* "A bomb will indicate if it received an inaccurate activation code."
+
 But where do I do this? In order to get the initial test to pass, I created some web pages and some JavaScript. That was all that was needed to provide a simple form and handle a click. Should I put the validation in the JavaScript as well? At this point, I could start constructing this entire app in JavaScript -- so why do I even need any Ruby code at all, beyond the bare minimum of Sinatra providing the routing? So far nothing in the design was calling out the need for anything beyond HTML and JS. At this point, however, "valid" was not called out in the spec file so anything was valid.

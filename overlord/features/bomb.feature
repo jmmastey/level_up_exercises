@@ -14,3 +14,16 @@ Feature: Bomb
     When entering a valid activation code
     Then the bomb will display as active
 
+  @javascript
+  Scenario Outline: Bombs cannot be activated with invalid activation codes
+    Given a newly booted bomb
+    When entering an invalid activation <code>
+    Then the bomb will display as inactive
+    And the display indicates the code was invalid
+
+    Examples:
+      | code   |
+      | ""     |
+      | "aaaa" |
+      | "1ab3" |
+      | "12"   |

@@ -52,8 +52,7 @@ end
 
 Then /^the (.*) code will be (\d+)$/ do |type, code|
   region = browser.find_element(id: type+"_key")
-  binding.pry
-  region.find_element(class: "status").text.should eq(code)
+  browser.find_element(class: "status").text.should eq(code)
 end
 
 Then /^the user should see the time$/ do
@@ -75,8 +74,7 @@ Then /^the bomb is (.*)$/ do |state|
 end
 
 Then /^the (.*) code fails$/ do |id|
-  binding.pry
-  msg = browser.find_element(id: id+"_key").find_element(class: "status").text
+  msg = browser.find_element(class: "status").text
   msg.should eq("Cannot Change Once Bomb is Booted")
 end
 
@@ -88,6 +86,5 @@ When /^submit code (\d+) is invalid$/ do |code|
   textbox.send_keys(code)
   region.find_element(class: "btn").click
   sleep(0.1)
-  binding.pry
-  region.find_element(class: "status").text.should eq("Incorrect Code")
+  browser.find_element(class: "status").text.should eq("Incorrect Code")
 end

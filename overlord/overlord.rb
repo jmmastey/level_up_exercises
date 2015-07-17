@@ -1,14 +1,19 @@
 # run `ruby overlord.rb` to run a webserver for this app
 
 require 'sinatra'
+require 'json'
 
-enable :sessions
+class Overlord < Sinatra::Base
+  enable :sessions
 
-get '/' do
-  "Time to build an app around here. Start time: " + start_time
-end
+  get '/' do
+    session.delete(:bomb)
+    erb :home, layout: 'layouts/main'.to_sym
+  end
 
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
+  get '/bomb' do
+    content_type :json
+    bomb_count = session[:bomb].nil? ? 0 : 1
+    { count: bomb_count }.to_json
+  end
 end

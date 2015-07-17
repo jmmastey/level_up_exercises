@@ -27,59 +27,60 @@
         .col-sm-8.col-sm-offset-2
           .panel.panel-default
             .panel-body
-              .row
-                .col-sm-6
-                  .form-inline
-                    .form-group
-                      .text_bar#activation_code
-                        .title
-                          Activation Code
+              .form-horizontal
+                .form-group
+                  .text_bar#activation_code
+                    .col-sm-3.control-label.title
+                      Activation Code
+                    .col-sm-6
+                      %input.textbox.form-control
+                    .col-sm-3
+                      %button.btn.btn-default.btn-block
+                        Submit
+                .form-horizontal
+                  .form-group
+                    .text_bar#deactivation_code
+                      .col-sm-3.control-label.title
+                        Deactivation Code
+                      .col-sm-6
                         %input.textbox.form-control
-                        %button.btn.btn-default
-                          Submit
-                .col-sm-6
-                  .form-inline
-                    .form-group
-                      .text_bar#deactivation_code
-                        .title
-                          Deactivation Code
-                        %input.textbox.form-control
-                        %button.btn.btn-default
+                      .col-sm-3
+                        %button.btn.btn-default.btn-block
                           Submit
       .row
-        .col-sm-4.col-sm-offset-2
-          .row
-            .col-sm-12
-              .panel.panel-default
-                .panel-body
-                  .form-inline
-                    .form-group
-                      .text_bar#submit_code
-                        .title
-                          Submit Code
-                        %input.textbox.form-control
-                        %button.btn.btn-default
-                          Submit
-          .row
-            .col-sm-12
-              .panel.panel-default
-                .panel-heading
-                  .panel-title
-                    Status
-                .panel-body
-                  .row
-                    .col-sm-12
-                      %span
-                        Bomb State:
-                        %span.label.label-primary#bomb_state
-                          off
-                  .row
-                    .col-sm-12
-                      %span
-                        Timer:
-                        %span.label.label-danger#timer
-                          0:00
-        .col-sm-4
+        .col-sm-8.col-sm-offset-2
+          .panel.panel-default
+            .panel-body
+              .form-horizontal
+                .form-group
+                  .text_bar#submit_code
+                    .col-sm-3.control-label.title
+                      Submit Code
+                    .col-sm-6
+                      %input.textbox.form-control
+                    .col-sm-3
+                      %button.btn.btn-default.btn-block
+                        Submit
+      .row
+        .col-sm-8.col-sm-offset-2
+          .panel.panel-default
+            .panel-heading
+              .panel-title
+                Status
+            .panel-body
+              .row
+                .col-sm-6
+                  %h2
+                    Bomb State:
+                    %span.label.label-primary#bomb_state
+                      off
+                .col-sm-6
+                  %h2
+                    Timer:
+                    %span.label.label-danger#timer
+                      0:00
+      .row
+        .col-sm-8.col-sm-offset-2
           .panel.panel-default
             .panel-heading
               .panel-title

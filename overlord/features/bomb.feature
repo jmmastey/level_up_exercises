@@ -17,13 +17,32 @@ Feature: Bomb
   @javascript
   Scenario Outline: Bombs cannot be activated with invalid activation codes
     Given a newly booted bomb
-    When entering an invalid activation <code>
+    When an invalid activation <code> is entered
     Then the bomb will display as inactive
-    And the display indicates the code was invalid
+    And the display indicates the activation code was invalid
 
     Examples:
       | code   |
       | ""     |
       | "aaaa" |
       | "1ab3" |
+      | "12"   |
+
+  @javascript
+  Scenario: Bombs can be deactivated with valid deactivation codes
+    Given an active bomb
+    When a valid deactivation code is entered
+    Then the bomb will display as inactive
+
+  @javascript
+  Scenario Outline: Bombs cannot be deactivated with invalid deactivation codes
+    Given an active bomb
+    When an invalid deactivation <code> is entered
+    Then the bomb will display as active
+    And the display indicates the deactivation code was invalid
+
+    Examples:
+      | code   |
+      | ""     |
+      | "aaaa" |
       | "12"   |

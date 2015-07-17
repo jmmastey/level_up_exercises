@@ -10,4 +10,16 @@ $(document).ready(function() {
             $('#bomb-state').text('Bomb is active.');
         }
     });
+
+    $('#deactivate-bomb').click(function(e) {
+        var regex = /(^\d{4}$)/;
+        var deactivationCode = $('#deactivation-code');
+
+        if (deactivationCode.val() === "" || !deactivationCode.val().match(regex)) {
+            $('#notice').text('Deactivation code was inaccurate.');
+        } else {
+            $('#notice').text('');
+            $('#bomb-state').text('Bomb is inactive.');
+        }
+    })
 });

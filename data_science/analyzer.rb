@@ -1,7 +1,6 @@
 require 'json'
 require 'abanalyzer'
 require_relative './cohort.rb'
-require 'pry'
 
 class Analyzer
   P_LEVEL = 0.05
@@ -11,18 +10,17 @@ class Analyzer
     @file_name = file_name
   end
 
-  def load_data
+  def load_raw_data_from_file
     JSON.parse(File.read(@file_name))
   end
 
   def load_cohort_data(data)
-    cohorts = {}
-    cohorts = Hash.new { [] }
+    cohort_data = Hash.new { [] }
     data.each do |row|
       cohort_name = row["cohort"]
-      cohorts[cohort_name] <<= row["result"]
+      cohort_data[cohort_name] <<= row["result"]
     end
-    cohorts
+    cohort_data
   end
 
   def build_cohort_array(cohort_data)
@@ -33,16 +31,20 @@ class Analyzer
     end
   end
 
+  def convert_data_for_test
+    raw_data = load_raw_data_from_file
+    cohort_data = load_cohort_data(raw_data)
+    build_cohort_array(cohort_data)
+  end
+
   def initialize_test
+    @cohorts = convert_data_for_test
     values = {}
     @cohorts.each { |chrt| values[chrt.name] = chrt.conversion_statistics }
     ABAnalyzer::ABTest.new(values)
   end
 
   def perform_experiment
-    data = load_data
-    cohort_data = load_cohort_data(data)
-    @cohorts = build_cohort_array(cohort_data)
     tester = initialize_test
     @p_value = tester.chisquare_p
   end
@@ -73,6 +75,5 @@ end
 
 # file_name = 'data_export_2014_06_20_15_59_02.json'
 # analyzer = Analyzer.new(file_name)
-# analyzer.load_data
 # analyzer.perform_experiment
 # analyzer.print_summary

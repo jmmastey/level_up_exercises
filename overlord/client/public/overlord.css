@@ -1,0 +1,17 @@
+.navbar-btn {
+  margin-right: 30px;
+}
+
+body {
+  padding-top: 65px;
+}
+
+.bottom-spacer {
+  margin-bottom: 20px;
+}
+
+.errors {
+  min-height: 180px;
+  max-height: 400px;
+  overflow: scroll;
+}

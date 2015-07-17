@@ -1,0 +1,15 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+ruby "2.1.1"
+
+gem 'sinatra'
+gem 'cucumber'
+gem 'rspec'
+gem 'capybara'
+gem 'rack'
+gem 'rack-test'
+gem 'guard'
+gem 'guard-cucumber'
+gem 'foreman'
+gem 'json'

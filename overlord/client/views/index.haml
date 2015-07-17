@@ -1,0 +1,89 @@
+!!!
+%html
+  %head
+    %title Bomb Client v1.0
+    %script{type: "text/javascript", src: "jquery-2.1.4.min.js"}
+    %script{type: "text/javascript", src: "overlord.js"}
+    %link{:href=>"reset.css", :rel=>"stylesheet"}
+    %link{:href=>"https://bootswatch.com/slate/bootstrap.min.css", :rel=>"stylesheet"}
+    %link{:href=>"overlord.css", :rel=>"stylesheet"}
+    .container
+      .navbar.navbar-default.navbar-fixed-top
+        .navbar-header.pull-left
+          %a.navbar-brand{href:"#"}
+            Bomb Controller
+        .navbar-header.navbar-right
+          .navbar-btn
+            %button.button.btn.btn-danger#bomb_reset_btn
+              Reset Bomb
+
+  %body
+    .container
+      .row.bottom-spacer
+        .col-sm-8.col-sm-offset-2
+          %button.button.btn.btn-success.btn-block#bomb_boot_btn
+            Boot Bomb
+      .row
+        .col-sm-8.col-sm-offset-2
+          .panel.panel-default
+            .panel-body
+              .form-horizontal
+                .form-group
+                  .text_bar#activation_code
+                    .col-sm-3.control-label.title
+                      Activation Code
+                    .col-sm-6
+                      %input.textbox.form-control
+                    .col-sm-3
+                      %button.btn.btn-default.btn-block
+                        Submit
+                .form-horizontal
+                  .form-group
+                    .text_bar#deactivation_code
+                      .col-sm-3.control-label.title
+                        Deactivation Code
+                      .col-sm-6
+                        %input.textbox.form-control
+                      .col-sm-3
+                        %button.btn.btn-default.btn-block
+                          Submit
+      .row
+        .col-sm-8.col-sm-offset-2
+          .panel.panel-default
+            .panel-body
+              .form-horizontal
+                .form-group
+                  .text_bar#submit_code
+                    .col-sm-3.control-label.title
+                      Submit Code
+                    .col-sm-6
+                      %input.textbox.form-control
+                    .col-sm-3
+                      %button.btn.btn-default.btn-block
+                        Submit
+      .row
+        .col-sm-8.col-sm-offset-2
+          .panel.panel-default
+            .panel-heading
+              .panel-title
+                Status
+            .panel-body
+              .row
+                .col-sm-6
+                  %h2
+                    Bomb State:
+                    %span.label.label-primary#bomb_state
+                      off
+                .col-sm-6
+                  %h2
+                    Timer:
+                    %span.label.label-danger#timer
+                      0:00
+      .row
+        .col-sm-8.col-sm-offset-2
+          .panel.panel-default
+            .panel-heading
+              .panel-title
+                Messages
+            .panel-body.errors
+              %ul.list_group#error_list

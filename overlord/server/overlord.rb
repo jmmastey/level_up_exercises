@@ -37,15 +37,15 @@ get '/timer' do
   { :message => bomb.time_left }.to_json
 end
 
-post '/set_activation_key' do
+post '/set_activation_code' do
   content_type :json
-  { :message => try_method(-> { bomb.activation_key = params[:key] },
+  { :message => try_method(-> { bomb.activation_key = params[:code] },
                            -> { bomb.activation_key }) }.to_json
 end
 
-post '/set_deactivation_key' do
+post '/set_deactivation_code' do
   content_type :json
-  { :message => try_method(-> { bomb.deactivation_key = params[:key] },
+  { :message => try_method(-> { bomb.deactivation_key = params[:code] },
                            -> { bomb.deactivation_key }) }.to_json
 end
 

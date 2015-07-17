@@ -4,10 +4,10 @@ Feature: Default Bomb
     And I booted the bomb
 
   Scenario: Cannot change once booted
-    Then set activation key to "0000" fails
+    Then set activation code to "0000" fails
 
   Scenario: Cannot change once booted
-    Then set deactivation key to "0000" fails
+    Then set deactivation code to "0000" fails
 
   Scenario:
     Then the time is "0:00"

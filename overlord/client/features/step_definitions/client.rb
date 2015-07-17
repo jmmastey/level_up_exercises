@@ -26,9 +26,9 @@ When /^the user submits (.*)code (\d+)$/ do |type, code|
   field_id = ""
   case type
   when "deactivation "
-    field_id = "deactivation_key"
+    field_id = "deactivation_code"
   when "activation "
-    field_id = "activation_key"
+    field_id = "activation_code"
   when ""
     field_id = "submit_code"
   else
@@ -51,7 +51,7 @@ Then /^the bomb state is valid$/ do
 end
 
 Then /^the (.*) code will be (\d+)$/ do |type, code|
-  region = browser.find_element(id: type+"_key")
+  region = browser.find_element(id: type+"_code")
   browser.find_element(class: "status").text.should eq(code)
 end
 

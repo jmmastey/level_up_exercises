@@ -16,7 +16,7 @@ Feature: Brand New Bomb
     Then submit code "1234" fails (not booted)
 
   Scenario:
-    Then set activation key to "0123" succeeds
+    Then set activation code to "0123" succeeds
 
   Scenario:
-    Then set deactivation key to "9999" succeeds
+    Then set deactivation code to "9999" succeeds

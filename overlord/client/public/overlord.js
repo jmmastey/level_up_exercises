@@ -25,8 +25,7 @@ $(function() {
         url: 'http://localhost:4567' + path,
         type: request,
         crossDomain: true,
-        data: { 'key' : $(id).find('.textbox')[0].value,
-                'code' : $(id).find('.textbox')[0].value },
+        data: { 'code' : $(id).find('.textbox')[0].value },
         success: function(data) {
           message = data['message'];
           $("ul#error_list").prepend('<li class="status">' + message + '</li>');
@@ -38,8 +37,8 @@ $(function() {
     });
   }
 
-  bind_text_field('#deactivation_key', '/set_deactivation_key', 'POST', 'Oops');
-  bind_text_field('#activation_key', '/set_activation_key', 'POST', 'Oops');
+  bind_text_field('#deactivation_code', '/set_deactivation_code', 'POST', 'Oops');
+  bind_text_field('#activation_code', '/set_activation_code', 'POST', 'Oops');
   bind_text_field('#submit_code', '/submit_code', 'POST', 'Oops');
 
   status_timer = setInterval(function() {

@@ -10,9 +10,9 @@ Given /^I submit code "([^"]*)"$/ do |code|
   page.driver.post("/submit_code", code: code)
 end
 
-Given /^set (.*) key to "([^"]*)"$/ do |dest, key|
-  path = "/set_" + dest + "_key"
-  page.driver.post(path, key: key)
+Given /^set (.*) code to "([^"]*)"$/ do |dest, code|
+  path = "/set_" + dest + "_code"
+  page.driver.post(path, code: code)
 end
 
 Then /^I should see an unbooted bomb$/ do
@@ -51,13 +51,13 @@ Then /^submit code "([^"]*)" (.*)$/ do |code, result|
   end
 end
 
-Then /^set (.*) key to "([^"]*)" (.*)$/ do |dest, key, result|
-  path = "/set_" + dest + "_key"
-  page.driver.post(path, key: key)
+Then /^set (.*) code to "([^"]*)" (.*)$/ do |dest, code, result|
+  path = "/set_" + dest + "_code"
+  page.driver.post(path, code: code)
   response = JSON.parse(body)
   case result
   when "succeeds"
-    response["message"].should eq(key)
+    response["message"].should eq(code)
   when "fails"
     response["message"].should have_content("Cannot Change Once Bomb is Booted")
   else

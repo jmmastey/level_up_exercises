@@ -22,8 +22,8 @@ class Arrowhead
 
   # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
-    shapes    = CLASSIFICATIONS[region]
-    arrowhead = shapes.nil? ? raise(UNKNOWN_REGION_MSG) : shapes[shape]
+    region_shapes = CLASSIFICATIONS[region]
+    arrowhead = region_shapes.nil? ? raise(UNKNOWN_REGION_MSG) : region_shapes[shape]
     arrowhead.nil? ? raise(UNKNOWN_SHAPE_MSG) : arrowhead_msg(arrowhead)
   end
 

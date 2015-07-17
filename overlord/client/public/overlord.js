@@ -1,4 +1,31 @@
 $(function() {
+  insert_message = function(msg) {
+    try {
+      type = msg.substr(0, msg.indexOf(' '));
+      text = msg.substr(msg.indexOf(' ')+1);
+      classes = "status list-group-item";
+      switch (type) {
+        case "Alert:":
+          classes += " list-group-item-success";
+          break;
+        case "Error:":
+          classes += " list-group-item-danger";
+          break;
+        case "Update:":
+          classes += " list-group-item-info";
+          break;
+        default:
+          break;
+      }
+
+      list_item = '<li class="' + classes + '">' + text + '</li>';
+      $("ul#error_list").prepend(list_item);
+    }
+    catch(err) {
+      alert(err);
+    }
+  }
+
   bind_button = function(btn, path, request, error) {
     $(btn).click(function() {
       $.ajax({
@@ -7,7 +34,7 @@ $(function() {
         crossDomain: true,
         success: function(data) {
           message = data['message'];
-          $("ul#error_list").prepend('<li class="status list-group-item">' + message + '</li>');
+          insert_message(message);
         },
         error: function(data) {
           alert(error);
@@ -28,7 +55,7 @@ $(function() {
         data: { 'code' : $(id).find('.textbox')[0].value },
         success: function(data) {
           message = data['message'];
-          $("ul#error_list").prepend('<li class="status list-group-item">' + message + '</li>');
+          insert_message(message);
         },
         error: function(data) {
           alert(error);

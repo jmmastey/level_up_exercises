@@ -1,3 +1,13 @@
+class String
+  def alpha?
+    !match(/[^[:alnum:]]/)
+  end
+
+  def number?
+    true if Float(self) rescue false
+  end
+end
+
 class DinoParser
   TRANSLATE_MAP = {
     "genus" => "name",
@@ -64,4 +74,49 @@ class DinoTranslator
 end
 
 class DinoValidator
+  DISPATCHER = {
+    "name" => self.valid_name?,
+    "period" => self.valid_period?,
+    "continent" => self.valid_continent?,
+    "diet" => self.valid_diet?,
+    "weight" => self.valid_weight?,
+    "walking" => self.valid_walking?,
+    "desc" => self.valid_desc?,
+  }
+
+  def self.valid_input?(data)
+    data.each { |row| self.valid_row?(row) }
+  end
+
+  def self.valid_row?(row)
+
+  end
+
+  def self.valid_name?(name)
+    name.alpha?
+  end
+
+  def self.valid_period?(period)
+    period.alpha?
+  end
+
+  def self.valid_continent?(continent)
+    continent.alpha?
+  end
+
+  def self.valid_diet?(diet)
+    diet.alpha?
+  end
+
+  def self.valid_weight?(weight)
+    weight.number?
+  end
+
+  def self.valid_walking?(walking)
+    walking.alpha?
+  end
+
+  def self.valid_desc?(desc)
+    true
+  end
 end

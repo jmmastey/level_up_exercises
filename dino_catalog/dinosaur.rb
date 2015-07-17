@@ -1,7 +1,23 @@
 require_relative 'dino_parser'
 
 class Dinodex
-  @registry = []
+  attr_accessor :registry
+
+  def initialize
+    @registry = {}
+  end
+
+  def load_data(data)
+    data.each do |row|
+      @registry[row["name"]] = Dinosaur.new(row)
+    end
+  end
+
+  def load_csv(filename)
+    return false unless File.file?(filename)
+    data = DinoTranslator.translate(DinoParser.parse_csv(filename))
+    load_data(data) if DinoValidator.valid_data?(data)
+  end
 end
 
 class Dinosaur
@@ -18,8 +34,7 @@ class Dinosaur
   end
 end
 
-dinosaurs = []
+dinodex = Dinodex.new
 ARGV.each do |arg|
-  dinosaurs += DinoParser.parse_csv(arg) if File.file?(arg)
+  dinodex.load_csv(arg)
 end
-puts dinosaurs

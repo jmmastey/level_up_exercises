@@ -21,7 +21,7 @@ class DinoParser
 
   def self.grab_data
     dino_data = []
-    @f.drop(1).each do |line|
+    @f.each do |line|
       dino_data << Hash[@header.zip(self.split_strip_downcase(line))]
     end
     dino_data
@@ -105,11 +105,11 @@ class DinoValidator
   }
 
   def self.valid_row?(row)
-    row.each { |k, v| DISPATCHER[k].call(v) }
+    row.each { |k, v| DISPATCHER[k].call(v) if DISPATCHER.include?(k) }
     true
   end
 
-  def self.valid_input?(data)
+  def self.valid_data?(data)
     data.each { |row| self.valid_row?(row) }
     true
   end

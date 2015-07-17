@@ -1,6 +1,8 @@
+InvalidDataError = Class.new(RuntimeError)
+
 class String
   def alpha?
-    !match(/[^[:alnum:]]/)
+    match(/^[a-z ]*$/) != nil
   end
 
   def number?
@@ -9,13 +11,6 @@ class String
 end
 
 class DinoParser
-  TRANSLATE_MAP = {
-    "genus" => "name",
-    "carnivore" => "diet",
-    "weight_in_lbs" => "weight",
-  }
-  TRANSLATE = -> h { TRANSLATE_MAP.include?(h) ? TRANSLATE_MAP[h] : h }
-
   def self.split_strip_downcase(line)
     line.split(',').map { |d| d.strip.downcase }
   end
@@ -53,7 +48,7 @@ class DinoTranslator
   def self.translate_carnivore_key(h)
     carnivore_map = {
       "yes" => "carnivore",
-      "no" => ""
+      "no" => "",
     }
     h["carnivore"] = carnivore_map[h["carnivore"]] if h.include? "carnivore"
   end
@@ -74,49 +69,48 @@ class DinoTranslator
 end
 
 class DinoValidator
+  VALID_NAME = lambda do |name|
+    raise InvalidDataError, "Name is invalid." unless name.alpha?
+  end
+
+  VALID_PERIOD = lambda do |period|
+    raise InvalidDataError, "Period is invalid." unless period.alpha?
+  end
+
+  VALID_CONTINENT = lambda do |continent|
+    raise InvalidDataError, "Continent is invalid." unless continent.alpha?
+  end
+
+  VALID_DIET = lambda do |diet|
+    raise InvalidDataError, "Diet is invalid." unless diet.alpha?
+  end
+
+  VALID_WEIGHT = lambda do |weight|
+    unless weight.number? || weight.length == 0
+      raise InvalidDataError, "Weight is invalid."
+    end
+  end
+
+  VALID_WALKING = lambda do |walking|
+    raise InvalidDataError, "Walking is invalid." unless walking.alpha?
+  end
+
   DISPATCHER = {
-    "name" => self.valid_name?,
-    "period" => self.valid_period?,
-    "continent" => self.valid_continent?,
-    "diet" => self.valid_diet?,
-    "weight" => self.valid_weight?,
-    "walking" => self.valid_walking?,
-    "desc" => self.valid_desc?,
+    "name" => VALID_NAME,
+    "period" => VALID_PERIOD,
+    "continent" => VALID_CONTINENT,
+    "diet" => VALID_DIET,
+    "weight" => VALID_WEIGHT,
+    "walking" => VALID_WALKING,
   }
+
+  def self.valid_row?(row)
+    row.each { |k, v| DISPATCHER[k].call(v) }
+    true
+  end
 
   def self.valid_input?(data)
     data.each { |row| self.valid_row?(row) }
-  end
-
-  def self.valid_row?(row)
-
-  end
-
-  def self.valid_name?(name)
-    name.alpha?
-  end
-
-  def self.valid_period?(period)
-    period.alpha?
-  end
-
-  def self.valid_continent?(continent)
-    continent.alpha?
-  end
-
-  def self.valid_diet?(diet)
-    diet.alpha?
-  end
-
-  def self.valid_weight?(weight)
-    weight.number?
-  end
-
-  def self.valid_walking?(walking)
-    walking.alpha?
-  end
-
-  def self.valid_desc?(desc)
     true
   end
 end

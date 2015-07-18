@@ -83,26 +83,6 @@ class Dinodex
     @registry = []
   end
 
-  def print_search(args = {})
-    res = search(args)
-    DinodexPrinter.print(res)
-  end
-
-  def search(args = {}, results = @registry)
-    args.each do |k, v|
-      results = SEARCH_DISPATCHER[k].call(results, v)
-    end
-    results
-  end
-
-  def export_json(results = @registry)
-    { "dinosaurs" => results.map(&:data) }.to_json
-  end
-
-  def to_s(subset = @registry)
-    DinodexPrinter.print(subset)
-  end
-
   def load_data(data)
     data.each do |row|
       @registry << Dinosaur.new(row)
@@ -113,6 +93,26 @@ class Dinodex
     return false unless File.file?(filename)
     data = DinoTranslator.translate(DinoParser.parse_csv(filename))
     load_data(data) if DinoValidator.valid_data?(data)
+  end
+
+  def search(args = {}, results = @registry)
+    args.each do |k, v|
+      results = SEARCH_DISPATCHER[k].call(results, v)
+    end
+    results
+  end
+
+  def print_search(args = {})
+    res = search(args)
+    DinodexPrinter.print(res)
+  end
+
+  def export_json(results = @registry)
+    { "dinosaurs" => results.map(&:data) }.to_json
+  end
+
+  def to_s(subset = @registry)
+    DinodexPrinter.print(subset)
   end
 end
 
@@ -157,6 +157,11 @@ module DinodexPrinter
     columns_max_len
   end
 
+  def self.calc_column_lengths(subset)
+    columns_max_len = calc_max_column_lengths(subset)
+    remove_blank_columns(columns_max_len)
+  end
+
   def self.remove_blank_columns(columns_max_len)
     columns_max_len.keys.each do |key|
       if columns_max_len[key] == 0
@@ -167,11 +172,6 @@ module DinodexPrinter
       columns_max_len[key] = v > key.length ? v : key.length
     end
     columns_max_len
-  end
-
-  def self.calc_column_lengths(subset)
-    columns_max_len = calc_max_column_lengths(subset)
-    remove_blank_columns(columns_max_len)
   end
 
   def self.print(subset)

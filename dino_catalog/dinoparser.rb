@@ -10,31 +10,31 @@ class String
   end
 end
 
-class DinoParser
+module DinoParser
   def self.split_strip_downcase(line)
     line.split(',').map { |d| d.strip.downcase }
   end
 
   def self.grab_header
-    self.split_strip_downcase(@f.first)
+    split_strip_downcase(@f.first)
   end
 
   def self.grab_data
     dino_data = []
     @f.each do |line|
-      dino_data << Hash[@header.zip(self.split_strip_downcase(line))]
+      dino_data << Hash[@header.zip(split_strip_downcase(line))]
     end
     dino_data
   end
 
   def self.parse_csv(filename)
     @f = open(filename, 'r')
-    @header = self.grab_header
-    self.grab_data
+    @header = grab_header
+    grab_data
   end
 end
 
-class DinoTranslator
+module DinoTranslator
   HEADER_MAP = {
     "genus" => "name",
     "carnivore" => "diet",
@@ -54,21 +54,21 @@ class DinoTranslator
   end
 
   def self.translate_header(data)
-    data.each { |h| h.keys.each { |k| self.translate_key(h, k) } }
+    data.each { |h| h.keys.each { |k| translate_key(h, k) } }
   end
 
   def self.translate_data(data)
-    data.each { |h| self.translate_carnivore_key(h) }
+    data.each { |h| translate_carnivore_key(h) }
   end
 
   def self.translate(data)
-    self.translate_data(data)
-    self.translate_header(data)
+    translate_data(data)
+    translate_header(data)
     data
   end
 end
 
-class DinoValidator
+module DinoValidator
   VALID_NAME = lambda do |name|
     raise InvalidDataError, "Name is invalid." unless name.alpha?
   end
@@ -110,7 +110,7 @@ class DinoValidator
   end
 
   def self.valid_data?(data)
-    data.each { |row| self.valid_row?(row) }
+    data.each { |row| valid_row?(row) }
     true
   end
 end

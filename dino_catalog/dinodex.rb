@@ -26,7 +26,7 @@ class Dinosaur
   end
 
   def carnivore?
-    @data['diet'] != 'herbivore' if has?('diet')
+    @data['diet'] != 'herbivore' && !@data['diet'].empty? if has?('diet')
   end
 
   def size_is?(size)
@@ -40,7 +40,7 @@ class Dinosaur
   end
 
   def to_s
-    max_len = @data.keys.max_by { |k| k.length if @data[k].length > 0 }.length
+    max_len = @data.keys.max_by(&:length).length
     @data.each do |k, v|
       spaces = ' ' * (max_len - k.length) + ' '
       puts k + ':' + spaces + v if v.length > 0
@@ -131,8 +131,10 @@ module DinodexPrinter
     subset.each do |dino|
       row = "|"
       columns.each do |key, max_len|
-        spaces = " " * (max_len - dino.data[key].length) + " |"
-        row += " " + dino.data[key] + spaces
+        data = dino.has?(key) ? dino.data[key] : ""
+        data_len = dino.has?(key) ? dino.data[key].length : 0
+        spaces = "." * (max_len - data_len) + " |"
+        row += " " + data + spaces
       end
       row += "\n"
       body += row
@@ -151,7 +153,9 @@ module DinodexPrinter
       'description' => 0,
     }
     columns_max_len.keys.each do |key|
-      max_col_len = subset.max_by { |d| d.data[key].length if d.has?(key) }.data[key].length
+      dino = subset.max_by { |d| d.has?(key) ? d.data[key].length : 0 }
+      next unless dino.has?(key)
+      max_col_len = dino.data[key].length
       columns_max_len[key] = max_col_len
     end
     columns_max_len
@@ -190,7 +194,7 @@ ARGV.each do |arg|
   dinodex.load_csv(arg)
 end
 
-exit if dinodex.registry.empty?
+# exit if dinodex.registry.empty?
 
 puts "\nAll the bipeds:"
 dinodex.print_search(walking: 'biped')

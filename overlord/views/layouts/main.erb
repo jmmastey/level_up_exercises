@@ -5,15 +5,24 @@
   <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-<header>
-  
-</header>
+<nav class="navbar navbar-inverse" role="navigation">
+  <div class="container">
+    <a class="navbar-brand" href="/">Overload Lair</a>
 
+
+  </div>
+</nav>
+
+<div class="container wrapper">
   <%= yield %>
-
+  <div class="footer-push"></div>
+</div>
+  
 <footer>
   
 </footer>
-<script type="javascript" src="javascript/vendor/require.js" data-main="javascript/require-config.js"></script>
+<script src="javascript/vendor/jquery.js"></script>
+<script src="javascript/vendor/bootstrap.min.js"></script>
+<script src="javascript/vendor/require.js" data-main="javascript/require-config.js"></script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+# Dinosaur Class. We store these dinosaurs in an array in
+# order to query the array.
+
 class Dinosaur
   def initialize(info)
     @name = info['Name']
@@ -23,7 +26,7 @@ class Dinosaur
 
   def to_s
     name_to_s + period_to_s + continent_to_s + diet_to_s + \
-    diet_to_s + weight_to_s + walking_to_s + description_to_s
+      weight_to_s + walking_to_s + description_to_s
   end
 
   def name_to_s
@@ -34,7 +37,7 @@ class Dinosaur
     if @period == ''
       ''
     else
-    ' Period: ' + @period
+      ' Period: ' + @period
     end
   end
 
@@ -82,22 +85,19 @@ class Dinosaur
     @walking == type.capitalize
   end
 
-  def is_carnivore?()
+  def carnivore?
     %w(Carnivore Piscivore Insectivore).include?(@diet)
   end
 
   def in_period?(period)
-    @walking.include?(period.capitalize)
+    @period.downcase.include?(period.downcase)
   end
 
   def above_weight?(weight)
-    @weight > weight
+    @weight.to_i > weight.to_i
   end
 
   def below_weight?(weight)
-    @weight < weight
+    @weight.to_i < weight.to_i
   end
-
-
-
 end

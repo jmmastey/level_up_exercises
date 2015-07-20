@@ -31,7 +31,6 @@ class DinodexParserCSV
       value.strip!
       value.capitalize!
     end
-    line
   end
 
   def convert_african
@@ -42,15 +41,6 @@ class DinodexParserCSV
 
   def convert(from, to)
     index = @categories.index(from)
-    unless index.nil?
-      @categories[index] = to
-    end
+    @categories[index] = to unless index.nil?
   end
-
-end
-
-dex = DinodexParserCSV.new('dinodex.csv')
-list = dex.parse('african_dinosaur_export.csv')
-list.each do |dino|
-  puts dino
 end

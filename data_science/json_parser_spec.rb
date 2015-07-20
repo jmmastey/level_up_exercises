@@ -12,11 +12,11 @@ describe JSONParser do
   end
 
   it 'should fail elegantly when the file does not exist' do
-    @parser.parse('nope.json').should == {}
+    @parser.parse('json_test_files/nope.json').should == {}
   end
 
   it 'should open simple files correctly' do
-    @parser.parse('simple.json').should == {
+    @parser.parse('json_test_files/simple.json').should == {
         'hello' => 'world',
         'goodbye' => 'moon',
         'dog' => 'cat',
@@ -24,11 +24,11 @@ describe JSONParser do
   end
 
   it 'should correctly read an empty file' do
-    @parser.parse('empty.json').should == {}
+    @parser.parse('json_test_files/empty.json').should == {}
   end
 
   it 'should load an array of hashes correctly' do
-    @parser.parse('array_of_hashes.json').should == [
+    @parser.parse('json_test_files/array_of_hashes.json').should == [
         {'hello' => 'world'},
         {'goodbye' => 'moon'}
     ]

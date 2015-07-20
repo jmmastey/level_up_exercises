@@ -1,25 +1,25 @@
 $(document).ready(function() {
     $('#activate-bomb').click(function(e) {
         var regex = /(^\d{4}$)/;
-        var activationCode = $('#activation-code');
+        var activationCode = $('#activation-code').val();
 
-        if (activationCode.val() === "" || !activationCode.val().match(regex)) {
+        if (activationCode === "" || !activationCode.match(regex)) {
             $('#notice').text('Activation code was inaccurate.');
         } else {
             $('#notice').text('');
-            $('#bomb-state').text('Bomb is active.');
+            window.location = '/enter/' + activationCode;
         }
     });
 
     $('#deactivate-bomb').click(function(e) {
         var regex = /(^\d{4}$)/;
-        var deactivationCode = $('#deactivation-code');
+        var deactivationCode = $('#deactivation-code').val();
 
-        if (deactivationCode.val() === "" || !deactivationCode.val().match(regex)) {
+        if (deactivationCode === "" || !deactivationCode.match(regex)) {
             $('#notice').text('Deactivation code was inaccurate.');
         } else {
             $('#notice').text('');
-            $('#bomb-state').text('Bomb is inactive.');
+            window.location = '/enter/' + deactivationCode;
         }
     })
 });

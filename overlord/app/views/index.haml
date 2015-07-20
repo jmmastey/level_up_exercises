@@ -1,4 +1,8 @@
-%label#bomb-state Bomb is inactive.
+- if trigger.activated?
+  %label#bomb-state Bomb is active.
+- else
+  %label#bomb-state Bomb is inactive.
+
 %label#notice
 
 %input#activation-code{type: 'text'}

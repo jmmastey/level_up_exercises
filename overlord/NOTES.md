@@ -59,3 +59,19 @@ The next user session started with another critical piece of the bomb: being abl
 * "Once the bomb is active, a correct deactivation code will make the bomb inactive."
 * "A bomb will indicate if it is inactive."
 * "A bomb will indicate if it received an inaccurate deactivation code."
+
+### Manifest Test and Data Conditions
+
+What was clear was that the test specs did not state certain things, except implicitly. For example, while we now had tests talking about valid and invalid codes, it was not necessarily clear that what "valid" meant was four numeric characters. That could be gleaned but nothing outright said it. It was uncertain at this point, however, how best to make this information clearer in the test specs particularly since the originally stated goal was to make sure that there was not too much duplication of BDD and TDD style tests.
+
+My current test specs, on the other hand, do allow for a lot of flexibility for the underlying implementation. But then my scenario outlines stick out like a sore thumb in that they encode the specific behavior.
+
+### Modelling the Bomb
+
+One thing that became obvious: we're starting to get into state here. The bomb is now no longer just being displayed but is having a specific state that needs to be set and retrieved. That implied we are starting to get into a model. It seemed like we were close to actually coding something.
+
+From a design perspective, it's not a "bomb" that is active or inactive but rather the trigger for the bomb. That trigger happens to be one component of a working bomb. This suggests a bomb page, which needs to be connected to via a route. And that route is going to call some functionality that lets me create my model instance.
+
+First step was writing the BDD style tests. And that made me note that, up to this point, I have been using scenarios that say how the bomb "displays." So it will "display inactive" or "display active". But that's not the same as saying that it will _be_ active or inactive.
+
+Even in starting the RSpec tests, it's clear they will duplicate the Cucumber tests. On the other hand, though, the Cucumber tests drove the design of the view. The RSpec tests will drive the design of the model. Since the view is ultimately representing the model, the fact that the tests overlap should not be surprising.

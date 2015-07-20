@@ -4,8 +4,8 @@ end
 
 Given(/^an active bomb$/) do
   on_visit(BombPage) do |page|
-    page.enter_valid_activation_code('1234')
-    page.activate_bomb.click
+    page.enter_code('1234')
+    page.change_bomb_state
   end
 end
 
@@ -15,29 +15,29 @@ end
 
 When(/^entering a valid activation code$/) do
   on(BombPage) do |page|
-    page.enter_valid_activation_code('1234')
-    page.activate_bomb.click
+    page.enter_code('1234')
+    page.change_bomb_state
   end
 end
 
 When(/^an invalid activation "([^"]*)" is entered$/) do |code|
   on(BombPage) do |page|
-    page.enter_valid_activation_code(code)
-    page.activate_bomb.click
+    page.enter_code(code)
+    page.change_bomb_state
   end
 end
 
 When(/^an invalid deactivation "([^"]*)" is entered$/) do |code|
   on(BombPage) do |page|
-    page.enter_valid_deactivation_code(code)
-    page.deactivate_bomb.click
+    page.enter_code(code)
+    page.change_bomb_state
   end
 end
 
 When(/^a valid deactivation code is entered$/) do
   on(BombPage) do |page|
-    page.enter_valid_deactivation_code('0000')
-    page.deactivate_bomb.click
+    page.enter_code('0000')
+    page.change_bomb_state
   end
 end
 

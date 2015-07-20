@@ -5,8 +5,9 @@
 
 %label#notice
 
-%input#activation-code{type: 'text'}
-%input#activate-bomb{type: 'submit', value: 'Activate'}
+%input#trigger-code{type: 'text'}
 
-%input#deactivation-code{type: 'text'}
-%input#deactivate-bomb{type: 'submit', value: 'Deactivate'}
+- if trigger.activated?
+  %input#change-bomb-state{type: 'submit', value: 'Deactivate'}
+- else
+  %input#change-bomb-state{type: 'submit', value: 'Activate'}

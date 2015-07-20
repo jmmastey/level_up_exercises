@@ -1,25 +1,17 @@
 $(document).ready(function() {
-    $('#activate-bomb').click(function(e) {
+    $('#change-bomb-state').click(function(e) {
         var regex = /(^\d{4}$)/;
-        var activationCode = $('#activation-code').val();
+        var enteredCode = $('#trigger-code').val();
 
-        if (activationCode === "" || !activationCode.match(regex)) {
-            $('#notice').text('Activation code was inaccurate.');
+        if (!enteredCode.match(regex)) {
+            if ($('#change-bomb-state').val() === 'Activate') {
+                $('#notice').text('Activation code was inaccurate.');
+            } else {
+                $('#notice').text('Deactivation code was inaccurate.');
+            }
         } else {
             $('#notice').text('');
-            window.location = '/enter/' + activationCode;
+            window.location = '/enter/' + enteredCode;
         }
     });
-
-    $('#deactivate-bomb').click(function(e) {
-        var regex = /(^\d{4}$)/;
-        var deactivationCode = $('#deactivation-code').val();
-
-        if (deactivationCode === "" || !deactivationCode.match(regex)) {
-            $('#notice').text('Deactivation code was inaccurate.');
-        } else {
-            $('#notice').text('');
-            window.location = '/enter/' + deactivationCode;
-        }
-    })
 });

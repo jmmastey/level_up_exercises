@@ -1,4 +1,4 @@
-@javascript @bomb_setup
+@bomb_setup
 Feature: Set a bomb Deactivation code
     In order to deactivate a bomb
     As a super villain

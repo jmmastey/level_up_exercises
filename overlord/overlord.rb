@@ -6,30 +6,27 @@ require 'capybara/rspec'
 require 'tilt/erubis'
 require './bomb'
 
-
 class Overlord < Sinatra::Base
-
   enable :sessions
 
   set :port, 8888
-  set :views, "views"
+  set :views, 'views'
   set :run, true
   set :raise_errors, true
   set :dump_errors, false
   # enable :lock
 
-
   get '/' do
-    "Time to build an app around here. Start time: " + start_time
+    'Time to boot a bomb. Start time: ' << start_time
   end
 
   get '/boot/' do
-     erb :boot_form
+    erb :boot_form
   end
 
   post '/boot/' do
-    the_bomb.load(:deactivation_code=> params[:deactivation],:activation_code=> params[:activation])
-    erb :index, :locals => {'activation' => params[:activation], 'deactivation' => params[:deactivation]}
+    the_bomb.boot(params[:activation], params[:deactivation])
+    erb :index, locals: { activation: params[:activation], deactivation: params[:deactivation] }
   end
 
   get '/arm/' do
@@ -38,7 +35,7 @@ class Overlord < Sinatra::Base
 
   post '/arm/' do
     the_bomb.arm(params[:armingcode])
-    erb :index#, :locals => {'armingcode' => params[:armingcode]}
+    erb :index
   end
 
   get '/disarm/' do
@@ -47,42 +44,21 @@ class Overlord < Sinatra::Base
 
   post '/disarm/' do
     the_bomb.disarm(params[:disarmingcode])
-    erb :index#, :locals => {'armingcode' => params[:armingcode]}
+    erb :index
   end
 
   def the_bomb
-    session[:bomb] ||=Bomb.new
-     session[:bomb]
+    session[:bomb] ||= Bomb.new
+    session[:bomb]
   end
 
-# we can shove stuff into the session cookie YAY!
   def start_time
     session[:start_time] ||= (Time.now).to_s
   end
-
-  get '/*' do
-    viewname = params[:splat].first   # eg "some/path/here"
-
-    # if File.exist?("views/#{viewname}.erb")
-    #   erb :"#{viewname}"
-
-    # else
-    #   "Nopers, I can't find it."
-    # end
-  end
-
-
-  # get '/:name' do
-  #   "Hello, #{params[:name]}!, it is: " + start_time
-  # end
 
   def setup
     Capybara.app = Sinatra::Application.new
   end
 
-private
-
-
-
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

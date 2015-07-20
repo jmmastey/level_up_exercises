@@ -35,7 +35,6 @@ Feature: Boot And Set A Bomb
     And I am booting a bomb
     And I provide a custom activation code "9999"
     Then the bomb should not be activated
-#    And the bomb activation code should not change
 
 
 

@@ -30,6 +30,4 @@ Feature: Bomb Deactivation
         Given A bomb is active and armed
         And An incorrect disarming code 7777 was entered 2 times since the bomb was activated
         When I apply the disarming code "9999"
-#        Then The should see a message that should say "Do not forget to recycle"
         And The bomb should explode
-#        And All buttons should be disabled

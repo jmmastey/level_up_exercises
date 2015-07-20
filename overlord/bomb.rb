@@ -16,24 +16,12 @@ class Bomb
     @disarm_attempts = 0
   end
 
-  def activation_code
-    @activation_code
-  end
-
-  def deactivation_code
-    @deactivation_code
-  end
-
   def disarm_attempts_left
-    [ALLOWED_DISARM_ATTEMPTS - @disarm_attempts,0].max
+    [ALLOWED_DISARM_ATTEMPTS - @disarm_attempts, 0].max
   end
 
-  def last_disarm_attempt_successful?
+  def last_disarm_successful?
     @disarm_attempts == 0
-  end
-
-  def valid_code? string
-    true if string.nil? || Float(string) rescue false
   end
 
   def active?
@@ -44,22 +32,22 @@ class Bomb
     @armed
   end
 
-  def load (options ={})
+  def valid_code?(string)
+    true if Float(string) rescue false
+  end
 
-    # return self if @armed
-
+  def boot(arming = nil, disarming = nil)
     @booted = true
-
-    if valid_code?(options[:activation_code])
-      @activation_code = options[:activation_code] unless options[:activation_code].to_s ==""
+    if valid_code?(disarming)
+      @deactivation_code = disarming.to_s
     else
-      @booted = false unless options[:activation_code].to_s ==""
+      @booted = false unless disarming.to_s.empty?
     end
 
-    if valid_code?(options[:deactivation_code])
-      @deactivation_code = options[:deactivation_code] unless options[:deactivation_code].to_s ==""
+    if valid_code?(arming)
+      @activation_code = arming.to_s
     else
-      @booted = false unless options[:deactivation_code].to_s ==""
+      @booted = false unless arming.to_s.empty?
     end
 
     self
@@ -71,14 +59,19 @@ class Bomb
   end
 
   def disarm(code)
-    if(code == @deactivation_code)
-      @armed = false
-      @disarm_attempts = 0
-    else
-      @disarm_attempts += 1
-      @detonated = @disarm_attempts >= ALLOWED_DISARM_ATTEMPTS
-    end
+    (code == @deactivation_code) ? successful_disarm : failed_disarm
     self
   end
 
+  private
+
+  def failed_disarm
+    @disarm_attempts += 1
+    @detonated = @disarm_attempts >= ALLOWED_DISARM_ATTEMPTS
+  end
+
+  def successful_disarm
+    @armed = false
+    @disarm_attempts = 0
+  end
 end

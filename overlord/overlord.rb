@@ -6,6 +6,7 @@ enable :sessions
 
 get '/' do
   "Time to build an app around here. Start time: " + start_time
+  # erb :index
 end
 
 # we can shove stuff into the session cookie YAY!

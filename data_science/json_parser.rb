@@ -12,7 +12,3 @@ class JSONParser
     end
   end
 end
-
-parser = JSONParser.new
-json = parser.parse('test_data.json')
-puts json[0]['date']

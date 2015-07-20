@@ -14,66 +14,66 @@ class Dinodex
   end
 
   def less_than(field, value)
-    match = @dinos.select do |dino| 
-      dino.less_than?(field, value) 
+    match = @dinos.select do |dino|
+      dino.less_than?(field, value)
     end
-    
+
     Dinodex.new(match)
   end
 
   def greater_than(field, value)
-    match = @dinos.select do |dino| 
-      dino.greater_than?(field, value) 
+    match = @dinos.select do |dino|
+      dino.greater_than?(field, value)
     end
-    
+
     Dinodex.new(match)
   end
 
   def equal(field, value)
-    match = @dinos.select do |dino| 
-      dino.equal?(field, value) 
+    match = @dinos.select do |dino|
+      dino.equal?(field, value)
     end
-    
+
     Dinodex.new(match)
   end
 
   def not_equal(field, value)
-    match = @dinos.select do |dino| 
-      dino.not_equal?(field, value) 
+    match = @dinos.select do |dino|
+      dino.not_equal?(field, value)
     end
-    
+
     Dinodex.new(match)
   end
 
   def less_or_equal(field, value)
-    match = @dinos.select do |dino| 
-      dino.less_or_equal?(field, value) 
+    match = @dinos.select do |dino|
+      dino.less_or_equal?(field, value)
     end
-    
+
     Dinodex.new(match)
   end
 
   def greater_or_equal(field, value)
-    match = @dinos.select do |dino| 
-      dino.greater_or_equal?(field, value) 
+    match = @dinos.select do |dino|
+      dino.greater_or_equal?(field, value)
     end
 
     Dinodex.new(match)
   end
 
   def like(field, value)
-    match = @dinos.select do |dino| 
-      dino.like?(field, value) 
+    match = @dinos.select do |dino|
+      dino.like?(field, value)
     end
-    
+
     Dinodex.new(match)
   end
 
   def not_like(field, value)
-    match = @dinos.select do |dino| 
-      dino.not_like?(field, value) 
+    match = @dinos.select do |dino|
+      dino.not_like?(field, value)
     end
-    
+
     Dinodex.new(match)
   end
 

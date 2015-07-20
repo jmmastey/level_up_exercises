@@ -4,7 +4,8 @@ require.config({
       "jquery": "vendor/jquery",
       "backbone": "vendor/backbone",
       "handlebars": "vendor/handlebars",
-      "underscore": "vendor/underscore"
+      "underscore": "vendor/underscore",
+      "app": "app"
     },
 
     shim: {
@@ -22,9 +23,8 @@ require.config({
 });
 
 
-require(["jquery", "app"],
+require(["jquery", "controllers/overlord"],
 function($, App){
- var app = new App.Controller();
-
- app.start();
+  var app = new App();
+  app.start();
 });

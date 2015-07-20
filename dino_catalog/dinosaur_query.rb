@@ -1,15 +1,16 @@
 class DinosaurQuery
-  attr_accessor :dinosaurs, :filtered, :query, :criteria
+  attr_accessor :dinosaurs, :query, :criteria
 
   def initialize(dinosaurs)
     @dinosaurs = dinosaurs
     @criteria = {}
-    @filtered = []
   end
 
   def process
-    filter_criteria
-    filtered
+    ask_user_for_criteria
+    normalize_query
+    process_query
+    dinosaurs
   end
 
   private
@@ -18,14 +19,8 @@ class DinosaurQuery
     query.squeeze!(' ')
   end
 
-  def filter_criteria
-    print "Enter your query (sql style)\n> "
-    @query = gets.chomp!
-    normalize_query
-    process_query
-  end
-
   def process_query
+    # Split on all spaces except for spaces inside quotes
     parts = query.split(/\s(?=(?:[^"]|"[^"]*")*$)/)
     return if parts.length < 3
     return run_single_query(parts) if parts.length == 3
@@ -33,22 +28,23 @@ class DinosaurQuery
   end
 
   def run_single_query(parts)
-    criteria[:key] = parts[0]
-    criteria[:filter] = parts[1]
-    criteria[:value] = parts[2].gsub(/\"/, '')
+    self.criteria = {
+      key: parts[0],
+      filter: parts[1],
+      value: parts[2].gsub(/\"/, ''),
+    }
     run_criteria
   end
 
   def run_multiple_queries(parts)
     parts.each_with_index do |part, index|
       build_criteria(part, index)
-      run_criteria if index % 4 == 3
+      run_criteria if index % 4 == 2
     end
   end
 
   def run_criteria
-    @filtered += run_query_part
-    @filtered.uniq!
+    @dinosaurs = run_query_part
   end
 
   def run_query_part
@@ -60,11 +56,11 @@ class DinosaurQuery
       when '<'
         dinosaurs.select { |d| d.less_than?(criteria[:key], criteria[:value]) }
       when '='
-        dinosaurs.select { |d| d.filter(criteria[:key], criteria[:value]) }
+        dinosaurs.select { |d| d.eql?(criteria[:key], criteria[:value]) }
       when 'eq'
         dinosaurs.select { |d| d.contains(criteria[:key], criteria[:value]) }
       when '!='
-        dinosaurs.reject { |d| d.filter(criteria[:key], criteria[:value]) }
+        dinosaurs.reject { |d| d.eql?(criteria[:key], criteria[:value]) }
       when 'ne'
         dinosaurs.reject { |d| d.contains(criteria[:key], criteria[:value]) }
     end
@@ -75,5 +71,13 @@ class DinosaurQuery
     @criteria[:key] = part if index == 0
     @criteria[:filter] = part if index == 1
     @criteria[:value] = part.gsub(/\"/, '') if index == 2
+  end
+
+  private
+
+  def ask_user_for_criteria
+    print "Enter your query \
+          (sql style, for example weight > 400 AND diet = Carnivore)\n> "
+    @query = gets.chomp!
   end
 end

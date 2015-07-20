@@ -1,4 +1,4 @@
-require_relative('filterable')
+require_relative 'filterable'
 
 class Dinosaur
   include Filterable
@@ -20,7 +20,7 @@ class Dinosaur
   end
 
   def diet
-    return 'Carnivore' if @diet =~ /Insect|Pisci|Yes/
+    return 'Carnivore' if @diet =~ /Insect|Pisci|Yes/i
     @diet
   end
 

@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title Overlord
+  %body
+    %h1 Bomb Configuration
+    -if @message
+      %h2=@message
+    %form{action: "/configure", method: "post"}
+      %fieldset
+        .field
+          %label{:for => "activation_code"} Activation Code:
+          %input{:type => "text", :value => "1234", :name => "activation_code", :class => "text"}
+        .field
+          %label{:for => "deactivation_code"} Deactivation Code:
+          %input{:type => "text", :value => "0000", :name => "deactivation_code", :class => "text"}
+        %input{:type => "submit", :value => "Boot", :class => "button"}

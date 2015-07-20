@@ -14,6 +14,21 @@ class Bomb
     @attempts = 0
   end
 
+  def string_state
+    case @state
+    when 1
+      "off"
+    when 2
+      "booted"
+    when 3
+      "activated"
+    when 4
+      "deactivated"
+    when 5
+      "exploded"
+    end
+  end
+
   def valid_codes?
     @activation_code =~ /^[0-9]+$/ && @deactivation_code =~ /^[0-9]+$/
   end

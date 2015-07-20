@@ -2,6 +2,7 @@
 
 require 'sinatra'
 require 'json'
+require_relative 'lib/bomb'
 
 class Overlord < Sinatra::Base
   enable :sessions
@@ -21,7 +22,24 @@ class Overlord < Sinatra::Base
     { count: bomb_count }.to_json
   end
 
+  post '/bomb' do
+    content_type :json
+    bomb = Bomb.new(params[:activation_code], params[:deactivation_code])
+    if bomb.valid?
+      session[:bomb] = bomb
+      return bomb_to_json
+    end
+    { error: true }.to_json
+  end
+
   delete '/bomb/delete' do
     session.delete(:bomb)
+  end
+
+  def bomb_to_json
+    {
+      status: session[:bomb].status,
+      timer: session[:bomb].timer,
+    }.to_json
   end
 end

@@ -25,37 +25,13 @@ function initial_code_submit(event) {
   var arm_code = $('#arm-code-input').val();
   var disarm_code = $('#disarm-code-input').val();
 
-  var msg = 'One or more codes is invalid. Codes must be 4 digits.';
-  if(!(arm_code.length == 4 || arm_code.length == 0)
-    && !(disarm_code.length == 4 || disarm_code.length == 0))
-  {
-    $('#dialog-flash').html(msg);
-    return;
-  }
-  else {
-    for(var k=0; k<arm_code.length; k++) {
-      var ach = arm_code.charAt(k);
-      if(isNaN(parseInt(ach))) {
-        $('.flash').html(msg);
-        return;
-      }
-    }
-    for(var k=0; k<disarm_code.length; k++) {
-      var dch = disarm_code.charAt(k);
-      if(isNaN(parseInt(dch))) {
-        $('.flash').html(msg);
-        return;
-      }
-    }
-    if(arm_code.length == 0)
-      arm_code = '1234';
-    if(disarm_code.length == 0)
-      disarm_code = '0000';
-  }
-  $('.code-input').fadeOut(400);
-  
   var params = {'arm' : arm_code, 'disarm' : disarm_code};
-  $.post('/setcodes', params);
+  $.post('/setcodes', params, function(response) {
+    if(response.success)
+      $('.code-input').fadeOut(400);
+    else 
+      $('#dialog-flash').html(response.message);
+  });
 }
 
 function depress_button(event) {
@@ -153,7 +129,7 @@ function enter_code(event) {
   if($('.bomb').hasClass('detonated')) return;
 
   var code = $('#password').val();
-  $.get('/code', {'code' : code }, function(data) {
+  $.get('/entercode', {'code' : code }, function(data) {
     if(!data['success']) {
       $('#code-flash').html(data['attempts_remain'] + " attempts remain.");
     }

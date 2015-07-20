@@ -50,10 +50,12 @@ end
 
 Given(/^the depressed buttons form a(?:n)? (in)?correct sequence$/) do |wrong|
   answer = find(@panel + " .message p").text.to_i
-  @bomb.codes[0] = answer
+  @bomb.panels[0].code = answer
 
   binary = @bomb.sequence_for(0)
   binary[0] = 1 - binary[0] if wrong
+
+  puts "BINARY IS #{binary} AND CODE IS #{answer}"
 
   binary.each_with_index do |val, button_number|
     next unless val == 1
@@ -91,7 +93,7 @@ end
 Given(/^I enter correct sequences for all panels$/) do
   (1..6).each do |panel|
     answer = find("#panel#{panel - 1} .message p").text.to_i
-    @bomb.codes[panel - 1] = answer
+    @bomb.panels[panel - 1].code = answer
 
     binary = @bomb.sequence_for(panel - 1)
     binary.each_with_index do |val, button_number|

@@ -2,19 +2,17 @@
   %h1 Activation Sequence
   %h2.activation_error Wrong activation code
   %form#activation{action: '/activate', method: 'post'}
-    %fieldset
-      .field
-        %label{:for => "activation_code"} Activation Code:
-        %input{:type => "text", :name => "submit_activation_code", :class => "text"}
-      %input{:type => "submit", :value => "Activate", :class => "button"}
+    .form-group
+      %label{:for => "activation_code"} Activation Code:
+      %input.form-control{:type => "text", :name => "submit_activation_code", :class => "text"}
+    %button.btn.btn-default{type: "submit"} Activate
 
 
 .deactivate
   %h2.attempts 3 attempts left
   %h2.deactivation_error Wrong deactivation code
   %form#deactivation{action: '/deactivate', method: 'post'}
-    .fieldset
-      .field
-        %label{:for => "deactivation_code"} Deactivation Code:
-        %input{:type => "text", :name => "submit_deactivation_code", :class => "text"}
-      %input{:type => "submit", :value => "Deactivate", :class => "button"}
+    .form-group
+      %label{:for => "deactivation_code"} Deactivation Code:
+      %input.form-control{:type => "text", :name => "submit_deactivation_code", :class => "text"}
+    %button.btn.btn-default{type: "submit"} Deactivate

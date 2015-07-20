@@ -3,17 +3,24 @@
   %head
     %title Overlord
     %script{src: 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'}
+    %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"}
+    %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"}
+    %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
+    %link{href: "reset.css", rel: "stylesheet", type: 'text/css'}
+    %link{href: "normalize.css", rel: "stylesheet", type: 'text/css'}
     %link{href: "overload.css", rel: "stylesheet", type: 'text/css'}
 
   %body
-    %h1.bomb_status Bomb is off!
-    .configuration
-      =haml :configuration
-    .activation
-      =haml :booted_bomb
-    .safe
-      =haml :safe
-    .exploded
-      =haml :exploded
+    .container
+      .col-md-6.col-md-offset-3
+        %h1.bomb_status Bomb is off!
+        .configuration
+          =haml :configuration
+        .activation
+          =haml :booted_bomb
+        .safe
+          =haml :safe
+        .exploded
+          =haml :exploded
 
 %script{src: "overload.js", type: "text/javascript"}

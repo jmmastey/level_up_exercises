@@ -1,10 +1,9 @@
 %h2.error Invalid parameters
 %form#boot_up{action: "/configure", method: "post", remote: true}
-  %fieldset
-    .field
-      %label{:for => "activation_code"} Activation Code:
-      %input{:type => "text", :value => "1234", :name => "configure_activation_code", :class => "text"}
-    .field
-      %label{:for => "deactivation_code"} Deactivation Code:
-      %input{:type => "text", :value => "0000", :name => "configure_deactivation_code", :class => "text"}
-    %input{:type => "submit", :value => "Boot", id: "boot_bomb", :class => "button"}
+  .form-group
+    %label{:for => "activation_code"} Activation Code:
+    %input.form-control{:type => "text", :value => "1234", :name => "configure_activation_code", :class => "text"}
+  .form-group
+    %label{:for => "deactivation_code"} Deactivation Code:
+    %input.form-control{:type => "text", :value => "0000", :name => "configure_deactivation_code", :class => "text"}
+  %button.btn.btn-default{type: "submit"} Submit

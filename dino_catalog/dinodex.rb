@@ -10,44 +10,71 @@ class Dinodex
   end
 
   def index
-    @dinos.each(&:dino_facts)
+    @dinos.each { |dino| puts "#{dino}\n" }
   end
 
   def less_than(field, value)
-    Dinodex.new(lt(field, value))
+    match = @dinos.select do |dino| 
+      dino.less_than?(field, value) 
+    end
+    
+    Dinodex.new(match)
   end
 
   def greater_than(field, value)
-    slt = select_less_than(field, value)
-    seq = select_equal(field, value)
-    Dinodex.new(@dinos - slt - seq)
+    match = @dinos.select do |dino| 
+      dino.greater_than?(field, value) 
+    end
+    
+    Dinodex.new(match)
   end
 
   def equal(field, value)
-    Dinodex.new(select_equal(field, value))
+    match = @dinos.select do |dino| 
+      dino.equal?(field, value) 
+    end
+    
+    Dinodex.new(match)
   end
 
   def not_equal(field, value)
-    Dinodex.new(@dinos - select_equal(field, value))
+    match = @dinos.select do |dino| 
+      dino.not_equal?(field, value) 
+    end
+    
+    Dinodex.new(match)
   end
 
   def less_or_equal(field, value)
-    slt = select_less_than(field, value)
-    seq = select_equal(field, value)
-    Dinodex.new(slt + seq)
+    match = @dinos.select do |dino| 
+      dino.less_or_equal?(field, value) 
+    end
+    
+    Dinodex.new(match)
   end
 
   def greater_or_equal(field, value)
-    slt = select_less_than(field, value)
-    Dinodex.new(@dinos - slt)
+    match = @dinos.select do |dino| 
+      dino.greater_or_equal?(field, value) 
+    end
+
+    Dinodex.new(match)
   end
 
   def like(field, value)
-    Dinodex.new(select_like(field, value))
+    match = @dinos.select do |dino| 
+      dino.like?(field, value) 
+    end
+    
+    Dinodex.new(match)
   end
 
   def not_like(field, value)
-    Dinodex.new(@dinos - select_like(field, value))
+    match = @dinos.select do |dino| 
+      dino.not_like?(field, value) 
+    end
+    
+    Dinodex.new(match)
   end
 
   def search(hash)
@@ -65,25 +92,11 @@ class Dinodex
 
   def to_json
     {
-      'dinos' => @dinos.map { |dino| Hash[dino.properties] }
+      'dinos' => @dinos.map(&:properties)
     }.to_json
   end
 
   def inspect
     dinos.inspect
-  end
-
-  private
-
-  def select_less_than(field, value)
-    @dinos.select { |dino| dino.less_than?(field, value) }
-  end
-
-  def select_equal(field, value)
-    @dinos.select { |dino| dino.equal?(field, value) }
-  end
-
-  def select_like(field, value)
-    @dinos.select { |dino| dino.like?(field, value) }
   end
 end

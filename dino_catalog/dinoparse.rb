@@ -9,6 +9,8 @@ class Dinoparse
     @dinos = dino_data.map { |dino_dat| Dino.new(dino_dat) }
   end
 
+  private
+  
   def filter(d_attrs)
     to_delete = Set.new(%w(carnivore genus weight_in_lbs))
     d_attrs.delete_if { |key, _| to_delete.member?(key) }

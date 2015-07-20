@@ -1,8 +1,7 @@
 class Dino
   ATTRIBUTES = %w(name period continent diet weight walking description)
 
-  attr_accessor :name, :period, :continent
-  attr_accessor :diet, :weight, :walking, :description
+  attr_accessor *ATTRIBUTES
 
   def initialize(data)
     data.keys.each do |attr|
@@ -11,16 +10,16 @@ class Dino
   end
 
   def properties
-    ATTRIBUTES.map { |attr| [attr, send(attr)] }
+    Hash[ATTRIBUTES.map { |attr| [attr, send(attr)] }]
   end
 
-  def dino_facts
-    properties.each do |attr, val|
-      fattr = "#{attr.capitalize}:".ljust(20)
-      fval = val.nil? ? '---' : val
-      puts "#{fattr}#{fval}"
+  def to_s
+    properties.each.inject("") do |str, tuple|
+      fattr = "#{tuple[0].capitalize}:".ljust(20)
+      fval = tuple[1].nil? ? '---' : tuple[1]
+
+      str << "#{fattr}#{fval}\n"
     end
-    puts
   end
 
   def compare(field, with)
@@ -31,6 +30,15 @@ class Dino
       myval.to_i <=> with.to_i
     else
       myval.downcase <=> with.downcase
+    end
+  end
+
+  def like?(field, value)
+    myval = send(field)
+    if myval.nil? || value.nil?
+      myval.nil? && value.nil?
+    else
+      !!(myval.downcase =~ /#{value.downcase}/)
     end
   end
 
@@ -46,12 +54,19 @@ class Dino
     compare(field, value) == 0
   end
 
-  def like?(field, value)
-    myval = send(field)
-    if myval.nil? || value.nil?
-      myval.nil? && value.nil?
-    else
-      myval.downcase =~ /#{value.downcase}/
-    end
+  def less_or_equal?(field, value)
+    !greater_than?(field, value)
+  end
+
+  def greater_or_equal?(field, value)
+    !less_than?(field, value)
+  end
+
+  def not_equal?(field, value)
+    !equal?(field, value)
+  end
+
+  def not_like?(field, value)
+    !like?(field, value)
   end
 end

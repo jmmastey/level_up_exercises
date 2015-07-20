@@ -25,9 +25,9 @@ class Arrowhead
   end
 
   def self.classify(region, shape)
-    region_error unless CLASSIFICATIONS.include? region
+    region_error unless CLASSIFICATIONS.include?(region)
     shapes = CLASSIFICATIONS[region]
-    shape_error unless shapes.include? shape
+    shape_error unless shapes.include?(shape)
     arrowhead = shapes[shape]
     "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end

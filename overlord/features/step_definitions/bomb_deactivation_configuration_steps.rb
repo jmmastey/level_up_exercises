@@ -13,5 +13,6 @@ When(/^I enter a a custom deactivation code (\d+)$/) do |code|
 end
 
 Then(/^the bomb deactivation code should be set to (\d+)$/) do |code|
-  expect(page).to have_text('Bomb Deactivation Code :'+code)
+  # expect(page).to have_text('Bomb Deactivation Code :'+code)
+  verify_disarming_code(code)
 end

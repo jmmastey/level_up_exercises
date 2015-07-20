@@ -9,8 +9,12 @@
   <% end %>
 
 <br>
-<a href='/boot/'>Boot A Bomb</a>
 
+  <% if the_bomb.armed? || the_bomb.active?%>
+      <a href="javascript: void(0)">Boot A Bomb</a>
+  <% else %>
+      <a href='/boot/' >Boot A Bomb</a>
+  <% end %>
 
 <form action="/arm/" method="POST">
   <label for="arming-code">Code: </label><input type="text" name="armingcode" id="armingcode">

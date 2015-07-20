@@ -21,7 +21,6 @@ class Overlord < Sinatra::Base
 
   get '/' do
     "Time to build an app around here. Start time: " + start_time
-
   end
 
   get '/boot/' do
@@ -51,7 +50,6 @@ class Overlord < Sinatra::Base
     erb :index#, :locals => {'armingcode' => params[:armingcode]}
   end
 
-
   def the_bomb
     session[:bomb] ||=Bomb.new
      session[:bomb]
@@ -61,7 +59,6 @@ class Overlord < Sinatra::Base
   def start_time
     session[:start_time] ||= (Time.now).to_s
   end
-
 
   get '/*' do
     viewname = params[:splat].first   # eg "some/path/here"

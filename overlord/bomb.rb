@@ -38,18 +38,8 @@ class Bomb
 
   def boot(arming = nil, disarming = nil)
     @booted = true
-    if valid_code?(disarming)
-      @deactivation_code = disarming.to_s
-    else
-      @booted = false unless disarming.to_s.empty?
-    end
-
-    if valid_code?(arming)
-      @activation_code = arming.to_s
-    else
-      @booted = false unless arming.to_s.empty?
-    end
-
+    load_disarm_code(disarming)
+    load_arm_code(arming)
     self
   end
 
@@ -64,6 +54,22 @@ class Bomb
   end
 
   private
+
+  def load_arm_code(arming)
+    if valid_code?(arming)
+      @activation_code = arming.to_s
+    else
+      @booted = false unless arming.to_s.empty?
+    end
+  end
+
+  def load_disarm_code(disarming)
+    if valid_code?(disarming)
+      @deactivation_code = disarming.to_s
+    else
+      @booted = false unless disarming.to_s.empty?
+    end
+  end
 
   def failed_disarm
     @disarm_attempts += 1

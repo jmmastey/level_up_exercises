@@ -13,6 +13,5 @@ gem 'capybara'
 
 gem 'rspec-rails' # library of Rails assertions
 
-gem 'capybara-screenshot', :group => :test
-gem 'poltergeist' , :group => :test
-
+gem 'capybara-screenshot', group: :test
+gem 'poltergeist', group: :test

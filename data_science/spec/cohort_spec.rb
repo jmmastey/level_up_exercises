@@ -22,4 +22,10 @@ describe Cohort do
       expect(cohort.calculate_conversion_rate).to be_within(0.01).of(0.234)
     end
   end
+
+  describe "#calculate_standard_error" do
+    it "should have a standard error of about 0.0772" do
+      expect(cohort.calculate_standard_error).to be_within(0.01).of(0.0772)
+    end
+  end
 end

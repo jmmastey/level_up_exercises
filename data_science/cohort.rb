@@ -10,4 +10,10 @@ class Cohort
   def calculate_conversion_rate
     @conversions.to_f / @sample_size
   end
+
+  def calculate_standard_error
+    p = calculate_conversion_rate
+    n =  @sample_size.to_f
+    Math.sqrt(p * (1 - p) / n)
+  end
 end

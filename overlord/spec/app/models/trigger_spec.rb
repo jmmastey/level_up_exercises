@@ -11,6 +11,10 @@ RSpec.describe Trigger do
     it 'will have a default activation code' do
       expect(trigger.activation_code).to eq('1234')
     end
+
+    it 'will have a default deactivation code' do
+      expect(trigger.deactivation_code).to eq('0000')
+    end
   end
 
   context 'activation' do
@@ -25,7 +29,7 @@ RSpec.describe Trigger do
   context 'deactivation' do
     let(:trigger) { Trigger.new }
 
-    it 'requires a valid deactivation code' do
+    it 'requires a correct deactivation code' do
       trigger.deactivate('0000')
       expect(trigger).to be_deactivated
     end

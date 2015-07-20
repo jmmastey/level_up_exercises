@@ -19,18 +19,7 @@ Feature: Bomb
     Given a newly booted bomb
     When an incorrect activation code is entered
     Then the bomb will display as inactive
-    And the display indicates the activation code was invalid
-
-  # ==============================
-  # Why is this one different from the one above about the default
-  # activation code? They both are doing the exact same thing and
-  # prove nothing different.
-  @javascript
-  Scenario: Bombs can be activated with valid activation codes
-    Given a newly booted bomb
-    When entering a valid activation code
-    Then the bomb will display as active
-  # ==============================
+    And the display indicates the activation code was incorrect
 
   @javascript
   Scenario Outline: Bombs will not activate with invalid activation codes
@@ -47,14 +36,21 @@ Feature: Bomb
       | "12"   |
 
   @javascript
-  Scenario: Bombs can be deactivated with valid deactivation codes
-    Given an active bomb
-    When a valid deactivation code is entered
+  Scenario: Bombs have a default deactivation code
+    Given an activated bomb
+    When the default deactivation code "0000" is entered
     Then the bomb will display as inactive
 
   @javascript
+  Scenario: Bombs will not deactivate with incorrect deactivation codes
+    Given an activated bomb
+    When an incorrect deactivation code is entered
+    Then the bomb will display as active
+    And the display indicates the deactivation code was incorrect
+
+  @javascript
   Scenario Outline: Bombs cannot be deactivated with invalid deactivation codes
-    Given an active bomb
+    Given an activated bomb
     When an invalid deactivation <code> is entered
     Then the bomb will display as active
     And the display indicates the deactivation code was invalid
@@ -63,4 +59,5 @@ Feature: Bomb
       | code   |
       | ""     |
       | "aaaa" |
+      | "1ab3" |
       | "12"   |

@@ -2,14 +2,19 @@
 
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/flash'
 
 require 'tilt/haml'
 
+require_relative 'overlord_helpers'
 require_relative 'app/models/trigger'
 
 module Project
   class Overlord < Sinatra::Base
     register Sinatra::Reloader
+    register Sinatra::Flash
+
+    helpers OverlordHelpers
 
     attr_reader :trigger
 
@@ -24,13 +29,13 @@ module Project
       haml :index
     end
 
-    get '/enter/:code' do
+    get '/enter/:code?' do
       @trigger = session[:trigger]
 
-      if trigger.deactivated?
-        trigger.activate(params[:code])
+      if trigger.valid?(params[:code])
+        trigger_bomb_state(trigger)
       else
-        trigger.deactivate(params[:code])
+        flash[:invalid_code] = 'The code must be four numeric characters.'
       end
 
       redirect to('/')

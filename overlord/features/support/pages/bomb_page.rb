@@ -4,6 +4,7 @@ class BombPage < SitePrism::Page
   element :trigger_code, 'input[id=trigger-code]'
   element :bomb_state, 'input[id=change-bomb-state]'
   element :notice, 'label[id=notice]'
+  element :bomb_status, 'label[id=bomb-status]'
 
   def enter_code(code)
     trigger_code.set(code)

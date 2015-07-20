@@ -1,9 +1,15 @@
 - if trigger.activated?
-  %label#bomb-state Bomb is active.
+  %label#bomb-status Bomb is active.
 - else
-  %label#bomb-state Bomb is inactive.
+  %label#bomb-status Bomb is inactive.
 
-%label#notice
+- if flash[:invalid_code]
+  %label#notice= flash[:invalid_code]
+
+- if flash[:invalid_activation]
+  %label#notice= flash[:invalid_activation]
+- if flash[:invalid_deactivation]
+  %label#notice= flash[:invalid_deactivation]
 
 %input#trigger-code{type: 'text'}
 

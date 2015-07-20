@@ -11,6 +11,7 @@
 .deactivate
   %h2.attempts 3 attempts left
   %h2.deactivation_error Wrong deactivation code
+  %span.timer#30
   %form#deactivation{action: '/deactivate', method: 'post'}
     .form-group
       %label{:for => "deactivation_code"} Deactivation Code:

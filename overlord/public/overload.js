@@ -30,6 +30,7 @@ $('#activation').on('submit', function(event) {
       $('.activate').hide()
       $('.bomb_status').html("Bomb has been activated!")
       $('.deactivate').show()
+      start_timer();
     },
     error: function(json) {
       $('.activation_error').show()
@@ -52,9 +53,7 @@ $('#deactivation').on('submit', function(event) {
     },
     statusCode: {
       400: function() {
-        $('.activation').hide()
-        $('.bomb_status').html("Bomb has exploded!")
-        $('.exploded').show()
+        explode();
       },
       422: function() {
         $('.deactivation_error').show()
@@ -62,3 +61,27 @@ $('#deactivation').on('submit', function(event) {
     }
   })
 })
+
+$("#getting-started").countdown("2016/01/01", function(event) {
+  $(this).text(event.strftime('%D days %H:%M:%S'));
+});
+
+function start_timer(){
+    var c = $('.timer').attr('id');
+    $('.timer').text(c);
+    setInterval(function(){
+        c--;
+        if(c>=0){
+            $('.timer').text(c + " seconds left");
+        }
+        if(c==0){
+            explode();
+        }
+    },1000);
+}
+
+function explode(){
+  $('.activation').hide()
+  $('.bomb_status').html("Bomb has exploded!")
+  $('.exploded').show()
+}

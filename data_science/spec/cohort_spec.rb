@@ -16,4 +16,10 @@ describe Cohort do
       expect(cohort.sample_size).to eq(30)
     end
   end
+
+  describe "#calculate_conversion_rate" do
+    it "should have a conversion rate of about 23.34%" do
+      expect(cohort.calculate_conversion_rate).to be_within(0.01).of(0.234)
+    end
+  end
 end

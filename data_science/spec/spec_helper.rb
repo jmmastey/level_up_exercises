@@ -1,3 +1,4 @@
+require 'json'
 require_relative '../cohort'
 require_relative '../analyzer'
 

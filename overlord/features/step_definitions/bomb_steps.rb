@@ -1,4 +1,4 @@
-Given(/^there are 0 bombs$/) do
+Given(/^there are no bombs$/) do
   http_delete '/bomb/delete'
   visit '/'
   expect(page).to have_content('No bomb created yet')
@@ -13,19 +13,14 @@ end
 
 When(/^enter a deactivation code$/) do
   fill_in('deactivation_code', with: '2345')
+end
+
+When(/^press the create button$/) do
   click_button('Create Bomb')
 end
 
-Then(/^there should be (\d+) bomb$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^there should be a bomb with an activation code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^there should be deactivation code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^there should be a bomb$/) do
+  expect(page).not_to have_content('No bomb created yet')
 end
 
 Then(/^the status should be inactive$/) do

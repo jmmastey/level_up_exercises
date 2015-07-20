@@ -20,6 +20,13 @@ When(/^entering a valid activation code$/) do
   end
 end
 
+When(/^an incorrect activation code is entered$/) do
+  on(BombPage) do |page|
+    page.enter_code('9999')
+    page.change_bomb_state
+  end
+end
+
 When(/^an invalid activation "([^"]*)" is entered$/) do |code|
   on(BombPage) do |page|
     page.enter_code(code)
@@ -41,6 +48,13 @@ When(/^a valid deactivation code is entered$/) do
   end
 end
 
+When(/^the default activation code "([^"]*)" is entered$/) do |code|
+  on(BombPage) do |page|
+    page.enter_code(code)
+    page.change_bomb_state
+  end
+end
+
 Then(/^the bomb will display as inactive$/) do
   expect(@page).to have_content('Bomb is inactive.')
 end
@@ -50,9 +64,9 @@ Then(/^the bomb will display as active$/) do
 end
 
 Then(/^the display indicates the activation code was invalid$/) do
-  expect(@page.notice.text).to eq('Activation code was inaccurate.')
+  expect(@page.notice.text).to eq('Activation code was invalid.')
 end
 
 Then(/^the display indicates the deactivation code was invalid$/) do
-  expect(@page.notice.text).to eq('Deactivation code was inaccurate.')
+  expect(@page.notice.text).to eq('Deactivation code was invalid.')
 end

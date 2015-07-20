@@ -5,9 +5,9 @@ $(document).ready(function() {
 
         if (!enteredCode.match(regex)) {
             if ($('#change-bomb-state').val() === 'Activate') {
-                $('#notice').text('Activation code was inaccurate.');
+                $('#notice').text('Activation code was invalid.');
             } else {
-                $('#notice').text('Deactivation code was inaccurate.');
+                $('#notice').text('Deactivation code was invalid.');
             }
         } else {
             $('#notice').text('');

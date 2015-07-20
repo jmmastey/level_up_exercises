@@ -7,12 +7,16 @@ RSpec.describe Trigger do
     it 'will not be active' do
       expect(trigger).to be_deactivated
     end
+
+    it 'will have a default activation code' do
+      expect(trigger.activation_code).to eq('1234')
+    end
   end
 
   context 'activation' do
     let(:trigger) { Trigger.new }
 
-    it 'requires a valid activation code' do
+    it 'requires a correct activation code' do
       trigger.activate('1234')
       expect(trigger).to be_activated
     end

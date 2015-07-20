@@ -75,3 +75,11 @@ From a design perspective, it's not a "bomb" that is active or inactive but rath
 First step was writing the BDD style tests. And that made me note that, up to this point, I have been using scenarios that say how the bomb "displays." So it will "display inactive" or "display active". But that's not the same as saying that it will _be_ active or inactive.
 
 Even in starting the RSpec tests, it's clear they will duplicate the Cucumber tests. On the other hand, though, the Cucumber tests drove the design of the view. The RSpec tests will drive the design of the model. Since the view is ultimately representing the model, the fact that the tests overlap should not be surprising.
+
+### Default Codes
+
+As of now, my code feels disjointed. I have two checks for what a valid code means: one in the JS that the view uses and one in the model. However, this is the same check being applied twice. By the time the `valid?` method in the model gets run, I already know the code must be valid because of the JavaScript.
+
+I'm not sure how to handle that better at this point. Then again, I'm not a web app developer nor do I have a desire to be. Nor, in fact, was I hired to be. So I'm not sure how much I should be focusing on this since the alleged goal of this exercise is to focus on Cucumber tests. So far, by necessity, that has been focused on the least.
+
+That's my thought as I head into providing default codes for the bomb. And it is _not_ a happy thought.

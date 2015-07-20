@@ -1,10 +1,17 @@
 class Trigger
+  DEFAULT_ACTIVATION_CODE = '1234'
+
+  attr_reader :activation_code
+
   def initialize
     @active = false
+    @activation_code = DEFAULT_ACTIVATION_CODE
   end
 
   def activate(code)
-    @active = true if valid?(code)
+    if valid?(code) && correct_activation?(code)
+      @active = true if valid?(code)
+    end
   end
 
   def deactivate(code)
@@ -19,9 +26,13 @@ class Trigger
     !activated?
   end
 
+  def correct_activation?(code)
+    code == @activation_code
+  end
+
   private
 
   def valid?(code)
-    code =~ /(^\d{4}$)/
+    code =~ /(^\d{4}$)/ ? true : false
   end
 end

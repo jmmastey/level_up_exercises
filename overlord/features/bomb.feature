@@ -9,13 +9,31 @@ Feature: Bomb
     Then the bomb will display as inactive
 
   @javascript
+  Scenario: Bombs have a default activation code
+    Given a newly booted bomb
+    When the default activation code "1234" is entered
+    Then the bomb will display as active
+
+  @javascript
+  Scenario: Bombs will not activate with incorrect activation codes
+    Given a newly booted bomb
+    When an incorrect activation code is entered
+    Then the bomb will display as inactive
+    And the display indicates the activation code was invalid
+
+  # ==============================
+  # Why is this one different from the one above about the default
+  # activation code? They both are doing the exact same thing and
+  # prove nothing different.
+  @javascript
   Scenario: Bombs can be activated with valid activation codes
     Given a newly booted bomb
     When entering a valid activation code
     Then the bomb will display as active
+  # ==============================
 
   @javascript
-  Scenario Outline: Bombs cannot be activated with invalid activation codes
+  Scenario Outline: Bombs will not activate with invalid activation codes
     Given a newly booted bomb
     When an invalid activation <code> is entered
     Then the bomb will display as inactive

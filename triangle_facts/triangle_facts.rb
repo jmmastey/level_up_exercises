@@ -9,35 +9,31 @@ class Triangle
   end
 
   def recite_facts
-    puts 'This triangle is equilateral!' if equilateral
+    puts 'This triangle is equilateral!' if equilateral?
     puts 'This triangle is isosceles!' \
-         ' Also, that word is hard to type.' if isosceles
-    puts 'This triangle is scalene and mathematically boring.' if scalene
+         ' Also, that word is hard to type.' if isosceles?
+    puts 'This triangle is scalene and mathematically boring.' if scalene?
 
     puts_angle_info
   end
 
-  def equilateral
+  def equilateral?
     side1 == side2 && side2 == side3
   end
 
-  def isosceles
+  def isosceles?
     [side1, side2, side3].uniq.length == 2
   end
 
-  def scalene
-    if equilateral || isosceles
-      true
-    else
-      false
-    end
+  def scalene?
+    equilateral? || isosceles?
   end
 
   def puts_angle_info
     angles = calculate_angles(side1, side2, side3)
-    puts 'The angles of this triangle are ' + angles.join(',')
+    puts 'The angles of this triangle are ' << angles.join(',')
 
-    puts 'This triangle is also a right triangle!' if angles.include? 90
+    puts 'This triangle is also a right triangle!' if angles.include?(90)
     puts ''
   end
 

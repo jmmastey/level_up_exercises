@@ -2,16 +2,18 @@
 %html
   %head
     %title Overlord
+    %script{src: 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'}
+    %link{href: "overload.css", rel: "stylesheet", type: 'text/css'}
+
   %body
-    %h1 Bomb Configuration
-    -if @message
-      %h2=@message
-    %form{action: "/configure", method: "post"}
-      %fieldset
-        .field
-          %label{:for => "activation_code"} Activation Code:
-          %input{:type => "text", :value => "1234", :name => "activation_code", :class => "text"}
-        .field
-          %label{:for => "deactivation_code"} Deactivation Code:
-          %input{:type => "text", :value => "0000", :name => "deactivation_code", :class => "text"}
-        %input{:type => "submit", :value => "Boot", :class => "button"}
+    %h1.bomb_status Bomb is off!
+    .configuration
+      =haml :configuration
+    .activation
+      =haml :booted_bomb
+    .safe
+      =haml :safe
+    .exploded
+      =haml :exploded
+
+%script{src: "overload.js", type: "text/javascript"}

@@ -1,5 +1,4 @@
-require_relative "../../overlord"
-
+require_relative '../../overlord.rb'
 require "Capybara"
 require "Capybara/cucumber"
 require "rspec"

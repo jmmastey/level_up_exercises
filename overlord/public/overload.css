@@ -1,0 +1,3 @@
+.error, .activation_error, .deactivation_error, .activation, .deactivate, .safe, .exploded {
+  display: none;
+}

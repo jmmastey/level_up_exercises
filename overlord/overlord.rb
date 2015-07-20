@@ -1,47 +1,47 @@
-# run `ruby overlord.rb` to run a webserver for this app
-
 require 'sinatra'
-require_relative './bomb'
 require 'pry'
 require 'haml'
+require 'json'
+require_relative './bomb'
 
+set :public_folder, 'public'
 enable :sessions
+set :session_secret, ENV['overlord_secret_key']
+
 
 get '/' do
   haml :index
 end
 
-post '/configure' do
+post '/configure', provides: :json do
   bomb = Bomb.new(params['activation_code'], params['deactivation_code'])
   if bomb.booted?
     session[:bomb] = bomb
-    redirect "/bomb"
+    halt 200
   else
-    @message = "Invalid code"
-    haml :index
+    halt 422
   end
 end
 
-get '/bomb' do
-  @bomb = session[:bomb]
-  haml :bomb
-end
-
-post '/activate' do
+post '/activate', provides: :json do
   @bomb = session[:bomb]
   @bomb.activate(params['activation_code']) unless @bomb.activated?
-  redirect 'bomb'
+  if @bomb.activated?
+    halt 200
+  else
+    halt 422
+  end
 end
 
-post '/deactivate' do
+post '/deactivate', provides: :json do
   @bomb = session[:bomb]
   @bomb.deactivate(params['deactivation_code'])
   if @bomb.deactivated?
-    redirect 'safe'
+    halt 200
   elsif @bomb.exploded?
-    redirect 'exploded'
+    halt 400
   else
-    redirect 'bomb'
+    halt 422
   end
 end
 

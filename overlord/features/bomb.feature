@@ -7,71 +7,54 @@ Feature: Dropping bombs
     Given I am a website visitor
     When I boot the bomb
     Then the bomb should be booted
-    And the bomb should not be activated
-    And the activation code is set to 1234
-    And the deactivation code is set to 0000
 
   Scenario: Activation code is set
     Given I am a website visitor
-    When I type in the activation code 1234
-    When I boot the bomb
-    Then the bomb should be booted
-    And the bomb should not be activated
-    And the activation code is set to 1234
-    And the deactivation code is set to 0000
-
-  Scenario: Activation code is invalid
-    Given I am a website visitor
-    When I type in the activation code a123
+    When I configure the activation code "2345"
     And I boot the bomb
-    Then the bomb should not be booted
+    Then the bomb should be booted
 
   Scenario: Activation code is invalid
     Given I am a website visitor
-    When I boot the bomb
-    And I type in the activation code a123
-    Then the bomb should not be activated
+    When I configure the activation code "a123"
+    And I boot the bomb
+    Then the bomb should be off
 
   Scenario: Custom activation code
-    Given the bomb is activated with code 56789
+    Given I am a website visitor
+    And I configure the activation code "56789"
     When I boot the bomb
-    And I type in the activation code 56789
-    Then the bomb is activated
-    And the bomb is active
+    And I submit the activation code "56789"
+    Then the bomb is now activated
 
-  Scenario: Repeating the activation code
-    Given the bomb is activated
-    When I type in the activation code 5678
-    Then the bomb is activated
+  Scenario: Bomb is activated
+    Given the bomb is booted with default config
+    When I submit the activation code "1234"
+    Then the bomb is now activated
 
   Scenario: Bomb is deactivated
-    Given the bomb is activated
-    When I type in the deactivation code 1234
+    Given the bomb is booted with default config
+    And the bomb is activated with default config
+    When I submit the deactivation code "0000"
     Then the bomb should be deactivated
-    And the bomb is inactive
 
   Scenario: Wrong deactivation code
-    Given the bomb is activated
-    When I type in the deactivation code 3333
-    Then the bomb should not be deactivated
-    And the bomb is active
+    Given the bomb is booted with default config
+    And the bomb is activated with default config
+    When I submit the deactivation code "3333"
+    Then the bomb is now activated
 
   Scenario: Wrong deactivation code first
-    Given the bomb is activated
-    When I type in the deactivation code 3333
-    When I type in the deactivation code 0000
+    Given the bomb is booted with default config
+    And the bomb is activated with default config
+    When I submit the deactivation code "3333"
+    When I submit the deactivation code "0000"
     Then the bomb should be deactivated
-    And the bomb is inactive
 
   Scenario: Bomb explodes
-    Given the bomb is activated
-    When I type in the deactivation code 3333
-    When I type in the deactivation code 1111
-    When I type in the deactivation code 2222
+    Given the bomb is booted with default config
+    And the bomb is activated with default config
+    When I submit the deactivation code "3333"
+    When I submit the deactivation code "1111"
+    When I submit the deactivation code "2222"
     Then the bomb should explode
-    And the bomb is inactive
-
-  Scenario: Bomb explodes
-    Given the bomb explodes
-    When I type in the activation code 3333
-    Then the bomb is inactive

@@ -12,6 +12,10 @@ html, body {
   padding: 0;
 }
 
+body {
+  @include image-url("congruent_outline.png");
+}
+
 .wrapper {
   min-height: 100%;
   height: auto !important;
@@ -20,8 +24,8 @@ html, body {
 }
 
 footer {
+  @extend .center;
   height: $footer-height;
-  background: #000;
 }
 
 .footer-push {
@@ -29,18 +33,7 @@ footer {
 }
 
 .center {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
-}
-
-form {
-  p {
-    width: 100%;
-    display: inline;
-  }
-
-  input {
-    width: 100%;
-    display: inline;
-  }
 }

@@ -5,6 +5,12 @@
 @import 'pages/bomb';
 
 
+.new-bomb {
+  .jumbotron {
+    @include image-url("crossword.png");
+  }
+}
+
 #bomb {
   @extend .col-xs-8;
   @extend .col-xs-offset-2;
@@ -35,7 +41,7 @@
   }
 
   .bolt-bottom-left {
-    @include image-rotate(20deg);
+    @include image-rotate(95deg);
     position: absolute; bottom: 5px; left: 5px;
   }
 

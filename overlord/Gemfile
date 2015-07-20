@@ -5,4 +5,5 @@ gem "sinatra"
 gem "cucumber"
 gem "rspec"
 gem 'capybara'
+gem 'selenium-webdriver'
 gem 'sass', '~> 3.4'

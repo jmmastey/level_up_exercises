@@ -18,12 +18,11 @@
 
     .container-fluid
       .col-md-3
-        .panel.panel-success
+        .panel.panel-info
           .panel-heading
             %h3.panel-title Bomb Status
           .panel-body
             %h3.bomb_status Off!
-            %span.timer#30
             %h2.attempts 3 attempts left
       .col-md-9
         .panel.panel-info
@@ -32,7 +31,7 @@
           .panel-body
             .configuration
               =haml :configuration
-            .activation
+            .interface
               =haml :booted_bomb
             .safe
               =haml :safe

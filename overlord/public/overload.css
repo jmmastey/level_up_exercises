@@ -1,3 +1,7 @@
-.attempts, .timer, .error, .activation_error, .deactivation_error, .activation, .deactivate, .safe, .exploded {
+.attempts, .timer, .alert, .interface, .deactivate, .safe, .exploded {
   display: none;
+}
+
+.backgroundRed {
+    background-color: red;
 }

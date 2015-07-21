@@ -20,6 +20,12 @@ class Bomb
     @activation_code =~ /^[0-9]+$/ && @deactivation_code =~ /^[0-9]+$/
   end
 
+  def update_codes(params)
+    @activation_code = params["activation_code"]
+    @deactivation_code = params["deactivation_code"]
+    @state = BOOTED if valid_codes?
+  end
+
   def activate(code)
     @state = ACTIVATED if @activation_code == code
   end

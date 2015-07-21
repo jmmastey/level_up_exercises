@@ -1,4 +1,4 @@
-$('#boot_up').on('submit', function (event) {
+$('.configuration form').on('submit', function (event) {
   event.preventDefault();
   $.ajax({
     url: '/configure',
@@ -9,50 +9,49 @@ $('#boot_up').on('submit', function (event) {
           },
     dataType: 'text'
   })
-    .done(function(data) {
-      $('.activation').show()
-      $('.panel').addClass('panel-info')
+    .done(function() {
+      $('.interface').show()
+      change_panel('panel-info')
       $('.bomb_status').html("Booted up!")
       $('.configuration').hide()
     })
-    .fail(function(data) {
-      $('.error').show();
+    .fail(function() {
+      $('.configuration .alert').show();
     });
 });
 
-$('#activation').on('submit', function(event) {
+$('.activate form').on('submit', function(event) {
   event.preventDefault();
   $.ajax({
     url: '/activate',
     type: 'POST',
-    data: { 'activation_code': $('input[name="submit_activation_code"]').val()},
+    data: { 'activation_code': $('.activate input').val()},
     dataType: 'text'
   })
-    .done(function(data) {
+    .done(function() {
       $('.activate').hide()
       $('.bomb_status').html("Activated!")
-      $('.panel').addClass('panel-warning')
+      change_panel('panel-warning')
       $('.deactivate').show()
       $('.attempts').show()
       start_timer();
     })
-    .fail(function(json) {
-      $('.activation_error').show()
+    .fail(function() {
+      $('.activate .alert').show()
     });
 })
 
-
-$('#deactivation').on('submit', function(event) {
+$('.deactivate form').on('submit', function(event) {
   event.preventDefault();
   $.ajax({
     url: '/deactivate',
     type: 'POST',
-    data: { 'deactivation_code': $('input[name="submit_deactivation_code"]').val()},
-    accepts: "application/json",
+    data: { 'deactivation_code': $('.deactivate input').val()},
+    dataType: 'text',
 
-    success: function(json) {
-      $('.activation').hide()
-      $('.panel').addClass('panel-success')
+    success: function() {
+      $('.interface').hide()
+      change_panel('panel-success')
       $('.bomb_status').html("Deactivated!")
       $('.safe').show()
       $('.timer').hide()
@@ -62,33 +61,48 @@ $('#deactivation').on('submit', function(event) {
         explode();
       },
       422: function (responseData, textStatus, errorThrown) {
-        $('.deactivation_error').show()
+        $('.deactivate .alert').show()
         $('.attempts').html(responseData.responseText)
       }
     }
   })
 })
 
-function start_timer(){
-    $('.timer').show()
+function start_timer() {
+    $('.timer').show();
     var c = $('.timer').attr('id');
     $('.timer').text(c);
+    var dangerFlashing = null;
     setInterval(function(){
         c--;
-        if(c>=0){
+        if(c >= 0){
             $('.timer').text(c + " seconds left");
         }
-        if(c==0){
-            // explode();
+        if (c == 10) {
+            $('.countdown').css('color', 'red');
+            change_panel('panel-danger');
+            dangerFlashing = setInterval(function(){
+               $("body").toggleClass("backgroundRed");
+            }, 500);
         }
-    },1000);
+        if(c == 0){
+            explode();
+            clearInterval(dangerFlashing);
+        }
+    }, 1000);
 }
 
-function explode(){
-  $('.activation').hide()
-  $('.panel').addClass('panel-danger')
-  $('.bomb_status').html("Exploded!")
-  $('.attempts').hide()
-  $('.timer').hide()
-  $('.exploded').show()
+function explode() {
+  $('.interface').hide();
+  change_panel('panel-danger')
+  $('.bomb_status').html("Exploded!");
+  $('.attempts').hide();
+  $('.timer').hide();
+  $('.exploded').show();
+}
+
+function change_panel(newClass) {
+  var lastClass = $('.panel').attr('class').split(' ').pop();
+  $('.panel').removeClass(lastClass);
+  $('.panel').addClass(newClass)
 }

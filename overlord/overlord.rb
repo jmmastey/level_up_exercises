@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'haml'
 require_relative './bomb'
+require 'pry'
 
 enable :sessions
 set :session_secret, ENV['overlord_secret_key']
@@ -11,7 +12,7 @@ get '/' do
 end
 
 post '/configure' do
-  update_bomb
+  set_bomb
   halt(422) unless session[:bomb].booted?
   halt(200)
 end
@@ -32,16 +33,11 @@ post '/deactivate' do
   halt(422, "#{bomb.attempts} attempts left")
 end
 
-def create_bomb
-  bomb = Bomb.new(params['activation_code'], params['deactivation_code'])
-  session[:bomb] = bomb
-end
-
-def update_bomb
+def set_bomb
   if session[:bomb]
-    session[:bomb].activation_code = params['activation_code']
-    session[:bomb].deactivation_code = params['deactivation_code']
+    session[:bomb].update_codes(params)
   else
-    create_bomb
+    bomb = Bomb.new(params['activation_code'], params['deactivation_code'])
+    session[:bomb] = bomb
   end
 end

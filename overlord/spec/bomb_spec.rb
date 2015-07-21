@@ -35,6 +35,23 @@ describe Bomb do
     end
   end
 
+  describe '#update_codes' do
+    let(:bomb) { Bomb.new('abc', '1234') }
+    let(:params) do
+      {
+        "activation_code" => '0000',
+        "deactivation_code" => '1234',
+      }
+    end
+
+    context 'with correct activation code' do
+      before { bomb.update_codes(params) }
+      it 'is booted correctly' do
+        expect(bomb).to be_booted
+      end
+    end
+  end
+
   describe '#activate' do
     let(:bomb) { Bomb.new }
     context 'with the correct code' do

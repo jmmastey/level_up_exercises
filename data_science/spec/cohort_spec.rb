@@ -28,4 +28,13 @@ describe Cohort do
       expect(cohort.calculate_standard_error).to be_within(0.01).of(0.0772)
     end
   end
+
+  describe "#calculate_confidence_interval" do
+    it "should have a confidence interval of about [0.156, 0.310]" do
+      expect(cohort.calculate_confidence_interval[0])
+        .to be_within(0.01).of(0.1558)
+      expect(cohort.calculate_confidence_interval[1])
+        .to be_within(0.01).of(0.3112)
+    end
+  end
 end

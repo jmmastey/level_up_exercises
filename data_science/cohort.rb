@@ -16,4 +16,10 @@ class Cohort
     n =  @sample_size.to_f
     Math.sqrt(p * (1 - p) / n)
   end
+
+  def calculate_confidence_interval
+    lower_limit = calculate_conversion_rate - calculate_standard_error
+    upper_limit = calculate_conversion_rate + calculate_standard_error
+    [lower_limit, upper_limit]
+  end
 end

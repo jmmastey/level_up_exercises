@@ -16,22 +16,6 @@ body {
   @include image-url("congruent_outline.png");
 }
 
-.wrapper {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -#{$footer-height};
-}
-
-footer {
-  @extend .center;
-  height: $footer-height;
-}
-
-.footer-push {
-  height: $footer-height;
-}
-
 .center {
   margin-left: auto;
   margin-right: auto;

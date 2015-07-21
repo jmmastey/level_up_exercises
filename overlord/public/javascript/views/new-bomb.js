@@ -19,7 +19,6 @@ function(App, $, _, FormHelper, BombModel){
         return;
       }
       var data = FormHelper.serialize("form");
-      console.log(data);
 
       var bomb = new BombModel(data);
 
@@ -27,13 +26,23 @@ function(App, $, _, FormHelper, BombModel){
         alert(bomb.validationError);
         return;
       }
+      this.processing = true;
+
       var self = this;
 
       bomb.save(bomb.attributes, {
         success: function(model) {
-          self.$(".no-bomb-alert").remove();
+          self.processing = false;
+
+          if (model.get("error") == true) {
+            alert("Activation and/or Deactivation code invalid");
+            return;
+          }
+
+          App.events.trigger('render-view', 'existing_bomb');
         },
         error: function(response) {
+          self.processing = false;
           alert("Could not create bomb.");
         }
       });

@@ -21,8 +21,10 @@ end
 
 Then(/^there should be a bomb$/) do
   expect(page).not_to have_content('No bomb created yet')
+  find_button('Activate')
+  find_button('Deactivate')
 end
 
 Then(/^the status should be inactive$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content('INACTIVE')
 end

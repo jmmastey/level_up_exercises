@@ -8,7 +8,7 @@ define(function(require){
   
   var App = _.extend({}, {
     templates: {},
-    events: _.extend({}, Backbone.events),
+    events: _.extend({}, Backbone.Events),
 
     loadTemplate: function(template){
       if (!_.isUndefined(this.templates[template])) {
@@ -41,7 +41,7 @@ define(function(require){
     view: null,
 
     start: function(){
-      this.listenTo(App.events, "render-view", "renderView");
+      this.listenTo(App.events, "render-view", this.renderView);
 
       var viewName = 'new_bomb';
       if (!_.isUndefined(haveBomb) && haveBomb !== false) {
@@ -52,6 +52,9 @@ define(function(require){
     },
 
     renderView: function(viewName) {
+      if (!_.isNull(this.view)) {
+        this.view.remove();
+      }
       this.actions[viewName].call(this);
 
       this.$el.html(this.view.render().el);
@@ -63,7 +66,21 @@ define(function(require){
   });
 
   App.Model = Backbone.Model.extend({
-
+    fetchWait: function(){
+      var self = this;
+      
+      $.ajax({
+        url: this.url() + this.id,
+        type: 'GET',
+        async: false,
+        success: function(attributes) {
+          self.set(attributes);
+        },
+        error: function(response) {
+          alert("Could not load model");
+        }
+      });
+    }
   });
 
   App.Collection = Backbone.Collection.extend({

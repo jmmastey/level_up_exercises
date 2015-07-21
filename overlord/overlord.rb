@@ -9,8 +9,16 @@ class Overlord < Sinatra::Base
 
   set :public_folder, File.dirname(__FILE__) + '/public'
 
+  # All methods except GET send content_type application/json
+  before do
+    unless request.request_method.eql?('GET')
+      parameters = request.body.read
+      return unless parameters.length > 2
+      params.merge!(JSON.parse(parameters))
+    end
+  end
+
   get '/' do
-    session.delete(:bomb)
     erb :home,
         layout: 'layouts/main'.to_sym,
         locals: { bomb: session[:bomb] }

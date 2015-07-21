@@ -9,8 +9,8 @@ class DataPoint
     contents.fetch(measure, nil)
   end
 
-  def match?(requirements_hash)
-    requirements_hash.each do |key, value|
+  def match?(requirements)
+    requirements.each do |key, value|
       return false unless @contents.key?(key)
       return false unless @contents[key] == value
     end

@@ -26,6 +26,13 @@ describe Cohort do
       it "is .interesting?" do
         expect(a_sig_more.interesting?).to be true
       end
+      it "correctly converts itself .to_s" do
+        description = "Cohort A contains 20 samples with 18 conversions.  The "
+        description << "conversion rate is 77% - 100% with a 95% confidence.  "
+        description << "It is significantly better than random with a 99% "
+        description << "confidence."
+        expect(a_sig_more.to_s).to eq(description)
+      end
     end
     context "when the difference is not significant" do
       let(:insig_more) { Cohort.new(name: "A", size: 20, conversion_count: 15) }
@@ -54,6 +61,13 @@ describe Cohort do
     end
     it "is .interesting?" do
       expect(even_dist.interesting?).to be false
+    end
+
+    it "correctly converts itself .to_s" do
+      description = "Cohort A contains 20 samples with 10 conversions.  "
+      description << "The conversion rate is 28% - 72% with a 95% confidence.  "
+      description << "It is not significantly better than random."
+      expect(even_dist.to_s).to eq(description)
     end
   end
 end

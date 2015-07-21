@@ -49,9 +49,9 @@ class RoboResearcher
     best = best_cohorts
     cohort_names = best.collect(&:name)
     names = cohort_names.join(" and ")
-    to_be = best.length > 1 ? "are" : "is"
+    is_are = best.length > 1 ? "are" : "is"
     negation = best[0].interesting? ? "" : " NOT"
-    "Cohort #{names} #{to_be}#{negation} significantly better than random."
+    "Cohort #{names} #{is_are}#{negation} significantly better than random."
   end
 
   def best_cohorts
@@ -61,6 +61,9 @@ class RoboResearcher
   end
 
   def details
-    cohorts
+    cohorts.each_with_object([]) do |key_cohort_pair, info|
+      cohort = key_cohort_pair[1]
+      info << cohort.to_s
+    end
   end
 end

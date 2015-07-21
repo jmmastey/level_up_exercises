@@ -73,19 +73,8 @@ describe RoboResearcher do
 
   context "when asked for .details" do
     let(:researcher) { RoboResearcherFactory.create([25, 20, 25, 20]) }
-    it "provides a hash with an entry for each cohort" do
-      expect(researcher.details).to have_key("A")
-      expect(researcher.details).to have_key("B")
-    end
-
-    it "includes conversion_rate_interval for each cohort" do
-      expect(researcher.details["A"].conversion_rate_interval).not_to be_nil
-      expect(researcher.details["B"].conversion_rate_interval).not_to be_nil
-    end
-
-    it "includes confidence_of_significance for each cohort" do
-      expect(researcher.details["A"].confidence_of_significance).not_to be_nil
-      expect(researcher.details["B"].confidence_of_significance).not_to be_nil
+    it "provides a description for each cohort" do
+      expect(researcher.details.length).to be 2
     end
   end
 end

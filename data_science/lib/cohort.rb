@@ -56,4 +56,39 @@ class Cohort
   def interesting?
     better_than_random? && significant?
   end
+
+  def to_s
+    string = "#{readable_basic_data}  "
+    string << "#{readable_conversion_rate}  "
+    string << readable_interesting
+  end
+
+  def readable_basic_data
+    string = "Cohort #{name} contains #{size} samples with #{conversion_count} "
+    string << "conversions."
+  end
+
+  def readable_conversion_rate
+    string = "The conversion rate is #{rate_min_percent}% - "
+    string << "#{rate_max_percent}% with a 95% confidence."
+  end
+
+  def readable_interesting
+    if interesting?
+      string = "It is significantly better than random with a "
+      string << "#{confidence_of_significance.round}% confidence."
+      string
+    else
+      "It is not significantly better than random."
+    end
+  end
+
+  def rate_min_percent
+    (rate_min * 100).round
+  end
+
+  def rate_max_percent
+    uncapped_percentage = (rate_max * 100).round
+    [uncapped_percentage, 100].min
+  end
 end

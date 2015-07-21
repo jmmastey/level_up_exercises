@@ -6,8 +6,8 @@ class DataReader
 
   def initialize(file_name)
     @file_name = file_name
-    data_hashes = read_json
     @data = []
+    data_hashes = read_json
     data_hashes.each { |hash| @data << DataPoint.new(hash) }
   end
 

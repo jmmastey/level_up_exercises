@@ -17,9 +17,9 @@ class DinoCatalogTest < Minitest::Test
     assert_equal([DINO2], dinos)
   end
 
-  def test_search_by_hash
+  def test_search_by_multiple_attrs
     catalog = DinoCatalog.new(dinosaurs: [DINO1, DINO2, DINO3])
-    dinos = catalog.search_by_hash(size: :small, walking: "quadruped")
+    dinos = catalog.search_by_multiple_attrs(size: :small, walking: "quadruped")
     assert_equal([DINO2], dinos)
   end
 end
@@ -90,7 +90,7 @@ class DinosaurTest < Minitest::Test
                        diet: "gourmet", period: "Late Cretaceous")
 
   def test_initialize_ignores_bogus_attributes
-    dino1 = Dinosaur.new(foo: "foo", name: "Dino")
+    dino1 = Dinosaur.new(bogus: "bogus", name: "Dino")
     dino2 = Dinosaur.new(name: "Dino")
     assert_equal(dino1.to_s, dino2.to_s)
   end
@@ -151,39 +151,80 @@ end
 
 # Proper testing would involve mocking out the data files.
 class DinoFileTest < Minitest::Test
-  def test_format_specific_reader_with_bogus_format
-    dino_file = DinoFile.new("foo", :bogus)
-    dino_file_method = dino_file.reader
-    assert_nil(dino_file_method)
+  def test_initialize_with_bogus_format
+    assert_raises(DinoBadFormat) do
+      DinoFile.new(path: "bogus_format_test_data.csv")
+    end
   end
 
-  def test_csv_file_to_hashes
-    dino_file = DinoFile.new("original_format_test_data.csv", :original)
-    dino_hash = dino_file.csv_file_to_hashes
+  def test_initialize_with_empty_file
+    assert_raises(EOFError) do
+      DinoFile.new(path: "empty_test_data.csv")
+    end
+  end
+
+  def test_initialize_with_nonexistent_file
+    assert_raises(Errno::ENOENT) do
+      DinoFile.new(path: "not_here.csv")
+    end
+  end
+
+  def test_csv_file_to_h_with_original_format
+    dino_file = DinoFile.new(path: "original_format_test_data.csv")
+    dinos = dino_file.csv_file_to_h
     expected = [
       { name: "Bary", period: "Early Cre", continent: "Eur", diet: "Piscivore",
         weight_in_lbs: "6000", walking: "Biped", description: "Rare diet." },
     ]
-    assert_equal(expected, dino_hash)
+    assert_equal(expected, dinos)
   end
 
-  def test_original_format_hash_to_dinosaur
-    dino_file = DinoFile.new("foo", :original)
-    dino_hash = { name: "Di", period: "Sc", continent: "x", diet: "y",
-                  weight_in_lbs: "20", walking: "quad", description: "boo!" }
-    dinosaur = dino_file.original_format_hash_to_dinosaur(dino_hash)
+  def test_csv_file_to_h_with_p_b_africa_format
+    dino_file = DinoFile.new(path: "p_b_africa_format_test_data.csv")
+    dinos = dino_file.csv_file_to_h
+    expected = [
+      { genus: "Bary", period: "Early Cre", carnivore: "Yes", weight: "6000",
+        walking: "Biped" },
+    ]
+    assert_equal(expected, dinos)
+  end
+
+  def test_original_format_to_dinosaur
+    dino_file = DinoFile.new
+    dino = { name: "Di", period: "Sc", continent: "x", diet: "y",
+             weight_in_lbs: "20", walking: "quad", description: "boo!" }
+    dinosaur = dino_file.original_format_to_dinosaur(dino)
     expected = Dinosaur.new(name: "Di", period: "Sc", continent: "x", diet: "y",
                             weight: "20", walking: "quad", description: "boo!")
     assert_equal(expected, dinosaur)
   end
 
-  def test_p_b_africa_format_hash_to_dinosaur
-    dino_file = DinoFile.new("foo", :p_b_africa)
-    dino_hash = { genus: "Dino", period: "Sec", carnivore: "Yes",
-                  weight: "2000", walking: "quad" }
-    dinosaur = dino_file.p_b_africa_format_hash_to_dinosaur(dino_hash)
+  def test_p_b_africa_format_to_dinosaur
+    dino_file = DinoFile.new
+    dino = { genus: "Dino", period: "Sec", carnivore: "Yes", weight: "2000",
+             walking: "quad" }
+    dinosaur = dino_file.p_b_africa_format_to_dinosaur(dino)
     expected = Dinosaur.new(continent: "Africa", name: "Dino", period: "Sec",
                             diet: "Carnivore", weight: "2000", walking: "quad")
     assert_equal(expected, dinosaur)
+  end
+
+  def test_read_with_original_format
+    dino_file = DinoFile.new(path: "original_format_test_data.csv")
+    expected = [
+      Dinosaur.new(name: "Bary", period: "Early Cre", continent: "Eur",
+                   diet: "Piscivore", weight: "6000", walking: "Biped",
+                   description: "Rare diet."),
+    ]
+    assert_equal(expected, dino_file.read)
+  end
+
+  def test_read_with_p_b_africa_format
+    dino_file = DinoFile.new(path: "p_b_africa_format_test_data.csv")
+    expected = [
+      Dinosaur.new(name: "Bary", period: "Early Cre", continent: "Africa",
+                   diet: "Carnivore", weight: "6000", walking: "Biped"),
+    ]
+    assert_equal(expected, dino_file.read)
   end
 end

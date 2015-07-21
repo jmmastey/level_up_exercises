@@ -1,6 +1,6 @@
 class Cohort
   attr_accessor :name, :sample_size, :conversions
-  
+
   def initialize(name, samples)
     @name = name
     @sample_size = samples.length
@@ -21,5 +21,18 @@ class Cohort
     lower_limit = calculate_conversion_rate - calculate_standard_error
     upper_limit = calculate_conversion_rate + calculate_standard_error
     [lower_limit, upper_limit]
+  end
+
+  def conversion_stats
+    { converts: @conversions, nonconverts: @sample_size - @conversions }
+  end
+
+  def print_info
+    puts "Cohort: " + @name
+    puts "Sample Size: " + @sample_size.to_s
+    puts "Conversions: " + @conversions.to_s
+    puts "Conversion Rate: " + calculate_conversion_rate.to_s
+    puts "Confidence Interval: " + calculate_confidence_interval.to_s
+    puts
   end
 end

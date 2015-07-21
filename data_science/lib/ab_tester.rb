@@ -16,7 +16,7 @@ class ABTester
   end
 
   def conversions(visits)
-    visits.count { |visit|  visit["result"] == 1 }
+    visits.count { |visit| visit["result"] == 1 }
   end
 
   def chi_square(cohort_a, cohort_b)

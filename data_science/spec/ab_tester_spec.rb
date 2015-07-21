@@ -100,7 +100,6 @@ describe ABTester do
     ]
   end
   let(:ab_tester) { ABTester.new(cohort_visits) }
-
   describe '#initialize' do
     it 'accepts and assigns arg of data array to variable' do
       expect(ab_tester.all_visits).to eq cohort_visits

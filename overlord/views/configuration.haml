@@ -1,9 +1,12 @@
+%h1 Choose wisely, supervillain
 %h2.error Invalid parameters
-%form#boot_up{action: "/configure", method: "post", remote: true}
+%form.form-horizontal#boot_up{action: "/configure", method: "post", remote: true}
   .form-group
-    %label{:for => "activation_code"} Activation Code:
-    %input.form-control{:type => "text", :value => "1234", :name => "configure_activation_code", :class => "text"}
+    %label.col-sm-4.control-label{for: "activation_code"} Activation Code:
+    .col-sm-4
+      %input.form-control{:type => "text", :value => "1234", :name => "configure_activation_code", :class => "text"}
   .form-group
-    %label{:for => "deactivation_code"} Deactivation Code:
-    %input.form-control{:type => "text", :value => "0000", :name => "configure_deactivation_code", :class => "text"}
-  %button.btn.btn-default{type: "submit"} Submit
+    %label.col-sm-4.control-label{for: "deactivation_code"} Deactivation Code:
+    .col-sm-4
+      %input.form-control{:type => "text", :value => "0000", :name => "configure_deactivation_code", :class => "text"}
+  %button.btn.btn-default{type: "submit"} Boot

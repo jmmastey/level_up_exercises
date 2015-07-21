@@ -3,33 +3,38 @@ Feature: Dropping bombs
   As a visitor to the site
   I want to set the codes
 
+  Scenario: Bomb is not booted
+    Given I visit the home page
+    When I do nothing
+    Then the bomb should be off
+
   Scenario: Bomb is booted
-    Given I am a website visitor
+    Given I visit the home page
     When I boot the bomb
     Then the bomb should be booted
 
   Scenario: Activation code is set
-    Given I am a website visitor
+    Given I visit the home page
     When I configure the activation code "2345"
     And I boot the bomb
     Then the bomb should be booted
 
   Scenario: Activation code is invalid
-    Given I am a website visitor
+    Given I visit the home page
     When I configure the activation code "a123"
     And I boot the bomb
     Then the bomb should be off
 
-  Scenario: Custom activation code
-    Given I am a website visitor
-    And I configure the activation code "56789"
-    When I boot the bomb
-    And I submit the activation code "56789"
-    Then the bomb is now activated
-
   Scenario: Bomb is activated
     Given the bomb is booted with default config
     When I submit the activation code "1234"
+    Then the bomb is now activated
+
+  Scenario: Custom activation code
+    Given I visit the home page
+    When I configure the activation code "56789"
+    And I boot the bomb
+    And I submit the activation code "56789"
     Then the bomb is now activated
 
   Scenario: Bomb is deactivated

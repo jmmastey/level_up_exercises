@@ -1,3 +1,3 @@
-.error, .activation_error, .deactivation_error, .activation, .deactivate, .safe, .exploded {
+.attempts, .timer, .error, .activation_error, .deactivation_error, .activation, .deactivate, .safe, .exploded {
   display: none;
 }

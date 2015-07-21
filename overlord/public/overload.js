@@ -7,16 +7,17 @@ $('#boot_up').on('submit', function (event) {
             'activation_code': $('input[name="configure_activation_code"]').val(),
             'deactivation_code': $('input[name="configure_deactivation_code"]').val()
           },
-    accepts: "application/json",
-    success: function(json) {
-      $('.activation').show()
-      $('.bomb_status').html("Bomb has been booted up!")
-      $('.configuration').hide()
-    },
-    error: function(json) {
-      $('.error').show();
-    }
+    dataType: 'text'
   })
+    .done(function(data) {
+      $('.activation').show()
+      $('.panel').addClass('panel-info')
+      $('.bomb_status').html("Booted up!")
+      $('.configuration').hide()
+    })
+    .fail(function(data) {
+      $('.error').show();
+    });
 });
 
 $('#activation').on('submit', function(event) {
@@ -25,17 +26,19 @@ $('#activation').on('submit', function(event) {
     url: '/activate',
     type: 'POST',
     data: { 'activation_code': $('input[name="submit_activation_code"]').val()},
-    accepts: "application/json",
-    success: function(json) {
-      $('.activate').hide()
-      $('.bomb_status').html("Bomb has been activated!")
-      $('.deactivate').show()
-      start_timer();
-    },
-    error: function(json) {
-      $('.activation_error').show()
-    }
+    dataType: 'text'
   })
+    .done(function(data) {
+      $('.activate').hide()
+      $('.bomb_status').html("Activated!")
+      $('.panel').addClass('panel-warning')
+      $('.deactivate').show()
+      $('.attempts').show()
+      start_timer();
+    })
+    .fail(function(json) {
+      $('.activation_error').show()
+    });
 })
 
 
@@ -46,27 +49,28 @@ $('#deactivation').on('submit', function(event) {
     type: 'POST',
     data: { 'deactivation_code': $('input[name="submit_deactivation_code"]').val()},
     accepts: "application/json",
+
     success: function(json) {
       $('.activation').hide()
-      $('.bomb_status').html("Bomb has been deactivated!")
+      $('.panel').addClass('panel-success')
+      $('.bomb_status').html("Deactivated!")
       $('.safe').show()
+      $('.timer').hide()
     },
     statusCode: {
       400: function() {
         explode();
       },
-      422: function() {
+      422: function (responseData, textStatus, errorThrown) {
         $('.deactivation_error').show()
+        $('.attempts').html(responseData.responseText)
       }
     }
   })
 })
 
-$("#getting-started").countdown("2016/01/01", function(event) {
-  $(this).text(event.strftime('%D days %H:%M:%S'));
-});
-
 function start_timer(){
+    $('.timer').show()
     var c = $('.timer').attr('id');
     $('.timer').text(c);
     setInterval(function(){
@@ -75,13 +79,16 @@ function start_timer(){
             $('.timer').text(c + " seconds left");
         }
         if(c==0){
-            explode();
+            // explode();
         }
     },1000);
 }
 
 function explode(){
   $('.activation').hide()
-  $('.bomb_status').html("Bomb has exploded!")
+  $('.panel').addClass('panel-danger')
+  $('.bomb_status').html("Exploded!")
+  $('.attempts').hide()
+  $('.timer').hide()
   $('.exploded').show()
 }

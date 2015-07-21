@@ -1,59 +1,47 @@
 require 'sinatra'
-require 'pry'
 require 'haml'
-require 'json'
 require_relative './bomb'
 
-set :public_folder, 'public'
 enable :sessions
 set :session_secret, ENV['overlord_secret_key']
 
-
 get '/' do
+  session[:bomb] = nil
   haml :index
 end
 
-post '/configure', provides: :json do
+post '/configure' do
+  update_bomb
+  halt(422) unless session[:bomb].booted?
+  halt(200)
+end
+
+post '/activate' do
+  bomb = session[:bomb]
+  bomb.activate(params['activation_code']) unless bomb.activated?
+  halt(422) unless bomb.activated?
+  halt(200)
+end
+
+post '/deactivate' do
+  bomb = session[:bomb]
+  bomb.deactivate(params['deactivation_code'])
+  halt(200) if bomb.deactivated?
+  halt(400) if bomb.exploded?
+  session[:bomb] = nil if bomb.deactivated? || bomb.exploded?
+  halt(422, "#{bomb.attempts} attempts left")
+end
+
+def create_bomb
   bomb = Bomb.new(params['activation_code'], params['deactivation_code'])
-  if bomb.booted?
-    session[:bomb] = bomb
-    halt 200
+  session[:bomb] = bomb
+end
+
+def update_bomb
+  if session[:bomb]
+    session[:bomb].activation_code = params['activation_code']
+    session[:bomb].deactivation_code = params['deactivation_code']
   else
-    halt 422
+    create_bomb
   end
-end
-
-post '/activate', provides: :json do
-  @bomb = session[:bomb]
-  @bomb.activate(params['activation_code']) unless @bomb.activated?
-  if @bomb.activated?
-    halt 200
-  else
-    halt 422
-  end
-end
-
-post '/deactivate', provides: :json do
-  @bomb = session[:bomb]
-  @bomb.deactivate(params['deactivation_code'])
-  if @bomb.deactivated?
-    halt 200
-  elsif @bomb.exploded?
-    halt 400
-  else
-    halt 422
-  end
-end
-
-get '/safe' do
-  haml :safe
-end
-
-get '/exploded' do
-  haml :exploded
-end
-
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
 end

@@ -2,7 +2,7 @@
 %html
   %head
     %title Overlord
-    %script{src: 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'}
+    %script{src: '//code.jquery.com/jquery-1.11.3.min.js'}
     %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"}
     %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"}
     %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
@@ -11,18 +11,32 @@
     %link{href: "overload.css", rel: "stylesheet", type: 'text/css'}
 
   %body
-    .container
-      .col-md-6.col-md-offset-3
-        %h1.bomb_status Bomb is off!
-        .configuration
-          =haml :configuration
-        .activation
-          =haml :booted_bomb
-        .safe
-          =haml :safe
-        .exploded
-          =haml :exploded
+    %nav.navbar.navbar-default.navbar-inverse
+      .container-fluid
+        .navbar-header
+          %a.navbar-brand{href: "#"} Overlord
 
-%script{src: "overload.js", type: "text/javascript"}
+    .container-fluid
+      .col-md-3
+        .panel.panel-success
+          .panel-heading
+            %h3.panel-title Bomb Status
+          .panel-body
+            %h3.bomb_status Off!
+            %span.timer#30
+            %h2.attempts 3 attempts left
+      .col-md-9
+        .panel.panel-info
+          .panel-heading
+            %h3.panel-title Bomb Interface
+          .panel-body
+            .configuration
+              =haml :configuration
+            .activation
+              =haml :booted_bomb
+            .safe
+              =haml :safe
+            .exploded
+              =haml :exploded
 
-#getting-started
+  %script{src: "overload.js", type: "text/javascript"}

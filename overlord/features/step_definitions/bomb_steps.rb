@@ -1,5 +1,8 @@
-Given(/^I am a website visitor$/) do
+Given(/^I visit the home page$/) do
   visit('/')
+end
+
+When(/^I do nothing$/) do
 end
 
 When(/^I boot the bomb$/) do
@@ -7,7 +10,7 @@ When(/^I boot the bomb$/) do
 end
 
 Then(/^the bomb should be booted$/) do
-  expect(find('.bomb_status').text).to eq("Bomb has been booted up!")
+  expect(find('.bomb_status').text).to eq("Booted up!")
 end
 
 When(/^I configure the activation code "([^"]*)"$/) do |code|
@@ -15,7 +18,7 @@ When(/^I configure the activation code "([^"]*)"$/) do |code|
 end
 
 Then(/^the bomb should be off$/) do
-  expect(find('.bomb_status').text).to eq("Bomb is off!")
+  expect(find('.bomb_status').text).to eq("Off!")
 end
 
 Given(/^the bomb is booted with default config$/) do
@@ -29,7 +32,7 @@ When(/^I submit the activation code "([^"]*)"$/) do |code|
 end
 
 Then(/^the bomb is now activated$/) do
-  expect(find('.bomb_status').text).to eq("Bomb has been activated!")
+  expect(find('.bomb_status').text).to eq("Activated!")
 end
 
 Given(/^the bomb is activated with default config$/) do
@@ -43,9 +46,9 @@ When(/^I submit the deactivation code "([^"]*)"$/) do |code|
 end
 
 Then(/^the bomb should be deactivated$/) do
-  expect(find('.bomb_status').text).to eq("Bomb has been deactivated!")
+  expect(find('.bomb_status').text).to eq("Deactivated!")
 end
 
 Then(/^the bomb should explode$/) do
-  expect(find('.bomb_status').text).to eq("Bomb has exploded!")
+  expect(find('.bomb_status').text).to eq("Exploded!")
 end

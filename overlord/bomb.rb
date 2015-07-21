@@ -5,28 +5,15 @@ class Bomb
   DEACTIVATED = 4
   EXPLODED = 5
 
+  DEFAULT_NUM_ATTEMPTS = 3
+
   attr_accessor :state, :activation_code, :deactivation_code, :attempts
 
   def initialize(activation_code = '1234', deactivation_code = '0000')
     @activation_code = activation_code
     @deactivation_code = deactivation_code
     @state = valid_codes? ? BOOTED : OFF
-    @attempts = 0
-  end
-
-  def string_state
-    case @state
-    when 1
-      "off"
-    when 2
-      "booted"
-    when 3
-      "activated"
-    when 4
-      "deactivated"
-    when 5
-      "exploded"
-    end
+    @attempts = DEFAULT_NUM_ATTEMPTS
   end
 
   def valid_codes?
@@ -43,11 +30,11 @@ class Bomb
       return
     end
 
-    @attempts += 1
-    explode! if @attempts == 3
+    @attempts -= 1
+    explode if @attempts == 0
   end
 
-  def explode!
+  def explode
     @state = EXPLODED
   end
 

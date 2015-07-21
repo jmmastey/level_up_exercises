@@ -95,3 +95,7 @@ Alternatively, I could just do jQuery validation. This, after all, is largely wh
 ### A Component-ized Bomb
 
 I'm now at the point where I really, really need this bomb to be modular, the trigger in particular being just one part of it. This will impact the screens (to some extent) and thus the routes.
+
+### Moderate Styling
+
+At this point in the process, my client and I decided it would be worth it to spend some time on the interface aspects of the bomb provisioning application. Some of this styling was going to have an impact on the trigger mechanism, in particular. The idea was to limit the modality of the trigger mechanism by providing a keypad style interface.

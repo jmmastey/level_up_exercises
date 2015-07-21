@@ -5,12 +5,13 @@
     %title Project Overlord
     %meta{content: 'IE=edge,chrome=1', 'http-equiv' => 'X-UA-Compatible'}
     %meta{content: 'width=device-width, initial-scale=1', name: 'viewport'}
+    %link{rel: :stylesheet, href: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'}
   %body
     %h1 Project Overlord
     = yield
-    %script{src: '/js/require.js'}
     %script{src: 'https://code.jquery.com/jquery-2.1.4.min.js'}
     %script{src: 'http://cdn.jsdelivr.net/jquery.validation/1.14.0/jquery.validate.min.js'}
+    %script{src: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'}
     //%script{src: '/js/jquery-2.1.4.min.js'}
     //%script{src: '/js/jquery.validate.min.js'}
     %script{src: '/js/overlord.js'}

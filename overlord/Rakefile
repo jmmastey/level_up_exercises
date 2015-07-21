@@ -10,4 +10,9 @@ Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts == 'features --format pretty'
 end
 
+desc 'Starts the server through rackup.'
+task :serve do
+  `rackup -p 9292`
+end
+
 task default: [:features, :spec, :rubocop]

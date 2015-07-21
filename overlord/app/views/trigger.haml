@@ -1,0 +1,19 @@
+- if trigger.activated?
+  %label#bomb-status Bomb is active.
+- else
+  %label#bomb-status Bomb is inactive.
+
+- if flash[:invalid_code]
+  %label#notice= flash[:invalid_code]
+
+- if flash[:invalid_activation]
+  %label#notice= flash[:invalid_activation]
+- if flash[:invalid_deactivation]
+  %label#notice= flash[:invalid_deactivation]
+
+%input#trigger-code{type: 'text'}
+
+- if trigger.activated?
+  %input#change-bomb-state{type: 'submit', value: 'Deactivate'}
+- else
+  %input#change-bomb-state{type: 'submit', value: 'Activate'}

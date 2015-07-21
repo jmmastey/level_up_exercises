@@ -1,5 +1,5 @@
 class BombPage < SitePrism::Page
-  set_url '/'
+  set_url '/trigger'
 
   element :trigger_code, 'input[id=trigger-code]'
   element :bomb_state, 'input[id=change-bomb-state]'

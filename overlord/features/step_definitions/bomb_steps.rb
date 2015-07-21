@@ -9,6 +9,10 @@ Given(/^an activated bomb$/) do
   end
 end
 
+Given(/^a bomb provisioned with a custom activation code of "([^"]*)"$/) do |code|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
 When(/^a bomb is booted for the first time$/) do
   on_visit(BombPage)
 end
@@ -39,6 +43,10 @@ When(/^a valid deactivation code is entered$/) do
     page.enter_code('0000')
     page.change_bomb_state
   end
+end
+
+When(/^the custom activation code is entered$/) do
+  pending # Write code here that turns the phrase above into concrete actions
 end
 
 When(/^the default activation code "([^"]*)" is entered$/) do |code|

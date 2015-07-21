@@ -23,10 +23,10 @@ module Project
     set :views, 'app/views'
     set :haml, format: :html5
 
-    get '/' do
+    get '/trigger' do
       @trigger = session[:trigger] || Trigger.new
       session[:trigger] = @trigger
-      haml :index
+      haml :trigger
     end
 
     get '/enter/:code?' do
@@ -38,7 +38,7 @@ module Project
         flash[:invalid_code] = 'The code must be four numeric characters.'
       end
 
-      redirect to('/')
+      redirect to('/trigger')
     end
   end
 end

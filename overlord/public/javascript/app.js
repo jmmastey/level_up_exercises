@@ -1,5 +1,5 @@
 define(function(require){
-
+  "use strict";
   var $ = require("jquery"),
       _ = require("underscore"),
       Backbone = require("backbone"),
@@ -15,12 +15,12 @@ define(function(require){
         return this.templates[template];
       }
 
-      var normalizedTemplate = template.replace(/\./g, '/');
+      var normalizedTemplate = template.replace(/\./g, "/");
       var self = this;
 
       $.ajax({
-        url: 'javascript/templates/' + normalizedTemplate + '.handlebars',
-        type: 'GET',
+        url: "javascript/templates/" + normalizedTemplate + ".handlebars",
+        type: "GET",
         async: false,
         success: function(response) {
           self.templates[template] = Handlebars.compile(response);
@@ -36,16 +36,16 @@ define(function(require){
   });
 
   App.Controller = Backbone.View.extend({
-    defaultView: 'index',
+    defaultView: "index",
     actions: {},
     view: null,
 
     start: function(){
       this.listenTo(App.events, "render-view", this.renderView);
 
-      var viewName = 'new_bomb';
-      if (!_.isUndefined(haveBomb) && haveBomb !== false) {
-        viewName = 'existing_bomb';
+      var viewName = "new_bomb";
+      if (!_.isUndefined(window.haveBomb) && window.haveBomb !== false) {
+        viewName = "existing_bomb";
       }
 
       this.renderView(viewName);
@@ -71,13 +71,14 @@ define(function(require){
 
       $.ajax({
         url: this.url,
-        type: 'GET',
+        type: "GET",
         async: false,
         success: function(attributes) {
           self.set(attributes);
         },
         error: function(response) {
           alert("Could not load model");
+          console.log(response);
         }
       });
     }

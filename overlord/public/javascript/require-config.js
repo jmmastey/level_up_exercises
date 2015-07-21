@@ -10,14 +10,14 @@ require.config({
 
     shim: {
       backbone: {
-        deps: ['jquery', 'underscore'],
-        exports: 'Backbone'
+        deps: ["jquery", "underscore"],
+        exports: "Backbone"
       },
       underscore: {
-        exports: '_'
+        exports: "_"
       },
       jquery: {
-        exports: '$'
+        exports: "$"
       }
     }
 });

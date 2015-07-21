@@ -1,5 +1,5 @@
 define(function(require){
-
+  "use strict";
   var BaseApp = require("app");
   var NewBombView = require("views/new-bomb");
   var ExistingBombView = require("views/existing-bomb");

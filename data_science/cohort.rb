@@ -28,11 +28,11 @@ class Cohort
   end
 
   def print_info
-    puts "Cohort: " + @name
-    puts "Sample Size: " + @sample_size.to_s
-    puts "Conversions: " + @conversions.to_s
-    puts "Conversion Rate: " + calculate_conversion_rate.to_s
-    puts "Confidence Interval: " + calculate_confidence_interval.to_s
+    puts "Cohort: #{@name}"
+    puts "Sample Size: #{@sample_size}"
+    puts "Conversions: #{@conversions}"
+    puts "Conversion Rate #{calculate_conversion_rate}"
+    puts "Confidence Interval #{calculate_confidence_interval}"
     puts
   end
 end

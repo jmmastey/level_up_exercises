@@ -21,7 +21,6 @@ class Analyzer
 
   def print_results
     @cohorts.values.each(&:print_info)
-    
     puts "Test Results:"
     puts 'Better than random? ' + better_than_random?.to_s
   end

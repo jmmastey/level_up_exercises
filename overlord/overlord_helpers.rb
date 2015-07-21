@@ -1,7 +1,8 @@
 module OverlordHelpers
-  def provide_trigger
-    Trigger.new(activate: session[:activate],
-      deactivate: session[:deactivate])
+  def provide_bomb
+    trigger = Trigger.new(activate: session[:activate],
+        deactivate: session[:deactivate])
+    Bomb.new(trigger: trigger)
   end
 
   def trigger_bomb_state(trigger)

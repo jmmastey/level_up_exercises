@@ -91,3 +91,7 @@ At this point, I've found that while I like the basis of Cucumber, implementatio
 I'm at the point now where the check for valid code (in the `/trigger` route) has to be done in the post route for the index page as well. The problem is I can't call `trigger.valid?` during the post because a trigger instance has not been created. Does this suggest that a bomb code should be its own entity? On the one hand, an object for a code seems like overkill. On the other hand, various (admittedly contradictory) sources on Ruby coding practices suggest treating a value (like my codes) as objects. Or I suppose it could be the bomb itself. The whole idea was that the bomb was made of multiple components, one of which happens to be the trigger. But the trigger is mainly the mechanism for activating or deactivating the bomb. So now that I think on it, perhaps the codes should apply to a Bomb entity, which also starts getting more towards a modular entity overall.
 
 Alternatively, I could just do jQuery validation. This, after all, is largely what I would want as a user. Why post something to the server when validation can be done in the interface itself without a server call?
+
+### A Component-ized Bomb
+
+I'm now at the point where I really, really need this bomb to be modular, the trigger in particular being just one part of it. This will impact the screens (to some extent) and thus the routes.

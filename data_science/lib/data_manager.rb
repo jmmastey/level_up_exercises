@@ -1,27 +1,40 @@
 require 'abanalyzer'
+require_relative 'cohort'
 
 class DataManager
   @sample_size = 0
   attr_accessor :reader
 
-  def initialize(reader = nil)
-    load(reader) if reader
+  def initialize(reader)
+    @reader = reader
+    @cohorts = { A: init_cohort('A'), B: init_cohort('B') }
   end
 
-  def load(reader)
-    @reader = reader
+  def init_cohort(name)
+    one_count = @reader.data_hash.count do |item|
+      item['cohort'] == name && item['result'] == 1
+    end
+    zero_count = @reader.data_hash.count do |item|
+      item['cohort'] == name && item['result'] == 0
+    end
+    Cohort.new(one_count, zero_count)
   end
 
   def sample_size(cohort_name = nil)
     raise ArgumentError, "reader not initialized" unless @reader
-    return @reader.data_hash.count unless cohort_name
-    @reader.data_hash.count { |item| item['cohort'] == cohort_name }
+    sum = 0
+    return 0 if @cohorts[cohort_name].nil? unless cohort_name.nil?
+    sum = @cohorts[cohort_name].total_sample_size unless cohort_name.nil?
+    @cohorts.values.each { |c| sum += c.total_sample_size } if cohort_name.nil?
+    sum
   end
 
   def conversion_size(cohort_name = nil)
     raise ArgumentError, "reader not initialized" unless @reader
+    sum = 0
     return cohort_conversion_size(cohort_name) if cohort_name
-    @reader.data_hash.count { |item| item['result'] == 1 }
+    @cohorts.values.each { |c| sum += c.success_count } if cohort_name.nil?
+    sum
   end
 
   def conversion_rate(cohort = nil)
@@ -33,8 +46,8 @@ class DataManager
 
   def calc_chi_square
     values = {}
-    prepare_data_by_group(values, :agroup, "A")
-    prepare_data_by_group(values, :bgroup, "B")
+    prepare_data_by_group(values, :agroup, :A)
+    prepare_data_by_group(values, :bgroup, :B)
     tester = ABAnalyzer::ABTest.new(values)
     tester.chisquare_p.round(3)
   end
@@ -48,8 +61,6 @@ class DataManager
   private
 
   def cohort_conversion_size(name)
-    @reader.data_hash.count do |item|
-      item['cohort'] == name && item['result'] == 1
-    end
+    @cohorts[name].success_count
   end
 end

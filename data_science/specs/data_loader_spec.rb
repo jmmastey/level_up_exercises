@@ -11,7 +11,7 @@ describe 'JsonReader' do
       end
     end
   end
-  describe '.load_data' do
+  describe '#load_data' do
     context 'when loading data' do
       it 'should load all elements' do
         expect(reader.load_data(JSON_FILE_PATH).count).to eq(2892)

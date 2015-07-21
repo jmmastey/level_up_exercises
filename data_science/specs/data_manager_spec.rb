@@ -32,13 +32,7 @@ describe 'DataManager' do
     end
   end
 
-  describe '.load' do
-    it 'should load a reader without blowing up' do
-      expect(manager.load(double_reader)).not_to be_nil
-    end
-  end
-
-  describe '.sample_size' do
+  describe '#sample_size' do
     context 'before loading a reader' do
       it 'should raise an exception' do
         expect { DataManager.new.sample_size }.to raise_error ArgumentError
@@ -53,21 +47,23 @@ describe 'DataManager' do
 
     context 'sample size per cohort' do
       it 'should have a total sample size of 1543 for cohort B' do
-        expect(manager.sample_size("B")).to eq(1543)
+        expect(manager.sample_size(:B)).to eq(1543)
       end
     end
 
     context 'sample size per cohort' do
       it 'should have a total sample size of 0 for cohort C' do
-        expect(manager.sample_size("C")).to eq(0)
+        expect(manager.sample_size(:C)).to eq(0)
       end
     end
   end
 
-  describe '.conversions_size' do
+  describe '#conversions_size' do
     context 'before loading a reader' do
       it 'should raise an error' do
-        expect { DataManager.new.conversion_rate }.to raise_error ArgumentError
+        expect do
+          DataManager.new.conversion_rate
+        end.to raise_error(ArgumentError)
       end
     end
 
@@ -79,35 +75,39 @@ describe 'DataManager' do
 
     context 'conversion count per cohort' do
       it 'should have a total conversion rate for cohort B' do
-        expect(manager.conversion_size("A")).to eq(47)
+        expect(manager.conversion_size(:A)).to eq(47)
       end
     end
   end
 
-  describe '.conversion_rate' do
+  describe '#conversion_rate' do
     context 'before loading a reader' do
       it 'should raise an error' do
-        expect { DataManager.new.conversion_rate }.to raise_error ArgumentError
+        expect do
+          DataManager.new.conversion_rate
+        end.to raise_error(ArgumentError)
       end
     end
 
     context 'conversion rate' do
       it 'A should have a conversion rate of 3.48%' do
-        expect(manager.conversion_rate("A")).to eq(3.48)
+        expect(manager.conversion_rate(:A)).to eq(3.48)
       end
     end
 
     context 'conversion rate' do
       it 'B should have a conversion rate of 5.12%' do
-        expect(manager.conversion_rate("B")).to eq(5.12)
+        expect(manager.conversion_rate(:B)).to eq(5.12)
       end
     end
   end
 
-  describe '.calculate_chi_square' do
+  describe '#calculate_chi_square' do
     context 'before loading a reader' do
       it 'should raise an error' do
-        expect { DataManager.new.calc_chi_square }.to raise_error ArgumentError
+        expect do
+          DataManager.new.calc_chi_square
+        end.to raise_error(ArgumentError)
       end
     end
 

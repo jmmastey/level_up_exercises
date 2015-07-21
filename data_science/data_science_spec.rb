@@ -13,7 +13,7 @@ describe DataScience do
   end
 
   it 'should correctly load a small json dataset' do
-    @calculator.data.should == [
+    @calculator.data_reader.should == [
         {'date' => '2014-03-20', 'cohort' => 'A', 'result' => 1},
         {'date' => '2014-03-20', 'cohort' => 'A', 'result' => 1},
         {'date' => '2014-03-20', 'cohort' => 'A', 'result' => 0},
@@ -29,7 +29,7 @@ describe DataScience do
     @calculator.total_size.should == 4
   end
 
-  it 'should correctly count the number of visitors' do
+  it 'should correctly count the number of conversions' do
     @calculator.number_of_conversions.should == 2
   end
 

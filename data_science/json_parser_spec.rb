@@ -16,7 +16,8 @@ describe JSONParser do
   end
 
   it 'should open simple files correctly' do
-    @parser.parse('json_test_files/simple.json').should == {
+    @parser.parse('json_test_files/simple.json').should == \
+    {
         'hello' => 'world',
         'goodbye' => 'moon',
         'dog' => 'cat',
@@ -29,8 +30,8 @@ describe JSONParser do
 
   it 'should load an array of hashes correctly' do
     @parser.parse('json_test_files/array_of_hashes.json').should == [
-        {'hello' => 'world'},
-        {'goodbye' => 'moon'}
+      {'hello' => 'world'},
+      {'goodbye' => 'moon'},
     ]
   end
 end

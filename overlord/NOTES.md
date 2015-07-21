@@ -85,3 +85,9 @@ I'm not sure how to handle that better at this point. Then again, I'm not a web 
 That's my thought as I head into providing default codes for the bomb. And it is _not_ a happy thought.
 
 At this point, I've found that while I like the basis of Cucumber, implementation wise it is very lacking and is cumbersome. (It's Cucumbersome!) The benefit of course is executable statements. However, you could do a layer like this in RSpec as well. One layer of RSpec would be unit focused and the other would be so-called acceptance focused. If the fear is losing Given-When-Then, you could wrap various types of libraries around RSpec to provide similar Gherkin-like nomenclature. The nice thing is you wouldn't be tied to Gherkin in that case.
+
+### The Bomb Code as Object?
+
+I'm at the point now where the check for valid code (in the `/trigger` route) has to be done in the post route for the index page as well. The problem is I can't call `trigger.valid?` during the post because a trigger instance has not been created. Does this suggest that a bomb code should be its own entity? On the one hand, an object for a code seems like overkill. On the other hand, various (admittedly contradictory) sources on Ruby coding practices suggest treating a value (like my codes) as objects. Or I suppose it could be the bomb itself. The whole idea was that the bomb was made of multiple components, one of which happens to be the trigger. But the trigger is mainly the mechanism for activating or deactivating the bomb. So now that I think on it, perhaps the codes should apply to a Bomb entity, which also starts getting more towards a modular entity overall.
+
+Alternatively, I could just do jQuery validation. This, after all, is largely what I would want as a user. Why post something to the server when validation can be done in the interface itself without a server call?

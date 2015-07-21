@@ -1,3 +1,5 @@
 .idea/
 spec/examples.txt
 spec/reports
+public/js/jquery-2.1.4.min.js
+public/js/jquery.validate.min.js

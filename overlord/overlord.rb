@@ -23,6 +23,17 @@ module Project
     set :views, 'app/views'
     set :haml, format: :html5
 
+    get '/' do
+      haml :index
+    end
+
+    post '/' do
+      session[:activate] = params[:activation_code]
+      session[:deactivate] = params[:deactivation_code]
+
+      redirect to('/trigger')
+    end
+
     get '/trigger' do
       @trigger = session[:trigger] || Trigger.new
       session[:trigger] = @trigger

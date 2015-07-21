@@ -83,3 +83,5 @@ As of now, my code feels disjointed. I have two checks for what a valid code mea
 I'm not sure how to handle that better at this point. Then again, I'm not a web app developer nor do I have a desire to be. Nor, in fact, was I hired to be. So I'm not sure how much I should be focusing on this since the alleged goal of this exercise is to focus on Cucumber tests. So far, by necessity, that has been focused on the least.
 
 That's my thought as I head into providing default codes for the bomb. And it is _not_ a happy thought.
+
+At this point, I've found that while I like the basis of Cucumber, implementation wise it is very lacking and is cumbersome. (It's Cucumbersome!) The benefit of course is executable statements. However, you could do a layer like this in RSpec as well. One layer of RSpec would be unit focused and the other would be so-called acceptance focused. If the fear is losing Given-When-Then, you could wrap various types of libraries around RSpec to provide similar Gherkin-like nomenclature. The nice thing is you wouldn't be tied to Gherkin in that case.

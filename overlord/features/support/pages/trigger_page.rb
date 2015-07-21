@@ -1,4 +1,4 @@
-class BombPage < SitePrism::Page
+class TriggerPage < SitePrism::Page
   set_url '/trigger'
 
   element :trigger_code, 'input[id=trigger-code]'

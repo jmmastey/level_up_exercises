@@ -1,45 +1,37 @@
-Given(/^a newly booted bomb$/) do
-  on_visit(BombPage)
-end
-
 Given(/^an activated bomb$/) do
-  on_visit(BombPage) do |page|
+  on_visit(TriggerPage) do |page|
     page.enter_code('1234')
     page.change_bomb_state
   end
 end
 
-Given(/^a bomb provisioned with a custom activation code of "([^"]*)"$/) do |code|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 When(/^a bomb is booted for the first time$/) do
-  on_visit(BombPage)
+  on_visit(TriggerPage)
 end
 
 When(/^an incorrect (?:activation|deactivation) code is entered$/) do
-  on(BombPage) do |page|
+  on(TriggerPage) do |page|
     page.enter_code('9999')
     page.change_bomb_state
   end
 end
 
 When(/^an invalid activation "([^"]*)" is entered$/) do |code|
-  on(BombPage) do |page|
+  on(TriggerPage) do |page|
     page.enter_code(code)
     page.change_bomb_state
   end
 end
 
 When(/^an invalid deactivation "([^"]*)" is entered$/) do |code|
-  on(BombPage) do |page|
+  on(TriggerPage) do |page|
     page.enter_code(code)
     page.change_bomb_state
   end
 end
 
 When(/^a valid deactivation code is entered$/) do
-  on(BombPage) do |page|
+  on(TriggerPage) do |page|
     page.enter_code('0000')
     page.change_bomb_state
   end
@@ -50,14 +42,14 @@ When(/^the custom activation code is entered$/) do
 end
 
 When(/^the default activation code "([^"]*)" is entered$/) do |code|
-  on(BombPage) do |page|
+  on(TriggerPage) do |page|
     page.enter_code(code)
     page.change_bomb_state
   end
 end
 
 When(/^the default deactivation code "([^"]*)" is entered$/) do |code|
-  on(BombPage) do |page|
+  on(TriggerPage) do |page|
     page.enter_code(code)
     page.change_bomb_state
   end

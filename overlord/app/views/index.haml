@@ -1,1 +1,12 @@
-
+%form{action: '/', method: 'post'}
+  %label{for: 'activation-code'} Activation Code
+  %span
+    %em
+      Default: 1234
+  %input#activation-code{name: 'activation_code', type: 'text'}
+  %label{for: 'deactivation-code'} Deactivation Code
+  %span
+    %em
+      Default: 0000
+  %input#deactivation-code{name: 'deactivation_code', type: 'text'}
+  %input#provision-bomb{type: 'submit', value: 'Provision Your Bomb!'}

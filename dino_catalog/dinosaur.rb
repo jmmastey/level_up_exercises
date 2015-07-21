@@ -5,8 +5,8 @@ class Dinosaur
   def initialize(info)
     @name = info['Name']
     @period = info['Period']
-    @continent = info['Continent'] || ''
-    setup_diet(info['Diet'])
+    @continent = info['Continent']
+    @diet = info['Diet']
     @weight = info['Weight_in_lbs']
     @walking = info['Walking']
     @description = info['Description'] || ''
@@ -25,60 +25,12 @@ class Dinosaur
   end
 
   def to_s
-    name_to_s + period_to_s + continent_to_s + diet_to_s + \
-      weight_to_s + walking_to_s + description_to_s
-  end
-
-  def name_to_s
-    'Name: ' + @name
-  end
-
-  def period_to_s
-    if @period == ''
-      ''
-    else
-      ' Period: ' + @period
+    row = ''
+    instance_variables.each do |var|
+      value = instance_variable_get(var)
+      row << "#{var}: #{value} " unless value == ''
     end
-  end
-
-  def continent_to_s
-    if @continent == ''
-      ''
-    else
-      ' Continent: ' + @continent
-    end
-  end
-
-  def diet_to_s
-    if @diet == ''
-      ''
-    else
-      ' Diet: ' + @diet
-    end
-  end
-
-  def weight_to_s
-    if @weight == ''
-      ''
-    else
-      ' Weight: ' + @weight
-    end
-  end
-
-  def walking_to_s
-    if @walking == ''
-      ''
-    else
-      ' Walking: ' + @walking
-    end
-  end
-
-  def description_to_s
-    if @description == ''
-      ''
-    else
-      ' Description: ' + @description
-    end
+    row.delete('@')
   end
 
   def walking_type?(type)
@@ -94,10 +46,10 @@ class Dinosaur
   end
 
   def above_weight?(weight)
-    @weight.to_i > weight.to_i
+    @weight.to_i >= weight.to_i
   end
 
   def below_weight?(weight)
-    @weight.to_i < weight.to_i
+    @weight.to_i <= weight.to_i
   end
 end

@@ -1,28 +1,21 @@
 require_relative('dinosaur.rb')
+require_relative('dinodex.rb')
 
 class DinodexParserCSV
-  def initialize(filepath)
-    parse(filepath)
-  end
-
   def parse(filepath)
-    @file = open(filepath, 'r')
+    @path = filepath
+    @file = open(@path, 'r')
     generate_categories
     generate_data
-    @dinosaurs
   end
 
   def generate_categories
     @categories = clean_row(@file.first)
-    convert_african
+    convert_african if african_csv?
   end
 
   def generate_data
-    @dinosaurs = []
-    @file.each do |row|
-      row_data = Hash[@categories.zip(clean_row(row))]
-      @dinosaurs << Dinosaur.new(row_data)
-    end
+    @dinosaurs = @file.map { |row| generate_dinosaur(row) }
   end
 
   def clean_row(row)
@@ -33,10 +26,28 @@ class DinodexParserCSV
     end
   end
 
+  def generate_dinosaur(row)
+    dino_hash = Hash[@categories.zip(clean_row(row))]
+    convert_african_hash(dino_hash) if african_csv?
+    Dinosaur.new(dino_hash)
+  end
+
+  def african_csv?
+    @path == 'african_dinosaur_export.csv'
+  end
+
   def convert_african
     convert('Genus', 'Name')
-    convert('Carnivore', 'Diet')
     convert('Weight', 'Weight_in_lbs')
+  end
+
+  def convert_african_hash(map)
+    map['Continent'] = 'Africa'
+    if map['Carnivore'] == 'Yes'
+      map['Diet'] = 'Carnivore'
+    else
+      map['Diet'] = 'Not Specified'
+    end
   end
 
   def convert(from, to)

@@ -1,8 +1,11 @@
 require 'json'
-require 'set'
 require './dino.rb'
+require './dino_compare.rb'
 
 class Dinodex
+  OPERATIONS = %w(less_than greater_than equal not_equal)
+  OPERATIONS += %w(less_or_equal greater_or_equal like not_like)
+
   attr_accessor :dinos
 
   def initialize(dinos)
@@ -13,67 +16,14 @@ class Dinodex
     @dinos.each { |dino| puts "#{dino}\n" }
   end
 
-  def less_than(field, value)
+  def method_missing(name, *args, &block) 
+    return unless OPERATIONS.include?(name.to_s)
+    return unless args.count == 2
+
     match = @dinos.select do |dino|
-      dino.less_than?(field, value)
+      new_args = [dino.send(args[0]), args[1]]
+      DinoCompare.send("#{name}?", *new_args)
     end
-
-    Dinodex.new(match)
-  end
-
-  def greater_than(field, value)
-    match = @dinos.select do |dino|
-      dino.greater_than?(field, value)
-    end
-
-    Dinodex.new(match)
-  end
-
-  def equal(field, value)
-    match = @dinos.select do |dino|
-      dino.equal?(field, value)
-    end
-
-    Dinodex.new(match)
-  end
-
-  def not_equal(field, value)
-    match = @dinos.select do |dino|
-      dino.not_equal?(field, value)
-    end
-
-    Dinodex.new(match)
-  end
-
-  def less_or_equal(field, value)
-    match = @dinos.select do |dino|
-      dino.less_or_equal?(field, value)
-    end
-
-    Dinodex.new(match)
-  end
-
-  def greater_or_equal(field, value)
-    match = @dinos.select do |dino|
-      dino.greater_or_equal?(field, value)
-    end
-
-    Dinodex.new(match)
-  end
-
-  def like(field, value)
-    match = @dinos.select do |dino|
-      dino.like?(field, value)
-    end
-
-    Dinodex.new(match)
-  end
-
-  def not_like(field, value)
-    match = @dinos.select do |dino|
-      dino.not_like?(field, value)
-    end
-
     Dinodex.new(match)
   end
 
@@ -85,7 +35,7 @@ class Dinodex
 
   def sort(field)
     sorted = @dinos.sort do |a, b|
-      a.compare(field, b.send(field))
+      DinoCompare.compare(a, field, b.send(field))
     end
     Dinodex.new(sorted)
   end

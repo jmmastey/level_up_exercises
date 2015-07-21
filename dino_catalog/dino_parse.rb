@@ -1,7 +1,8 @@
 require 'csv'
+require 'set'
 require './dino.rb'
 
-class Dinoparse
+class DinoParse
   attr_reader :dinos
 
   def initialize(dinofile)
@@ -10,8 +11,8 @@ class Dinoparse
   end
 
   private
-  
-  def filter(d_attrs)
+
+  def drop_unused_attributes(d_attrs)
     to_delete = Set.new(%w(carnivore genus weight_in_lbs))
     d_attrs.delete_if { |key, _| to_delete.member?(key) }
   end
@@ -22,8 +23,9 @@ class Dinoparse
 
     new_diet = (d_attrs['carnivore'] ? 'Carnivore' : "Non-Carnivore")
     d_attrs['diet'] = d_attrs['diet'] || new_diet
+    d_attrs['continent'] = d_attrs['continent'] || 'Africa'
 
-    filter(d_attrs)
+    drop_unused_attributes(d_attrs)
   end
 
   def parse(dinofile)

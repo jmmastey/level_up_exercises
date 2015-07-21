@@ -1,16 +1,16 @@
 require './dinodex.rb'
 require './dino.rb'
-require './dinoparse.rb'
+require './dino_parse.rb'
 
-class Dinotest
+class DinoTest
   attr_accessor :dinodex
 
   def initialize
     file1 = 'dinodex.csv'
     file2 = 'african_dinosaur_export.csv'
 
-    dinos1 = Dinoparse.new(file1).dinos
-    dinos2 = Dinoparse.new(file2).dinos
+    dinos1 = DinoParse.new(file1).dinos
+    dinos2 = DinoParse.new(file2).dinos
 
     @dinodex = Dinodex.new(dinos1 + dinos2)
   end
@@ -88,7 +88,7 @@ class Dinotest
     case_str << " you implement a JSON export feature?"
 
     puts case_str
-    puts dinodex.not_like('continent', 'America').to_json
+    puts dinodex.equal('continent', 'Africa').to_json
   end
 
   def test_all
@@ -98,5 +98,5 @@ class Dinotest
   end
 end
 
-Dinotest.new.test_all
+DinoTest.new.test_all
 # DONE

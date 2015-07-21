@@ -2,7 +2,7 @@ require_relative '../lib/cohort_data'
 
 describe CohortData do
   let(:file) { '../data_export_2014_06_20_15_59_02.json' }
-  let(:cohort_data)  { CohortData.new(file) }
+  let(:cohort_data) { CohortData.new(file) }
   describe '#intialize' do
     it 'loads cohort data' do
       cohort_data.load_json_data_into_array

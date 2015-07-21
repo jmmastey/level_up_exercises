@@ -35,7 +35,7 @@ module Project
     end
 
     get '/trigger' do
-      @trigger = session[:trigger] || Trigger.new
+      @trigger = session[:trigger] || provide_trigger
       session[:trigger] = @trigger
       haml :trigger
     end

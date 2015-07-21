@@ -17,6 +17,18 @@ RSpec.describe Trigger do
     end
   end
 
+  context 'custom configuration' do
+    let(:trigger) { Trigger.new(activate: '9292', deactivate: '1138') }
+
+    it 'accepts a custom activation code' do
+      expect(trigger.activation_code).to eq('9292')
+    end
+
+    it 'accepts a custom deactivation code' do
+      expect(trigger.deactivation_code).to eq('1138')
+    end
+  end
+
   context 'activation' do
     let(:trigger) { Trigger.new }
 

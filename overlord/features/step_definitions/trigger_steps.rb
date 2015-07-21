@@ -1,12 +1,9 @@
 Given(/^an activated bomb$/) do
-  on_visit(TriggerPage) do |page|
+  on_visit(ProvisionPage).create_bomb
+  on(TriggerPage) do |page|
     page.enter_code('1234')
     page.change_bomb_state
   end
-end
-
-When(/^a bomb is booted for the first time$/) do
-  on_visit(TriggerPage)
 end
 
 When(/^an incorrect (?:activation|deactivation) code is entered$/) do
@@ -37,8 +34,18 @@ When(/^a valid deactivation code is entered$/) do
   end
 end
 
-When(/^the custom activation code is entered$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^the custom activation code "([^"]*)" is entered$/) do |code|
+  on(TriggerPage) do |page|
+    page.enter_code(code)
+    page.change_bomb_state
+  end
+end
+
+When(/^the custom deactivation code "([^"]*)" is entered$/) do |code|
+  on(TriggerPage) do |page|
+    page.enter_code(code)
+    page.change_bomb_state
+  end
 end
 
 When(/^the default activation code "([^"]*)" is entered$/) do |code|
@@ -56,7 +63,7 @@ When(/^the default deactivation code "([^"]*)" is entered$/) do |code|
 end
 
 Then(/^the bomb will display as inactive$/) do
-  expect(@page.bomb_status.text).to eq('Bomb is inactive.')
+  expect(on(TriggerPage).bomb_status.text).to eq('Bomb is inactive.')
 end
 
 Then(/^the bomb will display as active$/) do

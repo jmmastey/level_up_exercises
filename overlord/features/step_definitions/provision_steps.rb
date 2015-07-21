@@ -1,8 +1,15 @@
 Given(/^a newly booted bomb$/) do
-  on_visit(TriggerPage)
-  # Need to make this ProvisionPage and have it click provision button.
+  on_visit(ProvisionPage).create_bomb
 end
 
 Given(/^a bomb provisioned with a custom activation code of "([^"]*)"$/) do |code|
   on_visit(ProvisionPage).create_bomb(activate: code)
+end
+
+Given(/^a bomb provisioned with a custom deactivation code of "([^"]*)"$/) do |code|
+  on_visit(ProvisionPage).create_bomb(deactivate: code)
+end
+
+When(/^a bomb is booted for the first time$/) do
+  on_visit(ProvisionPage).create_bomb
 end

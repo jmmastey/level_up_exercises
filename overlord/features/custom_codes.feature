@@ -7,5 +7,11 @@ Ability: Allow Custom Bomb Codes
   @javascript
   Scenario: Custom activation codes can be provided
     Given a bomb provisioned with a custom activation code of "9292"
-    When the custom activation code is entered
+    When the custom activation code "9292" is entered
     Then the bomb will display as active
+
+  @javascript
+  Scenario: Custom deactivation codes can be provided
+    Given a bomb provisioned with a custom deactivation code of "1138"
+    When the custom deactivation code "1138" is entered
+    Then the bomb will display as inactive

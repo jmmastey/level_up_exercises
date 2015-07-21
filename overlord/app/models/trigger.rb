@@ -4,10 +4,11 @@ class Trigger
 
   attr_reader :activation_code, :deactivation_code
 
-  def initialize
+  def initialize(options = {})
+    @options = options
     @active = false
-    @activation_code = DEFAULT_ACTIVATION_CODE
-    @deactivation_code = DEFAULT_DEACTIVATION_CODE
+    setup_activation_code
+    setup_deactivation_code
   end
 
   def activate(code)
@@ -36,5 +37,21 @@ class Trigger
 
   def valid?(code)
     code =~ /(^\d{4}$)/ ? true : false
+  end
+
+  def setup_activation_code
+    if @options[:activate].nil? || @options[:activate].empty?
+      @activation_code = DEFAULT_ACTIVATION_CODE
+    else
+      @activation_code = @options[:activate]
+    end
+  end
+
+  def setup_deactivation_code
+    if @options[:deactivate].nil? || @options[:deactivate].empty?
+      @deactivation_code = DEFAULT_DEACTIVATION_CODE
+    else
+      @deactivation_code = @options[:deactivate]
+    end
   end
 end

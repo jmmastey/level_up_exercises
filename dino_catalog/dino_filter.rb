@@ -19,7 +19,7 @@ class DinoFilter
   end
 
   def specialized_search(dinosaurs, block)
-    dinosaurs.find_all do |dino|
+    dinosaurs.select do |dino|
       attr_value = dino.method(dino_attr).call
       downcase_attr_value = attr_value.to_s.downcase
       block.call(downcase_attr_value, desired_value)

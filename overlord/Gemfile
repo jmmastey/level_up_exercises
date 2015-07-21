@@ -1,6 +1,17 @@
 # A sample Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby '2.0.0'
 
-gem "sinatra"
+gem 'sinatra'
+
+gem 'cucumber'
+gem 'cucumber-sinatra'
+gem 'coffee-script'
+
+gem 'capybara'
+
+gem 'rspec-rails' # library of Rails assertions
+
+gem 'capybara-screenshot', group: :test
+gem 'poltergeist', group: :test

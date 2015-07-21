@@ -1,0 +1,27 @@
+<p>
+
+  <% if the_bomb.active? %>
+      <br>Bomb active
+      <br>Bomb created successfully
+  <% else %>
+      <br>Bomb inactive
+      <br>Bomb creation failed
+  <% end %>
+
+<br>
+
+  <% if the_bomb.armed? || the_bomb.active?%>
+      <a href="javascript: void(0)">Boot A Bomb</a>
+  <% else %>
+      <a href='/boot/' >Boot A Bomb</a>
+  <% end %>
+
+<form action="/arm/" method="POST">
+  <label for="arming-code">Code: </label><input type="text" name="armingcode" id="armingcode">
+  <input type="submit" class='btn btn-primary' value="Arm Bomb">
+</form>
+
+<form action="/disarm/" method="POST">
+  <label for="disarming-code">Code: </label><input type="text" name="disarmingcode" id="disarmingcode">
+  <input type="submit" class='btn btn-primary' value="Disarm Bomb">
+</form>

@@ -6,6 +6,7 @@ class DataManager
   attr_accessor :reader
 
   def initialize(reader)
+    raise ArgumentError, "reader not initialized" unless reader
     @reader = reader
     @cohorts = { A: init_cohort('A'), B: init_cohort('B') }
   end
@@ -21,7 +22,6 @@ class DataManager
   end
 
   def sample_size(cohort_name = nil)
-    raise ArgumentError, "reader not initialized" unless @reader
     sum = 0
     return 0 if @cohorts[cohort_name].nil? unless cohort_name.nil?
     sum = @cohorts[cohort_name].total_sample_size unless cohort_name.nil?
@@ -30,7 +30,6 @@ class DataManager
   end
 
   def conversion_size(cohort_name = nil)
-    raise ArgumentError, "reader not initialized" unless @reader
     sum = 0
     return cohort_conversion_size(cohort_name) if cohort_name
     @cohorts.values.each { |c| sum += c.success_count } if cohort_name.nil?
@@ -38,7 +37,6 @@ class DataManager
   end
 
   def conversion_rate(cohort = nil)
-    raise ArgumentError, "reader not initialized" unless @reader
     converted = conversion_size(cohort)
     total = sample_size(cohort)
     ((converted.to_f / total.to_f) * 100).round(2)

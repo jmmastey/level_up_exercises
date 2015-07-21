@@ -35,7 +35,7 @@ describe 'DataManager' do
   describe '#sample_size' do
     context 'before loading a reader' do
       it 'should raise an exception' do
-        expect { DataManager.new.sample_size }.to raise_error ArgumentError
+        expect { DataManager.new(nil).sample_size }.to raise_error ArgumentError
       end
     end
 
@@ -62,7 +62,7 @@ describe 'DataManager' do
     context 'before loading a reader' do
       it 'should raise an error' do
         expect do
-          DataManager.new.conversion_rate
+          DataManager.new(nil).conversion_rate
         end.to raise_error(ArgumentError)
       end
     end
@@ -84,7 +84,7 @@ describe 'DataManager' do
     context 'before loading a reader' do
       it 'should raise an error' do
         expect do
-          DataManager.new.conversion_rate
+          DataManager.new(nil).conversion_rate
         end.to raise_error(ArgumentError)
       end
     end
@@ -106,7 +106,7 @@ describe 'DataManager' do
     context 'before loading a reader' do
       it 'should raise an error' do
         expect do
-          DataManager.new.calc_chi_square
+          DataManager.new(nil).calc_chi_square
         end.to raise_error(ArgumentError)
       end
     end

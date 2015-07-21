@@ -68,9 +68,9 @@ define(function(require){
   App.Model = Backbone.Model.extend({
     fetchWait: function(){
       var self = this;
-      
+
       $.ajax({
-        url: this.url() + this.id,
+        url: this.url,
         type: 'GET',
         async: false,
         success: function(attributes) {

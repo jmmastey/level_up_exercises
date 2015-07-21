@@ -14,7 +14,6 @@ define(function(require){
         this.view = new NewBombView();
       },
       existing_bomb: function() {
-        
         this.view = new ExistingBombView();
       }
     }

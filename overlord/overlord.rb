@@ -26,8 +26,7 @@ class Overlord < Sinatra::Base
 
   get '/bomb' do
     content_type :json
-    bomb_count = session[:bomb].nil? ? 0 : 1
-    { count: bomb_count }.to_json
+    bomb_to_json
   end
 
   post '/bomb' do

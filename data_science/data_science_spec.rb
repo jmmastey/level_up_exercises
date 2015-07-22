@@ -9,10 +9,10 @@ describe DataScience do
 
   it 'should correctly load a small json dataset' do
     expect(@calculator.data_reader).to eq([
-      {'date' => '2014-03-20', 'cohort' => 'A', 'result' => 1},
-      {'date' => '2014-03-20', 'cohort' => 'A', 'result' => 1},
-      {'date' => '2014-03-20', 'cohort' => 'A', 'result' => 0},
-      {'date' => '2014-03-20', 'cohort' => 'A', 'result' => 0},
+      { 'date' => '2014-03-20', 'cohort' => 'A', 'result' => 1 },
+      { 'date' => '2014-03-20', 'cohort' => 'A', 'result' => 1 },
+      { 'date' => '2014-03-20', 'cohort' => 'A', 'result' => 0 },
+      { 'date' => '2014-03-20', 'cohort' => 'A', 'result' => 0 },
     ])
   end
 

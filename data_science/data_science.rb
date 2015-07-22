@@ -28,15 +28,15 @@ class DataScience
   end
 
   def confidence_interval(cohort, confidence)
-    successes = number_of_conversions('A')
-    trials = total_size('A')
+    successes = number_of_conversions(cohort)
+    trials = total_size(cohort)
     ABAnalyzer.confidence_interval(successes, trials, confidence)
   end
 
   def chi_square_confidence
     values = {}
-    values[:a] = { success: number_of_conversions('A'), total: total_size('A')}
-    values[:b] = { success: number_of_conversions('B'), total: total_size('B')}
+    values[:a] = { success: number_of_conversions('A'), total: total_size('A') }
+    values[:b] = { success: number_of_conversions('B'), total: total_size('B') }
     ab_test = ABAnalyzer::ABTest.new(values)
     ab_test.chisquare_p
   end

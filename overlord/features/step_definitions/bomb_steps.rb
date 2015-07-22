@@ -1,5 +1,5 @@
 Given(/^there are no bombs$/) do
-  http_delete '/bomb/delete'
+  http_delete '/bomb'
   visit '/'
   expect(page).to have_content('No bomb created yet')
 end

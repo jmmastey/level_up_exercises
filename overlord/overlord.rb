@@ -40,7 +40,7 @@ class Overlord < Sinatra::Base
     error
   end
 
-  delete '/bomb/delete' do
+  delete '/bomb' do
     session.delete(:bomb)
   end
 

@@ -22,4 +22,6 @@ $(document).ready(function() {
         },
         errorLabelContainer: "#code-error"
     });
+
+    $('#code-error').hide();
 });

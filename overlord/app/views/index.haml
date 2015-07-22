@@ -4,6 +4,7 @@
       .settings-panel{class: 'panel panel-info'}
         .panel-body
           .col-sm-5
+            %span{id: 'code-error'}
             %form{action: '/', method: 'post', id: 'provision_bomb'}
               %label{for: 'activation-code'} Activation Code
               %span
@@ -15,5 +16,4 @@
                 %em
                   Default: 0000
               %input#deactivation-code{name: 'deactivation_code', type: 'text', class: 'form-control'}
-              %span{id: 'code-error'}
               %input#provision-bomb{type: 'submit', value: 'Provision Your Bomb!', class: 'btn btn-lg btn-block btn-danger'}

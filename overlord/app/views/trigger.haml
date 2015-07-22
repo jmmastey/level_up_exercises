@@ -1,19 +1,29 @@
-- if trigger.activated?
-  %label#bomb-status Bomb is active.
-- else
-  %label#bomb-status Bomb is inactive.
+.component#trigger
+  - if flash[:invalid_code]
+    %label#notice= flash[:invalid_code]
 
-- if flash[:invalid_code]
-  %label#notice= flash[:invalid_code]
+  - if flash[:invalid_activation]
+    %label#notice= flash[:invalid_activation]
+  - if flash[:invalid_deactivation]
+    %label#notice= flash[:invalid_deactivation]
 
-- if flash[:invalid_activation]
-  %label#notice= flash[:invalid_activation]
-- if flash[:invalid_deactivation]
-  %label#notice= flash[:invalid_deactivation]
+  %table
+    - if trigger.activated?
+      %caption{id: 'bomb-status', class: 'alert alert-danger'}
+        %strong Bomb is active.
+    - else
+      %caption{id: 'bomb-status', class: 'alert alert-success'}
+        %strong Bomb is inactive.
 
-%input#trigger-code{type: 'text'}
+    %tr
+      %td{colspan: 2}
+        %div#trigger-code-display
+          %fieldset
+            %input#trigger-code{class: 'form-control input-lg', type: 'text'}
 
-- if trigger.activated?
-  %input#change-bomb-state{type: 'submit', value: 'Deactivate'}
-- else
-  %input#change-bomb-state{type: 'submit', value: 'Activate'}
+    %tr
+      %td{colspan: 2}
+        - if trigger.activated?
+          %input#change-bomb-state{type: 'submit', value: 'Deactivate', class: 'btn btn-lg btn-block btn-danger'}
+        - else
+          %input#change-bomb-state{type: 'submit', value: 'Activate', class: 'btn btn-lg btn-block btn-danger'}

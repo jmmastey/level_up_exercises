@@ -17,4 +17,20 @@ body { background: url("../img/escheresque.png"); padding: 0; margin: 0; font-fa
 .main .content { padding: 20px; }
 
 /* line 55, ../scss/overlord.scss */
+.config { color: white; text-transform: uppercase; width: 415px; margin: 0 auto; }
+/* line 60, ../scss/overlord.scss */
+.config .activation-code-group { float: left; }
+/* line 64, ../scss/overlord.scss */
+.config .deactivation-code-group { float: right; }
+/* line 68, ../scss/overlord.scss */
+.config input { padding: 10px; border: 1px solid #000; font-family: "Share"; font-size: 1.5em; width: 200px; text-align: center; letter-spacing: 5px; }
+/* line 77, ../scss/overlord.scss */
+.config input:focus { outline: none; border: 1px solid #ff6666; -moz-box-shadow: 0 0 10px red; -webkit-box-shadow: 0 0 10px red; box-shadow: 0 0 10px red; }
+
+/* line 85, ../scss/overlord.scss */
+.set-bomb { clear: both; color: white; display: block; text-decoration: none; width: 150px; margin: 20px auto; padding: 20px 30px; background-color: red; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+/* line 95, ../scss/overlord.scss */
+.set-bomb:hover { background-color: #990000; cursor: pointer; }
+
+/* line 101, ../scss/overlord.scss */
 .name { color: red; }

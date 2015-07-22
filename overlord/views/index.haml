@@ -4,13 +4,16 @@
     %script{src: '//code.jquery.com/jquery-1.11.3.min.js'}
     %link{rel: "stylesheet", href: "css/overlord.css"}
   %body
-    %div.header
+    .header
       %h1.logo OVERLORD
-      %div.bomb-state Off
+      .bomb-state Off
 
     %section.main
       %header
-        Hello
+        Welcome,
         %span.name Overlord
-      %div.content
-        %button.boot Boot Up Bomb
+      .content
+        .panel.configure_bomb
+          =haml :configure_bomb
+        .panel.activate_bomb
+        .panel.deactivate_bomb

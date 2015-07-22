@@ -34,7 +34,7 @@ class Bomb
 
   def activate(code)
     return unless on?
-    @state = ACTIVATED if code == @activation_code
+    @state = ACTIVATED if code == @activation_code || activated?
   end
 
   def deactivate(code)

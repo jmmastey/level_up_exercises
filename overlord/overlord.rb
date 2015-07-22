@@ -5,11 +5,21 @@ require 'sinatra'
 enable :sessions
 
 get '/' do
-  session[:bomb] = nil
+  session[:bomb] = Bomb.new unless session[:bomb]
   haml :index
 end
 
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
+post '/configure' do
+  set_bomb(params)
+end
+
+post '/activate' do
+end
+
+post '/deactivate' do
+end
+
+def set_bomb(params)
+  bomb = session[:bomb]
+  bomb.boot_up(params[:activation_code], params[:deactivation_code])
 end

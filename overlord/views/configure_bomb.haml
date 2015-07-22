@@ -1,0 +1,10 @@
+%form.config{action: "/configure", method: "post", name: "config"}
+  %div.activation-code-group
+    %label{for: "activation-code"} Activation code:
+    %p
+      %input.activation-code{type: "text", name: "activation-code"}
+  %div.deactivation-code-group
+    %label{for: "deactivation-code"} Deactivation code:
+    %p
+      %input.deactivation-code{type: "text", name: "deactivation-code"}
+  %a.set-bomb{onclick: "document.config.submit(); false;"} Set Bomb

@@ -48,6 +48,9 @@ class Overlord < Sinatra::Base
     content_type :json
 
     bomb = session[:bomb]
+
+    return error if bomb.active?
+
     if bomb.correct_activation_code?(params[:activation_code])
       bomb.activate
       {

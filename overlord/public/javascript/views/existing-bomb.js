@@ -115,6 +115,10 @@ define(function(require){
         return;
       }
 
+      if ($button.val().toLowerCase() == "activate" && this.bomb.armed()) {
+        return;
+      }
+
       this.view = new KeypadView($button.val());
       this.view.render();
 

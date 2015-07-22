@@ -114,6 +114,10 @@ function(App, $, _){
 
     exploded: function() {
       return this.get("status") == "exploded";
+    },
+
+    armed: function() {
+      return this.get("status") == "armed";
     }
   });
 

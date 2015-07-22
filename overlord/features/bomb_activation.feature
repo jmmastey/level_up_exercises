@@ -18,3 +18,7 @@ Feature: Bomb Activation
     When I enter in the incorrect activation code
     Then I should see an invalid code error message
     And the status to equal INACTIVE
+
+  Scenario: Activation button should disable after bomb is activated
+    When I enter in the correct activation code
+    Then the activation button should not work

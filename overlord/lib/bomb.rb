@@ -58,4 +58,8 @@ class Bomb
   def correct_explode_pin?(pin)
     @explode_pin == pin.to_i
   end
+
+  def active?
+    @status == 'armed' && !exploded?
+  end
 end

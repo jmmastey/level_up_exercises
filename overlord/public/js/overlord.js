@@ -14,7 +14,7 @@ timer = {
     updateTimeDisplay : function(time) {
         this.time = time;
         if (time < 0) {
-            //window.location.reload();
+            window.location.reload();
         }
         this.updateDisplay();
     },

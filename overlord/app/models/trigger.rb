@@ -20,7 +20,6 @@ class Trigger
     return if detonated?
     @attempts += 1
 
-    # @active = false if valid?(code) && correct_deactivation?(code)
     reset_bomb if valid?(code) && correct_deactivation?(code)
   end
 
@@ -52,6 +51,7 @@ class Trigger
 
   def reset_bomb
     @active = false
+    @attempts = 0
   end
 
   def setup_activation_code

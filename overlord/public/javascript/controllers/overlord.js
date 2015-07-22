@@ -3,6 +3,7 @@ define(function(require){
   var BaseApp = require("app");
   var NewBombView = require("views/new-bomb");
   var ExistingBombView = require("views/existing-bomb");
+  var ExplodedView = require("views/exploded-bomb");
 
   var OverlordController = BaseApp.Controller.extend({
     initialize: function(){
@@ -15,6 +16,9 @@ define(function(require){
       },
       existing_bomb: function() {
         this.view = new ExistingBombView();
+      },
+      explode: function() {
+        this.view = new ExplodedView();
       }
     }
   });

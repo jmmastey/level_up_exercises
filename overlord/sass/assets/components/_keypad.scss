@@ -1,0 +1,43 @@
+#keypad {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 100;
+
+  text-align: center;
+
+  width: 100%;
+  height: 100%;
+
+  @include transparent-background(0, 0, 0, 0.5);
+
+  .content {
+    @extend .center;
+    @include vertical-align(40%);
+    @include image-url("crossword.png");
+    
+    width: 375px;
+    padding: 25px 50px;
+    border: 1px solid $grey;
+
+    #display {
+      @extend .center;
+      width: 85%;
+      height: 35px;
+      background: $black;
+      color: $digital-green;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      font-size: 18pt;
+    }
+    
+    .key {
+      @extend .col-xs-4;
+    }
+
+    .key-0 {
+      @extend .col-xs-offset-4;
+    }
+
+
+  }
+}

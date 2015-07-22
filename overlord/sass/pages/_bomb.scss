@@ -20,7 +20,7 @@
   @include image-url("crossword.png");
   margin-top: 150px;
   padding: 50px;
-  border: 2px solid #ccc;
+  border: 2px solid $grey;
 
   position: relative;
 
@@ -46,14 +46,14 @@
 
   #timer {
     @extend .center;
-    background: #000;
+    background: $black;
     width: 80%;
     height: 50px;
     margin-top: -25px;
     margin-bottom: 10px;
 
     p {
-      @include blink(1.5s);
+      @include blink(1s);
       color: red;
       font-size: 24pt;
       letter-spacing: 4px;
@@ -76,10 +76,11 @@
     display: block;
     width: 150px;
     height: 35px;
-    background: #ccc;
-    border: 1px solid #000;
-    margin-top: 20px;
+    background: $black;
+    margin-top: 25px;
+    padding-top: 7px;
+    color: $digital-green;
+    letter-spacing: 2px;
   }
-  
 
 }

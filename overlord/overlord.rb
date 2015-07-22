@@ -26,6 +26,7 @@ class Overlord < Sinatra::Base
 
   get '/bomb' do
     content_type :json
+    session[:bomb].explode if session[:bomb].exploded?
     bomb_to_json
   end
 
@@ -36,11 +37,53 @@ class Overlord < Sinatra::Base
       session[:bomb] = bomb
       return bomb_to_json
     end
-    { error: true }.to_json
+    error
   end
 
   delete '/bomb/delete' do
     session.delete(:bomb)
+  end
+
+  post '/bomb/activate' do
+    content_type :json
+
+    bomb = session[:bomb]
+    if bomb.correct_activation_code?(params[:activation_code])
+      bomb.activate
+      {
+        status: session[:bomb].status,
+        timer: session[:bomb].timer,
+        pin: session[:bomb].explode_pin,
+      }.to_json
+    else
+      error
+    end
+  end
+
+  post '/bomb/deactivate' do
+    content_type :json
+
+    bomb = session[:bomb]
+    if bomb.correct_deactivation_code?(params[:deactivation_code])
+      bomb.deactivate
+      bomb_to_json
+    else
+      bomb.increment_deactivation_code_attempts
+      bomb.explode if bomb.reached_deactivation_attempt_limit?
+      error
+    end
+  end
+
+  post '/bomb/explode' do
+    content_type :json
+    bomb = session[:bomb]
+
+    bomb.explode if bomb.correct_explode_pin?(params[:explode_pin])
+    bomb_to_json
+  end
+
+  def error(type = true)
+    { error: type }.to_json
   end
 
   def bomb_to_json

@@ -62,7 +62,11 @@ define(function(require){
   });
 
   App.View = Backbone.View.extend({
-
+    triggerView: function(viewName) {
+      window.setTimeout(function(){
+        App.events.trigger("render-view", viewName);
+      }, 10);
+    }
   });
 
   App.Model = Backbone.Model.extend({

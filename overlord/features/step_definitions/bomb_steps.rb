@@ -67,7 +67,7 @@ When(/^I click the activate button$/) do
   click_button('Activate')
 end
 
-When(/^enter in the incorrect activation code$/) do
+When(/^(?:I )?enter in the incorrect activation code$/) do
   click_button("9")
   click_button("9")
   click_button("9")

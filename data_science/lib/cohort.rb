@@ -9,7 +9,6 @@ class Cohort
     @size = size
     @conversion_count = conversion_count
     @conversion_rate_interval = calculate_conversion_rate_interval
-    @confidence_of_significance = nil
   end
 
   def calculate_conversion_rate_interval
@@ -18,13 +17,12 @@ class Cohort
     ABAnalyzer.confidence_interval(conversion_count, size, interval_confidence)
   end
 
-  def interesting?
-    better_than_random? && significant?
+  def better_than?(other)
+    interval_midpoint > other.interval_midpoint
   end
 
-  def better_than_random?
-    estimate = (rate_min + rate_max) / 2
-    estimate > 0.5
+  def interval_midpoint
+    (rate_min + rate_max) / 2
   end
 
   def rate_min
@@ -35,20 +33,11 @@ class Cohort
     conversion_rate_interval[1]
   end
 
-  def significant?
-    significance_level = 95.0
-    confidence_of_significance >= significance_level
-  end
-
-  def confidence_of_significance
-    @confidence_of_significance ||= calculate_significance
-  end
-
-  def calculate_significance
-    return 0 if size == 0
+  def significance_of_difference(other)
     cohort = { yes: conversion_count, no: size - conversion_count }
-    fake_random = { yes: size / 2, no: size / 2 }
-    test = ABAnalyzer::ABTest.new(name => cohort, :random => fake_random)
+    other_cohort = { yes: other.conversion_count,
+                     no: other.size - other.conversion_count }
+    test = ABAnalyzer::ABTest.new(name => cohort, other.name => other_cohort)
     p = test.chisquare_p
     p_to_percentage(p)
   end
@@ -58,9 +47,7 @@ class Cohort
   end
 
   def to_s
-    string = "#{readable_basic_data}  "
-    string << "#{readable_conversion_rate}  "
-    string << readable_interesting
+    "#{readable_basic_data}  #{readable_conversion_rate}"
   end
 
   def readable_basic_data
@@ -80,15 +67,5 @@ class Cohort
   def rate_max_percent
     uncapped_percentage = (rate_max * 100).round
     [uncapped_percentage, 100].min
-  end
-
-  def readable_interesting
-    if interesting?
-      string = "It is significantly better than random with a "
-      string << "#{confidence_of_significance.round}% confidence."
-      string
-    else
-      "It is not significantly better than random."
-    end
   end
 end

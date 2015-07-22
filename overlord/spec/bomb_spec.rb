@@ -44,17 +44,31 @@ describe Bomb do
       }
     end
 
+    let(:invalid_params) do
+      {
+        "activation_code" => '000a',
+        "deactivation_code" => '1234',
+      }
+    end
+
     context 'with correct activation code' do
       before { bomb.update_codes(params) }
       it 'is booted correctly' do
         expect(bomb).to be_booted
       end
     end
+
+    context 'with incorrect activation code' do
+      before { bomb.update_codes(invalid_params) }
+      it 'is still off' do
+        expect(bomb).to be_off
+      end
+    end
   end
 
   describe '#activate' do
     let(:bomb) { Bomb.new }
-    context 'with the correct code' do
+    context 'with the default activation code' do
       before { bomb.activate('1234') }
 
       it 'is activated' do
@@ -62,7 +76,7 @@ describe Bomb do
       end
     end
 
-    context 'with the incorrect code' do
+    context 'with the incorrect activation code' do
       before { bomb.activate('1111') }
 
       it 'is not activated' do

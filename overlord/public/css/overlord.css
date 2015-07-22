@@ -1,0 +1,20 @@
+@import url(http://fonts.googleapis.com/css?family=Poiret+One|Share:400,700);
+/* line 3, ../scss/overlord.scss */
+body { background: url("../img/escheresque.png"); padding: 0; margin: 0; font-family: "Share"; }
+
+/* line 10, ../scss/overlord.scss */
+.header { position: relative; padding: 20px; background-color: rgba(0, 0, 0, 0.3); }
+/* line 16, ../scss/overlord.scss */
+.header .logo { font-family: "Poiret One"; letter-spacing: 20px; text-align: center; color: white; margin: 0; }
+/* line 24, ../scss/overlord.scss */
+.header .bomb-state { color: white; position: absolute; padding: 10px 20px; background-color: red; top: 20px; right: 20px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+
+/* line 35, ../scss/overlord.scss */
+.main { width: 800px; margin: 50px auto; text-align: center; background-color: rgba(0, 0, 0, 0.3); -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
+/* line 42, ../scss/overlord.scss */
+.main header { -moz-border-radius: 10px 10px 0 0; -webkit-border-radius: 10px; border-radius: 10px 10px 0 0; background-color: #000; font-size: 1.3em; padding: 10px; color: #fff; }
+/* line 50, ../scss/overlord.scss */
+.main .content { padding: 20px; }
+
+/* line 55, ../scss/overlord.scss */
+.name { color: red; }

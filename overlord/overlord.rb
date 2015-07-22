@@ -9,6 +9,7 @@ require 'tilt/haml'
 require_relative 'overlord_helpers'
 require_relative 'app/models/bomb'
 require_relative 'app/models/trigger'
+require_relative 'app/models/timer'
 
 module Project
   class Overlord < Sinatra::Base
@@ -29,12 +30,16 @@ module Project
     post '/' do
       session[:activate] = params[:activation_code]
       session[:deactivate] = params[:deactivation_code]
+      session[:countdown] = params[:countdown_value]
 
       redirect to('/bomb')
     end
 
     get '/bomb' do
       @bomb = session[:bomb] || provide_bomb
+
+      puts "@bomb = #{@bomb}"
+
       session[:bomb] = @bomb
       haml :bomb
     end
@@ -43,7 +48,7 @@ module Project
       @bomb = session[:bomb]
 
       if trigger.valid?(params[:code])
-        trigger_bomb_state(trigger)
+        trigger_bomb_state(trigger, timer)
       else
         flash[:invalid_code] = 'The code must be four numeric characters.'
       end
@@ -53,6 +58,10 @@ module Project
 
     def trigger
       @bomb.components[:trigger]
+    end
+
+    def timer
+      @bomb.components[:timer]
     end
   end
 end

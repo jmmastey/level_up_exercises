@@ -1,6 +1,4 @@
 class TriggerPage < SitePrism::Page
-  set_url '/trigger'
-
   element :trigger_code, 'input[id=trigger-code]'
   element :bomb_state, 'input[id=change-bomb-state]'
   element :notice, 'label[id=notice]'

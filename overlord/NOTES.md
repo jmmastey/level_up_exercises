@@ -99,3 +99,7 @@ I'm now at the point where I really, really need this bomb to be modular, the tr
 ### Moderate Styling
 
 At this point in the process, my client and I decided it would be worth it to spend some time on the interface aspects of the bomb provisioning application. Some of this styling was going to have an impact on the trigger mechanism, in particular. The idea was to limit the modality of the trigger mechanism by providing a keypad style interface.
+
+### Timer
+
+The bomb clearly needs a timer. A lack of timer means the bomb explodes pretty much immediately. So this is the next component to get in place. What I found interesting here is that while having my Cucumber tests really was fairly invaluable, the design of the tests -- in terms of their level of abstraction -- had to change (potentially) as the design changed. Yet the implementation of the tests necessarily didn't. So my bombw as going from being nothing more than a trigger to a bomb device that had components (a trigger and, soon, a timer). Having the page objects really helped with this to an extent, although I found that it probably would have been better to stick with the highest level abstraction in them (bomb) rather than going with the implementation as it was (trigger). I'm still not sure on this.

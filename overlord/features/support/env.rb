@@ -7,3 +7,4 @@ require_relative '../../overlord'
 
 Capybara.app = Project::Overlord
 Capybara.javascript_driver = :poltergeist
+# Capybara.javascript_driver = :selenium

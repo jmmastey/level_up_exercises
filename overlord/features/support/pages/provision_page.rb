@@ -3,15 +3,17 @@ class ProvisionPage < SitePrism::Page
 
   element :activation_code, 'input[id=activation-code]'
   element :deactivation_code, 'input[id=deactivation-code]'
+  element :countdown_value, 'input[id=countdown-value]'
   element :provision_bomb, 'input[id=provision-bomb]'
-  element :code_error, 'span[id=code-error]'
+  element :provision_error, 'span[id=provision-error]'
 
   def create_bomb(options = {})
     activation_code.set(options[:activate]) if options[:activate]
+    deactivation_code.set(options[:deactivate]) if options[:deactivate]
     provision_bomb.click
   end
 
-  def code_error_message
-    code_error.text
+  def provision_error_message
+    provision_error.text
   end
 end

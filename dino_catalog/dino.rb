@@ -16,13 +16,13 @@ class Dino
   end
 
   def to_s
-    properties.inject("") do |str, tuple|
-      fattr = "#{tuple[0].capitalize}:".ljust(20)
+    properties.inject("") do |output_str, tuple|
+      formatted_attribute = "#{tuple[0].capitalize}:".ljust(20)
 
-      no_val = tuple[1].nil? || tuple[1].strip == ''
-      fval = no_val ? '---' : tuple[1]
+      bad_value = tuple[1].nil? || tuple[1].strip == ''
+      formatted_value = bad_value ? '---' : tuple[1]
 
-      str << "#{fattr}#{fval}\n"
+      output_str << "#{formatted_attribute}#{formatted_value}\n"
     end
   end
 end

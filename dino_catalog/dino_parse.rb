@@ -7,25 +7,25 @@ class DinoParse
 
   def initialize(dinofile)
     dino_data = parse(dinofile)
-    @dinos = dino_data.map { |dino_dat| Dino.new(dino_dat) }
+    @dinos = dino_data.map { |attribute_hash| Dino.new(attribute_hash) }
   end
 
   private
 
-  def drop_unused_attributes(d_attrs)
+  def drop_unused_attributes(dino)
     to_delete = Set.new(%w(carnivore genus weight_in_lbs))
-    d_attrs.delete_if { |key, _| to_delete.member?(key) }
+    dino.delete_if { |key, _| to_delete.member?(key) }
   end
 
-  def consolidate(d_attrs)
-    d_attrs['weight'] = d_attrs['weight_in_lbs'] || d_attrs['weight']
-    d_attrs['name'] = d_attrs['name'] || d_attrs['genus']
+  def consolidate(dino)
+    dino['weight'] = dino['weight_in_lbs'] || dino['weight']
+    dino['name'] = dino['name'] || dino['genus']
 
-    new_diet = (d_attrs['carnivore'] ? 'Carnivore' : "Non-Carnivore")
-    d_attrs['diet'] = d_attrs['diet'] || new_diet
-    d_attrs['continent'] = d_attrs['continent'] || 'Africa'
+    new_diet = (dino['carnivore'] ? 'Carnivore' : "Non-Carnivore")
+    dino['diet'] = dino['diet'] || new_diet
+    dino['continent'] = dino['continent'] || 'Africa'
 
-    drop_unused_attributes(d_attrs)
+    drop_unused_attributes(dino)
   end
 
   def parse(dinofile)

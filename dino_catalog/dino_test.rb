@@ -5,7 +5,7 @@ require './dino_parse.rb'
 class DinoTest
   attr_accessor :dinodex
 
-  def initialize
+  def initialize(filenames)
     file1 = 'dinodex.csv'
     file2 = 'african_dinosaur_export.csv'
 

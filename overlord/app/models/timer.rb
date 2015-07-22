@@ -27,4 +27,14 @@ class Timer
   def started?
     started
   end
+
+  def detonated?
+    return false unless started?
+    @detonation < Time.now
+  end
+
+  def reset(time = DEFAULT_COUNTDOWN)
+    @time_remaining = time
+    @detonation = Time.now + @time_remaining
+  end
 end

@@ -7,6 +7,7 @@ class Trigger
   def initialize(options = {})
     @options = options
     @active = false
+    @attempts = 0
     setup_activation_code
     setup_deactivation_code
   end
@@ -16,7 +17,11 @@ class Trigger
   end
 
   def deactivate(code)
-    @active = false if valid?(code) && correct_deactivation?(code)
+    return if detonated?
+    @attempts += 1
+
+    # @active = false if valid?(code) && correct_deactivation?(code)
+    reset_bomb if valid?(code) && correct_deactivation?(code)
   end
 
   def activated?
@@ -37,6 +42,16 @@ class Trigger
 
   def valid?(code)
     code =~ /(^\d{4}$)/ ? true : false
+  end
+
+  def detonated?
+    @attempts > 2
+  end
+
+  private
+
+  def reset_bomb
+    @active = false
   end
 
   def setup_activation_code

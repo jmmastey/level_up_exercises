@@ -8,6 +8,10 @@ RSpec.describe Timer do
     it 'will not be started' do
       expect(timer).not_to be_started
     end
+
+    it 'will not be detonated' do
+      expect(timer).not_to be_detonated
+    end
   end
 
   context 'starting with the default value' do

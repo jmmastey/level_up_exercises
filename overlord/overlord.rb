@@ -35,11 +35,13 @@ module Project
       redirect to('/bomb')
     end
 
+    post '/set/:seconds' do
+      @bomb = session[:bomb]
+      timer.reset(params[:seconds].to_i)
+    end
+
     get '/bomb' do
       @bomb = session[:bomb] || provide_bomb
-
-      puts "@bomb = #{@bomb}"
-
       session[:bomb] = @bomb
       haml :bomb
     end

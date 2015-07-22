@@ -26,9 +26,17 @@ timer = {
     }
 }
 
+trigger = {
+    activate : function() {
+        $.post('/set/' + timer.time, function() {
+            window.location = '/enter/' + $('#trigger-code').val();
+        });
+    }
+}
+
 $(document).ready(function() {
     $('#change-bomb-state').click(function(e) {
-        window.location = '/enter/' + $('#trigger-code').val();
+        trigger.activate();
     });
 
     $('#provision_bomb').validate({

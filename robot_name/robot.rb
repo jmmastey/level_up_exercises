@@ -1,43 +1,53 @@
-class DuplicateName < RuntimeError; end
-class InvalidName < RuntimeError; end
+class DuplicateNameError < RuntimeError; end
+class InvalidNameError < RuntimeError; end
 
 class Registry
   @robot_names = []
-
-  def self.check_for_duplicate(name)
-    if @robot_names.include?(name)
-      raise DuplicateName, 'There was a problem generating the robot name!'
-    end
-  end
 
   def self.add_name(name)
     check_for_duplicate(name)
     @robot_names << name
   end
+
+  def self.check_for_duplicate(name)
+    if @robot_names.include?(name)
+      raise DuplicateNameError, 'Robot name already exists!'
+    end
+  end
+
+  private_class_method :check_for_duplicate
 end
 
 class Robot
   attr_accessor :name
 
-  CHAR_GENERATOR = -> { ('A'..'Z').to_a.sample }
-  NUM_GENERATOR = -> { rand(10) }
-
   def initialize(generator = nil)
-    @name = generator ? generator.call : generate_name
+    @name = generate_name(generator)
     validate_name
     Registry.add_name(@name)
   end
 
-  def validate_name
-    is_invalid = !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
-    raise InvalidName, 'Invalid name' if is_invalid
+  private
+
+  def generate_name(generator)
+    return generator.call if generator
+
+    chars = 2.times.map { generate_char }
+    digits = 3.times.map { generate_digit }
+    (chars + digits).inject("") { |name, char| name << char }
   end
 
-  def generate_name
-    @name = ""
-    2.times { @name << CHAR_GENERATOR.call }
-    3.times { @name << NUM_GENERATOR.call.to_s }
-    @name
+  def validate_name
+    is_invalid = !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
+    raise InvalidNameError, "#{name} is invalid" if is_invalid
+  end
+
+  def generate_char
+    ('A'..'Z').to_a.sample
+  end
+
+  def generate_digit
+    rand(10).to_s
   end
 end
 

@@ -82,18 +82,18 @@ function updatePage() {
   });
 }
 
-function timer(timer_end) {
-  updateTimer(getTimeString(getNumSecondsLeft(timer_end)));
+function timer(timerEnd) {
+  updateTimer(getTimeString(getNumSecondsLeft(timerEnd)));
   showTimer();
-  var timer_handler = setInterval(function() {
-    var numSecondsLeft = getNumSecondsLeft(timer_end);
+  var timerHandler = setInterval(function() {
+    var numSecondsLeft = getNumSecondsLeft(timerEnd);
     updateTimer(getTimeString(numSecondsLeft));
 
     if(deactivated) {
-      clearInterval(timer_handler);
+      clearInterval(timerHandler);
       updatePage();
     } else if (!deactivated && numSecondsLeft <= 0) {
-      clearInterval(timer_handler);
+      clearInterval(timerHandler);
       $.ajax({
         url: "/explode",
         type: "POST",
@@ -106,12 +106,12 @@ function timer(timer_end) {
   }, 500);
 }
 
-function getNumSecondsLeft(timer_end) {
+function getNumSecondsLeft(timerEnd) {
   var now = Math.floor(new Date().getTime() / 1000);
-  if (timer_end - now <= 0) {
+  if (timerEnd - now <= 0) {
     return 0;
   } else {
-    return (timer_end - now);
+    return (timerEnd - now);
   }
 }
 

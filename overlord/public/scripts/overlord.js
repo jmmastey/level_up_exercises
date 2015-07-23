@@ -53,7 +53,7 @@ function activatedUpdates(jsonObj) {
     attemptsRemaining = attemptsRemaining + " attempts remaining!)";
     document.getElementById("AttemptsRemaining").innerHTML = attemptsRemaining;
   }
-  timer(jsonObj['timer_end']);
+  timer(jsonObj.timer_end);
 }
 
 function deactivatedUpdates() {
@@ -148,7 +148,7 @@ function hideWarning() {
 }
 
 function showInputWarning() {
-  var text = "Only numeric input is allowed."
+  var text = "Only numeric input is allowed.";
   document.getElementById("Invalid").innerHTML = text;
 }
 

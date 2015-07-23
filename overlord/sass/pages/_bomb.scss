@@ -1,0 +1,87 @@
+
+.new-bomb {
+  .jumbotron {
+    @include image-url("crossword.png");
+  }
+}
+
+#bomb {
+  @extend .col-xs-8;
+  @extend .col-xs-offset-2;
+  @include image-url("bomb.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  height: 600px;
+}
+
+#bomb-panel {
+  @extend .col-xs-8;
+  @extend .col-xs-offset-2;
+  @include image-url("crossword.png");
+  margin-top: 150px;
+  padding: 50px;
+  border: 2px solid $grey;
+  min-width: 250px;
+
+  position: relative;
+
+  .bolt-top-left {
+    @include image-rotate(50deg);
+    position: absolute; top: 5px; left: 5px;
+  }
+
+  .bolt-top-right {
+    @include image-rotate(38deg);
+    position: absolute; top: 5px; right: 5px;
+  }
+
+  .bolt-bottom-left {
+    @include image-rotate(95deg);
+    position: absolute; bottom: 5px; left: 5px;
+  }
+
+  .bolt-bottom-right {
+    @include image-rotate(75deg);
+    position: absolute; bottom: 5px; right: 5px;
+  }
+
+  #timer {
+    @extend .center;
+    background: $black;
+    width: 80%;
+    height: 50px;
+    margin-top: -25px;
+    margin-bottom: 10px;
+
+    p {
+      @include blink(1s);
+      color: red;
+      font-size: 24pt;
+      letter-spacing: 4px;
+      animation: blink 1s steps(5, start) infinite;
+    }
+
+  }
+
+  p {
+    display: inline-block;
+    width: 120px;
+  }
+
+  input[type='text'] {
+    display: inline;
+  }
+
+  .status {
+    @extend .center;
+    display: block;
+    width: 150px;
+    height: 35px;
+    background: $black;
+    margin-top: 25px;
+    padding-top: 7px;
+    color: $digital-green;
+    letter-spacing: 2px;
+  }
+
+}

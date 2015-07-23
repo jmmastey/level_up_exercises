@@ -1,0 +1,20 @@
+<div id="bomb">
+  <div class="row">
+    <form id="bomb-panel">
+      <img src="images/bolt.png" class="bolt-top-left">
+      <img src="images/bolt.png" class="bolt-top-right">
+      <img src="images/bolt.png" class="bolt-bottom-left">
+      <img src="images/bolt.png" class="bolt-bottom-right">
+
+      <div id="timer"><p>{{this.timer}}</p></div>
+      
+      <div class="center">
+        <input type="button" value="Activate" class="btn btn-danger btn-md" />
+        <input type="button" value="Deactivate" class="btn btn-primary btn-md" />
+      </div>
+
+      <div class="status">{{ this.status }}</div>
+
+    </form>
+  </div>
+</div>

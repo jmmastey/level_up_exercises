@@ -1,0 +1,70 @@
+@mixin image-url($image) {
+  background-image: url(../images/#{$image});
+}
+
+@mixin image-rotate($degrees) {
+  -webkit-transform: rotate($degrees);
+  -moz-transform: rotate($degrees);
+  -ms-transform: rotate($degrees);
+  -o-transform: rotate($degrees);
+  transform: rotate($degrees);
+}
+
+
+@mixin blink($time) {
+  .blink {
+      -webkit-animation: blink $time linear infinite;
+      -moz-animation: blink $time linear infinite;
+      -ms-animation: blink $time linear infinite;
+      -o-animation: blink $time linear infinite;
+      animation: blink $time linear infinite;
+  }
+
+  @-webkit-keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 1; }
+      50.01% { opacity: 0; }
+      100% { opacity: 0; }
+  }
+
+  @-moz-keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 1; }
+      50.01% { opacity: 0; }
+      100% { opacity: 0; }
+  }
+
+  @-ms-keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 1; }
+      50.01% { opacity: 0; }
+      100% { opacity: 0; }
+  }
+
+  @-o-keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 1; }
+      50.01% { opacity: 0; }
+      100% { opacity: 0; }
+  }
+
+  @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 1; }
+      50.01% { opacity: 0; }
+      100% { opacity: 0; }
+  }
+}
+
+@mixin transparent-background($red, $green, $blue, $alpha) {
+    background-color: rgb($red, $green, $blue);
+    background-color: rgba($red, $green, $blue, $alpha);
+}
+
+@mixin vertical-align($offset) {
+    position: relative;
+    top: $offset;
+    -webkit-transform: translateY(-#{$offset});
+    -ms-transform: translateY(-#{$offset});
+    transform: translateY(-#{$offset});
+}

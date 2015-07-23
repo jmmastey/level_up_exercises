@@ -6,7 +6,7 @@ Ability: Provide Shipping Estimates
   And allow them to make decisions around high-buying times
 
   Background:
-    Given an authenticated user
+    Given an authenticated customer
 
   Scenario: Valid shipping address provided
     Given a cart with products that have been purchased

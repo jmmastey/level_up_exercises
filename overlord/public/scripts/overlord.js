@@ -148,7 +148,8 @@ function hideWarning() {
 }
 
 function showInputWarning() {
-  document.getElementById("Invalid").innerHTML = "Only numeric input is allowed.";
+  var text = "Only numeric input is allowed."
+  document.getElementById("Invalid").innerHTML = text;
 }
 
 function hideTimer() {

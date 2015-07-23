@@ -152,3 +152,7 @@ Then(/^the deactivation button should not work$/) do
   expect(page).not_to have_css("#keypad")
   expect(page).not_to have_content('Confirm')
 end
+
+Then(/^there should be an error dialogue$/) do
+  page.accept_alert
+end

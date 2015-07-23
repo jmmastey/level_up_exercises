@@ -1,9 +1,9 @@
-require 'rspec'
-require_relative 'constants'
-require_relative '../lib/json_reader'
+require_relative 'spec_helper'
 
-describe 'JsonReader' do
+describe JsonReader do
+
   let(:reader) { JsonReader.new }
+
   describe '#new' do
     context 'when initializing data reader' do
       it 'should not be nil' do
@@ -11,6 +11,7 @@ describe 'JsonReader' do
       end
     end
   end
+
   describe '#load_data' do
     context 'when loading data' do
       it 'should load all elements' do

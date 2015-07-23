@@ -1,22 +1,23 @@
-require 'rspec'
-require_relative '../lib/data_manager'
+require_relative 'spec_helper'
 
-def test_hash
-  result = []
-  1464.times { result << { 'cohort' => "B", "result" => 0 } }
-  1302.times { result << { 'cohort' => "A", "result" => 0 } }
-  47.times { result << { 'cohort' => "A", "result" => 1 } }
-  79.times { result << { 'cohort' => "B", "result" => 1 } }
-  result
-end
+describe DataManager do
 
-describe 'DataManager' do
+  let(:test_hash) do
+    result = []
+    1464.times { result << { 'cohort' => "B", "result" => 0 } }
+    1302.times { result << { 'cohort' => "A", "result" => 0 } }
+    47.times { result << { 'cohort' => "A", "result" => 1 } }
+    79.times { result << { 'cohort' => "B", "result" => 1 } }
+    result
+  end
+
   let(:double_reader) do
     double_reader = double
     allow(double_reader).to receive(:data_hash).and_return(test_hash)
     double_reader
   end
   let(:manager) { DataManager.new double_reader }
+  let(:data_manager_nil){DataManager.new(nil)}
 
   describe '#new' do
     context 'when initialized data manager' do
@@ -35,7 +36,7 @@ describe 'DataManager' do
   describe '#sample_size' do
     context 'before loading a reader' do
       it 'should raise an exception' do
-        expect { DataManager.new(nil).sample_size }.to raise_error ArgumentError
+        expect { data_manager_nil.sample_size }.to raise_error ArgumentError
       end
     end
 
@@ -62,7 +63,7 @@ describe 'DataManager' do
     context 'before loading a reader' do
       it 'should raise an error' do
         expect do
-          DataManager.new(nil).conversion_rate
+          data_manager_nil.conversion_rate
         end.to raise_error(ArgumentError)
       end
     end
@@ -84,7 +85,7 @@ describe 'DataManager' do
     context 'before loading a reader' do
       it 'should raise an error' do
         expect do
-          DataManager.new(nil).conversion_rate
+          data_manager_nil.conversion_rate
         end.to raise_error(ArgumentError)
       end
     end
@@ -106,7 +107,7 @@ describe 'DataManager' do
     context 'before loading a reader' do
       it 'should raise an error' do
         expect do
-          DataManager.new(nil).calc_chi_square
+          data_manager_nil.calc_chi_square
         end.to raise_error(ArgumentError)
       end
     end

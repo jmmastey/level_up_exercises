@@ -31,7 +31,9 @@ class DataManager
   def conversion_size(cohort_name = nil)
     conversions = 0
     return cohort_conversion_size(cohort_name) if cohort_name
-    @cohorts.values.each { |c| conversions += c.success_count } if cohort_name.nil?
+    if cohort_name.nil?
+      @cohorts.values.each { |c| conversions += c.success_count }
+    end
     conversions
   end
 

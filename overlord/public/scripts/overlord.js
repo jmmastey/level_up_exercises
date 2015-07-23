@@ -53,7 +53,7 @@ function activatedUpdates(jsonObj) {
     attemptsRemaining = attemptsRemaining + " attempts remaining!)";
     document.getElementById("AttemptsRemaining").innerHTML = attemptsRemaining;
   }
-  timer(jsonObj.timer_end);
+  timer(jsonObj['timer_end']);
 }
 
 function deactivatedUpdates() {
@@ -68,7 +68,7 @@ function deactivatedUpdates() {
 function explodedUpdates() {
   deactivated = true;
   hideTimer();
-  var explodedLabelText = "To deactiv ent fjds as;dfasåß∂¬ƒåƒ∆åå…ßˆƒ˙Ω©∫˚∫´å: ";
+  var explodedLabelText = "To deactiv ent fjds as;dfasåß∂¬ƒåƒ∆å…ßˆƒ˙Ω©∫˚∫´å: ";
   document.getElementById("bombState").innerHTML = "!@#$%^&*!@#&$!";
   document.getElementById("formLabel").innerHTML = explodedLabelText;
   document.getElementById("AttemptsRemaining").innerHTML = "";

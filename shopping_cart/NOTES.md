@@ -1,0 +1,7 @@
+The notion fo "happy path", "sad path", "bad path" is, at least in testing circles, not always a good way to break things down from a conceptual standpoint. This is more what developers do rather than what testers do.
+
+The division sounds fun but the notion of "sad" and "bad" can be vague and non-specific. That's the exact opposite of what you want from operational language. Even "happy path" can be based on who it is happy for. After all, if the application provides an error when it should that, for us, _is_ a happy path. This is exactly the nomenclature conundrum the industry got itself into with "positive testing" and "negative testing."
+
+What is undeniably accurate is that testing is broken down into test conditions and data conditions. In both cases, those conditions can be categorized as those that are valid and those that are invalid.
+
+Also note that Cucumber usage suggests a distinction between "Feature" and "Ability" which I will utilize here. Generally the "Feature" is the overall aspect of what you are providing: customers can purchase products. The "Ability" is each specific aspect of behavior that allows that feature to be realized. So adding products to a cart is an ability, as is the ability to use coupons, etc. This is a change that Cucumber folks have been slow to adopt. (I'm biased on this because I was one of the people that got the Cucumber maintainers to add this functionality as part of Gherkin.)

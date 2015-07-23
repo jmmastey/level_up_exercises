@@ -16,10 +16,16 @@ class RedditCast
 
   def channel_up
     @current_channel = (@current_channel + 1) % @channels.count
+    puts "Channel is now #{channel}"
   end
 
   def channel_down
     @current_channel = (@current_channel - 1) % @channels.count
+    puts "Channel is now #{channel}"
+  end
+
+  def channel
+    @channels[@current_channel]
   end
 
   def skip_show

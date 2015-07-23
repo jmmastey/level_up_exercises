@@ -1,56 +1,48 @@
-require './reddit_search.rb'
+require './search.rb'
+require './search_iterator.rb'
 
-class SearchSet
-  include Enumerable
+class SearchSet < SearchIterator
+  attr_accessor :searches
 
-  LIMIT = 5
-  attr_accessor :reddit_searches, :aggregate_posts, :original_queries
-
-  def initialize(queries)
+  def initialize(queries: [''], limit: 20)
+    @page_number = 0
     @original_queries = queries
-    @reddit_searches = queries.map do |query|
-      puts "Searching for #{query}..."
-      RedditSearch.new(query, limit: LIMIT)
+    @searches = queries.map do |search_query|
+      Search.new(query: search_query, limit: limit / queries.count )
     end
     aggregate_searches
   end
 
   def aggregate_searches
-    @aggregate_posts = @reddit_searches.inject([]) do |posts, search|
+    @posts = @searches.inject([]) do |posts, search|
       posts += search.posts
     end
-    @aggregate_posts.shuffle!
+    @posts.shuffle!
   end
 
-  def next_page
-    @reddit_searches.each do |search|
-      search.next_page
-    end
-    aggregate_searches
+  def next_page?
+    @searches.any?(&:next_page?)
   end
 
-  def more_results?
-    @reddit_searches.any?(&:more_results?)
-  end
-
-  def each(&block)
-    @aggregate_posts.each(&block)
-  end
-
-  def list
-    each_with_index do |post, idx|
-      next if post.nsfw?
-      puts "[ #{idx} ] #{post}"
-    end
+  def prev_page?
+    @searches.any?(&:prev_page?)
   end
 
   def to_s
-    str = "#<SearchSet: #queries='#{@original_queries}' "
-    str << "results=#{@aggregate_posts.count} "
-    str << "more_results?=#{more_results?}>"
+    str = "#<SearchSet: queries='#{@original_queries}' "
+    str << "#{}results=#{@posts.count} "
+    str << "next_page?=#{next_page?} "
+    str << "prev_page?=#{prev_page?}>"
   end
 
-  def inspect
-    to_s
+  private
+
+  def change_page(to: 'next')
+    if to == 'next'
+      @searches.each(&:next_page)
+    else
+      @searches.each(&:prev_page)
+    end
+    aggregate_searches
   end
 end

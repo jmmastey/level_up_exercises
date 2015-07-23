@@ -22,4 +22,12 @@ class Channel
   def show_prev
 
   end
+
+  def to_s
+    "#<Channel: name='#{@name}'>"
+  end
+
+  def inspect
+    to_s
+  end
 end

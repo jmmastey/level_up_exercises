@@ -28,6 +28,7 @@
       "SpaceX",
       "Space travel",
       "Star wars"
-    ]}
+    ]},
+    { "Name" : "Everything", "Queries" : []}
   ]
 }

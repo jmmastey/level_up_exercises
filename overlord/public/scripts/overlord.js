@@ -1,5 +1,3 @@
-"use strict";
-
 var deactivated = true;
 
 function submitCode() {
@@ -44,12 +42,16 @@ function analyzeData(jsonObj) {
 
 function activatedUpdates(jsonObj) {
   deactivated = false;
-  document.getElementById("bombState").innerHTML = "<span style=\"color:red\">Activated!</span>";
-  document.getElementById("formLabel").innerHTML = "To deactivate, enter your deactivation code: ";
+  var bombState = "<span style=\"color:red\">Activated!</span>";
+  var deactivateLabel = "To deactivate, enter your deactivation code: ";
+  document.getElementById("bombState").innerHTML = bombState;
+  document.getElementById("formLabel").innerHTML = deactivateLabel;
   if (jsonObj.attempts_remaining <= 0) {
     explodedUpdates();
   } else if (jsonObj.attempts_remaining < 3) {
-    document.getElementById("AttemptsRemaining").innerHTML = "(" + jsonObj.attempts_remaining + " attempts remaining!)";
+    var attemptsRemaining = "(" + jsonObj.attempts_remaining;
+    attemptsRemaining = attemptsRemaining + " attempts remaining!)";
+    document.getElementById("AttemptsRemaining").innerHTML = attemptsRemaining;
   }
   timer(jsonObj.timer_end);
 }
@@ -57,16 +59,18 @@ function activatedUpdates(jsonObj) {
 function deactivatedUpdates() {
   deactivated = true;
   hideTimer();
+  var activateLabel = "To activate, enter your activation code: ";
   document.getElementById("bombState").innerHTML = "Deactivated";
-  document.getElementById("formLabel").innerHTML = "To activate, enter your activation code: ";
+  document.getElementById("formLabel").innerHTML = activateLabel;
   document.getElementById("AttemptsRemaining").innerHTML = "";
 }
 
 function explodedUpdates() {
   deactivated = true;
   hideTimer();
+  var explodedLabelText = "To deactiv ent fjds as;dfasåß∂¬ƒåƒ∆åå…ßˆƒ˙Ω©∫˚∫´å: ";
   document.getElementById("bombState").innerHTML = "!@#$%^&*!@#&$!";
-  document.getElementById("formLabel").innerHTML = "To deactiv ent fjds as;dfasåß∂¬ƒåƒ∆åƒ…å¬˚∆å…ßˆƒ˙Ω©√∫˚∫´å: ";
+  document.getElementById("formLabel").innerHTML = explodedLabelText;
   document.getElementById("AttemptsRemaining").innerHTML = "";
   disableButtons();
 }
@@ -128,7 +132,7 @@ function getTimeString(seconds) {
 }
 
 function updateTimer(string) {
-  document.getElementById("timer").innerHTML = "<center><span style=\"font-size:200pt\">" + string + "</span></center>";
+  document.getElementById("timer").innerHTML = "" + string;
 }
 
 function showTimer() {
@@ -136,7 +140,7 @@ function showTimer() {
 }
 
 function showInvalid() {
-  document.getElementById("Invalid").innerHTML = "<span style=\"color:red\">Invalid!</span>";
+  document.getElementById("Invalid").innerHTML = "Invalid!";
 }
 
 function hideWarning() {
@@ -144,7 +148,7 @@ function hideWarning() {
 }
 
 function showInputWarning() {
-  document.getElementById("Invalid").innerHTML = "<span style=\"color:red\">Only numeric input is allowed.</span>";
+  document.getElementById("Invalid").innerHTML = "Only numeric input is allowed.";
 }
 
 function hideTimer() {

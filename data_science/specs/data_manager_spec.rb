@@ -91,13 +91,13 @@ describe 'DataManager' do
 
     context 'conversion rate' do
       it 'A should have a conversion rate of 3.48%' do
-        expect(manager.conversion_rate(:A)).to eq(3.48)
+        expect(manager.conversion_rate(:A)).to be_within(0.01).of(3.48)
       end
     end
 
     context 'conversion rate' do
       it 'B should have a conversion rate of 5.12%' do
-        expect(manager.conversion_rate(:B)).to eq(5.12)
+        expect(manager.conversion_rate(:B)).to be_within(0.01).of(5.12)
       end
     end
   end

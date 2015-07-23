@@ -38,7 +38,7 @@ class DataManager
   def conversion_rate(cohort = nil)
     converted = conversion_size(cohort)
     total = sample_size(cohort)
-    ((converted.to_f / total.to_f) * 100).round(2)
+    ((converted.to_f / total.to_f) * 100)
   end
 
   def calc_chi_square

@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %title Overlord!
+    %link{:rel => :stylesheet, :type => :"text/css", :href => "styles/styles.css"}
+    %script{:src => "//code.jquery.com/jquery-1.11.3.min.js"}
+    %script{:src => "//code.jquery.com/jquery-migrate-1.2.1.min.js"}
+    %script{:src => "scripts/overlord.js"}
+  %body
+    %p Welcome, evil genius.
+    The bomb is currently: 
+    %span{:style => "font-size:24pt"}
+      #bombState
+    %br
+    %form#codeForm{:action => "javascript:submitCode();"}
+      %label#formLabel{:for => "code"}
+      %input#formInput{:type => "text", :name => "code"}
+      %span{:style => "color:red"}
+        #Invalid
+      #AttemptsRemaining
+      %br
+      %input#formButton{:type => "submit", :value => "Submit", :class => "button"}
+    %center
+      %span{:style => "font-size:200pt"}
+        #timer
+    %br
+    %br
+    

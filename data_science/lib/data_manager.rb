@@ -46,7 +46,7 @@ class DataManager
     prepare_data_by_group(values, :agroup, :A)
     prepare_data_by_group(values, :bgroup, :B)
     tester = ABAnalyzer::ABTest.new(values)
-    tester.chisquare_p.round(3)
+    tester.chisquare_p
   end
 
   def prepare_data_by_group(values, group_name, group_code)

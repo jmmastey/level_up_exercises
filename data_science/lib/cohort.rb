@@ -1,6 +1,5 @@
 class Cohort
-  attr_reader :success_count
-  attr_reader :failure_count
+  attr_reader :success_count, :failure_count
 
   def initialize(success_count, failure_count)
     @success_count = success_count

@@ -2,23 +2,22 @@ require 'abanalyzer'
 require_relative 'cohort'
 
 class DataManager
-  @sample_size = 0
   attr_accessor :reader
 
   def initialize(reader)
     raise ArgumentError, "reader not initialized" unless reader
-    @reader = reader
-    @cohorts = { A: init_cohort('A'), B: init_cohort('B') }
+    @sample_size = 0
+    @cohorts = { A: init_cohort(reader, 'A'), B: init_cohort(reader, 'B') }
   end
 
-  def init_cohort(name)
-    one_count = @reader.data_hash.count do |item|
+  def init_cohort(reader, name)
+    success_count = reader.data_hash.count do |item|
       item['cohort'] == name && item['result'] == 1
     end
-    zero_count = @reader.data_hash.count do |item|
+    failure_count = reader.data_hash.count do |item|
       item['cohort'] == name && item['result'] == 0
     end
-    Cohort.new(one_count, zero_count)
+    Cohort.new(success_count, failure_count)
   end
 
   def sample_size(cohort_name = nil)

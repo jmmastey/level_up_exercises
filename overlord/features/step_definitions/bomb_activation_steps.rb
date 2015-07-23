@@ -9,7 +9,7 @@ When(/^I enter the activation code (\d+) for a bomb$/) do |code|
   click_button 'Arm Bomb'
 end
 
-Given(/^The bomb is unarmed$/) do
+Then(/^The bomb is unarmed$/) do
   expect(page).to have_text('Bomb Armed :false ')
 end
 

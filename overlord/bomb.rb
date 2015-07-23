@@ -1,5 +1,6 @@
 class Bomb
-  attr_reader :activation_code, :deactivation_code
+  attr_reader :activation_code
+  attr_reader :deactivation_code
   attr_reader :armed
   attr_reader :booted
   attr_reader :detonated
@@ -10,7 +11,7 @@ class Bomb
   def initialize
     @activation_code = '1234'
     @deactivation_code = '0000'
-    @booted = false
+    @booted = false #TODO: nil is falsy so see if can change the code in a way where do not need to explicitly initialize
     @armed = false
     @detonated = false
     @disarm_attempts = 0
@@ -20,7 +21,7 @@ class Bomb
     [ALLOWED_DISARM_ATTEMPTS - @disarm_attempts, 0].max
   end
 
-  def last_disarm_successful?
+  def last_disarm_successful? #TODO: And what if no disarm attempts have been made?
     @disarm_attempts == 0
   end
 

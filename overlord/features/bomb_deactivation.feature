@@ -4,13 +4,13 @@ Feature: Bomb Deactivation
     As a super villain
     I want to allow deactivation of the bomb
 
-    Scenario: super villain enters the correct deactivation code
+    Scenario: I enter the correct deactivation code
         Given A bomb is active and armed
         When I apply the disarming code "0000"
         Then The bomb should deactivate
         And The see a message that should say deactivation was successful
 
-    Scenario: super villain enters the incorrect deactivation code for the 1st time
+    Scenario: I enter the incorrect deactivation code for the 1st time
         Given A bomb is active and armed
         And An incorrect disarming code 7777 was entered 0 times since the bomb was activated
         When I apply the disarming code "9999"
@@ -18,7 +18,7 @@ Feature: Bomb Deactivation
         And The see a message that should say deactivation failed
         And The bomb should not explode
 
-    Scenario: super villain enters the incorrect deactivation code for the 2nd time
+    Scenario: I enter the incorrect deactivation code for the 2nd time
         Given A bomb is active and armed
         And An incorrect disarming code 7777 was entered 1 times since the bomb was activated
         When I apply the disarming code "9999"
@@ -26,7 +26,7 @@ Feature: Bomb Deactivation
         And I see that I have 1 attempts left
         And The bomb should not explode
 
-    Scenario: super villain enters the incorrect deactivation code for the 3rd time
+    Scenario: I enter the incorrect deactivation code for the 3rd time
         Given A bomb is active and armed
         And An incorrect disarming code 7777 was entered 2 times since the bomb was activated
         When I apply the disarming code "9999"

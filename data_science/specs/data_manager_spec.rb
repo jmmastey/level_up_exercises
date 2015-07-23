@@ -1,7 +1,6 @@
 require_relative 'spec_helper'
 
 describe DataManager do
-
   let(:test_hash) do
     result = []
     1464.times { result << { 'cohort' => "B", "result" => 0 } }
@@ -17,7 +16,7 @@ describe DataManager do
     double_reader
   end
   let(:manager) { DataManager.new double_reader }
-  let(:data_manager_nil){DataManager.new(nil)}
+  let(:data_manager_nil) { DataManager.new(nil) }
 
   describe '#new' do
     context 'when initialized data manager' do

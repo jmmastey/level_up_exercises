@@ -1,7 +1,6 @@
 require_relative 'spec_helper'
 
 describe JsonReader do
-
   let(:reader) { JsonReader.new }
 
   describe '#new' do

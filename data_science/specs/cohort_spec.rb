@@ -6,7 +6,7 @@ describe Cohort do
   describe '#new' do
     context 'when initializing a Cohort' do
       it 'should not be a Cohort' do
-        #todo - ask Dan about this ? What would be a good/valid test ?
+        # TODO: ask Dan about this ? What would be a good/valid test ?
         expect(cohort).to be_a(Cohort)
       end
     end

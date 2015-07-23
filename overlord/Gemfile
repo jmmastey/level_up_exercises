@@ -3,4 +3,10 @@ source "https://rubygems.org"
 
 ruby "2.0.0"
 
-gem "sinatra"
+gem 'sinatra'
+gem 'cucumber'
+gem 'haml'
+gem 'capybara'
+gem 'rspec'
+gem 'launchy'
+gem 'selenium-webdriver'

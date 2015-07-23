@@ -1,0 +1,26 @@
+- if @bomb.detonated?
+  = haml :detonate
+- else
+  .container
+    .row
+      .col-sm-12
+        .bomb-panel{class: 'panel panel-danger'}
+          .panel-heading
+            %h2{class: 'panel-title'}
+              Business is Booming!
+            %h5
+              Don't go
+              %strong
+                %ins fission
+              for more!
+              Avoid the con<strong><ins>fusion</ins></strong> of choice!
+              (See what we did there?)
+          .panel-body
+            %strong Preferential Eigenstate-Selecting Temporally-Dispersive Internet Bomb
+    .row#components
+      .col-sm-4
+        = haml :trigger
+      .col-sm-4
+        = haml :timer
+      .col-sm-4
+        = haml :device

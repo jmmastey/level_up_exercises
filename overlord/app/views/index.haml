@@ -1,0 +1,42 @@
+.container
+  .row
+    .col-sm-12
+      .intro-panel{class: 'panel panel-primary'}
+        .panel-heading
+          %h1{class: 'panel-title'}
+            Business is Booming!
+          %h5
+            Don't go
+            %strong
+              %ins fission
+            for more!
+            Avoid the con<strong><ins>fusion</ins></strong> of choice!
+            (See what we did there?)
+        .panel-body
+          Let's provision your bomb. Your bomb will come with some default
+          settings, that should be fine for your destruction needs. However,
+          you can customize a few aspects of your bomb. Fill in the details
+          below or simply leave them blank to accept our defaults.
+  .row
+    .col-sm-12
+      .settings-panel{class: 'panel panel-info'}
+        .panel-body
+          .col-sm-5
+            %span{id: 'provision-error'}
+            %form{action: '/', method: 'post', id: 'provision_bomb'}
+              %label{for: 'activation-code'} Activation Code
+              %span
+                %em
+                  Default: 1234
+              %input#activation-code{name: 'activation_code', type: 'text', class: 'form-control'}
+              %label{for: 'deactivation-code'} Deactivation Code
+              %span
+                %em
+                  Default: 0000
+              %input#deactivation-code{name: 'deactivation_code', type: 'text', class: 'form-control'}
+              %label{for: 'countdown-value'} Countdown Duration (in seconds)
+              %span
+                %em
+                  Default: 30
+              %input#countdown-value{name: 'countdown_value', type: 'text', class: 'form-control'}
+              %input#provision-bomb{type: 'submit', value: 'Provision Your Bomb!', class: 'btn btn-lg btn-block btn-danger'}

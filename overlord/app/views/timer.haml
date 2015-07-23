@@ -1,0 +1,7 @@
+.component#timer
+  .row
+    .timer-display
+      %fieldset{disabled: ''}
+        %input#timer-output{class: 'text-center col-sm-8 col-sm-offset-2 input-lg', type: 'text'}
+  %input#timer-countdown{name: 'timer-countdown', value: "#{timer.time_remaining}", type: 'hidden'}
+  %input#timer-started{name: 'timer-started', value: "#{timer.started?}", type: 'hidden'}

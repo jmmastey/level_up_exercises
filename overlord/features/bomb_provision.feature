@@ -22,7 +22,7 @@ Feature: Bomb Provisioning
   Scenario Outline: Custom activation codes must be four numeric characters
     Given the bomb provisioning page
     When an invalid custom activation <code> is provided
-    Then the provision process indicates the custom activation code is invalid
+    Then the user is told the custom activation code is invalid
 
     Examples:
       | code    |
@@ -35,7 +35,7 @@ Feature: Bomb Provisioning
   Scenario Outline: Custom deactivation codes must be four numeric characters
     Given the bomb provisioning page
     When an invalid custom deactivation <code> is provided
-    Then the provision process indicates the custom deactivation code is invalid
+    Then the user is told the custom deactivation code is invalid
 
     Examples:
       | code    |
@@ -48,7 +48,7 @@ Feature: Bomb Provisioning
   Scenario Outline: Custom countdown values must be a whole number of seconds
     Given the bomb provisioning page
     When an invalid custom countdown <value> is provided
-    Then the provision process indicates the custom countdown value is invalid
+    Then the user is told the custom countdown value is invalid
 
     Examples:
       | value |

@@ -3,7 +3,7 @@ module OverlordHelpers
     trigger = Trigger.new(activate: session[:activate],
         deactivate: session[:deactivate])
 
-    session[:countdown] = 30 if session[:countdown].empty?
+    set_countdown
 
     timer = Timer.new(session[:countdown].to_i)
 
@@ -28,5 +28,10 @@ module OverlordHelpers
   def incorrect_deactivation
     return unless trigger.activated?
     flash[:invalid_deactivation] = 'Incorrect deactivation code.'
+  end
+
+  def set_countdown
+    return unless session[:countdown].empty?
+    session[:countdown] = 30
   end
 end

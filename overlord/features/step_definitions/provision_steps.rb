@@ -38,19 +38,19 @@ When(/^an invalid custom countdown "([^"]*)" is provided$/) do |value|
   on(ProvisionPage).create_bomb(countdown: value)
 end
 
-Then(/^the provision process indicates the custom activation code is invalid$/) do
+Then(/^the user is told the custom activation code is invalid$/) do
   error_message = on(ProvisionPage).provision_error_message
   expect(error_message)
     .to eq('The activation code must be four numeric characters.')
 end
 
-Then(/^the provision process indicates the custom deactivation code is invalid$/) do
+Then(/^the user is told the custom deactivation code is invalid$/) do
   error_message = on(ProvisionPage).provision_error_message
   expect(error_message)
     .to eq('The deactivation code must be four numeric characters.')
 end
 
-Then(/^the provision process indicates the custom countdown value is invalid$/) do
+Then(/^the user is told the custom countdown value is invalid$/) do
   error_message = on(ProvisionPage).provision_error_message
   expect(error_message)
     .to eq('The countdown value must be a whole number.')

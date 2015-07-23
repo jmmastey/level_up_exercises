@@ -22,7 +22,7 @@ class DataManager
 
   def sample_size(cohort_name = nil)
     sum = 0
-    return 0 if @cohorts[cohort_name].nil? unless cohort_name.nil?
+    return 0 if !cohort_name.nil? && @cohorts[cohort_name].nil?
     sum = @cohorts[cohort_name].total_sample_size unless cohort_name.nil?
     @cohorts.values.each { |c| sum += c.total_sample_size } if cohort_name.nil?
     sum

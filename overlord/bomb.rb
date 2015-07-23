@@ -15,21 +15,22 @@ class Bomb
     @deactivation_attempts = 0
   end
 
-  def valid_code?(code)
-    code =~ /[0-9]+/
+  def readable_state
+    %w(Off On Activated Deactivated Destroyed)[@state]
   end
 
-  def set_codes(activation_code, deactivation_code)
-    unless valid_code?(activation_code) && valid_code?(deactivation_code)
-      raise InvalidCodeError, "Bomb attempted to boot up with invalid codes"
-    end
-    @activation_code = activation_code
-    @deactivation_code = deactivation_code
+  def valid_code?(code)
+    code =~ /^[0-9]+$/
+  end
+
+  def set_codes(a_code, d_code)
+    return false unless valid_code?(a_code) && valid_code?(d_code)
+    @activation_code = a_code
+    @deactivation_code = d_code
   end
 
   def boot_up(activation_code = "1234", deactivation_code = "0000")
-    set_codes(activation_code, deactivation_code)
-    @state = ON
+    @state = ON if set_codes(activation_code, deactivation_code)
   end
 
   def activate(code)
@@ -48,8 +49,12 @@ class Bomb
   end
 
   def detonate
-    return unless activated? && @deactivation_attempts >= 3
+    return if @deactivation_attempts < 3
     @state = DESTROYED
+  end
+
+  def attempts_left
+    3 - @deactivation_attempts
   end
 
   def on?

@@ -7,6 +7,14 @@ body {
   font-family: $sans_serif;
 }
 
+a {
+  color: red;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .header {
   $header_padding: 20px;
   position: relative;
@@ -17,18 +25,35 @@ body {
     font-family: $overlord_font;
     letter-spacing: 20px;
     text-align: center;
-    color: white;
     margin: 0;
+    a {
+      color: white;
+      text-decoration: none;
+      &:hover {
+        color: red;
+      }
+    }
   }
 
   .bomb-state {
     color: white;
     position: absolute;
-    padding: 10px 20px;
-    background-color: red;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    text-transform: uppercase;
     top: $header_padding;
     right: $header_padding;
     @include border-radius(5px);
+
+    &.off { background-color: red; }
+    &.on { background-color: green; }
+    &.activated {
+      color: black;
+      background-color: yellow;
+    }
+    &.deactivated { background-color: blue; }
+    &.destroyed { background-color: black; }
   }
 }
 
@@ -52,17 +77,26 @@ body {
   }
 }
 
-.config {
+.panel {
+  display: none;
   color: white;
+  &.display {
+    display: block;
+  }
+}
+
+.controls {
   text-transform: uppercase;
   width: 415px;
   margin: 0 auto;
-  .activation-code-group {
-    float: left;
-  }
+  &.config {
+    .activation-code-group {
+      float: left;
+    }
 
-  .deactivation-code-group {
-    float: right;
+    .deactivation-code-group {
+      float: right;
+    }
   }
 
   input {
@@ -82,7 +116,7 @@ body {
   }
 }
 
-.set-bomb {
+.btn {
   clear: both;
   color: white;
   display: block;
@@ -90,11 +124,26 @@ body {
   width: 150px;
   margin: 20px auto;
   padding: 20px 30px;
-  background-color: red;
   @include border-radius(5px);
+
+  // Default button color
+  background-color: red;
   &:hover {
     background-color: darken(red, 20%);
     cursor: pointer;
+  }
+  &.activate-bomb {
+    color: black;
+    background-color: yellow;
+    &:hover {
+      background-color: darken(yellow, 20%);
+    }
+  }
+  &.deactivate-bomb {
+    background-color: blue;
+    &:hover {
+      background-color: darken(blue, 20%);
+    }
   }
 }
 

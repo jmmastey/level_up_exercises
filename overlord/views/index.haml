@@ -1,19 +1,30 @@
 %html
   %head
     %title Overlord -- Watch the world burn
-    %script{src: '//code.jquery.com/jquery-1.11.3.min.js'}
+    %script{src: 'js/jquery-1.11.3.min.js'}
+    %script{src: 'js/sweetalert.min.js'}
     %link{rel: "stylesheet", href: "css/overlord.css"}
+    %link{rel: "stylesheet", href: "css/sweetalert.css"}
   %body
     .header
-      %h1.logo OVERLORD
-      .bomb-state Off
+      %h1.logo
+        %a{href: "/"} OVERLORD
+      .bomb-state= locals[:bomb_state]
 
     %section.main
       %header
-        Welcome,
-        %span.name Overlord
+        Welcome, almighty 
+        %span.name= locals[:name]
       .content
-        .panel.configure_bomb
+        .panel.configure_bomb.display
           =haml :configure_bomb
         .panel.activate_bomb
+          =haml :activate
         .panel.deactivate_bomb
+          =haml :deactivate
+        .panel.bomb_deactivated
+          =haml :deactivated
+        .panel.world_ended
+          =haml :destroyed
+
+  %script{src: 'js/overlord.js'}

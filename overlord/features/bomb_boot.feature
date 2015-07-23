@@ -15,7 +15,19 @@ Feature: Boot up bomb
 
   Scenario: Booting up the bomb with activation code configured
     Given I visit the home page
-    When I boot up the bomb with activation code 0987
+    When I configure the activation code to be 0987
+    And I boot up the bomb
     Then the bomb should be on
-    And the activation code should be set to 0987
-    
+
+  Scenario: Booting up the bomb with deactivation code configured
+    Given I visit the home page
+    When I configure the deactivation code to be 1111
+    And I boot up the bomb
+    Then the bomb should be on
+
+  Scenario: Booting up the bomb with activation and deactivation codes configured
+    Given I visit the home page
+    When I configure the activation code to be 0987
+    And I configure the deactivation code to be 1111
+    And I boot up the bomb
+    Then the bomb should be on

@@ -1,0 +1,6 @@
+%form.controls.deactivate{action: "/deactivate", method: "post", name: "deactivate"}
+  .deactivation-code-group
+    %label{for: "deactivation-code"} Enter the appropriate deactivation code:
+    %p
+      %input.deactivation-code{type: "text", name: "deactivation_code"}
+  %a.btn.deactivate-bomb Deactivate Bomb

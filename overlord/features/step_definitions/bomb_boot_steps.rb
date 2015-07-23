@@ -1,27 +1,26 @@
 Given(/^I visit the home page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit('/')
 end
 
 When(/^I do nothing$/) do
-  pending # Write code here that turns the phrase above into concrete actions
 end
 
 Then(/^the bomb should be off$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(find('.bomb-state').text.downcase).to eq('off')
 end
 
 When(/^I boot up the bomb$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  find('.set-bomb').click
 end
 
 Then(/^the bomb should be on$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(find('.bomb-state').text.downcase).to eq('on')
 end
 
-When(/^I boot up the bomb with activation code (\d+)$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I configure the activation code to be (\d+)$/) do |code|
+  fill_in('activation_code', with: code)
 end
 
-Then(/^the activation code should be set to (\d+)$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I configure the deactivation code to be (\d+)$/) do |code|
+  fill_in('deactivation_code', with: code)
 end

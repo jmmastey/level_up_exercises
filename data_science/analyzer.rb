@@ -1,9 +1,10 @@
 require 'json'
 require 'abanalyzer'
 require_relative './cohort.rb'
+require 'pry'
 
 class Analyzer
-  P_LEVEL = 0.05
+  PROBABILITY_LEVEL = 0.05
   attr_accessor :file_name, :cohorts, :p_value
 
   def initialize(file_name)
@@ -15,12 +16,10 @@ class Analyzer
   end
 
   def load_cohort_data(data)
-    cohort_data = Hash.new { [] }
-    data.each do |row|
-      cohort_name = row["cohort"]
-      cohort_data[cohort_name] <<= row["result"]
+    data.each_with_object({}) do |row, cohort_data|
+      cohort_data[row['cohort']] ||= []
+      cohort_data[row['cohort']] <<= row["result"]
     end
-    cohort_data
   end
 
   def build_cohort_array(cohort_data)
@@ -39,8 +38,9 @@ class Analyzer
 
   def initialize_test
     @cohorts = convert_data_for_test
-    values = {}
-    @cohorts.each { |chrt| values[chrt.name] = chrt.conversion_statistics }
+    values = @cohorts.each_with_object({}) do |cohort, test_params|
+      test_params[cohort.name] = cohort.conversion_statistics
+    end
     ABAnalyzer::ABTest.new(values)
   end
 
@@ -59,7 +59,7 @@ class Analyzer
 
   def print_results
     puts "P-value: #{@p_value.round(4)}"
-    if @p_value < P_LEVEL
+    if @p_value < PROBABILITY_LEVEL
       puts "There is a significant difference between the cohorts"
     else
       puts "There is no significant difference between the cohorts"

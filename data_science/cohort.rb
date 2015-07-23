@@ -1,44 +1,55 @@
+require 'bigdecimal'
+
 class Cohort
-  attr_accessor :name, :sample_size, :conversions, :conversion_rate
-  attr_accessor :stnd_error, :lower_ci, :upper_ci
-  COND_LEVEL = 1.96
+  attr_accessor :name, :sample_size, :conversions, :conversion_rate,
+    :standard_error, :lower_confidence_interal,
+    :upper_confidence_interval
+
+  CONFIDENCE_LEVEL = BigDecimal(1.96, 4)
 
   def initialize(name, sample)
     @name = name
-    @sample_size = sample.count
-    @conversions = sample.count(1)
+    @sample_size = BigDecimal(sample.count)
+    @conversions = BigDecimal(sample.count(1))
   end
 
   def calculate_statistics
-    calc_conversion_rate
-    calc_standard_error
-    calc_confidence_intervals
+    calculate_conversion_rate
+    calculate_standard_error
+    calculate_confidence_intervals
   end
 
-  def calc_conversion_rate
-    @conversion_rate = @conversions.to_f / @sample_size
+  def calculate_conversion_rate
+    @conversion_rate = @conversions / @sample_size
   end
 
-  def calc_confidence_intervals
-    @lower_ci = @conversion_rate - COND_LEVEL * @stnd_error
-    @upper_ci = @conversion_rate + COND_LEVEL * @stnd_error
+  def calculate_confidence_intervals
+    difference = CONFIDENCE_LEVEL * @standard_error
+    @lower_confidence_interal = @conversion_rate - difference
+    @upper_confidence_interval = @conversion_rate + difference
   end
 
-  def calc_standard_error
+  def calculate_standard_error
     p = @conversion_rate
     n = @sample_size
-    @stnd_error = Math.sqrt(p * (1 - p) / n)
+    @standard_error = BigDecimal(Math.sqrt(p * (1 - p) / n), 8)
   end
 
   def conversion_statistics
     { conversions: @conversions, non_conversions: @sample_size - @conversions }
   end
 
+  def print_big_decimal(decimal)
+    format('%.4f', decimal)
+  end
+
   def print_summary
     puts "Cohort: #{@name}"
-    print "Conversion Rate: #{@conversion_rate.round(4)}"
-    puts " (#{@conversions} out of #{@sample_size} visits)"
-    puts "95% Confidence Interval: [#{lower_ci.round(4)}, #{upper_ci.round(4)}]"
+    print "Conversion Rate: #{print_big_decimal(@conversion_rate)}"
+    puts " (#{@conversions.to_i} out of #{@sample_size.to_i} visits)"
+    puts "95% Confidence Interval: " \
+         "[#{print_big_decimal(lower_confidence_interal)}, " \
+         "#{print_big_decimal(upper_confidence_interval)}]"
     puts
   end
 end

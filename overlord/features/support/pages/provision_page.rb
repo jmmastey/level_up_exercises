@@ -10,6 +10,7 @@ class ProvisionPage < SitePrism::Page
   def create_bomb(options = {})
     activation_code.set(options[:activate]) if options[:activate]
     deactivation_code.set(options[:deactivate]) if options[:deactivate]
+    countdown_value.set(options[:countdown]) if options[:countdown]
     provision_bomb.click
   end
 

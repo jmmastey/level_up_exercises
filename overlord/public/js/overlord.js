@@ -2,8 +2,12 @@ timer = {
     time : 0,
 
     timeDisplay : function() {
-        var minutes = Math.floor(this.time / 60);
-        var seconds = this.time % 60;
+        //var minutes = Math.floor(this.time / 60);
+        //var seconds = this.time % 60;
+
+        var minutes = this.padTime(Math.floor(this.time / 60), 2, '0');
+        var seconds = this.padTime(this.time % 60, 2, '0');
+
         return minutes + ":" + seconds;
     },
 
@@ -23,8 +27,16 @@ timer = {
         setInterval(function() {
             timer.updateTimeDisplay(timer.time - 1)
         }, 1000);
+    },
+
+    padTime : function(value, count, fill) {
+        var buffer = '' + value;
+        for(var idx = buffer.length; idx < count; idx++) {
+            buffer = fill + buffer;
+        }
+        return buffer;
     }
-}
+};
 
 trigger = {
     activate : function() {
@@ -32,7 +44,7 @@ trigger = {
             window.location = '/enter/' + $('#trigger-code').val();
         });
     }
-}
+};
 
 $(document).ready(function() {
     $('#change-bomb-state').click(function(e) {

@@ -4,6 +4,7 @@ module OverlordHelpers
         deactivate: session[:deactivate])
 
     session[:countdown] = 30 if session[:countdown].empty?
+
     timer = Timer.new(session[:countdown].to_i)
 
     Bomb.new(trigger: trigger, timer: timer)

@@ -1,10 +1,12 @@
+require 'active_support/time'
+
 class Timer
   DEFAULT_COUNTDOWN = 30
 
   attr_reader :started, :time_remaining, :detonation
 
   def initialize(countdown = DEFAULT_COUNTDOWN)
-    @time_remaining = countdown
+    @time_remaining = countdown.seconds
     @started = false
   end
 
@@ -34,7 +36,7 @@ class Timer
   end
 
   def reset(time = DEFAULT_COUNTDOWN)
-    @time_remaining = time
+    @time_remaining = time.seconds
     @detonation = Time.now + @time_remaining
   end
 end

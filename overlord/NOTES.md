@@ -103,3 +103,35 @@ At this point in the process, my client and I decided it would be worth it to sp
 ### Timer
 
 The bomb clearly needs a timer. A lack of timer means the bomb explodes pretty much immediately. So this is the next component to get in place. What I found interesting here is that while having my Cucumber tests really was fairly invaluable, the design of the tests -- in terms of their level of abstraction -- had to change (potentially) as the design changed. Yet the implementation of the tests necessarily didn't. So my bombw as going from being nothing more than a trigger to a bomb device that had components (a trigger and, soon, a timer). Having the page objects really helped with this to an extent, although I found that it probably would have been better to stick with the highest level abstraction in them (bomb) rather than going with the implementation as it was (trigger). I'm still not sure on this.
+
+### Refactor Testing
+
+Cucumber proves to be a bit more of a distraction -- unless you are willing to not be so religious about the structure. The Given-When-Then can constrain you a bit but using the asterisk keyword can actually be quite helpful. However, I'm going to try not to do that and instead try to work in the following statements, which is really what a business person would prefer to read.
+
+* A newly provisioned bomb with default settings will not be active and will have a countdown timer set to 30 seconds.
+
+* Create a default bomb and activate it with the default activation code. The bomb will show up as active and the timer will start.
+
+* Create a default, activated bomb and deactivate it with the default deactivation code. The bomb will show up as inactive and the timer will stop.
+
+* Create a bomb with a custom activation code. The bomb will show up as active and the timer will start.
+
+* Create a bomb with a custom deactivation code. The bomb will show up as inactive and the timer will stop.
+
+* Create a bomb with a custom countdown value. The bomb will show up as active and the timer will start.
+
+* A bomb whose timer runs out should explode.
+
+* A bomb with three invalid deactivation attempts explodes.
+
+* A bomb will not activate if the activation code is invalid.
+
+* A bomb will not deactivate if the deactivation code is invalid.
+
+* A bomb cannot be created with invalid activation codes.
+
+* A bomb cannot be created with invalid deactivation codes.
+
+* A bomb cannot be created with an invalid countdown timer.
+
+The above is actually what I started with but I instead went the official Cucumber way, which ended up being both good and bad, interestingly enough.

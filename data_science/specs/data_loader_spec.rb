@@ -5,8 +5,8 @@ describe JsonReader do
 
   describe '#new' do
     context 'when initializing data reader' do
-      it 'should not be nil' do
-        expect(reader).to_not be_nil
+      it 'does not raise error' do
+        expect { reader }.not_to raise_error
       end
     end
   end

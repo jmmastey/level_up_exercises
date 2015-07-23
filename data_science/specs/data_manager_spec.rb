@@ -20,13 +20,7 @@ describe DataManager do
 
   describe '#new' do
     context 'when initialized data manager' do
-      it 'should not be nil' do
-        expect(manager).not_to be_nil
-      end
-    end
-
-    context 'when initialized with reader it should not blow up' do
-      it 'should not be nil' do
+      it 'does not raise' do
         expect(manager).not_to be_nil
       end
     end

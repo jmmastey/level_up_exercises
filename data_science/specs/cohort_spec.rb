@@ -5,9 +5,8 @@ describe Cohort do
 
   describe '#new' do
     context 'when initializing a Cohort' do
-      it 'should not be a Cohort' do
-        # TODO: ask Dan about this ? What would be a good/valid test ?
-        expect(cohort).to be_a(Cohort)
+      it 'does not raise' do
+        expect { cohort }.not_to raise_error
       end
     end
   end

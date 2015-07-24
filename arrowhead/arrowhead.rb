@@ -1,7 +1,7 @@
 class Arrowhead
   UNKNOWN_REGION = 'Unknown region, please provide a valid region.'
-  UNKNOWN_SHAPE  = "Unknown shape value."\
-                       "Are you sure you know what you're talking about?"
+  UNKNOWN_SHAPE = "Unknown shape value."\
+                  "Are you sure you know what you're talking about?"
 
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
@@ -20,7 +20,6 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
     region_shapes = CLASSIFICATIONS[region]
     arwhead = region_shapes.nil? ? raise(UNKNOWN_REGION) : region_shapes[shape]

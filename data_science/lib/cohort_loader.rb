@@ -69,7 +69,7 @@ class CohortLoader
   private
 
   def add_visit_details_to_cohort(visit_details)
-      visit = Visit.new(visit_details['result'], visit_details['date'])
-      @cohorts[visit_details['cohort']].add_visit(visit)
+    visit = Visit.new(visit_details['result'], visit_details['date'])
+    @cohorts[visit_details['cohort']].add_visit(visit)
   end
 end

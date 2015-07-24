@@ -15,11 +15,11 @@ class Cohort
   end
 
   def failed_conversions
-    visits.reject(&:conversion?).length
+    visits.reject(&:conversion?).count
   end
 
   def sample_size
-    return visits.length
+    visits.length
   end
 
   def conversion_rate

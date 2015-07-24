@@ -1,26 +1,54 @@
 class Bomb
-  def initialize(activation = 1234, deactivation = 0000)
-    @activation_code = activation
-    @deactivation_code = deactivation
+  def initialize(activation = '', deactivation = '')
+    setup_activation_code(activation)
+    setup_deactivation_code(deactivation)
     @deactivation_attempts = 0
     @status = 'Inactive'
   end
 
-  def activate(code)
-    @status = 'Active' if @activation_code == code
-  end
-
-  def deactivate(code)
-    @deactivation_attempts += 1
-    if @deactivation_code == code
-      @status = 'Inactive'
-    elsif @deactivation_attempts == 2
-      @status = 'Blown Up'
+  def setup_activation_code(activation)
+    if activation == ''
+      @activation_code = '1234'
+    else
+      @activation_code = activation
     end
   end
 
-  def status
+  def setup_deactivation_code(deactivation)
+    if deactivation == ''
+      @deactivation_code = '0000'
+    else
+      @deactivation_code = deactivation
+    end
+  end
+
+  def activate(code)
+    if @activation_code == code && @status != 'Active'
+      @status = 'Active'
+      true
+    else
+      false
+    end
+  end
+
+  def deactivate(code)
+    if @deactivation_code == code
+      @status = 'Inactive'
+      true
+    elsif @deactivation_attempts >= 2
+      @status = 'Blown Up'
+      false
+    end
+    @deactivation_attempts += 1
+  end
+
+  def status_reader
     @status
   end
 
+  def self.valid_code?(code)
+    !!Integer(code)
+  rescue ArgumentError, TypeError
+    '' == code
+  end
 end

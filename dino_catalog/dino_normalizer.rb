@@ -1,6 +1,6 @@
 class DinoNormalizer
-  CARNIVORE_DIETS        = %w(Piscivore Insectivore Carnivore)
-  MAX_SMALL_DINO_WEIGHT  = 4000
+  CARNIVORE_DIETS = %w(Piscivore Insectivore Carnivore)
+  MAX_SMALL_DINO_WEIGHT = 4000
 
   def self.normalize(fields = {})
     normalize_field_aliases fields, :genus, [:name]

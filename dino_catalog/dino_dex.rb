@@ -4,7 +4,7 @@ require 'json'
 
 class DinoDex
   DINO_DATA_DIR = 'dino_data'
-  EMPTY_FIELD   = '(null)'
+  EMPTY_FIELD = '(null)'
 
   def initialize
     @catalog = DinoCatalog.new

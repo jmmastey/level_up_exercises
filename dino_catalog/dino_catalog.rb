@@ -23,7 +23,7 @@ class DinoCatalog
 
   def dinos_where(filters = {})
     dino_addrs = filters.map { |flt, val| dino_addrs_with(flt, val) }
-    dinos_at dino_addrs.reduce(&:&)
+    dinos_at dino_addrs.inject(&:&)
   end
 
   private

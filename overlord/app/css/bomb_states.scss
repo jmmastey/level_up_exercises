@@ -1,0 +1,62 @@
+#overlord {
+
+  &.activation {
+    $color: green;
+
+    #activation::before {
+      background-color: $color;
+      box-shadow: 0 0 20px $color;
+    }
+
+    #input-submit {
+      background-color: $color;
+    }
+  }
+
+  &.deactivation {
+    $color: blue;
+
+    #deactivation::before {
+      background-color: $color;
+      box-shadow: 0 0 20px $color;
+    }
+
+    #input-submit {
+      background-color: $color;
+    }
+  }
+
+  &.standby {
+    $color: yellow;
+
+    #standby::before {
+      background-color: $color;
+      box-shadow: 0 0 20px $color;
+    }
+
+    #input-submit {
+      background-color: $color;
+
+      &::before {
+        content: 'ARM';
+      }
+    }
+  }
+
+  &.armed {
+    $color: red;
+
+    #armed::before {
+      background-color: $color;
+      box-shadow: 0 0 20px $color;
+    }
+
+    #input-submit {
+      background-color: $color;
+
+      &::before {
+        content: 'DISARM';
+      }
+    }
+  }
+}

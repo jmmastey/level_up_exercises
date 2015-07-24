@@ -9,11 +9,15 @@ But, this is the important part: you're going to write all the tests for the dev
 ### Requirements
 
 1. Even coffee machines have webservers these days. The bomb interface should be a Sinatra app, and the tests should be written in Cucumber and Rspec. A simple Sinatra base has been provided.
+
 2. The bomb interface should include a field to type in an activation / deactivation code and an indicator of the activation state of the bomb.
+
 3. When the super villain first boots the bomb, it should not be activated.
+
 4. The activation code is pretty simple:
   * The code should be configurable on boot. If no code is specified, 1234 seems pretty safe. Validate that only numeric inputs are allowed.
   * When the correct activation code is entered, the bomb should activate. Putting in the same activation code again should have no effect. From now on, the status indicator should let the user know that the bomb is active.
+
 5. Next, the deactivation code.
   * This code should be configurable as well. A good default code would be 0000.
   * Once the bomb is active, putting in the correct deactivation code should cause the bomb to revert to inactivity, and indicate as such.
@@ -27,3 +31,12 @@ But, this is the important part: you're going to write all the tests for the dev
 * Add a timer. All good bombs have timers.
 * Add wires to snip to stop the bomb from detonating. This guy seems like he might not pay on time.
 * No bonus points for developing an actual electronic detonator. Still, dude, sweet.
+
+
+<!-- sequence_code
+- numeric code
+- verifies length 4 and numeric
+
+-- set
+-- reset
+ -->

@@ -1,0 +1,17 @@
+#timer {
+  border: solid 3px #444;
+  background-color: #777;
+  color: #67C8FF;
+  padding: 40px;
+  font-size: 90px;
+  width: 400px;
+  margin: 100px auto;
+  border-radius: 5px;
+  box-shadow: inset 1px 2px 2px black;
+  text-align: center;
+  transition: color ease 1s;
+
+  &.danger {
+    color: red;
+  }
+}

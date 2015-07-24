@@ -1,0 +1,45 @@
+.wire-container {
+  position: absolute;
+  width: 100%;
+  height: 150px;
+  top: 125px;
+
+  .wire {
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    cursor: url(/images/open_scissors.png), auto;
+
+
+    &:active {
+      cursor: url(/images/closed_scissors.png), auto;
+    }
+
+    &::before, &::after {
+      float: right;
+      background-color: darkgrey;
+      width: 10px;
+      height: 100%;
+      content: '';
+    }
+
+    &::after {
+      float: left;
+    }
+
+    &.red {
+      top: 0;
+      background: linear-gradient(to bottom, #ff0505 1%,#8f0222 44%,#8f0222 52%,#ff0505 100%);
+    }
+
+    &.blue {
+      top: 33px;
+      background: linear-gradient(to bottom, #05d5ff 0%,#03005b 44%,#03005b 52%,#05d5ff 100%);
+    }
+
+    &.green {
+      top: 65px;
+      background: linear-gradient(to bottom, #05ff15 0%,#055101 44%,#055101 52%,#05ff15 100%);
+    }
+  }
+}

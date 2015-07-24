@@ -5,11 +5,13 @@
   padding: 40px;
   font-size: 90px;
   width: 400px;
-  margin: 100px auto;
+  margin: 75px auto;
   border-radius: 5px;
   box-shadow: inset 1px 2px 2px black;
   text-align: center;
   transition: color ease 1s;
+  position: relative;
+  z-index: 100;
 
   &.danger {
     color: red;

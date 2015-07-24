@@ -19,6 +19,13 @@ class Overlord < Sinatra::Base
     erb :index
   end
 
+  %w{jpg png}.each do |format|
+    get "/assets/:image.#{format}" do |image|
+      content_type("image/#{format}")
+      settings.assets["#{image}.#{format}"]
+    end
+  end
+
   def start_time
     session[:start_time] ||= (Time.now).to_s
   end

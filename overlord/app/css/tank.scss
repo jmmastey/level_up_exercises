@@ -1,4 +1,18 @@
-.tank{
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 25px  green,
+                0 0 50px  green;
+  }
+
+  100% {
+    box-shadow: 0 0 25px  green,
+                0 0 50px  green,
+                0 0 100px green,
+                0 0 200px green;
+  }
+}
+
+.tank {
   position: relative;
   top: -50px;
   margin: 10px;
@@ -17,16 +31,14 @@
     .tank-middle {
       top: 40px;
       height: 180px;
-      box-shadow: 0 0 200px green,
-                  0 0 100px green,
-                  0 0 50px  green,
-                  0 0 25px  green;
+      animation: glow 3s infinite alternate;
     }
   }
 
   .tank-top, .tank-middle, .tank-bottom {
     width: 300px;
     border: 1px solid black;
+    box-shadow: 0 0.5px 1px;
   }
 
   .tank-top, .tank-middle {
@@ -44,9 +56,9 @@
   }
 
   .tank-top{
-    background-color: #444;
     top: 135px;
     z-index: 10;
+    background: linear-gradient(to bottom,  #4c4c4c 20%, #8c8c8c 100%);
   }
 
   .tank-middle {

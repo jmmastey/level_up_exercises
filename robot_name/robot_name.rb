@@ -19,7 +19,7 @@ class Robot
 
   def generate_rand_name
     rand_chars = "#{generate_char}#{generate_char}"
-    rand_num   = "#{generate_num}#{generate_num}#{generate_num}"
+    rand_num = "#{generate_num}#{generate_num}#{generate_num}"
     rand_chars + rand_num
   end
 

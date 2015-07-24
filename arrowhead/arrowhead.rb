@@ -1,6 +1,6 @@
 class Arrowhead
-  UNKNOWN_REGION_MSG = 'Unknown region, please provide a valid region.'
-  UNKNOWN_SHAPE_MSG  = "Unknown shape value."\
+  UNKNOWN_REGION = 'Unknown region, please provide a valid region.'
+  UNKNOWN_SHAPE  = "Unknown shape value."\
                        "Are you sure you know what you're talking about?"
 
   # This seriously belongs in a database.
@@ -23,8 +23,8 @@ class Arrowhead
   # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
     region_shapes = CLASSIFICATIONS[region]
-    arrowhead = region_shapes.nil? ? raise(UNKNOWN_REGION_MSG) : region_shapes[shape]
-    arrowhead.nil? ? raise(UNKNOWN_SHAPE_MSG) : arrowhead_msg(arrowhead)
+    arwhead = region_shapes.nil? ? raise(UNKNOWN_REGION) : region_shapes[shape]
+    arwhead.nil? ? raise(UNKNOWN_SHAPE) : arrowhead_msg(arwhead)
   end
 
   def self.arrowhead_msg(arrowhead)

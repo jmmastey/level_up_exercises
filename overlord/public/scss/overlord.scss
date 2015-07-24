@@ -57,6 +57,36 @@ a {
   }
 }
 
+#timer {
+  position: absolute;
+  top: 0;
+  right: 150px;
+  color: white;
+  background-color: black;
+  font-size: 2em;
+  font-family: $timer_font;
+  padding: 21px;
+
+  &.blink {
+    color: black;
+    background-color: yellow;
+  }
+  &.blink-red {
+    background-color: red;
+  }
+
+  #time {
+    display: none;
+  }
+
+  #seconds {
+    margin-right: -15px;
+  }
+  #milliseconds {
+    margin-left: -15px;
+  }
+}
+
 .main {
   width: 800px;
   margin: 50px auto;

@@ -6,11 +6,12 @@ require_relative "bomb"
 enable :sessions
 
 get '/' do
-  session[:bomb] = Bomb.new unless session[:bomb]
+  new_bomb
   session[:name] = determine_villain_name unless session[:name]
   haml :index, locals: {
     bomb_state: session[:bomb].readable_state,
     name: session[:name],
+    time: session[:bomb].time_left,
   }
 end
 
@@ -40,11 +41,22 @@ end
 post '/deactivate' do
   deactivate_bomb(params)
   bomb = session[:bomb]
-  unless session[:bomb].deactivated?
+  unless bomb.deactivated?
     halt(422,
       "Wrong deactivation code. #{bomb.attempts_left} attempts left.")
   end
   halt(200, bomb.readable_state)
+end
+
+post '/no_more_time' do
+  session[:bomb].detonate
+  halt(200, session[:bomb].readable_state)
+end
+
+def new_bomb
+  bomb = session[:bomb]
+  return session[:bomb] = Bomb.new unless bomb
+  session[:bomb] = Bomb.new if bomb.destroyed? || bomb.deactivated?
 end
 
 def boot_up_bomb(params)

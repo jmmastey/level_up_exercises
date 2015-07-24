@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Poiret+One|Share:400,700);
+@import url(http://fonts.googleapis.com/css?family=Poiret+One|Inconsolata|Share:400,700);
 /* line 3, ../scss/overlord.scss */
 body { background: url("../img/escheresque.png"); padding: 0; margin: 0; font-family: "Share"; }
 
@@ -29,40 +29,53 @@ a:hover { text-decoration: underline; }
 .header .bomb-state.destroyed { background-color: black; }
 
 /* line 60, ../scss/overlord.scss */
+#timer { position: absolute; top: 0; right: 150px; color: white; background-color: black; font-size: 2em; font-family: "Inconsolata"; padding: 21px; }
+/* line 70, ../scss/overlord.scss */
+#timer.blink { color: black; background-color: yellow; }
+/* line 74, ../scss/overlord.scss */
+#timer.blink-red { background-color: red; }
+/* line 78, ../scss/overlord.scss */
+#timer #time { display: none; }
+/* line 82, ../scss/overlord.scss */
+#timer #seconds { margin-right: -15px; }
+/* line 85, ../scss/overlord.scss */
+#timer #milliseconds { margin-left: -15px; }
+
+/* line 90, ../scss/overlord.scss */
 .main { width: 800px; margin: 50px auto; text-align: center; background-color: rgba(0, 0, 0, 0.3); -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
-/* line 67, ../scss/overlord.scss */
+/* line 97, ../scss/overlord.scss */
 .main header { -moz-border-radius: 10px 10px 0 0; -webkit-border-radius: 10px; border-radius: 10px 10px 0 0; background-color: #000; font-size: 1.3em; padding: 10px; color: #fff; }
-/* line 75, ../scss/overlord.scss */
+/* line 105, ../scss/overlord.scss */
 .main .content { padding: 20px; }
 
-/* line 80, ../scss/overlord.scss */
+/* line 110, ../scss/overlord.scss */
 .panel { display: none; color: white; }
-/* line 83, ../scss/overlord.scss */
+/* line 113, ../scss/overlord.scss */
 .panel.display { display: block; }
 
-/* line 88, ../scss/overlord.scss */
+/* line 118, ../scss/overlord.scss */
 .controls { text-transform: uppercase; width: 415px; margin: 0 auto; }
-/* line 93, ../scss/overlord.scss */
+/* line 123, ../scss/overlord.scss */
 .controls.config .activation-code-group { float: left; }
-/* line 97, ../scss/overlord.scss */
+/* line 127, ../scss/overlord.scss */
 .controls.config .deactivation-code-group { float: right; }
-/* line 102, ../scss/overlord.scss */
+/* line 132, ../scss/overlord.scss */
 .controls input { padding: 10px; border: 1px solid #000; font-family: "Share"; font-size: 1.5em; width: 200px; text-align: center; letter-spacing: 5px; }
-/* line 111, ../scss/overlord.scss */
+/* line 141, ../scss/overlord.scss */
 .controls input:focus { outline: none; border: 1px solid #ff6666; -moz-box-shadow: 0 0 10px red; -webkit-box-shadow: 0 0 10px red; box-shadow: 0 0 10px red; }
 
-/* line 119, ../scss/overlord.scss */
+/* line 149, ../scss/overlord.scss */
 .btn { clear: both; color: white; display: block; text-decoration: none; width: 150px; margin: 20px auto; padding: 20px 30px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; background-color: red; }
-/* line 131, ../scss/overlord.scss */
+/* line 161, ../scss/overlord.scss */
 .btn:hover { background-color: #990000; cursor: pointer; }
-/* line 135, ../scss/overlord.scss */
+/* line 165, ../scss/overlord.scss */
 .btn.activate-bomb { color: black; background-color: yellow; }
-/* line 138, ../scss/overlord.scss */
+/* line 168, ../scss/overlord.scss */
 .btn.activate-bomb:hover { background-color: #999900; }
-/* line 142, ../scss/overlord.scss */
+/* line 172, ../scss/overlord.scss */
 .btn.deactivate-bomb { background-color: blue; }
-/* line 144, ../scss/overlord.scss */
+/* line 174, ../scss/overlord.scss */
 .btn.deactivate-bomb:hover { background-color: #000099; }
 
-/* line 150, ../scss/overlord.scss */
+/* line 180, ../scss/overlord.scss */
 .name { color: red; }

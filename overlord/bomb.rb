@@ -6,6 +6,7 @@ class Bomb
   ACTIVATED = 2
   DEACTIVATED = 3
   DESTROYED = 4
+  TIMER = 30
 
   attr_accessor :start_time, :state, :activation_code, :deactivation_code
   attr_accessor :deactivation_attempts
@@ -35,7 +36,10 @@ class Bomb
 
   def activate(code)
     return unless on?
-    @state = ACTIVATED if code == @activation_code || activated?
+    if code == @activation_code || activated?
+      @state = ACTIVATED 
+      @start_time = Time.now
+    end
   end
 
   def deactivate(code)
@@ -49,12 +53,19 @@ class Bomb
   end
 
   def detonate
-    return if @deactivation_attempts < 3
+    # return if @deactivation_attempts < 3 || time_left > 0
     @state = DESTROYED
   end
 
   def attempts_left
     3 - @deactivation_attempts
+  end
+
+  def time_left
+    return unless activated?
+    elapsed = Time.now.to_i - @start_time.to_i
+    left = TIMER - elapsed
+    left < 0 ? 0 : left
   end
 
   def on?

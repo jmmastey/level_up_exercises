@@ -3,12 +3,19 @@
     %title Overlord -- Watch the world burn
     %script{src: 'js/jquery-1.11.3.min.js'}
     %script{src: 'js/sweetalert.min.js'}
+    %script{src: 'js/countdowntimer.js'}
     %link{rel: "stylesheet", href: "css/overlord.css"}
     %link{rel: "stylesheet", href: "css/sweetalert.css"}
   %body
     .header
       %h1.logo
         %a{href: "/"} OVERLORD
+      #timer
+        %input#hidden{value: locals[:time], type: 'hidden'}
+        %span#time= locals[:time]
+        %span#seconds 30
+        \:
+        %span#milliseconds 00
       .bomb-state= locals[:bomb_state]
 
     %section.main

@@ -9,6 +9,10 @@ When(/^I fail at deactivating the bomb$/) do
   find('.sweet-alert .confirm').click
 end
 
+When(/^I wait for (\d+) seconds$/) do |seconds|
+  sleep(seconds.to_i)
+end
+
 Then(/^the world should be destroyed$/) do
   expect(find('.bomb-state').text.downcase).to eq('destroyed')
 end

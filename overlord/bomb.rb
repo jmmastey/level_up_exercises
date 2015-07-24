@@ -36,10 +36,9 @@ class Bomb
 
   def activate(code)
     return unless on?
-    if code == @activation_code || activated?
-      @state = ACTIVATED 
-      @start_time = Time.now
-    end
+    return unless code == @activation_code
+    @state = ACTIVATED
+    @start_time = Time.now
   end
 
   def deactivate(code)

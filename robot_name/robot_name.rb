@@ -3,7 +3,7 @@ class NameCollisionError < RuntimeError; end
 class Robot
   attr_accessor :name
 
-  VALID_NAME_FORMAT  = /[[:alpha:]]{2}[[:digit:]]{3}/
+  VALID_NAME_FORMAT = /[[:alpha:]]{2}[[:digit:]]{3}/
   NAME_COLLISION_MSG = 'There was a problem generating the robot name!'
 
   @@registry = []

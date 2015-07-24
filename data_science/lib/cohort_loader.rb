@@ -1,66 +1,75 @@
 require 'json'
 require_relative '../lib/cohort'
+require_relative '../lib/visit'
 
 class CohortLoader
   attr_accessor :filename, :cohorts
 
   def initialize(filename)
     @filename = filename
+    @cohorts = { 'A' => Cohort.new('A'), 'B' => Cohort.new('B') }
   end
 
   def load
-    @cohorts = JSON.parse(File.read(filename)).map do |cohort|
-      Cohort.new(cohort)
+    JSON.parse(File.read(filename)).each do |visit_details|
+      add_visit_details_to_cohort(visit_details)
     end
   end
 
   def sample_size(cohort_name = nil)
-    return cohorts.length if cohort_name.nil?
-    cohorts.count { |cohort| cohort.name.eql?(cohort_name) }
+    return total_sample_size unless cohort_name
+    cohorts[cohort_name].sample_size
+  end
+
+  def total_sample_size
+    cohorts['A'].sample_size + cohorts['B'].sample_size
   end
 
   def conversions(cohort_name = nil)
-    return all_conversions if cohort_name.nil?
-    cohorts.count do |cohort|
-      cohort.name.eql?(cohort_name) && cohort.conversion?
-    end
+    return all_conversions unless cohort_name
+    cohorts[cohort_name].conversions
   end
 
   def conversion_rate(cohort_name = nil)
-    conversions(cohort_name).to_f / sample_size(cohort_name).to_f
+    return total_conversion_rate unless cohort_name
+    cohorts[cohort_name].conversion_rate
+  end
+
+  def total_conversion_rate
+    conversions.to_f / sample_size.to_f
   end
 
   def standard_error(cohort_name = nil)
-    p = conversion_rate(cohort_name)
-    n = sample_size(cohort_name)
+    return total_standard_error unless cohort_name
+    cohorts[cohort_name].standard_error
+  end
 
-    Math.sqrt((p * (1 - p)) / n)
+  def total_standard_error
+    rate = conversion_rate
+    size = sample_size
+
+    Math.sqrt((rate * (1 - rate)) / size)
   end
 
   def conversion_rate_range(cohort_name)
-    range = []
-    range << conversion_rate(cohort_name) - standard_error(cohort_name)
-    range << conversion_rate(cohort_name) + standard_error(cohort_name)
-    range
+    cohorts[cohort_name].conversion_rate_range
   end
 
   def to_ab_format
-    values = {}
-    values['A'] = generate_pass_fail_info('A')
-    values['B'] = generate_pass_fail_info('B')
-    values
+    {
+      'A' => cohorts['A'].generate_pass_fail_info,
+      'B' => cohorts['B'].generate_pass_fail_info,
+    }
+  end
+
+  def all_conversions
+    cohorts['A'].conversions + cohorts['B'].conversions
   end
 
   private
 
-  def all_conversions
-    cohorts.count(&:conversion?)
-  end
-
-  def generate_pass_fail_info(cohort_name)
-    {
-      pass: conversions(cohort_name),
-      fail: sample_size(cohort_name) - conversions(cohort_name),
-    }
+  def add_visit_details_to_cohort(visit_details)
+      visit = Visit.new(visit_details['result'], visit_details['date'])
+      @cohorts[visit_details['cohort']].add_visit(visit)
   end
 end

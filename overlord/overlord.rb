@@ -1,4 +1,3 @@
-# run `ruby overlord.rb` to run a webserver for this app
 require "haml"
 require "sinatra"
 require_relative "bomb"
@@ -12,6 +11,7 @@ get '/' do
     bomb_state: session[:bomb].readable_state,
     name: session[:name],
     time: session[:bomb].time_left,
+    time_limit: session[:bomb].time_limit,
   }
 end
 

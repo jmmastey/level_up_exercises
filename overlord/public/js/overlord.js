@@ -50,8 +50,8 @@ $('form.deactivate').on('submit', function (e) {
 });
 
 function load_timer_info() {
-  if ($("#time").html() != "") {
-    timer.set_time(parseInt($("#time").html()), 0);
+  if ($("#hidden").val() != "") {
+    timer.set_time(parseInt($("#hidden").val()), 0);
     start_timer();
   }
 }

@@ -12,8 +12,7 @@
         %a{href: "/"} OVERLORD
       #timer
         %input#hidden{value: locals[:time], type: 'hidden'}
-        %span#time= locals[:time]
-        %span#seconds 30
+        %span#seconds= locals[:time_limit]
         \:
         %span#milliseconds 00
       .bomb-state= locals[:bomb_state]

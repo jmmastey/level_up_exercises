@@ -7,13 +7,15 @@ class Bomb
   attr_accessor :hack_count, :attempts_remain
 
   def initialize
-    codes = (1...64).to_a.sample(6)
-    @panels = codes.map { |code| Panel.new(code) }
-
+    @panels = initialize_panels
     @hack_count = 0
     @attempts_remain = 3
-
     @state = 1
+  end
+
+  def initialize_panels
+    codes = (1...64).to_a.sample(6)
+    codes.map { |code| Panel.new(code) }
   end
 
   def secret_codes(code_hash)
@@ -71,5 +73,9 @@ class Bomb
 
   def armed?
     @state == 0
+  end
+
+  def disarmed?
+    @state == 1
   end
 end

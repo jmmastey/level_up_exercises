@@ -6,11 +6,12 @@ Feature: Entering incorrect bomb codes
   As an unfortunate soul
   I should enter an incorrect code 3 times
 
-  @happy
-  Scenario: Entering the incorrect code 3 times
+  Background:
     Given I'm at the bomb page
     And I have already submitted my codes
-    And the bomb is disarmed
+
+  @happy
+  Scenario: Entering the incorrect code 3 times
     When I enter the incorrect disarm code
     And I enter the incorrect disarm code again
     And I enter the incorrect disarm code again

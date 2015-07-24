@@ -3,76 +3,72 @@
 require 'json'
 require 'sinatra'
 require './classes/bomb.rb'
-# require './classes/timer.rb'
 
 enable :sessions
 
 get '/index' do
-  # session[:timer] = Timer.new(120)
   session[:bomb] = Bomb.new
   haml :index, locals: { bomb: session[:bomb] }
 end
 
 get '/hack' do
-  b = params[:binary].split(//).map(&:to_i)
-  p = params[:panel].to_i
+  binary_digits = params[:binary].split(//).map(&:to_i)
+  panel_number = params[:panel].to_i
 
   content_type :json
-  { 'success' => session[:bomb].attempt_hack(b, p),
-    'done' => session[:bomb].state == 3 }.to_json
+  { 
+    success: session[:bomb].attempt_hack(binary_digits, panel_number),
+    done: session[:bomb].state == 3 
+  }.to_json
 end
 
 get '/entercode' do
-  success = false
-  if session[:bomb].attempts_remain > 0
-    if session[:bomb].armed?
-      success = session[:bomb].disarm(params[:code])
-    else
-      success = session[:bomb].arm(params[:code])
-    end
-  end
-
-  # session[:timer].toggle if success
-
-  content_type :json
-  response = { success: success }
+  response = { success: entered_code_matched?(params) }
   response[:attempts_remain] = session[:bomb].attempts_remain
   response[:state] = session[:bomb].state_to_s
 
+  content_type :json
   response.to_json
 end
 
-# get '/timeremain' do
-#   session[:timer].tick
-
-#   content_type :json
-#   response = {}
-#   mins = session[:timer].remain / 60
-#   secs = session[:timer].remain - mins * 60
-#   response[:mins] = mins
-#   response[:secs] = secs
-
-#   response.to_json
-# end
-
 post "/setcodes" do
+  params[:arm] =  '1234' if params[:arm].empty?
+  params[:disarm] =  '0000' if params[:disarm].empty?
+
+  response = set_code_response(params)
+  session[:bomb].secret_codes(params) if response[:success]
+
   content_type :json
+  response.to_json
+end
 
-  response = { success: false, message: "Codes already set." }
-  response.to_json if session[:bomb].codes_set?
-  params[:arm] =  params[:arm] == '' ? '1234' : params[:arm]
-  params[:disarm] =  params[:disarm] == '' ? '0000' : params[:disarm]
+def set_code_response(params)
+  response = { success: false, msg: "" }
 
-  num_expr = /[0-9]{4}/
-  if !(params[:arm] =~ num_expr)
-    response[:message] = "Invalid arm code."
-  elsif !(params[:disarm] =~ num_expr)
-    response[:message] = "Invalid disarm code."
+  if session[:bomb].codes_set?
+    response[:msg] = "Codes already set."
+  elsif !codes_valid?(params)
+    response[:msg] = "Codes must be 4 numeric digits."
   else
-    session[:bomb].secret_codes(params)
+    response[:msg] = "Codes have been set."
     response[:success] = true
-    response[:message] = "Codes have been set."
   end
 
-  response.to_json
+  response
+end
+
+def entered_code_matched?(params)
+  return false if session[:bomb].attempts_remain == 0
+
+  session[:bomb].disarm(params[:code]) if session[:bomb].armed?
+  session[:bomb].arm(params[:code]) if session[:bomb].disarmed?
+end
+
+def codes_valid?(params)
+  num_expr = /^[0-9]{4}$/
+
+  valid_arm_code = params[:arm] =~ num_expr
+  valid_disarm_code = params[:disarm] =~ num_expr
+
+  valid_arm_code && valid_disarm_code
 end

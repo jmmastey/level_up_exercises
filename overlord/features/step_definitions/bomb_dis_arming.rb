@@ -1,16 +1,12 @@
 # encoding: utf-8
 require './classes/bomb.rb'
 
-Given(/^the bomb is (dis)?armed$/) do |disarmed|
+Given(/^the bomb is armed$/) do
   selector = '.bomb'
-  if disarmed
-    selector << '.disarmed'
-  else
-    find('#password').set(@arm_actual)
-    find('#confirm').click
+  find('#password').set(@arm_actual)
+  find('#confirm').click
 
-    selector << ":not(.disarmed)"
-  end
+  selector << ":not(.disarmed)"
   find(selector)
 end
 
@@ -27,7 +23,7 @@ When(/^I enter the (in)?correct (dis)?arm code(?: again)?$/) do |wrong, disarm|
   @start_time = find('.minutes').text + find('.seconds').text
 end
 
-Then(/^the bomb should (not )?(dis)?arm$/) do |should_not, disarm|
+Then(/^the bomb should (not )?be (dis)?armed$/) do |should_not, disarm|
   selector = '.bomb'
   if disarm
     selector << (should_not ? ':not(.disarmed)' : '.disarmed')

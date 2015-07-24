@@ -5,8 +5,7 @@
 .box {
   padding: 10px 20px;
   background: white;
-  border: 1px solid #555;
-  box-shadow: 0px 1px 1px #222;
+  border: 1px solid #999;
   margin: 5px auto;
 }
 html {

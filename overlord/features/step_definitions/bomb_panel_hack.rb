@@ -55,8 +55,6 @@ Given(/^the depressed buttons form a(?:n)? (in)?correct sequence$/) do |wrong|
   binary = @bomb.sequence_for(0)
   binary[0] = 1 - binary[0] if wrong
 
-  puts "BINARY IS #{binary} AND CODE IS #{answer}"
-
   binary.each_with_index do |val, button_number|
     next unless val == 1
     selector = ".columns > .column:first-child "

@@ -4,7 +4,6 @@ class Panel
   def initialize(code)
     @code = code
     @sequence = conv_to_binary
-    puts "SEQ FOR #{code} IS #{@sequence}"
   end
 
   def hacked?

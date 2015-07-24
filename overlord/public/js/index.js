@@ -30,14 +30,13 @@ function initial_code_submit(event) {
     if(response.success)
       $('.code-input').fadeOut(400);
     else 
-      $('#dialog-flash').html(response.message);
+      $('#dialog-flash').html(response.msg);
   });
 }
 
 function depress_button(event) {
   var $el = $(event.currentTarget);
-  if($el.parent().hasClass('hacked'))
-    return;
+  if($el.parent().hasClass('hacked')) return;
 
   $el.toggleClass('depressed');
   $el.html(1 - parseInt($el.html()));
@@ -49,8 +48,8 @@ function detonate() {
   $('.bomb').addClass('detonated');
   $('#password, #confirm').attr('disabled', 'true');
 
-  var url = "https://www.youtube.com/embed/qDMUekfOR-E";
-  var params = "?start=5&autoplay=1&controls=0&loop=1&rel=0";
+  var url = 'https://www.youtube.com/embed/qDMUekfOR-E';
+  var params = '?start=6&autoplay=1&controls=0&loop=1&rel=0';
   var iframe = $('<iframe>')
     .attr('src', url + params)
     .attr('height', '390')

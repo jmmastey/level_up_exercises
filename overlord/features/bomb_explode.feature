@@ -6,11 +6,13 @@ Feature: Bomb timer expires
   As the bomb
   I should hit zero without being disarmed
 
-  @happy
-  Scenario: The timer hits zero
+  Background:
     Given I'm at the bomb page
     And I have already submitted my codes
     And the bomb is armed
+
+  @happy
+  Scenario: The timer hits zero
     When the timer hits zero
     Then the bomb should explode
     And I should be unable to arm the bomb

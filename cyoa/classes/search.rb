@@ -1,9 +1,9 @@
 require './post.rb'
-require './search_iterator.rb'
+require './rc_iterator.rb'
 require 'httparty'
 require 'json'
 
-class Search < SearchIterator
+class Search < RCIterator
   include HTTParty
   base_uri "http://www.reddit.com"
 
@@ -12,49 +12,51 @@ class Search < SearchIterator
   def initialize(query: '', limit: 5)
     @after, @before = '', ''
     @limit = limit
-    @page_number = 0
+    @listing_number = 0
 
     @original_queries = [query]
     @api_query = "site:youtube.com #{query}"
     search
   end
 
-  def next_page?
+  def next_listing?
     @after != ''
   end
 
-  def prev_page?
+  def prev_listing?
     @before != ''
   end
 
   def to_s
-    str = "#<RedditSearch: query='#{@original_queries[0]}' "
-    str << "results=#{@posts.count} "
-    str << "next_page?=#{next_page?} "
-    str << "prev_page?=#{prev_page?}>"
+    str = "#<Search: query='#{@original_queries[0]}' "
+    str << "results=#{@listings.count} "
+    str << "next_listing?=#{next_listing?} "
+    str << "prev_listing?=#{prev_listing?}>"
   end
 
   private
 
-  def change_page(to: 'next')
-    search(page: to)
+  def change_listing(to: 'next')
+    search(next_or_prev: to)
+    current_listing
   end
 
-  def search(depth = 10, page: 'next')
+  def search(depth = 10, next_or_prev: 'next')
     raise "Could not connect to Reddit." if depth == 0
 
-    response = self.class.get("/search.json", query: search_params(page))
-    if response
+    response = self.class.get("/search.json", query: search_params(next_or_prev))
+    if response && response['data']
       parse_response(response['data'])
     else
+      puts "GOING DEEPER..."
       search(depth - 1) 
     end
   end
 
-  def search_params(page)
+  def search_params(next_or_prev)
     http_params = { q: @api_query, limit: @limit }
 
-    if page == 'next'
+    if next_or_prev == 'next'
       http_params[:after] = @after
     else
       http_params[:before] = @before
@@ -65,14 +67,14 @@ class Search < SearchIterator
 
   def parse_response(json_response)
     @after = json_response['after']
-    if @page_number == 0
+    if @listing_number == 0
       @before = ''
     else
       first_post = json_response['children'][0]
       @before = first_post['data']['before']
     end
 
-    @posts = json_response['children'].map do |child| 
+    @listings = json_response['children'].map do |child| 
       Post.new(child['data']) 
     end
   end

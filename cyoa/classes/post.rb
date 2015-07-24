@@ -7,7 +7,7 @@ class Post
     @nsfw = json_post['over_18']
 
     @youtube_link = json_post['url']
-    @youtube_id = @youtube_link[/(?<=v=).+$/]
+    @youtube_id = @youtube_link[/(?<=v=).{11}$/]
   end
 
   def nsfw?
@@ -15,7 +15,13 @@ class Post
   end
 
   def to_s
-    formatted_string = "#{@title}\n"
-    formatted_string += "(by /u/#{@author}) #{@youtube_link}\n\n"
+    shorter_title = @title[0..20]
+    shorter_title += "..." if(shorter_title.length < @title.length)
+
+    "#<Post: id=#{@youtube_id} title=#{shorter_title} author=#{@author}>"
+  end
+
+  def inspect
+    to_s
   end
 end

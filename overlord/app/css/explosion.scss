@@ -1,0 +1,42 @@
+#overlord.exploded {
+  #game-over {
+    transition: all ease 1s;
+    z-index: 10000;
+    opacity: 1;
+  }
+  
+  #briefcase-lid, #briefcase-box {
+    transition: all ease 0.8s;
+    opacity: 0;
+
+    .top {
+      transition: all ease 1.3s;
+      -webkit-transform: rotateY(220deg) translate3d(300px, -200px, 500px);
+    }
+
+    .bottom {
+      transition: all ease 1s;
+      -webkit-transform: rotateX(200deg) translate3d(-300px, -200px, 500px);
+    }
+
+    .left {
+      transition: all ease 1.1s;
+      -webkit-transform: rotateZ(200deg) translate3d(-300px, -200px, 500px);
+    }
+
+    .right {
+      transition: all ease 1.15s;
+      -webkit-transform: rotateY(115deg) translate3d(-300px, -200px, 500px);
+    }
+
+    .front {
+      transition: all ease 1.2s;
+      -webkit-transform: rotateX(200deg) translate3d(-200px, -125px, 500px);
+    }
+
+    .back {
+      transition: all ease 1.35s;
+      -webkit-transform: rotateZ(-260deg) translate3d(150px, 133px, -390px);
+    }
+  }
+}

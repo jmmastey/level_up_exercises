@@ -9,10 +9,12 @@
     height: 20px;
     position: absolute;
     cursor: url(/images/open_scissors.png), auto;
+    transition: all ease 0.1s;
 
 
     &:active {
       cursor: url(/images/closed_scissors.png), auto;
+      background: grey !important;
     }
 
     &::before, &::after {

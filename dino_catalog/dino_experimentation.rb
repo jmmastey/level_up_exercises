@@ -1,3 +1,5 @@
+require_relative 'dinosaur_catalog'
+
 catalog = DinosaurCatalog.new("dino_catalog/dinodex.csv")
 
 puts "Carnivore, Weight 4001"

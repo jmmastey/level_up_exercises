@@ -33,7 +33,6 @@ class Cohort
   end
 
   def conversion_rate_range
-    range = []
     range_min = conversion_rate - 1.96 * standard_error
     range_max = conversion_rate + 1.96 * standard_error
     range_min = range_min.round(3)

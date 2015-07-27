@@ -18,8 +18,8 @@ class DataAnalyzer
 
   def values_to_hash
     {
-      a: {conversion: @cohort_a.conversions, fails: @cohort_a.fails},
-      b: {conversion: @cohort_b.conversions, fails: @cohort_b.fails}
+      a: { conversion: @cohort_a.conversions, fails: @cohort_a.fails },
+      b: { conversion: @cohort_b.conversions, fails: @cohort_b.fails },
     }
   end
 end

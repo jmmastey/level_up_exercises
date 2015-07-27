@@ -17,7 +17,7 @@ describe Bomb do
   it 'should default the deactivation code to 0000' do
     @bomb.activate('1234')
     @bomb.deactivate('0000')
-    expect(@bomb.status_reader).to eq('Inactive')
+    expect(@bomb.status_reader).to eq('Deactivated')
   end
 
   it 'should work with a different activation code' do
@@ -30,7 +30,7 @@ describe Bomb do
     @bomb = Bomb.new('0000', '1111')
     @bomb.activate('0000')
     @bomb.deactivate('1111')
-    expect(@bomb.status_reader).to eq('Inactive')
+    expect(@bomb.status_reader).to eq('Deactivated')
   end
 
   it 'should blow up after three incorrect deactivation attempts' do
@@ -43,7 +43,7 @@ describe Bomb do
     @bomb.activate('1234')
     2.times { @bomb.deactivate('1111') }
     @bomb.deactivate('0000')
-    expect(@bomb.status_reader).to eq('Inactive')
+    expect(@bomb.status_reader).to eq('Deactivated')
   end
 
   it 'should correctly validate codes' do

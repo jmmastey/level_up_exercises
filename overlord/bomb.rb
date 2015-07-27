@@ -33,7 +33,7 @@ class Bomb
 
   def deactivate(code)
     if @deactivation_code == code
-      @status = 'Inactive'
+      @status = 'Deactivated'
       true
     elsif @deactivation_attempts >= 2
       @status = 'Blown Up'

@@ -30,7 +30,7 @@ class Overlord < Sinatra::Base
     activate_bomb(params[:activation])
     deactivation = params[:deactivation]
     session[:bomb].deactivate(deactivation) unless deactivation.nil?
-    bomb_status_redirection
+    bomb_status_redirect
   end
 
   get '/hero/' do
@@ -51,13 +51,11 @@ class Overlord < Sinatra::Base
     end
   end
 
-  def activate_bomb(key)
-    activated_this_turn = session[:bomb].activate(key)
-    already_activated = session[:bomb].status_reader == 'Active'
-    redirect to('/activate/') unless activated_this_turn || already_activated
+  def no_bomb_redirect
+    redirect to('/?error=3') unless session.key?(:bomb)
   end
 
-  def bomb_status_redirection
+  def bomb_status_redirect
     if session[:bomb].status_reader == 'Active'
       redirect to('/deactivate/')
     elsif session[:bomb].status_reader == 'Blown Up'
@@ -74,6 +72,12 @@ class Overlord < Sinatra::Base
     redirect to('/?error=2') unless valid_deactivation_code
   end
 
+  def activate_bomb(key)
+    activated_this_turn = session[:bomb].activate(key)
+    already_activated = session[:bomb].status_reader == 'Active'
+    redirect to('/activate/') unless activated_this_turn || already_activated
+  end
+
   def root_error_codes(index)
     case index
       when 1
@@ -85,10 +89,6 @@ class Overlord < Sinatra::Base
       else
         ''
     end
-  end
-
-  def no_bomb_redirect
-    redirect to('/?error=3') unless session.key?(:bomb)
   end
 
   enable :sessions

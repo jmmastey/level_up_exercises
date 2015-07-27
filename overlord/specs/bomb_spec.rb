@@ -1,12 +1,15 @@
 
 require_relative '../bomb'
 
+def setup_and_disarm(failed_disarm_attempts)
+  bomb = Bomb.new.arm('1234')
+  failed_disarm_attempts.times { bomb.disarm('3') }
+  bomb
+end
+
 describe 'Bomb' do
   let(:bomb) { Bomb.new }
   let(:armed_bomb) { bomb.boot.arm('1234') }
-  let(:armed_bomb_fail_disarm_1st) { armed_bomb.disarm('3') } #TODO: not sure about this
-  let(:armed_bomb_fail_disarm_2nd) { armed_bomb_fail_disarm_1st.disarm('3') }
-  let(:armed_bomb_fail_disarm_3rd) { armed_bomb_fail_disarm_2nd.disarm('3') }
   describe '#new' do
     context 'when initialized bomb' do
       it 'should not be nil' do
@@ -82,26 +85,26 @@ describe 'Bomb' do
   describe '#disarm'
   context 'when disarming a bomb with the correct activation code it should be armed' do
     it 'should allow disarming a bomb with correct code' do
-      expect(bomb.boot.arm('1234').disarm('0000').armed?).to be false
+      expect(armed_bomb.disarm('0000').armed?).to be false
     end
 
     it 'should should not disarm a bomb with incorrect code' do
-      expect(bomb.boot.arm('1234').disarm('1111').armed?).to be true
+      expect(armed_bomb.disarm('1111').armed?).to be true
     end
   end
 
   describe '#detonated' do
   context 'putting in the wrong deactivation code three times should detonate' do
     it 'should not detonate after 1 failed attempt' do
-      expect(armed_bomb_fail_disarm_1st.detonated).to be false
+      expect(setup_and_disarm(1).detonated).to be false
     end
 
     it 'should not detonate after 2 failed attempts' do
-      expect(armed_bomb_fail_disarm_2nd.detonated).to be false
+      expect(setup_and_disarm(2).detonated).to be false
     end
 
     it 'should detonate after 3 failed attempts' do
-      expect(armed_bomb_fail_disarm_3rd.detonated).to be true
+      expect(setup_and_disarm(3).detonated).to be true
     end
   end
     end

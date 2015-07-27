@@ -2,7 +2,11 @@
   #game-over {
     transition: all ease 1s;
     z-index: 10000;
-    opacity: 1;
+    opacity: 0.85;
+
+    h2 {
+      display: block;
+    }
   }
   
   #briefcase-lid, #briefcase-box {
@@ -38,5 +42,11 @@
       transition: all ease 1.35s;
       -webkit-transform: rotateZ(-260deg) translate3d(150px, 133px, -390px);
     }
+  }
+}
+
+#briefcase-lid, #briefcase-box {
+  figure {
+    transition: all ease 0.7s
   }
 }

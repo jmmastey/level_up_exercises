@@ -20,6 +20,7 @@
   color: white;
   text-align: center;
   padding: 500px 25px 100px 25px;
+  transition: all ease 1s;
 
   h1 {
     font-size: 100px;
@@ -27,12 +28,16 @@
     animation: text-glow 2s infinite alternate;
   }
 
-  h2 a {
-    font-size: 40px;
-    color: red;
+  h2 {
+    display: none;
 
-    &:hover {
-      color: darkred;
+    a {
+      font-size: 40px;
+      color: red;
+
+      &:hover {
+        color: darkred;
+      }
     }
   }
 }

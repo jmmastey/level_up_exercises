@@ -38,26 +38,31 @@ BombStates =
 	states: 
 	[
 		{
-			className: 'activation', 
+			className:    'activation', 
+			inputHandler: function() { return true },
+			onEnterState: function() { Bomb.toggleLid(false); Timer.reset() }
+		},
+
+		{
+			className:    'deactivation', 
 			inputHandler: function() { return true }
 		},
 
 		{
-			className: 'deactivation', 
+			className:    'standby', 
 			inputHandler: function() { return true }
 		},
 
 		{
-			className: 'standby', 
-			inputHandler: function() { return true }
+			className:    'armed', 
+			inputHandler: function() { return true },
+			onEnterState: function() { Bomb.toggleLid(true); Timer.startCountDown(); }
 		},
 
 		{
-			className: 'armed', 
-			inputHandler:  function() { return true },
-			onEnterState:  function() { this.toggleBombLid(); Timer.startCountDown(); },
-			onLeaveState:  function() { this.toggleBombLid(); Timer.reset(); },
-			toggleBombLid: function() { $('#briefcase-lid').toggleClass('open'); $('.tank').toggleClass('show'); }
+			className:    'exploded',
+			inputHandler: function() { return true },
+			onEnterState: function() { Timer.stop() }
 		}
 	]
 }

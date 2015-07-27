@@ -8,7 +8,7 @@ class Overlord < Sinatra::Base
 
   register Sinatra::AssetPack
   assets do
-    js  :application, [ '/js/jquery-2.1.4.min.js', '/js/*.js' ]
+    js  :application, [ '/js/jquery-2.1.4.min.js', '/js/timer.js', '/js/*.js' ]
     css :application, [ '/css/*.css' ]
     js_compression :jsmin
     css_compression :scss

@@ -13,9 +13,13 @@ Timer =
 
 	decrementTimer: function() {
 		this.currentTime -= this.TIMER_UPDATE_INTERVAL_IN_S;
-		this.updateTimerText();
-		this.updateTimeRunningOutClass();
-		this.currentTime <= 0 && this.reset();
+		
+		if (this.currentTime > 0) {
+			this.updateTimerText();
+			this.updateTimeRunningOutClass();
+		} else {
+			BombStates.goNextState();
+		}
 	},
 
 	updateTimeRunningOutClass: function() {
@@ -34,8 +38,12 @@ Timer =
 		this.timer.html(minutes + ':' + seconds + ':' + miliseconds);
 	},
 
-	reset: function() {
+	stop: function() {
 		clearInterval(this.timerInterval);
+	},
+
+	reset: function() {
+		this.stop();
 		this.currentTime = 0;
 		this.updateTimerText();
 		this.updateTimeRunningOutClass();

@@ -7,8 +7,10 @@ require File.join(File.dirname(__FILE__), '..', '..', 'overlord.rb')
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
+require 'pry'
 
 Capybara.app = Overlord
+Capybara.default_driver = :selenium
 
 class OverlordWorld
   include Capybara::DSL

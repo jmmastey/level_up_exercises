@@ -27,10 +27,13 @@ module DinoValidator
     "walking" => valid_walking,
   }
 
+  def self.validate(k, v)
+    return true unless DISPATCHER.include?(k)
+    DISPATCHER[k].call(v)
+  end
+
   def self.valid_row?(row)
-    row.reduce(0) do |valid, (k, v)|
-      valid && DISPATCHER.include?(k) ? DISPATCHER[k].call(v) : true
-    end
+    row.reduce(0) { |valid, (k, v)| valid && validate(k, v) }
   end
 
   def self.valid_data?(data)

@@ -1,0 +1,20 @@
+<html>
+<head>
+  <title>Overlord</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body>
+<h1>Bomb Status: <%= status %> </h1>
+<h2><%= error %></h2>
+<div class="container">
+  <form action="/activate/" method="post">
+    <label>Activation Code</label>
+    <input type="text" name="activation"><br/>
+    <label>Deactivation Code</label>
+    <input type="text" name="deactivation"><br />
+    <input style="margin-top: 5%;" type="submit" value="Submit">
+  </form>
+</div>
+</body>
+</html>

@@ -2,7 +2,6 @@ require_relative 'json_reader'
 require 'abanalyzer'
 
 class DataAnalyzer
-  attr_accessor :data
 
   def initialize(file_path)
     @data_array = JSONReader.read_json_file(file_path)

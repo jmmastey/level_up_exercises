@@ -1,4 +1,3 @@
-
 require_relative '../bomb'
 
 def setup_and_disarm(failed_disarm_attempts)
@@ -94,9 +93,9 @@ describe Bomb do
   end
 
   describe '#last_disarm_successful'
-    it 'will be true if the previous disarm attempt was successful' do
-      expect(armed_bomb.disarm('0000').last_disarm_successful).to be true
-    end
+  it 'will be true if the previous disarm attempt was successful' do
+    expect(armed_bomb.disarm('0000').last_disarm_successful).to be true
+  end
   it 'will be false if the previous disarm attempt was unsuccessful' do
     expect(armed_bomb.disarm('1111').last_disarm_successful).to be false
   end
@@ -105,18 +104,18 @@ describe Bomb do
   end
 
   describe '#detonated' do
-  context 'putting in the wrong deactivation code three times should detonate' do
-    it 'should not detonate after 1 failed attempt' do
-      expect(setup_and_disarm(1).detonated).to be false
-    end
+    context 'putting in the wrong deactivation code three times should detonate' do
+      it 'should not detonate after 1 failed attempt' do
+        expect(setup_and_disarm(1).detonated).to be false
+      end
 
-    it 'should not detonate after 2 failed attempts' do
-      expect(setup_and_disarm(2).detonated).to be false
-    end
+      it 'should not detonate after 2 failed attempts' do
+        expect(setup_and_disarm(2).detonated).to be false
+      end
 
-    it 'should detonate after 3 failed attempts' do
-      expect(setup_and_disarm(3).detonated).to be true
+      it 'should detonate after 3 failed attempts' do
+        expect(setup_and_disarm(3).detonated).to be true
+      end
     end
   end
-    end
 end

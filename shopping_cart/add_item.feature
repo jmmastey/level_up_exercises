@@ -129,4 +129,3 @@ Feature: Add an item
     Given I have an empty cart
     And I try to add an invalid item to the cart
     Then I should have "0" items in my cart
-    

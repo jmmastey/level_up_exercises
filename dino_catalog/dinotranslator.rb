@@ -18,8 +18,11 @@ module DinoTranslator
   end
 
   def self.translate_empty_weight(h)
-    return h unless h.include?("weight")
-    h.delete("weight") if h["weight"].length == 0
+    if h.include?("weight")
+      h.delete("weight") if h["weight"].length == 0
+    elsif h.include?("weight_in_lbs")
+      h.delete("weight_in_lbs") if h["weight_in_lbs"].length == 0
+    end
   end
 
   def self.translate_header(data)

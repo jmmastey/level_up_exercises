@@ -7,7 +7,7 @@ require_relative 'dinodex_printer'
 
 class Dinodex
   attr_accessor :registry
-  
+
   search_name = lambda do |res, name|
     res.select { |dino| dino.name_is?(name) }
   end
@@ -20,8 +20,16 @@ class Dinodex
     res.select { |dino| dino.diet_is?(diet) }
   end
 
-  search_size = lambda do |res, size|
-    res.select { |dino| dino.size_is?(size) }
+  search_big = lambda do |res, b|
+    res.select { |dino| dino.big?(b) }
+  end
+
+  search_small = lambda do |res, b|
+    res.select { |dino| dino.small?(b) }
+  end
+
+  search_weight = lambda do |res, weight|
+    res.select { |dino| dino.weight_is?(weight) }
   end
 
   search_walking = lambda do |res, walking|
@@ -32,7 +40,9 @@ class Dinodex
     name: search_name,
     period: search_period,
     diet: search_diet,
-    size: search_size,
+    big: search_big,
+    small: search_small,
+    weight: search_weight,
     walking: search_walking,
   }
 

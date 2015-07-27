@@ -15,7 +15,7 @@ puts "\nAll the dinosaurs from the cretaceous period:"
 dinodex.print_search(period: 'cretaceous')
 
 puts "\nAll the big dinosaurs:"
-dinodex.print_search(size: 'big')
+dinodex.print_search(big: true)
 
 puts "\nAll the small dinosaurs:"
-dinodex.print_search(size: 'small')
+dinodex.print_search(small: true)

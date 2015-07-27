@@ -1,5 +1,6 @@
 class Dinosaur
   TWO_TONS = 4000
+  SMALL = 2000
 
   attr_accessor :data
 
@@ -8,7 +9,7 @@ class Dinosaur
   end
 
   def has?(key)
-    data.has_key?(key)
+    data.key?(key)
   end
 
   def name_is?(name)
@@ -28,12 +29,18 @@ class Dinosaur
     data['diet'] != 'herbivore' && data['diet'] != ""
   end
 
-  def size_is?(size)
-    size = size.downcase
-    return false if data['weight'].length == 0
-    return Float(data['weight']) > TWO_TONS if size == 'big'
-    return Float(data['weight']) < 2000 if size == 'small'
-    return data['weight'] == size
+  def big?(b)
+    return unless data['weight']
+    b == (Float(data['weight']) > TWO_TONS)
+  end
+
+  def small?(b)
+    return unless data['weight']
+    b == (Float(data['weight']) < SMALL)
+  end
+
+  def weight_is?(weight)
+    data['weight'] == weight
   end
 
   def walking_is?(walking)

@@ -33,10 +33,10 @@ module DinoValidator
   end
 
   def self.valid_row?(row)
-    row.reduce(0) { |valid, (k, v)| valid && validate(k, v) }
+    row.inject(0) { |valid, (k, v)| valid && validate(k, v) }
   end
 
   def self.valid_data?(data)
-    data.reduce(0) { |valid, row| valid && valid_row?(row) }
+    data.inject(0) { |valid, row| valid && valid_row?(row) }
   end
 end

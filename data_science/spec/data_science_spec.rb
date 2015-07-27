@@ -1,19 +1,19 @@
 require_relative '../data_science/data_science.rb'
 
 RSpec.describe DataScience do
-  TEST_JSON_PATH           = 'split_data/test_data.json'
-  NUM_TEST_ENTRIES_TOTAL   = 40
-  NUM_TEST_ENTRIES_A       = 20
-  NUM_TEST_ENTRIES_B       = NUM_TEST_ENTRIES_TOTAL - NUM_TEST_ENTRIES_A
-  COHORT_NAME_A            = 'A'
-  COHORT_NAME_B            = 'B'
+  TEST_JSON_PATH = 'split_data/test_data.json'
+  NUM_TEST_ENTRIES_TOTAL = 40
+  NUM_TEST_ENTRIES_A = 20
+  NUM_TEST_ENTRIES_B = NUM_TEST_ENTRIES_TOTAL - NUM_TEST_ENTRIES_A
+  COHORT_NAME_A = 'A'
+  COHORT_NAME_B = 'B'
 
   before(:example) do
     @data_science = DataScience.new(COHORT_NAME_A, COHORT_NAME_B)
   end
 
   def cohort_entry(cohort_name)
-    { cohort: cohort_name, date: '2014-05-10', result: 1  }
+    { cohort: cohort_name, date: '2014-05-10', result: 1 }
   end
 
   it 'can load an entry into cohort A' do

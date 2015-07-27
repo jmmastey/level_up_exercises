@@ -3,7 +3,7 @@ require 'abanalyzer'
 
 class DataScience
   DEFUALT_COHORT_JSON_PATH = 'split_data/data_export_2014_06_20_15_59_02.json'
-  AB_CONFIDENCE            = 0.95
+  AB_CONFIDENCE = 0.95
 
   attr_reader :cohort_a, :cohort_b
 
@@ -26,7 +26,7 @@ class DataScience
   end
 
   def load_cohort_json(path = DEFUALT_COHORT_JSON_PATH)
-    json_file      = File.read path
+    json_file = File.read path
     cohort_entries = JSON.parse(json_file, symbolize_names: true)
     cohort_entries.each(&method(:add_cohort_entry))
   end

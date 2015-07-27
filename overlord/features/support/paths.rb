@@ -10,7 +10,7 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-      when /the home\s?page/
+      when /the starting\s?page/
         '/'
 
       when /the activation\s?page/

@@ -11,6 +11,7 @@ require 'rspec'
 Capybara.app = Overlord
 
 class OverlordWorld
+  Capybara.current_driver = :selenium
   include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers

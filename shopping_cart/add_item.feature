@@ -1,4 +1,8 @@
 Feature: Add an item
+  In order to buy necessary goods
+  As a customer
+  I should be able to add items to the cart
+
   @Happy
   Scenario Outline: When I try to add an item to the cart it should add the item and quantity specified correctly.
     Given I have an empty cart
@@ -125,3 +129,4 @@ Feature: Add an item
     Given I have an empty cart
     And I try to add an invalid item to the cart
     Then I should have "0" items in my cart
+    

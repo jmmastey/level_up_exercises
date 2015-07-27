@@ -11,7 +11,7 @@ describe DataLoader do
       expect(nothing_loaded.size).to eq(0)
     end
 
-    it "loads json and returns a dictionary of cohorts" , happy: true do
+    it "loads json and returns a dictionary of cohorts", happy: true do
       expect(cohorts.size).to eq(2)
       expect(cohorts['A']).to be_a(Cohort)
       expect(cohorts['B']).to be_a(Cohort)

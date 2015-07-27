@@ -14,7 +14,6 @@ class Overlord < Sinatra::Base
   set :run, true
   set :raise_errors, true
   set :dump_errors, false
-  # enable :lock
 
   get '/' do
     'Time to boot a bomb. Start time: ' << start_time
@@ -45,10 +44,6 @@ class Overlord < Sinatra::Base
 
   def start_time
     session[:start_time] ||= (Time.now).to_s
-  end
-
-  def setup
-    Capybara.app = Sinatra::Application.new
   end
 
   run! if app_file == $PROGRAM_NAME

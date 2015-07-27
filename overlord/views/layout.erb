@@ -24,13 +24,13 @@
 <h1>iBomb</h1>
 <h3> <%= (Time.now).to_s  %></h3>
 
-DEBUG Bomb Enabled :<%= the_bomb.active? %> <br>
-DEBUG Bomb Armed :<%= the_bomb.armed? %> <br>
-DEBUG Bomb Last deactivation attempt was successful :<%= the_bomb.last_disarm_successful? %> <br>
-<!--DEBUG Bomb Activation Code :<%=the_bomb.activation_code  %> <br>-->
-<!--DEBUG Bomb Deactivation Code :<%= the_bomb.deactivation_code %> <br>-->
-DEBUG Bomb Deactivation Attempts Left :<%= the_bomb.disarm_attempts_left %> <br>
-DEBUG Bomb Exploded :<%= the_bomb.detonated %> <br>
+DEBUG Bomb Enabled :<%= bomb.active? %> <br>
+DEBUG Bomb Armed :<%= bomb.armed? %> <br>
+DEBUG Bomb Last deactivation attempt was successful :<%= bomb.last_disarm_successful %> <br>
+<!--DEBUG Bomb Activation Code :<%=bomb.activation_code  %> <br>-->
+<!--DEBUG Bomb Deactivation Code :<%= bomb.deactivation_code %> <br>-->
+DEBUG Bomb Deactivation Attempts Left :<%= bomb.disarm_attempts_left %> <br>
+DEBUG Bomb Exploded :<%= bomb.detonated %> <br>
 
 <%= yield %>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

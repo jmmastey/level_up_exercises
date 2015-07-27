@@ -1,6 +1,6 @@
 <p>
 
-  <% if the_bomb.active? %>
+  <% if bomb.active? %>
       <br>Bomb active
       <br>Bomb created successfully
   <% else %>
@@ -10,7 +10,7 @@
 
 <br>
 
-  <% if the_bomb.armed? || the_bomb.active?%>
+  <% if bomb.armed? || bomb.active?%>
       <a href="javascript: void(0)">Boot A Bomb</a>
   <% else %>
       <a href='/boot/' >Boot A Bomb</a>

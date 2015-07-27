@@ -1,8 +1,12 @@
-Given(/^A bomb is active and armed$/) do
-  visit '/boot/'
+def create_and_arm_bomb
   fill_in 'activation', with: ''
   click_button 'Create Bomb'
   fill_in 'armingcode', with: '1234'
+end
+
+Given(/^A bomb is active and armed$/) do
+  visit '/boot/'
+  create_and_arm_bomb
   click_button('Arm Bomb')
 end
 

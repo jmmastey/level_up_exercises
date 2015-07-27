@@ -7,7 +7,7 @@ def setup_and_disarm(failed_disarm_attempts)
   bomb
 end
 
-describe 'Bomb' do
+describe Bomb do
   let(:bomb) { Bomb.new }
   let(:armed_bomb) { bomb.boot.arm('1234') }
   describe '#new' do
@@ -91,6 +91,17 @@ describe 'Bomb' do
     it 'should should not disarm a bomb with incorrect code' do
       expect(armed_bomb.disarm('1111').armed?).to be true
     end
+  end
+
+  describe '#last_disarm_successful'
+    it 'will be true if the previous disarm attempt was successful' do
+      expect(armed_bomb.disarm('0000').last_disarm_successful).to be true
+    end
+  it 'will be false if the previous disarm attempt was unsuccessful' do
+    expect(armed_bomb.disarm('1111').last_disarm_successful).to be false
+  end
+  it 'will be :unknown if there was no previous disarm attempt' do
+    expect(armed_bomb.last_disarm_successful).to eq(:unknown)
   end
 
   describe '#detonated' do

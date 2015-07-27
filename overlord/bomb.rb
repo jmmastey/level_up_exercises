@@ -11,17 +11,19 @@ class Bomb
   def initialize
     @activation_code = '1234'
     @deactivation_code = '0000'
-    @booted = false #TODO: nil is falsy so see if can change the code in a way where do not need to explicitly initialize
+    @booted = false
     @armed = false
     @detonated = false
     @disarm_attempts = 0
+    @disarm_attempt_made = false
   end
 
   def disarm_attempts_left
     [ALLOWED_DISARM_ATTEMPTS - @disarm_attempts, 0].max
   end
 
-  def last_disarm_successful? #TODO: And what if no disarm attempts have been made?
+  def last_disarm_successful
+    return :unknown unless @disarm_attempt_made
     @disarm_attempts == 0
   end
 
@@ -51,6 +53,7 @@ class Bomb
 
   def disarm(code)
     (code == @deactivation_code) ? successful_disarm : failed_disarm
+    @disarm_attempt_made = true
     self
   end
 

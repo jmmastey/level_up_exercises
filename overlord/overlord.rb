@@ -25,8 +25,8 @@ class Overlord < Sinatra::Base
   end
 
   post '/boot/' do
-    the_bomb.boot(params[:activation], params[:deactivation])
-    erb :index, locals: { activation: params[:activation], deactivation: params[:deactivation] }
+    bomb.boot(params[:activation], params[:deactivation])
+    erb :index
   end
 
   get '/arm/' do
@@ -34,7 +34,7 @@ class Overlord < Sinatra::Base
   end
 
   post '/arm/' do
-    the_bomb.arm(params[:armingcode])
+    bomb.arm(params[:armingcode])
     erb :index
   end
 
@@ -43,13 +43,12 @@ class Overlord < Sinatra::Base
   end
 
   post '/disarm/' do
-    the_bomb.disarm(params[:disarmingcode])
+    bomb.disarm(params[:disarmingcode])
     erb :index
   end
 
-  def the_bomb
+  def bomb
     session[:bomb] ||= Bomb.new
-    session[:bomb]
   end
 
   def start_time

@@ -29,16 +29,8 @@ class Overlord < Sinatra::Base
     erb :index
   end
 
-  get '/arm/' do
-    erb :index
-  end
-
   post '/arm/' do
     bomb.arm(params[:armingcode])
-    erb :index
-  end
-
-  get '/disarm/' do
     erb :index
   end
 

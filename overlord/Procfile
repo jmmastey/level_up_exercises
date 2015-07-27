@@ -1,0 +1,2 @@
+web: rerun 'rackup overlord.rb'
+guard: bundle exec guard -i

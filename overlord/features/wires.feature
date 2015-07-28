@@ -11,7 +11,7 @@ Feature: The bomb has wires that can be snipped to keep the bomb from exploding
   Scenario Outline: Cutting the wires disables the bomb
     Given an <status> bomb
     When I cut the wires
-    Then the bomb is "disabled"
+    Then the bomb is disabled
 
     Examples:
       | status   |

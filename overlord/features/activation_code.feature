@@ -6,7 +6,7 @@ Feature: Activation code
 Scenario Outline: Activate the bomb or not
     Given an inactive bomb with activation code "<correct>"
     When I activate the bomb with "<provided>"
-    Then the bomb is "<status>"
+    Then the bomb is <status>
 
     Examples:
       | correct | provided | status   |
@@ -19,15 +19,15 @@ Scenario Outline: Activate the bomb or not
 
   Scenario Outline: Entering the activation code extra times has no effect
     Given an active bomb with activation code "1234"
-    When some incompetent minion activates the bomb with "1234" "<number>" times
+    When some incompetent minion activates the bomb with "1234" <count> times
     Then the bomb is active
 
     Examples:
-      | number |
-      | 1      |
-      | 2      |
-      | 3      |
-      | 10     |
+      | count |
+      | 1     |
+      | 2     |
+      | 3     |
+      | 10    |
 
   Scenario: Activating with the wrong code provides a message
     Given an inactive bomb with activation code "1234"

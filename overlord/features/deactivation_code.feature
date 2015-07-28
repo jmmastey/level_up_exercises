@@ -6,7 +6,7 @@ Feature: Deactivation code
 Scenario Outline: Deactivate the bomb or not
     Given an active bomb with deactivation code "<correct>"
     When I fill in "code" with "<provided>"
-    Then the bomb is "<status>"
+    Then the bomb is <status>
 
     Examples:
       | correct | provided | status   |

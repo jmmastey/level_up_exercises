@@ -69,16 +69,17 @@ var bomb = {
         $('.panel').addClass(newClass);
     },
 
-    insert_errors: function(selector, errors) {
+    insertErrors: function(selector, errors) {
         $('.errors').html('');
         for(var i = 0; i < errors.length; i++) {
-            error_div = '<div class="alert alert-danger" style="display: block;">'
-                        + errors[i] + '</div>';
-            $(selector + ' .errors').append(error_div);
+            var errorDiv = '<div class="alert alert-danger"' +
+                           'style="display: block;">' +
+                           errors[i] + '</div>';
+            $(selector + ' .errors').append(errorDiv);
         }
         $(selector + ' .alert').show();
     }
-}
+};
 
 $('.configuration form').on('submit', function (event) {
     event.preventDefault();
@@ -93,9 +94,9 @@ $('.configuration form').on('submit', function (event) {
             'deactivation_code': deactivationCode
         },
         dataType: 'json',
-        success: function(data) { bomb.boot(); },
+        success: function() { bomb.boot(); },
         error: function (data) {
-            bomb.insert_errors('.configuration', data.responseJSON['errors'])
+            bomb.insertErrors('.configuration', data.responseJSON.errors);
         }
     });
 });
@@ -107,9 +108,9 @@ $('.activate form').on('submit', function(event) {
         type: 'POST',
         data: { 'activation_code': $('.activate input').val()},
         dataType: 'json',
-        success: function(data) { bomb.activate(); },
+        success: function() { bomb.activate(); },
         error: function (data) {
-          bomb.insert_errors('.activate', data.responseJSON['errors'])
+          bomb.insertErrors('.activate', data.responseJSON.errors);
         }
     });
 });
@@ -121,12 +122,12 @@ $('.deactivate form').on('submit', function(event) {
         type: 'POST',
         data: { 'deactivation_code': $('.deactivate input').val()},
         dataType: 'json',
-        success: function(data) { bomb.deactivate(); },
+        success: function() { bomb.deactivate(); },
         statusCode: {
             400: function() { bomb.explode(); },
             422: function (data) {
-                bomb.insert_errors('.deactivate', data.responseJSON['errors']);
-                $('.attempts').html(data.responseJSON['attempts']);
+                bomb.insertErrors('.deactivate', data.responseJSON.errors);
+                $('.attempts').html(data.responseJSON.attempts);
             }
         }
     });

@@ -3,31 +3,31 @@ Feature: Deactivating bombs
   I want to deactivate the bomb
   Because I need to save the world
 
-  Scenario: Bomb is deactivated
+  Scenario: Deactivating with default config
     Given the bomb is booted with default config
     And the bomb is activated with default config
     When I submit the deactivation code "0000"
-    Then the bomb should be deactivated
+    Then the bomb is "Deactivated!"
 
   Scenario: Invalid deactivation code
     Given the bomb is booted with default config
     And the bomb is activated with default config
     When I submit the deactivation code "333z"
-    Then I see a deactivation error message
+    Then I see "Wrong deactivation code"
     And there are 2 attempts left
 
   Scenario: Wrong deactivation code
     Given the bomb is booted with default config
     And the bomb is activated with default config
     When I submit the deactivation code "3333"
-    Then I see a deactivation error message
+    Then I see "Wrong deactivation code"
 
   Scenario: Wrong deactivation code first
     Given the bomb is booted with default config
     And the bomb is activated with default config
     When I submit the deactivation code "3333"
-    When I submit the deactivation code "0000"
-    Then the bomb should be deactivated
+    And I submit the deactivation code "0000"
+    Then the bomb is "Deactivated!"
 
   Scenario: 2 failed attempts
     Given the bomb is booted with default config
@@ -42,4 +42,4 @@ Feature: Deactivating bombs
     When I submit the deactivation code "3333"
     When I submit the deactivation code "1111"
     When I submit the deactivation code "2222"
-    Then the bomb should explode
+    Then the bomb is "Exploded!"

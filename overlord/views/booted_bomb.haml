@@ -1,9 +1,6 @@
 .activate
   %h1 Activation Sequence
-  .alert.alert-danger{role: "alert"}
-    %span.glyphicon.glyphicon-exclamation-sign{'aria-hidden' => "true"}
-    %span.sr-only Error:
-    Wrong activation code
+  .errors
   %form{action: '/activate', method: 'post'}
     .form-group
       %label{for: "activation_code"} Activation Code:
@@ -14,10 +11,7 @@
   %h1.countdown
     Countdown:
     %span.timer#30
-  .alert.alert-danger{role: "alert"}
-    %span.glyphicon.glyphicon-exclamation-sign{'aria-hidden' => "true"}
-    %span.sr-only Error:
-    Wrong deactivation code
+  .errors
   %form{action: '/deactivate', method: 'post'}
     .form-group
       %label{for: "deactivation_code"} Deactivation Code:

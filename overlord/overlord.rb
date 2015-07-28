@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'haml'
 require_relative './bomb'
+require 'json'
 require 'pry'
 
 enable :sessions
@@ -13,31 +14,34 @@ end
 
 post '/configure' do
   set_bomb
-  halt(422) unless session[:bomb].booted?
-  halt(200)
+  bomb.boot
+  halt(200, "OK".to_json) if bomb.booted?
+  halt(422, { 'errors' => bomb.errors }.to_json)
 end
 
 post '/activate' do
-  bomb = session[:bomb]
-  bomb.activate(params['activation_code']) unless bomb.activated?
-  halt(422) unless bomb.activated?
-  halt(200)
+  bomb.activate(params['activation_code'])
+  halt(200, "OK".to_json) if bomb.activated?
+  halt(422, { 'errors' => bomb.errors }.to_json)
 end
 
 post '/deactivate' do
-  bomb = session[:bomb]
   bomb.deactivate(params['deactivation_code'])
-  halt(200) if bomb.deactivated?
-  halt(400) if bomb.exploded?
-  session[:bomb] = nil if bomb.deactivated? || bomb.exploded?
-  halt(422, "#{bomb.attempts} attempts left")
+  halt(200, "OK".to_json) if bomb.deactivated?
+  halt(400, { 'status' => "Exploded" }.to_json) if bomb.exploded?
+  halt(422, { 'errors' => bomb.errors,
+              'attempts' => "#{bomb.attempts} attempts left" }.to_json)
 end
 
 def set_bomb
-  if session[:bomb]
-    session[:bomb].update_codes(params)
+  if bomb
+    bomb.update(params['activation_code'], params['deactivation_code'])
   else
-    bomb = Bomb.new(params['activation_code'], params['deactivation_code'])
-    session[:bomb] = bomb
+    session[:bomb] = Bomb.new(params['activation_code'],
+      params['deactivation_code'])
   end
+end
+
+def bomb
+  session[:bomb]
 end

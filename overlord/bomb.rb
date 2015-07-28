@@ -1,10 +1,5 @@
+require_relative 'bomb_state'
 class Bomb
-  OFF = :OFF
-  BOOTED = :BOOTED
-  ACTIVATED = :ACTIVATED
-  DEACTIVATED = :DEACTIVATED
-  EXPLODED = :EXPLODED
-
   DEFAULT_NUM_ATTEMPTS = 3
 
   attr_accessor :state, :activation_code, :deactivation_code, :attempts, :errors
@@ -13,7 +8,7 @@ class Bomb
     @activation_code = activation_code
     @deactivation_code = deactivation_code
     @errors = []
-    @state = OFF
+    @state = BombState::OFF
   end
 
   def update(activation_code, deactivation_code)
@@ -22,56 +17,56 @@ class Bomb
   end
 
   def boot
-    return unless state == OFF
+    return unless off?
 
     check_for_valid_codes
     return unless valid_codes?
 
-    @state = BOOTED
+    @state = BombState::BOOTED
     @attempts = DEFAULT_NUM_ATTEMPTS
   end
 
   def activate(code)
-    return unless state == BOOTED
+    return unless booted?
 
     check_for_correct_code?(code)
     return unless valid_codes?
 
-    @state = ACTIVATED
+    @state = BombState::ACTIVATED
   end
 
   def deactivate(code)
-    return unless state == ACTIVATED
+    return unless activated?
 
     check_for_correct_code?(code)
-    return @state = DEACTIVATED if valid_codes?
+    return @state = BombState::DEACTIVATED if valid_codes?
 
     @attempts -= 1
     explode if attempts == 0
   end
 
   def explode
-    @state = EXPLODED
+    @state = BombState::EXPLODED
   end
 
   def off?
-    state == OFF
+    state == BombState::OFF
   end
 
   def booted?
-    state == BOOTED
+    state == BombState::BOOTED
   end
 
   def activated?
-    state == ACTIVATED
+    state == BombState::ACTIVATED
   end
 
   def deactivated?
-    state == DEACTIVATED
+    state == BombState::DEACTIVATED
   end
 
   def exploded?
-    state == EXPLODED
+    state == BombState::EXPLODED
   end
 
   private
@@ -81,7 +76,7 @@ class Bomb
   end
 
   def check_for_valid_codes
-    return unless state == OFF
+    return unless off?
     errors.clear
     errors << 'Invalid activation code' unless valid_code?(activation_code)
     errors << 'Invalid deactivation code' unless valid_code?(deactivation_code)
@@ -89,9 +84,9 @@ class Bomb
 
   def check_for_correct_code?(code)
     errors.clear
-    if state == BOOTED
+    if booted?
       errors << 'Wrong activation code' unless activation_code == code
-    elsif state == ACTIVATED
+    elsif activated?
       errors << 'Wrong deactivation code' unless deactivation_code == code
     end
   end

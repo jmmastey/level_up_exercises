@@ -42,6 +42,7 @@ describe Bomb do
 
       it 'is still in off state' do
         expect(bomb).to be_off
+        expect(bomb.errors).to eq(["Invalid activation code"])
       end
     end
   end
@@ -68,6 +69,7 @@ describe Bomb do
 
       it 'is still off' do
         expect(bomb).to be_off
+        expect(bomb.errors).to eq(["Invalid activation code"])
       end
     end
   end
@@ -87,6 +89,7 @@ describe Bomb do
       it 'is not activated' do
         expect(bomb).to_not be_activated
         expect(bomb).to be_booted
+        expect(bomb.errors).to eq(["Wrong activation code"])
       end
     end
   end
@@ -111,6 +114,7 @@ describe Bomb do
 
       it 'is not deactivated' do
         expect(bomb).to_not be_deactivated
+        expect(bomb.errors).to eq(["Wrong deactivation code"])
       end
 
       it 'has 2 attempts left' do

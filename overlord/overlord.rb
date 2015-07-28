@@ -2,7 +2,6 @@ require 'sinatra'
 require 'haml'
 require_relative './bomb'
 require 'json'
-require 'pry'
 
 enable :sessions
 set :session_secret, ENV['overlord_secret_key']

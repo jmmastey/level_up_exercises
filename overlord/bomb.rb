@@ -25,13 +25,14 @@ class Bomb
   end
 
   def set_codes(a_code, d_code)
-    return false unless valid_code?(a_code) && valid_code?(d_code)
+    raise InvalidCodeError unless valid_code?(a_code) && valid_code?(d_code)
     @activation_code = a_code
     @deactivation_code = d_code
   end
 
   def boot_up(activation_code = "1234", deactivation_code = "0000")
-    @state = ON if set_codes(activation_code, deactivation_code)
+    set_codes(activation_code, deactivation_code)
+    @state = ON
   end
 
   def activate(code)

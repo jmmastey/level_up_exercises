@@ -1,0 +1,7 @@
+.attempts, .timer, .alert, .interface, .deactivate, .safe, .exploded {
+  display: none;
+}
+
+.backgroundRed {
+    background-color: red;
+}

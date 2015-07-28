@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %title Overlord
+    %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"}
+    %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"}
+    %link{href: "reset.css", rel: "stylesheet", type: 'text/css'}
+    %link{href: "normalize.css", rel: "stylesheet", type: 'text/css'}
+    %link{href: "overload.css", rel: "stylesheet", type: 'text/css'}
+
+  %body
+    %nav.navbar.navbar-default.navbar-inverse
+      .container-fluid
+        .navbar-header
+          %a.navbar-brand{href: "#"} Overlord
+
+    .container-fluid
+      .col-md-3
+        .panel.panel-info
+          .panel-heading
+            %h3.panel-title Bomb Status
+          .panel-body
+            %h3.bomb_status Off!
+            %h2.attempts 3 attempts left
+      .col-md-9
+        .panel.panel-info
+          .panel-heading
+            %h3.panel-title Bomb Interface
+          .panel-body
+            .configuration
+              =haml :configuration
+            .interface
+              =haml :booted_bomb
+            .safe
+              =haml :safe
+            .exploded
+              =haml :exploded
+
+
+  %script{src: '//code.jquery.com/jquery-1.11.3.min.js'}
+  %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
+  %script{src: "overload.js", type: "text/javascript"}

@@ -1,0 +1,19 @@
+.activate
+  %h1 Activation Sequence
+  .errors
+  %form{action: '/activate', method: 'post'}
+    .form-group
+      %label{for: "activation_code"} Activation Code:
+      %input.form-control{type: "text", name: "submit_activation_code"}
+    %button.btn.btn-default{type: "submit"} Activate
+
+.deactivate
+  %h1.countdown
+    Countdown:
+    %span.timer#30
+  .errors
+  %form{action: '/deactivate', method: 'post'}
+    .form-group
+      %label{for: "deactivation_code"} Deactivation Code:
+      %input.form-control{type: "text", name: "submit_deactivation_code"}
+    %button.btn.btn-default{type: "submit"} Deactivate

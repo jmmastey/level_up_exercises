@@ -6,7 +6,7 @@ Feature: Add an item
   @Happy
   Scenario Outline: When I try to add an item to the cart it should add the item and quantity specified correctly.
     Given I have an empty cart
-    And I am on a random item page
+    And I am on an item page
     When I try to add <number> of the item to the cart
     Then My cart should have <number> of items
     Examples:
@@ -23,7 +23,7 @@ Feature: Add an item
   @Happy
   Scenario Outline: When I try to add an item to the cart it should add the item and quantity specified correctly.
     Given I have an empty cart
-    And I am on a random item page
+    And I am on an item page
     When I try to add <number> of the item to the cart
     Then My cart should have the correct price for <number> of items
     Examples:
@@ -40,7 +40,7 @@ Feature: Add an item
   @Happy
   Scenario Outline: When I add mutiples of an item to my cart, it should display bulk discounts correctly.
     Given I have an empty cart
-    And I am on a random item page
+    And I am on an item page
     When I try to add <number> of the item to the cart
     Then My cart should have the correct bulk discount price for <number>
     Examples:
@@ -56,14 +56,15 @@ Feature: Add an item
 
   @Happy
   Scenario: When I add new items to the cart, the total cost should update accordingly
-    Given I have items in my cart
-    And I try to add a random item
+    Given I have 2 items in my cart
+    And I am on an item page
+    When I try to add an item
     Then I should see my price change accordingly
 
   @Happy
   Scenario: When I add bundled items to the cart, the bundle should follow correctly
     Given: I have no items in my cart
-    And I try to add a bundle deal to my cart
+    When I try to add a bundle deal to my cart
     Then I should have all the items added into my cart
 
   @Happy
@@ -85,7 +86,7 @@ Feature: Add an item
 
   @Happy
   Scenario: Customer adds item with the same product id to the cart.
-    Given I have an cart with one item
+    Given I have 1 item in my cart
     And I view that item
     When I try to add "1" item to the cart
     Then I should have "2" items in my cart

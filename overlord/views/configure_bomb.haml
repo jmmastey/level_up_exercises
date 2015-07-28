@@ -1,0 +1,10 @@
+%form.controls.config{action: "/configure", method: "post", name: "config"}
+  .activation-code-group
+    %label{for: "activation_code"} Activation code:
+    %p
+      %input.activation-code{type: "text", name: "activation_code", value: "1234"}
+  .deactivation-code-group
+    %label{for: "deactivation_code"} Deactivation code:
+    %p
+      %input.deactivation-code{type: "text", name: "deactivation_code", value: "0000"}
+  %a.btn.set-bomb Set Bomb

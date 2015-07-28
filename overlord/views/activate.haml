@@ -1,0 +1,6 @@
+%form.controls.activate{action: "/activate", method: "post", name: "activate"}
+  .activation-code-group
+    %label{for: "activation-code"} Enter the appropriate activation code:
+    %p
+      %input.activation-code{type: "text", name: "activation_code"}
+  %a.btn.activate-bomb Activate Bomb

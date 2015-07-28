@@ -1,6 +1,6 @@
 require 'json'
-require './rc_iterator.rb'
-require './channel.rb'
+require_relative 'rc_iterator.rb'
+require_relative 'channel.rb'
 
 class RedditCast < RCIterator
 

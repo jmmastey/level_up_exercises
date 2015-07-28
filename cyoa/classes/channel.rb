@@ -1,5 +1,5 @@
-require './search_set.rb'
-require './rc_iterator.rb'
+require_relative 'search_set.rb'
+require_relative 'rc_iterator.rb'
 
 class Channel < RCIterator
   
@@ -17,6 +17,14 @@ class Channel < RCIterator
 
   def now_showing
     current_listing
+  end
+
+  def next_show
+    next_listing
+  end
+
+  def prev_show
+    prev_listing
   end
 
   def next_listing?

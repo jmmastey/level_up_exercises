@@ -1,0 +1,34 @@
+.ld-bars,
+.ld-bars:after,
+.ld-bars:before {
+  padding: 10px 3px;
+  background: white;
+}
+.ld-bars {
+  margin: -10px -15px;
+
+  -webkit-animation: ld-bars 1s 0s infinite ease-out;
+  animation: ld-bars 1s 0s infinite ease-out;
+}
+.ld-bars:before {
+  margin: -10px 9px;
+
+  -webkit-animation: ld-bars 1s 0.1s infinite ease-out;
+  animation: ld-bars 1s 0.1s infinite ease-out;
+}
+.ld-bars:after {
+  margin: -10px 21px;
+
+  -webkit-animation: ld-bars 1s 0.2s infinite ease-out;
+  animation: ld-bars 1s 0.2s infinite ease-out;
+}
+@-webkit-keyframes ld-bars {
+  0%, 30%, 90% {
+    padding: 10px 3px;
+    margin-top: -10px;
+  }
+  50% {
+    padding: 20px 3px;
+    margin-top: -20px;
+  }
+}

@@ -1,5 +1,5 @@
-require './post.rb'
-require './rc_iterator.rb'
+require_relative 'show.rb'
+require_relative 'rc_iterator.rb'
 require 'httparty'
 require 'json'
 
@@ -67,15 +67,21 @@ class Search < RCIterator
 
   def parse_response(json_response)
     @after = json_response['after']
+    parse_before_link(json_response)
+
+    @listings = json_response['children'].map do |child| 
+      Show.new(child['data']) 
+    end
+  end
+
+  def parse_before_link(json_response)
     if @listing_number == 0
+      @before = ''
+    elsif json_response['children'].count == 0
       @before = ''
     else
       first_post = json_response['children'][0]
       @before = first_post['data']['before']
-    end
-
-    @listings = json_response['children'].map do |child| 
-      Post.new(child['data']) 
     end
   end
 end

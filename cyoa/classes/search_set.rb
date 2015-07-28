@@ -1,5 +1,5 @@
-require './search.rb'
-require './rc_iterator.rb'
+require_relative 'search.rb'
+require_relative 'rc_iterator.rb'
 
 class SearchSet < RCIterator
   attr_accessor :searches

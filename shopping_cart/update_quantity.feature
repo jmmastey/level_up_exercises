@@ -1,7 +1,7 @@
 Feature: Change item quantity
-  In order to buy necessary goods
   As a customer
   I should be able to change the quantity of items in my cart
+  In order to buy necessary goods
   @Happy
   Scenario: When I try to increase the quantity of an item in my cart, the quantity should update
     Given I have 5 items in my cart

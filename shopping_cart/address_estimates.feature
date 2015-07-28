@@ -1,7 +1,7 @@
 Feature: Address Estimates
-  In order to know how much I'm spending
   As a customer
   I should be able to see shipping estimates
+  In order to know how much I'm spending
 
   @Happy
   Scenario: When I input a valid address into the shopping cart, we should see a shipping estimate.

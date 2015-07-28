@@ -1,7 +1,7 @@
 Feature: Clicking an item leads to it's product page
-  In order to buy necessary goods
   As a customer
   I should be able to click on items in the cart and see their page
+  In order to buy necessary goods
   @Happy
   Scenario: When I click on a shopping cart item, it should redirect me to it's webpage
     Given I have items in my cart

@@ -1,7 +1,7 @@
 Feature: Add an item
-  In order to buy necessary goods
   As a customer
   I should be able to add items to the cart
+  In order to buy necessary goods
 
   @Happy
   Scenario Outline: When I try to add an item to the cart it should add the item and quantity specified correctly.

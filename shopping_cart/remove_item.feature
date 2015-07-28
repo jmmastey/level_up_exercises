@@ -1,7 +1,7 @@
 Feature: Remove an Item
-  In order to buy necessary goods
   As a customer
   I should be able to remove items from the cart
+  In order to buy exactly what I want
   @Happy
   Scenario: When I try to remove something from the cart, it should remove that item.
     Given I have 5 items in my cart.

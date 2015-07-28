@@ -1,4 +1,8 @@
 Feature: Apply Coupons
+  As a customer
+  I should be able to apply coupons
+  In order to save money
+
   Background:
     Given We have a valid 10 percent off coupon
 

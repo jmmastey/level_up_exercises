@@ -22,17 +22,18 @@ BombStates =
 		shouldGoNextState && this.goNextState();
 	},
 
-	goToState: function(fromStateIndex, toStateIndex) {
+	goToState: function(toStateIndex) {
 		var state     = this.states[toStateIndex];
-		var lastState = this.states[fromStateIndex];
+		var lastState = this.states[this.currentStateIndex];
 		lastState && lastState.onLeaveState && lastState.onLeaveState();
 		$('#code-input-panel input').val('');
 		$('#overlord').attr('class', state.className);
 		state.onEnterState && state.onEnterState();
+		this.currentStateIndex = toStateIndex;
 	},
 
 	goNextState: function() { 
-		this.goToState(this.currentStateIndex, this.incStateIndex());
+		this.goToState(this.incStateIndex());
 	},
 
 	states: 

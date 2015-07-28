@@ -4,6 +4,10 @@ Given(/^the bomb is armed$/) do
   submit_input_sequence
 end
 
+Given(/^the bomb has exploded$/) do
+  page.evaluate_script('BombStates.goToState(0, 4)')
+end
+
 When(/^I submit sequence code input$/) do
   submit_input_sequence
 end
@@ -18,6 +22,10 @@ end
 
 Then(/^the bomb lid should be open$/) do
   page.should have_css('#briefcase-lid.open')
+end
+
+Then(/^all code input fields are empty$/) do
+  page.should have_css('#code-input-panel input', text: '', count: 4)
 end
 
 def submit_input_sequence

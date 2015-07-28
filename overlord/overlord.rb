@@ -2,6 +2,7 @@
 require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/assetpack'
+require 'json'
 
 class Overlord < Sinatra::Base
   enable :sessions
@@ -15,8 +16,31 @@ class Overlord < Sinatra::Base
   end
 
   get '/' do
-    @start_time = start_time
     erb :index
+  end
+
+  post '/reset-bomb' do
+    reset_bomb
+  end
+
+  post '/activation/set/:code' do
+    is_success = session[:bomb].activation_code.set params[:code]
+    render_is_success_json is_success
+  end
+
+  post '/deactivation/set/:code' do
+    is_success = session[:bomb].deactivation_code.set params[:code]
+    render_is_success_json is_success
+  end
+
+  post '/activation/check/:code' do
+    is_success = session[:bomb].activation_code.is? params[:code]
+    render_is_success_json is_success
+  end
+
+  post '/deactivation/check/:code' do
+    is_success = session[:bomb].deactivation_code.is? params[:code]
+    render_is_success_json is_success
   end
 
   %w{jpg png}.each do |format|
@@ -26,7 +50,16 @@ class Overlord < Sinatra::Base
     end
   end
 
-  def start_time
-    session[:start_time] ||= (Time.now).to_s
+  def reset_bomb 
+    session[:bomb] = Bomb.new
+  end
+
+  def render_json(hash)
+    content_type :json
+    hash.to_json
+  end
+
+  def render_is_success_json(is_success)
+    render_json { is_success: is_success }
   end
 end

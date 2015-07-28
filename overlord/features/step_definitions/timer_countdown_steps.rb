@@ -13,8 +13,8 @@ end
 
 Then(/^the timer should start counting down$/) do
   expected_seconds = timer_seconds - 1
-  sleep(1)
-  expect(timer_seconds).to be_within(0.1).of(expected_seconds)
+  sleep(1.1)
+  expect(timer_seconds).to be_within(0.2).of(expected_seconds)
 end
 
 def timer_seconds

@@ -6,10 +6,12 @@ describe Cohort do
   let(:test_file_name) { 'test_data.json' }
   let(:data) { JSON.parse(File.read(test_file_name)) }
   let(:cohort_name) { 'A' }
+
   let(:cohort_data) do
     data.select { |row| row["cohort"] == cohort_name }
       .map { |row| row["result"] }
   end
+
   let(:cohort) { Cohort.new(cohort_name, cohort_data) }
 
   describe '#initialize' do
@@ -21,37 +23,19 @@ describe Cohort do
     end
   end
 
-  describe 'calculating statistics' do
-    before do
-      cohort.calculate_conversion_rate
-      cohort.calculate_standard_error
-      cohort.calculate_confidence_intervals
+  describe '#calculate_statistics' do
+    before { cohort.calculate_statistics }
+
+    it 'calculates the conversion rate' do
+      expect(cohort.conversion_rate).to be_within(0.01).of(0.416)
     end
 
-    context '#calculate_conversion_rate' do
-      it 'calculates correct data' do
-        expect(cohort.conversion_rate).to be_within(0.01).of(0.416)
-      end
+    it 'calculates lower confidence interval' do
+      expect(cohort.lower_confidence_interal).to be_within(0.01).of(0.21882)
     end
 
-    context '#calculate_standard_error' do
-      it 'calculates correct data' do
-        expect(cohort.standard_error).to be_within(0.01).of(0.1006)
-      end
-    end
-
-    describe '#calculate_confidence_intervals' do
-      context '#lower_ci' do
-        it 'calculates correct data' do
-          expect(cohort.lower_confidence_interal).to be_within(0.01).of(0.218824)
-        end
-      end
-
-      context '#upper_ci' do
-        it 'calculates correct data' do
-          expect(cohort.upper_confidence_interval).to be_within(0.01).of(0.613176)
-        end
-      end
+    it 'calculates upper confidence interval' do
+      expect(cohort.upper_confidence_interval).to be_within(0.01).of(0.6132)
     end
   end
 
@@ -59,9 +43,23 @@ describe Cohort do
     let(:stats) { cohort.conversion_statistics }
 
     it 'creates a hash of conversions and non-conversions' do
-      expect(stats).to be_a(Hash)
       expect(stats[:conversions]).to eq(10)
       expect(stats[:non_conversions]).to eq(14)
+    end
+  end
+
+  describe '#summary' do
+    before do
+      cohort.calculate_statistics
+      @output = cohort.summary
+    end
+
+    it 'includes the cohort name' do
+      expect(@output).to include('Cohort: A')
+    end
+
+    it 'includes the sample proportions' do
+      expect(@output).to include('(10 out of 24 visits)')
     end
   end
 end

@@ -3,7 +3,11 @@ Feature: Activation code
   As a super villain
   I want my bomb to be activated by entering a 4-digit code
 
-Scenario Outline: Activate the bomb or not
+  Scenario: A new bomb is inactive
+    Given a new bomb
+    Then the bomb is inactive
+
+  Scenario Outline: Activate the bomb or not
     Given an inactive bomb with activation code "<correct>"
     When I activate the bomb with "<provided>"
     Then the bomb is <status>

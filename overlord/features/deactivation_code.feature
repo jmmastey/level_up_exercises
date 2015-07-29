@@ -5,7 +5,7 @@ Feature: Deactivation code
 
 Scenario Outline: Deactivate the bomb or not
     Given an active bomb with deactivation code "<correct>"
-    When I fill in "code" with "<provided>"
+    When I submit code "<provided>"
     Then the bomb is <status>
 
     Examples:
@@ -19,10 +19,10 @@ Scenario Outline: Deactivate the bomb or not
 
   Scenario: Trying wrong deactivation codes 3 times makes the bomb explode
     Given an active bomb with deactivation code "0000"
-    When some meddling fool fills in "code" with 3 bad codes
+    When some meddling fool submits 3 bad codes
     Then the bomb is exploded
 
   Scenario: Deactivating with the wrong code provides a message
     Given an active bomb with deactivation code "0000"
-    When some meddling fool fills in "code" with "6875"
+    When some meddling fool submits code "6875"
     Then he should see "Ha-ha-ha-ha!  I win, you fool!"

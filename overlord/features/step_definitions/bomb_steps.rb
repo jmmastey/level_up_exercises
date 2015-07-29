@@ -1,58 +1,65 @@
 ACTIVATION_DEFAULT = "1234"
 DEACTIVATION_DEFAULT = "0000"
 
-GET_CODE_INFO = /(?:| with (.*) code "(.*)")/
-GET_ACTIVATION_CODE = /(?:| with activation code "(.*)")/
+GET_CODE_INFO = /(?:| with (.*) code "(\d*)")/
 GET_TIMER = /(?:| with timer at "(\d\d:\d\d:\d\d)")/
 
-Given(/^I am ready to enact my evil plan$/) do
+Given(/^I have not configured my bomb$/) do
+  visit path_to("my bomb")
 end
 
-Given(/^a newly constructed bomb$/) do
-  bomb = Bomb.new
+Given(/^a new bomb$/) do
+  visit path_to("my bomb")
+  step "I submit code \"\""
+  step "I submit code \"\""
 end
 
-Given(/^a newly booted bomb#{GET_ACTIVATION_CODE}$/) do |code_value|
-  step "a newly constructed bomb"
-  bomb.boot!
-  activation_code = code_value || ACTIVATION_DEFAULT
-  fill_in("code", with: activation_code)
+Given(/^a bomb configured with codes "([^"]*)" and "([^"]*)"$/) do |arg1, arg2|
+  visit path_to("my bomb")
+  step "I submit code \"arg1\""
+  step "I submit code \"arg2\""
+end
+
+Given(/^an activation code selection "([^"]*)"$/) do |code|
+  visit path_to("my bomb")
+  step "I submit code \"#{code}\""
 end
 
 Given(/^an inactive bomb#{GET_CODE_INFO}#{GET_TIMER}$/) do |type, code, time|
-  activation_code = type == "activation" ? code : ACTIVATION_DEFAULT
-  deactivation_code = type == "deactivation" ? code : DEACTIVATION_DEFAULT
-  step "a newly booted bomb with activation code \"#{activation_code}\""
-  fill_in("code", with: deactivation_code)
-  bomb.set_timer(time) unless time.nil?
+  act_code = type == "activation" ? code : ACTIVATION_DEFAULT
+  deact_code = type == "deactivation" ? code : DEACTIVATION_DEFAULT
+  step "a bomb configured with codes \"#{act_code}\" and \"#{deact_code}\""
+  fill_in("top secret countdown setter", with: time) unless time.nil?
 end
 
 Given(/^an active bomb#{GET_CODE_INFO}#{GET_TIMER}$/) do |type, code, time|
-  set_code_info = " with #{type} code \"#{code}\""
-  set_timer = " with timer at \"#{time}\""
+  set_code_info = type && code ? " with #{type} code \"#{code}\"" : ""
+  set_timer = time ? " with timer at \"#{time}\"" : ""
   step "an inactive bomb#{set_code_info}#{set_timer}"
-  step "I activate the bomb"
+  act_code = type == "activation" ? code : ACTIVATION_DEFAULT
+  step "I activate the bomb with \"#{act_code}\""
 end
 
 Given(/^an exploded bomb$/) do
   step "an active bomb"
-  bomb.explode!
+  step "I submit 3 bad codes"
 end
 
-Given(/^a disabled active bomb$/) do
-  step "an active bomb"
-  bomb.disable!
+When(/^.* submits? code "(.*)"$/) do |value|
+  fill_in("code", with: value)
+  click_button("Submit")
 end
 
-Given(/^a bomb waiting for confirmation of activation$/) do
-  step "an active bomb"
-  fill_in("code", with: ACTIVATION_DEFAULT)
+When(/^.* submits? (\d+) bad codes$/) do |count|
+  count.to_i.times do
+    fill_in("code", with: "bad")
+    click_button("Submit")
+  end
 end
 
-When(/^I configure the codes$/) do
-  click_button("Boot")
-  fill_in("code", with: ACTIVATION_DEFAULT)
-  fill_in("code", with: DEACTIVATION_DEFAULT)
+When(/^I submit (\d+) bad (de)?activation codes$/) do |count, is_deactivation|
+  step "I submit code \"\"" if is_deactivation
+  step "I submit #{count} bad codes"
 end
 
 When(/activates? the bomb(?:| with "(.*)")(?:| (\d+) times)$/) do |code, count|
@@ -60,69 +67,48 @@ When(/activates? the bomb(?:| with "(.*)")(?:| (\d+) times)$/) do |code, count|
   count ||= 1
   count.to_i.times do
     fill_in("code", with: code)
+    click_button("Submit")
     click_button("Confirm")
   end
 end
 
-When(/^.* fills? in "(.*)" with (\d+) bad codes$/) do |field, count|
-  count.to_i.times fill_in(field, with: "bad")
-end
-
-When(/^.* fills in "(.*)" with "(.*)"$/) do |field, value|
-  fill_in(field, with: value)
-end
-
-When(/^I wait (\d+) seconds$/) do |delay|
-  bomb.advance_time!(delay)
-end
-
 When(/^I cut the wires$/) do
-  bomb.cut_wires!
-end
-
-When(/^an explosion is triggered$/) do
-  bomb.explode!
+  click_button("Wires")
 end
 
 Then(/^the bomb is active$/) do
-  expect(bomb).to be_active
+  step "the \"status\" field should contain \"active\""
 end
 
 Then(/^the bomb is inactive$/) do
-  expect(bomb).not_to be_active
+  step "the \"status\" field should contain \"inactive\""
 end
 
 Then(/^the bomb is( not)? exploded$/) do |negation|
   if negation
-    expect(bomb).not_to be_exploded
+    step "I should see \"Control Panel\""
   else
-    expect(bomb).to be_exploded
+    step "there is nothing but a pile of rubble"
   end
 end
 
 Then(/^the bomb is disabled$/) do
-  expect(bomb).to be_disabled
-end
-
-Then(/^(".*") is "big"$/) do |button|
-  expect(find_button(button).background).to eq("Red")
-end
-
-Then(/^(".*") is "red"$/) do |button|
-  expect(find_button(button).padding).to be > 35
-end
-
-Then(/^the activation code is "(.*)"$/) do |code_value|
-  expect(bomb.activation_code).to eq?(code_value)
-end
-
-Then(/^the deactivation code is "(.*)"$/) do |code_value|
-  expect(bomb.deactivation_code).to eq?(code_value)
+  step "I should not see \"Configuration Panel\""
+  step "I should not see \"Control Panel\""
+  step "I should see \"Damaged!\""
 end
 
 Then(/^I need to confirm activation$/) do
-  step "I see \"Please confirm activation.\""
-  expect(bomb).not_to be_active
+  step "I should see \"Please confirm activation.\""
+  step "the \"status\" field should contain \"inactive\""
+end
+
+Then(/^(".*") is "red"$/) do |button|
+  expect(find_button(button).background).to eq("Red")
+end
+
+Then(/^(".*") is "big"$/) do |button|
+  expect(find_button(button).padding).to be > 35
 end
 
 Then(/^he should see "([^"]*)"$/) do |arg1|
@@ -130,17 +116,8 @@ Then(/^he should see "([^"]*)"$/) do |arg1|
 end
 
 Then(/^there is nothing but a pile of rubble$/) do
+  step "I should not see \"Configuration Panel\""
   step "I should not see \"Control Panel\""
+  step "I should not see \"Access Panel\""
   step "I should see \"You are surrounded by rubble.\""
-end
-
-Then(/(\d*) seconds? later (.*)/) do |delay, action|
-  bomb.advance_time!(delay)
-  step action
-end
-
-Then(/^the "([^"]*)" field stops at "([^"]*)"$/) do |field_name, value|
-  step "the #{field_name} field contains #{value}"
-  bomb.advance_time!(5)
-  step "the #{field_name} field contains #{value}"
 end

@@ -2,7 +2,7 @@ require 'json'
 require_relative 'dinosaur'
 require_relative 'dinoparser'
 require_relative 'dinovalidator'
-require_relative 'dinotranslator'
+require_relative 'dinouniformer'
 require_relative 'dinodex_printer'
 
 class Dinodex
@@ -20,12 +20,12 @@ class Dinodex
     res.select { |dino| dino.diet_is?(diet) }
   end
 
-  search_big = lambda do |res, b|
-    res.select { |dino| dino.big?(b) }
+  search_big = lambda do |res, search|
+    res.select { |dino| dino.big? if search }
   end
 
-  search_small = lambda do |res, b|
-    res.select { |dino| dino.small?(b) }
+  search_small = lambda do |res, search|
+    res.select { |dino| dino.small? if search }
   end
 
   search_weight = lambda do |res, weight|
@@ -50,29 +50,27 @@ class Dinodex
     @registry = []
   end
 
-  def load_data(data)
-    data.each do |row|
-      @registry << Dinosaur.new(row)
-    end
+  def build_registry(data)
+    @registry |= data.map { |row| Dinosaur.new(row) }
   end
 
   def load_csv(filename)
     return unless File.file?(filename)
-    data = DinoTranslator.translate(DinoParser.parse_csv(filename))
+    data = DinoUniformer.uniform(DinoParser.parse_csv(filename))
     raise InvalidDataError unless DinoValidator.valid_data?(data)
-    load_data(data)
+    build_registry(data)
   end
 
   def search(args = {}, results = @registry)
-    args.each do |k, v|
-      results = SEARCH_DISPATCHER[k].call(results, v)
+    args.each do |dino_attr, value|
+      results = SEARCH_DISPATCHER[dino_attr].call(results, value)
     end
     results
   end
 
   def print_search(args = {})
-    res = search(args)
-    DinodexPrinter.print(res)
+    results = search(args)
+    DinodexPrinter.print(results)
   end
 
   def export_json(results = @registry)

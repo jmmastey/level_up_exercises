@@ -1,23 +1,21 @@
 module DinoParser
-  def self.split_strip_downcase(line)
-    line.split(',').map { |d| d.strip.downcase }
+  def self.split_strip(line)
+    line.split(',').map(&:strip)
   end
 
-  def self.grab_header
-    split_strip_downcase(@f.first)
+  def self.parse_header
+    split_strip(@file.first).map(&:downcase)
   end
 
-  def self.grab_data
-    dino_data = []
-    @f.each do |line|
-      dino_data << Hash[@header.zip(split_strip_downcase(line))]
+  def self.parse_rows
+    @file.each_with_object([]) do |row, dino_data|
+      dino_data << Hash[@header.zip(split_strip(row))]
     end
-    dino_data
   end
 
   def self.parse_csv(filename)
-    @f = open(filename, 'r')
-    @header = grab_header
-    grab_data
+    @file = open(filename, 'r')
+    @header = parse_header
+    parse_rows
   end
 end

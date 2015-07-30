@@ -2,7 +2,7 @@ InvalidDataError = Class.new(RuntimeError)
 
 class String
   def alpha?
-    match(/^[a-z ]*$/) != nil
+    match(/^[A-Za-z ]*$/) != nil
   end
 
   def number?
@@ -27,16 +27,16 @@ module DinoValidator
     "walking" => valid_walking,
   }
 
-  def self.validate(k, v)
-    return true unless DISPATCHER.include?(k)
-    DISPATCHER[k].call(v)
+  def self.valid?(dino_attr, value)
+    return true unless DISPATCHER.include?(dino_attr)
+    DISPATCHER[dino_attr].call(value)
   end
 
   def self.valid_row?(row)
-    row.inject(0) { |valid, (k, v)| valid && validate(k, v) }
+    row.all? { |dino_attr, value| valid?(dino_attr, value) }
   end
 
   def self.valid_data?(data)
-    data.inject(0) { |valid, row| valid && valid_row?(row) }
+    data.all? { |row| valid_row?(row) }
   end
 end

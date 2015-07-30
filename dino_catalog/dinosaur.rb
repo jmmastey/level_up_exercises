@@ -1,6 +1,5 @@
 class Dinosaur
   TWO_TONS = 4000
-  SMALL = 2000
 
   attr_accessor :data
 
@@ -13,45 +12,46 @@ class Dinosaur
   end
 
   def name_is?(name)
-    data['name'] == name
+    data['name'].downcase == name.downcase
   end
 
   def from_period?(period)
-    data['period'].include?(period)
+    data['period'].downcase.include?(period.downcase)
   end
 
   def diet_is?(diet)
-    return carnivore? if diet == 'carnivore'
-    data['diet'] == diet
+    return carnivore? if diet.downcase == 'carnivore'
+    data['diet'].downcase == diet.downcase
   end
 
   def carnivore?
-    data['diet'] != 'herbivore' && data['diet'] != ""
+    data['diet'].downcase != 'herbivore'
   end
 
-  def big?(b)
-    return unless data['weight']
-    b == (Float(data['weight']) > TWO_TONS)
+  def big?
+    return false unless has?('weight')
+    Float(data['weight']) > TWO_TONS
   end
 
-  def small?(b)
-    return unless data['weight']
-    b == (Float(data['weight']) < SMALL)
+  def small?
+    return false unless has?('weight')
+    !big?
   end
 
   def weight_is?(weight)
-    data['weight'] == weight
+    return false unless has?('weight')
+    Float(data['weight']) == Float(weight)
   end
 
   def walking_is?(walking)
-    data['walking'] == walking.downcase
+    data['walking'].downcase == walking.downcase
   end
 
   def to_s
     max_len = data.keys.max_by(&:length).length
-    data.each do |k, v|
-      spaces = ' ' * (max_len - k.length)
-      puts "#{k}: #{spaces} #{v}"
+    data.each do |dino_attr, value|
+      spaces = ' ' * (max_len - dino_attr.length)
+      puts "#{dino_attr}: #{spaces} #{value}"
     end
   end
 end

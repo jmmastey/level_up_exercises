@@ -35,7 +35,7 @@ module DinodexPrinter
   end
 
   def self.calc_column_max_lengths(dinos)
-    columns_max_len = self.find_columns(dinos)
+    columns_max_len = find_columns(dinos)
     columns_max_len.keys.each do |key|
       dino = dinos.max_by { |d| d.has?(key) ? d.data[key].length : 0 }
       next unless dino.has?(key)

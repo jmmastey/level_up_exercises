@@ -6,7 +6,7 @@ require_relative 'dinouniformer'
 require_relative 'dinodex_printer'
 
 class Dinodex
-  attr_accessor :registry
+  attr_accessor :registry, :loaded_files
 
   search_name = lambda do |res, name|
     res.select { |dino| dino.name_is?(name) }
@@ -48,6 +48,7 @@ class Dinodex
 
   def initialize
     @registry = []
+    @loaded_files = []
   end
 
   def build_registry(data)
@@ -59,6 +60,7 @@ class Dinodex
     data = DinoUniformer.uniform(DinoParser.parse_csv(filename))
     raise InvalidDataError unless DinoValidator.valid_data?(data)
     build_registry(data)
+    @loaded_files << filename
   end
 
   def search(args = {}, results = @registry)

@@ -33,7 +33,7 @@ module DinoUniformer
     return unless row.key?("diet")
     diet = row["diet"].downcase
     return unless %w(yes no).include?(diet)
-    
+
     row["diet"] = CARNIVORE_MAP[diet]
   end
 
@@ -46,5 +46,4 @@ module DinoUniformer
     uniform_header(data)
     uniform_data(data)
   end
-
 end

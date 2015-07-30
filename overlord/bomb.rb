@@ -7,7 +7,7 @@ class Bomb
   DEFAULT_DEACTIVATION_CODE = '0000'
 
   def initialize
-    @activation_code = CodeSequence.new DEFAULT_ACTIVATION_CODE
-    @deactivation_code = CodeSequence.new DEFAULT_DEACTIVATION_CODE
+    @activation_code = CodeSequence.new(DEFAULT_ACTIVATION_CODE)
+    @deactivation_code = CodeSequence.new(DEFAULT_DEACTIVATION_CODE)
   end
 end

@@ -7,7 +7,7 @@ Given(/^the bomb is armed$/) do
 end
 
 When(/^I input "([^"]*)" for digit\-(\d+)$/) do |value, digitField|
-  page.fill_in "digit-#{digitField}", with: value
+  page.fill_in("digit-#{digitField}", with: value)
 end
 
 When(/^I submit a valid code input$/) do
@@ -42,11 +42,11 @@ When(/^I arm the bomb with the default deactivation code$/) do
 end
 
 Then(/^all input fields flash a warning$/) do
-  inputs_should_be_empty_with_selector 'input.warning'
+  inputs_should_be_empty_with_selector('input.warning')
 end
 
 Then(/^all code input fields are empty$/) do
-  inputs_should_be_empty_with_selector 'input'
+  inputs_should_be_empty_with_selector('input')
 end
 
 def inputs_should_be_empty_with_selector(selector)
@@ -54,11 +54,11 @@ def inputs_should_be_empty_with_selector(selector)
 end
 
 def submit_valid_input_sequence
-  submit_input_sequence 5, 7, 2, 9
+  submit_input_sequence(5, 7, 2, 9)
 end
 
 def submit_invalid_input_sequence
-  submit_input_sequence 5, 'e', 2, 7
+  submit_input_sequence(5, 'e', 2, 7)
 end
 
 def submit_default_activation_code
@@ -70,13 +70,13 @@ def submit_default_deactivation_code
 end
 
 def submit_input_sequence(digit_1, digit_2, digit_3, digit_4)
-  page.fill_in 'digit-1', with: digit_1
-  page.fill_in 'digit-2', with: digit_2
-  page.fill_in 'digit-3', with: digit_3
-  page.fill_in 'digit-4', with: digit_4
+  page.fill_in('digit-1', with: digit_1)
+  page.fill_in('digit-2', with: digit_2)
+  page.fill_in('digit-3', with: digit_3)
+  page.fill_in('digit-4', with: digit_4)
   click_submit_button
 end
 
 def click_submit_button
-  page.click_button 'input-submit'
+  page.click_button('input-submit')
 end

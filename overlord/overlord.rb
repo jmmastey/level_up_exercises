@@ -11,14 +11,14 @@ class Overlord < Sinatra::Base
 
   register Sinatra::AssetPack
   assets do
-    js :application, ['/js/jquery-2.1.4.min.js', '/js/timer.js', '/js/*.js']
-    css :application, ['/css/*.css']
-    js_compression :jsmin
-    css_compression :scss
+    js(:application, ['/js/jquery-2.1.4.min.js', '/js/timer.js', '/js/*.js'])
+    css(:application, ['/css/*.css'])
+    js_compression(:jsmin)
+    css_compression(:scss)
   end
 
   get '/' do
-    erb :index
+    erb(:index)
   end
 
   post '/bomb/reset' do
@@ -26,22 +26,22 @@ class Overlord < Sinatra::Base
   end
 
   post '/activation/set/?:code?' do
-    bomb.activation_code.set params[:code]
+    bomb.activation_code.set(code)
     render_activation_status
   end
 
   post '/deactivation/set/?:code?' do
-    bomb.deactivation_code.set params[:code]
+    bomb.deactivation_code.set(code)
     render_deactivation_status
   end
 
   post '/activation/check/?:code?' do
-    bomb.activation_code.check params[:code]
+    bomb.activation_code.check(code)
     render_activation_status
   end
 
   post '/deactivation/check/?:code?' do
-    bomb.deactivation_code.check params[:code]
+    bomb.deactivation_code.check(code)
     render_deactivation_status
   end
 
@@ -50,6 +50,12 @@ class Overlord < Sinatra::Base
       content_type("image/#{format}")
       settings.assets["#{image}.#{format}"]
     end
+  end
+
+  private
+
+  def code
+    params[:code]
   end
 
   def bomb
@@ -61,15 +67,15 @@ class Overlord < Sinatra::Base
   end
 
   def render_json(hash)
-    content_type :json
+    content_type(:json)
     hash.to_json
   end
 
   def render_activation_status
-    render_json bomb.activation_code.status
+    render_json(bomb.activation_code.status)
   end
 
   def render_deactivation_status
-    render_json bomb.deactivation_code.status
+    render_json(bomb.deactivation_code.status)
   end
 end

@@ -3,11 +3,11 @@ Given(/^the bomb has exploded$/) do
 end
 
 Then(/^the bomb should be disarmed$/) do
-  bomb_state_should_be 'activation'
+  bomb_state_should_be('activation')
 end
 
 Then(/^the bomb state should be (.+?)$/) do |state|
-  bomb_state_should_be state
+  bomb_state_should_be(state)
 end
 
 Then(/^the bomb lid should be open$/) do

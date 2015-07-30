@@ -7,7 +7,7 @@ RSpec.describe CodeSequence do
   INVALID_LENGTH_CODE = '973'
 
   before :example do
-    @code = CodeSequence.new DEFAULT_CODE
+    @code = CodeSequence.new(DEFAULT_CODE)
   end
 
   it 'raises an error when initialized with invalid default code' do
@@ -16,35 +16,35 @@ RSpec.describe CodeSequence do
   end
 
   it 'uses the default code when set with nil' do
-    expect(@code.set nil).to be true
+    expect(@code.set(nil)).to be true
     expect(@code.code).to eq(DEFAULT_CODE)
   end
 
   it 'rejects setting the code when given code is not numeric' do
-    expect(@code.set INVALID_NUMERIC_CODE).to be false
-    expect(@code.code).to eq(nil)
+    expect(@code.set(INVALID_NUMERIC_CODE)).to be false
+    expect(@code.code).to be_nil
   end
 
   it 'rejects setting the code when given code is too short' do
-    expect(@code.set INVALID_LENGTH_CODE).to be false
-    expect(@code.code).to eq(nil)
+    expect(@code.set(INVALID_LENGTH_CODE)).to be false
+    expect(@code.code).to be_nil
   end
 
   it 'accepts setting the code when the given code is valid' do
-    expect(@code.set VALID_CODE).to be true
+    expect(@code.set(VALID_CODE)).to be true
     expect(@code.code).to eq(VALID_CODE)
   end
 
   it 'can compare its code after invalid entry'  do
-    @code.set INVALID_NUMERIC_CODE
-    expect(@code.check INVALID_NUMERIC_CODE).to be false
-    expect(@code.check DEFAULT_CODE).to be false
-    expect(@code.check nil).to be true
+    @code.set(INVALID_NUMERIC_CODE)
+    expect(@code.check(INVALID_NUMERIC_CODE)).to be false
+    expect(@code.check(DEFAULT_CODE)).to be false
+    expect(@code.check(nil)).to be true
   end
 
   it 'can compare its user set code after valid entry' do
-    @code.set VALID_CODE
-    expect(@code.check DEFAULT_CODE).to be false
-    expect(@code.check VALID_CODE).to be true
+    @code.set(VALID_CODE)
+    expect(@code.check(DEFAULT_CODE)).to be false
+    expect(@code.check(VALID_CODE)).to be true
   end
 end

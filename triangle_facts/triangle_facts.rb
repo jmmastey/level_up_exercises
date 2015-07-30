@@ -1,58 +1,67 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-	attr_accessor :side1,:side2,:side3
+  attr_accessor :side1, :side2, :side3
 
-	def initialize(side1,side2,side3)
-		@side1,@side2,@side3 = side1,side2,side3
-	end
+  def initialize(side1, side2, side3)
+    @side1 = side1
+    @side2 = side2
+    @side3 = side3
+  end
 
-	def equilateral()
-		return side1 == side2 && side2 == side3
-	end
+  def equilateral?
+    @side1 == @side2 && @side2 == @side3
+  end
 
-	def isosceles()
-		return [side1,side2,side3].uniq.length == 2
-	end
+  def isosceles?
+    [@side1, @side2, @side3].uniq.length == 2
+  end
 
-	def scalene()
-		unless ! (equilateral || isosceles)
-	    false
-	  else
-	    true
-	  end
-	end
+  def scalene?
+    !(equilateral? || isosceles?)
+  end
 
-	def recite_facts
-		puts 'This triangle is equilateral!' if equilateral
-		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles 
-		puts 'This triangle is scalene and mathematically boring.' if scalene 
+  def recite_facts
+    puts(shape_type_msg)
+    puts(angles_type_msg)
+  end
 
-		angles = self.calculate_angles(side1,side2,side3)
-		puts 'The angles of this triangle are ' + angles.join(',')
+  def shape_type_msg
+    return 'This triangle is equilateral' if equilateral?
+    return 'This triangle is scalene and mathematically boring.' if scalene?
+    'This triangle is isosceles! Also, that word is hard to type.'
+  end
 
-		puts 'This triangle is also a right triangle!' if angles.include? 90
-		puts ''
-	end
+  def angles_type_msg
+    angles = calculate_angles
+    msg = "The angles of this triangle are #{angles.join(',')}\n"
+    msg << "This triangle is also a right triangle!\n" if angles.include?(90)
+  end
 
-	def calculate_angles(a,b,c)
-		angleA = radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
-		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
-		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
+  def calculate_angles
+    [
+      self.class.calculate_angle(@side1, @side2, @side3),
+      self.class.calculate_angle(@side2, @side1, @side3),
+      self.class.calculate_angle(@side3, @side1, @side2),
+    ]
+  end
 
-		return [angleA, angleB, angleC]
-	end
+  def self.calculate_angle(main_angle, a, b)
+    numerator   = a**2 + b**2 - main_angle**2
+    denominator = 2.0 * a * b
+    radians_to_degrees(Math.acos(numerator / denominator))
+  end
 
-	def radians_to_degrees(rads)
-		return (rads * 180 / Math::PI).round
-	end
+  def self.radians_to_degrees(rads)
+    (rads * 180 / Math::PI).round
+  end
 end
 
-
 triangles = [
-	[5,5,5],
-	[5,12,13],
+  [5, 5, 5],
+  [5, 12, 13],
 ]
-triangles.each { |sides|
-	tri = Triangle.new(*sides)
-	tri.recite_facts
-}
+
+triangles.each do |sides|
+  tri = Triangle.new(*sides)
+  tri.recite_facts
+end

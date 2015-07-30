@@ -3,14 +3,14 @@ Feature: Game Over Screen
   As a bomb defuser
   I want to see a game over screen that allows me to restart
 
-  Scenario: the game over screen appears after the bomb has exploded
+  Background:
     Given I am on the bomb page
     And the bomb has exploded
+
+  Scenario: the game over screen appears after the bomb has exploded
     Then I should see the game over screen
 
   Scenario: Being able to resart the game from the game over screen
-    Given I am on the bomb page
-    And the bomb has exploded
     When I click the try again button
     Then the bomb state should be activation
     And I should not see the game over screen

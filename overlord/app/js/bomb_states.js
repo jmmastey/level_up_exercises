@@ -11,15 +11,15 @@ BombStates =
 		return this.states[this.currentStateIndex] ;
 	},
 
-	getInputDigits: function() {
-		var input = '';
-		$('#code-input').each(function() { input += $(this).val() });
-		return input;
-	},
-
 	submitHandler: function() {
-		var shouldGoNextState = this.currentState().inputHandler(this.getInputDigits());
-		shouldGoNextState && this.goNextState();
+		this.currentState().inputHandler(CodePanel.getInputDigits(), function(codeStatus) {
+			if (codeStatus.is_valid) {
+				BombStates.goNextState();
+			} else {
+				CodePanel.clear();
+				CodePanel.flashWarning();
+			}
+		});
 	},
 
 	goToState: function(toStateIndex) {
@@ -36,28 +36,34 @@ BombStates =
 		this.goToState(this.incStateIndex());
 	},
 
+	ACTIVATION:   0,
+	DEACTIVATION: 1,
+	STANDBY:      2,
+	ARMED:        3,
+	EXPLODED:     4,
+
 	states: 
 	[
 		{
-			className:    'activation', 
-			inputHandler: function() { return true },
-			onEnterState: function() { Bomb.toggleLid(false); Timer.reset() }
+			className:    'activation',
+			inputHandler: Bomb.setActivationInputHandler,
+			onEnterState: function() {  Bomb.reset() }
 		},
 
 		{
 			className:    'deactivation', 
-			inputHandler: function() { return true }
+			inputHandler: Bomb.setDeactivationInputHandler
 		},
 
 		{
 			className:    'standby', 
-			inputHandler: function() { return true }
+			inputHandler: Bomb.checkActivationInputHandler
 		},
 
 		{
 			className:    'armed', 
-			inputHandler: function() { return true },
-			onEnterState: function() { Bomb.toggleLid(true); Timer.startCountDown(); }
+			inputHandler: Bomb.checkDeactivationInputHandler,
+			onEnterState: function() { Bomb.arm() }
 		},
 
 		{
@@ -69,4 +75,4 @@ BombStates =
 }
 
 
-BombStates.goNextState();
+BombStates.goNextState(BombStates.ACTIVATION);

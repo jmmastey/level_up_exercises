@@ -21,6 +21,10 @@
     &:focus {
       background-color: white;
     }
+
+    &.warning {
+      background-color: red;
+    }
   }
 
   #input-submit {
@@ -29,7 +33,7 @@
     font-size: 17px;
 
     &:hover, &:focus {
-      border-color: #666;
+      border-color: #ccc;
     }
 
     &:active {

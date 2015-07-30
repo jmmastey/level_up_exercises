@@ -15,30 +15,36 @@ RSpec.describe CodeSequence do
     expect(bad_init).to raise_error(RuntimeError)
   end
 
-  it 'uses the default code when given code is less than 4 chars' do
-    expect(@code.set INVALID_LENGTH_CODE).to be false
+  it 'uses the default code when set with nil' do
+    expect(@code.set nil).to be true
     expect(@code.code).to eq(DEFAULT_CODE)
   end
 
-  it 'uses the default code when given code is not numeric' do
+  it 'rejects setting the code when given code is not numeric' do
     expect(@code.set INVALID_NUMERIC_CODE).to be false
-    expect(@code.code).to eq(DEFAULT_CODE)
+    expect(@code.code).to eq(nil)
   end
 
-  it 'uses the given code when its valid' do
+  it 'rejects setting the code when given code is too short' do
+    expect(@code.set INVALID_LENGTH_CODE).to be false
+    expect(@code.code).to eq(nil)
+  end
+
+  it 'accepts setting the code when the given code is valid' do
     expect(@code.set VALID_CODE).to be true
     expect(@code.code).to eq(VALID_CODE)
   end
 
-  it 'can compare its default code after invalid entry'  do
+  it 'can compare its code after invalid entry'  do
     @code.set INVALID_NUMERIC_CODE
-    expect(@code.is? INVALID_NUMERIC_CODE).to be false
-    expect(@code.is? DEFAULT_CODE).to be true
+    expect(@code.check INVALID_NUMERIC_CODE).to be false
+    expect(@code.check DEFAULT_CODE).to be false
+    expect(@code.check nil).to be true
   end
 
   it 'can compare its user set code after valid entry' do
     @code.set VALID_CODE
-    expect(@code.is? DEFAULT_CODE).to be false
-    expect(@code.is? VALID_CODE).to be true
+    expect(@code.check DEFAULT_CODE).to be false
+    expect(@code.check VALID_CODE).to be true
   end
 end

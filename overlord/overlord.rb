@@ -4,13 +4,15 @@ require 'sinatra/base'
 require 'sinatra/assetpack'
 require 'json'
 
+require_relative './bomb.rb'
+
 class Overlord < Sinatra::Base
   enable :sessions
 
   register Sinatra::AssetPack
   assets do
-    js  :application, [ '/js/jquery-2.1.4.min.js', '/js/timer.js', '/js/*.js' ]
-    css :application, [ '/css/*.css' ]
+    js :application, ['/js/jquery-2.1.4.min.js', '/js/timer.js', '/js/*.js']
+    css :application, ['/css/*.css']
     js_compression :jsmin
     css_compression :scss
   end
@@ -19,38 +21,42 @@ class Overlord < Sinatra::Base
     erb :index
   end
 
-  post '/reset-bomb' do
+  post '/bomb/reset' do
     reset_bomb
   end
 
-  post '/activation/set/:code' do
-    is_success = session[:bomb].activation_code.set params[:code]
-    render_is_success_json is_success
+  post '/activation/set/?:code?' do
+    bomb.activation_code.set params[:code]
+    render_activation_status
   end
 
-  post '/deactivation/set/:code' do
-    is_success = session[:bomb].deactivation_code.set params[:code]
-    render_is_success_json is_success
+  post '/deactivation/set/?:code?' do
+    bomb.deactivation_code.set params[:code]
+    render_deactivation_status
   end
 
-  post '/activation/check/:code' do
-    is_success = session[:bomb].activation_code.is? params[:code]
-    render_is_success_json is_success
+  post '/activation/check/?:code?' do
+    bomb.activation_code.check params[:code]
+    render_activation_status
   end
 
-  post '/deactivation/check/:code' do
-    is_success = session[:bomb].deactivation_code.is? params[:code]
-    render_is_success_json is_success
+  post '/deactivation/check/?:code?' do
+    bomb.deactivation_code.check params[:code]
+    render_deactivation_status
   end
 
-  %w{jpg png}.each do |format|
+  %w(jpg png).each do |format|
     get "/assets/:image.#{format}" do |image|
       content_type("image/#{format}")
       settings.assets["#{image}.#{format}"]
     end
   end
 
-  def reset_bomb 
+  def bomb
+    session[:bomb]
+  end
+
+  def reset_bomb
     session[:bomb] = Bomb.new
   end
 
@@ -59,7 +65,11 @@ class Overlord < Sinatra::Base
     hash.to_json
   end
 
-  def render_is_success_json(is_success)
-    render_json { is_success: is_success }
+  def render_activation_status
+    render_json bomb.activation_code.status
+  end
+
+  def render_deactivation_status
+    render_json bomb.deactivation_code.status
   end
 end

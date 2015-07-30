@@ -21,38 +21,34 @@ class Triangle
   end
 
   def recite_facts
-    puts shape_type_msg
-    puts angles_type_msg
+    puts(shape_type_msg)
+    puts(angles_type_msg)
   end
 
   def shape_type_msg
-    if equilateral?
-      'This triangle is equilateral'
-    elsif isosceles?
-      'This triangle is isosceles! Also, that word is hard to type.'
-    else
-      'This triangle is scalene and mathematically boring.'
-    end
+    return 'This triangle is equilateral' if equilateral?
+    return 'This triangle is scalene and mathematically boring.' if scalene?
+    'This triangle is isosceles! Also, that word is hard to type.'
   end
 
   def angles_type_msg
-    angles = Triangle.calculate_angles(@side1, @side2, @side3)
+    angles = calculate_angles
     msg = "The angles of this triangle are #{angles.join(',')}\n"
-    msg << "This triangle is also a right triangle!\n" if angles.include? 90
+    msg << "This triangle is also a right triangle!\n" if angles.include?(90)
   end
 
-  def self.calculate_angles(a, b, c)
+  def calculate_angles
     [
-      Triangle.calculate_angle(a, b, c),
-      Triangle.calculate_angle(b, a, c),
-      Triangle.calculate_angle(c, a, b),
+      calculate_angle(@side1, @side2, @side3),
+      calculate_angle(@side2, @side1, @side3),
+      calculate_angle(@side3, @side1, @side2),
     ]
   end
 
   def self.calculate_angle(main_angle, a, b)
     numerator   = a**2 + b**2 - main_angle**2
     denominator = 2.0 * a * b
-    radians_to_degrees Math.acos(numerator / denominator)
+    radians_to_degrees(Math.acos(numerator / denominator))
   end
 
   def self.radians_to_degrees(rads)

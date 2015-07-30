@@ -39,9 +39,9 @@ class Triangle
 
   def calculate_angles
     [
-      calculate_angle(@side1, @side2, @side3),
-      calculate_angle(@side2, @side1, @side3),
-      calculate_angle(@side3, @side1, @side2),
+      self.class.calculate_angle(@side1, @side2, @side3),
+      self.class.calculate_angle(@side2, @side1, @side3),
+      self.class.calculate_angle(@side3, @side1, @side2),
     ]
   end
 

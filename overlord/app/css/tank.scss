@@ -1,0 +1,90 @@
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 25px  green,
+                0 0 50px  green;
+  }
+
+  100% {
+    box-shadow: 0 0 25px  green,
+                0 0 50px  green,
+                0 0 100px green,
+                0 0 200px green;
+  }
+}
+
+.tank {
+  position: relative;
+  top: -50px;
+  margin: 10px;
+  width: 350px;
+  height: 300px;
+  z-index: 25;
+  -webkit-transform-style: preserve-3d; 
+  -webkit-transform-origin: 50% 50% 0;
+  -webkit-transform: translate3d(0, 0, 100px);
+  transform-style: preserve-3d; 
+  transform-origin: 50% 50% 0;
+  transform: translate3d(0, 0, 100px);
+
+  &.show {
+    .tank-top {
+      top: -25px;
+    }
+
+    .tank-middle {
+      top: 40px;
+      height: 180px;
+      animation: glow 3s infinite alternate;
+    }
+  }
+
+  .tank-top,
+  .tank-middle,
+  .tank-bottom {
+    width: 300px;
+    border: 1px solid #000;
+    box-shadow: 0 0.5px 1px;
+  }
+
+  .tank-top,
+  .tank-middle {
+    transition: all ease 0.5s;
+  }
+
+  .tank-top,
+  .tank-bottom {
+    height: 125px;
+    border-radius: 180px / 75px;
+    position: absolute;
+  }
+
+  .tank-middle,
+  .tank-bottom {
+    background-color: green;
+  }
+
+  .tank-top {
+    top: 135px;
+    z-index: 10;
+    background: linear-gradient(to bottom,  #4c4c4c 20%, #8c8c8c 100%);
+  }
+
+  .tank-middle {
+    height: 140px;
+    position: absolute;
+    top: 200px;
+  }
+
+  .tank-bottom {
+    top: 160px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
+  }
+}
+
+#left-tank {
+  float: right;
+}
+
+#right-tank {
+  float: left;
+}

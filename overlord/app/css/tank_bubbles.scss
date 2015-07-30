@@ -1,0 +1,79 @@
+@keyframes bubble {
+  0% {
+    top: 100%;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+
+.tank-middle {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+
+  .bubble {
+    &,
+    &::before,
+    &::after {
+      content: '';
+      border-radius: 100%;
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border: 2px solid white;
+      background-color: rgba(240, 240, 240, 0.75);
+      opacity: 0.1;
+      position: relative;
+      margin: 5px;
+    }
+
+    &::before {
+      animation: bubble 2s infinite;
+      margin: 10px;
+    }
+
+    &::after {
+      animation: bubble 3s infinite;
+      margin: 20px;
+    }
+
+    &:nth-child(even) {
+      animation: bubble 1.9s infinite;
+    }
+
+    &:nth-child(odd) {
+      animation: bubble 2.1s infinite;
+    }
+
+    &:nth-child(3n) {
+      animation: bubble 2.3s infinite;
+    }
+
+    &:nth-child(4n) {
+      animation: bubble 2.5s infinite;
+    }
+
+    &:nth-child(5n) {
+      animation: bubble 2.7s infinite;
+    }
+
+    &:nth-child(6n) {
+      animation: bubble 2.9s infinite;
+    }
+
+    &:nth-child(7n) {
+      animation: bubble 3.1s infinite;
+    }
+
+    &:nth-child(8n) {
+      animation: bubble 3.3s infinite;
+    }
+
+    &:nth-child(9n) {
+      animation: bubble 3.5s infinite;
+    }
+  }
+}

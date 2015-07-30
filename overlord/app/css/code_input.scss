@@ -1,0 +1,49 @@
+#code-input-panel {
+  padding: 10px 20px;
+  text-align: center;
+
+  input, button {
+    box-sizing: border-box;
+    width: 130px;
+    height: 70px;
+    padding: 25px;
+    margin: 0 8px;
+    border: 3px solid #444;
+    outline: none;
+    text-align: center;
+    transition: all ease 0.3s;
+  }
+
+  input {
+    font-size: 40px;
+    background-color: #666;
+
+    &:focus {
+      background-color: white;
+    }
+
+    &.warning {
+      background-color: red;
+    }
+  }
+
+  #input-submit {
+    cursor: pointer;
+    float: right;
+    font-size: 17px;
+
+    &:hover, &:focus {
+      border-color: #ccc;
+    }
+
+    &:active {
+      transition: none;
+      background-color: #444;
+    }
+
+    &::before {
+      content: 'SUBMIT';
+      font-weight: bold;
+    }
+  }
+}

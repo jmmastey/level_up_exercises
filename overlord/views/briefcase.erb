@@ -1,0 +1,31 @@
+<div class='box-container'>
+  <div id='briefcase-lid' class='box'>
+    <figure class='back'></figure>
+    <figure class='bottom'>
+      <div id='timer'>00:00:00</div>
+      <div class='wire-container'>
+        <div class='wire red'></div>
+        <div class='wire blue'></div>
+        <div class='wire green'></div>
+      </div>
+    </figure>
+    <figure class='left'></figure>
+    <figure class='right'></figure>
+    <figure class='front'></figure>
+    <figure class='top'></figure>
+  </div>
+
+  <div id='briefcase-box' class='box'>
+    <figure class='back'>
+      <%= erb :tank, layout: false, locals: { tank_id: 'left-tank' } %>
+      <%= erb :tank, layout: false, locals: { tank_id: 'right-tank' } %>
+    </figure>
+    <figure class='bottom'></figure>
+    <figure class='left'></figure>
+    <figure class='right'></figure>
+    <figure class='front'>
+      <%= erb :status_lights,    layout: false %>
+      <%= erb :code_input_panel, layout: false %>
+    </figure>
+  </div>
+</div>

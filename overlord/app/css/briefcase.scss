@@ -1,0 +1,47 @@
+#briefcase-lid {
+  opacity: 0.7;
+  -webkit-transform-origin: 50% 50% 0;
+  -webkit-transform: rotateX(180deg) translate3d(0, -32px, 0);
+  transition: all ease-in-out 0.5s;
+
+  &.open {
+    -webkit-transform: rotateX(270deg) translate3d(0, 230px, -85px);
+    -webkit-transform-origin: 50% 0 0;
+  }
+
+  .left, .right, .front, .back {
+    height: 25px;
+  }
+
+  .top {
+    -webkit-transform: rotateX(90deg) translateZ(225px); 
+  }
+
+  .bottom {
+    -webkit-transform: rotateX(90deg) translateZ(250px);
+    border: solid 3px #444;
+
+    &::before, &::after {
+      display: none;
+    }
+  }
+}
+
+#briefcase-box {
+  figure {
+    opacity: 0.6;
+  }
+
+  .front {
+    opacity: 0.95;
+    box-shadow: 0 2px 4px black;
+
+    &::before, &::after {
+      display: none;
+    }
+  }
+
+  .back {
+    opacity: 1;
+  }
+}

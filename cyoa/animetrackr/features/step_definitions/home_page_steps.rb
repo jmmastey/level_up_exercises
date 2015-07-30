@@ -19,7 +19,7 @@ Then(/^there should be a link to sign up$/) do
 end
 
 Given(/^I am signed in$/) do
-  sign_up(USER[:username], USER[:email], USER[:password])
+  sign_in(USER[:email], USER[:password])
 end
 
 Then(/^I should be redirected to the profile page$/) do

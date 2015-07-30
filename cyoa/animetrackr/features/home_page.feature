@@ -9,7 +9,8 @@ Feature: Home Page
     And there should not be a link to sign out
 
   Scenario: When signed in, home page redirects to profile page
-    Given I am signed in
+    Given I have an account
+    And I am signed in
     When I view the home page
     Then I should be redirected to the profile page
     And there should not be a link to sign in

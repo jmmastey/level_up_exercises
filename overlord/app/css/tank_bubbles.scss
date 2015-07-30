@@ -15,7 +15,9 @@
   overflow: hidden;
 
   .bubble {
-    &, &::before, &::after {
+    &,
+    &::before,
+    &::after {
       content: '';
       border-radius: 100%;
       display: inline-block;

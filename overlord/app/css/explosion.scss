@@ -9,7 +9,8 @@
     }
   }
   
-  #briefcase-lid, #briefcase-box {
+  #briefcase-lid,
+  #briefcase-box {
     transition: all ease 0.8s;
     opacity: 0;
 
@@ -45,7 +46,8 @@
   }
 }
 
-#briefcase-lid, #briefcase-box {
+#briefcase-lid,
+#briefcase-box {
   figure {
     transition: all ease 0.7s
   }

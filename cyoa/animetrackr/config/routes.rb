@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+  get 'profile/view'
+  get 'profile/' => 'profile#index'
+
+  devise_for :users
+  root to: 'root#home'
+
+  # Set up or alter routes for test environment only
+  if Rails.env.test?
+    # Convert sign out from DELETE to GET for test environment only
+    as :user do
+      get 'users/sign_out' => 'devise/sessions#destroy'
+    end
+  end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

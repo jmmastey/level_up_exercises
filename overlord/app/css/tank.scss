@@ -22,6 +22,9 @@
   -webkit-transform-style: preserve-3d; 
   -webkit-transform-origin: 50% 50% 0;
   -webkit-transform: translate3d(0, 0, 100px);
+  transform-style: preserve-3d; 
+  transform-origin: 50% 50% 0;
+  transform: translate3d(0, 0, 100px);
 
   &.show {
     .tank-top {
@@ -35,27 +38,32 @@
     }
   }
 
-  .tank-top, .tank-middle, .tank-bottom {
+  .tank-top,
+  .tank-middle,
+  .tank-bottom {
     width: 300px;
-    border: 1px solid black;
+    border: 1px solid #000;
     box-shadow: 0 0.5px 1px;
   }
 
-  .tank-top, .tank-middle {
+  .tank-top,
+  .tank-middle {
     transition: all ease 0.5s;
   }
 
-  .tank-top, .tank-bottom {
+  .tank-top,
+  .tank-bottom {
     height: 125px;
     border-radius: 180px / 75px;
-    position:absolute;
+    position: absolute;
   }
 
-  .tank-middle, .tank-bottom {
+  .tank-middle,
+  .tank-bottom {
     background-color: green;
   }
 
-  .tank-top{
+  .tank-top {
     top: 135px;
     z-index: 10;
     background: linear-gradient(to bottom,  #4c4c4c 20%, #8c8c8c 100%);
@@ -67,9 +75,9 @@
     top: 200px;
   }
 
-  .tank-bottom{
+  .tank-bottom {
     top: 160px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
   }
 }
 

@@ -9,9 +9,9 @@ class DinoCsvCleaner
   end
 
   def open_file(csv_file)
-    CSV.foreach(csv_file, :headers => true, :header_converters => :downcase) do |row|
+    CSV.foreach(csv_file, headers: true, header_converters: :downcase) do |row|
       @csv_data << row.to_hash
-      @csv_headers << row.to_hash.keys.map! {|x| x.dup.chomp}
+      @csv_headers << row.to_hash.keys.map! { |x| x.dup.chomp }
     end
   end
 
@@ -33,7 +33,7 @@ class DinoCsvCleaner
   end
 
   def standardize_headers
-    @csv_headers.flatten!.map! {|a| a}.uniq!.delete("weight_in_lbs")
+    @csv_headers.flatten!.map! { |a| a }.uniq!.delete("weight_in_lbs")
     @csv_headers.delete("carnivore")
   end
 
@@ -47,9 +47,7 @@ class DinoCsvCleaner
     CSV.open("new.csv", "w") do |out|
       out << @csv_headers
       @csv_data.each do |line|
-        out << @csv_headers.map { |header|
-          line[header]
-        }
+        out << @csv_headers.map { |header| line[header] }
       end
     end
   end

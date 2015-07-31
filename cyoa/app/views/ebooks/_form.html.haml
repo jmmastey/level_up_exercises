@@ -1,0 +1,45 @@
+= form_for(@ebook, html: { class: "bottom-margin" } ) do |f|
+  - if @ebook.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@ebook.errors.count, "error")
+        prohibited this ebook from being saved:
+      %ul
+        -@ebook.errors.full_messages.each do |message|
+          %li
+            = message
+  - unless locked
+    = f.hidden_field :user_id, :value => current_user.id
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: "form-control", disabled: locked
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: "form-control", disabled: locked
+  .form-group
+    = f.label :version
+    = f.text_field :version, class: "form-control", disabled: locked
+  .form-group
+    = f.label :url
+    = f.text_area :url, class: "form-control", disabled: locked
+  .form-group
+    = f.label :language
+    = f.text_field :language, class: "form-control", disabled: locked
+  .form-group
+    = f.label :publisher
+    = f.text_field :publisher, class: "form-control", disabled: locked
+  .form-group
+    = f.label :subject
+    = f.text_field :subject, class: "form-control", disabled: locked
+  .form-group
+    = f.label :rights
+    = f.text_field :rights, class: "form-control", disabled: locked
+  .checkbox
+    %label
+      = f.check_box :readability, disabled: locked
+      Readability
+  .form-group
+    = f.label :markdown
+    = f.text_area :markdown, class: "form-control", disabled: locked
+  - unless locked
+    = f.submit class: "btn btn-primary"

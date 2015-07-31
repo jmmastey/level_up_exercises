@@ -1,0 +1,41 @@
+.jumbotron
+  %h1
+    My Ebooks
+  %p
+    = link_to 'New Ebook', new_ebook_path, class: "btn btn-success"
+
+- if @ebooks.empty?
+  .alert.alert-danger
+    %strong
+      Error!
+    No ebooks found.  Why don't you get started and
+    = link_to "upload one?", new_ebook_path, class: "alert-link"
+- else
+  %table.table
+    %thead
+      %tr
+        %th
+          Title
+        %th
+          Modified Date
+        %th
+          Show
+        %th
+          Edit
+        %th
+          Destroy
+    %tbody
+      - @ebooks.each do |ebook|
+        %tr
+          %td
+            = ebook.title
+          %td
+            = ebook.updated_at.strftime("%b %e, %Y")
+          %td
+            = link_to fa_icon("desktop"), ebook, class: "btn btn-success"
+          %td
+            = link_to fa_icon("pencil"), edit_ebook_path(ebook),
+              class: "btn btn-primary"
+          %td
+            = link_to fa_icon("trash"), ebook, method: :delete,
+              data: { confirm: 'Are you sure?' }, class: "btn btn-danger"

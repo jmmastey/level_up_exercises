@@ -1,0 +1,52 @@
+.jumbotron
+  %h1
+    = fa_icon "book"
+    Publishr
+  %p
+    Self Publishing Ebooks Just Got Easier
+  %p
+    = link_to "Find a Book", ebooks_path, class: "btn btn-success"
+    = link_to "Share a Book", new_ebook_path, class: "btn btn-info"
+
+.bs-callout.bs-callout-success
+  %h4
+    What is publishr?
+  %p
+    Publisher is a tool designed to process websites and generate *.epub files
+    from the contents.
+
+.bs-callout.bs-callout-success
+  %h4
+    Why does this matter?
+  %p
+    Publishr allows for the sharing of links with an *.epub extension.  Direct
+    links to books means content can easily be pulled into eReaders and
+    other devices for offline use.
+
+.bs-callout.bs-callout-info
+  %h4
+    How do I get started sharing?
+  %p
+    To share your work, first go to
+    = link_to "the sign up page", new_user_registration_path
+    and make a new account.
+
+.bs-callout.bs-callout-info
+  %h4
+    How do I get started reading?
+  %p
+    To get started reading, simply to go the
+    = link_to "library", ebooks_path
+    and click download on a book that sparks your interest!
+
+.bs-callout.bs-callout-danger
+  %h4
+    How does this work?
+  %p
+    This website is built using tools from
+    = link_to "FuckYeahMarkdown.com", "http://fuckyeahmarkdown.com/"
+    as well the ruby gem
+    = link_to "rPub", "http://avdgaag.github.io/rpub/"
+    :plain
+      . You can check out the source on
+    = link_to "GitHub", "http://www.github.com/tornquist/publishr"

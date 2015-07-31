@@ -1,0 +1,91 @@
+.jumbotron
+  %h1
+    Edit Account
+
+= form_for(resource, html: { class: "form-horizontal", method: :put },
+  as: resource_name, url: registration_path(resource_name)) do |f|
+  = devise_error_messages!
+
+  .panel.panel-success
+    .panel-heading
+      .panel-title
+        Profile Information
+    .panel-body
+      .form-group
+        = f.label :username, class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.text_field :username, class: "form-control"
+
+      .form-group
+        = f.label :first_name, "First Name", class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.text_field :first_name, class: "form-control"
+
+      .form-group
+        = f.label :last_name, "Last Name", class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.text_field :last_name, class: "form-control"
+
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        .panel.panel-danger
+          .panel-body
+            %strong
+              Currently waiting confirmation for:
+            %em
+              = resource.unconfirmed_email
+
+      .form-group
+        = f.label :email, class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.email_field :email, autofocus: true, class: "form-control"
+
+      .form-group
+        = f.label :biography, "Biography", class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.text_area :biography, class: "form-control"
+
+
+  .panel.panel-danger
+    .panel-heading
+      .panel-title
+        Password Reset
+    .panel-body
+      .panel.panel-danger
+        .panel-body
+          %strong
+            Notice!
+          %em
+            Leave blank if you do not wish to change your password
+
+      .form-group
+        = f.label :password, class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.password_field :password, autocomplete: "off",
+            class: "form-control"
+
+      .form-group
+        = f.label :password_confirmation, class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.password_field :password_confirmation, autocomplete: "off",
+            class: "form-control"
+
+  .panel.panel-info
+    .panel-heading
+      .panel-title
+        Submit Changes
+    .panel-body
+      .form-group
+        = f.label :current_password, class: "col-sm-2 control-label"
+        .col-sm-7
+          = f.password_field :current_password, autocomplete: "off",
+            class: "form-control"
+        .col-sm-3
+          = f.submit "Update My Account", class: "btn btn-success btn-block"
+.row
+  .col-sm-3
+    = link_to "Back", :back, class: "btn btn-danger btn-block"
+  .col-sm-3.col-sm-offset-6
+    = button_to "Cancel My Account", registration_path(resource_name),
+      data: { confirm: "Are you sure you wish to delete your account?" },
+      method: :delete, class: "btn btn-danger btn-block"
+

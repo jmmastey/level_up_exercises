@@ -1,0 +1,10 @@
+.jumbotron
+  %h1
+    %span
+      = fa_icon "exclamation-triangle"
+      Access Denied
+  %p
+    It looks like you tried to change a book that isn't yours. Please log in
+    with the correct account, or contact the author of the book.
+  %p
+    = link_to "Back", :back, class: "btn btn-danger"

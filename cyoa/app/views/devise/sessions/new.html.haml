@@ -1,0 +1,33 @@
+.jumbotron
+  %h1
+    Log In
+
+= form_for(resource, html: { class: "form-horizontal" },
+  as: resource_name, url: session_path(resource_name)) do |f|
+  = devise_error_messages!
+  .panel.panel-success
+    .panel-heading
+      .panel-title
+        Enter Credentials
+    .panel-body
+      .form-group
+        = f.label :email, class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.email_field :email, class: "form-control"
+      .form-group
+        = f.label :password, class: "col-sm-2 control-label"
+        .col-sm-10
+          = f.password_field :password, class: "form-control",
+            autocomplete: "off"
+
+      - if devise_mapping.rememberable?
+        .form-group
+          .col-sm-offset-2.col-sm-10
+            .check-box
+              %label
+                = f.check_box :remember_me
+                Remember Me
+
+  = f.submit "Log In", class: "btn btn-success"
+
+= render "devise/shared/links"

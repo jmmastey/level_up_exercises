@@ -1,0 +1,65 @@
+.jumbotron
+  %h1
+    = @ebook.title
+  %p
+    Managed By:
+    - if @ebook.user.nil?
+      [ Account Deleted ]
+    - else
+      = @ebook.user.full_name
+      = surround '(', ')' do
+        = link_to ("@"+ @ebook.user.username), user_profile_path(@ebook.user),
+          id: "author_link"
+  - if user_signed_in? && current_user == @ebook.user
+    = link_to "Edit", edit_ebook_path(@ebook), class: "btn btn-success"
+
+.bs-callout.bs-callout-success
+  %h4
+    Description:
+  %p
+    = @ebook.description
+
+.bs-callout.bs-callout-info
+  %h4
+    Source URL
+  %p
+    = link_to @ebook.url, @ebook.url
+  %h4
+    Download Epub
+  %p
+    - if @ebook.generated
+      = link_to "Download Ebook", ebook_download_path(@ebook)
+    - else
+      Download Processing
+
+.bs-callout.bs-callout-warning
+  %h4
+    Technical Information
+  %p
+    %strong
+      Version:
+    = @ebook.version
+  %p
+    %strong
+      Language
+    = @ebook.language
+  %p
+    %strong
+      Publisher
+    = @ebook.publisher
+  %p
+    %strong
+      Subject:
+    = @ebook.subject
+  %p
+    %strong
+      Rights:
+    = @ebook.rights
+  %p
+    %strong
+      Processed with
+      = succeed ":" do
+        = link_to "Readability", "https://readability.com/"
+    = @ebook.readability ? "Yes" : "No"
+
+= link_to 'Back', :back, class: "btn btn-danger"

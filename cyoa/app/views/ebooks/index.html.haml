@@ -1,0 +1,8 @@
+.jumbotron
+  %h1
+    Ebook Library
+  - if user_signed_in?
+    %p
+      = link_to 'New Ebook', new_ebook_path, class: "btn btn-success"
+
+= render 'ebooks_grid'

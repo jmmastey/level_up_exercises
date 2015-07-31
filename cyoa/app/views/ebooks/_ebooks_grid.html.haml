@@ -1,0 +1,19 @@
+- @ebooks.each_slice(4) do |slice|
+  .row
+    - slice.each do |ebook|
+      .col-xs-6.col-md-3
+        %a.thumbnail{href: ebook_path(ebook),
+          style: "text-decoration: none; overflow: hidden"}
+          %div{style: "padding: 0px 10px;"}
+            %h3
+              = ebook.title
+            %p
+              = surround '(', ')' do
+                - if ebook.user
+                  = ebook.user.username
+                - else
+                  Account Deleted
+                on
+                = ebook.updated_at.strftime("%b %e, %Y")
+            %p
+              = ebook.description

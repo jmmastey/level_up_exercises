@@ -6,11 +6,10 @@ Feature:
   Background:
     Given a user is on the home page
     And the user is EITHER logged in OR anonymous
-    And the cart is empty
 
-  Scenario: Add item to the cart
+  Scenario Outline: Add item to the cart
     Given the user opens the product page for <product>
-    When the user clicks "add to cart"
+    When the user adds the item to the cart
     Then the cart will have 1 item in it
     And the user will see the cart page
   Examples:
@@ -20,10 +19,10 @@ Feature:
     | WiiU     |
     | SNES     |
 
-  Scenario: Remove item from the cart
+  Scenario Outline: Remove item from the cart
     Given there is 1 <product> in the cart
     And the user is on the cart page
-    When the user clicks "remove <product>"
+    When the user removes <product> from the cart
     Then the cart will have 0 items in it
   Examples:
     | product  |
@@ -32,11 +31,12 @@ Feature:
     | WiiU     |
     | SNES     |
 
-  Scenario: Remove item from cart without removing all items
-    Given there is <xBox #> "xBox One" and <PS4 #> "PS4" in the cart
+  Scenario Outline: Remove item from cart without removing all items
+    Given there is <xBox #> "xBox One" in the cart
+    And there is <PS4 #> "PS4" in the cart
     And the user is on the cart page
     And the cart has <Total> items in it
-    When the user clicks "remove PS4"
+    When the user removes PS4 from the cart
     Then the cart will have <xBox #> item in it
   Examples:
     | xBox # | PS4 # | Total |
@@ -45,8 +45,9 @@ Feature:
     | 1      | 1     | 2     |
     | 1111   | 2222  | 3333  |
 
-  Scenario: Change cart items quantity
-    Given there is <xBox #> "xBox One" and <PS4 #> "PS4" in the cart
+  Scenario Outline: Change cart items quantity
+    Given there is <xBox #> "xBox One" in the cart
+    And there is <PS4 #> "PS4" in the cart
     And the user is on the cart page
     And the cart has <Total> items in it
     When the user changes the quantity of "xBox One" to <xBox New>
@@ -58,7 +59,7 @@ Feature:
     | 1      | 1     | 2     | 6        | 7     |
     | 1111   | 2222  | 3333  | 2        | 2224  |
 
-  Scenario: Changing the item quantity to zero removes it
+  Scenario Outline: Changing the item quantity to zero removes it
     Given there is <quantity> "WiiU" in the cart
     And the user is on the cart page
     When the user changes the quantity of "WiiU" to 0

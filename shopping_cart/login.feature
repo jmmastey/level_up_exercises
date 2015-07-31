@@ -1,9 +1,13 @@
 Feature:
-  As a user my cart is remembered between sessions.
+  As an authenticated user my cart is remembered between sessions.
   Additionally, logging has the ability to transfer items into my user's cart
+  from a previously anonymous session
 
   Background:
-    Given there is 2 "WiiU" and 1 "PS4" and 1 "SNES" in the cart
+    Given there is a user account
+    And there is 2 "WiiU" in the user's saved cart
+    And there is 1 "PS4" in the user's saved cart
+    And there is 1 "SNES" in the user's saved cart
     And the user is not logged in
 
   Scenario: Saved cart

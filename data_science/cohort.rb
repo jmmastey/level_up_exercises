@@ -5,6 +5,8 @@ class Cohort
   attr_accessor :name, :records, :conversions
   Record = Struct.new(:result, :date)
 
+  CONFIDENCE_INTERVAL_ACCURACY = 0.95
+
   def initialize(name)
     @name = name
     @records = []
@@ -22,7 +24,8 @@ class Cohort
   end
 
   def conversion_rate
-    interval = ABAnalyzer.confidence_interval(@conversions, @records.size, 0.95)
+    interval = ABAnalyzer.confidence_interval(@conversions, @records.size,
+                                             CONFIDENCE_INTERVAL_ACCURACY)
     interval.map { |val| (val * 100).round(2) }
   end
 

@@ -36,6 +36,7 @@ describe Cohort do
 
     it "validates record hashes" do
       expect { cohort.insert_record(invalid_record) }.to raise_error(ArgumentError)
+      expect { cohort.insert_record(valid_record) }.to_not raise_error
     end
 
     it "validates cohort name" do
@@ -44,25 +45,18 @@ describe Cohort do
   end
 
   context "math check" do
-    let(:name) { "B" }
-    subject(:cohort) do
-      cohort = Cohort.new(name)
-      rates = [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1]
-      rates.each do |rate|
-        record = { date: "03/12/2015",
-                   cohort: "B",
-                   result: rate }
-        cohort.insert_record(record)
-      end
-      cohort
+    subject(:cohorts) do
+      DataScience.new('test.json').cohorts
     end
 
-    it "accepts multiple records" do
-      expect(cohort.records.size).to eq(21)
+    it "has the correct number of records" do
+      expect(cohorts["A"].records.size).to eq(29)
+      expect(cohorts["B"].records.size).to eq(30)
     end
 
-    it "returns correct conversion ranges" do
-      expect(cohort.conversion_rate).to eq([31.02, 73.74])
+    it "returns correct conversion ranges for those records" do
+      expect(cohorts["A"].conversion_rate).to eq([5.95, 35.43])
+      expect(cohorts["B"].conversion_rate).to eq([46.09, 80.58])
     end
   end
 end

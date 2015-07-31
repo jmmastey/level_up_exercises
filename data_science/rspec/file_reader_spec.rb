@@ -11,6 +11,14 @@ describe FileReader do
     it "should load data from the file" do
       expect(test_file_reader.data).to_not be_empty
     end
+
+    it "should return a valid array after processing test.json" do
+      expect(test_file_reader.data.is_a?(Array)).to eq(true)
+    end
+
+    it "should return hashes within the resulting array" do
+      expect(test_file_reader.data.map { |a| a.is_a?(Hash) }.all?).to eq(true)
+    end
   end
 
   context 'negative' do

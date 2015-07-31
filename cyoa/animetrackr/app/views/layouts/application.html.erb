@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
 <%= render 'shared/header' %>
 
 <p class="notice"><%= notice %></p>

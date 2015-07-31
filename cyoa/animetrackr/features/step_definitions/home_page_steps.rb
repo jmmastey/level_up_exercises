@@ -11,11 +11,11 @@ Then(/^I should see home title$/) do
 end
 
 Then(/^there should be a link to sign in$/) do
-  expect(find_link('Sign In')[:href]).to eq(new_user_session_path)
+  expect(find_link('Sign In')[:href]).to end_with(new_user_session_path)
 end
 
 Then(/^there should be a link to sign up$/) do
-  expect(find_link('Sign Up')[:href]).to eq(new_user_registration_path)
+  expect(find_link('Sign Up')[:href]).to end_with(new_user_registration_path)
 end
 
 Given(/^I am signed in$/) do

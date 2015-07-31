@@ -13,3 +13,7 @@ def sign_in(email, password)
   fill_in(:user_password, with: password)
   click_button('Sign In')
 end
+
+def sign_out
+  visit(destroy_user_session_path)
+end

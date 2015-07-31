@@ -4,7 +4,7 @@ end
 
 Given(/^I have an account$/) do
   sign_up(USER[:username], USER[:email], USER[:password])
-  visit(destroy_user_session_path)
+  sign_out
 end
 
 Given(/^I visit the sign up page$/) do
@@ -32,89 +32,61 @@ When(/^click sign up$/) do
 end
 
 Then(/^I expect to view my profile page$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(current_path).to eq(profile_path)
 end
 
-When(/^I enter an invalid username, (\d+)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I enter an invalid username, (.+)$/) do |username|
+  fill_in(:user_username, with: username)
 end
 
-Then(/^I expect to have a username error$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I expect to have a username is too short error$/) do
+  expect(page).to have_content('Username is too short')
+end
+
+Then(/^I expect to have a username must contain letters error$/) do
+  expect(page).to have_content('Username must contain at least 1 letter')
 end
 
 Then(/^I should not view my profile page$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(current_path).not_to eq(profile_path)
 end
 
-When(/^I enter an invalid username, asdf$/) do
-  pending # express the regexp above with the code you wish you had
+When(/^I enter an invalid password, (.+)$/) do |password|
+  fill_in(:user_password, with: password)
 end
 
-When(/^I enter an invalid username, _@\#\$$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I should expect to have a password is too short error$/) do
+  expect(page).to have_content('Password is too short')
 end
 
-When(/^I enter an invalid password, (\d+)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^I should expect to have an invalid password error$/) do
+  expect(page).to have_content('Password must contain at least 1 lowercase, 1 uppercase and 1 number')
 end
 
-Then(/^I should expect to have a password error$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter an invalid password, tooshort$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter an invalid password, NoNumbers$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter an invalid password, Ask(\d+)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter an invalid password, !\$%@\#\$\#@$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter an invalid email, invalid\.com$/) do
-  pending # express the regexp above with the code you wish you had
+When(/^I enter an invalid email, (.+)$/) do |email|
+  fill_in(:user_email, with: email)
 end
 
 Then(/^I should expect to have an email error$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter an invalid email, invalid@com$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter an invalid email, missing@extension$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter an invalid email, double@at@sign\.com$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I enter an invalid email, just_some_text_(\d+)$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content('Email is invalid')
 end
 
 When(/^I enter a username that is taken$/) do
-  pending # express the regexp above with the code you wish you had
+  User.create(email: 'test@example.com', username: USER[:username], 
+              password: USER[:password], password_confirmation: USER[:password])
+  fill_in(:user_username, with: USER[:username])
 end
 
 Then(/^I should expect to have a username taken error$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content('Username has already been taken')
 end
 
 When(/^I enter an email that is taken$/) do
-  pending # express the regexp above with the code you wish you had
+  User.create(email: USER[:email], username: 'test_user', 
+              password: USER[:password], password_confirmation: USER[:password])
+  fill_in(:user_email, with: USER[:email])
 end
 
 Then(/^I should expect to have an email taken error$/) do
-  pending # express the regexp above with the code you wish you had
+  expect(page).to have_content('Email has already been taken')
 end

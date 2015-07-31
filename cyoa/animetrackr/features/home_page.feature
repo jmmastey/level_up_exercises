@@ -16,4 +16,3 @@ Feature: Home Page
     And there should not be a link to sign in
     And there should not be a link to sign up
     And there should be a link to sign out
-

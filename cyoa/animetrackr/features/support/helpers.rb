@@ -1,7 +1,5 @@
 require_relative 'helpers/session_helpers'
 require 'pry'
-World(FactoryGirl::Syntax::Methods)
-
 
 USER = {
   username: 'zsyed',

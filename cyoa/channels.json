@@ -1,0 +1,18 @@
+{
+  "channels":[
+    { "name" : "Smite", "queries" : [
+      "smite isis gameplay",
+      "smite best plays",
+      "smite serqet gameplay"
+    ]},
+    { "name" : "Vines", "queries" : [
+      "funny vine",
+      "vine comp",
+      "hilarious vine"
+    ]},
+    { "name" : "Rick and Morty", "queries" : [
+      "rick and morty",
+      "justin roiland"
+    ]}
+  ]
+}

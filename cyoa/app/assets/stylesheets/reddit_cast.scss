@@ -1,0 +1,204 @@
+@import url('montserrat.css');
+@import url('ld-spin.css');
+@import url('ld-bars.css');
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+}
+html {
+  background: image-url('living_room.jpg') no-repeat 0 0;
+  background-size: cover;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  width: 100%;
+}
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/***************************
+         TELEVISION
+***************************/
+.television {
+  position: relative;
+  max-width: 1400px;
+  min-width: 1000px;
+  margin: 30px auto;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  > img {
+    width: 100%;
+  }
+}
+.player {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 99%;
+  box-shadow: 0px 0px 30px black;
+  z-index: 5;
+
+  &:after {
+    content: "";
+    padding: 10px 50%;
+    max-width: 400px;
+    box-shadow: 0px 0px 15px black;
+    position: absolute;
+    bottom: -100px;
+    left: 0px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+  }
+  .logo {
+    margin: 20% auto;
+    cursor: default;
+    img {
+      width: 400px;
+    }
+    p {
+      color: #ccc;
+      font-size: 18px;
+      opacity: 0;
+
+      -webkit-animation: fade-in-out 2s 0s infinite ease;
+      animation: fade-in-out 2s 0s infinite ease;
+    }
+  }
+  embed, iframe {
+    position: absolute;
+    top: 5%;
+    left: 3%;
+    width: 94%;
+    height: 85%;
+    box-shadow: 0px 0px 2px black;
+
+    z-index: 15;
+  }
+}
+
+/***************************
+        TOP DETAILS
+***************************/
+.player .details {
+  position: absolute;
+  top: 5%;
+  left: 3%;
+  width: 94%;
+
+  background: rgba(0,0,0,0.8);
+  text-align: left;
+  cursor: default;
+  height: 55px;
+  overflow: hidden;
+
+  transition: 0.2s all;
+  z-index: 20;
+  &.hidden {
+    height: 0px;
+  }
+  .channel-details {
+    color: white;
+    text-shadow: 0px 0px 1px black;
+    padding-left: 10px;
+    .number{
+      font-size: 42px;
+    }
+    .name {
+      color: #ccc;
+      font-style: italic;
+      text-transform: uppercase;
+      padding-right: 10px;
+      font-size: 28px;
+    }
+  }
+  .show-details {
+    font-size: 30px;
+    color: white;
+    text-shadow: 0px 0px 1px black;
+    float: right;
+    padding-top: 10px;
+    padding-right: 10px;
+    max-width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/***************************
+      BOTTOM TOGGLES
+***************************/
+.toggles {
+  .media-toggle {
+    position: absolute;
+    bottom: 1%;
+    font-size: 60px;
+    color: #aaa;
+    z-index: 10;
+    vertical-align: middle;
+    text-shadow: 0px 1px 1px #333;
+
+    transition: 0.2s all;
+    &:not(.loading):hover {
+      color: white;
+      cursor: pointer;
+
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+  }
+  .prev-channel { left: 30%; }
+  .next-channel { right: 30%; }
+  .prev-show { left: 35%; }
+  .next-show { right: 35%; }
+  .loading {
+    left: 100px;
+    bottom: 40px;
+  }
+  img {
+    vertical-align: middle;
+    position: absolute;
+    left: 50%;
+    bottom: 3%;
+    margin-left: -75px;
+    opacity: 0.8;
+  }
+}
+
+/***************************
+         ANIMATIONS
+***************************/
+@-webkit-keyframes fade-in-out {
+  0%, 100% { opacity: 0; }
+  50%, 80% { opacity: 1; }
+}
+@keyframes fade-in-out {
+  0%, 100% { opacity: 0; }
+  50%, 80% { opacity: 1; }
+}
+
+/***************************
+           MEDIA
+***************************/
+@media(max-width: 1200px) {
+  .television {
+    margin-top: 10%;
+  }
+  .television .loading {
+    bottom: 30px;
+  }
+}

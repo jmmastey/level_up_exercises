@@ -1,0 +1,22 @@
+.television
+  = image_tag "tv3.jpg"
+  .player
+    .logo
+      = image_tag "rclogo.png"
+      %p Loading your channels...
+    .details
+      %span.channel-details
+        %span.number= "00"
+        %span.name= @channel_name
+      %span.show-details
+        %span.name= "My test show"
+        %span.duration
+    #video
+  .toggles
+    .loading.media-toggle
+      .ld.ld-bars
+    %i.prev-channel.media-toggle.fa.fa-angle-double-left
+    %i.prev-show.media-toggle.fa.fa-caret-left
+    = image_tag "rclogo.png", width: 150
+    %i.next-show.media-toggle.fa.fa-caret-right
+    %i.next-channel.media-toggle.fa.fa-angle-double-right

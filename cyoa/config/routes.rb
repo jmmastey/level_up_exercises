@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  get 'channel/new'
+  get 'channel/create'
+  get 'channel/show'
+  get 'channel/edit'
+  get 'channel/update'
+  get 'reddit_cast/show'
+
+  root 'reddit_cast#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

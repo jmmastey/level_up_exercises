@@ -1,0 +1,2 @@
+module ChannelHelper
+end

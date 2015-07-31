@@ -1,0 +1,47 @@
+.ld, .ld:before, .ld:after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+}
+.ld-spin {
+  padding: 4px;
+  background: white;
+  border-radius: 8px;
+  margin: -20px -10px;
+
+  box-shadow: 12px 0px 0px white,
+              20px 8px 0px white,
+              20px 20px 0px white,
+              12px 28px 0px white,
+              0px 28px 0px white,
+              -8px 20px 0px white,
+              -8px 8px 0px white;
+
+  -webkit-transform-origin: 140% 220%;
+  transform-origin: 140% 220%;
+  
+  -webkit-animation: ld-spin 2s 0s infinite linear;
+  animation: ld-spin 2s 0s infinite linear;
+}
+
+@-webkit-keyframes ld-spin {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(360deg);
+    transform: rotateZ(360deg);
+  }
+}
+@keyframes ld-spin {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(360deg);
+    transform: rotateZ(360deg);
+  }
+}

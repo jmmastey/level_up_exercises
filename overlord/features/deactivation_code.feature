@@ -25,4 +25,4 @@ Scenario Outline: Deactivate the bomb or not
   Scenario: Deactivating with the wrong code provides a message
     Given an active bomb with deactivation code "0000"
     When some meddling fool submits code "6875"
-    Then he should see "Ha-ha-ha-ha!  I win, you fool!"
+    Then the bomb is active

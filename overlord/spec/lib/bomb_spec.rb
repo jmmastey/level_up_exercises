@@ -2,101 +2,93 @@ require 'spec_helper'
 require 'bomb'
 
 describe Bomb do
-  let(:ACTIVATION) { "6667" }
-  let(:DEACTIVATION) { "8889" }
-  let(:OTHER) { "0987" }
+  let(:activation_code) { "6667" }
+  let(:deactivation_code) { "8889" }
+  let(:other_code) { "0987" }
+  let(:bomb) { Bomb.new("6667", "8889") }
 
-  context "a newly created bomb" do
-    let(:new_bomb) { Bomb.new(ACTIVATION, DEACTIVATION) }
-
+  context "which is newly created" do
     it "is not .active?" do
-      expect(new_bomb).not_to be_active
+      expect(bomb).not_to be_active
     end
 
     it "is not .disabled?" do
-      expect(new_bomb).not_to be_disabled
+      expect(bomb).not_to be_disabled
     end
+  end
 
-  context "an inactive bomb" do
-    let(:inactive_bomb) { Bomb.new(ACTIVATION, DEACTIVATION) }
-
+  context "which is inactive" do
     it "cannot explode" do
-      inactive_bomb.explode!
-      expect(inactive_bomb).not_to be_exploded
+      bomb.explode!
+      expect(bomb).not_to be_exploded
     end
 
     it "is not activated by an attempt to explode it" do
-      inactive_bomb.explode!
-      expect(inactive_bomb).not_to be_active
+      bomb.explode!
+      expect(bomb).not_to be_active
     end
 
     it "is not activated by entering an incorrect activation code" do
-      inactive_bomb.enter_code(OTHER)
-      expect(inactive_bomb).not_to be_active
+      bomb.enter_code(other_code)
+      expect(bomb).not_to be_active
     end
 
     it "is activated by entering the correct activation code" do
-      inactive_bomb.enter_code(ACTIVATION)
-      expect(inactive_bomb).to be_active
+      bomb.enter_code(activation_code)
+      expect(bomb).to be_active
     end
 
     it "can be disabled with .cut_wires!" do
-      inactive_bomb.cut_wires!
-      expect(inactive_bomb).to be_disabled
+      bomb.cut_wires!
+      expect(bomb).to be_disabled
     end
   end
 
-  context "an active bomb" do
-    let(:active_bomb) do
-      Bomb.new(ACTIVATION, DEACTIVATION)
-      active_bomb.enter_code(ACTIVATION)
-    end
+  context "which is active" do
+    let(:another_bomb) { bomb.enter_code(activation_code) }
 
     it "can explode" do
-      active_bomb.explode!
-      expect(active_bomb).to be_exploded
+      another_bomb.explode!
+      expect(another_bomb).to be_exploded
     end
 
     it "is deactivated by entering the correct deactivation code" do
-      active_bomb.enter_code(DEACTIVATION)
-      expect(active_bomb).no_to be_active
+      another_bomb.enter_code(deactivation_code)
+      expect(another_bomb).not_to be_active
     end
 
     it "is not deactivated by entering an incorrect deactivation code" do
-      active_bomb.enter_code(OTHER)
-      expect(active_bomb).to be_active
+      another_bomb.enter_code(other_code)
+      expect(another_bomb).to be_active
     end
 
     it "will not explode on first two incorrect deactivation code entries" do
-      2.times active_bomb.enter_code(OTHER)
-      expect(active_bomb).not_to be_exploded
+      2.times { another_bomb.enter_code(other_code) }
+      expect(another_bomb).not_to be_exploded
     end
 
     it "will explode on third incorrect deactivation code entry" do
-      3.times active_bomb.enter_code(OTHER)
+      3.times { another_bomb.enter_code(other_code) }
+      expect(another_bomb).to be_exploded
     end
 
     it "will not explode from re-entry of activation code" do
-      3.times active_bomb.enter_code(ACTIVATION)
-      expect(active_bomb).not_to be_exploded
+      3.times { another_bomb.enter_code(activation_code) }
+      expect(another_bomb).not_to be_exploded
     end
 
     it "can be disabled with .cut_wires!" do
-      active_bomb.cut_wires!
-      expect(active_bomb).to be_disabled
+      another_bomb.cut_wires!
+      expect(another_bomb).to be_disabled
     end
-  end
 
-  context "a disabled bomb" do
-    let(:disabled_bomb) do
-      Bomb.new(ACTIVATION, DEACTIVATION)
-      disabled_bomb.enter_code(ACTIVATION)
-      disabled_bomb.cut_wires
-    end
-    
-    it "cannot explode" do
-      disabled_bomb.explode!
-      expect(disabled_bomb).not_to be_exploded
+    context "which is disabled" do
+      let(:disabled_bomb) { another_bomb.cut_wires }
+
+      it "cannot explode" do
+        disabled_bomb.explode!
+        expect(disabled_bomb).not_to be_exploded
+      end
     end
   end
 end

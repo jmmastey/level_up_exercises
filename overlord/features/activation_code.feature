@@ -23,7 +23,7 @@ Feature: Activation code
 
   Scenario Outline: Entering the activation code extra times has no effect
     Given an active bomb with activation code "1234"
-    When some incompetent minion activates the bomb with "1234" <count> times
+    When some incompetent minion submits code "1234" <count> times
     Then the bomb is active
 
     Examples:

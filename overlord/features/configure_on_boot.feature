@@ -22,18 +22,22 @@ Feature: Configure activation and deactivation codes
       | abcd  |
       | 12345 |
       | 123   |
-  
-  Scenario: I only get 2 chances to pick a good activation code
-    Given I have not configured my bomb
-    When I submit 2 bad activation codes
-    Then I should see "Idiot!  Using default 1234."
-    And I should see "Select deactivation code (default: 0000)"
     
   Scenario: Selecting an activation code should trigger the deactivation prompt
     Given I have not configured my bomb
     When I submit code "5555"
     Then I should see "Select deactivation code (default: 0000)"
 
+  Scenario: Activation code "" triggers the deactivation prompt
+    Given I have not configured my bomb
+    When I submit code ""
+    Then I should see "Select deactivation code (default: 0000)"
+
+  Scenario: Entering activation code "" sets activation code to "1234"
+    Given an inactive bomb with activation code ""
+    When I activate the bomb with "1234"
+    Then the bomb is active
+    
   Scenario Outline: The bomb only accepts 4-digit numeric deactivation codes
     Given an activation code selection "5555"
     When I submit code "<value>"
@@ -45,12 +49,6 @@ Feature: Configure activation and deactivation codes
       | 12345 |
       | 123   |
 
-  Scenario: I only get 2 chances to pick a good deactivation code
-    Given an activation code selection "5555"
-    When I submit 2 bad deactivation codes
-    Then I should see "Idiot!  Using default 0000."
-    And I should see "Control Panel"
-    
   Scenario: The deactivation code must be different than the activation code
     Given an activation code selection "5555"
     When I submit code "5555"
@@ -61,3 +59,13 @@ Feature: Configure activation and deactivation codes
     Given an activation code selection "5555"
     When I submit code "9876"
     Then I should see "Control Panel"
+
+  Scenario: Dectivation code "" triggers the control panel
+    Given an activation code selection "5555"
+    When I submit code ""
+    Then I should see "Control Panel"
+
+  Scenario: Entering deactivation code "" sets deactivation code to "0000"
+    Given an active bomb with deactivation code "0000"
+    When I submit code "0000"
+    Then the bomb is inactive

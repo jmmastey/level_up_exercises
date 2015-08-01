@@ -6,7 +6,4 @@ Feature: The bomb has a big red button!  It... confirms activation.
   Scenario: Entering the activation code requires confirmation
     Given an inactive bomb with activation code "1234"
     When I submit code "1234"
-    Then I need to confirm activation
-    And I should see "BigRedButton"
-    And "BigRedButton" is "big"
-    And "BigRedButton" is "red"
+    Then I need to confirm activation with the BigRedButton

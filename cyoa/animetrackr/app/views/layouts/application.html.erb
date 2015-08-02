@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= page_title %></title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
 
   <%= csrf_meta_tags %>
 </head>
@@ -10,8 +10,13 @@
 <%= render 'shared/header' %>
 
 <div class="container">
+  <% if notice %>
   <p class="notice"><%= notice %></p>
+  <% end %>
+
+  <% if alert %>
   <p class="alert"><%= alert %></p>
+  <% end %>
   
   <%= yield %>
 </div>

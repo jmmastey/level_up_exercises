@@ -1,9 +1,11 @@
 Given(/^I do not have an account$/) do
-  expect(User.exists?(email: USER[:email])).to be(false)
+  user = build(:user)
+  expect(User.exists?(email: user.email)).to be(false)
 end
 
 Given(/^I have an account$/) do
-  sign_up(USER[:username], USER[:email], USER[:password])
+  user = build(:user)
+  sign_up(user.username, user.email, user.password)
   sign_out
 end
 
@@ -12,19 +14,23 @@ Given(/^I visit the sign up page$/) do
 end
 
 When(/^I enter my username$/) do
-  fill_in(:user_username, with: USER[:username])
+  user = build(:user)
+  fill_in(:user_username, with: user.username)
 end
 
 When(/^I enter my password$/) do
-  fill_in(:user_password, with: USER[:password])
+  user = build(:user)
+  fill_in(:user_password, with: user.password)
 end
 
 When(/^I enter my confirmation password$/) do
-  fill_in(:user_password_confirmation, with: USER[:password])
+  user = build(:user)
+  fill_in(:user_password_confirmation, with: user.password)
 end
 
 When(/^I enter my email address$/) do
-  fill_in(:user_email, with: USER[:email])
+  user = build(:user)
+  fill_in(:user_email, with: user.email)
 end
 
 When(/^click sign up$/) do
@@ -72,9 +78,8 @@ Then(/^I should expect to have an email error$/) do
 end
 
 When(/^I enter a username that is taken$/) do
-  User.create(email: 'test@example.com', username: USER[:username], 
-              password: USER[:password], password_confirmation: USER[:password])
-  fill_in(:user_username, with: USER[:username])
+  user = create(:user)
+  fill_in(:user_username, with: user.username)
 end
 
 Then(/^I should expect to have a username taken error$/) do
@@ -82,9 +87,8 @@ Then(/^I should expect to have a username taken error$/) do
 end
 
 When(/^I enter an email that is taken$/) do
-  User.create(email: USER[:email], username: 'test_user', 
-              password: USER[:password], password_confirmation: USER[:password])
-  fill_in(:user_email, with: USER[:email])
+  user = create(:user)
+  fill_in(:user_email, with: user.email)
 end
 
 Then(/^I should expect to have an email taken error$/) do

@@ -1,5 +1,5 @@
 Given(/^I am signed out$/) do
- visit(destroy_user_session_path)
+  sign_out
 end
 
 When(/^I view the home page$/) do
@@ -19,12 +19,12 @@ Then(/^there should be a link to sign up$/) do
 end
 
 Given(/^I am signed in$/) do
-  sign_in(USER[:email], USER[:password])
+  user = build(:user)
+  sign_in(user.email, user.password)
 end
 
 Then(/^I should be redirected to the profile page$/) do
   expect(current_path).to eq(profile_path)
-  expect(page).to have_content('Your Profile')
 end
 
 Then(/^there should not be a link to sign in$/) do

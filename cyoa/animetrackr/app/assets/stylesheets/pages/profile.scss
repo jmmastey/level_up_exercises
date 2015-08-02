@@ -1,3 +1,24 @@
-// Place all the styles related to the profile controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#profile {
+  @extend .row;
+
+  .profile-overview {
+    @extend .col-xs-12;
+    @include transparent-background(255, 255 ,255 , 0.5);
+    min-height: 250px;
+    border: 1px solid $black;
+    padding: 25px;
+
+
+    .avatar {
+      @extend .pull-left;
+      border: 1px solid $black;
+      width: 150px;
+      height: 150px;
+    }
+  
+    .details {
+      @extend .col-sm-3;
+      display: inline-block;
+    }
+  }
+}

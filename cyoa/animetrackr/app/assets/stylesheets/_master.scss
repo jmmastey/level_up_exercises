@@ -6,4 +6,13 @@ a {
   color: $brand-color;
 }
 
+.notice {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  min-height: 30px;
+  background: $success-green;
+  border: 1px solid darken($success-green, 25%);
+}
+
 @include spacer-x();

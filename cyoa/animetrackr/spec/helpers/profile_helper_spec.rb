@@ -1,15 +1,21 @@
 require 'rails_helper'
+require 'digest'
 
-# Specs in this file have access to a helper object that includes
-# the ProfileHelper. For example:
-#
-# describe ProfileHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe ProfileHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe('#gravatar_for') do
+    it 'should return a gravatar url for user email' do
+      email = 'test@example.com'
+      gravatar_url = 'https://www.gravatar.com/avatar/' +
+                     Digest::MD5.hexdigest(email)
+
+      expect(gravatar_for('test@example.com')).to eq(gravatar_url)
+    end
+  end
+
+  describe('#member_since') do
+    it 'should return the join date in a formatted date' do
+      format_regex = /Member Since: \d{2}-\d{2}-\d{4}/
+      expect(member_since(Time.now)).to match(format_regex)
+    end
+  end
 end

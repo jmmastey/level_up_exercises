@@ -1,6 +1,15 @@
 <% content_for(:title, 'Profile') %>
-<h1>Your Profile</h1>
-<p>Find me in app/views/profile/index.html.erb</p>
 
+<div id="profile">
 
-<%= gravatar_for(current_user.email) %>
+  <div class="profile-overview">
+    <img src="<%= gravatar_for(current_user.email) %>" class='avatar' />
+    
+    <div class="details">
+      <h3><%= current_user.username %></h3>
+      <p>Member Since: <%= current_user.created_at.strftime('%m-%d-%Y') %></p>
+    </div>
+    
+  </div>
+
+</div>

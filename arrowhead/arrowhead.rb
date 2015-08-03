@@ -21,7 +21,7 @@ class Arrowhead
       shapes = CLASSIFICATIONS[region]
       if shapes.include? shape
         arrowhead = shapes[shape]
-        puts "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
+        "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
       else
         raise "Unknown shape value. Are you sure you know what you're talking about?"
       end

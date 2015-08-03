@@ -22,4 +22,4 @@ You should write both the tests and the code for this exercise. Writing lots of 
 
 An easy way to write tests for this project is to create a small (artificial) data set similar to the one provided in the JSON file. This will decouple your production data from the test data, so that your tests are not as fragile.
 
-Some level-up'ers discovered that ABAnalyzer will throw an `insufficient data` error if your data set is two small. You may need a sample size of at least twenty per cohort to get it to work properly.
+Some Level-Up'ers discovered that ABAnalyzer will throw an `insufficient data` error if your data set is too small. You may need a sample size of at least twenty per cohort to get it to work properly.

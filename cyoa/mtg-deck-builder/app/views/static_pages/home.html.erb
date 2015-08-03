@@ -1,4 +1,14 @@
-<h1>MTG Deck Builder</h1>
-<p>Welcome to MTG Deck Builder, a beautiful rails app that allows you to build
-   the MTG deck of your dreams (and then have those dreams shot down when you
-   realize how expensive this game is...)</p>
+<% provide(:title, "Home") %>
+<div class="panel" id="login-or-signup">
+  <header>
+    <h2>Log In / Sign Up</h2>
+  </header>
+  <form>
+    <p><input name="username" placeholder="Username" type="text" /></p>
+    <p><input name="password" placeholder="Password" type="password" /></p>
+    <p>
+      <input class="btn" type="submit" value="Log In" name="login" />
+      <input class="btn" type="submit" value="Sign Up" name="signup" />
+    </p>
+  </form>
+</div>

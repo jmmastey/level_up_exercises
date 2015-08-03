@@ -1,0 +1,38 @@
+body {
+  font-family: $sans-serif;
+  background-image: asset-data-url("cream_pixels.png");
+}
+
+a {
+  color: $link_color;
+  text-decoration: none;
+  &:hover {
+    color: $link_hover_color;
+  }
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="textbox"] {
+  padding: 10px;
+  @include box-sizing(border-box);
+  border: 1px solid #ddd;
+  color: $site_color;
+  font-family: $sans_serif;
+  @include transition-duration(0.3s);
+  @include transition-timing-function(ease-out);
+
+  &:focus {
+    outline: none;
+    border: 1px solid lighten($site_color, 20%);
+    @include box-shadow(lighten($site_color, 50%) 0px 0px 10px);
+  }
+}

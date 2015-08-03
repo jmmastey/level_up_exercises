@@ -1,0 +1,20 @@
+#login-or-signup {
+  width: 400px;
+  text-align: center;
+  
+  p {
+    margin-bottom: 10px;
+  }
+
+  input {
+    &[type="text"],
+    &[type="password"] {
+      width: 100%;
+      font-size: 1.5em;
+      text-align: center;
+    }
+    &[type="submit"] {
+      width: 100%;  
+    }
+  }
+}

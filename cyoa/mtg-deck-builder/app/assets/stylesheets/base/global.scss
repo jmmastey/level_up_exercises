@@ -27,8 +27,7 @@ input[type="textbox"] {
   border: 1px solid #ddd;
   color: $site_color;
   font-family: $sans_serif;
-  @include transition-duration(0.3s);
-  @include transition-timing-function(ease-out);
+  @include default-transition();
 
   &:focus {
     outline: none;

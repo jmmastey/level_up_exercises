@@ -18,8 +18,7 @@
   display: inline-block;
   font-family: $logo;
   letter-spacing: 2px;
-  @include transition-duration(0.3s);
-  @include transition-timing-function(ease-out);
+  @include default-transition();
 
   &:hover {
     cursor: pointer;
@@ -54,14 +53,12 @@
   letter-spacing: 2px;
   text-decoration: none;
   text-transform: uppercase;
-  @include transition-duration(0.3s);
-  @include transition-timing-function(ease-out);
+  @include fancy-hover-shadow();
 
   &:hover {
     z-index: 1;
     color: $site_color;
     cursor: pointer;
     background-color: white;
-    @include box-shadow($shadow_color 3px 3px 10px);
   }
 }

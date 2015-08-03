@@ -1,15 +1,19 @@
-<% provide(:title, "Home") %>
-<div class="panel" id="login-or-signup">
+<% provide(:title, "Sign Up") %>
+<div class="panel" id="signup">
   <header>
-    <h2>Log In / Sign Up</h2>
+    <h2>Sign Up</h2>
   </header>
   <form>
     <p><input name="username" placeholder="Username" type="text" /></p>
     <p><input name="password" placeholder="Password" type="password" /></p>
     <p><input name="password_confirmation" placeholder="Confirm Password" type="password" /></p>
     <p>
-      <input class="btn" type="submit" value="Log In" name="login" />
       <input class="btn" type="submit" value="Sign Up" name="signup" />
     </p>
   </form>
+  <br>
+  <p>
+    Already signed up?
+    <%= link_to "Log In", "#" %>
+  </p>
 </div>

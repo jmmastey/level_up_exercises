@@ -1,14 +1,11 @@
 require_relative('json_parser')
 require('abanalyzer')
 
-class DataScience
-  def load(filepath)
-    @parser = JSONParser.new
-    @data = @parser.parse(filepath)
-  end
+class Calculator
+  attr_reader :data
 
-  def data_reader
-    @data
+  def load(filepath)
+    @data = JSONParser.new.parse(filepath)
   end
 
   def conversion_rate(cohort)
@@ -20,11 +17,7 @@ class DataScience
   end
 
   def number_of_conversions(cohort)
-    conversions = 0
-    @data.each do |entry|
-      conversions += 1 if entry['result'] == 1 && entry['cohort'] == cohort
-    end
-    conversions
+    @data.count { |entry| entry['result'] == 1 && entry['cohort'] == cohort }
   end
 
   def confidence_interval(cohort, confidence)
@@ -34,10 +27,12 @@ class DataScience
   end
 
   def chi_square_confidence
-    values = {}
-    values[:a] = { success: number_of_conversions('A'), total: total_size('A') }
-    values[:b] = { success: number_of_conversions('B'), total: total_size('B') }
+    values = { a: cohort_totals('A'), b: cohort_totals('B') }
     ab_test = ABAnalyzer::ABTest.new(values)
     ab_test.chisquare_p
+  end
+
+  def cohort_totals(cohort)
+    { success: number_of_conversions(cohort), total: total_size(cohort)}
   end
 end

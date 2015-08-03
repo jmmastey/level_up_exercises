@@ -1,6 +1,6 @@
-require_relative('data_science.rb')
+require_relative('calculator.rb')
 
-calculator = DataScience.new
+calculator = Calculator.new
 calculator.load('data_export_2014_06_20_15_59_02.json')
 puts 'Total Sample size (Cohort A)'
 puts calculator.total_size('A')

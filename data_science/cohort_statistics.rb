@@ -1,8 +1,7 @@
 require 'bigdecimal'
 
 class CohortStatistics
-	attr_accessor :values
-  INTERVAL = 1.96
+	attr_accessor :values, :converted, :not_converted, :conversion_freq
   def initialize(cohort_group, cohort_data)
   	@cohort_data = cohort_data
     @cohort_group = cohort_group
@@ -34,7 +33,7 @@ class CohortStatistics
   end
 
   def cohort_stats
-    cohort_size
+  	cohort_size
     cohort_conversion_freq
     cohort_confidence_interval
     cohort_chi_square    

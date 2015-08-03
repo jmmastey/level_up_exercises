@@ -1,4 +1,5 @@
-require "rspec/collection_matchers"
+require "simplecov"
+SimpleCov.start
 
 require_relative "../lib/bomb.rb"
 require_relative "../lib/timer.rb"

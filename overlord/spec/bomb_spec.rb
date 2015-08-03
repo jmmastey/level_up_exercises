@@ -14,6 +14,15 @@ describe Bomb do
     it "creates an inactive bomb" do
       expect(bomb).to be_inactive
     end
+
+    it "defaults the max number of failed deactivations to 3" do
+      expect(bomb.max_failed_deactivations).to eq(3)
+    end
+
+    it "accepts a custom number of failed deactivations" do
+      bomb = described_class.new(activation_code, deactivation_code, 5)
+      expect(bomb.max_failed_deactivations).to eq(5)
+    end
   end
 
   describe "#enter_code" do
@@ -61,36 +70,37 @@ describe Bomb do
       end
 
       context "when entering the activation code" do
-        context "up to 2 times" do
+        context "one time" do
           it "is active" do
-            2.times do
-              bomb.enter_code(activation_code)
-              expect(bomb).to be_active
-            end
+            bomb.enter_code(activation_code)
+            expect(bomb).to be_active
           end
         end
 
-        context "3 times" do
+        context "numerous times" do
           it "is active" do
-            3.times { bomb.enter_code(activation_code) }
+            bomb.max_failed_deactivations.times do
+              bomb.enter_code(activation_code)
+            end
+
             expect(bomb).to be_active
           end
         end
       end
 
       context "when entering a bad code" do
-        context "up to 2 times" do
+        context "up until the max number of deactivations" do
           it "is active" do
-            2.times do
+            (bomb.max_failed_deactivations - 1).times do
               bomb.enter_code(bad_code)
               expect(bomb).to be_active
             end
           end
         end
 
-        context "3 times" do
+        context "past the number of deactivations" do
           it "explodes the bomb" do
-            3.times do
+            bomb.max_failed_deactivations.times do
               bomb.enter_code(bad_code)
             end
 

@@ -10,9 +10,9 @@ describe WireBundle do
 
   describe "#new" do
     it "requires a number of disarm and detonating wires" do
-      expect(bundle).to have(disarming_wire_count).disarming_wires
-      expect(bundle).to have(detonating_wire_count).detonating_wires
-      expect(bundle).to have(total_wire_count).wires
+      expect(bundle.disarming_wires.length).to eq(disarming_wire_count)
+      expect(bundle.detonating_wires.length).to eq(detonating_wire_count)
+      expect(bundle.wires.length).to eq(total_wire_count)
     end
   end
 

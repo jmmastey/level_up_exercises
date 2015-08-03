@@ -4,11 +4,10 @@ require_relative 'cohort_statistics'
 require 'pp'
 
 class DataStatistics
-	:cohort_data
-  def initialize
-    filename = 'test.json'
-     @cohort_data = Analyzer.new(filename).parse_data
-     @values = nil
+	attr_accessor :cohort_data
+  def initialize(filename)
+    @cohort_data = Analyzer.new(filename).parse_data
+    @values = nil
   end
   
   def convert_data_to_hash
@@ -23,5 +22,5 @@ class DataStatistics
     pp tester.chisquare_p
   end
 end
-
-DataStatistics.new.chi_square
+filename = 'test.json'
+DataStatistics.new(filename).chi_square

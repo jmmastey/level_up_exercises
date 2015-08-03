@@ -2,6 +2,7 @@ require 'bigdecimal'
 
 class CohortStatistics
 	attr_accessor :values, :converted, :not_converted, :conversion_freq
+  INTERVAL = 1.96
   def initialize(cohort_group, cohort_data)
   	@cohort_data = cohort_data
     @cohort_group = cohort_group
@@ -25,7 +26,7 @@ class CohortStatistics
     standard_error = standard_error(@conversion_freq, @cohort_size)
     bottom_range = @conversion_freq - INTERVAL * standard_error
     top_range = @conversion_freq + INTERVAL * standard_error
-    [bottom_range, top_range]
+    [bottom_range.round(3), top_range.round(3)]
   end
 
   def cohort_chi_square

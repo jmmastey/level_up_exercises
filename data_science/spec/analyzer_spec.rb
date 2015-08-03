@@ -1,8 +1,8 @@
 require_relative '../analyzer'
 
-describe Analyzer do 
-  let(:filename){'test.json'}
-  let(:analyzer){Analyzer.new(filename)}
+describe Analyzer do
+  let(:filename) { 'test.json' }
+  let(:analyzer) { Analyzer.new(filename) }
 
   describe '#initialize' do
     it 'sets the filename for a new Analyzer instance' do
@@ -13,11 +13,10 @@ describe Analyzer do
 
   describe "#parse_data" do
     let(:cohort_data) { analyzer.parse_data }
-  
     it "creates a hash of cohort and their respective results" do
       expect(cohort_data).to be_a(Hash)
       expect(cohort_data.values).to be_a(Array)
-      expect(cohort_data.keys).to eq(["B", "A"])
+      expect(cohort_data.keys).to eq(%w(B A))
     end
   end
 end

@@ -33,6 +33,6 @@ class Calculator
   end
 
   def cohort_totals(cohort)
-    { success: number_of_conversions(cohort), total: total_size(cohort)}
+    { success: number_of_conversions(cohort), total: total_size(cohort) }
   end
 end

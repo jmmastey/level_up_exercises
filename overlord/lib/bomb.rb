@@ -36,7 +36,7 @@ class Bomb
   end
 
   def attempt_activation(code)
-    return activate if code == activation_code
+    activate if code == activation_code
   end
 
   def attempt_deactivation(code)

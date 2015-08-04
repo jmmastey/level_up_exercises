@@ -35,6 +35,7 @@ class Fraction
     divisor = @num.abs.gcd(@den)
     @num /= divisor
     @den /= divisor
+    @den = 1 if @num == 0
   end
 
   def make_denominator_positive

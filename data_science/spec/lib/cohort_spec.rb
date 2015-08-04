@@ -2,52 +2,71 @@ require 'spec_helper'
 require 'cohort'
 
 describe Cohort do
-  context "when it calculates its .conversion_rate_interval" do
-    let(:cohort) { Cohort.new(name: "A", size: 20, conversion_count: 10) }
+  describe "#conversion_rate_interval" do
+    let(:cohort) { Cohort.new("A", 20, 10) }
     it "gets the right range" do
-      expect(cohort.rate_min).to be_within(0.01).of(0.28)
-      expect(cohort.rate_max).to be_within(0.01).of(0.72)
+      expect(cohort.conversion_rate_min).to be_within(0.01).of(0.28)
+      expect(cohort.conversion_rate_max).to be_within(0.01).of(0.72)
     end
   end
 
-  context "when A is better than B" do
-    let(:cohort_b) { Cohort.new(name: "B", size: 20, conversion_count: 10) }
-    context "when the difference is significant" do
-      let(:a_sig_more) { Cohort.new(name: "A", size: 20, conversion_count: 18) }
-      it "is .better_than? B" do
-        expect(a_sig_more.better_than?(cohort_b)).to be true
+  describe "#is_better_than?" do
+    context "when A is better than B" do
+      let(:cohort_b) { Cohort.new("B", 20, 10) }
+      context "when the difference is significant" do
+        let(:cohort_a) { Cohort.new("A", 20, 18) }
+        it "is true" do
+          expect(cohort_a).to be_better_than(cohort_b)
+        end
       end
-      it "gets the right .significance_of_difference percentage" do
-        significance = a_sig_more.significance_of_difference(cohort_b)
-        expect(significance).to be_within(0.1).of(99.5)
-      end
-      it "correctly converts itself .to_s" do
-        description = "Cohort A contains 20 samples with 18 conversions.  The "
-        description << "conversion rate is 77% - 100% with a 95% confidence."
-        expect(a_sig_more.to_s).to eq(description)
+
+      context "when the difference is not significant" do
+        let(:cohort_a) { Cohort.new("A", 20, 15) }
+        it "is true" do
+          expect(cohort_a).to be_better_than(cohort_b)
+        end
       end
     end
-    context "when the difference is not significant" do
-      let(:insig_more) { Cohort.new(name: "A", size: 20, conversion_count: 15) }
-      it "is .better_than?" do
-        expect(insig_more.better_than?(cohort_b)).to be true
-      end
-      it "gets the right .significance_of_difference percentage" do
-        significance = insig_more.significance_of_difference(cohort_b)
-        expect(significance).to be_within(0.1).of(89.8)
+
+    context "when A is NOT better than B" do
+      let(:cohort_a) { Cohort.new("A", 20, 10) }
+      let(:cohort_b) { Cohort.new("B", 20, 10) }
+      it "is false" do
+        expect(cohort_a).not_to be_better_than(cohort_b)
       end
     end
   end
-  context "when A is NOT better than B" do
-    let(:even_dist) { Cohort.new(name: "A", size: 20, conversion_count: 10) }
-    let(:cohort_b) { Cohort.new(name: "B", size: 20, conversion_count: 10) }
-    it ".better_than? is false" do
-      expect(even_dist.better_than?(cohort_b)).to be false
+
+  describe "#significance_of_difference" do
+    context "when A is better than B" do
+      let(:cohort_b) { Cohort.new("B", 20, 10) }
+      context "when the difference is significant" do
+        let(:cohort_a) { Cohort.new("A", 20, 18) }
+        it "returns the right percentage" do
+          significance = cohort_a.significance_of_difference(cohort_b)
+          expect(significance).to be_within(0.1).of(99.5)
+        end
+      end
+
+      context "when the difference is not significant" do
+        let(:cohort_a) { Cohort.new("A", 20, 15) }
+        it "returns the right percentage" do
+          significance = cohort_a.significance_of_difference(cohort_b)
+          expect(significance).to be_within(0.1).of(89.8)
+        end
+      end
     end
-    it "correctly converts itself .to_s" do
-      description = "Cohort A contains 20 samples with 10 conversions.  "
-      description << "The conversion rate is 28% - 72% with a 95% confidence."
-      expect(even_dist.to_s).to eq(description)
+  end
+
+  describe "#to_s" do
+    let(:cohort_a) { Cohort.new("A", 20, 18) }
+    it "correctly converts itself to a string" do
+      description = cohort_a.to_s
+      expect(description).to include("Cohort A")
+      expect(description).to include("20 samples")
+      expect(description).to include("18 conversions")
+      expect(description).to include("conversion rate")
+      expect(description).to include("95% confidence")
     end
   end
 end

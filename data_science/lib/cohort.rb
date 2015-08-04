@@ -1,20 +1,20 @@
 require 'abanalyzer'
 
 class Cohort
-  attr_accessor :name, :size, :conversion_count
+  attr_accessor :name, :views, :conversions
   attr_reader :conversion_rate_interval
 
-  def initialize(name: nil, size: 0, conversion_count: 0)
+  INTERVAL_CONFIDENCE = 0.95
+
+  def initialize(name, views, conversions)
     @name = name
-    @size = size
-    @conversion_count = conversion_count
-    @conversion_rate_interval = calculate_conversion_rate_interval
+    @views = views
+    @conversions = conversions
   end
 
-  def calculate_conversion_rate_interval
-    return 0 if size == 0
-    interval_confidence = 0.95
-    ABAnalyzer.confidence_interval(conversion_count, size, interval_confidence)
+  def conversion_rate_interval
+    return 0 if views == 0
+    ABAnalyzer.confidence_interval(conversions, views, INTERVAL_CONFIDENCE)
   end
 
   def better_than?(other)
@@ -22,21 +22,21 @@ class Cohort
   end
 
   def interval_midpoint
-    (rate_min + rate_max) / 2
+    (conversion_rate_min + conversion_rate_max) / 2
   end
 
-  def rate_min
+  def conversion_rate_min
     conversion_rate_interval[0]
   end
 
-  def rate_max
+  def conversion_rate_max
     conversion_rate_interval[1]
   end
 
   def significance_of_difference(other)
-    cohort = { yes: conversion_count, no: size - conversion_count }
-    other_cohort = { yes: other.conversion_count,
-                     no: other.size - other.conversion_count }
+    cohort = { yes: conversions, no: views - conversions }
+    other_cohort = { yes: other.conversions,
+                     no: other.views - other.conversions }
     test = ABAnalyzer::ABTest.new(name => cohort, other.name => other_cohort)
     p = test.chisquare_p
     p_to_percentage(p)
@@ -51,21 +51,20 @@ class Cohort
   end
 
   def readable_basic_data
-    string = "Cohort #{name} contains #{size} samples with #{conversion_count} "
-    string << "conversions."
+    "Cohort #{name} contains #{views} samples with #{conversions} conversions."
   end
 
   def readable_conversion_rate
-    string = "The conversion rate is #{rate_min_percent}% - "
-    string << "#{rate_max_percent}% with a 95% confidence."
+    "The conversion rate is #{conversion_rate_min_percent}% - " \
+    "#{conversion_rate_max_percent}% with a 95% confidence."
   end
 
-  def rate_min_percent
-    (rate_min * 100).round
+  def conversion_rate_min_percent
+    (conversion_rate_min * 100).round
   end
 
-  def rate_max_percent
-    uncapped_percentage = (rate_max * 100).round
+  def conversion_rate_max_percent
+    uncapped_percentage = (conversion_rate_max * 100).round
     [uncapped_percentage, 100].min
   end
 end

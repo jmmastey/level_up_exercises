@@ -8,32 +8,34 @@ describe RoboResearcher do
     context "when the difference is significantly better than random" do
       let(:researcher) { RoboResearcherFactory.create([250, 100, 250, 70]) }
       it "reports A is significantly better" do
-        a_is_better = "Cohort A is better with 95% confidence.  The difference "
-        a_is_better << "is significant with 99% confidence."
-        expect(researcher.conclude).to eq(a_is_better)
+        conclusion = researcher.conclude
+        expect(conclusion).to include("Cohort A is better")
+        expect(conclusion).to include("95% confidence")
+        expect(conclusion).to include("is significant")
+        expect(conclusion).to include("99% confidence")
       end
     end
+
     context "when the difference is insignificant" do
       let(:researcher) { RoboResearcherFactory.create([20, 10, 20, 9]) }
       it "reports there is no significant difference" do
-        no_difference = "There is no significant difference between cohorts."
-        expect(researcher.conclude).to eq(no_difference)
+        expect(researcher.conclude).to include("no significant difference")
       end
     end
   end
 
-  context "when B is better than A" do
-    context "when the difference is significantly better than random" do
-      let(:researcher) { RoboResearcherFactory.create([250, 50, 250, 100]) }
-      it "reports B is significantly better" do
-        b_is_better = "Cohort B is better with 95% confidence.  The difference "
-        b_is_better << "is significant with 99.99% confidence."
-        expect(researcher.conclude).to eq(b_is_better)
-      end
+  context "when B is significantly better than A" do
+    let(:researcher) { RoboResearcherFactory.create([250, 50, 250, 100]) }
+    it "reports B is significantly better" do
+      conclusion = researcher.conclude
+      expect(conclusion).to include("Cohort B is better")
+      expect(conclusion).to include("95% confidence")
+      expect(conclusion).to include("is significant")
+      expect(conclusion).to include("99% confidence")
     end
   end
 
-  context "when asked for .details" do
+  describe "#details" do
     let(:researcher) { RoboResearcherFactory.create([25, 20, 25, 20]) }
     it "provides a description for each cohort" do
       expect(researcher.details.length).to be 2
@@ -43,11 +45,9 @@ end
 
 module RoboResearcherFactory
   def self.create(fake_data)
-    researcher = RoboResearcher.new
-    researcher.cohorts = [
-      Cohort.new(name: "A", size: fake_data[0], conversion_count: fake_data[1]),
-      Cohort.new(name: "B", size: fake_data[2], conversion_count: fake_data[3]),
-    ]
-    researcher
+    RoboResearcher.new.tap do |researcher|
+      researcher.cohorts = [Cohort.new("A", fake_data[0], fake_data[1]),
+                            Cohort.new("B", fake_data[2], fake_data[3])]
+    end
   end
 end

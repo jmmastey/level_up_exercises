@@ -1,57 +1,34 @@
 require_relative 'data_set'
-require_relative 'data_reader'
 require_relative 'cohort'
 
 class RoboResearcher
   attr_accessor :cohorts
-  attr_reader :data_file, :data
+  attr_reader :data
 
   def initialize(data_file: nil)
-    @data_file = data_file
     @cohorts = []
-    @data = DataSet.new(data: [])
-    initialize_from_data_file unless data_file.nil?
-  end
-
-  def initialize_from_data_file
-    initialize_data
-    populate_cohorts
-  end
-
-  def initialize_data
-    data_points = DataReader.new(data_file).data
-    @data = DataSet.new(data: data_points)
-  end
-
-  def populate_cohorts
-    data.possible_values(:cohort).each do |name|
-      @cohorts << create_cohort(name)
+    @data = DataSet.new(file_name: data_file)
+    data.cohorts.each do |name|
+      @cohorts << Cohort.new(name, data.views(name), data.conversions(name))
     end
-  end
-
-  def create_cohort(name)
-    size = data.count(cohort: name)
-    conversion_count = data.count(cohort: name, result: 1)
-    Cohort.new(name: name, size: size, conversion_count: conversion_count)
   end
 
   def conclude
+    count = cohorts.length
+    return "Unable to compare #{count} cohorts." unless count == 2
     significance = cohorts[0].significance_of_difference(cohorts[1])
-    if significance < 95.0
-      return "There is no significant difference between cohorts."
-    else
-      conclude_significant(significance)
-    end
+    return conclude_significant(significance) unless significance < 95.0
+    "There is no significant difference between cohorts."
   end
 
   def conclude_significant(significance)
     best = cohorts[0].better_than?(cohorts[1]) ? cohorts[0] : cohorts[1]
-    sig = shorten_significance(significance)
-    string = "Cohort #{best.name} is better with 95% confidence.  The "
-    string << "difference is significant with #{sig}% confidence."
+    standardized_significance = stats_standard_significance(significance)
+    "Cohort #{best.name} is better with 95% confidence.  The difference is " \
+    "significant with #{standardized_significance}% confidence."
   end
 
-  def shorten_significance(significance)
+  def stats_standard_significance(significance)
     return 99.99 if significance >= 99.99
     return 99.9 if significance >= 99.9
     return 99 if significance >= 99
@@ -59,8 +36,6 @@ class RoboResearcher
   end
 
   def details
-    cohorts.each_with_object([]) do |cohort, info|
-      info << cohort.to_s
-    end
+    cohorts.map(&:to_s)
   end
 end

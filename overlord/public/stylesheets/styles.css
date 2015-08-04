@@ -1,0 +1,102 @@
+
+body {
+  background-color: #672E45;
+  /* Remove space around window edge */
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+section {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle
+}
+ul{
+  list-style-type: none;
+}
+li{
+  position: relative;
+}
+
+.wrapperOutside {
+   display: table;
+   width: 100vw;
+   height: 100vh;
+}
+
+.wrapperInside {
+   display: table-cell;
+   text-align: center;
+   vertical-align: middle;
+}
+
+.buttonContainer {
+  /* Form */
+  width: 300px;
+  height: auto;
+  /* Internal padding */
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  /* External padding */
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;    
+}
+
+/*
+The attributes below style the
+hit target.
+*/
+
+.buttonTouchTarget {
+  display: inline-block;
+  background-color: rgba(0,0,0,0);
+  /* Remove grey background on link clicked in ios safari */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/*
+The attributes below style the
+flat button based on the Google
+material design language.
+*/
+
+#buttonTwo{
+  background: #719E8B;
+  color: #fff;
+}
+
+.buttonFlat {
+  /* Form */
+  display: inline-block;
+  height: 36px;
+  background-color: #fff;
+  border: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: rgba(0,0,0,0.9);
+  line-height: 30px;    
+  text-align: center;
+  letter-spacing: 0.04px;     
+  /* Internal padding */
+  padding-top: 0;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 0;
+  /* External padding – Touch target size */
+  margin-top: 3px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 3px;
+}
+
+.buttonFlat:focus{
+  outline: 0;
+}
+

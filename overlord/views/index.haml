@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title My Sinatra Website
+    %link{:rel => 'stylesheet', :type => 'text/css', :href => '/stylesheets/styles.css'}
+  %body
+    %section
+    .wrapperOutside
+      .wrapperInside
+        / %ul.input-list.style-1.clearfix
+        /   %li
+        .buttonContainer
+          %form{action: "", method: "post"}
+            %a#buttonOneTouchTarget.buttonTouchTarget
+              %input{placeholder: "activation code", id: "buttonOne", type: "text", name: "code", class: "buttonFlat"}
+              / #buttonOne.buttonFlat{:fit => ""} DESIGN
+            %a#buttonTwoTouchTarget.buttonTouchTarget
+              %input{type: "submit", :value => "SUBMIT", :class => "buttonFlat", :id => "buttonTwo"}

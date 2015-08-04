@@ -1,19 +1,15 @@
 <% provide(:title, "Sign Up") %>
+<%= render 'shared/error_messages' %>
 <div class="panel" id="signup">
   <header>
     <h2>Sign Up</h2>
   </header>
-  <form>
-    <p><input name="username" placeholder="Username" type="text" /></p>
-    <p><input name="password" placeholder="Password" type="password" /></p>
-    <p><input name="password_confirmation" placeholder="Confirm Password" type="password" /></p>
-    <p>
-      <input class="btn" type="submit" value="Sign Up" name="signup" />
-    </p>
-  </form>
+  <%= form_for(@user) do |f| %>
+    <%= render "shared/user_signup_form", f: f %>
+  <% end %>
   <br>
   <p>
     Already signed up?
-    <%= link_to "Log In", "#" %>
+    <%= link_to "Log In", "#{}" %>
   </p>
 </div>

@@ -36,3 +36,7 @@ input[type="textbox"] {
     @include box-shadow(lighten($site_color, 50%) 0px 0px 10px);
   }
 }
+
+.align-center {
+  text-align: center;
+}

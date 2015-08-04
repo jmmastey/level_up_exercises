@@ -24,6 +24,6 @@ Your task is to complete the implementation of `Fraction` by doing the following
 
 ## Notes
 
-This exercise is a great opportunity to practice _true_ Test-Driven-Development (TDD)! Try writing the RSpec tests first, then code your implementation to make them pass.
+Yes, we know that the class `Rational` already exists in core Ruby. However the point here is to practice writing tests for your own software. This exercise is a great opportunity to practice _true_ Test-Driven-Development (TDD)! Try writing the RSpec tests first, then code your implementation to make them pass.
 
-Feel free to add additional functionality to your class - there's always room for creativity in coding!
+Feel free to add additional features to your class - there's always room for creativity in coding!

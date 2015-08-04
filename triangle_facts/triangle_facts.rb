@@ -11,7 +11,7 @@ class Triangle
 	end
 
 	def isosceles()
-		return [side1,side2,side3].uniq.length <= 2
+		return [side1,side2,side3].uniq.length == 2
 	end
 
 	def scalene()

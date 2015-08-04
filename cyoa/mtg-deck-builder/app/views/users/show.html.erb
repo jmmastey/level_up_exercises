@@ -1,6 +1,5 @@
 <% provide(:title, "User profile: #{@user.username}") %>
 <div class="panel" id="user-profile">
-  <header>
-    <h2>Profile for: <%= @user.username %></h2>
-  </header>
+  <h2>Hello, <%= @user.username %></h2>
+  <%= link_to "Edit Profile", "#", class: "btn" %>
 </div>

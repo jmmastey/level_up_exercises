@@ -19,6 +19,9 @@
   </nav>
 </div>
 
+<% flash.each do |message_type, message| %>
+  <div class="panel <%= message_type %>"><%= message %></div>
+<% end %>
 <%= yield %>
 
 </body>

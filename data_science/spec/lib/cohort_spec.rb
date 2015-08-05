@@ -2,64 +2,35 @@ require 'spec_helper'
 require 'cohort'
 
 describe Cohort do
-  describe "#conversion_rate_interval" do
-    let(:cohort) { Cohort.new("A", 20, 10) }
-    it "gets the right range" do
+  let(:cohort) { Cohort.new(name: "A", views: 20, conversions: 10) }
+  let(:uneven_cohort) { Cohort.new(name: "A", views: 20, conversions: 8) }
+
+  describe "#non_conversions" do
+    it "is views minus conversions" do
+      expect(uneven_cohort.non_conversions).to eq(12)
+    end
+  end
+
+  describe "#conversion_rate_min" do
+    it "is right" do
       expect(cohort.conversion_rate_min).to be_within(0.01).of(0.28)
+    end
+  end
+
+  describe "#conversion_rate_max" do
+    it "is right value" do
       expect(cohort.conversion_rate_max).to be_within(0.01).of(0.72)
     end
   end
 
-  describe "#is_better_than?" do
-    context "when A is better than B" do
-      let(:cohort_b) { Cohort.new("B", 20, 10) }
-      context "when the difference is significant" do
-        let(:cohort_a) { Cohort.new("A", 20, 18) }
-        it "is true" do
-          expect(cohort_a).to be_better_than(cohort_b)
-        end
-      end
-
-      context "when the difference is not significant" do
-        let(:cohort_a) { Cohort.new("A", 20, 15) }
-        it "is true" do
-          expect(cohort_a).to be_better_than(cohort_b)
-        end
-      end
-    end
-
-    context "when A is NOT better than B" do
-      let(:cohort_a) { Cohort.new("A", 20, 10) }
-      let(:cohort_b) { Cohort.new("B", 20, 10) }
-      it "is false" do
-        expect(cohort_a).not_to be_better_than(cohort_b)
-      end
-    end
-  end
-
-  describe "#significance_of_difference" do
-    context "when A is better than B" do
-      let(:cohort_b) { Cohort.new("B", 20, 10) }
-      context "when the difference is significant" do
-        let(:cohort_a) { Cohort.new("A", 20, 18) }
-        it "returns the right percentage" do
-          significance = cohort_a.significance_of_difference(cohort_b)
-          expect(significance).to be_within(0.1).of(99.5)
-        end
-      end
-
-      context "when the difference is not significant" do
-        let(:cohort_a) { Cohort.new("A", 20, 15) }
-        it "returns the right percentage" do
-          significance = cohort_a.significance_of_difference(cohort_b)
-          expect(significance).to be_within(0.1).of(89.8)
-        end
-      end
+  describe "#conversion_rate_midpoint" do
+    it "it is right" do
+      expect(cohort.conversion_rate_midpoint).to be_within(0.01).of(0.5)
     end
   end
 
   describe "#to_s" do
-    let(:cohort_a) { Cohort.new("A", 20, 18) }
+    let(:cohort_a) { Cohort.new(name: "A", views: 20, conversions: 18) }
     it "correctly converts itself to a string" do
       description = cohort_a.to_s
       expect(description).to include("Cohort A")

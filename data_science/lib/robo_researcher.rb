@@ -1,41 +1,52 @@
+require 'abanalyzer'
 require_relative 'data_set'
 require_relative 'cohort'
 
 class RoboResearcher
   attr_accessor :cohorts
-  attr_reader :data
 
   def initialize(data_file: nil)
     @cohorts = []
-    @data = DataSet.new(file_name: data_file)
+    data = DataSet.new(file_name: data_file)
+    populate_cohorts(data)
+  end
+
+  def populate_cohorts(data)
     data.cohorts.each do |name|
-      @cohorts << Cohort.new(name, data.views(name), data.conversions(name))
+      views = data.views(name)
+      conversions = data.conversions(name)
+      @cohorts << Cohort.new(name: name, views: views, conversions: conversions)
     end
   end
 
-  def conclude
-    count = cohorts.length
-    return "Unable to compare #{count} cohorts." unless count == 2
-    significance = cohorts[0].significance_of_difference(cohorts[1])
-    return conclude_significant(significance) unless significance < 95.0
-    "There is no significant difference between cohorts."
+  def significant?
+    significance_of_difference >= 95.0
   end
 
-  def conclude_significant(significance)
-    best = cohorts[0].better_than?(cohorts[1]) ? cohorts[0] : cohorts[1]
-    standardized_significance = stats_standard_significance(significance)
-    "Cohort #{best.name} is better with 95% confidence.  The difference is " \
-    "significant with #{standardized_significance}% confidence."
+  def significance_of_difference
+    cohort0 = { yes: cohorts[0].conversions, no: cohorts[0].non_conversions }
+    cohort1 = { yes: cohorts[1].conversions, no: cohorts[1].non_conversions }
+    test = ABAnalyzer::ABTest.new(cohorts[0].name => cohort0,
+                                  cohorts[1].name => cohort1)
+    p = test.chisquare_p
+    p_to_percentage(p)
   end
 
-  def stats_standard_significance(significance)
-    return 99.99 if significance >= 99.99
-    return 99.9 if significance >= 99.9
-    return 99 if significance >= 99
-    significance.round
+  def p_to_percentage(p)
+    (1 - p) * 100
   end
 
-  def details
+  def best_cohort
+    rate0 = cohorts[0].conversion_rate_midpoint
+    rate1 = cohorts[1].conversion_rate_midpoint
+    rate0 > rate1 ? cohorts[0] : cohorts[1]
+  end
+
+  def to_s
     cohorts.map(&:to_s)
+  end
+
+  def cohort(name)
+    cohorts.find { |c| c.name == name }
   end
 end

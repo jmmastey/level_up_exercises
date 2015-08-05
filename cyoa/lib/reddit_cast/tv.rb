@@ -2,14 +2,12 @@ require 'json'
 
 module RedditCast
   class TV < RCIterator
-    def initialize
-      channel_information = open('channels.json', &:read)
-      parsed = JSON.parse(channel_information)
-
-      @listings = parsed['channels'].map do |json_channel|
-        Channel.new(json_channel)
+    def initialize(channels: nil, json_file: "channels.json")
+      if !!channels
+        init_from_db(channels)
+      else
+        init_from_json(json_file)
       end
-      @listing_number = 0
     end
 
     def next_listing?
@@ -44,6 +42,30 @@ module RedditCast
 
     def channel
       current_listing
+    end
+
+    def channel_number
+      num = listing_number + 1
+      "#{num < 10 ? '0' : ''}#{num}"
+    end
+
+    private
+
+    def init_from_db(channels)
+      @listings = channels.map do |channel|
+        RedditCast::Channel.new(channel: channel)
+      end
+      @listing_number = 0
+    end
+
+    def init_from_json(json_file)
+      channel_information = open(json_file, &:read)
+      parsed = JSON.parse(channel_information)
+
+      @listings = parsed['channels'].map do |json|
+        RedditCast::Channel.new(name: json['name'], tags: json['queries'])
+      end
+      @listing_number = 0
     end
   end
 end

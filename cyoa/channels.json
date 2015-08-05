@@ -1,18 +1,47 @@
 {
-  "channels":[
-    { "name" : "Smite", "queries" : [
-      "smite isis gameplay",
-      "smite best plays",
-      "smite serqet gameplay"
+  "channels": [
+    { "name" : "Movie Trailers", "queries" : [
+      "official trailer",
+      "full trailer",
+      "teaser trailer"
     ]},
-    { "name" : "Vines", "queries" : [
-      "funny vine",
-      "vine comp",
-      "hilarious vine"
+    { "name" : "Animated Shows", "queries" : [
+      "the simpsons",
+      "family guy",
+      "american dad",
+      "south park"
     ]},
-    { "name" : "Rick and Morty", "queries" : [
-      "rick and morty",
-      "justin roiland"
+    { "name" : "Comedy", "queries" : [
+      "whose line",
+      "funny standup",
+      "hilarious comedian"
+    ]},
+    { "name" : "World News", "queries" : [
+      "/r/worldnews"
+    ]},
+    { "name" : "Animals", "queries" : [
+      "animal planet",
+      "zoo animal",
+      "national geographic"
+    ]},
+    { "name" : "Cooking", "queries" : [
+      "cooking show",
+      "food preparation"
+    ]},
+    { "name" : "Travel", "queries" : [
+      "travel abroad",
+      "europe trip"
+    ]},
+    { "name" : "Game Show", "queries" : [
+      "Jeopardy",
+      "Who wants to be a millionaire",
+      "deal or no deal",
+      "wheel of fortune"
+    ]},
+    { "name" : "Classical Music", "queries" : [
+      "Chopin",
+      "Rachmaninov",
+      "Mozart piano"
     ]}
   ]
 }

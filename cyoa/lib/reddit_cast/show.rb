@@ -1,24 +1,23 @@
 module RedditCast
   class Show
-    YOUTUBE = "http://www.youtube.com/embed/"
-    OPTIONS = "?showinfo=0&rel=0"
-    attr_accessor :author, :title, :youtube_id
+    attr_accessor :title, :youtubeid
 
-    def initialize(json_post)
-      @author = json_post['author']
-      @title = json_post['title']
-      @nsfw = json_post['over_18']
-
-      youtube_link = json_post['url']
-      @youtube_id = youtube_link[/(?<=v=).{11}/]
+    def initialize(show: nil, title: "", url: "")
+      if !!show
+        init_from_model(show)
+      else
+        init_from_json(title, url)
+      end
     end
 
-    def nsfw?
-      @nsfw
+    def init_from_model(show)
+      @title = show.title
+      @youtubeid = show.youtubeid
     end
 
-    def embed
-      "#{YOUTUBE}#{youtube_id}#{OPTIONS}"
+    def init_from_json(title, url)
+      @title = title
+      @youtubeid = url[/(?<=v=).{11}/]
     end
 
     def short_title
@@ -28,7 +27,7 @@ module RedditCast
     end
 
     def to_s
-      "#<Show: id=#{youtube_id} title=#{short_title} author=#{author}>"
+      "#<Show: id=#{youtubeid} title=#{short_title}>"
     end
 
     def inspect

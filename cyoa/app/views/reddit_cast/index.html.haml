@@ -6,15 +6,13 @@
       %p Loading your channels...
     .details
       %span.channel-details
-        %span.number= "00"
+        %span.number= @channel_number
         %span.name= @channel_name
       %span.show-details
-        %span.name= "My test show"
+        %span.name= @show_name
         %span.duration
     #video
   .toggles
-    .loading.media-toggle
-      .ld.ld-bars
     %i.prev-channel.media-toggle.fa.fa-angle-double-left
     %i.prev-show.media-toggle.fa.fa-caret-left
     = image_tag "rclogo.png", width: 150

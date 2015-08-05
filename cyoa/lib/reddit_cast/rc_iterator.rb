@@ -1,7 +1,8 @@
 module RedditCast
   class RCIterator  
     include Enumerable
-    attr_accessor :listings, :original_queries, :listing_number
+    attr_accessor :listings, :listing_number
+    attr_reader :original_queries
 
     def next_listing?
       false
@@ -16,7 +17,6 @@ module RedditCast
 
       @listing_number += 1
       change_listing(to: 'next')
-      current_listing
     end
 
     def prev_listing
@@ -24,7 +24,6 @@ module RedditCast
 
       @listing_number  -= 1
       change_listing(to: 'prev')
-      current_listing
     end
 
     def current_listing

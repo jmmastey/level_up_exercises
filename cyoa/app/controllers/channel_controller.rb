@@ -3,6 +3,7 @@ class ChannelController < ApplicationController
   end
 
   def create
+    # Channel.create(params)
   end
 
   def show

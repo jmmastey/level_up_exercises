@@ -1,6 +1,4 @@
 @import url('montserrat.css');
-@import url('ld-spin.css');
-@import url('ld-bars.css');
 
 html, body {
   margin: 0px;
@@ -8,7 +6,7 @@ html, body {
   height: 100%;
 }
 html {
-  background: image-url('living_room.jpg') no-repeat 0 0;
+  background: image-url('living_room02.png') no-repeat 0 0;
   background-size: cover;
 }
 body {
@@ -32,9 +30,9 @@ body {
 ***************************/
 .television {
   position: relative;
-  max-width: 1400px;
+  max-width: 1600px;
   min-width: 1000px;
-  margin: 30px auto;
+  margin: 20px auto;
 
   width: 100%;
   box-sizing: border-box;
@@ -145,12 +143,11 @@ body {
 .toggles {
   .media-toggle {
     position: absolute;
-    bottom: 1%;
+    bottom: 2%;
     font-size: 60px;
     color: #aaa;
     z-index: 10;
-    vertical-align: middle;
-    text-shadow: 0px 1px 1px #333;
+    text-shadow: 0px 1px 1px black;
 
     transition: 0.2s all;
     &:not(.loading):hover {
@@ -173,7 +170,7 @@ body {
     vertical-align: middle;
     position: absolute;
     left: 50%;
-    bottom: 3%;
+    bottom: 3.5%;
     margin-left: -75px;
     opacity: 0.8;
   }
@@ -200,5 +197,11 @@ body {
   }
   .television .loading {
     bottom: 30px;
+  }
+  .toggles .media-toggle {
+    bottom: 1%;
+  }
+  .toggles img {
+    bottom: 3%;
   }
 }

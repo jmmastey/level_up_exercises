@@ -15,11 +15,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml'
 gem 'haml-rails'
 gem 'httparty'
-gem 'dalli'
+gem 'sidekiq'
+gem 'redis'
+gem 'redis-rails'
+gem 'activerecord-session_store'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
-  gem 'spring'
 end
 

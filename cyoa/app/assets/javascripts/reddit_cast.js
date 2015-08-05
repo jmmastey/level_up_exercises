@@ -1,5 +1,6 @@
 var player = false;
 var auto_switch = false;
+var mouseover = false;
 
 $(window).load(function() {
   first_video();
@@ -7,14 +8,6 @@ $(window).load(function() {
   $('.prev-channel').click(prev_channel);
   $('.next-show').click(next_show);
   $('.prev-show').click(prev_show);
-  $('.player').mouseenter(function() {
-    console.log("entering video...");
-    show_details();
-  });
-  $('.player').mouseleave(function() {
-    console.log("exiting video...");
-    hide_details();
-  });
 });
 
 function next_show() {
@@ -49,6 +42,7 @@ function update_player(player_info) {
   }
   else {
     initialize_player(player_info.show_id);
+    initialize_mouse_functions();
   }
 }
 function initialize_player(show) {
@@ -66,6 +60,17 @@ function initialize_player(show) {
   });
 }
 
+function initialize_mouse_functions() {
+  $('#video').mouseenter(function() {
+    mouseover = true;
+    show_details();
+  });
+  $('#video').mouseleave(function() {
+    mouseover = false;
+    hide_details();
+  });
+}
+
 function onPlayerReady(event) {
   player_ready = true;
   event.target.playVideo();
@@ -76,6 +81,7 @@ function show_details() {
 }
 function hide_details() {
   if(player.getPlayerState() == YT.PlayerState.PAUSED) return;
+  if(mouseover) return;
 
   $('.player .details').addClass('hidden');
 }

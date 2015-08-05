@@ -11,7 +11,7 @@ class DataScience
   end
 
   def report
-    puts "\n#{conclude}\n\n#{details}\n\n"
+    puts "\n#{conclude}\n\n#{researcher}\n\n"
   end
 
   def conclude
@@ -32,10 +32,6 @@ class DataScience
     return 99.9 if significance >= 99.9
     return 99 if significance >= 99
     significance.round
-  end
-
-  def details
-    researcher.to_s.join("\n")
   end
 end
 

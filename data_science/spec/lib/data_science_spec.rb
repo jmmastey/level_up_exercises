@@ -39,14 +39,6 @@ describe DataScience do
       expect(conclusion).to include("99% confidence")
     end
   end
-
-  describe "#details" do
-    let(:researcher) { RoboResearcherFactory.create([25, 20, 25, 20]) }
-    it "provides a description for each cohort" do
-        data_science = DataScience.new(researcher: researcher)
-        expect(data_science.details.length).to be 2
-    end
-  end
 end
 
 module RoboResearcherFactory
@@ -54,9 +46,8 @@ module RoboResearcherFactory
     RoboResearcher.new.tap do |researcher|
       researcher.cohorts = [
         Cohort.new(name: "A", views: fake_data[0], conversions: fake_data[1]),
-        Cohort.new(name: "B", views: fake_data[2], conversions: fake_data[3])
+        Cohort.new(name: "B", views: fake_data[2], conversions: fake_data[3]),
       ]
     end
   end
 end
-

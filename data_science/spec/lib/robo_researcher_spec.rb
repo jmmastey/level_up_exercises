@@ -3,9 +3,11 @@ require 'data_set'
 require 'robo_researcher'
 
 describe RoboResearcher do
-
   describe "#populate_cohort" do
-    let(:data) { DataSetFactory.create("A", 4, 3, "B", 5, 0) }
+    let(:data) do
+      DataSetFactory.create("A" => { conversions: 3, non_conversions: 1 },
+                            "B" => { conversions: 0, non_conversions: 5 })
+    end
     let(:researcher) { RoboResearcher.new }
     it "populates both cohorts" do
       researcher.populate_cohorts(data)
@@ -18,7 +20,7 @@ describe RoboResearcher do
       expect(cohort_a.views).to eq(4)
       expect(cohort_a.conversions).to eq(3)
     end
-    
+
     it "populates views and conversions correctly for second cohort" do
       researcher.populate_cohorts(data)
       cohort_b = researcher.cohort("B")
@@ -37,7 +39,7 @@ describe RoboResearcher do
         expect(researcher.best_cohort).to be(cohort_a)
       end
     end
-    
+
     context "when B is better than A" do
       let(:cohort_a) { Cohort.new(name: "A", views: 20, conversions: 10) }
       let(:cohort_b) { Cohort.new(name: "B", views: 20, conversions: 18) }
@@ -65,22 +67,19 @@ module RoboResearcherFactory
     RoboResearcher.new.tap do |researcher|
       researcher.cohorts = [
         Cohort.new(name: "A", views: fake_data[0], conversions: fake_data[1]),
-        Cohort.new(name: "B", views: fake_data[2], conversions: fake_data[3])
+        Cohort.new(name: "B", views: fake_data[2], conversions: fake_data[3]),
       ]
     end
   end
 end
 
 module DataSetFactory
-  def self.create(name1, views1, conversions1,
-                  name2, views2, conversions2)
-    data_points = []
-    conversions1.times { data_points << { cohort: name1, result: 1 } }
-    non_conversions1 = views1 - conversions1
-    non_conversions1.times { data_points << { cohort: name1, result: 0 } }
-    conversions2.times { data_points << { cohort: name2, result: 1 } }
-    non_conversions2 = views2 - conversions2
-    non_conversions2.times { data_points << { cohort: name2, result: 0 } }
-    DataSet.new(data_points: data_points)
+  def self.create(cohort_infos)
+    data = []
+    cohort_infos.each do |name, counts|
+      counts[:conversions].times { data << { cohort: name, result: 1 } }
+      counts[:non_conversions].times { data << { cohort: name, result: 0 } }
+    end
+    DataSet.new(data_points: data)
   end
 end

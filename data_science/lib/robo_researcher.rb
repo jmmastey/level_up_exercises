@@ -24,12 +24,18 @@ class RoboResearcher
   end
 
   def significance_of_difference
-    cohort0 = { yes: cohorts[0].conversions, no: cohorts[0].non_conversions }
-    cohort1 = { yes: cohorts[1].conversions, no: cohorts[1].non_conversions }
-    test = ABAnalyzer::ABTest.new(cohorts[0].name => cohort0,
-                                  cohorts[1].name => cohort1)
+    test = create_abtest
     p = test.chisquare_p
     p_to_percentage(p)
+  end
+
+  def create_abtest
+    ABAnalyzer::ABTest.new(cohorts[0].name => abtest_format(cohorts[0]),
+                           cohorts[1].name => abtest_format(cohorts[1]))
+  end
+
+  def abtest_format(cohort)
+    { yes: cohort.conversions, no: cohort.non_conversions }
   end
 
   def p_to_percentage(p)
@@ -43,7 +49,7 @@ class RoboResearcher
   end
 
   def to_s
-    cohorts.map(&:to_s)
+    cohorts.map(&:to_s).join("\n")
   end
 
   def cohort(name)

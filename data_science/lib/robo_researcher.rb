@@ -53,6 +53,6 @@ class RoboResearcher
   end
 
   def cohort(name)
-    cohorts.find { |c| c.name == name }
+    cohorts.detect { |c| c.name == name }
   end
 end

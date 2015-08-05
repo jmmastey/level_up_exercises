@@ -1,6 +1,6 @@
 
 body {
-  background-color: #672E45;
+  background-color: #F1E6B2;
   /* Remove space around window edge */
   margin-top: 0;
   margin-left: 0;
@@ -12,12 +12,6 @@ section {
   display: table-cell;
   text-align: center;
   vertical-align: middle
-}
-ul{
-  list-style-type: none;
-}
-li{
-  position: relative;
 }
 
 .wrapperOutside {
@@ -34,7 +28,7 @@ li{
 
 .buttonContainer {
   /* Form */
-  width: 300px;
+  width: 500px;
   height: auto;
   /* Internal padding */
   padding-top: 0;
@@ -48,39 +42,25 @@ li{
   margin-bottom: 0;    
 }
 
-/*
-The attributes below style the
-hit target.
+/*#boot-bomb{
+  background: #719E8B;
+  color: #fff;
+}
 */
-
-.buttonTouchTarget {
+.bomb-button {
   display: inline-block;
   background-color: rgba(0,0,0,0);
   /* Remove grey background on link clicked in ios safari */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/*
-The attributes below style the
-flat button based on the Google
-material design language.
-*/
-
-#buttonTwo{
-  background: #719E8B;
-  color: #fff;
-}
-
 .buttonFlat {
   /* Form */
   display: inline-block;
   height: 36px;
-  background-color: #fff;
   border: none;
-  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 15px;
-  color: rgba(0,0,0,0.9);
   line-height: 30px;    
   text-align: center;
   letter-spacing: 0.04px;     
@@ -99,4 +79,27 @@ material design language.
 .buttonFlat:focus{
   outline: 0;
 }
+
+/*ul{
+  list-style-type: none;
+}
+li{
+  position: relative;
+}*/
+
+
+
+/*
+The attributes below style the
+hit target.
+*/
+
+/*
+The attributes below style the
+flat button based on the Google
+material design language.
+*/
+
+
+
 

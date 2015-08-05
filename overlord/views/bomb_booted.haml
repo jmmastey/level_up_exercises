@@ -1,0 +1,7 @@
+%form{action: "/boot", method: "post", id: "bomb_form"}
+  #input-activate.bomb-button
+    %input{placeholder: "activation code", name: "a_code", class: "buttonFlat"}
+  #input-deactivate.bomb-button
+    %input{placeholder: "deactivation code", name: "d_code", class: "buttonFlat"}
+  #boot-bomb.bomb-button
+    %input{type: "submit", :value => "BOOT", :class => "buttonFlat"}

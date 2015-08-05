@@ -1,0 +1,11 @@
+%form{action: "/activate", method: "post"}
+  #activate-bomb.bomb-button
+    %input{placeholder: "activate", name: "activate", class: "buttonFlat"}
+  #submit-bomb.bomb-button
+    %input{type: "submit", :value => "ACTIVATE", :class => "buttonFlat"}
+  #countdown
+    .wrapper-bomb
+      .container-bomb.minutes
+      .container-bomb.seconds
+      .container-bomb.miliseconds
+

@@ -1,0 +1,65 @@
+/*.align-vh {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%)
+}
+.wrapper-bomb {
+  position: absolute;
+  .align-vh();
+}*/
+
+
+#countdown{
+  display: none;
+  font-family: sans-serif;
+  width: 100px;
+}
+
+.bomb-deactivated{
+  display: none;
+}
+.bomb-activated{
+  display: none;
+}
+
+#booted{
+  display: none;
+  font-family: sans-serif;
+  width: 100px;
+}
+.container-bomb{
+  font-size: 1em;
+  height: 5em;
+  width: 5em;
+  line-height: 5em;
+  color: #BA0C2F;
+  overflow: hidden;
+  display: inline-block;
+}
+.container-bomb:after {
+  display: block;
+  margin: 0 auto;
+  font-size: 3em;
+  text-align: center;
+  width: 1em;
+}
+.miliseconds:after {
+  
+  content: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 0';
+  -webkit-animation: counter infinite 1s steps(100) forwards;
+}
+.seconds:after {
+  
+  content: '0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59';
+  -webkit-animation: counter infinite 60s steps(60) forwards;
+}
+.minutes:after {
+  
+  content: '0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59';
+  -webkit-animation: counter infinite 3600s steps(60) forwards;
+}
+@-webkit-keyframes counter {
+  to{
+    -webkit-transform: translateY(-100%);
+  }
+}

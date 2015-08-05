@@ -4,23 +4,30 @@ require 'sinatra'
 require 'haml'
 require 'sass'
 require 'pp'
-
+require_relative 'app_helper'
+require_relative 'bomb'
 enable :sessions
 
 get '/' do
 	haml :index
 end
 
-post '/' do
-	if params[:code].nil? 
-		code = 1234
-	else
-		code = params[:code]
-	end
-	haml :index
+post '/boot' do
+	new_bomb
+	puts "params #{params}"
+	session[:bomb].booted(params[:activation], params[:deactivation])
+	#haml :index
 end
 
-# we can shove stuff into the session cookie YAY!
-def start_time
-	session[:start_time] ||= (Time.now).to_s
+post '/activate' do
+	session[:bomb].activated
+	#haml :index
+end
+
+post '/deactivate' do
+	session[:bomb].deactivate
+end
+
+def new_bomb
+	session[:bomb] = Bomb.new
 end

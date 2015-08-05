@@ -1,4 +1,5 @@
 class Bomb
+	attr_accessor :state_table
 	def initialize
 		@state_table = {booted: false, activated: false, deactivated: false, exploded: false}
 	  @a_code = nil
@@ -17,5 +18,9 @@ class Bomb
 
 	def deactivate
 		@state_table[:deactivate] = true
+	end
+
+	def status(params)
+		@state_table[params]
 	end
 end

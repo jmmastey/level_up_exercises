@@ -8,9 +8,13 @@ $(document).ready(function() {
             url: '/boot',
             data: code,
         }).success(function(data) {
-            console.log(code);
+            $.get('/boot', function(boot) {
+                if(boot == "true"){
+                    $(".status-booted").show('slide');
+                } 
+            });
             $("#input-deactivate").hide('slide', function() {
-                $("#input-activate").hide('slide', function(){
+                $("#input-activate").hide('slide', function() {
                     $(".bomb-activated").show('slide');
                     $("#boot-bomb").replaceWith($("#submit-bomb"));
                 });
@@ -22,71 +26,87 @@ $(document).ready(function() {
 
     function activateBomb(code) {
         $("#submit-bomb").click(code, function() {
-            var code_converted = code.split('&');
-            var a_code = code_converted[0].split('=')[1];
-            var d_code = code_converted[1].split('=')[1];
-            var activate = $('input[name=activate]').val();
-            if (a_code == "" || a_code == null){
-                a_code = 1234;
-            }
-            if (d_code == "" || d_code == null){
-                d_code = "0000";
-            }
-            $.ajax({
-                type: "POST",
-                url: '/activate',
-                data: {a_code, activate, d_code},
-            }).success(function(data) {
-                console.log(a_code);
-                console.log(d_code);
-                $("#activate-bomb").hide('slide', function() {
-                    $("#submit-bomb").hide('slide', function() {
-                       if (activate == a_code) {
-                        console.log(activate);
-                        $(".bomb-deactivated").show('slide');
-                        $("#countdown").show('slide');
-                       } else {
-                        $("#activate-bomb").show('slide');
-                        $("#submit-bomb").show('slide');
-                       }
-                    });
-                });
-            }).done(deactivateBomb(0, a_code, d_code));
-            return false;
-        });
-    }
-    function deactivateBomb(numberOftries, a_code, d_code) {
-        $("#try-bomb").click({a_code, d_code}, function() {
-            // var a_code = $('input[name=a_code]').val();
-            var deactivate = $('input[name=deactivate]').val();
-            console.log("a_code", a_code);
-            console.log(d_code);
-            // console.log(d_code);
-            // console.log(deactivate);
-            $.ajax({
-                type: "POST",
-                url: '/deactivate',
-                data: {d_code, deactivate},
-            }).success(function(data) {
-                // console.log(d_code);
-                if (numberOftries <= 3) {
-                    if (d_code != deactivate){
-                        numberOftries += 1;
-                        deactivateBomb(numberOftries, d_code);
-                    } else if (d_code == deactivate){
-                        $("#countdown").hide('slide');
-                    }
-                } else {
-                    explodeBomb();
+                var code_converted = code.split('&');
+                var a_code = code_converted[0].split('=')[1];
+                var d_code = code_converted[1].split('=')[1];
+                var activate = $('input[name=activate]').val();
+                if (a_code == "" || a_code == null) {
+                    a_code = 1234;
                 }
-            }).done();
+                if (d_code == "" || d_code == null) {
+                    d_code = "0000";
+                }
+                if (activate != a_code) {
+                    try_activation(activate, a_code);
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '/activate',
+                    data: {
+                        a_code, activate, d_code
+                    },
+                }).success(function(data) {
+                    $.get('/activate', function(activate_status) {
+                        console.log(activate_status);
+                        try_activation(activate, a_code);
+                    });
+                    deactivateBomb(0, a_code, d_code);
+                }).done();
             return false;
         });
-    }
+}
 
-    function explodeBomb(){
-        alert("The Bomb Exploded");
-    }
+function try_activation(activate, a_code) {
+    $("#activate-bomb").hide('slide', function() {
+        $("#submit-bomb").hide('slide', function() {
+            if (activate == a_code) {
+                console.log(activate);
+                $(".bomb-deactivated").show('slide');
+                $("#countdown").show('slide');
+            } else {
+                $("#activate-bomb").show('slide');
+                $("#submit-bomb").show('slide');
+            }
+        });
+    });
+}
+
+function deactivateBomb(numberOftries, a_code, d_code) {
+    $("#try-bomb").click({
+        a_code, d_code
+    }, function() {
+        // var a_code = $('input[name=a_code]').val();
+        var deactivate = $('input[name=deactivate]').val();
+        console.log("a_code", a_code);
+        console.log(d_code);
+        // console.log(d_code);
+        // console.log(deactivate);
+        $.ajax({
+            type: "POST",
+            url: '/deactivate',
+            data: {
+                d_code, deactivate
+            },
+        }).success(function(data) {
+            // console.log(d_code);
+            if (numberOftries <= 3) {
+                if (d_code != deactivate) {
+                    numberOftries += 1;
+                    deactivateBomb(numberOftries, d_code);
+                } else if (d_code == deactivate) {
+                    $("#countdown").hide('slide');
+                }
+            } else {
+                explodeBomb();
+            }
+        }).done();
+        return false;
+    });
+}
+
+function explodeBomb() {
+    alert("The Bomb Exploded");
+}
 });
 // $(".bomb-wrapper").show();
 // $('#buttonTwo').hide('slide', {direction: 'left'}, 1000);

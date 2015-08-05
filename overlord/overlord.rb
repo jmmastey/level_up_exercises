@@ -19,13 +19,28 @@ post '/boot' do
 	#haml :index
 end
 
+get '/boot' do
+	boot_status = session[:bomb].status(:booted)
+	"#{boot_status}"
+end
+
 post '/activate' do
 	session[:bomb].activated
 	#haml :index
 end
 
+get '/activate' do
+	activate_status = session[:bomb].status(:activated)
+	"#{activate_status}"
+end
+
 post '/deactivate' do
 	session[:bomb].deactivate
+end
+
+get '/deactivate' do
+	deactivate_status = session[:bomb].status(:deactivated)
+	"#{deactivate_status}"
 end
 
 def new_bomb

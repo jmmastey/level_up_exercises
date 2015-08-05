@@ -1,7 +1,6 @@
 
 body {
   background-color: #F1E6B2;
-  /* Remove space around window edge */
   margin-top: 0;
   margin-left: 0;
   margin-right: 0;
@@ -12,6 +11,18 @@ section {
   display: table-cell;
   text-align: center;
   vertical-align: middle
+}
+
+.status-booted {
+  display: none;
+}
+
+.status-activated {
+  display: none;
+}
+
+.status-deactivated {
+  display: none;
 }
 
 .wrapperOutside {
@@ -30,23 +41,16 @@ section {
   /* Form */
   width: 500px;
   height: auto;
-  /* Internal padding */
   padding-top: 0;
   padding-left: 0;
   padding-right: 0;
   padding-bottom: 0;
-  /* External padding */
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0;    
 }
 
-/*#boot-bomb{
-  background: #719E8B;
-  color: #fff;
-}
-*/
 .bomb-button {
   display: inline-block;
   background-color: rgba(0,0,0,0);
@@ -55,51 +59,42 @@ section {
 }
 
 .buttonFlat {
-  /* Form */
+  text-transform: uppercase;
   display: inline-block;
   height: 36px;
-  border: none;
   font-weight: 500;
-  font-size: 15px;
-  line-height: 30px;    
+  font-size: 14px;
+  color: rgba(0,0,0,0.9);
+  line-height: 36px;    
   text-align: center;
-  letter-spacing: 0.04px;     
-  /* Internal padding */
+  letter-spacing: 1.px;     
   padding-top: 0;
   padding-left: 8px;
   padding-right: 8px;
   padding-bottom: 0;
-  /* External padding – Touch target size */
-  margin-top: 3px;
+  margin-top: 6px;
   margin-left: 4px;
   margin-right: 4px;
-  margin-bottom: 3px;
+  margin-bottom: 6px;
+  border: none;
 }
 
-.buttonFlat:focus{
-  outline: 0;
+input[type="submit"] {
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  height: 36px;
+  background: #672E45;
+  color: white;
+  cursor: pointer;
 }
 
-/*ul{
-  list-style-type: none;
+
+input[type="submit"]#submit-bomb:hover {
+  display: inline-block;
+  height: 36px;
+  background-color: #BA0C2F;
+  color: black;
+  cursor: pointer;
 }
-li{
-  position: relative;
-}*/
-
-
-
-/*
-The attributes below style the
-hit target.
-*/
-
-/*
-The attributes below style the
-flat button based on the Google
-material design language.
-*/
-
-
 
 

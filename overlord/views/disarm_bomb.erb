@@ -1,0 +1,8 @@
+<h2>Disarm Bomb</h2>
+<h2>Bomb Status: <%= (session[:bomb]).status %> </h2>
+<%= "<h1> You have #{(session[:bomb]).attempts_remaining} tries left." %>
+<form method='post' action='/disarm_bomb'>
+  <label for="disarming_code">Enter Bomb Disarming Code:</label>
+  <input type='text'  name='disarming_code' id="disarming_code"/>
+  <input type='submit'  value='Disarm This Bomb!'/>
+</form>

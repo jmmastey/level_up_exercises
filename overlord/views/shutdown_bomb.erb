@@ -1,0 +1,6 @@
+<h2>Bomb Status: <%= (session[:bomb]).status %> </h2>
+<p>Press the button below to shutdown your bomb</p>
+<form method="post" action="/shutdown_bomb">
+  <input type="submit" value='Shutdown Bomb' id="Shutdown Bomb">
+</form>
+  <a href="villain">Return to Villain Menu</a>

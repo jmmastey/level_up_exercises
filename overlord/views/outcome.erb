@@ -1,0 +1,11 @@
+<% if (session[:bomb]).disarmed? %>
+<title>Hero Page</title>
+<body>
+<p>You have disarmed the bomb</p>
+</body>
+<% else %>
+<title>Loser Page</title>
+<body>
+<p>You're dead</p>
+</body>
+<% end %>

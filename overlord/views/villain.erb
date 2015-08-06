@@ -1,0 +1,17 @@
+  <h2>Menu</h2>
+  <% if !(session[:bomb]).booted? %>
+    <a href="boot_bomb">Boot Bomb</a>
+  <% end %>
+    <a href="reset_codes">Reset Bomb Codes</a>
+  <% if !(session[:bomb]).armed? %>
+    <a href="arm_bomb">Arm Bomb</a>
+  <% else %>
+    <a href="disarm_bomb">Disarm Bomb</a>
+  <% end %>
+  <a href="shutdown_bomb">Shutdown Bomb</a>
+  <br>
+  <h1>Bomb Status: <%= (session[:bomb]).status %></h1>
+  <% if (session[:bomb]).booted? %>
+      <p>Your arming code: <%= (session[:bomb]).arming_code %></p>
+      <p>Your disarming code: <%= (session[:bomb]).disarming_code %></p>
+  <% end %>

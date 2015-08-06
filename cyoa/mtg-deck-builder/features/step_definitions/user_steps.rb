@@ -15,20 +15,9 @@ When(/^I sign up$/) do
 end
 
 Then(/^a new user should be saved$/) do
-  expect(User.all.count).to eq(1) 
+  expect(User.all.count).to eq(1)
 end
 
 Given(/^I created a user$/) do
   @user = create(:user, password: '123456')
-end
-
-When(/^I log in$/) do
-  visit('/login')
-  fill_in 'user[username]', with: @user.username
-  fill_in 'user[password]', with: '123456'
-  click_button 'Log In'
-end
-
-Then(/^I should be taken to the user profile page$/) do
-  pending
 end

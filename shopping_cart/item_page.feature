@@ -1,4 +1,4 @@
-Feature:
+Feature: Item Details Page
   As a user either logged in or anonmyous
   I want to be able to access an item's page from the shopping cart
   In order to see information about that item

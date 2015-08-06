@@ -1,18 +1,17 @@
-Feature:
+Feature: Coupons
   As a user
   I want to submit a potential coupon
   In order to see if I can change the order price
 
-  Note: Each item is $100 for testing
-        And savings is a % off original price
-          100 = 100%
-          75 = 75%
-          60 = 60%
+  Note: Savings is a % off original price
+      100 = 100%
+      75 = 75%
+      60 = 60%
 
   Background:
-    Given there is 2 "WiiU" in the cart
-    And there is 1 "PS4" in the cart
-    And there is 3 "SNES" in the cart
+    Given there is 2 "WiiU" in the cart that cost 100 each
+    And there is 1 "PS4" in the cart that cost 100 each
+    And there is 3 "SNES" in the cart that cost 100 each
     And the user is on the cart page
     And the total cost is 600
 

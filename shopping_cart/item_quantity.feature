@@ -1,4 +1,4 @@
-Feature:
+Feature: User Cart
   As a user either logged in or anonymous
   I want to be able to add, remove, and change the quantity of items in the cart
   So that I can ultimatly have control over what I order.

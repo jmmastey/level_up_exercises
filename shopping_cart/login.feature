@@ -1,4 +1,4 @@
-Feature:
+Feature: User login and authentication
   As an authenticated user my cart is remembered between sessions.
   Additionally, logging has the ability to transfer items into my user's cart
   from a previously anonymous session

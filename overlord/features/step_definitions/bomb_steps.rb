@@ -74,30 +74,29 @@ When(/^I cut the wires$/) do
 end
 
 Then(/^(?:|I )(?:|he )should see "([^"]*)"$/) do |text|
-  page.should have_content(text)
+  expect(page).to have_content(text)
 end
 
 Then(/^(?:|I )should not see "([^\"]*)"$/) do |text|
-  page.should have_no_content(text)
+  expect(page).to have_no_content(text)
 end
 
-Then(/^the "([^\"]*)" field should contain "([^\"]*)"$/) do |field, value|
-  field = find_field(field)
-  field_value = (field.tag_name == 'textarea') ? field.text : field.value
-  field_value.should =~ /#{value}/
+Then(/^the status field should contain "(.*)"$/) do |value|
+  field = find_field("status")
+  expect(field.value =~ /#{value}/).to eq(0)
 end
 
 Then(/^the bomb is active$/) do
-  step "the \"status\" field should contain \"^active$\""
+  step "the status field should contain \"^active$\""
 end
 
 Then(/^the bomb is inactive$/) do
-  step "the \"status\" field should contain \"^inactive$\""
+  step "the status field should contain \"^inactive$\""
 end
 
 Then(/x^the bomb is( not)? exploded$/) do |negation|
   if negation
-    step "I should see \"Control Panel\""
+    expect(page).to have_content("Control Panel")
   else
     step "there is nothing but a pile of rubble"
   end
@@ -108,20 +107,20 @@ Then(/^the bomb is exploded$/) do
 end
 
 Then(/^the bomb is disabled$/) do
-  step "I should not see \"Configuration Panel\""
-  step "I should not see \"Control Panel\""
-  step "I should see \"Damaged!\""
+  expect(page).to have_no_content("Configuration Panel")
+  expect(page).to have_no_content("Control Panel")
+  expect(page).to have_content("Damaged!")
 end
 
 Then(/^I need to confirm activation with the BigRedButton$/) do
-  step "I should see \"Please confirm activation.\""
-  step "the \"status\" field should contain \"inactive\""
+  expect(page).to have_content("Please confirm activation.")
+  step "the status field should contain \"inactive\""
   expect(find_button("BigRedButton"))
 end
 
 Then(/^there is nothing but a pile of rubble$/) do
-  step "I should not see \"Configuration Panel\""
-  step "I should not see \"Control Panel\""
-  step "I should not see \"Access Panel\""
-  step "I should see \"You are surrounded by rubble.\""
+  expect(page).to have_no_content("Configuration Panel")
+  expect(page).to have_no_content("Control Panel")
+  expect(page).to have_no_content("Access Panel")
+  expect(page).to have_content("You are surround by rubble.")
 end

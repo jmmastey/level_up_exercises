@@ -5,7 +5,7 @@ Feature: Bomb status is obvious
 
   Scenario Outline: I can tell the bomb is active
     Given an <state> bomb
-    Then the "status" field should contain "<state>"
+    Then the status field should contain "<state>"
 
     Examples:
       | state    |

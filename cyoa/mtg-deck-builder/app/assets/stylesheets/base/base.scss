@@ -2,6 +2,7 @@
   background-color: white;
   padding: 10px;
   margin-bottom: 50px;
+  @include box-shadow($shadow_color 0 0 5px);
 
   nav {
     float: right;

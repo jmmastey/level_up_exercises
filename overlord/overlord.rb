@@ -43,7 +43,8 @@ post '/control_panel' do
   else
     session[:bomb].enter_code(params[:code])
     if session[:bomb].status == :exploded
-      erb :rubble
+    #erb :rubble
+      haml :rubble
     else
       erb :control_panel
     end

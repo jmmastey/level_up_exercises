@@ -17,6 +17,7 @@ Scenario Outline: Deactivate the bomb or not
       | 0000    | abcd     | active   |
       | 0000    |          | active   |
 
+  @javascript
   Scenario: Trying wrong deactivation codes 3 times makes the bomb explode
     Given an active bomb with deactivation code "0000"
     When some meddling fool submits 3 bad codes

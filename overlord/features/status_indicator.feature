@@ -12,6 +12,7 @@ Feature: Bomb status is obvious
       | active   |
       | inactive |
 
+  @javascript
   Scenario: I can tell the bomb has exploded
     Given an exploded bomb
     Then there is nothing but a pile of rubble

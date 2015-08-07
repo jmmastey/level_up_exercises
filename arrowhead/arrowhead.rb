@@ -38,10 +38,16 @@ class Arrowhead
   # Raises an Exception if the region is not in the classification table
   # Raises an Exception if the shape is not in the classification table
   def self.classify(region, shape)
-    raise "Unknown region, please provide a valid region." unless CLASSIFICATIONS.include? region
+    unless CLASSIFICATIONS.include? region
+      raise "Unknown region, please provide a valid region."
+    end
 
     shapes = CLASSIFICATIONS[region]
-    raise "Unknown shape value. Are you sure you know what you're talking about?" unless shapes.include? shape
+
+    unless shapes.include? shape
+      raise "Unknown shape value. " \
+            "Are you sure you know what you're talking about?"
+    end
 
     arrowhead = shapes[shape]
     a_an = %(a e i o u).include?(arrowhead[0].downcase) ? "an" : "a"

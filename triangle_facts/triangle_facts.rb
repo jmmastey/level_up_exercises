@@ -8,7 +8,6 @@ require 'set'
 #   t.recite_facts
 #
 class Triangle
-
   # Public: Gets/Sets the lengths of the three sides
   attr_accessor :side_a, :side_b, :side_c
 
@@ -19,21 +18,23 @@ class Triangle
   # side_c - The Integer length of the third side of the triangle
   #
   def initialize(side_a, side_b, side_c)
-    @side_a, @side_b, @side_c = side_a, side_b, side_c
+    @side_a = side_a
+    @side_b = side_b
+    @side_c = side_c
   end
 
   # Public: Is this an equilateral triangle?
   #
   # Returns a Boolean
   def equilateral?
-    side_a === side_b && side_b === side_c
+    side_a == side_b && side_b == side_c
   end
 
   # Public: Is this an iscsceles triangle?
   #
   # Returns a Boolean
   def isosceles?
-    Set.new([side_a,side_b,side_c]).length == 2
+    Set.new([side_a, side_b, side_c]).length == 2
   end
 
   # Public: Is this a scalene triangle?
@@ -45,19 +46,32 @@ class Triangle
 
   # Public: Prints facts about the triangle
   #
-  # Returns nothing.
+  # Returns nothing
   def recite_facts
     puts "Facts about a triangle described by side lengths of " \
          "#{side_a}, #{side_b}, and #{side_c} units"
+
+    print_type
+    print_angles
+    puts ""
+  end
+
+  # Public: Prints the type of triangle
+  #
+  # Returns nothing
+  def print_type
     puts "This triangle is equilateral!" if equilateral?
     puts "This triangle is isosceles!" if isosceles?
     puts "This triangle is scalene!" if scalene?
+  end
 
+  # Public: List the angles of a triangle and mentions if it's a right triangle
+  #
+  # Returns nothing
+  def print_angles
     angles = calculate_angles
     puts "The angles of this triangle are #{angles.join("\xC2\xB0, ")}\xC2\xB0"
-
     puts "This triangle is also a right triangle!" if angles.include? 90
-    puts ""
   end
 
   # Internal: Calculates the inner angles based on the side length
@@ -79,7 +93,7 @@ class Triangle
   #
   # Returns the angle in degrees as a Float
   def calculate_angle(left, right, trans)
-    Math.acos((left**2 + right**2 - trans**2) /( 2.0 * left * right))
+    Math.acos((left**2 + right**2 - trans**2) / (2.0 * left * right))
   end
 
   # Internal: Converts radians to degrees
@@ -88,7 +102,6 @@ class Triangle
   def radians_to_degrees(rads)
     (rads * 180 / Math::PI).round
   end
-
 end
 
 puts ""

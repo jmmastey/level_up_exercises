@@ -16,7 +16,6 @@ class NameValidationError < RobotError; end
 #   registry = RobotRegistry.new
 #   registry << "B.E.N.D.E.R."
 class RobotRegistry < Set
-
   # Public: Overrides the default Set::add method to throw an exception
   #         if a duplicate is detected.
   #
@@ -30,17 +29,16 @@ class RobotRegistry < Set
   end
 
   # Public: Ensures that the << alias uses the child method
-  alias :<< :add
+  alias_method :<<, :add
 end
 
 # Public: A named object
 #
 # Examples
 #
-#   robot = Robot.new( { :registry => RobotRegistry.new } )
-#   robot = Robot.new( { :registry => RobotRegistry.new,
-#                        :name_validator => -> (name) { !name.empty? }
-#                      } )
+#   robot = Robot.new(registry: RobotRegistry.new)
+#   robot = Robot.new(registry: RobotRegistry.new,
+#                     name_validator: -> (name) { !name.empty? })
 class Robot
   # Public: Establishes getters for the name and registry attributes
   attr_reader :name, :registry
@@ -56,8 +54,8 @@ class Robot
   #        :name_validator - A Proc or Method that returns true if the provided
   #                          name is valid. (optional)
   def initialize(args = {})
-    @name_generator = args[:name_generator] || self.method(:generate_name)
-    @name_validator = args[:name_validator] || self.method(:valid_name?)
+    @name_generator = args[:name_generator] || method(:generate_name)
+    @name_validator = args[:name_validator] || method(:valid_name?)
 
     @registry       = args[:registry]
     @name           = name_generator.call
@@ -101,7 +99,6 @@ class Robot
   def valid_name?(name)
     name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
   end
-
 end
 
 # Demonstrates the use of the classes
@@ -116,7 +113,7 @@ registry = RobotRegistry.new
 # Demonstrate Generator
 begin
   3.times do
-    robot = Robot.new( { :registry => registry } )
+    robot = Robot.new(registry: registry)
     puts "Robot '#{robot.name}' Registered! (default generator and validator)"
   end
 rescue RobotError => e
@@ -130,8 +127,7 @@ begin
   generator = -> { "AA111" }
 
   2.times do
-    robot = Robot.new( { :registry       => registry,
-                         :name_generator => generator } )
+    robot = Robot.new(registry: registry, name_generator: generator)
     puts "Robot '#{robot.name}' Registered! (static name, default validator)"
   end
 rescue RobotError => e
@@ -146,18 +142,16 @@ begin
   validator = -> (name) { name =~ /TOBOR Model X-[[:alpha:]]{2}[[:digit:]]{3}/ }
 
   2.times do
-    robot = Robot.new( { :registry       => registry,
-                         :name_generator => generator,
-                         :name_validator => validator } )
+    robot = Robot.new(registry: registry,
+                      name_generator: generator,
+                      name_validator: validator)
     puts "Robot '#{robot.name}' Registered! (custom generator and validator)"
   end
 
-  robot = Robot.new( { :registry       => registry,
-                       :name_validator => validator } )
+  robot = Robot.new(registry: registry, name_validator: validator)
   puts "Robot '#{robot.name}' Registered! (custom generator, default validator)"
 rescue RobotError => e
   puts "Error Generating Robot: #{e.message}"
 end
 
 puts ""
-

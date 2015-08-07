@@ -10,17 +10,17 @@
 class Arrowhead
   # Public: Static classification table. Consider migrating to database.
   CLASSIFICATIONS = {
-    :far_west => {
-      :notched    => "Archaic Side Notch",
-      :stemmed    => "Archaic Stemmed",
-      :lanceolate => "Agate Basin",
-      :bifurcated => "Cody",
+    far_west: {
+      notched: "Archaic Side Notch",
+      stemmed: "Archaic Stemmed",
+      lanceolate: "Agate Basin",
+      bifurcated: "Cody",
     },
-    :northern_plains => {
-      :notched    => "Besant",
-      :stemmed    => "Archaic Stemmed",
-      :lanceolate => "Humboldt Constricted Base",
-      :bifurcated => "Oxbow",
+    northern_plains: {
+      notched: "Besant",
+      stemmed: "Archaic Stemmed",
+      lanceolate: "Humboldt Constricted Base",
+      bifurcated: "Oxbow",
     },
   }
 
@@ -38,16 +38,10 @@ class Arrowhead
   # Raises an Exception if the region is not in the classification table
   # Raises an Exception if the shape is not in the classification table
   def self.classify(region, shape)
-    unless CLASSIFICATIONS.include? region
-      raise "Unknown region, please provide a valid region."
-    end
+    raise "Invalid region." unless CLASSIFICATIONS.include? region
 
     shapes = CLASSIFICATIONS[region]
-
-    unless shapes.include? shape
-      raise "Unknown shape value. " \
-            "Are you sure you know what you're talking about?"
-    end
+    raise "Invalid shape." unless shapes.include? shape
 
     arrowhead = shapes[shape]
     a_an = %(a e i o u).include?(arrowhead[0].downcase) ? "an" : "a"

@@ -15,6 +15,14 @@
   .toggles
     %i.prev-channel.media-toggle.fa.fa-angle-double-left
     %i.prev-show.media-toggle.fa.fa-caret-left
-    = image_tag "rclogo.png", width: 150
+    .guide-button
+      = image_tag "rclogo.png", width: 150
     %i.next-show.media-toggle.fa.fa-caret-right
     %i.next-channel.media-toggle.fa.fa-angle-double-right
+  .guide.hidden
+    .guide-title Channel Guide
+    .channels
+      -@channels.each_with_index do |channel, idx|
+        .channel
+          %span.channel-number= idx < 9 ? "0#{idx+1}" : idx+1
+          %span.channel-name= channel.name

@@ -1,22 +1,35 @@
 class RedditCastController < ApplicationController
 
   def next_show
-    session[:tv].channel.next_show
+    session[:save_channel] = true
+    session[:channel].next_show
     render json: locals
   end
 
   def prev_show
-    session[:tv].channel.prev_show
+    session[:save_channel] = true
+    session[:channel].prev_show
     render json: locals
   end
 
   def next_channel
-    session[:tv].channel_up
+    save_channel if session[:save_channel]
+    session[:channel_idx]  = (session[:channel_idx] + 1) % session[:channels].count
+    session[:channel] = channel
     render json: locals
   end
 
   def prev_channel
-    session[:tv].channel_down
+    save_channel if session[:save_channel]
+    session[:channel_idx]  = (session[:channel_idx] - 1) % session[:channels].count
+    session[:channel] = channel
+    render json: locals
+  end
+
+  def to_channel
+    save_channel if session[:save_channel]
+    session[:channel] = Channel.find_by_name(params[:name])
+    session[:channel_idx] = session[:channels].index(session[:channel].id)
     render json: locals
   end
 
@@ -25,7 +38,10 @@ class RedditCastController < ApplicationController
   end
 
   def index
-    session[:tv] ||= RedditCast::TV.new(channels: Channel.all)
+    session[:channels] = Channel.ids
+    session[:channel_idx] = 0
+    session[:channel] = channel
+    @channels = Channel.all
     @locals = locals
   end
 
@@ -40,30 +56,30 @@ class RedditCastController < ApplicationController
     }
   end
 
+  def save_channel
+    session[:channel].search_set.searches.each(&:save)
+    session[:channel].search_set.save
+    session[:channel].save
+  end
+
+  def channel
+    Channel.find(session[:channels][session[:channel_idx]])
+  end
+
   def channel_name
-    session[:tv].channel.name
+    session[:channel].name
   end
 
   def channel_number
-    session[:tv].channel_number
+    num = session[:channel_idx] + 1
+    "#{num < 10 ? '0' : ''}#{num}"
   end
 
   def show_id
-    session[:tv].channel.now_showing.youtubeid
+    session[:channel].now_showing.youtubeid
   end
 
   def show_name
-    session[:tv].channel.now_showing.short_title
-  end
-
-  def load_next_search_page
-    limit = RedditCast::SearchSet::LIMIT
-    num_queries = session[:tv].channel.original_queries.count
-    real_limit = (limit / num_queries) * num_queries;
-
-    if session[:tv].channel.listing_number % real_limit == 0
-      puts "++++++++ LOADING NEXT PAGE +++++++"
-      TVWorker.perform_async(session[:tv], 1)
-    end
+    session[:channel].now_showing.short_title
   end
 end

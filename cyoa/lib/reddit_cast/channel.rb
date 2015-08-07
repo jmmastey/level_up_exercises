@@ -1,7 +1,7 @@
 module RedditCast
   class Channel < RCIterator
     
-    attr_accessor :name, :now_showing
+    attr_accessor :name
 
     def initialize(channel: nil, name: "", tags: [""])
       puts "Creating channel #{name || channel.name}-----"

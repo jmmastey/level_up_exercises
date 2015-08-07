@@ -1,5 +1,5 @@
 module RedditCast
-  class RCIterator  
+  class RCIterator
     include Enumerable
     attr_accessor :listings, :listing_number
     attr_reader :original_queries

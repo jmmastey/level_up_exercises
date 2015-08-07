@@ -8,6 +8,8 @@ $(window).load(function() {
   $('.prev-channel').click(prev_channel);
   $('.next-show').click(next_show);
   $('.prev-show').click(prev_show);
+  $('.guide-button').click(toggle_guide);
+  $('.channel').click(to_channel);
 });
 
 function next_show() {
@@ -24,6 +26,11 @@ function next_channel() {
 
 function prev_channel() {
   $.get('/prevchannel', {}, update_player);
+}
+function to_channel(event) {
+  var name = $(event.currentTarget).find('.channel-name').html();
+  $.get('/to_channel',{'name': name}, update_player);
+  toggle_guide();
 }
 
 function first_video() {
@@ -84,6 +91,15 @@ function hide_details() {
   if(mouseover) return;
 
   $('.player .details').addClass('hidden');
+}
+
+function toggle_guide() {
+  if($('.guide').hasClass('hidden')) {
+    $('.guide').removeClass('hidden');
+  }
+  else {
+    $('.guide').addClass('hidden');
+  }
 }
 
 function onPlayerStateChange(event) {

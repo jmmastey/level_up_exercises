@@ -56,9 +56,8 @@ class Robot
   def initialize(args = {})
     @name_generator = args[:name_generator] || method(:generate_name)
     @name_validator = args[:name_validator] || method(:valid_name?)
-
-    @registry       = args[:registry]
-    @name           = name_generator.call
+    @registry = args[:registry]
+    @name = name_generator.call
 
     validate
     register

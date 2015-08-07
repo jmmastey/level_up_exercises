@@ -223,6 +223,7 @@ body {
   top: 0;
   left: 0;
   background: #222;
+  min-width: 280px;
   height: 99%;
   width: 20%;
   z-index: 10;
@@ -263,6 +264,7 @@ body {
   }
   &.hidden {
     width: 0%;
+    min-width: 0px;
   }
 }
 
@@ -289,9 +291,9 @@ body {
     bottom: 30px;
   }
   .toggles .media-toggle {
-    bottom: 1%;
+    bottom: 0.5%;
   }
-  .toggles img {
-    bottom: 3%;
+  .toggles .guide-button {
+    bottom: 2%;
   }
 }

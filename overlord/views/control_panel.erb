@@ -1,0 +1,18 @@
+<form action="/control_panel" method="post">
+  <h3>Control Panel</h3>
+  <%= "Idiot! Using default 0000.<br><br>" if params[:idiot] %>
+  
+  <% if params[:loser] %>
+  <%= "You lose.  Thanks for playing, please try again.<br><br>" %>
+  <% end %>
+  
+  <% status_value = session[:bomb].status %>
+  <input type="text" name="status" readonly value=<%= status_value %>>
+  <br>
+  <input type="text" name="code" autofocus>
+  <br><br>
+  <button type="submit">Submit</button>
+  <br><br>
+  <h3>Access Panel</h3>
+  <button type="submit" formaction="/cut">Wires</button>
+</form>

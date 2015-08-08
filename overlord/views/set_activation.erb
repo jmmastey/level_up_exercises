@@ -1,0 +1,9 @@
+<form action="/set_activation" method="post">
+  <h3>Configuration Panel</h3>
+  Select activation code (default: 1234)
+  <br>
+  <%= "Please enter a 4-digit number<br>" if params[:bad_format] %>
+  <input type="text" name="code" autofocus>
+  <br><br><br><br>
+  <input type="submit" id="Submit">
+</form>

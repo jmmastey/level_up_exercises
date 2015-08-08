@@ -17,14 +17,14 @@ class Cohort
   def bad_numeric_arg_raise(arg_name)
     raise(ArgumentError, "#{arg_name} must be a non-negative integer")
   end
-    
+
   def bad_numeric_arg?(arg_value)
     return true if arg_value.nil?
     return true unless arg_value.respond_to?(:round)
     return true if arg_value < 0
     return true unless arg_value.round == arg_value
   end
-  
+
   def conversion_rate_interval
     return [0, 0] if views == 0
     ABAnalyzer.confidence_interval(conversions, views, INTERVAL_CONFIDENCE)

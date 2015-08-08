@@ -2,6 +2,9 @@ require 'abanalyzer'
 require_relative 'data_set'
 require_relative 'cohort'
 
+class BadData < StandardError
+end
+
 class RoboResearcher
   attr_accessor :cohorts
 
@@ -30,8 +33,14 @@ class RoboResearcher
   end
 
   def create_abtest
+    raise_if_bad_cohort_count
     ABAnalyzer::ABTest.new(cohorts[0].name => abtest_format(cohorts[0]),
                            cohorts[1].name => abtest_format(cohorts[1]))
+  end
+
+  def raise_if_bad_cohort_count
+    return if cohorts.length == 2
+    raise(BadData, "Need 2 cohorts to compare, but found #{cohorts.length}.")
   end
 
   def abtest_format(cohort)
@@ -50,9 +59,5 @@ class RoboResearcher
 
   def to_s
     cohorts.map(&:to_s).join("\n")
-  end
-
-  def cohort(name)
-    cohorts.detect { |c| c.name == name }
   end
 end

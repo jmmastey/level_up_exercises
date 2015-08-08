@@ -1,0 +1,49 @@
+#anime {
+  @extend .row;
+
+  .search {
+    @extend .content-box;
+  }
+
+  .search-results {
+    @extend .col-md-12;
+    padding: 0;
+
+    .result-item {
+      @include transparent-background(255, 255, 255, 0.75);
+      @include transparent-border(3px, 0, 0, 0, 0.10);
+      padding: 25px;
+      margin-bottom: 25px;
+
+      &:after {
+        clear:both;
+        display: table;
+        content: ""
+      }
+
+      img {
+        width: 25%;
+        border: 2px solid $black;
+        @extend .pull-left;
+      }
+
+      .details {
+        @extend .col-xs-8;
+      }
+
+      h3 {
+        color: $main-heading;
+      }
+
+      .rated {
+        //color: #218407;
+        color: darken($success-green, 25%);
+      }
+
+      .unrated {
+        color: $light-grey;
+
+      }
+    }
+  }
+}

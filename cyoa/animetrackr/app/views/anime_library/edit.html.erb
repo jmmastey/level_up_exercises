@@ -1,0 +1,38 @@
+<% content_for(:title, "Edit #{@library_item.anime.title}".html_safe) %>
+<div id="anime-library">
+<div class="edit">
+  <%= form_for @library_item, url: { action: 'edit' }, html: { class: 'basic-form' } do |f| %>
+    <h3>Edit <%= @library_item.anime.title %></h3>
+
+    <%= f.label(:user_rating) %>
+    <%= f.select(:user_rating, ratings_options) %>
+
+    <br>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-default <% if @library_item.public %>active<% end %>">
+        <%= f.radio_button(:public, true) %>Public
+      </label>
+      <label class="btn btn-default <% unless @library_item.public %>active<% end %>">
+        <%= f.radio_button(:public, false) %>Private
+      </label>
+    </div>
+    <br><br>
+
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-default <% if @library_item.wishlist? %>active<% end %>">
+        <%= f.radio_button(:view_status, 'Wishlist') %>Wishlist
+      </label>
+      <label class="btn btn-default  <% if @library_item.currently_watching? %>active<% end %>">
+        <%= f.radio_button(:view_status, 'Currently Watching') %>Currently Watching
+      </label>
+      <label class="btn btn-default <% if @library_item.done_watching? %>active<% end %>">
+        <%= f.radio_button(:view_status, 'Done') %>Done
+      </label>
+    </div>
+    <br>
+
+    <%= f.submit 'Update' %>
+    <%= link_to 'Delete', anime_library_remove_path(@library_item), method: :delete, class: 'delete' %>
+  <% end %>
+</div>
+</div>

@@ -20,5 +20,23 @@
       @extend .col-sm-3;
       display: inline-block;
     }
+
+    .library-overview {
+      @extend .col-sm-3;
+      display: inline-block;
+
+      ul {
+        padding-left: 10px;
+      }
+
+      li {
+        list-style: none;
+        a {
+          font-size: 11pt;
+          text-index: -10px;
+        }
+      }
+
+    }
   }
 }

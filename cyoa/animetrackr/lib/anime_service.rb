@@ -5,27 +5,25 @@ class AnimeService
   include HTTParty
   base_uri 'https://hummingbird.me/api/v1'
 
-  attr_accessor :query
-
   def search(title)
-    parameters(query: title)
-    api_call('/search/anime')
+    query = parameters(query: title)
+    api_call('/search/anime', query)
   end
 
   def find_by_id(id)
-    parameters(id: id)
-    api_call("/anime/#{id}")
+    query = parameters(id: id)
+    api_call("/anime/#{id}", query)
   end
 
   private
 
-  def api_call(endpoint)
+  def api_call(endpoint, query)
     response = self.class.get(endpoint, query)
 
     JSON.parse(response.body)
   end
 
   def parameters(params)
-    @query = { query: params }
+    { query: params }
   end
 end

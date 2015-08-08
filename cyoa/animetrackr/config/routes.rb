@@ -1,6 +1,23 @@
 Rails.application.routes.draw do
+  get 'anime_library/index'
+  get 'anime_library/view'
+  get 'anime_library/add/:id', to: 'anime_library#add', as: 'anime_library_add'
+  post 'anime_library/add/:id', to: 'anime_library#create'
+  get 'anime_library/edit/:id', to: 'anime_library#edit', as: 'anime_library_edit'
+  patch 'anime_library/edit/:id', to: 'anime_library#submit_edit'
+  delete 'anime_library/remove/:id', to: 'anime_library#remove', as: 'anime_library_remove'
+
+  get 'anime/search'
+  post 'anime/search' => 'anime#search_redirect'
+  get 'anime/search/:title' => 'anime#search'
+  get 'anime/edit'
+  get 'anime/add/:id', to: 'anime#add', as: 'anime_add'
+  post 'anime/add/:id', to: 'anime#add'
+  get 'anime/remove'
+
   get 'profile/view'
   get 'profile/' => 'profile#index'
+  get 'profile/add_anime'
 
   devise_for :users
   root to: 'root#home'
@@ -12,7 +29,6 @@ Rails.application.routes.draw do
       get 'users/sign_out' => 'devise/sessions#destroy'
     end
   end
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

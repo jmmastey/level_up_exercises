@@ -15,4 +15,20 @@ a {
   border: 1px solid darken($success-green, 25%);
 }
 
+.alert {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  min-height: 30px;
+  background: $error-red;
+  border: 1px solid darken($error-red, 25%);
+}
+
+.content-box {
+  @extend .col-md-12;
+  @include transparent-background(255, 255, 255, 0.75);
+  @include transparent-border(3px, 0, 0, 0, 0.10);
+  padding: 25px;
+}
+
 @include spacer-x();

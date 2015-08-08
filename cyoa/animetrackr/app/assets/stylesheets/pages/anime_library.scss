@@ -1,0 +1,11 @@
+#anime-library {
+  @extend .row;
+  
+  .add {
+    @extend .content-box;
+  }
+
+  .edit {
+    @extend .content-box;
+  }
+}

@@ -17,4 +17,7 @@ class User < ActiveRecord::Base
             format: { with: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
                       message: 'must contain at least 1 lowercase, 1 uppercase 
                                and 1 number' }
+ 
+  has_many :library_items
+  has_many :animes, through: :library_items
 end

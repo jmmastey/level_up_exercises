@@ -13,18 +13,7 @@ Feature: Profile page
     And I should see my username
     And I should see when I joined
 
-
-  Scenario: Activity Feed - Empty
-    When I am on my profile page
-    And I have not entered anything in my activity feed
-    Then I should see my activity feed
-    But my activity feed should be empty
-
-
-  Scenario: Activity Feed - Existing items
-    When I am on my profile page
-    And I have entered at least 1 activity in my feed
-    Then I should see my activity feed
-    And my activity feed should contain entries
-
-    
+  Scenario: Must be signed in to view profile
+    When I am signed out
+    And I am on my profile page
+    Then I should be redirected to the sign in page

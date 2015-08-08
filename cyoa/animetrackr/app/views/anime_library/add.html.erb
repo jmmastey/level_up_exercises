@@ -1,0 +1,38 @@
+<% content_for(:title, 'Add ' + @library_item.anime.title) %>
+<div id="anime-library">
+<div class="add">
+
+  <%= form_for @library_item, url: { action: 'add' }, html: { class: 'basic-form' } do |f| %>
+  <h3>Add <%= @library_item.anime.title %></h3>  
+
+    <%= f.label(:user_rating) %>
+    <%= f.select(:user_rating, ratings_options) %>
+
+    <br>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-default active">
+        <%= f.radio_button(:public, true, checked: true) %>Public
+      </label>
+      <label class="btn btn-default">
+        <%= f.radio_button(:public, false) %>Private
+      </label>
+    </div>
+    <br><br>
+
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-default">
+        <%= f.radio_button(:view_status, 'Wishlist') %>Wishlist
+      </label>
+      <label class="btn btn-default">
+        <%= f.radio_button(:view_status, 'Currently Watching') %>Currently Watching
+      </label>
+      <label class="btn btn-default">
+        <%= f.radio_button(:view_status, 'Done') %>Done
+      </label>
+    </div>
+    <br>
+
+  <%= submit_tag("Add") %>
+<% end %>
+</div>
+</div>

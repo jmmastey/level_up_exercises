@@ -1,7 +1,5 @@
 Given(/^I am on my profile page$/) do
   visit(profile_path)
-  expect(current_path).to eq(profile_path)
-  expect(page).to have_title('Profile')
 end
 
 Then(/^I should see my gravatar$/) do
@@ -16,4 +14,8 @@ end
 Then(/^I should see when I joined$/) do
   join_date_regex = /Member Since: \d{2}-\d{2}-\d{4}/
   expect(page.text).to match(join_date_regex)
+end
+
+Then(/^I should be redirected to the sign in page$/) do
+  expect(current_path).to eq(new_user_session_path)
 end

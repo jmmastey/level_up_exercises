@@ -9,7 +9,31 @@
       <h3><%= current_user.username %></h3>
       <p>Member Since: <%= current_user.created_at.strftime('%m-%d-%Y') %></p>
     </div>
-    
-  </div>
 
+    <div class="library-overview">
+      <h3>Anime Library (<%= @library.size %>)</h3>
+      <%= link_to 'Add Anime', anime_search_path %>
+
+      <h4>Wishlist<h4>
+      <ul class='wishlist'>
+        <% anime_wishlist(current_user, 3).each do |library_item| %>
+            <li><%= link_to library_item.anime.title, anime_library_edit_path(library_item) %></li>
+        <% end %>
+      </ul>
+
+      <h4>Currently Watching<h4>
+      <ul class='currently-watching'>
+        <% anime_currently_watching(current_user, 3).each do |library_item| %>
+            <li><%= link_to library_item.anime.title, anime_library_edit_path(library_item) %></li>
+        <% end %>
+      </ul>
+
+      <h4>Done Watching<h4>
+      <ul class='done-watching'>
+        <% anime_done_watching(current_user, 3).each do |library_item| %>
+            <li><%= link_to library_item.anime.title, anime_library_edit_path(library_item) %></li>
+        <% end %>
+      </ul>
+
+  </div>
 </div>

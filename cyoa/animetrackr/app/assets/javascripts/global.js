@@ -10,7 +10,7 @@ var globals = _.extend({}, {
     if (!$element.length) {
       return;
     }
-    timeout = timeout || 5000;
+    timeout = timeout || 3000;
     easing = easing || 1000;
     setTimeout(function(){
       $element.fadeToggle(easing);

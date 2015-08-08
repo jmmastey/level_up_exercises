@@ -11,15 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728214038) do
+ActiveRecord::Schema.define(version: 20150807180709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "animes", force: :cascade do |t|
+    t.integer  "external_id"
+    t.string   "status"
+    t.string   "title"
+    t.integer  "episode_count"
+    t.integer  "episode_length"
+    t.string   "cover_image"
+    t.string   "synopsis"
+    t.string   "show_type"
+    t.integer  "community_rating"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "animes", ["external_id"], name: "index_animes_on_external_id", using: :btree
+  add_index "animes", ["title"], name: "index_animes_on_title", using: :btree
+
+  create_table "library_items", force: :cascade do |t|
+    t.string   "view_status"
+    t.integer  "user_rating"
+    t.boolean  "public"
+    t.integer  "anime_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "password"
-    t.date     "join_date",              default: '2015-07-28', null: false
+    t.date     "join_date",              default: '2015-08-07', null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
     t.string   "email",                  default: "",           null: false

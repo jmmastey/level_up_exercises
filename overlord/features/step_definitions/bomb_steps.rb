@@ -106,7 +106,7 @@ Then(/^the bomb is exploded$/) do
   step "there is nothing but a pile of rubble"
 end
 
-Then(/^the bomb is disabled$/) do
+Then(/^the bomb is obviously disabled$/) do
   expect(page).to have_no_content("Configuration Panel")
   expect(page).to have_no_content("Control Panel")
   expect(page).to have_content("Damaged!")

@@ -1,3 +1,6 @@
+require "net/http"
+require "json"
+
 class Fraction
   attr_accessor :num, :den
 
@@ -9,13 +12,27 @@ class Fraction
 
   def +(rhs)
     raise "Right-hand-side of + must be a Fraction" unless rhs.is_a? Fraction
-    num = self.num * rhs.den + self.den * rhs.num
-    den = self.den * rhs.den
+    num = @num * rhs.den + @den * rhs.num
+    den = @den * rhs.den
     Fraction.new(num, den)
   end
 
   def to_s
     "#{num}/#{den}"
+  end
+
+  def from_json(body)
+    parsed = JSON.parse(body)
+    @num = parsed["num"]
+    @den = parsed["den"]
+  end
+
+  def load(url)
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+    from_json(response.body)
   end
 
   private

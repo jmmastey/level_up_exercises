@@ -7,4 +7,4 @@ z = x + y
 puts "The sum of #{x} and #{y} is #{z}"
 
 x.load("http://localhost:8080")
-puts "Random fraction: #{x}"
+puts "Random fraction from server: #{x}"

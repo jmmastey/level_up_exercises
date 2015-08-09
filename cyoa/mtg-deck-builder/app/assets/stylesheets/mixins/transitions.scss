@@ -1,5 +1,5 @@
 @mixin default-transition() {
-  @include transition-duration(0.3s);
+  @include transition-duration(0.25s);
   @include transition-timing-function(ease-out);
 }
 
@@ -7,6 +7,6 @@
   @include default-transition();
 
   &:hover {
-    @include box-shadow($shadow_color 3px 3px 10px);
+    @include box-shadow(darken($shadow_color, 15%) -5px 5px 10px);
   }
 }

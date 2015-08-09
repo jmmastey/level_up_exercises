@@ -1,8 +1,12 @@
-When(/^I log in$/) do
+def log_in(user, password)
   visit('/login')
-  fill_in 'session[username]', with: @user.username
-  fill_in 'session[password]', with: '123456'
+  fill_in 'session[username]', with: user.username
+  fill_in 'session[password]', with: password
   click_button 'Go'
+end
+
+When(/^I log in$/) do
+  login(@user, "123456")
 end
 
 Then(/^I should see my user profile$/) do
@@ -19,4 +23,9 @@ end
 
 Then(/^I should be logged out$/) do
   page.should have_selector('.btn', text: 'Log In')
+end
+
+Given(/^I'm logged in$/) do
+  @user = create(:user, password: "123456")
+  log_in(@user, "123456")
 end

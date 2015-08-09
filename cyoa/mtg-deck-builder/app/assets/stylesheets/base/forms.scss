@@ -1,14 +1,13 @@
-#login,
-#signup { 
+.form { 
   width: 400px;
   text-align: center;
-  
+
   p {
     margin-bottom: 10px;
   }
 
   input {
-    width: 100%;  
+    width: 100%;
     &[type="text"],
     &[type="email"],
     &[type="password"] {

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :decks, dependent: :destroy
   validates :username, presence: true,
                        uniqueness: true,
                        length: { maximum: 50 }

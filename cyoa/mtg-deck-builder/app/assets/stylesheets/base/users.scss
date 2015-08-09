@@ -1,0 +1,45 @@
+.user-profile {
+  float: left;
+  width: 210px;
+  margin-right: 20px;
+
+  h2 {
+    font-size: 1.3em;
+  }
+
+  .btn {
+    display: block;
+  }
+}
+
+.user-decks {
+  position: relative;
+  float: left;
+
+  .decks {
+    overflow: hidden;
+  }
+
+  .user-deck {}
+
+  .deck-name {
+    float: left;
+    width: 315px;
+    margin-bottom: 5px;
+  }
+  .new {
+    position: absolute;
+    top: $panel_padding + $panel_h2_padding;
+    right: $panel_padding;
+  }
+  .edit {
+    float: right;
+  }
+  .destroy {
+    float: right;
+    &:hover {
+      color: black;
+      background-color: lighten($mtg_red, 50%);
+    }
+  }
+}

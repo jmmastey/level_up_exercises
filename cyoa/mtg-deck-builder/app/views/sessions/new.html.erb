@@ -1,5 +1,5 @@
 <% provide(:title, "Log In") %>
-<div class="panel" id="login">
+<div class="panel form">
   <h2>Log In</h2>
   <%= form_for(:session, url: login_path) do |f| %>
     <%= render "shared/user_login_form", f: f %>

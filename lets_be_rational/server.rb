@@ -2,22 +2,25 @@ require 'socket'
 require 'json'
 
 def random_fraction
-  fraction = { :num => rand(1000) + 1, :den => rand(1000) + 1 }
+  fraction = { num: rand(1000) + 1, den: rand(1000) + 1 }
   JSON.generate(fraction).to_s
+end
+
+def header(size)
+  ["HTTP/1.1 200 OK",
+   "Content-Type: text/plain",
+   "Content-Length: #{size}",
+   "Connection: close\r\n"].join("\r\n")
 end
 
 server = TCPServer.new('localhost', 8080)
 
 loop do
   socket = server.accept
-  request = socket.gets
+  socket.gets
   response = random_fraction + "\n"
 
-  socket.print "HTTP/1.1 200 OK\r\n" +
-               "Content-Type: text/plain\r\n" +
-               "Content-Length: #{response.bytesize}\r\n" +
-               "Connection: close\r\n"
-
+  socket.print header(response.size)
   socket.print "\r\n"
   socket.print response
   socket.close

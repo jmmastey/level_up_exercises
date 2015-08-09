@@ -4,17 +4,15 @@ require "json"
 class Fraction
   attr_accessor :num, :den
 
-  def initialize(numerator, denominator)
-    @num = numerator
-    @den = denominator
-    validate
+  def initialize(num, den)
+    set(num, den)
   end
 
   def +(rhs)
     raise "Right-hand-side of + must be a Fraction" unless rhs.is_a? Fraction
     num = @num * rhs.den + @den * rhs.num
     den = @den * rhs.den
-    Fraction.new(num, den)
+    set(num, den)
   end
 
   def to_s
@@ -23,8 +21,7 @@ class Fraction
 
   def from_json(body)
     parsed = JSON.parse(body)
-    @num = parsed["num"]
-    @den = parsed["den"]
+    set(parsed["num"], parsed["den"])
   end
 
   def load(url)
@@ -37,10 +34,17 @@ class Fraction
 
   private
 
+  def set(num, den)
+    @num = num
+    @den = den
+    validate
+    normalize
+  end
+
   def validate
     raise "Can't have zero denominator" if @den == 0
-    raise "Numerator miust be an integer" unless @num.is_a? Integer
-    raise "Denominator miust be an integer" unless @den.is_a? Integer
+    raise "Numerator must be an integer" unless @num.is_a? Integer
+    raise "Denominator must be an integer" unless @den.is_a? Integer
   end
 
   def normalize

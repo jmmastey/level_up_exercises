@@ -2,7 +2,7 @@
 
 It's your first week on the job, and you've been asked to help complete a task that a former employee left unfinished. The task was to build a class that can store numerical fractions like 1/4 and -131/27. Unfortunately your predecessor not only left out most of the requested features, but they also failed to write any tests for their software.
 
-## Requirements
+## Description
 
 Included in this project is a partially-implemented class `Fraction` along with a couple scripts. The class is expected to work something like this:
 
@@ -34,6 +34,7 @@ Then in another terminal repeatedly run the test script:
 $ ruby test.rb
 ```
 
+## Requirements
 
 Your task is to complete the implementation of `Fraction` by doing the following:
 

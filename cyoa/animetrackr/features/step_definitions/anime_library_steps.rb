@@ -37,6 +37,10 @@ When(/^I delete the anime (.+)$/) do |anime|
   click_link('Delete')
 end
 
+When(/^I view my entire library$/) do
+  visit(anime_library_path)
+end
+
 Then(/^I expect to have search result for '(.+)'$/) do |title|
   expect(page).to have_content('Search Results')
   expect(page).to have_content('Search Results for ' + title)
@@ -67,4 +71,8 @@ end
 
 Then(/^I should not see (.+) in my library$/) do |anime|
   expect(page).not_to have_content(anime)
+end
+
+Then(/^I should see (.+) in my library$/) do |anime|
+  expect(page).to have_content(anime)
 end

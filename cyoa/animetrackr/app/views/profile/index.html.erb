@@ -11,7 +11,7 @@
     </div>
 
     <div class="library-overview">
-      <h3>Anime Library (<%= @library.size %>)</h3>
+      <h3><%= link_to 'Anime Library', anime_library_path %> (<%= @library.size %>)</h3>
       <%= link_to 'Add Anime', anime_search_path %>
 
       <h4>Wishlist<h4>

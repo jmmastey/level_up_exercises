@@ -36,13 +36,11 @@
       }
 
       .rated {
-        //color: #218407;
         color: darken($success-green, 25%);
       }
 
       .unrated {
         color: $light-grey;
-
       }
     }
   }

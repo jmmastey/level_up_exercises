@@ -2,6 +2,7 @@ class AnimeLibraryController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @library = LibraryItem.where(user: current_user)
   end
 
   def view

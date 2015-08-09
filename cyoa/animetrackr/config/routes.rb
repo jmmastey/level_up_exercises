@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'anime_library/index'
+  get 'anime_library/' => 'anime_library#index'
   get 'anime_library/view'
   get 'anime_library/add/:id', to: 'anime_library#add', as: 'anime_library_add'
   post 'anime_library/add/:id', to: 'anime_library#create'

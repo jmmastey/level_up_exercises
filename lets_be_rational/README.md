@@ -15,7 +15,14 @@ puts "As a float: #{z.to_f}"
 puts "As JSON: #{z.to_json}"
 ```
 
-Interestingly enough, `Fraction` can load a value over HTTP. Run the server and the test scripts in the project directory to see it in action:
+Interestingly enough, `Fraction` can load a value over HTTP:
+
+```
+x.load("http://www.randomratio.com/")
+puts "Random fraction from server: #{x}"
+```
+
+Run the server and the test scripts in the project directory to see it in action:
 
 ```
 $ ruby server.rb

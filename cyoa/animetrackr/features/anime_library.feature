@@ -42,9 +42,9 @@ Feature: Anime library
     When  I delete the anime <anime>
     Then I should not see <anime> in my library
     Examples:
-    | anime              |
-    | InuYasha           |
-    | Witch Hunter Robin |
+      | anime              |
+      | InuYasha           |
+      | Witch Hunter Robin |
 
   Scenario: View entire library
     Given I am currently watching Wolf's Rain

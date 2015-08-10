@@ -34,6 +34,23 @@
             <li><%= link_to library_item.anime.title, anime_library_edit_path(library_item) %></li>
         <% end %>
       </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="activity-feed">
+      <h3>Activity Feed</h3>
+      <% @activities.each do |activity| %>
+        <div class="feed-item">
+        <%= render :partial => 'shared/feed/added_anime',
+                   :locals => { activity: activity } if activity.activity == 'Added' %>
+
+        </div>
+
+
+      <% end %>
+
+    </div>
 
   </div>
 </div>

@@ -70,9 +70,17 @@ Then(/^I should see (.+) in the done watching section$/) do |anime|
 end
 
 Then(/^I should not see (.+) in my library$/) do |anime|
-  expect(page).not_to have_content(anime)
+  expect(find('.library-overview')).not_to have_content(anime)
 end
 
 Then(/^I should see (.+) in my library$/) do |anime|
+  expect(find('.library-overview')).to have_content(anime)
+end
+
+Then(/^I should not see (.+) in my full library$/) do |anime|
+  expect(page).not_to have_content(anime)
+end
+
+Then(/^I should see (.+) in my full library$/) do |anime|
   expect(page).to have_content(anime)
 end

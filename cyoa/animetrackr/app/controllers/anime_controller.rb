@@ -52,7 +52,7 @@ class AnimeController < ApplicationController
       cover_image: attributes['cover_image'],
       synopsis: attributes['synopsis'],
       show_type: attributes['show_type'],
-      community_rating: attributes['community_rating'],
+      community_rating: attributes['community_rating'].round,
     )
   end
 end

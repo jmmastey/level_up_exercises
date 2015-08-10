@@ -39,4 +39,20 @@
 
     }
   }
+
+  .activity-feed {
+    @extend .col-md-8;
+  
+    .feed-item {
+      @extend .content-box;
+      margin-bottom: 25px;
+
+      img {
+        @extend .pull-left;
+        width: 25%;
+        margin-right: 25px;
+        border: 2px solid $black;
+      }
+    }
+  }
 }

@@ -19,5 +19,6 @@ class User < ActiveRecord::Base
                                and 1 number' }
  
   has_many :library_items
+  has_many :activities
   has_many :animes, through: :library_items
 end

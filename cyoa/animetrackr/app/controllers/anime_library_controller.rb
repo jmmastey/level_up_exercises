@@ -19,6 +19,7 @@ class AnimeLibraryController < ApplicationController
     library_item.anime_id = params[:id]
     library_item.user = current_user
     library_item.save
+    add_to_activity_feed(library_item, 'Added')
     redirect_to(profile_path)
   end
 
@@ -46,5 +47,13 @@ class AnimeLibraryController < ApplicationController
 
   def get_library_item(id)
     LibraryItem.find_by(user: current_user, id: id)
+  end
+
+  def add_to_activity_feed(library_item, activity)
+    Activity.create(
+      anime: library_item.anime,
+      activity: activity,
+      user: current_user,
+    )
   end
 end

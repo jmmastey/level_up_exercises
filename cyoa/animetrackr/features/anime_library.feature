@@ -50,5 +50,5 @@ Feature: Anime library
     Given I am currently watching Wolf's Rain
     And I am currently watching Michiko to Hatchin
     When I view my entire library
-    Then I should see Wolf's Rain in my library
-    And I should see Michiko to Hatchin in my library
+    Then I should see Wolf's Rain in my full library
+    And I should see Michiko to Hatchin in my full library

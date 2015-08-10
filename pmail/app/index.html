@@ -28,27 +28,26 @@
     <![endif]-->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
             <img src="images/enova.png"/>
           </a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse">
           <form class="navbar-form navbar-left" role="search">
             <div class="input-group">
-              <input type="text" class="form-control" aria-describedby="search">
-              <span class="input-group-addon glyphicon glyphicon-search" id="search"></span>
+              <input type="text" class="form-control search-bar" aria-describedby="search">
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
             </div>
+
           </form>
 
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-th"></span></a></li>
             <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ssapra@enova.com <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>ssapra@enova.com</span> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">My Account</a></li>
                 <li><a href="#">Add Account</a></li>
@@ -117,9 +116,10 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Mark as read</a></li>
-                <li><a href="#">Mark as unread</a></li>
-                <li><a href="#">Mark as not important</a></li>
+                <li class="dropdown-header">Display Density</li>
+                <li><a href="#">Comfortable</a></li>
+                <li><a href="#">Cozy</a></li>
+                <li><a href="#">Compact</a></li>
                 <li><a href="#">Add to tasks</a></li>
                 <li><a href="#">Add star</a></li>
                 <li><a href="#">Remove star</a></li>
@@ -160,15 +160,5 @@
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='https://www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
   </body>
 </html>

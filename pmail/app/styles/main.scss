@@ -5,20 +5,33 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 // endbower
 
 body {
+  background-color: black;
   font-family: arial,sans-serif;
-}
-
-.navbar-form button {
-  background: -webkit-linear-gradient(top,#4387fd,#4683ea);
-  color: white;
-}
-
-.navbar a {
-  width: 50%;
 }
 
 .container {
   width: 100%;
+
+  a {
+    color: white;
+  }
+}
+
+.container-fluid {
+  border-bottom: 1px solid #494949;
+  padding: 6px 0;
+}
+
+.glyphicon-bell {
+  color: black;
+  background-color: white;
+  padding: 5px;
+  border-radius: 50%;
+  font-size: 11px;
+}
+
+.glyphicon-th {
+  font-size: 19px;
 }
 
 .list-group-item {
@@ -27,40 +40,9 @@ body {
   border: none !important;
 }
 
-.container a {
-  color: white;
-}
-
-.glyphicon-bell {
-  color: black;
-  background-color: white;
-  padding: 5px;
-  border-radius: 50%;
-}
-
-.pull-right li:first-child {
-  color: white;
-  background-color: black;
-}
-
-.pull-right li {
-  height: 35px;
-}
-
-.nav-pills li {
-  background-color: grey;
-}
-
-.nav-pills a {
-  color: white;
-}
-
-.navbar img {
-  width: 100%;
-}
-
-body {
-  background-color: black;
+.navbar-brand img {
+  margin-top: -21px;
+  margin-left: 21px;
 }
 
 .navbar-default {
@@ -68,6 +50,71 @@ body {
   border: none;
 }
 
+.navbar-header {
+  width: 250px;
+}
+
+.navbar-form {
+  margin-top: 10px;
+
+  button {
+    background: -webkit-linear-gradient(top,#4387fd,#4683ea);
+    color: white;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius:2px;
+    border: 0 !important;
+    width: 60px;
+    height: 30px;
+  }
+}
+
+.navbar {
+  a {
+    width: 70%;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  li {
+    height: 50px;
+  }
+
+  .dropdown a {
+    width: 175px;
+  }
+}
+
+.nav-pills {
+  a {
+    color: white;
+  }
+
+  li {
+    background-color: grey;
+  }
+}
+
 .navbar-right a {
   color: white !important;
+}
+
+.pull-right {
+  li {
+    height: 35px;
+  }
+
+  li:first-child {
+    color: white;
+    background-color: black;
+  }
+}
+
+.search-bar {
+  border-radius: 0;
+  width: 590px !important;
+  height: 30px;
 }

@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
   <head>
     <meta charset="utf-8">
-    <title>pmail</title>
+    <title>PMail</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,53 +20,118 @@
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
-    
+
   </head>
   <body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img src="images/enova.png"/>
+          </a>
+        </div>
 
-    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <form class="navbar-form navbar-left" role="search">
+            <div class="input-group">
+              <input type="text" class="form-control" aria-describedby="search">
+              <span class="input-group-addon glyphicon glyphicon-search" id="search"></span>
+            </div>
+          </form>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-th"></span></a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ssapra@enova.com <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">My Account</a></li>
+                <li><a href="#">Add Account</a></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">pmail</h3>
-      </div>
-
-      <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
-        <p class="lead">Always a pleasure scaffolding your apps.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Splendid! <span class="glyphicon glyphicon-ok"></span></a></p>
-      </div>
-
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4><a href="https://html5boilerplate.com/">HTML5 Boilerplate</a></h4>
-          <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
-
-          <h4><a href="http://libsass.org/">Sass</a></h4>
-          <p>Sass is a mature, stable, and powerful professional grade CSS extension language.</p>
-          
-
-          <h4><a href="http://getbootstrap.com/">Bootstrap</a></h4>
-          <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
-
-          <h4><a href="http://modernizr.com/">Modernizr</a></h4>
-          <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
-          
+      <div class="col-md-2">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h3>Mail</h3><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Mail</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li><a href="#">Tasks</a></li>
+          </ul>
+        </li>
+        <button type="button" class="btn btn-default">Compose</button>
+        <div class="list-group">
+          <button type="button" class="list-group-item">Inbox</button>
+          <button type="button" class="list-group-item">Starred</button>
+          <button type="button" class="list-group-item">Sent Mail</button>
+          <button type="button" class="list-group-item">Drafts</button>
+          <button type="button" class="list-group-item">More</button>
         </div>
       </div>
+      <div class="col-md-10">
+        <div class="header">
+          <ul class="nav nav-pills pull-left">
+             <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><input type="checkbox" aria-label="..."><span class="caret"></span></a>
+               <ul class="dropdown-menu">
+                 <li><a href="#">All</a></li>
+                 <li><a href="#">None</a></li>
+                 <li><a href="#">Read</a></li>
+                 <li><a href="#">Unread</a></li>
+                 <li><a href="#">Starred</a></li>
+                 <li><a href="#">Unstarred</a></li>
+               </ul>
+             </li>
+            <li><a href="#"><span class="glyphicon glyphicon-repeat"></span></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Mark as read</a></li>
+                <li><a href="#">Mark as unread</a></li>
+                <li><a href="#">Mark as not important</a></li>
+                <li><a href="#">Add to tasks</a></li>
+                <li><a href="#">Add star</a></li>
+                <li><a href="#">Remove star</a></li>
+                <li><a href="#">Filter messages like these</a></li>
+                <li><a href="#">Mute</a></li>
+              </ul>
+            </li>
+          </ul>
 
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+          <ul class="nav nav-pills pull-right">
+            <li><h6>1-5 of 5</h6></li>
+            <li><span class="glyphicon glyphicon-chevron-left"></span></li>
+            <li><span class="glyphicon glyphicon-chevron-right"></span></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Mark as read</a></li>
+                <li><a href="#">Mark as unread</a></li>
+                <li><a href="#">Mark as not important</a></li>
+                <li><a href="#">Add to tasks</a></li>
+                <li><a href="#">Add star</a></li>
+                <li><a href="#">Remove star</a></li>
+                <li><a href="#">Filter messages like these</a></li>
+                <li><a href="#">Mute</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-    
+
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -75,7 +140,7 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    
+
     <!-- build:js(.) scripts/plugins.js -->
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
@@ -90,7 +155,7 @@
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
     <!-- endbuild -->
-    
+
 
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>

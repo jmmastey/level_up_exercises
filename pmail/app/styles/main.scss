@@ -4,90 +4,70 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-/* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  font-family: arial,sans-serif;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+.navbar-form button {
+  background: -webkit-linear-gradient(top,#4387fd,#4683ea);
+  color: white;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
+.navbar a {
+  width: 50%;
 }
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+.container {
+  width: 100%;
 }
 
-.container-narrow > hr {
-  margin: 30px 0;
+.list-group-item {
+  background-color: black;
+  color: white !important;
+  border: none !important;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
+.container a {
+  color: white;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-  p + h4 {
-    margin-top: 28px;
-  }
+.glyphicon-bell {
+  color: black;
+  background-color: white;
+  padding: 5px;
+  border-radius: 50%;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
+.pull-right li:first-child {
+  color: white;
+  background-color: black;
+}
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
+.pull-right li {
+  height: 35px;
+}
 
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
+.nav-pills li {
+  background-color: grey;
+}
 
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+.nav-pills a {
+  color: white;
+}
+
+.navbar img {
+  width: 100%;
+}
+
+body {
+  background-color: black;
+}
+
+.navbar-default {
+  background-color: black;
+  border: none;
+}
+
+.navbar-right a {
+  color: white !important;
 }

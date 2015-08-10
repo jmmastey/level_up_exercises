@@ -1,32 +1,92 @@
-class NameCollisionError < RuntimeError; end
+require_relative "errors.rb"
+require_relative "registry.rb"
 
 class Robot
-  attr_accessor :name
-
-  @@registry
+  attr_reader :name, :registry
+  attr_reader :name_generator, :name_validator
 
   def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+    @name_generator = args[:name_generator] || method(:generate_name)
+    @name_validator = args[:name_validator] || method(:valid_name?)
+    @registry = args[:registry]
+    @name = name_generator.call
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+    validate
+    register
+  end
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
+  def register
+    registry << name
+  end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+  def validate
+    raise NameValidationError,
+      "#{name} is not a valid name!" unless name_validator.call(name)
+  end
+
+  def generate_name
+    generate_char = -> { ('A'..'Z').to_a.sample }
+    generate_num = -> { rand(10) }
+
+    "#{generate_char.call}#{generate_char.call}" \
+      "#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+  end
+
+  def valid_name?(name)
+    name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
   end
 end
 
-robot = Robot.new
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+puts ""
+puts "***********************************"
+puts "* Robot Name Generator & Registry *"
+puts "***********************************"
+puts ""
 
-# Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+registry = RobotRegistry.new
+
+# Demonstrate Generator
+begin
+  3.times do
+    robot = Robot.new(registry: registry)
+    puts "Robot '#{robot.name}' Registered! (default generator and validator)"
+  end
+rescue RobotError => e
+  puts "Error Generating Robot: #{e.message}"
+end
+
+puts ""
+
+# Demonstrate Duplicates Checking
+begin
+  generator = -> { "AA111" }
+
+  2.times do
+    robot = Robot.new(registry: registry, name_generator: generator)
+    puts "Robot '#{robot.name}' Registered! (static name, default validator)"
+  end
+rescue RobotError => e
+  puts "Error Generating Robot: #{e.message}"
+end
+
+puts ""
+
+# Demonstrate Validation
+begin
+  generator = -> { "TOBOR Model X-QQ66#{rand(10)}" }
+  validator = -> (name) { name =~ /TOBOR Model X-[[:alpha:]]{2}[[:digit:]]{3}/ }
+
+  2.times do
+    robot = Robot.new(registry: registry,
+                      name_generator: generator,
+                      name_validator: validator)
+    puts "Robot '#{robot.name}' Registered! (custom generator and validator)"
+  end
+
+  robot = Robot.new(registry: registry, name_validator: validator)
+  puts "Robot '#{robot.name}' Registered! (custom generator, default validator)"
+rescue RobotError => e
+  puts "Error Generating Robot: #{e.message}"
+end
+
+puts ""

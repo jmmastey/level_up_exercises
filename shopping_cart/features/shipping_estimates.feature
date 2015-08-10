@@ -20,4 +20,3 @@ Given I am on the checkout page
   When I enter '60610' for zipcode
   Then I should see 'State: IL'
 
-

@@ -1,0 +1,32 @@
+@import url('ld-common.css');
+
+.ld-caret-up:before,
+.ld-caret-right:before,
+.ld-caret-down:before,
+.ld-caret-left:before {
+  color: white;
+  font-size: 40px;
+  margin: -35px -20px;
+
+  -webkit-animation: ld-generic-point-up 0.75s 0s infinite ease;
+  animation: ld-generic-point-up 0.75s 0s infinite ease;
+}
+.ld-caret-up:before {
+  content: "△"!important;
+}
+.ld-caret-right:before {
+  content: "▷"!important;
+  -webkit-animation-name: ld-generic-point-right;
+  animation-name: ld-generic-point-right;
+}
+.ld-caret-down:before {
+  content: "▽"!important;
+  -webkit-animation-name: ld-generic-point-down;
+  animation-name: ld-generic-point-down;
+}
+.ld-caret-left:before {
+  content: "◃"!important;
+  -webkit-animation-name: ld-generic-point-left;
+  animation-name: ld-generic-point-left;
+}
+

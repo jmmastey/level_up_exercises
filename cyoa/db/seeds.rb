@@ -15,7 +15,7 @@ puts "(3) Building channels..."
 @listings = parsed['channels'].map do |json|
   puts "\tCreating channel #{json['name']}..."
 
-  channel = Channel.new.init_from_http(json['name'], json['queries'])
+  channel = Channel.new.init_from_http(json['name'], json['queries'], true)
   channel.next
   channel.search_set.save
   channel.search_set.searches.each(&:save)

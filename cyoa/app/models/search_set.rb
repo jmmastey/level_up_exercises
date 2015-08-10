@@ -57,13 +57,6 @@ class SearchSet < ActiveRecord::Base
     current_listing
   end
 
-  def to_s
-    str = "#<SearchSet: queries='#{queries}' "
-    str << "results=#{num_results} "
-    str << "next?=#{next?} "
-    str << "previous?=#{previous?}>"
-  end
-
   def current_listing
     searches[self.listing % searches.count].current_listing
   end

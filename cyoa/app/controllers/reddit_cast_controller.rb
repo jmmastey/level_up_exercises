@@ -1,35 +1,32 @@
 class RedditCastController < ApplicationController
+  before_action :authenticate_user!
 
   def next_show
-    session[:save_channel] = true
-    session[:channel].next_show
+    channel.next_show
+    save_channel
     render json: locals
   end
 
   def prev_show
-    session[:save_channel] = true
-    session[:channel].prev_show
+    channel.prev_show
+    save_channel
     render json: locals
   end
 
   def next_channel
-    save_channel if session[:save_channel]
     session[:channel_idx]  = (session[:channel_idx] + 1) % session[:channels].count
-    session[:channel] = channel
     render json: locals
   end
 
   def prev_channel
-    save_channel if session[:save_channel]
     session[:channel_idx]  = (session[:channel_idx] - 1) % session[:channels].count
-    session[:channel] = channel
     render json: locals
   end
 
   def to_channel
-    save_channel if session[:save_channel]
-    session[:channel] = Channel.find_by_name(params[:name])
-    session[:channel_idx] = session[:channels].index(session[:channel].id)
+    session[:channel_idx] = session[:channels].index do |ch|
+      ch.name == params[:name]
+    end
     render json: locals
   end
 
@@ -38,10 +35,9 @@ class RedditCastController < ApplicationController
   end
 
   def index
-    session[:channels] = Channel.ids
+    session[:channels] = current_user.channels
     session[:channel_idx] = 0
-    session[:channel] = channel
-    @channels = Channel.all
+    @channels = session[:channels]
     @locals = locals
   end
 
@@ -52,22 +48,22 @@ class RedditCastController < ApplicationController
       channel_name: channel_name, 
       channel_number: channel_number, 
       show_id: show_id,
-      show_name: show_name
+      show_name: show_name,
+      index: session[:channel_idx]
     }
   end
 
   def save_channel
-    session[:channel].search_set.searches.each(&:save)
-    session[:channel].search_set.save
-    session[:channel].save
+    channel.search_set.searches.each(&:save)
+    channel.search_set.save
   end
 
   def channel
-    Channel.find(session[:channels][session[:channel_idx]])
+    session[:channels][session[:channel_idx]]
   end
 
   def channel_name
-    session[:channel].name
+    channel.name
   end
 
   def channel_number
@@ -76,10 +72,10 @@ class RedditCastController < ApplicationController
   end
 
   def show_id
-    session[:channel].now_showing.youtubeid
+    channel.now_showing.youtubeid
   end
 
   def show_name
-    session[:channel].now_showing.short_title
+    channel.now_showing.short_title
   end
 end

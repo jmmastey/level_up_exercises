@@ -1,8 +1,11 @@
 class Channel < ActiveRecord::Base
   has_one :search_set
+  has_many :user_channels
+  has_many :users, through: :user_channels
 
-  def init_from_http(ch_name, ch_tags)
+  def init_from_http(ch_name, ch_tags, default = false)
     self.name = ch_name
+    self.default = default;
     self.search_set = SearchSet.new.init_from_http(ch_tags)
     save
     self
@@ -33,7 +36,7 @@ class Channel < ActiveRecord::Base
   end
 
   def to_s
-    "#<Channel: name='#{name}' now_showing=#{now_showing}>"
+    "#<Channel: name='#{name}'>"
   end
 
   alias_method :next_show, :next

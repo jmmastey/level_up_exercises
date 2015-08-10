@@ -43,15 +43,10 @@ class Search < ActiveRecord::Base
   end
 
   def to_s
-    str = "#<Search: query='#{query}' "
-    str << "results=#{shows.count} "
-    str << "next=#{next?} "
-    str << "prev=#{previous?}>"
+    "#<Search: query='#{query}'>"
   end
 
   def current_listing
-    return "" unless has_post?
-
     shows[self.listing]
   end
 

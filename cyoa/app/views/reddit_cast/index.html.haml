@@ -6,10 +6,10 @@
       %p Loading your channels...
     .details
       %span.channel-details
-        %span.number= @channel_number
-        %span.name= @channel_name
+        %span.number= @locals[:channel_number]
+        %span.name= @locals[:channel_name]
       %span.show-details
-        %span.name= @show_name
+        %span.name= @locals[:show_name]
         %span.duration
     #video
   .toggles
@@ -21,8 +21,11 @@
     %i.next-channel.media-toggle.fa.fa-angle-double-right
   .guide.hidden
     .guide-title Channel Guide
+    .ld.ld-caret-up
     .channels
       -@channels.each_with_index do |channel, idx|
-        .channel
+        .channel{ class: idx==@locals[:index] ? "active" : "" }
+          %i.active-icon.fa.fa-play-circle-o
           %span.channel-number= idx < 9 ? "0#{idx+1}" : idx+1
           %span.channel-name= channel.name
+    .ld.ld-caret-down

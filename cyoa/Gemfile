@@ -15,9 +15,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml'
 gem 'haml-rails'
 gem 'httparty'
-gem 'sidekiq'
-gem 'redis'
-gem 'redis-rails'
+gem 'devise'
 gem 'activerecord-session_store'
 
 group :development, :test do

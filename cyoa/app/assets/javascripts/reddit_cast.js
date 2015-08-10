@@ -28,9 +28,11 @@ function prev_channel() {
   $.get('/prevchannel', {}, update_player);
 }
 function to_channel(event) {
-  var name = $(event.currentTarget).find('.channel-name').html();
+  var $targ = $(event.currentTarget);
+  if($targ.hasClass('active')) return;
+
+  var name = $targ.find('.channel-name').html();
   $.get('/to_channel',{'name': name}, update_player);
-  toggle_guide();
 }
 
 function first_video() {
@@ -38,11 +40,16 @@ function first_video() {
 }
 
 function update_player(player_info) {
-  console.log(player_info);
+  /* update detailed player information */
   $('.player .channel-details .number').html(player_info.channel_number);
   $('.player .channel-details .name').html(player_info.channel_name);
   $('.player .show-details .name').html(player_info.show_name);
   show_details();
+
+  /* udpate active channel on guide */
+  $('.channel.active').removeClass('active');
+  $('.channel:nth-child('+(player_info.index+1)+')').addClass('active');
+  setTimeout(hide_guide, 400);
 
   if(player){
     player.loadVideoById(player_info.show_id);
@@ -95,15 +102,28 @@ function hide_details() {
 
 function toggle_guide() {
   if($('.guide').hasClass('hidden')) {
-    $('.guide').removeClass('hidden');
+    show_guide();
   }
   else {
-    $('.guide').addClass('hidden');
+    hide_guide();
   }
+}
+function show_guide() {
+  $('.guide').removeClass('hidden');
+
+  var channels = $('.channels')[0];
+  if(channels.scrollHeight > channels.clientHeight) {
+    $('.ld').removeClass('hidden');
+  }
+  else {
+    $('.ld').addClass('hidden');
+  }
+}
+function hide_guide() {
+  $('.guide').addClass('hidden');
 }
 
 function onPlayerStateChange(event) {
-  console.log("State change: "+event.data);
   clearTimeout(auto_switch);
 
   switch(event.data) {

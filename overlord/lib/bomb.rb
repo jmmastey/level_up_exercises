@@ -17,6 +17,10 @@ class Bomb
     @disarming_count = 0
   end
 
+  def not_booted?
+    status == 'Not Booted'
+  end
+
   def booted?
     status == 'Booted'
   end
@@ -70,6 +74,7 @@ class Bomb
   def disarm(code)
     if code == disarming_code
       @status = "Disarmed"
+      @disarming_count = 0
     else
       track_count
     end

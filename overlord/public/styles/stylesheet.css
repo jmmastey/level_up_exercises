@@ -1,0 +1,12 @@
+body {
+    background-color: white;
+    background-image: url(images/blueprint.png),
+    url(images/bg_image.jpg);
+    color: white;
+    font-family: Bitstream Vera Sans Mono, monospace;
+}
+
+#wrapper, img {
+    width: 75%;
+    height: 75%;
+}

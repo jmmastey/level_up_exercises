@@ -5,65 +5,13 @@ class Overlord < Sinatra::Base
   enable :sessions
 
   get '/' do
-    if session[:bomb]
+    bomb = Bomb.instance
+    session[:bomb] = bomb
+    if bomb.armed?
       redirect "/disarm_bomb"
     else
-      'Nothing to do here.'
+      erb :outcome
     end
-  end
-
-  def load_session
-    bomb = Bomb.instance
-    session[:bomb] = bomb
-  end
-
-  get '/villain' do
-    load_session
-    erb :villain
-  end
-
-  get '/boot_bomb' do
-    load_session
-    erb :boot_bomb
-  end
-
-  post '/boot_bomb' do
-    bomb = Bomb.instance
-    bomb.boot_bomb
-    bomb.configure_arming_code(params[:arming_code])
-    bomb.configure_disarming_code(params[:disarming_code])
-    session[:bomb] = bomb
-    erb :villain
-  end
-
-  get '/shutdown_bomb' do
-    load_session
-    erb :shutdown_bomb
-  end
-
-  post '/shutdown_bomb' do
-    bomb = Bomb.instance
-    bomb.shutdown
-    session[:bomb] = bomb
-    erb :villain
-  end
-
-  get '/reset_codes' do
-    bomb = Bomb.instance
-    session[:bomb] = bomb
-    if bomb.booted?
-      erb :reset_codes
-    else
-      erb :boot_bomb
-    end
-  end
-
-  post '/reset_codes' do
-    bomb = Bomb.instance
-    bomb.configure_arming_code(params[:arming_code_reset])
-    bomb.configure_disarming_code(params[:disarming_code_reset])
-    session[:bomb] = bomb
-    erb :villain
   end
 
   get '/disarm_bomb' do
@@ -74,7 +22,7 @@ class Overlord < Sinatra::Base
   post '/disarm_bomb' do
     bomb = Bomb.instance
     session[:bomb] = bomb
-    bomb.disarm(params[:disarming_code])
+    bomb.disarm(params[:disarming_code].to_s)
     if bomb.disarmed? || bomb.detonated?
       erb :outcome
     else
@@ -82,17 +30,45 @@ class Overlord < Sinatra::Base
     end
   end
 
-  get '/arm_bomb' do
+  def load_session
     bomb = Bomb.instance
     session[:bomb] = bomb
-    erb :arm_bomb
+  end
+
+  get '/configure_bomb' do
+    load_session
+    erb :configure_bomb
+  end
+
+  post '/boot_bomb' do
+    bomb = Bomb.instance
+    bomb.boot_bomb
+    bomb.configure_arming_code(params[:arming_code].to_s)
+    bomb.configure_disarming_code(params[:disarming_code].to_s)
+    session[:bomb] = bomb
+    erb :configure_bomb
+  end
+
+  post '/shutdown_bomb' do
+    bomb = Bomb.instance
+    bomb.shutdown
+    session[:bomb] = bomb
+    erb :configure_bomb
+  end
+
+  post '/reset_codes' do
+    bomb = Bomb.instance
+    bomb.configure_arming_code(params[:arming_code_reset].to_s)
+    bomb.configure_disarming_code(params[:disarming_code_reset].to_s)
+    session[:bomb] = bomb
+    erb :configure_bomb
   end
 
   post '/arm_bomb' do
     bomb = Bomb.instance
-    bomb.arm(params[:arming_code])
+    bomb.arm(params[:arming_code].to_s)
     session[:bomb] = bomb
-    erb :villain
+    erb :configure_bomb
   end
 
   get '/outcome' do
@@ -100,5 +76,5 @@ class Overlord < Sinatra::Base
     erb :outcome
   end
   # start the server if ruby file executed directly
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

@@ -9,32 +9,16 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-
-    when /the home\s?page/
-      '/'
-    when /the villain\s?page/
-      '/villain'
-    when /boot_bomb\s?page/
-      '/boot_bomb'
-    when /reset_bomb\s?page/
-      '/reset_bomb'
-    when /arm_bomb\s?page/
-      '/arm_bomb'
-    when /disarm_bomb\s?page/
-      '/disarm_bomb'
-    when /shutdown_bomb\s?page/
-      '/shutdown_bomb'
-
-    # Add more mappings here.
-    # Here is an example that pulls values out of the Regexp:
-    #
-    #   when /^(.*)'s profile page$/i
-    #     user_profile_path(User.find_by_login($1))
-
-    else
-      raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
-        "Now, go and add a mapping in #{__FILE__}"
-    end
+      when /the home\s?page/
+        '/'
+      when /configure_bomb\s?page/
+        '/configure_bomb'
+      when /disarm_bomb\s?page/
+        '/disarm_bomb'
+      else
+        raise "Can't find mapping from \"#{page_name}\" to a path.\n" /
+          "Now, go and add a mapping in #{__FILE__}"
+      end
   end
 end
 

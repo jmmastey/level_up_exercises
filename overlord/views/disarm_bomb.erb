@@ -3,18 +3,20 @@
   <title>Disarm Bomb</title>
   <link type="text/css" rel="stylesheet" href="styles/stylesheet.css"/>
 </head>
-<body>
-<h2>Bomb Status: <%= (session[:bomb]).status %> </h2>
-<% if (session[:bomb]).armed? %>
-    <audio controls autoplay hidden>
-      <source src="alarm.mp3" type="audio/ogg">
-    </audio>
-    <%= "<h1> You have #{(session[:bomb]).attempts_remaining} tries left." %>
-    <form method='post' action='/disarm_bomb'>
-      <label for="disarming_code">Enter Bomb Disarming Code:</label>
-      <input type='text' name='disarming_code' id="disarming_code"/>
-      <input type='submit' value='Disarm This Bomb!'/>
-    </form>
-    </body>
-    </html>
+   <body>
+     <div class="centerdiv">
+        <h2>Bomb Status: <%= (session[:bomb]).status %> </h2>
+        <% if (session[:bomb]).armed? %>
+          <audio controls autoplay hidden>
+            <source src="alarm.mp3" type="audio/ogg">
+          </audio>
+        <%= "<h1> You have #{(session[:bomb]).attempts_remaining} tries left." %>
+       <form method='post' action='/disarm_bomb'>
+         <label for="disarming_code">Enter Bomb Disarming Code:</label>
+         <input type='text' name='disarming_code' id="disarming_code"/>
+         <input type='submit' value='Disarm This Bomb!'/>
+       </form>
+     </div>
+   </body>
+</html>
 <% end %>

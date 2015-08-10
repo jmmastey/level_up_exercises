@@ -9,3 +9,8 @@ end
 When(/^I enter (\d+) for "([^"]*)"$/) do |value, field|
   fill_in(field, with: value)
 end
+
+When(/^I enter the wrong code three times$/) do
+  arm_bomb_for_disarming
+  disarm_bomb_second_try
+end

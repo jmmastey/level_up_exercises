@@ -5,27 +5,33 @@
       <title> Hero Page </title>
       </head>
       <body>
+      <div class="centerdiv">
       <h2>Bomb Status: <%= (session[:bomb]).status %> </h2>
 
       <p>You have disarmed the bomb</p>
       <img src="styles/images/hero.png">
+      </div>
       </body>
-  <% elsif (session[:bomb]).not_booted? %>
+  <% elsif (session[:bomb]).not_booted? || (session[:bomb]).booted?%>
       <title>Nothing to do here</title>
 
       <body>
+      <div class="centerdiv">
       <div id="wrapper">
         <img src="styles/images/nothing.jpg">
+      </div>
       </div>
       </body>
   <% else %>
       <title>Loser Page</title>
-
       <body>
+      <div class="centerdiv">
+      <h2>You're dead!</h2>
       <video controls autoplay>
         <source src="explosion.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
+          </div>
       </body>
   <% end %>
   </html>

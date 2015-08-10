@@ -16,8 +16,7 @@ module NavigationHelpers
       when /disarm_bomb\s?page/
         '/disarm_bomb'
       else
-        raise "Can't find mapping from \"#{page_name}\" to a path.\n" /
-          "Now, go and add a mapping in #{__FILE__}"
+        raise "Can't find mapping from \"#{page_name}\" to a path.\n"
       end
   end
 end

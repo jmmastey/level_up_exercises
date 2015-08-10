@@ -4,12 +4,10 @@
   <title>Configure Bomb</title>
 </head>
 <body>
+<div class="centerdiv">
 <h2>Bomb Status: <%= (session[:bomb]).status %> </h2>
-
 <h3>Arming code: <%= (session[:bomb]).arming_code %> </h3>
-
 <h3>Disarming code: <%= (session[:bomb]).disarming_code %> </h3>
-
 <p>Press the button below to boot up your bomb</p>
 <% if session[:bomb].not_booted? || session[:bomb].disarmed? %>
     <form method="post" action="/boot_bomb">
@@ -31,14 +29,17 @@
       <input type="text" name="disarming_code_reset" id="disarming_code_reset" maxlength="4">
       <input type='submit' value='Reset Bomb Codes' id="Reset">
     </form>
+    <% if session[:bomb].booted? %>
     <form method='post' action='/arm_bomb'>
       <label for="arming_code">Enter Bomb Arming Code:</label>
       <input type='text' name='arming_code' id="arming_code"/>
-      <input type='submit' value='Arm This Bomb!'/>
+      <input type='submit' value='Arm This Bomb!' class="redbutton"/>
     </form>
+    <% end %>
 <% end %>
 <form method="post" action="/shutdown_bomb">
   <input type="submit" value='Shutdown Bomb' id="Shutdown Bomb">
 </form>
+</div>
 </body>
 </html>

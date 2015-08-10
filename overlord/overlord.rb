@@ -36,7 +36,8 @@ class Overlord < Sinatra::Base
   end
 
   get '/configure_bomb' do
-    load_session
+    bomb = Bomb.instance
+    session[:bomb] = bomb
     erb :configure_bomb
   end
 
@@ -68,7 +69,7 @@ class Overlord < Sinatra::Base
     bomb = Bomb.instance
     bomb.arm(params[:arming_code].to_s)
     session[:bomb] = bomb
-    erb :configure_bomb
+    redirect :configure_bomb
   end
 
   get '/outcome' do

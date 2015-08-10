@@ -1,4 +1,3 @@
-@reset_bomb_codes
 Feature: Villain resets arming and disarming codes
 
 Scenario: Villain resets the arming code

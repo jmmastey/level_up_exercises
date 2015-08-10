@@ -17,28 +17,26 @@ Feature: Villain Arms Bomb
   Scenario: Villain enters correct arming code
     Given I am on the "configure_bomb" page
     And the bomb is not armed
-    When I enter '0000' for "Enter Bomb Arming Code:"
-    And  I press "Arm This Bomb!" within "arm_bomb"
+    When I enter '0000' for "arming_code"
+    And  I press "Arm This Bomb!" within "configure_bomb"
     Then I should see "Bomb Status: Armed"
 #
   Scenario: Villain enters incorrect arming code
     Given I am on the "configure_bomb" page
     And I have a booted bomb with default values
     And the bomb is not armed
-    When I enter '2222' for "Enter Bomb Arming Code:"
-    And I press "Arm This Bomb!" within "arm_bomb"
+    When I enter '2222' for "arming_code"
+    And I press "Arm This Bomb!" within "configure_bomb"
     Then I should see "Bomb Status: Booted"
 
   Scenario: Villain enters correct arming code
     Given I am on the "configure_bomb" page
     And I have a booted bomb with default values
-    When I enter '0000' for "Enter Bomb Arming Code:"
-    And I press "Arm This Bomb!" within "arm_bomb"
+    When I enter '0000' for "arming_code"
+    And I press "Arm This Bomb!" within "configure_bomb"
     Then I should see "Bomb Status: Armed"
 
   Scenario: Villain configure_bomb an arming code when bomb is armed
-    Given I am on the "arm_bomb" page
+    Given I am on the "configure_bomb" page
     And I have an armed bomb with default values
-    When I enter '0000' for "Enter Bomb Arming Code:"
-    And I press "Arm This Bomb!" within "arm_bomb"
-    Then I should see "Bomb Status: Armed"
+    Then I should not see "Enter Bomb Arming Code:"

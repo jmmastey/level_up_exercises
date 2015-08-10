@@ -16,18 +16,6 @@ Feature: Disarm Bomb
   Scenario: The bomb is armed and I enter the incorrect disarming code
     Given I have an armed bomb ready to disarm
     And I am on the "disarm_bomb" page
-    When I enter '4444' for "disarming_code"
-    And I press "Disarm This Bomb!" within "disarm_bomb"
-    Then I should see "You have 2 tries left."
-
-  Scenario Outline: Three failed disarming attempts
-    Given I have an armed bomb ready to disarm
-    When I enter <code> for "disarming_code"
-    And I press "Disarm This Bomb!" within "disarm_bomb"
-    Then I should see <bomb_status>
-
-    Examples:
-      | code    | bomb_status           |
-      |  1235   | "Bomb Status: Armed"  |
-      |  7777   | "Bomb Status: Armed"  |
-      |  5325   | "You're dead"         |
+    When I enter the wrong code three times
+    Then I should see "You're dead!"
+#

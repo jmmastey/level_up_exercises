@@ -110,7 +110,7 @@ button.list-group-item {
   border-bottom: 1px solid #494949;
 }
 
-.bottom-container > button {
+.bottom-container .col-md-2 > button {
   width: 120px;
   font-weight: bold;
   border-radius: 2px;
@@ -140,6 +140,33 @@ button.list-group-item {
   width: 70px;
   height: 30px;
   text-align: center;
+}
+
+table {
+  color: #ccc;
+  font-size: 0.9em;
+  margin-top: -10px;
+
+  td {
+    border-top: none !important;
+    border-bottom: 1px solid #494949 !important;
+  }
+}
+
+.rest {
+  color: #777777;
+}
+
+table tr td:nth-child(2) {
+  width: 15%;
+}
+
+table tr td {
+  padding: 13px 8px !important;
+}
+
+table tr td:last-child {
+  text-align: right;
 }
 
 .chevrons {

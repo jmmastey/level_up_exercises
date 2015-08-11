@@ -1,0 +1,23 @@
+.row
+  .col.s10.offset-s1
+    -if !@search_params.empty?
+      %h4="#{@num_legislators} legislators found for #{params[:query]}"
+      -if @legislators.any?
+        %table.bordered.clickable.hoverable.responsive-table#results
+          %thead
+            %tr
+              %th Name
+              %th Party
+              %th State
+              %th Website
+          %tbody
+            -@legislators.each do |legislator|
+              -@legislator = legislator
+              %tr{'data-url' => "/legislators/#{legislator.id}"}
+                %td
+                  %p=legislator_name
+                  %p=verbose_summary
+                %td=full_party
+                %td=@legislator.state
+                %td=link_to @legislator.website, @legislator.website, target: '_'
+        = paginate @legislators

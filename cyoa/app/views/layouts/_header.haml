@@ -1,0 +1,29 @@
+.navbar-fixed
+  %nav.blue
+    .nav-wrapper
+      .row
+        .col.s1
+          %a{:href => "/"} Good Deed
+        .col.s3
+          %span=header_text
+        .col.s5
+          =form_tag(params[:controller] == 'legislators' ? '/legislators' : '/bills' , method: :get, id: 'search') do
+            .input-field
+              - if @bill
+                -placeholder_text = @bill.bill_id
+              -elsif @legislator
+                -placeholder_text = legislator_name
+              -elsif params[:search]
+                -placeholder_text = params[:query]
+              -else
+                -placeholder_text = 'keywords like FDA, Banking, Military spending'
+              =text_field_tag :query, params[:query], placeholder: placeholder_text, required: '', type: 'search', autocomplete: 'off'
+        .col.s3
+          %ul.right.hide-on-med-and-down
+            -if current_user
+              %li=link_to "My Account", user_path(current_user)
+              %li=link_to "Bookmarks", bookmarks_path
+              %li=link_to "Logout", destroy_user_session_path, method: :delete
+            -else
+              %li=link_to "Log in", new_user_session_path
+              %li=link_to "Sign up", new_user_registration_path

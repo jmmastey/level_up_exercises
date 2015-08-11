@@ -1,0 +1,20 @@
+%h3 My Account
+%p.summary Based on these fields, we'll find legislators who match your profile
+=form_for(current_user, class: "col s12") do |user_form|
+  =user_form.hidden_field :id, value: current_user.id
+
+  .row
+    .input-field.col.s12
+      =user_form.label :zipcode
+      =user_form.text_field :zipcode
+
+    .input-field.col.s12
+      =user_form.label :email
+      =user_form.text_field :email
+
+    .col.s12
+      =user_form.label :political_party
+      =user_form.select(:political_party, ["Democrat", "Republican", "Independent"], include_blank: true)
+  .row
+    .col.s3
+      %button.blue.btn.waves-effect.waves-light{:name => "action", :type => "submit"} Save Account

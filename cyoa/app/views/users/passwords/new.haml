@@ -1,0 +1,17 @@
+.row
+  .col.s8.offset-s2
+    %h2 Forgot yor password?
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      .row
+        .col.s12
+          .input-field
+            =f.label :email
+            =f.email_field :email, autofocus: true
+
+      .row
+        .col.s12
+          %button.blue.btn.waves-effect.waves-light{:name => "action", :type => "submit"} Send me reset password instructions
+
+      .row
+        .col.s12
+          = render "users/shared/links"

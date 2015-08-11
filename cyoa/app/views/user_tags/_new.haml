@@ -1,0 +1,29 @@
+%h3 Tags
+-if current_user.tags.empty?
+  %h5 No tags! Add some below to help us find bills you'll be interested in
+-else
+  %p.summary Based on these tags, we'll find bills that match your interests
+
+-if current_user.tags.any?
+  %ul.collection.tags
+    -current_user.tags.each do |tag|
+      %li.collection-item{'data-tag-id' => tag.id}
+        %span=tag.name
+        =link_to icon('close'), user_tag_path(tag), remote: true, method: :delete
+
+=form_for(UserTag.new, class: "col s12") do |user_tag_form|
+  .input-field.col.s12
+    =user_tag_form.label :tag_name, "Add another tag"
+    =text_field_tag nil, nil, id: 'tag_name', data: { autocomplete_source: Tag.order(:name).map { |t| { label: t.name, value: t.id } } }
+    =user_tag_form.hidden_field :tag_id
+
+    =user_tag_form.hidden_field :user_id, value: current_user.id
+
+  .row
+  .row
+  .row
+  .row
+    .col.s9
+      %p &nbsp;
+    .col.s3
+      %button.blue.btn.waves-effect.waves-light{:name => "action", :type => "submit"} Add new tag

@@ -43,11 +43,10 @@
       <% @activities.each do |activity| %>
         <div class="feed-item">
         <%= render :partial => 'shared/feed/added_anime',
-                   :locals => { activity: activity } if activity.activity == 'Added' %>
-
+                   :locals => { activity: activity } if activity.added? %>
+        <%= render :partial => 'shared/feed/updated_anime',
+                   :locals => { activity: activity } if activity.updated? %>
         </div>
-
-
       <% end %>
 
     </div>

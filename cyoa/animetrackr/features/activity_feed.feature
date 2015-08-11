@@ -21,6 +21,6 @@ Feature: Activity Feed
     And I am on my profile page
     Then I should see my activity feed saying that I am <status> watching <anime>
     Examples:
-    | anime              | status             |
-    | Wolf's Rain        | Done               |
-    | Michiko to Hatchin | Currently Watching |
+    | anime              | status    |
+    | Wolf's Rain        | Done      |
+    | Michiko to Hatchin | Currently |

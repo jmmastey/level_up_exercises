@@ -100,11 +100,4 @@ RSpec.describe ProfileHelper, type: :helper do
       expect(anime_done_watching(user, 2).size).to be(2)
     end
   end
-
-  describe('#output_activity') do
-    it 'should return added anime_title if activity is added' do
-      activity = create(:new_activity)
-      expect(output_activity(activity)).to eq("Added #{activity.anime.title}")
-    end
-  end
 end

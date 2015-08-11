@@ -1,1 +1,4 @@
-<h4><%= activity.activity + ' ' + activity.anime.title %></h4>
+<img src="<%= activity.anime.cover_image %>" />
+<h4><%= activity.activity %></h4>
+<p><%= distance_of_time_in_words(Time.now, activity.created_at) %> ago</p>
+<p>Rating: <%= output_stars(activity.anime.community_rating) %></p>

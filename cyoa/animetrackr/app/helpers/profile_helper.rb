@@ -40,8 +40,4 @@ module ProfileHelper
   def sort_by_created_date(items)
     items.sort { |a, b| a.created_at <=> b.created_at }
   end
-
-  def output_activity(activity)
-    return "Added #{activity.anime.title}" if activity.activity.eql?('Added')
-  end
 end

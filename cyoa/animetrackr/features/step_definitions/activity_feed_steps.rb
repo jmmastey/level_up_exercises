@@ -34,3 +34,7 @@ end
 Then(/^I should see my activity feed saying that I am Currently watching (.+)$/) do |anime|
   expect(page).to have_content("Currently watching #{anime}")
 end
+
+Then(/^I should see my activity feed saying that I added (.+) to wishlist$/) do |anime|
+  expect(page).to have_content("Added #{anime} to wishlist")
+end

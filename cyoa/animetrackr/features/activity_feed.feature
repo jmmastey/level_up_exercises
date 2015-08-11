@@ -24,3 +24,9 @@ Feature: Activity Feed
     | anime              | status    |
     | Wolf's Rain        | Done      |
     | Michiko to Hatchin | Currently |
+
+  Scenario: Activity feed shows anime moved to wishlist
+    When I am currently watching InuYasha
+    And I change the status of InuYasha to Wishlist
+    And I am on my profile page
+    Then I should see my activity feed saying that I added Inuyasha to wishlist

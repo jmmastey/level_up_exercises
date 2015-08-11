@@ -5,12 +5,6 @@ class Dinosaur
   alias_method :genus=, :name=
   alias_method :weight_in_lbs=, :weight=
 
-  def initialize(args = {})
-    args.each do |key, value|
-      send("#{key.downcase}=", value)
-    end
-  end
-
   def carnivore
     @diet.downcase != "herbivore"
   end
@@ -20,14 +14,33 @@ class Dinosaur
     @diet = "Herbivore" if value.downcase == "no"
   end
 
-  def to_s
-    instance_variables.map do |ivar|
+  def initialize(args = {})
+    args.each do |key, value|
+      send("#{key.downcase}=", value)
+    end
+  end
+
+  def to_hash
+    out = instance_variables.map do |ivar|
       vname = ivar.to_s
       vname[0] = ""
 
       value = instance_variable_get(ivar)
-
-      "#{vname.capitalize}: #{value}" if value
+      [vname, value]
     end
+
+    Hash[out]
+  end
+
+  def to_s
+    out = instance_variables.map do |ivar|
+      vname = ivar.to_s
+      vname[0] = ""
+
+      value = instance_variable_get(ivar)
+      "#{format('%12s', vname.capitalize)}:\t#{value}" if value
+    end
+
+    out.compact.join("\n")
   end
 end

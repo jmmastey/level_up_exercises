@@ -3,7 +3,7 @@ Feature: Bomb status is obvious
   As a super villian
   I want to know whether my bomb is active or inactive
 
-  Scenario Outline: I can tell the bomb is active
+  Scenario Outline: I can tell whether the bomb is active
     Given an <state> bomb
     Then the status field should contain "<state>"
 

@@ -16,6 +16,38 @@ body {
   }
 }
 
+tr:hover {
+  border-left: 2px dotted rgba(68, 68, 68, 0.74902);
+}
+
+footer {
+  margin-left: 250px;
+  color: white;
+
+  .activity {
+    text-align: right
+  }
+
+  .policy {
+    text-align: center;
+  }
+
+  .google-logo {
+    width: 63px;
+    height: 24px;
+    background-image: url(//ssl.gstatic.com/mail/images/google_logo_white_126x48.png);
+    -webkit-background-size: 63px 24px;
+    background-size: 63px 24px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  span {
+    display: block;
+    font-size: 0.8em;
+  }
+}
+
 .container-fluid {
   border-bottom: 1px solid #494949;
   padding: 6px 0;

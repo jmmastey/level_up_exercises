@@ -59,78 +59,83 @@
       </div><!-- /.container-fluid -->
     </nav>
 
+      <div class="container top-container">
+        <div class="col-md-2">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h4>Mail</h4><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Mail</a></li>
+              <li><a href="#">Contacts</a></li>
+              <li><a href="#">Tasks</a></li>
+            </ul>
+          </li>
+        </div>
+        <div class="col-md-10">
+          <div class="header">
+            <ul class="nav nav-pills pull-left">
+               <li class="dropdown">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><input type="checkbox" aria-label="..."><span class="caret"></span></a>
+                 <ul class="dropdown-menu">
+                   <li><a href="#">All</a></li>
+                   <li><a href="#">None</a></li>
+                   <li><a href="#">Read</a></li>
+                   <li><a href="#">Unread</a></li>
+                   <li><a href="#">Starred</a></li>
+                   <li><a href="#">Unstarred</a></li>
+                 </ul>
+               </li>
+              <li><a href="#"><span class="glyphicon glyphicon-repeat"></span></a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Mark as read</a></li>
+                  <li><a href="#">Mark as unread</a></li>
+                  <li><a href="#">Mark as not important</a></li>
+                  <li><a href="#">Add to tasks</a></li>
+                  <li><a href="#">Add star</a></li>
+                  <li><a href="#">Remove star</a></li>
+                  <li><a href="#">Filter messages like these</a></li>
+                  <li><a href="#">Mute</a></li>
+                </ul>
+              </li>
+            </ul>
 
-    <div class="container">
-      <div class="col-md-2">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h3>Mail</h3><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Mail</a></li>
-            <li><a href="#">Contacts</a></li>
-            <li><a href="#">Tasks</a></li>
-          </ul>
-        </li>
-        <button type="button" class="btn btn-default">Compose</button>
-        <div class="list-group">
-          <button type="button" class="list-group-item">Inbox</button>
-          <button type="button" class="list-group-item">Starred</button>
-          <button type="button" class="list-group-item">Sent Mail</button>
-          <button type="button" class="list-group-item">Drafts</button>
-          <button type="button" class="list-group-item">More</button>
+            <ul class="nav nav-pills pull-right">
+              <li class="statistics"><h5>1-5 of 5</h5></li>
+              <li class="chevrons"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+              <li class="chevrons"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header">Display Density</li>
+                  <li><a href="#">Comfortable</a></li>
+                  <li><a href="#">Cozy</a></li>
+                  <li><a href="#">Compact</a></li>
+                  <li><a href="#">Add to tasks</a></li>
+                  <li><a href="#">Add star</a></li>
+                  <li><a href="#">Remove star</a></li>
+                  <li><a href="#">Filter messages like these</a></li>
+                  <li><a href="#">Mute</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="col-md-10">
-        <div class="header">
-          <ul class="nav nav-pills pull-left">
-             <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><input type="checkbox" aria-label="..."><span class="caret"></span></a>
-               <ul class="dropdown-menu">
-                 <li><a href="#">All</a></li>
-                 <li><a href="#">None</a></li>
-                 <li><a href="#">Read</a></li>
-                 <li><a href="#">Unread</a></li>
-                 <li><a href="#">Starred</a></li>
-                 <li><a href="#">Unstarred</a></li>
-               </ul>
-             </li>
-            <li><a href="#"><span class="glyphicon glyphicon-repeat"></span></a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Mark as read</a></li>
-                <li><a href="#">Mark as unread</a></li>
-                <li><a href="#">Mark as not important</a></li>
-                <li><a href="#">Add to tasks</a></li>
-                <li><a href="#">Add star</a></li>
-                <li><a href="#">Remove star</a></li>
-                <li><a href="#">Filter messages like these</a></li>
-                <li><a href="#">Mute</a></li>
-              </ul>
-            </li>
-          </ul>
-
-          <ul class="nav nav-pills pull-right">
-            <li><h6>1-5 of 5</h6></li>
-            <li><span class="glyphicon glyphicon-chevron-left"></span></li>
-            <li><span class="glyphicon glyphicon-chevron-right"></span></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li class="dropdown-header">Display Density</li>
-                <li><a href="#">Comfortable</a></li>
-                <li><a href="#">Cozy</a></li>
-                <li><a href="#">Compact</a></li>
-                <li><a href="#">Add to tasks</a></li>
-                <li><a href="#">Add star</a></li>
-                <li><a href="#">Remove star</a></li>
-                <li><a href="#">Filter messages like these</a></li>
-                <li><a href="#">Mute</a></li>
-              </ul>
-            </li>
-          </ul>
+      <div class="container bottom-container">
+        <div class="col-md-2">
+          <button type="button" class="btn btn-default">COMPOSE</button>
+          <div class="list-group">
+            <button type="button" class="list-group-item">Inbox</button>
+            <button type="button" class="list-group-item">Starred</button>
+            <button type="button" class="list-group-item">Sent Mail</button>
+            <button type="button" class="list-group-item">Drafts</button>
+            <button type="button" class="list-group-item">More</button>
+          </div>
+        </div>
+        <div class="col-md-10">
         </div>
       </div>
-    </div>
 
 
     <!-- build:js(.) scripts/vendor.js -->

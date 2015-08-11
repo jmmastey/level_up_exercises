@@ -12,8 +12,7 @@ Feature: Creating Users
   Scenario: Edit user
     Given I created a user
     And I log in
-    When I edit my 'email' to be 'edit@email.com'
-    And I edit my 'username' to be 'EditTestUser'
-    And I update my profile
-    Then my 'email' should be 'edit@email.com'
-    And  my 'username' should be 'EditTestUser'
+    When I update my email to be 'edit@email.com'
+    And I update my username to be 'EditTestUser'
+    Then my email should be 'edit@email.com'
+    And  my username should be 'EditTestUser'

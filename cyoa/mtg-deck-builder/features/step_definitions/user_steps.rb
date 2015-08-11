@@ -22,12 +22,9 @@ Given(/^I created a user$/) do
   @user = create(:user, password: '123456')
 end
 
-When(/^I edit my (.*) to be (.*)$/) do |field, value|
+When(/^I update my (.*) to be (.*)$/) do |field, value|
   visit("/users/#{@user.id}/edit")
   fill_in "user[#{field}]", with: value
-end
-
-When(/^I update my profile$/) do
   click_button 'Update'
 end
 

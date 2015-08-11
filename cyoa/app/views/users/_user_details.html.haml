@@ -1,0 +1,23 @@
+.jumbotron
+  %h1
+    = @user.username
+  %p
+    = [@user.first_name, @user.last_name].join(" ")
+  - if user_signed_in? && current_user.id == @user.id
+    = link_to "Edit", edit_user_registration_path, class: "btn btn-success"
+
+
+
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      Biography
+  .panel-body
+    - unless @user.biography.blank?
+      = simple_format(@user.biography)
+    - else
+      .panel.panel-danger
+        .panel-body
+          %strong
+            Error:
+          No biography found.

@@ -1,0 +1,8 @@
+= Publishr
+
+Publishr is an ebook sharing platform.  You can easily create an ebook from any remote URL.  Once the remote content has been processed, manually editing of the intermediate markdown allows for full customization of the resulting *.epub files.
+
+== Dependencies
+- Built on Ruby 2.1.1
+- Redis-server must be running to catch and queue ebooks waiting for processing.
+- Sidekiq must be running to process the ebooks in the redis queue

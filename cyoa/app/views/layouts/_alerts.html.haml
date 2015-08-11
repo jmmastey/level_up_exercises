@@ -1,0 +1,11 @@
+.container
+  .row
+    .col-sm-12
+      - flash.each do |type, message|
+        %div{class: "alert #{alert_class_for(type)} alert-dismissible fade in"}
+          %button.close{ :data => { :dismiss => "alert"} }
+            %span{"aria-hidden"=>"true"}
+              = fa_icon "close"
+            %span.sr-only
+              Close
+          = message

@@ -1,0 +1,3 @@
+[submodule "cyoa/publishr"]
+	path = cyoa/publishr
+	url = git@github.com:Tornquist/publishr.git

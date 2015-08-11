@@ -19,7 +19,6 @@ class Cohort
   end
 
   def bad_numeric_arg?(arg_value)
-    return true if arg_value.nil?
     return true unless arg_value.respond_to?(:round)
     return true if arg_value < 0
     return true unless arg_value.round == arg_value

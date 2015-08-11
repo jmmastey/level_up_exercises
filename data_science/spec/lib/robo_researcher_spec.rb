@@ -91,9 +91,11 @@ describe RoboResearcher do
     let(:cohort_a) { Cohort.new(name: "A", views: 200, conversions: 100) }
     let(:cohort_b) { Cohort.new(name: "B", views: 200, conversions: 100) }
     let(:researcher) { RoboResearcher.new }
-    it "is false" do
-      researcher.cohorts = [cohort_a, cohort_b]
-      expect(researcher).not_to be_significant
+    describe "#significant?" do
+      it "is false" do
+        researcher.cohorts = [cohort_a, cohort_b]
+        expect(researcher).not_to be_significant
+      end
     end
   end
 

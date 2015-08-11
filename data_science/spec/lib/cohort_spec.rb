@@ -32,29 +32,30 @@ describe Cohort do
   end
 
   describe "#to_s" do
-    let(:cohort_a) { Cohort.new(name: "A", views: 20, conversions: 18) }
-    it "correctly converts itself to a string" do
-      description = cohort_a.to_s
-      expect(description).to include("Cohort A")
-      expect(description).to include("20 samples")
-      expect(description).to include("18 conversions")
-      expect(description).to include("conversion rate")
-      expect(description).to include("95% confidence")
+    context "when the cohort has a name" do
+      let(:cohort_a) { Cohort.new(name: "A", views: 20, conversions: 18) }
+      it "correctly converts itself to a string" do
+        description = cohort_a.to_s
+        expect(description).to include("Cohort A")
+        expect(description).to include("20 samples")
+        expect(description).to include("18 conversions")
+        expect(description).to include("conversion rate")
+        expect(description).to include("95% confidence")
+      end
+    end
+
+    # sad path tests
+    context "when the cohort does not have a name" do
+      it "correctly converts itself to a string" do
+        description = nameless_cohort.to_s
+        expect(description).to include("Nameless cohort")
+        expect(description).to include("0 samples")
+        expect(description).to include("0 conversions")
+        expect(description).to include("conversion rate")
+        expect(description).to include("95% confidence")
+      end
     end
   end
-
-  # sad path tests
-  describe "#to_s" do
-    it "correctly converts itself to a string" do
-      description = nameless_cohort.to_s
-      expect(description).to include("Nameless cohort")
-      expect(description).to include("0 samples")
-      expect(description).to include("0 conversions")
-      expect(description).to include("conversion rate")
-      expect(description).to include("95% confidence")
-    end
-  end
-
   # bad path tests
   it "raises an error if views is nil" do
     expect { Cohort.new(name: "F", views: nil, conversions: 0) }.to(

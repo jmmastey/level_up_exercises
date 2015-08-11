@@ -3,16 +3,17 @@ class Bomb
 
   NUMBER_OF_TRIES = 3
   def initialize
-    @state_table = { booted: false, activated: false, deactivated: false, exploded: false }
+    @state_table = { booted: false, activated: false,
+                     deactivated: false, exploded: false }
     @a_code_correct = nil
     @d_code_correct = nil
     @count = 0
   end
 
-  def booted(code)
-    if (code.nil?) || (is_number? (code))
-      @state_table[:booted] = true
-    end
+  def booted(_code)
+    # if (code.nil?) || (number? (code))
+    @state_table[:booted] = true
+    # end
   end
 
   def activated(correct_code, d_code, input)
@@ -40,7 +41,7 @@ class Bomb
     @state_table[params]
   end
 
-  def is_number? string
+  def number?(string)
     true if Float(string) rescue false
   end
 end

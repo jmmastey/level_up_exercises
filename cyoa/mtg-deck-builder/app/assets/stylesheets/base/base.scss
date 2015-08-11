@@ -16,6 +16,7 @@
 }
 
 #wrapper {
+  position: relative;
   padding: 20px 50px;
 }
 
@@ -50,6 +51,12 @@ $panel_h2_padding: 10px;
     padding-bottom: $panel_h2_padding;
     border-bottom: 1px solid #eee;
   }
+}
+
+.divide {
+  background-color: white;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
 }
 
 .btn {

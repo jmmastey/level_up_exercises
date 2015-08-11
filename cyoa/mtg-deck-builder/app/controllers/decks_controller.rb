@@ -16,6 +16,11 @@ class DecksController < ApplicationController
     end
   end
 
+  def edit
+    @cards = Card.paginate(page: params[:page], per_page: 100)
+    @deck = Deck.find(params[:id])
+  end
+
   def destroy
   end
 

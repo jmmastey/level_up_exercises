@@ -52,6 +52,13 @@ $panel_h2_padding: 10px;
   }
 }
 
+.sidebar {
+  &.left {
+    float: left;
+    margin-right: 10px;
+  }
+}
+
 .btn {
   position: relative;
   padding: 10px 30px;

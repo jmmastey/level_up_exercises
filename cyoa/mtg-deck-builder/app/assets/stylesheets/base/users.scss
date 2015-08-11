@@ -1,5 +1,5 @@
 .user-profile {
-  float: left;
+  // float: left;
   width: 210px;
   margin-right: 20px;
 
@@ -14,26 +14,33 @@
 
 .user-decks {
   position: relative;
-  float: left;
 
-  .decks {
+  .decks {}
+
+  .user-deck {
     overflow: hidden;
   }
 
-  .user-deck {}
-
   .deck-name {
     float: left;
-    width: 315px;
+    width: 304px;
     margin-bottom: 5px;
+  }
+
+  .btn {
+    border: 1px solid #eee;
+    &:hover {
+      box-shadow: none;
+    }
   }
   .new {
     position: absolute;
-    top: $panel_padding + $panel_h2_padding;
+    top: $panel_padding + $panel_h2_padding - 1;
     right: $panel_padding;
   }
   .edit {
     float: right;
+    margin-right: 5px;
   }
   .destroy {
     float: right;

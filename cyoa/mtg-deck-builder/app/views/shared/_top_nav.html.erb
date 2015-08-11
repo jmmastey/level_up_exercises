@@ -1,0 +1,12 @@
+<nav>
+  <%= link_to "Home", root_path, class: "btn" %>
+  <%= link_to "Help", help_path, class: "btn" %>
+  <%= link_to "About", about_path, class: "btn" %>
+  <% if logged_in? %>
+    <%= link_to "Profile", current_user, class: "btn" %>
+    <%= link_to "Log Out", logout_path, method: :delete, class: "btn" %>
+  <% else %>
+    <%= link_to "Sign Up", signup_path, class: "btn" %>
+    <%= link_to "Log In", login_path, class: "btn" %>
+  <% end %>
+</nav>

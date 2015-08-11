@@ -1,0 +1,8 @@
+<p><%= f.text_field :username, placeholder: user.username %></p>
+<p><%= f.email_field :email, placeholder: user.email %></p>
+<br>
+<!-- <p><%= f.password_field :old_password, placeholder: "Old Password" %></p> -->
+<p><%= f.password_field :password, placeholder: "New Password" %></p>
+<p><%= f.password_field :password_confirmation, placeholder: "New Password Confirmation" %></p>
+<br>
+<%= f.submit "Update", class: "btn", name: "update" %>

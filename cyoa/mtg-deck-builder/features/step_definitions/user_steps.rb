@@ -21,3 +21,11 @@ end
 Given(/^I created a user$/) do
   @user = create(:user, password: '123456')
 end
+
+When(/^I edit my email to be '(.*)'$/) |email| do
+  pending
+end
+
+Then(/^my email should be '(.*)'$/) |email| do
+  pending
+end

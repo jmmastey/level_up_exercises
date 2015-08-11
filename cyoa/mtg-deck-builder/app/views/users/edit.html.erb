@@ -1,0 +1,8 @@
+<% provide(:title, "Edit user: #{@user.username}") %>
+<%= render 'shared/error_messages', obj: @user %>
+<div class="panel form">
+  <h2>Edit User</h2>
+  <%= form_for(@user) do |f| %>
+    <%= render "shared/user_edit_form", f: f, user: @user %>
+  <% end %>
+</div>

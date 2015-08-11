@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update]
   def show
     @user = User.find(session[:user_id])
     @decks = @user.decks.paginate(page: params[:page])
@@ -7,6 +7,20 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+  end
+
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if @user.update_attributes(user_params)
+      flash[:success] = "Awesome! Your profile has been updated."
+      redirect_to @user
+    else
+      render 'edit'
+    end
   end
 
   def create

@@ -6,7 +6,7 @@ def log_in(user, password)
 end
 
 When(/^I log in$/) do
-  login(@user, "123456")
+  log_in(@user, "123456")
 end
 
 Then(/^I should see my user profile$/) do

@@ -22,10 +22,13 @@ Given(/^I created a user$/) do
   @user = create(:user, password: '123456')
 end
 
-When(/^I edit my email to be '(.*)'$/) |email| do
-  pending
+When(/^I edit my email to be (.*)$/) do |email|
+  visit("/users/#{@user.id}/edit")
+  fill_in 'user[email]', with: email
+  click_button 'Update'
 end
 
-Then(/^my email should be '(.*)'$/) |email| do
-  pending
+Then(/^my email should be (.*)$/) do |email|
+  visit("/users/#{@user.id}/edit")
+  expect(find_field('user[email]').value).to eq(email)
 end

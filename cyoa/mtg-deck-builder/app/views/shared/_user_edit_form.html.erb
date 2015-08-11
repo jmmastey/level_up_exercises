@@ -1,8 +1,7 @@
-<p><%= f.text_field :username, placeholder: user.username %></p>
-<p><%= f.email_field :email, placeholder: user.email %></p>
+<p><%= f.text_field :username, placeholder: user.username, tabindex: 1 %></p>
+<p><%= f.email_field :email, placeholder: user.email, tabindex: 2 %></p>
 <br>
-<!-- <p><%= f.password_field :old_password, placeholder: "Old Password" %></p> -->
-<p><%= f.password_field :password, placeholder: "New Password" %></p>
-<p><%= f.password_field :password_confirmation, placeholder: "New Password Confirmation" %></p>
+<p><%= f.password_field :password, placeholder: "New Password", tabindex: 3 %></p>
+<p><%= f.password_field :password_confirmation, placeholder: "New Password Confirmation", tabindex: 4 %></p>
 <br>
-<%= f.submit "Update", class: "btn", name: "update" %>
+<%= f.submit "Update", class: "btn", name: "update", tabindex: 5 %>

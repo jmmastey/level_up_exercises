@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   def show
-    @user = User.find(session[:user_id])
+    @user = User.find(params[:id])
     @decks = @user.decks.paginate(page: params[:page])
   end
 

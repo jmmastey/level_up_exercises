@@ -2,19 +2,19 @@
 %html
   %head
     %title Overlord
-    %link{:rel => 'stylesheet', :type => 'text/css', :href => '/stylesheets/styles.css'}
-    %link{:rel => 'stylesheet', :type => 'text/css', :href => '/stylesheets/bomb.css'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/stylesheets/styles.css'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/stylesheets/bomb.css'}
   %body
     %section
     .wrapperOutside
       .wrapperInside
-        .status-activated Activated
-        .status-booted Booted
-        .status-deactivated Deactivated
-
-        / %ul.input-list.style-1.clearfix
-        /   %li
         .buttonContainer
+          .count 
+          .status-activated Activated
+          .status-booted Booted
+          .status-deactivated Deactivated
+          .status-exploded Exploded
+          .status-notbooted Not Booted
           .bomb-booted
             = haml :bomb_booted
           .bomb-activated

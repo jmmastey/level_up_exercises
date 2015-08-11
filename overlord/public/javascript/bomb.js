@@ -9,10 +9,11 @@ $(document).ready(function() {
             data: code,
         }).success(function(data) {
             $.get('/boot', function(boot) {
-                if(boot == "true"){
+                if (boot == "true") {
                     $(".status-booted").show('slide');
-                } 
+                }
             });
+            $(".status-notbooted").hide('slide');
             $("#input-deactivate").hide('slide', function() {
                 $("#input-activate").hide('slide', function() {
                     $(".bomb-activated").show('slide');
@@ -26,87 +27,75 @@ $(document).ready(function() {
 
     function activateBomb(code) {
         $("#submit-bomb").click(code, function() {
-                var code_converted = code.split('&');
-                var a_code = code_converted[0].split('=')[1];
-                var d_code = code_converted[1].split('=')[1];
-                var activate = $('input[name=activate]').val();
-                if (a_code == "" || a_code == null) {
-                    a_code = 1234;
-                }
-                if (d_code == "" || d_code == null) {
-                    d_code = "0000";
-                }
-                if (activate != a_code) {
-                    try_activation(activate, a_code);
-                }
-                $.ajax({
-                    type: "POST",
-                    url: '/activate',
-                    data: {
-                        a_code, activate, d_code
-                    },
-                }).success(function(data) {
-                    $.get('/activate', function(activate_status) {
-                        console.log(activate_status);
-                        try_activation(activate, a_code);
+            var code_converted = code.split('&');
+            var a_code = code_converted[0].split('=')[1];
+            var d_code = code_converted[1].split('=')[1];
+            var activate = $('input[name=activate]').val();
+            console.log(activate);
+            $.ajax({
+                type: "POST",
+                url: '/activate',
+                data: {
+                    a_code, activate, d_code, code
+                },
+            }).success(function(data) {
+                $.get('/activate', function(activate_status) {
+                    $("#activate-bomb").hide('slide', function() {
+                        $("#submit-bomb").hide('slide', function() {
+                            if (activate_status == "true") {
+                                $(".bomb-deactivated").show('slide');
+                                $("#countdown").show('slide').delay(20000).hide('slide', function() {
+                                    var status =  $(".status-exploded").show('slide');
+                                    bombStatus(status);
+                                });
+                                $(".status-booted").hide('slide');
+                                $(".status-activated").show('slide');
+                            } else {
+                                $("#activate-bomb").show('slide');
+                                $("#submit-bomb").show('slide');
+                                activateBomb(code);
+                            }
+                        });
                     });
-                    deactivateBomb(0, a_code, d_code);
-                }).done();
+                });
+                deactivateBomb(0);
+            }).done();
             return false;
         });
-}
+    }
 
-function try_activation(activate, a_code) {
-    $("#activate-bomb").hide('slide', function() {
-        $("#submit-bomb").hide('slide', function() {
-            if (activate == a_code) {
-                console.log(activate);
-                $(".bomb-deactivated").show('slide');
-                $("#countdown").show('slide');
-            } else {
-                $("#activate-bomb").show('slide');
-                $("#submit-bomb").show('slide');
-            }
+    function deactivateBomb(numberOftries) {
+        $("#try-bomb").click(function() {
+            var deactivate = $('input[name=deactivate]').val();
+            $.ajax({
+                type: "POST",
+                url: '/deactivate',
+                data: {deactivate},
+            }).success(function(data) {
+                $.get('/deactivate', function(deactivate_status) {
+                    deact_status = deactivate_status.split("&")[0];
+                    exploded_status = deactivate_status.split("&")[1];
+                    count = "Tries: " + deactivate_status.split("&")[2];
+                    $(".count").html(count);
+                    if (deact_status == "true" && exploded_status == "false") {
+                        var status = $(".status-deactivated").show('slide');
+                        bombStatus(status);
+                    } else if (deact_status == "false" && exploded_status == "true") {
+                        var status =  $(".status-exploded").show('slide');
+                        bombStatus(status);
+                    } else {
+                        deactivateBomb(numberOftries);
+                    }
+                });
+            }).done();
+            return false;
         });
-    });
-}
+    }
 
-function deactivateBomb(numberOftries, a_code, d_code) {
-    $("#try-bomb").click({
-        a_code, d_code
-    }, function() {
-        // var a_code = $('input[name=a_code]').val();
-        var deactivate = $('input[name=deactivate]').val();
-        console.log("a_code", a_code);
-        console.log(d_code);
-        // console.log(d_code);
-        // console.log(deactivate);
-        $.ajax({
-            type: "POST",
-            url: '/deactivate',
-            data: {
-                d_code, deactivate
-            },
-        }).success(function(data) {
-            // console.log(d_code);
-            if (numberOftries <= 3) {
-                if (d_code != deactivate) {
-                    numberOftries += 1;
-                    deactivateBomb(numberOftries, d_code);
-                } else if (d_code == deactivate) {
-                    $("#countdown").hide('slide');
-                }
-            } else {
-                explodeBomb();
-            }
-        }).done();
-        return false;
-    });
-}
-
-function explodeBomb() {
-    alert("The Bomb Exploded");
-}
+    function bombStatus(status) {
+        $(".status-activated").hide('slide');
+        $(".bomb-activated").hide('slide');
+        $(".bomb-deactivated").hide('hide');
+        status.show('slide');
+    }
 });
-// $(".bomb-wrapper").show();
-// $('#buttonTwo').hide('slide', {direction: 'left'}, 1000);

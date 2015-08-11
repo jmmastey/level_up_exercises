@@ -14,9 +14,14 @@ section {
 }
 
 .status-booted {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 36px;
+  text-align: center;
+  letter-spacing: 1px;
+  border: none;
   display: none;
 }
-
 .status-activated {
   display: none;
 }
@@ -25,6 +30,9 @@ section {
   display: none;
 }
 
+.status-exploded {
+  display: none;
+}
 .wrapperOutside {
    display: table;
    width: 100vw;
@@ -32,9 +40,11 @@ section {
 }
 
 .wrapperInside {
-   display: table-cell;
-   text-align: center;
-   vertical-align: middle;
+  font-family: sans-serif;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
 }
 
 .buttonContainer {
@@ -48,7 +58,7 @@ section {
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 0;    
+  margin-bottom: 0;
 }
 
 .bomb-button {
@@ -65,9 +75,9 @@ section {
   font-weight: 500;
   font-size: 14px;
   color: rgba(0,0,0,0.9);
-  line-height: 36px;    
+  line-height: 36px;
   text-align: center;
-  letter-spacing: 1.px;     
+  letter-spacing: 1.px;
   padding-top: 0;
   padding-left: 8px;
   padding-right: 8px;
@@ -96,5 +106,3 @@ input[type="submit"]#submit-bomb:hover {
   color: black;
   cursor: pointer;
 }
-
-

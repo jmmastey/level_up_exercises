@@ -6,8 +6,9 @@ ruby "2.0.0"
 gem "sinatra"
 gem 'haml'
 gem 'sass'
-gem 'cucumber'  
-gem 'rspec'  
-gem 'webrat'  
+gem 'cucumber'
+gem 'rspec'
+gem 'webrat'
 gem 'capybara'
 gem 'compass'
+gem 'selenium-webdriver'

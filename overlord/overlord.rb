@@ -1,12 +1,6 @@
 # run `ruby overlord.rb` to run a webserver for this app
 
 require 'sinatra'
-require_relative 'lib/bomb'
-
-enable :sessions
-# run `ruby overlord.rb` to run a webserver for this app
-
-require 'sinatra'
 
 enable :sessions
 

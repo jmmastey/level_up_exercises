@@ -2,30 +2,46 @@ class RedditCastController < ApplicationController
   before_action :authenticate_user!
 
   def next_show
-    channel.next_show
-    save_channel
+    if(session[:channel_count] != 0)
+      channel.next_show
+      save_channel
+    end
     render json: locals
   end
 
   def prev_show
-    channel.prev_show
-    save_channel
+    if(session[:channel_count] != 0)
+      channel.prev_show
+      save_channel
+    end
     render json: locals
   end
 
   def next_channel
-    session[:channel_idx]  = (session[:channel_idx] + 1) % session[:channels].count
+    if(session[:channel_count] == 0)
+      session[:channel] = 0
+    else
+      session[:channel]  = (session[:channel] + 1) % session[:channel_count]
+    end
     render json: locals
   end
 
   def prev_channel
-    session[:channel_idx]  = (session[:channel_idx] - 1) % session[:channels].count
+    if(session[:channel_count] == 0)
+      session[:channel] = 0
+    else
+      session[:channel]  = (session[:channel] - 1) % session[:channel_count]
+    end
     render json: locals
   end
 
   def to_channel
-    session[:channel_idx] = session[:channels].index do |ch|
-      ch.name == params[:name]
+    if(session[:channel_count] == 0)
+      session[:channel] = 0
+    else
+      session[:channel] = current_user.channels.index do |ch|
+        ch.name == params[:name]
+      end    
     end
     render json: locals
   end
@@ -35,22 +51,32 @@ class RedditCastController < ApplicationController
   end
 
   def index
-    session[:channels] = current_user.channels
-    session[:channel_idx] = 0
-    @channels = session[:channels]
+    session[:channel] = 0
+    @channels = current_user.channels
+    session[:channel_count] = @channels.count
     @locals = locals
   end
 
   private
 
   def locals
-    { 
-      channel_name: channel_name, 
-      channel_number: channel_number, 
-      show_id: show_id,
-      show_name: show_name,
-      index: session[:channel_idx]
-    }
+    if(session[:channel_count] != 0)
+      { 
+        channel_name: channel_name, 
+        channel_number: channel_number, 
+        show_id: show_id,
+        show_name: show_name,
+        index: session[:channel]
+      }
+    else 
+      { 
+        channel_name: "RedditCast", 
+        channel_number: "00", 
+        show_id: "",
+        show_name: "Open the guide to create a channel",
+        index: 0
+      }
+    end
   end
 
   def save_channel
@@ -59,7 +85,7 @@ class RedditCastController < ApplicationController
   end
 
   def channel
-    session[:channels][session[:channel_idx]]
+    current_user.channels[session[:channel]]
   end
 
   def channel_name
@@ -67,7 +93,7 @@ class RedditCastController < ApplicationController
   end
 
   def channel_number
-    num = session[:channel_idx] + 1
+    num = session[:channel] + 1
     "#{num < 10 ? '0' : ''}#{num}"
   end
 

@@ -6,6 +6,8 @@ Channel.delete_all
 SearchSet.delete_all
 Search.delete_all
 Show.delete_all
+User.delete_all
+UserChannel.delete_all
 
 puts "(2) Reading in json file..."
 channel_information = open('channels.json', &:read)
@@ -16,7 +18,6 @@ puts "(3) Building channels..."
   puts "\tCreating channel #{json['name']}..."
 
   channel = Channel.new.init_from_http(json['name'], json['queries'], true)
-  channel.next
   channel.search_set.save
   channel.search_set.searches.each(&:save)
 end

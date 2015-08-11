@@ -4,7 +4,7 @@ class SearchSet < ActiveRecord::Base
   LIMIT = 20
 
   def init_from_http(queries)
-    self.listing = -1
+    self.listing = 0
 
     limit = LIMIT / queries.count
     queries.each do |search_query|
@@ -28,7 +28,7 @@ class SearchSet < ActiveRecord::Base
   end
 
   def previous?
-    self.listing > -1
+    self.listing > 0
   end
 
   def next

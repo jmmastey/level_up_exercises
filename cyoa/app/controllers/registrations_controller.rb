@@ -5,6 +5,8 @@ class RegistrationsController < Devise::RegistrationsController
     Channel.where(default: true).each do |ch|
       current_user.channels << ch
     end
+    current_user.last_channel = 0
+    current_user.save
 
     '/'
   end

@@ -6,7 +6,7 @@ class Search < ActiveRecord::Base
 
   def init_from_http(search_query, limit)
     self.after, self.before = '', ''
-    self.listing = -1
+    self.listing = 0
     self.query = search_query
     @limit = limit
     load_results_page
@@ -18,7 +18,7 @@ class Search < ActiveRecord::Base
   end
 
   def previous?
-    self.listing > -1
+    self.listing > 0
   end
 
   def has_post?

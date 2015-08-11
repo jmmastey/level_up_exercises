@@ -1,5 +1,6 @@
 class Show < ActiveRecord::Base
   belongs_to :search
+  validates_uniqueness_of :youtubeid, scope: :search_id
 
   def short_title
     short = self.title[0..50]

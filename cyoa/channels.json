@@ -16,9 +16,6 @@
       "funny standup",
       "hilarious comedian"
     ]},
-    { "name" : "World News", "queries" : [
-      "/r/worldnews"
-    ]},
     { "name" : "Animals", "queries" : [
       "animal planet",
       "zoo animal",
@@ -35,12 +32,12 @@
     { "name" : "Game Show", "queries" : [
       "Jeopardy",
       "Who wants to be a millionaire",
-      "deal or no deal",
+      "gameshow",
       "wheel of fortune"
     ]},
     { "name" : "Classical Music", "queries" : [
       "Chopin",
-      "Rachmaninov",
+      "Rachmaninov piano",
       "Mozart piano"
     ]}
   ]

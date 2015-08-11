@@ -1,5 +1,3 @@
-@import url('montserrat.css');
-
 html, body {
   margin: 0px;
   padding: 0px;
@@ -57,7 +55,7 @@ p.notice {
     margin: 20% auto;
     cursor: default;
     img {
-      width: 400px;
+      width: 600px;
     }
     p {
       color: #ccc;
@@ -73,7 +71,7 @@ p.notice {
     top: 5%;
     left: 3%;
     width: 94%;
-    height: 85%;
+    height: 86%;
     box-shadow: 0px 0px 2px black;
 
     z-index: 15;
@@ -116,13 +114,12 @@ p.notice {
     }
   }
   .show-details {
-    font-size: 30px;
+    font-size: 20px;
     color: white;
     text-shadow: 0px 0px 1px black;
     float: right;
-    padding-top: 10px;
-    padding-right: 10px;
-    max-width: 40%;
+    padding: 20px 10px;
+    max-width: 50%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -155,8 +152,17 @@ p.notice {
   .prev-show { left: 35%; }
   .next-show { right: 35%; }
   .loading {
-    left: 100px;
-    bottom: 40px;
+    display: none;
+    position: absolute;
+    bottom: 3.5%;
+    color: white;
+    .ld {
+      left: 5%;
+      margin-top: -19px;
+    }
+    span { margin-left: 35px; }
+    &.loading-show { right: 5%; }
+    &.loading-new-channel { left: 5%; }
   }
 }
 .guide-button {
@@ -234,7 +240,7 @@ p.notice {
     padding: 5px;
   }
   .channels {
-    max-height: 92%;
+    max-height: 88%;
     overflow-y: scroll;
     position: relative;
   }
@@ -244,7 +250,7 @@ p.notice {
       top: 90px;
     }
     &.ld-caret-down {
-      top: 98%;
+      top: 93%;
     }
     &:before,
     &:after {
@@ -253,12 +259,28 @@ p.notice {
     }
     &.hidden { display: none; }
   }
+  .new-channel {
+    color: white;
+    background: #1b5;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 90%;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 1%;
+    left: 5%;
+    &:hover {
+      background: #2c6;
+    }
+  }
   &.hidden {
     margin-left: -400px;
   }
 }
 .channel {
   padding: 10px 20px;
+  padding-left: 5px;
   text-align: left;
   white-space: nowrap;
   border-bottom: 1px solid #444;
@@ -269,6 +291,9 @@ p.notice {
     color: white;
     font-size: 30px;
     vertical-align: middle;
+    display: inline-block;
+    min-width: 40px;
+    text-align: center;
   }
   .channel-name {
     color: #ccc;
@@ -278,20 +303,67 @@ p.notice {
     vertical-align: middle;
     font-style: italic;
   }
+  .fa { vertical-align: middle;}
   .active-icon{ 
     display: none; 
     color: wheat;
     font-size: 42px;
-    vertical-align: middle;
+    min-width: 40px;
+  }
+  .delete-icon {
+    color: #666;
+    padding: 5px;
+    font-size: 18px;
+    &:hover { color: #ccc; }
   }
   &.active {
     background: black;
     .channel-name { color: wheat; }
     .channel-number { display: none; }
-    .active-icon{ display: initial; }
+    .active-icon{ display: inline-block; }
   }
   &:hover {
     background: #444;
+  }
+}
+
+/***************************
+         NEW CHANNEL
+***************************/
+.player-dialog {
+  position: absolute;
+  z-index: 50;
+  width: 30%;
+  top: 25%;
+  left: 50%;
+  color: white;
+  margin-left: -16%;
+  background: #222;
+  padding: 20px;
+  display: none;
+
+  input[type="text"] {
+    padding: 10px;
+    width: 75%;
+    border: 1px solid #222;
+    font-size: 18px;
+    outline: none;
+    background: #333;
+    color: white;
+  }
+  input[type="button"],
+  input[type="submit"] {
+    background: #08a;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: inline-block;
+    &:hover {
+      background: #19b;
+    }
   }
 }
 
@@ -322,5 +394,9 @@ p.notice {
   }
   .toggles .guide-button {
     bottom: 2%;
+  }
+  .guide {
+    .channels { max-height: 85%; }
+    .new-channel { bottom: 5px; }
   }
 }

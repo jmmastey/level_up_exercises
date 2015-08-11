@@ -16,8 +16,92 @@ body {
   }
 }
 
+.account-menu {
+  width: 250px;
+  margin-right: 25px
+}
+
+.account-management span, .account-summary span {
+  display: block;
+}
+
+.black {
+  color: black;
+}
+
+.account-summary {
+  padding: 10px 20px;
+  button {
+    border-radius: 2px;
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.account-management {
+  background: #fef9db;
+  font-size: 11px;
+  padding: 10px 20px;
+  white-space: normal;
+}
+
+.account-settings {
+  background: #f5f5f5;
+  border-top: 1px solid #ccc;
+  border-color: rgba(0,0,0,.2);
+  padding: 10px 20px;
+  width: 100%;
+  display: table;
+  button:first-child {
+    margin-right: 10px;
+  }
+
+  button {
+    border-radius: 2px;
+  }
+}
+
+.my-account {
+  background: -webkit-linear-gradient(top,#4387fd,#4683ea);
+  color: white;
+}
+
+.account-summary span:last-child a {
+  color: #36c;
+  &:hover {
+    text-decoration: underline;
+    color: white;
+  }
+}
+
 tr:hover {
   border-left: 2px dotted rgba(68, 68, 68, 0.74902);
+}
+
+tr.highlight {
+  color: white;
+  background-color: #aaaaaa;
+}
+
+.app-menu {
+  height: 400px !important;
+  width: 300px;
+}
+
+.notification-menu {
+  background-color: #e5e5e5;
+  width: 400px;
+  height: 400px !important;
+
+  h4 {
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+.notifications, .apps {
+  width: 50px;
 }
 
 footer {
@@ -255,6 +339,10 @@ nav > li > a {
   &:hover, &:focus{
     background-color: inherit;
   }
+}
+
+.navbar-right {
+  margin-top: 10px;
 }
 
 .navbar-right > li > a {

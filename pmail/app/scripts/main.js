@@ -1,2 +1,5 @@
 // jshint devel:true
-console.log('\'Allo \'Allo!');
+
+$('table input:checkbox').click(function() {
+  $(this).closest('tr').toggleClass('highlight')
+})

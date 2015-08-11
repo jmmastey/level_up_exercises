@@ -44,14 +44,35 @@
           </form>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-th"></span></a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+            <li class="dropdown apps">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-th"></span></a>
+              <ul class="dropdown-menu app-menu">
+              </ul>
+            </li>
+            <li class="dropdown notifications">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell"></span></a>
+              <ul class="dropdown-menu notification-menu">
+                <h4>Google notifications</h4>
+              </ul>
+            </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>ssapra@enova.com</span> <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">My Account</a></li>
-                <li><a href="#">Add Account</a></li>
-                <li><a href="#">Logout</a></li>
+              <ul class="dropdown-menu account-menu">
+                <div class="account-management"
+                  <span>This account is managed by enova.com.</span>
+                  <span><a href="#">Learn more</a><span>
+                </div>
+                <div class="account-summary">
+                  <span class="black">Shaan Sapra</span>
+                  <span class="email black">ssapra@enova.com</span>
+                  <span><a href="#">Privacy</a></span>
+                  <button type="button" class="btn btn-default my-account">My Account</button>
+                </div>
+
+                <div class="account-settings">
+                  <button type="button" class="btn btn-default">Add Account</button>
+                  <button type="button" class="btn btn-default">Logout</button>
+                </div>
               </ul>
             </li>
           </ul>

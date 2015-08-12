@@ -1,3 +1,11 @@
+## Setup
+
+```
+npm install
+bower install
+grunt serve
+```
+
 ## PeteMail
 
 Hot off his last two victories, Peteshow and Petelab, our favorite protagonist is looking for more industries to revolutionize. Frustrated with the existing level of vim keybinding support in his mail client, it's time to introduce Pmail. Unfortunately, Pete's dotfiles are acting up again, so you're going to need to write the UI while he fiddles with them.

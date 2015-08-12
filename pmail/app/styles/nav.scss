@@ -39,7 +39,7 @@
   width: 100%;
   display: table;
   button:first-child {
-    margin-right: 30px;
+    margin-right: 14%;
   }
 }
 
@@ -78,17 +78,6 @@
 .navbar-form {
   margin-top: 10px;
   width: 50%;
-}
-
-.blue-button {
-  background: -webkit-linear-gradient(top,#4387fd,#4683ea);
-  color: white;
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius:2px;
-  border: 0 !important;
-  height: 30px;
 }
 
 .navbar {

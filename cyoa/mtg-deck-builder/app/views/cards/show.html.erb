@@ -1,0 +1,5 @@
+<% provide(:title, "Card: #{@card.name}") %>
+<div class="panel card-info">
+  <h2><%= @card.name %></h2>
+  <%= image_tag(@card.image_url, :alt => @card.name) %>
+</div>

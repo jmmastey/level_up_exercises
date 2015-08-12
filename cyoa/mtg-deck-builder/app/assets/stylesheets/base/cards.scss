@@ -1,2 +1,55 @@
-.all-cards {}
-.card {}
+.divide.search-for-deck {
+  h2 {
+    margin-bottom: 10px;
+  }
+}
+.all-cards {
+  table {
+    width: 100%;
+  }
+}
+.card {
+  border-bottom: 1px solid #ddd;
+  &:nth-child(even) {
+    background: darken(white, 5%);
+  }
+  td {
+    padding: 10px;
+  }
+}
+.card-info {
+  text-align: center;
+}
+.divide.cards {
+  padding: 0px;
+  table {
+    width: 100%;
+    th {
+      padding: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+  .card {}
+  .number-in-deck {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .add,
+  .remove {
+    img {
+      width: 10px;
+      &:hover {
+        @include opacity(0.5);
+      }
+    }
+  }
+  .deck-stats {}
+}
+
+.mana-cost {
+  font: normal normal normal 14px/1 Mana;
+  i {
+    margin-left: 2px;
+  }
+}

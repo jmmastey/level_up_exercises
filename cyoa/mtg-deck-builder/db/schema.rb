@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810152846) do
+ActiveRecord::Schema.define(version: 20150812192100) do
 
   create_table "cards", force: :cascade do |t|
     t.string  "name"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20150810152846) do
     t.integer "power"
     t.integer "toughness"
     t.string  "image_url"
+  end
+
+  create_table "cards_decks", id: false, force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "deck_id"
+    t.integer "number_in_deck", default: 0
   end
 
   create_table "decks", force: :cascade do |t|

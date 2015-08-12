@@ -29,4 +29,4 @@ Feature: Activity Feed
     When I am currently watching InuYasha
     And I change the status of InuYasha to Wishlist
     And I am on my profile page
-    Then I should see my activity feed saying that I added Inuyasha to wishlist
+    Then I should see my activity feed saying that I added InuYasha to wishlist

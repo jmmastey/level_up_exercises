@@ -1,5 +1,6 @@
 class DecksController < ApplicationController
   def show
+    @deck = Deck.find(params[:id])
   end
 
   def new
@@ -17,7 +18,7 @@ class DecksController < ApplicationController
   end
 
   def edit
-    @cards = Card.paginate(page: params[:page], per_page: 100)
+    @cards = Card.search_by_name(params[:cardname]).paginate(page: params[:page], per_page: 100)
     @deck = Deck.find(params[:id])
   end
 

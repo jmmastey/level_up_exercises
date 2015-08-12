@@ -1,20 +1,14 @@
 <% provide(:title, "Brewing Your Deck") %>
-<div class="divide in-your-deck">
-  <h2>Currently in your deck</h2>
-  <%= render @deck.cards, deck: @deck %>
+<div class="divide your-deck">
+  <h2>Editing: <%= @deck.name %></h2>
 </div>
+
+<%= render 'show_deck', deck: @deck %>
 
 <div class="divide search-for-deck">
   <h2>Search</h2>
+  <%= render 'shared/card_search', action: edit_deck_path(@deck) %>
 </div>
 <div class="divide cards">
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Types</th>
-      <th>Mana Cost</th>
-      <th>Add/Remove</th>
-    </tr>
-    <%= render @cards, deck: @deck %>
-  </table>
+  <%= render 'shared/cards_search_results', deck: @deck, cards: @cards %>
 </div>

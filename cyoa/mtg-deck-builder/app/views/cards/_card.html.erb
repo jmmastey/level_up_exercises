@@ -4,21 +4,9 @@
     <td class="card-type"><%= types_to_html(card.types) %></td>
     <td class="mana-cost"><%= mana_cost_to_html(card.cost) %></td>
     <td class="deck-stats">
-      <a href="#" class="add"><%= image_tag("plus.png", rel: "Add to deck") %></a>
+      <%= link_to image_tag("plus.png", rel: "Add to deck"), "#", remote: true, class: "add" %>
       <span class="number-in-deck"><%= cards_in_deck_with_id(deck, card.id).count %></span>
-      <a href="#" class="remove"><%= image_tag("minus.png", rel: "Remove from deck") %></a>
+      <%= link_to image_tag("minus.png", rel: "Remove from deck"), "#", remote: true, class: "remove" %>
     </td>
   <% end %>
 </tr>
-
-<!-- <div class="card" id="card-<%= card.id %>">
-  <span class="card-name"><%= link_to card.name, card %></span>
-  <span class="mana-cost"><%= mana_cost_to_html(card.cost) %></span>
-  <% if deck %>
-    <div class="deck-stats">
-      <a class="add">+</a>
-      <span class="number-in-deck"><%= cards_in_deck_with_id(deck, card.id).count %></span>
-      <a class="remove">-</a>
-    </div>
-  <% end %>
-</div> -->

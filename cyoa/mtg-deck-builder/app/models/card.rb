@@ -6,4 +6,9 @@ class Card < ActiveRecord::Base
   serialize :types
   serialize :supertypes
   serialize :subtypes
+
+  def self.search_by_name(cardname)
+    return all unless cardname
+    where('name LIKE ?', "%#{cardname}%")
+  end
 end

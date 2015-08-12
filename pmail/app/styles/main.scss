@@ -39,6 +39,10 @@ body {
   }
 }
 
+.top-container .pull-left .dropdown input, .top-container .pull-left .dropdown a {
+  display: inline-block;
+}
+
 .account-management {
   background: #fef9db;
   font-size: 11px;
@@ -81,7 +85,7 @@ tr:hover {
 
 tr.highlight {
   color: white;
-  background-color: #aaaaaa;
+  background-color: #555555;
 }
 
 .app-menu {
@@ -181,6 +185,7 @@ button.list-group-item {
 
 .navbar-form {
   margin-top: 10px;
+  width: 50%;
 
   button {
     background: -webkit-linear-gradient(top,#4387fd,#4683ea);
@@ -359,9 +364,11 @@ nav > li > a {
   color: white;
   background-color: rgba(0, 0, 0, 0);
 }
-
+.input-group{
+  display: flex !important;
+}
 .search-bar {
   border-radius: 0;
-  width: 590px !important;
+  width: 100% !important;
   height: 30px;
 }

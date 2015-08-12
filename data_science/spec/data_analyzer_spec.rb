@@ -2,7 +2,7 @@ require_relative "../data_analyzer"
 
 describe DataAnalyzer do
   let(:filepath) { File.expand_path("../data/sample_data.json", __FILE__) }
-  let(:loader)   { DataLoader.new(filepath) }
+  let(:loader) { DataLoader.new(filepath) }
 
   subject(:analyzer) { DataAnalyzer.new(loader) }
 
@@ -46,7 +46,7 @@ describe DataAnalyzer do
     end
 
     context "when reporting the 95% confidence interval" do
-      let(:interval)    { analyzer.confidence_interval(:bgroup, 0.95) }
+      let(:interval) { analyzer.confidence_interval(:bgroup, 0.95) }
       let(:upper_bound) { interval[:high] }
       let(:lower_bound) { interval[:low] }
 

@@ -2,7 +2,7 @@ require_relative "../data_loader"
 
 describe DataLoader do
   let(:filepath) { File.expand_path("../data/sample_data.json", __FILE__) }
-  let(:loader)   { DataLoader.new(filepath) }
+  let(:loader) { DataLoader.new(filepath) }
 
   context "#initialize" do
     it "produces a valid instance" do

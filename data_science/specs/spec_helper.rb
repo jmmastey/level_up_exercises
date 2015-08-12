@@ -1,0 +1,5 @@
+require 'rspec'
+require_relative '../lib/cohort'
+require_relative '../lib/json_reader'
+require_relative '../lib/data_manager'
+require_relative 'constants'

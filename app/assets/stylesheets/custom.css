@@ -1,0 +1,92 @@
+.title {
+    width: 100%;
+}
+
+.title h1 {
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+}
+
+
+.container {
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background:rgba(255,255,255,0.5);
+}
+.searchBar {
+    width: 100%;
+    height: 25%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.leftSidebar {
+    background: #4A5F70;
+    color: #fff;
+    width: 25%;
+    height: 100%;
+    /* Fixed sidebar start */
+    position:fixed;
+    /* Drop Shadow */
+    -webkit-box-shadow: 2px 2px 27px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 27px 0px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 27px 0px rgba(0,0,0,0.75);
+}
+.mainContent {
+    background: #E6E6E6;
+    color: #fff;
+    width: 75%;
+    height: 100%;
+    float: right;
+}
+
+.mainContent h1 {
+    color: #4A5F70;
+    text-align: center;
+}
+
+.mainContent p {
+    color: #8A8A8A;
+    padding-left: 5%;
+    padding-right: 5%;
+    text-indent: 3%;
+}
+.clear {clear:both;}
+
+.form-group {
+}
+
+.form-control {
+    -webkit-box-shadow: inset 2px 2px 50px -15px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 2px 2px 50px -15px rgba(0,0,0,0.75);
+    box-shadow: inset 2px 2px 50px -15px rgba(0,0,0,0.75);
+}
+
+
+@media (max-width: 450px){
+    .leftSidebar {
+        /* Fix for smaller screens */
+        width: 80%;
+        margin: 0 auto 15px auto;
+        position:inherit;
+    }
+    .mainContent {
+        width: 80%;
+        margin: 0 auto;
+        float:none;
+    }
+}
+input, select, textarea{
+    color: #000000;
+}
+
+textarea:focus, input:focus {
+    color: #000000;
+}

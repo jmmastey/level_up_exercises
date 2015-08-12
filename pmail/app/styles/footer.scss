@@ -1,0 +1,29 @@
+@import "partials/global";
+
+footer {
+  margin-left: 250px;
+  color: $white;
+
+  .activity {
+    text-align: right
+  }
+
+  .policy {
+    text-align: center;
+  }
+
+  .google-logo {
+    width: 63px;
+    height: 24px;
+    background-image: url(//ssl.gstatic.com/mail/images/google_logo_white_126x48.png);
+    -webkit-background-size: 63px 24px;
+    background-size: 63px 24px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  span {
+    display: block;
+    font-size: 0.8em;
+  }
+}

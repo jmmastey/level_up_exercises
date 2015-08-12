@@ -1,0 +1,30 @@
+body {
+  background-color: #111111;
+  font-family: arial,sans-serif;
+}
+
+nav > li > a {
+  padding: 5px 15px;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
+table {
+  color: #ccc;
+  font-size: 0.9em;
+  margin-top: -10px;
+}
+
+tr:hover {
+  border-left: 2px dotted rgba(68, 68, 68, 0.74902);
+}
+
+nav {
+  background-color: black;
+}

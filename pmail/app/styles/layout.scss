@@ -1,0 +1,28 @@
+@import "partials/global";
+
+.container {
+  width: 100%;
+}
+
+.black {
+  color: $black;
+}
+
+.top-container .pull-left .dropdown input,
+.top-container .pull-left .dropdown a {
+  display: inline-block;
+}
+
+.container-fluid {
+  padding: 6px 0;
+}
+
+.top-container {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.container-fluid, .container-header, .top-container {
+  border-bottom: 1px solid $lightgray;
+}

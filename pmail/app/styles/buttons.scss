@@ -1,0 +1,97 @@
+@import "partials/global";
+
+.bottom-container .col-md-2 > button {
+  width: 120px;
+  font-weight: bold;
+  border-radius: 2px;
+  font-size: 0.8em;
+}
+
+.list-group-item:first-child {
+  font-weight: bold;
+}
+
+.top-container .col-md-2 .dropdown{
+  position: absolute;
+  left: 0;
+}
+
+.pull-left > li {
+  width: 70px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.nav-pills > li + li {
+  margin-left: 1px;
+}
+
+.pull-right li:first-child {
+  width: 70px;
+  height: 30px;
+  text-align: center;
+}
+
+.chevrons {
+  width: 40px;
+  height: 30px;
+  text-align: center;
+}
+
+.chevrons:last-child{
+  margin-left: 0;
+}
+
+.pull-right .dropdown {
+  height: 30px;
+  width: 70px;
+  margin-left: 15px;
+  text-align: center;
+}
+
+.nav > li > a {
+  padding: 5px 10px !important;
+}
+
+.nav-pills a {
+  color: $pill-text-color;
+}
+
+.nav-pills.pull-right .dropdown-menu{
+  right: 0;
+  left: auto;
+}
+
+.nav-pills > li {
+  background-color: rgba(0, 0, 0, 0);
+  background-image: -webkit-linear-gradient(top, rgba(68, 68, 68, 0.74902), rgba(60, 60, 60, 0.74902));
+}
+
+.pull-right > li:first-child {
+  color: $white;
+  background-image: none;
+  padding: 0 0.8em;
+}
+
+.nav > li > a:hover{
+  color: $white;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.list-group-item {
+  background-color: #111111;
+  color: $white !important;
+  border: none !important;
+  padding: 10px 0px;
+  line-height: 10px;
+  &:hover, &:focus{
+    background-color: rgba(35,35,35,0.8) !important;
+    outline: none;
+  }
+}
+
+.dropdown-toggle h4 {
+  display: inline-block;
+  padding-right: 0.3em;
+  vertical-align: sub;
+}

@@ -11,16 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805154107) do
+ActiveRecord::Schema.define(version: 20150813203108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
+  create_table "artists", force: :cascade do |t|
     t.string   "name"
-    t.json     "data"
+    t.string   "json"
+    t.text     "related"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "graphs", force: :cascade do |t|
+    t.string   "search_name"
+    t.integer  "depth"
+    t.string   "nodes"
+    t.string   "edges"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

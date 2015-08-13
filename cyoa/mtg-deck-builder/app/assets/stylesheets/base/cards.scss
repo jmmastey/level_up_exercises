@@ -37,16 +37,16 @@
     padding-right: 10px;
     padding-left: 10px;
   }
-  .add,
-  .remove {
-    img {
-      width: 10px;
-      &:hover {
-        @include opacity(0.5);
-      }
+  .deck-stats {}
+}
+.add,
+.remove {
+  img {
+    width: 10px;
+    &:hover {
+      @include opacity(0.5);
     }
   }
-  .deck-stats {}
 }
 
 .mana-cost {

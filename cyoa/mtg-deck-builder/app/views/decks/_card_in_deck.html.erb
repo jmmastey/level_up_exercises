@@ -1,0 +1,20 @@
+<div class="card-in-deck card-<%= card.id %>">
+  <%= link_to card.name, card %>
+  <div class="deck-stats">
+    <%= link_to(
+      image_tag("plus.png", rel: "Add to deck"),
+      "/add_card_to_deck/#{params[:id]}/#{card.id}",
+      remote: true,
+      class: "add") %>
+
+    <span class="number-in-deck>">
+      <%= find_number_of_card_in_deck(params[:id], card.id) %>
+    </span>
+
+    <%= link_to(
+      image_tag("minus.png", rel: "Remove from deck"),
+      "/remove_card_from_deck/#{params[:id]}/#{card.id}",
+      remote: true,
+      class: "remove") %>
+  </div>
+</div>

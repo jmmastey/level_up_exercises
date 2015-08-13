@@ -9,7 +9,9 @@
   }
 }
 .card {
-  border-bottom: 1px solid #ddd;
+  &:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+  }
   &:nth-child(even) {
     background: darken(white, 5%);
   }

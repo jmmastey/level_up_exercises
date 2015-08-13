@@ -5,5 +5,6 @@ $(function () {
   // Search
   $(form_selector + " input").keyup(function () {
     $.get($(form_selector).attr("action"), $(form_selector).serialize(), null, "script");
+    return false;
   });
 });

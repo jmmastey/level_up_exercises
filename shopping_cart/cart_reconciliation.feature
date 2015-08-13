@@ -14,17 +14,17 @@ Feature: Cart reconciliation
     When I am viewing the second product
     And I add 3 items of the second product to my cart
     And I log in
-    Then I have 2 items of the first product in my cart
-    Then I have 3 items of the second product in my cart
+    Then I expect to have 2 items of the first product in my cart
+    Then I expect to have 3 items of the second product in my cart
 
   Scenario: Keeping larger session item amounts
     When I am viewing the first product
     And I add 3 items of the first product to my cart
     And I log in
-    Then I have 3 items of the first product in my cart
+    Then I expect to have 3 items of the first product in my cart
 
   Scenario: Keeping smaller session item amounts
     When I am viewing the first product
     And I add 1 item of the first product to my cart
     And I log in
-    Then I have 1 item of the first product in my cart
+    Then I expect to have 1 item of the first product in my cart

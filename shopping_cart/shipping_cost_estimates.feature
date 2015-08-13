@@ -9,12 +9,12 @@ Feature: Estimate shipping costs
 
   Scenario: Begin shipping estimate process
     When I visit the shipping estimate page
-    Then I see the shipping address form
+    Then I expect to see the shipping address form
 
   Scenario: Fill in shipping address form
     When I visit the shipping estimate page
     And I fill in my address
-    Then I see my estimated order total
+    Then I expect to see my estimated order total
 
   Scenario: Partially fill in shipping address form
     When I visit the shipping estimate page

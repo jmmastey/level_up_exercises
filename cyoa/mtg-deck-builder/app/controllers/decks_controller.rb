@@ -1,10 +1,10 @@
 class DecksController < ApplicationController
-  def show
-    @deck = Deck.find(params[:id])
-  end
-
   def new
     @deck = current_user.decks.build
+  end
+
+  def show
+    @deck = Deck.find(params[:id])
   end
 
   def create
@@ -23,6 +23,9 @@ class DecksController < ApplicationController
   end
 
   def destroy
+    Deck.destroy(params[:id])
+    flash[:success] = "Your deck #{@deck.name} has been destroyed."
+    redirect_to current_user
   end
 
   private

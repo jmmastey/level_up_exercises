@@ -1,0 +1,13 @@
+<div class="panel user-decks">
+  <h2>Decks (<%= user.decks.count %>)</h2>
+  <%= link_to "New", new_deck_path, class: "btn blue new" %>
+
+  <% if user.decks.any? %>
+    <ol class="decks">
+      <% decks.each do |deck| %>
+        <%= render 'deck_item', deck: deck %>
+      <% end %>
+    </ol>
+  <% end %>
+  <%= will_paginate decks %>
+</div>

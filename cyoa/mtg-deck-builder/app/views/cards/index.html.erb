@@ -1,12 +1,9 @@
 <% provide(:title, "Cards") %>
 <div class="divide search">
   <h2>Search</h2>
-  <%= render 'shared/card_search' %>
+  <%= render 'shared/cards_search_form', action: cards_path %>
 </div>
-<div class="panel all-cards">
-  <h2>Cards</h2>
-  <table>
-    <%= render @cards, deck: nil %>
-  </table>
-  <%= will_paginate @cards %>
+
+<div class="divide cards">
+  <%= render 'shared/cards_search_results', cards: @cards %>
 </div>

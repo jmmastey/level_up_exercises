@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
   def index
-    @cards = Card.paginate(page: params[:page], per_page: 50)
+    @cards = Card.search_by_name(params[:cardname]).paginate(page: params[:page], per_page: 50)
   end
 
   def show

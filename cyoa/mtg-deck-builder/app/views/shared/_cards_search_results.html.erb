@@ -1,7 +1,11 @@
 <table class="cards-search-results">
   <%= render 'shared/cards_search_results_header' %>
   <% cards.each do |card| %>
-    <%= render 'shared/cards_search_result', card: card, deck: deck %>
+    <% if local_assigns.key? :deck %>
+      <%= render 'shared/cards_search_result', card: card, deck: deck %>
+    <% else %>
+      <%= render 'shared/cards_search_result', card: card %>
+    <% end %>
   <% end %>
 </table>
 <%= will_paginate(cards) %>

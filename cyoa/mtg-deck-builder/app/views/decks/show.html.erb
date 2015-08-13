@@ -1,2 +1,4 @@
 <% provide(:title, "#{@deck.name}") %>
-<%= render 'show_deck', deck: @deck %>
+<div class="divide cards-in-deck">
+  <%= render 'cards_in_deck', deck: @deck %>
+<div>

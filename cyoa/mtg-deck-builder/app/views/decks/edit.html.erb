@@ -3,12 +3,15 @@
   <h2>Editing: <%= @deck.name %></h2>
 </div>
 
-<%= render 'show_deck', deck: @deck %>
+<div class="divide cards-in-deck">
+  <%= render 'cards_in_deck', deck: @deck %>
+</div>
 
 <div class="divide search-for-deck">
   <h2>Search</h2>
-  <%= render 'shared/card_search', action: edit_deck_path(@deck) %>
+  <%= render 'shared/card_search_form', action: edit_deck_path(@deck) %>
 </div>
+
 <div class="divide cards">
   <%= render 'shared/cards_search_results', deck: @deck, cards: @cards %>
 </div>

@@ -1,10 +1,7 @@
 <table class="cards-search-results">
-  <tr>
-    <th>Name</th>
-    <th>Types</th>
-    <th>Mana Cost</th>
-    <th>Add/Remove</th>
-  </tr>
-  <%= render cards, deck: deck %>
+  <%= render 'shared/cards_search_results_header' %>
+  <% cards.each do |card| %>
+    <%= render 'shared/cards_search_result', card: card, deck: deck %>
+  <% end %>
 </table>
 <%= will_paginate(cards) %>

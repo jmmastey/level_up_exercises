@@ -1,0 +1,11 @@
+<tr class="card card-<%= card.id %>">
+  <td class="card-name"><%= link_to card.name, card %></td>
+  <td class="card-type"><%= types_to_html(card.types) %></td>
+  <td class="mana-cost"><%= mana_cost_to_html(card.cost) %></td>
+
+  <% if local_assigns.key? :deck %>
+    <td class="deck-stats">
+      <%= render 'shared/add_remove_cards_in_deck', card: card %>
+    </td>
+  <% end %>
+</tr>

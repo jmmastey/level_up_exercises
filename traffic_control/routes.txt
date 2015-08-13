@@ -1,0 +1,85 @@
+                  Prefix Verb   URI Pattern                                 Controller#Action
+Manage flights by viewing all or a single one, creating, updating, removing, or searching
+
+                 flights GET    /flights                                    flights#index
+                         POST   /flights                                    flights#create
+                  flight GET    /flights/:id                                flights#show
+                         DELETE /flights/:id                                flights#destroy
+                         PUT    /flights/:id                                flights#update
+          search_flights GET    /flights/search                             flights#search
+
+See all passengers for a particular flight
+
+       flight_passengers GET    /flights/:flight_id/passengers              passengers#index
+
+Create, update, view all or one, or remove bookings for a flight
+
+         flight_bookings GET    /flights/:flight_id/bookings                bookings#index
+                         POST   /flights/:flight_id/bookings                bookings#create
+          flight_booking GET    /flights/:flight_id/bookings/:id            bookings#show
+                         PUT    /flights/:flight_id/bookings/:id            bookings#update
+                         DELETE /flights/:flight_id/bookings/:id            bookings#destroy
+
+Manage airplanes by viewing all of them, a single one, create a new one, update one, reroute or remove one from service
+
+               airplanes GET    /airplanes                                  airplanes#index
+                         POST   /airplanes                                  airplanes#create
+                airplane GET    /airplanes/:id                              airplanes#show
+                         PUT    /airplanes/:id                              airplanes#update
+                         DELETE /airplanes/:id                              airplanes#destroy
+
+        reroute_airplane PUT    /airplanes/:id/reroute                      airplanes#reroute
+
+Check the refuel stops or all stops for a single airplane
+
+   airplane_refuel_stops GET    /airplanes/:airplane_id/refuel_stops        airports#refuel_stops
+       airplane_airports GET    /airplanes/:airplane_id/airports            airports#index
+
+See all airports, check details for a certain airport, or check all flights arriving at or departing from an airport
+
+                airports GET    /airports                                   airports#index
+                 airport GET    /airports/:airport_code                     airports#show
+         airport_flights GET    /airports/:airport_code/flights             flights#index
+
+See all passengers or a particular passenger
+
+              passengers GET    /passengers                                 passengers#index
+               passenger GET    /passengers/:id                             passengers#show
+
+Passenger can fully manage their itineraries
+
+   passenger_itineraries GET    /passengers/:passenger_id/itineraries       itineraries#index
+                         POST   /passengers/:passenger_id/itineraries       itineraries#create
+     passenger_itinerary GET    /passengers/:passenger_id/itinerary         itineraries#show
+                         PUT    /passengers/:passenger_id/itinerary         itineraries#update
+                         DELETE /passengers/:passenger_id/itinerary         itineraries#destroy
+
+Find all flights with a passenger's itineraries
+
+       itinerary_flights GET    /itineraries/:itinerary_id/flights          flights#index
+
+Passenger can fully manage their bookings
+
+      passenger_bookings GET    /passengers/:passenger_id/bookings          bookings#index
+                         POST   /passengers/:passenger_id/bookings          bookings#create
+       passenger_booking GET    /passengers/:passenger_id/bookings/:id      bookings#show
+                         PUT    /passengers/:passenger_id/bookings/:id      bookings#update
+                         DELETE /passengers/:passenger_id/bookings/:id      bookings#destroy
+
+
+Model Associations
+
+Flight
+  has many bookings
+  has many passengers
+
+Airplane
+  has many airports
+
+Airport
+  has many flights
+
+Passenger
+  has many bookings
+  has many itineraries
+  has many flights

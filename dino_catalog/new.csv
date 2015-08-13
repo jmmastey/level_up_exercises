@@ -1,0 +1,18 @@
+name,period,continent,diet,walking,description,genus,weight
+Albertosaurus,Late Cretaceous,North America,Carnivore,Biped,Like a T-Rex but smaller.,,2000
+Albertonykus,Early Cretaceous,North America,Insectivore,Biped,Earliest known Alvarezsaurid.,,
+Baryonyx,Early Cretaceous,Europe,Piscivore,Biped,One of the only known dinosaurs with a fish-only diet.,,6000
+Deinonychus,Early Cretaceous,North America,Carnivore,Biped,,,150
+Diplocaulus,Late Permian,North America,Carnivore,Quadruped,They actually had fins on the side of their body.,,
+Megalosaurus,Jurassic,Europe,Carnivore,Biped,Originally thought to be a Quadruped. First dinosaur to be named.,,2200
+Giganotosaurus,Late Cretaceous,South America,Carnivore,Biped,Largest hunter and also the coolest ever.,,30420
+Quetzalcoatlus,Late Cretaceous,North America,Carnivore,Quadruped,Largest known flying animal of all time.,,440
+Yangchuanosaurus,Oxfordian,Asia,Carnivore,Biped,,,7200
+Dracopelta,Early Cretaceous or Late Jurassic,South America,Herbivore,Quadruped,One of the most primitive known Ankylosauria.,,
+,Jurassic,,,Biped,,Abrictosaurus,100
+,Jurassic,,Carnivore,Biped,,Afrovenator,
+,Albian,,Carnivore,Biped,,Carcharodontosaurus,3000
+,Jurassic,,,Quadruped,,Giraffatitan,6600
+,Cretaceous,,,Quadruped,,Paralititan,120000
+,Cretaceous,,Carnivore,Biped,,Suchomimus,10400
+,Triassic,,,Quadruped,,Melanorosaurus,2400

@@ -1,4 +1,5 @@
 class DecksController < ApplicationController
+  include DecksHelper
   def new
     @deck = current_user.decks.build
   end
@@ -18,7 +19,6 @@ class DecksController < ApplicationController
   end
 
   def edit
-    # Need to make sure user is logged in.
     @cards = Card.search_by_name(params[:cardname]).paginate(page: params[:page], per_page: 100)
     @deck = Deck.find(params[:id])
   end

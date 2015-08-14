@@ -1,3 +1,7 @@
+def create_user(password)
+  @user = create(:user, password: password)
+end
+
 Given(/^I visit the sign up page$/) do
   visit('/signup')
 end
@@ -19,7 +23,7 @@ Then(/^a new user should be saved$/) do
 end
 
 Given(/^I created a user$/) do
-  @user = create(:user, password: '123456')
+  create_user('123456')
 end
 
 When(/^I update my (.*) to be (.*)$/) do |field, value|

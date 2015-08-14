@@ -29,12 +29,14 @@ module CardsHelper
   }
 
   def symbol_to_class(symbol)
+    return unless symbol
     color_class = SYMBOL_TO_CLASS[symbol] if SYMBOL_TO_CLASS.key?(symbol)
     number_class = "ms-#{symbol}" unless color_class
     classes = "\"ms ms-cost ms-shadow #{color_class} #{number_class}\""
   end
 
   def mana_cost_to_html(cost_string)
+    return unless cost_string
     symbols = cost_string.scan(/\{([A-Z1-9\/]+)\}/).flatten.map do |symbol|
       "<i class=#{symbol_to_class(symbol)}></i>"
     end
@@ -42,6 +44,7 @@ module CardsHelper
   end
 
   def types_to_html(card_types)
+    return unless card_types
     card_types.join(", ")
   end
 end

@@ -1,6 +1,6 @@
-<div class="card-in-deck card-<%= card.id %>">
+<div class="card-in-deck" data-card-id="<%= card.id %>">
   <%= link_to card.name, card %>
   <div class="deck-stats">
-    <%= render 'shared/add_remove_cards_in_deck', card: card %>
+    <%= render 'shared/add_remove_cards_in_deck', card_id: card.id, deck_id: deck_id %>
   </div>
 </div>

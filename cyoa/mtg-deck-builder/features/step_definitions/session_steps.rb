@@ -26,6 +26,7 @@ Then(/^I should be logged out$/) do
 end
 
 Given(/^I'm logged in$/) do
-  @user = create(:user, password: "123456")
-  log_in(@user, "123456")
+  password = "123456"
+  create_user(password)
+  log_in(@user, password)
 end

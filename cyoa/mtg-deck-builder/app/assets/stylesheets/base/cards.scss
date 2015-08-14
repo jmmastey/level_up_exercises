@@ -38,7 +38,11 @@
     padding-right: 10px;
     padding-left: 10px;
   }
-  .deck-stats {}
+}
+.deck-stats {
+  form {
+    display: inline-block;
+  }
 }
 .add,
 .remove {

@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   get 'login'     => 'sessions#new'
   post 'login'    => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  #
-  get 'add_card_to_deck/:deck_id/:card_id'      => 'cards_decks#add_card_to_deck'
-  get 'remove_card_from_deck/:deck_id/:card_id' => 'cards_decks#remove_card_from_deck'
+  post 'cards_decks'   => 'cards_decks#create', as: :add_card_to_deck
+  delete 'cards_decks' => 'cards_decks#destroy', as: :remove_card_from_deck
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

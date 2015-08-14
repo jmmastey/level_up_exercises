@@ -64,6 +64,7 @@ $panel_h2_padding: 10px;
   background-color: white;
   padding: 20px;
   border-bottom: 1px solid #ddd;
+  @include box-shadow($shadow_color 0px 5px 10px);
 }
 
 .btn {

@@ -19,6 +19,17 @@
   }
 }
 
+.edit-user {
+  .destroy {
+    display: inherit;
+    margin-top: 50px;
+    &:hover {
+      color: white;
+      background-color: $mtg-red;
+    }
+  }
+}
+
 .user-decks {
   position: relative;
 

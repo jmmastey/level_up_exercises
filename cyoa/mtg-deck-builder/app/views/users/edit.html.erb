@@ -1,8 +1,9 @@
 <% provide(:title, "Edit user: #{@user.username}") %>
 <%= render 'shared/error_messages', obj: @user %>
-<div class="panel form">
+<div class="panel form edit-user">
   <h2>Edit User</h2>
   <%= form_for(@user) do |f| %>
     <%= render "shared/user_edit_form", f: f, user: @user %>
   <% end %>
+  <%= link_to "Destroy Account", @user, method: :delete, class: "btn destroy" %>
 </div>

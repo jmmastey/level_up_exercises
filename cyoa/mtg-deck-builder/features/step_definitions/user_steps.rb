@@ -44,6 +44,6 @@ When(/^I destroy my account$/) do
   click_link("Destroy Account")
 end
 
-Then(/^my account should be destroyed$/) do
-  expect(@user).to be_nil
+Then(/^I expect my account to be destroyed$/) do
+  expect{User.find(@user.id)}.to raise_error(ActiveRecord::RecordNotFound)
 end

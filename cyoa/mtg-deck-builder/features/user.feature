@@ -21,5 +21,5 @@ Feature: Creating Users
     Given I created a user
       And I log in
     When I destroy my account
-    Then my account should be destroyed
+    Then I expect my account to be destroyed
       And I should no longer be able to log in

@@ -1,5 +1,7 @@
 def create_user(password)
   @user = create(:user, password: password)
+  @username = @user.username
+  @password = password
 end
 
 Given(/^I visit the sign up page$/) do
@@ -27,12 +29,21 @@ Given(/^I created a user$/) do
 end
 
 When(/^I update my (.*) to be (.*)$/) do |field, value|
-  visit("/users/#{@user.id}/edit")
+  visit(edit_user_path(@user))
   fill_in "user[#{field}]", with: value
   click_button 'Update'
 end
 
 Then(/^my (.*) should be (.*)$/) do |field, value|
-  visit("/users/#{@user.id}/edit")
+  visit(edit_user_path(@user))
   expect(find_field("user[#{field}]").value).to eq(value)
+end
+
+When(/^I destroy my account$/) do
+  visit(edit_user_path(@user))
+  click_link("Destroy Account")
+end
+
+Then(/^my account should be destroyed$/) do
+  expect(@user).to be_nil
 end

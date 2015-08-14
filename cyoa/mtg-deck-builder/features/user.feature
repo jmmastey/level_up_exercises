@@ -11,8 +11,15 @@ Feature: Creating Users
 
   Scenario: Edit user
     Given I created a user
-    And I log in
+      And I log in
     When I update my email to be 'edit@email.com'
-    And I update my username to be 'EditTestUser'
+      And I update my username to be 'EditTestUser'
     Then my email should be 'edit@email.com'
-    And  my username should be 'EditTestUser'
+      And  my username should be 'EditTestUser'
+
+  Scenario: Destroy User
+    Given I created a user
+      And I log in
+    When I destroy my account
+    Then my account should be destroyed
+      And I should no longer be able to log in

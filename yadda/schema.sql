@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS beers CASCADE;
 CREATE TABLE beers
 (
   id                          SERIAL                          PRIMARY KEY,
+  name                        VARCHAR(50)                     NOT NULL,
   style                       VARCHAR(100)                    NOT NULL,
   description                 TEXT                            ,
   brewing_year                SMALLINT                        NOT NULL,
@@ -73,7 +74,7 @@ CREATE TABLE ratings
   feel                        SMALLINT                        CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
   overall                     SMALLINT                        CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
   notes                       TEXT                            ,
-  date                        DATE                            ,
+  date                        DATE                            NOT NULL DEFAULT CURRENT_DATE,
   created_on                  TIMESTAMP WITH TIME ZONE        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_on                  TIMESTAMP WITH TIME ZONE        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   created_by                  VARCHAR(30)                     NOT NULL,

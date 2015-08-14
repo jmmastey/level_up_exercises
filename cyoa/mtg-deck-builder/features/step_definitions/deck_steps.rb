@@ -21,6 +21,18 @@ When(/^I create a deck named (.*)$/) do |deck_name|
   click_button 'Create New Deck'
 end
 
+When(/^I destroy the deck named (.*)$/) do |deck_name|
+  deck_id = Deck.where(name: deck_name).first.id
+  visit(user_path(@user))
+  selector = "li[data-deck-id=\"#{deck_id}\"] a.destroy"
+  find(selector, match: :first).click
+end
+
+Then(/^I expect to not have a deck named (.*)$/) do |deck_name|
+  visit(user_path(@user))
+  expect(find(".user-decks", match: :first)).to_not have_content(deck_name)
+end
+
 When(/^I visit the create deck page$/) do
   visit("/decks/new")
 end

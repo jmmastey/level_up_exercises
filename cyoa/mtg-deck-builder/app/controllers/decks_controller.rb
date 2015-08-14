@@ -24,8 +24,9 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    Deck.destroy(params[:id])
-    flash[:success] = "Your deck #{@deck.name} has been destroyed."
+    deck = Deck.find(params[:id])
+    flash[:success] = "Your deck #{deck.name} has been destroyed."
+    deck.destroy
     redirect_to current_user
   end
 

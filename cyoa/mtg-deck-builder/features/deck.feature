@@ -12,6 +12,12 @@ Feature: Create/Edit decks
     When I create a deck named "BestDeckEvar"
     Then I expect to have 1 deck named "BestDeckEvar"
 
+  Scenario: Destroy Deck
+    And I visit the create deck page
+    And I create a deck named "BestDeckEvar"
+    When I destroy the deck named "BestDeckEvar"
+    Then I expect to not have a deck named "BestDeckEvar"
+
   @javascript
   Scenario: Add a card to deck
     And I create a deck

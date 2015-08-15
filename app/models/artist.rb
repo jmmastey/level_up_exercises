@@ -2,7 +2,7 @@ class Artist < ActiveRecord::Base
   serialize :related,Array
 
   def self.search(name, depth)
-    return [{}, {}] if depth <= 0
+    return [{}, {}] if depth <= 0 || name.nil? || name == '' ||  name == 0
     current_artist = Artist.find_by_name(name)
     current_artist = Artist.lookup_one(name) if current_artist.nil?
     return [{}, {}] if current_artist.nil?

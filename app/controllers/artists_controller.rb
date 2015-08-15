@@ -1,22 +1,16 @@
 class ArtistsController < ApplicationController
-  def new
+  def index
+    # User visited /
   end
-
   def generate_graph
-    graph_generator = GraphJSON.new
-    if params[:name].nil? || params[:name] == '' || params[:depth].nil? || params[:depth] == ''
-      @nodes = '{}'
-      @edges = '{}'
-    else
-      name = params[:name]
-      depth = params[:depth].to_i
-      # CALL BACKGROUND WORKER -> RENDER
-      graph_nodes = Artist.search(name, depth)
-      if graph_nodes[0] == {}
-        flash[:danger] = params[:name] + \
-        ' could not be found as a Spotify artist. Please double check the spelling.'
-      end
-      @nodes, @edges = graph_generator.to_json(graph_nodes[0], graph_nodes[1])
+    graph_json = GraphJSON.new
+    name = params[:name]
+    depth = params[:depth].to_i
+    nodes_edges = Artist.search(name, depth)
+    if nodes_edges[0] == {}
+      flash[:danger] = "#{name} could not be found as a Spotify artist." << \
+                       ' Please double check the spelling.'
     end
+    @nodes, @edges = graph_json.to_json(nodes_edges[0], nodes_edges[1])
   end
 end

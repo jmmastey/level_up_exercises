@@ -44,6 +44,8 @@ group :development, :test do
   ##############################################################################
   # RSpec
   gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'faker'
 end
 
 group :test do

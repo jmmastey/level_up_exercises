@@ -2,12 +2,10 @@ class Artist < ActiveRecord::Base
   serialize :related,Array
 
   def self.search(name, depth)
-    return [{}, {}] if depth <= 0 || name.nil? || name == '' ||  name == 0
-    current_artist = Artist.find_by_name(name)
-    current_artist = Artist.lookup_one(name) if current_artist.nil?
+    return [{}, {}] if depth <= 0 || name.nil? || name == ''
+    current_artist = Artist.lookup_artist(name)
     return [{}, {}] if current_artist.nil?
-    node_depth = {}
-    node_depth[current_artist.name] = depth
+    node_depth = { current_artist.name => depth }
     network = { current_artist.name => current_artist.related }
     current_artist.related.each do |related|
       recursive_step = Artist.search(related, depth - 1)
@@ -17,21 +15,25 @@ class Artist < ActiveRecord::Base
     [network, node_depth]
   end
 
-  def self.lookup_one(name)
-    artist = Artist.find_artist(RSpotify::Artist.search(name), name)
+  def self.lookup_artist(name)
+    artist = Artist.find_by(name: name)
+    return Artist.search_spotify(name) if artist.nil?
+    artist
+  end
+
+  def self.search_spotify(name)
+    artist = Artist.find_artist_in_array(RSpotify::Artist.search(name), name)
     return nil if artist.nil?
-    Artist.create!(name: artist.name, json: artist.to_json, related: Artist.generate_related_artists(artist.related_artists))
+    Artist.create!(name: artist.name, json: artist.to_json, related: Artist.collect_related_artists(artist.related_artists))
   end
 
-  def self.generate_related_artists(related_artists)
-    names = []
-    related_artists.each do |artist|
-      names << artist.name
-    end
-    names
+  # Collect the related artist names into an array of strings
+  def self.collect_related_artists(related_artists)
+    related_artists.map { |artist| artist.name }
   end
 
-  def self.find_artist(artist_array, name)
+  # Returns nil unless we find a precise match against the searched artist
+  def self.find_artist_in_array(artist_array, name)
     return nil if artist_array.size == 0
     artist_array.each do |artist|
       return artist if artist.name.downcase == name.downcase
@@ -39,13 +41,15 @@ class Artist < ActiveRecord::Base
     nil
   end
 
+  # A hash merge with the strategy of selecting the max value with keys in both
+  # hashes. Used to keep track of the maximal depths of nodes.
   def self.depth_merge!(depth_1, depth_2)
     merged = {}
     depth_1.each do |key, value|
       depth_1.delete(key) if value.nil?
+      depth_2.delete(key) if depth_2[key].nil?
       if depth_2.key?(key)
-        depth_2.delete(key) if depth_2[key].nil?
-        merged[key] = [value, depth_2[key]].max
+        merged[key] = [ value.to_i, depth_2[key].to_i ].max
         depth_2.delete(key)
       else
         merged[key] = value

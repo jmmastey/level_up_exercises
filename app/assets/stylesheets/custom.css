@@ -8,6 +8,20 @@
     text-align: center;
 }
 
+h2 {
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+    color: #4C4C4C;
+}
+
+h3 {
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+    color: #666666;
+}
+
 
 .container {
     position:fixed;

@@ -14,15 +14,11 @@ class BlagPost
     args[:author_url] ||= ""
     FIELDS.each { |field| args[field] ||= "" }
 
+    @categories = (args[:categories].presence || []) - DISALLOWED_CATEGORIES
+    @publish_date = Date.parse(args[:publish_date]) rescue Date.today
     @author = Author.new(args[:author], args[:author_url])
-
-    @categories = args[:categories].presence || []
-    @categories -= DISALLOWED_CATEGORIES
-
     @comments = args[:comments].presence || []
     @body = args[:body].squish
-
-    @publish_date = Date.parse(args[:publish_date]) rescue Date.today
   end
 
   def to_s
@@ -43,7 +39,7 @@ class BlagPost
   end
 
   def commenters
-    return '' unless comments_allowed? || comments.length > 0
+    return '' unless comments_allowed? && comments.present?
 
     "You will be the #{comments.length.ordinalize} commenter"
   end
@@ -55,7 +51,6 @@ class BlagPost
   def abstract
     body.truncate(200)
   end
-
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",

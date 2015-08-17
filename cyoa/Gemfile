@@ -21,8 +21,11 @@ gem 'redis-rails'
 gem 'sidekiq'
 gem 'activerecord-session_store'
 
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
+  gem 'cucumber-rails', :require => false
+  gem 'capybara', :require => false
 end
 

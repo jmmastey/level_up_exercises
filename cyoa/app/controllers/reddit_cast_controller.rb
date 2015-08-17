@@ -36,6 +36,7 @@ class RedditCastController < ApplicationController
   end
 
   def to_channel
+    puts "\nSEARCHING FOR CHANNEL #{params[:name]}\n"
     if(session[:channel_count] == 0)
       session[:channel] = 0
     else

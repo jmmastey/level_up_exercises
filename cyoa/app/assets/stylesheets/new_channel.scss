@@ -1,0 +1,39 @@
+/***************************
+         NEW CHANNEL
+***************************/
+.player-dialog {
+  position: absolute;
+  z-index: 50;
+  width: 30%;
+  top: 25%;
+  left: 50%;
+  color: white;
+  margin-left: -16%;
+  background: #222;
+  padding: 20px;
+  display: none;
+
+  input[type="text"] {
+    padding: 10px;
+    width: 75%;
+    border: 1px solid #222;
+    font-size: 18px;
+    outline: none;
+    background: #333;
+    color: white;
+  }
+  input[type="button"],
+  input[type="submit"] {
+    background: #08a;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: inline-block;
+    &:hover {
+      background: #19b;
+    }
+  }
+}

@@ -1,8 +1,6 @@
 class ChannelController < ApplicationController
-  def new
-
-  end
-
+  before_action :authenticate_user!
+  
   def create
     # note: make sure to strip whitespace from each tag
     params[:tags].map! { |tag| tag.strip.downcase }
@@ -11,7 +9,7 @@ class ChannelController < ApplicationController
   end
 
   def status
-    ch = Channel.where(name: params["name"])
+    ch = current_user.channels.where(name: params["name"])
 
     response = {}
     response['ready'] = (ch.count != 0)
@@ -23,7 +21,7 @@ class ChannelController < ApplicationController
     render json: response
   end
 
-  def delete
+  def destroy
     channel = current_user.channels.find_by_name(params[:name])
     user_channels = current_user.user_channels.where(channel_id: channel.id)
     user_channels.each(&:destroy)

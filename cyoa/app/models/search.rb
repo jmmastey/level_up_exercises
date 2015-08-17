@@ -65,7 +65,7 @@ class Search < ActiveRecord::Base
     if response && response['data']
       parse_response(response['data'])
     else
-      search(depth - 1) 
+      load_results_page(depth - 1) 
     end
     save
   end

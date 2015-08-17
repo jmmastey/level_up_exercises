@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'login'     => 'sessions#new'
   post 'login'    => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  get 'types'     => 'types#index'
   post 'cards_decks'   => 'cards_decks#create', as: :add_card_to_deck
   delete 'cards_decks' => 'cards_decks#destroy', as: :remove_card_from_deck
 

@@ -11,8 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
-//= require turbolinks
+//= require tag-it.min
 //= require_tree .
 
 function setupLogoClickHandler (logo_selector) {

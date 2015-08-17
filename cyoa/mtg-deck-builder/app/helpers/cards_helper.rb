@@ -45,6 +45,6 @@ module CardsHelper
 
   def types_to_html(card_types)
     return unless card_types
-    card_types.join(", ")
+    card_types.map(&:name).join(', ')
   end
 end

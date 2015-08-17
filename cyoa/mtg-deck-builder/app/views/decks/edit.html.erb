@@ -4,11 +4,12 @@
 </div>
 
 <div class="divide cards-in-deck">
+  <h2>Currently in your deck:</h2>
   <%= render 'cards_in_deck', deck: @deck %>
 </div>
 
 <div class="divide search-for-deck">
-  <h2>Search</h2>
+  <h2>Search by:</h2>
   <%= render 'shared/cards_search_form', action: edit_deck_path(@deck) %>
 </div>
 

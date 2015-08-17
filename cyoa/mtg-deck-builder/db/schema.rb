@@ -11,26 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812205522) do
+ActiveRecord::Schema.define(version: 20150814213855) do
 
   create_table "cards", force: :cascade do |t|
     t.string  "name"
     t.integer "cmc"
     t.string  "cost"
     t.string  "colors"
-    t.string  "types"
     t.string  "supertypes"
     t.string  "subtypes"
     t.text    "text"
     t.integer "power"
     t.integer "toughness"
     t.string  "image_url"
+    t.string  "rarity"
   end
 
   create_table "cards_decks", force: :cascade do |t|
     t.integer "card_id"
     t.integer "deck_id"
     t.integer "number_in_deck", default: 0
+  end
+
+  create_table "cards_types", id: false, force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "type_id"
   end
 
   create_table "decks", force: :cascade do |t|
@@ -42,6 +47,10 @@ ActiveRecord::Schema.define(version: 20150812205522) do
 
   add_index "decks", ["user_id", "created_at"], name: "index_decks_on_user_id_and_created_at"
   add_index "decks", ["user_id"], name: "index_decks_on_user_id"
+
+  create_table "types", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"

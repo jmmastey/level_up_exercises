@@ -7,6 +7,6 @@
   @include default-transition();
 
   &:hover {
-    @include box-shadow(darken($shadow_color, 15%) -5px 5px 10px);
+    @include box-shadow(darken($shadow_color, 15%) -3px 3px 10px);
   }
 }

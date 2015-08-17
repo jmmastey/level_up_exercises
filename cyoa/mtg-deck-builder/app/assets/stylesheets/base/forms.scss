@@ -1,3 +1,28 @@
+@mixin text-input-focus() {
+  outline: none;
+  border: 1px solid lighten($site_color, 20%);
+  @include box-shadow(lighten($site_color, 50%) 0px 0px 10px);
+}
+@mixin text-input() {
+  padding: 10px;
+  @include box-sizing(border-box);
+  border: 1px solid #ddd;
+  color: $site_color;
+  font-family: $sans_serif;
+  @include default-transition();
+
+  &:focus {
+    @include text-input-focus();
+  }
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="textbox"] {
+  @include text-input();
+}
+
+
 .form {
   width: 400px;
   text-align: center;
@@ -17,7 +42,38 @@
   }
 }
 
+ul.tagit {
+  margin-top: 10px;
+  @include text-input();
+  &.focus {
+    @include text-input-focus();
+  }
+  .tagit-choice {
+    top: 3px;
+  }
+}
+.tagit-autocomplete.ui-menu {
+  font-size: 0.8em;
+  background-color: white;
+  @include border-radius(0);
+  @include box-shadow($shadow_color -3px 3px 10px);
+  .ui-menu-item {
+    padding: 0;
+    a {
+      padding: 5px;
+    }
+  }
+  .ui-state-focus {
+    border: none;
+    @include border-radius(0);
+  }
+}
+
 #card-search {
+  ul.tagit {
+    padding: 4px 10px;
+    font-size: 1em;
+  }
   input {
     &[type="text"] {
       width: 100%;

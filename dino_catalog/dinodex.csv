@@ -1,4 +1,4 @@
-ME,PERIOD,CONTINENT,DIET,WEIGHT_IN_LBS,WALKING,DESCRIPTION
+NAME,PERIOD,CONTINENT,DIET,WEIGHT_IN_LBS,WALKING,DESCRIPTION
 Albertosaurus,Late Cretaceous,North America,Carnivore,2000,Biped,Like a T-Rex but smaller.
 Albertonykus,Early Cretaceous,North America,Insectivore,,Biped,Earliest known Alvarezsaurid.
 Baryonyx,Early Cretaceous,Europe,Piscivore,6000,Biped,One of the only known dinosaurs with a fish-only diet.

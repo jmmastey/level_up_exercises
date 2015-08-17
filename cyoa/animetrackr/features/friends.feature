@@ -39,3 +39,9 @@ Feature: Friends
     Given I have a friend
     When I click on their username in my friends list
     Then I should be on their profile page
+
+  Scenario: Fail to add request if already friends
+    Given I have a friend
+    When I search for my friend
+    And I send a friend request
+    Then I should not see a pending request in my friends list

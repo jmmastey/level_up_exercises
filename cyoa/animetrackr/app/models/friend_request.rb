@@ -26,6 +26,7 @@ class FriendRequest < ActiveRecord::Base
 
   def no_duplicate_requests
     request = FriendRequest.where(to: to, from: from)
-    errors.add(:to, "request already sent and is pending") unless request.empty?
+    errors.add(:to, 'request already sent and is pending') unless request.empty?
+    errors.add(:to, 'Already a friend') unless Friend.where(friend: to).empty?
   end
 end

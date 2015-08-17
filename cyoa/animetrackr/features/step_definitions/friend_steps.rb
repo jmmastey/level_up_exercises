@@ -54,6 +54,11 @@ When(/^I click on their username in my friends list$/) do
   click_link(@friend.username)
 end
 
+When(/^I search for my friend$/) do
+  visit(friends_search_path)
+  fill_in(:username, with: @friend.username)
+end
+
 Then(/^I expect to see an empty search result$/) do
   expect(find('.search-results ul')).not_to have_content(@friend.username)
   expect(page).to have_content('No results')
@@ -99,4 +104,9 @@ end
 Then(/^I should be on their profile page$/) do
   expect(page).to have_content(@friend.username)
   expect(find('.friends-list')).to have_content(@user.username)
+end
+
+Then(/^I should not see a pending request in my friends list$/) do
+  visit(profile_path)
+  expect(page).not_to have_content(@friend.username + ' (pending)')
 end

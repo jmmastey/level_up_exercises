@@ -21,4 +21,8 @@ class User < ActiveRecord::Base
   has_many :library_items
   has_many :activities
   has_many :animes, through: :library_items
+
+  def self.find_public_users(username, current_user)
+    where('username like ? AND username != ? AND public = true', "%#{username}%", current_user)
+  end
 end

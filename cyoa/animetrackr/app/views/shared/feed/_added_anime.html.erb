@@ -1,6 +1,6 @@
 <img src="<%= activity.anime.cover_image %>" />
 <h4><%= activity.activity %></h4>
-<p><%= distance_of_time_in_words(Time.now, activity.created_at) %></p>
+<p><%= distance_of_time_in_words(Time.now, activity.created_at) %> ago</p>
 <p><%= activity.anime.status %></p>
 <p>Rating: <%= output_stars(activity.anime.community_rating) %></p>
 <p>Episode: <%= activity.anime.episode_count %></p>

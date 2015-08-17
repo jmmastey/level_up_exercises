@@ -1,0 +1,36 @@
+#friends {
+  @extend .row;
+
+  .search {
+    @extend .content-box;
+  }
+
+  .search-results {
+    ul {
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    .search-result-item {
+      @extend .col-md-6;
+      @include transparent-background(255, 255, 255, 0.75);
+      @include transparent-border(3px, 0, 0, 0, 0.10);
+      padding: 25px;
+      list-style: none;
+      margin: 25px 0;
+
+      img {
+        @extend .pull-left;
+        margin-right: 25px;
+      }
+
+      .request {
+        @extend .btn;
+        @extend .btn-primary;
+        
+      }
+
+    }
+
+  }
+}

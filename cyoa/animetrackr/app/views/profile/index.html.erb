@@ -48,8 +48,26 @@
                    :locals => { activity: activity } if activity.updated? %>
         </div>
       <% end %>
-
     </div>
+
+    <div class="friends">
+      <h3>Friends</h3>
+      <ul class="friends-list">
+      <li><%= link_to 'Add Friend', friends_search_path %></li>
+      <% @requests.each do |request| %>
+        <li class="request">
+          <%= request.from.username %>
+          <%= link_to 'Accept', friend_request_accept_path(request), method: :post, class: 'btn btn-primary' %>
+          <%= link_to 'Reject', friend_request_reject_path(request), method: :post, class: 'btn btn-danger' %>
+        </li>
+      <% end %>
+      <% @pending.each do |pending| %>
+        <li class="pending"><%= pending.to.username %> (pending)</li>
+      <% end %>
+      <% @friends.each do |friend| %>
+        <li class="friend"><%= link_to friend.friend.username, profile_view_path(friend.friend.username) %></li>
+      <% end %>
+      </ul>
 
   </div>
 </div>

@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+  get 'friends/search'
+  post 'friends/search', to: 'friends#search_redirect'
+  get 'friends/search/:username' => 'friends#search'
+  post 'friends/request/:id' => 'friends#send_request', as: 'friend_request'
+  post 'friends/accept/:id' => 'friends#accept', as: 'friend_request_accept'
+  post 'friends/reject/:id' => 'friends#reject', as: 'friend_request_reject'
+
   get 'anime_library/' => 'anime_library#index'
-  get 'anime_library/view'
+  get 'anime_library/:username', to: 'anime_library#view', as: 'anime_library_view'
   get 'anime_library/add/:id', to: 'anime_library#add', as: 'anime_library_add'
   post 'anime_library/add/:id', to: 'anime_library#create'
   get 'anime_library/edit/:id', to: 'anime_library#edit', as: 'anime_library_edit'
@@ -15,9 +22,8 @@ Rails.application.routes.draw do
   post 'anime/add/:id', to: 'anime#add'
   get 'anime/remove'
 
-  get 'profile/view'
+  get 'profile/:username', to: 'profile#view', as: 'profile_view'
   get 'profile/' => 'profile#index'
-  get 'profile/add_anime'
 
   devise_for :users
   root to: 'root#home'

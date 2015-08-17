@@ -7,8 +7,10 @@
       <p>Your Rating: <%= output_stars(library_item.user_rating) %></p>
       <p><%= library_item.anime.synopsis %></p>
 
-      <%= link_to 'Delete', anime_library_remove_path(library_item), method: :delete %>
-      <%= link_to 'Edit', anime_library_edit_path(library_item) %>
+      <% if library_item.user == current_user %>
+        <%= link_to 'Delete', anime_library_remove_path(library_item), method: :delete %>
+        <%= link_to 'Edit', anime_library_edit_path(library_item) %>
+      <% end %>
     </li>
   <% end %>
 </ul>

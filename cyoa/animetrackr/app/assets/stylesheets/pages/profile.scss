@@ -31,6 +31,16 @@
 
       li {
         list-style: none;
+
+        p {
+          font-size: 11pt;
+          color: darken($brand-color, 10%);
+
+          &:before {
+            content: '» '
+          }
+        }
+
         a {
           font-size: 11pt;
           text-index: -10px;
@@ -53,6 +63,40 @@
         margin-right: 25px;
         border: 2px solid $black;
       }
+    }
+  }
+
+  .friends {
+    @extend .col-md-4;
+
+    .friends-list {
+      @include transparent-background(255, 255, 255, 0.75);
+      @include transparent-border(3px, 0, 0, 0, 0.10);
+      padding: 0;
+
+      li {
+        list-style: none;
+        width: 100%;
+        padding: 5px 10px;
+        display: table;
+
+        &:hover {
+          background: lighten($brand-color, 25%);
+        }
+      }
+
+      .pending {
+        background: lighten($light-grey, 5%);
+      }
+
+      .request {
+        background: lighten($light-grey, 5%);
+
+        .btn {
+          @extend .pull-right;
+        }
+      }
+
     }
   }
 }

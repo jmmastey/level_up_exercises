@@ -3,14 +3,14 @@
 <div class="view-all">
   <h3>Wishlist</h3>
   <%= render :partial => 'shared/anime_library_item', 
-             :locals => { library_items: anime_wishlist(current_user) } %>
+             :locals => { library_items: anime_wishlist(@user) } %>
 
   <h3>Currently Watching</h3>
   <%= render :partial => 'shared/anime_library_item', 
-             :locals => { library_items: anime_currently_watching(current_user) } %>
+             :locals => { library_items: anime_currently_watching(@user) } %>
 
   <h3>Done Watching</h3>
   <%= render :partial => 'shared/anime_library_item', 
-             :locals => { library_items: anime_done_watching(current_user) } %>
+             :locals => { library_items: anime_done_watching(@user) } %>
 </div>
 </div>

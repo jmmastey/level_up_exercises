@@ -17,3 +17,14 @@ end
 def sign_out
   visit(destroy_user_session_path)
 end
+
+def switch_users(user)
+  sign_out
+  sign_in(user.email, user.password)
+end
+
+def switch_to_new_user(user)
+  sign_out
+  sign_up(user.username, user.email, user.password)
+  sign_in(user.email, user.password)
+end

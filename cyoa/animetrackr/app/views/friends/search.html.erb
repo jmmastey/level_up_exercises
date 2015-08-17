@@ -1,0 +1,37 @@
+<% content_for(:title, @users ? "Search - #{params[:username]}" : 'Search') %>
+<div id="friends">
+<div class="search">  
+ <h3>Search</h3>
+  <%= form_tag(friends_search_path, method: 'POST', class: 'basic-form') do %>
+
+  <%= label_tag(:username) %>
+  <%= text_field_tag(:username) %>
+  <%= submit_tag('Search') %>
+  
+  <% end %>
+</div>
+
+<% if @users %>
+<div class="search-results">
+  <h3>Search Results for "<%= params[:username] %>"</h3>
+
+  <% if @users.empty? %>
+  <div class="no-results">
+    <p>No results</p>
+  </div>
+  <% end %>
+
+  <ul>  
+  <% @users.each do |user| %>
+    <li class='search-result-item'>
+      <img src="<%= gravatar_for(user.email) %>" />
+      <h4><%= user.username %></h4>
+      <p>Member Since: <%= user.join_date.strftime('%m-%d-%Y') %></p>
+      <%= link_to 'Send Friend Request', friend_request_path(user), class: 'request', method: :post %>
+    </li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+
+</div>

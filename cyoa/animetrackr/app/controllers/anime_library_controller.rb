@@ -3,9 +3,13 @@ class AnimeLibraryController < ApplicationController
 
   def index
     @library = LibraryItem.where(user: current_user)
+    @user = current_user
   end
 
   def view
+    @user = User.find_by(username: params[:username])
+    @library = LibraryItem.where(user: @user)
+    render :index
   end
 
   def add

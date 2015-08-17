@@ -1,4 +1,4 @@
-s## Dinosaur Catalog
+## Dinosaur Catalog
 
 It may not be immediately evident, but I am a huge fan of dinosaurs. They're huge and dangerous and have cool names like Giganotosaurus (not to be confused with Gigantosaurus).
 

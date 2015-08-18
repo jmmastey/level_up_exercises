@@ -1,4 +1,7 @@
-DROP TABLE IF EXISTS addresses CASCADE;
+DROP DATABASE IF EXISTS yadda;
+CREATE DATABASE yadda;
+\c yadda
+
 CREATE TABLE addresses
 (
   id                          SERIAL                          PRIMARY KEY,
@@ -14,7 +17,6 @@ CREATE TABLE addresses
   updated_by                  VARCHAR(30)
 );
 
-DROP TABLE IF EXISTS breweries CASCADE;
 CREATE TABLE breweries
 (
   id                          SERIAL                          PRIMARY KEY,
@@ -28,7 +30,6 @@ CREATE TABLE breweries
   updated_by                  VARCHAR(30)
 );
 
-DROP TABLE IF EXISTS beers CASCADE;
 CREATE TABLE beers
 (
   id                          SERIAL                          PRIMARY KEY,
@@ -43,8 +44,6 @@ CREATE TABLE beers
   updated_by                  VARCHAR(30)
 );
 
-
-DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users
 (
   id                          SERIAL                          PRIMARY KEY,
@@ -62,17 +61,16 @@ CREATE TABLE users
   updated_by                  VARCHAR(30)
 );
 
-DROP TABLE IF EXISTS ratings CASCADE;
 CREATE TABLE ratings
 (
   id                          SERIAL                          PRIMARY KEY,
   user_id                     INTEGER                         NOT NULL REFERENCES users ON DELETE RESTRICT, -- rating should not be deleted if user still exists
   beer_id                     INTEGER                         NOT NULL REFERENCES beers ON DELETE RESTRICT, -- rating should not be deleted if beer still exists
-  look                        SMALLINT                        CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
-  smell                       SMALLINT                        CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
-  taste                       SMALLINT                        CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
-  feel                        SMALLINT                        CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
-  overall                     SMALLINT                        CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
+  look                        NUMERIC(3,2)                    CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
+  smell                       NUMERIC(3,2)                    CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
+  taste                       NUMERIC(3,2)                    CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
+  feel                        NUMERIC(3,2)                    CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
+  overall                     NUMERIC(3,2)                    CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
   notes                       TEXT                            ,
   date                        DATE                            NOT NULL DEFAULT CURRENT_DATE,
   created_on                  TIMESTAMP WITH TIME ZONE        NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -96,19 +94,17 @@ $$ language 'plpgsql';
 -- Apply function to each table to automatically set the updated_on column
 -- for each update query
 
-
-CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON addresses FOR 
+CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON addresses FOR
 EACH ROW EXECUTE PROCEDURE  update_updated_on_column();
 
-CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON users FOR 
+CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON users FOR
 EACH ROW EXECUTE PROCEDURE  update_updated_on_column();
 
-CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON breweries FOR 
+CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON breweries FOR
 EACH ROW EXECUTE PROCEDURE  update_updated_on_column();
 
-CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON beers FOR 
+CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON beers FOR
 EACH ROW EXECUTE PROCEDURE  update_updated_on_column();
 
-CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON ratings FOR 
+CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON ratings FOR
 EACH ROW EXECUTE PROCEDURE  update_updated_on_column();
-

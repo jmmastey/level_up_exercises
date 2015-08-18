@@ -8,16 +8,23 @@ require 'capybara'
 require 'capybara-webkit'
 require 'capybara/cucumber'
 require 'rspec'
+require 'tilt/erb'
+
+require_relative 'detonator_helper.rb'
 
 Capybara.app = Overlord
-Capybara.default_driver = :webkit
-Capybara.default_wait_time = 5
-Capybara.javascript_driver = :webkit
+Capybara.default_wait_time = 7
+
+Capybara::Webkit.configure do |config|
+  config.allow_url("code.jquery.com")
+  config.allow_url("maxcdn.bootstrapcdn.com")
+end
 
 class OverlordWorld
   include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers
+  include DetonatorHelpers
 end
 
 World do

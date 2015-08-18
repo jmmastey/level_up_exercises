@@ -14,6 +14,7 @@
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require tag-it.min
+//= require tipped
 //= require_tree .
 
 function setupLogoClickHandler (logo_selector) {

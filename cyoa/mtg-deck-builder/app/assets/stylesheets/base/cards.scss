@@ -32,6 +32,34 @@
     margin-bottom: 5px;
   }
 }
+.card-tooltip {
+  img {
+    float: left;
+    width: 200px;
+    @include border-radius(10px);
+  }
+  h3 {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .card-info {
+    float: left;
+    width: 210px;
+  }
+  .card-text {
+    padding: 5px;
+    text-align: left;
+  }
+}
+img.show-card-tooltip {
+  width: 15px;
+  margin-right: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
 .divide.cards {
   padding: 0px;
   table {

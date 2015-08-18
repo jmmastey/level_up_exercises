@@ -1,4 +1,13 @@
 module CardsHelper
+  TYPE_ORDERING = %w(
+    creature
+    enchantment
+    instant
+    sorcery
+    land
+    artifact
+    planeswalker)
+
   SYMBOL_TO_CLASS = {
     "W" => 'ms-w',
     "B" => 'ms-b',
@@ -26,6 +35,8 @@ module CardsHelper
     "G/P" => 'ms-gp',
     "S" => 'ms-s',
     "X" => 'ms-x',
+    "T" => 'ms-tap',
+    "Q" => 'ms-untap',
   }
 
   def symbol_to_class(symbol)
@@ -43,15 +54,21 @@ module CardsHelper
     symbols.join.html_safe
   end
 
+  def better_card_text(card_text)
+    return unless card_text
+    card_text = card_text.gsub(/\.\)/, ").")
+    card_text = card_text.gsub(/\./, ".<br/>")
+    card_text.gsub(/\{[A-Z0-9]\}/) { |cost_string| mana_cost_to_html(cost_string) }.html_safe
+  end
+
   def types_to_html(card_types)
     return unless card_types
     card_types.map(&:name).join(', ')
   end
 
   def organize_cards_by_type(cards)
-    types = %w(creature enchantment artifact instant sorcery planeswalker land)
     groups = Hash.new { |h,k| h[k] = [] }
-    types.each do |type|
+    TYPE_ORDERING.each do |type|
       groups[type] = cards.select { |card| card.types.map(&:name).include?(type) }
       groups[type].each { |card| cards -= [card] }
     end

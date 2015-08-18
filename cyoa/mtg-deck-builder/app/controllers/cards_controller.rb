@@ -4,6 +4,11 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card = Card.find_by_id(params[:id])
+    @card = Card.find(params[:id])
+  end
+
+  def show_tooltip
+    @card = Card.find(params[:id])
+    render 'cards/show_tooltip', layout: false
   end
 end

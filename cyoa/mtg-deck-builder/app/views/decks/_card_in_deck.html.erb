@@ -1,6 +1,7 @@
 <% if find_number_of_card_in_deck(deck_id, card.id) > 0 %>
   <div class="card-in-deck" data-card-id="<%= card.id %>">
-    <%= link_to card.name, card %>
+    <%= image_tag("search.png", class: "show-card-tooltip") %>
+    <span class="card-name"><%= link_to card.name, card %></span>
     <div class="deck-stats">
       <%= render 'shared/add_remove_cards_in_deck', card_id: card.id, deck_id: deck_id %>
     </div>

@@ -1,5 +1,8 @@
 <tr class="card" data-card-id="<%= card.id %>">
-  <td class="card-name"><%= link_to card.name, card %></td>
+  <td class="card-name">
+    <%= image_tag("search.png", class: "show-card-tooltip") %>
+    <%= link_to card.name, card %>
+  </td>
   <td class="card-type"><%= types_to_html(card.types) %></td>
   <td class="mana-cost"><%= mana_cost_to_html(card.cost) %></td>
 

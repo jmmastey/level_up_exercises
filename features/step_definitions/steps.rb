@@ -8,26 +8,26 @@ When(/^I search for the artist "(.*?)" at a depth (\d+)$/) do |artist, depth|
   click_button('Submit')
 end
 
-Then(/^I should see a graph$/) do
+Then(/^I see a graph$/) do
   has_nodes = page.evaluate_script("typeof nodes !== 'undefined'")
   has_edges = page.evaluate_script("typeof edges !== 'undefined'")
   is_graph = has_nodes && has_edges
   expect(is_graph).to be true
 end
 
-Then(/^I should see that "(.*?)" is not on spotify$/) do |artist|
+Then(/^I see that "(.*?)" is not on spotify$/) do |artist|
   expect(page.html).to include(artist + ' could not be found')
 end
 
-Then(/^I should see no error messages$/) do
+Then(/^I see no error messages$/) do
   expect(page.html).not_to include('could not be found as a Spotify artist.')
 end
 
-Then(/^I should see "(.*?)" as a related artist of "(.*?)"$/) do |to, from|
+Then(/^I see "(.*?)" as a related artist of "(.*?)"$/) do |to, from|
   expect(edge_exists?(from, to)).to be true
 end
 
-Then(/^I should see no related artists$/) do
+Then(/^I see no related artists$/) do
   edges_zero = page.evaluate_script('edges.length')
   expect(edges_zero).to equal 0
 end

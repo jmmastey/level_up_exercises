@@ -1,48 +1,32 @@
 Feature: Related Artists
-  As a curious spotify user
-  I should be able to see related artists
-  In order to get more information about the graph
+  As a curious Spotify user
+  I should be able to see the related artists
+  In order to get more information about relationships between artists
 
-  Background: We are on the homepage
+  Background: I am on the homepage of the website
     Given I am on the homepage
 
   @javascript
   Scenario Outline: We should be able to see related artists of a valid artist
-    When I search for the artist "Black Sabbath" at a depth 2
-    Then I should see <related> as a related artist of "Black Sabbath"
+    When I search for the artist <artist> at a depth 2
+    Then I see <related> as a related artist of <artist>
     Examples:
-      | related        |
-      | "Ozzy Osbourne"|
-      | "Judas Priest" |
-      | "Dio"          |
-      | "Iron Maiden"  |
-
-  @javascript
-  Scenario Outline: We should be able to see related artists of a valid artist
-    When I search for the artist "Green Day" at a depth 2
-    Then I should see <related> as a related artist of "Green Day"
-    Examples:
-      | related         |
-      | "blink-182"     |
-      | "The Offspring" |
-      | "Sum 41"        |
-      | "Simple Plan"   |
-
-  @javascript
-  Scenario Outline: We should be able to see related artists of a valid artist
-    When I search for the artist "Mixtapes" at a depth 2
-    Then I should see <related> as a related artist of "Mixtapes"
-    Examples:
-      | related           |
-      | "Fireworks"       |
-      | "Polar Bear Club" |
-      | "Such Gold"       |
-      | "Candy Hearts"    |
+      | artist          | related          |
+      | "Black Sabbath" | "Ozzy Osbourne"  |
+      | "Black Sabbath" | "Judas Priest"   |
+      | "Black Sabbath" | "Dio"            |
+      | "Black Sabbath" | "Iron Maiden"    |
+      | "Ozzy Osbourne" | "Dio"            |
+      | "Ozzy Osbourne" | "KISS"           |
+      | "Ozzy Osbourne" | "Bruce Dickinson"|
+      | "Ozzy Osbourne" | "Rainbow"        |
+      | "Radiohead"     | "Muse"           |
+      | "Radiohead"     | "Pixies"         |
 
   @javascript
   Scenario Outline: We should see no related artists for a failed search
     When I search for the artist <artist> at a depth 2
-    Then I should see no related artists
+    Then I see no related artists
     Examples:
       | artist       |
       | "glsvrnmqGa" |

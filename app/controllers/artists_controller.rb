@@ -14,7 +14,7 @@ class ArtistsController < ApplicationController
   private
 
   def validate_depth(param)
-    max_depth = 6
+    max_depth = 5
     return false if param.nil?
     param == '0' || (param.to_i > 0 && param.to_i <= max_depth)
   end
@@ -26,7 +26,7 @@ class ArtistsController < ApplicationController
   end
 
   def return_bad_request_status
-    render nothing: true, status: 400
+    render :index, status: 400
   end
 
   def generate_flash(name)

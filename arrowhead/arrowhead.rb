@@ -18,7 +18,7 @@ class Arrowhead
   # FIXME: I don't have time to deal with this. -- fixed
   def self.classify(region, shape)
 
-    if !CLASSIFICATIONS,include? region
+    if !CLASSIFICATIONS.include? region
       raise "Unknown region, please provide a valid region."
     end
 

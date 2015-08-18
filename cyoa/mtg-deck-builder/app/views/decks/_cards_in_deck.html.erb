@@ -1,4 +1,4 @@
-<h2>Currently in your deck:</h2>
+<h2>Currently in your deck (<%= total_number_of_card_subset_in_deck(deck, deck.cards) %>):</h2> 
 <% organize_cards_by_type(non_zero_cards_in_deck(deck)).each do |type, cards| %>
   <% next unless cards.count > 0 %>
   <div class="cards-type-group">

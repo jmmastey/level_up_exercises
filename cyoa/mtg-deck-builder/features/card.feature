@@ -43,3 +43,10 @@ Feature: Search cards
       And I search for cards with "flying"
       And I search for cards with "deathtouch"
     Then I should see at least 1 cards with "flying, deathtouch"
+
+  @javascript
+  Scenario: Search by card color
+    And there is a card with colors "blue"
+    When I visit the card search page
+      And I search for cards with color "blue"
+    Then I should see at least 1 cards with color "blue"

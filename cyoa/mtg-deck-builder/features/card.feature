@@ -34,4 +34,12 @@ Feature: Search cards
     And there is a card with "flying"
     When I visit the card search page
       And I search for cards with "flying"
-    Then I should see at least 1 card with "flying"
+    Then I should see at least 1 cards with "flying"
+
+  @javascript
+  Scenario: Search for cards by multiple text keywords
+    And there is a card with "flying, deathtouch"
+    When I visit the card search page
+      And I search for cards with "flying"
+      And I search for cards with "deathtouch"
+    Then I should see at least 1 cards with "flying, deathtouch"

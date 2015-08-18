@@ -31,6 +31,7 @@ $(function () {
       placeholderText: "Card type",
       availableTags: types,
       showAutocompleteOnFocus: true,
+      tabIndex: 2,
       beforeTagAdded: function (event, ui) {
         var type = ui.tag[0].children[2].value;
         return types.indexOf(type) != -1;
@@ -42,6 +43,18 @@ $(function () {
   // Make tagit consistent with inputs
   $("#types").on("focusin", function () { $(this).addClass("focus"); });
   $("#types").on("focusout", function () { $(this).removeClass("focus"); });
+
+  // Search by tagname
+  $("#cardtext").tagit({
+    fieldName: "cardtext[]",
+    placeholderText: "Card text",
+    allowSpaces: true,
+    tabIndex: 3,
+    afterTagAdded: function (event, ui) { loadCards(); },
+    afterTagRemoved: function (event, ui) { loadCards(); }
+  });
+  $("#cardtext").on("focusin", function () { $(this).addClass("focus"); });
+  $("#cardtext").on("focusout", function () { $(this).removeClass("focus"); });
 
   // Pagination
   $(document).on("click", ".divide.cards .pagination a", function (event) {

@@ -10,11 +10,19 @@ class Card < ActiveRecord::Base
   def self.search(params)
     cards = where(nil)
     cards = where('name LIKE ?', "%#{params[:cardname]}%") if params[:cardname]
+    cards = where_text(cards, params[:cardtext]) if params[:cardtext]
     cards = where_types(cards, params[:cardtypes]) if params[:cardtypes]
     cards
   end
 
   private
+
+  def self.where_text(cards, keywords)
+    keywords.each do |keyword|
+      cards = cards.where('text LIKE ?', "%#{keyword}%")
+    end
+    cards
+  end
 
   def self.where_types(cards, types)
     types_group  = "GROUP_CONCAT(types.name)"

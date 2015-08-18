@@ -33,11 +33,13 @@ When(/^I search for the card named "(.*)"$/) do |card_name|
 end
 
 When(/^I search for cards with type "(.*)"$/) do |card_type|
-  page.execute_script('$("#types").tagit("createTag", "#{card_type}")')
+  find('#types')
+  page.execute_script("$('#types').tagit('createTag', '#{card_type}')")
 end
 
 When(/^I search for cards with "(.*)"$/) do |text|
-  page.execute_script('$("#cardtext").tagit("createTag", "#{text}")')
+  find('#cardtext')
+  page.execute_script("$('#cardtext').tagit('createTag', '#{text}')")
 end
 
 Then(/^I should see the card named "(.*)"$/) do |card_name|
@@ -49,5 +51,6 @@ Then(/^I should see at least (.*) cards with the type "(.*)"$/) do |n, card_type
 end
 
 Then(/^I should see at least (.*) cards with "(.*)"$/) do |n, text|
-  expect(find('.cards', match: :first)).to have_content(text, count: n)
+  card_id = find('tr.card', match: :first)['data-card-id']
+  expect(Card.find(card_id).text.include?(text)).to eq(true)
 end

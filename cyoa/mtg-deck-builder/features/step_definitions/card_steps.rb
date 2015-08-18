@@ -20,6 +20,10 @@ Given(/^there is a card with types "(.*)" in the database$/) do |card_types|
   end
 end
 
+Given(/^there is a card with "(.*)"$/) do |text|
+  @card = create(:card, text: text)
+end
+
 When(/^I visit the card search page$/) do
   visit(cards_path)
 end
@@ -32,10 +36,18 @@ When(/^I search for cards with type "(.*)"$/) do |card_type|
   page.execute_script('$("#types").tagit("createTag", "#{card_type}")')
 end
 
+When(/^I search for cards with "(.*)"$/) do |text|
+  page.execute_script('$("#cardtext").tagit("createTag", "#{text}")')
+end
+
 Then(/^I should see the card named "(.*)"$/) do |card_name|
   expect(page).to have_content(card_name)
 end
 
 Then(/^I should see at least (.*) cards with the type "(.*)"$/) do |n, card_type|
   expect(find('.cards', match: :first)).to have_content(card_type, count: n)
+end
+
+Then(/^I should see at least (.*) cards with "(.*)"$/) do |n, text|
+  expect(find('.cards', match: :first)).to have_content(text, count: n)
 end

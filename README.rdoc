@@ -6,6 +6,10 @@ You input a depth (below 4 is reccomended) and it will generate a network graph 
 It's kind of like the 6 degrees of Kevin Bacon.
 
 == Screen Shots
-
+http://i.imgur.com/FZuE0Ax.png
+http://i.imgur.com/jUcMB7H.png
+The search artist is tan, all related artists of Black Sabbath are green
+http://i.imgur.com/30yLEGu.jpg
+The search artist is red, all related artists are tan, all the artists related to the related artists are green.
 == Tests
 To run all the available tests, execute ./run_all_tests.sh

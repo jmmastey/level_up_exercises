@@ -16,7 +16,9 @@ class Overlord < Sinatra::Base
   post '/activate/' do
     activation = params[:activation]
     deactivation = params[:deactivation]
-    validate_codes(activation, deactivation)
+    replace_empty_params(activation, deactivation)
+    valid = Bomb.validate_codes(activation, deactivation)
+    new_bomb_errors(valid) unless valid == 0
     session[:bomb] = Bomb.new(activation, deactivation)
     erb :activate, locals: { status: current_status }
   end
@@ -45,7 +47,7 @@ class Overlord < Sinatra::Base
 
   def current_status
     if session.key?(:bomb)
-      session[:bomb].status_reader
+      session[:bomb].status
     else
       'Inactive'
     end
@@ -56,25 +58,22 @@ class Overlord < Sinatra::Base
   end
 
   def bomb_status_redirect
-    if session[:bomb].status_reader == 'Active'
+    if session[:bomb].status == 'Active'
       redirect to('/deactivate/')
-    elsif session[:bomb].status_reader == 'Blown Up'
+    elsif session[:bomb].status == 'Blown Up'
       redirect to('/boom/')
     else
       redirect to('/hero/')
     end
   end
 
-  def validate_codes(activation, deactivation)
-    valid_activation_code = Bomb.valid_code?(activation)
-    redirect to('/?error=1') unless valid_activation_code
-    valid_deactivation_code = Bomb.valid_code?(deactivation)
-    redirect to('/?error=2') unless valid_deactivation_code
+  def new_bomb_errors(error)
+    redirect to("/?error=#{error}")
   end
 
   def activate_bomb(key)
     activated_this_turn = session[:bomb].activate(key)
-    already_activated = session[:bomb].status_reader == 'Active'
+    already_activated = session[:bomb].status == 'Active'
     redirect to('/activate/') unless activated_this_turn || already_activated
   end
 
@@ -89,6 +88,11 @@ class Overlord < Sinatra::Base
       else
         ''
     end
+  end
+
+  def replace_empty_params(activation, deactivation)
+    activation.replace('1234') if activation == ''
+    deactivation.replace('0000') if deactivation == ''
   end
 
   enable :sessions

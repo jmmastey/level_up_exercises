@@ -1,3 +1,5 @@
 #!/bin/bash
-rspec bomb_spec.rb
+echo 'RSpec'
+rspec spec/
+echo 'Cucumber'
 cucumber

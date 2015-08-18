@@ -32,6 +32,21 @@ When(/^I click the "([^"]*)" button$/) do |button|
   click_button(button)
 end
 
+When(/^I create a new bomb$/) do
+  visit path_to("the starting page")
+  click_button("Submit")
+end
+
+When(/^I try the default activation code$/) do
+  fill_in("activation", with: '1234')
+  click_button("Activate")
+end
+
+When(/^I try to activate the bomb with the code "([^"]*)"$/) do |arg1|
+  fill_in("activation", with: arg1)
+  click_button("Activate")
+end
+
 Then(/^The page should say "([^"]*)"$/) do |text|
   if page.respond_to? :should
     page.should have_content(text)

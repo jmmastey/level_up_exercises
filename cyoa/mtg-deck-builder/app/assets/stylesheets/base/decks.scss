@@ -3,10 +3,12 @@
 }
 
 .card-in-deck {
-  float: left;
   border: 1px solid #ddd;
   padding: 10px;
-  margin: 10px;
+
+  &:not(:last-child) {
+    border-bottom: none;
+  }
 
   .deck-stats {
     float: right;

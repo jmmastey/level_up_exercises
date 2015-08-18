@@ -35,14 +35,11 @@ $(function () {
         var type = ui.tag[0].children[2].value;
         return types.indexOf(type) != -1;
       },
-      afterTagAdded: function (event, ui) {
-        loadCards();
-      },
-      afterTagRemoved: function (event, ui) {
-        loadCards();
-      }
+      afterTagAdded: function (event, ui) { loadCards(); },
+      afterTagRemoved: function (event, ui) { loadCards(); }
     });
   });
+  // Make tagit consistent with inputs
   $("#types").on("focusin", function () { $(this).addClass("focus"); });
   $("#types").on("focusout", function () { $(this).removeClass("focus"); });
 
@@ -51,6 +48,5 @@ $(function () {
     event.preventDefault();
     var page = $(this).html();
     loadPagination(page);
-    return false;
   });
 });

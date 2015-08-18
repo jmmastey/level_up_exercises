@@ -47,4 +47,15 @@ module CardsHelper
     return unless card_types
     card_types.map(&:name).join(', ')
   end
+
+  def organize_cards_by_type(cards)
+    types = %w(creature enchantment artifact instant sorcery planeswalker land)
+    groups = Hash.new { |h,k| h[k] = [] }
+    types.each do |type|
+      groups[type] = cards.select { |card| card.types.map(&:name).include?(type) }
+      groups[type].each { |card| cards -= [card] }
+    end
+    cards.each { |card| groups["other"] << card }
+    groups
+  end
 end

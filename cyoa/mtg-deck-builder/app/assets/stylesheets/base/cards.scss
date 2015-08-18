@@ -23,6 +23,15 @@
 .card-info {
   text-align: center;
 }
+.cards-type-group {
+  float: left;
+  margin: 10px 5px;
+  background-color: white;
+  h3 {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+}
 .divide.cards {
   padding: 0px;
   table {

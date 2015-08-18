@@ -1,40 +1,46 @@
 Feature: Address Estimates
   As a customer
-  I should be able to see shipping estimates
+  I can use my zip code to get shipping estimates
   In order to know how much I'm spending
 
-  @Happy
-  Scenario: When I input a valid address into the shopping cart, we should see a shipping estimate.
-    Given I have 5 items in my shopping cart
-    When I put 60618 into the shipping estimator
-    Then I should see a shipping cost of "$5.00"
+  Background: I have some items in my cart
+    Given: I have some items in my cart
 
   @Happy
-  Scenario: When I input an address within X miles of the store, I should see that the shipping could be free.
-    Given I have 5 items in my shopping cart
+  Scenario Outline: When I input a valid address into the shopping cart, I see the shipping estimate.
+    When I put <zip> into the shipping estimator
+    Then I should see a shipping cost of <cost>
+    Examples:
+    | zip      | cost     |
+    | "60618"  | "5.00"   |
+    | "61534"  | "10.00"  |
+    | "33983"  | "20.00"  |
+
+  @Happy
+  Scenario: When I input an address within X miles of the store, I see that the shipping could be free.
     When I put 61616 into the shipping estimator
     Then I should see the option to pick up the order from the store
 
   @Sad
-  Scenario: When I put in an invalid shipping address, we should see an error message
-    Given I have 5 items in my shopping cart
-    When I put 6061 into the shipping estimator
+  Scenario Outline: When I put in an invalid zip code, I see an error message
+    When I put <bad> into the shipping estimator
     Then I should see an error message
-
-  @Sad
-  Scenario: When I put in a shipping address out of the valid shipment zones (outside the US for example), we should see an error message.
-    Given I have 5 items in my shopping cart
-    When I put 96598 intot he shipping estimator
-    Then I should see an error message
+    Examples:
+    | bad   |
+    | ""    |
+    | 1     |
+    | 12    |
+    | 123   |
+    | 2345  |
+    | "hi"  |
+    | 96598 |
 
   @Bad
-  Scenario: The address field should sanitize input
-    Given I have 5 items in my shopping cart
-    When I put "; DROP TABLE products" in to the shipping estimator
+  Scenario Outline: I should not be able to do any injections on the zip field.
+    When I put <bad> in to the shipping estimator
     Then I should see an error message
-
-  @Sad
-  Scenario: When I put in a bogus shipping address, we should see an error message
-    Given I have 5 items in my shopping cart
-    When I put "Hello" into the shipping estimator
-    Then I should see an error message
+    Examples:
+    | bad                               |
+    | "; DROP TABLE products;"          |
+    | "<script>alert('pwned');</script>"|
+    | "alert('pwned');"                 |

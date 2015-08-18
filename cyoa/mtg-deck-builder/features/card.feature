@@ -28,3 +28,10 @@ Feature: Search cards
       And I search for cards with type "artifact"
     Then I should see at least 1 cards with the type "creature"
       And I should see at least 1 cards with the type "artifact"
+
+  @javascript
+  Scenario: Search for cards by text
+    And there is a card with "flying"
+    When I visit the card search page
+      And I search for cards with "flying"
+    Then I should see at least 1 card with "flying"

@@ -2,15 +2,13 @@ class Artist < ActiveRecord::Base
   serialize :related,Array
 
   def self.search(name, depth)
-    return [{}, {}] if depth <= 0 || name.nil? || name == ''
+    return [{}, {}] if valid_parameters(depth, name)
     current_artist = Artist.lookup_artist(name)
     return [{}, {}] if current_artist.nil?
     node_depth = { current_artist.name => depth }
     network = { current_artist.name => current_artist.related }
     current_artist.related.each do |related|
-      recursive_step = Artist.search(related, depth - 1)
-      network.merge!(recursive_step[0])
-      node_depth = Artist.depth_merge!(node_depth, recursive_step[1])
+      merge_recursive_step(network, node_depth, Artist.search(related, depth - 1))
     end
     [network, node_depth]
   end
@@ -43,8 +41,10 @@ class Artist < ActiveRecord::Base
 
   # A hash merge with the strategy of selecting the max value with keys in both
   # hashes. Used to keep track of the maximal depths of nodes.
-  def self.depth_merge!(depth_1, depth_2)
+  def self.depth_merge!(hash_1, hash_2)
     merged = {}
+    depth_1 = hash_1.clone
+    depth_2 = hash_2.clone
     depth_1.each do |key, value|
       depth_1.delete(key) if value.nil?
       depth_2.delete(key) if depth_2[key].nil?
@@ -57,4 +57,18 @@ class Artist < ActiveRecord::Base
     end
     merged.merge!(depth_2)
   end
+
+  class << self
+    private
+    def valid_parameters(depth, name)
+      depth <= 0 || name.nil? || name == ''
+    end
+
+    def merge_recursive_step(network, node_depth, recursive_step)
+      network.merge!(recursive_step[0])
+      node_depth.replace(Artist.depth_merge!(node_depth, recursive_step[1]))
+    end
+  end
 end
+
+

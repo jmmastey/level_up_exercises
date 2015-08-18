@@ -9,29 +9,33 @@ class GraphJSON
     nodes = []
     id = 1
     @visited_nodes = {}
-    network.each do |key, value|
-      next if @visited_nodes.key?(key)
-      nodes << {id: id, label: key, color: colors(@depth[key])}
-      @visited_nodes[key] = id
+    network.each do |key|
+      name = key[0]
+      next if @visited_nodes.key?(name.downcase)
+      nodes << {id: id, label: name, color: colors(@depth[name])}
+      @visited_nodes[name.downcase] = id
       id += 1
-      value.each do |val|
-        next if @visited_nodes.key?(key)
-        nodes << {id: id, label: val, color: colors(@depth[val])}
-        @visited_nodes[val] = id
-        id += 1
-      end
     end
     nodes.to_json
   end
 
   def edges_to_json(network)
     edges = []
-    network.each do |key, value|
-      value.each do |related|
-        edges << {from:  @visited_nodes[key], to: @visited_nodes[related]}
-      end
+    network.each do |key|
+      edges.concat(generate_artist_edges(key[0], key[1]))
     end
     edges.to_json
+  end
+
+  def generate_artist_edges(artist, related)
+    edges = []
+    from = @visited_nodes[artist.downcase]
+    related.each do |related_artist|
+      to = @visited_nodes[related_artist.downcase]
+      both_required = ! from.nil? && ! to.nil?
+      edges << {from: from, to: to} if both_required
+    end
+    edges
   end
 
   def colors(depth)

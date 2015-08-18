@@ -39,7 +39,7 @@ RSpec.describe ArtistsController, type: :controller do
     }
 
     # The next two functions ensure GACC on validate_depth
-    it "returns 200 on :valid_artists depth: 0 to 2" do
+    it 'returns 200 on :valid_artists depth: 0 to 2' do
       valid_artists.each do |artist|
         3.times do |depth|
           post_generate_graph({ name: artist, depth: depth.to_s }, 200)
@@ -47,7 +47,7 @@ RSpec.describe ArtistsController, type: :controller do
       end
     end
 
-    it "returns bad request on :valid_artists on :bad_depths" do
+    it 'returns bad request on :valid_artists on :bad_depths' do
       valid_artists.each do |artist|
         bad_depths.each do |depth|
           post_generate_graph({ name: artist, depth: depth}, 400)

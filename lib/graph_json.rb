@@ -1,3 +1,4 @@
+# Converts our graph data into the JSON required by vis.js
 class GraphJSON
   def to_json(graph, depth)
     @depth = depth
@@ -5,6 +6,7 @@ class GraphJSON
   end
 
   private
+
   def nodes_to_json(network)
     nodes = []
     id = 1
@@ -12,9 +14,7 @@ class GraphJSON
     network.each do |key|
       name = key[0]
       next if @visited_nodes.key?(name.downcase)
-      nodes << {id: id, label: name, color: colors(@depth[name])}
-      @visited_nodes[name.downcase] = id
-      id += 1
+      id = convert_single_node!(name, id, nodes)
     end
     nodes.to_json
   end
@@ -32,13 +32,20 @@ class GraphJSON
     from = @visited_nodes[artist.downcase]
     related.each do |related_artist|
       to = @visited_nodes[related_artist.downcase]
-      both_required = ! from.nil? && ! to.nil?
-      edges << {from: from, to: to} if both_required
+      both_required = !from.nil? && !to.nil?
+      edges << { from: from, to: to } if both_required
     end
     edges
   end
 
   def colors(depth)
     %w(#4A5F70 #7F825f #C2AE95 #824E4E #66777D)[depth % 5]
+  end
+
+  # Modifies nodes!
+  def convert_single_node!(name, id, nodes)
+    nodes << { id: id, label: name, color: colors(@depth[name]) }
+    @visited_nodes[name.downcase] = id
+    id + 1
   end
 end

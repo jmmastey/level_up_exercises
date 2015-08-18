@@ -15,53 +15,56 @@ describe GraphJSON do
     it 'converts one node correctly' do
       one_node = { 'Black Sabbath' => [] }
       depths = { 'Black Sabbath' => 1 }
-      result = ["[{\"id\":1,\"label\":\"Black Sabbath\",\"color\":\"#7F825f\"}]", "[]"]
+      result = [
+        "[{\"id\":1,\"label\":\"Black Sabbath\",\"color\":\"#7F825f\"}]",
+        '[]'
+      ]
       expect(graph_json.to_json(one_node, depths)).to eq(result)
     end
 
     it 'converts two nodes correctly' do
       two_nodes = {
         'Black Sabbath' => [],
-        'Radiohead' => [],
+        'Radiohead' => []
       }
       depths = { 'Black Sabbath' => 1, 'Radiohead' => 2 }
       result = [
-          "[{\"id\":1,\"label\":\"Black Sabbath\",\"color\":\"#7F825f\"}," << \
-           "{\"id\":2,\"label\":\"Radiohead\",\"color\":\"#C2AE95\"}]",
-          "[]"
+        "[{\"id\":1,\"label\":\"Black Sabbath\",\"color\":\"#7F825f\"}," \
+        "{\"id\":2,\"label\":\"Radiohead\",\"color\":\"#C2AE95\"}]",
+        '[]'
       ]
       expect(graph_json.to_json(two_nodes, depths)).to eq(result)
     end
 
     it 'converts cycles correctly' do
       cycle = {
-          'Black Sabbath' => ['Radiohead'],
-          'Radiohead' => ['Black Sabbath'],
+        'Black Sabbath' => ['Radiohead'],
+        'Radiohead' => ['Black Sabbath']
       }
       depths = { 'Black Sabbath' => 1, 'Radiohead' => 2 }
       result = [
-          "[{\"id\":1,\"label\":\"Black Sabbath\",\"color\":\"#7F825f\"}," << \
-           "{\"id\":2,\"label\":\"Radiohead\",\"color\":\"#C2AE95\"}]",
-          "[{\"from\":1,\"to\":2},{\"from\":2,\"to\":1}]"
+        "[{\"id\":1,\"label\":\"Black Sabbath\",\"color\":\"#7F825f\"}," \
+         "{\"id\":2,\"label\":\"Radiohead\",\"color\":\"#C2AE95\"}]",
+        "[{\"from\":1,\"to\":2},{\"from\":2,\"to\":1}]"
       ]
       expect(graph_json.to_json(cycle, depths)).to eq(result)
     end
 
     it 'converts self-edge nodes successfully' do
-      self_edge = { 'Black Sabbath' => ['Black Sabbath']}
+      self_edge = { 'Black Sabbath' => ['Black Sabbath'] }
       depths = { 'Black Sabbath' => 1 }
       result = [
-          "[{\"id\":1,\"label\":\"Black Sabbath\",\"color\":\"#7F825f\"}]",
-          "[{\"from\":1,\"to\":1}]"
+        "[{\"id\":1,\"label\":\"Black Sabbath\",\"color\":\"#7F825f\"}]",
+        "[{\"from\":1,\"to\":1}]"
       ]
       expect(graph_json.to_json(self_edge, depths)).to eq(result)
     end
 
     it 'converts trees properly' do
       tree = {
-          'Black Sabbath' => ['Ozzy', 'Dio'],
-          'Ozzy' => ['Radiohead', 'Nirvana'],
-          'Dio' => ['Kendrick', 'Lamar'],
+        'Black Sabbath' => %w(Ozzy Dio),
+        'Ozzy' => %w(Radiohead Nirvana),
+        'Dio' => %w(Kendrick Lamar)
       }
       depths = {
         'Black Sabbath' => 1,
@@ -70,13 +73,13 @@ describe GraphJSON do
         'Radiohead' => 3,
         'Nirvana' => 3,
         'Kendrick' => 3,
-        'Lamar' => 3,
+        'Lamar' => 3
       }
       result = [
-          "[{\"id\":1,\"label\":\"Black Sabbath\",\"color\":\"#7F825f\"}," << \
-           "{\"id\":2,\"label\":\"Ozzy\",\"color\":\"#C2AE95\"}," << \
-           "{\"id\":3,\"label\":\"Dio\",\"color\":\"#C2AE95\"}]",
-          "[{\"from\":1,\"to\":2},{\"from\":1,\"to\":3}]"
+        "[{\"id\":1,\"label\":\"Black Sabbath\",\"color\":\"#7F825f\"}," \
+         "{\"id\":2,\"label\":\"Ozzy\",\"color\":\"#C2AE95\"}," \
+         "{\"id\":3,\"label\":\"Dio\",\"color\":\"#C2AE95\"}]",
+        "[{\"from\":1,\"to\":2},{\"from\":1,\"to\":3}]"
       ]
       expect(graph_json.to_json(tree, depths)).to eq(result)
     end
@@ -89,7 +92,7 @@ describe GraphJSON do
       random_graph.each do |node|
         node_ids << node['id']
       end
-      expect(node_ids).to  eq(node_ids.uniq)
+      expect(node_ids).to eq(node_ids.uniq)
     end
 
     def generate_random_graph(size)
@@ -110,6 +113,5 @@ describe GraphJSON do
       end
       artists
     end
-
   end
 end

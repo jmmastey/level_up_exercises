@@ -14,29 +14,29 @@ RSpec.describe ArtistsController, type: :controller do
   end
 
   describe 'POST #generate_graph' do
-    let(:valid_artists) {
+    let(:valid_artists) do
       [
-          'Black Sabbath',
+        'Black Sabbath'
       ]
-    }
+    end
 
-    let(:invalid_artists) {
+    let(:invalid_artists) do
       [
-          'Bak Sabat',
+        'Bak Sabat'
       ]
-    }
+    end
 
-    let(:bad_depths) {
+    let(:bad_depths) do
       [
-          'words',
-          '',
-          nil,
-          '-1',
-          -1,
-          7,
-          8,
+        'words',
+        '',
+        nil,
+        '-1',
+        -1,
+        7,
+        8
       ]
-    }
+    end
 
     # The next two functions ensure GACC on validate_depth
     it 'returns 200 on :valid_artists depth: 0 to 2' do
@@ -50,7 +50,7 @@ RSpec.describe ArtistsController, type: :controller do
     it 'returns bad request on :valid_artists on :bad_depths' do
       valid_artists.each do |artist|
         bad_depths.each do |depth|
-          post_generate_graph({ name: artist, depth: depth}, 400)
+          post_generate_graph({ name: artist, depth: depth }, 400)
         end
       end
     end
@@ -78,7 +78,7 @@ RSpec.describe ArtistsController, type: :controller do
   end
 
   def graph_error(params, status)
-    "Expected posting to artists#generate_graph with params= #{params}" << \
+    "Expected posting to artists#generate_graph with params= #{params}" \
     " To have status #{status}"
   end
 end

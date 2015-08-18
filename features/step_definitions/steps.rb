@@ -37,7 +37,7 @@ end
 def get_node_id(name)
   nodes = page.evaluate_script('nodes._data')
   name_id = -1
-  nodes.each do |key, value|
+  nodes.each do |_key, value|
     name_id = value['id'] if value['label'] == name
     break if name_id != -1
   end
@@ -49,7 +49,7 @@ def edge_exists?(from, to)
   to_id = get_node_id(to)
   edges = page.evaluate_script('edges._data')
   edge_exists = false
-  edges.each do |key, value|
+  edges.each do |_key, value|
     edge_exists = true if value['from'] == from_id && value['to'] == to_id
     break if edge_exists
   end

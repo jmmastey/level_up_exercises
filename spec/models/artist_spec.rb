@@ -19,7 +19,7 @@ RSpec.describe Artist, type: :model do
     it 'merges correctly when neither are empty and neither coincide' do
       hash_1 = { first: 1 }
       hash_2 = { second: 2 }
-      result = { first: 1, second: 2}
+      result = { first: 1, second: 2 }
       expect(Artist.depth_merge!(hash_1, hash_2)).to eq(result)
     end
 
@@ -29,7 +29,9 @@ RSpec.describe Artist, type: :model do
     end
 
     it 'merges correctly when one key coincides (equal value)' do
-      expect(Artist.depth_merge!({ first: 1 }, { first: 1 })).to eq({ first: 1 })
+      hash_1 = { first: 1 }
+      hash_2 = { first: 1 }
+      expect(Artist.depth_merge!(hash_1, hash_2)).to eq(hash_1)
     end
 
     it 'merges correctly when one key coincides (min left val)' do
@@ -66,23 +68,22 @@ RSpec.describe Artist, type: :model do
     end
 
     it 'multiple coincide with nil (avg use)' do
-      hash_1 = {a: 1, b: 2, c: nil, d: 4, e: 5 }
-      hash_2 = {a: 4, b: 3, c: 2, d: 1, e: nil }
-      result = {a: 4, b: 3, c: 2, d: 4, e: 5 }
+      hash_1 = { a: 1, b: 2, c: nil, d: 4, e: 5 }
+      hash_2 = { a: 4, b: 3, c: 2, d: 1, e: nil }
+      result = { a: 4, b: 3, c: 2, d: 4, e: 5 }
       expect(Artist.depth_merge!(hash_1, hash_2)).to eq(result)
     end
   end
 
   describe 'Artist.find_artist' do
-    let(:valid_names) {[ 'Black Sabbath', 'Radiohead' ]}
+    let(:valid_names) { ['Black Sabbath', 'Radiohead'] }
 
     # Note, Faker will not generate names of this form
-    let(:invalid_names) {
+    let(:invalid_names) do
       %w(sPUKslXlnz pdbPxLK7rt w8yUJnC171 mLvr4IaeC8 ZYR9Z5R967)
-    }
+    end
 
     let(:random_array_size_max) { 20 }
-
 
     it 'returns nil if we search against an empty array' do
       valid_names.each do |name|
@@ -93,15 +94,16 @@ RSpec.describe Artist, type: :model do
     it 'finds an artist when present in a single artist array' do
       valid_names.each do |name|
         artist = build(:artist, name: name)
-        artist_array = generate_artist_array(1, { artist: artist })
+        artist_array = generate_artist_array(1, artist: artist)
         expect(Artist.find_artist_in_array(artist_array, name)).to eq(artist)
       end
     end
 
     it 'finds an artist when present independent of case' do
+      name = 'BlAcK SAbbAth'
       artist = build(:artist, name: 'blACk SaBBath')
-      artist_array = generate_artist_array(1, { artist: artist })
-      expect(Artist.find_artist_in_array(artist_array, 'BlAcK SAbbAth')).to eq(artist)
+      artist_array = generate_artist_array(1, artist: artist)
+      expect(Artist.find_artist_in_array(artist_array, name)).to eq(artist)
     end
 
     it 'returns nil when the artist is not present in the array' do
@@ -115,7 +117,7 @@ RSpec.describe Artist, type: :model do
       valid_names.each do |name|
         size = rand(2...random_array_size_max)
         artist = build(:artist, name: name)
-        artist_array = generate_artist_array(size, { artist: artist })
+        artist_array = generate_artist_array(size, artist: artist)
         expect(Artist.find_artist_in_array(artist_array, name)).to eq(artist)
       end
     end
@@ -170,7 +172,10 @@ RSpec.describe Artist, type: :model do
   end
 
   describe 'Artist.search_spotify' do
-    let(:artists) { [ 'Radiohead', 'Mixtapes' ] }
+    let(:artists) { %w(Radiohead Mixtapes) }
+    let(:not_on_spotify) do
+      %w(sPUKslXlnz pdbPxLK7rt w8yUJnC171 mLvr4IaeC8 ZYR9Z5R967)
+    end
 
     it 'finds an artists given the artist is on spotify' do
       artist = Artist.search_spotify('Black Sabbath')
@@ -178,7 +183,7 @@ RSpec.describe Artist, type: :model do
     end
 
     it 'returns nil if the artist is not on spotify' do
-      %w(sPUKslXlnz pdbPxLK7rt w8yUJnC171 mLvr4IaeC8 ZYR9Z5R967).each do |invalid|
+      not_on_spotify.each do |invalid|
         artist = Artist.search_spotify(invalid)
         expect(artist).to be nil
       end
@@ -197,85 +202,85 @@ RSpec.describe Artist, type: :model do
   end
 
   describe 'Artist.search' do
-    let(:valid_names) { [ 'Black Sabbath', 'Radiohead' ] }
-    let(:invalid_names) {
+    let(:valid_names) { ['Black Sabbath', 'Radiohead'] }
+    let(:invalid_names) do
       [
-          nil,
-          '',
-          '; DROP TABLE artists;',
-          "'<script>alert('alert');</script>'",
+        nil,
+        '',
+        '; DROP TABLE artists;',
+        "'<script>alert('alert');</script>'"
       ]
-    }
-    let(:related_artists) {
+    end
+    let(:related_artists) do
       {
-          'Black Sabbath' => [
-              'Ozzy Osbourne',
-              'Judas Priest',
-              'Dio',
-              'Iron Maiden',
-              'Motörhead',
-              'Danzig',
-              'Deep Purple',
-              'Thin Lizzy',
-              'KISS',
-              'Saxon',
-              'Heaven & Hell',
-              'AC/DC',
-              'Rainbow',
-              'Metallica',
-              'Bruce Dickinson',
-              'Tony Iommi',
-              'UFO',
-              'Diamond Head',
-              'Alice Cooper',
-              'Uriah Heep',
-          ],
-          'Radiohead' => [
-              'Thom Yorke',
-              'Portishead',
-              'Muse',
-              'Björk',
-              'Pixies',
-              'Interpol',
-              'Atoms For Peace',
-              'Beck',
-              'Four Tet',
-              'Joy Division',
-              'The Flaming Lips',
-              'Grizzly Bear',
-              'The National',
-              'The xx',
-              'The Smiths',
-              'Burial',
-              'R.E.M.',
-              'Elbow',
-              'St. Vincent',
-              'Liars',
-          ],
-          'Ozzy Osbourne' => [
-              'Black Sabbath',
-              'Dio',
-              'Judas Priest',
-              'KISS',
-              'Iron Maiden',
-              'Twisted Sister',
-              'Alice Cooper',
-              'Scorpions',
-              'Whitesnake',
-              'Mötley Crüe',
-              'Rainbow',
-              'Bruce Dickinson',
-              'Deep Purple',
-              'Skid Row',
-              'AC/DC',
-              'Queensrÿche',
-              'Motörhead',
-              'Saxon',
-              'Quiet Riot',
-              "\"Ugly Kid Joe",
-          ],
+        'Black Sabbath' => [
+          'Ozzy Osbourne',
+          'Judas Priest',
+          'Dio',
+          'Iron Maiden',
+          'Motörhead',
+          'Danzig',
+          'Deep Purple',
+          'Thin Lizzy',
+          'KISS',
+          'Saxon',
+          'Heaven & Hell',
+          'AC/DC',
+          'Rainbow',
+          'Metallica',
+          'Bruce Dickinson',
+          'Tony Iommi',
+          'UFO',
+          'Diamond Head',
+          'Alice Cooper',
+          'Uriah Heep'
+        ],
+        'Radiohead' => [
+          'Thom Yorke',
+          'Portishead',
+          'Muse',
+          'Björk',
+          'Pixies',
+          'Interpol',
+          'Atoms For Peace',
+          'Beck',
+          'Four Tet',
+          'Joy Division',
+          'The Flaming Lips',
+          'Grizzly Bear',
+          'The National',
+          'The xx',
+          'The Smiths',
+          'Burial',
+          'R.E.M.',
+          'Elbow',
+          'St. Vincent',
+          'Liars'
+        ],
+        'Ozzy Osbourne' => [
+          'Black Sabbath',
+          'Dio',
+          'Judas Priest',
+          'KISS',
+          'Iron Maiden',
+          'Twisted Sister',
+          'Alice Cooper',
+          'Scorpions',
+          'Whitesnake',
+          'Mötley Crüe',
+          'Rainbow',
+          'Bruce Dickinson',
+          'Deep Purple',
+          'Skid Row',
+          'AC/DC',
+          'Queensrÿche',
+          'Motörhead',
+          'Saxon',
+          'Quiet Riot',
+          "\"Ugly Kid Joe"
+        ]
       }
-    }
+    end
     let(:invalid_depths) { (-10..0).to_a }
 
     it 'returns valid graph for depths 1 for valid_names' do

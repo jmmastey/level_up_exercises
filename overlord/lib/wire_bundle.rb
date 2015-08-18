@@ -1,3 +1,5 @@
+require_relative "wire"
+
 class WireBundle
   attr_reader :wires
 

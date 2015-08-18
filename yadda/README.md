@@ -1,3 +1,11 @@
+## Setup
+
+```ruby
+ruby yadda_generator.rb
+```
+
+This drops the yadda database, recreates it, creates the tables, and then seeds them. You should only run this once and never again.
+
 # YADDA - Yet Another Drinking Diary App
 
 We need an excuse to build a database with some real interactions. This is just that excuse. There is a major flaw with every currently extant drinking-diary app (BrewTrackr, BrewGene, Untappd, BeerHunt, NextPint, etc etc etc). They've all already been built, and not by us. Let's use that justification and build some data.

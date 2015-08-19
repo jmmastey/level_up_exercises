@@ -6,6 +6,10 @@
   border: 1px solid #ddd;
   padding: 10px;
 
+  &:nth-child(odd) {
+    background-color: darken(white, 5%);
+  }
+
   &:not(:last-child) {
     border-bottom: none;
   }

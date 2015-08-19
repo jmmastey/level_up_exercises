@@ -1,31 +1,10 @@
+<div id="toggle-advanced-search">
+  <div class="btn">Advanced Search</div>
+</div>
 <%= form_tag(action, method: "get", id: "card-search") do %>
   <%= hidden_field_tag "page", params[:page] %>
   <%= text_field_tag "cardname", nil, placeholder: "Card Name", tabindex: 1 %>
-  <ul id="types"></ul>
-  <ul id="cardtext"></ul>
-  <ul id="colors">
-    <li>
-      <%= check_box_tag "cardcolors[]", "white", false, id: "white" %>
-      <label for="white" class="ms ms-cost ms-w"></label>
-    </li>
-    <li>
-      <%= check_box_tag "cardcolors[]", "blue", false, id: "blue" %>
-      <label for="blue" class="ms ms-cost ms-u"></label>
-    </li>
-    <li>
-      <%= check_box_tag "cardcolors[]", "black", false, id: "black" %>
-      <label for="black" class="ms ms-cost ms-b"></label>
-    </li>
-    <li>
-      <%= check_box_tag "cardcolors[]", "red", false, id: "red" %>
-      <label for="red" class="ms ms-cost ms-r"></label>
-    </li>
-    <li>
-      <%= check_box_tag "cardcolors[]", "green", false, id: "green" %>
-      <label for="green" class="ms ms-cost ms-g"></label>
-    </li>
-    <p><%= check_box_tag "exclude" %><label for="exclude">Selected colors only</label></p>
-    <p><%= check_box_tag "multicolor" %><label for="multicolor">Multicolor only</label></p>
-    <p><%= check_box_tag "hybrid" %><label for="multicolor">Hybrid mana only</label></p>
-  </ul>
+  <div id="advanced-options">
+    <%= render 'shared/cards_advanced_search' %>
+  </div>
 <% end %>

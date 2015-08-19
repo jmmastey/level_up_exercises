@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require tag-it.min
 //= require tipped
+//= require nouislider.min
 //= require_tree .
 
 function setupLogoClickHandler (logo_selector) {

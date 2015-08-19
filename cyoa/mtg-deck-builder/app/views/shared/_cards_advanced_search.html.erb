@@ -1,0 +1,51 @@
+<ul id="types"></ul>
+<ul id="cardtext"></ul>
+<ul id="mana">
+  <div class="colors">
+    <h3>Search by color:</h3>
+    <li>
+      <%= check_box_tag "cardcolors[]", "white", false, id: "white" %>
+      <label for="white" class="ms ms-cost ms-w"></label>
+    </li>
+    <li>
+      <%= check_box_tag "cardcolors[]", "blue", false, id: "blue" %>
+      <label for="blue" class="ms ms-cost ms-u"></label>
+    </li>
+    <li>
+      <%= check_box_tag "cardcolors[]", "black", false, id: "black" %>
+      <label for="black" class="ms ms-cost ms-b"></label>
+    </li>
+    <li>
+      <%= check_box_tag "cardcolors[]", "red", false, id: "red" %>
+      <label for="red" class="ms ms-cost ms-r"></label>
+    </li>
+    <li>
+      <%= check_box_tag "cardcolors[]", "green", false, id: "green" %>
+      <label for="green" class="ms ms-cost ms-g"></label>
+    </li>
+  </div>
+  <div class="color-options">
+    <p><%= check_box_tag "exclude" %><label for="exclude">Selected colors only</label></p>
+    <p><%= check_box_tag "multicolor" %><label for="multicolor">Multicolor only</label></p>
+    <p><%= check_box_tag "hybrid" %><label for="multicolor">Hybrid mana only</label></p>
+    <p><%= check_box_tag "pherexian" %><label for="pherexian">Pherexian mana only</label></p>
+  </div>
+  <div class="mana-range">
+    <h3>Converted mana cost</h3>
+    <div class="mana-slider"></div>
+    <div class="min-max-mana">
+      <div class="minmana">
+        <p><%= text_field_tag "minmana" %></p>
+        <label for="minmana">Min</label>
+      </div>
+      <div class="exactmana">
+        <p><%= text_field_tag "exactmana" %></p>
+        <label for="exactmana">Exact cost</label>
+      </div>
+      <div class="maxmana">
+        <p><%= text_field_tag "maxmana" %></p>
+        <label for="maxmana">Max</label>
+      </div>
+    </div>
+  </div>
+</ul>

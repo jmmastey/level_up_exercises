@@ -1,8 +1,20 @@
 .divide.search,
 .divide.search-for-deck {
+  overflow: hidden;
   h2 {
     margin-bottom: 10px;
   }
+}
+#toggle-advanced-search {
+  position: relative;
+  .btn {
+    position: absolute;
+    top: -40px;
+    right: 0px;
+  }
+}
+#advanced-options {
+  display: none;
 }
 .all-cards {
   table {
@@ -104,7 +116,8 @@ img.show-card-tooltip {
     }
   }
 }
-#colors {
+#mana {
+  overflow: hidden;
   margin-top: 15px;
   li {
     display: inline-block;
@@ -119,6 +132,72 @@ img.show-card-tooltip {
       &:checked + label {
         border: 3px solid $mtg_blue;
         margin: 0px;
+      }
+    }
+  }
+  .colors {
+    float: left;
+    margin-top: 15px;
+    margin-right: 20px;
+    h3 {
+      font-size: 0.8em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  }
+  .color-options {
+    font-size: 0.8em;
+    float: left;
+    margin-top: 10px;
+  }
+  .mana-range {
+    float: left;
+    margin-left: 50px;
+    h3 {
+      font-size: 0.8em;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .mana-slider {
+      height: 10px;
+      width: 400px;
+      .noUi-connect {
+        background-color: $mtg_blue !important;
+      }
+      .noUi-handle {
+        width: 20px;
+        height: 20px;
+        &:before,
+        &:after {
+          display: none;
+        }
+      }
+    }
+    .min-max-mana {
+      padding-top: 10px;
+      input[type="text"] {
+        width: 50px;
+        text-align: center;
+        font-size: 0.8em;
+        padding: 5px;
+      }
+      div {
+        text-align: center;
+        float: left;
+        label {
+          font-size: 0.7em;
+        }
+      }
+      .minmana {
+        margin-left: -30px;
+      }
+      .exactmana {
+        margin-left: 145px;
+      }
+      .maxmana {
+        float: right;
+        margin-right: -20px;
       }
     }
   }

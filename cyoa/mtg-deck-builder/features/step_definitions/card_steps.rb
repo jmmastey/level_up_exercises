@@ -25,7 +25,7 @@ Given(/^there is a card with "(.*)"$/) do |text|
 end
 
 Given(/^there is a card with colors "(.*)"$/) do |colors|
-  @card.create(:card, colors: colors.split(','))
+  @card = create(:card, colors: colors.split(','))
 end
 
 When(/^I visit the card search page$/) do
@@ -47,7 +47,7 @@ When(/^I search for cards with "(.*)"$/) do |text|
 end
 
 When(/^I search for cards with colors "(.*)"$/) do |colors|
-  colors.split(',').each { |color| check(color) }
+  colors.split(',').each { |color| find("label[for='#{color}']", match: :first).click }
 end
 
 Then(/^I should see the card named "(.*)"$/) do |card_name|
@@ -65,7 +65,7 @@ end
 
 Then(/^I should see at least 1 cards with colors "(.*)"$/) do |colors|
   card_id = find('tr.card', match: :first)['data-card-id']
-  colors.each do |color|
+  colors.split(',').each do |color|
     expect(Card.find(card_id).colors.include?(color)).to eq(true)
   end
 end

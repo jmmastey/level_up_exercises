@@ -104,7 +104,25 @@ img.show-card-tooltip {
     }
   }
 }
-
+#colors {
+  margin-top: 15px;
+  li {
+    display: inline-block;
+    input[type="checkbox"] {
+      display: none;
+      & + label {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #555;
+        margin: 2px;
+      }
+      &:checked + label {
+        border: 3px solid black;
+        margin: 0px;
+      }
+    }
+  }
+}
 .mana-cost {
   font: normal normal normal 14px/1 Mana;
   i {

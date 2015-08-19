@@ -24,6 +24,11 @@ $(function () {
     typingTimer = setTimeout(loadCards, doneTypingInterval);
   });
 
+  // Search by cardcolor
+  $("#colors input[type='checkbox']").on("change", function (event) {
+    loadCards();
+  });
+
   // Search by tagname
   $.getJSON("/types", function (types) {
     $("#types").tagit({

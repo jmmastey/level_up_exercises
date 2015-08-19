@@ -10,12 +10,39 @@ class Card < ActiveRecord::Base
   def self.search(params)
     cards = where(nil)
     cards = where('name LIKE ?', "%#{params[:cardname]}%") if params[:cardname]
+    cards = where_colors(cards, params[:cardcolors]) if params[:cardcolors]
+    cards = where_colors_exclude(cards, params[:cardcolors]) if params[:exclude]
+    cards = where_colors_multicolor(cards) if params[:multicolor]
+    cards = where_colors_hybrid(cards) if params[:hybrid]
     cards = where_text(cards, params[:cardtext]) if params[:cardtext]
     cards = where_types(cards, params[:cardtypes]) if params[:cardtypes]
     cards
   end
 
   private
+
+  def self.where_colors_exclude(cards, colors)
+    colors_to_exclude = %w(black blue green red white) - colors
+    colors_to_exclude.each do |color|
+      cards = cards.where('colors NOT LIKE ?', "%#{color}%")
+    end
+    cards
+  end
+
+  def self.where_colors_multicolor(cards)
+    cards.where('colors LIKE ?', "%- %- %")
+  end
+
+  def self.where_colors_hybrid(cards)
+    cards.where('cost LIKE ?', "%/%")
+  end
+
+  def self.where_colors(cards, colors)
+    colors.each do |color|
+      cards = cards.where('colors LIKE ?', "%#{color}%")
+    end
+    cards
+  end
 
   def self.where_text(cards, keywords)
     keywords.each do |keyword|

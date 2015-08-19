@@ -3,7 +3,7 @@ class Artist < ActiveRecord::Base
   serialize :related, Array
 
   def self.search(name, depth)
-    return [{}, {}] if valid_parameters(depth, name)
+    return [{}, {}] if invalid_parameters?(depth, name)
     current_artist = Artist.lookup_artist(name)
     return [{}, {}] if current_artist.nil?
     node_depth = { current_artist.name => depth }
@@ -35,28 +35,19 @@ class Artist < ActiveRecord::Base
 
   # Returns nil unless we find a precise match against the searched artist
   def self.find_artist_in_array(artist_array, name)
-    artist_array.each do |artist|
-      return artist if artist.name.downcase == name.downcase
-    end
-    nil
+    artist_array.find { |artist| artist.name.downcase == name.downcase }
   end
 
   # A hash merge with the strategy of selecting the max value with keys in both
   # hashes. Used to keep track of the maximal depths of nodes.
   def self.depth_merge!(hash_1, hash_2)
-    merged = {}
-    depth_1 = hash_1.clone
-    depth_2 = hash_2.clone
-    depth_1.each do |key, value|
-      maximal_hash_merge(depth_1, depth_2, merged, key, value)
-    end
-    merged.merge!(depth_2)
+    hash_1.merge(hash_2) { |key, old, new| [old.to_i, new.to_i].max }
   end
 
   class << self
     private
 
-    def valid_parameters(depth, name)
+    def invalid_parameters?(depth, name)
       depth <= 0 || name.nil? || name == ''
     end
 
@@ -64,18 +55,6 @@ class Artist < ActiveRecord::Base
     def merge_recursive_step(network, node_depth, recursive_step)
       network.merge!(recursive_step[0])
       node_depth.replace(Artist.depth_merge!(node_depth, recursive_step[1]))
-    end
-
-    # Main strategy for the maximal hash merging.
-    def maximal_hash_merge(depth_1, depth_2, currently_merged, key, value)
-      depth_1.delete(key) if value.nil?
-      depth_2.delete(key) if depth_2[key].nil?
-      if depth_2.key?(key)
-        currently_merged[key] = [value.to_i, depth_2[key].to_i].max
-        depth_2.delete(key)
-      else
-        currently_merged[key] = value
-      end
     end
   end
 end

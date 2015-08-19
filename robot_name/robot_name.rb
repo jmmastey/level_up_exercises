@@ -10,41 +10,41 @@ class Robot
     @name_generator = args[:name_generator]
 
     if @name_generator
-      addRobotToRegistry(@name_generator.call)
+      add_robot_to_registry(@name_generator.call)
     else
-      addRobotToRegistry
+      add_robot_to_registry
     end
   end
 
-  def self.showRegistered
+  def self.show_registered
     puts @@registry
   end
 
-  def addRobotToRegistry(robotName="")
+  def add_robot_to_registry(robotName="")
     if robotName.empty?
-      robotName   = "#{generateChar(2)}#{generateNum(3)}"
+      robotName = "#{generate_char(2)}#{generate_num(3)}"
     end
 
     @name = robotName
-    unless robotRegistered?(@name)
-      raise NameCollisionError, "Problem with robot name! [#{@name}]" unless properName?(@name)
+    unless robot_registered?(@name)
+      raise NameCollisionError, "Improper robot name!" unless proper_name?(@name)
       @@registry << @name
     end
   end
 
-  def generateChar(length=1)
-    length.times.collect {('A'..'Z').to_a.sample}.join("")
+  def generate_char(length=1)
+    length.times.map { ('A'..'Z').to_a.sample }.join("")
   end
 
-  def generateNum(length=1)
-    length.times.collect {rand(10)}.join("")
+  def generate_num(length=1)
+    length.times.map { rand(10) }.join("")
   end
 
-  def properName?(name) 
+  def proper_name?(name) 
     name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
   end
 
-  def robotRegistered?(name)
+  def robot_registered?(name)
     @@registry.include?(name)
   end
 end
@@ -57,4 +57,4 @@ Robot.new(name_generator: generator)
 Robot.new(name_generator: generator)
 
 puts "Robots Registered:"
-Robot.showRegistered
+Robot.show_registered

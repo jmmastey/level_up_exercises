@@ -49,6 +49,8 @@ group :development, :test do
   gem 'simplecov',
       require: false,
       group: :test
+  gem 'pry'
+  gem 'gist'
 end
 
 group :test do

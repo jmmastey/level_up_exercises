@@ -117,7 +117,7 @@ img.show-card-tooltip {
         margin: 2px;
       }
       &:checked + label {
-        border: 3px solid black;
+        border: 3px solid $mtg_blue;
         margin: 0px;
       }
     }

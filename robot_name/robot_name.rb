@@ -10,23 +10,51 @@ class Robot
     @name_generator = args[:name_generator]
 
     if @name_generator
-      @name = @name_generator.call
+      addRobotToRegistry(@name_generator.call)
     else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+      addRobotToRegistry
+    end
+  end
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+  def self.showRegistered
+    puts @@registry
+  end
+
+  def addRobotToRegistry(robotName="")
+    if robotName.empty?
+      robotName   = "#{generateChar(2)}#{generateNum(3)}"
     end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+    @name = robotName
+    unless robotRegistered?(@name)
+      raise NameCollisionError, "Problem with robot name! [#{@name}]" unless properName?(@name)
+      @@registry << @name
+    end
+  end
+
+  def generateChar(length=1)
+    length.times.collect {('A'..'Z').to_a.sample}.join("")
+  end
+
+  def generateNum(length=1)
+    length.times.collect {rand(10)}.join("")
+  end
+
+  def properName?(name) 
+    name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
+  end
+
+  def robotRegistered?(name)
+    @@registry.include?(name)
   end
 end
 
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
-# Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+generator = -> { 'AA111' }
+Robot.new(name_generator: generator) 
+Robot.new(name_generator: generator)
+
+puts "Robots Registered:"
+Robot.showRegistered

@@ -48,5 +48,5 @@ Feature: Search cards
   Scenario: Search by card color
     And there is a card with colors "blue"
     When I visit the card search page
-      And I search for cards with color "blue"
-    Then I should see at least 1 cards with color "blue"
+      And I search for cards with colors "blue"
+    Then I should see at least 1 cards with colors "blue"

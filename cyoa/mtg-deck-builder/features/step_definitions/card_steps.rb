@@ -24,6 +24,10 @@ Given(/^there is a card with "(.*)"$/) do |text|
   @card = create(:card, text: text)
 end
 
+Given(/^there is a card with colors "(.*)"$/) do |colors|
+  @card.create(:card, colors: colors.split(','))
+end
+
 When(/^I visit the card search page$/) do
   visit(cards_path)
 end
@@ -42,6 +46,10 @@ When(/^I search for cards with "(.*)"$/) do |text|
   page.execute_script("$('#cardtext').tagit('createTag', '#{text}')")
 end
 
+When(/^I search for cards with colors "(.*)"$/) do |colors|
+  colors.split(',').each { |color| check(color) }
+end
+
 Then(/^I should see the card named "(.*)"$/) do |card_name|
   expect(page).to have_content(card_name)
 end
@@ -53,4 +61,11 @@ end
 Then(/^I should see at least (.*) cards with "(.*)"$/) do |n, text|
   card_id = find('tr.card', match: :first)['data-card-id']
   expect(Card.find(card_id).text.include?(text)).to eq(true)
+end
+
+Then(/^I should see at least 1 cards with colors "(.*)"$/) do |colors|
+  card_id = find('tr.card', match: :first)['data-card-id']
+  colors.each do |color|
+    expect(Card.find(card_id).colors.include?(color)).to eq(true)
+  end
 end

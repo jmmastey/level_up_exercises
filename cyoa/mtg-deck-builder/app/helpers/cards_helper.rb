@@ -48,7 +48,7 @@ module CardsHelper
 
   def mana_cost_to_html(cost_string)
     return unless cost_string
-    symbols = cost_string.scan(/\{([A-Z1-9\/]+)\}/).flatten.map do |symbol|
+    symbols = cost_string.scan(/\{([A-Z0-9\/]+)\}/).flatten.map do |symbol|
       "<i class=#{symbol_to_class(symbol)}></i>"
     end
     symbols.join.html_safe
@@ -56,9 +56,7 @@ module CardsHelper
 
   def better_card_text(card_text)
     return unless card_text
-    card_text = card_text.gsub(/\.\)/, ").")
-    card_text = card_text.gsub(/\./, ".<br/>")
-    card_text.gsub(/\{[A-Z0-9]\}/) { |cost_string| mana_cost_to_html(cost_string) }.html_safe
+    card_text.gsub(/\{[A-Z0-9]+\}/) { |cost_string| mana_cost_to_html(cost_string) }.html_safe
   end
 
   def types_to_html(card_types)

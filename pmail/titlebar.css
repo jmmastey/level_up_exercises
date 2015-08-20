@@ -1,0 +1,122 @@
+/**************************
+        TITLEBAR
+**************************/
+.titlebar {
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  padding: 6px 30px 6px 15px;
+  border-bottom: 1.5px solid rgba(255,255,255,0.2);
+}
+.titlebar .logo {
+  font-size: 32px;
+  font-family: serif;
+  width: 185px;
+  padding: 5px 0px;
+  background: url('gsprite.png') no-repeat 14px -315px;
+  background-size: 52%;
+  color: rgba(0,0,0,0);
+  text-shadow: none;
+}
+.titlebar .searchbar {
+  width: 51%;
+  max-width: 635px;
+  white-space: nowrap;
+}
+.titlebar .searchbar .text-container:after {
+  right: 3px;
+  top: 13px;
+  border-top: 4px solid #ccc;
+}
+.titlebar .searchbar:hover .text-container:after {
+  border-top: 4px solid #999;
+}
+.titlebar .searchbar input[type="text"] {
+  margin-top: -8px;
+  width: 102%;
+}
+.titlebar .searchbar .search-button {
+  display: inline-block;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  margin-left: -4px;
+  width: 8%;
+  min-width: 62px;
+  font-size: 16px;
+  line-height: 14px;
+  color: rgba(0,0,0,0);
+  text-shadow: none;
+  background: #4285f4;
+  box-shadow: 0.5px 0.5px 3px rgba(0,0,0,0.2);
+  background: -webkit-linear-gradient(top,#4387fd,#4683ea);
+  background: linear-gradient(top,#4387fd,#4683ea);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4387fd,endColorstr=#4683ea,GradientType=1);
+}
+.titlebar .searchbar .search-button:after {
+  content: "";
+  position: absolute;
+  z-index: 20;
+  padding: 15px;
+  background: url('gsprite.png') no-repeat -1px -1907px;
+  background-size: 300%;
+}
+.titlebar .searchbar input,
+.titlebar .searchbar span {
+  border: none;
+  padding: 8px;
+  outline: none;
+  height: 30px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.titlebar .searchbar .text-container { 
+  font-size: 16px;
+  padding-left: 0px;
+  width: 92.5%;
+  box-shadow: -0.5px 0.5px 3px rgba(0,0,0,0.2);
+}
+.titlebar .profile-options {
+  float: right;
+  margin-right: -10px;
+  margin-top: 10px;
+}
+.profile-options > span:not(.profile-dialog) {
+  margin: 0px 11px;
+}
+.profile-options .user {
+  cursor: text;
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+}
+.profile-options .picture:hover {
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.5);
+}
+.profile-options .apps,
+.profile-options .notifications {
+  position: relative;
+  color: rgba(0,0,0,0);
+}
+.profile-options .apps:after,
+.profile-options .notifications:after  {
+  content: "";
+  position: absolute;
+  left: 0px;
+  z-index: 20;
+  padding: 15px;
+}
+.profile-options .apps:after {
+  background: url('gsprite.png') no-repeat -7px -73px;
+  background-size: 300%;
+}
+.profile-options .notifications:after {
+  background: url('gsprite.png') no-repeat 0px -887px;
+  background-size: 300%;
+}
+.profile-options .picture {
+  padding: 15px;
+  background: url('profile_pic.png') no-repeat 0 0;
+  background-size: cover;
+  font-size: 0px;
+  border-radius: 20px;
+}
+

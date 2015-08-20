@@ -1,0 +1,88 @@
+.profile-dialog {
+  position: absolute;
+  margin-right: 30px;
+  top: 100%;
+  background: white;
+  color: black;
+  right: 0px;
+  z-index: 30;
+  width: 300px;
+  text-shadow: none;
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+}
+.profile-dialog:after {
+  content: "";
+  position: absolute;
+  right: 5px;
+  top: -10px;
+  border-bottom: 10px solid white;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+.profile-dialog.hidden {
+  display: none;
+}
+.profile-dialog .account-info {
+  padding: 5px;
+}
+.profile-dialog .picture-large {
+  width: 40%;
+  vertical-align: top;
+  padding: 20px 15px 10px 15px;
+  box-sizing: border-box;
+}
+.profile-dialog .account-button {
+  font-size: 13px;
+  text-shadow: none;
+  color: white;
+  border: 1px solid #37e;
+  font-weight: bold;
+  padding: 6px 13px;
+  border-radius: 2px;
+  background: #4285f4;
+  background: -webkit-linear-gradient(top,#4387fd,#4683ea);
+  background: linear-gradient(top,#4387fd,#4683ea);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4387fd,endColorstr=#4683ea,GradientType=1);
+}
+.profile-dialog .picture-large img {
+  width: 108%;
+}
+.profile-dialog .details {
+  width: 58%;
+  text-align: left;
+  padding: 15px 0px;
+  box-sizing: border-box;
+}
+.profile-dialog .name {
+  font-weight: bold;
+  font-size: 13px;
+}
+.profile-dialog .email {
+  font-size: 13px;
+  color: #555;
+  margin-top: -5px;
+}
+.profile-dialog .links {
+  margin: 2px 0px;
+}
+.profile-dialog .links a {
+  text-decoration: none;
+  font-size: 13px;
+}
+.profile-dialog .account-actions {
+  border-top: 1px solid#ccc;
+  background: #f3f3f3;
+  width: 100%;
+  padding: 10px 20px;
+}
+.account-actions input {
+  padding: 6px 13px;
+  color: #555;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  background: #f6f6f6;
+  border-radius: 2px;
+}
+.account-actions input:last-child {
+  float: right;
+}

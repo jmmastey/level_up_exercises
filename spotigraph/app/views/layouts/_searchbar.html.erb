@@ -1,0 +1,18 @@
+<div class="searchBar">
+  <form action="/" method="post">
+    <div class="form-group">
+      <label for="artist_name">Artist Name</label>
+      <input type="artist" class="form-control" name="name" id="artist_name" value="<%= params[:name] %>"><br/>
+    </div>
+    <div class="form-group">
+      <label for="recursion-depth">Depth</label>
+      <input type="NUMBER" min="1" max="5" step="1" name="depth" class="form-control" id="recursion-depth" value="<%= params[:depth] %>"><br/>
+    </div>
+    <div class="form-group">
+      <button type="submit" name = "Submit" class="btn btn-default">Submit</button>
+    </div>
+  </form>
+  <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
+</div>

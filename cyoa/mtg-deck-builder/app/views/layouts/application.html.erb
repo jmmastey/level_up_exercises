@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= yield(full_title(:title)) %></title>
+  <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="header">
-  <div id="logo">
-    <h1>MTG</h1>
-    <h2>DECK BUILDER</h2>
+  <div id="header">
+    <%= render 'shared/logo' %>
+    <%= render "shared/top_nav" %>
   </div>
-  <%= render "shared/top_nav" %>
-</div>
 
-<% flash.each do |message_type, message| %>
-  <div class="panel alert <%= message_type %>"><%= message %></div>
-<% end %>
+  <% flash.each do |message_type, message| %>
+    <div class="panel alert <%= message_type %>"><%= message %></div>
+  <% end %>
 
-<div id="wrapper">
-  <%= yield %>
-</div>
+  <div id="wrapper">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

@@ -1,0 +1,68 @@
+@mixin fit-content-height () {
+  overflow: hidden;
+}
+
+@mixin alternate-colors ($odd-or-even: even, $color: darken($white, 5%)) {
+  &:nth-child(#{even}) {
+    background-color: $color;
+  }
+}
+
+@mixin card-name-overflow ($width) {
+  width: $width;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin hover-btn ($text-color, $bg-color) {
+  &:hover {
+    color: $text-color;
+    background-color: $bg-color;
+  }
+}
+
+@mixin hover-pointer () {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@mixin absolute-positioning ($top, $right) {
+  position: absolute;
+  top: $top;
+  right: $right;
+}
+
+@mixin margin-border-padding ($direction, $margin, $border, $padding) {
+  margin-#{$direction}: $margin;
+  padding-#{$direction}: $padding;
+  border-#{$direction}: $border;
+}
+
+@mixin equal-margin-border-padding ($direction, $spacing, $border) {
+  @include margin-border-padding($direction, $spacing, $border, $spacing);
+}
+
+@mixin hide-for-js () {
+  display: none;
+}
+
+@mixin square-dimensions ($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin site-box-shadow ($shadow-params) {
+  @include box-shadow($shadow_color $shadow-params);
+}
+
+@mixin margin-auto ($width, $margin-top-bottom: 0) {
+  width: $width;
+  margin: $margin-top-bottom auto;
+}
+
+@function easy-border ($color, $width: 1px) {
+  @return $width solid $color;
+}

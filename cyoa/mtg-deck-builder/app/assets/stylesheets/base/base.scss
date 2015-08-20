@@ -1,29 +1,30 @@
+// Includes logo and top navigation bar.
 #header {
   position: relative;
-  background-color: white;
-  padding: 10px;
-  @include box-shadow($shadow_color 0 0 5px);
+  padding: $header-padding;
+  background-color: $site-background-color;
+  @include site-box-shadow($header-shadow);
 
   nav {
     float: right;
-    margin-top: 20px;
-    margin-right: 10px;
-  }
-
-  a {
-    margin-left: -4px;
+    margin-top: 2 * $header-padding;
+    margin-right: $header-padding;
+    a {
+      margin-left: $close-top-nav-btn-gap;
+    }
   }
 }
 
+// Wraps all content outside of header.
 #wrapper {
   position: relative;
-  padding: 20px 50px;
+  padding: $wrapper-padding;
 }
 
 #logo {
   display: inline-block;
   font-family: $logo;
-  letter-spacing: 2px;
+  letter-spacing: $logo-letter-spacing;
   @include default-transition();
 
   &:hover {
@@ -31,62 +32,60 @@
     color: $site_color;
   }
 
-  h2 {
-    font-size: 0.8em;
-  }
+  h2 { font-size: $smallish-font; }
 }
 
-$panel_padding: 20px;
-$panel_h2_padding: 10px;
+// A panel is a medium sized box for content.
 .panel {
+  @include margin-auto($panel-width);
+  margin-bottom: $smaller-spacing;
   padding: $panel_padding;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  width: 600px;
-  background-color: white;
-  @include box-shadow($shadow_color 3px 3px 5px);
+  background-color: $site-background-color;
+  @include site-box-shadow($left-shadow);
 
   h2 {
-    margin-bottom: 15px;
+    margin-bottom: $panel-title-bottom-margin;
     padding-bottom: $panel_h2_padding;
-    border-bottom: 1px solid #eee;
+    border-bottom: easy-border($lightest-grey);
   }
 }
 
-.sidebar {
+// A panel-column is just a way to organize multiple panels into columns.
+.panel-column {
   &.left {
     float: left;
-    margin-right: 10px;
+    margin-right: $smaller-spacing;
   }
 }
 
+// A divide is a large box for content, spanning the width of the page.
 .divide {
-  background-color: white;
-  padding: 20px;
-  border-bottom: 1px solid #ddd;
-  @include box-shadow($shadow_color 0px 5px 10px);
+  background-color: $site-background-color;
+  padding: $divide-padding;
+  border-bottom: easy-border($lighter-grey);
+  @include site-box-shadow($straight-shadow);
 }
 
 .btn {
   position: relative;
-  padding: 10px 30px;
-  background-color: rgba(0, 0, 0, 0.05);
-  color: black;
+  padding: $btn-padding;
+  color: $btn-text-color;
+  background-color: $btn-background-color;
   border: none;
-  font-size: 0.75em;
-  letter-spacing: 2px;
+  font-size: $btn-font-size;
+  letter-spacing: $btn-letter-spacing;
   text-decoration: none;
   text-transform: uppercase;
   @include fancy-hover-shadow();
 
   &.blue {
-    background-color: lighten($mtg_blue, 65%);
+    background-color: $btn-blue-background-color;
   }
 
   &:hover {
     z-index: 1;
-    color: $site_color;
     cursor: pointer;
-    background-color: white;
+    color: $btn-text-hover-color;
+    background-color: $btn-background-hover-color;
   }
 }

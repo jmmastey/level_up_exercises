@@ -1,32 +1,18 @@
+
 .user-profile {
-  width: 210px;
-  margin-right: 20px;
+  width: $user-profile-width;
+  margin-right: $user-profile-right-margin;
 
-  h2 {
-    font-size: 1.3em;
-  }
-
-  h3 {
-    font-weight: bold;
-  }
-
-  p {
-    margin-bottom: 10px;
-  }
-
-  .btn {
-    display: block;
-  }
+  p { margin-bottom: $smaller-spacing; }
+  h2 { font-size: $biggish-font; }
+  .btn { display: block; }
 }
 
 .edit-user {
-  .destroy {
+  .btn.destroy {
     display: inherit;
-    margin-top: 50px;
-    &:hover {
-      color: white;
-      background-color: $mtg-red;
-    }
+    margin-top: $edit-user-destroy-btn-top-margin;
+    @include hover-btn($white, $mtg-red);
   }
 }
 
@@ -34,37 +20,25 @@
   position: relative;
 
   .decks {}
-
-  .user-deck {
-    overflow: hidden;
-  }
-
+  .user-deck { @include fit-content-height(); }
   .deck-name {
     float: left;
-    width: 304px;
-    margin-bottom: 5px;
+    width: $deck-name-width;
+    margin-bottom: $deck-name-bottom-margin;
   }
-
   .btn {
-    border: 1px solid #eee;
-    &:hover {
-      box-shadow: none;
-    }
+    border: easy-border($lightest-grey);
+    &:hover { box-shadow: none; }
   }
-  .new {
-    position: absolute;
-    top: $panel_padding + $panel_h2_padding - 1;
-    right: $panel_padding;
+  .btn.new {
+    @include absolute-positioning($new-deck-btn-top, $new-deck-btn-right);
   }
-  .edit {
+  .btn.edit {
     float: right;
-    margin-right: 5px;
+    margin-right: $edit-deck-btn-right-margin;
   }
-  .destroy {
+  .btn.destroy {
     float: right;
-    &:hover {
-      color: black;
-      background-color: lighten($mtg_red, 50%);
-    }
+    @include hover-btn($black, lighten($mtg_red, 50%));
   }
 }

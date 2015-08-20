@@ -1,23 +1,27 @@
 .cards-in-deck {
-  overflow: hidden;
-}
+  @include fit-content-height();
 
-.card-in-deck {
-  border: 1px solid #ddd;
-  padding: 10px;
+  .cards-type-group {
+    float: left;
+    width: $card-type-group-width;
+    margin: $card-type-group-margin;
+    background-color: $white;
+    h3 { margin-bottom: $smallest-spacing; }
 
-  &:nth-child(odd) {
-    background-color: darken(white, 5%);
-  }
+    .card-in-deck {
+      padding: $card-in-deck-padding;
+      border: easy-border($lighter-grey);
 
-  &:not(:last-child) {
-    border-bottom: none;
-  }
+      @include alternate-colors(odd);
 
-  .deck-stats {
-    float: right;
-    margin-left: 10px;
-    padding-left: 10px;
-    border-left: 1px solid #ddd;
+      &:not(:last-child) {
+        border-bottom: none;
+      }
+
+      .deck-stats {
+        float: right;
+        @include equal-margin-border-padding(left, $smaller-spacing, easy-border($lighter-grey));
+      }
+    }
   }
 }

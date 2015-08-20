@@ -1,6 +1,6 @@
 body {
   font-family: $sans-serif;
-  background-image: asset-data-url("cream_pixels.png");
+  background-image: $site-background-image;
 }
 
 a {
@@ -11,18 +11,12 @@ a {
   }
 }
 
-h1 {
-  font-size: 3em;
+h1 { font-size: $really-big-font; }
+h2 { font-size: $big-font; }
+h3 {
+  font-weight: bold;
+  font-size: $smallish-font;
 }
 
-h2 {
-  font-size: 2em;
-}
-
-.clear {
-  clear: both;
-}
-
-.align-center {
-  text-align: center;
-}
+.clear        { clear: both; }
+.align-center { text-align: center; }

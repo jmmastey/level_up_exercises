@@ -16,9 +16,15 @@ module YaddaGenerator
   end
 
   def self.create_data
+    create_beer_styles
     create_breweries
     create_users
     create_ratings
+  end
+
+  def self.create_beer_styles
+    beer_style_names = File.readlines('data/beer_styles.txt').map(&:chomp)
+    beer_style_names.each { |name| FactoryGirl.create(:beer_style, name: name) }
   end
 
   def self.create_breweries

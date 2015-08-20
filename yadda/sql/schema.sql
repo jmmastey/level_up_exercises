@@ -82,14 +82,13 @@ CREATE TABLE ratings
   feel                        NUMERIC(3,2)                    CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
   overall                     NUMERIC(3,2)                    CHECK (look BETWEEN 0 AND 5) DEFAULT 0,
   notes                       TEXT                            ,
-  date                        DATE                            NOT NULL DEFAULT CURRENT_DATE,
   created_on                  TIMESTAMP WITH TIME ZONE        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_on                  TIMESTAMP WITH TIME ZONE        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   created_by                  VARCHAR(30)                     NOT NULL,
   updated_by                  VARCHAR(30)
 );
 
-CREATE OR REPLACE FUNCTION update_updated_on_column()
+CREATE OR REPLACE FUNCTION update_timestamp()
 RETURNS TRIGGER AS $$
 BEGIN
    IF row(NEW.*) IS DISTINCT FROM row(OLD.*) THEN
@@ -104,17 +103,20 @@ $$ language 'plpgsql';
 -- Apply function to each table to automatically set the updated_on column
 -- for each update query
 
-CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON addresses FOR
-EACH ROW EXECUTE PROCEDURE  update_updated_on_column();
+CREATE TRIGGER update_timestamp BEFORE UPDATE ON addresses FOR
+EACH ROW EXECUTE PROCEDURE update_timestamp();
 
-CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON users FOR
-EACH ROW EXECUTE PROCEDURE  update_updated_on_column();
+CREATE TRIGGER update_timestamp BEFORE UPDATE ON beer_styles FOR
+EACH ROW EXECUTE PROCEDURE update_timestamp();
 
-CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON breweries FOR
-EACH ROW EXECUTE PROCEDURE  update_updated_on_column();
+CREATE TRIGGER update_timestamp BEFORE UPDATE ON users FOR
+EACH ROW EXECUTE PROCEDURE update_timestamp();
 
-CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON beers FOR
-EACH ROW EXECUTE PROCEDURE  update_updated_on_column();
+CREATE TRIGGER update_timestamp BEFORE UPDATE ON breweries FOR
+EACH ROW EXECUTE PROCEDURE update_timestamp();
 
-CREATE TRIGGER update_updated_on_column BEFORE UPDATE ON ratings FOR
-EACH ROW EXECUTE PROCEDURE  update_updated_on_column();
+CREATE TRIGGER update_timestamp BEFORE UPDATE ON beers FOR
+EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+CREATE TRIGGER update_timestamp BEFORE UPDATE ON ratings FOR
+EACH ROW EXECUTE PROCEDURE update_timestamp();

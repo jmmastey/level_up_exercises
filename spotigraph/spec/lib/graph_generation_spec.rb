@@ -103,7 +103,7 @@ describe GraphJSON do
         graph[name] = generate_random_artist_array(20)
         depths[name] = rand(1...10)
       end
-      return graph, depths
+      [graph, depths]
     end
 
     def generate_random_artist_array(size)

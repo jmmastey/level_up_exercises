@@ -2,7 +2,7 @@
 class GraphJSON
   def to_json(graph, depth)
     @depth = depth
-    return nodes_to_json(graph), edges_to_json(graph)
+    [nodes_to_json(graph), edges_to_json(graph)]
   end
 
   private

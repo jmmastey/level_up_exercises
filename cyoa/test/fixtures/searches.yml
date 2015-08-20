@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  before: 1
+  after: 1
+  query: MyString
+  listing: 1
+
+two:
+  before: 1
+  after: 1
+  query: MyString
+  listing: 1

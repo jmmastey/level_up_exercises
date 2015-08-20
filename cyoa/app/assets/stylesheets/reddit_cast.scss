@@ -1,0 +1,61 @@
+html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+}
+html {
+  background: image-url('living_room02.png') no-repeat 0 0;
+  background-size: cover;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  width: 100%;
+}
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+p.notice {
+  display: none;
+}
+
+/***************************
+         ANIMATIONS
+***************************/
+@-webkit-keyframes fade-in-out {
+  0%, 100% { opacity: 0; }
+  50%, 80% { opacity: 1; }
+}
+@keyframes fade-in-out {
+  0%, 100% { opacity: 0; }
+  50%, 80% { opacity: 1; }
+}
+
+/***************************
+           MEDIA
+***************************/
+@media(max-width: 1200px) {
+  .television {
+    margin-top: 10%;
+  }
+  .television .loading {
+    bottom: 30px;
+  }
+  .toggles .media-toggle {
+    bottom: 0.5%!important;
+  }
+  .toggles .guide-button {
+    bottom: 2%;
+  }
+  .guide {
+    .channels { max-height: 85%; }
+    .new-channel { bottom: 5px; }
+  }
+}

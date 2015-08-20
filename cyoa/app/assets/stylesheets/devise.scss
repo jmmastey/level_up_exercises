@@ -1,0 +1,104 @@
+#error_explanation, p.alert {
+  text-align: left;
+  margin: auto;
+  width: 50%;
+  max-width: 600px;
+  background: rgba(255, 0, 0, 0.701961);
+  padding: 10px 20px;
+  color: white;
+  border-radius: 15px;
+}
+.devise-form {
+  max-width: 600px;
+  margin: 10% auto 10px auto;
+  padding: 20px;
+  background: image-url('tv3_small.jpg');
+  background-size: 100%;
+  color: white;
+  box-shadow: 0px 1px 2px #333;
+  text-shadow: 0px 1px 1px #222;
+
+  h2 {
+    font-size: 50px;
+    line-height: 20px;
+  }
+  label {
+    display: inline-block;
+    min-width: 100px;
+    text-align: left;
+    font-size: 18px;
+    color: #ccc;
+  }
+  input[type="password"],
+  input[type="email"] {
+    padding: 10px;
+    width: 75%;
+    border: 1px solid #222;
+    font-size: 18px;
+    outline: none;
+    background: #333;
+    color: white;
+  }
+  .actions {
+    margin: auto;
+    text-align: right;
+    width: 75%;
+    display: inline-block;
+
+    input[type="submit"] {
+      background: #0a4;
+      border: none;
+      padding: 10px 50px;
+      border-radius: 5px;
+      font-size: 20px;
+      color: white;
+      text-shadow: 0px 1px 1px gray;
+      margin-top: 10px;
+      cursor: pointer;
+      &:hover {
+        background: #2c6;
+      }
+    }
+  }
+  a {
+    color: #888;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 30px;
+    &:hover {
+      color: white;
+    }
+  }
+  img {
+    width: 50%;
+    padding: 40px 20px;
+  }
+  br {
+    display: none;
+  }
+}
+
+.session-form {
+  .field:nth-child(5) {
+    display: inline-block;
+  }
+  .actions {
+    width: auto;
+    padding-left: 70px;
+  }
+}
+.new-password-form {
+  h2 {
+    font-size: 40px;
+    margin-top: 50px;
+  }
+  .field, a {
+    margin-top: 70px;
+  }
+}
+
+
+

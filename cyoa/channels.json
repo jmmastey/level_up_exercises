@@ -1,0 +1,44 @@
+{
+  "channels": [
+    { "name" : "Movie Trailers", "queries" : [
+      "official trailer",
+      "full trailer",
+      "teaser trailer"
+    ]},
+    { "name" : "Animated Shows", "queries" : [
+      "the simpsons",
+      "family guy",
+      "american dad",
+      "south park"
+    ]},
+    { "name" : "Comedy", "queries" : [
+      "whose line",
+      "funny standup",
+      "hilarious comedian"
+    ]},
+    { "name" : "Animals", "queries" : [
+      "animal planet",
+      "zoo animal",
+      "national geographic"
+    ]},
+    { "name" : "Cooking", "queries" : [
+      "cooking show",
+      "food preparation"
+    ]},
+    { "name" : "Travel", "queries" : [
+      "travel abroad",
+      "europe trip"
+    ]},
+    { "name" : "Game Show", "queries" : [
+      "Jeopardy",
+      "Who wants to be a millionaire",
+      "gameshow",
+      "wheel of fortune"
+    ]},
+    { "name" : "Classical Music", "queries" : [
+      "Chopin",
+      "Rachmaninov piano",
+      "Mozart piano"
+    ]}
+  ]
+}

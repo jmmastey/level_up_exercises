@@ -1,0 +1,49 @@
+.television
+  = image_tag "tv3.jpg"
+  .player
+    .logo
+      = image_tag "rclogo.png"
+    .details
+      %span.channel-details
+        %span.number= @locals[:channel_number]
+        %span.name= @locals[:channel_name]
+      %span.show-details
+        %span.name= @locals[:show_name]
+        %span.duration
+    #video
+  .toggles
+    .loading-new-channel.loading
+      .ld.ld-spin-solid
+      %span Creating channel...
+    %i.prev-channel.media-toggle.fa.fa-angle-double-left
+    %i.prev-show.media-toggle.fa.fa-caret-left
+    .guide-button
+      = image_tag "rclogo.png", width: 150
+    %i.next-show.media-toggle.fa.fa-caret-right
+    %i.next-channel.media-toggle.fa.fa-angle-double-right
+    .loading-show.loading
+      .ld.ld-spin-solid
+      %span Loading show...
+  .guide.hidden
+    .guide-title Channel Guide
+    .ld.ld-caret-up
+    .channels
+      -@channels.each_with_index do |channel, idx|
+        .channel{ class: idx==@locals[:index] ? "active" : "" }
+          %i.delete-icon.fa.fa-times
+          %i.active-icon.fa.fa-play-circle-o
+          %span.channel-number= idx < 9 ? "0#{idx+1}" : idx+1
+          %span.channel-name= channel.name
+    .ld.ld-caret-down
+    .new-channel New Channel
+  .new-channel-dialog.player-dialog
+    %h2 Create New Channel
+    =form_for :channel, html: {class: "channel-form"} do |f|
+      = f.text_field :name, placeholder: "name"
+      = f.text_field :tags, placeholder: "tags (comma-separated)"
+      %input.cancel-new-channel{type: "button", value: "Cancel"}
+      = f.submit "Create Channel"
+  .delete-channel-dialog.player-dialog
+    %h2 Delete Channel?
+    %input.confirm-delete{type: "button", value: "Yes"}
+    %input.cancel-delete{type: "button", value: "No"}

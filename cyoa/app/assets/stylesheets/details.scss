@@ -1,0 +1,47 @@
+/***************************
+        TOP DETAILS
+***************************/
+.player .details {
+  position: absolute;
+  top: 5%;
+  left: 3%;
+  width: 94%;
+
+  background: rgba(0,0,0,0.8);
+  text-align: left;
+  cursor: default;
+  height: 55px;
+  overflow: hidden;
+
+  transition: 0.4s all;
+  z-index: 20;
+  &.hidden {
+    height: 0px;
+  }
+  .channel-details {
+    color: white;
+    text-shadow: 0px 0px 1px black;
+    padding-left: 10px;
+    .number{
+      font-size: 42px;
+    }
+    .name {
+      color: #ccc;
+      font-style: italic;
+      text-transform: uppercase;
+      padding-right: 10px;
+      font-size: 28px;
+    }
+  }
+  .show-details {
+    font-size: 20px;
+    color: white;
+    text-shadow: 0px 0px 1px black;
+    float: right;
+    padding: 20px 10px;
+    max-width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

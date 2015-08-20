@@ -1,0 +1,242 @@
+.ld.ease,
+.ld.ease:before,
+.ld.ease:after {
+  -webkit-animation-timing-function: ease!important;
+  animation-timing-function: ease!important;
+}
+.ld.linear,
+.ld.linear:before,
+.ld.linear:after {
+  -webkit-animation-timing-function: linear!important;
+  animation-timing-function: linear!important;
+}
+
+.ld.slowest,
+.ld.slowest:before,
+.ld.slowest:after {
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+}
+.ld.slow,
+.ld.slow:before,
+.ld.slow:after {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+.ld.moderate,
+.ld.moderate:before,
+.ld.moderate:after {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+}
+.ld.fast,
+.ld.fast:before,
+.ld.fast:after {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+}
+.ld.fastest,
+.ld.fastest:before,
+.ld.fastest:after {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
+}
+
+.ld, 
+.ld:before, 
+.ld:after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+}
+
+/*******************************
+    GENERIC SPIN ANIMATION
+*******************************/
+@-webkit-keyframes ld-generic-spin {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(360deg);
+    transform: rotateZ(360deg);
+  }
+}
+@keyframes ld-generic-spin {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(360deg);
+    transform: rotateZ(360deg);
+  }
+}
+.ld.spin {
+  -webkit-animation: ld-generic-spin 1s 0s infinite linear;
+  animation: ld-generic-spin 1s 0s infinite linear;
+}
+
+/*******************************
+    GENERIC THROB ANIMATION
+*******************************/
+@-webkit-keyframes ld-generic-throb {
+  0%, 100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.25);
+    transform: scale(1.25);
+  }
+}
+@keyframes ld-generic-throb {
+  0%, 100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.25);
+    transform: scale(1.25);
+  }
+}
+.ld.throb {
+  -webkit-animation: ld-generic-throb 1s 0s infinite linear;
+  animation: ld-generic-throb 1s 0s infinite linear;
+}
+
+/*******************************
+  GENERIC THROB SPIN ANIMATION
+*******************************/
+@-webkit-keyframes ld-generic-throb-spin {
+  0% {
+    -webkit-transform: scale(0.75) rotateZ(0deg);
+    transform: scale(0.75) rotateZ(0deg);
+  }
+  50% {
+    -webkit-transform: scale(1.25) rotateZ(180deg);
+    transform: scale(1.25) rotateZ(180deg);
+  }
+  100% {
+    -webkit-transform: scale(0.75) rotateZ(360deg);
+    transform: scale(0.75) rotateZ(360deg);
+  }
+}
+@keyframes ld-generic-throb-spin {
+  0% {
+    -webkit-transform: scale(0.75) rotateZ(0deg);
+    transform: scale(0.75) rotateZ(0deg);
+  }
+  50% {
+    -webkit-transform: scale(1.25) rotateZ(180deg);
+    transform: scale(1.25) rotateZ(180deg);
+  }
+  100% {
+    -webkit-transform: scale(0.75) rotateZ(360deg);
+    transform: scale(0.75) rotateZ(360deg);
+  }
+}
+.ld.throb-spin {
+  -webkit-animation: ld-generic-throb-spin 1s 0s infinite linear;
+  animation: ld-generic-throb-spin 1s 0s infinite linear;
+}
+
+/*******************************
+    GENERIC RIGHT ARROW POINT
+*******************************/
+@-webkit-keyframes ld-generic-point-right {
+  0%, 100% {
+    -webkit-transform: translateX(-10px);
+    transform: translateX(-10px);
+  }
+  50% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+}
+@keyframes ld-generic-point-right {
+  0%, 100% {
+    -webkit-transform: translateX(-10px);
+    transform: translateX(-10px);
+  }
+  50% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+}
+
+
+/*******************************
+    GENERIC LEFT ARROW POINT
+*******************************/
+@-webkit-keyframes ld-generic-point-left {
+  0%, 100% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  50% {
+    -webkit-transform: translateX(-10px);
+    transform: translateX(-10px);
+  }
+}
+@keyframes ld-generic-point-left {
+  0%, 100% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  50% {
+    -webkit-transform: translateX(-10px);
+    transform: translateX(-10px);
+  }
+}
+
+
+/*******************************
+    GENERIC UP ARROW POINT
+*******************************/
+@-webkit-keyframes ld-generic-point-up {
+  0%, 100% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+  50% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+}
+@keyframes ld-generic-point-up {
+  0%, 100% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+  50% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+}
+
+/*******************************
+    GENERIC DOWN ARROW POINT
+*******************************/
+@-webkit-keyframes ld-generic-point-down {
+  0%, 100% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  50% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+}
+@keyframes ld-generic-point-down {
+  0%, 100% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  50% {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+}

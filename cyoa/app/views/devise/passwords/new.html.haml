@@ -1,0 +1,10 @@
+.devise-form.new-password-form
+  %h2 Forgot your password?
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    .field
+      / = f.label :email
+      = f.email_field :email, { autofocus: true, placeholder: "e-mail" }
+    .actions
+      = f.submit "Send me reset password instructions"
+  = render "devise/shared/links"
+= devise_error_messages!

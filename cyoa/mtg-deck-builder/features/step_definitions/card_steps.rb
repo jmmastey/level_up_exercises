@@ -30,6 +30,7 @@ end
 
 When(/^I visit the card search page$/) do
   visit(cards_path)
+  find("#toggle-advanced-search .btn", match: :first).click
 end
 
 When(/^I search for the card named "(.*)"$/) do |card_name|
@@ -50,20 +51,20 @@ When(/^I search for cards with colors "(.*)"$/) do |colors|
   colors.split(',').each { |color| find("label[for='#{color}']", match: :first).click }
 end
 
-Then(/^I should see the card named "(.*)"$/) do |card_name|
+Then(/^I will see the card named "(.*)"$/) do |card_name|
   expect(page).to have_content(card_name)
 end
 
-Then(/^I should see at least (.*) cards with the type "(.*)"$/) do |n, card_type|
-  expect(find('.cards', match: :first)).to have_content(card_type, count: n)
+Then(/^I will see cards with the type "(.*)"$/) do |card_type|
+  expect(find('.cards', match: :first)).to have_content(card_type)
 end
 
-Then(/^I should see at least (.*) cards with "(.*)"$/) do |n, text|
+Then(/^I will see cards with "(.*)"$/) do |text|
   card_id = find('tr.card', match: :first)['data-card-id']
   expect(Card.find(card_id).text.include?(text)).to eq(true)
 end
 
-Then(/^I should see at least 1 cards with colors "(.*)"$/) do |colors|
+Then(/^I will see cards with colors "(.*)"$/) do |colors|
   card_id = find('tr.card', match: :first)['data-card-id']
   colors.split(',').each do |color|
     expect(Card.find(card_id).colors.include?(color)).to eq(true)

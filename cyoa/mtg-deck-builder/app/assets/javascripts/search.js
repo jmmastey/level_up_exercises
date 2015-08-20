@@ -1,4 +1,5 @@
 $(function () {
+  if (!$("body").hasClass("cards index") && !$("body").hasClass("decks edit")) return;
   var typingTimer, sliderTimer;
   var doneTypingInterval = 300;
   var doneSlidingInterval = 200;

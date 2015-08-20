@@ -9,7 +9,7 @@ class Cohort
 
   def initialize(name)
     @name = name
-    @records = []
+    @records = 0
     @conversions = 0
   end
 
@@ -18,34 +18,31 @@ class Cohort
     validate_cohort(record)
     record = convert_record(record)
     if record[:result] == 1
-      @conversions = @conversions + 1
+      @conversions += 1
     end
-    @records.push(record)
+    @records += 1
   end
 
   def conversion_rate
-    interval = ABAnalyzer.confidence_interval(@conversions, @records.size,
+    interval = ABAnalyzer.confidence_interval(@conversions, @records,
                                              CONFIDENCE_INTERVAL_ACCURACY)
     interval.map { |val| (val * 100).round(2) }
   end
 
   def to_s
-    string = ""
-    string << "Cohort: #{@name}\n"
-    string << "Total Records: #{@records.size}\n"
-    string << "Total Conversions: #{@conversions}\n"
-    string << "Conversion Interval: #{conversion_rate[0]}% to "
-    string << "#{conversion_rate[1]}%\n"
+    [
+      "Cohort: #{name}",
+      "Total Records: #{records}",
+      "Total Conversions: #{conversions}",
+      "Conversion Interval: #{conversion_rate[0]}% to #{conversion_rate[1]}%"
+    ].join("\n")
   end
 
   private
 
   def validate_hash(record)
-    unless record.include?(:date) &&
-           record.include?(:result) &&
-           record.include?(:cohort)
-      raise ArgumentError, "Invalid Record"
-    end
+    return if [:date, :result, :cohort].all? { |k| record.key?(k) }
+    raise ArgumentError, "Invalid Record"
   end
 
   def validate_cohort(record)

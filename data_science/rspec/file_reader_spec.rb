@@ -17,7 +17,7 @@ describe FileReader do
     end
 
     it "should return hashes within the resulting array" do
-      expect(test_file_reader.data.map { |a| a.is_a?(Hash) }.all?).to eq(true)
+      expect(test_file_reader.data.all? { |a| a.is_a?(Hash) }).to be true
     end
   end
 

@@ -3,35 +3,18 @@ require_relative '../cohort'
 describe Cohort do
   context "basic check" do
     let(:name) { "A" }
-    let(:valid_record) do
-      { date: "03/12/2015",
-        cohort: "A",
-        result: 0 }
-    end
-
-    let(:invalid_record) do
-      { date: "03/12/2015",
-        result: 0 }
-    end
-
-    let(:wrong_record) do
-      { date: "03/12/2015",
-        cohort: "B",
-        result: 0 }
-    end
+    let(:valid_record) { { date: "03/12/2015", cohort: "A", result: 0 } }
+    let(:invalid_record) { { date: "03/12/2015", result: 0 } }
+    let(:wrong_record) { { date: "03/12/2015", cohort: "B", result: 0 } }
 
     subject(:cohort) { Cohort.new(name) }
-
-    it "creates a cohort object" do
-      expect(cohort).to_not be_nil
-    end
 
     it "sets the cohort name" do
       expect(cohort.name).to eq("A")
     end
 
     it "starts with no records" do
-      expect(cohort.records.size).to eq(0)
+      expect(cohort.records).to eq(0)
     end
 
     it "validates record hashes" do
@@ -50,13 +33,13 @@ describe Cohort do
     end
 
     it "has the correct number of records" do
-      expect(cohorts["A"].records.size).to eq(29)
-      expect(cohorts["B"].records.size).to eq(30)
+      expect(cohorts["A"].records).to eq(29)
+      expect(cohorts["B"].records).to eq(30)
     end
 
     it "returns correct conversion ranges for those records" do
-      expect(cohorts["A"].conversion_rate).to eq([5.95, 35.43])
-      expect(cohorts["B"].conversion_rate).to eq([46.09, 80.58])
+      expect(cohorts["A"].conversion_rate).to match_array([5.95, 35.43])
+      expect(cohorts["B"].conversion_rate).to match_array([46.09, 80.58])
     end
   end
 end

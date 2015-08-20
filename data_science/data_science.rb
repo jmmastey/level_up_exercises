@@ -5,17 +5,11 @@ class DataScience
   attr_accessor :raw_data, :cohorts
 
   def initialize(file_path)
-    @raw_data = FileReader.new(file_path).data
-    load_cohorts
+    @cohorts = load_cohorts(FileReader.new(file_path).data)
   end
 
-  def cohorts_different?
-    cohorts_hash = @cohorts.each_with_object({}) do |(name, cohort), values|
-      values[name] = {}
-      values[name][:conversions] = cohort.conversions
-      values[name][:records] = cohort.records.size
-    end
-    ABAnalyzer::ABTest.new(cohorts_hash).different?
+  def different_cohorts?
+    ABAnalyzer::ABTest.new(ab_test_values).different?
   end
 
   def to_s
@@ -23,13 +17,26 @@ class DataScience
       string << cohort.to_s
       string << "\n"
     end
-    result << "The cohorts are statistically different: #{cohorts_different?}"
+    result << "The cohorts are statistically different: #{different_cohorts?}"
   end
 
   private
 
-  def load_cohorts
-    @cohorts = @raw_data.each_with_object({}) do |line, cohorts|
+  def ab_test_values
+    @cohorts.each_with_object({}) do |(name, cohort), values|
+      values[name] = cohort_test_hash(cohort)
+    end
+  end
+
+  def cohort_test_hash(cohort)
+    {
+      conversions: cohort.conversions,
+      records: cohort.records
+    }
+  end
+
+  def load_cohorts(raw_cohorts)
+    raw_cohorts.each_with_object({}) do |line, cohorts|
       line = symbolize_keys(line)
       unless cohorts[line[:cohort]]
         cohorts[line[:cohort]] = Cohort.new(line[:cohort])

@@ -4,15 +4,8 @@ class FileReader
   attr_accessor :data
 
   def initialize(file_path)
-    @data = {}
-
-    if file_path.to_s.strip.empty?
-      raise IOError, "Invalid input file path"
-    end
-
-    unless File.exist?(file_path)
-      raise IOError, "File does not exist"
-    end
+    raise IOError, "Invalid input file path" if file_path.to_s.strip.empty?
+    raise IOError, "File does not exist" unless File.exist?(file_path)
 
     @data = JSON.parse(File.read(file_path))
   end

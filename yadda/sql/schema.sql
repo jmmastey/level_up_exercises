@@ -30,11 +30,21 @@ CREATE TABLE breweries
   updated_by                  VARCHAR(30)
 );
 
+CREATE TABLE beer_styles
+(
+  id                          SERIAL                          PRIMARY KEY,
+  name                        VARCHAR(50)                     NOT NULL UNIQUE,
+  created_on                  TIMESTAMP WITH TIME ZONE        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_on                  TIMESTAMP WITH TIME ZONE        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_by                  VARCHAR(30)                     NOT NULL,
+  updated_by                  VARCHAR(30)
+);
+
 CREATE TABLE beers
 (
   id                          SERIAL                          PRIMARY KEY,
   name                        VARCHAR(50)                     NOT NULL,
-  style                       VARCHAR(100)                    NOT NULL,
+  beer_style_id               INTEGER                         NOT NULL REFERENCES beer_styles ON DELETE RESTRICT, -- beer style should not be deleted if beer still has that style
   description                 TEXT                            ,
   brewing_year                SMALLINT                        NOT NULL,
   brewery_id                  INTEGER                         NOT NULL REFERENCES breweries ON DELETE CASCADE, -- remove all beers assocated with a deleted brewery

@@ -51,9 +51,8 @@ class UsersController < ApplicationController
   end
 
   def logged_in_user
-    unless logged_in?
-      flash[:error] = "Oops! You need to log in."
-      redirect_to login_url
-    end
+    return unless logged_in?
+    flash[:error] = "Oops! You need to log in."
+    redirect_to login_url
   end
 end

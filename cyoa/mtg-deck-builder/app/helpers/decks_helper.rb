@@ -1,7 +1,7 @@
 module DecksHelper
   def find_number_of_card_in_deck(deck_id, card_id)
     cards_deck = find_cards_deck(deck_id, card_id)
-    return cards_deck ? cards_deck.number_in_deck : 0
+    cards_deck ? cards_deck.number_in_deck : 0
   end
 
   def find_cards_deck(deck_id, card_id)

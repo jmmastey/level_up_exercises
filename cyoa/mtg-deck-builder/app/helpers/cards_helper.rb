@@ -44,12 +44,12 @@ module CardsHelper
     return unless symbol
     color_class = SYMBOL_TO_CLASS[symbol] if SYMBOL_TO_CLASS.key?(symbol)
     number_class = "ms-#{symbol}" unless color_class
-    classes = "\"ms ms-cost ms-shadow #{color_class} #{number_class}\""
+    "\"ms ms-cost ms-shadow #{color_class} #{number_class}\""
   end
 
   def mana_cost_to_html(cost_string)
     return unless cost_string
-    symbols = cost_string.scan(/\{([A-Z0-9\/]+)\}/).flatten.map do |symbol|
+    symbols = cost_string.scan(%r(\{([A-Z0-9\/]+)\})).flatten.map do |symbol|
       "<i class=#{symbol_to_class(symbol)}></i>"
     end
     symbols.join.html_safe
@@ -66,7 +66,7 @@ module CardsHelper
   end
 
   def organize_cards_by_type(cards)
-    groups = Hash.new { |h,k| h[k] = [] }
+    groups = Hash.new { |h, k| h[k] = [] }
     TYPE_ORDERING.each do |type|
       groups[type] = cards.select { |card| card.types.map(&:name).include?(type) }
       groups[type].each { |card| cards -= [card] }

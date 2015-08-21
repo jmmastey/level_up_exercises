@@ -22,8 +22,6 @@ class Card < ActiveRecord::Base
     cards
   end
 
-  private
-
   def self.where_mana_gt(cards, min)
     cards.where('cmc >= ?', Integer(min))
   end

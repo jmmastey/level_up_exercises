@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 def generate_decks(user)
-  n_decks = rand(2..20)
-  decks = Array.new(n_decks) { create(:deck, user: user) }
-  n_decks
+  rand(2..20).times { create(:deck, user: user) }
 end
 
 describe User do
@@ -55,7 +53,7 @@ describe User do
 
   it "can create a deck" do
     user = create(:user)
-    deck = create(:deck, user: user)
+    create(:deck, user: user)
     expect(user.decks).to_not be_empty
   end
 
@@ -67,7 +65,7 @@ describe User do
 
   it "has all of its decks destroyed when it itself is destroyed" do
     user = create(:user)
-    n_decks = generate_decks(user)
+    generate_decks(user)
     deck_ids = user.decks.map(&:id)
     user.destroy
     expect(Deck.where(id: deck_ids)).to be_empty

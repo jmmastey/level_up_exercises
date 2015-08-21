@@ -7,27 +7,26 @@ class DeckBrew
     "creature enchant" => ["enchantment"],
     "enchant player" => ["enchantment"],
     "player enchant" => ["enchantment"],
-    "interrupt" => ["instant"]
+    "interrupt" => ["instant"],
   }
 
   def all_cards
     puts "Getting all cards"
     page = 0
     cards = []
-    no_more_cards = false
-    until no_more_cards do
+    loop do
       puts "\tOn page #{page}"
       response = self.class.get("#{BASE_URI}/cards?page=#{page}")
       page += 1
       cards += response
-      no_more_cards = true unless response.length > 0
+      break unless response.length > 0
     end
     cards
   end
 
   def all(something)
     return all_cards if something == "cards"
-    return self.class.get("#{BASE_URI}/#{something}")
+    self.class.get("#{BASE_URI}/#{something}")
   end
 
   def load_all_cards

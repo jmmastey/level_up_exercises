@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :deck do
-    sequence(:name) { |n| "test_deck#{n}" }
+    name { Faker::Name.name }
     user
   end
 end

@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :type do
-    sequence(:name) { |n| "test_type#{n}" }
+    sequence(:name) { |n| "#{Faker::Lorem.word}#{n}" }
   end
 end

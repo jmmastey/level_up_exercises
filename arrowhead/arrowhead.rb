@@ -17,16 +17,12 @@ class Arrowhead
 
   # FIXME: I don't have time to deal with this. -- fixed
   def self.classify(region, shape)
-    unless CLASSIFICATIONS.include?(region)
+    shapes = CLASSIFICATIONS.fetch(region) do 
       raise "Unknown region, please provide a valid region."
     end
-
-    shapes = CLASSIFICATIONS[region]
-    unless shapes.include?(shape)
+    arrowhead = shapes.fetch(shape) do 
       raise "Unknown shape value. Are you sure you know what you're talking about?"
     end
-
-    arrowhead = shapes[shape]
     "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end

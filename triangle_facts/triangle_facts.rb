@@ -12,15 +12,15 @@ class Triangle
 	end
 
 	def equilateral?
-		return side1 == side2 && side2 == side3
+		side1 == side2 && side2 == side3
 	end
 
 	def isosceles?
-  	return [side1, side2, side3].uniq.length == 2
+  	[side1, side2, side3].uniq.length == 2
 	end
 
 	def scalene?
-		equilateral? || isosceles?
+		!(equilateral? || isosceles?)
 	end
 
 	def right_angle?
@@ -28,12 +28,11 @@ class Triangle
 	end
 
 	def recite_facts
-		triangleFacts = ""
 		triangleFacts = "This triangle is equilateral!" if equilateral?
 		triangleFacts = "This triangle is isosceles! Also, that word is hard to type." if isosceles?
-		triangleFacts = "This triangle is scalene and mathematically boring." unless scalene?
-
+		triangleFacts = "This triangle is scalene and mathematically boring." if scalene?
 		puts triangleFacts
+
 		puts "This triangle is also a right triangle!" if right_angle?
 		puts "The angles of this triangle are #{ angles.join(",") }"
 	end
@@ -43,18 +42,18 @@ class Triangle
 		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
 		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
 
-		return [angleA, angleB, angleC]
+		[angleA, angleB, angleC]
 	end
 
 	def radians_to_degrees(rads)
-		return (rads * 180 / Math::PI).round
+		(rads * 180 / Math::PI).round
 	end
 end
 
 triangles = [
 	[5, 5, 5],
-	[5, 12, 13],
-	[6, 6, 8]
+	[6, 6, 8],
+	[5, 12, 13]
 ]
 
 triangles.each { |sides|

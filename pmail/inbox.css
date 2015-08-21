@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+.navbar {
+    z-index: 1;
+}
+
+.sidebar-nav {
+    padding: 9px 0;
+}
+
+.dropdown-menu .sub-menu {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    margin-top: -1px;
+}
+
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.whole_page {
+    position: fixed;
+    margin: 0;
+    padding-top: 3.5%;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.leftSidebar {
+    background: #F8F8F8;
+    color: #fff;
+    width: 20%;
+    height: 100%;
+    /* Fixed sidebar start */
+    position: fixed;
+
+}
+
+.leftSidebar .folders {
+    padding-top: 10%;
+    text-align: left;
+    color: #000000;
+}
+
+.leftSidebar .folders li {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+}
+
+.leftSidebar .folders li a {
+    width: 100%;
+    overflow: auto;
+}
+
+.leftSidebar .folders_extended {
+    display: none;
+    text-align: left;
+    color: #000000;
+}
+
+.leftSidebar .folders_extended li {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+}
+
+.leftSidebar .folders_extended li a {
+    width: 100%;
+}
+
+.leftSidebar .compose {
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.leftSidebar .compose a {
+    width: 100%;
+}
+
+.mainContent {
+    background: #F0F0F0;
+    width: 80%;
+    height: 100%;
+    float: right;
+    -webkit-box-shadow: inset 9px 10px 32px -16px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 9px 10px 32px -16px rgba(0,0,0,0.75);
+    box-shadow: inset 9px 10px 32px -16px rgba(0,0,0,0.75);
+}
+
+.mainContent .line_item {
+    font-size: 17px;
+}
+
+.glyphicon:before {
+    color: darkgray;
+    visibility: visible;
+}
+
+.glyphicon.glyphicon-star-empty:checked:before {
+    color: yellow;
+    content: "\e006";
+}
+
+input[type=checkbox].glyphicon {
+    visibility: hidden;
+}
+
+.mainContent .listgroup {
+    list-style-type: none;
+}
+
+.mainContent .listgroup .line_item .email:hover {
+    background: #D6D6D6;
+}
+
+.mainContent .email_toolbar {
+    padding: 1.5%;
+}
+
+.mainContent .listgroup .line_item .glyphy {
+    margin-left: 10%;
+    margin-top: 0;
+    position: absolute;
+}
+
+.mainContent .listgroup .line_item .email .sender {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mainContent .listgroup .line_item .email .subject {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mainContent .listgroup .line_item .email .date {
+    text-align: right;
+}
+
+.mainContent .navbar-fixed-bottom {
+    width: 98%;
+    padding-left: 22%;
+}

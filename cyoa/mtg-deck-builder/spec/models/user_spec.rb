@@ -1,5 +1,11 @@
 require 'rails_helper'
 
+def generate_decks(user)
+  n_decks = rand(2..20)
+  decks = Array.new(n_decks) { create(:deck, user: user) }
+  n_decks
+end
+
 describe User do
   it "has a valid factory" do
     expect(create(:user)).to be_valid
@@ -45,5 +51,25 @@ describe User do
 
   it "is invalid with emails longer than 255 characters" do
     expect(build(:user, email: "e" * 256)).to_not be_valid
+  end
+
+  it "can create a deck" do
+    user = create(:user)
+    deck = create(:deck, user: user)
+    expect(user.decks).to_not be_empty
+  end
+
+  it "can create multiple decks" do
+    user = create(:user)
+    n_decks = generate_decks(user)
+    expect(user.decks.count).to eq(n_decks)
+  end
+
+  it "has all of its decks destroyed when it itself is destroyed" do
+    user = create(:user)
+    n_decks = generate_decks(user)
+    deck_ids = user.decks.map(&:id)
+    user.destroy
+    expect(Deck.where(id: deck_ids)).to be_empty
   end
 end

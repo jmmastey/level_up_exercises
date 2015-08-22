@@ -2,19 +2,17 @@
 class GraphJSON
   def to_json(graph, depth)
     @depth = depth
+    @visited_nodes = {}
     [nodes_to_json(graph), edges_to_json(graph)]
   end
 
   private
 
   def nodes_to_json(network)
-    nodes = []
-    id = 1
-    @visited_nodes = {}
-    network.each do |key|
-      name = key[0]
-      next if @visited_nodes.key?(name.downcase)
-      id = convert_single_node!(name, id, nodes)
+    id = 0
+    nodes = network.map do |name, _related|
+      id += 1
+      convert_single_node(name, id) unless @visited_nodes.key?(name.downcase)
     end
     nodes.to_json
   end
@@ -42,10 +40,9 @@ class GraphJSON
     %w(#4A5F70 #7F825f #C2AE95 #824E4E #66777D)[depth % 5]
   end
 
-  # Modifies nodes!
-  def convert_single_node!(name, id, nodes)
-    nodes << { id: id, label: name, color: colors(@depth[name]) }
+  # Logs that we have visited a node and sets up the hash for that node.
+  def convert_single_node(name, id)
     @visited_nodes[name.downcase] = id
-    id + 1
+    { id: id, label: name, color: colors(@depth[name]) }
   end
 end

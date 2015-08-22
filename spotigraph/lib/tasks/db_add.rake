@@ -1,5 +1,7 @@
-namespace :artists do
-  task :add => :environment do |task, args|
+# Adds artists to the database.
+# Example usage: rake artist:add["Black Sabbath","Radiohead",.....]
+namespace :artist do
+  task add: :environment do |_task, args|
     args.extras.each do |subsequent|
       name = String(subsequent)
       message_user(Artist.search_spotify(name), name)

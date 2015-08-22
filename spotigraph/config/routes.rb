@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  post '/' => 'artists#generate_graph'
-  root 'artists#index'
+  post '/' => 'graph#generate_graph'
+  root 'graph#index'
 
 end

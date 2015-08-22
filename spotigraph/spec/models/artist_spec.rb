@@ -1,81 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Artist, type: :model do
-  describe 'Artist.depth_merge!' do
-    it 'merges two empty hashes correctly' do
-      expect(Artist.depth_merge!({}, {})).to eq({})
-    end
-
-    it 'merges correctly when the right hash is empty' do
-      one_key = { first: 1 }
-      expect(Artist.depth_merge!(one_key, {})).to eq(one_key)
-    end
-
-    it 'merges correctly when the left hash is empty' do
-      one_key = { first: 1 }
-      expect(Artist.depth_merge!({}, one_key)).to eq(one_key)
-    end
-
-    it 'merges correctly when neither are empty and neither coincide' do
-      hash_1 = { first: 1 }
-      hash_2 = { second: 2 }
-      result = { first: 1, second: 2 }
-      expect(Artist.depth_merge!(hash_1, hash_2)).to eq(result)
-    end
-
-    it 'merges correctly when passed two copies of the same hash' do
-      hash_1 = { first: 1 }
-      expect(Artist.depth_merge!(hash_1, hash_1)).to eq(hash_1)
-    end
-
-    it 'merges correctly when one key coincides (equal value)' do
-      hash_1 = { first: 1 }
-      hash_2 = { first: 1 }
-      expect(Artist.depth_merge!(hash_1, hash_2)).to eq(hash_1)
-    end
-
-    it 'merges correctly when one key coincides (min left val)' do
-      hash_1 = { first: 0 }
-      hash_2 = { first: 1 }
-      expect(Artist.depth_merge!(hash_1, hash_2)).to eq(hash_2)
-    end
-
-    it 'merges correctly when one key coincides (min right val)' do
-      hash_1 = { first: 1 }
-      hash_2 = { first: 0 }
-      expect(Artist.depth_merge!(hash_1, hash_2)).to eq(hash_1)
-    end
-
-    it 'merges correctly when multiple keys coincide (avg use)' do
-      hash_1 = { a: 1, b: 2, c: 3, d: 4, e: 5 }
-      hash_2 = { a: 4, b: 3, c: 2, d: 1, e: 7 }
-      result = { a: 4, b: 3, c: 3, d: 4, e: 7 }
-      expect(Artist.depth_merge!(hash_1, hash_2)).to eq(result)
-    end
-
-    it 'merges correctly when left has nil' do
-      hash_1 = { a: 1, b: 2, c: nil, d: 4, e: 5 }
-      hash_2 = { a: 4, b: 3, c: 2, d: 1, e: 3 }
-      result = { a: 4, b: 3, c: 2, d: 4, e: 5 }
-      expect(Artist.depth_merge!(hash_1, hash_2)).to eq(result)
-    end
-
-    it 'merges correctly when right has nil' do
-      hash_1 = { a: 1, b: 2, c: 2, d: 4, e: 5 }
-      hash_2 = { a: 4, b: 3, c: 2, d: 1, e: nil }
-      result = { a: 4, b: 3, c: 2, d: 4, e: 5 }
-      expect(Artist.depth_merge!(hash_1, hash_2)).to eq(result)
-    end
-
-    it 'multiple coincide with nil (avg use)' do
-      hash_1 = { a: 1, b: 2, c: nil, d: 4, e: 5 }
-      hash_2 = { a: 4, b: 3, c: 2, d: 1, e: nil }
-      result = { a: 4, b: 3, c: 2, d: 4, e: 5 }
-      expect(Artist.depth_merge!(hash_1, hash_2)).to eq(result)
-    end
-  end
-
-  describe 'Artist.find_artist' do
+  describe '.find_artist' do
     let(:valid_names) { ['Black Sabbath', 'Radiohead'] }
 
     # Note, Faker will not generate names of this form
@@ -143,7 +69,7 @@ RSpec.describe Artist, type: :model do
     end
   end
 
-  describe 'Artist.collect_related_artists' do
+  describe '.collect_related_artists' do
     let(:max_size) { 5 }
 
     it 'correctly merges an array of names' do
@@ -171,13 +97,13 @@ RSpec.describe Artist, type: :model do
     end
   end
 
-  describe 'Artist.search_spotify' do
+  describe '.search_spotify' do
     let(:artists) { %w(Radiohead Mixtapes) }
     let(:not_on_spotify) do
       %w(sPUKslXlnz pdbPxLK7rt w8yUJnC171 mLvr4IaeC8 ZYR9Z5R967)
     end
 
-    it 'finds an artists given the artist is on spotify' do
+    it 'finds an graph given the artist is on spotify' do
       artist = Artist.search_spotify('Black Sabbath')
       expect(artist.name).to eq('Black Sabbath')
     end
@@ -189,123 +115,14 @@ RSpec.describe Artist, type: :model do
       end
     end
 
-    it 'adds artists it finds to the database' do
+    it 'adds graph it finds to the database' do
       # If this test is failing, ensure that you haven't modified the seed file.
-      # Seed file is loaded for testing, and some artists will already be in db.
-      # This test ensures that we properly add encountered artists to the db.
+      # Seed file is loaded for testing, and some graph will already be in db.
+      # This test ensures that we properly add encountered graph to the db.
       artists.each do |artist|
         expect(Artist.find_by_name(artist)).to be nil
         Artist.lookup_artist(artist)
         expect(Artist.find_by_name(artist)).to_not be_nil
-      end
-    end
-  end
-
-  describe 'Artist.search' do
-    let(:valid_names) { ['Black Sabbath', 'Radiohead'] }
-    let(:invalid_names) do
-      [
-        nil,
-        '',
-        '; DROP TABLE artists;',
-        "'<script>alert('alert');</script>'"
-      ]
-    end
-    let(:related_artists) do
-      {
-        'Black Sabbath' => [
-          'Ozzy Osbourne',
-          'Judas Priest',
-          'Dio',
-          'Iron Maiden',
-          'Motörhead',
-          'Danzig',
-          'Deep Purple',
-          'Thin Lizzy',
-          'KISS',
-          'Saxon',
-          'Heaven & Hell',
-          'AC/DC',
-          'Rainbow',
-          'Metallica',
-          'Bruce Dickinson',
-          'Tony Iommi',
-          'UFO',
-          'Diamond Head',
-          'Alice Cooper',
-          'Uriah Heep'
-        ],
-        'Radiohead' => [
-          'Thom Yorke',
-          'Portishead',
-          'Muse',
-          'Björk',
-          'Pixies',
-          'Interpol',
-          'Atoms For Peace',
-          'Beck',
-          'Four Tet',
-          'Joy Division',
-          'The Flaming Lips',
-          'Grizzly Bear',
-          'The National',
-          'The xx',
-          'The Smiths',
-          'Burial',
-          'R.E.M.',
-          'Elbow',
-          'St. Vincent',
-          'Liars'
-        ],
-        'Ozzy Osbourne' => [
-          'Black Sabbath',
-          'Dio',
-          'Judas Priest',
-          'KISS',
-          'Iron Maiden',
-          'Twisted Sister',
-          'Alice Cooper',
-          'Scorpions',
-          'Whitesnake',
-          'Mötley Crüe',
-          'Rainbow',
-          'Bruce Dickinson',
-          'Deep Purple',
-          'Skid Row',
-          'AC/DC',
-          'Queensrÿche',
-          'Motörhead',
-          'Saxon',
-          'Quiet Riot',
-          "\"Ugly Kid Joe"
-        ]
-      }
-    end
-    let(:invalid_depths) { (-10..0).to_a }
-
-    it 'returns valid graph for depths 1 for valid_names' do
-      valid_names.each do |name|
-        graph = Artist.search(name, 1)[0]
-        graph.each do |key, value|
-          expect(related_artists[key]).to eq(value)
-        end
-      end
-    end
-
-    it 'works correctly for a path length of 2' do
-      graph = Artist.search('Black Sabbath', 2)[0]
-      expect(graph['Ozzy Osbourne']).to eq(related_artists['Ozzy Osbourne'])
-    end
-
-    it 'returns [{}, {}] for invalid names' do
-      invalid_names.each do |name|
-        expect(Artist.search(name, 1)).to eq([{}, {}])
-      end
-    end
-
-    it 'returns [{}, {}] for invalid depths' do
-      invalid_depths.each do |depth|
-        expect(Artist.search('Black Sabbath', depth)).to eq([{}, {}])
       end
     end
   end

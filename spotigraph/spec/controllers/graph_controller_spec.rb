@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe ArtistsController, type: :controller do
-  describe 'GET #index' do
+RSpec.describe GraphController, type: :controller do
+  describe 'GET', '#index' do
     it 'returns http success' do
       get :index
       expect(response).to have_http_status(:success)
@@ -13,7 +13,7 @@ RSpec.describe ArtistsController, type: :controller do
     end
   end
 
-  describe 'POST #generate_graph' do
+  describe 'POST', '#generate_graph' do
     let(:valid_artists) do
       [
         'Black Sabbath'
@@ -63,22 +63,43 @@ RSpec.describe ArtistsController, type: :controller do
       end
     end
 
-    it 'returns 400 for invalid artists on :bad_depths' do
+    it 'returns 400 for invalid graph on :bad_depths' do
       invalid_artists.each do |invalid|
         bad_depths.each do |depth|
           post_generate_graph({ name: invalid, depth: depth }, 400)
         end
       end
     end
+
+    it 'loads the cached graph whenever possible' do
+      # This test assumes graph_controller.setup_graph functions properly.
+      valid_artists.each do |artist|
+        setup_graph(artist, 1)
+        find_artist = Graph.find_by(artist: artist, depth: 1)
+        expect(find_artist).to_not be(nil)
+        post_generate_graph({ name: artist, depth: 1 }, 200)
+      end
+    end
   end
 
   def post_generate_graph(params, status)
     post :generate_graph, params
-    expect(response).to have_http_status(status), graph_error(params, status)
+    expect(response).to have_http_status(status), error(params, status, response)
   end
 
-  def graph_error(params, status)
-    "Expected posting to artists#generate_graph with params= #{params}" \
-    " To have status #{status}"
+  def error(params, status, response)
+    "Expected posting to graph#generate_graph with params= #{params} "
+    "To have status #{status}. Instead, it had status #{response}."
+  end
+
+  def setup_graph(name, depth)
+    nodes, edges = Graph.search(name, depth)
+    nodes_json, edges_json = GraphJSON.new.to_json(nodes, edges)
+    Graph.create!(
+      artist: name,
+      depth: depth,
+      nodes: nodes_json,
+      edges: edges_json,
+    )
   end
 end

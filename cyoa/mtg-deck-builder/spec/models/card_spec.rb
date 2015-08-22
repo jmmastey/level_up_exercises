@@ -134,7 +134,7 @@ describe Card do
           hybrid: true,
         }
         cards = Card.search(params)
-        cards.each { |card| expect(card.mana).to include('/') }
+        cards.each { |card| expect(card.cost).to include('/') }
       end
 
       it "returns cards searched only for pherexian mana" do
@@ -142,7 +142,7 @@ describe Card do
           pherexian: true,
         }
         cards = Card.search(params)
-        cards.each { |card| expect(card.mana).to include('P') }
+        cards.each { |card| expect(card.cost).to include('P') }
       end
 
       it "returns cards searched by for minimum converted mana cost" do

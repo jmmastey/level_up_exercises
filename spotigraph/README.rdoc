@@ -11,5 +11,3 @@ http://i.imgur.com/jUcMB7H.png
 The search artist is tan, all related artists of Black Sabbath are green
 http://i.imgur.com/30yLEGu.jpg
 The search artist is red, all related artists are tan, all the artists related to the related artists are green.
-== Tests
-To run all the available tests, execute ./run_all_tests.sh

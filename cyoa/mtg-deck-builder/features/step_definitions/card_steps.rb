@@ -90,8 +90,7 @@ When(/^I search for pherexian mana cards$/) do
   check "pherexian"
 end
 
-# TODO: Fix cmc tests. For some reason, it seems that they are not
-#       loading search results.
+# TODO: Fix cmc tests.
 When(/^I search for cards with cmc greater than or equal to (.*)$/) do |cmc|
   fill_in "minmana", with: cmc
   find("#minmana", match: :first).native.send_keys(:return)

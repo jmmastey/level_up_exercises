@@ -3,30 +3,28 @@ Feature: Boot up bomb
   As a supervillian
   I should be able to boot up the bomb
 
-  Scenario: Not Booting up the bomb
+  Background: Visit the home page
     Given I visit the home page
+
+  Scenario: Not Booting up the bomb
     When I do nothing
     Then the bomb will be off
 
   Scenario: Booting up the bomb
-    Given I visit the home page
     When I boot up the bomb
     Then the bomb will be on
 
   Scenario: Booting up the bomb with activation code configured
-    Given I visit the home page
     When I configure the activation code to be "0987"
     And I boot up the bomb
     Then the bomb will be on
 
   Scenario: Booting up the bomb with deactivation code configured
-    Given I visit the home page
     When I configure the deactivation code to be "1111"
     And I boot up the bomb
     Then the bomb will be on
 
-  Scenario: Booting up the bomb with activation and deactivation codes configured
-    Given I visit the home page
+  Scenario: Booting up the bomb with both activation and deactivation codes configured
     When I configure the activation code to be "0987"
     And I configure the deactivation code to be "1111"
     And I boot up the bomb

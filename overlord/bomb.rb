@@ -42,6 +42,7 @@ class Bomb
   end
 
   def deactivate(code)
+    return @state unless activated?
     if code == @deactivation_code
       @state = DEACTIVATED
     else

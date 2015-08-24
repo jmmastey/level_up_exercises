@@ -5,21 +5,6 @@ describe Bomb do
     @default_activation_code = "1234"
     @default_deactivation_code = "0000"
     @bomb = Bomb.new
-
-    @activate = lambda do |code|
-      @bomb.boot_up
-      @bomb.activate(code)
-    end
-
-    @deactivate = lambda do |code|
-      @activate.call(@default_activation_code)
-      @bomb.deactivate(code)
-    end
-
-    @detonate = lambda do
-      @activate.call(@default_deactivation_code)
-      3.times { @bomb.deactivate("9999") }
-    end
   end
 
   describe "#initialize" do
@@ -36,8 +21,8 @@ describe Bomb do
       end
 
       it "should boot up with default codes" do
-        expect(@bomb.activation_code).to eq("1234")
-        expect(@bomb.deactivation_code).to eq("0000")
+        expect(@bomb.activation_code).to eq(@default_activation_code)
+        expect(@bomb.deactivation_code).to eq(@default_deactivation_code)
       end
 
       it "should set the Bomb's state to ON" do
@@ -45,14 +30,16 @@ describe Bomb do
       end
     end
 
-    context "boot up bomb with activation and deactivation codes supplied" do
+    context "boot up bomb with custom activation and deactivation codes supplied" do
       before(:each) do
-        @bomb.boot_up("2345", "1111")
+        @activation_code = "2345"
+        @deactivation_code = "1111"
+        @bomb.boot_up(@activation_code, @deactivation_code)
       end
 
       it "should boot up with supplied codes" do
-        expect(@bomb.activation_code).to eq("2345")
-        expect(@bomb.deactivation_code).to eq("1111")
+        expect(@bomb.activation_code).to eq(@activation_code)
+        expect(@bomb.deactivation_code).to eq(@deactivation_code)
       end
 
       it "should set the Bomb's state to ON" do
@@ -62,7 +49,8 @@ describe Bomb do
 
     context "boot up bomb with invalid activation and deactivation codes supplied" do
       before(:each) do
-        @bomb.boot_up("asdf", "asdf")
+        @invalid_code = "asdf"
+        @bomb.boot_up(@invalid_code, @invalid_code)
       end
 
       it "should not set the Bomb's state to ON" do
@@ -72,77 +60,137 @@ describe Bomb do
   end
 
   describe "#activate" do
-    context "bomb is off" do
+    context "attempt to activate bomb before bomb has been booted" do
       before(:each) do
         @bomb.activate("1234")
       end
 
       it "should not activate bomb" do
-        expect(@bomb.state).to eq(0)
+        expect(@bomb.state).to_not eq(2)
       end
     end
 
-    context "bomb is on, and correct activation code is supplied" do
+    context "attempt to activate bomb when bomb is on, and configured with default codes" do
       before(:each) do
-        @activate.call("1234")
+        @bomb.boot_up
       end
 
-      it "should set the Bomb's state to ACTIVATED" do
+      it "should set the Bomb's state to ACTIVATED when correct code is supplied" do
+        @bomb.activate(@default_activation_code)
         expect(@bomb.state).to eq(2)
       end
+
+      it "should not set the Bomb's state to ACTIVATED when incorrect code is supplied" do
+        @bomb.activate("asdf")
+        expect(@bomb.state).to_not eq(2)
+      end
     end
 
-    context "bomb is on, but incorrect activation code is supplied" do
+    context "attempt to activate bomb when bomb is on, and configured with custom codes" do
       before(:each) do
-        @activate.call("2345")
+        @activation_code = "2345"
+        @deactivation_code = "1111"
+        @bomb.boot_up(@activation_code, @deactivation_code)
       end
 
-      it "should not activate bomb" do
-        expect(@bomb.state).to eq(1)
+      it "should set the Bomb's state to ACTIVATED when correct code is supplied" do
+        @bomb.activate(@activation_code)
+        expect(@bomb.state).to eq(2)
+      end
+
+      it "should not set the Bomb's state to ACTIVATED when incorrect code is supplied" do
+        @bomb.activate("asdf")
+        expect(@bomb.state).to_not eq(2)
       end
     end
   end
 
   describe "#deactivate" do
-    context "bomb has not been activated" do
+    context "attempt to deactivate before bomb has been booted" do
+      before(:each) do
+        @bomb.deactivate(@default_deactivation_code)
+      end
+
+      it "should not activate or deactivate the bomb, and bomb should be off" do
+        expect(@bomb.state).to_not eq(2)
+        expect(@bomb.state).to_not eq(3)
+      end
+    end
+
+    context "attempt to deactivate before bomb has been activated" do
       before(:each) do
         @bomb.boot_up
-        @bomb.deactivate("0000")
+        @bomb.deactivate(@default_deactivation_code)
       end
 
       it "should not activate or deactivate the bomb" do
-        expect(@bomb.state).to eq(1)
+        expect(@bomb.state).to_not eq(2)
+        expect(@bomb.state).to_not eq(3)
       end
     end
 
-    context "bomb has been activated and correct code is supplied" do
+    context "attempt to deactivate when bomb has been activated and configured with default codes" do
       before(:each) do
-        @deactivate.call("0000")
+        @bomb.boot_up
+        @bomb.activate(@default_activation_code)
       end
 
-      it "should set the Bomb's state to DEACTIVATED" do
+      it "should set the Bomb's state to DEACTIVATED when correct code is supplied" do
+        @bomb.deactivate(@default_deactivation_code)
         expect(@bomb.state).to eq(3)
       end
+
+      it "should not set the Bomb's state to DEACTIVATED when incorrect code is supplied" do
+        @bomb.deactivate("asdf")
+        expect(@bomb.state).to_not eq(3)
+      end
+
+      it "should increment deactivation attempts when incorrect code is supplied" do
+        deactivation_attempts = @bomb.deactivation_attempts
+        @bomb.deactivate("asdf")
+        expect(@bomb.deactivation_attempts).to eq(deactivation_attempts + 1)
+      end
+
+      it "should destroy the bomb after 3 deactivation_attempts" do
+        3.times { @bomb.deactivate("asdf") }
+        expect(@bomb.state).to eq(4)
+      end
     end
 
-    context "bomb has been activated but incorrect code is supplied" do
+    context "attempt to deactivate when bomb has been activated and configured with custom codes" do
       before(:each) do
-        @deactivate.call("1111")
+        @activation_code = "2345"
+        @deactivation_code = "1111"
+        @bomb.boot_up(@activation_code, @deactivation_code)
+        @bomb.activate(@activation_code)
       end
 
-      it "should not deactivate the bomb" do
-        expect(@bomb.state).to eq(2)
+      it "should set the Bomb's state to DEACTIVATED when correct code is supplied" do
+        @bomb.deactivate(@deactivation_code)
+        expect(@bomb.state).to eq(3)
       end
 
-      it "should increment deactivation attempts" do
-        expect(@bomb.deactivation_attempts).to eq(1)
+      it "should not set the Bomb's state to DEACTIVATED when incorrect code is supplied" do
+        @bomb.deactivate("asdf")
+        expect(@bomb.state).to_not eq(3)
+      end
+
+      it "should increment deactivation attempts when incorrect code is supplied" do
+        deactivation_attempts = @bomb.deactivation_attempts
+        @bomb.deactivate("asdf")
+        expect(@bomb.deactivation_attempts).to eq(deactivation_attempts + 1)
+      end
+
+      it "should destroy the bomb after 3 deactivation_attempts" do
+        3.times { @bomb.deactivate("asdf") }
+        expect(@bomb.state).to eq(4)
       end
     end
   end
 
   describe "#detonate" do
     before(:each) do
-      @detonate.call
+      @bomb.detonate
     end
 
     it "should set the Bomb's state to DESTROYED" do
@@ -156,7 +204,7 @@ describe Bomb do
         @bomb.boot_up
       end
 
-      it "should return true that the Bomb's state is ON" do
+      it "should return true; the Bomb's state is ON" do
         expect(@bomb.on?).to eq(true)
       end
     end
@@ -165,7 +213,7 @@ describe Bomb do
       before(:each) do
       end
 
-      it "should return false that the Bomb's state is not ON" do
+      it "should return false; the Bomb's state is not ON" do
         expect(@bomb.on?).to eq(false)
       end
     end
@@ -177,7 +225,7 @@ describe Bomb do
         @bomb.boot_up
       end
 
-      it "should return false that the Bomb's state is OFF" do
+      it "should return false; the Bomb's state is OFF" do
         expect(@bomb.off?).to eq(false)
       end
     end
@@ -186,7 +234,7 @@ describe Bomb do
       before(:each) do
       end
 
-      it "should return true that the bomb's state is OFF" do
+      it "should return true; the bomb's state is OFF" do
         expect(@bomb.off?).to eq(true)
       end
     end
@@ -195,7 +243,8 @@ describe Bomb do
   describe "#activated?" do
     context "bomb has been activated" do
       before(:each) do
-        @activate.call("1234")
+        @bomb.boot_up
+        @bomb.activate(@default_activation_code)
       end
 
       it "should return true, Bomb's state is ACTIVATED" do
@@ -217,7 +266,9 @@ describe Bomb do
   describe "#deactivated?" do
     context "bomb has been deactivated" do
       before(:each) do
-        @deactivate.call("0000")
+        @bomb.boot_up
+        @bomb.activate(@default_activation_code)
+        @bomb.deactivate(@default_deactivation_code)
       end
 
       it "should return true, Bomb's state is DEACTIVATED" do
@@ -227,7 +278,8 @@ describe Bomb do
 
     context "bomb has not been deactivated" do
       before(:each) do
-        @activate.call("1234")
+        @bomb.boot_up
+        @bomb.activate(@default_activation_code)
       end
 
       it "should return false, Bomb's state is not DEACTIVATED" do
@@ -239,7 +291,9 @@ describe Bomb do
   describe "#destroyed?" do
     context "bomb has been destroyed" do
       before(:each) do
-        @detonate.call
+        @bomb.boot_up
+        @bomb.activate(@default_activation_code)
+        @bomb.detonate
       end
 
       it "should return true, Bomb's state is DESTROYED" do
@@ -249,7 +303,8 @@ describe Bomb do
 
     context "bomb has not been destroyed" do
       before(:each) do
-        @activate.call("1234")
+        @bomb.boot_up
+        @bomb.activate(@default_activation_code)
       end
 
       it "should return false, Bomb's state is not DESTROYED" do

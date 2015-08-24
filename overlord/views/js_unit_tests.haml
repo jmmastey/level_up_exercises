@@ -1,0 +1,31 @@
+%html
+  %head
+    %title Overlord -- JavaScript Unit Tests
+    %script{src: 'js/jquery-1.11.3.min.js'}
+    %script{src: 'js/sweetalert.min.js'}
+    %script{src: 'js/countdowntimer.js'}
+    %link{rel: "stylesheet", href: "css/overlord.css"}
+    %link{rel: "stylesheet", href: "css/sweetalert.css"}
+    %link{rel: "stylesheet", href: "css/qunit-1.18.0.css"}
+  %body
+    .header
+      %h1.logo
+        %a{href: "/"} OVERLORD
+      #timer
+        %input#hidden{value: locals[:time], type: 'hidden'}
+        %span#seconds= locals[:time_limit]
+        \:
+        %span#milliseconds 00
+      .bomb-state= locals[:bomb_state]
+
+    %section.main
+      %header
+        JavaScript Unit Tests
+        %a{href: "https://qunitjs.com/"} (Using QUnit)
+      .content
+        #qunit
+        #qunit-fixture
+
+  %script{src: 'js/overlord.js'}
+  %script{src: 'js/qunit-1.18.0.js'}
+  %script{src: 'js/unit-tests.js'}

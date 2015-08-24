@@ -4,6 +4,17 @@ require_relative "bomb"
 
 enable :sessions
 
+get '/js_unit_tests' do
+  new_bomb
+  session[:name] = determine_villain_name unless session[:name]
+  haml :js_unit_tests, locals: {
+    bomb_state: session[:bomb].readable_state,
+    name: session[:name],
+    time: session[:bomb].time_left,
+    time_limit: session[:bomb].time_limit,
+  }
+end
+
 get '/' do
   new_bomb
   session[:name] = determine_villain_name unless session[:name]

@@ -50,7 +50,7 @@ When(/^I visit the card search page$/) do
 end
 
 When(/^I hover over a card's tooltip icon$/) do
-  pending # TODO: Fix card tooltip test.
+  pending # TODO: Fix card tooltip test!
   execute_script('$($(".show-card-tooltip")[0]).mouseover()')
   @card_id = evaluate_script("$($('.card')[0]).data('card-id')")
 end

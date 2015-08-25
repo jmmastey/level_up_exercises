@@ -1,0 +1,12 @@
+@mixin default-transition() {
+  @include transition-duration(0.25s);
+  @include transition-timing-function(ease-out);
+}
+
+@mixin fancy-hover-shadow() {
+  @include default-transition();
+
+  &:hover {
+    @include box-shadow(darken($shadow_color, 15%) -5px 5px 10px);
+  }
+}

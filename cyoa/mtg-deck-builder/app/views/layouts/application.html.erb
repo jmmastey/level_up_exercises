@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(full_title(:title)) %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="header">
+  <div id="logo">
+    <h1>MTG</h1>
+    <h2>DECK BUILDER</h2>
+  </div>
+  <nav>
+    <%= link_to "Home", root_path, class: "btn" %>
+    <%= link_to "Help", help_path, class: "btn" %>
+    <%= link_to "About", about_path, class: "btn" %>
+    <% if logged_in? %>
+      <%= link_to "Profile", current_user, class: "btn" %>
+      <%= link_to "Log Out", logout_path, method: :delete, class: "btn" %>
+    <% else %>
+      <%= link_to "Sign Up", signup_path, class: "btn" %>
+      <%= link_to "Log In", login_path, class: "btn" %>
+    <% end %>
+  </nav>
+</div>
+
+<% flash.each do |message_type, message| %>
+  <div class="panel alert <%= message_type %>"><%= message %></div>
+<% end %>
+
+<div id="wrapper">
+  <%= yield %>
+</div<
+
+</body>
+</html>

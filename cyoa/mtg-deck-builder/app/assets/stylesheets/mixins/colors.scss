@@ -1,0 +1,9 @@
+$shadow_color: rgba(0,0,0,0.2);
+$mtg_blue: #006699;
+$mtg_red: #990000;
+$mtg_green: #009900;
+$mtg_yellow: #FFFFCC;
+
+$site_color: $mtg_blue;
+$link_color: $site_color;
+$link_hover_color: lighten($link_color, 20%);

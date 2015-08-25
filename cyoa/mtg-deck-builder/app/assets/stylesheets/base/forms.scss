@@ -1,0 +1,19 @@
+.form { 
+  width: 400px;
+  text-align: center;
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  input {
+    width: 100%;
+    &[type="text"],
+    &[type="email"],
+    &[type="password"] {
+      width: 100%;
+      font-size: 1.5em;
+      text-align: center;
+    }
+  }
+}

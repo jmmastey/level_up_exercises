@@ -1,0 +1,33 @@
+.basic-form {
+  h3 {
+    color: $main-heading;
+    text-align: center;
+  }
+
+  input[type='text'], input[type='password'], input[type='email'] {
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    border: 2px solid $light-grey;
+
+    &:hover {
+      border: 2px solid darken($light-grey, 25%);
+    }
+
+    &:focus {
+      border: 2px solid darken($brand-color, 25%);
+    }
+  }
+
+  input[type='submit'] {
+    @extend .btn;
+    @extend .btn-primary;
+    min-width: 20%;
+    margin-top: 15px;
+  }
+
+  select {
+    min-width: 25%;
+    display: block;
+  }
+}

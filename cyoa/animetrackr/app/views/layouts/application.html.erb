@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%=h page_title %></title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
+<%= render 'shared/header' %>
+
+<div class="container">
+  <% if notice %>
+  <p class="notice"><%= notice %></p>
+  <% end %>
+
+  <% if alert %>
+  <p class="alert"><%= alert %></p>
+  <% end %>
+  
+  <%= yield %>
+</div>
+
+<%= javascript_include_tag 'application' %>
+</body>
+</html>

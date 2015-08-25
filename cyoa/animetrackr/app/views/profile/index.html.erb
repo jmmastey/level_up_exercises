@@ -1,0 +1,73 @@
+<% content_for(:title, 'Profile') %>
+
+<div id="profile">
+
+  <div class="profile-overview">
+    <img src="<%= gravatar_for(current_user.email) %>" class='avatar' />
+    
+    <div class="details">
+      <h3><%= current_user.username %></h3>
+      <p>Member Since: <%= current_user.created_at.strftime('%m-%d-%Y') %></p>
+    </div>
+
+    <div class="library-overview">
+      <h3><%= link_to 'Anime Library', anime_library_path %> (<%= @library.size %>)</h3>
+      <%= link_to 'Add Anime', anime_search_path %>
+
+      <h4>Wishlist<h4>
+      <ul class='wishlist'>
+        <% anime_wishlist(current_user, 3).each do |library_item| %>
+            <li><%= link_to library_item.anime.title, anime_library_edit_path(library_item) %></li>
+        <% end %>
+      </ul>
+
+      <h4>Currently Watching<h4>
+      <ul class='currently-watching'>
+        <% anime_currently_watching(current_user, 3).each do |library_item| %>
+            <li><%= link_to library_item.anime.title, anime_library_edit_path(library_item) %></li>
+        <% end %>
+      </ul>
+
+      <h4>Done Watching<h4>
+      <ul class='done-watching'>
+        <% anime_done_watching(current_user, 3).each do |library_item| %>
+            <li><%= link_to library_item.anime.title, anime_library_edit_path(library_item) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="activity-feed">
+      <h3>Activity Feed</h3>
+      <% @activities.each do |activity| %>
+        <div class="feed-item">
+        <%= render :partial => 'shared/feed/added_anime',
+                   :locals => { activity: activity } if activity.added? %>
+        <%= render :partial => 'shared/feed/updated_anime',
+                   :locals => { activity: activity } if activity.updated? %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="friends">
+      <h3>Friends</h3>
+      <ul class="friends-list">
+      <li><%= link_to 'Add Friend', friends_search_path %></li>
+      <% @requests.each do |request| %>
+        <li class="request">
+          <%= request.from.username %>
+          <%= link_to 'Accept', friend_request_accept_path(request), method: :post, class: 'btn btn-primary' %>
+          <%= link_to 'Reject', friend_request_reject_path(request), method: :post, class: 'btn btn-danger' %>
+        </li>
+      <% end %>
+      <% @pending.each do |pending| %>
+        <li class="pending"><%= pending.to.username %> (pending)</li>
+      <% end %>
+      <% @friends.each do |friend| %>
+        <li class="friend"><%= link_to friend.friend.username, profile_view_path(friend.friend.username) %></li>
+      <% end %>
+      </ul>
+
+  </div>
+</div>

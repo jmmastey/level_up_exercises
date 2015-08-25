@@ -1,0 +1,28 @@
+@mixin transparent-background($red, $green, $blue, $alpha) {
+  background-color: rgb($red, $green, $blue);
+  background-color: rgba($red, $green, $blue, $alpha);
+}
+
+
+
+@mixin transparent-border($size, $red, $green, $blue, $alpha) {
+  border: $size solid rgb($red, $green, $blue);
+  border: $size solid rgba($red, $green, $blue, $alpha);
+  -moz-background-clip: padding;     /* Firefox 3.6 */
+    -webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
+    background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */        
+}
+
+@mixin spacer($size) {
+  width: 100%;
+  height: $size;
+}
+
+@mixin spacer-x() {
+  @each $size in 5 10 15 20 25 30 35 40 45 50 {
+    .spacer-#{$size} {
+      width: 100%;
+      height: #{$size}px
+    }
+  }
+}

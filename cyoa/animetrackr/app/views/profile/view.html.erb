@@ -1,0 +1,61 @@
+<% content_for(:title, 'Profile') %>
+
+<div id="profile">
+
+  <div class="profile-overview">
+    <img src="<%= gravatar_for(@user.email) %>" class='avatar' />
+    
+    <div class="details">
+      <h3><%= @user.username %></h3>
+      <p>Member Since: <%= @user.created_at.strftime('%m-%d-%Y') %></p>
+    </div>
+
+    <div class="library-overview">
+      <h3><%= link_to 'Anime Library', anime_library_view_path(@user.username) %> (<%= @library.size %>)</h3>
+
+      <h4>Wishlist<h4>
+      <ul class='wishlist'>
+        <% anime_wishlist(@user, 3).each do |library_item| %>
+            <li><p><%= library_item.anime.title %></p></li>
+        <% end %>
+      </ul>
+
+      <h4>Currently Watching<h4>
+      <ul class='currently-watching'>
+        <% anime_currently_watching(@user, 3).each do |library_item| %>
+            <li><p><%= library_item.anime.title %></p></li>
+        <% end %>
+      </ul>
+
+      <h4>Done Watching<h4>
+      <ul class='done-watching'>
+        <% anime_done_watching(@user, 3).each do |library_item| %>
+            <li><p><%= library_item.anime.title %></p></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="activity-feed">
+      <h3>Activity Feed</h3>
+      <% @activities.each do |activity| %>
+        <div class="feed-item">
+        <%= render :partial => 'shared/feed/added_anime',
+                   :locals => { activity: activity } if activity.added? %>
+        <%= render :partial => 'shared/feed/updated_anime',
+                   :locals => { activity: activity } if activity.updated? %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="friends">
+      <h3>Friends</h3>
+      <ul class="friends-list">
+      <% @friends.each do |friend| %>
+        <li class="friend"><%= link_to friend.friend.username, profile_view_path(friend.friend.username) %></li>
+      <% end %>
+      </ul>
+
+  </div>
+</div>

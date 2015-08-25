@@ -1,0 +1,55 @@
+#anime-library {
+  @extend .row;
+  
+  .add {
+    @extend .content-box;
+  }
+
+  .edit {
+    @extend .content-box;
+  }
+
+  .view-all {
+    ul {
+      @extend .col-md-12;
+      padding: 0;
+
+      li {
+        @include transparent-background(255, 255, 255, 0.75);
+        @include transparent-border(3px, 0, 0, 0, 0.10);
+        padding: 25px;
+        margin-bottom: 25px;
+        list-style: none;
+
+        &:after {
+          clear:both;
+          display: table;
+          content: ""
+        }
+
+        img {
+          @extend .pull-left;
+          margin-right: 25px;
+          width: 25%;
+          border: 2px solid $black;
+        }
+
+        .details {
+          @extend .col-xs-8;
+        }
+
+        h4 {
+          color: $main-heading;
+        }
+
+        .rated {
+          color: darken($success-green, 25%);
+        }
+
+        .unrated {
+          color: $light-grey;
+        }
+      }
+    }
+  }
+}

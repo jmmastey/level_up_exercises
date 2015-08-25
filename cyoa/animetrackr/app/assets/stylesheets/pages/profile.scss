@@ -1,0 +1,102 @@
+#profile {
+  @extend .row;
+
+  .profile-overview {
+    @extend .col-xs-12;
+    @include transparent-background(255, 255 ,255 , 0.5);
+    min-height: 250px;
+    border: 1px solid $black;
+    padding: 25px;
+
+
+    .avatar {
+      @extend .pull-left;
+      border: 1px solid $black;
+      width: 150px;
+      height: 150px;
+    }
+  
+    .details {
+      @extend .col-sm-3;
+      display: inline-block;
+    }
+
+    .library-overview {
+      @extend .col-sm-3;
+      display: inline-block;
+
+      ul {
+        padding-left: 10px;
+      }
+
+      li {
+        list-style: none;
+
+        p {
+          font-size: 11pt;
+          color: darken($brand-color, 10%);
+
+          &:before {
+            content: '» '
+          }
+        }
+
+        a {
+          font-size: 11pt;
+          text-index: -10px;
+        }
+      }
+
+    }
+  }
+
+  .activity-feed {
+    @extend .col-md-8;
+  
+    .feed-item {
+      @extend .content-box;
+      margin-bottom: 25px;
+
+      img {
+        @extend .pull-left;
+        width: 25%;
+        margin-right: 25px;
+        border: 2px solid $black;
+      }
+    }
+  }
+
+  .friends {
+    @extend .col-md-4;
+
+    .friends-list {
+      @include transparent-background(255, 255, 255, 0.75);
+      @include transparent-border(3px, 0, 0, 0, 0.10);
+      padding: 0;
+
+      li {
+        list-style: none;
+        width: 100%;
+        padding: 5px 10px;
+        display: table;
+
+        &:hover {
+          background: lighten($brand-color, 25%);
+        }
+      }
+
+      .pending {
+        background: lighten($light-grey, 5%);
+      }
+
+      .request {
+        background: lighten($light-grey, 5%);
+
+        .btn {
+          @extend .pull-right;
+        }
+      }
+
+    }
+  }
+}

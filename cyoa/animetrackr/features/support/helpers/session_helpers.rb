@@ -1,0 +1,30 @@
+def sign_up(username, email, password)
+  visit(new_user_registration_path)
+  fill_in(:user_username, with: username)
+  fill_in(:user_email, with: email)
+  fill_in(:user_password, with: password)
+  fill_in(:user_password_confirmation, with: password)
+  click_button('Sign Up')
+end
+
+def sign_in(email, password)
+  visit(new_user_session_path)
+  fill_in(:user_email, with: email)
+  fill_in(:user_password, with: password)
+  click_button('Sign In')
+end
+
+def sign_out
+  visit(destroy_user_session_path)
+end
+
+def switch_users(user)
+  sign_out
+  sign_in(user.email, user.password)
+end
+
+def switch_to_new_user(user)
+  sign_out
+  sign_up(user.username, user.email, user.password)
+  sign_in(user.email, user.password)
+end

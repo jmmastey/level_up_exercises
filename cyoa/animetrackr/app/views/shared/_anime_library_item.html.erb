@@ -1,0 +1,16 @@
+<ul>
+  <% library_items.each do |library_item| %>
+    <li>
+      <img src="<%= library_item.anime.cover_image %>" />
+      <h4><%= library_item.anime.title %></h4>
+      <p>Community Rating: <%= output_stars(library_item.anime.community_rating) %></p>
+      <p>Your Rating: <%= output_stars(library_item.user_rating) %></p>
+      <p><%= library_item.anime.synopsis %></p>
+
+      <% if library_item.user == current_user %>
+        <%= link_to 'Delete', anime_library_remove_path(library_item), method: :delete %>
+        <%= link_to 'Edit', anime_library_edit_path(library_item) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

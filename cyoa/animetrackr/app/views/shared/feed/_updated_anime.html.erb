@@ -1,0 +1,3 @@
+<h4><%= activity.activity %></h4>
+<p><%= distance_of_time_in_words(Time.now, activity.created_at) %> ago</p>
+<p>Rating: <%= output_stars(activity.anime.community_rating) %></p>

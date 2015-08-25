@@ -1,0 +1,30 @@
+<% content_for(:title, @anime ? 'Search Results - ' + @title : 'Search') %>
+<div id="anime">
+  <div class="search">
+    <h3>Search</h3>
+    <%= form_tag(anime_search_path, method: 'POST', class: 'basic-form') do %>
+      <%= label_tag(:title) %>
+      <%= text_field_tag(:title) %>
+      <%= submit_tag("Search") %>
+
+    <% end %>
+  </div>
+
+  <% if @anime %>
+  <div class="search-results">
+    <h3>Search Results for <%=h @title %></h3>
+    <% @anime.each do |anime| %>
+      <div class="result-item">
+        <img src="<%= anime.cover_image %>" />
+        <div class="details">
+          <h3><%= anime.title %></h3>
+          <p>Rating: <%= output_stars(anime.community_rating) %></p>
+          <p><%= anime.synopsis %></p>
+          <%= link_to 'Add to Library',  anime_library_add_path(anime), class: 'add-anime' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+
+</div>

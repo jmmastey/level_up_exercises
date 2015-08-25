@@ -1,6 +1,7 @@
 example_emails();
 handle_checks();
 
+// Obviously we want to delete this when the backend exists.
 function example_emails() {
     generate_message(false, 'John Smith', 'Lorem Ipsum', '12-12-12', 'label-warning', 'Important');
     generate_message(false, 'Nida Hayslett', 'Buy This Today', '12-11-12', 'label-success', 'Ad');
@@ -18,11 +19,12 @@ function example_emails() {
 
 // Used to toggle visible folders when we click more/less
 function show_folders() {
-    $('.folders_extended').show();
+    $('.folders#user_folders').show();
     $('.show_more').hide();
 }
+
 function hide_folders() {
-    $('.folders_extended').hide();
+    $('.folders#user_folders').hide();
     $('.show_more').show();
 }
 // Generates url-safe string. (Used to generate email click redirect)
@@ -33,6 +35,7 @@ function to_slug(Text) {
         .replace(/[^\w-]+/g, '')
         ;
 }
+
 // Select all emails
 function select_all() {
     var select_all = !$(document).find('#check_all').hasClass('active');
@@ -43,16 +46,17 @@ function select_all() {
         $(this).closest('.email').css('background', color);
     });
 }
-// Redirects the browser using email information.
+
+// Redirects the browser using email information. (Ludicrously unsafe)
 function email_click_redirect(email) {
     var sender = $(email).find(".sender").text();
     var subject = $(email).find(".subject").text();
     var date = $(email).find(".date").text();
-    // may change depending how we send users to the specific email.
     window.location = "#sender=" + to_slug(sender) +
         "&subject=" + to_slug(subject) +
         "&date=" + to_slug(date);
 }
+
 // Handle the checkboxes and stars for each email.
 function handle_checks() {
     $('#check_all').click(select_all);
@@ -61,6 +65,7 @@ function handle_checks() {
         handle_message(i);
     }
 }
+
 // Handle a particular message. (highlighting, clicking, etc)
 function handle_message(index) {
     $('.sender_subject_' + index)
@@ -82,6 +87,7 @@ function handle_message(index) {
             }
         });
 }
+
 /* Appends a message to the listgroup ul.
  * \params
  * Label must be passed as a bootstrap label.
@@ -114,7 +120,8 @@ function generate_message(read, author, subject, date, label, label_message) {
                     $('<input>').attr({
                         type: 'checkbox',
                         id: 'message_' + email_number + '_star',
-                        class: 'star_message_' + email_number + ' glyphy glyphicon glyphicon-star-empty'
+                        class: 'star_message_' + email_number +
+                               ' glyphy glyphicon glyphicon-star-empty'
                     })
                 ),
                 $('<div>')
@@ -133,7 +140,7 @@ function generate_message(read, author, subject, date, label, label_message) {
                             .append(label_message),
                         ' ' + subject
                     ),
-                    $('<div>')
+                    $('<time>')
                         .attr('class', 'date col-md-4')
                         .append(date)
                 )

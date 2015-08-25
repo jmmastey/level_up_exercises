@@ -57,7 +57,7 @@
     </div>
 </nav>
 <!-- Mail Toolbar -->
-<div class="email_toolbar col-md-12">
+<section class="email_toolbar col-md-12">
     <div class="col-md-2 btn-group" style="z-index: 2;">
         <button type="button" class="btn btn-default dropdown-toggle"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -127,9 +127,9 @@
             <li><a href="#">New Tag</a></li>
         </ul>
     </div>
-</div>
+</section>
 <!-- Left Menu -->
-<div class="leftSidebar">
+<aside class="leftSidebar">
     <div class="compose">
         <a href="#" role="button" class="btn btn-danger">Compose</a>
     </div>
@@ -153,7 +153,7 @@
                     More <span class="glyphicon glyphicon-arrow-down"></span>
                 </a></li>
             </div>
-            <div class="folders_extended" id="user_folders">
+            <div class="folders" id="user_folders">
                 <li><a onclick="hide_folders();" style="cursor: pointer;  padding-left: 2px;">
                     Less<span class="glyphicon glyphicon-arrow-up"></span>
                 </a></li>
@@ -166,14 +166,14 @@
             </div>
         </ul>
     </div>
-</div>
+</aside>
 <!-- All messages -->
-<div class="mainContent">
+<main class="mainContent">
     <ul class="listgroup">
         <!-- Emails go here (jQuery) -->
     </ul>
     <!-- Bottom Navigation -->
-    <div class="container">
+    <footer class="container">
         <nav class="navbar-fixed-bottom">
             <ul class="pager">
                 <li class="previous"><a href="#"><span
@@ -182,9 +182,9 @@
                         aria-hidden="true">&rarr;</span></a></li>
             </ul>
         </nav>
-    </div>
+    </footer>
     <!-- / Bottom Navigation -->
-</div>
+</main>
 <!-- Javascript for handling the inbox -->
 <script src="inbox.js"></script>
 </body>

@@ -1,9 +1,0 @@
-<% provide(:title, "New Deck") %>
-<%= render 'shared/error_messages', obj: @deck %>
-<div class="panel form">
-  <h2>New Deck</h2>
-  <%= form_for(@deck) do |f| %>
-    <p><%= f.text_field :name, placeholder: "Name" %></p>
-    <p><%= f.submit "Create New Deck", class: "btn" %></p>
-  <% end %>
-</div>

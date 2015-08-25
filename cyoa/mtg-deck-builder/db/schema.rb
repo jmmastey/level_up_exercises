@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814213855) do
+ActiveRecord::Schema.define(version: 20150825190253) do
 
   create_table "cards", force: :cascade do |t|
     t.string  "name"
@@ -33,6 +33,11 @@ ActiveRecord::Schema.define(version: 20150814213855) do
     t.integer "number_in_deck", default: 0
   end
 
+  create_table "cards_mtg_sets", id: false, force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "mtg_set_id"
+  end
+
   create_table "cards_types", id: false, force: :cascade do |t|
     t.integer "card_id"
     t.integer "type_id"
@@ -47,6 +52,12 @@ ActiveRecord::Schema.define(version: 20150814213855) do
 
   add_index "decks", ["user_id", "created_at"], name: "index_decks_on_user_id_and_created_at"
   add_index "decks", ["user_id"], name: "index_decks_on_user_id"
+
+  create_table "mtg_sets", force: :cascade do |t|
+    t.string "set_id"
+    t.string "name"
+    t.string "set_type"
+  end
 
   create_table "types", force: :cascade do |t|
     t.string "name"

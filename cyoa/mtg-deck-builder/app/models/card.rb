@@ -1,6 +1,7 @@
 class Card < ActiveRecord::Base
   has_and_belongs_to_many :decks
   has_and_belongs_to_many :types
+  has_and_belongs_to_many :mtg_sets
   validates :name, presence: true,
                    uniqueness: true
   serialize :colors

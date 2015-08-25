@@ -6,6 +6,7 @@ class CreateBillActions < ActiveRecord::Migration
       t.integer :bill_id
 
       t.timestamps null: false
+      t.index :created_at
     end
   end
 end

@@ -8,7 +8,7 @@ describe BillsController, type: :controller do
       context 'searching for bill content' do
         before do
           create(:bill, short_title: 'American Super Computing Leadership Act')
-          params = default_params.merge(query: 'american leadership')
+          params = default_params.merge(bill: { query: 'american leadership'})
           get(:index, params)
         end
 

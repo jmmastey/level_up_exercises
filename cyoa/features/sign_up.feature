@@ -3,22 +3,21 @@ Feature: Signing up
   I want to sign in
   Because I want to customize my preferences
 
-Scenario: Sign up
-  Given I am signed out
-  When I sign up
-  Then I see a welcome message
+  Background:
+    Given I am signed out
 
-Scenario: Email already taken
-  Given I am signed out
-  When I sign up with a used email
-  Then I see an email already taken message
+  Scenario: Sign up
+    When I sign up
+    Then I see a welcome message
 
-Scenario: Invalid email
-  Given I am signed out
-  When I sign up with an invalid email
-  Then I see an invalid email error message
+  Scenario: Email already taken
+    When I sign up with a used email
+    Then I see an email already taken message
 
-Scenario: Inadequate password
-  Given I am signed out
-  When I sign up with a short password
-  Then I see an bad password error message
+  Scenario: Invalid email
+    When I sign up with an invalid email
+    Then I see an invalid email error message
+
+  Scenario: Inadequate password
+    When I sign up with a short password
+    Then I see an bad password error message

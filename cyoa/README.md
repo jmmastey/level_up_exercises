@@ -19,11 +19,7 @@ SUNLIGHTLABS_APIKEY: 'my-api-key'
 ```
 git clone https://github.com/ssapra/good_deeds.git
 cd good_deeds
-bundle install
-rake db:create
-rake db:migrate
-rake load:districts
-rake db:seed
+bin/setup
 rails server
 ```
 

@@ -7,7 +7,8 @@
         .col.s3
           %span=header_text
         .col.s5
-          =form_tag(params[:controller] == 'legislators' ? '/legislators' : '/bills' , method: :get, id: 'search') do
+          - action = params[:controller] == 'legislators' ? 'legislators' : 'bills'
+          =form_tag(action , method: :get, id: 'search') do
             .input-field
               - if @bill
                 -placeholder_text = @bill.bill_id
@@ -17,7 +18,7 @@
                 -placeholder_text = params[:query]
               -else
                 -placeholder_text = 'keywords like FDA, Banking, Military spending'
-              =text_field_tag :query, params[:query], placeholder: placeholder_text, required: '', type: 'search', autocomplete: 'off'
+              =text_field_tag "#{action.singularize}[query]", params[:query], placeholder: placeholder_text, required: '', type: 'search', autocomplete: 'off'
         .col.s3
           %ul.right.hide-on-med-and-down
             -if current_user

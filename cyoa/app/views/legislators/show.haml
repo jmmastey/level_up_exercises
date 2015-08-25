@@ -53,7 +53,7 @@
           %tbody
             .row
               -@legislator.bills.order(last_action_at: :desc).each do |bill|
-                %tr{'data-url' => "/bills/#{bill.bill_id}"}
+                =content_tag_for(:tr, bill, 'data-url' => bill_path(bill)) do
                   %td.col.s2=bill.last_action_at.strftime('%B %-d, %Y')
                   %td.col.s10
                     %h6.bill_title

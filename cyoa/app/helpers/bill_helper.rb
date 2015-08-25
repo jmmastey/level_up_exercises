@@ -46,7 +46,7 @@ module BillHelper
 
   def bookmark_options
     return unless current_user
-    if UserBill.exists?(user_id: current_user.id, bill_id: @bill.id)
+    if Bookmark.exists?(user_id: current_user.id, bill_id: @bill.id)
       already_bookmarked
     else
       allow_bookmark_action
@@ -63,7 +63,7 @@ module BillHelper
   def allow_bookmark_action
     content_tag(:p) do
       link_text = icon('bookmark_border') << 'Add to bookmarks'
-      link_to(link_text, bookmarks_path(bill_id: @bill.id), method: :post)
+      link_to(link_text, bookmarks_path(bookmark: { bill_id: @bill.bill_id }), method: :post)
     end
   end
 

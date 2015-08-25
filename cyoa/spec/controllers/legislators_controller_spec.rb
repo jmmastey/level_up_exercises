@@ -13,7 +13,7 @@ describe LegislatorsController, type: :controller do
 
       context 'searching by state' do
         before do
-          params = default_params.merge(query: 'IL')
+          params = default_params.merge(legislator: { query: 'IL'}) 
           get(:index, params)
         end
 
@@ -25,7 +25,7 @@ describe LegislatorsController, type: :controller do
 
       context 'searching by title' do
         before do
-          params = default_params.merge(query: 'Rep')
+          params = default_params.merge(legislator: { query: 'Rep'})
           get(:index, params)
         end
 

@@ -6,9 +6,9 @@ describe SendEmailUpdates do
       action_1 = create(:bill_action, text: 'Signed by President.', date: 10.minutes.ago)
       action_2 = create(:bill_action, text: 'Became Public Law No. 1', date: 10.hours.ago)
       action_3 = create(:bill_action, text: 'Nothing happens in Congress', date: 24.days.ago)
-      user_bill = create(:user_bill, bill_id: action_1.bill_id)
-      create(:user_bill, bill_id: action_2.bill_id, user_id: user_bill.user.id)
-      create(:user_bill, bill_id: action_3.bill_id)
+      bookmark = create(:bookmark, bill_id: action_1.bill_id)
+      create(:bookmark, bill_id: action_2.bill_id, user_id: bookmark.user.id)
+      create(:bookmark, bill_id: action_3.bill_id)
     end
 
     after do

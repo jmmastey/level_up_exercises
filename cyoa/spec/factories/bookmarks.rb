@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :user_bill do
+  factory :bookmark do
     user
     bill
   end

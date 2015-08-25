@@ -1,7 +1,7 @@
 class CreateBills < ActiveRecord::Migration
   def change
     create_table :bills do |t|
-      t.string :bill_id
+      t.string :bill_id, null: false
       t.string :bill_type
       t.string :chamber
       t.integer :congress
@@ -19,6 +19,8 @@ class CreateBills < ActiveRecord::Migration
       t.integer :legislator_id
 
       t.timestamps null: false
+
+      t.index :last_action_at
     end
   end
 end

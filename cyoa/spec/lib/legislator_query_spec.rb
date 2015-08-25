@@ -16,7 +16,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, @legislator_1.first_name) }
 
         it 'searches for legislators who match the name' do
-          expect(legislator_query.search.count).to eq(1)
+          expect(legislator_query.execute.count).to eq(1)
         end
       end
 
@@ -24,7 +24,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, @legislator_2.last_name.downcase) }
 
         it 'searches for legislators who match the name' do
-          expect(legislator_query.search.count).to eq(1)
+          expect(legislator_query.execute.count).to eq(1)
         end
       end
 
@@ -32,7 +32,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, 'Democratic') }
 
         it 'searches for legislators who are Democratic' do
-          expect(legislator_query.search.count).to eq(2)
+          expect(legislator_query.execute.count).to eq(2)
         end
       end
 
@@ -40,7 +40,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, 'new York') }
 
         it 'searches for legislators who represent new york' do
-          expect(legislator_query.search.count).to eq(1)
+          expect(legislator_query.execute.count).to eq(1)
         end
       end
 
@@ -48,7 +48,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, 'IL') }
 
         it 'searches for legislators who represent Arizona' do
-          expect(legislator_query.search.count).to eq(2)
+          expect(legislator_query.execute.count).to eq(2)
         end
       end
 
@@ -56,7 +56,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, 'Senator') }
 
         it 'searches for legislators who are Senators' do
-          expect(legislator_query.search.count).to eq(2)
+          expect(legislator_query.execute.count).to eq(2)
         end
       end
 
@@ -64,7 +64,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, 'del') }
 
         it 'searches for legislators who are Delegates' do
-          expect(legislator_query.search.count).to eq(1)
+          expect(legislator_query.execute.count).to eq(1)
         end
       end
 
@@ -72,7 +72,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, @il_zipcode) }
 
         it "searches for legislators who serve the zipcode #{@il_zipcode}" do
-          expect(legislator_query.search.count).to eq(2)
+          expect(legislator_query.execute.count).to eq(2)
         end
       end
     end
@@ -82,7 +82,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, "#{@il_zipcode} democratic") }
 
         it "searches for Democratics who serve in zipcode #{@il_zipcode}" do
-          expect(legislator_query.search.count).to eq(1)
+          expect(legislator_query.execute.count).to eq(1)
         end
       end
 
@@ -90,7 +90,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, "#{@legislator_1.first_name} #{@legislator_1.last_name}") }
 
         it 'searches for legislators by full name' do
-          expect(legislator_query.search.count).to eq(1)
+          expect(legislator_query.execute.count).to eq(1)
         end
       end
 
@@ -98,7 +98,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, 'new York senator') }
 
         it 'searches for legislators who are Senators in New York' do
-          expect(legislator_query.search.count).to eq(1)
+          expect(legislator_query.execute.count).to eq(1)
         end
       end
 
@@ -106,7 +106,7 @@ describe LegislatorQuery do
         let(:legislator_query) { LegislatorQuery.new(Legislator.all, "illinois #{@legislator_2.first_name} #{@legislator_2.last_name} delegate democratic") }
 
         it 'searches for legislators who are Democratic Delegators in Illinois by name' do
-          expect(legislator_query.search.count).to eq(1)
+          expect(legislator_query.execute.count).to eq(1)
         end
       end
     end

@@ -1,11 +1,10 @@
 class BookmarksController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_bill, only: [:create, :destroy]
 
   def create
-    bill_id = bookmark_params[:bill_id]
-    bill = Bill.find(bill_id)
-    UserBill.create(user_id: current_user.id, bill_id: bill_id)
-    redirect_to bill_path(bill_id: bill.bill_id), notice: 'Bookmarked!'
+    Bookmark.create(user_id: current_user.id, bill_id: @bill.id)
+    redirect_to bill_path(@bill), notice: 'Bookmarked!'
   end
 
   def index
@@ -13,14 +12,17 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    bill_id = bookmark_params[:bill_id]
-    UserBill.where(user_id: current_user.id, bill_id: bill_id).first.destroy
+    Bookmark.where(user_id: current_user.id, bill_id: @bill.id).first.destroy
     redirect_to bookmarks_path
   end
 
   private
 
   def bookmark_params
-    params.permit(:bill_id)
+    params.require(:bookmark).permit(:bill_id)
+  end
+
+  def find_bill
+    @bill = Bill.where(bookmark_params).first
   end
 end

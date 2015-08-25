@@ -10,7 +10,7 @@ class LegislatorQuery
     @current_search_term = ''
   end
 
-  def search
+  def execute
     if full_search_term.count(' ') == 0
       single_keyword_search
     else

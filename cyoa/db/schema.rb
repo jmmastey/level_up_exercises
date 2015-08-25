@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806170407) do
+ActiveRecord::Schema.define(version: 20150818165259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,15 +26,17 @@ ActiveRecord::Schema.define(version: 20150806170407) do
     t.string   "chamber"
   end
 
+  add_index "bill_actions", ["created_at"], name: "index_bill_actions_on_created_at", using: :btree
+
   create_table "bill_tags", force: :cascade do |t|
-    t.integer  "bill_id"
-    t.integer  "tag_id"
+    t.integer  "bill_id",    null: false
+    t.integer  "tag_id",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "bills", force: :cascade do |t|
-    t.string   "bill_id"
+    t.string   "bill_id",          null: false
     t.string   "bill_type"
     t.string   "chamber"
     t.integer  "congress"
@@ -50,6 +52,15 @@ ActiveRecord::Schema.define(version: 20150806170407) do
     t.integer  "legislator_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  add_index "bills", ["last_action_at"], name: "index_bills_on_last_action_at", using: :btree
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "bill_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "congressional_districts", force: :cascade do |t|
@@ -96,6 +107,8 @@ ActiveRecord::Schema.define(version: 20150806170407) do
     t.boolean  "in_office"
   end
 
+  add_index "legislators", ["first_name"], name: "index_legislators_on_first_name", using: :btree
+
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
     t.integer  "searchable_id"
@@ -112,16 +125,11 @@ ActiveRecord::Schema.define(version: 20150806170407) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_bills", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "bill_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "user_tags", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "tag_id"
+    t.integer  "user_id",    null: false
+    t.integer  "tag_id",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

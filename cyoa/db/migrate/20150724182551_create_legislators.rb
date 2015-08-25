@@ -32,6 +32,7 @@ class CreateLegislators < ActiveRecord::Migration
       t.string :oc_email
 
       t.timestamps null: false
+      t.index :firstname
     end
   end
 end

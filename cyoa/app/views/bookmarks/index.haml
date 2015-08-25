@@ -18,12 +18,12 @@
           .row
             -@bills.each do |bill|
               -@bill = bill
-              %tr{'data-url' => "/bills/#{bill.bill_id}"}
+              =content_tag_for(:tr, @bill, 'data-url' => bill_path(@bill)) do
                 %td.col.s2=bill.last_action_at.strftime('%b %-d, %Y')
                 %td.col.s3=bill_current_status
                 %td.col.s7
                   =bill_title
                   %p.summary=bill.summary_short
-                %td.remove=link_to icon('close'), bookmarks_path(bill_id: bill.id), method: :delete
+                %td.remove=link_to icon('close'), bookmarks_path(bookmark: { bill_id: bill.bill_id }), method: :delete
 
       = paginate @bills

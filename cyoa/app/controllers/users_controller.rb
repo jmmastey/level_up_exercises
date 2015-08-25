@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:user][:id])
 
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       flash.delete(:alert)
       redirect_to @user, notice: changed_attributes_message
     else
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def changed_attributes_message
     changed_fields = @user.previous_changes.keys
     changed_fields.delete('updated_at')
-    changed_fields.map! { |field| field.gsub('_', ' ') }
+    changed_fields.map! { |field| field.tr('_', ' ') }
     return nil unless changed_fields.any?
     "Updated #{changed_fields.join(', ')}"
   end

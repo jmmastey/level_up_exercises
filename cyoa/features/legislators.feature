@@ -14,37 +14,37 @@ Feature: Interacting with legislators data
 
   @javascript
   Scenario: Search legislators by name
-    Given I visit "/"
+    Given I visit the home page
     When I search legislators for "Bob"
     Then I see 1 legislators
 
   @javascript
   Scenario: Search legislators by title
-    Given I visit "/"
+    Given I visit the home page
     When I search legislators for "Representative"
     Then I see 1 legislators
 
   @javascript
   Scenario: Search legislators by party
-    Given I visit "/"
+    Given I visit the home page
     When I search legislators for "Republican"
     Then I see 1 legislators
 
   @javascript
   Scenario: Search legislators by state
-    Given I visit "/"
+    Given I visit the home page
     When I search legislators for "Illinois"
     Then I see 1 legislators
 
   @javascript
   Scenario: Search legislators by zipcode
-    Given I visit "/"
+    Given I visit the home page
     When I search legislators for "60606"
     Then I see 1 legislators
 
   @javascript
   Scenario: View a particular legislator
-    Given I visit "/"
+    Given I visit the home page
     And I search legislators for "Bob"
     When I click on "Bob"
     Then I see the legislator page for "Bob"

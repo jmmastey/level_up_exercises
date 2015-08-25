@@ -15,9 +15,7 @@ Given(/^I visit "(.*?)"$/) do |url|
 end
 
 When(/^I search legislators for "(.*?)"$/) do |input|
-  find('.query-filter', text: 'LEGISLATORS').click
-  fill_in('query', with: input)
-  page.execute_script("$('form#search').submit()")
+  search('LEGISLATORS', input)
 end
 
 When(/^I click on "(.*?)"$/) do |text|

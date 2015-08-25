@@ -11,13 +11,13 @@
         %span=tag.name
         =link_to icon('close'), user_tag_path(tag), remote: true, method: :delete
 
-=form_for(UserTag.new, class: "col s12") do |user_tag_form|
+=form_for(UserTag.new, class: "col s12") do |f|
   .input-field.col.s12
-    =user_tag_form.label :tag_name, "Add another tag"
+    =f.label :tag_name, "Add another tag"
     =text_field_tag nil, nil, id: 'tag_name', data: { autocomplete_source: Tag.order(:name).map { |t| { label: t.name, value: t.id } } }
-    =user_tag_form.hidden_field :tag_id
+    =f.hidden_field :tag_id
 
-    =user_tag_form.hidden_field :user_id, value: current_user.id
+    =f.hidden_field :user_id, value: current_user.id
 
   .row
   .row

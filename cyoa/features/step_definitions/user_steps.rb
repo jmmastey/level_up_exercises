@@ -3,6 +3,10 @@ Given(/^I am a new user$/) do
   fill_sign_in_form(@user.email, 'password')
 end
 
+Given(/^I visit the home page$/) do
+  visit('/')
+end
+
 Given(/^there exists tags "(.*?)"$/) do |tag_names|
   tag_names.split(', ').each { |name| Tag.create(name: name) }
 end

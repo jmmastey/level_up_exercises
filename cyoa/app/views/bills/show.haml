@@ -66,5 +66,4 @@
           .fb-share-button{"data-href" => "#{request.base_url}/bills/bill_id", "data-layout" => "button"}
           %a{href: "https://twitter.com/share", class: "twitter-share-button", 'data-url' => "#{request.base_url}/bills/#{@bill.bill_id}", 'data-size' => "large", 'data-count' => "none", 'data-hashtags' => "congress"} Tweet
 
-:javascript
-  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+=javascript_include_tag "social_media.js"

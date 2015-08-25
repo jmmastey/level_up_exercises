@@ -36,17 +36,17 @@ class DinodexShell
 
   def do_option(input)
     case input
-    when "l"
-      prompt_load_csv
-    when "s"
-      prompt_search_dinodex
-    when "a"
-      list_dinosaurs
-    when "q"
-      stop_shell
-    else
-      gets_option
-    end
+      when "l"
+        prompt_load_csv
+      when "s"
+        prompt_search_dinodex
+      when "a"
+        list_dinosaurs
+      when "q"
+        stop_shell
+      else
+        gets_option
+      end
   end
 
   def search_dinodex(args)

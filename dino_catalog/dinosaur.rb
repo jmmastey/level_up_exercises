@@ -15,7 +15,7 @@ class Dinosaur
     data['name'].strip.downcase == name.downcase
   end
 
-  def period?(period)
+  def from_period?(period)
     data['period'].strip.downcase.include?(period.downcase)
   end
 

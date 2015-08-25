@@ -13,7 +13,7 @@ class Dinodex
   }
 
   search_period = ->(res, period) {
-    res.select { |dino| dino.period?(period) }
+    res.select { |dino| dino.from_period?(period) }
   }
 
   search_diet = ->(res, diet) {

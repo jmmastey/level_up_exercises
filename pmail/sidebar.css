@@ -1,0 +1,38 @@
+/**************************
+        SIDEBAR
+**************************/
+.sidebar {
+  padding: 8px 0px;
+  width: 170px;
+  float: left;
+}
+.sidebar input[type="button"] {
+  border: none;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 2px;
+  padding: 8px 30px;
+  margin: 0px 30px;
+  background: rgba(255,255,255,0.9);
+  font-weight: bold;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  color: #444;
+}
+.sidebar .inboxes {
+  list-style-type: none;
+  margin-top: 7px;
+  padding: 0px;
+}
+.sidebar .inboxes li {
+  font-size: 13px;
+  padding: 1.5px 30px;
+  cursor: pointer;
+}
+.sidebar .inboxes li:hover {
+  background: rgba(0,0,0,0.5);
+}
+.sidebar .inboxes li.active {
+  font-weight: bold;
+  border-left: 4px solid white;
+  padding: 2px 26px;
+}

@@ -1,0 +1,190 @@
+/**************************
+      VIEW OPTIONS
+**************************/
+.view-options {
+  padding: 8.5px 20px 8.5px 30px;
+  border-bottom: 1.5px solid rgba(255,255,255,0.2);
+}
+.app-select {
+  width: 170px;
+}
+.app-select .current-app {
+  font-size: 19px;
+  padding-right: 20px;
+}
+.view-options .gbutton {
+  padding: 4px 20px;
+  min-width: 70px;
+  text-align: center;
+  margin-right: 12.5px;
+  color: #444;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.1);
+  text-shadow: none;
+  position: relative;
+  cursor: default;
+  background-image: -webkit-linear-gradient(top,rgba(255,255,255,.85),rgba(247,247,247,.85));
+  background-image: linear-gradient(top,rgba(255,255,255,.85),rgba(247,247,247,.85));
+  background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,.85)),to(rgba(247,247,247,.85)));
+  background-image: -webkit-linear-gradient(top,rgba(255,255,255,.85),rgba(247,247,247,.85));
+}
+.gbutton:hover {
+  background: rgba(255,255,255,0.95);
+}
+.gbutton.select {
+  padding: 13px 20px;
+  cursor: default;
+}
+.gbutton.select:hover:after {
+  border-top-color: #666;
+}
+.gbutton.select .checkbox {
+  position: absolute;
+  content: "";
+  padding: 5.5px;
+  border: 1px solid #bbb;
+
+  left: 38%;
+  top: 50%;
+  margin-left: -5.5px;
+  margin-top: -5.5px;
+}
+.gbutton.select .checkbox:hover,
+.gbutton.select .checkbox.select-all {
+  box-shadow: inset 0.5px 0.5px 3px #ddd;
+  font-size: 10px;
+  line-height: 5px;
+  background: white;
+}
+.gbutton.select .checkbox.select-all {
+  padding: 3.5px 2.5px;
+}
+
+.gbutton.select .checkbox.select-all:before {
+  content: "✓";
+}
+.gbutton.select:after {
+  border-top-color: #aaa;
+  right: 20px;
+  top: 12px;
+}
+.gbutton.refresh {
+  color: rgba(0,0,0,0);
+}
+.gbutton.refresh:before {
+  background: url('iconsprite.png') no-repeat 0px -189px;
+}
+.gbutton.more {
+  padding: 7px 24px 7px 16px;
+  font-size: 11px;
+  font-weight: bold;
+}
+.gbutton.more:after {
+  border-top-color: #aaa;
+  right: 15px;
+  top: 11px;
+}
+.page-info {
+  float: right;
+}
+.page-info .gbutton {
+  border-radius: 2px;
+}
+.page-info .prev-page,
+.page-info .next-page {
+  padding: 4.5px 12px;
+  min-width: 30px;
+  color: rgba(0,0,0,0);
+}
+.page-info .prev-page {
+  margin-right: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.page-info .prev-page:before,
+.page-info .next-page:before,
+.gbutton.refresh:before,
+.preferences .gbutton:before {
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  content: "";
+  padding: 12px;
+  margin-left: -10px;
+}
+.page-info .prev-page:before {
+  opacity: 0.45;
+  background: url('iconsprite.png') no-repeat 0px -168px;
+}
+.page-info .next-page:before {
+  opacity: 0.65;
+  background: url('iconsprite.png') no-repeat 0px -102px;
+}
+.preferences .gbutton {
+  color: rgba(0,0,0,0);
+  padding: 4.5px 20px;
+}
+.preferences .gbutton:before {
+  margin-left: -14px;
+  opacity: 0.55;
+  background: url('iconsprite.png') no-repeat 0px -470px;
+}
+.preferences .gbutton:after {
+  border-top-color: #888;
+  right: 17px;
+  top: 11px;
+}
+.page-info .next-page {
+  margin-right: 10px;
+  margin-left: -6px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.page-numbers {
+  font-size: 13px;
+  margin-right: 10px;
+}
+.page-numbers .num {
+  font-weight: bold;
+}
+.menu {
+  position: absolute;
+  z-index: 30;
+  background: white;
+  padding: 8px 0px;
+  list-style-type: none;
+  color: black;
+  text-shadow: none;
+  margin-top: 0px;
+  font-size: 13px;
+
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 2px #ccc;
+}
+.menu.hidden {
+  display: none;
+}
+.menu li {
+  margin: 2px 0px;
+  padding: 2px 45px 2px 30px;
+}
+.menu li:hover {
+  background: #eee;
+}
+.app-select ul li.active {
+  font-weight: bold;
+}
+.settings ~ .menu {
+  margin-left: -100px;
+}
+.settings ~ .menu ul {
+  list-style-type: none;
+  padding: 0px 10px;
+}
+.settings ~ .menu ul li {
+  padding-left: 20px;
+}
+
+
+
+

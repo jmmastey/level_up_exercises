@@ -1,0 +1,141 @@
+/**************************
+      CONTENT
+**************************/
+.content {
+  margin-left: 204px;
+  padding: 8px 0px;
+  margin-right: 30px;
+  min-width: 500px;
+}
+.tab-select {
+  border-bottom: 8px solid rgba(255,255,255,0.9);
+}
+.tab-select div {
+  border-top: 2px solid transparent;
+  background: rgba(243,243,243,0.85);
+  border: 1px solid #ccc;
+  text-shadow: none;
+  color: black;
+
+  display: inline-block;
+  padding: 8px 38px;
+  margin-left: -5px;
+  max-width: 300px;
+  width: 25%;
+  line-height: 12px;
+  font-size: 13px;
+
+  position: relative;
+  cursor: pointer;
+
+  transition: border-top 0.4s ease, opacity 0.4s ease;
+}
+.tab-select div:first-child {
+  margin-left: 0px;
+}
+.tab-select div:before {
+  position: absolute;
+  content: "";
+  padding: 10px;
+  left: 12px;
+  top: 3px;
+  background: url('tabsprite.png') no-repeat -10px 0;
+  opacity: 0.6;
+}
+.tab-select div:first-child.active,
+.tab-select div:first-child:hover {
+  border-top: 2px solid red;
+}
+.tab-select div:nth-child(2).active,
+.tab-select div:nth-child(2):hover {
+  border-top: 2px solid blue;
+}
+.tab-select div:last-child.active,
+.tab-select div:last-child:hover {
+  border-top: 2px solid green;
+}
+.tab-select div:nth-child(2):before {
+  background: url('tabsprite.png') no-repeat -42px 0;
+}
+.tab-select div:last-child:before {
+  background: url('tabsprite.png') no-repeat -75px 0;
+}
+.tab-select div.active {
+  background: rgba(255,255,255,0.9);
+  border-bottom: 1px solid transparent;
+}
+.tab-select div.active:before,
+.tab-select div:hover:before{
+  opacity: 0.85;
+}
+.messages {
+  text-shadow: none;
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+}
+.messages .message {
+  font-size: 12.5px;
+  padding: 4px 8px;
+  border-top: 1px solid #ddd;
+  border-left: 4px solid transparent;
+  background: rgba(243,243,243,0.85);
+  cursor: pointer;
+}
+.message.key-selected {
+  border-left: 4px solid #7af;
+}
+li.message input, li.message span {
+  cursor: pointer;
+}
+li.message input[type="checkbox"] {
+  margin: 0px 4px;
+}
+li.message .star {
+  opacity: 0.75;
+  padding: 10px;
+  background: url('star.png') no-repeat 0 -1px;
+}
+li.message .star.starred {
+  background: url('star-lit.png') no-repeat 0 -1px;
+}
+li.message .star:not(.starred):hover {
+  opacity: 1;
+}
+li.message .sender {
+  width: 20%;
+  max-width: 220px;
+  min-width: 200px;
+}
+li.message .preview {
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+li.message .body {
+  color: #555;  
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 60%;
+}
+li.message .date {
+  float: right;
+  margin-top: 3px;
+  margin-right: 10px;
+}
+li.message.unread {
+  background: rgba(255,255,255,0.9);
+}
+li.message.selected {
+  background: #feb;
+}
+li.message.unread .sender,
+li.message.unread .subject,
+li.message.unread .date {
+  font-weight: bold;
+}
+li.message a {
+  text-decoration: none;
+  color: black;
+}

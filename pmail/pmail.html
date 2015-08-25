@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8"/>
+      <title>Inbox (19) - walle@gmail.com</title>
+      <link rel="icon" type="image/png" href="https://ssl.gstatic.com/ui/v1/icons/mail/images/favicon5.ico">
+      <link type="text/css" rel="stylesheet" href="pmail.css"/>
+      <link type="text/css" rel="stylesheet" href="view-options.css"/>
+      <link type="text/css" rel="stylesheet" href="titlebar.css"/>
+      <link type="text/css" rel="stylesheet" href="profile-dialog.css"/>
+      <link type="text/css" rel="stylesheet" href="content.css"/>
+      <link type="text/css" rel="stylesheet" href="sidebar.css"/>
+      <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script src="pmail.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <div class="titlebar">
+        <span class="logo">Google</span>
+        <span class="searchbar">
+          <span class="text-container dropdown">
+            <input type="text"/>
+          </span>
+          <span class="search-button">S</span>
+        </span>
+        <span class="profile-options">
+          <span class="user">Wall-E</span>
+          <span class="apps">A</span>
+          <span class="notifications">N</span>
+          <span class="picture"></span>
+          <span class="profile-dialog hidden">
+            <span class="account-info">
+              <span class="picture-large">
+                <img src="profile_pic.png"/>
+              </span>
+              <span class="details">
+                <span class="name">Wall-E</span>
+                <br/>
+                <span class="email">walle@gmail.com</span>
+                <br/>
+                <span class="links">
+                  <a href="#">Profile</a>
+                  <span>-</span>
+                  <a href="#">Privacy</a>
+                </span>
+                <br/>
+                <input class="account-button" type="button" value="My Account"/>
+              </span>
+            </span>
+            <span class="account-actions">
+              <input class="gbutton" type="button" value="Add account"/>
+              <input class="gbutton" type="button" value="Sign out"/>
+            </span>
+          </span>
+        </span>
+      </div>
+      <div class="view-options">
+          <span class="app-select">
+            <span class="current-app dropdown">Gmail</span>
+            <ul class="menu hidden">
+              <li class="active">Gmail</li>
+              <li>Contacts</li>
+              <li>Tasks</li>
+            </ul>
+          </span>
+          <span class="filter-buttons">
+            <span class="selections">
+              <span class="gbutton select dropdown">
+                <span class="checkbox"></span>
+              </span>
+              <ul class="menu hidden">
+                <li>All</li>
+                <li>None</li>
+                <li>Read</li>
+                <li>Unread</li>
+                <li>Starred</li>
+                <li>Unstarred</li>
+              </ul>
+            </span>
+            <span class="gbutton refresh">R</span>
+            <span class="gbutton more dropdown">More</span>
+          </span>
+          <span class="page-info">
+            <span class="page-numbers">
+              <span class="num">1-50</span> 
+              <span>of</span> 
+              <span class="num">5,126</span>
+            </span>
+            <span class="page-settings">
+              <span class="gbutton prev-page"><</span>
+              <span class="gbutton next-page">></span>
+              <span class="preferences">
+                <span class="gbutton settings dropdown"> S </span>
+                <ul class="menu hidden">
+                  <ul class="display-density"> Display Density:
+                    <li> Compact </li>
+                    <li> Comfortable </li>
+                    <li> Cozy </li>
+                  </ul>
+                  <hr/>
+                  <li> Configure Inbox </li>
+                  <hr/>
+                  <li> Settings </li>
+                  <li> Themes </li>
+                  <hr/>
+                  <li> Send Feedback </li>
+                  <li> Help </li>
+                </ul>
+              </span>
+            </span>
+          </span>
+      </div>
+    </div>
+    <div class="main">
+      <div class="sidebar">
+        <input type="button" value="Compose"/>
+        <ul class="inboxes">
+          <li class="active">Inbox (19)</li>
+          <li>Starred</li>
+          <li>Sent Mail</li>
+          <li>Drafts</li>
+          <li>Call Log</li>
+          <li>Junk</li>
+          <li>SMS</li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="tab-select">
+          <div class="primary active">Primary</div>
+          <div class="social">Social</div>
+          <div class="promotions">Promotions</div>
+        </div>
+        <ul class="messages"></ul>
+      </div>
+    </div>
+  </body>
+</html>

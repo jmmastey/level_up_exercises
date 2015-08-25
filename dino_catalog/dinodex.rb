@@ -8,33 +8,33 @@ require_relative 'dinodex_printer'
 class Dinodex
   attr_accessor :registry, :loaded_files
 
-  search_name = lambda do |res, name|
-    res.select { |dino| dino.name_is?(name) }
-  end
+  search_name = ->(res, name) {
+    res.select { |dino| dino.named?(name) }
+  }
 
-  search_period = lambda do |res, period|
-    res.select { |dino| dino.from_period?(period) }
-  end
+  search_period = ->(res, period) {
+    res.select { |dino| dino.period?(period) }
+  }
 
-  search_diet = lambda do |res, diet|
-    res.select { |dino| dino.diet_is?(diet) }
-  end
+  search_diet = ->(res, diet) {
+    res.select { |dino| dino.diet?(diet) }
+  }
 
-  search_big = lambda do |res, search|
+  search_big = ->(res, search) {
     res.select { |dino| dino.big? if search }
-  end
+  }
 
-  search_small = lambda do |res, search|
+  search_small = ->(res, search) {
     res.select { |dino| dino.small? if search }
-  end
+  }
 
-  search_weight = lambda do |res, weight|
-    res.select { |dino| dino.weight_is?(weight) }
-  end
+  search_weight = ->(res, weight) {
+    res.select { |dino| dino.weighs?(weight) }
+  }
 
-  search_walking = lambda do |res, walking|
-    res.select { |dino| dino.walking_is?(walking) }
-  end
+  search_walking = ->(res, walking) {
+    res.select { |dino| dino.walking?(walking) }
+  }
 
   SEARCH_DISPATCHER = {
     name: search_name,
@@ -49,6 +49,10 @@ class Dinodex
   def initialize
     @registry = []
     @loaded_files = []
+    @dinoparser = DinoParser.new
+    @dinovalidator = DinoValidator.new
+    @dinouniformer = DinoUniformer.new
+    @dinodex_printer = DinodexPrinter.new
   end
 
   def build_registry(data)
@@ -57,8 +61,8 @@ class Dinodex
 
   def load_csv(filename)
     return unless File.file?(filename)
-    data = DinoUniformer.uniform(DinoParser.parse_csv(filename))
-    raise InvalidDataError unless DinoValidator.valid_data?(data)
+    data = @dinouniformer.uniform(@dinoparser.parse_csv(filename))
+    raise InvalidDataError unless @dinovalidator.valid_data?(data)
     build_registry(data)
     @loaded_files << filename
   end
@@ -72,7 +76,7 @@ class Dinodex
 
   def print_search(args = {})
     results = search(args)
-    DinodexPrinter.print(results)
+    @dinodex_printer.print(results)
   end
 
   def export_json(results = @registry)
@@ -80,6 +84,6 @@ class Dinodex
   end
 
   def to_s(subset = @registry)
-    DinodexPrinter.print(subset)
+    @dinodex_printer.print(subset)
   end
 end

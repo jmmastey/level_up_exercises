@@ -10,7 +10,7 @@ class String
   end
 end
 
-module DinoValidator
+class DinoValidator
   valid_name = -> name { name.alpha? }
   valid_period = -> period { period.alpha? }
   valid_continent = -> continent { continent.alpha? }
@@ -27,16 +27,16 @@ module DinoValidator
     "walking" => valid_walking,
   }
 
-  def self.valid?(dino_attr, value)
+  def valid?(dino_attr, value)
     return true unless DISPATCHER.include?(dino_attr)
     DISPATCHER[dino_attr].call(value)
   end
 
-  def self.valid_row?(row)
+  def valid_row?(row)
     row.all? { |dino_attr, value| valid?(dino_attr, value) }
   end
 
-  def self.valid_data?(data)
+  def valid_data?(data)
     data.all? { |row| valid_row?(row) }
   end
 end

@@ -1,7 +1,7 @@
 require_relative 'dinodex'
 require_relative 'dinodex_shell'
 
-DinodexShell.start_shell if ARGV.length == 0
+DinodexShell.new.start_shell if ARGV.length == 0
 
 dinodex = Dinodex.new
 ARGV.each do |arg|

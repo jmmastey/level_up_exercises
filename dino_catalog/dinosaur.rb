@@ -11,15 +11,15 @@ class Dinosaur
     data.key?(key)
   end
 
-  def name_is?(name)
+  def named?(name)
     data['name'].strip.downcase == name.downcase
   end
 
-  def from_period?(period)
+  def period?(period)
     data['period'].strip.downcase.include?(period.downcase)
   end
 
-  def diet_is?(diet)
+  def diet?(diet)
     return carnivore? if diet.downcase == 'carnivore'
     data['diet'].strip.downcase == diet.downcase
   end
@@ -38,12 +38,12 @@ class Dinosaur
     !big?
   end
 
-  def weight_is?(weight)
+  def weighs?(weight)
     return false unless has?('weight')
     Float(data['weight']) == Float(weight)
   end
 
-  def walking_is?(walking)
+  def walking?(walking)
     data['walking'].strip.downcase == walking.downcase
   end
 

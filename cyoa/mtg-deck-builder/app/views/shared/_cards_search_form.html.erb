@@ -1,0 +1,10 @@
+<div id="toggle-advanced-search">
+  <div class="btn">Advanced Search</div>
+</div>
+<%= form_tag(action, method: "get", id: "card-search") do %>
+  <%= hidden_field_tag "page", params[:page] %>
+  <%= text_field_tag "cardname", nil, placeholder: "Card Name", tabindex: 1 %>
+  <div id="advanced-options">
+    <%= render 'shared/cards_advanced_search' %>
+  </div>
+<% end %>

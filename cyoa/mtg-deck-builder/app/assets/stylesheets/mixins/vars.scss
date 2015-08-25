@@ -1,0 +1,49 @@
+// Site vars
+$smallest-spacing: 5px;
+$smaller-spacing: 10px;
+$smallish-spacing: 15px;
+$small-spacing: 20px;
+$medium-spacing: 30px;
+$big-spacing: 50px;
+
+// Shadow vars
+$straight-shadow: 0px 5px 10px;
+$left-shadow: -3px 3px 10px;
+$header-shadow: 0px 0px 5px;
+
+// Components vars
+// Logo
+$logo-letter-spacing: 2px;
+// Wrapper
+$wrapper-padding: $small-spacing $big-spacing;
+// Header
+$header-padding: $smaller-spacing;
+$close-top-nav-btn-gap: -4px;
+// Divide
+$divide-padding: $small-spacing;
+// Panel
+$panel-width: 600px;
+$panel-padding: $small-spacing;
+$panel-h2-padding: $smaller-spacing;
+$panel-title-bottom-margin: $smallish-spacing;
+// Buttons
+$btn-padding: $smaller-spacing $medium-spacing;
+$btn-font-size: 0.75em;
+$btn-letter-spacing: 2px;
+
+// User vars
+$user-profile-width: 210px;
+$user-profile-right-margin: $small-spacing;
+$edit-user-destroy-btn-top-margin: $big-spacing;
+$new-deck-btn-top: $panel-padding + $panel-h2-padding - 1;
+$new-deck-btn-right: $panel-padding;
+$edit-deck-btn-right-margin: $smallest-spacing;
+$deck-name-width: 304px;
+$deck-name-bottom-margin: $smallest-spacing;
+// Deck vars
+$card-in-deck-padding: $smaller-spacing;
+$card-type-group-width: 24%;
+$card-type-group-margin: $smaller-spacing $smallest-spacing;
+// Card vars
+$card-tooltip-image-width: 200px;
+$card-tooltip-info-width: 210px;

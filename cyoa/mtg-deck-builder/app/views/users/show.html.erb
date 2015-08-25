@@ -1,0 +1,8 @@
+<% provide(:title, "User profile: #{@user.username}") %>
+<div class="panel-column left">
+  <%= render 'user_panel', user: @user %>
+</div>
+
+<div class="content">
+  <%= render 'deck_list', user: @user, decks: @decks %>
+</div>

@@ -1,0 +1,12 @@
+<% provide(:title, "Log In") %>
+<div class="panel form">
+  <h2>Log In</h2>
+  <%= form_for(:session, url: login_path) do |f| %>
+    <%= render "shared/user_login_form", f: f %>
+  <% end %>
+  <br>
+  <p>
+    Haven't signed up?
+    <%= link_to "Register", signup_path %>
+  </p>
+</div>

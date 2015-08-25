@@ -1,0 +1,22 @@
+body {
+  font-family: $sans-serif;
+  background-image: $site-background-image;
+}
+
+a {
+  color: $link_color;
+  text-decoration: none;
+  &:hover {
+    color: $link_hover_color;
+  }
+}
+
+h1 { font-size: $really-big-font; }
+h2 { font-size: $big-font; }
+h3 {
+  font-weight: bold;
+  font-size: $smallish-font;
+}
+
+.clear        { clear: both; }
+.align-center { text-align: center; }

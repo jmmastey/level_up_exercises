@@ -1,0 +1,17 @@
+<% provide(:title, "Brewing Your Deck") %>
+<div class="divide your-deck">
+  <h2>Editing: <%= @deck.name %></h2>
+</div>
+
+<div class="divide cards-in-deck">
+  <%= render 'cards_in_deck', deck: @deck %>
+</div>
+
+<div class="divide search-for-deck">
+  <h2>Search by:</h2>
+  <%= render 'shared/cards_search_form', action: edit_deck_path(@deck) %>
+</div>
+
+<div class="divide cards">
+  <%= render 'shared/cards_search_results', deck: @deck, cards: @cards %>
+</div>

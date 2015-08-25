@@ -1,0 +1,27 @@
+.cards-in-deck {
+  @include fit-content-height();
+
+  .cards-type-group {
+    float: left;
+    width: $card-type-group-width;
+    margin: $card-type-group-margin;
+    background-color: $white;
+    h3 { margin-bottom: $smallest-spacing; }
+
+    .card-in-deck {
+      padding: $card-in-deck-padding;
+      border: easy-border($lighter-grey);
+
+      @include alternate-colors(odd);
+
+      &:not(:last-child) {
+        border-bottom: none;
+      }
+
+      .deck-stats {
+        float: right;
+        @include equal-margin-border-padding(left, $smaller-spacing, easy-border($lighter-grey));
+      }
+    }
+  }
+}

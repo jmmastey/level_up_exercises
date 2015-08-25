@@ -1,0 +1,5 @@
+<li class="user-deck" data-deck-id="<%= deck.id %>">
+  <%= link_to deck.name, deck, class: "deck-name btn" %>
+  <%= link_to "Destroy", deck, method: :delete, class: "destroy btn" %>
+  <%= link_to "Edit", edit_deck_path(deck), class: "edit btn" %>
+</li>

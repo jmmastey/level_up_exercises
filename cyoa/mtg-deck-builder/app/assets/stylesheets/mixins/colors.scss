@@ -1,0 +1,29 @@
+$shadow_color: rgba(0,0,0,0.2);
+$white: white;
+$black: black;
+$lighter-grey: #DDD;
+$lightest-grey: #EEE;
+
+$mtg_blue: #006699;
+$mtg_red: #990000;
+$mtg_green: #009900;
+$mtg_yellow: #FFFFCC;
+
+$mtg_island: #a8dcee;
+$mtg_mountain: #eea489;
+$mtg_forest: #93cba4;
+$mtg_plains: #fefbd5;
+$mtg_swamp: #c4bdb7;
+$mtg_artifact: #b4aaa8;
+
+$site_color: $mtg_blue;
+$link_color: $site_color;
+$link_hover_color: lighten($link_color, 20%);
+$site-background-color: $white;
+$site-background-image: asset-data-url("cream_pixels.png");
+
+$btn-text-color: $black;
+$btn-text-hover-color: $site_color;
+$btn-background-color: rgba(0, 0, 0, 0.05);
+$btn-background-hover-color: $white;
+$btn-blue-background-color: lighten($mtg_blue, 65%);

@@ -1,0 +1,13 @@
+<div class="panel user-profile">
+  <h2>Profile Info</h2>
+  <h3>Username:</h3>
+  <p><%= user.username %></p>
+
+  <h3>Email:</h3>
+  <p><%= user.email %></p>
+
+  <% if logged_in? %>
+    <br />
+    <%= link_to "Edit Profile", edit_user_path, class: "btn" %>
+  <% end %>
+</div>

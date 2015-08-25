@@ -1,0 +1,9 @@
+<div class="card-tooltip" data-card-id="<%= @card.id %>">
+  <%= image_tag(@card.image_url, alt: @card.name) %>
+  <div class="card-info">
+    <h3><%= @card.name %></h3>
+    <p><%= types_to_html(@card.types) %></p>
+    <p><%= mana_cost_to_html(@card.cost) %></p>
+    <p class="card-text"><%= better_card_text(@card.text) %></p>
+  </div>
+</div>

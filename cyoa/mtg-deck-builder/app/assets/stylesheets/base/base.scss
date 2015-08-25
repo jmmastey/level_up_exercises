@@ -1,0 +1,91 @@
+// Includes logo and top navigation bar.
+#header {
+  position: relative;
+  padding: $header-padding;
+  background-color: $site-background-color;
+  @include site-box-shadow($header-shadow);
+
+  nav {
+    float: right;
+    margin-top: 2 * $header-padding;
+    margin-right: $header-padding;
+    a {
+      margin-left: $close-top-nav-btn-gap;
+    }
+  }
+}
+
+// Wraps all content outside of header.
+#wrapper {
+  position: relative;
+  padding: $wrapper-padding;
+}
+
+#logo {
+  display: inline-block;
+  font-family: $logo;
+  letter-spacing: $logo-letter-spacing;
+  @include default-transition();
+
+  &:hover {
+    cursor: pointer;
+    color: $site_color;
+  }
+
+  h2 { font-size: $smallish-font; }
+}
+
+// A panel is a medium sized box for content.
+.panel {
+  @include margin-auto($panel-width);
+  margin-bottom: $smaller-spacing;
+  padding: $panel_padding;
+  background-color: $site-background-color;
+  @include site-box-shadow($left-shadow);
+
+  h2 {
+    margin-bottom: $panel-title-bottom-margin;
+    padding-bottom: $panel_h2_padding;
+    border-bottom: easy-border($lightest-grey);
+  }
+}
+
+// A panel-column is just a way to organize multiple panels into columns.
+.panel-column {
+  &.left {
+    float: left;
+    margin-right: $smaller-spacing;
+  }
+}
+
+// A divide is a large box for content, spanning the width of the page.
+.divide {
+  background-color: $site-background-color;
+  padding: $divide-padding;
+  border-bottom: easy-border($lighter-grey);
+  @include site-box-shadow($straight-shadow);
+}
+
+.btn {
+  position: relative;
+  padding: $btn-padding;
+  color: $btn-text-color;
+  background-color: $btn-background-color;
+  border: none;
+  font-size: $btn-font-size;
+  letter-spacing: $btn-letter-spacing;
+  text-decoration: none;
+  text-transform: uppercase;
+  @include fancy-hover-shadow();
+
+  &.blue {
+    background-color: $btn-blue-background-color;
+  }
+
+  &:hover {
+    z-index: 1;
+    cursor: pointer;
+    color: $btn-text-hover-color;
+    background-color: $btn-background-hover-color;
+  }
+}

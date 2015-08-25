@@ -1,0 +1,13 @@
+<% provide(:title, "Sign Up") %>
+<%= render 'shared/error_messages', obj: @user %>
+<div class="panel form">
+  <h2>Sign Up</h2>
+  <%= form_for(@user) do |f| %>
+    <%= render "shared/user_signup_form", f: f %>
+  <% end %>
+  <br>
+  <p>
+    Already signed up?
+    <%= link_to "Log In", login_path %>
+  </p>
+</div>

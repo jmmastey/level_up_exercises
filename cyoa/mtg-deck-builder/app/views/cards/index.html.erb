@@ -1,0 +1,9 @@
+<% provide(:title, "Cards") %>
+<div class="divide search">
+  <h2>Search</h2>
+  <%= render 'shared/cards_search_form', action: cards_path %>
+</div>
+
+<div class="divide cards">
+  <%= render 'shared/cards_search_results', cards: @cards %>
+</div>

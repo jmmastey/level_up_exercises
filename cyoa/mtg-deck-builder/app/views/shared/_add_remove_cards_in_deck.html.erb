@@ -1,0 +1,17 @@
+<%= link_to(
+  image_tag("plus.png", rel: "Add to deck"),
+  add_card_to_deck_path(deck_id: deck_id, card_id: card_id),
+  method: :post,
+  remote: true,
+  class: "add") %>
+
+<span class="number-in-deck>">
+  <%= find_number_of_card_in_deck(deck_id, card_id) %>
+</span>
+
+<%= link_to(
+  image_tag("minus.png", rel: "Remove from deck"),
+  remove_card_from_deck_path(deck_id: deck_id, card_id: card_id),
+  method: :delete,
+  remote: true,
+  class: "remove") %>

@@ -1,0 +1,44 @@
+
+.user-profile {
+  width: $user-profile-width;
+  margin-right: $user-profile-right-margin;
+
+  p { margin-bottom: $smaller-spacing; }
+  h2 { font-size: $biggish-font; }
+  .btn { display: block; }
+}
+
+.edit-user {
+  .btn.destroy {
+    display: inherit;
+    margin-top: $edit-user-destroy-btn-top-margin;
+    @include hover-btn($white, $mtg-red);
+  }
+}
+
+.user-decks {
+  position: relative;
+
+  .decks {}
+  .user-deck { @include fit-content-height(); }
+  .deck-name {
+    float: left;
+    width: $deck-name-width;
+    margin-bottom: $deck-name-bottom-margin;
+  }
+  .btn {
+    border: easy-border($lightest-grey);
+    &:hover { box-shadow: none; }
+  }
+  .btn.new {
+    @include absolute-positioning($new-deck-btn-top, $new-deck-btn-right);
+  }
+  .btn.edit {
+    float: right;
+    margin-right: $edit-deck-btn-right-margin;
+  }
+  .btn.destroy {
+    float: right;
+    @include hover-btn($black, lighten($mtg_red, 50%));
+  }
+}

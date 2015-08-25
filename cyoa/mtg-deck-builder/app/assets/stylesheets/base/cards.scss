@@ -1,0 +1,163 @@
+.divide.search,
+.divide.search-for-deck {
+  @include fit-content-height();
+  h2 { margin-bottom: $smaller-spacing; }
+}
+
+#toggle-advanced-search {
+  position: relative;
+  .btn { @include absolute-positioning(-40px, 0px); }
+}
+
+#advanced-options { @include hide-for-js(); }
+
+.all-cards {
+  table {
+    width: 100%;
+  }
+}
+
+.card {
+  @include alternate-colors();
+  &:not(:last-child) {
+    border-bottom: easy-border($lighter-grey);
+  }
+  td { padding: $smaller-spacing; }
+}
+
+span.card-name a { /* @include card-name-overflow(160px); */ }
+td.card-name a { /* @include card-name-overflow(500px); */ }
+
+.card-info { text-align: center; }
+
+.show-card-tooltip {
+  width: $smallish-spacing;
+  margin-right: $smallest-spacing;
+  @include hover-pointer();
+}
+.card-tooltip {
+  img {
+    float: left;
+    width: $card-tooltip-image-width;
+    @include border-radius(10px);
+  }
+  h3 {
+    font-size: $biggish-font;
+    margin-bottom: $smallest-spacing;
+  }
+  .card-info {
+    float: left;
+    width: $card-tooltip-info-width;
+  }
+  .card-text {
+    text-align: left;
+    padding: $smallest-spacing;
+  }
+}
+
+.divide.cards {
+  padding: 0px;
+  table {
+    width: 100%;
+    th {
+      padding: $smaller-spacing;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+  .card {}
+  .number-in-deck {
+    padding-right: $smaller-spacing;
+    padding-left: $smaller-spacing;
+  }
+}
+.deck-stats {}
+.add,
+.remove {
+  img {
+    width: 10px;
+    &:hover { @include opacity(0.5); }
+  }
+}
+#mana {
+  @include fit-content-height();
+  margin-top: $smallish-spacing;
+  li {
+    display: inline-block;
+    input[type="checkbox"] {
+      display: none;
+      $unchecked-border-width: 1px;
+      $checked-border-width: 3px;
+      & + label {
+        @include square-dimensions(20px);
+        margin: $checked-border-width - $unchecked-border-width;
+        border: easy-border(#555, $unchecked-border-width);
+      }
+      &:checked + label {
+        margin: 0px;
+        border: easy-border($mtg_blue, $checked-border-width);
+      }
+    }
+  }
+  .colors {
+    float: left;
+    margin-top: $smallish-spacing;
+    margin-right: $small-spacing;
+    h3 { margin-bottom: $smallest-spacing; }
+  }
+  .color-options {
+    float: left;
+    font-size: $smallish-font;
+    margin-top: $smaller-spacing;
+  }
+  .mana-range {
+    float: left;
+    margin-left: $big-spacing;
+    h3 {
+      text-align: center;
+      margin-bottom: $smaller-spacing;
+    }
+    .mana-slider {
+      height: 10px;
+      width: 400px;
+      // Probably bad...
+      .noUi-connect {
+        background-color: $mtg_blue !important;
+      }
+      .noUi-handle {
+        @include square-dimensions(20px);
+        &:before, &:after { display: none; }
+      }
+    }
+    .min-max-mana {
+      padding-top: $smaller-spacing;
+      input[type="text"] {
+        width: 50px;
+        text-align: center;
+        font-size: $smallish-font;
+        padding: $smallest-spacing;
+      }
+      div {
+        float: left;
+        text-align: center;
+        label { font-size: $smallish-font; }
+      }
+      .minmana {
+        margin-left: -30px;
+      }
+      .exactmana {
+        margin-left: 145px;
+      }
+      .maxmana {
+        float: right;
+        margin-right: -20px;
+      }
+    }
+  }
+}
+.mana-cost {
+  font: normal normal normal 14px/1 Mana;
+  i {
+    margin-left: 2px;
+  }
+}

@@ -1,0 +1,2 @@
+$(".cards-in-deck").html("<%= escape_javascript(render("decks/cards_in_deck", deck: Deck.find(@cards_deck.deck_id))) %>");
+$("*[data-card-id=<%= @cards_deck.card_id %>] .deck-stats").html("<%= escape_javascript(render("shared/add_remove_cards_in_deck", deck_id: @cards_deck.deck_id, card_id: @cards_deck.card_id)) %>");

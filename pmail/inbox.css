@@ -6,6 +6,8 @@
 
 .navbar {
     z-index: 1;
+    margin: 0;
+    color: #FFFFFF;
 }
 
 .sidebar-nav {
@@ -28,33 +30,20 @@
     display: block;
 }
 
-.whole_page {
-    position: fixed;
-    margin: 0;
-    padding-top: 3.5%;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.5);
+.email_toolbar {
+    padding: 5px;
 }
 
 .leftSidebar {
-    background: #F8F8F8;
-    color: #fff;
-    width: 20%;
-    height: 100%;
-    /* Fixed sidebar start */
+    width: 6%;
+    height: 90%;
+    padding-top: 2%;
     position: fixed;
-
 }
 
 .leftSidebar .folders {
     padding-top: 10%;
     text-align: left;
-    color: #000000;
 }
 
 .leftSidebar .folders li {
@@ -95,17 +84,14 @@
 }
 
 .mainContent {
-    background: #F0F0F0;
-    width: 80%;
+    width: 94%;
     height: 100%;
+    position: inherit;
     float: right;
-    -webkit-box-shadow: inset 9px 10px 32px -16px rgba(0,0,0,0.75);
-    -moz-box-shadow: inset 9px 10px 32px -16px rgba(0,0,0,0.75);
-    box-shadow: inset 9px 10px 32px -16px rgba(0,0,0,0.75);
 }
 
 .mainContent .line_item {
-    font-size: 17px;
+    font-size: 15px;
 }
 
 .glyphicon:before {
@@ -130,10 +116,6 @@ input[type=checkbox].glyphicon {
     background: #D6D6D6;
 }
 
-.mainContent .email_toolbar {
-    padding: 1.5%;
-}
-
 .mainContent .listgroup .line_item .glyphy {
     margin-left: 10%;
     margin-top: 0;
@@ -155,6 +137,7 @@ input[type=checkbox].glyphicon {
 }
 
 .mainContent .navbar-fixed-bottom {
+    z-index: 2;
     width: 98%;
-    padding-left: 22%;
+    padding-left: 8%;
 }

@@ -8,18 +8,19 @@ puts "****************"
 puts
 
 loader = DataLoader.new(
-  File.expand_path("../data/data_export_2014_06_20_15_59_02.json", __FILE__))
+  file: File.expand_path("../data/data_export_2014_06_20_15_59_02.json",
+                         __FILE__))
 
 analyzer = DataAnalyzer.new(loader)
-analyzer.load(agroup: { cohort: "A" }, bgroup: { cohort: "B" })
+analyzer.load(a_group: { cohort: "A" }, b_group: { cohort: "B" })
 
 puts "Total Sample Size: #{analyzer.sample_size}"
 puts "Significant? #{analyzer.significant? ? 'Yes' : 'No'}"
 puts "P-Value: #{analyzer.p_value.round(3)}"
 puts
 
-%w("A" "B").each do |group_letter|
-  group = "#{group_letter.downcase}group".to_sym
+%w(A B).each do |group_letter|
+  group = "#{group_letter.downcase}_group".to_sym
 
   puts "-- Cohort #{group_letter} --"
   puts "Samples: #{analyzer.sample_size(group)}"

@@ -5,6 +5,8 @@ require_relative "data_loader"
 class DataAnalyzer
   attr_reader :groups
 
+  SIGNIFICANCE_THRESHOLD = 0.05
+
   def initialize(loader)
     @loader = loader
   end
@@ -17,17 +19,12 @@ class DataAnalyzer
   end
 
   def sample_size(group = nil)
-    if group
-      groups[group].size
-    else
-      groups.values.flatten.size
-    end
+    return groups[group].size if group
+    groups.values.flatten.size
   end
 
   def conversion_count(group)
-    groups[group].count do |i|
-      i[:result] != 0
-    end
+    groups[group].count { |i| i[:result] != 0 }
   end
 
   def conversion_rate(group)
@@ -48,7 +45,7 @@ class DataAnalyzer
   end
 
   def significant?
-    p_value < 0.05
+    p_value < SIGNIFICANCE_THRESHOLD
   end
 
   def compose_values

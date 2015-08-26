@@ -1,8 +1,8 @@
 require_relative "../data_analyzer"
+require_relative "spec_helpers"
 
 describe DataAnalyzer do
-  let(:filepath) { File.expand_path("../data/sample_data.json", __FILE__) }
-  let(:loader) { DataLoader.new(filepath) }
+  let(:loader) { DataLoader.new(data: generate_data) }
 
   subject(:analyzer) { DataAnalyzer.new(loader) }
 
@@ -21,28 +21,33 @@ describe DataAnalyzer do
       expect(analyzer.groups.size).to eq(2)
     end
 
-    it "reports the total sample size if no group is specified" do
-      expect(analyzer.sample_size).to eq(195)
+    describe "#sample_size" do
+      it "reports the total sample size if no group is specified" do
+        expect(analyzer.sample_size).to eq(195)
+      end
+
+      it "reports the sample size for agroup" do
+        expect(analyzer.sample_size(:agroup)).to eq(87)
+      end
+
+      it "reports the sample size for bgroup" do
+        expect(analyzer.sample_size(:bgroup)).to eq(108)
+      end
     end
 
-    it "reports the sample size for agroup" do
-      expect(analyzer.sample_size(:agroup)).to eq(87)
-    end
+    describe "#conversion_count" do
+      it "reports the conversion count for agroup" do
+        expect(analyzer.conversion_count(:agroup)).to eq(5)
+      end
 
-    it "reports the sample size for bgroup" do
-      expect(analyzer.sample_size(:bgroup)).to eq(108)
-    end
+      it "reports the conversion count for bgroup" do
+        expect(analyzer.conversion_count(:bgroup)).to eq(9)
+      end
 
-    it "reports the conversion count for agroup" do
-      expect(analyzer.conversion_count(:agroup)).to eq(5)
-    end
-
-    it "reports the conversion count for bgroup" do
-      expect(analyzer.conversion_count(:bgroup)).to eq(9)
-    end
-
-    it "reports the conversion rate for bgroup" do
-      expect(analyzer.conversion_rate(:bgroup).round(3)).to eq(0.083)
+      it "reports the conversion rate for bgroup" do
+        expect(analyzer.conversion_rate(:bgroup).round(3)).to \
+          be_within(0.005).of(0.085)
+      end
     end
 
     context "when reporting the 95% confidence interval" do
@@ -51,11 +56,11 @@ describe DataAnalyzer do
       let(:lower_bound) { interval[:low] }
 
       it "provides an upper boundary" do
-        expect(upper_bound.round(3)).to eq(0.135)
+        expect(upper_bound.round(3)).to be_within(0.002).of(0.135)
       end
 
       it "provides a lower boundary" do
-        expect(lower_bound.round(3)).to eq(0.031)
+        expect(lower_bound.round(3)).to be_within(0.002).of(0.030)
       end
     end
 

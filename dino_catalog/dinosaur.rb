@@ -5,7 +5,7 @@ class Dinosaur
   alias_method :genus=, :name=
   alias_method :weight_in_lbs=, :weight=
 
-  def carnivore
+  def carnivore?
     @diet.downcase != "herbivore"
   end
 
@@ -21,26 +21,25 @@ class Dinosaur
   end
 
   def to_hash
-    out = instance_variables.map do |ivar|
-      vname = ivar.to_s
-      vname[0] = ""
-
-      value = instance_variable_get(ivar)
-      [vname, value]
-    end
-
+    out = ivars { |vname, value| [vname, value] }
     Hash[out]
   end
 
   def to_s
-    out = instance_variables.map do |ivar|
-      vname = ivar.to_s
-      vname[0] = ""
-
-      value = instance_variable_get(ivar)
+    out = ivars do |vname, value|
       "#{format('%12s', vname.capitalize)}:\t#{value}" if value
     end
-
     out.compact.join("\n")
+  end
+
+  private
+
+  def ivars
+    instance_variables.map do |ivar|
+      vname = ivar.to_s
+      vname[0] = ""
+      value = instance_variable_get(ivar)
+      yield(vname, value)
+    end
   end
 end

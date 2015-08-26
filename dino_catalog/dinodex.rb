@@ -3,14 +3,8 @@ require 'json'
 require_relative 'dinosaur'
 
 class Dinodex
-  attr_reader :db
-
   def each(&block)
     to_a.each(&block)
-  end
-
-  def filters
-    @filter ||= []
   end
 
   def filter(args)
@@ -21,54 +15,16 @@ class Dinodex
   end
 
   def import(filename)
-    db.concat(parse_csv(filename))
+    @dinos.concat(parse_csv(filename))
   end
 
   def initialize
-    @db = []
-  end
-
-  def match_dino(dino)
-    match = 1
-
-    filters.each do |filter|
-      key = filter.first.first
-      value = dino.method(key).call
-
-      match = test_match(match, value, filter)
-    end
-
-    match == 1
-  end
-
-  def parse_csv(filename)
-    csv = CSV.new(IO.read(filename), headers: true, converters: :all)
-
-    csv.to_a.map { |row| Dinosaur.new(row.to_hash) }
-  end
-
-  def reset_filters
-    @filter = []
-  end
-
-  def test_match(match, value, filter)
-    op = filter[:op]
-    negate = filter[:negate]
-    target = filter.first.last
-
-    match &= 0 unless value && (
-                 (!negate && value.method(op).call(target)) ||
-                 (negate && !value.method(op).call(target)))
-    match
+    @dinos = []
   end
 
   def to_a
-    arr = db.reject do |dino|
-      !match_dino(dino)
-    end
-
+    arr = @dinos.select { |dino| match?(dino) }
     reset_filters
-
     arr
   end
 
@@ -77,6 +33,41 @@ class Dinodex
   end
 
   def to_json
-    JSON.generate(to_hash)
+    JSON.pretty_generate(to_hash)
+  end
+
+  def to_s
+    to_a.map { |dino| "#{dino}\n\n" }.join
+  end
+
+  private
+
+  def filters
+    @filter ||= []
+  end
+
+  def match?(dino)
+    filters.all? do |filter|
+      key = filter.keys.first
+      value = dino.method(key).call
+      match_filter?(value, filter)
+    end
+  end
+
+  def match_filter?(value, filter)
+    op = filter[:op]
+    negate = filter[:negate]
+    target = filter.values.first
+    result = !value.nil? && value.method(op).call(target)
+    (result && !negate) || (!result && negate)
+  end
+
+  def parse_csv(filename)
+    csv = CSV.read(filename, headers: true, converters: :all)
+    csv.map { |row| Dinosaur.new(row) }
+  end
+
+  def reset_filters
+    @filter = []
   end
 end

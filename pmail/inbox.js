@@ -128,12 +128,16 @@ function generate_message(read, author, subject, date, label, label_message) {
                     .attr('class', 'sender_subject_' + email_number + ' col-md-11')
                     .append(
                     $('<div>')
-                        .attr('class', 'sender col-md-2')
-                        .attr('id', 'message_' + email_number + '_sender')
+                        .attr({
+                        'class': 'sender col-md-2',
+                        id: 'message_' + email_number + '_sender'
+                        })
                         .append(author),
                     $('<div>')
-                        .attr('class', 'subject col-md-6')
-                        .attr('id', 'message_' + email_number + '_subject')
+                        .attr({
+                            'class': 'subject col-md-6',
+                            id: 'message_' + email_number + '_subject'
+                        })
                         .append(
                         $('<span>')
                             .attr('class', 'label ' + label)

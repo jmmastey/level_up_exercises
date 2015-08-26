@@ -119,7 +119,7 @@ body {
 /* line 1, ../scss/_buttons.scss */
 .btn {
   font-weight: bold;
-  background-color: #eee;
+  background-color: #eeeeee;
   border: 1px solid #ddd;
   border-radius: 2px;
   padding: 7px;
@@ -222,27 +222,26 @@ body {
 /* line 16, ../scss/style.scss */
 #header .google-logo img {
   height: 30px;
-  margin-left: 30px;
   margin-top: 3px;
+  margin-left: 30px;
 }
 /* line 23, ../scss/style.scss */
 #header .search-pmail {
   float: left;
-  margin-top: 2px;
   width: 60%;
+  margin-top: 2px;
 }
 /* line 27, ../scss/style.scss */
 #header .search-pmail input[type="text"] {
-  width: 80%;
-  height: 25px;
-  padding: 0px;
-  padding-left: 5px;
+  float: left;
   font-size: 1.2em;
+  width: 75%;
+  height: 25px;
+  padding: 0px 10px 0px 5px;
   border: 1px solid #ccc;
   border-width: 1px 0px 1px 1px;
-  float: left;
 }
-/* line 36, ../scss/style.scss */
+/* line 35, ../scss/style.scss */
 #header .search-pmail input[type="text"]:focus {
   outline: none;
   border-color: #4485f4;
@@ -253,30 +252,30 @@ body {
   background-image: -webkit-linear-gradient(#e6e6e6, #ffffff 15%, #ffffff 85%);
   background-image: linear-gradient(#e6e6e6, #ffffff 15%, #ffffff 85%);
 }
-/* line 42, ../scss/style.scss */
+/* line 41, ../scss/style.scss */
 #header .search-pmail .submit-search {
   display: inline-block;
   margin-left: -5px;
 }
-/* line 45, ../scss/style.scss */
+/* line 44, ../scss/style.scss */
 #header .search-pmail .submit-search button {
-  border-radius: 0px 2px 2px 0px;
   padding: 2px 20px;
+  border-radius: 0px 2px 2px 0px;
   border-width: 1px 1px 1px 0px;
 }
-/* line 49, ../scss/style.scss */
+/* line 48, ../scss/style.scss */
 #header .search-pmail .submit-search button img {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
   height: 19px;
 }
-/* line 57, ../scss/style.scss */
+/* line 56, ../scss/style.scss */
 #header .account {
   float: right;
-  margin-top: 5px;
-  margin-right: 30px;
   color: #777;
   font-size: 0.95em;
+  margin-top: 5px;
+  margin-right: 30px;
 }
 /* line 2, ../scss/_mixins.scss */
 #header .account span.user:after {
@@ -288,11 +287,11 @@ body {
   background-size: 80%;
   background-position-y: 20px;
 }
-/* line 67, ../scss/style.scss */
+/* line 66, ../scss/style.scss */
 #header .account span:not(last-child) {
   margin-right: 10px;
 }
-/* line 70, ../scss/style.scss */
+/* line 69, ../scss/style.scss */
 #header .account img {
   width: 20px;
   margin: 0 10px;
@@ -301,7 +300,7 @@ body {
   opacity: 0.5;
 }
 
-/* line 80, ../scss/style.scss */
+/* line 79, ../scss/style.scss */
 .inbox-actions .btn {
   float: left;
   margin-right: 15px;
@@ -317,7 +316,7 @@ body {
   background-size: 80%;
   background-position-y: 15px;
 }
-/* line 87, ../scss/style.scss */
+/* line 86, ../scss/style.scss */
 .inbox-actions .select-all input[type="checkbox"] {
   margin-top: -2px;
 }
@@ -332,7 +331,7 @@ body {
   background-position-y: 15px;
 }
 
-/* line 95, ../scss/style.scss */
+/* line 94, ../scss/style.scss */
 .gmail-services {
   display: block;
   margin-top: 15px;
@@ -355,29 +354,29 @@ body {
   background-image: url("../images/menu-down-red.png");
 }
 
-/* line 103, ../scss/style.scss */
+/* line 102, ../scss/style.scss */
 .gmail-actions {
   padding: 10px 0px 10px 30px;
 }
 
-/* line 106, ../scss/style.scss */
+/* line 105, ../scss/style.scss */
 .gmail-locations {
   padding-left: 0px;
 }
-/* line 109, ../scss/style.scss */
+/* line 108, ../scss/style.scss */
 .gmail-locations ul li {
   padding-left: 30px;
 }
-/* line 111, ../scss/style.scss */
+/* line 110, ../scss/style.scss */
 .gmail-locations ul li.selected {
   padding-left: 26px;
   border-left: 4px solid #d84a38;
 }
-/* line 114, ../scss/style.scss */
+/* line 113, ../scss/style.scss */
 .gmail-locations ul li.selected a {
   color: #d84a38;
 }
-/* line 118, ../scss/style.scss */
+/* line 117, ../scss/style.scss */
 .gmail-locations ul li a {
   display: block;
   color: black;
@@ -386,9 +385,9 @@ body {
   margin-right: 15px;
   text-decoration: none;
 }
-/* line 125, ../scss/style.scss */
+/* line 124, ../scss/style.scss */
 .gmail-locations ul li a:hover {
-  background-color: #eee;
+  background-color: #eeeeee;
 }
 
 /* line 2, ../scss/_mixins.scss */
@@ -402,37 +401,37 @@ body {
   background-position-y: 20px;
 }
 
-/* line 136, ../scss/style.scss */
+/* line 135, ../scss/style.scss */
 .unread {
   font-weight: bold;
 }
 
-/* line 140, ../scss/style.scss */
+/* line 139, ../scss/style.scss */
 .n-results-on-page {
   float: left;
   display: block;
   margin-top: 10px;
   margin-right: 10px;
 }
-/* line 145, ../scss/style.scss */
+/* line 144, ../scss/style.scss */
 .n-results-on-page span {
   font-weight: bold;
 }
 
-/* line 149, ../scss/style.scss */
+/* line 148, ../scss/style.scss */
 .btn.prev-page {
   padding: 3px 7px;
   border-radius: 2px 0px 0px 2px;
 }
 
-/* line 153, ../scss/style.scss */
+/* line 152, ../scss/style.scss */
 .btn.next-page {
   padding: 3px 7px;
   border-radius: 0px 2px 2px 0px;
   margin-left: -5px;
 }
 
-/* line 158, ../scss/style.scss */
+/* line 157, ../scss/style.scss */
 .btn.settings {
   margin-left: 15px;
 }
@@ -447,7 +446,7 @@ body {
   background-position-y: 10px;
 }
 
-/* line 162, ../scss/style.scss */
+/* line 161, ../scss/style.scss */
 .settings-panel {
   display: none;
   position: absolute;
@@ -456,68 +455,66 @@ body {
   box-shadow: 0px 4px 8px #aaa;
   right: 30px;
 }
-/* line 169, ../scss/style.scss */
+/* line 168, ../scss/style.scss */
 .settings-panel p {
   margin-top: 5px;
   padding: 5px 10px;
 }
-/* line 173, ../scss/style.scss */
+/* line 172, ../scss/style.scss */
 .settings-panel ul {
-  padding: 5px 0px;
-  padding-top: 2px;
+  padding: 1px 0px 5px 0px;
   margin: 5px 0px;
 }
-/* line 177, ../scss/style.scss */
+/* line 175, ../scss/style.scss */
 .settings-panel ul:not(:last-child) {
   border-bottom: 1px solid #ddd;
 }
-/* line 180, ../scss/style.scss */
+/* line 178, ../scss/style.scss */
 .settings-panel ul li {
   padding: 5px 40px;
 }
-/* line 182, ../scss/style.scss */
+/* line 180, ../scss/style.scss */
 .settings-panel ul li:hover {
   cursor: pointer;
-  background-color: #eee;
+  background-color: #eeeeee;
 }
 
-/* line 190, ../scss/style.scss */
+/* line 188, ../scss/style.scss */
 .emails {
   overflow-y: scroll;
   padding-left: 1px;
 }
-
-/* line 194, ../scss/style.scss */
+/* line 191, ../scss/style.scss */
 .emails table {
   width: 100%;
 }
-/* line 196, ../scss/style.scss */
+/* line 193, ../scss/style.scss */
 .emails table tr.selected {
   border-left: 2px solid #4485f4;
 }
-/* line 199, ../scss/style.scss */
+/* line 196, ../scss/style.scss */
 .emails table .unread td {
   background-color: white;
   font-weight: bold;
 }
-/* line 203, ../scss/style.scss */
+/* line 200, ../scss/style.scss */
 .emails table td {
   padding: 10px;
-  background-color: #eee;
+  background-color: #eeeeee;
   border-bottom: 1px solid #ddd;
 }
-/* line 207, ../scss/style.scss */
+/* line 204, ../scss/style.scss */
 .emails table td span {
   font-weight: normal;
   color: #888;
 }
-/* line 212, ../scss/style.scss */
+/* line 209, ../scss/style.scss */
 .emails table .star {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
   opacity: 0.3;
   height: 20px;
 }
-/* line 216, ../scss/style.scss */
+/* line 213, ../scss/style.scss */
 .emails table .starred {
   height: 20px;
 }

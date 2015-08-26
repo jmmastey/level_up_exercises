@@ -1,6 +1,6 @@
 .btn {
   font-weight: bold;
-  background-color: #eee;
+  background-color: $pmail-grey;
   border: 1px solid #ddd;
   border-radius: 2px;
   padding: 7px;
@@ -47,7 +47,7 @@
   }
   &:hover {
     cursor: pointer;
-    @include background-image(linear-gradient(lighten(#eee, 2%), #eee));
+    @include background-image(linear-gradient(lighten($pmail-grey, 2%), $pmail-grey));
     border: 1px solid #ccc;
   }
   &:focus {
@@ -56,7 +56,7 @@
     border: 1px solid $pmail-blue;
   }
   &:active {
-    @include background-image(linear-gradient(darken(#eee, 10%), #eee 7%, #eee 93%));
+    @include background-image(linear-gradient(darken($pmail-grey, 10%), $pmail-grey 7%, $pmail-grey 93%));
     border: 1px solid $pmail-blue;
   }
 }

@@ -15,24 +15,23 @@
     height: 30px;
     img {
       height: 30px;
-      margin-left: $site-side-padding;
       margin-top: 3px;
+      margin-left: $site-side-padding;
     }
   }
 
   .search-pmail {
     float: left;
-    margin-top: 2px;
     width: 60%;
+    margin-top: 2px;
     input[type="text"] {
-      width: 80%;
-      height: 25px;
-      padding: 0px;
-      padding-left: 5px;
+      float: left;
       font-size: 1.2em;
+      width: 75%;
+      height: 25px;
+      padding: 0px 10px 0px 5px;
       border: 1px solid #ccc;
       border-width: 1px 0px 1px 1px;
-      float: left;
       &:focus {
         outline: none;
         border-color: $pmail-blue;
@@ -43,8 +42,8 @@
       display: inline-block;
       margin-left: -5px;
       button {
-        border-radius: 0px 2px 2px 0px;
         padding: 2px 20px;
+        border-radius: 0px 2px 2px 0px;
         border-width: 1px 1px 1px 0px;
         img {
           @include opacity(1);
@@ -56,10 +55,10 @@
 
   .account {
     float: right;
-    margin-top: 5px;
-    margin-right: $site-side-padding;
     color: #777;
     font-size: 0.95em;
+    margin-top: 5px;
+    margin-right: $site-side-padding;
 
     span.user {
       @include menu-down-icon();
@@ -123,7 +122,7 @@
         margin-right: 15px;
         text-decoration: none;
         &:hover {
-          background-color: #eee;
+          background-color: $pmail-grey;
         }
       }
     }
@@ -171,8 +170,7 @@
     padding: 5px 10px;
   }
   ul {
-    padding: 5px 0px;
-    padding-top: 2px;
+    padding: 1px 0px 5px 0px;
     margin: 5px 0px;
     &:not(:last-child) {
       border-bottom: 1px solid #ddd;
@@ -181,7 +179,7 @@
       padding: 5px 40px;
       &:hover {
         cursor: pointer;
-        background-color: #eee;
+        background-color: $pmail-grey;
       }
     }
   }
@@ -190,30 +188,30 @@
 .emails {
   overflow-y: scroll;
   padding-left: 1px;
-}
-.emails table {
-  width: 100%;
-  tr.selected {
-    border-left: 2px solid $pmail-blue;
-  }
-  .unread td {
-    background-color: white;
-    font-weight: bold;
-  }
-  td {
-    padding: 10px;
-    background-color: #eee;
-    border-bottom: 1px solid #ddd;
-    span {
-      font-weight: normal;
-      color: #888;
+  table {
+    width: 100%;
+    tr.selected {
+      border-left: 2px solid $pmail-blue;
     }
-  }
-  .star {
-    @include opacity(0.3);
-    height: 20px;
-  }
-  .starred {
-    height: 20px;
+    .unread td {
+      background-color: white;
+      font-weight: bold;
+    }
+    td {
+      padding: 10px;
+      background-color: $pmail-grey;
+      border-bottom: 1px solid #ddd;
+      span {
+        font-weight: normal;
+        color: #888;
+      }
+    }
+    .star {
+      @include opacity(0.3);
+      height: 20px;
+    }
+    .starred {
+      height: 20px;
+    }
   }
 }

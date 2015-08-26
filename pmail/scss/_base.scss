@@ -1,0 +1,35 @@
+#header {
+  overflow: hidden;
+  padding: 15px 0px;
+  border-bottom: 1px solid $header-border-color;
+  background-color: $header-bg-color;
+}
+
+.sidebar {
+  float: left;
+  width: $sidebar-wdith;
+
+  .section-header {
+    padding-left: $site-side-padding;
+  }
+}
+
+.content {
+  float: right;
+  width: $content-width;
+}
+
+.section-header {
+  overflow: hidden;
+  height: 50px;
+  border-bottom: 1px solid $header-border-color;
+  .header-left {
+    margin-top: 10px;
+    float: left;
+  }
+  .header-right {
+    padding-right: $site-side-padding;
+    margin-top: 10px;
+    float: right;
+  }
+}

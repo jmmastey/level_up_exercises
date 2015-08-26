@@ -1,0 +1,18 @@
+@mixin menu-down-icon($height: 15px, $y-pos: 20px) {
+  &:after {
+    display: inline-block;
+    content: "";
+    width: 20px;
+    height: $height;
+    background-image: url('../images/menu-down.png');
+    background-size: 80%;
+    background-position-y: $y-pos;
+  }
+}
+
+@mixin menu-down-icon-red($height: 15px, $y-pos: 20px) {
+  @include menu-down-icon($height, $y-pos);
+  &:after {
+    background-image: url('../images/menu-down-red.png');
+  }
+}

@@ -3,32 +3,22 @@
 require 'active_support/all'
 
 class BlagPost
-  attr_accessor :author, :comments, :categories, :body, :publish_date
-
-  Author = Struct.new(:name, :url)
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
+  FIELDS = [:author, :comments, :categories, :body, :publish_date]
+  Author = Struct.new(:name, :url)
+
+  attr_accessor *FIELDS
 
   def initialize(args)
-    args = args.inject({}) do |hash, (key, value)|
-      hash[key.to_sym] = value
-      hash
-    end
+    args.symbolize_keys!
+    args[:author_url] ||= ""
+    FIELDS.each { |field| args[field] ||= "" }
 
-    if args[:author] != '' && args[:author_url] != ''
-      @author = Author.new(args[:author], args[:author_url])
-    end
-
-    if args[:categories]
-      @categories = args[:categories].reject do |category|
-        DISALLOWED_CATEGORIES.include? category
-      end
-    else
-      @categories = []
-    end
-
-    @comments = args[:comments] || []
-    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
-    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
+    @categories = (args[:categories].presence || []) - DISALLOWED_CATEGORIES
+    @publish_date = Date.parse(args[:publish_date]) rescue Date.today
+    @author = Author.new(args[:author], args[:author_url])
+    @comments = args[:comments].presence || []
+    @body = args[:body].squish
   end
 
   def to_s
@@ -38,65 +28,29 @@ class BlagPost
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    author.try { |a| "By #{a.name}, at #{a.url}" }
   end
 
   def category_list
     return "" if categories.empty?
 
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
-  end
-
-  def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    label = "Category".pluralize(categories.length)
+    "#{label}: " + categories.map{|c| c.to_s.titleize}.to_sentence
   end
 
   def commenters
-    return '' unless comments_allowed?
-    return '' unless comments.length > 0
+    return '' unless comments_allowed? && comments.present?
 
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    "You will be the #{comments.length.ordinalize} commenter"
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date + 3.years > Date.today
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
-    end
+    body.truncate(200)
   end
-
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",

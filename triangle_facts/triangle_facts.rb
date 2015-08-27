@@ -17,11 +17,11 @@ class Triangle
   end
 
   def scalene?
-  (equilateral? || isosceles?)
+    (equilateral? || isosceles?)
   end
 
   def right_triangle?
-  calculate_angles(side1, side2, side3).include? 90
+    calculate_angles(side1, side2, side3).include? 90
   end
 
   def recite_facts

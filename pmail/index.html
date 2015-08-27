@@ -1,0 +1,101 @@
+<!Doctype html>
+<html>
+  <head>
+    <title>PMail</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.18.0.css">
+    <!-- JS -->
+    <script src="js/lodash.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/qunit/qunit-1.18.0.js"></script>
+    <script src="js/table.js"></script>
+    <script src="js/gmail-actions.js"></script>
+    <script src="js/unit-tests.js"></script>
+  </head>
+  <body>
+
+    <div id="header">
+      <div class="google-logo">
+        <img src="images/google_logo.png" alt="Google" />
+      </div>
+      <form class="search-pmail">
+        <input type="text" name="search" />
+        <div class="submit-search">
+          <button class="btn btn-wide btn-blue btn-with-icon search"><img src="images/magnify.png" alt="Seach" /></button>
+        </div>
+      </form>
+      <div class="account">
+        <span class="name">Alex</span>
+        <img class="apps" src="images/apps.png" />
+        <img class="alerts" src="images/bell.png" />
+        <span class="user">abake@enova.com</span>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <section class="sidebar">
+      <header class="section-header">
+        <a class="gmail-services" href="#">Gmail</a>
+      </header>
+      <div class="gmail-actions">
+        <button class="btn btn-ultra-wide btn-red">COMPOSE</button>
+      </div>
+      <div class="gmail-locations">
+        <ul>
+          <li class="selected unread"><a href="#">Inbox (<span class="n-unread"></span>)</a></li>
+          <li><a href="#">Starred</a></li>
+          <li><a href="#">Important</a></li>
+          <li><a href="#">Sent Mail</a></li>
+          <li><a href="#">Drafts</a></li>
+          <li><a class="more-locations" href="#">More</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="content">
+      <header class="section-header">
+        <div class="header-left inbox-actions">
+          <button class="btn btn-wide select-all"><input type="checkbox" /></button>
+          <button class="btn btn-with-icon refresh"><img src="images/refresh.png" alt="Refresh emails" /></button>
+          <button class="btn btn-wide more-options">More</button>
+        </div>
+
+        <div class="header-right">
+          <div class="n-results-on-page">
+            <span>1-20</span> of <span>20</span>
+          </div>
+          <button class="btn btn-with-icon prev-page"><img src="images/chevron-left.png" alt="Previous page" /></button>
+          <button class="btn btn-with-icon next-page"><img src="images/chevron-right.png" alt="Previous page" /></button>
+          <button class="btn btn-with-icon settings"><img src="images/settings.png" alt="Settings" /></button>
+          <div class="settings-panel">
+            <p>Display Density</p>
+            <ul>
+              <li>Comfortable</li>
+              <li>Cozy</li>
+              <li>Compact</li>
+            </ul>
+            <ul>
+              <li>Configure Inbox</li>
+            </ul>
+            <ul>
+              <li>Settings</li>
+              <li>Themes</li>
+            </ul>
+
+            <ul>
+              <li>Send Feedback</li>
+              <li>Help</li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="emails">
+        <br /><br />
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+      </div>
+    </section>
+  </body>
+</html>

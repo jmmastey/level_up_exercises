@@ -1,0 +1,62 @@
+.btn {
+  font-weight: bold;
+  background-color: $pmail-grey;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: 7px;
+  outline: none;
+
+  &.btn-wide {
+    padding: 7px 15px;
+  }
+  &.btn-ultra-wide {
+    padding: 7px 30px;
+  }
+  &.btn-with-icon {
+    padding: 3px 15px;
+    img {
+      height: 20px;
+      @include opacity(0.6);
+    }
+    &:hover {
+      img {
+        @include opacity(1);
+      }
+    }
+  }
+  &.btn-red {
+    color: white;
+    border: 1px solid darken($pmail-red, 10%);
+    background-color: $pmail-red;
+    &:hover {
+      border: 1px solid darken($pmail-red, 20%);
+      @include background-image(linear-gradient($pmail-red, darken($pmail-red, 5%)));
+    }
+    &:focus {
+      border: 1px solid lighten($pmail-red, 20%);
+    }
+  }
+  &.btn-blue {
+    color: white;
+    border: 1px solid darken($pmail-blue, 10%);
+    background-color: $pmail-blue;
+    &:hover {
+      border: 1px solid darken($pmail-blue, 20%);
+      @include background-image(linear-gradient($pmail-blue, darken($pmail-blue, 5%)));
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    @include background-image(linear-gradient(lighten($pmail-grey, 2%), $pmail-grey));
+    border: 1px solid #ccc;
+  }
+  &:focus {
+    z-index: 0;
+    position: relative;
+    border: 1px solid $pmail-blue;
+  }
+  &:active {
+    @include background-image(linear-gradient(darken($pmail-grey, 10%), $pmail-grey 7%, $pmail-grey 93%));
+    border: 1px solid $pmail-blue;
+  }
+}

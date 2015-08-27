@@ -1,0 +1,217 @@
+@import "compass";
+@import "compass/css3";
+@import "compass/reset";
+@import "vars";
+@import "global";
+@import "mixins";
+@import "base";
+@import "buttons";
+
+#header {
+  .google-logo {
+    float: left;
+    position: relative;
+    width: $sidebar-wdith;
+    height: 30px;
+    img {
+      height: 30px;
+      margin-top: 3px;
+      margin-left: $site-side-padding;
+    }
+  }
+
+  .search-pmail {
+    float: left;
+    width: 60%;
+    margin-top: 2px;
+    input[type="text"] {
+      float: left;
+      font-size: 1.2em;
+      width: 75%;
+      height: 25px;
+      padding: 0px 10px 0px 5px;
+      border: 1px solid #ccc;
+      border-width: 1px 0px 1px 1px;
+      &:focus {
+        outline: none;
+        border-color: $pmail-blue;
+        @include background-image(linear-gradient(darken(white, 10%), white 15%, white 85%));
+      }
+    }
+    .submit-search {
+      display: inline-block;
+      margin-left: -5px;
+      button {
+        padding: 2px 20px;
+        border-radius: 0px 2px 2px 0px;
+        border-width: 1px 1px 1px 0px;
+        img {
+          @include opacity(1);
+          height: 19px;
+        }
+      }
+    }
+  }
+
+  .account {
+    float: right;
+    color: #777;
+    font-size: 0.95em;
+    margin-top: 5px;
+    margin-right: $site-side-padding;
+
+    span.user {
+      @include menu-down-icon();
+    }
+    span:not(last-child) {
+      margin-right: 10px;
+    }
+    img {
+      width: 20px;
+      margin: 0 10px;
+      margin-bottom: -5px;
+      @include opacity(0.5);
+    }
+  }
+}
+
+.inbox-actions {
+  .btn {
+    float: left;
+    margin-right: 15px;
+    height: 30px;
+  }
+  .select-all {
+    @include menu-down-icon(10px, 15px);
+    input[type="checkbox"] {
+      margin-top: -2px;
+    }
+  }
+  .more-options {
+    @include menu-down-icon(10px, 15px);
+  }
+}
+.gmail-services {
+  display: block;
+  margin-top: 15px;
+  color: $pmail-red;
+  font-size: 1.3em;
+  text-decoration: none;
+  @include menu-down-icon-red(15px, 17px);
+}
+.gmail-actions {
+  padding: 10px 0px 10px $site-side-padding;
+}
+.gmail-locations {
+  padding-left: 0px;
+  ul {
+    li {
+      padding-left: $site-side-padding;
+      &.selected {
+        padding-left: 26px;
+        border-left: 4px solid $pmail-red;
+        a {
+          color: $pmail-red;
+        }
+      }
+      a {
+        display: block;
+        color: black;
+        padding: 7px 10px 7px 20px;
+        margin-left: -20px;
+        margin-right: 15px;
+        text-decoration: none;
+        &:hover {
+          background-color: $pmail-grey;
+        }
+      }
+    }
+  }
+}
+.more-locations {
+  @include menu-down-icon();
+}
+
+.unread {
+  font-weight: bold;
+}
+
+.n-results-on-page {
+  float: left;
+  display: block;
+  margin-top: 10px;
+  margin-right: 10px;
+  span {
+    font-weight: bold;
+  }
+}
+.btn.prev-page {
+  padding: 3px 7px;
+  border-radius: 2px 0px 0px 2px;
+}
+.btn.next-page {
+  padding: 3px 7px;
+  border-radius: 0px 2px 2px 0px;
+  margin-left: -5px;
+}
+.btn.settings {
+  margin-left: 15px;
+  @include menu-down-icon(10px, 10px);
+}
+.settings-panel {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 8px #aaa;
+  right: $site-side-padding;
+  p {
+    margin-top: 5px;
+    padding: 5px 10px;
+  }
+  ul {
+    padding: 1px 0px 5px 0px;
+    margin: 5px 0px;
+    &:not(:last-child) {
+      border-bottom: 1px solid #ddd;
+    }
+    li {
+      padding: 5px 40px;
+      &:hover {
+        cursor: pointer;
+        background-color: $pmail-grey;
+      }
+    }
+  }
+}
+
+.emails {
+  overflow-y: scroll;
+  padding-left: 1px;
+  table {
+    width: 100%;
+    tr.selected {
+      border-left: 2px solid $pmail-blue;
+    }
+    .unread td {
+      background-color: white;
+      font-weight: bold;
+    }
+    td {
+      padding: 10px;
+      background-color: $pmail-grey;
+      border-bottom: 1px solid #ddd;
+      span {
+        font-weight: normal;
+        color: #888;
+      }
+    }
+    .star {
+      @include opacity(0.3);
+      height: 20px;
+    }
+    .starred {
+      height: 20px;
+    }
+  }
+}

@@ -1,0 +1,520 @@
+/* line 5, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 1, ../scss/_global.scss */
+body {
+  font-size: 0.85em;
+  font-family: "Arial";
+}
+
+/* line 5, ../scss/_global.scss */
+.clear {
+  clear: both;
+}
+
+/* line 1, ../scss/_base.scss */
+#header {
+  overflow: hidden;
+  padding: 15px 0px;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #f1f1f1;
+}
+
+/* line 8, ../scss/_base.scss */
+.sidebar {
+  float: left;
+  width: 15%;
+}
+/* line 12, ../scss/_base.scss */
+.sidebar .section-header {
+  padding-left: 30px;
+}
+
+/* line 17, ../scss/_base.scss */
+.content {
+  float: right;
+  width: 85%;
+}
+
+/* line 22, ../scss/_base.scss */
+.section-header {
+  overflow: hidden;
+  height: 50px;
+  border-bottom: 1px solid #e5e5e5;
+}
+/* line 26, ../scss/_base.scss */
+.section-header .header-left {
+  margin-top: 10px;
+  float: left;
+}
+/* line 30, ../scss/_base.scss */
+.section-header .header-right {
+  padding-right: 30px;
+  margin-top: 10px;
+  float: right;
+}
+
+/* line 1, ../scss/_buttons.scss */
+.btn {
+  font-weight: bold;
+  background-color: #eeeeee;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: 7px;
+  outline: none;
+}
+/* line 9, ../scss/_buttons.scss */
+.btn.btn-wide {
+  padding: 7px 15px;
+}
+/* line 12, ../scss/_buttons.scss */
+.btn.btn-ultra-wide {
+  padding: 7px 30px;
+}
+/* line 15, ../scss/_buttons.scss */
+.btn.btn-with-icon {
+  padding: 3px 15px;
+}
+/* line 17, ../scss/_buttons.scss */
+.btn.btn-with-icon img {
+  height: 20px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  opacity: 0.6;
+}
+/* line 22, ../scss/_buttons.scss */
+.btn.btn-with-icon:hover img {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+}
+/* line 27, ../scss/_buttons.scss */
+.btn.btn-red {
+  color: white;
+  border: 1px solid #b93524;
+  background-color: #d84a38;
+}
+/* line 31, ../scss/_buttons.scss */
+.btn.btn-red:hover {
+  border: 1px solid #8e291c;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Q4NGEzOCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2NlM2IyOCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d84a38), color-stop(100%, #ce3b28));
+  background-image: -moz-linear-gradient(#d84a38, #ce3b28);
+  background-image: -webkit-linear-gradient(#d84a38, #ce3b28);
+  background-image: linear-gradient(#d84a38, #ce3b28);
+}
+/* line 35, ../scss/_buttons.scss */
+.btn.btn-red:focus {
+  border: 1px solid #e9988d;
+}
+/* line 39, ../scss/_buttons.scss */
+.btn.btn-blue {
+  color: white;
+  border: 1px solid #1466f1;
+  background-color: #4485f4;
+}
+/* line 43, ../scss/_buttons.scss */
+.btn.btn-blue:hover {
+  border: 1px solid #0c51c6;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ0ODVmNCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJjNzVmMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4485f4), color-stop(100%, #2c75f3));
+  background-image: -moz-linear-gradient(#4485f4, #2c75f3);
+  background-image: -webkit-linear-gradient(#4485f4, #2c75f3);
+  background-image: linear-gradient(#4485f4, #2c75f3);
+}
+/* line 48, ../scss/_buttons.scss */
+.btn:hover {
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YzZjNmMyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f3f3f3), color-stop(100%, #eeeeee));
+  background-image: -moz-linear-gradient(#f3f3f3, #eeeeee);
+  background-image: -webkit-linear-gradient(#f3f3f3, #eeeeee);
+  background-image: linear-gradient(#f3f3f3, #eeeeee);
+  border: 1px solid #ccc;
+}
+/* line 53, ../scss/_buttons.scss */
+.btn:focus {
+  z-index: 0;
+  position: relative;
+  border: 1px solid #4485f4;
+}
+/* line 58, ../scss/_buttons.scss */
+.btn:active {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Q1ZDVkNSIvPjxzdG9wIG9mZnNldD0iNyUiIHN0b3AtY29sb3I9IiNlZWVlZWUiLz48c3RvcCBvZmZzZXQ9IjkzJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d5d5d5), color-stop(7%, #eeeeee), color-stop(93%, #eeeeee));
+  background-image: -moz-linear-gradient(#d5d5d5, #eeeeee 7%, #eeeeee 93%);
+  background-image: -webkit-linear-gradient(#d5d5d5, #eeeeee 7%, #eeeeee 93%);
+  background-image: linear-gradient(#d5d5d5, #eeeeee 7%, #eeeeee 93%);
+  border: 1px solid #4485f4;
+}
+
+/* line 11, ../scss/style.scss */
+#header .google-logo {
+  float: left;
+  position: relative;
+  width: 15%;
+  height: 30px;
+}
+/* line 16, ../scss/style.scss */
+#header .google-logo img {
+  height: 30px;
+  margin-top: 3px;
+  margin-left: 30px;
+}
+/* line 23, ../scss/style.scss */
+#header .search-pmail {
+  float: left;
+  width: 60%;
+  margin-top: 2px;
+}
+/* line 27, ../scss/style.scss */
+#header .search-pmail input[type="text"] {
+  float: left;
+  font-size: 1.2em;
+  width: 75%;
+  height: 25px;
+  padding: 0px 10px 0px 5px;
+  border: 1px solid #ccc;
+  border-width: 1px 0px 1px 1px;
+}
+/* line 35, ../scss/style.scss */
+#header .search-pmail input[type="text"]:focus {
+  outline: none;
+  border-color: #4485f4;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U2ZTZlNiIvPjxzdG9wIG9mZnNldD0iMTUlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSI4NSUiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e6e6e6), color-stop(15%, #ffffff), color-stop(85%, #ffffff));
+  background-image: -moz-linear-gradient(#e6e6e6, #ffffff 15%, #ffffff 85%);
+  background-image: -webkit-linear-gradient(#e6e6e6, #ffffff 15%, #ffffff 85%);
+  background-image: linear-gradient(#e6e6e6, #ffffff 15%, #ffffff 85%);
+}
+/* line 41, ../scss/style.scss */
+#header .search-pmail .submit-search {
+  display: inline-block;
+  margin-left: -5px;
+}
+/* line 44, ../scss/style.scss */
+#header .search-pmail .submit-search button {
+  padding: 2px 20px;
+  border-radius: 0px 2px 2px 0px;
+  border-width: 1px 1px 1px 0px;
+}
+/* line 48, ../scss/style.scss */
+#header .search-pmail .submit-search button img {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+  height: 19px;
+}
+/* line 56, ../scss/style.scss */
+#header .account {
+  float: right;
+  color: #777;
+  font-size: 0.95em;
+  margin-top: 5px;
+  margin-right: 30px;
+}
+/* line 2, ../scss/_mixins.scss */
+#header .account span.user:after {
+  display: inline-block;
+  content: "";
+  width: 20px;
+  height: 15px;
+  background-image: url("../images/menu-down.png");
+  background-size: 80%;
+  background-position-y: 20px;
+}
+/* line 66, ../scss/style.scss */
+#header .account span:not(last-child) {
+  margin-right: 10px;
+}
+/* line 69, ../scss/style.scss */
+#header .account img {
+  width: 20px;
+  margin: 0 10px;
+  margin-bottom: -5px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
+
+/* line 79, ../scss/style.scss */
+.inbox-actions .btn {
+  float: left;
+  margin-right: 15px;
+  height: 30px;
+}
+/* line 2, ../scss/_mixins.scss */
+.inbox-actions .select-all:after {
+  display: inline-block;
+  content: "";
+  width: 20px;
+  height: 10px;
+  background-image: url("../images/menu-down.png");
+  background-size: 80%;
+  background-position-y: 15px;
+}
+/* line 86, ../scss/style.scss */
+.inbox-actions .select-all input[type="checkbox"] {
+  margin-top: -2px;
+}
+/* line 2, ../scss/_mixins.scss */
+.inbox-actions .more-options:after {
+  display: inline-block;
+  content: "";
+  width: 20px;
+  height: 10px;
+  background-image: url("../images/menu-down.png");
+  background-size: 80%;
+  background-position-y: 15px;
+}
+
+/* line 94, ../scss/style.scss */
+.gmail-services {
+  display: block;
+  margin-top: 15px;
+  color: #d84a38;
+  font-size: 1.3em;
+  text-decoration: none;
+}
+/* line 2, ../scss/_mixins.scss */
+.gmail-services:after {
+  display: inline-block;
+  content: "";
+  width: 20px;
+  height: 15px;
+  background-image: url("../images/menu-down.png");
+  background-size: 80%;
+  background-position-y: 17px;
+}
+/* line 15, ../scss/_mixins.scss */
+.gmail-services:after {
+  background-image: url("../images/menu-down-red.png");
+}
+
+/* line 102, ../scss/style.scss */
+.gmail-actions {
+  padding: 10px 0px 10px 30px;
+}
+
+/* line 105, ../scss/style.scss */
+.gmail-locations {
+  padding-left: 0px;
+}
+/* line 108, ../scss/style.scss */
+.gmail-locations ul li {
+  padding-left: 30px;
+}
+/* line 110, ../scss/style.scss */
+.gmail-locations ul li.selected {
+  padding-left: 26px;
+  border-left: 4px solid #d84a38;
+}
+/* line 113, ../scss/style.scss */
+.gmail-locations ul li.selected a {
+  color: #d84a38;
+}
+/* line 117, ../scss/style.scss */
+.gmail-locations ul li a {
+  display: block;
+  color: black;
+  padding: 7px 10px 7px 20px;
+  margin-left: -20px;
+  margin-right: 15px;
+  text-decoration: none;
+}
+/* line 124, ../scss/style.scss */
+.gmail-locations ul li a:hover {
+  background-color: #eeeeee;
+}
+
+/* line 2, ../scss/_mixins.scss */
+.more-locations:after {
+  display: inline-block;
+  content: "";
+  width: 20px;
+  height: 15px;
+  background-image: url("../images/menu-down.png");
+  background-size: 80%;
+  background-position-y: 20px;
+}
+
+/* line 135, ../scss/style.scss */
+.unread {
+  font-weight: bold;
+}
+
+/* line 139, ../scss/style.scss */
+.n-results-on-page {
+  float: left;
+  display: block;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+/* line 144, ../scss/style.scss */
+.n-results-on-page span {
+  font-weight: bold;
+}
+
+/* line 148, ../scss/style.scss */
+.btn.prev-page {
+  padding: 3px 7px;
+  border-radius: 2px 0px 0px 2px;
+}
+
+/* line 152, ../scss/style.scss */
+.btn.next-page {
+  padding: 3px 7px;
+  border-radius: 0px 2px 2px 0px;
+  margin-left: -5px;
+}
+
+/* line 157, ../scss/style.scss */
+.btn.settings {
+  margin-left: 15px;
+}
+/* line 2, ../scss/_mixins.scss */
+.btn.settings:after {
+  display: inline-block;
+  content: "";
+  width: 20px;
+  height: 10px;
+  background-image: url("../images/menu-down.png");
+  background-size: 80%;
+  background-position-y: 10px;
+}
+
+/* line 161, ../scss/style.scss */
+.settings-panel {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 8px #aaa;
+  right: 30px;
+}
+/* line 168, ../scss/style.scss */
+.settings-panel p {
+  margin-top: 5px;
+  padding: 5px 10px;
+}
+/* line 172, ../scss/style.scss */
+.settings-panel ul {
+  padding: 1px 0px 5px 0px;
+  margin: 5px 0px;
+}
+/* line 175, ../scss/style.scss */
+.settings-panel ul:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+/* line 178, ../scss/style.scss */
+.settings-panel ul li {
+  padding: 5px 40px;
+}
+/* line 180, ../scss/style.scss */
+.settings-panel ul li:hover {
+  cursor: pointer;
+  background-color: #eeeeee;
+}
+
+/* line 188, ../scss/style.scss */
+.emails {
+  overflow-y: scroll;
+  padding-left: 1px;
+}
+/* line 191, ../scss/style.scss */
+.emails table {
+  width: 100%;
+}
+/* line 193, ../scss/style.scss */
+.emails table tr.selected {
+  border-left: 2px solid #4485f4;
+}
+/* line 196, ../scss/style.scss */
+.emails table .unread td {
+  background-color: white;
+  font-weight: bold;
+}
+/* line 200, ../scss/style.scss */
+.emails table td {
+  padding: 10px;
+  background-color: #eeeeee;
+  border-bottom: 1px solid #ddd;
+}
+/* line 204, ../scss/style.scss */
+.emails table td span {
+  font-weight: normal;
+  color: #888;
+}
+/* line 209, ../scss/style.scss */
+.emails table .star {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+  height: 20px;
+}
+/* line 213, ../scss/style.scss */
+.emails table .starred {
+  height: 20px;
+}

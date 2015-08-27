@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Pmail</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="inbox.css">
+</head>
+<body>
+<!-- Top Menu -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button"
+                    class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <span class="glyphicon glyphicon-envelope"></span> Pmail</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-haspopup="true" aria-expanded="false">
+                        example_user@pmail.com
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Account Settings</a></li>
+                        <li><a href="#">Setup Filters</a></li>
+                        <li><a href="#">Setup Folders</a></li>
+                        <li><a href="#">Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Mail Toolbar -->
+<section class="email_toolbar col-md-12">
+    <div class="col-md-2 btn-group" style="z-index: 2;">
+        <button type="button" class="btn btn-default dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Mail <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">Mail</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li><a href="#">Tasks</a></li>
+        </ul>
+        <button type="button" class="btn btn-default btn-sm"
+                id="check_all"
+                data-toggle="button" style="margin-left: 20%">
+            <span class="glyphicon glyphicon-check"></span> Select All
+        </button>
+    </div>
+
+    <div class="btn-group col-md-3 col-md-offset-1" role="group">
+        <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-save"></span>
+            Archive
+        </button>
+        <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-sunglasses"></span>
+            Mark as Read
+        </button>
+        <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-bullhorn"></span>
+            Report Spam
+        </button>
+        <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-trash"></span>
+            Move to Trash
+        </button>
+    </div>
+    <div class="btn-group col-md-1">
+        <button type="button"
+                class="btn btn-default btn-sm dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <span class="glyphicon glyphicon-folder-open"></span>
+            Move to Folder
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">User Folder 1 <span class="badge">19</span></a></li>
+            <li><a href="#">User Folder 2 <span class="badge">84</span></a></li>
+            <li><a href="#">New Folder</a></li>
+        </ul>
+    </div>
+    <div class="btn-group col-md-1">
+        <button type="button"
+                class="btn btn-default btn-sm dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <span class="glyphicon glyphicon-tag"></span>
+            Add Tag
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">
+                <span class="label label-warning">Urgent</span>
+            </a></li>
+            <li><a href="#">
+                <span class="label label-success">Low Priority</span>
+            </a></li>
+            <li><a href="#">New Tag</a></li>
+        </ul>
+    </div>
+</section>
+<!-- Left Menu -->
+<aside class="leftSidebar">
+    <div class="compose">
+        <a href="#" role="button" class="btn btn-danger">Compose</a>
+    </div>
+    <div class="folders">
+        <ul class="listgroup">
+            <li><a href="#" role="button" type="button" class="list-group-item">
+                Inbox <span class="badge">21</span>
+            </a></li>
+            <li><a href="#starred" role="button" type="button" class="list-group-item">
+                Starred<span class="badge">12</span>
+            </a></li>
+            <li><a href="#sent" role="button" type="button" class="list-group-item">
+                Sent
+            </a></li>
+            <li><a href="#drafts" role="button" type="button" class="list-group-item">
+                Drafts<span class="badge">2</span>
+            </a></li>
+
+            <div class="show_more">
+                <li><a onclick="show_folders();" style="cursor: pointer; padding-left: 2px;">
+                    More <span class="glyphicon glyphicon-arrow-down"></span>
+                </a></li>
+            </div>
+            <div class="folders" id="user_folders">
+                <li><a onclick="hide_folders();" style="cursor: pointer;  padding-left: 2px;">
+                    Less<span class="glyphicon glyphicon-arrow-up"></span>
+                </a></li>
+                <li><a href="#1" role="button" type="button" class="list-group-item">
+                    Folder 1<span class="badge">19</span>
+                </a></li>
+                <li><a href="#2" role="button" type="button" class="list-group-item">
+                    Folder 2<span class="badge">84</span>
+                </a></li>
+            </div>
+        </ul>
+    </div>
+</aside>
+<!-- All messages -->
+<main class="mainContent">
+    <ul class="listgroup">
+        <!-- Emails go here (jQuery) -->
+    </ul>
+    <!-- Bottom Navigation -->
+    <footer class="container">
+        <nav class="navbar-fixed-bottom">
+            <ul class="pager">
+                <li class="previous"><a href="#"><span
+                        aria-hidden="true">&larr;</span> Older</a></li>
+                <li class="next"><a href="#">Newer <span
+                        aria-hidden="true">&rarr;</span></a></li>
+            </ul>
+        </nav>
+    </footer>
+    <!-- / Bottom Navigation -->
+</main>
+<!-- Javascript for handling the inbox -->
+<script src="inbox.js"></script>
+</body>
+</html>

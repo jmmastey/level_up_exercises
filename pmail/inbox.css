@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+/* Navbar */
+.navbar {
+    z-index: 1;
+    margin: 0;
+    color: #FFFFFF;
+}
+
+.sidebar-nav {
+    padding: 9px 0;
+}
+
+.dropdown-menu .sub-menu {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    margin-top: -1px;
+}
+
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Email Toolbar (archive delete, etc) */
+.email_toolbar {
+    padding: 5px;
+}
+
+.compose {
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.compose a {
+    width: 100%;
+}
+/* End Email Toolbar */
+
+/* Left sidebar with the folders and compose button */
+.leftSidebar {
+    width: 6%;
+    height: 90%;
+    padding-top: 2%;
+    position: fixed;
+}
+
+.folders {
+    padding-top: 10%;
+    text-align: left;
+}
+
+.folders li {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+}
+
+.folders li a {
+    width: 100%;
+    overflow: auto;
+}
+
+.folders#user_folders {
+    display: none;
+}
+/* End Left Sidebar */
+
+/* Main part of the inbox. This is where the emails are displayed. */
+.mainContent {
+    width: 94%;
+    height: 100%;
+    position: inherit;
+    float: right;
+}
+
+.line_item {
+    font-size: 15px;
+}
+/* Stars */
+.glyphicon:before {
+    color: darkgray;
+    visibility: visible;
+}
+
+.glyphicon.glyphicon-star-empty:checked:before {
+    color: yellow;
+    content: "\e006";
+}
+
+input[type=checkbox].glyphicon {
+    visibility: hidden;
+}
+/* end stars */
+
+.listgroup {
+    list-style-type: none;
+}
+
+.email:hover {
+    background: #D6D6D6;
+}
+
+.line_item .glyphy {
+    margin-left: 10%;
+    margin-top: 0;
+    position: absolute;
+}
+
+.email .sender {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.email .subject {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.email .date {
+    text-align: right;
+}
+
+.navbar-fixed-bottom {
+    z-index: 2;
+    width: 98%;
+    padding-left: 8%;
+}
+/* End mainContent */

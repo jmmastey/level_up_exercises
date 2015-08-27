@@ -4,12 +4,14 @@
     <title>PMail</title>
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.18.0.css">
     <!-- JS -->
+    <script src="js/lodash.js"></script>
     <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/react/react.js"></script>
-    <script src="js/react/JSXTransformer.js"></script>
+    <script src="http://code.jquery.com/qunit/qunit-1.18.0.js"></script>
     <script src="js/table.js"></script>
     <script src="js/gmail-actions.js"></script>
+    <script src="js/unit-tests.js"></script>
   </head>
   <body>
 
@@ -89,7 +91,11 @@
           </div>
         </div>
       </header>
-      <div class="emails"></div>
+      <div class="emails">
+        <br /><br />
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+      </div>
     </section>
   </body>
 </html>

@@ -20,7 +20,7 @@ function maybeStarred() {
 
 function createTable (n_rows) {
   var table = "<table>"
-  for (var i = 0; i <= n_rows; i++) {
+  for (var _ = 0; _ < n_rows; _++) {
     table += "<tr " + maybeUnread() + ">";
     table += '<td class="checkbox-select"><input type="checkbox" /></td>';
     table += '<td class="star-email">' + maybeStarred(); + '</td>';
@@ -54,6 +54,6 @@ $(document).ready(function () {
   setHeightForEmailsOverflow();
   $(window).resize(setHeightForEmailsOverflow);
 
-  $('.emails').html(createTable(25))
+  $('.emails').prepend(createTable(25))
   $('.n-unread').html(countUnread());
 });

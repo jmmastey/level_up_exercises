@@ -1,0 +1,44 @@
+                Prefix Verb   URI Pattern                                   Controller#Action
+                  flights GET    /flights                                      flights#index
+                          POST   /flights                                      flights#create
+                   flight GET    /flights/:id                                  flights#show
+                          GET    /flights/:id/edit                             flights#edit
+                          PATCH  /flights/:id                                  flights#update
+                          DELETE /flights/:id                                  flights#destroy
+           search_flights GET    /flights/search                               flights#search
+        flight_passengers GET    /flights/:id/passengers                       passengers#index
+          flight_bookings GET    /flights/:flight_id/bookings/                 flight_bookings#index
+                          POST   /flights/:flight_id/bookings/                 flight_bookings#create
+           flight_booking GET    /flights/:flight_id/bookings/:id              flight_bookings#show
+                          GET    /flights/:flight_id/bookings/:id/edit         flight_bookings#edit
+                          PATCH  /flights/:flight_id/bookings/:id              flight_bookings#update
+                          DELETE /flights/:flight_id/bookings/:id              flight_bookings#destroy
+                airplanes GET    /airplanes                                    airplanes#index
+                          POST   /airplanes                                    airplanes#create
+                 airplane GET    /airplanes/:id                                airplanes#show
+                          GET    /airplanes/:id/edit                           airplanes#edit
+                          PATCH  /airplanes/:id                                airplanes#update
+                          DELETE /airplanes/:id                                airplanes#destroy
+         reroute_airplane PUT    /airplanes/:id/reroute                        airplanes#reroute
+airplane_refuel_locations GET    /airplanes/:id/refuel_locations               airplanes#refuel_locations
+                 airports GET    /airports                                     airports#index
+                          POST   /airports                                     airports#create
+                  airport GET    /airports/:id                                 airports#show
+                          GET    /airports/:id/edit                            airports#edit
+                          PATCH  /airports/:id                                 airports#update
+                          DELETE /airports/:id                                 airports#destroy
+        airport_airplanes GET    /airports/:airport_id/airplanes               airport#airplanes
+               passengers GET    /passengers                                   passengers#index
+                passenger GET    /passengers/:id                               passengers#show
+    passenger_itineraries GET    /passenger/:passenger_id/itineraries          itineraries#index
+                          POST   /passenger/:passenger_id/itineraries          itineraries#create
+      passenger_itinerary GET    /passenger/:passenger_id/itineraries/:id      itineraries#show
+                          GET    /passenger/:passenger_id/itineraries/:id/edit itineraries#edit
+                          PATCH  /passenger/:passenger_id/itineraries/:id      itineraries#update
+                          DELETE /passenger/:passenger_id/itineraries/:id      itineraries#destroy
+       passenger_bookings GET    /passenger_bookings                           passenger_bookings#index
+                          POST   /passenger_bookings                           passenger_bookings#create
+        passenger_booking GET    /passenger_bookings/:id                       passenger_bookings#show
+                          GET    /passenger_bookings/:id/edit                  passenger_bookings#edit
+                          PATCH  /passenger_bookings/:id                       passenger_bookings#update
+                          DELETE /passenger_bookings/:id                       passenger_bookings#destroy

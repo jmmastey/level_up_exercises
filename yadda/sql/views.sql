@@ -2,23 +2,25 @@
 DROP VIEW IF EXISTS top_beers CASCADE;
 CREATE VIEW top_beers AS
   SELECT
-    beers.name AS beer,
-    beers.brewery_id AS brewery_id,
-    beers.beer_style_id AS beer_style_id,
-    ratings.overall AS score
+    b.name AS beer,
+    br.name AS brewery,
+    b.beer_style_id AS beer_style_id,
+    r.overall AS score
   FROM
-    beers
+    beers b
   INNER JOIN
-    ratings ON beers.id = ratings.beer_id
+    ratings r ON b.id = r.beer_id
+  INNER JOIN
+    breweries br ON br.id = b.brewery_id
   ORDER BY
-    ratings.overall DESC;
+    r.overall DESC;
 
 -- "Recent score" for a beer, where only ratings within the last six months are counted and the ratings within that period are averaged.
 DROP VIEW IF EXISTS recent_score_for_beer CASCADE;
 CREATE VIEW recent_score_for_beer AS
   SELECT
     beer_id,
-    round(AVG(ratings.overall), 2) AS score
+    round(AVG(ratings.overall), 2) AS average_score
   FROM
     ratings
   WHERE
@@ -30,19 +32,22 @@ CREATE VIEW recent_score_for_beer AS
 DROP VIEW IF EXISTS recommended_beers CASCADE;
 CREATE VIEW recommended_beers AS
   SELECT
-    beers.id AS beer_id,
-    beers.name AS beer_name,
-    beer_styles.name AS beer_style,
-    round(AVG(ratings.overall), 2) AS score
+    b.id AS beer_id,
+    b.name AS beer_name,
+    bs.name AS beer_style,
+    br.name AS brewery_name,
+    round(AVG(r.overall), 2) AS average_score
   FROM
-    beers
+    beers b
   INNER JOIN
-    beer_styles ON beer_styles.id = beers.beer_style_id
+    beer_styles bs ON bs.id = b.beer_style_id
   INNER JOIN
-    ratings ON ratings.beer_id = beers.id
+    ratings r ON r.beer_id = b.id
+  INNER JOIN
+    breweries br ON br.id = b.brewery_id
   GROUP BY
-    beers.id, beers.name, beer_styles.name
+    b.id, b.name, bs.name, br.name
   HAVING
-    AVG(ratings.overall) > 4.0
+    AVG(r.overall) > 4.0
   ORDER BY
     RANDOM();

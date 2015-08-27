@@ -24,6 +24,7 @@ CREATE TABLE breweries (
   street_address VARCHAR(100),
   city           VARCHAR(200) NOT NULL,
   country        VARCHAR(50),
+  zip_code       VARCHAR(10),
   description    TEXT,
   founding_year  INTEGER,
   modified_on    TIMESTAMP DEFAULT current_timestamp,
@@ -32,7 +33,7 @@ CREATE TABLE breweries (
 COMMENT ON TABLE breweries IS 'Information about each brewery';
 -- Store brewery information. Name and city must not be null. modified_by
 -- may be set to null if the user that modified the brewery has been deleted.
--- Brewery to beers is one to many.
+-- Zip is varchar in order to support hyphens. Brewery to beers is one to many.
 
 CREATE TABLE beers (
   beer_id     SERIAL PRIMARY KEY,

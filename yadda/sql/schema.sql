@@ -120,3 +120,14 @@ EACH ROW EXECUTE PROCEDURE update_timestamp();
 
 CREATE TRIGGER update_timestamp BEFORE UPDATE ON ratings FOR
 EACH ROW EXECUTE PROCEDURE update_timestamp();
+
+
+CREATE INDEX ratings_beer_id_index ON ratings(beer_id);
+
+CREATE INDEX beers_beer_style_id_index ON beers(beer_style_id);
+
+CREATE INDEX beers_brewery_id_index ON beers(brewery_id);
+
+CREATE INDEX ratings_created_on_index ON ratings(created_on);
+
+CREATE INDEX beers_styles_name_index ON beer_styles(name);

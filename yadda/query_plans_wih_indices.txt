@@ -1,0 +1,64 @@
+yadda=# explain select * from top_beers where brewery_id = 2;
+                                                QUERY PLAN
+----------------------------------------------------------------------------------------------------------
+ Sort  (cost=147.89..147.90 rows=1 width=174)
+   Sort Key: r.overall
+   ->  Nested Loop  (cost=5.10..147.88 rows=1 width=174)
+         ->  Nested Loop  (cost=4.80..139.56 rows=1 width=25)
+               ->  Bitmap Heap Scan on beers b  (cost=4.51..48.01 rows=11 width=18)
+                     Recheck Cond: (brewery_id = 2)
+                     ->  Bitmap Index Scan on beers_brewery_id_index  (cost=0.00..4.51 rows=11 width=0)
+                           Index Cond: (brewery_id = 2)
+               ->  Index Scan using ratings_beer_id_index on ratings r  (cost=0.29..8.31 rows=1 width=11)
+                     Index Cond: (beer_id = b.id)
+         ->  Index Scan using breweries_pkey on breweries br  (cost=0.29..8.31 rows=1 width=153)
+               Index Cond: (id = 2)
+(12 rows)
+
+The scan on ratings is now an Index Scan rather than a sequential scan. It's
+also using the index for the where clause in that part of the query that reduces
+the number of rows to 1. There are two more index scans that utilize the index
+on the beer_id foreign key and the brewery_id foreign on the ratings and beers
+table respectively.
+
+yadda=# explain select * from recent_score_for_beer where beer_id = 123;
+                                          QUERY PLAN
+-----------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=0.30..4.34 rows=1 width=11)
+   Group Key: ratings.beer_id
+   ->  Index Scan using ratings_created_on_index on ratings  (cost=0.30..4.32 rows=1 width=11)
+         Index Cond: (created_on > (('now'::cstring)::date - '6 mons'::interval))
+         Filter: (beer_id = 123)
+(5 rows)
+
+This query using the created_on index on the ratings table. This reduces
+the number of rows scanned very quickly.
+
+
+yadda=# explain select * from recommended_beers where beer_style = 'Imperial IPA';
+                                                           QUERY PLAN
+---------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on recommended_beers  (cost=15974.46..15981.14 rows=535 width=208)
+   ->  Sort  (cost=15974.46..15975.79 rows=535 width=183)
+         Sort Key: (random())
+         ->  HashAggregate  (cost=15938.18..15950.21 rows=535 width=183)
+               Group Key: b.id, b.name, bs.name, br.name
+               Filter: (avg(r.overall) > 4.0)
+               ->  Nested Loop  (cost=118.67..15930.15 rows=535 width=183)
+                     ->  Nested Loop  (cost=118.38..15746.91 rows=535 width=38)
+                           ->  Nested Loop  (cost=118.09..13945.75 rows=5348 width=31)
+                                 ->  Seq Scan on beer_styles bs  (cost=0.00..4.34 rows=1 width=21)
+                                       Filter: ((name)::text = 'Imperial IPA'::text)
+                                 ->  Bitmap Heap Scan on beers b  (cost=118.09..13887.65 rows=5376 width=18)
+                                       Recheck Cond: (beer_style_id = bs.id)
+                                       ->  Bitmap Index Scan on beers_beer_style_id_index  (cost=0.00..116.74 rows=5376 width=0)
+                                             Index Cond: (beer_style_id = bs.id)
+                           ->  Index Scan using ratings_beer_id_index on ratings r  (cost=0.29..0.33 rows=1 width=11)
+                                 Index Cond: (beer_id = b.id)
+                     ->  Index Scan using breweries_pkey on breweries br  (cost=0.29..0.33 rows=1 width=153)
+                           Index Cond: (id = b.brewery_id)
+(19 rows)
+
+This query also reduces its cost by using index scans and bitmap index scans in
+the most nested parts of the nested loops which reduces a lot of the scanning
+needed. 

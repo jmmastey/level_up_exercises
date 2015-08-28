@@ -2,8 +2,10 @@
 DROP VIEW IF EXISTS top_beers CASCADE;
 CREATE VIEW top_beers AS
   SELECT
+    b.id AS beer_id,
     b.name AS beer,
     br.name AS brewery,
+    br.id AS brewery_id,
     b.beer_style_id AS beer_style_id,
     r.overall AS score
   FROM
@@ -35,7 +37,8 @@ CREATE VIEW recommended_beers AS
     b.id AS beer_id,
     b.name AS beer_name,
     bs.name AS beer_style,
-    br.name AS brewery_name,
+    br.name AS brewery,
+    br.id AS brewery_id,
     round(AVG(r.overall), 2) AS average_score
   FROM
     beers b
@@ -46,7 +49,7 @@ CREATE VIEW recommended_beers AS
   INNER JOIN
     breweries br ON br.id = b.brewery_id
   GROUP BY
-    b.id, b.name, bs.name, br.name
+    b.id, b.name, bs.name, br.name, br.id
   HAVING
     AVG(r.overall) > 4.0
   ORDER BY

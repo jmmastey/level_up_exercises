@@ -69,7 +69,7 @@ class Overlord < Sinatra::Base
   post '/BOMB/v1/wire/cut' do
     content_type :json
 
-    return { error: "Invalid Wire Selected" }.to_json unless params[:index]
+    return { error: "Invalid Wire Selected" }.to_json unless params[:index] && params[:index].to_i < @bomb.wires.wires.size
     return { error: "Bomb is wireless" }.to_json unless @bomb.wires.wires
 
     @bomb.wires.wires[params[:index].to_i].cut

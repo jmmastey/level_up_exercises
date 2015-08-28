@@ -5,4 +5,17 @@ gem "sinatra"
 group :test do
   gem "rspec"
   gem "simplecov", require: false
+  gem "cucumber"
+  gem "selenium-webdriver"
+  gem "cucumber-sinatra"
+  gem "capybara"
+  gem "capybara-webkit"
+  gem "rack"
+  gem "rack-test"
+  gem "jasmine"
+  gem "guard"
+  gem "guard-cucumber"
+  gem "guard-rspec"
+  gem "guard-jasmine"
+  gem "foreman"
 end

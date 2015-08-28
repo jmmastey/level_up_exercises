@@ -1,0 +1,142 @@
+.control-panel {
+  border: 2px solid #AAA;
+  border-radius: 15px;
+  margin: 10% auto;
+  min-width: 300px;
+  padding: 40px;
+  width: 50%;
+}
+
+.input-group {
+  margin: 20px;
+}
+
+.btn-group {
+  text-align: center;
+  width: 100%;
+}
+
+.btn-group label.btn {
+  display: inline-block;
+  float: none;
+  font-size: 25px;
+}
+
+.btn.mode.armed {
+  margin-left: -4px;
+}
+
+#trigger {
+  display: block;
+  font-size: 30px;
+  margin: 20px auto;
+  padding: 10px 40px;
+}
+#error {
+  position: absolute;
+}
+form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.wires,
+.front-plate {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  border: 5px solid #fff;
+}
+.front-plate {
+  position: relative;
+  z-index: 100;
+  -webkit-transition: 2s ease-out;
+  -webkit-transform: perspective(1000) rotateY(0deg);
+  -webkit-transform-origin: 0% 50%;
+}
+.reveal {
+  border-color: #aaa;
+  -webkit-transform: perspective(1000) rotateY(-80deg);
+}
+.exposed {
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+}
+.wire {
+  border-radius: 5px;
+  margin: 25px auto;
+}
+.wire.blue {
+  border-left: 20px solid #1E5799;
+  border-right: 20px solid #1E5799;
+}
+.wire.green {
+  border-left: 20px solid #3CB524;
+  border-right: 20px solid #3CB524;
+}
+.intact {
+  font-weight: bold
+}
+.intact.green {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3cb524+20,95bc5e+50,3cb524+80&0+0,0.8+15,1+19,1+81,0.8+85,0+100 */
+  background: -moz-linear-gradient(top, rgba(60,181,36,0) 0%, rgba(60,181,36,0.8) 15%, rgba(60,181,36,1) 19%, rgba(60,181,36,1) 20%, rgba(149,188,94,1) 50%, rgba(60,181,36,1) 80%, rgba(60,181,36,1) 81%, rgba(60,181,36,0.8) 85%, rgba(60,181,36,0) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(60,181,36,0)), color-stop(15%,rgba(60,181,36,0.8)), color-stop(19%,rgba(60,181,36,1)), color-stop(20%,rgba(60,181,36,1)), color-stop(50%,rgba(149,188,94,1)), color-stop(80%,rgba(60,181,36,1)), color-stop(81%,rgba(60,181,36,1)), color-stop(85%,rgba(60,181,36,0.8)), color-stop(100%,rgba(60,181,36,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(60,181,36,0) 0%,rgba(60,181,36,0.8) 15%,rgba(60,181,36,1) 19%,rgba(60,181,36,1) 20%,rgba(149,188,94,1) 50%,rgba(60,181,36,1) 80%,rgba(60,181,36,1) 81%,rgba(60,181,36,0.8) 85%,rgba(60,181,36,0) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(60,181,36,0) 0%,rgba(60,181,36,0.8) 15%,rgba(60,181,36,1) 19%,rgba(60,181,36,1) 20%,rgba(149,188,94,1) 50%,rgba(60,181,36,1) 80%,rgba(60,181,36,1) 81%,rgba(60,181,36,0.8) 85%,rgba(60,181,36,0) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(60,181,36,0) 0%,rgba(60,181,36,0.8) 15%,rgba(60,181,36,1) 19%,rgba(60,181,36,1) 20%,rgba(149,188,94,1) 50%,rgba(60,181,36,1) 80%,rgba(60,181,36,1) 81%,rgba(60,181,36,0.8) 85%,rgba(60,181,36,0) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(60,181,36,0) 0%,rgba(60,181,36,0.8) 15%,rgba(60,181,36,1) 19%,rgba(60,181,36,1) 20%,rgba(149,188,94,1) 50%,rgba(60,181,36,1) 80%,rgba(60,181,36,1) 81%,rgba(60,181,36,0.8) 85%,rgba(60,181,36,0) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003cb524', endColorstr='#003cb524',GradientType=0 ); /* IE6-9 */
+}
+.intact.blue {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+20,2989d8+50,1e5799+80&0+0,0.8+15,1+19,1+81,0.8+85,0+100;Blue+Two+Sided+Transparent */
+  background: -moz-linear-gradient(top, rgba(30,87,153,0) 0%, rgba(30,87,153,0.8) 15%, rgba(30,87,153,1) 19%, rgba(30,87,153,1) 20%, rgba(41,137,216,1) 50%, rgba(30,87,153,1) 80%, rgba(30,87,153,1) 81%, rgba(30,87,153,0.8) 85%, rgba(30,87,153,0) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,0)), color-stop(15%,rgba(30,87,153,0.8)), color-stop(19%,rgba(30,87,153,1)), color-stop(20%,rgba(30,87,153,1)), color-stop(50%,rgba(41,137,216,1)), color-stop(80%,rgba(30,87,153,1)), color-stop(81%,rgba(30,87,153,1)), color-stop(85%,rgba(30,87,153,0.8)), color-stop(100%,rgba(30,87,153,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(30,87,153,0) 0%,rgba(30,87,153,0.8) 15%,rgba(30,87,153,1) 19%,rgba(30,87,153,1) 20%,rgba(41,137,216,1) 50%,rgba(30,87,153,1) 80%,rgba(30,87,153,1) 81%,rgba(30,87,153,0.8) 85%,rgba(30,87,153,0) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(30,87,153,0) 0%,rgba(30,87,153,0.8) 15%,rgba(30,87,153,1) 19%,rgba(30,87,153,1) 20%,rgba(41,137,216,1) 50%,rgba(30,87,153,1) 80%,rgba(30,87,153,1) 81%,rgba(30,87,153,0.8) 85%,rgba(30,87,153,0) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(30,87,153,0) 0%,rgba(30,87,153,0.8) 15%,rgba(30,87,153,1) 19%,rgba(30,87,153,1) 20%,rgba(41,137,216,1) 50%,rgba(30,87,153,1) 80%,rgba(30,87,153,1) 81%,rgba(30,87,153,0.8) 85%,rgba(30,87,153,0) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(30,87,153,0) 0%,rgba(30,87,153,0.8) 15%,rgba(30,87,153,1) 19%,rgba(30,87,153,1) 20%,rgba(41,137,216,1) 50%,rgba(30,87,153,1) 80%,rgba(30,87,153,1) 81%,rgba(30,87,153,0.8) 85%,rgba(30,87,153,0) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#001e5799', endColorstr='#001e5799',GradientType=0 ); /* IE6-9 */
+}
+
+.cut {
+  text-decoration: line-through;
+}
+.overlay {
+  width: 100%;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000000;
+  background-color: #fff;
+  -webkit-transition: background-color 15s ease-out;
+}
+.exploded {
+  background: url(https://theglobalworldnews.files.wordpress.com/2012/08/nuclear_explosion_by_theabp-d59sy3y.jpg);
+}
+.exploded .overlay {
+  background: url(http://i318.photobucket.com/albums/mm429/allenjeffries/private/broken-glass-psd44132.png);
+  background-color: transparent;
+  background-size: cover;
+  height: 100%;
+}
+
+.disarmed button {
+  text-decoration: line-through;
+}
+
+button {
+  overflow: hidden;
+  height: 100%;
+  -webkit-transition: 0.5s ease-out;
+}
+button:disabled {
+  height: 0;
+}

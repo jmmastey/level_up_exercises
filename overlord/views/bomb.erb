@@ -1,0 +1,48 @@
+<form>
+  <div class="front-plate">
+    <div class="input-group">
+      <span class="input-group-addon" id="clock-label">Time Until Detonation</span>
+      <input type="text" name="clock" class="clock form-control" disabled="disabled" aria-describedby="clock-label">
+      <span class="input-group-addon">ms</span>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-addon" id="code-label">Enter Code Here</span>
+      <input type="text" name="code" class="form-control" aria-describedby="code-label">
+    </div>
+
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary mode disarmed active">
+        <input type="radio" name="mode" value="disarmed" checked="checked"> Disarm
+      </label>
+      <label class="btn btn-primary mode armed">
+        <input type="radio" name="mode" value="armed"> Arm
+      </label>
+    </div>
+
+    <button id="trigger" class="btn btn-default" name="trigger" disabled="disabled">Activate Bomb</button>
+
+  </div>
+
+  <div class="wires">
+    <p class="exposed hidden">This detonator is operated wirelessly</p>
+  </div>
+</form>
+
+<div id="error" class="modal modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1>Error</h1>
+    </div>
+    <div class="modal-body">
+      <p class="message"></p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+<script src="javascripts/detonator.js"></script>
+<script>
+  var detonator = new Detonator();
+</script>

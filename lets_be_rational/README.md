@@ -15,25 +15,6 @@ puts "As a float: #{z.to_f}"
 puts "As JSON: #{z.to_json}"
 ```
 
-Interestingly enough, `Fraction` can load a value over HTTP:
-
-```
-x.load("http://www.randomratio.com/")
-puts "Random fraction from server: #{x}"
-```
-
-Run the server and the test scripts in the project directory to see it in action:
-
-```
-$ ruby server.rb
-```
-
-Then in another terminal repeatedly run the test script:
-
-```
-$ ruby test.rb
-```
-
 ## Requirements
 
 Your task is to complete the implementation of `Fraction` by doing the following:
@@ -46,7 +27,7 @@ Your task is to complete the implementation of `Fraction` by doing the following
   5. Add `to_f`
 2. Implement tests
   1. Write unit-tests in RSpec
-  2. Test the `load` method by mocking the `http.request` call
+  2. Practice TDD for all your features.
 
 ## Notes
 

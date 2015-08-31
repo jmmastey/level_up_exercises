@@ -15,8 +15,8 @@ class Bomb
   end
 
   def deactivate(code)
-    check_deactivation_attempts
     check_deactivation_code(code)
+    check_deactivation_attempts
     is_deactivated?
   end
 
@@ -58,13 +58,17 @@ class Bomb
 
   private
   def check_deactivation_attempts
-    @status = 'Blown Up' if @deactivation_attempts >= 2
+    return if is_deactivated? || @deactivation_attempts <= 2
+    @status = 'Blown Up'
   end
 
   def check_deactivation_code(code)
     return if is_deactivated? || is_blown_up?
-    @status = 'Deactivated' if @deactivation_code == code
-    @deactivation_attempts += 1 unless is_deactivated?
+    if @deactivation_code == code
+      @status = 'Deactivated'
+    else
+      @deactivation_attempts += 1
+    end
   end
 
   def valid_activation_code?(code)

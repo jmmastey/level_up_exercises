@@ -61,8 +61,3 @@ Feature: Apply Coupons
     Given I have 1 item in my cart which has a valid coupon
     When I try to apply the coupon code <bad>
     Then I should see an error message
-
-
-
-
-

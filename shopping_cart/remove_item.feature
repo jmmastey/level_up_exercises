@@ -2,6 +2,7 @@ Feature: Remove an Item
   As a customer
   I should be able to remove items from the cart
   In order to buy exactly what I want
+
   @Happy
   Scenario: Items remove from the cart correctly.
     Given I have 5 items in my cart.

@@ -1,4 +1,4 @@
-# run `ruby overlord.rb` to run a webserver for this app
+# run 'ruby overlord.rb` to run a webserver for this app
 
 require 'sinatra'
 

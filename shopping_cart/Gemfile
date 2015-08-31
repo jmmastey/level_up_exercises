@@ -1,0 +1,12 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+ruby "2.0.0"
+
+gem 'cucumber'
+gem 'rspec'
+gem 'webrat'
+gem 'capybara'
+gem 'compass'
+gem 'selenium-webdriver'
+gem 'rubocop'

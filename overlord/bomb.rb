@@ -1,33 +1,30 @@
 class Bomb
   attr_accessor :status
 
-  def initialize(activation = nil, deactivation = nil)
-    @activation_code = activation || '1234'
-    @deactivation_code = deactivation || '0000'
+  def initialize(activation = '', deactivation = '')
+    replace_empty_params(activation, deactivation)
+    @activation_code = activation
+    @deactivation_code = deactivation
     @deactivation_attempts = 0
     @status = 'Inactive'
   end
 
   def activate(code)
-    @status = 'Active' if check_activation_code(code)
-    @status == 'Active'
+    @status = 'Active' if valid_activation_code?(code)
+    is_active?
   end
 
   def deactivate(code)
-    if @deactivation_code == code
-      @status = 'Deactivated'
-      true
-    elsif @deactivation_attempts >= 2
-      @status = 'Blown Up'
-      false
-    end
-    @deactivation_attempts += 1
+    check_deactivation_attempts
+    check_deactivation_code(code)
+    is_deactivated?
   end
 
   def self.validate_codes(activation, deactivation)
-    return 1 unless Bomb.valid_code?(activation)
-    return 2 unless Bomb.valid_code?(deactivation)
-    0
+    error = 0
+    error = 1 unless Bomb.valid_code?(activation)
+    error = 2 unless Bomb.valid_code?(deactivation)
+    Bomb.error_codes(error)
   end
 
   def self.valid_code?(code)
@@ -36,9 +33,46 @@ class Bomb
     '' == code
   end
 
-  private
+  def self.error_codes(error)
+    case error
+      when 1
+        'Invalid activation code. Activation code must be only numbers.'
+      when 2
+        'Invalid deactivation code. Deactivation code must be only numbers'
+      else
+        nil
+    end
+  end
 
-  def check_activation_code(code)
+  def is_active?
+    status == 'Active'
+  end
+
+  def is_deactivated?
+    status == 'Deactivated'
+  end
+
+  def is_blown_up?
+    status == 'Blown Up'
+  end
+
+  private
+  def check_deactivation_attempts
+    @status = 'Blown Up' if @deactivation_attempts >= 2
+  end
+
+  def check_deactivation_code(code)
+    return if is_deactivated? || is_blown_up?
+    @status = 'Deactivated' if @deactivation_code == code
+    @deactivation_attempts += 1 unless is_deactivated?
+  end
+
+  def valid_activation_code?(code)
     @activation_code == code && @status != 'Active'
+  end
+
+  def replace_empty_params(activation, deactivation)
+    activation.replace('1234') if activation == '' || activation.nil?
+    deactivation.replace('0000') if deactivation == '' || deactivation.nil?
   end
 end

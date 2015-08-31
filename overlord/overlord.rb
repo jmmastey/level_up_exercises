@@ -4,8 +4,9 @@ require 'sinatra'
 
 class Overlord < Sinatra::Base
   get '/' do
-    error_code = root_error_codes(params[:error].to_i)
-    erb :input_codes, locals: { status: 'Inactive', error: error_code }
+    error = session[:error]
+    session.delete(:error)
+    erb :input_codes, locals: { status: 'Inactive', error: error }
   end
 
   get '/activate/' do
@@ -16,9 +17,7 @@ class Overlord < Sinatra::Base
   post '/activate/' do
     activation = params[:activation]
     deactivation = params[:deactivation]
-    replace_empty_params(activation, deactivation)
-    valid = Bomb.validate_codes(activation, deactivation)
-    new_bomb_errors(valid) unless valid == 0
+    code_redirect(activation, deactivation)
     session[:bomb] = Bomb.new(activation, deactivation)
     erb :activate, locals: { status: current_status }
   end
@@ -53,8 +52,17 @@ class Overlord < Sinatra::Base
     end
   end
 
+  def code_redirect(activation, deactivation)
+    error = Bomb.validate_codes(activation, deactivation)
+    return '' if error.nil?
+    session[:error] = error
+    redirect to('/')
+  end
+
+  # Redirect with error if we try to jump to a page/state we shouldn't
   def no_bomb_redirect
-    redirect to('/?error=3') unless session.key?(:bomb)
+    session[:error] = 'Nice try hero, back to square one for you.'
+    redirect to('/') unless session.key?(:bomb)
   end
 
   def bomb_status_redirect
@@ -67,32 +75,10 @@ class Overlord < Sinatra::Base
     end
   end
 
-  def new_bomb_errors(error)
-    redirect to("/?error=#{error}")
-  end
-
   def activate_bomb(key)
     activated_this_turn = session[:bomb].activate(key)
     already_activated = session[:bomb].status == 'Active'
     redirect to('/activate/') unless activated_this_turn || already_activated
-  end
-
-  def root_error_codes(index)
-    case index
-      when 1
-        'Invalid activation code. Activation code must be only numbers.'
-      when 2
-        'Invalid deactivation code. Deactivation code must be only numbers'
-      when 3
-        'Nice try hero, back to square one for you.'
-      else
-        ''
-    end
-  end
-
-  def replace_empty_params(activation, deactivation)
-    activation.replace('1234') if activation == ''
-    deactivation.replace('0000') if deactivation == ''
   end
 
   enable :sessions

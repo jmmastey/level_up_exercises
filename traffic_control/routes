@@ -12,9 +12,13 @@ airport                  GET    /airports/:id                                 ai
 
 Airplane trip taken, when to refuel, and update maintenance records.
 airplane                 GET    /airplanes/:id                                airplanes#show
-airplane_maintenance     GET    /airplanes/:id/maintenance                    airplanes#maintenance
-                         PUT    /airplanes/:id/maintenance                    airplanes#update
-airplane_refuel          GET    /airplanes/:id/refuel                         airplanes#refuel
+airplane_refuel          GET    /airplanes/:id/refuel/:litres                 airplanes#refuel
+
+Airplane maintenance system
+airplane_maintenance     GET    /airplanes/:id/maintenance/:maintenance_id    maintenance#show
+                         PUT    /airplanes/:id/maintenance/:maintenance_id    maintenance#udpate
+                         GET    /airplanes/:id/maintenance                    maintenance#index
+                         DELETE /airplanes/:id/maintenance/:maintenance_id    maintenance#destroy
 
 Passenger itinerary
 passenger                GET    /passengers/:id                               passengers#show

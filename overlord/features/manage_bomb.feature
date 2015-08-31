@@ -4,7 +4,7 @@ Feature: Manage Bomb
   I want to create and manage the bomb
 
   Background:
-    Given I am on the page
+    Given I am on the bomb page
 
   @javascript
   Scenario: Activate Bomb
@@ -36,11 +36,8 @@ Feature: Manage Bomb
   @javascript
   Scenario: Enter Incorrect Deactivation Code 3 Times
     Given the bomb is activated
-    When I enter an incorrect deactivation code
-    And I enter an incorrect deactivation code again
-    And I enter an incorrect deactivation code again
+    When I enter an incorrect deactivation code three times
     Then the bomb should explode
-    And the bomb should be exploded
     And the buttons should be disabled
     And the timer should be stopped
 
@@ -49,7 +46,6 @@ Feature: Manage Bomb
     Given the bomb is activated
     When the bomb timer ends
     Then the bomb should explode
-    And the bomb should be exploded
     And the buttons should be disabled
     And the timer should be stopped
 
@@ -57,4 +53,4 @@ Feature: Manage Bomb
   Scenario: Invalid Input for Code
     Given the bomb is not exploded
     When I enter an invalid code
-    Then I should see "Only Numerical Inputs Allowed"
+    Then I should see that only numerical inputs are allowed

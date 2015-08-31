@@ -33,14 +33,32 @@ class Bomb
   end
 
   def correct_activation_code?(code)
-    code == @default_activation_code || code == @custom_activation_code
+    default_activation_code?(code) || custom_activation_code?(code)
   end
 
   def correct_deactivation_code?(code)
-    code == @default_deactivation_code || code == @custom_deactivation_code
+    default_deactivation_code?(code) || custom_deactivation_code?(code)
   end
 
   def decrement_attempt
     @attempts_remaining -= 1
+  end
+
+  private
+
+  def default_activation_code?(code)
+    code == @default_activation_code
+  end
+
+  def default_deactivation_code?(code)
+    code == @default_deactivation_code
+  end
+
+  def custom_activation_code?(code)
+    code == @custom_activation_code
+  end
+
+  def custom_deactivation_code?(code)
+    code == @custom_deactivation_code
   end
 end

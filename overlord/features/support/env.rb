@@ -1,4 +1,3 @@
-require_relative './../../bomb.rb'
 require_relative './../../overlord.rb'
 
 require 'selenium-webdriver'

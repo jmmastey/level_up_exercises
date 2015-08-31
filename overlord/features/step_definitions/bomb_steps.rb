@@ -1,8 +1,6 @@
-Given(/^I am on the page$/) do
+Given(/^I am on the bomb page$/) do
   visit '/'
   sleep(0.5)
-  @bomb = Bomb.new("2345", "5432")
-  # save_and_open_page
 end
 
 Given(/^the bomb is deactivated$/) do
@@ -19,7 +17,7 @@ Then(/^the bomb should be activated$/) do
 end
 
 Then(/^the timer should start$/) do
-  page.has_css?('div.timer')
+  expect(page).to have_selector('#timer', visible: true)
 end
 
 Given(/^the bomb is activated$/) do
@@ -39,7 +37,7 @@ Then(/^the bomb should be deactivated$/) do
 end
 
 Then(/^the timer should be stopped$/) do
-  !page.has_css?('div.timer')
+  expect(page).to have_selector('#timer', visible: false)
 end
 
 When(/^I enter an activation code$/) do
@@ -67,7 +65,15 @@ When(/^I enter an incorrect deactivation code$/) do
   expect(page).to have_content("(2 attempts remaining!)")
 end
 
-When(/^I enter an incorrect deactivation code again$/) do
+When(/^I enter an incorrect deactivation code three times$/) do
+  fill_in('code', with: '1111')
+  click_button('Submit')
+  sleep(0.3)
+  expect(page).to have_content("(2 attempts remaining!)")
+  fill_in('code', with: '1111')
+  click_button('Submit')
+  sleep(0.3)
+  expect(page).to have_content("(1 attempt remaining!")
   fill_in('code', with: '1111')
   click_button('Submit')
   sleep(0.3)
@@ -95,6 +101,6 @@ When(/^I enter an invalid code$/) do
   sleep(0.3)
 end
 
-Then(/^I should see "([^"]*)"$/) do
+Then(/^I should see that only numerical inputs are allowed$/) do
   page.has_content?("Only numeric input is allowed.")
 end

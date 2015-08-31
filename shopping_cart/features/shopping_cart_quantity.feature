@@ -3,11 +3,8 @@ Feature: Shopping Cart Checkout
   As a shopper
   I should be able to delete and add items
 
-  Background:
-    Given I am viewing "checkout"
-
   Scenario Outline: Changing Shopping Cart quantities
-    Given I am viewing the shopping cart
+    Given I am viewing "checkout"
     And the user has 1 soap in their cart
     Then I want to <change> soap <quantities>
 

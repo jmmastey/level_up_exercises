@@ -7,9 +7,11 @@ Feature: Shopping Cart Items
     Given I am viewing "checkout"
 
   Scenario: Product does not exist
-    I click on "item"
-    Then I am viewing "404"
+    When I click on "item"
+    And "item" does not exist
+    Then I should see an error
 
   Scenario: Product does exist
-    I click on "item"
+    When I click on "item"
+    And "item" does exist
     Then I am viewing "item page"

@@ -3,11 +3,8 @@ Feature: Shopping Cart Checkout
   As a shopper
   I should be able to add coupons and input address
 
-  Background:
-    Given I viewing "checkout"
-
   Scenario Outline: Enter address information
-    And I enter the <address>
+    When I enter the <address>
     Then I should get shipping <ship_cost>
     And I should get total <cost>
 
@@ -17,11 +14,11 @@ Feature: Shopping Cart Checkout
     | 60615   | 31        | 32   |
 
   Scenario Outline: Add expired coupon
-    And I enter a "coupon"
+    When I enter a "coupon"
     Then the status is "expired"
 
   Scenario Outline: Add valid coupon
-    And I enter a "coupon"
+    When I enter a "coupon"
     And the coupon is for <discount> off <item>
     And the item is currently <item_cost>
     Then I update the cost

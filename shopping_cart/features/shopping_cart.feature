@@ -1,31 +1,30 @@
 Feature: Shopping Cart Checkout
-  In order to get total price updates
+  In order to get cart totals
   As a shopper
   I should be able to add coupons and input address
 
-  Scenario Outline: Enter address information
-    When I enter the <address>
-    Then I should get shipping <ship_cost>
-    And I should get total <cost>
+  Background:
+    Given I have 2 items in my cart with a total of 20 dollars
 
-    Examples:
-    | address | ship_cost | cost |
-    | 60614   | 30        | 31   |
-    | 60615   | 31        | 32   |
+  Scenario: Shipping form is filled correctly
+    When I enter the address
+    Then the cart total is 25 dollars
 
-  Scenario Outline: Add expired coupon
-    When I enter a "coupon"
-    Then the status is "expired"
+  Scenario: Shipping form is filled incorrectly
+    When I enter the street address
+    Then I should see an error message "address not complete"
+    And the cart total is still 20 dollars
 
-  Scenario Outline: Add valid coupon
-    When I enter a "coupon"
-    And the coupon is for <discount> off <item>
-    And the item is currently <item_cost>
-    Then I update the cost
-    And item is now <item_cost>
-    And I should get total <cost>
+  Scenario: Shipping form is filled with invalid data
+    When I enter an invalid address
+    Then should see an error message "address not found"
+    And the cart total is still 20 dollars
 
-    Examples:
-    | discount | item | item_cost  | item_cost | cost |
-    | 20       | soap | 10         |      8    |  16  |
-    | 50       | hat  | 10         |      5    |  10  |
+  Scenario: Add expired coupon to cart
+    When I enter an expired coupon
+    Then I should see an error message "code expired"
+    And the cart total is still 20 dollars
+
+  Scenario: Add valid coupon to a cart
+    When I enter a valid coupon
+    Then the cart total is 18 dollars

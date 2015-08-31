@@ -1,12 +1,12 @@
 Feature: Shopping Cart Checkout
-  In order to change quantities
+  In order to manage cart items
   As a shopper
   I should be able to delete and add items
 
-  Scenario Outline: Changing Shopping Cart quantities
-    Given I am viewing "checkout"
-    And the user has 1 soap in their cart
-    Then I want to <change> soap <quantities>
+  Scenario Outline: Changing cart quantities
+    Given there exists "user" with 2 items in the cart
+    And I see the cart
+    Then I want to <change> <quantities> item
 
     Examples:
     | change   | quantities |

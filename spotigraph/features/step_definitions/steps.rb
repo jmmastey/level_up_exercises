@@ -9,8 +9,8 @@ When(/^I search for the artist "(.*?)" at a depth (\d+)$/) do |artist, depth|
 end
 
 Then(/^I see a graph$/) do
-  has_nodes = page.evaluate_script("typeof nodes !== 'undefined'")
-  has_edges = page.evaluate_script("typeof edges !== 'undefined'")
+  has_nodes = page.evaluate_script("typeof graph.nodes !== 'undefined'")
+  has_edges = page.evaluate_script("typeof graph.edges !== 'undefined'")
   is_graph = has_nodes && has_edges
   expect(is_graph).to be true
 end

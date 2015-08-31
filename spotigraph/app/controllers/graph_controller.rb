@@ -1,8 +1,4 @@
 class GraphController < ApplicationController
-  def index
-    # User visited root
-  end
-
   def generate_graph
     if validate_depth(params[:depth])
       load_graph(params[:name], params[:depth].to_i)

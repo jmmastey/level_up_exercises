@@ -13,7 +13,7 @@ RSpec.describe Artist, type: :model do
 
     it 'returns nil if we search against an empty array' do
       valid_names.each do |name|
-        expect(Artist.find_artist_in_array([], name)).to eq(nil)
+        expect(Artist.find_matching_name([], name)).to eq(nil)
       end
     end
 
@@ -21,7 +21,7 @@ RSpec.describe Artist, type: :model do
       valid_names.each do |name|
         artist = build(:artist, name: name)
         artist_array = generate_artist_array(1, artist: artist)
-        expect(Artist.find_artist_in_array(artist_array, name)).to eq(artist)
+        expect(Artist.find_matching_name(artist_array, name)).to eq(artist)
       end
     end
 
@@ -29,13 +29,13 @@ RSpec.describe Artist, type: :model do
       name = 'BlAcK SAbbAth'
       artist = build(:artist, name: 'blACk SaBBath')
       artist_array = generate_artist_array(1, artist: artist)
-      expect(Artist.find_artist_in_array(artist_array, name)).to eq(artist)
+      expect(Artist.find_matching_name(artist_array, name)).to eq(artist)
     end
 
     it 'returns nil when the artist is not present in the array' do
       artist_array = generate_artist_array(1)
       invalid_names.each do |invalid|
-        expect(Artist.find_artist_in_array(artist_array, invalid)).to eq(nil)
+        expect(Artist.find_matching_name(artist_array, invalid)).to eq(nil)
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe Artist, type: :model do
         size = rand(2...random_array_size_max)
         artist = build(:artist, name: name)
         artist_array = generate_artist_array(size, artist: artist)
-        expect(Artist.find_artist_in_array(artist_array, name)).to eq(artist)
+        expect(Artist.find_matching_name(artist_array, name)).to eq(artist)
       end
     end
 
@@ -52,7 +52,7 @@ RSpec.describe Artist, type: :model do
       size = rand(2...random_array_size_max)
       artist_array = generate_artist_array(size)
       invalid_names.each do |invalid|
-        expect(Artist.find_artist_in_array(artist_array, invalid)).to eq(nil)
+        expect(Artist.find_matching_name(artist_array, invalid)).to eq(nil)
       end
     end
 
@@ -98,7 +98,6 @@ RSpec.describe Artist, type: :model do
   end
 
   describe '.search_spotify' do
-    let(:artists) { %w(Radiohead Mixtapes) }
     let(:not_on_spotify) do
       %w(sPUKslXlnz pdbPxLK7rt w8yUJnC171 mLvr4IaeC8 ZYR9Z5R967)
     end
@@ -114,15 +113,27 @@ RSpec.describe Artist, type: :model do
         expect(artist).to be nil
       end
     end
+  end
 
-    it 'adds graph it finds to the database' do
-      # If this test is failing, ensure that you haven't modified the seed file.
-      # Seed file is loaded for testing, and some graph will already be in db.
-      # This test ensures that we properly add encountered graph to the db.
-      artists.each do |artist|
-        expect(Artist.find_by_name(artist)).to be nil
-        Artist.lookup_artist(artist)
-        expect(Artist.find_by_name(artist)).to_not be_nil
+  describe '.cache_artist' do
+    let(:valid_artists) { %w(Radiohead Mixtapes) }
+    let(:not_on_spotify) do
+      %w(sPUKslXlnz pdbPxLK7rt w8yUJnC171 mLvr4IaeC8 ZYR9Z5R967)
+    end
+
+    it 'caches artists that are on spotify' do
+      valid_artists.each do |name|
+        expect(Artist.find_by(name: name)).to be(nil), 'Artist should not start in the db'
+        artist = Artist.search_spotify(name)
+        expect(Artist.cache_artist(artist)).to_not be(nil)
+      end
+    end
+
+    it 'does not cache artists that it does not find on spotify' do
+      not_on_spotify.each do |name|
+        expect(Artist.find_by(name: name)).to be(nil), 'Artist should not start in the db'
+        artist = Artist.search_spotify(name)
+        expect(Artist.cache_artist(artist)).to be(nil)
       end
     end
   end

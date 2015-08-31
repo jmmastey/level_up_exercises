@@ -12,7 +12,5 @@
       <button type="submit" name = "Submit" class="btn btn-default">Submit</button>
     </div>
   </form>
-  <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
-  <% end %>
+  <%= render('layouts/flash') %>
 </div>

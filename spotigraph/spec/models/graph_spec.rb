@@ -82,7 +82,7 @@ RSpec.describe Graph, type: :model do
         nil,
         '',
         '; DROP TABLE graph;',
-        "'<script>alert('alert');</script>'",
+        "<script>alert('alert');</script>",
       ]
     end
     let(:related_artists) do
@@ -117,19 +117,19 @@ RSpec.describe Graph, type: :model do
           'Pixies',
           'Interpol',
           'Atoms For Peace',
+          'Joy Division',
           'Beck',
           'Four Tet',
-          'Joy Division',
+          'The National',
           'The Flaming Lips',
           'Grizzly Bear',
-          'The National',
           'The xx',
           'The Smiths',
           'Burial',
           'R.E.M.',
-          'Elbow',
-          'St. Vincent',
           'Liars',
+          'St. Vincent',
+          'Placebo',
         ],
       }
     end
@@ -139,7 +139,7 @@ RSpec.describe Graph, type: :model do
       valid_names.each do |name|
         graph = Graph.search(name, 1)[0]
         graph.each do |key, value|
-          expect(related_artists[key]).to eq(value)
+          expect(value).to eq(related_artists[key])
         end
       end
     end

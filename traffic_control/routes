@@ -12,7 +12,7 @@ airport                  GET    /airports/:id                                 ai
 
 Airplane trip taken, when to refuel, and update maintenance records.
 airplane                 GET    /airplanes/:id                                airplanes#show
-airplane_refuel          GET    /airplanes/:id/refuel/:litres                 airplanes#refuel
+airplane_refuel          GET    /airplanes/:id/refuel_stops                   airplanes#refuel
 
 Airplane maintenance system
 airplane_maintenance     GET    /airplanes/:id/maintenance/:maintenance_id    maintenance#show
@@ -24,10 +24,11 @@ Passenger itinerary
 passenger                GET    /passengers/:id                               passengers#show
 
 Allows a passenger to add/remove/update a booking.
-bookings                 GET    /bookings/:id                                 bookings#show
-                         PUT    /bookings/:id                                 bookings#update
-                         DELETE /bookings/:id                                 bookings#destroy
-                         POST   /bookings                                     bookings#create
+bookings                 GET    /flights/:flight_id/bookings/:id              bookings#show
+                         PUT    /flights/:flight_id/bookings/:id              bookings#update
+                         DELETE /flights/:flight_id/bookings/:id              bookings#destroy
+                         POST   /flights/:flight_id/bookings                  bookings#create
+                         GET    /flights/:flight_id/bookings                  bookings#index
 
 Itineraries with flights for a given passenger (can be updated)
 passenger                GET    /passengers/:id                               passengers#show

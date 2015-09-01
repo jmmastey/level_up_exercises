@@ -8,15 +8,15 @@ class Robot
 
   class << self
     attr_reader :registry
-    
+
     def registry=(input_registry)
-      raise ArgumentError, ERROR_INVALID_REGISTRY unless is_valid_registry?(input_registry)
+      raise ArgumentError, ERROR_INVALID_REGISTRY unless valid_registry?(input_registry)
       @registry = input_registry
     end
   end
 
   def initialize(args = {})
-    self.class.registry ||= args[:use_registry] if self.class.is_valid_registry?(args[:use_registry])
+    self.class.registry ||= args[:use_registry] if self.class.valid_registry?(args[:use_registry])
     self.class.registry ||= RobotRegistry.new
     @name = parse_name_generator(args[:name_generator]) || generate_robot_name
     self.class.register_robot(self)
@@ -26,7 +26,7 @@ class Robot
     registry.add_robot_to_registry(robot.name)
   end
 
-  def self.is_valid_registry?(input_registry)
+  def self.valid_registry?(input_registry)
     input_registry.instance_of?(RobotRegistry)
   end
 

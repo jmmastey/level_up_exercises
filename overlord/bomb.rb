@@ -39,8 +39,6 @@ class Bomb
         'Invalid activation code. Activation code must be only numbers.'
       when 2
         'Invalid deactivation code. Deactivation code must be only numbers'
-      else
-        nil
     end
   end
 
@@ -61,6 +59,7 @@ class Bomb
   end
 
   private
+
   def check_deactivation_attempts
     return if deactivated? || @deactivation_attempts <= 2
     @status = 'Blown Up'

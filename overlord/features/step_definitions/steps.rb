@@ -16,7 +16,6 @@ Given(/^I activated the bomb with the user's activation code$/) do
   click_button("Activate")
 end
 
-
 Given(/^I activated the bomb with the user's deactivation code$/) do
   visit path_to("the starting page")
   fill_in("deactivation", with: "8675")

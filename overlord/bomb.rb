@@ -11,13 +11,13 @@ class Bomb
 
   def activate(code)
     @status = 'Active' if valid_activation_code?(code)
-    is_active?
+    active?
   end
 
   def deactivate(code)
     check_deactivation_code(code)
     check_deactivation_attempts
-    is_deactivated?
+    deactivated?
   end
 
   def self.validate_codes(activation, deactivation)
@@ -44,26 +44,30 @@ class Bomb
     end
   end
 
-  def is_active?
+  def inactive?
+    status == 'Inactive'
+  end
+
+  def active?
     status == 'Active'
   end
 
-  def is_deactivated?
+  def deactivated?
     status == 'Deactivated'
   end
 
-  def is_blown_up?
+  def blown_up?
     status == 'Blown Up'
   end
 
   private
   def check_deactivation_attempts
-    return if is_deactivated? || @deactivation_attempts <= 2
+    return if deactivated? || @deactivation_attempts <= 2
     @status = 'Blown Up'
   end
 
   def check_deactivation_code(code)
-    return if is_deactivated? || is_blown_up?
+    return if deactivated? || blown_up?
     if @deactivation_code == code
       @status = 'Deactivated'
     else

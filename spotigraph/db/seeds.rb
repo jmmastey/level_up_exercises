@@ -77,3 +77,29 @@ related = [
   'Diamond Head',
 ]
 Artist.create(name: 'Dio', json: json, related: related)
+
+# Create Radiohead
+json = "{ \"external_urls\" : { \"spotify\" : \"https://open.spotify.com/artist/4Z8W4fKeB5YxbusRsdQVPb\" }, \"followers\" : { \"href\" : null, \"total\" : 1186749 }, \"genres\" : [ ], \"href\" : \"https://api.spotify.com/v1/artists/4Z8W4fKeB5YxbusRsdQVPb\", \"id\" : \"4Z8W4fKeB5YxbusRsdQVPb\", \"images\" : [ { \"height\" : 1005, \"url\" : \"https://i.scdn.co/image/37b5ff0a5db57e80ff72b41a32b7320bdbae8e5d\", \"width\" : 1000 }, { \"height\" : 643, \"url\" : \"https://i.scdn.co/image/c3b1daad34f11333dd0038f5f2ded565ce67f437\", \"width\" : 640 }, { \"height\" : 201, \"url\" : \"https://i.scdn.co/image/40c276238f13077be869e6755056a0a65b530cf5\", \"width\" : 200 }, { \"height\" : 64, \"url\" : \"https://i.scdn.co/image/853cdfd938ec2ac1487c7a5164700d29b3a28dd6\", \"width\" : 64 } ], \"name\" : \"Radiohead\", \"popularity\" : 80, \"type\" : \"artist\", \"uri\" : \"spotify:artist:4Z8W4fKeB5YxbusRsdQVPb\" }"
+related = [
+  'Thom Yorke',
+  'Portishead',
+  'Björk',
+  'Muse',
+  'Pixies',
+  'Interpol',
+  'Atoms For Peace',
+  'Beck',
+  'Joy Division',
+  'Four Tet',
+  'The National',
+  'The Flaming Lips',
+  'Grizzly Bear',
+  'The xx',
+  'The Smiths',
+  'Burial',
+  'R.E.M.',
+  'Placebo',
+  'Liars',
+  'St. Vincent',
+]
+Artist.create(name: 'Radiohead', json: json, related: related)

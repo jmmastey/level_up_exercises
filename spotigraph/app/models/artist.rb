@@ -3,10 +3,12 @@ class Artist < ActiveRecord::Base
   serialize :related, Array
 
   def self.lookup_artist(name)
+    return nil if name.nil? || name == ''
     Artist.find_by(name: name) || Artist.cache_artist(Artist.search_spotify(name))
   end
 
   def self.search_spotify(name)
+    return nil if name == '' || name.nil?
     artist = RSpotify::Artist.search(name)
     Artist.find_matching_name(artist, name)
   end

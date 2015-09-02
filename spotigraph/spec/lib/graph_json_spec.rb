@@ -1,6 +1,3 @@
-require_relative('../../lib/graph_json')
-require('faker')
-
 describe GraphJSON, '.to_json' do
   let(:graph_json) { GraphJSON.new }
   let(:max_size) { 200 }

@@ -2,43 +2,31 @@ require 'rails_helper'
 
 RSpec.describe GraphController, type: :controller do
   describe 'POST', '#generate_graph' do
-    let(:valid_artists) do
-      [
-        'Black Sabbath'
-      ]
-    end
 
-    let(:invalid_artists) do
-      [
-        'Bak Sabat'
-      ]
-    end
+    let(:valid_artists)   { TestData.valid_artists }
+    let(:invalid_artists) { TestData.invalid_artists }
+    let(:invalid_depths)  { TestData.invalid_depths }
 
-    let(:bad_depths) do
-      [
-        'words',
-        '',
-        nil,
-        '-1',
-        -1,
-        7,
-        8
-      ]
-    end
-
-    # The next two functions ensure GACC on validate_depth
     it 'returns 200 on :valid_artists depth: 0 to 2' do
       valid_artists.each do |artist|
         3.times do |depth|
-          post_generate_graph({ name: artist, depth: depth.to_s }, 200)
+          params = { name: artist, depth: depth.to_s }
+          status = 200
+          post :generate_graph, params
+          expect(response).to have_http_status(status),
+                              error(params, status, response)
         end
       end
     end
 
-    it 'returns bad request on :valid_artists on :bad_depths' do
+    it 'returns bad request on :valid_artists on :invalid_depths' do
       valid_artists.each do |artist|
-        bad_depths.each do |depth|
-          post_generate_graph({ name: artist, depth: depth }, 400)
+        invalid_depths.each do |depth|
+          params = { name: artist, depth: depth }
+          status = 400
+          post :generate_graph, params
+          expect(response).to have_http_status(status),
+                              error(params, status, response)
         end
       end
     end
@@ -46,15 +34,23 @@ RSpec.describe GraphController, type: :controller do
     it 'returns 200 for invalid artist (to display a message) depth: 0 to 2' do
       invalid_artists.each do |invalid|
         3.times do |depth|
-          post_generate_graph({ name: invalid, depth: depth }, 200)
+          params = { name: invalid, depth: depth }
+          status = 200
+          post :generate_graph, params
+          expect(response).to have_http_status(status),
+                              error(params, status, response)
         end
       end
     end
 
-    it 'returns 400 for invalid graph on :bad_depths' do
+    it 'returns 400 for invalid graph on :invalid_depths' do
       invalid_artists.each do |invalid|
-        bad_depths.each do |depth|
-          post_generate_graph({ name: invalid, depth: depth }, 400)
+        invalid_depths.each do |depth|
+          params = { name: invalid, depth: depth }
+          status = 400
+          post :generate_graph, params
+          expect(response).to have_http_status(status),
+                              error(params, status, response)
         end
       end
     end
@@ -64,17 +60,19 @@ RSpec.describe GraphController, type: :controller do
       valid_artists.each do |artist|
         setup_graph(artist, 1)
         find_artist = Graph.find_by(artist: artist, depth: 1)
+        # Ensure that the artist is currently not in the db
         expect(find_artist).to_not be(nil)
-        post_generate_graph({ name: artist, depth: 1 }, 200)
+        params = { name: artist, depth: 1 }
+        status = 200
+        post :generate_graph, params
+        expect(response).to have_http_status(status),
+                            error(params, status, response)
       end
     end
   end
 
-  def post_generate_graph(params, status)
-    post :generate_graph, params
-    expect(response).to have_http_status(status), error(params, status, response)
-  end
-
+  # Give a useful error message. Almost a necessity with each it block doing
+  # multiple assertions.
   def error(params, status, response)
     "Expected posting to graph#generate_graph with params= #{params} "
     "To have status #{status}. Instead, it had status #{response}."

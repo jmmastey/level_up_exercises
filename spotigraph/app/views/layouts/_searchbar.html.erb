@@ -1,4 +1,16 @@
 <div class="searchBar">
+  <div class="user_actions">
+  <% if user_signed_in? %>
+      Logged in as <strong><%= current_user.email %></strong>.
+      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+      <% max_depth = 5 %>
+  <% else %>
+      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+      <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+      <% max_depth = 2 %>
+  <% end %>
+  </div>
   <form action="/" method="post">
     <div class="form-group">
       <label for="artist_name">Artist Name</label>
@@ -6,11 +18,12 @@
     </div>
     <div class="form-group">
       <label for="recursion-depth">Depth</label>
-      <input type="NUMBER" min="1" max="5" step="1" name="depth" class="form-control" id="recursion-depth" value="<%= params[:depth] %>"><br/>
+      <input type="NUMBER" min="1" max="<%= max_depth %>" step="1" name="depth" class="form-control" id="recursion-depth" value="<%= params[:depth] %>"><br/>
     </div>
     <div class="form-group">
       <button type="submit" name = "Submit" class="btn btn-default">Submit</button>
     </div>
   </form>
-  <%= render('layouts/flash') %>
+  <p class="navbar-text pull-right">
+    <%= render('layouts/flash') %>
 </div>

@@ -68,7 +68,7 @@ RSpec.describe Graph, type: :model do
       expect(Graph.depth_merge!(hash_1, hash_2)).to eq(result)
     end
 
-    it 'multiple coincide with nil (avg use)' do
+    it 'multiple coincide with nil' do
       hash_1 = { a: 1, b: 2, c: nil, d: 4, e: 5 }
       hash_2 = { a: 4, b: 3, c: 2, d: 1, e: nil }
       result = { a: 4, b: 3, c: 2, d: 4, e: 5 }

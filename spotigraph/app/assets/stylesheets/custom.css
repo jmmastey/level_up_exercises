@@ -33,7 +33,7 @@ h3 {
 
     width: 100%;
     height: 100%;
-    background:rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.5);
 }
 .searchBar {
     width: 100%;
@@ -103,4 +103,25 @@ input, select, textarea{
 
 textarea:focus, input:focus {
     color: #000000;
+}
+
+.user_operations {
+    padding-left: 5%;
+}
+
+.devise_errors {
+    color: red;
+}
+
+.field {
+    color: black;
+}
+
+.navbar-link {
+    color: rgba(255,255,255,0.5);
+}
+
+.user_actions {
+    padding-bottom: 5%;
+    color: rgba(255,255,255,0.5);
 }

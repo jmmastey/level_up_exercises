@@ -30,7 +30,11 @@ class Graph < ActiveRecord::Base
     node_depth = { current_artist.name => depth }
     network = { current_artist.name => current_artist.related }
     current_artist.related.each do |related|
-      merge_recursive_step(network, node_depth, Graph.search(related, depth - 1))
+      merge_recursive_step(
+          network,
+          node_depth,
+          Graph.search(related, depth - 1)
+      )
     end
     [network, node_depth]
   end

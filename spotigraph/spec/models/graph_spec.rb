@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.describe Graph, type: :model do
   describe '.depth_merge!' do
     it 'merges two empty hashes correctly' do
@@ -106,6 +105,7 @@ RSpec.describe Graph, type: :model do
   end
 
   def search_error(name, value, related)
-    "Expected #{name} to have related artists \n#{related}, instead it has \n#{value}"
+    "Expected #{name} to have related artists
+    #{related}, instead it has \n#{value}"
   end
 end

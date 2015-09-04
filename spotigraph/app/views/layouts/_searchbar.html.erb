@@ -11,6 +11,7 @@
       <% max_depth = 2 %>
   <% end %>
   </div>
+
   <form action="/" method="post">
     <div class="form-group">
       <label for="artist_name">Artist Name</label>
@@ -18,7 +19,7 @@
     </div>
     <div class="form-group">
       <label for="recursion-depth">Depth</label>
-      <input type="NUMBER" min="1" max="<%= max_depth %>" step="1" name="depth" class="form-control" id="recursion-depth" value="<%= params[:depth] %>"><br/>
+      <input type="NUMBER" min="1" max="<%= max_depth %>" step="1" name="depth" class="form-control" id="recursion-depth" value="<%= params[:depth] %>" onchange="check_user_depth();"><br/>
     </div>
     <div class="form-group">
       <button type="submit" name = "Submit" class="btn btn-default">Submit</button>

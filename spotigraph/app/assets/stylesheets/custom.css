@@ -125,3 +125,12 @@ textarea:focus, input:focus {
     padding-bottom: 5%;
     color: rgba(255,255,255,0.5);
 }
+
+.devise_errors {
+    color: red;
+}
+
+.user_button {
+    margin-top: 0.5%;
+    margin-bottom: 1%;
+}

@@ -80,16 +80,18 @@ RSpec.describe Artist, type: :model do
 
   describe '.cache_artist' do
     it 'caches artists that are on spotify' do
+      not_in_db = 'Artist should not start in the db'
       not_seeded_artists.each do |name|
-        expect(Artist.find_by(name: name)).to be(nil), 'Artist should not start in the db'
+        expect(Artist.find_by(name: name)).to be(nil), not_in_db
         artist = Artist.search_spotify(name)
         expect(Artist.cache_artist(artist)).to_not be(nil)
       end
     end
 
     it 'does not cache artists that it does not find on spotify' do
+      not_in_db = 'Artist should not start in the db'
       invalid_artists.each do |name|
-        expect(Artist.find_by(name: name)).to be(nil), 'Artist should not start in the db'
+        expect(Artist.find_by(name: name)).to be(nil), not_in_db
         artist = Artist.search_spotify(name)
         expect(Artist.cache_artist(artist)).to be(nil)
       end

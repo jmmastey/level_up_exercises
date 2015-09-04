@@ -1,4 +1,6 @@
 <% flash.each do |message_type, message| %>
-    <div class="alert alert-<%= message_type || devise_message %>"><%= message %></div>
+    <% type = message_type %>
+    <% type = 'warning' if message_type == 'notice' || message_type == 'alert' %>
+    <div class="alert alert-<%= type %>"><%= message %></div>
 <% end %>
 

@@ -16,3 +16,13 @@
 //= require_tree .
 //= require bootstrap-sprockets
 //= require vis
+function check_user_depth(){
+    var current_depth = $('#recursion-depth').val();
+    var logged_in = $('a[href$="/users/sign_up"]').length == 0;
+    if(!logged_in && current_depth > 2){
+        alert("You must log in to search at depths greater than 2");
+    }
+    if(logged_in && current_depth > 5) {
+        alert("Searching at depths greater than 5 is too computationally expensive.");
+    }
+}

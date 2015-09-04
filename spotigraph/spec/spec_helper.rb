@@ -19,4 +19,12 @@ RSpec.configure do |config|
 
   # Use the specified formatter
   config.formatter = :documentation # :progress, :html, :textmate
+
+  # Clean and seed the db before tests. Ensures we don't have flaky tests due to
+  # Spotify updating a given artist's related artists
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+    Rails.application.load_seed # loading seeds
+  end
 end

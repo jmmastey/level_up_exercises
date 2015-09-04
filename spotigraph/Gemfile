@@ -32,8 +32,8 @@ gem 'visjs-rails'
 gem 'json'
 gem 'devise'
 
-
 group :development, :test do
+  gem 'pry'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'

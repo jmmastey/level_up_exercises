@@ -4,8 +4,8 @@ class TestData
   # below, and add the artist information to the seed data.
   def self.valid_artists
     [
-        'Black Sabbath',
-        'Radiohead',
+      'Black Sabbath',
+      'Radiohead',
     ]
   end
 
@@ -14,26 +14,26 @@ class TestData
   def self.valid_artists_related
     {
       'Black Sabbath' => [
-          'Ozzy Osbourne',
-          'Judas Priest',
-          'Dio',
-          'Iron Maiden',
-          'Motörhead',
-          'Danzig',
-          'Deep Purple',
-          'Thin Lizzy',
-          'KISS',
-          'Saxon',
-          'Heaven & Hell',
-          'AC/DC',
-          'Rainbow',
-          'Metallica',
-          'Bruce Dickinson',
-          'Tony Iommi',
-          'UFO',
-          'Diamond Head',
-          'Alice Cooper',
-          'Uriah Heep',
+        'Ozzy Osbourne',
+        'Judas Priest',
+        'Dio',
+        'Iron Maiden',
+        'Motörhead',
+        'Danzig',
+        'Deep Purple',
+        'Thin Lizzy',
+        'KISS',
+        'Saxon',
+        'Heaven & Hell',
+        'AC/DC',
+        'Rainbow',
+        'Metallica',
+        'Bruce Dickinson',
+        'Tony Iommi',
+        'UFO',
+        'Diamond Head',
+        'Alice Cooper',
+        'Uriah Heep',
       ],
       'Radiohead' => [
         'Thom Yorke',
@@ -62,44 +62,37 @@ class TestData
 
   def self.not_seeded_artists
     [
-        'Mixtapes',
-        'Blink-182'
+      'Mixtapes',
+      'Blink-182',
     ]
   end
-
 
   # These are generally artists that will not end up being found on search
   # Avoid adding names similar to Faker::Name.name whenever possible.
   def self.invalid_artists
     [
-        'Bak Sabat',
-        'sPUKslXlnz',
-        'pdbPxLK7rt',
-        'w8yUJnC171',
-        'mLvr4IaeC8',
-        '',
-        '; DROP TABLE graph;',
-        "<script>alert('alert');</script>",
-    ]
-  end
-
-  def self.valid_depths
-    [
-
+      'sPUKslXlnz',
+      'pdbPxLK7rt',
+      'w8yUJnC171',
+      'mLvr4IaeC8',
+      'Bak Sabat',
+      '',
+      '; DROP TABLE graph;',
+      "<script>alert('alert');</script>",
     ]
   end
 
   def self.invalid_depths
     [
-        'words',
-        '',
-        nil,
-        '-1',
-        -1,
-        -2,
-        -3,
-        10,
-        11,
+      'words',
+      '',
+      nil,
+      '-1',
+      -1,
+      -2,
+      -3,
+      10,
+      11,
     ]
   end
 end

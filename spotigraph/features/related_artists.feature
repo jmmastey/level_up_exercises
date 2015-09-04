@@ -6,26 +6,26 @@ Feature: Related Artists
   Background: I am on the homepage of the website
     Given I am on the homepage
 
-  @javascript
+  @javascript @slow
   Scenario Outline: We should be able to see related artists of a valid artist
-    When I search for the artist <artist> at a depth 2
+    When I search for <artist> at a depth 2
     Then I see <related> as a related artist of <artist>
     Examples:
-      | artist          | related          |
-      | "Black Sabbath" | "Ozzy Osbourne"  |
-      | "Black Sabbath" | "Judas Priest"   |
-      | "Black Sabbath" | "Dio"            |
-      | "Black Sabbath" | "Iron Maiden"    |
-      | "Ozzy Osbourne" | "Dio"            |
-      | "Ozzy Osbourne" | "KISS"           |
-      | "Ozzy Osbourne" | "Bruce Dickinson"|
-      | "Ozzy Osbourne" | "Rainbow"        |
-      | "Radiohead"     | "Muse"           |
-      | "Radiohead"     | "Pixies"         |
+      | artist        | related        |
+      | Black Sabbath | Ozzy Osbourne  |
+      | Black Sabbath | Judas Priest   |
+      | Black Sabbath | Dio            |
+      | Black Sabbath | Iron Maiden    |
+      | Ozzy Osbourne | Dio            |
+      | Ozzy Osbourne | KISS           |
+      | Ozzy Osbourne | Bruce Dickinson|
+      | Ozzy Osbourne | Rainbow        |
+      | Radiohead     | Muse           |
+      | Radiohead     | Pixies         |
 
   @javascript
   Scenario Outline: We should see no related artists for a failed search
-    When I search for the artist <artist> at a depth 2
+    When I search for <artist> at a depth 2
     Then I see no related artists
     Examples:
       | artist       |

@@ -1,0 +1,33 @@
+<!-- New Next Term Modal -->
+<div class="modal fade" id="newNextTermModal" tabindex="-1" role="dialog" aria-labelledby="New Term">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for(Term.new) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Term</h4>
+      </div>
+      <div class="modal-body">
+        <%= f.hidden_field :month, value: (Time.now + 1.month).month %>
+        <%= f.hidden_field :year, value: (Time.now + 1.month).year %>
+
+        <%= f.label :options, "Select the categories you would like to include for next month." %><br>
+        <div class="category-list">
+          <table>
+            <% current_user.categories.each do |category| %>
+              <tr>
+                <td style="width:200px;"><%= label_tag category.name %></td>
+                <td style="float:left;"><%= check_box_tag "#{category.name}-check", nil, class: 'form-control', selected: true %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit 'Create Term', class: "btn btn-info" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

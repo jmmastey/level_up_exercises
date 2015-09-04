@@ -1,0 +1,117 @@
+<% provide(:title, "Funds") %>
+
+<div class="center jumbotron">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-header-with-button">Funds</h3>
+      <button type="button" data-toggle="modal" data-target="#newFundModal" class="btn btn-info panel-add-button" id="new-fund-button"><i class="glyphicon glyphicon-plus"></i> New Fund</button>
+    </div>
+    <div class="panel-body">
+      <table class="table" id="funds-table">
+        <thead>
+          <tr>
+            <th style="width:300px;">Name</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @funds.empty? %>
+            <tr>
+              <td>You have no funds.</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          <% else %>
+            <% @funds.each do |fund| %>
+              <tr class="active expandable-category-row">
+                <td><%= fund.name %>  <i class="expandable glyphicon glyphicon-triangle-bottom"></i></td>
+                <td><%= fund.fund_type.titleize %></td>
+                <td><%= "$%.2f" % fund.amount %></td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-success" id="new-money-button" data-toggle="modal" data-target="#newMoneyModal" data-id="<%= fund.id %>" data-name="<%= fund.name %>"><i class="glyphicon glyphicon-usd"></i>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Available amount -->
+              <tr style="display:none;">
+                <td style="padding-left: 50px;">
+                  <span style="color:green;">Available: </span></span>
+                <td></td>
+                <td><%= "$%.2f" % fund.components["Available"] %></td>
+                <td></td>
+              </tr>
+
+              <% terms = current_user.terms %>
+
+              <!-- Reserved Amounts -->
+              <% fund.components["Reserved"].each do |key, value| %>
+                <tr style="display:none;">
+                  <td style="padding-left: 50px;">
+                    <span style="color:orange;">Reserved: <%= key %></span></td>
+                  <td></td>
+                  <td><%= "$%.2f" % value %></td>
+                  <td></td>
+                </tr>
+              <% end %>
+
+              <!-- Pending Amounts -->
+              <% fund.components["Pending"].each do |key, value| %>
+                <tr style="display:none;">
+                  <td style="padding-left: 50px;">
+                    <span style="color:red;">Pending: <%= key %></span></td>
+                  <td></td>
+                  <td><%= "$%.2f" % value %></td>
+                  <td></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>Inputs</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped" id="inputs-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Fund</th>
+            <th>Info</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @inputs.empty? %>
+            <tr>
+              <td>You have not added any additional money.</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          <% else %>
+            <% @inputs.each do |input| %>
+              <tr>
+                <td><%= input.date.strftime("%m/%d/%Y") %></td>
+                <td><%= "$%.2f" % input.amount %></td>
+                <td><%= current_user.funds.find(input.fund_id).name %></td>
+                <td><%= input.description %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= render '/modals/new_fund' %>
+<%= render '/modals/new_money' %>

@@ -1,0 +1,24 @@
+<!-- Add Money to Term Category Modal -->
+<div class="modal fade" id="addMoneyTermCategoryModal" tabindex="-1" role="dialog" aria-labelledby="Add Money to Term Category">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag("/terms/add-money-to-category/", method: "post", id: 'add-money-to-term-category-form') do %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Money to</h4>
+      </div>
+      <div class="modal-body">
+        <%= hidden_field_tag :term_id, @term.id %>
+        <%= label_tag :amount, "Please input the amount of money you would like to put into this category." %>
+        <% current_user.funds.each do |fund| %>
+          <%= number_field_tag "#{fund.name}", nil, class: 'form-control', placeholder: "Fund: #{fund.name}, Available: #{"$%.2f" % fund.components["Available"]}", step: 0.01, min: 0 %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag 'Done', class: "btn btn-info" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

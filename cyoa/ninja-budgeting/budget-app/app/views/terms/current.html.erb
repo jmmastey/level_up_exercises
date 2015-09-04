@@ -1,0 +1,11 @@
+<% provide(:title, "Current Month") %>
+<div class="center jumbotron">
+  <% if @term.nil? %>
+    <h2 style="text-align:center;">You have not created a budget for this month.<br><a href='#' data-toggle="modal" data-target="#newCurrentTermModal" id="create-new-current-term">Create one now?</a>
+    </h2>
+    <%= render 'modals/new_current_month' %>
+  <% else %>
+
+    <%= render 'transaction_list' %>
+<% end %>
+</div>

@@ -1,0 +1,12 @@
+<% provide(:title, "Home") %>
+
+<div class="jumbotron">
+  <h1 style="text-align:center">
+      Welcome!
+  </h1>
+  <div>
+    <%= link_to "/auth/google_oauth2", class: "btn btn-danger", id: "google-sign-in-button" do %>
+      Sign in with Google
+    <% end %>
+  </div>
+</div>

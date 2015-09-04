@@ -1,0 +1,30 @@
+<!-- New Category Component Modal -->
+<div class="modal fade" id="newCategoryComponentModal" tabindex="-1" role="dialog" aria-labelledby="New Category Component">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag "/new-component", method: :patch, id: 'new-category-component-form' do %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Subcategory for NAME</h4>
+      </div>
+      <div class="modal-body">
+        <%= hidden_field_tag :fund_id, value: 0 %>
+
+        <%= label_tag :name do %>
+          Name<span class="required">*</span>
+        <% end %>
+        <%= text_field_tag :name, nil, class: 'form-control', required: true %>
+
+        <%= label_tag :amount do %>
+          Amount<span class="required">*</span>
+        <% end %>
+        <%= number_field_tag :amount, nil, class: 'form-control', required: true, step: 0.01, min: 0 %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag 'Add Subcategory', class: "btn btn-info" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

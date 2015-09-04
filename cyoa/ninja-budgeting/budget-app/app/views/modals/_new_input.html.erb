@@ -1,0 +1,28 @@
+<!-- New Input Modal -->
+<div class="modal fade" id="newInputModal" tabindex="-1" role="dialog" aria-labelledby="New Input">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag("/funds/add", method: "post", onsubmit: "return validateAddMoneyForm()") do %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Money</h4>
+      </div>
+      <div class="modal-body">
+        <%= hidden_field_tag :term_id, @term.id %>
+        <%= text_field_tag :description, nil, class: 'form-control', id: 'add-money-description-input', placeholder: 'Name or Description (i.e. Work Check)', required: true %>
+        <%= number_field_tag :amount, nil, class: 'form-control', id: 'add-money-total-amount-input', placeholder: 'Total Amount', required: true, step: 0.01, min: 0 %>
+        <div id="add-money-fund-options">
+          <h5 style="text-align:center;">Please input the amount of money you would like to put in each fund. Leave blank for $0.</h3>
+          <% Fund.where(user_id: current_user.id).order(name: :ASC).each do |fund| %>
+            <%= number_field_tag "#{fund.name}", nil, class: 'form-control', placeholder: "#{fund.name}", step: 0.01, min: 0 %>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag 'Submit', class: "btn btn-info" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

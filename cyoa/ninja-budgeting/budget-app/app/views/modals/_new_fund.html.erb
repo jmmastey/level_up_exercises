@@ -1,0 +1,34 @@
+<!-- New Fund Modal -->
+<div class="modal fade" id="newFundModal" tabindex="-1" role="dialog" aria-labelledby="New Fund">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for(Fund.new) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Fund</h4>
+      </div>
+      <div class="modal-body">
+        <%= f.label :name do %>
+          Name<span class="required">*</span>
+        <% end %>
+        <%= f.text_field :name, class: 'form-control', required: true %>
+
+        If this fund is a credit card, enter the amount of debt currently on the card, rather than your credit limit.<br>
+        <%= f.label :amount do %>
+          Amount<span class="required">*</span>
+        <% end %>
+        <%= f.number_field :amount, class: 'form-control', required: true, step: 0.01, min: 0 %>
+
+        <%= f.label :fund_type do %>
+          Fund Type<span class="required">*</span>
+        <% end %>
+        <%= f.select :fund_type, [['Bank', 'bank'], ['Credit', 'credit']], include_blank: true, required: true %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit 'Add Fund', class: "btn btn-info" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

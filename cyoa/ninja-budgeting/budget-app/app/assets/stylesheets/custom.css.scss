@@ -1,0 +1,161 @@
+@import "bootstrap-sprockets";
+@import "bootswatch/slate/variables";
+@import "bootstrap";
+@import "bootswatch/slate/bootswatch";
+
+/* mixins, variables, etc. */
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* General */
+.container {
+  width: 80%;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 60px;
+}
+
+/* header */
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 7px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Home Page */
+#google-sign-in-button {
+  display: block;
+  width: 200px;
+  margin: 30px auto 0px auto;
+}
+
+/* Footer */
+footer {
+  width:60%;
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  border-top: 1px solid #C8C8C8;
+  height: 60px;
+  margin: 0 auto;
+  text-align: center;
+  p {
+    margin: 20px 0;
+  }
+}
+
+/* Fund, Category, Term 'Add' buttons */
+.panel-header-with-button {
+  display: inline-block;
+}
+
+.panel-add-button {
+  float: right;
+}
+
+#new-fund-button {
+  margin-right: 5px;
+}
+
+/* Forms */
+.form-control, textarea, select {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+  color: black;
+}
+
+#add-money-total-amount-input {
+  width: 50%;
+  margin: 0 auto;
+}
+#add-money-description-input {
+  width: 50%;
+  margin: 0 auto 5px auto;
+}
+
+#add-money-fund-options {
+  border-top: 1px solid #FFF;
+  margin-top: 10px;
+  margin: 20px 50px;
+  padding: 10px;
+  input {
+    width: 50%;
+    margin: 5px auto;
+  }
+}
+
+.category-list {
+  margin-top: 5px;
+  label {
+    font-size: 18px;
+  }
+  input {
+    margin-left: 20px;
+    display: inline;
+  }
+}
+
+.required {
+  color: red;
+}
+
+#addMoneyTermCategoryModal input[type="text"] {
+  width: 50%;
+  display: inline;
+  margin-left: 15px;
+}
+
+/* TERMS */
+.progress {
+  margin-bottom: 0;
+}
+
+#transaction-table-first-row td {
+  border-bottom: 1px solid #FFF;
+}
+
+#transaction-table-last-row td {
+  border-top: 1px solid #FFF;
+}
+
+/* Buttons (and link buttons) in table rows */
+td button, td a {
+  float: right;
+}
+
+/* FUNDS */
+#edit-fund-button {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+/* CATEGORIES */
+#edit-category-button {
+  margin-right: 5px;
+}

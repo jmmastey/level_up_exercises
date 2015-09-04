@@ -1,0 +1,24 @@
+<!-- Add Money to Fund Reserve Modal -->
+<div class="modal fade" id="newFundReserveModal" tabindex="-1" role="dialog" aria-labelledby="Reserve Money from Fund">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag("/funds/add-to-reserve", method: "post", id: 'add-money-to-fund-reserve-form') do %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Rserve Money from Fund</h4>
+      </div>
+      <div class="modal-body">
+        <%= hidden_field_tag :fund_id %>
+        <%= label_tag :name, "Enter a name for this subcategory." %>
+        <%= text_field_tag :name, nil, class: 'form-control' %>
+        <%= label_tag :amount, "Please input the amount of money you would like to put into this subcategory." %>
+        <%= number_field_tag :amount, nil, class: 'form-control', placeholder: "Available: ", step: 0.01, min: 0 %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag 'Done', class: "btn btn-info" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

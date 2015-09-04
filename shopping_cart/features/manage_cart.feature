@@ -6,9 +6,8 @@ Feature: Manage Cart
   Background:
     Given I am on the shopping cart page
 
-  @happy
-  Scenario:
+  Scenario: Items in cart are saved if logged out
     Given I am not logged in
     And there are items in the cart
     When I log in
-    Then I should see all the previous items in my cart
+    Then I see all the previous items in my cart

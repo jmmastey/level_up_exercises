@@ -1,0 +1,68 @@
+top_beers
+
+yadda=# EXPLAIN SELECT * FROM top_beers WHERE brewery_name = 'Howell-Oberbrunner';
+                                          QUERY PLAN
+----------------------------------------------------------------------------------------------
+ Subquery Scan on top_beers  (cost=6106.13..6106.16 rows=3 width=48)
+   ->  Sort  (cost=6106.13..6106.13 rows=3 width=46)
+         Sort Key: (count(ratings.overall))
+         ->  HashAggregate  (cost=6106.07..6106.10 rows=3 width=46)
+               ->  Nested Loop Left Join  (cost=0.00..6106.05 rows=3 width=46)
+                     Join Filter: (ratings.beer_id = beers.id)
+                     ->  Nested Loop Left Join  (cost=0.00..6070.30 rows=3 width=44)
+                           Join Filter: (beers.brewery_id = breweries.id)
+                           ->  Seq Scan on breweries  (cost=0.00..5794.55 rows=3 width=22)
+                                 Filter: ((name)::text = 'Howell-Oberbrunner'::text)
+                           ->  Materialize  (cost=0.00..254.50 rows=500 width=26)
+                                 ->  Seq Scan on beers  (cost=0.00..252.00 rows=500 width=26)
+                     ->  Materialize  (cost=0.00..14.50 rows=500 width=6)
+                           ->  Seq Scan on ratings  (cost=0.00..12.00 rows=500 width=6)
+(14 rows)
+
+The slowest parts will likely be the sequential scans on breweries, beers, and ratings
+
+
+
+
+yadda=# EXPLAIN SELECT * FROM recent_score WHERE brewery_name = 'Okuneva Group';
+                                                  QUERY PLAN
+---------------------------------------------------------------------------------------------------------------
+ Subquery Scan on recent_score  (cost=3860.28..3860.30 rows=1 width=72)
+   ->  Sort  (cost=3860.28..3860.28 rows=1 width=46)
+         Sort Key: (avg(ratings.overall))
+         ->  HashAggregate  (cost=3860.26..3860.27 rows=1 width=46)
+               ->  Nested Loop  (cost=0.42..3860.25 rows=1 width=46)
+                     Join Filter: (beers.id = ratings.beer_id)
+                     ->  Nested Loop  (cost=0.42..3838.25 rows=1 width=44)
+                           ->  Seq Scan on beers  (cost=0.00..252.00 rows=500 width=26)
+                           ->  Index Scan using breweries_pkey on breweries  (cost=0.42..7.16 rows=1 width=22)
+                                 Index Cond: (id = beers.brewery_id)
+                                 Filter: ((name)::text = 'Okuneva Group'::text)
+                     ->  Seq Scan on ratings  (cost=0.00..15.75 rows=500 width=6)
+                           Filter: (created_on >= (now() - '6 mons'::interval))
+
+The sequential scan will likely be slower than the index scan. It would be faster
+if we stored which rating ids were created within the last 6 months.
+
+
+
+yadda=# EXPLAIN SELECT * FROM might_also_enjoy WHERE beer_style='alias';
+                                          QUERY PLAN
+----------------------------------------------------------------------------------------------
+ Subquery Scan on might_also_enjoy  (cost=801.89..801.92 rows=2 width=56)
+   ->  Sort  (cost=801.89..801.90 rows=2 width=30)
+         Sort Key: (random())
+         ->  HashAggregate  (cost=801.84..801.88 rows=2 width=30)
+               Filter: (avg(ratings.overall) > 7::numeric)
+               ->  Hash Left Join  (cost=276.50..801.82 rows=2 width=30)
+                     Hash Cond: (beers.id = ratings.beer_id)
+                     ->  Hash Join  (cost=258.25..783.54 rows=2 width=28)
+                           Hash Cond: (styles.id = beers.style_id)
+                           ->  Seq Scan on styles  (cost=0.00..525.25 rows=2 width=10)
+                                 Filter: ((style)::text = 'alias'::text)
+                           ->  Hash  (cost=252.00..252.00 rows=500 width=26)
+                                 ->  Seq Scan on beers  (cost=0.00..252.00 rows=500 width=26)
+                     ->  Hash  (cost=12.00..12.00 rows=500 width=6)
+                           ->  Seq Scan on ratings  (cost=0.00..12.00 rows=500 width=6)
+
+The slowest parts will likely be the sequential scans. 

@@ -25,7 +25,7 @@ CREATE OR REPLACE VIEW recent_score AS
   LEFT JOIN ratings ON ratings.beer_id = beers.id
   WHERE ratings.created_on >= (NOW() - interval '6 months')
   GROUP BY breweries.id, beers.id
-  ORDER BY rating_count DESC;
+  ORDER BY average_rating DESC;
 
 -- Might also enjoy
 CREATE OR REPLACE VIEW might_also_enjoy AS

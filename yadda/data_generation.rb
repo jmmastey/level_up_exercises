@@ -22,10 +22,10 @@ MAX_BEER_NAME = 100
 
 # Constants for how much data to generate
 USER_COUNT = 10_000
-BREWERIES_COUNT = 1_000_000
-STYLES_COUNT = 100_000
-BEERS_COUNT = 10_000_000
-RATINGS_COUNT = 25_000_000
+BREWERIES_COUNT = 1_000
+STYLES_COUNT = 10_000
+BEERS_COUNT = 30_000
+RATINGS_COUNT = 25_000
 
 def insert_fake_user
   @database.insert(
@@ -112,10 +112,15 @@ end
 
 def fake_it
   fake_users(USER_COUNT)
+  puts 'Faked users'
   fake_breweries(BREWERIES_COUNT)
+  puts 'Faked breweries'
   fake_styles(STYLES_COUNT)
+  puts 'Faked Styles'
   fake_beers(BEERS_COUNT)
+  puts 'Faked beers'
   fake_ratings(RATINGS_COUNT)
+  puts 'Faked Ratings.'
 end
 
 @database = Database.new

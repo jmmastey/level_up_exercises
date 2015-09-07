@@ -79,3 +79,10 @@ COMMENT ON TABLE ratings IS 'Ratings for each beer';
 -- overall are integers between 1 and 10.
 -- A user has many ratings, a beer has many ratings.
 
+CREATE INDEX beers_brewery_id on beers(brewery_id);
+CREATE INDEX beer_style_id on beers(style_id);
+CREATE INDEX ratings_beer_id on ratings(beer_id);
+CREATE INDEX ratings_id_index ON ratings(id);
+CREATE INDEX ratings_user_id_index ON ratings(user_id);
+CREATE INDEX ratings_beer_id_index ON ratings(beer_id);
+CREATE INDEX ratings_overall_index ON ratings(overall);

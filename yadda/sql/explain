@@ -1,68 +1,162 @@
-top_beers
-
-yadda=# EXPLAIN SELECT * FROM top_beers WHERE brewery_name = 'Howell-Oberbrunner';
-                                          QUERY PLAN
-----------------------------------------------------------------------------------------------
- Subquery Scan on top_beers  (cost=6106.13..6106.16 rows=3 width=48)
-   ->  Sort  (cost=6106.13..6106.13 rows=3 width=46)
+yadda=# EXPLAIN ANALYZE SELECT * FROM top_beers WHERE brewery_id=106056;
+                                                                    QUERY PLAN
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on top_beers  (cost=275.62..275.64 rows=1 width=48) (actual time=0.298..0.298 rows=1 loops=1)
+   ->  Sort  (cost=275.62..275.63 rows=1 width=46) (actual time=0.297..0.297 rows=1 loops=1)
          Sort Key: (count(ratings.overall))
-         ->  HashAggregate  (cost=6106.07..6106.10 rows=3 width=46)
-               ->  Nested Loop Left Join  (cost=0.00..6106.05 rows=3 width=46)
-                     Join Filter: (ratings.beer_id = beers.id)
-                     ->  Nested Loop Left Join  (cost=0.00..6070.30 rows=3 width=44)
+         Sort Method: quicksort  Memory: 25kB
+         ->  HashAggregate  (cost=275.60..275.61 rows=1 width=46) (actual time=0.293..0.293 rows=1 loops=1)
+               ->  Nested Loop Left Join  (cost=253.68..275.60 rows=1 width=46) (actual time=0.247..0.291 rows=3 loops=1)
+                     Join Filter: (beers.brewery_id = breweries.id)
+                     ->  Index Scan using breweries_pkey on breweries  (cost=0.42..8.44 rows=1 width=22) (actual time=0.010..0.011 rows=1 loops=1)
+                           Index Cond: (id = 106056)
+                     ->  Hash Right Join  (cost=253.26..267.15 rows=1 width=28) (actual time=0.236..0.279 rows=3 loops=1)
+                           Hash Cond: (ratings.beer_id = beers.id)
+                           ->  Seq Scan on ratings  (cost=0.00..12.00 rows=500 width=6) (actual time=0.002..0.035 rows=500 loops=1)
+                           ->  Hash  (cost=253.25..253.25 rows=1 width=26) (actual time=0.208..0.208 rows=1 loops=1)
+                                 Buckets: 1024  Batches: 1  Memory Usage: 1kB
+                                 ->  Seq Scan on beers  (cost=0.00..253.25 rows=1 width=26) (actual time=0.166..0.207 rows=1 loops=1)
+                                       Filter: (brewery_id = 106056)
+                                       Rows Removed by Filter: 499
+ Total runtime: 0.333 ms
+
+Most of my time here is spent sequentially scanning beers. I should index beers(brewery_id)
+Also spending lots of time sequential scanning ratings
+
+
+                                                                       QUERY PLAN
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on top_beers  (cost=77.01..77.08 rows=6 width=48) (actual time=0.057..0.058 rows=6 loops=1)
+   ->  Sort  (cost=77.01..77.02 rows=6 width=46) (actual time=0.057..0.057 rows=6 loops=1)
+         Sort Key: (count(ratings.overall))
+         Sort Method: quicksort  Memory: 25kB
+         ->  HashAggregate  (cost=76.87..76.93 rows=6 width=46) (actual time=0.052..0.052 rows=6 loops=1)
+               ->  Nested Loop Left Join  (cost=4.88..76.82 rows=6 width=46) (actual time=0.019..0.047 rows=12 loops=1)
+                     ->  Nested Loop Left Join  (cost=4.60..30.98 rows=6 width=44) (actual time=0.015..0.022 rows=6 loops=1)
                            Join Filter: (beers.brewery_id = breweries.id)
-                           ->  Seq Scan on breweries  (cost=0.00..5794.55 rows=3 width=22)
-                                 Filter: ((name)::text = 'Howell-Oberbrunner'::text)
-                           ->  Materialize  (cost=0.00..254.50 rows=500 width=26)
-                                 ->  Seq Scan on beers  (cost=0.00..252.00 rows=500 width=26)
-                     ->  Materialize  (cost=0.00..14.50 rows=500 width=6)
-                           ->  Seq Scan on ratings  (cost=0.00..12.00 rows=500 width=6)
-(14 rows)
+                           ->  Index Scan using breweries_pkey on breweries  (cost=0.28..8.29 rows=1 width=22) (actual time=0.005..0.005 rows=1 loops=1)
+                                 Index Cond: (id = 127)
+                           ->  Bitmap Heap Scan on beers  (cost=4.33..22.61 rows=6 width=26) (actual time=0.007..0.012 rows=6 loops=1)
+                                 Recheck Cond: (brewery_id = 127)
+                                 ->  Bitmap Index Scan on beers_brewery_id  (cost=0.00..4.33 rows=6 width=0) (actual time=0.005..0.005 rows=6 loops=1)
+                                       Index Cond: (brewery_id = 127)
+                     ->  Index Scan using ratings_beer_id_index on ratings  (cost=0.28..7.63 rows=1 width=6) (actual time=0.002..0.003 rows=2 loops=6)
+                           Index Cond: (beer_id = beers.id)
+ Total runtime: 0.104 ms
+(17 rows)
 
-The slowest parts will likely be the sequential scans on breweries, beers, and ratings
+That's a bit better!
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-yadda=# EXPLAIN SELECT * FROM recent_score WHERE brewery_name = 'Okuneva Group';
-                                                  QUERY PLAN
----------------------------------------------------------------------------------------------------------------
- Subquery Scan on recent_score  (cost=3860.28..3860.30 rows=1 width=72)
-   ->  Sort  (cost=3860.28..3860.28 rows=1 width=46)
+yadda=# EXPLAIN ANALYZE SELECT * FROM recent_score WHERE brewery_id=874;
+                                                                    QUERY PLAN
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on recent_score  (cost=187.32..187.40 rows=6 width=72) (actual time=1.032..1.032 rows=3 loops=1)
+   ->  Sort  (cost=187.32..187.34 rows=6 width=46) (actual time=1.031..1.031 rows=3 loops=1)
          Sort Key: (avg(ratings.overall))
-         ->  HashAggregate  (cost=3860.26..3860.27 rows=1 width=46)
-               ->  Nested Loop  (cost=0.42..3860.25 rows=1 width=46)
-                     Join Filter: (beers.id = ratings.beer_id)
-                     ->  Nested Loop  (cost=0.42..3838.25 rows=1 width=44)
-                           ->  Seq Scan on beers  (cost=0.00..252.00 rows=500 width=26)
-                           ->  Index Scan using breweries_pkey on breweries  (cost=0.42..7.16 rows=1 width=22)
-                                 Index Cond: (id = beers.brewery_id)
-                                 Filter: ((name)::text = 'Okuneva Group'::text)
-                     ->  Seq Scan on ratings  (cost=0.00..15.75 rows=500 width=6)
-                           Filter: (created_on >= (now() - '6 mons'::interval))
+         Sort Method: quicksort  Memory: 25kB
+         ->  HashAggregate  (cost=187.17..187.24 rows=6 width=46) (actual time=1.025..1.026 rows=3 loops=1)
+               ->  Nested Loop  (cost=95.86..187.12 rows=6 width=46) (actual time=0.599..1.017 rows=5 loops=1)
+                     ->  Index Scan using breweries_pkey on breweries  (cost=0.28..8.29 rows=1 width=22) (actual time=0.005..0.005 rows=1 loops=1)
+                           Index Cond: (id = 874)
+                     ->  Hash Join  (cost=95.59..178.77 rows=6 width=28) (actual time=0.593..1.011 rows=5 loops=1)
+                           Hash Cond: (ratings.beer_id = beers.id)
+                           ->  Seq Scan on ratings  (cost=0.00..73.75 rows=2500 width=6) (actual time=0.006..0.595 rows=2500 loops=1)
+                                 Filter: (created_on >= (now() - '6 mons'::interval))
+                           ->  Hash  (cost=95.50..95.50 rows=7 width=26) (actual time=0.288..0.288 rows=7 loops=1)
+                                 Buckets: 1024  Batches: 1  Memory Usage: 1kB
+                                 ->  Seq Scan on beers  (cost=0.00..95.50 rows=7 width=26) (actual time=0.096..0.287 rows=7 loops=1)
+                                       Filter: (brewery_id = 874)
+                                       Rows Removed by Filter: 2993
+ Total runtime: 1.076 ms
+(18 rows)
 
-The sequential scan will likely be slower than the index scan. It would be faster
-if we stored which rating ids were created within the last 6 months.
+
+Most of my time here is spent sequentially scanning ratings and beers. I will index beers(brewery_id)
+Also spending lots of time sequential scanning ratings
+
+                                                                         QUERY PLAN
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on recent_score  (cost=77.02..77.08 rows=5 width=72) (actual time=0.067..0.068 rows=4 loops=1)
+   ->  Sort  (cost=77.02..77.03 rows=5 width=46) (actual time=0.067..0.068 rows=4 loops=1)
+         Sort Key: (avg(ratings.overall))
+         Sort Method: quicksort  Memory: 25kB
+         ->  HashAggregate  (cost=76.90..76.96 rows=5 width=46) (actual time=0.059..0.061 rows=4 loops=1)
+               ->  Nested Loop  (cost=4.88..76.86 rows=5 width=46) (actual time=0.032..0.053 rows=5 loops=1)
+                     ->  Index Scan using breweries_pkey on breweries  (cost=0.28..8.29 rows=1 width=22) (actual time=0.009..0.009 rows=1 loops=1)
+                           Index Cond: (id = 483)
+                     ->  Nested Loop  (cost=4.61..68.52 rows=5 width=28) (actual time=0.022..0.043 rows=5 loops=1)
+                           ->  Bitmap Heap Scan on beers  (cost=4.33..22.61 rows=6 width=26) (actual time=0.011..0.016 rows=6 loops=1)
+                                 Recheck Cond: (brewery_id = 483)
+                                 ->  Bitmap Index Scan on beers_brewery_id  (cost=0.00..4.33 rows=6 width=0) (actual time=0.007..0.007 rows=6 loops=1)
+                                       Index Cond: (brewery_id = 483)
+                           ->  Index Scan using ratings_beer_id_index on ratings  (cost=0.28..7.64 rows=1 width=6) (actual time=0.004..0.004 rows=1 loops=6)
+                                 Index Cond: (beer_id = beers.id)
+                                 Filter: (created_on >= (now() - '6 mons'::interval))
+ Total runtime: 0.118 ms
+(17 rows)
+
+That's way bit better!
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-yadda=# EXPLAIN SELECT * FROM might_also_enjoy WHERE beer_style='alias';
-                                          QUERY PLAN
-----------------------------------------------------------------------------------------------
- Subquery Scan on might_also_enjoy  (cost=801.89..801.92 rows=2 width=56)
-   ->  Sort  (cost=801.89..801.90 rows=2 width=30)
+
+EXPLAIN ANALYZE SELECT * FROM might_also_enjoy WHERE beer_style='assumenda';
+                                                                 QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on might_also_enjoy  (cost=183.12..183.27 rows=12 width=56) (actual time=0.779..0.780 rows=4 loops=1)
+   ->  Sort  (cost=183.12..183.15 rows=12 width=30) (actual time=0.778..0.778 rows=4 loops=1)
          Sort Key: (random())
-         ->  HashAggregate  (cost=801.84..801.88 rows=2 width=30)
+         Sort Method: quicksort  Memory: 25kB
+         ->  HashAggregate  (cost=182.67..182.91 rows=12 width=30) (actual time=0.771..0.772 rows=4 loops=1)
                Filter: (avg(ratings.overall) > 7::numeric)
-               ->  Hash Left Join  (cost=276.50..801.82 rows=2 width=30)
-                     Hash Cond: (beers.id = ratings.beer_id)
-                     ->  Hash Join  (cost=258.25..783.54 rows=2 width=28)
-                           Hash Cond: (styles.id = beers.style_id)
-                           ->  Seq Scan on styles  (cost=0.00..525.25 rows=2 width=10)
-                                 Filter: ((style)::text = 'alias'::text)
-                           ->  Hash  (cost=252.00..252.00 rows=500 width=26)
-                                 ->  Seq Scan on beers  (cost=0.00..252.00 rows=500 width=26)
-                     ->  Hash  (cost=12.00..12.00 rows=500 width=6)
-                           ->  Seq Scan on ratings  (cost=0.00..12.00 rows=500 width=6)
+               Rows Removed by Filter: 9
+               ->  Hash Right Join  (cost=118.07..182.55 rows=12 width=30) (actual time=0.550..0.758 rows=16 loops=1)
+                     Hash Cond: (ratings.beer_id = beers.id)
+                     ->  Seq Scan on ratings  (cost=0.00..55.00 rows=2500 width=6) (actual time=0.002..0.139 rows=2500 loops=1)
+                     ->  Hash  (cost=117.92..117.92 rows=12 width=28) (actual time=0.452..0.452 rows=13 loops=1)
+                           Buckets: 1024  Batches: 1  Memory Usage: 1kB
+                           ->  Hash Join  (cost=18.55..117.92 rows=12 width=28) (actual time=0.195..0.450 rows=13 loops=1)
+                                 Hash Cond: (beers.style_id = styles.id)
+                                 ->  Seq Scan on beers  (cost=0.00..88.00 rows=3000 width=26) (actual time=0.002..0.181 rows=3000 loops=1)
+                                 ->  Hash  (cost=18.50..18.50 rows=4 width=10) (actual time=0.075..0.075 rows=5 loops=1)
+                                       Buckets: 1024  Batches: 1  Memory Usage: 1kB
+                                       ->  Seq Scan on styles  (cost=0.00..18.50 rows=4 width=10) (actual time=0.008..0.074 rows=5 loops=1)
+                                             Filter: ((style)::text = 'assumenda'::text)
+                                             Rows Removed by Filter: 995
+ Total runtime: 0.819 ms
+(21 rows)
 
-The slowest parts will likely be the sequential scans. 
+Most of my time is spent sequential scanning beers and ratings. Will index beers(style_id) and ratings(beer_id)
+Also spending lots of time sequential scanning ratings
+
+                                                                       QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+ Subquery Scan on might_also_enjoy  (cost=123.46..123.72 rows=21 width=56) (actual time=0.184..0.185 rows=3 loops=1)
+   ->  Sort  (cost=123.46..123.51 rows=21 width=30) (actual time=0.184..0.184 rows=3 loops=1)
+         Sort Key: (random())
+         Sort Method: quicksort  Memory: 25kB
+         ->  HashAggregate  (cost=122.57..122.99 rows=21 width=30) (actual time=0.175..0.180 rows=3 loops=1)
+               Filter: (avg(ratings.overall) > 7::numeric)
+               Rows Removed by Filter: 16
+               ->  Nested Loop Left Join  (cost=4.01..122.36 rows=21 width=30) (actual time=0.023..0.165 rows=24 loops=1)
+                     ->  Nested Loop  (cost=3.73..114.77 rows=21 width=28) (actual time=0.019..0.123 rows=19 loops=1)
+                           ->  Seq Scan on styles  (cost=0.00..18.50 rows=7 width=10) (actual time=0.011..0.081 rows=7 loops=1)
+                                 Filter: ((style)::text = 'eligendi'::text)
+                                 Rows Removed by Filter: 993
+                           ->  Bitmap Heap Scan on beers  (cost=3.73..13.72 rows=3 width=26) (actual time=0.004..0.006 rows=3 loops=7)
+                                 Recheck Cond: (style_id = styles.id)
+                                 ->  Bitmap Index Scan on beer_style_id  (cost=0.00..3.73 rows=3 width=0) (actual time=0.002..0.002 rows=3 loops=7)
+                                       Index Cond: (style_id = styles.id)
+                     ->  Index Scan using ratings_beer_id_index on ratings  (cost=0.28..0.35 rows=1 width=6) (actual time=0.002..0.002 rows=1 loops=19)
+                           Index Cond: (beer_id = beers.id)
+ Total runtime: 0.226 ms
+(19 rows)
+
+That is better as well!
+
+

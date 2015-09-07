@@ -1,0 +1,43 @@
+Prefix                      Verb    URI Pattern                                       Controller#Action
+
+flight                      GET     /flights                                          flights#index            
+                            POST    /flights                                          flights#create
+                            GET     /flights/:id                                      flights#show        
+                            PUT     /flights/:id                                      flights#update            
+                            DELETE  /flights/:id                                      flights#destroy            
+flight_search               GET     /flights/search                                   flights#search              
+flight_passengers           GET     /flights/:id/passengers                           flights#passengers                      
+
+airport                     GET     /airports                                         airports#index        
+                            POST    /airports                                         airports#create        
+                            GET     /airports/:id                                     airports#show            
+                            PUT     /airports/:id                                     airports#update      
+                            DELETE  /airports/:id                                     airports#destroy     
+airport_search              GET     /airports/search                                  airports#search          
+airport_flights             GET     /airports/:id/flights                             airports#flights            
+
+airplane                    GET     /airplanes/:id                                    airplanes#index    
+                            POST    /airplanes                                        airplanes#create
+                            PUT     /airplanes/:id                                    airplanes#update
+                            DELETE  /airplanes/:id                                    airplanes#destroy
+airplane_search             GET     /airplanes/search                                 airplanes#search
+airplane_passengers         GET     /airplanes/:id/passengers                         airplanes#passengers
+airplane_flights            GET     /airplanes/:id/flights                            airplanes#flights
+
+airplane_maintenance        GET     /airplanes/:id/maintenance                        maintenance#index
+                            POST    /airplanes/:id/maintenance                        maintenance#create
+                            GET     /airplanes/:id/maintenance/:maintenance_id        maintenance#show
+                            PUT     /airplanes/:id/maintenance/:maintenance_id        maintenance#update
+                            DELETE  /airplanes/:id/maintenance/:maintenance_id        maintenance#destroy
+
+passenger                   GET     /passengers/                                      passengers#index
+                            POST    /passengers                                       passengers#create
+                            GET     /passengers/:id                                   passengers#show
+                            PUT     /passengers/:id                                   passengers#update
+                            DELETE  /passengers/:id                                   passengers#destroy
+
+bookings                    GET     /flights/:flight_id/bookings                      flights#index
+                            POST    /flights/:flight_id/bookings                      flights#create
+                            GET     /flights/:flight_id/bookings/:id                  flights#show
+                            PUT     /flights/:flight_id/bookings/:id                  flights#update
+                            DELETE  /flights/:flight_id/bookings/:id                  flights#destroy

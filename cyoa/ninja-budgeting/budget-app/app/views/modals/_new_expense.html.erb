@@ -1,0 +1,53 @@
+<!-- New Expense Modal -->
+<div class="modal fade" id="newTransactionModal" tabindex="-1" role="dialog" aria-labelledby="New Transaction">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for(Transaction.new) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Transaction</h4>
+      </div>
+      <div class="modal-body">
+        <p>Fields marked with a <span class="required">*</span> are required.</p>
+
+        <%= f.label :date do %>
+          Date<span class="required">*</span>
+        <% end %>
+        <%= f.date_select :date, class: 'form-control', required: true %><br>
+
+        <%= f.label :description %>
+        <%= f.text_field :description, class: 'form-control' %>
+
+        <%= f.label :amount do %>
+          Amount<span class="required">*</span>
+        <% end %>
+        <%= f.number_field :amount, class: 'form-control', required: true, step: 0.01, min: 0 %>
+
+        <%= f.label :category do %>
+          Category<span class="required">*</span>
+        <% end %>
+
+        <%= f.select :category, Category.where(user_id: current_user.id).collect { |c| [c.name, c.name] }, class: 'form-control', include_blank: true, required: true %><br>
+
+        <%= f.hidden_field :term_id, value: @term.id %>
+
+        <%= f.label :fund_id do %>
+          Payment Method<span class="required">*</span>
+        <% end %>
+        <%= f.select :fund_id, Fund.where(user_id: current_user.id).collect { |f| [f.name, f.id] }, class: 'form-control', include_blank: true, required: true %><br>
+
+        <%= f.hidden_field :transaction_type, value: "expense" %>
+
+        <%= f.label :paid do %>
+          Payment Complete?<span class="required">*</span>
+        <% end %>
+        <%= f.check_box :paid %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit 'Add Expense', class: "btn btn-info" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

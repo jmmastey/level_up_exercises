@@ -1,0 +1,44 @@
+<% provide(:title, "Categories") %>
+
+<div class="center jumbotron">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-header-with-button">Categories</h3>
+      <button type="button" data-toggle="modal" data-target="#newCategoryModal" class="btn btn-info panel-add-button" id="new-category-button"><i class="glyphicon glyphicon-plus"></i> New Category</button>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @categories.empty? %>
+            <tr>
+              <td>You have no categories.</td>
+              <td></td>
+            </tr>
+          <% else %>
+            <% @categories.each do |category| %>
+              <tr>
+                <td><%= category.name %></td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-danger" id="delete-category-button" data-toggle="modal" data-target="#deleteCategoryModal" data-id="<%= category.id %>"><i class="glyphicon glyphicon-trash"></i>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-success" id="edit-category-button" data-toggle="modal" data-target="#editCategoryModal" data-id="<%= category.id %>" data-name="<%= category.name %>"><i class="glyphicon glyphicon-pencil"></i>
+                  </button>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= render '/modals/new_category' %>
+<%= render '/modals/edit_category' %>
+<%= render '/modals/delete_category' %>

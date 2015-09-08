@@ -1,0 +1,105 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-header-with-button"><%= @term.date %></h3>
+    <button type="button" data-toggle="modal" data-target="#newTransactionModal" class="btn btn-info panel-add-button" id="new-transaction-button"><i class="glyphicon glyphicon-plus"></i> New Expense</button>
+  </div>
+  <div class="panel-body">
+    <table class="table" id="transactions-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Description</th>
+          <% @term.options.each do |key, _| %>
+            <th style="text-align:center;">
+              <a href="#" id="add-money-to-term-category-link" data-toggle="modal" data-target="#addMoneyTermCategoryModal" data-id="<%= @term.id %>" data-name="<%= key %>"><%= key %></a>
+              </th>
+          <% end %>
+          <th>Payment Type</th>
+          <th>Paid?</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- FIRST ROW - BUDGET VALUES -->
+        <tr id="transaction-table-first-row">
+          <td>Budget Amounts</td>
+          <td></td>
+          <td></td>
+          <% @term.options.each do |key, _| %>
+            <td style="text-align:center;">
+              <span style="color:orange;">
+                <%= "$%.2f" % @term.budgeted_amount_for_category(key) %>
+              </span>
+            </td>
+          <% end %>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <% if @term.transactions.empty? %>
+          <tr>
+            <td>You have no transactions for this month.</td>
+            <% @term.options.count.times do %>
+              <td></td>
+            <% end %>
+            <% 6.times do %>
+              <td></td>
+            <% end %>
+          </tr>
+        <% else %>
+          <% @term.transactions.order(created_at: :DESC).each do |transaction| %>
+            <tr>
+              <td style="width:150px;"><%= transaction.date.strftime("%m/%d") %></td>
+              <td><%= "$%.2f" % transaction.amount %></td>
+              <td><%= transaction.description %></td>
+              <% @term.options.each do |key, value| %>
+                <% if key == transaction.category %>
+                  <td style="text-align:center">
+                    <% if transaction.transaction_type == "expense" %>
+                      <span style="color:red;">
+                    <% else %>
+                      <span style="color:green;">
+                    <% end %>
+                    <%= "$%.2f" % transaction.amount %>
+                    </span>
+                  </td>
+                <% else %>
+                  <td></td>
+                <% end %>
+              <% end %>
+              <td><%= current_user.funds.find(transaction.fund_id).name %></td>
+              <td style="width:50px;text-align:center;">
+              <% if transaction.paid? %>
+                <span style="color:green;"><i class="glyphicon glyphicon-ok"></i></span>
+              <% else %>
+                <%= link_to "/transactions/paid/#{transaction.id}", method: :post, style: 'width:100%;' do %>
+                  <span style="color:red;">No</span>
+                <% end %>
+              <% end %>
+              </td>
+              <td></td>
+          <% end %>
+        <% end %>
+
+        <!-- Last row - totals -->
+        <tr id="transaction-table-last-row">
+          <td style="text-align:center;">Remaining Totals</td>
+          <td></td>
+          <td></td>
+          <% @term.options.each do |key, value| %>
+            <td style="text-align:center;"><%= "$%.2f" % (@term.budgeted_amount_for_category(key) - value[:amount_spent]) %>
+          <% end %>
+          <% 4.times do %>
+            <td></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  
+<%= render 'modals/new_expense' %>
+<%= render 'modals/add_money_to_term_category' %>

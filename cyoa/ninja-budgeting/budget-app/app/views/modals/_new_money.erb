@@ -1,0 +1,22 @@
+<!-- New Money Modal -->
+<div class="modal fade" id="newMoneyModal" tabindex="-1" role="dialog" aria-labelledby="New Money">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag("/funds/add", method: "post", id: "new-money-form") do %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Money</h4>
+      </div>
+      <div class="modal-body">
+        <%= hidden_field_tag :fund_id %>
+        <%= text_field_tag :description, nil, class: 'form-control', id: 'add-money-description-input', placeholder: 'Name or Description (i.e. Work Check)', required: true %>
+        <%= number_field_tag :amount, nil, class: 'form-control', id: 'add-money-total-amount-input', placeholder: 'Total Amount', required: true, step: 0.01, min: 0 %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag 'Submit', class: "btn btn-info" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

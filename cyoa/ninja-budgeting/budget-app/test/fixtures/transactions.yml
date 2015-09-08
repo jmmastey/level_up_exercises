@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  location: MyString
+  date: 2015-08-20
+  description: MyText
+  amount: 9.99
+  category: MyString
+  term_id: 1
+  how_paid: MyString
+  type: 
+
+two:
+  name: MyString
+  location: MyString
+  date: 2015-08-20
+  description: MyText
+  amount: 9.99
+  category: MyString
+  term_id: 1
+  how_paid: MyString
+  type: 

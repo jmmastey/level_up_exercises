@@ -1,0 +1,64 @@
+<% provide(:title, "Terms") %>
+
+<div class="center jumbotron">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-header-with-button">Terms</h3>
+      <button type="button" data-toggle="modal" data-target="#newTermModal" class="btn btn-info panel-add-button" id="new-term-button"><i class="glyphicon glyphicon-plus"></i> New Term</button>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped" id="terms-table">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Year</th>
+            <th>Budgeted Money Remaining</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @terms.empty? %>
+            <tr>
+              <td>You have no terms.</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          <% else %>
+            <% @terms.each do |term| %>
+              <tr class="expandable-category-row">
+                <td><%= term.date.split(' ')[0] %> <i class="expandable glyphicon glyphicon-triangle-bottom"></i></td>
+                <td><%= term.year %></td>
+                <td><%= "$%.2f" % term.total_budgeted_amount %></td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-danger" id="delete-term-button" data-toggle="modal" data-target="#deleteTermModal" data-id="<%= term.id %>"><i class="glyphicon glyphicon-trash"></i>
+                  </button>
+                  <%= link_to "/terms/#{term.id}", class: "btn btn-sm btn-info", id: 'view-term-button', style: 'margin-right: 5px;' do %>
+                    <i class="glyphicon glyphicon-search"></i>
+                  <% end %>
+                </td>
+              </tr>
+              <% term.options.each do |option, value| %>
+                <% if !value[:budgeted_amount].empty? && term.budgeted_amount_for_category(option) - value[:amount_spent] > 0 %> 
+                  <tr style="display:none;">
+                    <td style="padding-left: 50px;"><span style="color:orange;"><%= option %></span></td>
+                    <td></td>
+                    <td><%= "$%.2f" % (term.budgeted_amount_for_category(option) - value[:amount_spent]) %></td>
+                    <td>
+                      <%= link_to restore_money_path(id: term.id, name: option), class: 'btn btn-sm btn-success', method: :post, id: 'restore-money-button' do %>
+                        <i class="glyphicon glyphicon-share-alt"></i>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= render 'modals/new_term' %>
+<%= render 'modals/delete_term' %>

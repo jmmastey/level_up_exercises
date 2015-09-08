@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %> | Ninja Budgeting</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'dollar.ico' %>
+</head>
+<body>
+  <%= render 'layouts/header' %>
+  <div class="container">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+    <%= yield %>
+  </div>
+  <%= render 'layouts/footer' %>
+</body>
+</html>

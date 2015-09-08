@@ -44,14 +44,14 @@ function activatedUpdates(jsonObj) {
   deactivated = false;
   var bombState = "<span style=\"color:red\">Activated!</span>";
   var deactivateLabel = "To deactivate, enter your deactivation code: ";
-  document.getElementById("bombState").innerHTML = bombState;
-  document.getElementById("formLabel").innerHTML = deactivateLabel;
+  $('#bombState').html(bombState);
+  $('#formLabel').text(deactivateLabel);
   if (jsonObj.attempts_remaining <= 0) {
     explodedUpdates();
   } else if (jsonObj.attempts_remaining < 3) {
     var attemptsRemaining = "(" + jsonObj.attempts_remaining;
     attemptsRemaining = attemptsRemaining + " attempts remaining!)";
-    document.getElementById("AttemptsRemaining").innerHTML = attemptsRemaining;
+    $('#AttemptsRemaining').text(attemptsRemaining);
   }
   timer(jsonObj.timer_end);
 }
@@ -60,18 +60,18 @@ function deactivatedUpdates() {
   deactivated = true;
   hideTimer();
   var activateLabel = "To activate, enter your activation code: ";
-  document.getElementById("bombState").innerHTML = "Deactivated";
-  document.getElementById("formLabel").innerHTML = activateLabel;
-  document.getElementById("AttemptsRemaining").innerHTML = "";
+  $('#bombState').text('Deactivated');
+  $('#formLabel').text(activateLabel);
+  $('#AttemptsRemaining').text("");
 }
 
 function explodedUpdates() {
   deactivated = true;
   hideTimer();
   var explodedLabelText = "To deactiv ent fjds as;dfasåß∂¬ƒåƒ∆å…ßˆƒ˙Ω©∫˚∫´å: ";
-  document.getElementById("bombState").innerHTML = "!@#$%^&*!@#&$!";
-  document.getElementById("formLabel").innerHTML = explodedLabelText;
-  document.getElementById("AttemptsRemaining").innerHTML = "";
+  $('#bombState').text("!@#$%^&*!@#&$!");
+  $('#formLabel').text(explodedLabelText);
+  $('#AttemptsRemaining').text("");
   disableButtons();
 }
 
@@ -132,7 +132,7 @@ function getTimeString(seconds) {
 }
 
 function updateTimer(string) {
-  document.getElementById("timer").innerHTML = "" + string;
+  $('#timer').text("" + string);
 }
 
 function showTimer() {
@@ -140,16 +140,16 @@ function showTimer() {
 }
 
 function showInvalid() {
-  document.getElementById("Invalid").innerHTML = "Invalid!";
+  $('#Invalid').text("Invalid!");
 }
 
 function hideWarning() {
-  document.getElementById("Invalid").innerHTML = "";
+  $('#Invalid').text("");
 }
 
 function showInputWarning() {
   var text = "Only numeric input is allowed.";
-  document.getElementById("Invalid").innerHTML = text;
+  $('#Invalid').text(text);
 }
 
 function hideTimer() {
@@ -157,7 +157,7 @@ function hideTimer() {
 }
 
 function disableButtons() {
-  document.getElementById("formButton").disabled = true;
+  $('#formButton').prop('disabled', true);
 }
 
 window.onload = updatePage();

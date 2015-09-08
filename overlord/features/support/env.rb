@@ -1,12 +1,13 @@
 require_relative './../../overlord.rb'
 
-require 'selenium-webdriver'
+require 'capybara/poltergeist'
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 
 Capybara.app = Sinatra::Application
-Capybara.default_driver = :selenium
+Capybara.javascript_driver = :poltergeist
+Capybara.default_driver = :poltergeist
 
 class OverlordWorld
   include Capybara::DSL

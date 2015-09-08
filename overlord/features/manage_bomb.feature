@@ -10,15 +10,13 @@ Feature: Manage Bomb
   Scenario: Activate Bomb
     Given the bomb is deactivated
     When I enter the correct activation code
-    Then the bomb should be activated
-    And the timer should start
+    Then the bomb is now activated
 
   @javascript
   Scenario: Deactivate Bomb
     Given the bomb is activated
     When I enter the correct deactivation code
-    Then the bomb should be deactivated
-    And the timer should be stopped
+    Then the bomb is now deactivated
 
   @javascript
   Scenario: Activate Already-Activated Bomb
@@ -30,27 +28,22 @@ Feature: Manage Bomb
   Scenario: Enter Incorrect Activation Code
     Given the bomb is deactivated
     When I enter an incorrect activation code
-    Then the bomb should be deactivated
-    And the timer should be stopped
+    Then the bomb is now deactivated
 
   @javascript
   Scenario: Enter Incorrect Deactivation Code 3 Times
     Given the bomb is activated
     When I enter an incorrect deactivation code three times
-    Then the bomb should explode
-    And the buttons should be disabled
-    And the timer should be stopped
+    Then the bomb is exploded
 
   @javascript
-  Scenario: The bomb timer reaches 00:00
+  Scenario: The bomb timer reaches 00:00 from 02:00
     Given the bomb is activated
     When the bomb timer ends
-    Then the bomb should explode
-    And the buttons should be disabled
-    And the timer should be stopped
+    Then the bomb is exploded
 
   @javascript
   Scenario: Invalid Input for Code
     Given the bomb is not exploded
     When I enter an invalid code
-    Then I should see that only numerical inputs are allowed
+    Then I see that only numerical inputs are allowed

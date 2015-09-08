@@ -3,62 +3,56 @@ class Bomb
   attr_reader :state, :attempts_remaining, :timer_end
 
   def initialize(custom_activation_code = nil, custom_deactivation_code = nil)
-    @default_activation_code = "1234"
-    @default_deactivation_code = "0000"
-
-    @custom_activation_code = custom_activation_code
-    @custom_deactivation_code = custom_deactivation_code
+    @activation_code = custom_activation_code || "1234"
+    @deactivation_code = custom_deactivation_code || "0000"
 
     @state = "Deactivated"
     @timer_end = 0
     @attempts_remaining = 3
   end
 
-  def activate
-    @state = "Activated"
-    start_timer
-    @attempts_remaining = 3
+  def activate(code)
+    valid = @activation_code == code && @state == "Deactivated"
+    if valid
+      @state = "Activated"
+      start_timer
+      @attempts_remaining = 3
+      true
+    else
+      false
+    end
   end
 
-  def deactivate
-    @state = "Deactivated"
+  def deactivate(code)
+    if @state == "Activated"
+      if @deactivation_code == code
+        @state = "Deactivated"
+        return true
+      else
+        invalid_attempt
+      end
+    end
+    false
   end
 
-  def explode
-    @state = "Exploded"
+  def explode_if_timer_out
+    explode_bomb if @timer_end - Time.now.to_i <= 0
   end
 
   def start_timer
     @timer_end = (Time.now + TWO_MINUTES).to_i
   end
 
-  def correct_activation_code?(code)
-    default_activation_code?(code) || custom_activation_code?(code)
-  end
-
-  def correct_deactivation_code?(code)
-    default_deactivation_code?(code) || custom_deactivation_code?(code)
-  end
-
-  def decrement_attempt
-    @attempts_remaining -= 1
-  end
-
   private
 
-  def default_activation_code?(code)
-    code == @default_activation_code
+  def invalid_attempt
+    @attempts_remaining -= 1
+    if @attempts_remaining == 0
+      explode_bomb
+    end
   end
 
-  def default_deactivation_code?(code)
-    code == @default_deactivation_code
-  end
-
-  def custom_activation_code?(code)
-    code == @custom_activation_code
-  end
-
-  def custom_deactivation_code?(code)
-    code == @custom_deactivation_code
+  def explode_bomb
+    @state = "Exploded"
   end
 end

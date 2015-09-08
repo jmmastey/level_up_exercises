@@ -2,15 +2,15 @@ var deactivated = true;
 
 function submitCode() {
   var code = $('input').val();
-  var json = {"code":code};
+  var json = {'code':code};
   $.ajax({
-    url: "/",
-    type: "POST",
+    url: '/',
+    type: 'POST',
     data: json,
     success: function(data) {
       var jsonData = JSON.parse(data);
       analyzeData(jsonData);
-      $("#codeForm")[0].reset();
+      $('#codeForm')[0].reset();
     }
   });
 }
@@ -18,18 +18,18 @@ function submitCode() {
 function analyzeData(jsonObj) {
   if (jsonObj.status == 200) {
     hideWarning();
-    if (jsonObj.state == "Activated") {
+    if (jsonObj.state == 'Activated') {
       activatedUpdates(jsonObj);
-    } else if (jsonObj.state == "Deactivated") {
+    } else if (jsonObj.state == 'Deactivated') {
       deactivatedUpdates();
     } else { // Exploded
       explodedUpdates();
     }
   } else if (jsonObj.status == 401) {
     showInvalid();
-    if (jsonObj.state == "Activated") {
+    if (jsonObj.state == 'Activated') {
       activatedUpdates(jsonObj);
-    } else if (jsonObj.state == "Deactivated") {
+    } else if (jsonObj.state == 'Deactivated') {
       deactivatedUpdates();
     } else { // Exploded
       explodedUpdates();
@@ -77,8 +77,8 @@ function explodedUpdates() {
 
 function updatePage() {
   $.ajax({
-    url: "/status",
-    type: "GET",
+    url: '/status',
+    type: 'GET',
     success: function(data) {
       var jsonData = JSON.parse(data);
       analyzeData(jsonData);
@@ -99,8 +99,8 @@ function timer(timerEnd) {
     } else if (!deactivated && numSecondsLeft <= 0) {
       clearInterval(timerHandler);
       $.ajax({
-        url: "/explode",
-        type: "POST",
+        url: '/explode',
+        type: 'POST',
         success: function() {
           hideTimer();
           updatePage();
@@ -122,9 +122,9 @@ function getNumSecondsLeft(timerEnd) {
 function getTimeString(seconds) {
   var mins = Math.floor(seconds / 60);
   var secs = seconds - (mins * 60);
-  var timeString = "0" + mins + ":";
+  var timeString = '0' + mins + ':';
   if (secs < 10) {
-    timeString = timeString + "0" + secs;
+    timeString = timeString + '0' + secs;
   } else {
     timeString = timeString + secs;
   }

@@ -1,5 +1,6 @@
 require 'faker'
-require_relative 'Database'
+require 'colorize'
+require_relative 'database'
 
 # Constants used to slice strings in order to ensure they fit in the db.
 # Would it be better to define everything like this, or to just include numbers?
@@ -21,11 +22,13 @@ MAX_STYLE_STYLE = 50
 MAX_BEER_NAME = 100
 
 # Constants for how much data to generate
+THREAD_MULTIPLIER = 10
+
 USER_COUNT = 10_000
 BREWERIES_COUNT = 1_000
-STYLES_COUNT = 10_000
-BEERS_COUNT = 30_000
-RATINGS_COUNT = 25_000
+STYLES_COUNT = 4_000
+BEERS_COUNT = 7_000
+RATINGS_COUNT = 10_000
 
 def insert_fake_user
   @database.insert(
@@ -89,39 +92,36 @@ def insert_fake_rating
   )
 end
 
-def fake_breweries(count)
-  count.times { insert_fake_brewery }
+def percent(count, multiplier)
+  ((count * 100) / (count * multiplier)).to_i
 end
 
-def fake_users(count)
-  count.times { insert_fake_user }
+def function_to_s(function)
+  name = function.to_s.split('_').last
+  return 'breweries' if name == 'brewery'
+  name << 's'
 end
 
-def fake_styles(count)
-  count.times { insert_fake_style }
-end
-
-# Ensure that we have styles and breweries inserted before calling
-def fake_beers(count)
-  count.times { insert_fake_beer }
-end
-
-def fake_ratings(count)
-  count.times { insert_fake_rating }
+def fake(function, count, multiplier)
+  puts "Started faking #{count * multiplier} #{function_to_s(function)}".yellow
+  multiplier.times do
+    @threads << Thread.new do
+      count.times { send(function) }
+      puts "Generated #{percent(count, multiplier)}% of the ".green +
+        function_to_s(function).green
+    end
+  end
 end
 
 def fake_it
-  fake_users(USER_COUNT)
-  puts 'Faked users'
-  fake_breweries(BREWERIES_COUNT)
-  puts 'Faked breweries'
-  fake_styles(STYLES_COUNT)
-  puts 'Faked Styles'
-  fake_beers(BEERS_COUNT)
-  puts 'Faked beers'
-  fake_ratings(RATINGS_COUNT)
-  puts 'Faked Ratings.'
+  @threads = []
+  fake(:insert_fake_user, USER_COUNT, THREAD_MULTIPLIER)
+  fake(:insert_fake_brewery, BREWERIES_COUNT, THREAD_MULTIPLIER)
+  fake(:insert_fake_style, STYLES_COUNT, THREAD_MULTIPLIER)
+  fake(:insert_fake_beer, BEERS_COUNT, THREAD_MULTIPLIER)
+  fake(:insert_fake_rating, RATINGS_COUNT, THREAD_MULTIPLIER)
+  @threads.each(&:join)
 end
 
-@database = Database.new
+@database = Database.new('yadda', THREAD_MULTIPLIER)
 fake_it

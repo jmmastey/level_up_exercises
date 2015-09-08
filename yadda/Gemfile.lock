@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    colorize (0.7.7)
+    connection_pool (2.2.0)
+    faker (1.5.0)
+      i18n (~> 0.5)
+    i18n (0.7.0)
+    pg (0.18.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  colorize
+  connection_pool
+  faker
+  pg
+
+BUNDLED WITH
+   1.10.6

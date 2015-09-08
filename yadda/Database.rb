@@ -55,4 +55,3 @@ class Database
     random_id(table, depth + 1)
   end
 end
-

@@ -14,7 +14,6 @@ describe 'funds index page' do
     within(:css, '#newFundModal') do
       fill_in('Name', with: 'Test Fund')
       fill_in('Amount', with: 10.32)
-      select('Bank', from: 'fund[fund_type]')
     end
     click_button('Add Fund')
     expect(page).to have_content('Fund successfully added.')
@@ -32,7 +31,6 @@ describe 'funds index page' do
     within(:css, '#newFundModal') do
       fill_in('Name', with: 'Bank Fund')
       fill_in('Amount', with: 10.32)
-      select('Bank', from: 'fund[fund_type]')
     end
     click_button('Add Fund')
     expect(page).to have_content('Could not add fund.')

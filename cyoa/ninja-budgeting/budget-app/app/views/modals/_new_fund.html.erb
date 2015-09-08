@@ -22,7 +22,7 @@
         <%= f.label :fund_type do %>
           Fund Type<span class="required">*</span>
         <% end %>
-        <%= f.select :fund_type, [['Bank', 'bank'], ['Credit', 'credit']], include_blank: true, required: true %>
+        <%= f.hidden_field :fund_type, value: 'bank' %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

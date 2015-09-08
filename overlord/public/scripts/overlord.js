@@ -1,7 +1,7 @@
 var deactivated = true;
 
 function submitCode() {
-  var code = document.forms[0].elements[0].value;
+  var code = $('input').val();
   var json = {"code":code};
   $.ajax({
     url: "/",
@@ -42,15 +42,15 @@ function analyzeData(jsonObj) {
 
 function activatedUpdates(jsonObj) {
   deactivated = false;
-  var bombState = "<span style=\"color:red\">Activated!</span>";
-  var deactivateLabel = "To deactivate, enter your deactivation code: ";
+  var bombState = '<span style="color:red">Activated!</span>';
+  var deactivateLabel = 'To deactivate, enter your deactivation code: ';
   $('#bombState').html(bombState);
   $('#formLabel').text(deactivateLabel);
   if (jsonObj.attempts_remaining <= 0) {
     explodedUpdates();
   } else if (jsonObj.attempts_remaining < 3) {
-    var attemptsRemaining = "(" + jsonObj.attempts_remaining;
-    attemptsRemaining = attemptsRemaining + " attempts remaining!)";
+    var attemptsRemaining = '(' + jsonObj.attempts_remaining;
+    attemptsRemaining = attemptsRemaining + ' attempts remaining!)';
     $('#AttemptsRemaining').text(attemptsRemaining);
   }
   timer(jsonObj.timer_end);
@@ -59,19 +59,19 @@ function activatedUpdates(jsonObj) {
 function deactivatedUpdates() {
   deactivated = true;
   hideTimer();
-  var activateLabel = "To activate, enter your activation code: ";
+  var activateLabel = 'To activate, enter your activation code: ';
   $('#bombState').text('Deactivated');
   $('#formLabel').text(activateLabel);
-  $('#AttemptsRemaining').text("");
+  $('#AttemptsRemaining').text('');
 }
 
 function explodedUpdates() {
   deactivated = true;
   hideTimer();
-  var explodedLabelText = "To deactiv ent fjds as;dfasåß∂¬ƒåƒ∆å…ßˆƒ˙Ω©∫˚∫´å: ";
-  $('#bombState').text("!@#$%^&*!@#&$!");
+  var explodedLabelText = 'To deactiv ent fjds as;dfasåß∂¬ƒåƒ∆å…ßˆƒ˙Ω©∫˚∫´å: ';
+  $('#bombState').text('!@#$%^&*!@#&$!');
   $('#formLabel').text(explodedLabelText);
-  $('#AttemptsRemaining').text("");
+  $('#AttemptsRemaining').text('');
   disableButtons();
 }
 
@@ -132,28 +132,28 @@ function getTimeString(seconds) {
 }
 
 function updateTimer(string) {
-  $('#timer').text("" + string);
+  $('#timer').text(string);
 }
 
 function showTimer() {
-  $("#timer").removeClass("hidden");
+  $('#timer').removeClass('hidden');
 }
 
 function showInvalid() {
-  $('#Invalid').text("Invalid!");
+  $('#Invalid').text('Invalid!');
 }
 
 function hideWarning() {
-  $('#Invalid').text("");
+  $('#Invalid').text('');
 }
 
 function showInputWarning() {
-  var text = "Only numeric input is allowed.";
+  var text = 'Only numeric input is allowed.';
   $('#Invalid').text(text);
 }
 
 function hideTimer() {
-  $("#timer").addClass("hidden");
+  $('#timer').addClass('hidden');
 }
 
 function disableButtons() {

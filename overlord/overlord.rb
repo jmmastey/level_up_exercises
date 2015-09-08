@@ -24,9 +24,8 @@ post '/' do
 end
 
 post '/explode' do
-  if session[:bomb].state == "Activated"
-    session[:bomb].explode_if_timer_out
-  end
+  return unless session[:bomb].state == "Activated"
+  session[:bomb].explode_if_timer_out
 end
 
 def attempt_activation(code)
@@ -49,8 +48,8 @@ end
 
 def create_response(code)
   bomb = session[:bomb]
-  { status: code, state: bomb.state, 
-    attempts_remaining: bomb.attempts_remaining, 
+  { status: code, state: bomb.state,
+    attempts_remaining: bomb.attempts_remaining,
     timer_end: bomb.timer_end }.to_json
 end
 

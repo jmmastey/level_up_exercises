@@ -47,9 +47,8 @@ class Bomb
 
   def invalid_attempt
     @attempts_remaining -= 1
-    if @attempts_remaining == 0
-      explode_bomb
-    end
+    return unless @attempts_remaining == 0
+    explode_bomb
   end
 
   def explode_bomb

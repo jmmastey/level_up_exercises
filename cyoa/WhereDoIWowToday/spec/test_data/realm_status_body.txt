@@ -1,0 +1,52 @@
+{	
+  "realms": [
+              {
+               "type": "pve",
+               "population": "medium",
+               "queue": true,
+               "wintergrasp": {
+                               "area": 1,
+                               "controlling-faction": 0,
+                               "status": 0,
+                               "next": 1441730049186
+                              },
+               "tol-barad": {
+                             "area": 21,
+                             "controlling-faction": 0,
+                             "status": 0,
+                             "next": 1441729104436
+                            },
+               "status": true,
+               "name": "Anvilmar",
+               "slug": "anvilmar",
+               "battlegroup": "Ruin",
+               "locale": "en_US",
+               "timezone": "America/Los_Angeles",
+               "connected_realms": ["anvilmar", "undermine"]
+              },
+              {
+               "type": "rp",
+               "population": "low",
+               "queue": true,
+               "wintergrasp": {
+                               "area": 1,
+                               "controlling-faction": 1,
+                               "status": 0,
+                               "next": 1441730011237
+                              },
+               "tol-barad": {
+                             "area": 21,
+                             "controlling-faction": 1,
+                             "status": 0,
+                             "next": 1441728966480
+                            },
+               "status": true,
+               "name": "Earthen Ring",
+               "slug": "earthen-ring",
+               "battlegroup": "Vindication",
+               "locale": "en_US",
+               "timezone": "America/Los_Angeles",
+               "connected_realms": ["earthen-ring"]
+              }
+            ]
+}

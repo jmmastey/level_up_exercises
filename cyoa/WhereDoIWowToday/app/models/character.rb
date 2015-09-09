@@ -1,5 +1,7 @@
 class Character < ActiveRecord::Base
   validates_presence_of :name, :realm
+  validates_uniqueness_of :name , scope: :realm
+
   has_many :character_zone_activities, dependent: :destroy
   has_many :quests, through: :character_zone_activity
   has_many :achievements, through: :character_zone_activity
@@ -17,7 +19,7 @@ class Character < ActiveRecord::Base
 
   
   def self.refresh_individual(name:, realm:)
-    character = Character.find_by(name: name, realm: realm)
+    character = Character.find_by(name: name.titleize, realm: realm)
     if character.nil?
       character = get_character_from_blizzard(name, realm)
     end

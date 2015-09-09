@@ -15,6 +15,7 @@ Given(/^I am on the (.*) page$/) do |page|
 end
 
 Given(/^there are multiple zones$/) do
+  stub_request(:any, /us.api.battle.net/)
   ZONES.each do |name|
       FactoryGirl.create(:category, name: name, blizzard_type: 'zone')
   end
@@ -166,6 +167,7 @@ Then(/^I should be on the character page for that character$/) do
   realm = VALID_REALM.gsub("\s", '-')
   step "I should see \"#{VALID_NAME}\""
   step "I should see \"#{VALID_REALM}\""
+  step "I should not see \"does not exist\""
 end
 
 Then(/^I should see a row for each zone$/) do

@@ -86,10 +86,11 @@ class CharactersController < ApplicationController
     end
 
     def go_to_character
-      @character = Character.refresh_individual(name: params['Name'],
+      @character = Character.refresh_individual(name: params['Name'].titleize,
                                                 realm: params['Realm'])
-      if !@character.nil? && @character.name.eql?(params['Name'])
+      if !@character.nil? && @character.name.eql?(params['Name'].titleize)
         redirect_to @character
+        flash.delete :notice
       else
         flash[:notice] = "Character does not exist"
       end

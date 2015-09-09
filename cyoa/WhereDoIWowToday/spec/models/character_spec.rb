@@ -19,6 +19,7 @@ RSpec.describe Character, type: :model do
 
           expect(stub).to have_been_requested.once
           expect(Character.count).to eq(1)
+          expect(Character.find_by_name("Sal").realm).to eq("Earthen Ring")
         end
       end
     end

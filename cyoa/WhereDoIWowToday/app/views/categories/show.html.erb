@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @category.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @category.blizzard_type %>
+</p>
+
+<ul> Uncompleted quests  <br>
+    <%= "No remaining quests" if @quests.empty? %>
+    <% @quests.each do |quest| %>
+      <li> <%= quest.title %> </li>
+    <% end %>
+</ul>
+
+<ul> Uncompleted achievements  <br>
+    <%= "No remaining achievements" if @achievements.empty? %>
+    <% @achievements.each do |achievement| %>
+      <li> <%= achievement.title %> </li>
+    <% end %>
+</ul>
+<br>

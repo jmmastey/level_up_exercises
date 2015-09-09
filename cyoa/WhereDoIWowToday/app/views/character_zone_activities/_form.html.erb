@@ -1,0 +1,17 @@
+<%= form_for(@character_zone_activity) do |f| %>
+  <% if @character_zone_activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@character_zone_activity.errors.count, "error") %> prohibited this character_zone_activity from being saved:</h2>
+
+      <ul>
+      <% @character_zone_activity.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Blizzard:</strong>
+  <%= @quest.blizzard_id %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @quest.title %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @quest.category %>
+</p>
+
+<p>
+  <strong>Req level:</strong>
+  <%= @quest.req_level %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @quest.level %>
+</p>
+
+<%= link_to 'Edit', edit_quest_path(@quest) %> |
+<%= link_to 'Back', quests_path %>

@@ -1,0 +1,28 @@
+Known valid characters are:
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Realm</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @characters.size == 0 %>
+      <%= "No characters found" %>
+    <% else %>
+      <% @characters.each do |character| %>
+        <tr>
+          <td><%= link_to character.name, character %></td>
+          <td><%= character.realm %></td>
+        </tr>
+	<% end %>
+      <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'NewSearch', root_path %>

@@ -1,0 +1,21 @@
+<p id="error"><%= flash[:error]%></p>
+<br>
+<h1>Where Do I WoW Today</h1>
+<br>
+<form action="/characters" method="get">
+  <h3>Select character</h3>
+  Character Name:
+  <input type="text" name="Name" autofocus>
+  <br>
+  Realm:
+  <select name="Realm">
+    <% @realms.each do |realm_name| %>
+    <option value="<%= realm_name %>"> <%= realm_name %> </option>
+    <% end %>
+  </select>
+  <br>
+  <button type="submit">Submit</button>
+</form>
+
+<br><br>
+<p>Find me in app/views/welcome/index.html.erb</p>

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Character Zone Activities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @character_zone_activities.each do |character_zone_activity| %>
+      <tr>
+        <td><%= link_to 'Show', character_zone_activity %></td>
+        <td><%= link_to 'Edit', edit_character_zone_activity_path(character_zone_activity) %></td>
+        <td><%= link_to 'Destroy', character_zone_activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Character zone activity', new_character_zone_activity_path %>

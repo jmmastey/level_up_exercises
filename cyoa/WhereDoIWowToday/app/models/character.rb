@@ -19,33 +19,32 @@ class Character < ActiveRecord::Base
 
   
   def self.refresh_individual(name:, realm:)
-    character = Character.find_by(name: name.titleize, realm: realm)
-    if character.nil?
-      character = get_character_from_blizzard(name, realm)
-    end
-    return character
+    name = name.titleize
+    character = Character.find_by(name: name, realm: realm)
+    return new_character(name, realm) if character.nil?
+    character.update_from_blizzard! if character.updated_at < 1.hour.ago
+  end
+
+  def self.new_character(name, realm)
+    @api ||= Blizzard.new
+    raw_info = @api.get_character(name, realm)
+    return if raw_info.nil?
+    converted_info = convert_character(raw_info)
+    character = Character.create!(converted_info)
+    character.update_dependents(raw_info)
+  end
+
+  def update_from_blizzard!
+    @api ||= Blizzard.new
+    raw_info = @api.get_character(name, realm)
+    return if raw_info.nil?
+    update_dependents(raw_info)    
+  end
+
+  def update_dependents(raw_info)
   end
 
   private
-  
-  def self.get_character_from_blizzard(name, realm)
-    url = blizzard_url(name, realm)
-    response = Blizzard.get(url)
-    return if response.body.nil? || response.code != 200
-    json_to_database_character(response.body)
-  end
-
-  def self.blizzard_url(name, realm)
-    realm_name = Realm.name_for_url(realm)
-    api_key = ENV['API_KEY']
-    "/character/#{realm_name}/#{name}?apikey=#{api_key}"
-  end
-  
-  def self.json_to_database_character(basic_info)
-    parsed_basic_info = JSON.parse(basic_info)
-    converted_info = convert_character(parsed_basic_info)
-    Character.create!(converted_info)
-  end
 
   def self.convert_character(character_info)
     faction = alliance_race?(character_info["race"]) ? ALLIANCE : HORDE

@@ -5,25 +5,51 @@ RSpec.describe Character, type: :model do
     context "when the character is not in the database" do
       before { Character.destroy_all }
 
-      context "when the character is valid" do
-        before { Realm.create!(name: "Earthen Ring", slug: "earthen-ring") }
+      it "should fetch the character's data from blizzard and store it" do
+        json_body = character_json_factory.create("Sal", "Earthen Ring")
+        stub = stub_request(:any, //).to_return(body: json_body, status: 200)
 
-        let(:json_body) { character_json_factory.create("Sal", "Earthen Ring") }
+        Character.refresh_individual(name: "Sal", realm: "Earthen Ring")
 
-        it "should fetch the character's data from blizzard and store it" do
-          url_pattern = /us.api.battle.net\/wow\/character\/earthen-ring\/Sal.*/
-          stub = stub_request(:get, url_pattern).
-                 to_return(body: json_body, status: 200)
-
-          Character.refresh_individual(name: "Sal", realm: "Earthen Ring")
-
-          expect(stub).to have_been_requested.once
-          expect(Character.count).to eq(1)
-          expect(Character.find_by_name("Sal").realm).to eq("Earthen Ring")
-        end
+        expect(Character.count).to eq(1)
+        expect(Character.find_by_name("Sal").realm).to eq("Earthen Ring")
       end
     end
-  end
+
+    context "when the character data is stale" do
+      before do
+        FactoryGirl.create(:character, name: "Cris", realm: "Earthen Ring",
+                           updated_at: 2.days.ago)
+      end
+      
+      it "should fetch the character's data from blizzard and store it" do
+        json_body = character_json_factory.create("Cris", "Earthen Ring")
+        stub = stub_request(:any, //).to_return(body: json_body, status: 200)
+
+        Character.refresh_individual(name: "Cris", realm: "Earthen Ring")
+
+        expect(stub).to have_been_requested.once
+        expect(Character.count).to eq(1)
+        expect(Character.find_by_name("Cris").realm).to eq("Earthen Ring")
+      end
+    end
+
+      context "when the character data is recent" do
+        before do
+          FactoryGirl.create(:character, name: "Sam", realm: "Earthen Ring",
+                           updated_at: 2.minutes.ago)
+      end
+      
+      it "should not fetch the character's data from blizzard" do
+        json_body = character_json_factory.create("Sam", "Earthen Ring")
+        stub = stub_request(:any, //).to_return(body: json_body, status: 200)
+
+        Character.refresh_individual(name: "Sam", realm: "Earthen Ring")
+
+        expect(stub).not_to have_been_requested
+      end
+    end
+end
   
   describe "#zone_summaries" do
     let(:character) { FactoryGirl.create(:character) }

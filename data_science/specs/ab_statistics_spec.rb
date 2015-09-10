@@ -9,10 +9,10 @@ describe ABStatistics do
   let(:ab_sample_stats)  { ABStatistics.new(ab_sample_cohort) }
 
   it "should load JSON dataset to cohort with associated results" do
-    expect(ab_small_stats.cohort_data).to eq({"A"=>[1, 1, 0]})
+    expect(ab_small_stats.cohort_data).to eq("A" => [1, 1, 0])
   end
 
-  context "#cohort_sample_size" do 
+  context "#cohort_sample_size" do
     let(:cohort) { "A" }
 
     it "should fail if asked for invalid cohort" do
@@ -25,7 +25,7 @@ describe ABStatistics do
     end
   end
 
-  context "#cohort_sample_success" do 
+  context "#cohort_sample_success" do
     let(:cohort) { "A" }
 
     it "should fail if asked for invalid cohort" do
@@ -38,7 +38,7 @@ describe ABStatistics do
     end
   end
 
-  context "#cohort_conversion_rate" do 
+  context "#cohort_conversion_rate" do
     let(:cohort) { "A" }
 
     it "should fail if asked for invalid cohort" do
@@ -51,7 +51,7 @@ describe ABStatistics do
     end
   end
 
-  context "#cohort_totals" do 
+  context "#cohort_totals" do
     let(:cohort) { "A" }
 
     it "should fail if asked for invalid cohort" do
@@ -60,7 +60,7 @@ describe ABStatistics do
 
     it "should return a hash of success and total sample for a cohort" do
       expect(ab_sample_stats.cohort_totals(cohort)).to be_a(Hash)
-      expect(ab_sample_stats.cohort_totals(cohort)).to eq({ :success => 50, :total => 100 })
+      expect(ab_sample_stats.cohort_totals(cohort)).to eq(success: 50, total: 100)
     end
   end
 

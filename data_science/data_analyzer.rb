@@ -2,7 +2,6 @@ require "json"
 require_relative "errors"
 
 class DataAnalyzer
-
   attr_accessor :filepath, :json_data
 
   ERROR_FILE_MISSING = "File does not exist, or was not specified."

@@ -62,9 +62,22 @@ RSpec.describe Quest, type: :model do
              to_return(body: quest_json_factory.create(1), status: 200).
              to_return(body: quest_json_factory.create(2), status: 200).
              to_return(body: NO_QUEST_ERROR, status: 404)
-      Quest.refresh_all(min_blizzard_id: 1, max_blizzard_id: 3)
+      Quest.populate_from_blizzard(min_blizzard_id: 1, max_blizzard_id: 3)
       expect(stub).to have_been_requested.times(3)
       expect(Quest.count).to eq(2)
+    end
+
+    it "should populate each quest correctly" do
+      stub = stub_request(:any, //).
+             to_return(body: quest_json_factory.create(1), status: 200)
+      Quest.populate_from_blizzard(min_blizzard_id: 1, max_blizzard_id: 1)
+      quest = Quest.last
+      expect(quest.id).not_to be_nil
+      expect(quest.blizzard_id_num).to eq(1)
+      expect(quest.title).to eq("Quest Number 1")
+      expect(quest.req_level).to eq(77)
+      expect(quest.level).to eq(80)
+      expect(quest.category_id).to eq(Category.find_by(name: "Icecrown").id)
     end
   end
 end

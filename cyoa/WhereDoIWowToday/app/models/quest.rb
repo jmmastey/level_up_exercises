@@ -62,7 +62,8 @@ class Quest < ActiveRecord::Base
     quest.each_with_object({}) do |key_val_pair, converted_quest|
       key = convert_key(key_val_pair[0])
       unless key.nil?
-        converted_quest[key] = convert_value(key, key_val_pair[1])
+        value = convert_value(key, key_val_pair[1])
+        converted_quest[key] = value
       end
     end
   end
@@ -73,7 +74,8 @@ class Quest < ActiveRecord::Base
 
   def self.convert_value(converted_key, value)
     return value unless converted_key == "category_id"
-    Category.find_by(name: value) || Category.create!(name: value)
+    category = Category.find_by(name: value) || Category.create!(name: value)
+    category.id
   end
 end
 

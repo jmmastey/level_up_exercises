@@ -1,4 +1,4 @@
-require_relative "DinoDex"
+require_relative "dino_dex"
 
 dino_dex   = DinoDex.new
 dino_files = FileFinder.new(".", "*.csv")

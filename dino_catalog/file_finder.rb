@@ -1,9 +1,8 @@
 class FileFinder
-
   attr_accessor :files, :file_type
   attr_reader :directory_path
-  
-  ERROR_NO_DIRECTORY  = "[Error] Directory specified does not exist."
+
+  ERROR_NO_DIRECTORY = "[Error] Directory specified does not exist."
 
   def initialize(directory_path = ".", file_type = "*")
     @files            = []
@@ -16,14 +15,10 @@ class FileFinder
   end
 
   def directory_path=(path)
-    return puts ERROR_NO_DIRECTORY if Dir.exists?(path) == false
+    return puts ERROR_NO_DIRECTORY if Dir.exist?(path) == false
     Dir.chdir(path)
     @directory_path = set_proper_path(Dir.pwd)
-    return true
-  end
-
-  def exists?(path)
-    Dir.exists?(path)
+    true
   end
 
   def search

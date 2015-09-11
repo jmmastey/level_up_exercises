@@ -1,4 +1,4 @@
-require_relative 'DinoDex'
+require_relative 'dino_dex'
 
 class DinodexShell
   VALID_OPTION = /[plsaeq]/
@@ -15,49 +15,16 @@ class DinodexShell
     gets_option
   end
 
-  def print_header
-    header_line(@header_line_length)
-    header_line(@header_line_length, @header_line_padding, "Jurassic Park, DinoDex Interface")
-    header_line(@header_line_length, @header_line_padding, "Version 4.0.5, Alpha E")
-    header_line(@header_line_length)
-  end
-
-  def header_line(line_length = 40, line_padding = 0, line_str = "")
-    return puts "#" * line_length if line_str == ""
-    empty_space = line_length - line_str.length - (line_padding*2)
-    return puts "#" * line_length if empty_space < 0
-    line_str = "##" + ( " " * (empty_space/2)) + line_str + (" " * (empty_space/2))
-    unless empty_space%2 == 0
-      printf(line_str + " ##\n")
-    else
-      printf(line_str + "##\n")
-    end
-  end
-
-  def print_line
-    puts "*"*80
-  end
-
-  def clear_screen
-    system("clear") || system("cls")
-  end
+  private
 
   def print_main
     clear_screen
     print_header
   end
 
-  def gets_option
-    state_info
-    state_options
-    print "> "
-    do_option(parse_option(gets))
-    gets_option
-  end
-
   def state_info
-    printf("Dinosaurs:\t\t(%s)\nWorking Path:\t\t(%s)\nCSV Files Found:\t(%s)\n\n", 
-      @dex.dinosaurs.length.to_s, 
+    printf("Dinosaurs:\t\t(%s)\nWorking Path:\t\t(%s)\nCSV Files Found:\t(%s)\n\n",
+      @dex.dinosaurs.length.to_s,
       @file_finder.directory_path,
       @file_finder.files.length.to_s)
   end
@@ -67,17 +34,36 @@ class DinodexShell
     puts "\t\t\t(E): Export JSON Dinosaurs, (Q): Quit DinoDex\n\n"
   end
 
-  def parse_option(input)
-    input = input.strip.downcase
-    return unless valid_option?(input)
-    input
+  def print_header
+    header_line(@header_line_length)
+    header_line(@header_line_length, @header_line_padding, "Jurassic Park, DinoDex Interface")
+    header_line(@header_line_length, @header_line_padding, "Version 4.0.5, Alpha E")
+    header_line(@header_line_length)
   end
 
-  def valid_option?(input)
-    valid = VALID_OPTION =~ input
-    return true if valid
-    puts "Not a valid option."
-    false
+  def header_line(line_length = 40, line_padding = 0, line_str = "")
+    return puts "#" * line_length if line_str == ""
+    empty_space = line_length - line_str.length - (line_padding * 2)
+    return puts "#" * line_length if empty_space < 0
+    line_str = "##" + (" " * (empty_space / 2)) + line_str + (" " * (empty_space / 2))
+    return printf(line_str + " ##\n") unless empty_space.even?
+    printf(line_str + "##\n")
+  end
+
+  def print_line
+    puts "*" * 80
+  end
+
+  def clear_screen
+    system("clear") || system("cls")
+  end
+
+  def gets_option
+    state_info
+    state_options
+    print "> "
+    do_option(parse_option(gets))
+    gets_option
   end
 
   def do_option(input)
@@ -101,6 +87,19 @@ class DinodexShell
       end
   end
 
+  def parse_option(input)
+    input = input.strip.downcase
+    return unless valid_option?(input)
+    input
+  end
+
+  def valid_option?(input)
+    valid = VALID_OPTION =~ input
+    return true if valid
+    puts "Not a valid option."
+    false
+  end
+
   def prompt_set_path
     printf "Please specify the CSV search path or (!Q)uit: "
     input = gets.strip
@@ -119,7 +118,7 @@ class DinodexShell
 
   def set_working_dir(dir = "")
     dir = "." if dir == ""
-    unless @file_finder.exists?(dir)
+    unless Dir.exist?(dir)
       puts "Directory specified does not exist."
       return false
     end
@@ -145,7 +144,7 @@ class DinodexShell
         print_main
       else
         clear_screen
-        print_header 
+        print_header
         puts "\nDinosaur Search Results:\n-----"
         search_hash = parse_search_options(input)
         @dex.select_hash(search_hash).print_data(search_hash.keys.unshift("name"))
@@ -213,5 +212,4 @@ class DinodexShell
     abort("\nExiting DinoDex Interface... Goodbye\n\n")
   end
 end
-
 DinodexShell.new.start_shell

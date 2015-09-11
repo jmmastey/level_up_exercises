@@ -1,5 +1,4 @@
 class DinoCatalog
-
   attr_accessor :dinosaurs
 
   def initialize(dinosaurs = [])
@@ -17,11 +16,11 @@ class DinoCatalog
     self
   end
 
-  def print_data(requestedData)
-    requestedData = Array(requestedData)
+  def print_data(requested_data)
+    requested_data = Array(requested_data)
     dinosaurs.each do |dinosaur|
       dino_data ||= ''
-      requestedData.each do |header_name|
+      requested_data.each do |header_name|
         dino_data << "#{dinosaur.instance_variable_get(("@#{header_name}"))} | "
       end
       puts dino_data.slice(0..-4)

@@ -1,5 +1,4 @@
 class Dinosaur
-
   attr_accessor :name, :location, :period, :weight, :walk_type, :description
   attr_reader :diet
 
@@ -8,31 +7,22 @@ class Dinosaur
     @diet = str
   end
 
-  def has?(key)
-    instance_variables.include?("@#{key}".to_sym) && !empty?(key)
-  end
-
-  def empty?(key)
-    instance_variable_get("@#{key}".to_sym).nil?
-  end
-
   def larger_than?(size)
-    return false unless has?("weight")
-    return Float(weight) > Float(size)
+    return false if weight.nil?
+    Float(weight) > Float(size)
   end
 
   def smaller_than?(size)
-    return false unless has?("weight")
+    return false if weight.nil?
     !larger_than?(size)
   end
-    
+
   def print_facts
     instance_variables.each do |instance_var|
-      unless self.instance_variable_get(("#{instance_var}")).nil?
-        fact_header  = "[#{clean_attr_name(instance_var).gsub(/[A-Za-z']+/,&:capitalize)}]"
-        fact_value   = "#{self.instance_variable_get(("#{instance_var}"))}"
-        printf("%-15s %s\n", fact_header, fact_value)
-      end
+      next unless instance_variable_get(("#{instance_var}"))
+      fact_header  = "[#{clean_attr_name(instance_var).gsub(/[A-Za-z']+/, &:capitalize)}]"
+      fact_value   = "#{instance_variable_get(("#{instance_var}"))}"
+      printf("%-15s %s\n", fact_header, fact_value)
     end
   end
 
@@ -40,7 +30,7 @@ class Dinosaur
     hash = {}
     instance_variables.each do |instance_var|
       fact_header  = "#{clean_attr_name(instance_var)}"
-      fact_value   = "#{self.instance_variable_get(("#{instance_var}"))}"
+      fact_value   = "#{instance_variable_get(("#{instance_var}"))}"
       hash[fact_header] = fact_value
     end
     hash

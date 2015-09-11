@@ -6,7 +6,7 @@ flight                      GET     /flights                                    
                             PUT     /flights/:id                                      flights#update            
                             DELETE  /flights/:id                                      flights#destroy            
 flight_search               GET     /flights/search                                   flights#search              
-flight_passengers           GET     /flights/:id/passengers                           flights#passengers                      
+flight_passengers           GET     /flights/:id/passengers                           passengers#index                      
 
 airport                     GET     /airports                                         airports#index        
                             POST    /airports                                         airports#create        
@@ -22,7 +22,8 @@ airplane                    GET     /airplanes/:id                              
                             DELETE  /airplanes/:id                                    airplanes#destroy
 airplane_search             GET     /airplanes/search                                 airplanes#search
 airplane_passengers         GET     /airplanes/:id/passengers                         airplanes#passengers
-airplane_flights            GET     /airplanes/:id/flights                            airplanes#flights
+airplane_refuel             GET     /airplanes/:id/refuel                             airplanes#refuel
+airplane_flights            GET     /airplanes/:id/flights                            flights#index
 
 airplane_maintenance        GET     /airplanes/:id/maintenance                        maintenance#index
                             POST    /airplanes/:id/maintenance                        maintenance#create
@@ -30,14 +31,19 @@ airplane_maintenance        GET     /airplanes/:id/maintenance                  
                             PUT     /airplanes/:id/maintenance/:maintenance_id        maintenance#update
                             DELETE  /airplanes/:id/maintenance/:maintenance_id        maintenance#destroy
 
-passenger                   GET     /passengers/                                      passengers#index
+passenger                   GET     /passengers                                       passengers#index
                             POST    /passengers                                       passengers#create
                             GET     /passengers/:id                                   passengers#show
                             PUT     /passengers/:id                                   passengers#update
                             DELETE  /passengers/:id                                   passengers#destroy
+passenger_search            GET     /passengers/search                                passengers#search
 
-bookings                    GET     /flights/:flight_id/bookings                      flights#index
-                            POST    /flights/:flight_id/bookings                      flights#create
-                            GET     /flights/:flight_id/bookings/:id                  flights#show
-                            PUT     /flights/:flight_id/bookings/:id                  flights#update
-                            DELETE  /flights/:flight_id/bookings/:id                  flights#destroy
+bookings                    GET     /flights/:flight_id/bookings                      bookings#index
+                            POST    /flights/:flight_id/bookings                      bookings#create
+                            GET     /flights/:flight_id/bookings/:id                  bookings#show
+                            PUT     /flights/:flight_id/bookings/:id                  bookings#update
+                            DELETE  /flights/:flight_id/bookings/:id                  bookings#destroy
+
+itineraries                 GET     /passengers/:id/flights                           flights#index
+                            PUT     /passengers/:id/flights/:id                       passengers#update_flight
+                            DELETE  /passengers/:id/flights/:id                       passengers#remove_flight

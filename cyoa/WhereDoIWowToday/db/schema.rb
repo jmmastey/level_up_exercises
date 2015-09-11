@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909143835) do
+ActiveRecord::Schema.define(version: 20150911155624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,15 +61,16 @@ ActiveRecord::Schema.define(version: 20150909143835) do
   create_table "quests", force: :cascade do |t|
     t.integer  "blizzard_id_num"
     t.string   "title"
-    t.string   "category"
     t.integer  "req_level"
     t.integer  "level"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "blizzard_faction_id_num"
+    t.integer  "category_id"
   end
 
   add_index "quests", ["blizzard_id_num"], name: "index_quests_on_blizzard_id_num", unique: true, using: :btree
+  add_index "quests", ["category_id"], name: "index_quests_on_category_id", using: :btree
 
   create_table "realms", force: :cascade do |t|
     t.string   "name"
@@ -100,4 +101,5 @@ ActiveRecord::Schema.define(version: 20150909143835) do
   add_foreign_key "character_zone_activities", "categories"
   add_foreign_key "character_zone_activities", "characters"
   add_foreign_key "character_zone_activities", "quests"
+  add_foreign_key "quests", "categories"
 end

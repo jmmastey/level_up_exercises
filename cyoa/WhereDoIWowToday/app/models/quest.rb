@@ -8,7 +8,7 @@ class Quest < ActiveRecord::Base
 
   KEY_MAPPINGS = { "id" => "blizzard_id_num",
                    "title" => "title",
-                   "category" => "category",
+                   "category" => "category_id",
                    "reqLevel" => "req_level",
                    "level" => "level",
                    "faction_id" => "blizzard_faction_id_num"}
@@ -61,12 +61,19 @@ class Quest < ActiveRecord::Base
   def self.convert_quest(quest)
     quest.each_with_object({}) do |key_val_pair, converted_quest|
       key = convert_key(key_val_pair[0])
-      converted_quest[key] = key_val_pair[1] unless key.nil?
+      unless key.nil?
+        converted_quest[key] = convert_value(key, key_val_pair[1])
+      end
     end
   end
   
   def self.convert_key(possible_key)
     KEY_MAPPINGS.fetch(possible_key, nil)
+  end
+
+  def self.convert_value(converted_key, value)
+    return value unless converted_key == "category_id"
+    Category.find_by(name: value) || Category.create!(name: value)
   end
 end
 

@@ -19,15 +19,15 @@ class Character < ActiveRecord::Base
 
   
   def self.refresh_individual(name:, realm:)
-    name = name.titleize
     character = Character.find_by(name: name, realm: realm)
     return new_character(name, realm) if character.nil?
     character.update_from_blizzard! if character.updated_at < 1.hour.ago
+    character
   end
 
   def self.new_character(name, realm)
     @api ||= Blizzard.new
-    raw_info = @api.get_character(name, realm)
+    raw_info = @api.get_character_quests(name, realm)
     return if raw_info.nil?
     converted_info = convert_character(raw_info)
     character = Character.create!(converted_info)
@@ -36,12 +36,23 @@ class Character < ActiveRecord::Base
 
   def update_from_blizzard!
     @api ||= Blizzard.new
-    raw_info = @api.get_character(name, realm)
+    raw_info = @api.get_character_quests(name, realm)
     return if raw_info.nil?
     update_dependents(raw_info)    
   end
 
   def update_dependents(raw_info)
+    known_quests = Quest.all.map &:blizzard_id_num
+    completed_quests = raw_info["quests"]
+    uncompleted_quests = known_quests - completed_quests
+    uncompleted_quests.each do |blizzard_id_num|
+      quest = Quest.find_by(blizzard_id_num: blizzard_id_num)
+
+      category = Category.find(quest.category_id)
+      CharacterZoneActivity.create!(character: self, quest: quest,
+                                      category: category)
+    end
+    self
   end
 
   private

@@ -49,8 +49,34 @@ RSpec.describe Character, type: :model do
         expect(stub).not_to have_been_requested
       end
     end
-end
-  
+  end
+
+  describe "#update_dependents" do
+    context "when the character is new" do
+      let(:character) do
+        FactoryGirl.create(:character, name: "Sal", realm: "Argent Dawn")
+      end
+      let(:json_body) { character_json_factory.create("Sal", "Argent Dawn") }
+      
+      context "when there are 2 quests the character has not completed" do
+        before do
+          [100, 101, 201].each do |id|
+            FactoryGirl.create(:quest, blizzard_id_num: id)
+          end
+        end
+
+        it "should create a character_zone_activity for each quest" do
+          CharacterZoneActivity.destroy_all
+          stub_request(:any, //).to_return(body: json_body, status: 200)
+          
+          character.update_dependents(JSON.parse(json_body))
+          
+          expect(CharacterZoneActivity.count).to eq(2)
+        end
+      end
+    end
+  end
+
   describe "#zone_summaries" do
     let(:character) { FactoryGirl.create(:character) }
 
@@ -101,6 +127,7 @@ def character_json_factory
      "achievementPoints": 16520,
      "thumbnail": "earthen-ring/133/4118149-avatar.jpg",
      "calcClass": "b",
+     "quests": [100, 171, 107],
      "totalHonorableKills": 2271,
     }.to_json
   end

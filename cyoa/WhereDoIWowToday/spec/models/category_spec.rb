@@ -46,14 +46,14 @@ RSpec.describe Category, type: :model do
   end
 
   describe "#character_quests" do
-    let(:zone) do
+    let!(:zone) do
       FactoryGirl.create(:category, name: "zone1", blizzard_type: "zone")
     end
     let(:character) { FactoryGirl.create(:character) }
       
     context "when there are 2 quests in the zone" do
-      let(:quest1) { FactoryGirl.create(:quest, category: zone) }
-      let(:quest2) { FactoryGirl.create(:quest, category: zone) }
+      let(:quest1) { FactoryGirl.create(:quest, category_name: "zone1") }
+      let(:quest2) { FactoryGirl.create(:quest, category_name: "zone1") }
 
       context "when the character has not completed 1 of the quests" do
         before do

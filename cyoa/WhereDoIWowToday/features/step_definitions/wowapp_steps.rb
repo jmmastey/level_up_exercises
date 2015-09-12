@@ -120,9 +120,7 @@ When(/^I request information for my character$/) do
 end
 
 When(/^I click the zone name in the zone summaries$/) do
-  REALMS.each do |realm_name|
-    FactoryGirl.create(:realm, name: realm_name)
-  end
+  FactoryGirl.create(:realm, name: VALID_REALM)
   visit "/"
   FactoryGirl.create(:character, name: VALID_NAME, realm: VALID_REALM)
   fill_in("Name", with: VALID_NAME)

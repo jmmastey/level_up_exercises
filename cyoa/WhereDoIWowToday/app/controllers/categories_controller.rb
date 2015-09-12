@@ -10,8 +10,9 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @quests = @category.character_quests(params[:character].to_i)
-    @achievements = @category.character_achievements(params[:character].to_i)
+    character = params[:character].nil? ? nil : params[:character].to_i
+    @quests = @category.character_quests(character)
+    @achievements = @category.character_achievements(character)
   end
 
   # GET /categories/new
@@ -71,6 +72,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name, :type)
+      params.require(:category).permit(:name, :blizzard_type)
     end
 end

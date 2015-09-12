@@ -67,10 +67,17 @@ RSpec.describe Category, type: :model do
         end
       end
 
-      context "when it is passed nil for the character_id" do
-        it "returns an empty list" do
-          quests = zone.character_quests(nil)
-          expect(quests).to be_empty
+      context "when the database includes quests for other zones" do
+        let!(:zone2) do
+          FactoryGirl.create(:category, name: "zone2", blizzard_type: "zone")
+        end
+        let(:quest3) { FactoryGirl.create(:quest, category_name: "zone2") }
+        
+        context "when there is no character_id" do
+          it "returns all the quests for the category" do
+            quests = zone.character_quests(nil)
+            expect(quests).to match_array([quest1, quest2])
+          end
         end
       end
     end

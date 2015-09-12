@@ -16,14 +16,10 @@ class Category < ActiveRecord::Base
   end
 
   def character_quests(character_id)
-    return [] if character_id.nil?
-    quests = []
-    character_zone_activities.each do |cza|
-      if cza.character.id == character_id
-        quests << cza.quest
-      end
-    end
-    quests.compact
+    return quests if character_id.nil?
+    character = Character.find(character_id)
+    czas = CharacterZoneActivity.where(character: character, category: self)
+    czas.collect(&:quest).compact
   end
 
   def character_achievements(character_id)

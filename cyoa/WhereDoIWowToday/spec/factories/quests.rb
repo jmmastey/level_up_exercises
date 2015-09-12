@@ -8,11 +8,11 @@ FactoryGirl.define do
       category_name "Duskwood"
     end
     
-    category_id do
+    categories do
       category = 
         Category.find_by(name: category_name) || FactoryGirl.create(
           :category, name: category_name)
-      category.id
+      [category]
     end
   end
 end

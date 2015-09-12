@@ -34,11 +34,13 @@ class CharactersController < ApplicationController
 
     respond_to do |format|
       if @character.save
-        format.html { redirect_to @character, notice: 'Character was successfully created.' }
+        format.html { redirect_to @character,
+                      notice: 'Character was successfully created.' }
         format.json { render :show, status: :created, location: @character }
       else
         format.html { render :new }
-        format.json { render json: @character.errors, status: :unprocessable_entity }
+        format.json { render json: @character.errors,
+                             status: :unprocessable_entity }
       end
     end
   end
@@ -48,11 +50,13 @@ class CharactersController < ApplicationController
   def update
     respond_to do |format|
       if @character.update(character_params)
-        format.html { redirect_to @character, notice: 'Character was successfully updated.' }
+        format.html { redirect_to @character,
+                      notice: 'Character was successfully updated.' }
         format.json { render :show, status: :ok, location: @character }
       else
         format.html { render :edit }
-        format.json { render json: @character.errors, status: :unprocessable_entity }
+        format.json { render json: @character.errors,
+                             status: :unprocessable_entity }
       end
     end
   end
@@ -62,7 +66,10 @@ class CharactersController < ApplicationController
   def destroy
     @character.destroy
     respond_to do |format|
-      format.html { redirect_to characters_url, notice: 'Character was successfully destroyed.' }
+      format.html do
+        redirect_to characters_url,
+                    notice: 'Character was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
@@ -73,7 +80,6 @@ class CharactersController < ApplicationController
       @character = Character.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def character_params
       params.require(:character).permit(:name, :realm)
     end

@@ -1,6 +1,6 @@
 class Quest < ActiveRecord::Base
   validates_presence_of :blizzard_id_num
-  has_many :categories
+  has_and_belongs_to_many :categories
   has_many :character_zone_activites
   # has_many :objectives
 
@@ -8,7 +8,7 @@ class Quest < ActiveRecord::Base
 
   KEY_MAPPINGS = { "id" => "blizzard_id_num",
                    "title" => "title",
-                   "category" => "category_id",
+                   "category" => "categories",
                    "reqLevel" => "req_level",
                    "level" => "level",
                    "faction_id" => "blizzard_faction_id_num"}
@@ -73,9 +73,9 @@ class Quest < ActiveRecord::Base
   end
 
   def self.convert_value(converted_key, value)
-    return value unless converted_key == "category_id"
+    return value unless converted_key == "categories"
     category = Category.find_by(name: value) || Category.create!(name: value)
-    category.id
+    [category]
   end
 end
 

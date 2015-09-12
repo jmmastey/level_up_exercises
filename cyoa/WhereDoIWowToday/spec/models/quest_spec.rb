@@ -77,7 +77,7 @@ RSpec.describe Quest, type: :model do
       expect(quest.title).to eq("Quest Number 1")
       expect(quest.req_level).to eq(77)
       expect(quest.level).to eq(80)
-      expect(quest.category_id).to eq(Category.find_by(name: "Icecrown").id)
+      expect(quest.categories).to match_array(Category.find_by(name: "Icecrown"))
     end
   end
 end

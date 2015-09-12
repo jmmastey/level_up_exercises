@@ -42,17 +42,20 @@ class Character < ActiveRecord::Base
   end
 
   def update_dependents(raw_info)
-    known_quests = Quest.all.map &:blizzard_id_num
     completed_quests = raw_info["quests"]
-    uncompleted_quests = known_quests - completed_quests
-    uncompleted_quests.each do |blizzard_id_num|
-      quest = Quest.find_by(blizzard_id_num: blizzard_id_num)
-
-      category = Category.find(quest.category_id)
-      CharacterZoneActivity.create!(character: self, quest: quest,
-                                      category: category)
+    Quest.all.each do |quest|
+      if completed_quests.include?(quest.blizzard_id_num)
+        czas = CharacterZoneActivity.where(quest: quest, character: self)
+        czas.each.map(&:destroy) unless czas.empty?
+      else
+        quest.categories.each do |category|
+          if category.zone?
+            CharacterZoneActivity.find_or_create(
+              quest: quest, category: category, character: self)
+          end
+        end
+      end
     end
-    self
   end
 
   private
@@ -75,10 +78,12 @@ class Character < ActiveRecord::Base
   def zone_summaries
     czas = CharacterZoneActivity.where(character_id: self[:id]) || []
     czas.each.with_object(empty_summaries) do |cza, summaries|
-      zone = cza.zone.name
-      summaries[zone][:id] = cza.zone.id
-      summaries[zone][:quest_count] += cza.quest_count
-      summaries[zone][:achievement_count] += cza.achievement_count
+      zone = cza.zone
+      break if zone.nil?
+      zone_name = zone.name
+      summaries[zone_name][:id] = zone.id
+      summaries[zone.name][:quest_count] += cza.quest_count
+      summaries[zone.name][:achievement_count] += cza.achievement_count
     end
   end
 

@@ -13,8 +13,7 @@ FactoryGirl.define do
 
     trait :quest do
       quest do
-        FactoryGirl.create(:quest, category_name: category_name,
-                           blizzard_faction_id_num: activity_faction_id)
+        FactoryGirl.create(:quest, blizzard_faction_id_num: activity_faction_id)
       end
     end
 

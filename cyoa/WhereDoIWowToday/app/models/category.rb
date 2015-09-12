@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
   has_many :character_zone_activities, dependent: :destroy
-  has_many :quests, through: :character_zone_activity
+  has_and_belongs_to_many :quests
   has_many :achievements, through: :character_zone_activity
   
   def zone?

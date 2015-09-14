@@ -6,7 +6,7 @@ RSpec.describe Character, type: :model do
       before { Character.destroy_all }
 
       it "should fetch the character's data from blizzard and store it" do
-        stub_api_response("Sal", "Earthen Ring")
+        stub_character_api("Sal", "Earthen Ring")
 
         Character.refresh_individual(name: "Sal", realm: "Earthen Ring")
 
@@ -22,7 +22,7 @@ RSpec.describe Character, type: :model do
       end
       
       it "should fetch the character's data from blizzard and store it" do
-        stub = stub_api_response("Cris", "Earthen Ring")
+        stub = stub_character_api("Cris", "Earthen Ring")
 
         Character.refresh_individual(name: "Cris", realm: "Earthen Ring")
 
@@ -39,7 +39,7 @@ RSpec.describe Character, type: :model do
       end
       
       it "should not fetch the character's data from blizzard" do
-        stub = stub_api_response("Sam", "Earthen Ring")
+        stub = stub_character_api("Sam", "Earthen Ring")
 
         Character.refresh_individual(name: "Sam", realm: "Earthen Ring")
 
@@ -142,14 +142,13 @@ RSpec.describe Character, type: :model do
   end
 end
 
-
-def stub_api_response(name, realm)
+def stub_character_api(name, realm)
   raw_data = raw_character_data_factory.create(name, realm)
   body = raw_data.to_json
-  stub_request(:any, //).to_return(body: body, status: 200)
+  stub_request(:any, /character/).to_return(body: body, status: 200)
 end
 
-def raw_character_data_factory #character_json_factory
+def raw_character_data_factory
   def create(name, realm)
     {
      "lastModified" => 1439777849000,
@@ -165,6 +164,6 @@ def raw_character_data_factory #character_json_factory
      "calcClass" => "b",
      "quests" => [100, 171, 107],
      "totalHonorableKills" => 2271,
-    }#.to_json
+    }
   end
 end

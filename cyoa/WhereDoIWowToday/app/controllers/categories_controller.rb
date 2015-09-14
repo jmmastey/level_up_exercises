@@ -12,7 +12,6 @@ class CategoriesController < ApplicationController
   def show
     character = params[:character].nil? ? nil : params[:character].to_i
     @quests = @category.character_quests(character)
-    @achievements = @category.character_achievements(character)
   end
 
   # GET /categories/new

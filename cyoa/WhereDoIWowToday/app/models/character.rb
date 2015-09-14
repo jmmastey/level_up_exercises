@@ -15,7 +15,6 @@ class Character < ActiveRecord::Base
 
   has_many :character_zone_activities, dependent: :destroy
   has_many :quests, through: :character_zone_activity
-  has_many :achievements, through: :character_zone_activity
 
   def self.refresh_individual(name:, realm:)
     character = Character.find_by(name: name, realm: realm)
@@ -103,11 +102,10 @@ class Character < ActiveRecord::Base
 
   def new_zero_summary(zone_name)
     id = Category.name_to_id(zone_name)
-    { zone_name => { quest_count: 0, achievement_count: 0, id: id } }
+    { zone_name => { quest_count: 0, id: id } }
   end
 
   def add_to_summary!(character_zone_activity, summary)
     summary[:quest_count] += character_zone_activity.quest_count
-    summary[:achievement_count] += character_zone_activity.achievement_count
   end
 end

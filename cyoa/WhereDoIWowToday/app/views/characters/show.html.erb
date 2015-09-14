@@ -16,7 +16,6 @@
     <tr>
       <th>Zone</th>
       <th>Quests</th>
-      <th>Achievements</th>
     </tr>
     <% @zone_summaries.each do |name, data| %>
       <tr>
@@ -24,9 +23,6 @@
 	  <%= link_to name, "/categories/#{data[:id]}?character=#{@character.id}" %>
 	</td>
         <td id=<%= "#{name}_quests" %>> <%= data[:quest_count] %></td>
-        <td id=<%= "#{name}_achievements" %>>
-	  <%= data[:achievement_count] %>
-	</td>
       </tr>
     <% end %>
 </p>

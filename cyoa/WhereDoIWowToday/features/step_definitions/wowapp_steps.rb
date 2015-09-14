@@ -29,14 +29,6 @@ Given(/^a zone with (\d+) uncompleted quests?$/) do |count|
   end
 end
 
-Given(/^a zone with (\d+) uncompleted achievements$/) do |count|
-  @test_character = FactoryGirl.create(:character)
-  count.to_i.times do
-    FactoryGirl.create(:character_zone_activity, :achievement,
-                       character: @test_character)
-  end
-end
-
 Given(/^a zone with (\d+) uncompleted objective restricted to the other faction$/) do |count|
   @test_character = FactoryGirl.create(:character, blizzard_faction_id_num: "1")
   count.to_i.times do
@@ -59,14 +51,6 @@ Given(/^(\d+) quests? not completed by a different character$/) do |count|
     FactoryGirl.create(:character_zone_activity, :quest,
                        character: other_character, category_name: DEFAULT_ZONE)
   end
-end
-
-Given(/^a zone with (\d+) achievement not completed by my character$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given(/^(\d+) achievements not completed by a different character$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
 end
 
 Given(/^(\d+) objectives$/) do |arg1|
@@ -180,7 +164,6 @@ end
 Then(/^I should see the zone's details$/) do
   step "I should see \"#{DEFAULT_ZONE}\""
   step "I should see \"Uncompleted quests\""
-  step "I should see \"Uncompleted achievements\""
 end
 
 Then(/^I should see (\d+) objectives?$/) do |count|

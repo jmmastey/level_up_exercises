@@ -12,17 +12,9 @@ Feature: List the number of each type of objective available in each zone
     When I request information for my character
     Then the zone's row should specify 3 quests
 
-    Given a zone with 2 uncompleted achievements
-    When I request information for my character
-    Then the zone's row should specify 2 achievements
-
     Given a zone with 0 uncompleted quests
     When I request information for my character
     Then the zone's row should specify 0 quests
-
-    Given a zone with 0 uncompleted achievements
-    When I request information for my character
-    Then the zone's row should specify 0 achievements
 
     Given a zone with 1 uncompleted quest
     When I click the zone name in the zone summaries

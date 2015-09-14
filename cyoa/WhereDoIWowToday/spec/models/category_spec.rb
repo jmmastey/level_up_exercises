@@ -82,8 +82,4 @@ RSpec.describe Category, type: :model do
       end
     end
   end
-  
-  describe "#character_achievements" do
-    skip
-  end
 end

@@ -16,11 +16,4 @@
       <li> <%= quest.title %> </li>
     <% end %>
 </ul>
-
-<ul> Uncompleted achievements  <br>
-    <%= "No remaining achievements" if @achievements.empty? %>
-    <% @achievements.each do |achievement| %>
-      <li> <%= achievement.title %> </li>
-    <% end %>
-</ul>
 <br>

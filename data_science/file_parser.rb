@@ -1,18 +1,12 @@
 require "json"
 require_relative "errors"
 
-class DataAnalyzer
-  attr_accessor :filepath, :json_data
-
+class FileParser
   ERROR_FILE_MISSING = "File does not exist, or was not specified."
 
-  def initialize(filepath)
+  def self.parse_data(filepath)
     raise MissingFileError, ERROR_FILE_MISSING unless File.exist?(filepath)
-    @filepath   = filepath
-    @json_data  = JSON.parse(File.read(filepath))
-  end
-
-  def parse_data
+    json_data = JSON.parse(File.read(filepath))
     json_hash = {}
     json_data.each do |data_line|
       json_hash[data_line['cohort']] ||= []

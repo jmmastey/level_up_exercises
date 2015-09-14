@@ -25,22 +25,6 @@ RSpec.describe CharacterZoneActivity, type: :model do
     end
   end
 
-  describe "#achievement_count" do
-    context "when there are no achievements" do
-      before { FactoryGirl.create :character_zone_activity }
-
-      it { "should be 0" }
-    end
-
-    xcontext "when there are 2 achievements" do
-      before do
-        2.times { FactoryGirl.create(:character_zone_activity, :achievement) }
-      end
-      
-      it { "should be 2" }
-    end
-  end
-
   describe "#find_or_create" do
     context "when the cza exists" do
       let(:cza) { FactoryGirl.create(:character_zone_activity, :quest) }

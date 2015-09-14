@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Blizzard, type: :model do
+  let(:api) { Blizzard.new }
   describe "#get_character" do
-    let(:api) { Blizzard.new }
     let(:url_pattern) { /character\/Earthen%20Ring\/Nell\?apikey=.*/ }
     
     it "should retrieve character information from battlenet" do
@@ -25,7 +25,6 @@ RSpec.describe Blizzard, type: :model do
   end
   
   describe "#get_character_quests" do
-    let(:api) { Blizzard.new }
     let(:url_patterns) do
       [/character\/Earthen%20Ring\/Nell\?apikey=.*&fields=quests/,
        /character\/Earthen%20Ring\/Nell\?fields=quests&apikey=.*/]
@@ -55,8 +54,10 @@ RSpec.describe Blizzard, type: :model do
   end
 
   describe "#get_quest" do
-    let(:api) { Blizzard.new }
-    let(:url_pattern) { /^https:\/\/us.api.battle.net\/wow\/quest\/.*/ }
+
+    let(:url_pattern) do
+      /^https:\/\/us.api.battle.net\/wow\/quest\/.*\?apikey=./
+    end
     
     it "should retrieve quest information from battlenet" do
       stub_request(:get, url_pattern).
@@ -76,4 +77,28 @@ RSpec.describe Blizzard, type: :model do
       expect(quest).to be_nil
     end
   end
+
+  describe "#get_realm_status" do
+    let(:url_pattern) { /us.api.battle.net\/wow\/realm\/status\?apikey=./ }
+    let(:realm_statuses) { IO.read("spec/test_data/realm_status_body.txt") }
+
+    it "should retrieve realm status information from battlenet" do
+      stub = stub_request(:get, url_pattern).
+             to_return(body: realm_statuses, status: 200)
+
+      statuses = api.get_realm_status
+
+      realms = statuses["realms"]
+      expect(realms.length).to eq(2)
+    end
+
+      it "should return nil if there was an error"do
+      stub_request(:get, url_pattern).
+        to_return(body: realm_statuses, status: 404)
+
+      realms = api.get_realm_status
+
+      expect(realms).to be_nil
+    end
+end
 end

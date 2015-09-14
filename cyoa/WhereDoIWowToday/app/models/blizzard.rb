@@ -1,11 +1,11 @@
 require 'uri'
 
 class Blizzard
+  MAX_QUERIES_BLIZZARD_PERMITS_PER_SECOND = 10
+
   include HTTParty
   base_uri 'https://us.api.battle.net/wow'
 
-  MAX_QUERIES_BLIZZARD_PERMITS_PER_SECOND = 10
-  
   def initialize(api_key: nil)
     api_key = ENV['API_KEY'] if api_key.nil?
     @options = { query: { apikey: api_key } }
@@ -25,6 +25,10 @@ class Blizzard
 
   def get_quest(id)
     get "/quest/#{id}"
+  end
+
+  def get_realm_status
+    get "/realm/status"
   end
 
   private

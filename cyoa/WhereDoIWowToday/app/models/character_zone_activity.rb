@@ -5,7 +5,7 @@ class CharacterZoneActivity < ActiveRecord::Base
   belongs_to :category
   belongs_to :quest
   belongs_to :achievement
-  
+
   def zone
     category if category.zone?
   end
@@ -13,7 +13,7 @@ class CharacterZoneActivity < ActiveRecord::Base
   def quest_count
     quest.nil? ? 0 : 1
   end
-  
+
   def achievement_count
     achievement.nil? ? 0 : 1
   end

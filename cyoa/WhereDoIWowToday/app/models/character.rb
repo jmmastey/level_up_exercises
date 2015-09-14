@@ -1,11 +1,4 @@
 class Character < ActiveRecord::Base
-  validates_presence_of :name, :realm
-  validates_uniqueness_of :name , scope: :realm
-
-  has_many :character_zone_activities, dependent: :destroy
-  has_many :quests, through: :character_zone_activity
-  has_many :achievements, through: :character_zone_activity
-
   ALLIANCE = 1
   HORDE = 2
   ALLIANCE_RACES = [1, # human
@@ -17,7 +10,13 @@ class Character < ActiveRecord::Base
                     25, # alliance pandaren
                    ]
 
-  
+  validates_presence_of :name, :realm
+  validates_uniqueness_of :name, scope: :realm
+
+  has_many :character_zone_activities, dependent: :destroy
+  has_many :quests, through: :character_zone_activity
+  has_many :achievements, through: :character_zone_activity
+
   def self.refresh_individual(name:, realm:)
     character = Character.find_by(name: name, realm: realm)
     return new_character(name, realm) if character.nil?
@@ -34,32 +33,6 @@ class Character < ActiveRecord::Base
     character.update_dependents(raw_info)
   end
 
-  def update_from_blizzard!
-    @api ||= Blizzard.new
-    raw_info = @api.get_character_quests(name, realm)
-    return if raw_info.nil?
-    update_dependents(raw_info)    
-  end
-
-  def update_dependents(raw_info)
-    completed_quests = raw_info["quests"]
-    Quest.all.each do |quest|
-      if completed_quests.include?(quest.blizzard_id_num)
-        czas = CharacterZoneActivity.where(quest: quest, character: self)
-        czas.each.map(&:destroy) unless czas.empty?
-      else
-        quest.categories.each do |category|
-          if category.zone?
-            CharacterZoneActivity.find_or_create(
-              quest: quest, category: category, character: self)
-          end
-        end
-      end
-    end
-  end
-
-  private
-
   def self.convert_character(character_info)
     faction = alliance_race?(character_info["race"]) ? ALLIANCE : HORDE
     {
@@ -68,47 +41,73 @@ class Character < ActiveRecord::Base
       blizzard_faction_id_num: faction,
     }
   end
+  private_class_method :convert_character
 
   def self.alliance_race?(race)
     ALLIANCE_RACES.include? race
   end
+  private_class_method :alliance_race?
 
-  public
-  
+  def update_from_blizzard!
+    @api ||= Blizzard.new
+    raw_info = @api.get_character_quests(name, realm)
+    return if raw_info.nil?
+    update_dependents(raw_info)
+  end
+
+  def update_dependents(raw_info)
+    completed_quests = raw_info["quests"]
+    Quest.all.each do |quest|
+      update_character_zone_activities(quest, completed_quests)
+    end
+  end
+
+  def update_character_zone_activities(quest, completed_quests)
+    if completed_quests.include?(quest.blizzard_id_num)
+      destroy_where(quest: quest, character: self)
+    else
+      create_character_zone_activities(quest)
+    end
+  end
+
+  def destroy_where(args)
+    character_zone_activities = CharacterZoneActivity.where(args)
+    return if character_zone_activities.empty?
+    character_zone_activities.each.map(&:destroy)
+  end
+
+  def create_character_zone_activities(quest)
+    quest.categories.each do |category|
+      if category.zone?
+        CharacterZoneActivity.find_or_create(
+          quest: quest, category: category, character: self)
+      end
+    end
+  end
+
   def zone_summaries
     czas = CharacterZoneActivity.where(character_id: self[:id]) || []
     czas.each.with_object(empty_summaries) do |cza, summaries|
-      zone = cza.zone
-      break if zone.nil?
-      zone_name = zone.name
-      summaries[zone_name][:id] = zone.id
-      summaries[zone.name][:quest_count] += cza.quest_count
-      summaries[zone.name][:achievement_count] += cza.achievement_count
+      break if cza.zone.nil?
+      add_to_summary!(cza, summaries[cza.zone.name])
     end
   end
 
   private
-  
+
   def empty_summaries
     Category.all_zones.each.with_object({}) do |zone, summaries|
-      summaries.merge! zero_summary(zone.name)
+      summaries.merge! new_zero_summary(zone.name)
     end
   end
 
-  def zero_summary(name)
-    id = Category.name_to_id(name)
-    { name => { quest_count: 0, achievement_count: 0, id: id } }
+  def new_zero_summary(zone_name)
+    id = Category.name_to_id(zone_name)
+    { zone_name => { quest_count: 0, achievement_count: 0, id: id } }
+  end
+
+  def add_to_summary!(character_zone_activity, summary)
+    summary[:quest_count] += character_zone_activity.quest_count
+    summary[:achievement_count] += character_zone_activity.achievement_count
   end
 end
-
-### alliance races
-# 1 human
-# 3 dwarf
-# 4 night elf
-# 7 gnome
-# 11 draenei
-# 22 worgen
-# 25 pandaren
-
-### horde races
-# 26 pandaren

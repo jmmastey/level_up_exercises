@@ -29,7 +29,7 @@ Given(/^a zone with (\d+) uncompleted quests?$/) do |count|
   end
 end
 
-Given(/^a zone with (\d+) uncompleted objective restricted to the other faction$/) do |count|
+Given(/^a zone with (\d+) uncompleted quest restricted to the other faction$/) do |count|
   @test_character = FactoryGirl.create(:character, blizzard_faction_id_num: "1")
   count.to_i.times do
     FactoryGirl.create(:character_zone_activity, activity_faction_id: "2",

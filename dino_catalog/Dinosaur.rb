@@ -1,10 +1,21 @@
 class Dinosaur
-  attr_accessor :name, :location, :period, :weight, :walk_type, :description
-  attr_reader :diet
+  attr_accessor :name, :continent, :period, :weight, :walking, :description, :diet
 
-  def diet=(str)
-    str = ("Carnivore" if str == "Yes") || (nil if str == "No")
-    @diet = str
+  DATA_CONVERSIONS = {
+    Yes:  "Carnivore",
+    No:   "Herbivore",
+  }
+
+  def initialize(args)
+    args.each do |key, value|
+      value = normalize_data(value)
+      instance_variable_set("@#{key}", value)
+    end
+  end
+
+  def normalize_data(data = "")
+    return data if data.nil? || DATA_CONVERSIONS[(data.to_sym)].nil?
+    DATA_CONVERSIONS[data.to_sym]
   end
 
   def larger_than?(size)
@@ -17,23 +28,21 @@ class Dinosaur
     !larger_than?(size)
   end
 
-  def print_facts
-    instance_variables.each do |instance_var|
-      next unless instance_variable_get(("#{instance_var}"))
-      fact_header  = "[#{clean_attr_name(instance_var).gsub(/[A-Za-z']+/, &:capitalize)}]"
-      fact_value   = "#{instance_variable_get(("#{instance_var}"))}"
-      printf("%-15s %s\n", fact_header, fact_value)
+  def export_facts(facts = "")
+    to_hash.each do |header, value|
+      next if value.empty?
+      header = header.gsub(/[A-Za-z']+/, &:capitalize)
+      facts << sprintf("%-15s %s\n", header, value)
     end
+    facts
   end
 
-  def export_hash
-    hash = {}
-    instance_variables.each do |instance_var|
-      fact_header  = "#{clean_attr_name(instance_var)}"
-      fact_value   = "#{instance_variable_get(("#{instance_var}"))}"
-      hash[fact_header] = fact_value
+  def to_hash
+    instance_variables.each_with_object({}) do |var, data|
+      fact_header  = "#{clean_attr_name(var)}"
+      fact_value   = "#{instance_variable_get(var)}"
+      data[fact_header] = fact_value
     end
-    hash
   end
 
   private

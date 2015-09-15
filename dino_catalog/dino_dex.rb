@@ -19,25 +19,20 @@ class DinoDex
   end
 
   def import_csv_file(csv_file_path)
-    extract_rows(csv_file_path)
-    normalize_headers(@csv_rows)
-    @csv_rows.each_index { |index| dinosaurs << create_dinosaur(@csv_rows[index]) }
-  end
-
-  def empty?
-    dinosaurs.length == 0
+    extract_data(csv_file_path)
+    @dinosaurs.concat(@csv_rows.collect { |row| Dinosaur.new(row) })
   end
 
   def select(key, value)
-    DinoCatalog.new(dinosaurs).filter(key, value)
+    DinoCatalog.new(@dinosaurs).filter(key, value)
   end
 
   def select_larger_than(value)
-    DinoCatalog.new(dinosaurs.select { |dinosaur| dinosaur.larger_than?(value) })
+    DinoCatalog.new(@dinosaurs.select { |dinosaur| dinosaur.larger_than?(value) })
   end
 
   def select_smaller_than(value)
-    DinoCatalog.new(dinosaurs.select { |dinosaur| dinosaur.smaller_than?(value) })
+    DinoCatalog.new(@dinosaurs.select { |dinosaur| dinosaur.smaller_than?(value) })
   end
 
   def select_hash(args)
@@ -47,46 +42,32 @@ class DinoDex
   end
 
   def select_dinosaur(dinosaur_name)
-    dinosaurs.each do |dinosaur|
-      return dinosaur if dinosaur.name.downcase == dinosaur_name.downcase
-    end
-    nil
+    match = dinosaurs.select { |dino| dino.name.downcase == dinosaur_name.downcase }
+    match[0]
   end
 
-  def export_json
+  def to_json
     {
-      "dinosaurs" => dinosaurs.map(&:export_hash),
+      dinosaurs: dinosaurs.map(&:to_hash),
     }.to_json
   end
 
   private
 
-  def extract_rows(csv_file_path)
+  def extract_data(csv_file_path)
+    @csv_rows = []
     CSV.foreach(csv_file_path, headers: true, header_converters: :symbol) do |row|
-      (@csv_rows ||= []) << row
+      @csv_rows << clean_row(row)
     end
   end
 
-  def normalize_headers(rows)
-    rows.each do |row|
-      HEADER_NORMALIZE.each do |old_header, new_header|
-        next unless row.header?(old_header)
-        row_value = row[old_header]
-        row.delete(old_header)
-        row[new_header] = row_value
-      end
+  def clean_row(csv_row)
+    return csv_row if (HEADER_NORMALIZE.keys & csv_row.headers).empty?
+    (HEADER_NORMALIZE.keys & csv_row.headers).each do |matched_key|
+      value = csv_row[matched_key]
+      csv_row.delete(matched_key)
+      csv_row[HEADER_NORMALIZE[matched_key]] = value
     end
-  end
-
-  def create_dinosaur(csv_row)
-    dinosaur = Dinosaur.new
-    dinosaur.diet         = csv_row[:diet]
-    dinosaur.name         = csv_row[:name]
-    dinosaur.period       = csv_row[:period]
-    dinosaur.weight       = csv_row[:weight]
-    dinosaur.walk_type    = csv_row[:walking]
-    dinosaur.location     = csv_row[:continent]
-    dinosaur.description  = csv_row[:description]
-    dinosaur
+    csv_row
   end
 end

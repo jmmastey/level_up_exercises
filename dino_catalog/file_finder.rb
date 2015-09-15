@@ -10,24 +10,20 @@ class FileFinder
     @directory_path   = directory_path
 
     Dir.chdir(@directory_path)
-    @directory_path = set_proper_path(Dir.pwd)
+    @directory_path = File.join(Dir.pwd, "/")
     search
   end
 
   def directory_path=(path)
-    return puts ERROR_NO_DIRECTORY if Dir.exist?(path) == false
+    return puts ERROR_NO_DIRECTORY unless Dir.exist?(path)
     Dir.chdir(path)
-    @directory_path = set_proper_path(Dir.pwd)
+    @directory_path = File.join(Dir.pwd, "/")
     true
   end
 
   def search
     @files = []
     Dir.glob(file_type) { |file_name| @files.push(@directory_path + file_name) }
-    files.length
-  end
-
-  def set_proper_path(directory_path)
-    return directory_path << '/' unless directory_path.end_with?('/')
+    files
   end
 end

@@ -20,7 +20,7 @@
 # only needed for tests that try to make calls to external sites, so might
 # need to move out of this file someday if it's slowing down other tests.
 require 'webmock/rspec' 
-
+require 'devise'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -101,4 +101,6 @@ RSpec.configure do |config|
   # only needed for tests that try to make calls to external sites, so might
   # need to move out of this file someday if it's slowing down other tests.
   config.include WebMock::API
+
+  config.include Devise::TestHelpers, type: :controller
 end

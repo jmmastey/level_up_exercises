@@ -1,15 +1,10 @@
 Rails.application.routes.draw do
-  resources :realms
-
+  resources :characters
+  resources :quests
   resources :categories
-
   resources :character_zone_activities
 
   get 'welcome/index'
-
-  resources :characters
-  resources :quests
-  resources :character_zone_activities
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,5 +1,5 @@
 class Quest < ActiveRecord::Base
-  MAX_BLIZZARD_QUEST_ID = 9  # 99999999999 ?
+  MAX_BLIZZARD_QUEST_ID = 17_000
 
   KEY_MAPPINGS = { "id" => "blizzard_id_num",
                    "title" => "title",
@@ -9,24 +9,15 @@ class Quest < ActiveRecord::Base
                    "faction_id" => "blizzard_faction_id_num" }
 
   validates_presence_of :blizzard_id_num
+  validates_presence_of :title
   has_and_belongs_to_many :categories
   has_many :character_zone_activites
-  # has_many :objectives
-
-  def self.refresh_all(min_blizzard_id: 1,
-                       max_blizzard_id: MAX_BLIZZARD_QUEST_ID)
-    if Quest.count > 0
-      latest = Quest.all.order(:updated_at).last
-      return if latest.updated_at > 1.week.ago
-    end
-    populate_from_blizzard(min_blizzard_id: min_blizzard_id,
-                           max_blizzard_id: max_blizzard_id)
-  end
 
   def self.populate_next_batch(count: 500)
-    latest_stored = Quest.order(:blizzard_id_num).last
-    min_to_fetch = 1 + latest_stored.blizzard_id_num
-    max_to_fetch = min_to_fetch + count
+    return if count < 1
+    last_stored = Quest.order(:blizzard_id_num).last
+    min_to_fetch = last_stored.nil? ? 1 : 1 + last_stored.blizzard_id_num
+    max_to_fetch = min_to_fetch + count - 1
     populate_from_blizzard(min_blizzard_id: min_to_fetch,
                            max_blizzard_id: max_to_fetch)
   end

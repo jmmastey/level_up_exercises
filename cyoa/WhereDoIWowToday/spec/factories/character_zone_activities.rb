@@ -16,9 +16,5 @@ FactoryGirl.define do
         FactoryGirl.create(:quest, blizzard_faction_id_num: activity_faction_id)
       end
     end
-
-    trait :achievement do
-      achievement { FactoryGirl.create(:achievement_in_duskwood) }
-    end
   end
 end

@@ -19,6 +19,26 @@ Given(/^the account "([^"]*)" does not exist$/) do |arg1|
   visit '/'
 end
 
+Given(/^I am logged in as an admin$/) do
+  stub_request(:any, /us.api.battle.net/)
+  visit "/"
+  admin = FactoryGirl.create(:admin, password: VALID_PASSWORD)
+  click_link("Login")
+  fill_in("user_email", with: admin.email)
+  fill_in("user_password", with: VALID_PASSWORD)
+  click_button("Log in")
+end
+
+Given(/^I am not logged in as an admin$/) do
+  stub_request(:any, /us.api.battle.net/)
+  visit "/"
+  user = FactoryGirl.create(:user, password: VALID_PASSWORD)
+  click_link("Login")
+  fill_in("user_email", with: user.email)
+  fill_in("user_password", with: VALID_PASSWORD)
+  click_button("Log in")
+end
+
 When(/^I register with#{EMAIL},?#{PASSWORD},?#{CONFIRM}$/) do |name, pass, conf|
   fill_in("user_email", with: name || VALID_EMAIL)
   fill_in("user_password", with: pass || VALID_PASSWORD)

@@ -144,7 +144,8 @@ class DinoDexShell
   end
 
   def parse_search_options(params)
-    params.delete(' ').delete("\t").split(',').each_with_object({}) do |param, args|
+    params.gsub!(/[\s\t]/, '')
+    params.split(',').each_with_object({}) do |param, args|
       param = param.split(':')
       args[param[0].to_sym] = param[1]
     end
@@ -153,7 +154,7 @@ class DinoDexShell
   def prompt_load_csv
     puts "Loading CSV files from working path..."
     @file_finder.search
-    if file_finder.files.length == 0
+    if file_finder.files.empty?
       clear_screen
       print_header
       puts "No CSV files found in current directory. Try changing the path and load again.\n\n"

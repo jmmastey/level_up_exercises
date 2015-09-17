@@ -1,6 +1,6 @@
 Feature: A todo list for zone objectives
   As a user
-  I want to make an objective todo list for a zone
+  I want to make a todo list for a zone
   So that I can plan which objectives to do
 
   Scenario: It should be possible to create a todo list by adding an objective

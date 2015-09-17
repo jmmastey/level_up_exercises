@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  has_many :character_zone_activities, dependent: :destroy
+  has_many :activities, dependent: :destroy
   has_and_belongs_to_many :quests
 
   def zone?
@@ -17,7 +17,7 @@ class Category < ActiveRecord::Base
   def character_quests(character_id)
     return quests if character_id.nil?
     character = Character.find(character_id)
-    czas = CharacterZoneActivity.where(character: character, category: self)
-    czas.collect(&:quest).compact
+    activities = Activity.where(character: character, category: self)
+    activities.collect(&:quest).compact
   end
 end

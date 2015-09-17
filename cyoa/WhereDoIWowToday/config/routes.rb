@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :characters
   resources :quests
   resources :categories
-  resources :character_zone_activities
 
   get 'welcome/index'
 

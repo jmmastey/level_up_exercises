@@ -13,8 +13,8 @@ class Character < ActiveRecord::Base
   validates_presence_of :name, :realm
   validates_uniqueness_of :name, scope: :realm
 
-  has_many :character_zone_activities, dependent: :destroy
-  has_many :quests, through: :character_zone_activity
+  has_many :activities, dependent: :destroy
+  has_many :quests, through: :activity
 
   def self.refresh_individual(name:, realm:)
     character = Character.find_by(name: name, realm: realm)
@@ -57,38 +57,35 @@ class Character < ActiveRecord::Base
   def update_dependents(raw_info)
     completed_quests = raw_info["quests"]
     Quest.all.each do |quest|
-      update_character_zone_activities(quest, completed_quests)
+      update_activities(quest, completed_quests)
     end
   end
 
-  def update_character_zone_activities(quest, completed_quests)
+  def update_activities(quest, completed_quests)
     if completed_quests.include?(quest.blizzard_id_num)
       destroy_where(quest: quest, character: self)
     else
-      create_character_zone_activities(quest)
+      create_activities(quest)
     end
   end
 
   def destroy_where(args)
-    character_zone_activities = CharacterZoneActivity.where(args)
-    return if character_zone_activities.empty?
-    character_zone_activities.each.map(&:destroy)
+    activities = Activity.where(args)
+    return if activities.empty?
+    activities.each.map(&:destroy)
   end
 
-  def create_character_zone_activities(quest)
+  def create_activities(quest)
     quest.categories.each do |category|
-      if category.zone?
-        CharacterZoneActivity.find_or_create(
-          quest: quest, category: category, character: self)
-      end
+      Activity.find_or_create(quest: quest, category: category, character: self)
     end
   end
 
   def zone_summaries
-    czas = CharacterZoneActivity.where(character_id: self[:id]) || []
-    czas.each.with_object(empty_summaries) do |cza, summaries|
-      break if cza.zone.nil?
-      add_to_summary!(cza, summaries[cza.zone.name])
+    activities = Activity.where(character_id: self[:id]) || []
+    activities.each.with_object(empty_summaries) do |activity, summaries|
+      break if activity.zone.nil?
+      summaries[activity.zone.name][:quest_count] += 1
     end
   end
 
@@ -103,9 +100,5 @@ class Character < ActiveRecord::Base
   def new_zero_summary(zone_name)
     id = Category.name_to_id(zone_name)
     { zone_name => { quest_count: 0, id: id } }
-  end
-
-  def add_to_summary!(character_zone_activity, summary)
-    summary[:quest_count] += character_zone_activity.quest_count
   end
 end

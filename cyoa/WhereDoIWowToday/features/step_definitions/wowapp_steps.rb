@@ -25,8 +25,8 @@ end
 Given(/^a zone with (\d+) uncompleted quests?$/) do |count|
   @test_character = FactoryGirl.create(:character)
   count.to_i.times do
-    FactoryGirl.create(:character_zone_activity, :quest,
-                       character: @test_character, category_name: DEFAULT_ZONE)
+    FactoryGirl.create(:activity, :quest, character: @test_character,
+                       category_name: DEFAULT_ZONE)
   end
   @quest = Quest.all.first
 end
@@ -34,7 +34,7 @@ end
 Given(/^a zone with (\d+) uncompleted quest restricted to the other faction$/) do |count|
   @test_character = FactoryGirl.create(:character, blizzard_faction_id_num: "1")
   count.to_i.times do
-    FactoryGirl.create(:character_zone_activity, activity_faction_id: "2",
+    FactoryGirl.create(:activity, activity_faction_id: "2",
                        character: @test_character, category_name: DEFAULT_ZONE)
   end
   @quest = Quest.all.first
@@ -43,8 +43,8 @@ end
 Given(/^a zone with (\d+) quests? not completed by my character$/) do |count|
   @test_character = FactoryGirl.create(:character)
   count.to_i.times do
-    FactoryGirl.create(:character_zone_activity, :quest,
-                       character: @test_character, category_name: DEFAULT_ZONE)
+    FactoryGirl.create(:activity, :quest, character: @test_character,
+                       category_name: DEFAULT_ZONE)
   end
   @quest = Quest.all.first
 end
@@ -52,8 +52,8 @@ end
 Given(/^(\d+) quests? not completed by a different character$/) do |count|
   other_character = FactoryGirl.create(:character)
   count.to_i.times do
-    FactoryGirl.create(:character_zone_activity, :quest,
-                       character: other_character, category_name: DEFAULT_ZONE)
+    FactoryGirl.create(:activity, :quest, character: other_character,
+                       category_name: DEFAULT_ZONE)
   end
   @quest = Quest.all.first
 end

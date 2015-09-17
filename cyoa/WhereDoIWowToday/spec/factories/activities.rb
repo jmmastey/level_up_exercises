@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :character_zone_activity do
+  factory :activity do
     character
-    
+
     transient do
       category_name "Duskwood"
       activity_faction_id "2"

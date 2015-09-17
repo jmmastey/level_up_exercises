@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915155140) do
+ActiveRecord::Schema.define(version: 20150917214059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.integer "character_id"
+    t.integer "category_id"
+    t.integer "quest_id"
+    t.integer "achievement_id"
+  end
+
+  add_index "activities", ["achievement_id"], name: "index_activities_on_achievement_id", using: :btree
+  add_index "activities", ["category_id"], name: "index_activities_on_category_id", using: :btree
+  add_index "activities", ["character_id"], name: "index_activities_on_character_id", using: :btree
+  add_index "activities", ["quest_id"], name: "index_activities_on_quest_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -29,18 +41,6 @@ ActiveRecord::Schema.define(version: 20150915155140) do
     t.integer "category_id", null: false
     t.integer "quest_id",    null: false
   end
-
-  create_table "character_zone_activities", force: :cascade do |t|
-    t.integer "character_id"
-    t.integer "category_id"
-    t.integer "quest_id"
-    t.integer "achievement_id"
-  end
-
-  add_index "character_zone_activities", ["achievement_id"], name: "index_character_zone_activities_on_achievement_id", using: :btree
-  add_index "character_zone_activities", ["category_id"], name: "index_character_zone_activities_on_category_id", using: :btree
-  add_index "character_zone_activities", ["character_id"], name: "index_character_zone_activities_on_character_id", using: :btree
-  add_index "character_zone_activities", ["quest_id"], name: "index_character_zone_activities_on_quest_id", using: :btree
 
   create_table "characters", force: :cascade do |t|
     t.string   "name"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20150915155140) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "character_zone_activities", "categories"
-  add_foreign_key "character_zone_activities", "characters"
-  add_foreign_key "character_zone_activities", "quests"
+  add_foreign_key "activities", "categories"
+  add_foreign_key "activities", "characters"
+  add_foreign_key "activities", "quests"
 end

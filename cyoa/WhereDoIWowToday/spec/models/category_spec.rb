@@ -57,7 +57,7 @@ RSpec.describe Category, type: :model do
 
       context "when the character has not completed 1 of the quests" do
         before do
-          FactoryGirl.create(:character_zone_activity, quest: quest2,
+          FactoryGirl.create(:activity, quest: quest2,
                              category_name: "zone1", character: character)
         end
 

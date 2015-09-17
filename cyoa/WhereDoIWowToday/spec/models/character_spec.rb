@@ -62,43 +62,43 @@ RSpec.describe Character, type: :model do
 
     context "when the character is new" do
       context "when the character has not completed 2 of 3 quests" do
-        it "should create a cza for each uncompleted quest" do
-          CharacterZoneActivity.destroy_all
+        it "should create an activity for each uncompleted quest" do
+          Activity.destroy_all
           
           character.update_dependents(raw_data)
 
-          quests = CharacterZoneActivity.all.map(&:quest)
+          quests = Activity.all.map(&:quest)
           expect(quests.map(&:blizzard_id_num)).to match_array([101, 201])
         end
       end
     end
 
-    context "when the character already has character_zone_activities" do
+    context "when the character already has activities" do
       let!(:quest) { Quest.find_by(blizzard_id_num: 101) }
-      let!(:existing_cza) do
-        FactoryGirl.create(:character_zone_activity, character: character,
+      let!(:existing_activity) do
+        FactoryGirl.create(:activity, character: character,
                            quest: quest)
       end
 
-      it "does not create a duplicate character_zone_activity" do
+      it "does not create a duplicate activity" do
         character.update_dependents(raw_data)
 
-        expect(CharacterZoneActivity.count).to eq(2)
+        expect(Activity.count).to eq(2)
       end
     end
       
-    context "when the character has now completed a quest that had a cza" do
+    context "when the character has newly completed a quest" do
       let!(:quest) { Quest.find_by(blizzard_id_num: 100) }
-      let!(:existing_cza) do
-        FactoryGirl.create(:character_zone_activity, character: character,
+      let!(:existing_activity) do
+        FactoryGirl.create(:activity, character: character,
                            quest: quest)
       end
 
-      it "removes the obsolete character_zone_activity" do
+      it "removes the obsolete activity" do
         character.update_dependents(raw_data)
 
-        character_czas = CharacterZoneActivity.where(character: character)
-        character_quests = character_czas.map(&:quest)
+        character_activities = Activity.where(character: character)
+        character_quests = character_activities.map(&:quest)
         expected_quests = [Quest.find_by(blizzard_id_num: 101),
                            Quest.find_by(blizzard_id_num: 201)]
         expect(character_quests).to match_array(expected_quests)
@@ -109,25 +109,25 @@ RSpec.describe Character, type: :model do
   describe "#zone_summaries" do
     let(:character) { FactoryGirl.create(:character) }
 
-    context "when the character does not have character_zone_activities" do
+    context "when the character does not have activities" do
       it "should have an empty return value" do
         expect(character.zone_summaries).to be_empty
       end
     end
 
-    context "when the character has character_zone_activities" do
+    context "when the character has activities" do
       before do
         3.times do
-          FactoryGirl.create(:character_zone_activity, :quest,
+          FactoryGirl.create(:activity, :quest,
                              character: character, category_name: "Duskwood")
         end
         2.times do
-          FactoryGirl.create(:character_zone_activity, :quest,
+          FactoryGirl.create(:activity, :quest,
                              character: character, category_name: "Ashenvale")
         end
       end
       
-      it "should return a summary for each character_zone_activity" do
+      it "should return a summary for each activity" do
         expect(character.zone_summaries.count).to eq(2)
         expect(character.zone_summaries).to have_key("Duskwood")
         expect(character.zone_summaries).to have_key("Ashenvale")

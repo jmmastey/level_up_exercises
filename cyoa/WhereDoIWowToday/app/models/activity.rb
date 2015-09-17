@@ -1,4 +1,4 @@
-class CharacterZoneActivity < ActiveRecord::Base
+class Activity < ActiveRecord::Base
   validates_presence_of :character, :category
   validates_uniqueness_of :character, scope: [:category, :quest]
   belongs_to :character
@@ -9,11 +9,7 @@ class CharacterZoneActivity < ActiveRecord::Base
     category if category.zone?
   end
 
-  def quest_count
-    quest.nil? ? 0 : 1
-  end
-
   def self.find_or_create(args)
-    CharacterZoneActivity.find_by(args) || CharacterZoneActivity.create!(args)
+    Activity.find_by(args) || Activity.create!(args)
   end
 end

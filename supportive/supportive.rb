@@ -32,7 +32,7 @@ class BlagPost
   end
 
   def to_s
-    [ category_list, byline, abstract, commenters ].join("\n")
+    [category_list, byline, abstract, commenters].join("\n")
   end
 
   private
@@ -65,13 +65,12 @@ class BlagPost
   def abstract
     body.truncate(204)
   end
-
 end
 
 blag = BlagPost.new("author"        => "Foo Bar",
                     "author_url"    => "http://www.google.com",
                     "categories"    => [:theory_of_computation, :languages, :gossip],
-                    "comments"      => [ [], [], [] ], # because comments are meaningless, get it?
+                    "comments"      => [[], [], []], # because comments are meaningless, get it?
                     "publish_date"  => "2013-02-10",
                     "body"          => <<-ARTICLE
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.

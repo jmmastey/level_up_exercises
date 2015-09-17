@@ -11,6 +11,7 @@ class Quest < ActiveRecord::Base
   validates_presence_of :blizzard_id_num
   validates_presence_of :title
   has_and_belongs_to_many :categories
+  accepts_nested_attributes_for :categories
   has_many :character_zone_activites
 
   def self.populate_next_batch(count: 500)

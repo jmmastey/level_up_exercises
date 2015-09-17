@@ -1,3 +1,40 @@
-<h1>Editing Quest</h1>
+<p id="notice"><%= notice %></p>
 
-<%= render 'form' %>
+<%= form_for @quest do |f| %>
+<p>
+  <%= f.label :title %>:
+  <%= f.text_field :title, readonly: true %>
+</p>
+
+<p>
+  <% @quest.categories.each do |category| %>
+    <%= f.fields_for category do |category_form| %><br>
+       Category: <%= category_form.text_field :name, readonly: true %>
+    <% end %>
+  <% end %>
+  <br>
+  <%= render "add_category_quest" %>
+</p>
+
+<p>
+  <%= f.label :req_level %>:
+  <%= f.text_field :req_level, readonly: true %>
+</p>
+
+<p>
+  <%= f.label :level %>:
+  <%= f.text_field :level, readonly: true %>
+</p>
+
+<p>
+  <%= f.label :blizzard_id_num %>:
+  <%= f.text_field :blizzard_id_num, readonly: true %>
+</p>
+
+<p>
+  <%= f.submit "Update quest" %>
+</p>
+
+<%= link_to 'Back', quest_path(@quest) %>
+
+<% end %>

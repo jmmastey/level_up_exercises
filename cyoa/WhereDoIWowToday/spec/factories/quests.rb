@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :quest do
     sequence :id
-    blizzard_id_num { id }
+    blizzard_id_num { id + 10 }
     title "Fake Quest Title"
     blizzard_faction_id_num "1"
 

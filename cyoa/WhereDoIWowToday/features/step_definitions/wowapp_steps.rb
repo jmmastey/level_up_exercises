@@ -3,6 +3,7 @@ REALMS = ["Argent Dawn", "Earthen Ring"]
 VALID_REALM = REALMS[1]
 ZONES = %w(Ashenvale Duskwood Westfall)
 DEFAULT_ZONE = "Duskwood"
+OTHER_ZONE = "Westfall"
 
 Given(/^I am on the (.*) page$/) do |page|
   stub_request(:any, /us.api.battle.net/)
@@ -27,6 +28,7 @@ Given(/^a zone with (\d+) uncompleted quests?$/) do |count|
     FactoryGirl.create(:character_zone_activity, :quest,
                        character: @test_character, category_name: DEFAULT_ZONE)
   end
+  @quest = Quest.all.first
 end
 
 Given(/^a zone with (\d+) uncompleted quest restricted to the other faction$/) do |count|
@@ -35,6 +37,7 @@ Given(/^a zone with (\d+) uncompleted quest restricted to the other faction$/) d
     FactoryGirl.create(:character_zone_activity, activity_faction_id: "2",
                        character: @test_character, category_name: DEFAULT_ZONE)
   end
+  @quest = Quest.all.first
 end
 
 Given(/^a zone with (\d+) quests? not completed by my character$/) do |count|
@@ -43,6 +46,7 @@ Given(/^a zone with (\d+) quests? not completed by my character$/) do |count|
     FactoryGirl.create(:character_zone_activity, :quest,
                        character: @test_character, category_name: DEFAULT_ZONE)
   end
+  @quest = Quest.all.first
 end
 
 Given(/^(\d+) quests? not completed by a different character$/) do |count|
@@ -51,6 +55,7 @@ Given(/^(\d+) quests? not completed by a different character$/) do |count|
     FactoryGirl.create(:character_zone_activity, :quest,
                        character: other_character, category_name: DEFAULT_ZONE)
   end
+  @quest = Quest.all.first
 end
 
 Given(/^(\d+) objectives$/) do |arg1|
@@ -100,12 +105,12 @@ end
 
 When(/^I request information for my character$/) do
   @test_character ||= FactoryGirl.create(:character)
-  visit "/characters/#{@test_character.id}"
+  visit character_path(@test_character.id)
 end
 
 When(/^I click the zone name in the zone summaries$/) do
   FactoryGirl.create(:realm, name: VALID_REALM)
-  visit "/"
+  visit root_path
   FactoryGirl.create(:character, name: VALID_NAME, realm: VALID_REALM)
   fill_in("Name", with: VALID_NAME)
   select(VALID_REALM, from: "Realm")
@@ -116,7 +121,24 @@ end
 When(/^I visit the zone details page$/) do
   zone = Category.find_by(name: DEFAULT_ZONE) || FactoryGirl.create(
            :category, name: DEFAULT_ZONE)
-  visit("/categories/#{zone.id}?character=#{@test_character.id}")
+  visit("#{category_path(zone.id)}?character=#{@test_character.id}")
+end
+
+When(/^I visit the quest details page$/) do
+  visit(quest_path(@quest.id))
+end
+
+When(/^I click on the quest$/) do
+  click_link(@quest.title)
+end
+
+When(/^I submit a new category for a quest$/) do
+  @original_category = @quest.categories.first
+  @added_category = Category.find_by(name: OTHER_ZONE) || FactoryGirl.create(
+           :category, name: OTHER_ZONE)
+  visit(edit_quest_path(@quest.id))
+  select(OTHER_ZONE, from: "category")
+  click_button("Update quest")
 end
 
 When(/^I hide (\d+) objective$/) do |arg1|
@@ -145,15 +167,15 @@ Then(/^the realm selector should contain all of the realms$/) do
   expect(listed).to match_array(known)
 end
 
-Then(/^I should be on the character page for that character$/) do
+Then(/^I should see the character's details$/) do
   realm = VALID_REALM.gsub("\s", '-')
-  step "I should see \"#{VALID_NAME}\""
-  step "I should see \"#{VALID_REALM}\""
-  step "I should not see \"does not exist\""
+  expect(page).to have_content("#{VALID_NAME}")
+  expect(page).to have_content("#{VALID_REALM}")
+  expect(page).not_to have_content("does not exist")
 end
 
 Then(/^I should see a row for each zone$/) do
-  ZONES.each { |zone| step "I should see \"#{zone}\"" }
+  ZONES.each { |zone| expect(page).to have_content("#{zone}") }
 end
 
 Then(/^the zone's row should specify (\d+) ([a-z]+)$/) do |count, type|
@@ -162,8 +184,26 @@ Then(/^the zone's row should specify (\d+) ([a-z]+)$/) do |count, type|
 end
 
 Then(/^I should see the zone's details$/) do
-  step "I should see \"#{DEFAULT_ZONE}\""
-  step "I should see \"Uncompleted quests\""
+    expect(page).to have_content("#{DEFAULT_ZONE}")
+    expect(page).to have_content("Uncompleted quests")
+end
+
+Then(/^I should see the quest's details$/) do
+  expect(page).to have_content("#{@quest.title}")
+  expect(page).to have_content("#{@quest.blizzard_id_num}")
+  expect(page).to have_content("Required level")
+  expect(page).to have_content("Level")
+  @quest.categories.each do |category|
+    expect(page).to have_content(category.name)
+  end
+end
+
+Then(/^I should see the new category$/) do
+  expect(page).to have_content(@added_category.name)
+end
+
+Then(/^I should see the old category$/) do
+  expect(page).to have_content(@original_category.name)
 end
 
 Then(/^I should see (\d+) objectives?$/) do |count|

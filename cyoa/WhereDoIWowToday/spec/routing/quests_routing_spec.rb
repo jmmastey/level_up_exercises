@@ -9,5 +9,9 @@ RSpec.describe QuestsController, type: :routing do
     it "routes to #edit" do
       expect(get: "/quests/1/edit").to route_to("quests#edit", id: "1")
     end
+
+    it "routes to #update" do
+      expect(get: "/quests/1/update").to route_to("quests#update", id: "1")
+    end
   end
 end

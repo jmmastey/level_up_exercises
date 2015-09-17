@@ -10,12 +10,12 @@ Feature: Character selection
   Scenario: A user should see information about an existing character
     Given I am on the character selection page
     When I submit a valid character name and a valid realm
-    Then I should be on the character page for that character
+    Then I should see the character's details
 
   Scenario: Character name should not be case-sensitive
     Given I am on the character selection page
     When I submit a valid but lowercase character name and a valid realm
-    Then I should be on the character page for that character
+    Then I should see the character's details
     
   Scenario: A user should get an error when requesting a non-existant character
     Given I am on the character selection page

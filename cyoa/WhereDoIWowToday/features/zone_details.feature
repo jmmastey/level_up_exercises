@@ -1,6 +1,6 @@
 Feature: Each zone has details about its remaining objectives
   As a user
-  I want to see a list of quests left to do in a zone
+  I want to see the quests left to do in a zone
   So that I can tell whether it looks fun
 
   Scenario: Only list the quests not completed by my character

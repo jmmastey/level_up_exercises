@@ -102,7 +102,6 @@ module QuestJsonFactory
       "id": id,
       "title": "Quest Number #{id}",
       "reqLevel": 77,
-      "suggestedPartyMembers": 0,
       "category": "Icecrown",
       "level": 80,
     }.to_json

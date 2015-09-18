@@ -25,13 +25,13 @@ Feature: Admin user can make otherwise restricted changes
     And I should see the old category
 
   Scenario: Normal user should not be able to edit quest from zone details page
-    Given I am not logged in as an admin
+    Given I am logged in as a normal user
     And a zone with 1 uncompleted quest
     When I visit the zone details page
     Then I should not see "Edit quest"
 
   Scenario: Normal user should not be able to edit quest quest details page
-    Given I am not logged in as an admin
+    Given I am logged in as a normal user
     And a zone with 1 uncompleted quest
     When I visit the quest details page
     Then I should not see "Edit quest"

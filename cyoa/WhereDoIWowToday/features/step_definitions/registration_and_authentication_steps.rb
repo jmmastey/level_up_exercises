@@ -29,7 +29,7 @@ Given(/^I am logged in as an admin$/) do
   click_button("Log in")
 end
 
-Given(/^I am not logged in as an admin$/) do
+Given(/^I am logged in as a normal user$/) do
   stub_request(:any, /us.api.battle.net/)
   visit "/"
   user = FactoryGirl.create(:user, password: VALID_PASSWORD)
@@ -51,6 +51,10 @@ When(/^I login(?:| with#{EMAIL},?#{PASSWORD})$/) do |name, pass|
   fill_in("user_email", with: name || VALID_EMAIL)
   fill_in("user_password", with: pass || VALID_PASSWORD)
   click_button("Log in")
+end
+
+When(/^I logout$/) do
+  click_link("Logout")
 end
 
 Then(/^I should be signed up as "([^"]*)"$/) do |user|

@@ -129,7 +129,7 @@ RSpec.describe Character, type: :model do
         end
       end
 
-      it "should return a summary for each activity" do
+      it "should return a summary for each zone" do
         expect(character.zone_summaries.count).to eq(2)
         expect(character.zone_summaries).to have_key("Duskwood")
         expect(character.zone_summaries).to have_key("Ashenvale")

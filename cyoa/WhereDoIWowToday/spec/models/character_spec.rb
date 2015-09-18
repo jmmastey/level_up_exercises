@@ -129,7 +129,7 @@ RSpec.describe Character, type: :model do
         end
       end
 
-      it "should return a summary for each zone" do
+      it "should return a summary for each activity" do
         expect(character.zone_summaries.count).to eq(2)
         expect(character.zone_summaries).to have_key("Duskwood")
         expect(character.zone_summaries).to have_key("Ashenvale")
@@ -139,28 +139,6 @@ RSpec.describe Character, type: :model do
         duskwood_summary = character.zone_summaries["Duskwood"]
         duskwood = Category.find_by_name("Duskwood")
         expect(duskwood_summary[:id]).to eq(duskwood.id)
-      end
-
-      it "should report the correct number of quests in the summary" do
-        duskwood_summary = character.zone_summaries["Duskwood"]
-        duskwood = Category.find_by_name("Duskwood")
-        expect(duskwood_summary[:quest_count]).to eq(3)
-      end
-    end
-
-    context "when the character has activities in a non-zone category" do
-      before do
-        FactoryGirl.create(:category, name: "Season", blizzard_type: "other")
-        FactoryGirl.create(
-          :activity, :quest, character: character, category_name: "Season")
-        FactoryGirl.create(
-          :activity, :quest, character: character, category_name: "Duskwood")
-        FactoryGirl.create(
-          :activity, :quest, character: character, category_name: "Ashenvale")
-      end
-
-      it "should return a summary for each zone" do
-        expect(character.zone_summaries.count).to eq(2)
       end
     end
   end

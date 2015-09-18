@@ -84,7 +84,8 @@ class Character < ActiveRecord::Base
   def zone_summaries
     activities = Activity.where(character_id: self[:id]) || []
     activities.each.with_object(empty_summaries) do |activity, summaries|
-      summaries[activity.zone.name][:quest_count] += 1 unless activity.zone.nil?
+      break if activity.zone.nil?
+      summaries[activity.zone.name][:quest_count] += 1
     end
   end
 

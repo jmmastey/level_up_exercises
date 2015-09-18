@@ -5,7 +5,7 @@ Feature: Rearrange goal list items
 
   Scenario: Newly added items should go at the end of the list
     Given a goal list with 2 objectives
-    When I add 1 objective to the goal list
+    When I add an objective to the goal list
     Then the new objective should be at the end of the goal list
 
   Scenario: I should be able to move an item to the beginning of the list

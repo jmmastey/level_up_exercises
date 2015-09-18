@@ -6,10 +6,10 @@ class QuestsController < ApplicationController
   end
 
   def update
-    redirect_to(quest_path) and return unless admin_user?
     category_name = params[:category]
-    redirect_to(quest_path) and return unless useful_value?(category_name)
-    @quest.categories << Category.find_by(name: category_name)
+    if admin_user? && useful_value?(category_name)
+      @quest.categories << Category.find_by(name: category_name)
+    end
     redirect_to(quest_path)
   end
 

@@ -18,7 +18,7 @@ end
 Given(/^there are multiple zones$/) do
   stub_request(:any, /us.api.battle.net/)
   ZONES.each do |name|
-      FactoryGirl.create(:category, name: name, blizzard_type: 'zone')
+    FactoryGirl.create(:category, name: name, blizzard_type: 'zone')
   end
 end
 
@@ -135,7 +135,7 @@ end
 When(/^I submit a new category for a quest$/) do
   @original_category = @quest.categories.first
   @added_category = Category.find_by(name: OTHER_ZONE) || FactoryGirl.create(
-           :category, name: OTHER_ZONE)
+                      :category, name: OTHER_ZONE)
   visit(edit_quest_path(@quest.id))
   select(OTHER_ZONE, from: "category")
   click_button("Update quest")
@@ -162,13 +162,12 @@ When(/^I remove (\d+) objective from the todo list$/) do |arg1|
 end
 
 Then(/^the realm selector should contain all of the realms$/) do
-  known = Realm.all.map &:name
-  listed = page.find("select").all("option").map &:value
+  known = Realm.all.map(&:name)
+  listed = page.find("select").all("option").map(&:value)
   expect(listed).to match_array(known)
 end
 
 Then(/^I should see the character's details$/) do
-  realm = VALID_REALM.gsub("\s", '-')
   expect(page).to have_content("#{VALID_NAME}")
   expect(page).to have_content("#{VALID_REALM}")
   expect(page).not_to have_content("does not exist")

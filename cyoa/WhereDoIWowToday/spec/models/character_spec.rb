@@ -20,7 +20,7 @@ RSpec.describe Character, type: :model do
         FactoryGirl.create(:character, name: "Cris", realm: "Earthen Ring",
                            updated_at: 2.days.ago)
       end
-      
+
       it "should fetch the character's data from blizzard and store it" do
         stub = stub_character_api("Cris", "Earthen Ring")
 
@@ -37,7 +37,7 @@ RSpec.describe Character, type: :model do
         FactoryGirl.create(:character, name: "Sam", realm: "Earthen Ring",
                            updated_at: 2.minutes.ago)
       end
-      
+
       it "should not fetch the character's data from blizzard" do
         stub = stub_character_api("Sam", "Earthen Ring")
 
@@ -49,7 +49,7 @@ RSpec.describe Character, type: :model do
   end
 
   describe "#update_dependents" do
-    let(:raw_data) { raw_character_data_factory.create("Sam", "Earthen Ring") }
+    let(:raw_data) { RawCharacterDataFactory.create("Sam", "Earthen Ring") }
     let(:character) do
       FactoryGirl.create(:character, name: "Sal", realm: "Argent Dawn")
     end
@@ -64,7 +64,7 @@ RSpec.describe Character, type: :model do
       context "when the character has not completed 2 of 3 quests" do
         it "should create an activity for each uncompleted quest" do
           Activity.destroy_all
-          
+
           character.update_dependents(raw_data)
 
           quests = Activity.all.map(&:quest)
@@ -86,7 +86,7 @@ RSpec.describe Character, type: :model do
         expect(Activity.count).to eq(2)
       end
     end
-      
+
     context "when the character has newly completed a quest" do
       let!(:quest) { Quest.find_by(blizzard_id_num: 100) }
       let!(:existing_activity) do
@@ -103,13 +103,15 @@ RSpec.describe Character, type: :model do
                            Quest.find_by(blizzard_id_num: 201)]
         expect(character_quests).to match_array(expected_quests)
       end
-    end    
+    end
   end
 
   describe "#zone_summaries" do
     let(:character) { FactoryGirl.create(:character) }
 
     context "when the character does not have activities" do
+      before { Activity.destroy_all }
+
       it "should have an empty return value" do
         expect(character.zone_summaries).to be_empty
       end
@@ -118,15 +120,15 @@ RSpec.describe Character, type: :model do
     context "when the character has activities" do
       before do
         3.times do
-          FactoryGirl.create(:activity, :quest,
-                             character: character, category_name: "Duskwood")
+          FactoryGirl.create(
+            :activity, :quest, character: character, category_name: "Duskwood")
         end
         2.times do
-          FactoryGirl.create(:activity, :quest,
-                             character: character, category_name: "Ashenvale")
+          FactoryGirl.create(
+            :activity, :quest, character: character, category_name: "Ashenvale")
         end
       end
-      
+
       it "should return a summary for each activity" do
         expect(character.zone_summaries.count).to eq(2)
         expect(character.zone_summaries).to have_key("Duskwood")
@@ -143,27 +145,19 @@ RSpec.describe Character, type: :model do
 end
 
 def stub_character_api(name, realm)
-  raw_data = raw_character_data_factory.create(name, realm)
+  raw_data = RawCharacterDataFactory.create(name, realm)
   body = raw_data.to_json
   stub_request(:any, /character/).to_return(body: body, status: 200)
 end
 
-def raw_character_data_factory
-  def create(name, realm)
+module RawCharacterDataFactory
+  def self.create(name, realm)
     {
-     "lastModified" => 1439777849000,
-     "name" => name,
-     "realm" => realm,
-     "battlegroup" => "Vindication",
-     "class" => 2,
-     "race" => 3,
-     "gender" => 1,
-     "level" => 100,
-     "achievementPoints" => 16520,
-     "thumbnail" => "earthen-ring/133/4118149-avatar.jpg",
-     "calcClass" => "b",
-     "quests" => [100, 171, 107],
-     "totalHonorableKills" => 2271,
+      "name" => name,
+      "realm" => realm,
+      "race" => 3,
+      "level" => 100,
+      "quests" => [100, 171, 107],
     }
   end
 end

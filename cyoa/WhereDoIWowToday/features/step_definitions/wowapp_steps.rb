@@ -66,11 +66,7 @@ Given(/^(\d+) hidden objectives? and (\d+) visible objectives?$/) do |arg1, arg2
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Given(/^an empty todo list$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given(/^a todo list with (\d+) objectives?$/) do |arg1|
+Given(/^a goal list with (\d+) objectives?$/) do |arg1|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
@@ -141,6 +137,10 @@ When(/^I submit a new category for a quest$/) do
   click_button("Update quest")
 end
 
+When(/^I add an objective to the goal list$/) do
+  click_link("Add to list")
+end
+
 When(/^I hide (\d+) objective$/) do |arg1|
   pending # Write code here that turns the phrase above into concrete actions
 end
@@ -149,15 +149,11 @@ When(/^I show all objectives$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-When(/^I add (\d+) objective to the todo list$/) do
+When(/^I move the last objective to the beginning of the goal list$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-When(/^I move the last objective to the beginning of the todo list$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When(/^I remove (\d+) objective from the todo list$/) do |arg1|
+When(/^I remove an objective from the goal list$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
@@ -213,15 +209,15 @@ Then(/^I should see the removed objective$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^the todo list should contain (\d+) objectives?$/) do |arg1|
+Then(/^the goal list should contain (\d+) objectives?$/) do |arg1|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^the new objective should be at the end of the todo list$/) do
+Then(/^the new objective should be at the end of the goal list$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^the moved objective should be at the beginning of the todo list$/) do
+Then(/^the moved objective should be at the beginning of the goal list$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 

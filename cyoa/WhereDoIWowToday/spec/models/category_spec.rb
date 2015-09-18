@@ -27,7 +27,7 @@ RSpec.describe Category, type: :model do
       let(:zone2) do
         FactoryGirl.create(:category, name: "zone2", blizzard_type: "zone")
       end
-      
+
       it "should return the 2 zones" do
         expect(Category.all_zones).to match_array([zone1, zone2])
       end
@@ -50,7 +50,7 @@ RSpec.describe Category, type: :model do
       FactoryGirl.create(:category, name: "zone1", blizzard_type: "zone")
     end
     let(:character) { FactoryGirl.create(:character) }
-      
+
     context "when there are 2 quests in the zone" do
       let(:quest1) { FactoryGirl.create(:quest, category_name: "zone1") }
       let(:quest2) { FactoryGirl.create(:quest, category_name: "zone1") }
@@ -72,7 +72,7 @@ RSpec.describe Category, type: :model do
           FactoryGirl.create(:category, name: "zone2", blizzard_type: "zone")
         end
         let(:quest3) { FactoryGirl.create(:quest, category_name: "zone2") }
-        
+
         context "when there is no character_id" do
           it "returns all the quests for the category" do
             quests = zone.character_quests(nil)

@@ -36,7 +36,7 @@ RSpec.describe Realm, type: :model do
     context "when realm table data is less than a day old" do
       before { Realm.create!(name: "testing") }
       after { Realm.destroy(Realm.find_by_name("testing").id) }
-      
+
       it "should not fetch realm data from blizzard" do
         stub = stub_realm_status_api(realm_statuses)
 
@@ -69,6 +69,6 @@ RSpec.describe Realm, type: :model do
 end
 
 def stub_realm_status_api(body, response_status: 200)
-  stub_request(:any, /realm\/status/)
+  stub_request(:any, %r{realm/status})
     .to_return(body: body, status: response_status)
 end

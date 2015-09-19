@@ -10,6 +10,14 @@ class Activity < ActiveRecord::Base
   end
 
   def self.find_or_create(args)
-    Activity.find_by(args) || Activity.create!(args)
+    Activity.find_by(args) || Activity.create!(ensure_hidden_is_set(args))
   end
+
+  def self.ensure_hidden_is_set(args)
+    unless args.key?(:hidden) && !args[:hidden].empty?
+      args[:hidden] = false
+    end
+    args
+  end
+  private_class_method :ensure_hidden_is_set
 end

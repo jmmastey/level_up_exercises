@@ -10,15 +10,37 @@
   <%= @category.blizzard_type %>
 </p>
 
-<ul>
+<ul id = "quests">
   <strong>Uncompleted quests</strong>  <br>
     <%= "No remaining quests" if @quests.empty? %>
     <% @quests.each do |quest| %>
-  <li> <%= link_to quest.title, quest_path(quest.id), id: quest.title %>
-    <% if user_signed_in? && current_user.admin? %>
-    <%= link_to 'Edit quest', edit_quest_path(quest) %>
+      <% activity = Activity.find_by(character: @character, category:
+	 @category, quest: quest) %>
+      <li>
+	<%= link_to quest.title, quest_path(quest.id), id: quest.title
+	    %>
+	<%= link_to 'Add to goal list', add_to_goals_path(activity.id),
+	    method: :patch, id: "add_quest_#{quest.id}" %>
+	<% if user_signed_in? && current_user.admin? %>
+	<%= link_to 'Edit quest', edit_quest_path(quest) %>
+	<% end %>
+      </li>
     <% end %>
-  </li>
-    <% end %>
-</ul>
+</ul> <br>
+<% unless @goals.empty? %>
+  <ul id= "goals">
+    <strong> Goals </strong> <br>
+    <% @goals.each do |goal| %>
+      <% quest = goal.quest %>
+      <li>
+	<%= link_to quest.title, quest_path(quest.id), id: quest.title %>
+	<%= link_to 'Remove from goal list', activity_path(goal),
+	    action: :update, id: "remove_quest_#{quest.id}" %>
+	<% if user_signed_in? && current_user.admin? %>
+	<%= link_to 'Edit quest', edit_quest_path(quest) %>
+	<% end %>
+      </li>
+     <% end %>
+  </ul>
+<% end %>
 <br>

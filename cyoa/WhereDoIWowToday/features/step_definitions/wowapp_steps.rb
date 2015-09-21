@@ -137,8 +137,13 @@ When(/^I submit a new category for a quest$/) do
   click_button("Update quest")
 end
 
+When(/^I visit the activity page$/) do
+  activity = Activity.find_by(character: @test_character, quest: @quest)
+  visit(activity_path(activity.id))
+end
+
 When(/^I add an objective to the goal list$/) do
-  click_link("Add to list")
+  click_link("add_quest_#{@quest.id}")
 end
 
 When(/^I hide (\d+) objective$/) do |arg1|
@@ -201,16 +206,26 @@ Then(/^I should see the old category$/) do
   expect(page).to have_content(@original_category.name)
 end
 
+Then(/^I should see the activity details$/) do
+  expect(page).to have_content("Character")
+  expect(page).to have_content("Category")
+  expect(page).to have_content("Quest")
+end
+
 Then(/^I should see (\d+) objectives?$/) do |count|
-  page.assert_selector('li', :visible => true, :count => count.to_i)
+  within("//ul[@id='quests']") do
+    expect(all('li').count).to eq(count.to_i)
+  end
 end
 
 Then(/^I should see the removed objective$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^the goal list should contain (\d+) objectives?$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^the goal list should contain (\d+) objectives?$/) do |count|
+  within("//ul[@id='goals']") do
+    expect(all('li').count).to eq(count.to_i)
+  end
 end
 
 Then(/^the new objective should be at the end of the goal list$/) do

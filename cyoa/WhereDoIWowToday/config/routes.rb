@@ -8,5 +8,9 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  patch 'activities/add_to_goals/:id', to: 'activities#add_to_goals', as: :add_to_goals
+  patch 'activities/add_to_goals/:id', to: 'activities#add_to_goals',
+        as: :add_to_goals
+
+  patch 'activities/remove_from_goals/:id', to: 'activities#remove_from_goals',
+        as: :remove_from_goals
 end

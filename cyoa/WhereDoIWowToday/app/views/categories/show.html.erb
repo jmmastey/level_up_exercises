@@ -34,8 +34,8 @@
       <% quest = goal.quest %>
       <li>
 	<%= link_to quest.title, quest_path(quest.id), id: quest.title %>
-	<%= link_to 'Remove from goal list', activity_path(goal),
-	    action: :update, id: "remove_quest_#{quest.id}" %>
+	<%= link_to 'Remove from goal list', remove_from_goals_path(goal.id),
+	   method: :patch, id: "remove_quest_#{quest.id}" %>
 	<% if user_signed_in? && current_user.admin? %>
 	<%= link_to 'Edit quest', edit_quest_path(quest) %>
 	<% end %>

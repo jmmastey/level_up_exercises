@@ -66,8 +66,14 @@ Given(/^(\d+) hidden objectives? and (\d+) visible objectives?$/) do |arg1, arg2
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Given(/^a goal list with (\d+) objectives?$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+Given(/^a goal list with (\d+) objectives?$/) do |count|
+  step "a zone with #{count.to_i + 1} uncompleted quests"
+  step "I visit the zone details page"
+  count.to_i.times do
+    step "I add an objective to the goal list"
+    @objective = @quest
+    @quest = Quest.find(@quest.id + 1)
+  end
 end
 
 Given(/^the blizzard API is unavailable$/) do
@@ -146,6 +152,10 @@ When(/^I add an objective to the goal list$/) do
   click_link("add_quest_#{@quest.id}")
 end
 
+When(/^I remove an objective from the goal list$/) do
+  click_link("remove_quest_#{@objective.id}")
+end
+
 When(/^I hide (\d+) objective$/) do |arg1|
   pending # Write code here that turns the phrase above into concrete actions
 end
@@ -155,10 +165,6 @@ When(/^I show all objectives$/) do
 end
 
 When(/^I move the last objective to the beginning of the goal list$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When(/^I remove an objective from the goal list$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
@@ -219,7 +225,7 @@ Then(/^I should see (\d+) objectives?$/) do |count|
 end
 
 Then(/^I should see the removed objective$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content(@objective.title)
 end
 
 Then(/^the goal list should contain (\d+) objectives?$/) do |count|

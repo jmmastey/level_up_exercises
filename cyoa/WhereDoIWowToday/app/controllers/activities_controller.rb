@@ -1,8 +1,15 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: [:show, :add_to_goals]
+  before_action :set_activity, only: [:show, :add_to_goals, :remove_from_goals]
 
   def add_to_goals
     @activity.list_position = next_list_position
+    @activity.save
+    character_param = "?character=#{@activity.character_id}"
+    redirect_to(category_path(@activity.category) + character_param)
+  end
+
+  def remove_from_goals
+    @activity.list_position = nil
     @activity.save
     character_param = "?character=#{@activity.character_id}"
     redirect_to(category_path(@activity.category) + character_param)

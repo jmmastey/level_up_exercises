@@ -23,3 +23,8 @@ Feature: A goal list for zone objectives
     Given a goal list with 2 objectives
     When I remove an objective from the goal list
     Then I should see the removed objective
+
+  Scenario: Newly added items should go at the end of the list
+    Given a goal list with 2 objectives
+    When I add an objective to the goal list
+    Then the new objective should be at the end of the goal list

@@ -164,10 +164,6 @@ When(/^I show all objectives$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-When(/^I move the last objective to the beginning of the goal list$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 Then(/^the realm selector should contain all of the realms$/) do
   known = Realm.all.map(&:name)
   listed = page.find("select").all("option").map(&:value)
@@ -235,15 +231,9 @@ Then(/^the goal list should contain (\d+) objectives?$/) do |count|
 end
 
 Then(/^the new objective should be at the end of the goal list$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^the moved objective should be at the beginning of the goal list$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^the unmoved objects should retain their relative order$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  within("//ul[@id='goals']") do
+    expect(page).to have_selector("li:last-child", text: @objective.title)
+  end
 end
 
 Then(/^the (.*) data is refreshed$/) do |data_type|

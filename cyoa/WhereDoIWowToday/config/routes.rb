@@ -13,4 +13,8 @@ Rails.application.routes.draw do
 
   patch 'activities/remove_from_goals/:id', to: 'activities#remove_from_goals',
         as: :remove_from_goals
+
+  patch 'activities/hide/:id', to: 'activities#hide', as: :hide_activity
+
+  patch 'activities/unhide', to: 'activities#unhide', as: :unhide_activities
 end

@@ -58,19 +58,17 @@ Given(/^(\d+) quests? not completed by a different character$/) do |count|
   @quest = Quest.all.first
 end
 
-Given(/^(\d+) objectives$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given(/^(\d+) hidden objectives? and (\d+) visible objectives?$/) do |arg1, arg2|
-  pending # Write code here that turns the phrase above into concrete actions
+Given(/^(\d+) visible quests? and 1 hidden quest?$/) do |count|
+  step "a zone with #{count.to_i + 1} uncompleted quests"
+  step "I visit the zone details page"
+  step "I hide a quest"
 end
 
 Given(/^a goal list with (\d+) objectives?$/) do |count|
   step "a zone with #{count.to_i + 1} uncompleted quests"
   step "I visit the zone details page"
   count.to_i.times do
-    step "I add an objective to the goal list"
+    step "I add a quest to the goal list"
     @objective = @quest
     @quest = Quest.find(@quest.id + 1)
   end
@@ -148,7 +146,7 @@ When(/^I visit the activity page$/) do
   visit(activity_path(activity.id))
 end
 
-When(/^I add an objective to the goal list$/) do
+When(/^I add a quest to the goal list$/) do
   click_link("add_quest_#{@quest.id}")
 end
 
@@ -156,12 +154,12 @@ When(/^I remove an objective from the goal list$/) do
   click_link("remove_quest_#{@objective.id}")
 end
 
-When(/^I hide (\d+) objective$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I hide a quest$/) do
+  click_link("hide_quest_#{@quest.id}")
 end
 
-When(/^I show all objectives$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I show all quests$/) do
+  click_on("Show hidden")
 end
 
 Then(/^the realm selector should contain all of the realms$/) do
@@ -234,12 +232,4 @@ Then(/^the new objective should be at the end of the goal list$/) do
   within("//ul[@id='goals']") do
     expect(page).to have_selector("li:last-child", text: @objective.title)
   end
-end
-
-Then(/^the (.*) data is refreshed$/) do |data_type|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^the (.*) data is not refreshed$/) do |data_type|
-  pending # Write code here that turns the phrase above into concrete actions
 end

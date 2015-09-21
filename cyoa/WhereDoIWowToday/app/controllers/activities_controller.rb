@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: [:show, :add_to_goals, :remove_from_goals]
+  before_action :set_activity, except: :unhide
 
   def add_to_goals
     @activity.list_position = next_list_position
@@ -13,6 +13,26 @@ class ActivitiesController < ApplicationController
     @activity.save
     character_param = "?character=#{@activity.character_id}"
     redirect_to(category_path(@activity.category) + character_param)
+  end
+
+  def hide
+    @activity.hidden = true
+    @activity.save
+    character_param = "?character=#{@activity.character_id}"
+    redirect_to(category_path(@activity.category) + character_param)
+  end
+
+  def unhide
+    character_id = params[:character]
+    category_id = params[:category]
+    activities = Activity.where(
+      category_id: category_id, character_id: character_id)
+    activities.each do |activity|
+      activity.hidden = false
+      activity.save
+    end
+    character_param = "?character=#{character_id}"
+    redirect_to(category_path(Category.find(category_id)) + character_param)
   end
 
   private

@@ -6,12 +6,12 @@ Feature: A goal list for zone objectives
   Scenario: It should be possible to create a goal list by adding an objective
     Given a zone with 2 uncompleted quests
     And I visit the zone details page
-    When I add an objective to the goal list
+    When I add a quest to the goal list
     Then the goal list should contain 1 objective
 
-  Scenario: I should be able to add an objective to an existing goal list
+  Scenario: I should be able to add a quest to an existing goal list
     Given a goal list with 1 objective
-    When I add an objective to the goal list
+    When I add a quest to the goal list
     Then the goal list should contain 2 objectives
 
   Scenario: I should be able to remove an objective from an existing goal list
@@ -26,5 +26,5 @@ Feature: A goal list for zone objectives
 
   Scenario: Newly added items should go at the end of the list
     Given a goal list with 2 objectives
-    When I add an objective to the goal list
+    When I add a quest to the goal list
     Then the new objective should be at the end of the goal list

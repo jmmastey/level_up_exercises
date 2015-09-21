@@ -11,7 +11,11 @@
 </p>
 
 <ul id = "quests">
-  <strong>Uncompleted quests</strong>  <br>
+  <strong>Uncompleted quests</strong>
+  <%= link_to 'Show hidden', unhide_activities_path(category:
+  @category.id, character: @character), method:
+  :patch, id: "unhide_activities" %>
+  <br>
     <%= "No remaining quests" if @quests.empty? %>
     <% @quests.each do |quest| %>
       <% activity = Activity.find_by(character: @character, category:
@@ -19,10 +23,15 @@
       <li>
 	<%= link_to quest.title, quest_path(quest.id), id: quest.title
 	    %>
+	
+	<%= link_to 'Hide', hide_activity_path(activity.id),
+	    method: :patch, id: "hide_quest_#{quest.id}" %>
+	
 	<%= link_to 'Add to goal list', add_to_goals_path(activity.id),
 	    method: :patch, id: "add_quest_#{quest.id}" %>
+	
 	<% if user_signed_in? && current_user.admin? %>
-	<%= link_to 'Edit quest', edit_quest_path(quest) %>
+  	  <%= link_to 'Edit quest', edit_quest_path(quest) %>
 	<% end %>
       </li>
     <% end %>
@@ -33,11 +42,14 @@
     <% @goals.each do |goal| %>
       <% quest = goal.quest %>
       <li>
-	<%= link_to quest.title, quest_path(quest.id), id: quest.title %>
+	<%= link_to quest.title, quest_path(quest.id), id: quest.title
+	    %>
+	
 	<%= link_to 'Remove from goal list', remove_from_goals_path(goal.id),
-	   method: :patch, id: "remove_quest_#{quest.id}" %>
+	    method: :patch, id: "remove_quest_#{quest.id}" %>
+	
 	<% if user_signed_in? && current_user.admin? %>
-	<%= link_to 'Edit quest', edit_quest_path(quest) %>
+	  <%= link_to 'Edit quest', edit_quest_path(quest) %>
 	<% end %>
       </li>
      <% end %>

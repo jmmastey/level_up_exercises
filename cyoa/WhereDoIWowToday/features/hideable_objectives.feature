@@ -1,20 +1,15 @@
-Feature: Toggle visibility of objectives
+Feature: Toggle visibility of quests
   As a user
   I want to hide and unhide objectives
-  So that I can concentrate on the objects that interest me the most
+  So that I can ignore objectives that I don't want to consider
 
   Scenario: I should be able to hide objectives
-    Given 3 objectives
-    When I hide 1 objective
+    Given a zone with 3 uncompleted quests
+    And I visit the zone details page
+    When I hide a quest
     Then I should see 2 objectives
 
   Scenario: I should be able to unhide objectives
-    Given 1 hidden objective and 1 visible objective
-    When I show all objectives
+    Given 1 visible quest and 1 hidden quest
+    When I show all quests
     Then I should see 2 objectives
-
-  Scenario: Nothing should happen when I try to unhide 0 objectives
-    Given 0 hidden objectives and 3 visible objectives
-    When I show all objectives
-    Then I should see 3 objectives
-

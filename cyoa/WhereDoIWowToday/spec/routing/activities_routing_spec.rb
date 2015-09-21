@@ -15,5 +15,15 @@ RSpec.describe "ActivitiesController", type: :routing do
       expect(patch: "/activities/remove_from_goals/1")
         .to route_to("activities#remove_from_goals", id: "1")
     end
-  end
+
+    it "routes to #hide" do
+      expect(patch: "/activities/hide/1")
+        .to route_to("activities#hide", id: "1")
+    end
+
+      it "routes to #unhide" do
+      expect(patch: "/activities/unhide")
+        .to route_to("activities#unhide")
+    end
+end
 end

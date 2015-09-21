@@ -5,12 +5,22 @@ class Activity < ActiveRecord::Base
   belongs_to :category
   belongs_to :quest
 
+  def self.find_or_create(args)
+    Activity.find_by(args) || Activity.create!(ensure_hidden_is_set(args))
+  end
+
   def zone
     category if category.zone?
   end
 
-  def self.find_or_create(args)
-    Activity.find_by(args) || Activity.create!(ensure_hidden_is_set(args))
+  def hide
+    self.hidden = true
+    save
+  end
+
+  def unhide
+    self.hidden = false
+    save
   end
 
   def self.ensure_hidden_is_set(args)

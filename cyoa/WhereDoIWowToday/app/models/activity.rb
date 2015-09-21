@@ -14,9 +14,7 @@ class Activity < ActiveRecord::Base
   end
 
   def self.ensure_hidden_is_set(args)
-    unless args.key?(:hidden) && !args[:hidden].empty?
-      args[:hidden] = false
-    end
+    args[:hidden] = false unless args.key?(:hidden) && !args[:hidden].empty?
     args
   end
   private_class_method :ensure_hidden_is_set

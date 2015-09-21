@@ -20,7 +20,8 @@
     <% @zone_summaries.each do |name, data| %>
       <tr>
         <td id=<%= "#{name}_zone" %>>
-	  <%= link_to name, "/categories/#{data[:id]}?character=#{@character.id}" %>
+	  <% category = Category.find(data[:id]) %>
+	  <%= link_to name, category_path(category) + "?character=#{@character.id}" %>
 	</td>
         <td id=<%= "#{name}_quests" %>> <%= data[:quest_count] %></td>
       </tr>

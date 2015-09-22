@@ -31,7 +31,6 @@ class Bomb
 
   def enter_code(code)
     unless code.nil?
-      puts try_activation(code).inspect
       try_activation(code) if inactive?
       try_deactivation(code) if active?
     end

@@ -14,7 +14,6 @@ get '/' do
 end
 
 get '/status' do
-  puts "GET STATUS"
   body(bomb_status_response(200))
 end
 

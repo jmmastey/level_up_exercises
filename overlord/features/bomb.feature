@@ -3,28 +3,30 @@ Feature: EVIL Bomb
   I want to have an EVIL bomb
   So that I can be a Supervillian
 
+  Background:
+    Given the villian is on the homepage
+    When the villian enters the bomb activation code "1233"
+    And the villian enters the bomb deactivation code "3872"
+
   Scenario: Deploy Bomb
-    Given I visit the homepage
-    When I enter the bomb activation code "1233"
-    And I enter the bomb deactivation code "3872"
-    And I click "DEPLOY"
-    Then I expect the bomb status to be "ready for activation"
+    And the villian clicks "DEPLOY"
+    Then the villian expects the bomb status to be "ready for activation"
 
   Scenario: Activate Bomb
-    Given I deployed a bomb with an activation code of "1233"
-    When I enter a activation code "1233" on the page
-    And I click "ACTIVATE"
-    Then I expect the bomb status to be "activated"
+    And the bomb has been deployed
+    And the villian enters the bomb activation code "1233"
+    And the villian clicks "ACTIVATE"
+    Then the villian expects the bomb status to be "activated"
 
   Scenario: Deactivate Bomb
-    Given I deployed a bomb with a deactivation code of "3872"
-    And I activated the bomb
-    When I enter a deactivation code "3872" on the page
-    And I click "DEACTIVATE"
-    Then I expect the bomb status to be "ready for activation"
+    And the bomb has been deployed
+    And the bomb has been activated
+    And the villian enters the bomb deactivation code "3872"
+    And the villian clicks "DEACTIVATE"
+    Then the villian expects the bomb status to be "ready for activation"
 
   Scenario: Enter Incorrect Deactivation Code 3 Times
-    Given I deployed a bomb
-    And I activated the bomb
-    When I enter an incorrect deactivation code three times
-    Then the bomb is exploded
+    And the bomb has been deployed
+    And the bomb has been activated
+    And the hero enters an incorrect deactivation code three times
+    Then the bomb should explode

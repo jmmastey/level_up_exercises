@@ -37,8 +37,8 @@
         %h2 Activate Bomb:
         %form{"name" => "activateBombForm", "novalidate" => ""}
           %p
-            %label.formLabel{:for => "activateCode"} Activation Code
-            %input.formInput{:type => "text", :id => "activateCode", :name => "activateCode", "restrict" => "[^0-9]", "data-ng-model" => "tryActiveCode"}
+            %label.formLabel{:for => "activeCode"} Activation Code
+            %input.formInput{:type => "text", :id => "activeCode", :name => "activeCode", "restrict" => "[^0-9]", "data-ng-model" => "tryActiveCode"}
 
           %button.formButton{"data-ng-click" => "Bomb.activate(tryActiveCode)"} ACTIVATE
 

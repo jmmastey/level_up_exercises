@@ -1,0 +1,26 @@
+.hidden {
+  visibility: hidden;
+  over-flow: hidden;
+  width: 0px;
+  height: 0px;
+}
+
+body {
+  color: white;
+  background-color: #666;
+}
+
+.ng-hide {
+  display: none;
+}
+/*#_bombState p {
+  display: none;
+}
+
+#_bombState .bombStateInactive {
+  display: block;
+}
+
+#_bombState.active .bombStateActive {
+  display: block;
+}*/

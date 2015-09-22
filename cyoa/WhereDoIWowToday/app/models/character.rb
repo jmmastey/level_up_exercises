@@ -1,15 +1,4 @@
 class Character < ActiveRecord::Base
-  ALLIANCE = 1
-  HORDE = 2
-  ALLIANCE_RACES = [1, # human
-                    3, # dwarf
-                    4, # night elf
-                    7, # gnome
-                    11, # draenei
-                    22, # worgen
-                    25, # alliance pandaren
-                   ]
-
   validates_presence_of :name, :realm
   validates_uniqueness_of :name, scope: :realm
 
@@ -33,19 +22,12 @@ class Character < ActiveRecord::Base
   end
 
   def self.convert_character(character_info)
-    faction = alliance_race?(character_info["race"]) ? ALLIANCE : HORDE
     {
       name: character_info["name"],
       realm: character_info["realm"],
-      blizzard_faction_id_num: faction,
     }
   end
   private_class_method :convert_character
-
-  def self.alliance_race?(race)
-    ALLIANCE_RACES.include? race
-  end
-  private_class_method :alliance_race?
 
   def update_from_blizzard!
     @api ||= Blizzard.new

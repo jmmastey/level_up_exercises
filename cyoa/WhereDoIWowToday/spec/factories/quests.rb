@@ -3,7 +3,6 @@ FactoryGirl.define do
     sequence :id
     blizzard_id_num { id + 10 }
     title "Fake Quest Title"
-    blizzard_faction_id_num "1"
 
     transient do
       category_name "Duskwood"

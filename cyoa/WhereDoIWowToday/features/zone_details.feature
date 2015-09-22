@@ -13,8 +13,3 @@ Feature: Each zone has details about its remaining objectives
     Given a zone with 0 uncompleted quests
     When I visit the zone details page
     Then I should see "No remaining quests"
-
-  Scenario: Objectives for the other faction should not be listed
-    Given a zone with 1 uncompleted quest restricted to the other faction
-    When I visit the zone details page
-    Then I should see "No remaining quests"

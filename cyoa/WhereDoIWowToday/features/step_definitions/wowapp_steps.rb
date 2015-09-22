@@ -25,7 +25,7 @@ end
 Given(/^a zone with (\d+) uncompleted quests?$/) do |count|
   @test_character = FactoryGirl.create(:character)
   count.to_i.times do
-    FactoryGirl.create(:activity, :quest, character: @test_character,
+    FactoryGirl.create(:activity, character: @test_character,
                        category_name: DEFAULT_ZONE)
   end
   @quest = Quest.all.first

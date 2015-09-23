@@ -17,6 +17,15 @@ get '/status' do
   body(bomb_status_response(200))
 end
 
+get '/explode' do
+  body(bomb_status_response(200))
+end
+
+post '/explode' do
+  return unless session[:bomb].state == "Activated"
+  session[:bomb].explode_if_timer_out
+end
+
 post '/deploy' do
   params = JSON.parse(request.env["rack.input"].read)
   session[:bomb] = Bomb.new(params["activateCode"], params["deactivateCode"])

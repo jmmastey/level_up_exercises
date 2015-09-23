@@ -18,6 +18,8 @@
           Bomb Status: [
           %span#_bombStatus {{Bomb.state}}
           ]
+        %p{"data-ng-if" => "Bomb.isActive()"}
+          Detonating in: {{Bomb.timerCount}} seconds...
 
       #createBomb{"data-ng-if" => "!Bomb.isDeployed()"}
         %h2 Deploy Bomb:

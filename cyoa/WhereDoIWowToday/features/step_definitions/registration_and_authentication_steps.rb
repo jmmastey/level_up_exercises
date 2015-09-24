@@ -1,4 +1,5 @@
 VALID_EMAIL = "name@example.com"
+OTHER_EMAIL = "name2@example.com"
 VALID_PASSWORD = "asdf1234"
 EMAIL = '(?:| email "([^"]*)")'
 PASSWORD = '(?:| password "([^"]*)")'
@@ -32,7 +33,27 @@ end
 Given(/^I am logged in as a normal user$/) do
   stub_request(:any, /us.api.battle.net/)
   visit "/"
-  user = FactoryGirl.create(:user, password: VALID_PASSWORD)
+  @user = FactoryGirl.create(:user, password: VALID_PASSWORD)
+  click_link("Login")
+  fill_in("user_email", with: @user.email)
+  fill_in("user_password", with: VALID_PASSWORD)
+  click_button("Log in")
+end
+
+When(/^I log in as the same user$/) do
+  click_link("Logout")
+  stub_request(:any, /us.api.battle.net/)
+  click_link("Login")
+  fill_in("user_email", with: @user.email)
+  fill_in("user_password", with: VALID_PASSWORD)
+  click_button("Log in")
+end
+
+When(/^I log in as a different user$/) do
+  click_link("Logout")
+  stub_request(:any, /us.api.battle.net/)
+  visit "/"
+  user = FactoryGirl.create(:user, email: OTHER_EMAIL, password: VALID_PASSWORD)
   click_link("Login")
   fill_in("user_email", with: user.email)
   fill_in("user_password", with: VALID_PASSWORD)

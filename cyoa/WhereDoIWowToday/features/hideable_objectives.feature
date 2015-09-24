@@ -4,7 +4,8 @@ Feature: Toggle visibility of quests
   So that I can ignore objectives that I don't want to consider
 
   Scenario: I should be able to hide objectives
-    Given a zone with 3 uncompleted quests
+    Given I am logged in as a normal user
+    And a zone with 3 uncompleted quests
     And I visit the zone details page
     When I hide a quest
     Then I should see 2 objectives

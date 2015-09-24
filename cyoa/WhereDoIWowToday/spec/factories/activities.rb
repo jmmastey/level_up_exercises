@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :activity do
     character
-    hidden false
 
     transient do
       category_name "Duskwood"

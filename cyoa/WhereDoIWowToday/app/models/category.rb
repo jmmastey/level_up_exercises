@@ -20,4 +20,12 @@ class Category < ActiveRecord::Base
     activities = Activity.where(character: character, category: self)
     activities.collect(&:quest).compact
   end
+
+  def character_activities(character: nil, user: nil)
+    Activity.where(character: character, category: self)
+  end
+
+  def goals(character:, user:)
+    OwnedActivity.goals(character: character, user: user, category: self)
+  end
 end

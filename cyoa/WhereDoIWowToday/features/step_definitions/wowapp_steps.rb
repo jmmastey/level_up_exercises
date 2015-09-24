@@ -50,6 +50,7 @@ Given(/^(\d+) quests? not completed by a different character$/) do |count|
 end
 
 Given(/^(\d+) visible quests? and 1 hidden quest?$/) do |count|
+  step "I am logged in as a normal user"
   step "a zone with #{count.to_i + 1} uncompleted quests"
   step "I visit the zone details page"
   step "I hide a quest"

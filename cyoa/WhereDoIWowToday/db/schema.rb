@@ -11,21 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919001638) do
+ActiveRecord::Schema.define(version: 20150924160048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
     t.integer "character_id"
-    t.integer "category_id"
-    t.integer "quest_id"
-    t.integer "achievement_id"
-    t.boolean "hidden",         default: false, null: false
-    t.integer "list_position"
+    t.integer "category_id",  null: false
+    t.integer "quest_id",     null: false
   end
 
-  add_index "activities", ["achievement_id"], name: "index_activities_on_achievement_id", using: :btree
   add_index "activities", ["category_id"], name: "index_activities_on_category_id", using: :btree
   add_index "activities", ["character_id"], name: "index_activities_on_character_id", using: :btree
   add_index "activities", ["quest_id"], name: "index_activities_on_quest_id", using: :btree
@@ -47,21 +43,31 @@ ActiveRecord::Schema.define(version: 20150919001638) do
   create_table "characters", force: :cascade do |t|
     t.string   "name"
     t.string   "realm"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "blizzard_faction_id_num", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "characters", ["name", "realm"], name: "name_and_realm", unique: true, using: :btree
 
+  create_table "owned_activities", force: :cascade do |t|
+    t.integer  "activity_id"
+    t.integer  "user_id"
+    t.boolean  "hidden",        default: false, null: false
+    t.integer  "list_position"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "owned_activities", ["activity_id"], name: "index_owned_activities_on_activity_id", using: :btree
+  add_index "owned_activities", ["user_id"], name: "index_owned_activities_on_user_id", using: :btree
+
   create_table "quests", force: :cascade do |t|
-    t.integer  "blizzard_id_num",         null: false
-    t.string   "title",                   null: false
+    t.integer  "blizzard_id_num", null: false
+    t.string   "title",           null: false
     t.integer  "req_level"
     t.integer  "level"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "blizzard_faction_id_num"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "quests", ["blizzard_id_num"], name: "index_quests_on_blizzard_id_num", unique: true, using: :btree
@@ -95,4 +101,6 @@ ActiveRecord::Schema.define(version: 20150919001638) do
   add_foreign_key "activities", "categories"
   add_foreign_key "activities", "characters"
   add_foreign_key "activities", "quests"
+  add_foreign_key "owned_activities", "activities"
+  add_foreign_key "owned_activities", "users"
 end

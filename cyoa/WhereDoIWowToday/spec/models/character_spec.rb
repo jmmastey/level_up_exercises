@@ -121,11 +121,11 @@ RSpec.describe Character, type: :model do
       before do
         3.times do
           FactoryGirl.create(
-            :activity, :quest, character: character, category_name: "Duskwood")
+            :activity, character: character, category_name: "Duskwood")
         end
         2.times do
           FactoryGirl.create(
-            :activity, :quest, character: character, category_name: "Ashenvale")
+            :activity, character: character, category_name: "Ashenvale")
         end
       end
 

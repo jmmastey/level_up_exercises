@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
   belongs_to :character
   belongs_to :category
   belongs_to :quest
-  has_and_belongs_to_many :owned_activity
+  has_many :owned_activity, dependent: :destroy
 
   def self.find_or_create(args)
     Activity.find_by(args) || Activity.create!(args)

@@ -5,5 +5,4 @@ FactoryGirl.define do
     hidden false
     list_position 1
   end
-
 end

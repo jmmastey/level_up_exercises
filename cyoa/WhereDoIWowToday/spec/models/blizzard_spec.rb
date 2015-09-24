@@ -54,7 +54,7 @@ RSpec.describe Blizzard, type: :model do
   end
 
   describe "#get_quest" do
-    let(:url_pattern) { %r{^https://us.api.battle.net/wow/quest/.*\?apikey=.} }
+    let(:url_pattern) { %r{^https://us.api.battle.net/wow/quest/.*\?apikey=.*} }
 
     it "should retrieve quest information from battlenet" do
       stub_request(:get, url_pattern)
@@ -76,7 +76,7 @@ RSpec.describe Blizzard, type: :model do
   end
 
   describe "#get_realm_status" do
-    let(:url_pattern) { %r{us.api.battle.net/wow/realm/status\?apikey=.} }
+    let(:url_pattern) { %r{us.api.battle.net/wow/realm/status\?apikey=.*} }
     let(:realm_statuses) { IO.read("spec/test_data/realm_status_body.txt") }
 
     it "should retrieve realm status information from battlenet" do

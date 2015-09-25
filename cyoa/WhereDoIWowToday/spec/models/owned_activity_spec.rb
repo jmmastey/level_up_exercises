@@ -9,7 +9,7 @@ RSpec.describe OwnedActivity, type: :model do
 
       it { expect(owned.showable?).to be false }
     end
-      
+
     context "when the hidden attribute is false" do
       let(:owned) { FactoryGirl.create(:owned_activity, hidden: false) }
 
@@ -23,14 +23,14 @@ RSpec.describe OwnedActivity, type: :model do
 
       it { expect(owned.goal?).to be false }
     end
-      
+
     context "when the index attribute is not nil" do
       let(:owned) { FactoryGirl.create(:owned_activity, index: "3") }
 
       it { expect(owned.goal?).to be true }
     end
   end
-  
+
   describe "#hide" do
     let(:owned) { FactoryGirl.create(:owned_activity, hidden: false) }
 
@@ -40,7 +40,7 @@ RSpec.describe OwnedActivity, type: :model do
       expect(OwnedActivity.first.hidden).to be true
     end
   end
-  
+
   describe "#unhide" do
     let(:owned) { FactoryGirl.create(:owned_activity, hidden: true) }
 

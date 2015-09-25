@@ -21,8 +21,7 @@ class ActivitiesController < ApplicationController
     character = Character.find(params[:character])
     current_user.unhide_all(
       category_id: @category.id, character_id: character.id)
-    activities = Activity.where(
-      category: @category, character: character) 
+    activities = Activity.where(category: @category, character: character)
     @activity = activities.first
     redirect_to_zone_summary
   end

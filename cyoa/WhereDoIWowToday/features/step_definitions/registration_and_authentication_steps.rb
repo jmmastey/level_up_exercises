@@ -15,7 +15,7 @@ Given(/^the account "([^"]*)" with#{PASSWORD} exists$/) do |name, pass|
   click_link("Logout")
 end
 
-Given(/^the account "([^"]*)" does not exist$/) do |arg1|
+Given(/^the account "[^"]*" does not exist$/) do
   stub_request(:any, /us.api.battle.net/)
   visit '/'
 end

@@ -111,8 +111,8 @@ When(/^I click the zone name in the zone summaries$/) do
 end
 
 When(/^I visit the zone details page$/) do
-  zone = Category.find_by(name: DEFAULT_ZONE) || FactoryGirl.create(
-           :category, name: DEFAULT_ZONE)
+  zone = Category.find_by(name: DEFAULT_ZONE) ||
+         FactoryGirl.create(:category, name: DEFAULT_ZONE)
   visit("#{category_path(zone.id)}?character=#{@test_character.id}")
 end
 
@@ -126,8 +126,8 @@ end
 
 When(/^I submit a new category for a quest$/) do
   @original_category = @quest.categories.first
-  @added_category = Category.find_by(name: OTHER_ZONE) || FactoryGirl.create(
-                      :category, name: OTHER_ZONE)
+  @added_category = Category.find_by(name: OTHER_ZONE) ||
+                    FactoryGirl.create(:category, name: OTHER_ZONE)
   visit(edit_quest_path(@quest.id))
   select(OTHER_ZONE, from: "category")
   click_button("Update quest")
@@ -176,8 +176,8 @@ Then(/^the zone's row should specify (\d+) ([a-z]+)$/) do |count, type|
 end
 
 Then(/^I should see the zone's details$/) do
-    expect(page).to have_content("#{DEFAULT_ZONE}")
-    expect(page).to have_content("Uncompleted quests")
+  expect(page).to have_content("#{DEFAULT_ZONE}")
+  expect(page).to have_content("Uncompleted quests")
 end
 
 Then(/^I should see the quest's details$/) do

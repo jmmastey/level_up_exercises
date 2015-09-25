@@ -33,7 +33,6 @@ class User < ActiveRecord::Base
 
   def remove_from_goals(activity)
     owned_activity = owned_activities.find_by(activity: activity)
-    # return if owned_activity.nil? || owned_activity.index.nil?
     owned_activity.index = nil
     owned_activity.save
   end
@@ -69,9 +68,8 @@ class User < ActiveRecord::Base
 
   def raise_if_bad_arg(args)
     bad_args = args.keys - [:category_id, :character_id]
-    unless bad_args.empty?
-      raise ArgumentError.new("Unrecognized argument: #{bad_args}")
-    end
+    return if bad_args.empty?
+    raise ArgumentError.new("Unrecognized argument: #{bad_args}")
   end
 
   def find_goals_by(args)

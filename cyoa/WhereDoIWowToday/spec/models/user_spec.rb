@@ -30,7 +30,7 @@ RSpec.describe User, type: :model do
 
         it "returns the goals that match the category" do
           result = user.goals(category_id: category.id)
-          
+
           expect(result).to eq([activity3])
         end
       end
@@ -52,7 +52,7 @@ RSpec.describe User, type: :model do
 
     context "when an invalid argument is specified" do
       it "raises an error" do
-        expect{user.goals(thing: "thing")}.to raise_error(ArgumentError)
+        expect { user.goals(thing: "thing") }.to raise_error(ArgumentError)
       end
     end
   end
@@ -128,7 +128,6 @@ RSpec.describe User, type: :model do
       end
 
       it "returns an empty list" do
-        character = owned_activity.activity.character
         expect(user.available_activities).to be_empty
       end
     end
@@ -143,7 +142,7 @@ RSpec.describe User, type: :model do
 
     context "when an invalid argument is specified" do
       it "raises an error" do
-        expect{user.available_activities(thing: "thing")}
+        expect { user.available_activities(thing: "thing") }
           .to raise_error(ArgumentError)
       end
     end
@@ -200,7 +199,7 @@ RSpec.describe User, type: :model do
 
       it "creates a new owned_activity with the activity as a user goal" do
         user.add_to_goals(activity)
-        
+
         goal = OwnedActivity.all.first
         expect(goal.index).to eq(1)
       end
@@ -216,7 +215,7 @@ RSpec.describe User, type: :model do
 
       context "when there are no goals" do
         it "does not raise an error" do
-          expect{user.remove_from_goals(activity)}.not_to raise_error
+          expect { user.remove_from_goals(activity) }.not_to raise_error
         end
       end
 
@@ -227,7 +226,7 @@ RSpec.describe User, type: :model do
 
         it "the existing goal is left a goal" do
           existing_id = existing_goal.id
-        
+
           user.remove_from_goals(activity)
 
           owned_activity = OwnedActivity.find(existing_id)
@@ -341,13 +340,13 @@ RSpec.describe User, type: :model do
 
     context "when the user does not have hidden owned_activities" do
       it "does not raise an error" do
-        expect{user.unhide_all}.not_to raise_error
+        expect { user.unhide_all }.not_to raise_error
       end
     end
 
     context "when an invalid argument is specified" do
       it "raises an error" do
-        expect{user.unhide_all(thing: "thing")}
+        expect { user.unhide_all(thing: "thing") }
           .to raise_error(ArgumentError)
       end
     end
@@ -375,7 +374,7 @@ RSpec.describe User, type: :model do
       let!(:activity) { FactoryGirl.create(:activity) }
 
       it "does not raise an error" do
-        expect{user.unhide(activity)}.not_to raise_error
+        expect { user.unhide(activity) }.not_to raise_error
       end
     end
   end

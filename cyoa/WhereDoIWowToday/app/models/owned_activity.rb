@@ -12,11 +12,11 @@ class OwnedActivity < ActiveRecord::Base
 
   def hide
     self.hidden = true
-    self.save
+    save
   end
 
   def unhide
     self.hidden = false
-    self.save
+    save
   end
 end

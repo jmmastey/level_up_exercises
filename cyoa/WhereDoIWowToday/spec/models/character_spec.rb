@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Character, type: :model do
+  describe "validations" do
+  end
+
   describe ".refresh_individual" do
     context "when the character is not in the database" do
       before { Character.destroy_all }

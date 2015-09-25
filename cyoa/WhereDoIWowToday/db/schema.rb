@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924160048) do
+ActiveRecord::Schema.define(version: 20150924231952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
     t.integer "character_id"
-    t.integer "category_id",  null: false
-    t.integer "quest_id",     null: false
+    t.integer "category_id",   null: false
+    t.integer "quest_id",      null: false
+    t.integer "list_position"
   end
 
   add_index "activities", ["category_id"], name: "index_activities_on_category_id", using: :btree
@@ -52,10 +53,10 @@ ActiveRecord::Schema.define(version: 20150924160048) do
   create_table "owned_activities", force: :cascade do |t|
     t.integer  "activity_id"
     t.integer  "user_id"
-    t.boolean  "hidden",        default: false, null: false
-    t.integer  "list_position"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "hidden",      default: false, null: false
+    t.integer  "index"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "owned_activities", ["activity_id"], name: "index_owned_activities_on_activity_id", using: :btree

@@ -1,4 +1,4 @@
-class RemoveHiddenFromActivity < ActiveRecord::Migration
+class RemoveHiddenFromActivities < ActiveRecord::Migration
   def change
     remove_column :activities, :hidden, :boolean
   end

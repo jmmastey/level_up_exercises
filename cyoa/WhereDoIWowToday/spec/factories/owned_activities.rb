@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :owned_activity do
-    activity nil
-    user nil
+    activity
+    user
     hidden false
-    list_position 1
+    index nil
   end
 end

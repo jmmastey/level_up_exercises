@@ -4,13 +4,17 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
+    category_id = params[:id]
+    @category = Category.find(category_id)
     character_id = params[:character]
     @character = character_id.nil? ? nil : Character.find(character_id.to_i)
-    character_activities = @category.character_activities(
-      character: @character, user: current_user)
-    @goals = @category.goals(character: @character, user: current_user)
-    hidden_activities = OwnedActivity.hidden_activities(character: @character, category: @category, user: current_user)
-    @available_activities = character_activities - @goals - hidden_activities
+    if current_user.nil?
+      @goals = []
+      @available_activities = @category.character_activities(@character)
+    else
+      @goals = current_user.goals(character_id: character_id, category_id: category_id)
+      @available_activities = current_user.available_activities(
+        character_id: character_id, category_id: category_id)
+    end
   end
 end

@@ -1,10 +1,11 @@
+
 class CreateOwnedActivities < ActiveRecord::Migration
   def change
     create_table :owned_activities do |t|
       t.references :activity, index: true
       t.references :user, index: true
-      t.boolean :hidden
-      t.integer :list_position
+      t.boolean :hidden, null: false, default: false
+      t.integer :index
 
       t.timestamps null: false
     end

@@ -3,24 +3,24 @@ class ActivitiesController < ApplicationController
   before_action :set_category, only: :unhide
 
   def add_to_goals
-    OwnedActivity.add_to_goals(activity: @activity, user: current_user)
+    current_user.add_to_goals(@activity)
     redirect_to_zone_summary
   end
 
   def remove_from_goals
-    OwnedActivity.remove_from_goals(activity: @activity, user: current_user)
+    current_user.remove_from_goals(@activity)
     redirect_to_zone_summary
   end
 
   def hide
-    OwnedActivity.hide(activity: @activity, user: current_user)
+    current_user.hide(@activity)
     redirect_to_zone_summary
   end
 
   def unhide
     character = Character.find(params[:character])
-    OwnedActivity.unhide(
-      category: @category, character: character, user: current_user)
+    current_user.unhide_all(
+      category_id: @category.id, character_id: character.id)
     activities = Activity.where(
       category: @category, character: character) 
     @activity = activities.first

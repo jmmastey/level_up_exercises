@@ -10,16 +10,12 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :owned_activities
 
   def goals(args = {})
-    return all_visible_goals if args.empty?
+    return all_showable_goals if args.empty?
     raise_if_bad_arg(args)
-    restricted_goals(args)
+    find_goals_by(args)
   end
 
   def available_activities(args = {})
-    if args.empty?
-      return(all_visible_non_goal_activities +
-             available_unowned_activities(args))
-    end
     raise_if_bad_arg(args)
     available_owned_activities(args) + available_unowned_activities(args)
   end
@@ -65,7 +61,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def all_visible_goals
+  def all_showable_goals
     goal_containers = owned_activities.where.not(index: nil)
                       .where(hidden: false)
     goal_containers.map(&:activity)
@@ -78,7 +74,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def restricted_goals(args)
+  def find_goals_by(args)
     goal_containers = owned_activities.where.not(index: nil)
                       .where(hidden: false)
                       .includes(:activity).where(activities: args)
@@ -86,14 +82,13 @@ class User < ActiveRecord::Base
   end
 
   def available_owned_activities(args)
-    activity_containers = owned_activities.where(hidden: false, index: nil)
-                          .includes(:activity).where(activities: args)
-    activity_containers.map(&:activity)
-  end
-
-  def all_visible_non_goal_activities
-    goal_containers = owned_activities.where(index: nil, hidden: false)
-    goal_containers.map(&:activity)    
+    if args.empty?
+      containers = owned_activities.where(index: nil, hidden: false)
+    else
+      containers = owned_activities.where(hidden: false, index: nil)
+                   .includes(:activity).where(activities: args)
+    end
+    containers.map(&:activity)
   end
 
   def available_unowned_activities(args)

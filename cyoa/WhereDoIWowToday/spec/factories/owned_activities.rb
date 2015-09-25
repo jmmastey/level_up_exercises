@@ -4,5 +4,9 @@ FactoryGirl.define do
     user
     hidden false
     index nil
+    
+    trait :goal do
+      sequence(:index) { |n| "#{n}" }
+    end
   end
 end

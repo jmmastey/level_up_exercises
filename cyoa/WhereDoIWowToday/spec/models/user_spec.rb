@@ -4,28 +4,19 @@ RSpec.describe User, type: :model do
   let(:user) { FactoryGirl.create(:user) }
 
   describe "#goals" do
-    let(:activity1) { FactoryGirl.create(:activity) }
-    let(:activity2) { FactoryGirl.create(:activity) }
-    
     context "when the user has goals" do
-      let!(:goal1) do
-        FactoryGirl.create(:owned_activity, index: "3", user: user,
-                           activity: activity1)
-      end
-      let!(:goal2) do
-        FactoryGirl.create(:owned_activity, index: "8", user: user,
-                           activity: activity2)
-      end
+      let!(:goal1) { FactoryGirl.create(:owned_activity, :goal, user: user) }
+      let!(:goal2) { FactoryGirl.create(:owned_activity, :goal, user: user) }
 
       it "returns the goal activities as a list" do
-        expect(user.goals).to match_array([activity1, activity2])
+        expect(user.goals).to match_array([goal1.activity, goal2.activity])
       end
 
       context "when the character is specified" do
         it "returns the goals that match the character" do
-          result = user.goals(character_id: activity1.character.id)
+          result = user.goals(character_id: goal1.activity.character.id)
 
-          expect(result).to eq([activity1])
+          expect(result).to eq([goal1.activity])
         end
       end
 
@@ -34,7 +25,7 @@ RSpec.describe User, type: :model do
         let!(:activity3) { FactoryGirl.create(:activity, category: category) }
         let!(:goal3) do
           FactoryGirl.create(
-            :owned_activity, user: user, index: "5", activity: activity3)
+            :owned_activity, :goal, user: user, activity: activity3)
         end
 
         it "returns the goals that match the category" do
@@ -52,9 +43,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the user has activities that are not goals" do
-      let!(:non_goal) do
-        FactoryGirl.create(:owned_activity, index: nil, user: user)
-      end
+      let!(:non_goal) { FactoryGirl.create(:owned_activity, user: user) }
 
       it "returns an empty list" do
         expect(user.goals).to be_empty
@@ -86,8 +75,7 @@ RSpec.describe User, type: :model do
 
       context "when the user owns an available version of that activity" do
         let!(:owned_activity) do
-          FactoryGirl.create(
-            :owned_activity, index: nil, user: user, activity: activity)
+          FactoryGirl.create(:owned_activity, user: user, activity: activity)
         end
 
         it "returns the activity as a list" do
@@ -96,16 +84,14 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context "when the user has visible activities that are not goals" do
+    context "when the user has showable activities that are not goals" do
       let(:activity1) { FactoryGirl.create(:activity) }
       let!(:non_goal1) do
-        FactoryGirl.create(
-          :owned_activity, index: nil, user: user, activity: activity1)
+        FactoryGirl.create(:owned_activity, user: user, activity: activity1)
       end
       let(:activity2) { FactoryGirl.create(:activity) }
       let!(:non_goal2) do
-        FactoryGirl.create(
-          :owned_activity, index: nil, user: user, activity: activity2)
+        FactoryGirl.create(:owned_activity, user: user, activity: activity2)
       end
 
       it "returns the activities as a list" do
@@ -125,8 +111,7 @@ RSpec.describe User, type: :model do
         let(:category) { FactoryGirl.create(:category) }
         let(:activity3) { FactoryGirl.create(:activity, category: category) }
         let!(:non_goal3) do
-          FactoryGirl.create(
-            :owned_activity, user: user, index: nil, activity: activity3)
+          FactoryGirl.create(:owned_activity, user: user, activity: activity3)
         end
 
         it "returns the activities that match the category" do
@@ -139,8 +124,7 @@ RSpec.describe User, type: :model do
 
     context "when the user has hidden activities that are not goals" do
       let!(:owned_activity) do
-        FactoryGirl.create(
-          :owned_activity, index: nil, hidden: true, user: user)
+        FactoryGirl.create(:owned_activity, hidden: true, user: user)
       end
 
       it "returns an empty list" do
@@ -150,7 +134,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when the user has goals" do
-      before { FactoryGirl.create(:owned_activity, index: "3", user: user) }
+      before { FactoryGirl.create(:owned_activity, :goal, user: user) }
 
       it "returns an empty list" do
         expect(user.available_activities).to be_empty
@@ -169,8 +153,7 @@ RSpec.describe User, type: :model do
     context "when the activity is not yet a goal" do
       let!(:activity) { FactoryGirl.create(:activity) }
       let!(:owned_activity) do
-        FactoryGirl.create(
-          :owned_activity, index: nil, activity: activity, user: user)
+        FactoryGirl.create(:owned_activity, activity: activity, user: user)
       end
 
       context "when there are no goals yet" do
@@ -228,8 +211,7 @@ RSpec.describe User, type: :model do
     context "when the activity is not a goal" do
       let!(:activity) { FactoryGirl.create(:activity) }
       let!(:owned_activity) do
-        FactoryGirl.create(
-          :owned_activity, index: nil, activity: activity, user: user)
+        FactoryGirl.create(:owned_activity, activity: activity, user: user)
       end
 
       context "when there are no goals" do
@@ -240,16 +222,16 @@ RSpec.describe User, type: :model do
 
       context "when there is an existing goal" do
         let!(:existing_goal) do
-          FactoryGirl.create(:owned_activity, index: "4", user: user)
+          FactoryGirl.create(:owned_activity, :goal, user: user)
         end
 
-        it "the existing goal index is unchanged" do
+        it "the existing goal is left a goal" do
           existing_id = existing_goal.id
         
           user.remove_from_goals(activity)
 
-          goal = OwnedActivity.find(existing_id)
-          expect(goal.index).to eq(4)
+          owned_activity = OwnedActivity.find(existing_id)
+          expect(owned_activity).to be_goal
         end
       end
     end
@@ -258,15 +240,15 @@ RSpec.describe User, type: :model do
       let!(:activity) { FactoryGirl.create(:activity) }
       let!(:existing_goal) do
         FactoryGirl.create(
-          :owned_activity, activity: activity, index: "4", user: user)
+          :owned_activity, :goal, activity: activity, user: user)
       end
 
-      it "sets the index to nil" do
+      it "makes the activity not a goal" do
         existing_id = existing_goal.id
         user.remove_from_goals(activity)
 
-        goal = OwnedActivity.find_by(id: existing_id)
-        expect(goal.index).to be nil
+        owned_activity = OwnedActivity.find_by(id: existing_id)
+        expect(owned_activity).not_to be_goal
       end
     end
   end
@@ -279,29 +261,29 @@ RSpec.describe User, type: :model do
           :owned_activity, activity: activity, user: user, hidden: false)
       end
 
-      it "sets hidden to true" do
+      it "hides the activity" do
         id = owned_activity.id
 
         user.hide(activity)
 
         owned_activity = OwnedActivity.find(id)
-        expect(owned_activity.hidden).to be true
+        expect(owned_activity).not_to be_showable
       end
     end
 
     context "when the user does not have an owned_activity for the activity" do
       let!(:activity) { FactoryGirl.create(:activity) }
 
-      it "creates a new owned_activity with the activity hidden" do
+      it "creates a new hidden owned_activity" do
         user.hide(activity)
 
         owned_activity = OwnedActivity.find_by(activity: activity)
-        expect(owned_activity.hidden).to be true
+        expect(owned_activity).not_to be_showable
       end
     end
   end
 
-  describe "#uhide_all" do
+  describe "#unhide_all" do
     context "when the user has hidden owned_activities" do
       let!(:character1) { FactoryGirl.create(:character) }
       let!(:character2) { FactoryGirl.create(:character) }
@@ -328,28 +310,31 @@ RSpec.describe User, type: :model do
           :owned_activity, activity: activity3, user: user, hidden: true)
       end
 
-      it "sets hidden to false for all of the user's owned_activities" do
+      it "makes all of the user's owned_activities showable" do
         user.unhide_all
 
-        visible_activities = OwnedActivity.where(hidden: false)
-        expect(visible_activities.count).to eq(3)
+        user.owned_activities.each do |owned_activity|
+          expect(owned_activity).to be_showable
+        end
       end
 
       context "when the character is specified" do
-        it "sets hidden to false for the user+character owned_activites" do
+        it "makes the user+character owned_activites showable" do
           user.unhide_all(character_id: character1.id)
 
-          visible = OwnedActivity.where(hidden: false).map(&:activity)
-          expect(visible).to match_array([activity1, activity3])
+          expect(OwnedActivity.find_by(activity: activity1)).to be_showable
+          expect(OwnedActivity.find_by(activity: activity2)).not_to be_showable
+          expect(OwnedActivity.find_by(activity: activity3)).to be_showable
         end
       end
 
       context "when the category is specified" do
-        it "sets hidden to false for the user+category owned_activites" do
+        it "makes the user+category owned_activites showable" do
           user.unhide_all(category_id: category1.id)
 
-          visible = OwnedActivity.where(hidden: false).map(&:activity)
-          expect(visible).to match_array([activity1, activity2])
+          expect(OwnedActivity.find_by(activity: activity1)).to be_showable
+          expect(OwnedActivity.find_by(activity: activity2)).to be_showable
+          expect(OwnedActivity.find_by(activity: activity3)).not_to be_showable
         end
       end
     end
@@ -376,13 +361,13 @@ RSpec.describe User, type: :model do
           :owned_activity, activity: activity, user: user, hidden: true)
       end
 
-      it "sets hidden to false" do
+      it "makes thea activity showable" do
         id = owned_activity.id
 
         user.unhide(activity)
 
         owned_activity = OwnedActivity.find(id)
-        expect(owned_activity.hidden).to be false
+        expect(owned_activity).to be_showable
       end
     end
 

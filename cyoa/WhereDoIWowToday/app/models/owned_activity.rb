@@ -1,10 +1,10 @@
 class OwnedActivity < ActiveRecord::Base
   belongs_to :activity
   belongs_to :user
-    
+
   def self.create_goal(user, activity)
     index = next_index(user.owned_activities)
-    create(user:user, activity: activity, index: index)
+    create(user: user, activity: activity, index: index)
   end
 
   def self.next_index(owned_activities)

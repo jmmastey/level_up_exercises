@@ -4,7 +4,7 @@ RSpec.describe Activity, type: :model do
   describe "validations" do
     skip
   end
-  
+
   describe "#find_or_create" do
     context "when the activity exists" do
       let(:activity) { FactoryGirl.create(:activity) }

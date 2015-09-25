@@ -51,8 +51,7 @@ class User < ActiveRecord::Base
   private
 
   def all_showable_goals
-    owneds = owned_activities.where.not(index: nil)
-                      .where(hidden: false)
+    owneds = owned_activities.where.not(index: nil).where(hidden: false)
     owneds.map(&:activity)
   end
 
@@ -63,9 +62,8 @@ class User < ActiveRecord::Base
   end
 
   def find_goals_by(args)
-    owneds = owned_activities.where.not(index: nil)
-                      .where(hidden: false)
-                      .includes(:activity).where(activities: args)
+    owneds = owned_activities.where.not(index: nil).where(hidden: false)
+             .includes(:activity).where(activities: args)
     owneds.map(&:activity)
   end
 
@@ -74,7 +72,7 @@ class User < ActiveRecord::Base
       owneds = owned_activities.where(index: nil, hidden: false)
     else
       owneds = owned_activities.where(hidden: false, index: nil)
-                   .includes(:activity).where(activities: args)
+               .includes(:activity).where(activities: args)
     end
     owneds.map(&:activity)
   end

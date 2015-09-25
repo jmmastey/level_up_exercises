@@ -108,7 +108,7 @@ RSpec.describe OwnedActivity, type: :model do
 
       it "should make the owned activity be not a goal" do
         id = owned.id
-      
+
         owned.make_not_goal
 
         expect(OwnedActivity.find(id)).not_to be_goal
@@ -120,7 +120,7 @@ RSpec.describe OwnedActivity, type: :model do
 
       it "should leave the owned activity not a goal" do
         id = owned.id
-      
+
         owned.make_not_goal
 
         expect(OwnedActivity.find(id)).not_to be_goal

@@ -3,18 +3,9 @@ class CategoriesController < ApplicationController
   before_action :set_categories, only: :index
 
   def show
-    category_id = params[:id]
-    character_id = params[:character]
-    @character = Character.find(character_id.to_i)
-    if current_user.nil?
-      @goals = []
-      @available_activities = @category.character_activities(@character)
-    else
-      @goals = current_user.goals(
-        character_id: character_id, category_id: category_id)
-      @available_activities = current_user.available_activities(
-        character_id: character_id, category_id: category_id)
-    end
+    @character = Character.find(params[:character])
+    set_goals
+    set_available_activities
   end
 
   private
@@ -25,5 +16,23 @@ class CategoriesController < ApplicationController
 
   def set_categories
     @categories = Category.all
+  end
+
+  def set_goals
+    if current_user.nil?
+      @goals = []
+    else
+      @goals = current_user.goals(
+        character_id: @character.id, category_id: @category.id)
+    end
+  end
+
+  def set_available_activities
+    if current_user.nil?
+      @available_activities = @category.character_activities(@character)
+    else
+      @available_activities = current_user.available_activities(
+        character_id: @character.id, category_id: @category.id)
+    end
   end
 end

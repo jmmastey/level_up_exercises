@@ -149,32 +149,17 @@ RSpec.describe User, type: :model do
   end
 
   describe "#add_to_goals" do
-    context "when the activity is not yet a goal" do
+    context "when a non-goal owned_activity exists for the activity" do
       let!(:activity) { FactoryGirl.create(:activity) }
       let!(:owned_activity) do
         FactoryGirl.create(:owned_activity, activity: activity, user: user)
       end
 
-      context "when there are no goals yet" do
-        it "sets the index to 1" do
-          user.add_to_goals(activity)
+      it "should make the owned_activity a goal" do
+        user.add_to_goals(activity)
 
-          goal = OwnedActivity.find(owned_activity.id)
-          expect(goal.index).to eq(1)
-        end
-      end
-
-      context "when there is an existing goal" do
-        let!(:existing_goal) do
-          FactoryGirl.create(:owned_activity, index: "4", user: user)
-        end
-
-        it "sets the index to the next available list position" do
-          user.add_to_goals(activity)
-
-          goal = OwnedActivity.find(owned_activity.id)
-          expect(goal.index).to eq(5)
-        end
+        owned = OwnedActivity.find_by(user: user, activity: activity)
+        expect(owned).to be_goal
       end
     end
 
@@ -182,15 +167,14 @@ RSpec.describe User, type: :model do
       let!(:activity) { FactoryGirl.create(:activity) }
       let!(:existing_goal) do
         FactoryGirl.create(
-          :owned_activity, activity: activity, index: "4", user: user)
+          :owned_activity, :goal, activity: activity, user: user)
       end
 
-      it "leaves the index unchanged" do
-        existing_id = existing_goal.id
+      it "should leave the goal alone" do
         user.add_to_goals(activity)
 
-        goal = OwnedActivity.find_by(id: existing_id)
-        expect(goal.index).to eq(4)
+        owned = OwnedActivity.find_by(user: user, activity: activity)
+        expect(owned).to be_goal
       end
     end
 
@@ -200,14 +184,14 @@ RSpec.describe User, type: :model do
       it "creates a new owned_activity with the activity as a user goal" do
         user.add_to_goals(activity)
 
-        goal = OwnedActivity.all.first
-        expect(goal.index).to eq(1)
+        owned = OwnedActivity.find_by(user: user, activity: activity)
+        expect(owned).to be_goal
       end
     end
   end
 
   describe "#remove_from_goals" do
-    context "when the activity is not a goal" do
+    context "when the owned_activity is not a goal" do
       let!(:activity) { FactoryGirl.create(:activity) }
       let!(:owned_activity) do
         FactoryGirl.create(:owned_activity, activity: activity, user: user)
@@ -348,33 +332,6 @@ RSpec.describe User, type: :model do
       it "raises an error" do
         expect { user.unhide_all(thing: "thing") }
           .to raise_error(ArgumentError)
-      end
-    end
-  end
-
-  describe "#unhide" do
-    context "when the user has an owned_activity for the activity" do
-      let!(:activity) { FactoryGirl.create(:activity) }
-      let!(:owned_activity) do
-        FactoryGirl.create(
-          :owned_activity, activity: activity, user: user, hidden: true)
-      end
-
-      it "makes thea activity showable" do
-        id = owned_activity.id
-
-        user.unhide(activity)
-
-        owned_activity = OwnedActivity.find(id)
-        expect(owned_activity).to be_showable
-      end
-    end
-
-    context "when the user does not have an owned_activity for the activity" do
-      let!(:activity) { FactoryGirl.create(:activity) }
-
-      it "does not raise an error" do
-        expect { user.unhide(activity) }.not_to raise_error
       end
     end
   end

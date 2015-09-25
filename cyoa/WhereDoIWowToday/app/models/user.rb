@@ -21,49 +21,39 @@ class User < ActiveRecord::Base
   end
 
   def add_to_goals(activity)
-    owned_activity = owned_activities.find_by(activity: activity)
-    if owned_activity.nil?
-      return OwnedActivity.create!(
-               activity: activity, user: self, index: next_goal_index)
-    end
-    return unless owned_activity.index.nil?
-    owned_activity.index = next_goal_index
-    owned_activity.save
+    owned = owned_activities.find_by(activity: activity)
+    return OwnedActivity.create_goal(self, activity) if owned.nil?
+    return if owned.goal?
+    owned.convert_to_goal
   end
 
   def remove_from_goals(activity)
-    owned_activity = owned_activities.find_by(activity: activity)
-    owned_activity.index = nil
-    owned_activity.save
+    goal = owned_activities.find_by(activity: activity)
+    goal.make_not_goal
   end
 
   def hide(activity)
-    owned_activity = owned_activities.find_by(activity: activity)
-    if owned_activity.nil?
+    owned = owned_activities.find_by(activity: activity)
+    if owned.nil?
       return OwnedActivity.create!(activity: activity, user: self, hidden: true)
     end
-    owned_activity.hide
+    owned.hide
   end
 
   def unhide_all(args = {})
     owned_activities.each.map(&:unhide) if args.empty?
     raise_if_bad_arg(args)
-    activity_containers = owned_activities.where(hidden: true)
-                          .includes(:activity).where(activities: args)
-    activity_containers.map(&:unhide)
-  end
-
-  def unhide(activity)
-    owned_activity = owned_activities.find_by(activity: activity)
-    owned_activity.unhide unless owned_activity.nil?
+    owneds = owned_activities.where(hidden: true)
+             .includes(:activity).where(activities: args)
+    owneds.map(&:unhide)
   end
 
   private
 
   def all_showable_goals
-    goal_containers = owned_activities.where.not(index: nil)
+    owneds = owned_activities.where.not(index: nil)
                       .where(hidden: false)
-    goal_containers.map(&:activity)
+    owneds.map(&:activity)
   end
 
   def raise_if_bad_arg(args)
@@ -73,31 +63,25 @@ class User < ActiveRecord::Base
   end
 
   def find_goals_by(args)
-    goal_containers = owned_activities.where.not(index: nil)
+    owneds = owned_activities.where.not(index: nil)
                       .where(hidden: false)
                       .includes(:activity).where(activities: args)
-    goal_containers.map(&:activity)
+    owneds.map(&:activity)
   end
 
   def available_owned_activities(args)
     if args.empty?
-      containers = owned_activities.where(index: nil, hidden: false)
+      owneds = owned_activities.where(index: nil, hidden: false)
     else
-      containers = owned_activities.where(hidden: false, index: nil)
+      owneds = owned_activities.where(hidden: false, index: nil)
                    .includes(:activity).where(activities: args)
     end
-    containers.map(&:activity)
+    owneds.map(&:activity)
   end
 
   def available_unowned_activities(args)
     owned = owned_activities.map(&:activity)
     activities = Activity.where(args)
     activities - owned
-  end
-
-  def next_goal_index
-    goals = OwnedActivity.where(user: self).where.not(index: nil)
-    return 1 if goals.empty?
-    goals.map(&:index).max + 1
   end
 end

@@ -14,22 +14,22 @@ get '/' do
 end
 
 get '/status' do
-  body(bomb_status_response(200))
+  body(server_response(200))
 end
 
 get '/explode' do
-  body(bomb_status_response(200))
+  body(server_response(200))
 end
 
 post '/deploy' do
   params = JSON.parse(request.env["rack.input"].read)
   if !numeric_input?(params["activateCode"]) || !numeric_input?(params["deactivateCode"])
-    return bomb_status_response(400, "Codes must be numeric.")
+    return server_response(400, "Codes must be numeric.")
   elsif params["activateCode"] == params["deactivateCode"]
-    return bomb_status_response(400, "Codes cannot match.")
+    return server_response(400, "Codes cannot match.")
   end
   session[:bomb] = Bomb.new(params["activateCode"], params["deactivateCode"])
-  body(bomb_status_response(200))
+  body(server_response(200))
 end
 
 post '/activate' do
@@ -42,39 +42,37 @@ post '/deactivate' do
   attempt_deactivation(params["code"])
 end
 
-def bomb_status_response(code, error_message = "")
+def bomb_status
   bomb = session[:bomb]
+  {
+    state: bomb.state,
+    attempts: bomb.failed_deactivations,
+    max_attempts: bomb.max_failed_deactivations,
+    detonation_time: bomb.timer.nil? ? -1 : bomb.timer.seconds_remaining,
+  }
+end
 
-  bomb_status = {
+def server_response(code, error_message = "")
+  response = {
     status: code,
     error: error_message,
   }
-
-  unless bomb.nil?
-    bomb_status.merge!
-    {
-      state: bomb.state,
-      attempts: bomb.failed_deactivations,
-      max_attempts: bomb.max_failed_deactivations,
-      detonation_time: bomb.timer.nil? ? -1 : bomb.timer.seconds_remaining,
-    }
-  end
-
-  bomb_status.to_json
+  response.merge!(bomb_status) unless session[:bomb].nil?
+  response.to_json
 end
 
 def attempt_activation(code, time)
-  return bomb_status_response(400, "Code must be numeric.") unless numeric_input?(code)
-  return bomb_status_response(401, "Invalid activation code.") unless session[:bomb].enter_code(code).error.nil?
+  return server_response(400, "Code must be numeric.") unless numeric_input?(code)
+  return server_response(401, "Invalid activation code.") unless session[:bomb].enter_code(code).error.nil?
   session[:bomb].timer = Timer.new(time)
-  bomb_status_response(200)
+  server_response(200)
 end
 
 def attempt_deactivation(code)
-  return bomb_status_response(400, "Code must be numeric.") unless numeric_input?(code)
-  return bomb_status_response(401, "Invalid deactivation code.") unless session[:bomb].enter_code(code).error.nil?
+  return server_response(400, "Code must be numeric.") unless numeric_input?(code)
+  return server_response(401, "Invalid deactivation code.") unless session[:bomb].enter_code(code).error.nil?
   session[:bomb].timer = nil
-  bomb_status_response(200)
+  server_response(200)
 end
 
 def numeric_input?(code)

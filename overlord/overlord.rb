@@ -51,12 +51,13 @@ def bomb_status_response(code, error_message = "")
   }
 
   unless bomb.nil?
-    bomb_status.merge!({ 
+    bomb_status.merge!
+    {
       state: bomb.state,
       attempts: bomb.failed_deactivations,
       max_attempts: bomb.max_failed_deactivations,
-      detonation_time: bomb.timer.nil? ? -1 : bomb.timer.seconds_remaining
-    })
+      detonation_time: bomb.timer.nil? ? -1 : bomb.timer.seconds_remaining,
+    }
   end
 
   bomb_status.to_json
@@ -64,22 +65,16 @@ end
 
 def attempt_activation(code, time)
   return bomb_status_response(400, "Code must be numeric.") unless numeric_input?(code)
-  unless session[:bomb].enter_code(code).error.nil?
-    return bomb_status_response(401, "Invalid activation code.")
-  else
-    session[:bomb].timer = Timer.new(time)
-    return bomb_status_response(200)
-  end
+  return bomb_status_response(401, "Invalid activation code.") unless session[:bomb].enter_code(code).error.nil?
+  session[:bomb].timer = Timer.new(time)
+  bomb_status_response(200)
 end
 
 def attempt_deactivation(code)
   return bomb_status_response(400, "Code must be numeric.") unless numeric_input?(code)
-  unless session[:bomb].enter_code(code).error.nil?
-    return bomb_status_response(401, "Invalid deactivation code.")
-  else
-    session[:bomb].timer = nil
-    return bomb_status_response(200)
-  end
+  return bomb_status_response(401, "Invalid deactivation code.") unless session[:bomb].enter_code(code).error.nil?
+  session[:bomb].timer = nil
+  bomb_status_response(200)
 end
 
 def numeric_input?(code)

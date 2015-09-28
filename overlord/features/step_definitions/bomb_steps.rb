@@ -56,6 +56,10 @@ Then(/^the villian expects the bomb status to be "([^"]*)"$/) do |status|
   end
 end
 
+Then(/^the page should say "([^"]*)"$/) do |page_text|
+  expect(page).to have_content(page_text)
+end
+
 def fill_in_active_code(code)
   fill_in("activeCode", with: code)
 end

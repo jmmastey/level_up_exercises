@@ -10,7 +10,7 @@
     %div{"data-ng-if" => "Bomb.exploded"}
       %h1 Bomb Detonated
 
-    %div{"data-ng-if" => "!Bomb.exploded"}
+    %div#bomb-wrap{"data-ng-if" => "!Bomb.exploded"}
 
       %h1 E.V.I.L. Bomb System v1.0
       %div{"data-ng-class" => "{'active': Bomb.isActive()}"}
@@ -19,7 +19,11 @@
           %span#_bombStatus {{Bomb.state}}
           ]
         %p{"data-ng-if" => "Bomb.isActive()"}
-          Detonating in: {{Bomb.timerCount}} seconds...
+          Detonating in: {{Bomb.detonateTime | detonateTimeText}}
+        %p{"data-ng-if" => "Bomb.serverResponse != ''"}
+          %span.error ERROR: {{Bomb.serverResponse}}
+        %p{"data-ng-if" => "Bomb.isActive() && Bomb.timeoutRate != 1000"}
+          %span.warning WARNING: Detonation Increased By {{Bomb.increasedRate}}%
 
       #createBomb{"data-ng-if" => "!Bomb.isDeployed()"}
         %h2 Deploy Bomb:
@@ -37,6 +41,7 @@
 
       #activateBomb{"data-ng-if" => "Bomb.isDeployed() && !Bomb.isActive()"}
         %h2 Activate Bomb:
+
         %form{"name" => "activateBombForm", "novalidate" => ""}
           %p
             %label.formLabel{:for => "activeCode"} Activation Code

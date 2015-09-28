@@ -3,13 +3,13 @@
 require 'sinatra'
 require 'json'
 require_relative 'lib/bomb'
+require_relative 'lib/timer'
 
 enable :sessions
 set :public_folder, Proc.new { File.join(File.dirname(__FILE__), 'assets') }
 
-ERROR_INVALID_CODE = "One or more bomb codes entered were invalid, unable to deploy bomb."
-
 get '/' do
+  session[:bomb] = nil
   haml :index
 end
 
@@ -21,20 +21,20 @@ get '/explode' do
   body(bomb_status_response(200))
 end
 
-post '/explode' do
-  return unless session[:bomb].state == "Activated"
-  session[:bomb].explode_if_timer_out
-end
-
 post '/deploy' do
   params = JSON.parse(request.env["rack.input"].read)
+  if !numeric_input?(params["activateCode"]) || !numeric_input?(params["deactivateCode"])
+    return bomb_status_response(400, "Codes must be numeric.")
+  elsif params["activateCode"] == params["deactivateCode"]
+    return bomb_status_response(400, "Codes cannot match.")
+  end
   session[:bomb] = Bomb.new(params["activateCode"], params["deactivateCode"])
   body(bomb_status_response(200))
 end
 
 post '/activate' do
   params = JSON.parse(request.env["rack.input"].read)
-  attempt_activation(params["code"])
+  attempt_activation(params["code"], params["time"])
 end
 
 post '/deactivate' do
@@ -42,35 +42,42 @@ post '/deactivate' do
   attempt_deactivation(params["code"])
 end
 
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
-end
-
-def bomb_status_response(code)
+def bomb_status_response(code, error_message = "")
   bomb = session[:bomb]
-  { 
+
+  bomb_status = {
     status: code,
-    state: bomb.state,
-    attempts: bomb.failed_deactivations,
-    max_attempts: bomb.max_failed_deactivations,
-  }.to_json
+    error: error_message,
+  }
+
+  unless bomb.nil?
+    bomb_status.merge!({ 
+      state: bomb.state,
+      attempts: bomb.failed_deactivations,
+      max_attempts: bomb.max_failed_deactivations,
+      detonation_time: bomb.timer.nil? ? -1 : bomb.timer.seconds_remaining
+    })
+  end
+
+  bomb_status.to_json
 end
 
-def attempt_activation(code)
-  return bomb_status_response(400) unless numeric_input?(code)
+def attempt_activation(code, time)
+  return bomb_status_response(400, "Code must be numeric.") unless numeric_input?(code)
   unless session[:bomb].enter_code(code).error.nil?
-    return bomb_status_response(401)
+    return bomb_status_response(401, "Invalid activation code.")
   else
+    session[:bomb].timer = Timer.new(time)
     return bomb_status_response(200)
   end
 end
 
 def attempt_deactivation(code)
-  return bomb_status_response(400) unless numeric_input?(code)
+  return bomb_status_response(400, "Code must be numeric.") unless numeric_input?(code)
   unless session[:bomb].enter_code(code).error.nil?
-    return bomb_status_response(401)
+    return bomb_status_response(401, "Invalid deactivation code.")
   else
+    session[:bomb].timer = nil
     return bomb_status_response(200)
   end
 end

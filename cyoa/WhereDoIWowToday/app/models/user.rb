@@ -11,12 +11,12 @@ class User < ActiveRecord::Base
 
   def goals(args = {})
     return all_showable_goals if args.empty?
-    raise_if_bad_arg(args)
+    fail_if_bad_arg(args)
     find_goals_by(args)
   end
 
   def available_activities(args = {})
-    raise_if_bad_arg(args)
+    fail_if_bad_arg(args)
     available_owned_activities(args) + available_unowned_activities(args)
   end
 
@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   def unhide_all(args = {})
     owned_activities.each.map(&:unhide) if args.empty?
-    raise_if_bad_arg(args)
+    fail_if_bad_arg(args)
     owneds = owned_activities.where(hidden: true)
              .includes(:activity).where(activities: args)
     owneds.map(&:unhide)
@@ -55,10 +55,10 @@ class User < ActiveRecord::Base
     owneds.map(&:activity)
   end
 
-  def raise_if_bad_arg(args)
+  def fail_if_bad_arg(args)
     bad_args = args.keys - [:category_id, :character_id]
     return if bad_args.empty?
-    raise ArgumentError.new("Unrecognized argument: #{bad_args}")
+    fail ArgumentError, "Unrecognized argument: #{bad_args}"
   end
 
   def find_goals_by(args)

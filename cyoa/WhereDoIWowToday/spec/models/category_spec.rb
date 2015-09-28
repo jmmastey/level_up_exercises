@@ -17,7 +17,59 @@ RSpec.describe Category, type: :model do
   end
 
   describe "#character_activities" do
-    skip
+    let(:category) { FactoryGirl.create(:category) }
+    let(:character) { FactoryGirl.create(:character) }
+
+    context "when there are activities for the category+character" do
+      let!(:activity1) do
+        FactoryGirl.create(:activity, category: category, character: character)
+      end
+      let!(:activity2) do
+        FactoryGirl.create(:activity, category: category, character: character)
+      end
+
+      it "should return activities for the specified category+character" do
+        result = category.character_activities(character)
+
+        expect(result).to match_array([activity1, activity2])
+      end
+
+      context "when the category has an activity for a different character" do
+        let(:character2) { FactoryGirl.create(:character) }
+        let!(:activity) do
+          FactoryGirl.create(
+            :activity, category: category, character: character2)
+        end
+
+        it "should return activities for the specified category+character" do
+          result = category.character_activities(character)
+
+          expect(result).to match_array([activity1, activity2])
+        end
+      end
+
+      context "when a different category has an activity for the character" do
+        let(:category2) { FactoryGirl.create(:category) }
+        let!(:activity) do
+          FactoryGirl.create(
+            :activity, category: category2, character: character)
+        end
+
+        it "should return activities for the specified category+character" do
+          result = category.character_activities(character)
+
+          expect(result).to match_array([activity1, activity2])
+        end
+      end
+    end
+
+    context "when there are no activities" do
+      it "returns an empty list" do
+        result = category.character_activities(character)
+
+        expect(result).to be_empty
+      end
+    end
   end
 
   describe ".all_zones" do

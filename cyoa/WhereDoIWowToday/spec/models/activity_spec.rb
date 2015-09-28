@@ -1,8 +1,55 @@
 require 'rails_helper'
 
 RSpec.describe Activity, type: :model do
-  describe "validations" do
-    skip
+  describe "it should not save invalid activities" do
+    let(:character) { FactoryGirl.create(:character) }
+    let(:category) { FactoryGirl.create(:category) }
+    let(:quest) { FactoryGirl.create(:quest) }
+
+    it "should save an activity with a character, category, and quest" do
+      activity = Activity.new(
+        character: character, category: category, quest: quest)
+
+      activity.save
+
+      expect(Activity.all).to match_array([activity])
+    end
+
+    it "should not save an activity without a character" do
+      activity = Activity.new(category: category, quest: quest)
+
+      activity.save
+
+      expect(Activity.all).to be_empty
+    end
+
+    it "should not save an activity without a caregory" do
+      activity = Activity.new(character: character, quest: quest)
+
+      activity.save
+
+      expect(Activity.all).to be_empty
+    end
+
+    it "should not save an activity without a quest" do
+      activity = Activity.new(character: character, category: category)
+
+      activity.save
+
+      expect(Activity.all).to be_empty
+    end
+
+    it "should not save a duplicate activity" do
+      activity1 = Activity.new(
+        character: character, category: category, quest: quest)
+      activity2 = Activity.new(
+        character: character, category: category, quest: quest)
+
+      activity1.save
+      activity2.save
+
+      expect(Activity.all).to match_array([activity1])
+    end
   end
 
   describe "#find_or_create" do

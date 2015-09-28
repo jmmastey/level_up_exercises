@@ -1,0 +1,63 @@
+%html{ "data-ng-app" => "EvilBombApp", "data-ng-controller" => "HomeCtrl" }
+  %head
+    %title Overlord! Yeah yeah yeah!
+    %link{ :rel => :stylesheet, :type => :"text/css", :href => "/styles/screen.css" }
+    %script{ :src => "//ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js" }
+    %script{ :src => "//code.angularjs.org/1.2.28/angular-route.min.js" }
+    %script{ :src => "/scripts/overlord.js" }
+  %body
+    %div{ "data-ng-if" => "Bomb.exploded" }
+      %h1 Bomb Detonated
+
+    #bomb-wrap{ "data-ng-if" => "!Bomb.exploded" }
+
+      %h1 E.V.I.L. Bomb System v1.0
+      %div{ "data-ng-class" => "{'active': Bomb.isActive()}" }
+        %p
+          Bomb Status: [
+          %span#_bombStatus {{Bomb.state}}
+          ]
+        %p{ "data-ng-if" => "Bomb.isActive()" }
+          Detonating in: {{Bomb.detonateTime | detonateTimeText}}
+        %p{ "data-ng-if" => "Bomb.serverResponse != ''" }
+          %span.error ERROR: {{Bomb.serverResponse}}
+        %p{ "data-ng-if" => "Bomb.isActive() && Bomb.timeoutRate != 1000" }
+          %span.warning WARNING: Detonation Increased By {{Bomb.increasedRate}}%
+
+      #createBomb{ "data-ng-if" => "!Bomb.isDeployed()" }
+        %h2 Deploy Bomb:
+        %form{ "name" => "createBombForm", "novalidate" => "" }
+          %p
+            %label.formLabel{ :for => "activeCode" } Activation Code
+            %input.formInput{ :type => "text", :id => "activeCode", :name => "activeCode", "restrict" => "[^0-9]", "data-ng-model" => "bomb.activateCode", "required" => "", "data-ng-minlength" => "4" }
+            %span{"data-ng-show" => "createBombForm.activeCode.$error.minlength"} Activation Code must be at least 4 numbers
+          %p
+            %label.formLabel{ :for => "deactiveCode" } Deactivation Code
+            %input.formInput{ :type => "text", :id => "deactiveCode", :name => "deactiveCode", "restrict" => "[^0-9]", "data-ng-model" => "bomb.deactivateCode", "required" => "", "data-ng-minlength" => "4" }
+            %span{ "data-ng-show" => "createBombForm.deactiveCode.$error.minlength" } Deactivation Code must be at least 4 numbers
+
+          %button.formButton{ "data-ng-disabled" => "createBombForm.$invalid", "data-ng-click" => "Bomb.deploy(bomb)" }
+            DEPLOY
+
+      #activateBomb{ "data-ng-if" => "Bomb.isDeployed() && !Bomb.isActive()" }
+        %h2 Activate Bomb:
+
+        %form{ "name" => "activateBombForm", "novalidate" => "" }
+          %p
+            %label.formLabel{ :for => "activeCode"} Activation Code
+            %input.formInput{ :type => "text", :id => "activeCode", :name => "activeCode", "restrict" => "[^0-9]", "data-ng-model" => "tryActiveCode" }
+
+          %button.formButton{ "data-ng-click" => "Bomb.activate(tryActiveCode)" } 
+            ACTIVATE
+
+      #destroyBomb{ "data-ng-if" => "Bomb.isDeployed()&& Bomb.isActive()" }
+        %h2 Deactivate Bomb:
+        %h4 Attempts Remaining: {{Bomb.attemptsRemaining}}
+        %form{ "name" => "deactivateBombForm", "novalidate" => "" }
+          %p
+            %label.formLabel{ :for => "deactiveCode" } Deactivation Code
+            %input.formInput{ :type => "text", :id => "deactiveCode", :name => "deactiveCode", "restrict" => "[^0-9]", "data-ng-model" => "setDeactiveCode" }
+
+          %button.formButton{ "data-ng-disabled" => "Bomb.busy", "data-ng-click" => "Bomb.deactivate(setDeactiveCode)" }
+            DEACTIVATE
+      

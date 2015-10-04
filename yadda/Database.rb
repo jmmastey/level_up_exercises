@@ -1,6 +1,5 @@
 require 'pg'
 require 'connection_pool'
-require 'colorize'
 
 class Database
   RANDOM_ID_RETRY_DEPTH = 5

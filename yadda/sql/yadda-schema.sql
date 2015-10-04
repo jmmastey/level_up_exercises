@@ -38,7 +38,7 @@ COMMENT ON TABLE breweries IS 'Information about each brewery';
 
 CREATE TABLE styles (
   id          SERIAL PRIMARY KEY,
-  style       VARCHAR(50) NOT NULL
+  name       VARCHAR(50) NOT NULL
 );
 -- Store a table of styles to be referenced by the beers table to normalize db.
 
@@ -64,10 +64,10 @@ CREATE TABLE ratings (
   id          SERIAL PRIMARY KEY,
   user_id     INTEGER REFERENCES users (id) ON DELETE CASCADE,
   beer_id     INTEGER REFERENCES beers (id) ON DELETE CASCADE,
-  look        SMALLINT CHECK (look > 0 AND look < 11),
-  smell       SMALLINT CHECK (smell > 0 AND smell < 11),
-  taste       SMALLINT CHECK (taste > 0 AND taste < 11),
-  overall     SMALLINT CHECK (overall > 0 AND overall < 11),
+  look        SMALLINT CHECK (look BETWEEN 0 AND 11) DEFAULT 0,
+  smell       SMALLINT CHECK (look BETWEEN 0 AND 11) DEFAULT 0,
+  taste       SMALLINT CHECK (look BETWEEN 0 AND 11) DEFAULT 0,
+  overall     SMALLINT CHECK (look BETWEEN 0 AND 11) DEFAULT 0,
   modified_on TIMESTAMP WITH TIME ZONE DEFAULT current_timestamp,
   modified_by VARCHAR(50),
   created_on  TIMESTAMP WITH TIME ZONE DEFAULT current_timestamp,
@@ -86,3 +86,4 @@ CREATE INDEX ratings_id_index ON ratings(id);
 CREATE INDEX ratings_user_id_index ON ratings(user_id);
 CREATE INDEX ratings_beer_id_index ON ratings(beer_id);
 CREATE INDEX ratings_overall_index ON ratings(overall);
+CREATE INDEX ratings_created_on_index ON ratings(created_on);

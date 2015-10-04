@@ -21,9 +21,9 @@ CREATE OR REPLACE VIEW recent_score AS
     beers.name AS beer_name,
     AVG(ratings.overall) AS average_rating
   FROM breweries
-  LEFT JOIN beers ON beers.brewery_id = breweries.id
+  INNER JOIN beers ON beers.brewery_id = breweries.id
   LEFT JOIN ratings ON ratings.beer_id = beers.id
-  WHERE ratings.created_on >= (NOW() - interval '6 months')
+  WHERE ratings.created_on >= (NOW() - INTERVAL '6 months')
   GROUP BY breweries.id, beers.id
   ORDER BY average_rating DESC;
 
@@ -31,11 +31,11 @@ CREATE OR REPLACE VIEW recent_score AS
 CREATE OR REPLACE VIEW might_also_enjoy AS
   SELECT
     beers.name AS beer_name,
-    styles.style AS beer_style,
+    styles.name AS beer_style,
     AVG(ratings.overall) AS average_rating
   FROM beers
   LEFT JOIN ratings ON ratings.beer_id = beers.id
   LEFT JOIN styles ON beers.style_id = styles.id
-  GROUP BY styles.style, beers.id
+  GROUP BY styles.name, beers.id
   HAVING AVG(ratings.overall) > 7
   ORDER BY RANDOM();

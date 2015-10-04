@@ -17,7 +17,7 @@ MAX_BREWERY_CITY = 200
 MAX_BREWERY_COUNTRY = 50
 MAX_BREWERY_ZIP = 10
 
-MAX_STYLE_STYLE = 50
+MAX_STYLE_NAME = 50
 
 MAX_BEER_NAME = 100
 
@@ -37,7 +37,7 @@ def insert_fake_user
     email: Faker::Internet.email[0, MAX_USER_EMAIL],
     birthday: Faker::Time.between(DateTime.now - 30, DateTime.now),
     password: Faker::Internet.password(8, 49)[0, MAX_USER_PASSWORD],
-    modified_by: Faker::Internet.user_name[0, MAX_CREATED],
+    modified_by: Faker::Internet.user_name[0, MAX_MODIFIED],
   )
 end
 
@@ -59,7 +59,7 @@ end
 def insert_fake_style
   @database.insert(
     'styles',
-    style: Faker::Lorem.word[0, MAX_STYLE_STYLE],
+    name: Faker::Lorem.word[0, MAX_STYLE_NAME],
   )
 end
 
@@ -87,8 +87,8 @@ def insert_fake_rating
     smell: rand(1..10),
     taste: rand(1..10),
     overall: rand(1..10),
-    modified_by: Faker::Internet.user_name,
-    created_by: Faker::Internet.user_name,
+    modified_by: Faker::Internet.user_name[0, MAX_MODIFIED],
+    created_by: Faker::Internet.user_name[0, MAX_CREATED],
   )
 end
 
@@ -96,30 +96,29 @@ def percent(count, multiplier)
   ((count * 100) / (count * multiplier)).to_i
 end
 
-def function_to_s(function)
-  name = function.to_s.split('_').last
+def table_to_s(name)
   return 'breweries' if name == 'brewery'
-  name << 's'
+  name + 's'
 end
 
-def fake(function, count, multiplier)
-  puts "Started faking #{count * multiplier} #{function_to_s(function)}".yellow
+def fake(table, count, multiplier)
+  puts "Started faking #{count * multiplier} #{table_to_s(table)}".yellow
   multiplier.times do
     @threads << Thread.new do
-      count.times { send(function) }
+      count.times { send("insert_fake_#{table}") }
       puts "Generated #{percent(count, multiplier)}% of the ".green +
-        function_to_s(function).green
+        table_to_s(table).green
     end
   end
 end
 
 def fake_it
   @threads = []
-  fake(:insert_fake_user, USER_COUNT, THREAD_MULTIPLIER)
-  fake(:insert_fake_brewery, BREWERIES_COUNT, THREAD_MULTIPLIER)
-  fake(:insert_fake_style, STYLES_COUNT, THREAD_MULTIPLIER)
-  fake(:insert_fake_beer, BEERS_COUNT, THREAD_MULTIPLIER)
-  fake(:insert_fake_rating, RATINGS_COUNT, THREAD_MULTIPLIER)
+  fake('user', USER_COUNT, THREAD_MULTIPLIER)
+  fake('brewery', BREWERIES_COUNT, THREAD_MULTIPLIER)
+  fake('style', STYLES_COUNT, THREAD_MULTIPLIER)
+  fake('beer', BEERS_COUNT, THREAD_MULTIPLIER)
+  fake('rating', RATINGS_COUNT, THREAD_MULTIPLIER)
   @threads.each(&:join)
 end
 

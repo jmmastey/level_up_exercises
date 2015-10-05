@@ -15,9 +15,15 @@ class Robot
   end
 
   def generate_name
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
-      "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+      "#{generate_char}#{generate_char}#{generate_num}#{generate_num}#{generate_num}"
+  end
+
+  def generate_char
+    ('A'..'Z').to_a.sample
+  end
+
+  def generate_num
+    rand(10)
   end
 
   def duplication_check

@@ -28,7 +28,7 @@ class Triangle
 		puts 'This triangle is also a right triangle!' if angles.include? 90
 	end
 
-	def calculate_angles a, b, c
+	def calculate_angles(a, b, c)
 		angleA = radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
 		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
 		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))

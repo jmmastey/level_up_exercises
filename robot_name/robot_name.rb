@@ -16,9 +16,8 @@ class Robot
 
   def generate_name
     name = ""
-    2.times {name += generate_char}
-    3.times {name += generate_num.to_s}
-    binding.pry
+    2.times { name += generate_char }
+    3.times { name += generate_num.to_s }
   end
 
   def generate_char
@@ -49,4 +48,4 @@ puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 generator = -> { 'AA011' }
 robot1 = Robot.new(generator)
 puts "My pet robot's name is #{robot1.name}, but we usually call him sparky."
-#robot1 = Robot.new(generator)
+robot2 = Robot.new(generator)

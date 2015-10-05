@@ -16,8 +16,9 @@ class Robot
 
   def generate_name
     name = ""
-    2.times { name += generate_char }
-    3.times { name += generate_num.to_s }
+    2.times {name << generate_char}
+    3.times {name << generate_num.to_s}
+    name
   end
 
   def generate_char
@@ -30,7 +31,7 @@ class Robot
 
   def duplication_check
     raise NameCollisionError, ERROR if incorrect_name_pattern? || name_taken?
-    @@registry << @name
+    @@registry << name
   end
 
   def name_taken?
@@ -48,4 +49,4 @@ puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 generator = -> { 'AA011' }
 robot1 = Robot.new(generator)
 puts "My pet robot's name is #{robot1.name}, but we usually call him sparky."
-robot2 = Robot.new(generator)
+#robot2 = Robot.new(generator)

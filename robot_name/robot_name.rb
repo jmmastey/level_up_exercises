@@ -5,20 +5,45 @@ class Robot
 
   @@registry
 
+  def new_name_using_default_generator 
+    generate_char = -> { ('A'..'Z').to_a.sample }
+    generate_num = -> { rand(10) }
+
+    # pattern AB123
+    return "#{generate_char.call}
+            #{generate_char.call}
+            #{generate_num.call}
+            #{generate_num.call}
+            #{generate_num.call}"
+  end
+
+  def new_name_is_invalid(new_name)
+    #garbage sorting
+    if new_name == '' || new_name == nil 
+      return true
+    # pattern matching
+    elsif !(new_name !=~ /[[:alpha:]]{2}[[:digit:]]{3}/)
+      return true
+    # redundancy matching
+    elsif @@registry.include?(new_name)
+      return true
+    end
+    return false
+  end
+
   def initialize(args = {})
     @@registry ||= []
     @name_generator = args[:name_generator]
+    @name = ''
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
-
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    while new_name_is_invalid(@name)
+      if @name_generator
+        @name = @name_generator.call
+      else
+        @name = new_name_using_default_generator()
+      end
     end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
     @@registry << @name
   end
 end

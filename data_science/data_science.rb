@@ -28,6 +28,8 @@ class DataScience
 	end
 
 	def parse_json_file(file_path)
+		# return if !File.exists?(file_path)
+
 		json_data = open_and_read_file(file_path)
 
 		@visits = JSON.parse(json_data)		

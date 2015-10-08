@@ -5,11 +5,27 @@ require './lib/bomb'
 
 enable :sessions
 
-bomb = Bomb.new("1234", "0000", "bad code")
+bomb = Bomb.new("1234", "0000", 3)
+
+dummy = ["We said number dummy!",
+		"Next time, I'm blowing up!",
+		"Are you drunk?",
+		"How could 0 to 9 confuse you?",
+		"I'm going to start counting these as tries..."]
 
 get '/' do
 
-	@bombStatus = bomb.active? ? "live" : "inactive"
+	if bomb.exploded?
+		redirect to('/exploded')
+	end
+
+	@dummy = nil
+	if params['dummy']
+		index = rand(3)
+		@dummy = dummy[index]
+	end
+
+	@bombActive = bomb.active?
 	@tries = bomb.failed_deactivations
 	@maxTries = bomb.max_failed_deactivations
 	erb :index
@@ -19,13 +35,16 @@ end
 post '/' do
 	code = params['code']
 
-	bomb.enter_code(code)
-	@bombStatus = bomb.active? ? "live" : "inactive"
-
-	if bomb.active?
-
+	if !(code =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/)
+		redirect to ('/?dummy=duh')
 	end
-	erb :index
+	bomb.enter_code(code)
+
+	redirect to('/')
+end
+
+get '/exploded' do
+	erb :exploded
 end
 
 # we can shove stuff into the session cookie YAY!

@@ -1,5 +1,15 @@
-<p>Bomb is <%= @bombStatus %></p>
-<p><%= @tries %> over <%= @maxTries %>
+
+<p>Bomb is <%= @bombActive ? "Active" : "Inactive" %></p>
+
+<% if @bombActive %>
+<!-- <p>You have <%= '12' %> seconds before it explodes.</p> -->
+
+<p><%= @maxTries-@tries %> tries left.</p>
+<% end %>
+
+<% if @dummy != nil %>
+<p style="color:#ff0000"><%= @dummy %></p>
+<% end %>
 <form method="post" action="/">
 
 Code: <input type='text' name="code" />

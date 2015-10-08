@@ -1,4 +1,5 @@
 require 'json'
+require 'ABAnalyzer'
 
 class DataScience
 	@visits
@@ -40,10 +41,10 @@ class DataScience
 	end
 
 	def find_counts_per_cohort
-		@cohortACount = 0.0
-		@cohortBCount = 0.0
-		@cohortAConvCount = 0.0
-		@cohortBConvCount = 0.0
+		@cohortACount = 0
+		@cohortBCount = 0
+		@cohortAConvCount = 0
+		@cohortBConvCount = 0
 
 		@visits.each do |visit| 
 			cohortForVisit = visit['cohort']
@@ -74,36 +75,39 @@ class DataScience
 		@avgRateA = 0.0
 		@avgRateB = 0.0
 
-		@avgRateA = @cohortAConvCount / @cohortACount * 100
-		@avgRateB = @cohortBConvCount / @cohortBCount * 100
+		@avgRateA = @cohortAConvCount.to_f / @cohortACount.to_f
+		@avgRateB = @cohortBConvCount.to_f / @cohortBCount.to_f
 	end
 
 	def able_to_calculate_avg_conv_rate?
-		if @avgRateA == 0 && @avgRateB == 0
+		if @avgRateA == 0 || @avgRateB == 0
 			return false
 		end
 		true
 	end
 
-	def calculate_95_perc_conversion_rate_range(avg_conv_rate, trial_count, cohort)
-		@rateBLowRange = 0 
-		@rateBHighRange = 0
-		@rateALowRange = 0 
-		@rateAHighRange = 0
-		se = sqrt(avg_conv_rate*(1-avg_conv_rate)/trial_count)
+	def calculate_95_perc_conversion_rate_range(cohort)
+		case cohort
+		  when "A"
+			@rateALowRange = 0 
+			@rateAHighRange = 0
 
-		if cohort == "A"
-			@rateALowRange = avg_conv_rate % 1.96 * se
-			@rateAHighRange = avg_conv_rate % -1.96 * se
-		elsif cohort == "B"
-			@rateBLowRange = avg_conv_rate % 1.96 * se
-			@rateBHighRange = avg_conv_rate % -1.96 * se
+			result = ABAnalyzer.confidence_interval(@cohortAConvCount, @cohortACount, 0.95)
+			@rateALowRange = result[0]
+			@rateAHighRange = result[1]
+		  when "B"
+			@rateBLowRange = 0 
+			@rateBHighRange = 0
+
+			result = ABAnalyzer.confidence_interval(@cohortBConvCount, @cohortBCount, 0.95)
+			@rateBLowRange = result[0]
+			@rateBHighRange = result[1]			
 		end
 			
 	end
 
 	def able_to_calculate_95_conv_rate_ranges?
-		if @rateALowRange == 0 && @rateAHighRange == 0 && @rateBLowRange == 0 && @rateBHighRange == 0
+		if @rateALowRange == 0 || @rateAHighRange == 0 || @rateBLowRange == 0 || @rateBHighRange == 0
 			return false
 		end
 		true
@@ -111,18 +115,71 @@ class DataScience
 
 	def calculate_confidence_level 
 		# dropped here cause need to integrate manually ABAnalyzer as I can't build the gem :(
+			values = Hash.new
+			values['a'] = { 'conved' => @cohortAConvCount, 'unconved' => @cohortACount-@cohortAConvCount}
+			values['b'] = { 'conved' => @cohortBConvCount, 'unconved' => @cohortBCount-@cohortBConvCount}
+
+			analyzer = ABAnalyzer::ABTest.new values
+
+			@confidenceLevel = 0
+			@confidenceLevel = analyzer.chisquare_p
 	end
 
+	def able_to_produce_confidence_level?
+		if @confidenceLevel != 0 
+			return true
+		end
+		false
+	end
 
 	def show_avg_rates
-		print "Avg A Rate: "+@avgRateA.round(2).to_s+"% ("+@cohortAConvCount.to_s+"/"+@cohortACount.to_s+")\n"
-		print "Avg B Rate: "+@avgRateB.round(2).to_s+"% ("+@cohortBConvCount.to_s+"/"+ @cohortBCount.to_s+")\n"
+		# presentable values.
+		avgRateAPres = @avgRateA *100
+		convCountAPres = @cohortAConvCount * 100
+		countAPres = @cohortACount * 100
+
+		avgRateBPres = @avgRateB * 100
+		convCountBPres = @cohortBConvCount * 100
+		countBPres = @cohortBCount * 100
+		
+		puts "Avg A Rate: "+avgRateAPres.round(2).to_s+"% ("+convCountAPres.to_s+"/"+countAPres.to_s+")"
+		puts "Avg B Rate: "+avgRateBPres.round(2).to_s+"% ("+convCountBPres.to_s+"/"+ countBPres.to_s+")"
 	end
 
 	def show_rates_ranges
-		print "A Rates: ["+@rateALowRange+" - "+@rateAHighRange+"]\n"
-		print "B Rates: ["+@rateBLowRange+" - "+@rateBHighRange+"]\n"
+		#presentable values
+		aLowPres = @rateALowRange * 100
+		aHighPres = @rateAHighRange * 100
+
+		bLowPres = @rateBLowRange * 100
+		bHighPres = @rateBHighRange * 100
+
+		puts "A Rates: ["+aLowPres.round(2).to_s+"% - "+aHighPres.round(2).to_s+"%]"
+		puts "B Rates: ["+bLowPres.round(2).to_s+"% - "+bHighPres.round(2).to_s+"%]"
+	end
+
+	def show_confidence_level
+		#presentable values
+		confPres = @confidenceLevel * 100
+
+		puts "Confidence Level: "+confPres.round(2).to_s+"%"
 	end
 
 end
+
+filePath = './data_export_2014_06_20_15_59_02.json'
+dataScience = DataScience.new
+
+dataScience.parse_json_file(filePath)
+dataScience.find_counts_per_cohort
+
+dataScience.calculate_average_conversion_rate
+dataScience.calculate_95_perc_conversion_rate_range("A")
+dataScience.calculate_95_perc_conversion_rate_range("B")
+dataScience.calculate_confidence_level
+
+dataScience.show_avg_rates
+dataScience.show_rates_ranges
+dataScience.show_confidence_level
+
 

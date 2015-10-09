@@ -17,7 +17,7 @@ class Robot
     if new_name == '' || new_name.nil?
       return true
     # pattern matching
-    elsif !(new_name !=~ /[[:alpha:]]{2}[[:digit:]]{3}/)
+    elsif !(new_name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
       return true
     # redundancy matching
     elsif @registry.include?(new_name)

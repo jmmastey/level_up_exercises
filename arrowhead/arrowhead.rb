@@ -15,14 +15,12 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
-
     if CLASSIFICATIONS.include? region == false
       raise "Unknown region, please provide a valid region."
     end
     shapes = CLASSIFICATIONS[region]
-    if shapes.include? shape == false 
+    if shapes.include? shape == false
       raise "Unknown shape value. \
       Are you sure you know what you're talking about?"
     end

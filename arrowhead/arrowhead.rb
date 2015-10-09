@@ -21,13 +21,11 @@ class Arrowhead
     if CLASSIFICATIONS.include? region == false
       raise "Unknown region, please provide a valid region."
     end
-
     shapes = CLASSIFICATIONS[region]
-
     if shapes.include? shape == false 
-      raise "Unknown shape value. Are you sure you know what you're talking about?"
+      raise "Unknown shape value. \
+      Are you sure you know what you're talking about?"
     end
-
     arrowhead = shapes[shape]
     "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end

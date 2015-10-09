@@ -14,6 +14,10 @@ class Dinobase
     data
   end
 
+  def if_not_number_then_not_avail(potential_number)
+    (potential_number =~ /\A[-+]?\d+\z/) ? potential_number : 'N/A'
+  end
+
   def new_entry_for_dinodex_row(row)
     cells = row.split(',')
 
@@ -22,7 +26,7 @@ class Dinobase
     new_entry['period'] = cells[1]
     new_entry['continent'] = cells[2]
     new_entry['diet'] = cells[3]
-    new_entry['weight'] = cells[4].to_i != 0 ? cells[4] : 'N/A'
+    new_entry['weight'] = if_not_number_then_not_avail(cells[4])
     new_entry['walking'] = cells[5]
     new_entry['description'] = cells[6]
 
@@ -57,7 +61,7 @@ class Dinobase
     new_entry['period'] = cells[1]
     new_entry['continent'] = 'N/A'
     new_entry['diet'] = cells[2] == 'Yes' ? 'Carnivore' : 'Herbivore'
-    new_entry['weight'] = /\A[-+]?\d+\z/ === cells[3] ? cells[3] : 'N/A'
+    new_entry['weight'] = if_not_number_then_not_avail(cells[3])
     new_entry['walking'] = cells[4]
     new_entry['description'] =
     'Not a lot is known about ' + cells[0] + ' at this point.'
@@ -152,29 +156,25 @@ class Dinocalls
     new_dino_list
   end
 
+  def test_if_value_matches_search(field, search_string)
+    field.downcase.include?(search_string.downcase)
+  end
+
+  def test_if_dino_matches_search(dino, search_string)
+    keys_to_search = %w(name description period diet continent
+                        walking weight)
+    keys_to_search.each do |key|
+      return true if test_if_value_matches_search(dino[key], search_string)
+    end
+    false
+  end
+
   def filter_search(dinosaurs, search_string)
     new_dino_list = []
 
     dinosaurs.each do |dino|
-
-      dino_name = dino['period']
-      dino_description = dino['description']
-      dino_period = dino['period']
-      dino_diet = dino['diet']
-      dino_continent = dino['continent']
-      dino_walking = dino['walking']
-      dino_weight = dino['weight']
-
-      if dino_name.downcase.include?(search_string.downcase) ||
-         dino_description.downcase.include?(search_string.downcase) ||
-         dino_period.downcase.include?(search_string.downcase) ||
-         dino_diet.downcase.include?(search_string.downcase) ||
-         dino_continent.downcase.include?(search_string.downcase) ||
-         dino_walking.downcase.include?(search_string.downcase) ||
-         dino_weight.downcase.include?(search_string.downcase)
-
-        new_dino_list.push(dino)
-      end
+      matched = test_if_dino_matches_search(dino, search_string)
+      new_dino_list.push(dino) unless matched == false
     end
 
     new_dino_list
@@ -248,8 +248,76 @@ class Dinocalls
     puts "--json         Export results in JSON"
   end
 
+  def handle_posture(args, final_dinosaurs_list)
+    if args.include? "-b"
+      final_dinosaurs_list = filter_bipeds(final_dinosaurs_list)
+    end
+    final_dinosaurs_list
+  end
+
+  def handle_diet(args, final_dinosaurs_list)
+    if args.include? "-c"
+      final_dinosaurs_list = filter_carnivors(final_dinosaurs_list)
+    end
+    final_dinosaurs_list
+  end
+
+  def handle_size(args, final_dinosaurs_list)
+    if args.include? "-s"
+      final_dinosaurs_list = filter_small(final_dinosaurs_list)
+    elsif args.include? "-B"
+      final_dinosaurs_list = filter_big(final_dinosaurs_list)
+    end
+    final_dinosaurs_list
+  end
+
+  def handle_period(args, final_dinosaurs_list)
+    if args.include? "--period"
+      index_of_period_arg = args.index("--period")
+      period_param = args[index_of_period_arg + 1]
+
+      final_dinosaurs_list = filter_period(final_dinosaurs_list, period_param)
+    end
+    final_dinosaurs_list
+  end
+
+  def handle_search(args, final_dinosaurs_list)
+    if args.include? "--search"
+      index_of_search_arg = args.index("--search")
+      search_param = args[index_of_search_arg + 1]
+
+      final_dinosaurs_list = filter_search(final_dinosaurs_list, search_param)
+    end
+    final_dinosaurs_list
+  end
+
+  def handle_export(args, final_dinosaurs_list)
+    if args.include? "--json"
+      json_export(final_dinosaurs_list)
+    else
+      text_export(final_dinosaurs_list)
+    end
+  end
+
+  def handle_params(args, final_dinosaurs_list)
+    final_dinosaurs_list = handle_posture(args, final_dinosaurs_list)
+    final_dinosaurs_list = handle_diet(args, final_dinosaurs_list)
+    final_dinosaurs_list = handle_size(args, final_dinosaurs_list)
+    final_dinosaurs_list = handle_period(args, final_dinosaurs_list)
+    final_dinosaurs_list = handle_search(args, final_dinosaurs_list)
+    final_dinosaurs_list
+  end
+
+  def handle_usage_and_decide_if_continue(args)
+    if args.include?("--help") || arg_does_not_exist(args)
+      display_usage
+      return false
+    end
+    true
+  end
+
   def main(args)
-    # load data from csv
+    return unless handle_usage_and_decide_if_continue
     dinodatabase = Dinobase.new
 
     dinodatabase.parse_dinodex
@@ -257,45 +325,9 @@ class Dinocalls
 
     final_dinosaurs_list = Array.new(dinodatabase.dinosaurs)
 
-    if args.include?("--help") || arg_does_not_exist(args)
-      display_usage
-      return
-    end
-
-    if args.include? "-b"
-      final_dinosaurs_list = filter_bipeds(final_dinosaurs_list)
-    end
-
-    if args.include? "-c"
-      final_dinosaurs_list = filter_carnivors(final_dinosaurs_list)
-    end
-
-    if args.include? "-s"
-      final_dinosaurs_list = filter_small(final_dinosaurs_list)
-    elsif args.include? "-B"
-      final_dinosaurs_list = filter_big(final_dinosaurs_list)
-    end
-
-    if args.include? "--period"
-      index_of_period_arg = args.index("--period")
-      periodParam = args[index_of_period_arg + 1]
-
-      final_dinosaurs_list = filter_period(final_dinosaurs_list, periodParam)
-    end
-
-    if args.include? "--search"
-      indexOfSearchArg = args.index("--search")
-      searchParam = args[indexOfSearchArg + 1]
-
-      final_dinosaurs_list = filter_search(final_dinosaurs_list, searchParam)
-    end
-
-    # finally we export our work
-    if args.include? "--json"
-      json_export(final_dinosaurs_list)
-    else
-      text_export(final_dinosaurs_list)
-    end
+   
+    final_dinosaurs_list = handle_params(args, final_dinosaurs_list)
+    handle_export(args, final_dinosaurs_list)
   end
 end
 

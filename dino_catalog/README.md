@@ -23,6 +23,6 @@ Go check out the CSVs and come back. Done? Cool, I've just got a few features I 
 #### Extra Credit
 
 1. I would love to have a way to do (and chain) generic search by parameters. I can pass in a hash, and I'd like to get the proper list of dinos back out.
-2. CSV isn't may favorite format in the world. Can you implement a JSON export feature?
+2. CSV isn't my favorite format in the world. Can you implement a JSON export feature?
 
 Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long and up to 8 tons! Suh-weet.)

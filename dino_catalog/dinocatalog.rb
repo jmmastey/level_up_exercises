@@ -324,8 +324,6 @@ class Dinocalls
     dinodatabase.parse_african_dinos
 
     final_dinosaurs_list = Array.new(dinodatabase.dinosaurs)
-
-   
     final_dinosaurs_list = handle_params(args, final_dinosaurs_list)
     handle_export(args, final_dinosaurs_list)
   end

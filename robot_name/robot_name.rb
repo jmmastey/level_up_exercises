@@ -57,15 +57,13 @@ class Robot
   end
 
   def produce_valid_name
-    begin
-      generate_self_name
-      @registry.add_entry(@name)
-    rescue NameCollisionError
-      max_attempts -= 1
-      retry unless @max_attempts == 0
-    rescue StandardError => error
-      puts "Error: " << error.to_s
-    end
+    generate_self_name
+    @registry.add_entry(@name)
+  rescue NameCollisionError
+    max_attempts -= 1
+    retry unless @max_attempts == 0
+  rescue StandardError => error
+    puts "Error: " << error.to_s
   end
 end
 

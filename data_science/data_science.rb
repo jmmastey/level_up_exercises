@@ -1,128 +1,168 @@
 require 'json'
+require 'ABAnalyzer'
 
 class DataScience
-	@visits
-	@cohortACount
-	@cohortBCount
-	@cohortAConvCount
-	@cohortBConvCount
+  def initializer(_args = {})
+    @visits = []
+  end
 
-	@avgRateA
-	@rateALowRange 
-	@rateAHighRange
+  def open_and_read_file(file_path)
+    file = File.open(file_path, "r")
+    data = file.read
+    file.close
+    data
+  end
 
-	@avgRateB
-	@rateBLowRange 
-	@rateBHighRange
+  def parse_json_file(file_path)
+    # return if !File.exists?(file_path)
 
-	def initializer(args = {})
-		@visits = Array.new
-	end
+    json_data = open_and_read_file(file_path)
 
-	def open_and_read_file(file_path)
-		file = File.open(file_path, "r")
-		data = file.read
-		file.close
-		return data
-	end
+    @visits = JSON.parse(json_data)
+  end
 
-	def parse_json_file(file_path)
-		json_data = open_and_read_file(file_path)
+  def successfully_loaded?
+    return false if @visits.nil? || @visits.empty?
+    true
+  end
 
-		@visits = JSON.parse(json_data)		
-	end
+  def find_counts_per_cohort
+    @cohort_a_count = 0
+    @cohort_b_count = 0
+    @cohort_a_conv_count = 0
+    @cohort_b_conv_count = 0
 
-	def successfully_loaded?
-		if @visits == nil || @visits.empty?
-			return false
-		 end
-		 true
-	end
+    @visits.each do |visit|
+      cohort_for_visit = visit['cohort']
+      conversion_for_visit = visit['result']
 
-	def find_counts_per_cohort
-		@cohortACount = 0.0
-		@cohortBCount = 0.0
-		@cohortAConvCount = 0.0
-		@cohortBConvCount = 0.0
+      case cohort_for_visit
+        when 'A'
+          @cohort_a_count += 1
+          @cohort_a_conv_count += conversion_for_visit
+        when 'B'
+          @cohort_b_count += 1
+          @cohort_b_conv_count += conversion_for_visit
+        else
+          next
+      end
+    end
+  end
 
-		@visits.each do |visit| 
-			cohortForVisit = visit['cohort']
-			conversionForVisit = visit['result']
+  def able_to_find_cohort_counts?
+    return true if @cohort_a_count != 0 && @cohort_b_count != 0
+    false
+  end
 
-			case cohortForVisit
-			when 'A'
-				@cohortACount += 1
-				@cohortAConvCount += conversionForVisit
-			when 'B'
-				@cohortBCount += 1
-				@cohortBConvCount += conversionForVisit
-			else 
-				next
-			end
-		end
+  def calculate_average_conversion_rate
+    @avg_rate_a = 0.0
+    @avg_rate_b = 0.0
 
-	end
+    @avg_rate_a = @cohort_a_conv_count.to_f / @cohort_a_count.to_f
+    @avg_rate_b = @cohort_b_conv_count.to_f / @cohort_b_count.to_f
+  end
 
-	def able_to_find_cohort_counts?
-		if @cohortACount != 0 && @cohortBCount != 0 
-			return true
-		end
-		false
-	end
+  def able_to_calculate_avg_conv_rate?
+    return false if @avg_rate_a == 0 || @avg_rate_b == 0
+    true
+  end
 
-	def calculate_average_conversion_rate
-		@avgRateA = 0.0
-		@avgRateB = 0.0
+  def calculate_95_perc_conversion_rate_range(cohort)
+    case cohort
+      when "A"
+        @rate_a_low_range = 0
+        @rate_a_high_range = 0
 
-		@avgRateA = @cohortAConvCount / @cohortACount * 100
-		@avgRateB = @cohortBConvCount / @cohortBCount * 100
-	end
+        result = ABAnalyzer.confidence_interval(@cohort_a_conv_count,
+                                                @cohort_a_count, 0.95)
+        @rate_a_low_range = result[0]
+        @rate_a_high_range = result[1]
+      when "B"
+        @rate_b_low_range = 0
+        @rate_b_high_range = 0
 
-	def able_to_calculate_avg_conv_rate?
-		if @avgRateA == 0 && @avgRateB == 0
-			return false
-		end
-		true
-	end
+        result = ABAnalyzer.confidence_interval(@cohort_b_conv_count,
+                                                @cohort_b_count, 0.95)
+        @rate_b_low_range = result[0]
+        @rate_b_high_range = result[1]
+    end
+  end
 
-	def calculate_95_perc_conversion_rate_range(avg_conv_rate, trial_count, cohort)
-		@rateBLowRange = 0 
-		@rateBHighRange = 0
-		@rateALowRange = 0 
-		@rateAHighRange = 0
-		se = sqrt(avg_conv_rate*(1-avg_conv_rate)/trial_count)
+  def able_to_calculate_95_conv_rate_ranges?
+    if @rate_a_low_range == 0 || @rate_a_high_range == 0 ||
+       @rate_b_low_range == 0 || @rate_b_high_range == 0
+      return false
+    end
+    true
+  end
 
-		if cohort == "A"
-			@rateALowRange = avg_conv_rate % 1.96 * se
-			@rateAHighRange = avg_conv_rate % -1.96 * se
-		elsif cohort == "B"
-			@rateBLowRange = avg_conv_rate % 1.96 * se
-			@rateBHighRange = avg_conv_rate % -1.96 * se
-		end
-			
-	end
+  def calculate_confidence_level
+    values = {}
+    values['a'] = { 'conved' => @cohort_a_conv_count,
+                    'unconved' => @cohort_a_count - @cohort_a_conv_count }
+    values['b'] = { 'conved' => @cohort_b_conv_count,
+                    'unconved' => @cohort_b_count - @cohort_b_conv_count }
 
-	def able_to_calculate_95_conv_rate_ranges?
-		if @rateALowRange == 0 && @rateAHighRange == 0 && @rateBLowRange == 0 && @rateBHighRange == 0
-			return false
-		end
-		true
-	end
+    analyzer = ABAnalyzer::ABTest.new values
 
-	def calculate_confidence_level 
-		# dropped here cause need to integrate manually ABAnalyzer as I can't build the gem :(
-	end
+    @confidence_level = 0
+    @confidence_level = analyzer.chisquare_p
+  end
 
+  def able_to_produce_confidence_level?
+    return true if @confidence_level != 0
+    false
+  end
 
-	def show_avg_rates
-		print "Avg A Rate: "+@avgRateA.round(2).to_s+"% ("+@cohortAConvCount.to_s+"/"+@cohortACount.to_s+")\n"
-		print "Avg B Rate: "+@avgRateB.round(2).to_s+"% ("+@cohortBConvCount.to_s+"/"+ @cohortBCount.to_s+")\n"
-	end
+  def show_avg_rates
+    # presentable values.
+    avg_rate_a_pres = @avg_rate_a * 100
+    conv_count_a_pres = @cohort_a_conv_count * 100
+    count_a_pres = @cohort_a_count * 100
 
-	def show_rates_ranges
-		print "A Rates: ["+@rateALowRange+" - "+@rateAHighRange+"]\n"
-		print "B Rates: ["+@rateBLowRange+" - "+@rateBHighRange+"]\n"
-	end
+    avg_rate_b_pres = @avg_rate_b * 100
+    conv_count_b_pres = @cohort_b_conv_count * 100
+    count_b_pres = @cohort_b_count * 100
 
+    puts "Avg A Rate: " + avg_rate_a_pres.round(2).to_s + "% (" +
+      conv_count_a_pres.to_s + "/" + count_a_pres.to_s + ")"
+    puts "Avg B Rate: " + avg_rate_b_pres.round(2).to_s + "% (" +
+      conv_count_b_pres.to_s + "/" + count_b_pres.to_s + ")"
+  end
+
+  def show_rates_ranges
+    # presentable values
+    a_low_pres = @rate_a_low_range * 100
+    a_high_pres = @rate_a_high_range * 100
+
+    b_low_pres = @rate_b_low_range * 100
+    b_high_pres = @rate_b_high_range * 100
+
+    puts "A Rates: [" + a_low_pres.round(2).to_s + "% - " +
+      a_high_pres.round(2).to_s + "%]"
+    puts "B Rates: [" + b_low_pres.round(2).to_s + "% - " +
+      b_high_pres.round(2).to_s + "%]"
+  end
+
+  def show_confidence_level
+    # presentable values
+    conf_pres = @confidence_level * 100
+
+    puts "Confidence Level: " + conf_pres.round(2).to_s + "%"
+  end
 end
 
+file_path = './data_export_2014_06_20_15_59_02.json'
+data_science = DataScience.new
+
+data_science.parse_json_file(file_path)
+data_science.find_counts_per_cohort
+
+data_science.calculate_average_conversion_rate
+data_science.calculate_95_perc_conversion_rate_range("A")
+data_science.calculate_95_perc_conversion_rate_range("B")
+data_science.calculate_confidence_level
+
+data_science.show_avg_rates
+data_science.show_rates_ranges
+data_science.show_confidence_level

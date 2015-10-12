@@ -15,7 +15,7 @@ class Robot
   end
 
   def assign_name_generator(name_generator)
-    name_generator.nil? ? DefaultNameGenerator.new : name_generator
+    name_generator || DefaultNameGenerator.new
   end
 
   def generate_self_name
@@ -27,7 +27,7 @@ class Robot
     @registry.add_entry(@name)
   rescue NameCollisionError
     max_attempts -= 1
-    retry unless @max_attempts == 0
+    retry unless @max_attempts.zero?
   rescue
     raise
   end

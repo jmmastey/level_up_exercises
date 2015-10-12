@@ -1,1 +1,0 @@
-class PatternError < RuntimeError; end

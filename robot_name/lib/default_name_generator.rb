@@ -1,10 +1,16 @@
 class DefaultNameGenerator
-  def call
-    generate_char = -> { ('A'..'Z').to_a.sample }
-    generate_num = -> { rand(10) }
+  def alpha_gen
+    ('A'..'Z').to_a.sample
+  end
 
-    # pattern AB123
-    "#{generate_char.call}#{generate_char.call}"\
-    "#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+  def digit_gen
+    rand(10)
+  end
+
+  def call
+    new_name = ""
+    2.times { new_name.concat(alpha_gen) }
+    3.times { new_name.concat(digit_gen.to_s) }
+    new_name
   end
 end

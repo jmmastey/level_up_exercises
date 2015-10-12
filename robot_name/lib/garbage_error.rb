@@ -1,0 +1,1 @@
+class GarbageError < RuntimeError; end

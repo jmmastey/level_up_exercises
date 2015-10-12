@@ -23,7 +23,8 @@ class Arrowhead
         arrowhead = shapes[shape]
         "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
       else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
+        raise "Unknown shape value. \
+        Are you sure you know what you're talking about?"
       end
     else
       raise "Unknown region, please provide a valid region."

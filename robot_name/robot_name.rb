@@ -1,29 +1,40 @@
-class NameCollisionError < RuntimeError; end
+require './lib/name_collision_error'
+require './lib/default_name_generator'
+require './lib/registry'
 
 class Robot
   attr_accessor :name
-
-  @@registry
+  MAX_ATTEMPTS = 10
 
   def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+    @name_generator = assign_name_generator(args[:name_generator])
+    @registry = args[:registry]
+    @max_attempts = MAX_ATTEMPTS
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+    produce_valid_name
+  end
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
+  def assign_name_generator(name_generator)
+    name_generator || DefaultNameGenerator.new
+  end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+  def generate_self_name
+    @name = @name_generator.call
+  end
+
+  def produce_valid_name
+    generate_self_name
+    @registry.add_entry(@name)
+  rescue NameCollisionError
+    max_attempts -= 1
+    retry unless @max_attempts.zero?
+  rescue
+    raise
   end
 end
 
-robot = Robot.new
+registry = Registry.new
+robot = Robot.new(registry: registry)
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!

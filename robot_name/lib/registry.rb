@@ -1,7 +1,3 @@
-require './lib/pattern_error'
-require './lib/name_collision_error'
-require './lib/garbage_error'
-
 class Registry
   class GarbageError < RuntimeError; end
   class CollisionError < RuntimeError; end
@@ -20,6 +16,7 @@ class Registry
     @registry.push(new_entry)
   end
 
+private
   def test_garbage_name(new_entry)
     raise GarbageError, "Junk Name Error" if new_entry == '' || new_entry.nil?
   end

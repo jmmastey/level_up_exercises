@@ -1,4 +1,3 @@
-require './lib/name_collision_error'
 require './lib/default_name_generator'
 require './lib/registry'
 
@@ -6,16 +5,12 @@ class Robot
   attr_accessor :name
   MAX_ATTEMPTS = 10
 
-  def initialize(args = {})
-    @name_generator = assign_name_generator(args[:name_generator])
-    @registry = args[:registry]
+  def initialize(name_generator: DefaultNameGenerator.new, registry: Registry.new)
+    @name_generator = name_generator
+    @registry = registry
     @max_attempts = MAX_ATTEMPTS
 
     produce_valid_name
-  end
-
-  def assign_name_generator(name_generator)
-    name_generator || DefaultNameGenerator.new
   end
 
   def generate_self_name
@@ -24,8 +19,8 @@ class Robot
 
   def produce_valid_name
     generate_self_name
-    @registry.add_entry(@name)
-  rescue NameCollisionError
+    @registry.add_entry(name)
+  rescue Registry::CollisionError
     max_attempts -= 1
     retry unless @max_attempts.zero?
   rescue

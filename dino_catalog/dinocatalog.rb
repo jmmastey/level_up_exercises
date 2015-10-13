@@ -20,9 +20,9 @@ class Dinocatalog
   end
 
   def filter_period(dinosaurs, period_string)
-    dinosaurs.select { |dino| 
+    dinosaurs.select do |dino|
       dino['period'].downcase.include? period_string.downcase
-    }
+    end
   end
 
   def test_if_value_matches_search(field, search_string)

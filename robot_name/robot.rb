@@ -5,8 +5,8 @@ class Robot
   attr_accessor :name
   MAX_ATTEMPTS = 10
 
-  def initialize(name_generator: DefaultNameGenerator.new, registry: Registry.new)
-    @name_generator = name_generator
+  def initialize(generator: DefaultNameGenerator.new, registry: Registry.new)
+    @name_generator = generator
     @registry = registry
     @max_attempts = MAX_ATTEMPTS
 

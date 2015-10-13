@@ -13,10 +13,11 @@ class Registry
 
   def add_entry(new_entry)
     validate_entry(new_entry)
-    @registry.push(new_entry)
+    @registry << new_entry
   end
 
-private
+  private
+
   def test_garbage_name(new_entry)
     raise GarbageError, "Junk Name Error" if new_entry == '' || new_entry.nil?
   end

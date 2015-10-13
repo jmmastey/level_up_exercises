@@ -2,3 +2,5 @@
 **/coverage
 **/*.swp
 .DS_Store
+
+arrowhead/arrowhead.rb

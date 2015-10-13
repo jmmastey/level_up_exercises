@@ -4,67 +4,25 @@ class Dinocatalog
   LARGE_SIZE = 2000
 
   def filter_bipeds(dinosaurs)
-    new_dino_list = []
-
-    dinosaurs.each do |dino|
-      dino_biped_status = dino['walking']
-
-      new_dino_list.push(dino) if dino_biped_status == 'Biped'
-    end
-
-    new_dino_list
+    dinosaurs.select { |dino| dino['walking'] == 'Biped' }
   end
 
   def filter_carnivors(dinosaurs)
-    new_dino_list = []
-
-    dinosaurs.each do |dino|
-      dino_diet_status = dino['diet']
-
-      new_dino_list.push(dino) if dino_diet_status != 'Herbivore'
-    end
-
-    new_dino_list
+    dinosaurs.select { |dino| dino['diet'] != 'Herbivore' }
   end
 
   def filter_small(dinosaurs)
-    new_dino_list = []
-
-    dinosaurs.each do |dino|
-      dino_size_status = dino['weight']
-      next if dino_size_status == 'N/A'
-
-      dino_size_int = dino_size_status.to_i
-      new_dino_list.push(dino) if dino_size_int <= LARGE_SIZE
-    end
-
-    new_dino_list
+    dinosaurs.select { |dino| dino['weight'].to_i <= LARGE_SIZE }
   end
 
   def filter_big(dinosaurs)
-    new_dino_list = []
-
-    dinosaurs.each do |dino|
-      dino_size_status = dino['weight']
-      next if dino_size_status == 'N/A'
-
-      dino_size_int = dino_size_status.to_i
-      new_dino_list.push(dino) if dino_size_int >= LARGE_SIZE
-    end
-
-    new_dino_list
+    dinosaurs.select { |dino| dino['weight'].to_i >= LARGE_SIZE }
   end
 
   def filter_period(dinosaurs, period_string)
-    new_dino_list = []
-
-    dinosaurs.each do |dino|
-      dino_period = dino['period']
-      small_period = period_string.downcase
-      new_dino_list.push(dino) if dino_period.downcase.include? small_period
-    end
-
-    new_dino_list
+    dinosaurs.select { |dino| 
+      dino['period'].downcase.include? period_string.downcase
+    }
   end
 
   def test_if_value_matches_search(field, search_string)
@@ -81,14 +39,7 @@ class Dinocatalog
   end
 
   def filter_search(dinosaurs, search_string)
-    new_dino_list = []
-
-    dinosaurs.each do |dino|
-      matched = test_if_dino_matches_search(dino, search_string)
-      new_dino_list.push(dino) unless matched == false
-    end
-
-    new_dino_list
+    dinosaurs.select { |dino| test_if_dino_matches_search(dino, search_string) }
   end
 
   def text_export(dinosaurs)
@@ -102,6 +53,7 @@ class Dinocatalog
       puts "Description: " + dino['description']
       puts "---"
     end
+    puts "Showed #{dinosaurs.count} Dinos"
   end
 
   def json_export(dinosaurs)

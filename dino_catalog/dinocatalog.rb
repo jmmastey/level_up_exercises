@@ -1,6 +1,6 @@
 require './dinobase.rb'
 
-class Dinocalls
+class Dinocatalog
   LARGE_SIZE = 2000
 
   def filter_bipeds(dinosaurs)
@@ -231,8 +231,7 @@ class Dinocalls
     return unless handle_usage_and_decide_if_continue(args)
     dinodatabase = Dinobase.new
 
-    dinodatabase.parse_dinodex
-    dinodatabase.parse_african_dinos
+    dinodatabase.parse_all
 
     final_dinosaurs_list = Array.new(dinodatabase.dinosaurs)
     final_dinosaurs_list = handle_params(args, final_dinosaurs_list)
@@ -241,5 +240,5 @@ class Dinocalls
 end
 
 # creating a new dinocall and passing args
-dinocall = Dinocalls.new
+dinocall = Dinocatalog.new
 dinocall.main(ARGV)

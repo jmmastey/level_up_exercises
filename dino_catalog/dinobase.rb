@@ -1,92 +1,64 @@
+require 'csv'
+
 class Dinobase
   attr_reader :dinosaurs
-  @debug = true
-  
-  def initialize(_args = {})
+  VALID_INTEGER_REGEX = /\A[-+]?\d+\z/
+
+  def initialize
     @dinosaurs = []
-    @debug = false
+    @parsing_recipes = [dinodex_recipe, african_dino_recipe]
   end
 
-  def open_and_read_file(file_path)
-    file = File.open(file_path, "r")
-    data = file.read
-    file.close
-    data
+  def dinodex_recipe
+    {
+      'name' => 'dinodex',
+      'file_path' => './dinodex.csv',
+      'recipe_proc' => proc do |row|
+        { 'name' => row[0],
+          'period' => row[1],
+          'continent' => row[2],
+          'diet' => row[3],
+          'weight' => number_or_na(row[4]),
+          'walking' => row[5],
+          'description' => row[6] ? row[6] : 'N/A' }
+      end,
+    }
   end
 
-  def if_not_number_then_not_avail(potential_number)
-    (potential_number =~ /\A[-+]?\d+\z/) ? potential_number : 'N/A'
+  def african_dino_recipe
+    {
+      'name' => 'african',
+      'file_path' => './african_dinosaur_export.csv',
+      'recipe_proc' => proc do |row|
+        { 'name' => row[0],
+          'period' => row[1],
+          'continent' => 'N/A',
+          'diet' => row[2] == 'Yes' ? 'Carnivore' : 'Herbivore',
+          'weight' => number_or_na(row[4]),
+          'walking' => row[4],
+          'description' =>
+          'Not a lot is known about ' + row[0] + ' at this point.' }
+      end,
+    }
   end
 
-  def new_entry_for_dinodex_row(row)
-    cells = row.split(',')
-
-    new_entry = {}
-    new_entry['name'] = cells[0]
-    new_entry['period'] = cells[1]
-    new_entry['continent'] = cells[2]
-    new_entry['diet'] = cells[3]
-    new_entry['weight'] = if_not_number_then_not_avail(cells[4])
-    new_entry['walking'] = cells[5]
-    new_entry['description'] = cells[6]
-
-    new_entry
+  def number_or_na(potential_number)
+    (potential_number =~ VALID_INTEGER_REGEX) ? potential_number : 'N/A'
   end
 
-  def parse_dinodex
-    csv_path = './dinodex.csv'
-    csv_content = open_and_read_file(csv_path)
-    line_count = 0
-    skipped_first_line = false
-    csv_content.each_line do |row|
-      # skip the header.
-      if skipped_first_line == false
-        skipped_first_line = true
-        next
+  def parse(source_name:)
+    @parsing_recipes.each do |recipe|
+      if recipe['name'] == source_name
+        CSV.foreach(recipe['file_path']) do |row|
+          @dinosaurs.push(recipe['recipe_proc'].call(row))
+        end
+        break
       end
-      new_entry = new_entry_for_dinodex_row(row)
-
-      @dinosaurs.push(new_entry)
-      line_count += 1
     end
-    print "Just loaded " + line_count.to_s +
-      " Dinosaurs from dinodex\n" if @debug
   end
 
-  def new_entry_for_african_dinos_row(row)
-    cells = row.split(',')
-
-    new_entry = {}
-    new_entry['name'] = cells[0]
-    new_entry['period'] = cells[1]
-    new_entry['continent'] = 'N/A'
-    new_entry['diet'] = cells[2] == 'Yes' ? 'Carnivore' : 'Herbivore'
-    new_entry['weight'] = if_not_number_then_not_avail(cells[3])
-    new_entry['walking'] = cells[4]
-    new_entry['description'] =
-    'Not a lot is known about ' + cells[0] + ' at this point.'
-
-    new_entry
-  end
-
-  def parse_african_dinos
-    csv_path = './african_dinosaur_export.csv'
-    csv_content = open_and_read_file(csv_path)
-
-    line_count = 0
-    skipped_first_line = false
-    csv_content.each_line do |row|
-      # skip the header.
-      if skipped_first_line == false
-        skipped_first_line = true
-        next
-      end
-      new_entry = new_entry_for_african_dinos_row(row)
-
-      @dinosaurs.push(new_entry)
-      line_count += 1
-    end
-    print "Just loaded " + line_count.to_s +
-      " Dinosaurs from african dinosaurs\n" if @debug
+  def parse_all
+    parse(source_name: 'african')
+    parse(source_name: 'dinodex')
   end
 end

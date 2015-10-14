@@ -1,0 +1,10 @@
+New category:
+<select name="category">
+  <option value="<%= nil %>"> --none-- </option>
+  <% Category.all.each do |category| %>
+    <% unless @quest.categories.include? category %>
+      <option value="<%= category.name %>"> <%= category.name %> </option>
+      <% end %>
+    <% end %>
+</select>
+<br>

@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @quest.title %>
+</p>
+
+<p>
+  <strong>Categories:</strong>
+  <% categories = @quest.categories %>
+  <% if categories.nil? %>
+    <%= "none" %>
+  <% else %>
+    <% categories.each do |category| %>
+      <%= "#{category.name}" %> <br>
+    <% end %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Required level:</strong>
+  <%= @quest.req_level %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @quest.level %>
+</p>
+
+<p>
+  <strong>Blizzard quest id:</strong>
+  <%= @quest.blizzard_id_num %>
+</p>
+
+<% if user_signed_in? && current_user.admin? %>
+  <%= link_to 'Edit quest', edit_quest_path(@quest) %>
+<% end %>

@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @character.name %>
+</p>
+
+<p>
+  <strong>Realm:</strong>
+  <%= @character.realm %>
+</p>
+
+<p>
+  <strong>Uncompleted objectives summary:</strong>
+  <table>
+    <tr>
+      <th>Zone</th>
+      <th>Quests</th>
+    </tr>
+    <% @zone_summaries.each do |name, data| %>
+      <tr>
+        <td id=<%= "#{name}_zone" %>>
+	  <% category = Category.find(data[:id]) %>
+	  <%= link_to name, category_path(category) + "?character=#{@character.id}" %>
+	</td>
+        <td id=<%= "#{name}_quests" %>> <%= data[:quest_count] %></td>
+      </tr>
+    <% end %>
+</p>
+
+<%# link_to 'Edit', edit_character_path(@character) %>
+<%# link_to 'Back', characters_path %>

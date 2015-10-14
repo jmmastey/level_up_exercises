@@ -2,6 +2,7 @@ AllCops:
   Exclude:
     - triangle_facts/*.rb
     - supportive/supportive.rb
+    - '**/db/schema.rb'
     
 # C: Missing top-level module documentation comment.
 Style/Documentation:

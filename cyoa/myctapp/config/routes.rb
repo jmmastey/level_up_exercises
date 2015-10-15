@@ -6,6 +6,15 @@ Rails.application.routes.draw do
   get 'about' => 'static_pages#about'
   get 'signup' => 'users#new'
 
+  resources :users
+  # GET     /users          #index    users_path
+  # GET     /users/1        #show     user_path(user)
+  # GET     /users/new      #new      new_user_path
+  # POST    /users          #created  users_path
+  # GET     /users/1/edit   #edit     edit_user_path(user)
+  # PATCH   /users/1        #update   user_path(user)
+  # DELETE  /users/1        #destroy  user_path(user)
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

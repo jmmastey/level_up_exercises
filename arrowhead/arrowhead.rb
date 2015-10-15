@@ -15,11 +15,13 @@ class Arrowhead
     },
   }
 
+  private_constant :CLASSIFICATIONS
+
   def self.classify(region, shape)
-    raise 'Unknown region, please provide a valid region.' unless CLASSIFICATIONS.include?(region)
+    raise "Unknown region #{region}, please provide a valid region." unless CLASSIFICATIONS.include?(region)
 
     shapes = CLASSIFICATIONS[region]
-    raise "Unknown shape value. Are you sure you know what you're talking about?" unless shapes.include?(shape)
+    raise "Unknown shape #{shape}, please provide a valid shape." unless shapes.include?(shape)
 
     arrowhead = shapes[shape]
     "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."

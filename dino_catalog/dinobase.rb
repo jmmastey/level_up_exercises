@@ -1,4 +1,5 @@
 require 'csv'
+require './dinosaur'
 
 class Dinobase
   attr_reader :dinosaurs
@@ -14,13 +15,13 @@ class Dinobase
       'name' => 'dinodex',
       'file_path' => './dinodex.csv',
       'recipe_proc' => proc do |row|
-        { 'name' => row[0],
-          'period' => row[1],
-          'continent' => row[2],
-          'diet' => row[3],
-          'weight' => number_or_na(row[4]),
-          'walking' => row[5],
-          'description' => row[6] ? row[6] : 'N/A' }
+        Dinosaur.new(name: row[0],
+          period: row[1],
+          continent: row[2],
+          diet: row[3],
+          weight: evaluated_weight(row[4]),
+          walking: row[5],
+          description: row[6] ? row[6] : 'N/A')
       end,
     }
   end
@@ -30,35 +31,33 @@ class Dinobase
       'name' => 'african',
       'file_path' => './african_dinosaur_export.csv',
       'recipe_proc' => proc do |row|
-        { 'name' => row[0],
-          'period' => row[1],
-          'continent' => 'N/A',
-          'diet' => row[2] == 'Yes' ? 'Carnivore' : 'Herbivore',
-          'weight' => number_or_na(row[4]),
-          'walking' => row[4],
-          'description' =>
-          'Not a lot is known about ' + row[0] + ' at this point.' }
+        Dinosaur.new(name: row[0],
+          period: row[1],
+          continent: 'Africa',
+          diet: row[2] == 'Yes' ? 'Carnivore' : 'Herbivore',
+          weight: evaluated_weight(row[3]),
+          walking: row[4],
+          description: 'N/A')
       end,
     }
   end
 
-  def number_or_na(potential_number)
+  def evaluated_weight(potential_number)
     (potential_number =~ VALID_INTEGER_REGEX) ? potential_number : 'N/A'
   end
 
-  def parse(source_name:)
-    @parsing_recipes.each do |recipe|
-      if recipe['name'] == source_name
-        CSV.foreach(recipe['file_path']) do |row|
-          @dinosaurs.push(recipe['recipe_proc'].call(row))
-        end
-        break
-      end
+  def parse(source_name)
+    recipe = @parsing_recipes.select do |stored_recipe|
+      stored_recipe['name'] == source_name 
+    end
+    return if recipe.empty?
+
+    CSV.foreach(recipe[0]['file_path'], :headers => :first_row) do |row|
+      @dinosaurs.push(recipe[0]['recipe_proc'].call(row))
     end
   end
 
   def parse_all
-    parse(source_name: 'african')
-    parse(source_name: 'dinodex')
+    %w(african, dinodex).each { |name| parse(name) }
   end
 end

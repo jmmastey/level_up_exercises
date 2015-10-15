@@ -1,193 +1,118 @@
 require './dinobase.rb'
+require './dinoshow.rb'
 
 class Dinocatalog
   LARGE_SIZE = 2000
+  HANDLERS = {
+    '-b' => :filter_bipeds,
+    '-c' => :filter_carnivores,
+    '-s' => :filter_small,
+    '-B' => :filter_big,
+    '--search' => :handle_search,
+    '--period' => :handle_period,
+  }
+  VALID_ARGS = ["-b",
+                "-c",
+                "--period",
+                "-s",
+                "-B",
+                "--search",
+                "--help",
+                "--json"]
 
-  def filter_bipeds(dinosaurs)
-    dinosaurs.select { |dino| dino['walking'] == 'Biped' }
+  def filter_bipeds(dinosaurs, _args)
+    dinosaurs.select { |dino| dino['walking'].casecmp('Biped') == 0 }
   end
 
-  def filter_carnivors(dinosaurs)
+  def filter_carnivores(dinosaurs, _args)
     dinosaurs.select { |dino| dino['diet'] != 'Herbivore' }
   end
 
-  def filter_small(dinosaurs)
-    dinosaurs.select { |dino| dino['weight'].to_i <= LARGE_SIZE }
+  def filter_small(dinosaurs, _args)
+    dinosaurs.select { |dino| dino['weight'].to_i < LARGE_SIZE }
   end
 
-  def filter_big(dinosaurs)
+  def filter_big(dinosaurs, _args)
     dinosaurs.select { |dino| dino['weight'].to_i >= LARGE_SIZE }
   end
 
-  def filter_period(dinosaurs, period_string)
+  def filter_period(dinosaurs, period)
+    return [] if period.nil?
     dinosaurs.select do |dino|
-      dino['period'].downcase.include? period_string.downcase
+      dino['period'].downcase.include? period.downcase
     end
   end
 
-  def test_if_value_matches_search(field, search_string)
-    field.downcase.include?(search_string.downcase)
+  def value_matches?(field, search_terms)
+    field.downcase.include?(search_terms.downcase)
   end
 
-  def test_if_dino_matches_search(dino, search_string)
-    keys_to_search = %w(name description period diet continent
-                        walking weight)
-    keys_to_search.each do |key|
-      return true if test_if_value_matches_search(dino[key], search_string)
-    end
-    false
+  def dino_matches?(dino, search_terms)
+    return [] if search_terms.nil?
+    keys = %w(name description period diet continent
+              walking weight)
+    keys.any? { |key| value_matches?(dino[key], search_terms) }
   end
 
-  def filter_search(dinosaurs, search_string)
-    dinosaurs.select { |dino| test_if_dino_matches_search(dino, search_string) }
+  def filter_search(dinosaurs, search_terms)
+    dinosaurs.select { |dino| dino_matches?(dino, search_terms) }
   end
 
-  def text_export(dinosaurs)
-    dinosaurs.each do |dino|
-      puts "Name: " + dino['name']
-      puts "Period: " + dino['period']
-      puts "Continent: " + dino['continent']
-      puts "Diet: " + dino['diet']
-      puts "Weight: " + dino['weight']
-      puts "Walking: " + dino['walking']
-      puts "Description: " + dino['description']
-      puts "---"
-    end
-    puts "Showed #{dinosaurs.count} Dinos"
-  end
-
-  def json_export(dinosaurs)
-    is_first_line = true
-    print "["
-    dinosaurs.each do |dino|
-      unless is_first_line
-        print ","
-        is_first_line = false
-      end
-      print "{"
-      print "\"name\":" + "\"" + dino['name'] + "\","
-      print "\"period\":" + "\"" + dino['period'] + "\","
-      print "\"continent\":" + "\"" + dino['continent'] + "\","
-      print "\"diet\":" + "\"" + dino['diet'] + "\","
-      print "\"weight\":" + "\"" + dino['weight'] + "\","
-      print "\"walking\":" + "\"" + dino['walking'] + "\","
-      print "\"description\":" + "\"" + dino['description'] + "\""
-      print "}"
-    end
-    print "]"
-  end
-
-  def arg_does_not_exist(args)
-    list_of_valid_arg = ["-b",
-                         "-c",
-                         "--period",
-                         "-s",
-                         "-B",
-                         "--search",
-                         "--help",
-                         "--json"]
-
+  def valid_arg?(args)
     args.each do |arg|
-      if arg.start_with?("-") && !list_of_valid_arg.include?(arg)
+      if arg.start_with?("-") && !VALID_ARGS.include?(arg)
         print "*** Invalid Option " + arg + " ***\n"
-        return true
+        return false
       end
-    end
-
-    false
-  end
-
-  def display_usage
-    puts "ruby dinocatalog.rb <options>"
-    puts "Options are: "
-
-    puts "-b         Sort to show only bipeds dinosaurs"
-    puts "-c         Sort to show only carnivores dinosaurs"
-    puts "--period period      Sort to show dinosaurs which lived during period"
-    puts "-s         Sort to only show small dinosaurs"
-    puts "-B         Sort to only show big dinosaurs"
-    puts "--search pattern    Search for pattern in the database"
-    puts "--help        Shows this usage/help message"
-    puts "--json         Export results in JSON"
-  end
-
-  def handle_posture(args, final_dinosaurs_list)
-    if args.include? "-b"
-      final_dinosaurs_list = filter_bipeds(final_dinosaurs_list)
-    end
-    final_dinosaurs_list
-  end
-
-  def handle_diet(args, final_dinosaurs_list)
-    if args.include? "-c"
-      final_dinosaurs_list = filter_carnivors(final_dinosaurs_list)
-    end
-    final_dinosaurs_list
-  end
-
-  def handle_size(args, final_dinosaurs_list)
-    if args.include? "-s"
-      final_dinosaurs_list = filter_small(final_dinosaurs_list)
-    elsif args.include? "-B"
-      final_dinosaurs_list = filter_big(final_dinosaurs_list)
-    end
-    final_dinosaurs_list
-  end
-
-  def handle_period(args, final_dinosaurs_list)
-    if args.include? "--period"
-      index_of_period_arg = args.index("--period")
-      period_param = args[index_of_period_arg + 1]
-
-      final_dinosaurs_list = filter_period(final_dinosaurs_list, period_param)
-    end
-    final_dinosaurs_list
-  end
-
-  def handle_search(args, final_dinosaurs_list)
-    if args.include? "--search"
-      index_of_search_arg = args.index("--search")
-      search_param = args[index_of_search_arg + 1]
-
-      final_dinosaurs_list = filter_search(final_dinosaurs_list, search_param)
-    end
-    final_dinosaurs_list
-  end
-
-  def handle_export(args, final_dinosaurs_list)
-    if args.include? "--json"
-      json_export(final_dinosaurs_list)
-    else
-      text_export(final_dinosaurs_list)
-    end
-  end
-
-  def handle_params(args, final_dinosaurs_list)
-    final_dinosaurs_list = handle_posture(args, final_dinosaurs_list)
-    final_dinosaurs_list = handle_diet(args, final_dinosaurs_list)
-    final_dinosaurs_list = handle_size(args, final_dinosaurs_list)
-    final_dinosaurs_list = handle_period(args, final_dinosaurs_list)
-    final_dinosaurs_list = handle_search(args, final_dinosaurs_list)
-    final_dinosaurs_list
-  end
-
-  def handle_usage_and_decide_if_continue(args)
-    if args.include?("--help") || arg_does_not_exist(args)
-      display_usage
-      return false
     end
     true
   end
 
+  def handle_period(dinosaurs, args)
+    index_of_period_arg = args.index("--period")
+    period_param = args[index_of_period_arg + 1]
+    filter_period(dinosaurs, period_param)
+  end
+
+  def handle_search(dinosaurs, args)
+    index_of_search_arg = args.index("--search")
+    search_param = args[index_of_search_arg + 1]
+    filter_search(dinosaurs, search_param)
+  end
+
+  def handle_print(args, dinosaurs)
+    if args.include? "--json"
+      Dinoshow.print_json(dinosaurs)
+    else
+      Dinoshow.print_text(dinosaurs)
+    end
+  end
+
+  def handle_params(args, dinosaurs)
+    args.each do |arg|
+      handler = HANDLERS[arg]
+      dinosaurs = send(handler, dinosaurs, args) if handler
+    end
+    dinosaurs
+  end
+
+  def args_invalid?(args)
+    if args.include?("--help") || !valid_arg?(args)
+      Dinoshow.print_usage
+      return true
+    end
+    false
+  end
+
   def main(args)
-    return unless handle_usage_and_decide_if_continue(args)
+    return if args_invalid?(args)
     dinodatabase = Dinobase.new
 
     dinodatabase.parse_all
 
-    final_dinosaurs_list = Array.new(dinodatabase.dinosaurs)
-    final_dinosaurs_list = handle_params(args, final_dinosaurs_list)
-    handle_export(args, final_dinosaurs_list)
+    dinosaurs = Array.new(dinodatabase.dinosaurs)
+    dinosaurs = handle_params(args, dinosaurs)
+    handle_print(args, dinosaurs)
   end
 end
 

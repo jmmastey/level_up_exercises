@@ -5,20 +5,22 @@ class Arrowhead
       notched:    'Archaic Side Notch',
       stemmed:    'Archaic Stemmed',
       lanceolate: 'Agate Basin',
-      bifurcated: 'Cody',
+      bifurcated: 'Cody'
     },
     northern_plains: {
       notched:    'Besant',
       stemmed:    'Archaic Stemmed',
       lanceolate: 'Humboldt Constricted Base',
-      bifurcated: 'Oxbow',
-    },
+      bifurcated: 'Oxbow'
+    }
   }
 
   private_constant :CLASSIFICATIONS
 
   def self.classify(region, shape)
-    raise "Unknown region #{region}, please provide a valid region." unless CLASSIFICATIONS.include?(region)
+    unless CLASSIFICATIONS.include?(region)
+      raise "Unknown region #{region}, please provide a valid region."
+    end
 
     shapes = CLASSIFICATIONS[region]
     raise "Unknown shape #{shape}, please provide a valid shape." unless shapes.include?(shape)

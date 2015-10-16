@@ -18,12 +18,13 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   test "account created with valid information" do
     get signup_path
     assert_difference 'User.count', 1 do
-      post_via_redirect users_path, user: { name: "Example User",
-                                            email: "user.name@example.com",
+      post_via_redirect users_path, user: { name: "Billy Bob",
+                                            email: "billy.bob@example.com",
                                             password: "foobar1234",
                                             password_confirmation: "foobar1234" }
     end
     assert_template 'users/show'
     assert_select 'div.alert-success'
+    assert is_logged_in?
   end
 end

@@ -1,32 +1,40 @@
-class NameCollisionError < RuntimeError; end
+require './robot_name_registry'
+require './default_robot_name_generator'
+
+class InvalidNameFormatError < RuntimeError
+  def initialize(name)
+    super("Invalid robot name, #{name}.")
+  end
+end
 
 class Robot
-  attr_accessor :name
+  attr_reader :name
 
-  @@registry
+  VALID_NAME_REGEXP = /\A[[:alpha:]]{2}[[:digit:]]{3}\Z/
 
-  def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+  private_constant :VALID_NAME_REGEXP
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+  def initialize(name_generator = DefaultRobotNameGenerator.new,
+                 registry = RobotNameRegistry.instance)
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
+    @name = name_generator.call
+    fail InvalidNameFormatError, @name unless @name =~ VALID_NAME_REGEXP
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+    registry << @name
   end
+
+  self
+
 end
 
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
-# Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+a = Robot.new(-> { 'AA111' })
+puts a.name
+
+# a = Robot.new(-> { 'Bad' })
+# puts a.name
+
+# a = Robot.new(-> { 'AA111' })
+# puts a.name

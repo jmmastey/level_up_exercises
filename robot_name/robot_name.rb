@@ -1,30 +1,68 @@
+require 'set'
+require 'singleton'
+
 class NameCollisionError < RuntimeError; end
+class InvalidNameFormatError < RuntimeError; end
+
+class DefaultRobotNameGenerator < Proc
+  CHAR_GENERATOR = -> { ('A'..'Z').to_a.sample }
+  NUM_GENERATOR = -> { rand(10) }
+
+  private_constant :CHAR_GENERATOR, :NUM_GENERATOR
+
+  def self.new
+    super() do
+      "#{CHAR_GENERATOR.call}#{CHAR_GENERATOR.call}#{NUM_GENERATOR.call}#{NUM_GENERATOR.call}#{NUM_GENERATOR.call}"
+    end
+  end
+
+  self
+
+end
+
+class RobotNameRegistry
+  include Singleton
+
+  def initialize
+    @registry = Set.new
+  end
+
+  def include?(name)
+    @registry.include?(name)
+  end
+
+  def <<(name)
+    @registry << name
+  end
+
+  self
+end
 
 class Robot
   attr_accessor :name
 
-  @@registry
+  VALID_NAME_REGEXP = /\A[[:alpha:]]{2}[[:digit:]]{3}\Z/
 
-  def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+  def initialize(name_generator = DefaultRobotNameGenerator.new, registry = RobotNameRegistry.instance)
+    @name = name_generator.call
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
-
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    unless name =~ VALID_NAME_REGEXP
+      raise InvalidNameFormatError, "Invalid robot name, #{@name}.  It must be 2 characters follow by 3 numbers."
     end
+    raise NameCollisionError, "Robot name, #{@name}, is already in use." if registry.include?(name)
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+    registry << @name
   end
+
+  self
+
 end
 
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+
+a = Robot.new(-> { 'AA111' })
+puts a.name
 
 # Errors!
 # generator = -> { 'AA111' }

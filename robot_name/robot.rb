@@ -15,7 +15,7 @@ class Robot
 
   private_constant :VALID_NAME_REGEXP
 
-  def initialize(name_generator = DefaultRobotNameGenerator::RANDOM_NAME,
+  def initialize(name_generator = DefaultRobotNameGenerator.new,
                  registry = RobotNameRegistry.instance)
 
     @name = name_generator.call

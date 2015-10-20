@@ -1,5 +1,5 @@
-require './robot_name_registry'
-require './default_robot_name_generator'
+require_relative 'robot_name_registry'
+require_relative 'default_robot_name_generator'
 
 class InvalidNameFormatError < RuntimeError
   def initialize(name)
@@ -8,13 +8,14 @@ class InvalidNameFormatError < RuntimeError
 end
 
 class Robot
+
   attr_reader :name
 
   VALID_NAME_REGEXP = /\A[[:alpha:]]{2}[[:digit:]]{3}\Z/
 
   private_constant :VALID_NAME_REGEXP
 
-  def initialize(name_generator = DefaultRobotNameGenerator.new,
+  def initialize(name_generator = DefaultRobotNameGenerator::RANDOM_NAME,
                  registry = RobotNameRegistry.instance)
 
     @name = name_generator.call
@@ -22,8 +23,6 @@ class Robot
 
     registry << @name
   end
-
-  self
 
 end
 

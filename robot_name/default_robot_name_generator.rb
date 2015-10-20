@@ -1,23 +1,10 @@
-class DefaultRobotNameGenerator < Proc
+class DefaultRobotNameGenerator
 
-  def self.new
-    super() do
-      "#{random_char}#{random_char}#{random_num}#{random_num}#{random_num}"
-    end
-  end
+  RANDOM_CHAR = proc { [*'A'..'Z'].sample }
+  RANDOM_NUM = proc { rand(10) }
 
-  class << self
-    def random_char
-      [*'A'..'Z'].sample
-    end
+  RANDOM_NAME = proc { "#{RANDOM_NUM}#{RANDOM_NUM}#{RANDOM_CHAR}#{RANDOM_CHAR}#{RANDOM_CHAR}" }
 
-    def random_num
-      rand(10)
-    end
-  end
-
-  private_class_method :random_char, :random_num
-
-  self
+  private_constant :RANDOM_CHAR, :RANDOM_NUM
 
 end

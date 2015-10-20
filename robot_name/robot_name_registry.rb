@@ -19,5 +19,4 @@ class RobotNameRegistry
     @registry << name
   end
 
-  self
 end

@@ -8,6 +8,12 @@
   box-sizing:         border-box;
 }
 
+@mixin round_border {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+
 /* universal */
 body {
   padding-top: 100px;
@@ -29,12 +35,32 @@ textarea {
   }
 }
 
+.container {
+  // background-color: rgba(51, 0, 255, 0.04);
+}
+
 .debug_dump {
   clear: both;
   float: left;
   width: 100%;
   margin-top: 45px;
   @include box_sizing;
+}
+
+.disabled {
+  label {
+      color: #aaa;
+  }
+
+  select {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.border-top {
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
 }
 
 
@@ -95,7 +121,7 @@ aside {
     border: 1px solid #aaa;
     background-color: #DEDEDE;
     padding: 10px;
-    border-radius: 3px;
+    @include round_border;
   }
   section {
     padding: 10px 0;
@@ -164,6 +190,106 @@ input {
 #session_remember_me {
   width: auto;
   margin-left: 0;
+}
+
+
+/* selection */
+.bus-selection-wrap {
+  background-color: #eee;
+  text-align: center;
+  margin-bottom: 15px;
+  color: $gray-dark;
+  height: 120px;
+  padding-top: 5px;
+  @include round_border;
+
+  &.disabled {
+    .selection {
+      color: #aaa;
+    }
+  }
+
+  label {
+    font-size: 20px
+  }
+
+  select {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    opacity: 0;
+    z-index: 10;
+  }
+
+  .selection {
+    font-size: 24px;
+    word-wrap: break-word;
+  }
+
+  .favorite-stop {
+    position: absolute;
+    font-size: 24px;
+    z-index: 20;
+    cursor: pointer;
+    width: 30px;
+
+    .no-fave {
+      color: #aaa;
+    }
+
+    .fave {
+      color: blue;
+    }
+  }
+}
+
+
+/* card UI */
+.card {
+    padding: 12px;
+    margin-bottom: 20px;
+    @include round_border;
+
+    &.card-default {
+      background-color: #eee;
+    }
+}
+
+
+/* card UI - Bus */
+.eta-bus {
+  position: relative;
+  min-height: 150px;
+
+  .number, .destination {
+    margin: 0;
+    padding: 0;
+  }
+
+  .number {
+    font-size: 26px;
+    margin-bottom: 5px;
+  }
+
+  .destination {
+    font-size: 14px;
+  }
+
+  .arrival {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 15px;
+  }
+
+  .vehicle {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+  }
 }
 
 

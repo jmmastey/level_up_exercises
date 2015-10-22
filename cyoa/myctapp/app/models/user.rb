@@ -1,3 +1,6 @@
+require 'json'
+require 'set'
+
 class User < ActiveRecord::Base
   attr_accessor :remember_token
 
@@ -8,7 +11,8 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 8 }
+  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
+  # serialize :favorite_routes, String
 
   # returns hash digest of given string
   def User.digest(string)
@@ -36,5 +40,31 @@ class User < ActiveRecord::Base
   # forgets a user
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # adds a route to user favorites if not already existing
+  def favorite_add(route)
+    favorite_routes = favorite_route_list
+    return false if favorite_routes.any? { |h| h["stop_id"] == route[:stop_id] }
+    favorite_routes << route
+    self.favorite_routes = JSON.generate(favorite_routes)
+    return true if self.save
+    return false
+  end
+
+  # adds a route to user favorites if not already existing
+  def favorite_remove(route)
+    favorite_routes = favorite_route_list
+    return false unless favorite_routes.any? { |h| h["stop_id"] == route[:stop_id] }
+    favorite_routes.reject! { |h| h["stop_id"] == route[:stop_id] }
+    self.favorite_routes = JSON.generate(favorite_routes)
+    return true if self.save
+    return false
+  end
+
+  # parses the stored JSON favorite_routes
+  def favorite_route_list
+    return [] if self.favorite_routes.nil?
+    JSON.parse(self.favorite_routes)
   end
 end

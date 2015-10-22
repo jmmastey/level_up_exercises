@@ -21,7 +21,18 @@ Rails.application.routes.draw do
   # PATCH   /users/1        #update   user_path(user)
   # DELETE  /users/1        #destroy  user_path(user)
 
+  # FOR INTERNAL API USE
+  get 'api/routes' => 'cta#routes'
+  get 'api/route_directions/:route_id' => 'cta#route_directions'
+  get 'api/route_stops/:route_id/:route_direction' => 'cta#route_stops'
+  get 'api/stop_eta/:stop_id(/:route_id)' => 'cta#stop_eta'
 
+  get 'api/authcheck' => 'sessions#authcheck'
+  get 'api/user/favorite_routes' => 'users#favorite_routes'
+  get 'api/user/recent_routes' => 'users#recent_routes'
+
+  patch 'api/user/save_favorite' => 'users#save_favorite'
+  patch 'api/user/remove_favorite' => 'users#remove_favorite'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

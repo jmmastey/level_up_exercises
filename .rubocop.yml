@@ -1,2 +1,11 @@
 inherit_from:
   - .hound.yml
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Metrics/LineLength:
+  Max: 100
+
+Style/AlignParameters:
+  Enabled: false

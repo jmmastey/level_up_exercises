@@ -3,7 +3,7 @@ class Dinosaur
               :weight_in_lbs, :walking, :description
 
   CARNIVORE_DIETS = %w(Carnivore Insectivore Piscivore)
-  BIPED = 'Biped'
+  WALKING_BIPED = 'Biped'
 
   def initialize(attributes = {})
     @name = attributes[:name]
@@ -41,13 +41,13 @@ class Dinosaur
       @period = nil
       @epoch = nil
     else
-      @period = period.gsub(/(?:Early|Middle|Late) /, '').split(' or ')
       @epoch = period.split(' or ') if period =~ /Early|Middle|Late/
+      @period = period.split(' or ').map { |p| p.sub(/(?:Early|Middle|Late) /, '') }
     end
   end
 
   def printable_name(field_name)
-    field_name.to_s.delete('@').split('_').map(&:capitalize).join(' ')
+    field_name.to_s.slice!(1..-1).split('_').map(&:capitalize!).join(' ')
   end
 
   def join_if_array(value)

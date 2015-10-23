@@ -26,7 +26,7 @@ class CustomFilter
   end
 
   def list_of_filterable_fields(items)
-    items.first.instance_variables.map { |v| v.to_s.delete('@') }
+    items.first.instance_variables.map { |v| v.to_s.slice(1..-1) }
   end
 
   def read_filter

@@ -17,7 +17,7 @@ class DinosaurOperations
 
   def self.basic_filters
     [
-      Filter.new('Filter by bipeds.', proc { |d| d.walking == Dinosaur::BIPED }),
+      Filter.new('Filter by bipeds.', proc { |d| d.walking == Dinosaur::WALKING_BIPED }),
       Filter.new('Filter by carnivores.', proc { |d| Dinosaur::CARNIVORE_DIETS.include?(d.diet) }),
     ]
   end

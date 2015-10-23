@@ -1,17 +1,14 @@
-require_relative 'dinosaur_csv_deserializer'
+require_relative 'dinosaur_deserializer'
 require_relative 'dinosaur_operations'
 
 class DinoDex
   def initialize
-    african_dinosaurs = DinosaurCsvDeserializer.deserialize(
-      'african_dinosaur_export.csv',
-      &DinosaurCsvDeserializer::AFRICAN_CSV_DESERIALIZER)
+    dinodex_dinosaurs = DinosaurDeserializer::CSV::deserialize('dinodex.csv')
 
-    dinodex_dinosaurs = DinosaurCsvDeserializer.deserialize(
-      'dinodex.csv',
-      &DinosaurCsvDeserializer::DINODEX_CSV_DESERIALIZER)
+    african_dinosaurs = DinosaurDeserializer::CSV::deserialize('african_dinosaur_export.csv',
+                                                               :african)
 
-    @dinosaurs = african_dinosaurs + dinodex_dinosaurs
+    @dinosaurs = dinodex_dinosaurs + african_dinosaurs
   end
 
   def filter_and_print_facts(operations = DinosaurOperations.operations)

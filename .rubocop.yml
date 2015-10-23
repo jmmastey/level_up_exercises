@@ -1,2 +1,171 @@
-inherit_from:
-  - .hound.yml
+# Most useful invocation seems to be:
+#     $ rubocop --display-cop-name --format simple
+#
+# Run `rubocop --show-cops` to see the full list of cops and their configs.
+#
+# See also:
+# * https://github.com/bbatsov/rubocop/blob/master/config/enabled.yml
+# * https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+require: rubocop-rspec
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  RunRailsCops: true
+  Exclude:
+  - 'bin/**/*'
+  - 'config/**/*.rb'
+  - 'db/**/*.rb'
+  - 'features/**/*.rb'
+  - 'lib/**/*.rake'
+  - 'script/**/*'
+  - 'vendor/**/*'
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+# habtm has legitimate use cases. sort of.
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+# read_attribute() is generally clearer than self[].
+Rails/ReadWriteAttribute:
+  Enabled: false
+
+# Permit `head 200 and return if ...`, but never `if foo and bar`
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Style/AlignParameters:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Style/ClassCheck:
+  # This is an arbitrary choice, but aligns with `be_kind_of` in rspec, which
+  # reads (IMO) better than `be_a`.
+  EnforcedStyle: kind_of?
+
+Style/Documentation:
+  Enabled: false
+
+Style/DotPosition:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/EmptyLiteral:
+  Enabled: false
+
+Style/EmptyLines:
+  Enabled: false
+
+Style/EmptyLinesAroundMethodBody:
+  Enabled: false
+
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Style/Encoding:
+  EnforcedStyle: when_needed
+
+Style/FormatString:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+# Using the modifier syntax `foo if bar?` is fine, but can prevent accurate
+# branch coverage analysis; we definitely shouldn't *require* modifier syntax.
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/IndentHash:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  # Rationale:
+  # * if it produces a string, use ();
+  # * if it produces an array, use [];
+  # * the rest are just the defaults
+  PreferredDelimiters:
+    '%':  '()'
+    '%q': '()'
+    '%Q': '()'
+    '%i': '[]'
+    '%w': '[]'
+    '%W': '[]'
+    '%s': '()'
+    '%r': '{}'
+    '%x': '()'
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/PredicateName:
+  Enabled: false
+
+Style/RaiseArgs:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Style/SingleSpaceBeforeFirstArg:
+  Enabled: false
+
+Style/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+Style/SpaceInsideBlockBraces:
+  # Permitted:
+  #   let(:params) {{ foo: bar }}
+  Exclude:
+  - "spec/**/*"
+
+Style/SpaceInsideBrackets:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/FirstParameterIndentation:
+  Enabled: false
+
+Style/ClosingParenthesisIndentation:
+  Enabled: false
+
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+Style/SpaceAroundOperators:
+  Enabled: false
+
+Style/MultilineOperationIndentation:
+  Enabled: false
+
+Style/AlignHash:
+  EnforcedLastArgumentHashStyle: ignore_implicit
+
+#Up for debate.
+
+RSpec/DescribedClass:
+  Enabled: false
+
+RSpec/MultipleDescribes:
+  Enabled: false
+
+RSpec/FilePath: # Almost fully passing
+  Enabled: false
+  # CustomTransform:
+  #   Identity: client
+
+RSpec/DescribeClass:
+  Exclude:
+    - "spec/db/*"
+    - "spec/requests/**/*"
+    - "spec/rbf/*"

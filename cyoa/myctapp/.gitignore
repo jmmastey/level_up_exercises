@@ -17,5 +17,10 @@
 /tmp
 /tmp/*
 
+
 # Ignore application configuration
 /config/application.yml
+
+# Ignore misc angular files
+/vendor/assets/javascripts/angular/docs/*
+/vendor/assets/javascripts/angular/i18n/*

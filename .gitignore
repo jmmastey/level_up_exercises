@@ -1,4 +1,5 @@
 **/.bundle
 **/coverage
 **/*.swp
+**/*.sock
 .DS_Store

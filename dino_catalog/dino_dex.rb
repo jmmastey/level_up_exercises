@@ -3,9 +3,9 @@ require_relative 'dinosaur_operations'
 
 class DinoDex
   def initialize
-    dinodex_dinosaurs = DinosaurDeserializer::CSV::deserialize('dinodex.csv')
+    dinodex_dinosaurs = DinosaurDeserializer::CSV.deserialize('dinodex.csv')
 
-    african_dinosaurs = DinosaurDeserializer::CSV::deserialize('african_dinosaur_export.csv',
+    african_dinosaurs = DinosaurDeserializer::CSV.deserialize('african_dinosaur_export.csv',
                                                                :african)
 
     @dinosaurs = dinodex_dinosaurs + african_dinosaurs

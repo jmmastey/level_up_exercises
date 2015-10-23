@@ -2,7 +2,7 @@ class Dinosaur
   attr_reader :name, :period, :epoch, :continent, :diet,
               :weight_in_lbs, :walking, :description
 
-  CARNIVORE_DIETS = %w(Carnivore Insectivore Piscivore)
+  CARNIVORE_DIETS = %w[Carnivore Insectivore Piscivore]
   WALKING_BIPED = 'Biped'
 
   def initialize(attributes = {})
@@ -51,6 +51,6 @@ class Dinosaur
   end
 
   def join_if_array(value)
-    value.is_a?(Array) ? value.join(', ') : value
+    value.kind_of?(Array) ? value.join(', ') : value
   end
 end

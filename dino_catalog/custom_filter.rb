@@ -8,7 +8,7 @@ class CustomFilter
 
   def call(items)
     print_instructions(items)
-    hash = read_filter
+    hash = read_filter_from_stdin
     puts
 
     items.reject! { |d| reject_item?(d, hash) }
@@ -29,7 +29,7 @@ class CustomFilter
     items.first.instance_variables.map { |v| v.to_s.slice(1..-1) }
   end
 
-  def read_filter
+  def read_filter_from_stdin
     hash_string = $stdin.readline.chomp
     convert_input_to_hash(hash_string)
   end
@@ -46,7 +46,7 @@ class CustomFilter
   end
 
   def reject_item_for_field?(field_value, filter_value)
-    if field_value.is_a?(Array)
+    if field_value.kind_of?(Array)
       !field_value.include?(filter_value)
     else
       field_value.nil? || field_value.to_s != filter_value.to_s

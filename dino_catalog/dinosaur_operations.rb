@@ -18,7 +18,7 @@ class DinosaurOperations
   def self.basic_filters
     [
       Filter.new('Filter by bipeds.', proc { |d| d.walking == Dinosaur::WALKING_BIPED }),
-      Filter.new('Filter by carnivores.', proc { |d| Dinosaur::CARNIVORE_DIETS.include?(d.diet) }),
+      Filter.new('Filter by carnivores.', proc { |d| Dinosaur::CARNIVORE_DIETS.include?(d.diet) })
     ]
   end
 
@@ -26,12 +26,12 @@ class DinosaurOperations
     [
       Operation.new('Filter by period.', OperationChoice.new(*period_filters)),
       Operation.new('Filter by size.', OperationChoice.new(*size_filters)),
-      Operation.new('Custom filter.', CustomFilter.new(CUSTOM_QUERY_DESCRIPTION)),
+      Operation.new('Custom filter.', CustomFilter.new(CUSTOM_QUERY_DESCRIPTION))
     ]
   end
 
   def self.period_filters
-    %w(Albian Cretaceous Jurassic Oxfordian Permian Triassic).map do |p|
+    %w[Albian Cretaceous Jurassic Oxfordian Permian Triassic].map do |p|
       Filter.new("#{p} period.", proc { |d| d.period.include?(p) })
     end
   end
@@ -41,7 +41,7 @@ class DinosaurOperations
       Filter.new('Big (> 2 tons) dinosaurs.',
                  proc { |d| !d.weight_in_lbs.nil? && d.weight_in_lbs > TWO_TONS_IN_LBS }),
       Filter.new('Small dinosaurs.',
-                 proc { |d| !d.weight_in_lbs.nil? && d.weight_in_lbs <= TWO_TONS_IN_LBS }),
+                 proc { |d| !d.weight_in_lbs.nil? && d.weight_in_lbs <= TWO_TONS_IN_LBS })
     ]
   end
 
@@ -49,7 +49,7 @@ class DinosaurOperations
     [
       Operation.new('Print list.', print_dinosaurs),
       Operation.new('Print list in JSON.', print_dinosaurs_in_json),
-      Operation.new('Exit.', proc { |_| exit }),
+      Operation.new('Exit.', proc { |_| exit })
     ]
   end
 

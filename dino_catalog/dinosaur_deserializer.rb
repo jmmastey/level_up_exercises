@@ -1,7 +1,9 @@
 require 'csv'
 require_relative 'dinosaur'
 
-class DinosaurCsvDeserializer
+module DinosaurDeserializer
+  module_function
+
   DINODEX_CSV_DESERIALIZER = proc { |array| Dinosaur.new(array.to_hash) }
 
   AFRICAN_CSV_DESERIALIZER = proc do |array|
@@ -14,8 +16,8 @@ class DinosaurCsvDeserializer
     Dinosaur.new(hash)
   end
 
-  class << self
-    def deserialize(filename, &block)
+  class CSV
+    def self.deserialize(filename, &block)
       CSV.table(filename).map(&block)
     end
   end

@@ -1,5 +1,6 @@
 window.myctapp.controller('BusHomeCtrl', ['$scope', '$http', '$interval', 'Utilities', 'User', ($scope, $http, $interval, Utilities, User)->
   NO_SELECTION = "-----"
+  $scope.refreshTimeInMinutes = 1
 
   $scope.User = User
 
@@ -147,10 +148,10 @@ window.myctapp.controller('BusHomeCtrl', ['$scope', '$http', '$interval', 'Utili
     $scope.clearBusWatch()
     $scope.getEta(()->
       $scope.activeSearch = true
-      # console.log("SET WATCHER")
-      # $scope.busTimer = $interval(()->
-      #   $scope.refreshEta()
-      # , 10000)
+      console.log("SET WATCHER")
+      $scope.busTimer = $interval(()->
+        $scope.refreshEta()
+      , ($scope.refreshTimeInMinutes * 60 * 1000))
     )
   )
 

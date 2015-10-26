@@ -5,17 +5,21 @@ gem "rails", "4.2.0"
 gem "pg"
 gem "coffee-rails", "~> 4.1.0"
 gem "therubyracer", platforms: :ruby
-
 gem "jquery-rails"
+gem "sass-rails"
+gem "sprockets-rails"
 gem "jbuilder", "~> 2.0"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "delivery", github: "djkotowski/delivery"
+gem "omniauth-oauth2"
 gem "omniauth-delivery-food"
 gem "haml-rails"
 gem "devise"
 gem "bootstrap-sass", "~> 3.3.5"
 gem "bootstrap_form"
 gem "devise-bootstrap-views"
+gem "figgy"
+gem "pry"
 
 group :development, :test do
   gem "byebug"

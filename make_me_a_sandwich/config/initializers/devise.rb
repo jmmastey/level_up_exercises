@@ -1,18 +1,6 @@
-# Use this hook to configure devise mailer, warden hooks and so forth.
-# Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  # The secret key used by Devise. Devise uses this key to generate
-  # random tokens. Changing this key will render invalid all existing
-  # confirmation, reset password and unlock tokens in the database.
-  # Devise will use the `secret_key_base` on Rails 4+ applications as its `secret_key`
-  # by default. You can change it below and use your own secret key.
-  # config.secret_key = '8ee357771b83d4faa801871bfc0709cce31d57a36942241c6fb52166992c6afcb5be9daccf16a800739a2940ab8b7fed403c97524e59ed0a08596e6870c4d201'
-
-  # ==> Mailer Configuration
-  # Configure the e-mail address which will be shown in Devise::Mailer,
-  # note that it will be overwritten if you use your own mailer class
-  # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = "djkotowski@gmail.com"
+  config.secret_key = ENV["SECRET_KEY_BASE"] if Rails.env.production?
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -235,8 +223,15 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-
+  config.omniauth :delivery,
+    ENV["DELIVERY_API_KEY"],
+    ENV["DELIVERY_API_SECRET"],
+    setup: lambda { |env|
+      options = env["omniauth.strategy"].options[:client_options]
+      options.site = AppConfig.delivery.site
+      options.authorize_url = URI.join(options.site, "third_party/authorize").to_s
+      options.token_url = URI.join(options.site, "third_party/access_token").to_s
+    }
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

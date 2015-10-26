@@ -1,3 +1,5 @@
+require 'json'
+
 class Dinoshow
   def self.print_usage
     puts "ruby dinocatalog.rb <options>"
@@ -19,34 +21,31 @@ class Dinoshow
 
   def self.print_text(dinosaurs)
     dinosaurs.each do |dino|
-      puts "Name: " + dino.name if valid_data?(dino.name)
-      puts "Period: " + dino.period if valid_data?(dino.period)
-      puts "Continent: " + dino.continent if valid_data?(dino.continent)
-      puts "Diet: " + dino.diet if valid_data?(dino.diet)
-      puts "Weight: " + dino.weight if valid_data?(dino.weight)
-      puts "Walking: " + dino.walking if valid_data?(dino.walking)
-      puts "Description: " + dino.description if valid_data?(dino.description)
+      puts "Name: " << dino.name if valid_data?(dino.name)
+      puts "Period: " << dino.period if valid_data?(dino.period)
+      puts "Continent: " << dino.continent if valid_data?(dino.continent)
+      puts "Diet: " << dino.diet if valid_data?(dino.diet)
+      puts "Weight: " << dino.weight if valid_data?(dino.weight)
+      puts "Walking: " << dino.walking if valid_data?(dino.walking)
+      puts "Description: " << dino.description if valid_data?(dino.description)
       puts "---"
     end
     puts "Showed #{dinosaurs.count} Dinos"
   end
 
   def self.print_json(dinosaurs)
-    print "["
+    json_dinos = []
     dinosaurs.each do |dino|
-      print "," if dino != dinosaurs.first
-      print "{"
-      print '"name":' + '"' + dino.name + '",'
-      print '"period":' + '"' + dino.period + '",'
-      print '"continent":' + '"' + dino.continent + '",'
-      print '"diet":' + '"' + dino.diet + '",'
-      print '"weight":' + '"' + dino.weight + '",'
-      print '"walking":' + '"' + dino.walking + '",'
-      print '"description":' + '"' + dino.description + '"'
-      print "}"
+      json_dinos_hash = { 'name' => dino.name,
+                          'period' => dino.period,
+                          'continent' => dino.continent,
+                          'diet' => dino.diet,
+                          'weight' => dino.weight,
+                          'walking' => dino.walking,
+                          'description' => dino.description }
+      json_dinos.push(json_dinos_hash)
     end
-    print "," if dinosaurs.count > 0
-    print '{"dino_count":' << dinosaurs.count.to_s << '}'
-    print "]"
+    json_dinos.push('dino_count' => dinosaurs.count) if dinosaurs.count > 0
+    puts JSON.generate(json_dinos)
   end
 end

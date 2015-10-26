@@ -7,13 +7,13 @@ class Dinosaur
   attr_accessor :walking
   attr_accessor :description
 
-  def initialize(name: 'Trollosaurus Rex',
-                 period: 'Late MSNerius',
-                 continent: 'North America',
-                 diet: 'People\'s Anger',
-                 weight: '200',
-                 walking: 'rarely',
-                 description: 'Furry, lives in forests and comments online')
+  def initialize(name,
+                 period,
+                 continent,
+                 diet,
+                 weight,
+                 walking,
+                 description)
     @name = name
     @period = period
     @continent = continent

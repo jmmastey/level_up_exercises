@@ -20,8 +20,21 @@ class Dinocatalog
                 "--help",
                 "--json"]
 
+  def main(args)
+    return if args_invalid?(args)
+    dino_database = Dinobase.new
+
+    dino_database.parse_all
+
+    dinosaurs = Array.new(dino_database.dinosaurs)
+    dinosaurs = handle_params(args, dinosaurs)
+    handle_print(args, dinosaurs)
+  end
+
+  private
+
   def filter_bipeds(dinosaurs, _args)
-    dinosaurs.select { |dino| dino['walking'].casecmp('Biped') == 0 }
+    dinosaurs.select { |dino| dino['walking'].casecmp('Biped').zero? }
   end
 
   def filter_carnivores(dinosaurs, _args)
@@ -37,7 +50,7 @@ class Dinocatalog
   end
 
   def filter_period(dinosaurs, period)
-    return [] if period.nil?
+    return [] unless period
     dinosaurs.select do |dino|
       dino['period'].downcase.include? period.downcase
     end
@@ -48,7 +61,7 @@ class Dinocatalog
   end
 
   def dino_matches?(dino, search_terms)
-    return [] if search_terms.nil?
+    return [] unless search_terms
     keys = %w(name description period diet continent
               walking weight)
     keys.any? { |key| value_matches?(dino[key], search_terms) }
@@ -97,22 +110,9 @@ class Dinocatalog
   end
 
   def args_invalid?(args)
-    if args.include?("--help") || !valid_arg?(args)
-      Dinoshow.print_usage
-      return true
-    end
-    false
-  end
-
-  def main(args)
-    return if args_invalid?(args)
-    dinodatabase = Dinobase.new
-
-    dinodatabase.parse_all
-
-    dinosaurs = Array.new(dinodatabase.dinosaurs)
-    dinosaurs = handle_params(args, dinosaurs)
-    handle_print(args, dinosaurs)
+    return false unless args.include?("--help") || !valid_arg?(args)
+    Dinoshow.print_usage
+    true
   end
 end
 

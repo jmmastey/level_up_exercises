@@ -11,10 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026153928) do
+ActiveRecord::Schema.define(version: 20151026212955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.string   "landmark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.string   "external_id"
+    t.string   "name"
+    t.string   "description"
+    t.integer  "merchant_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "merchants", force: :cascade do |t|
+    t.string   "external_id"
+    t.string   "name"
+    t.string   "phone"
+    t.string   "description"
+    t.integer  "location_id"
+    t.decimal  "minimum_pickup"
+    t.decimal  "minimum_delivery"
+    t.decimal  "maximum_pickup"
+    t.decimal  "maximum_delivery"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

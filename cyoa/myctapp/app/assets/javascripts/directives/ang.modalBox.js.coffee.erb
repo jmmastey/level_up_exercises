@@ -1,9 +1,11 @@
+#= depend_on_asset "_modalBox.html.erb"
+
 window.myctapp.directive('modalBox', ()->
   return {
-    templateUrl: '/assets/modalBox.html.erb',
+    templateUrl: '<%= asset_path("_modalBox.html.erb") %>' # "templates/_modalBox.html",  # "<%=asset_path '/assets/modalBox.html.erb' %>",
     replace: true,
     controller: ['$scope', '$http', ($scope, $http)->
-      # console.info("Im alive!")
+      console.info("Im alive!")
 
       $scope.modalTitle = ""
       $scope.modalBody = ""

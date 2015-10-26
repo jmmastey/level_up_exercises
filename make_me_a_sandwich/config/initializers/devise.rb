@@ -226,6 +226,7 @@ Devise.setup do |config|
   config.omniauth :delivery,
     ENV["DELIVERY_API_KEY"],
     ENV["DELIVERY_API_SECRET"],
+    provider_ignores_state: true,
     setup: lambda { |env|
       options = env["omniauth.strategy"].options[:client_options]
       options.site = AppConfig.delivery.site

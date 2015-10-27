@@ -62,11 +62,12 @@ class CTA
       }
       data = compile_node_data(route_node.children, search_nodes)
       data[:eta_time] = minute_difference(data[:eta_stamp].split(" ")[1])
-      data[:milirary_time] = data[:eta_stamp].split(" ")[1]
-      data[:utc_offset] = utc_offset
-      data[:time_now] = DateTime.now().utc
-      data[:bus_time_to_parse] = "#{data[:eta_stamp].split(" ")[1]} #{utc_offset}"
-      data[:bus_time] = DateTime.parse("#{data[:eta_stamp].split(" ")[1]} #{utc_offset}").utc
+
+      # data[:milirary_time] = data[:eta_stamp].split(" ")[1]
+      # data[:utc_offset] = utc_offset
+      # data[:time_now] = DateTime.now().utc
+      # data[:bus_time_to_parse] = "#{data[:eta_stamp].split(" ")[1]} #{utc_offset}"
+      # data[:bus_time] = DateTime.parse("#{data[:eta_stamp].split(" ")[1]} #{utc_offset}").utc
       data
     end
   end

@@ -64,8 +64,9 @@ class CTA
       data[:eta_time] = minute_difference(data[:eta_stamp].split(" ")[1])
       data[:milirary_time] = data[:eta_stamp].split(" ")[1]
       data[:utc_offset] = utc_offset
-      data[:time_now] = DateTime.now()
-      data[:bus_time] = DateTime.parse("#{data[:eta_stamp].split(" ")[1]} #{utc_offset}")
+      data[:time_now] = DateTime.now().utc
+      data[:bus_time_to_parse] = "#{data[:eta_stamp].split(" ")[1]} #{utc_offset}"
+      data[:bus_time] = DateTime.parse("#{data[:eta_stamp].split(" ")[1]} #{utc_offset}").utc
       data
     end
   end
@@ -74,7 +75,7 @@ class CTA
 
   def minute_difference(military_time)
     time = DateTime.parse("#{military_time} #{utc_offset}")
-    (((time - DateTime.now()) * 24 ) * 60 ).to_i
+    (((time.utc - DateTime.now().utc) * 24 ) * 60 ).to_i
   end
 
   def utc_offset

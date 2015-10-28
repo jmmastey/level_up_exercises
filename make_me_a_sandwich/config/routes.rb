@@ -7,5 +7,7 @@ Rails.application.routes.draw do
     to: "delivery_auth#callback",
     as: :delivery_auth_callback
 
+  resource :session, only: [:new, :destroy]
+
   root "home#index"
 end

@@ -110,6 +110,9 @@ GEM
     httplog (0.2.11)
     i18n (0.7.0)
     interactor (3.1.0)
+    interactor-rails (2.0.1)
+      interactor (~> 3.0)
+      rails (>= 3, < 5)
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -235,6 +238,7 @@ DEPENDENCIES
   haml-rails
   httplog
   interactor
+  interactor-rails
   jbuilder (~> 2.0)
   jquery-rails
   pg
@@ -246,6 +250,3 @@ DEPENDENCIES
   sprockets-rails
   therubyracer
   web-console (~> 2.0)
-
-BUNDLED WITH
-   1.10.6

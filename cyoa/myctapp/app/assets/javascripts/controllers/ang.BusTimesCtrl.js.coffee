@@ -26,17 +26,6 @@ window.myctapp.controller('BusHomeCtrl', ['$scope', '$http', '$interval', 'Utili
     console.log("REFRESHING")
     $scope.getEta()
 
-
-  $http.get("/api/routes").then((response)->
-    try
-      if response.status and response.data.status is "ok"
-        for route in response.data.routes
-          route.label = "(#{route.route_id}) #{route.route_name}"
-          $scope.routeList.push(route)
-      console.error("Error occurred", error)
-    # console.log("FINALLY", response)
-  )
-
   User.authcheck(()->
     console.log("AUTHCHECK SUCCESS -- #{User.logged_in}")
     if User.loggedIn
@@ -194,4 +183,24 @@ window.myctapp.controller('BusHomeCtrl', ['$scope', '$http', '$interval', 'Utili
         console.error("Error occurred", error)
       # console.log("FINALLY", response)
     )
+
+  $scope.getRouteList = ()->
+    if $scope.routeList.length is 0
+      $http.get("/api/routes").then((response)->
+        try
+          if response.status and response.data.status is "ok"
+            if response.data.routes.length is 0
+              console.warn("TRY AGAIN")
+              $scope.getRouteList()
+            else
+              for route in response.data.routes
+                route.label = "(#{route.route_id}) #{route.route_name}"
+                $scope.routeList.push(route)
+          console.error("Error occurred", error)
+        # console.log("FINALLY", response)
+      )
+
+  $scope.getRouteList()
+
+  return
 ])

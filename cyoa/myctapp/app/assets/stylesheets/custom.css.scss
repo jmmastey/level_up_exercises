@@ -63,6 +63,15 @@ textarea {
     padding-top: 15px;
 }
 
+.disabled-color {
+  color: #aaa;
+}
+
+a.disabled-color:hover {
+  color: #aaa;
+}
+
+
 
 /* typography */
 h1, h2, h3, h4, h5, h6 {
@@ -201,6 +210,7 @@ input {
   color: $gray-dark;
   height: 120px;
   padding-top: 5px;
+  position: relative;
   @include round_border;
 
   &.disabled {
@@ -236,6 +246,7 @@ input {
     z-index: 20;
     cursor: pointer;
     width: 30px;
+    left: 15px;
 
     .no-fave {
       color: #aaa;

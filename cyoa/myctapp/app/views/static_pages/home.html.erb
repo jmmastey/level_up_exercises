@@ -18,12 +18,13 @@
               data-ng-model="useFavoriteRoute"
               data-ng-change="selectFavoriteRoute(useFavoriteRoute)">
         <option value="" data-ng-bind="no_selection"></option>
-        <option data-ng-repeat="route in User.favoriteRoutes" value="{{route}}">({{route.number}}) {{route.stop_name}}</option>
+        <option data-ng-repeat="route in User.favoriteRoutes" value="{{route}}">({{route.number}}) {{route.stop_name}} ({{route.direction}})</option>
       </select>
     </div>
   </div>
 
   <div class="row">
+
     <div class="col-sm-4">
       <div class="col-sm-12 bus-selection-wrap" data-ng-class="{'disabled': routeList.length == 0}">
         <label for="select_route">Select Route</label>
@@ -37,6 +38,7 @@
         <p class="selection" data-ng-bind="route.number"></p>
       </div>
     </div>
+
     <div class="col-sm-4">
       <div class="col-sm-12 bus-selection-wrap" data-ng-class="{'disabled': directionList.length == 0}">
         <label for="select_direction">Select Direction</label>
@@ -50,13 +52,22 @@
         <p class="selection" data-ng-bind="route.direction"></p>
       </div>
     </div>
+
     <div class="col-sm-4">
       <div class="col-sm-12 bus-selection-wrap" data-ng-class="{'disabled': stopList.length == 0}">
 
-        <div class="favorite-stop" data-route="{{route.stop.stop_id}}" data-ng-click="toggleFavoriteStop(route.stop)">
+        <button id="favorite-this-stop"
+              value="fave_this"
+              class="favorite-stop"
+              data-route="{{route.stop.stop_id}}"
+              data-ng-click="toggleFavoriteStop(route.stop)"
+              data-ng-class="{'disabled-color': !activeSearch}"
+              data-ng-if="activeSearch">
+
           <span class="glyphicon glyphicon-star-empty"
                 data-ng-class="{'glyphicon-star-empty': !User.hasFavorite(route.stop.stop_id), 'glyphicon-star': User.hasFavorite(route.stop.stop_id)}"></span>
-        </div>
+
+        </button>
 
         <label for="select_stop">Select Stop</label>
         <select id="select_stop"
@@ -69,6 +80,7 @@
         <p class="selection" data-ng-bind="route.stop.stop_name || no_selection"></p>
       </div>
     </div>
+
   </div>
 
   <div class="row border-top">

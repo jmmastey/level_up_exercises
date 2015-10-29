@@ -12,14 +12,17 @@ class CTA
 
   def load_routes
     doc = Nokogiri::XML(xml_request("getroutes"))
-    route_list = doc.xpath("//route")
-    route_list.collect do |route_node|
+    # route_list = doc.xpath("//route")
+
+    doc.xpath("//route").collect do |route_node|
+      # puts route_node
       search_nodes = {
         rt:   :route_id,
         rtnm: :route_name,
       }
       compile_node_data(route_node.children, search_nodes)
     end
+
   end
 
   def load_direction(route_id = 0)

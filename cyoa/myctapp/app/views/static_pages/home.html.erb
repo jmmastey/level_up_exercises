@@ -1,0 +1,103 @@
+<% provide(:title, "Home") %>
+<div data-ng-controller="BusHomeCtrl">
+
+  <div class="center jumbotron">
+    <h1>MyCTApp</h1>
+    <h2>Quickly find upcoming bus times for the CTA and save them for later when you're on the go.</h2>
+    <!-- <p>API KEY: <%= @cta_api.api_key %></p>
+    <p>TEST: <%= @cta_api.test_var %></p> -->
+
+    <!-- <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %> -->
+  </div>
+
+  <div class="row" data-ng-if="User.loggedIn">
+    <div class="col-sm-6">
+      <label for="favorite_route_select">Favorite Routes</label>
+      <select id="favorite_route_select"
+              name="favorite_route_select"
+              data-ng-model="useFavoriteRoute"
+              data-ng-change="selectFavoriteRoute(useFavoriteRoute)">
+        <option value="" data-ng-bind="no_selection"></option>
+        <option data-ng-repeat="route in User.favoriteRoutes" value="{{route}}">({{route.number}}) {{route.stop_name}} ({{route.direction}})</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-4">
+      <div class="col-sm-12 bus-selection-wrap" data-ng-class="{'disabled': routeList.length == 0}">
+        <label for="select_route">Select Route</label>
+        <select id="select_route"
+                name="select_route"
+                data-ng-model="route.number"
+                data-ng-disabled="routeList.length == 0"
+                data-ng-options="option.route_id as option.label for option in routeList">
+          <option value="">{{no_selection}}</option>
+        </select>
+        <p class="selection" data-ng-bind="route.number"></p>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="col-sm-12 bus-selection-wrap" data-ng-class="{'disabled': directionList.length == 0}">
+        <label for="select_direction">Select Direction</label>
+        <select id="select_direction"
+                name="select_direction"
+                data-ng-model="route.direction"
+                data-ng-disabled="directionList.length == 0"
+                data-ng-options="direction for direction in directionList">
+          <option value="">{{no_selection}}</option>
+        </select>
+        <p class="selection" data-ng-bind="route.direction"></p>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="col-sm-12 bus-selection-wrap" data-ng-class="{'disabled': stopList.length == 0}">
+
+        <button id="favorite-this-stop"
+              value="fave_this"
+              class="favorite-stop"
+              data-route="{{route.stop.stop_id}}"
+              data-ng-click="toggleFavoriteStop(route.stop)"
+              data-ng-class="{'disabled-color': !activeSearch}"
+              data-ng-if="activeSearch">
+
+          <span class="glyphicon glyphicon-star-empty"
+                data-ng-class="{'glyphicon-star-empty': !User.hasFavorite(route.stop.stop_id), 'glyphicon-star': User.hasFavorite(route.stop.stop_id)}"></span>
+
+        </button>
+
+        <label for="select_stop">Select Stop</label>
+        <select id="select_stop"
+                name="select_stop"
+                data-ng-model="route.stop"
+                data-ng-disabled="stopList.length == 0"
+                data-ng-options="stop.stop_name for stop in stopList">
+          <option value="">{{no_selection}}</option>
+        </select>
+        <p class="selection" data-ng-bind="route.stop.stop_name || no_selection"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row border-top">
+
+    <div class="col-sm-12">
+      <p data-ng-if="activeSearch && etaList.length == 0">No estimated arrival times for this location</p>
+    </div>
+
+    <div data-ng-repeat="eta in etaList" class="col-sm-4">
+      <div class="card card-default eta-bus">
+        <h3 class="number" data-ng-bind="eta.route_id"></h3>
+        <h4 class="destination" data-ng-bind="eta.destination"></h4>
+
+        <p class="arrival"><span data-ng-bind="eta.eta_time | estimatedTime"></span></p>
+        <p class="vehicle" data-ng-bind="eta.vehicle_id"></p>
+      </div>
+    </div>
+
+  </div>
+</div>

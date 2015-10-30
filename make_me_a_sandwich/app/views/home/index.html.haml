@@ -1,1 +1,4 @@
 %h1 Welcome, #{current_user.first_name}
+
+= form_tag(merchant_search_path) do |f|
+  = f.search_field_tag "search", placeholder: "Search by 'City, State' or 'ZIP'"

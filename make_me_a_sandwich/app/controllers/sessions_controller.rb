@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   before_action :logout_user, only: [:destroy]
 
-  def new
+  def create
     if logged_in?
       redirect_to root_path
     else

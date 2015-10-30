@@ -10,8 +10,9 @@ class DeliveryAuthController < ApplicationController
       flash[:notice] = "You have been signed in successfully."
       redirect_to root_path
     else
-      flash[:error] = result.errors.first.try(:[], "user_msg")
-      render status: 400
+      flash[:alert] = result.errors.first.try(:[], "user_msg")
+      result.errors.each { |error| Rails.logger.error(error) }
+      redirect_to error_session_path
     end
   end
 
@@ -24,6 +25,7 @@ class DeliveryAuthController < ApplicationController
       redirect_uri: delivery_auth_callback_url,
       response_type: :code,
       scope: :global,
+      state: Time.now.to_s
     }
   end
 

@@ -1,11 +1,11 @@
 require "interactor"
 
-class LoginUser
+class DeliveryLoginUser
   include Interactor
 
   def call
-    get_access_token
-    info = get_customer_info unless context.fail?
+    fetch_access_token
+    info = fetch_customer_info unless context.fail?
     find_or_create_user(info) unless context.fail?
   end
 
@@ -17,7 +17,7 @@ class LoginUser
     context.fail!
   end
 
-  def get_access_token
+  def fetch_access_token
     response = context.client.access_token(context.auth_code)
     return bad_response(:access_token, response) unless response.status == :ok
 
@@ -26,7 +26,7 @@ class LoginUser
     end
   end
 
-  def get_customer_info
+  def fetch_customer_info
     response = context.client.customer_info(context.access_token)
     return bad_response(:customer_info, response) unless response.status == :ok
 

@@ -13,6 +13,7 @@ gem "delivery", github: "djkotowski/delivery"
 gem "haml-rails"
 gem "bootstrap-sass", "~> 3.3.5"
 gem "bootstrap_form"
+gem "devise"
 gem "figgy"
 gem "httplog"
 gem "interactor"
@@ -24,6 +25,6 @@ group :development, :test do
   gem "database_cleaner", "~> 1.5"
   gem "interactor-rails", require: false
   gem "rspec-rails", "~> 3.2.3", require: false
+  gem "simplecov", require: false
   gem "web-console", "~> 2.0"
 end
-

@@ -19,18 +19,18 @@ class ApplicationController < ActionController::Base
 
   def delivery_client
     Delivery::Client.new(AppConfig.delivery.site,
-                         ENV["DELIVERY_API_KEY"],
-                         ENV["DELIVERY_API_SECRET"],
-                         delivery_auth_callback_url)
+      ENV["DELIVERY_API_KEY"],
+      ENV["DELIVERY_API_SECRET"],
+      delivery_auth_callback_url)
   end
 
   private
 
   def check_session_expiry
-    if session[:user_id] && session_expired?
-      session[:user_id] = nil
-      session[:expires] = nil
-    end
+    return unless session[:user_id] || session_expired?
+
+    session[:user_id] = nil
+    session[:expires] = nil
   end
 
   def session_expired?

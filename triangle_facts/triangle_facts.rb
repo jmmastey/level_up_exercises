@@ -27,7 +27,7 @@ class Triangle
 		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles
 		puts 'This triangle is scalene and mathematically boring.' if scalene
 
-		angles = self.calculate_angles#(side1, side2, side3)
+		angles = self.calculate_angles
 		# print angles function
 		puts 'The angles of this triangle are ' + angles.join(',')
 
@@ -35,7 +35,7 @@ class Triangle
 		puts ''
 	end
 
-	def calculate_angles#(a,b,c)
+	def calculate_angles
 		angleA = radians_to_degrees(Math.acos((@side2**2 + @side3**2 - @side1**2) / (2.0 * @side2 * @side3)))
 		angleB = radians_to_degrees(Math.acos((@side1**2 + @side3**2 - @side2**2) / (2.0 * @side1 * @side3)))
 		angleC = radians_to_degrees(Math.acos((@side1**2 + @side2**2 - @side3**2) / (2.0 * @side1 * @side2)))

@@ -1,18 +1,3 @@
-# User stories:
-  # As a user, I want to take in 2 types of csv files and combine the data into one data structure
-  # As a user, I want to be able to query my data, with multiple parameters:
-    # Grab all the dinosaurs that were bipeds.
-    # Grab all the dinosaurs that were carnivores (fish and insects count).
-    # Grab dinosaurs for specific periods (no need to differentiate between Early and Late Cretaceous, btw).
-    # Grab only big (> 2 tons) or small dinosaurs.
-    # Just to be sure, I'd love to be able to combine criteria at will, even better if I can chain filter calls together.
-
-
-# There are 2 types of files that will be passed. The difference between
-# them is the columns count and some labeling.
-
-
-
 class DinoDex
 
   attr_reader :all_dinosaurs, :data_source_A, :data_source_B
@@ -77,7 +62,17 @@ class DinoDex
     return @all_dinosaurs
   end
 
-  def query_data(filter_criteria={})
+  def fetch_big
+    @all_dinosaurs.select { |dino| dino.big? == true}
+  end
+
+  def fetch_carnivore
+    @all_dinosaurs.select { |dino| dino.carnivore? == true}
+  end
+
+
+
+  def query_chain_data(filter_criteria={})
     # Helper data structure
     temp = []
 

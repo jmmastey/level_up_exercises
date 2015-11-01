@@ -13,7 +13,12 @@ class Dinosaur
   end
 
   def big?
-    # true if this or that
+    @weight_lbs > 2000
+  end
+
+  def carnivore?
+    # Include fish and insects due to requirements
+    ["Carnivore", "Insectivore", "Piscivore"].any? { |opt| @diet == opt}
   end
 
 end

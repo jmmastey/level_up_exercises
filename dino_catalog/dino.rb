@@ -1,8 +1,11 @@
 # User stories:
   # As a user, I want to take in 2 types of csv files and combine the data into one data structure
-  # As a user, I want to be able to query my data, with parameters that may change
-  #
-  #
+  # As a user, I want to be able to query my data, with multiple parameters:
+    # Grab all the dinosaurs that were bipeds.
+    # Grab all the dinosaurs that were carnivores (fish and insects count).
+    # Grab dinosaurs for specific periods (no need to differentiate between Early and Late Cretaceous, btw).
+    # Grab only big (> 2 tons) or small dinosaurs.
+    # Just to be sure, I'd love to be able to combine criteria at will, even better if I can chain filter calls together.
 
 
 
@@ -76,70 +79,38 @@ class DinoDex
     return @all_dinosaurs
   end
 
-  # def format_data_A(headers, data)
-  #   data.each do |row|
-  #     p row.class
-  #   end
-  #   headers
-  # end
+  def query_data(filter_criteria={})
+    # Helper data structure
+    temp = []
 
-  # def format_data_B(headers)
-  #
-  # end
+    p filter_criteria
 
-
-
-  def parse_csv_with_CSV(input_file)
-    data = Array.new
-    CSV.foreach(input_file, headers: true, header_converters: :downcase) do |row|
-      data << row
-    end
-
-    data.each do |row|
-
-      @dino_hash[row["name"].to_sym] = row
-    end
-  end
-
-  def parse_csv_with_File(input_file)
-    # Data structures
-    data = Array.new
-
-    # Iterate through csv, without csv module, remove new line char and append to array structure
-    File.open(input_file).each do |row|
-      data << row.sub(/\n/, "")
-    end
-
-    # Retrieve headers from data
-    headers = data[0].split(",")
-
-    # Iterate through data without headers
-    data[1..-1].each do |row|
-
-      # temporary placeholder for data
-      temp = {}
-
-      row_split_data = row.split(",")
-
-      # Combine headers with rows
-      headers.each.with_index do |header, i|
-
-        # traverses split data and combines it with the header, as a symbol
-        temp[header.downcase.to_sym] = row_split_data[i]
-
-        # Adds to main data structure
-        @dino_hash[temp[:name]] = temp
+    @all_dinosaurs.each do | dino |
+      filter_criteria.each do | key , value |
+        if dino[key] == value
+          p "YEAH YEAH YEAH"
+          temp << dino
+        else
+          next
+        end
       end
     end
-    return @dino_hash
+    return temp
   end
-
 end
 
-# TODO
-  # The foreach method from the CSV doesn't give me enough leverage. Will prob stick to writing my own.
+class Dinosaur
+
+  
+
+end
 
 dino_instance = DinoDex.new({data_source_A: "dinodex.csv",
                              data_source_B: "african_dinosaur_export.csv"})
 dino_instance.seed_dino
-dino_instance.all_dinosaurs
+# dino_instance.all_dinosaurs
+query = dino_instance.query_data({walking: "Biped", diet: "Carnivore"})
+
+query.each do |d|
+  p d
+end

@@ -22,17 +22,11 @@ class Triangle
 	end
 
 	def recite_facts
-		# case statement
-		puts 'This triangle is equilateral!' if equilateral
-		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles
-		puts 'This triangle is scalene and mathematically boring.' if scalene
+		puts triangle_type
 
-		angles = self.calculate_angles
-		# print angles function
-		puts 'The angles of this triangle are ' + angles.join(',')
+		puts prettify_angles
 
-		puts 'This triangle is also a right triangle!' if angles.include? 90
-		puts ''
+		puts right_triagle
 	end
 
 	def calculate_angles
@@ -46,6 +40,25 @@ class Triangle
 	def radians_to_degrees(rads)
 		return (rads * 180 / Math::PI).round
 	end
+
+	def prettify_angles
+		return "The angles of this triangle are #{calculate_angles.join(",")}"
+	end
+
+	def right_triagle
+		return "This triangle is also a right triangle!" if calculate_angles.include?(90)
+	end
+
+	def triangle_type
+		if equilateral
+			'This triangle is equilateral!'
+		elsif isosceles
+			'This triangle is isosceles! Also, that word is hard to type.'
+		else # scalene
+			'This triangle is scalene and mathematically boring.'
+		end
+	end
+
 end
 
 triangles = [[5,5,5],

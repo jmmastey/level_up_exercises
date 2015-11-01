@@ -36,15 +36,11 @@ class Triangle
 	end
 
 	def calculate_angles
-		angleA = radians_to_degrees(setup_radians_to_degrees)
+		angleA = radians_to_degrees(Math.acos((@side2**2 + @side3**2 - @side1**2) / (2.0 * @side2 * @side3)))
 		angleB = radians_to_degrees(Math.acos((@side1**2 + @side3**2 - @side2**2) / (2.0 * @side1 * @side3)))
 		angleC = radians_to_degrees(Math.acos((@side1**2 + @side2**2 - @side3**2) / (2.0 * @side1 * @side2)))
 
 		return [angleA, angleB, angleC]
-	end
-
-	def setup_radians_to_degrees
-		return Math.acos((@side2**2 + @side3**2 - @side1**2) / (2.0 * @side2 * @side3))
 	end
 
 	def radians_to_degrees(rads)

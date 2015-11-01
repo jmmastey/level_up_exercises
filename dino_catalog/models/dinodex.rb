@@ -8,12 +8,10 @@
     # Just to be sure, I'd love to be able to combine criteria at will, even better if I can chain filter calls together.
 
 
-
-
-require 'csv'
-
 # There are 2 types of files that will be passed. The difference between
 # them is the columns count and some labeling.
+
+
 
 class DinoDex
 
@@ -57,7 +55,7 @@ class DinoDex
       temp[:walking]      = row[5]
       temp[:description]  = row[6]
 
-      @all_dinosaurs << temp
+      @all_dinosaurs << Dinosaur.new(temp)
     end
 
     data_B.each do |row|
@@ -73,7 +71,7 @@ class DinoDex
       temp[:walking]      = row[4]
       temp[:description]  = nil
 
-      @all_dinosaurs << temp
+      @all_dinosaurs << Dinosaur.new(temp)
     end
 
     return @all_dinosaurs
@@ -97,20 +95,4 @@ class DinoDex
     end
     return temp
   end
-end
-
-class Dinosaur
-
-  
-
-end
-
-dino_instance = DinoDex.new({data_source_A: "dinodex.csv",
-                             data_source_B: "african_dinosaur_export.csv"})
-dino_instance.seed_dino
-# dino_instance.all_dinosaurs
-query = dino_instance.query_data({walking: "Biped", diet: "Carnivore"})
-
-query.each do |d|
-  p d
 end

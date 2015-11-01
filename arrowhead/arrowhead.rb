@@ -1,3 +1,8 @@
+# Let me try to understand what the code is doing here:
+  # This is a class used to take input and return information that belongs to the input
+  # There is a constant with 2 types of region, each region has 4 shapes
+# I will refactor this by creating base cases that return text if conditions are not met
+
 class Arrowhead
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
@@ -15,19 +20,14 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+    raise "Unknown region, please provide a valid region." unless CLASSIFICATIONS.include?(region)
+
+    shapes = CLASSIFICATIONS[region]
+
+    raise "Unknown shape value. Are you sure you know what you're talking about?" unless shapes.include?(shape)
+
+    return "You have a(n) '#{shapes[shape]}' arrowhead. Probably priceless."
   end
 end
 

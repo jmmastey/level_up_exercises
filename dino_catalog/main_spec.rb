@@ -139,6 +139,13 @@ Walking -> Biped
 EOT
       expect(dinodex_instance.display_group(small)).to eq(result)
     end
+
+    it "Exports the dinosaur collection to a json string" do
+      dinodex_instance.seed
+      export = dinodex_instance.export_json
+      expect(export.class).to be(String)
+    end
+
   end
 
   describe Dinosaur do
@@ -164,6 +171,5 @@ Description -> One of the most primitive known Ankylosauria.
 EOT
       expect(dinosaur.display).to eq(result)
     end
-
   end
 end

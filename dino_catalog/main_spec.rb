@@ -36,7 +36,7 @@ describe "DinoDex Controller" do
       end
     end
 
-    context "DinoDex has queying capabilities" do
+    context "DinoDex has query capabilities" do
       it "Can fetch walking type correctly" do
         dinodex_instance.seed
         dinodex_instance.fetch_biped.each do |dino|
@@ -72,6 +72,35 @@ describe "DinoDex Controller" do
         end
       end
 
+      it "Can fetch animal (small) size correctly" do
+        dinodex_instance.seed
+        dinodex_instance.fetch_small.each do |dino|
+          expect(dino.weight_lbs).to be < 2000
+        end
+      end
+
+      it "Can use the master fetch and return unique results (Set) based on all search params" do
+        dinodex_instance.seed
+        unique_values = dinodex_instance.master_fetch({param1: "fetch_biped",
+                                                       param2: "fetch_big"})
+        expect(unique_values).to be_a(Set)
+      end
+
+      it "Can use the master fetch and return the same results as a simple query" do
+        dinodex_instance.seed
+        small = dinodex_instance.fetch_small
+        small_master = dinodex_instance.master_fetch({param1: "fetch_small"})
+
+        expect(small_master.to_a.flatten.length).to eq(small.length)
+      end
+
+      it "Can use the master fetch and return the same results as a query that takes parameters" do
+        dinodex_instance.seed
+        period = dinodex_instance.fetch_period("Triassic")
+        period_master = dinodex_instance.master_fetch({"Triassic" => "fetch_period"})
+
+        expect(period_master.to_a.flatten.length).to eq(period.length)
+      end
     end
   end
 

@@ -1,3 +1,5 @@
+require 'set'
+
 class DinoDex
 
   attr_reader :all_dinosaurs, :data_source_A, :data_source_B
@@ -39,7 +41,7 @@ class DinoDex
       temp[:weight_lbs]   = row[4].to_i
       temp[:walking]      = row[5]
       temp[:description]  = row[6]
-      
+
       @all_dinosaurs << Dinosaur.new(temp)
     end
 
@@ -82,22 +84,34 @@ class DinoDex
     @all_dinosaurs.select { |dino| dino.period.include?(input_period)}
   end
 
-  def query_chain_data(filter_criteria={})
-    # Helper data structure
+  def master_fetch(opts={})
+    # Helper data struc
     temp = []
 
-    p filter_criteria
+    opts.each do | key, value |
 
-    @all_dinosaurs.each do | dino |
-      filter_criteria.each do | key , value |
-        if dino[key] == value
-          p "YEAH YEAH YEAH"
-          temp << dino
-        else
-          next
-        end
+      case value
+
+      when "fetch_biped"
+        temp << fetch_biped
+
+      when "fetch_big"
+        temp << fetch_big
+
+      when "fetch_small"
+        temp << fetch_small
+
+      when "fetch_carnivore"
+        temp << fetch_carnivore
+
+      # This is a hacky solution to this problem. This fetches the result we want and we are able to pass
+      # the params through the call. Would really love to see a cleaner implementation for this problem.
+      when "fetch_period"
+        temp << fetch_period(key)
       end
     end
-    return temp
+
+    # will use set to remove duplicates
+    return Set.new(temp)
   end
 end

@@ -114,4 +114,15 @@ class DinoDex
     # will use set to remove duplicates
     return Set.new(temp)
   end
+
+  def display_group(group)
+    # Helper
+    group_string = ""
+
+    group.each do |dino|
+       group_string += dino.display
+    end
+    return group_string
+  end
+
 end

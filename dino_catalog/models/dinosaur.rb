@@ -29,6 +29,13 @@ class Dinosaur
     ["Carnivore", "Insectivore", "Piscivore"].any? { |opt| @diet == opt }
   end
 
-  
+  def display
+    pretty_string = "#######################\nHere are my details!!\n#######################\n"
+    instance_variables.each do |var|
+      pretty_string += "#{var.to_s.sub("@", "").capitalize} -> #{instance_variable_get(var)}\n" unless instance_variable_get(var) == nil
+    end
+    pretty_string += "#######################\n"
+    return pretty_string
+  end
 
 end

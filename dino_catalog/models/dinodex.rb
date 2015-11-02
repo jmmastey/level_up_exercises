@@ -1,4 +1,5 @@
 require 'set'
+require 'json'
 
 class DinoDex
 
@@ -8,6 +9,7 @@ class DinoDex
     @all_dinosaurs = Array.new
     @data_source_A = opts[:data_source_A]
     @data_source_B = opts[:data_source_B]
+    @json_data = Array.new
   end
 
 
@@ -43,6 +45,7 @@ class DinoDex
       temp[:description]  = row[6]
 
       @all_dinosaurs << Dinosaur.new(temp)
+      @json_data << temp
     end
 
     data_B.each do |row|
@@ -59,6 +62,7 @@ class DinoDex
       temp[:description]  = nil
 
       @all_dinosaurs << Dinosaur.new(temp)
+      @json_data << temp
     end
 
     return @all_dinosaurs
@@ -114,4 +118,19 @@ class DinoDex
     # will use set to remove duplicates
     return Set.new(temp)
   end
+
+  def display_group(group)
+    # Helper
+    group_string = ""
+
+    group.each do |dino|
+       group_string += dino.display
+    end
+    return group_string
+  end
+
+  def export_json
+    @json_data.to_json
+  end
+
 end

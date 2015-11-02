@@ -102,11 +102,74 @@ describe "DinoDex Controller" do
         expect(period_master.to_a.flatten.length).to eq(period.length)
       end
     end
+
+    it "Displays information about a group" do
+      dinodex_instance.seed
+      small = dinodex_instance.fetch_small
+result = <<-EOT
+#######################
+Here are my details!!
+#######################
+Name -> Deinonychus
+Period -> Early Cretaceous
+Continent -> North America
+Diet -> Carnivore
+Weight_lbs -> 150
+Walking -> Biped
+#######################
+#######################
+Here are my details!!
+#######################
+Name -> Quetzalcoatlus
+Period -> Late Cretaceous
+Continent -> North America
+Diet -> Carnivore
+Weight_lbs -> 440
+Walking -> Quadruped
+Description -> Largest known flying animal of all time.
+#######################
+#######################
+Here are my details!!
+#######################
+Name -> Abrictosaurus
+Period -> Jurassic
+Weight_lbs -> 100
+Walking -> Biped
+#######################
+EOT
+      expect(dinodex_instance.display_group(small)).to eq(result)
+    end
+
+    it "Exports the dinosaur collection to a json string" do
+      dinodex_instance.seed
+      export = dinodex_instance.export_json
+      expect(export.class).to be(String)
+    end
+
   end
 
   describe Dinosaur do
     it "Creates an instance of Dinosaur" do
       expect(dinosaur).to be_an_instance_of(Dinosaur)
+    end
+
+    it "Dinosaur knows how to display itself" do
+
+# Use heredoc to see the result better. I need this indentation as it is.
+result = <<-EOT
+#######################
+Here are my details!!
+#######################
+Name -> Dracopelta
+Period -> Early Cretaceous or Late Jurassic
+Continent -> South America
+Diet -> Herbivore
+Weight_lbs -> 0
+Walking -> Quadruped
+Description -> One of the most primitive known Ankylosauria.
+#######################
+EOT
+      expect(dinosaur.display).to eq(result)
     end
   end
 end

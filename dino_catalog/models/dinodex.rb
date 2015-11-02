@@ -21,7 +21,7 @@ class DinoDex
     return data
   end
 
-  def seed_dino
+  def seed
     # Parses CSVs, skips headers
     data_A = parse_csv_to_array_of_arrays(@data_source_A).drop(1)
     data_B = parse_csv_to_array_of_arrays(@data_source_B).drop(1)
@@ -39,7 +39,7 @@ class DinoDex
       temp[:weight_lbs]   = row[4].to_i
       temp[:walking]      = row[5]
       temp[:description]  = row[6]
-
+      
       @all_dinosaurs << Dinosaur.new(temp)
     end
 
@@ -62,15 +62,25 @@ class DinoDex
     return @all_dinosaurs
   end
 
+  def fetch_biped
+    @all_dinosaurs.select { |dino| dino.biped? == true}
+  end
+
   def fetch_big
     @all_dinosaurs.select { |dino| dino.big? == true}
+  end
+
+  def fetch_small
+    @all_dinosaurs.select { |dino| dino.small? == true }
   end
 
   def fetch_carnivore
     @all_dinosaurs.select { |dino| dino.carnivore? == true}
   end
 
-
+  def fetch_period(input_period)
+    @all_dinosaurs.select { |dino| dino.period.include?(input_period)}
+  end
 
   def query_chain_data(filter_criteria={})
     # Helper data structure

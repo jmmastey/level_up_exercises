@@ -1,4 +1,7 @@
-%h1 Welcome, #{current_user.first_name}
+%h1 Welcome!
 
-= form_tag(merchant_search_path) do |f|
-  = f.search_field_tag "search", placeholder: "Search by 'City, State' or 'ZIP'"
+= form_tag(search_merchant_path) do
+  .col-md-10
+    .form-group
+      = search_field_tag "search", "", class: "form-control input-lg", placeholder: "Search by 'City, State' or 'ZIP'"
+  %button.col-md-2.btn.btn-primary.btn-lg{ type: :submit } Search

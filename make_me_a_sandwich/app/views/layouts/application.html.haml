@@ -10,7 +10,7 @@
     = render "shared/navbar"
     .container
       - if notice
-        %p.notice= notice
+        .alert.alert-info{ role: :alert }= notice
       - if alert
-        %p.alert= alert
+        .alert.alert-danger{ role: :alert }= alert
       = yield

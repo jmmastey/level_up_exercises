@@ -1,0 +1,20 @@
+- if @merchants.any?
+  - @merchants.each do |merchant|
+    .panel.panel-default
+      .panel-heading
+        .row
+          .col-md-8
+            %h3.panel-title= merchant.name
+          .col-md-4.text-right
+            %a.btn.btn-info
+              %i.glyphicon.glyphicon-th-list
+              &nbsp;See Menu
+      .panel-body
+        %p= merchant.description
+        %dl
+          %dt Phone
+          %dd= merchant.phone
+          %dt Address
+          %dd= format_address(merchant.location)
+- else
+  %p.alert.alert-info No merchants found.

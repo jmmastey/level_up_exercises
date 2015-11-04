@@ -14,6 +14,7 @@ module MakeMeASandwich
     config.active_record.raise_in_transactional_callbacks = true
 
     config.generators do |g|
+      g.factory_girl dir: "factories"
       g.template_engine :haml
     end
   end

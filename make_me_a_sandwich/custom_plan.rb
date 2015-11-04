@@ -16,6 +16,8 @@ class CustomPlan < Zeus::Rails
 
   def test
     ARGV << "spec" if ARGV.empty?
+    require "simplecov"
+    SimpleCov.start
     exit RSpec::Core::Runner.run(ARGV)
   end
 end

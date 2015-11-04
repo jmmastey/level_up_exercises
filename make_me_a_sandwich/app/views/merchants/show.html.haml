@@ -1,0 +1,24 @@
+.page-header
+  %h1= @merchant.name
+
+%p= @merchant.description
+
+%dl.dl-horizontal
+  - if @merchant.phone.present?
+    %dt Phone
+    %dd= @merchant.phone
+  - if @merchant.location.present?
+    %dt Address
+    %dd= format_address(@merchant.location)
+  - if @merchant.minimum_pickup.present?
+    %dt Minimum Pickup Amount
+    %dd= @merchant.minimum_pickup.to_s(:currency)
+  - if @merchant.maximum_pickup.present?
+    %dt Maximum Pickup Amount
+    %dd= @merchant.maximum_pickup.to_s(:currency)
+  - if @merchant.minimum_delivery.present?
+    %dt Minimum Delivery Amount
+    %dd= @merchant.minimum_delivery.to_s(:currency)
+  - if @merchant.maximum_delivery.present?
+    %dt Maximum Delivery Amount
+    %dd= @merchant.maximum_delivery.to_s(:currency)

@@ -1,7 +1,5 @@
-%h1 Welcome!
+.jumbotron
+  %h1 Welcome!
+  %p Start your search for grub here.
 
-= form_tag(search_merchant_path) do
-  .col-md-10
-    .form-group
-      = search_field_tag "search", "", class: "form-control input-lg", placeholder: "Search by 'City, State' or 'ZIP'"
-  %button.col-md-2.btn.btn-primary.btn-lg{ type: :submit } Search
+= render partial: "merchants/search_form"

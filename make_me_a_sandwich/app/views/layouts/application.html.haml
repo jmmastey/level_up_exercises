@@ -10,7 +10,10 @@
     = render "shared/navbar"
     .container
       - if notice
-        .alert.alert-info{ role: :alert }= notice
+        .alert.alert-info.alert-dismissable{ role: :alert }
+          %button.close{ type: :button, aria: { label: "Close" }, data: { dismiss: :alert }}
+            %span{ aria: { hidden: "true" }} &times;
+          = notice
       - if alert
         .alert.alert-danger{ role: :alert }= alert
       = yield

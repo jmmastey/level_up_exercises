@@ -1,7 +1,13 @@
+def zeus_running?
+  File.exists?(".zeus.sock")
+end
+
 ENV['RAILS_ENV'] ||= 'test'
 
-require "simplecov"
-SimpleCov.start
+unless zeus_running?
+  require "simplecov"
+  SimpleCov.start("rails")
+end
 
 require 'rspec/rails'
 require 'spec_helper'

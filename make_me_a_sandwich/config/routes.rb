@@ -9,9 +9,7 @@ Rails.application.routes.draw do
   #   to: "delivery_auth#callback",
   #   as: :delivery_auth_callback
 
-  resource :merchant, only: [:index] do
-    get "search", to: "merchants#search"
-  end
+  resources :merchants, only: [:index, :show]
 
   # resource :session, only: [:new, :create, :destroy] do
   #   get "error", to: "sessions#error"

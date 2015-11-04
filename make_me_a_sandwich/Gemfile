@@ -23,6 +23,8 @@ group :development, :test do
   gem "byebug"
   gem "pry"
   gem "cucumber-rails", "~> 1.4.2", require: false
+  gem "factory_girl_rails"
+  gem "faker"
   gem "database_cleaner", "~> 1.5"
   gem "interactor-rails", require: false
   gem "rspec-rails", "~> 3.2.3", require: false

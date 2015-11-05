@@ -15,6 +15,8 @@ module MakeMeASandwich
 
     config.generators do |g|
       g.factory_girl dir: "factories"
+      g.assets false
+      g.helper false
       g.template_engine :haml
     end
   end

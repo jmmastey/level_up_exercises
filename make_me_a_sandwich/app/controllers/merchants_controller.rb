@@ -5,6 +5,10 @@ class MerchantsController < ApplicationController
 
   def index
     @location = search_params[:location]
+
+    if @location.blank?
+      flash[:alert] = "You must enter a ZIP to search by."
+    end
   end
 
   private
@@ -14,6 +18,7 @@ class MerchantsController < ApplicationController
   end
 
   def retrieve_merchants
+    return @merchants = [] unless search_params[:location].present?
     @merchants = Merchant.in_zip(search_params[:location])
   end
 

@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'data_science'
+
+require 'trollop'
+
+p = Trollop::Parser.new do
+  banner <<-EOS
+Data Science will answer all of your A/B Testing questions.
+
+Usage:
+       data-science [options] <datafile>
+where [options] are:
+EOS
+end
+
+Trollop::with_standard_exception_handling p do
+  raise Trollop::HelpNeeded if ARGV.size != 1 # show help screen
+  p.parse ARGV
+end
+
+filename = ARGV[0]
+DataScience.print_statistics(filename)

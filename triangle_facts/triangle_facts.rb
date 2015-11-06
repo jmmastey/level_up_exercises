@@ -3,7 +3,8 @@ require 'pry'
 PI = 3.14
 
 class Triangle
-  attr_accessor :side1, :side2, :side3, :all
+  attr_reader :side1, :side2, :side3, :all
+
   def initialize(side1, side2, side3)
     @side1 = side1
     @side2 = side2
@@ -27,15 +28,15 @@ class Triangle
     (rads * 180 / Math::PI).round
   end
 
-  def calculate(first, second, third)
+  def calc_angle(first, second, third)
     side_calc = (second**2 + third**2 - first**2) / (2.0 * second * third)
     rads_to_degs(Math.acos(side_calc))
   end
 
   def calculate_angles
-    angle_a = calculate(side1, side2, side3)
-    angle_b = calculate(side2, side1, side3)
-    angle_c = calculate(side3, side1, side2)
+    angle_a = calc_angle(side1, side2, side3)
+    angle_b = calc_angle(side2, side1, side3)
+    angle_c = calc_angle(side3, side1, side2)
     [angle_a, angle_b, angle_c]
   end
 

@@ -61,6 +61,8 @@ class Triangle
     print_triangle_type
     print_triangle_angles
   end
+
+  private :rads_to_degs, :calc_angle, :calculate_angles
 end
 
 triangles = [

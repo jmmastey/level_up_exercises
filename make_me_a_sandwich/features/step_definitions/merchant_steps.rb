@@ -19,6 +19,14 @@ Given(/^some merchants exist$/) do
   @merchants.concat(create_merchants_with_zip("60604-2345", 5))
 end
 
+Given(/^some merchants exist with menus$/) do
+  @merchants = FactoryGirl.create_list(:merchant, 10, :with_menus)
+end
+
+When(/^I visit a merchant page$/) do
+  visit merchant_path(@merchants.first)
+end
+
 When(/^I search a matching ZIP$/) do
   search_merchants("60604-1234")
 end
@@ -62,4 +70,11 @@ end
 
 Then(/^I see I must enter a ZIP$/) do
   expect(page).to have_content("You must enter a ZIP to search by")
+end
+
+Then(/^I see that merchant's menus$/) do
+  merchant = @merchants.first
+  merchant.menus.each do |menu|
+    expect(page).to have_content(menu.name)
+  end
 end

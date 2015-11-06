@@ -23,6 +23,6 @@ class MerchantsController < ApplicationController
   end
 
   def retrieve_merchant
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.with_menus.find(params[:id])
   end
 end

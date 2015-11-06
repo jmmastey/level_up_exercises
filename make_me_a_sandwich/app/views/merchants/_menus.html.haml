@@ -1,0 +1,17 @@
+%h2 Menu
+
+.panel-group#menus{ role: :tablist, aria: { multiselectable: "true" }}
+  - menus.each do |menu|
+    .panel.panel-info
+      .panel-heading{ id: menu_heading_id(menu), role: :tab }
+        %h4.panel-title
+          %a{ role: :button, href: "##{menu_collapse_id(menu)}", data: { toggle: :collapse, parent: "#menus" }, aria: { controls: menu_collapse_id(menu) }}= menu.name
+
+      .panel-collapse.collapse.in{ id: menu_collapse_id(menu), role: :tabpanel, aria: { labelledby: menu_heading_id(menu) }}
+        .panel-body
+          %table.table.table-striped
+            %tbody
+              - menu.menu_items.each do |item|
+                %tr
+                  %th= item.name
+                  %td= item.description

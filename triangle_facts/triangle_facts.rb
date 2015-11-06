@@ -3,13 +3,13 @@ require 'pry'
 PI = 3.14
 
 class Triangle
-  attr_reader :side1, :side2, :side3, :all
+  attr_reader :side1, :side2, :side3, :triangle_sides
 
   def initialize(side1, side2, side3)
     @side1 = side1
     @side2 = side2
     @side3 = side3
-    @all = [side1, side2, side3]
+    @triangle_sides = [side1, side2, side3]
   end
 
   def equilateral?
@@ -17,7 +17,7 @@ class Triangle
   end
 
   def isosceles?
-    all.uniq.length == 2
+    triangle_sides.uniq.length == 2
   end
 
   def scalene?
@@ -47,7 +47,7 @@ class Triangle
   def print_triangle_type
     prints("equilateral!") if equilateral?
     prints("isosceles!", "Also, that word is hard to type.") if isosceles?
-    prints("scalene", "and mathematically boring.") if scalene?
+    prints("scalene", "and mathematictriangle_sidesy boring.") if scalene?
   end
 
   def print_triangle_angles

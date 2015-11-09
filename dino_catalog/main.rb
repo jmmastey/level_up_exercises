@@ -20,7 +20,7 @@ require_relative 'models/dinosaur'
 # Please run the tests to confirm the implementation below works.
 
   # dinodex_instance = DinoDex.new({data_source_A: "csv_data/dinodex.csv",
-                               data_source_B: "csv_data/african_dinosaur_export.csv"})
+                              #  data_source_B: "csv_data/african_dinosaur_export.csv"})
   # 1) OK As a user, I want to take in 2 types of csv files and combine the data into one data structure
   # dinodex_instance.seed
 

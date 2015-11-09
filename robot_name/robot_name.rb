@@ -3,30 +3,69 @@ class NameCollisionError < RuntimeError; end
 class Robot
   attr_accessor :name
 
-  @@registry
-
   def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+    @registry = args[:registry]
+    @name = args[:name] || NameGenerator.new.generate_name(2,3)
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+    add_to_registry(@registry)
+  end
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+  private
+
+  def add_to_registry(registry)
+    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || registry.include?(name)
+    registry.list << self.name
+  end
+
+end
+
+class NameGenerator
+  
+  def generate_name(num_chars, num_nums)
+    name = ""
+    num_chars.times do 
+      name += generate_char
+    end
+    num_nums.times do
+      name += generate_num
     end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+    name
+  end
+
+  private
+
+  def generate_char
+    ('A'..'Z').to_a.sample
+  end
+
+  def generate_num
+    rand(10).to_s
+  end
+
+end
+
+class Registry
+
+  attr_accessor :list
+  
+  def initialize(args = {})
+    @type = args[:type]
+    @list = args[:list] || []
+  end
+
+  def include?(string)
+    @list.include?(string)
   end
 end
 
-robot = Robot.new
+robot_registry = Registry.new(type: "robot")
+robot = Robot.new(registry: robot_registry)
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+robot_2 = Robot.new(registry: robot_registry, name: 'AA111')
+puts "My pet robot's name is #{robot_2.name}, but we usually call him junky."
+
+robot_3 = Robot.new(registry: robot_registry, name: 'AA111')
+puts "My pet robot's name is #{robot_3.name}, but we usually call him junky."

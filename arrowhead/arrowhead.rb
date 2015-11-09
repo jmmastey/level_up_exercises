@@ -20,9 +20,7 @@ class Arrowhead
     arrowhead = get_arrowhead(shapes, shape)
     "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
-  
-  private
-  
+
   def self.get_shapes(region)
     raise "Unknown region, please provide a valid region." unless CLASSIFICATIONS.include? region
     CLASSIFICATIONS[region]

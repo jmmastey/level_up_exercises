@@ -1,6 +1,4 @@
-require 'pry'
-
-class NameCollisionError < RuntimeError; end
+require_relative 'robot_name_errors.rb'
 
 class RobotName
   attr_accessor :name

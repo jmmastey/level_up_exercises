@@ -1,76 +1,61 @@
 require 'json'
 require 'ABAnalyzer'
 require './data_print'
+require './cohort_attributes'
 
 class DataScience
   attr_reader :confidence_level
-  attr_reader :a_count
-  attr_reader :a_conv_count
-  attr_reader :avg_rate_a
-  attr_reader :rate_a_low
-  attr_reader :rate_a_high
-  attr_reader :b_count
-  attr_reader :b_conv_count
-  attr_reader :avg_rate_b
-  attr_reader :rate_b_low
-  attr_reader :rate_b_high
+  attr_reader :cohort_a, :cohort_b
 
-  def initializer(_args = {})
+  def initialize(file_path)
     @visits = []
-  end
-
-  def parse_json_file(file_path)
+    @cohort_a = CohortAttributes.new
+    @cohort_b = CohortAttributes.new
     json_data = open_and_read_file(file_path)
     @visits = JSON.parse(json_data)
   end
 
   def successfully_loaded?
-    return false if @visits.nil? || @visits.empty?
-    true
+    !@visits.nil? || !@visits.empty?
   end
 
   def find_counts_per_cohort
-    @a_count, @a_conv_count = find_counts_for_cohort('A')
-    @b_count, @b_conv_count = find_counts_for_cohort('B')
-  end
-
-  def able_to_find_cohort_counts?
-    return true if @a_count != 0 && @b_count != 0
-    false
+    @cohort_a.count, @cohort_a.conversions = find_counts_for_cohort('A')
+    @cohort_b.count, @cohort_b.conversions = find_counts_for_cohort('B')
   end
 
   def calculate_average_conversion_rate
-    @avg_rate_a = 0.0
-    @avg_rate_b = 0.0
-
-    @avg_rate_a = @a_conv_count.to_f / @a_count.to_f
-    @avg_rate_b = @b_conv_count.to_f / @b_count.to_f
+    @cohort_a.avg_rate = @cohort_a.conversions.to_f / @cohort_a.count.to_f
+    @cohort_b.avg_rate = @cohort_b.conversions.to_f / @cohort_b.count.to_f
   end
 
   def able_to_calculate_avg_conv_rate?
-    return false if @avg_rate_a == 0 || @avg_rate_b == 0
-    true
+    @cohort_a.avg_rate != 0 && @cohort_b.avg_rate != 0
   end
 
   def calculate_95_perc_conversion_rate_range
-    @rate_a_low, @rate_a_high = calc_95_conv_rate_for(@a_count, @a_conv_count)
-    @rate_b_low, @rate_b_high = calc_95_conv_rate_for(@b_count, @b_conv_count)
+    @cohort_a.rate_low, @cohort_a.rate_high =
+      calc_95_conv_rate_for(@cohort_a.count, @cohort_a.conversions)
+    @cohort_b.rate_low, @cohort_b.rate_high =
+      calc_95_conv_rate_for(@cohort_b.count, @cohort_b.conversions)
   end
 
   def able_to_calculate_95_conv_rate_ranges?
-    if @rate_a_low == 0 || @rate_a_high == 0 ||
-       @rate_b_low == 0 || @rate_b_high == 0
+    if @cohort_a.rate_low == 0 || @cohort_a.rate_high == 0 ||
+       @cohort_b.rate_low == 0 || @cohort_b.rate_high == 0
       return false
     end
     true
   end
 
+  def confidence_interval(cohort)
+    { converted: cohort.conversions, unconverted: cohort.count - cohort.conversions }
+  end
+
   def calculate_confidence_level
     values = {}
-    values['a'] = { 'conved' => @a_conv_count,
-                    'unconved' => @a_count - @a_conv_count }
-    values['b'] = { 'conved' => @b_conv_count,
-                    'unconved' => @b_count - @b_conv_count }
+    values['a'] = confidence_interval(cohort_a)
+    values['b'] = confidence_interval(cohort_b)
 
     analyzer = ABAnalyzer::ABTest.new values
 
@@ -79,8 +64,7 @@ class DataScience
   end
 
   def able_to_produce_confidence_level?
-    return true if @confidence_level != 0
-    false
+    @confidence_level != 0
   end
 
   private
@@ -93,43 +77,34 @@ class DataScience
   end
 
   def find_counts_for_cohort(name)
-    count = 0
-    conv_count = 0
-    @visits.each do |visit|
-      if visit['cohort'] == name
-        count += 1
-        conv_count += visit['result']
-      end
-    end
-    return count, conv_count
+    cohort_visits = @visits.select { |v| v['cohort'] == name }
+    conversions = cohort_visits.inject(0) { |sum, v| sum += v['result'] }
+    return cohort_visits.size, conversions
   end
 
   def calc_95_conv_rate_for(count, conv_count)
     result = ABAnalyzer.confidence_interval(conv_count, count, 0.95)
-    low = result[0]
-    high = result[1]
-    return low, high
+    return result[0], result[1]
   end
 end
 
 file_path = './data_export_2014_06_20_15_59_02.json'
-data_science = DataScience.new
+data_science = DataScience.new(file_path)
 
-data_science.parse_json_file(file_path)
 data_science.find_counts_per_cohort
 
 data_science.calculate_average_conversion_rate
 data_science.calculate_95_perc_conversion_rate_range
 data_science.calculate_confidence_level
 
-DataPrint.print_avg_rates(data_science.avg_rate_a,
-                          data_science.a_count,
-                          data_science.a_conv_count,
-                          data_science.avg_rate_b,
-                          data_science.b_count,
-                          data_science.b_conv_count)
-DataPrint.print_rates_ranges(data_science.rate_a_low,
-                             data_science.rate_a_high,
-                             data_science.rate_b_low,
-                             data_science.rate_b_high)
+DataPrint.print_avg_rates(data_science.cohort_a.avg_rate,
+                          data_science.cohort_a.count,
+                          data_science.cohort_a.conversions,
+                          data_science.cohort_b.avg_rate,
+                          data_science.cohort_b.count,
+                          data_science.cohort_b.conversions)
+DataPrint.print_rates_ranges(data_science.cohort_a.rate_low,
+                             data_science.cohort_a.rate_high,
+                             data_science.cohort_b.rate_low,
+                             data_science.cohort_b.rate_high)
 DataPrint.print_confidence_level(data_science.confidence_level)

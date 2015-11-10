@@ -11,26 +11,20 @@ class DataPrint
   end
 
   def self.print_confidence_level(conf_level)
-    # presentable values
     conf_pres = conf_level * 100
-
-    puts "Confidence Level: " << conf_pres.round(2).to_s << "%"
+    puts "Confidence Level: #{conf_pres.round(2)}%"
   end
 
   def self.print_avg_rate(name, avg_rate, count, conv_count)
     avg_rate_pres = avg_rate * 100
     conv_count_pres = conv_count * 100
     count_pres = count * 100
-
-    puts "Avg " << name << " Rate: " << avg_rate_pres.round(2).to_s << "% (" +
-      conv_count_pres.to_s << "/" << count_pres.to_s << ")"
+    puts "Avg #{name} Rate: #{avg_rate_pres.round(2)}% (#{conv_count_pres}/#{count_pres})"
   end
 
   def self.print_rate(name, low, high)
     low_pres = low * 100
     high_pres = high * 100
-
-    puts name << " Rates: [" << low_pres.round(2).to_s << "% - " +
-      high_pres.round(2).to_s << "%]"
+    puts "#{name} Rates: [#{low_pres.round(2)}% - #{high_pres.round(2)}%]"
   end
 end

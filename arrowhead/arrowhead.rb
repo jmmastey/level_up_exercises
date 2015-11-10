@@ -30,5 +30,4 @@ class Arrowhead
     raise "Unknown shape value. Are you sure you know what you're talking about?" unless shapes.include? shape
     shapes[shape]
   end
-
 end

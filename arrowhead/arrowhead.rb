@@ -17,14 +17,31 @@ class Arrowhead
 
   # FIXME: I don't have time to deal with this.
   def self.classify(region, shape)
-    if CLASSIFICATIONS[region]
-      shapes = CLASSIFICATIONS[region]
-      return "You have a(n) '#{shapes[shape]}' arrowhead. Probably priceless." if shapes[shape]
-      raise "Unknown shape value. Are you sure you know what you're talking about?"
+    if valid_region(region) && valid_shape(region, shape)
+      "You have a(n) '#{valid_shape(region, shape)}' arrowhead. Probably priceless."
+    elsif !(valid_region(region))
+      region_error
     else
-      raise "Unknown region, please provide a valid region."
+      shape_error
     end
   end
+
+  def self.valid_region(region)
+    CLASSIFICATIONS[region]
+  end
+
+  def self.valid_shape(region, shape)
+    CLASSIFICATIONS[region][shape] if valid_region(region)
+  end
+
+  def self.shape_error
+    raise "Unknown shape value. Are you sure you know what you're talking about?"
+  end
+
+  def self.region_error
+    raise "Unknown region, please provide a valid region."
+  end
+
 end
 
 puts Arrowhead.classify(:northern_plains, :bifurcated)

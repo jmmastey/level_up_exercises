@@ -22,12 +22,14 @@ class Arrowhead
   end
 
   def self.get_shapes(region)
-    raise "Unknown region, please provide a valid region." unless CLASSIFICATIONS.include? region
+    raise "Unknown region, please provide a " \
+      "valid region." unless CLASSIFICATIONS.include? region
     CLASSIFICATIONS[region]
   end
 
   def self.get_arrowhead(shapes, shape)
-    raise "Unknown shape value. Are you sure you know what you're talking about?" unless shapes.include? shape
+    raise "Unknown shape value. Are you sure you know what " \
+      "you're talking about?" unless shapes.include? shape
     shapes[shape]
   end
 end

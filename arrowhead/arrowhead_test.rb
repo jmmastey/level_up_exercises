@@ -4,14 +4,17 @@ require './arrowhead.rb'
 describe Arrowhead do
   it 'is Oxbow' do
     classify = Arrowhead.classify(:northern_plains, :bifurcated)
-    expect(classify).to eq("You have a(n) 'Oxbow' arrowhead.  Probably priceless.")
+    output = "You have a(n) 'Oxbow' arrowhead.  Probably priceless."
+    expect(classify).to eq(output)
   end
 
   it 'test region' do
-    expect{ Arrowhead.classify(:midwest, :bifurcated)}.to raise_error("Unknown region.")
+    output = "Unknown region."
+    expect { Arrowhead.classify(:midwest, :bifurcated) }.to raise_error(output)
   end
 
   it 'test shape' do
-    expect { Arrowhead.classify(:northern_plains, :round)}.to raise_error("Unknown shape value.")
+    output = "Unknown shape value."
+    expect { Arrowhead.classify(:northern_plains, :tri) }.to raise_error(output)
   end
 end

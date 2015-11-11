@@ -37,15 +37,5 @@ describe RobotName do
       allow(robot_name).to receive(:name).and_return('AA333')
       expect(robot_name.invalid_name?).to be_falsey
     end
-
-    # it "invalidates if name is not in registry" do
-    #   robot_name.generate_name
-    #   expect(robot_name.invalid_name?).to be_falsey
-    # end
-  end
-
-  describe '#rand_name_generator' do
-    # output = "There was a problem generating the robot name!"
-    expect(robot_name).not_to raise_error
   end
 end

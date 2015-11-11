@@ -2,17 +2,18 @@ def zeus_running?
   File.exists?(".zeus.sock")
 end
 
-ENV['RAILS_ENV'] ||= 'test'
+ENV["RAILS_ENV"] ||= "test"
 
 unless zeus_running?
   require "simplecov"
   SimpleCov.start("rails")
 end
 
-require 'rspec/rails'
+require "rspec/rails"
+require "webmock/rspec"
 require "database_cleaner"
-require 'spec_helper'
-require File.expand_path('../../config/environment', __FILE__)
+require "spec_helper"
+require File.expand_path("../../config/environment", __FILE__)
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|

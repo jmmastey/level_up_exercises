@@ -8,9 +8,9 @@ class Robot
   attr_accessor :name
   attr_reader :registry
 
-  def initialize(args = {})
-    @registry = args[:registry]
-    @name = args[:name] || NameGenerator.new.generate_name(2, 3)
+  def initialize(registry:, name: NameGenerator.new.generate_name(2, 3))
+    @registry = registry
+    @name = name
 
     add_to_registry(@registry)
   end
@@ -56,9 +56,9 @@ end
 class Registry
   attr_accessor :list
 
-  def initialize(args = {})
-    @type = args[:type]
-    @list = args[:list] || []
+  def initialize(type:, list: [])
+    @type = type
+    @list = list
   end
 
   def include?(string)

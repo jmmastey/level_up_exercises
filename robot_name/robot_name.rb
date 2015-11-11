@@ -1,5 +1,3 @@
-require_relative 'robot_name_errors.rb'
-
 class RobotName
   attr_accessor :name
 
@@ -8,7 +6,7 @@ class RobotName
   def initialize(args = {})
     @@registry ||= []
     @name_generator = args[:name_generator]
-    generate_name
+    @name = generate_name
   end
 
   def alpha_char
@@ -30,13 +28,13 @@ class RobotName
   end
 
   def generate_name
-    @name = @name_generator ? name_generator.call : rand_name_generator
-    @@registry << @name
+    @name_assign = @name_generator ? name_generator.call : rand_name_generator
+    @@registry.push(@name_assign).last
   end
 end
 
-robot = RobotName.new
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+# robot = RobotName.new
+# puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
 # generator = -> { 'AA111' }

@@ -1,11 +1,16 @@
-class NameCollisionError < RuntimeError; end
+class NameCollisionError < RuntimeError
+  def self.failure
+    raise 'There was a problem generating the robot name!'
+  end
+end
 
 class Robot
   attr_accessor :name
+  attr_reader :registry
 
   def initialize(args = {})
     @registry = args[:registry]
-    @name = args[:name] || NameGenerator.new.generate_name(2,3)
+    @name = args[:name] || NameGenerator.new.generate_name(2, 3)
 
     add_to_registry(@registry)
   end
@@ -13,17 +18,21 @@ class Robot
   private
 
   def add_to_registry(registry)
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || registry.include?(name)
-    registry.list << self.name
+    if invalid_name?
+      NameCollisionError.failure
+    end
+    registry.list << name
   end
 
+  def invalid_name?
+    !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || registry.include?(name)
+  end
 end
 
 class NameGenerator
-  
   def generate_name(num_chars, num_nums)
     name = ""
-    num_chars.times do 
+    num_chars.times do
       name += generate_char
     end
     num_nums.times do
@@ -36,26 +45,24 @@ class NameGenerator
   private
 
   def generate_char
-    ('A'..'Z').to_a.sample
+    [*'A'..'Z'].sample
   end
 
   def generate_num
     rand(10).to_s
   end
-
 end
 
 class Registry
-
   attr_accessor :list
-  
+
   def initialize(args = {})
     @type = args[:type]
     @list = args[:list] || []
   end
 
   def include?(string)
-    @list.include?(string)
+    list.include?(string)
   end
 end
 

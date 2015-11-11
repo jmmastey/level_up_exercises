@@ -34,13 +34,12 @@ class Arrowhead
   end
 
   def self.shape_error
-    raise "Unknown shape value. Are you sure you know what you're talking about?"
+    raise "Unknown shape value - sure you know what you're talking about?"
   end
 
   def self.region_error
     raise "Unknown region, please provide a valid region."
   end
-
 end
 
 puts Arrowhead.classify(:northern_plains, :bifurcated)

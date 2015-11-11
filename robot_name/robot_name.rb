@@ -1,7 +1,7 @@
 class RobotName
   attr_accessor :name
 
-  @@registry
+  VALID_NAME_REGEX = /[[:alpha:]]{2}[[:digit:]]{3}/
 
   def initialize(args = {})
     @@registry ||= []
@@ -18,7 +18,7 @@ class RobotName
   end
 
   def invalid_name?
-    !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
+    !(name =~ VALID_NAME_REGEX) || @@registry.include?(name)
   end
 
   def rand_name_generator

@@ -20,10 +20,10 @@ class TestRobot < Test::Unit::TestCase
     expected = true
     actual = robot3.name != robot2.name
     assert_equal(expected, actual, "robot names should not be equal")
-    
+
     actual = robot3.name != robot1.name
     assert_equal(expected, actual, "robot names should not be equal")
-    
+
     actual = robot2.name != robot1.name
     assert_equal(expected, actual, "robot names should not be equal")
   end

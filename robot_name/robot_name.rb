@@ -35,15 +35,15 @@ class Robot
   def create_random_generator
     generate_char = -> { ('A'..'Z').to_a.sample }
     generate_num = -> { rand(10) }
-    lambda { 
+    lambda do
       "#{generate_char.call}#{generate_char.call}" \
       "#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    }
+    end
   end
 
   def invalid_name?(name)
-    name.nil? || 
-      @@registry.include?(name) || 
+    name.nil? ||
+      @@registry.include?(name) ||
       !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
   end
 end

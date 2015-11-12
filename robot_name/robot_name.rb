@@ -28,8 +28,8 @@ class RobotName
   end
 
   def generate_name
-    @name_assign = @name_generator ? name_generator.call : rand_name_generator
-    @@registry.push(@name_assign).last
+    name_assign = @name_generator ? name_generator.call : rand_name_generator
+    @@registry.push(name_assign).last
   end
 end
 

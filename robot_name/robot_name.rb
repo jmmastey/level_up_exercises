@@ -11,8 +11,9 @@ class Robot
 
     begin
       @name = generate_name(@name_generator)
-      raise NameCollisionError, 'There was a problem generating the robot name!' if is_invalid_name?(@name)
-    rescue Exception => e
+      raise NameCollisionError, 'There was a problem ' \
+        'generating the robot name!' if invalid_name?(@name)
+    rescue StandardError => e
       puts e.message
       puts e.backtrace.inspect
     end
@@ -23,7 +24,7 @@ class Robot
   def generate_name(name_generator)
     name = name_generator.call if name_generator
 
-    while is_invalid_name?(name) do
+    while invalid_name?(name)
       name_generator = create_random_generator
       name = name_generator.call
     end
@@ -34,10 +35,15 @@ class Robot
   def create_random_generator
     generate_char = -> { ('A'..'Z').to_a.sample }
     generate_num = -> { rand(10) }
-    name_generator = -> { "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}" }
+    lambda { 
+      "#{generate_char.call}#{generate_char.call}" \
+      "#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    }
   end
 
-  def is_invalid_name?(name)
-    name.nil? || @@registry.include?(name) || !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
+  def invalid_name?(name)
+    name.nil? || 
+      @@registry.include?(name) || 
+      !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
   end
 end

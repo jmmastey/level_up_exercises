@@ -17,9 +17,15 @@ class TestRobot < Test::Unit::TestCase
     assert_not_nil(robot3)
     assert_not_nil(robot3.name)
 
-    assert_equal(true, robot3.name != robot2.name, "robot names should not be equal")
-    assert_equal(true, robot3.name != robot1.name, "robot names should not be equal")
-    assert_equal(true, robot2.name != robot1.name, "robot names should not be equal")
+    expected = true
+    actual = robot3.name != robot2.name
+    assert_equal(expected, actual, "robot names should not be equal")
+    
+    actual = robot3.name != robot1.name
+    assert_equal(expected, actual, "robot names should not be equal")
+    
+    actual = robot2.name != robot1.name
+    assert_equal(expected, actual, "robot names should not be equal")
   end
 
   def test_create_random_generator
@@ -33,7 +39,8 @@ class TestRobot < Test::Unit::TestCase
 
     expected = true
     actual = generator1.call != generator2.call
-    assert_equal(expected, actual, "Generators from same Robot instance should not be equal")
+    assert_equal(expected, actual, "Generators from same Robot " \
+      "instance should not be equal")
   end
 
   def test_generate_name
@@ -44,20 +51,23 @@ class TestRobot < Test::Unit::TestCase
     assert_not_nil(name)
 
     actual = name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
-    assert_not_nil(actual, "Name should start with 2 alpha and end with 3 numeric chars")
+    assert_not_nil(actual, "Name should start with 2 alpha and end with " \
+      "3 numeric chars")
 
     generator = -> { 'AA111' }
     robot = Robot.new(name_generator: generator)
     name = robot.generate_name(generator)
 
     actual = name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
-    assert_not_nil(actual, "Name should start with 2 alpha and end with 3 numeric chars")
+    assert_not_nil(actual, "Name should start with 2 alpha and end with " \
+      "3 numeric chars")
   end
 
   def test_is_invalid_name
     robot = Robot.new
     mock_name = robot.name.split("")[1] + robot.name.split("")[0] + "123"
-    is_invalid = robot.is_invalid_name?(mock_name)
-    assert_equal(false, is_invalid, "First attempt at name should not be invalid")
+    is_invalid = robot.invalid_name?(mock_name)
+    assert_equal(false, is_invalid, "First attempt at name " \
+      "should not be invalid")
   end
 end

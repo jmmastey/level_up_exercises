@@ -1,10 +1,10 @@
-class NameCollisionError < RuntimeError
-  def self.failure
-    raise 'There was a problem generating the robot name!'
-  end
-end
+require_relative 'name_generator'
+require_relative 'registry'
+require_relative 'name_collision_error'
 
 class Robot
+  THREE_LETTERS_TWO_DIGITS = /[[:alpha:]]{2}[[:digit:]]{3}/
+
   attr_accessor :name
   attr_reader :registry
 
@@ -18,51 +18,14 @@ class Robot
   private
 
   def add_to_registry(registry)
-    if invalid_name?
-      NameCollisionError.failure
+    unless valid_name?
+      raise NameCollisionError, "There was a problem generating the Robot name!"
     end
     registry.list << name
   end
 
-  def invalid_name?
-    !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || registry.include?(name)
-  end
-end
-
-class NameGenerator
-  def generate_name(num_chars, num_nums)
-    name = ""
-    num_chars.times do
-      name += generate_char
-    end
-    num_nums.times do
-      name += generate_num
-    end
-
-    name
-  end
-
-  private
-
-  def generate_char
-    [*'A'..'Z'].sample
-  end
-
-  def generate_num
-    rand(10).to_s
-  end
-end
-
-class Registry
-  attr_accessor :list
-
-  def initialize(type:, list: [])
-    @type = type
-    @list = list
-  end
-
-  def include?(string)
-    list.include?(string)
+  def valid_name?
+    (name =~ THREE_LETTERS_TWO_DIGITS) && !registry.include?(name)
   end
 end
 

@@ -40,7 +40,7 @@ module Locu
 
       JSON.parse(body)
     rescue JSON::ParserError
-      # return nil
+      raise "Unable to parse result from Locu."
     end
   end
 end

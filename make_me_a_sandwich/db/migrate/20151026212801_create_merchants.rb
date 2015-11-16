@@ -2,7 +2,7 @@ class CreateMerchants < ActiveRecord::Migration
   def change
     create_table :merchants do |t|
       t.string :external_id
-      t.string :name
+      t.string :name, required: true
       t.string :phone
       t.string :description
       t.references :location

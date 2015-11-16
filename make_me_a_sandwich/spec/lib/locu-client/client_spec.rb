@@ -46,7 +46,9 @@ describe Locu::Client do
     context "when the result is not valid JSON" do
       let(:response) { "invalid JSON" }
 
-      it { is_expected.to be_nil }
+      it "raises an error" do
+        expect { search }.to raise_error
+      end
     end
   end
 end

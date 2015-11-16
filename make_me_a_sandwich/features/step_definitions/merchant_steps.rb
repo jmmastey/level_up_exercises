@@ -5,38 +5,18 @@ def create_merchants_with_zip(zip, count)
 end
 
 def search_merchants(location)
-  find_by_id("location").set(location)
-  click_button "Search"
+  VCR.use_cassette("search_merchants_at_#{location}") do
+    find_by_id("location").set(location)
+    click_button "Search"
+  end
 end
 
 Given(/^I am on the merchant index$/) do
   visit merchants_path
 end
 
-Given(/^some merchants exist$/) do
-  @merchants = FactoryGirl.create_list(:merchant, 10)
-  @merchants.concat(create_merchants_with_zip("60604-1234", 5))
-  @merchants.concat(create_merchants_with_zip("60604-2345", 5))
-end
-
-Given(/^some merchants exist with menus$/) do
-  @merchants = FactoryGirl.create_list(:merchant, 10, :with_menus)
-end
-
-When(/^I visit a merchant page$/) do
-  visit merchant_path(@merchants.first)
-end
-
 When(/^I search a matching ZIP$/) do
-  search_merchants("60604-1234")
-end
-
-When(/^I search a matching ZIP without the 4-digit extension$/) do
   search_merchants("60604")
-end
-
-When(/^I search a non\-matching ZIP$/) do
-  search_merchants("00000")
 end
 
 When(/^I search without a ZIP$/) do
@@ -44,24 +24,7 @@ When(/^I search without a ZIP$/) do
 end
 
 Then(/^I see the merchants matching that ZIP$/) do
-  merchants = @merchants.select { |m| m.location.zip == "60604-1234" }
-  merchants.each do |merchant|
-    expect(page).to have_content(merchant.name)
-  end
-end
-
-Then(/^I see the merchants matching that partial ZIP$/) do
-  merchants = @merchants.select { |m| m.location.zip.start_with?("60604") }
-  merchants.each do |merchant|
-    expect(page).to have_content(merchant.name)
-  end
-end
-
-Then(/^I do not see the merchants not matching that ZIP$/) do
-  merchants = @merchants.reject { |m| m.location.zip == "60604-1234" }
-  merchants.each do |merchant|
-    expect(page).not_to have_content(merchant.name)
-  end
+  expect(page).not_to have_content("No merchants found")
 end
 
 Then(/^I see there are no matching merchants$/) do
@@ -70,11 +33,4 @@ end
 
 Then(/^I see I must enter a ZIP$/) do
   expect(page).to have_content("You must enter a ZIP to search by")
-end
-
-Then(/^I see that merchant's menus$/) do
-  merchant = @merchants.first
-  merchant.menus.each do |menu|
-    expect(page).to have_content(menu.name)
-  end
 end

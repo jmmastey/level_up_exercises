@@ -4,7 +4,7 @@ class SearchLocuVenues
   include Interactor
 
   def call
-    context.merchants = create_merchants(venues)
+    create_merchants(venues)
   end
 
   private
@@ -22,8 +22,8 @@ class SearchLocuVenues
     location.zip = location_data[:postal_code]
 
     coords = location_data[:geo].try(:[], :coordinates)
-    location.latitude = coords[0]
-    location.longitude = coords[1]
+    location.latitude = coords.try(:[], 0)
+    location.longitude = coords.try(:[], 1)
 
     location
   end
@@ -62,14 +62,15 @@ class SearchLocuVenues
 
   def create_merchants(venues)
     Merchant.transaction do
-      venues.map do |venue|
+      context.merchants = venues.map do |venue|
         Merchant.find_or_initialize_by(external_id: venue[:locu_id]).tap do |m|
           break m if m.recently_updated?
 
           m.name = venue[:name]
           m.phone = venue[:contact].try(:[], :phone)
+          m.description = venue[:description]
           m.location = build_location(m.location, venue[:location])
-          m.save
+          m.save || Rails.logger.error("Unable to save merchant #{m.inspect}")
 
           create_menus(m, venue[:menus])
         end
@@ -81,14 +82,12 @@ class SearchLocuVenues
     response = context.client.search_venues(search_params)
     response = HashWithIndifferentAccess.new(response)
 
-    response[:venues]
+    response[:venues] || []
   end
 
   def search_params
     {
-      location: { postal_code: context.postal_code },
-      fields: [ :locu_id, :name, :description, :location, :contact, :categories,
-                :menus, :website_url ],
+      location: { postal_code: context.postal_code }
     }
   end
 end

@@ -4,10 +4,9 @@ Feature: Viewing menus
   In order to get food
 
   Background:
-    Given some merchants exist with menus
-    And I have a valid account
+    Given I have a valid account
     And I am logged in
 
-  Scenario: Navigating to a menu from a merchant
-    When I visit a merchant page
-    Then I see that merchant's menus
+    #  Scenario: Navigating to a menu from a merchant
+    #When I visit a merchant page
+    #Then I see that merchant's menus

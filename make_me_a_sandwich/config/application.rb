@@ -12,6 +12,7 @@ Bundler.require(*Rails.groups)
 module MakeMeASandwich
   class Application < Rails::Application
     config.active_record.raise_in_transactional_callbacks = true
+    config.eager_load_paths += %W( #{config.root}/lib/locu-client )
 
     config.generators do |g|
       g.factory_girl dir: "factories"

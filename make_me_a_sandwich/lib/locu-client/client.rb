@@ -3,6 +3,10 @@ require "json"
 
 module Locu
   class Client
+    FIELDS = %w(
+      locu_id name description location contact categories menus website_url
+    )
+
     HOST = "https://api.locu.com"
     PATHS = {
       venue_search: "/v2/venue/search"
@@ -14,7 +18,8 @@ module Locu
     end
 
     def search_venues(venue_params = {})
-      params = default_params.merge(venue_queries: [venue_params])
+      params = default_params.merge(fields: FIELDS,
+                                    venue_queries: [venue_params])
 
       post_json(PATHS[:venue_search], params)
     end

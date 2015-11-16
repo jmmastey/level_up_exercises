@@ -17,10 +17,6 @@ Around do |scenario, block|
 end
 
 VCR.configure do |config|
-  config.cassette_library_dir = "vcr"
+  config.cassette_library_dir = "features/support/fixtures/vcr"
   config.hook_into(:webmock)
-end
-
-VCR.cucumber_tags do |t|
-  t.tag("@vcr")
 end

@@ -13,13 +13,20 @@ class MerchantsController < ApplicationController
 
   private
 
+  def locu_client
+    Locu::Client.new(Rails.application.secrets.locu_api_key)
+  end
+
   def search_params
     params.permit(:location)
   end
 
   def retrieve_merchants
     return @merchants = [] unless search_params[:location].present?
-    @merchants = Merchant.in_zip(search_params[:location])
+
+    result = SearchLocuVenues.call(client: locu_client,
+                                   postal_code: search_params[:location])
+    @merchants = result.merchants
   end
 
   def retrieve_merchant

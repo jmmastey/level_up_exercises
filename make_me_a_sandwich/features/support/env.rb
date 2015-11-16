@@ -1,4 +1,5 @@
-require 'cucumber/rails'
+require "cucumber/rails"
+require "vcr"
 
 ActionController::Base.allow_rescue = false
 
@@ -13,4 +14,13 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Around do |scenario, block|
   DatabaseCleaner.cleaning(&block)
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "vcr"
+  config.hook_into(:webmock)
+end
+
+VCR.cucumber_tags do |t|
+  t.tag("@vcr")
 end

@@ -244,6 +244,7 @@ GEM
     tilt (2.0.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    vcr (3.0.0)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -288,6 +289,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   therubyracer
+  vcr
   web-console (~> 2.0)
   webmock
 

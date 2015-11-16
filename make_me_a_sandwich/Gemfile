@@ -31,4 +31,5 @@ group :development, :test do
   gem "simplecov", require: false
   gem "web-console", "~> 2.0"
   gem "webmock"
+  gem "vcr"
 end

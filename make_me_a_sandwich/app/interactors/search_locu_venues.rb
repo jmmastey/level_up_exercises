@@ -36,9 +36,9 @@ class SearchLocuVenues
         subgroup = subsection[:subsection_name]
 
         subsection[:contents].each do |item|
-          menu_item = MenuItem.find_or_initialize_by(group: group,
-                                                     subgroup: subgroup,
-                                                     name: item[:name])
+          menu_item = menu.menu_items.find_or_initialize_by(group: group,
+                                                            subgroup: subgroup,
+                                                            name: item[:name])
 
           menu_item.description = item[:description]
           menu_item.price = item[:price]
@@ -69,6 +69,7 @@ class SearchLocuVenues
           m.name = venue[:name]
           m.phone = venue[:contact].try(:[], :phone)
           m.description = venue[:description]
+          m.website_url = venue[:website_url]
           m.location = build_location(m.location, venue[:location])
           m.save || Rails.logger.error("Unable to save merchant #{m.inspect}")
 
@@ -87,6 +88,7 @@ class SearchLocuVenues
 
   def search_params
     {
+      categories: "food",
       location: { postal_code: context.postal_code }
     }
   end

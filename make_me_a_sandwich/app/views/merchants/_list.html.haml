@@ -6,15 +6,24 @@
           .col-md-8
             %h3.panel-title= merchant.name
           .col-md-4.text-right
-            %a.btn.btn-info
-              %i.glyphicon.glyphicon-th-list
-              &nbsp;See Menu
+            - if merchant.menus.any?
+              %a.btn.btn-info
+                %i.glyphicon.glyphicon-th-list
+                &nbsp;See Menu
+            - else
+              %span.text-info No menu available.
       .panel-body
-        %p= merchant.description
+        - if merchant.description
+          %p= merchant.description
         %dl
-          %dt Phone
-          %dd= merchant.phone
-          %dt Address
-          %dd= format_address(merchant.location)
+          - if merchant.phone.present?
+            %dt Phone
+            %dd= merchant.phone
+          - if merchant.location.present?
+            %dt Address
+            %dd= format_address(merchant.location)
+          - if merchant.website_url.present?
+            %dt Website
+            %dd= link_to(merchant.website_url, merchant.website_url)
 - else
   %p.alert.alert-info No merchants found.

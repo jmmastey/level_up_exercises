@@ -1,4 +1,0 @@
-site: "http://sandbox.delivery.com"
-path:
-  authorize: "third_party/authorize"
-  token:     "third_party/access_token"

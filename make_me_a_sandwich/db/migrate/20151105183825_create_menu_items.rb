@@ -6,6 +6,7 @@ class CreateMenuItems < ActiveRecord::Migration
       t.string :group
       t.string :subgroup
       t.string :description
+      t.decimal :price, precision: 8, scale: 2
       t.boolean :active, default: true
       t.references :menu, required: true
 

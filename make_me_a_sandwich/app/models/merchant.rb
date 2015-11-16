@@ -1,4 +1,6 @@
 class Merchant < ActiveRecord::Base
+  MAX_DAYS_TO_CACHE = AppConfig.locu.caching_time
+
   belongs_to :location, autosave: true
   has_many :menus
 
@@ -8,8 +10,7 @@ class Merchant < ActiveRecord::Base
 
   scope :with_menus, -> { includes(menus: :menu_items) }
 
-  scope :in_zip, (lambda do |zip|
-    keyword = zip + "-%"
-    where("locations.zip = ? OR locations.zip LIKE ?", zip, keyword)
-  end)
+  def recently_updated?
+    self.updated_at && self.updated_at < MAX_DAYS_TO_CACHE.days.ago
+  end
 end

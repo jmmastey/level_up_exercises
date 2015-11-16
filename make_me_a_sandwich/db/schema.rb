@@ -34,19 +34,21 @@ ActiveRecord::Schema.define(version: 20151113223905) do
     t.string   "group"
     t.string   "subgroup"
     t.string   "description"
-    t.boolean  "active",      default: true
+    t.decimal  "price",       precision: 8, scale: 2
+    t.boolean  "active",                              default: true
     t.integer  "menu_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   create_table "menus", force: :cascade do |t|
     t.string   "external_id"
     t.string   "name"
     t.string   "description"
+    t.string   "price_unit",  limit: 1, default: "$"
     t.integer  "merchant_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "merchants", force: :cascade do |t|

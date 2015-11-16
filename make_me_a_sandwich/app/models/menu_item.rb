@@ -3,4 +3,6 @@ class MenuItem < ActiveRecord::Base
 
   validates_presence_of :name, :menu
   validates_absence_of :subgroup, if: -> (item) { item.group.present? }
+
+  default_scope -> { includes(:menu) }
 end

@@ -27,7 +27,26 @@ describe SearchLocuVenues, type: :interactor do
     search
   end
 
-  it "creates merchants" do
-    expect { search }.to change { Merchant.count }.by(25)
+  context "if merchants have not been recently updated" do
+    it "creates merchants" do
+      expect { search }.to change { Merchant.count }.by(25)
+    end
+
+    it "creates menus" do
+      expect { search }.to change { Menu.count }
+    end
+  end
+
+  context "if merchant has been recently updated" do
+    let(:old_merchant) { search.merchants.first }
+
+    let(:new_merchant) do
+      id = old_merchant.id
+      search.merchants.select { |m| m.id == id }.first
+    end
+
+    it "does not update the merchant" do
+      expect(old_merchant.updated_at).to eq(new_merchant.updated_at)
+    end
   end
 end

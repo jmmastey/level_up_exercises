@@ -12,3 +12,4 @@ Functionality:
 * Add a dropdown menu for the user's profile that opens on hover and allows them to Log out, view their settings, etc.
 * Your content, structure and behavior should be properly separated. 
 * If you can figure it out, add keyboard commands to navigate up and down selecting the "current" email row.
+as

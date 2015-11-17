@@ -1,0 +1,6 @@
+<form action="/boot" method="post">
+  <label for="activation_code">Activation Code:     </label><input type="text" name="activation_code" value="1234" autocomplete="off" maxlength="4" size="10"><span class="error">  <%= errors[:activation_code] if errors %></span>
+  <label for="deactivation_code">Deactivation Code:   </label><input type="text" name="deactivation_code" value="0000" autocomplete="off" maxlength="4" size="10"><span class="error">  <%= errors[:deactivation_code] if errors %></span>
+
+  <input type="submit" value="Boot">
+</form>

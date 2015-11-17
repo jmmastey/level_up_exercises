@@ -1,0 +1,17 @@
+<% is_exploded = bomb.exploded? %>
+<% disabled_text = is_exploded ? 'disabled="disabled"' : '' %>
+
+<h1 class="status">Bomb State: <%= 'Activated' if bomb.active? %><%= 'Deactivated' if bomb.inactive? %><%= 'Exploded' if is_exploded %></h1>
+
+<form id="enterCodeForm" action="/enter-code" method="post" <%= 'onSubmit="return check_confirmation()"' if bomb.inactive? %>>
+<label for="code">(De)Activation Code: </label><input type="text" id="code" name="code" autocomplete="off" maxlength="4" size="10" <%= disabled_text %>>
+
+<input id="codeSubmit" type="submit" value="Submit" <%= disabled_text %>><input id="activationConfirm" type="button" value="Confirm" <%= disabled_text %> onClick="confirmAndSubmit(); return true;"> <input id="activationCancel" type="button" value="Cancel" onclick="cancelActivation();" <%= disabled_text %>>
+</form>
+
+<% if bomb.active? %>
+<div id="timerMessage"><span id="timer"><%= bomb.timer.to_s %></span> until detonation</div>
+<script>
+    var total_seconds_remaining = <%= bomb.timer.seconds_remaining.round %>;
+</script>
+<% end %>

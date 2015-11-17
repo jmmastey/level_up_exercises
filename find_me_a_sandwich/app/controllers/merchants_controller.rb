@@ -1,5 +1,3 @@
-require_relative "../../lib/locu-client/locu"
-
 class MerchantsController < ApplicationController
   before_action :retrieve_location
   before_action :retrieve_merchants, only: [:index]

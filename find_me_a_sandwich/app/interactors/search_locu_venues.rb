@@ -12,20 +12,18 @@ class SearchLocuVenues
   def build_location(location, location_data)
     return nil unless location_data
 
-    location ||= Location.new
+    Location.new.tap do |location|
+      location.street = location_data[:address1]
+      location.street += "\n#{location_data[:address2]}" if location_data[:address2]
 
-    location.street = location_data[:address1]
-    location.street += "\n#{location_data[:address2]}" if location_data[:address2]
+      location.city = location_data[:locality]
+      location.state = location_data[:region]
+      location.zip = location_data[:postal_code]
 
-    location.city = location_data[:locality]
-    location.state = location_data[:region]
-    location.zip = location_data[:postal_code]
-
-    coords = location_data[:geo].try(:[], :coordinates)
-    location.latitude = coords.try(:[], 0)
-    location.longitude = coords.try(:[], 1)
-
-    location
+      coords = location_data[:geo].try(:[], :coordinates)
+      location.latitude = coords.try(:[], 0)
+      location.longitude = coords.try(:[], 1)
+    end
   end
 
   def create_menu_items(menu, sections)

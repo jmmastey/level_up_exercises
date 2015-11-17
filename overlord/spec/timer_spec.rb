@@ -9,6 +9,15 @@ describe Timer do
       expect { timer }.not_to raise_error
     end
 
+    it "has a string representation" do
+      expect(timer.to_s).to eql "0:10"
+    end
+
+    it "0-pads seconds in its string representation" do
+      timer = described_class.new(5)
+      expect(timer.to_s).to eql "0:05"
+    end
+
     context "when duration is negative" do
       let(:duration) { -5 }
 
@@ -18,7 +27,7 @@ describe Timer do
     end
   end
 
-  describe "#seconds_remaining" do
+  describe "#total_seconds_remaining" do
     let(:time) { timer.seconds_remaining }
 
     it "is the number of seconds until detonation time" do

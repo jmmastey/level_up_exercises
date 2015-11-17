@@ -1,0 +1,24 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+  <link rel="stylesheet" type="text/css" href="overlord.css"/>
+  <script src="overlord_bomb.js" defer></script>
+  <title>V.O.I.D. - Visual Overlord Interface for Destruction</title>
+</head>
+
+<body>
+
+<div id="outer">
+  <div id="screen">
+    <div id="layer">
+      <div id="output">
+        <h1>V.O.I.D. - Visual Overlord Interface for Destruction</h1>
+        <%= yield %>
+      </div>
+    </div>
+    <div id="overlay"></div>
+  </div>
+  <div id="led"></div>
+</div>
+</body>
+</html>

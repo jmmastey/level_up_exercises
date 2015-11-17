@@ -1,6 +1,5 @@
 require "rails_helper"
 require "json"
-require_relative "../../../lib/locu-client/locu"
 
 describe Locu::Client do
   let(:api_key) { "Mock Key" }

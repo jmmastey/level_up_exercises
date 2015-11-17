@@ -1,7 +1,6 @@
 require_relative "../../lib/locu-client/locu"
 
 class MerchantsController < ApplicationController
-  before_action :authenticate_user!
   before_action :retrieve_location
   before_action :retrieve_merchants, only: [:index]
   before_action :retrieve_merchant, only: [:show]
@@ -29,9 +28,14 @@ class MerchantsController < ApplicationController
   def retrieve_merchants
     return @merchants = [] unless search_params[:location].present?
 
-    result = SearchLocuVenues.call(client: locu_client,
-                                   postal_code: search_params[:location])
-    @merchants = result.merchants
+    cache_expires = AppConfig.locu.caching_time.days
+    cache_name = "merchant_results_#{@location}"
+
+    @merchants = Rails.cache.fetch(cache_name, expires_in: cache_expires) do
+      result = SearchLocuVenues.call(client: locu_client,
+                                     postal_code: @location)
+      result.merchants
+    end
   end
 
   def retrieve_merchant

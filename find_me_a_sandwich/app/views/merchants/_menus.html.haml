@@ -1,7 +1,9 @@
 %h2 Menu
 
 - if menus.one?
-  = render partial: "merchants/menu", locals: { menu: menus.first }
+  .panel.panel-info
+    .panel-body
+      = render partial: "merchants/menu", locals: { menu: menus.first }
 - else
   .panel-group#menus{ role: :tablist, aria: { multiselectable: "true" }}
     - menus.each do |menu|

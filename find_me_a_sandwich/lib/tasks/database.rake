@@ -21,3 +21,22 @@ module ActiveRecord
     end
   end
 end
+
+def format_class_name(model_class)
+  model_class.name
+    .underscore
+    .humanize(capitalize: false)
+    .pluralize(model_class.count)
+end
+
+namespace :db do
+  desc "Clears info retrieved from API"
+  task clear_api_data: :environment do
+    [MenuItem, Menu, Location, Merchant].each do |model_class|
+      puts "Deleting #{model_class.count} #{format_class_name(model_class)}..."
+      model_class.delete_all
+    end
+
+    puts "Done."
+  end
+end

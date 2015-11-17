@@ -36,8 +36,8 @@ class SearchLocuVenues
         subgroup = subsection[:subsection_name]
 
         subsection[:contents].each do |item|
-          menu_item = menu.menu_items.find_or_initialize_by(group: group,
-                                                            subgroup: subgroup,
+          menu_item = menu.menu_items.find_or_initialize_by(menu_group: group,
+                                                            menu_subgroup: subgroup,
                                                             name: item[:name])
 
           menu_item.description = item[:description]
@@ -89,7 +89,8 @@ class SearchLocuVenues
   def search_params
     {
       categories: "food",
-      location: { postal_code: context.postal_code }
+      location: { postal_code: context.postal_code },
+      menus: { "$present" => true },
     }
   end
 end

@@ -1,11 +1,12 @@
+require_relative "../../lib/locu-client/locu"
+
 class MerchantsController < ApplicationController
   before_action :authenticate_user!
+  before_action :retrieve_location
   before_action :retrieve_merchants, only: [:index]
   before_action :retrieve_merchant, only: [:show]
 
   def index
-    @location = search_params[:location]
-
     if @location.blank?
       flash[:alert] = "You must enter a ZIP to search by."
     end
@@ -19,6 +20,10 @@ class MerchantsController < ApplicationController
 
   def search_params
     params.permit(:location)
+  end
+
+  def retrieve_location
+    @location = search_params[:location]
   end
 
   def retrieve_merchants

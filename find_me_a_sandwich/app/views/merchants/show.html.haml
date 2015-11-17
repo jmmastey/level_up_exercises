@@ -1,28 +1,44 @@
-.page-header
-  %h1= @merchant.name
+= render partial: "search_form", location: @location
 
-%h2 Information
-%p= @merchant.description
+.row
+  .page-header
+    %h1= @merchant.name
 
-%dl.dl-horizontal
-  - if @merchant.phone.present?
-    %dt Phone
-    %dd= @merchant.phone
-  - if @merchant.location.present?
-    %dt Address
-    %dd= format_address(@merchant.location)
-  - if @merchant.minimum_pickup.present?
-    %dt Minimum Pickup Amount
-    %dd= @merchant.minimum_pickup.to_s(:currency)
-  - if @merchant.maximum_pickup.present?
-    %dt Maximum Pickup Amount
-    %dd= @merchant.maximum_pickup.to_s(:currency)
-  - if @merchant.minimum_delivery.present?
-    %dt Minimum Delivery Amount
-    %dd= @merchant.minimum_delivery.to_s(:currency)
-  - if @merchant.maximum_delivery.present?
-    %dt Maximum Delivery Amount
-    %dd= @merchant.maximum_delivery.to_s(:currency)
+.row
+  .col-xs-12.col-sm-6.col-lg-8
+    - if @merchant.description.present?
+      %p= @merchant.description
+    - else
+      %p No description provided.
 
-- if @merchant.menus.any?
-  = render partial: "menus", locals: { menus: @merchant.menus }
+  .col-xs-12.col-sm-6.col-lg-4
+    %table.table
+      %tbody
+        - if @merchant.phone.present?
+          %tr
+            %th Phone
+            %td= @merchant.phone
+        - if @merchant.location.present?
+          %tr
+            %th Address
+            %td= format_address(@merchant.location)
+        - if @merchant.minimum_pickup.present?
+          %tr
+            %th Minimum Pickup Amount
+            %td= @merchant.minimum_pickup.to_s(:currency)
+        - if @merchant.maximum_pickup.present?
+          %tr
+            %th Maximum Pickup Amount
+            %td= @merchant.maximum_pickup.to_s(:currency)
+        - if @merchant.minimum_delivery.present?
+          %tr
+            %th Minimum Delivery Amount
+            %td= @merchant.minimum_delivery.to_s(:currency)
+        - if @merchant.maximum_delivery.present?
+          %tr
+            %th Maximum Delivery Amount
+            %td= @merchant.maximum_delivery.to_s(:currency)
+
+.row
+  - if @merchant.menus.any?
+    = render partial: "menus", locals: { menus: @merchant.menus }

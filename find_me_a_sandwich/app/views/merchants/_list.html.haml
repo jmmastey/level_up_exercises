@@ -6,12 +6,9 @@
           .col-md-8
             %h3.panel-title= merchant.name
           .col-md-4.text-right
-            - if merchant.menus.any?
-              %a.btn.btn-info
-                %i.glyphicon.glyphicon-th-list
-                &nbsp;See Menu
-            - else
-              %span.text-info No menu available.
+            = link_to(merchant_path(merchant, location: @location), class: "btn btn-info") do
+              %i.glyphicon.glyphicon-th-list
+              &nbsp;See More
       .panel-body
         - if merchant.description
           %p= merchant.description
@@ -24,6 +21,6 @@
             %dd= format_address(merchant.location)
           - if merchant.website_url.present?
             %dt Website
-            %dd= link_to(merchant.website_url, merchant.website_url)
+            %dd= link_to(merchant.website_url, merchant.website_url, target: "_blank")
 - else
   %p.alert.alert-info No merchants found.

@@ -1,0 +1,11 @@
+- menu.menu_items.group_by(&:menu_group).each do |group, items|
+  %table.table.table-striped
+    %thead
+      %tr
+        %th{ colspan: 2 }
+          %h4= group
+    %tbody
+      - items.each do |item|
+        %tr
+          %th= item.name
+          %td= item.description

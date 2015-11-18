@@ -19,11 +19,12 @@ class DinoCatalog::Dinodex
     filter_by_attribute("walking", "biped")
   end
 
-  def filter_by_attribute(attribute, value)
-    dinosaurs.select do |dinosaur|
+  def filter(attribute:, value:)
+    dinos = dinosaurs.select do |dinosaur|
       val_of_attribute = dinosaur.send(attribute)
       val_of_attribute.downcase == value.downcase unless val_of_attribute.nil?
     end
+    self.class.new(dinos)
   end
 
   def print_collection(dino_collection = dinosaurs)

@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
     "lib/dino_catalog/dino_importer.rb",
     "lib/dino_catalog/dinodex.rb",
     "lib/dino_catalog/dinosaur.rb",
-    "lib/dino_catalog/json_maker.rb",
+    "lib/dino_catalog/dino_serializer.rb",
   ]
   s.license = "MIT"
 end

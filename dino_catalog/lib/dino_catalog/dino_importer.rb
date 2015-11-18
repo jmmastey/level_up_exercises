@@ -3,8 +3,9 @@ require_relative '../dino_catalog'
 class DinoCatalog::DinoImporter
   attr_reader :dinosaur_list
 
-  def initialize
+  def initialize(csv_file)
     @dinosaur_list = []
+    import_from_csv(csv_file)
   end
 
   def import_from_csv(file, format = nil)

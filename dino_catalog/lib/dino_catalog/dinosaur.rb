@@ -35,13 +35,13 @@ class DinoCatalog::Dinosaur
     puts formatted_facts
   end
 
-  # def to_json
-  # 	json_hash = {}
-  # 	self.instance_variables.each do |variable|
-  # 		json_hash[variable] = self.instance_variable_get(variable)
-  # 	end
-  # 	json_hash
-  # end
+  def to_json
+  	json_hash = {}
+  	self.instance_variables.each do |variable|
+  		json_hash[variable] = self.instance_variable_get(variable)
+  	end
+  	json_hash.to_json
+  end
 
   private
 

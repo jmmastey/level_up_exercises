@@ -11,5 +11,7 @@ describe 'DinoCatalog::DinoImporter' do
     it 'returns a collection of Dinosaur objects' do
       expect(@imported_dinosaurs).to all(be_a DinoCatalog::Dinosaur)
     end
+
+    it 'changes data format for pirate bay format'
   end
 end

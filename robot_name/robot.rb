@@ -1,41 +1,51 @@
 require_relative 'name_generator'
 require_relative 'registry'
 require_relative 'name_collision_error'
+require 'pry'
 
 class Robot
-  THREE_LETTERS_TWO_DIGITS = /[[:alpha:]]{2}[[:digit:]]{3}/
+  VALID_ROBOT_NAME = /[[:alpha:]]{2}[[:digit:]]{3}/
 
   attr_accessor :name
-  attr_reader :registry
+  attr_reader :registry, :name_generator
 
-  def initialize(registry:, name: NameGenerator.new.generate_name(2, 3))
-    @registry = registry
-    @name = name
-
+  def initialize(name_generator: nil)
+    @registry = self.class.registry
+    @name_generator = name_generator
+    generate_name
     add_to_registry(@registry)
+  end
+
+  def self.registry
+    @registry ||= Registry.new
   end
 
   private
 
-  def add_to_registry(registry)
-    unless valid_name?
-      raise NameCollisionError, "There was a problem generating the Robot name!"
-    end
-    registry.list << name
+  def generate_name
+    self.name = name_generator.call
   end
 
-  def valid_name?
-    (name =~ THREE_LETTERS_TWO_DIGITS) && !registry.include?(name)
+  def add_to_registry(registry)
+    check_for_valid_name
+    registry.add(name)
+  end
+
+  def check_for_valid_name
+    if name && !(name =~ VALID_ROBOT_NAME)
+      raise NameCollisionError, "That Robot name is invalid!"
+    end
   end
 end
 
-robot_registry = Registry.new(type: "robot")
-robot = Robot.new(registry: robot_registry)
+generator = NameGenerator.new
+generator_2 = -> { 'AA111' }
+robot = Robot.new(name_generator: generator)
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 
 # Errors!
-robot_2 = Robot.new(registry: robot_registry, name: 'AA111')
+robot_2 = Robot.new(name_generator: generator_2)
 puts "My pet robot's name is #{robot_2.name}, but we usually call him junky."
 
-robot_3 = Robot.new(registry: robot_registry, name: 'AA111')
+robot_3 = Robot.new(name_generator: generator_2)
 puts "My pet robot's name is #{robot_3.name}, but we usually call him junky."

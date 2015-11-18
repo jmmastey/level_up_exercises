@@ -32,9 +32,13 @@ class Robot
   end
 
   def check_for_valid_name
-    if name && !(name =~ VALID_ROBOT_NAME)
+    if name && invalid_name?
       raise NameCollisionError, "That Robot name is invalid!"
     end
+  end
+
+  def invalid_name?
+    !(name =~ VALID_ROBOT_NAME)
   end
 end
 

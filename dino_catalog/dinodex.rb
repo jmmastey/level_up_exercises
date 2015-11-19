@@ -1,5 +1,6 @@
 require 'csv'
 require 'json'
+require 'pry'
 require_relative 'dinosaur.rb'
 
 CSV::Converters[:blank_to_nil] = lambda do |field|
@@ -82,10 +83,10 @@ class Dinodex
     array_of_strings.join("\n")
   end
 
-  def export_to_json(filename)
-    dinosaur_data = @master_dinosaur_list.map(&:to_hash)
+  def export_to_json(filename, dinosaur_data)
+    #dinosaur_data = @master_dinosaur_list.map(&:to_hash)
     File.open(filename, "w") do |f|
-      f.write(JSON.pretty_generate dinosaur_data)
+      f.write(JSON.pretty_generate dinosaur_data.master_dinosaur_list.map(&:to_hash))
     end
   end
 end

@@ -16,7 +16,7 @@ class DinoCatalog::Dinodex
   end
 
   def bipeds
-    filter_by_attribute("walking", "biped")
+    filter(attribute: "walking", value: "biped")
   end
 
   def filter(attribute:, value:)

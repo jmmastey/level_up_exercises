@@ -2,9 +2,8 @@ require_relative '../../lib/dino_catalog'
 
 describe 'DinoCatalog::Dinodex' do
   before :each do
-    @dino_collection = DinoCatalog::DinoImporter.new
-    @imported_dinosaurs = @dino_collection.import_from_csv('lib/dinodex.csv')
-    @dinodex = DinoCatalog::Dinodex.new(@imported_dinosaurs)
+    @importer = DinoCatalog::DinoImporter.new('lib/dinodex.csv')
+    @dinodex = DinoCatalog::Dinodex.new(@importer.dinosaur_list)
   end
 
   describe '#carnivores' do
@@ -18,16 +17,16 @@ describe 'DinoCatalog::Dinodex' do
 
   describe '#bipeds' do
     it 'returns only biped Dinosaurs' do
-      bipeds = @dinodex.bipeds
+      bipeds = @dinodex.bipeds.dinosaurs
       bipeds.each do |dinosaur|
         expect(dinosaur.walking.downcase).to eq("biped")
       end
     end
   end
 
-  describe '#filter_by_attribute' do
+  describe '#filter' do
     it 'returns a collection of Dinosaur objects' do
-      big_dinos = @dinodex.filter_by_attribute("size", "big")
+      big_dinos = @dinodex.filter(attribute: "size", value: "big").dinosaurs
       expect(big_dinos).to all(be_a DinoCatalog::Dinosaur)
     end
   end

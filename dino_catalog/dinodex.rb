@@ -89,3 +89,8 @@ class Dinodex
     end
   end
 end
+
+# dinodex = Dinodex.new([])
+# dinodex.african_dino_import
+# dinodex.dino_import
+# puts dinodex.biped_search.period_search("Cretaceous").small

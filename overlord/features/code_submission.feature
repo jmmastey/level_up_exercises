@@ -21,7 +21,6 @@ Feature: Submitted a code
 	Scenario: bomb deactivation fails and tries count increases
 	Given(/^I have entered the wrong deactivation code$/) do
   		bomb = Bomb.new("1234", "0000", 3)
-
   		bomb.enter_code("1332")
 	end
 

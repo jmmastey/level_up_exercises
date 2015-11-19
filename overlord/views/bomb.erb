@@ -1,9 +1,6 @@
-
 <p>Bomb is <%= @bomb_active ? "Active" : "Inactive" %></p>
 
 <% if @bomb_active %>
-<!-- <p>You have <%= '12' %> seconds before it explodes.</p> -->
-
 <p><%= @max_tries-@tries %> tries left.</p>
 <% end %>
 

@@ -25,7 +25,7 @@ get '/' do
   # "Time to build an app around here. Start time: " + start_time
 end
 
-get '/exploded' do 
+get '/exploded' do
   redirect to('/') unless bomb.exploded?
   erb :exploded
 end

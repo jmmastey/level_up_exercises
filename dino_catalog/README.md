@@ -11,11 +11,11 @@ First, require the gem in whichever necessary files, or in IRB if you wish to pl
 Create a new DinoImporter, which takes your csv file and turns each row of data into a Dinosaur object. If you are importing with normal Dinodex format, you don't need to pass a format type---but if you downloaded Dino Data from the Pirate Bay, then you should pass in the optional argument "pirate_bay" as shown in the example below
 
 ```
-importer = DinoCatalog::DinoImporter.new(csv_file) #DinoImporter.dinosaur_list contains a collection of dinosaurs importer from the csv file
+importer = DinoCatalog::DinoImporter.new('path_to_csv_file.csv') #DinoImporter.dinosaur_list contains a collection of dinosaurs importer from the csv file
 
 #To import additional dinosaurs:
 
-importer.import_from_csv('piratebayfile.csv', "pirate_bay") #Importing from a csv of dino data downloaded from the Pirate Bay
+importer.import_from_csv('path_to_other_csv_file.csv', "pirate_bay") #Importing from a csv of dino data downloaded from the Pirate Bay
 ```
 
 Then, load the collection of Dinosaur objects that you've created into a new Dinodex. Use the dinosaur_list method to access the collection of Dinosaurs now held inside the DinoImporter you made.
@@ -47,14 +47,14 @@ dinodex.filter(attribute: "size", value: "small").filter(attribute: "diet", valu
 
 To print data about a collection of dinosaurs (whether all the 'saurs in your Dinodex, or just some that have been filtered):
 ```
-quadrupeds = dinodex.filter(attribute: "walking",value: "quadruped")
+quadrupeds = dinodex.filter(attribute: "walking",value: "quadruped").dinosaurs
 
 dinodex.print_collection(quadrupeds) #prints a formatted list of quadruped Dinosaurs.
 ```
 
 To export your dinosaur data as JSON:
 ```
-small_dinos = dinodex.filter(attribute: "size", value: "big")
+small_dinos = dinodex.filter(attribute: "size", value: "big").dinosaurs
 JsonMaker.export_json(small_dinos)
 ```
 
@@ -63,7 +63,7 @@ JsonMaker.export_json(small_dinos)
 You can also print the facts about a given Dinosaur. Let's say that we filter a number of dinosaurs by size using the Dinodex we instantiated earlier.
 
 ```
-dinosaur = dinodex.filter_by_attribute("size","small").first #=> first Dinosaur in the returned collection
+dinosaur = dinodex.filter_by_attribute("size","small").dinosaurs.first #=> first Dinosaur in the returned collection
 
 dinosaur.print_facts #=> returns the Dinosaur object and prints its attributes, each on new lines.
 ```

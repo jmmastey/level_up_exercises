@@ -37,8 +37,8 @@ class DinoCatalog::DinoImporter
   end
 
   def format_pirate_bay_data(row_data)
-    row_data["NAME"] =          row_data["Genus"]
-    row_data["PERIOD"]	=       row_data["Period"]
+    row_data["NAME"] = row_data["Genus"]
+    row_data["PERIOD"]	= row_data["Period"]
     row_data["CONTINENT"] =     "Africa"
     row_data["WEIGHT_IN_LBS"] = row_data["Weight"]
     row_data["WALKING"] =       row_data["Walking"]

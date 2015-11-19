@@ -1,5 +1,7 @@
-<p>Bomb is <%= @bomb_active ? "Active" : "Inactive" %></p>
+<div id='bomb'>
+<div class='title'>Bomb is <%= @bomb_active ? "Active" : "Inactive" %></div>
 
+<div class='code'>
 <% if @bomb_active %>
 <p><%= @max_tries-@tries %> tries left.</p>
 <% end %>
@@ -13,3 +15,5 @@ Code: <input type='text' name="code" />
 <input value="submit" type="submit" />
 
 </form>
+</div>
+</div>

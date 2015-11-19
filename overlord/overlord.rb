@@ -27,19 +27,16 @@ end
 
 get '/exploded' do 
   redirect to('/') unless bomb.exploded?
+  erb :exploded
 end
 
 post '/' do
   code = params['code']
 
-  redirect to('/dummy=duh') unless code =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/
+  redirect to('/?dummy=duh') unless code =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/
   bomb.enter_code(code)
 
   redirect to('/')
-end
-
-get '/exploded' do
-  erb :exploded
 end
 
 # we can shove stuff into the session cookie YAY!

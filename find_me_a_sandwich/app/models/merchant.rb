@@ -11,6 +11,6 @@ class Merchant < ActiveRecord::Base
   scope :with_menus, -> { includes(menus: :menu_items) }
 
   def recently_updated?
-    self.updated_at && self.updated_at > MAX_DAYS_TO_CACHE.days.ago
+    updated_at && updated_at > MAX_DAYS_TO_CACHE.days.ago
   end
 end

@@ -1,5 +1,5 @@
 def zeus_running?
-  File.exists?(".zeus.sock")
+  File.exist?(".zeus.sock")
 end
 
 ENV["RAILS_ENV"] ||= "test"

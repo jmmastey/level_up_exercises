@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :menu do
-    name        "Dinner"
+    name "Dinner"
     association :merchant
 
     trait :with_items do

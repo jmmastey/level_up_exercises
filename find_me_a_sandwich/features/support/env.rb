@@ -12,7 +12,7 @@ end
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
-Around do |scenario, block|
+Around do |_scenario, block|
   DatabaseCleaner.cleaning(&block)
 end
 

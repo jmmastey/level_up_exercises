@@ -4,9 +4,8 @@ class MerchantsController < ApplicationController
   before_action :retrieve_merchant, only: [:show]
 
   def index
-    if @location.blank?
-      flash[:alert] = "You must enter a ZIP to search by."
-    end
+    return unless @location.blank?
+    flash[:alert] = "You must enter a ZIP to search by."
   end
 
   private

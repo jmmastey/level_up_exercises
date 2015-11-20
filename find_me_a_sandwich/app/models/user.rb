@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   VALID_NAME_PATTERN = /\A[A-Za-z\-' ]*\z/
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :location
 

@@ -8,9 +8,7 @@ module Locu
     )
 
     HOST = "https://api.locu.com"
-    PATHS = {
-      venue_search: "/v2/venue/search"
-    }
+    PATHS = { venue_search: "/v2/venue/search" }
 
     def initialize(api_key)
       @api_key = api_key

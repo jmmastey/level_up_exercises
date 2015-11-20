@@ -35,7 +35,7 @@ Then(/^I see that I am logged in$/) do
   expect(page).to have_content("Signed in successfully")
 end
 
-Then(/^I see an invalid email\/password error message$/) do
+Then(%r{^I see an invalid email/password error message$}) do
   expect(page).to have_content("Invalid email or password")
 end
 
@@ -44,5 +44,5 @@ Then(/^I am redirected to the login page$/) do
 end
 
 Then(/^I see I must log in before continuing$/) do
-  expect(page).to have_content("You need to sign in or sign up before continuing")
+  expect(page).to have_content("You need to sign in or sign up")
 end

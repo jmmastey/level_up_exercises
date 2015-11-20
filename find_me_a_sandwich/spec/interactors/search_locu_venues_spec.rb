@@ -21,7 +21,7 @@ describe SearchLocuVenues, type: :interactor do
 
   it "searches through Locu" do
     expect(locu_client).to receive(:search_venues).with(
-      hash_including(location: { postal_code: "60604" })
+      hash_including(location: { postal_code: "60604" }),
     )
 
     search
@@ -42,7 +42,7 @@ describe SearchLocuVenues, type: :interactor do
 
     let(:new_merchant) do
       id = old_merchant.id
-      search.merchants.select { |m| m.id == id }.first
+      search.merchants.find { |m| m.id == id }
     end
 
     it "does not update the merchant" do

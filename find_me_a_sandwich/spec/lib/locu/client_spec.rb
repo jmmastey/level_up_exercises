@@ -16,8 +16,10 @@ describe Locu::Client do
     subject(:search) { client.search_venues(params) }
 
     before(:each) do
-      stub_request(:post, url)
-        .to_return(body: response, headers: {"Content-Type" => "application/json"} )
+      stub_request(:post, url).to_return(
+        body: response,
+        headers: { "Content-Type" => "application/json" },
+      )
     end
 
     it "calls the Locu API with the API key" do
@@ -29,7 +31,7 @@ describe Locu::Client do
 
     it "includes any venue parameters included" do
       expected_body = {
-        "venue_queries" => [{ "location" => { "zip" => "60604" } }]
+        "venue_queries" => [{ "location" => { "zip" => "60604" } }],
       }
 
       search

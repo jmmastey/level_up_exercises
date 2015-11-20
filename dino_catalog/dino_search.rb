@@ -10,7 +10,6 @@ class DinoSearch
     @dinodex.dino_import
   end
 
-
   def create_json(dinosaur_data)
     @dinodex.export_to_json("export#{Time.now.strftime("%FT%R")}.json", dinosaur_data)
     puts "\n JSON successfully exported!"
@@ -44,7 +43,7 @@ class DinoSearch
   def print_menu_options
     l_width = 40
     puts ("\n Welcome to Dinosaurus!  Choose your adventure:".center(l_width))
-    puts "\n"
+    puts
     puts ("DINOSAURUS MENU OPTIONS \n".center(l_width))
     puts ("SEARCH:".ljust(l_width/2) + "TYPE THE FOLLOWING:".rjust(l_width/2))
     puts ("Instructions".ljust(l_width/2) + "1".rjust(l_width/2))

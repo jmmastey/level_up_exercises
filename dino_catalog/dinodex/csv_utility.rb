@@ -13,7 +13,7 @@ module CsvUtility
 
   def self.read_csv(path)
     raise "You need to specify a path and file" unless valid_path?(path)
-    csv_options = { :encoding => "UTF-8", :skip_blanks => true, :headers => true }
+    csv_options = { encoding: "UTF-8", skip_blanks: true, headers: true }
     process_csv_rows(path, csv_options)
   end
 

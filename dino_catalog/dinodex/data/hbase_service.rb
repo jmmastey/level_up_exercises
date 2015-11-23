@@ -6,7 +6,7 @@ module HbaseService
   QUAL = "data"
   URL = "http://localhost:8777"
 
-  @@client = Stargate::Client.new(URL, :proxy => URL)
+  @@client = Stargate::Client.new(URL, proxy: URL)
 
   def self.init
     @@client.create_table(TABLE, CF)
@@ -14,7 +14,7 @@ module HbaseService
 
   def self.put(key, data)
     raise "You must provide key and data" if key.nil? || data.nil?
-    @@client.create_row(TABLE, key, Time.now.to_i, :name => "#{CF}:#{QUAL}", :value => Marshal.dump(data))
+    @@client.create_row(TABLE, key, Time.now.to_i, name: "#{CF}:#{QUAL}", value: Marshal.dump(data))
   end
 
   def self.get(key)
@@ -29,7 +29,7 @@ module HbaseService
 
   def self.scan_rowkeys
     results = []
-    scanner = @@client.open_scanner(TABLE, :columns => ["#{CF}:#{QUAL}"])
+    scanner = @@client.open_scanner(TABLE, columns: ["#{CF}:#{QUAL}"])
     rows = @@client.get_rows(scanner)
     rows.each { |row| results << row.name }
     @@client.close_scanner(scanner)

@@ -27,15 +27,6 @@ module HbaseService
     @@client.delete_row(TABLE, key, nil, "#{CF}:#{QUAL}")
   end
 
-  def self.scan_values
-    results = []
-    scanner = @@client.open_scanner(TABLE, :columns => ["#{CF}:#{QUAL}"])
-    rows = @@client.get_rows(scanner)
-    rows.each { |row| results << Marshal.load(row.columns.first.value) }
-    @@client.close_scanner(scanner)
-    results
-  end
-
   def self.scan_rowkeys
     results = []
     scanner = @@client.open_scanner(TABLE, :columns => ["#{CF}:#{QUAL}"])

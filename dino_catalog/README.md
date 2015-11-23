@@ -33,6 +33,8 @@ Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long
 
 ### Prerequisites ###
 - <http://hbase.apache.org/book.html#quickstart>
+
+### Required Gems (see `./dinodex/Gemfile.lock` for details) ###
 - <https://github.com/greglu/hbase-stargate>
 - <https://github.com/erikhuda/thor/wiki/Getting-Started>
 

@@ -9,7 +9,7 @@ module Library
   end
 
   def self.get_data(name, file_system = false)
-    data = file_system ? CsvUtility.read_csv(name) : HbaseService.get(name)
+    file_system ? CsvUtility.read_csv(name) : HbaseService.get(name)
   end
 
   def self.remove_file(name)
@@ -31,7 +31,6 @@ module Library
     current_data = get_data(name1) + get_data(name2)
 
     current_data.each do |data|
-      data_object = {}
       data_object = data.select { |key, _| common_columns.include?(key) }
       data_object.merge!(create_hash_from_mapping(data, name1_to_name2_mapping))
       result_data << data_object if data_object.length > 0
@@ -44,9 +43,9 @@ module Library
     result_hash = {}
 
     column_mapping.each do |name1_col, name2_col|
-      if hash.has_key?(name1_col)
+      if hash.key?(name1_col)
         result_hash[name1_col] = hash[name1_col]
-      elsif hash.has_key?(name2_col)
+      elsif hash.key?(name2_col)
         result_hash[name1_col] = hash[name2_col]
       end
     end
@@ -62,9 +61,8 @@ module Library
   end
 
   def self.filter_data(data, search_options)
-    result_data = []
     search_keys, search_criteria = build_search_params(search_options)
-    result_data = filter_data_objects(data, search_keys, search_criteria)
+    filter_data_objects(data, search_keys, search_criteria)
   end
 
   def self.filter_data_objects(data, search_keys, search_criteria)
@@ -104,7 +102,7 @@ module Library
   def self.parse_search_values(key, string)
     return [key, "==", ""] if string.nil? || string.length == 0
     return [key, "=~", string.split(/=~/).last] if string.include?("=~")
-    return foo(key, string)
+    foo(key, string)
   end
 
   def self.foo(key, string)
@@ -115,7 +113,7 @@ module Library
   end
 
   def self.build_match_lambda(object_key, value, search_criteria)
-    return_lambda = lambda {return false}
+    return_lambda = -> { return false }
     search_criteria.each do |entry|
       search_key = entry[0]
       operator = entry[1]
@@ -132,6 +130,9 @@ module Library
     enclosing = operator == "=~" ? "/" : "'"
     enclosing = "" if operator.index(/[<>]/)
     value_enclosing = operator.index(/[<>]/) ? "" : "'"
-    lambda {return eval "#{value_enclosing}#{value}#{value_enclosing} #{operator} #{enclosing}#{criteria}#{enclosing}"}
+    lambda do
+      return eval "#{value_enclosing}#{value}#{value_enclosing} " \
+        "#{operator} #{enclosing}#{criteria}#{enclosing}"
+    end
   end
 end

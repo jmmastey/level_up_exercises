@@ -10,16 +10,16 @@ class TestLibrary < Test::Unit::TestCase
   end
 
   def test_create_hash_from_mapping
-    column_mapping = {"name" => "genus", "weight_in_lbs" => "weight"}
+    column_mapping = { "name" => "genus", "weight_in_lbs" => "weight" }
 
-    hash = {"genus" => "foo", "weight" => "10", "bar" => "42"}
+    hash = { "genus" => "foo", "weight" => "10", "bar" => "42" }
     actual_hash = Library.create_hash_from_mapping(hash, column_mapping)
-    expected_hash = {"name" => "foo", "weight_in_lbs" => "10"}
+    expected_hash = { "name" => "foo", "weight_in_lbs" => "10" }
     assert_equal(expected_hash, actual_hash, "Expected hash is not equal")
-    
-    hash = {"name" => "foo", "weight_in_lbs" => "10", "bar" => "42"}
+
+    hash = { "name" => "foo", "weight_in_lbs" => "10", "bar" => "42" }
     actual_hash = Library.create_hash_from_mapping(hash, column_mapping)
-    expected_hash = {"name" => "foo", "weight_in_lbs" => "10"}
+    expected_hash = { "name" => "foo", "weight_in_lbs" => "10" }
     assert_equal(expected_hash, actual_hash, "Expected hash is not equal")
   end
 
@@ -55,5 +55,4 @@ class TestLibrary < Test::Unit::TestCase
     expected = ["key", "=~", "bar"]
     assert_equal(expected, actual, "Actual is not equal to expected")
   end
-
 end

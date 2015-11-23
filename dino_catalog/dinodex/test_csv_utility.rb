@@ -6,9 +6,9 @@ class TestCsvUtility < Test::Unit::TestCase
 
   def test_write_csv
     data_objects = []
-    data_objects << {"a"=>"1","b"=>"2"}
-    data_objects << {"a"=>"2","b"=>"4"}
-    data_objects << {"a"=>"3","b"=>"6"}
+    data_objects << { "a" => "1", "b" => "2" }
+    data_objects << { "a" => "2", "b" => "4" }
+    data_objects << { "a" => "3", "b" => "6" }
     actual = CsvUtility.write_csv(data_objects)
     expected = "a,b\n1,2\n2,4\n3,6\n"
     assert_equal(expected, actual, "CSV String does not equal expected")

@@ -1,3 +1,4 @@
+require 'json'
 require './csv_utility'
 require './library'
 
@@ -17,16 +18,19 @@ class Dinodex < Thor
 
   desc "read_file FILE", "This task will read a file (You can search " \
     "based on given criteria. Also, provide an optional 'columns' option " \
-    "and/or 'file_system' option)"
+    "'file_system' option or 'to_json' for JSON format)"
   method_option :criteria, :type => :hash, :required => false
   method_option :columns, :type => :array, :required => false
   method_option :file_system, :type => :boolean, :required => false
+  method_option :to_json, :type => :boolean, :required => false
   def read_file(file)
     search_options = options[:criteria]
     columns = options[:columns]
     file_system = options[:file_system] || false
+    to_json = options[:to_json] || false
     data = Library.read_file(file, search_options, columns, file_system)
-    puts CsvUtility.write_csv(data)
+    output = to_json ? JSON.generate(data) : CsvUtility.write_csv(data)
+    puts output
   end
 
   desc "remove_file FILE", "This task will delete a previously loaded file"
@@ -43,11 +47,15 @@ class Dinodex < Thor
     end
   end
 
-  desc "merge_files FILE1 FILE2", "This task will merge two data files"
+  desc "merge_files FILE1 FILE2", "This task will merge two data files. (You " \
+    " can also provide 'to_json' option for JSON format)"
   method_option :mapping, :type => :hash, :required => true
+  method_option :to_json, :type => :boolean, :required => false
   def merge_files(file1, file2)
     hash_object = options[:mapping]
+    to_json = options[:to_json] || false
     data = Library.merge_data(file1, file2, hash_object)
-    puts CsvUtility.write_csv(data)
+    output = to_json ? JSON.generate(data) : CsvUtility.write_csv(data)
+    puts output
   end
 end

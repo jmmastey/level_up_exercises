@@ -48,6 +48,12 @@ Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long
 - This will load a csv file as a single record in Hbase:
 `thor dinodex:load_file ../dinodex.csv`
 
+- This will read the csv entry and output it in JSON format:
+`thor dinodex:read_file ../dinodex.csv --to_json`
+
+- This will read a csv file anywhere on the file system:
+`thor dinodex:read_file /Users/foo/bar/test.csv --file_system`
+
 - This will filter loaded dinodex.csv for *Cretaceous periods:
 `thor dinodex:read_file "../dinodex.csv" --criteria='period':'=~Cretaceous'`
 

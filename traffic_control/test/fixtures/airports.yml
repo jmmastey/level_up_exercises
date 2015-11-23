@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  city: MyString
+  capacity: 
+
+two:
+  code: MyString
+  city: MyString
+  capacity: 

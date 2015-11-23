@@ -27,6 +27,14 @@ module CsvUtility
     data_objects
   end
 
+  def self.valid_path?(path)
+    return false if path.nil?
+    return false unless path =~ /\w.csv/
+    File.file?(path)
+  end
+
+  private
+
   def self.process_row(row)
     data = {}
 
@@ -35,11 +43,5 @@ module CsvUtility
     end
 
     data
-  end
-
-  def self.valid_path?(path)
-    return false if path.nil?
-    return false unless path =~ /\w.csv/
-    File.file?(path)
   end
 end

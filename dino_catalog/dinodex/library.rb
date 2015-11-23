@@ -102,10 +102,10 @@ module Library
   def self.parse_search_values(key, string)
     return [key, "==", ""] if string.nil? || string.length == 0
     return [key, "=~", string.split(/=~/).last] if string.include?("=~")
-    foo(key, string)
+    parse_equality_values(key, string)
   end
 
-  def self.foo(key, string)
+  def self.parse_equality_values(key, string)
     glt_index = string.index(/[<>]/)
     operator = glt_index.nil? ? "==" : string[glt_index]
     operator += "=" if string.include?("=") && !glt_index.nil?

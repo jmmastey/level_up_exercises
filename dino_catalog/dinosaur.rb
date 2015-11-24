@@ -22,8 +22,8 @@ class Dinosaur
     ["Carnivore", "Piscivore", "Insectivore"].include?(@diet)
   end
 
-  def period_name(period)
-    @period.include?(period)
+  def dino_in_period?(period)
+    period.include?(@period)
   end
 
   def to_hash

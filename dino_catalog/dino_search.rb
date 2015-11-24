@@ -1,8 +1,7 @@
-require 'pry'
 require_relative 'dinodex.rb'
 
 class DinoSearch
-  attr_accessor :dinodex
+  attr_reader :dinodex
 
   def initialize
     @dinodex = Dinodex.new([])
@@ -11,7 +10,8 @@ class DinoSearch
   end
 
   def create_json(dinosaur_data)
-    @dinodex.export_to_json("export#{Time.now.strftime("%FT%R")}.json", dinosaur_data)
+    json_name = "export#{Time.now.strftime('%FT%R')}.json"
+    dinodex.export_to_json(json_name, dinosaur_data)
     puts "\n JSON successfully exported!"
   end
 
@@ -106,8 +106,8 @@ class DinoSearch
           export_query_option
         when 9
           @results = @dinodex
-      else
-        puts "Please choose a valid menu option." unless user_input == 10
+        else
+          puts "Please choose a valid menu option." unless user_input == 10
       end
     end while user_input != 10
   end

@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
     "lib/dino_catalog/dino_serializer.rb",
   ]
   s.license = "MIT"
+  add_development_dependency "rspec"
 end

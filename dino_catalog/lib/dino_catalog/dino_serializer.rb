@@ -1,7 +1,8 @@
-class DinoCatalog::DinoSerializer
-  def self.export_json(dino_collection)
-    dino_collection.map(&:to_json)
-  end
+module DinoCatalog
+  class DinoSerializer
+    def self.export_json(dino_collection)
+      dino_collection.map(&:to_json)
+    end
 
   # private
 
@@ -12,4 +13,5 @@ class DinoCatalog::DinoSerializer
   #   end
   #   dino_hash.to_json
   # end
+  end
 end

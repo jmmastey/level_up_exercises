@@ -15,7 +15,8 @@ importer = DinoCatalog::DinoImporter.new('path_to_csv_file.csv') #DinoImporter.d
 
 #To import additional dinosaurs:
 
-importer.import_from_csv('path_to_other_csv_file.csv', "pirate_bay") #Importing from a csv of dino data downloaded from the Pirate Bay
+importer.import_from_csv('path_to_second_file.csv', "pirate_bay") 
+#Importing from a csv of dino data downloaded from the Pirate Bay
 ```
 
 Then, load the collection of Dinosaur objects that you've created into a new Dinodex. Use the dinosaur_list method to access the collection of Dinosaurs now held inside the DinoImporter you made.
@@ -27,22 +28,29 @@ Then, load the collection of Dinosaur objects that you've created into a new Din
 You can use the Dinodex to filter by various parameters using the method 'filter_by_attribute'.
 
 ```
-dinodex.filter(attribute: "walking", value: "biped") #=> collection of Dinosaurs with attribute walking equal to 'biped'
+dinodex.filter(attribute: "walking", value: "biped") 
+#=> collection of Dinosaurs with attribute walking equal to 'biped'
 
-dinodex.filter(attribute: "diet", value: "carnivore") #=> collection of Dinosaurs that eat fish, insects, and meat
+dinodex.filter(attribute: "diet", value: "carnivore") 
+#=> collection of Dinosaurs that eat fish, insects, and meat
 
-dinodex.filter(attribute: "period", value: "Early Cretaceous") #=> collection of Dinosaurs that lived in the Early Cretaceous period.
+dinodex.filter(attribute: "period", value: "Early Cretaceous") 
+#=> collection of Dinosaurs that lived in the Early Cretaceous period.
 
-dinodex.filter(attribute: "size", value: "big") #=> collection of Dinosaurs weighing over 2000 lbs.
+dinodex.filter(attribute: "size", value: "big") 
+#=> collection of Dinosaurs weighing over 2000 lbs.
 
-dinodex.filter(attribute: "size", value: "small") #=> collection of Dinosaurs weighing under 2000 lbs.
+dinodex.filter(attribute: "size", value: "small") 
+#=> collection of Dinosaurs weighing under 2000 lbs.
 
 ```
 
 You can also chain filter calls together. For instance,
 
 ```
-dinodex.filter(attribute: "size", value: "small").filter(attribute: "diet", value: "carnivore") #=> collection of Dinosaurs that weigh less than 2000 lbs AND are also carnivores.
+small = dinodex.filter(attribute: "size", value: "small")
+small.filter(attribute: "diet", value: "carnivore").dinosaurs
+#=> collection of Dinosaurs that weigh less than 2000 lbs AND are also carnivores.
 ```
 
 To print data about a collection of dinosaurs (whether all the 'saurs in your Dinodex, or just some that have been filtered):
@@ -63,8 +71,11 @@ JsonMaker.export_json(small_dinos)
 You can also print the facts about a given Dinosaur. Let's say that we filter a number of dinosaurs by size using the Dinodex we instantiated earlier.
 
 ```
-dinosaur = dinodex.filter_by_attribute("size","small").dinosaurs.first #=> first Dinosaur in the returned collection
+dinosaur = dinodex.filter_by_attribute("size","small").dinosaurs.first 
+#=> first Dinosaur in the returned collection
 
-dinosaur.print_facts #=> returns the Dinosaur object and prints its attributes, each on new lines.
+dinosaur.print_facts 
+#=> returns the Dinosaur object and prints its 
+# attributes, each on new lines.
 ```
 

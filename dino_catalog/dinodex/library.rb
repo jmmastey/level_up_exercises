@@ -70,14 +70,19 @@ module Library
 
     data.each do |data_object|
       data_object.each do |obj_key, obj_value|
-        if search_keys.include?(obj_key) && !obj_value.nil?
-          matches = build_match_lambda(obj_key, obj_value, search_criteria).call
-          result_data << data_object if matches
+        if add_to_results?(search_keys, obj_key, obj_value, search_criteria)
+          result_data << data_object
         end
       end
     end
 
     result_data
+  end
+
+  def self.add_to_results?(search_keys, obj_key, obj_value, search_criteria)
+    search_keys.include?(obj_key) &&
+      !obj_value.nil? &&
+      criteria_match?(obj_key, obj_value, search_criteria)
   end
 
   def self.build_search_params(search_options)
@@ -112,27 +117,17 @@ module Library
     [key, operator] << string.split(/[<>=]/).last
   end
 
-  def self.build_match_lambda(object_key, value, search_criteria)
-    return_lambda = -> { return false }
+  def self.criteria_match?(object_key, value, search_criteria)
+    return_value = false
     search_criteria.each do |entry|
       search_key = entry[0]
       operator = entry[1]
-      criteria = entry[2]
+      criteria = operator.include?("~") ? /#{entry[2]}/ : entry[2]
       if search_key == object_key
-        return_lambda = build_lambda(value, operator, criteria)
+        return_value = value.send(operator, criteria)
         break
       end
     end
-    return_lambda
-  end
-
-  def self.build_lambda(value, operator, criteria)
-    enclosing = operator == "=~" ? "/" : "'"
-    enclosing = "" if operator.index(/[<>]/)
-    value_enclosing = operator.index(/[<>]/) ? "" : "'"
-    lambda do
-      return eval "#{value_enclosing}#{value}#{value_enclosing} " \
-        "#{operator} #{enclosing}#{criteria}#{enclosing}"
-    end
+    return_value
   end
 end

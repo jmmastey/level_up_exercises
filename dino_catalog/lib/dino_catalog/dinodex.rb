@@ -9,15 +9,11 @@ module DinoCatalog
     end
 
     def carnivores
-      dinosaurs.select do |dinosaur|
-        dinosaur.diet.downcase == "carnivore" ||
-          dinosaur.diet.downcase == "piscivore" ||
-          dinosaur.diet.downcase == "insectivore"
-      end
+      self.class.new(dinosaurs.select(&:carnivore?))
     end
 
     def bipeds
-      filter(attribute: "walking", value: "biped")
+      self.class.new(dinosaurs.select(&:biped?))
     end
 
     def filter(attribute:, value:)
@@ -28,8 +24,8 @@ module DinoCatalog
       self.class.new(dinos)
     end
 
-    def print_collection(dino_collection = dinosaurs)
-      dino_collection.each do |dinosaur|
+    def print_collection
+      dinosaurs.each do |dinosaur|
         puts dinosaur.print_facts
       end
     end

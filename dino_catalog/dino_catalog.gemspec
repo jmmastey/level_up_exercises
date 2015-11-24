@@ -7,15 +7,15 @@ Gem::Specification.new do |s|
   s.authors = ['Chris Stavitsky']
   s.email = 'cstavitsky@enova.com'
   s.files = [
-    "lib/dino_catalog.rb",
-    "lib/dinodex.csv",
-    "lib/african_dinosaur_export.csv",
-    "lib/dino_catalog/dino_importer.rb",
-    "lib/dino_catalog/dinodex.rb",
-    "lib/dino_catalog/dinosaur.rb",
-    "lib/dino_catalog/dino_serializer.rb",
+    'lib/dino_catalog.rb',
+    'lib/dinodex.csv',
+    'lib/african_dinosaur_export.csv',
+    'lib/dino_catalog/dino_importer.rb',
+    'lib/dino_catalog/dinodex.rb',
+    'lib/dino_catalog/dinosaur.rb',
+    'lib/dino_catalog/dino_serializer.rb',
   ]
-  s.license = "MIT"
-  s.add_development_dependency "rspec"
-  s.add_development_dependency "pry"
+  s.license = 'MIT'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'pry'
 end

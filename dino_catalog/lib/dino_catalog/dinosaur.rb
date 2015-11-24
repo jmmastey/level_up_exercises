@@ -1,5 +1,7 @@
 module DinoCatalog
   class Dinosaur
+    CARNIVORE_TYPES = %w(carnivore piscivore insectivore)
+
     ATTRIBUTES = [
       :name,
       :description,
@@ -32,16 +34,16 @@ module DinoCatalog
       @description	= description
     end
 
-    def print_facts
-      puts formatted_facts
+    def carnivore?
+      CARNIVORE_TYPES.include?(diet.downcase)
     end
 
-    def to_json
-      json_hash = {}
-      instance_variables.each do |variable|
-        json_hash[variable] = instance_variable_get(variable)
-      end
-      json_hash.to_json
+    def biped?
+      walking == "biped"
+    end
+
+    def to_s
+      formatted_facts
     end
 
     private

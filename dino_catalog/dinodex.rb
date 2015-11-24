@@ -1,30 +1,26 @@
 require 'csv'
 require 'json'
-require 'pry'
 require_relative 'dinosaur.rb'
 
 CSV::Converters[:blank_to_nil] = lambda do |field|
   field && field.empty? ? nil : field
 end
 
+CSV_HEADER_CONVERTERS = {
+                          headers: true,
+                          header_converters: :symbol,
+                          converters: [:all, :blank_to_nil],
+                        }
+
 class Dinodex
   attr_reader :master_dinosaur_list
 
   def initialize(master_dinosaur_list)
-    @master_dinosaur_list ||= []
     @master_dinosaur_list = master_dinosaur_list || []
   end
 
-  def csv_header_converters
-    {
-      headers: true,
-      header_converters: :symbol,
-      converters: [:all, :blank_to_nil],
-    }
-  end
-
   def african_dino_import
-    CSV.foreach("african_dinosaur_export.csv", csv_header_converters) do |dino|
+    CSV.foreach("african_dinosaur_export.csv", CSV_HEADER_CONVERTERS) do |dino|
       african_dino = {
         name: dino[:genus],
         period: dino[:period],
@@ -42,7 +38,7 @@ class Dinodex
   end
 
   def dino_import
-    CSV.foreach("dinodex.csv", csv_header_converters) do |dino|
+    CSV.foreach("dinodex.csv", CSV_HEADER_CONVERTERS) do |dino|
       dinosaur = {
         name: dino[:name],
         period: dino[:period],
@@ -84,7 +80,6 @@ class Dinodex
   end
 
   def export_to_json(filename, dinosaur_data)
-    #dinosaur_data = @master_dinosaur_list.map(&:to_hash)
     File.open(filename, "w") do |f|
       f.write(JSON.pretty_generate dinosaur_data.master_dinosaur_list.map(&:to_hash))
     end

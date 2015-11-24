@@ -39,7 +39,7 @@ module DinoCatalog
     end
 
     def biped?
-      walking == "biped"
+      walking.downcase == "biped"
     end
 
     def to_s

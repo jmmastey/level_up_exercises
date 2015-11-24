@@ -4,9 +4,9 @@ require "test/unit"
 class TestLibrary < Test::Unit::TestCase
   include Library
 
-  def test_get_all_files_loaded
-    assert_not_nil(Library.get_all_files_loaded)
-    assert_equal(true, Library.get_all_files_loaded.length > 0)
+  def test_retrieve_all_files_loaded
+    assert_not_nil(Library.retrieve_all_files_loaded)
+    assert_equal(true, Library.retrieve_all_files_loaded.length > 0)
   end
 
   def test_create_hash_from_mapping

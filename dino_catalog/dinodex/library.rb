@@ -20,7 +20,7 @@ module Library
     get_data(name).first.keys
   end
 
-  def self.get_all_files_loaded
+  def self.retrieve_all_files_loaded
     HbaseService.scan_rowkeys
   end
 

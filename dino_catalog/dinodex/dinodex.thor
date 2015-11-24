@@ -13,7 +13,7 @@ class Dinodex < Thor
 
   desc "files", "This task will list files that were loaded"
   def files
-    puts Library.get_all_files_loaded
+    puts Library.retrieve_all_files_loaded
   end
 
   desc "read_file FILE", "This task will read a file (You can search " \
@@ -40,7 +40,7 @@ class Dinodex < Thor
 
   desc "list_columns", "This task will list all column names for each file"
   def list_columns
-    files = Library.get_all_files_loaded
+    files = Library.retrieve_all_files_loaded
     files.each do |file|
       columns = Library.get_data_columns(file)
       puts "#{file} --> #{columns.to_s}"

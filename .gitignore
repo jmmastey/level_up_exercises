@@ -2,3 +2,13 @@
 **/coverage
 **/*.swp
 .DS_Store
+**/.yardoc
+**/Gemfile.lock
+**/_yardoc/
+**/doc/
+**/pkg/
+**/spec/reports/
+**/tmp/
+**/*.gem
+.idea
+**/*.iml

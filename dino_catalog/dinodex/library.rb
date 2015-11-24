@@ -72,6 +72,7 @@ module Library
       data_object.each do |obj_key, obj_value|
         if add_to_results?(search_keys, obj_key, obj_value, search_criteria)
           result_data << data_object
+          break
         end
       end
     end
@@ -91,7 +92,7 @@ module Library
 
     search_options.each do |search_key, search_value|
       search_keys << search_key
-      search_criteria << parse_search_values(search_key, search_value)
+      search_criteria << parse_search_values(search_value).unshift(search_key)
     end
 
     return search_keys, search_criteria
@@ -104,17 +105,17 @@ module Library
     end
   end
 
-  def self.parse_search_values(key, string)
-    return [key, "==", ""] if string.nil? || string.length == 0
-    return [key, "=~", string.split(/=~/).last] if string.include?("=~")
-    parse_equality_values(key, string)
+  def self.parse_search_values(string)
+    return ["==", ""] if string.nil? || string.length == 0
+    return ["=~", string.split(/=~/).last] if string.include?("=~")
+    parse_equality_values(string)
   end
 
-  def self.parse_equality_values(key, string)
+  def self.parse_equality_values(string)
     glt_index = string.index(/[<>]/)
     operator = glt_index.nil? ? "==" : string[glt_index]
     operator += "=" if string.include?("=") && !glt_index.nil?
-    [key, operator] << string.split(/[<>=]/).last
+    [operator] << string.split(/[<>=]/).last
   end
 
   def self.criteria_match?(object_key, value, search_criteria)
@@ -122,12 +123,25 @@ module Library
     search_criteria.each do |entry|
       search_key = entry[0]
       operator = entry[1]
-      criteria = operator.include?("~") ? /#{entry[2]}/ : entry[2]
       if search_key == object_key
+        value = convert_from_string(value, false)
+        criteria = convert_from_string(entry[2], operator.include?("~"))
         return_value = value.send(operator, criteria)
         break
       end
     end
     return_value
+  end
+
+  private
+
+  def self.convert_from_string(string, regex_operator)
+    value = regex_operator ? /#{string}/ : string
+    value = string.to_i if is_number?(string)
+    value
+  end
+
+  def self.is_number?(string)
+    true if Float(string) rescue false
   end
 end

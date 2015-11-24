@@ -137,11 +137,11 @@ module Library
 
   def self.convert_from_string(string, regex_operator)
     value = regex_operator ? /#{string}/ : string
-    value = string.to_i if is_number?(string)
+    value = string.to_i if number?(string)
     value
   end
 
-  def self.is_number?(string)
+  def self.number?(string)
     true if Float(string) rescue false
   end
 end

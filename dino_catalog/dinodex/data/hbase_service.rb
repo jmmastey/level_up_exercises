@@ -7,7 +7,7 @@ module HbaseService
   URL = "http://localhost:8777"
 
   def self.client
-    hbase_client ||= Stargate::Client.new(URL, proxy: URL)
+    @hbase_client ||= Stargate::Client.new(URL, proxy: URL)
   end
 
   def self.put(key, data)

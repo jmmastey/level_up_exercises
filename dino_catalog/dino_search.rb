@@ -91,11 +91,11 @@ class DinoSearch
             puts "That's not a valid period."
           end
         when 5
-          @results = @results.big
+          @results = @results.big_search
           print_dino_results
           export_query_option
         when 6
-          @results = @results.small
+          @results = @results.small_search
           print_dino_results
           export_query_option
         when 7

@@ -66,11 +66,11 @@ class Dinodex
     end)
   end
 
-  def big
+  def big_search
     Dinodex.new(@master_dinosaur_list.select(&:big?))
   end
 
-  def small
+  def small_search
     Dinodex.new(@master_dinosaur_list.select(&:small?))
   end
 

@@ -5,8 +5,6 @@ class DinoSearch
 
   def initialize
     @dinodex = Dinodex.new([])
-    @dinodex.african_dino_import
-    @dinodex.dino_import
   end
 
   def create_json(dinosaur_data)

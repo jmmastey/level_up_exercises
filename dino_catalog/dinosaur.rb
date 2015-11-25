@@ -22,7 +22,7 @@ class Dinosaur
     ["Carnivore", "Piscivore", "Insectivore"].include?(@diet)
   end
 
-  def dino_in_period?(period)
+  def in_period?(period)
     period.include?(@period)
   end
 

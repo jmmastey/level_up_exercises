@@ -62,7 +62,7 @@ class Dinodex
 
   def period_search(period)
     Dinodex.new(@master_dinosaur_list.select do |dino|
-      dino.dino_in_period?(period)
+      dino.in_period?(period)
     end)
   end
 

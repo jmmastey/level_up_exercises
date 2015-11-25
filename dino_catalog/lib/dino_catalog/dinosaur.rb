@@ -46,6 +46,14 @@ module DinoCatalog
       formatted_facts
     end
 
+    def to_h
+      dino_hash = {}
+      self.instance_variables.each do |variable|
+        dino_hash[variable] = self.instance_variable_get(variable)
+      end
+      dino_hash
+    end
+
     private
 
     def formatted_facts

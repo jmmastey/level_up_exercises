@@ -18,16 +18,11 @@ module DinoCatalog
 
     def filter(attribute:, value:)
       dinos = dinosaurs.select do |dinosaur|
-        val_of_attribute = dinosaur.send(attribute)
+        # raise "Invalid attribute type. Use a String." unless attribute.is_a?(String)
+        val_of_attribute = dinosaur.send(attribute).to_s
         val_of_attribute.downcase == value.downcase unless val_of_attribute.nil?
       end
       self.class.new(dinos)
-    end
-
-    def print_collection
-      dinosaurs.each do |dinosaur|
-        puts dinosaur.print_facts
-      end
     end
   end
 end

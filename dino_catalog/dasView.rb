@@ -1,6 +1,18 @@
 class DasView
 
-	def display(outputData)
+	def headerDisplay(headers)
+		headers.each do |header|
+			puts header
+		end
+	end
+
+	def dinoFullDisplay(dinos)
+		dinos.each do |dino|
+			dino.each do |k, v|
+				print "#{k}: #{v} "
+			end
+			puts
+		end
 	end
 
 	def optionsDisplay

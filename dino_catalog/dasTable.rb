@@ -1,6 +1,7 @@
 require_relative "dasScanner"
 
 class DasTable
+	attr_reader :headers, :table
 	def initialize
 		@headers = []
 		@table = []
@@ -39,4 +40,4 @@ class DasTable
 
 end
 
-tb = DasTable.new
+#tb = DasTable.new

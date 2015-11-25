@@ -22,9 +22,10 @@ class DasController
 			when "-h", "help"
 				@view.optionsDisplay
 			when "-l", "list"
-				puts "listing stuff"
+				@view.dinoFullDisplay(@table.table)
 			when "-c", "categories"
-				puts "catting stuff"
+				@view.headerDisplay(@table.headers)
+
 			when "-s", "search"
 				puts "searching stuff"
 			end

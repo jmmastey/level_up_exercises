@@ -12,29 +12,25 @@ class DasController
 	end
 
 	def run
-		while true
-			print "Dino Request: "
-			command = gets.chomp.split(" ")
-
-			p command[0]
+		@view.greetingDisplay
+		command = ["help"]
+		while true		
 
 			case command[0]
 			when "-e", "exit"
 				break
-
 			when "-h", "help"
 				@view.optionsDisplay
-
 			when "-l", "list"
-
-
+				puts "listing stuff"
 			when "-c", "categories"
-
-
+				puts "catting stuff"
 			when "-s", "search"
-
+				puts "searching stuff"
 			end
 
+			print "Dino Request: "
+			command = gets.chomp.split(" ")
 		end
 	end
 

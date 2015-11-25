@@ -8,20 +8,19 @@ First, require the gem in whichever necessary files, or in IRB if you wish to pl
 
 ```require 'dino_catalog'```
 
-Create a new DinoImporter, which takes your csv file and turns each row of data into a Dinosaur object. If you are importing with normal Dinodex format, you don't need to pass a format type---but if you downloaded Dino Data from the Pirate Bay, then you should pass in the optional argument "pirate_bay" as shown in the example below
+Create a new DinoImporter, which takes your csv file and turns each row of data into a Dinosaur object. If you are importing with normal Dinodex format, you don't need to pass a format type---but if you downloaded Dino Data from the Pirate Bay, then you should pass in the optional argument formatter:PirateBayFormatter as shown in the example below. The default importer used is DinodexFormatter, which is used to convert CSV files in the default Dinodex format.
 
 ```
-importer = DinoCatalog::DinoImporter.new('path_to_csv_file.csv') #DinoImporter.dinosaur_list contains a collection of dinosaurs importer from the csv file
+dinos = DinoCatalog::DinoImporter.import_from_csv(file: 'path_to_csv_file.csv') #DinoImporter.import_from_csv returns an array of Dinosaurs.
 
-#To import additional dinosaurs:
-
-importer.import_from_csv('path_to_second_file.csv', "pirate_bay") 
+# To use the Pirate Bay formatter
+DinoCatalog::DinoImporter.import_from_csv(file: 'path_to_second_file.csv', formatter: DinoCatalog::PirateBayFormatter) 
 #Importing from a csv of dino data downloaded from the Pirate Bay
 ```
 
 Then, load the collection of Dinosaur objects that you've created into a new Dinodex. Use the dinosaur_list method to access the collection of Dinosaurs now held inside the DinoImporter you made.
 
-```dinodex = DinoCatalog::Dinodex.new(importer.dinosaur_list)```
+```dinodex = DinoCatalog::Dinodex.new(dinos)```
 
 ##Dinodex methods
 
@@ -63,7 +62,7 @@ dinodex.print_collection(quadrupeds) #prints a formatted list of quadruped Dinos
 To export your dinosaur data as JSON:
 ```
 small_dinos = dinodex.filter(attribute: "size", value: "big").dinosaurs
-JsonMaker.export_json(small_dinos)
+DinoCatalog::DinoSerializer.serialize_collection(small_dinos)
 ```
 
 ##Dinosaur methods
@@ -71,11 +70,13 @@ JsonMaker.export_json(small_dinos)
 You can also print the facts about a given Dinosaur. Let's say that we filter a number of dinosaurs by size using the Dinodex we instantiated earlier.
 
 ```
-dinosaur = dinodex.filter_by_attribute("size","small").dinosaurs.first 
+dinosaur = dinodex.filter(attribute: "size", value: "small").dinosaurs.first 
 #=> first Dinosaur in the returned collection
 
-dinosaur.print_facts 
-#=> returns the Dinosaur object and prints its 
+#Assuming 'dinos' refers to a collection of imported Dinosaurs
+DinoCatalog::DinoPrinter.print_collection(dinos) 
+
+#=> returns the dinosaur collection and prints its 
 # attributes, each on new lines.
 ```
 

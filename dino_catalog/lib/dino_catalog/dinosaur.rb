@@ -24,14 +24,14 @@ module DinoCatalog
       size:          nil,
       description:   nil)
 
-      @name	= name
-      @period	= period
-      @continent	= continent
-      @diet	= diet
+      @name	          = name
+      @period	        = period
+      @continent	    = continent
+      @diet	          = diet
       @weight_in_lbs	= weight_in_lbs
-      @size	= calculated_size(weight_in_lbs.to_i)
-      @walking	= walking
-      @description	= description
+      @size	          = calculated_size(weight_in_lbs.to_i)
+      @walking	      = walking
+      @description	  = description
     end
 
     def carnivore?

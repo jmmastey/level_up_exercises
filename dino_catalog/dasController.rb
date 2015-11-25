@@ -8,7 +8,6 @@ class DasController
 	def initialize
 		@table = DasTable.new
 		@view = DasView.new
-		@logic = DasLogic.new
 	end
 
 	def run
@@ -27,7 +26,9 @@ class DasController
 				@view.headerDisplay(@table.headers)
 
 			when "-s", "search"
-				puts "searching stuff"
+				@view.dinoFullDisplay(
+					@table.search(command[1..-1])
+				)
 			end
 
 			print "Dino Request: "

@@ -16,7 +16,6 @@ module DinoCatalog
         end
         dinosaur_list
       end
-
     end
   end
 end

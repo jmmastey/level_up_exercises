@@ -1,6 +1,6 @@
 module DinoCatalog
-	class DinoPrinter
-		def self.print_collection(dinosaurs)
+  class DinoPrinter
+    def self.print_collection(dinosaurs)
       dinosaurs.each do |dinosaur|
         puts dinosaur
         puts ""
@@ -8,7 +8,7 @@ module DinoCatalog
     end
 
     def self.print_dinosaur(dinosaur)
-    	puts dinosaur
+      puts dinosaur
     end
   end
 end

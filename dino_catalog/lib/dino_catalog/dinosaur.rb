@@ -26,10 +26,10 @@ module DinoCatalog
 
       @name	          = name
       @period	        = period
-      @continent	    = continent
-      @diet	          = diet
+      @continent = continent
+      @diet = diet
       @weight_in_lbs	= weight_in_lbs
-      @size	          = calculated_size(weight_in_lbs.to_i)
+      @size = calculated_size(weight_in_lbs.to_i)
       @walking	      = walking
       @description	  = description
     end
@@ -48,8 +48,8 @@ module DinoCatalog
 
     def to_h
       dino_hash = {}
-      self.instance_variables.each do |variable|
-        dino_hash[variable] = self.instance_variable_get(variable)
+      instance_variables.each do |variable|
+        dino_hash[variable] = instance_variable_get(variable)
       end
       dino_hash
     end

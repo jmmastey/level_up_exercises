@@ -1,27 +1,27 @@
 require 'csv'
 module DasScanner
 
-	def setTable
-		Dir['./dino_fact_csvs/*'].each do |csvFilePath|
+	def set_table
+		Dir['./dino_fact_csvs/*'].each do |csv_file_path|
     	i = 0
     	headers = ""
-    	CSV.read(csvFilePath).each do |line|
+    	CSV.read(csv_file_path).each do |line|
 	    	if i == 0
 	    		headers = line
-	    		self.updateHeaders(line)
+	    		self.update_headers(line)
 	    	else
-	    		self.addLine(line, headers)
+	    		self.add_line(line, headers)
 	    	end
 	    	i += 1
 	    end
 		end
 	end
 
-	def updateHeaders(newHeaders)
-		@headers = newHeaders.map(&:upcase) | @headers
+	def update_headers(new_headers)
+		@headers = new_headers.map(&:upcase) | @headers
 	end
 
-	def addLine(line, headers)
+	def add_line(line, headers)
 		dino = {}
 		headers.each_with_index do |header, i|
 			dino[header] = line[i]

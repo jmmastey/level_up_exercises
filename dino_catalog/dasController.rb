@@ -11,7 +11,7 @@ class DasController
 	end
 
 	def run
-		@view.greetingDisplay
+		@view.greeting_display
 		command = ["help"]
 		while true		
 
@@ -19,14 +19,14 @@ class DasController
 			when "-e", "exit"
 				break
 			when "-h", "help"
-				@view.optionsDisplay
+				@view.options_display
 			when "-l", "list"
-				@view.dinoFullDisplay(@table.table)
+				@view.dino_full_display(@table.table)
 			when "-c", "categories"
-				@view.headerDisplay(@table.headers)
+				@view.header_display(@table.headers)
 
 			when "-s", "search"
-				@view.dinoFullDisplay(
+				@view.dino_full_display(
 					@table.search(command[1..-1])
 				)
 			end

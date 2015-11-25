@@ -4,11 +4,11 @@ class DasTable
 	attr_reader :headers, :table
 	include DasScanner
 	include DasLogic
-	
+
 	def initialize
 		@headers = []
 		@table = []
-		setTable
+		set_table
 	end
 
 

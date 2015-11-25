@@ -1,7 +1,7 @@
 module DasLogic
 
-	def select(list, columnName, value)
-		list.select{ |dino| dino[columnName] == value}
+	def select(list, column_name, value)
+		list.select{ |dino| dino[column_name] == value}
 	end
 
 	def search(args)

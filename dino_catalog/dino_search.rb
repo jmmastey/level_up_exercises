@@ -4,7 +4,7 @@ class DinoSearch
   attr_reader :dinodex
 
   def initialize
-    @dinodex = Dinodex.new([])
+    @dinodex = Dinodex.new
   end
 
   def create_json(dinosaur_data)

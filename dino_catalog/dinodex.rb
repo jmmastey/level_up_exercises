@@ -4,8 +4,8 @@ require_relative 'csvparser.rb'
 class Dinodex
   attr_reader :master_dinosaur_list
 
-  def initialize(master_dinosaur_list)
-    @master_dinosaur_list = CSVParser.new.generate_master_dinosaur_list || []
+  def initialize(master_dinosaur_list = CSVParser.new.generate_dinosaur_list)
+    @master_dinosaur_list = master_dinosaur_list
   end
 
   def biped_search
@@ -44,7 +44,8 @@ class Dinodex
   end
 end
 
-# dinodex = Dinodex.new([])
+# dinodex = Dinodex.new
 # dinodex.african_dino_import
 # dinodex.dino_import
-# puts dinodex.biped_search.period_search("Cretaceous").small
+# puts dinodex.biped_search
+# .period_search("Cretaceous").small_search

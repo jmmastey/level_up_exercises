@@ -50,7 +50,7 @@ class CSVParser
     master_dinosaur_list
   end
 
-  def generate_master_dinosaur_list
+  def generate_dinosaur_list
     african_dino_import.concat(dino_import)
   end
 end

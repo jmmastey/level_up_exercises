@@ -27,7 +27,9 @@ class DasController
 
 			when "-s", "search"
 				@view.dino_full_display(
-					@table.search(command[1..-1])
+					@table.search(
+						parse_search_terms(command[1..-1])
+					)
 				)
 			end
 
@@ -36,7 +38,14 @@ class DasController
 		end
 	end
 
-
+	def parse_search_terms(search_terms)
+		rtn = {}
+		search_terms.each do |term|
+			arg = term.split(":")
+			rtn[arg[0]] = arg[1]
+		end
+		rtn
+	end
 
 
 end

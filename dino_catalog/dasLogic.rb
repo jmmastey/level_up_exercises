@@ -6,11 +6,10 @@ module DasLogic
 
 	def search(args)
 		list = @table
-		args.each do |arg|
-			search = arg.split(":")
-			list = select(list, search[0], search[1])
+		args.each do |k, v|
+			list = select(list, k, v)
 		end
-		return list
+		list
 	end
 
 end

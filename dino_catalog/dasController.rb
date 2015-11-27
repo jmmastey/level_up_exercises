@@ -4,7 +4,7 @@ require_relative "dasLogic"
 require_relative "dasView"
 require_relative "dasTable"
 
-class DasController
+class CatalougeController
 	def initialize
 		@table = DasTable.new
 		@view = DasView.new
@@ -50,5 +50,5 @@ class DasController
 
 end
 
-defacto = DasController.new
+defacto = CatalougeController.new
 defacto.run

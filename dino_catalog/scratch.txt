@@ -1,0 +1,36 @@
+feedback
+
+  X - adjust names (turtle:snake)
+work on matching of root words in header titles
+implement "carnivore" search
+implement "big" search
+
+refactor controller so that it holds the options list
+***I dislike this b/c it puts "view elements" in controller, maybe having some kind of object that is handed to the display
+
+Consider making dino objects rather than hashs
+
+Figure out how to export the info as json
+
+snake_case:  symbols, methods, variables
+SCREAMING_SNAKE: constants
+CamelCase: classes, modules
+
+==================
+
+  11/27/15::1216
+new structure idea:
+-dino object
+  *key attributes
+    name, weight, diet, locomotion, period
+  *catch all "other" attribute
+    stores a hash w/ non-standard info
+      (continent, description, unforseen)
+
+-dino catalouge
+  *stores collection of dino obj
+  *has spc search methods
+  *has load csv method
+
+-dino command line interface
+  *wraps the catalouge and

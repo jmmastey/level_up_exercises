@@ -25,19 +25,19 @@ class DinoCatalog
   end
 
   def big_dinosaurs
-
+    dino_collection.select(&:is_big?)
   end
 
   def biped_dinosaurs
-
+    dino_collection.select(&:is_biped?)
   end
 
   def carnivorus_dinosaurs
-
+    dino_collection.select(&:is_carnivore?)
   end
 
   def dinosaurs_from(period)
-
+    dino_collection.select{ |d| d.is_from?(period) }
   end
 
   def search(terms)

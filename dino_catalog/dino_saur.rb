@@ -12,20 +12,20 @@ class DinoSaur
   end
 
   def is_big?
-    self.weight >= 4000
+    self.weight && self.weight >= 4000
   end
 
   def is_carnivore?
-    ["piscivore", "carnivore", "insectivore"].include?(self.diet.downcase)
+    self.diet && ["piscivore", "carnivore", "insectivore"].include?(self.diet.downcase)
   end
 
   def is_biped?
-    self.locomotion.downcase == "biped"
+    self.locomotion && self.locomotion.downcase == "biped"
   end
 
-  # def existing_attributes
-  #   rtn
-  # end
+  def is_from?(period)
+    self.period && self.period.downcase.include?(period.downcase)
+  end
 
   def to_s
     rtn = []
@@ -39,7 +39,6 @@ class DinoSaur
         rtn << "#{attribute.to_s[1..-1]}: #{self.instance_variable_get(attribute)}"
       end
     end
-
     rtn.compact.join(", ") + "\n\n"
   end
 
@@ -108,14 +107,3 @@ class DinoSaur
 
 end
 
-
-args = {}
-args[:name] = "Albertosaurus"
-args[:weight] = 2000
-args[:diet] = "Carnivore"
-args[:locomotion] = "Biped"
-args[:period] = "Late Cretaceous"
-args[:additional_info] = {continent: "North America", description: "Like a T-Rex but smaller."}
-
-d = DinoSaur.new(args)
-puts d

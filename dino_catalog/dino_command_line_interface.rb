@@ -16,8 +16,14 @@ class DinoCommandLineInterface
         options_display
       when "-l", "list"
         display_collection(dino_catalog.dino_collection)
-      when "-c", "categories"
-        # @view.header_display(@table.headers)
+      when "-b", "big"
+        display_collection(dino_catalog.big_dinosaurs)
+      when "-c", "carnivorus"
+        display_collection(dino_catalog.carnivorus_dinosaurs)
+      when "-2", "biped"
+        display_collection(dino_catalog.biped_dinosaurs)
+      when "-p", "period"
+        display_collection(dino_catalog.dinosaurs_from(command[1]))
 
       when "-s", "search"
         # @view.dino_full_display(
@@ -46,7 +52,10 @@ class DinoCommandLineInterface
     puts "-h or help: access this help menue"
     puts "-e or exit: exit the program"
     puts "-l or list: view a list of all dinos"
-    puts "-c or categories: view a list of all search categories"
+    puts "-b or big: view a list of dino >= 4000lb"
+    puts "-c or carnivorus: view a list of all non-plant eating dinosaurs"
+    puts "-2 or biped: view a list of all bipedal dinosaurs"
+    puts "-p or period <period>: view a list of dinosaurs from the <period> period"
     puts "-s or search category:<term> category:<term>... : view a filtered list of dinos"
   end
 

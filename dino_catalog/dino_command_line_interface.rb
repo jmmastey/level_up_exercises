@@ -15,9 +15,7 @@ class DinoCommandLineInterface
       when "-h", "help"
         options_display
       when "-l", "list"
-        dino_catalog.each do |dinosaur|
-          puts dinosaur
-        end 
+        display_collection(dino_catalog.dino_collection)
       when "-c", "categories"
         # @view.header_display(@table.headers)
 
@@ -32,6 +30,12 @@ class DinoCommandLineInterface
       end
       print "Dino Request: "
       command = gets.chomp.split(" ")
+    end
+  end
+
+  def display_collection(collection)
+    collection.each do |item|
+      puts item
     end
   end
 

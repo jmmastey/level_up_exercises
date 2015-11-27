@@ -18,11 +18,10 @@ class DinoCatalog
                   :header_converters => lambda {|h| h.downcase}
                   ) do |row|
         args = DinoSaur.construct_arguments(row)
-        #rtn << DinoSaur.new(args)
+        rtn << DinoSaur.new(args)
       end
-
     end
-
+    rtn
   end
 
   def big_dinosaurs

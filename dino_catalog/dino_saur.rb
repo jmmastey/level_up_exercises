@@ -23,29 +23,37 @@ class DinoSaur
     self.locomotion.downcase == "biped"
   end
 
+  # def existing_attributes
+  #   rtn
+  # end
+
   def to_s
-    rtn = "name:#{name}, period:#{period}, locomotion:#{locomotion}, "
-    rtn += "diet:#{diet}, weight:#{weight}"
-    if additional_info
-      additional_info.each do |k, v|
-        rtn += ", #{k}:#{v}"
+    rtn = []
+    self.instance_variables.each do |attribute|
+      next if !self.instance_variable_get(attribute)
+      if attribute == :@additional_info 
+        additional_info.each do |k, v|
+          rtn << "#{k}: #{v}"
+        end
+      else
+        rtn << "#{attribute.to_s[1..-1]}: #{self.instance_variable_get(attribute)}"
       end
     end
-    rtn += "\n"
+
+    rtn.compact.join(", ") + "\n\n"
   end
 
   ###  class methods  ####
 
   def self.construct_arguments(csv_table_row)
     rtn = {}
-    # p csv_table_row.headers
     rtn[:name] = DinoSaur.parse_name(csv_table_row)
     rtn[:weight] = DinoSaur.parse_weight(csv_table_row)
     rtn[:diet] = DinoSaur.parse_diet(csv_table_row)
     rtn[:locomotion] = DinoSaur.parse_locomotion(csv_table_row)
     rtn[:period] = DinoSaur.parse_period(csv_table_row)
     rtn[:additional_info] = DinoSaur.parse_additional_info(csv_table_row)
-    p rtn
+    rtn
   end
 
   def self.general_parser(possible_headers, csv_table_row)
@@ -61,7 +69,7 @@ class DinoSaur
   end
 
   def self.parse_weight(csv_table_row)
-    possible_headers = ["weight", "weight_in_pounds"]
+    possible_headers = ["weight", "weight_in_lbs"]
     DinoSaur.general_parser(possible_headers, csv_table_row)
   end
 
@@ -96,8 +104,18 @@ class DinoSaur
       end  
       additional_info
     end
-    # possible_headers = ["name", "genus"]
-    # DinoSaur.general_parser(possible_headers, csv_table_row)
   end
 
 end
+
+
+args = {}
+args[:name] = "Albertosaurus"
+args[:weight] = 2000
+args[:diet] = "Carnivore"
+args[:locomotion] = "Biped"
+args[:period] = "Late Cretaceous"
+args[:additional_info] = {continent: "North America", description: "Like a T-Rex but smaller."}
+
+d = DinoSaur.new(args)
+puts d

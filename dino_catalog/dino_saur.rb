@@ -28,10 +28,12 @@ class DinoSaur
     self.period && self.period.downcase.include?(period.downcase)
   end
 
-  def has_attribute_value?(attribute, value)
-    # need to turn a string into a method call / name
-    # call on self and see if value matches
-    self.send(attribute) == value    
+  def has_attribute_value?(dino_attribute, value)
+    self.send(dino_attribute).downcase == value.downcase
+  end
+
+  def has_additional_info_value?(additional_info_catagory, additional_info_value)
+    self.additional_info && self.additional_info.has_key?(additional_info_catagory) && self.additional_info[additional_info_catagory].include?(additional_info_value)
   end
 
   def to_s
@@ -71,9 +73,24 @@ class DinoSaur
     end
   end
 
+  def self.look_up_attribute_by_csv_header(csv_header)
+    case csv_header.downcase
+    when "name", "genus"
+      "name"
+    when "weight", "weight_in_lbs"
+      "weight"
+    when "carnivore", "diet"
+      "diet"
+    when "walking"
+      "locomotion"
+    when "period"
+      "period"
+    end
+  end
+
   def self.parse_name(csv_table_row)
     possible_headers = ["name", "genus"]
-    DinoSaur.general_parser(possible_headers, csv_table_row)
+    DinoSaur.general_parser(possible_headers, csv_table_row).downcase
   end
 
   def self.parse_weight(csv_table_row)
@@ -83,7 +100,7 @@ class DinoSaur
 
   def self.parse_diet(csv_table_row)
     header = csv_table_row.headers
-    return csv_table_row["diet"] if header.include?("diet")
+    return csv_table_row["diet"].downcase if header.include?("diet")
     if header.include?("carnivore")
       if csv_table_row["carnivore"]
         "carnivore"
@@ -95,12 +112,12 @@ class DinoSaur
 
   def self.parse_locomotion(csv_table_row)
     possible_headers = ["walking"]
-    DinoSaur.general_parser(possible_headers, csv_table_row)
+    DinoSaur.general_parser(possible_headers, csv_table_row).downcase
   end
 
   def self.parse_period(csv_table_row)
     possible_headers = ["period"]
-    DinoSaur.general_parser(possible_headers, csv_table_row)
+    DinoSaur.general_parser(possible_headers, csv_table_row).downcase
   end
 
   def self.parse_additional_info(csv_table_row)
@@ -108,10 +125,19 @@ class DinoSaur
     if !unrecognized_fields.empty?
       additional_info = {}
       unrecognized_fields.each do |header|
-        additional_info[header] = csv_table_row[header]
+        additional_info[header] = csv_table_row[header].downcase if csv_table_row[header] 
       end  
       additional_info
     end
+  end
+
+  def self.hash_dino(dino_instance)
+    dino_hash = {}
+    dino_instance.instance_variables.each do |attribute|
+      next if !dino_instance.instance_variable_get(attribute)
+      dino_hash[attribute.to_s[1..-1]] = dino_instance.instance_variable_get(attribute)
+    end
+    dino_hash
   end
 
 end

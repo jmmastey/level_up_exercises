@@ -1,4 +1,5 @@
 require 'csv'
+require 'json'
 require_relative "dino_saur"
 
 class DinoCatalog
@@ -41,20 +42,25 @@ class DinoCatalog
   end
 
   def search(terms)
-    #terms ## {diet: carnivore, locomotion: quadraped...}
-    terms.each do |k, v|
-      if DinoSaur::MODEL_ATTRIBUTE_FIELDS.include?(k)
-        # search main
-        dino_collection.select{ |d| d.has_attribute_value?(k, v)}
+    collection = dino_collection
+    terms.each do |katagory, value|
+      if DinoSaur::MODEL_ATTRIBUTE_FIELDS.include?(katagory)
+        collection = collection.select{ |d| d.has_attribute_value?(katagory, value)}
+      elsif DinoSaur::RECOGNIZED_CSV_COLUMN_HEADERS.include?(katagory)
+        attribute = DinoSaur.look_up_attribute_by_csv_header(katagory)
+        collection = collection.select{ |d| d.has_attribute_value?(attribute, value)}
       else
-        # search additional info
-        puts "search additional info"
+        collection = collection.select{ |d| d.has_additional_info_value?(katagory, value)}
       end
     end
-
-
+    collection
   end
 
+  ####  class methods  ####
 
+  def self.collection_to_json(collection)
+    collection.map {|d| DinoSaur.hash_dino(d) }.to_json
+  end
 
 end
+

@@ -43,12 +43,12 @@ class DinoCatalog
   def search(terms)
     #terms ## {diet: carnivore, locomotion: quadraped...}
     terms.each do |k, v|
-      if DinoSaur::RECOGNIZED_CSV_COLUMN_HEADERS.include?(k)
+      if DinoSaur::MODEL_ATTRIBUTE_FIELDS.include?(k)
         # search main
-        puts k
+        dino_collection.select{ |d| d.has_attribute_value?(k, v)}
       else
         # search additional info
-        puts "add info"
+        puts "search additional info"
       end
     end
 

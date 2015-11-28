@@ -25,7 +25,9 @@ class DinoCommandLineInterface
       when "-p", "period"
         display_collection(dino_catalog.dinosaurs_from(command[1]))
       when "-f", "filter"
-        filter_criteria = command[1..-1].map(&:downcase)
+        command[1..-1].map(&:downcase).each do |filter_term|
+
+          
         # collection = dino_catalog.dino_collection        
         # if filter_criteria.include?("-c") || filter_criteria.include?("carnivorus")
         #   collection = dino_catalog.carnivorus_dinosaurs(collection)
@@ -40,11 +42,7 @@ class DinoCommandLineInterface
 
       when "-s", "search"
         search_terms = parse_search_terms(command[1..-1])
-        # display_collection(
-          dino_catalog.search(search_terms)
-          # )
-
-
+        display_collection(dino_catalog.search(search_terms))
       end
       print "Dino Request: "
       command = gets.chomp.split(" ")

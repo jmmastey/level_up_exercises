@@ -2,8 +2,8 @@ feedback
 
   X - adjust names (turtle:snake)
 work on matching of root words in header titles
-implement "carnivore" search
-implement "big" search
+  X - implement "carnivore" search
+  X - implement "big" search
 
 refactor controller so that it holds the options list
 ***I dislike this b/c it puts "view elements" in controller, maybe having some kind of object that is handed to the display

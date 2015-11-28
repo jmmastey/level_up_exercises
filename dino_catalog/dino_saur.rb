@@ -1,6 +1,7 @@
-RECOGNIZED_CSV_COLUMN_HEADERS = ["name", "genus", "carnivore", "weight", "walking", "period", "diet", "weight_in_lbs"]
-
 class DinoSaur
+  RECOGNIZED_CSV_COLUMN_HEADERS = ["name", "genus", "carnivore", "weight", "walking", "period", "diet", "weight_in_lbs"]
+  MODEL_ATTRIBUTE_FIELDS = ["name", "weight", "diet", "locomotion", "period", "additional_info"]
+
   attr_reader :name, :weight, :diet, :locomotion, :period, :additional_info
   def initialize(args)
     @name = args[:name]
@@ -27,10 +28,10 @@ class DinoSaur
     self.period && self.period.downcase.include?(period.downcase)
   end
 
-  def is_part_of_attribute_search?(attribute, value)
+  def has_attribute_value?(attribute, value)
     # need to turn a string into a method call / name
     # call on self and see if value matches
-    
+    self.send(attribute) == value    
   end
 
   def to_s
@@ -39,7 +40,9 @@ class DinoSaur
       next if !self.instance_variable_get(attribute)
       if attribute == :@additional_info 
         additional_info.each do |k, v|
-          rtn << "#{k}: #{v}"
+          if v
+            rtn << "#{k}: #{v}"
+          end
         end
       else
         rtn << "#{attribute.to_s[1..-1]}: #{self.instance_variable_get(attribute)}"

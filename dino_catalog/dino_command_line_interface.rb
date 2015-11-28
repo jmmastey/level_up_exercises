@@ -24,13 +24,25 @@ class DinoCommandLineInterface
         display_collection(dino_catalog.biped_dinosaurs)
       when "-p", "period"
         display_collection(dino_catalog.dinosaurs_from(command[1]))
+      when "-f", "filter"
+        filter_criteria = command[1..-1].map(&:downcase)
+        # collection = dino_catalog.dino_collection        
+        # if filter_criteria.include?("-c") || filter_criteria.include?("carnivorus")
+        #   collection = dino_catalog.carnivorus_dinosaurs(collection)
+        # end
+        # if filter_criteria.include?("-b") || filter_criteria.include?("big")
+        #   collection = dino_catalog.big_dinosaurs(collection)
+        # end
+        # if filter_criteria.include?("-2") || filter_criteria.include?("biped")
+        #   collection = dino_catalog.biped_dinosaurs(collection)
+        # end
+        display_collection(collection)
 
       when "-s", "search"
-        # @view.dino_full_display(
-        #   @table.search(
-        #     parse_search_terms(command[1..-1])
-        #   )
-        # ) 
+        search_terms = parse_search_terms(command[1..-1])
+        # display_collection(
+          dino_catalog.search(search_terms)
+          # )
 
 
       end
@@ -46,6 +58,12 @@ class DinoCommandLineInterface
   end
 
   def parse_search_terms(search_terms)
+    rtn = {}
+    search_terms.each do |term|
+      search_pair = term.split(":")
+      rtn[search_pair[0].downcase] = search_pair[1].downcase
+    end
+    rtn
   end
 
   def options_display
@@ -56,7 +74,8 @@ class DinoCommandLineInterface
     puts "-c or carnivorus: view a list of all non-plant eating dinosaurs"
     puts "-2 or biped: view a list of all bipedal dinosaurs"
     puts "-p or period <period>: view a list of dinosaurs from the <period> period"
-    puts "-s or search category:<term> category:<term>... : view a filtered list of dinos"
+    puts "-f or filter <big/biped/carnivorus or their abbreviations>: view a listed filtered by all included criteria"
+    puts "-s or search category:<term> category:<term>... : view a list of dinos filtered by search criteria"
   end
 
   def greeting_display

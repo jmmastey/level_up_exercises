@@ -24,16 +24,16 @@ class DinoCatalog
     rtn
   end
 
-  def big_dinosaurs
-    dino_collection.select(&:is_big?)
+  def big_dinosaurs(collection = dino_collection)
+    collection.select(&:is_big?)
   end
 
-  def biped_dinosaurs
-    dino_collection.select(&:is_biped?)
+  def biped_dinosaurs(collection = dino_collection)
+    collection.select(&:is_biped?)
   end
 
-  def carnivorus_dinosaurs
-    dino_collection.select(&:is_carnivore?)
+  def carnivorus_dinosaurs(collection = dino_collection)
+    collection.select(&:is_carnivore?)
   end
 
   def dinosaurs_from(period)
@@ -41,6 +41,18 @@ class DinoCatalog
   end
 
   def search(terms)
+    #terms ## {diet: carnivore, locomotion: quadraped...}
+    terms.each do |k, v|
+      if DinoSaur::RECOGNIZED_CSV_COLUMN_HEADERS.include?(k)
+        # search main
+        puts k
+      else
+        # search additional info
+        puts "add info"
+      end
+    end
+
+
   end
 
 

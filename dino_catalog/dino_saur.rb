@@ -27,6 +27,12 @@ class DinoSaur
     self.period && self.period.downcase.include?(period.downcase)
   end
 
+  def is_part_of_attribute_search?(attribute, value)
+    # need to turn a string into a method call / name
+    # call on self and see if value matches
+    
+  end
+
   def to_s
     rtn = []
     self.instance_variables.each do |attribute|

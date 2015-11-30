@@ -26,3 +26,38 @@ Go check out the CSVs and come back. Done? Cool, I've just got a few features I 
 2. CSV isn't may favorite format in the world. Can you implement a JSON export feature?
 
 Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long and up to 8 tons! Suh-weet.)
+
+## Dinodex Implementation ##
+
+### Getting Started ###
+
+- Run `bundle install`
+
+### Examples: ###
+
+- This will read the csv entry and output it in JSON format:
+`thor dinodex:read_file ./dinodex.csv --to_json`
+
+- This will filter loaded dinodex.csv for *Cretaceous periods:
+`thor dinodex:read_file "./dinodex.csv" --criteria='period':'=~Cretaceous'`
+
+- This will merge two loaded files given the column mapping as the last argument and write to a file named 'results.csv':
+`thor dinodex:merge_files "./dinodex.csv" "./african_dinosaur_export.csv" --mapping=name:genus weight_in_lbs:weight diet:carnivore | tee results.csv`
+
+- This will merge both data files and filter for Bipeds and print the columns 'name', 'period', 'weight_in_lbs', 'diet':
+`thor dinodex:merge_files "./dinodex.csv" "./african_dinosaur_export.csv" --mapping=name:genus weight_in_lbs:weight diet:carnivore > results.csv && thor dinodex:read_file results.csv --criteria='walking':'=Biped' --columns= name period weight_in_lbs diet`
+
+- This will read results.csv from the file_system and filter for records Jurassic period:
+`thor dinodex:read_file results.csv --criteria='period':'=Jurassic' 'weight_in_lbs':'>6000'`
+
+- This will filter loaded dinodex.csv for name equal to 'Dracopelta' and only print out columns 'name', 'period', 'continent', 'diet', 'walking' and 'description':
+`thor dinodex:read_file "./dinodex.csv" --criteria='name':'=Dracopelta' --columns='name' 'period' 'continent' 'diet' 'walking' 'description'`
+
+- This will merge both data files and filter for Cretaceous periods :
+`thor dinodex:merge_files "./dinodex.csv" "./african_dinosaur_export.csv" --mapping=name:genus weight_in_lbs:weight diet:carnivore > results.csv && thor dinodex:read_file results.csv --criteria='period':'=~Cretaceous'`
+
+- This will merge both data files and filter for Jurassic periods OR weight greater than 6000:
+`thor dinodex:merge_files "./dinodex.csv" "./african_dinosaur_export.csv" --mapping=name:genus weight_in_lbs:weight diet:carnivore > results.csv && thor dinodex:read_file results.csv --criteria='period':'=Jurassic' 'weight_in_lbs':'>6000'`
+
+- This will merge both data files and filter for Jurassic periods AND weight greater than 2000:
+`thor dinodex:merge_files "./dinodex.csv" "./african_dinosaur_export.csv" --mapping=name:genus weight_in_lbs:weight diet:carnivore > results.csv && thor dinodex:read_file results.csv --criteria='period':'=Jurassic' > jurassic.csv && thor dinodex:read_file jurassic.csv --criteria='weight_in_lbs':'>2000'`

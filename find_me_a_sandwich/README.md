@@ -21,3 +21,6 @@ Now let's add a controller to receive requests related to our favorites and resp
 
 ## Part 4 - Model
 Finally, we need to create the Favorite model and appropriate database migration.  The model should reference a `User` and a `MenuItem`.
+
+## Part 5 - API
+This site's search capabilities aren't very useful.  I want to be able to search restaurants by menu item.  We've got developers working on the interface, but we need someone to update the Locu API client library.  Take a look at the [Locu docs](https://dev.locu.com/documentation/#venue-search-api) and update `Locu::Client#search_venues` to support searching by menu items.

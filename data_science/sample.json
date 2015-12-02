@@ -51,7 +51,7 @@
     "date":"2014-04-03","cohort":"B","result":0
   },
   {
-    "date":"2014-04-03","cohort":"B","result":0
+    "date":"2014-04-03","cohort":"B","result":1
   },
   {
     "date":"2014-04-03","cohort":"A","result":1
@@ -66,7 +66,7 @@
     "date":"2014-04-03","cohort":"A","result":0
   },
   {
-    "date":"2014-04-03","cohort":"B","result":0
+    "date":"2014-04-03","cohort":"B","result":1
   },
   {
     "date":"2014-04-03","cohort":"A","result":0

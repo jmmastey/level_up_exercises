@@ -1,3 +1,4 @@
+require 'spec_helper'
 require_relative '../lib/visits_parser'
 
 describe VisitsParser do
@@ -10,11 +11,9 @@ describe VisitsParser do
 			expect(VisitsParser.parse(data).length).to eq(3)
 		end
 
-		# it 'creates objects that respond to cohort' do
-		# 	object = VisitsParser.parse(data).first
-		# 	expect(object.cohort).to be_truthy
-		# end
-
-		it 'returns a collection of visits'
+		it 'creates objects that respond to cohort with a truthy value' do
+			object = VisitsParser.parse(data).first
+			expect(object.cohort).to be_truthy
+		end
 	end
 end

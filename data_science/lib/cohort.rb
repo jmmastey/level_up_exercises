@@ -3,7 +3,8 @@ require 'abanalyzer'
 require 'pry'
 
 class Cohort
-	attr_accessor :visits, :conversions
+	attr_reader :visits
+	private :visits
 
 	def initialize(visits)
 		validate_visits(visits)
@@ -19,25 +20,12 @@ class Cohort
 		conversions.length
 	end
 
-	def conversions
-		converted = 1
-		@conversions = visits.select{ |visit| visit.result == converted }
-	end
-
 	def conversion_rate(confidence = 0.95)
 		ABAnalyzer.confidence_interval(num_conversions, sample_size, confidence)
 	end
 
-	def current_leader(cohort_to_compare)
-		comparison = self.conversion_rate <=> cohort_to_compare.conversion_rate
-		case
-			when comparison > 0
-				return self
-			when comparison < 0
-				return cohort_to_compare
-			else
-				"It's a tie!"
-		end
+  def <=>(cohort_to_compare)
+		self.conversion_rate <=> cohort_to_compare.conversion_rate
 	end
 
 	private
@@ -46,5 +34,10 @@ class Cohort
 		if visits.find{ |visit| visit.cohort != visit_cohort}
 			raise "All visits must be from the same cohort"
 		end
+	end
+
+	def conversions
+		converted = 1
+		@conversions = visits.select{ |visit| visit.result == converted }
 	end
 end

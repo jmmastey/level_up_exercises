@@ -1,0 +1,8 @@
+source 'http://rubygems.org'
+
+gem 'abanalyzer'
+gem 'json'
+gem 'pry'
+gem 'pry-state'
+gem 'rspec'
+gem 'rubocop'

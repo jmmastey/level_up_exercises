@@ -46,6 +46,10 @@ class DataScience
     results
   end
 
+  def chi_square
+    [@analyzer.chisquare_score, @analyzer.chisquare_p]
+  end
+
   private
 
   def build_values

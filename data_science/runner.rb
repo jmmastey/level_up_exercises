@@ -7,3 +7,4 @@ puts app.sample_size
 puts app.conversions
 puts app.confidence
 puts app.significance?
+puts "#{app.chi_square}"

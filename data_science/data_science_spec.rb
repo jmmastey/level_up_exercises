@@ -66,4 +66,15 @@ RSpec.describe DataScience do
       expect(actual).to be == expected
     end
   end
+
+  describe "#chi_square" do
+    it "return the score and p values of the chi-square test" do
+      data = JsonIO.new("./test_data.json").read
+      data_science = DataScience.new(data)
+      expected = [3.333, 0.068]
+      actual = data_science.chi_square
+      actual.map! { |f| f.round(3) }
+      expect(actual).to be == expected
+    end
+  end
 end

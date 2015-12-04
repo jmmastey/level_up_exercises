@@ -24,3 +24,9 @@ Finally, we need to create the Favorite model and appropriate database migration
 
 ## Part 5 - API
 This site's search capabilities aren't very useful.  I want to be able to search restaurants by menu item.  We've got developers working on the interface, but we need someone to update the Locu API client library.  Take a look at the [Locu docs](https://dev.locu.com/documentation/#venue-search-api) and update `Locu::Client#search_venues` to support searching by menu items.
+
+## Enabling Postgresql Support
+* Install Postgresql
+* Uncomment `gem "pg"` in the Gemfile
+* Replace `config/database.yml` with `config/database.postgresql.yml`
+* Rename `lib/tasks/database.rake.disable` to `lib/tasks/database.rake`

@@ -11,4 +11,11 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore VCR cassettes
 **/fixtures/vcr
+
+# Ignore SQLite DBs
+**/*.sqlite
+**/*.sqlite2
+**/*.sqlite3

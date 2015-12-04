@@ -2,8 +2,14 @@ source "https://rubygems.org"
 
 gem "sinatra"
 
+group :development, :test do
+  gem "pry"
+end
+
 group :test do
+  gem "capybara"
   gem "cucumber"
+  gem "shotgun"
   gem "rspec"
   gem "simplecov", require: false
 end

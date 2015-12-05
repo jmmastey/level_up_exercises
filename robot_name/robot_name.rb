@@ -17,19 +17,18 @@ class Robot
     @@registry << @name
   end
 
-  def generate_char
-    ('A'..'Z').to_a.sample
-  end
-
-  def generate_num
-    rand(10)
+  def generate_name
+    output = ""
+    2.times { output << ('A'..'Z').to_a.sample }
+    3.times { output << rand(10).to_s }
+    output
   end
 
   def make_name
     if @name_generator
       @name = @name_generator.call
     else
-      @name = "#{generate_char}#{generate_char}#{generate_num}#{generate_num}#{generate_num}"
+     @name = generate_name
     end
   end
 

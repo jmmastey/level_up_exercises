@@ -23,7 +23,7 @@ class Arrowhead
     "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 
-  def self.region_error 
+  def self.region_error
     raise "Uknown region, please provide a valid region."
   end
 

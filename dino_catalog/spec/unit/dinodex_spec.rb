@@ -19,7 +19,7 @@ describe 'DinoCatalog::Dinodex' do
     it 'returns only biped Dinosaurs' do
       bipeds = @dinodex.bipeds.dinosaurs
       bipeds.each do |dinosaur|
-        expect(dinosaur.walking.downcase).to eq("biped")
+        expect(dinosaur.walking.downcase).to be_biped
       end
     end
   end

@@ -1,16 +1,15 @@
 module DinoCatalog
-  class DinoSerializer
-    def self.serialize_collection(dinosaurs)
+  module DinoSerializer
+    def serialize_collection
       dinosaurs.map do |dinosaur|
-        binding.pry
-        DinoSerializer.serialize(dinosaur.to_h)
+        serialize(dinosaur.to_h)
       end
     end
 
     private
 
-    def self.serialize(dino_hash)
-      dino_hash.to_json
+    def serialize(dino_data)
+      dino_data.to_json
     end
   end
 end

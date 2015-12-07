@@ -1,5 +1,8 @@
+require_relative '../dino_catalog'
+
 module DinoCatalog
   class Dinosaur
+    include DinoCatalog::DinoPrinter
     CARNIVORE_TYPES = %w(carnivore piscivore insectivore)
 
     ATTRIBUTES = [
@@ -15,21 +18,19 @@ module DinoCatalog
     attr_reader *(ATTRIBUTES)
 
     def initialize(
-      name: nil,
+      name:          nil,
       period:        nil,
       continent:     nil,
       diet:          nil,
       weight_in_lbs: nil,
       walking:       nil,
-      size:          nil,
       description:   nil)
 
       @name	          = name
       @period	        = period
-      @continent = continent
-      @diet = diet
+      @continent      = continent
+      @diet           = diet
       @weight_in_lbs	= weight_in_lbs
-      @size = calculated_size(weight_in_lbs.to_i)
       @walking	      = walking
       @description	  = description
     end
@@ -47,29 +48,33 @@ module DinoCatalog
     end
 
     def to_h
-      dino_hash = {}
-      instance_variables.each do |variable|
-        dino_hash[variable] = instance_variable_get(variable)
+      instance_variables.each_with_object({}) do |variable, h|
+        h[variable] = instance_variable_get(variable)
       end
-      dino_hash
+    end
+
+    def big?
+      calculated_size == "big"
+    end
+
+    def small?
+      calculated_size == "small"
     end
 
     private
 
     def formatted_facts
-      attributes_with_values = ATTRIBUTES.select do |attribute|
-        send(attribute)
-      end
-
-      attributes_with_values.map do |attribute|
-        "#{attribute}: #{send(attribute)}"
-      end.join("\n")
+      ATTRIBUTES.map do |attribute|
+        value = send(attribute)
+        "#{attribute}: #{value}" if value
+      end.compact.join("\n")
     end
 
-    def calculated_size(weight_in_lbs)
-      if weight_in_lbs >= 2000
+    def calculated_size
+      weight = weight_in_lbs.to_i
+      if weight >= 4000
         "big"
-      elsif weight_in_lbs > 0
+      elsif weight > 0
         "small"
       end
     end

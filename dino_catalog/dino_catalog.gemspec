@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'dino_catalog'
-  s.version = '0.0.0'
+  s.version = '1.0.0'
   s.date = '2015-11-15'
   s.summary = 'Dino Catalog'
   s.description = 'Import Dinosaur data and filter by parameters.'

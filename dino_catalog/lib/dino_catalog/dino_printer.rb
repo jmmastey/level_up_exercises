@@ -1,14 +1,13 @@
-module DinoCatalog
-  class DinoPrinter
-    def self.print_collection(dinosaurs)
-      dinosaurs.each do |dinosaur|
-        puts dinosaur
-        puts ""
-      end
-    end
+require_relative '../dino_catalog'
 
-    def self.print_dinosaur(dinosaur)
-      puts dinosaur
+module DinoCatalog
+  module DinoPrinter
+    def print
+      if self.is_a?(DinoCatalog::Dinosaur)
+        puts self
+      elsif self.is_a?(DinoCatalog::Dinodex)
+        dinosaurs.each { |dinosaur| puts dinosaur.to_s + "\n\n"}
+      end
     end
   end
 end

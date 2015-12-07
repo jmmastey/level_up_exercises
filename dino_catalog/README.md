@@ -54,15 +54,15 @@ small.filter(attribute: "diet", value: "carnivore").dinosaurs
 
 To print data about a collection of dinosaurs (whether all the 'saurs in your Dinodex, or just some that have been filtered):
 ```
-quadrupeds = dinodex.filter(attribute: "walking",value: "quadruped").dinosaurs
+quadrupeds = dinodex.filter(attribute: "walking",value: "quadruped")
 
-dinodex.print_collection(quadrupeds) #prints a formatted list of quadruped Dinosaurs.
+quadrupeds.print_collection #prints a formatted list of quadruped Dinosaurs.
 ```
 
 To export your dinosaur data as JSON:
 ```
-small_dinos = dinodex.filter(attribute: "size", value: "big").dinosaurs
-DinoCatalog::DinoSerializer.serialize_collection(small_dinos)
+small_dinos = dinodex.filter(attribute: "size", value: "big")
+small_dinos.serialize_collection
 ```
 
 ##Dinosaur methods
@@ -74,8 +74,7 @@ dinosaur = dinodex.filter(attribute: "size", value: "small").dinosaurs.first
 #=> first Dinosaur in the returned collection
 
 #Assuming 'dinos' refers to a collection of imported Dinosaurs
-DinoCatalog::DinoPrinter.print_collection(dinos) 
-
+dinosaur.print
 #=> returns the dinosaur collection and prints its 
 # attributes, each on new lines.
 ```

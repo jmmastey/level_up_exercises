@@ -22,10 +22,10 @@ Your job is to allow me to favorite my sandwiches, and look up the favorites of 
 ## The Exercise
 
 ### Part 0 - Getting Started
-First, you'll need to get everything set up.  Run the tests with `bundle exec cucumber` and `bundle exec rspec` and make sure everything passes.  Then stand the app up and make sure you can navigate it in your browser.
+First, you'll need to get everything set up. Use RSpec to execute the existing unit tests using the command `bundle exec rspec`. You should make sure everything passes, and then stand the app up and make sure you can navigate to it in your browser.
 
 ### Part 1 - Behavioral Tests
-As with any behavior-driven developed program, you'll be starting with the tests.  Add a series of Cucumber features for favoriting/unfavoriting meals, and looking up others' favorites.
+As with any behavior-driven developed program, you'll be starting with the tests.  Add a series of [Cucumber](https://cucumber.io) features for favoriting/unfavoriting meals, and looking up others' favorites.
 
 ```
 As a user
@@ -51,16 +51,18 @@ I want to find the favorite meals of my friends
 In order to decide what to eat
 ```
 
+Keep in mind that this outside-in approach will require you to mock some objects (especially models).  Take a look at [RSpec mocks](https://www.relishapp.com/rspec/rspec-mocks/docs) for reference.
+
 ### Part 2 - Views
-Now that we have some behavioral tests up, let's add some views.  Use Haml to modify the existing menu and add a "Favorite" option to each menu item. Also add views to:
+Now that we have some behavioral tests up, let's add some views.  Use [Haml](http://haml.info) to modify the existing menu and add a "Favorite" option to each menu item. Also add views to:
 * View and manage your favorites
 * Browse others' favorites
 
 ### Part 3 - Controller
-Now let's add a controller to receive requests related to our favorites and respond with the appropriate rendered view.  Start with some [specs](https://www.relishapp.com/rspec/rspec-rails/docs/controller-specs). Then add the controller itself.
+Now let's add a controller to receive requests related to our favorites and respond with the appropriate rendered view.  Start with some [specs](https://www.relishapp.com/rspec/rspec-rails/docs/controller-specs). Then add the [controller](http://edgeguides.rubyonrails.org/action_controller_overview.html) itself.
 
 ### Part 4 - Model
-Finally, we need to create the Favorite model and appropriate database migration.  The model should reference a `User` and a `MenuItem`.
+Finally, we need to create the Favorite [model](http://edgeguides.rubyonrails.org/active_record_basics.html) and appropriate [database migration](http://edgeguides.rubyonrails.org/active_record_migrations.html).  The model should [reference](http://edgeguides.rubyonrails.org/association_basics.html) a `User` and a `MenuItem`.
 
 **Bonus points:** Use PostgreSQL for the database instead of SQLite. See section below on [*Enabling PostgreSQL Support*](#enabling-postgresql-support).
 
@@ -78,13 +80,18 @@ This site's search capabilities aren't very useful.  I want to be able to search
   - [Haml Reference](http://haml.info/docs/yardoc/file.REFERENCE.html)
   - [Haml Tutorial](http://haml.info/tutorial.html)
 * [Locu Venue Search API](https://dev.locu.com/documentation/#venue-search-api)
+* MVC
+  - [Wikipedia](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 * Rails
+  - [Ruby on Rails - Framework](http://www.tutorialspoint.com/ruby-on-rails/rails-framework.htm) - Brief intro to MVC and Rails
   - [Ruby on Rails Guides](http://guides.rubyonrails.org/index.html)
+    * [Active Support Core Extensions](http://edgeguides.rubyonrails.org/active_support_core_extensions.html) - Learning these extensions will save you a lot of time
 * RSpec
   - [Better Specs](http://betterspecs.org/) - RSpec best practices
   - [Controller Specs Reference](https://www.relishapp.com/rspec/rspec-rails/docs/controller-specs)
   - [RSpec Mocks](https://www.relishapp.com/rspec/rspec-mocks/docs) - A guide on mocking objects in RSpec (very useful when testing views & controllers)
 * Other resources
+  - [Factory Girl](https://github.com/thoughtbot/factory_girl) / [Rails](https://github.com/thoughtbot/factory_girl_rails) - Useful tool for building and persisting models for testing
   - [Pry](http://pryrepl.org/) - A very useful tool for debugging
 
 ## Enabling PostgreSQL Support

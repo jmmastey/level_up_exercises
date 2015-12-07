@@ -9,6 +9,7 @@ We have a pretty basic app calle "Find Me A Sandwich" which can lookup menus fro
 Your job is to allow me to favorite my sandwiches, and look up the favorites of others.
 
 ## Table of Contents
+* [Overview](#overview)
 * [The Exercise](#the-exercise)
   - [Part 0 - Getting Started](#part-0---getting-started)
   - [Part 1 - Behavioral Tests](#part-1---behavioral-tests)
@@ -18,6 +19,10 @@ Your job is to allow me to favorite my sandwiches, and look up the favorites of 
   - [Part 5 - API](#part-5---api)
 * [Resources](#resources)
 * [Enabling PostgreSQL Support](#enabling-postgresql-support)
+
+## Overview
+
+Find Me A Sandwich is written in Rails, a Ruby-based MVC framework.  The MVC architectural pattern separates applications into three interconnected parts: the **m**odel, **v**iew and **c**ontroller.  The **model** component is responsible for storing data and containing the business logic of the application.  The **view** generates output to the user.  In Rails, this output usually takes the form of HTML (for browsers) or JSON (for API consumers).  Finally, the **controller** links the two, accepting web requests from the client, sending messages to the model, and rendering the views based on the state of the model.  Take a look at the [resources](#resources) below for more information on MVC and Rails.
 
 ## The Exercise
 

@@ -16,6 +16,7 @@ Your job is to allow me to favorite my sandwiches, and look up the favorites of 
   - [Part 3 - Controller](#part-3---controller)
   - [Part 4 - Model](#part-4---model)
   - [Part 5 - API](#part-5---api)
+* [Resources](#resources)
 * [Enabling PostgreSQL Support](#enabling-postgresql-support)
 
 ## The Exercise
@@ -65,6 +66,26 @@ Finally, we need to create the Favorite model and appropriate database migration
 
 ### Part 5 - API
 This site's search capabilities aren't very useful.  I want to be able to search restaurants by menu item.  We've got developers working on the interface, but we need someone to update the Locu API client library.  Take a look at the [Locu docs](https://dev.locu.com/documentation/#venue-search-api) and update `Locu::Client#search_venues` to support searching by menu items.
+
+## Resources
+* Capybara
+  - [Capybara Github](https://github.com/jnicklas/capybara)
+  - [Capybara Cheat Sheet](https://gist.github.com/zhengjia/428105)
+* Cucumber
+  - [Cucumber.io](https://cucumber.io/)
+  - [The training wheels came off](http://aslakhellesoy.com/post/11055981222/the-training-wheels-came-off) - Article on why not to use `web_steps.rb` and how to follow best BDD practices
+* Haml
+  - [Haml Reference](http://haml.info/docs/yardoc/file.REFERENCE.html)
+  - [Haml Tutorial](http://haml.info/tutorial.html)
+* [Locu Venue Search API](https://dev.locu.com/documentation/#venue-search-api)
+* Rails
+  - [Ruby on Rails Guides](http://guides.rubyonrails.org/index.html)
+* RSpec
+  - [Better Specs](http://betterspecs.org/) - RSpec best practices
+  - [Controller Specs Reference](https://www.relishapp.com/rspec/rspec-rails/docs/controller-specs)
+  - [RSpec Mocks](https://www.relishapp.com/rspec/rspec-mocks/docs) - A guide on mocking objects in RSpec (very useful when testing views & controllers)
+* Other resources
+  - [Pry](http://pryrepl.org/) - A very useful tool for debugging
 
 ## Enabling PostgreSQL Support
 * Install `postgresql`

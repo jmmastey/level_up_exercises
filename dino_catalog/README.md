@@ -28,19 +28,19 @@ You can use the Dinodex to filter by various parameters using the method 'filter
 
 ```
 dinodex.filter(attribute: "walking", value: "biped") 
-#=> collection of Dinosaurs with attribute walking equal to 'biped'
+#=> Dinodex containing Dinosaurs with attribute walking equal to 'biped'
 
 dinodex.filter(attribute: "diet", value: "carnivore") 
-#=> collection of Dinosaurs that eat fish, insects, and meat
+#=> Dinodex containing Dinosaurs that eat fish, insects, and meat
 
 dinodex.filter(attribute: "period", value: "Early Cretaceous") 
-#=> collection of Dinosaurs that lived in the Early Cretaceous period.
+#=> Dinodex containing Dinosaurs that lived in the Early Cretaceous period.
 
 dinodex.filter(attribute: "size", value: "big") 
-#=> collection of Dinosaurs weighing over 2000 lbs.
+#=> Dinodex containing Dinosaurs weighing over 4000 lbs.
 
 dinodex.filter(attribute: "size", value: "small") 
-#=> collection of Dinosaurs weighing under 2000 lbs.
+#=> Dinodex containing Dinosaurs weighing under 4000 lbs.
 
 ```
 

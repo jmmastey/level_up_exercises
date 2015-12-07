@@ -15,7 +15,7 @@ module DinoCatalog
       :continent,
       :size,
     ]
-    attr_reader *(ATTRIBUTES)
+    attr_reader(*ATTRIBUTES)
 
     def initialize(
       name:          nil,

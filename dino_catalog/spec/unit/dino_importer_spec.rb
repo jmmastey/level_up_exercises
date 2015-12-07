@@ -11,6 +11,5 @@ describe 'DinoCatalog::DinoImporter' do
       @importer.import_from_csv('lib/dinodex.csv')
       expect(@importer.dinosaur_list).to all(be_a DinoCatalog::Dinosaur)
     end
-
   end
 end

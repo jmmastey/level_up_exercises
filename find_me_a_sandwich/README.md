@@ -8,6 +8,16 @@ We have a pretty basic app calle "Find Me A Sandwich" which can lookup menus fro
 
 Your job is to allow me to favorite my sandwiches, and look up the favorites of others.
 
+## Table of Contents
+* [The Exercise](#the-exercise)
+  - [Part 0 - Getting Started](#part-0---getting-started)
+  - [Part 1 - Behavioral Tests](#part-1---behavioral-tests)
+  - [Part 2 - Views](#part-2---views)
+  - [Part 3 - Controller](#part-3---controller)
+  - [Part 4 - Model](#part-4---model)
+  - [Part 5 - API](#part-5---api)
+* [Enabling PostgreSQL Support](#enabling-postgresql-support)
+
 ## The Exercise
 
 ### Part 0 - Getting Started
@@ -51,7 +61,7 @@ Now let's add a controller to receive requests related to our favorites and resp
 ### Part 4 - Model
 Finally, we need to create the Favorite model and appropriate database migration.  The model should reference a `User` and a `MenuItem`.
 
-**Bonus points:** Use PostgreSQL for the database instead of SQLite. See section below on *Enabling PostgreSQL Support*.
+**Bonus points:** Use PostgreSQL for the database instead of SQLite. See section below on [*Enabling PostgreSQL Support*](#enabling-postgresql-support).
 
 ### Part 5 - API
 This site's search capabilities aren't very useful.  I want to be able to search restaurants by menu item.  We've got developers working on the interface, but we need someone to update the Locu API client library.  Take a look at the [Locu docs](https://dev.locu.com/documentation/#venue-search-api) and update `Locu::Client#search_venues` to support searching by menu items.

@@ -6,4 +6,6 @@ group :test do
   gem "rspec"
   gem "simplecov", require: false
   gem 'cucumber', '~> 2.1'
+  gem 'cucumber-sinatra'
+  gem 'capybara', '~> 2.5'
 end

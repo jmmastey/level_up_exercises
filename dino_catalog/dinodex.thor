@@ -8,9 +8,11 @@ class Dinodex < Thor
   desc "read_file FILE", "This task will read a file (You can search " \
     "based on given criteria. Also, provide an optional 'columns' option " \
     "'file_system' option or 'to_json' for JSON format)"
+
   method_option :criteria, type: :hash, required: false
   method_option :columns, type: :array, required: false
   method_option :to_json, type: :boolean, required: false
+
   def read_file(file)
     search_options = options[:criteria]
     columns = options[:columns]
@@ -25,8 +27,10 @@ class Dinodex < Thor
 
   desc "merge_files FILE1 FILE2", "This task will merge two data files. (You " \
     " can also provide 'to_json' option for JSON format)"
+
   method_option :mapping, type: :hash, required: true
   method_option :to_json, type: :boolean, required: false
+
   def merge_files(file1, file2)
     hash_object = options[:mapping]
     to_json = options[:to_json]

@@ -1,7 +1,5 @@
 class DinodexApp
-  attr_accessor :io
-  attr_accessor :filter
-  attr_accessor :merger
+  attr_accessor :io, :filter, :merger
 
   def initialize(io, filter, merger)
     @io = io

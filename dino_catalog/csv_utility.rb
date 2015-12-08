@@ -21,7 +21,7 @@ class CsvUtility
 
   def valid_path?(path)
     return false if path.nil?
-    return false unless path =~ /\w.csv/
+    return false unless path.to_s =~ /\w.csv/
     File.file?(path)
   end
 

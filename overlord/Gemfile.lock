@@ -23,6 +23,8 @@ GEM
     docile (1.1.5)
     extlib (0.9.16)
     gherkin3 (3.1.2)
+    haml (4.0.7)
+      tilt
     highline (1.7.8)
     json (1.8.3)
     mime-types (3.0)
@@ -75,6 +77,7 @@ DEPENDENCIES
   capybara (~> 2.5)
   cucumber (~> 2.1)
   cucumber-sinatra
+  haml (~> 4.0, >= 4.0.7)
   rspec
   simplecov
   sinatra

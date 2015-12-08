@@ -20,11 +20,10 @@ class FilterUtility
   end
 
   def build_search_params(search_options)
-    search_criteria = []
-    search_options.each do |search_key, search_value|
+    search_options.inject([]) do |search_criteria, (search_key, search_value)|
       search_criteria << parse_search_values(search_value).unshift(search_key)
+      search_criteria
     end
-    search_criteria
   end
 
   def filter_columns(data, columns)

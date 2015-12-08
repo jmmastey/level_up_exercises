@@ -36,12 +36,9 @@ class CsvUtility
   end
 
   def process_row(row)
-    data = {}
-
-    row.headers.each do |header|
+    row.headers.inject({}) do |data, header|
       data[header.gsub(/\s/, "_").downcase] = row[header]
+      data
     end
-
-    data
   end
 end

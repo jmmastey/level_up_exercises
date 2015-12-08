@@ -14,7 +14,7 @@ class Dinodex < Thor
   def read_file(file)
     search_options = options[:criteria]
     columns = options[:columns]
-    to_json = options[:to_json] || false
+    to_json = options[:to_json]
     app = DinodexApp.new(CsvUtility.new, FilterUtility.new, MergeUtility.new)
     data = app.read(file)
     data = app.filter(data, search_options) if search_options
@@ -29,7 +29,7 @@ class Dinodex < Thor
   method_option :to_json, :type => :boolean, :required => false
   def merge_files(file1, file2)
     hash_object = options[:mapping]
-    to_json = options[:to_json] || false
+    to_json = options[:to_json]
     app = DinodexApp.new(CsvUtility.new, FilterUtility.new, MergeUtility.new)
     data1 = app.read(file1)
     data2 = app.read(file2)

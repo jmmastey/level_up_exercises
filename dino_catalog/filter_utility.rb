@@ -7,10 +7,9 @@ class FilterUtility
   end
 
   def data_matches?(data_object, search_criteria)
-    data_object.each do |obj_key, obj_value|
-      return true if matches_search?(obj_key, obj_value, search_criteria)
+    data_object.any? do |obj_key, obj_value|
+      matches_search?(obj_key, obj_value, search_criteria)
     end
-    false
   end
 
   def matches_search?(obj_key, obj_value, search_criteria)

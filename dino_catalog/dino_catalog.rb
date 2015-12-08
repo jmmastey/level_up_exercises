@@ -8,7 +8,25 @@ class DinoCatalog
     dinodex = CSVHelper.load_csv("dinodex.csv")
     african = CSVHelper.load_csv("african_dinosaur_export.csv")
     @data = merge_data(dinodex, african)
-    puts @data
+  end
+
+  def grab_bipeds
+    search( {:walking => "Biped"} )
+  end
+
+  def grab_carnivores 
+    search( {:carnivore => true})
+  end
+
+  # def grab
+
+  def search(filters)
+    result = []
+    @data.each do |entry|
+      filters.each do |key, value|
+        result << entry if entry[key] == value
+      end
+    end
   end
 
   # dinodex: name, period, continent, diet, weight_in_lbs, walking, description
@@ -66,3 +84,5 @@ module CSVHelper
 end
 
 catalog = DinoCatalog.new
+puts catalog.search ({:carnivore => true})
+puts catalog.search ({:carnivore => false})

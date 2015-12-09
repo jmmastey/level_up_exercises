@@ -101,13 +101,4 @@ class Bomb
     @failed_deactivations += 1
     explode if failed_deactivations >= max_failed_deactivations
   end
-
-  def serialize
-    {
-      :state => state
-      :activation_code => @activation_code,
-      :deactivation_code => @deactivation_code,
-      :max_failed_deactivations => @max_failed_deactivations
-    }
-  end
 end

@@ -10,14 +10,14 @@ class Optimizer
   def simple_counts
     result = {}
     [:A, :B].each do |cohort|
-      result[cohort] = {:sample_size => @data[cohort].values.inject(:+), 
-        :conversions => @data[cohort][:successes]}
+      result[cohort] = { :sample_size => @data[cohort].values.inject(:+),
+                        :conversions => @data[cohort][:successes] }
     end
     result
   end
 
   def conversion_rates
-    counts = simple_counts()
+    counts = simple_counts
     result = {}
     [:A, :B].each do |cohort|
       result[cohort] = ABAnalyzer.confidence_interval(
@@ -48,7 +48,7 @@ class DataLoader
   end
 
   def self.parse(data)
-    result = Hash.new { |hash, key| hash[key] = {:successes => 0, :failures => 0} }
+    result = Hash.new { |hash, key| hash[key] = { :successes => 0, :failures => 0 } }
     data.each do |entry|
       result_key = self.key_or_sym(entry, "result") == 1 ? :successes : :failures
       result[self.key_or_sym(entry, "cohort").to_sym][result_key] += 1
@@ -59,7 +59,6 @@ class DataLoader
   def self.key_or_sym(hash, value)
     hash[value.to_sym] || hash[value.to_s]
   end
-
 end
 
 optimizer = Optimizer.new "data_export_2014_06_20_15_59_02.json"

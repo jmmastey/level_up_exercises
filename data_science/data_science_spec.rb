@@ -52,7 +52,10 @@ describe Optimizer do
   end
 
   it "loads data" do
-    optimizer = Optimizer.new [{:cohort => "A", :result => 1}, {:cohort => "A", :result => 1}]
+    optimizer = Optimizer.new [
+      {:cohort => "A", :result => 1}, 
+      {:cohort => "A", :result => 1}
+    ]
     expect(optimizer.data[:A][:successes]).to eq(2)
   end
 
@@ -68,7 +71,7 @@ describe Optimizer do
 
   it "counds number of conversions per cohort" do
     expect(@optimizer.simple_counts[:A][:conversions]).to eq(12)
-  end 
+  end
 
   it "should calculate conversion rates" do
     result = @optimizer.conversion_rates
@@ -80,4 +83,3 @@ describe Optimizer do
     expect(@optimizer.result_confidence).to be < 1
   end
 end
-

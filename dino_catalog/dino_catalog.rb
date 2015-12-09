@@ -1,13 +1,47 @@
 require 'csv'
+require 'json'
 
 
-
-class DinoCatalog
+class DinoCatalog 
+  attr_accessor :data
 
   def initialize
     dinodex = CSVHelper.load_csv("dinodex.csv")
     african = CSVHelper.load_csv("african_dinosaur_export.csv")
     @data = merge_data(dinodex, african)
+  end
+
+  def start_filter
+    @filtered ||= @data.dup
+  end
+
+  def results
+    start_filter
+    results = @filtered.dup
+    @filtered = nil
+    results
+  end
+
+  def select(&block)
+    start_filter
+    @filtered = @filtered.select(&block)
+    self
+  end
+
+  def length
+    results.length
+  end
+
+  def to_s
+    results.to_s
+  end
+
+  def to_json
+    JSON.generate(results)
+  end
+
+  def print
+    JSON.pretty_generate(results)
   end
 
   def grab_bipeds
@@ -18,15 +52,19 @@ class DinoCatalog
     search( {:carnivore => true})
   end
 
-  # def grab
+  def grab_period(period)
+    select { |item| item[:period].include? period}
+  end
+
+  def grab_heavier_than(weight)
+    select { |item| (item[:weight] || 0) > weight }
+  end
 
   def search(filters)
-    result = []
-    @data.each do |entry|
-      filters.each do |key, value|
-        result << entry if entry[key] == value
-      end
+    filters.each do |key, value|
+      select { |item| item[key] == value}
     end
+    self
   end
 
   # dinodex: name, period, continent, diet, weight_in_lbs, walking, description
@@ -84,5 +122,17 @@ module CSVHelper
 end
 
 catalog = DinoCatalog.new
-puts catalog.search ({:carnivore => true})
-puts catalog.search ({:carnivore => false})
+# puts catalog.data
+# puts catalog.select { |item| item[:period].include? "Jurrasic"}.length
+# puts catalog.grab_period("Jurassic").grab_heavier_than(2000).results.length
+
+puts "# carnivores: #{catalog.search({:carnivore => true}).length}"
+puts "# get carnivores: #{catalog.grab_carnivores().length}"
+puts "# herbivores: #{catalog.search({:carnivore => false}).length}"
+puts "# bipeds: #{catalog.grab_bipeds.length}"
+puts "# Jurassic: #{catalog.grab_period("Jurassic").grab_heavier_than(2000).length}"
+puts "# Cretaceous: #{catalog.grab_period("Cretaceous").length}"
+puts "# really heavy: #{catalog.grab_heavier_than(2000).length}"
+puts "# really heavy carnivores: #{catalog.grab_heavier_than(2000).grab_carnivores.length}"
+puts "JSON: #{catalog.grab_heavier_than(2000).grab_carnivores.to_json}"
+puts "print: #{catalog.grab_heavier_than(2000).grab_carnivores.print}"

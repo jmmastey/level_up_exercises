@@ -1,7 +1,7 @@
 require_relative 'data_science'
 
 describe Optimizer do
-  fake_data = [{"cohort": "A", "result": 2}, {"cohort": "A", "result": 4}, {"cohort": "B", "result": 0}]
+  fake_data = [{"cohort": "A", "result": 1}, {"cohort": "A", "result": 0}, {"cohort": "B", "result": 0}]
   before :each do
     @optimizer = Optimizer.new fake_data
   end
@@ -18,10 +18,11 @@ describe Optimizer do
   end
 
   it "counts total sample size per cohort" do
-
+    expect(@optimizer.simple_counts[:A][:sample_size]).to eq(2)
+    expect(@optimizer.simple_counts[:B][:sample_size]).to eq(1)
   end
 
   it "counds number of conversions per cohort" do
-
+    expect(@optimizer.simple_counts[:A][:conversions]).to eq(1)
   end 
 end

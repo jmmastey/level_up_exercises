@@ -5,6 +5,15 @@ class Optimizer
   def initialize(initial_data)
     @data = DataLoader.load_data initial_data
   end
+
+  def simple_counts
+    result = {}
+    [:A, :B].each do |cohort|
+      result[cohort] = {:sample_size => @data[cohort].values.inject(:+), 
+        :conversions => @data[cohort][:successes]}
+    end
+    result
+  end
 end
 
 class DataLoader

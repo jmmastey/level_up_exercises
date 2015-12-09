@@ -1,0 +1,1 @@
+Feature: Bomb activation and deactivation

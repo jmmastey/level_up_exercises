@@ -1,3 +1,38 @@
+require 'json'
+
 class Optimizer
+  attr_accessor :data
+  def initialize(initial_data)
+    @data = DataLoader.load_data initial_data
+  end
+end
+
+class DataLoader
+  def self.load_data(filename_or_array)
+    return parse filename_or_array if filename_or_array.class == Array
+    self.parse(
+      self.load_json(filename_or_array)
+    )
+  end
+
+  def self.load_json(json_data_filename)
+    f = File.open(json_data_filename, "r")
+    data = f.read
+    f.close
+    JSON.parse(data)
+  end
+
+  def self.parse(data)
+    result = Hash.new { |hash, key| hash[key] = {:successes => 0, :failures => 0} }
+    data.each do |entry|
+      result_key = self.key_or_sym(entry, "result") == 1 ? :successes : :failures
+      result[self.key_or_sym(entry, "cohort").to_sym][result_key] += 1
+    end
+    result
+  end
+
+  def self.key_or_sym(hash, value)
+    hash[value.to_sym] || hash[value.to_s]
+  end
 
 end

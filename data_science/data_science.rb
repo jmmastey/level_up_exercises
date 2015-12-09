@@ -23,7 +23,6 @@ class Optimizer
       result[cohort] = ABAnalyzer.confidence_interval(
         counts[cohort][:conversions], counts[cohort][:sample_size], 0.95)
     end
-    puts result
     result
   end
 
@@ -62,3 +61,6 @@ class DataLoader
   end
 
 end
+
+optimizer = Optimizer.new "data_export_2014_06_20_15_59_02.json"
+puts optimizer.result_confidence

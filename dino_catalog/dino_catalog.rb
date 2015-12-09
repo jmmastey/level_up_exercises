@@ -1,8 +1,7 @@
 require 'csv'
 require 'json'
 
-
-class DinoCatalog 
+class DinoCatalog
   attr_accessor :data
 
   def initialize
@@ -45,15 +44,15 @@ class DinoCatalog
   end
 
   def grab_bipeds
-    search( {:walking => "Biped"} )
+    search(:walking => "Biped")
   end
 
-  def grab_carnivores 
-    search( {:carnivore => true})
+  def grab_carnivores
+    search(:carnivore => true)
   end
 
   def grab_period(period)
-    select { |item| item[:period].include? period}
+    select { |item| item[:period].include? period }
   end
 
   def grab_heavier_than(weight)
@@ -62,14 +61,11 @@ class DinoCatalog
 
   def search(filters)
     filters.each do |key, value|
-      select { |item| item[key] == value}
+      select { |item| item[key] == value }
     end
     self
   end
 
-  # dinodex: name, period, continent, diet, weight_in_lbs, walking, description
-  # african: genus, period, carnivore, weight, walking
-  # merged: name, period, continent, diet, carnivore, weight, walking, description 
   def merge_data(dinodex, african)
     merged = []
     dinodex.each { |entry| merged << normalize_dinodex_entry(entry) }
@@ -79,14 +75,14 @@ class DinoCatalog
 
   def normalize_dinodex_entry(entry)
     {
-        :name => entry[:name],
-        :period => entry[:period],
-        :continent => entry[:continent],
-        :diet => entry[:diet],
-        :carnivore => get_carnivore_for_dinodex(entry[:diet]),
-        :weight => entry[:weight_in_lbs],
-        :walking => entry[:walking],
-        :description => entry[:description],
+      :name => entry[:name],
+      :period => entry[:period],
+      :continent => entry[:continent],
+      :diet => entry[:diet],
+      :carnivore => get_carnivore_for_dinodex(entry[:diet]),
+      :weight => entry[:weight_in_lbs],
+      :walking => entry[:walking],
+      :description => entry[:description],
     }
   end
 
@@ -99,25 +95,25 @@ class DinoCatalog
       :carnivore => (entry[:diet] == "Yes"),
       :weight => entry[:weight],
       :walking => entry[:walking],
-      :description => nil
+      :description => nil,
     }
-  end 
+  end
 
   def get_carnivore_for_dinodex(diet)
-    (["Carnivore", "Pescivore", "Insectivore"].include? diet)
+    %w(Carnivore Pescivore Insectivore).include? diet
   end
 end
-
 
 module CSVHelper
   CSV::Converters[:blank_to_nil] = lambda do |field|
     field && field.empty? ? nil : field
   end
 
-  def CSVHelper.load_csv(filename)
+  def self.load_csv(filename)
     f = File.open(filename, "r")
-    data = CSV.new(f, :headers => true, :header_converters => :symbol, :converters => [:all, :blank_to_nil])
-    data.to_a.map {|row| row.to_hash }
+    data = CSV.new(f, :headers => true, :header_converters => :symbol,
+                   :converters => [:all, :blank_to_nil])
+    data.to_a.map(&:to_hash)
   end
 end
 
@@ -126,13 +122,15 @@ catalog = DinoCatalog.new
 # puts catalog.select { |item| item[:period].include? "Jurrasic"}.length
 # puts catalog.grab_period("Jurassic").grab_heavier_than(2000).results.length
 
-puts "# carnivores: #{catalog.search({:carnivore => true}).length}"
-puts "# get carnivores: #{catalog.grab_carnivores().length}"
-puts "# herbivores: #{catalog.search({:carnivore => false}).length}"
+puts "# carnivores: #{catalog.search(:carnivore => true).length}"
+puts "# get carnivores: #{catalog.grab_carnivores.length}"
+puts "# herbivores: #{catalog.search(:carnivore => false).length}"
 puts "# bipeds: #{catalog.grab_bipeds.length}"
-puts "# Jurassic: #{catalog.grab_period("Jurassic").grab_heavier_than(2000).length}"
-puts "# Cretaceous: #{catalog.grab_period("Cretaceous").length}"
+puts "# Jurassic: " \
+  "#{catalog.grab_period('Jurassic').grab_heavier_than(2000).length}"
+puts "# Cretaceous: #{catalog.grab_period('Cretaceous').length}"
 puts "# really heavy: #{catalog.grab_heavier_than(2000).length}"
-puts "# really heavy carnivores: #{catalog.grab_heavier_than(2000).grab_carnivores.length}"
+puts "# really heavy carnivores: " \
+  "#{catalog.grab_heavier_than(2000).grab_carnivores.length}"
 puts "JSON: #{catalog.grab_heavier_than(2000).grab_carnivores.to_json}"
 puts "print: #{catalog.grab_heavier_than(2000).grab_carnivores.print}"

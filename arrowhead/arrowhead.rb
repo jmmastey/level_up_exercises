@@ -17,7 +17,7 @@ class Arrowhead
 
   def self.get_region_shapes(region)
     if CLASSIFICATIONS.include? region
-      CLASSIFICATIONS[region] 
+      CLASSIFICATIONS[region]
     else
       raise "Unknown region, please provide a valid region."
     end
@@ -28,13 +28,14 @@ class Arrowhead
       arrowhead = region_shapes[shape]
       "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
     else
-      raise "Unknown shape value. Are you sure you know what you're talking about?"
+      raise "Unknown shape value. Are you sure you know what " \
+        "you're talking about?"
     end
   end
 
   def self.classify(region, shape)
-    region_shapes = self.get_region_shapes region
-    self.get_shape(region_shapes, shape)
+    region_shapes = get_region_shapes region
+    get_shape(region_shapes, shape)
   end
 end
 

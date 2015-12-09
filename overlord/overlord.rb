@@ -24,8 +24,15 @@ end
 
 post '/activate' do
   @bomb = get_bomb params
-  puts "params: #{params}"
   @bomb.enter_code(params[:activation_code])
+  set_bomb @bomb
+  redirect to('/bomb')
+end
+
+post '/deactivate' do
+  @bomb = get_bomb params
+  puts "params: #{params}"
+  @bomb.enter_code(params[:deactivation_code])
   set_bomb @bomb
   redirect to('/bomb')
 end

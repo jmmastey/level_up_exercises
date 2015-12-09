@@ -9,6 +9,8 @@ They set us up the bomb.
     <input type="submit" value="submit"/>
   </form>
 <% else %>
+  <p>
+  Failed deactivations: <%= @bomb.failed_deactivations %> of <%= @bomb.max_failed_deactivations %>
   <form action="/deactivate" method="post">
     <label>Deactivation Code</label>
     <input type="text" name="deactivation_code"/>

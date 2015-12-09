@@ -2,7 +2,6 @@ Feature: Bomb activation and deactivation
 
   Scenario: super villian first finds the bomb
     Given the bomb page is loaded
-    When I look at the bomb
     Then it is not activated
 
   Scenario: bomb activated with default code

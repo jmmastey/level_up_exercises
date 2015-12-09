@@ -23,10 +23,15 @@ class Arrowhead
     end
   end
 
+  def self.get_article(arrowhead)
+    %w(a e i o u).include?(arrowhead[0].downcase) ? "an" : "a"
+  end
+
   def self.get_shape(region_shapes, shape)
     if region_shapes.include? shape
       arrowhead = region_shapes[shape]
-      "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
+      article = get_article(arrowhead)
+      "You have #{article} '#{arrowhead}' arrowhead. Probably priceless."
     else
       raise "Unknown shape value. Are you sure you know what " \
         "you're talking about?"

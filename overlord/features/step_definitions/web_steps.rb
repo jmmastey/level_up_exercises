@@ -192,6 +192,28 @@ Then /^the "([^\"]*)" checkbox(?: within "([^\"]*)")? should not be checked$/ do
   end
 end
 
+Then /^the "([^\"]*)" checkbox(?: within "([^\"]*)")? should be true$/ do |label, selector|
+  with_scope(selector) do
+    field_checked = find_field(label)['checked']
+    if field_checked.respond_to? :should
+      field_checked.should == 'true'
+    else
+      assert_equal 'true', field_checked
+    end
+  end
+end
+
+Then /^the "([^\"]*)" checkbox(?: within "([^\"]*)")? should not be true$/ do |label, selector|
+  with_scope(selector) do
+    field_checked = find_field(label)['checked']
+    if field_checked.respond_to? :should_not
+      field_checked.should_not == 'true'
+    else
+      assert_not_equal 'true', field_checked
+    end
+  end
+end
+
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should

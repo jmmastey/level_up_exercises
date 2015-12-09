@@ -43,7 +43,8 @@ post '/newbomb' do
 end
 
 def new_bomb params
-  puts "running new bomb"
+  raise "need a number for code" unless is_number?(params[:activation_code]) and 
+                                        is_number?(params[:deactivation_code])
   Bomb.new(params[:activation_code] || "1234", 
            params[:deactivation_code] || "0000")
 end
@@ -55,4 +56,9 @@ end
 def get_bomb(params)
   puts "found session bomb #{session[:bomb]}"
   session[:bomb] || new_bomb(params)
+end
+
+def is_number? string
+  return true if string.nil? || string == ''
+  true if Integer(string) rescue false
 end

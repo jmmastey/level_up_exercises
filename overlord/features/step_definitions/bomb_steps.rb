@@ -1,6 +1,7 @@
 
 require 'capybara/cucumber'
 require 'capybara'
+
 Capybara.default_driver = :selenium
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
@@ -17,65 +18,66 @@ Given(/^the bomb page is loaded$/) do
 end
 
 Then(/^it is not activated$/) do
-  page.has_content?("inactive")
+  expect(page).to have_content("inactive")
+  click_button "newbomb"
 end
 
 When(/^I input the default activation code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  fill_in "activation_input", :with => "1234"
+  click_button 'submit'
+end
+
+And(/^the bomb is now active$/) do
+  expect(page).to(have_content("active")) && expect(page).not_to(have_content("inactive"))
 end
 
 Then(/^the bomb is active$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^the status informs us that the bomb is active$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to(have_content("active")) && expect(page).not_to(have_content("inactive"))
+  click_button "newbomb"
 end
 
 Given(/^the bomb page is loaded with specified$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit('/newbomb/1444/1111')
 end
 
 When(/^I input the specified activation code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  fill_in "activation_input", :with => "1444"
+  click_button 'submit'
 end
 
 When(/^I input the wrong code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  fill_in "activation_input", :with => "1"
+  click_button 'submit'
 end
 
 Given(/^the bomb page is loaded with non numeric$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit('/newbomb/1aaa/1111')
 end
 
 Then(/^I get an error$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content("error")
 end
 
 When(/^I input the default deactivation code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^the bomb is not activated$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given(/^the bomb page is loaded with specified deactivation$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  fill_in "deactivation_input", :with => "0000"
+  click_button 'submit'
 end
 
 When(/^I input the specified deactivation code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  fill_in "deactivation_input", :with => "1111"
+  click_button 'submit'
 end
 
 When(/^I input an incorrect deactivation code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  fill_in "deactivation_input", :with => "1"
+  click_button 'submit'
 end
 
 Then(/^the number of attempts remaining is (\d+)$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content("Failed deactivations: #{3 - arg1.to_i} of 3")
+  click_button "newbomb"
 end
 
 Then(/^the bomb explodes$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content("exploded")
 end

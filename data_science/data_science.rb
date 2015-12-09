@@ -1,4 +1,5 @@
 require 'json'
+require 'abanalyzer'
 
 class Optimizer
   attr_accessor :data
@@ -13,6 +14,22 @@ class Optimizer
         :conversions => @data[cohort][:successes]}
     end
     result
+  end
+
+  def conversion_rates
+    counts = simple_counts()
+    result = {}
+    [:A, :B].each do |cohort|
+      result[cohort] = ABAnalyzer.confidence_interval(
+        counts[cohort][:conversions], counts[cohort][:sample_size], 0.95)
+    end
+    puts result
+    result
+  end
+
+  def result_confidence
+    tester = ABAnalyzer::ABTest.new @data
+    tester.chisquare_p
   end
 end
 

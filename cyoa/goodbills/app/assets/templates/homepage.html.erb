@@ -1,1 +1,19 @@
-homepage template! {{test}}
+homepage template! 
+test
+<ul ng-repeat="bill in bills">
+<li>Official Title: {{bill.official_title}}</li>
+<li>vote up</li>
+</ul>
+<button type="button" 
+  id="previousPage"
+  class="btn btn-default" 
+  ng-click="changePage(page - 1)"
+  ng-if="page > 1">
+  Previous Page
+</button>
+<button type="button" 
+  id="nextPage"
+  class="btn btn-default" 
+  ng-click="changePage(page + 1)">
+  Next Page
+</button>

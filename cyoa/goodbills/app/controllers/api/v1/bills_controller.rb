@@ -1,6 +1,6 @@
 class Api::V1::BillsController < ApplicationController
   def index
-    @bills = Bill.order("id ASC").first(10)
+    @bills = Bill.order("id ASC").paginate(:page => params[:page] || 1, :per_page => 10)
     render json: @bills
   end
 

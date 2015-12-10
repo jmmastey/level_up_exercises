@@ -9,7 +9,7 @@ class Robot
     @name_generator = args[:name_generator]
     @name = make_name
 
-    check_name  
+    check_name
   end
 
   def check_name
@@ -28,7 +28,7 @@ class Robot
     if @name_generator
       @name = @name_generator.call
     else
-     @name = generate_name
+      @name = generate_name
     end
   end
 

@@ -3,6 +3,10 @@ class Api::V1::BillsController < ApplicationController
     @bills = Bill.order("id ASC").first(10)
   end
 
+  def show
+    @bill = Bill.find(params[:id])
+  end
+
   def update
     Bill.find(params[:id]).tap { |bill|
       bill.update_score(bill_update_params[:vote])

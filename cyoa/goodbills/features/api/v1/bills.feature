@@ -13,3 +13,8 @@ Feature: GoodBills API
     When I vote that I like one
     And I ask for bills from the API
     Then my vote should be counted
+
+  Scenario: Get a single bill
+    Given some bills
+    When I ask for a bill from the API
+    Then I should receive only that bill, with all information

@@ -24,3 +24,14 @@ Then(/^my vote should be counted$/) do
   expect(bills_json.length).to eq(10)
   expect(bills_json[0]["score"]).to eq("251.0")
 end
+
+When(/^I ask for a bill from the API$/) do
+  header 'Accept', 'application/json'
+  get '/api/v1/bills/2'
+end
+
+Then(/^I should receive only that bill, with all information$/) do
+  bill_json = JSON last_response.body
+  expect(bill_json["id"]).to eq(2)
+  expect(bill_json["score"]).to eq("250.0")
+end

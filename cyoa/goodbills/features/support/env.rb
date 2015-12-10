@@ -67,8 +67,9 @@ After do |scenario|
 end
 
 # Register Chrome as the default driver
-Capybara.register_driver :chrome do |app|
+Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
 
 Capybara.javascript_driver = :chrome
+Capybara.default_driver = :selenium

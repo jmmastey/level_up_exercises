@@ -12,5 +12,6 @@ end
 Then(/^I should receive them with voting information$/) do
   bills_json = JSON last_response.body
   puts bills_json
-  expect(bills_json).to be
+  expect(bills_json.length).to eq(10)
+  expect(bills_json[0]["official_title"]).to eq("title-1")
 end

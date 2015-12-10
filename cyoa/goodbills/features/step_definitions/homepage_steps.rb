@@ -11,6 +11,18 @@ Then(/^I should see some bills$/) do
   @content = page.html
 end
 
+Then(/^I should see a next page button$/) do
+  expect(page).to have_content("Next Page")
+end
+
+Then(/^I should not see a previous page button$/) do
+  expect(page).not_to have_content("Previous Page")
+end
+
+Then(/^I should see a previous page button$/) do
+  expect(page).to have_content("Previous Page")
+end
+
 When(/^I click the next page button$/) do
   click_button('Next Page')
 end

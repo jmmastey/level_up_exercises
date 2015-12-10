@@ -7,7 +7,8 @@ Given(/^I am on the home page$/) do
 end
 
 Then(/^I should see some bills$/) do
-  expect(page).to have_content("title-1")
+  expect(page).to have_content("title-")
+  @content = page.html
 end
 
 When(/^I click the next page button$/) do
@@ -15,7 +16,8 @@ When(/^I click the next page button$/) do
 end
 
 Then(/^I should see different bills$/) do
-  expect(page).not_to have_content("title-1")
+  expect(page.html).not_to eq(@content)
+  expect(page).to have_content("Current Page: 2")
 end
 
 Then(/^bills should include voting results$/) do

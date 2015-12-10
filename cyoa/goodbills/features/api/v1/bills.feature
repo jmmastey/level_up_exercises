@@ -7,3 +7,9 @@ Feature: GoodBills API
     Given some bills
     When I ask for bills from the API
     Then I should receive them with voting information
+
+  Scenario: Vote on a bill
+    Given some bills
+    When I vote that I like one
+    And I ask for bills from the API
+    Then my vote should be counted

@@ -33,5 +33,5 @@ Then(/^I should see different bills$/) do
 end
 
 Then(/^bills should include voting results$/) do
-  expect(page).to have_content("vote up")
+  expect(page).to have_content("score")
 end

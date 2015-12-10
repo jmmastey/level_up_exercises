@@ -1,8 +1,8 @@
-homepage template! 
-test
+Good Bill Hunting
 <ul ng-repeat="bill in bills">
 <li>Official Title: {{bill.official_title}}</li>
-<li>vote up</li>
+<li>Score: {{bill.score}}</li>
+<li><a href="#/bills/{{bill.id}}">Bill Detail</a></li>
 </ul>
 <button type="button" 
   id="previousPage"

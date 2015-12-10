@@ -1,1 +1,17 @@
-single bill detail page
+Details for Bill: {{bill.official_title}}<br/>
+Summary: {{bill.summary}}<br/>
+Score: {{bill.score}}<br/>
+Number of Votes: {{bill.num_voted}}<br/>
+Vote: 
+<button type="button" 
+  id="dislike"
+  class="btn btn-default" 
+  ng-click="vote('dislike')">
+  Dislike
+</button>
+<button type="button" 
+  id="like"
+  class="btn btn-default" 
+  ng-click="vote('like')">
+  Like
+</button>

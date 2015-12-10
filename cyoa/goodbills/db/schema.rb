@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210184033) do
+ActiveRecord::Schema.define(version: 20151210225802) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "official_title"
@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20151210184033) do
     t.date     "last_version_on"
     t.string   "congress_url"
     t.boolean  "enacted"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.decimal  "score"
-    t.decimal  "num_voted"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "score",           default: 0
+    t.integer  "num_voted",       default: 0
   end
 
   add_index "bills", ["num_voted"], name: "index_bills_on_num_voted"

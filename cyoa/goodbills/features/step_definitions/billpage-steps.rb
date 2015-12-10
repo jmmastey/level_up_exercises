@@ -1,13 +1,13 @@
 When(/^I click an individual bill link$/) do
-  click_link("Bill Detail")
+ first(:link, "Bill Detail").click
 end
 
-When(/^I am on the home page$/) do
+When(/^I am on the homepage$/) do
   visit('/')  
 end
 
 Then(/^I should be on the individual bill page$/) do
-  expect(current_path.include? 'bills').to be(true)
+  expect(current_url.include? 'bills').to be(true)
 end
 
 Then(/^there should be information about the bill$/) do

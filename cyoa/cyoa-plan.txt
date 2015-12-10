@@ -1,0 +1,25 @@
+Going to make the rails app on a branch of the level_up_exercises project, rooted in the cyoa folder
+
+High level business requirements:
+
+  Grab each bill that congress passes.
+  Store bill data in a local db.
+  Pull new bill data on a schedule.
+  Display last N bills on the homepage.
+  Allow users to log in with facebook and github.
+  Allow users to vote on whether or not a bill represents a good deed. (positive or negative feedback)
+  Allow users to tweet about a bill.
+  Republish bill data as a JSON feed with voting results included.
+
+Test plan:
+  Attributes: Fast, Simple, Persistent
+  Components: Main bill page, individual bill view, voting system, API in, API out
+  Capabilities:
+    Main bill page: view and paginate bills, show voting results at a glance
+    Individual bill: view details about the bill, allow voting via click, 
+      show voting results details
+    Voting system: Allow voting once per user, allow vote change (?!),
+      votes saved in DB, indices on vote table columns allow quick tallying
+    API in: grab all bill data from sunshine foundation on a schedule, save it to disk
+    API out: allow authenticated users to vote via API PUT and/or POST, provide bill data with 
+      vote tallies via API GET.

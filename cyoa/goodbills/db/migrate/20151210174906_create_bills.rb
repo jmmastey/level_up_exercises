@@ -14,7 +14,7 @@ class CreateBills < ActiveRecord::Migration
       t.date :introduced_on
       t.date :last_action_at
       t.datetime :last_vote_at
-      t.data :last_version_on
+      t.date :last_version_on
       t.string :congress_url
       t.boolean :enacted
 

@@ -1,3 +1,5 @@
+require 'rspec/expectations'
+
 Given(/^some bills$/) do
   FactoryGirl.create_list :bill, 20
 end
@@ -9,5 +11,6 @@ end
 
 Then(/^I should receive them with voting information$/) do
   bills_json = JSON last_response.body
-  bills_json.should have(10).bill
+  puts bills_json
+  expect(bills_json).to be
 end

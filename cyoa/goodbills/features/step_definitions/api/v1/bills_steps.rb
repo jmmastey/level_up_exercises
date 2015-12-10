@@ -14,4 +14,5 @@ Then(/^I should receive them with voting information$/) do
   puts bills_json
   expect(bills_json.length).to eq(10)
   expect(bills_json[0]["official_title"]).to eq("title-1")
+  expect(bills_json[0]["score"]).to eq("250.0")
 end

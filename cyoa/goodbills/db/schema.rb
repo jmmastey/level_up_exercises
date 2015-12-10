@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210174906) do
+ActiveRecord::Schema.define(version: 20151210184033) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "official_title"
@@ -32,6 +32,11 @@ ActiveRecord::Schema.define(version: 20151210174906) do
     t.boolean  "enacted"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.decimal  "score"
+    t.decimal  "num_voted"
   end
+
+  add_index "bills", ["num_voted"], name: "index_bills_on_num_voted"
+  add_index "bills", ["score"], name: "index_bills_on_score"
 
 end

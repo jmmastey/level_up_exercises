@@ -1,0 +1,11 @@
+@goodbills = angular.module('goodbills',['ngRoute'])
+@goodbills.config(['$routeProvider', ($routeProvider) ->
+  $routeProvider.when('/bills/:billId', {
+    templateUrl: '<%= asset_path("bill.html") %>',
+    controller: "BillCtrl"
+  })
+  $routeProvider.otherwise({
+    templateUrl: '<%= asset_path("homepage.html") %>',
+    controller: "HomepageCtrl"
+  })
+])

@@ -54,7 +54,7 @@ end
 private
 
 def new_bomb(params)
-  raise "need a number for code" unless valid_code?(params[:activation_code]) and 
+  raise "need a number for code" unless valid_code?(params[:activation_code]) &&
                                         valid_code?(params[:deactivation_code])
   Bomb.new(params[:activation_code] || "1234",
            params[:deactivation_code] || "0000")

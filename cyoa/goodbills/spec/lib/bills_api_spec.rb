@@ -20,5 +20,6 @@ describe "BillsAPI" do
     Bill.delete_all  
     BillsAPI.save example_data
     expect(Bill.all[0].bill_id).to eq("hr4236-114")
+    expect(Bill.all[0].congress_url).not_to be_nil
   end
 end

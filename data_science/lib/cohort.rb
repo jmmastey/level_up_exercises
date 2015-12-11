@@ -21,18 +21,19 @@ class Cohort
   end
 
   def conversion_rate(confidence = 0.95)
-    ABAnalyzer.confidence_interval(num_conversions, sample_size, confidence)
+    vals = ABAnalyzer.confidence_interval(num_conversions, sample_size, confidence)
+    vals.map{ |val| val.round(4) }
   end
 
-  def <=>(cohort_to_compare)
-    conversion_rate <=> cohort_to_compare.conversion_rate
-   end
+  def <=>(other)
+    conversion_rate <=> other.conversion_rate
+  end
 
   private
 
   def validate_visits(visits)
     visit_cohort = visits.first.cohort
-    if visits.find { |visit| visit.cohort != visit_cohort }
+    if visits.detect { |visit| visit.cohort != visit_cohort }
       raise "All visits must be from the same cohort"
     end
   end

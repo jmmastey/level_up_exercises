@@ -22,7 +22,7 @@ class Cohort
 
   def conversion_rate(confidence = 0.95)
     vals = ABAnalyzer.confidence_interval(num_conversions, sample_size, confidence)
-    vals.map{ |val| val.round(4) }
+    vals.map { |val| val.round(4) }
   end
 
   def <=>(other)

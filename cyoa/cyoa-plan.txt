@@ -18,7 +18,7 @@ Test plan:
     Main bill page: view and paginate bills, show voting results at a glance
     Individual bill: view details about the bill, allow voting via click, 
       show voting results details
-    Voting system: Allow voting once per user, allow vote change (?!),
+    Voting system: Allow voting once per user (TODO!!), allow vote change (?!),
       votes saved in DB, indices on vote table columns allow quick tallying
     API in: grab all bill data from sunshine foundation on a schedule, save it to disk
     API out: allow authenticated users to vote via API PUT and/or POST, provide bill data with 

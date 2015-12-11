@@ -32,14 +32,14 @@ describe Cohort do
 
   context 'when larger sample size' do
     let(:visits) do
-      ([1] * 4 + [0] * 35).shuffle.map{|v| v == 0 ? a_visit_neg : a_visit_pos}
+      ([1] * 4 + [0] * 35).shuffle.map { |v| v == 0 ? a_visit_neg : a_visit_pos }
     end
     let (:cohort) { Cohort.new(visits) }
 
     describe '#conversion_rate' do
       it 'returns a result with 95% confidence' do
         # Unfortunately this isn't really TDD -- the values below came from
-        # running the gem. Didn't understand how else to do this and get the 
+        # running the gem. Didn't understand how else to do this and get the
         # same values.
         expect(cohort.conversion_rate).to eq([0.0073, 0.1978])
       end

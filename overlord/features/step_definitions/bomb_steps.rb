@@ -4,7 +4,7 @@ require 'capybara'
 
 Capybara.default_driver = :selenium
 Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
 end
 
 Capybara.javascript_driver = :chrome
@@ -12,6 +12,11 @@ Capybara.configure do |config|
   config.run_server = false
   config.app_host = "localhost:4567"
 end
+
+DEFAULT_ACTIVATION_CODE = "1234"
+DEFAULT_DEACTIVATION_CODE = "0000"
+SPECIFIED_ACTIVATION_CODE = "1444"
+SPECIFIED_DEACTIVATION_CODE = "1111"
 
 Given(/^the bomb page is loaded$/) do
   visit('/bomb')
@@ -23,53 +28,55 @@ Then(/^it is not activated$/) do
 end
 
 When(/^I input the default activation code$/) do
-  fill_in "activation_input", :with => "1234"
+  fill_in "activation_input", with: DEFAULT_ACTIVATION_CODE
   click_button 'submit'
 end
 
 And(/^the bomb is now active$/) do
-  expect(page).to(have_content("active")) && expect(page).not_to(have_content("inactive"))
+  expect(page).to(have_content("active"))
+  expect(page).not_to(have_content("inactive"))
 end
 
 Then(/^the bomb is active$/) do
-  expect(page).to(have_content("active")) && expect(page).not_to(have_content("inactive"))
+  expect(page).to(have_content("active"))
+  expect(page).not_to(have_content("inactive"))
   click_button "newbomb"
 end
 
 Given(/^the bomb page is loaded with specified$/) do
-  visit('/newbomb/1444/1111')
+  visit("/newbomb/#{SPECIFIED_ACTIVATION_CODE}/#{SPECIFIED_DEACTIVATION_CODE}")
 end
 
 When(/^I input the specified activation code$/) do
-  fill_in "activation_input", :with => "1444"
+  fill_in "activation_input", with: SPECIFIED_ACTIVATION_CODE
   click_button 'submit'
 end
 
 When(/^I input the wrong code$/) do
-  fill_in "activation_input", :with => "1"
+  fill_in "activation_input", with: "1"
   click_button 'submit'
 end
 
 Given(/^the bomb page is loaded with non numeric$/) do
-  visit('/newbomb/1aaa/1111')
+  visit("/newbomb/1aaa/#{SPECIFIED_DEACTIVATION_CODE}")
 end
 
 Then(/^I get an error$/) do
-  expect(page).to have_content("error")
+  expect(page).to have_content("Error")
 end
 
 When(/^I input the default deactivation code$/) do
-  fill_in "deactivation_input", :with => "0000"
+  fill_in "deactivation_input", with: DEFAULT_DEACTIVATION_CODE
   click_button 'submit'
 end
 
 When(/^I input the specified deactivation code$/) do
-  fill_in "deactivation_input", :with => "1111"
+  fill_in "deactivation_input", with: SPECIFIED_DEACTIVATION_CODE
   click_button 'submit'
 end
 
 When(/^I input an incorrect deactivation code$/) do
-  fill_in "deactivation_input", :with => "1"
+  fill_in "deactivation_input", with: "1"
   click_button 'submit'
 end
 

@@ -42,10 +42,10 @@ post '/newbomb' do
   redirect to('/bomb')
 end
 
-def new_bomb params
-  raise "need a number for code" unless is_number?(params[:activation_code]) and 
-                                        is_number?(params[:deactivation_code])
-  Bomb.new(params[:activation_code] || "1234", 
+def new_bomb(params)
+  raise "need a number for code" unless valid_code?(params[:activation_code]) and 
+                                        valid_code?(params[:deactivation_code])
+  Bomb.new(params[:activation_code] || "1234",
            params[:deactivation_code] || "0000")
 end
 
@@ -58,7 +58,12 @@ def get_bomb(params)
   session[:bomb] || new_bomb(params)
 end
 
-def is_number? string
+def valid_code?(string)
   return true if string.nil? || string == ''
-  true if Integer(string) rescue false
+  begin
+    Integer(string)
+    true
+  rescue
+    false
+  end
 end

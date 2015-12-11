@@ -20,6 +20,11 @@ get '/newbomb/:activation_code/:deactivation_code' do
   redirect to('/bomb')
 end
 
+get '/newbomb' do
+  session[:bomb] = nil
+  redirect to('/bomb')
+end
+
 get '/bomb' do
   @bomb = get_bomb(params)
   set_bomb(@bomb)

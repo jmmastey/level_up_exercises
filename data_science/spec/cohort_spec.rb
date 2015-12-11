@@ -32,7 +32,7 @@ describe Cohort do
 
   context 'when larger sample size' do
     let(:visits) do
-      ([1] * 4 + [0] * 35).shuffle.map { |v| v == 0 ? a_visit_neg : a_visit_pos }
+      ([1] * 4 + [0] * 35).shuffle.map{ |v| v == 0 ? a_visit_neg : a_visit_pos }
     end
     let (:cohort) { Cohort.new(visits) }
 

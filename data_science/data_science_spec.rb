@@ -1,54 +1,8 @@
 require_relative 'data_science'
 
-fake_data = [
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 0},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 0},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 1},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 0},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 0},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 1},
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 0},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 0},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 0},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 1},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 0},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 0},
-  {"cohort": "A", "result": 1}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 1},
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "A", "result": 0}, 
-  {"cohort": "B", "result": 0},
-]
-
-
 describe Optimizer do
   before :each do
-    @optimizer = Optimizer.new fake_data
+    @optimizer = Optimizer.new 'test_data.json'
   end
 
   it "loads data" do

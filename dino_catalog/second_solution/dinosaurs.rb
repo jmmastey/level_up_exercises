@@ -22,5 +22,5 @@ class Dinosaurs
 end
 
 
-collection = Dinosaurs.new
-p collection
+# collection = Dinosaurs.new
+# p collection

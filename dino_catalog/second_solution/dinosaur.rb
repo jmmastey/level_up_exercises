@@ -1,5 +1,5 @@
 class Dinosaur
-  RECOGNIZED_CSV_COLUMN_HEADER_SPECIAL_CASES = ["carnivore"]
+  SPECIAL_CASE_CSV_COLUMN_HEADERS = ["carnivore"]
   RECOGNIZED_CSV_COLUMN_HEADERS = ["name", "genus", "weight", "walking", "period", "diet", "weight_in_lbs", "locomotion"]
 
   attr_reader :name, :weight, :diet, :locomotion, :period, :additional_info
@@ -22,8 +22,8 @@ class Dinosaur
     csv_table_row.each_with_object({}) do |data, arg|
       column_header = data[0]
       cell_data = data[1]
-      if RECOGNIZED_CSV_COLUMN_HEADER_SPECIAL_CASES.include?(column_header)
-        Dinosaur.add_special_case_to_arg(column_header, cell_data, arg)
+      if SPECIAL_CASE_CSV_COLUMN_HEADERS.include?(column_header)
+        Dinosaur.add_special_case_data_to_arg(column_header, cell_data, arg)
       elsif RECOGNIZED_CSV_COLUMN_HEADERS.include?(column_header)
         Dinosaur.add_recognized_data_to_arg(column_header, cell_data, arg)
       else
@@ -37,7 +37,7 @@ class Dinosaur
     arg[:additional_info][column_header] = cell_data
   end
 
-  def self.add_special_case_to_arg(column_header, cell_data, arg)
+  def self.add_special_case_data_to_arg(column_header, cell_data, arg)
     case column_header
     when "carnivore"
       recognized_header = "diet"
@@ -47,10 +47,10 @@ class Dinosaur
   end
 
   def self.special_case_carnivore_data(cell_data)
-    if cell_data == true
-      "carnivore"
-    else
+    if cell_data.downcase == "no"
       "herbivore"
+    else      
+      "carnivore"
     end
   end
 
@@ -72,6 +72,4 @@ class Dinosaur
       :diet
     end
   end
-
-
 end

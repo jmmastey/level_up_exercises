@@ -16,18 +16,27 @@ describe Dinosaur do
 
   let(:african_herbivore_csv_row) { CSV::Row.new ['genus','period','carnivore','weight','walking'], ['Abrictosaurus','Jurassic','No',100,'Biped']}
   let(:african_carnivore_csv_row){ CSV::Row.new ['genus','period','carnivore','weight','walking'], ['Suchomimus','Cretaceous','Yes',10400,'Biped']}
-  let(:dex_csv_row){ CSV::Row.new ['name','period','continent','diet','walking','description'], ['Albertonykus','Early Cretaceous','North America','Insectivore','Biped','Earliest known Alvarezsaurid.']}
-  let(:dex2_csv_row){ CSV::Row.new ['name','period','continent','diet','weight_in_lbs','walking','description'],['Albertosaurus','Late Cretaceous','North America','Carnivore',2000,'Biped','Like a T-Rex but smaller.']}
+  let(:dex_insectivore_csv_row){ CSV::Row.new ['name','period','continent','diet','walking','description'], ['Albertonykus','Early Cretaceous','North America','Insectivore','Biped','Earliest known Alvarezsaurid.']}
+  let(:dex_carnivore_csv_row){ CSV::Row.new ['name','period','continent','diet','weight_in_lbs','walking','description'],['Albertosaurus','Late Cretaceous','North America','Carnivore',2000,'Biped','Like a T-Rex but smaller.']}
+  let(:dex_piscivore_csv_row){CSV::Row.new ['name','period','continent','diet','weight_in_lbs','walking','description'], ["Baryonyx", "Early Cretaceous","Europe","Piscivore",6000,"Biped","One of the only known dinosaurs with a fish-only diet."]}
+  let(:dex_herbivore_csv_row){CSV::Row.new ['name','period','continent','diet','walking','description'], ["Dracopelta","Early Cretaceous or Late Jurassic","South America","Herbivore","Quadruped","One of the most primitive known Ankylosauria"]}
 
-  let(:african_herbivore_dino) {Dinosaur.from_csv_row(african_herbivore_csv_row)}
-  let(:african_carnivore_dino) {Dinosaur.from_csv_row(african_carnivore_csv_row)}
-  let(:dex_dino) {Dinosaur.from_csv_row(dex_csv_row)}
-  let(:dex2_dino) {Dinosaur.from_csv_row(dex2_csv_row)}
 
   let(:african_herbivore_args) {Dinosaur.construct_args_from_csv(african_herbivore_csv_row)}
   let(:african_carnivore_args) {Dinosaur.construct_args_from_csv(african_carnivore_csv_row)}
-  let(:dex_args) {Dinosaur.construct_args_from_csv(dex_csv_row)}
-  let(:dex2_args) {Dinosaur.construct_args_from_csv(dex2_csv_row)}
+  let(:dex_insectivore_args) {Dinosaur.construct_args_from_csv(dex_insectivore_csv_row)}
+  let(:dex_carnivore_args) {Dinosaur.construct_args_from_csv(dex_carnivore_csv_row)}
+  let(:dex_piscivore_args) {Dinosaur.construct_args_from_csv(dex_piscivore_csv_row)}
+  let(:dex_herbivore_args) {Dinosaur.construct_args_from_csv(dex_herbivore_csv_row)}
+
+
+  let(:african_herbivore_dino) {Dinosaur.from_csv_row(african_herbivore_csv_row)}
+  let(:african_carnivore_dino) {Dinosaur.from_csv_row(african_carnivore_csv_row)}
+  let(:dex_insectivore_dino) {Dinosaur.from_csv_row(dex_insectivore_csv_row)}
+  let(:dex_carnivore_dino) {Dinosaur.from_csv_row(dex_carnivore_csv_row)}
+  let(:dex_piscivore_dino) {Dinosaur.from_csv_row(dex_piscivore_csv_row)}
+  let(:dex_herbivore_dino) {Dinosaur.from_csv_row(dex_herbivore_csv_row)}
+
 
   describe "#initialize and accesors" do
     it "creates a dinosaur object" do
@@ -55,30 +64,122 @@ describe Dinosaur do
     end
   end
 
+  describe "#big?" do
+    it "responds true if weight is >= 4000" do
+      expect(african_carnivore_dino.big?).to be true
+    end
+    it "responds false if weight is < 4000" do
+      expect(dex_carnivore_dino.big?).to be false
+    end
+  end
+
+  describe "#carnivore?" do
+    it "responds true if diet is 'carnivore'" do
+      expect(dex_carnivore_dino.carnivore?).to be true
+    end
+    it "responds true if diet is 'insectivore'" do
+      expect(dex_insectivore_dino.carnivore?).to be true
+    end
+    it "responds true if diet is 'piscivore'" do
+      expect(dex_piscivore_dino.carnivore?).to be true
+    end
+    it "responds false if diet is 'herbivore'" do
+      expect(dex_herbivore_dino.carnivore?).to be false
+    end
+  end
+
+  describe "#biped?" do
+    it "responds true if locomotion is =='biped'" do
+      expect(dex_piscivore_dino.biped?).to be true
+    end
+    it "responds false if locomotion is !='biped'" do
+      expect(dex_herbivore_dino.biped?).to be false
+    end
+  end
+
+  describe "#from?(age)" do
+    it "responds true if passed age == model.period" do
+      expect(dex_carnivore_dino.from?("Cretaceous")).to be true
+    end
+    it "responds true if passed age != model.period" do
+      expect(dex_carnivore_dino.from?("Jurassic")).to be false
+    end
+  end
+
+  describe "#attribute_value?(attribute, value)" do
+    it "responds true if model.attribute == value" do
+      expect(african_herbivore_dino.attribute_value?("name", "Abrictosaurus")).to be true
+    end
+    it "responds false if model.attribute != value" do
+      expect(african_herbivore_dino.attribute_value?("name", "Bob")).to be false
+    end
+    it "responds false if model.attribute unassigned" do
+      expect(dex_insectivore_dino.attribute_value?("weight", 100)).to be false
+    end
+  end
+
+  describe "#additional_info_value?(additional_info_catagory, additional_info_value)" do
+    it "responds true if the additional_info attribute has k-v matching passed vars" do
+      expect(dex_herbivore_dino.additional_info_value?("continent", "South America")).to be true
+    end
+    it "responds false if the additional_info doesn't have matching value" do
+      expect(dex_herbivore_dino.additional_info_value?("continent", "Europe")).to be false
+    end
+    it "responds false if the additional_info doesn't have matching value" do
+      expect(dex_herbivore_dino.additional_info_value?("time", "now")).to be false
+    end
+    it "responds false if it doesn't have an additional_info attribute" do
+      expect(african_herbivore_dino.additional_info_value?("continent", "Europe")).to be false
+    end
+  end
+
+  describe "#to_h" do
+    it "produces a hash" do
+      expect(african_herbivore_dino.to_h).to be_an_instance_of Hash
+    end
+    it "has all the model's attributes" do
+      expect(african_herbivore_dino.to_h["name"]).to eq("Abrictosaurus")
+      expect(african_herbivore_dino.to_h["weight"]).to eq(100)
+      expect(african_herbivore_dino.to_h["diet"]).to eq("herbivore")
+      expect(african_herbivore_dino.to_h["period"]).to eq("Jurassic")
+      expect(african_herbivore_dino.to_h["locomotion"]).to eq("Biped")
+    end
+  end
+
+  describe "#to_s" do
+    it "should output a formated string with the models data" do
+      expect(african_carnivore_dino.to_s).to eq("name: Suchomimus, weight: 10400, diet: carnivore, locomotion: Biped, period: Cretaceous\n\n")
+    end
+  end
+
+
+
+############  class method tests  ###################
+
   describe ".from_csv_row" do
     it "returns a fully populated dinosaur obj" do
       expect(african_herbivore_dino).to be_an_instance_of Dinosaur
-      expect(dex_dino).to be_an_instance_of Dinosaur
+      expect(dex_insectivore_dino).to be_an_instance_of Dinosaur
       expect(african_herbivore_dino.name).to eq("Abrictosaurus")
       expect(african_herbivore_dino.weight).to eq(100)
-      expect(dex2_dino.weight).to eq(2000)
+      expect(dex_carnivore_dino.weight).to eq(2000)
       expect(african_herbivore_dino.diet).to eq("herbivore")
       expect(african_carnivore_dino.diet).to eq("carnivore")      
       expect(african_herbivore_dino.locomotion).to eq("Biped")
       expect(african_herbivore_dino.period).to eq("Jurassic")
-      expect(dex_dino.additional_info).to eq({"continent"=>"North America", "description"=>"Earliest known Alvarezsaurid."})
+      expect(dex_insectivore_dino.additional_info).to eq({"continent"=>"North America", "description"=>"Earliest known Alvarezsaurid."})
     end
   end
 
   describe ".construct_args_from_csv" do
     it "returns an arguments hash" do      
       expect(african_herbivore_args).to be_an_instance_of Hash
-      expect(dex_args).to be_an_instance_of Hash
+      expect(dex_insectivore_args).to be_an_instance_of Hash
     end
     it "processes RECOGNIZED_CSV_COLUMN_HEADERS" do
       expect(african_herbivore_args[:name]).to eq("Abrictosaurus")
       expect(african_herbivore_args[:weight]).to eq(100)
-      expect(dex2_args[:weight]).to eq(2000)
+      expect(dex_carnivore_args[:weight]).to eq(2000)
       expect(african_herbivore_args[:locomotion]).to eq("Biped")
       expect(african_herbivore_args[:period]).to eq("Jurassic")
     end
@@ -87,7 +188,7 @@ describe Dinosaur do
       expect(african_carnivore_args[:diet]).to eq("carnivore") 
     end
     it "processes unrecognized column headers" do
-      expect(dex_args[:additional_info]).to eq({"continent"=>"North America", "description"=>"Earliest known Alvarezsaurid."})    
+      expect(dex_insectivore_args[:additional_info]).to eq({"continent"=>"North America", "description"=>"Earliest known Alvarezsaurid."})    
     end
   end
 

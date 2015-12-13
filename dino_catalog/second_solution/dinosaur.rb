@@ -12,6 +12,52 @@ class Dinosaur
     @additional_info  =   args[:additional_info]
   end
 
+  def big?
+    weight && weight >= 4000
+  end
+
+  def carnivore?
+    diet && ["piscivore", "carnivore", "insectivore"].include?(diet.downcase)
+  end
+
+  def biped?
+    locomotion && locomotion.downcase == "biped"
+  end
+
+  def from?(age)
+    period && period.downcase.include?(age.downcase)
+  end
+
+  def attribute_value?(attribute, value)
+    self.send(attribute) != nil && self.send(attribute).downcase == value.downcase
+  end
+
+  def additional_info_value?(additional_info_catagory, additional_info_value)
+    self.additional_info != nil && self.additional_info.has_key?(additional_info_catagory) && self.additional_info[additional_info_catagory].include?(additional_info_value)
+  end
+
+  def to_s
+    self.instance_variables.each_with_object([]) do |attribute, output|
+      next if !self.instance_variable_get(attribute)
+      if attribute == :@additional_info 
+        additional_info.each do |k, v|
+          if v
+            output << "#{k}: #{v}"
+          end
+        end
+      else
+        output << "#{attribute.to_s[1..-1]}: #{self.instance_variable_get(attribute)}"
+      end
+    end.compact.join(", ") + "\n\n"
+  end
+
+  def to_h
+    self.instance_variables.each_with_object({}) do |attribute, output|
+      next if !self.instance_variable_get(attribute)
+      output[attribute.to_s[1..-1]] = self.instance_variable_get(attribute)
+    end
+  end
+
 ########  class methods  ########
 
   def self.from_csv_row(csv_row)

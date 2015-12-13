@@ -37,21 +37,21 @@ class DinoSaur
   end
 
   def to_s
-    rtn = []
-    self.instance_variables.each do |attribute|
+    self.instance_variables.each_with_object([]) do |attribute, output|
       next if !self.instance_variable_get(attribute)
       if attribute == :@additional_info 
         additional_info.each do |k, v|
           if v
-            rtn << "#{k}: #{v}"
+            output << "#{k}: #{v}"
           end
         end
       else
-        rtn << "#{attribute.to_s[1..-1]}: #{self.instance_variable_get(attribute)}"
+        output << "#{attribute.to_s[1..-1]}: #{self.instance_variable_get(attribute)}"
       end
-    end
-    rtn.compact.join(", ") + "\n\n"
+    end.compact.join(", ") + "\n\n"
   end
+
+  
 
   ###  class methods  ####
 
@@ -132,12 +132,10 @@ class DinoSaur
   end
 
   def self.hash_dino(dino_instance)
-    dino_hash = {}
-    dino_instance.instance_variables.each do |attribute|
+    dino_instance.instance_variables.each_with_object({}) do |attribute, hash|
       next if !dino_instance.instance_variable_get(attribute)
-      dino_hash[attribute.to_s[1..-1]] = dino_instance.instance_variable_get(attribute)
+      hash[attribute.to_s[1..-1]] = dino_instance.instance_variable_get(attribute)
     end
-    dino_hash
   end
 
 end

@@ -1,0 +1,1 @@
+require_relative "../dino_command_line_interface"

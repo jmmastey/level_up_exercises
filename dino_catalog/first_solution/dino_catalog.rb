@@ -12,7 +12,7 @@ class DinoCatalog
   def build_collection
     rtn = []
 
-    Dir['./dino_fact_csvs/*'].each do |csv_file_path|
+    Dir['../dino_fact_csvs/*'].each do |csv_file_path|
       CSV.foreach(csv_file_path, 
                   converters: :numeric, 
                   headers: true,

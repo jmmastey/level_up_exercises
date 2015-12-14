@@ -21,20 +21,15 @@ class DataScience
   end
 
   def sample_size
-    results = {}
-    results["Total"] = @data.length
-    COHORTS.each do |cohort|
+    COHORTS.each_with_object("Total" => @data.length) do |cohort, results|
       results[cohort] = count("cohort" => cohort)
     end
-    results
   end
 
   def conversions
-    results = {}
-    COHORTS.each do |cohort|
+    COHORTS.each_with_object({}) do |cohort, results|
       results[cohort] = count("cohort" => cohort, "result" => 1)
     end
-    results
   end
 
   def confidence

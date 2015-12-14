@@ -1,5 +1,4 @@
 class Bill < ActiveRecord::Base
-
   def update_score(vote)
     self.score += 1 if vote == "like"
     self.score -= 1 if vote == "dislike"

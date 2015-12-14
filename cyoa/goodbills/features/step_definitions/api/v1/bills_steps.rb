@@ -16,7 +16,7 @@ end
 
 When(/^I vote that I like one$/) do
   header 'Accept', 'application/json'
-  put '/api/v1/bills/1', bill: { vote: "like" } 
+  put '/api/v1/bills/1', bill: { vote: "like" }
 end
 
 Then(/^my vote should be counted$/) do

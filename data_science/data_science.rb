@@ -10,18 +10,22 @@ class Optimizer
   end
 
   def simple_counts
-    [:A, :B].each_with_object({}) do |cohort, result|
-      result[cohort] = { sample_size: @data[cohort].values.inject(:+),
-                         conversions: @data[cohort][:successes] }
-    end
+    { A: simple_count_for(:A), B: simple_count_for(:B) }
+  end
+
+  def simple_count_for(cohort)
+    data = @data[cohort]
+    { sample_size: data.values.inject(:+), conversions: data[:successes] }
   end
 
   def conversion_rates
-    counts = simple_counts
-    [:A, :B].each_with_object({}) do |cohort, result|
-      result[cohort] = ABAnalyzer.confidence_interval(
-        counts[cohort][:conversions], counts[cohort][:sample_size], 0.95)
-    end
+    { A: conversion_rate_for(:A), B: conversion_rate_for(:B) }
+  end
+
+  def conversion_rate_for(cohort)
+    counts = simple_count_for(cohort)
+    ABAnalyzer.confidence_interval(
+      counts[:conversions], counts[:sample_size], 0.95)
   end
 
   def result_confidence
@@ -32,3 +36,5 @@ end
 
 optimizer = Optimizer.new("data_export_2014_06_20_15_59_02.json")
 puts optimizer.result_confidence
+puts optimizer.conversion_rates
+puts optimizer.simple_counts

@@ -1,0 +1,11 @@
+= render partial: "search_form", location: @location
+
+- if @location.present?
+  .page-header
+    %h1
+      Search Merchants
+      %small
+        in
+        = @location
+
+  = render partial: "merchants/list", merchants: @merchants

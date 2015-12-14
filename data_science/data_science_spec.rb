@@ -8,6 +8,13 @@ RSpec.describe DataScience do
     DataScience.new(data)
   end
 
+  let(:actual_confidence) { data_science.confidence }
+
+  let(:actual_chisquare) do
+    actual = data_science.chi_square
+    actual.map! { |f| f.round(3) }
+  end
+
   describe "#significant?" do
     it "should calculate a small sample and return false" do
       expect(data_science).not_to be_significant
@@ -45,20 +52,16 @@ RSpec.describe DataScience do
 
   describe "#confidence" do
     it "should return a 95% confidence range for success rates" do
-      actual = data_science.confidence
-      expect(actual["A"][0].round(3)).to be == 0.067
-      expect(actual["A"][1].round(3)).to be == 0.333
-      expect(actual["B"][0].round(3)).to be == 0.238
-      expect(actual["B"][1].round(3)).to be == 0.562
+      expect(actual_confidence["A"][0].round(3)).to be == 0.067
+      expect(actual_confidence["A"][1].round(3)).to be == 0.333
+      expect(actual_confidence["B"][0].round(3)).to be == 0.238
+      expect(actual_confidence["B"][1].round(3)).to be == 0.562
     end
   end
 
   describe "#chi_square" do
     it "return the score and p values of the chi-square test" do
-      expected = [3.333, 0.068]
-      actual = data_science.chi_square
-      actual.map! { |f| f.round(3) }
-      expect(actual).to be == expected
+      expect(actual_chisquare).to be == [3.333, 0.068]
     end
   end
 end

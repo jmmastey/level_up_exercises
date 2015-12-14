@@ -11,7 +11,7 @@ describe Optimizer do
       expect(@optimizer.simple_counts[:B][:sample_size]).to eq(14)
     end
 
-    it "counds number of conversions per cohort" do
+    it "counts number of conversions per cohort" do
       expect(@optimizer.simple_counts[:A][:conversions]).to eq(12)
     end
   end

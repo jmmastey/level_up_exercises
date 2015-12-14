@@ -11,8 +11,8 @@ class Optimizer
 
   def simple_counts
     [:A, :B].each_with_object({}) do |cohort, result|
-      result[cohort] = { :sample_size => @data[cohort].values.inject(:+),
-                        :conversions => @data[cohort][:successes] }
+      result[cohort] = { sample_size: @data[cohort].values.inject(:+),
+                         conversions: @data[cohort][:successes] }
     end
   end
 

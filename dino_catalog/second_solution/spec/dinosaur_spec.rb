@@ -101,7 +101,10 @@ describe Dinosaur do
     it "responds true if passed age == model.period" do
       expect(dex_carnivore_dino.from?("Cretaceous")).to be true
     end
-    it "responds true if passed age != model.period" do
+    it "responds true even if model.period includes additional words" do
+      expect(dex_insectivore_dino.from?("Cretaceous")).to be true
+    end
+    it "responds false if passed age != model.period" do
       expect(dex_carnivore_dino.from?("Jurassic")).to be false
     end
   end

@@ -24,13 +24,13 @@ class Dinosaurs
     Dinosaurs.new( collection.select{|d| d.from?(period)} )
   end
 
-  # def search(terms)
-  #   collection = Dinosaurs.new(@dinosaurs)
-  #   terms.each do |katagory, value|
-  #     collection = collection.filter_by(katagory.downcase, value)
-  #   end
-  #   collection
-  # end
+  def search(terms)
+    dino_collection = Dinosaurs.new(self.collection)
+    terms.each do |katagory, value|
+      dino_collection = dino_collection.filter_by(katagory.downcase, value)
+    end
+    dino_collection
+  end
 
   def filter_by(category, value)
     if Dinosaur::SPECIAL_CASE_CSV_COLUMN_HEADERS.include?(category)

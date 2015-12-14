@@ -27,21 +27,7 @@ class DinoRunner
       when "-p", "period"
         dino_catalog.dinosaurs_from(command[1]).display
       when "-f", "filter"
-        #collection = dino_catalog.dino_collection        
-
-        # command[1..-1].map(&:downcase).each do |filter_criteria|          
-        #   if filter_criteria.include?("-c") || filter_criteria.include?("carnivorus")
-        #     collection = dino_catalog.carnivorus_dinosaurs(collection)
-        #   end
-        #   if filter_criteria.include?("-b") || filter_criteria.include?("big")
-        #     collection = dino_catalog.big_dinosaurs(collection)
-        #   end
-        #   if filter_criteria.include?("-2") || filter_criteria.include?("biped")
-        #     collection = dino_catalog.biped_dinosaurs(collection)
-        #   end
-        # end
-        # display_collection(collection)
-
+        filter_catalog(command[1..-1]).display
       when "-s", "search"
         search_terms = parse_search_terms(command[1..-1])
         dino_catalog.search(search_terms).display
@@ -49,6 +35,29 @@ class DinoRunner
       print "Dino Request: "
       command = gets.chomp.split(" ")
     end
+  end
+
+  def filter_catalog(filter_terms)
+    # so two ideas are going on here: one, the object being handed 
+    #wtf, why is this not working.  if I am assigning it to a var why no work?!?
+    dinosaurs = Dinosaurs.new(dino_catalog)
+    # p filter_terms
+    filter_terms.each do |term|
+      case term      
+      when "-b", "big"
+        # p dinosaurs.class 
+        # dinosaurs.big_dinosaurs
+        
+        dinosaurs = dinosaurs.big_dinosaurs
+      when "-c", "carnivorus"
+         # dinosaurs.carnivorus_dinosaurs
+        dinosaurs = dinosaurs.carnivorus_dinosaurs
+      when "-2", "biped"
+         # dinosaurs.biped_dinosaurs
+        dinosaurs = dinosaurs.biped_dinosaurs
+      end
+    end
+    dinosaurs
   end
 
   def parse_search_terms(search_terms)

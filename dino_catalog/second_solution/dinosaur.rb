@@ -33,7 +33,7 @@ class Dinosaur
   end
 
   def additional_info_value?(additional_info_catagory, additional_info_value)
-    self.additional_info != nil && self.additional_info.has_key?(additional_info_catagory) && self.additional_info[additional_info_catagory].include?(additional_info_value)
+    self.additional_info != nil && self.additional_info.has_key?(additional_info_catagory) && self.additional_info[additional_info_catagory] !=nil && self.additional_info[additional_info_catagory].include?(additional_info_value)
   end
 
   def to_s
@@ -102,6 +102,13 @@ class Dinosaur
 
   def self.add_recognized_data_to_arg(column_header, cell_data, arg)
     arg[Dinosaur.attribute_from_recognized_csv_header(column_header)] = cell_data
+  end
+
+  def self.attribute_from_special_case_csv_header(column_header)
+    case column_header
+    when "carnivore"
+      :diet
+    end
   end
 
   def self.attribute_from_recognized_csv_header(column_header)

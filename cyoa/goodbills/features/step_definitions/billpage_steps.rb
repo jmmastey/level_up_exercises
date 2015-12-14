@@ -1,9 +1,9 @@
 When(/^I click an individual bill link$/) do
- first(:link, "Bill Detail").click
+  first(:link, "Bill Detail").click
 end
 
 When(/^I am on the homepage$/) do
-  visit('/')  
+  visit('/')
 end
 
 Then(/^I should be on the individual bill page$/) do

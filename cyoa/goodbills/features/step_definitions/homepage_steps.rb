@@ -3,7 +3,7 @@ Given(/^some more bills$/) do
 end
 
 Given(/^I am on the home page$/) do
-  visit('/')  
+  visit('/')
 end
 
 Then(/^I should see some bills$/) do

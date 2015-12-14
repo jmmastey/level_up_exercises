@@ -6,5 +6,5 @@ app = DataScience.new(data)
 puts app.sample_size
 puts app.conversions
 puts app.confidence
-puts app.significance?
+puts app.significant?
 puts "#{app.chi_square}"

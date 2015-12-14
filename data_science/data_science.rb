@@ -3,26 +3,27 @@ require "abanalyzer"
 class DataScience
   attr_accessor :data
 
+  COHORTS = %w(A B)
+
   def initialize(data)
     @data = data
     @analyzer = ABAnalyzer::ABTest.new(build_values)
   end
 
-  def significance?
+  def significant?
     @analyzer.different?
   end
 
   def count(hash)
-    results = @data.select do |obj|
+    @data.count do |obj|
       hash.all? { |k, v| obj[k] == v }
     end
-    results.length
   end
 
   def sample_size
     results = {}
     results["Total"] = @data.length
-    %w(A B).each do |cohort|
+    COHORTS.each do |cohort|
       results[cohort] = count("cohort" => cohort)
     end
     results
@@ -30,20 +31,18 @@ class DataScience
 
   def conversions
     results = {}
-    %w(A B).each do |cohort|
+    COHORTS.each do |cohort|
       results[cohort] = count("cohort" => cohort, "result" => 1)
     end
     results
   end
 
   def confidence
-    results = {}
-    %w(A B).each do |cohort|
+    COHORTS.each_with_object({}) do |cohort, results|
       success  = count("cohort" => cohort, "result" => 1)
       trials = count("cohort" => cohort)
       results[cohort] = ABAnalyzer.confidence_interval(success, trials, 0.95)
     end
-    results
   end
 
   def chi_square
@@ -53,11 +52,11 @@ class DataScience
   private
 
   def build_values
-    values = {}
-    values[:agroup] = { success: count("cohort" => "A", "result" => 1),
-                        failure: count("cohort" => "A", "result" => 0) }
-    values[:bgroup] = { success: count("cohort" => "B", "result" => 1),
-                        failure: count("cohort" => "B", "result" => 0) }
-    values
+    { agroup: build_values_for("A"), bgroup: build_values_for("B") }
+  end
+
+  def build_values_for(cohort)
+    { success: count("cohort" => cohort, "result" => 1),
+      failure: count("cohort" => cohort, "result" => 0) }
   end
 end

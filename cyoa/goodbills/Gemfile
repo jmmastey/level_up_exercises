@@ -23,6 +23,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bower-rails'
 gem 'will_paginate'
 gem 'congress'
+gem 'devise'
+gem 'omniauth-github'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

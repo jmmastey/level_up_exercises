@@ -9,11 +9,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<nav class="navbar navbar-inverse">
   <div class="container">
-
-    <span class="notice"><%= notice %></span>
-    <span class="alert"><%= alert %></span>
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">Good Bill Hunting</a>
+      <% if current_user %>
+        <span class="navbar-text">Logged in as: <%= current_user.email %></span>
+        <span class="navbar-text"><%= link_to "Sign out", destroy_user_session_path %></span>
+      <% else %>
+        <span class="navbar-text">
+          <%= link_to "Sign in with Github", user_omniauth_authorize_path(:github) %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+</nav>
+  <div class="container">
+  <p>
+    <div class="flash_messages">
+      <span class="notice"><%= notice %></span>
+      <span class="alert"><%= alert %></span>
+    </div>
+    </p>
     <%= yield %> 
   </div>
 

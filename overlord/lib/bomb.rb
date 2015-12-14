@@ -1,4 +1,5 @@
 require_relative "wire_bundle"
+require 'oj'
 
 class Bomb
   attr_accessor :timer, :wires
@@ -41,6 +42,10 @@ class Bomb
     check_wires
     check_timer
     @state
+  end
+
+  def to_json
+    Oj.dump(self)
   end
 
   private

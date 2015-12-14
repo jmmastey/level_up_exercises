@@ -1,0 +1,1 @@
+json.score @bill.score

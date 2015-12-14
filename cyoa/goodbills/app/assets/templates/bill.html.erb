@@ -1,0 +1,27 @@
+<div class="row">
+  <b>Title: </b>{{bill.official_title}}
+</div>
+<div class="row" ng-if="bill.summary">Summary: {{bill.summary}}</div>
+<div class="row">
+<b>Score:</b> {{bill.score}}
+</div>
+<div class="row">
+<b>Number of Votes:</b> {{bill.num_voted}}
+</div>
+<div class="row">
+Vote: 
+</div>
+<div class="row">
+<button type="button" 
+  id="dislike"
+  class="btn btn-default" 
+  ng-click="vote('dislike')">
+  Dislike
+</button>
+<button type="button" 
+  id="like"
+  class="btn btn-default" 
+  ng-click="vote('like')">
+  Like
+</button>
+</div>

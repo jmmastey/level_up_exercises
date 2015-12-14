@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Goodbills</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">Good Bill Hunting</a>
+      <% if current_user %>
+        <span class="navbar-text">Logged in as: <%= current_user.email %></span>
+        <span class="navbar-text"><%= link_to "Sign out", destroy_user_session_path %></span>
+      <% else %>
+        <span class="navbar-text">
+          <%= link_to "Sign in with Github", user_omniauth_authorize_path(:github) %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+</nav>
+  <div class="container">
+  <p>
+    <div class="flash_messages">
+      <span class="notice"><%= notice %></span>
+      <span class="alert"><%= alert %></span>
+    </div>
+    </p>
+    <%= yield %> 
+  </div>
+
+</body>
+</html>

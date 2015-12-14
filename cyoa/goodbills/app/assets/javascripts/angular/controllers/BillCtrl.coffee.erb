@@ -1,0 +1,11 @@
+@goodbills.controller 'BillCtrl', ['$scope', 'bill', 'Restangular', ($scope, bill, Restangular) ->
+  $scope.bill = bill
+  $scope.vote = (voteChoice) ->
+    $scope.bill.bill = {vote: voteChoice}
+    $scope.bill.put().then( (data) ->
+      Restangular.one('bills', $scope.bill.id).get().then( (data) ->
+        $scope.bill = data
+      )
+    )
+
+]

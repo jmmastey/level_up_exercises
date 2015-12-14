@@ -1,0 +1,28 @@
+@goodbills = angular.module('goodbills',['ngRoute','restangular'])
+
+@goodbills.config ["$httpProvider", ($httpProvider) ->
+  $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
+]
+
+@goodbills.config(['RestangularProvider', (RestangularProvider) ->
+  RestangularProvider.setBaseUrl('/api/v1')
+])
+
+@goodbills.config(['$routeProvider', ($routeProvider) ->
+  $routeProvider.when('/bills/:billId', {
+    templateUrl: '<%= asset_path("bill.html") %>',
+    controller: "BillCtrl"
+    resolve: {
+      bill: ($route, Restangular) ->
+        return Restangular.one('bills', $route.current.params.billId).get()
+    }
+  })
+  $routeProvider.otherwise({
+    templateUrl: '<%= asset_path("homepage.html") %>',
+    controller: "HomepageCtrl"
+    resolve: {
+      bills: ($route, Restangular) ->
+        return Restangular.all('bills').getList()
+    }
+  })
+])

@@ -1,0 +1,20 @@
+
+<ul ng-repeat="bill in bills">
+<li><i>{{bill.official_title}}</i></li>
+<li><b>Score:</b> {{bill.score}}</li>
+<li><a href="#/bills/{{bill.id}}">Bill Detail</a></li>
+</ul>
+<button type="button" 
+  id="previousPage"
+  class="btn btn-default" 
+  ng-click="changePage(page - 1)"
+  ng-if="page > 1">
+  Previous Page
+</button>
+Current Page: {{page}}
+<button type="button" 
+  id="nextPage"
+  class="btn btn-default" 
+  ng-click="changePage(page + 1)">
+  Next Page
+</button>

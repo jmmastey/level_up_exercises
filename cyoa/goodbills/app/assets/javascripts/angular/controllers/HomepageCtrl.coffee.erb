@@ -1,0 +1,12 @@
+@goodbills.controller 'HomepageCtrl', ['$scope','bills','Restangular', ($scope, bills, Restangular) ->
+  $scope.page = 1
+  $scope.bills = bills
+
+  $scope.changePage = (page) ->
+    $scope.page = page 
+    Restangular.all('bills').getList({page: $scope.page}).then( (data) ->
+      $scope.bills = data
+    )
+
+
+]

@@ -6,7 +6,7 @@ require_relative 'dinosaur'
 class DinoCatalog
   attr_accessor :data
 
-  def initialize data=nil
+  def initialize(data = nil)
     @data = data || load_data
   end
 
@@ -21,7 +21,7 @@ class DinoCatalog
   end
 
   def length
-    return @data.length
+    @data.length
   end
 
   def print
@@ -29,11 +29,11 @@ class DinoCatalog
   end
 
   def bipeds
-    search(:walking => "Biped")
+    search(walking: "Biped")
   end
 
   def carnivores
-    search(:carnivore => true)
+    search(carnivore: true)
   end
 
   def period(period)
@@ -53,16 +53,13 @@ class DinoCatalog
   end
 
   def merge_data(dinodex, african)
-    dinodex.map { |entry| Dinosaur.normalize_dinodex(entry) } + 
+    dinodex.map { |entry| Dinosaur.normalize_dinodex(entry) } +
       african.map { |entry| Dinosaur.normalize_african(entry) }
   end
 end
 
-
 catalog = DinoCatalog.new
-puts "# carnivores: #{catalog.search(:carnivore => true).length}"
 puts "# get carnivores: #{catalog.carnivores.length}"
-puts "# herbivores: #{catalog.search(:carnivore => false).length}"
 puts "# bipeds: #{catalog.bipeds.length}"
 puts "# Jurassic: " \
   "#{catalog.period('Jurassic').heavier_than(2000).length}"

@@ -9,12 +9,12 @@ unless zeus_running?
   SimpleCov.start("rails")
 end
 
-require "rspec/rails"
+require "rails/all"
 require "webmock/rspec"
 require "database_cleaner"
-require "vcr"
 require "spec_helper"
 require File.expand_path("../../config/environment", __FILE__)
+require "rspec/rails"
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|

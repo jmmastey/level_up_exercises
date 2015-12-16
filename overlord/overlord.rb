@@ -11,7 +11,7 @@ get '/' do
 end
 
 get '/bomb' do
-  bomb = nil if bomb
+  session[:bomb] = nil if session[:bomb]
   erb :bomb
 end
 
@@ -35,7 +35,8 @@ post '/boot' do
 end
 
 get '/inactive_bomb' do
-  erb :inactive_bomb
+  return erb :inactive_bomb if bomb && bomb.inactive?
+  redirect '/reroute'
 end
 
 post '/activate' do
@@ -49,7 +50,8 @@ post '/activate' do
 end
 
 get '/active_bomb' do
-  erb :active_bomb
+  return erb :active_bomb if bomb && bomb.active?
+  redirect '/reroute'
 end
 
 post '/deactivate' do
@@ -66,8 +68,8 @@ post '/deactivate' do
 end
 
 get '/explosion' do
-  bomb.exploded?
-  erb :explosion
+  return erb :explosion if bomb && bomb.exploded?
+  redirect '/reroute'
 end
 
 not_found do
@@ -85,9 +87,8 @@ def bomb
 end
 
 def create_bomb(activation_code, deactivation_code, max_failed_deactivations)
-  bomb = Bomb.new(activation_code, deactivation_code, max_failed_deactivations)
-  puts bomb.active?
-  session[:bomb] = bomb
+  new_bomb = Bomb.new(activation_code, deactivation_code, max_failed_deactivations)
+  session[:bomb] = new_bomb
 end
 
 def numeric?(code)
@@ -100,4 +101,11 @@ end
 
 def flash_validation
   flash[:validation] = "Codes can only be numeric."
+end
+
+get '/reroute' do
+  redirect '/bomb' if !bomb
+  redirect '/inactive_bomb' if bomb.inactive?
+  redirect '/active_bomb' if bomb.active?
+  redirect '/explosion' if bomb.exploded?
 end

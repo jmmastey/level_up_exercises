@@ -38,26 +38,31 @@ class DinoRunner
   end
 
   def filter_catalog(filter_terms)
-    # so two ideas are going on here: one, the object being handed 
-    #wtf, why is this not working.  if I am assigning it to a var why no work?!?
-    dinosaurs = Dinosaurs.new(dino_catalog)
-    # p filter_terms
+    dinosaurs = dino_catalog.clone
     filter_terms.each do |term|
       case term      
       when "-b", "big"
-        # p dinosaurs.class 
-        # dinosaurs.big_dinosaurs
-        
-        dinosaurs = dinosaurs.big_dinosaurs
+        dinosaurs = dinosaurs.big_dinosaurs.clone
       when "-c", "carnivorus"
-         # dinosaurs.carnivorus_dinosaurs
-        dinosaurs = dinosaurs.carnivorus_dinosaurs
+        dinosaurs = dinosaurs.carnivorus_dinosaurs.clone
       when "-2", "biped"
-         # dinosaurs.biped_dinosaurs
-        dinosaurs = dinosaurs.biped_dinosaurs
+        dinosaurs = dinosaurs.biped_dinosaurs.clone
       end
     end
     dinosaurs
+
+    # #this doesn't work but the above does
+    # #pretty sure this is b/c of the clone but not super clear on why
+    # filter_terms.each_with_object(dino_catalog.clone) do |term, dinosaurs|
+    #   case term      
+    #   when "-b", "big"
+    #     dinosaurs = dinosaurs.big_dinosaurs.clone
+    #   when "-c", "carnivorus"
+    #     dinosaurs = dinosaurs.carnivorus_dinosaurs.clone
+    #   when "-2", "biped"
+    #     dinosaurs = dinosaurs.biped_dinosaurs.clone
+    #   end
+    # end
   end
 
   def parse_search_terms(search_terms)

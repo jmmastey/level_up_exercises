@@ -3,8 +3,12 @@ require_relative "dinosaurs"
 class DinoRunner
   attr_reader :dino_catalog
 
-  def initialize
-    @dino_catalog = Dinosaurs.from_directory
+  def initialize(dir = ARGV)
+    if !dir.empty?
+      @dino_catalog = Dinosaurs.from_directory(dir.first)
+    else
+      @dino_catalog = Dinosaurs.from_directory
+    end
   end
 
   def run
@@ -88,10 +92,10 @@ class DinoRunner
     puts "Welcome to Di-Facto, your presumed source for prehistoric points of interest"
   end
 
-  private
-  attr_reader :dino_catalog
+  # private
+  # attr_reader :dino_catalog
 
 end
 
-defacto = DinoRunner.new
-defacto.run
+# defacto = DinoRunner.new
+# defacto.run

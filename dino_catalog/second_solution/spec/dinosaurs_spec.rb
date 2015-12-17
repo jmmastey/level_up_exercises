@@ -1,6 +1,5 @@
 require_relative "../dinosaurs"
 
-
 SPEC_ROOT = File.expand_path("..", __FILE__)
 TEST_DIR_PATH = SPEC_ROOT + "/test"
 
@@ -118,13 +117,13 @@ describe Dinosaurs do
       expect(dino_add_info_continent).to be_an_instance_of Dinosaurs    
     end
     it "returns matching dinos when recog csv col passed as category" do
-      expect(dino_recog_col_name.collection.all?{|d| d.name == "Albertonykus"}).to be true
+      expect(dino_recog_col_name.collection.all?{ |d| d.name == "Albertonykus"}).to be true
     end
     it "returns matching dinos when special csv col passed as category" do
       expect(dino_spc_col_carnivore.collection.all?(&:carnivore?)).to be true
     end
     it "returns matching dinos when unkn csv col passed as category" do
-      expect(dino_add_info_continent.collection.all?{|d| d.additional_info["continent"].include?("America")}).to be true
+      expect(dino_add_info_continent.collection.all?{ |d| d.additional_info["continent"].include?("America")}).to be true
     end    
   end
 
@@ -138,7 +137,7 @@ describe Dinosaurs do
     it "returns a collection matching all search terms" do
       expect(dino_search.collection.all?(&:carnivore?)).to be true
       expect(dino_search.collection.all?(&:biped?)).to be true
-      expect(dino_search.collection.all?{|d| d.additional_info["continent"].include?("America")}).to be true
+      expect(dino_search.collection.all?{ |d| d.additional_info["continent"].include?("America")}).to be true
     end
   end
 

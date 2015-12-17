@@ -278,5 +278,4 @@ describe Dinosaur do
       expect(additional_info).to eq({old_data: "test", additional_info: {"continent" => "North America", "description"=>"Earliest known Alvarezsaurid."}})
     end
   end
-
-end  
+end

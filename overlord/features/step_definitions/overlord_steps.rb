@@ -1,13 +1,14 @@
+ACTIVATION_CODE = 1234
+DEACTIVATION_CODE = 0000
+DUPLICATE_CODE = 1234
+INCORRECT_CODE = "asdf1234"
+BLANK_CODE = ""
+
 Given(/^I am on the bomb page$/) do
   visit '/bomb'
 end
 
 When(/^I set valid activation and deactivation codes$/) do
-  ACTIVATION_CODE = 1234
-  DEACTIVATION_CODE = 0000
-  DUPLICATE_CODE = 1234
-  INCORRECT_CODE = "asdf1234"
-  BLANK_CODE = ""
   initialize_bomb(ACTIVATION_CODE, DEACTIVATION_CODE)
 end
 

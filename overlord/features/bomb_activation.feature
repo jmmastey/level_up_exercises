@@ -24,7 +24,7 @@ Feature: Bomb activation
     Given I am on the bomb page
     When I set blank activation or deactivation codes
     Then I should be directed to the bomb page
-    And the page should contain Codes can only be numeric.
+    And the page should contain Input must not be blank.
 
   Scenario: Successful bomb activation
     Given I am on the inactive_bomb page

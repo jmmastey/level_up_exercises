@@ -20,7 +20,7 @@ post '/boot' do
   deactivation_code = params[:deactivation_code]
   max_failed_deactivations = 3
   if empty?(activation_code) || empty?(deactivation_code)
-    flash_validation
+    flash[:blank] = "Input must not be blank."
     redirect '/bomb'
   elsif activation_code == deactivation_code
     flash[:duplicate] = "Codes must be different."

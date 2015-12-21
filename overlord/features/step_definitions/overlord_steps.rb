@@ -44,7 +44,7 @@ When(/^I input the incorrect activation code$/) do
   validate_code('activation_code', INCORRECT_CODE)
 end
 
-Then /the page should contain (.*)/ do |input|
+Then(/the page should contain (.*)/) do |input|
   expect(page).to have_content(input)
 end
 

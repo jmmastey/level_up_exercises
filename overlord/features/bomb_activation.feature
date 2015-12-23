@@ -3,6 +3,10 @@ Feature: Bomb activation
   As the evil Vault Boy
   I want to activate the bomb
 
+  Scenario: Visit the inactive bomb page
+    When I am on the inactive_bomb page
+    Then I should see instructions and the form to submit the activation code
+
   Scenario: Successful bomb activation
     Given I am on the inactive_bomb page
     When I input the correct activation code

@@ -20,12 +20,28 @@ When(/^I set valid activation and deactivation codes$/) do
   initialize_bomb(ACTIVATION_CODE, DEACTIVATION_CODE)
 end
 
-When(/^I set invalid activation or deactivation codes$/) do
+When(/^I set an invalid activation code with a valid deactivation code$/) do
+  initialize_bomb(INCORRECT_CODE, DEACTIVATION_CODE)
+end
+
+When(/^I set a valid activation code with an invalid deactivation code$/) do
   initialize_bomb(ACTIVATION_CODE, INCORRECT_CODE)
 end
 
-When(/^I set invalid duplicate activation or deactivation codes$/) do
+When(/^I set invalid duplicate activation and deactivation codes$/) do
+  initialize_bomb(INCORRECT_CODE, INCORRECT_CODE)
+end
+
+When(/^I set valid duplicate activation or deactivation codes$/) do
   initialize_bomb(ACTIVATION_CODE, DUPLICATE_CODE)
+end
+
+When(/^I set a blank activation code$/) do
+  initialize_bomb(BLANK_CODE, DEACTIVATION_CODE)
+end
+
+When(/^I set blank deactivation code$/) do
+  initialize_bomb(ACTIVATION_CODE, BLANK_CODE)
 end
 
 When(/^I set blank activation or deactivation codes$/) do

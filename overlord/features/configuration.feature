@@ -3,6 +3,12 @@ Feature: Code configurations
   As the evil Vault Boy
   I want to input the correct activation code
 
+  Scenario: Set blank duplicate activation and deactivation codes
+    Given I am on the bomb page
+    When I set blank activation or deactivation codes
+    Then I should be directed to the bomb page
+    And the page should contain Input must not be blank.
+
   Scenario: Set valid activation and deactivation codes
     Given I am on the bomb page
     When I set valid activation and deactivation codes

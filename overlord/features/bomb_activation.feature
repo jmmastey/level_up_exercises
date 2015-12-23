@@ -3,12 +3,6 @@ Feature: Bomb activation
   As the evil Vault Boy
   I want to activate the bomb
 
-  Scenario: Set blank duplicate activation and deactivation codes
-    Given I am on the bomb page
-    When I set blank activation or deactivation codes
-    Then I should be directed to the bomb page
-    And the page should contain Input must not be blank.
-
   Scenario: Successful bomb activation
     Given I am on the inactive_bomb page
     When I input the correct activation code

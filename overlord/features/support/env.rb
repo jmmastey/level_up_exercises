@@ -1,4 +1,6 @@
 require 'capybara/cucumber'
+require 'site_prism'
+
 require_relative '../../overlord'
 require_relative 'helpers'
 

@@ -3,6 +3,10 @@ Feature: Code configurations
   As the evil Vault Boy
   I want to input the correct activation code
 
+  Scenario: Visit the bomb page
+    When I am on the bomb page
+    Then I should see instructions and the form to set and submit codes.
+
   Scenario: Set blank duplicate activation and deactivation codes
     Given I am on the bomb page
     When I set blank activation or deactivation codes

@@ -4,8 +4,16 @@ DUPLICATE_CODE = 1234
 INCORRECT_CODE = "asdf1234"
 BLANK_CODE = ""
 
-Given(/^I am on the bomb page$/) do
-  visit '/bomb'
+When /^I am on the bomb page$/ do
+  @bomb_page = BombPage.new
+  @bomb_page.load
+end
+
+Then /^I should see instructions and the form to set and submit codes$/ do
+  expect(@bomb_page).to have_instructions
+  expect(@bomb_page).to have_activation_code_field
+  expect(@bomb_page).to have_deactivation_code_field
+  expect(@bomb_page).to have_submit_button
 end
 
 When(/^I set valid activation and deactivation codes$/) do
@@ -25,8 +33,11 @@ When(/^I set blank activation or deactivation codes$/) do
 end
 
 Then(/^I should be directed to the inactive_bomb page$/) do
-  expect(current_path).to eq '/inactive_bomb'
+  @inactive_bomb_page = InactiveBombPage.new
+  expect(@inactive_bomb_page).to be_displayed
 end
+
+
 
 Given(/^I am on the inactive_bomb page$/) do
   visit '/bomb'

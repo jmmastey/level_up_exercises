@@ -47,6 +47,7 @@ Feature: Code configurations
     When I set invalid duplicate activation and deactivation codes
     Then I should be directed to the bomb page
     And the page should contain Codes must be different.
+    And the page should contain Codes can only be numeric.
 
   Scenario: Set valid duplicate activation and deactivation codes
     Given I am on the bomb page

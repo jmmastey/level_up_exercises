@@ -22,11 +22,12 @@ post '/boot' do
   if empty?(activation_code) || empty?(deactivation_code)
     flash[:blank] = "Input must not be blank."
     redirect '/bomb'
-  elsif activation_code == deactivation_code
-    flash[:duplicate] = "Codes must be different."
-    redirect '/bomb'
   elsif !(numeric?(activation_code) && numeric?(deactivation_code))
     flash_validation
+    flash_duplicate_code if activation_code == deactivation_code
+    redirect '/bomb'
+  elsif activation_code == deactivation_code
+    flash_duplicate_code
     redirect '/bomb'
   else
     create_bomb(activation_code, deactivation_code, max_failed_deactivations)
@@ -101,6 +102,10 @@ end
 
 def flash_validation
   flash[:validation] = "Codes can only be numeric."
+end
+
+def flash_duplicate_code
+  flash[:duplicate] = "Codes must be different."
 end
 
 get '/reroute' do

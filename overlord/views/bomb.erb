@@ -28,9 +28,11 @@
       <div class="flash">
         <% if flash[:validation] %>
           <%= flash[:validation] %>
-        <% elsif flash[:blank] %>
+          <% end %>
+        <% if flash[:blank] %>
           <%= flash[:blank] %>
-        <% else %>
+          <% end %>
+        <% if flash[:duplicate] %>
           <%= flash[:duplicate] %>
         <% end %>
       </div>

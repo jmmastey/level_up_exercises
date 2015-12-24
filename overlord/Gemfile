@@ -1,8 +1,15 @@
 source "https://rubygems.org"
 
 gem "sinatra"
+gem 'activerecord'
+gem 'sinatra-activerecord'
+gem 'pg'
 
 group :test do
   gem "rspec"
   gem "simplecov", require: false
+  gem "cucumber"
+  gem "capybara"
+  gem "shotgun"
+  gem "pry"
 end

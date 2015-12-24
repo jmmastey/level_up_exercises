@@ -1,0 +1,9 @@
+<p>The bomb is active!</p>
+<% if session[:deactivation_attempts].to_i > 0 && session[:deactivation_attempts] < @bomb.max_failed_deactivations %>
+	You have used <%= session[:deactivation_attempts] %> of <%= @bomb.max_failed_deactivations %> attempts at deactivating the bomb.
+<% end %>
+
+<form action="/deactivate" method="POST">
+	Deactivate: <input type="text" id="bomb-deactivation-code" name="deactcode">
+	<input type="submit" id='deactivate' value="Deactivate">
+</form>

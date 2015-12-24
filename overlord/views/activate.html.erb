@@ -1,0 +1,12 @@
+<h1><%= @error %><h1>
+
+The bomb is <%= @bomb.state %>
+
+<% if @bomb.state == :inactive %>
+	<form action="/activate" method="POST">
+		Enter activation code to activate bomb: <input id='bomb-activation-code' name='actcode'>
+		<input type="submit" id="activate" value="activate">
+	</form>
+<% else %>
+	Cannot activate the bomb from this state.
+<% end %>

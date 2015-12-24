@@ -5,42 +5,43 @@ Feature: Shopping Cart
 
   Scenario: Empty shopping cart
     Given I have an empty shopping cart
-    When I click on the shopping cart link
+    When I go to see my shopping cart
     Then my shopping cart should be empty
 
   Scenario: Display items in shopping cart
     Given I have items in my shopping cart
-    When I click on the shopping cart link
+    When I go to see my shopping cart
     Then my shopping cart should display those items
 
   Scenario: Add items to shopping cart
     Given I am on a product page
-    When I click Add Item
+    When I add an item
     And I enter the quantity
     Then the corresponding quantity of items should be added to the cart
 
-  Scenario: Remove items from shopping cart
+  Scenario: Remove the same item from shopping cart
     Given I am on the shopping cart page
-    When I click Remove Item
+    When I remove an item
     And I enter the quantity
     Then the corresponding quantity of items should be removed from the cart
 
-  Scenario: Items vanishing from shopping cart
+  Scenario: Remove item completely from shopping cart
     Given I have a particular quantity of an item in the shopping cart
     When I remove all of the respective item
-    Then the item should vanish from the shopping cart
+    Then the item should vanish completely from the shopping cart
 
-  Scenario: Adding the same item twice to shopping cart
+  Scenario: Add the same item to shopping cart
     Given I have an item in the shopping cart
+    And I am on the shopping cart page
     When I re-add that same item with a specified quantity
     Then the corresponding quantity of items should be added to the cart
 
   Scenario: Go to item page from shopping cart page
     Given I am on the shopping cart page
     When I click on an item
-    Then I should be directed to that item page
+    Then I should be directed to that respective item's page
 
-  Scenario: Change quantity of item on shopping cart page
+  Scenario: Increase quantity of item on shopping cart page
     Given I am on the shopping cart page
     When I increase the quantity of that item
     Then the quantity for that item should change respectively

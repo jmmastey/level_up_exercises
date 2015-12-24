@@ -4,12 +4,12 @@ DUPLICATE_CODE = 1234
 INCORRECT_CODE = "asdf1234"
 BLANK_CODE = ""
 
-When /^I am on the bomb page$/ do
+When(/^I am on the bomb page$/) do
   @bomb_page = BombPage.new
   @bomb_page.load
 end
 
-Then /^I should see instructions and the form to set and submit codes$/ do
+Then(/^I should see instructions and the form to set and submit codes$/) do
   expect(@bomb_page).to have_instructions
   expect(@bomb_page).to have_activation_code_field
   expect(@bomb_page).to have_deactivation_code_field
@@ -53,12 +53,12 @@ Then(/^I should be directed to the inactive_bomb page$/) do
   expect(@inactive_bomb_page).to be_displayed
 end
 
-When /^I am on the inactive_bomb page$/ do
+When(/^I am on the inactive_bomb page$/) do
   @inactive_bomb_page = InactiveBombPage.new
   @inactive_bomb_page.load
 end
 
-Then /^I should see instructions and the form to submit the activation code$/ do
+Then(/^I should see instructions and the form to submit the activation code$/) do
   expect(@inactive_bomb_page).to have_instructions
   expect(@inactive_bomb_page).to have_activation_code_field
   expect(@inactive_bomb_page).to have_submit_button
@@ -74,12 +74,12 @@ Then(/^I should be directed to the active_bomb page$/) do
   expect(@active_bomb_page).to be_displayed
 end
 
-When /^I am on the active_bomb page$/ do
+When(/^I am on the active_bomb page$/) do
   @active_bomb_page = ActiveBombPage.new
   @active_bomb_page.load
 end
 
-Then /^I should see instructions and the form to submit the deactivation code$/ do
+Then(/^I should see instructions and the form to submit the deactivation code$/) do
   expect(@active_bomb_page).to have_instructions
   expect(@active_bomb_page).to have_deactivation_code_field
   expect(@active_bomb_page).to have_submit_button

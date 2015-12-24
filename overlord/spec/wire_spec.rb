@@ -1,4 +1,4 @@
-drequire "spec_helper"
+require "spec_helper"
 
 describe Wire do
   let(:disarm_wire) { described_class.new(:disarm) }

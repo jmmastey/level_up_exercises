@@ -9,28 +9,28 @@ end
 
 Given(/^the bomb has been activated$/) do
   visit('/')
-  fill_in('actcode', :with=>'1234')
-  page.find('#activate').click 
+  fill_in('actcode', with: '1234')
+  page.find('#activate').click
 end
 
 Given(/^the bomb has been initialized with activation code "(.*?)"$/) do |code|
   visit('/')
-  fill_in('actcode', :with=>code)
+  fill_in('actcode', with: code)
   page.find('#initialize').click
 end
 
 Given(/^the bomb has been initialized with deactivation code "(.*?)"$/) do |code|
   visit('/')
-  fill_in('bomb-deactivation-code', :with=>code)
+  fill_in('bomb-deactivation-code', with: code)
   page.find('#initialize').click
 end
 
 Given(/^I enter an incorrect code three times$/) do
   visit('/')
-  fill_in('bomb-deactivation-code', :with=>"wrong")
+  fill_in('bomb-deactivation-code', with: "wrong")
   page.find('#deactivate').click
-  fill_in('bomb-deactivation-code', :with=>"wrong")
+  fill_in('bomb-deactivation-code', with: "wrong")
   page.find('#deactivate').click
-  fill_in('bomb-deactivation-code', :with=>"wrong")
+  fill_in('bomb-deactivation-code', with: "wrong")
   page.find('#deactivate').click
 end

@@ -15,7 +15,6 @@ get '/bomb' do
   erb :bomb
 end
 
-
 post '/boot' do
   activation_code = params[:activation_code]
   deactivation_code = params[:deactivation_code]
@@ -26,7 +25,7 @@ post '/boot' do
     create_bomb(activation_code, deactivation_code, max_failed_deactivations)
     redirect '/inactive_bomb'
   else
-    errors.map do |k,v|
+    errors.map do |k, v|
       flash[k] = v
     end
     redirect '/bomb'
@@ -106,6 +105,7 @@ get '/reroute' do
 end
 
 private
+
 def collect_errors(activation_code, deactivation_code)
   errors = {}
   if empty?(activation_code) || empty?(deactivation_code)

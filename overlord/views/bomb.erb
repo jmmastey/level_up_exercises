@@ -26,14 +26,10 @@
       </form>
 
       <div class="flash">
-        <% if flash[:validation] %>
-          <%= flash[:validation] %>
-          <% end %>
-        <% if flash[:blank] %>
-          <%= flash[:blank] %>
-          <% end %>
-        <% if flash[:duplicate] %>
-          <%= flash[:duplicate] %>
+        <% flash.each do |k, v| %>
+          <div>
+            <%= v %>
+          </div>
         <% end %>
       </div>
     </div>

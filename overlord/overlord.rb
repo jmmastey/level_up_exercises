@@ -15,23 +15,21 @@ get '/bomb' do
   erb :bomb
 end
 
+
 post '/boot' do
   activation_code = params[:activation_code]
   deactivation_code = params[:deactivation_code]
   max_failed_deactivations = 3
-  if empty?(activation_code) || empty?(deactivation_code)
-    flash[:blank] = "Input must not be blank."
-    redirect '/bomb'
-  elsif !(numeric?(activation_code) && numeric?(deactivation_code))
-    flash_validation
-    flash_duplicate_code if activation_code == deactivation_code
-    redirect '/bomb'
-  elsif activation_code == deactivation_code
-    flash_duplicate_code
-    redirect '/bomb'
-  else
+  errors = collect_errors(activation_code, deactivation_code)
+
+  if errors.empty?
     create_bomb(activation_code, deactivation_code, max_failed_deactivations)
     redirect '/inactive_bomb'
+  else
+    errors.map do |k,v|
+      flash[k] = v
+    end
+    redirect '/bomb'
   end
 end
 
@@ -100,17 +98,24 @@ def empty?(code)
   code.empty?
 end
 
-def flash_validation
-  flash[:validation] = "Codes can only be numeric."
-end
-
-def flash_duplicate_code
-  flash[:duplicate] = "Codes must be different."
-end
-
 get '/reroute' do
   redirect '/bomb' if !bomb
   redirect '/inactive_bomb' if bomb.inactive?
   redirect '/active_bomb' if bomb.active?
   redirect '/explosion' if bomb.exploded?
+end
+
+private
+def collect_errors(activation_code, deactivation_code)
+  errors = {}
+  if empty?(activation_code) || empty?(deactivation_code)
+    errors[:blank_input] = "Input must not be blank."
+  end
+  if !(numeric?(activation_code) && numeric?(deactivation_code))
+    errors[:non_numeric] = "Codes can only be numeric."
+  end
+  if activation_code == deactivation_code
+    errors[:duplicate] = "Codes must be different."
+  end
+  errors
 end

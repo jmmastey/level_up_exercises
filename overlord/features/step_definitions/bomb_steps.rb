@@ -10,13 +10,11 @@ Then(/^the bomb should be booted$/) do
 end
 
 Then(/^the bomb should be activated$/) do
-  sleep(2)
   step 'I should see the element id "alarm"'
   step 'I should see ":active"'
 end
 
 Then(/^the bomb should be deactivated$/) do
-  sleep(2)
   step 'I should see ":inactive"'
 end
 
@@ -48,16 +46,13 @@ end
 When(/^I fail to deactivate the bomb$/) do
   step 'I fill in "code" with "9999"'
   step 'I press "deactivate-bomb"'
-  sleep(1)
   step 'I fill in "code" with "8888"'
   step 'I press "deactivate-bomb"'
-  sleep(1)
   step 'I fill in "code" with "7777"'
   step 'I press "deactivate-bomb"'
 end
 
 Then(/^the bomb should explode$/) do
-  sleep(1)
   step 'I should not see "Time:"'
 end
 

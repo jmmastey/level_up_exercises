@@ -34,3 +34,7 @@ Given(/^I enter an incorrect code three times$/) do
   fill_in('bomb-deactivation-code', with: "wrong")
   page.find('#deactivate').click
 end
+
+When(/^I confirm the pop\-up dialog$/) do
+  page.driver.browser.switch_to.alert.accept
+end

@@ -29,5 +29,5 @@ Feature: Log-in
     Given I had items added from a prior unfinished checkout
     And some of those items no longer exist
     When I log-in
-    Then I should have the still existing items in my shopping cart
+    Then I should still have the existing items in my shopping cart
     And should see a notification for the items that no longer exist

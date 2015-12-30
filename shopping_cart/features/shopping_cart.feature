@@ -11,7 +11,7 @@ Feature: Shopping Cart
   Scenario: Display items in shopping cart
     Given I have items in my shopping cart
     When I go to see my shopping cart
-    Then my shopping cart should display those items
+    Then I should see those items in my shopping cart
 
   Scenario: Add items to shopping cart
     Given I am on a product page

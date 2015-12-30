@@ -1,6 +1,9 @@
+DEFAULT_ACTIVATION_CODE = "4321"
+DEFAULT_DEACTIVATION_CODE = "1234"
+
 When(/^I submit an activation and deactivation code$/) do
-  step 'I fill in "activation-code" with "4321"'
-  step 'I fill in "deactivation-code" with "1234"'
+  step "I fill in \"activation-code\" with \"#{DEFAULT_ACTIVATION_CODE}\""
+  step "I fill in \"deactivation-code\" with \"#{DEFAULT_DEACTIVATION_CODE}\""
   step 'I press "boot-bomb"'
 end
 
@@ -19,16 +22,16 @@ Then(/^the bomb should be deactivated$/) do
 end
 
 When(/^I activate the bomb$/) do
-  step 'I fill in "activation-code" with "4321"'
-  step 'I fill in "deactivation-code" with "1234"'
+  step "I fill in \"activation-code\" with \"#{DEFAULT_ACTIVATION_CODE}\""
+  step "I fill in \"deactivation-code\" with \"#{DEFAULT_DEACTIVATION_CODE}\""
   step 'I press "boot-bomb"'
-  step 'I fill in "code" with "4321"'
+  step "I fill in \"code\" with \"#{DEFAULT_ACTIVATION_CODE}\""
   step 'I fill in "time" with "30"'
   step 'I press "activate-bomb"'
 end
 
 When(/^I enter the deactivation code$/) do
-  step 'I fill in "code" with "1234"'
+  step "I fill in \"code\" with \"#{DEFAULT_DEACTIVATION_CODE}\""
   step 'I press "deactivate-bomb"'
 end
 

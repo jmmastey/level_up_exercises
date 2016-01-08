@@ -1,4 +1,8 @@
 class Arrowhead
+  # Error Messages
+  BAD_REGION = "Unknown region, please provide a valid region."
+  BAD_SHAPE = "Unknown shape value. please provide a valid shape"
+
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
     far_west: {
@@ -15,19 +19,20 @@ class Arrowhead
     },
   }
 
-  # FIXME: I don't have time to deal with this.
+  def self.valid_region?(region)
+    CLASSIFICATIONS.include? region
+  end
+
+  def self.valid_shape?(shapes, shape)
+    shapes.include? shape
+  end
+
   def self.classify(region, shape)
-    if CLASSIFICATIONS.include? region
-      shapes = CLASSIFICATIONS[region]
-      if shapes.include? shape
-        arrowhead = shapes[shape]
-        "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
-      else
-        raise "Unknown shape value. Are you sure you know what you're talking about?"
-      end
-    else
-      raise "Unknown region, please provide a valid region."
-    end
+    return raise BAD_REGION unless valid_region?(region)
+    shapes = CLASSIFICATIONS[region]
+    return raise BAD_SHAPE unless valid_shape?(shapes, shape)
+    arrowhead = shapes[shape]
+    "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end
 end
 

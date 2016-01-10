@@ -1,4 +1,5 @@
 require "simplecov"
+require "capybara"
 SimpleCov.start
 
 require_relative "../lib/bomb.rb"

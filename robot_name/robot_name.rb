@@ -1,32 +1,45 @@
-class NameCollisionError < RuntimeError; end
+class NameFormatError < RuntimeError; end
 
 class Robot
   attr_accessor :name
-
-  @@registry
+  @@registry ||= []
 
   def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+    @name = generate_name(args[:name])
+  end
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+  def generate_name(robot_name = nil)
+    robot_name = "#{generate_char}#{generate_num}" if !robot_name
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    if @@registry.include?(robot_name)
+      return generate_name()
     end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+    if !(robot_name =~ /^[A-Z]{2}[0-9]{3}$/)
+      raise NameFormatError, "Robot name \"#{robot_name}\" is wrong format!"
+    end
+
+    @@registry << robot_name
+
+    robot_name
+  end
+
+  def generate_char
+    ('A'..'Z').to_a.sample(2).join
+  end
+
+  def generate_num
+    prng = Random.new
+    prng.rand(100..999)
   end
 end
 
 robot = Robot.new
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+robot2 = Robot.new
+robot3 = Robot.new(name: "AA111")
+robot4 = Robot.new(name: "AA111")
 
-# Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+puts "My pet robot's name is #{robot2.name}, but we usually call him sparky."
+puts "My pet robot's name is #{robot3.name}, but we usually call him sparky."
+puts "My pet robot's name is #{robot4.name}, but we usually call him sparky."

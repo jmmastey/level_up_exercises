@@ -26,9 +26,7 @@ class Robot
       raise NameFormatError, "Robot name \"#{robot_name}\" is wrong format!"
     end
 
-    return true unless @@registry.include?(robot_name)
-
-    false
+    @@registry.include?(robot_name) ? false : true
   end
 
   def generate_char

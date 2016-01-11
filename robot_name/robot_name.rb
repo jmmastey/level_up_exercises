@@ -13,15 +13,22 @@ class Robot
   def generate_name(robot_name = nil)
     robot_name = "#{generate_char}#{generate_num}" unless robot_name
 
-    return generate_name if @@registry.include?(robot_name)
+    if valid_name?(robot_name)
+      @@registry << robot_name
+      robot_name
+    else
+      generate_name
+    end
+  end
 
+  def valid_name?(robot_name)
     unless robot_name =~ /^[A-Z]{2}[0-9]{3}$/
       raise NameFormatError, "Robot name \"#{robot_name}\" is wrong format!"
     end
 
-    @@registry << robot_name
+    return true unless @@registry.include?(robot_name)
 
-    robot_name
+    false
   end
 
   def generate_char

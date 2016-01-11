@@ -39,7 +39,7 @@ class Robot
 
   def incorrect_name_format?
     fail NameCollisionError,
-      'NO: 2 CHARs and 3 Digits' if !(@name =~ /[[:alpha:]]{2}[[:digit:]]{3}/)
+      'NO: 2 CHARs and 3 Digits' unless @name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
   end
 
   def generate_char
@@ -51,7 +51,8 @@ class Robot
   end
 
   def create_new_name
-    @name = "#{generate_char}#{generate_char}#{generate_num}#{generate_num}#{generate_num}"
+    @name = "#{generate_char}#{generate_char}#{generate_num}#{generate_num}" \
+      "#{generate_num}"
   end
 end
 

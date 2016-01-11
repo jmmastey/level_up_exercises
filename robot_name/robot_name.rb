@@ -1,32 +1,58 @@
+class NameFormatError < RuntimeError; end
 class NameCollisionError < RuntimeError; end
 
 class Robot
   attr_accessor :name
 
-  @@registry
+  def self.registry
+    @registry ||= []
+  end
 
   def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+    @name = args[:name] ? register_name(args[:name]) : generate_name
+  end
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+  def generate_name
+    robot_name = "#{generate_char}#{generate_num}"
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    return generate_name if name_exists?(robot_name)
+
+    register_name(robot_name)
+  end
+
+  def register_name(robot_name)
+    raise NameCollisionError, "Robot name \"#{robot_name}\" "\
+                              "already exists!" if name_exists?(robot_name)
+
+    raise NameFormatError, "Robot name \"#{robot_name}\" is wrong "\
+                           "format!" unless robot_name =~ /^[A-Z]{2}[0-9]{3}$/
+
+    self.class.registry << robot_name
+
+    robot_name
+  end
+
+  def generate_char
+    ('A'..'Z').to_a.sample(2).join
+  end
+
+  def generate_num
+    nums = []
+    (1..3).each do
+      nums << rand(10)
     end
+    nums.join
+  end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+  def name_exists?(robot_name)
+    self.class.registry.include?(robot_name) ? true : false
   end
 end
 
 robot = Robot.new
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+robot2 = Robot.new
+robot3 = Robot.new(name: "AA111")
 
-# Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+puts "My pet robot's name is #{robot2.name}, but we usually call him sparky."
+puts "My pet robot's name is #{robot3.name}, but we usually call him sparky."

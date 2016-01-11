@@ -15,7 +15,8 @@ RSpec.describe "testing" do
     replacement = "z"
     string_out = "zbcdefg"
 
-    expect(Stringswap.swap(string_in, target_match, replacement)).to eq(string_out)
+    expect(Stringswap.swap(string_in, target_match, replacement)).to \
+      eq(string_out)
   end
 
   it "swaps out many characters" do
@@ -24,6 +25,7 @@ RSpec.describe "testing" do
     replacement = "for all good men"
     string_out = "The time has come for all good men"
 
-    expect(Stringswap.swap(string_in, target_match, replacement)).to eq(string_out)
+    expect(Stringswap.swap(string_in, target_match, replacement)).to \
+      eq(string_out)
   end
 end

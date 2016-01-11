@@ -2,20 +2,20 @@ class NameFormatError < RuntimeError; end
 
 class Robot
   attr_accessor :name
-  @@registry ||= []
+
+  @@registry
 
   def initialize(args = {})
+    @@registry ||= []
     @name = generate_name(args[:name])
   end
 
   def generate_name(robot_name = nil)
-    robot_name = "#{generate_char}#{generate_num}" if !robot_name
+    robot_name = "#{generate_char}#{generate_num}" unless robot_name
 
-    if @@registry.include?(robot_name)
-      return generate_name()
-    end
+    return generate_name if @@registry.include?(robot_name)
 
-    if !(robot_name =~ /^[A-Z]{2}[0-9]{3}$/)
+    unless robot_name =~ /^[A-Z]{2}[0-9]{3}$/
       raise NameFormatError, "Robot name \"#{robot_name}\" is wrong format!"
     end
 

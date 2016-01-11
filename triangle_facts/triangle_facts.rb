@@ -41,7 +41,6 @@ class Triangle
   end
 
   def recite_facts
-    
     triangle_type_facts(triangle_type)
 
     angles = calculate_angles(side1, side2, side3)

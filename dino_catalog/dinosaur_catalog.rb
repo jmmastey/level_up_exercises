@@ -22,14 +22,6 @@ class DinosaurCatalog
     end
   end
 
-  def dinodex_keys
-    all_keys = []
-    @dinodex.map do |row|
-      all_keys += row.keys
-    end
-    all_keys.uniq
-  end
-
   def parse_keys
     @dinodex.map do |row|
       parsed_row = {}
@@ -46,6 +38,22 @@ class DinosaurCatalog
       end
       parsed_row
     end
+  end
+
+  def dinodex_keys
+    all_keys = []
+    @dinodex.map do |row|
+      all_keys += row.keys
+    end
+    all_keys.uniq
+  end
+
+  def dinodex_periods
+    periods = []
+    @dinodex.map do |row|
+      periods << row[:period]
+    end
+    periods.uniq
   end
 
   def find_large_dinosaurs(catalog = nil)

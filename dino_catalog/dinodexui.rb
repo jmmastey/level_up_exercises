@@ -21,10 +21,16 @@ class DinodexUI
   def self.run
     @running = true
     system "clear" || "cls"
-    puts "--DINODEX--"
+    show_banner
     while @running
       show_menu_options
       handle_user_input(gets.chomp.downcase)
+    end
+  end
+
+  def self.show_banner
+    File.open('dinobanner.txt', 'r') do |f|
+      puts f.read
     end
   end
 

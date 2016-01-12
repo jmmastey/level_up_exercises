@@ -5,67 +5,92 @@ class DinosaurCatalog
   attr_accessor :catalogs
 
   def initialize(attrs = {})
-    @catalogs = []
+    @dinodex = []
     @files = Array(attrs[:catalogs])
     read_catalogs
+    @dinodex = parse_keys
+    set_current_catalog(@dinodex)
   end
 
   def read_catalogs
     @files.map do |file_name|
-      @catalogs << CSV.read(
-        file_name,
-        headers: true,
-        header_converters: :symbol,
-      )
+      CSV.foreach(
+        file_name, headers: true, header_converters: :symbol
+      ) do |row|
+        @dinodex << row.to_hash
+      end
     end
   end
 
-  def find_dinos(key, value)
-    results = []
-    @catalogs.map do |catalog|
-      results.concat catalog.select { |dino|
-        dino[key] == value
-      }
+  def dinodex_keys
+    all_keys = []
+    @dinodex.map do |row|
+      all_keys += row.keys
     end
-    results
+    all_keys.uniq
   end
 
-  def find_large_dinosaurs
-    results = []
-    @catalogs.map do |catalog|
-      results.concat catalog.select { |dino|
-        dino[:weight] > 2000 || dino[:weight_in_lbs] > 2000
-      }
+  def parse_keys
+    @dinodex.map do |row|
+      parsed_row = {}
+      row.each do |column, value|
+        if column == :genus
+          parsed_row[:name] = value
+        elsif column == :weight_in_lbs
+          parsed_row[:weight] = value
+        elsif column == :carnivore
+          parsed_row[:diet] = (value == 'Yes') ? 'Carnivore' : nil
+        else
+          parsed_row[column] = value
+        end
+      end
+      parsed_row
     end
-    results
   end
 
-  def find_small_dinosaurs
-    results = []
-    @catalogs.map do |catalog|
-      results.concat catalog.select { |dino|
-        dino[:weight] <= 2000 || dino[:weight_in_lbs] <= 2000
-      }
+  def find_large_dinosaurs(catalog = nil)
+    find_by_weight(2000, 999_999_999, catalog)
+  end
+
+  def find_small_dinosaurs(catalog = nil)
+    find_by_weight(1, 2000, catalog)
+  end
+
+  def find_by_weight(min_weight, max_weight, catalog = nil)
+    set_current_catalog(catalog)
+
+    @current_catalog.select do |row|
+      row[:weight].to_i.between?(min_weight, max_weight)
     end
+  end
+
+  def find_bipeds(catalog = nil)
+    set_current_catalog(catalog)
+
+    find_dinos(:walking, "biped")
+  end
+
+  def find_carnivores(catalog = nil)
+    set_current_catalog(catalog)
+
+    results = find_dinos(:diet, "carnivore")
+    results.concat find_dinos(:diet, "insectivore")
+    results.concat find_dinos(:diet, "piscivore")
     results
   end
 
-  def find_bipeds
-    find_dinos(:walking, "Biped")
-  end
-
-  def find_carnivores
-    results = find_dinos(:diet, "Carnivore")
-    results.concat find_dinos(:diet, "Insectivore")
-    results.concat find_dinos(:diet, "Piscivore")
-    results.concat find_dinos(:carnivore, "Yes")
-    results
-  end
-
-  def find_by_period(time_period)
+  def find_by_period(catalog = nil)
     find_dinos(:period, time_period)
   end
 
-  def retrieve_dinosaur_facts
+  def find_dinos(key, value, catalog = nil)
+    set_current_catalog(catalog ? catalog : @dinodex)
+    @current_catalog.select do |row|
+      row[key] && row[key].downcase == value
+    end
+  end
+
+  def set_current_catalog(catalog = nil)
+    @current_catalog = catalog ? catalog : @current_catalog
   end
 end

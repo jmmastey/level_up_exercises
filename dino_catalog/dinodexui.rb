@@ -37,7 +37,7 @@ class DinodexUI
 
   def self.show_menu_options
     puts
-    puts @current_menu > 0 ? "Q) Quit B) Go back" : "Q) Quit"
+    puts "J) To json B) Back Q) Quit"
     puts @menu_text[@current_menu]
     puts "\nKeys: #{@catalog.dinodex_keys.join(',')}" if @current_menu == 3
     puts
@@ -50,6 +50,9 @@ class DinodexUI
       @current_menu = 0
     elsif user_input == "q"
       quit
+    elsif user_input == "j"
+      @catalog.export_to_json
+      puts "Saved catalog to #{@catalog.json_file_name}"
     else
       case @current_menu
         when 0

@@ -1,11 +1,13 @@
 require "CSV"
+require "JSON"
 
 class DinosaurCatalog
   attr_accessor :files
-  attr_accessor :catalogs
+  attr_accessor :json_file_name
 
   def initialize(attrs = {})
     @dinodex = []
+    @json_file_name = 'dinodex.json'
     @files = Array(attrs[:catalogs])
     read_catalogs
     @dinodex = parse_keys
@@ -100,5 +102,11 @@ class DinosaurCatalog
 
   def set_current_catalog(catalog = nil)
     @current_catalog = catalog ? catalog : @current_catalog
+  end
+
+  def export_to_json
+    File.open(@json_file_name, "w") do |f|
+      f.write JSON.dump @dinodex
+    end
   end
 end

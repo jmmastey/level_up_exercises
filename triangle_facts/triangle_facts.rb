@@ -17,14 +17,10 @@ class Triangle
   end
 
   def scalene?
-    if !(equilateral? || isosceles?)
-      true
-    else
-      false
-    end
+    !(equilateral? || isosceles?)
   end
 
-  def recite_facts
+  def recite_triangle_type
     case
       when equilateral?
         'This triangle is equilateral!'
@@ -38,10 +34,10 @@ class Triangle
   def recite_angle_facts
     angles = calculate_angles(side1, side2, side3)
 
-    result = "\nThe angles of this triangle are " + angles.join(',')
+    puts "The angles of this triangle are " + angles.join(',')
 
-    if angles.include? 90
-      result += "\nThis triangle is also a right triangle!\n\n"
+    if angles.include?(90)
+      puts "This triangle is also a right triangle!"
     end
 
     result

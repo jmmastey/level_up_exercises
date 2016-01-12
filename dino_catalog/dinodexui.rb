@@ -8,13 +8,14 @@ class DinodexUI
 
   @menu_text = [
     "1) Show bipeds 2) Show carnivores 3) Period menu 4) Size menu 5) Search",
-    "Enter a search term:",
+    "",
     "1) Show large dinosaurs 2) Show small dinosaurs",
     "Search with key:value (eg: diet:herbivore)\nChain searches with comma.\n",
   ]
 
   def self.start(attr = {})
     @catalog = DinosaurCatalog.new(catalogs: attr[:catalogs])
+    @menu_text[1] = period_options
     run
   end
 
@@ -72,6 +73,8 @@ class DinodexUI
   end
 
   def self.handle_period_input(user_input)
+    period = @catalog.dinodex_periods[user_input.to_i - 1]
+    show_dinosaur_facts @catalog.find_dinos(:period, period.downcase)
   end
 
   def self.handle_size_input(user_input)
@@ -86,6 +89,16 @@ class DinodexUI
       index = @catalog.find_dinos(facet[0].to_sym, facet[1], index)
     end
     show_dinosaur_facts index
+  end
+
+  def self.period_options
+    option = 1
+    options = ""
+    @catalog.dinodex_periods.each do |period|
+      options += "#{option}) #{period} "
+      option += 1
+    end
+    options
   end
 
   def self.show_dinosaur_facts(results)

@@ -14,7 +14,7 @@ class DinodexUI
   ]
 
   def self.start(attr = {})
-    @catalog = DinosaurCatalog.new(catalogs: attr[:catalogs])
+    @catalog = DinosaurCatalog.new(csv_files: attr[:csv_files])
     @menu_text[1] = period_options
     run
   end
@@ -39,7 +39,7 @@ class DinodexUI
     puts
     puts "J) To json B) Back Q) Quit"
     puts @menu_text[@current_menu]
-    puts "\nKeys: #{@catalog.dinodex_keys.join(',')}" if @current_menu == 3
+    puts "\nKeys: #{@catalog.default_keys.join(',')}" if @current_menu == 3
     puts
   end
 

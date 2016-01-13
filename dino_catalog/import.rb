@@ -2,14 +2,9 @@ require_relative 'catalog'
 require 'table_print'
 
 class Import
-  CONVERT_AFRICAN_TABLE = {
-    'Genus' => 'Name',
-    'Carnivore' => 'Diet',
-    'Weight' => 'Weight_in_lbs',
-  }
-
   def initialize
     attrs = {}
+    # NAME,PERIOD,CONTINENT,DIET,WEIGHT_IN_LBS,WALKING,DESCRIPTION
     CSV.foreach("dinodex.csv", headers: true, converters: :all) do |row|
       name = row["NAME"] # || row["genius"]
       attrs[:period] = row["PERIOD"]
@@ -21,18 +16,27 @@ class Import
       puts "added >>" + name
       Catalog.dinosaurs << Dinosaur.new(name, attrs)
     end
-  tp Catalog.dinosaurs
+
+    # Genus,Period,Carnivore,Weight,Walking
+    CSV.foreach("african_dinosaur_export.csv",
+      headers: true, converters: :all) do |row|
+      name = row["Genus"]
+      attrs[:period] = row["Period"]
+      attrs[:continent] = "Africa"
+      attrs[:diet] = convert_carnivore_to_diet(row)
+      attrs[:weight] =  row["Weight"]
+      attrs[:walking] = row["Walking"]
+      attrs[:description] = "Very little is known"
+      puts "added >>" + name
+      Catalog.dinosaurs << Dinosaur.new(name, attrs)
+    end
+  end
+
+  def convert_carnivore_to_diet(row)
+    if row["Carnivore"] == "Yes"
+      "Carnivore"
+    else
+      "Unknown"
+    end
   end
 end
-
-    # @store = csv_to_array(filename)
-    #   @columns
-    # end
-
-    # def csv_to_array(file_location)
-    #   csv = CSV.parse(File.open(file_location, 'r') { |f| f.read })
-    #   titles = csv.shift
-    #   titles = titles.map { |f| f.downcase.to_sym }
-    #   @columns = titles
-    #   csv.collect { |record| Hash[*titles.zip(record).flatten(1)] }
-    # end

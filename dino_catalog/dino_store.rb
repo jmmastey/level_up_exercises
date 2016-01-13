@@ -26,6 +26,8 @@ class Dinodex
   Catalog.new('enova')
   Import.new
   Display.print_all
+  Search.find('Giganotosaurus')
+  Search.select('diet', 'Carnivore')
 end
 
 # d = Dinodex.new('dinodex.csv')

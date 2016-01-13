@@ -2,7 +2,7 @@ require 'table_print'
 
 module Display
   def self.print_all
-    tp @dinosaurs
+    tp Catalog.dinosaurs
   end
 
   def self.print_one(result)

@@ -4,17 +4,22 @@ require "JSON"
 class DinosaurCatalog
   attr_accessor :files
   attr_accessor :json_file_name
+  attr_accessor :default_keys
+
+  def default_keys
+    @default_keys = %w(name period continent diet walking weight description)
+  end
 
   def initialize(attrs = {})
     @dinodex = []
     @json_file_name = 'dinodex.json'
-    @files = Array(attrs[:catalogs])
-    read_catalogs
+    @files = Array(attrs[:csv_files])
+    import_csv_files
     @dinodex = parse_keys
     set_current_catalog(@dinodex)
   end
 
-  def read_catalogs
+  def import_csv_files
     @files.map do |file_name|
       CSV.foreach(
         file_name, headers: true, header_converters: :symbol
@@ -26,36 +31,18 @@ class DinosaurCatalog
 
   def parse_keys
     @dinodex.map do |row|
-      parsed_row = {}
-      row.each do |column, value|
-        if column == :genus
-          parsed_row[:name] = value
-        elsif column == :weight_in_lbs
-          parsed_row[:weight] = value
-        elsif column == :carnivore
-          parsed_row[:diet] = (value == 'Yes') ? 'Carnivore' : nil
-        else
-          parsed_row[column] = value
-        end
-      end
-      parsed_row
+      row.merge(@default_keys.to_h)
+      row[:name] = row[:genus] unless row[:name]
+      row[:weight] = row[:weight_in_lbs] unless row[:weight]
+      row[:diet] = 'Carnivore' if !row[:diet] && row[:carnivore] == 'Yes'
+      row
     end
-  end
-
-  def dinodex_keys
-    all_keys = []
-    @dinodex.map do |row|
-      all_keys += row.keys
-    end
-    all_keys.uniq
   end
 
   def dinodex_periods
-    periods = []
     @dinodex.map do |row|
-      periods << row[:period]
-    end
-    periods.uniq
+      row[:period]
+    end.uniq
   end
 
   def find_large_dinosaurs(catalog = nil)
@@ -86,10 +73,11 @@ class DinosaurCatalog
     results = find_dinos(:diet, "carnivore")
     results.concat find_dinos(:diet, "insectivore")
     results.concat find_dinos(:diet, "piscivore")
+
     results
   end
 
-  def find_by_period(catalog = nil)
+  def find_by_period
     find_dinos(:period, time_period)
   end
 

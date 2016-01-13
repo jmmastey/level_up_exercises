@@ -16,7 +16,6 @@ class DinosaurCatalog
     @files = Array(attrs[:csv_files])
     import_csv_files
     @dinodex = parse_keys
-    set_current_catalog(@dinodex)
   end
 
   def import_csv_files
@@ -45,31 +44,25 @@ class DinosaurCatalog
     end.uniq
   end
 
-  def find_large_dinosaurs(catalog = nil)
-    find_by_weight(2000, 999_999_999, catalog)
+  def find_large_dinosaurs
+    find_by_weight(2000, 999_999_999)
   end
 
-  def find_small_dinosaurs(catalog = nil)
-    find_by_weight(1, 2000, catalog)
+  def find_small_dinosaurs
+    find_by_weight(1, 2000)
   end
 
-  def find_by_weight(min_weight, max_weight, catalog = nil)
-    set_current_catalog(catalog)
-
-    @current_catalog.select do |row|
+  def find_by_weight(min_weight, max_weight)
+    @dinodex.select do |row|
       row[:weight].to_i.between?(min_weight, max_weight)
     end
   end
 
-  def find_bipeds(catalog = nil)
-    set_current_catalog(catalog)
-
+  def find_bipeds
     find_dinos(:walking, "biped")
   end
 
-  def find_carnivores(catalog = nil)
-    set_current_catalog(catalog)
-
+  def find_carnivores
     results = find_dinos(:diet, "carnivore")
     results.concat find_dinos(:diet, "insectivore")
     results.concat find_dinos(:diet, "piscivore")
@@ -82,14 +75,10 @@ class DinosaurCatalog
   end
 
   def find_dinos(key, value, catalog = nil)
-    set_current_catalog(catalog ? catalog : @dinodex)
-    @current_catalog.select do |row|
+    current_catalog = catalog ? catalog : @dinodex
+    current_catalog.select do |row|
       row[key] && row[key].downcase == value
     end
-  end
-
-  def set_current_catalog(catalog = nil)
-    @current_catalog = catalog ? catalog : @current_catalog
   end
 
   def export_to_json

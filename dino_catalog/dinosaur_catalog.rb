@@ -63,11 +63,9 @@ class DinosaurCatalog
   end
 
   def find_carnivores
-    results = find_dinos(:diet, "carnivore")
-    results.concat find_dinos(:diet, "insectivore")
-    results.concat find_dinos(:diet, "piscivore")
-
-    results
+    find_dinos(:diet, "carnivore")
+      .concat find_dinos(:diet, "insectivore")
+      .concat find_dinos(:diet, "piscivore")
   end
 
   def find_by_period

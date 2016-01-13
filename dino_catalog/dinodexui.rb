@@ -1,32 +1,77 @@
+require_relative "menus"
 require_relative "dinosaur_catalog"
 
 class DinodexUI
   attr_accessor :running
   attr_accessor :catalog
+  attr_accessor :menu_text
 
-  @current_menu = 0
+  @menu_index = 0
 
-  @menu_text = [
-    "1) Show bipeds 2) Show carnivores 3) Period menu 4) Size menu 5) Search",
-    "",
-    "1) Show large dinosaurs 2) Show small dinosaurs",
-    "Search with key:value (eg: diet:herbivore)\nChain searches with comma.\n",
-  ]
+  def self.current_sub_menu
+    @sub_menus[@menu_index]
+  end
 
   def self.start(attr = {})
-    @catalog = DinosaurCatalog.new(csv_files: attr[:csv_files])
-    @menu_text[1] = period_options
+    @catalog = DinosaurCatalog.new(attr)
+
+    @sub_menus = [
+      Menu.new(
+        options: %w(Bipeds Carnivores Periods Sizes Search),
+        actions: [
+          ->(_user_input) { show_dinosaur_facts(@catalog.find_bipeds) },
+          ->(_user_input) { show_dinosaur_facts(@catalog.find_carnivores) },
+        ],
+        default_action: ->(user_input) { switch_menu(user_input) },
+      ),
+      Menu.new(
+        options: @catalog.dinodex_periods,
+        default_action: lambda do |user_input|
+          show_dinosaur_facts @catalog.find_dinos(
+            :period, @catalog.dinodex_periods[user_input.to_i - 1].downcase
+          )
+        end,
+      ),
+      Menu.new(
+        options: ["Show large dinosaurs", "Show small dinosaurs"],
+        default_action: ->(user_input) { show_dinos_by_size(user_input) },
+      ),
+      Menu.new(
+        options: ["\nSearch with key:value. "\
+                  "Chain searches with comma. "\
+                  "(eg: walking:biped,period:jurassic)\n"],
+        default_action: ->(user_input) { handle_search_input(user_input) },
+      ),
+    ]
+
+    @home_menu = LetteredMenu.new(
+      options: ["JSON Save", "Back", "Quit"],
+      actions: [
+        ->(_user_input) { save_to_json },
+        ->(_user_input) { back_to_home_menu },
+        ->(_user_input) { quit },
+      ],
+    )
+
     run
   end
 
   def self.run
-    @running = true
-    system "clear" || "cls"
+    clear_screen
     show_banner
+
+    @running = true
     while @running
-      show_menu_options
-      handle_user_input(gets.chomp.downcase)
+      current_sub_menu.show_options
+      @home_menu.show_options
+      user_input = gets.chomp.downcase
+      clear_screen
+      handle_user_input(user_input)
     end
+  end
+
+  def self.clear_screen
+    system "clear" || "cls"
   end
 
   def self.show_banner
@@ -35,54 +80,24 @@ class DinodexUI
     end
   end
 
-  def self.show_menu_options
-    puts
-    puts "J) To json B) Back Q) Quit"
-    puts @menu_text[@current_menu]
-    puts "\nKeys: #{@catalog.default_keys.join(',')}" if @current_menu == 3
-    puts
+  def self.switch_menu(user_input)
+    @menu_index = 1 if user_input == "3"  # periods
+    @menu_index = 2 if user_input == "4"  # sizes
+    @menu_index = 3 if user_input == "5"  # search
   end
 
   def self.handle_user_input(user_input)
-    system "clear" || "cls"
+    current_sub_menu.handle_user_input(user_input) unless
+      @home_menu.handle_user_input(user_input)
+  end
 
-    if user_input == "b" && @current_menu > 0
-      @current_menu = 0
-    elsif user_input == "q"
-      quit
-    elsif user_input == "j"
-      @catalog.export_to_json
-      puts "Saved catalog to #{@catalog.json_file_name}"
-    else
-      case @current_menu
-        when 0
-          handle_main_menu_input(user_input)
-        when 1
-          handle_period_input(user_input)
-        when 2
-          handle_size_input(user_input)
-        when 3
-          handle_search_input(user_input)
-      end
+  def self.show_dinos_by_size(user_input)
+    case user_input
+      when "1"
+        show_dinosaur_facts @catalog.find_large_dinosaurs
+      when "2"
+        show_dinosaur_facts @catalog.find_small_dinosaurs
     end
-  end
-
-  def self.handle_main_menu_input(user_input)
-    show_dinosaur_facts @catalog.find_bipeds if user_input == "1"
-    show_dinosaur_facts @catalog.find_carnivores if user_input == "2"
-    @current_menu = 1 if user_input == "3"
-    @current_menu = 2 if user_input == "4"
-    @current_menu = 3 if user_input == "5"
-  end
-
-  def self.handle_period_input(user_input)
-    period = @catalog.dinodex_periods[user_input.to_i - 1]
-    show_dinosaur_facts @catalog.find_dinos(:period, period.downcase)
-  end
-
-  def self.handle_size_input(user_input)
-    show_dinosaur_facts @catalog.find_large_dinosaurs if user_input == "1"
-    show_dinosaur_facts @catalog.find_small_dinosaurs if user_input == "2"
   end
 
   def self.handle_search_input(user_input)
@@ -92,16 +107,6 @@ class DinodexUI
       index = @catalog.find_dinos(facet[0].to_sym, facet[1], index)
     end
     show_dinosaur_facts index
-  end
-
-  def self.period_options
-    option = 1
-    options = ""
-    @catalog.dinodex_periods.each do |period|
-      options += "#{option}) #{period} "
-      option += 1
-    end
-    options
   end
 
   def self.show_dinosaur_facts(results)
@@ -114,6 +119,17 @@ class DinodexUI
       puts "Approx weight: #{dino[:weight]}lbs." if dino[:weight]
       puts "Facts: #{dino[:description]}" if dino[:description]
     end
+  end
+
+  def self.save_to_json
+    @catalog.export_to_json
+    puts "Saved catalog to #{@catalog.json_file_name}"
+    true
+  end
+
+  def self.back_to_home_menu
+    @menu_index = 0
+    true
   end
 
   def self.quit

@@ -6,10 +6,13 @@ end
 class Robot
   attr_accessor :name
 
-  @@registry
+  @registry ||= []
+
+  class << self
+    attr_accessor :registry
+  end
 
   def initialize(args = {})
-    @@registry ||= []
     @name_generator = args[:name_generator]
     create_or_allocate_name
     check_and_register_name
@@ -27,14 +30,14 @@ class Robot
     if name_alreadly_used? || incorrect_name_format?
       return
     else
-      @@registry << @name
+      Robot.registry << @name
       puts @name + " Registered"
     end
   end
 
   def name_alreadly_used?
     fail NameCollisionError,
-      'NO: Name Alreadly Used' if @@registry.include?(@name)
+      'NO: Name Alreadly Used' if Robot.registry.include?(@name)
   end
 
   def incorrect_name_format?

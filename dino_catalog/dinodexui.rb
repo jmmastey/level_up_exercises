@@ -59,14 +59,11 @@ class DinodexUI
   def self.run
     clear_screen
     show_banner
-
     @running = true
+
     while @running
-      current_sub_menu.show_options
-      @home_menu.show_options
-      user_input = gets.chomp.downcase
-      clear_screen
-      handle_user_input(user_input)
+      show_menu_options
+      handle_user_input
     end
   end
 
@@ -80,13 +77,20 @@ class DinodexUI
     end
   end
 
+  def self.show_menu_options
+    current_sub_menu.show_options
+    @home_menu.show_options
+  end
+
   def self.switch_menu(user_input)
     @menu_index = 1 if user_input == "3"  # periods
     @menu_index = 2 if user_input == "4"  # sizes
     @menu_index = 3 if user_input == "5"  # search
   end
 
-  def self.handle_user_input(user_input)
+  def self.handle_user_input
+    user_input = gets.chomp.downcase
+    clear_screen
     current_sub_menu.handle_user_input(user_input) unless
       @home_menu.handle_user_input(user_input)
   end
@@ -106,7 +110,7 @@ class DinodexUI
       facet = search.split(':')
       index = @catalog.find_dinos(facet[0].to_sym, facet[1], index)
     end
-    show_dinosaur_facts index
+    show_dinosaur_facts(index)
   end
 
   def self.show_dinosaur_facts(results)

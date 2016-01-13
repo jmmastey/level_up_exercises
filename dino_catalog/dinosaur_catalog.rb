@@ -2,7 +2,6 @@ require "CSV"
 require "JSON"
 
 class DinosaurCatalog
-  attr_accessor :files
   attr_accessor :json_file_name
   attr_accessor :default_keys
 
@@ -13,13 +12,14 @@ class DinosaurCatalog
   def initialize(attrs = {})
     @dinodex = []
     @json_file_name = 'dinodex.json'
-    @files = Array(attrs[:csv_files])
-    import_csv_files
-    @dinodex = parse_keys
+
+    import_csv_files(attrs[:csv_files])
+
+    parse_keys
   end
 
-  def import_csv_files
-    @files.map do |file_name|
+  def import_csv_files(files)
+    files.map do |file_name|
       CSV.foreach(
         file_name, headers: true, header_converters: :symbol
       ) do |row|
@@ -29,7 +29,7 @@ class DinosaurCatalog
   end
 
   def parse_keys
-    @dinodex.map do |row|
+    @dinodex = @dinodex.map do |row|
       row.merge(@default_keys.to_h)
       row[:name] = row[:genus] unless row[:name]
       row[:weight] = row[:weight_in_lbs] unless row[:weight]

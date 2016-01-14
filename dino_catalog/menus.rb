@@ -1,6 +1,4 @@
 class Menu
-  attr_accessor :menu_options
-
   def initialize(options)
     @menu_options = Array(options)
   end

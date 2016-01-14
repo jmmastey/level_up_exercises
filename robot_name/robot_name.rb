@@ -6,33 +6,37 @@ end
 class Robot
   attr_accessor :name
 
+  TWO_CHARS_THREE_NUMBERS = /[[:alpha:]]{2}[[:digit:]]{3}/
+
   @registry ||= []
 
   class << self
     attr_accessor :registry
   end
 
-  def initialize(args = {})
-    @name_generator = args[:name_generator]
-    create_or_allocate_name
-    check_and_register_name
-  end
-
-  def create_or_allocate_name
-    if @name_generator
-      @name = @name_generator
-    else
+  def initialize(name_generator = nil)
+    if name_generator.nil?
       create_new_name
+    else
+      allocate_name(name_generator)
     end
+
+    register_name unless invalid_name?
   end
 
-  def check_and_register_name
-    if name_alreadly_used? || incorrect_name_format?
-      return
-    else
-      Robot.registry << @name
-      puts @name + " Registered"
-    end
+  private
+
+  def allocate_name(name_generator)
+    @name = name_generator
+  end
+
+  def invalid_name?
+    name_alreadly_used? || incorrect_name_format?
+  end
+
+  def register_name
+    Robot.registry << @name
+    puts @name + " Registered"
   end
 
   def name_alreadly_used?
@@ -42,11 +46,11 @@ class Robot
 
   def incorrect_name_format?
     fail NameCollisionError,
-      'NO: 2 CHARs and 3 Digits' unless @name =~ /[[:alpha:]]{2}[[:digit:]]{3}/
+      'NO: 2 Chars and 3 Digits' unless @name =~ TWO_CHARS_THREE_NUMBERS
   end
 
   def generate_char
-    ('A'..'Z').to_a.sample
+    [*'A'..'Z'].sample
   end
 
   def generate_num
@@ -63,7 +67,7 @@ puts "---"
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
 puts "---"
-robot = Robot.new(name_generator: 'AA111')
+robot = Robot.new('AA111')
 puts "My pet robot's name is #{robot.name}, but we usually call him basil."
 puts "---"
 # puts "Will Fail"
@@ -71,5 +75,5 @@ puts "---"
 # puts "My pet robot's name is #{robot.name}, but we usually call him basil."
 # puts "---"
 puts "Will Fail"
-robot = Robot.new(name_generator: 'Ted')
+robot = Robot.new('Ted')
 puts "My pet robot's name is #{robot.name}, but we usually call him basil."

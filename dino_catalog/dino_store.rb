@@ -25,8 +25,9 @@ require_relative 'catalog'
 class Dinodex
   Catalog.new('enova')
   Import.new
-  Display.print_all
+  Display.print_all(Catalog.dinosaurs)
   Search.find('Giganotosaurus')
+  Search.select('walking', 'Biped')
   Search.select('diet', 'Carnivore')
 end
 

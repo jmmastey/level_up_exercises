@@ -19,6 +19,6 @@ class Dinosaur
 
   def what_size?
     return "Unknown" if @weight.nil?
-    @weight > 2000 ? "Big - Over a ton" : "Small - Under a ton"
+    @weight >= 2000 ? "Big - Over a ton" : "Small - Under a ton"
   end
 end

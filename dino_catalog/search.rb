@@ -1,3 +1,5 @@
+require 'table_print'
+
 class Search
   def self.find(keyword)
     result = Catalog.dinosaurs.find { |x| x.name == keyword }
@@ -5,7 +7,7 @@ class Search
   end
 
   def self.select(category, keyword)
-    results = Catalog.dinosaurs.find_all { |x| x.instance_variable_get("@#{category}") == keyword }
-    Display.print_all
+    results = Catalog.dinosaurs.find_all { |x| x.instance_variable_get("@#{category}").include?(keyword) }
+    Display.print_all(results)
   end
 end

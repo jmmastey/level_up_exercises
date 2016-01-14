@@ -1,8 +1,8 @@
 require 'table_print'
 
 module Display
-  def self.print_all
-    tp Catalog.dinosaurs
+  def self.print_all(results)
+    tp results
   end
 
   def self.print_one(result)

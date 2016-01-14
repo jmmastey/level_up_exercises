@@ -115,13 +115,10 @@ class DinodexUI
 
   def self.show_dinosaur_facts(results)
     results.each do |dino|
-      puts "\nName: #{dino[:name]}"
-      puts "Period: #{dino[:period]}"
-      puts "Walking: #{dino[:walking]}"
-      puts "Continent: #{dino[:continent]}." if dino[:continent]
-      puts "Diet: #{dino[:diet]}" if dino[:diet]
-      puts "Approx weight: #{dino[:weight]}lbs." if dino[:weight]
-      puts "Facts: #{dino[:description]}" if dino[:description]
+      dino.each_pair do |key, val|
+        puts "#{key.capitalize}: #{val}" if val
+      end
+      puts '-' * 80
     end
   end
 

@@ -1,16 +1,12 @@
-require './import'
-require './filter_dinos'
-require 'pp'
-
 DINO_ATTRIBUTES = [:name, :period, :continent, :diet, :weight, :walking,
                    :description]
 
 class DinoCollection
   attr_accessor :collection_of_dinos
 
-  def initialize(load = false)
+  def initialize(load_from_csv = false)
     @collection_of_dinos = []
-    load_from_csv_files if load
+    load_from_csv_files if load_from_csv
   end
 
   def load_from_csv_files
@@ -27,18 +23,20 @@ class DinoCollection
   end
 
   def add_many_dinos(many_dino_objects)
-    many_dino_objects.each { |dino| add_dino(dino)}
+    many_dino_objects.each { |dino| add_dino(dino) }
   end
 
   def fancy_display
-    @collection_of_dinos.each do |dino|
-      DINO_ATTRIBUTES.each do |attribute|
-        
-      end
-    end
+    @collection_of_dinos.each(&:fancy_display)
   end
 
-
+  def create_hash_from_dinos
+    array_of_hashes = []
+    @collection_of_dinos.each do |dino|
+      array_of_hashes << dino.hash_of_attributes
+    end
+    array_of_hashes
+  end
 end
 
 class Dino
@@ -60,16 +58,25 @@ class Dino
     @description = attrs[:description]
   end
 
-  def carnivore?
-    return false if @diet=="Herbivore"
-    true
+  def carnivore_or_herbivore
+    return "Herbivore" if @diet == "Herbivore"
+    "Carnivore"
+  end
+
+  def fancy_display
+    puts
+    DINO_ATTRIBUTES.each do |attribute|
+      next if send(attribute).nil?
+      puts "#{attribute}...#{send(attribute)}"
+    end
+  end
+
+  def hash_of_attributes
+    attribute_hash = {}
+    DINO_ATTRIBUTES.each do |attribute|
+      next if send(attribute).nil?
+      attribute_hash[attribute] = send(attribute)
+    end
+    attribute_hash
   end
 end
-
-main_collection = DinoCollection.new(true)
-
-main_collection.fancy_display
-#bipeds = DinoFilter.filter_by_category_value(main_collection, "walking", "Biped")
-#puts bipeds.inspect
-
-#carnivore = DinoFilter.filter_by_category_value(main_collection, "diet", "true")

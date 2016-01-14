@@ -1,13 +1,29 @@
-
-
 class DinoFilter
-  def self.filter_by_category_value(dino_collection, category, value)
-    category = special_searches(category, value)
+  def self.search(dino_collection, search_attrs)
+    working_collection = dino_collection
+    search_attrs.each do |category, value|
+      category = :carnivore_or_herbivore if category == :diet
+      working_collection = find_matches(working_collection, category, value)
+    end
+    working_collection
+  end
+
+  def self.find_matches(dino_collection, category, value)
     matching_dinos = []
     dino_collection.collection_of_dinos.each do |dino|
-      matching_dinos << dino if dino.send(category).match(value)
+      matching_dinos << dino if dino_match?(dino, category, value)
     end
-    result = create_filtered_dino_collection(matching_dinos)
+    create_filtered_dino_collection(matching_dinos)
+  end
+
+  def self.dino_match?(dino, category, value)
+    case category
+      when :weight_greater_than
+        return !dino.weight.nil? && dino.weight > value
+      when :weight_less_than
+        return !dino.weight.nil? && dino.weight < value
+    end
+    dino.send(category).match(value)
   end
 
   def self.create_filtered_dino_collection(dino_objects)
@@ -15,11 +31,4 @@ class DinoFilter
     new_collection.add_many_dinos(dino_objects)
     new_collection
   end
-
-  def searches_selector(category, value)
-    case category
-    when "diet" then return "Carnivore?"
-    end
-  end
-
 end

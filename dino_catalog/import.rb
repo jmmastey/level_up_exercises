@@ -1,8 +1,5 @@
-require 'csv'
-
 class ImportData
   CSVFILES = ['dinodex.csv', 'african_dinosaur_export.csv']
-  
 
   def self.load_and_transform
     processed_data = []
@@ -57,7 +54,7 @@ class ImportData
 
   def self.read_csv_file(csv_file_path)
     table_from_csv = []
-    CSV.foreach(csv_file_path, headers: true) do |csv_obj|
+    CSV.foreach(csv_file_path, headers: true, converters: :all) do |csv_obj|
       table_from_csv << csv_obj.to_h
     end
     table_from_csv

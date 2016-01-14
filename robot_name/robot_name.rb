@@ -4,7 +4,12 @@ class NameCollisionError < RuntimeError; end
 class Robot
   attr_accessor :name
 
+  def name_generator
+    @name_generator ||= -> { name_builder }
+  end
+
   def initialize(args = {})
+    @name_generator = args[:name_generator]
     @name = args[:name] ? register_name(args[:name]) : generate_name
   end
 
@@ -15,11 +20,17 @@ class Robot
   end
 
   def generate_name
-    robot_name = "#{generate_char}#{generate_num_string}"
-
-    return generate_name if name_exists?(robot_name)
+    robot_name = name_generator.call
 
     register_name(robot_name)
+  end
+
+  def name_builder
+    robot_name = "#{generate_char}#{generate_num_string}"
+
+    return name_generator.call if name_exists?(robot_name)
+
+    robot_name
   end
 
   def register_name(robot_name)
@@ -40,9 +51,7 @@ class Robot
 
   def generate_num_string
     nums = ""
-    (1..3).each do
-      nums += rand(10).to_s
-    end
+    (1..3).to_a.map { nums += rand(10).to_s }
     nums
   end
 
@@ -51,10 +60,11 @@ class Robot
   end
 end
 
-robot = Robot.new
-robot2 = Robot.new
-robot3 = Robot.new(name: "AA111")
-
-puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
-puts "My pet robot's name is #{robot2.name}, but we usually call him sparky."
-puts "My pet robot's name is #{robot3.name}, but we usually call him sparky."
+[
+  Robot.new,
+  Robot.new,
+  Robot.new(name: "AA111"),
+  Robot.new(name_generator: -> { "ZZ222" }),
+].each do |robot|
+  puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
+end

@@ -1,14 +1,16 @@
 class Menu
   attr_accessor :menu_options
-  attr_accessor :menu_actions
-  attr_accessor :default_action
+  attr_accessor :action
 
   def initialize(attrs = {})
-    attrs[:actions] ||= []
+    @menu_options = Array(attrs[:options])
+    @action = attrs[:action]
+    @help_text = attrs[:help_text]
+  end
 
-    @menu_options = attrs[:options]
-    @menu_actions = attrs[:actions]
-    @default_action = attrs[:default_action]
+  def show
+    show_options
+    show_help_text
   end
 
   def show_options
@@ -19,14 +21,12 @@ class Menu
     puts menu_text
   end
 
-  def handle_user_input(user_input)
-    index = user_input.to_i - 1
+  def show_help_text
+    puts @help_text
+  end
 
-    if @menu_actions[index]
-      @menu_actions[index].call(user_input)
-    else
-      @default_action.call(user_input)
-    end
+  def handle_user_input(user_input)
+    @action.call(user_input)
   end
 end
 
@@ -34,23 +34,22 @@ class LetteredMenu < Menu
   def initialize(attrs = {})
     super(attrs)
     hashed_menu_options = {}
-    @menu_options.each_with_index do |option, index|
-      action = @menu_actions[index] ? @menu_actions[index] : @default_action
-      hashed_menu_options[option[0].upcase] = { option: option, action: action }
+    @menu_options.each do |option|
+      hashed_menu_options[option[0].upcase] = option
     end
     @menu_options = hashed_menu_options
   end
 
   def show_options
     menu_text = ""
-    @menu_options.each do |key, menu_action|
-      menu_text += "#{key}) #{menu_action[:option]} "
+    @menu_options.each do |key, action|
+      menu_text += "#{key}) #{action} "
     end
     puts menu_text
   end
 
   def handle_user_input(user_input)
     index = user_input.upcase
-    @menu_options[index] ? @menu_options[index][:action].call(user_input) : nil
+    @menu_options[index] ? @action.call(user_input) : nil
   end
 end

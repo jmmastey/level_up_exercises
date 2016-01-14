@@ -8,6 +8,11 @@ class DinodexUI
 
   @menu_index = 0
 
+  @action_menu = LetteredMenu.new(
+    options: ["JSON Save", "Back", "Quit"],
+    action: ->(user_input) { handle_action_menu(user_input) },
+  )
+
   def self.current_sub_menu
     @sub_menus[@menu_index]
   end
@@ -18,40 +23,22 @@ class DinodexUI
     @sub_menus = [
       Menu.new(
         options: %w(Bipeds Carnivores Periods Sizes Search),
-        actions: [
-          ->(_user_input) { show_dinosaur_facts(@catalog.find_bipeds) },
-          ->(_user_input) { show_dinosaur_facts(@catalog.find_carnivores) },
-        ],
-        default_action: ->(user_input) { switch_menu(user_input) },
+        action: ->(user_input) { handle_home_menu(user_input) },
       ),
       Menu.new(
         options: @catalog.dinodex_periods,
-        default_action: lambda do |user_input|
-          show_dinosaur_facts @catalog.find_dinos(
-            :period, @catalog.dinodex_periods[user_input.to_i - 1].downcase
-          )
-        end,
+        action: ->(user_input) { show_dinos_by_period(user_input) },
       ),
       Menu.new(
         options: ["Show large dinosaurs", "Show small dinosaurs"],
-        default_action: ->(user_input) { show_dinos_by_size(user_input) },
+        action: ->(user_input) { show_dinos_by_size(user_input) },
       ),
       Menu.new(
-        options: ["\nSearch with key:value. "\
-                  "Chain searches with comma. "\
-                  "(eg: walking:biped,period:jurassic)\n"],
-        default_action: ->(user_input) { handle_search_input(user_input) },
+        help_text: "\nSearch with key:value. Chain searches with comma. "\
+                    "(eg: walking:biped,period:jurassic)\n",
+        action: ->(user_input) { handle_search_input(user_input) },
       ),
     ]
-
-    @home_menu = LetteredMenu.new(
-      options: ["JSON Save", "Back", "Quit"],
-      actions: [
-        ->(_user_input) { save_to_json },
-        ->(_user_input) { back_to_home_menu },
-        ->(_user_input) { quit },
-      ],
-    )
 
     run
   end
@@ -78,21 +65,44 @@ class DinodexUI
   end
 
   def self.show_menu_options
-    current_sub_menu.show_options
-    @home_menu.show_options
+    current_sub_menu.show
+    @action_menu.show
   end
 
   def self.switch_menu(user_input)
-    @menu_index = 1 if user_input == "3"  # periods
-    @menu_index = 2 if user_input == "4"  # sizes
-    @menu_index = 3 if user_input == "5"  # search
+    @menu_index = 1 if user_input == 3  # periods
+    @menu_index = 2 if user_input == 4  # sizes
+    @menu_index = 3 if user_input == 5  # search
   end
 
   def self.handle_user_input
     user_input = gets.chomp.downcase
     clear_screen
     current_sub_menu.handle_user_input(user_input) unless
-      @home_menu.handle_user_input(user_input)
+      @action_menu.handle_user_input(user_input)
+  end
+
+  def self.handle_home_menu(user_input)
+    user_input = user_input.to_i
+
+    if user_input > 2
+      switch_menu(user_input)
+    else
+      show_dinosaur_facts(@catalog.find_bipeds) if user_input == 1
+      show_dinosaur_facts(@catalog.find_carnivores) if user_input == 2
+    end
+  end
+
+  def self.handle_action_menu(user_input)
+    save_to_json if user_input == 'j'
+    back_to_home_menu if user_input == 'b'
+    quit if user_input == 'q'
+  end
+
+  def self.show_dinos_by_period(user_input)
+    show_dinosaur_facts @catalog.find_dinos(
+      :period, @catalog.dinodex_periods[user_input.to_i - 1].downcase
+    )
   end
 
   def self.show_dinos_by_size(user_input)

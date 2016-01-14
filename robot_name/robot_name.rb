@@ -4,12 +4,14 @@ class NameCollisionError < RuntimeError; end
 class Robot
   attr_accessor :name
 
-  def self.registry
-    @registry ||= []
-  end
-
   def initialize(args = {})
     @name = args[:name] ? register_name(args[:name]) : generate_name
+  end
+
+  private
+
+  def self.registry
+    @registry ||= []
   end
 
   def generate_name

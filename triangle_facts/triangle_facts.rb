@@ -42,7 +42,7 @@ class Triangle
   def angle_facts
     angles = calculate_angles
     puts 'The angles of this triangle are ' << angles.join(',')
-    puts 'This triangle is also a right triangle!' if (angles.include? 90)
+    puts 'This triangle is also a right triangle!' if angles.include? 90
   end
 
   private def calculate_angles

@@ -44,11 +44,11 @@ class DinosaurCatalog
     end.uniq
   end
 
-  def find_large_dinosaurs
+  def find_large
     find_by_weight(2000, 999_999_999)
   end
 
-  def find_small_dinosaurs
+  def find_small
     find_by_weight(1, 2000)
   end
 

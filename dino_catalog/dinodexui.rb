@@ -14,8 +14,7 @@ class DinodexUI
 
     clear_screen
 
-    # show banner
-    File.open('dinobanner.txt', 'r') { |f| puts f.read }
+    show_banner
 
     run
   end
@@ -37,6 +36,10 @@ class DinodexUI
       sizes: ->(user_input) { show_dinos_by_size(user_input) },
       search: ->(user_input) { handle_search_input(user_input) },
     }
+  end
+
+  def self.show_banner
+    File.open('dinobanner.txt', 'r') { |f| puts f.read }
   end
 
   def self.run

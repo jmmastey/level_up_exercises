@@ -11,6 +11,7 @@ class DinosaurCatalog
 
   def initialize(attrs = {})
     @dinodex = []
+
     @json_file_name = 'dinodex.json'
 
     import_csv_files(attrs[:csv_files])
@@ -38,9 +39,7 @@ class DinosaurCatalog
   end
 
   def dinodex_periods
-    @dinodex.map do |row|
-      row[:period]
-    end.uniq
+    @dinodex.map { |row| row[:period] }.uniq
   end
 
   def find_large
@@ -52,9 +51,7 @@ class DinosaurCatalog
   end
 
   def find_by_weight(min_weight, max_weight)
-    @dinodex.select do |row|
-      row[:weight].to_i.between?(min_weight, max_weight)
-    end
+    @dinodex.select { |row| row[:weight].to_i.between?(min_weight, max_weight) }
   end
 
   def find_bipeds
@@ -73,14 +70,10 @@ class DinosaurCatalog
 
   def find_dinos(key, value, catalog = nil)
     current_catalog = catalog ? catalog : @dinodex
-    current_catalog.select do |row|
-      row[key] && row[key].downcase == value
-    end
+    current_catalog.select { |row| row[key] && row[key].downcase == value }
   end
 
   def export_to_json
-    File.open(@json_file_name, "w") do |f|
-      f.write JSON.dump @dinodex
-    end
+    File.open(@json_file_name, "w") { |f| f.write JSON.dump @dinodex }
   end
 end

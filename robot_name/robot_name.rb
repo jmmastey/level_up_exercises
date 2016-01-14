@@ -1,32 +1,79 @@
-class NameCollisionError < RuntimeError; end
+class NameCollisionError < RuntimeError
+end
 
+# A Random name will be created if you give no gudiance
+# To allocate a name give an arg (name_generator: 'ted')
 class Robot
   attr_accessor :name
 
-  @@registry
+  TWO_CHARS_THREE_NUMBERS = /[[:alpha:]]{2}[[:digit:]]{3}/
 
-  def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+  @registry ||= []
 
-    if @name_generator
-      @name = @name_generator.call
+  class << self
+    attr_accessor :registry
+  end
+
+  def initialize(name_generator = nil)
+    if name_generator.nil?
+      create_new_name
     else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
-
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+      allocate_name(name_generator)
     end
 
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+    register_name unless invalid_name?
+  end
+
+  private
+
+  def allocate_name(name_generator)
+    @name = name_generator
+  end
+
+  def invalid_name?
+    name_alreadly_used? || incorrect_name_format?
+  end
+
+  def register_name
+    Robot.registry << @name
+    puts @name + " Registered"
+  end
+
+  def name_alreadly_used?
+    fail NameCollisionError,
+      'NO: Name Alreadly Used' if Robot.registry.include?(@name)
+  end
+
+  def incorrect_name_format?
+    fail NameCollisionError,
+      'NO: 2 Chars and 3 Digits' unless @name =~ TWO_CHARS_THREE_NUMBERS
+  end
+
+  def generate_char
+    [*'A'..'Z'].sample
+  end
+
+  def generate_num
+    rand(10).to_s
+  end
+
+  def create_new_name
+    @name = "#{generate_char}#{generate_char}#{generate_num}#{generate_num}" \
+      "#{generate_num}"
   end
 end
 
+puts "---"
 robot = Robot.new
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
-
-# Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+puts "---"
+robot = Robot.new('AA111')
+puts "My pet robot's name is #{robot.name}, but we usually call him basil."
+puts "---"
+# puts "Will Fail"
+# robot = Robot.new(name_generator: 'AA111')
+# puts "My pet robot's name is #{robot.name}, but we usually call him basil."
+# puts "---"
+puts "Will Fail"
+robot = Robot.new('Ted')
+puts "My pet robot's name is #{robot.name}, but we usually call him basil."

@@ -6,8 +6,11 @@ class Menu
   end
 
   def show
-    show_options
-    show_help_text
+    if @menu_options.length == 1
+      puts @menu_options[0]
+    else
+      show_options
+    end
   end
 
   def show_options
@@ -16,10 +19,6 @@ class Menu
       menu_text += "#{index + 1}) #{option} "
     end
     puts menu_text
-  end
-
-  def show_help_text
-    puts @help_text
   end
 end
 

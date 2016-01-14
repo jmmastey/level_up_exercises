@@ -1,11 +1,8 @@
 class Menu
   attr_accessor :menu_options
-  attr_accessor :action
 
-  def initialize(attrs = {})
-    @menu_options = Array(attrs[:options])
-    @action = attrs[:action]
-    @help_text = attrs[:help_text]
+  def initialize(options)
+    @menu_options = Array(options)
   end
 
   def show
@@ -15,18 +12,14 @@ class Menu
 
   def show_options
     menu_text = ""
-    @menu_options.each_with_index do |action, index|
-      menu_text += "#{index + 1}) #{action} "
+    @menu_options.each_with_index do |option, index|
+      menu_text += "#{index + 1}) #{option} "
     end
     puts menu_text
   end
 
   def show_help_text
     puts @help_text
-  end
-
-  def handle_user_input(user_input)
-    @action.call(user_input)
   end
 end
 
@@ -42,14 +35,9 @@ class LetteredMenu < Menu
 
   def show_options
     menu_text = ""
-    @menu_options.each do |key, action|
-      menu_text += "#{key}) #{action} "
+    @menu_options.each do |key, option|
+      menu_text += "#{key}) #{option} "
     end
     puts menu_text
-  end
-
-  def handle_user_input(user_input)
-    index = user_input.upcase
-    @menu_options[index] ? @action.call(user_input) : nil
   end
 end

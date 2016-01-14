@@ -3,6 +3,7 @@ require "JSON"
 
 class DinosaurCatalog
   attr_accessor :json_file_name
+  attr_accessor :default_keys
 
   def default_keys
     @default_keys = %w(name period continent diet walking weight description)
@@ -29,7 +30,6 @@ class DinosaurCatalog
 
   def parse_keys
     @dinodex = @dinodex.map do |row|
-      row.merge(@default_keys.to_h)
       row[:name] = row[:genus] unless row[:name]
       row[:weight] = row[:weight_in_lbs] unless row[:weight]
       row[:diet] = 'Carnivore' if !row[:diet] && row[:carnivore] == 'Yes'

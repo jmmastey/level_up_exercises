@@ -11,6 +11,8 @@ class Menu
     end
   end
 
+  private
+
   def show_options
     menu_text = ""
     @menu_options.each_with_index do |option, index|
@@ -29,6 +31,8 @@ class LetteredMenu < Menu
     end
     @menu_options = hashed_menu_options
   end
+
+  private
 
   def show_options
     menu_text = ""

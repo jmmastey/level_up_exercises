@@ -19,25 +19,6 @@ class DinosaurCatalog
     parse_keys
   end
 
-  def import_csv_files(files)
-    files.map do |file_name|
-      CSV.foreach(
-        file_name, headers: true, header_converters: :symbol
-      ) do |row|
-        @dinodex << row.to_hash
-      end
-    end
-  end
-
-  def parse_keys
-    @dinodex = @dinodex.map do |row|
-      row[:name] = row[:genus] unless row[:name]
-      row[:weight] = row[:weight_in_lbs] unless row[:weight]
-      row[:diet] = 'Carnivore' if !row[:diet] && row[:carnivore] == 'Yes'
-      row
-    end
-  end
-
   def dinodex_periods
     @dinodex.map { |row| row[:period] }.uniq
   end
@@ -75,5 +56,26 @@ class DinosaurCatalog
 
   def export_to_json
     File.open(@json_file_name, "w") { |f| f.write JSON.dump @dinodex }
+  end
+
+  private
+
+  def import_csv_files(files)
+    files.map do |file_name|
+      CSV.foreach(
+        file_name, headers: true, header_converters: :symbol
+      ) do |row|
+        @dinodex << row.to_hash
+      end
+    end
+  end
+
+  def parse_keys
+    @dinodex = @dinodex.map do |row|
+      row[:name] = row[:genus] unless row[:name]
+      row[:weight] = row[:weight_in_lbs] unless row[:weight]
+      row[:diet] = 'Carnivore' if !row[:diet] && row[:carnivore] == 'Yes'
+      row
+    end
   end
 end

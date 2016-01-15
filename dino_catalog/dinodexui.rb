@@ -9,7 +9,6 @@ class DinodexUI
     @catalog = DinosaurCatalog.new(attr)
 
     load_sub_menus
-    load_sub_menu_actions
     @action_menu = LetteredMenu.new(["JSON Save", "Back", "Quit"])
 
     clear_screen
@@ -26,15 +25,6 @@ class DinodexUI
       sizes: Menu.new(["Large dinosaurs", "Small dinosaurs"]),
       search: Menu.new("\nSearch with key:value. Chain searches with comma. "\
         "(eg: walking:biped,period:jurassic)\n"),
-    }
-  end
-
-  def self.load_sub_menu_actions
-    @sub_menu_actions = {
-      home: ->(user_input) { handle_home_menu(user_input) },
-      periods: ->(user_input) { show_dinos_by_period(user_input) },
-      sizes: ->(user_input) { show_dinos_by_size(user_input) },
-      search: ->(user_input) { handle_search_input(user_input) },
     }
   end
 
@@ -62,18 +52,7 @@ class DinodexUI
     if %w(j b q).include?(user_input)
       handle_action_menu(user_input)
     else
-      @sub_menu_actions[@menu_index].call(user_input)
-    end
-  end
-
-  def self.handle_home_menu(user_input)
-    user_input = user_input.to_i
-
-    if user_input > 2
-      switch_menu(user_input)
-    else
-      show_dinosaur_facts(@catalog.find_bipeds) if user_input == 1
-      show_dinosaur_facts(@catalog.find_carnivores) if user_input == 2
+      handle_sub_menu_actions(user_input)
     end
   end
 
@@ -87,6 +66,30 @@ class DinodexUI
     save_to_json if user_input == 'j'
     @menu_index = :home if user_input == 'b'
     @running = false if user_input == 'q'
+  end
+
+  def self.handle_sub_menu_actions(user_input)
+    case @menu_index
+      when :home
+        handle_home_menu(user_input)
+      when :periods
+        show_dinos_by_period(user_input)
+      when :sizes
+        show_dinos_by_size(user_input)
+      when :search
+        handle_search_input(user_input)
+    end
+  end
+
+  def self.handle_home_menu(user_input)
+    user_input = user_input.to_i
+
+    if user_input > 2
+      switch_menu(user_input)
+    else
+      show_dinosaur_facts(@catalog.find_bipeds) if user_input == 1
+      show_dinosaur_facts(@catalog.find_carnivores) if user_input == 2
+    end
   end
 
   def self.show_dinos_by_period(user_input)

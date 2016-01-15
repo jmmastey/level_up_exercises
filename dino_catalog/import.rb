@@ -6,7 +6,7 @@ class Import
     attrs = {}
     # NAME,PERIOD,CONTINENT,DIET,WEIGHT_IN_LBS,WALKING,DESCRIPTION
     CSV.foreach("dinodex.csv", headers: true, converters: :all) do |row|
-      name = row["NAME"] # || row["genius"]
+      name = row["NAME"]
       attrs[:period] = row["PERIOD"]
       attrs[:continent] = row["CONTINENT"]
       attrs[:diet] = row["DIET"]

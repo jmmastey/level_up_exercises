@@ -3,6 +3,7 @@ class Dinosaur
 
   def initialize(name, attr = {})
     @name = name
+    # allowed attributes
     attr.each { |k, v| instance_variable_set("@#{k}", v) }
     # @period = attr[:period]
     # @continent = attr[:continent]
@@ -20,5 +21,13 @@ class Dinosaur
   def what_size?
     return "Unknown" if @weight.nil?
     @weight >= 2000 ? "Big - Over a ton" : "Small - Under a ton"
+  end
+
+  def to_hash
+    hash = {}
+    instance_variables.each do |var|
+      hash[var.to_s.delete("@")] = instance_variable_get(var)
+    end
+    hash
   end
 end

@@ -21,6 +21,7 @@ require_relative 'import'
 require_relative 'display'
 require_relative 'search'
 require_relative 'catalog'
+require_relative 'export'
 
 class Dinodex
   Catalog.new('enova')
@@ -29,6 +30,9 @@ class Dinodex
   Search.find('Giganotosaurus')
   Search.select('walking', 'Biped')
   Search.select('diet', 'Carnivore')
+  # Search.select(send(Dinosaur.what_size?), 'Big')
+  Export.convert_to_json(Catalog.dinosaurs)
+  # Catalog.dinosaurs.multi_select('walking', 'Biped').multi_select('diet', 'Carnivore')
 end
 
 # d = Dinodex.new('dinodex.csv')

@@ -11,3 +11,5 @@ class Search
     Display.print_all(results)
   end
 end
+
+# move to catalog and make instance var

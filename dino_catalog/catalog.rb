@@ -9,9 +9,6 @@ class Catalog
 
   def initialize(name)
     @name = name
+    @dinosaurs = []
   end
-
-  # def <<(dinosaur)
-  #   @dinosaurs << dinosaur
-  # end
 end

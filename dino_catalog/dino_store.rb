@@ -19,13 +19,12 @@ require 'csv'
 require_relative 'dinosaur'
 require_relative 'import'
 require_relative 'display'
-require_relative 'search'
 require_relative 'catalog'
 require_relative 'export'
 
 class Dinodex
   Catalog.new('enova')
-  Import.new
+  Import.new('enova')
   Display.print_all(Catalog.dinosaurs)
   Search.find('Giganotosaurus')
   Search.select('walking', 'Biped')

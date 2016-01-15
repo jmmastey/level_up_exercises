@@ -2,7 +2,9 @@ require_relative 'catalog'
 require 'table_print'
 
 class Import
-  def initialize
+  def initialize(a_catalog)
+  @dinosaurs = Catalog.find(a_catalog)
+
     attrs = {}
     # NAME,PERIOD,CONTINENT,DIET,WEIGHT_IN_LBS,WALKING,DESCRIPTION
     CSV.foreach("dinodex.csv", headers: true, converters: :all) do |row|
@@ -14,7 +16,7 @@ class Import
       attrs[:walking] = row["WALKING"]
       attrs[:description] = row["DESCRIPTION"]
       puts "added >>" + name
-      Catalog.dinosaurs << Dinosaur.new(name, attrs)
+      @dinosaurs << Dinosaur.new(name, attrs)
     end
 
     # Genus,Period,Carnivore,Weight,Walking
@@ -28,7 +30,7 @@ class Import
       attrs[:walking] = row["Walking"]
       attrs[:description] = "Very little is known"
       puts "added >>" + name
-      Catalog.dinosaurs << Dinosaur.new(name, attrs)
+      @dinosaurs << Dinosaur.new(name, attrs)
     end
   end
 

@@ -4,13 +4,11 @@ class ABTestCalculator
   attr_accessor :data
 
   def initialize(attrs = {})
-    @json_file = attrs[:json_file]
-
-    read_data
+    read_data(attrs[:json_file])
   end
 
-  def read_data
-    File.open(@json_file, "r") do |f|
+  def read_data(json_file)
+    File.open(json_file, "r") do |f|
       @data = JSON.parse(f.read)
     end
   end

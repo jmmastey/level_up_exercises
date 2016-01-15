@@ -20,4 +20,8 @@ class ABTestCalculator
   def total_conversions
     0
   end
+
+  def conversion_rate
+    0.0
+  end
 end

@@ -21,5 +21,9 @@ RSpec.describe ABTestCalculator, "#read_data" do
     it "returns total number of conversions as an integer" do
       expect(@abtc.total_conversions.is_a?(Integer)).to eq true
     end
+
+    it "returns conversion rate as a decimal" do
+      expect(@abtc.conversion_rate % 1 == 1).to eq false
+    end
   end
 end

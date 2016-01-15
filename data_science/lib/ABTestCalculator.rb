@@ -16,4 +16,8 @@ class ABTestCalculator
   def total_sample_size
     0
   end
+
+  def total_conversions
+    0
+  end
 end

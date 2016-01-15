@@ -12,4 +12,8 @@ class ABTestCalculator
       @data = JSON.parse(f.read)
     end
   end
+
+  def total_sample_size
+    0
+  end
 end

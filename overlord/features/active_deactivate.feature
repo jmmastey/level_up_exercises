@@ -12,7 +12,7 @@ Feature: Disarm active bomb
 		And I should see a "#bomb-deactivation-code" submit button
 
 	Scenario: User enters correct deactivation code for an active bomb
-		Given the bomb has been initialized with deactivation code "4444"
+		Given the bomb has been initialized w deactivation code "4444"
 		And the bomb has been activated
 		And I go to the homepage
 		When I fill in "4444" as the deactivation code
@@ -20,7 +20,7 @@ Feature: Disarm active bomb
 		Then I should see "The bomb is initialized with activation and deactivation codes, but is not active. Activate it with the correct code:"
 
 	Scenario: User enters incorrect deactivation code for an active bomb
-		Given the bomb has been initialized with deactivation code "4444"
+		Given the bomb has been initialized w deactivation code "4444"
 		And the bomb has been activated
 		And I go to the homepage
 		When I fill in "1111" as the deactivation code

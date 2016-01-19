@@ -1,6 +1,6 @@
 # run `ruby overlord.rb` to run a webserver for this app
 
-require_relative 'lib/bomb'
+require_relative 'lib/models/bomb'
 require 'sinatra/base'
 require 'sinatra/activerecord'
 require 'tilt'
@@ -52,7 +52,7 @@ class Overlord < Sinatra::Base
   end
 
   def start_time
-    session[:start_time] ||= (Time.now).to_s
+    session[:start_time] ||= (Time.zone.now).to_s
   end
 
   def more_deactivation_attempts?(bomb)

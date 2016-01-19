@@ -4,7 +4,7 @@ Feature: Bomb explosion
 	So that only people who know the code can disarm it
 
 	Scenario: User enters incorrect disarm code for the third time.
-		Given the bomb has been initialized with deactivation code "4444"
+		Given the bomb has been initialized w deactivation code "4444"
 		And the bomb has been activated
 		When I enter an incorrect code three times
 		Then I should see "The bomb exploded"

@@ -42,7 +42,7 @@ Then(/^I should see a[n]? "(.*?)" input box$/) do |box_name|
 end
 
 Then(/^I should see a[n]? "(.*?)" button$/) do |button_text|
-  expect(page).to have_css("button", { text: button_text })
+  expect(page).to have_css("button", text: button_text)
 end
 
 Then(/^I should see a[n]? "(.*?)" submit button$/) do |button_id|
@@ -54,14 +54,14 @@ When(/^I press the "(.*?)" button$/) do |button_name|
 end
 
 Then(/^I fill in the following:$/) do |_object, value|
-  object = value
+  _object = value
 end
 
 Then(/^I should be on the homepage$/) do
   visit("/")
 end
 
-CSS_MATCHERS = {
+HTML_ELEMENT_MATCHERS = {
   # input boxes
   "Bomb activation code" => "#bomb-activation-code",
   "Bomb deactivation code" => "#bomb-deactivation-code",

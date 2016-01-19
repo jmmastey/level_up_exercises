@@ -19,7 +19,7 @@ Given(/^the bomb has been initialized with activation code "(.*?)"$/) do |code|
   page.find('#initialize').click
 end
 
-Given(/^the bomb has been initialized with deactivation code "(.*?)"$/) do |code|
+Given(/^the bomb has been initialized w deactivation code "(.*?)"$/) do |code|
   visit('/')
   fill_in('bomb-deactivation-code', with: code)
   page.find('#initialize').click

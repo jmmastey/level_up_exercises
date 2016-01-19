@@ -1,4 +1,6 @@
-class Arrowhead
+module Arrowhead
+  module_function
+
   # This seriously belongs in a database.
   CLASSIFICATIONS = {
     far_west: {
@@ -15,26 +17,21 @@ class Arrowhead
     },
   }
 
-  def self.region_lookup(region)
-    unless CLASSIFICATIONS.include? region
-      raise "Unknown region, please provide a valid region."
-    end
-    CLASSIFICATIONS[region]
-  end
-
-  def self.shape_lookup(region_info, shape)
-    unless region_info.include? shape
-      error_msg = "Unkonwn shape value. Are you sure you know what"
-      error_msg = error_msg << " you are talking about?"
-      raise error_msg
-    end
-    region_info[shape]
-  end
-
-  def self.classify(region, shape)
+  def classify(region, shape)
     region_info = region_lookup(region)
     arrowhead_info = shape_lookup(region_info, shape)
     "You have a(n) '#{arrowhead_info}' arrowhead. Probably priceless."
+  end
+
+  def region_lookup(region)
+    return CLASSIFICATIONS[region] if CLASSIFICATIONS.include? region
+    raise "Unknown region, please provide a valid region."
+  end
+
+  def shape_lookup(region_info, shape)
+    return region_info[shape] if region_info.include? shape
+    raise "Unknown shape value. Are you sure you know what you are "  \
+  "talking about?"
   end
 end
 

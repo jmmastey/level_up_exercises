@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>O V E R L O R D</title>
+</head>
+<body>
+<form>
+  <input type="text" name="code">
+  <input type="submit" value="submit" name="submit">
+  <p>
+    BOMB
+    <% if bomb.exploded? %>
+      DETONATED
+    <% else %>
+      <% if !bomb.active? %>IN<% end %>ACTIVE
+    <% end %>
+  </p>
+</form>
+</body>
+</html>

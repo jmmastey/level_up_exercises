@@ -14,36 +14,28 @@ Feature: Interface
     Then the bomb active state should become true
 
   Scenario: Activating an active bomb does nothing
-    Given I have entered the correct activation code into a text field
-    And the bomb's active state is true
-    When I submit the form
+    Given The bomb's active state is true
+    And I enter the correct activation code into a text field
     Then nothing should happen
 
   Scenario: Deactivate the bomb with correct code
-    Given I have entered the correct deactivation code into a text field
-    And the bomb's active state is true
-    When I submit the form
+    Given I have an active bomb
+    And I enter the correct deactivation code
     Then the bomb state should become inactive
 
-  Scenario: Deactivate bomb with correct code
-    Given I have entered the correct deactivation code into a text field
-    And the bomb's active state is true
-    When I submit the form
-    Then the bomb active state should become false
-
   Scenario: Entering deactivation code too many times results in detonation
-    Given I have entered the incorrect deactivation code 3 times
-    And the bomb's active state is true
+    Given I activate the bomb
+    And I enter the incorrect deactivation code 3 times
     Then the bomb should detonate
 
   Scenario: Bomb is detonated, so the interface no longer works
     Given the bomb has been detonated
     Then the interface should no longer respond to user input
 
-  Scenario: Interface displays active state true when it is true
-    Given the bomb's active state is true
-    Then the interface should display BOMB ACTIVE
-
   Scenario: Interface displays active state false when it is false
-    Given the bomb's active state is false
+    Given an inactive bomb
     Then the interface should display BOMB DEACTIVATED
+
+  Scenario: Interface displays active state true when it is true
+    Given an active bomb
+    Then the interface should display BOMB ACTIVE

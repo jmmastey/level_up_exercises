@@ -38,3 +38,4 @@ DEPENDENCIES
   rspec
   simplecov
   sinatra
+  watir

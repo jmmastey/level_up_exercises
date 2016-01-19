@@ -18,8 +18,6 @@ class DinodexUI
     run
   end
 
-  private
-
   def self.load_sub_menus
     @sub_menus = {
       home: Menu.new(%w(Bipeds Carnivores Periods Sizes Search)),

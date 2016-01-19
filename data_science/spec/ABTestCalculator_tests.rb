@@ -14,4 +14,10 @@ RSpec.describe ABTestCalculator, "#read_data" do
       expect(@abtc.data.is_a?(Hash)).to eq true
     end
   end
+
+  context "for a given experiment" do
+    it "returns confidence level" do
+      expect(@abtc.confidence_level).to eq 0.031564025460594
+    end
+  end
 end

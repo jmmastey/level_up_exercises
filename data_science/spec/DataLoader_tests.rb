@@ -11,12 +11,20 @@ RSpec.describe DataLoader, "#read_data" do
       expect(@data.is_a?(Hash)).to eq true
     end
 
-    it "has cohort A data" do
-      expect(@data[:A][:conversion]).to eq 47
+    it "has cohort A conversion data" do
+      expect(@data[:A][:results][:conversion]).to eq 47
     end
 
-    it "has cohort B data" do
-      expect(@data[:B][:conversion]).to eq 79
+    it "has cohort B conversion data" do
+      expect(@data[:B][:results][:conversion]).to eq 79
+    end
+
+    it "has cohort A non-conversion data" do
+      expect(@data[:A][:results][:nonconversion]).to eq 1302
+    end
+
+    it "has cohort B non-conversion data" do
+      expect(@data[:B][:results][:nonconversion]).to eq 1464
     end
 
     it "has a cohort A sample size total" do

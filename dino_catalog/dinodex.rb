@@ -1,4 +1,5 @@
-require "./dino_data"
+#!/usr/bin/env ruby
+
 require "./filter_dinos"
 require "./import"
 require 'trollop'

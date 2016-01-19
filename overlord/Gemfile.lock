@@ -23,9 +23,14 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webkit (1.7.1)
+      capybara (>= 2.3.0, < 2.6.0)
+      json
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
+    httpi (1.1.1)
+      rack
     i18n (0.7.0)
     jquery-rails (3.1.4)
       railties (>= 3.0, < 5.0)
@@ -82,6 +87,8 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  capybara-webkit
+  httpi
   jquery-rails
   rspec
   simplecov

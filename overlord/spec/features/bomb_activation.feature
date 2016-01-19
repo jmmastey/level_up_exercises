@@ -1,4 +1,3 @@
-
 Feature: Bomb Activation is possible with correct activation code
   and only once
 
@@ -6,7 +5,7 @@ Feature: Bomb Activation is possible with correct activation code
     Given a new bomb presented to super villian
     When incorrect activation code is entered
     Then bomb state is inactive 
- 
+
   Scenario: Check that non-numeric code does not activate bomb
     Given a new bomb presented to super villian
     When non-numeric activation code is entered

@@ -6,7 +6,9 @@ gem "jquery-rails"
 
 gem "capybara"
 
+gem "httpi"
 group :test do
+  gem "capybara-webkit"
   gem "rspec"
   gem "simplecov", require: false
 end

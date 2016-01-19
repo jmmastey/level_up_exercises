@@ -14,7 +14,7 @@ Feature: Bomb Deactivation is possible with correct deactivation code
 
   Scenario: Check that correct code deactivates bomb
     Given a active bomb presented to super villian
-    When incorrect deactivation code is entered
+    When correct deactivation code is entered
     Then bomb state is inactive
 
   Scenario: Check that 2nd incorrect attempt does not deactivate bomb

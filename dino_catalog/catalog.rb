@@ -11,12 +11,24 @@ class Catalog
   end
 
   def find_one(keyword)
-    result = @items.find { |x| x.name == keyword }
-    Display.print_one(result)
+    @items.find { |x| x.name == keyword }
   end
 
-  def select_all(category, keyword)
-    results = @items.find_all { |x| x.instance_variable_get("@#{category}").include?(keyword) }
-    Display.print_all(results)
+  def filter(category, keyword)
+    @results = @items.find_all do |x|
+      x.instance_variable_get("@#{category}").include?(keyword)
+    end
+    self
+  end
+
+  def print_filter
+    @results.each { |x| puts x.to_s }
+    p "end of filter"
+  end
+
+  def print_all
+    p "Complete catalog"
+    @items.each { |x| puts x.to_s }
+    p "end of entire catalog"
   end
 end

@@ -20,20 +20,19 @@ $LOAD_PATH << '.'
 
 require 'dinosaur'
 require 'import'
-require 'display'
 require 'catalog'
 require 'export'
 
 class Dinodex
   @dinosaurs_catalog = Catalog.new
   Import.new(@dinosaurs_catalog)
-  Display.print_all(@dinosaurs_catalog)
+  puts @dinosaurs_catalog.items[0].to_s
+  @dinosaurs_catalog.print_all
   @dinosaurs_catalog.find_one('Giganotosaurus')
-  @dinosaurs_catalog.select_all('walking', 'Biped')
-  @dinosaurs_catalog.select_all('diet', 'Carnivore')
-  # Search.select(send(Dinosaur.what_size?), 'Big')
+  @dinosaurs_catalog.filter('walking', 'Biped')
+  @dinosaurs_catalog.filter('diet', 'Carnivore')
+  @dinosaurs_catalog.filter('diet', 'Carnivore').filter('walking', 'Biped').print_filter
   Export.convert_to_json(@dinosaurs_catalog)
-  # Catalog.dinosaurs.multi_select('walking', 'Biped').multi_select('diet', 'Carnivore')
 end
 
 # d = Dinodex.new('dinodex.csv')

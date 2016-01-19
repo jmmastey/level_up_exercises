@@ -30,4 +30,21 @@ class Dinosaur
     end
     hash
   end
+
+  def to_s
+    pad = 15
+    record = ''
+    record << "-" * 100 + "\n"
+    record << "Name:".ljust(pad) + "#{@name}\n" unless @name == ""
+    record << "Period:".ljust(pad) + "#{@period}\n" unless @period == ""
+    record << "Continent:".ljust(pad) + "#{@continent}\n" \
+      unless @continent == ""
+    record << "Diet:".ljust(pad) + "#{@diet}\n" unless @diet == ""
+    record << "Weight:".ljust(pad) + "#{@weight}\n" unless @weight.nil?
+    record << "Walking:".ljust(pad) + "#{@walking}\n" unless @walking == ""
+    record << "Description:".ljust(pad) + "#{@description}\n" \
+      unless @description == "" || @description.nil?
+    record << "-" * 50 + "\n"
+    record
+  end
 end

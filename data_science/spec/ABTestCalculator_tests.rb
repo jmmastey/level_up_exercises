@@ -20,4 +20,13 @@ RSpec.describe ABTestCalculator, "#read_data" do
       expect(@abtc.confidence_level).to eq 0.031564025460594
     end
   end
+
+  context "for each cohort" do
+    it "returns a conversion rate" do
+      expect(@abtc.cohort_conversion_rate).to eq(
+        A: [0.025055087455844, 0.04462615791109446],
+        B: [0.04020173369400816, 0.06219619242394388],
+      )
+    end
+  end
 end

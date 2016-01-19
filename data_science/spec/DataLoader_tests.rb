@@ -19,8 +19,12 @@ RSpec.describe DataLoader, "#read_data" do
       expect(@data[:B][:conversion]).to eq 79
     end
 
-    it "has a sample size total" do
-      expect(@data[:sample_size]).to eq 2892
+    it "has a cohort A sample size total" do
+      expect(@data[:A][:total]).to eq 1349
+    end
+
+    it "has a cohort B sample size total" do
+      expect(@data[:B][:total]).to eq 1543
     end
   end
 end

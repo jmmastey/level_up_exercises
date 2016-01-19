@@ -9,5 +9,5 @@ Gem::Specification.new do |s|
   s.email        = 'jcurlee@enova.com'
   s.files        = ["lib/datascience.rb"]
   s.homepage     = ''
-  s.requirements = ["rspec, 3.4.0"]
+  s.requirements = ["rspec, 3.4.0", "abanalyzer, 0.1.0"]
 end

@@ -1,4 +1,6 @@
-require_relative '../lib/ABTestCalculator'
+$LOAD_PATH << "../lib"
+
+require 'ABTestCalculator'
 
 RSpec.describe ABTestCalculator, "#read_data" do
   before do
@@ -8,8 +10,8 @@ RSpec.describe ABTestCalculator, "#read_data" do
   end
 
   context "On initialization of class" do
-    it "reads data from a JSON file and stores in an array" do
-      expect(@abtc.data.is_a?(Array)).to eq true
+    it "reads data from a JSON file and stores in a hash" do
+      expect(@abtc.data.is_a?(Hash)).to eq true
     end
   end
 

@@ -11,8 +11,16 @@ RSpec.describe DataLoader, "#read_data" do
       expect(@data.is_a?(Hash)).to eq true
     end
 
-    it "also parses the data" do
-      expect(@data["B"]).to eq 79
+    it "has cohort A data" do
+      expect(@data[:A][:conversion]).to eq 47
+    end
+
+    it "has cohort B data" do
+      expect(@data[:B][:conversion]).to eq 79
+    end
+
+    it "has a sample size total" do
+      expect(@data[:sample_size]).to eq 2892
     end
   end
 end

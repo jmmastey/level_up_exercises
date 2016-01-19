@@ -12,9 +12,13 @@ class DataLoader
   def self.parse_data(raw_data)
     parsed_data = {}
     raw_data.each do |res|
-      parsed_data[res["cohort"]] ||= 0
-      parsed_data[res["cohort"]] += res["result"]
+      cohort = res["cohort"].to_sym
+      parsed_data[cohort] ||= {conversion: 0, nonconversion: 0}
+      parsed_data[cohort][:conversion] += 1 if res["result"] > 0
+      parsed_data[cohort][:nonconversion] += 1 if res["result"] == 0
     end
+
+    parsed_data[:sample_size] = raw_data.length
 
     parsed_data
   end

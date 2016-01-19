@@ -12,7 +12,7 @@ RSpec.describe DataLoader, "#read_data" do
     end
 
     it "also parses the data" do
-      expect(@data["2014-03-20"]["B"]).to eq 5
+      expect(@data["B"]).to eq 79
     end
   end
 end

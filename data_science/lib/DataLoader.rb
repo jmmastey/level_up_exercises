@@ -12,10 +12,8 @@ class DataLoader
   def self.parse_data(raw_data)
     parsed_data = {}
     raw_data.each do |res|
-      parsed_data[res["date"]] ||= {}
-
-      parsed_data[res["date"]][res["cohort"]] ||= 0
-      parsed_data[res["date"]][res["cohort"]] += res["result"]
+      parsed_data[res["cohort"]] ||= 0
+      parsed_data[res["cohort"]] += res["result"]
     end
 
     parsed_data

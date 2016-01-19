@@ -1,0 +1,53 @@
+[
+  {
+    "name": "Baryonyx",
+    "period": "Early Cretaceous",
+    "continent": "Europe",
+    "diet": "Piscivore",
+    "weight": 6000,
+    "walking": "Biped",
+    "description": "One of the only known dinosaurs with a fish-only diet."
+  },
+  {
+    "name": "Megalosaurus",
+    "period": "Jurassic",
+    "continent": "Europe",
+    "diet": "Carnivore",
+    "weight": 2200,
+    "walking": "Biped",
+    "description": "Originally thought to be a Quadruped. First dinosaur to be named."
+  },
+  {
+    "name": "Giganotosaurus",
+    "period": "Late Cretaceous",
+    "continent": "South America",
+    "diet": "Carnivore",
+    "weight": 30420,
+    "walking": "Biped",
+    "description": "Largest hunter and also the coolest ever."
+  },
+  {
+    "name": "Yangchuanosaurus",
+    "period": "Oxfordian",
+    "continent": "Asia",
+    "diet": "Carnivore",
+    "weight": 7200,
+    "walking": "Biped"
+  },
+  {
+    "name": "Carcharodontosaurus",
+    "period": "Albian",
+    "continent": "Africa",
+    "diet": "Carnivore",
+    "weight": 3000,
+    "walking": "Biped"
+  },
+  {
+    "name": "Suchomimus",
+    "period": "Cretaceous",
+    "continent": "Africa",
+    "diet": "Carnivore",
+    "weight": 10400,
+    "walking": "Biped"
+  }
+]

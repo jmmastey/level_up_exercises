@@ -42,10 +42,10 @@ filtered_dinos = DinoFilter.search(DinoCollection.new(true), search_hash)
 filtered_dinos.fancy_display
 
 # Output to file if specified
-if command_opts[:search_file]
-  File.open(command_opts[:search_file], "w") do |f|
+if command_opts[:output_file]
+  File.open(command_opts[:output_file], "w") do |f|
     f.write(JSON.pretty_generate(filtered_dinos.create_hash_from_dinos))
   end
   puts
-  puts "Your search results can be found in file: #{command_opts[:search_file]}"
+  puts "Your search results can be found in file: #{command_opts[:output_file]}"
 end

@@ -9,10 +9,10 @@ class Triangle
   end
 
   def facts
-    puts "\nFacts of a triangle with sides #{side1}, #{side2}, #{side3}"
-    triangle_type_facts
-    angle_facts
-    puts "\n"
+    40.times { print "-" }
+    puts "\nFacts of a triangle with sides #{side1}, #{side2}, #{side3}\n\n"
+    puts "#{triangle_type_facts}\n"
+    puts "#{angle_facts}\n"
   end
 
   def equilateral?
@@ -41,11 +41,13 @@ class Triangle
 
   def angle_facts
     angles = calculate_angles
-    puts 'The angles of this triangle are ' << angles.join(',')
+    puts "The angles of this triangle are #{angles.join(',')}"
     puts 'This triangle is also a right triangle!' if angles.include? 90
   end
 
-  private def calculate_angles
+  private
+
+  def calculate_angles
     angle_a = single_angle(side1, side2, side3)
     angle_b = single_angle(side2, side1, side3)
     angle_c = single_angle(side3, side1, side2)
@@ -53,22 +55,13 @@ class Triangle
     [angle_a, angle_b, angle_c]
   end
 
-  private def single_angle(angle_side, other_side_1, other_side_2)
+  def single_angle(angle_side, other_side_1, other_side_2)
     numerator = (other_side_1**2 + other_side_2**2 - angle_side**2)
     denominator = (2.0 * other_side_1 * other_side_2)
     radians_to_degrees(Math.acos(numerator / denominator))
   end
 
-  private def radians_to_degrees(rads)
+  def radians_to_degrees(rads)
     (rads * 180 / Math::PI).round
   end
-end
-
-triangles = [
-  [5, 5, 5],
-  [5, 12, 13],
-]
-triangles.each do |sides|
-  tri = Triangle.new(*sides)
-  tri.facts
 end

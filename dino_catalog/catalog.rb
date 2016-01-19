@@ -10,13 +10,34 @@ class Catalog
     @items = []
   end
 
-  def find_one(keyword)
-    @items.find { |x| x.name == keyword }
+  def find_big
+    p "BIG Dinosaurs"
+    @results = @items.find_all { |x| x.weight >= 2000 }
+    self
+  end
+
+  def find_small
+    p "Small Dinosaurs"
+    @results = @items.find_all { |x| x.weight < 2000 }
+    self
   end
 
   def filter(category, keyword)
-    @results = @items.find_all do |x|
+    p "Filter by #{category} for #{keyword}"
+    current_items = @results ? @results : @items
+
+    @results = current_items.find_all do |x|
       x.instance_variable_get("@#{category}").include?(keyword)
+    end
+    self
+  end
+
+  def search_with_hash(h)
+    p "hash search"
+    @results = nil
+    carry = []
+    h.each_pair do |key, value|
+      carry = filter(key, value)
     end
     self
   end
@@ -29,6 +50,16 @@ class Catalog
   def print_all
     p "Complete catalog"
     @items.each { |x| puts x.to_s }
+    p "end of entire catalog"
+  end
+
+  def print_sizes
+    p "Complete catalog"
+    @items.each do |x|
+      puts x.name
+      puts x.what_size
+      puts "-" * 50 + "\n"
+    end
     p "end of entire catalog"
   end
 end

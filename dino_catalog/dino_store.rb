@@ -1,21 +1,3 @@
-
-# dinodex
-# name, period, continent, diet, weight_in_lbs, walking, description
-
-# african_dinosaur_export
-# genus, period, carnivore, weight, walking
-
-# load file x
-# parse csv x
-# see database contents x
-# search by walking, diet, periods, small or big, or combine
-# look at each dinosaur x
-# show reults from search/filter x
-# search by parameters
-# export json
-
-require 'csv'
-
 $LOAD_PATH << '.'
 
 require 'dinosaur'
@@ -25,18 +7,28 @@ require 'export'
 
 class Dinodex
   @dinosaurs_catalog = Catalog.new
+  # 1 import both files
   Import.new(@dinosaurs_catalog)
-  puts @dinosaurs_catalog.items[0].to_s
+  # 2.1 Grab all the dinosaurs that were bipeds.
+  @dinosaurs_catalog.filter('walking', 'Biped').print_filter
+  # # 2.2 Grab all Carnivores
+  @dinosaurs_catalog.filter('diet', 'Carnivore').print_filter
+  # # 2.3 Grab all from Cretaceous period
+  @dinosaurs_catalog.filter('period', 'Cretaceous').print_filter
+  # # 2.4 Grab Big or Small
+  @dinosaurs_catalog.find_small.print_filter
+  @dinosaurs_catalog.find_big.print_filter
+
+  # # 2.5 Combine Criteria
+  @dinosaurs_catalog.filter('diet', 'Carnivore').filter('walking', 'Biped') \
+    .print_filter
+  # # 3 Print all known facts
   @dinosaurs_catalog.print_all
-  @dinosaurs_catalog.find_one('Giganotosaurus')
-  @dinosaurs_catalog.filter('walking', 'Biped')
-  @dinosaurs_catalog.filter('diet', 'Carnivore')
-  @dinosaurs_catalog.filter('diet', 'Carnivore').filter('walking', 'Biped').print_filter
+  # # 4 Printer after filter
+  @dinosaurs_catalog.filter('period', 'Cretaceous').print_filter
+  # # 5 Use a hash to load search parameters
+  paras = { diet: 'Carnivore', walking: 'Quadruped', period: 'Cretaceous' }
+  @dinosaurs_catalog.search_with_hash(paras).print_filter
+  # 6 Convert to JSON
   Export.convert_to_json(@dinosaurs_catalog)
 end
-
-# d = Dinodex.new('dinodex.csv')
-# d.print_all
-# p d.columns
-# p d.find('Giganotosaurus')
-# d.select('diet', 'Carnivore')

@@ -12,13 +12,13 @@ class Catalog
 
   def find_big
     p "BIG Dinosaurs"
-    @results = @items.find_all { |x| x.weight >= 2000 }
+    @results = @items.select { |x| x.weight >= 2000 }
     self
   end
 
   def find_small
     p "Small Dinosaurs"
-    @results = @items.find_all { |x| x.weight < 2000 }
+    @results = @items.select { |x| x.weight < 2000 }
     self
   end
 
@@ -26,7 +26,7 @@ class Catalog
     p "Filter by #{category} for #{keyword}"
     current_items = @results ? @results : @items
 
-    @results = current_items.find_all do |x|
+    @results = current_items.select do |x|
       x.instance_variable_get("@#{category}").include?(keyword)
     end
     self

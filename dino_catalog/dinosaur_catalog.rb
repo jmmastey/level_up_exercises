@@ -2,6 +2,8 @@ require "CSV"
 require "JSON"
 
 class DinosaurCatalog
+  ONE_TON = 2000
+
   attr_accessor :json_file_name
   attr_accessor :default_keys
 
@@ -24,15 +26,19 @@ class DinosaurCatalog
   end
 
   def find_large
-    find_by_weight(2000, 999_999_999)
+    find_by_weight('large')
   end
 
   def find_small
-    find_by_weight(1, 2000)
+    find_by_weight('small')
   end
 
-  def find_by_weight(min_weight, max_weight)
-    @dinodex.select { |row| row[:weight].to_i.between?(min_weight, max_weight) }
+  def find_by_weight(size)
+    @dinodex.select do |row|
+      weight = row[:weight].to_i
+
+      size == 'large' ? weight >= ONE_TON : weight < ONE_TON
+    end
   end
 
   def find_bipeds

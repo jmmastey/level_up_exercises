@@ -16,21 +16,23 @@
 
 require 'csv'
 
-require_relative 'dinosaur'
-require_relative 'import'
-require_relative 'display'
-require_relative 'catalog'
-require_relative 'export'
+$LOAD_PATH << '.'
+
+require 'dinosaur'
+require 'import'
+require 'display'
+require 'catalog'
+require 'export'
 
 class Dinodex
-  Catalog.new('enova')
-  Import.new('enova')
-  Display.print_all(Catalog.dinosaurs)
-  Search.find('Giganotosaurus')
-  Search.select('walking', 'Biped')
-  Search.select('diet', 'Carnivore')
+  @dinosaurs_catalog = Catalog.new
+  Import.new(@dinosaurs_catalog)
+  Display.print_all(@dinosaurs_catalog)
+  @dinosaurs_catalog.find_one('Giganotosaurus')
+  @dinosaurs_catalog.select_all('walking', 'Biped')
+  @dinosaurs_catalog.select_all('diet', 'Carnivore')
   # Search.select(send(Dinosaur.what_size?), 'Big')
-  Export.convert_to_json(Catalog.dinosaurs)
+  Export.convert_to_json(@dinosaurs_catalog)
   # Catalog.dinosaurs.multi_select('walking', 'Biped').multi_select('diet', 'Carnivore')
 end
 

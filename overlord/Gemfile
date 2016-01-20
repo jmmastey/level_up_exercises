@@ -4,5 +4,8 @@ gem "sinatra"
 
 group :test do
   gem "rspec"
+  gem "cucumber"
+  gem "capybara"
+  gem "capybara-webkit"
   gem "simplecov", require: false
 end

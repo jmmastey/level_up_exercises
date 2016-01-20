@@ -1,0 +1,57 @@
+Verb      URI_Pattern
+GET       /api/:version_id/flights/:id/passengers
+GET       /api/:version_id/flights/:id
+# For a given flight, get a manifest of passengers, and details of the flight.
+
+GET       /api/:version_id/flights/:id/passengers/:id
+# For a given flight, get the details of a passenger
+
+POST      /api/:version_id/flights/:id/bookings
+# Add bookings from a flight
+# Pass JSON with new booking, e.g. { "booking" : { "status" : "new", ... }, ... }
+
+DELETE      /api/:version_id/flights/:id/bookings/:id
+# Remove bookings from a flight
+
+PUT      /api/:version_id/flights/:id/bookings/:id
+# Edit bookings from a flight
+# Pass JSON with updated booking, e.g. { "booking" : { "status" : "cancel", ... }, ... }
+
+GET      /api/:version_id/flights/:id/bookings/:id
+# Read one booking from a flight
+
+GET      /api/:version_id/flights/:id/bookings
+# Read all bookings from a flight
+
+PUT      /api/:version_id/flights/:id/passengers/:id/preferences
+# Change my food preferences
+# Pass JSON with updated food, e.g. { "preferences" : { "food" : "vegetarian", ... }, ... }
+
+PUT      /api/:version_id/flights/:id/passengers/:id/preferences
+# Change my seating
+# Pass JSON with updated seat, e.g. { "preferences" : { "seat" : "12A", ... }, ... }
+
+PUT      /api/:version_id/flights/:id/route/:id
+# I need to re-route airplanes
+# Pass JSON with updated route, e.g. { "route" : { "status" : "update", "dependent" : "foobar" }, ... }
+
+GET      /api/:version_id/flights/:id/route
+# See the trip an airplane will make
+
+GET      /api/:version_id/flights/:id/
+# See when the airplane will have to refuel during those trips
+
+PUT      /api/:version_id/vehicle/:id
+# When I maintenance an airplane, I need to update information on the vehicle
+# Pass JSON with updated info, e.g. { "vehicle" : { "status" : "using", "description" : "foobar" }, ... }
+
+GET      /api/:version_id/flights/search
+# Find flights matching some search criteria
+# Pass JSON with search criteria, e.g. { "search" : { "make" : "boeing", ... }, ...}
+
+GET      /api/:version_id/airport/:code
+# Get details on an airport or destination (use the airport code for this)
+
+GET      /api/:version_id/passengers/:id/flights
+# Get a list of itineraries with flights for a given passenger
+

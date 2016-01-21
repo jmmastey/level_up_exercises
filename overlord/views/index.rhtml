@@ -15,6 +15,10 @@
       <% if !bomb.active? %>IN<% end %>ACTIVE
     <% end %>
   </p>
+
+  <% if bomb.failed_deactivations > 0 %>
+    <p>WRONG DEACTIVATION CODE ENTERED</p>
+  <% end %>
 </form>
 </body>
 </html>

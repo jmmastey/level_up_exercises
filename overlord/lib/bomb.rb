@@ -12,6 +12,7 @@ class Bomb
     @deactivation_code = deactivation_code.to_s
     @max_failed_deactivations = max_failed_deactivations
     @wires = WireBundle.new(0, 0)
+    @failed_deactivations = 0
   end
 
   def active?
@@ -73,6 +74,7 @@ class Bomb
 
     @state = :inactive
     @error = nil
+    @failed_deactivations = 0
   end
 
   def disarm

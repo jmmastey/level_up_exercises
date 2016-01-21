@@ -112,6 +112,17 @@ Then(/^the interface should display BOMB ACTIVE$/) do
   expect(page).to have_content('BOMB ACTIVE')
 end
 
+Given(/^I enter the incorrect deactivation code$/) do
+  fill_in('code', with: "zzzz")
+  click_button("submit")
+end
+
+Then(
+  /^the interface should not display an incorrect deactivation code message$/
+) do
+  expect(page).not_to have_content('WRONG DEACTIVATION CODE ENTERED')
+end
+
 # bad path
 
 Given(/^I have activated the bomb$/) do

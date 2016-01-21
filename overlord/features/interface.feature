@@ -43,3 +43,9 @@ Feature: Interface
   Scenario: Interface displays incorrect code message when appropriate
     Given I have activated the bomb
     Then entering the incorrect deactivation code results in a message
+
+  Scenario: Interface stops displaying incorrect code message when appropriate
+    Given an active bomb
+    And I enter the incorrect deactivation code
+    And I enter the correct deactivation code
+    Then the interface should not display an incorrect deactivation code message

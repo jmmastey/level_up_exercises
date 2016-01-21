@@ -3,13 +3,16 @@ require_relative "wire_bundle"
 class Bomb
   attr_accessor :timer, :wires
   attr_reader :error, :failed_deactivations, :max_failed_deactivations
+  attr_reader :activation_code
+  attr_reader :deactivation_code
 
-  def initialize(activation_code, deactivation_code, max_failed_deactivations = 3)
+  def initialize(activation_code="1234", deactivation_code="0000", max_failed_deactivations = 3)
     @state = :inactive
     @activation_code = activation_code.to_s
     @deactivation_code = deactivation_code.to_s
     @max_failed_deactivations = max_failed_deactivations
     @wires = WireBundle.new(0, 0)
+    @failed_deactivations = 0
   end
 
   def active?
@@ -71,6 +74,7 @@ class Bomb
 
     @state = :inactive
     @error = nil
+    @failed_deactivations = 0
   end
 
   def disarm

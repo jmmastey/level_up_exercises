@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>O V E R L O R D</title>
+</head>
+<body>
+<form>
+  <input type="text" name="code">
+  <input type="submit" value="submit" name="submit" id="submit">
+  <p>
+    BOMB
+    <% if bomb.exploded? %>
+      DETONATED
+    <% else %>
+      <% if !bomb.active? %>IN<% end %>ACTIVE
+    <% end %>
+  </p>
+
+  <% if bomb.failed_deactivations > 0 %>
+    <p>WRONG DEACTIVATION CODE ENTERED</p>
+  <% end %>
+</form>
+</body>
+</html>

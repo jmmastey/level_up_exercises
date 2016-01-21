@@ -39,3 +39,7 @@ Feature: Interface
   Scenario: Interface displays active state true when it is true
     Given an active bomb
     Then the interface should display BOMB ACTIVE
+
+  Scenario: Interface displays incorrect code message when appropriate
+    Given I have activated the bomb
+    Then entering the incorrect deactivation code results in a message

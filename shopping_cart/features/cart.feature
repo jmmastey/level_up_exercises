@@ -1,66 +1,7 @@
-Feature: Shopping cart
+Feature: Anonymous and logged in cart separation
   In order to purchase items from a page
   As an online shopper
-  I want the ability to add and remove items to a cart, as well as change quantity.
-
-  Scenario: Ability to add items to cart
-    Given an item has an add to cart button
-    When a user clicks the add to cart button
-    Then the cart should show the item in its contents
-
-  Scenario: Ability to remove an item from cart
-    Given the cart has an item in it
-    When a user clicks the remove from cart button
-    Then the cart should no longer contain the item
-
-  Scenario: Ability to modify in cart item quantity
-    Given the cart has an item in it
-    When a user increments the item's quantity
-    Then the cart should reflect the correct quantity for the item
-
-  Scenario: Ability to modify in cart item quantity
-    Given the cart has an item in it
-    When a user decrements the item's quantity
-    Then the cart should reflect the correct quantity for the item
-
-  Scenario: Ability to change item quantity to zero and have it removed from cart
-    Given the cart has an item in it
-    When a user changes the item quantity to 0
-    Then the cart should no longer contain the item
-
-  Scenario: Ability to navigate to item page from cart
-    Given the cart has an item in it
-    When a user clicks the item row
-    Then the page should navigate to that item's description page
-
-  Scenario: Ability to get a shipping estimate based on address.
-    Given the cart contains one or more items
-    When a user enters a correct address in the address fields
-    Then the cart should display an estimated shipping price.
-
-  Scenario: User enters incorrect shipping address
-    Given the cart contains one or more items
-    When a user enters a bad shipping address
-    Then the cart should display a bad address message
-
-  Scenario: No items in cart
-    Given the cart contains no items
-    When a user views the cart
-    Then the user should not have the option to enter a shipping address
-
-  Scenario: Cart displays total price of items
-    Give the cart contains one or more items
-    Then the user should see total price of items
-
-  Scenario: Ability to apply valid coupons to items in cart
-    Given the cart contains one or more items
-    When a user enters a valid coupon code
-    Then the cart should show a discounted total price of items
-
-  Scenario: Bad coupon codes display an invalid coupon message
-    Given the cart contains one or more items
-    When a user enters an invalid coupon code
-    Then the cart should display an invalid coupon message
+  I want the ability to login and save a cart or shop anonymously
 
   Scenario: Anonymous user adds item and logs in to previous session
     Given an anonymous user adds an item to the cart

@@ -59,12 +59,3 @@ class Robot
     self.class.registry.include?(robot_name)
   end
 end
-
-[
-  Robot.new,
-  Robot.new,
-  Robot.new(name: "AA111"),
-  Robot.new(name_generator: -> { "ZZ222" }),
-].each do |robot|
-  puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
-end

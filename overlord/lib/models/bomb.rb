@@ -10,6 +10,9 @@ class Bomb
     @deact_code = deact_code.to_s
     @max_failed_deact = max_failed_deact
     @wires = WireBundle.new(0, 0)
+    unless @act_code && @deact_code
+      raise ArgumentError, "You need an activation and deactivation code"
+    end
   end
 
   def active?
@@ -42,6 +45,8 @@ class Bomb
     check_timer
     @state
   end
+
+
 
   private
 

@@ -6,7 +6,6 @@ require "sinatra/base"
 require "rack/test"
 require "pry"
 
-
 # helpers
 
 # app
@@ -17,7 +16,7 @@ require_relative "../lib/models/wire.rb"
 require_relative "../lib/models/wire_bundle.rb"
 
 def app
-	Overlord.new
+  Overlord.new
 end
 
 RSpec.configure do |config|

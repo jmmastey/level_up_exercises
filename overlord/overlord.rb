@@ -24,7 +24,6 @@ class Overlord < Sinatra::Base
     act_code = params["actcode"].empty? ? "1234" : params["actcode"]
     deact_code = params["deactcode"].empty? ? "0000" : params["deactcode"]
     session[:bomb] = Bomb.new(act_code, deact_code)
-    session[:deactivation_attempts] = 0
     redirect '/'
   end
 
@@ -43,23 +42,16 @@ class Overlord < Sinatra::Base
     @bomb = session[:bomb]
     @bomb.enter_code(params["deactcode"])
     if @bomb.state == :inactive
-      session[:deactivation_attempts] = 0
+      @bomb.counter.reset
       redirect '/'
     else
-      session[:deactivation_attempts] += 1
+      @bomb.counter.increase_by_one
       redirect '/'
     end
   end
 
   def start_time
     session[:start_time] ||= (Time.zone.now).to_s
-  end
-
-  def more_deactivation_attempts?(bomb)
-    if session[:deactivation_attempts].to_i < bomb.max_failed_deactivations
-      return true
-    end
-    false
   end
 
   run! if app_file == $PROGRAM_NAME

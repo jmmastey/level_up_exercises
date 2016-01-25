@@ -1,0 +1,9 @@
+<h1><%= @error %></h1>
+
+Mwahahaha!  
+
+<form action="/initialize" method="POST">
+	Enter an activation code: <input id='bomb-activation-code' name='actcode'><br>
+	Deactivation code: Enter an activation code: <input id='bomb-deactivation-code' name='deactcode'><br>
+	<input type="submit" id='initialize' value="Initialize" onclick="return confirm('You sure?')">
+</form>

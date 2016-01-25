@@ -4,47 +4,76 @@ require 'json'
 require 'abanalyzer'
 
 class DataScience
-  # A. The data set is a JSON file exported from the database (because Postgres
-  # does JSON now and someone went a little overboard). You'll need to parse the input file.
-  # However, make sure the data loading is abstracted from the main calculation code.
-  def import
+  def self.import
     file = File.read(FILETOIMPORT)
     @data_hash = JSON.parse(file)
-    puts "loaded #{@data_hash.length} sample"
+    @sample = @data_hash.length
+    puts "loaded #{@sample} sample\n\n"
   end
 
-  # B. For a given experiment, we're looking to calculate the conversion rate of visitors as part of a split test. We care about the following factors:
-
-  # 1. Total sample size and number of conversions for each cohort.
-  def raw_results
-    a_group = 0
-    b_group = 0
+  def self.raw_results
+    @a_converts = 0
+    @b_converts = 0
+    @a_count = 0
+    @b_count = 0
 
     @data_hash.each do |k|
       if k["cohort"] == "A"
-        a_group += k["result"].to_i
+        @a_converts += k["result"].to_i
+        @a_count += 1
       else
-        b_group += k["result"].to_i
+        @b_converts += k["result"].to_i
+        @b_count += 1
       end
+      @a_nonconverts = @a_count - @a_converts
+      @b_nonconverts = @b_count - @b_converts
     end
 
-    puts "A group: #{a_group}"
-    puts "B group: #{b_group}"
+    puts "A conversion: #{@a_converts} non converts: " +
+      "#{@a_nonconverts} over #{@a_count} days"
+    puts "B conversion: #{@b_converts} non converts: " +
+      "#{@b_nonconverts} over #{@b_count} days"
+    puts "Total Sample: #{@sample}\n\n"
   end
 
-  #   2. Conversion rate (including error bars) for each cohort with a 95% confidence.
-  def significant_difference?
+  def self.significant_difference?
     values = {}
-    values[:agroup] = { converted: 47, not_converted: 2892 }
-    values[:bgroup] = { converted: 79, not_converted: 2892 }
-    tester = ABAnalyzer::ABTest.new values
-    puts tester.different?
+    values[:asum] = { converted: @a_converts, not_converted: @a_nonconverts }
+    values[:bsum] = { converted: @b_converts, not_converted: @b_nonconverts }
+    @significant_difference = ABAnalyzer::ABTest.new values
+    puts "Is there a difference between the groups?"
+    puts "#{@significant_difference.different?} \n\n"
   end
 
-  # 3. Confidence level that the current leader is in fact better than random.
-  # You should use the Chi-square test for this, feel free to cheat with a [simple calculator](http://www.usereffect.com/split-test-calculator)
-  # to get your initial calculations. Feel free to use a gem to perform the calculations in your code; gems are good.
-  def confidence
-    puts ABAnalyzer.confidence_interval(27, 2892, 0.95)
+  def self.confidence_level
+    p = 0.95
+    puts "Conversion rates with #{p} certain"
+    puts "Group A"
+    @a_conf_rang = ABAnalyzer.confidence_interval(
+      @a_converts, @a_nonconverts, p)
+
+    puts "Conversion range from #{@a_conf_rang[0]} to #{@a_conf_rang[1]}"
+    puts "Group B"
+    @b_conf_rang = ABAnalyzer.confidence_interval(
+      @b_converts, @b_nonconverts, p)
+
+    puts "Conversion range from #{@b_conf_rang[0]} to #{@b_conf_rang[1]}\n\n"
+  end
+
+  def self.chi_leader
+    values = {}
+    values[:asum] = { converted: @a_converts, not_converted: @a_nonconverts }
+    values[:bsum] = { converted: @b_converts, not_converted: @b_nonconverts }
+    tester = ABAnalyzer::ABTest.new values
+    puts "Chi leader"
+    puts "Chi-Square Test if less then 0.05, we cannot accept null hypothesis"
+
+    puts tester.chisquare_p
   end
 end
+
+DataScience.import
+DataScience.raw_results
+DataScience.significant_difference?
+DataScience.confidence_level
+DataScience.chi_leader

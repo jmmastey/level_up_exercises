@@ -12,7 +12,7 @@ describe "Testing the integration with the abanalyzer gem" do
         test_array << { "date" => "2014-03-20", "cohort" => "B", "result" => 1 }
         test_array << { "date" => "2014-03-20", "cohort" => "A", "result" => 1 }
       end
-      expect((DataScience.new(test_array)).analyze).to eql(false)
+      expect(DataScience.new(test_array).analyze).to eql(false)
     end
   end
 
@@ -27,7 +27,7 @@ describe "Testing the integration with the abanalyzer gem" do
         test_array << { "date" => "2014-03-20", "cohort" => "B", "result" => 0 }
         test_array << { "date" => "2014-03-20", "cohort" => "A", "result" => 1 }
       end
-      expect((DataScience.new(test_array)).analyze).to eql(true)
+      expect(DataScience.new(test_array).analyze).to eql(true)
     end
   end
 end

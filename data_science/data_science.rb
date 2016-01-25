@@ -36,7 +36,7 @@ class DataScience
 
   def analyze
     ab_test = ABAnalyzer::ABTest.new @loaded_stats.prep_data
-    p_value = (ab_test.chisquare_p).round(4)
+    p_value = ab_test.chisquare_p.round(4)
     puts "Chi Squared p value is #{p_value}"
     test_hypo(p_value)
   end

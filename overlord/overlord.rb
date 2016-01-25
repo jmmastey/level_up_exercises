@@ -42,10 +42,9 @@ class Overlord < Sinatra::Base
     @bomb = session[:bomb]
     @bomb.enter_code(params["deactcode"])
     if @bomb.state == :inactive
-      @bomb.counter.reset
       redirect '/'
     else
-      @bomb.counter.increase_by_one
+      @error = "Wrong deactivation code"
       redirect '/'
     end
   end

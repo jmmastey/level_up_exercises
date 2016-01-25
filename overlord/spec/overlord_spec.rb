@@ -39,10 +39,14 @@ describe 'Overlord' do
       #
       # double("bomb", state: :active)
       #
-      # while initially trying to use a double in this test, Rack's underlying attempt to marshal this failed beneath the surface. Spent a few hours not getting it to work, and Richard helped me find:
+      # while initially trying to use a double in this test,
+      # Rack's underlying attempt to marshal this failed beneath
+      # the surface. Spent a few hours not getting it to work, and
+      # Richard helped me find:
       # 1. https://stackoverflow.com/questions/17399079/mocking-in-rspec2-causes-singleton-cant-be-dumped-in-sinatra-controller
       # 2. http://ruby-doc.org/core-2.2.2/Marshal.html#method-c-dump
-      # As suggested by the StackOverflow answer, I used an OpenStruct (instead of using an instance of class Bomb)
+      # As suggested by the StackOverflow answer, I used
+      # an OpenStruct (instead of using an instance of class Bomb)
 
       it 'displays active bomb page' do
         expect(last_response).to be_ok
@@ -78,7 +82,8 @@ describe 'Overlord' do
       end
 
       it 'initializes a bomb w/o params' do
-        ## adequate? Can't test last_response.body because we get a '302', for redirection.
+        # adequate? Can't test last_response.body
+        # because we get a '302', for redirection.
         follow_redirect!
         expect(last_response).to be_ok
       end
@@ -129,7 +134,7 @@ describe 'Overlord' do
       end
 
       it 'should deactivate the bomb when correct code is entered' do
-        expected = "The bomb is initialized with activation and deactivation codes"
+        expected = "The bomb is initialized with activation and deactivation"
         follow_redirect!
         expect(last_response.body).to include(expected)
       end

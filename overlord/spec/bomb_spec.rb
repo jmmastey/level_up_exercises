@@ -194,5 +194,4 @@ describe Bomb do
       end
     end
   end
-
 end

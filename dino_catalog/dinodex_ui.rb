@@ -38,7 +38,7 @@ class DinodexUI
   end
 
   def self.clear_screen
-    system "clear" || "cls"
+    system("clear") || system("cls")
   end
 
   def self.show_menu_options

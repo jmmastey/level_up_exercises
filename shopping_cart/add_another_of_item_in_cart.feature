@@ -3,7 +3,6 @@ Feature: Add another item of the same SKU that's already in user's cart updates 
 	I want to add more items to cart of the ones I already had
 	So I can stock up on Sour Patch Kids in preparation for a zombie apocalypse
 
-	(happy path)
 	Scenario: User clicks "add to cart" on an item of which there is already one in cart
 		Given that I have 1 Broomstick in my cart
 		And I am on the Broomstick item page

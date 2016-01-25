@@ -3,7 +3,6 @@ Feature: When anonymous user logs in, her cart is merged with her account's save
 	I want to merge my cart while I browse anonymously with my saved account cart when I login
 	So I don't lose the items I've been amassing while shopping
 
-	(happy path)
 	Scenario: Anonymous user logs in with items in cart. Her account also has items saved in its cart
 		Given that I am not logged in
 		And I have 1 Broomstick and 1 Wand in my cart
@@ -14,7 +13,6 @@ Feature: When anonymous user logs in, her cart is merged with her account's save
 		And I should see "1 Wand"
 		And I should see "1 Textbook" 
 
-	(sad path)
 	Scenario: Anonymous user enters wrong information
 		Given that I am not logged in
 		And I have 1 Broomstick and 1 Wand in my cart

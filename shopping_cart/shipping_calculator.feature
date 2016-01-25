@@ -3,7 +3,6 @@ Feature: weight-agnostic shipping calculator
 	I want to know the cost to ship products to my address
 	So I can expect how much my grand order total will be
 
-	(happy path)
 	Scenarios: Enter valid address to calculate shipping cost
 		Given that I have 1 Broomstick in my cart
 		And I am on the checkout page
@@ -15,7 +14,6 @@ Feature: weight-agnostic shipping calculator
 		When I click the "Estimate shipping" button
 		Then I should see "Your Shipping Estimate: $9.99"
 
-	(sad path)
 	Scenario: User enters a nonexistent shipping address
 		Given that I have 1 Broomstick in my cart
 		And I am on the checkout page
@@ -37,7 +35,6 @@ Feature: weight-agnostic shipping calculator
 		When I click the "Estimate shipping" button
 		Then I should see "Please fill out all required fields"
 
-	(sad path)
 	Scenario: User enters no city
 		Given that I have 1 Broomstick in my cart
 		And I am on the checkout page
@@ -46,7 +43,6 @@ Feature: weight-agnostic shipping calculator
 		When I click the "Estimate shipping" button
 		Then I should see "Please fill out all required fields"
 
-	(sad path)
 	Scenario: User enters no state
 		Given that I have 1 Broomstick in my cart
 		And I am on the checkout page
@@ -56,7 +52,6 @@ Feature: weight-agnostic shipping calculator
 		When I click the "Estimate shipping" button
 		Then I should see "Please fill out all required fields"
 
-	(sad path)
 	Scenario: User enters no zipcode
 		Given that I have 1 Broomstick in my cart
 		And I am on the checkout page
@@ -66,7 +61,6 @@ Feature: weight-agnostic shipping calculator
 		When I click the "Estimate shipping" button
 		Then I should see "Please fill out all required fields"
 
-	(bad path)
 	Scenario: User enters more than 70 characters in the shipping address field
 		Given that I have 1 Broomstick in my cart
 		And I am on the checkout page
@@ -77,7 +71,6 @@ Feature: weight-agnostic shipping calculator
 		When I click the "Estimate shipping" button
 		Then I should see "Please enter a shipping address under 70 characters"
 
-	(bad path)
 	Scenario: User enters more than 30 characters in the shipping city field
 		Given that I have 1 Broomstick in my cart
 		And I am on the checkout page
@@ -88,7 +81,6 @@ Feature: weight-agnostic shipping calculator
 		When I click the "Estimate shipping" button
 		Then I should see "Please enter a shipping address under 70 characters"
 
-	(bad path)
 	Scenario: User enters zipcode that is not exactly 5 integers
 		Given that I have 1 Broomstick in my cart
 		And I am on the checkout page

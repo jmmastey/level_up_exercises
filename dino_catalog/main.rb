@@ -1,4 +1,4 @@
-require_relative 'dinodexui'
+require_relative 'dinodex_ui'
 
 DinodexUI.start(csv_files: [
   "./dinodex.csv",

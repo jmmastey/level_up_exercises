@@ -2,13 +2,11 @@ require_relative "menus"
 require_relative "dinosaur_catalog"
 
 class DinodexUI
-  @menu_index = :home
-  @sub_menus = {}
-
   def self.start(attr = {})
     @catalog = DinosaurCatalog.new(attr)
 
-    load_sub_menus
+    @menu_index = :home
+    load_sub_menus(@catalog.dinodex_periods)
     @action_menu = LetteredMenu.new(["JSON Save", "Back", "Quit"])
 
     clear_screen
@@ -18,10 +16,10 @@ class DinodexUI
     run
   end
 
-  def self.load_sub_menus
+  def self.load_sub_menus(periods)
     @sub_menus = {
       home: Menu.new(%w(Bipeds Carnivores Periods Sizes Search)),
-      periods: Menu.new(@catalog.dinodex_periods),
+      periods: Menu.new(periods),
       sizes: Menu.new(["Large dinosaurs", "Small dinosaurs"]),
       search: Menu.new("\nSearch with key:value. Chain searches with comma. "\
         "(eg: walking:biped,period:jurassic)\n"),

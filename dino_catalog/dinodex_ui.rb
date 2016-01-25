@@ -2,6 +2,8 @@ require_relative "menus"
 require_relative "dinosaur_catalog"
 
 class DinodexUI
+  HOME_MENU_OPTIONS = %w(Bipeds Carnivores Periods Sizes Search)
+
   def self.start(attr = {})
     @catalog = DinosaurCatalog.new(attr)
 
@@ -18,7 +20,7 @@ class DinodexUI
 
   def self.load_sub_menus(periods)
     @sub_menus = {
-      home: Menu.new(%w(Bipeds Carnivores Periods Sizes Search)),
+      home: Menu.new(HOME_MENU_OPTIONS),
       periods: Menu.new(periods),
       sizes: Menu.new(["Large dinosaurs", "Small dinosaurs"]),
       search: Menu.new("\nSearch with key:value. Chain searches with comma. "\
@@ -55,9 +57,7 @@ class DinodexUI
   end
 
   def self.switch_menu(user_input)
-    @menu_index = :periods if user_input == 3
-    @menu_index = :sizes if user_input == 4
-    @menu_index = :search if user_input == 5
+    @menu_index = HOME_MENU_OPTIONS[user_input - 1].downcase.to_sym
   end
 
   def self.handle_action_menu(user_input)

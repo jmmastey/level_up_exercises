@@ -1,17 +1,16 @@
 require 'json'
 
 data = File.read("arrowhead_data.json")
-CLASSIFICATIONS = JSON.parse(data, :symbolize_names => true)
+CLASSIFICATIONS = JSON.parse(data, symbolize_names: true)
 
 class Arrowhead
-  def self.classify(region, shape)
-    unless shapes = CLASSIFICATIONS[region]
-      raise "Unknown region, please provide a valid region."
-    end
+  REGION_ERROR = "Unknown region, please provide a valid region."
+  SHAPE_ERROR  = "Unknown shape value. "\
+                 "Are you sure you know what you're talking about?"
 
-    unless arrowhead = shapes[shape]
-      raise "Unknown shape value. Are you sure you know what you're talking about?"
-    end
+  def self.classify(region, shape)
+    raise REGION_ERROR unless (shapes = CLASSIFICATIONS[region])
+    raise SHAPE_ERROR  unless (arrowhead = shapes[shape])
 
     "You have a(n) '#{arrowhead}' arrowhead. Probably priceless."
   end

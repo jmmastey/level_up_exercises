@@ -23,13 +23,13 @@ class Triangle
   def recite_facts
     puts side_facts
     puts angle_facts
-    puts ""
+    puts 
   end
 
   def side_facts
     return 'This triangle is equilateral!' if equilateral?
-    return "This triangle is isosceles! \
-Also, that word is hard to type." if isosceles?
+    return "This triangle is isosceles! "\
+           "Also, that word is hard to type." if isosceles?
     return 'This triangle is scalene and mathematically boring.' if scalene?
   end
 

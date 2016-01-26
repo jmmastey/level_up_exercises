@@ -29,10 +29,7 @@ class Bomb
   end
 
   def enter_code(code)
-    unless code.nil?
-      try_activation(code) if inactive?
-      try_deactivation(code) if active?
-    end
+    try_code(code) unless code.nil?
 
     self
   end
@@ -100,5 +97,10 @@ class Bomb
     @error = :bad_code
     @failed_deactivations += 1
     explode if failed_deactivations >= max_failed_deactivations
+  end
+
+  def try_code(code)
+    return try_activation(code) if inactive?
+    try_deactivation(code) if active?
   end
 end

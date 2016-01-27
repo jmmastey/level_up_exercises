@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   scope :visible, -> { where(profile_visible: true) }
   scope :order_by_name, -> { order(:last_name, :first_name) }
 
+  has_many :favorites
+
   def full_name
     "#{first_name} #{last_name}"
   end

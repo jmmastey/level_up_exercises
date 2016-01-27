@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118173746) do
+ActiveRecord::Schema.define(version: 20160126204519) do
+
+  create_table "favorites", force: :cascade do |t|
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+    t.integer  "menu_item_id"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string   "street"
@@ -36,7 +43,10 @@ ActiveRecord::Schema.define(version: 20151118173746) do
     t.integer  "menu_id"
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
+    t.integer  "favorite_id"
   end
+
+  add_index "menu_items", ["favorite_id"], name: "index_menu_items_on_favorite_id"
 
   create_table "menus", force: :cascade do |t|
     t.string   "external_id"
@@ -81,9 +91,11 @@ ActiveRecord::Schema.define(version: 20151118173746) do
     t.string   "about"
     t.integer  "location_id"
     t.boolean  "profile_visible",        default: false
+    t.integer  "favorite_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["favorite_id"], name: "index_users_on_favorite_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

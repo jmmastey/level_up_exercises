@@ -1,5 +1,6 @@
 class MenuItem < ActiveRecord::Base
   belongs_to :menu
+  belongs_to :favorite
 
   validates_presence_of :name, :menu
 

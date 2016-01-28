@@ -9,24 +9,22 @@ class BlagPost
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
 
   def initialize(args)
+    """
     args = args.inject({}) do |hash, (key, value)|
       hash[key.to_sym] = value
       hash
     end
+    """
 
-    if args[:author] != '' && args[:author_url] != ''
+    unless args[:author].blank? && args[:author_url].blank?
       @author = Author.new(args[:author], args[:author_url])
     end
 
-    if args[:categories]
-      @categories = args[:categories].reject do |category|
-        DISALLOWED_CATEGORIES.include? category
-      end
-    else
-      @categories = []
+    @categories = args[:categories].reject do |category|
+      DISALLOWED_CATEGORIES.include? category
     end
 
-    @comments = args[:comments] || []
+    @comments = args[:comments].presence || []
     @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
     @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
   end

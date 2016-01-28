@@ -1,32 +1,32 @@
 require_relative '../blag_post.rb'
 
 describe BlagPost do
-  before(:each) do
-    @author_name = "Foo Bar"
-    @author_url = "http://www.google.com"
-    @categories = [:theory_of_computation, :languages, :gossip]
-    @comments = [[], [], []]
-    @publish_date = "2013-02-10"
-    @body = "FOOBAR"
+  author_name = "Foo Bar"
+  author_url = "http://www.google.com"
+  categories = [:theory_of_computation, :languages, :gossip]
+  comments = [[], [], []]
+  publish_date = "2013-02-10"
+  body = "FOOBAR"
 
-    @blagpost = BlagPost.new(
-      author: @author_name,
-      author_url: @author_url,
-      categories: @categories,
-      comments: @comments,
-      publish_date: @publish_date,
-      body: @body,
-    )
-  end
+  context "when creating a new BlagPost with all parameters" do
+    before(:each) do
+      @blagpost = BlagPost.new(
+        author: author_name,
+        author_url: author_url,
+        categories: categories,
+        comments: comments,
+        publish_date: publish_date,
+        body: body,
+      )
+    end
 
-  context "when creating a new BlagPost" do
     describe "#new" do
       it "has struct with @author_name" do
-        expect(@blagpost.author.name).to eq @author_name
+        expect(@blagpost.author.name).to eq author_name
       end
 
       it "has struct with with @author_url" do
-        expect(@blagpost.author.url).to eq @author_url
+        expect(@blagpost.author.url).to eq author_url
       end
 
       it "has categories containing allowed categories" do
@@ -34,15 +34,15 @@ describe BlagPost do
       end
 
       it "has @comments" do
-        expect(@blagpost.comments).to eq @comments
+        expect(@blagpost.comments).to eq comments
       end
 
       it "has a parsed publish date" do
-        expect(@blagpost.publish_date).to eq Date.parse(@publish_date)
+        expect(@blagpost.publish_date).to eq Date.parse(publish_date)
       end
 
       it "has a @body" do
-        expect(@blagpost.body).to eq @body
+        expect(@blagpost.body).to eq body
       end
     end
 
@@ -55,6 +55,63 @@ describe BlagPost do
 
         expect(@blagpost.to_s).to eq formatted_string
       end
+    end
+  end
+
+  context "when creating a new BlagPost without an author_name" do
+    blagpost = BlagPost.new(
+      author_url: author_url,
+      categories: categories,
+      comments: comments,
+      publish_date: publish_date,
+      body: body,
+    )
+
+    it "does contains an author struct without a name" do
+      expect(blagpost.author.name).to be_nil
+    end
+
+    it "does contain an author struct with a url" do
+      expect(blagpost.author.url).to eq author_url
+    end
+  end
+
+  context "when creating a new BlagPost without an author_name && author_url" do
+    blagpost = BlagPost.new(
+      categories: categories,
+      comments: comments,
+      publish_date: publish_date,
+      body: body,
+    )
+
+    it "does not contain an author struct" do
+      expect(blagpost.author).to be_nil
+    end
+  end
+
+  context "when creating a new BlagPost without allowed categories" do
+    blagpost = BlagPost.new(
+      categories: [:gossip],
+      comments: comments,
+      publish_date: publish_date,
+      body: body,
+    )
+
+    it "contains an empty category array" do
+      expect(blagpost.categories).to eq []
+    end
+  end
+
+  context "when creating a new BlagPost with blank comments string" do
+    blagpost = BlagPost.new(
+      categories: [:gossip],
+      comments: '',
+      publish_date: publish_date,
+      body: body,
+    )
+
+    it "contains an empty category array" do
+      expect(blagpost.comments).to eq []
     end
   end
 end

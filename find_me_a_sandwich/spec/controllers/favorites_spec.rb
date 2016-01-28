@@ -42,6 +42,27 @@ describe FavoritesController do
   end
 
   describe "#destroy" do
+    context "When logged in and deleting legit item from favorites" do
+      it "removes the favorited item" do
+        user = FactoryGirl.create(:user, password: "1234asdf")
+        merchant = FactoryGirl.create(:merchant, name: "FOO")
+        menu = FactoryGirl.create(:menu, name: "foobar", merchant_id: merchant.id)
+        menu_item = FactoryGirl.create(
+          :menu_item, name: "barbaz", menu_id: menu.id, menu_group: "foogroup"
+        )
+        fave = Favorite.create(menu_item: menu_item, user: user)
+
+        request.env["HTTP_REFERER"] = "http://test.host/foo"
+
+        sign_in(user)
+        get(:destroy, id: fave.id)
+
+        favorites = Favorite.where(user_id: user.id)
+
+        expect(favorites.length).to eq(0)
+      end
+    end
+
     it "redirects to :back" do
       request.env["HTTP_REFERER"] = "http://test.host/foo"
       get :destroy

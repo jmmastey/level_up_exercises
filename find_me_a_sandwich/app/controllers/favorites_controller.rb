@@ -7,12 +7,12 @@ class FavoritesController < ApplicationController
 
   def new
     menu_item = MenuItem.find_by(id: params[:id])
-    Favorite.create(menu_item: menu_item, user: current_user)
+    Favorite.create(menu_item: menu_item, user: current_user) if menu_item
     redirect_to(:back)
   end
 
   def destroy
-    Favorite.destroy(params[:id])
+    Favorite.destroy(params[:id]) if params[:id]
     redirect_to(:back)
   end
 end

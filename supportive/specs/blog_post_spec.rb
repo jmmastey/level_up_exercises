@@ -9,6 +9,24 @@ describe BlagPost do
   body = "FOOBAR"
   body_with_spaces = "Buffalo  buffalo    Buffalo buffalo      buffalo\n"\
     " buffalo\nBuffalo      buffalo "
+  long_body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec "\
+              "dolor nisi, suscipit et nisl et, volutpat fermentum lorem. Sed "\
+              "turpis magna, gravida et sollicitudin sed, accumsan vitae justo"\
+              ". Fusce arcu magna, pharetra cursus quam nec, scelerisque "\
+              "blandit purus. Integer varius, ipsum vel interdum suscipit, "\
+              "eros eros posuere leo, non venenatis nisi velit sed dolor. "\
+              "Mauris posuere, magna vitae mollis hendrerit, dolor elit "\
+              "pellentesque ante, at vulputate neque lorem sed lorem. Ut vel "\
+              "lorem imperdiet, scelerisque dui eget, faucibus purus. Praesent"\
+              " nunc lacus, facilisis non finibus eget, pharetra ac risus. Nam"\
+              " quis sem mattis, volutpat justo id, lobortis leo. Curabitur "\
+              "condimentum, elit a sagittis consequat, magna tortor hendrerit "\
+              "leo, vitae sagittis quam nunc a neque. Curabitur molestie "\
+              "mauris id sapien auctor dapibus. Donec bibendum nec risus nec "\
+              "vestibulum. Curabitur eget erat dictum, lobortis tortor id, "\
+              "aliquet justo. Vestibulum in nisl posuere, mattis ipsum quis, "\
+              "molestie tortor. Donec suscipit massa vitae neque efficitur "\
+              "ultricies. Mauris consectetur at sem in pharetra."
 
   context "when creating a new BlagPost with all parameters" do
     before(:each) do
@@ -222,6 +240,19 @@ describe BlagPost do
       it "will return a string with 1st comment info" do
         blagpost = BlagPost.new
         expect(blagpost.to_s).to eq "You will be the 1st commenter"
+      end
+    end
+
+    context "when creating a new BlagPost with a lengthy body" do
+      it "will return truncated body text" do
+        blagpost = BlagPost.new(body: long_body)
+        expect(blagpost.to_s).to eq "Lorem ipsum dolor sit amet, consectetur "\
+                                    "adipiscing elit. Donec dolor nisi, "\
+                                    "suscipit et nisl et, volutpat fermentum "\
+                                    "lorem. Sed turpis magna, gravida et "\
+                                    "sollicitudin sed, accumsan vitae justo. "\
+                                    "Fusce ...\nYou will be the 1st "\
+                                    "commenter"
       end
     end
   end

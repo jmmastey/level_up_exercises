@@ -6,13 +6,17 @@ class FavoritesController < ApplicationController
   end
 
   def new
-    menu_item = MenuItem.find_by(id: params[:id])
-    Favorite.create(menu_item: menu_item, user: current_user) if menu_item
+    if user_signed_in?
+      menu_item = MenuItem.find_by(id: params[:id])
+      Favorite.create(menu_item: menu_item, user: current_user) if menu_item
+    end
+
     redirect_to(:back)
   end
 
   def destroy
-    Favorite.destroy(params[:id]) if params[:id]
+    fave = Favorite.find_by(id: params[:id], user: current_user)
+    fave.destroy if fave
     redirect_to(:back)
   end
 end

@@ -1,6 +1,10 @@
 require "rails_helper"
 
 describe FavoritesController do
+  before(:each) do
+    request.env["HTTP_REFERER"] = "http://test.host/foo"
+  end
+
   describe "#show" do
     context "When not logged in" do
       it "renders the show template" do
@@ -19,12 +23,9 @@ describe FavoritesController do
     context "When logged in and adding a legit item to favorites" do
       it "saves the item as a favorite" do
         user = FactoryGirl.create(:user, password: "1234asdf")
-        merchant = FactoryGirl.create(:merchant, name: "FOO")
-        menu = FactoryGirl.create(:menu, name: "foobar", merchant_id: merchant.id)
         menu_item = FactoryGirl.create(
-          :menu_item, name: "barbaz", menu_id: menu.id, menu_group: "foogroup"
+          :menu_item
         )
-        request.env["HTTP_REFERER"] = "http://test.host/foo"
 
         sign_in(user)
         get(:new, id: menu_item.id)
@@ -34,8 +35,19 @@ describe FavoritesController do
       end
     end
 
+    context "When not logged in and adding a legit item to favorites" do
+      it "does not save the favorited item" do
+        menu_item = FactoryGirl.create(
+          :menu_item
+        )
+
+        get(:new, id: menu_item.id)
+
+        expect(Favorite.count).to eq(0)
+      end
+    end
+
     it "redirects to :back" do
-      request.env["HTTP_REFERER"] = "http://test.host/foo"
       get :new
       expect(response).to redirect_to(:back)
     end
@@ -44,27 +56,24 @@ describe FavoritesController do
   describe "#destroy" do
     context "When logged in and deleting legit item from favorites" do
       it "removes the favorited item" do
-        user = FactoryGirl.create(:user, password: "1234asdf")
-        merchant = FactoryGirl.create(:merchant, name: "FOO")
-        menu = FactoryGirl.create(:menu, name: "foobar", merchant_id: merchant.id)
-        menu_item = FactoryGirl.create(
-          :menu_item, name: "barbaz", menu_id: menu.id, menu_group: "foogroup"
-        )
-        fave = Favorite.create(menu_item: menu_item, user: user)
-
-        request.env["HTTP_REFERER"] = "http://test.host/foo"
-
-        sign_in(user)
+        fave = FactoryGirl.create(:favorite)
+        sign_in(fave.user)
         get(:destroy, id: fave.id)
-
-        favorites = Favorite.where(user_id: user.id)
+        favorites = Favorite.where(user_id: fave.user.id)
 
         expect(favorites.length).to eq(0)
       end
     end
 
+    context "When not logged in and deleting a legit item from favorites" do
+      it "does not remove the favorited item" do
+        fave = FactoryGirl.create(:favorite)
+        get(:destroy, id: fave.id)
+        expect(Favorite.find(fave.id)).to eq(fave)
+      end
+    end
+
     it "redirects to :back" do
-      request.env["HTTP_REFERER"] = "http://test.host/foo"
       get :destroy
       expect(response).to redirect_to(:back)
     end

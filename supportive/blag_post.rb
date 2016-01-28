@@ -5,32 +5,46 @@ require 'active_support/all'
 class BlagPost
   attr_accessor :author, :comments, :categories, :body, :publish_date
 
-  Author = Struct.new(:name, :url)
   DISALLOWED_CATEGORIES = [:selfposts, :gossip, :bildungsromane]
+  Author = Struct.new(:name, :url)
 
-  def initialize(args)
-    """
-    args = args.inject({}) do |hash, (key, value)|
-      hash[key.to_sym] = value
-      hash
+  def categories=(categories)
+    categories = categories.presence || []
+
+    @categories = categories.reject do |category|
+      DISALLOWED_CATEGORIES.include? category
     end
-    """
+  end
 
+  def body=(body)
+    @body = body.gsub(/\s{2,}|\n/, ' ').gsub(/^\s+|\s+$/, '') if body.presence
+  end
+
+  def publish_date=(pub_date)
+    pub_date = pub_date.presence || ''
+
+    begin
+      pub_date = pub_date.to_date
+    rescue ArgumentError
+      pub_date = nil
+    end
+
+    @publish_date = pub_date ? pub_date : Date.today
+  end
+
+  def initialize(args = {})
     unless args[:author].blank? && args[:author_url].blank?
       @author = Author.new(args[:author], args[:author_url])
     end
 
-    @categories = args[:categories].reject do |category|
-      DISALLOWED_CATEGORIES.include? category
-    end
-
     @comments = args[:comments].presence || []
-    @body = args[:body].gsub(/\s{2,}|\n/, ' ').gsub(/^\s+/, '')
-    @publish_date = (args[:publish_date] && Date.parse(args[:publish_date])) || Date.today
+    self.categories = args[:categories]
+    self.body = args[:body]
+    self.publish_date = args[:publish_date]
   end
 
   def to_s
-    [ category_list, byline, abstract, commenters ].join("\n")
+    [category_list, byline, abstract, commenters].join("\n")
   end
 
   private

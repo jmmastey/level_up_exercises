@@ -7,6 +7,8 @@ describe BlagPost do
   comments = [[], [], []]
   publish_date = "2013-02-10"
   body = "FOOBAR"
+  body_with_spaces = "Buffalo  buffalo    Buffalo buffalo      buffalo\n"\
+    " buffalo\nBuffalo      buffalo "
 
   context "when creating a new BlagPost with all parameters" do
     before(:each) do
@@ -63,8 +65,6 @@ describe BlagPost do
       author_url: author_url,
       categories: categories,
       comments: comments,
-      publish_date: publish_date,
-      body: body,
     )
 
     it "does contains an author struct without a name" do
@@ -76,42 +76,67 @@ describe BlagPost do
     end
   end
 
-  context "when creating a new BlagPost without an author_name && author_url" do
-    blagpost = BlagPost.new(
-      categories: categories,
-      comments: comments,
-      publish_date: publish_date,
-      body: body,
-    )
+  describe "#new" do
+    context "when creating a new BlagPost without params" do
+      before(:each) do
+        @blagpost = BlagPost.new
+      end
 
-    it "does not contain an author struct" do
-      expect(blagpost.author).to be_nil
+      it "returns a new BlagPost object" do
+        expect(@blagpost).to be_a(BlagPost)
+      end
+
+      it "does not contain an author struct" do
+        expect(@blagpost.author).to be_nil
+      end
+
+      it "contains an empty category array" do
+        expect(@blagpost.categories).to eq []
+      end
+
+      it "contains an empty category array" do
+        expect(@blagpost.comments).to eq []
+      end
     end
-  end
 
-  context "when creating a new BlagPost without allowed categories" do
-    blagpost = BlagPost.new(
-      categories: [:gossip],
-      comments: comments,
-      publish_date: publish_date,
-      body: body,
-    )
-
-    it "contains an empty category array" do
-      expect(blagpost.categories).to eq []
+    context "when creating a new BlagPost without allowed categories" do
+      it "contains an empty category array" do
+        blagpost = BlagPost.new(categories: [:gossip])
+        expect(blagpost.categories).to eq []
+      end
     end
-  end
 
-  context "when creating a new BlagPost with blank comments string" do
-    blagpost = BlagPost.new(
-      categories: [:gossip],
-      comments: '',
-      publish_date: publish_date,
-      body: body,
-    )
+    context "when creating a new BlagPost with weird body spacing" do
+      it "parses the body and fixes the spaced formatting" do
+        blagpost = BlagPost.new(body: body_with_spaces)
+        expect(blagpost.body).to eq "Buffalo buffalo Buffalo buffalo buffalo "\
+          "buffalo Buffalo buffalo"
+      end
+    end
 
-    it "contains an empty category array" do
-      expect(blagpost.comments).to eq []
+    context "when creating a new BlagPost with a bad date" do
+      it "assigns Date.today to publish_date when date is empty string" do
+        blagpost = BlagPost.new(publish_date: '')
+
+        expect(blagpost.publish_date).to eq Date.today
+      end
+
+      it "Date.today is assigned to publish_date when date is bad format" do
+        blagpost = BlagPost.new(publish_date: 'asdf')
+        expect(blagpost.publish_date).to eq Date.today
+      end
+
+      it "Date.today is assigned when publish_date is missing" do
+        blagpost = BlagPost.new(categories: [:gossip])
+        expect(blagpost.publish_date).to eq Date.today
+      end
+    end
+
+    context "when creating a new BlagPost with no body parameter" do
+      it "assigns nil to body" do
+        blagpost = BlagPost.new(categories: [:gossip])
+        expect(blagpost.body).to be_nil
+      end
     end
   end
 end

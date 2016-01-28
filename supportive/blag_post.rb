@@ -44,36 +44,26 @@ class BlagPost
   end
 
   def to_s
-    [category_list, byline, abstract, commenters].join("\n")
+    [category_list, byline, abstract, commenters].reject(&:!).join("\n")
   end
 
   private
 
   def byline
-    if author.nil?
-      ""
-    else
-      "By #{author.name}, at #{author.url}"
-    end
+    return nil unless author
+
+    by_line = author.name.presence || 'anonymous'
+    by_line += ", at #{author.url}" if author.url
+
+    "By #{by_line}"
   end
 
   def category_list
-    return "" if categories.empty?
+    return nil if categories.empty?
 
-    if categories.length == 1
-      label = "Category"
-    else
-      label = "Categories"
-    end
-
-    if categories.length > 1
-      last_category = categories.pop
-      suffix = " and #{as_title(last_category)}"
-    else
-      suffix = ""
-    end
-
-    label + ": " + categories.map { |cat| as_title(cat) }.join(", ") + suffix
+    label = "Category"
+    label = label.pluralize if categories.length > 1
+    label + ": " + categories.map { |cat| as_title(cat) }.to_sentence
   end
 
   def as_title(string)
@@ -85,8 +75,8 @@ class BlagPost
   end
 
   def commenters
-    return '' unless comments_allowed?
-    return '' unless comments.length > 0
+    return nil unless comments_allowed?
+    return nil unless comments.length > 0
 
     ordinal = case comments.length % 10
       when 1 then "st"
@@ -102,11 +92,12 @@ class BlagPost
   end
 
   def abstract
-    if body.length < 200
-      body
-    else
-      body[0..200] + "..."
+    if body
+      if body.length < 200
+        body
+      else
+        body[0..200] + "..."
+      end
     end
   end
-
 end

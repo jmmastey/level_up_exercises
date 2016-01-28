@@ -139,4 +139,71 @@ describe BlagPost do
       end
     end
   end
+
+  describe "#to_s" do
+    context "when creating a new BlagPost with only author info" do
+      it "will return a string with author info" do
+        blagpost = BlagPost.new(
+          author: author_name,
+          author_url: author_url,
+        )
+        expect(blagpost.to_s).to eq "By #{author_name}, at #{author_url}"
+      end
+    end
+
+    context "when creating a new BlagPost with author name" do
+      it "will return a string with author name" do
+        blagpost = BlagPost.new(
+          author: author_name
+        )
+        expect(blagpost.to_s).to eq "By #{author_name}"
+      end
+    end
+
+    context "when creating a new BlagPost with author url" do
+      it "will return a string with author url" do
+        blagpost = BlagPost.new(
+          author_url: author_url
+        )
+        puts blagpost.author.name
+        expect(blagpost.to_s).to eq "By anonymous, at #{author_url}"
+      end
+    end
+
+    context "when creating a new BlagPost with only categories" do
+      it "will return a string with category info" do
+        blagpost = BlagPost.new(
+          categories: [:foobar]
+        )
+        expect(blagpost.to_s).to eq "Category: Foobar"
+      end
+    end
+
+    context "when creating a new BlagPost with multiple categories" do
+      it "will return a string with plural categories word" do
+        blagpost = BlagPost.new(
+          categories: [:foobar, :barbaz]
+        )
+        expect(blagpost.to_s).to eq "Categories: Foobar and Barbaz"
+      end
+    end
+
+    context "when creating a new BlagPost with only body" do
+      it "will return a string with body" do
+        blagpost = BlagPost.new(
+          body: body
+        )
+        expect(blagpost.to_s).to eq "FOOBAR"
+      end
+    end
+
+    context "when creating a new BlagPost with only comments" do
+      it "will return a string with comment info" do
+        blagpost = BlagPost.new(
+          comments: comments
+        )
+        expect(blagpost.to_s).to eq "You will be the 3rd commenter"
+      end
+    end
+  end
 end

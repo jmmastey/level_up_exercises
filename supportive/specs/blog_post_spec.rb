@@ -53,7 +53,7 @@ describe BlagPost do
         formatted_string = ["Categories: Theory Of Computation and Languages",
                             "By Foo Bar, at http://www.google.com",
                             "FOOBAR",
-                            "You will be the 3rd commenter"].join("\n")
+                            "You will be the 4th commenter"].join("\n")
 
         expect(@blagpost.to_s).to eq formatted_string
       end
@@ -147,7 +147,9 @@ describe BlagPost do
           author: author_name,
           author_url: author_url,
         )
-        expect(blagpost.to_s).to eq "By #{author_name}, at #{author_url}"
+        expect(blagpost.to_s).to eq(
+          "By #{author_name}, at #{author_url}\nYou will be the 1st commenter"
+        )
       end
     end
 
@@ -156,7 +158,9 @@ describe BlagPost do
         blagpost = BlagPost.new(
           author: author_name
         )
-        expect(blagpost.to_s).to eq "By #{author_name}"
+        expect(blagpost.to_s).to eq(
+          "By #{author_name}\nYou will be the 1st commenter"
+        )
       end
     end
 
@@ -166,7 +170,9 @@ describe BlagPost do
           author_url: author_url
         )
         puts blagpost.author.name
-        expect(blagpost.to_s).to eq "By anonymous, at #{author_url}"
+        expect(blagpost.to_s).to eq(
+          "By anonymous, at #{author_url}\nYou will be the 1st commenter"
+        )
       end
     end
 
@@ -175,7 +181,9 @@ describe BlagPost do
         blagpost = BlagPost.new(
           categories: [:foobar]
         )
-        expect(blagpost.to_s).to eq "Category: Foobar"
+        expect(blagpost.to_s).to eq(
+          "Category: Foobar\nYou will be the 1st commenter"
+        )
       end
     end
 
@@ -184,7 +192,9 @@ describe BlagPost do
         blagpost = BlagPost.new(
           categories: [:foobar, :barbaz]
         )
-        expect(blagpost.to_s).to eq "Categories: Foobar and Barbaz"
+        expect(blagpost.to_s).to eq(
+          "Categories: Foobar and Barbaz\nYou will be the 1st commenter"
+        )
       end
     end
 
@@ -193,7 +203,9 @@ describe BlagPost do
         blagpost = BlagPost.new(
           body: body
         )
-        expect(blagpost.to_s).to eq "FOOBAR"
+        expect(blagpost.to_s).to eq(
+          "FOOBAR\nYou will be the 1st commenter"
+        )
       end
     end
 
@@ -202,7 +214,14 @@ describe BlagPost do
         blagpost = BlagPost.new(
           comments: comments
         )
-        expect(blagpost.to_s).to eq "You will be the 3rd commenter"
+        expect(blagpost.to_s).to eq "You will be the 4th commenter"
+      end
+    end
+
+    context "when creating a new BlagPost with no comments" do
+      it "will return a string with 1st comment info" do
+        blagpost = BlagPost.new
+        expect(blagpost.to_s).to eq "You will be the 1st commenter"
       end
     end
   end

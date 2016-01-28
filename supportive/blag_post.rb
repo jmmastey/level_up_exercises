@@ -67,15 +67,10 @@ class BlagPost
 
   def commenters
     return nil unless comments_allowed?
-    return nil unless comments.length > 0
 
-    ordinal = case comments.length % 10
-      when 1 then "st"
-      when 2 then "nd"
-      when 3 then "rd"
-      else "th"
-    end
-    "You will be the #{comments.length}#{ordinal} commenter"
+    comment_number = comments.length + 1
+
+    "You will be the #{comment_number.ordinalize} commenter"
   end
 
   def comments_allowed?

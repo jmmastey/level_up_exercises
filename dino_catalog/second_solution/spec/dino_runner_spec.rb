@@ -64,17 +64,17 @@ describe DinoRunner do
     end
     it "accepts an array of arg filters" #no idea
     it "correctly parses filter terms & applies methods" do
-      expect(runner.filter_catalog(filter_args_b).collection.all?{ |d| d.big?}).to be true
-      expect(runner.filter_catalog(filter_args_2).collection.all?{ |d| d.biped? }).to be true
-      expect(runner.filter_catalog(filter_args_c).collection.all?{ |d| d.carnivore? }).to be true
+      expect(runner.filter_catalog(filter_args_b).collection.all?{ |d| d.big?}).to be_truthy
+      expect(runner.filter_catalog(filter_args_2).collection.all?{ |d| d.biped? }).to be_truthy
+      expect(runner.filter_catalog(filter_args_c).collection.all?{ |d| d.carnivore? }).to be_truthy
     end
 
     it "applies a method for each arg" do
-      expect(runner.filter_catalog(filter_args_verbose).collection.all?{ |d| d.carnivore? && d.biped? && d.big?}).to be true
-      expect(runner.filter_catalog(filter_args_shorthand).collection.all?{ |d| d.carnivore? && d.biped? && d.big?}).to be true
-      expect(runner.filter_catalog(filter_args_bc).collection.all?{ |d| d.carnivore? && d.big?}).to be true
-      expect(runner.filter_catalog(filter_args_2b).collection.all?{ |d| d.biped? && d.big?}).to be true
-      expect(runner.filter_catalog(filter_args_2c).collection.all?{ |d| d.carnivore? && d.biped? }).to be true
+      expect(runner.filter_catalog(filter_args_verbose).collection.all?{ |d| d.carnivore? && d.biped? && d.big?}).to be_truthy
+      expect(runner.filter_catalog(filter_args_shorthand).collection.all?{ |d| d.carnivore? && d.biped? && d.big?}).to be_truthy
+      expect(runner.filter_catalog(filter_args_bc).collection.all?{ |d| d.carnivore? && d.big?}).to be_truthy
+      expect(runner.filter_catalog(filter_args_2b).collection.all?{ |d| d.biped? && d.big?}).to be_truthy
+      expect(runner.filter_catalog(filter_args_2c).collection.all?{ |d| d.carnivore? && d.biped? }).to be_truthy
     end
   end
 

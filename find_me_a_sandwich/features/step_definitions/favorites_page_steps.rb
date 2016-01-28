@@ -42,3 +42,12 @@ end
 Then(/^I do not see meals I have not added to the list$/) do
   expect(page).not_to have_content('foobaz')
 end
+
+When(/^there are no favorited meals in my favorites list$/) do
+  expect(page).not_to have_content('barbaz A')
+  expect(page).not_to have_content('barbaz B')
+end
+
+Then(/^I see a message telling me to add some favorites$/) do
+  expect(page).to have_content("Save some meals to favorites and they will show up here after.")
+end

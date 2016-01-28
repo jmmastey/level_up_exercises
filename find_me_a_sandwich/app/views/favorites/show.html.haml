@@ -1,13 +1,19 @@
 .page-header
   %h1 Favorites
 
-%table
-  %thead
-    %tr
-      %th Name
-  %tbody
-    - @favorites.each do |favorite|
-      %tr
-        %td= favorite.menu_item.name
-        %td
-          %a.unfavorite{ href: "/favorites/destroy/#{favorite.id}" } remove from favorites
+- if user_signed_in?
+  - if @favorites.length == 0
+    %p Save some meals to favorites and they will show up here after.
+  - else
+    %table
+      %thead
+        %tr
+          %th Name
+      %tbody
+        - @favorites.each do |favorite|
+          %tr
+            %td= favorite.menu_item.name
+            %td
+              %a.unfavorite{ href: "/favorites/destroy/#{favorite.id}" } remove from favorites
+- else
+  %p Login or signup to start saving favorites!

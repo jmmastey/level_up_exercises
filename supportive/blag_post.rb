@@ -61,17 +61,8 @@ class BlagPost
   def category_list
     return nil if categories.empty?
 
-    label = "Category"
-    label = label.pluralize if categories.length > 1
-    label + ": " + categories.map { |cat| as_title(cat) }.to_sentence
-  end
-
-  def as_title(string)
-    string = String(string)
-    words = string.gsub('_', ' ').split(' ')
-
-    words.map!(&:capitalize)
-    words.join(' ')
+    label = "Category".pluralize(categories.length) + ': '
+    label + categories.map { |cat| cat.to_s.humanize.titleize }.to_sentence
   end
 
   def commenters

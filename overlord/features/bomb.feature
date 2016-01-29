@@ -1,10 +1,11 @@
 Feature: The bomb interface should include a field
+  In order to destroy people
   As a bomber
-  I want to type in an activation / deactivation code and see the bomb state
-  So that I can destroy people
+  I want to acess my bomb controls
 
-  Scenario: Enter code
+  Scenario: Create a new Bomb
     Given A new bomb is not active
     When I start the application
-    Then the game should say “Welcome to Blow people up”
-    And the game should say “Enter code: and the current state of the bomb”
+    Then the game should say “Super Villain's Detonation Device”
+    And the game should say “Please enter your code to blow things up”
+    And a form should exist with a button

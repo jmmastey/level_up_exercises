@@ -1,16 +1,24 @@
+$LOAD_PATH << 'lib'
+
+require 'bomb'
+
 Given(/^A new bomb is not active$/) do
-  @bomb = Bomb.new
-  @bomb.state = :inactive
+  bomb = Bomb.new("1234", "0000")
+  !bomb.active?
 end
 
 When(/^I start the application$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit("http://localhost:4567/")
 end
 
-Then(/^the game should say “Welcome to Blow people up”$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^the game should say “Super Villain's Detonation Device”$/) do
+  expect(page).to have_content "Super Villain's Detonation Device"
 end
 
-Then(/^the game should say “Enter code: and the current state of the bomb”$/) do
+Then(/^the game should say “Please enter your code to blow things up”$/) do
+  expect(page).to have_content "Please enter your code to blow things up"
+end
+
+Then(/^a form should exist with a button$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end

@@ -3,12 +3,8 @@ require "JSON"
 
 class DinosaurCatalog
   TWO_TONS = 4000
+  DEFAULT_KEYS = %w(name period continent diet walking weight description)
   attr_accessor :json_file_name
-  attr_accessor :default_keys
-
-  def default_keys
-    @default_keys = %w(name period continent diet walking weight description)
-  end
 
   def initialize(attrs = {})
     @dinosaur_catalog = []

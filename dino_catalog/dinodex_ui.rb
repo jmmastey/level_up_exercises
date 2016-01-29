@@ -114,7 +114,7 @@ class DinodexUI
 
   def self.show_dinosaur_facts(results)
     results.each do |dino|
-      @catalog.default_keys.each do |key|
+      DinosaurCatalog::DEFAULT_KEYS.each do |key|
         sym_key = key.to_sym
 
         puts "#{key.capitalize}: #{dino[sym_key]}" if dino[sym_key]

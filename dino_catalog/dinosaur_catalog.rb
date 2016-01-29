@@ -2,7 +2,7 @@ require "CSV"
 require "JSON"
 
 class DinosaurCatalog
-  ONE_TON = 2000
+  TWO_TONS = 4000
 
   attr_accessor :json_file_name
   attr_accessor :default_keys
@@ -57,7 +57,7 @@ class DinosaurCatalog
     @dinosaur_catalog.select do |row|
       weight = row[:weight].to_i
 
-      size == 'large' ? weight >= ONE_TON : weight < ONE_TON
+      size == 'large' ? weight > TWO_TONS : weight <= TWO_TONS
     end
   end
 

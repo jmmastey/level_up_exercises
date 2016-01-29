@@ -6,17 +6,17 @@ describe DinosaurCatalog do
     period: "Late Fooeous",
     continent: "North Amerifoo",
     diet: "Carnivore",
-    weight_in_lbs: "2000",
+    weight_in_lbs: "5000",
     walking: "Fooped",
     description: "Like a Foo-Rex but smaller.",
-    weight: "2000",
+    weight: "5000",
   }
 
   barosaurus = {
     genus: "Barosaurus",
     period: "Barassic",
     carnivore: "No",
-    weight: "100",
+    weight: "4000",
     walking: "Biped",
     name: "Barosaurus",
   }
@@ -26,12 +26,12 @@ describe DinosaurCatalog do
       allow(File).to receive(:open).and_return(
         StringIO.new(
           "NAME,PERIOD,CONTINENT,DIET,WEIGHT_IN_LBS,WALKING,DESCRIPTION\n"\
-          "Fooasaurus,Late Fooeous,North Amerifoo,Carnivore,2000,Fooped,"\
+          "Fooasaurus,Late Fooeous,North Amerifoo,Carnivore,5000,Fooped,"\
             "Like a Foo-Rex but smaller."
         ),
         StringIO.new(
           "Genus,Period,Carnivore,Weight,Walking\n"\
-          "Barosaurus,Barassic,No,100,Biped"
+          "Barosaurus,Barassic,No,4000,Biped"
         ),
       )
 
@@ -57,13 +57,13 @@ describe DinosaurCatalog do
     end
 
     describe "#find_large" do
-      it "returns a list of dinosaurs over 1 ton" do
+      it "returns a list of dinosaurs over 2 tons" do
         expect(@dinocat.find_large).to eq [fooasaurus]
       end
     end
 
     describe "#find_small" do
-      it "returns a list of dinosaurs over 1 ton" do
+      it "returns a list of dinosaurs <= 2 tons" do
         expect(@dinocat.find_small).to eq [barosaurus]
       end
     end

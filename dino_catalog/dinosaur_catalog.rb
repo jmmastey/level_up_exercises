@@ -3,7 +3,6 @@ require "JSON"
 
 class DinosaurCatalog
   TWO_TONS = 4000
-
   attr_accessor :json_file_name
   attr_accessor :default_keys
 

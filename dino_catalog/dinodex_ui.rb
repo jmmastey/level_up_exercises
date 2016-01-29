@@ -98,7 +98,7 @@ class DinodexUI
   end
 
   def self.show_dinos_by_size(user_input)
-    dinos = user_input == "1" ? @catalog.find_large : @catalog.find_small
+    dinos = (user_input == "1") ? @catalog.find_large : @catalog.find_small
 
     show_dinosaur_facts(dinos)
   end

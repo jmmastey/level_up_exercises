@@ -173,9 +173,7 @@ describe BlagPost do
 
     context "when creating a new BlagPost with author name" do
       it "will return a string with author name" do
-        blagpost = BlagPost.new(
-          author: author_name
-        )
+        blagpost = BlagPost.new(author: author_name)
         expect(blagpost.to_s).to eq(
           "By #{author_name}\nYou will be the 1st commenter"
         )
@@ -184,9 +182,7 @@ describe BlagPost do
 
     context "when creating a new BlagPost with author url" do
       it "will return a string with author url" do
-        blagpost = BlagPost.new(
-          author_url: author_url
-        )
+        blagpost = BlagPost.new(author_url: author_url)
         puts blagpost.author.name
         expect(blagpost.to_s).to eq(
           "By anonymous, at #{author_url}\nYou will be the 1st commenter"
@@ -196,9 +192,7 @@ describe BlagPost do
 
     context "when creating a new BlagPost with only categories" do
       it "will return a string with category info" do
-        blagpost = BlagPost.new(
-          categories: [:foobar]
-        )
+        blagpost = BlagPost.new(categories: [:foobar])
         expect(blagpost.to_s).to eq(
           "Category: Foobar\nYou will be the 1st commenter"
         )
@@ -207,9 +201,7 @@ describe BlagPost do
 
     context "when creating a new BlagPost with multiple categories" do
       it "will return a string with plural categories word" do
-        blagpost = BlagPost.new(
-          categories: [:foobar, :barbaz]
-        )
+        blagpost = BlagPost.new(categories: [:foobar, :barbaz])
         expect(blagpost.to_s).to eq(
           "Categories: Foobar and Barbaz\nYou will be the 1st commenter"
         )
@@ -218,9 +210,7 @@ describe BlagPost do
 
     context "when creating a new BlagPost with only body" do
       it "will return a string with body" do
-        blagpost = BlagPost.new(
-          body: body
-        )
+        blagpost = BlagPost.new(body: body)
         expect(blagpost.to_s).to eq(
           "FOOBAR\nYou will be the 1st commenter"
         )
@@ -229,9 +219,7 @@ describe BlagPost do
 
     context "when creating a new BlagPost with only comments" do
       it "will return a string with comment info" do
-        blagpost = BlagPost.new(
-          comments: comments
-        )
+        blagpost = BlagPost.new(comments: comments)
         expect(blagpost.to_s).to eq "You will be the 4th commenter"
       end
     end

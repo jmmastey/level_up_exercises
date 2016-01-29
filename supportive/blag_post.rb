@@ -1,5 +1,3 @@
-# In case you missed them, here are the extensions: http://guides.rubyonrails.org/active_support_core_extensions.html
-
 require 'active_support/all'
 
 class BlagPost

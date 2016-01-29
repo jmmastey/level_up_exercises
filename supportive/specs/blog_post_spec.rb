@@ -133,20 +133,20 @@ describe BlagPost do
     end
 
     context "when creating a new BlagPost with a bad date" do
-      it "assigns Date.today to publish_date when date is empty string" do
+      it "assigns Date.current to publish_date when date is empty string" do
         blagpost = BlagPost.new(publish_date: '')
 
-        expect(blagpost.publish_date).to eq Date.today
+        expect(blagpost.publish_date).to eq Date.current
       end
 
-      it "Date.today is assigned to publish_date when date is bad format" do
+      it "Date.current is assigned to publish_date when date is bad format" do
         blagpost = BlagPost.new(publish_date: 'asdf')
-        expect(blagpost.publish_date).to eq Date.today
+        expect(blagpost.publish_date).to eq Date.current
       end
 
-      it "Date.today is assigned when publish_date is missing" do
+      it "Date.current is assigned when publish_date is missing" do
         blagpost = BlagPost.new(categories: [:gossip])
-        expect(blagpost.publish_date).to eq Date.today
+        expect(blagpost.publish_date).to eq Date.current
       end
     end
 
@@ -253,6 +253,16 @@ describe BlagPost do
                                     "sollicitudin sed, accumsan vitae justo. "\
                                     "Fusce ...\nYou will be the 1st "\
                                     "commenter"
+      end
+    end
+
+    context "BlagPost created with only comments and no comments are allowed" do
+      it "will return a blank string" do
+        blagpost = BlagPost.new(
+          comments: [[]],
+          publish_date: Date.today.years_ago(3),
+        )
+        expect(blagpost.to_s).to eq ""
       end
     end
   end

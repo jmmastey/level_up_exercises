@@ -29,7 +29,7 @@ class BlagPost
       pub_date = nil
     end
 
-    @publish_date = pub_date ? pub_date : Date.today
+    @publish_date = pub_date ? pub_date : Date.current
   end
 
   def initialize(args = {})
@@ -74,7 +74,7 @@ class BlagPost
   end
 
   def comments_allowed?
-    publish_date + (365 * 3) > Date.today
+    publish_date.years_since(3) > Date.current
   end
 
   def abstract

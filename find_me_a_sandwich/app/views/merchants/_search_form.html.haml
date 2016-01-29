@@ -1,0 +1,7 @@
+.search-form-container
+  = form_tag(merchants_path, method: :get) do
+    .row
+      .col-md-10
+        .form-group
+          = search_field_tag :location, @location, class: "form-control input-lg", placeholder: "Search by ZIP"
+      %button.col-md-2.btn.btn-primary.btn-lg{ type: :submit } Search

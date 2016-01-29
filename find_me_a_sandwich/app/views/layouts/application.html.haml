@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Find Me A Sandwich
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    = render "shared/navbar"
+    .container
+      - if notice
+        .alert.alert-info.alert-dismissable{ role: :alert }
+          %button.close{ type: :button, aria: { label: "Close" }, data: { dismiss: :alert }}
+            %span{ aria: { hidden: "true" }} &times;
+          = notice
+      - if alert
+        .alert.alert-danger{ role: :alert }= alert
+      = yield

@@ -1,4 +1,5 @@
-require_relative "menus"
+require_relative "menu"
+require_relative "lettered_menu"
 require_relative "dinosaur_catalog"
 
 class DinodexUI
@@ -8,7 +9,7 @@ class DinodexUI
     @catalog = DinosaurCatalog.new(attr)
 
     @menu_index = :home
-    load_sub_menus(@catalog.dinodex_periods)
+    load_sub_menus(@catalog.dinosaur_catalog_periods)
     @action_menu = LetteredMenu.new(["JSON Save", "Back", "Quit"])
 
     clear_screen
@@ -92,7 +93,7 @@ class DinodexUI
 
   def self.show_dinos_by_period(user_input)
     show_dinosaur_facts @catalog.find_dinos(
-      :period, @catalog.dinodex_periods[user_input.to_i - 1].downcase
+      :period, @catalog.dinosaur_catalog_periods[user_input.to_i - 1].downcase
     )
   end
 

@@ -115,9 +115,7 @@ class DinodexUI
   def self.show_dinosaur_facts(results)
     results.each do |dino|
       DinosaurCatalog::DEFAULT_KEYS.each do |key|
-        sym_key = key.to_sym
-
-        puts "#{key.capitalize}: #{dino[sym_key]}" if dino[sym_key]
+        puts "#{key.capitalize}: #{dino[key]}" if dino[key]
       end
       puts '-' * 80
     end

@@ -53,6 +53,11 @@ class DinosaurCatalog
     end
   end
 
+  def find_dinos(key, value, catalog = nil)
+    current_catalog = catalog ? catalog : @dinosaur_catalog
+    current_catalog.select { |row| row[key] && row[key].downcase == value }
+  end
+
   private
 
   def find_by_weight(size)
@@ -61,11 +66,6 @@ class DinosaurCatalog
 
       size == 'large' ? weight > TWO_TONS : weight <= TWO_TONS
     end
-  end
-
-  def find_dinos(key, value, catalog = nil)
-    current_catalog = catalog ? catalog : @dinosaur_catalog
-    current_catalog.select { |row| row[key] && row[key].downcase == value }
   end
 
   def import_csv_files(files)

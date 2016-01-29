@@ -1,12 +1,12 @@
 require 'json'
 
-data = File.read("arrowhead_data.json")
+data = File.read('arrowhead_data.json')
 CLASSIFICATIONS = JSON.parse(data, symbolize_names: true)
 
 class Arrowhead
-  REGION_ERROR = "Unknown region, please provide a valid region."
-  SHAPE_ERROR  = "Unknown shape value. "\
-                 "Are you sure you know what you're talking about?"
+  REGION_ERROR = 'Unknown region, please provide a valid region.'.freeze
+  SHAPE_ERROR  = 'Unknown shape value. '\
+                 'Are you sure you know what you\'re talking about?'.freeze
 
   def self.classify(region, shape)
     raise REGION_ERROR unless (shapes = CLASSIFICATIONS[region])

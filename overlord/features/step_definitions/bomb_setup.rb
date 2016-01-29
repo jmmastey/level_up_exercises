@@ -20,5 +20,5 @@ Then(/^the game should say “Please enter your code to blow things up”$/) do
 end
 
 Then(/^a form should exist with a button$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  page.should have_selector(:link_or_button, 'Submit')
 end

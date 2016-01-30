@@ -60,7 +60,6 @@
 * When I click 'Estimate shipping costs'
 * Then I should see an error message prompting me to select a different carrier
 
-
 ####Scenario: Invalidating shipping info when items are added (Bad)
 * Given that I am on my shopping cart page
 * And I have an item in my cart
@@ -70,3 +69,4 @@
 * And I see a shipping estimate
 * When I add an item to my cart that is ineligible to be shipped by my carrier
 * Then I should see my shipping estimate reset automatically
+* Then I should see an error message prompting me to select a shipping carrier

@@ -18,7 +18,7 @@
   And I enter my zip code
   And I select a shipping carrier
   When I click 'Estimate shipping costs'
-  Then I should see a shipping estimate based on my location
+  Then I should see a shipping estimate based on my location and carrier
 
 
 ####Scenario: Adding my address to get a shipping estimate (Sad)
@@ -51,3 +51,10 @@
   And I select a shipping carrier
   When I click 'Estimate shipping costs'
   Then I should see an error message prompting me to enter my zip code
+
+  Given that I am on my shopping cart page
+  And I have an item in my cart
+  And I enter my zip code
+  And I select a shipping carrier who does not ship to my zip code
+  When I click 'Estimate shipping costs'
+  Then I should see an error message prompting me to select a different carrier

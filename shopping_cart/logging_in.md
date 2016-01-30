@@ -2,10 +2,11 @@
 * In order to have as few barriers to purchasing merchandise as possible
 * I need to be able to save my cart and come back to it later
 
-####Scenario: Logging in with a saved item (Happy)
+####Scenario: Logging in with a saved in-stock item (Happy)
 * Given that I am not logged in
 * And I am viewing my empty cart
 * And I added an item to my cart previously when I was logged in
+* And the item is still in stock
 * When I log in with valid credentials
 * Then I should see the item in my cart from my last session
 

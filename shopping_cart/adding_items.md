@@ -24,7 +24,6 @@
   When I visit the shopping cart page
   Then I should see my item listed with a quantity of n + 1
 
-
 ####Scenario: Adding an out-of-stock item to my cart (Bad)
   Given that I am on an item page
   And the item is NOT in stock

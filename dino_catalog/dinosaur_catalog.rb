@@ -46,7 +46,8 @@ class DinosaurCatalog
 
   def export_to_json
     File.open(@json_file_name, "w") do |f|
-      f.write(JSON.dump(@dinosaur_catalog))
+      json = JSON.dump(@dinosaur_catalog)
+      f.write(json)
     end
   end
 

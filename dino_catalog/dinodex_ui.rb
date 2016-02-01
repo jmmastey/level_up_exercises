@@ -1,6 +1,7 @@
 require_relative "menu"
 require_relative "lettered_menu"
 require_relative "dinosaur_catalog"
+require_relative "dinosaur_view"
 
 class DinodexUI
   HOME_MENU_OPTIONS = %w(Bipeds Carnivores Periods Sizes Search)
@@ -124,18 +125,15 @@ class DinodexUI
     catalog = nil
     user_input.split(',').each do |search|
       facet = search.split(':')
-      catalog = @catalog.find_dinos(facet[0].to_sym, facet[1], catalog)
+      key = facet[0].to_sym
+      val = facet[1]
+      catalog = @catalog.find_dinos(key, val, catalog)
     end
     show_dinosaur_facts(catalog)
   end
 
   def self.show_dinosaur_facts(results)
-    results.each do |dino|
-      DinosaurCatalog::DEFAULT_KEYS.each do |key|
-        puts "#{key.capitalize}: #{dino[key]}" if dino[key]
-      end
-      puts '-' * 80
-    end
+    DinosaurView.show(dinos: results)
   end
 
   def self.save_to_json

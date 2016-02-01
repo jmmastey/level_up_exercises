@@ -2,22 +2,30 @@ $LOAD_PATH << 'lib'
 
 require 'bomb'
 
-Given(/^I have entered the correct activation code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Given(/^I visit the root page$/) do
+  visit("http://localhost:4567/")
+  Bomb.new("1234", "0000")
 end
 
-When(/^I submit the code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I submit the activation code$/) do
+  fill_in 'code', with: '1234'
+  click_button 'Submit'
 end
 
 Then(/^the bomb will be active$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit("http://localhost:4567/")
+  expect(page).to have_content 'BOMB STATUS - ACTIVE'
 end
 
-Given(/^I have entered the correct de\-activation code$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Given(/^I visit the root page again$/) do
+  visit("http://localhost:4567/")
+end
+
+When(/^I submit the deactivation code$/) do
+  fill_in 'code', with: '0000'
+  click_button 'Submit'
 end
 
 Then(/^the bomb will be Inactive$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content 'BOMB STATUS - INACTIVE'
 end

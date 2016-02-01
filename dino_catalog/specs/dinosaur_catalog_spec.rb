@@ -85,5 +85,11 @@ describe DinosaurCatalog do
         expect(@dinocat.find_by_period("late fooeous")).to eq [fooasaurus]
       end
     end
+
+    describe "#find_dinos" do
+      it "performs a case insensitive search" do
+        expect(@dinocat.find_dinos(:walking, "BIPED")).to eq [barosaurus]
+      end
+    end
   end
 end

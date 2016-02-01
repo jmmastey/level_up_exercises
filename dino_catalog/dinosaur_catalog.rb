@@ -52,7 +52,7 @@ class DinosaurCatalog
 
   def find_dinos(key, value, catalog = nil)
     current_catalog = catalog ? catalog : @dinosaur_catalog
-    current_catalog.select { |row| row[key] && row[key].downcase == value }
+    current_catalog.select { |row| row[key] && value.casecmp(row[key]) == 0 }
   end
 
   private

@@ -117,17 +117,16 @@ class DinodexUI
 
   def self.show_dinos_by_size(user_input)
     dinos = (user_input == "1") ? @catalog.find_large : @catalog.find_small
-
     show_dinosaur_facts(dinos)
   end
 
   def self.handle_search_input(user_input)
-    index = nil
+    catalog = nil
     user_input.split(',').each do |search|
       facet = search.split(':')
-      index = @catalog.find_dinos(facet[0].to_sym, facet[1], index)
+      catalog = @catalog.find_dinos(facet[0].to_sym, facet[1], catalog)
     end
-    show_dinosaur_facts(index)
+    show_dinosaur_facts(catalog)
   end
 
   def self.show_dinosaur_facts(results)

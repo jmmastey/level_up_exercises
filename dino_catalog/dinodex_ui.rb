@@ -42,7 +42,7 @@ class DinodexUI
     user_input = collect_user_input
 
     if %w(b j q).include? user_input
-      handle_menu_options(user_input.to_sym)
+      handle_menu_options(user_input)
     else
       handle_sub_menu_actions(user_input)
     end
@@ -72,9 +72,9 @@ class DinodexUI
   end
 
   def self.handle_menu_options(user_input)
-    switch_menu(:home) if user_input == :b
-    save_to_json if user_input == :j
-    stop_running if user_input == :q
+    switch_menu(:home) if user_input == 'b'
+    save_to_json if user_input == 'j'
+    stop_running if user_input == 'q'
   end
 
   def self.handle_sub_menu_actions(user_input)
@@ -92,7 +92,6 @@ class DinodexUI
 
   def self.handle_home_menu(user_input)
     option = HOME_MENU_OPTIONS[user_input.to_i - 1].downcase.to_sym
-    puts HOME_MENU_OPTIONS[user_input.to_i - 1].downcase.to_sym
 
     case option
       when :bipeds

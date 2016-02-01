@@ -3,11 +3,9 @@ require_relative './menu'
 class LetteredMenu < Menu
   def initialize(attrs = {})
     super(attrs)
-    hashed_menu_options = {}
-    @menu_options.each do |option|
-      hashed_menu_options[option[0].upcase] = option
+    @menu_options = @menu_options.each_with_object({}) do |option, obj|
+      obj[option[0].upcase] = option
     end
-    @menu_options = hashed_menu_options
   end
 
   private

@@ -8,5 +8,3 @@ Feature: Visit item pages from cart
 		And I am on the shopping cart page
 		When I click the "Broomstick" link
 		Then I should be on the Broomstick item page
-		And I should see "Broomstick"
-		And I should see "Add to cart"

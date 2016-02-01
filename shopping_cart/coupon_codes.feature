@@ -3,49 +3,37 @@ Feature: add coupon code for discount
 	I want to add a coupon code
 	So I can save money and get the discount I was promised
 
-	Scenario: User enters a valid coupon code to save a static amount
+	Background:
 		Given that I have 1 Textbook in my cart
-		And the price of a Textbook is $100
-		And the "LOCKHART_FAN" coupon code is active
 		And I am on the shopping cart page
-		When I fill in the coupon code form with "LOCKHART_FAN"
-		And I click the "Apply coupon code" button
-		Then I should see "-20.00"
-		And I should see "You saved 20.00"
 
-	Scenario: User enters a valid coupon code for a particular item on the right item
-		Given that I have 1 Butterbeer in my cart
-		And the price of a Butterbeer is $15
-		And the "5_OFF_BUTTERBEER" coupon code is active
-		And I am on the shopping cart page
-		When I fill in the coupon code form with "5_OFF_BUTTERBEER"
-		And I click the "Apply coupon code" button
-		And I should see "-5.00"
+		Scenario: User enters a valid coupon code to save a static amount
+			Given a coupon code that gives a flat discount is active
+			When I enter the active coupon code
+			Then I should see that I saved a flat amount on my order
+			
+		Scenario: User enters a valid coupon code for a particular item on the right item
+			Given a coupon code that discounts Textbooks is active
+			When I enter the active coupon code
+			Then I should see that I saved money on the Textbook
 
-	Scenario: User enters a valid coupon code to save a percent
-		Given that I have 1 Butterbeer in my cart
-		And the price of a Butterbeer is $15
-		And the "SAVE_10_PERCENT" coupon code is active
-		And I am on the shopping cart page
-		When I fill in the coupon code form with "SAVE_10_PERCENT"
-		And I click the "Apply coupon code" button
-		Then I should see "-1.50"
-		And I should see "You saved 10%"
+		Scenario: User enters a valid coupon code to save a percent
+			Given a coupon code that saves 10% is active
+			When I enter the active coupon code
+			Then I should see that I saved a percentage on my order
 
-	Scenario: User enters an expired or invalid coupon code
-		Given that I have 1 Textbook in my cart
-		And the price of a Textbook is $100
-		And the "SNAPE_SUX" coupon code is not active
-		And I am on the shopping cart page
-		When I fill in the coupon code form with "SNAPE_SUX"
-		And I click the "Apply coupon code" button
-		Then I should see "That's not currently a valid coupon code"
+		Scenario: User enters an expired coupon code
+			Given a coupon code has expired
+			When I enter the expired coupon code
+			Then I should see that the coupon has expired
 
-	Scenario: User enters a coupon code for a particular item on the wrong item
-		Given that I have 1 Textbook in my cart
-		And the price of a Textbook is $100
-		And the "5_OFF_BUTTERBEER" coupon code is active
-		And I am on the shopping cart page
-		When I fill in the coupon code form with "5_OFF_BUTTERBEER"
-		And I click the "Apply coupon code" button
-		Then I should see "That coupon code doesn't apply to the items in your cart"
+		Scenario: User enters an invalid coupon code
+			Given an invalid coupon code
+			When I enter the invalid coupon code
+			Then I should see that the coupon is invalid
+
+		Scenario: User enters a coupon code for a particular item on the wrong item
+			Given a coupon code that discounts Butterbeer is active
+			And I have 0 Butterbeer in my cart
+			When I enter the coupon code that discounts Butterbeer
+			Then I should see that the coupon code doesn't apply to items in my cart

@@ -13,7 +13,6 @@
         - @favorites.each do |favorite|
           %tr
             %td= favorite.menu_item.name
-            %td
-              %a.unfavorite{ href: "/favorites/destroy/#{favorite.id}" }remove from favorites
+            %td= favorite_link(favorite.menu_item)
 - else
   %p Login or signup to start saving favorites!

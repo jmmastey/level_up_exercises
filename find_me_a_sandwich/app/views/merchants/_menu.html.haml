@@ -12,8 +12,4 @@
               %tr
                 %th= item.name
                 %td= item.description
-                %td
-                  - if item.favorite
-                    =link_to("remove from favorites", "/favorites/destroy/#{item.favorite.id}")
-                  - else
-                    =link_to("save to favorites", "/favorites/new/#{item.id}")
+                %td= favorite_link(item)

@@ -34,10 +34,28 @@ class DinodexUI
 
     while @running
       show_menu_options
-      user_input = gets.chomp.downcase
-      clear_screen
-      handle_user_input(user_input)
+      handle_user_input
     end
+  end
+
+  def self.handle_user_input
+    user_input = collect_user_input
+
+    if %w(b j q).include? user_input
+      handle_menu_options(user_input.to_sym)
+    else
+      handle_sub_menu_actions(user_input)
+    end
+  end
+
+  def self.stop_running
+    @running = false
+  end
+
+  def self.collect_user_input
+    user_input = gets.chomp
+    clear_screen
+    user_input.downcase
   end
 
   def self.clear_screen
@@ -49,22 +67,14 @@ class DinodexUI
     @action_menu.show
   end
 
-  def self.handle_user_input(user_input)
-    if %w(j b q).include?(user_input)
-      handle_action_menu(user_input)
-    else
-      handle_sub_menu_actions(user_input)
-    end
-  end
-
   def self.switch_menu(user_input)
-    @menu_index = HOME_MENU_OPTIONS[user_input - 1].downcase.to_sym
+    @menu_index = user_input
   end
 
-  def self.handle_action_menu(user_input)
-    save_to_json if user_input == 'j'
-    @menu_index = :home if user_input == 'b'
-    @running = false if user_input == 'q'
+  def self.handle_menu_options(user_input)
+    switch_menu(:home) if user_input == :b
+    save_to_json if user_input == :j
+    stop_running if user_input == :q
   end
 
   def self.handle_sub_menu_actions(user_input)
@@ -81,13 +91,16 @@ class DinodexUI
   end
 
   def self.handle_home_menu(user_input)
-    user_input = user_input.to_i
+    option = HOME_MENU_OPTIONS[user_input.to_i - 1].downcase.to_sym
+    puts HOME_MENU_OPTIONS[user_input.to_i - 1].downcase.to_sym
 
-    if user_input > 2
-      switch_menu(user_input)
-    else
-      show_dinosaur_facts(@catalog.find_bipeds) if user_input == 1
-      show_dinosaur_facts(@catalog.find_carnivores) if user_input == 2
+    case option
+      when :bipeds
+        show_dinosaur_facts(@catalog.find_bipeds)
+      when :carnivores
+        show_dinosaur_facts(@catalog.find_carnivores)
+      else
+        switch_menu(option)
     end
   end
 

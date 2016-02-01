@@ -13,5 +13,7 @@
                 %th= item.name
                 %td= item.description
                 %td
-                  link_to("save to favorites", favorites_add)
-                  %a.favorite{ href: "/favorites/new/#{item.id}" } save to favorites
+                  - if item.favorite
+                    =link_to("remove from favorites", "/favorites/destroy/#{item.favorite.id}")
+                  - else
+                    =link_to("save to favorites", "/favorites/new/#{item.id}")

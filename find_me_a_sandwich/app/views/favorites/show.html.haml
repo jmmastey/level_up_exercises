@@ -5,15 +5,15 @@
   - if @favorites.length == 0
     %p Save some meals to favorites and they will show up here after.
   - else
-    %table
+    %table{ class: "table" }
       %thead
         %tr
-          %th Name
+          %th{ colspan: "2" } Name
       %tbody
         - @favorites.each do |favorite|
           %tr
             %td= favorite.menu_item.name
             %td
-              %a.unfavorite{ href: "/favorites/destroy/#{favorite.id}" } remove from favorites
+              %a.unfavorite{ href: "/favorites/destroy/#{favorite.id}" }remove from favorites
 - else
   %p Login or signup to start saving favorites!

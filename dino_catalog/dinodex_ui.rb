@@ -104,9 +104,15 @@ class DinodexUI
   end
 
   def self.show_dinos_by_period(user_input)
-    show_dinosaur_facts @catalog.find_dinos(
-      :period, @catalog.dinosaur_catalog_periods[user_input.to_i - 1].downcase
+    selected_period = @catalog.dinosaur_catalog_periods[
+      user_input.to_i - 1
+    ].downcase
+
+    dinos = @catalog.find_dinos(
+      :period, selected_period
     )
+
+    show_dinosaur_facts(dinos)
   end
 
   def self.show_dinos_by_size(user_input)

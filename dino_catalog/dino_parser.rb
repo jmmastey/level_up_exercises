@@ -1,5 +1,5 @@
-require 'pry'
 class DinoParser
+  attr_accessor :csv_data, :data_fields
   @@fields =  
     [:food, :name, :period, :weight,
      :walking, :continent, :description]
@@ -11,6 +11,7 @@ class DinoParser
     map_indices
     @carnivores = []
     @food_index = @map_indices[@fields_mapping[:food].to_sym]
+    @species = []
     @@fields.each do |field|
       self.class.send(:define_method,"#{field}_index") do 
         @map_indices[@fields_mapping[field.to_sym].to_sym]
@@ -18,7 +19,7 @@ class DinoParser
     end
   end
 
-  def map_fields()
+  def map_fields
     @fields_mapping = {}
     @@fields.each do |field|
       @possible_fields = DinoParser.send("#{field}_fields")
@@ -34,17 +35,17 @@ class DinoParser
     end 
   end
 
-  def find_bipeds
+  def classify_by_bipeds
     bipeds = []
     @csv_data.each do |line|
       if(line[walking_index].downcase == 'biped')
         bipeds << line[name_index]
       end
     end
-    print_dinosaurs("Biped Dinosaurs", bipeds)
+    return bipeds
   end
 
-  def dino_classified_by_periods
+  def classify_by_periods
     dinos_in_periods = {}
     @csv_data.each  do |line|
       key = line[period_index]
@@ -56,11 +57,11 @@ class DinoParser
         dinos_in_periods[key] << line[name_index]
       end
     end   
-    print_dinosaurs("Dinos in different periods", dinos_in_periods)
+    return dinos_in_periods
   end
 
   def find_carnivores
-    carnivores = []
+    
   end
 
   def classify_by_weight
@@ -74,7 +75,7 @@ class DinoParser
         next    
       end
     end
-    print_dinosaurs("Dinos by weight", dinos_by_weight)
+    return dinos_by_weight
   end
 
   def self.food_fields
@@ -105,19 +106,11 @@ class DinoParser
     [:description]
   end
 
-  def print_dinosaurs(message, data)
-    puts ":#############{message.upcase}############"
-    if(data.is_a?(Array))
-      data.each do |element|
-        puts element
-      end
-    elsif(data.is_a?(Hash))
-      data.each do |k,v|
-        puts "::#{k.to_s.upcase}::\n"
-        v.each do |el|
-          puts "#{el}\n"
-        end
-      end
-    end 
+  def species_data
+    @csv_data.each do |row|
+      @species << row[0]
+    end
+    return @species
   end
+
 end

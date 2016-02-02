@@ -7,7 +7,7 @@ class Dino
   attr_reader :walking
   attr_reader :description
   DINO_ATTRIBUTES = [:name, :period, :continent, :diet, :weight, :walking,
-                     :description]
+                     :description].freeze
 
   def initialize(attrs)
     @name = attrs[:name]

@@ -1,6 +1,6 @@
 class TransformData
   NORMALIZE_MAPPINGS = { genus: "name", carnivore: "carnivore",
-                         weight_in_lbs: "weight" }
+                         weight_in_lbs: "weight" }.freeze
 
   def self.transform(dino_info)
     normalized_info = {}

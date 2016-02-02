@@ -1,10 +1,10 @@
 class ImportData
-  CSVFILES = ['dinodex.csv', 'african_dinosaur_export.csv']
+  CSVFILES = ['dinodex.csv', 'african_dinosaur_export.csv'].freeze
 
   def self.load_and_transform
     processed_data = []
     CSVFILES.each do |file_path|
-      (read_csv_file(file_path)).each do |dino_info|
+      read_csv_file(file_path).each do |dino_info|
         processed_data << TransformData.transform(dino_info)
       end
     end

@@ -9,11 +9,11 @@ class DinoFilter
   end
 
   def self.find_matches(dino_collection, category, value)
-    matching_dinos = []
-    dino_collection.collection_of_dinos.each do |dino|
+    matching_dinos = DinoCollection.new
+    dino_collection.dinos.each do |dino|
       matching_dinos << dino if dino_match?(dino, category, value)
     end
-    create_filtered_dino_collection(matching_dinos)
+    matching_dinos
   end
 
   def self.dino_match?(dino, category, value)
@@ -24,11 +24,5 @@ class DinoFilter
         return !dino.weight.nil? && dino.weight < value
     end
     dino.send(category).match(value)
-  end
-
-  def self.create_filtered_dino_collection(dino_objects)
-    new_collection = DinoCollection.new
-    new_collection.add_many_dinos(dino_objects)
-    new_collection
   end
 end

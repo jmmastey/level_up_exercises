@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 
-require "./filter_dinos"
-require "./import"
+require './dino_collection'
+require './dino'
+require './filter_dinos'
+require './import_data'
 require 'trollop'
 require 'yaml'
 require 'json'
@@ -32,6 +34,7 @@ ranges.
       dinodex.rb [options]
 where [options] are:
 EOS
+
   opt :search_file, "Path of the search YAML file", type: String
   opt :output_file, "Path of the file for JSON output", type: String
 end
@@ -39,14 +42,14 @@ Trollop.die :search_file, "must exist" unless command_opts[:search_file]
 
 # Import the data and search
 search_hash = UserOptions.create_hash_from_yaml(command_opts[:search_file])
-filtered_dinos = DinoFilter.search(DinoCollection.new(true), search_hash)
-filtered_dinos.fancy_display
+full_collection = DinoCollection.new(ImportData.load_and_transform)
+filtered_dinos = DinoFilter.search(full_collection, search_hash)
+puts filtered_dinos
 
 # Output to file if specified
 if command_opts[:output_file]
   File.open(command_opts[:output_file], "w") do |f|
-    f.write(JSON.pretty_generate(filtered_dinos.create_hash_from_dinos))
+    f.write(filtered_dinos.to_json)
   end
-  puts
-  puts "Your search results can be found in file: #{command_opts[:output_file]}"
+  puts "\nYour search results are in file: #{command_opts[:output_file]}"
 end

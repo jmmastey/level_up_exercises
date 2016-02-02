@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: find_me_a_sandwich_development
+
+test: &test
+  <<: *default
+  database: find_me_a_sandwich_test
+
+production:
+  <<: *default
+  database: find_me_a_sandwich_production
+  username: find_me_a_sandwich
+  password: <%= ENV['MAKE_ME_A_SANDWICH_DATABASE_PASSWORD'] %>
+
+cucumber:
+  <<: *test

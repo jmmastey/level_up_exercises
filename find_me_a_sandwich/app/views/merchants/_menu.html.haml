@@ -1,0 +1,15 @@
+.row
+  - each_column(menu) do |column|
+    .col-md-12.col-lg-6
+      - column.each do |group, items|
+        %table.table.table-striped
+          %thead
+            %tr
+              %th{ colspan: 3 }
+                %h4= group
+          %tbody
+            - items.each do |item|
+              %tr
+                %th= item.name
+                %td= item.description
+                %td= favorite_link(item)

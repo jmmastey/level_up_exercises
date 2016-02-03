@@ -59,4 +59,10 @@ describe DinoCatalog do
     dino_results = @dino_log.walking_search("Biped", "Quadruped")
     expect(dino_results.count).to be(17)
   end
+
+  it "should search for multiple terms" do
+    dino_results = @dino_log.dino_search(period_search: "Permian",
+                                         walking_search: "Quadruped")
+    expect(dino_results.count).to be(6)
+  end
 end

@@ -13,41 +13,38 @@ class DinoCatalog
   end
 
   def parse(csv_file)
-    dino_array = CSV.open(csv_file, :converters => :all,
+    listing = CSV.open(csv_file, :converters => :all,
                           :headers => true, :header_converters => :symbol)
 
     if csv_file.to_s.split("_").include? "african"
-      add_african_dinos(dino_array)
+      add_dinos(african_dinos(listing))
     else
-      add_dinos(dino_array)
+      add_dinos(dinos(listing))
     end
   end
 
-  def add_dinos(dino_array)
-    dino_array.each do |dino|
-      @dino_dex << Dino.new(dino[:name], dino[:period], dino[:continent],
-                              dino[:diet], dino[:weight_in_lbs],
-                              dino[:walking], dino[:description])
+  def add_dinos(dinos)
+    @dino_dex.concat dinos
+  end
+
+  def dinos(listing)
+    listing.map do |dino|
+      Dino.new(dino[:name], dino[:period], dino[:continent],
+               dino[:diet], dino[:weight_in_lbs],
+               dino[:walking], dino[:description])
     end
   end
 
-  def add_african_dinos(dino_array)
-    dino_array.each do |dino|
-      @dino_dex << AfricanDino.new(dino[:genus], dino[:period],
-                                   dino[:carnivore], dino[:weight],
-                                   dino[:walking])
+  def african_dinos(listing)
+    listing.map do |dino|
+      AfricanDino.new(dino[:genus], dino[:period], dino[:carnivore],
+                      dino[:weight], dino[:walking])
     end
   end
   
-  def dino_search(*options)
+  def dino_search(options={})
     dino_results = []
-    options.each do |option|
-      if option.is_a? Symbol
-        dino_results.concat send(option)
-      else
-        option.each {|k,v| dino_results.concat send(k, v)}
-      end
-    end
+      options.each {|option,query| dino_results.concat send(option, query)}
     dino_results.uniq!.each {|dino| puts "----------"; dino_facts(dino)}
   end
 
@@ -62,6 +59,14 @@ class DinoCatalog
   def period_search(*periods)
     @dino_dex.select do |dino| 
       dino.period.split.any? { |period| periods.include? period }
+    end
+  end
+
+  def diet_search(diet)
+    if diet.eql? "Carnivore"
+      carnivores
+    elsif diet.eql? "Herbivore"
+      herbivores
     end
   end
 

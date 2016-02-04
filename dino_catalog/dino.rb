@@ -1,5 +1,6 @@
 class Dino
-  attr_accessor :name, :period, :continent, :diet, :weight_in_lbs, :walking, :description
+  attr_accessor :name, :period, :continent, :diet, :weight_in_lbs,
+                :walking, :description
 
   def initialize(name, period, continent, diet, weight, walking, description)
     @name = name

@@ -4,7 +4,6 @@ require_relative 'dino'
 require_relative 'african_dino'
 
 class DinoCatalog
-
   attr_accessor :dino_dex
 
   def initialize
@@ -45,7 +44,7 @@ class DinoCatalog
   def dino_search(queries)
     dino_results = []
     queries.each { |search, query| dino_results.concat send(search, query) }
-    
+
     dino_results.uniq!.each do |dino|
       puts "----------"
       dino_facts(dino)

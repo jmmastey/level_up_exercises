@@ -4,11 +4,11 @@ require_relative 'dino'
 require_relative 'african_dino'
 
 class DinoCatalog
-  
+
   attr_accessor :dino_dex
 
   def initialize
-    @dino_dex = [] 
+    @dino_dex = []
     @dino_results = []
   end
 
@@ -41,7 +41,7 @@ class DinoCatalog
                       dino[:weight], dino[:walking])
     end
   end
-  
+
   def dino_search(options={})
     dino_results = []
       options.each {|option,query| dino_results.concat send(option, query)}
@@ -57,7 +57,7 @@ class DinoCatalog
   end
 
   def period_search(*periods)
-    @dino_dex.select do |dino| 
+    @dino_dex.select do |dino|
       dino.period.split.any? { |period| periods.include? period }
     end
   end
@@ -87,11 +87,11 @@ class DinoCatalog
       ["Carnivore","Insectivore","Piscivore", "Yes"].include? dino.diet
     end
   end
-  
+
   def herbivores
     @dino_dex.select { |dino| dino.diet == "Herbivore" }
   end
-  
+
   def dino_facts(dino)
     dino.to_h.each do |heading, fact|
       puts "#{heading.capitalize}: #{fact}" unless fact.to_s.empty?

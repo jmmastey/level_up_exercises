@@ -13,8 +13,8 @@ class DinoCatalog
   end
 
   def parse(csv_file)
-    listing = CSV.open(csv_file, :converters => :all,
-                          :headers => true, :header_converters => :symbol)
+    listing = CSV.open(csv_file, converters: :all,
+                          headers: true, header_converters: :symbol)
 
     if csv_file.to_s.split("_").include? "african"
       add_dinos(african_dinos(listing))
@@ -42,14 +42,18 @@ class DinoCatalog
     end
   end
 
-  def dino_search(options={})
+  def dino_search(queries)
     dino_results = []
-      options.each {|option,query| dino_results.concat send(option, query)}
-    dino_results.uniq!.each {|dino| puts "----------"; dino_facts(dino)}
+    queries.each { |search, query| dino_results.concat send(search, query) }
+    
+    dino_results.uniq!.each do |dino|
+      puts "----------"
+      dino_facts(dino)
+    end
   end
 
   def name_search(*dino_names)
-    @dino_dex.select { |dino| dino_names.include? dino.name}
+    @dino_dex.select { |dino| dino_names.include? dino.name }
   end
 
   def walking_search(*walk_styles)
@@ -84,7 +88,7 @@ class DinoCatalog
 
   def carnivores
     @dino_dex.select do |dino|
-      ["Carnivore","Insectivore","Piscivore", "Yes"].include? dino.diet
+      %w(Carnivore Insectivore Piscivore Yes).include? dino.diet
     end
   end
 

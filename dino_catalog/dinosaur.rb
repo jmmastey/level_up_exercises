@@ -1,16 +1,15 @@
 class Dinosaur
-  attr_accessor :name, :period, :continent, :diet, :weight, :walking,
-                :description
-  attr_reader :to_hash
+  attr_reader :name, :period, :continent, :diet, :weight, :walking,
+              :description, :size, :to_h
 
   def initialize(args = {})
-    @to_hash     = args
-    @name        = args[:name]
-    @period      = args[:period]
-    @continent   = args[:continent]
-    @diet        = args[:diet]
-    @weight      = args[:weight]
-    @walking     = args[:walking]
-    @description = args[:description]
+    @to_h = args
+    args.each { |k,v| instance_variable_set("@#{k}", v) }
+  end
+
+  def to_s
+    Array(to_h).reject { |pair|
+      pair.include?(nil) }.map { |pair|
+        pair.join(": ") }.join("\n")
   end
 end

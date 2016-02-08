@@ -12,4 +12,7 @@
               %tr
                 %th= item.name
                 %td= item.description
-                %td= favorite_link(item)
+                %td
+                  - if current_user
+                    =link_to_unless(MenuItem.favorited(item, current_user).exists?, "save to favorites", { controller: "favorites", action: "create", id: item.id }) do
+                      favorited

@@ -2,7 +2,7 @@
   %h1 Favorites
 
 - if user_signed_in?
-  - if @favorites.length == 0
+  - if @favorites.none?
     %p Save some meals to favorites and they will show up here after.
   - else
     %table{ class: "table" }
@@ -13,6 +13,6 @@
         - @favorites.each do |favorite|
           %tr
             %td= favorite.menu_item.name
-            %td= favorite_link(favorite.menu_item)
+            %td= link_to("remove from favorites", controller: "favorites", action: "destroy", id: favorite.id)
 - else
   %p Login or signup to start saving favorites!

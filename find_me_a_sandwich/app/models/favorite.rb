@@ -1,4 +1,4 @@
 class Favorite < ActiveRecord::Base
   belongs_to(:user)
-  has_one(:menu_item)
+  belongs_to(:menu_item)
 end

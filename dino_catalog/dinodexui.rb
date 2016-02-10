@@ -6,8 +6,8 @@ class DinoDexUI
     continent: %w(North\ America South\ America Europe Africa Asia),
     diet: %w(Herbivore Carnivore Insectivore Piscivore),
     size: %w(Small Large),
-    walking: %w(Biped Quadruped)
-  }
+    walking: %w(Biped Quadruped),
+  }.freeze
 
   def initialize
     @dex = DinoDex.new
@@ -16,10 +16,10 @@ class DinoDexUI
   end
 
   def run
-    command = ""
-    while command != "q"
+    command = ''
+    while command != 'q'
       puts main_menu_text
-      printf "Enter a command: "
+      printf 'Enter a command: '
       command = gets.chomp
       handle_menu_command(command)
     end
@@ -28,10 +28,10 @@ class DinoDexUI
   private
 
   def main_menu_text
-  puts "\e[H\e[2J"
-  puts "search filters = #{@search_hash}"
-  print_number_of_results
-    %q(
+    puts "\e[H\e[2J"
+    puts "search filters = #{@search_hash}"
+    print_number_of_results
+    %(
 --Menu-------------------
   -(n)ame search
   -(a)ll dinosaurs
@@ -44,24 +44,24 @@ class DinoDexUI
 
   def handle_menu_command(command)
     case command
-    when 'q' then puts "Goodbye!"
-    when 'a' then all_dinosaurs
-    when 'n' then find_by_name
-    when 'c' then clear_filters
-    when 'f' then filter_menu
-    when 'p' then print_search_results
-    else
-      puts "Sorry, invalid command"
+      when 'q' then puts 'Goodbye!'
+      when 'a' then all_dinosaurs
+      when 'n' then find_by_name
+      when 'c' then clear_filters
+      when 'f' then filter_menu
+      when 'p' then print_search_results
+      else
+        puts 'Sorry, invalid command'
     end
   end
 
   def filter_menu
     puts "\e[H\e[2J"
-    puts "--Filters----------------"
+    puts '--Filters----------------'
     FILTER_OPTIONS.values.each do |value|
       puts value.inspect
     end
-    printf "Enter one or more filters, separated by commas: "
+    printf 'Enter one or more filters, separated by commas: '
     filter_dinosaurs(gets.chomp)
   end
 
@@ -102,22 +102,22 @@ class DinoDexUI
 
   def find_by_name
     puts "\e[H\e[2J"
-    printf "Enter dinosaur name: "
+    printf 'Enter dinosaur name: '
     @search_results = @dex.find_by_name(gets.chomp)
   end
 
   def print_number_of_results
     number_of_results = @search_results.size
     puts "#{number_of_results} "\
-         "#{number_of_results == 1 ? "dinosaur" : "dinosaurs"} selected."
+         "#{number_of_results == 1 ? 'dinosaur' : 'dinosaurs'} selected."
   end
 
   def print_search_results
-    output =  if @search_results.empty?
-                "Search results empty"
-              else
-                output = @search_results.map(&:to_s).join("\n\n")
-              end
-    IO.popen("less", "w") { |f| f.puts output }
+    output = if @search_results.empty?
+               'Search results empty'
+             else
+               @search_results.map(&:to_s).join("\n")
+             end
+    IO.popen('less', 'w') { |f| f.puts output }
   end
 end

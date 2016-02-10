@@ -16,7 +16,7 @@ class DinoDex
 
   def filter_by_hash(search_hash)
     @dinosaurs.select do |dino|
-      search_hash.each { |k,v| break if !(dino.send(k) =~ /#{v}/i) }
+      search_hash.each { |k, v| break unless dino.send(k) =~ /#{v}/i }
     end
   end
 
@@ -43,7 +43,7 @@ class DinoDex
       weight:      dino[:weight_in_lbs] || dino[:weight],
       size:        small_or_large(dino),
       walking:     dino[:walking],
-      description: dino[:description]
+      description: dino[:description],
     }
   end
 
@@ -63,19 +63,17 @@ class DinoDex
 
   def correct_period(dino_period)
     case dino_period
-    when /Oxfordian/
-      "Late Jurassic > Oxfordian"
-    when /Albian/
-      "Early Cretaceous > Albian"
-    else
-      dino_period
+      when /Oxfordian/
+        "Late Jurassic > Oxfordian"
+      when /Albian/
+        "Early Cretaceous > Albian"
+      else
+        dino_period
     end
   end
 
   def small_or_large(dino)
     weight = dino[:weight_in_lbs] || dino[:weight]
-    unless weight.nil?
-      weight > 2000 ? "Large" : "Small"
-    end
+    weight.nil? || weight > 2000 ? "Large" : "Small"
   end
 end

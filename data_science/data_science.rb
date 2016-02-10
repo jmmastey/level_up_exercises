@@ -4,10 +4,10 @@ require './data_from_file'
 require 'abanalyzer'
 
 class DataScience
-  attr_accessor :loaded_stats
+  attr_accessor :stats
 
-  def initialize(data_array)
-    @loaded_stats = WebsiteStats.new(data_array)
+  def initialize(data)
+    @stats = WebsiteStats.new(data)
   end
 
   def run
@@ -16,32 +16,34 @@ class DataScience
     analyze
   end
 
-  def display_meta_data
-    puts "Running an analysis on the following data:"
-    @loaded_stats.prep_data.each { |k, v| puts "Cohort #{k}: #{v}" }
-  end
-
-  def conversion_ranges
-    %w(A B).each do |cohort_name|
-      range = calc_conversion_ranges(cohort_name)
-      puts "95% Conversion range for #{cohort_name} is #{range}"
-    end
-  end
-
-  def calc_conversion_ranges(cohort_name)
-    num_conversion = @loaded_stats.num_of_conversions(cohort_name)
-    total = @loaded_stats.size_of_cohort(cohort_name)
+  def conversion_range(cohort)
+    num_conversion = @stats.num_of_conversions(cohort)
+    total = @stats.size_of_cohort(cohort)
     ABAnalyzer.confidence_interval(num_conversion, total, 0.95)
   end
 
   def analyze
-    ab_test = ABAnalyzer::ABTest.new @loaded_stats.prep_data
+    ab_test = ABAnalyzer::ABTest.new @stats.prep_data
     p_value = ab_test.chisquare_p.round(4)
     puts "Chi Squared p value is #{p_value}"
-    test_hypo(p_value)
+    test_hypothesis(p_value)
   end
 
-  def test_hypo(p_value)
+  private
+
+  def display_meta_data
+    puts "Running an analysis on the following data:"
+    @stats.prep_data.each { |k, v| puts "Cohort #{k}: #{v}" }
+  end
+
+  def conversion_ranges
+    %w(A B).each do |cohort|
+      range = conversion_range(cohort)
+      puts "95% Conversion range for #{cohort} is #{range}"
+    end
+  end
+
+  def test_hypothesis(p_value)
     if p_value >= 0.05
       puts "No correlated evidence from the data."
       false

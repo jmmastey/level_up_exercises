@@ -3,27 +3,25 @@ require './website_data'
 class WebsiteStats
   attr_accessor :site_data
 
-  def initialize(array_of_visits)
-    @site_data = WebsiteData.new(array_of_visits)
+  def initialize(visits)
+    @site_data = WebsiteData.new(visits)
   end
 
-  def size_of_cohort(cohort_name)
-    @site_data.filtered_size(cohort: cohort_name)
+  def size_of_cohort(cohort)
+    @site_data.filtered_size(cohort: cohort)
   end
 
-  def num_of_conversions(cohort_name)
-    @site_data.filtered_size(cohort: cohort_name, result: 1)
+  def num_of_conversions(cohort)
+    @site_data.filtered_size(cohort: cohort, result: 1)
   end
 
-  def num_no_conversions(cohort_name)
-    @site_data.filtered_size(cohort: cohort_name, result: 0)
+  def num_no_conversions(cohort)
+    @site_data.filtered_size(cohort: cohort, result: 0)
   end
 
-  def cohort_values(cohort_name)
-    results_hash = {}
-    results_hash[:not_converted] = num_no_conversions(cohort_name)
-    results_hash[:converted] = num_of_conversions(cohort_name)
-    results_hash
+  def cohort_values(cohort)
+    { not_converted: num_no_conversions(cohort),
+      converted: num_of_conversions(cohort) }
   end
 
   def prep_data

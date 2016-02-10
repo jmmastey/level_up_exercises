@@ -14,11 +14,6 @@ describe DataFromFile do
       allow(File).to receive(:read).and_return(json_data)
     end
 
-    it "opens the file using File library" do
-      expect(File).to receive(:read).with(file_path)
-      DataFromFile.get(file_path)
-    end
-
     it "returns an array of hashes" do
       expect(loaded_data).to be_an(Array)
     end

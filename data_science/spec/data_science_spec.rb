@@ -15,7 +15,7 @@ describe DataScience do
   describe ".calc_conversion_ranges" do
     it "sends converted, total, and p value to ABAnalyzer" do
       expect(ABAnalyzer).to receive(:confidence_interval).with(2, 3, 0.95)
-      test_data_science.calc_conversion_ranges("A")
+      test_data_science.conversion_range("A")
     end
   end
 end

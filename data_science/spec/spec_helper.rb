@@ -8,3 +8,8 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 end
+
+def visits(count, cohort, result)
+  Array.new(count, "date" => "2014-03-20", "cohort" => cohort,
+            "result" => result)
+end

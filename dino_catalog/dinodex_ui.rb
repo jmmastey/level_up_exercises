@@ -9,8 +9,8 @@ class DinoDexUI
     walking: %w(Biped Quadruped),
   }.freeze
 
-  def initialize
-    @dex = DinoDex.new
+  def initialize(dino_list)
+    @dex = DinoDex.new(dino_list)
     @search_results = []
     @search_hash = {}
   end

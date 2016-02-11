@@ -59,7 +59,7 @@ class DinoCsvParser
 
   def self.add_unrecognized_data_to_arg(column_header, cell_data, arg)
     arg[:additional_info] = {} unless arg[:additional_info]
-    arg[:additional_info][column_header] = cell_data
+    arg[:additional_info][column_header.downcase] = cell_data
   end
 
   def self.special_case_carnivore_data(cell_data)

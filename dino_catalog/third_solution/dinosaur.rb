@@ -31,7 +31,12 @@ class Dinosaur
   end
 
   def additional_info_value?(additional_info_catagory, additional_info_value)
-    self.additional_info != nil && self.additional_info.has_key?(additional_info_catagory) && self.additional_info[additional_info_catagory] !=nil && self.additional_info[additional_info_catagory].include?(additional_info_value)
+    category = additional_info_catagory.downcase
+    search_term = additional_info_value.downcase
+    self.additional_info != nil &&
+    self.additional_info.has_key?(category) && 
+    self.additional_info[category] !=nil && 
+    self.additional_info[category].downcase.include?(search_term)
   end
 
   def to_s

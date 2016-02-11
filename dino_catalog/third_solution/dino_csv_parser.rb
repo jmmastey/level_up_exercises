@@ -1,10 +1,11 @@
 require 'csv'
 
 class DinoCsvParser
+  APP_ROOT = File.expand_path("../..", __FILE__)
   SPECIAL_CASE_CSV_COLUMN_HEADERS = ["carnivore"]
   RECOGNIZED_CSV_COLUMN_HEADERS = ["name", "genus", "weight", "walking", "period", "diet", "weight_in_lbs", "locomotion"]
 
-  def self.from_csv_directory(dir_path = "../dino_fact_csvs")
+  def self.from_csv_directory(dir_path = APP_ROOT+"/dino_fact_csvs")
     ary = [] # each_with_object([]) doesn't work w/ += ary
     Dir["#{dir_path}/*"].each do |file_path|
       ary += DinoCsvParser.from_csv_file(file_path)

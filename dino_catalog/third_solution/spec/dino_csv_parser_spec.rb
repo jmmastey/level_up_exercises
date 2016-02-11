@@ -22,28 +22,28 @@ describe DinoCsvParser do
 
 
 
-    # it "pulls from 'dino_catalog/dino_fact_csv' if no other directory is provided"do
-    #   sbj = DinoCsvParser.from_csv_directory
-    #   expect(sbj.count).to eq(17)
-    #   expect(sbj.first).to eq({
-    #     :name=>"Abrictosaurus", 
-    #     :period=>"Jurassic", 
-    #     :diet=>"herbivore", 
-    #     :weight=>100, 
-    #     :locomotion=>"Biped"
-    #   })
-    #   expect(sbj.last).to eq({
-    #     :name=>"Dracopelta", 
-    #     :period=>"Early Cretaceous or Late Jurassic", 
-    #     :diet=>"Herbivore", 
-    #     :weight=>nil, 
-    #     :locomotion=>"Quadruped",
-    #     :additional_info=>{
-    #       "continent"=>"South America", 
-    #       "description"=>"One of the most primitive known Ankylosauria."
-    #     }
-    #   })
-    # end
+    it "pulls from 'dino_catalog/dino_fact_csv' if no other directory is provided"do
+      sbj = DinoCsvParser.from_csv_directory
+      expect(sbj.count).to eq(17)
+      expect(sbj.first).to eq({
+        :name=>"Abrictosaurus", 
+        :period=>"Jurassic", 
+        :diet=>"herbivore", 
+        :weight=>100, 
+        :locomotion=>"Biped"
+      })
+      expect(sbj.last).to eq({
+        :name=>"Dracopelta", 
+        :period=>"Early Cretaceous or Late Jurassic", 
+        :diet=>"Herbivore", 
+        :weight=>nil, 
+        :locomotion=>"Quadruped",
+        :additional_info=>{
+          "continent"=>"South America", 
+          "description"=>"One of the most primitive known Ankylosauria."
+        }
+      })
+    end
 
     it "returns hashes of csv data in provided directory" do
       expect(sample_output.count).to eq(10)

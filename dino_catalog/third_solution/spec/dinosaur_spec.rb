@@ -152,4 +152,22 @@ describe Dinosaur do
     end
   end
 
+  describe "#to_s" do
+    it "has all attributes of obj, including under additional_info" do
+      expect(subject_bob.to_s).to eq("name: Bob, weight: 280, diet: coffee & doughnuts, locomotion: rolling chair, period: haven't gone since highschool, fun fact: I only drink when I smoke, best quote: there aint no sunshine when shes gone\n\n")
+    end
+    it "skips values not completed for model" do
+      expect(subject_big.to_s).to eq("weight: 4000\n\n")
+    end
+  end
+
+  describe "#to_h" do
+    it "has all attributes of obj" do
+      expect(subject_bob.to_h).to eq({"name"=>"Bob", "weight"=>280, "diet"=>"coffee & doughnuts", "locomotion"=>"rolling chair", "period"=>"haven't gone since highschool", "additional_info"=>{"fun fact"=>"I only drink when I smoke", "best quote"=>"there aint no sunshine when shes gone"}})
+    end
+    it "skips attributes no completed for model" do
+      expect(subject_big.to_h).to eq({"weight" => 4000})
+    end
+  end
+
 end

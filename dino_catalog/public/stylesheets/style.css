@@ -1,0 +1,14 @@
+.info-container {
+  height: 600px; width: 400px;
+  overflow: scroll;
+  border: 1px dashed #58a;
+}
+
+.dino-info {
+  padding: 20px;
+  border-bottom: 1px dashed #58a;
+}
+
+.dino-info::first-line {
+  font-size: 2em;
+}

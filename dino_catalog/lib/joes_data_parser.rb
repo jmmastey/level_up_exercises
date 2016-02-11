@@ -2,7 +2,7 @@
 require_relative 'dino_data_parser'
 class JoesDataParser < DinoDataParser
   def data_file
-    'dinodex.csv'
+    'lib/data/dinodex.csv'
   end
 
   def format_data(dino)
@@ -21,7 +21,7 @@ class JoesDataParser < DinoDataParser
 
   def correct_period(period)
     if period.casecmp('oxfordian') == 0
-      ['Late Jurassic', period]
+      %w(Late\ Jurassic Oxfordian)
     else
       [period, nil]
     end

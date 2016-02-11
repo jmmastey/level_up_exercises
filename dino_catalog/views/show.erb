@@ -1,0 +1,9 @@
+<h1>All Dinosaurs (<%= dinosaurs.count %>)</h1>
+
+<div class="info-container">
+  <% dinosaurs.each do |dino| %>
+    <div class='dino-info'>
+      <%= dino.to_s.gsub("\n", '<br>').gsub("Name:", "") %>
+    </div>
+  <% end %>
+</div>

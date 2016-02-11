@@ -2,7 +2,7 @@
 require_relative 'dino_data_parser'
 class AfricanDataParser < DinoDataParser
   def data_file
-    'african_dinosaur_export.csv'
+    'lib/data/african_dinosaur_export.csv'
   end
 
   def format_data(dino)
@@ -19,7 +19,7 @@ class AfricanDataParser < DinoDataParser
 
   def correct_period(period)
     if period.casecmp('albian') == 0
-      ['Early Cretaceous', period]
+      %w(Early\ Cretaceous Albian)
     else
       [period, nil]
     end

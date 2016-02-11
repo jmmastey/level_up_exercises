@@ -98,10 +98,20 @@ describe DinoCsvParser do
   end
 
   describe "canonize data" do
-    it "adds recognized columns to arg" do
+    it "adds recognized column data to arg" do
       expect(sample_from_dinodex_format.first[:name]).to eq("Albertosaurus")
+      expect(sample_from_african_dinosaur_format.first[:name]).to eq("Abrictosaurus")
     end
-    it "adds recognized special cases to arg"
-    it "adds unrecognized cases to additional info"
+    it "adds recognized special case data to arg" do
+      expect(sample_from_african_dinosaur_format.first[:diet]).to eq("herbivore")
+      expect(sample_from_african_dinosaur_format.last[:diet]).to eq("carnivore")
+    end
+    it "adds unrecognized cases to an additional info hash" do
+      expect(sample_from_dinodex_format.first[:additional_info]).to eq({
+        "continent"=>"North America", 
+        "description"=>"Like a T-Rex but smaller."
+      })
+      expect(sample_from_african_dinosaur_format.first[:additional_info]).to be_nil
+    end
   end
 end

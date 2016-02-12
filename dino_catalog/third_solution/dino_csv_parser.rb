@@ -4,6 +4,7 @@ class DinoCsvParser
   APP_ROOT = File.expand_path("../..", __FILE__)
   SPECIAL_CASE_CSV_COLUMN_HEADERS = ["carnivore"]
   RECOGNIZED_CSV_COLUMN_HEADERS = ["name", "genus", "weight", "walking", "period", "diet", "weight_in_lbs", "locomotion"]
+  RECOGNIZED_ATTRIBUTES = RECOGNIZED_CSV_COLUMN_HEADERS + SPECIAL_CASE_CSV_COLUMN_HEADERS
 
   def self.from_csv_directory(dir_path = APP_ROOT+"/dino_fact_csvs")
     ary = [] # each_with_object([]) doesn't work w/ += ary
@@ -27,6 +28,21 @@ class DinoCsvParser
 
   # def self.from_json(json)
   # end
+
+  def self.attribute_from_header(column_header)
+    case column_header
+    when "name", "genus"
+      :name
+    when "weight", "weight_in_lbs"
+      :weight
+    when "locomotion", "walking"
+      :locomotion
+    when "period"
+      :period
+    when "diet", "carnivore"
+      :diet
+    end
+  end
 
   private
   def self.dino_args_from_csv_row(csv_row)
@@ -54,7 +70,7 @@ class DinoCsvParser
   end
 
   def self.add_recognized_data_to_arg(column_header, cell_data, arg)
-    arg[DinoCsvParser.attribute_from_recognized_csv_header(column_header)] = cell_data
+    arg[DinoCsvParser.attribute_from_header(column_header)] = cell_data
   end
 
   def self.add_unrecognized_data_to_arg(column_header, cell_data, arg)
@@ -69,25 +85,4 @@ class DinoCsvParser
       "carnivore"
     end
   end
-
-  def self.attribute_from_recognized_csv_header(column_header)
-    case column_header
-    when "name", "genus"
-      :name
-    when "weight", "weight_in_lbs"
-      :weight
-    when "locomotion", "walking"
-      :locomotion
-    when "period"
-      :period
-    when "diet"
-      :diet
-    end
-  end
-
 end
-
-# test = DinoCsvParser.from_directory
-# puts test.count
-# puts test.first
-# puts test.last

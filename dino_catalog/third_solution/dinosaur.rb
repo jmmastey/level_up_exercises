@@ -60,8 +60,4 @@ class Dinosaur
       output[attribute.to_s[1..-1]] = self.instance_variable_get(attribute)
     end
   end
-
-
-
 end
-

@@ -51,6 +51,7 @@ describe Dinosaurs do
       expect(subject_from_files.collection).to all(be_a(Dinosaur))
     end
   end
+
   describe "#instantiation and accessors" do
     it "can initialize w/ and empty collection" do
       expect(Dinosaurs.new.collection).to eq([])
@@ -63,15 +64,6 @@ describe Dinosaurs do
       )
     end
   end
-
-  # describe "#big_dinosaurs" do
-  #   it "returns a dinosaurs object" do
-  #     expect(subject_from_files).to be_an_instance_of(Dinosaurs)
-  #   end
-  #   it "the new objs collection is populated by only dinos"do
-  #     expect(subject_from_files.collection).to all(be_a(Dinosaur))
-  #   end
-  # end
 
   describe "#big_dinosaurs" do
     it "returns a dinosaurs object" do
@@ -210,6 +202,12 @@ describe Dinosaurs do
       }.to output(
         "name: Bob, weight: 280, diet: coffee & doughnuts, locomotion: rolling chair, period: haven't gone since highschool, fun fact: I only drink when I smoke, best quote: there aint no sunshine when shes gone\n\nname: Mary, weight: 180, diet: salad, locomotion: exer-ball, period: who has the time, favorit movie: Under the Tuscan Sun, best quote: will over reason\n\nname: Jake, weight: 235, diet: cereal, locomotion: subway, period: between now and then, fashion: anti-chic, best quote: How can a clam cram in a clean cream can?\n\n"
       ).to_stdout
+    end
+  end
+
+  describe "#export_json" do
+    it "" do
+      p subject_from_sample.export_json
     end
   end
 end

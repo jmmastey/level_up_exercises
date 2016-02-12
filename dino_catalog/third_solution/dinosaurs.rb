@@ -1,3 +1,4 @@
+require 'json'
 require_relative "dinosaur"
 require_relative "dino_csv_parser"
 
@@ -40,6 +41,10 @@ class Dinosaurs
     collection.each do |dinosaur|
       puts dinosaur
     end  
+  end
+
+  def export_json
+    collection.map(&:to_h).to_json
   end
 
   # def add_dino(dinosaur)

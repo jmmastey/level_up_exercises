@@ -1,3 +1,4 @@
+require 'json'
 require_relative "../dinosaurs"
 
 describe Dinosaurs do
@@ -39,6 +40,8 @@ describe Dinosaurs do
       }
     })
   ]
+
+  json_sample_collection = JSON.generate(sample_collection.map(&:to_h))
 
   let(:subject_from_files) { Dinosaurs.from_args(test_args)}
   let(:subject_from_sample) { Dinosaurs.new(sample_collection)}
@@ -206,8 +209,8 @@ describe Dinosaurs do
   end
 
   describe "#export_json" do
-    it "" do
-      p subject_from_sample.export_json
+    it "hands back a json obj of the collection" do
+      expect(subject_from_sample.export_json).to eq(json_sample_collection)
     end
   end
 end

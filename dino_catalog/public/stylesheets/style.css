@@ -1,12 +1,93 @@
+body {
+  min-width: 540px;
+  max-width: 860px;
+  background-color: white;
+}
+
+h2 {
+  margin-top: 0;
+  padding: 0 20px;
+  color: #45C405;
+}
+
+a {
+  text-decoration: none;
+  color: #444;
+}
+
+a:hover {
+  color: #45C405;
+  text-decoration: underline;
+}
+
+header {
+  background-color: black;
+  background-image: url(../images/dino_comics_t_rex.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 50px 0 10px 100px;
+  margin-bottom: 40px;
+}
+
+header > a {
+  font-size: 4em;
+  color: white;
+}
+
+header > a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+footer {
+  clear: both;
+  margin: 20px 40px 20px 20px;
+  padding: 25px;
+  border-top: 1px dashed #45C405;
+  text-align: right;
+}
+
+option, label, select {
+  text-transform: capitalize;
+}
+
+aside, section{
+  color: #333;
+}
+
+#name-search {
+  padding-bottom: 26px;
+  margin-bottom: 26px;
+  border-bottom: 1px dashed #45C405;
+}
+
+.filter {
+  padding-bottom: 20px;
+}
+
+.filter > select, .filter span, input[type='submit'] {
+  float: right;
+}
+
+.filter input[type='number'] {
+  width: 6em;
+}
+
+.search-menu {
+  float: left;
+  width: 240px;
+  margin: 20px;
+}
+
 .info-container {
-  height: 600px; width: 400px;
-  overflow: scroll;
-  border: 1px dashed #58a;
+  float: left;
+  width: 500px;
+  margin: 20px;
 }
 
 .dino-info {
   padding: 20px;
-  border-bottom: 1px dashed #58a;
+  border-top: 1px dashed #45C405;
 }
 
 .dino-info::first-line {

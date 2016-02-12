@@ -7,13 +7,13 @@ class AfricanDataParser < DinoDataParser
 
   def format_data(dino)
     {
-      name:               dino[:genus],
-      period:             correct_period(dino[:period])[0],
-      period_subdivision: correct_period(dino[:period])[1],
-      continent:          'Africa',
-      diet:               carnivore_or_not(dino[:carnivore]),
-      weight:             dino[:weight],
-      walking:            dino[:walking],
+      :name                 => dino[:genus],
+      :period               => correct_period(dino[:period])[0],
+      :'period subdivision' => correct_period(dino[:period])[1],
+      :continent            => 'Africa',
+      :diet                 => carnivore_or_not(dino[:carnivore]),
+      :weight               => dino[:weight],
+      :walking              => dino[:walking],
     }
   end
 

@@ -1,17 +1,42 @@
 class DinoDex
+  FILTERS = {
+    :period => %w(jurassic cretaceous triassic permian),
+    :'period subdivision' =>  %w(oxfordian albian),
+    :continent => %w(north\ america south\ america asia africa europe),
+    :diet => %w(carnivore herbivore),
+    :'diet subtype' => %w(piscivore insectivore),
+    :walking => %w(biped quadruped),
+  }
+
   attr_reader :all_dinosaurs
 
   def initialize(dino_list)
     @all_dinosaurs = dino_list
   end
 
-  def find_by_name(search_name)
-    all_dinosaurs.select { |dino| dino.name.casecmp(search_name) == 0 }
+  def find(params)
+    matchable_params = params.reject { |_k, v| v =~ /\d/ }
+    dino_sets = [find_match(matchable_params),
+                 find_weight(params[:min], params[:max])]
+    dino_sets.reject(&:empty?).reduce(:&) || []
   end
 
-  def filter_by_hash(filters)
+  def find_match(matchable_params)
+    return [] if matchable_params.empty?
     all_dinosaurs.select do |dino|
-      filters.each { |k, v| break unless dino.send(k) =~ /#{v}/i }
+      matchable_params.each do |k, v|
+        break unless dino.send(k) =~ /#{v}/i
+      end
+    end
+  end
+
+  def find_weight(min, max)
+    return [] if min.nil? && max.nil?
+    min = (min &&= min.to_i) || 0
+    max = (max &&= max.to_i) || Float::INFINITY
+    all_dinosaurs.select do |dino|
+      next if dino.weight.nil?
+      dino.weight.between?(min, max)
     end
   end
 end

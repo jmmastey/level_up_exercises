@@ -9,9 +9,13 @@ dino_list = JoesDataParser.new.parse +
 dex = DinoDex.new(dino_list)
 
 get '/' do
+  @filters = DinoDex::FILTERS
+  @dino_list = dex.find(params)
   erb :index
 end
 
 get '/all' do
-  erb :show, :locals => {dinosaurs: dex.all_dinosaurs}
+  @filters = DinoDex::FILTERS
+  @dino_list = dex.all_dinosaurs
+  erb :index
 end

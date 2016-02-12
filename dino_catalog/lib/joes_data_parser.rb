@@ -7,15 +7,15 @@ class JoesDataParser < DinoDataParser
 
   def format_data(dino)
     {
-      name:               dino[:name],
-      period:             correct_period(dino[:period])[0],
-      period_subdivision: correct_period(dino[:period])[1],
-      continent:          dino[:continent],
-      diet:               correct_diet(dino[:diet])[0],
-      diet_subtype:       correct_diet(dino[:diet])[1],
-      weight:             dino[:weight_in_lbs],
-      walking:            dino[:walking],
-      description:        dino[:description],
+      :name                 => dino[:name],
+      :period               => correct_period(dino[:period])[0],
+      :'period subdivision' => correct_period(dino[:period])[1],
+      :continent            => dino[:continent],
+      :diet                 => correct_diet(dino[:diet])[0],
+      :'diet subtype'       => correct_diet(dino[:diet])[1],
+      :weight               => dino[:weight_in_lbs],
+      :walking              => dino[:walking],
+      :description          => dino[:description],
     }
   end
 

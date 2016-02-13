@@ -19,3 +19,9 @@ get '/all' do
   @dino_list = dex.all_dinosaurs
   erb :index
 end
+
+get '/download' do
+  dex.export_json
+  send_file "./dinosaur_export.json", :filename => 'dinosaur_export.json',
+    :type => 'application/json'
+end

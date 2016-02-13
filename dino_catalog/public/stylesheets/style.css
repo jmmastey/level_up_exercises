@@ -1,6 +1,7 @@
 body {
   min-width: 540px;
   max-width: 860px;
+  margin: 0 auto;
   background-color: white;
 }
 
@@ -55,7 +56,7 @@ aside, section{
   color: #333;
 }
 
-#name-search {
+aside > form {
   padding-bottom: 26px;
   margin-bottom: 26px;
   border-bottom: 1px dashed #45C405;
@@ -78,6 +79,7 @@ aside, section{
   width: 240px;
   margin: 20px;
 }
+
 
 .info-container {
   float: left;

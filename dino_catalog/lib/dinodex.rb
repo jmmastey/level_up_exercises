@@ -1,4 +1,6 @@
 class DinoDex
+  require 'json'
+
   FILTERS = {
     :period => %w(jurassic cretaceous triassic permian),
     :'period subdivision' =>  %w(oxfordian albian),
@@ -37,6 +39,13 @@ class DinoDex
     all_dinosaurs.select do |dino|
       next if dino.weight.nil?
       dino.weight.between?(min, max)
+    end
+  end
+
+  def export_json
+    export = all_dinosaurs.reduce([]) { |export, dino| export << dino.to_h }
+    File.open('dinosaur_export.json', 'w') do |file|
+      file.write(JSON.pretty_generate(export))
     end
   end
 end

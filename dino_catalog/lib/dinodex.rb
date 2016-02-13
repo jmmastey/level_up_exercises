@@ -3,7 +3,7 @@ class DinoDex
 
   FILTERS = {
     :period => %w(jurassic cretaceous triassic permian),
-    :'period subdivision' =>  %w(oxfordian albian),
+    :'period subdivision' => %w(oxfordian albian),
     :continent => %w(north\ america south\ america asia africa europe),
     :diet => %w(carnivore herbivore),
     :'diet subtype' => %w(piscivore insectivore),
@@ -43,7 +43,7 @@ class DinoDex
   end
 
   def export_json
-    export = all_dinosaurs.reduce([]) { |export, dino| export << dino.to_h }
+    export = all_dinosaurs.reduce([]) { |a, dino| a << dino.to_h }
     File.open('dinosaur_export.json', 'w') do |file|
       file.write(JSON.pretty_generate(export))
     end

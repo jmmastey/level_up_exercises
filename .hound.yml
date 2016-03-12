@@ -25,9 +25,6 @@ Style/StringLiterals:
 Style/SignalException:
   Enabled: false
 
-Style/TrailingComma:
-  EnforcedStyleForMultiline: comma
-
 # This never works for validations
 Style/AlignHash:
   EnforcedLastArgumentHashStyle: ignore_implicit

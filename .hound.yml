@@ -25,7 +25,7 @@ Style/StringLiterals:
 Style/SignalException:
   Enabled: false
 
-Style/TrailingComma:
+Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: comma
 
 # This never works for validations

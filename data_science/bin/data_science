@@ -2,7 +2,7 @@
 
 require_relative '../lib/data_science'
 
-raise ArgumentError, "No file given" unless file = ARGV[0]
+raise ArgumentError, "No file given" unless (file = ARGV[0])
 
 data = DataScience::WebsiteData.new(file)
 stats = DataScience::Stats.new(data)

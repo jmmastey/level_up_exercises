@@ -4,13 +4,13 @@ class Arrowhead
 
   def self.classify_region(region, shape)
     if Classifications::CLASSIFICATIONS.include? region
-      self.classify_arrow(region, shape)
+      self.classify_type(region, shape)
     else
       raise "Unknown region, please provide a valid region."
     end
   end
 
-  def self.classify_arrow(region, shape)
+  def self.classify_type(region, shape)
     shapes = Classifications::CLASSIFICATIONS[region]
 
     if shapes.include? shape

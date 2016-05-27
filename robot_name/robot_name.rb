@@ -21,9 +21,9 @@ class Robot
   end
 
   def name_constructor
-    generate_char = -> { ('A'..'Z').to_a.sample }
-    generate_num = -> { rand(10) }
-    @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
+    generate_char = ('A'..'Z').to_a.sample(2)
+    generate_num = (1..10).to_a.sample(3)
+    @name = generate_char.concat(generate_num).join
   end
 
   def duplicate_name?

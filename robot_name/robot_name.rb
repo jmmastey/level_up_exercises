@@ -12,10 +12,10 @@ class Robot
     else
       name_constructor
     end
-    add_name
+    register_name
   end
 
-  def add_name
+  def register_name
     @@registry << @name
     p @@registry
   end

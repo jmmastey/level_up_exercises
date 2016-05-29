@@ -6,12 +6,12 @@ class Dino
 
   def initialize(args)
     @name = args[:name] || nil
-    @period = args[:period]
-    @continent = args[:continent]
+    @period = args[:period] || nil
+    @continent = args[:continent] || nil
     @diet = args[:diet] || args[:carnivore]
-    @weight_in_lbs = args[:weight_in_lbs] || args[:weight]
-    @walking = args[:walking]
-    @description = args[:description]
+    @weight_in_lbs = args[:weight_in_lbs] || args[:weight] || nil
+    @walking = args[:walking] || nil
+    @description = args[:description] || nil
   end
 
 end
@@ -52,7 +52,10 @@ class Directory
 	carnivores = []
 	@dinos.each do |dino|
 	  eating_habbits = dino.diet
-	  carnivores << dino if (eating_habbits == "Yes") || (eating_habbits != "Herbivore")
+	  carnivores << dino if eating_habbits == "Yes"
+	  carnivores << dino if eating_habbits == "Carnivore"
+	  carnivores << dino if eating_habbits == "Insectivore"
+	  carnivores << dino if eating_habbits == "Piscivore"
 	end
 	carnivores.map {|dino_obj| format_dino_output(dino_obj)}
   end

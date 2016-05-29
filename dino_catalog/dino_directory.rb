@@ -36,21 +36,25 @@ class Directory
   	@dinos = dinos || []
   end
 
+  def format_dino_output(input)
+  	"#{input.name} #{input.period} #{input.continent} #{input.diet} #{input.weight_in_lbs} #{input.walking} #{input.description}"
+  end
+
   def find_bipeds
   	bipeds = []
   	@dinos.each do |dino|
   	  bipeds << dino if dino.walking == "Biped"
   	end
-  	bipeds
+  	bipeds.map {|dino_obj| format_dino_output(dino_obj)}
   end
 
   def find_carnivores
 	carnivores = []
 	@dinos.each do |dino|
 	  eating_habbits = dino.diet
-	  carnivores << dino if eating_habbits == ("Yes" || "Carnivores")
+	  carnivores << dino if (eating_habbits == "Yes") || (eating_habbits != "Herbivore")
 	end
-	carnivores
+	carnivores.map {|dino_obj| format_dino_output(dino_obj)}
   end
 
   def find_period(period)
@@ -58,7 +62,7 @@ class Directory
 	@dinos.each do |dino|
 	  dinos_by_period << dino if dino.period == period
 	end
-	dinos_by_period
+	dinos_by_period.map {|dino_obj| format_dino_output(dino_obj)}
   end
 
   def find_big_dinos
@@ -67,7 +71,7 @@ class Directory
   	  weight = dino.weight_in_lbs.to_i || dino.weight.to_i
 	  big_dinos << dino if weight > 2000
 	end
-	big_dinos
+	big_dinos.map {|dino_obj| format_dino_output(dino_obj)}
   end
 
   def find_small_dinos
@@ -76,7 +80,7 @@ class Directory
 	  weight = dino.weight_in_lbs.to_i || dino.weight.to_i
 	  small_dinos << dino if weight < 2000
     end
-    small_dinos
+    small_dinos.map {|dino_obj| format_dino_output(dino_obj)}
   end
 
 end
@@ -92,9 +96,9 @@ if ARGV[0] == "find"
   	puts directory.find_carnivores
   elsif ARGV[1] == "period"
   	puts directory.find_period(ARGV[2])
-  elsif ARGV[1] == "big dinos"
+  elsif ARGV[1] == "big-dinos"
   	puts directory.find_big_dinos
-  elsif ARGV[1] == "small dinos"
+  elsif ARGV[1] == "small-dinos"
   	puts directory.find_small_dinos
   end
 else

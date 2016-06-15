@@ -1,32 +1,34 @@
-class NameCollisionError < RuntimeError; end
-
 class Robot
+  CHARS = ('A'..'Z').to_a
+  NUMS = (0..10).to_a
+
   attr_accessor :name
 
-  @@registry
+  def initialize(options = {})
+    @registry = []
+    add_name_to_registry(options)
+  end
 
-  def initialize(args = {})
-    @@registry ||= []
-    @name_generator = args[:name_generator]
+  def generate_name
+    name = ""
+    2.times { name += CHARS.sample }
+    3.times { name += NUMS.sample.to_s }
+    name
+  end
 
-    if @name_generator
-      @name = @name_generator.call
-    else
-      generate_char = -> { ('A'..'Z').to_a.sample }
-      generate_num = -> { rand(10) }
+  def add_name_to_registry(options)
+    @name = options[:name] || generate_name
+    raise "Duplicate Error" if duplicate_name?
+    @registry << @name
+  end
 
-      @name = "#{generate_char.call}#{generate_char.call}#{generate_num.call}#{generate_num.call}#{generate_num.call}"
-    end
-
-    raise NameCollisionError, 'There was a problem generating the robot name!' if !(name =~ /[[:alpha:]]{2}[[:digit:]]{3}/) || @@registry.include?(name)
-    @@registry << @name
+  def duplicate_name?
+    @registry.include?(@name)
   end
 end
 
-robot = Robot.new
+name = 'AA111'
+robot = Robot.new(name: name)
 puts "My pet robot's name is #{robot.name}, but we usually call him sparky."
-
-# Errors!
-# generator = -> { 'AA111' }
-# Robot.new(name_generator: generator)
-# Robot.new(name_generator: generator)
+# Robot.new(name: name)
+# Robot.new(name: name)

@@ -6,11 +6,24 @@ class Dinodex
   def load_dinosaurs_file(csv_path, type = 'none')
     dinodex_reader = DinodexReader.new(csv_path, type)
     @dinosaurs = dinodex_reader.fetch
-    binding.pry
   end
 
-  def search(params)
+  def bipeds
+    @dinosaurs.select { |dino| dino.walking == 'Biped' }
   end
+
+  def carnivores
+    @dinosaurs.select { |dino| dino.diet == 'Carnivore' }
+  end
+
+  def small_dinos
+    @dinosaurs.select { |dino| dino.weight_in_lbs.to_i < 2000 }
+  end
+
+  def big_dinos
+    @dinosaurs.select { |dino| dino.weight_in_lbs.to_i > 2000 }
+  end
+
 end
 
 dinodex = Dinodex.new

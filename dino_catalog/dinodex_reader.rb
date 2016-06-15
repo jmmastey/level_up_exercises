@@ -1,37 +1,28 @@
 require 'csv'
 require 'pry'
+require_relative 'dinosaur'
 
 class DinodexReader
-  attr_accessor :dinos
 
   def initialize(path, type)
     @path = path
-    @dinos = read_african_dinos(path) if type == 'african'
-    @dinos = read_from_csv(path) if type == 'none'
+    @type = type
   end
 
-  def read_dinos
-    # Format
-    # {
-    #   name: "Albertosaurus",
-    #   period: "Late Cretaceous",
-    #   continent: "North America",
-    #   diet: "Carnivore",
-    #   weight_in_lbs: "2000",
-    #   walking: "Biped",
-    #   description: "Like a T-Rex but smaller"
-    # }
+  def fetch
+    read_csv_normal if @type == 'none'
   end
 
-  def read_african_dinos
-    # Format
-    # {
-    #   genus: "Abrictosaurus",
-    #   period: "Jurassic",
-    #   carnivore: "No",
-    #   weight: "100",
-    #   walking: "Biped"
-    # }
+  def read_csv_normal
+    dinosaurs = []
+    CSV.foreach(@path, { headers: true }) do |row|
+      dinosaurs << create_dinosaur(row)
+    end
+    dinosaurs
+  end
+
+  def create_dinosaur(options)
+    Dinosaur.new(options.to_h)
   end
 
 end

@@ -1,0 +1,642 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+	background-color: black;
+	color: #AAAAAA;
+}
+
+.page-title {
+	position: fixed;
+	left: 50%;
+	top: 5px;
+	margin-left: -50px;
+	color: yellow;
+	z-index: 15;
+	font-size: 25px;
+	font-family: verdana;
+	font-weight: bold;
+}
+
+.warning-message {
+	color: red;
+}
+
+.tooltip {
+	display: inline;
+	position: relative;
+}
+
+.tooltip:hover:after {
+	border-radius: 5;
+	bottom: 26px;
+	content: attr(title);
+	left: 20%;
+	padding: 5px 15px;
+	position: absolute;
+	z-index: 100;
+	width: 220px;
+}
+
+td {
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+	color: #33FFCC;
+	background-color:rgba(60, 60, 60, 0.5);
+}
+
+td a {
+	text-decoration: none;
+	color: #AAAAEE;
+}
+
+td a:hover {
+	color: #CCCCFF;
+}
+
+table td ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #AA5F33;
+}
+
+a:hover {
+	color: #DD9266;
+}
+
+.scrollable #user-event-showings {
+	position: absolute;
+}
+
+#user-event-showings {
+	position: fixed;
+	top: 100px;
+	bottom: 40px;
+	left: 100px;
+	right: 50%;
+}
+
+#user-event-showings table {
+	position: absolute;
+	overflow: auto;
+	font-size: 16px;
+	padding-bottom: 200px;
+	border-collapse: separate; 
+	border-spacing: 3px;
+}
+
+#user-event-showings table ul {
+	list-style: none;
+}
+
+#user-event-showings table td {
+	background-color:rgba(0, 0, 85, 0.4);
+	padding: 0px;
+}
+
+#user-event-showings table .image {
+	background: none;
+	align: center;
+}
+
+#user-event-showings table .image img {
+	height: 80px;
+	width: 80px;
+	opacity: 0.7;
+	border-radius: 5px;
+	vertical-align: middle;
+}
+
+#user-event-showings table td .remove {
+	position: relative;
+	top: -20px;
+	background: none;
+}
+
+#user-event-showings table td .add-to-cal {
+	position: relative;
+	top: -20px;
+}
+
+#user-event-showings table td .add-to-cal .add-image {
+	height: 14px;
+	width: 14px;
+}
+
+#user-event-showings table .time {
+	color: #FFFF99;	
+}
+
+#user-event-showings table .location {
+	color: orange;	
+}
+
+#user-event-showings table li:first-child {
+	font-size: 16px;
+}
+
+#user-event-showings table li:not(:first-child) {
+	padding-left: 10px;
+}
+
+#all-events {
+	position: absolute;
+	left: 50%;
+	top: 100px;
+	right: 120px;
+}
+
+#all-events .table-container {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 120px;
+}
+
+#all-events table {
+	position: absolute;
+	top: 0px;
+	left: 0px;	
+	overflow-y: hidden;
+	font-size: 15px;
+	padding-bottom: 200px;
+	border-collapse: separate; 
+	border-spacing: 5px;
+}
+
+#all-events table tr  {
+	background: none;
+}
+
+#all-events table td {
+	border-radius: 15px;
+	padding: 0px;
+}
+
+#all-events table .name {
+	font-size: 20px;	
+}
+
+#all-events table .location {
+	color: orange;
+	font-size: 18px;
+}
+
+#all-events table .showing-count {
+	color: #999999;
+	font-size: 16px;
+}
+
+#all-events table .image {
+	background: none;
+	align: center;
+}
+
+#all-events table img {
+	height: 110px;
+	width: 110px;
+	opacity: 0.7;
+	border-radius: 5px;
+	vertical-align: middle;
+}
+
+#all-events .nav {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 100px;
+}
+
+#all-events .cool-round-button.events {
+	position: fixed;
+	top: 120px;
+	right: 65px;	
+}
+
+#all-events .cool-round-button.home {
+	position: fixed;
+	top: 270px;
+	right: 65px;	
+}
+
+#all-events .cool-round-button.sources {
+	position: fixed;
+	top: 420px;
+	right: 65px;	
+}
+
+#scrape_link {
+	position: fixed;
+	left: 50%;
+	bottom: 10px;
+	margin-left: -75px;
+	color: salmon;
+	z-index: 15;
+	font-size: 20px;
+	font-family: verdana;
+	font-weight: bold;	
+}
+
+.title-headings {
+	color: yellow;
+}
+
+.show-headings {
+	color: #EEEE33;
+}
+
+.background-image {
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: -1;
+	opacity: 0.5;
+}
+
+.background-image-blurred {
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	left: -300px;
+	right: 0px;
+	z-index: -2;
+	opacity: 0.5;	
+}
+
+.background-image-hide {
+	display: none;
+}
+
+.dim-table {
+	width: 40%;
+	margin-top: 0px;
+	padding-top: 100px;
+	z-index: 0;
+	opacity: 1.00;
+	display: inline;
+	position: fixed;
+}
+
+.focus-table {
+	width: 40%;
+	margin-top: 0px;
+	padding-top: 100px;
+	z-index: 0;
+	opacity: 1.0;
+	display: inline;
+}
+
+#events-table-div {
+	position: fixed;
+}
+
+#all-events-title {
+	position: fixed;
+	left: 50%;
+	top: 5px;
+	margin-left: -50px;
+	color: yellow;
+	z-index: 15;
+	font-size: 25px;
+	font-family: verdana;
+	font-weight: bold;
+}
+
+#event-attributes {
+	position: fixed;
+	z-index: 15;
+	font-size: 20px;
+	font-family: verdana;
+	font-weight: bold;
+}
+
+#event-attributes .label {
+	color: #9999FF;
+}
+
+#event-attributes .value {
+	color: #EEEE55;	
+}
+
+#event-attributes .name {
+	position: fixed;
+	top: 5px;
+	left: 400px;
+	right: 400px;
+	margin-left: -20px;
+	color: yellow;
+	text-align: center;
+	z-index: 9;
+	padding: 0px;
+}
+
+#event-attributes .location {
+	position: fixed;
+	left: 50px;
+	bottom: 10px;
+	color: #5555CC;
+}
+
+#event-attributes .link {
+	position: fixed;
+	right: 50px;
+	bottom: 10px;
+	color: #5555CC;
+}
+
+#event-attributes .link value a {
+	color: salmon;
+}
+
+#event-showings {
+	position: absolute;
+	left: 40%;
+	top: 100px;
+	width: 30%;
+	right: 70%;
+}
+
+#event-showings .table-container {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 200px;
+	bottom: 100px;
+}
+
+#event-showings table {
+	font-size: 15px;
+	font-family: verdana;
+	padding-bottom: 200px;
+	right: 200px;
+}
+
+#event-showings .nav {
+	position: fixed;
+	top: 0px;
+	right: 10px;
+	bottom: 100px;
+}
+
+#event-showings .right-panel {
+	position: fixed;
+	top: 100px;
+	right: 100px;
+	width: 25%;	
+}
+
+#event-showings .right-panel .image-box {
+	position: absolute;
+	top: 0px;
+	background-color: rgba(90, 90, 90, 0.2);
+	padding: 15px 20px 12px 20px;
+	opacity: 0.8;
+	margin: 0px;
+	border: 2px solid rgba(60, 60, 60, 0.4);
+}
+
+.right-panel .image-box {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	top: 0px;
+	right: 0px;
+}
+
+.right-panel .image-box img {
+	width: 200px;
+	height: 200px;
+}
+
+.right-panel .description {
+	position: absolute;
+	right: 270px;
+	top: 10px;
+	right: 260px;
+	width: 200px;
+	align: left;
+	
+}
+
+#event-showings .cool-round-button.website {
+	position: absolute;
+	top: 265px;
+	right: 65px;
+}
+
+#event-showings .cool-round-button.events {
+	position: absolute;
+	top: 400px;
+	right: 65px;
+}
+
+#event-showings .cool-round-button.home {
+	position: absolute;
+	top: 535px;
+	right: 65px;
+}
+
+#home-menu {
+	position: fixed;
+	top: 40px;
+	left: 50%;
+	right: 10px;
+	bottom: 400px;
+}
+
+.cool-round-button {
+	display: block;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	background-color: rgba(0, 0, 70, 0.3);
+	top: 50%;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 100px;
+	padding: 0px;
+	padding-top: 0px;
+	font-size: 15px;
+	font-family: verdana;
+	font-weight: bold;
+	color: rgba(153, 153, 255, 0.9);
+	background-image: radial-gradient(circle at center,
+									  rgba(0, 0, 0, 0) 0%,
+									  rgba(0, 0, 0, 0) 40px,
+									  rgba(50, 50, 255, 0.3) 45px,
+									  rgba(50, 50, 255, 0.0) 50px);
+}
+
+
+.cool-round-button:hover {
+	color: rgba(183, 183, 255, 1.0);
+	background-image: radial-gradient(circle at center,
+									  rgba(0, 0, 0, 0) 0%,
+									  rgba(0, 0, 0, 0) 40px,
+									  rgba(90, 90, 255, 0.6) 45px,
+									  rgba(90, 90, 255, 0.0) 50px);
+}
+
+.cool-round-button.neutral {
+	color: rgba(153, 153, 153, 0.9);
+	background-color: rgba(0, 0, 0, 0.0);
+	background-image: radial-gradient(circle at center,
+									  rgba(0, 0, 0, 0.8) 0%,
+									  rgba(0, 0, 0, 0.5) 40px,
+									  rgba(70, 70, 70, 0.5) 45px,
+									  rgba(0, 0, 0, 0.0) 50px);
+}
+
+
+
+#home-menu .cool-round-button.events {
+	position: absolute;
+	top: 100px;
+	left: 300px;
+	right: 10px;
+}
+
+#home-menu .cool-round-button.sources {
+	position: absolute;
+	top: 411px;
+	left: 120px;
+	right: 10px;
+}
+
+#home-menu .cool-round-button.scrape {
+	position: absolute;
+	top: 411px;
+	left: 480px;
+	right: 10px;
+}
+
+#home-menu .cool-round-button.home {
+	position: absolute;
+	top: 303px;
+	left: 300px;
+	right: 10px;
+}
+
+#home-menu-canvas {
+	position: absolute;
+	top: 100px;
+	left: 120px;
+	width: 470px;
+	height: 420px;
+}
+
+.member {
+	color: #33FFFF;
+	background-color:rgba(17, 17, 85, 0.7);
+}
+
+.non-member {
+	background-color:rgba(60, 60, 60, 0.6);
+}
+
+.member .name a {
+	color: #EEFF11;
+}
+
+.member .location {
+	color: #FFAA33;
+}
+
+.member .date-range {
+	color: #FF9911;
+}
+
+.member.time {
+	color: #FFFF11;
+}
+
+.non-member.time {
+	color: #FF4411;
+}
+
+.plus {
+	height: 16px;
+	width: 16px;
+	background: none;
+}
+
+.minus {
+	height: 20px;
+	width: 20px;
+	background: none;
+}
+
+.remove-x {
+	height: 12px;
+	width: 12px;
+	opacity: 0.2;
+}
+
+.remove-x:hover {
+	opacity: 1.0;
+}
+
+.image-sample {
+	display: none;
+}
+
+.on-user-home {
+	display: none;
+	z-index: 50;
+}
+
+.random-image {
+	position: fixed;
+	right: 50%;
+	top: 120px;
+	opacity: 0.75;
+	border-radius: 15px;
+	padding: 0px;
+	height: 120px;
+	width: 200px;
+}
+
+.random-image-picture {
+	position: relative;
+}
+
+.random-image-caption {
+	position: relative;
+	align: left;
+	padding: 0px;
+	margin: 0px;
+}
+
+.big-notice {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	line-height: 100%;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 150px;
+	background: none;
+	color: rgba(180, 180, 180, 0.7);
+	z-index: 10000;
+}

@@ -1,0 +1,20 @@
+<div id='session-bar'>
+  <nav class='navigate'>
+	Logged-In:
+	<span class='username'> <%= current_user.name %> </span>
+	&nbsp|&nbsp<%= link_to 'Home', current_user %>
+	&nbsp|&nbsp<%= link_to 'Events', events_path, :id => 'session-bar-events' %>
+  </nav>
+  <div class='logout'>
+	  <%= link_to 'Logout', session_path(id: 0), method: :delete %>
+  </div>
+</div>
+
+<div id='footer-bar'>
+</div>
+
+<%= image_tag("3d_background_wallpaper_by_zedj-d4m7qg1.png", class: 'background-image-hide') %>
+<%= image_tag("3d-HD-Wallpapers.jpg", class: 'background-image-hide') %>
+<%= image_tag("dark-blue.jpg", class: 'background-image-hide') %>
+<%= image_tag("stock-footage-multiple-colored-d-light-streaks-animated-over-a-grid-p.jpg", class: 'background-image') %>
+<%= image_tag("pulse.jpg", class: 'background-image-blurred') %>

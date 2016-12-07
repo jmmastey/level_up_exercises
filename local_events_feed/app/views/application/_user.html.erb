@@ -1,0 +1,40 @@
+<section id='user-event-showings'>
+  <table>
+	<% current_user.showings.sorted.each do |showing| %>
+    <tr>
+	  <td>
+		<div class="add-to-cal">
+		  <%= link_to image_tag("calendar.png", :class => 'add-image tooltip', :title => 'Add Calendar'),
+		  { controller: 'showings', action: 'show', id: showing.id, :format => :ics },
+		  :id => "add_cal-#{showing.id}" %>
+		</div>
+	  </td>
+	  <td class="attributes">
+		<ul>
+		  <li>
+			<% local_time_view = ApplicationHelper::LocalTimeView.new(showing.time) %>
+			<span class="date"><%= local_time_view.pretty_date %></span>&nbsp
+			<span class="time"><%= local_time_view.pretty_time %></span>
+		  </li>
+		  <li>
+			<span class="name"><%= link_to showing.name.truncate(50), event_path(showing.event) %></span>
+		  </li>
+		  <li>
+			<span class="location"><%= showing.location.truncate(50) %></span>
+		  </li>
+		</ul>
+	  </td>
+	  <td>
+		<div class="remove">
+		  <%= link_to image_tag("remove.png", :class => 'remove-x'),
+		      { controller: 'showings', action: 'remove_from_user', id: showing.id },
+		      method: :post, :id => "remove-#{showing[:id]}-user-show" %>
+		</div>
+	  </td>
+	  <% if showing.image.present? %>
+	  <td class="image-sample" data-image="<%= showing.image %>" data-description="<%= showing.description.truncate(500) %>"></td>
+	  <% end %>
+    </tr>
+	<% end %>
+  </table>
+</section>

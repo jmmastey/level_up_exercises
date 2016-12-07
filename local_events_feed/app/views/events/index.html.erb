@@ -1,0 +1,10 @@
+<body>
+  <% if signed_in? %>
+    <%= render :partial => "session_bar.html.erb" %>
+	<%= render :partial => "user.html.erb" %>
+	<%= render :partial => "events.html.erb" %>
+	<div class='page-title'>All Events</div>
+  <% else %>
+    <h3>Please <%= link_to 'sign in', new_session_path %></h3>
+  <% end %>
+</body>

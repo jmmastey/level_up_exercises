@@ -1,0 +1,14 @@
+<nav id="home-menu">
+  <canvas id="home-menu-canvas"></canvas>
+  <div class="cool-round-button home neutral">Home</div>
+  <%= link_to 'Events', events_path, :class => 'cool-round-button events' %>
+  <%= link_to 'Sources', "http://www.theatreinchicago.com/", :class => 'cool-round-button sources', :target => '_blank' %>
+  <%= link_to 'Scrape', scrape_path, :method => 'post', :class => 'cool-round-button scrape' %>
+</nav>
+
+<script type="text/javascript">
+$( document ).ready( function() {
+  drawHomeBackground();
+  setUpScrapeHandler();
+});
+</script>

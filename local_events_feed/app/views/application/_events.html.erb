@@ -1,0 +1,40 @@
+<div id='all-events'>
+  <div class="table-container">
+	<table>
+	  <% Event.all.sorted.each do |event| %>
+	  <% member = current_user.has_showing_in?(event) %>
+	  <% member_class = member ? "member" : "non-member" %>
+	  <tr>
+		<td class="<%= member_class %>" align='left'>
+		  <ul>
+			<li>
+			  <span class='name'>
+				<%= link_to event.name.truncate(40), { action: 'show', id: event.id }, 
+					{ id: "#{event.name}-events" } %>
+			  </span>
+			</li>
+
+			<% pretty_date_range = ShowingsHelper.pretty_date_range(event.showings) %>
+			<% pretty_showing_count = ShowingsHelper.pretty_showing_count(event.showings) %>
+
+			<li><span class='location'><%= event.location.truncate(40) %></span></li>
+			<li><span class='date-range'><%= pretty_date_range %></span></li>
+			<li><span class='showing-count'><%= pretty_showing_count %></span></li>
+		  </ul>
+		</td>
+		<td class="<%= member_class %> image" %>
+		  <% if event.image.present? %>
+		  <img src=<%= event.image %> />
+		  <% end %>
+		</td>
+	  </tr>
+	  <% end %>
+	</table>
+  </div>
+  
+  <div class="nav">
+	<div class="cool-round-button events neutral">Events</div>
+	<%= link_to 'Home', current_user, :class => 'cool-round-button home' %>
+	<%= link_to 'Sources', "http://www.theatreinchicago.com/", :class => 'cool-round-button sources', :target => '_blank' %>
+  </div>
+</div>

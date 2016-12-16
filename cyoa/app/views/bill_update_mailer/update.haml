@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+
+  %body
+    %table{style: 'margin-left: 10%; border-collapse: collapse;'}
+      %thead
+        %td Bill
+        %td Status Updates
+      %tbody
+        -@bills.each_pair do |bill_id, updates|
+          -bill = Bill.find(bill_id)
+          %tr{style: 'border-bottom: 1px solid black; border-top: 1px solid black;'}
+            %td{style: 'width: 30%;'}
+              %p{style: 'font-weight: bold;'}="#{bill.type_and_num}"
+              =bill.short_title if bill.short_title
+              =bill.official_title unless bill.short_title
+
+            %td
+              -updates.each do |update|
+                .row
+                  %p=update

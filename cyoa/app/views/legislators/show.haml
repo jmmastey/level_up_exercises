@@ -1,0 +1,63 @@
+.row
+  .col.s1
+    %p &nbsp;
+  .col.s3
+    .card-panel
+      %h4=legislator_name
+      =image_tag "https://theunitedstates.io/images/congress/225x275/#{@legislator.bioguide_id}.jpg"
+      %p=full_party
+      %p=full_leadership_role
+      %p=verbose_summary
+      %p=link_to @legislator.website, @legislator.website, target: '_'
+      %p=age
+      %p="Term: #{Date.parse(@legislator.term_start).strftime('%B %-d, %Y')} - #{Date.parse(@legislator.term_end).strftime('%B %-d, %Y')}"
+    .card-panel
+      %h4 Read More
+      .row
+        .col.s12
+          %p=link_to "VoteSmart", votesmart_url, target: '_'
+          %p=link_to "BioGuide", bioguide_url, target: '_'
+
+      %h4 Social Media
+      .row
+        .col.s12
+          %p=link_to 'Youtube', "https://www.youtube.com/#{@legislator.youtube_id}", target: '_'
+          %p=link_to "Facebook", "http://www.facebook.com/#{@legislator.facebook_id}", target: '_'
+          %p=link_to "Twitter", "http://www.twitter.com/#{@legislator.twitter_id}", target: '_'
+
+      %h4 Contact
+      .row
+        .col.s12
+          %p="Phone: #{@legislator.phone}"
+          %p="Fax: #{@legislator.fax}"
+          %p="Email: #{@legislator.oc_email}"
+          %p=link_to "Contact form", @legislator.contact_form
+
+      .row
+        .col.s12
+          %p Address:
+          %p=@legislator.office
+
+  .col.s7
+    .card-panel
+      -if @legislator.bills.count == 0
+        %h4 No sponsored bills
+        %h5="Give the #{legislator_full_title} a call and figure out what's on his/her plate"
+      -else
+        %h4="Sponsored #{pluralize(@legislator.bills.count, 'bill')}"
+        %table.responsive-table.clickable.bill_summary#results
+          %thead
+            %tr
+              %td.col.s2 Last Update
+              %td.col.s10 Summary
+          %tbody
+            .row
+              -@legislator.bills.order(last_action_at: :desc).each do |bill|
+                %tr{'data-url' => "/bills/#{bill.bill_id}"}
+                  %td.col.s2=bill.last_action_at.strftime('%B %-d, %Y')
+                  %td.col.s10
+                    %h6.bill_title
+                      ="#{bill.type_and_num} - "
+                      =bill.short_title if bill.short_title
+                      =bill.official_title unless bill.short_title
+                    %p.summary=bill.summary_short

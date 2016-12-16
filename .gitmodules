@@ -1,0 +1,3 @@
+[submodule "cyoa/good_deeds"]
+	path = cyoa/good_deeds
+	url = git@github.com:ssapra/good_deeds.git

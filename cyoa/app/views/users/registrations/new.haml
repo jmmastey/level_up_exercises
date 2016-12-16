@@ -1,0 +1,37 @@
+.row
+  .col.s8.offset-s2
+    %h2 Sign up
+    =form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      =devise_error_messages!
+      .row
+        .col.s12
+          .input-field
+            =f.label :email
+            =f.email_field :email, autofocus: true
+
+      .row
+        .col.s12
+          .input-field
+            =f.label :password
+            =f.password_field :password, autocomplete: "off"
+
+      .row
+        .col.s12
+          .input-field
+            =f.label :password_confirmation
+            =f.password_field :password_confirmation, autocomplete: "off"
+
+      .row
+        .col.s12
+          -if devise_mapping.rememberable?
+            %p
+              =f.check_box :remember_me, id: 'remember_me'
+              %label{for: "remember_me"} Remember Me
+
+      .row
+        .col.s12
+          %button.blue.btn.waves-effect.waves-light{:name => "action", :type => "submit"} Sign up
+
+      .row
+        .col.s12
+          = render "users/shared/links"

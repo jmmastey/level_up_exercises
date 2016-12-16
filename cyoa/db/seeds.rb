@@ -1,0 +1,6 @@
+Legislator.destroy_all
+Bill.destroy_all
+
+include SunlightlabsApi
+get_legislators_from_api
+get_bills_from_api

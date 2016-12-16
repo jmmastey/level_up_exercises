@@ -1,0 +1,17 @@
+%h2 Menu
+
+- if menus.one?
+  .panel.panel-info
+    .panel-body
+      = render partial: "merchants/menu", locals: { menu: menus.first }
+- else
+  .panel-group#menus{ role: :tablist, aria: { multiselectable: "true" }}
+    - menus.each do |menu|
+      .panel.panel-info
+        .panel-heading{ id: menu_heading_id(menu), role: :tab }
+          %h4.panel-title
+            %a{ role: :button, href: "##{menu_collapse_id(menu)}", data: { toggle: :collapse, parent: "#menus" }, aria: { controls: menu_collapse_id(menu) }}= menu.name
+
+        .panel-collapse.collapse{ id: menu_collapse_id(menu), role: :tabpanel, aria: { labelledby: menu_heading_id(menu) }}
+          .panel-body
+            = render partial: "merchants/menu", locals: { menu: menu }

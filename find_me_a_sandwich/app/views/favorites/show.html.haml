@@ -1,0 +1,18 @@
+.page-header
+  %h1 Favorites
+
+- if user_signed_in?
+  - if @favorites.none?
+    %p Save some meals to favorites and they will show up here after.
+  - else
+    %table{ class: "table" }
+      %thead
+        %tr
+          %th{ colspan: "2" } Name
+      %tbody
+        - @favorites.each do |favorite|
+          %tr
+            %td= favorite.menu_item.name
+            %td= link_to("remove from favorites", controller: "favorites", action: "destroy", id: favorite.id)
+- else
+  %p Login or signup to start saving favorites!

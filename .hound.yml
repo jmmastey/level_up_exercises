@@ -1,9 +1,13 @@
 AllCops:
   Exclude:
+    - '**/*.rake'
+    - '**/config/initializers/*'
     - triangle_facts/*.rb
     - supportive/supportive.rb
     - '**/db/schema.rb'
-    
+    - '**/db/migrate/*'
+    - '**/script/cucumber'
+
 # C: Missing top-level module documentation comment.
 Style/Documentation:
   Enabled: false
@@ -61,3 +65,6 @@ Metrics/ParameterLists:
 Style/AsciiComments:
   Exclude:
     - scheduler/schedule.rb
+
+Style/DoubleNegation:
+  Enabled: false

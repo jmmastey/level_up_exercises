@@ -1,0 +1,13 @@
+.page-header
+  %h1 User Directory
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Location
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= link_to(user.full_name, user_path(user))
+        %td= format_user_location(user.location)

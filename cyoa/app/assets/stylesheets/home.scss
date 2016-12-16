@@ -1,0 +1,118 @@
+h1,h2,h3,h4,h5,h6,p,li,span,a,input, td{
+  font-weight: 300;
+}
+
+body.background {
+  background: url("washington.jpg") no-repeat center center fixed;
+  background-size: 100% 100%;
+  z-index: 1000;
+}
+
+.quote {
+  background-color: rgba(192,192,192,0.7);
+}
+
+.home-panel {
+  background-color: rgba(192,192,192,0.7);
+  margin-top: 35%;
+}
+
+body {
+  background-color: #f2f2f2;
+}
+
+.bill_summary tr, .legislator_summary tr, .actions tr {
+  line-height: 1.5em;
+}
+
+.query-filter {
+  padding: 0 1rem;
+  margin: 0 0.5em;
+}
+
+.bill_title {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.summary {
+  font-size: 12px;
+}
+
+#clickable tr:hover {
+  cursor: pointer;
+}
+
+#query {
+  padding-left: 2rem;
+  color: black;
+}
+
+.tags i {
+  font-size: 1rem;
+}
+
+.alert span, .notice span, .tags span{
+  vertical-align: super;
+}
+
+.collection-item > a {
+  vertical-align: text-bottom;
+}
+
+.input-field input[type="search"]{
+  height: 50px;
+  line-height: 50px;
+  display: table-cell;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.search .material-icons{
+  color: white !important;
+}
+.search.active .material-icons{
+  color: gray !important;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: #2196F3 !important;
+}
+
+#search i {
+  margin-left: 10px;
+}
+
+table {
+  background-color: white;
+}
+
+#results th{
+  padding: 15px 10px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+#results td{
+  padding: 1em 0.75em;
+}
+
+.card-panel a{
+  display: inline-flex;
+}
+
+.fb-share-button{
+  display: block !important;
+}
+
+input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]){
+  border-bottom: 1px solid #2196F3 !important;
+  box-shadow: 0 1px 0 0 #2196F3 !important;
+}

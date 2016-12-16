@@ -1,0 +1,29 @@
+.row
+  .col.s10.offset-s1
+    %h4 Bookmarks
+    -if @bills.empty?
+      %h4
+        No bookmarks yet! Fill out your zipcode/political interests at your
+        =link_to "Account", current_user
+        and then check out some
+        =link_to "bills", '/good_deed'
+    -else
+      %table.bordered.clickable.hoverable.responsive-table#results
+        %thead
+          .row
+            %td.col.s2 Last Action
+            %td.col.s3 Status
+            %td.col.s7 Summary
+        %tbody
+          .row
+            -@bills.each do |bill|
+              -@bill = bill
+              =content_tag_for(:tr, @bill, 'data-url' => bill_path(@bill)) do
+                %td.col.s2=bill.last_action_at.strftime('%b %-d, %Y')
+                %td.col.s3=bill_current_status
+                %td.col.s7
+                  =bill_title
+                  %p.summary=bill.summary_short
+                %td.remove=link_to icon('close'), bookmarks_path(bookmark: { bill_id: bill.bill_id }), method: :delete
+
+      = paginate @bills

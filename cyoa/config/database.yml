@@ -1,0 +1,26 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: good_deeds_development
+  pool: 5
+  username:
+  password:
+
+test: &test
+  adapter: postgresql
+  encoding: utf8
+  database: good_deeds_test
+  pool: 5
+  username:
+  password:
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: good_deeds_production
+  pool: 5
+  username:
+  password:
+
+cucumber:
+  <<: *test

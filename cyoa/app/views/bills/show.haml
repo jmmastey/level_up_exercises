@@ -1,0 +1,69 @@
+.row
+  .col.s10.offset-s1
+    .card-panel
+      =bill_title
+      %table.bill_summary
+        %tbody
+          .row
+            %tr
+              %td.col.s2 Title:
+              %td.col.s10=@bill.official_title
+            %tr
+              %td.col.s2 Status:
+              %td.col.s10=bill_current_status
+            %tr
+              %td.col.s2 Number of Co-Sponsors:
+              %td.col.s10=@bill.cosponsors_count
+            %tr
+              %td.col.s2 Introduced:
+              %td.col.s10=@bill.introduced_on.strftime('%B %-d, %Y')
+            -if @bill.legislator
+              %tr
+                %td.col.s2 Sponsor:
+                %td.col.s10
+                  %p= link_to legislator_name, @legislator
+                  %p.summary= verbose_summary
+                  %p.summary= full_party
+            %tr
+              %td.col.s2 Summary:
+              %td.col.s10= @bill.summary_short
+            -if @bill.last_version_pdf
+              %tr
+                %td.col.s2 PDF
+                %td.col.s10= link_to icon('insert_drive_file'), @bill.last_version_pdf, target: '_'
+
+.row
+  .col.s7.offset-s1
+    .card-panel
+      %h4 Actions
+      %table.actions
+        %tbody
+          -@bill_actions.order(created_at: :desc).each do |action|
+            =bill_action_text(action)
+          %td.bold.col.s3="#{@bill.introduced_on.strftime('%B %-d, %Y')}:"
+          %td.bold.col.s9="Introduced to the #{@bill.chamber}"
+
+  .col.s3
+    .card-panel
+      %h4 Other
+      .row
+        .col.s6
+          %p=link_to icon('note_add') << "Read more at GovTrack", @bill.url, target: '_'
+        - if @bill.legislator
+          .col.s6
+            %p=icon('call')
+            %p="Call #{legislator_name}"
+            %p=@bill.legislator.phone
+      .row
+        .col.s6
+          =bookmark_options
+        .col.s6
+          %p=link_to icon('refresh') << "Find another good deed", '/good_deed'
+
+      .row
+        .col.s12
+          %h6 Share
+          .fb-share-button{"data-href" => "#{request.base_url}/bills/bill_id", "data-layout" => "button"}
+          %a{href: "https://twitter.com/share", class: "twitter-share-button", 'data-url' => "#{request.base_url}/bills/#{@bill.bill_id}", 'data-size' => "large", 'data-count' => "none", 'data-hashtags' => "congress"} Tweet
+
+=javascript_include_tag "social_media.js"

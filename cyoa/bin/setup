@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+require 'pathname'
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
+
+Dir.chdir APP_ROOT do
+  unless ENV['SUNLIGHTLABS_APIKEY']
+    puts 'SUNLIGHTLABS_APIKEY could not be found!'
+    puts 'Please register at ' \
+         'https://sunlightfoundation.com/api/accounts/register/ and then ' \
+         'follow the instructions at https://github.com/ssapra/good_deeds/blob/master/README.md#sunlight-foundation-api'
+    exit
+  end
+
+  puts '== Installing dependencies =='
+  system 'gem install bundler --conservative'
+  system 'bundle check || bundle install'
+
+  puts '\n== Preparing database =='
+  system 'bin/rake db:migrate:reset'
+
+  puts '\n== Seeding Congressional Districts =='
+  system 'rake load:districts'
+
+  puts '\n== Seeding Legislators =='
+  system 'rake load:legislators'
+
+  puts '\n== Seeding Bills =='
+  system 'rake load:bills'
+
+  puts '\n== Removing old logs and tempfiles =='
+  system 'rm -f log/*'
+  system 'rm -rf tmp/cache'
+
+  puts '\n== Restarting application server =='
+  system 'touch tmp/restart.txt'
+end

@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title GoodDeeds
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    = csrf_meta_tags
+
+  -if request.original_url == root_url
+    %body.background
+  -else
+    %body
+
+  #fb-root
+  .main
+    = render 'layouts/header'
+    = flash_panel(notice, alert)
+    .main-content= yield

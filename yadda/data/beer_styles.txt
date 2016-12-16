@@ -1,0 +1,187 @@
+Altbier
+Alternative Grain Beer
+Alternative Sugar Beer
+American Amber Ale
+American Barleywine
+American Brown Ale
+American IPA
+American Lager
+American Light Lager
+American Pale Ale
+American Porter
+American Stout
+American Strong Ale
+American Wheat Beer
+American Wheat or Rye
+Applewine
+Australian Sparkling Ale
+Autumn Seasonal Beer
+Baltic Porter
+Belgian Blond Ale
+Belgian Dark Strong Ale
+Belgian Dubbel
+Belgian Golden Strong Ale
+Belgian Pale Ale
+Belgian Specialty Ale
+Belgian Tripel
+Berliner Weisse
+Berry Mead
+Best Bitter
+Bière de Garde
+Blonde Ale
+Bohemian Pilsner
+Braggot
+Brett Beer
+Brown Porter
+California Common Beer
+Christmas/Winter Specialty Spiced Beer
+Cider with Herbs/Spices
+Cider with Other Fruit
+Classic American Pilsner
+Classic Rauchbier
+Classic Style Smoked Beer
+Clone Beer
+Common Cider
+Common Perry
+Cream Ale
+Cyser
+Czech Amber Lager
+Czech Dark Lager
+Czech Pale Lager
+Czech Premium Pale Lager
+Dark American Lager
+Dark Mild
+Doppelbock
+Dortmunder Export
+Double IPA
+Dry Mead
+Dry Stout
+Dunkels Weissbier
+Dunkelweizen
+Dunkles Bock
+Düsseldorf Altbier
+Eisbock
+English Barleywine
+English Brown Ale
+English Cider
+English Golden Ale
+English IPA
+English Porter
+English Strong Ale
+Experimental Beer
+Experimental Mead
+Extra Special/Strong Bitter
+Festbier
+Flanders Brown Ale/Oud Bruin
+Flanders Red Ale
+Foreign Extra Stout
+French Cider
+Fruit Beer
+Fruit Cider
+Fruit Lambic
+Fruit and Spice Beer
+Fruit and Spice Mead
+German Exportbier
+German Leichtbier
+German Pils
+German Pilsner
+Gueuze
+Helles Bock
+Historical Beer: Gose
+Historical Beer: Kentucky Common
+Historical Beer: Lichtenhainer
+Historical Beer: London Brown Ale
+Historical Beer: Piwo Grodziskie
+Historical Beer: Pre-Prohibition Lager
+Historical Beer: Pre-Prohibition Porter
+Historical Beer: Roggenbier
+Historical Beer: Sahti
+Historical Mead
+Ice Cider
+Imperial IPA
+International Amber Lager
+International Dark Lager
+International Pale Lager
+Irish Extra Stout
+Irish Red Ale
+Irish Stout
+Kellerbier: Franconian Kellerbier
+Kellerbier: Munich Kellerbier
+Kölsch
+Lambic
+Lite American Lager
+Maibock/Helles Bock
+Melomel
+Metheglin
+Mild
+Mixed-Fermentation Sour Beer
+Mixed-Style Beer
+Munich Dunkel
+Munich Helles
+Märzen
+New England Cider
+New World Cider
+New World Perry
+Northern English Brown Ale
+Northern German Altbier
+Oatmeal Stout
+Oktoberfest/Märzen
+Old Ale
+Open Category Mead
+Ordinary Bitter
+Other Fruit Melomel
+Other Smoked Beer
+Other Specialty Cider/Perry
+Oud Bruin
+Premium American Lager
+Pyment
+Rauchbier
+Robust Porter
+Roggenbier
+Russian Imperial Stout
+Saison
+Schwarzbier
+Scottch Export
+Scottch Export 80/-
+Scottish Heavy
+Scottish Heavy 70/-
+Scottish Light
+Scottish Light 60/-
+Semi-Sweet Mead
+Soured Fruit Beer
+Southern English Brown Ale
+Special/Best/Premium Bitter
+Specialty Beer
+Specialty Cider/Perry
+Specialty Fruit Beer
+Specialty IPA: Belgian IPA
+Specialty IPA: Black IPA
+Specialty IPA: Brown IPA
+Specialty IPA: Red IPA
+Specialty IPA: Rye IPA
+Specialty IPA: White IPA
+Specialty Smoked Beer
+Specialty Wood-Aged Beer
+Spice, Herb or Vegetable Beer
+Spice, Herb or Vegetable Mead
+Standard American Lager
+Standard/Ordinary Bitter
+Stone Fruit Mead
+Straight (Unblended) Lambic
+Strong Bitter
+Strong Scotch Ale
+Sweet Mead
+Sweet Stout
+Traditional Bock
+Traditional Perry
+Trappist Single
+Tropical Stout
+Vienna Lager
+Wee Heavy
+Weissbier
+Weizen/Weissbier
+Weizenbock
+Wheatwine
+Winter Seasonal Beer
+Witbier
+Wood-Aged Beer

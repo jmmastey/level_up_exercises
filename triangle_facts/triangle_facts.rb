@@ -1,58 +1,63 @@
 # Killer facts about triangles AWW YEAH
 class Triangle
-	attr_accessor :side1,:side2,:side3
+  attr_reader :sides
 
-	def initialize(side1,side2,side3)
-		@side1,@side2,@side3 = side1,side2,side3
-	end
+  def initialize(*sides)
+    @sides = sides[0, 3]
+  end
 
-	def equilateral()
-		return side1 == side2 && side2 == side3
-	end
+  def recite_facts
+    puts side_facts
+    puts angle_facts + "\n\n"
+  end
 
-	def isosceles()
-		return [side1,side2,side3].uniq.length == 2
-	end
+  private
 
-	def scalene()
-		unless ! (equilateral || isosceles)
-	    false
-	  else
-	    true
-	  end
-	end
+  def type
+    [:equilateral, :isosceles, :scalene].at(sides.uniq.size - 1)
+  end
 
-	def recite_facts
-		puts 'This triangle is equilateral!' if equilateral
-		puts 'This triangle is isosceles! Also, that word is hard to type.' if isosceles 
-		puts 'This triangle is scalene and mathematically boring.' if scalene 
+  def side_facts
+    case type
+    when :equilateral
+      'This triangle is equilateral!'
+    when :isosceles
+      'This triangle is isosceles! Also, that word is hard to type.'
+    when :scalene
+      'This triangle is scalene and mathematically boring.'
+    end
+  end
 
-		angles = self.calculate_angles(side1,side2,side3)
-		puts 'The angles of this triangle are ' + angles.join(',')
+  def angle_facts
+    ["The angles of this triangle are #{angles.join(',')}",
+     ('This triangle is also a right triangle!' if angles.include?(90)),
+    ].compact.join("\n")
+  end
 
-		puts 'This triangle is also a right triangle!' if angles.include? 90
-		puts ''
-	end
+  def angles
+    permutations = (0..2).map { |i| sides.rotate(i) }
+    permutations.map { |perm| calculate_angle(*perm) }
+  end
 
-	def calculate_angles(a,b,c)
-		angleA = radians_to_degrees(Math.acos((b**2 + c**2 - a**2) / (2.0 * b * c)))
-		angleB = radians_to_degrees(Math.acos((a**2 + c**2 - b**2) / (2.0 * a * c)))
-		angleC = radians_to_degrees(Math.acos((a**2 + b**2 - c**2) / (2.0 * a * b)))
+  # Uses the law of cosines to calculate angle opposite of 'side'
+  # given three side lengths
+  def calculate_angle(side, first_adj_side, second_adj_side)
+    rads = Math.acos((first_adj_side**2 + second_adj_side**2 - side**2) /
+                     (2.0 * first_adj_side * second_adj_side))
+    radians_to_degrees(rads)
+  end
 
-		return [angleA, angleB, angleC]
-	end
-
-	def radians_to_degrees(rads)
-		return (rads * 180 / Math::PI).round
-	end
+  def radians_to_degrees(rads)
+    (rads * 180 / Math::PI).round
+  end
 end
 
-
 triangles = [
-	[5,5,5],
-	[5,12,13],
+  [5, 5, 5],             # equilateral triangle
+  [5, 12, 13],           # scalene triangle
+  [2, 2, Math.sqrt(2) * 2] # isosceles right triangle
 ]
-triangles.each { |sides|
-	tri = Triangle.new(*sides)
-	tri.recite_facts
-}
+triangles.each do |sides|
+  tri = Triangle.new(*sides)
+  tri.recite_facts
+end

@@ -1,0 +1,17 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    faker (1.4.3)
+      i18n (~> 0.5)
+    i18n (0.7.0)
+    pg (0.18.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  faker
+  pg
+
+BUNDLED WITH
+   1.10.6

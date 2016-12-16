@@ -1,0 +1,61 @@
+yadda=# explain select * from top_beers where brewery_id = 2;
+                                  QUERY PLAN
+-------------------------------------------------------------------------------
+ Sort  (cost=53832.31..53837.04 rows=1893 width=20)
+   Sort Key: ratings.overall
+   ->  Hash Join  (cost=42375.34..53729.27 rows=1893 width=20)
+         Hash Cond: (ratings.beer_id = beers.id)
+         ->  Seq Scan on ratings  (cost=0.00..8585.00 rows=200000 width=10)
+         ->  Hash  (cost=42257.00..42257.00 rows=9467 width=18)
+               ->  Seq Scan on beers  (cost=0.00..42257.00 rows=9467 width=18)
+                     Filter: (brewery_id = 2)
+(8 rows)
+
+This query performs two sequential scans, the first on beers and the second on
+ratings in order to perform the hash join. The sort based on
+ratings.overall has large cost. This query could benefit from an index on
+the ratings.beer_id foreign key to help with scanning. I'm unsure if
+an index on the overall column for the ratings table would help with sorting
+since it's of numeric type, but it's worth investigating.
+
+yadda=# explain select * from recent_score_for_beer where beer_id = 123;
+                                             QUERY PLAN
+----------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=0.00..11085.02 rows=1 width=10)
+   Group Key: ratings.beer_id
+   ->  Seq Scan on ratings  (cost=0.00..11085.00 rows=1 width=10)
+         Filter: ((beer_id = 123) AND (created_on > (('now'::cstring)::date - '6 mons'::interval)))
+(4 rows)
+
+This query performs a sequential scan on ratings to match beer_id and filter the
+created_on for recent dates. Adding the index on ratings.beer_id and
+ratings.created_on will help filter the ratings records and reduce the time
+spent in the scan.
+
+yadda=# explain select * from recommended_beers where beer_style = 'Imperial IPA';
+                                              QUERY PLAN
+------------------------------------------------------------------------------------------------------
+ Subquery Scan on recommended_beers  (cost=53068.67..53082.04 rows=1070 width=59)
+   ->  Sort  (cost=53068.67..53071.34 rows=1070 width=33)
+         Sort Key: (random())
+         ->  HashAggregate  (cost=52990.76..53014.83 rows=1070 width=33)
+               Group Key: beers.id, beers.name, beer_styles.name
+               Filter: (avg(ratings.overall) > 4.0)
+               ->  Hash Join  (cost=43631.68..52977.38 rows=1070 width=33)
+                     Hash Cond: (ratings.beer_id = beers.id)
+                     ->  Seq Scan on ratings  (cost=0.00..8585.00 rows=200000 width=10)
+                     ->  Hash  (cost=43564.83..43564.83 rows=5348 width=27)
+                           ->  Hash Join  (cost=4.35..43564.83 rows=5348 width=27)
+                                 Hash Cond: (beers.beer_style_id = beer_styles.id)
+                                 ->  Seq Scan on beers  (cost=0.00..39757.00 rows=1000000 width=14)
+                                 ->  Hash  (cost=4.34..4.34 rows=1 width=21)
+                                       ->  Seq Scan on beer_styles  (cost=0.00..4.34 rows=1 width=21)
+                                             Filter: ((name)::text = 'Imperial IPA'::text)
+(16 rows)
+
+This query performs 3 sequential scans. This can be immediately improved
+by adding indices to the foreign keys ratings.beer_id and beers.beer_style_id
+as well as beer_styles.name since that is used for filtering. After the 2 hash
+joins between ratings and beers as well as beer_styles and beer, there is a
+filter to keep only beers with average overall rating above 4.0. Lastly, the
+results are sorted randomly.

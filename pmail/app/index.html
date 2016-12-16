@@ -1,0 +1,235 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>PMail</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="bower_components/modernizr/modernizr.js"></script>
+  </head>
+
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img src="images/enova.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+          <form class="navbar-form navbar-left" role="search">
+            <div class="input-group">
+              <input type="text" class="form-control search-bar" aria-describedby="search">
+              <button type="button" class="btn btn-default blue-button"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+
+          </form>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown apps">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-th"></span></a>
+              <ul class="dropdown-menu app-menu">
+              </ul>
+            </li>
+            <li class="dropdown notifications">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell"></span></a>
+              <ul class="dropdown-menu notification-menu">
+                <h4>Google notifications</h4>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>ssapra@enova.com</span> <span class="caret"></span></a>
+              <ul class="dropdown-menu account-menu">
+                <div class="account-management"
+                  <span>This account is managed by enova.com.</span>
+                  <span><a href="#">Learn more</a><span>
+                </div>
+                <div class="account-summary">
+                  <span class="black">Shaan Sapra</span>
+                  <span class="email black">ssapra@enova.com</span>
+                  <span><a href="#">Privacy</a></span>
+                  <button type="button" class="btn btn-default blue-button">My Account</button>
+                </div>
+
+                <div class="account-settings">
+                  <button type="button" class="btn btn-default">Add Account</button>
+                  <button type="button" class="btn btn-default">Logout</button>
+                </div>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+      <div class="container top-container">
+        <div class="col-md-2">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h4>Mail</h4><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Mail</a></li>
+              <li><a href="#">Contacts</a></li>
+              <li><a href="#">Tasks</a></li>
+            </ul>
+          </li>
+        </div>
+        <div class="col-md-10">
+          <div class="header">
+            <ul class="nav nav-pills pull-left">
+               <li class="dropdown">
+                 <input type="checkbox" class="selection">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                 <ul class="dropdown-menu">
+                   <li><a href="#">All</a></li>
+                   <li><a href="#">None</a></li>
+                   <li><a href="#">Read</a></li>
+                   <li><a href="#">Unread</a></li>
+                   <li><a href="#">Starred</a></li>
+                   <li><a href="#">Unstarred</a></li>
+                 </ul>
+               </li>
+              <li><a href="#"><span class="glyphicon glyphicon-repeat"></span></a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Mark as read</a></li>
+                  <li><a href="#">Mark as unread</a></li>
+                  <li><a href="#">Mark as not important</a></li>
+                  <li><a href="#">Add to tasks</a></li>
+                  <li><a href="#">Add star</a></li>
+                  <li><a href="#">Remove star</a></li>
+                  <li><a href="#">Filter messages like these</a></li>
+                  <li><a href="#">Mute</a></li>
+                </ul>
+              </li>
+            </ul>
+
+            <ul class="nav nav-pills pull-right">
+              <li><h5>1-5 of 5</h5></li>
+              <li class="chevrons"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+              <li class="chevrons"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header">Display Density</li>
+                  <li><a href="#">Comfortable</a></li>
+                  <li><a href="#">Cozy</a></li>
+                  <li><a href="#">Compact</a></li>
+                  <li><a href="#">Add to tasks</a></li>
+                  <li><a href="#">Add star</a></li>
+                  <li><a href="#">Remove star</a></li>
+                  <li><a href="#">Filter messages like these</a></li>
+                  <li><a href="#">Mute</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container bottom-container">
+        <div class="col-md-2">
+          <button type="button" class="btn btn-default">COMPOSE</button>
+          <div class="list-group">
+            <button type="button" class="list-group-item">Inbox</button>
+            <button type="button" class="list-group-item">Starred</button>
+            <button type="button" class="list-group-item">Sent Mail</button>
+            <button type="button" class="list-group-item">Drafts</button>
+            <button type="button" class="list-group-item">More</button>
+          </div>
+        </div>
+        <div class="col-md-10">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><input type="checkbox" aria-label="..."></td>
+                <td>Stephan, Ramona</td>
+                <td>
+                  <span class="title">Enova Mentor Program Launch</span>
+                  <span class="rest">- We are excited to announce the next round of Enova's Mentor Program! Our vision for the program</span>
+                </td>
+                <td>3:35pm</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" aria-label="..."></td>
+                <td>John J. Higginson</td>
+                <td>
+                  <span class="title">Security Enhancements at Enova</span>
+                  <span class="rest">- All- Cyber Security is in the news a lot lately — from stories of the hacking of government records</span>
+                </td>
+                <td>11:34am</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" aria-label="..."></td>
+                <td>Arntz, Kaitlin</td>
+                <td>
+                  <span class="title">Volunteer Opportunity: Coach a Scholar, Make a Difference!</span>
+                  <span class="rest">- Coach a Scholar. Give your knowledge. Share your network. Get the best few hours</span>
+                </td>
+                <td>Aug 3</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="storage col-md-4">
+            <span>0% full</span>
+            <span>Using 0.01 GB of your 30 GB</span>
+          </div>
+          <div class="policy col-md-4">
+            <a href="#"><span>Progam Policies</span></a>
+            <div>
+              Powered by
+              <a href="http://google.com">
+                <div class="google-logo">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="activity col-md-4">
+            <span>Last account activity: 50 minutes ago</span>
+            <span>Details</span>
+          </div>
+        </div>
+      </footer>
+
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+
+    <!-- build:js(.) scripts/plugins.js -->
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>

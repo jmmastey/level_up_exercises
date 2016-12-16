@@ -1,0 +1,134 @@
+@import "partials/global";
+
+.app-menu {
+  height: 400px !important;
+  width: 300px;
+}
+
+.account-menu {
+  width: 250px;
+  margin-right: 25px;
+  a {
+    color: $blue;
+  }
+}
+
+.notification-menu {
+  background-color: $simplegray;
+  width: 400px;
+  height: 400px !important;
+
+  h4 {
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+.account-management {
+  background: $paleyellow;
+  font-size: 11px;
+  padding: 10px 20px;
+  white-space: normal;
+}
+
+.account-settings {
+  background: $normalgray;
+  border-top: 1px solid #ccc;
+  border-color: rgba(0,0,0,.2);
+  padding: 10px 20px;
+  width: 100%;
+  display: table;
+  button:first-child {
+    margin-right: 14%;
+  }
+}
+
+.notifications, .apps {
+  width: 50px;
+}
+
+.account-summary {
+  padding: 10px 20px;
+  button {
+    border-radius: 2px;
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+.account-management span, .account-summary span {
+  display: block;
+}
+
+.navbar-brand img {
+  margin-top: -21px;
+  margin-left: 21px;
+}
+
+.navbar-default {
+  background-color: black;
+  border: none;
+}
+
+.navbar-header {
+  width: 250px;
+}
+
+.navbar-form {
+  margin-top: 10px;
+  width: 50%;
+}
+
+.navbar {
+  a {
+    width: 70%;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  li {
+    height: 50px;
+  }
+
+  .dropdown a {
+    width: 175px;
+  }
+}
+
+.input-group{
+  display: flex !important;
+}
+
+.search-bar {
+  border-radius: 0;
+  width: 100% !important;
+  height: 30px;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.nav > li > a:focus{
+  background-color: inherit;
+  background-image: none;
+  outline: none;
+  border: none;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.nav .open > a{
+  background-color: inherit;
+  &:hover, &:focus{
+    background-color: inherit;
+  }
+}
+
+.navbar-right {
+  margin-top: 10px;
+}
+
+.navbar-right > li > a {
+  color: $white !important;
+}

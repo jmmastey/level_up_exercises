@@ -1,3 +1,11 @@
+## Setup
+
+```
+npm install
+bower install
+grunt serve
+```
+
 ## PeteMail
 
 Hot off his last two victories, Peteshow and Petelab, our favorite protagonist is looking for more industries to revolutionize. Frustrated with the existing level of vim keybinding support in his mail client, it's time to introduce Pmail. Unfortunately, Pete's dotfiles are acting up again, so you're going to need to write the UI while he fiddles with them.
@@ -10,5 +18,5 @@ Functionality:
 * You don't need a backend for this system, a straightforward HTML mockup will do the trick. Pete's messing with Ember and who knows when that's going to be done, so all your backend would get thrown away anyway.
 * A basic inbox layout, with links to folders etc in the sidebar. Don't worry about making them functional yet, but give them dapper looking hover states. Business users love that shit.
 * Add a dropdown menu for the user's profile that opens on hover and allows them to Log out, view their settings, etc.
-* Your content, structure and behavior should be properly separated. 
+* Your content, structure and behavior should be properly separated.
 * If you can figure it out, add keyboard commands to navigate up and down selecting the "current" email row.

@@ -1,0 +1,27 @@
+@import "partials/global";
+
+tr.highlight {
+  color: $white;
+  background-color: #555555;
+}
+
+td {
+  border-top: none !important;
+  border-bottom: 1px solid $lightgray !important;
+}
+
+.rest {
+  color: $gray;
+}
+
+table tr td:nth-child(2) {
+  width: 15%;
+}
+
+table tr td {
+  padding: 13px 8px !important;
+}
+
+table tr td:last-child {
+  text-align: right;
+}

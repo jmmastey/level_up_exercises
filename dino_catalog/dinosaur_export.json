@@ -1,0 +1,175 @@
+[
+  {
+    "name": "Albertosaurus",
+    "period": "Late Cretaceous",
+    "period subdivision": null,
+    "continent": "North America",
+    "diet": "Carnivore",
+    "diet subtype": null,
+    "weight": 2000,
+    "walking": "Biped",
+    "description": "Like a T-Rex but smaller."
+  },
+  {
+    "name": "Albertonykus",
+    "period": "Early Cretaceous",
+    "period subdivision": null,
+    "continent": "North America",
+    "diet": "Carnivore",
+    "diet subtype": "Insectivore",
+    "weight": null,
+    "walking": "Biped",
+    "description": "Earliest known Alvarezsaurid."
+  },
+  {
+    "name": "Baryonyx",
+    "period": "Early Cretaceous",
+    "period subdivision": null,
+    "continent": "Europe",
+    "diet": "Carnivore",
+    "diet subtype": "Piscivore",
+    "weight": 6000,
+    "walking": "Biped",
+    "description": "One of the only known dinosaurs with a fish-only diet."
+  },
+  {
+    "name": "Deinonychus",
+    "period": "Early Cretaceous",
+    "period subdivision": null,
+    "continent": "North America",
+    "diet": "Carnivore",
+    "diet subtype": null,
+    "weight": 150,
+    "walking": "Biped",
+    "description": null
+  },
+  {
+    "name": "Diplocaulus",
+    "period": "Late Permian",
+    "period subdivision": null,
+    "continent": "North America",
+    "diet": "Carnivore",
+    "diet subtype": null,
+    "weight": null,
+    "walking": "Quadruped",
+    "description": "They actually had fins on the side of their body."
+  },
+  {
+    "name": "Megalosaurus",
+    "period": "Jurassic",
+    "period subdivision": null,
+    "continent": "Europe",
+    "diet": "Carnivore",
+    "diet subtype": null,
+    "weight": 2200,
+    "walking": "Biped",
+    "description": "Originally thought to be a Quadruped. First dinosaur to be named."
+  },
+  {
+    "name": "Giganotosaurus",
+    "period": "Late Cretaceous",
+    "period subdivision": null,
+    "continent": "South America",
+    "diet": "Carnivore",
+    "diet subtype": null,
+    "weight": 30420,
+    "walking": "Biped",
+    "description": "Largest hunter and also the coolest ever."
+  },
+  {
+    "name": "Quetzalcoatlus",
+    "period": "Late Cretaceous",
+    "period subdivision": null,
+    "continent": "North America",
+    "diet": "Carnivore",
+    "diet subtype": null,
+    "weight": 440,
+    "walking": "Quadruped",
+    "description": "Largest known flying animal of all time."
+  },
+  {
+    "name": "Yangchuanosaurus",
+    "period": "Late Jurassic",
+    "period subdivision": "Oxfordian",
+    "continent": "Asia",
+    "diet": "Carnivore",
+    "diet subtype": null,
+    "weight": 7200,
+    "walking": "Biped",
+    "description": null
+  },
+  {
+    "name": "Dracopelta",
+    "period": "Early Cretaceous or Late Jurassic",
+    "period subdivision": null,
+    "continent": "South America",
+    "diet": "Herbivore",
+    "diet subtype": null,
+    "weight": null,
+    "walking": "Quadruped",
+    "description": "One of the most primitive known Ankylosauria."
+  },
+  {
+    "name": "Abrictosaurus",
+    "period": "Jurassic",
+    "period subdivision": null,
+    "continent": "Africa",
+    "diet": null,
+    "weight": 100,
+    "walking": "Biped"
+  },
+  {
+    "name": "Afrovenator",
+    "period": "Jurassic",
+    "period subdivision": null,
+    "continent": "Africa",
+    "diet": "Carnivore",
+    "weight": null,
+    "walking": "Biped"
+  },
+  {
+    "name": "Carcharodontosaurus",
+    "period": "Early Cretaceous",
+    "period subdivision": "Albian",
+    "continent": "Africa",
+    "diet": "Carnivore",
+    "weight": 3000,
+    "walking": "Biped"
+  },
+  {
+    "name": "Giraffatitan",
+    "period": "Jurassic",
+    "period subdivision": null,
+    "continent": "Africa",
+    "diet": null,
+    "weight": 6600,
+    "walking": "Quadruped"
+  },
+  {
+    "name": "Paralititan",
+    "period": "Cretaceous",
+    "period subdivision": null,
+    "continent": "Africa",
+    "diet": null,
+    "weight": 120000,
+    "walking": "Quadruped"
+  },
+  {
+    "name": "Suchomimus",
+    "period": "Cretaceous",
+    "period subdivision": null,
+    "continent": "Africa",
+    "diet": "Carnivore",
+    "weight": 10400,
+    "walking": "Biped"
+  },
+  {
+    "name": "Melanorosaurus",
+    "period": "Triassic",
+    "period subdivision": null,
+    "continent": "Africa",
+    "diet": null,
+    "weight": 2400,
+    "walking": "Quadruped"
+  }
+]

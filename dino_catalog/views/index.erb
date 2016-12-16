@@ -1,0 +1,43 @@
+<aside class="search-menu">
+  <form id="name-search" action="/" method="get">
+    <input type="text" name="name" placeholder="Name" required="true">
+    <input type="submit" value="Search">
+  </form>
+
+  <form id="filter-search" class="remove-empty-values" action="/" method="get">
+    <% @filters.each do |attribute, values| %>
+    <div class="filter">
+      <label for="<%= attribute.to_s %>">
+        <%= attribute %>:
+      </label>
+      <select class="filter-dropdown" name="<%= attribute.to_s %>">
+        <option value="" selected />
+        <% values.each do |value| %>
+        <option value="<%= value %>"><%= value %></option>
+        <% end %>
+      </select>
+    </div>
+    <% end %>
+    <div class="filter">
+      <label for="weight">weight: </label>
+      <span>
+        <input type="number" name="min" placeholder="Min"> -
+        <input type="number" name="max" placeholder="Max">
+      </span>
+    </div>
+    <div class="filter">
+      <input type="submit" value="Filter">
+    </div>
+  </form>
+
+  <a href="/download">Download JSON</a>
+</aside>
+
+<section class="info-container">
+  <h2>Search Results <%= "(#{@dino_list.count})" %></h2>
+  <% @dino_list.each do |dino| %>
+    <div class='dino-info'>
+      <p><%= dino.to_s.gsub("\n", '<br>').gsub(/name:/i, "") %></p>
+    </div>
+  <% end %>
+</section>

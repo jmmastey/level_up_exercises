@@ -4,11 +4,11 @@ class Bomb
   attr_accessor :timer, :wires
   attr_reader :error, :failed_deactivations, :max_failed_deactivations
 
-  def initialize(activation_code, deactivation_code, max_failed_deactivations = 3)
+  def initialize(activation_code, deactivation_code, max_failed_tries = 3)
     @state = :inactive
     @activation_code = activation_code.to_s
     @deactivation_code = deactivation_code.to_s
-    @max_failed_deactivations = max_failed_deactivations
+    @max_failed_deactivations = max_failed_tries
     @wires = WireBundle.new(0, 0)
   end
 

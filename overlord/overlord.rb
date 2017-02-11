@@ -2,13 +2,20 @@
 
 require 'sinatra'
 
+$LOAD_PATH << 'lib'
+require 'bomb'
+
 enable :sessions
 
 get '/' do
-  "Time to build an app around here. Start time: " + start_time
+  code = params[:code]
+  response = bomb.enter_code(code) if code
+
+  p response # for logging params
+
+  erb :index, locals: { bomb: bomb }
 end
 
-# we can shove stuff into the session cookie YAY!
-def start_time
-  session[:start_time] ||= (Time.now).to_s
+def bomb
+  session[:bomb] ||= Bomb.new("1234", "0000")
 end

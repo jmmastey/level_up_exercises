@@ -1,0 +1,7 @@
+<h1><%= @error %></h1>
+
+	<form action="/activate" method="POST">
+		The bomb is initialized with activation and deactivation codes, but is not active. Activate it with the correct code:<br/>
+		<input id='bomb-activation-code' name='actcode'>
+		<input type="submit" id="activate" value="Activate">
+	</form>

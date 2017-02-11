@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>
+Welcome to your Bomb's web page!
+</title>
+</head>
+<body>
+<b>Instructions:</b><br>
+1. Enter activation code to activate bomb(You will see image that bomb is activated if you enter correct code)<br>
+2. If you enter activation code incorrectly 3 times, bomb will detonate!<br>
+3. Enter deactivation code to deactivate active bomb(You will see that bomb is deactivated)<br>
+<div id='bomb-state-div' data-state="hi" data-deactivations=0 data-activation-cd=<%=bomb.activation_code%> data-deactivation-cd=<%=bomb.deactivation_code%>>
+Bomb State is <span id='bomb-state'><%=bomb.state.to_s%></span>
+</div>
+<input type="text" maxlength=4 name="activation_code" id="activation_code" >
+<input type="text" maxlength=4 name="deactivation_code" id="deactivation_code" >
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="javascripts/application.js"></script>
+<div id='bomb_activation_code' data-activation=<%=bomb.activation_code%>></div>
+<input type="submit" id="submit_code" value="Activate" onclick="callBombCode()">
+<script type="text/javascript">
+  function callBombCode(){
+    var bomb_code = $('#activation_code').val();
+}
+</script>
+</body>
+</html>

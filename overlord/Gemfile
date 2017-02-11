@@ -5,4 +5,10 @@ gem "sinatra"
 group :test do
   gem "rspec"
   gem "simplecov", require: false
+  gem 'cucumber', '~> 2.1'
+  gem 'cucumber-sinatra'
+  gem 'capybara', '~> 2.5'
+  gem 'haml', '~> 4.0', '>= 4.0.7'
+  gem 'selenium-webdriver', '~> 2.48', '>= 2.48.1'
+  gem 'oj'
 end

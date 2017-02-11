@@ -2,3 +2,9 @@
 **/coverage
 **/*.swp
 .DS_Store
+
+*.cache
+
+*.pid
+
+*.log

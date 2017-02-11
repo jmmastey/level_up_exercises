@@ -1,0 +1,52 @@
+<html>
+<head>
+<style type='text/css'>
+#main_content {
+	width: 100%;
+	text-align: center;
+}
+
+#bomb {
+	width: 300px;
+	height: 200px;
+	background-color: #333;
+	color: #ffffff;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) 
+}
+
+#bomb .title {
+	margin-top: 20px;
+font-size: 36px;
+}
+
+#bomb .code {
+font-size: 18px;
+margin-top: 40px;
+}
+
+#exploded {
+	width: 300px;
+	height: 200px;
+	background-color: #f00;
+	color: #000;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) 
+}
+
+#exploded p {
+	margin-top: 25%;
+	font-size: 24px;
+}
+
+</style>
+</head>
+<body>
+	<div id='main_content'><%= yield %></div></div>
+</body>
+</html>

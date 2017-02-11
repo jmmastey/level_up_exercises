@@ -1,0 +1,22 @@
+%h1= "Overlord"
+%br
+%span.boot_elem Activation Code:
+%input#activation-code.boot_elem{:type => "text", :value => "1234"}
+%br
+%span.boot_elem Deactivation Code:
+%input#deactivation-code.boot_elem{:type => "text", :value => "0000"}
+%br
+%button#boot-bomb.boot_elem Boot
+%br
+%div#error
+%br
+%span.active_elem Code:
+%input#code.active_elem{:type => "text"}
+%span.active_elem Time:
+%input#time.active_elem{:type => "text"}
+%button#activate-bomb.active_elem Activate
+%button#deactivate-bomb.active_elem Deactivate
+%br
+%span#state :disarmed
+%br
+%img#alarm{:src => "img/alarm.gif"}/

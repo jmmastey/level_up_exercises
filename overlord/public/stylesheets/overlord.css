@@ -1,0 +1,115 @@
+/*
+  Black: #000000;
+  Neon Green: #0FFF10;
+  Red: #FF0000;
+  White: #FFFFFF;
+*/
+
+body {
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: 'Share Tech Mono';
+}
+
+/*general*/
+.index {
+  background-image: url("../images/fallout-1.jpg");
+}
+
+.bomb {
+  background-image: url("../images/theatom.jpg");
+}
+
+.explosion {
+  background-image: url("../images/megatonnuked.jpg");
+}
+
+.standby {
+  background-image: url("../images/standby.jpg");
+}
+
+/*container*/
+.indexcontainer {
+  float: right;
+  text-align: right;
+}
+
+.container {
+  margin-top: 40px;
+  text-align: center;
+}
+
+nav {
+  margin-left: 300px;
+  margin-right: 20px;
+  margin-top: 200px;
+}
+
+nav ul {
+  list-style-type: none;
+  overflow: hidden;
+  padding: 0;
+}
+
+.navtitle {
+  font-size: 40px;
+}
+
+.navlink {
+  font-size: 30px;
+}
+
+a:link, a:visited {
+  color: #020202;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #d3d3d3;
+  cursor: url('../images/cursor.png'), auto;
+}
+
+.instructions {
+  height: 240px;
+}
+
+.line {
+  color: #0FFF10;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.explosionline {
+  color: #000000;
+  font-size: 20px;
+}
+
+.whitebutton {
+  background-color: #FFFFF;
+  border-radius: 50px / 10px;
+  color: #000000;
+  cursor: pointer;
+  font-family: 'Share Tech Mono';
+  margin-top: 20px;
+}
+
+.redbutton {
+  background-color: #FF0000;
+  border-radius: 50px / 10px;
+  color: #00000;
+  cursor: pointer;
+  font-family: 'Share Tech Mono';
+  margin-top: 20px;
+}
+
+.flash {
+  color: #FFFFFF;
+  font-size: 20px;
+  margin-top: 10px;
+}
+

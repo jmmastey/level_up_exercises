@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Megaton</title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono:400" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/overlord.css">
+  </head>
+
+  <body class="bomb">
+    <div class="container">
+      <div class="instructions">
+        <div class="line">Bomb Activated</div>
+        <div class="line">You chose to succumb to Mr. Burke's evil ways.</div>
+        <div class="line">(You really should have listened to Lucas Simms.)</div>
+        <div class="line">Enter in the deactivation code to save Megaton!</div>
+      </div>
+
+      <form action="/deactivate" method="post">
+        <input type="text" placeholder="Deactivation Code" autocomplete="off" name="deactivation_code">
+        <div>
+          <button class="whitebutton" type="submit" name="submit_button">Save Megaton</button>
+        </div>
+      </form>
+
+      <div class="flash">
+        <% if flash[:uhoh] %>
+          <%= flash[:uhoh] %>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>

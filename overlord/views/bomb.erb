@@ -1,0 +1,31 @@
+<html>
+  <head></head>
+  <body>
+    They set us up the bomb.
+    <br/>
+    <b>State:</b> <%= @bomb.state %>
+    <br/>
+    <% if @bomb.inactive? %>
+      <form action="/activate" method="post">
+        <label>Activation Code</label>
+        <input id="activation_input" type="text" name="activation_code"/>
+        <input type="submit" value="submit"/>
+      </form>
+    <% elsif @bomb.exploded? %>
+    bang.
+    <% else %>
+      <p>
+        Failed deactivations: <%= @bomb.failed_deactivations %> of <%= @bomb.max_failed_deactivations %>
+      </p>
+      <form action="/deactivate" method="post">
+        <label>Deactivation Code</label>
+        <input id="deactivation_input" type="text" name="deactivation_code"/>
+        <input type="submit" value="submit"/>
+      </form>
+    <% end %>
+
+    <form action="/newbomb" method="post">
+      <input id="newbomb" type="submit" value="New Bomb"/>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+TODO:
+
+0:  class << self
+      alias_method :[], :load
+    end
+
+1:  wrappable:
+    - investigate using the singleton_class or alias_method instead of prepend
+    - prefer instance over class mixins (see above?)
+    - write more readable tests
+
+2:  object.this { ... }
+
+3:  const_missing require hook
+    
+4:  dino_catalog
+    - global:       switch to activesupport concerns
+                    https://gist.github.com/scottsims/09a23ee408c260351111
+
+5:  data_science
+    - refactor to introspect on file information for instantation klasses.
+      - OR inject importer into parser prior to passing off to calculator
+    - omit Importer::read() in favor of Importer::load()
+    - fix begin/rescue syntax in SplitTest execute
+    - just use keys in build_groups in SplitTest
+    - extra reject clause from init_tester in SplitTest
+    - remove #to_f from denominator in conversion in SplitTest
+    - SplitTestCalculator -> Calculator
+    - Object.this(&block) OR GROUP_BY in SplitTestParser
+    - specs -> me -> better naming
+    - specs -> lets for outside context variable assignment
+    - hash_matcher / keys for in 'exposes correct fields' in SplitTestCalculator
+    - new line are `it` blocks
+    - "populates `results` hash with accurate data" -> extract `expected`
+
+6: TEST ENGINEERING LEVELUP STUFF
+
+    Exercise: Knows how Capybara and drivers work
+    - Name a case where a driver other than the default would be necessary, then go implement it with your overlord code.
+
+    Exercise: Uses happy path, sad path, and error path to create test cases
+    - Go back to all the tests you've written for this course. Organize them according to what type of test they are.
+    - Think about what sort of tests you may have missed for the various paths, and add them to the code.
+
+    One of the tools that might make you wrinkle your nose is a test plan. Planning your test process -- for your code or others' -- is a huge step toward doing good test work. Read this article and spend some time thinking about how you're going to test your next software project.
+
+    Exercise: Writes test plans at the beginning of a task, and uses them to clarify requirements
+    - Do the Shopping Cart exercise.
+
+    Exercise: Tries to make tests fail to verify that they work
+    - Go check the tests you've written during this course. Try to change the system under test to make the tests fail. If they don't, refactor them until they do.
+
+    *** constraining manual testing time: look up "timeboxing"
+
+    *** http://robots.thoughtbot.com/write-reliable-asynchronous-integration-tests-with-capybara
+
+    *** http://www.regexr.com/39ig4
+
+        /^I (.+) the bomb(?: (?:with|and) "(\w+)")*$/gm
+
+        I boot the bomb                             => ["boot"]
+        I activate the bomb with "0000" and "1234"  => ["activate", "1234"]
+        I deactivate the bomb with "0000"           => ["deactivate", "0000"]

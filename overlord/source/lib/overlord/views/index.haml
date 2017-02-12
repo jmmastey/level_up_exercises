@@ -1,0 +1,9 @@
+#status
+  = haml :status, layout: false
+
+- unless session[:notification].nil?
+  = haml :notification, layout: false
+
+#controls
+  = haml :controls, layout: false
+  

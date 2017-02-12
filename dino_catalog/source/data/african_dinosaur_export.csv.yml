@@ -1,0 +1,37 @@
+{
+  global: {
+    headers: {
+      formatters: [ ]
+    }
+  }, 
+  fields: {
+    genus: {
+      type: symbol
+    },
+    period: {
+      type: symbol
+    },
+    continent: {
+      type: Symbol,
+      default_value: africa
+    },
+    diet: {
+      type: symbol,
+      lexicon: {
+        'yes': carnivore,
+        'no': herbivore
+      },
+      translations: [ carnivore ]
+    },
+    weight: {
+      type: integer
+    },
+    locomotion_type: {
+      type: symbol,
+      translations: [ walking ]
+    },
+    description: {
+      type: string
+    }
+  }
+}

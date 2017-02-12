@@ -1,0 +1,20 @@
+SHELL_OPTS = {
+  notification: true,
+  all_on_start: true
+}
+guard :shell, SHELL_OPTS do
+  watch(%r{^lib/(.+)\.rb}) do |m|
+    n m[0], "Rubocop:"
+    `bundle exec rubocop #{m[0]}`
+  end
+end
+
+RSPEC_OPTS = {
+  cmd: 'bundle exec rspec --tty --color',
+  notification: true,
+  all_on_start: true
+}
+guard :rspec, RSPEC_OPTS do
+  watch(%r{^lib/(.+)\.rb})      { 'spec' }
+  watch(%r{^spec/(.+)\.rb})     { 'spec' }
+end

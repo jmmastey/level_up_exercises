@@ -1,0 +1,33 @@
+{
+  global: {
+    headers: {
+      formatters: [ ]
+    }
+  }, 
+  fields: {
+    genus: {
+      type: Symbol,
+      translations: [ name ]
+    },
+    period: {
+      type: Symbol
+    },
+    continent: {
+      type: Symbol
+    },
+    diet: {
+      type: Symbol
+    },
+    weight: {
+      type: Integer,
+      translations: [ weight_in_lbs ]
+    },
+    locomotion_type: {
+      type: Symbol,
+      translations: [ walking ]
+    },
+    description: {
+      type: String
+    }
+  }
+}

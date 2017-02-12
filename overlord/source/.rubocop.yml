@@ -1,0 +1,4 @@
+Style/TrailingComma:
+  Enabled: false
+
+inherit_from: '../../.hound.yml'

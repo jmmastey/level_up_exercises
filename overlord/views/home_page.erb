@@ -1,0 +1,16 @@
+<h2>Welcome to BareBonesBomb v1.0</h2>
+<h3 id="bomb_state">Bomb is currently: <span class="<%= @bomb.state.downcase %>"><%= @bomb.state.upcase %></span></h3>
+<div class="spacer"></div>
+<p id="prompt">
+  <% if @bomb.inactive? %>
+    Enter activation code to arm bomb:
+  <% else %>
+    Enter deactivation code to disarm bomb:
+  <% end %>
+</p>
+<form action="/" method="post">
+  <input type="text" name="code">
+  <br />
+  <input style="margin-top: 10px" type="submit" id="submit">
+</form>
+<p id="error_msg"><%= @error_msg %></p>

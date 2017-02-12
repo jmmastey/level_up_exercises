@@ -1,0 +1,60 @@
+# rubocop:disable all
+$PROJECT_ROOT ||= File.dirname(__FILE__)
+
+load "#{$PROJECT_ROOT}/test/support/system_helper.rb"
+load "#{$PROJECT_ROOT}/test/support/sinatra_helper.rb"
+
+SHELL_OPTS = {
+  notification: true
+}
+
+CUKE_OPTS = {
+  all_on_start: true,
+  cli: "--color --strict --format progress",
+  bundler: true,
+  feature_sets: [ 'test/features' ],
+  notification: true
+}
+
+RSPEC_OPTS = {  
+  all_on_start: true,
+  cmd: "bundle exec rspec --tty --color",
+  spec_paths: [ 'test/spec' ],
+  notification: true
+}
+
+RUBOCOP_OPTS = {
+  all_on_start: false,
+  notification: true
+}
+ 
+group :red_green_refactor, halt_on_fail: true do
+  guard :shell, SHELL_OPTS do
+    start_server
+    watch(%r{^main\.rb|Rakefile|test/(.+)_(?:helper|formatter)\.rb}) do |m|
+      ::Guard.evaluator.reevaluate_guardfile
+    end
+    watch(%r{^(?:lib|test)/(.+)\.(?:rb|feature|haml)}) { reload_server }
+    Kernel.at_exit { stop_server }
+  end
+
+  guard :cucumber, CUKE_OPTS do
+    watch(%r{^test/features/.+\.feature$})
+    watch(%r{^test/features/support/.+$}) { CUKE_OPTS[:feature_sets] }
+    watch(%r{^test/features/step_definitions/(.+)_steps\.rb$}) do |m|
+      Dir[File.join("**/#{m[1]}.feature")][0] || CUKE_OPTS[:feature_sets]
+    end
+  end
+
+  guard :rspec, RSPEC_OPTS do
+    watch(%r{^test/support/spec_helper\.rb}) { "test/spec" }
+    watch(%r{^test/spec/(.+)\.rb})           { |m| "#{m[0]}" }
+    watch(%r{^lib/(.+)\.rb})                 { |m| "test/spec/lib/#{m[1]}_spec.rb" }
+  end
+
+  guard :rubocop, RUBOCOP_OPTS do
+    watch(%r{lib/(.+)\.rb$}) { |m| "#{m[0]}" }
+  end
+end
+
+# rubocop:enable all

@@ -1,0 +1,5 @@
+- unless bomb_status == :exploded
+  %form{action: 'configure'}
+    %input{name: 'codes', placeholder: placeholder_string, size: 36, autofocus: true,}
+    %input{type: 'submit', value: 'go'}
+    %a{style: 'font-size: 80%; text-decoration: none;', onclick: 'javascript:alert("defaults = { on: 1234, off: 0000 }")', href: '#'} ( ? )

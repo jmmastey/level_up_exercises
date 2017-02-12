@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-2.0.0.js"></script>
+<script type="text/javascript" src="js/jquery.timer.js"></script>
+<script type='text/javascript'>
+var currentTime = 1000;
+var timer = null;
+$(document).ready(function(){
+    $("#btn-submit-code").on('click',function(event){
+        event.preventDefault();
+        button_text = $(this).text();
+        code = $('#code').val();
+        $('#code').val('');    
+        $.ajax({
+                url: '/submit_code',
+                type: "POST",
+                data: { button_text: button_text, code: code }, 
+                success:function(data){
+                    var obj = JSON.parse(data);
+                    if(!obj['result']){
+                        if(obj['bomb_state'] == 'Exploded'){
+                            window.location = '/detonate';
+                        }
+                        button_text = button_text.substring(0, button_text.length - 1) + 'ion';
+                        $('#alert_message').text(button_text + " code does not match");
+                        $('#alert_message').css("display","block");
+                    }else{
+                        $('#bomb_state').text(obj['bomb_state']);
+                        $('#btn-detonate').attr('disabled', false);
+                        if(button_text == 'Activate'){
+                            $('#btn-submit-code').text('Deactivate');
+                            $('h4').css('color', 'red');
+                            timer = $.timer(updateTimer, 70, false);
+                            $("#bomb_timer").css("display", "block");
+                            timer.toggle();
+                        }else{
+                            timer.toggle();
+                            currentTime = 1000;
+                            $('#btn-submit-code').text('Activate');
+                            $('h4').css('color', 'white');
+                        }
+                    }      
+                },
+            });
+    });
+    $('#code').on('click', function(){
+        $('.alert').css('display', 'none');
+    });
+})
+    
+function updateTimer(){
+    $("#bomb_timer").html(formatTime(currentTime));
+    if(currentTime == 0){
+        timer.stop();
+        window.location = '/detonate';
+        return;
+    }
+    currentTime -= 70 / 10;
+    if(currentTime < 0) currentTime = 0;
+
+}
+
+function pad(number , length){
+    var str = '' + number;
+    while (str.length < length){
+        str = '0' + str;
+    }
+    return str;
+}
+function formatTime(time) {
+    var min = parseInt(time / 6000),
+        sec = parseInt(time / 100) - (min * 60),
+        hundredths = pad(time - (sec * 100) - (min * 6000), 2);
+    return (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + ":" + hundredths;
+}
+</script>
+<style>
+
+    #bomb{
+        background-image: url("../img/bomb.png");
+        width: 640px;
+        height: 558px;
+        padding-top: 15%;
+        padding-left: 50px;
+        margin-top: 5%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    h4 { color:white; }
+    #bomb_panel{
+        width: 350px;
+        height: 350px;
+    }
+    #bomb_timer{
+        width: 100px;
+        height: 50px;
+        margin-left: 16%;
+        color: white;
+        font-size: 30px;
+        display: none;     
+    }
+</style>
+<div id='bomb'>
+    <span id='bomb_timer'>00:00:00</span>
+    <div id='bomb_panel'>
+        <h4>Bomb State : <span id='bomb_state'><%= session[:state] %></span></h4>
+        <input type='text' class='form-control' id='code'>
+        <button id='btn-submit-code' class='btn btn-default'><%= session[:state] == 'Activated' ? 'Deactivate' : 'Activate' %></button>
+        <div id='alert_message' class='alert alert-danger' role='alert' style='display:none'>
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        </div>
+    </div>
+</div>

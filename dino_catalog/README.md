@@ -1,28 +1,70 @@
-## Dinosaur Catalog
+##Dino Catalog Overview
 
-It may not be immediately evident, but I am a huge fan of dinosaurs. They're huge and dangerous and have cool names like Giganotosaurus (not to be confused with Gigantosaurus).
+This is a Dino Catalog gem. You can import Dinosaurs in CSV format, as well as filter Dinosaurs by different parameters once you've imported them.
 
-...
+##How To Use
 
-Anyway. I need to catalog some dinosaurs for my newest project, DinoDex. I've got a [CSV](http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html) file for the dinosaur facts, and I need the code to read all the dinosaur facts and do some basic manipulations with the data.
+First, require the gem in whichever necessary files, or in IRB if you wish to play around with it first.
 
-### Requirements
+```require 'dino_catalog'```
 
-Go check out the CSVs and come back. Done? Cool, I've just got a few features I need:
+Create a new DinoImporter, which takes your csv file and turns each row of data into a Dinosaur object. If you are importing with normal Dinodex format, you don't need to pass a format type---but if you downloaded Dino Data from the Pirate Bay, then you should pass in the optional argument "pirate_bay" as shown in the example below
 
-1. I loaded my favorite dinosaurs into a CSV file you'll need to parse. I don't know a lot about African Dinosaurs though, so I downloaded one from The Pirate Bay. It isn't formatted as well as mine, so you'll need to handle both formats.
-2. I have friends who ask me a lot of questions about dinosaurs (I'm kind of a big deal). Please make sure the dinodex is able to answer these things for me:
-    * Grab all the dinosaurs that were bipeds.
-    * Grab all the dinosaurs that were carnivores (fish and insects count).
-    * Grab dinosaurs for specific periods (no need to differentiate between Early and Late Cretaceous, btw).
-    * Grab only big (> 2 tons) or small dinosaurs.
-    * Just to be sure, I'd love to be able to combine criteria at will, even better if I can chain filter calls together.
-3. For a given dino, I'd like to be able to print all the known facts about that dinosaur. If there are facts missing, please don't print empty values, just skip that heading. Make sure to print Early / Late etc for the periods.
-4. Also, I'll probably want to print all the dinosaurs in a given collection (after filtering, etc).
+```
+importer = DinoCatalog::DinoImporter.new('path_to_csv_file.csv') #DinoImporter.dinosaur_list contains a collection of dinosaurs importer from the csv file
 
-#### Extra Credit
+#To import additional dinosaurs:
 
-1. I would love to have a way to do (and chain) generic search by parameters. I can pass in a hash, and I'd like to get the proper list of dinos back out.
-2. CSV isn't may favorite format in the world. Can you implement a JSON export feature?
+importer.import_from_csv('path_to_other_csv_file.csv', "pirate_bay") #Importing from a csv of dino data downloaded from the Pirate Bay
+```
 
-Happy Hunting. (Giganotosaurus was the largest hunting dinosaur, at 46 feet long and up to 8 tons! Suh-weet.)
+Then, load the collection of Dinosaur objects that you've created into a new Dinodex. Use the dinosaur_list method to access the collection of Dinosaurs now held inside the DinoImporter you made.
+
+```dinodex = DinoCatalog::Dinodex.new(importer.dinosaur_list)```
+
+##Dinodex methods
+
+You can use the Dinodex to filter by various parameters using the method 'filter_by_attribute'.
+
+```
+dinodex.filter(attribute: "walking", value: "biped") #=> collection of Dinosaurs with attribute walking equal to 'biped'
+
+dinodex.filter(attribute: "diet", value: "carnivore") #=> collection of Dinosaurs that eat fish, insects, and meat
+
+dinodex.filter(attribute: "period", value: "Early Cretaceous") #=> collection of Dinosaurs that lived in the Early Cretaceous period.
+
+dinodex.filter(attribute: "size", value: "big") #=> collection of Dinosaurs weighing over 2000 lbs.
+
+dinodex.filter(attribute: "size", value: "small") #=> collection of Dinosaurs weighing under 2000 lbs.
+
+```
+
+You can also chain filter calls together. For instance,
+
+```
+dinodex.filter(attribute: "size", value: "small").filter(attribute: "diet", value: "carnivore") #=> collection of Dinosaurs that weigh less than 2000 lbs AND are also carnivores.
+```
+
+To print data about a collection of dinosaurs (whether all the 'saurs in your Dinodex, or just some that have been filtered):
+```
+quadrupeds = dinodex.filter(attribute: "walking",value: "quadruped").dinosaurs
+
+dinodex.print_collection(quadrupeds) #prints a formatted list of quadruped Dinosaurs.
+```
+
+To export your dinosaur data as JSON:
+```
+small_dinos = dinodex.filter(attribute: "size", value: "big").dinosaurs
+JsonMaker.export_json(small_dinos)
+```
+
+##Dinosaur methods
+
+You can also print the facts about a given Dinosaur. Let's say that we filter a number of dinosaurs by size using the Dinodex we instantiated earlier.
+
+```
+dinosaur = dinodex.filter_by_attribute("size","small").dinosaurs.first #=> first Dinosaur in the returned collection
+
+dinosaur.print_facts #=> returns the Dinosaur object and prints its attributes, each on new lines.
+```
+

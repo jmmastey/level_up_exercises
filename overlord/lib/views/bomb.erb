@@ -1,0 +1,19 @@
+<% if session[:bomb_state] == 'exploded' %>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+  <script>
+  $(document).ready(function() {
+    $("#toggle").toggle("explode");
+  });
+  </script>
+<% end %>
+
+<div id="toggle" class="bomb-screen">
+  <div style="padding-top:310px;">
+    <form action="/switch" method="POST">
+      <span class="text-frame">Enter code <input type="text" id="code" name="code"></span>
+      <p>&nbsp;</p>
+      <input type="submit" class="btn btn-lg btn-default" id="arm-button" name="arm-button" value="Arm the Bomb">
+    </form>
+  </div>
+</div>

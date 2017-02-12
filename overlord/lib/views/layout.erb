@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Overlord, the bomb</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style type="text/css">
+      /* Customize container */
+      @media (min-width: 768px) {
+        .container {
+          max-width: 730px;
+        }
+      }
+
+      .header{
+        border-bottom:1px solid #e9e9e9;
+        font-size:18px;
+      }
+
+      .boot-screen{
+        background:url('images/briefcase_1_closed.jpg');
+        height:650px;
+        text-align:center;
+        width:650px;
+      }
+
+      .bomb-screen{
+        background:url('images/briefcase_1_open_bomb.jpg');
+        height:622px;
+        text-align:center;
+        width:650px;
+      }
+
+      .text-frame{
+        background-color:#ffffff;
+        font-size:20px;
+        opacity:0.9;
+        padding:8px 8px 14px 8px;
+      }
+
+      .bomb-field{
+        display:inline;
+        width:250px;
+      }
+
+      .bomb-button{
+        display:inline;
+        width:150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <span class="pull-right">bomb status <span class="label label-warning"><%= session[:bomb_state] %></span></span>
+        <h3><a href="/">Overlord</a></h3>
+      </div>
+      <br />
+      <div class="content">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

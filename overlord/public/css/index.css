@@ -1,0 +1,398 @@
+
+/****************************
+          GENERAL
+****************************/
+.box {
+  padding: 10px 20px;
+  background: white;
+  border: 1px solid #999;
+  margin: 5px auto;
+}
+html {
+  min-height: 100%;
+}
+body {
+  font-family: "Trebuchet MS", sans-serif;
+  background: url('../images/ocean-bg.jpg') no-repeat 0 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  margin: 0px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+/****************************
+          MESSAGES
+****************************/
+.welcome.message {
+  position: relative;
+}
+.message p {
+  color: #555;
+}
+.message > span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.message span:last-child {
+  margin-left: 150px;
+  font-size: 14px;
+}
+.message span:first-child {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  margin-top: -75px;
+  overflow: hidden;
+}
+
+/****************************
+        BOMB PANELS
+****************************/
+.bomb {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+.bomb .columns {
+  margin-top: 25px;
+  text-align: justify;
+  -ms-text-justify: distribute-all-lines;
+  text-justify: distribute-all-lines;
+}
+.bomb .columns .stretch {
+  width: 100%;
+  display: inline-block;
+  font-size: 0;
+  line-height: 0
+}
+.bomb .column {
+  border: 1px solid #a88;
+  box-shadow: 0px 0px 2px #666;
+  border-top: 15px solid #f00;
+  border-bottom: 15px solid #f00;
+  border-radius: 5px;
+  background: #eaa;
+
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  text-align: center;
+  width: 16%;
+
+  -webkit-animation: red-blinker 1.0s infinite ease-in;
+  animation: red-blinker 1.0s infinite ease-in;
+  transition: 0.2s all;
+  position: relative;
+}
+.bomb .column.shake {
+  -webkit-animation: shake 0.25s 1 linear;
+  animation: shake 0.25s 1 linear;
+}
+
+.bomb .column.hacked {
+  border: 1px solid #8a8;
+  border-top: 15px solid #0a0;
+  border-bottom: 15px solid #0a0;
+  background: #8da;
+
+  -webkit-animation: none;
+  animation: none;
+}
+.bomb .column.hacked .connector {
+  background: #cfc;
+}
+.bomb .column.hacked .connector:not(.depressed) {
+  opacity: 0.5;
+}
+.bomb .column.hacked .connector:after {
+  background: #aaa;
+}
+.bomb .column.hacked .message {
+  border: 2px solid #aaa;
+}
+.bomb .column.hacked .message p {
+  color: #444;
+  text-shadow: 0px 1px 1px #aaa;
+}
+.bomb .column.hacked .message h4,
+.bomb .column.hacked input {
+  display: none;
+}
+
+/****************************
+        CONNECTORS
+****************************/
+.bomb .column .connector {
+  width: 50px;
+  height: 50px;
+  background: #fcc;
+  border: 1px solid gray;
+  border-radius: 25px;
+  margin: 10px auto;
+  box-shadow: 0px 0px 2px #333;
+  transition: 0.2s all;
+  position: relative;
+
+  text-align: center;
+  line-height: 50px;
+}
+.bomb .column .connector:after {
+  content: "";
+  background: #ddd;
+  padding: 6px 1px;
+  position: absolute;
+  bottom: -13px;
+  left: 50%;
+  margin-left: -1px;
+}
+.bomb .column .connector.depressed {
+  border: 1px solid gray;
+  border-radius: 5px;
+  background: white;
+  font-size: 24px;
+}
+.bomb .column:not(.hacked) .connector:hover {
+  border: 1px dotted gray;
+  background: #fdd;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.bomb .column .message {
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+}
+.bomb .column .message h4 {
+  font-size: 14px;
+  font-style: italic;
+  margin: 0px;
+}
+.bomb .column .message p {
+  font-size: 32px;
+  color: white;
+  text-shadow: 0px 1px 1px gray;
+  margin: 0px;
+}
+.bomb .column input[type="submit"] {
+  margin: 20px auto;
+  margin-bottom: 0px;
+  cursor: pointer;
+}
+.bomb.disarmed .column:after,
+.bomb.detonated .column:after,
+.bomb.hacked .column:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  box-sizing: border-box;
+  opacity: 0.95;
+}
+.bomb.disarmed .column {
+  border-top: 15px solid #333;
+  border-bottom: 15px solid #333;
+  -webkit-animation: none;
+  animation: none;
+}
+.bomb.disarmed .column:after {
+  background-color: gray;
+}
+.bomb.detonated .column:after {
+  background-color: #c41;
+}
+.bomb.hacked .column:after {
+  background-color: #0c8;
+}
+.bomb.disarmed .message:after,
+.bomb.detonated .message:after,
+.bomb.hacked .message:after{
+  padding-top: 55%;
+  width: 50%;
+  height: 100px;
+  border-radius: 5px;
+
+  position: absolute;
+  z-index: 11;
+  top: 50%;
+  left: 25%;
+  margin-top: -50px;
+}
+.bomb.disarmed .message:after {
+  content: "Disarmed";
+  background: url('../images/padlock.png') no-repeat 50% 10px;
+  background-size: 50%;
+}
+
+.bomb.detonated .message:after {
+  content: "Detonated";
+  background: url('../images/skull.png') no-repeat 50% 10px;
+  background-size: 60%;
+}
+.bomb.hacked .message:after {
+  content: "Hacked";
+  background: url('../images/checkmark.svg') no-repeat 50% 10px;
+  background-size: 60%;
+  opacity: 0.5;
+}
+
+/****************************
+           FOOTER
+****************************/
+.footer {
+  text-align: center;
+  padding: 20px;
+}
+.footer input {
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  font-style: italic;
+  color: #444;
+  font-size: 18px;
+  outline: none;
+}
+.footer input[type='password'] {
+  width: 450px;
+  text-transform: uppercase;
+}
+.footer input[type='button'] {
+  cursor: pointer;
+}
+.footer #password[disabled] {
+  background: #ccc;
+}
+.footer #confirm[disabled] {
+  color: #ccc;
+  cursor: default;
+}
+.footer .footer-section {
+  display: inline-block;
+  vertical-align: middle;
+}
+.footer .footer-section:first-child {
+  position: absolute;
+  left: 20px;
+  font-size: 68px;
+  color: white;
+  text-shadow: 0px 1px 1px gray;
+  background: #222;
+  padding: 10px;
+  border-radius: 5px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.footer .footer-section:last-child {
+  margin-left: 200px;
+}
+/****************************
+        EXPLOSION
+****************************/
+.explosion-overlay {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 12;
+  display: none;
+}
+
+/****************************
+        CODE INPUT
+****************************/
+.code-input {
+  position: fixed;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: rgba(0,0,0,0.8);
+  z-index: 50;
+  text-align: center;
+  display: none;
+}
+.code-input .message.box {
+  top: 50%;
+  width: 600px;
+  left: 50%;
+  position: absolute;
+  margin-top: -150px;
+  margin-left: -300px;
+  padding: 20px;
+}
+.code-input input {
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  font-style: italic;
+  color: #444;
+  font-size: 18px;
+  outline: none;
+}
+.code-input input[type="button"] {
+  cursor: pointer;
+}
+.code-input .flash {
+  padding: 20px;
+  color: red;
+  font-weight: bold;
+}
+
+/****************************
+        ANIMATIONS
+****************************/
+@-webkit-keyframes red-blinker {
+  0%, 100%  { 
+    border-top: 15px solid #a00; 
+    border-bottom: 15px solid #a00;
+  }
+  50%  { 
+    border-top: 15px solid #f55; 
+    border-bottom: 15px solid #f55; 
+  }
+}
+@keyframes red-blinker {
+  0%, 100%  { 
+    border-top: 15px solid #a00; 
+    border-bottom: 15px solid #a00;
+  }
+  50%  { 
+    border-top: 15px solid #f55; 
+    border-bottom: 15px solid #f55; 
+  }
+}
+
+@-webkit-keyframes green-blinker {
+  0%, 100%  { 
+    border-top: 15px solid #080; 
+    border-bottom: 15px solid #080;
+  }
+  50%  { 
+    border-top: 15px solid #0c0; 
+    border-bottom: 15px solid #0c0; 
+  }
+}
+
+@-webkit-keyframes shake {
+  0%, 100%  { transform: rotateZ(0deg); }
+  25%, 75%  { transform: rotateZ(3deg); }
+  50%       { transform: rotateZ(-3deg); }
+}
+@keyframes shake {
+  0%, 100%  { transform: rotateZ(0deg); }
+  25%, 75%  { transform: rotateZ(3deg); }
+  50%       { transform: rotateZ(-3deg); }
+}

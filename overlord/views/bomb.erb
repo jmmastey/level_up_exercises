@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="http://code.jquery.com/jquery-2.0.0.js"></script>
+<script type="text/javascript" src="js/jquery.timer.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bomb.js"></script>
+<script type="text/javascript" src="js/bootbox.js"></script>
+<div id='bomb'>
+    <span id='bomb-timer'>00:00:000</span>
+    <div id='bomb-panel'>
+        <h4>Bomb State : <span id='bomb-state'><%= session[:state].to_s.sub('_', ' ') %></span></h4>
+        <input type='text' class='form-control' id='code'>
+        <button id='btn-submit-code' class='btn btn-default'><%= session[:state] == 'Activated' ? 'Deactivate' : 'Activate' %></button>
+        <div id='alert-message' class='alert alert-danger' role='alert' style='display:none'>
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        </div>
+    </div>
+</div>

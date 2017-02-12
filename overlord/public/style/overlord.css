@@ -1,0 +1,24 @@
+body {
+  text-align: center;
+  width: 100%;
+}
+
+input {
+  font-size: 16pt;
+}
+
+.inactive {
+  color: #888;
+}
+
+.armed {
+  color: #0a0;
+}
+
+.exploded, .error {
+  color: #d00;
+}
+
+.spacer {
+  height: 20px;
+}

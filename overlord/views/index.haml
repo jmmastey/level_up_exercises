@@ -1,0 +1,51 @@
+!!!
+%html
+  %head
+    %link{:rel => :stylesheet, :type => :"text/css", :href => "css/index.css"}
+    %script{:src => "js/jquery.js"}
+    %script{:src => "js/index.js"}
+  %body
+    .code-input
+      .message.box
+        %h4 Welcome back our one, true, dearest overlord.
+        %h1 Please enter your arm / disarm codes.
+        %input.enterable{:id => 'arm-code-input', :type => 'text', :placeholder => 'Arm Code', :autofocus => true}
+        %input.enterable{:id => 'disarm-code-input', :type => 'text', :placeholder => 'Disarm Code'}
+        %input.enterable{:id => 'submit-codes', :type => 'button', :value => 'Use Codes'}
+        #dialog-flash.flash
+    .welcome.message.box
+      %span
+        %img{:src => "images/pipboy.png", :width => 150, :height => 150}
+      %span
+        %h2 To whatever pathetic bomb defuser this may concern.
+        %p SECURITY WARNING: This ocean-annihilating bomb is currently inactive. Once armed with the secret code, there are three extremely tedious and difficult ways to disarm it again (so you might as well not try, especially since you will be underwater):
+        %ol
+          %li Hack into each of the 6 panels on the bomb by specifying the correct binary sequences.
+          %li Enter the super secret disarm code that only the overlord knows.
+          %li 
+            Simply 
+            %b [CLASSIFIED] 
+            until 
+            %b [REDACTED].
+        %p Oh yeah, and if you're going to hack into the panels make sure you get them on your first try! Otherwise each unsuccessful attempt takes 10 seconds off the timer. Once all panels have been hacked, the bomb cannot be armed again. Good luck, the fate of the ocean is in your hands...muhahahahaha.
+    .bomb.disarmed
+      .columns
+        -6.times do |id|
+          .column.box{:id => "panel#{id}"}
+            -6.times do
+              .connector 0
+            .message
+              %h4 Enter this code:
+              %p= bomb.panels[id].code
+            %input{:type => 'submit'}
+        %span.stretch
+    .footer.box
+      .footer-section
+        %span.minutes 02
+        %span :
+        %span.seconds 00
+      .footer-section
+        %p Evil Overlord, you may now enter your code to arm the bomb and blow up the ocean.
+        %input.enterable{:id => 'password', :type => "password"}
+        %input.enterable{:id => 'confirm', :type => "button", :value => "Arm"}
+        #code-flash.flash

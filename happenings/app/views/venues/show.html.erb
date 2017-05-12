@@ -1,0 +1,37 @@
+<%- model_class = Venue -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @venue.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+  <dd><%= @venue.address %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:city) %>:</strong></dt>
+  <dd><%= @venue.city %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:zipcode) %>:</strong></dt>
+  <dd><%= @venue.zipcode %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @venue.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:phone_number) %>:</strong></dt>
+  <dd><%= @venue.phone_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:venue_url) %>:</strong></dt>
+  <dd><%= @venue.venue_url %></dd>
+</dl>
+
+      <%= render @venue.events %>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              venues_path, :class => 'btn btn-default'  %>
+<% if user_signed_in? && current_user.superadmin? %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_venue_path(@venue), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              venue_path(@venue),
+              :method => 'delete',
+              :data => { confirm: t('.confirm',
+                                    :default => t("helpers.links.confirm",
+                                                  :default => 'Are you sure?'))
+              },
+              :class => 'btn btn-danger' %>
+<% end %>

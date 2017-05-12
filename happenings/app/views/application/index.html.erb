@@ -1,0 +1,21 @@
+<div class="row">
+    <div id="calendar" class="col-xs-10"></div>
+    <div class="col-xs-2">
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <h3 class="panel-title"><%= link_to "Upcoming Events", events_path %></h3>
+            </div>
+            <div class="panel-body">
+                <%= render @events %>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><%= link_to "Venues", venues_path %></h3>
+            </div>
+            <div class="panel-body">
+                <%= render @venues %>
+            </div>
+        </div>
+    </div>
+</div>

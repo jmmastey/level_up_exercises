@@ -1,0 +1,41 @@
+<article>
+    <ul class="list-group ">
+        <li class="list-group-item">
+            <h3 class="list-group-item-heading"><%= link_to event.name, event_path(event) %>
+                <% if event.venue %>
+                    <span class="h4">@ <%= link_to event.venue.name, venue_path(event.venue) %></span>
+                <% end %>
+            </h3>
+           <% unless current_page?(root_path) %>
+            <div class="list-group-item-text">
+                <%= event.description %>
+                <dl class=" dl-horizontal pull-right text-right">
+                    <% info = %w(price show_type phone_number running_time) %>
+                    <% info.each do |i| %>
+                        <% unless event[i.to_sym].blank? %>
+                            <dt><%= i.humanize %>:</dt>
+                            <dd><%= event[i.to_sym] %></dd>
+                        <% end %>
+                    <% end %>
+                </dl>
+                <div class="">
+                <%= link_to "Event URL", event.event_url, class: "label label-default" %>
+                <%= link_to "Ticket URL", event.ticket_url, class: "label label-info" %>
+                </div>
+            </div>
+
+            <span class="row"></span>
+            <div class="panel panel-info panel-collapse" id="panel_<%= event.id %>">
+                <div class="panel-heading" data-toggle="collapse" data-target="#panel_<%= event.id %> .panel-body">
+                    <h3 class="panel-title">Showtimes <span class="caret"></span></h3>
+                </div>
+                <div class="panel-body collapse">
+                    <div class="list-group">
+                        <%= render event.event_dates %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+        </li>
+    </ul>
+</article>

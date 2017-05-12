@@ -1,0 +1,2 @@
+namespace :datascrapper do
+end

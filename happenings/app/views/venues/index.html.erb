@@ -1,0 +1,13 @@
+<%- model_class = Venue -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<div>
+    <% @venues.each do |venue| %>
+        <%= render venue %>
+    <% end %>
+</div>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_venue_path,
+            :class => 'btn btn-primary' %>

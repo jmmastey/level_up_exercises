@@ -1,0 +1,43 @@
+<%- model_class = Event -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @event.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:venue_id) %>:</strong></dt>
+  <dd><%=link_to @event.venue.name, venue_path(@event.venue_id) %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @event.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dd><%= @event.price %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:show_type) %>:</strong></dt>
+  <dd><%= @event.show_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:phone_number) %>:</strong></dt>
+  <dd><%= @event.phone_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:running_time) %>:</strong></dt>
+  <dd><%= @event.running_time %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:event_url) %>:</strong></dt>
+  <dd><%= link_to @event.event_url %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:ticket_url) %>:</strong></dt>
+  <dd><%= @event.ticket_url %></dd>
+</dl>
+<% @event.event_dates.each do |ev_date| %>
+      <%= render ev_date %>
+<% end %>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              events_path, :class => 'btn btn-default'  %>
+<% if user_signed_in? && current_user.superadmin? %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_event_path(@event), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              event_path(@event),
+              :method => 'delete',
+              :data => {
+                      confirm: t('.confirm',
+                                 :default => t("helpers.links.confirm",
+                                               :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+<% end %>

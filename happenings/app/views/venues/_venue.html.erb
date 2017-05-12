@@ -1,0 +1,40 @@
+<article>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h3 class="list-group-item-heading"><%= link_to venue.name, venue_path(venue) %></h3>
+            <% unless current_page?(root_path) %>
+                <div class="list-group-item-text">
+                    <details>
+                        <summary><%= venue.description %></summary>
+                        <address>
+                            <dt>Address:</dt>
+                            <dd><%= venue.address %><br>
+                                <%= venue.city %>, <%= venue.zipcode %></dd>
+                            <dt>Phone:</dt>
+                            <dd><%= venue.phone_number %></dd>
+                            <% unless venue.venue_url.blank? %>
+                            <dt>URL:</dt>
+                            <dd><%= venue.venue_url %></dd>
+                            <% end %>
+                        </address>
+
+                    </details>
+                </div>
+                <% if user_signed_in? && current_user.superadmin? %>
+                <li class="list-group-item">
+                    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                                edit_venue_path(venue),
+                                :class => 'btn btn-default btn-xs' %>
+                    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                                venue_path(venue),
+                                :method => :delete,
+                                :data   => { confirm: t('.confirm',
+                                                        :default => t("helpers.links.confirm",
+                                                                      :default => 'Are you sure?')) },
+                                :class  => 'btn btn-xs btn-danger' %>
+                    <% end %>
+            <% end %>
+            </li>
+            </ul>
+
+</article>

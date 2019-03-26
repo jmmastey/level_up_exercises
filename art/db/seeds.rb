@@ -14,8 +14,8 @@ def execute_with_progress(num, title)
   #progress.finish
 end
 
-execute_with_progress(MODEL_COUNTS[:user], "Users"){ FactoryGirl.create(:user) }
-execute_with_progress(MODEL_COUNTS[:show], "Shows"){ FactoryGirl.create(:show) }
-execute_with_progress(MODEL_COUNTS[:performer], "Performers"){ FactoryGirl.create(:performer, :with_shows) }
-execute_with_progress(MODEL_COUNTS[:review], "Reviews"){ FactoryGirl.create(:review) }
+execute_with_progress(MODEL_COUNTS[:user], "Users"){ FactoryBot.create(:user) }
+execute_with_progress(MODEL_COUNTS[:show], "Shows"){ FactoryBot.create(:show) }
+execute_with_progress(MODEL_COUNTS[:performer], "Performers"){ FactoryBot.create(:performer, :with_shows) }
+execute_with_progress(MODEL_COUNTS[:review], "Reviews"){ FactoryBot.create(:review) }
 

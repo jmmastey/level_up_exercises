@@ -6,11 +6,11 @@ RSpec.describe ShowsController, :type => :controller do
   # Show. As you add validations to Show, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:show)
+    FactoryBot.attributes_for(:show)
   }
 
   let(:invalid_attributes) {
-    FactoryGirl.attributes_for(:show, name: nil)
+    FactoryBot.attributes_for(:show, name: nil)
   }
 
   # This should return the minimal set of values that should be in the session

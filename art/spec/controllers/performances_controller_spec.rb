@@ -6,11 +6,11 @@ RSpec.describe PerformancesController, :type => :controller do
   # Performance. As you add validations to Performance, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.build(:performance).attributes.symbolize_keys
+    FactoryBot.build(:performance).attributes.symbolize_keys
   }
 
   let(:invalid_attributes) {
-    FactoryGirl.attributes_for :performance, performed_on: nil
+    FactoryBot.attributes_for :performance, performed_on: nil
   }
 
   # This should return the minimal set of values that should be in the session

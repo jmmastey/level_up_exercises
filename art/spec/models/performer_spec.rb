@@ -7,20 +7,20 @@ RSpec.describe Performer, :type => :model do
   it { should have_many :performances }
 
   describe "#average_rating" do
-    subject(:performer) { FactoryGirl.create(:performer, :with_performances) }
+    subject(:performer) { FactoryBot.create(:performer, :with_performances) }
 
     it "should return nil when there are no reviews" do
       expect(performer.average_rating).to be_nil
     end
 
     it "should grab reviews for their performances" do
-      FactoryGirl.create(:review, rating: 4, performance: subject.performances.first)
+      FactoryBot.create(:review, rating: 4, performance: subject.performances.first)
       expect(performer.average_rating).to eq(4)
     end
 
     it "should summarize all scores when they are available" do
-      FactoryGirl.create_list(:review, 30, rating: 5, performance: subject.performances.first)
-      FactoryGirl.create_list(:review, 30, rating: 3, performance: subject.performances.last)
+      FactoryBot.create_list(:review, 30, rating: 5, performance: subject.performances.first)
+      FactoryBot.create_list(:review, 30, rating: 3, performance: subject.performances.last)
       expect(performer.average_rating).to eq(4)
     end
   end

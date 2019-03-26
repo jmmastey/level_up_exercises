@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe ShowRecommender, :type => :model do
-  let(:show_i_loved) { FactoryGirl.create(:show, :with_performances) }
-  let(:show_i_should_see) { FactoryGirl.create(:show, :with_performances) }
-  let(:me) { FactoryGirl.create(:user) }
-  let(:stranger) { FactoryGirl.create(:user) }
+  let(:show_i_loved) { FactoryBot.create(:show, :with_performances) }
+  let(:show_i_should_see) { FactoryBot.create(:show, :with_performances) }
+  let(:me) { FactoryBot.create(:user) }
+  let(:stranger) { FactoryBot.create(:user) }
   subject(:recommender) { ShowRecommender.new(me) }
 
   def create_awesome_review(user, show)
-    FactoryGirl.create(:review, rating: 5, user: user,
+    FactoryBot.create(:review, rating: 5, user: user,
                        performance: show.performances.last)
   end
 
@@ -30,7 +30,7 @@ RSpec.describe ShowRecommender, :type => :model do
     end
 
     it "provides a unique list" do
-      other_stranger = FactoryGirl.create(:user)
+      other_stranger = FactoryBot.create(:user)
       create_awesome_review(other_stranger, show_i_loved)
       create_awesome_review(other_stranger, show_i_should_see)
 

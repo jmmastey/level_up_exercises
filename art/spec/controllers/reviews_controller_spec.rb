@@ -6,7 +6,7 @@ RSpec.describe ReviewsController, :type => :controller do
   # Review. As you add validations to Review, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.build(:review).attributes.symbolize_keys
+    FactoryBot.build(:review).attributes.symbolize_keys
   }
 
   let(:invalid_attributes) {
@@ -85,7 +85,7 @@ RSpec.describe ReviewsController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        { user_id: FactoryGirl.create(:user).id }
+        { user_id: FactoryBot.create(:user).id }
       }
 
       it "updates the requested review" do

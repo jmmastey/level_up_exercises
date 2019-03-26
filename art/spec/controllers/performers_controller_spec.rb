@@ -6,7 +6,7 @@ RSpec.describe PerformersController, :type => :controller do
   # Performer. As you add validations to Performer, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:performer)
+    FactoryBot.attributes_for(:performer)
   }
 
   let(:invalid_attributes) {

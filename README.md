@@ -17,6 +17,38 @@ When you finish an exercise, feel free to make a pull request back into this rep
 
 Like everything else in the world, these exercises have errors and problems and typos. We experience this problem whenever we code, and the only way to stay sane as a group is to fix problems as we find them. Be a mensch, send pull requests.
 
+## Exercise List (in Order)
+
+### Ruby
+
+1. Triangle Facts
+2. Arrowhead
+3. Robot Name
+4. Dino Catalog (personal fave)
+
+### Testing
+
+1. Data Science
+2. Overlord
+3. Shopping Cart
+
+### Rails
+
+1. CYOA
+2. Supportive
+
+#### Data
+
+1. Traffic Control
+2. Yadda
+
+### Interaction
+
+1. Pmail
+
+### Scaling
+
+1. Art
 
 ## Contributing
 
